@@ -570,7 +570,17 @@
                             this.$emit('processing', 'address');
 
                             if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
+                                const billingRegex = /^billing\./;
+
+                                if (Object.keys(error.response.data.errors).some(key => billingRegex.test(key))) {
+                                    setErrors({
+                                        'billing.id': error.response.data.message
+                                    });
+                                } else {
+                                    setErrors({
+                                        'shipping.id': error.response.data.message
+                                    });
+                                }
                             }
                         });
                 },
