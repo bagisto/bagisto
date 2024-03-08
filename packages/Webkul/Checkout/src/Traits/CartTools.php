@@ -182,22 +182,24 @@ trait CartTools
      * @param  \Webkul\Customer\Contracts\WishlistItem  $wishlistItem
      * @return bool
      */
-    public function moveToCart($wishlistItem)
+    public function moveToCart($wishlistItem, $quantity = 1)
     {
         if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
             return false;
         }
 
         if (! $wishlistItem->additional) {
-            $wishlistItem->additional = [
-                'product_id' => $wishlistItem->product_id,
-                'quantity'   => request()->input('quantity'),
-            ];
+            $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
         }
 
-        request()->merge($wishlistItem->additional);
+        $additional = [
+            ...$wishlistItem->additional,
+            'quantity' => $quantity,
+        ];
 
-        $result = $this->addProduct($wishlistItem->product_id, $wishlistItem->additional);
+        request()->merge($additional);
+
+        $result = $this->addProduct($wishlistItem->product_id, $additional);
 
         if ($result) {
             $this->wishlistRepository->delete($wishlistItem->id);
@@ -209,13 +211,12 @@ trait CartTools
     }
 
     /**
-     * Function to move a already added product to wishlist will run only on customer
-     * authentication.
+     * Move to wishlist items.
      *
      * @param  int  $itemId
-     * @return bool
+     * @param  int  $quantity
      */
-    public function moveToWishlist($itemId)
+    public function moveToWishlist($itemId, $quantity = 1): bool
     {
         $cart = $this->getCart();
 
@@ -249,7 +250,10 @@ trait CartTools
                 'channel_id'  => $cart->channel_id,
                 'customer_id' => auth()->guard()->user()->id,
                 'product_id'  => $cartItem->product_id,
-                'additional'  => $cartItem->additional,
+                'additional'  => [
+                    ...$cartItem->additional,
+                    'quantity' => $quantity,
+                ],
             ]);
         }
 

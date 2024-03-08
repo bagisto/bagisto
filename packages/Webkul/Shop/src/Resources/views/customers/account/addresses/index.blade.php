@@ -121,11 +121,7 @@
                     </div>
 
                     <p class="text-[#6E6E6E] mt-6">
-                        {{ $address->address1 }},
-
-                        @if ($address->address2)
-                            {{ $address->address2 }},
-                        @endif
+                        {{ $address->address }},
 
                         {{ $address->city }}, 
                         {{ $address->state }}, {{ $address->country }}, 

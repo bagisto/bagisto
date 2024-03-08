@@ -211,7 +211,7 @@ it('should returns the address page of the customer', function () {
         ->assertSeeText($customerAddress->email)
         ->assertSeeText($customerAddress->fast_name)
         ->assertSeeText($customerAddress->last_name)
-        ->assertSeeText($customerAddress->address1)
+        ->assertSeeText($customerAddress->address)
         ->assertSeeText($customerAddress->city)
         ->assertSeeText($customerAddress->state)
         ->assertSeeText($customerAddress->company_name)
@@ -241,10 +241,11 @@ it('should fails the validation error when certain inputs not provided when stor
         ->assertJsonValidationErrorFor('phone')
         ->assertJsonValidationErrorFor('state')
         ->assertJsonValidationErrorFor('country')
-        ->assertJsonValidationErrorFor('address1')
+        ->assertJsonValidationErrorFor('address')
         ->assertJsonValidationErrorFor('postcode')
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('first_name')
+        ->assertJsonValidationErrorFor('email')
         ->assertUnprocessable();
 });
 
@@ -257,8 +258,7 @@ it('should store the customer address', function () {
         'company_name'    => $companyName = fake()->word(),
         'first_name'      => $firstName = fake()->firstName(),
         'last_name'       => $lastName = fake()->lastName(),
-        'address1'        => [fake()->word()],
-        'address'         => fake()->address(),
+        'address'         => [fake()->word()],
         'country'         => $countryCode = fake()->countryCode(),
         'state'           => $state = fake()->state(),
         'city'            => $city = fake()->city(),
@@ -266,6 +266,7 @@ it('should store the customer address', function () {
         'phone'           => $phoneNumber = fake()->e164PhoneNumber(),
         'default_address' => fake()->randomElement([0, 1]),
         'address_type'    => $addressType = CustomerAddress::ADDRESS_TYPE,
+        'email'           => $email = fake()->email(),
     ])
         ->assertRedirect(route('shop.customers.account.addresses.index'));
 
@@ -282,6 +283,7 @@ it('should store the customer address', function () {
                 'postcode'     => $postCode,
                 'phone'        => $phoneNumber,
                 'address_type' => $addressType,
+                'email'        => $email,
             ],
         ],
     ]);
@@ -320,10 +322,11 @@ it('should fails the validation error when certain inputs not provided update th
         ->assertJsonValidationErrorFor('phone')
         ->assertJsonValidationErrorFor('state')
         ->assertJsonValidationErrorFor('country')
-        ->assertJsonValidationErrorFor('address1')
+        ->assertJsonValidationErrorFor('address')
         ->assertJsonValidationErrorFor('postcode')
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('first_name')
+        ->assertJsonValidationErrorFor('email')
         ->assertUnprocessable();
 });
 
@@ -342,7 +345,7 @@ it('should update the customer address', function () {
         'company_name'    => $companyName = fake()->word(),
         'first_name'      => $firstName = fake()->firstName(),
         'last_name'       => $lastName = fake()->lastName(),
-        'address1'        => [fake()->word()],
+        'address'         => [fake()->word()],
         'country'         => $customerAddress->country,
         'state'           => $customerAddress->state,
         'city'            => $customerAddress->city,
@@ -350,6 +353,7 @@ it('should update the customer address', function () {
         'phone'           => $customerAddress->phone,
         'default_address' => 1,
         'address_type'    => $customerAddress->address_type,
+        'email'           => $email = fake()->email(),
     ])
         ->assertRedirect(route('shop.customers.account.addresses.index'));
 
@@ -367,6 +371,7 @@ it('should update the customer address', function () {
                 'phone'           => $customerAddress->phone,
                 'default_address' => $customerAddress->default_address,
                 'address_type'    => $customerAddress->address_type,
+                'email'           => $email,
             ],
         ],
     ]);

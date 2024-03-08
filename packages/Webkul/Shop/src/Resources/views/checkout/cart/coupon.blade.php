@@ -1,7 +1,8 @@
 <!-- Coupon Vue Component -->
 <v-coupon 
-    :is-coupon-applied="cart.coupon_code"
-    :sub-total="cart.base_grand_total"
+    :cart="cart"
+    @coupon-applied="getCart"
+    @coupon-removed="getCart"
 >
 </v-coupon>
 
@@ -12,7 +13,7 @@
     >
         <div class="flex justify-between text-right">
             <p class="text-base max-sm:text-sm max-sm:font-normal">
-                @{{ isCouponApplied ? "@lang('shop::app.checkout.cart.coupon.applied')" : "@lang('shop::app.checkout.cart.coupon.discount')" }}
+                @{{ cart.coupon_code ? "@lang('shop::app.checkout.cart.coupon.applied')" : "@lang('shop::app.checkout.cart.coupon.discount')" }}
             </p>
 
             {!! view_render_event('bagisto.shop.checkout.cart.coupon.before') !!}
@@ -35,7 +36,7 @@
                                     class="text-[#0A49A7] cursor-pointer"
                                     role="button"
                                     tabindex="0"
-                                    v-if="! isCouponApplied"
+                                    v-if="! cart.coupon_code"
                                 >
                                     @lang('shop::app.checkout.cart.coupon.apply')
                                 </span>
@@ -55,7 +56,6 @@
                                         type="text"
                                         class="py-5 px-6"
                                         name="code"
-                                        v-model="code"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.cart.coupon.enter-your-code')"
                                     />
@@ -70,25 +70,23 @@
                             <!-- Modal Footer -->
                             <x-slot:footer>
                                 <!-- Coupon Form Action Container -->
-                                <div class="flex justify-between items-center gap-4 flex-wrap">
-                                    <p class="text-sm font-medium text-[#6E6E6E]">
-                                        @lang('shop::app.checkout.cart.coupon.subtotal')
-                                    </p>
-
-                                    <div class="flex gap-8 items-center flex-auto flex-wrap">
-                                        <p 
-                                            class="text-3xl font-semibold max-sm:text-xl"
-                                            v-text="subTotal"
-                                        >
+                                <div class="flex items-center gap-4 flex-wrap">
+                                    <div class="flex gap-4 items-center">
+                                        <p class="text-sm font-medium text-[#6E6E6E]">
+                                            @lang('shop::app.checkout.cart.coupon.subtotal')
                                         </p>
 
-                                        <button
-                                            class="block flex-auto w-max py-3 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer max-sm:text-sm max-sm:px-6"
-                                            type="submit"
-                                        >
-                                            @lang('shop::app.checkout.cart.coupon.button-title')
-                                        </button>
+                                        <p class="text-3xl font-semibold max-sm:text-xl">
+                                            @{{ cart.formatted_sub_total }}
+                                        </p>
                                     </div>
+
+                                    <x-shop::button
+                                        class="primary-button flex-auto max-w-none py-3 px-11 rounded-2xl"
+                                        :title="trans('shop::app.checkout.cart.coupon.button-title')"
+                                        ::loading="isStoring"
+                                        ::disabled="isStoring"
+                                    />
                                 </div>
                             </x-slot>
                         </x-shop::modal>
@@ -100,17 +98,17 @@
                 <!-- Applied Coupon Information Container -->
                 <div 
                     class="flex justify-between items-center text-xs font-small "
-                    v-if="isCouponApplied"
+                    v-if="cart.coupon_code"
                 >
                     <p 
-                        class="text-base font-medium cursor-pointer text-navyBlue"
+                        class="text-base font-medium text-navyBlue"
                         title="@lang('shop::app.checkout.cart.coupon.applied')"
                     >
-                        "@{{ isCouponApplied }}"
+                        "@{{ cart.coupon_code }}"
                     </p>
 
                     <span 
-                        class="icon-cancel text-3xl cursor-pointer"
+                        class="icon-cancel text-2xl cursor-pointer"
                         title="@lang('shop::app.checkout.cart.coupon.remove')"
                         @click="destroyCoupon"
                     >
@@ -126,27 +124,23 @@
         app.component('v-coupon', {
             template: '#v-coupon-template',
             
-            props: ['isCouponApplied', 'subTotal'],
+            props: ['cart'],
 
             data() {
                 return {
-                    isCartPage: Boolean("{{ request()->route()->getName() === 'shop.checkout.cart.index' }}"),
-
-                    coupons: [],
-
-                    code: '',
+                    isStoring: false,
                 }
             },
 
             methods: {
                 applyCoupon(params, { resetForm }) {
+                    this.isStoring = true;
+
                     this.$axios.post("{{ route('shop.api.checkout.cart.coupon.apply') }}", params)
                         .then((response) => {
-                            if (this.isCartPage) {
-                                this.$parent.$parent.$refs.vCart.get();
-                            } else {
-                                this.$parent.$parent.getOrderSummary();
-                            }
+                            this.isStoring = false;
+
+                            this.$emit('coupon-applied');
                   
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
@@ -155,10 +149,12 @@
                             resetForm();
                         })
                         .catch((error) => {
+                            this.isStoring = false;
+
+                            this.$refs.couponModel.toggle();
+
                             if ([400, 422].includes(error.response.request.status)) {
                                 this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
-
-                                this.$refs.couponModel.toggle();
 
                                 resetForm();
 
@@ -166,8 +162,6 @@
                             }
 
                             this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-
-                            this.$refs.couponModel.toggle();
                         });
                 },
 
@@ -176,11 +170,7 @@
                             '_token': "{{ csrf_token() }}"
                         })
                         .then((response) => {
-                            if (this.isCartPage) {
-                                this.$parent.$parent.$refs.vCart.get();
-                            } else {
-                                this.$parent.$parent.getOrderSummary();
-                            }
+                            this.$emit('coupon-removed');
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })

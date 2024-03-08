@@ -40,7 +40,7 @@ class OnepageController extends APIController
      */
     public function storeAddress(CartAddressRequest $cartAddressRequest): JsonResource
     {
-        $address = $cartAddressRequest->all();
+        $params = $cartAddressRequest->all();
 
         if (
             ! auth()->guard('customer')->check()
@@ -54,18 +54,12 @@ class OnepageController extends APIController
 
         if (Cart::hasError()) {
             return new JsonResource([
-                'redirect' => true,
-                'data'     => route('shop.checkout.cart.index'),
+                'redirect'     => true,
+                'redirect_url' => route('shop.checkout.cart.index'),
             ]);
         }
 
-        if (isset($address['billing'])) {
-            Cart::updateOrCreateBillingAddress($address['billing']);
-        }
-
-        Cart::updateOrCreateShippingAddress($address['shipping'] ?? []);
-
-        Cart::saveCustomerDetails();
+        Cart::saveAddresses($params);
 
         $cart = Cart::getCart();
 
@@ -74,8 +68,8 @@ class OnepageController extends APIController
         if ($cart->haveStockableItems()) {
             if (! $rates = Shipping::collectRates()) {
                 return new JsonResource([
-                    'redirect' => true,
-                    'data'     => route('shop.checkout.cart.index'),
+                    'redirect'     => true,
+                    'redirect_url' => route('shop.checkout.cart.index'),
                 ]);
             }
 
@@ -150,7 +144,7 @@ class OnepageController extends APIController
     /**
      * Store order
      */
-    public function storeOrder(): JsonResource
+    public function storeOrder()
     {
         if (Cart::hasError()) {
             return new JsonResource([
@@ -161,7 +155,13 @@ class OnepageController extends APIController
 
         Cart::collectTotals();
 
-        $this->validateOrder();
+        try {
+            $this->validateOrder();
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
 
         $cart = Cart::getCart();
 
