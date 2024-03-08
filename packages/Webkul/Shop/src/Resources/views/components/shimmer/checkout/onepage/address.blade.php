@@ -1,13 +1,12 @@
-<div class="mt-8 mb-7">
-    <!-- Header -->
-    <div class="flex justify-between items-center">
-        <h2 class="shimmer w-[180px] h-[32px]"></h2>
-        
-        <span class="shimmer w-6 h-6"></span>
+<!-- Address Section -->
+<div class="mt-8">
+    <!-- Section Title -->
+    <div class="mb-4">
+        <h2 class="shimmer w-[150px] h-[28px]"></h2>
     </div>
 
     <!-- Address Cards -->
-    <div class="grid gap-5 grid-cols-2 mt-8 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
+    <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
         <!-- Single card addredd -->
         <div class="max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
             <div class="flex gap-2.5 justify-between items-center">

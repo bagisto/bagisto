@@ -211,7 +211,7 @@ it('should returns the address page of the customer', function () {
         ->assertSeeText($customerAddress->email)
         ->assertSeeText($customerAddress->fast_name)
         ->assertSeeText($customerAddress->last_name)
-        ->assertSeeText($customerAddress->address1)
+        ->assertSeeText($customerAddress->address)
         ->assertSeeText($customerAddress->city)
         ->assertSeeText($customerAddress->state)
         ->assertSeeText($customerAddress->company_name)
@@ -241,7 +241,7 @@ it('should fails the validation error when certain inputs not provided when stor
         ->assertJsonValidationErrorFor('phone')
         ->assertJsonValidationErrorFor('state')
         ->assertJsonValidationErrorFor('country')
-        ->assertJsonValidationErrorFor('address1')
+        ->assertJsonValidationErrorFor('address')
         ->assertJsonValidationErrorFor('postcode')
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('first_name')
@@ -258,8 +258,7 @@ it('should store the customer address', function () {
         'company_name'    => $companyName = fake()->word(),
         'first_name'      => $firstName = fake()->firstName(),
         'last_name'       => $lastName = fake()->lastName(),
-        'address1'        => [fake()->word()],
-        'address'         => fake()->address(),
+        'address'         => [fake()->word()],
         'country'         => $countryCode = fake()->countryCode(),
         'state'           => $state = fake()->state(),
         'city'            => $city = fake()->city(),
@@ -323,7 +322,7 @@ it('should fails the validation error when certain inputs not provided update th
         ->assertJsonValidationErrorFor('phone')
         ->assertJsonValidationErrorFor('state')
         ->assertJsonValidationErrorFor('country')
-        ->assertJsonValidationErrorFor('address1')
+        ->assertJsonValidationErrorFor('address')
         ->assertJsonValidationErrorFor('postcode')
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('first_name')
@@ -346,7 +345,7 @@ it('should update the customer address', function () {
         'company_name'    => $companyName = fake()->word(),
         'first_name'      => $firstName = fake()->firstName(),
         'last_name'       => $lastName = fake()->lastName(),
-        'address1'        => [fake()->word()],
+        'address'         => [fake()->word()],
         'country'         => $customerAddress->country,
         'state'           => $customerAddress->state,
         'city'            => $customerAddress->city,

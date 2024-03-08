@@ -40,7 +40,7 @@ class AddressDataGrid extends DataGrid
             ->addSelect(
                 'ca.id as address_id',
                 'ca.company_name',
-                'ca.address1',
+                'ca.address',
                 'ca.country',
                 DB::raw(''.DB::getTablePrefix().'countries.name as country_name'),
                 'ca.state',
@@ -61,7 +61,7 @@ class AddressDataGrid extends DataGrid
             ->addSelect(DB::raw(DB::getTablePrefix().'country_states.default_name as state_name'));
 
         $this->addFilter('company_name', 'ca.company_name');
-        $this->addFilter('address1', 'ca.address1');
+        $this->addFilter('address', 'ca.address');
         $this->addFilter('postcode', 'ca.postcode');
         $this->addFilter('city', 'ca.city');
         // $this->addFilter('state_name', DB::raw(DB::getTablePrefix() . 'country_states.default_name'));
@@ -97,7 +97,7 @@ class AddressDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'address1',
+            'index'      => 'address',
             'label'      => trans('admin::app.customers.addresses.address-1'),
             'type'       => 'string',
             'searchable' => true,
