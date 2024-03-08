@@ -97,7 +97,7 @@ class WishlistController extends APIController
         }
 
         try {
-            $result = Cart::moveToCart($wishlistItem);
+            $result = Cart::moveToCart($wishlistItem, request()->input('quantity'));
 
             if ($result) {
                 return new JsonResource([
