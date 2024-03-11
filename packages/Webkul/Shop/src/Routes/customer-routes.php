@@ -39,7 +39,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
         Route::controller(SessionController::class)->prefix('login')->group(function () {
             Route::get('', 'index')->name('shop.customer.session.index');
 
-            Route::post('', 'create')->name('shop.customer.session.create');
+            Route::post('', 'store')->name('shop.customer.session.create');
         });
 
         /**
