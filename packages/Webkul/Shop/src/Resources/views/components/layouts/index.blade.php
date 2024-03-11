@@ -33,7 +33,7 @@
             content="{{ url()->to('/') }}"
         >
         <meta
-            name="currency-code"
+            name="currency"
             content="{{ core()->getCurrentCurrency()->toJson() }}"
         >
 

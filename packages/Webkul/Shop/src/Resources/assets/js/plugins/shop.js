@@ -37,7 +37,7 @@ export default {
             formatPrice(price) {
                 const locale = document.querySelector('meta[http-equiv="content-language"]').content;
 
-                const currency = JSON.parse(document.querySelector('meta[name="currency-code"]').content);
+                const currency = JSON.parse(document.querySelector('meta[name="currency"]').content);
 
                 const symbol = currency.symbol !== '' ? currency.symbol : currency.code;
 

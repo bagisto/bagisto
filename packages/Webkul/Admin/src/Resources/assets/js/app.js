@@ -24,9 +24,9 @@ window.app = createApp({
                 const errorKeys = Object.entries(errors)
                     .map(([key, value]) => ({ key, value }))
                     .filter(error => error["value"].length);
-        
+
                 let firstErrorElement = document.querySelector('[name="' + errorKeys[0]["key"] + '"]');
-        
+
                 firstErrorElement.scrollIntoView({
                     behavior: "smooth",
                     block: "center"
@@ -56,8 +56,6 @@ import Draggable from "./plugins/draggable";
     VeeValidate,
     Draggable,
 ].forEach((plugin) => app.use(plugin));
-
-
 
 /**
  * Global directives.

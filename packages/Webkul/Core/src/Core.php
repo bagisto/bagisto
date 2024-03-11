@@ -562,17 +562,35 @@ class Core
             ? $this->getAllCurrencies()->where('code', $currencyCode)->first()
             : $this->getCurrentCurrency();
 
-        $symbol = ! empty($currency->symbol)
-            ? $currency->symbol
-            : $currency->code;
+        return $this->formatMoney($price, $currency);
+    }
 
+    /**
+     * Format price with base currency symbol.
+     */
+    public function formatBasePrice(?float $price): string
+    {
+        if (is_null($price)) {
+            $price = 0;
+        }
+
+        $currency = $this->getBaseCurrency();
+
+        return $this->formatMoney($price, $currency);
+    }
+
+    /**
+     * Format money.
+     */
+    public function formatMoney(?float $money, Currency $currency): string
+    {
         $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
 
         $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, '');
 
         $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
 
-        $formattedCurrency = preg_replace('/^\s+|\s+$/u', '', $formatter->format($price));
+        $formattedCurrency = preg_replace('/^\s+|\s+$/u', '', $formatter->format($money));
 
         if (! empty($currency->group_separator)) {
             $formattedCurrency = str_replace(
@@ -593,43 +611,16 @@ class Core
             );
         }
 
+        $symbol = ! empty($currency->symbol)
+            ? $currency->symbol
+            : $currency->code;
+
         return match ($currency->currency_position) {
             CurrencyPositionEnum::LEFT->value             => $symbol.$formattedCurrency,
             CurrencyPositionEnum::LEFT_WITH_SPACE->value  => $symbol.' '.$formattedCurrency,
             CurrencyPositionEnum::RIGHT->value            => $formattedCurrency.$symbol,
             CurrencyPositionEnum::RIGHT_WITH_SPACE->value => $formattedCurrency.' '.$symbol,
         };
-    }
-
-    /**
-     * Format price with base currency symbol. This method also give ability to encode
-     * the base currency symbol and its optional.
-     *
-     * @param  float  $price
-     * @param  bool  $isEncoded
-     * @return string
-     */
-    public function formatBasePrice($price, $isEncoded = false)
-    {
-        if (is_null($price)) {
-            $price = 0;
-        }
-
-        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
-
-        if ($symbol = $this->getBaseCurrency()->symbol) {
-            if ($this->currencySymbol($this->getBaseCurrencyCode()) == $symbol) {
-                $content = $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
-            } else {
-                $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
-
-                $content = $formatter->format($this->convertPrice($price));
-            }
-        } else {
-            $content = $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
-        }
-
-        return ! $isEncoded ? $content : htmlentities($content);
     }
 
     /**
