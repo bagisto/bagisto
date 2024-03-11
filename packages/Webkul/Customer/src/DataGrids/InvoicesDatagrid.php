@@ -29,6 +29,10 @@ class InvoicesDatagrid extends DataGrid
             ->where('ors.customer_id', '=', request()->route('id'))
             ->selectRaw("CASE WHEN {$dbPrefix}invoices.increment_id IS NOT NULL THEN {$dbPrefix}invoices.increment_id ELSE {$dbPrefix}invoices.id END AS increment_id");
 
+        $this->addFilter('increment_id', 'ors.increment_id');
+        $this->addFilter('created_at', 'ors.created_at');
+        $this->addFilter('base_grand_total', 'invoices.base_grand_total');
+
         return $queryBuilder;
     }
 

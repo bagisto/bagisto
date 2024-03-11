@@ -39,6 +39,9 @@ class OrdersDataGrid extends DataGrid
             )
             ->where('orders.customer_id', request()->route('id'));
 
+        $this->addFilter('full_name', DB::raw('CONCAT('.DB::getTablePrefix().'orders.customer_first_name, " ", '.DB::getTablePrefix().'orders.customer_last_name)'));
+        $this->addFilter('created_at', 'orders.created_at');
+
         return $queryBuilder;
     }
 

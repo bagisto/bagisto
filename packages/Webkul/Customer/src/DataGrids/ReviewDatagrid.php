@@ -30,6 +30,12 @@ class ReviewDatagrid extends DataGrid
             )
             ->where('customer_id', request()->route('id'));
 
+        $this->addFilter('id', 'product_reviews.id');
+        $this->addFilter('created_at', 'product_reviews.created_at');
+        $this->addFilter('status', 'product_reviews.status');
+        $this->addFilter('product_name', 'product_flat.name');
+        $this->addFilter('product_id', 'product_flat.product_id');
+
         return $queryBuilder;
     }
 
@@ -41,7 +47,7 @@ class ReviewDatagrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'increment_id',
+            'index'      => 'id',
             'label'      => trans('ID'),
             'type'       => 'string',
             'searchable' => true,
