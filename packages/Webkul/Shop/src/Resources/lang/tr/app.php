@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Zaten Şifre Sıfırlama Postası Gönderildi.',
             'back'                 => 'Girişe geri dön?',
             'bagisto'              => 'Bagisto',
             'email'                => 'E-posta',

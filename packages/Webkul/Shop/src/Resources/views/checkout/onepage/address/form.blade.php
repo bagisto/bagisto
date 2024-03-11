@@ -115,8 +115,14 @@
                         <x-shop::form.control-group.control
                             type="text"
                             ::name="controlName + '.address.[{{ $i }}]'"
+                            rules="address"
                             :label="trans('shop::app.checkout.onepage.address.street-address')"
                             :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
+                        />
+
+                        <x-shop::form.control-group.error
+                            class="mb-2"
+                            ::name="controlName + '.address.[{{ $i }}]'"
                         />
                     @endfor
                 @endif

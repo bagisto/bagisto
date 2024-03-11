@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Письмо для сброса пароля уже отправлено.',
             'back'                 => 'Вернуться к входу?',
             'bagisto'              => 'Багисто',
             'email'                => 'Электронная почта',

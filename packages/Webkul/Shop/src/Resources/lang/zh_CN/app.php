@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => '密码重置邮件已发送。',
             'back'                 => '返回登录？',
             'bagisto'              => '巴基斯托',
             'email'                => '电子邮件',

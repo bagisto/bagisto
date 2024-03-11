@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Już zresetuj hasło. Wiadomość została wysłana.',
             'back'                 => 'Powrót do logowania?',
             'bagisto'              => 'Bagisto',
             'email'                => 'Email',

@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'E-mail de redefinição de senha já enviado.',
             'back'                 => 'Voltar para Entrar?',
             'bagisto'              => 'Bagisto',
             'email'                => 'E-mail',
