@@ -38,6 +38,10 @@
 
                 {!! view_render_event('bagisto.shop.checkout.cart.logo.after') !!}
             </div>
+
+            @guest('customer')
+                @include('shop::checkout.login')
+            @endguest
         </div>
     </div>
 

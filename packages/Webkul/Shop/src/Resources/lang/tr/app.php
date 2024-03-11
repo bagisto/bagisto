@@ -653,22 +653,6 @@ return [
                 ],
             ],
 
-            'coupon'   => [
-                'already-applied' => 'Kupon kodu zaten uygulanmış.',
-                'applied'         => 'Kupon uygulandı',
-                'apply'           => 'Kuponu Uygula',
-                'apply-issue'     => 'Kupon kodu uygulanamıyor.',
-                'button-title'    => 'Uygula',
-                'code'            => 'Kupon Kodu',
-                'discount'        => 'Kupon İndirimi',
-                'enter-your-code' => 'Kodunuzu girin',
-                'error'           => 'Bir şeyler yanlış gitti',
-                'invalid'         => 'Kupon kodu geçersiz.',
-                'remove'          => 'Kuponu Kaldır',
-                'subtotal'        => 'Ara Toplam',
-                'success-apply'   => 'Kupon kodu başarıyla uygulandı.',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'Ödemeye Devam Et',
                 'empty-cart'           => 'Sepetiniz boş',
@@ -743,6 +727,28 @@ return [
                 'sub-total'        => 'Ara Toplam',
                 'tax'              => 'Vergi',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Kupon kodu zaten uygulanmış.',
+            'applied'         => 'Kupon uygulandı',
+            'apply'           => 'Kuponu Uygula',
+            'apply-issue'     => 'Kupon kodu uygulanamıyor.',
+            'button-title'    => 'Uygula',
+            'code'            => 'Kupon Kodu',
+            'discount'        => 'Kupon İndirimi',
+            'enter-your-code' => 'Kodunuzu girin',
+            'error'           => 'Bir şeyler yanlış gitti',
+            'invalid'         => 'Kupon kodu geçersiz.',
+            'remove'          => 'Kuponu Kaldır',
+            'subtotal'        => 'Ara Toplam',
+            'success-apply'   => 'Kupon kodu başarıyla uygulandı.',
+        ],
+
+        'login' => [
+            'email'    => 'E-posta',
+            'password' => 'Şifre',
+            'title'    => 'Giriş Yap',
         ],
     ],
 
