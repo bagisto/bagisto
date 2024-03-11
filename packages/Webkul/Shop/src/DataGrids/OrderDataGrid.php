@@ -135,15 +135,7 @@ class OrderDataGrid extends DataGrid
             },
         ]);
     }
-    ->leftJoin('addresses as order_address_shipping', function ($leftJoin) {
-        $leftJoin->on('order_address_shipping.order_id', '=', 'orders.id')
-            ->where('order_address_shipping.address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
-    })
-    ->leftJoin('addresses as order_address_billing', function ($leftJoin) {
-        $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
-            ->where('order_address_billing.address_type', OrderAddress::ADDRESS_TYPE_BILLING);
-    })
-    ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
+
     /**
      * Prepare actions.
      *
