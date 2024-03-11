@@ -329,10 +329,10 @@
                 },
 
                 removeItem(itemId) {
-                    this.isLoading = true;
-
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
+                            this.isLoading = true;
+
                             this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
                                 '_method': 'DELETE',
                                 'cart_item_id': itemId,
