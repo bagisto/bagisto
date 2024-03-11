@@ -18,14 +18,16 @@
 
                 {!! view_render_event('bagisto.admin.customers.customers.create.before') !!}
 
-                <v-create-customer-form>
-                    <button
-                        type="button"
-                        class="primary-button"
-                    >
-                        @lang('admin::app.customers.customers.index.create.create-btn')
-                    </button>
-                </v-create-customer-form>
+                @if (bouncer()->hasPermission('customers.customers.create'))
+                    <v-create-customer-form>
+                        <button
+                            type="button"
+                            class="primary-button"
+                        >
+                            @lang('admin::app.customers.customers.index.create.create-btn')
+                        </button>
+                    </v-create-customer-form>
+                @endif
 
                 {!! view_render_event('bagisto.admin.customers.customers.create.after') !!}
 
@@ -237,15 +239,13 @@
         <script type="text/x-template" id="v-create-customer-form-template">
             <div>
                 <!-- Create Button -->
-                @if (bouncer()->hasPermission('customers.customers.create'))
-                    <button
-                        type="button"
-                        class="primary-button"
-                        @click="$refs.customerCreateModal.toggle()"
-                    >
-                        @lang('admin::app.customers.customers.index.create.create-btn')
-                    </button>
-                @endif
+                <button
+                    type="button"
+                    class="primary-button"
+                    @click="$refs.customerCreateModal.toggle()"
+                >
+                    @lang('admin::app.customers.customers.index.create.create-btn')
+                </button>
 
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"

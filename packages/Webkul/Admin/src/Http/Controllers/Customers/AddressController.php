@@ -91,6 +91,7 @@ class AddressController extends Controller
 
         return new JsonResponse([
             'message' => trans('admin::app.customers.addresses.create-success'),
+            'data'    => $customerAddress,
         ]);
     }
 
@@ -149,6 +150,7 @@ class AddressController extends Controller
 
         return new JsonResponse([
             'message' => trans('admin::app.customers.addresses.update-success'),
+            'data'    => $customerAddress,
         ]);
     }
 
@@ -169,13 +171,12 @@ class AddressController extends Controller
             'customer_id'     => $id,
         ]);
 
-        if ($address) {
-            $address->update(['default_address' => 1]);
+        $address->update(['default_address' => 1]);
 
-            session()->flash('success', trans('admin::app.customers.customers.view.set-default-success'));
-        }
-
-        return redirect()->back();
+        return new JsonResponse([
+            'message' => trans('admin::app.customers.customers.view.set-default-success'),
+            'data'    => $address,
+        ]);
     }
 
     /**
@@ -191,8 +192,8 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        session()->flash('success', trans('admin::app.customers.customers.view.address-delete-success'));
-
-        return redirect()->back();
+        return new JsonResponse([
+            'message' => trans('admin::app.customers.customers.view.address-delete-success'),
+        ]);
     }
 }

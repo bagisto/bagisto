@@ -1,6 +1,8 @@
-<v-customer-edit :customer="customer">
-    <div type="button"
-        class="flex gap-1.5 items-center justify-between px-2.5 text-blue-600 cursor-pointer transition-all hover:underline">
+<v-customer-edit
+    :customer="customer"
+    @update-customer="updateCustomer"
+>
+    <div class="flex gap-1.5 items-center justify-between px-2.5 text-blue-600 cursor-pointer transition-all hover:underline">
         @lang('admin::app.customers.customers.edit.edit-btn')
     </div>
 </v-customer-edit>
@@ -26,7 +28,10 @@
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
         >
-            <form @submit="handleSubmit($event, edit)" ref="customerEditForm">
+            <form
+                @submit="handleSubmit($event, edit)"
+                ref="customerEditForm"
+            >
                 <!-- Customer Edit Modal -->
                 <x-admin::modal ref="customerEditModal">
                     <!-- Modal Header -->
@@ -181,13 +186,12 @@
                                     id="customerGroup" 
                                     :label="trans('admin::app.customers.customers.edit.customer-group')"
                                 >
-                                <option 
-                                    v-for="group in groups" 
-                                    :value="group.id"
-                                    selected
-                                > 
-                                    @{{ group.name }} 
-                                </option>
+                                    <option 
+                                        v-for="group in groups" 
+                                        :value="group.id"
+                                    > 
+                                        @{{ group.name }} 
+                                    </option>
                                 </x-admin::form.control-group.control>
                             </x-admin::form.control-group>
                         </div>
@@ -241,14 +245,13 @@
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
-                        <div class="flex gap-x-2.5 items-center">
-                            <button 
-                                type="submit"
-                                class="primary-button"
-                            >
-                                @lang('admin::app.customers.customers.edit.save-btn')
-                            </button>
-                        </div>
+                        <x-admin::button
+                            button-type="submit"
+                            class="primary-button justify-center"
+                            :title="trans('admin::app.customers.customers.edit.save-btn')"
+                            ::loading="isUpdating"
+                            ::disabled="isUpdating"
+                        />
                     </x-slot>
                 </x-admin::modal>
             </form>
@@ -263,30 +266,35 @@
 
             props: ['customer'],
 
+            emits: ['update-customer'],
+
             data() {
                 return {
                     groups: @json($groups),
+
+                    isUpdating: false,
                 };
             },
 
             methods: {
                 edit(params, {resetForm, setErrors}) {
+                    this.isUpdating = true;
+
                     let formData = new FormData(this.$refs.customerEditForm);
 
                     formData.append('_method', 'put');
 
                     this.$axios.post('{{ route('admin.customers.customers.update', $customer->id) }}', formData)
                         .then((response) => {
-                            this.$refs.customerEditModal.close();
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            this.$emitter.emit('add-flash', {
-                                type: 'success',
-                                message: response.data.message
-                            });
-
-                            this.$parent.$parent.$parent.$refs.customerDetails.get()
+                            this.$emit('update-customer', response.data.data);
 
                             resetForm();
+
+                            this.isUpdating = false;
+
+                            this.$refs.customerEditModal.close();
                         })
                         .catch(error => {
                             if (error.response.status == 422) {

@@ -3,6 +3,7 @@
 namespace Webkul\Customer\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Customer\Contracts\CustomerAddress;
 
 class CustomerAddressRepository extends Repository
 {
@@ -11,10 +12,12 @@ class CustomerAddressRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Customer\Contracts\CustomerAddress';
+        return CustomerAddress::class;
     }
 
     /**
+     * Create a new customer address
+     *
      * @return \Webkul\Customer\Contracts\CustomerAddress
      */
     public function create(array $data)
@@ -38,6 +41,8 @@ class CustomerAddressRepository extends Repository
     }
 
     /**
+     * Update customer address.
+     *
      * @param  int  $id
      * @return \Webkul\Customer\Contracts\CustomerAddress
      */
@@ -45,24 +50,16 @@ class CustomerAddressRepository extends Repository
     {
         $address = $this->find($id);
 
-        $data['default_address'] = $data['default_address'] ?? $address->default_address;
-
-        $default_address = $this
-            ->findWhere(['customer_id' => $address->customer_id, 'default_address' => 1])
-            ->first();
+        $defaultAddress = $this->findOneWhere(['customer_id' => $address->customer_id, 'default_address' => 1]);
 
         if (
-            isset($default_address->id)
-            && $data['default_address']
+            $defaultAddress
+            && $defaultAddress->id != $address->id
         ) {
-            if ($default_address->id != $address->id) {
-                $default_address->update(['default_address' => 0]);
-            }
-
-            $address->update($data);
-        } else {
-            $address->update($data);
+            $defaultAddress->update(['default_address' => 0]);
         }
+
+        $address->update($data);
 
         return $address;
     }

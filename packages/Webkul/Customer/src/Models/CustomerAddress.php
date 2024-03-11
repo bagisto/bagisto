@@ -19,6 +19,34 @@ class CustomerAddress extends Address implements CustomerAddressContract
     public const ADDRESS_TYPE = 'customer';
 
     /**
+     * Define the fillable property of the model.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'address_type',
+        'parent_address_id',
+        'customer_id',
+        'cart_id',
+        'order_id',
+        'first_name',
+        'last_name',
+        'gender',
+        'company_name',
+        'address',
+        'city',
+        'state',
+        'country',
+        'postcode',
+        'email',
+        'phone',
+        'vat_id',
+        'default_address',
+        'use_for_shipping',
+        'additional',
+    ];
+
+    /**
      * Define the attributes of the customer address model.
      *
      * @var array default values

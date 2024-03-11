@@ -1172,6 +1172,53 @@ return [
     ],
 
     'customers' => [
+        'addresses' => [
+            'create' => [
+                'address-1'          => 'Address 1',
+                'address-2'          => 'Address 2',
+                'city'               => 'City',
+                'company-name'       => 'Company Name',
+                'country'            => 'Country',
+                'create-address-btn' => 'Add New Address',
+                'default-address'    => 'Default Address',
+                'email'              => 'Email',
+                'first-name'         => 'First Name',
+                'last-name'          => 'Last Name',
+                'phone'              => 'Phone',
+                'post-code'          => 'Post Code',
+                'save-btn-title'     => 'Save Address',
+                'select-country'     => 'Select Country',
+                'state'              => 'State',
+                'street-address'     => 'Street Address',
+                'title'              => 'Create Customer\'s Address',
+                'vat-id'             => 'Vat ID',
+            ],
+
+            'edit' => [
+                'address-1'       => 'Address 1',
+                'address-2'       => 'Address 2',
+                'city'            => 'City',
+                'company-name'    => 'Company Name',
+                'country'         => 'Country',
+                'default-address' => 'Default Address',
+                'email'           => 'Email',
+                'first-name'      => 'First Name',
+                'last-name'       => 'Last Name',
+                'phone'           => 'Phone',
+                'post-code'       => 'Post Code',
+                'save-btn-title'  => 'Save Address',
+                'select-country'  => 'Select Country',
+                'state'           => 'State',
+                'street-address'  => 'Street Address',
+                'title'           => 'Address Edit',
+                'vat-id'          => 'Vat ID',
+            ],
+
+            'create-success'      => 'Address Created Successfully',
+            'success-mass-delete' => 'Address Mass Delete Successfully',
+            'update-success'      => 'Address Updated Successfully',
+        ],
+
         'customers' => [
             'index' => [
                 'login-message' => 'you logged in as :customer_name',
