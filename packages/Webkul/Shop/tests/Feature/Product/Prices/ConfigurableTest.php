@@ -798,7 +798,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
@@ -980,7 +980,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
@@ -1170,7 +1170,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
@@ -1360,7 +1360,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
