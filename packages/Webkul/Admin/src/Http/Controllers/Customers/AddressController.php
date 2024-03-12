@@ -90,7 +90,7 @@ class AddressController extends Controller
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
         return new JsonResponse([
-            'message' => trans('admin::app.customers.addresses.create-success'),
+            'message' => trans('admin::app.customers.customers.view.address.create-success'),
             'data'    => $customerAddress,
         ]);
     }
@@ -149,7 +149,7 @@ class AddressController extends Controller
         Event::dispatch('customer.addresses.update.after', $customerAddress);
 
         return new JsonResponse([
-            'message' => trans('admin::app.customers.addresses.update-success'),
+            'message' => trans('admin::app.customers.customers.view.address.update-success'),
             'data'    => $customerAddress,
         ]);
     }
@@ -174,7 +174,7 @@ class AddressController extends Controller
         $address->update(['default_address' => 1]);
 
         return new JsonResponse([
-            'message' => trans('admin::app.customers.customers.view.set-default-success'),
+            'message' => trans('admin::app.customers.customers.view.address.set-default-success'),
             'data'    => $address,
         ]);
     }
@@ -193,7 +193,7 @@ class AddressController extends Controller
         Event::dispatch('customer.addresses.delete.after', $id);
 
         return new JsonResponse([
-            'message' => trans('admin::app.customers.customers.view.address-delete-success'),
+            'message' => trans('admin::app.customers.customers.view.address.address-delete-success'),
         ]);
     }
 }

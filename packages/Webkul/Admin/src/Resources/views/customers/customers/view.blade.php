@@ -101,7 +101,7 @@
                 >
                     <span class="icon-exit text-2xl"></span>
 
-                    @lang('Login as customer')
+                    @lang('admin::app.customers.customers.view.login-as-customer')
                 </a>
             </div>
 
@@ -163,8 +163,10 @@
         
                             <x-slot:content>
                                 <div class="grid gap-y-2.5">
-                                    <p class="text-gray-800 font-semibold dark:text-white">
-                                        @{{ customer.first_name + ' ' + customer.last_name }}
+                                    <p 
+                                        lass="text-gray-800 font-semibold dark:text-white"
+                                        v-text="`${customer.first_name} ${customer.last_name}`"
+                                    >
                                     </p>
         
                                     <p class="text-gray-600 dark:text-gray-300">
@@ -202,8 +204,9 @@
                         <x-admin::accordion>
                             <x-slot:header>
                                 <div class="flex w-full">
+                                    <!-- Address Title -->
                                     <p class="w-full p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
-                                        @lang('admin::app.customers.customers.view.address')
+                                        @{{ "@lang('admin::app.customers.customers.view.address.count')".replace(':count', customer.addresses.length) }}
                                     </p>
 
                                     <!-- Address Create component -->
@@ -248,7 +251,7 @@
                                             @{{ '@lang('admin::app.customers.customers.view.email')'.replace(':email', address.email ?? 'N/A') }}
                                         </p>
 
-                                        <div class="flex gap-2.5">
+                                        <div class="flex items-center gap-2.5">
                                             <!-- Edit Address -->
                                             @include('admin::customers.customers.view.address.edit')
 
@@ -264,12 +267,14 @@
 
                                             <!-- Set Default Address -->
                                             <template v-if="! address.default_address">
-                                                <p
-                                                    class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                                    @click="setAsDefault(address)"
-                                                >
-                                                    @lang('admin::app.customers.customers.view.set-as-default')
-                                                </p>
+                                                <x-admin::button
+                                                    button-type="button"
+                                                    class="flex justify-center text-sm text-blue-600 cursor-pointer transition-all hover:underline"
+                                                    :title="trans('admin::app.customers.customers.view.set-as-default')"
+                                                    ::loading="isUpdating[index]"
+                                                    ::disabled="isUpdating[index]"
+                                                    @click="setAsDefault(address, index)"
+                                                />
                                             </template>
                                         </div>
 
@@ -315,6 +320,8 @@
                 data() {
                     return {
                         customer: @json($customer),
+
+                        isUpdating: {},
                     };
                 },
 
@@ -335,7 +342,9 @@
                         });
                     },
 
-                    setAsDefault(address) {
+                    setAsDefault(address, index) {
+                        this.isUpdating[index] = true;
+
                         this.$axios.post(`{{ route('admin.customers.customers.addresses.set_default', '') }}/${this.customer.id}`, {
                             set_as_default: address.id,
                         })
@@ -348,6 +357,8 @@
                                         ? response.data.data.default_address
                                         : false,
                                 }));
+
+                                this.isUpdating[index] = false;
                             })
                             .catch((error) => {});
                     },

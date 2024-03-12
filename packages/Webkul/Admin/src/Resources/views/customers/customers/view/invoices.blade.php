@@ -8,7 +8,7 @@
         <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading, available}">
             <p class="p-4 text-base text-gray-800 leading-none dark:text-white font-semibold">
-                @{{ "@lang('admin::app.customers.customers.view.invoice')".replace(':invoice_count', available.meta.total) }}
+                @{{ "@lang('admin::app.customers.customers.view.invoices.count')".replace(':count', available.meta.total ?? 0) }}
             </p>
 
             <template v-if="! isLoading">
@@ -51,72 +51,77 @@
             </template>
         </template>
 
-        <template #body="{ columns, records, performAction, available }">
-            <div
-                v-for="record in records"
-                class="flex justify-between items-center px-4 py-4 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-            >
-                <div class="">
-                    <div class="flex gap-2.5">
-                        <div class="flex flex-col gap-1.5">
-                            <!-- Id -->
-                            <p class="text-gray-600 dark:text-gray-300">
-                                @{{ "@lang('admin::app.customers.customers.view.increment-id')".replace(':increment_id', record.id) }}
-                            </p>
+        <template #body="{ columns, records, performAction, available, isLoading}">
+            <template v-if="! isLoading">
+                <div
+                    v-for="record in records"
+                    class="flex justify-between items-center px-4 py-4 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                >
+                    <div class="">
+                        <div class="flex gap-2.5">
+                            <div class="flex flex-col gap-1.5">
+                                <!-- Id -->
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ "@lang('admin::app.customers.customers.view.invoices.increment-id')".replace(':increment_id', record.id) }}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="">
-                    <div class="flex gap-2.5">
-                        <div class="flex flex-col gap-1.5">
-                            <!-- Created At -->
-                            <p class="text-gray-600 dark:text-gray-300">
-                                @{{ record.created_at }}
-                            </p>
+                    <div class="">
+                        <div class="flex gap-2.5">
+                            <div class="flex flex-col gap-1.5">
+                                <!-- Created At -->
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ record.created_at }}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="">
-                    <div class="flex gap-2.5">
+                    <div class="">
+                        <div class="flex gap-2.5">
+                            <div class="flex flex-col gap-1.5">
+                                <!-- Created At -->
+                                <p
+                                    class="text-gray-600 dark:text-gray-300"
+                                    v-text="$admin.formatPrice(record.base_grand_total)"
+                                >
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="flex gap-2.5">
+                            <div class="flex flex-col gap-1.5">
+                                <!-- Created At -->
+                                <p
+                                    class="text-gray-600 dark:text-gray-300"
+                                    v-text="`# ${record.order_id}`"
+                                >
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View the order -->
+                    <div class="">
                         <div class="flex flex-col gap-1.5">
-                            <!-- Created At -->
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="$admin.formatPrice(record.base_grand_total)"
+                            <a
+                                :href="`{{ route('admin.sales.invoices.view', '') }}/${record.id}`"
+                                class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                             >
-                            </p>
-                            
-                        
+                            </a>
                         </div>
                     </div>
                 </div>
+            </template>
 
-                <div class="">
-                    <div class="flex gap-2.5">
-                        <div class="flex flex-col gap-1.5">
-                            <!-- Created At -->
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="`# ${record.order_id}`"
-                            >
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- View the order -->
-                <div class="">
-                    <div class="flex flex-col gap-1.5">
-                        <a
-                            :href="`{{ route('admin.sales.invoices.view', '') }}/${record.id}`"
-                            class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
-                        >
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <!-- Datagrid Body Shimmer -->
+            <template v-else>
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+            </template>
         </template>
     </x-admin::datagrid>
 </div>

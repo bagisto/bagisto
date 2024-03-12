@@ -1,7 +1,7 @@
 <!-- Notes Form -->
 <div class="p-4 bg-white dark:bg-gray-900  rounded box-shadow">
     <p class="p-4 pb-0 text-base text-gray-800 leading-none dark:text-white font-semibold">
-        @lang('admin::app.customers.customers.view.add-note')
+        @lang('admin::app.customers.customers.view.notes.add-note')
     </p>
 
     <x-admin::form :action="route('admin.customer.note.store', $customer->id)">
@@ -13,8 +13,8 @@
                     id="note"
                     name="note"
                     rules="required"
-                    :label="trans('admin::app.customers.customers.view.note')"
-                    :placeholder="trans('admin::app.customers.customers.view.note-placeholder')"
+                    :label="trans('admin::app.customers.customers.view.notes.note')"
+                    :placeholder="trans('admin::app.customers.customers.view.notes.note-placeholder')"
                     rows="3"
                 />
 
@@ -37,7 +37,7 @@
                     <span class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
 
                     <p class="flex gap-x-1 items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
-                        @lang('admin::app.customers.customers.view.notify-customer')
+                        @lang('admin::app.customers.customers.view.notes.notify-customer')
                     </p>
                 </label>
 
@@ -46,7 +46,7 @@
                     type="submit"
                     class="secondary-button"
                 >
-                    @lang('admin::app.customers.customers.view.submit-btn-title')
+                    @lang('admin::app.customers.customers.view.notes.submit-btn-title')
                 </button>
             </div>
         </div>
@@ -66,11 +66,11 @@
                 @if ($note->customer_notified)
                     <span class="h-fit text-2xl rounded-full icon-done text-blue-600 bg-blue-100"></span>
 
-                    @lang('admin::app.customers.customers.view.customer-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
+                    @lang('admin::app.customers.customers.view.notes.customer-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @else
                     <span class="h-fit text-2xl rounded-full icon-cancel-1 text-red-600 bg-red-100"></span>
 
-                    @lang('admin::app.customers.customers.view.customer-not-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
+                    @lang('admin::app.customers.customers.view.notes.customer-not-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @endif
             </p>
         </div>
