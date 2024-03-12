@@ -411,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'ක්‍රියාවලිය',
+                'actions'              => 'ක්‍රියා',
                 'next-page'            => 'ඊළඟ පිටුව',
-                'no-records-available' => 'ලකුණු නොපවතියි.',
-                'page-navigation'      => 'පිටුව නවිකාශය',
+                'no-records-available' => 'ලියාපදිංචි නොවේ.',
+                'of'                   => ':total ඇතුලු සටහන්',
+                'page-navigation'      => 'පිටු පාලනය',
                 'page-number'          => 'පිටුවේ අංකය',
                 'previous-page'        => 'පෙර පිටුව',
+                'showing'              => ':firstItem පෙන්වනු ඇත',
+                'to'                   => ':lastItem දක්වනු ඇත',
             ],
         ],
 

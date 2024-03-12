@@ -157,7 +157,11 @@
                         <!-- Information Panel -->
                         <div v-if="$parent.available.records.length" class="flex justify-between items-center p-6">
                             <p class="text-xs font-medium">
-                                Showing @{{ $parent.available.meta.from }} to @{{ $parent.available.meta.to }} of @{{ $parent.available.meta.total }} entries
+                                <p class="text-xs font-medium">
+                                    @{{ "@lang('shop::app.components.datagrid.table.showing')".replace(':firstItem', $parent.available.meta.from) }}
+                                    @{{ "@lang('shop::app.components.datagrid.table.to')".replace(':lastItem', $parent.available.meta.to) }}
+                                    @{{ "@lang('shop::app.components.datagrid.table.of')".replace(':total', $parent.available.meta.total) }}
+                                </p>
                             </p>
 
                             <!-- Pagination -->

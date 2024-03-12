@@ -414,9 +414,12 @@ return [
                 'actions'              => 'Actions',
                 'next-page'            => 'Page suivante',
                 'no-records-available' => 'Aucun enregistrement disponible.',
+                'of'                   => 'de :total entrées',
                 'page-navigation'      => 'Navigation de page',
                 'page-number'          => 'Numéro de page',
                 'previous-page'        => 'Page précédente',
+                'showing'              => 'Affichage de :firstItem',
+                'to'                   => 'à :lastItem',
             ],
         ],
 

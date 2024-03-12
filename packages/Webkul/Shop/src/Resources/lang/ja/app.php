@@ -414,9 +414,12 @@ return [
                 'actions'              => 'アクション',
                 'next-page'            => '次のページ',
                 'no-records-available' => '利用可能なレコードはありません。',
+                'of'                   => 'の合計 :total エントリ',
                 'page-navigation'      => 'ページナビゲーション',
                 'page-number'          => 'ページ番号',
                 'previous-page'        => '前のページ',
+                'showing'              => ':firstItem を表示',
+                'to'                   => ':lastItem まで',
             ],
         ],
 

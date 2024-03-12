@@ -411,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'عملیات‌ها',
-                'no-records-available' => 'رکوردی در دسترس نیست.',
+                'actions'              => 'عملیات',
                 'next-page'            => 'صفحه بعدی',
-                'page-navigation'      => 'ناوبری صفحه',
-                'previous-page'        => 'صفحه قبلی',
+                'no-records-available' => 'هیچ رکوردی موجود نیست.',
+                'of'                   => 'از :total ورودی',
+                'page-navigation'      => 'مسیریابی صفحه',
                 'page-number'          => 'شماره صفحه',
+                'previous-page'        => 'صفحه قبلی',
+                'showing'              => 'نمایش :firstItem',
+                'to'                   => 'تا :lastItem',
             ],
         ],
 
