@@ -5,8 +5,7 @@ namespace Webkul\Core;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Webkul\Core\Contracts\Currency;
-use Webkul\Core\Enums\CurrencyPositionEnum;
+use Webkul\Core\Concerns\CurrencyFormatter;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Repositories\CoreConfigRepository;
@@ -20,6 +19,8 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Core
 {
+    use CurrencyFormatter;
+
     /**
      * The Bagisto version.
      *
@@ -535,21 +536,6 @@ class Core
     }
 
     /**
-     * Return currency symbol from currency code.
-     *
-     * @param  string|\Webkul\Core\Contracts\Currency  $currency
-     * @return string
-     */
-    public function currencySymbol($currency)
-    {
-        $code = $currency instanceof \Webkul\Core\Contracts\Currency ? $currency->code : $currency;
-
-        $formatter = new \NumberFormatter(app()->getLocale().'@currency='.$code, \NumberFormatter::CURRENCY);
-
-        return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
-    }
-
-    /**
      * Format price.
      */
     public function formatPrice(?float $price, ?string $currencyCode = null): string
@@ -562,7 +548,7 @@ class Core
             ? $this->getAllCurrencies()->where('code', $currencyCode)->first()
             : $this->getCurrentCurrency();
 
-        return $this->formatMoney($price, $currency);
+        return $this->formatCurrency($price, $currency);
     }
 
     /**
@@ -576,51 +562,7 @@ class Core
 
         $currency = $this->getBaseCurrency();
 
-        return $this->formatMoney($price, $currency);
-    }
-
-    /**
-     * Format money.
-     */
-    public function formatMoney(?float $money, Currency $currency): string
-    {
-        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
-
-        $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, '');
-
-        $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
-
-        $formattedCurrency = preg_replace('/^\s+|\s+$/u', '', $formatter->format($money));
-
-        if (! empty($currency->group_separator)) {
-            $formattedCurrency = str_replace(
-                $formatter->getSymbol(\NumberFormatter::GROUPING_SEPARATOR_SYMBOL),
-                $currency->group_separator,
-                $formattedCurrency
-            );
-        }
-
-        if (
-            $currency->decimal > 0
-            && ! empty($currency->decimal_separator)
-        ) {
-            $formattedCurrency = str_replace(
-                $formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL),
-                $currency->decimal_separator,
-                $formattedCurrency
-            );
-        }
-
-        $symbol = ! empty($currency->symbol)
-            ? $currency->symbol
-            : $currency->code;
-
-        return match ($currency->currency_position) {
-            CurrencyPositionEnum::LEFT->value             => $symbol.$formattedCurrency,
-            CurrencyPositionEnum::LEFT_WITH_SPACE->value  => $symbol.' '.$formattedCurrency,
-            CurrencyPositionEnum::RIGHT->value            => $formattedCurrency.$symbol,
-            CurrencyPositionEnum::RIGHT_WITH_SPACE->value => $formattedCurrency.' '.$symbol,
-        };
+        return $this->formatCurrency($price, $currency);
     }
 
     /**

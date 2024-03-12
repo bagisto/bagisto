@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('currencies', function (Blueprint $table) {
             $table->string('group_separator')->default(',')->after('decimal');
             $table->string('decimal_separator')->default('.')->after('group_separator');
-            $table->string('currency_position')->default('left')->after('decimal_separator');
+            $table->string('currency_position')->nullable()->after('decimal_separator');
         });
     }
 

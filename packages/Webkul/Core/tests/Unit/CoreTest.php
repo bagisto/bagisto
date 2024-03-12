@@ -168,9 +168,57 @@ it('returns the current channel code if requested channel code is not provided',
     expect($channelCode)->toBe($expectedChannel->code);
 });
 
+it('should format the price with default symbol based on the current currency and use default formatter if currency position is not defined', function () {
+    // Arrange
+    $expectedSymbol = '$';
+
+    $channel = Channel::factory()->create();
+
+    $channel->base_currency->update([
+        'symbol'            => null,
+        'currency_position' => null,
+    ]);
+
+    $price = number_format(fake()->randomFloat(min: 1, max: 500), $channel->base_currency->decimal);
+
+    core()->setCurrentChannel($channel);
+
+    // Act
+    $formattedPrice = core()->formatPrice($price);
+
+    // Assert
+    expect($formattedPrice)->toBe($expectedSymbol.$price);
+});
+
+it('should format the price with custom symbol based on the current currency and use default formatter if currency position is not defined', function () {
+    // Arrange
+    $expectedSymbol = '€';
+
+    $channel = Channel::factory()->create();
+
+    $channel->base_currency->update([
+        'symbol'            => $expectedSymbol,
+        'currency_position' => null,
+    ]);
+
+    $price = number_format(fake()->randomFloat(min: 1, max: 500), $channel->base_currency->decimal);
+
+    core()->setCurrentChannel($channel);
+
+    // Act
+    $formattedPrice = core()->formatPrice($price);
+
+    // Assert
+    expect($formattedPrice)->toBe($expectedSymbol.$price);
+});
+
 it('should format the price based on the current currency and place the symbol on the left side', function () {
     // Arrange
     $channel = Channel::factory()->create();
+
+    $channel->base_currency->update([
+        'currency_position' => CurrencyPositionEnum::LEFT->value,
+    ]);
 
     $price = number_format(fake()->randomFloat(min: 1, max: 500), $channel->base_currency->decimal);
 
