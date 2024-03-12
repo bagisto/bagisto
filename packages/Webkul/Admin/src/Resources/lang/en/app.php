@@ -1268,7 +1268,7 @@ return [
                         'title'              => 'Create Address',
                         'vat-id'             => 'Vat ID',
                     ],
-        
+
                     'edit' => [
                         'city'            => 'City',
                         'company-name'    => 'Company Name',
@@ -1287,7 +1287,7 @@ return [
                         'title'           => 'Edit Address',
                         'vat-id'          => 'Vat ID',
                     ],
-        
+
                     'address-delete-success' => 'Address Deleted Successfully',
                     'create-success'         => 'Address Created Successfully',
                     'set-default-success'    => 'Default Address Updated Successfully',
@@ -1324,7 +1324,7 @@ return [
                         'invoice-date'   => 'Invoices Date',
                         'order-id'       => 'Order ID',
                         'view'           => 'View',
-                    ]
+                    ],
                 ],
 
                 'notes' => [
@@ -1341,7 +1341,7 @@ return [
                     'count'           => 'Orders (:count)',
                     'increment-id'    => '# :increment_id',
                     'total-revenue'   => 'Total Revenue - :revenue',
-                    'datagrid' => [
+                    'datagrid'        => [
                         'canceled'        => 'Canceled',
                         'channel-name'    => 'Channel Name',
                         'closed'          => 'Closed',
@@ -1359,13 +1359,13 @@ return [
                         'processing'      => 'Processing',
                         'status'          => 'Status',
                         'view'            => 'View',
-                    ]
+                    ],
                 ],
-                
+
                 'reviews' => [
                     'id'          => 'ID - :id',
                     'count'       => 'Reviews (:count)',
-                    'datagrid' => [
+                    'datagrid'    => [
                         'approved'     => 'Approved',
                         'comment'      => 'Comment',
                         'created-at'   => 'Created At',
@@ -1378,7 +1378,7 @@ return [
                         'rating'       => 'Rating',
                         'status'       => 'Status',
                         'title'        => 'Title',
-                    ]
+                    ],
                 ],
             ],
 

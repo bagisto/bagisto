@@ -360,7 +360,7 @@
 
                                 this.isUpdating[index] = false;
                             })
-                            .catch((error) => {});
+                            .catch((error) => this.isUpdating[index] = false);
                     },
 
                     updateCustomer(data) {

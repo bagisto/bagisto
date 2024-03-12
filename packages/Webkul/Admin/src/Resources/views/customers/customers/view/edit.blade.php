@@ -295,6 +295,8 @@
                             this.$refs.customerEditModal.close();
                         })
                         .catch(error => {
+                            this.isUpdating = false;
+
                             if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
                             }

@@ -1248,7 +1248,7 @@ return [
 
                 'address' => [
                     'count'  => 'العناوين (:count)',
-                
+
                     'create' => [
                         'city'               => 'المدينة',
                         'company-name'       => 'اسم الشركة',
@@ -1268,7 +1268,7 @@ return [
                         'title'              => 'إنشاء عنوان',
                         'vat-id'             => 'رقم الضريبة القيمة المضافة',
                     ],
-                
+
                     'edit' => [
                         'city'            => 'المدينة',
                         'company-name'    => 'اسم الشركة',
@@ -1287,14 +1287,14 @@ return [
                         'title'           => 'تحرير العنوان',
                         'vat-id'          => 'رقم الضريبة القيمة المضافة',
                     ],
-                
+
                     'address-delete-success' => 'تم حذف العنوان بنجاح',
                     'create-success'         => 'تم إنشاء العنوان بنجاح',
                     'set-default-success'    => 'تم تحديث العنوان الافتراضي بنجاح',
                     'success-mass-delete'    => 'تم حذف عناوين الشحن بنجاح',
                     'update-success'         => 'تم تحديث العنوان بنجاح',
                 ],
-                
+
                 'edit' => [
                     'contact-number'        => 'رقم الاتصال',
                     'customer-group'        => 'مجموعة العملاء',
@@ -1314,7 +1314,7 @@ return [
                     'suspended'             => 'معلق',
                     'title'                 => 'تحرير العميل',
                 ],
-                
+
                 'invoices' => [
                     'count'         => 'الفواتير (:count)',
                     'increment-id'  => '# :increment_id',
@@ -1326,7 +1326,7 @@ return [
                         'view'           => 'عرض',
                     ],
                 ],
-                
+
                 'notes' => [
                     'add-note'              => 'إضافة مذكرة',
                     'customer-not-notified' => ':date | <b>لم يتم إشعار العميل</b>',
@@ -1341,7 +1341,7 @@ return [
                     'count'           => 'الطلبات (:count)',
                     'increment-id'    => '# :increment_id',
                     'total-revenue'   => 'إجمالي الإيرادات - :revenue',
-                    'datagrid' => [
+                    'datagrid'        => [
                         'canceled'        => 'تم الإلغاء',
                         'channel-name'    => 'اسم القناة',
                         'closed'          => 'مغلق',
@@ -1359,13 +1359,13 @@ return [
                         'processing'      => 'قيد المعالجة',
                         'status'          => 'الحالة',
                         'view'            => 'عرض',
-                    ]
+                    ],
                 ],
-                
+
                 'reviews' => [
                     'id'          => 'المعرف - :id',
                     'count'       => 'التقييمات (:count)',
-                    'datagrid' => [
+                    'datagrid'    => [
                         'approved'     => 'تم الموافقة عليه',
                         'comment'      => 'التعليق',
                         'created-at'   => 'تاريخ الإنشاء',
@@ -1378,7 +1378,7 @@ return [
                         'rating'       => 'التقييم',
                         'status'       => 'الحالة',
                         'title'        => 'العنوان',
-                    ]
+                    ],
                 ],
             ],
 

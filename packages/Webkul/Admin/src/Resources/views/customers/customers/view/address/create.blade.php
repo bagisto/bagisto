@@ -376,6 +376,8 @@
                             this.$refs.createAddress.toggle();
                         })
                         .catch(error => {
+                            this.isUpdating = false;
+
                             if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
                             }
