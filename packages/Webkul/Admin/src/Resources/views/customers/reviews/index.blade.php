@@ -387,7 +387,7 @@
                                                     <source
                                                         :src="image.url"
                                                         type="video/mp4"
-                                                    />
+                                                    >
                                                 </video>
                                             </div>
                                         </div>
@@ -412,11 +412,10 @@
 
                 methods: {
                     update(params) {
-                        let formData = new FormData(this.$refs.reviewCreateForm);
-
-                        formData.append('_method', 'put');
-
-                        this.$axios.post(`{{ route('admin.customers.customers.review.update', '') }}/${params.id}`, formData)
+                        this.$axios.post(`{{ route('admin.customers.customers.review.update', '') }}/${params.id}`, {
+                            _method: 'PUT',
+                            status: params.status,
+                        })
                             .then((response) => {
                                 this.$refs.review.close();
 
