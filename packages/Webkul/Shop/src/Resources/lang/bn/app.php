@@ -411,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'প্রক্রিয়াসমূহ',
+                'actions'              => 'ক্রিয়াকলাপ',
                 'next-page'            => 'পরবর্তী পৃষ্ঠা',
-                'no-records-available' => 'কোন রেকর্ড পাওয়া যায়নি।',
+                'no-records-available' => 'রেকর্ড পাওয়া যায়নি।',
+                'of'                   => 'মোট :total এন্ট্রির মধ্যে',
                 'page-navigation'      => 'পৃষ্ঠা নেভিগেশন',
                 'page-number'          => 'পৃষ্ঠা নম্বর',
-                'previous-page'        => 'পূর্ববর্তী পৃষ্ঠা',
+                'previous-page'        => 'আগের পৃষ্ঠা',
+                'showing'              => ':firstItem দেখাচ্ছে',
+                'to'                   => ':lastItem পর্যন্ত',
             ],
         ],
 

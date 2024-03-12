@@ -413,10 +413,13 @@ return [
             'table' => [
                 'actions'              => '操作',
                 'next-page'            => '下一页',
-                'no-records-available' => '没有可用记录。',
-                'page-navigation'      => '页面导航',
+                'no-records-available' => '没有可用的记录。',
+                'of'                   => '共 :total 条记录',
+                'page-navigation'      => '分页导航',
                 'page-number'          => '页码',
                 'previous-page'        => '上一页',
+                'showing'              => '显示 :firstItem',
+                'to'                   => '至 :lastItem',
             ],
         ],
 

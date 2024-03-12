@@ -412,11 +412,14 @@ return [
 
             'table' => [
                 'actions'              => 'Действия',
-                'next-page'            => 'Следующая Страница',
+                'next-page'            => 'Следующая страница',
                 'no-records-available' => 'Нет доступных записей.',
-                'page-navigation'      => 'Навигация по Страницам',
-                'page-number'          => 'Номер Страницы',
-                'previous-page'        => 'Предыдущая Страница',
+                'of'                   => 'из :total записей',
+                'page-navigation'      => 'Навигация по страницам',
+                'page-number'          => 'Номер страницы',
+                'previous-page'        => 'Предыдущая страница',
+                'showing'              => 'Показано :firstItem',
+                'to'                   => 'до :lastItem',
             ],
         ],
 

@@ -412,11 +412,14 @@ return [
 
             'table' => [
                 'actions'              => 'Acciones',
-                'next-page'            => 'Siguiente página',
+                'next-page'            => 'Siguiente Página',
                 'no-records-available' => 'No hay registros disponibles.',
-                'page-navigation'      => 'Navegación de página',
-                'page-number'          => 'Número de página',
-                'previous-page'        => 'Página anterior',
+                'of'                   => 'de :total entradas',
+                'page-navigation'      => 'Navegación de Página',
+                'page-number'          => 'Número de Página',
+                'previous-page'        => 'Página Anterior',
+                'showing'              => 'Mostrando :firstItem',
+                'to'                   => 'a :lastItem',
             ],
         ],
 

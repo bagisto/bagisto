@@ -414,9 +414,12 @@ return [
                 'actions'              => 'פעולות',
                 'next-page'            => 'העמוד הבא',
                 'no-records-available' => 'אין רשומות זמינות.',
+                'of'                   => 'מתוך :total רשומות',
                 'page-navigation'      => 'ניווט בעמודים',
                 'page-number'          => 'מספר עמוד',
                 'previous-page'        => 'העמוד הקודם',
+                'showing'              => 'מציג :firstItem',
+                'to'                   => 'עד :lastItem',
             ],
         ],
 
