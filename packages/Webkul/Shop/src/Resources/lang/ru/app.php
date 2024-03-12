@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Письмо для сброса пароля уже отправлено.',
             'back'                 => 'Вернуться к входу?',
             'bagisto'              => 'Багисто',
             'email'                => 'Электронная почта',
@@ -116,6 +117,7 @@ return [
                 'edit'             => 'Редактировать',
                 'edit-address'     => 'Редактировать адрес',
                 'edit-success'     => 'Адрес успешно обновлен.',
+                'email'            => 'Электронная почта',
                 'empty-address'    => 'Вы еще не добавили адрес в свой аккаунт.',
                 'first-name'       => 'Имя',
                 'last-name'        => 'Фамилия',
@@ -272,11 +274,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'Доступный',
+                'completed'           => 'Завершенный',
                 'date'                => 'Дата',
                 'download-error'      => 'Срок действия ссылки для скачивания истек.',
+                'expired'             => 'Истек',
                 'empty-product'       => 'У вас нет продукта для загрузки',
                 'name'                => 'Продукты для скачивания',
                 'orderId'             => 'ID заказа',
+                'pending'             => 'В ожидании',
                 'payment-error'       => 'Оплата не была произведена за эту загрузку.',
                 'records-found'       => 'Запись(и) найдены',
                 'remaining-downloads' => 'Оставшиеся загрузки',
@@ -406,11 +412,14 @@ return [
 
             'table' => [
                 'actions'              => 'Действия',
-                'next-page'            => 'Следующая Страница',
+                'next-page'            => 'Следующая страница',
                 'no-records-available' => 'Нет доступных записей.',
-                'page-navigation'      => 'Навигация по Страницам',
-                'page-number'          => 'Номер Страницы',
-                'previous-page'        => 'Предыдущая Страница',
+                'of'                   => 'из :total записей',
+                'page-navigation'      => 'Навигация по страницам',
+                'page-number'          => 'Номер страницы',
+                'previous-page'        => 'Предыдущая страница',
+                'showing'              => 'Показано :firstItem',
+                'to'                   => 'до :lastItem',
             ],
         ],
 
@@ -687,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'Добавить новый адрес',
-                    'back'                               => 'Назад',
-                    'billing-address'                    => 'Адрес для выставления счетов',
-                    'city'                               => 'Город',
-                    'company-name'                       => 'Название компании',
-                    'confirm'                            => 'Подтвердить',
-                    'country'                            => 'Страна',
-                    'email'                              => 'Email',
-                    'first-name'                         => 'Имя',
-                    'last-name'                          => 'Фамилия',
-                    'postcode'                           => 'Индекс',
-                    'proceed'                            => 'Продолжить',
-                    'save'                               => 'сохранять',
-                    'use-different-address-for-shipping' => 'Адрес совпадает с адресом для выставления счетов',
-                    'save-address'                       => 'Сохранить этот адрес',
-                    'select-country'                     => 'Выберите страну',
-                    'select-state'                       => 'Выберите область',
-                    'state'                              => 'Область',
-                    'street-address'                     => 'Улица и номер дома',
-                    'telephone'                          => 'Телефон',
-                ],
-
-                'index' => [
-                    'bagisto' => 'Багисто',
-                    'confirm' => 'Подтвердить',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'Добавить новый адрес',
-                    'back'             => 'Назад',
-                    'city'             => 'Город',
-                    'company-name'     => 'Название компании',
-                    'confirm'          => 'Подтвердить',
-                    'country'          => 'Страна',
-                    'email'            => 'Email',
-                    'first-name'       => 'Имя',
-                    'last-name'        => 'Фамилия',
-                    'postcode'         => 'Индекс',
-                    'proceed'          => 'Продолжить',
-                    'save'             => 'сохранять',
-                    'save-address'     => 'Сохранить этот адрес',
-                    'select-country'   => 'Выберите страну',
-                    'select-state'     => 'Выберите область',
-                    'shipping-address' => 'Адрес доставки',
-                    'state'            => 'Область',
-                    'street-address'   => 'Улица и номер дома',
-                    'telephone'        => 'Телефон',
-                ],
-
-                'title' => 'Адрес',
+            'address' => [
+                'add-new-address'  => 'Добавить новый адрес',
+                'add-new'          => 'Добавить новый адрес',
+                'back'             => 'Назад',
+                'billing-address'  => 'Платежный адрес',
+                'city'             => 'Город',
+                'company-name'     => 'Название компании',
+                'confirm'          => 'Подтвердить',
+                'country'          => 'Страна',
+                'email'            => 'Электронная почта',
+                'first-name'       => 'Имя',
+                'last-name'        => 'Фамилия',
+                'postcode'         => 'Почтовый индекс',
+                'proceed'          => 'Продолжить',
+                'same-as-billing'  => 'Использовать одинаковый адрес для доставки?',
+                'save-address'     => 'Сохранить в адресной книге',
+                'save'             => 'Сохранить',
+                'select-country'   => 'Выбрать страну',
+                'select-state'     => 'Выбрать регион',
+                'shipping-address' => 'Адрес доставки',
+                'state'            => 'Регион',
+                'street-address'   => 'Улица, дом',
+                'telephone'        => 'Телефон',
+                'title'            => 'Адрес',
             ],
 
             'index' => [
@@ -773,6 +754,12 @@ return [
             'offer'               => 'Получите скидку до 40% на свой первый заказ. ПОКУПАЙТЕ СЕЙЧАС',
             'resend-verify-email' => 'Повторно отправить письмо для подтверждения почты',
             'verify-email'        => 'Подтвердите вашу электронную почту',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Показаны записи с :firstItem по :lastItem из :total',
         ],
     ],
 

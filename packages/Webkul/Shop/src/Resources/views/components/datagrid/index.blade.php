@@ -193,6 +193,8 @@
 
                     this.isLoading = true;
 
+                    this.$refs['filterDrawer'].close();
+
                     this.$axios
                         .get(this.src, {
                             params: { ...params, ...extraParams }
@@ -378,10 +380,10 @@
                      * activated. In this case, we will search for `all` indices and update the
                      * value accordingly.
                      */
-                    if (!column) {
+                    if (! column) {
                         let appliedColumn = this.findAppliedColumn('all');
 
-                        if (!requestedValue) {
+                        if (! requestedValue) {
                             appliedColumn.value = [];
 
                             return;
@@ -492,7 +494,7 @@
                     /**
                      * Clean up is done here. If there are no applied values present, there is no point in including the applied column as well.
                      */
-                    if (!appliedColumn.value.length) {
+                    if (! appliedColumn.value.length) {
                         this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
                     }
 
@@ -512,7 +514,7 @@
                 setCurrentSelectionMode() {
                     this.applied.massActions.meta.mode = 'none';
 
-                    if (!this.available.records.length) {
+                    if (! this.available.records.length) {
                         return;
                     }
 
@@ -550,7 +552,7 @@
 
                             let found = this.applied.massActions.indices.find(selectedId => selectedId === id);
 
-                            if (!found) {
+                            if (! found) {
                                 this.applied.massActions.indices.push(id);
                             }
                         });
@@ -560,13 +562,13 @@
                 },
 
                 validateMassAction() {
-                    if (!this.applied.massActions.indices.length) {
+                    if (! this.applied.massActions.indices.length) {
                         this.$emitter.emit('add-flash', { type: 'warning', message: 'No records have been selected.' });
 
                         return false;
                     }
 
-                    if (!this.applied.massActions.meta.action) {
+                    if (! this.applied.massActions.meta.action) {
                         this.$emitter.emit('add-flash', { type: 'warning', message: 'You must select a mass action.' });
 
                         return false;
@@ -591,7 +593,7 @@
                         this.applied.massActions.value = currentOption.value;
                     }
 
-                    if (!this.validateMassAction()) {
+                    if (! this.validateMassAction()) {
                         return;
                     }
 

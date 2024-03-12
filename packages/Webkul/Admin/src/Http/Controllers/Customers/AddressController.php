@@ -55,13 +55,14 @@ class AddressController extends Controller
     {
         $this->validate(request(), [
             'company_name' => [new AlphaNumericSpace],
-            'address1'     => ['required', 'array'],
+            'address'      => ['required', 'array'],
             'country'      => ['required', new AlphaNumericSpace],
             'state'        => ['required', new AlphaNumericSpace],
             'city'         => ['required', 'string'],
             'postcode'     => ['required', 'numeric'],
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
+            'email'        => ['required'],
         ]);
 
         $data = array_merge(request()->only([
@@ -70,16 +71,16 @@ class AddressController extends Controller
             'vat_id',
             'first_name',
             'last_name',
-            'address1',
+            'address',
             'city',
             'country',
             'state',
             'postcode',
             'phone',
+            'email',
             'default_address',
         ]), [
-            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'address2' => implode(PHP_EOL, array_filter(request()->input('address2', []))),
+            'address' => implode(PHP_EOL, array_filter(request()->input('address'))),
         ]);
 
         Event::dispatch('customer.addresses.create.before');
@@ -112,13 +113,14 @@ class AddressController extends Controller
     {
         $this->validate(request(), [
             'company_name' => [new AlphaNumericSpace],
-            'address1'     => ['required', 'array'],
+            'address'      => ['required', 'array'],
             'country'      => ['required', new AlphaNumericSpace],
             'state'        => ['required', new AlphaNumericSpace],
             'city'         => ['required', 'string'],
             'postcode'     => ['required', 'numeric'],
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
+            'email'        => ['required'],
         ]);
 
         $data = array_merge(request()->only([
@@ -127,16 +129,16 @@ class AddressController extends Controller
             'vat_id',
             'first_name',
             'last_name',
-            'address1',
+            'address',
             'city',
             'country',
             'state',
             'postcode',
             'phone',
+            'email',
             'default_address',
         ]), [
-            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'address2' => implode(PHP_EOL, array_filter(request()->input('address2', []))),
+            'address' => implode(PHP_EOL, array_filter(request()->input('address'))),
         ]);
 
         Event::dispatch('customer.addresses.update.before', $id);

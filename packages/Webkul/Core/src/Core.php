@@ -23,7 +23,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.1.1';
+    const BAGISTO_VERSION = '2.1.2';
 
     /**
      * Current Channel.
@@ -1075,19 +1075,19 @@ class Core
     }
 
     /**
-     * Get Shop email sender details.
+     * Get sender email details.
      *
      * @return array
      */
     public function getSenderEmailDetails()
     {
-        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ?: config('mail.from.name');
+        $senderName = $this->getConfigData('emails.configure.email_settings.sender_name') ?: config('mail.from.name');
 
-        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?: config('mail.from.address');
+        $senderEmail = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?: config('mail.from.address');
 
         return [
-            'name'  => $sender_name,
-            'email' => $sender_email,
+            'name'  => $senderName,
+            'email' => $senderEmail,
         ];
     }
 

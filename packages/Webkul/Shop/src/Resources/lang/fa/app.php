@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'از قبل بازنشانی رمز عبور ایمیل ارسال شده است.',
             'back'                 => 'بازگشت به صفحه ورود؟',
             'bagisto'              => 'بگیستو',
             'email'                => 'ایمیل',
@@ -116,6 +117,7 @@ return [
                 'edit'             => 'ویرایش',
                 'edit-address'     => 'ویرایش آدرس',
                 'edit-success'     => 'آدرس با موفقیت به‌روزرسانی شد.',
+                'email'            => 'ایمیل',
                 'empty-address'    => 'هنوز آدرسی به حساب خود اضافه نکرده‌اید.',
                 'first-name'       => 'نام',
                 'last-name'        => 'نام خانوادگی',
@@ -272,11 +274,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'در دسترس',
+                'completed'           => 'تکمیل شد',
                 'date'                => 'تاریخ',
                 'download-error'      => 'لینک دانلود منقضی شده است.',
+                'expired'             => 'منقضی شده',
                 'empty-product'       => 'محصولی برای دانلود ندارید',
                 'name'                => 'محصولات قابل دانلود',
                 'orderId'             => 'شناسه سفارش',
+                'pending'             => 'انتظار',
                 'payment-error'       => 'پرداخت برای این دانلود انجام نشده است.',
                 'records-found'       => 'رکورد(های) پیدا شده',
                 'remaining-downloads' => 'دانلودهای باقیمانده',
@@ -405,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'عملیات‌ها',
-                'no-records-available' => 'رکوردی در دسترس نیست.',
+                'actions'              => 'عملیات',
                 'next-page'            => 'صفحه بعدی',
-                'page-navigation'      => 'ناوبری صفحه',
-                'previous-page'        => 'صفحه قبلی',
+                'no-records-available' => 'هیچ رکوردی موجود نیست.',
+                'of'                   => 'از :total ورودی',
+                'page-navigation'      => 'مسیریابی صفحه',
                 'page-number'          => 'شماره صفحه',
+                'previous-page'        => 'صفحه قبلی',
+                'showing'              => 'نمایش :firstItem',
+                'to'                   => 'تا :lastItem',
             ],
         ],
 
@@ -687,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'افزودن آدرس جدید',
-                    'back'                               => 'بازگشت',
-                    'billing-address'                    => 'آدرس صورتحساب',
-                    'city'                               => 'شهر',
-                    'company-name'                       => 'نام شرکت',
-                    'confirm'                            => 'تأیید',
-                    'country'                            => 'کشور',
-                    'email'                              => 'ایمیل',
-                    'first-name'                         => 'نام',
-                    'last-name'                          => 'نام خانوادگی',
-                    'postcode'                           => 'کد پستی',
-                    'proceed'                            => ' ادامه دادن',
-                    'save'                               => 'صرفه جویی',
-                    'use-different-address-for-shipping' => 'آدرس مشابه آدرس صورتحساب من است',
-                    'save-address'                       => 'ذخیره این آدرس',
-                    'select-country'                     => 'انتخاب کشور',
-                    'select-state'                       => 'انتخاب استان',
-                    'state'                              => 'استان',
-                    'street-address'                     => 'آدرس',
-                    'telephone'                          => 'تلفن',
-                ],
-
-                'index' => [
-                    'bagisto' => 'بگیستو',
-                    'confirm' => 'تأیید',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'افزودن آدرس جدید',
-                    'back'             => 'بازگشت',
-                    'city'             => 'شهر',
-                    'company-name'     => 'نام شرکت',
-                    'confirm'          => 'تأیید',
-                    'country'          => 'کشور',
-                    'email'            => 'ایمیل',
-                    'first-name'       => 'نام',
-                    'last-name'        => 'نام خانوادگی',
-                    'postcode'         => 'کد پستی',
-                    'proceed'          => 'ادامه دادن',
-                    'save'             => 'صرفه جویی',
-                    'save-address'     => 'ذخیره این آدرس',
-                    'select-country'   => 'انتخاب کشور',
-                    'select-state'     => 'انتخاب استان',
-                    'shipping-address' => 'آدرس ارسال',
-                    'state'            => 'استان',
-                    'street-address'   => 'آدرس',
-                    'telephone'        => 'تلفن',
-                ],
-
-                'title' => 'آدرس',
+            'address' => [
+                'add-new-address'  => 'افزودن آدرس جدید',
+                'add-new'          => 'افزودن آدرس جدید',
+                'back'             => 'بازگشت',
+                'billing-address'  => 'آدرس صورتحساب',
+                'city'             => 'شهر',
+                'company-name'     => 'نام شرکت',
+                'confirm'          => 'تایید',
+                'country'          => 'کشور',
+                'email'            => 'ایمیل',
+                'first-name'       => 'نام',
+                'last-name'        => 'نام خانوادگی',
+                'postcode'         => 'کد پستی',
+                'proceed'          => 'ادامه',
+                'same-as-billing'  => 'استفاده از همان آدرس برای حمل و نقل؟',
+                'save-address'     => 'ذخیره در دفتر آدرس',
+                'save'             => 'ذخیره',
+                'select-country'   => 'انتخاب کشور',
+                'select-state'     => 'انتخاب استان',
+                'shipping-address' => 'آدرس حمل و نقل',
+                'state'            => 'استان',
+                'street-address'   => 'آدرس خیابان',
+                'telephone'        => 'تلفن',
+                'title'            => 'آدرس',
             ],
 
             'index' => [
@@ -773,6 +754,12 @@ return [
             'offer'               => 'تا 40% تخفیف برای سفارش اولتان دریافت کنید. همین الان خرید کنید',
             'resend-verify-email' => 'ارسال مجدد ایمیل تأیید',
             'verify-email'        => 'ایمیل خود را تأیید کنید',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'نمایش :firstItem تا :lastItem از مجموع :total مورد',
         ],
     ],
 

@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'ইতিমধ্যেই পাসওয়ার্ড রিসেট মেল পাঠানো হয়েছে।',
             'back'                 => 'সাইন ইনে ফিরে যেতে?',
             'bagisto'              => 'বাগিস্তো',
             'email'                => 'ইমেইল',
@@ -116,6 +117,7 @@ return [
                 'edit'             => 'সম্পাদনা করুন',
                 'edit-address'     => 'ঠিকানা সম্পাদনা করুন',
                 'edit-success'     => 'ঠিকানা সফলভাবে আপডেট হয়েছে।',
+                'email'            => 'ইমেল',
                 'empty-address'    => 'আপনি এখনো আপনার অ্যাকাউন্টে কোনও ঠিকানা যোগ করেননি।',
                 'first-name'       => 'প্রথম নাম',
                 'last-name'        => 'শেষ নাম',
@@ -272,11 +274,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'পাওয়া যায়',
+                'completed'           => 'সম্পন্ন',
                 'date'                => 'তারিখ',
                 'download-error'      => 'ডাউনলোড লিঙ্কের মেয়াদ শেষ হয়ে গিয়েছে।',
                 'empty-product'       => 'আপনার ডাউনলোড করার জন্য কোনও পণ্য নেই',
+                'expired'             => 'মেয়াদোত্তীর্ণ',
                 'name'                => 'ডাউনলোডযোগ্য পণ্য',
                 'orderId'             => 'অর্ডার আইডি',
+                'pending'             => 'বিচারাধীন',
                 'payment-error'       => 'এই ডাউনলোডের জন্য পেমেন্ট হয়নি।',
                 'records-found'       => 'রেকর্ড(গুলি) পাওয়া গিয়েছে',
                 'remaining-downloads' => 'অবশিষ্ট ডাউনলোড',
@@ -405,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'প্রক্রিয়াসমূহ',
+                'actions'              => 'ক্রিয়াকলাপ',
                 'next-page'            => 'পরবর্তী পৃষ্ঠা',
-                'no-records-available' => 'কোন রেকর্ড পাওয়া যায়নি।',
+                'no-records-available' => 'রেকর্ড পাওয়া যায়নি।',
+                'of'                   => 'মোট :total এন্ট্রির মধ্যে',
                 'page-navigation'      => 'পৃষ্ঠা নেভিগেশন',
                 'page-number'          => 'পৃষ্ঠা নম্বর',
-                'previous-page'        => 'পূর্ববর্তী পৃষ্ঠা',
+                'previous-page'        => 'আগের পৃষ্ঠা',
+                'showing'              => ':firstItem দেখাচ্ছে',
+                'to'                   => ':lastItem পর্যন্ত',
             ],
         ],
 
@@ -687,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'নতুন ঠিকানা যোগ করুন',
-                    'back'                               => 'পিছনে',
-                    'billing-address'                    => 'বিলিং ঠিকানা',
-                    'city'                               => 'শহর',
-                    'company-name'                       => 'কোম্পানির নাম',
-                    'confirm'                            => 'কনফার্ম',
-                    'country'                            => 'দেশ',
-                    'email'                              => 'ইমেইল',
-                    'first-name'                         => 'প্রথম নাম',
-                    'last-name'                          => 'শেষ নাম',
-                    'postcode'                           => 'জিপ/পোস্টকোড',
-                    'proceed'                            => 'চলতি রাখা',
-                    'save'                               => 'সংরক্ষণ',
-                    'use-different-address-for-shipping' => 'ঠিকানা আমার বিলিং ঠিকানা সমান',
-                    'save-address'                       => 'এই ঠিকানা সংরক্ষণ করুন',
-                    'select-country'                     => 'দেশ নির্বাচন করুন',
-                    'select-state'                       => 'রাজ্য নির্বাচন করুন',
-                    'state'                              => 'রাজ্য',
-                    'street-address'                     => 'স্ট্রিট ঠিকানা',
-                    'telephone'                          => 'টেলিফোন',
-                ],
-
-                'index' => [
-                    'bagisto' => 'বাগিস্তো',
-                    'confirm' => 'কনফার্ম',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'নতুন ঠিকানা যোগ করুন',
-                    'back'             => 'পিছনে',
-                    'city'             => 'শহর',
-                    'company-name'     => 'কোম্পানির নাম',
-                    'confirm'          => 'কনফার্ম',
-                    'country'          => 'দেশ',
-                    'email'            => 'ইমেইল',
-                    'first-name'       => 'প্রথম নাম',
-                    'last-name'        => 'শেষ নাম',
-                    'postcode'         => 'জিপ/পোস্টকোড',
-                    'proceed'          => 'চলতি রাখা',
-                    'save'             => 'সংরক্ষণ',
-                    'save-address'     => 'এই ঠিকানা সংরক্ষণ করুন',
-                    'select-country'   => 'দেশ নির্বাচন করুন',
-                    'select-state'     => 'রাজ্য নির্বাচন করুন',
-                    'shipping-address' => 'প্রেরণের ঠিকানা',
-                    'state'            => 'রাজ্য',
-                    'street-address'   => 'স্ট্রিট ঠিকানা',
-                    'telephone'        => 'টেলিফোন',
-                ],
-
-                'title' => 'ঠিকানা',
+            'address' => [
+                'add-new-address'  => 'নতুন ঠিকানা যোগ করুন',
+                'add-new'          => 'নতুন ঠিকানা যোগ করুন',
+                'back'             => 'পৃষ্ঠায় ফিরুন',
+                'billing-address'  => 'বিলিং ঠিকানা',
+                'city'             => 'শহর',
+                'company-name'     => 'কোম্পানির নাম',
+                'confirm'          => 'নিশ্চিত করুন',
+                'country'          => 'দেশ',
+                'email'            => 'ইমেইল',
+                'first-name'       => 'প্রথম নাম',
+                'last-name'        => 'শেষ নাম',
+                'postcode'         => 'জিপ/পোস্টকোড',
+                'proceed'          => 'এগিয়ে যান',
+                'same-as-billing'  => 'শিপিংের জন্য একই ঠিকানা ব্যবহার করবেন?',
+                'save-address'     => 'এইটি ঠিকানা বইয়ে সংরক্ষণ করুন',
+                'save'             => 'সংরক্ষণ করুন',
+                'select-country'   => 'দেশ নির্বাচন করুন',
+                'select-state'     => 'রাষ্ট্র নির্বাচন করুন',
+                'shipping-address' => 'শিপিং ঠিকানা',
+                'state'            => 'রাষ্ট্র',
+                'street-address'   => 'রাস্তার ঠিকানা',
+                'telephone'        => 'টেলিফোন',
+                'title'            => 'ঠিকানা',
             ],
 
             'index' => [
@@ -773,6 +754,12 @@ return [
             'offer'               => 'আপনার 1 ম অর্ডারে 40% ছাড় পেতে SHOP NOW',
             'resend-verify-email' => 'ইমেইল পুনরায় পাঠান',
             'verify-email'        => 'আপনার ইমেইল অ্যাকাউন্ট যাচাই করুন',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => ':firstItem থেকে :lastItem পর্যন্ত মোট :total নির্দেশিকা দেখানো হচ্ছে',
         ],
     ],
 

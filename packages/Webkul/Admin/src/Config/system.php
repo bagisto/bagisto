@@ -966,7 +966,7 @@ return [
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
-                'name'          => 'address1',
+                'name'          => 'address',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.street-address',
                 'type'          => 'text',
                 'validation'    => 'required',

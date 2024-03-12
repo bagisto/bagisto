@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => '密码重置邮件已发送。',
             'back'                 => '返回登录？',
             'bagisto'              => '巴基斯托',
             'email'                => '电子邮件',
@@ -116,6 +117,7 @@ return [
                 'edit'             => '编辑',
                 'edit-address'     => '编辑地址',
                 'edit-success'     => '地址已成功更新。',
+                'email'            => '电子邮件',
                 'empty-address'    => '您尚未将地址添加到您的帐户。',
                 'first-name'       => '名字',
                 'last-name'        => '姓氏',
@@ -272,11 +274,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => '可用的',
+                'completed'           => '完全的',
                 'date'                => '日期',
                 'download-error'      => '下载链接已过期。',
+                'expired'             => '已过期',
                 'empty-product'       => '您没有可下载的商品',
                 'name'                => '可下载商品',
                 'orderId'             => '订单ID',
+                'pending'             => '待办的',
                 'payment-error'       => '该下载商品尚未付款。',
                 'records-found'       => '找到记录',
                 'remaining-downloads' => '剩余下载次数',
@@ -407,10 +413,13 @@ return [
             'table' => [
                 'actions'              => '操作',
                 'next-page'            => '下一页',
-                'no-records-available' => '没有可用记录。',
-                'page-navigation'      => '页面导航',
+                'no-records-available' => '没有可用的记录。',
+                'of'                   => '共 :total 条记录',
+                'page-navigation'      => '分页导航',
                 'page-number'          => '页码',
                 'previous-page'        => '上一页',
+                'showing'              => '显示 :firstItem',
+                'to'                   => '至 :lastItem',
             ],
         ],
 
@@ -687,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => '添加新地址',
-                    'back'                               => '返回',
-                    'billing-address'                    => '账单地址',
-                    'city'                               => '城市',
-                    'company-name'                       => '公司名称',
-                    'confirm'                            => '确认',
-                    'country'                            => '国家',
-                    'email'                              => '电子邮件',
-                    'first-name'                         => '名字',
-                    'last-name'                          => '姓氏',
-                    'postcode'                           => '邮政编码',
-                    'proceed'                            => '继续',
-                    'save'                               => '节省',
-                    'use-different-address-for-shipping' => '地址与我的账单地址相同',
-                    'save-address'                       => '保存此地址',
-                    'select-country'                     => '选择国家',
-                    'select-state'                       => '选择状态',
-                    'state'                              => '州',
-                    'street-address'                     => '街道地址',
-                    'telephone'                          => '电话',
-                ],
-
-                'index' => [
-                    'bagisto' => '巴基斯托',
-                    'confirm' => '确认',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => '添加新地址',
-                    'back'             => '返回',
-                    'city'             => '城市',
-                    'company-name'     => '公司名称',
-                    'confirm'          => '确认',
-                    'country'          => '国家',
-                    'email'            => '电子邮件',
-                    'first-name'       => '名字',
-                    'last-name'        => '姓氏',
-                    'postcode'         => '邮政编码',
-                    'proceed'          => '继续',
-                    'save'             => '节省',
-                    'save-address'     => '保存此地址',
-                    'select-country'   => '选择国家',
-                    'select-state'     => '选择州',
-                    'shipping-address' => '送货地址',
-                    'state'            => '州',
-                    'street-address'   => '街道地址',
-                    'telephone'        => '电话',
-                ],
-
-                'title' => '地址',
+            'address' => [
+                'add-new-address'  => '添加新地址',
+                'add-new'          => '添加新地址',
+                'back'             => '返回',
+                'billing-address'  => '账单地址',
+                'city'             => '城市',
+                'company-name'     => '公司名称',
+                'confirm'          => '确认',
+                'country'          => '国家',
+                'email'            => '电子邮件',
+                'first-name'       => '名',
+                'last-name'        => '姓',
+                'postcode'         => '邮政编码',
+                'proceed'          => '继续',
+                'same-as-billing'  => '是否使用相同地址进行配送？',
+                'save-address'     => '保存到地址簿',
+                'save'             => '保存',
+                'select-country'   => '选择国家',
+                'select-state'     => '选择省份',
+                'shipping-address' => '送货地址',
+                'state'            => '省份',
+                'street-address'   => '街道地址',
+                'telephone'        => '电话',
+                'title'            => '地址',
             ],
 
             'index' => [
@@ -773,6 +754,11 @@ return [
             'offer'               => '首次下单立减40%，现在开始购物',
             'resend-verify-email' => '重新发送验证电子邮件',
             'verify-email'        => '验证您的电子邮件帐户',
+        ],
+    ],
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => '显示 :total 个条目中的 :firstItem 到 :lastItem',
         ],
     ],
 

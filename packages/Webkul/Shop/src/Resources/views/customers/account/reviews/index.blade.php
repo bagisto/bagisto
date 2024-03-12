@@ -95,6 +95,9 @@
                                             </div>
                                         </a>
                                     @endforeach
+
+                                    <!-- Pagination -->
+                                    {{ $reviews->links() }}
                                 </div>
                             @else
                                 <!-- Review Empty Page -->
