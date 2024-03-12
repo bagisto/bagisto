@@ -2,6 +2,27 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.1.2 (8th of March 2024)** - *Release*
+* #9547 [improvements] - Revamped completed checkout flow.
+
+* #9537 [fixed] - Unable to Checkout Product when Address is created from user profile and then proceed for checkout. Email is a mandatory field at checkout.
+
+* #9544 [fixed] - 500 Internal Server error in console as Transaction Datagrid Not working.
+
+* #9551 [fixed] - Admin End -> Sales -> Transactions Datagrid is having status row status entries UI is not appropriate and also translations is missing for Payment Method.
+
+* #9550 [fixed] - Downloadable Product Datagrid in customer profile -> Status Row is having missing status entries.
+
+* #9564 [fixed] - Date Filters not working in Transaction section in Admin End.
+
+* #9568 [fixed] - In Customer Profile Reviews -> there we are able to see only 5 reviews in total, but I have approved more reviews for the same user. 
+
+* #9567 [fixed] - After applying a filter on the orders page , Sidebar Scroller should be working - Customer end.
+
+* #9579 [fixed] - Fix issue related to moving items between the wishlist and cart with quantities.
+
+* #9543 [fixed] - Once the user has requested for password reset, then again if user raises the request there validation message appears "We cannot find a user with that email address."
+
 ## **v2.1.1 (27th of February 2024)** - *Release*
 
 * #9501 [fixed] - Can't Checkout

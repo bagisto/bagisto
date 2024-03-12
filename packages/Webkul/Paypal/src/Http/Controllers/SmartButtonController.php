@@ -60,7 +60,7 @@ class SmartButtonController extends Controller
     {
         $cart = Cart::getCart();
 
-        $billingAddressLines = $this->getAddressLines($cart->billing_address->address1);
+        $billingAddressLines = $this->getAddressLines($cart->billing_address->address);
 
         $data = [
             'intent' => 'CAPTURE',

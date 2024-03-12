@@ -18,7 +18,7 @@
     {!! view_render_event('bagisto.shop.checkout.onepage.header.before') !!}
 
     <!-- Page Header -->
-    <div class="lex flex-wrap">
+    <div class="flex-wrap">
         <div class="w-full flex justify-between px-[60px] py-4 border border-t-0 border-b border-l-0 border-r-0 max-lg:px-8 max-sm:px-4">
             <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 <a
@@ -39,6 +39,7 @@
 
     {!! view_render_event('bagisto.shop.checkout.onepage.header.after') !!}
 
+    <!-- Page Content -->
     <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.before') !!}
@@ -48,6 +49,7 @@
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.after') !!}
 
+        <!-- Checkout Vue Component -->
         <v-checkout>
             <!-- Shimmer Effect -->
             <x-shop::shimmer.checkout.onepage />
@@ -59,32 +61,63 @@
             type="text/x-template"
             id="v-checkout-template"
         >
-            <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
-                <div
-                    class="overflow-y-auto"
-                    id="scrollBottom"
-                >
-                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
+            <template v-if="! cart">
+                <!-- Shimmer Effect -->
+                <x-shop::shimmer.checkout.onepage />
+            </template>
 
-                    @include('shop::checkout.onepage.addresses.index')
+            <template v-else>
+                <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
+                    <div
+                        class="overflow-y-auto"
+                        id="steps-container"
+                    >
+                        <!-- Included Addresses Blade File -->
+                        <template v-if="['address', 'shipping', 'payment', 'review'].includes(currentStep)">
+                            @include('shop::checkout.onepage.address')
+                        </template>
 
-                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
+                        <!-- Included Shipping Methods Blade File -->
+                        <template v-if="cart.have_stockable_items && ['shipping', 'payment', 'review'].includes(currentStep)">
+                            @include('shop::checkout.onepage.shipping')
+                        </template>
 
-                    {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.before') !!}
+                        <!-- Included Payment Methods Blade File -->
+                        <template v-if="['payment', 'review'].includes(currentStep)">
+                            @include('shop::checkout.onepage.payment')
+                        </template>
+                    </div>
 
-                    @include('shop::checkout.onepage.shipping')
+                    <!-- Included Checkout Summary Blade File -->
+                    <div class="sticky top-8 h-max w-[442px] max-w-full ltr:pl-8 rtl:pr-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:ltr:pl-0 max-lg:rtl:pr-0">
+                        @include('shop::checkout.onepage.summary')
 
-                    {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.after') !!}
+                        <div
+                            class="flex justify-end"
+                            v-if="canPlaceOrder"
+                        >
+                            <template v-if="cart.payment_method == 'paypal_smart_button'">
+                                {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!}
 
-                    {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.before') !!}
+                                <v-paypal-smart-button></v-paypal-smart-button>
 
-                    @include('shop::checkout.onepage.payment')
+                                {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!}
+                            </template>
 
-                    {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.before') !!}
+                            <template v-else>
+                                <x-shop::button
+                                    type="button"
+                                    class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
+                                    :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                                    ::disabled="isPlacingOrder"
+                                    ::loading="isPlacingOrder"
+                                    @click="placeOrder"
+                                />
+                            </template>
+                        </div>
+                    </div>
                 </div>
-
-                @include('shop::checkout.onepage.summary')
-            </div>
+            </template>
         </script>
 
         <script type="module">
@@ -96,34 +129,96 @@
                         cart: null,
 
                         isCartLoading: true,
+
+                        isPlacingOrder: false,
+
+                        currentStep: 'address',
+
+                        shippingMethods: null,
+
+                        paymentMethods: null,
+
+                        canPlaceOrder: false,
                     }
                 },
 
                 mounted() {
-                    this.getOrderSummary();
-
-                    this.$emitter.on('update-cart-summary', this.getOrderSummary);
+                    this.getCart();
                 },
 
                 methods: {
-                    getOrderSummary() {
+                    getCart() {
                         this.$axios.get("{{ route('shop.checkout.onepage.summary') }}")
                             .then(response => {
                                 this.cart = response.data.data;
 
                                 this.isCartLoading = false;
-
-                                let container = document.getElementById('scrollBottom');
-
-                                if (container) {
-                                    container.scrollIntoView({
-                                        behavior: 'smooth',
-                                        block: 'end'
-                                    });
-                                }
+                                
+                                this.scrollToCurrentStep();
                             })
                             .catch(error => {});
                     },
+
+                    stepForward(step) {
+                        this.currentStep = step;
+
+                        if (step == 'review') {
+                            this.canPlaceOrder = true;
+
+                            return;
+                        }
+
+                        this.canPlaceOrder = false;
+
+                        if (this.currentStep == 'shipping') {
+                            this.shippingMethods = null;
+                        } else if (this.currentStep == 'payment') {
+                            this.paymentMethods = null;
+                        }
+                    },
+
+                    stepProcessed(data) {
+                        if (this.currentStep == 'shipping') {
+                            this.shippingMethods = data;
+                        } else if (this.currentStep == 'payment') {
+                            this.paymentMethods = data;
+                        }
+
+                        this.getCart();
+                    },
+
+                    scrollToCurrentStep() {
+                        let container = document.getElementById('steps-container');
+
+                        if (! container) {
+                            return;
+                        }
+
+                        container.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'end'
+                        });
+                    },
+
+                    placeOrder() {
+                        this.isPlacingOrder = true;
+
+                        this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
+                            .then(response => {
+                                if (response.data.data.redirect) {
+                                    window.location.href = response.data.data.redirect_url;
+                                } else {
+                                    window.location.href = '{{ route('shop.checkout.onepage.success') }}';
+                                }
+
+                                this.isPlacingOrder = false;
+                            })
+                            .catch(error => {
+                                this.isPlacingOrder = false
+
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                            });
+                    }
                 },
             });
         </script>

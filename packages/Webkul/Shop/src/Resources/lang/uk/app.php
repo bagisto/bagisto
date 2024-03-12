@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Лист для скидання пароля вже надіслано.',
             'back'                 => 'Повернутися до входу?',
             'bagisto'              => 'Багісто',
             'email'                => 'Електронна пошта',
@@ -692,58 +693,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'Додати нову адресу',
-                    'back'                               => 'Назад',
-                    'billing-address'                    => 'Платіжна адреса',
-                    'city'                               => 'Місто',
-                    'company-name'                       => 'Назва компанії',
-                    'confirm'                            => 'Підтвердити',
-                    'country'                            => 'Країна',
-                    'email'                              => 'Електронна пошта',
-                    'first-name'                         => 'Ім\'я',
-                    'last-name'                          => 'Прізвище',
-                    'postcode'                           => 'Поштовий індекс',
-                    'proceed'                            => 'Продовжуйте',
-                    'save'                               => 'зберегти',
-                    'use-different-address-for-shipping' => 'Адреса співпадає з адресою платника',
-                    'save-address'                       => 'Зберегти цю адресу',
-                    'select-country'                     => 'Виберіть країну',
-                    'select-state'                       => 'Виберіть область',
-                    'state'                              => 'Область',
-                    'street-address'                     => 'Вулиця',
-                    'telephone'                          => 'Телефон',
-                ],
-
-                'index' => [
-                    'bagisto' => 'Багісто',
-                    'confirm' => 'Підтвердити',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'Додати нову адресу',
-                    'back'             => 'Назад',
-                    'city'             => 'Місто',
-                    'company-name'     => 'Назва компанії',
-                    'confirm'          => 'Підтвердити',
-                    'country'          => 'Країна',
-                    'email'            => 'Електронна пошта',
-                    'first-name'       => 'Ім\'я',
-                    'last-name'        => 'Прізвище',
-                    'postcode'         => 'Поштовий індекс',
-                    'proceed'          => 'Продовжуйте',
-                    'save'             => 'зберегти',
-                    'save-address'     => 'Зберегти цю адресу',
-                    'select-country'   => 'Виберіть країну',
-                    'select-state'     => 'Виберіть область',
-                    'shipping-address' => 'Адреса доставки',
-                    'state'            => 'Область',
-                    'street-address'   => 'Вулиця',
-                    'telephone'        => 'Телефон',
-                ],
-
-                'title' => 'Адреса',
+            'address' => [
+                'add-new-address'  => 'Додати нову адресу',
+                'add-new'          => 'Додати нову адресу',
+                'back'             => 'Назад',
+                'billing-address'  => 'Платіжна адреса',
+                'city'             => 'Місто',
+                'company-name'     => 'Назва компанії',
+                'confirm'          => 'Підтвердити',
+                'country'          => 'Країна',
+                'email'            => 'Електронна пошта',
+                'first-name'       => 'Ім\'я',
+                'last-name'        => 'Прізвище',
+                'postcode'         => 'Поштовий індекс',
+                'proceed'          => 'Продовжити',
+                'same-as-billing'  => 'Використовувати той самий адрес для доставки?',
+                'save-address'     => 'Зберегти в адресну книгу',
+                'save'             => 'Зберегти',
+                'select-country'   => 'Вибрати країну',
+                'select-state'     => 'Вибрати область',
+                'shipping-address' => 'Адреса доставки',
+                'state'            => 'Область',
+                'street-address'   => 'Вулиця',
+                'telephone'        => 'Телефон',
+                'title'            => 'Адреса',
             ],
 
             'index' => [
@@ -778,6 +751,12 @@ return [
             'offer'               => 'Отримайте ЗНИЖКУ до 40% на ваше 1-е замовлення. КУПУЙТЕ ЗАРАЗ',
             'resend-verify-email' => 'Надіслати лист для підтвердження електронної пошти знову',
             'verify-email'        => 'Підтвердіть свій обліковий запис електронної пошти',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Показано від :firstItem до :lastItem з :total записів',
         ],
     ],
 
