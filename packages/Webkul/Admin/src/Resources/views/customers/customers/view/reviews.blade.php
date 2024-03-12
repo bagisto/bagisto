@@ -1,6 +1,11 @@
-@php $reviews = $customer->reviews(); @endphp
-
 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+    <div class="flex justify-between">
+        <!-- Total Reviews Count -->
+        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+            @lang('admin::app.customers.customers.view.reviews.count', ['count' => count($customer->reviews)])
+        </p>
+    </div>
+
     <x-admin::datagrid
         :src="route('admin.customers.customers.view', [
             'id'   => $customer->id,
@@ -8,13 +13,6 @@
         ])"
     >
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading, available }">
-            <div class="p-4 flex justify-between">
-                <!-- Total Reviews Count -->
-                <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-                    @{{ "@lang('admin::app.customers.customers.view.reviews.count')".replace(':count', available.meta.total) }}
-                </p>
-            </div>
-
             <template v-if="! isLoading">
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
                     <div

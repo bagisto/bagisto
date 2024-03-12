@@ -1,4 +1,16 @@
 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+    <div class="flex justify-between">
+        <!-- Total Order Count -->
+        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+            @lang('admin::app.customers.customers.view.orders.count', ['count' => count($customer->orders)])
+        </p>
+
+        <!-- Total Order Revenue -->
+        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+            @lang('admin::app.customers.customers.view.orders.total-revenue', ['revenue' => core()->formatPrice($customer->orders->whereNotIn('status', ['canceled', 'closed'])->sum('base_grand_total_invoiced'))])
+        </p>
+    </div>
+
     <x-admin::datagrid
         :src="route('admin.customers.customers.view', [
             'id'   => $customer->id,
@@ -7,18 +19,6 @@
     >
         <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading, available }">
-            <div class="p-4 flex justify-between">
-                <!-- Total Order Count -->
-                <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-                    @{{ "@lang('admin::app.customers.customers.view.orders.count')".replace(':count', available.meta.total ?? 0) }}
-                </p>
-
-                <!-- Total Order Revenue -->
-                <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-                    @lang('admin::app.customers.customers.view.orders.total-revenue', ['revenue' => core()->formatPrice($customer->orders->whereNotIn('status', ['canceled', 'closed'])->sum('base_grand_total_invoiced'))])
-                </p>
-            </div>
-
             <template v-if="! isLoading">
                 <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
                     <div

@@ -1,4 +1,8 @@
 <div class="p-4 bg-white dark:bg-gray-900  rounded box-shadow">
+    <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+        @lang('admin::app.customers.customers.view.invoices.count', ['count' => count($customer->invoices)])
+    </p>
+
     <x-admin::datagrid
         :src="route('admin.customers.customers.view', [
             'id'   => $customer->id,
@@ -7,10 +11,6 @@
     >
         <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading, available}">
-            <p class="p-4 text-base text-gray-800 leading-none dark:text-white font-semibold">
-                @{{ "@lang('admin::app.customers.customers.view.invoices.count')".replace(':count', available.meta.total ?? 0) }}
-            </p>
-
             <template v-if="! isLoading">
                 <div class="row grid grid-cols-4 grid-rows-1 items-center px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
                     <div
