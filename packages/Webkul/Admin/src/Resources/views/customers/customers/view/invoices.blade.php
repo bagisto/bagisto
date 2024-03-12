@@ -51,11 +51,12 @@
             </template>
         </template>
 
-        <template #body="{ columns, records, performAction, available, isLoading}">
+        <template #body="{ columns, records, performAction, available, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    v-for="record in records"
+                    v-if="available.meta.total"
                     class="flex justify-between items-center px-4 py-4 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    v-for="record in records"
                 >
                     <div class="">
                         <div class="flex gap-2.5">
@@ -113,6 +114,25 @@
                                 class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                             >
                             </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    v-else
+                    class="table-responsive grid w-full"
+                >
+                    <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5">
+                        <!-- Placeholder Image -->
+                        <img
+                            src="{{ bagisto_asset('images/settings/invoice.svg') }}"
+                            class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                        />
+
+                        <div class="flex flex-col items-center">
+                            <p class="text-base text-gray-400 font-semibold">
+                                @lang('admin::app.customers.customers.view.invoices.datagrid.empty-invoice')
+                            </p>
                         </div>
                     </div>
                 </div>

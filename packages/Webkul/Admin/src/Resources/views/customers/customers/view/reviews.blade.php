@@ -16,7 +16,7 @@
             </div>
 
             <template v-if="! isLoading">
-                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-4 py-2.5 border-b dark:border-gray-800">
+                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
                     <div
                         class="flex gap-2.5 items-center select-none"
                         v-for="(columnGroup, index) in [['product_name', 'status', 'title', 'comment'], ['rating', 'created_at', 'id']]"
@@ -58,6 +58,7 @@
         <template #body="{ columns, records, performAction, available, isLoading}">
             <template v-if="! isLoading">
                 <div 
+                    v-if="available.meta.total"
                     class="grid gap-y-4 p-4 pt-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="(record, index) in records"
                 >
@@ -139,6 +140,25 @@
                         class="block w-full border-b dark:border-gray-800"
                     >
                     </span>
+                </div>
+
+                <div    
+                    v-else
+                    class="table-responsive grid w-full"
+                >
+                    <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5">
+                        <!-- Placeholder Image -->
+                        <img
+                            src="{{ bagisto_asset('images/empty-placeholders/reviews.svg') }}"
+                            class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                        />
+
+                        <div class="flex flex-col items-center">
+                            <p class="text-base text-gray-400 font-semibold">
+                                @lang('admin::app.customers.customers.view.reviews.datagrid.empty-reviews')
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </template>
 

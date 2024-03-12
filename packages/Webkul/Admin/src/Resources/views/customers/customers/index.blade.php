@@ -423,12 +423,13 @@
                                 <!-- Modal Submission -->
                                 <div class="flex gap-x-2.5 items-center">
                                     <!-- Save Button -->
-                                    <button
-                                        type="submit"
-                                        class="primary-button"
-                                    >
-                                        @lang('admin::app.customers.customers.index.create.save-btn')
-                                    </button>
+                                    <x-admin::button
+                                        button-type="submit"
+                                        class="primary-button justify-center"
+                                        :title="trans('admin::app.customers.customers.index.create.save-btn')"
+                                        ::loading="isStoring"
+                                        ::disabled="isStoring"
+                                    />
                                 </div>
                             </x-slot>
                         </x-admin::modal>
@@ -444,11 +445,15 @@
                 data() {
                     return {
                         groups: @json($groups),
+
+                        isStoring: false,
                     };
                 },
 
                 methods: {
                     create(params, { resetForm, setErrors }) {
+                        this.isStoring = true;
+
                         this.$axios.post("{{ route('admin.customers.customers.store') }}", params)
                             .then((response) => {
                                 this.$refs.customerCreateModal.close();
@@ -458,8 +463,12 @@
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 resetForm();
+
+                                this.isStoring = false;
                             })
                             .catch(error => {
+                                this.isStoring = false;
+
                                 if (error.response.status ==422) {
                                     setErrors(error.response.data.errors);
                                 }
