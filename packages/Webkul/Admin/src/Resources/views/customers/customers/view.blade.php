@@ -228,7 +228,11 @@
                                         </p>
 
                                         <p class="text-gray-800 font-semibold dark:text-white">
-                                            @{{ `${address.first_name} ${address.last_name} (${address.company_name})` }}
+                                            @{{ `${address.first_name} ${address.last_name}` }} 
+
+                                            <template v-if="address.company_name">
+                                                (@{{ address.company_name }})
+                                            </template>
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
