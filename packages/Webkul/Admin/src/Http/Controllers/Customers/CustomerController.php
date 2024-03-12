@@ -229,7 +229,7 @@ class CustomerController extends Controller
      */
     public function show(int $id)
     {
-        $customer = $this->customerRepository->with('addresses')->findOrFail($id);
+        $customer = $this->customerRepository->with(['addresses', 'group'])->findOrFail($id);
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
@@ -243,12 +243,6 @@ class CustomerController extends Controller
 
                 case self::REVIEWS:
                     return app(CustomerReviewDatagrid::class)->toJson();
-
-                default:
-                    return new JsonResponse([
-                        'customer' => $customer,
-                        'groups'   => $customer->group,
-                    ]);
             }
         }
 

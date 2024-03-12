@@ -314,23 +314,11 @@
 
                 data() {
                     return {
-                        customer: null,
+                        customer: @json($customer),
                     };
                 },
 
-                created() {
-                    this.getCustomer();
-                },
-
                 methods: {
-                    getCustomer() {
-                        this.$axios.get('{{ route('admin.customers.customers.view', $customer->id) }}')
-                            .then((response) => {
-                                this.customer = response.data.customer;
-                            })
-                            .catch((error) => {});
-                    },
-
                     deleteAddress(id) {
                         this.$emitter.emit('open-confirm-modal', {
                             message: '@lang('admin::app.customers.customers.view.address-delete-confirmation')',
