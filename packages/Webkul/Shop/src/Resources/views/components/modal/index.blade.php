@@ -83,7 +83,7 @@
                 <div
                     class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen"
                 >
-                    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                    <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
                         <div class="w-full max-w-[595px] z-[999] absolute left-1/2 top-1/2 bg-[#F5F5F5] max-md:w-[90%] -translate-x-1/2 -translate-y-1/2">
                             <!-- Header Slot-->
                             <slot

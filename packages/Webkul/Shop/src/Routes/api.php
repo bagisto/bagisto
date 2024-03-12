@@ -6,6 +6,7 @@ use Webkul\Shop\Http\Controllers\API\CartController;
 use Webkul\Shop\Http\Controllers\API\CategoryController;
 use Webkul\Shop\Http\Controllers\API\CompareController;
 use Webkul\Shop\Http\Controllers\API\CoreController;
+use Webkul\Shop\Http\Controllers\API\CustomerController;
 use Webkul\Shop\Http\Controllers\API\OnepageController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
@@ -88,13 +89,21 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::post('check-minimum-order', 'checkMinimumOrder')->name('shop.checkout.onepage.check_minimum_order');
     });
 
+    /**
+     * Login routes.
+     */
+    Route::controller(CustomerController::class)->prefix('customer')->group(function () {
+        Route::post('login', 'login')->name('shop.api.customers.session.create');
+    });
+
     Route::group(['middleware' => ['customer'], 'prefix' => 'customer'], function () {
+
         Route::controller(AddressController::class)->prefix('addresses')->group(function () {
-            Route::get('', 'index')->name('api.shop.customers.account.addresses.index');
+            Route::get('', 'index')->name('shop.api.customers.account.addresses.index');
 
-            Route::post('', 'store')->name('api.shop.customers.account.addresses.store');
+            Route::post('', 'store')->name('shop.api.customers.account.addresses.store');
 
-            Route::put('edit/{id?}', 'update')->name('api.shop.customers.account.addresses.update');
+            Route::put('edit/{id?}', 'update')->name('shop.api.customers.account.addresses.update');
         });
 
         Route::controller(WishlistController::class)->prefix('wishlist')->group(function () {

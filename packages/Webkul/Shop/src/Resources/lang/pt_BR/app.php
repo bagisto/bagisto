@@ -414,9 +414,12 @@ return [
                 'actions'              => 'Ações',
                 'next-page'            => 'Próxima Página',
                 'no-records-available' => 'Nenhum registro disponível.',
+                'of'                   => 'de :total entradas',
                 'page-navigation'      => 'Navegação de Página',
                 'page-number'          => 'Número da Página',
                 'previous-page'        => 'Página Anterior',
+                'showing'              => 'Mostrando :firstItem',
+                'to'                   => 'até :lastItem',
             ],
         ],
 
@@ -653,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon'   => [
-                'already-applied' => 'Código do cupom já aplicado.',
-                'applied'         => 'Cupom aplicado',
-                'apply'           => 'Aplicar Cupom',
-                'apply-issue'     => 'O código do cupom não pode ser aplicado.',
-                'button-title'    => 'Aplicar',
-                'code'            => 'Código do Cupom',
-                'discount'        => 'Desconto do Cupom',
-                'enter-your-code' => 'Digite seu código',
-                'error'           => 'Algo deu errado',
-                'invalid'         => 'Código do cupom é inválido.',
-                'remove'          => 'Remover Cupom',
-                'subtotal'        => 'Subtotal',
-                'success-apply'   => 'Código do cupom aplicado com sucesso.',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'Continuar para o Checkout',
                 'empty-cart'           => 'Seu carrinho está vazio',
@@ -743,6 +730,28 @@ return [
                 'sub-total'        => 'Subtotal',
                 'tax'              => 'Imposto',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Código do cupom já aplicado.',
+            'applied'         => 'Cupom aplicado',
+            'apply'           => 'Aplicar Cupom',
+            'apply-issue'     => 'O código do cupom não pode ser aplicado.',
+            'button-title'    => 'Aplicar',
+            'code'            => 'Código do Cupom',
+            'discount'        => 'Desconto do Cupom',
+            'enter-your-code' => 'Digite seu código',
+            'error'           => 'Algo deu errado',
+            'invalid'         => 'Código do cupom é inválido.',
+            'remove'          => 'Remover Cupom',
+            'subtotal'        => 'Subtotal',
+            'success-apply'   => 'Código do cupom aplicado com sucesso.',
+        ],
+
+        'login' => [
+            'email'    => 'E-mail',
+            'password' => 'Senha',
+            'title'    => 'Entrar',
         ],
     ],
 

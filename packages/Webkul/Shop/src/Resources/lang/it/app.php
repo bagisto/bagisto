@@ -414,9 +414,12 @@ return [
                 'actions'              => 'Azioni',
                 'next-page'            => 'Pagina successiva',
                 'no-records-available' => 'Nessun record disponibile.',
+                'of'                   => 'di :total voci',
                 'page-navigation'      => 'Navigazione pagina',
                 'page-number'          => 'Numero di pagina',
                 'previous-page'        => 'Pagina precedente',
+                'showing'              => 'Mostra :firstItem',
+                'to'                   => 'a :lastItem',
             ],
         ],
 
@@ -653,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon'   => [
-                'already-applied' => 'Codice del coupon già applicato.',
-                'applied'         => 'Coupon applicato',
-                'apply'           => 'Applica coupon',
-                'apply-issue'     => 'Il codice del coupon non può essere applicato.',
-                'button-title'    => 'Applica',
-                'code'            => 'Codice coupon',
-                'discount'        => 'Sconto del coupon',
-                'enter-your-code' => 'Inserisci il tuo codice',
-                'error'           => 'Qualcosa è andato storto',
-                'invalid'         => 'Codice coupon non valido.',
-                'remove'          => 'Rimuovi coupon',
-                'subtotal'        => 'Subtotale',
-                'success-apply'   => 'Codice coupon applicato con successo.',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'Continua al pagamento',
                 'empty-cart'           => 'Il tuo carrello è vuoto',
@@ -743,6 +730,28 @@ return [
                 'sub-total'        => 'Subtotale',
                 'tax'              => 'Imposta',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Codice del coupon già applicato.',
+            'applied'         => 'Coupon applicato',
+            'apply'           => 'Applica coupon',
+            'apply-issue'     => 'Il codice del coupon non può essere applicato.',
+            'button-title'    => 'Applica',
+            'code'            => 'Codice coupon',
+            'discount'        => 'Sconto del coupon',
+            'enter-your-code' => 'Inserisci il tuo codice',
+            'error'           => 'Qualcosa è andato storto',
+            'invalid'         => 'Codice coupon non valido.',
+            'remove'          => 'Rimuovi coupon',
+            'subtotal'        => 'Subtotale',
+            'success-apply'   => 'Codice coupon applicato con successo.',
+        ],
+
+        'login' => [
+            'email'    => 'Email',
+            'password' => 'Password',
+            'title'    => 'Accedi',
         ],
     ],
 

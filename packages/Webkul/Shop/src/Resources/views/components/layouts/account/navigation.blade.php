@@ -62,7 +62,7 @@
                                     @lang($subMenuItem['name'])
                                 </p>
 
-                                <span class="icon-arrow-right text-2xl max-md:hidden"></span>
+                                <span class="icon-arrow-right rtl:icon-arrow-left text-2xl max-md:hidden"></span>
                             </div>
                         </a>
                     @endforeach

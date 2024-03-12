@@ -411,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'ක්‍රියාවලිය',
+                'actions'              => 'ක්‍රියා',
                 'next-page'            => 'ඊළඟ පිටුව',
-                'no-records-available' => 'ලකුණු නොපවතියි.',
-                'page-navigation'      => 'පිටුව නවිකාශය',
+                'no-records-available' => 'ලියාපදිංචි නොවේ.',
+                'of'                   => ':total ඇතුලු සටහන්',
+                'page-navigation'      => 'පිටු පාලනය',
                 'page-number'          => 'පිටුවේ අංකය',
                 'previous-page'        => 'පෙර පිටුව',
+                'showing'              => ':firstItem පෙන්වනු ඇත',
+                'to'                   => ':lastItem දක්වනු ඇත',
             ],
         ],
 
@@ -653,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon'   => [
-                'already-applied' => 'කෝපන කේතය දැක්කාය.',
-                'applied'         => 'කෝපනය සාර්ථකව අදිනය',
-                'apply'           => 'කෝපනය කරන්න',
-                'apply-issue'     => 'කෝපන කේතය අදින නැත.',
-                'button-title'    => 'යොමුවන්',
-                'code'            => 'කෝපන කේතය',
-                'discount'        => 'කෝපන වටාන',
-                'enter-your-code' => 'කේතය ඇතුල් කරන්න',
-                'error'           => 'දෝෂයකි',
-                'invalid'         => 'කෝපන කේතය වලංගු නොවේ.',
-                'remove'          => 'කෝපනය ඉවත් කරන්න',
-                'subtotal'        => 'උපකරණය',
-                'success-apply'   => 'කෝපන කේතය සාර්ථකව අදිනය',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'පරියේෂයට කිරීමට සහාය',
                 'empty-cart'           => 'ඔබගේ කර්තෘ කැට් එක හිස්',
@@ -743,6 +730,28 @@ return [
                 'sub-total'        => 'උපකරණය',
                 'tax'              => 'බද',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'කෝපන කේතය දැක්කාය.',
+            'applied'         => 'කෝපනය සාර්ථකව අදිනය',
+            'apply'           => 'කෝපනය කරන්න',
+            'apply-issue'     => 'කෝපන කේතය අදින නැත.',
+            'button-title'    => 'යොමුවන්',
+            'code'            => 'කෝපන කේතය',
+            'discount'        => 'කෝපන වටාන',
+            'enter-your-code' => 'කේතය ඇතුල් කරන්න',
+            'error'           => 'දෝෂයකි',
+            'invalid'         => 'කෝපන කේතය වලංගු නොවේ.',
+            'remove'          => 'කෝපනය ඉවත් කරන්න',
+            'subtotal'        => 'උපකරණය',
+            'success-apply'   => 'කෝපන කේතය සාර්ථකව අදිනය',
+        ],
+
+        'login' => [
+            'email'    => 'විද්‍යුත් තැපෑල',
+            'password' => 'මුරපදය',
+            'title'    => 'පිවිසීම',
         ],
     ],
 

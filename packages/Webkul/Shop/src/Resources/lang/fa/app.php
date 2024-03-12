@@ -411,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'عملیات‌ها',
-                'no-records-available' => 'رکوردی در دسترس نیست.',
+                'actions'              => 'عملیات',
                 'next-page'            => 'صفحه بعدی',
-                'page-navigation'      => 'ناوبری صفحه',
-                'previous-page'        => 'صفحه قبلی',
+                'no-records-available' => 'هیچ رکوردی موجود نیست.',
+                'of'                   => 'از :total ورودی',
+                'page-navigation'      => 'مسیریابی صفحه',
                 'page-number'          => 'شماره صفحه',
+                'previous-page'        => 'صفحه قبلی',
+                'showing'              => 'نمایش :firstItem',
+                'to'                   => 'تا :lastItem',
             ],
         ],
 
@@ -653,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'already-applied' => 'کد تخفیف در حال حاضر اعمال شده است.',
-                'applied'         => 'کد تخفیف اعمال شد',
-                'apply'           => 'اعمال کد تخفیف',
-                'apply-issue'     => 'نمی‌توان کد تخفیف را اعمال کرد.',
-                'button-title'    => 'اعمال',
-                'code'            => 'کد تخفیف',
-                'discount'        => 'تخفیف کد تخفیف',
-                'enter-your-code' => 'کد خود را وارد کنید',
-                'error'           => 'مشکلی پیش آمد',
-                'invalid'         => 'کد تخفیف نامعتبر است.',
-                'remove'          => 'حذف کد تخفیف',
-                'subtotal'        => 'جمع کل',
-                'success-apply'   => 'کد تخفیف با موفقیت اعمال شد.',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'ادامه به تسویه حساب',
                 'empty-cart'           => 'سبد خرید شما خالی است',
@@ -743,6 +730,28 @@ return [
                 'sub-total'        => 'جمع جزئیات',
                 'tax'              => 'مالیات',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'کد تخفیف در حال حاضر اعمال شده است.',
+            'applied'         => 'کد تخفیف اعمال شد',
+            'apply'           => 'اعمال کد تخفیف',
+            'apply-issue'     => 'نمی‌توان کد تخفیف را اعمال کرد.',
+            'button-title'    => 'اعمال',
+            'code'            => 'کد تخفیف',
+            'discount'        => 'تخفیف کد تخفیف',
+            'enter-your-code' => 'کد خود را وارد کنید',
+            'error'           => 'مشکلی پیش آمد',
+            'invalid'         => 'کد تخفیف نامعتبر است.',
+            'remove'          => 'حذف کد تخفیف',
+            'subtotal'        => 'جمع کل',
+            'success-apply'   => 'کد تخفیف با موفقیت اعمال شد.',
+        ],
+
+        'login' => [
+            'email'    => 'ایمیل',
+            'password' => 'رمز عبور',
+            'title'    => 'ورود',
         ],
     ],
 

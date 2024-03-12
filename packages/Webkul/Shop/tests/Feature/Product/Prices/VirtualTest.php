@@ -713,7 +713,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
@@ -892,7 +892,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
@@ -1073,7 +1073,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
@@ -1254,7 +1254,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);

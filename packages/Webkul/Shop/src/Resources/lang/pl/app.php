@@ -411,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'Akcje',
+                'actions'              => 'Działania',
                 'next-page'            => 'Następna Strona',
                 'no-records-available' => 'Brak dostępnych rekordów.',
-                'page-navigation'      => 'Nawigacja Strony',
+                'of'                   => 'z :total wpisów',
+                'page-navigation'      => 'Nawigacja Stronami',
                 'page-number'          => 'Numer Strony',
                 'previous-page'        => 'Poprzednia Strona',
+                'showing'              => 'Pokazuje :firstItem',
+                'to'                   => 'do :lastItem',
             ],
         ],
 
@@ -653,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon'   => [
-                'already-applied' => 'Kod kuponu jest już zastosowany',
-                'applied'         => 'Kod kuponu został zastosowany',
-                'apply'           => 'Zastosuj kod kuponu',
-                'apply-issue'     => 'Kod kuponu nie może być zastosowany',
-                'button-title'    => 'Zastosuj',
-                'code'            => 'Kod kuponu',
-                'discount'        => 'Rabat z kuponu',
-                'enter-your-code' => 'Wprowadź swój kod',
-                'error'           => 'Coś poszło nie tak',
-                'invalid'         => 'Kod kuponu jest nieprawidłowy',
-                'remove'          => 'Usuń kupon',
-                'subtotal'        => 'Suma częściowa',
-                'success-apply'   => 'Kod kuponu został pomyślnie zastosowany',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'Przejdź do realizacji zamówienia',
                 'empty-cart'           => 'Twój koszyk jest pusty',
@@ -743,6 +730,28 @@ return [
                 'sub-total'        => 'Suma częściowa',
                 'tax'              => 'Podatek',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Kod kuponu jest już zastosowany',
+            'applied'         => 'Kod kuponu został zastosowany',
+            'apply'           => 'Zastosuj kod kuponu',
+            'apply-issue'     => 'Kod kuponu nie może być zastosowany',
+            'button-title'    => 'Zastosuj',
+            'code'            => 'Kod kuponu',
+            'discount'        => 'Rabat z kuponu',
+            'enter-your-code' => 'Wprowadź swój kod',
+            'error'           => 'Coś poszło nie tak',
+            'invalid'         => 'Kod kuponu jest nieprawidłowy',
+            'remove'          => 'Usuń kupon',
+            'subtotal'        => 'Suma częściowa',
+            'success-apply'   => 'Kod kuponu został pomyślnie zastosowany',
+        ],
+
+        'login' => [
+            'email'    => 'E-mail',
+            'password' => 'Hasło',
+            'title'    => 'Zaloguj się',
         ],
     ],
 

@@ -414,9 +414,12 @@ return [
                 'actions'              => 'Actions',
                 'next-page'            => 'Next Page',
                 'no-records-available' => 'No Records Available.',
+                'of'                   => 'of :total entries',
                 'page-navigation'      => 'Page Navigation',
                 'page-number'          => 'Page Number',
                 'previous-page'        => 'Previous Page',
+                'showing'              => 'Showing :firstItem',
+                'to'                   => 'to :lastItem',
             ],
         ],
 
@@ -653,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon'   => [
-                'already-applied' => 'Coupon code already applied.',
-                'applied'         => 'Coupon applied',
-                'apply'           => 'Apply Coupon',
-                'apply-issue'     => 'Coupon code can\'t be applied.',
-                'button-title'    => 'Apply',
-                'code'            => 'Coupon code',
-                'discount'        => 'Coupon Discount',
-                'enter-your-code' => 'Enter your code',
-                'error'           => 'Something went wrong',
-                'invalid'         => 'Coupon code is invalid.',
-                'remove'          => 'Remove Coupon',
-                'subtotal'        => 'Subtotal',
-                'success-apply'   => 'Coupon code applied successfully.',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'Continue to Checkout',
                 'empty-cart'           => 'Your cart is empty',
@@ -743,6 +730,28 @@ return [
                 'sub-total'        => 'Subtotal',
                 'tax'              => 'Tax',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Coupon code already applied.',
+            'applied'         => 'Coupon applied',
+            'apply'           => 'Apply Coupon',
+            'apply-issue'     => 'Coupon code can\'t be applied.',
+            'button-title'    => 'Apply',
+            'code'            => 'Coupon code',
+            'discount'        => 'Coupon Discount',
+            'enter-your-code' => 'Enter your code',
+            'error'           => 'Something went wrong',
+            'invalid'         => 'Coupon code is invalid.',
+            'remove'          => 'Remove Coupon',
+            'subtotal'        => 'Subtotal',
+            'success-apply'   => 'Coupon code applied successfully.',
+        ],
+
+        'login' => [
+            'email'    => 'Email',
+            'password' => 'Password',
+            'title'    => 'Sign In',
         ],
     ],
 

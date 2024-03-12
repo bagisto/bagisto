@@ -413,10 +413,13 @@ return [
             'table' => [
                 'actions'              => '操作',
                 'next-page'            => '下一页',
-                'no-records-available' => '没有可用记录。',
-                'page-navigation'      => '页面导航',
+                'no-records-available' => '没有可用的记录。',
+                'of'                   => '共 :total 条记录',
+                'page-navigation'      => '分页导航',
                 'page-number'          => '页码',
                 'previous-page'        => '上一页',
+                'showing'              => '显示 :firstItem',
+                'to'                   => '至 :lastItem',
             ],
         ],
 
@@ -653,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'already-applied' => '优惠券码已应用。',
-                'applied'         => '已应用优惠券',
-                'apply'           => '应用优惠券',
-                'apply-issue'     => '无法应用优惠券码。',
-                'button-title'    => '应用',
-                'code'            => '优惠券码',
-                'discount'        => '优惠券折扣',
-                'enter-your-code' => '输入您的代码',
-                'error'           => '出了点问题',
-                'invalid'         => '优惠券码无效。',
-                'remove'          => '删除优惠券',
-                'subtotal'        => '小计',
-                'success-apply'   => '优惠券码已成功应用。',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => '继续结帐',
                 'empty-cart'           => '您的购物车是空的',
@@ -743,6 +730,28 @@ return [
                 'sub-total'        => '小计',
                 'tax'              => '税',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => '优惠券码已应用。',
+            'applied'         => '已应用优惠券',
+            'apply'           => '应用优惠券',
+            'apply-issue'     => '无法应用优惠券码。',
+            'button-title'    => '应用',
+            'code'            => '优惠券码',
+            'discount'        => '优惠券折扣',
+            'enter-your-code' => '输入您的代码',
+            'error'           => '出了点问题',
+            'invalid'         => '优惠券码无效。',
+            'remove'          => '删除优惠券',
+            'subtotal'        => '小计',
+            'success-apply'   => '优惠券码已成功应用。',
+        ],
+
+        'login' => [
+            'email'    => '电子邮件',
+            'password' => '密码',
+            'title'    => '登录',
         ],
     ],
 

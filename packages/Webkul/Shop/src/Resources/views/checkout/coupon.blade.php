@@ -13,7 +13,7 @@
     >
         <div class="flex justify-between text-right">
             <p class="text-base max-sm:text-sm max-sm:font-normal">
-                @{{ cart.coupon_code ? "@lang('shop::app.checkout.cart.coupon.applied')" : "@lang('shop::app.checkout.cart.coupon.discount')" }}
+                @{{ cart.coupon_code ? "@lang('shop::app.checkout.coupon.applied')" : "@lang('shop::app.checkout.coupon.discount')" }}
             </p>
 
             {!! view_render_event('bagisto.shop.checkout.cart.coupon.before') !!}
@@ -38,14 +38,14 @@
                                     tabindex="0"
                                     v-if="! cart.coupon_code"
                                 >
-                                    @lang('shop::app.checkout.cart.coupon.apply')
+                                    @lang('shop::app.checkout.coupon.apply')
                                 </span>
                             </x-slot>
 
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <h2 class="text-2xl font-medium max-sm:text-xl">
-                                    @lang('shop::app.checkout.cart.coupon.apply')
+                                    @lang('shop::app.checkout.coupon.apply')
                                 </h2>
                             </x-slot>
 
@@ -57,7 +57,7 @@
                                         class="py-5 px-6"
                                         name="code"
                                         rules="required"
-                                        :placeholder="trans('shop::app.checkout.cart.coupon.enter-your-code')"
+                                        :placeholder="trans('shop::app.checkout.coupon.enter-your-code')"
                                     />
 
                                     <x-shop::form.control-group.error
@@ -73,7 +73,7 @@
                                 <div class="flex items-center gap-4 flex-wrap">
                                     <div class="flex gap-4 items-center">
                                         <p class="text-sm font-medium text-[#6E6E6E]">
-                                            @lang('shop::app.checkout.cart.coupon.subtotal')
+                                            @lang('shop::app.checkout.coupon.subtotal')
                                         </p>
 
                                         <p class="text-3xl font-semibold max-sm:text-xl">
@@ -83,7 +83,7 @@
 
                                     <x-shop::button
                                         class="primary-button flex-auto max-w-none py-3 px-11 rounded-2xl"
-                                        :title="trans('shop::app.checkout.cart.coupon.button-title')"
+                                        :title="trans('shop::app.checkout.coupon.button-title')"
                                         ::loading="isStoring"
                                         ::disabled="isStoring"
                                     />
@@ -102,14 +102,14 @@
                 >
                     <p 
                         class="text-base font-medium text-navyBlue"
-                        title="@lang('shop::app.checkout.cart.coupon.applied')"
+                        title="@lang('shop::app.checkout.coupon.applied')"
                     >
                         "@{{ cart.coupon_code }}"
                     </p>
 
                     <span 
                         class="icon-cancel text-2xl cursor-pointer"
-                        title="@lang('shop::app.checkout.cart.coupon.remove')"
+                        title="@lang('shop::app.checkout.coupon.remove')"
                         @click="destroyCoupon"
                     >
                     </span>

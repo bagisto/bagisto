@@ -34,6 +34,10 @@
                     >
                 </a>
             </div>
+
+            @guest('customer')
+                @include('shop::checkout.login')
+            @endguest
         </div>
     </div>
 

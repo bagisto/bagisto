@@ -243,6 +243,8 @@
                                     :label="trans('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')"
                                     :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')"
                                 />
+
+                                <x-admin::form.control-group.error control-name="redirect_url" />
                             </x-admin::form.control-group>
 
                             <!-- Channels -->
