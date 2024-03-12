@@ -14,6 +14,13 @@ export default {
 
                 const symbol = currency.symbol !== '' ? currency.symbol : currency.code;
 
+                if (! currency.currency_position) {
+                    return new Intl.NumberFormat(locale, {
+                        style: "currency",
+                        currency: currency.code,
+                    }).format(price);
+                }
+
                 const formatter = new Intl.NumberFormat(locale, {
                     style: 'currency',
                     currency: currency.code,
