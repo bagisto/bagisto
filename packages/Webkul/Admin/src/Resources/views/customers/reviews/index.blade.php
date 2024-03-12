@@ -20,13 +20,12 @@
             type="text/x-template"
             id="v-review-edit-drawer-template"
         >
-
             {!! view_render_event('bagisto.admin.customers.reviews.list.before') !!}
 
             <x-admin::datagrid
                 src="{{ route('admin.customers.customers.review.index') }}"
                 :isMultiRow="true"
-                ref="review_data"
+                ref="reviewDatagrid"
             >
                 @php 
                     $hasPermission = bouncer()->hasPermission('customers.reviews.edit') || bouncer()->hasPermission('customers.reviews.delete');
@@ -194,7 +193,7 @@
                                 <!-- View Button -->
                                 <a
                                     v-if="record.actions.find(action => action.index === 'edit')"
-                                    @click="edit(record.actions.find(action => action.index === 'edit')?.url)"
+                                    @click="$refs.review.open();review = record"
                                 >
                                     <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                                 </a>
@@ -229,7 +228,7 @@
                                         @lang('admin::app.customers.reviews.index.edit.title')
                                     </p>
                 
-                                    <button class="ltr:mr-11 rtl:ml-11 primary-button">
+                                    <button class="primary-button ltr:mr-11 rtl:ml-11">
                                         @lang('admin::app.customers.reviews.index.edit.save-btn')
                                     </button>
                                 </div>
@@ -247,23 +246,23 @@
 
                                             <p 
                                                 class="text-gray-800 font-semibold dark:text-white" 
-                                                v-text="review.name !== '' ? review.name : 'N/A'"
+                                                v-text="review.customer_full_name"
                                             >
                                             </p>
                                         </div>
 
-                                        <div class="">
+                                         <div class="">
                                             <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.product')
                                             </p>
 
                                             <p 
                                                 class="text-gray-800 font-semibold dark:text-white" 
-                                                v-text="review.product.name"
+                                                v-text="review.product_name"
                                             >
                                             </p>
                                         </div>
-                
+
                                         <div class="">
                                             <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.id')
@@ -271,7 +270,7 @@
 
                                             <p 
                                                 class="text-gray-800 font-semibold dark:text-white" 
-                                                v-text="review.id"
+                                                v-text="review.product_review_id"
                                             >
                                             </p>
                                         </div>
@@ -283,7 +282,7 @@
 
                                             <p 
                                                 class="text-gray-800 font-semibold dark:text-white" 
-                                                v-text="review.date"
+                                                v-text="review.created_at"
                                             >
                                             </p>
                                         </div>
@@ -294,7 +293,7 @@
                                             type="hidden"
                                             name="id"
                                             rules="required"
-                                            ::value="review.id"
+                                            ::value="review.product_review_id"
                                         />
 
                                         <x-admin::form.control-group>
@@ -306,7 +305,7 @@
                                                 type="select"
                                                 name="status"
                                                 rules="required"
-                                                ::value="review.status"
+                                                ::value="review.images.status"
                                             >
                                                 <option value="approved" >
                                                     @lang('admin::app.customers.reviews.index.edit.approved')
@@ -324,7 +323,7 @@
                                             <x-admin::form.control-group.error control-name="status" />
                                         </x-admin::form.control-group>
                                     </div>
-                
+
                                     <div class="w-full">
                                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                             @lang('admin::app.customers.reviews.index.edit.rating') 
@@ -364,14 +363,14 @@
 
                                     <div
                                         class="w-full"
-                                        v-if="review.images.length"
+                                        v-if="review.images.images.length"
                                     >
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.customers.reviews.index.edit.images')     
                                         </x-admin::form.control-group.label>
                                     
                                         <div class="flex flex-wrap gap-4">
-                                            <div v-for="image in review.images" :key="image.id">
+                                            <div v-for="image in review.images.images">
                                                 <img
                                                     :src="image.url"
                                                     class="h-[60px] w-[60px] rounded"
@@ -388,7 +387,7 @@
                                                     <source
                                                         :src="image.url"
                                                         type="video/mp4"
-                                                    >
+                                                    />
                                                 </video>
                                             </div>
                                         </div>
@@ -408,25 +407,10 @@
                 data() {
                     return {
                         review: {},
-                    }
+                    };
                 },
 
                 methods: {
-                    edit(url) {
-                        this.$axios.get(url)
-                            .then((response) => {
-                                this.$refs.review.open(),
-
-                                this.review = response.data.data
-                            })
-                            .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
-                   
-                    },
-
                     update(params) {
                         let formData = new FormData(this.$refs.reviewCreateForm);
 
@@ -436,9 +420,9 @@
                             .then((response) => {
                                 this.$refs.review.close();
 
-                                this.$refs.review_data.get();
+                                this.$refs.reviewDatagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data,message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {
@@ -446,8 +430,8 @@
                                 }
                             });
                     },
-                }
-            })
+                },
+            });
         </script>
     @endPushOnce
 </x-admin::layouts>

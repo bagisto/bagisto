@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Customers;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewDataGrid extends DataGrid
 {
@@ -162,6 +163,18 @@ class ReviewDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => false,
             'sortable'   => false,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'images',
+            'label'      => trans('admin::app.customers.reviews.index.datagrid.comment'),
+            'type'       => 'string',
+            'searchable' => false,
+            'filterable' => false,
+            'sortable'   => false,
+            'closure'    => function ($row) {
+                return app(ProductReviewRepository::class)->with('images')->find($row->product_review_id);
+            },
         ]);
 
         $this->addColumn([
