@@ -411,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'الإجراءات',
+                'actions'              => 'إجراءات',
                 'next-page'            => 'الصفحة التالية',
                 'no-records-available' => 'لا تتوفر سجلات.',
+                'of'                   => 'من :total إدخالات',
                 'page-navigation'      => 'تنقل الصفحة',
                 'page-number'          => 'رقم الصفحة',
                 'previous-page'        => 'الصفحة السابقة',
+                'showing'              => 'يتم عرض :firstItem',
+                'to'                   => 'إلى :lastItem',
             ],
         ],
 

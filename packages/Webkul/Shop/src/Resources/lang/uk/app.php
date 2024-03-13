@@ -412,11 +412,14 @@ return [
 
             'table' => [
                 'actions'              => 'Дії',
-                'next-page'            => 'Наступна Сторінка',
-                'no-records-available' => 'Немає доступних записів.',
-                'page-navigation'      => 'Навігація Сторінкою',
-                'page-number'          => 'Номер Сторінки',
-                'previous-page'        => 'Попередня Сторінка',
+                'next-page'            => 'Наступна сторінка',
+                'no-records-available' => 'Записи відсутні.',
+                'of'                   => 'з :total записів',
+                'page-navigation'      => 'Навігація сторінками',
+                'page-number'          => 'Номер сторінки',
+                'previous-page'        => 'Попередня сторінка',
+                'showing'              => 'Показано :firstItem',
+                'to'                   => 'до :lastItem',
             ],
         ],
 

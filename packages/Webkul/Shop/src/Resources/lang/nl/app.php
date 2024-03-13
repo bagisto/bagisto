@@ -414,9 +414,12 @@ return [
                 'actions'              => 'Acties',
                 'next-page'            => 'Volgende Pagina',
                 'no-records-available' => 'Geen records beschikbaar.',
+                'of'                   => 'van :total items',
                 'page-navigation'      => 'Pagina Navigatie',
                 'page-number'          => 'Paginanummer',
                 'previous-page'        => 'Vorige Pagina',
+                'showing'              => 'Weergeven :firstItem',
+                'to'                   => 'tot :lastItem',
             ],
         ],
 

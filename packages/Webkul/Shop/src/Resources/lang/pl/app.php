@@ -411,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'Akcje',
+                'actions'              => 'Działania',
                 'next-page'            => 'Następna Strona',
                 'no-records-available' => 'Brak dostępnych rekordów.',
-                'page-navigation'      => 'Nawigacja Strony',
+                'of'                   => 'z :total wpisów',
+                'page-navigation'      => 'Nawigacja Stronami',
                 'page-number'          => 'Numer Strony',
                 'previous-page'        => 'Poprzednia Strona',
+                'showing'              => 'Pokazuje :firstItem',
+                'to'                   => 'do :lastItem',
             ],
         ],
 

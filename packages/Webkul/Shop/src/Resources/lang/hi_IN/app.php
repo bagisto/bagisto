@@ -414,9 +414,12 @@ return [
                 'actions'              => 'क्रियाएँ',
                 'next-page'            => 'अगला पृष्ठ',
                 'no-records-available' => 'कोई रिकॉर्ड उपलब्ध नहीं है।',
+                'of'                   => 'कुल :total एन्ट्री में से',
                 'page-navigation'      => 'पृष्ठ नेविगेशन',
                 'page-number'          => 'पृष्ठ संख्या',
                 'previous-page'        => 'पिछला पृष्ठ',
+                'showing'              => ':firstItem दिखा रहा है',
+                'to'                   => ':lastItem तक',
             ],
         ],
 

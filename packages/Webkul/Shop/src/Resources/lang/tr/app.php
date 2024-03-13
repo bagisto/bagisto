@@ -413,10 +413,13 @@ return [
             'table' => [
                 'actions'              => 'Eylemler',
                 'next-page'            => 'Sonraki Sayfa',
-                'no-records-available' => 'Uygun kayıt bulunamadı.',
+                'no-records-available' => 'Kayıt bulunamadı.',
+                'of'                   => 'toplam :total girdi',
                 'page-navigation'      => 'Sayfa Gezinme',
                 'page-number'          => 'Sayfa Numarası',
                 'previous-page'        => 'Önceki Sayfa',
+                'showing'              => 'Gösteriliyor :firstItem',
+                'to'                   => 'ilâ :lastItem',
             ],
         ],
 
