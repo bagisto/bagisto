@@ -91,5 +91,21 @@
         {!! view_render_event('bagisto.admin.layout.body.after') !!}
 
         @stack('scripts')
+
+        {!! view_render_event('bagisto.admin.layout.vue-app-mount.before') !!}
+
+        <script>
+            /**
+             * Load event, the purpose of using the event is to mount the application
+             * after all of our `Vue` components which is present in blade file have
+             * been registered in the app. No matter what `app.mount()` should be
+             * called in the last.
+             */
+            window.addEventListener("load", function (event) {
+                app.mount("#app");
+            });
+        </script>
+
+        {!! view_render_event('bagisto.admin.layout.vue-app-mount.after') !!}
     </body>
 </html>
