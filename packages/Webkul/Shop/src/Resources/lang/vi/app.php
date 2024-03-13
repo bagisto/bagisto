@@ -68,7 +68,6 @@ return [
             'verify-failed'               => 'Chúng tôi không thể xác minh tài khoản email của bạn.',
         ],
 
-
         'account' => [
             'home' => 'Trang chủ',
 
@@ -239,7 +238,6 @@ return [
                     ],
                 ],
 
-
                 'invoice-pdf' => [
                     'bank-details'      => 'Thông tin Ngân hàng',
                     'bill-to'           => 'Thanh toán cho',
@@ -304,7 +302,6 @@ return [
                 'success'            => 'Mục đã được thêm vào danh sách mong muốn thành công',
                 'title'              => 'Danh sách mong muốn',
             ],
-
         ],
     ],
 
@@ -415,7 +412,6 @@ return [
                 'page-number'          => 'Số trang',
                 'previous-page'        => 'Trang trước',
             ],
-
         ],
 
         'modal' => [
@@ -455,7 +451,6 @@ return [
             'range'     => 'Phạm vi:',
         ],
 
-
         'carousel' => [
             'image-slide' => 'Ảnh Slide',
             'next'        => 'Tiếp theo',
@@ -466,232 +461,228 @@ return [
             'decrease-quantity' => 'Giảm Số lượng',
             'increase-quantity' => 'Tăng Số lượng',
         ],
-
-        'products' => [
-            'prices' => [
-                'grouped' => [
-                    'starting-at' => 'Bắt đầu từ',
-                ],
-
-                'configurable' => [
-                    'as-low-as' => 'Chỉ từ',
-                ],
+    ],
+    'products'   => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'Bắt đầu từ',
             ],
 
-            'sort-by' => [
-                'title' => 'Sắp xếp theo',
+            'configurable' => [
+                'as-low-as' => 'Chỉ từ',
             ],
+        ],
 
-            'view' => [
-                'type' => [
-                    'configurable' => [
-                        'select-options'       => 'Vui lòng chọn một tùy chọn',
-                        'select-above-options' => 'Vui lòng chọn các tùy chọn phía trên',
-                    ],
+        'sort-by' => [
+            'title' => 'Sắp xếp theo',
+        ],
 
-                    'bundle' => [
-                        'none' => 'Không',
-                    ],
-
-                    'downloadable' => [
-                        'links'   => 'Liên kết',
-                        'sample'  => 'Mẫu',
-                        'samples' => 'Mẫu',
-                    ],
-
-                    'grouped' => [
-                        'name' => 'Tên',
-                    ],
-                ],
-
-                'gallery' => [
-                    'product-image'   => 'Ảnh Sản phẩm',
-                    'thumbnail-image' => 'Ảnh nhỏ',
-                ],
-
-                'reviews' => [
-                    'attachments'      => 'Tệp đính kèm',
-                    'cancel'           => 'Hủy',
-                    'comment'          => 'Bình luận',
-                    'customer-review'  => 'Nhận xét của khách hàng',
-                    'empty-review'     => 'Không có đánh giá nào được tìm thấy, hãy là người đầu tiên đánh giá sản phẩm này',
-                    'failed-to-upload' => 'Không thể tải lên hình ảnh',
-                    'load-more'        => 'Tải thêm',
-                    'name'             => 'Tên',
-                    'rating'           => 'Đánh giá',
-                    'submit-review'    => 'Gửi Đánh giá',
-                    'success'          => 'Đánh giá đã được gửi thành công.',
-                    'title'            => 'Tiêu đề',
-                    'translate'        => 'Dịch',
-                    'translating'      => 'Đang dịch...',
-                    'write-a-review'   => 'Viết đánh giá',
-                ],
-
-                'add-to-cart'            => 'Thêm vào Giỏ hàng',
-                'add-to-compare'         => 'Sản phẩm được thêm vào so sánh.',
-                'add-to-wishlist'        => 'Thêm vào Danh sách mong muốn',
-                'additional-information' => 'Thông tin bổ sung',
-                'already-in-compare'     => 'Sản phẩm đã được thêm vào so sánh.',
-                'buy-now'                => 'Mua ngay',
-                'compare'                => 'So sánh',
-                'description'            => 'Mô tả',
-                'related-product-title'  => 'Sản phẩm liên quan',
-                'review'                 => 'Đánh giá',
-                'tax-inclusive'          => 'Bao gồm tất cả các loại thuế',
-                'up-sell-title'          => 'Chúng tôi đã tìm thấy các sản phẩm khác mà bạn có thể thích!',
-            ],
-
+        'view' => [
             'type' => [
-                'abstract' => [
-                    'offers' => 'Mua :qty với giá :price mỗi cái và tiết kiệm :discount',
+                'configurable' => [
+                    'select-options'       => 'Vui lòng chọn một tùy chọn',
+                    'select-above-options' => 'Vui lòng chọn các tùy chọn phía trên',
+                ],
+
+                'bundle' => [
+                    'none' => 'Không',
+                ],
+
+                'downloadable' => [
+                    'links'   => 'Liên kết',
+                    'sample'  => 'Mẫu',
+                    'samples' => 'Mẫu',
+                ],
+
+                'grouped' => [
+                    'name' => 'Tên',
                 ],
             ],
+
+            'gallery' => [
+                'product-image'   => 'Ảnh Sản phẩm',
+                'thumbnail-image' => 'Ảnh nhỏ',
+            ],
+
+            'reviews' => [
+                'attachments'      => 'Tệp đính kèm',
+                'cancel'           => 'Hủy',
+                'comment'          => 'Bình luận',
+                'customer-review'  => 'Nhận xét của khách hàng',
+                'empty-review'     => 'Không có đánh giá nào được tìm thấy, hãy là người đầu tiên đánh giá sản phẩm này',
+                'failed-to-upload' => 'Không thể tải lên hình ảnh',
+                'load-more'        => 'Tải thêm',
+                'name'             => 'Tên',
+                'rating'           => 'Đánh giá',
+                'submit-review'    => 'Gửi Đánh giá',
+                'success'          => 'Đánh giá đã được gửi thành công.',
+                'title'            => 'Tiêu đề',
+                'translate'        => 'Dịch',
+                'translating'      => 'Đang dịch...',
+                'write-a-review'   => 'Viết đánh giá',
+            ],
+
+            'add-to-cart'            => 'Thêm vào Giỏ hàng',
+            'add-to-compare'         => 'Sản phẩm được thêm vào so sánh.',
+            'add-to-wishlist'        => 'Thêm vào Danh sách mong muốn',
+            'additional-information' => 'Thông tin bổ sung',
+            'already-in-compare'     => 'Sản phẩm đã được thêm vào so sánh.',
+            'buy-now'                => 'Mua ngay',
+            'compare'                => 'So sánh',
+            'description'            => 'Mô tả',
+            'related-product-title'  => 'Sản phẩm liên quan',
+            'review'                 => 'Đánh giá',
+            'tax-inclusive'          => 'Bao gồm tất cả các loại thuế',
+            'up-sell-title'          => 'Chúng tôi đã tìm thấy các sản phẩm khác mà bạn có thể thích!',
         ],
 
-
-        'categories' => [
-            'filters' => [
-                'clear-all' => 'Xóa tất cả',
-                'filters'   => 'Bộ lọc:',
-                'filter'    => 'Lọc',
-                'sort'      => 'Sắp xếp',
-            ],
-
-            'toolbar' => [
-                'grid' => 'Lưới',
-                'list' => 'Danh sách',
-                'show' => 'Hiển thị',
-            ],
-
-            'view' => [
-                'empty'     => 'Không có sản phẩm nào trong danh mục này',
-                'load-more' => 'Tải thêm',
-            ],
-
-        ],
-
-        'search' => [
-            'title'   => 'Kết quả tìm kiếm cho : :query',
-            'results' => 'Kết quả tìm kiếm',
-
-            'images' => [
-                'index' => [
-                    'only-images-allowed'  => 'Chỉ cho phép hình ảnh (.jpeg, .jpg, .png, ..).',
-                    'search'               => 'Tìm kiếm',
-                    'size-limit-error'     => 'Lỗi Giới hạn Kích thước',
-                    'something-went-wrong' => 'Đã xảy ra sự cố, vui lòng thử lại sau.',
-                ],
-
-                'results' => [
-                    'analysed-keywords' => 'Từ khóa đã phân tích:',
-                ],
+        'type' => [
+            'abstract' => [
+                'offers' => 'Mua :qty với giá :price mỗi cái và tiết kiệm :discount',
             ],
         ],
+    ],
 
-        'compare' => [
-            'already-added'      => 'Sản phẩm đã được thêm vào danh sách so sánh',
-            'delete-all'         => 'Xóa tất cả',
-            'empty-text'         => 'Bạn không có sản phẩm nào trong danh sách so sánh của bạn',
-            'item-add-success'   => 'Sản phẩm đã được thêm vào danh sách so sánh thành công',
-            'product-compare'    => 'So sánh Sản phẩm',
-            'remove-all-success' => 'Tất cả các mục đã được xóa thành công.',
-            'remove-error'       => 'Đã xảy ra sự cố, vui lòng thử lại sau.',
-            'remove-success'     => 'Mục đã được xóa thành công.',
-            'title'              => 'So sánh Sản phẩm',
+    'categories' => [
+        'filters' => [
+            'clear-all' => 'Xóa tất cả',
+            'filters'   => 'Bộ lọc:',
+            'filter'    => 'Lọc',
+            'sort'      => 'Sắp xếp',
         ],
 
-        'checkout' => [
-            'success' => [
-                'info'          => 'Chúng tôi sẽ gửi email cho bạn về chi tiết đơn hàng và thông tin theo dõi.',
-                'order-id-info' => 'Mã đơn hàng của bạn là #:order_id',
-                'thanks'        => 'Cảm ơn bạn đã đặt hàng!',
-                'title'         => 'Đặt hàng thành công',
+        'toolbar' => [
+            'grid' => 'Lưới',
+            'list' => 'Danh sách',
+            'show' => 'Hiển thị',
+        ],
+
+        'view' => [
+            'empty'     => 'Không có sản phẩm nào trong danh mục này',
+            'load-more' => 'Tải thêm',
+        ],
+    ],
+
+    'search' => [
+        'title'   => 'Kết quả tìm kiếm cho : :query',
+        'results' => 'Kết quả tìm kiếm',
+
+        'images' => [
+            'index' => [
+                'only-images-allowed'  => 'Chỉ cho phép hình ảnh (.jpeg, .jpg, .png, ..).',
+                'search'               => 'Tìm kiếm',
+                'size-limit-error'     => 'Lỗi Giới hạn Kích thước',
+                'something-went-wrong' => 'Đã xảy ra sự cố, vui lòng thử lại sau.',
             ],
 
-            'cart' => [
-                'continue-to-checkout'      => 'Tiếp tục thanh toán',
-                'illegal'                   => 'Số lượng không thể nhỏ hơn một.',
-                'inactive'                  => 'Sản phẩm đã bị vô hiệu hóa và sau đó đã được loại bỏ khỏi giỏ hàng.',
-                'inventory-warning'         => 'Số lượng yêu cầu không có sẵn, vui lòng thử lại sau.',
-                'item-add-to-cart'          => 'Thêm sản phẩm thành công',
-                'minimum-order-message'     => 'Số tiền đơn hàng tối thiểu là :amount',
-                'missing-fields'            => 'Thiếu một số trường bắt buộc cho sản phẩm này.',
-                'missing-options'           => 'Thiếu tùy chọn cho sản phẩm này.',
-                'paypal-payment-cancelled'  => 'Thanh toán Paypal đã bị hủy.',
-                'qty-missing'               => 'Ít nhất một sản phẩm phải có số lượng lớn hơn 1.',
-                'return-to-shop'            => 'Quay lại cửa hàng',
-                'rule-applied'              => 'Quy tắc giỏ hàng được áp dụng',
-                'select-hourly-duration'    => 'Chọn một khoảng thời gian mỗi giờ.',
-                'success-remove'            => 'Sản phẩm đã được xóa khỏi giỏ hàng thành công.',
-                'suspended-account-message' => 'Tài khoản của bạn đã bị tạm ngừng.',
+            'results' => [
+                'analysed-keywords' => 'Từ khóa đã phân tích:',
+            ],
+        ],
+    ],
 
-                'index' => [
-                    'bagisto'                  => 'Bagisto',
-                    'cart'                     => 'Giỏ hàng',
-                    'continue-shopping'        => 'Tiếp tục mua sắm',
-                    'empty-product'            => 'Bạn không có sản phẩm nào trong giỏ hàng của mình.',
-                    'home'                     => 'Trang chủ',
-                    'items-selected'           => ':count sản phẩm được chọn',
-                    'move-to-wishlist'         => 'Chuyển qua danh sách mong muốn',
-                    'move-to-wishlist-success' => 'Các mục được chọn đã được chuyển thành công vào danh sách mong muốn.',
-                    'price'                    => 'Giá',
-                    'product-name'             => 'Tên sản phẩm',
-                    'quantity'                 => 'Số lượng',
-                    'quantity-update'          => 'Cập nhật số lượng thành công',
-                    'remove'                   => 'Xóa',
-                    'remove-selected-success'  => 'Các mục được chọn đã được xóa khỏi giỏ hàng thành công.',
-                    'see-details'              => 'Xem chi tiết',
-                    'select-all'               => 'Chọn tất cả',
-                    'select-cart-item'         => 'Chọn mục giỏ hàng',
-                    'tax'                      => 'Thuế',
-                    'total'                    => 'Tổng cộng',
-                    'update-cart'              => 'Cập nhật giỏ hàng',
-                    'view-cart'                => 'Xem giỏ hàng',
+    'compare' => [
+        'already-added'      => 'Sản phẩm đã được thêm vào danh sách so sánh',
+        'delete-all'         => 'Xóa tất cả',
+        'empty-text'         => 'Bạn không có sản phẩm nào trong danh sách so sánh của bạn',
+        'item-add-success'   => 'Sản phẩm đã được thêm vào danh sách so sánh thành công',
+        'product-compare'    => 'So sánh Sản phẩm',
+        'remove-all-success' => 'Tất cả các mục đã được xóa thành công.',
+        'remove-error'       => 'Đã xảy ra sự cố, vui lòng thử lại sau.',
+        'remove-success'     => 'Mục đã được xóa thành công.',
+        'title'              => 'So sánh Sản phẩm',
+    ],
 
-                    'cross-sell' => [
-                        'title' => 'Lựa chọn khác',
-                    ],
-                ],
+    'checkout' => [
+        'success' => [
+            'info'          => 'Chúng tôi sẽ gửi email cho bạn về chi tiết đơn hàng và thông tin theo dõi.',
+            'order-id-info' => 'Mã đơn hàng của bạn là #:order_id',
+            'thanks'        => 'Cảm ơn bạn đã đặt hàng!',
+            'title'         => 'Đặt hàng thành công',
+        ],
 
-                'coupon' => [
-                    'already-applied' => 'Mã giảm giá đã được áp dụng.',
-                    'applied'         => 'Mã giảm giá đã được áp dụng',
-                    'apply'           => 'Áp dụng mã giảm giá',
-                    'apply-issue'     => 'Không thể áp dụng mã giảm giá.',
-                    'button-title'    => 'Áp dụng',
-                    'code'            => 'Mã giảm giá',
-                    'discount'        => 'Giảm giá mã giảm giá',
-                    'enter-your-code' => 'Nhập mã của bạn',
-                    'error'           => 'Đã xảy ra lỗi',
-                    'invalid'         => 'Mã giảm giá không hợp lệ.',
-                    'remove'          => 'Xóa mã giảm giá',
-                    'subtotal'        => 'Tổng phụ',
-                    'success-apply'   => 'Mã giảm giá đã được áp dụng thành công.',
-                ],
+        'cart' => [
+            'continue-to-checkout'      => 'Tiếp tục thanh toán',
+            'illegal'                   => 'Số lượng không thể nhỏ hơn một.',
+            'inactive'                  => 'Sản phẩm đã bị vô hiệu hóa và sau đó đã được loại bỏ khỏi giỏ hàng.',
+            'inventory-warning'         => 'Số lượng yêu cầu không có sẵn, vui lòng thử lại sau.',
+            'item-add-to-cart'          => 'Thêm sản phẩm thành công',
+            'minimum-order-message'     => 'Số tiền đơn hàng tối thiểu là :amount',
+            'missing-fields'            => 'Thiếu một số trường bắt buộc cho sản phẩm này.',
+            'missing-options'           => 'Thiếu tùy chọn cho sản phẩm này.',
+            'paypal-payment-cancelled'  => 'Thanh toán Paypal đã bị hủy.',
+            'qty-missing'               => 'Ít nhất một sản phẩm phải có số lượng lớn hơn 1.',
+            'return-to-shop'            => 'Quay lại cửa hàng',
+            'rule-applied'              => 'Quy tắc giỏ hàng được áp dụng',
+            'select-hourly-duration'    => 'Chọn một khoảng thời gian mỗi giờ.',
+            'success-remove'            => 'Sản phẩm đã được xóa khỏi giỏ hàng thành công.',
+            'suspended-account-message' => 'Tài khoản của bạn đã bị tạm ngừng.',
 
-                'mini-cart' => [
-                    'continue-to-checkout' => 'Tiếp tục thanh toán',
-                    'empty-cart'           => 'Giỏ hàng của bạn trống rỗng',
-                    'offer-on-orders'      => 'Nhận Giảm Giá Lên Đến 30% cho đơn đặt hàng đầu tiên của bạn',
-                    'remove'               => 'Xóa',
-                    'see-details'          => 'Xem chi tiết',
-                    'shopping-cart'        => 'Giỏ hàng',
-                    'subtotal'             => 'Tổng phụ',
-                    'view-cart'            => 'Xem giỏ hàng',
-                ],
+            'index' => [
+                'bagisto'                  => 'Bagisto',
+                'cart'                     => 'Giỏ hàng',
+                'continue-shopping'        => 'Tiếp tục mua sắm',
+                'empty-product'            => 'Bạn không có sản phẩm nào trong giỏ hàng của mình.',
+                'home'                     => 'Trang chủ',
+                'items-selected'           => ':count sản phẩm được chọn',
+                'move-to-wishlist'         => 'Chuyển qua danh sách mong muốn',
+                'move-to-wishlist-success' => 'Các mục được chọn đã được chuyển thành công vào danh sách mong muốn.',
+                'price'                    => 'Giá',
+                'product-name'             => 'Tên sản phẩm',
+                'quantity'                 => 'Số lượng',
+                'quantity-update'          => 'Cập nhật số lượng thành công',
+                'remove'                   => 'Xóa',
+                'remove-selected-success'  => 'Các mục được chọn đã được xóa khỏi giỏ hàng thành công.',
+                'see-details'              => 'Xem chi tiết',
+                'select-all'               => 'Chọn tất cả',
+                'select-cart-item'         => 'Chọn mục giỏ hàng',
+                'tax'                      => 'Thuế',
+                'total'                    => 'Tổng cộng',
+                'update-cart'              => 'Cập nhật giỏ hàng',
+                'view-cart'                => 'Xem giỏ hàng',
 
-                'summary' => [
-                    'cart-summary'        => 'Tóm tắt giỏ hàng',
-                    'delivery-charges'    => 'Phí vận chuyển',
-                    'discount-amount'     => 'Số tiền giảm giá',
-                    'grand-total'         => 'Tổng cộng',
-                    'place-order'         => 'Đặt hàng',
-                    'proceed-to-checkout' => 'Tiếp tục thanh toán',
-                    'sub-total'           => 'Tổng phụ',
-                    'tax'                 => 'Thuế',
+                'cross-sell' => [
+                    'title' => 'Lựa chọn khác',
                 ],
             ],
 
+            'coupon' => [
+                'already-applied' => 'Mã giảm giá đã được áp dụng.',
+                'applied'         => 'Mã giảm giá đã được áp dụng',
+                'apply'           => 'Áp dụng mã giảm giá',
+                'apply-issue'     => 'Không thể áp dụng mã giảm giá.',
+                'button-title'    => 'Áp dụng',
+                'code'            => 'Mã giảm giá',
+                'discount'        => 'Giảm giá mã giảm giá',
+                'enter-your-code' => 'Nhập mã của bạn',
+                'error'           => 'Đã xảy ra lỗi',
+                'invalid'         => 'Mã giảm giá không hợp lệ.',
+                'remove'          => 'Xóa mã giảm giá',
+                'subtotal'        => 'Tổng phụ',
+                'success-apply'   => 'Mã giảm giá đã được áp dụng thành công.',
+            ],
+
+            'mini-cart' => [
+                'continue-to-checkout' => 'Tiếp tục thanh toán',
+                'empty-cart'           => 'Giỏ hàng của bạn trống rỗng',
+                'offer-on-orders'      => 'Nhận Giảm Giá Lên Đến 30% cho đơn đặt hàng đầu tiên của bạn',
+                'remove'               => 'Xóa',
+                'see-details'          => 'Xem chi tiết',
+                'shopping-cart'        => 'Giỏ hàng',
+                'subtotal'             => 'Tổng phụ',
+                'view-cart'            => 'Xem giỏ hàng',
+            ],
+
+            'summary' => [
+                'cart-summary'        => 'Tóm tắt giỏ hàng',
+                'delivery-charges'    => 'Phí vận chuyển',
+                'discount-amount'     => 'Số tiền giảm giá',
+                'grand-total'         => 'Tổng cộng',
+                'place-order'         => 'Đặt hàng',
+                'proceed-to-checkout' => 'Tiếp tục thanh toán',
+                'sub-total'           => 'Tổng phụ',
+                'tax'                 => 'Thuế',
+            ],
         ],
 
         'onepage' => [

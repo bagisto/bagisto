@@ -457,6 +457,7 @@ return [
             'title'                     => 'Bagisto Installer',
             'turkish'                   => 'Turkish',
             'ukrainian'                 => 'Ukrainian',
+            'vietnamese'                => 'Vietnamese',
             'webkul'                    => 'Webkul',
         ],
     ],

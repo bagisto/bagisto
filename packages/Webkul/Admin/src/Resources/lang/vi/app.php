@@ -921,7 +921,6 @@ return [
                 ],
             ],
 
-
             'edit' => [
                 'add-attribute-options' => 'Thêm Tùy chọn Thuộc tính',
                 'add-option'            => 'Thêm Tùy chọn',
@@ -1392,7 +1391,6 @@ return [
                     'update-status'       => 'Cập nhật Trạng thái',
                 ],
             ],
-
         ],
 
         'addresses' => [
@@ -1993,7 +1991,6 @@ return [
                         'title'          => 'Chỉnh sửa Thuật ngữ Tìm kiếm',
                     ],
                 ],
-
             ],
 
             'search-synonyms' => [
@@ -2027,7 +2024,6 @@ return [
                         'title'          => 'Chỉnh sửa Đồng nghĩa Tìm kiếm',
                     ],
                 ],
-
             ],
 
             'sitemaps' => [
@@ -2119,7 +2115,6 @@ return [
                         'title'          => 'Chỉnh sửa URL Rewrite',
                     ],
                 ],
-
             ],
         ],
     ],
@@ -2406,7 +2401,6 @@ return [
                 'delete-success' => 'Tỉ giá Hối đoái đã được Xóa thành công',
                 'update-success' => 'Tỉ giá Hối đoái đã được Cập nhật thành công',
             ],
-
         ],
 
         'inventory-sources' => [
@@ -2530,7 +2524,6 @@ return [
                     'delete-success' => 'Xóa Danh mục Thuế thành công',
                     'update-success' => 'Cập nhật Danh mục Thuế thành công',
                 ],
-
             ],
 
             'rates' => [
@@ -3036,7 +3029,6 @@ return [
             'info'  => 'Không có dữ liệu nào cho khoảng thời gian đã chọn',
             'title' => 'Không Có Dữ Liệu',
         ],
-
     ],
 
     'configuration' => [
@@ -3184,7 +3176,7 @@ return [
                     ],
                 ],
 
-                'products'      => [
+                'products' => [
                     'info'  => 'Cài đặt thanh toán khách, trang xem sản phẩm, trang giỏ hàng, cửa hàng, đánh giá và chia sẻ xã hội thuộc tính.',
                     'title' => 'Sản phẩm',
 
@@ -3301,7 +3293,6 @@ return [
                         'title-info'              => '"Danh mục" đề cập đến các nhóm hoặc phân loại giúp tổ chức và nhóm các sản phẩm hoặc mặt hàng tương tự lại với nhau để dễ dàng duyệt và điều hướng.',
                     ],
                 ],
-
             ],
 
             'customer' => [
@@ -3408,7 +3399,6 @@ return [
                     'verification'                                     => 'Gửi email xác minh sau khi đăng ký khách hàng',
                 ],
             ],
-
 
             'sales' => [
                 'info'  => 'Bán hàng',
@@ -3548,7 +3538,6 @@ return [
                         'title-info'                 => 'Thông báo hoặc liên lạc tự động được gửi đến khách hàng để nhắc nhở họ về các khoản thanh toán sắp tới hoặc quá hạn cho các hóa đơn.',
                     ],
                 ],
-
             ],
 
             'taxes' => [
@@ -3572,7 +3561,6 @@ return [
                         'title-info'        => 'Xác định tự động một vị trí tiêu chuẩn hoặc ban đầu dựa trên các yếu tố hoặc cài đặt được xác định trước.',
                     ],
                 ],
-
             ],
         ],
     ],
@@ -3722,7 +3710,6 @@ return [
                 'actions'              => 'Hành Động',
                 'no-records-available' => 'Không có Bản Ghi Nào.',
             ],
-
         ],
 
         'modal' => [
@@ -3791,7 +3778,6 @@ return [
             ],
         ],
 
-
         'tinymce' => [
             'ai-btn-tile' => 'Trí tuệ nhân tạo',
 
@@ -3817,7 +3803,6 @@ return [
                 'vicuna'                 => 'Vicuna',
                 'llava'                  => 'LLaVA',
             ],
-
         ],
     ],
 
@@ -3950,7 +3935,6 @@ return [
             ],
         ],
 
-
         'orders' => [
             'created' => [
                 'greeting' => 'Bạn có một đơn hàng mới :order_id được đặt vào :created_at',
@@ -4009,6 +3993,5 @@ return [
             'subtotal'          => 'Tổng phụ',
             'tax'               => 'Thuế',
         ],
-
     ],
 ];

@@ -46,5 +46,4 @@ return [
         'simple'       => 'Đơn giản',
         'virtual'      => 'Ảo',
     ],
-
 ];

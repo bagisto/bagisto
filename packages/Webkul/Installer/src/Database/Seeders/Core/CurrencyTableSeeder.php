@@ -25,6 +25,7 @@ class CurrencyTableSeeder extends Seeder
         'SAR' => '﷼',
         'IRR' => '﷼',
         'AFN' => '؋',
+        'VND' => '₫',
         'TRY' => '₺',
     ];
 

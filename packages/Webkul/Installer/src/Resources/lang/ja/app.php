@@ -148,6 +148,7 @@ return [
                 'SAR' => 'サウジリヤル',
                 'TRY' => 'トルコリラ',
                 'UAH' => 'ウクライナフリブニ',
+                'VND' => 'ベトナムドン',
                 'USD' => '米ドル',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => 'シンハラ語',
                 'tr'    => 'トルコ語',
                 'uk'    => 'ウクライナ語',
+                'vi'    => 'ベトナム語',
                 'zh_CN' => '中国語',
             ],
         ],
@@ -365,6 +367,7 @@ return [
                 'turkish-lira'        => 'トルコリラ（TRY）',
                 'ukrainian-hryvnia'   => 'ウクライナフリブナ（UAH）',
                 'usd'                 => '米ドル（USD）',
+                'vietnamese-dong'     => 'ベトナムドン（VND）',
                 'warning-message'     => '警告！デフォルトのシステム言語設定およびデフォルト通貨設定は恒久的で、二度と変更できません。',
             ],
 
@@ -454,6 +457,7 @@ return [
             'title'                     => 'Bagistoインストーラ',
             'turkish'                   => 'トルコ語',
             'ukrainian'                 => 'ウクライナ語',
+            'vietnamese'                => 'ベトナム語',
             'webkul'                    => 'Webkul',
         ],
     ],

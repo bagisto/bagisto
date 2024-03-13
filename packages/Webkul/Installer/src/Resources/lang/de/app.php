@@ -148,6 +148,7 @@ return [
                 'SAR' => 'Saudi-Riyal',
                 'TRY' => 'Türkische Lira',
                 'UAH' => 'Ukrainische Hrywnja',
+                'VND' => 'Vietnamesischer Dong',
                 'USD' => 'US-Dollar',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => 'Sinhala',
                 'tr'    => 'Türkisch',
                 'uk'    => 'Ukrainisch',
+                'vi'    => 'Vietnamesisch',
                 'zh_CN' => 'Chinesisch',
             ],
         ],
@@ -454,6 +456,7 @@ return [
             'title'                     => 'Bagisto Installer',
             'turkish'                   => 'Türkisch',
             'ukrainian'                 => 'Ukrainisch',
+            'vietnamese'                => 'Vietnamesisch',
             'webkul'                    => 'Webkul',
         ],
     ],
