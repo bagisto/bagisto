@@ -1,9 +1,12 @@
-@props(['controlName' => ''])
+@props([
+    'name'        => null,
+    'controlName' => '',
+])
 
 @if (! empty($controlName))
     <v-error-message
-        name="{{ $controlName }}"
         {{ $attributes }}
+        name="{{ $name ?? $controlName }}"
         v-slot="{ message }"
     >
         <p

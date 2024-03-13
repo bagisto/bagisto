@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'पासवर्ड रीसेट मेल पहले ही भेजा जा चुका है।',
             'back'                 => 'साइन इन पर वापस जाएं?',
             'bagisto'              => 'बागिस्तो',
             'email'                => 'ईमेल',
@@ -413,9 +414,12 @@ return [
                 'actions'              => 'क्रियाएँ',
                 'next-page'            => 'अगला पृष्ठ',
                 'no-records-available' => 'कोई रिकॉर्ड उपलब्ध नहीं है।',
+                'of'                   => 'कुल :total एन्ट्री में से',
                 'page-navigation'      => 'पृष्ठ नेविगेशन',
                 'page-number'          => 'पृष्ठ संख्या',
                 'previous-page'        => 'पिछला पृष्ठ',
+                'showing'              => ':firstItem दिखा रहा है',
+                'to'                   => ':lastItem तक',
             ],
         ],
 
@@ -692,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'नई पता जोड़ें',
-                    'back'                               => 'पीछे जाएं',
-                    'billing-address'                    => 'बिलिंग पता',
-                    'city'                               => 'शहर',
-                    'company-name'                       => 'कंपनी का नाम',
-                    'confirm'                            => 'कन्फर्म करें',
-                    'country'                            => 'देश',
-                    'email'                              => 'ईमेल',
-                    'first-name'                         => 'पहला नाम',
-                    'last-name'                          => 'अंतिम नाम',
-                    'postcode'                           => 'ज़िप/पिन कोड',
-                    'proceed'                            => 'आगे बढ़ें',
-                    'save'                               => 'बचाना',
-                    'use-different-address-for-shipping' => 'पता मेरे बिलिंग पते का है',
-                    'save-address'                       => 'इस पते को सहेजें',
-                    'select-country'                     => 'देश चुनें',
-                    'select-state'                       => 'राज्य चुनें',
-                    'state'                              => 'राज्य',
-                    'street-address'                     => 'स्ट्रीट पता',
-                    'telephone'                          => 'टेलीफोन',
-                ],
-
-                'index' => [
-                    'bagisto' => 'बागिस्तो',
-                    'confirm' => 'कन्फर्म करें',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'नई पता जोड़ें',
-                    'back'             => 'पीछे जाएं',
-                    'city'             => 'शहर',
-                    'company-name'     => 'कंपनी का नाम',
-                    'confirm'          => 'कन्फर्म करें',
-                    'country'          => 'देश',
-                    'email'            => 'ईमेल',
-                    'first-name'       => 'पहला नाम',
-                    'last-name'        => 'अंतिम नाम',
-                    'postcode'         => 'ज़िप/पिन कोड',
-                    'proceed'          => 'आगे बढ़ें',
-                    'save'             => 'बचाना',
-                    'save-address'     => 'इस पते को सहेजें',
-                    'select-country'   => 'देश चुनें',
-                    'select-state'     => 'राज्य चुनें',
-                    'shipping-address' => 'शिपिंग पता',
-                    'state'            => 'राज्य',
-                    'street-address'   => 'सड़क पता',
-                    'telephone'        => 'टेलीफोन',
-                ],
-
-                'title' => 'पता',
+            'address' => [
+                'add-new-address'  => 'नया पता जोड़ें',
+                'add-new'          => 'नया पता जोड़ें',
+                'back'             => 'पीछे जाएं',
+                'billing-address'  => 'बिलिंग पता',
+                'city'             => 'शहर',
+                'company-name'     => 'कंपनी का नाम',
+                'confirm'          => 'पुष्टि करें',
+                'country'          => 'देश',
+                'email'            => 'ईमेल',
+                'first-name'       => 'पहला नाम',
+                'last-name'        => 'आख़िरी नाम',
+                'postcode'         => 'पिन कोड',
+                'proceed'          => 'आगे बढ़ें',
+                'same-as-billing'  => 'शिपिंग के लिए एक ही पता उपयोग करें?',
+                'save-address'     => 'इसे पता पुस्तिका में सहेजें',
+                'save'             => 'सहेजें',
+                'select-country'   => 'देश चुनें',
+                'select-state'     => 'राज्य चुनें',
+                'shipping-address' => 'शिपिंग पता',
+                'state'            => 'राज्य',
+                'street-address'   => 'स्ट्रीट पता',
+                'telephone'        => 'टेलीफोन',
+                'title'            => 'पता',
             ],
 
             'index' => [
@@ -778,6 +754,12 @@ return [
             'offer'               => 'पहले आदेश पर अपटू 40% तक की छूट पाएं अभी खरीदें',
             'resend-verify-email' => 'सत्यापन ईमेल फिर से भेजें',
             'verify-email'        => 'अपने ईमेल खाता सत्यापित करें',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'कुल :total आइटमों में :firstItem से :lastItem तक दिखा रहा है',
         ],
     ],
 

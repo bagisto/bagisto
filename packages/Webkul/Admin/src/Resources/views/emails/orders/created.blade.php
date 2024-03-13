@@ -33,7 +33,7 @@
 
                     {{ $order->shipping_address->name }}<br/>
                     
-                    {{ $order->shipping_address->address1 }}<br/>
+                    {{ $order->shipping_address->address }}<br/>
                     
                     {{ $order->shipping_address->postcode . " " . $order->shipping_address->city }}<br/>
                     
@@ -65,7 +65,7 @@
 
                     {{ $order->billing_address->name }}<br/>
                     
-                    {{ $order->billing_address->address1 }}<br/>
+                    {{ $order->billing_address->address }}<br/>
                     
                     {{ $order->billing_address->postcode . " " . $order->billing_address->city }}<br/>
                     

@@ -28,7 +28,7 @@ class CustomerAddressFactory extends Factory
             'vat_id'          => $fakerIt->vatId(),
             'first_name'      => $this->faker->firstName,
             'last_name'       => $this->faker->lastName,
-            'address1'        => $this->faker->streetAddress,
+            'address'         => $this->faker->streetAddress,
             'country'         => $this->faker->countryCode,
             'state'           => $this->faker->state,
             'city'            => $this->faker->city,

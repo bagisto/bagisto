@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'כבר איפוס סיסמה נשלח דואר.',
             'back'                 => 'חזרה להתחברות?',
             'bagisto'              => 'בַּגִּיסְטוֹ',
             'email'                => 'אימייל',
@@ -413,9 +414,12 @@ return [
                 'actions'              => 'פעולות',
                 'next-page'            => 'העמוד הבא',
                 'no-records-available' => 'אין רשומות זמינות.',
+                'of'                   => 'מתוך :total רשומות',
                 'page-navigation'      => 'ניווט בעמודים',
                 'page-number'          => 'מספר עמוד',
                 'previous-page'        => 'העמוד הקודם',
+                'showing'              => 'מציג :firstItem',
+                'to'                   => 'עד :lastItem',
             ],
         ],
 
@@ -692,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'הוסף כתובת חדשה',
-                    'back'                               => 'חזור',
-                    'billing-address'                    => 'כתובת לחיוב',
-                    'city'                               => 'עיר',
-                    'company-name'                       => 'שם החברה',
-                    'confirm'                            => 'אשר',
-                    'country'                            => 'מדינה',
-                    'email'                              => 'אימייל',
-                    'first-name'                         => 'שם פרטי',
-                    'last-name'                          => 'שם משפחה',
-                    'postcode'                           => 'מיקוד',
-                    'proceed'                            => 'לְהַמְשִׁיך',
-                    'save'                               => 'להציל',
-                    'use-different-address-for-shipping' => 'הכתובת זהה לכתובת החיוב שלי',
-                    'save-address'                       => 'שמור כתובת זו',
-                    'select-country'                     => 'בחר מדינה',
-                    'select-state'                       => 'בחר מדינה',
-                    'state'                              => 'מדינה',
-                    'street-address'                     => 'כתובת',
-                    'telephone'                          => 'טלפון',
-                ],
-
-                'index' => [
-                    'bagisto' => 'בַּגִּיסְטוֹ',
-                    'confirm' => 'אשר',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'הוסף כתובת חדשה',
-                    'back'             => 'חזור',
-                    'city'             => 'עיר',
-                    'company-name'     => 'שם החברה',
-                    'confirm'          => 'אשר',
-                    'country'          => 'מדינה',
-                    'email'            => 'אימייל',
-                    'first-name'       => 'שם פרטי',
-                    'last-name'        => 'שם משפחה',
-                    'postcode'         => 'מיקוד',
-                    'proceed'          => 'לְהַמְשִׁיך',
-                    'save'             => 'להציל',
-                    'save-address'     => 'שמור כתובת זו',
-                    'select-country'   => 'בחר מדינה',
-                    'select-state'     => 'בחר מדינה',
-                    'shipping-address' => 'כתובת למשלוח',
-                    'state'            => 'מדינה',
-                    'street-address'   => 'כתובת',
-                    'telephone'        => 'טלפון',
-                ],
-
-                'title' => 'כתובת',
+            'address' => [
+                'add-new-address'  => 'הוסף כתובת חדשה',
+                'add-new'          => 'הוסף כתובת חדשה',
+                'back'             => 'חזור',
+                'billing-address'  => 'כתובת לחיוב',
+                'city'             => 'עיר',
+                'company-name'     => 'שם החברה',
+                'confirm'          => 'אישור',
+                'country'          => 'מדינה',
+                'email'            => 'אימייל',
+                'first-name'       => 'שם פרטי',
+                'last-name'        => 'שם משפחה',
+                'postcode'         => 'מיקוד',
+                'proceed'          => 'המשך',
+                'same-as-billing'  => 'השתמש באותה כתובת למשלוח?',
+                'save-address'     => 'שמור בספר הכתובות',
+                'save'             => 'שמור',
+                'select-country'   => 'בחר מדינה',
+                'select-state'     => 'בחר מדינה',
+                'shipping-address' => 'כתובת למשלוח',
+                'state'            => 'מדינה',
+                'street-address'   => 'כתובת',
+                'telephone'        => 'טלפון',
+                'title'            => 'כתובת',
             ],
 
             'index' => [
@@ -778,6 +754,12 @@ return [
             'offer'               => 'עד 40% הנחה על הזמנתך הראשונה! קנה עכשיו',
             'resend-verify-email' => 'שלח מחדש אימייל לאימות',
             'verify-email'        => 'אמת את חשבון האימייל שלך',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'מציג :firstItem עד :lastItem מתוך :total רשומות',
         ],
     ],
 

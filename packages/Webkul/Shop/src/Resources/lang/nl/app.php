@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Wachtwoord al opnieuw ingesteld E-mail verzonden.',
             'back'                 => 'Terug naar Aanmelden?',
             'bagisto'              => 'Bagisto',
             'email'                => 'E-mail',
@@ -413,9 +414,12 @@ return [
                 'actions'              => 'Acties',
                 'next-page'            => 'Volgende Pagina',
                 'no-records-available' => 'Geen records beschikbaar.',
+                'of'                   => 'van :total items',
                 'page-navigation'      => 'Pagina Navigatie',
                 'page-number'          => 'Paginanummer',
                 'previous-page'        => 'Vorige Pagina',
+                'showing'              => 'Weergeven :firstItem',
+                'to'                   => 'tot :lastItem',
             ],
         ],
 
@@ -692,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'Nieuw adres toevoegen',
-                    'back'                               => 'Terug',
-                    'billing-address'                    => 'Factuuradres',
-                    'city'                               => 'Stad',
-                    'company-name'                       => 'Bedrijfsnaam',
-                    'confirm'                            => 'Bevestigen',
-                    'country'                            => 'Land',
-                    'email'                              => 'E-mail',
-                    'first-name'                         => 'Voornaam',
-                    'last-name'                          => 'Achternaam',
-                    'postcode'                           => 'Postcode',
-                    'proceed'                            => 'Doorgaan',
-                    'save'                               => 'redden',
-                    'use-different-address-for-shipping' => 'Adres is hetzelfde als mijn factuuradres',
-                    'save-address'                       => 'Dit adres opslaan',
-                    'select-country'                     => 'Selecteer land',
-                    'select-state'                       => 'Selecteer provincie',
-                    'state'                              => 'Provincie',
-                    'street-address'                     => 'Straatnaam en huisnummer',
-                    'telephone'                          => 'Telefoonnummer',
-                ],
-
-                'index' => [
-                    'confirm' => 'Bevestigen',
-                    'bagisto' => 'Bagisto',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'Nieuw adres toevoegen',
-                    'back'             => 'Terug',
-                    'city'             => 'Stad',
-                    'company-name'     => 'Bedrijfsnaam',
-                    'confirm'          => 'Bevestigen',
-                    'country'          => 'Land',
-                    'email'            => 'E-mail',
-                    'first-name'       => 'Voornaam',
-                    'last-name'        => 'Achternaam',
-                    'postcode'         => 'Postcode',
-                    'proceed'          => 'Doorgaan',
-                    'save'             => 'redden',
-                    'save-address'     => 'Dit adres opslaan',
-                    'select-country'   => 'Selecteer land',
-                    'select-state'     => 'Selecteer provincie',
-                    'shipping-address' => 'Verzendadres',
-                    'state'            => 'Provincie',
-                    'street-address'   => 'Straatnaam en huisnummer',
-                    'telephone'        => 'Telefoonnummer',
-                ],
-
-                'title' => 'Adres',
+            'address' => [
+                'add-new-address'  => 'Nieuw adres toevoegen',
+                'add-new'          => 'Nieuw adres toevoegen',
+                'back'             => 'Terug',
+                'billing-address'  => 'Factuuradres',
+                'city'             => 'Stad',
+                'company-name'     => 'Bedrijfsnaam',
+                'confirm'          => 'Bevestigen',
+                'country'          => 'Land',
+                'email'            => 'E-mail',
+                'first-name'       => 'Voornaam',
+                'last-name'        => 'Achternaam',
+                'postcode'         => 'Postcode',
+                'proceed'          => 'Ga verder',
+                'same-as-billing'  => 'Gelijk adres gebruiken voor verzending?',
+                'save-address'     => 'Opslaan in adresboek',
+                'save'             => 'Opslaan',
+                'select-country'   => 'Selecteer land',
+                'select-state'     => 'Selecteer provincie',
+                'shipping-address' => 'Verzendadres',
+                'state'            => 'Provincie',
+                'street-address'   => 'Straatadres',
+                'telephone'        => 'Telefoon',
+                'title'            => 'Adres',
             ],
 
             'index' => [
@@ -778,6 +754,12 @@ return [
             'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email'        => 'Verifieer je e-mailaccount',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Toont :firstItem tot :lastItem van de :total vermeldingen',
         ],
     ],
 

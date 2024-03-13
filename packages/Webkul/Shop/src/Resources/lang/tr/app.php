@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Zaten Şifre Sıfırlama Postası Gönderildi.',
             'back'                 => 'Girişe geri dön?',
             'bagisto'              => 'Bagisto',
             'email'                => 'E-posta',
@@ -412,10 +413,13 @@ return [
             'table' => [
                 'actions'              => 'Eylemler',
                 'next-page'            => 'Sonraki Sayfa',
-                'no-records-available' => 'Uygun kayıt bulunamadı.',
+                'no-records-available' => 'Kayıt bulunamadı.',
+                'of'                   => 'toplam :total girdi',
                 'page-navigation'      => 'Sayfa Gezinme',
                 'page-number'          => 'Sayfa Numarası',
                 'previous-page'        => 'Önceki Sayfa',
+                'showing'              => 'Gösteriliyor :firstItem',
+                'to'                   => 'ilâ :lastItem',
             ],
         ],
 
@@ -692,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'Yeni Adres Ekle',
-                    'back'                               => 'Geri',
-                    'billing-address'                    => 'Fatura Adresi',
-                    'city'                               => 'Şehir',
-                    'company-name'                       => 'Şirket Adı',
-                    'confirm'                            => 'Onayla',
-                    'country'                            => 'Ülke',
-                    'email'                              => 'E-posta',
-                    'first-name'                         => 'Ad',
-                    'last-name'                          => 'Soyad',
-                    'postcode'                           => 'Posta Kodu',
-                    'proceed'                            => 'Devam etmek',
-                    'save'                               => 'kaydetmek',
-                    'use-different-address-for-shipping' => 'Adresim, fatura adresimle aynı',
-                    'save-address'                       => 'Bu adresi kaydet',
-                    'select-country'                     => 'Ülke Seçin',
-                    'select-state'                       => 'Eyalet Seçin',
-                    'state'                              => 'Eyalet',
-                    'street-address'                     => 'Cadde Adresi',
-                    'telephone'                          => 'Telefon',
-                ],
-
-                'index' => [
-                    'bagisto' => 'Bagisto',
-                    'confirm' => 'Onayla',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'Yeni Adres Ekle',
-                    'back'             => 'Geri',
-                    'city'             => 'Şehir',
-                    'company-name'     => 'Şirket Adı',
-                    'confirm'          => 'Onayla',
-                    'country'          => 'Ülke',
-                    'email'            => 'E-posta',
-                    'first-name'       => 'Ad',
-                    'last-name'        => 'Soyad',
-                    'postcode'         => 'Posta Kodu',
-                    'proceed'          => 'Devam etmek',
-                    'save'             => 'kaydetmek',
-                    'save-address'     => 'Bu adresi kaydet',
-                    'select-country'   => 'Ülke Seçin',
-                    'select-state'     => 'Eyalet Seçin',
-                    'shipping-address' => 'Teslimat Adresi',
-                    'state'            => 'Eyalet',
-                    'street-address'   => 'Cadde adresi',
-                    'telephone'        => 'Telefon',
-                ],
-
-                'title' => 'Adres',
+            'address' => [
+                'add-new-address'  => 'Yeni adres ekleyin',
+                'add-new'          => 'Yeni adres ekleyin',
+                'back'             => 'Geri',
+                'billing-address'  => 'Fatura Adresi',
+                'city'             => 'Şehir',
+                'company-name'     => 'Şirket Adı',
+                'confirm'          => 'Onayla',
+                'country'          => 'Ülke',
+                'email'            => 'E-posta',
+                'first-name'       => 'Ad',
+                'last-name'        => 'Soyadı',
+                'postcode'         => 'Posta Kodu',
+                'proceed'          => 'Devam Et',
+                'same-as-billing'  => 'Gönderim için aynı adresi kullanmak istiyor musunuz?',
+                'save-address'     => 'Adresi Adres Defterine Kaydet',
+                'save'             => 'Kaydet',
+                'select-country'   => 'Ülke Seç',
+                'select-state'     => 'Bölge Seç',
+                'shipping-address' => 'Teslimat Adresi',
+                'state'            => 'Bölge',
+                'street-address'   => 'Sokak Adresi',
+                'telephone'        => 'Telefon',
+                'title'            => 'Adres',
             ],
 
             'index' => [
@@ -778,6 +754,12 @@ return [
             'offer'               => '1. siparişinizde %40\'a varan İNDİRİM ALIŞVERİŞ YAPIN',
             'resend-verify-email' => 'Doğrulama E-postası Tekrar Gönder',
             'verify-email'        => 'E-posta hesabınızı doğrulayın',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Toplam :total girdinin :firstItem ile :lastItem arası gösteriliyor',
         ],
     ],
 

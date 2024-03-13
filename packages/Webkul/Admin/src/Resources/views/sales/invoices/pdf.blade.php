@@ -193,7 +193,7 @@
                                 <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
                             </div>
 
-                            <div>{{ core()->getConfigData('sales.shipping.origin.address1') ?? '' }}</div>
+                            <div>{{ core()->getConfigData('sales.shipping.origin.address') ?? '' }}</div>
 
                             <div>
                                 <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ?? '' }}</span>
@@ -272,7 +272,7 @@
 
                                             <p>{{ $invoice->order->$addressType->name }}</p>
 
-                                            <p>{{ $invoice->order->$addressType->address1 }}</p>
+                                            <p>{{ $invoice->order->$addressType->address }}</p>
 
                                             <p>{{ $invoice->order->$addressType->postcode . ' ' . $invoice->order->$addressType->city }}</p>
 

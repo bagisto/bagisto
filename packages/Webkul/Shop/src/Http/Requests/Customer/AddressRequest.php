@@ -3,7 +3,6 @@
 namespace Webkul\Shop\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Rules\Address;
 use Webkul\Core\Rules\AlphaNumericSpace;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Customer\Rules\VatIdRule;
@@ -31,8 +30,7 @@ class AddressRequest extends FormRequest
             'company_name' => [new AlphaNumericSpace],
             'first_name'   => ['required', new AlphaNumericSpace],
             'last_name'    => ['required', new AlphaNumericSpace],
-            'address1'     => ['required', 'array'],
-            'address1.*'   => ['required', new Address],
+            'address'      => ['required', 'array', 'min:1'],
             'country'      => core()->isCountryRequired() ? ['required', new AlphaNumericSpace] : [new AlphaNumericSpace],
             'state'        => core()->isStateRequired() ? ['required', new AlphaNumericSpace] : [new AlphaNumericSpace],
             'city'         => ['required', 'string'],
@@ -51,7 +49,7 @@ class AddressRequest extends FormRequest
     public function attributes()
     {
         return [
-            'address1.*' => 'address',
+            'address.*' => 'address',
         ];
     }
 }

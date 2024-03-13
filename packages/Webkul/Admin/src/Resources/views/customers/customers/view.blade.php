@@ -31,7 +31,7 @@
     <!-- Filters -->
     <div class="flex gap-x-1 gap-y-2 items-center flex-wrap mt-7">
         <!-- Address Create component -->
-        @include('admin::customers.addresses.create')
+        @include('admin::customers.customers.view.addresses.create')
 
         <!-- Account Delete button -->
         @if (bouncer()->hasPermission('customers.customers.delete'))
@@ -173,7 +173,7 @@
                                             <p class="text-gray-600 dark:text-gray-300">
                                                 {{
                                                     collect([
-                                                        $order->billingAddress->address1,
+                                                        $order->billingAddress->address,
                                                         $order->billingAddress->city,
                                                         $order->billingAddress->state,
                                                     ])
@@ -569,7 +569,10 @@
             <!-- Information -->
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
 
-            <v-customer-details ref="customerDetails"></v-customer-details>
+            <v-customer-details ref="customerDetails">
+                <!-- Shimmer Effect -->
+                <x-admin::shimmer.accordion class="w-[360px] h-[271px]" />
+            </v-customer-details>
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.before') !!}
 
@@ -598,11 +601,7 @@
                                 </p>
 
                                 <p class="text-gray-600 dark:text-gray-300">
-                                    {{ $address->address1 }},
-
-                                    @if ($address->address2)
-                                        {{ $address->address2 }},
-                                    @endif
+                                    {{ $address->address }},
 
                                     {{ $address->city }},
                                     {{ $address->state }},
@@ -624,7 +623,7 @@
 
                                 <div class="flex gap-2.5">
                                     <!-- Edit Address -->
-                                    @include('admin::customers.addresses.edit')
+                                    @include('admin::customers.customers.view.addresses.edit')
 
                                     <!-- Delete Address -->
                                     @if (bouncer()->hasPermission('customers.addresses.delete'))
@@ -723,7 +722,7 @@
                             </p>
 
                             <!--Customer Edit Component -->
-                            @include('admin::customers.customers.edit')
+                            @include('admin::customers.customers.view.edit')
                         </div>
                     </x-slot:header>
 
