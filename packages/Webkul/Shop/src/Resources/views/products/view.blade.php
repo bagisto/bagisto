@@ -7,6 +7,8 @@
     $percentageRatings = $reviewHelper->getPercentageRating($product);
 
     $customAttributeValues = $productViewHelper->getAdditionalData($product);
+
+    $attributeData = collect($customAttributeValues)->filter(fn ($item) => ! empty($item['value']));
 @endphp
 
 <!-- SEO Meta Content -->
@@ -86,56 +88,53 @@
 
             {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
 
-
             <!-- Additional Information Tab -->
-            <x-shop::tabs.item
-                class="container mt-[60px] !p-0 max-1180:hidden"
-                :title="trans('shop::app.products.view.additional-information')"
-                :is-selected="false"
-            >
-                <div class="container mt-[60px] max-1180:px-5">
-                    <div class="grid gap-4 grid-cols-[auto_1fr] max-w-max mt-8">
-                        @foreach ($customAttributeValues as $customAttributeValue)
-                            <div class="grid">
-                                <p class="text-base text-black">
-                                    {!! $customAttributeValue['label'] !!}
-                                </p>
-                            </div>
+            @if(count($attributeData))
+                <x-shop::tabs.item
+                    class="container mt-[60px] !p-0 max-1180:hidden"
+                    :title="trans('shop::app.products.view.additional-information')"
+                    :is-selected="false"
+                >
+                    <div class="container mt-[60px] max-1180:px-5">
+                        <div class="grid gap-4 grid-cols-[auto_1fr] max-w-max mt-8">
+                            @foreach ($customAttributeValues as $customAttributeValue)
+                                @if (! empty($customAttributeValue['value']))
+                                    <div class="grid">
+                                        <p class="text-base text-black">
+                                            {!! $customAttributeValue['label'] !!}
+                                        </p>
+                                    </div>
 
-                            @if (
-                                $customAttributeValue['type'] == 'file'
-                                && $customAttributeValue['value']
-                            )
-                                <a
-                                    href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                    download="{{ $customAttributeValue['label'] }}"
-                                >
-                                    <span class="icon-download text-2xl"></span>
-                                </a>
-                            @elseif (
-                                $customAttributeValue['type'] == 'image'
-                                && $customAttributeValue['value']
-                            )
-                                <a
-                                    href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                    download="{{ $customAttributeValue['label'] }}"
-                                >
-                                    <img 
-                                        class="h-5 w-5 min-h-5 min-w-5"
-                                        src="{{ Storage::url($customAttributeValue['value']) }}"
-                                    />
-                                </a>
-                            @else 
-                                <div class="grid">
-                                    <p class="text-base text-[#7D7D7D]">
-                                        {!! $customAttributeValue['value'] ? $customAttributeValue['value'] : '-' !!}
-                                    </p>
-                                </div>
-                            @endif
-                        @endforeach
+                                    @if ($customAttributeValue['type'] == 'file')
+                                        <a 
+                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                            download="{{ $customAttributeValue['label'] }}"
+                                        >
+                                            <span class="icon-download text-2xl"></span>
+                                        </a>
+                                    @elseif ($customAttributeValue['type'] == 'image')
+                                        <a 
+                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                            download="{{ $customAttributeValue['label'] }}"
+                                        >
+                                            <img 
+                                                class="h-5 w-5 min-h-5 min-w-5" 
+                                                src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                            />
+                                        </a>
+                                    @else
+                                        <div class="grid">
+                                            <p class="text-base text-[#7D7D7D]">
+                                                {!! $customAttributeValue['value'] !!}
+                                            </p>
+                                        </div>
+                                    @endif
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-            </x-shop::tabs.item>
+                </x-shop::tabs.item>
+            @endif
 
             <!-- Reviews Tab -->
             <x-shop::tabs.item
@@ -166,47 +165,56 @@
         </x-shop::accordion>
 
         <!-- Additional Information Accordion -->
-        <x-shop::accordion class="bg-gray-100" :is-active="false">
-            <x-slot:header>
-                <p class="text-base font-medium 1180:hidden">
-                    @lang('shop::app.products.view.additional-information')
-                </p>
-            </x-slot>
-
-            <x-slot:content>
-                <div class="container mt-5 mb-5 max-1180:px-5">
-                    <p class="text-[#6E6E6E] text-lg max-1180:text-sm">
-                        @foreach ($customAttributeValues as $customAttributeValue)
-                            <div class="grid">
-                                <p class="text-base text-black">
-                                    {{ $customAttributeValue['label'] }}
-                                </p>
-                            </div>
-
-                            @if (
-                                $customAttributeValue['type'] == 'file'
-                                || $customAttributeValue['type'] == 'image'
-                            )
-                                <a
-                                    href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                    download="{{ $customAttributeValue['label'] }}"
-                                >
-                                    <p class="text-base text-blue-500 underline">
-                                        {{ $customAttributeValue['label'] }}
-                                    </p>
-                                </a>
-                            @else 
-                                <div class="grid">
-                                    <p class="text-base text-[#6E6E6E]">
-                                        {{ $customAttributeValue['value'] ?? '-' }}
-                                    </p>
-                                </div>
-                            @endif
-                        @endforeach
+        @if (count($attributeData))
+            <x-shop::accordion class="bg-gray-100" :is-active="false">
+                <x-slot:header>
+                    <p class="text-base font-medium 1180:hidden">
+                        @lang('shop::app.products.view.additional-information')
                     </p>
-                </div>
-            </x-slot>
-        </x-shop::accordion>
+                </x-slot>
+
+                <x-slot:content>
+                    <div class="container mb-4 max-1180:px-5">
+                        <div class="grid gap-4 grid-cols-[auto_1fr] max-w-max text-[#6E6E6E] text-lg max-1180:text-sm">
+                            @foreach ($customAttributeValues as $customAttributeValue)
+                                @if (! empty($customAttributeValue['value']))
+                                    <div class="grid">
+                                        <p class="text-base text-black">
+                                            {{ $customAttributeValue['label'] }}
+                                        </p>
+                                    </div>
+
+                                    @if ($customAttributeValue['type'] == 'file')
+                                        <a
+                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
+                                            download="{{ $customAttributeValue['label'] }}"
+                                        >
+                                            <span class="icon-download text-2xl"></span>
+                                        </a>
+                                    @elseif ($customAttributeValue['type'] == 'image')
+                                        <a 
+                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                            download="{{ $customAttributeValue['label'] }}"
+                                        >
+                                            <img 
+                                                class="h-5 w-5 min-h-5 min-w-5" 
+                                                src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                            />
+                                        </a>
+                                    @else
+                                        <div class="grid">
+                                            <p class="text-base text-[#6E6E6E]">
+                                                {{ $customAttributeValue['value'] ?? '-' }}
+                                            </p>
+                                        </div>
+                                    @endif 
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </x-slot>
+            </x-shop::accordion>
+        @endif
 
         <!-- Reviews Accordion -->
         <x-shop::accordion class="bg-gray-100" :is-active="false">
@@ -291,7 +299,7 @@
                                     @endif
                                 </div>
 
-                                {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
+                                {!! view_render_event('bagisto.shop.products.name.after', ['product' => $product]) !!}
 
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
@@ -381,7 +389,7 @@
                                         :loading="false"
                                         :title="trans('shop::app.products.view.add-to-cart')"
                                         :disabled="! $product->isSaleable(1)"
-                                        ref="addToCartButton"
+                                        ::loading="isStoring.addToCart"
                                     />
 
                                     {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
@@ -397,8 +405,7 @@
                                         button-type="secondary-button"
                                         :title="trans('shop::app.products.view.buy-now')"
                                         :disabled="! $product->isSaleable(1)"
-                                        :loading="false"
-                                        ref="buyNowButton"
+                                        ::loading="isStoring.buyNow"
                                         @click="is_buy_now=1;"
                                     />
                                 @endif
@@ -451,14 +458,20 @@
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
 
                         is_buy_now: 0,
+
+                        isStoring: {
+                            addToCart: false,
+
+                            buyNow: false,
+                        },
                     }
                 },
 
                 methods: {
                     addToCart(params) {
-                        const operation = this.is_buy_now ? 'buyNowButton' : 'addToCartButton';
+                        const operation = this.is_buy_now ? 'buyNow' : 'addToCart';
 
-                        this.$refs[operation].isLoading = true;
+                        this.isStoring[operation] = true;
 
                         let formData = new FormData(this.$refs.formData);
 
@@ -480,10 +493,10 @@
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                                 }
 
-                                this.$refs[operation].isLoading = false;
+                                this.isStoring[operation] = false;
                             })
                             .catch(error => {
-                                this.$refs[operation].isLoading=false;
+                                this.isStoring[operation] = false;
                             });
                     },
 

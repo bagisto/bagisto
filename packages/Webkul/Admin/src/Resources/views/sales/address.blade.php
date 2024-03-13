@@ -8,11 +8,7 @@
     </p>
     
     <p class="text-gray-600 dark:text-gray-300 !leading-6">
-        {{ $address->address1 }}<br>
-
-        @if ($address->address2)
-            {{ $address->address2 }}<br>
-        @endif
+        {{ $address->address }}<br>
 
         {{ $address->city }}<br>
 

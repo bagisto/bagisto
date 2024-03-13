@@ -545,13 +545,15 @@ return [
         'sort'   => 8,
         'fields' => [
             [
-                'name'  => 'image_attribute_upload_size',
-                'title' => 'admin::app.configuration.index.catalog.products.attribute.image-upload-size',
-                'type'  => 'text',
+                'name'       => 'image_attribute_upload_size',
+                'title'      => 'admin::app.configuration.index.catalog.products.attribute.image-upload-size',
+                'type'       => 'text',
+                'validation' => 'numeric',
             ], [
-                'name'  => 'file_attribute_upload_size',
-                'title' => 'admin::app.configuration.index.catalog.products.attribute.file-upload-size',
-                'type'  => 'text',
+                'name'       => 'file_attribute_upload_size',
+                'title'      => 'admin::app.configuration.index.catalog.products.attribute.file-upload-size',
+                'type'       => 'text',
+                'validation' => 'numeric',
             ],
         ],
     ], [
@@ -964,7 +966,7 @@ return [
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
-                'name'          => 'address1',
+                'name'          => 'address',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.street-address',
                 'type'          => 'text',
                 'validation'    => 'required',

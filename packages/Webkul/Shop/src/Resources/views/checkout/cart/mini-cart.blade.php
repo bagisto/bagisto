@@ -329,16 +329,22 @@
                 },
 
                 removeItem(itemId) {
-                    this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
-                            '_method': 'DELETE',
-                            'cart_item_id': itemId,
-                        })
-                        .then(response => {
-                            this.cart = response.data.data;
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
+                                '_method': 'DELETE',
+                                'cart_item_id': itemId,
+                            })
+                            .then(response => {
+                                this.cart = response.data.data;
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                        })
-                        .catch(error => {});
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            })
+                            .catch(error => {
+                                    this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                            });
+                        }
+                    });
                 },
             },
         });

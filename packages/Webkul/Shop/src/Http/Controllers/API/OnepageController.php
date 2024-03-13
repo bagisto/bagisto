@@ -9,7 +9,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
-use Webkul\Shop\Http\Requests\Customer\CustomerAddressForm;
+use Webkul\Shop\Http\Requests\CartAddressRequest;
 use Webkul\Shop\Http\Resources\CartResource;
 
 class OnepageController extends APIController
@@ -26,7 +26,7 @@ class OnepageController extends APIController
     }
 
     /**
-     * Return order short summary.
+     * Return cart summary.
      */
     public function summary(): JsonResource
     {
@@ -36,11 +36,11 @@ class OnepageController extends APIController
     }
 
     /**
-     * Store customer address.
+     * Store address.
      */
-    public function storeAddress(CustomerAddressForm $request): JsonResource
+    public function storeAddress(CartAddressRequest $cartAddressRequest): JsonResource
     {
-        $data = $request->all();
+        $params = $cartAddressRequest->all();
 
         if (
             ! auth()->guard('customer')->check()
@@ -52,19 +52,14 @@ class OnepageController extends APIController
             ]);
         }
 
-        $data['billing']['address1'] = implode(PHP_EOL, $data['billing']['address1']);
-
-        $data['shipping']['address1'] = implode(PHP_EOL, $data['shipping']['address1']);
-
-        if (
-            Cart::hasError()
-            || ! Cart::saveCustomerAddress($data)
-        ) {
+        if (Cart::hasError()) {
             return new JsonResource([
-                'redirect' => true,
-                'data'     => route('shop.checkout.cart.index'),
+                'redirect'     => true,
+                'redirect_url' => route('shop.checkout.cart.index'),
             ]);
         }
+
+        Cart::saveAddresses($params);
 
         $cart = Cart::getCart();
 
@@ -73,8 +68,8 @@ class OnepageController extends APIController
         if ($cart->haveStockableItems()) {
             if (! $rates = Shipping::collectRates()) {
                 return new JsonResource([
-                    'redirect' => true,
-                    'data'     => route('shop.checkout.cart.index'),
+                    'redirect'     => true,
+                    'redirect_url' => route('shop.checkout.cart.index'),
                 ]);
             }
 
@@ -149,7 +144,7 @@ class OnepageController extends APIController
     /**
      * Store order
      */
-    public function storeOrder(): JsonResource
+    public function storeOrder()
     {
         if (Cart::hasError()) {
             return new JsonResource([
@@ -160,7 +155,13 @@ class OnepageController extends APIController
 
         Cart::collectTotals();
 
-        $this->validateOrder();
+        try {
+            $this->validateOrder();
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
 
         $cart = Cart::getCart();
 

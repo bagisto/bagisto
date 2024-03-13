@@ -4,6 +4,8 @@ namespace Webkul\Checkout;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
+use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
+use Webkul\Checkout\Exceptions\BillingAddressNotFoundException;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Repositories\CartAddressRepository;
@@ -344,31 +346,120 @@ class Cart
     }
 
     /**
-     * Save customer address.
-     *
-     * @param  array  $data
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * Update or create billing address.
      */
-    public function saveCustomerAddress($data): bool
+    public function saveAddresses(array $params): void
     {
-        $cart = $this->getCart();
+        $this->updateOrCreateBillingAddress($params['billing']);
 
-        if (! $cart) {
-            return false;
+        $this->updateOrCreateShippingAddress($params['shipping'] ?? []);
+
+        $this->saveCustomerDetails();
+
+        $this->resetShippingMethod();
+    }
+
+    /**
+     * Update or create billing address.
+     */
+    public function updateOrCreateBillingAddress(array $params): CartAddressContract
+    {
+        $params = collect($params)
+            ->only([
+                'use_for_shipping',
+                'default_address',
+                'company_name',
+                'first_name',
+                'last_name',
+                'email',
+                'address',
+                'country',
+                'state',
+                'city',
+                'postcode',
+                'phone',
+            ])
+            ->merge([
+                'address_type'      => CartAddress::ADDRESS_TYPE_BILLING,
+                'parent_address_id' => ($params['address_type'] ?? '') == 'customer' ? $params['id'] : null,
+                'cart_id'           => $this->cart->id,
+                'customer_id'       => $this->cart->customer_id,
+                'address'           => implode(PHP_EOL, $params['address']),
+                'use_for_shipping'  => (bool) ($params['use_for_shipping'] ?? false),
+            ])
+            ->toArray();
+
+        return $this->cart->billing_address
+            ? $this->cartAddressRepository->update($params, $this->cart->billing_address->id)
+            : $this->cartAddressRepository->create($params);
+    }
+
+    /**
+     * Update or create shipping address.
+     */
+    public function updateOrCreateShippingAddress(array $params): ?CartAddressContract
+    {
+        if (! $this->cart->billing_address) {
+            throw new BillingAddressNotFoundException;
         }
 
-        $billingAddress = array_merge($this->collectAddress($data['billing']), [
-            'cart_id'          => $cart->id,
-            'use_for_shipping' => $data['billing']['use_for_shipping'] ?? 0,
-        ]);
+        $fillableFields = [
+            'default_address',
+            'company_name',
+            'first_name',
+            'last_name',
+            'email',
+            'address',
+            'country',
+            'state',
+            'city',
+            'postcode',
+            'phone',
+        ];
 
-        $shippingAddress = array_merge($this->collectAddress($data['shipping']), [
-            'cart_id' => $cart->id,
-        ]);
+        if ($this->cart->billing_address->use_for_shipping) {
+            $params = $this->cart->billing_address->only($fillableFields);
 
-        $this->updateOrCreateAddress($cart, $billingAddress, $shippingAddress);
+            $params = array_merge($params, [
+                'address_type'      => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'parent_address_id' => $this->cart->billing_address->parent_address_id,
+                'cart_id'           => $this->cart->id,
+                'customer_id'       => $this->cart->customer_id,
+            ]);
+        } else {
+            if (empty($params)) {
+                return null;
+            }
 
+            $params = collect($params)
+                ->only($fillableFields)
+                ->merge([
+                    'address_type'      => CartAddress::ADDRESS_TYPE_SHIPPING,
+                    'parent_address_id' => ($params['address_type'] ?? '') == 'customer' ? $params['id'] : null,
+                    'cart_id'           => $this->cart->id,
+                    'customer_id'       => $this->cart->customer_id,
+                    'address'           => implode(PHP_EOL, $params['address']),
+                ])
+                ->toArray();
+        }
+
+        /**
+         * If cart have stockable items then update or create shipping address.
+         */
+        if ($this->cart->haveStockableItems()) {
+            return $this->cart->shipping_address
+                ? $this->cartAddressRepository->update($params, $this->cart->shipping_address->id)
+                : $this->cartAddressRepository->create($params);
+        }
+
+        return null;
+    }
+
+    /**
+     * Save customer details.
+     */
+    public function saveCustomerDetails(): void
+    {
         if (
             ($user = auth()->guard()->user())
             && (
@@ -377,20 +468,16 @@ class Cart
                 && $user->last_name
             )
         ) {
-            $cart->customer_email = $user->email;
-            $cart->customer_first_name = $user->first_name;
-            $cart->customer_last_name = $user->last_name;
+            $this->cart->customer_email = $user->email;
+            $this->cart->customer_first_name = $user->first_name;
+            $this->cart->customer_last_name = $user->last_name;
         } else {
-            $cart->customer_email = $cart->billing_address->email;
-            $cart->customer_first_name = $cart->billing_address->first_name;
-            $cart->customer_last_name = $cart->billing_address->last_name;
+            $this->cart->customer_email = $this->cart->billing_address->email;
+            $this->cart->customer_first_name = $this->cart->billing_address->first_name;
+            $this->cart->customer_last_name = $this->cart->billing_address->last_name;
         }
 
-        $cart->save();
-
-        $this->collectTotals();
-
-        return true;
+        $this->cart->save();
     }
 
     /**
@@ -411,6 +498,25 @@ class Cart
         }
 
         $cart->shipping_method = $shippingMethodCode;
+        $cart->save();
+
+        return true;
+    }
+
+    /**
+     * Save shipping method for cart.
+     */
+    public function resetShippingMethod(): bool
+    {
+        $cart = $this->getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        Shipping::removeAllShippingRates();
+
+        $cart->shipping_method = null;
         $cart->save();
 
         return true;

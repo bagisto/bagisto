@@ -40,7 +40,7 @@
                         <div
                             class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9]"
                             @click="removeAll"
-                            v-if="wishlist.length"
+                            v-if="wishlistItems.length"
                         >
                             <span class="icon-bin text-2xl"></span>
                             @lang('shop::app.customers.account.wishlist.delete-all')
@@ -50,8 +50,8 @@
                     </div>
 
                     <div 
-                        v-if="wishlist.length" 
-                        v-for="(item,index) in wishlist"
+                        v-if="wishlistItems.length" 
+                        v-for="(item, index) in wishlistItems"
                         class="flex gap-20 flex-wrap mt-8 max-1060:flex-col"
                     >
                         <div class="grid gap-8 flex-1">
@@ -83,7 +83,7 @@
                                             <!--Wishlist Item attributes -->
                                             <div 
                                                 class="flex gap-x-2.5 gap-y-1.5 flex-wrap"
-                                                v-if="item.options.length"
+                                                v-if="item.options?.attributes"
                                             >
                                                 <div class="grid gap-2">
                                                     <div class="">
@@ -105,7 +105,7 @@
                                                         class="grid gap-2" 
                                                         v-show="item.option_show"
                                                     >
-                                                        <div v-for="option in item.options">
+                                                        <div v-for="option in item.options?.attributes">
                                                             <p class="text-sm font-medium">
                                                                 @{{ option.attribute_name + ':' }}
                                                             </p>
@@ -143,6 +143,7 @@
                                             <div class="flex gap-5 flex-wrap">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
+                                                    ::value="item.options.quantity ?? 1"
                                                     class="flex gap-x-2.5 items-center max-h-10 py-1.5 px-3.5 border border-navyBlue  rounded-[54px]"
                                                     @change="setItemQuantity($event, item)"
                                                 />
@@ -151,8 +152,8 @@
                                                 <x-shop::button
                                                     class="primary-button w-max max-h-10 py-1.5 px-6 rounded-2xl text-base text-center"
                                                     :title="trans('shop::app.customers.account.wishlist.move-to-cart')"
-                                                    :loading="false"
-                                                    ref="moveToCart"
+                                                    ::loading="isMovingToCart[item.id]"
+                                                    ::disabled="isMovingToCart[item.id]"
                                                     @click="moveToCart(item.id,index)"
                                                 />
                                             </div>
@@ -211,7 +212,9 @@
                     return {
                         isLoading: true,
 
-                        wishlist: [],
+                        isMovingToCart: {},
+
+                        wishlistItems: [],
                     };
                 },
 
@@ -225,8 +228,7 @@
                             .then(response => {
                                 this.isLoading = false;
 
-                                this.wishlist = response.data.data
-                                    .map((wishlist) => ({ ...wishlist, quantity: 1 }));
+                                this.wishlistItems = response.data.data;
                             })
                             .catch(error => {});
                     },
@@ -234,7 +236,7 @@
                     remove(id) {
                         this.$axios.delete(`{{ route('shop.api.customers.account.wishlist.destroy', '') }}/${id}`)
                             .then(response => {
-                                this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+                                this.wishlistItems = this.wishlistItems.filter(item => item.id != id);
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
@@ -249,7 +251,7 @@
                                     '_method': 'DELETE',
                                 })
                                 .then(response => {
-                                    this.wishlist = [];
+                                    this.wishlistItems = [];
 
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                                 })
@@ -259,40 +261,42 @@
                     },
 
                     moveToCart(id, index) {
-                        this.$refs.moveToCart[index].isLoading = true;
+                        this.isMovingToCart[id] = true;
 
-                        let url = `{{ route('shop.api.customers.account.wishlist.move_to_cart', ':wishlist_id:') }}`;
-                        url = url.replace(':wishlist_id:', id);
+                        let url = `{{ route('shop.api.customers.account.wishlist.move_to_cart', ':wishlist_id:') }}`.replace(':wishlist_id:', id);
 
-                        let existingItem = this.wishlist.find(item => item.id == id);
+                        let existingItem = this.wishlistItems.find(item => item.id == id);
 
-                        if (existingItem) {
-                            this.$axios.post(url, {
-                                    quantity: existingItem.quantity,
-                                    product_id: id
-                                })
-                                .then(response => {
-                                    if (response.data.redirect) {
-                                        this.$emitter.emit('add-flash', { type: 'warning', message: response.data.message });
-
-                                        window.location.href = response.data.data;
-                                    } else {
-                                        this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
-
-                                        this.$emitter.emit('update-mini-cart', response.data.data.cart);
-
-                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                                    }
-
-                                    this.$refs.moveToCart.map((item) => item.isLoading =  false);
-                                })
-                                .catch(error => {
-                                    this.$refs.moveToCart.map((item) => item.isLoading =  false);
-                                });
+                        if (! existingItem) {
+                            return
                         }
+
+                        this.$axios.post(url, {
+                                quantity: existingItem.quantity ?? existingItem.options.quantity,
+                                product_id: id
+                            })
+                            .then(response => {
+                                if (response.data.redirect) {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.message });
+
+                                    window.location.href = response.data.data;
+                                } else {
+                                    this.wishlistItems = this.wishlistItems.filter(item => item.id != id);
+
+                                    this.$emitter.emit('update-mini-cart', response.data.data.cart);
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                }
+
+                                this.isMovingToCart[id] = false;
+                            })
+                            .catch(error => {
+                                this.isMovingToCart[id] = false;
+                            });
                     },
+
                     setItemQuantity(quantity, requestedItem) {
-                        let existingItem = this.wishlist.find((item) => item.id === requestedItem.id);
+                        let existingItem = this.wishlistItems.find((item) => item.id === requestedItem.id);
 
                         if (existingItem) {
                             existingItem.quantity = quantity;

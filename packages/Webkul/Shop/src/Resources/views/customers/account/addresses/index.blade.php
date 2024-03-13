@@ -51,7 +51,7 @@
                             @endif
 
                             <!-- Dropdown Actions -->
-                            <x-shop::dropdown position="bottom-right">
+                            <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                                 <x-slot:toggle>
                                     <button class="icon-more px-1.5 py-1 rounded-md text-2xl text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
                                 </x-slot>
@@ -89,41 +89,39 @@
                                         </a>
                                     </x-shop::dropdown.menu.item>
 
-                                    <x-shop::dropdown.menu.item>
-                                        <form
-                                            method="POST"
-                                            ref="setAsDefault"
-                                            action="{{ route('shop.customers.account.addresses.update.default', $address->id) }}"
-                                        >
-                                            @method('PATCH')
-                                            @csrf
+                                    @if (! $address->default_address)
+                                        <x-shop::dropdown.menu.item>
+                                            <form
+                                                method="POST"
+                                                ref="setAsDefault"
+                                                action="{{ route('shop.customers.account.addresses.update.default', $address->id) }}"
+                                            >
+                                                @method('PATCH')
+                                                @csrf
 
-                                        </form>
+                                            </form>
 
-                                        <a 
-                                            href="javascript:void(0);"                                                
-                                            @click="$emitter.emit('open-confirm-modal', {
-                                                agree: () => {
-                                                    $refs['setAsDefault'].submit()
-                                                }
-                                            })"
-                                        >
-                                            <button>
-                                                @lang('shop::app.customers.account.addresses.set-as-default')
-                                            </button>
-                                        </a>
-                                    </x-shop::dropdown.menu.item>
+                                            <a 
+                                                href="javascript:void(0);"                                                
+                                                @click="$emitter.emit('open-confirm-modal', {
+                                                    agree: () => {
+                                                        $refs['setAsDefault'].submit()
+                                                    }
+                                                })"
+                                            >
+                                                <button>
+                                                    @lang('shop::app.customers.account.addresses.set-as-default')
+                                                </button>
+                                            </a>
+                                        </x-shop::dropdown.menu.item>
+                                    @endif
                                 </x-slot>
                             </x-shop::dropdown>
                         </div>
                     </div>
 
                     <p class="text-[#6E6E6E] mt-6">
-                        {{ $address->address1 }},
-
-                        @if ($address->address2)
-                            {{ $address->address2 }},
-                        @endif
+                        {{ $address->address }},
 
                         {{ $address->city }}, 
                         {{ $address->state }}, {{ $address->country }}, 

@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Already Password Reset Mail Sent.',
             'back'                 => 'Back to sign In ?',
             'bagisto'              => 'Bagisto',
             'email'                => 'Email',
@@ -116,6 +117,7 @@ return [
                 'edit'             => 'Edit',
                 'edit-address'     => 'Edit Address',
                 'edit-success'     => 'Address updated successfully.',
+                'email'            => 'Email',
                 'empty-address'    => 'You have not added an address to your account yet.',
                 'first-name'       => 'First Name',
                 'last-name'        => 'Last Name',
@@ -272,11 +274,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'Available',
+                'completed'           => 'Completed',
                 'date'                => 'Date',
                 'download-error'      => 'Download link has been expired.',
+                'expired'             => 'Expired',
                 'empty-product'       => 'You don’t have a product to download',
                 'name'                => 'Downloadable Products',
                 'orderId'             => 'Order Id',
+                'pending'             => 'Pending',
                 'payment-error'       => 'Payment has not been done for this download.',
                 'records-found'       => 'Record(s) found',
                 'remaining-downloads' => 'Remaining Downloads',
@@ -408,9 +414,12 @@ return [
                 'actions'              => 'Actions',
                 'next-page'            => 'Next Page',
                 'no-records-available' => 'No Records Available.',
+                'of'                   => 'of :total entries',
                 'page-navigation'      => 'Page Navigation',
                 'page-number'          => 'Page Number',
                 'previous-page'        => 'Previous Page',
+                'showing'              => 'Showing :firstItem',
+                'to'                   => 'to :lastItem',
             ],
         ],
 
@@ -687,54 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'      => 'Add new address',
-                    'back'                 => 'Back',
-                    'billing-address'      => 'Billing Address',
-                    'city'                 => 'City',
-                    'company-name'         => 'Company Name',
-                    'confirm'              => 'Confirm',
-                    'country'              => 'Country',
-                    'email'                => 'Email',
-                    'first-name'           => 'First Name',
-                    'last-name'            => 'Last Name',
-                    'postcode'             => 'Zip/Postcode',
-                    'save'                 => 'Save',
-                    'same-billing-address' => 'Address is the same as my billing address',
-                    'save-address'         => 'Save this address',
-                    'select-country'       => 'Select Country',
-                    'select-state'         => 'Select State',
-                    'state'                => 'State',
-                    'street-address'       => 'Street Address',
-                    'telephone'            => 'Telephone',
-                ],
-
-                'index' => [
-                    'bagisto' => 'Bagisto',
-                    'confirm' => 'Confirm',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'Add new address',
-                    'back'             => 'Back',
-                    'city'             => 'City',
-                    'company-name'     => 'Company Name',
-                    'confirm'          => 'Confirm',
-                    'country'          => 'Country',
-                    'email'            => 'Email',
-                    'first-name'       => 'First Name',
-                    'last-name'        => 'Last Name',
-                    'postcode'         => 'Zip/Postcode',
-                    'save'             => 'Save',
-                    'save-address'     => 'Save this address',
-                    'select-country'   => 'Select Country',
-                    'select-state'     => 'Select State',
-                    'shipping-address' => 'Shipping Address',
-                    'state'            => 'State',
-                    'street-address'   => 'Street address',
-                    'telephone'        => 'Telephone',
-                ],
+            'address' => [
+                'add-new-address'  => 'Add new address',
+                'add-new'          => 'Add new address',
+                'back'             => 'Back',
+                'billing-address'  => 'Billing Address',
+                'city'             => 'City',
+                'company-name'     => 'Company Name',
+                'confirm'          => 'Confirm',
+                'country'          => 'Country',
+                'email'            => 'Email',
+                'first-name'       => 'First Name',
+                'last-name'        => 'Last Name',
+                'postcode'         => 'Zip/Postcode',
+                'proceed'          => 'Proceed',
+                'same-as-billing'  => 'Use same address for shipping?',
+                'save-address'     => 'Save this to address book',
+                'save'             => 'Save',
+                'select-country'   => 'Select Country',
+                'select-state'     => 'Select State',
+                'shipping-address' => 'Shipping Address',
+                'state'            => 'State',
+                'street-address'   => 'Street Address',
+                'telephone'        => 'Telephone',
+                'title'            => 'Address',
             ],
 
             'index' => [
@@ -769,6 +754,12 @@ return [
             'offer'               => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
             'resend-verify-email' => 'Resend Verification Email',
             'verify-email'        => 'Verify your email account',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Showing :firstItem to :lastItem of :total entries',
         ],
     ],
 

@@ -94,7 +94,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
             Route::post('', 'store')->name('api.shop.customers.account.addresses.store');
 
-            Route::post('edit', 'update')->name('api.shop.customers.account.addresses.update');
+            Route::put('edit/{id?}', 'update')->name('api.shop.customers.account.addresses.update');
         });
 
         Route::controller(WishlistController::class)->prefix('wishlist')->group(function () {

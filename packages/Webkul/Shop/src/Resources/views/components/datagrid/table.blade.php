@@ -50,7 +50,6 @@
                             <!-- Columns -->
                             <p
                                 v-for="column in $parent.available.columns"
-                                v-if="$parent.available.actions.length"
                                 class="flex items-center gap-1.5"
                                 :class="{'cursor-pointer select-none': column.sortable}"
                                 @click="$parent.sortPage(column)"
@@ -65,7 +64,10 @@
                             </p>
 
                             <!-- Actions -->
-                            <p class="place-self-end">
+                            <p
+                                class="place-self-end"
+                                v-if="$parent.available.actions.length"
+                            >
                                 @lang('shop::app.components.datagrid.table.actions')
                             </p>
                         </div>
@@ -155,7 +157,11 @@
                         <!-- Information Panel -->
                         <div v-if="$parent.available.records.length" class="flex justify-between items-center p-6">
                             <p class="text-xs font-medium">
-                                Showing @{{ $parent.available.meta.from }} to @{{ $parent.available.meta.to }} of @{{ $parent.available.meta.total }} entries
+                                <p class="text-xs font-medium">
+                                    @{{ "@lang('shop::app.components.datagrid.table.showing')".replace(':firstItem', $parent.available.meta.from) }}
+                                    @{{ "@lang('shop::app.components.datagrid.table.to')".replace(':lastItem', $parent.available.meta.to) }}
+                                    @{{ "@lang('shop::app.components.datagrid.table.of')".replace(':total', $parent.available.meta.total) }}
+                                </p>
                             </p>
 
                             <!-- Pagination -->
@@ -180,10 +186,10 @@
                                     <li @click="$parent.changePage('previous')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-l-lg leading-normal font-medium hover:bg-gray-100"
+                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] ltr:rounded-l-lg rtl:rounded-r-lg leading-normal font-medium hover:bg-gray-100"
                                             aria-label="@lang('shop::app.components.datagrid.table.previous-page')"
                                         >
-                                            <span class="icon-arrow-left text-2xl"></span>
+                                            <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                                         </a>
                                     </li>
 
@@ -200,10 +206,10 @@
                                     <li @click="$parent.changePage('next')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-r-lg leading-normal font-medium hover:bg-gray-100"
+                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] ltr:rounded-r-lg rtl:rounded-l-lg leading-normal font-medium hover:bg-gray-100"
                                             aria-label="@lang('shop::app.components.datagrid.table.next-page')"
                                         >
-                                            <span class="icon-arrow-right text-2xl"></span>
+                                            <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>
                                         </a>
                                     </li>
                                 </ul>

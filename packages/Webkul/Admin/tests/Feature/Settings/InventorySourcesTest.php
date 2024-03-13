@@ -50,7 +50,7 @@ it('should store the newly created inventory sources', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.inventory_sources.store'), [
-        'code'           => $code = strtolower(fake()->word),
+        'code'           => $code = fake()->numerify('code#######'),
         'name'           => $name = fake()->name(),
         'priority'       => $priority = rand(1, 10),
         'contact_number' => $contactNumber = rand(1111111111, 9999999999),
