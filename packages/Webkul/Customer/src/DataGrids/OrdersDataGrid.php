@@ -34,7 +34,6 @@ class OrdersDataGrid extends DataGrid
                 'status',
                 'order_address_billing.email as customer_email',
                 'orders.cart_id as image',
-                DB::raw('(SELECT SUM(base_grand_total_invoiced) FROM orders WHERE customer_id = '.request()->route('id').' AND status NOT IN ("canceled", "closed")) AS revenue'),
                 DB::raw('CONCAT('.$getDbPrefix.'order_address_billing.first_name, " ", '.$getDbPrefix.'order_address_billing.last_name) as full_name'),
                 DB::raw('CONCAT('.$getDbPrefix.'order_address_billing.address, ", ", '.$getDbPrefix.'order_address_billing.city,", ", '.$getDbPrefix.'order_address_billing.state, ", ", '.$getDbPrefix.'order_address_billing.country) as location')
             )

@@ -1,13 +1,9 @@
 <div class="p-4 bg-white dark:bg-gray-900  rounded box-shadow">
-    <div class="flex justify-between">
-        <!-- Total Reviews Count -->
-        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-            @{{ "@lang('admin::app.customers.customers.view.invoices.count')".replace(':count', datagrids?.invoices?.meta?.total) }}
-        </p>
-    </div>
+    <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+        @lang('admin::app.customers.customers.view.invoices.count', ['count' => count($customer->invoices)])
+    </p>
 
     <x-admin::datagrid
-        ref="invoiceDatagrid"
         :src="route('admin.customers.customers.view', [
             'id'   => $customer->id,
             'type' => 'invoices'

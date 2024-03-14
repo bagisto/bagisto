@@ -2,18 +2,16 @@
     <div class="flex justify-between">
         <!-- Total Order Count -->
         <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-            @{{ "@lang('admin::app.customers.customers.view.orders.count')".replace(':count', datagrids?.orders?.meta?.total ?? 0) }}
+            @lang('admin::app.customers.customers.view.orders.count', ['count' => count($customer->orders)])
         </p>
-
 
         <!-- Total Order Revenue -->
         <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-            @{{ "@lang('admin::app.customers.customers.view.orders.total-revenue')".replace(':revenue', $admin.formatPrice(datagrids?.orders?.records[0]?.revenue ?? 00)) }}
+            @lang('admin::app.customers.customers.view.orders.total-revenue', ['revenue' => core()->formatPrice($customer->orders->whereNotIn('status', ['canceled', 'closed'])->sum('base_grand_total_invoiced'))])
         </p>
     </div>
 
     <x-admin::datagrid
-        ref="orderDatagrid"
         :src="route('admin.customers.customers.view', [
             'id'   => $customer->id,
             'type' => 'orders'

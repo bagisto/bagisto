@@ -2,12 +2,11 @@
     <div class="flex justify-between">
         <!-- Total Reviews Count -->
         <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-            @{{ "@lang('admin::app.customers.customers.view.reviews.count')".replace(':count', datagrids?.reviews?.meta?.total) }}
+            @lang('admin::app.customers.customers.view.reviews.count', ['count' => count($customer->reviews)])
         </p>
     </div>
 
     <x-admin::datagrid
-        ref="reviewDatagrid"
         :src="route('admin.customers.customers.view', [
             'id'   => $customer->id,
             'type' => 'reviews'
