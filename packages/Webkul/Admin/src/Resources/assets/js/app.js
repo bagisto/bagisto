@@ -57,8 +57,6 @@ import Draggable from "./plugins/draggable";
     Draggable,
 ].forEach((plugin) => app.use(plugin));
 
-
-
 /**
  * Global directives.
  */
@@ -72,3 +70,4 @@ app.directive("slugify-target", SlugifyTarget);
 app.directive("debounce", Debounce);
 app.directive("code", Code);
 
+export default app;

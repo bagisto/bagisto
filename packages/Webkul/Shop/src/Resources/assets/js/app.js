@@ -89,3 +89,5 @@ import Flatpickr from "./plugins/flatpickr";
     VeeValidate,
     Flatpickr,
 ].forEach((plugin) => app.use(plugin));
+
+export default app;
