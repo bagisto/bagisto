@@ -314,6 +314,8 @@
                                     @lang('admin::app.customers.customers.view.address.create.default-address')
                                 </label>
                             </x-admin::form.control-group>
+
+                            <x-admin::form.control-group.error control-name="default_address" />
                         </div>
 
                         {!! view_render_event('bagisto.admin.customers.create.after') !!}
@@ -362,6 +364,8 @@
             methods: {
                 create(params, { resetForm, setErrors }) {
                     this.isUpdating = true;
+
+                    params.default_address = params.default_address ?? 0;
 
                     this.$axios.post('{{ route('admin.customers.customers.addresses.store', $customer->id) }}', params)
                         .then((response) => {

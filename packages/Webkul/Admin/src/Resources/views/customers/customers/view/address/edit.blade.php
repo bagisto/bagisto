@@ -336,6 +336,8 @@
                                         @lang('admin::app.customers.customers.view.address.edit.default-address')
                                     </label>
                                 </x-admin::form.control-group>
+
+                                <x-admin::form.control-group.error control-name="default_address" />
                             </div>
 
                             {!! view_render_event('bagisto.admin.customers.edit.after') !!}

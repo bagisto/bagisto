@@ -54,15 +54,16 @@ class AddressController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'company_name' => [new AlphaNumericSpace],
-            'address'      => ['required', 'array'],
-            'country'      => ['required', new AlphaNumericSpace],
-            'state'        => ['required', new AlphaNumericSpace],
-            'city'         => ['required', 'string'],
-            'postcode'     => ['required', 'numeric'],
-            'phone'        => ['required', new PhoneNumber],
-            'vat_id'       => [new VatIdRule()],
-            'email'        => ['required'],
+            'company_name'    => [new AlphaNumericSpace],
+            'address'         => ['required', 'array'],
+            'country'         => ['required', new AlphaNumericSpace],
+            'state'           => ['required', new AlphaNumericSpace],
+            'city'            => ['required', 'string'],
+            'postcode'        => ['required', 'numeric'],
+            'phone'           => ['required', new PhoneNumber],
+            'vat_id'          => [new VatIdRule()],
+            'email'           => ['required'],
+            'default_address' => ['required', 'in:0,1'],
         ]);
 
         $data = array_merge(request()->only([
@@ -113,15 +114,16 @@ class AddressController extends Controller
     public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
-            'company_name' => [new AlphaNumericSpace],
-            'address'      => ['required', 'array'],
-            'country'      => ['required', new AlphaNumericSpace],
-            'state'        => ['required', new AlphaNumericSpace],
-            'city'         => ['required', 'string'],
-            'postcode'     => ['required', 'numeric'],
-            'phone'        => ['required', new PhoneNumber],
-            'vat_id'       => [new VatIdRule()],
-            'email'        => ['required'],
+            'company_name'    => [new AlphaNumericSpace],
+            'address'         => ['required', 'array'],
+            'country'         => ['required', new AlphaNumericSpace],
+            'state'           => ['required', new AlphaNumericSpace],
+            'city'            => ['required', 'string'],
+            'postcode'        => ['required', 'numeric'],
+            'phone'           => ['required', new PhoneNumber],
+            'vat_id'          => [new VatIdRule()],
+            'email'           => ['required'],
+            'default_address' => ['required', 'in:0,1'],
         ]);
 
         $data = array_merge(request()->only([
