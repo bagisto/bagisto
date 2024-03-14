@@ -21,6 +21,6 @@
     "mitt": "^3.0.1",
     "vee-validate": "^4.9.1",
     "vue-flatpickr": "^2.3.0",
-    "vuedraggable": "^2.24.3"
+    "vuedraggable": "^4.1.0"
   }
 }

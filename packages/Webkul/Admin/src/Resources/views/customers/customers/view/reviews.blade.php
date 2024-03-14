@@ -1,12 +1,22 @@
 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
     <div class="flex justify-between">
         <!-- Total Reviews Count -->
-        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-            @lang('admin::app.customers.customers.view.reviews.count', ['count' => count($customer->reviews)])
+        <p
+            class="w-32 p-2.5 shimmer"
+            v-if="! datagrids?.reviews?.meta?.total"
+        >
+        </p>
+
+        <p
+            class="text-base text-gray-800 leading-none dark:text-white font-semibold"
+            v-else
+        >
+            @{{ "@lang('admin::app.customers.customers.view.reviews.count')".replace(':count', datagrids.reviews.meta.total) }}
         </p>
     </div>
 
     <x-admin::datagrid
+        ref="reviewDatagrid"
         :src="route('admin.customers.customers.view', [
             'id'   => $customer->id,
             'type' => 'reviews'

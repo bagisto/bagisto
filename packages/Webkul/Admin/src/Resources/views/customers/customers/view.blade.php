@@ -326,9 +326,18 @@
                         customer: @json($customer),
 
                         isUpdating: {},
+
+                        datagrids: {},
                     };
                 },
 
+                mounted() {
+                    this.datagrids.orders = this.$refs.orderDatagrid.available;
+
+                    this.datagrids.reviews = this.$refs.reviewDatagrid.available;
+
+                    this.datagrids.invoices = this.$refs.invoiceDatagrid.available;
+                },
                 methods: {
                     deleteAddress(id) {
                         this.$emitter.emit('open-confirm-modal', {
