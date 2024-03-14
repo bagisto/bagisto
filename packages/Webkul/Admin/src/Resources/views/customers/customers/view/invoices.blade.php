@@ -1,17 +1,8 @@
 <div class="p-4 bg-white dark:bg-gray-900  rounded box-shadow">
     <div class="flex justify-between">
         <!-- Total Reviews Count -->
-        <p
-            class="w-32 p-2.5 shimmer"
-            v-if="! datagrids?.invoices?.meta?.total"
-        >
-        </p>
-
-        <p
-            class="text-base text-gray-800 leading-none dark:text-white font-semibold"
-            v-else
-        >
-            @{{ "@lang('admin::app.customers.customers.view.invoices.count')".replace(':count', datagrids.invoices.meta.total) }}
+        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+            @{{ "@lang('admin::app.customers.customers.view.invoices.count')".replace(':count', datagrids?.invoices?.meta?.total) }}
         </p>
     </div>
 
