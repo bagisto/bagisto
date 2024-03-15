@@ -18,7 +18,7 @@ class OrderResource extends JsonResource
             'cart_id'               => $this->id,
             'is_guest'              => $this->is_guest,
             'customer_id'           => $this->customer_id,
-            'customer_type'         => get_class($this->customer),
+            'customer_type'         => $this->customer ?? get_class($this->customer),
             'customer_email'        => $this->customer_email,
             'customer_first_name'   => $this->customer_first_name,
             'customer_last_name'    => $this->customer_last_name,

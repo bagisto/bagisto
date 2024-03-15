@@ -11,7 +11,7 @@ use Webkul\Checkout\Repositories\CartAddressRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
-use Webkul\Customer\Contracts\WishlistItem as WishlistItemContract;
+use Webkul\Customer\Contracts\Wishlist as WishlistContract;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Contracts\Product as ProductContract;
@@ -557,7 +557,7 @@ class Cart
     /**
      * Move a wishlist item to cart.
      */
-    public function moveToCart(WishlistItemContract $wishlistItem, int $quantity = 1): bool
+    public function moveToCart(WishlistContract $wishlistItem, int $quantity = 1): bool
     {
         if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
             return false;
