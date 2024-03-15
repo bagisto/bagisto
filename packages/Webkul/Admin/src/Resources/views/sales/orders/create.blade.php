@@ -29,7 +29,11 @@
             <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                 <!-- Left Component -->
                 {!! view_render_event('bagisto.admin.sales.order.create.left_component.before') !!}
-                <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                
+                <div
+                    class="flex flex-col gap-2 flex-1 max-xl:flex-auto overflow-y-auto"
+                    id="steps-container"
+                >
 
                     @include('admin::sales.orders.create.items')
 
@@ -39,13 +43,19 @@
                     </template>
 
                     <!-- Included Shipping Methods Blade File -->
-                    <template v-if="cart.items && cart.have_stockable_items && ['shipping', 'payment', 'review'].includes(currentStep)">
+                    <template v-if="cart.have_stockable_items && ['shipping', 'payment', 'review'].includes(currentStep)">
                         @include('admin::sales.orders.create.shipping')
                     </template>
 
                     <!-- Included Payment Methods Blade File -->
                     <template v-if="['payment', 'review'].includes(currentStep)">
                         @include('admin::sales.orders.create.payment')
+                    </template>
+                    </template>
+
+                    <!-- Included Payment Methods Blade File -->
+                    <template v-if="['review'].includes(currentStep)">
+                        @include('admin::sales.orders.create.summary')
                     </template>
 
                 </div>
@@ -70,8 +80,6 @@
                     return {
                         cart: @json($cart),
 
-                        isPlacingOrder: false,
-
                         currentStep: 'address',
 
                         shippingMethods: null,
@@ -87,6 +95,8 @@
                         axios.get("{{ route('admin.sales.cart.index', $cart->id) }}")
                             .then(response => {
                                 this.cart = response.data.data;
+
+                                this.scrollToCurrentStep();
                             })
                             .catch(error => {});
                     },
@@ -119,25 +129,18 @@
                         this.getCart();
                     },
 
-                    placeOrder() {
-                        this.isPlacingOrder = true;
+                    scrollToCurrentStep() {
+                        let container = document.getElementById('steps-container');
 
-                        this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
-                            .then(response => {
-                                if (response.data.data.redirect) {
-                                    window.location.href = response.data.data.redirect_url;
-                                } else {
-                                    window.location.href = '{{ route('shop.checkout.onepage.success') }}';
-                                }
+                        if (! container) {
+                            return;
+                        }
 
-                                this.isPlacingOrder = false;
-                            })
-                            .catch(error => {
-                                this.isPlacingOrder = false
-
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                            });
-                    }
+                        container.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'end'
+                        });
+                    },
                 }
             });
         </script>

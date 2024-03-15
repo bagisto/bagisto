@@ -12,6 +12,8 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Transformers\OrderResource;
 use Webkul\Shipping\Facades\Shipping;
 
 class CartController extends Controller
@@ -24,7 +26,8 @@ class CartController extends Controller
     public function __construct(
         protected CartRepository $cartRepository,
         protected ProductRepository $productRepository,
-        protected CartRuleCouponRepository $cartRuleCouponRepository
+        protected CartRuleCouponRepository $cartRuleCouponRepository,
+        protected OrderRepository $orderRepository
     ) {
     }
 
@@ -72,7 +75,7 @@ class CartController extends Controller
 
             return new JsonResource([
                 'data'     => new CartResource(Cart::getCart()),
-                'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
+                'message'  => trans('admin::app.sales.orders.create.item-add-to-cart'),
             ]);
         } catch (\Exception $exception) {
             return new JsonResource([
@@ -169,11 +172,15 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function storeShippingMethod()
+    public function storeShippingMethod(int $id)
     {
         $validatedData = $this->validate(request(), [
             'shipping_method' => 'required',
         ]);
+
+        $cart = $this->cartRepository->findOrFail($id);
+
+        Cart::setCart($cart);
 
         if (
             Cart::hasError()
@@ -195,11 +202,15 @@ class CartController extends Controller
      *
      * @return array
      */
-    public function storePaymentMethod()
+    public function storePaymentMethod(int $id)
     {
         $validatedData = $this->validate(request(), [
             'payment' => 'required',
         ]);
+
+        $cart = $this->cartRepository->findOrFail($id);
+
+        Cart::setCart($cart);
 
         if (
             Cart::hasError()
@@ -223,50 +234,52 @@ class CartController extends Controller
     /**
      * Apply coupon to the cart.
      */
-    public function storeCoupon()
+    public function storeCoupon(int $id)
     {
-        $validatedData = $this->validate(request(), [
+        $params = $this->validate(request(), [
             'code' => 'required',
         ]);
 
-        try {
-            if (strlen($validatedData['code'])) {
-                $coupon = $this->cartRuleCouponRepository->findOneByField('code', $validatedData['code']);
+        $cart = $this->cartRepository->findOrFail($id);
 
-                if (! $coupon) {
+        Cart::setCart($cart);
+
+        try {
+            $coupon = $this->cartRuleCouponRepository->findOneByField('code', $params['code']);
+
+            if (! $coupon) {
+                return (new JsonResource([
+                    'data'     => new CartResource(Cart::getCart()),
+                    'message'  => trans('admin::app.sales.orders.create.coupon-not-found'),
+                ]))->response()->setStatusCode(Response::HTTP_NOT_FOUND);
+            }
+
+            if ($coupon->cart_rule->status) {
+                if (Cart::getCart()->coupon_code == $params['code']) {
                     return (new JsonResource([
                         'data'     => new CartResource(Cart::getCart()),
-                        'message'  => trans('Coupon not found.'),
+                        'message'  => trans('admin::app.sales.orders.create.coupon-already-applied'),
                     ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
                 }
 
-                if ($coupon->cart_rule->status) {
-                    if (Cart::getCart()->coupon_code == $validatedData['code']) {
-                        return (new JsonResource([
-                            'data'     => new CartResource(Cart::getCart()),
-                            'message'  => trans('shop::app.checkout.cart.coupon-already-applied'),
-                        ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
-                    }
+                Cart::setCouponCode($params['code'])->collectTotals();
 
-                    Cart::setCouponCode($validatedData['code'])->collectTotals();
-
-                    if (Cart::getCart()->coupon_code == $validatedData['code']) {
-                        return new JsonResource([
-                            'data'     => new CartResource(Cart::getCart()),
-                            'message'  => trans('shop::app.checkout.coupon.success-apply'),
-                        ]);
-                    }
+                if (Cart::getCart()->coupon_code == $params['code']) {
+                    return new JsonResource([
+                        'data'     => new CartResource(Cart::getCart()),
+                        'message'  => trans('admin::app.sales.orders.create.coupon-applied'),
+                    ]);
                 }
-
-                return (new JsonResource([
-                    'data'     => new CartResource(Cart::getCart()),
-                    'message'  => trans('Coupon not found.'),
-                ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
             }
+
+            return (new JsonResource([
+                'data'     => new CartResource(Cart::getCart()),
+                'message'  => trans('admin::app.sales.orders.create.coupon-not-found'),
+            ]))->response()->setStatusCode(Response::HTTP_NOT_FOUND);
         } catch (\Exception $e) {
             return (new JsonResource([
                 'data'    => new CartResource(Cart::getCart()),
-                'message' => trans('shop::app.checkout.coupon.error'),
+                'message' => trans('admin::app.sales.orders.create.coupon-error'),
             ]))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -274,26 +287,33 @@ class CartController extends Controller
     /**
      * Remove applied coupon from the cart.
      */
-    public function destroyCoupon(): JsonResource
+    public function destroyCoupon(int $id): JsonResource
     {
+        $cart = $this->cartRepository->findOrFail($id);
+
+        Cart::setCart($cart);
+
         Cart::removeCouponCode()->collectTotals();
 
         return new JsonResource([
             'data'     => new CartResource(Cart::getCart()),
-            'message'  => trans('shop::app.checkout.coupon.remove'),
+            'message'  => trans('admin::app.sales.orders.create.summary.remove'),
         ]);
     }
 
     /**
      * Store order
      */
-    public function storeOrder()
+    public function storeOrder(int $id)
     {
+        $cart = $this->cartRepository->findOrFail($id);
+
+        Cart::setCart($cart);
+
         if (Cart::hasError()) {
-            return new JsonResource([
-                'redirect'     => true,
-                'redirect_url' => route('shop.checkout.cart.index'),
-            ]);
+            return response()->json([
+                'message' => trans('admin::app.sales.orders.create.summary.error'),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         Cart::collectTotals();
@@ -303,27 +323,28 @@ class CartController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
-            ], 500);
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         $cart = Cart::getCart();
 
-        if ($redirectUrl = Payment::getRedirectUrl($cart)) {
-            return new JsonResource([
-                'redirect'     => true,
-                'redirect_url' => $redirectUrl,
-            ]);
+        if (Payment::getRedirectUrl($cart)) {
+            return response()->json([
+                'message' => trans('admin::app.sales.orders.create.summary.payment-not-supported'),
+            ], Response::HTTP_BAD_REQUEST);
         }
 
-        $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+        $data = (new OrderResource($cart))->jsonSerialize();
 
-        Cart::deActivateCart();
+        $order = $this->orderRepository->create($data);
 
-        session()->flash('order', $order);
+        Cart::removeCart($cart);
+
+        session()->flash('order', trans('admin::app.sales.orders.create.order-placed-success'));
 
         return new JsonResource([
             'redirect'     => true,
-            'redirect_url' => route('shop.checkout.onepage.success'),
+            'redirect_url' => route('admin.sales.orders.view', $order->id),
         ]);
     }
 
@@ -336,43 +357,32 @@ class CartController extends Controller
     {
         $cart = Cart::getCart();
 
-        $minimumOrderAmount = core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
-
-        if (
-            auth()->guard('customer')->check()
-            && auth()->guard('customer')->user()->is_suspended
-        ) {
-            throw new \Exception(trans('shop::app.checkout.cart.suspended-account-message'));
-        }
-
-        if (
-            auth()->guard('customer')->user()
-            && ! auth()->guard('customer')->user()->status
-        ) {
-            throw new \Exception(trans('shop::app.checkout.cart.inactive-account-message'));
-        }
-
         if (! $cart->checkMinimumOrder()) {
-            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
+            throw new \Exception(trans('admin::app.sales.orders.create.minimum-order-error', [
+                'amount' => core()->formatPrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0)
+            ]));
         }
 
-        if ($cart->haveStockableItems() && ! $cart->shipping_address) {
-            throw new \Exception(trans('shop::app.checkout.cart.check-shipping-address'));
+        if (
+            $cart->haveStockableItems()
+            && ! $cart->shipping_address
+        ) {
+            throw new \Exception(trans('admin::app.sales.orders.create.check-shipping-address'));
         }
 
         if (! $cart->billing_address) {
-            throw new \Exception(trans('shop::app.checkout.cart.check-billing-address'));
+            throw new \Exception(trans('admin::app.sales.orders.create.check-billing-address'));
         }
 
         if (
             $cart->haveStockableItems()
             && ! $cart->selected_shipping_rate
         ) {
-            throw new \Exception(trans('shop::app.checkout.cart.specify-shipping-method'));
+            throw new \Exception(trans('admin::app.sales.orders.create.specify-shipping-method'));
         }
 
         if (! $cart->payment) {
-            throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
+            throw new \Exception(trans('admin::app.sales.orders.create.specify-payment-method'));
         }
     }
 }

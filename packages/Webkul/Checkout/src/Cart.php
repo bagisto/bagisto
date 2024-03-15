@@ -538,7 +538,7 @@ class Cart
     /**
      * Save payment method for cart.
      */
-    public function savePaymentMethod(array $payment): bool|Contracts\CartPayment
+    public function savePaymentMethod(array $params): bool|Contracts\CartPayment
     {
         if (! $this->cart) {
             return false;
@@ -550,8 +550,8 @@ class Cart
 
         $cartPayment = new CartPayment;
 
-        $cartPayment->method = $payment['method'];
-        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$payment['method'].'.title');
+        $cartPayment->method = $params['method'];
+        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$params['method'].'.title');
         $cartPayment->cart_id = $this->cart->id;
         $cartPayment->save();
 

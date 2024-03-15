@@ -169,36 +169,39 @@
                         @lang('shop::app.checkout.onepage.address.state')
                     </x-shop::form.control-group.label>
 
-                    <template v-if="haveStates">
-                        <x-shop::form.control-group.control
-                            type="select"
-                            ::name="controlName + '.state'"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                            :label="trans('shop::app.checkout.onepage.address.state')"
-                            :placeholder="trans('shop::app.checkout.onepage.address.state')"
-                        >
-                            <option value="">
-                                @lang('shop::app.checkout.onepage.address.select-state')
-                            </option>
-
-                            <option
-                                v-for='(state, index) in states[selectedCountry]'
-                                :value="state.code"
+                    <template v-if="states">
+                        <template v-if="haveStates">
+                            <x-shop::form.control-group.control
+                                type="select"
+                                ::name="controlName + '.state'"
+                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                ::value="address.state"
+                                :label="trans('shop::app.checkout.onepage.address.state')"
+                                :placeholder="trans('shop::app.checkout.onepage.address.state')"
                             >
-                                @{{ state.default_name }}
-                            </option>
-                        </x-shop::form.control-group.control>
-                    </template>
+                                <option value="">
+                                    @lang('shop::app.checkout.onepage.address.select-state')
+                                </option>
 
-                    <template v-else>
-                        <x-shop::form.control-group.control
-                            type="text"
-                            ::name="controlName + '.state'"
-                            ::value="address.state"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                            :label="trans('shop::app.checkout.onepage.address.state')"
-                            :placeholder="trans('shop::app.checkout.onepage.address.state')"
-                        />
+                                <option
+                                    v-for='(state, index) in states[selectedCountry]'
+                                    :value="state.code"
+                                >
+                                    @{{ state.default_name }}
+                                </option>
+                            </x-shop::form.control-group.control>
+                        </template>
+
+                        <template v-else>
+                            <x-shop::form.control-group.control
+                                type="text"
+                                ::name="controlName + '.state'"
+                                ::value="address.state"
+                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                :label="trans('shop::app.checkout.onepage.address.state')"
+                                :placeholder="trans('shop::app.checkout.onepage.address.state')"
+                            />
+                        </template>
                     </template>
 
                     <x-shop::form.control-group.error ::name="controlName + '.state'" />
@@ -306,7 +309,7 @@
 
                     countries: [],
 
-                    states: [],
+                    states: null,
                 }
             },
 

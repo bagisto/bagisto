@@ -164,9 +164,21 @@ return [
             ],
 
             'create' => [
-                'title'    => 'Create Order',
-                'back-btn' => 'Back',
-                'save-btn' => 'Create Order',
+                'title'                   => 'Create Order',
+                'back-btn'                => 'Back',
+                'save-btn'                => 'Create Order',
+                'payment-not-supported'   => 'This payment method is not supported',
+                'coupon-not-found'        => 'Coupon Not Found',
+                'coupon-already-applied'  => 'Coupon code already applied.',
+                'coupon-error'            => 'Coupon code can\'t be applied.',
+                'error'                   => 'Something went wrong',
+                'coupon-applied'          => 'Coupon code applied successfully.',
+                'minimum-order-error'     => 'The minimum order amount is not met.',
+                'check-shipping-address'  => 'Shipping address is missing.',
+                'check-billing-address'   => 'Billing address is missing.',
+                'specify-shipping-method' => 'Shipping method is missing.',
+                'specify-payment-method'  => 'Payment method is missing.',
+                'order-placed-success'    => 'Order placed successfully.',
 
                 'items' => [
                     'title'            => 'Cart Items',
@@ -214,23 +226,24 @@ return [
                 ],
 
                 'payment' => [
-                    'payment-method' => 'Payment Method',
+                    'title' => 'Payment',
                 ],
 
                 'shipping' => [
-                    'shipping-method' => 'Shipping Method',
+                    'title' => 'Shipping',
                 ],
 
                 'summary' => [
-                    'cart-summary'     => 'Cart Summary',
-                    'delivery-charges' => 'Delivery Charges',
-                    'discount-amount'  => 'Discount Amount',
-                    'grand-total'      => 'Grand Total',
-                    'place-order'      => 'Place Order',
-                    'price_&_qty'      => ':price × :qty',
-                    'processing'       => 'Processing',
-                    'sub-total'        => 'Subtotal',
-                    'tax'              => 'Tax',
+                    'title'           => 'Order Summary',
+                    'shipping-amount' => 'Shipping Amount',
+                    'discount-amount' => 'Discount Amount',
+                    'grand-total'     => 'Grand Total',
+                    'place-order'     => 'Place Order',
+                    'processing'      => 'Processing',
+                    'sub-total'       => 'Subtotal',
+                    'tax'             => 'Tax',
+                    'apply-coupon'    => 'Apply Coupon',
+                    'enter-your-code' => 'Enter your code',
                 ],
             ],
 

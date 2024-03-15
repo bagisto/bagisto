@@ -1,18 +1,18 @@
 {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.before') !!}
 
 <!-- Vue JS Component -->
-<v-cart-address
+<v-cart-addresses
     :cart="cart"
     @processing="stepForward"
     @processed="stepProcessed"
-></v-cart-address>
+></v-cart-addresses>
 
 {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.after') !!}
 
 @include('admin::sales.orders.create.address.form')
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-cart-address-template">
+    <script type="text/x-template" id="v-cart-addresses-template">
         <div class="bg-white dark:bg-gray-900 rounded box-shadow">
             <div class="flex items-center p-4 border-b dark:border-gray-800">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
@@ -305,8 +305,8 @@
     </script>
 
     <script type="module">
-        app.component('v-cart-address', {
-            template: '#v-cart-address-template',
+        app.component('v-cart-addresses', {
+            template: '#v-cart-addresses-template',
 
             props: ['cart'],
 
@@ -464,6 +464,8 @@
                         .then((response) => {
                             this.isStoring = false;
 
+                            this.$refs.updateCreateModal.close();
+
                             return response;
                         })
                         .catch(error => {
@@ -478,9 +480,13 @@
                 updateCustomerAddress(id, params) {
                     this.isStoring = true;
 
-                    return this.$axios.put('{{ route('admin.customers.customers.addresses.update', ':id') }}/'.replace(':id', id), params)
+                    params['default_address'] = this.selectedAddressForEdit.default_address;
+
+                    return this.$axios.put('{{ route('admin.customers.customers.addresses.update', ':id') }}'.replace(':id', id), params)
                         .then((response) => {
                             this.isStoring = false;
+
+                            this.$refs.updateCreateModal.close();
 
                             return response;
                         })
