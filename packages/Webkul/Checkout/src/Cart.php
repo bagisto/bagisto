@@ -105,6 +105,26 @@ class Cart
      */
     public function createCart(array $data): ?Contracts\Cart
     {
+        $data = array_merge([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+        ], $data);
+
+        $customer = $data['customer'] ?? auth()->guard()->user();
+
+        if ($customer) {
+            $data = array_merge([
+                'is_guest'            => 0,
+                'customer_id'         => $customer->id,
+                'customer_first_name' => $customer->first_name,
+                'customer_last_name'  => $customer->last_name,
+                'customer_email'      => $customer->email,
+            ], $data);
+        }
+
         $cart = $this->cartRepository->create($data);
 
         $this->setCart($cart);
@@ -216,6 +236,10 @@ class Cart
     public function addProduct(ProductContract $product, array $data): Contracts\Cart|\Exception
     {
         Event::dispatch('checkout.cart.add.before', $product->id);
+
+        if (! $this->cart) {
+            $this->createCart([]);            
+        }
 
         $cartProducts = $product->getTypeInstance()->prepareForCart($data);
 
@@ -557,7 +581,7 @@ class Cart
     /**
      * Move a wishlist item to cart.
      */
-    public function moveToCart(WishlistContract $wishlistItem, int $quantity = 1): bool
+    public function moveToCart(WishlistContract $wishlistItem, ?int $quantity = 1): bool
     {
         if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
             return false;
@@ -572,7 +596,7 @@ class Cart
             'quantity' => $quantity,
         ];
 
-        $result = $this->addProduct($wishlistItem->product_id, $additional);
+        $result = $this->addProduct($wishlistItem->product, $additional);
 
         if ($result) {
             $this->wishlistRepository->delete($wishlistItem->id);

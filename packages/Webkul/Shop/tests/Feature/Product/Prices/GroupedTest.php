@@ -740,8 +740,6 @@ it('should fails the validation error when certain inputs not provided when add 
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
     
-    $this->createCartIfNotExists();
-
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -835,8 +833,6 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
     
-    $this->createCartIfNotExists();
-
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -940,8 +936,6 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
     
-    $this->createCartIfNotExists();
-
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -1035,8 +1029,6 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
     
-    $this->createCartIfNotExists();
-
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -1143,8 +1135,6 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
     
-    $this->createCartIfNotExists();
-
     $cart = cart()->addProduct($product, [
         'quantity'   => 1,
         'is_buy_now' => '0',
@@ -1242,8 +1232,6 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
     
-    $this->createCartIfNotExists();
-
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -1351,8 +1339,6 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
     
-    $this->createCartIfNotExists();
-
     $cart = cart()->addProduct($product, [
         'quantity'   => 1,
         'is_buy_now' => '0',
@@ -1449,8 +1435,6 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
     
-    $this->createCartIfNotExists();
-
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -1539,8 +1523,6 @@ it('should check tax is applying for the grouped product into the cart for group
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
     
-    $this->createCartIfNotExists();
-
     $cart = cart()->addProduct($product, [
         'product_id' => $product->id,
         'quantity'   => 1,
