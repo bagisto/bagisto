@@ -68,6 +68,10 @@ class Cart
      */
     public function refreshCart(): void
     {
+        if (! $this->cart) {
+            return;
+        }
+
         $this->cart = $this->cartRepository->find($this->cart->id);
     }
 
@@ -345,6 +349,8 @@ class Cart
                 }
             }
         }
+
+        return null;
     }
 
     /**
