@@ -3,6 +3,8 @@
 <!-- Vue JS Component -->
 <v-cart-items
     :cart="cart"
+    @added-to-cart="getCart"
+    @remove-from-cart="getCart"
 ></v-cart-items>
 
 {!! view_render_event('bagisto.admin.sales.order.create.left_component.items.after') !!}
@@ -147,7 +149,7 @@
 
                     axios.post("{{ route('admin.sales.cart.store', $cart->id) }}", params)
                         .then(response => {
-                            this.$emit('processing', 'review');
+                            this.$emit('added-to-cart', response.data.data);
                         })
                         .catch(error => {
                             // Handle the error here
@@ -161,7 +163,7 @@
                         }
                     })
                         .then(response => {
-                            this.cart = response.data.data;
+                            this.$emit('remove-from-cart', response.data.data);
                         })
                         .catch(error => {
                             // Handle the error here

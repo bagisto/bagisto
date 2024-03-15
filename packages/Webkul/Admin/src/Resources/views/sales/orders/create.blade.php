@@ -51,7 +51,6 @@
                     <template v-if="['payment', 'review'].includes(currentStep)">
                         @include('admin::sales.orders.create.payment')
                     </template>
-                    </template>
 
                     <!-- Included Payment Methods Blade File -->
                     <template v-if="['review'].includes(currentStep)">
