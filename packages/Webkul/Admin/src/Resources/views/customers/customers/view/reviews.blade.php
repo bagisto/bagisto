@@ -17,7 +17,7 @@
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
                     <div
                         class="flex gap-2.5 items-center select-none"
-                        v-for="(columnGroup, index) in [['product_name', 'status', 'title', 'comment'], ['rating', 'created_at', 'id']]"
+                        v-for="(columnGroup, index) in [['product_name', 'status', 'title', 'comment'], ['rating', 'created_at', 'product_review_id']]"
                     >
                         <p class="text-gray-600 dark:text-gray-300">
                             <span class="[&>*]:after:content-['_/_']">
@@ -102,7 +102,7 @@
 
                             <!-- Review ID -->
                             <p class="text-gray-600 dark:text-gray-300">
-                                @{{ "@lang('admin::app.customers.customers.view.reviews.id')".replace(':id', record.id) }}
+                                @{{ "@lang('admin::app.customers.customers.view.reviews.id')".replace(':id', record.product_review_id) }}
                             </p>
                         </div>
                     </div>

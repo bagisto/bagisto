@@ -29,7 +29,7 @@ class InvoicesDatagrid extends DataGrid
             ->where('ors.customer_id', '=', request()->route('id'))
             ->selectRaw("CASE WHEN {$dbPrefix}invoices.increment_id IS NOT NULL THEN {$dbPrefix}invoices.increment_id ELSE {$dbPrefix}invoices.id END AS increment_id");
 
-        $this->addFilter('increment_id', 'ors.increment_id');
+        $this->addFilter('increment_id', 'invoices.increment_id');
         $this->addFilter('created_at', 'ors.created_at');
         $this->addFilter('base_grand_total', 'invoices.base_grand_total');
 
@@ -55,7 +55,7 @@ class InvoicesDatagrid extends DataGrid
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('admin::app.customers.customers.view.datagrid.invoices.invoice-date'),
-            'type'       => 'string',
+            'type'       => 'date_range',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
@@ -87,15 +87,13 @@ class InvoicesDatagrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('sales.orders.view')) {
-            $this->addAction([
-                'icon'   => 'icon-view',
-                'title'  => trans('admin::app.customers.customers.view.datagrid.invoices.view'),
-                'method' => 'GET',
-                'url'    => function ($row) {
-                    return route('admin.sales.orders.view', $row->id);
-                },
-            ]);
-        }
+        $this->addAction([
+            'icon'   => 'icon-view',
+            'title'  => trans('admin::app.customers.customers.view.datagrid.invoices.view'),
+            'method' => 'GET',
+            'url'    => function ($row) {
+                return route('admin.sales.orders.view', $row->id);
+            },
+        ]);
     }
 }

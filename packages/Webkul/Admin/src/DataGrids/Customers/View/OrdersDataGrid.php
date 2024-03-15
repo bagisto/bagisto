@@ -165,7 +165,7 @@ class OrdersDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.customers.view.datagrid.orders.customer-name'),
             'type'       => 'string',
             'searchable' => true,
-            'filterable' => true,
+            'filterable' => false,
             'sortable'   => true,
         ]);
 
@@ -186,8 +186,8 @@ class OrdersDataGrid extends DataGrid
                     ],
                 ],
             ],
-            'searchable' => true,
-            'filterable' => true,
+            'searchable' => false,
+            'filterable' => false,
             'sortable'   => true,
         ]);
 
