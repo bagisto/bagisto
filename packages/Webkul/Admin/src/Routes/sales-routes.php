@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Controllers\Sales\CartController;
 use Webkul\Admin\Http\Controllers\Sales\InvoiceController;
 use Webkul\Admin\Http\Controllers\Sales\OrderController;
 use Webkul\Admin\Http\Controllers\Sales\RefundController;
@@ -32,6 +33,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
          */
         Route::controller(OrderController::class)->prefix('orders')->group(function () {
             Route::get('', 'index')->name('admin.sales.orders.index');
+
+            Route::get('create', 'create')->name('admin.sales.orders.create');
+
+            Route::post('create', 'store')->name('admin.sales.orders.store');
 
             Route::get('view/{id}', 'view')->name('admin.sales.orders.view');
 
@@ -75,6 +80,28 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::post('create', 'store')->name('admin.sales.transactions.store');
 
             Route::get('view/{id}', 'view')->name('admin.sales.transactions.view');
+        });
+
+        Route::controller(CartController::class)->prefix('cart')->group(function () {
+            Route::get('{id}', 'index')->name('admin.sales.cart.index');
+
+            Route::post('{id}', 'store')->name('admin.sales.cart.store');
+
+            Route::put('{id}', 'update')->name('admin.sales.cart.update');
+
+            Route::delete('{id}', 'destroy')->name('admin.sales.cart.destroy');
+
+            Route::post('addresses/{id}', 'storeAddress')->name('admin.sales.cart.addresses.store');
+
+            Route::post('shipping-methods/{id}', 'storeShippingMethod')->name('admin.sales.cart.shipping_methods.store');
+
+            Route::post('payment-methods/{id}', 'storePaymentMethod')->name('admin.sales.cart.payment_methods.store');
+
+            Route::post('orders/{id}', 'storeOrder')->name('admin.sales.cart.orders.store');
+
+            Route::post('{id}/coupon', 'storeCoupon')->name('admin.sales.cart.store_coupon');
+
+            Route::delete('{id}/coupon', 'destroyCoupon')->name('admin.sales.cart.remove_coupon');
         });
     });
 });

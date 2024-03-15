@@ -12,6 +12,19 @@
         <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.sales.orders.index') }}" />
+
+            {!! view_render_event('bagisto.admin.sales.orders.create.before') !!}
+
+            @if (bouncer()->hasPermission('sales.orders.create'))
+                <a
+                    href="{{ route('admin.sales.orders.create') }}"
+                    class="primary-button"
+                >
+                    @lang('admin::app.sales.orders.index.create-btn')
+                </a>
+            @endif
+
+            {!! view_render_event('bagisto.admin.sales.orders.create.after') !!}
         </div>
     </div>
 

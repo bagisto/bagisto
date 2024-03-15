@@ -242,7 +242,7 @@
                             </p>
                         </div>
 
-                        <div class="flex  flex-col gap-y-1.5">
+                        <div class="flex flex-col gap-y-1.5">
                             <p class="text-gray-600 dark:text-gray-300 font-semibold !leading-5">
                                 {{ core()->formatBasePrice($order->base_sub_total) }}
                             </p>

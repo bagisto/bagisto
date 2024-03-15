@@ -134,7 +134,8 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'Orders',
+                'create-btn' => 'Create Order',
+                'title'      => 'Orders',
 
                 'datagrid' => [
                     'canceled'        => 'Canceled',
@@ -159,6 +160,77 @@ return [
                     'status'          => 'Status',
                     'success'         => 'Success',
                     'view'            => 'View',
+                ],
+            ],
+
+            'create' => [
+                'title'    => 'Create Order',
+                'back-btn' => 'Back',
+                'save-btn' => 'Create Order',
+
+                'items' => [
+                    'title'            => 'Cart Items',
+                    'sub-total'        => 'Sub Total - :sub_total',
+                    'add-product'      => 'Add Product',
+                    'sku'              => 'SKU - :sku',
+                    'amount-per-unit'  => ':amount Per Unit x :qty Quantity',
+                    'delete'           => 'Delete',
+                    'move-to-wishlist' => 'Move to Wishlist',
+                ],
+
+                'address' => [
+                    'title'            => 'Address',
+                    'add-btn'          => 'Add Address',
+                    'edit-btn'         => 'Edit Address',
+                    'addresses'        => 'Addresses',
+                    'add-new-address'  => 'Add new address',
+                    'add-new'          => 'Add new address',
+                    'back'             => 'Back',
+                    'billing-address'  => 'Billing Address',
+                    'city'             => 'City',
+                    'company-name'     => 'Company Name',
+                    'confirm'          => 'Confirm',
+                    'country'          => 'Country',
+                    'email'            => 'Email',
+                    'first-name'       => 'First Name',
+                    'last-name'        => 'Last Name',
+                    'postcode'         => 'Zip/Postcode',
+                    'proceed'          => 'Proceed',
+                    'same-as-billing'  => 'Use same address for shipping?',
+                    'save-address'     => 'Save this to address book',
+                    'save'             => 'Save',
+                    'select-country'   => 'Select Country',
+                    'select-state'     => 'Select State',
+                    'shipping-address' => 'Shipping Address',
+                    'state'            => 'State',
+                    'street-address'   => 'Street Address',
+                    'telephone'        => 'Telephone',
+                    'title'            => 'Address',
+                ],
+
+                'index' => [
+                    'checkout' => 'Checkout',
+                    'home'     => 'Home',
+                ],
+
+                'payment' => [
+                    'payment-method' => 'Payment Method',
+                ],
+
+                'shipping' => [
+                    'shipping-method' => 'Shipping Method',
+                ],
+
+                'summary' => [
+                    'cart-summary'     => 'Cart Summary',
+                    'delivery-charges' => 'Delivery Charges',
+                    'discount-amount'  => 'Discount Amount',
+                    'grand-total'      => 'Grand Total',
+                    'place-order'      => 'Place Order',
+                    'price_&_qty'      => ':price × :qty',
+                    'processing'       => 'Processing',
+                    'sub-total'        => 'Subtotal',
+                    'tax'              => 'Tax',
                 ],
             ],
 

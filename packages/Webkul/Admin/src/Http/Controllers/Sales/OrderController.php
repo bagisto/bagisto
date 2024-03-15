@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Sales\OrderDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Resources\AddressResource;
+use Webkul\Admin\Http\Resources\CartResource;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Sales\Repositories\OrderCommentRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 
@@ -34,6 +37,38 @@ class OrderController extends Controller
         }
 
         return view('admin::sales.orders.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        $customer = \Webkul\Customer\Models\Customer::first();
+
+        // $cart = Cart::setCustomer($customer)
+        //     ->createCart([
+        //         'is_active' => false,
+        //     ]);
+
+        $cart = \Webkul\Checkout\Models\Cart::with('items')->first();
+
+        $cart = new CartResource($cart);
+
+        $addresses = AddressResource::collection($customer->addresses);
+
+        return view('admin::sales.orders.create', compact('cart', 'addresses'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store()
+    {
     }
 
     /**

@@ -169,7 +169,7 @@
                         @lang('shop::app.checkout.onepage.address.state')
                     </x-shop::form.control-group.label>
 
-                    <template v-if="haveStates(selectedCountry)">
+                    <template v-if="haveStates">
                         <x-shop::form.control-group.control
                             type="select"
                             ::name="controlName + '.state'"
@@ -310,6 +310,12 @@
                 }
             },
 
+            computed: {
+                haveStates() {
+                    return !! this.states[this.selectedCountry]?.length;
+                },
+            },
+
             mounted() {
                 this.getCountries();
 
@@ -331,10 +337,6 @@
                             this.states = response.data.data;
                         })
                         .catch(() => {});
-                },
-
-                haveStates(countryCode) {
-                    return !! this.states[countryCode]?.length;
                 },
             }
         });
