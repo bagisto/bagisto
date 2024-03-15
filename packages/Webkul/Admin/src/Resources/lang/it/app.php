@@ -3035,6 +3035,8 @@ return [
             'save-btn'                     => 'Salva Configurazione',
             'save-message'                 => 'Configurazione salvata con successo',
             'search'                       => 'Ricerca',
+            'select-country'               => 'Seleziona il paese',
+            'select-state'                 => 'Seleziona lo stato',
             'title'                        => 'Configurazione',
 
             'general' => [
