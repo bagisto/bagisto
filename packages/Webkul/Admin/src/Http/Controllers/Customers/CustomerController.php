@@ -135,7 +135,7 @@ class CustomerController extends Controller
         Event::dispatch('customer.update.before', $id);
 
         $customer = $this->customerRepository->update($data, $id);
-    
+
         Event::dispatch('customer.update.after', $customer);
 
         return new JsonResponse([
