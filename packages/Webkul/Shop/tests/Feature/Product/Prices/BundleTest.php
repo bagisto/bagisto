@@ -789,6 +789,8 @@ it('should fails the validation error when the certain inputs not provided when 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
+    $this->createCartIfNotExists();
+
     $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
@@ -880,6 +882,8 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
+
+    $this->createCartIfNotExists();
 
     $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
@@ -981,6 +985,8 @@ it('should fails the validation error when certain inputs not provided when add 
 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
+    
+    $this->createCartIfNotExists();
 
     $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
@@ -1073,6 +1079,8 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
+    
+    $this->createCartIfNotExists();
 
     $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
@@ -1174,6 +1182,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
+    
+    $this->createCartIfNotExists();
 
     $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
@@ -1268,6 +1278,8 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
+    
+    $this->createCartIfNotExists();
 
     $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
@@ -1373,6 +1385,8 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
+    
+    $this->createCartIfNotExists();
 
     $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
@@ -1469,6 +1483,8 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
+    
+    $this->createCartIfNotExists();
 
     $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
@@ -1555,6 +1571,8 @@ it('should check tax is applying for the bundle product into the cart for bundle
 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
+    
+    $this->createCartIfNotExists();
 
     $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,

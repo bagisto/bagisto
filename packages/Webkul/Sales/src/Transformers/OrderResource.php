@@ -41,7 +41,7 @@ class OrderResource extends JsonResource
             'discount_amount'       => $this->discount_amount,
             'base_discount_amount'  => $this->base_discount_amount,
 
-            $this->mergeWhen($this->haveStockableItems(), [
+            $this->mergeWhen($this->haveStockableItems() && $this->selected_shipping_rate, [
                 'shipping_method'               => $this->selected_shipping_rate->method,
                 'shipping_title'                => $this->selected_shipping_rate->carrier_title.' - '.$this->selected_shipping_rate->method_title,
                 'shipping_description'          => $this->selected_shipping_rate->method_description,
