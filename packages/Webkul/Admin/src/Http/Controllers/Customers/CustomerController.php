@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
+use Webkul\Admin\DataGrids\Customers\View\InvoicesDatagrid;
+use Webkul\Admin\DataGrids\Customers\View\OrdersDataGrid;
+use Webkul\Admin\DataGrids\Customers\View\ReviewDatagrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\Admin\Mail\Customer\NewCustomerNotification;
-use Webkul\Customer\DataGrids\InvoicesDatagrid as CustomerInvoicesDatagrid;
-use Webkul\Customer\DataGrids\OrdersDataGrid as CustomerOrdersDataGrid;
-use Webkul\Customer\DataGrids\ReviewDatagrid as CustomerReviewDatagrid;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -236,13 +236,13 @@ class CustomerController extends Controller
         if (request()->ajax()) {
             switch (request()->query('type')) {
                 case self::ORDERS:
-                    return app(CustomerOrdersDataGrid::class)->toJson();
+                    return app(OrdersDataGrid::class)->toJson();
 
                 case self::INVOICES:
-                    return app(CustomerInvoicesDatagrid::class)->toJson();
+                    return app(InvoicesDatagrid::class)->toJson();
 
                 case self::REVIEWS:
-                    return app(CustomerReviewDatagrid::class)->toJson();
+                    return app(ReviewDatagrid::class)->toJson();
             }
         }
 

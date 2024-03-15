@@ -156,7 +156,7 @@
 
                         <div class="flex flex-col items-center">
                             <p class="text-base text-gray-400 font-semibold">
-                                @lang('admin::app.customers.customers.view.orders.datagrid.empty-order')
+                                @lang('admin::app.customers.customers.view.datagrid.orders.empty-order')
                             </p>
                         </div>
                     </div>

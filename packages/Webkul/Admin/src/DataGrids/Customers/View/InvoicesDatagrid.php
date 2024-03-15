@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Customer\DataGrids;
+namespace Webkul\Admin\DataGrids\Customers\View;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
@@ -45,7 +45,7 @@ class InvoicesDatagrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'increment_id',
-            'label'      => trans('admin::app.customers.customers.view.invoices.datagrid.increment-id'),
+            'label'      => trans('admin::app.customers.customers.view.datagrid.invoices.increment-id'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -54,7 +54,7 @@ class InvoicesDatagrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'created_at',
-            'label'      => trans('admin::app.customers.customers.view.invoices.datagrid.invoice-date'),
+            'label'      => trans('admin::app.customers.customers.view.datagrid.invoices.invoice-date'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -63,7 +63,7 @@ class InvoicesDatagrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.customers.customers.view.invoices.datagrid.invoice-amount'),
+            'label'      => trans('admin::app.customers.customers.view.datagrid.invoices.invoice-amount'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -72,7 +72,7 @@ class InvoicesDatagrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'order_id',
-            'label'      => trans('admin::app.customers.customers.view.invoices.datagrid.order-id'),
+            'label'      => trans('admin::app.customers.customers.view.datagrid.invoices.order-id'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -90,7 +90,7 @@ class InvoicesDatagrid extends DataGrid
         if (bouncer()->hasPermission('sales.orders.view')) {
             $this->addAction([
                 'icon'   => 'icon-view',
-                'title'  => trans('admin::app.customers.customers.view.invoices.datagrid.view'),
+                'title'  => trans('admin::app.customers.customers.view.datagrid.invoices.view'),
                 'method' => 'GET',
                 'url'    => function ($row) {
                     return route('admin.sales.orders.view', $row->id);

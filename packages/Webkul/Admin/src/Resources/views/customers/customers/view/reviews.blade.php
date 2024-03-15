@@ -153,7 +153,7 @@
 
                         <div class="flex flex-col items-center">
                             <p class="text-base text-gray-400 font-semibold">
-                                @lang('admin::app.customers.customers.view.reviews.datagrid.empty-reviews')
+                                @lang('admin::app.customers.customers.view.datagrid.reviews.empty-reviews')
                             </p>
                         </div>
                     </div>

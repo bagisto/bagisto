@@ -131,7 +131,7 @@
 
                         <div class="flex flex-col items-center">
                             <p class="text-base text-gray-400 font-semibold">
-                                @lang('admin::app.customers.customers.view.invoices.datagrid.empty-invoice')
+                                @lang('admin::app.customers.customers.view.datagrid.invoices.empty-invoice')
                             </p>
                         </div>
                     </div>
