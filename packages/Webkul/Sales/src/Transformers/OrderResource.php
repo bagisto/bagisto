@@ -16,7 +16,7 @@ class OrderResource extends JsonResource
     {
         $shippingInformation = [];
 
-         if ($this->haveStockableItems()) {
+        if ($this->haveStockableItems()) {
             $shippingInformation = [
                 'shipping_method'               => $this->selected_shipping_rate->method,
                 'shipping_title'                => $this->selected_shipping_rate->carrier_title.' - '.$this->selected_shipping_rate->method_title,
@@ -28,7 +28,7 @@ class OrderResource extends JsonResource
 
                 'shipping_address'              => (new OrderAddressResource($this->shipping_address))->jsonSerialize(),
             ];
-         }
+        }
 
         return [
             'cart_id'               => $this->id,

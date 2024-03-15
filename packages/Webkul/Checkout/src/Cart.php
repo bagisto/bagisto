@@ -238,7 +238,7 @@ class Cart
         Event::dispatch('checkout.cart.add.before', $product->id);
 
         if (! $this->cart) {
-            $this->createCart([]);            
+            $this->createCart([]);
         }
 
         $cartProducts = $product->getTypeInstance()->prepareForCart($data);
