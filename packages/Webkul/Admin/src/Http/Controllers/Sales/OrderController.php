@@ -48,8 +48,8 @@ class OrderController extends Controller
     {
         $customer = \Webkul\Customer\Models\Customer::first();
 
-        // $cart = Cart::setCustomer($customer)
-        //     ->createCart([
+        // $cart = Cart::createCart([
+        //         'customer'  => $customer,
         //         'is_active' => false,
         //     ]);
 

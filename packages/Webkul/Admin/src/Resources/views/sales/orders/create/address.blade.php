@@ -460,7 +460,7 @@
                 createCustomerAddress(params) {
                     this.isStoring = true;
 
-                    return this.$axios.post('{{ route('shop.api.customers.account.addresses.store') }}', params)
+                    return this.$axios.post('{{ route('admin.customers.customers.addresses.store', $cart->customer_id) }}', params)
                         .then((response) => {
                             this.isStoring = false;
 
@@ -478,7 +478,7 @@
                 updateCustomerAddress(id, params) {
                     this.isStoring = true;
 
-                    return this.$axios.put('{{ route('shop.api.customers.account.addresses.update') }}/' + id, params)
+                    return this.$axios.put('{{ route('admin.customers.customers.addresses.update', ':id') }}/'.replace(':id', id), params)
                         .then((response) => {
                             this.isStoring = false;
 

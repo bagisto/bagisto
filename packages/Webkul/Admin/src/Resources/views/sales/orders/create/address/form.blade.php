@@ -170,37 +170,39 @@
                         @lang('admin::app.sales.orders.create.address.state')
                     </x-admin::form.control-group.label>
 
-                    <template v-if="haveStates">
-                        <x-admin::form.control-group.control
-                            type="select"
-                            ::name="controlName + '.state'"
-                            ::value="address.state"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                            :label="trans('admin::app.sales.orders.create.address.state')"
-                            :placeholder="trans('admin::app.sales.orders.create.address.state')"
-                        >
-                            <option value="">
-                                @lang('admin::app.sales.orders.create.address.select-state')
-                            </option>
-
-                            <option
-                                v-for='state in states[selectedCountry]'
-                                :value="state.code"
+                    <template v-if="states">
+                        <template v-if="haveStates">
+                            <x-admin::form.control-group.control
+                                type="select"
+                                ::name="controlName + '.state'"
+                                ::value="address.state"
+                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                :label="trans('admin::app.sales.orders.create.address.state')"
+                                :placeholder="trans('admin::app.sales.orders.create.address.state')"
                             >
-                                @{{ state.default_name }}
-                            </option>
-                        </x-admin::form.control-group.control>
-                    </template>
+                                <option value="">
+                                    @lang('admin::app.sales.orders.create.address.select-state')
+                                </option>
 
-                    <template v-else>
-                        <x-admin::form.control-group.control
-                            type="text"
-                            ::name="controlName + '.state'"
-                            ::value="address.state"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                            :label="trans('admin::app.sales.orders.create.address.state')"
-                            :placeholder="trans('admin::app.sales.orders.create.address.state')"
-                        />
+                                <option
+                                    v-for='state in states[selectedCountry]'
+                                    :value="state.code"
+                                >
+                                    @{{ state.default_name }}
+                                </option>
+                            </x-admin::form.control-group.control>
+                        </template>
+
+                        <template v-else>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                ::name="controlName + '.state'"
+                                ::value="address.state"
+                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                :label="trans('admin::app.sales.orders.create.address.state')"
+                                :placeholder="trans('admin::app.sales.orders.create.address.state')"
+                            />
+                        </template>
                     </template>
 
                     <x-admin::form.control-group.error ::name="controlName + '.state'" />
@@ -308,7 +310,7 @@
 
                     countries: [],
 
-                    states: [],
+                    states: null,
                 }
             },
 

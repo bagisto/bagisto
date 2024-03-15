@@ -34,12 +34,12 @@
                     @include('admin::sales.orders.create.items')
 
                     <!-- Included Addresses Blade File -->
-                    <template v-if="['address', 'shipping', 'payment', 'review'].includes(currentStep)">
+                    <template v-if="cart.items_count && ['address', 'shipping', 'payment', 'review'].includes(currentStep)">
                         @include('admin::sales.orders.create.address')
                     </template>
 
                     <!-- Included Shipping Methods Blade File -->
-                    <template v-if="cart.have_stockable_items && ['shipping', 'payment', 'review'].includes(currentStep)">
+                    <template v-if="cart.items && cart.have_stockable_items && ['shipping', 'payment', 'review'].includes(currentStep)">
                         @include('admin::sales.orders.create.shipping')
                     </template>
 
