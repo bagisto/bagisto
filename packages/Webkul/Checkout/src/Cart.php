@@ -620,6 +620,9 @@ class Cart
 
         $cart->save();
 
+
+        dump(count($cart->items));
+
         Event::dispatch('checkout.cart.collect.totals.after', $cart);
     }
 

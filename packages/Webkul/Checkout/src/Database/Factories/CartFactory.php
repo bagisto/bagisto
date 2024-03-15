@@ -19,19 +19,27 @@ class CartFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'is_guest'              => 0,
-            'is_active'             => 1,
-            'is_gift'               => 0,
-            'base_currency_code'    => 'EUR',
-            'channel_currency_code' => 'EUR',
-            'grand_total'           => 0.0000,
-            'base_grand_total'      => 0.0000,
-            'sub_total'             => 0.0000,
-            'base_sub_total'        => 0.0000,
-            'channel_id'            => 1,
-            'created_at'            => now(),
-            'updated_at'            => now(),
+        $cartData = [
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
         ];
+
+        if ($customer = auth()->guard()->user()) {
+            $cartData = array_merge($cartData, [
+                'customer_id'         => $customer->id,
+                'is_guest'            => 0,
+                'customer_first_name' => $customer->first_name,
+                'customer_last_name'  => $customer->last_name,
+                'customer_email'      => $customer->email,
+            ]);
+        } else {
+            $cartData['is_guest'] = 1;
+        }
+
+        return $cartData;
     }
 }

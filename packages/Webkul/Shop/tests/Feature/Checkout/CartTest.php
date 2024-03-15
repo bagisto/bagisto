@@ -186,7 +186,7 @@ it('should fails the validation error when the wrong cart item id provided when 
         ->assertUnprocessable();
 });
 
-it('should remove product items to the cart', function () {
+it('should remove product items to the cart for the guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -207,35 +207,36 @@ it('should remove product items to the cart', function () {
         ->getSimpleProductFactory()
         ->create();
 
+    
+    $cart = Cart::factory()->create();
+
+    $additional = [
+        'product_id' => $product->id,
+        "rating"     => "0",
+        "is_buy_now" => "0",
+        "quantity"   => "1",
+    ];
+
     $cartItem = CartItem::factory()->create([
-        'quantity'          => 1,
+        'cart_id'           => $cart->id, 
         'product_id'        => $product->id,
         'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
         'name'              => $product->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'type'              => $product->type,
-        'weight'            => 1,
-        'total_weight'      => 1,
-        'base_total_weight' => 1,
-        'cart_id'           => $cartId = Cart::factory()->create([
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price = $product->price,
-            'base_grand_total'      => $price,
-            'sub_total'	            => $price,
-            'base_sub_total'        => $price,
-            'is_guest'              => 1,
-        ])->id,
+        'additional'        => $additional,
     ]);
 
-    $cartTemp = new \stdClass();
-    $cartTemp->id = $cartId;
+    cart()->collectTotals();
 
-    session()->put('cart', $cartTemp);
+    $this->setCartForGuestUser($cart);
 
     // Act and Assert
     deleteJson(route('shop.api.checkout.cart.destroy', [
@@ -247,6 +248,122 @@ it('should remove product items to the cart', function () {
 
     $this->assertDatabaseMissing('cart_items', [
         'id' => $cartItem->id,
+    ]);
+
+    $this->assertDatabaseMissing('cart', [
+        'id' => $cart->id,
+    ]);
+});
+
+it('should remove only one product from cart for guest user', function () {
+    // Arrange
+    $products = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->count(2)
+        ->create();
+
+    [$product1, $product2] = $products;
+
+    $cart = Cart::factory()->create();
+
+    $additional1 = [
+        'product_id' => $product1->id,
+        "rating"     => "0",
+        "is_buy_now" => "0",
+        "quantity"   => "1",
+    ];
+
+    $additional2 = [
+        'product_id' => $product2->id,
+        "rating"     => "0",
+        "is_buy_now" => "0",
+        "quantity"   => "1",
+    ];
+
+    $cartItem1 = CartItem::factory()->create([
+        'cart_id'           => $cart->id, 
+        'product_id'        => $product1->id,
+        'sku'               => $product1->sku,
+        'quantity'          => $additional1['quantity'],
+        'name'              => $product1->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product1->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional1['quantity'],
+        'base_total'        => $price * $additional1['quantity'],
+        'weight'            => $product1->weight ?? 0,
+        'total_weight'      => ($product1->weight ?? 0) * $additional1['quantity'],
+        'base_total_weight' => ($product1->weight ?? 0) * $additional1['quantity'],
+        'type'              => $product1->type,
+        'additional'        => $additional1,
+    ]);
+
+    $cartItem2 = CartItem::factory()->create([
+        'cart_id'           => $cart->id, 
+        'product_id'        => $product2->id,
+        'sku'               => $product2->sku,
+        'quantity'          => $additional2['quantity'],
+        'name'              => $product2->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product2->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional2['quantity'],
+        'base_total'        => $price * $additional2['quantity'],
+        'weight'            => $product2->weight ?? 0,
+        'total_weight'      => ($product2->weight ?? 0) * $additional2['quantity'],
+        'base_total_weight' => ($product2->weight ?? 0) * $additional2['quantity'],
+        'type'              => $product2->type,
+        'additional'        => $additional2,
+    ]);
+
+    $this->setCart($cart);
+
+    cart()->collectTotals();
+
+    // Act and Assert
+    deleteJson(route('shop.api.checkout.cart.destroy', [
+        'cart_item_id' => $cartItem1->id,
+    ]))
+        ->assertOk()
+        ->assertJsonPath('data.id', $cart->id)
+        ->assertJsonPath('data.is_guest', $cart->is_guest)
+        ->assertJsonPath('data.customer_id', $cart->customer_id)
+        ->assertJsonPath('data.items_count', $cart->items_count)
+        ->assertJsonPath('data.items_qty', $cart->items_qty)
+        ->assertJsonPath('data.grand_total', $cart->grand_total)
+        ->assertJsonPath('data.base_sub_total', core()->formatPrice($cart->base_sub_total))
+        ->assertJsonPath('data.base_tax_total', $cart->base_tax_total)
+        ->assertJsonPath('data.base_tax_total', $cart->base_tax_total)
+        ->assertJsonPath('data.base_tax_amounts.0', $cart->base_tax_amounts)
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
+
+    $this->assertDatabaseMissing('cart_items', [
+        'id' => $cartItem1->id,
+    ]);
+
+    $this->assertModelWise([
+        [
+            Cart::class => [
+                'id' => $cart->id,
+            ],
+
+            CartItem::class => [
+                
+            ]
+        ]
     ]);
 });
 
@@ -321,9 +438,9 @@ it('should add a simple product to the cart', function () {
         ->assertJsonPath('data.items.0.name', $product->name)
         ->assertJsonPath('data.items.0.quantity', $quantity);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['items'][0]['price'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquals(round(($product->price * $quantity), 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price * $quantity, $response['data']['grand_total']);
 });
 
 it('should fails the validation error when the product id not provided add a bundle product to the cart', function () {
@@ -439,9 +556,9 @@ it('should add a bundle product to the cart', function () {
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.name', $product->name);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquals(round($grandTotal), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($grandTotal, $response['data']['sub_total']);
 });
 
 it('should fails the validation when the product id not provided when add a configurable product to the cart', function () {
@@ -533,9 +650,9 @@ it('should add a configurable product to the cart', function () {
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.name', $product->name);
 
-    $this->assertEquals(round($childProduct->price, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($childProduct->price, $response['data']['grand_total']);
 
-    $this->assertEquals(round($childProduct->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($childProduct->price, $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the product id not provided when add a downloadable product to the cart', function () {
@@ -615,9 +732,9 @@ it('should add a downloadable product to the cart', function () {
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.name', $product->name);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['items'][0]['price'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['grand_total']);
 });
 
 it('should fails the validation error when the product id not provided when add a grouped product to the cart', function () {
