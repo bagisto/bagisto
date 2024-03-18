@@ -15,4 +15,18 @@ trait CoreAssertions
             }
         }
     }
+
+    /**
+     * Assert that two numbers are equal with optional decimal precision.
+     */
+    public function assertEquality(float $expected, float $actual, ?int $decimal = null): void
+    {
+        $decimal = $decimal ?? core()->getCurrentChannel()->decimal;
+
+        $expectedFormatted = number_format($expected, $decimal);
+
+        $actualFormatted = number_format($actual, $decimal);
+
+        $this->assertEquals($expectedFormatted, $actualFormatted);
+    }
 }
