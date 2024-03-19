@@ -63,15 +63,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function store()
-    {
-    }
-
-    /**
      * Show the view for the specified resource.
      *
      * @return \Illuminate\View\View

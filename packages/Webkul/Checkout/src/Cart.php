@@ -651,13 +651,15 @@ class Cart
 
         if (! $this->cart->items->count()) {
             $this->cartRepository->delete($this->cart->id);
+
+            $this->refreshCart();
         } else {
             $this->cartItemRepository->delete($itemId);
 
+            $this->refreshCart();
+
             $this->collectTotals();
         }
-
-        $this->refreshCart();
 
         return true;
     }

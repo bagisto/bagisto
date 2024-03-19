@@ -1,4 +1,4 @@
-{!! view_render_event('bagisto.admin.sales.order.create.left_component.payment.before') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.payment.before') !!}
 
 <v-cart-payment-methods
     :methods="paymentMethods"
@@ -6,9 +6,10 @@
     @processed="stepProcessed"
 >
     <!-- Payment Method shimmer Effect -->
+    <x-admin::shimmer.sales.orders.create.cart.payment />
 </v-cart-payment-methods>
 
-{!! view_render_event('bagisto.admin.sales.order.create.left_component.payment.after') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.payment.after') !!}
 
 @pushOnce('scripts')
     <script
@@ -18,21 +19,22 @@
         <div class="bg-white dark:bg-gray-900 rounded box-shadow">
             <div class="flex items-center p-4 border-b dark:border-gray-800">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
-                    @lang('admin::app.sales.orders.create.payment.title')
+                    @lang('admin::app.sales.orders.create.cart.payment.title')
                 </p>
             </div>
 
             <!-- Payment Cards -->
             <template v-if="! methods">
                 <!-- Payment Method Shimmer Effect -->
+                <x-admin::shimmer.sales.orders.create.cart.payment />
             </template>
 
             <template v-else>
                 <div class="grid">
-                    {!! view_render_event('bagisto.admin.sales.order.create.left_component.payment.before') !!}
+                    {!! view_render_event('bagisto.admin.sales.order.create.cart.payment.before') !!}
 
                     <label
-                        class="flex gap-4 items-center p-4 border-b dark:border-gray-800 cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="flex gap-2 items-center p-4 border-b dark:border-gray-800 cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         v-for="payment in methods"
                         :for="payment.method"
                     >
@@ -50,7 +52,7 @@
                         </p>
                     </label>
 
-                    {!! view_render_event('bagisto.admin.sales.order.create.left_component.payment.after') !!}
+                    {!! view_render_event('bagisto.admin.sales.order.create.cart.payment.after') !!}
                 </div>
             </template>
         </div>

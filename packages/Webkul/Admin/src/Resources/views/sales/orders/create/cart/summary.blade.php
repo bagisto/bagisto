@@ -1,4 +1,4 @@
-{!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.before') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.summary.before') !!}
 
 <v-cart-summary
     :cart="cart"
@@ -6,7 +6,7 @@
     @coupon-removed="getCart"
 ></v-cart-summary>
 
-{!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.after') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.summary.after') !!}
 
 @pushOnce('scripts')
     <script
@@ -16,7 +16,7 @@
         <div class="bg-white dark:bg-gray-900 rounded box-shadow">
             <div class="flex items-center p-4 border-b dark:border-gray-800">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
-                    @lang('admin::app.sales.orders.create.summary.title')
+                    @lang('admin::app.sales.orders.create.cart.summary.title')
                 </p>
             </div>
 
@@ -28,7 +28,7 @@
 
                     <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between">
                         <p class="text-base text-gray-600 font-medium">
-                            @lang('admin::app.sales.orders.create.summary.sub-total')
+                            @lang('admin::app.sales.orders.create.cart.summary.sub-total')
                         </p>
 
                         <p class="text-base text-gray-600 font-medium">
@@ -48,7 +48,7 @@
                         v-if="parseFloat(cart.base_tax_total)"
                     >
                         <p class="text-base text-gray-600 font-medium">
-                            @lang('admin::app.sales.orders.create.summary.tax') (@{{ index }})%
+                            @lang('admin::app.sales.orders.create.cart.summary.tax') (@{{ index }})%
                         </p>
 
                         <p class="text-base text-gray-600 font-medium">
@@ -66,7 +66,7 @@
                         v-if="cart.selected_shipping_rate"
                     >
                         <p class="text-base text-gray-600 font-medium">
-                            @lang('admin::app.sales.orders.create.summary.shipping-amount')
+                            @lang('admin::app.sales.orders.create.cart.summary.shipping-amount')
                         </p>
 
                         <p class="text-base text-gray-600 font-medium">
@@ -84,7 +84,7 @@
                         v-if="parseFloat(cart.base_discount_amount)"
                     >
                         <p class="text-base text-gray-600 font-medium">
-                            @lang('admin::app.sales.orders.create.summary.discount-amount')
+                            @lang('admin::app.sales.orders.create.cart.summary.discount-amount')
                         </p>
 
                         <p class="text-base text-gray-600 font-medium">
@@ -100,7 +100,7 @@
 
                     <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between">
                         <p class="text-base text-gray-600 font-medium">
-                            @lang('admin::app.sales.orders.create.summary.apply-coupon')
+                            @lang('admin::app.sales.orders.create.cart.summary.apply-coupon')
                         </p>
 
                         <template v-if="cart.coupon_code">
@@ -121,7 +121,7 @@
                                     class="text-blue-600 cursor-pointer"
                                     @click="$refs.couponModel.open()"
                                 >
-                                    @lang('admin::app.sales.orders.create.summary.apply-coupon')
+                                    @lang('admin::app.sales.orders.create.cart.summary.apply-coupon')
                                 </span>
                             </p>
                         </template>
@@ -136,7 +136,7 @@
 
                     <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between">
                         <p class="text-lg font-semibold">
-                            @lang('admin::app.sales.orders.create.summary.grand-total')
+                            @lang('admin::app.sales.orders.create.cart.summary.grand-total')
                         </p>
 
                         <p class="text-lg font-semibold">
@@ -172,7 +172,7 @@
                     <x-admin::modal ref="couponModel">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            @lang('admin::app.sales.orders.create.summary.apply-coupon')
+                            @lang('admin::app.sales.orders.create.cart.summary.apply-coupon')
                         </x-slot>
 
                         <!-- Modal Content -->
@@ -182,7 +182,7 @@
                                     type="text"
                                     name="code"
                                     rules="required"
-                                    :placeholder="trans('admin::app.sales.orders.create.summary.enter-your-code')"
+                                    :placeholder="trans('admin::app.sales.orders.create.cart.summary.enter-your-code')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="code" />
@@ -193,7 +193,7 @@
                         <x-slot:footer>
                             <x-admin::button
                                 class="primary-button"
-                                :title="trans('admin::app.sales.orders.create.summary.apply-coupon')"
+                                :title="trans('admin::app.sales.orders.create.cart.summary.apply-coupon')"
                                 ::loading="isStoring"
                                 ::disabled="isStoring"
                             />

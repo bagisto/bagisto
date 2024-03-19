@@ -5,6 +5,10 @@ use Webkul\Admin\Http\Controllers\Customers\AddressController;
 use Webkul\Admin\Http\Controllers\Customers\CustomerController;
 use Webkul\Admin\Http\Controllers\Customers\CustomerGroupController;
 use Webkul\Admin\Http\Controllers\Customers\ReviewController;
+use Webkul\Admin\Http\Controllers\Customers\Customer\CompareController;
+use Webkul\Admin\Http\Controllers\Customers\Customer\OrderController;
+use Webkul\Admin\Http\Controllers\Customers\Customer\WishlistController;
+use Webkul\Admin\Http\Controllers\Customers\Customer\CartController;
 
 /**
  * Customers routes.
@@ -33,7 +37,29 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url').'/c
 
             Route::post('mass-update', 'massUpdate')->name('admin.customers.customers.mass_update');
 
-            Route::post('/{id}', 'destroy')->name('admin.customers.customers.delete');
+            Route::post('{id}', 'destroy')->name('admin.customers.customers.delete');
+
+            Route::controller(WishlistController::class)->group(function () {
+                Route::get('{id}/wishlist-items', 'items')->name('admin.customers.customers.wishlist.items');
+
+                Route::delete('{id}/wishlist-items/{id}', 'destroy')->name('admin.customers.customers.wishlist.items.delete');
+            });
+
+            Route::controller(CompareController::class)->group(function () {
+                Route::get('{id}/compare-items', 'items')->name('admin.customers.customers.compare.items');
+
+                Route::delete('{id}/wishlist-items/{id}', 'destroy')->name('admin.customers.customers.compare.items.delete');
+            });
+
+            Route::controller(CartController::class)->group(function () {
+                Route::get('{id}/cart-items', 'items')->name('admin.customers.customers.cart.items');
+
+                Route::delete('{id}/cart-items/{id}', 'destroy')->name('admin.customers.customers.cart.items.delete');
+            });
+
+            Route::controller(OrderController::class)->group(function () {
+                Route::get('{id}/recent-order-items', 'recentItems')->name('admin.customers.customers.orders.recent_items');
+            });
         });
 
         /**

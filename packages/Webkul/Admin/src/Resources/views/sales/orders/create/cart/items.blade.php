@@ -1,38 +1,44 @@
-{!! view_render_event('bagisto.admin.sales.order.create.left_component.items.before') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.items.before') !!}
 
 <!-- Vue JS Component -->
 <v-cart-items
     :cart="cart"
     @added-to-cart="getCart"
     @remove-from-cart="getCart"
-></v-cart-items>
+>
+    <!-- Cart Items Shimmer Effect -->
+    <x-admin::shimmer.sales.orders.create.cart.items />
+</v-cart-items>
 
-{!! view_render_event('bagisto.admin.sales.order.create.left_component.items.after') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.items.after') !!}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-cart-items-template">
         <div class="bg-white dark:bg-gray-900 rounded box-shadow">
-            <div class="flex justify-between items-center p-4">
+            <div class="flex justify-between p-4">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
-                    @lang('admin::app.sales.orders.create.items.title')
+                    @lang('admin::app.sales.orders.create.cart.items.title')
                 </p>
 
                 <div class="flex gap-4 items-center">
                     <p class="text-base text-gray-800 dark:text-white font-semibold">
-                        @{{ "@lang('admin::app.sales.orders.create.items.sub-total', ['sub_total' => 'replace'])".replace('replace', cart.formatted_sub_total) }}
+                        @{{ "@lang('admin::app.sales.orders.create.cart.items.sub-total', ['sub_total' => 'replace'])".replace('replace', cart.formatted_sub_total) }}
                     </p>
 
                     <button
                         class="secondary-button"
                         @click="$refs.productSearch.openDrawer()"
                     >
-                        @lang('admin::app.sales.orders.create.items.add-product')
+                        @lang('admin::app.sales.orders.create.cart.items.add-product')
                     </button>
                 </div>
             </div>
 
             <!-- Order items -->
-            <div class="grid">
+            <div
+                class="grid"
+                v-if="cart.items.length"
+            >
                 <div
                     class="row grid p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="item in cart.items"
@@ -66,11 +72,11 @@
 
                                 <!-- Item SKU -->
                                 <p class="text-gray-600 dark:text-gray-300">
-                                    @{{ "@lang('admin::app.sales.orders.create.items.sku', ['sku' => ':replace'])".replace(':replace', item.sku) }}
+                                    @{{ "@lang('admin::app.sales.orders.create.cart.items.sku', ['sku' => ':replace'])".replace(':replace', item.sku) }}
                                 </p>
 
                                 <p class="text-gray-600 dark:text-gray-300">
-                                    @{{ "@lang('admin::app.sales.orders.create.items.amount-per-unit', ['amount' => ':replaceAmount', 'qty' => ':replaceQty'])".replace(':replaceAmount', item.formatted_price).replace(':replaceQty', item.quantity) }}
+                                    @{{ "@lang('admin::app.sales.orders.create.cart.items.amount-per-unit', ['amount' => ':replaceAmount', 'qty' => ':replaceQty'])".replace(':replaceAmount', item.formatted_price).replace(':replaceQty', item.quantity) }}
                                 </p>
 
                                 <!-- Item Options -->
@@ -98,13 +104,31 @@
                             class="text-red-600 cursor-pointer transition-all hover:underline"
                             @click="removeCartItem(item)"
                         >
-                            @lang('admin::app.sales.orders.create.items.delete')
+                            @lang('admin::app.sales.orders.create.cart.items.delete')
                         </p>
 
-                        <p class="text-blue-600 cursor-pointer transition-all hover:underline">
-                            @lang('admin::app.sales.orders.create.items.move-to-wishlist')
+                        <p class="text-emerald-600 cursor-pointer transition-all hover:underline">
+                            @lang('admin::app.sales.orders.create.cart.items.move-to-wishlist')
                         </p>
                     </div>
+                </div>
+            </div>
+
+            <!-- Empty Items Box -->
+            <div
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                v-else
+            >
+                <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-20 h-20 dark:invert dark:mix-blend-exclusion">
+                
+                <div class="flex flex-col gap-1.5 items-center">
+                    <p class="text-base text-gray-400 font-semibold">
+                        @lang('admin::app.sales.orders.create.cart.items.empty-title')
+                    </p>
+
+                    <p class="text-gray-400">
+                        @lang('admin::app.sales.orders.create.cart.items.empty-description')
+                    </p>
                 </div>
             </div>
 
@@ -147,7 +171,7 @@
                         };
                     });
 
-                    axios.post("{{ route('admin.sales.cart.store', $cart->id) }}", params)
+                    this.$axios.post("{{ route('admin.sales.cart.store', $cart->id) }}", params)
                         .then(response => {
                             this.$emit('added-to-cart', response.data.data);
                         })
@@ -157,7 +181,7 @@
                 },
 
                 removeCartItem(item) {
-                    axios.delete("{{ route('admin.sales.cart.destroy', $cart->id) }}", {
+                    this.$axios.delete("{{ route('admin.sales.cart.destroy', $cart->id) }}", {
                         data: {
                             cart_item_id: item.id
                         }

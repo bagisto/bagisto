@@ -22,7 +22,10 @@
     </div>
 
     <!-- Vue JS Component -->
-    <v-create-order></v-create-order>
+    <v-create-order>
+        <!-- Order Create Shimmer Effect -->
+        <x-admin::shimmer.sales.orders.create />
+    </v-create-order>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-order-template">
@@ -34,27 +37,27 @@
                     class="flex flex-col gap-2 flex-1 max-xl:flex-auto overflow-y-auto"
                     id="steps-container"
                 >
-
-                    @include('admin::sales.orders.create.items')
+                    <!-- Cart Items Component -->
+                    @include('admin::sales.orders.create.cart.items')
 
                     <!-- Included Addresses Blade File -->
                     <template v-if="cart.items_count && ['address', 'shipping', 'payment', 'review'].includes(currentStep)">
-                        @include('admin::sales.orders.create.address')
+                        @include('admin::sales.orders.create.cart.address')
                     </template>
 
                     <!-- Included Shipping Methods Blade File -->
                     <template v-if="cart.have_stockable_items && ['shipping', 'payment', 'review'].includes(currentStep)">
-                        @include('admin::sales.orders.create.shipping')
+                        @include('admin::sales.orders.create.cart.shipping')
                     </template>
 
                     <!-- Included Payment Methods Blade File -->
                     <template v-if="['payment', 'review'].includes(currentStep)">
-                        @include('admin::sales.orders.create.payment')
+                        @include('admin::sales.orders.create.cart.payment')
                     </template>
 
                     <!-- Included Payment Methods Blade File -->
                     <template v-if="['review'].includes(currentStep)">
-                        @include('admin::sales.orders.create.summary')
+                        @include('admin::sales.orders.create.cart.summary')
                     </template>
 
                 </div>
@@ -65,6 +68,17 @@
                 {!! view_render_event('bagisto.admin.sales.order.right_component.before') !!}
 
                 <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+                    <!-- Cart Items Component -->
+                    @include('admin::sales.orders.create.cart-items')
+
+                    <!-- Wishlist Items Component -->
+                    @include('admin::sales.orders.create.wishlist-items')
+
+                    <!-- Compare Items Component -->
+                    @include('admin::sales.orders.create.compare-items')
+
+                    <!-- Recent Order Items Component -->
+                    @include('admin::sales.orders.create.recent-order-items')
                 </div>
                     
                 {!! view_render_event('bagisto.admin.sales.order.create.right_component.after') !!}
@@ -91,7 +105,7 @@
 
                 methods: {
                     getCart() {
-                        axios.get("{{ route('admin.sales.cart.index', $cart->id) }}")
+                        this.$axios.get("{{ route('admin.sales.cart.index', $cart->id) }}")
                             .then(response => {
                                 this.cart = response.data.data;
 

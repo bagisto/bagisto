@@ -15,24 +15,24 @@
             <!-- Company Name -->
             <x-admin::form.control-group>
                 <x-admin::form.control-group.label>
-                    @lang('admin::app.sales.orders.create.address.company-name')
+                    @lang('admin::app.sales.orders.create.cart.address.company-name')
                 </x-admin::form.control-group.label>
 
                 <x-admin::form.control-group.control
                     type="text"
                     ::name="controlName + '.company_name'"
                     ::value="address.company_name"
-                    :placeholder="trans('admin::app.sales.orders.create.address.company-name')"
+                    :placeholder="trans('admin::app.sales.orders.create.cart.address.company-name')"
                 />
             </x-admin::form.control-group>
 
-            {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.company_name.after') !!}
+            {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.company_name.after') !!}
 
             <!-- First Name -->
             <div class="grid grid-cols-2 gap-x-5">
                 <x-admin::form.control-group>
                     <x-admin::form.control-group.label class="!mt-0 required">
-                        @lang('admin::app.sales.orders.create.address.first-name')
+                        @lang('admin::app.sales.orders.create.cart.address.first-name')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
@@ -40,19 +40,19 @@
                         ::name="controlName + '.first_name'"
                         ::value="address.first_name"
                         rules="required"
-                        :label="trans('admin::app.sales.orders.create.address.first-name')"
-                        :placeholder="trans('admin::app.sales.orders.create.address.first-name')"
+                        :label="trans('admin::app.sales.orders.create.cart.address.first-name')"
+                        :placeholder="trans('admin::app.sales.orders.create.cart.address.first-name')"
                     />
 
                     <x-admin::form.control-group.error ::name="controlName + '.first_name'" />
                 </x-admin::form.control-group>
 
-                {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.first_name.after') !!}
+                {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.first_name.after') !!}
 
                 <!-- Last Name -->
                 <x-admin::form.control-group>
                     <x-admin::form.control-group.label class="!mt-0 required">
-                        @lang('admin::app.sales.orders.create.address.last-name')
+                        @lang('admin::app.sales.orders.create.cart.address.last-name')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
@@ -60,20 +60,20 @@
                         ::name="controlName + '.last_name'"
                         ::value="address.last_name"
                         rules="required"
-                        :label="trans('admin::app.sales.orders.create.address.last-name')"
-                        :placeholder="trans('admin::app.sales.orders.create.address.last-name')"
+                        :label="trans('admin::app.sales.orders.create.cart.address.last-name')"
+                        :placeholder="trans('admin::app.sales.orders.create.cart.address.last-name')"
                     />
 
                     <x-admin::form.control-group.error ::name="controlName + '.last_name'" />
                 </x-admin::form.control-group>
 
-                {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.last_name.after') !!}
+                {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.last_name.after') !!}
             </div>
 
             <!-- Email -->
             <x-admin::form.control-group>
                 <x-admin::form.control-group.label class="!mt-0 required">
-                    @lang('admin::app.sales.orders.create.address.email')
+                    @lang('admin::app.sales.orders.create.cart.address.email')
                 </x-admin::form.control-group.label>
 
                 <x-admin::form.control-group.control
@@ -81,19 +81,19 @@
                     ::name="controlName + '.email'"
                     ::value="address.email"
                     rules="required|email"
-                    :label="trans('admin::app.sales.orders.create.address.email')"
+                    :label="trans('admin::app.sales.orders.create.cart.address.email')"
                     placeholder="email@example.com"
                 />
 
                 <x-admin::form.control-group.error ::name="controlName + '.email'" />
             </x-admin::form.control-group>
 
-            {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.email.after') !!}
+            {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.email.after') !!}
 
             <!-- Street Address -->
             <x-admin::form.control-group>
                 <x-admin::form.control-group.label class="!mt-0 required">
-                    @lang('admin::app.sales.orders.create.address.street-address')
+                    @lang('admin::app.sales.orders.create.cart.address.street-address')
                 </x-admin::form.control-group.label>
 
                 <x-admin::form.control-group.control
@@ -101,8 +101,8 @@
                     ::name="controlName + '.address.[0]'"
                     ::value="address.address[0]"
                     rules="required|address"
-                    :label="trans('admin::app.sales.orders.create.address.street-address')"
-                    :placeholder="trans('admin::app.sales.orders.create.address.street-address')"
+                    :label="trans('admin::app.sales.orders.create.cart.address.street-address')"
+                    :placeholder="trans('admin::app.sales.orders.create.cart.address.street-address')"
                 />
 
                 <x-admin::form.control-group.error
@@ -117,8 +117,8 @@
                             ::name="controlName + '.address.[{{ $i }}]'"
                             class="mt-2"
                             rules="address"
-                            :label="trans('admin::app.sales.orders.create.address.street-address')"
-                            :placeholder="trans('admin::app.sales.orders.create.address.street-address')"
+                            :label="trans('admin::app.sales.orders.create.cart.address.street-address')"
+                            :placeholder="trans('admin::app.sales.orders.create.cart.address.street-address')"
                         />
 
                         <x-admin::form.control-group.error
@@ -129,13 +129,13 @@
                 @endif
             </x-admin::form.control-group>
 
-            {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.address.after') !!}
+            {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.address.after') !!}
 
             <div class="grid grid-cols-2 gap-x-5">
                 <!-- Country -->
                 <x-admin::form.control-group class="!mb-4">
                     <x-admin::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
-                        @lang('admin::app.sales.orders.create.address.country')
+                        @lang('admin::app.sales.orders.create.cart.address.country')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
@@ -144,11 +144,11 @@
                         ::value="address.country"
                         v-model="selectedCountry"
                         rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
-                        :label="trans('admin::app.sales.orders.create.address.country')"
-                        :placeholder="trans('admin::app.sales.orders.create.address.country')"
+                        :label="trans('admin::app.sales.orders.create.cart.address.country')"
+                        :placeholder="trans('admin::app.sales.orders.create.cart.address.country')"
                     >
                         <option value="">
-                            @lang('admin::app.sales.orders.create.address.select-country')
+                            @lang('admin::app.sales.orders.create.cart.address.select-country')
                         </option>
 
                         <option
@@ -162,12 +162,12 @@
                     <x-admin::form.control-group.error ::name="controlName + '.country'" />
                 </x-admin::form.control-group>
 
-                {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.country.after') !!}
+                {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.country.after') !!}
 
                 <!-- State -->
                 <x-admin::form.control-group>
                     <x-admin::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
-                        @lang('admin::app.sales.orders.create.address.state')
+                        @lang('admin::app.sales.orders.create.cart.address.state')
                     </x-admin::form.control-group.label>
 
                     <template v-if="states">
@@ -177,11 +177,11 @@
                                 ::name="controlName + '.state'"
                                 ::value="address.state"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                                :label="trans('admin::app.sales.orders.create.address.state')"
-                                :placeholder="trans('admin::app.sales.orders.create.address.state')"
+                                :label="trans('admin::app.sales.orders.create.cart.address.state')"
+                                :placeholder="trans('admin::app.sales.orders.create.cart.address.state')"
                             >
                                 <option value="">
-                                    @lang('admin::app.sales.orders.create.address.select-state')
+                                    @lang('admin::app.sales.orders.create.cart.address.select-state')
                                 </option>
 
                                 <option
@@ -199,8 +199,8 @@
                                 ::name="controlName + '.state'"
                                 ::value="address.state"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                                :label="trans('admin::app.sales.orders.create.address.state')"
-                                :placeholder="trans('admin::app.sales.orders.create.address.state')"
+                                :label="trans('admin::app.sales.orders.create.cart.address.state')"
+                                :placeholder="trans('admin::app.sales.orders.create.cart.address.state')"
                             />
                         </template>
                     </template>
@@ -208,14 +208,14 @@
                     <x-admin::form.control-group.error ::name="controlName + '.state'" />
                 </x-admin::form.control-group>
 
-                {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.state.after') !!}
+                {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.state.after') !!}
             </div>
 
             <div class="grid grid-cols-2 gap-x-5">
                 <!-- City -->
                 <x-admin::form.control-group>
                     <x-admin::form.control-group.label class="!mt-0 required">
-                        @lang('admin::app.sales.orders.create.address.city')
+                        @lang('admin::app.sales.orders.create.cart.address.city')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
@@ -223,19 +223,19 @@
                         ::name="controlName + '.city'"
                         ::value="address.city"
                         rules="required"
-                        :label="trans('admin::app.sales.orders.create.address.city')"
-                        :placeholder="trans('admin::app.sales.orders.create.address.city')"
+                        :label="trans('admin::app.sales.orders.create.cart.address.city')"
+                        :placeholder="trans('admin::app.sales.orders.create.cart.address.city')"
                     />
 
                     <x-admin::form.control-group.error ::name="controlName + '.city'" />
                 </x-admin::form.control-group>
 
-                {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.city.after') !!}
+                {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.city.after') !!}
 
                 <!-- Postcode -->
                 <x-admin::form.control-group>
                     <x-admin::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
-                        @lang('admin::app.sales.orders.create.address.postcode')
+                        @lang('admin::app.sales.orders.create.cart.address.postcode')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
@@ -243,20 +243,20 @@
                         ::name="controlName + '.postcode'"
                         ::value="address.postcode"
                         rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
-                        :label="trans('admin::app.sales.orders.create.address.postcode')"
-                        :placeholder="trans('admin::app.sales.orders.create.address.postcode')"
+                        :label="trans('admin::app.sales.orders.create.cart.address.postcode')"
+                        :placeholder="trans('admin::app.sales.orders.create.cart.address.postcode')"
                     />
 
                     <x-admin::form.control-group.error ::name="controlName + '.postcode'" />
                 </x-admin::form.control-group>
 
-                {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.postcode.after') !!}
+                {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.postcode.after') !!}
             </div>
 
             <!-- Phone Number -->
             <x-admin::form.control-group>
                 <x-admin::form.control-group.label class="!mt-0 required">
-                    @lang('admin::app.sales.orders.create.address.telephone')
+                    @lang('admin::app.sales.orders.create.cart.address.telephone')
                 </x-admin::form.control-group.label>
 
                 <x-admin::form.control-group.control
@@ -264,14 +264,14 @@
                     ::name="controlName + '.phone'"
                     ::value="address.phone"
                     rules="required|numeric"
-                    :label="trans('admin::app.sales.orders.create.address.telephone')"
-                    :placeholder="trans('admin::app.sales.orders.create.address.telephone')"
+                    :label="trans('admin::app.sales.orders.create.cart.address.telephone')"
+                    :placeholder="trans('admin::app.sales.orders.create.cart.address.telephone')"
                 />
 
                 <x-admin::form.control-group.error ::name="controlName + '.phone'" />
             </x-admin::form.control-group>
 
-            {!! view_render_event('bagisto.admin.sales.order.create.left_component.address.form.phone.after') !!}
+            {!! view_render_event('bagisto.admin.sales.order.create.cart.address.form.phone.after') !!}
         </div>
     </script>
 

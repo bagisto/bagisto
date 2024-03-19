@@ -1,4 +1,4 @@
-{!! view_render_event('bagisto.admin.sales.order.create.left_component.address.before') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.address.before') !!}
 
 <!-- Vue JS Component -->
 <v-cart-addresses
@@ -7,16 +7,16 @@
     @processed="stepProcessed"
 ></v-cart-addresses>
 
-{!! view_render_event('bagisto.admin.sales.order.create.left_component.address.after') !!}
+{!! view_render_event('bagisto.admin.sales.order.create.cart.address.after') !!}
 
-@include('admin::sales.orders.create.address.form')
+@include('admin::sales.orders.create.cart.address.form')
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-cart-addresses-template">
         <div class="bg-white dark:bg-gray-900 rounded box-shadow">
             <div class="flex items-center p-4 border-b dark:border-gray-800">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
-                    @lang('admin::app.sales.orders.create.address.title')
+                    @lang('admin::app.sales.orders.create.cart.address.title')
                 </p>
             </div>
 
@@ -30,7 +30,7 @@
                         <!-- Billing Address Header -->
                         <div class="flex justify-between items-center mb-4">
                             <p class="text-base font-medium text-gray-600">
-                                @lang('admin::app.sales.orders.create.address.billing-address')
+                                @lang('admin::app.sales.orders.create.cart.address.billing-address')
                             </p>
 
                             <p
@@ -38,7 +38,7 @@
                                 @click="activeAddressForm = 'billing'; selectedAddressForEdit = null; $refs.updateCreateModal.open()"
                                 v-if="! cart.billing_address"
                             >
-                                @lang('admin::app.sales.orders.create.address.add-btn')
+                                @lang('admin::app.sales.orders.create.cart.address.add-btn')
                             </p>
                         </div>
 
@@ -58,7 +58,7 @@
                                         ::value="address.id"
                                         v-model="selectedAddresses.billing_address_id"
                                         rules="required"
-                                        label="{{ trans('admin::app.sales.orders.create.address.billing-address') }}"
+                                        label="{{ trans('admin::app.sales.orders.create.cart.address.billing-address') }}"
                                     />
                                 </x-admin::form.control-group>
 
@@ -100,7 +100,7 @@
                                             $refs.updateCreateModal.open()
                                         "
                                     >
-                                        @lang('admin::app.sales.orders.create.address.edit-btn')
+                                        @lang('admin::app.sales.orders.create.cart.address.edit-btn')
                                     </p>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                                     class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
                                     for="use_for_shipping"
                                 >
-                                    @lang('admin::app.sales.orders.create.address.same-as-billing')
+                                    @lang('admin::app.sales.orders.create.cart.address.same-as-billing')
                                 </label>
                             </x-admin::form.control-group>
 
@@ -140,7 +140,7 @@
                                 <!-- Shipping Address Header -->
                                 <div class="flex justify-between items-center mb-4">
                                     <p class="text-base font-medium text-gray-600">
-                                        @lang('admin::app.sales.orders.create.address.shipping-address')
+                                        @lang('admin::app.sales.orders.create.cart.address.shipping-address')
                                     </p>
 
                                     <p
@@ -152,7 +152,7 @@
                                         "
                                         v-if="! cart.shipping_address"
                                     >
-                                        @lang('admin::app.sales.orders.create.address.add-btn')
+                                        @lang('admin::app.sales.orders.create.cart.address.add-btn')
                                     </p>
                                 </div>
 
@@ -172,7 +172,7 @@
                                                 ::value="address.id"
                                                 v-model="selectedAddresses.shipping_address_id"
                                                 rules="required"
-                                                label="{{ trans('admin::app.sales.orders.create.address.shipping-address') }}"
+                                                label="{{ trans('admin::app.sales.orders.create.cart.address.shipping-address') }}"
                                             />
                                         </x-admin::form.control-group>
 
@@ -214,7 +214,7 @@
                                                     $refs.updateCreateModal.open()
                                                 "
                                             >
-                                                @lang('admin::app.sales.orders.create.address.edit-btn')
+                                                @lang('admin::app.sales.orders.create.cart.address.edit-btn')
                                             </p>
                                         </div>
                                     </div>
@@ -249,11 +249,11 @@
                         <x-slot:header>
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 <template v-if="activeAddressForm == 'billing'">
-                                    @lang('admin::app.sales.orders.create.address.billing-address')
+                                    @lang('admin::app.sales.orders.create.cart.address.billing-address')
                                 </template>
 
                                 <template v-else>
-                                    @lang('admin::app.sales.orders.create.address.shipping-address')
+                                    @lang('admin::app.sales.orders.create.cart.address.shipping-address')
                                 </template>
                             </p>
                         </x-slot>

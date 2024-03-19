@@ -16,6 +16,7 @@ class CartItemResource extends JsonResource
     {
         return [
             'id'              => $this->id,
+            'product_id'      => $this->product_id,
             'sku'             => $this->sku,
             'quantity'        => $this->quantity,
             'type'            => $this->type,
@@ -25,6 +26,7 @@ class CartItemResource extends JsonResource
             'total'           => $this->total,
             'formatted_total' => core()->formatPrice($this->total),
             'options'         => array_values($this->resource->additional['attributes'] ?? []),
+            'additional'      => $this->resource->additional,
             'images'          => $this->product->images,
         ];
     }
