@@ -1174,6 +1174,8 @@ it('should update cart quantities for guest user', function () {
         'additional'        => $additional2,
     ]);
 
+    cart()->collectTotals();
+
     cart()->setCart($cart);
 
     cart()->putCart($cart);
@@ -1362,7 +1364,7 @@ it('should fails the validation error when the product id not provided when add 
         ->assertUnprocessable();
 });
 
-it('should add a simple product to the cart', function () {
+it('should add a simple product to the cart for guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1393,19 +1395,82 @@ it('should add a simple product to the cart', function () {
         'quantity'   => $quantity = rand(1, 10),
     ]))
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
         ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.customer_id', null)
         ->assertJsonPath('data.items_qty', $quantity)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0)
+        ->assertJsonPath('data.coupon_code', null)
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.name', $product->name)
-        ->assertJsonPath('data.items.0.quantity', $quantity);
+        ->assertJsonPath('data.items.0.quantity', $quantity)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
     $this->assertEquality($product->price, $response['data']['items'][0]['price']);
 
     $this->assertEquality($product->price * $quantity, $response['data']['grand_total']);
+
+    $this->assertEquality($product->price * $quantity, $response['data']['sub_total']);
 });
 
-it('should fails the validation error when the product id is not provided when adding a bundle product to the cart', function () {
+it('should add a simple product to the cart for customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getSimpleProductFactory()->create();
+
+    // Act and Assert
+    $customer = $this->loginAsCustomer();
+
+    $response = postJson(route('shop.api.checkout.cart.store', [
+        'product_id' => $product->id,
+        'quantity'   => $quantity = rand(1, 10),
+    ]))
+        ->assertOk()
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.items_qty', $quantity)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.items.0.type', $product->type)
+        ->assertJsonPath('data.items.0.name', $product->name)
+        ->assertJsonPath('data.items.0.quantity', $quantity)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
+
+    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+
+    $this->assertEquality($product->price * $quantity, $response['data']['grand_total']);
+
+    $this->assertEquality($product->price * $quantity, $response['data']['sub_total']);
+});
+
+it('should fails the validation error when the product id not provided add a bundle product to the cart', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1459,7 +1524,7 @@ it('should fails the validation error when the product id is not provided when a
         ->assertUnprocessable();
 });
 
-it('should add a bundle product to the cart', function () {
+it('should add a bundle product to the cart for guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1516,7 +1581,89 @@ it('should add a bundle product to the cart', function () {
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items.0.quantity', 1)
         ->assertJsonPath('data.items.0.type', $product->type)
-        ->assertJsonPath('data.items.0.name', $product->name);
+        ->assertJsonPath('data.items.0.name', $product->name)
+        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.customer_id', null)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
+
+    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+
+    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+});
+
+it('should add a bundle product to the cart for customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getBundleProductFactory()->create();
+
+    $bundleOptions = [
+        'bundle_option_quantities' => [],
+        'bundle_options'           => [],
+    ];
+
+    $grandTotal = 0;
+
+    $product->load('bundle_options.product');
+
+    foreach ($product->bundle_options as $bundleOption) {
+        $grandTotal += $bundleOption->product->price;
+
+        $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+    }
+
+    // Act and Assert
+    $customer = $this->loginAsCustomer();
+
+    $response = postJson(route('shop.api.checkout.cart.store', [
+        'product_id'        => $product->id,
+        'quantity'          => 1,
+        'is_buy_now'        => '0',
+        'rating'            => '0',
+        'bundle_option_qty' => $bundleOptions['bundle_option_quantities'],
+        'bundle_options'    => $bundleOptions['bundle_options'],
+    ]))
+        ->assertOk()
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
+        ->assertJsonPath('data.items_qty', 1)
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.items.0.quantity', 1)
+        ->assertJsonPath('data.items.0.type', $product->type)
+        ->assertJsonPath('data.items.0.name', $product->name)
+        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
     $this->assertEquality($grandTotal, $response['data']['grand_total']);
 
@@ -1565,7 +1712,7 @@ it('should fails the validation when the product id not provided when add a conf
         ->assertUnprocessable();
 });
 
-it('should add a configurable product to the cart', function () {
+it('should add a configurable product to the cart for guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1605,12 +1752,80 @@ it('should add a configurable product to the cart', function () {
         ],
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items.0.quantity', 1)
         ->assertJsonPath('data.items.0.type', $product->type)
-        ->assertJsonPath('data.items.0.name', $product->name);
+        ->assertJsonPath('data.items.0.name', $product->name)
+        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.base_discount_amount', 0)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('data.customer_id', null)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
+
+    $this->assertEquality($childProduct->price, $response['data']['grand_total']);
+
+    $this->assertEquality($childProduct->price, $response['data']['sub_total']);
+});
+
+it('should add a configurable product to the cart for customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 2000),
+            ],
+        ],
+    ]))->getConfigurableProductFactory()->create();
+
+    $childProduct = $product->variants()->first();
+
+    // Act and Assert
+    $customer = $this->loginAsCustomer();
+
+    $response = postJson(route('shop.api.checkout.cart.store'), [
+        'selected_configurable_option' => $childProduct->id,
+        'product_id'                   => $product->id,
+        'is_buy_now'                   => '0',
+        'rating'                       => '0',
+        'quantity'                     => '1',
+        'super_attribute'              => [
+            23 => '1',
+            24 => '7',
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('data.items_qty', 1)
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.items.0.type', $product->type)
+        ->assertJsonPath('data.items.0.quantity', 1)
+        ->assertJsonPath('data.items.0.name', $product->name)
+        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0);
 
     $this->assertEquality($childProduct->price, $response['data']['grand_total']);
 
@@ -1653,7 +1868,7 @@ it('should fails the validation error when the product id not provided when add 
         ->assertUnprocessable();
 });
 
-it('should add a downloadable product to the cart', function () {
+it('should add a downloadable product to the cart for guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1688,11 +1903,73 @@ it('should add a downloadable product to the cart', function () {
     ]))
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
-        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.payment_method', null)
         ->assertJsonPath('data.items_qty', 1)
-        ->assertJsonPath('data.items.0.quantity', 1)
+        ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items.0.type', $product->type)
-        ->assertJsonPath('data.items.0.name', $product->name);
+        ->assertJsonPath('data.items.0.quantity', 1)
+        ->assertJsonPath('data.items.0.name', $product->name)
+        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.have_stockable_items', false)
+        ->assertJsonPath('data.customer_id', null)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0);
+
+    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+
+    $this->assertEquality($product->price, $response['data']['grand_total']);
+});
+
+it('should add a downloadable product to the cart for customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    // Act and Assert
+    $customer = $this->loginAsCustomer();
+
+    $response = postJson(route('shop.api.checkout.cart.store', [
+        'product_id' => $product->id,
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertOk()
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('data.items_qty', 1)
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.items.0.type', $product->type)
+        ->assertJsonPath('data.items.0.quantity', 1)
+        ->assertJsonPath('data.items.0.name', $product->name)
+        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.have_stockable_items', false)
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0);
 
     $this->assertEquality($product->price, $response['data']['items'][0]['price']);
 
@@ -1748,7 +2025,7 @@ it('should fails the validation error when the product id not provided when add 
         ->assertUnprocessable();
 });
 
-it('should add a grouped product to the cart', function () {
+it('should add a grouped product to the cart for guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1797,7 +2074,89 @@ it('should add a grouped product to the cart', function () {
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
-        ->assertJsonPath('data.items_count', 4);
+        ->assertJsonPath('data.items_count', 4)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('data.customer_id', null)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0);
+
+    foreach ($groupedProducts as $key => $groupedProduct) {
+        $response->assertJsonPath('data.items.'.$key.'.quantity', $groupedProduct->qty)
+            ->assertJsonPath('data.items.'.$key.'.type', $groupedProduct->associated_product->type)
+            ->assertJsonPath('data.items.'.$key.'.name', $groupedProduct->associated_product->name);
+    }
+
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should add a grouped product to the cart for customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with('associated_product')->get();
+
+    $data = [
+        'quantities'  => [],
+        'prices'      => [],
+    ];
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $data['quantities'][$groupedProduct->associated_product_id] = $groupedProduct->qty;
+
+        $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
+    }
+
+    // Act and Assert
+    $customer = $this->loginAsCustomer();
+
+    $response = postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $product->id,
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'qty'        => $data['quantities'],
+    ])
+        ->assertOk()
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
+        ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
+        ->assertJsonPath('data.items_count', 4)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0);
 
     foreach ($groupedProducts as $key => $groupedProduct) {
         $response->assertJsonPath('data.items.'.$key.'.quantity', $groupedProduct->qty)
@@ -1843,7 +2202,7 @@ it('should fails the validation error when the product id not provided when add 
         ->assertUnprocessable();
 });
 
-it('should add a virtual product to the cart', function () {
+it('should add a virtual product to the cart for guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1879,7 +2238,66 @@ it('should add a virtual product to the cart', function () {
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items.0.quantity', $quantity)
         ->assertJsonPath('data.items.0.type', $product->type)
-        ->assertJsonPath('data.items.0.name', $product->name);
+        ->assertJsonPath('data.items.0.name', $product->name)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.have_stockable_items', false)
+        ->assertJsonPath('data.customer_id', null)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0);
+
+    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+
+    $this->assertEquality($product->price * $quantity, $response['data']['grand_total']);
+});
+
+it('should add a virtual product to the cart for customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getVirtualProductFactory()->create();
+
+    // Act and Assert
+    $customer = $this->loginAsCustomer();
+
+    $response = postJson(route('shop.api.checkout.cart.store', [
+        'product_id' => $product->id,
+        'quantity'   => $quantity = rand(1, 10),
+    ]))
+        ->assertOk()
+        ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
+        ->assertJsonPath('data.items_qty', $quantity)
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.items.0.quantity', $quantity)
+        ->assertJsonPath('data.items.0.type', $product->type)
+        ->assertJsonPath('data.items.0.name', $product->name)
+        ->assertJsonPath('data.shipping_address', null)
+        ->assertJsonPath('data.payment_method', null)
+        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.have_stockable_items', false)
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.coupon_code', null)
+        ->assertJsonPath('data.billing_address', null)
+        ->assertJsonPath('data.base_tax_total', 0)
+        ->assertJsonPath('data.base_discount_amount', 0);
 
     $this->assertEquality($product->price, $response['data']['items'][0]['price']);
 
