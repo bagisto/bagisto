@@ -19,6 +19,7 @@ use Webkul\Sales\Models\OrderPayment;
 use Webkul\Shop\Mail\Order\CreatedNotification as ShopOrderCreatedNotification;
 
 use function Pest\Laravel\postJson;
+use function PHPUnit\Framework\assertJson;
 
 it('should handle certain validation errors when storing the guest user address for cart billing and shipping', function () {
     // Arrange
@@ -1536,44 +1537,46 @@ it('should store the payment method for guest user', function () {
         ->getSimpleProductFactory()
         ->create();
 
+    $cart = Cart::factory()->create();
+
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
     $cartItem = CartItem::factory()->create([
-        'quantity'          => 1,
+        'cart_id'           => $cart->id,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
         'name'              => $product->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
         'type'              => $product->type,
-        'weight'            => 1,
-        'total_weight'      => 1,
-        'base_total_weight' => 1,
-        'cart_id'           => $cartId = Cart::factory()->create([
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price = $product->price,
-            'base_grand_total'      => $price,
-            'sub_total'	            => $price,
-            'base_sub_total'        => $price,
-            'is_guest'              => 1,
-            'shipping_method'       => 'free_free',
-        ])->id,
+        'additional'        => $additional,
+    ]);
+        
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    $cartBillingAddress = CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
 
-    $cartShippingAddress = CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
-
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cartId;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
-    postJson(route('shop.checkout.onepage.payment_methods.store'), [
+    $response = postJson(route('shop.checkout.onepage.payment_methods.store'), [
         'payment' => [
             'method'       => 'cashondelivery',
             'method_title' => 'Cash On Delivery',
@@ -1581,19 +1584,208 @@ it('should store the payment method for guest user', function () {
             'sort'         => 1,
         ],
     ])
-        ->assertOk()
-        ->assertJsonPath('cart.id', $cartId)
+        ->assertJsonPath('cart.id', $cart->id)
+        ->assertJsonPath('cart.is_guest', 1)
         ->assertJsonPath('cart.items_count', 1)
+        ->assertJsonPath('cart.customer_id', null)
+        ->assertJsonPath('cart.items_count', 1)
+        ->assertJsonPath('cart.items_qty', 1)
+        ->assertJsonPath('cart.base_sub_total', core()->formatBasePrice($product->price))
         ->assertJsonPath('cart.items.0.id', $cartItem->id)
-        ->assertJsonPath('cart.items.0.type', $product->type)
+        ->assertJsonPath('cart.items.0.quantity', 1)
+        ->assertJsonPath('cart.items.0.type', $cartItem->type)
+        ->assertJsonPath('cart.items.0.name', $cartItem->name)
+        ->assertJsonPath('cart.items.0.price', $cartItem->price)
+        ->assertJsonPath('cart.items.0.formatted_price', core()->formatPrice($cartItem->price))
+        ->assertJsonPath('cart.items.0.formatted_total', core()->formatPrice($cartItem->total))
+        ->assertJsonPath('cart.items.0.options', array_values($cartItem->additional['attributes'] ?? []))
+        ->assertJsonPath('cart.items.0.base_image', $cartItem->getTypeInstance()->getBaseImage($cartItem))
+        ->assertJsonPath('cart.items.0.product_url_key', $cartItem->product->url_key)
+        ->assertJsonPath('cart.billing_address.id', $cartBillingAddress->id)
+        ->assertJsonPath('cart.billing_address.address_type', $cartBillingAddress->address_type)
+        ->assertJsonPath('cart.billing_address.parent_address_id', $cartBillingAddress->parent_address_id)
+        ->assertJsonPath('cart.billing_address.customer_id', $cartBillingAddress->customer_id)
+        ->assertJsonPath('cart.billing_address.cart_id', $cart->id)
+        ->assertJsonPath('cart.billing_address.order_id', null)
+        ->assertJsonPath('cart.billing_address.first_name', $cartBillingAddress->first_name)
+        ->assertJsonPath('cart.billing_address.last_name', $cartBillingAddress->last_name)
+        ->assertJsonPath('cart.billing_address.gender', $cartBillingAddress->gender)
+        ->assertJsonPath('cart.billing_address.company_name', $cartBillingAddress->company_name)
+        ->assertJsonPath('cart.billing_address.address', explode("\n", $cartBillingAddress->address))
+        ->assertJsonPath('cart.billing_address.city', $cartBillingAddress->city)
+        ->assertJsonPath('cart.billing_address.state', $cartBillingAddress->state)
+        ->assertJsonPath('cart.billing_address.country', $cartBillingAddress->country)
+        ->assertJsonPath('cart.billing_address.postcode', $cartBillingAddress->postcode)
+        ->assertJsonPath('cart.billing_address.email', $cartBillingAddress->email)
+        ->assertJsonPath('cart.billing_address.phone', $cartBillingAddress->phone)
+        ->assertJsonPath('cart.billing_address.vat_id', $cartBillingAddress->vat_id)
+        ->assertJsonPath('cart.shipping_address.id', $cartShippingAddress->id)
+        ->assertJsonPath('cart.shipping_address.address_type', $cartShippingAddress->address_type)
+        ->assertJsonPath('cart.shipping_address.parent_address_id', $cartShippingAddress->parent_address_id)
+        ->assertJsonPath('cart.shipping_address.customer_id', $cartShippingAddress->customer_id)
+        ->assertJsonPath('cart.shipping_address.cart_id', $cart->id)
+        ->assertJsonPath('cart.shipping_address.order_id', null)
+        ->assertJsonPath('cart.shipping_address.first_name', $cartShippingAddress->first_name)
+        ->assertJsonPath('cart.shipping_address.last_name', $cartShippingAddress->last_name)
+        ->assertJsonPath('cart.shipping_address.gender', $cartShippingAddress->gender)
+        ->assertJsonPath('cart.shipping_address.company_name', $cartShippingAddress->company_name)
+        ->assertJsonPath('cart.shipping_address.address', explode("\n", $cartShippingAddress->address))
+        ->assertJsonPath('cart.shipping_address.city', $cartShippingAddress->city)
+        ->assertJsonPath('cart.shipping_address.state', $cartShippingAddress->state)
+        ->assertJsonPath('cart.shipping_address.country', $cartShippingAddress->country)
+        ->assertJsonPath('cart.shipping_address.postcode', $cartShippingAddress->postcode)
+        ->assertJsonPath('cart.shipping_address.email', $cartShippingAddress->email)
+        ->assertJsonPath('cart.shipping_address.phone', $cartShippingAddress->phone)
+        ->assertJsonPath('cart.shipping_address.vat_id', $cartShippingAddress->vat_id)
         ->assertJsonPath('cart.have_stockable_items', true)
         ->assertJsonPath('cart.payment_method', 'cashondelivery')
+        ->assertJsonPath('cart.payment_method_title', 'Cash On Delivery')
+        ->assertOk();
+
+    $this->assertEquality($product->price, $response['cart']['grand_total']);
+
+    $this->assertEquality($cartItem->total, $response['cart']['items']['0']['total']);
+
+    $this->assertEquality($product->price, $response['cart']['sub_total']);
+});
+
+it('should store the payment method for customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
+    ]);
+
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $cartItem = CartItem::factory()->create([
+        'cart_id'           => $cart->id,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
+        'name'              => $product->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
+    ]);
+        
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    cart()->setCart($cart);
+
+    // Act and Assert
+
+    $this->loginAsCustomer($customer);
+
+    $response = postJson(route('shop.checkout.onepage.payment_methods.store'), [
+        'payment' => [
+            'method'       => 'cashondelivery',
+            'method_title' => 'Cash On Delivery',
+            'description'  => 'Cash On Delivery',
+            'sort'         => 1,
+        ],
+    ])
+        ->assertJsonPath('cart.id', $cart->id)
+        ->assertJsonPath('cart.is_guest', 0)
+        ->assertJsonPath('cart.items_count', 1)
+        ->assertJsonPath('cart.customer_id', $customer->id)
+        ->assertJsonPath('cart.items_count', 1)
+        ->assertJsonPath('cart.items_qty', 1)
+        ->assertJsonPath('cart.base_sub_total', core()->formatBasePrice($product->price))
+        ->assertJsonPath('cart.items.0.id', $cartItem->id)
+        ->assertJsonPath('cart.items.0.quantity', 1)
+        ->assertJsonPath('cart.items.0.type', $cartItem->type)
+        ->assertJsonPath('cart.items.0.name', $cartItem->name)
+        ->assertJsonPath('cart.items.0.price', $cartItem->price)
+        ->assertJsonPath('cart.items.0.formatted_price', core()->formatPrice($cartItem->price))
+        ->assertJsonPath('cart.items.0.formatted_total', core()->formatPrice($cartItem->total))
+        ->assertJsonPath('cart.items.0.options', array_values($cartItem->additional['attributes'] ?? []))
+        ->assertJsonPath('cart.items.0.base_image', $cartItem->getTypeInstance()->getBaseImage($cartItem))
+        ->assertJsonPath('cart.items.0.product_url_key', $cartItem->product->url_key)
         ->assertJsonPath('cart.billing_address.id', $cartBillingAddress->id)
-        ->assertJsonPath('cart.billing_address.address_type', 'cart_billing')
-        ->assertJsonPath('cart.billing_address.cart_id', $cartId)
+        ->assertJsonPath('cart.billing_address.address_type', $cartBillingAddress->address_type)
+        ->assertJsonPath('cart.billing_address.parent_address_id', $cartBillingAddress->parent_address_id)
+        ->assertJsonPath('cart.billing_address.customer_id', $cartBillingAddress->customer_id)
+        ->assertJsonPath('cart.billing_address.cart_id', $cart->id)
+        ->assertJsonPath('cart.billing_address.order_id', null)
+        ->assertJsonPath('cart.billing_address.first_name', $cartBillingAddress->first_name)
+        ->assertJsonPath('cart.billing_address.last_name', $cartBillingAddress->last_name)
+        ->assertJsonPath('cart.billing_address.gender', $cartBillingAddress->gender)
+        ->assertJsonPath('cart.billing_address.company_name', $cartBillingAddress->company_name)
+        ->assertJsonPath('cart.billing_address.address', explode("\n", $cartBillingAddress->address))
+        ->assertJsonPath('cart.billing_address.city', $cartBillingAddress->city)
+        ->assertJsonPath('cart.billing_address.state', $cartBillingAddress->state)
+        ->assertJsonPath('cart.billing_address.country', $cartBillingAddress->country)
+        ->assertJsonPath('cart.billing_address.postcode', $cartBillingAddress->postcode)
+        ->assertJsonPath('cart.billing_address.email', $cartBillingAddress->email)
+        ->assertJsonPath('cart.billing_address.phone', $cartBillingAddress->phone)
+        ->assertJsonPath('cart.billing_address.vat_id', $cartBillingAddress->vat_id)
         ->assertJsonPath('cart.shipping_address.id', $cartShippingAddress->id)
-        ->assertJsonPath('cart.shipping_address.address_type', 'cart_shipping')
-        ->assertJsonPath('cart.shipping_address.cart_id', $cartId);
+        ->assertJsonPath('cart.shipping_address.address_type', $cartShippingAddress->address_type)
+        ->assertJsonPath('cart.shipping_address.parent_address_id', $cartShippingAddress->parent_address_id)
+        ->assertJsonPath('cart.shipping_address.customer_id', $cartShippingAddress->customer_id)
+        ->assertJsonPath('cart.shipping_address.cart_id', $cart->id)
+        ->assertJsonPath('cart.shipping_address.order_id', null)
+        ->assertJsonPath('cart.shipping_address.first_name', $cartShippingAddress->first_name)
+        ->assertJsonPath('cart.shipping_address.last_name', $cartShippingAddress->last_name)
+        ->assertJsonPath('cart.shipping_address.gender', $cartShippingAddress->gender)
+        ->assertJsonPath('cart.shipping_address.company_name', $cartShippingAddress->company_name)
+        ->assertJsonPath('cart.shipping_address.address', explode("\n", $cartShippingAddress->address))
+        ->assertJsonPath('cart.shipping_address.city', $cartShippingAddress->city)
+        ->assertJsonPath('cart.shipping_address.state', $cartShippingAddress->state)
+        ->assertJsonPath('cart.shipping_address.country', $cartShippingAddress->country)
+        ->assertJsonPath('cart.shipping_address.postcode', $cartShippingAddress->postcode)
+        ->assertJsonPath('cart.shipping_address.email', $cartShippingAddress->email)
+        ->assertJsonPath('cart.shipping_address.phone', $cartShippingAddress->phone)
+        ->assertJsonPath('cart.shipping_address.vat_id', $cartShippingAddress->vat_id)
+        ->assertJsonPath('cart.have_stockable_items', true)
+        ->assertJsonPath('cart.payment_method', 'cashondelivery')
+        ->assertJsonPath('cart.payment_method_title', 'Cash On Delivery')
+        ->assertOk();
+
+    $this->assertEquality($product->price, $response['cart']['grand_total']);
+
+    $this->assertEquality($cartItem->total, $response['cart']['items']['0']['total']);
+
+    $this->assertEquality($product->price, $response['cart']['sub_total']);
 });
 
 it('should place a simple product order for a guest user', function () {
