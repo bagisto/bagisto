@@ -2,13 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Customers\AddressController;
-use Webkul\Admin\Http\Controllers\Customers\CustomerController;
-use Webkul\Admin\Http\Controllers\Customers\CustomerGroupController;
-use Webkul\Admin\Http\Controllers\Customers\ReviewController;
+use Webkul\Admin\Http\Controllers\Customers\Customer\CartController;
 use Webkul\Admin\Http\Controllers\Customers\Customer\CompareController;
 use Webkul\Admin\Http\Controllers\Customers\Customer\OrderController;
 use Webkul\Admin\Http\Controllers\Customers\Customer\WishlistController;
-use Webkul\Admin\Http\Controllers\Customers\Customer\CartController;
+use Webkul\Admin\Http\Controllers\Customers\CustomerController;
+use Webkul\Admin\Http\Controllers\Customers\CustomerGroupController;
+use Webkul\Admin\Http\Controllers\Customers\ReviewController;
 
 /**
  * Customers routes.

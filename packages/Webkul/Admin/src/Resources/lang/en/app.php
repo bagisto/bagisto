@@ -192,7 +192,7 @@ return [
                         'empty-title'       => 'Empty Cart Items',
                         'empty-description' => 'No items found in your cart.',
                     ],
-    
+
                     'address' => [
                         'title'            => 'Address',
                         'add-btn'          => 'Add Address',
@@ -226,11 +226,11 @@ return [
                     'payment' => [
                         'title' => 'Payment',
                     ],
-    
+
                     'shipping' => [
                         'title' => 'Shipping',
                     ],
-    
+
                     'summary' => [
                         'title'           => 'Order Summary',
                         'shipping-amount' => 'Shipping Amount',
@@ -279,7 +279,7 @@ return [
                     'move-to-cart'      => 'Move to Cart',
                     'empty-title'       => 'Empty Compare Items',
                     'empty-description' => 'No items found in your compare list.',
-                ]
+                ],
             ],
 
             'view' => [
