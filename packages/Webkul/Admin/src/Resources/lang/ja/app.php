@@ -3034,6 +3034,8 @@ return [
             'save-btn'                     => '設定を保存',
             'save-message'                 => '設定が正常に保存されました',
             'search'                       => '検索',
+            'select-country'               => '国を選択',
+            'select-state'                 => '州を選択',
             'title'                        => '設定',
 
             'general' => [

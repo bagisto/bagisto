@@ -3034,6 +3034,8 @@ return [
             'save-btn'                     => '保存配置',
             'save-message'                 => '配置保存成功',
             'search'                       => '搜索',
+            'select-country'               => '选择国家',
+            'select-state'                 => '选择州',
             'title'                        => '配置',
 
             'general' => [

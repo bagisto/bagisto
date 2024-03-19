@@ -312,6 +312,10 @@
                             :label="trans($field['title'])"
                             @change="changeCountry($event.target.value)"
                         >
+                            <option value="">
+                                @lang('admin::app.configuration.index.select-country')
+                            </option>
+
                             @foreach (core()->countries() as $country)
                                 <option value="{{ $country->code }}">
                                     {{ $country->name }}
@@ -339,6 +343,10 @@
                                     :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                                     :label="trans($field['title'])"
                                 >
+                                    <option value="">
+                                        @lang('admin::app.configuration.index.select-state')
+                                    </option>
+                                    
                                     <option
                                         v-for='(state, index) in countryStates[country]'
                                         :value="state.code"
