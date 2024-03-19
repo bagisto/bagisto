@@ -19,25 +19,11 @@
                 
             props: ['selector', 'field',],
 
-            data() {
-                return {
-                    currentSkin: document.documentElement.classList.contains('dark') ? 'oxide-dark' : 'oxide',
-
-                    currentContentCSS: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
-
-                    isLoading: false,
-                };
-            },
-
             mounted() {
                 this.init();
 
                 this.$emitter.on('change-theme', (theme) => {
                     tinymce.activeEditor.destroy();
-
-                    this.currentSkin = (theme === 'dark') ? 'oxide-dark' : 'oxide';
-
-                    this.currentContentCSS = (theme === 'dark') ? 'dark' : 'default';
 
                     this.init();
                 });
@@ -59,8 +45,6 @@
                                 uploadRoute: '{{ route('admin.tinymce.upload') }}',
                                 csrfToken: '{{ csrf_token() }}',
                                 ...extraConfiguration,
-                                skin: self.currentSkin,
-                                content_css: self.currentContentCSS,
                             };
 
                             const image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
