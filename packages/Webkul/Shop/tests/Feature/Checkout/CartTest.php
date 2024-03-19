@@ -361,7 +361,6 @@ it('should fails the validation error when the wrong cart item id provided when 
         ->getSimpleProductFactory()
         ->create();
 
-    
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
@@ -397,7 +396,7 @@ it('should fails the validation error when the wrong cart item id provided when 
     ]);
 
     cart()->putCart($cart);
-    
+
     $this->loginAsCustomer($customer);
 
     // Act and Assert
@@ -1175,15 +1174,13 @@ it('should update cart quantities for guest user', function () {
         'additional'        => $additional2,
     ]);
 
-    cart()->collectTotals();
-
     cart()->setCart($cart);
 
     cart()->putCart($cart);
 
     // Act and Assert
     $response = putJson(route('shop.api.checkout.cart.update'), [
-        "qty" => [
+        'qty' => [
             $cartItem1->id => rand(2, 10),
             $cartItem2->id => rand(2, 10),
         ],
@@ -1300,7 +1297,7 @@ it('should update cart quantities for customer', function () {
     $this->loginAsCustomer();
 
     $response = putJson(route('shop.api.checkout.cart.update'), [
-        "qty" => [
+        'qty' => [
             $cartItem1->id => rand(2, 10),
             $cartItem2->id => rand(2, 10),
         ],
@@ -1408,7 +1405,7 @@ it('should add a simple product to the cart', function () {
     $this->assertEquality($product->price * $quantity, $response['data']['grand_total']);
 });
 
-it('should fails the validation error when the product id not provided add a bundle product to the cart', function () {
+it('should fails the validation error when the product id is not provided when adding a bundle product to the cart', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [

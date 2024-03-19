@@ -26,7 +26,7 @@ class CartFactory extends Factory
             'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
             'cart_currency_code'    => core()->getCurrentCurrencyCode(),
             'items_count'           => 1,
-            'is_guest'              => 1, 
+            'is_guest'              => 1,
         ];
     }
 }
