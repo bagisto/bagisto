@@ -3073,6 +3073,8 @@ return [
             'save-btn'                     => 'Enregistrer la configuration',
             'save-message'                 => 'Configuration enregistrée avec succès',
             'search'                       => 'Recherche',
+            'select-country'               => 'Sélectionnez un pays',
+            'select-state'                 => 'Sélectionnez un état',
             'title'                        => 'Configuration',
 
             'general' => [
