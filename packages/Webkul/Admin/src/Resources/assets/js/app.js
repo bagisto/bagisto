@@ -70,12 +70,4 @@ app.directive("slugify-target", SlugifyTarget);
 app.directive("debounce", Debounce);
 app.directive("code", Code);
 
-/**
- * Load event, the purpose of using the event is to mount the application
- * after all of our `Vue` components which is present in blade file have
- * been registered in the app. No matter what `app.mount()` should be
- * called in the last.
- */
-window.addEventListener("load", function (event) {
-    app.mount("#app");
-});
+export default app;

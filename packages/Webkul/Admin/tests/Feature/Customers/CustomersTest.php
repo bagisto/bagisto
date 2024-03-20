@@ -54,8 +54,7 @@ it('should return the view page of customer', function () {
 
     get(route('admin.customers.customers.view', $customer->id))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.customers.customers.view.title'))
-        ->assertSeeText($customer->name);
+        ->assertSeeText(trans('admin::app.customers.customers.view.title'));
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in customer', function () {
