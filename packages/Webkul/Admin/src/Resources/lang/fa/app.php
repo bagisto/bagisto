@@ -3073,6 +3073,8 @@ return [
             'save-btn'                     => 'ذخیره پیکربندی',
             'save-message'                 => 'پیکربندی با موفقیت ذخیره شد',
             'search'                       => 'جستجو کردن',
+            'select-country'               => 'انتخاب کشور',
+            'select-state'                 => 'انتخاب استان',
             'title'                        => 'پیکربندی',
 
             'general' => [

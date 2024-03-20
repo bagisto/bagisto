@@ -22,7 +22,7 @@
 
                             <p class="w-14 p-2.5 shimmer"></p>
                         </template>
-                        
+
                         <template v-else>
                             <h1
                                 v-if="customer"
@@ -43,7 +43,7 @@
                             >
                                 @lang('admin::app.customers.customers.view.inactive')
                             </span>
-            
+
                             <span
                                 v-if="customer.is_suspended"
                                 class="label-canceled text-sm"
@@ -94,7 +94,7 @@
                     </div>
                 @endif
 
-                <a 
+                <a
                     class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                     href="{{ route('admin.customers.customers.login_as_customer', $customer->id) }}"
                     target="_blank"
@@ -113,25 +113,25 @@
                 <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.before') !!}
 
-                    @include('admin::customers.customers.view.orders')            
+                    @include('admin::customers.customers.view.orders')
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.after') !!}
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.invoices.before') !!}
 
-                    @include('admin::customers.customers.view.invoices')   
+                    @include('admin::customers.customers.view.invoices')
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.invoices.after') !!}
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.reviews.before') !!}
 
-                    @include('admin::customers.customers.view.reviews')   
+                    @include('admin::customers.customers.view.reviews')
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.reviews.after') !!}
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.notes.before') !!}
 
-                    @include('admin::customers.customers.view.notes')   
+                    @include('admin::customers.customers.view.notes')
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.notes.after') !!}
                 </div>
@@ -155,36 +155,36 @@
                                     <p class="w-full p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
                                         @lang('admin::app.customers.customers.view.customer')
                                     </p>
-        
+
                                     <!--Customer Edit Component -->
                                     @include('admin::customers.customers.view.edit')
                                 </div>
                             </x-slot:header>
-        
+
                             <x-slot:content>
                                 <div class="grid gap-y-2.5">
-                                    <p 
+                                    <p
                                         lass="text-gray-800 font-semibold dark:text-white"
                                         v-text="`${customer.first_name} ${customer.last_name}`"
                                     >
                                     </p>
-        
+
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @{{ "@lang('admin::app.customers.customers.view.email')".replace(':email', customer.email ?? 'N/A') }}
                                     </p>
-        
+
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @{{ "@lang('admin::app.customers.customers.view.phone')".replace(':phone', customer.phone ?? 'N/A') }}
                                     </p>
-        
+
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @{{ "@lang('admin::app.customers.customers.view.gender')".replace(':gender', customer.gender ?? 'N/A') }}
                                     </p>
-        
+
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @{{ "@lang('admin::app.customers.customers.view.date-of-birth')".replace(':dob', customer.date_of_birth ?? 'N/A') }}
                                     </p>
-        
+
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @{{ "@lang('admin::app.customers.customers.view.group')".replace(':group_code', customer.group?.name ?? 'N/A') }}
                                     </p>
@@ -220,7 +220,7 @@
                                         class="grid gap-y-2.5"
                                         v-for="(address, index) in customer.addresses"
                                     >
-                                        <p  
+                                        <p
                                             class="label-pending"
                                             v-if="address.default_address"
                                         >
@@ -228,7 +228,7 @@
                                         </p>
 
                                         <p class="text-gray-800 font-semibold dark:text-white">
-                                            @{{ `${address.first_name} ${address.last_name}` }} 
+                                            @{{ `${address.first_name} ${address.last_name}` }}
 
                                             <template v-if="address.company_name">
                                                 (@{{ address.company_name }})
@@ -288,7 +288,7 @@
                                         ></span>
                                     </div>
                                 </template>
-                                
+
                                 <template v-else>
                                     <!-- Empty Address Container -->
                                     <div class="flex gap-5 items-center py-2.5">
@@ -309,7 +309,7 @@
                                     </div>
                                 </template>
                             </x-slot>
-                        </x-admin::accordion>   
+                        </x-admin::accordion>
                     </template>
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.after') !!}
@@ -368,7 +368,7 @@
                     },
 
                     updateCustomer(data) {
-                        this.customer = { 
+                        this.customer = {
                             ...this.customer,
                             ...data.customer,
                             group: {
@@ -379,7 +379,7 @@
 
                     addressCreated(address) {
                         if (address.default_address) {
-                            this.customer.addresses.forEach(address => address.default_address = false);                            
+                            this.customer.addresses.forEach(address => address.default_address = false);
                         }
 
                         this.customer.addresses.push(address);
@@ -387,7 +387,7 @@
 
                     addressUpdated(updatedAddress) {
                         if (updatedAddress.default_address) {
-                            this.customer.addresses.forEach(address => address.default_address = false);                            
+                            this.customer.addresses.forEach(address => address.default_address = false);
                         }
 
                         let toUpdate = this.customer.addresses.find(address => address.id == updatedAddress.id);
