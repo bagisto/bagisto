@@ -60,6 +60,48 @@
                         @include('admin::sales.orders.create.cart.summary')
                     </template>
 
+                    <!-- Product Option Form -->
+                    <x-admin::form
+                        v-slot="{ meta, errors, handleSubmit }"
+                        as="div"
+                    >
+                        <form
+                            @submit="handleSubmit($event, addToCart)"
+                            ref="addToCartForm"
+                        >
+                            <x-admin::drawer ref="productConfigurationDrawer">
+                                <!-- Drawer Header -->
+                                <x-slot:header>
+                                    <div class="flex justify-between items-center">
+                                        <p class="text-xl font-medium dark:text-white">
+                                        @lang('admin::app.sales.orders.create.configuration')
+                                        </p>
+
+                                        <button class="primary-button ltr:mr-11 rtl:ml-11">
+                                            @lang('admin::app.sales.orders.create.add-to-cart')
+                                        </button>
+                                    </div>
+                                </x-slot>
+
+                                <!-- Drawer Content -->
+                                <x-slot:content class="!p-0">
+                                    {!! view_render_event('bagisto.admin.sales.order.create.product_options.before') !!}
+
+                                    <!-- Included Configurable Product Configuration Blade File -->
+                                    <template v-if="selectedProductOptions.product.type == 'configurable'">
+                                        @include('admin::sales.orders.create.types.configurable')
+                                    </template>
+
+                                    <!-- Included Bundle Product Configuration Blade File -->
+                                    <template v-if="selectedProductOptions.product.type == 'bundle'">
+                                        @include('admin::sales.orders.create.types.bundle')
+                                    </template>
+
+                                    {!! view_render_event('bagisto.admin.sales.order.create.product_options.after') !!}
+                                </x-slot>
+                            </x-admin::drawer>
+                        </form>
+                    </x-admin::form>
                 </div>
 
                 {!! view_render_event('bagisto.admin.sales.order.create.left_component.after') !!}
@@ -93,7 +135,11 @@
                     return {
                         cart: @json($cart),
 
+                        selectedProductOptions: null,
+
                         currentStep: 'address',
+
+                        isAddingToCart: false,
 
                         shippingMethods: null,
 
@@ -109,7 +155,48 @@
                             .then(response => {
                                 this.cart = response.data.data;
 
-                                this.scrollToCurrentStep();
+                                //this.scrollToCurrentStep();
+                            })
+                            .catch(error => {});
+                    },
+
+                    configureAddToCart(params) {
+                        this.selectedProductOptions = params;
+
+                        if (
+                            params.product.is_options_required
+                            && ! params.additional?.attributes
+                        ) {
+                            this.$refs.productConfigurationDrawer.open();
+
+                            return;
+                        }
+
+                        this.addToCart(params);
+                    },
+
+                    addToCart(params) {
+                        let formData = {};
+
+                        if (params.additional?.attributes) {
+                            formData = {
+                                product_id: params.product.id,
+
+                                quantity: params.qty,
+
+                                ...params.additional,
+                            };
+                        } else {
+                            formData = new FormData(this.$refs.addToCartForm);
+
+                            formData.append('product_id', this.selectedProductOptions.product.id);
+
+                            formData.append('quantity', this.selectedProductOptions.qty);
+                        }
+
+                        this.$axios.post("{{ route('admin.sales.cart.store', $cart->id) }}", formData)
+                            .then(response => {
+                                this.cart = response.data.data
                             })
                             .catch(error => {});
                     },

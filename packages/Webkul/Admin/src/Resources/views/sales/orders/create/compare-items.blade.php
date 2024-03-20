@@ -3,7 +3,7 @@
 <!-- Vue JS Component -->
 <v-compare-items
     :cart="cart"
-    @added-to-cart="getCart"
+    @add-to-cart="configureAddToCart"
     @remove-from-cart="getCart"
 >
     <!-- Items Shimmer Effect -->
@@ -80,7 +80,10 @@
                                     @lang('admin::app.sales.orders.create.compare-items.delete')
                                 </p>
 
-                                <p class="text-emerald-600 cursor-pointer transition-all hover:underline">
+                                <p
+                                    class="text-emerald-600 cursor-pointer transition-all hover:underline"
+                                    @click="moveToCart(item)"
+                                >
                                     @lang('admin::app.sales.orders.create.compare-items.move-to-cart')
                                 </p>
                             </div>
@@ -115,6 +118,8 @@
 
             props: ['cart'],
 
+            emits: ['add-to-cart', 'remove-from-cart'],
+
             data() {
                 return {
                     isLoading: false,
@@ -138,7 +143,18 @@
                             this.isLoading = false;
                         })
                         .catch(error => {});
-                }
+                },
+
+                moveToCart(item) {
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.$emit('add-to-cart', {
+                                product: item.product,
+                                qty: 1,
+                            });
+                        }
+                    });
+                },
             }
         });
     </script>

@@ -172,6 +172,8 @@ return [
                 'coupon-already-applied'  => 'Coupon code already applied.',
                 'coupon-error'            => 'Coupon code can\'t be applied.',
                 'error'                   => 'Something went wrong',
+                'configuration'           => 'Configuration',
+                'add-to-cart'             => 'Add to Cart',
                 'coupon-applied'          => 'Coupon code applied successfully.',
                 'minimum-order-error'     => 'The minimum order amount is not met.',
                 'check-shipping-address'  => 'Shipping address is missing.',
@@ -179,6 +181,17 @@ return [
                 'specify-shipping-method' => 'Shipping method is missing.',
                 'specify-payment-method'  => 'Payment method is missing.',
                 'order-placed-success'    => 'Order placed successfully.',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'Please select an option',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'None',
+                        'total-amount' => 'Total Amount',
+                    ]
+                ],
 
                 'cart' => [
                     'items' => [
@@ -191,6 +204,19 @@ return [
                         'move-to-wishlist'  => 'Move to Wishlist',
                         'empty-title'       => 'Empty Cart Items',
                         'empty-description' => 'No items found in your cart.',
+                        'see-details'       => 'See Details',
+
+                        'search' => [
+                            'empty-info'    => 'No products available for search term.',
+                            'empty-title'   => 'No products found',
+                            'product-image' => 'Product Image',
+                            'qty'           => ':qty Available',
+                            'sku'           => 'SKU - :sku',
+                            'title'         => 'Search Products',
+                            'available-qty' => ':qty Available',
+                            'qty'           => 'Qty',
+                            'add-to-cart'   => 'Add To Cart',
+                        ],
                     ],
 
                     'address' => [
@@ -252,6 +278,7 @@ return [
                     'move-to-cart'      => 'Move to Cart',
                     'empty-title'       => 'Empty Cart',
                     'empty-description' => 'No items found in your cart.',
+                    'see-details'       => 'See Details',
                 ],
 
                 'recent-order-items' => [
@@ -261,6 +288,7 @@ return [
                     'move-to-cart'      => 'Move to Cart',
                     'empty-title'       => 'Empty Orders',
                     'empty-description' => 'No items found in your recent orders.',
+                    'see-details'       => 'See Details',
                 ],
 
                 'wishlist-items' => [
@@ -270,6 +298,7 @@ return [
                     'move-to-cart'      => 'Move to Cart',
                     'empty-title'       => 'Empty Wishlist Items',
                     'empty-description' => 'No items found in your wishlist.',
+                    'see-details'       => 'See Details',
                 ],
 
                 'compare-items' => [
@@ -1507,6 +1536,10 @@ return [
                 'reviews' => [
                     'id'            => 'ID - :id',
                     'count'         => 'Reviews (:count)',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'Wishlist item removed successfully.',
                 ],
             ],
 

@@ -28,4 +28,20 @@ class WishlistController extends Controller
 
         return WishlistItemResource::collection($wishlistItems);
     }
+
+    /**
+     * Removes the item from the cart if it exists.
+     */
+    public function destroy(int $id): JsonResource
+    {
+        $this->validate(request(), [
+            'item_id' => 'required|exists:wishlist_items,id',
+        ]);
+
+        $this->wishlistRepository->delete(request()->input('item_id'));
+
+        return new JsonResource([
+            'message' => trans('admin::app.customers.customers.view.wishlist.remove-success'),
+        ]);
+    }
 }

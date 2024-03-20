@@ -169,7 +169,7 @@
 
             watch: {
                 searchTerm: function(newVal, oldVal) {
-                    this.search()
+                    this.search();
                 }
             },
 
@@ -197,7 +197,7 @@
                             self.searchedProducts = response.data.data;
                         })
                         .catch(function (error) {
-                        })
+                        });
                 },
 
                 addSelected() {

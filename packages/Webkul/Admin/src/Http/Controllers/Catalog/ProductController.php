@@ -21,6 +21,7 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Admin\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
@@ -333,21 +334,7 @@ class ProductController extends Controller
             'order'                => 'desc',
         ]);
 
-        foreach ($products as $product) {
-            $results[] = [
-                'id'              => $product->id,
-                'sku'             => $product->sku,
-                'name'            => $product->name,
-                'price'           => $product->price,
-                'formatted_price' => core()->formatBasePrice($product->price),
-                'images'          => $product->images,
-                'inventories'     => $product->inventories,
-            ];
-        }
-
-        $products->setCollection(collect($results));
-
-        return response()->json($products);
+        return ProductResource::collection($products);
     }
 
     /**

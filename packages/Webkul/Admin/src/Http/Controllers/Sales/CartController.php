@@ -55,33 +55,29 @@ class CartController extends Controller
     public function store(int $id): JsonResource
     {
         $this->validate(request(), [
-            '*.product_id' => 'required|integer|exists:products,id',
+            'product_id' => 'required|integer|exists:products,id',
         ]);
 
         $cart = $this->cartRepository->findOrFail($id);
 
         Cart::setCart($cart);
 
-        try {
-            foreach (request()->all() as $productParams) {
-                $product = $this->productRepository->findOrFail($productParams['product_id']);
+        // try {
+            $params = request()->all();
 
-                if (! $product->status) {
-                    continue;
-                }
+            $product = $this->productRepository->findOrFail($params['product_id']);
 
-                Cart::addProduct($product, $productParams);
-            }
+            Cart::addProduct($product, $params);
 
             return new JsonResource([
                 'data'     => new CartResource(Cart::getCart()),
                 'message'  => trans('admin::app.sales.orders.create.item-add-to-cart'),
             ]);
-        } catch (\Exception $exception) {
-            return new JsonResource([
-                'message' => $exception->getMessage(),
-            ]);
-        }
+        // } catch (\Exception $exception) {
+        //     return new JsonResource([
+        //         'message' => $exception->getMessage(),
+        //     ]);
+        // }
     }
 
     /**

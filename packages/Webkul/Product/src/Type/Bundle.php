@@ -60,6 +60,13 @@ class Bundle extends AbstractType
     protected $showQuantityBox = true;
 
     /**
+     * Product can be added to cart with options or not.
+     * 
+     * @var bool
+     */
+    protected $canBeAddedToCartWithoutOptions = false;
+
+    /**
      * Create a new product type instance.
      *
      * @return void
@@ -368,6 +375,8 @@ class Bundle extends AbstractType
             ->whereIn('id', array_keys($data['bundle_options']))
             ->orderBy('sort_order')
             ->get();
+
+        $data['attributes'] = [];
 
         foreach ($productBundleOptions as $option) {
             $labels = [];

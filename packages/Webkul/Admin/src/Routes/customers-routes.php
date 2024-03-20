@@ -42,19 +42,17 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url').'/c
             Route::controller(WishlistController::class)->group(function () {
                 Route::get('{id}/wishlist-items', 'items')->name('admin.customers.customers.wishlist.items');
 
-                Route::delete('{id}/wishlist-items/{id}', 'destroy')->name('admin.customers.customers.wishlist.items.delete');
+                Route::delete('{id}/wishlist-items', 'destroy')->name('admin.customers.customers.wishlist.items.delete');
             });
 
             Route::controller(CompareController::class)->group(function () {
                 Route::get('{id}/compare-items', 'items')->name('admin.customers.customers.compare.items');
 
-                Route::delete('{id}/wishlist-items/{id}', 'destroy')->name('admin.customers.customers.compare.items.delete');
+                Route::delete('{id}/compare-items', 'destroy')->name('admin.customers.customers.compare.items.delete');
             });
 
             Route::controller(CartController::class)->group(function () {
                 Route::get('{id}/cart-items', 'items')->name('admin.customers.customers.cart.items');
-
-                Route::delete('{id}/cart-items/{id}', 'destroy')->name('admin.customers.customers.cart.items.delete');
             });
 
             Route::controller(OrderController::class)->group(function () {

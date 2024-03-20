@@ -3,7 +3,7 @@
 <!-- Vue JS Component -->
 <v-previous-cart-items
     :cart="cart"
-    @added-to-cart="getCart"
+    @add-to-cart="configureAddToCart"
     @remove-from-cart="getCart"
 >
     <!-- Items Shimmer Effect -->
@@ -40,9 +40,9 @@
                         <!-- Image -->
                         <div
                             class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
-                            :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! item.images.length}"
+                            :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! item.product.images.length}"
                         >
-                            <template v-if="! item.images.length">
+                            <template v-if="! item.product.images.length">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                             
                                 <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
@@ -51,7 +51,7 @@
                             </template>
 
                             <template v-else>
-                                <img :src="item.images[0].url">
+                                <img :src="item.product.images[0].url">
                             </template>
                         </div>
 
@@ -67,31 +67,58 @@
                                 @{{ "@lang('admin::app.sales.orders.create.cart-items.sku', ['sku' => ':replace'])".replace(':replace', item.sku) }}
                             </p>
 
-                            <!-- Item Options -->
-                            <p class="text-gray-600 dark:text-gray-300 [&>*]:after:content-['_,_']">
-                                <span
-                                    class="after:content-[','] last:after:content-['']"
-                                    v-for="option in item.additional.attributes"
-                                >
-                                    @{{ option.attribute_name + ' : ' + option.option_label }}
-                                </span>
-                            </p>
-
                             <!-- Price -->
                             <p class="text-base text-gray-800 dark:text-white font-semibold">
                                 @{{ item.formatted_price }}
                             </p>
 
+                            <!-- Item Options -->
+                            <div
+                                class="grid gap-x-2.5 gap-y-1.5 select-none"
+                                v-if="item.options.length"
+                            >
+                                <!-- Details Toggler -->
+                                <p
+                                    class="flex gap-1 items-center text-sm cursor-pointer"
+                                    @click="item.option_show = ! item.option_show"
+                                >
+                                    @lang('admin::app.sales.orders.create.cart-items.see-details')
+
+                                    <span
+                                        class="text-2xl"
+                                        :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
+                                    ></span>
+                                </p>
+
+                                <div
+                                    class="w-full grid gap-2"
+                                    v-show="item.option_show"
+                                >
+                                    <div v-for="option in item.options">
+                                        <p class="text-sm text-gray-600">
+                                            @{{ option.attribute_name + ':' }}
+                                        </p>
+
+                                        <p class="text-sm text-gray-800 font-medium">
+                                            @{{ option.option_label }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Item Actions -->
                             <div class="flex gap-2.5 mt-2">
                                 <p
                                     class="text-red-600 cursor-pointer transition-all hover:underline"
-                                    @click="removeCartItem(item)"
+                                    @click="removeItem(item)"
                                 >
                                     @lang('admin::app.sales.orders.create.cart-items.delete')
                                 </p>
 
-                                <p class="text-emerald-600 cursor-pointer transition-all hover:underline">
+                                <p
+                                    class="text-emerald-600 cursor-pointer transition-all hover:underline"
+                                    @click="moveToCart(item)"
+                                >
                                     @lang('admin::app.sales.orders.create.cart-items.move-to-cart')
                                 </p>
                             </div>
@@ -126,6 +153,8 @@
 
             props: ['cart'],
 
+            emits: ['add-to-cart', 'remove-from-cart'],
+
             data() {
                 return {
                     isLoading: false,
@@ -149,7 +178,39 @@
                             this.isLoading = false;
                         })
                         .catch(error => {});
-                }
+                },
+
+                moveToCart(item) {
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.$emit('add-to-cart', {
+                                product: item.product,
+                                qty: item.additional.quantity || 1,
+                                additional: item.additional,
+                            });
+                        }
+                    });
+                },
+
+                removeItem(item) {
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.$axios.delete("{{ route('admin.sales.cart.destroy', ':replace') }}".replace(':replace', item.cart_id), {
+                                data: {
+                                    cart_item_id: item.id
+                                }
+                            })
+                                .then(response => {
+                                    let index = this.items.findIndex(cartItem => cartItem.id === item.id);
+
+                                    if (index !== -1) {
+                                        this.items.splice(index, 1);
+                                    }
+                                })
+                                .catch(error => {});
+                        }
+                    });
+                },
             }
         });
     </script>

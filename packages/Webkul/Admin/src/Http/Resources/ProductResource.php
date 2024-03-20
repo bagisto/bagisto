@@ -15,12 +15,15 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'              => $this->id,
-            'sku'             => $this->sku,
-            'name'            => $this->name,
-            'price'           => $this->price,
-            'formatted_price' => core()->formatPrice($this->price),
-            'images'          => $this->images,
+            'id'                  => $this->id,
+            'type'                => $this->type,
+            'sku'                 => $this->sku,
+            'name'                => $this->name,
+            'price'               => $this->price,
+            'formatted_price'     => core()->formatPrice($this->price),
+            'images'              => $this->images,
+            'inventories'         => $this->inventories,
+            'is_options_required' => ! $this->getTypeInstance()->canBeAddedToCartWithoutOptions(),
         ];
     }
 }

@@ -3,7 +3,7 @@
 <!-- Vue JS Component -->
 <v-cart-items
     :cart="cart"
-    @added-to-cart="getCart"
+    @add-to-cart="configureAddToCart"
     @remove-from-cart="getCart"
 >
     <!-- Cart Items Shimmer Effect -->
@@ -27,7 +27,7 @@
 
                     <button
                         class="secondary-button"
-                        @click="$refs.productSearch.openDrawer()"
+                        @click="$refs.searchProductDrawer.open()"
                     >
                         @lang('admin::app.sales.orders.create.cart.items.add-product')
                     </button>
@@ -49,9 +49,9 @@
                             <!-- Image -->
                             <div
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
-                                :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! item.images.length}"
+                                :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! item.product.images.length}"
                             >
-                                <template v-if="! item.images.length">
+                                <template v-if="! item.product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                 
                                     <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
@@ -60,13 +60,13 @@
                                 </template>
 
                                 <template v-else>
-                                    <img :src="item.images[0].url">
+                                    <img :src="item.product.images[0].url">
                                 </template>
                             </div>
 
                             <div class="flex flex-col gap-1.5">
                                 <!-- Item Name -->
-                                <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base text-gray-800 whitespace-nowrap dark:text-white font-semibold">
                                     @{{ item.name }}
                                 </p>
 
@@ -80,14 +80,38 @@
                                 </p>
 
                                 <!-- Item Options -->
-                                <p class="text-gray-600 dark:text-gray-300 [&>*]:after:content-['_,_']">
-                                    <span
-                                        class="after:content-[','] last:after:content-['']"
-                                        v-for="option in item.options"
+                                <div
+                                    class="grid gap-x-2.5 gap-y-1.5 select-none"
+                                    v-if="item.options.length"
+                                >
+                                    <!-- Details Toggler -->
+                                    <p
+                                        class="flex gap-1 items-center text-sm cursor-pointer"
+                                        @click="item.option_show = ! item.option_show"
                                     >
-                                        @{{ option.attribute_name + ' : ' + option.option_label }}
-                                    </span>
-                                </p>
+                                        @lang('admin::app.sales.orders.create.cart.items.see-details')
+
+                                        <span
+                                            class="text-2xl"
+                                            :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
+                                        ></span>
+                                    </p>
+
+                                    <div
+                                        class="w-full grid gap-2"
+                                        v-show="item.option_show"
+                                    >
+                                        <div v-for="option in item.options">
+                                            <p class="text-sm text-gray-600">
+                                                @{{ option.attribute_name + ':' }}
+                                            </p>
+
+                                            <p class="text-sm text-gray-800 font-medium">
+                                                @{{ option.option_label }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -102,7 +126,7 @@
                     <div class="flex justify-end gap-2.5">
                         <p
                             class="text-red-600 cursor-pointer transition-all hover:underline"
-                            @click="removeCartItem(item)"
+                            @click="removeItem(item)"
                         >
                             @lang('admin::app.sales.orders.create.cart.items.delete')
                         </p>
@@ -132,12 +156,146 @@
                 </div>
             </div>
 
-            <!-- Product Search Blade Component -->
-            <x-admin::products.search
-                ref="productSearch"
-                ::added-product-ids="addedProductIds"
-                @onProductAdded="addSelectedProducts($event)"
-            />
+            <!-- Search Drawer -->
+            <x-admin::drawer
+                ref="searchProductDrawer"
+                @close="searchTerm = ''; searchedProducts = [];"
+            >
+                <!-- Drawer Header -->
+                <x-slot:header>
+                    <div class="grid gap-5">
+                        <p class="text-xl font-medium dark:text-white">
+                            @lang('admin::app.sales.orders.create.cart.items.search.title')
+                        </p>
+
+                        <div class="relative w-full">
+                            <input
+                                type="text"
+                                class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-3 rtl:pr-3 ltr:pr-10 rtl:pl-10 py-1.5 leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                placeholder="Search by name"
+                                v-model.lazy="searchTerm"
+                                v-debounce="500"
+                            />
+
+                            <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                        </div>
+                    </div>
+                </x-slot>
+
+                <!-- Drawer Content -->
+                <x-slot:content class="!p-0">
+                    <div
+                        class="grid"
+                        v-if="searchedProducts.length"
+                    >
+                        <div
+                            class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800"
+                            v-for="product in searchedProducts"
+                        >
+                            <!-- Information -->
+                            <div class="flex gap-2.5">
+                                <!-- Image -->
+                                <div
+                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
+                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! product.images.length}"
+                                >
+                                    <template v-if="! product.images.length">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                    
+                                        <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                                            @lang('admin::app.sales.orders.create.cart.items.search.product-image')
+                                        </p>
+                                    </template>
+
+                                    <template v-else>
+                                        <img :src="product.images[0].url">
+                                    </template>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="grid gap-1.5 place-content-start">
+                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                        @{{ product.name }}
+                                    </p>
+
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ "@lang('admin::app.sales.orders.create.cart.items.search.sku')".replace(':sku', product.sku) }}
+                                    </p>
+
+                                    <p class="text-green-600">
+                                        @{{ "@lang('admin::app.sales.orders.create.cart.items.search.available-qty')".replace(':qty', availbleQty(product)) }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Actions -->
+                            <x-admin::form
+                                v-slot="{ meta, errors, handleSubmit }"
+                                as="div"
+                            >
+                                <form @submit="handleSubmit($event, addToCart)">
+                                    <div class="grid gap-2 place-content-start text-right">
+                                        <p class="text-gray-800 font-semibold dark:text-white">
+                                            @{{ product.formatted_price }}
+                                        </p>
+
+                                        <x-admin::form.control-group class="!mb-0">
+                                            <x-admin::form.control-group.label class="required justify-end">
+                                                @lang('admin::app.sales.orders.create.cart.items.search.qty')
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="hidden"
+                                                name="product_id"
+                                                ::value="product.id"
+                                            />
+
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="qty"
+                                                class="!w-[80px] !py-1.5 !px-2"
+                                                value="1"
+                                                rules="required|numeric|min_value:1"
+                                                :label="trans('admin::app.sales.orders.create.cart.items.search.qty')"
+                                                :placeholder="trans('admin::app.sales.orders.create.cart.items.search.qty')"
+                                            />
+
+                                            <x-admin::form.control-group.error name="qty" />
+                                        </x-admin::form.control-group>
+
+                                        <button class="text-sm text-blue-600 cursor-pointer transition-all hover:underline">
+                                            @lang('admin::app.sales.orders.create.cart.items.search.add-to-cart')
+                                        </button>
+                                    </div>
+                                </form>
+                            </x-admin::form>
+                        </div>
+                    </div>
+
+                    <!-- For Empty Variations -->
+                    <div
+                        class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                        v-else
+                    >
+                        <!-- Placeholder Image -->
+                        <img
+                            src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                            class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                        />
+
+                        <!-- Add Variants Information -->
+                        <div class="flex flex-col gap-1.5 items-center">
+                            <p class="text-base text-gray-400 font-semibold">
+                                @lang('admin::app.sales.orders.create.cart.items.search.empty-title')
+                            </p>
+
+                            <p class="text-gray-400">
+                                @lang('admin::app.sales.orders.create.cart.items.search.empty-info')
+                            </p>
+                        </div>
+                    </div>
+                </x-slot>
+            </x-admin::drawer>
         </div>
     </script>
 
@@ -147,51 +305,75 @@
 
             props: ['cart'],
 
+            emits: ['add-to-cart', 'remove-from-cart'],
+
             data() {
                 return {
+                    searchTerm: '',
+
+                    searchedProducts: [],
                 };
             },
 
-            computed: {
-                addedProductIds() {
-                    let productIds = this.cart.items.map(item => item.product_id);
-
-                    return productIds;
+            watch: {
+                searchTerm: function(newVal, oldVal) {
+                    this.search();
                 }
             },
 
             methods: {
-                addSelectedProducts(products) {
-                    let params = {};
+                search() {
+                    if (this.searchTerm.length <= 1) {
+                        this.searchedProducts = [];
 
-                    products.forEach(product => {
-                        params[product.id] = {
-                            product_id: product.id,
-                            quantity: 1,
-                        };
-                    });
+                        return;
+                    }
 
-                    this.$axios.post("{{ route('admin.sales.cart.store', $cart->id) }}", params)
-                        .then(response => {
-                            this.$emit('added-to-cart', response.data.data);
+                    let self = this;
+                    
+                    this.$axios.get("{{ route('admin.catalog.products.search') }}", {
+                            params: {
+                                query: this.searchTerm
+                            }
                         })
-                        .catch(error => {
-                            // Handle the error here
+                        .then(function(response) {
+                            self.searchedProducts = response.data.data;
+                        })
+                        .catch(function (error) {
                         });
                 },
 
-                removeCartItem(item) {
-                    this.$axios.delete("{{ route('admin.sales.cart.destroy', $cart->id) }}", {
-                        data: {
-                            cart_item_id: item.id
+                addToCart(params) {
+                    this.$emit('add-to-cart', {
+                        product: this.searchedProducts.find(product => product.id == params.product_id),
+                        qty: params.qty
+                    });
+                },
+
+                removeItem(item) {
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.$axios.delete("{{ route('admin.sales.cart.destroy', $cart->id) }}", {
+                                data: {
+                                    cart_item_id: item.id
+                                }
+                            })
+                                .then(response => {
+                                    this.$emit('remove-from-cart', response.data.data);
+                                })
+                                .catch(error => {});
                         }
-                    })
-                        .then(response => {
-                            this.$emit('remove-from-cart', response.data.data);
-                        })
-                        .catch(error => {
-                            // Handle the error here
-                        });
+                    });
+                },
+
+                availbleQty(product) {
+                    let qty = 0;
+
+                    product.inventories.forEach(function (inventory) {
+                        qty += inventory.qty;
+                    });
+
+                    return qty;
                 }
             }
         });

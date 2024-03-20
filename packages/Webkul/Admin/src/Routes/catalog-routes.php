@@ -5,6 +5,8 @@ use Webkul\Admin\Http\Controllers\Catalog\AttributeController;
 use Webkul\Admin\Http\Controllers\Catalog\AttributeFamilyController;
 use Webkul\Admin\Http\Controllers\Catalog\CategoryController;
 use Webkul\Admin\Http\Controllers\Catalog\ProductController;
+use Webkul\Admin\Http\Controllers\Catalog\Product\ConfigurableController;
+use Webkul\Admin\Http\Controllers\Catalog\Product\BundleController;
 
 /**
  * Catalog routes.
@@ -104,6 +106,14 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::post('mass-update', 'massUpdate')->name('admin.catalog.products.mass_update');
 
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.products.mass_delete');
+
+            Route::controller(ConfigurableController::class)->group(function () {
+                Route::get('{id}/configurable-options', 'options')->name('admin.catalog.products.configurable.options');
+            });
+
+            Route::controller(BundleController::class)->group(function () {
+                Route::get('{id}/bundle-options', 'options')->name('admin.catalog.products.bundle.options');
+            });
 
             Route::get('search', 'search')->name('admin.catalog.products.search');
 

@@ -23,31 +23,13 @@ class CartController extends Controller
     {
         $cartItems = $this->cartItemRepository
             ->with('product')
+            ->select('cart_items.*')
             ->leftJoin('cart', 'cart_items.cart_id', 'cart.id')
             ->whereNull('cart_items.parent_id')
             ->where('cart.customer_id', $id)
             ->where('cart.is_active', 1)
             ->get();
 
-        $items = [];
-
-        foreach ($cartItems as $item) {
-            $items[] = (object) [
-                'id'         => $item->id,
-                'product_id' => $item->product_id,
-                'type'       => $item->type,
-                'sku'        => $item->sku,
-                'name'       => $item->name,
-                'price'      => $item->product->price,
-                'quantity'   => $item->quantity,
-                'additional' => $item->additional,
-                'total'      => $item->total,
-                'product'    => (object) [
-                    'images' => $item->product->images,
-                ],
-            ];
-        }
-
-        return CartItemResource::collection($items);
+        return CartItemResource::collection($cartItems);
     }
 }

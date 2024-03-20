@@ -3,7 +3,7 @@
 <!-- Vue JS Component -->
 <v-recent-order-items
     :cart="cart"
-    @added-to-cart="getCart"
+    @add-to-cart="configureAddToCart"
     @remove-from-cart="getCart"
 >
     <!-- Items Shimmer Effect -->
@@ -67,31 +67,59 @@
                                 @{{ "@lang('admin::app.sales.orders.create.recent-order-items.sku', ['sku' => ':replace'])".replace(':replace', item.product.sku) }}
                             </p>
 
-                            <!-- Item Options -->
-                            <p class="text-gray-600 dark:text-gray-300 [&>*]:after:content-['_,_']">
-                                <span
-                                    class="after:content-[','] last:after:content-['']"
-                                    v-for="option in item.additional.attributes"
-                                >
-                                    @{{ option.attribute_name + ' : ' + option.option_label }}
-                                </span>
-                            </p>
-
                             <!-- Price -->
                             <p class="text-base text-gray-800 dark:text-white font-semibold">
                                 @{{ item.product.formatted_price }}
                             </p>
 
-                            <!-- Item Actions -->
-                            <div class="flex gap-2.5 mt-2">
+                            <!-- Item Options -->
+                            <div
+                                class="grid gap-x-2.5 gap-y-1.5 select-none"
+                                v-if="item.additional?.attributes && item.additional.attributes.length"
+                            >
+                                <!-- Details Toggler -->
                                 <p
-                                    class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                    @click="removeCartItem(item)"
+                                    class="flex gap-1 items-center text-sm cursor-pointer"
+                                    @click="item.option_show = ! item.option_show"
                                 >
-                                    @lang('admin::app.sales.orders.create.recent-order-items.view')
+                                    @lang('admin::app.sales.orders.create.recent-order-items.see-details')
+
+                                    <span
+                                        class="text-2xl"
+                                        :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
+                                    ></span>
                                 </p>
 
-                                <p class="text-emerald-600 cursor-pointer transition-all hover:underline">
+                                <div
+                                    class="w-full grid gap-2"
+                                    v-show="item.option_show"
+                                >
+                                    <div v-for="option in item.additional.attributes">
+                                        <p class="text-sm text-gray-600">
+                                            @{{ option.attribute_name + ':' }}
+                                        </p>
+
+                                        <p class="text-sm text-gray-800 font-medium">
+                                            @{{ option.option_label }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item Actions -->
+                            <div class="flex gap-2.5 items-center mt-2">
+                                <a
+                                    :href="'{{ route('admin.sales.orders.view', '') }}/' + item.order_id"
+                                    class="text-sm text-blue-600 cursor-pointer transition-all hover:underline"
+                                    target="_blank"
+                                >
+                                    @lang('admin::app.sales.orders.create.recent-order-items.view')
+                                </a>
+
+                                <p
+                                    class="text-emerald-600 cursor-pointer transition-all hover:underline"
+                                    @click="moveToCart(item)"
+                                >
                                     @lang('admin::app.sales.orders.create.recent-order-items.move-to-cart')
                                 </p>
                             </div>
@@ -126,6 +154,8 @@
 
             props: ['cart'],
 
+            emits: ['add-to-cart', 'remove-from-cart'],
+
             data() {
                 return {
                     isLoading: false,
@@ -149,7 +179,18 @@
                             this.isLoading = false;
                         })
                         .catch(error => {});
-                }
+                },
+
+                moveToCart(item) {
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.$emit('add-to-cart', {
+                                product: item.product,
+                                qty: 1,
+                            });
+                        }
+                    });
+                },
             }
         });
     </script>
