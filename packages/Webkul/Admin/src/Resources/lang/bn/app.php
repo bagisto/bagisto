@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'code'       => 'কোড',
-                    'create-btn' => 'মুদ্রা তৈরি করুন',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'বাম',
-                            'left-with-space'  => 'বাম স্থানে স্পেস সহ',
-                            'right'            => 'ডান',
-                            'right-with-space' => 'ডান স্থানে স্পেস সহ',
-                        ],
-
-                        'title' => 'মুদ্রা অবস্থান',
-                    ],
-
+                    'code'              => 'কোড',
+                    'create-btn'        => 'মুদ্রা তৈরি করুন',
+                    'currency-position' => 'মুদ্রা অবস্থান',
                     'decimal'           => 'দশমিক',
                     'decimal-separator' => 'দশমিক পৃথককরণ',
                     'delete-warning'    => 'আপনি কি নিশ্চিত, এই ক্রিয়াটি সম্পাদনা করতে চান?',
                     'general'           => 'সাধারণ',
+                    'group-separator'   => 'গ্রুপ বিভাজক',
                     'name'              => 'নাম',
                     'save-btn'          => 'মুদ্রা সংরক্ষণ করুন',
                     'symbol'            => 'প্রতীক',
-                    'group-separator'   => 'গ্রুপ বিভাজক',
                     'title'             => 'নতুন মুদ্রা তৈরি করুন',
                 ],
 

@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'code'       => 'الكود',
-                    'create-btn' => 'إنشاء عملة',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'اليسار',
-                            'left-with-space'  => 'اليسار مع فراغ',
-                            'right'            => 'اليمين',
-                            'right-with-space' => 'اليمين مع فراغ',
-                        ],
-
-                        'title' => 'موقع العملة',
-                    ],
-
+                    'code'              => 'الكود',
+                    'create-btn'        => 'إنشاء عملة',
+                    'currency-position' => 'موقع العملة',
                     'decimal'           => 'الكسور',
                     'decimal-separator' => 'فاصل الكسور',
                     'delete-warning'    => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
                     'general'           => 'عام',
+                    'group-separator'   => 'فاصل المجموعة',
                     'name'              => 'الاسم',
                     'save-btn'          => 'حفظ العملة',
                     'symbol'            => 'الرمز',
-                    'group-separator'   => 'فاصل المجموعة',
                     'title'             => 'إنشاء عملة جديدة',
                 ],
 

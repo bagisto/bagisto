@@ -32,10 +32,10 @@ enum CurrencyPositionEnum: string
     public static function options()
     {
         return [
-            CurrencyPositionEnum::LEFT->value             => trans('admin::app.settings.currencies.index.create.currency-position.options.left'),
-            CurrencyPositionEnum::LEFT_WITH_SPACE->value  => trans('admin::app.settings.currencies.index.create.currency-position.options.left-with-space'),
-            CurrencyPositionEnum::RIGHT->value            => trans('admin::app.settings.currencies.index.create.currency-position.options.right'),
-            CurrencyPositionEnum::RIGHT_WITH_SPACE->value => trans('admin::app.settings.currencies.index.create.currency-position.options.right-with-space'),
+            CurrencyPositionEnum::LEFT->value             => trans('core::app.currency-position.options.left'),
+            CurrencyPositionEnum::LEFT_WITH_SPACE->value  => trans('core::app.currency-position.options.left-with-space'),
+            CurrencyPositionEnum::RIGHT->value            => trans('core::app.currency-position.options.right'),
+            CurrencyPositionEnum::RIGHT_WITH_SPACE->value => trans('core::app.currency-position.options.right-with-space'),
         ];
     }
 }

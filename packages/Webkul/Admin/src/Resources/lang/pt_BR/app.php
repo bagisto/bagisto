@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn' => 'Criar Moeda',
-                    'code'       => 'Código',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'Esquerda',
-                            'left-with-space'  => 'Esquerda com Espaço',
-                            'right'            => 'Direita',
-                            'right-with-space' => 'Direita com Espaço',
-                        ],
-
-                        'title' => 'Posição da Moeda',
-                    ],
-
+                    'code'              => 'Código',
+                    'create-btn'        => 'Criar Moeda',
+                    'currency-position' => 'Posição da Moeda',
                     'decimal'           => 'Casas Decimais',
                     'decimal-separator' => 'Separador decimal',
                     'delete-warning'    => 'Tem certeza de que deseja executar esta ação?',
                     'general'           => 'Geral',
+                    'group-separator'   => 'Separador de Grupo',
                     'name'              => 'Nome',
                     'save-btn'          => 'Salvar Moeda',
                     'symbol'            => 'Símbolo',
-                    'group-separator'   => 'Separador de Grupo',
                     'title'             => 'Criar Nova Moeda',
                 ],
 

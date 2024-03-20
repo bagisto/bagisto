@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn' => 'Создать валюту',
-                    'code'       => 'Код',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'Слева',
-                            'left-with-space'  => 'Слева с пробелом',
-                            'right'            => 'Справа',
-                            'right-with-space' => 'Справа с пробелом',
-                        ],
-
-                        'title' => 'Положение валюты',
-                    ],
-
+                    'code'              => 'Код',
+                    'create-btn'        => 'Создать валюту',
+                    'currency-position' => 'Положение валюты',
                     'decimal'           => 'Десятичная часть',
                     'decimal-separator' => 'Десятичный разделитель',
                     'delete-warning'    => 'Вы уверены, что хотите выполнить это действие?',
                     'general'           => 'Общие',
+                    'group-separator'   => 'Разделитель групп',
                     'name'              => 'Название',
                     'save-btn'          => 'Сохранить валюту',
                     'symbol'            => 'Символ',
-                    'group-separator'   => 'Разделитель групп',
                     'title'             => 'Создать новую валюту',
                 ],
 

@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn' => 'Utwórz Walutę',
-                    'code'       => 'Kod',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'Lewo',
-                            'left-with-space'  => 'Lewo z odstępem',
-                            'right'            => 'Prawo',
-                            'right-with-space' => 'Prawo z odstępem',
-                        ],
-
-                        'title' => 'Pozycja Waluty',
-                    ],
-
+                    'code'              => 'Kod',
+                    'create-btn'        => 'Utwórz Walutę',
+                    'currency-position' => 'Pozycja Waluty',
                     'decimal'           => 'Miejsca dziesiętne',
                     'decimal-separator' => 'Separator liczb dziesiętnych',
                     'delete-warning'    => 'Czy na pewno chcesz wykonać tę operację?',
                     'general'           => 'Ogólne',
+                    'group-separator'   => 'Separator Grup',
                     'name'              => 'Nazwa',
                     'save-btn'          => 'Zapisz Walutę',
                     'symbol'            => 'Symbol',
-                    'group-separator'   => 'Separator Grup',
                     'title'             => 'Utwórz nową Walutę',
                 ],
 

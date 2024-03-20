@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn' => 'Valuta Aanmaken',
-                    'code'       => 'Code',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'Links',
-                            'left-with-space'  => 'Links met spatie',
-                            'right'            => 'Rechts',
-                            'right-with-space' => 'Rechts met spatie',
-                        ],
-
-                        'title' => 'Valutapositie',
-                    ],
-
+                    'code'              => 'Code',
+                    'create-btn'        => 'Valuta Aanmaken',
+                    'currency-position' => 'Valutapositie',
                     'decimal'           => 'Decimalen',
                     'decimal-separator' => 'Decimaalscheidingsteken',
                     'delete-warning'    => 'Weet je zeker dat je deze actie wilt uitvoeren?',
                     'general'           => 'Algemeen',
+                    'group-separator'   => 'Groepsscheidingsteken',
                     'name'              => 'Naam',
                     'save-btn'          => 'Valuta Opslaan',
                     'symbol'            => 'Symbool',
-                    'group-separator'   => 'Groepsscheidingsteken',
                     'title'             => 'Nieuwe Valuta Aanmaken',
                 ],
 

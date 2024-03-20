@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'code'       => 'קוד',
-                    'create-btn' => 'צור מטבע',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'שמאל',
-                            'left-with-space'  => 'שמאל עם רווח',
-                            'right'            => 'ימין',
-                            'right-with-space' => 'ימין עם רווח',
-                        ],
-
-                        'title' => 'מיקום המטבע',
-                    ],
-
+                    'code'              => 'קוד',
+                    'create-btn'        => 'צור מטבע',
+                    'currency-position' => 'מיקום המטבע',
                     'decimal'           => 'עשרוני',
                     'decimal-separator' => 'מפריד עשרוני',
                     'delete-warning'    => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
                     'general'           => 'כללי',
+                    'group-separator'   => 'מפריד קבוצה',
                     'name'              => 'שם',
                     'save-btn'          => 'שמור מטבע',
                     'symbol'            => 'סמל',
-                    'group-separator'   => 'מפריד קבוצה',
                     'title'             => 'צור מטבע חדש',
                 ],
 

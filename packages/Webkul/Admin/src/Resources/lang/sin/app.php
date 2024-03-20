@@ -2236,28 +2236,17 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn' => 'මුදල් සාදන්න',
-                    'code'       => 'කේතය',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'වම',
-                            'left-with-space'  => 'වම සහිත ස්පේස්',
-                            'right'            => 'දකුණ',
-                            'right-with-space' => 'දකුණ සහිත ස්පේස්',
-                        ],
-
-                        'title' => 'වම් ස්ථානය',
-                    ],
-
+                    'code'              => 'කේතය',
+                    'create-btn'        => 'මුදල් සාදන්න',
+                    'currency-position' => 'වම් ස්ථානය',
                     'decimal'           => 'දශක',
                     'decimal-separator' => 'දශම බෙදුම්කරු',
                     'delete-warning'    => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
                     'general'           => 'සාමාන්ය',
+                    'group-separator'   => 'කණ්ඩායම් බවට වෙනස්වීමක්',
                     'name'              => 'නම',
                     'save-btn'          => 'මුදල් සුරකින්න',
                     'symbol'            => 'සංක්‍රීයය',
-                    'group-separator'   => 'කණ්ඩායම් බවට වෙනස්වීමක්',
                     'title'             => 'නව මුදල් සාදන්න',
                 ],
 

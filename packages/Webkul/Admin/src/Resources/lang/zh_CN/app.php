@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn' => '创建货币',
-                    'code'       => '代码',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => '左侧',
-                            'left-with-space'  => '左侧带空格',
-                            'right'            => '右侧',
-                            'right-with-space' => '右侧带空格',
-                        ],
-
-                        'title' => '货币位置',
-                    ],
-
+                    'code'              => '代码',
+                    'create-btn'        => '创建货币',
+                    'currency-position' => '货币位置',
                     'decimal'           => '小数',
                     'decimal-separator' => '小数点分隔符',
                     'delete-warning'    => '确定要执行此操作吗？',
                     'general'           => '常规',
+                    'group-separator'   => '分组分隔符',
                     'name'              => '名称',
                     'save-btn'          => '保存货币',
                     'symbol'            => '符号',
-                    'group-separator'   => '分组分隔符',
                     'title'             => '创建新货币',
                 ],
 

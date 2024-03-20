@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn' => 'Створити Валюту',
-                    'code'       => 'Код',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'Ліворуч',
-                            'left-with-space'  => 'Ліворуч із пробілом',
-                            'right'            => 'Праворуч',
-                            'right-with-space' => 'Праворуч із пробілом',
-                        ],
-
-                        'title' => 'Позиція Валюти',
-                    ],
-
+                    'code'              => 'Код',
+                    'create-btn'        => 'Створити Валюту',
+                    'currency-position' => 'Позиція Валюти',
                     'decimal'           => 'Десятковий роздільник',
                     'decimal-separator' => 'Десятковий роздільник',
                     'delete-warning'    => 'Ви впевнені, що хочете виконати цю дію?',
                     'general'           => 'Загальне',
+                    'group-separator'   => 'Роздільник груп',
                     'name'              => 'Назва',
                     'save-btn'          => 'Зберегти Валюту',
                     'symbol'            => 'Символ',
-                    'group-separator'   => 'Роздільник груп',
                     'title'             => 'Створити Нову Валюту',
                 ],
 

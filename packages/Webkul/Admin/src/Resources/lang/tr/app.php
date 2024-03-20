@@ -2236,28 +2236,17 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn' => 'Para Birimi Oluştur',
-                    'code'       => 'Kodu',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'Sol',
-                            'left-with-space'  => 'Sol Boşluklu',
-                            'right'            => 'Sağ',
-                            'right-with-space' => 'Sağ Boşluklu',
-                        ],
-
-                        'title' => 'Para Birimi Pozisyonu',
-                    ],
-
+                    'code'              => 'Kodu',
+                    'create-btn'        => 'Para Birimi Oluştur',
+                    'currency-position' => 'Para Birimi Pozisyonu',
                     'decimal'           => 'Ondalık',
                     'decimal-separator' => 'Ondalık Ayırıcı',
                     'delete-warning'    => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
                     'general'           => 'Genel',
+                    'group-separator'   => 'Grup Ayırıcı',
                     'name'              => 'Adı',
                     'save-btn'          => 'Para Birimini Kaydet',
                     'symbol'            => 'Sembol',
-                    'group-separator'   => 'Grup Ayırıcı',
                     'title'             => 'Yeni Para Birimi Oluştur',
                 ],
 

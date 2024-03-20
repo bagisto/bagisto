@@ -2235,28 +2235,17 @@ return [
                 ],
 
                 'create' => [
-                    'code'       => 'Code',
-                    'create-btn' => 'Währung erstellen',
-
-                    'currency-position' => [
-                        'options' => [
-                            'left'             => 'Links',
-                            'left-with-space'  => 'Links mit Leerzeichen',
-                            'right'            => 'Rechts',
-                            'right-with-space' => 'Rechts mit Leerzeichen',
-                        ],
-
-                        'title' => 'Währungsposition',
-                    ],
-
+                    'code'              => 'Code',
+                    'create-btn'        => 'Währung erstellen',
+                    'currency-position' => 'Währungsposition',
                     'decimal'           => 'Dezimalstellen',
                     'decimal-separator' => 'Dezimaltrennzeichen',
                     'delete-warning'    => 'Sind Sie sicher, dass Sie diese Aktion durchführen möchten?',
                     'general'           => 'Allgemein',
+                    'group-separator'   => 'Gruppentrennzeichen',
                     'name'              => 'Name',
                     'save-btn'          => 'Währung speichern',
                     'symbol'            => 'Symbol',
-                    'group-separator'   => 'Gruppentrennzeichen',
                     'title'             => 'Neue Währung erstellen',
                 ],
 

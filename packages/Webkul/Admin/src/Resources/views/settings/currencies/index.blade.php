@@ -262,14 +262,14 @@
                             <!-- Currency Position -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.currencies.index.create.currency-position.title')
+                                    @lang('admin::app.settings.currencies.index.create.currency-position')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="currency_position"
                                     v-model="selectedCurrency.currency_position"
-                                    :label="trans('admin::app.settings.currencies.index.create.currency-position.title')"
+                                    :label="trans('admin::app.settings.currencies.index.create.currency-position')"
                                 >
                                     <option value="">@lang('admin::app.settings.taxes.categories.index.create.select')</option>
 
