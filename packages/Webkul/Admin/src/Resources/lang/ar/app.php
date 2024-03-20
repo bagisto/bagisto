@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'الكود',
-                    'create-btn'     => 'إنشاء عملة',
-                    'decimal'        => 'الكسور',
-                    'delete-warning' => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
-                    'general'        => 'عام',
-                    'name'           => 'الاسم',
-                    'save-btn'       => 'حفظ العملة',
-                    'symbol'         => 'الرمز',
-                    'title'          => 'إنشاء عملة جديدة',
+                    'code'              => 'الكود',
+                    'create-btn'        => 'إنشاء عملة',
+                    'currency-position' => 'موقع العملة',
+                    'decimal'           => 'الكسور',
+                    'decimal-separator' => 'فاصل الكسور',
+                    'delete-warning'    => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
+                    'general'           => 'عام',
+                    'group-separator'   => 'فاصل المجموعة',
+                    'name'              => 'الاسم',
+                    'save-btn'          => 'حفظ العملة',
+                    'symbol'            => 'الرمز',
+                    'title'             => 'إنشاء عملة جديدة',
                 ],
 
                 'edit' => [
@@ -2914,6 +2917,7 @@ return [
                 'url'                           => 'رابط الإنترنت',
                 'value'                         => 'القيمة: :value',
                 'value-input'                   => 'القيمة',
+
                 'services-content'              => [
                     'add-btn'            => 'أضف الخدمات',
                     'channels'           => 'القنوات',

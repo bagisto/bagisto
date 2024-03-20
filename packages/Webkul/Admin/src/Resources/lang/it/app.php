@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'Codice',
-                    'create-btn'     => 'Crea Valuta',
-                    'decimal'        => 'Decimale',
-                    'delete-warning' => 'Sei sicuro di voler eseguire questa azione?',
-                    'general'        => 'Generale',
-                    'name'           => 'Nome',
-                    'save-btn'       => 'Salva Valuta',
-                    'symbol'         => 'Simbolo',
-                    'title'          => 'Crea Nuova Valuta',
+                    'code'              => 'Código',
+                    'create-btn'        => 'Crear Moneda',
+                    'currency-position' => 'Posizione Valuta',
+                    'decimal'           => 'Separador Decimal',
+                    'decimal-separator' => 'Separador Decimal',
+                    'delete-warning'    => '¿Estás seguro de que deseas realizar esta acción?',
+                    'general'           => 'General',
+                    'group-separator'   => 'Separatore di Gruppo',
+                    'name'              => 'Nombre',
+                    'save-btn'          => 'Guardar Moneda',
+                    'symbol'            => 'Símbolo',
+                    'title'             => 'Crear Nueva Moneda',
                 ],
 
                 'edit' => [
@@ -3193,7 +3196,6 @@ return [
                         'title-info'        => 'Crea un messaggio di checkout personalizzato per i clienti nella pagina di Ringraziamento, adattando il contenuto alle preferenze individuali e migliorando l\'esperienza complessiva post-acquisto.',
                         'vicuna'            => 'Vicuna',
                     ],
-
                 ],
             ],
 

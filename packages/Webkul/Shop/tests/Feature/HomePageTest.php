@@ -12,7 +12,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('returns a successful response', function () {
-    // Act & Assert
+    // Act and Assert
     get(route('shop.home.index'))
         ->assertOk();
 });

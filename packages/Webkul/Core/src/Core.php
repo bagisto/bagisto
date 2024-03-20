@@ -5,6 +5,7 @@ namespace Webkul\Core;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Concerns\CurrencyFormatter;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Repositories\CoreConfigRepository;
@@ -18,12 +19,14 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Core
 {
+    use CurrencyFormatter;
+
     /**
      * The Bagisto version.
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.1.2';
+    const BAGISTO_VERSION = '2.1.x-dev';
 
     /**
      * Current Channel.
@@ -87,15 +90,6 @@ class Core
      * @var array
      */
     protected $singletonInstances = [];
-
-    /**
-     * Register your core config keys here which you don't want to
-     * load in static array. These keys will load from database
-     * every time the `getConfigData` method is called.
-     */
-    private $coreConfigExceptions = [
-        'catalog.products.guest_checkout.allow_guest_checkout',
-    ];
 
     /**
      * Create a new instance.
@@ -542,28 +536,9 @@ class Core
     }
 
     /**
-     * Return currency symbol from currency code.
-     *
-     * @param  string|\Webkul\Core\Contracts\Currency  $currency
-     * @return string
+     * Format price.
      */
-    public function currencySymbol($currency)
-    {
-        $code = $currency instanceof \Webkul\Core\Contracts\Currency ? $currency->code : $currency;
-
-        $formatter = new \NumberFormatter(app()->getLocale().'@currency='.$code, \NumberFormatter::CURRENCY);
-
-        return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
-    }
-
-    /**
-     * Format and convert price with currency symbol.
-     *
-     * @param  float  $price
-     * @param  string (optional)  $currencyCode
-     * @return string
-     */
-    public function formatPrice($price, $currencyCode = null)
+    public function formatPrice(?float $price, ?string $currencyCode = null): string
     {
         if (is_null($price)) {
             $price = 0;
@@ -573,56 +548,21 @@ class Core
             ? $this->getAllCurrencies()->where('code', $currencyCode)->first()
             : $this->getCurrentCurrency();
 
-        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
-
-        $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
-
-        if (! $currency) {
-            return $formatter->formatCurrency($price, $currencyCode);
-        }
-
-        if ($symbol = $currency->symbol) {
-            if ($this->currencySymbol($currency) == $symbol) {
-                return $formatter->formatCurrency($price, $currency->code);
-            }
-
-            $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
-
-            return $formatter->format($price);
-        }
-
-        return $formatter->formatCurrency($price, $currency->code);
+        return $this->formatCurrency($price, $currency);
     }
 
     /**
-     * Format price with base currency symbol. This method also give ability to encode
-     * the base currency symbol and its optional.
-     *
-     * @param  float  $price
-     * @param  bool  $isEncoded
-     * @return string
+     * Format price with base currency symbol.
      */
-    public function formatBasePrice($price, $isEncoded = false)
+    public function formatBasePrice(?float $price): string
     {
         if (is_null($price)) {
             $price = 0;
         }
 
-        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+        $currency = $this->getBaseCurrency();
 
-        if ($symbol = $this->getBaseCurrency()->symbol) {
-            if ($this->currencySymbol($this->getBaseCurrencyCode()) == $symbol) {
-                $content = $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
-            } else {
-                $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
-
-                $content = $formatter->format($this->convertPrice($price));
-            }
-        } else {
-            $content = $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
-        }
-
-        return ! $isEncoded ? $content : htmlentities($content);
+        return $this->formatCurrency($price, $currency);
     }
 
     /**

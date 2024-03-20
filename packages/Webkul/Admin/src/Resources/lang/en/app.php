@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'Code',
-                    'create-btn'     => 'Create Currency',
-                    'decimal'        => 'Decimal',
-                    'delete-warning' => 'Are you sure, you want to perform this action?',
-                    'general'        => 'General',
-                    'name'           => 'Name',
-                    'save-btn'       => 'Save Currency',
-                    'symbol'         => 'Symbol',
-                    'title'          => 'Create New Currency',
+                    'code'              => 'Code',
+                    'create-btn'        => 'Create Currency',
+                    'currency-position' => 'Currency Position',
+                    'decimal'           => 'Decimal',
+                    'decimal-separator' => 'Decimal Separator',
+                    'delete-warning'    => 'Are you sure you want to perform this action?',
+                    'general'           => 'General',
+                    'group-separator'   => 'Group Separator',
+                    'name'              => 'Name',
+                    'save-btn'          => 'Save Currency',
+                    'symbol'            => 'Symbol',
+                    'title'             => 'Create New Currency',
                 ],
 
                 'edit' => [
@@ -2747,8 +2750,8 @@ return [
                     'status'   => 'Status',
                 ],
 
-                'edit' => [
-                    'title'    => 'Edit User',
+                'edit'  => [
+                    'title'  => 'Edit User',
                 ],
             ],
 
@@ -2914,6 +2917,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Value: :value',
                 'value-input'                   => 'Value',
+
                 'services-content'              => [
                     'add-btn'            => 'Add Services',
                     'channels'           => 'Channels',

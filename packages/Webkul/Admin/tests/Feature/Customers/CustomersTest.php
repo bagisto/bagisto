@@ -30,7 +30,7 @@ it('should return listing items of customers', function () {
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act & Assert
+    // Act and Assert
     $this->loginAsAdmin();
 
     getJson(route('admin.customers.customers.index'), [

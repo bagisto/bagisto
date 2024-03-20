@@ -20,7 +20,7 @@ it('returns paginated category products', function () {
 
     $availableLimits = (new Toolbar())->getAvailableLimits();
 
-    // Act & Assert
+    // Act and Assert
     $availableLimits->each(function ($limit) use ($specifiedCategory, $productsCount) {
         getJson(route('shop.api.products.index', ['category_id' => $specifiedCategory->id, 'limit' => $limit]))
             ->assertOk()
@@ -44,7 +44,7 @@ it('returns category products sorted by name descending', function () {
         ->sortDesc()
         ->toArray();
 
-    // Act & Assert
+    // Act and Assert
     getJson(route('shop.api.products.index', ['category_id' => $specifiedCategory->id, 'sort' => 'name-desc']))
         ->assertOk()
         ->assertSeeTextInOrder($expectedNamesInDescOrder);
@@ -65,7 +65,7 @@ it('returns category products sorted by name ascending', function () {
         ->sort()
         ->toArray();
 
-    // Act & Assert
+    // Act and Assert
     getJson(route('shop.api.products.index', ['category_id' => $specifiedCategory->id, 'sort' => 'name-asc']))
         ->assertOk()
         ->assertSeeTextInOrder($expectedNamesInAscOrder);
@@ -91,7 +91,7 @@ it('returns category products sorted by created_at descending', function () {
         'created_at' => now(),
     ]);
 
-    // Act & Assert
+    // Act and Assert
     getJson(route('shop.api.products.index', ['category_id' => $specifiedCategory->id, 'sort' => 'created_at-desc']))
         ->assertOk()
         ->assertSeeTextInOrder([
@@ -121,7 +121,7 @@ it('returns category products sorted by created_at ascending', function () {
         'created_at' => now(),
     ]);
 
-    // Act & Assert
+    // Act and Assert
     getJson(route('shop.api.products.index', ['category_id' => $specifiedCategory->id, 'sort' => 'created_at-asc']))
         ->assertOk()
         ->assertSeeTextInOrder([
@@ -147,7 +147,7 @@ it('returns category products sorted by price descending', function () {
         ->map(fn ($price) =>  core()->formatPrice($price))
         ->toArray();
 
-    // Act & Assert
+    // Act and Assert
     getJson(route('shop.api.products.index', ['category_id' => $specifiedCategory->id, 'sort' => 'price-desc']))
         ->assertOk()
         ->assertSeeTextInOrder($expectedPricesInDescOrder);
@@ -169,7 +169,7 @@ it('returns category products sorted by price ascending', function () {
         ->map(fn ($price) =>  core()->formatPrice($price))
         ->toArray();
 
-    // Act & Assert
+    // Act and Assert
     getJson(route('shop.api.products.index', ['category_id' => $specifiedCategory->id, 'sort' => 'price-asc']))
         ->assertOk()
         ->assertSeeTextInOrder($expectedPricesInAscOrder);

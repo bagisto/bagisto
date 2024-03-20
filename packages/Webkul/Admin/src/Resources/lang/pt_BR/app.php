@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'Código',
-                    'create-btn'     => 'Criar Moeda',
-                    'decimal'        => 'Casas Decimais',
-                    'delete-warning' => 'Tem certeza de que deseja executar esta ação?',
-                    'general'        => 'Geral',
-                    'name'           => 'Nome',
-                    'save-btn'       => 'Salvar Moeda',
-                    'symbol'         => 'Símbolo',
-                    'title'          => 'Criar Nova Moeda',
+                    'code'              => 'Código',
+                    'create-btn'        => 'Criar Moeda',
+                    'currency-position' => 'Posição da Moeda',
+                    'decimal'           => 'Casas Decimais',
+                    'decimal-separator' => 'Separador decimal',
+                    'delete-warning'    => 'Tem certeza de que deseja executar esta ação?',
+                    'general'           => 'Geral',
+                    'group-separator'   => 'Separador de Grupo',
+                    'name'              => 'Nome',
+                    'save-btn'          => 'Salvar Moeda',
+                    'symbol'            => 'Símbolo',
+                    'title'             => 'Criar Nova Moeda',
                 ],
 
                 'edit' => [
@@ -2914,6 +2917,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Valor: :value',
                 'value-input'                   => 'Valor',
+
                 'services-content'              => [
                     'add-btn'            => 'Adicionar Serviços',
                     'channels'           => 'Canais',

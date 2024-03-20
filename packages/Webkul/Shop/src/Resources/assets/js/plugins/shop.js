@@ -2,49 +2,96 @@ export default {
     install(app) {
         app.config.globalProperties.$shop = {
             /**
-             * Load the dynamic scripts
-             * 
-             * @param {string} src 
-             * @param {callback} onScriptLoaded 
-             * 
+             * Base url.
+             *
+             * @returns {string}
+             */
+            baseUrl: () => {
+                return document.querySelector('meta[name="base-url"]').content ?? "http://localhost";
+            },
+
+            /**
+             * Load the dynamic scripts.
+             *
+             * @param {string} src
+             * @param {callback} onScriptLoaded
+             *
              * @returns {void}.
              */
             loadDynamicScript: (src, onScriptLoaded) => {
                 let dynamicScript = document.createElement('script');
-            
+
                 dynamicScript.setAttribute('src', src);
 
                 document.body.appendChild(dynamicScript);
-            
+
                 dynamicScript.addEventListener('load', onScriptLoaded, false);
             },
 
             /**
-             * Generates a formatted price string using the provided price, localeCode, and currencyCode.
+             * Format the given price with currency symbol.
              *
-             * @param {number} price - The price value to be formatted.
-             * @param {string} localeCode - The locale code specifying the desired formatting rules.
-             * @param {string} currencyCode - The currency code specifying the desired currency symbol.
-             * @returns {string} - The formatted price string.
+             * @param {number} price - The price to be formatted.
+             * @returns {string} - The formatted price as a string.
              */
-            formatPrice: (price, localeCode = null, currencyCode = null) => {
-                if (!localeCode) {
-                    localeCode =
-                        document.querySelector(
-                            'meta[http-equiv="content-language"]'
-                        ).content ?? "en";
+            formatPrice(price) {
+                const locale = document.querySelector('meta[http-equiv="content-language"]').content;
+
+                const currency = JSON.parse(document.querySelector('meta[name="currency"]').content);
+
+                const symbol = currency.symbol !== '' ? currency.symbol : currency.code;
+
+                if (! currency.currency_position) {
+                    return new Intl.NumberFormat(locale, {
+                        style: "currency",
+                        currency: currency.code,
+                    }).format(price);
                 }
 
-                if (!currencyCode) {
-                    currencyCode =
-                        document.querySelector('meta[name="currency-code"]')
-                            .content ?? "USD";
-                }
+                const formatter = new Intl.NumberFormat(locale, {
+                    style: 'currency',
+                    currency: currency.code,
+                    minimumFractionDigits: currency.decimal ?? 2
+                });
 
-                return new Intl.NumberFormat(localeCode, {
-                    style: "currency",
-                    currency: currencyCode,
-                }).format(price);
+                const formattedCurrency = formatter.formatToParts(price)
+                    .map(part => {
+                        switch (part.type) {
+                            case 'currency':
+                                return '';
+
+                            case 'group':
+                                return currency.group_separator === ''
+                                    ? part.value
+                                    : currency.group_separator;
+
+                            case 'decimal':
+                                return currency.decimal_separator === ''
+                                    ? part.value
+                                    : currency.decimal_separator;
+
+                            default:
+                                return part.value;
+                        }
+                    })
+                    .join('');
+
+                switch (currency.currency_position) {
+                    case 'left':
+                        return symbol + formattedCurrency;
+
+                    case 'left_with_space':
+                        return symbol + ' ' + formattedCurrency;
+
+                    case 'right':
+                        return formattedCurrency + symbol;
+
+                    case 'right_with_space':
+                        return formattedCurrency + ' ' + symbol;
+
+                    default:
+                        return formattedCurrency;
+                }
             },
         };
     },

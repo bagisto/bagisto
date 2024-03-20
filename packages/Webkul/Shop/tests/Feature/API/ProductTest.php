@@ -69,7 +69,7 @@ it('returns all products listing', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act & Assert
+    // Act and Assert
     getJson(route('shop.api.products.index'))
         ->assertOk()
         ->assertJsonIsArray('data')

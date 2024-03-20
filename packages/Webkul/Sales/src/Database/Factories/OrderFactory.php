@@ -18,6 +18,8 @@ class OrderFactory extends Factory
     protected $model = Order::class;
 
     /**
+     * States.
+     *
      * @var string[]
      */
     protected $states = [
@@ -44,9 +46,9 @@ class OrderFactory extends Factory
             'is_gift'                   => 0,
             'total_item_count'          => 1,
             'total_qty_ordered'         => 1,
-            'base_currency_code'        => 'EUR',
-            'channel_currency_code'     => 'EUR',
-            'order_currency_code'       => 'EUR',
+            'base_currency_code'        => 'USD',
+            'channel_currency_code'     => 'USD',
+            'order_currency_code'       => 'USD',
             'grand_total'               => $grandTotal = rand(0, 9999),
             'base_grand_total'          => $grandTotal,
             'grand_total_invoiced'      => $grandTotal,
@@ -68,6 +70,9 @@ class OrderFactory extends Factory
         ];
     }
 
+    /**
+     * Pending state.
+     */
     public function pending(): OrderFactory
     {
         return $this->state(function () {
@@ -77,6 +82,9 @@ class OrderFactory extends Factory
         });
     }
 
+    /**
+     * Completed state.
+     */
     public function completed(): OrderFactory
     {
         return $this->state(function () {
@@ -86,6 +94,9 @@ class OrderFactory extends Factory
         });
     }
 
+    /**
+     * Closed state.
+     */
     public function closed(): OrderFactory
     {
         return $this->state(function () {

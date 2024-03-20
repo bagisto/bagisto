@@ -5,7 +5,9 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\JsonResponse;
 use Webkul\Admin\DataGrids\Settings\CurrencyDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Enums\CurrencyPositionEnum;
 use Webkul\Core\Repositories\CurrencyRepository;
+use Webkul\Core\Rules\Code;
 
 class CurrencyController extends Controller
 {
@@ -29,7 +31,9 @@ class CurrencyController extends Controller
             return app(CurrencyDataGrid::class)->toJson();
         }
 
-        return view('admin::settings.currencies.index');
+        return view('admin::settings.currencies.index', [
+            'currencyPositions' => CurrencyPositionEnum::options(),
+        ]);
     }
 
     /**
@@ -38,7 +42,7 @@ class CurrencyController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'code' => 'required|min:3|max:3|unique:currencies,code',
+            'code' => ['required', 'min:3', 'max:3', 'unique:currencies,code', new Code],
             'name' => 'required',
         ]);
 
@@ -47,6 +51,9 @@ class CurrencyController extends Controller
             'name',
             'symbol',
             'decimal',
+            'group_separator',
+            'decimal_separator',
+            'currency_position',
         ]));
 
         return new JsonResponse([
@@ -55,7 +62,7 @@ class CurrencyController extends Controller
     }
 
     /**
-     * Currency Details
+     * Currency details.
      */
     public function edit(int $id): JsonResponse
     {
@@ -72,7 +79,7 @@ class CurrencyController extends Controller
         $id = request('id');
 
         $this->validate(request(), [
-            'code' => ['required', 'unique:currencies,code,'.$id, new \Webkul\Core\Rules\Code],
+            'code' => ['required', 'unique:currencies,code,'.$id, new Code],
             'name' => 'required',
         ]);
 
@@ -81,6 +88,9 @@ class CurrencyController extends Controller
             'name',
             'symbol',
             'decimal',
+            'group_separator',
+            'decimal_separator',
+            'currency_position',
         ]), $id);
 
         return new JsonResponse([
@@ -109,10 +119,10 @@ class CurrencyController extends Controller
             ], 200);
         } catch (\Exception $e) {
             report($e);
-        }
 
-        return new JsonResponse([
-            'message' => trans('admin::app.settings.currencies.index.delete-failed'),
-        ], 500);
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.currencies.index.delete-failed'),
+            ], 500);
+        }
     }
 }
