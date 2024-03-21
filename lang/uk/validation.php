@@ -25,7 +25,7 @@ return [
     'ascii'           => 'Поле :attribute повинно містити лише однобайтові буквено-цифрові символи та символи.',
     'before'          => 'Поле :attribute повинно бути датою перед :date.',
     'before_or_equal' => 'Поле :attribute повинно бути датою перед або дорівнює :date.',
-    
+
     'between' => [
         'array'   => 'Поле :attribute повинно містити від :min до :max елементів.',
         'file'    => 'Поле :attribute повинно бути від :min до :max кілобайт.',
@@ -156,14 +156,14 @@ return [
     'required_without'     => 'Поле :attribute є обов\'язковим, коли :values відсутній.',
     'required_without_all' => 'Поле :attribute є обов\'язковим, коли ні одне з :values не присутнє.',
     'same'                 => 'Поле :attribute повинно збігатися з :other.',
-    
+
     'size' => [
         'array'   => 'Поле :attribute повинно містити :size елементів.',
         'file'    => 'Поле :attribute повинно бути :size кілобайт.',
         'numeric' => 'Поле :attribute повинно бути :size.',
         'string'  => 'Поле :attribute повинно бути :size символів.',
     ],
-    
+
     'starts_with' => 'Поле :attribute повинно починатися з одного з наступних: :values.',
     'string'      => 'Поле :attribute повинно бути рядком.',
     'timezone'    => 'Поле :attribute повинно бути дійсною часовою зоною.',

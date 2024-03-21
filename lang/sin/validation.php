@@ -64,7 +64,7 @@ return [
         'numeric' => 'ප්‍රතිප්‍රශ්න :attribute කියවීම :value වඩා වැඩි විය යුතුය.',
         'string'  => 'ප්‍රතිප්‍රශ්න :attribute කියවීම :value අකුරු වඩා වැඩි විය යුතුය.',
     ],
-    
+
     'gte' => [
         'array'   => 'ප්‍රතිප්‍රශ්න :attribute කියවීම අගය :value හෝ වඩා වැඩි විය යුතුය.',
         'file'    => 'ප්‍රතිප්‍රශ්න :attribute කියවීම :value කිලෝ හෝ වඩා ඇතිවිය යුතුය.',
@@ -82,7 +82,7 @@ return [
     'ipv6'      => 'ප්‍රතිප්‍රශ්න :attribute කොටුව වලංගු IPv6 ලිපිනය විවෘත කළ යුතුය.',
     'json'      => 'ප්‍රතිප්‍රශ්න :attribute කොටුව වලංගු JSON ස්ථානය විවෘත කළ යුතුය.',
     'lowercase' => 'ප්‍රතිප්‍රශ්න :attribute කොටුව හොදයින් විය යුතුය.',
-    
+
     'lt' => [
         'array'   => 'ප්‍රතිප්‍රශ්න :attribute කොටුව :value කිලෝ හඩ වන අතර එකතු කළ යුතුය.',
         'file'    => 'ප්‍රතිප්‍රශ්න :attribute කොටුව :value කිලෝ වඩා වැඩි අකුරු විය යුතුය.',
@@ -96,9 +96,9 @@ return [
         'numeric' => ':attribute කොටුවේ අනුමත කිලෝ හෝ සමාන විය යුතුය :value.',
         'string'  => ':attribute කොටුවේ අනුමත කිලෝ හෝ සමාන විය යුතුය :value අකුරු.',
     ],
-    
+
     'mac_address' => ':attribute කොටුව වලංගු MAC ලිපිනය විවෘත කළ යුතුය.',
-    
+
     'max' => [
         'array'   => ':attribute කොටුවේ අනුමත දත්ත අගය :max ට වඩා හෝ සමාන විය යුතුය.',
         'file'    => ':attribute කොටුව අනුමත කිලෝ හෝ සමාන විය යුතුය :max කිලෝබයක්.',
@@ -109,7 +109,7 @@ return [
     'max_digits' => 'The :attribute කොටුව වල අනුමත අංක ගණන :max වලට වඩා වැඩි විය යුතුය.',
     'mimes'      => ':attribute කොටුව විටින් ගොනුවේ වර්ගය :values නිසා විය යුතුය.',
     'mimetypes'  => ':attribute කොටුව විටින් ගොනුවේ වර්ගය :values නිසා විය යුතුය.',
-    
+
     'min' => [
         'array'   => ':attribute කොටුව අනුමත දත්ත අගය අවට :min කිලෝ විය යුතුය.',
         'file'    => ':attribute කොටුව අනුමත කිලෝ අහෝ සමාන විය යුතුය :min කිලෝබයක්.',
@@ -163,7 +163,7 @@ return [
         'numeric' => ':attribute කොටුව :size වේ.',
         'string'  => ':attribute කොටුව :size අක්ෂාංකයක් යොමු කළ යුතුය.',
     ],
-    
+
     'starts_with' => ':attribute කොටුව පහත ලැයිස්තුවක් සමඟ ආරම්භ විය යුතුය: :values.',
     'string'      => ':attribute කොටුව සාමාන්‍ය වචන වේ.',
     'timezone'    => ':attribute කොටුව වලංගු කාල කට්ටයක් විය යුතුය.',
@@ -173,7 +173,7 @@ return [
     'url'         => ':attribute කොටුව වලංගු URL විය යුතුය.',
     'ulid'        => ':attribute කොටුව වලංගු ULID විය යුතුය.',
     'uuid'        => ':attribute කොටුව වලංගු UUID විය යුතුය.',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

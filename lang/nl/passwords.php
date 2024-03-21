@@ -17,6 +17,6 @@ return [
     'sent'      => 'We hebben de link voor het opnieuw instellen van uw wachtwoord per e-mail verzonden.',
     'throttled' => 'Wacht even voordat u het opnieuw probeert.',
     'token'     => 'Deze wachtwoord-resettoken is ongeldig.',
-    'user'      => "We kunnen geen gebruiker vinden met dat e-mailadres.",
+    'user'      => 'We kunnen geen gebruiker vinden met dat e-mailadres.',
 
 ];

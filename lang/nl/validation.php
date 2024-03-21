@@ -25,14 +25,14 @@ return [
     'ascii'           => 'Het veld :attribute mag alleen enkel-byte alfanumerieke tekens en symbolen bevatten.',
     'before'          => 'Het veld :attribute moet een datum zijn voor :date.',
     'before_or_equal' => 'Het veld :attribute moet een datum zijn voor of gelijk aan :date.',
-    
+
     'between' => [
         'array'   => 'Het veld :attribute moet tussen :min en :max items bevatten.',
         'file'    => 'Het veld :attribute moet tussen :min en :max kilobytes zijn.',
         'numeric' => 'Het veld :attribute moet tussen :min en :max zijn.',
         'string'  => 'Het veld :attribute moet tussen :min en :max karakters zijn.',
     ],
-    
+
     'boolean'           => 'Het veld :attribute moet waar of onwaar zijn.',
     'can'               => 'Het veld :attribute bevat een ongeautoriseerde waarde.',
     'confirmed'         => 'De bevestiging van het veld :attribute komt niet overeen.',
@@ -64,14 +64,14 @@ return [
         'numeric' => 'Het veld :attribute moet groter zijn dan :value.',
         'string'  => 'Het veld :attribute moet meer dan :value karakters bevatten.',
     ],
-    
+
     'gte' => [
         'array'   => 'Het veld :attribute moet :value items of meer bevatten.',
         'file'    => 'Het veld :attribute moet groter dan of gelijk aan :value kilobytes zijn.',
         'numeric' => 'Het veld :attribute moet groter dan of gelijk aan :value zijn.',
         'string'  => 'Het veld :attribute moet groter dan of gelijk aan :value karakters zijn.',
     ],
-    
+
     'hex_color' => 'Het veld :attribute moet een geldige hexadecimale kleur zijn.',
     'image'     => 'Het veld :attribute moet een afbeelding zijn.',
     'in'        => 'De geselecteerde :attribute is ongeldig.',
@@ -82,34 +82,34 @@ return [
     'ipv6'      => 'Het veld :attribute moet een geldig IPv6-adres zijn.',
     'json'      => 'Het veld :attribute moet een geldige JSON-string zijn.',
     'lowercase' => 'Het veld :attribute moet in kleine letters zijn.',
-    
+
     'lt' => [
         'array'   => 'Het veld :attribute moet minder dan :value items bevatten.',
         'file'    => 'Het veld :attribute moet kleiner zijn dan :value kilobytes.',
         'numeric' => 'Het veld :attribute moet kleiner zijn dan :value.',
         'string'  => 'Het veld :attribute moet minder dan :value karakters bevatten.',
     ],
-    
+
     'lte' => [
         'array'   => 'Het veld :attribute mag niet meer dan :value items bevatten.',
         'file'    => 'Het veld :attribute moet kleiner dan of gelijk aan :value kilobytes zijn.',
         'numeric' => 'Het veld :attribute moet kleiner dan of gelijk aan :value zijn.',
         'string'  => 'Het veld :attribute moet kleiner dan of gelijk aan :value karakters zijn.',
     ],
-    
+
     'mac_address' => 'Het veld :attribute moet een geldig MAC-adres zijn.',
-    
+
     'max' => [
         'array'   => 'Het veld :attribute mag niet meer dan :max items bevatten.',
         'file'    => 'Het veld :attribute mag niet groter zijn dan :max kilobytes.',
         'numeric' => 'Het veld :attribute mag niet groter zijn dan :max.',
         'string'  => 'Het veld :attribute mag niet groter zijn dan :max karakters.',
     ],
-    
+
     'max_digits' => 'Het veld :attribute mag niet meer dan :max cijfers bevatten.',
     'mimes'      => 'Het veld :attribute moet een bestand zijn van het type: :values.',
     'mimetypes'  => 'Het veld :attribute moet een bestand zijn van het type: :values.',
-    
+
     'min' => [
         'array'   => 'Het veld :attribute moet ten minste :min items bevatten.',
         'file'    => 'Het veld :attribute moet ten minste :min kilobytes zijn.',
@@ -156,14 +156,14 @@ return [
     'required_without'     => 'Het veld :attribute is verplicht wanneer :values niet aanwezig is.',
     'required_without_all' => 'Het veld :attribute is verplicht wanneer geen van :values aanwezig is.',
     'same'                 => 'Het veld :attribute moet overeenkomen met :other.',
-    
+
     'size' => [
         'array'   => 'Het veld :attribute moet :size items bevatten.',
         'file'    => 'Het veld :attribute moet :size kilobytes zijn.',
         'numeric' => 'Het veld :attribute moet :size zijn.',
         'string'  => 'Het veld :attribute moet :size karakters bevatten.',
     ],
-    
+
     'starts_with' => ':attribute moet beginnen met een van de volgende waarden: :values.',
     'string'      => ':attribute moet een string zijn.',
     'timezone'    => ':attribute moet een geldige tijdzone zijn.',

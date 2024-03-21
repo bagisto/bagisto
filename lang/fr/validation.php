@@ -57,7 +57,7 @@ return [
     'extensions'        => 'Le champ :attribute doit avoir l\'une des extensions suivantes : :values.',
     'file'              => 'Le champ :attribute doit être un fichier.',
     'filled'            => 'Le champ :attribute doit avoir une valeur.',
-    
+
     'gt' => [
         'array'   => 'Le champ :attribute doit avoir plus de :value éléments.',
         'file'    => 'Le champ :attribute doit être supérieur à :value kilo-octets.',
@@ -116,7 +116,7 @@ return [
         'numeric' => 'Le champ :attribute doit être d\'au moins :min.',
         'string'  => 'Le champ :attribute doit comporter au moins :min caractères.',
     ],
-    
+
     'min_digits'       => 'Le champ :attribute doit comporter au moins :min chiffres.',
     'missing'          => 'Le champ :attribute doit être manquant.',
     'missing_if'       => 'Le champ :attribute doit être manquant lorsque :other est :value.',
@@ -156,14 +156,14 @@ return [
     'required_without'     => 'Le champ :attribute est requis lorsque :values n\'est pas présent.',
     'required_without_all' => 'Le champ :attribute est requis lorsque aucun de :values n\'est présent.',
     'same'                 => 'Le champ :attribute doit correspondre à :other.',
-    
+
     'size' => [
         'array'   => 'Le champ :attribute doit contenir :size éléments.',
         'file'    => 'Le champ :attribute doit être de :size kilo-octets.',
         'numeric' => 'Le champ :attribute doit être :size.',
         'string'  => 'Le champ :attribute doit contenir :size caractères.',
     ],
-    
+
     'starts_with' => 'Le champ :attribute doit commencer par l\'un des éléments suivants : :values.',
     'string'      => 'Le champ :attribute doit être une chaîne de caractères.',
     'timezone'    => 'Le champ :attribute doit être un fuseau horaire valide.',

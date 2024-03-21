@@ -25,7 +25,7 @@ return [
     'ascii'           => 'فیلد :attribute فقط باید شامل کاراکترهای الفبایی و عددی یک بایتی باشد.',
     'before'          => 'فیلد :attribute باید یک تاریخ پیش از :date باشد.',
     'before_or_equal' => 'فیلد :attribute باید یک تاریخ قبل یا مساوی با :date باشد.',
-    
+
     'between' => [
         'array'   => 'فیلد :attribute باید بین :min و :max آیتم باشد.',
         'file'    => 'فیلد :attribute باید بین :min و :max کیلوبایت باشد.',
@@ -82,7 +82,7 @@ return [
     'ipv6'      => 'فیلد :attribute باید یک آدرس IPv6 معتبر باشد.',
     'json'      => 'فیلد :attribute باید یک رشته JSON معتبر باشد.',
     'lowercase' => 'فیلد :attribute باید شامل حروف کوچک باشد.',
-    
+
     'lt' => [
         'array'   => 'فیلد :attribute باید کمتر از :value آیتم داشته باشد.',
         'file'    => 'اندازه فایل :attribute باید کمتر از :value کیلوبایت باشد.',
@@ -105,18 +105,18 @@ return [
         'numeric' => 'مقدار :attribute نباید بیشتر از :max باشد.',
         'string'  => 'طول رشته :attribute نباید بیشتر از :max کاراکتر باشد.',
     ],
-    
+
     'max_digits' => 'فیلد :attribute نباید بیشتر از :max رقم داشته باشد.',
     'mimes'      => 'فیلد :attribute باید یک فایل از نوع :values باشد.',
     'mimetypes'  => 'فیلد :attribute باید یک فایل از نوع :values باشد.',
-    
+
     'min' => [
         'array'   => 'فیلد :attribute باید حداقل دارای :min آیتم باشد.',
         'file'    => 'اندازه فایل :attribute باید حداقل :min کیلوبایت باشد.',
         'numeric' => 'مقدار :attribute باید حداقل :min باشد.',
         'string'  => 'طول رشته :attribute باید حداقل :min کاراکتر باشد.',
     ],
-    
+
     'min_digits'       => 'فیلد :attribute باید حداقل دارای :min رقم باشد.',
     'missing'          => 'فیلد :attribute باید موجود باشد.',
     'missing_if'       => 'فیلد :attribute باید موجود باشد زمانی که :other برابر با :value است.',
@@ -127,7 +127,7 @@ return [
     'not_in'           => 'مقدار انتخابی :attribute معتبر نیست.',
     'not_regex'        => 'فرمت فیلد :attribute نامعتبر است.',
     'numeric'          => 'فیلد :attribute باید یک عدد باشد.',
-    
+
     'password' => [
         'letters'       => 'فیلد :attribute باید حداقل شامل یک حرف باشد.',
         'mixed'         => 'فیلد :attribute باید حداقل شامل یک حرف بزرگ و یک حرف کوچک باشد.',
@@ -156,14 +156,14 @@ return [
     'required_without'     => 'فیلد :attribute الزامی است زمانی که :values موجود نیست.',
     'required_without_all' => 'فیلد :attribute الزامی است زمانی که هیچ یک از :values موجود نیست.',
     'same'                 => 'فیلد :attribute باید با :other همخوانی داشته باشد.',
-    
+
     'size' => [
         'array'   => 'فیلد :attribute باید شامل :size مورد باشد.',
         'file'    => 'اندازه فایل :attribute باید :size کیلوبایت باشد.',
         'numeric' => 'مقدار :attribute باید :size باشد.',
         'string'  => 'طول رشته :attribute باید :size کاراکتر باشد.',
     ],
-    
+
     'starts_with' => 'فیلد :attribute باید با یکی از موارد زیر شروع شود: :values.',
     'string'      => 'فیلد :attribute باید یک رشته باشد.',
     'timezone'    => 'فیلد :attribute باید یک منطقه زمانی معتبر باشد.',

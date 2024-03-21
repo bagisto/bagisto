@@ -25,7 +25,7 @@ return [
     'ascii'           => ':attributeは半角英数字と記号のみを含む必要があります。',
     'before'          => ':attributeは:dateの前の日付でなければなりません。',
     'before_or_equal' => ':attributeは:date以前または同じ日付である必要があります。',
-    
+
     'between' => [
         'array'   => ':attributeは:minから:maxの間のアイテムを持つ必要があります。',
         'file'    => ':attributeは:minから:maxキロバイトの間である必要があります。',
@@ -64,14 +64,14 @@ return [
         'numeric' => ':attributeは:valueより大きい必要があります。',
         'string'  => ':attributeは:value文字より大きい必要があります。',
     ],
-    
+
     'gte' => [
         'array'   => ':attributeは:value個以上のアイテムを持つ必要があります。',
         'file'    => ':attributeは:valueキロバイト以上である必要があります。',
         'numeric' => ':attributeは:value以上である必要があります。',
         'string'  => ':attributeは:value文字以上である必要があります。',
     ],
-    
+
     'hex_color' => ':attributeは有効な16進カラーである必要があります。',
     'image'     => ':attributeは画像である必要があります。',
     'in'        => '選択された:attributeは無効です。',
@@ -82,14 +82,14 @@ return [
     'ipv6'      => ':attributeは有効なIPv6アドレスである必要があります。',
     'json'      => ':attributeは有効なJSON文字列である必要があります。',
     'lowercase' => ':attributeはすべて小文字である必要があります。',
-    
+
     'lt' => [
         'array'   => ':attributeは:value個より少ないアイテムを持つ必要があります。',
         'file'    => ':attributeは:valueキロバイトより小さい必要があります。',
         'numeric' => ':attributeは:valueより小さい必要があります。',
         'string'  => ':attributeは:value文字より小さい必要があります。',
     ],
-    
+
     'lte' => [
         'array'   => ':attributeは:value個以下のアイテムを持つ必要があります。',
         'file'    => ':attributeは:valueキロバイト以下である必要があります。',
@@ -105,18 +105,18 @@ return [
         'numeric' => ':attributeは:maxより大きくてはいけません。',
         'string'  => ':attributeは:max文字より大きくてはいけません。',
     ],
-    
+
     'max_digits' => ':attributeは:max桁を超えてはいけません。',
     'mimes'      => ':attributeは:valuesのファイルである必要があります。',
     'mimetypes'  => ':attributeは:valuesのファイルである必要があります。',
-    
+
     'min' => [
         'array'   => ':attributeは少なくとも:min個のアイテムを持つ必要があります。',
         'file'    => ':attributeは少なくとも:minキロバイトである必要があります。',
         'numeric' => ':attributeは少なくとも:minである必要があります。',
         'string'  => ':attributeは少なくとも:min文字である必要があります。',
     ],
-    
+
     'min_digits'       => ':attributeは少なくとも:min桁である必要があります。',
     'missing'          => ':attributeは存在していません。',
     'missing_if'       => ':otherが:valueの場合、:attributeは存在している必要があります。',
@@ -127,7 +127,7 @@ return [
     'not_in'           => '選択された:attributeは無効です。',
     'not_regex'        => ':attributeの形式が無効です。',
     'numeric'          => ':attributeは数値でなければなりません。',
-    
+
     'password' => [
         'letters'       => ':attributeには少なくとも1つの文字を含める必要があります。',
         'mixed'         => ':attributeには少なくとも1つの大文字と1つの小文字を含める必要があります。',
@@ -135,7 +135,7 @@ return [
         'symbols'       => ':attributeには少なくとも1つの記号を含める必要があります。',
         'uncompromised' => '指定された:attributeはデータリークに現れています。別の:attributeを選択してください。',
     ],
-    
+
     'present'              => ':attributeは存在している必要があります。',
     'present_if'           => ':otherが:valueの場合、:attributeは存在している必要があります。',
     'present_unless'       => ':otherが:valueでない限り、:attributeは存在している必要があります。',
@@ -156,14 +156,14 @@ return [
     'required_without'     => ':valuesが存在しない場合、:attributeは必須です。',
     'required_without_all' => ':valuesのいずれも存在しない場合、:attributeは必須です。',
     'same'                 => ':attributeは:otherと一致している必要があります。',
-    
+
     'size' => [
         'array'   => ':attributeは:size個のアイテムを持つ必要があります。',
         'file'    => ':attributeは:sizeキロバイトである必要があります。',
         'numeric' => ':attributeは:sizeである必要があります。',
         'string'  => ':attributeは:size文字である必要があります。',
     ],
-    
+
     'starts_with' => ':attributeは次のいずれかで始まる必要があります: :values。',
     'string'      => ':attributeは文字列である必要があります。',
     'timezone'    => ':attributeは有効なタイムゾーンである必要があります。',

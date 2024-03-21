@@ -25,14 +25,14 @@ return [
     'ascii'           => ':attribute 只能包含单字节的字母数字字符和符号。',
     'before'          => ':attribute 必须是 :date 之前的日期。',
     'before_or_equal' => ':attribute 必须是 :date 之前或相同的日期。',
-    
+
     'between' => [
         'array'   => ':attribute 必须在 :min 和 :max 之间。',
         'file'    => ':attribute 必须在 :min 和 :max 千字节之间。',
         'numeric' => ':attribute 必须在 :min 和 :max 之间。',
         'string'  => ':attribute 必须在 :min 和 :max 个字符之间。',
     ],
-    
+
     'boolean'           => ':attribute 字段必须是 true 或 false。',
     'can'               => ':attribute 字段包含未经授权的值。',
     'confirmed'         => ':attribute 确认不匹配。',
@@ -64,14 +64,14 @@ return [
         'numeric' => ':attribute 字段必须大于 :value。',
         'string'  => ':attribute 字段必须大于 :value 个字符。',
     ],
-    
+
     'gte' => [
         'array'   => ':attribute 字段必须拥有 :value 项或更多。',
         'file'    => ':attribute 字段必须大于或等于 :value 千字节。',
         'numeric' => ':attribute 字段必须大于或等于 :value。',
         'string'  => ':attribute 字段必须大于或等于 :value 个字符。',
     ],
-    
+
     'hex_color' => ':attribute 字段必须是有效的十六进制颜色。',
     'image'     => ':attribute 字段必须是图像。',
     'in'        => '所选 :attribute 无效。',
@@ -82,41 +82,41 @@ return [
     'ipv6'      => ':attribute 字段必须是有效的 IPv6 地址。',
     'json'      => ':attribute 字段必须是有效的 JSON 字符串。',
     'lowercase' => ':attribute 字段必须是小写的。',
-    
+
     'lt' => [
         'array'   => ':attribute 字段必须拥有少于 :value 项。',
         'file'    => ':attribute 字段必须小于 :value 千字节。',
         'numeric' => ':attribute 字段必须小于 :value。',
         'string'  => ':attribute 字段必须小于 :value 个字符。',
     ],
-    
+
     'lte' => [
         'array'   => ':attribute 字段不能拥有超过 :value 项。',
         'file'    => ':attribute 字段必须小于或等于 :value 千字节。',
         'numeric' => ':attribute 字段必须小于或等于 :value。',
         'string'  => ':attribute 字段必须小于或等于 :value 个字符。',
     ],
-    
+
     'mac_address' => ':attribute 字段必须是有效的 MAC 地址。',
-    
+
     'max' => [
         'array'   => ':attribute 字段不能拥有超过 :max 项。',
         'file'    => ':attribute 字段不能大于 :max 千字节。',
         'numeric' => ':attribute 字段不能大于 :max。',
         'string'  => ':attribute 字段不能大于 :max 个字符。',
     ],
-    
+
     'max_digits' => ':attribute 字段不能拥有超过 :max 位数字。',
     'mimes'      => ':attribute 字段必须是类型为 :values 的文件。',
     'mimetypes'  => ':attribute 字段必须是类型为 :values 的文件。',
-    
+
     'min' => [
         'array'   => ':attribute 字段必须拥有至少 :min 项。',
         'file'    => ':attribute 字段必须至少为 :min 千字节。',
         'numeric' => ':attribute 字段必须至少为 :min。',
         'string'  => ':attribute 字段必须至少为 :min 个字符。',
     ],
-    
+
     'min_digits'       => ':attribute 字段必须至少包含 :min 位数字。',
     'missing'          => ':attribute 字段必须缺失。',
     'missing_if'       => '当 :other 为 :value 时，:attribute 字段必须缺失。',
@@ -127,7 +127,7 @@ return [
     'not_in'           => '所选 :attribute 无效。',
     'not_regex'        => ':attribute 字段格式无效。',
     'numeric'          => ':attribute 字段必须是数字。',
-    
+
     'password' => [
         'letters'       => ':attribute 字段必须至少包含一个字母。',
         'mixed'         => ':attribute 字段必须至少包含一个大写字母和一个小写字母。',
@@ -156,14 +156,14 @@ return [
     'required_without'     => '当 :values 不存在时，:attribute 字段是必填的。',
     'required_without_all' => '当 :values 全部不存在时，:attribute 字段是必填的。',
     'same'                 => ':attribute 字段必须与 :other 匹配。',
-    
+
     'size' => [
         'array'   => ':attribute 字段必须包含 :size 项。',
         'file'    => ':attribute 字段必须为 :size 千字节。',
         'numeric' => ':attribute 字段必须为 :size。',
         'string'  => ':attribute 字段必须为 :size 个字符。',
     ],
-    
+
     'starts_with' => ':attribute 字段必须以以下之一开头: :values。',
     'string'      => ':attribute 字段必须是字符串。',
     'timezone'    => ':attribute 字段必须是有效的时区。',

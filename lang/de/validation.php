@@ -32,7 +32,7 @@ return [
         'numeric' => 'Das Feld :attribute muss zwischen :min und :max liegen.',
         'string'  => 'Das Feld :attribute muss zwischen :min und :max Zeichen lang sein.',
     ],
-    
+
     'boolean'           => 'Das Feld :attribute muss true oder false sein.',
     'can'               => 'Das Feld :attribute enthält einen unautorisierten Wert.',
     'confirmed'         => 'Die Bestätigung des Feldes :attribute stimmt nicht überein.',
@@ -64,14 +64,14 @@ return [
         'numeric' => 'Das Feld :attribute muss größer als :value sein.',
         'string'  => 'Das Feld :attribute muss mehr als :value Zeichen haben.',
     ],
-    
+
     'gte' => [
         'array'   => 'Das Feld :attribute muss :value Elemente oder mehr haben.',
         'file'    => 'Das Feld :attribute muss größer oder gleich :value Kilobytes sein.',
         'numeric' => 'Das Feld :attribute muss größer oder gleich :value sein.',
         'string'  => 'Das Feld :attribute muss größer oder gleich :value Zeichen haben.',
     ],
-    
+
     'hex_color' => 'Das Feld :attribute muss eine gültige hexadezimale Farbe sein.',
     'image'     => 'Das Feld :attribute muss ein Bild sein.',
     'in'        => 'Die ausgewählte :attribute ist ungültig.',
@@ -82,41 +82,41 @@ return [
     'ipv6'      => 'Das Feld :attribute muss eine gültige IPv6-Adresse sein.',
     'json'      => 'Das Feld :attribute muss ein gültiger JSON-String sein.',
     'lowercase' => 'Das Feld :attribute muss in Kleinbuchstaben sein.',
-    
+
     'lt' => [
         'array'   => 'Das Feld :attribute muss weniger als :value Elemente haben.',
         'file'    => 'Das Feld :attribute muss kleiner als :value Kilobytes sein.',
         'numeric' => 'Das Feld :attribute muss kleiner als :value sein.',
         'string'  => 'Das Feld :attribute muss weniger als :value Zeichen haben.',
     ],
-    
+
     'lte' => [
         'array'   => 'Das Feld :attribute darf nicht mehr als :value Elemente haben.',
         'file'    => 'Das Feld :attribute muss kleiner oder gleich :value Kilobytes sein.',
         'numeric' => 'Das Feld :attribute muss kleiner oder gleich :value sein.',
         'string'  => 'Das Feld :attribute muss kleiner oder gleich :value Zeichen haben.',
     ],
-    
+
     'mac_address' => 'Das Feld :attribute muss eine gültige MAC-Adresse sein.',
-    
+
     'max' => [
         'array'   => 'Das Feld :attribute darf nicht mehr als :max Elemente haben.',
         'file'    => 'Das Feld :attribute darf nicht größer als :max Kilobytes sein.',
         'numeric' => 'Das Feld :attribute darf nicht größer als :max sein.',
         'string'  => 'Das Feld :attribute darf nicht größer als :max Zeichen sein.',
     ],
-    
+
     'max_digits' => 'Das Feld :attribute darf nicht mehr als :max Ziffern haben.',
     'mimes'      => 'Das Feld :attribute muss eine Datei vom Typ: :values sein.',
     'mimetypes'  => 'Das Feld :attribute muss eine Datei vom Typ: :values sein.',
-    
+
     'min' => [
         'array'   => 'Das Feld :attribute muss mindestens :min Elemente haben.',
         'file'    => 'Das Feld :attribute muss mindestens :min Kilobytes groß sein.',
         'numeric' => 'Das Feld :attribute muss mindestens :min sein.',
         'string'  => 'Das Feld :attribute muss mindestens :min Zeichen haben.',
     ],
-    
+
     'min_digits'       => 'Das Feld :attribute muss mindestens :min Ziffern haben.',
     'missing'          => 'Das Feld :attribute muss fehlen.',
     'missing_if'       => 'Das Feld :attribute muss fehlen, wenn :other :value ist.',
@@ -127,7 +127,7 @@ return [
     'not_in'           => 'Die ausgewählte :attribute ist ungültig.',
     'not_regex'        => 'Das Format des Feldes :attribute ist ungültig.',
     'numeric'          => 'Das Feld :attribute muss eine Zahl sein.',
-    
+
     'password' => [
         'letters'       => 'Das Feld :attribute muss mindestens einen Buchstaben enthalten.',
         'mixed'         => 'Das Feld :attribute muss mindestens einen Großbuchstaben und einen Kleinbuchstaben enthalten.',

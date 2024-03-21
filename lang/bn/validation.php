@@ -25,7 +25,7 @@ return [
     'ascii'           => 'ফিল্ড :attribute অবশ্যই একটি একক-বাইট বর্ণান্ত অক্ষরিক এবং চিহ্ন ধারণ করতে হবে।',
     'before'          => 'ফিল্ড :attribute অবশ্যই :date এর পূর্বের একটি তারিখ হতে হবে।',
     'before_or_equal' => 'ফিল্ড :attribute অবশ্যই :date এর পূর্বে অথবা সমান হতে হবে।',
-    
+
     'between' => [
         'array'   => 'ফিল্ড :attribute অবশ্যই :min এবং :max আইটেম মধ্যে হতে হবে।',
         'file'    => 'ফিল্ড :attribute অবশ্যই :min এবং :max কিলোবাইট মধ্যে হতে হবে।',
@@ -64,7 +64,7 @@ return [
         'numeric' => 'ফিল্ড :attribute অবশ্যই :value এর চেয়ে বড় হতে হবে।',
         'string'  => 'ফিল্ড :attribute অবশ্যই :value অক্ষরের চেয়ে বেশি হতে হবে।',
     ],
-    
+
     'gte' => [
         'array'   => 'ফিল্ড :attribute অবশ্যই :value আইটেম অথবা তার অধিক হতে হবে।',
         'file'    => 'ফিল্ড :attribute অবশ্যই :value কিলোবাইটের চেয়ে বড় অথবা সমান হতে হবে।',
@@ -89,33 +89,33 @@ return [
         'numeric' => 'ফিল্ড :attribute অবশ্যই :value এর চেয়ে ছোট হতে হবে।',
         'string'  => 'ফিল্ড :attribute অবশ্যই :value অক্ষরের চেয়ে কম হতে হবে।',
     ],
-    
+
     'lte' => [
         'array'   => 'ফিল্ড :attribute অবশ্যই :value আইটেম অথবা তার কম হতে হবে।',
         'file'    => 'ফিল্ড :attribute অবশ্যই :value কিলোবাইটের চেয়ে ছোট অথবা সমান হতে হবে।',
         'numeric' => 'ফিল্ড :attribute অবশ্যই :value এর চেয়ে ছোট অথবা সমান হতে হবে।',
         'string'  => 'ফিল্ড :attribute অবশ্যই :value অক্ষরের চেয়ে কম অথবা সমান হতে হবে।',
     ],
-    
+
     'mac_address' => 'ফিল্ড :attribute অবশ্যই একটি বৈধ MAC ঠিকানা হতে হবে।',
-    
+
     'max' => [
         'array'   => 'ফিল্ড :attribute অবশ্যই :max আইটেমের বেশি হতে পারবে না।',
         'file'    => 'ফিল্ড :attribute অবশ্যই :max কিলোবাইটের বেশি হতে পারবে না।',
         'numeric' => 'ফিল্ড :attribute অবশ্যই :max এর বেশি হতে পারবে না।',
         'string'  => 'ফিল্ড :attribute অবশ্যই :max অক্ষরের বেশি হতে পারবে না।',
     ],
-    
+
     'max_digits' => 'ফিল্ড :attribute অবশ্যই :max ডিজিটের বেশি হতে পারবে না।',
     'mimes'      => 'ফিল্ড :attribute অবশ্যই নিম্নলিখিত ধরণের ফাইল হতে হবে: :values।',
     'mimetypes'  => 'ফিল্ড :attribute অবশ্যই নিম্নলিখিত ধরণের ফাইল হতে হবে: :values।',
-    
+
     'min' => [
         'array'   => 'ফিল্ড :attribute অবশ্যই অন্তত :min আইটেম থাকতে হবে।',
         'file'    => 'ফিল্ড :attribute অবশ্যই অন্তত :min কিলোবাইট থাকতে হবে।',
         'numeric' => 'ফিল্ড :attribute অবশ্যই অন্তত :min থাকতে হবে।',
         'string'  => 'ফিল্ড :attribute অবশ্যই অন্তত :min অক্ষর থাকতে হবে।',
-    ],    
+    ],
 
     'min_digits'       => 'ফিল্ড :attribute অবশ্যই অন্তত :min ডিজিট থাকতে হবে।',
     'missing'          => 'ফিল্ড :attribute অনুপস্থিত হতে হবে।',
@@ -127,7 +127,7 @@ return [
     'not_in'           => 'নির্বাচিত :attribute অবৈধ।',
     'not_regex'        => 'ফিল্ড :attribute ফরম্যাট অবৈধ।',
     'numeric'          => 'ফিল্ড :attribute অবশ্যই একটি সংখ্যা হতে হবে।',
-    
+
     'password' => [
         'letters'       => 'ফিল্ড :attribute অবশ্যই কমপক্ষে একটি অক্ষর থাকতে হবে।',
         'mixed'         => 'ফিল্ড :attribute অবশ্যই কমপক্ষে একটি বৃহত্তম এবং একটি ছোট্তম অক্ষর থাকতে হবে।',
@@ -163,7 +163,7 @@ return [
         'numeric' => 'ফিল্ড :attribute অবশ্যই :size হতে হবে।',
         'string'  => 'ফিল্ড :attribute অবশ্যই :size অক্ষর হতে হবে।',
     ],
-    
+
     'starts_with' => 'ফিল্ড :attribute অবশ্যই নিম্নলিখিত মধ্যে একটি দিয়ে শুরু হতে হবে: :values।',
     'string'      => 'ফিল্ড :attribute অবশ্যই একটি স্ট্রিং হতে হবে।',
     'timezone'    => 'ফিল্ড :attribute অবশ্যই একটি বৈধ সময় অঞ্চল হতে হবে।',

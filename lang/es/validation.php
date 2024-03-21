@@ -89,34 +89,34 @@ return [
         'numeric' => 'El campo :attribute debe ser menor que :value.',
         'string'  => 'El campo :attribute debe tener menos de :value caracteres.',
     ],
-    
+
     'lte' => [
         'array'   => 'El campo :attribute no debe tener más de :value elementos.',
         'file'    => 'El campo :attribute debe ser menor o igual que :value kilobytes.',
         'numeric' => 'El campo :attribute debe ser menor o igual que :value.',
         'string'  => 'El campo :attribute debe ser menor o igual que :value caracteres.',
     ],
-    
+
     'mac_address' => 'El campo :attribute debe ser una dirección MAC válida.',
-    
+
     'max' => [
         'array'   => 'El campo :attribute no debe tener más de :max elementos.',
         'file'    => 'El campo :attribute no debe ser mayor que :max kilobytes.',
         'numeric' => 'El campo :attribute no debe ser mayor que :max.',
         'string'  => 'El campo :attribute no debe ser mayor que :max caracteres.',
     ],
-    
+
     'max_digits'       => 'El campo :attribute no debe tener más de :max dígitos.',
     'mimes'            => 'El campo :attribute debe ser un archivo de tipo: :values.',
     'mimetypes'        => 'El campo :attribute debe ser un archivo de tipo: :values.',
-    
+
     'min' => [
         'array'   => 'El campo :attribute debe tener al menos :min elementos.',
         'file'    => 'El campo :attribute debe ser de al menos :min kilobytes.',
         'numeric' => 'El campo :attribute debe ser de al menos :min.',
         'string'  => 'El campo :attribute debe tener al menos :min caracteres.',
     ],
-    
+
     'min_digits'       => 'El campo :attribute debe tener al menos :min dígitos.',
     'missing'          => 'El campo :attribute debe faltar.',
     'missing_if'       => 'El campo :attribute debe faltar cuando :other es :value.',
@@ -127,7 +127,7 @@ return [
     'not_in'           => 'El :attribute seleccionado es inválido.',
     'not_regex'        => 'El formato del campo :attribute es inválido.',
     'numeric'          => 'El campo :attribute debe ser un número.',
-    
+
     'password' => [
         'letters'       => 'El campo :attribute debe contener al menos una letra.',
         'mixed'         => 'El campo :attribute debe contener al menos una letra mayúscula y una minúscula.',
@@ -156,14 +156,14 @@ return [
     'required_without'     => 'El campo :attribute es obligatorio cuando :values no está presente.',
     'required_without_all' => 'El campo :attribute es obligatorio cuando ninguno de los :values está presente.',
     'same'                 => 'El campo :attribute debe coincidir con :other.',
-    
+
     'size' => [
         'array'   => 'El campo :attribute debe contener :size elementos.',
         'file'    => 'El campo :attribute debe tener :size kilobytes.',
         'numeric' => 'El campo :attribute debe ser :size.',
         'string'  => 'El campo :attribute debe tener :size caracteres.',
     ],
-    
+
     'starts_with' => 'El campo :attribute debe empezar con uno de los siguientes valores: :values.',
     'string'      => 'El campo :attribute debe ser una cadena de texto.',
     'timezone'    => 'El campo :attribute debe ser una zona horaria válida.',

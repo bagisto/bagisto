@@ -25,7 +25,7 @@ return [
     'ascii'           => 'फ़ील्ड :attribute केवल एकल-बाइट वाले अक्षरमाला और प्रतीक होने चाहिए।',
     'before'          => 'फ़ील्ड :attribute :date के पहले की तारीख होनी चाहिए।',
     'before_or_equal' => 'फ़ील्ड :attribute :date के पहले या उसके बराबर की तारीख होनी चाहिए।',
-    
+
     'between' => [
         'array'   => 'फ़ील्ड :attribute में :min और :max आइटम्स होने चाहिए।',
         'file'    => 'फ़ील्ड :attribute :min और :max किलोबाइट्स के बीच होना चाहिए।',
@@ -57,7 +57,7 @@ return [
     'extensions'        => 'फ़ील्ड :attribute में निम्नलिखित में से कोई भी एक एक्सटेंशन होना चाहिए: :values।',
     'file'              => 'फ़ील्ड :attribute एक फ़ाइल होनी चाहिए।',
     'filled'            => 'फ़ील्ड :attribute का मान होना आवश्यक है।',
-    
+
     'gt' => [
         'array'   => 'फ़ील्ड :attribute में :value आइटम्स से अधिक होने चाहिए।',
         'file'    => 'फ़ील्ड :attribute :value किलोबाइट्स से अधिक होना चाहिए।',
@@ -71,7 +71,7 @@ return [
         'numeric' => 'फ़ील्ड :attribute :value से अधिक या उसके बराबर होना चाहिए।',
         'string'  => 'फ़ील्ड :attribute :value वर्णों से अधिक या उसके बराबर होना चाहिए।',
     ],
-    
+
     'hex_color'    => 'फ़ील्ड :attribute एक मान्य हेक्साडेसिमल रंग होना चाहिए।',
     'image'        => 'फ़ील्ड :attribute एक छवि होनी चाहिए।',
     'in'           => 'चयनित :attribute अमान्य है।',
@@ -82,14 +82,14 @@ return [
     'ipv6'         => 'फ़ील्ड :attribute एक मान्य IPv6 पता होना चाहिए।',
     'json'         => 'फ़ील्ड :attribute एक मान्य JSON स्ट्रिंग होनी चाहिए।',
     'lowercase'    => 'फ़ील्ड :attribute लोअरकेस होना चाहिए।',
-    
+
     'lt' => [
         'array'   => 'फ़ील्ड :attribute में :value आइटम्स से कम होने चाहिए।',
         'file'    => 'फ़ील्ड :attribute :value किलोबाइट्स से कम होना चाहिए।',
         'numeric' => 'फ़ील्ड :attribute :value से कम होना चाहिए।',
         'string'  => 'फ़ील्ड :attribute :value वर्णों से कम होना चाहिए।',
     ],
-    
+
     'lte' => [
         'array'   => 'फ़ील्ड :attribute में :value आइटम्स से अधिक नहीं होना चाहिए।',
         'file'    => 'फ़ील्ड :attribute :value किलोबाइट्स से अधिक या उसके बराबर होना चाहिए।',
@@ -105,18 +105,18 @@ return [
         'numeric' => 'फ़ील्ड :attribute :max से अधिक नहीं होना चाहिए।',
         'string'  => 'फ़ील्ड :attribute :max वर्णों से अधिक नहीं होना चाहिए।',
     ],
-    
+
     'max_digits' => 'फ़ील्ड :attribute में :max अंकों से अधिक नहीं होना चाहिए।',
     'mimes'      => 'फ़ील्ड :attribute एक फ़ाइल के प्रकार :values होनी चाहिए।',
     'mimetypes'  => 'फ़ील्ड :attribute एक फ़ाइल के प्रकार :values होनी चाहिए।',
-    
+
     'min' => [
         'array'   => 'फ़ील्ड :attribute में कम से कम :min आइटम्स होने चाहिए।',
         'file'    => 'फ़ील्ड :attribute कम से कम :min किलोबाइट्स होने चाहिए।',
         'numeric' => 'फ़ील्ड :attribute कम से कम :min होना चाहिए।',
         'string'  => 'फ़ील्ड :attribute कम से कम :min वर्ण होने चाहिए।',
     ],
-    
+
     'min_digits'       => 'फ़ील्ड :attribute में कम से कम :min अंक होने चाहिए।',
     'missing'          => 'फ़ील्ड :attribute अनुपस्थित होना चाहिए।',
     'missing_if'       => 'फ़ील्ड :attribute :other :value होने पर अनुपस्थित होना चाहिए।',
@@ -163,7 +163,7 @@ return [
         'numeric' => 'फ़ील्ड :attribute का मान :size होना चाहिए।',
         'string'  => 'फ़ील्ड :attribute :size अक्षरों का होना चाहिए।',
     ],
-    
+
     'starts_with' => 'फ़ील्ड :attribute निम्नलिखित में से किसी एक से शुरू होना चाहिए: :values।',
     'string'      => 'फ़ील्ड :attribute स्ट्रिंग होनी चाहिए।',
     'timezone'    => 'फ़ील्ड :attribute मान्य समय क्षेत्र होना चाहिए।',

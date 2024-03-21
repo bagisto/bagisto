@@ -25,7 +25,7 @@ return [
     'ascii'           => ':attribute alanı yalnızca tek baytlık alfasayısal karakterler ve semboller içermelidir.',
     'before'          => ':attribute alanı :date tarihinden önce bir tarih olmalıdır.',
     'before_or_equal' => ':attribute alanı :date tarihinden önce veya aynı tarih olmalıdır.',
-    
+
     'between' => [
         'array'   => ':attribute alanı :min ile :max arasında öğe içermelidir.',
         'file'    => ':attribute alanı :min ile :max kilobayt arasında olmalıdır.',
@@ -57,14 +57,14 @@ return [
     'extensions'        => ':attribute alanı şu uzantılardan birine sahip olmalıdır: :values.',
     'file'              => ':attribute alanı bir dosya olmalıdır.',
     'filled'            => ':attribute alanı bir değere sahip olmalıdır.',
-    
+
     'gt' => [
         'array'   => ':attribute alanı :value öğeden daha fazla olmalıdır.',
         'file'    => ':attribute alanı :value kilobayttan büyük olmalıdır.',
         'numeric' => ':attribute alanı :value\'dan büyük olmalıdır.',
         'string'  => ':attribute alanı :value karakterden büyük olmalıdır.',
     ],
-    
+
     'gte' => [
         'array'   => ':attribute alanı :value öğeden veya daha fazlasına sahip olmalıdır.',
         'file'    => ':attribute alanı :value kilobayttan büyük veya eşit olmalıdır.',
@@ -82,34 +82,34 @@ return [
     'ipv6'      => ':attribute alanı geçerli bir IPv6 adresi olmalıdır.',
     'json'      => ':attribute alanı geçerli bir JSON dizisi olmalıdır.',
     'lowercase' => ':attribute alanı küçük harf olmalıdır.',
-    
+
     'lt' => [
         'array'   => ':attribute alanı :value öğeden daha az olmalıdır.',
         'file'    => ':attribute alanı :value kilobayttan küçük olmalıdır.',
         'numeric' => ':attribute alanı :value\'dan küçük olmalıdır.',
         'string'  => ':attribute alanı :value karakterden az olmalıdır.',
     ],
-    
+
     'lte' => [
         'array'   => ':attribute alanı :value öğeden fazla olmamalıdır.',
         'file'    => ':attribute alanı :value kilobayttan küçük veya eşit olmalıdır.',
         'numeric' => ':attribute alanı :value\'dan küçük veya eşit olmalıdır.',
         'string'  => ':attribute alanı :value karakterden az veya eşit olmalıdır.',
     ],
-    
+
     'mac_address' => ':attribute alanı geçerli bir MAC adresi olmalıdır.',
-    
+
     'max' => [
         'array'   => ':attribute alanı :max öğeden fazla olmamalıdır.',
         'file'    => ':attribute alanı :max kilobayttan büyük olmamalıdır.',
         'numeric' => ':attribute alanı :max\'dan büyük olmamalıdır.',
         'string'  => ':attribute alanı :max karakterden fazla olmamalıdır.',
     ],
-    
+
     'max_digits' => ':attribute alanı :max basamaktan fazla olmamalıdır.',
     'mimes'      => ':attribute alanı şu türde bir dosya olmalıdır: :values.',
     'mimetypes'  => ':attribute alanı şu türde bir dosya olmalıdır: :values.',
-    
+
     'min' => [
         'array'   => ':attribute alanı en az :min öğe içermelidir.',
         'file'    => ':attribute alanı en az :min kilobayt olmalıdır.',
@@ -127,7 +127,7 @@ return [
     'not_in'           => 'Seçilen :attribute geçersizdir.',
     'not_regex'        => ':attribute alanı formatı geçersizdir.',
     'numeric'          => ':attribute alanı bir sayı olmalıdır.',
-    
+
     'password' => [
         'letters'       => ':attribute alanı en az bir harf içermelidir.',
         'mixed'         => ':attribute alanı en az bir büyük harf ve bir küçük harf içermelidir.',
@@ -135,7 +135,7 @@ return [
         'symbols'       => ':attribute alanı en az bir sembol içermelidir.',
         'uncompromised' => 'Verilen :attribute bir veri sızıntısında göründü. Lütfen farklı bir :attribute seçin.',
     ],
-    
+
     'present'              => ':attribute alanı mevcut olmalıdır.',
     'present_if'           => ':other :value olduğunda :attribute alanı mevcut olmalıdır.',
     'present_unless'       => ':other :value olmadığında :attribute alanı mevcut olmalıdır.',
@@ -156,14 +156,14 @@ return [
     'required_without'     => ':values mevcut olmadığında :attribute alanı gereklidir.',
     'required_without_all' => ':values mevcut olmadığında :attribute alanı gereklidir.',
     'same'                 => ':attribute alanı :other ile eşleşmelidir.',
-    
+
     'size' => [
         'array'   => ':attribute alanı :size öğe içermelidir.',
         'file'    => ':attribute alanı :size kilobayt olmalıdır.',
         'numeric' => ':attribute alanı :size olmalıdır.',
         'string'  => ':attribute alanı :size karakter olmalıdır.',
     ],
-    
+
     'starts_with' => ':attribute alanı şu değerlerden biriyle başlamalıdır: :values.',
     'string'      => ':attribute alanı bir dize olmalıdır.',
     'timezone'    => ':attribute alanı geçerli bir saat dilimi olmalıdır.',

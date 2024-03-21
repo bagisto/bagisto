@@ -17,6 +17,6 @@ return [
     'sent'      => 'Şifre sıfırlama bağlantınızı e-posta ile gönderdik.',
     'throttled' => 'Tekrar denemeden önce lütfen bekleyin.',
     'token'     => 'Bu şifre sıfırlama belirteci geçersiz.',
-    'user'      => "Bu e-posta adresiyle bir kullanıcı bulamıyoruz.",
+    'user'      => 'Bu e-posta adresiyle bir kullanıcı bulamıyoruz.',
 
 ];

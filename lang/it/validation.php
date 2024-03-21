@@ -25,7 +25,7 @@ return [
     'ascii'           => 'Il campo :attribute deve contenere solo caratteri alfanumerici e simboli a byte singolo.',
     'before'          => 'Il campo :attribute deve essere una data precedente a :date.',
     'before_or_equal' => 'Il campo :attribute deve essere una data precedente o uguale a :date.',
-    
+
     'between' => [
         'array'   => 'Il campo :attribute deve avere tra :min e :max elementi.',
         'file'    => 'Il campo :attribute deve essere tra :min e :max kilobyte.',
@@ -109,14 +109,14 @@ return [
     'max_digits' => 'Il campo :attribute non deve avere più di :max cifre.',
     'mimes'      => 'Il campo :attribute deve essere un file di tipo: :values.',
     'mimetypes'  => 'Il campo :attribute deve essere un file di tipo: :values.',
-    
+
     'min' => [
         'array'   => 'Il campo :attribute deve avere almeno :min elementi.',
         'file'    => 'Il campo :attribute deve essere almeno di :min kilobyte.',
         'numeric' => 'Il campo :attribute deve essere almeno :min.',
         'string'  => 'Il campo :attribute deve essere di almeno :min caratteri.',
     ],
-    
+
     'min_digits'       => 'Il campo :attribute deve avere almeno :min cifre.',
     'missing'          => 'Il campo :attribute deve essere mancante.',
     'missing_if'       => 'Il campo :attribute deve essere mancante quando :other è :value.',
@@ -127,7 +127,7 @@ return [
     'not_in'           => 'Il campo :attribute selezionato non è valido.',
     'not_regex'        => 'Il formato del campo :attribute non è valido.',
     'numeric'          => 'Il campo :attribute deve essere un numero.',
-    
+
     'password' => [
         'letters'       => 'Il campo :attribute deve contenere almeno una lettera.',
         'mixed'         => 'Il campo :attribute deve contenere almeno una lettera maiuscola e una minuscola.',
@@ -156,14 +156,14 @@ return [
     'required_without'     => 'Il campo :attribute è richiesto quando :values non è presente.',
     'required_without_all' => 'Il campo :attribute è richiesto quando nessuno dei :values è presente.',
     'same'                 => 'Il campo :attribute deve corrispondere a :other.',
-    
+
     'size' => [
         'array'   => 'Il campo :attribute deve contenere :size elementi.',
         'file'    => 'Il campo :attribute deve essere di :size kilobyte.',
         'numeric' => 'Il campo :attribute deve essere :size.',
         'string'  => 'Il campo :attribute deve essere di :size caratteri.',
     ],
-    
+
     'starts_with' => 'Il campo :attribute deve iniziare con uno dei seguenti: :values.',
     'string'      => 'Il campo :attribute deve essere una stringa.',
     'timezone'    => 'Il campo :attribute deve essere un fuso orario valido.',

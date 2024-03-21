@@ -64,14 +64,14 @@ return [
         'numeric' => 'Поле :attribute должно быть больше :value.',
         'string'  => 'Поле :attribute должно содержать больше :value символов.',
     ],
-    
+
     'gte' => [
         'array'   => 'Поле :attribute должно содержать :value элементов или больше.',
         'file'    => 'Поле :attribute должно быть больше или равно :value килобайт.',
         'numeric' => 'Поле :attribute должно быть больше или равно :value.',
         'string'  => 'Поле :attribute должно быть больше или равно :value символов.',
     ],
-    
+
     'hex_color' => 'Поле :attribute должно быть допустимым шестнадцатеричным цветом.',
     'image'     => 'Поле :attribute должно быть изображением.',
     'in'        => 'Выбранное значение для :attribute недопустимо.',
@@ -82,41 +82,41 @@ return [
     'ipv6'      => 'Поле :attribute должно быть действительным IPv6-адресом.',
     'json'      => 'Поле :attribute должно быть допустимой JSON строкой.',
     'lowercase' => 'Поле :attribute должно быть в нижнем регистре.',
-    
+
     'lt' => [
         'array'   => 'Поле :attribute должно содержать менее :value элементов.',
         'file'    => 'Поле :attribute должно быть меньше :value килобайт.',
         'numeric' => 'Поле :attribute должно быть меньше :value.',
         'string'  => 'Поле :attribute должно содержать меньше :value символов.',
     ],
-    
+
     'lte' => [
         'array'   => 'Поле :attribute не должно содержать более :value элементов.',
         'file'    => 'Поле :attribute должно быть меньше или равно :value килобайт.',
         'numeric' => 'Поле :attribute должно быть меньше или равно :value.',
         'string'  => 'Поле :attribute должно быть меньше или равно :value символов.',
     ],
-    
+
     'mac_address' => 'Поле :attribute должно быть допустимым MAC-адресом.',
-    
+
     'max' => [
         'array'   => 'Поле :attribute не должно содержать более :max элементов.',
         'file'    => 'Поле :attribute не должно быть больше :max килобайт.',
         'numeric' => 'Поле :attribute не должно быть больше :max.',
         'string'  => 'Поле :attribute не должно быть больше :max символов.',
     ],
-    
+
     'max_digits' => 'Поле :attribute не должно содержать более :max цифр.',
     'mimes'      => 'Поле :attribute должно быть файлом одного из следующих типов: :values.',
     'mimetypes'  => 'Поле :attribute должно быть файлом одного из следующих типов: :values.',
-    
+
     'min' => [
         'array'   => 'Поле :attribute должно содержать как минимум :min элементов.',
         'file'    => 'Поле :attribute должно быть как минимум :min килобайт.',
         'numeric' => 'Поле :attribute должно быть как минимум :min.',
         'string'  => 'Поле :attribute должно быть как минимум :min символов.',
     ],
-    
+
     'min_digits'       => 'Поле :attribute должно содержать как минимум :min цифр.',
     'missing'          => 'Поле :attribute должно отсутствовать.',
     'missing_if'       => 'Поле :attribute должно отсутствовать, когда :other равно :value.',
@@ -127,7 +127,7 @@ return [
     'not_in'           => 'Выбранное значение для :attribute недопустимо.',
     'not_regex'        => 'Формат поля :attribute недопустим.',
     'numeric'          => 'Поле :attribute должно быть числом.',
-    
+
     'password' => [
         'letters'       => 'Поле :attribute должно содержать как минимум одну букву.',
         'mixed'         => 'Поле :attribute должно содержать как минимум одну заглавную и одну строчную букву.',
@@ -135,7 +135,7 @@ return [
         'symbols'       => 'Поле :attribute должно содержать как минимум один символ.',
         'uncompromised' => 'Указанное значение :attribute встречается в утечках данных. Пожалуйста, выберите другое значение :attribute.',
     ],
-    
+
     'present'              => 'Поле :attribute должно присутствовать.',
     'present_if'           => 'Поле :attribute должно присутствовать, когда :other равно :value.',
     'present_unless'       => 'Поле :attribute должно присутствовать, если :other не равно :value.',
@@ -156,14 +156,14 @@ return [
     'required_without'     => 'Поле :attribute является обязательным, когда :values отсутствует.',
     'required_without_all' => 'Поле :attribute является обязательным, когда отсутствуют все значения :values.',
     'same'                 => 'Поле :attribute должно совпадать с :other.',
-    
+
     'size' => [
         'array'   => 'Поле :attribute должно содержать :size элементов.',
         'file'    => 'Поле :attribute должно быть :size килобайт.',
         'numeric' => 'Поле :attribute должно быть :size.',
         'string'  => 'Поле :attribute должно быть :size символов.',
     ],
-    
+
     'starts_with' => 'Поле :attribute должно начинаться с одного из следующих значений: :values.',
     'string'      => 'Поле :attribute должно быть строкой.',
     'timezone'    => 'Поле :attribute должно быть допустимым часовым поясом.',

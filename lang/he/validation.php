@@ -25,14 +25,14 @@ return [
     'ascii'           => 'שדה :attribute יכול להכיל רק תווים אלפאנומריים וסימנים בתצורה יחידתית.',
     'before'          => 'שדה :attribute חייב להיות תאריך לפני :date.',
     'before_or_equal' => 'שדה :attribute חייב להיות תאריך לפני או שווה ל־:date.',
-    
+
     'between' => [
         'array'   => 'שדה :attribute חייב להכיל בין :min ל־:max פריטים.',
         'file'    => 'שדה :attribute חייב להיות בין :min ל־:max קילובייטים.',
         'numeric' => 'שדה :attribute חייב להיות בין :min ל־:max.',
         'string'  => 'שדה :attribute חייב להיות בין :min ל־:max תווים.',
     ],
-    
+
     'boolean'           => 'שדה :attribute חייב להיות אמת או שקר.',
     'can'               => 'שדה :attribute מכיל ערך לא מורשה.',
     'confirmed'         => 'אישור השדה :attribute אינו תואם.',
@@ -82,30 +82,30 @@ return [
     'ipv6'      => 'שדה :attribute חייב להיות כתובת IPv6 תקינה.',
     'json'      => 'שדה :attribute חייב להיות מחרוזת JSON תקינה.',
     'lowercase' => 'שדה :attribute חייב להיות באותיות קטנות בלבד.',
-    
+
     'lt' => [
         'array'   => 'שדה :attribute חייב להכיל פחות מ־:value פריטים.',
         'file'    => 'שדה :attribute חייב להיות פחות מ־:value קילובייטים.',
         'numeric' => 'שדה :attribute חייב להיות פחות מ־:value.',
         'string'  => 'שדה :attribute חייב להיות פחות מ־:value תווים.',
     ],
-    
+
     'lte' => [
         'array'   => 'שדה :attribute חייב להכיל :value פריטים או פחות.',
         'file'    => 'שדה :attribute חייב להיות קטן או שווה ל־:value קילובייטים.',
         'numeric' => 'שדה :attribute חייב להיות קטן או שווה ל־:value.',
         'string'  => 'שדה :attribute חייב להיות קטן או שווה ל־:value תווים.',
     ],
-    
+
     'mac_address' => 'שדה :attribute חייב להיות כתובת MAC תקינה.',
-    
+
     'max' => [
         'array'   => 'שדה :attribute חייב להכיל לא יותר מ־:max פריטים.',
         'file'    => 'שדה :attribute חייב להיות קטן מ־:max קילובייטים.',
         'numeric' => 'שדה :attribute חייב להיות קטן מ־:max.',
         'string'  => 'שדה :attribute חייב להיות קטן מ־:max תווים.',
     ],
-    
+
     'max_digits' => 'שדה :attribute חייב להיות עד :max ספרות.',
     'mimes'      => 'שדה :attribute חייב להיות קובץ מסוג: :values.',
     'mimetypes'  => 'שדה :attribute חייב להיות קובץ מסוג: :values.',
@@ -116,7 +116,7 @@ return [
         'numeric' => 'שדה :attribute חייב להיות לפחות :min.',
         'string'  => 'שדה :attribute חייב להיות לפחות :min תווים.',
     ],
-    
+
     'min_digits'       => 'שדה :attribute חייב להיות לפחות בעל :min ספרות.',
     'missing'          => 'שדה :attribute חייב להיות חסר.',
     'missing_if'       => 'שדה :attribute חייב להיות חסר כאשר :other הוא :value.',
@@ -127,7 +127,7 @@ return [
     'not_in'           => 'הערך שנבחר עבור :attribute אינו תקין.',
     'not_regex'        => 'פורמט שדה :attribute אינו תקין.',
     'numeric'          => 'שדה :attribute חייב להיות מספר.',
-    
+
     'password' => [
         'letters'       => 'שדה :attribute חייב לכלול לפחות אות אחת.',
         'mixed'         => 'שדה :attribute חייב לכלול לפחות אות אחת באותיות גדולות ואחת באותיות קטנות.',
@@ -135,7 +135,7 @@ return [
         'symbols'       => 'שדה :attribute חייב לכלול לפחות סמל אחד.',
         'uncompromised' => 'ה־:attribute שנבחר הופיע בפרצת מידע. יש לבחור :attribute אחר.',
     ],
-    
+
     'present'              => 'שדה :attribute חייב להיות נוכח.',
     'present_if'           => 'שדה :attribute חייב להיות נוכח כאשר :other הוא :value.',
     'present_unless'       => 'שדה :attribute חייב להיות נוכח אלא אם :other הוא :value.',
@@ -163,7 +163,7 @@ return [
         'numeric' => 'שדה :attribute חייב להיות בגודל של :size.',
         'string'  => 'שדה :attribute חייב להיות בגודל של :size תווים.',
     ],
-    
+
     'starts_with' => 'שדה :attribute חייב להתחיל באחד מהערכים הבאים: :values.',
     'string'      => 'שדה :attribute חייב להיות מחרוזת.',
     'timezone'    => 'שדה :attribute חייב להיות איזור זמן תקין.',

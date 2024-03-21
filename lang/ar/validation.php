@@ -89,27 +89,27 @@ return [
         'numeric' => 'الحقل :attribute يجب أن يكون أصغر من :value.',
         'string'  => 'الحقل :attribute يجب أن يكون أصغر من :value حرف.',
     ],
-    
+
     'lte' => [
         'array'   => 'الحقل :attribute يجب ألا يحتوي على أكثر من :value عنصر.',
         'file'    => 'الحقل :attribute يجب أن يكون أصغر من أو يساوي :value كيلوبايت.',
         'numeric' => 'الحقل :attribute يجب أن يكون أصغر من أو يساوي :value.',
         'string'  => 'الحقل :attribute يجب أن يكون أصغر من أو يساوي :value حرف.',
     ],
-    
+
     'mac_address' => 'الحقل :attribute يجب أن يكون عنوان MAC صالحًا.',
-    
+
     'max' => [
         'array'   => 'الحقل :attribute يجب ألا يحتوي على أكثر من :max عنصر.',
         'file'    => 'الحقل :attribute يجب ألا يكون أكبر من :max كيلوبايت.',
         'numeric' => 'الحقل :attribute يجب ألا يكون أكبر من :max.',
         'string'  => 'الحقل :attribute يجب ألا يكون أكبر من :max حرف.',
     ],
-    
+
     'max_digits' => 'الحقل :attribute يجب ألا يحتوي على أكثر من :max أرقام.',
     'mimes'      => 'الحقل :attribute يجب أن يكون ملفًا من النوع: :values.',
     'mimetypes'  => 'الحقل :attribute يجب أن يكون ملفًا من النوع: :values.',
-    
+
     'min' => [
         'array'   => 'الحقل :attribute يجب أن يحتوي على الأقل على :min عنصر.',
         'file'    => 'الحقل :attribute يجب أن يكون على الأقل :min كيلوبايت.',
@@ -127,7 +127,7 @@ return [
     'not_in'           => 'القيمة المحددة :attribute غير صالحة.',
     'not_regex'        => 'تنسيق الحقل :attribute غير صالح.',
     'numeric'          => 'الحقل :attribute يجب أن يكون رقمًا.',
-    
+
     'password' => [
         'letters'       => 'الحقل :attribute يجب أن يحتوي على حرف واحد على الأقل.',
         'mixed'         => 'الحقل :attribute يجب أن يحتوي على حرف كبير وحرف صغير على الأقل واحد من كل.',
@@ -135,7 +135,7 @@ return [
         'symbols'       => 'الحقل :attribute يجب أن يحتوي على رمز واحد على الأقل.',
         'uncompromised' => 'الـ :attribute المعطى قد ظهر في تسريب بيانات. يرجى اختيار :attribute مختلف.',
     ],
-    
+
     'present'              => 'الحقل :attribute يجب أن يكون موجودًا.',
     'present_if'           => 'الحقل :attribute يجب أن يكون موجودًا عندما يكون :other :value.',
     'present_unless'       => 'الحقل :attribute يجب أن يكون موجودًا ما لم يكن :other :value.',
@@ -156,7 +156,7 @@ return [
     'required_without'     => 'الحقل :attribute مطلوب عندما لا تكون :values موجودة.',
     'required_without_all' => 'الحقل :attribute مطلوب عندما لا تكون أيًا من :values موجودة.',
     'same'                 => 'الحقل :attribute يجب أن يتطابق مع :other.',
-    
+
     'size' => [
         'array'   => 'الحقل :attribute يجب أن يحتوي على :size عنصر.',
         'file'    => 'الحقل :attribute يجب أن يكون :size كيلوبايت.',
@@ -172,7 +172,7 @@ return [
     'uppercase'   => 'الحقل :attribute يجب أن يكون في حالة كبيرة.',
     'url'         => 'الحقل :attribute يجب أن يكون رابط URL صالحًا.',
     'ulid'        => 'الحقل :attribute يجب أن يكون ULID صالحًا.',
-    'uuid'        => 'الحقل :attribute يجب أن يكون UUID صالحًا.',    
+    'uuid'        => 'الحقل :attribute يجب أن يكون UUID صالحًا.',
 
     /*
     |--------------------------------------------------------------------------
