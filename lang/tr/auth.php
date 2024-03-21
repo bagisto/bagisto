@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'failed'   => 'Bu kimlik bilgileri kayıtlarımızla eşleşmiyor.',
-    'throttle' => 'Çok fazla giriş denemesi. Lütfen :seconds içinde tekrar deneyin.',
+    'failed'   => 'Bu kimlik bilgileri kayıtlarımızla uyuşmuyor.',
+    'password' => 'Sağlanan şifre yanlış.',
+    'throttle' => 'Çok fazla giriş denemesi. Lütfen :seconds saniye sonra tekrar deneyin.',
 
 ];
