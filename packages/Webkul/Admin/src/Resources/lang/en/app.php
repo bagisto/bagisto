@@ -213,7 +213,7 @@ return [
                     'success-add-to-cart' => 'Product added to cart successfully',
                     'success-remove'      => 'Item removed from cart successfully',
                     'success-update'      => 'Cart item updated successfully',
-                    
+
                     'items' => [
                         'add-product'       => 'Add Product',
                         'amount-per-unit'   => ':amount Per Unit x :qty Quantity',

@@ -5,9 +5,9 @@ use Webkul\Admin\Http\Controllers\Catalog\AttributeController;
 use Webkul\Admin\Http\Controllers\Catalog\AttributeFamilyController;
 use Webkul\Admin\Http\Controllers\Catalog\CategoryController;
 use Webkul\Admin\Http\Controllers\Catalog\Product\BundleController;
-use Webkul\Admin\Http\Controllers\Catalog\Product\GroupedController;
 use Webkul\Admin\Http\Controllers\Catalog\Product\ConfigurableController;
 use Webkul\Admin\Http\Controllers\Catalog\Product\DownloadableController;
+use Webkul\Admin\Http\Controllers\Catalog\Product\GroupedController;
 use Webkul\Admin\Http\Controllers\Catalog\ProductController;
 
 /**
