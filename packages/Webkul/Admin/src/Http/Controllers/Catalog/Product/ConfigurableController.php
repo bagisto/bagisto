@@ -4,8 +4,8 @@ namespace Webkul\Admin\Http\Controllers\Catalog\Product;
 
 use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Helpers\ConfigurableOption;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ConfigurableController extends Controller
 {
@@ -15,8 +15,7 @@ class ConfigurableController extends Controller
     public function __construct(
         protected ProductRepository $productRepository,
         protected ConfigurableOption $configurableOptionHelper
-    )
-    {
+    ) {
     }
 
     /**

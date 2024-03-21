@@ -97,6 +97,17 @@
                                         @include('admin::sales.orders.create.types.bundle')
                                     </template>
 
+                                    <!-- Included Grouped Product Configuration Blade File -->
+                                    <template v-if="selectedProductOptions.product.type == 'grouped'">
+                                        @include('admin::sales.orders.create.types.grouped')
+                                    </template>
+
+                                    <!-- Included Downloadable Product Configuration Blade File -->
+                                    <template v-if="selectedProductOptions.product.type == 'downloadable'">
+                                        @include('admin::sales.orders.create.types.downloadable')
+                                    </template>
+
+
                                     {!! view_render_event('bagisto.admin.sales.order.create.product_options.after') !!}
                                 </x-slot>
                             </x-admin::drawer>
@@ -150,14 +161,18 @@
                 },
 
                 methods: {
+                    setCart(cart) {
+                        this.cart = cart;
+                    },
+
                     getCart() {
                         this.$axios.get("{{ route('admin.sales.cart.index', $cart->id) }}")
                             .then(response => {
                                 this.cart = response.data.data;
-
-                                //this.scrollToCurrentStep();
                             })
-                            .catch(error => {});
+                            .catch(error => {
+                                window.location.href = "{{ route('admin.sales.orders.index') }}";
+                            });
                     },
 
                     configureAddToCart(params) {
@@ -192,13 +207,22 @@
                             formData.append('product_id', this.selectedProductOptions.product.id);
 
                             formData.append('quantity', this.selectedProductOptions.qty);
+
+                            this.$refs.productConfigurationDrawer.close();
                         }
 
-                        this.$axios.post("{{ route('admin.sales.cart.store', $cart->id) }}", formData)
+                        this.$axios.post("{{ route('admin.sales.cart.items.store', $cart->id) }}", formData)
                             .then(response => {
-                                this.cart = response.data.data
+                                this.cart = response.data.data;
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {});
+                    },
+
+                    stepReset() {
+                        console.log(111)
+                        this.currentStep = 'address';
                     },
 
                     stepForward(step) {
@@ -206,6 +230,8 @@
 
                         if (step == 'review') {
                             this.canPlaceOrder = true;
+
+                            this.scrollToCurrentStep();
 
                             return;
                         }
@@ -226,11 +252,13 @@
                             this.paymentMethods = data;
                         }
 
+                        this.scrollToCurrentStep();
+
                         this.getCart();
                     },
 
                     scrollToCurrentStep() {
-                        let container = document.getElementById('steps-container');
+                        let container = document.getElementById(this.currentStep + '-step-container');
 
                         if (! container) {
                             return;

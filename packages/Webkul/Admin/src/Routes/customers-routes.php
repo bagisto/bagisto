@@ -53,6 +53,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url').'/c
 
             Route::controller(CartController::class)->group(function () {
                 Route::get('{id}/cart-items', 'items')->name('admin.customers.customers.cart.items');
+
+                Route::delete('{id}/cart-items', 'destroy')->name('admin.customers.customers.cart.items.delete');
             });
 
             Route::controller(OrderController::class)->group(function () {

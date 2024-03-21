@@ -3,8 +3,7 @@
 <!-- Vue JS Component -->
 <v-previous-cart-items
     :cart="cart"
-    @add-to-cart="configureAddToCart"
-    @remove-from-cart="getCart"
+    @add-to-cart="configureAddToCart($event); stepReset()"
 >
     <!-- Items Shimmer Effect -->
     <x-admin::shimmer.sales.orders.create.items />
@@ -119,7 +118,7 @@
                                     class="text-emerald-600 cursor-pointer transition-all hover:underline"
                                     @click="moveToCart(item)"
                                 >
-                                    @lang('admin::app.sales.orders.create.cart-items.move-to-cart')
+                                    @lang('admin::app.sales.orders.create.cart-items.add-to-cart')
                                 </p>
                             </div>
                         </div>
@@ -153,7 +152,7 @@
 
             props: ['cart'],
 
-            emits: ['add-to-cart', 'remove-from-cart'],
+            emits: ['add-to-cart'],
 
             data() {
                 return {
@@ -195,9 +194,9 @@
                 removeItem(item) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
-                            this.$axios.delete("{{ route('admin.sales.cart.destroy', ':replace') }}".replace(':replace', item.cart_id), {
+                            this.$axios.delete("{{ route('admin.customers.customers.cart.items.delete', $cart->customer_id) }}", {
                                 data: {
-                                    cart_item_id: item.id
+                                    item_id: item.id
                                 }
                             })
                                 .then(response => {
@@ -206,6 +205,8 @@
                                     if (index !== -1) {
                                         this.items.splice(index, 1);
                                     }
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                                 })
                                 .catch(error => {});
                         }

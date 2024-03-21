@@ -8,12 +8,11 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\CartAddressRequest;
 use Webkul\Admin\Http\Resources\CartResource;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Transformers\OrderResource;
 use Webkul\Shipping\Facades\Shipping;
 
 class CartController extends Controller
@@ -25,9 +24,9 @@ class CartController extends Controller
      */
     public function __construct(
         protected CartRepository $cartRepository,
+        protected CustomerRepository $customerRepository,
         protected ProductRepository $productRepository,
-        protected CartRuleCouponRepository $cartRuleCouponRepository,
-        protected OrderRepository $orderRepository
+        protected CartRuleCouponRepository $cartRuleCouponRepository
     ) {
     }
 
@@ -50,19 +49,43 @@ class CartController extends Controller
     }
 
     /**
+     * Create cart
+     */
+    public function store(): JsonResource
+    {
+        $customer = $this->customerRepository->findOrFail(request()->input('customer_id'));
+
+        try {
+            $cart = Cart::createCart([
+                'customer'  => $customer,
+                'is_active' => false,
+            ]);
+
+            return new JsonResource([
+                'data'         => new CartResource($cart),
+                'redirect_url' => route('admin.sales.orders.create', $cart->id),
+            ]);
+        } catch (\Exception $exception) {
+            return new JsonResource([
+                'message' => $exception->getMessage(),
+            ]);
+        }
+    }
+
+    /**
      * Store items in cart.
      */
-    public function store(int $id): JsonResource
+    public function storeItem(int $cartId): JsonResource
     {
         $this->validate(request(), [
             'product_id' => 'required|integer|exists:products,id',
         ]);
 
-        $cart = $this->cartRepository->findOrFail($id);
+        $cart = $this->cartRepository->findOrFail($cartId);
 
         Cart::setCart($cart);
 
-        // try {
+        try {
             $params = request()->all();
 
             $product = $this->productRepository->findOrFail($params['product_id']);
@@ -70,26 +93,26 @@ class CartController extends Controller
             Cart::addProduct($product, $params);
 
             return new JsonResource([
-                'data'     => new CartResource(Cart::getCart()),
-                'message'  => trans('admin::app.sales.orders.create.item-add-to-cart'),
+                'data'    => new CartResource(Cart::getCart()),
+                'message' => trans('admin::app.sales.orders.create.cart.success-add-to-cart'),
             ]);
-        // } catch (\Exception $exception) {
-        //     return new JsonResource([
-        //         'message' => $exception->getMessage(),
-        //     ]);
-        // }
+        } catch (\Exception $exception) {
+            return new JsonResource([
+                'message' => $exception->getMessage(),
+            ]);
+        }
     }
 
     /**
      * Removes the item from the cart if it exists.
      */
-    public function destroy(int $id): JsonResource
+    public function destroyItem(int $cartId): JsonResource
     {
         $this->validate(request(), [
             'cart_item_id' => 'required|exists:cart_items,id',
         ]);
 
-        $cart = $this->cartRepository->findOrFail($id);
+        $cart = $this->cartRepository->findOrFail($cartId);
 
         Cart::setCart($cart);
 
@@ -99,21 +122,25 @@ class CartController extends Controller
 
         return new JsonResource([
             'data'    => new CartResource(Cart::getCart()),
-            'message' => trans('shop::app.checkout.cart.success-remove'),
+            'message' => trans('admin::app.sales.orders.create.cart.success-remove'),
         ]);
     }
 
     /**
      * Updates the quantity of the items present in the cart.
      */
-    public function update(): JsonResource
+    public function updateItem(int $cartId): JsonResource
     {
+        $cart = $this->cartRepository->findOrFail($cartId);
+
+        Cart::setCart($cart);
+
         try {
             Cart::updateItems(request()->input());
 
             return new JsonResource([
                 'data'    => new CartResource(Cart::getCart()),
-                'message' => trans('shop::app.checkout.cart.index.quantity-update'),
+                'message' => trans('admin::app.sales.orders.create.cart.success-update'),
             ]);
         } catch (\Exception $exception) {
             return new JsonResource([
@@ -293,92 +320,7 @@ class CartController extends Controller
 
         return new JsonResource([
             'data'     => new CartResource(Cart::getCart()),
-            'message'  => trans('admin::app.sales.orders.create.summary.remove'),
+            'message'  => trans('admin::app.sales.orders.create.coupon-remove'),
         ]);
-    }
-
-    /**
-     * Store order
-     */
-    public function storeOrder(int $id)
-    {
-        $cart = $this->cartRepository->findOrFail($id);
-
-        Cart::setCart($cart);
-
-        if (Cart::hasError()) {
-            return response()->json([
-                'message' => trans('admin::app.sales.orders.create.summary.error'),
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-
-        Cart::collectTotals();
-
-        try {
-            $this->validateOrder();
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage(),
-            ], Response::HTTP_BAD_REQUEST);
-        }
-
-        $cart = Cart::getCart();
-
-        if (Payment::getRedirectUrl($cart)) {
-            return response()->json([
-                'message' => trans('admin::app.sales.orders.create.summary.payment-not-supported'),
-            ], Response::HTTP_BAD_REQUEST);
-        }
-
-        $data = (new OrderResource($cart))->jsonSerialize();
-
-        $order = $this->orderRepository->create($data);
-
-        Cart::removeCart($cart);
-
-        session()->flash('order', trans('admin::app.sales.orders.create.order-placed-success'));
-
-        return new JsonResource([
-            'redirect'     => true,
-            'redirect_url' => route('admin.sales.orders.view', $order->id),
-        ]);
-    }
-
-    /**
-     * Validate order before creation.
-     *
-     * @return void|\Exception
-     */
-    public function validateOrder()
-    {
-        $cart = Cart::getCart();
-
-        if (! $cart->checkMinimumOrder()) {
-            throw new \Exception(trans('admin::app.sales.orders.create.minimum-order-error', [
-                'amount' => core()->formatPrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0),
-            ]));
-        }
-
-        if (
-            $cart->haveStockableItems()
-            && ! $cart->shipping_address
-        ) {
-            throw new \Exception(trans('admin::app.sales.orders.create.check-shipping-address'));
-        }
-
-        if (! $cart->billing_address) {
-            throw new \Exception(trans('admin::app.sales.orders.create.check-billing-address'));
-        }
-
-        if (
-            $cart->haveStockableItems()
-            && ! $cart->selected_shipping_rate
-        ) {
-            throw new \Exception(trans('admin::app.sales.orders.create.specify-shipping-method'));
-        }
-
-        if (! $cart->payment) {
-            throw new \Exception(trans('admin::app.sales.orders.create.specify-payment-method'));
-        }
     }
 }

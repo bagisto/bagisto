@@ -41,7 +41,7 @@ class WishlistController extends Controller
         $this->wishlistRepository->delete(request()->input('item_id'));
 
         return new JsonResource([
-            'message' => trans('admin::app.customers.customers.view.wishlist.remove-success'),
+            'message' => trans('admin::app.customers.customers.view.wishlist.delete-success'),
         ]);
     }
 }

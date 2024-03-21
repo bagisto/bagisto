@@ -3,8 +3,7 @@
 <!-- Vue JS Component -->
 <v-wishlist-items
     :cart="cart"
-    @add-to-cart="configureAddToCart"
-    @remove-from-cart="getCart"
+    @add-to-cart="configureAddToCart($event); stepReset()"
 >
     <!-- Items Shimmer Effect -->
     <x-admin::shimmer.sales.orders.create.items />
@@ -119,7 +118,7 @@
                                     class="text-emerald-600 cursor-pointer transition-all hover:underline"
                                     @click="moveToCart(item)"
                                 >
-                                    @lang('admin::app.sales.orders.create.wishlist-items.move-to-cart')
+                                    @lang('admin::app.sales.orders.create.wishlist-items.add-to-cart')
                                 </p>
                             </div>
                         </div>
@@ -153,7 +152,7 @@
 
             props: ['cart'],
 
-            emits: ['add-to-cart', 'remove-from-cart'],
+            emits: ['add-to-cart'],
 
             data() {
                 return {
@@ -186,6 +185,7 @@
                             this.$emit('add-to-cart', {
                                 product: item.product,
                                 qty: item.additional.quantity || 1,
+                                additional: item.additional,
                             });
                         }
                     });
@@ -200,11 +200,13 @@
                                 }
                             })
                                 .then(response => {
-                                    let index = this.items.findIndex(cartItem => cartItem.id === item.id);
+                                    let index = this.items.findIndex(wishlistItem => wishlistItem.id === item.id);
 
                                     if (index !== -1) {
                                         this.items.splice(index, 1);
                                     }
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                                 })
                                 .catch(error => {});
                         }

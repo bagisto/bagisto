@@ -147,7 +147,7 @@
 
                 <template v-if="option.type == 'checkbox'">
                     <div class="grid gap-2">
-                    <!-- Options -->
+                        <!-- Options -->
                         <div
                             class="flex gap-x-4 items-center select-none"
                             v-for="(product, index) in option.products"
@@ -209,7 +209,7 @@
                 <x-admin::quantity-changer
                     ::name="'bundle_option_qty[' + option?.id + ']'"
                     ::value="productQty"
-                    class="gap-x-4 w-max rounded-xl py-1.5 px-4 mt-5"
+                    class="gap-x-4 w-max rounded-l py-1 px-4 mt-5"
                     @change="qtyUpdated($event)"
                 />
             </template>

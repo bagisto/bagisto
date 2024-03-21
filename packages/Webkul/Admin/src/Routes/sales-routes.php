@@ -34,9 +34,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(OrderController::class)->prefix('orders')->group(function () {
             Route::get('', 'index')->name('admin.sales.orders.index');
 
-            Route::get('create', 'create')->name('admin.sales.orders.create');
+            Route::get('create/{cartId}', 'create')->name('admin.sales.orders.create');
 
-            Route::post('create', 'store')->name('admin.sales.orders.store');
+            Route::post('create/{cartId}', 'store')->name('admin.sales.orders.store');
 
             Route::get('view/{id}', 'view')->name('admin.sales.orders.view');
 
@@ -85,19 +85,19 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(CartController::class)->prefix('cart')->group(function () {
             Route::get('{id}', 'index')->name('admin.sales.cart.index');
 
-            Route::post('{id}', 'store')->name('admin.sales.cart.store');
+            Route::post('create', 'store')->name('admin.sales.cart.store');
 
-            Route::put('{id}', 'update')->name('admin.sales.cart.update');
+            Route::post('{id}/items', 'storeItem')->name('admin.sales.cart.items.store');
 
-            Route::delete('{id}', 'destroy')->name('admin.sales.cart.destroy');
+            Route::put('{id}/items', 'updateItem')->name('admin.sales.cart.items.update');
 
-            Route::post('addresses/{id}', 'storeAddress')->name('admin.sales.cart.addresses.store');
+            Route::delete('{id}/items', 'destroyItem')->name('admin.sales.cart.items.destroy');
 
-            Route::post('shipping-methods/{id}', 'storeShippingMethod')->name('admin.sales.cart.shipping_methods.store');
+            Route::post('{id}/addresses', 'storeAddress')->name('admin.sales.cart.addresses.store');
 
-            Route::post('payment-methods/{id}', 'storePaymentMethod')->name('admin.sales.cart.payment_methods.store');
+            Route::post('{id}/shipping-methods', 'storeShippingMethod')->name('admin.sales.cart.shipping_methods.store');
 
-            Route::post('orders/{id}', 'storeOrder')->name('admin.sales.cart.orders.store');
+            Route::post('{id}/payment-methods', 'storePaymentMethod')->name('admin.sales.cart.payment_methods.store');
 
             Route::post('{id}/coupon', 'storeCoupon')->name('admin.sales.cart.store_coupon');
 

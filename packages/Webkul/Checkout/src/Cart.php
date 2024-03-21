@@ -189,45 +189,47 @@ class Cart
      */
     public function mergeCart(CustomerContract $customer): void
     {
-        if (session()->has('cart')) {
-            $cart = $this->cartRepository->findOneWhere([
-                'customer_id' => $customer->id,
-                'is_active'   => 1,
-            ]);
-
-            $this->setCart($cart);
-
-            $guestCart = $this->cartRepository->find(session()->get('cart')->id);
-
-            /**
-             * When the logged in customer is not having any of the cart instance previously and are active.
-             */
-            if (! $cart) {
-                $this->cartRepository->update([
-                    'customer_id'         => $customer->id,
-                    'is_guest'            => 0,
-                    'customer_first_name' => $customer->first_name,
-                    'customer_last_name'  => $customer->last_name,
-                    'customer_email'      => $customer->email,
-                ], $guestCart->id);
-
-                session()->forget('cart');
-
-                return;
-            }
-
-            foreach ($guestCart->items as $guestCartItem) {
-                try {
-                    $this->addProduct($guestCartItem->product, $guestCartItem->additional);
-                } catch (\Exception $e) {
-                    //Ignore exception
-                }
-            }
-
-            $this->collectTotals();
-
-            $this->removeCart($guestCart);
+        if (! session()->has('cart')) {
+            return;
         }
+
+        $cart = $this->cartRepository->findOneWhere([
+            'customer_id' => $customer->id,
+            'is_active'   => 1,
+        ]);
+
+        $guestCart = $this->cartRepository->find(session()->get('cart')->id);
+
+        /**
+         * When the logged in customer is not having any of the cart instance previously and are active.
+         */
+        if (! $cart) {
+            $this->cartRepository->update([
+                'customer_id'         => $customer->id,
+                'is_guest'            => 0,
+                'customer_first_name' => $customer->first_name,
+                'customer_last_name'  => $customer->last_name,
+                'customer_email'      => $customer->email,
+            ], $guestCart->id);
+
+            session()->forget('cart');
+
+            return;
+        }
+
+        $this->setCart($cart);
+
+        foreach ($guestCart->items as $guestCartItem) {
+            try {
+                $this->addProduct($guestCartItem->product, $guestCartItem->additional);
+            } catch (\Exception $e) {
+                //Ignore exception
+            }
+        }
+
+        $this->collectTotals();
+
+        $this->removeCart($guestCart);
     }
 
     /**

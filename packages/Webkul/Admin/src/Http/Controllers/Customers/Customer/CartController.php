@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Customers\Customer;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Resources\CartItemResource;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartItemRepository;
 
 class CartController extends Controller
@@ -31,5 +32,27 @@ class CartController extends Controller
             ->get();
 
         return CartItemResource::collection($cartItems);
+    }
+
+    /**
+     * Removes the item from the cart if it exists.
+     */
+    public function destroy(int $id): JsonResource
+    {
+        $this->validate(request(), [
+            'item_id' => 'required|exists:cart_items,id',
+        ]);
+
+        $cartItem = $this->cartItemRepository->findOrFail(request()->input('item_id'));
+
+        Cart::setCart($cartItem->cart);
+
+        Cart::removeItem($cartItem->id);
+
+        Cart::collectTotals();
+
+        return new JsonResource([
+            'message' => trans('admin::app.customers.customers.view.cart.delete-success'),
+        ]);
     }
 }

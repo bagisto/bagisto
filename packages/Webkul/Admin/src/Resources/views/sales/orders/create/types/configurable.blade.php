@@ -2,7 +2,7 @@
 
 <v-product-configurable-options
     :errors="errors"
-    :options="selectedProductOptions"
+    :product-options="selectedProductOptions"
 ></v-product-configurable-options>
 
 {!! view_render_event('bagisto.admin.sales.order.create.types.configurable.after') !!}
@@ -53,7 +53,7 @@
         app.component('v-product-configurable-options', {
             template: '#v-product-configurable-options-template',
 
-            props: ['errors', 'options'],
+            props: ['errors', 'productOptions'],
 
             data() {
                 return {
@@ -89,7 +89,7 @@
                 getAttibuteOptions() {
                     this.isLoading = true;
 
-                    this.$axios.get("{{ route('admin.catalog.products.configurable.options', ':replace') }}".replace(':replace', this.options.product.id))
+                    this.$axios.get("{{ route('admin.catalog.products.configurable.options', ':replace') }}".replace(':replace', this.productOptions.product.id))
                         .then(response => {
                             this.config = response.data.data;
 

@@ -65,7 +65,7 @@ abstract class AbstractType
 
     /**
      * Product can be added to cart with options or not.
-     * 
+     *
      * @var bool
      */
     protected $canBeAddedToCartWithoutOptions = true;
@@ -585,7 +585,7 @@ abstract class AbstractType
 
     /**
      * Return true if product can be added to cart without options.
-     * 
+     *
      * @return bool
      */
     public function canBeAddedToCartWithoutOptions()

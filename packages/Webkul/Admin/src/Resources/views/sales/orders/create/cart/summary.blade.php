@@ -2,8 +2,8 @@
 
 <v-cart-summary
     :cart="cart"
-    @coupon-applied="getCart"
-    @coupon-removed="getCart"
+    @coupon-applied="setCart"
+    @coupon-removed="setCart"
 ></v-cart-summary>
 
 {!! view_render_event('bagisto.admin.sales.order.create.cart.summary.after') !!}
@@ -13,7 +13,10 @@
         type="text/x-template"
         id="v-cart-summary-template"
     >
-        <div class="bg-white dark:bg-gray-900 rounded box-shadow">
+        <div
+            class="bg-white dark:bg-gray-900 rounded box-shadow"
+            id="review-step-container"
+        >
             <div class="flex items-center p-4 border-b dark:border-gray-800">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
                     @lang('admin::app.sales.orders.create.cart.summary.title')
@@ -228,7 +231,7 @@
                         .then((response) => {
                             this.isStoring = false;
 
-                            this.$emit('coupon-applied');
+                            this.$emit('coupon-applied', response.data.data);
                   
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
@@ -258,7 +261,7 @@
                             '_token': "{{ csrf_token() }}"
                         })
                         .then((response) => {
-                            this.$emit('coupon-removed');
+                            this.$emit('coupon-removed', response.data.data);
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
@@ -268,7 +271,7 @@
                 placeOrder() {
                     this.isPlacingOrder = true;
 
-                    this.$axios.post('{{ route('admin.sales.cart.orders.store', $cart->id) }}')
+                    this.$axios.post('{{ route('admin.sales.orders.store', $cart->id) }}')
                         .then(response => {
                             if (response.data.data.redirect) {
                                 window.location.href = response.data.data.redirect_url;

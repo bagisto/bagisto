@@ -13,7 +13,10 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-cart-addresses-template">
-        <div class="bg-white dark:bg-gray-900 rounded box-shadow">
+        <div
+            class="bg-white dark:bg-gray-900 rounded box-shadow"
+            id="address-step-container"
+        >
             <div class="flex items-center p-4 border-b dark:border-gray-800">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
                     @lang('admin::app.sales.orders.create.cart.address.title')

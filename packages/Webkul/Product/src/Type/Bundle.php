@@ -61,7 +61,7 @@ class Bundle extends AbstractType
 
     /**
      * Product can be added to cart with options or not.
-     * 
+     *
      * @var bool
      */
     protected $canBeAddedToCartWithoutOptions = false;
@@ -298,7 +298,7 @@ class Bundle extends AbstractType
                     'product_bundle_option_id' => $optionId,
                 ]);
 
-                if (! $optionProduct->product->getTypeInstance()->isSaleable()) {
+                if (! $optionProduct?->product->getTypeInstance()->isSaleable()) {
                     continue;
                 }
 

@@ -3,8 +3,7 @@
 <!-- Vue JS Component -->
 <v-recent-order-items
     :cart="cart"
-    @add-to-cart="configureAddToCart"
-    @remove-from-cart="getCart"
+    @add-to-cart="configureAddToCart($event); stepReset()"
 >
     <!-- Items Shimmer Effect -->
     <x-admin::shimmer.sales.orders.create.items />
@@ -120,7 +119,7 @@
                                     class="text-emerald-600 cursor-pointer transition-all hover:underline"
                                     @click="moveToCart(item)"
                                 >
-                                    @lang('admin::app.sales.orders.create.recent-order-items.move-to-cart')
+                                    @lang('admin::app.sales.orders.create.recent-order-items.add-to-cart')
                                 </p>
                             </div>
                         </div>
@@ -154,7 +153,7 @@
 
             props: ['cart'],
 
-            emits: ['add-to-cart', 'remove-from-cart'],
+            emits: ['add-to-cart'],
 
             data() {
                 return {

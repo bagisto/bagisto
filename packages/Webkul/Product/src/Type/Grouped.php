@@ -43,7 +43,7 @@ class Grouped extends AbstractType
 
     /**
      * Product can be added to cart with options or not.
-     * 
+     *
      * @var bool
      */
     protected $canBeAddedToCartWithoutOptions = false;

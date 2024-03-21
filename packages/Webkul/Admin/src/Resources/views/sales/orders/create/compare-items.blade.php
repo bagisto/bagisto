@@ -3,8 +3,7 @@
 <!-- Vue JS Component -->
 <v-compare-items
     :cart="cart"
-    @add-to-cart="configureAddToCart"
-    @remove-from-cart="getCart"
+    @add-to-cart="configureAddToCart($event); stepReset()"
 >
     <!-- Items Shimmer Effect -->
     <x-admin::shimmer.sales.orders.create.items />
@@ -75,7 +74,7 @@
                             <div class="flex gap-2.5 mt-2">
                                 <p
                                     class="text-red-600 cursor-pointer transition-all hover:underline"
-                                    @click="removeCartItem(item)"
+                                    @click="removeItem(item)"
                                 >
                                     @lang('admin::app.sales.orders.create.compare-items.delete')
                                 </p>
@@ -84,7 +83,7 @@
                                     class="text-emerald-600 cursor-pointer transition-all hover:underline"
                                     @click="moveToCart(item)"
                                 >
-                                    @lang('admin::app.sales.orders.create.compare-items.move-to-cart')
+                                    @lang('admin::app.sales.orders.create.compare-items.add-to-cart')
                                 </p>
                             </div>
                         </div>
@@ -118,7 +117,7 @@
 
             props: ['cart'],
 
-            emits: ['add-to-cart', 'remove-from-cart'],
+            emits: ['add-to-cart'],
 
             data() {
                 return {
@@ -152,6 +151,28 @@
                                 product: item.product,
                                 qty: 1,
                             });
+                        }
+                    });
+                },
+
+                removeItem(item) {
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.$axios.delete("{{ route('admin.customers.customers.compare.items.delete', $cart->customer_id) }}", {
+                                data: {
+                                    item_id: item.id
+                                }
+                            })
+                                .then(response => {
+                                    let index = this.items.findIndex(compareItem => compareItem.id === item.id);
+
+                                    if (index !== -1) {
+                                        this.items.splice(index, 1);
+                                    }
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                })
+                                .catch(error => {});
                         }
                     });
                 },

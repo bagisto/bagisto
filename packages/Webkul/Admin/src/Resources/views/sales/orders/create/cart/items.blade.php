@@ -3,8 +3,9 @@
 <!-- Vue JS Component -->
 <v-cart-items
     :cart="cart"
-    @add-to-cart="configureAddToCart"
-    @remove-from-cart="getCart"
+    @add-to-cart="configureAddToCart($event); stepReset()"
+    @remove-from-cart="setCart($event); stepReset()"
+    @cart-item-updated="setCart($event); stepReset()"
 >
     <!-- Cart Items Shimmer Effect -->
     <x-admin::shimmer.sales.orders.create.cart.items />
@@ -40,7 +41,7 @@
                 v-if="cart.items.length"
             >
                 <div
-                    class="row grid p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="row grid gap-4 p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="item in cart.items"
                 >
                     <!-- Item Information -->
@@ -115,10 +116,17 @@
                             </div>
                         </div>
 
-                        <div class="grid">
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                        <div class="flex flex-col gap-2">
+                            <p class="text-base text-gray-800 text-right dark:text-white font-semibold">
                                 @{{ item.formatted_total }}
                             </p>
+
+                            <x-admin::quantity-changer
+                                ::name="'qty[' + item.id + ']'"
+                                ::value="item.quantity"
+                                class="gap-x-4 w-max rounded-l py-1 px-4"
+                                @change="updateItem(item, $event)"
+                            />
                         </div>
                     </div>
 
@@ -312,6 +320,8 @@
                     searchTerm: '',
 
                     searchedProducts: [],
+
+                    isStoring: false,
                 };
             },
 
@@ -348,22 +358,49 @@
                         product: this.searchedProducts.find(product => product.id == params.product_id),
                         qty: params.qty
                     });
+
+                    this.$refs.searchProductDrawer.close();
                 },
 
                 removeItem(item) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
-                            this.$axios.delete("{{ route('admin.sales.cart.destroy', $cart->id) }}", {
+                            this.$axios.delete("{{ route('admin.sales.cart.items.destroy', $cart->id) }}", {
                                 data: {
                                     cart_item_id: item.id
                                 }
                             })
                                 .then(response => {
                                     this.$emit('remove-from-cart', response.data.data);
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
                                 .catch(error => {});
                         }
                     });
+                },
+
+                updateItem(item, qty) {
+                    this.isStoring = true;
+
+                    let params = {
+                        qty: {
+                            [item.id]: qty
+                        }
+                    };
+
+                    this.$axios.put("{{ route('admin.sales.cart.items.update', $cart->id) }}", params)
+                        .then(response => {
+                            this.$emit('cart-item-updated', response.data.data);
+
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                            this.isStoring = false;
+
+                        })
+                        .catch(error => {
+                            this.isStoring = false;
+                        });
                 },
 
                 availbleQty(product) {

@@ -28,4 +28,20 @@ class CompareController extends Controller
 
         return CompareItemResource::collection($compareItems);
     }
+
+    /**
+     * Removes the item from the cart if it exists.
+     */
+    public function destroy(int $id): JsonResource
+    {
+        $this->validate(request(), [
+            'item_id' => 'required|exists:compare_items,id',
+        ]);
+
+        $this->compareItemRepository->delete(request()->input('item_id'));
+
+        return new JsonResource([
+            'message' => trans('admin::app.customers.customers.view.compare.delete-success'),
+        ]);
+    }
 }
