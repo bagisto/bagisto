@@ -295,58 +295,16 @@
                 },
 
                 /**
-                 * Filter Page.
+                 * Search Page.
                  *
-                 * @param {object} $event
-                 * @param {object} column
-                 * @param {object} additional
+                 * @param {object} filters
                  * @returns {void}
                  */
-                filterPage($event, column = null, additional = {}) {
-                    let quickFilter = additional?.quickFilter;
-
-                    if (quickFilter?.isActive) {
-                        let options = quickFilter.selectedFilter;
-
-                        switch (column.type) {
-                            case 'date_range':
-                            case 'datetime_range':
-                                this.applyFilter(column, options.from, {
-                                    range: {
-                                        name: 'from'
-                                    }
-                                });
-
-                                this.applyFilter(column, options.to, {
-                                    range: {
-                                        name: 'to'
-                                    }
-                                });
-
-                                break;
-
-                            default:
-                                break;
-                        }
-                    } else {
-                        /**
-                         * Here, either a real event will come or a string value. If a string value is present, then
-                         * we create a similar event-like structure to avoid any breakage and make it easy to use.
-                         */
-                        if ($event?.target?.value === undefined) {
-                            $event = {
-                                target: {
-                                    value: $event,
-                                }
-                            };
-                        }
-
-                        this.applyFilter(column, $event.target.value, additional);
-
-                        if (column) {
-                            $event.target.value = '';
-                        }
-                    }
+                searchPage(filters) {
+                    this.applied.filters.columns = [
+                        ...(this.applied.filters.columns.filter((column) => column.index !== 'all')),
+                        ...filters.columns,
+                    ];
 
                     /**
                      * We need to reset the page on filtering.
@@ -356,137 +314,22 @@
                     this.get();
                 },
 
-                applyFilter(column, requestedValue, additional = {}) {
-                    let appliedColumn = this.findAppliedColumn(column?.index);
+                /**
+                 * Filter Page.
+                 *
+                 * @param {object} filters
+                 * @returns {void}
+                 */
+                 filterPage(filters) {
+                    this.applied.filters.columns = [
+                        ...(this.applied.filters.columns.filter((column) => column.index === 'all')),
+                        ...filters.columns,
+                    ];
 
                     /**
-                     * If no column is found, it means that search from the toolbar have been
-                     * activated. In this case, we will search for `all` indices and update the
-                     * value accordingly.
+                     * We need to reset the page on filtering.
                      */
-                    if (! column) {
-                        let appliedColumn = this.findAppliedColumn('all');
-
-                        if (! requestedValue) {
-                            appliedColumn.value = [];
-
-                            return;
-                        }
-
-                        if (appliedColumn) {
-                            appliedColumn.value = [requestedValue];
-                        } else {
-                            this.applied.filters.columns.push({
-                                index: 'all',
-                                value: [requestedValue]
-                            });
-                        }
-
-                        /**
-                         * Else, we will look into the sidebar filters and update the value accordingly.
-                         */
-                    } else {
-                        /**
-                         * Here if value already exists, we will not do anything.
-                         */
-                        if (
-                            requestedValue === undefined ||
-                            requestedValue === '' ||
-                            appliedColumn?.value.includes(requestedValue)
-                        ) {
-                            return;
-                        }
-
-                        switch (column.type) {
-                            case 'date_range':
-                            case 'datetime_range':
-                                let {
-                                    range
-                                } = additional;
-
-                                if (appliedColumn) {
-                                    let appliedRanges = appliedColumn.value[0];
-
-                                    if (range.name == 'from') {
-                                        appliedRanges[0] = requestedValue;
-                                    }
-
-                                    if (range.name == 'to') {
-                                        appliedRanges[1] = requestedValue;
-                                    }
-
-                                    appliedColumn.value = [appliedRanges];
-                                } else {
-                                    let appliedRanges = ['', ''];
-
-                                    if (range.name == 'from') {
-                                        appliedRanges[0] = requestedValue;
-                                    }
-
-                                    if (range.name == 'to') {
-                                        appliedRanges[1] = requestedValue;
-                                    }
-
-                                    this.applied.filters.columns.push({
-                                        ...column,
-                                        value: [appliedRanges]
-                                    });
-                                }
-
-                                break;
-
-                            default:
-                                if (appliedColumn) {
-                                    appliedColumn.value.push(requestedValue);
-                                } else {
-                                    this.applied.filters.columns.push({
-                                        ...column,
-                                        value: [requestedValue]
-                                    });
-                                }
-
-                                break;
-                        }
-                    }
-                },
-
-                //================================================================
-                // Filters logic, will move it from here once completed.
-                //================================================================
-
-                findAppliedColumn(columnIndex) {
-                    return this.applied.filters.columns.find(column => column.index === columnIndex);
-                },
-
-                hasAnyAppliedColumnValues(columnIndex) {
-                    let appliedColumn = this.findAppliedColumn(columnIndex);
-
-                    return appliedColumn?.value.length > 0;
-                },
-
-                getAppliedColumnValues(columnIndex) {
-                    let appliedColumn = this.findAppliedColumn(columnIndex);
-
-                    return appliedColumn?.value ?? [];
-                },
-
-                removeAppliedColumnValue(columnIndex, appliedColumnValue) {
-                    let appliedColumn = this.findAppliedColumn(columnIndex);
-
-                    appliedColumn.value = appliedColumn?.value.filter(value => value !== appliedColumnValue);
-
-                    /**
-                     * Clean up is done here. If there are no applied values present, there is no point in including the applied column as well.
-                     */
-                    if (!appliedColumn.value.length) {
-                        this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
-                    }
-
-                    this.get();
-                },
-
-                removeAppliedColumnAllValues(columnIndex) {
-                    this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
+                    this.applied.pagination.page = 1;
 
                     this.get();
                 },

@@ -1,8 +1,7 @@
 <v-datagrid-search-panel
     :available="available"
     :applied="applied"
-    :searched-value="getAppliedColumnValues('all')"
-    @search="filterPage"
+    @search="searchPage"
 >
 </v-datagrid-search-panel>
 
@@ -18,7 +17,7 @@
                     <input
                         type="text"
                         name="search"
-                        :value="searchedValue"
+                        :value="getSearchedValues('all')"
                         class="block w-full rounded-lg border dark:border-gray-800 bg-white dark:bg-gray-900 py-1.5 ltr:pl-3 rtl:pr-3 ltr:pr-10 rtl:pl-10 leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400  dark:focus:border-gray-400"
                         placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
                         autocomplete="off"
@@ -43,11 +42,50 @@
         app.component('v-datagrid-search-panel', {
             template: '#v-datagrid-search-panel-template',
 
-            props: ['available', 'applied', 'searchedValue'],
+            props: ['available', 'applied'],
+
+            data() {
+                return {
+                    filters: {
+                        columns: [],
+                    },
+                };
+            },
+
+            mounted() {
+                this.filters.columns = this.applied.filters.columns.filter((column) => column.index === 'all');
+            },
 
             methods: {
                 search($event) {
-                    this.$emit('search', $event);
+                    let requestedValue = $event.target.value;
+
+                    let appliedColumn = this.filters.columns.find(column => column.index === 'all');
+
+                    if (! requestedValue) {
+                        appliedColumn.value = [];
+
+                        this.$emit('search', this.filters);
+
+                        return;
+                    }
+
+                    if (appliedColumn) {
+                        appliedColumn.value = [requestedValue];
+                    } else {
+                        this.filters.columns.push({
+                            index: 'all',
+                            value: [requestedValue]
+                        });
+                    }
+
+                    this.$emit('search', this.filters);
+                },
+
+                getSearchedValues(columnIndex) {
+                    let appliedColumn = this.filters.columns.find(column => column.index === 'all');
+
+                    return appliedColumn?.value ?? [];
                 },
             },
         });
