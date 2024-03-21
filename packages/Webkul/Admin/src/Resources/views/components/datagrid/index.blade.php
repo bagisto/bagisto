@@ -191,7 +191,7 @@
 
                     this.isLoading = true;
 
-                    this.$refs['filterDrawer'].close();
+                    // this.$refs['filterDrawer'].close();
 
                     this.$axios
                         .get(this.src, {
@@ -240,47 +240,17 @@
                 },
 
                 /**
-                 * Change Page.
+                 * Change Page. When the child component has handled all the cases, it will send the
+                 * valid new page; otherwise, it will block. Here, we are certain that we have
+                 * a new page, so the parent will simply call the AJAX based on the new page.
                  *
-                 * The reason for choosing the numeric approach over the URL approach is to prevent any conflicts with our existing
-                 * URLs. If we were to use the URL approach, it would introduce additional arguments in the `get` method, necessitating
-                 * the addition of a `url` prop. Instead, by using the numeric approach, we can let Axios handle all the query parameters
-                 * using the `applied` prop. This allows for a cleaner and more straightforward implementation.
-                 *
-                 * @param {string|integer} directionOrPageNumber
+                 * @param {integer} newPage
                  * @returns {void}
                  */
-                changePage(directionOrPageNumber) {
-                    let newPage;
+                changePage(newPage) {
+                    this.applied.pagination.page = newPage;
 
-                    if (typeof directionOrPageNumber === 'string') {
-                        if (directionOrPageNumber === 'previous') {
-                            newPage = this.available.meta.current_page - 1;
-                        } else if (directionOrPageNumber === 'next') {
-                            newPage = this.available.meta.current_page + 1;
-                        } else {
-                            console.warn('Invalid Direction Provided : ' + directionOrPageNumber);
-
-                            return;
-                        }
-                    }  else if (typeof directionOrPageNumber === 'number') {
-                        newPage = directionOrPageNumber;
-                    } else {
-                        console.warn('Invalid Input Provided: ' + directionOrPageNumber);
-
-                        return;
-                    }
-
-                    /**
-                     * Check if the `newPage` is within the valid range.
-                     */
-                    if (newPage >= 1 && newPage <= this.available.meta.last_page) {
-                        this.applied.pagination.page = newPage;
-
-                        this.get();
-                    } else {
-                        console.warn('Invalid Page Provided: ' + newPage);
-                    }
+                    this.get();
                 },
 
                 /**
@@ -600,7 +570,7 @@
                     return true;
                 },
 
-                performMassAction(currentAction, currentOption = null) {
+                performMassAction({ currentAction, currentOption }) {
                     this.applied.massActions.meta.action = currentAction;
 
                     if (currentOption) {
@@ -611,9 +581,7 @@
                         return;
                     }
 
-                    const {
-                        action
-                    } = this.applied.massActions.meta;
+                    const { action } = this.applied.massActions.meta;
 
                     const method = action.method.toLowerCase();
 
