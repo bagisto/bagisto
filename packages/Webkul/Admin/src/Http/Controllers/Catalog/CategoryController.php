@@ -116,13 +116,6 @@ class CategoryController extends Controller
 
         $category = $this->categoryRepository->update($categoryRequest->only(
             'locale',
-            'parent_id',
-            'logo_path',
-            'banner_path',
-            'position',
-            'display_mode',
-            'status',
-            'attributes',
             core()->getCurrentLocale()->code
         ), $id);
 

@@ -52,9 +52,9 @@ class CartAddressRequest extends FormRequest
             "{$addressType}.email"      => ['required'],
             "{$addressType}.address"    => ['required', 'array', 'min:1'],
             "{$addressType}.city"       => ['required'],
-            "{$addressType}.country"    => [new AlphaNumericSpace],
-            "{$addressType}.state"      => [new AlphaNumericSpace],
-            "{$addressType}.postcode"   => ['numeric'],
+            "{$addressType}.country"    => ['required', new AlphaNumericSpace],
+            "{$addressType}.state"      => ['required', new AlphaNumericSpace],
+            "{$addressType}.postcode"   => ['required', 'numeric'],
             "{$addressType}.phone"      => ['required', new PhoneNumber],
         ]);
     }
