@@ -153,7 +153,7 @@
                         </div>
                     </div>
 
-                    <!-- Imgaes Section -->
+                    <!-- Images Section -->
                     <div class="flex gap-x-2 justify-between items-center">
                         <div class="flex flex-col gap-1.5">
                             <p

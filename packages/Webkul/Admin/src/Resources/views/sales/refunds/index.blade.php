@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.refunds.index.title')
     </x-slot>
@@ -10,11 +9,9 @@
         </p>
 
         <div class="flex gap-x-2.5 items-center">
-            <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.sales.refunds.index') }}" />
         </div>
     </div>
 
     <x-admin::datagrid :src="route('admin.sales.refunds.index')" />
-
 </x-admin::layouts>
