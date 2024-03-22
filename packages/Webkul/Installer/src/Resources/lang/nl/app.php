@@ -148,6 +148,7 @@ return [
                 'SAR' => 'Saoedi-Arabische Riyal',
                 'TRY' => 'Turkse Lira',
                 'UAH' => 'Oekraïense Hryvnia',
+                'VND' => 'Vietnamese Dong',
                 'USD' => 'Amerikaanse Dollar',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => 'Singalees',
                 'tr'    => 'Turks',
                 'uk'    => 'Oekraïens',
+                'vi'    => 'Vietnamees',
                 'zh_CN' => 'Chinees',
             ],
         ],
@@ -365,6 +367,7 @@ return [
                 'turkish-lira'        => 'Turkse Lira (TRY)',
                 'ukrainian-hryvnia'   => 'Oekraïense Hryvnia (UAH)',
                 'usd'                 => 'Amerikaanse Dollar (USD)',
+                'vietnamese-dong'     => 'Vietnamese Dong (VND)',
                 'warning-message'     => 'Let op! De instellingen voor uw standaardsysteemtalen en de standaardvaluta zijn permanent en kunnen nooit meer worden gewijzigd.',
             ],
 
@@ -454,6 +457,7 @@ return [
             'title'                     => 'Bagisto Installer',
             'turkish'                   => 'Turks',
             'ukrainian'                 => 'Oekraïens',
+            'vietnamese'                => 'Vietnamees',
             'webkul'                    => 'Webkul',
         ],
     ],

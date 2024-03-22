@@ -148,6 +148,7 @@ return [
                 'SAR' => '沙特里亞爾',
                 'TRY' => '土耳其里拉',
                 'UAH' => '烏克蘭格里夫納',
+                'VND' => '越南盾',
                 'USD' => '美元',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => '僧伽羅語',
                 'tr'    => '土耳其語',
                 'uk'    => '烏克蘭語',
+                'vi'    => '越南語',
                 'zh_CN' => '簡體中文',
             ],
         ],
@@ -365,6 +367,7 @@ return [
                 'turkish-lira'        => '土耳其里拉 (TRY)',
                 'ukrainian-hryvnia'   => '乌克兰格里夫纳 (UAH)',
                 'usd'                 => '美元 (USD)',
+                'vietnamese-dong'     => '越南盾 (VND)',
                 'warning-message'     => '警告！您的默认系统语言设置和默认货币设置是永久性的，无',
             ],
 
@@ -454,6 +457,7 @@ return [
             'title'                     => 'Bagisto 安装程序',
             'turkish'                   => '土耳其语',
             'ukrainian'                 => '乌克兰语',
+            'vietnamese'                => '越南语',
             'webkul'                    => 'Webkul',
         ],
     ],

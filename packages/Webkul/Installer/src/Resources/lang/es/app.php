@@ -148,6 +148,7 @@ return [
                 'SAR' => 'Riyal Saudí',
                 'TRY' => 'Lira Turca',
                 'UAH' => 'Grivna Ucraniana',
+                'VND' => 'Dong Vietnamita',
                 'USD' => 'Dólar Estadounidense',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => 'Cingalés',
                 'tr'    => 'Turco',
                 'uk'    => 'Ucraniano',
+                'vi'    => 'Vietnamita',
                 'zh_CN' => 'Chino',
             ],
         ],
@@ -365,6 +367,7 @@ return [
                 'turkish-lira'        => 'Lira turca (TRY)',
                 'ukrainian-hryvnia'   => 'Grivna ucraniana (UAH)',
                 'usd'                 => 'Dólar estadounidense (USD)',
+                'vietnamese-dong'    => 'Dong vietnamita (VND)',
                 'warning-message'     => '¡Cuidado! La configuración de los idiomas del sistema predeterminados y la moneda predeterminada son permanentes y no se pueden cambiar nunca más.',
             ],
 
@@ -454,6 +457,7 @@ return [
             'title'                     => 'Instalador de Bagisto',
             'turkish'                   => 'Turco',
             'ukrainian'                 => 'Ucraniano',
+            'vietnamese'                => 'Vietnamita',
             'webkul'                    => 'Webkul',
         ],
     ],

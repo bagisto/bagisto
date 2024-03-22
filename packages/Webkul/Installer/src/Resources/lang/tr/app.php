@@ -148,6 +148,7 @@ return [
                 'SAR' => 'Suudi Riyal',
                 'TRY' => 'Türk Lirası',
                 'UAH' => 'Ukrayna Grivnası',
+                'VND' => 'Vietnam Dong',
                 'USD' => 'ABD Doları',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => 'Sinhala',
                 'tr'    => 'Türkçe',
                 'uk'    => 'Ukraynaca',
+                'vi'    => 'Vietnamca',
                 'zh_CN' => 'Çince',
             ],
         ],
@@ -365,6 +367,7 @@ return [
                 'turkish-lira'        => 'Türk Lirası (TRY)',
                 'ukrainian-hryvnia'   => 'Ukrayna Grivnası (UAH)',
                 'usd'                 => 'ABD Doları (USD)',
+                'vietnamese-dong'     => 'Vietnam Dong (VND)',
                 'warning-message'     => 'Dikkat! Varsayılan sistem dilleri ve varsayılan para birimi ayarlarınız kalıcıdır ve bir daha asla değiştirilemez.',
             ],
 
@@ -454,6 +457,7 @@ return [
             'title'                     => 'Bagisto Kurulum Sihirbazı',
             'turkish'                   => 'Türkçe',
             'ukrainian'                 => 'Ukraynaca',
+            'vietnamese'                => 'Vietnamca',
             'webkul'                    => 'Webkul',
         ],
     ],

@@ -56,6 +56,7 @@ class Installer extends Command
         'sin'   => 'Sinhala',
         'tr'    => 'Turkish',
         'uk'    => 'Ukrainian',
+        'vi'    => 'Vietnamese',
         'zh_CN' => 'Chinese',
     ];
 
@@ -77,6 +78,7 @@ class Installer extends Command
         'SAR' => 'Saudi Riyal',
         'TRY' => 'Turkish Lira',
         'USD' => 'US Dollar',
+        'VND' => 'Vietnamese Dong',
         'UAH' => 'Ukrainian Hryvnia',
     ];
 

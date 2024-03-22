@@ -148,6 +148,7 @@ return [
                 'SAR' => 'Riyal Saudita',
                 'TRY' => 'Lira Turca',
                 'UAH' => 'Hryvnia Ucraniano',
+                'VND' => 'Dong Vietnamita',
                 'USD' => 'Dólar Americano',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => 'Cingalês',
                 'tr'    => 'Turco',
                 'uk'    => 'Ucraniano',
+                'vi'    => 'Vietnamita',
                 'zh_CN' => 'Chinês',
             ],
         ],
@@ -365,6 +367,7 @@ return [
                 'turkish-lira'        => 'Turkse Lira (TRY)',
                 'ukrainian-hryvnia'   => 'Oekraïense Hryvnia (UAH)',
                 'usd'                 => 'Amerikaanse Dollar (USD)',
+                'vietnamese-dong'     => 'Vietnamese Dong (VND)',
                 'warning-message'     => 'Atenção! As configurações para os idiomas padrão do seu sistema, bem como a moeda padrão, são permanentes e não podem ser alteradas novamente.',
             ],
 
@@ -454,6 +457,7 @@ return [
             'title'                     => 'Instalator Bagisto',
             'turkish'                   => 'Turecki',
             'ukrainian'                 => 'Ukraiński',
+            'vi'                        => 'Wietnamski',
             'webkul'                    => 'Webkul',
         ],
     ],

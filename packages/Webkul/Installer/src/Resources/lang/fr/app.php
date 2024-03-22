@@ -148,6 +148,7 @@ return [
                 'SAR' => 'Riyal saoudien',
                 'TRY' => 'Lire turque',
                 'UAH' => 'Hryvnia ukrainienne',
+                'VND' => 'Dong vietnamien',
                 'USD' => 'Dollar américain',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => 'Sinhala',
                 'tr'    => 'Turc',
                 'uk'    => 'Ukrainien',
+                'vi'    => 'Vietnamien',
                 'zh_CN' => 'Chinois',
             ],
         ],
@@ -454,6 +456,7 @@ return [
             'title'                     => 'Installeur de Bagisto',
             'turkish'                   => 'Turc',
             'ukrainian'                 => 'Ukrainien',
+            'vietnamese'                => 'Vietnamien',
             'webkul'                    => 'Webkul',
         ],
     ],

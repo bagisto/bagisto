@@ -148,6 +148,7 @@ return [
                 'SAR' => 'Riyal Saudita',
                 'TRY' => 'Lira Turca',
                 'UAH' => 'Grivnia Ucraina',
+                'VND' => 'Dong Vietnamita',
                 'USD' => 'Dollaro Americano',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => 'Sinhala',
                 'tr'    => 'Turco',
                 'uk'    => 'Ucraino',
+                'vi'    => 'Vietnamita',
                 'zh_CN' => 'Cinese',
             ],
         ],
@@ -365,6 +367,7 @@ return [
                 'turkish-lira'        => 'Lira turca (TRY)',
                 'ukrainian-hryvnia'   => 'Grivnia ucraina (UAH)',
                 'usd'                 => 'Dollaro statunitense (USD)',
+                'vietnamese-dong'     => 'Dong vietnamita (VND)',
                 'warning-message'     => 'Attenzione! Le impostazioni per le lingue di sistema predefinite e la valuta predefinita sono permanenti e non possono essere cambiate mai più.',
             ],
 
@@ -454,6 +457,7 @@ return [
             'title'                     => 'Installazione di Bagisto',
             'turkish'                   => 'Turco',
             'ukrainian'                 => 'Ucraino',
+            'vietnamese'                => 'Vietnamita',
             'webkul'                    => 'Webkul',
         ],
     ],
