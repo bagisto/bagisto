@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.rates.create.title')
     </x-slot>
@@ -33,8 +32,8 @@
                         </a>
 
                         <!-- Save Button -->
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             class="primary-button"
                         >
                             @lang('admin::app.settings.taxes.rates.create.save-btn')
@@ -74,7 +73,7 @@
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.taxes.rates.create.country')
                                 </x-admin::form.control-group.label>
-                
+
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="country"
@@ -95,10 +94,10 @@
                                         </option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
-                
+
                                 <x-admin::form.control-group.error control-name="country" />
                             </x-admin::form.control-group>
-                
+
                             <!-- State -->
                             <x-admin::form.control-group>
                                 <!-- Country Have States -->
@@ -106,7 +105,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.rates.create.state')
                                     </x-admin::form.control-group.label>
-                    
+
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="state"
@@ -120,8 +119,8 @@
                                             @lang('admin::app.settings.taxes.rates.edit.select-state')
                                         </option>
 
-                                        <option 
-                                            v-for='(state, index) in countryStates[country]' 
+                                        <option
+                                            v-for='(state, index) in countryStates[country]'
                                             :value="state.code"
                                             v-text="state.default_name"
                                         >
@@ -136,7 +135,7 @@
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.taxes.rates.create.state')
                                     </x-admin::form.control-group.label>
-                    
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="state"
@@ -177,7 +176,7 @@
                                     @lang('admin::app.settings.taxes.rates.create.settings')
                                 </p>
                             </x-slot>
-                        
+
                             <x-slot:content>
                                 <!-- Enable Zip Range -->
                                 <x-admin::form.control-group>
@@ -283,8 +282,8 @@
                 methods: {
                     haveStates: function () {
                         /*
-                        * The double negation operator is used to convert the value to a boolean. 
-                        * It ensures that the final result is a boolean value, 
+                        * The double negation operator is used to convert the value to a boolean.
+                        * It ensures that the final result is a boolean value,
                         * true if the array has a length greater than 0, and otherwise false.
                         */
                         return !!this.countryStates[this.country]?.length;

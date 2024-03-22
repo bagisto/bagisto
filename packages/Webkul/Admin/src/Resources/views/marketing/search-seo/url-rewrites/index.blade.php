@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.search-seo.url-rewrites.index.title')
     </x-slot>
@@ -54,11 +53,21 @@
                 src="{{ route('admin.marketing.search_seo.url_rewrites.index') }}"
                 ref="datagrid"
             >
-                <!-- DataGrid Body -->
-                <template #body="{ columns, records, setCurrentSelectionMode, performAction, available, applied, isLoading }">
-                    <template v-if="! isLoading">
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.datagrid.table.body />
+                    </template>
+
+                    <template v-else>
                         <div
-                            v-for="record in records"
+                            v-for="record in available.records"
                             class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
@@ -72,7 +81,6 @@
                                         :value="record[available.meta.primary_column]"
                                         :id="`mass_action_select_record_${record[available.meta.primary_column]}`"
                                         v-model="applied.massActions.indices"
-                                        @change="setCurrentSelectionMode"
                                     >
 
                                     <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-2xl">
@@ -80,7 +88,7 @@
                                 </label>
                             </p>
 
-                            <!-- Id -->
+                            <!-- ID -->
                             <p v-text="record.id"></p>
 
                             <!-- For -->
@@ -122,11 +130,6 @@
                             </div>
                         </div>
                     </template>
-
-                    <!-- Datagrid Body Shimmer -->
-                    <template v-else>
-                        <x-admin::shimmer.datagrid.table.body />
-                    </template>
                 </template>
             </x-admin::datagrid>
 
@@ -165,7 +168,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Id -->
+                            <!-- ID -->
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
@@ -273,7 +276,7 @@
                                 >
                                     @foreach (core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->code }}">{{ $locale->name }}</option>
-                                    @endforeach 
+                                    @endforeach
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error control-name="locale" />

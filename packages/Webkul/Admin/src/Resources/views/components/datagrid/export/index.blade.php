@@ -10,25 +10,21 @@
         id="v-datagrid-export-template"
     >
         <div>
-            <!-- Modal Component -->
             <x-admin::modal ref="exportModal">
-                <!-- Modal Toggle -->
                 <x-slot:toggle>
                     <button class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
                         <span class="icon-export text-xl text-gray-600"></span>
-                                        
+
                         @lang('admin::app.export.export')
                     </button>
                 </x-slot>
 
-                <!-- Modal Header -->
                 <x-slot:header>
                     <p class="text-lg text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.export.download')
                     </p>
                 </x-slot>
 
-                <!-- Modal Content -->
                 <x-slot:content>
                     <x-admin::form action="">
                         <x-admin::form.control-group class="!mb-0">
@@ -53,7 +49,6 @@
                     </x-admin::form>
                 </x-slot>
 
-                <!-- Modal Footer -->
                 <x-slot:footer>
                     <button
                         type="button"
@@ -88,43 +83,59 @@
             },
 
             methods: {
+                /**
+                 * Registers events to update properties and trigger the download process.
+                 *
+                 * @returns {void}
+                 */
                 registerEvents() {
                     this.$emitter.on('change-datagrid', this.updateProperties);
                 },
 
-                updateProperties({available, applied }) {
+                /**
+                 * Updates the available and applied properties with new values.
+                 *
+                 * @param {object} data - Object containing available and applied properties.
+                 * @returns {void}
+                 */
+                updateProperties({ available, applied }) {
                     this.available = available;
 
                     this.applied = applied;
                 },
 
+                /**
+                 * Initiates the download process for exporting data.
+                 *
+                 * @returns {void}
+                 */
                 download() {
-                    if (! this.available?.records?.length) {                        
+                    if (! this.available?.records?.length) {
                         this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('admin::app.export.no-records')' });
 
                         this.$refs.exportModal.toggle();
                     } else {
                         let params = {
                             export: 1,
-    
+
                             format: this.format,
-    
+
                             sort: {},
-    
+
                             filters: {},
                         };
-    
+
                         if (
                             this.applied.sort.column &&
                             this.applied.sort.order
                         ) {
                             params.sort = this.applied.sort;
                         }
-    
+
                         this.applied.filters.columns.forEach(column => {
                             params.filters[column.index] = column.value;
                         });
-    
+
                         this.$axios
                             .get(this.src, {
                                 params,

@@ -70,9 +70,9 @@ class UserDataGrid extends DataGrid
             'index'      => 'user_img',
             'label'      => trans('admin::app.settings.users.index.datagrid.name'),
             'type'       => 'string',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
+            'searchable' => false,
+            'filterable' => false,
+            'sortable'   => false,
             'closure'    => function ($row) {
                 if ($row->user_image) {
                     return Storage::url($row->user_image);
