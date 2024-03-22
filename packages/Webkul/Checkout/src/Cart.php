@@ -117,13 +117,13 @@ class Cart
         $customer = $data['customer'] ?? auth()->guard()->user();
 
         if ($customer) {
-            $data = array_merge([
+            $data = array_merge($data, [
                 'is_guest'            => 0,
                 'customer_id'         => $customer->id,
                 'customer_first_name' => $customer->first_name,
                 'customer_last_name'  => $customer->last_name,
                 'customer_email'      => $customer->email,
-            ], $data);
+            ]);
         }
 
         $cart = $this->cartRepository->create($data);
