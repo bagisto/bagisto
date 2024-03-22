@@ -106,6 +106,7 @@ class Cart
     public function createCart(array $data): ?Contracts\Cart
     {
         $data = array_merge([
+            'is_guest'              => 1,
             'channel_id'            => core()->getCurrentChannel()->id,
             'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
             'base_currency_code'    => $baseCurrencyCode,
