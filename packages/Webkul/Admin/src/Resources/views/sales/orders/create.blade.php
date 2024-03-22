@@ -1,14 +1,14 @@
 <x-admin::layouts>
     <!-- Title of the page -->
     <x-slot:title>
-        @lang('admin::app.sales.orders.create.title')
+        @lang('admin::app.sales.orders.create.title', ['name' => $cart->customer->name])
     </x-slot>
 
     <!-- Page Header -->
     <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
         <div class="grid gap-1.5">
             <p class="text-xl text-gray-800 dark:text-white font-bold leading-6">
-                @lang('admin::app.sales.orders.create.title')
+                @lang('admin::app.sales.orders.create.title', ['name' => $cart->customer->name])
             </p>
         </div>
 
@@ -221,7 +221,6 @@
                     },
 
                     stepReset() {
-                        console.log(111)
                         this.currentStep = 'address';
                     },
 

@@ -14,6 +14,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderCommentRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Transformers\OrderResource;
 
@@ -27,7 +28,8 @@ class OrderController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected OrderCommentRepository $orderCommentRepository,
-        protected CartRepository $cartRepository
+        protected CartRepository $cartRepository,
+        protected CustomerGroupRepository $customerGroupRepository,
     ) {
     }
 
@@ -42,7 +44,9 @@ class OrderController extends Controller
             return app(OrderDataGrid::class)->toJson();
         }
 
-        return view('admin::sales.orders.index');
+        $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
+
+        return view('admin::sales.orders.index', compact('groups'));
     }
 
     /**

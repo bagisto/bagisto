@@ -138,6 +138,7 @@ return [
                 'title'      => 'Orders',
 
                 'search-customer' => [
+                    'create-btn'  => 'Create Customer',
                     'empty-info'  => 'No customers available for search term.',
                     'empty-title' => 'No customers found',
                     'search-by'   => 'Search by email or name',
@@ -188,7 +189,7 @@ return [
                 'save-btn'                => 'Create Order',
                 'specify-payment-method'  => 'Payment method is missing.',
                 'specify-shipping-method' => 'Shipping method is missing.',
-                'title'                   => 'Create Order',
+                'title'                   => 'Create Order for :name',
 
                 'types' => [
                     'configurable' => [
