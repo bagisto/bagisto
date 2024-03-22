@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'failed'   => 'Podane dane uwierzytelniające nie pasują do naszych zapisów.',
-    'throttle' => 'Zbyt wiele prób logowania. Proszę spróbować ponownie za :seconds sekund.',
+    'failed'   => 'Te dane uwierzytelniające nie pasują do naszych rekordów.',
+    'password' => 'Podane hasło jest nieprawidłowe.',
+    'throttle' => 'Zbyt wiele prób logowania. Spróbuj ponownie za :seconds sekund.',
 
 ];

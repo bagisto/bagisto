@@ -3034,6 +3034,8 @@ return [
             'save-btn'                     => 'Instellingen Opslaan',
             'save-message'                 => 'Instellingen succesvol opgeslagen',
             'search'                       => 'Zoekopdracht',
+            'select-country'               => 'Land selecteren',
+            'select-state'                 => 'Staat selecteren',
             'title'                        => 'Instellingen',
 
             'general' => [
