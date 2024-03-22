@@ -12,10 +12,34 @@
         id="v-datagrid-template"
     >
         <div>
-            <x-admin::datagrid.toolbar />
+            <!-- Toolbar -->
+            <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
+                <!-- Left Toolbar -->
+                <div class="flex gap-x-1">
+                    <!-- Mass Actions Panel -->
+                    <template v-if="applied.massActions.indices.length">
+                        <x-admin::datagrid.panels.mass-action />
+                    </template>
 
+                    <!-- Search Panel -->
+                    <template v-else>
+                        <x-admin::datagrid.panels.search />
+                    </template>
+                </div>
+
+                <!-- Right Toolbar -->
+                <div class="flex gap-x-4">
+                    <!-- Filters Panel -->
+                    <x-admin::datagrid.panels.filter />
+
+                    <!-- Pagination Panel -->
+                    <x-admin::datagrid.panels.pagination />
+                </div>
+            </div>
+
+            <!-- Table -->
             <div class="flex mt-4">
-                <x-admin::datagrid.table :isMultiRow="$isMultiRow">
+                <x-admin::datagrid.panels.table :isMultiRow="$isMultiRow">
                     <template #header>
                         <slot
                             name="header"
@@ -24,8 +48,7 @@
                             :mass-actions="available.massActions"
                             :records="available.records"
                             :meta="available.meta"
-                            :sort-page="sortPage"
-                            :selectAllRecords="selectAllRecords"
+                            :sort-page="sort"
                             :available="available"
                             :applied="applied"
                             :is-loading="isLoading"
@@ -41,15 +64,13 @@
                             :mass-actions="available.massActions"
                             :records="available.records"
                             :meta="available.meta"
-                            :setCurrentSelectionMode="setCurrentSelectionMode"
-                            :performAction="performAction"
                             :available="available"
                             :applied="applied"
                             :is-loading="isLoading"
                         >
                         </slot>
                     </template>
-                </x-admin::datagrid.table>
+                </x-admin::datagrid.panels.table>
             </div>
         </div>
     </script>
@@ -113,6 +134,20 @@
                         },
                     },
                 };
+            },
+
+            watch: {
+                'available.records': function (newRecords, oldRecords) {
+                    this.setCurrentSelectionMode();
+
+                    this.updateDatagrids();
+
+                    this.updateExportComponent();
+                },
+
+                'applied.massActions.indices': function (newIndices, oldIndices) {
+                    this.setCurrentSelectionMode();
+                },
             },
 
             mounted() {
@@ -191,8 +226,6 @@
 
                     this.isLoading = true;
 
-                    // this.$refs['filterDrawer'].close();
-
                     this.$axios
                         .get(this.src, {
                             params: { ...params, ...extraParams }
@@ -221,19 +254,6 @@
                             this.available.records = records;
 
                             this.available.meta = meta;
-
-                            this.setCurrentSelectionMode();
-
-                            this.updateDatagrids();
-
-                           /**
-                            * This event should be fired at the end, but only in the GET method. This allows the export feature to listen to it
-                            * and update its properties accordingly.
-                            */
-                            this.$emitter.emit('change-datagrid', {
-                                available: this.available,
-                                applied: this.applied
-                            });
 
                             this.isLoading = false;
                         });
@@ -273,12 +293,12 @@
                 },
 
                 /**
-                 * Sort Page.
+                 * Sort results.
                  *
                  * @param {object} column
                  * @returns {void}
                  */
-                sortPage(column) {
+                sort(column) {
                     if (column.sortable) {
                         this.applied.sort = {
                             column: column.index,
@@ -295,12 +315,12 @@
                 },
 
                 /**
-                 * Search Page.
+                 * Search results.
                  *
                  * @param {object} filters
                  * @returns {void}
                  */
-                searchPage(filters) {
+                search(filters) {
                     this.applied.filters.columns = [
                         ...(this.applied.filters.columns.filter((column) => column.index !== 'all')),
                         ...filters.columns,
@@ -315,12 +335,12 @@
                 },
 
                 /**
-                 * Filter Page.
+                 * Filter results.
                  *
                  * @param {object} filters
                  * @returns {void}
                  */
-                 filterPage(filters) {
+                 filter(filters) {
                     this.applied.filters.columns = [
                         ...(this.applied.filters.columns.filter((column) => column.index === 'all')),
                         ...filters.columns,
@@ -334,10 +354,11 @@
                     this.get();
                 },
 
-                //================================================================
-                // Mass actions logic, will move it from here once completed.
-                //================================================================
-
+                /**
+                 * This will analyze the current selection mode based on the mass action indices.
+                 *
+                 * @returns {void}
+                 */
                 setCurrentSelectionMode() {
                     this.applied.massActions.meta.mode = 'none';
 
@@ -362,9 +383,12 @@
                     }
                 },
 
+                /**
+                 * This will select all records and update the mass action indices.
+                 *
+                 * @returns {void}
+                 */
                 selectAllRecords() {
-                    this.setCurrentSelectionMode();
-
                     if (['all', 'partial'].includes(this.applied.massActions.meta.mode)) {
                         this.available.records.forEach(record => {
                             const id = record[this.available.meta.primary_column];
@@ -379,8 +403,11 @@
 
                             let found = this.applied.massActions.indices.find(selectedId => selectedId === id);
 
-                            if (!found) {
-                                this.applied.massActions.indices.push(id);
+                            if (! found) {
+                                this.applied.massActions.indices = [
+                                    ...this.applied.massActions.indices,
+                                    id,
+                                ];
                             }
                         });
 
@@ -388,90 +415,19 @@
                     }
                 },
 
-                validateMassAction() {
-                    if (! this.applied.massActions.indices.length) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.no-records-selected')" });
-
-                        return false;
-                    }
-
-                    if (! this.applied.massActions.meta.action) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.must-select-a-mass-action')" });
-
-                        return false;
-                    }
-
-                    if (
-                        this.applied.massActions.meta.action?.options?.length &&
-                        this.applied.massActions.value === null
-                    ) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.must-select-a-mass-action-option')" });
-
-                        return false;
-                    }
-
-                    return true;
-                },
-
-                performMassAction({ currentAction, currentOption }) {
-                    this.applied.massActions.meta.action = currentAction;
-
-                    if (currentOption) {
-                        this.applied.massActions.value = currentOption.value;
-                    }
-
-                    if (! this.validateMassAction()) {
-                        return;
-                    }
-
-                    const { action } = this.applied.massActions.meta;
-
-                    const method = action.method.toLowerCase();
-
-                    this.$emitter.emit('open-confirm-modal', {
-                        agree: () => {
-                            switch (method) {
-                                case 'post':
-                                case 'put':
-                                case 'patch':
-                                    this.$axios[method](action.url, {
-                                            indices: this.applied.massActions.indices,
-                                            value: this.applied.massActions.value,
-                                        })
-                                        .then(response => {
-                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
-                                            this.get();
-                                        })
-                                        .catch((error) => {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                                        });
-
-                                    break;
-
-                                case 'delete':
-                                    this.$axios[method](action.url, {
-                                            indices: this.applied.massActions.indices
-                                        })
-                                        .then(response => {
-                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
-                                            this.get();
-                                        })
-                                        .catch((error) => {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                                        });
-
-                                    break;
-
-                                default:
-                                    console.error('Method not supported.');
-
-                                    break;
-                            }
-
-                            this.applied.massActions.indices  = [];
-                        }
+                /**
+                 * Updates the export component properties whenever new results appear in the datagrid.
+                 *
+                 * @returns {void}
+                 */
+                 updateExportComponent() {
+                    /**
+                     * This event should be fired whenever new results appear. This allows the export feature to
+                     * listen to it and update its properties accordingly.
+                     */
+                     this.$emitter.emit('change-datagrid', {
+                        available: this.available,
+                        applied: this.applied
                     });
                 },
 
@@ -479,6 +435,11 @@
                 // Support for previous applied values in datagrids. All code is based on local storage.
                 //=======================================================================================
 
+                /**
+                 * Updates the datagrids stored in local storage with the latest data.
+                 *
+                 * @returns {void}
+                 */
                 updateDatagrids() {
                     let datagrids = this.getDatagrids();
 
@@ -508,6 +469,11 @@
                     this.setDatagrids(datagrids);
                 },
 
+                /**
+                 * Returns the initial properties for a datagrid.
+                 *
+                 * @returns {object} Initial properties for a datagrid.
+                 */
                 getDatagridInitialProperties() {
                     return {
                         src: this.src,
@@ -517,10 +483,20 @@
                     };
                 },
 
+                /**
+                 * Returns the storage key for datagrids in local storage.
+                 *
+                 * @returns {string} Storage key for datagrids.
+                 */
                 getDatagridsStorageKey() {
                     return 'datagrids';
                 },
 
+                /**
+                 * Retrieves the datagrids stored in local storage.
+                 *
+                 * @returns {Array} Datagrids stored in local storage.
+                 */
                 getDatagrids() {
                     let datagrids = localStorage.getItem(
                         this.getDatagridsStorageKey()
@@ -529,52 +505,17 @@
                     return JSON.parse(datagrids) ?? [];
                 },
 
+                /**
+                 * Sets the datagrids in local storage.
+                 *
+                 * @param {Array} datagrids - Datagrids to be stored in local storage.
+                 * @returns {void}
+                 */
                 setDatagrids(datagrids) {
                     localStorage.setItem(
                         this.getDatagridsStorageKey(),
                         JSON.stringify(datagrids)
                     );
-                },
-
-                //================================================================
-                // Remaining logic, will check.
-                //================================================================
-
-                // refactor when not in that much use case...
-                performAction(action) {
-                    const method = action.method.toLowerCase();
-
-                    switch (method) {
-                        case 'get':
-                            window.location.href = action.url;
-
-                            break;
-
-                        case 'post':
-                        case 'put':
-                        case 'patch':
-                        case 'delete':
-                            this.$emitter.emit('open-confirm-modal', {
-                                agree: () => {
-                                    this.$axios[method](action.url)
-                                        .then(response => {
-                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
-                                            this.get();
-                                        })
-                                        .catch((error) => {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                                        });
-                                }
-                            });
-
-                            break;
-
-                        default:
-                            console.error('Method not supported.');
-
-                            break;
-                    }
                 },
             },
         });

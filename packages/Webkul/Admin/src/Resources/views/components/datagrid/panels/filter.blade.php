@@ -1,15 +1,15 @@
-<v-datagrid-filters-panel
+<v-datagrid-filter
     :available="available"
     :applied="applied"
-    @applyFilter="filterPage"
-    @removeFilter="filterPage"
+    @applyFilter="filter"
+    @removeFilter="filter"
 >
-</v-datagrid-filters-panel>
+</v-datagrid-filter>
 
 @pushOnce('scripts')
     <script
         type="text/x-template"
-        id="v-datagrid-filters-panel-template"
+        id="v-datagrid-filter-template"
     >
         <x-admin::drawer
             width="350px"
@@ -456,8 +456,8 @@
     </script>
 
     <script type="module">
-        app.component('v-datagrid-filters-panel', {
-            template: '#v-datagrid-filters-panel-template',
+        app.component('v-datagrid-filter', {
+            template: '#v-datagrid-filter-template',
 
             props: ['available', 'applied'],
 
@@ -474,6 +474,14 @@
             },
 
             methods: {
+                /**
+                 * Apply filter.
+                 *
+                 * @param {Event} $event
+                 * @param {object} column
+                 * @param {object} additional
+                 * @returns {void}
+                 */
                 applyFilter($event, column = null, additional = {}) {
                     let quickFilter = additional?.quickFilter;
 
@@ -523,6 +531,14 @@
                     this.$emit('applyFilter', this.filters);
                 },
 
+                /**
+                 * Apply column values.
+                 *
+                 * @param {object} column
+                 * @param {string} requestedValue
+                 * @param {object} additional
+                 * @returns {void}
+                 */
                 applyColumnValues(column, requestedValue, additional = {}) {
                     let appliedColumn = this.findAppliedColumn(column?.index);
 
@@ -584,22 +600,47 @@
                     }
                 },
 
+                /**
+                 * Find applied column.
+                 *
+                 * @param {string} columnIndex
+                 * @returns {object}
+                 */
                 findAppliedColumn(columnIndex) {
                     return this.filters.columns.find(column => column.index === columnIndex);
                 },
 
+                /**
+                 * Check if any values are applied for the specified column.
+                 *
+                 * @param {string} columnIndex
+                 * @returns {boolean}
+                 */
                 hasAnyAppliedColumnValues(columnIndex) {
                     let appliedColumn = this.findAppliedColumn(columnIndex);
 
                     return appliedColumn?.value.length > 0;
                 },
 
+                /**
+                 * Get applied values for the specified column.
+                 *
+                 * @param {string} columnIndex
+                 * @returns {Array}
+                 */
                 getAppliedColumnValues(columnIndex) {
                     let appliedColumn = this.findAppliedColumn(columnIndex);
 
                     return appliedColumn?.value ?? [];
                 },
 
+                /**
+                 * Remove a specific value from the applied values of the specified column.
+                 *
+                 * @param {string} columnIndex
+                 * @param {any} appliedColumnValue
+                 * @returns {void}
+                 */
                 removeAppliedColumnValue(columnIndex, appliedColumnValue) {
                     let appliedColumn = this.findAppliedColumn(columnIndex);
 
@@ -615,6 +656,12 @@
                     this.$emit('removeFilter', this.filters);
                 },
 
+                /**
+                 * Remove all values from the applied values of the specified column.
+                 *
+                 * @param {string} columnIndex
+                 * @returns {void}
+                 */
                 removeAppliedColumnAllValues(columnIndex) {
                     this.filters.columns = this.filters.columns.filter(column => column.index !== columnIndex);
 
@@ -703,6 +750,12 @@
             },
 
             methods: {
+                /**
+                 * Perform a look up for options based on the search query.
+                 *
+                 * @param {Event} $event
+                 * @returns {void}
+                 */
                 lookUp($event) {
                     let params = {
                         datagrid_id: this.datagridId,
@@ -731,6 +784,12 @@
                         });
                 },
 
+                /**
+                 * Select an option from the searched options.
+                 *
+                 * @param {object} option
+                 * @returns {void}
+                 */
                 selectOption(option) {
                     this.searchedOptions = [];
 
@@ -740,7 +799,7 @@
                         }
                     });
                 },
-            }
+            },
         });
     </script>
 @endpushOnce

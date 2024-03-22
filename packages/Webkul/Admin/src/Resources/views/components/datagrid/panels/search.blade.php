@@ -1,14 +1,14 @@
-<v-datagrid-search-panel
+<v-datagrid-search
     :available="available"
     :applied="applied"
-    @search="searchPage"
+    @search="search"
 >
-</v-datagrid-search-panel>
+</v-datagrid-search>
 
 @pushOnce('scripts')
     <script
         type="text/x-template"
-        id="v-datagrid-search-panel-template"
+        id="v-datagrid-search-template"
     >
         <div class="flex w-full items-center gap-x-1">
             <!-- Search Panel -->
@@ -39,8 +39,8 @@
     </script>
 
     <script type="module">
-        app.component('v-datagrid-search-panel', {
-            template: '#v-datagrid-search-panel-template',
+        app.component('v-datagrid-search', {
+            template: '#v-datagrid-search-template',
 
             props: ['available', 'applied'],
 
@@ -57,6 +57,12 @@
             },
 
             methods: {
+                /**
+                 * Perform a search operation based on the input value.
+                 *
+                 * @param {Event} $event
+                 * @returns {void}
+                 */
                 search($event) {
                     let requestedValue = $event.target.value;
 
@@ -82,6 +88,12 @@
                     this.$emit('search', this.filters);
                 },
 
+                /**
+                 * Get the searched values for a specific column.
+                 *
+                 * @param {string} columnIndex
+                 * @returns {Array}
+                 */
                 getSearchedValues(columnIndex) {
                     let appliedColumn = this.filters.columns.find(column => column.index === 'all');
 
