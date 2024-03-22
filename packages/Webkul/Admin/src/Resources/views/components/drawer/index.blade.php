@@ -21,7 +21,7 @@
             <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-3 border-b dark:border-gray-800 max-sm:px-4']) }}>
                 {{ $header }}
 
-                <div class="absolute top-4 ltr:right-3 rtl:left-3">
+                <div class="absolute top-3 ltr:right-3 rtl:left-3">
                     <span
                         class="icon-cross text-3xl  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
                         @click="close"

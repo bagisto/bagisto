@@ -41,6 +41,13 @@ class Downloadable extends AbstractType
     protected $isStockable = false;
 
     /**
+     * Product can be added to cart with options or not.
+     *
+     * @var bool
+     */
+    protected $canBeAddedToCartWithoutOptions = false;
+
+    /**
      * Create a new product type instance.
      *
      * @return void

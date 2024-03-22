@@ -37,13 +37,13 @@
                     <!-- Accordion Blade Component Content -->
                     <x-slot:content class="!p-0 mt-8">
                         <div class="flex flex-wrap gap-8">
-                            <div
-                                class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
-                                v-for="method in methods"
-                            >
+                            <template v-for="method in methods">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
 
-                                <div v-for="rate in method.rates">
+                                <div
+                                    class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
+                                    v-for="rate in method.rates"
+                                >
                                     <input 
                                         type="radio"
                                         name="shipping_method"
@@ -76,7 +76,7 @@
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping.after') !!}
-                            </div>
+                            </template>
                         </div>
                     </x-slot>
                 </x-shop::accordion>

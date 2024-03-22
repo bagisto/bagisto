@@ -45,7 +45,7 @@ class CustomerController extends APIController
         /**
          * Event passed to prepare cart after login.
          */
-        Event::dispatch('customer.after.login', $request->get('email'));
+        Event::dispatch('customer.after.login', auth()->guard()->user());
 
         return response()->json([]);
     }

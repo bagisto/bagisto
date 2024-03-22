@@ -132,8 +132,6 @@
                     return {
                         cart: null,
 
-                        isCartLoading: true,
-
                         isPlacingOrder: false,
 
                         currentStep: 'address',
@@ -156,8 +154,6 @@
                             .then(response => {
                                 this.cart = response.data.data;
 
-                                this.isCartLoading = false;
-                                
                                 this.scrollToCurrentStep();
                             })
                             .catch(error => {});

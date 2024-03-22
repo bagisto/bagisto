@@ -114,6 +114,7 @@ class CustomerController extends Controller
         }
 
         return new JsonResponse([
+            'data'    => $customer,
             'message' => trans('admin::app.customers.customers.index.create.create-success'),
         ]);
     }

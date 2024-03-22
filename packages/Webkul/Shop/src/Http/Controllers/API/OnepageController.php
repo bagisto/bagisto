@@ -8,6 +8,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Transformers\OrderResource;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Requests\CartAddressRequest;
 use Webkul\Shop\Http\Resources\CartResource;
@@ -172,11 +173,11 @@ class OnepageController extends APIController
             ]);
         }
 
-        $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+        $data = (new OrderResource($cart))->jsonSerialize();
+
+        $order = $this->orderRepository->create($data);
 
         Cart::deActivateCart();
-
-        Cart::activateCartIfSessionHasDeactivatedCartId();
 
         session()->flash('order', $order);
 
@@ -195,7 +196,9 @@ class OnepageController extends APIController
     {
         $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
 
-        $status = Cart::checkMinimumOrder();
+        $cart = Cart::getCart();
+
+        $status = $cart->checkMinimumOrder();
 
         return response()->json([
             'status'  => ! $status ? false : true,

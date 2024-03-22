@@ -689,7 +689,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',
@@ -775,7 +775,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
 
     $childProduct = $product->variants()->first();
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',
@@ -871,7 +871,7 @@ it('should fails the validation error when certain inputs not provided when add 
 
     $childProduct = $product->variants()->first();
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',
@@ -957,7 +957,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
 
     $childProduct = $product->variants()->first();
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',
@@ -1055,7 +1055,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',
@@ -1145,7 +1145,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
 
     $childProduct = $product->variants()->first();
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',
@@ -1245,7 +1245,7 @@ it('should fails the validation error when the certain input not provided when a
 
     $childProduct = $product->variants()->first();
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',
@@ -1335,7 +1335,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
 
     $childProduct = $product->variants()->first();
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',
@@ -1416,7 +1416,7 @@ it('should check tax is applying for the configurable product into the cart for 
 
     $childProduct = $product->variants()->first();
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',

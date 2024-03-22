@@ -19,6 +19,5 @@ class WishlistResource extends JsonResource
             'options' => $this->resource->additional ?? [],
             'product' => new ProductResource($this->product),
         ];
-
     }
 }

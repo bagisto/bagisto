@@ -78,7 +78,7 @@
 
                                     <div class="flex justify-between items-center">
                                         <p class="text-base font-medium">
-                                            @{{ address.first_name }} @{{ address.last_name }}
+                                            @{{ address.first_name + ' ' + address.last_name }}
 
                                             <template v-if="address.company_name">
                                                 (@{{ address.company_name }})
@@ -198,7 +198,7 @@
 
                                             <div class="flex justify-between items-center">
                                                 <p class="text-base font-medium">
-                                                    @{{ address.first_name }} @{{ address.last_name }}
+                                                    @{{ address.first_name + ' ' + address.last_name }}
 
                                                     <template v-if="address.company_name">
                                                         (@{{ address.company_name }})
