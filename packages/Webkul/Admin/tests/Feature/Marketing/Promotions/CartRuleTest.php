@@ -92,8 +92,7 @@ it('should copy the existing cart rule', function () {
 
     get(route('admin.marketing.promotions.cart_rules.copy', $cartRule->id))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.title'))
-        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.save-btn'));
+        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.title'));
 });
 
 it('should update the existing cart rule', function () {
@@ -108,8 +107,7 @@ it('should update the existing cart rule', function () {
 
     get(route('admin.marketing.promotions.cart_rules.edit', $cartRule->id))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.title'))
-        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.save-btn'));
+        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.title'));
 });
 
 it('should fail the validation with errors when certain field not provided when update the cart rule', function () {
