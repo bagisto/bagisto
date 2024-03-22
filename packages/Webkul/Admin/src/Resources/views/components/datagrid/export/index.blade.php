@@ -83,16 +83,32 @@
             },
 
             methods: {
+                /**
+                 * Registers events to update properties and trigger the download process.
+                 *
+                 * @returns {void}
+                 */
                 registerEvents() {
                     this.$emitter.on('change-datagrid', this.updateProperties);
                 },
 
-                updateProperties({available, applied }) {
+                /**
+                 * Updates the available and applied properties with new values.
+                 *
+                 * @param {object} data - Object containing available and applied properties.
+                 * @returns {void}
+                 */
+                updateProperties({ available, applied }) {
                     this.available = available;
 
                     this.applied = applied;
                 },
 
+                /**
+                 * Initiates the download process for exporting data.
+                 *
+                 * @returns {void}
+                 */
                 download() {
                     if (! this.available?.records?.length) {
                         this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('admin::app.export.no-records')' });
