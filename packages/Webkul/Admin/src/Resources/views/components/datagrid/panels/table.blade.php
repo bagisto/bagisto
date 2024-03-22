@@ -4,7 +4,7 @@
     :is-loading="isLoading"
     :available="available"
     :applied="applied"
-    @selectAllRecords="selectAllRecords"
+    @selectAll="selectAll"
     @sort="sort"
     @actionSuccess="get"
 >
@@ -18,7 +18,15 @@
     >
         <div class="w-full">
             <div class="table-responsive grid w-full box-shadow rounded bg-white dark:bg-gray-900 overflow-hidden">
-                <slot name="header">
+                <slot
+                    name="header"
+                    :is-loading="isLoading"
+                    :available="available"
+                    :applied="applied"
+                    :select-all="selectAll"
+                    :sort="sort"
+                    :perform-action="performAction"
+                >
                     <template v-if="isLoading">
                         <x-admin::shimmer.datagrid.table.head :isMultiRow="$isMultiRow" />
                     </template>
@@ -37,7 +45,7 @@
                                         id="mass_action_select_all_records"
                                         class="peer hidden"
                                         :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                                        @change="selectAllRecords"
+                                        @change="selectAll"
                                     >
 
                                     <span
@@ -79,7 +87,15 @@
                     </template>
                 </slot>
 
-                <slot name="body">
+                <slot
+                    name="body"
+                    :is-loading="isLoading"
+                    :available="available"
+                    :applied="applied"
+                    :select-all="selectAll"
+                    :sort="sort"
+                    :perform-action="performAction"
+                >
                     <template v-if="isLoading">
                         <x-admin::shimmer.datagrid.table.body :isMultiRow="$isMultiRow" />
                     </template>
@@ -183,8 +199,8 @@
                  *
                  * @returns {void}
                  */
-                selectAllRecords() {
-                    this.$emit('selectAllRecords');
+                selectAll() {
+                    this.$emit('selectAll');
                 },
 
                 /**

@@ -4,6 +4,7 @@
     @changePage="changePage"
     @changePerPageOption="changePerPageOption"
 >
+    {{ $slot }}
 </v-datagrid-pagination>
 
 @pushOnce('scripts')
@@ -11,68 +12,76 @@
         type="text/x-template"
         id="v-datagrid-pagination-template"
     >
-        <div class="flex items-center gap-x-2">
-            <x-admin::dropdown>
-                <x-slot:toggle>
-                    <button
-                        type="button"
-                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
-                    >
-                        <span>
-                            @{{ applied.pagination.perPage }}
-                        </span>
+        <slot
+            name="pagination"
+            :available="available"
+            :applied="applied"
+            :change-page="changePage"
+            :change-per-page-option="changePerPageOption"
+        >
+            <div class="flex items-center gap-x-2">
+                <x-admin::dropdown>
+                    <x-slot:toggle>
+                        <button
+                            type="button"
+                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                        >
+                            <span>
+                                @{{ applied.pagination.perPage }}
+                            </span>
 
-                        <span class="icon-sort-down text-2xl"></span>
-                    </button>
-                </x-slot>
+                            <span class="icon-sort-down text-2xl"></span>
+                        </button>
+                    </x-slot>
 
-                <x-slot:menu>
-                    <x-admin::dropdown.menu.item
-                        v-for="perPageOption in available.meta.per_page_options"
-                        @click="changePerPageOption(perPageOption)"
-                    >
-                        @{{ perPageOption }}
-                    </x-admin::dropdown.menu.item>
-                </x-slot>
-            </x-admin::dropdown>
+                    <x-slot:menu>
+                        <x-admin::dropdown.menu.item
+                            v-for="perPageOption in available.meta.per_page_options"
+                            @click="changePerPageOption(perPageOption)"
+                        >
+                            @{{ perPageOption }}
+                        </x-admin::dropdown.menu.item>
+                    </x-slot>
+                </x-admin::dropdown>
 
-            <p class="whitespace-nowrap text-gray-600 dark:text-gray-300 max-sm:hidden">
-                @lang('admin::app.components.datagrid.toolbar.per-page')
-            </p>
+                <p class="whitespace-nowrap text-gray-600 dark:text-gray-300 max-sm:hidden">
+                    @lang('admin::app.components.datagrid.toolbar.per-page')
+                </p>
 
-            <input
-                type="text"
-                class="inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-1 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-3 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:border-gray-400 dark:focus:border-gray-400 max-sm:hidden"
-                :value="available.meta.current_page"
-                @change="changePage(parseInt($event.target.value))"
-            >
-
-            <div class="whitespace-nowrap text-gray-600 dark:text-gray-300">
-                <span>
-                    @lang('admin::app.components.datagrid.toolbar.of')
-                </span>
-
-                <span>
-                    @{{ available.meta.last_page }}
-                </span>
-            </div>
-
-            <div class="flex items-center gap-1">
-                <div
-                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
-                    @click="changePage('previous')"
+                <input
+                    type="text"
+                    class="inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-1 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-3 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:border-gray-400 dark:focus:border-gray-400 max-sm:hidden"
+                    :value="available.meta.current_page"
+                    @change="changePage(parseInt($event.target.value))"
                 >
-                    <span class="icon-sort-left text-2xl"></span>
+
+                <div class="whitespace-nowrap text-gray-600 dark:text-gray-300">
+                    <span>
+                        @lang('admin::app.components.datagrid.toolbar.of')
+                    </span>
+
+                    <span>
+                        @{{ available.meta.last_page }}
+                    </span>
                 </div>
 
-                <div
-                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
-                    @click="changePage('next')"
-                >
-                    <span class="icon-sort-right text-2xl"></span>
+                <div class="flex items-center gap-1">
+                    <div
+                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
+                        @click="changePage('previous')"
+                    >
+                        <span class="icon-sort-left text-2xl"></span>
+                    </div>
+
+                    <div
+                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
+                        @click="changePage('next')"
+                    >
+                        <span class="icon-sort-right text-2xl"></span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </slot>
     </script>
 
     <script type="module">
