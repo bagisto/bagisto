@@ -22,42 +22,7 @@
 
     {!! view_render_event('bagisto.admin.catalog.attributes.list.before') !!}
 
-    <x-admin::datagrid :src="route('admin.catalog.attributes.index')">
-        <template #mass-action="{ available, applied, massActions, validateMassAction, performMassAction }">
-
-        </template>
-
-        <template #search="{ available, applied, search, getSearchedValues }">
-
-        </template>
-
-        <template #filter="{
-            available,
-            applied,
-            filters,
-            applyFilter,
-            applyColumnValues,
-            findAppliedColumn,
-            hasAnyAppliedColumnValues,
-            getAppliedColumnValues,
-            removeAppliedColumnValue,
-            removeAppliedColumnAllValues
-        }">
-
-        </template>
-
-        <template #header="{ available, applied, isLoading, selectAll, sort, performAction }">
-
-        </template>
-
-        <template #body="{ available, applied, isLoading, selectAll, sort, performAction }">
-
-        </template>
-
-        <template #pagination="{ available, applied, changePage, changePerPageOption }">
-
-        </template>
-    </x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.catalog.attributes.index')" />
 
     {!! view_render_event('bagisto.admin.catalog.attributes.list.after') !!}
 
