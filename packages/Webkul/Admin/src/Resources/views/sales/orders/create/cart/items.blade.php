@@ -3,6 +3,7 @@
 <!-- Vue JS Component -->
 <v-cart-items
     :cart="cart"
+    :is-adding-to-cart="isAddingToCart"
     @add-to-cart="configureAddToCart($event); stepReset()"
     @remove-from-cart="setCart($event); stepReset()"
     @cart-item-updated="setCart($event); stepReset()"
@@ -22,9 +23,18 @@
                 </p>
 
                 <div class="flex gap-4 items-center">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold">
-                        @{{ "@lang('admin::app.sales.orders.create.cart.items.sub-total', ['sub_total' => 'replace'])".replace('replace', cart.formatted_sub_total) }}
-                    </p>
+                    <template v-if="isAddingToCart || isUpdating">
+                        <img
+                            class="animate-spin h-5 w-5"
+                            src="{{ bagisto_asset('images/spinner.svg') }}"
+                        />
+                    </template>
+
+                    <template v-else>
+                        <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            @{{ "@lang('admin::app.sales.orders.create.cart.items.sub-total', ['sub_total' => 'replace'])".replace('replace', cart.formatted_sub_total) }}
+                        </p>
+                    </template>
 
                     <button
                         class="secondary-button"
@@ -185,7 +195,16 @@
                                 v-debounce="500"
                             />
 
-                            <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                            <template v-if="isSearching">
+                                <img
+                                    class="animate-spin h-5 w-5 absolute ltr:right-3 rtl:left-3 top-2.5"
+                                    src="{{ bagisto_asset('images/spinner.svg') }}"
+                                />
+                            </template>
+
+                            <template v-else>
+                                <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                            </template>
                         </div>
                     </div>
                 </x-slot>
@@ -311,7 +330,7 @@
         app.component('v-cart-items', {
             template: '#v-cart-items-template',
 
-            props: ['cart'],
+            props: ['cart', 'isAddingToCart'],
 
             emits: ['add-to-cart', 'remove-from-cart'],
 
@@ -321,7 +340,9 @@
 
                     searchedProducts: [],
 
-                    isStoring: false,
+                    isSearching: false,
+
+                    isUpdating: false,
                 };
             },
 
@@ -339,6 +360,8 @@
                         return;
                     }
 
+                    this.isSearching = true;
+
                     let self = this;
                     
                     this.$axios.get("{{ route('admin.catalog.products.search') }}", {
@@ -347,6 +370,8 @@
                             }
                         })
                         .then(function(response) {
+                            self.isSearching = false;
+
                             self.searchedProducts = response.data.data;
                         })
                         .catch(function (error) {
@@ -381,7 +406,7 @@
                 },
 
                 updateItem(item, qty) {
-                    this.isStoring = true;
+                    this.isUpdating = true;
 
                     let params = {
                         qty: {
@@ -395,11 +420,11 @@
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            this.isStoring = false;
+                            this.isUpdating = false;
 
                         })
                         .catch(error => {
-                            this.isStoring = false;
+                            this.isUpdating = false;
                         });
                 },
 

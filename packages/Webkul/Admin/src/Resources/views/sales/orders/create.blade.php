@@ -211,8 +211,12 @@
                             this.$refs.productConfigurationDrawer.close();
                         }
 
+                        this.isAddingToCart = true;
+
                         this.$axios.post("{{ route('admin.sales.cart.items.store', $cart->id) }}", formData)
                             .then(response => {
+                                this.isAddingToCart = false;
+
                                 this.cart = response.data.data;
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });

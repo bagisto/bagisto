@@ -214,7 +214,16 @@
                                     v-debounce="500"
                                 />
 
-                                <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                                <template v-if="isSearching">
+                                    <img
+                                        class="animate-spin h-5 w-5 absolute ltr:right-3 rtl:left-3 top-2.5"
+                                        src="{{ bagisto_asset('images/spinner.svg') }}"
+                                    />
+                                </template>
+
+                                <template v-else>
+                                    <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                                </template>
                             </div>
                         </div>
                     </x-slot>
@@ -288,6 +297,8 @@
                         searchTerm: '',
 
                         searchedCustomers: [],
+
+                        isSearching: false,
                     }
                 },
 
@@ -309,6 +320,8 @@
                             return;
                         }
 
+                        this.isSearching = true;
+
                         let self = this;
                         
                         this.$axios.get("{{ route('admin.customers.customers.search') }}", {
@@ -317,6 +330,8 @@
                                 }
                             })
                             .then(function(response) {
+                                self.isSearching = false;
+
                                 self.searchedCustomers = response.data.data;
                             })
                             .catch(function (error) {
