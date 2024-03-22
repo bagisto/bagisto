@@ -1,15 +1,15 @@
-<v-datagrid-pagination-panel
+<v-datagrid-pagination
     :available="available"
     :applied="applied"
     @changePage="changePage"
     @changePerPageOption="changePerPageOption"
 >
-</v-datagrid-pagination-panel>
+</v-datagrid-pagination>
 
 @pushOnce('scripts')
     <script
         type="text/x-template"
-        id="v-datagrid-pagination-panel-template"
+        id="v-datagrid-pagination-template"
     >
         <div class="flex items-center gap-x-2">
             <x-admin::dropdown>
@@ -76,8 +76,8 @@
     </script>
 
     <script type="module">
-        app.component('v-datagrid-pagination-panel', {
-            template: '#v-datagrid-pagination-panel-template',
+        app.component('v-datagrid-pagination', {
+            template: '#v-datagrid-pagination-template',
 
             props: ['available', 'applied'],
 
