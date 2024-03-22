@@ -1,8 +1,6 @@
 @props(['isMultiRow' => false])
 
 <v-datagrid {{ $attributes }}>
-    <x-admin::shimmer.datagrid :isMultiRow="$isMultiRow" />
-
     {{ $slot }}
 </v-datagrid>
 
@@ -18,55 +16,142 @@
                 <div class="flex gap-x-1">
                     <!-- Mass Actions Panel -->
                     <template v-if="applied.massActions.indices.length">
-                        <x-admin::datagrid.panels.mass-action />
+                        <x-admin::datagrid.panels.mass-action>
+                            <template #mass-action="{
+                                available,
+                                applied,
+                                massActions,
+                                validateMassAction,
+                                performMassAction
+                            }">
+                                <slot
+                                    name="mass-action"
+                                    :available="available"
+                                    :applied="applied"
+                                    :mass-actions="massActions"
+                                    :validate-mass-action="validateMassAction"
+                                    :perform-mass-action="performMassAction"
+                                >
+                                </slot>
+                            </template>
+                        </x-admin::datagrid.panels.mass-action>
                     </template>
 
                     <!-- Search Panel -->
                     <template v-else>
-                        <x-admin::datagrid.panels.search />
+                        <x-admin::datagrid.panels.search>
+                            <template #search="{
+                                available,
+                                applied,
+                                search,
+                                getSearchedValues
+                            }">
+                                <slot
+                                    name="search"
+                                    :available="available"
+                                    :applied="applied"
+                                    :search="search"
+                                    :get-searched-values="getSearchedValues"
+                                >
+                                </slot>
+                            </template>
+                        </x-admin::datagrid.panels.search>
                     </template>
                 </div>
 
                 <!-- Right Toolbar -->
                 <div class="flex gap-x-4">
-                    <!-- Filters Panel -->
-                    <x-admin::datagrid.panels.filter />
+                    <!-- Filter Panel -->
+                    <x-admin::datagrid.panels.filter>
+                        <template #filter="{
+                            available,
+                            applied,
+                            filters,
+                            applyFilter,
+                            applyColumnValues,
+                            findAppliedColumn,
+                            hasAnyAppliedColumnValues,
+                            getAppliedColumnValues,
+                            removeAppliedColumnValue,
+                            removeAppliedColumnAllValues
+                        }">
+                            <slot
+                                name="filter"
+                                :available="available"
+                                :applied="applied"
+                                :filters="filters"
+                                :apply-filter="applyFilter"
+                                :apply-column-values="applyColumnValues"
+                                :find-applied-column="findAppliedColumn"
+                                :has-any-applied-column-values="hasAnyAppliedColumnValues"
+                                :get-applied-column-values="getAppliedColumnValues"
+                                :remove-applied-column-value="removeAppliedColumnValue"
+                                :remove-applied-column-all-values="removeAppliedColumnAllValues"
+                            >
+                            </slot>
+                        </template>
+                    </x-admin::datagrid.panels.filter>
 
                     <!-- Pagination Panel -->
-                    <x-admin::datagrid.panels.pagination />
+                    <x-admin::datagrid.panels.pagination>
+                        <template #pagination="{
+                            available,
+                            applied,
+                            changePage,
+                            changePerPageOption
+                        }">
+                            <slot
+                                name="pagination"
+                                :available="available"
+                                :applied="applied"
+                                :change-page="changePage"
+                                :change-per-page-option="changePerPageOption"
+                            >
+                            </slot>
+                        </template>
+                    </x-admin::datagrid.panels.pagination>
                 </div>
             </div>
 
             <!-- Table -->
             <div class="flex mt-4">
                 <x-admin::datagrid.panels.table :isMultiRow="$isMultiRow">
-                    <template #header>
+                    <template #header="{
+                        available,
+                        applied,
+                        isLoading,
+                        selectAll,
+                        sort,
+                        performAction
+                    }">
                         <slot
                             name="header"
-                            :columns="available.columns"
-                            :actions="available.actions"
-                            :mass-actions="available.massActions"
-                            :records="available.records"
-                            :meta="available.meta"
-                            :sort-page="sort"
+                            :is-loading="isLoading"
                             :available="available"
                             :applied="applied"
-                            :is-loading="isLoading"
+                            :select-all="selectAll"
+                            :sort="sort"
+                            :perform-action="performAction"
                         >
                         </slot>
                     </template>
 
-                    <template #body>
+                    <template #body="{
+                        available,
+                        applied,
+                        isLoading,
+                        selectAll,
+                        sort,
+                        performAction
+                    }">
                         <slot
                             name="body"
-                            :columns="available.columns"
-                            :actions="available.actions"
-                            :mass-actions="available.massActions"
-                            :records="available.records"
-                            :meta="available.meta"
+                            :is-loading="isLoading"
                             :available="available"
                             :applied="applied"
-                            :is-loading="isLoading"
+                            :select-all="selectAll"
+                            :sort="sort"
+                            :perform-action="performAction"
                         >
                         </slot>
                     </template>
@@ -388,7 +473,7 @@
                  *
                  * @returns {void}
                  */
-                selectAllRecords() {
+                selectAll() {
                     if (['all', 'partial'].includes(this.applied.massActions.meta.mode)) {
                         this.available.records.forEach(record => {
                             const id = record[this.available.meta.primary_column];

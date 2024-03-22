@@ -10,7 +10,6 @@
         id="v-datagrid-export-template"
     >
         <div>
-            <!-- Modal Component -->
             <x-admin::modal ref="exportModal">
                 <x-slot:toggle>
                     <button class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
