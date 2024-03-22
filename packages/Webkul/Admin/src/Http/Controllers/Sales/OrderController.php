@@ -12,9 +12,9 @@ use Webkul\Admin\Http\Resources\AddressResource;
 use Webkul\Admin\Http\Resources\CartResource;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderCommentRepository;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Transformers\OrderResource;
 

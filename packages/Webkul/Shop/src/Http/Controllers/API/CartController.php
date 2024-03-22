@@ -173,7 +173,7 @@ class CartController extends APIController
                     if (Cart::getCart()->coupon_code == $validatedData['code']) {
                         return (new JsonResource([
                             'data'     => new CartResource(Cart::getCart()),
-                            'message'  => trans('shop::app.checkout.cart.coupon-already-applied'),
+                            'message'  => trans('shop::app.checkout.coupon.already-applied'),
                         ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
                     }
 
