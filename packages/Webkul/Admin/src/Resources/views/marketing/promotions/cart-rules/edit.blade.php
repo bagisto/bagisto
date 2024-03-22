@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.promotions.cart-rules.edit.title')
     </x-slot>
@@ -182,7 +181,7 @@
 
                                         <x-admin::form.control-group.error control-name="coupon_code" />
                                     </x-admin::form.control-group>
-                                    
+
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.uses-per-coupon')
@@ -552,7 +551,7 @@
                                     </x-admin::form.control-group>
 
                                     @php($selectedOptionIds = old('channels') ?? $cartRule->channels->pluck('id')->toArray())
-                                    <!--Channel--> 
+                                    <!--Channel-->
                                     <div class="mb-2.5">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.channels')

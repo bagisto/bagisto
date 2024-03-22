@@ -38,21 +38,27 @@
                 :isMultiRow="true"
                 ref="datagrid"
             >
-                <!-- DataGrid Body -->
-                <template #body="{ columns, records, performAction }">
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
                     <div
-                        v-for="record in records"
+                        v-for="record in available.records"
                         class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
-                        <!-- Id -->
+                        <!-- ID -->
                         <p
                             class="break-words"
                             v-text="record.id"
                         >
                         </p>
 
-                        <!-- Transaction ID-->
+                        <!-- Transaction ID -->
                         <p
                             class="break-words"
                             v-text="record.transaction_id"
@@ -64,14 +70,14 @@
                             @{{ $admin.formatPrice(record.amount) }}
                         </p>
 
-                        <!-- Invoice Id -->
+                        <!-- Invoice ID -->
                         <p
                             class="break-words"
                             v-text="record.invoice_id"
                         >
                         </p>
 
-                        <!-- Order Id -->
+                        <!-- Order ID -->
                         <p
                             class="break-words"
                             v-text="record.order_id"
@@ -217,7 +223,7 @@
             </div>
         </script>
 
-        <script 
+        <script
             type="text/x-template"
             id="v-create-transaction-form-template"
         >
@@ -278,7 +284,7 @@
                                         :label="trans('admin::app.sales.transactions.index.create.payment-method')"
                                         :placeholder="trans('admin::app.sales.transactions.index.create.payment-method')"
                                     >
-                                        <option 
+                                        <option
                                             v-for="paymentMethod in paymentMethods"
                                             :value="paymentMethod.method"
                                             v-text="paymentMethod.method_title"

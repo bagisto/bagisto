@@ -1,9 +1,7 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.campaigns.create.title')
     </x-slot>
-    
 
     {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.before') !!}
 
@@ -27,8 +25,8 @@
                 </a>
 
                 <!-- Save Button -->
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     class="primary-button"
                 >
                     @lang('admin::app.marketing.communications.campaigns.create.save-btn')
@@ -105,8 +103,8 @@
                                 </option>
 
                                 @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
-                                    <option 
-                                        value="{{ $event->id }}" 
+                                    <option
+                                        value="{{ $event->id }}"
                                         {{ old('marketing_event_id') == $event->id ? 'selected' : '' }}
                                     >
                                         {{ $event->name }}
@@ -137,8 +135,8 @@
                                 </option>
 
                                 @foreach ($templates as $template)
-                                    <option 
-                                        value="{{ $template->id }}" 
+                                    <option
+                                        value="{{ $template->id }}"
                                         {{ old('marketing_template_id') == $template->id ? 'selected' : '' }}
                                     >
                                         {{ $template->name }}
@@ -166,7 +164,7 @@
                             @lang('admin::app.marketing.communications.campaigns.create.setting')
                         </p>
                     </x-slot>
-                    
+
                     <x-slot:content>
                         <!-- Channel -->
                         <x-admin::form.control-group>
@@ -188,8 +186,8 @@
                                 </option>
 
                                 @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
-                                    <option 
-                                        value="{{ $channel->id }}" 
+                                    <option
+                                        value="{{ $channel->id }}"
                                         {{ old('channel_id') == $channel->id ? 'selected' : '' }}
                                     >
                                         {{ core()->getChannelName($channel) }}
@@ -220,8 +218,8 @@
                                 </option>
 
                                 @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                    <option 
-                                        value="{{ $customerGroup->id }}" 
+                                    <option
+                                        value="{{ $customerGroup->id }}"
                                         {{ old('customer_group_id') == $customerGroup->id ? 'selected' : '' }}
                                     >
                                         {{ $customerGroup->name }}

@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.categories.create.title')
     </x-slot>

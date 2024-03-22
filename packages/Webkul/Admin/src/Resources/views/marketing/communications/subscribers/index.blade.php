@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.subscribers.index.title')
     </x-slot>
@@ -21,19 +20,24 @@
             id="v-subscribers-template"
         >
             <div>
-                <!-- DataGrid -->
                 <x-admin::datagrid
                     src="{{ route('admin.marketing.communications.subscribers.index') }}"
                     ref="datagrid"
                 >
-                    <!-- DataGrid Body -->
-                    <template #body="{ columns, records, performAction }">
+                    <template #body="{
+                        isLoading,
+                        available,
+                        applied,
+                        selectAll,
+                        sort,
+                        performAction
+                    }">
                         <div
-                            v-for="record in records"
+                            v-for="record in available.records"
                             class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                                :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
+                            :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
-                            <!-- Id -->
+                            <!-- ID -->
                             <p v-text="record.id"></p>
 
                             <!-- Status -->
@@ -88,7 +92,7 @@
 
                             <!-- Modal Content -->
                             <x-slot:content>
-                                <!-- Id -->
+                                <!-- ID -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="id"
@@ -224,8 +228,8 @@
 
                                 this.$refs.groupCreateModal.toggle();
                             })
-                            .catch(error => this.$emitter.emit('add-flash', { 
-                                type: 'error', message: error.response.data.message 
+                            .catch(error => this.$emitter.emit('add-flash', {
+                                type: 'error', message: error.response.data.message
                             }));
                     }
                 }

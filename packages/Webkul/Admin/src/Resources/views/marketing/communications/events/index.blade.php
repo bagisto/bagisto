@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.events.index.title')
     </x-slot>
@@ -49,19 +48,24 @@
 
             {!! view_render_event('bagisto.admin.marketing.communications.events.list.before') !!}
 
-            <!-- Datagrid -->
             <x-admin::datagrid
                 src="{{ route('admin.marketing.communications.events.index') }}"
                 ref="datagrid"
             >
-                 <!-- DataGrid Body -->
-                 <template #body="{ columns, records, performAction }">
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
                     <div
-                        v-for="record in records"
+                        v-for="record in available.records"
                         class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                            :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
+                        :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
-                        <!-- Id -->
+                        <!-- ID -->
                         <p v-text="record.id"></p>
 
                         <!-- Status -->
@@ -72,7 +76,7 @@
 
                         <!-- Actions -->
                         @if (
-                            bouncer()->hasPermission('marketing.communications.events.edit') 
+                            bouncer()->hasPermission('marketing.communications.events.edit')
                             || bouncer()->hasPermission('marketing.communications.events.delete')
                         )
                             <div class="flex justify-end">
@@ -140,7 +144,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Id -->
+                            <!-- ID -->
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
@@ -284,8 +288,8 @@
                                     this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                                 }
                             })
-                            .catch(error => this.$emitter.emit('add-flash', { 
-                                type: 'error', message: error.response.data.message 
+                            .catch(error => this.$emitter.emit('add-flash', {
+                                type: 'error', message: error.response.data.message
                             }));
                     },
                 }

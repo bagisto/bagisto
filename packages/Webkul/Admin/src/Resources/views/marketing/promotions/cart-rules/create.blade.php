@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.promotions.cart-rules.create.title')
     </x-slot>
@@ -167,7 +166,7 @@
 
                                         <x-admin::form.control-group.error control-name="coupon_code" />
                                     </x-admin::form.control-group>
-                                    
+
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.create.uses-per-coupon')
@@ -714,7 +713,7 @@
                         :id="['conditions[' + index + '][attribute]']"
                         class="custom-select flex w-1/3 min:w-1/3 h-10 py-2.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
                         v-model="condition.attribute"
-                    > 
+                    >
                         <option value="">@lang('admin::app.marketing.promotions.cart-rules.create.choose-condition-to-add')</option>
 
                         <optgroup
@@ -1075,7 +1074,7 @@
                         if (this.condition.attribute == '') {
                             return;
                         }
-                            
+
                         let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
 
                         let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].find((attribute) => attribute.key == this.condition.attribute);

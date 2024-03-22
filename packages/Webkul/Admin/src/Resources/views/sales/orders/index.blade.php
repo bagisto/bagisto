@@ -10,15 +10,24 @@
         </p>
 
         <div class="flex gap-x-2.5 items-center">
-            <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.sales.orders.index') }}" />
         </div>
     </div>
 
     <x-admin::datagrid :src="route('admin.sales.orders.index')" :isMultiRow="true">
-        <!-- Datagrid Header -->
-        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
-             <template v-if="! isLoading">
+        <template #header="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-4 py-2.5 border-b dark:border-gray-800">
                     <div
                         class="flex gap-2.5 items-center select-none"
@@ -31,13 +40,13 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'text-gray-800 dark:text-white font-medium': applied.sort.column == column,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': available.columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
-                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                            available.columns.find(columnTemp => columnTemp.index === column)?.sortable ? sort(available.columns.find(columnTemp => columnTemp.index === column)): {}
                                         "
                                     >
-                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                        @{{ available.columns.find(columnTemp => columnTemp.index === column)?.label }}
                                     </span>
                                 </template>
                             </span>
@@ -46,23 +55,30 @@
                                 class="ltr:ml-1.5 rtl:mr-1.5 text-base  text-gray-800 dark:text-white align-text-bottom"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
-                            ></i>
+                            >
+                            </i>
                         </p>
                     </div>
                 </div>
             </template>
-
-            <!-- Datagrid Head Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
-            </template>
         </template>
 
-        <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
-            <template v-if="! isLoading">
+        <template #body="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div
                     class="row grid grid-cols-4 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                    v-for="record in records"
+                    v-for="record in available.records"
                 >
                     <!-- Order Id, Created, Status Section -->
                     <div class="">
@@ -161,11 +177,6 @@
                         </a>
                     </div>
                 </div>
-            </template>
-
-            <!-- Datagrid Body Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
             </template>
         </template>
     </x-admin::datagrid>

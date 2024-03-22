@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.users.index.title')
     </x-slot>
@@ -11,7 +10,7 @@
             </p>
 
             <div class="flex gap-x-2.5 items-center">
-                <!-- Create User Button -->
+                <!-- Create Button -->
                 @if (bouncer()->hasPermission('settings.users.users.create'))
                     <button
                         type="button"
@@ -23,7 +22,6 @@
             </div>
         </div>
 
-        <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid />
     </v-users>
 
@@ -38,7 +36,6 @@
                 </p>
 
                 <div class="flex gap-x-2.5 items-center">
-                    <!-- User Create Button -->
                     @if (bouncer()->hasPermission('settings.users.users.create'))
                         <button
                             type="button"
@@ -51,7 +48,6 @@
                 </div>
             </div>
 
-            <!-- Datagrid -->
             <x-admin::datagrid
                 src="{{ route('admin.settings.users.index') }}"
                 ref="datagrid"
@@ -59,55 +55,21 @@
                 @php
                     $hasPermission = bouncer()->hasPermission('settings.users.users.edit') || bouncer()->hasPermission('settings.users.users.delete');
                 @endphp
-                <!-- DataGrid Header -->
-                <template #header="{columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
-                        <div
-                            class="flex gap-2.5 cursor-pointer"
-                            v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name']"
-                        >
-                            <p class="text-gray-600 dark:text-gray-300">
-                                <span class="[&>*]:after:content-['_/_']">
-                                    <span
-                                        class="after:content-['/'] last:after:content-['']"
-                                        :class="{
-                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
-                                        }"
-                                        @click="
-                                            columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
-                                        "
-                                    >
-                                        @{{ columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
-                                    </span>
-                                </span>
 
-                                <!-- Filter Arrow Icon -->
-                                <i
-                                    class="ltr:ml-1.5 rtl:mr-1.5 text-base  text-gray-800 dark:text-white align-text-bottom"
-                                    :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
-                                    v-if="columnGroup.includes(applied.sort.column)"
-                                ></i>
-                            </p>
-                        </div>
-
-                        <!-- Actions -->
-                        @if ($hasPermission)
-                            <p class="flex gap-2.5 justify-end">
-                                @lang('admin::app.components.datagrid.table.actions')
-                            </p>
-                        @endif
-                    </div>
-                </template>
-
-                <!-- DataGrid Body -->
-                <template #body="{ columns, records, performAction }">
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
                     <div
-                        v-for="record in records"
+                        v-for="record in available.records"
                         class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
                     >
-                        <!-- Id -->
+                        <!-- ID -->
                         <p v-text="record.user_id"></p>
 
                         <!-- User Profile -->
@@ -508,8 +470,8 @@
 
                                 this.$refs.userUpdateOrCreateModal.toggle();
                             })
-                            .catch(error => this.$emitter.emit('add-flash', { 
-                                type: 'error', message: error.response.data.message 
+                            .catch(error => this.$emitter.emit('add-flash', {
+                                type: 'error', message: error.response.data.message
                             }));
                     },
 

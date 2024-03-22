@@ -17,9 +17,9 @@
             <div class="flex mt-4">
                 <x-admin::datagrid.table :isMultiRow="$isMultiRow">
                     <template #header="{
+                        isLoading,
                         available,
                         applied,
-                        isLoading,
                         selectAll,
                         sort,
                         performAction
@@ -37,9 +37,9 @@
                     </template>
 
                     <template #body="{
+                        isLoading,
                         available,
                         applied,
-                        isLoading,
                         selectAll,
                         sort,
                         performAction
