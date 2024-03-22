@@ -60,50 +60,56 @@
                     sort,
                     performAction
                 }">
-                    <div
-                        v-for="record in available.records"
-                        class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
-                    >
-                        <!-- ID -->
-                        <p v-text="record.id"></p>
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.datagrid.table.body />
+                    </template>
 
-                        <!-- Status -->
-                        <p v-text="record.name"></p>
+                    <template v-else>
+                        <div
+                            v-for="record in available.records"
+                            class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
+                        >
+                            <!-- ID -->
+                            <p v-text="record.id"></p>
 
-                        <!-- Email -->
-                        <p v-text="record.date"></p>
+                            <!-- Status -->
+                            <p v-text="record.name"></p>
 
-                        <!-- Actions -->
-                        @if (
-                            bouncer()->hasPermission('marketing.communications.events.edit')
-                            || bouncer()->hasPermission('marketing.communications.events.delete')
-                        )
-                            <div class="flex justify-end">
-                                @if (bouncer()->hasPermission('marketing.communications.events.edit'))
-                                    <a @click="id=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
-                                        <span
-                                            :class="record.actions.find(action => action.index === 'edit')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                            :title="record.actions.find(action => action.title === '@lang('admin::app.marketing.communications.events.index.datagrid.edit')')?.title"
-                                        >
-                                        </span>
-                                    </a>
-                                @endif
+                            <!-- Email -->
+                            <p v-text="record.date"></p>
 
-                                @if (bouncer()->hasPermission('marketing.communications.events.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
-                                        <span
-                                            :class="record.actions.find(action => action.index === 'delete')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                            :title="record.actions.find(action => action.title === '@lang('admin::app.marketing.communications.events.index.datagrid.delete')')?.title"
-                                        >
-                                        </span>
-                                    </a>
-                                @endif
-                            </div>
-                        @endif
-                    </div>
+                            <!-- Actions -->
+                            @if (
+                                bouncer()->hasPermission('marketing.communications.events.edit')
+                                || bouncer()->hasPermission('marketing.communications.events.delete')
+                            )
+                                <div class="flex justify-end">
+                                    @if (bouncer()->hasPermission('marketing.communications.events.edit'))
+                                        <a @click="id=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
+                                            <span
+                                                :class="record.actions.find(action => action.index === 'edit')?.icon"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                :title="record.actions.find(action => action.title === '@lang('admin::app.marketing.communications.events.index.datagrid.edit')')?.title"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
+
+                                    @if (bouncer()->hasPermission('marketing.communications.events.delete'))
+                                        <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
+                                            <span
+                                                :class="record.actions.find(action => action.index === 'delete')?.icon"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                :title="record.actions.find(action => action.title === '@lang('admin::app.marketing.communications.events.index.datagrid.delete')')?.title"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
+                                </div>
+                            @endif
+                        </div>
+                    </template>
                 </template>
             </x-admin::datagrid>
 

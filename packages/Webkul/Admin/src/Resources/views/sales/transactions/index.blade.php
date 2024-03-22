@@ -46,75 +46,81 @@
                     sort,
                     performAction
                 }">
-                    <div
-                        v-for="record in available.records"
-                        class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
-                    >
-                        <!-- ID -->
-                        <p
-                            class="break-words"
-                            v-text="record.id"
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.datagrid.table.body />
+                    </template>
+
+                    <template v-else>
+                        <div
+                            v-for="record in available.records"
+                            class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
-                        </p>
+                            <!-- ID -->
+                            <p
+                                class="break-words"
+                                v-text="record.id"
+                            >
+                            </p>
 
-                        <!-- Transaction ID -->
-                        <p
-                            class="break-words"
-                            v-text="record.transaction_id"
-                        >
-                        </p>
+                            <!-- Transaction ID -->
+                            <p
+                                class="break-words"
+                                v-text="record.transaction_id"
+                            >
+                            </p>
 
-                        <!-- Amount -->
-                        <p class="break-words">
-                            @{{ $admin.formatPrice(record.amount) }}
-                        </p>
+                            <!-- Amount -->
+                            <p class="break-words">
+                                @{{ $admin.formatPrice(record.amount) }}
+                            </p>
 
-                        <!-- Invoice ID -->
-                        <p
-                            class="break-words"
-                            v-text="record.invoice_id"
-                        >
-                        </p>
+                            <!-- Invoice ID -->
+                            <p
+                                class="break-words"
+                                v-text="record.invoice_id"
+                            >
+                            </p>
 
-                        <!-- Order ID -->
-                        <p
-                            class="break-words"
-                            v-text="record.order_id"
-                        >
-                        </p>
+                            <!-- Order ID -->
+                            <p
+                                class="break-words"
+                                v-text="record.order_id"
+                            >
+                            </p>
 
-                        <!-- Status -->
-                        <p
-                            class="break-words"
-                            v-html="record.status"
-                        >
-                        </p>
+                            <!-- Status -->
+                            <p
+                                class="break-words"
+                                v-html="record.status"
+                            >
+                            </p>
 
-                        <!-- Date -->
-                        <p
-                            class="break-words"
-                            v-text="record.created_at"
-                        >
-                        </p>
+                            <!-- Date -->
+                            <p
+                                class="break-words"
+                                v-text="record.created_at"
+                            >
+                            </p>
 
-                        <!-- Actions -->
-                        @if (bouncer()->hasPermission('sales.transactions.view'))
-                            <div class="flex justify-end">
-                                <a
-                                    v-if="record.actions.find(action => action.title === 'View')"
-                                    @click="view(record.actions.find(action => action.title === 'View')?.url)"
-                                >
-                                    <span
-                                        class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
-                                        role="button"
-                                        tabindex="0"
+                            <!-- Actions -->
+                            @if (bouncer()->hasPermission('sales.transactions.view'))
+                                <div class="flex justify-end">
+                                    <a
+                                        v-if="record.actions.find(action => action.title === 'View')"
+                                        @click="view(record.actions.find(action => action.title === 'View')?.url)"
                                     >
-                                    </span>
-                                </a>
-                            </div>
-                        @endif
-                    </div>
+                                        <span
+                                            class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                            role="button"
+                                            tabindex="0"
+                                        >
+                                        </span>
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
+                    </template>
                 </template>
             </x-admin::datagrid>
 

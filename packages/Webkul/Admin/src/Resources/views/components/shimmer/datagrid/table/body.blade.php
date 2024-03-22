@@ -6,15 +6,16 @@
             <div class="shimmer w-6 h-6 mb-0.5"></div>
 
             <div class="shimmer w-[100px] h-[17px]"></div>
-            
+
             <div class="shimmer w-[100px] h-[17px]"></div>
-            
+
             <div class="shimmer w-[100px] h-[17px]"></div>
-            
+
             <div class="shimmer w-[100px] h-[17px]"></div>
-            
+
             <div class="flex gap-2.5 place-self-end">
                 <div class="shimmer w-6 h-6 p-1.5"></div>
+
                 <div class="shimmer w-6 h-6 p-1.5"></div>
             </div>
         </div>
@@ -25,26 +26,26 @@
 
                 <div class="flex flex-col gap-1.5">
                     <div class="shimmer w-[250px] h-[19px]"></div>
-                    
+
                     <div class="shimmer w-[150px] h-[17px]"></div>
-                    
+
                     <div class="shimmer w-[150px] h-[17px]"></div>
                 </div>
             </div>
 
             <div class="flex gap-1.5 flex-col">
                 <div class="shimmer w-[250px] h-[19px]"></div>
-                
+
                 <div class="shimmer w-[150px] h-[17px]"></div>
-                
+
                 <div class="shimmer w-[150px] h-[17px]"></div>
             </div>
 
             <div class="flex gap-1.5 flex-col">
                 <div class="shimmer w-[250px] h-[19px]"></div>
-                
+
                 <div class="shimmer w-[150px] h-[17px]"></div>
-                
+
                 <div class="shimmer w-[150px] h-[17px]"></div>
             </div>
         </div>
