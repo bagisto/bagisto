@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.rates.index.title')
     </x-slot>
@@ -22,8 +21,8 @@
         </div>
     </div>
 
-    <x-admin::datagrid 
-        :src="route('admin.settings.taxes.rates.index')" 
+    <x-admin::datagrid
+        :src="route('admin.settings.taxes.rates.index')"
         ref="datagrid"
     />
 </x-admin::layouts>
