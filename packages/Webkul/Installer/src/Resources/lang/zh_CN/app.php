@@ -457,7 +457,7 @@ return [
             'title'                     => 'Bagisto 安装程序',
             'turkish'                   => '土耳其语',
             'ukrainian'                 => '乌克兰语',
-            'viatnamese'                => '越南语',
+            'vietnamese'                => '越南语',
             'webkul'                    => 'Webkul',
         ],
     ],

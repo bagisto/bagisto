@@ -367,7 +367,7 @@ return [
                 'turkish-lira'        => 'Турецька ліра (TRY)',
                 'ukrainian-hryvnia'   => 'Українська гривня (UAH)',
                 'usd'                 => 'Долар США (USD)',
-                'viatnamese-dong'     => 'В\'єтнамський донг (VND)',
+                'vietnamese-dong'    => 'В\'єтнамський донг (VND)',
                 'warning-message'     => 'Увага! Налаштування мов системи за замовчуванням, а також основна валюта є постійними і більше не можуть бути змінені.',
             ],
 
@@ -457,7 +457,7 @@ return [
             'title'                     => 'Установник Bagisto',
             'turkish'                   => 'Турецька',
             'ukrainian'                 => 'Українська',
-            'viatnamese'                => 'В\'єтнамська',
+            'vietnamese'                => 'В\'єтнамська',
             'webkul'                    => 'Webkul',
         ],
     ],

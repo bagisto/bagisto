@@ -457,7 +457,7 @@ return [
             'title'                     => 'Установщик Bagisto',
             'turkish'                   => 'Турецкий',
             'ukrainian'                 => 'Украинский',
-            'viatnamese'                => 'Вьетнамский',
+            'vietnamese'                => 'Вьетнамский',
             'webkul'                    => 'Webkul',
         ],
     ],

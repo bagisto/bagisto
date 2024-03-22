@@ -367,7 +367,7 @@ return [
                 'turkish-lira'        => 'Lira turca (TRY)',
                 'ukrainian-hryvnia'   => 'Grivna ucraniana (UAH)',
                 'usd'                 => 'Dólar estadounidense (USD)',
-                'viatnamese-dong'     => 'Dong vietnamita (VND)',
+                'vietnamese-dong'    => 'Dong vietnamita (VND)',
                 'warning-message'     => '¡Cuidado! La configuración de los idiomas del sistema predeterminados y la moneda predeterminada son permanentes y no se pueden cambiar nunca más.',
             ],
 

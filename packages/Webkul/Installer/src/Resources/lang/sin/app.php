@@ -457,7 +457,7 @@ return [
             'title'                     => 'Bagisto ස්තුරාකුල',
             'turkish'                   => 'තුර්කි',
             'ukrainian'                 => 'යුක්රේනියානු',
-            'viatnamese'                => 'වියට්නාමු',
+            'vietnamese'                => 'වියට්නාමු',
             'webkul'                    => 'වෙබ්කුල්',
         ],
     ],

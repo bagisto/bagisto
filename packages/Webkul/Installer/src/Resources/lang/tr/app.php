@@ -457,7 +457,7 @@ return [
             'title'                     => 'Bagisto Kurulum Sihirbazı',
             'turkish'                   => 'Türkçe',
             'ukrainian'                 => 'Ukraynaca',
-            'viatnamese'                => 'Vietnamca',
+            'vietnamese'                => 'Vietnamca',
             'webkul'                    => 'Webkul',
         ],
     ],

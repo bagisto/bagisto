@@ -456,7 +456,7 @@ return [
             'title'                     => 'مثبت Bagisto',
             'turkish'                   => 'التركية',
             'ukrainian'                 => 'الأوكرانية',
-            'viatnamese'                => 'الفيتنامية',
+            'vietnamese'                => 'الفيتنامية',
             'webkul'                    => 'Webkul',
         ],
     ],

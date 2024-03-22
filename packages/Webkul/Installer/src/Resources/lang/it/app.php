@@ -457,7 +457,7 @@ return [
             'title'                     => 'Installazione di Bagisto',
             'turkish'                   => 'Turco',
             'ukrainian'                 => 'Ucraino',
-            'viatnamese'                => 'Vietnamita',
+            'vietnamese'                => 'Vietnamita',
             'webkul'                    => 'Webkul',
         ],
     ],
