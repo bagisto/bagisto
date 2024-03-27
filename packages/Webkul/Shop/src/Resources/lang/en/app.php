@@ -627,6 +627,7 @@ return [
             'select-hourly-duration'    => 'Select a slot duration of one hour.',
             'success-remove'            => 'Item is successfully removed from the cart.',
             'suspended-account-message' => 'Your account has been suspended.',
+            'guest-not-allowed'         => 'You need to login first to buy this product.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',

@@ -9,6 +9,7 @@ use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Type\Downloadable;
 use Webkul\Shop\Http\Resources\CartResource;
 use Webkul\Shop\Http\Resources\ProductResource;
 
@@ -58,6 +59,21 @@ class CartController extends APIController
 
             if (request()->get('is_buy_now')) {
                 Cart::deActivateCart();
+            }
+
+            /**
+             * If product is downloadable and customer is not logged in, then redirect to login page
+             */
+            if (
+                ! auth()->guard('customer')->check()
+                && (
+                    $product->getTypeInstance() instanceof Downloadable
+                )
+            ) {
+                return new JsonResource([
+                    'redirect'     => route('shop.customer.session.index'),
+                    'message'      => trans('shop::app.checkout.cart.guest-not-allowed'),
+                ]);
             }
 
             $cart = Cart::addProduct($product->id, request()->all());

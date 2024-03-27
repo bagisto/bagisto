@@ -627,6 +627,7 @@ return [
             'select-hourly-duration'    => 'یک مدت زمان ساعتی انتخاب کنید.',
             'success-remove'            => 'کالا با موفقیت از سبد خرید حذف شد.',
             'suspended-account-message' => 'حساب کاربری شما مسدود شده است.',
+            'guest-not-allowed'         => 'برای خرید این محصول ابتدا باید لاگین کنید.',
 
             'index' => [
                 'bagisto'                  => 'بگیستو',
