@@ -82,7 +82,7 @@
 
                     minRange: parseInt(this.defaultMinRange ?? 0),
 
-                    maxRange: parseInt(this.defaultMaxRange ?? 100),
+                    maxRange: this.defaultMaxRange ?? 100,
                 };
             },
 
