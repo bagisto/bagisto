@@ -576,6 +576,8 @@ it('should fails the validation error when the product id not provided when add 
 
 it('should add a downloadable product to the cart', function () {
     // Arrange
+    $this->loginAsCustomer();
+
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -618,6 +620,47 @@ it('should add a downloadable product to the cart', function () {
     $this->assertEquals(round($product->price, 2), round($response['data']['items'][0]['price'], 2), '', 0.00000001);
 
     $this->assertEquals(round($product->price, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+});
+
+it('should return redirect result when customer is not logged in when add a downloadable product to the cart', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    // Act
+    $response = postJson(route('shop.api.checkout.cart.store', [
+        'product_id' => $product->id,
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]));
+
+    // Assert
+    $response
+        ->assertOk()
+        ->assertJsonPath('message', trans('shop::app.checkout.guest-not-allowed'))
+        ->assertJsonPath('redirect', route('shop.customer.session.index'));
 });
 
 it('should fails the validation error when the product id not provided when add a grouped product to the cart', function () {
