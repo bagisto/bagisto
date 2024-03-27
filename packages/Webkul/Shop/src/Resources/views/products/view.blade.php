@@ -106,20 +106,20 @@
                                     </div>
 
                                     @if ($customAttributeValue['type'] == 'file')
-                                        <a 
-                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                        <a
+                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
                                             <span class="icon-download text-2xl"></span>
                                         </a>
                                     @elseif ($customAttributeValue['type'] == 'image')
-                                        <a 
-                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                        <a
+                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
-                                            <img 
-                                                class="h-5 w-5 min-h-5 min-w-5" 
-                                                src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                            <img
+                                                class="h-5 w-5 min-h-5 min-w-5"
+                                                src="{{ Storage::url($customAttributeValue['value']) }}"
                                             />
                                         </a>
                                     @else
@@ -192,13 +192,13 @@
                                             <span class="icon-download text-2xl"></span>
                                         </a>
                                     @elseif ($customAttributeValue['type'] == 'image')
-                                        <a 
-                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                        <a
+                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
-                                            <img 
-                                                class="h-5 w-5 min-h-5 min-w-5" 
-                                                src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                            <img
+                                                class="h-5 w-5 min-h-5 min-w-5"
+                                                src="{{ Storage::url($customAttributeValue['value']) }}"
                                             />
                                         </a>
                                     @else
@@ -207,7 +207,7 @@
                                                 {{ $customAttributeValue['value'] ?? '-' }}
                                             </p>
                                         </div>
-                                    @endif 
+                                    @endif
                                 @endif
                             @endforeach
                         </div>
@@ -254,9 +254,9 @@
                     ref="formData"
                     @submit="handleSubmit($event, addToCart)"
                 >
-                    <input 
-                        type="hidden" 
-                        name="product_id" 
+                    <input
+                        type="hidden"
+                        name="product_id"
                         value="{{ $product->id }}"
                     >
 
@@ -265,10 +265,10 @@
                         name="is_buy_now"
                         v-model="is_buy_now"
                     >
-                    
-                    <input 
-                        type="hidden" 
-                        name="quantity" 
+
+                    <input
+                        type="hidden"
+                        name="quantity"
                         :value="qty"
                     >
 
@@ -305,7 +305,7 @@
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
                                 <div class="flex gap-4 items-center mt-4">
-                                    <x-shop::products.star-rating 
+                                    <x-shop::products.star-rating
                                         :value="$avgRatings"
                                         :is-editable=false
                                     />
@@ -327,7 +327,7 @@
 
                                     <span class="text-lg text-[#6E6E6E]">
                                         @if (
-                                            (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive') 
+                                            (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive')
                                             && $product->getTypeInstance()->getTaxCategory()
                                         )
                                             @lang('shop::app.products.view.tax-inclusive')
@@ -487,10 +487,16 @@
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                     if (response.data.redirect) {
-                                        window.location.href= response.data.redirect;
+                                        window.location.href = response.data.redirect;
                                     }
                                 } else {
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+
+                                    if(response.data.data.redirect) {
+                                        setTimeout(() => {
+                                            window.location.href = response.data.data.redirect
+                                        }, 1000)
+                                    }
                                 }
 
                                 this.isStoring[operation] = false;
