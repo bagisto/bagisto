@@ -659,8 +659,8 @@ it('should return redirect result when customer is not logged in when add a down
     // Assert
     $response
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.guest-not-allowed'))
-        ->assertJsonPath('redirect', route('shop.customer.session.index'));
+        ->assertJsonPath('data.message', trans('shop::app.checkout.cart.guest-not-allowed', locale: 'en'))
+        ->assertJsonPath('data.redirect', route('shop.customer.session.index'));
 });
 
 it('should fails the validation error when the product id not provided when add a grouped product to the cart', function () {
