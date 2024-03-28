@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 
 class SubscriptionController extends Controller
 {
@@ -12,8 +13,10 @@ class SubscriptionController extends Controller
      *
      * @return void
      */
-    public function __construct(protected SubscribersListRepository $subscriptionRepository)
-    {
+    public function __construct(
+        protected SubscribersListRepository $subscriptionRepository,
+        protected CustomerRepository $customerRepository
+    ) {
     }
 
     /**
@@ -39,7 +42,7 @@ class SubscriptionController extends Controller
 
         Event::dispatch('customer.subscription.before');
 
-        $customer = auth()->user();
+        $customer = $this->customerRepository->findOneByField('email', $email);
 
         $subscription = $this->subscriptionRepository->updateOrCreate([
             'email'         => $email,
