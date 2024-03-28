@@ -41,19 +41,15 @@ class SubscriptionController extends Controller
 
         $customer = auth()->user();
 
-        if ($subscription) {
-            $subscription = $this->subscriptionRepository->update([
-                'is_subscribed' => 1,
-            ], $subscription->id);
-        } else {
-            $subscription = $this->subscriptionRepository->create([
-                'email'         => $email,
-                'channel_id'    => core()->getCurrentChannel()->id,
-                'is_subscribed' => 1,
-                'token'         => uniqid(),
-                'customer_id'   => $customer->id ?? null,
-            ]);
-        }
+        $subscription = $this->subscriptionRepository->updateOrCreate([
+            'email'         => $email,
+            'channel_id'    => core()->getCurrentChannel()->id,
+            'is_subscribed' => 1,
+            'token'         => uniqid(),
+            'customer_id'   => $customer->id ?? null,
+        ], [
+            'email' => $email,
+        ]);
 
         if ($customer) {
             $customer->subscribed_to_news_letter = 1;
