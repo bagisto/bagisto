@@ -8,14 +8,14 @@ use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
 
 it('returns a successful response', function () {
-    // Act & Assert
+    // Act and Assert
     get(route('shop.customer.session.index'))
         ->assertOk()
         ->assertSeeText(trans('shop::app.customers.login-form.page-title'));
 });
 
 it('should fails validation errors when email and password not provided when login', function () {
-    // Act & Assert
+    // Act and Assert
     postJson(route('shop.customer.session.create'))
         ->assertJsonValidationErrorFor('email')
         ->assertJsonValidationErrorFor('password')
@@ -23,7 +23,7 @@ it('should fails validation errors when email and password not provided when log
 });
 
 it('should fails validation errors when email is not valid', function () {
-    // Act & Assert
+    // Act and Assert
     postJson(route('shop.customer.session.create'), [
         'email'    => fake()->word(),
         'password' => 'shop123',
@@ -33,7 +33,7 @@ it('should fails validation errors when email is not valid', function () {
 });
 
 it('should fails validation errors when password length not valid', function () {
-    // Act & Assert
+    // Act and Assert
     postJson(route('shop.customer.session.create'), [
         'email'    => fake()->email(),
         'password' => 'shop',
@@ -48,7 +48,7 @@ it('successfully logins a customer', function () {
         'password' => Hash::make($password = 'admin123'),
     ]);
 
-    // Act & Assert
+    // Act and Assert
     post(route('shop.customer.session.create'), [
         'email'    => $customer->email,
         'password' => $password,
@@ -65,7 +65,7 @@ it('fails to log in a customer if the email is invalid', function () {
         'password' => Hash::make($password = 'admin123'),
     ]);
 
-    // Act & Assert
+    // Act and Assert
     post(route('shop.customer.session.create'), [
         'email'    => 'wrong@email.com',
         'password' => $password,
@@ -78,7 +78,7 @@ it('fails to log in a customer if the password is invalid', function () {
     // Arrange
     $customer = (new CustomerFaker())->factory()->create();
 
-    // Act & Assert
+    // Act and Assert
     post(route('shop.customer.session.create'), [
         'email'    => $customer->email,
         'password' => 'WRONG_PASSWORD',

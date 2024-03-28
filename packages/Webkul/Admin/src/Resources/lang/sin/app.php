@@ -1601,6 +1601,7 @@ return [
             'events' => [
                 'index' => [
                     'create-btn' => 'සළායකයන් සාදන්න',
+                    'event'      => 'සිද්ධිය',
                     'title'      => 'සළාය',
 
                     'datagrid' => [
@@ -2274,15 +2275,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'කේතය',
-                    'create-btn'     => 'මුදල් සාදන්න',
-                    'decimal'        => 'දශක',
-                    'delete-warning' => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
-                    'general'        => 'සාමාන්ය',
-                    'name'           => 'නම',
-                    'save-btn'       => 'මුදල් සුරකින්න',
-                    'symbol'         => 'සංක්‍රීයය',
-                    'title'          => 'නව මුදල් සාදන්න',
+                    'code'              => 'කේතය',
+                    'create-btn'        => 'මුදල් සාදන්න',
+                    'currency-position' => 'වම් ස්ථානය',
+                    'decimal'           => 'දශක',
+                    'decimal-separator' => 'දශම බෙදුම්කරු',
+                    'delete-warning'    => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
+                    'general'           => 'සාමාන්ය',
+                    'group-separator'   => 'කණ්ඩායම් බවට වෙනස්වීමක්',
+                    'name'              => 'නම',
+                    'save-btn'          => 'මුදල් සුරකින්න',
+                    'symbol'            => 'සංක්‍රීයය',
+                    'title'             => 'නව මුදල් සාදන්න',
                 ],
 
                 'edit' => [
@@ -2913,6 +2917,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'අගය: :value',
                 'value-input'                   => 'අගය',
+
                 'services-content'              => [
                     'add-btn'            => 'සේවාවන් එක් කරන්න',
                     'channels'           => 'චැනල්ස්',

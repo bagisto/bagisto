@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'कोड',
-                    'create-btn'     => 'मुद्रा बनाएं',
-                    'decimal'        => 'दशमलव',
-                    'delete-warning' => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
-                    'general'        => 'सामान्य',
-                    'name'           => 'नाम',
-                    'save-btn'       => 'मुद्रा सहेजें',
-                    'symbol'         => 'प्रतीक',
-                    'title'          => 'नई मुद्रा बनाएं',
+                    'code'              => 'कोड',
+                    'create-btn'        => 'मुद्रा बनाएं',
+                    'currency-position' => 'मुद्रा स्थिति',
+                    'decimal'           => 'दशमलव',
+                    'decimal-separator' => 'दशमलव विभाजक',
+                    'delete-warning'    => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
+                    'general'           => 'सामान्य',
+                    'group-separator'   => 'समूह विभाजक',
+                    'name'              => 'नाम',
+                    'save-btn'          => 'मुद्रा सहेजें',
+                    'symbol'            => 'प्रतीक',
+                    'title'             => 'नई मुद्रा बनाएं',
                 ],
 
                 'edit' => [
@@ -2914,6 +2917,7 @@ return [
                 'url'                           => 'यूआरएल',
                 'value'                         => 'मूल्य: :value',
                 'value-input'                   => 'मूल्य',
+
                 'services-content'              => [
                     'add-btn'            => 'सेवाएं जोड़ें',
                     'channels'           => 'चैनल',
@@ -3837,7 +3841,6 @@ return [
                 'title'                  => 'ए.आई. सहायता',
                 'vicuna'                 => 'विकूना',
             ],
-
         ],
     ],
 
@@ -3938,7 +3941,6 @@ return [
         'no-records' => 'निर्यात के लिए कुछ नहीं है',
         'xls'        => 'XLS',
         'xlsx'       => 'एक्सएलएसएक्स',
-
     ],
 
     'validations' => [
