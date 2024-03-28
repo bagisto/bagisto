@@ -31,7 +31,7 @@ class SubscriptionController extends Controller
 
         $subscription = $this->subscriptionRepository->findOneByField('email', $email);
 
-        if ($subscription) {
+        if ($subscription?->is_subscribed) {
             session()->flash('error', trans('shop::app.subscription.already'));
 
             return redirect()->back();
@@ -41,13 +41,19 @@ class SubscriptionController extends Controller
 
         $customer = auth()->user();
 
-        $subscription = $this->subscriptionRepository->create([
-            'email'         => $email,
-            'channel_id'    => core()->getCurrentChannel()->id,
-            'is_subscribed' => 1,
-            'token'         => uniqid(),
-            'customer_id'   => $customer->id ?? null,
-        ]);
+        if ($subscription) {
+            $subscription = $this->subscriptionRepository->update([
+                'is_subscribed' => 1,
+            ], $subscription->id);
+        } else {
+            $subscription = $this->subscriptionRepository->create([
+                'email'         => $email,
+                'channel_id'    => core()->getCurrentChannel()->id,
+                'is_subscribed' => 1,
+                'token'         => uniqid(),
+                'customer_id'   => $customer->id ?? null,
+            ]);
+        }
 
         if ($customer) {
             $customer->subscribed_to_news_letter = 1;
