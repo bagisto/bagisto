@@ -19,7 +19,6 @@ use Webkul\Sales\Models\OrderPayment;
 use Webkul\Shop\Mail\Order\CreatedNotification as ShopOrderCreatedNotification;
 
 use function Pest\Laravel\postJson;
-use function PHPUnit\Framework\assertJson;
 
 it('should handle certain validation errors when storing the guest user address for cart billing and shipping', function () {
     // Arrange
@@ -1165,7 +1164,6 @@ it('should fails the validation error when shipping method not providing when st
         ->getSimpleProductFactory()
         ->create();
 
-   
     $cart = Cart::factory()->create();
 
     $additional = [
@@ -1210,7 +1208,6 @@ it('should fails the validation error when shipping method not providing when st
         ->assertUnprocessable();
 });
 
-
 it('should fails the validation error when shipping method not providing when store the shipping method for the customer', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -1227,7 +1224,6 @@ it('should fails the validation error when shipping method not providing when st
         ->getSimpleProductFactory()
         ->create();
 
-   
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
@@ -1331,12 +1327,12 @@ it('should store the shipping method for guest user', function () {
 
     CartAddress::factory()->create([
         'cart_id'      => $cart->id,
-        'address_type' => CartAddress::ADDRESS_TYPE_BILLING
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     CartAddress::factory()->create([
         'cart_id'      => $cart->id,
-        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
     cart()->setCart($cart);
@@ -1497,7 +1493,7 @@ it('should fails the validation error when store the payment method for guest us
         'type'              => $product->type,
         'additional'        => $additional,
     ]);
-    
+
     CartAddress::factory()->create([
         'cart_id'      => $cart->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
@@ -1562,7 +1558,7 @@ it('should store the payment method for guest user', function () {
         'type'              => $product->type,
         'additional'        => $additional,
     ]);
-        
+
     $cartBillingAddress = CartAddress::factory()->create([
         'cart_id'      => $cart->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
@@ -1698,7 +1694,7 @@ it('should store the payment method for customer', function () {
         'type'              => $product->type,
         'additional'        => $additional,
     ]);
-        
+
     $cartBillingAddress = CartAddress::factory()->create([
         'cart_id'      => $cart->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
@@ -1810,22 +1806,22 @@ it('should place a simple product order for a guest user', function () {
         ->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'is_guest'              => 1,
-        'shipping_method'       => 'free_free',
-        'customer_email'        => fake()->email(),
-        'customer_first_name'   => fake()->firstName(),
-        'customer_last_name'    => fake()->lastName(),
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'is_guest'                 => 1,
+        'shipping_method'          => 'free_free',
+        'customer_email'           => fake()->email(),
+        'customer_first_name'      => fake()->firstName(),
+        'customer_last_name'       => fake()->lastName(),
     ]);
 
     $cartItem = CartItem::factory()->create([
@@ -1881,6 +1877,7 @@ it('should place a simple product order for a guest user', function () {
 
     // Act and Assert
     postJson(route('shop.checkout.onepage.orders.store'))
+        ->dd()
         ->assertOk()
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
@@ -2033,22 +2030,22 @@ it('should place a simple product order for a guest user and send email to the g
         ->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'is_guest'              => 1,
-        'shipping_method'       => 'free_free',
-        'customer_email'        => fake()->email(),
-        'customer_first_name'   => fake()->firstName(),
-        'customer_last_name'    => fake()->lastName(),
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'is_guest'                 => 1,
+        'shipping_method'          => 'free_free',
+        'customer_email'           => fake()->email(),
+        'customer_first_name'      => fake()->firstName(),
+        'customer_last_name'       => fake()->lastName(),
     ]);
 
     $cartItem = CartItem::factory()->create([
@@ -2257,23 +2254,23 @@ it('should place a simple product order for a customer', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'shipping_method'          => 'free_free',
+        'customer_id'              => $customer->id,
+        'is_active'                => 1,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $cartItem = CartItem::factory()->create([
@@ -2499,23 +2496,23 @@ it('should place a simple product order for a customer and send email to the cus
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'shipping_method'          => 'free_free',
+        'customer_id'              => $customer->id,
+        'is_active'                => 1,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $cartItem = CartItem::factory()->create([
@@ -2759,22 +2756,22 @@ it('should place a configurable product order for a guest user', function () {
     }
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'is_guest'              => 1,
-        'shipping_method'       => 'free_free',
-        'customer_email'        => fake()->email(),
-        'customer_first_name'   => fake()->firstName(),
-        'customer_last_name'    => fake()->lastName(),
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'is_guest'                 => 1,
+        'shipping_method'          => 'free_free',
+        'customer_email'           => fake()->email(),
+        'customer_first_name'      => fake()->firstName(),
+        'customer_last_name'       => fake()->lastName(),
     ]);
 
     $cartTemp = new \stdClass();
@@ -3053,22 +3050,22 @@ it('should place a configurable product order for a guest user and send email to
     }
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'is_guest'              => 1,
-        'shipping_method'       => 'free_free',
-        'customer_email'        => fake()->email(),
-        'customer_first_name'   => fake()->firstName(),
-        'customer_last_name'    => fake()->lastName(),
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'is_guest'                 => 1,
+        'shipping_method'          => 'free_free',
+        'customer_email'           => fake()->email(),
+        'customer_first_name'      => fake()->firstName(),
+        'customer_last_name'       => fake()->lastName(),
     ]);
 
     $cartTemp = new \stdClass();
@@ -3348,23 +3345,23 @@ it('should place a configurable product order for a customer', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'shipping_method'          => 'free_free',
+        'customer_id'              => $customer->id,
+        'is_active'                => 1,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $cartTemp = new \stdClass();
@@ -3598,23 +3595,23 @@ it('should place a configurable product order for a customer and send email to t
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'shipping_method'          => 'free_free',
+        'customer_id'              => $customer->id,
+        'is_active'                => 1,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $cartTemp = new \stdClass();
@@ -3858,21 +3855,21 @@ it('should place a virtual product order for a guest user', function () {
         'type'              => $product->type,
         'weight'            => 1,
         'cart_id'           => $cart = Cart::factory()->create([
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'base_grand_total'      => $price = $product->price,
-            'base_sub_total'        => $price,
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price,
-            'sub_total'	            => $price,
-            'is_guest'              => 1,
-            'customer_email'        => fake()->email(),
-            'customer_first_name'   => fake()->firstName(),
-            'customer_last_name'    => fake()->lastName(),
+            'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+            'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'       => $baseCurrencyCode,
+            'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+            'base_grand_total'         => $price = $product->price,
+            'base_sub_total'           => $price,
+            'channel_id'               => core()->getCurrentChannel()->id,
+            'items_count'              => 1,
+            'items_qty'                => 1,
+            'grand_total'              => $price,
+            'sub_total'                => $price,
+            'is_guest'                 => 1,
+            'customer_email'           => fake()->email(),
+            'customer_first_name'      => fake()->firstName(),
+            'customer_last_name'       => fake()->lastName(),
         ]),
     ]);
 
@@ -4027,21 +4024,21 @@ it('should place a virtual product order for a guest user and send email to the 
         'type'              => $product->type,
         'weight'            => 1,
         'cart_id'           => $cart = Cart::factory()->create([
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'base_grand_total'      => $price = $product->price,
-            'base_sub_total'        => $price,
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price,
-            'sub_total'	            => $price,
-            'is_guest'              => 1,
-            'customer_email'        => fake()->email(),
-            'customer_first_name'   => fake()->firstName(),
-            'customer_last_name'    => fake()->lastName(),
+            'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+            'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'       => $baseCurrencyCode,
+            'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+            'base_grand_total'         => $price = $product->price,
+            'base_sub_total'           => $price,
+            'channel_id'               => core()->getCurrentChannel()->id,
+            'items_count'              => 1,
+            'items_qty'                => 1,
+            'grand_total'              => $price,
+            'sub_total'                => $price,
+            'is_guest'                 => 1,
+            'customer_email'           => fake()->email(),
+            'customer_first_name'      => fake()->firstName(),
+            'customer_last_name'       => fake()->lastName(),
         ]),
     ]);
 
@@ -4197,22 +4194,22 @@ it('should place a virtual product order for a customer', function () {
         'type'              => $product->type,
         'weight'            => 1,
         'cart_id'           => $cart = Cart::factory()->create([
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'base_grand_total'      => $price = $product->price,
-            'base_sub_total'        => $price,
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price,
-            'sub_total'	            => $price,
-            'customer_id'           => $customer->id,
-            'is_active'             => 1,
-            'customer_email'        => $customer->email,
-            'customer_first_name'   => $customer->first_name,
-            'customer_last_name'    => $customer->last_name,
+            'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+            'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'       => $baseCurrencyCode,
+            'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+            'base_grand_total'         => $price = $product->price,
+            'base_sub_total'           => $price,
+            'channel_id'               => core()->getCurrentChannel()->id,
+            'items_count'              => 1,
+            'items_qty'                => 1,
+            'grand_total'              => $price,
+            'sub_total'                => $price,
+            'customer_id'              => $customer->id,
+            'is_active'                => 1,
+            'customer_email'           => $customer->email,
+            'customer_first_name'      => $customer->first_name,
+            'customer_last_name'       => $customer->last_name,
         ]),
     ]);
 
@@ -4372,22 +4369,22 @@ it('should place a virtual product order for a customer and send email to the us
         'type'              => $product->type,
         'weight'            => 1,
         'cart_id'           => $cart = Cart::factory()->create([
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'base_grand_total'      => $price = $product->price,
-            'base_sub_total'        => $price,
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price,
-            'sub_total'	            => $price,
-            'customer_id'           => $customer->id,
-            'is_active'             => 1,
-            'customer_email'        => $customer->email,
-            'customer_first_name'   => $customer->first_name,
-            'customer_last_name'    => $customer->last_name,
+            'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+            'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'       => $baseCurrencyCode,
+            'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+            'base_grand_total'         => $price = $product->price,
+            'base_sub_total'           => $price,
+            'channel_id'               => core()->getCurrentChannel()->id,
+            'items_count'              => 1,
+            'items_qty'                => 1,
+            'grand_total'              => $price,
+            'sub_total'                => $price,
+            'customer_id'              => $customer->id,
+            'is_active'                => 1,
+            'customer_email'           => $customer->email,
+            'customer_first_name'      => $customer->first_name,
+            'customer_last_name'       => $customer->last_name,
         ]),
     ]);
 
@@ -4542,21 +4539,21 @@ it('should place a downloadable product order for a customer and send email to t
         ->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'is_guest'              => 1,
-        'customer_email'        => fake()->email(),
-        'customer_first_name'   => fake()->firstName(),
-        'customer_last_name'    => fake()->lastName(),
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'is_guest'                 => 1,
+        'customer_email'           => fake()->email(),
+        'customer_first_name'      => fake()->firstName(),
+        'customer_last_name'       => fake()->lastName(),
     ]);
 
     $cartTemp = new \stdClass();
@@ -4715,21 +4712,21 @@ it('should place a downloadable product order for a customer', function () {
         ->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'is_guest'              => 1,
-        'customer_email'        => fake()->email(),
-        'customer_first_name'   => fake()->firstName(),
-        'customer_last_name'    => fake()->lastName(),
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'is_guest'                 => 1,
+        'customer_email'           => fake()->email(),
+        'customer_first_name'      => fake()->firstName(),
+        'customer_last_name'       => fake()->lastName(),
     ]);
 
     $cartTemp = new \stdClass();
@@ -4884,21 +4881,21 @@ it('should not return the cash on delivery payment method if product is download
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'customer_id'           => $customer->id,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'customer_id'              => $customer->id,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
@@ -5019,21 +5016,21 @@ it('should not return the shipping methods if product is downloadable', function
     ]);
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'customer_id'           => $customer->id,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'customer_id'              => $customer->id,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $cartTemp = new \stdClass();
@@ -5147,21 +5144,21 @@ it('should not return the cash on delivery payment method if product is virtual'
     ]);
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'customer_id'           => $customer->id,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'customer_id'              => $customer->id,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $cartTemp = new \stdClass();
@@ -5277,21 +5274,21 @@ it('should not return the shipping methods if product is virtual', function () {
     ]);
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'customer_id'           => $customer->id,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $product->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'customer_id'              => $customer->id,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $cartTemp = new \stdClass();
@@ -5424,23 +5421,23 @@ it('should place order with two products with simple and configurable product ty
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $configurableProduct->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $configurableProduct->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'shipping_method'          => 'free_free',
+        'customer_id'              => $customer->id,
+        'is_active'                => 1,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $cartTemp = new \stdClass();
@@ -5704,23 +5701,23 @@ it('should place order with two products with simple and grouped product type', 
     $data['grand_total'][] = (float) $simpleProduct->price;
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 5,
-        'items_qty'             => array_sum($data['qty']),
-        'grand_total'           => $price = array_sum($data['grand_total']),
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 5,
+        'items_qty'                => array_sum($data['qty']),
+        'grand_total'              => $price = array_sum($data['grand_total']),
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'shipping_method'          => 'free_free',
+        'customer_id'              => $customer->id,
+        'is_active'                => 1,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     $cartTemp = new \stdClass();
@@ -5933,23 +5930,23 @@ it('should place order with two products with simple and downloadable product ty
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $downloadableProduct->price + $simpleProduct->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
-        'shipping_method'       => 'free_free',
+        'channel_id'               => core()->getCurrentChannel()->id,
+        'global_currency_code'     => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'       => $baseCurrencyCode,
+        'channel_currency_code'    => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'       => core()->getCurrentCurrencyCode(),
+        'items_count'              => 1,
+        'items_qty'                => 1,
+        'grand_total'              => $price = $downloadableProduct->price + $simpleProduct->price,
+        'base_grand_total'         => $price,
+        'sub_total'                => $price,
+        'base_sub_total'           => $price,
+        'customer_id'              => $customer->id,
+        'is_active'                => 1,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
+        'shipping_method'          => 'free_free',
     ]);
 
     $cartTemp = new \stdClass();
