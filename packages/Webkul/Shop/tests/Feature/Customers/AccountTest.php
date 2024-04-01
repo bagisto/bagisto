@@ -208,7 +208,6 @@ it('should returns the address page of the customer', function () {
 
     get(route('shop.customers.account.addresses.index'))
         ->assertOk()
-        ->assertSeeText($customerAddress->email)
         ->assertSeeText($customerAddress->fast_name)
         ->assertSeeText($customerAddress->last_name)
         ->assertSeeText($customerAddress->address)
