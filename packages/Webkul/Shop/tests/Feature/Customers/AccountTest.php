@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
@@ -44,11 +45,19 @@ it('should fails the validations error when certain inputs are not provided when
     // Act and Assert
     $this->loginAsCustomer();
 
-    postJson(route('shop.customers.account.profile.update'))
+    postJson(route('shop.customers.account.profile.update'), [
+        'gender'                    => 'UNKNOWN_GENDER',
+        'date_of_birth'             => now()->tomorrow()->toDateString(),
+        'email'                     => 'WRONG_EMAIL_FORMAT',
+        'image'                     => 'INVALID_FORMAT_IMAGE',
+    ])
         ->assertJsonValidationErrorFor('first_name')
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('gender')
         ->assertJsonValidationErrorFor('phone')
+        ->assertJsonValidationErrorFor('date_of_birth')
+        ->assertJsonValidationErrorFor('email')
+        ->assertJsonValidationErrorFor('image')
         ->assertUnprocessable();
 });
 
@@ -57,13 +66,18 @@ it('should update the customer', function () {
     $customer = $this->loginAsCustomer();
 
     postJson(route('shop.customers.account.profile.update'), [
-        'first_name'        => $firstName = fake()->firstName(),
-        'last_name'         => $lastName = fake()->lastName(),
-        'gender'            => $gender = fake()->randomElement(['Other', 'Male', 'Female']),
-        'email'             => $customer->email,
-        'status'            => 1,
-        'customer_group_id' => 2,
-        'phone'             => $phone = fake()->e164PhoneNumber(),
+        'first_name'                => $firstName = 'test',
+        'last_name'                 => $lastName = fake()->lastName(),
+        'gender'                    => $gender = fake()->randomElement(['Other', 'Male', 'Female']),
+        'email'                     => $customer->email,
+        'status'                    => 1,
+        'customer_group_id'         => 2,
+        'phone'                     => $phone = fake()->e164PhoneNumber(),
+        'date_of_birth'             => now()->subYear(20)->toDateString(),
+        'subscribed_to_news_letter' => true,
+        'image'                     => [
+            UploadedFile::fake()->image('TEST.png'),
+        ],
     ])
         ->assertRedirect(route('shop.customers.account.profile.index'));
 
