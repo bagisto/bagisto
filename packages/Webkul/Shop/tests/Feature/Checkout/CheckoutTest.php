@@ -1841,7 +1841,7 @@ it('should place a simple product order for a guest user', function () {
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartPayment::factory()->create([
+    $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
         'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
@@ -1868,93 +1868,17 @@ it('should place a simple product order for a guest user', function () {
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
+    $this->assertCart($cart);
+
+    $this->assertCartItem($cartItem);
+
+    $this->assertCartPayment($cartPayment);
+
+    $this->assertAddress($cartBillingAddress);
+
+    $this->assertAddress($cartShippingAddress);
+
     $this->assertModelWise([
-        Cart::class => [
-            [
-                'id'                  => $cart->id,
-                'customer_email'      => $cart->customer_email,
-                'customer_first_name' => $cart->customer_first_name,
-                'customer_last_name'  => $cart->customer_last_name,
-                'shipping_method'     => $cart->shipping_method,
-                'customer_id'         => null,
-                'channel_id'          => $cart->channel_id,
-                'is_active'           => 0,
-                'grand_total'         => $cart->grand_total,
-                'base_grand_total'    => $cart->base_grand_total,
-                'items_count'         => $cart->items_count,
-                'items_qty'           => $cart->items_qty,
-                'sub_total'           => $cart->sub_total,
-            ],
-        ],
-
-        CartItem::class => [
-            [
-                'cart_id'           => $cart->id,
-                'product_id'        => $product->id,
-                'sku'               => $product->sku,
-                'quantity'          => $additional['quantity'],
-                'name'              => $product->name,
-                'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-                'base_price'        => $price,
-                'total'             => $convertedPrice * $additional['quantity'],
-                'base_total'        => $price * $additional['quantity'],
-                'weight'            => $product->weight ?? 0,
-                'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
-                'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-                'type'              => $product->type,
-            ],
-        ],
-
-        CartPayment::class => [
-            [
-                'method'       => $paymentMethod,
-                'cart_id'      => $cart->id,
-                'method_title' => $methodTitle,
-            ],
-        ],
-
-        CartAddress::class => [
-            [
-                'customer_id'      => null,
-                'first_name'       => $cartBillingAddress->first_name,
-                'last_name'        => $cartBillingAddress->last_name,
-                'gender'           => $cartBillingAddress->gender,
-                'company_name'     => $cartBillingAddress->company_name,
-                'address'          => $cartBillingAddress->address,
-                'city'             => $cartBillingAddress->city,
-                'state'            => $cartBillingAddress->state,
-                'country'          => $cartBillingAddress->country,
-                'postcode'         => $cartBillingAddress->postcode,
-                'email'            => $cartBillingAddress->email,
-                'phone'            => $cartBillingAddress->phone,
-                'vat_id'           => $cartBillingAddress->vat_id,
-                'default_address'  => $cartBillingAddress->default_address,
-                'use_for_shipping' => $cartBillingAddress->use_for_shipping,
-                'address_type'     => $cartBillingAddress->address_type,
-                'cart_id'          => $cart->id,
-            ],
-        ],
-
-        CartAddress::class => [
-            [
-                'address_type' => $cartShippingAddress->address_type,
-                'cart_id'      => $cart->id,
-                'customer_id'  => null,
-                'first_name'   => $cartShippingAddress->first_name,
-                'last_name'    => $cartShippingAddress->last_name,
-                'gender'       => $cartShippingAddress->gender,
-                'company_name' => $cartShippingAddress->company_name,
-                'address'      => $cartShippingAddress->address,
-                'city'         => $cartShippingAddress->city,
-                'state'        => $cartShippingAddress->state,
-                'country'      => $cartShippingAddress->country,
-                'postcode'     => $cartShippingAddress->postcode,
-                'email'        => $cartShippingAddress->email,
-                'phone'        => $cartShippingAddress->phone,
-                'vat_id'       => $cartShippingAddress->vat_id,
-            ],
-        ],
-
         Order::class => [
             [
                 'status'               => Order::STATUS_PENDING,

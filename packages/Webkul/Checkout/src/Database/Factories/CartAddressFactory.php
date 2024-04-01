@@ -26,7 +26,6 @@ class CartAddressFactory extends Factory
             'last_name'        => $this->faker->lastName(),
             'email'            => $this->faker->email(),
             'country'          => $this->faker->countryCode(),
-            'state'            => $this->faker->state(),
             'state'            => $this->faker->randomElement(['Delhi', 'Mumbai', 'Kolkata', 'Rajasthan']),
             'city'             => $this->faker->city(),
             'postcode'         => $this->faker->numerify('######'),
