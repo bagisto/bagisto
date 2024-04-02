@@ -13,13 +13,6 @@ use Webkul\Core\Eloquent\Repository;
 class CategoryRepository extends Repository
 {
     /**
-     * Static pagination count.
-     *
-     * @var int
-     */
-    const COUNT = 10;
-
-    /**
      * Specify model class name.
      */
     public function model(): string
