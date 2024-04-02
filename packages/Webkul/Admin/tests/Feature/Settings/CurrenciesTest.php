@@ -86,7 +86,7 @@ it('should update the specified currency', function () {
 
     putJson(route('admin.settings.currencies.update'), [
         'id'   => $currency->id,
-        'code' => $code = fake()->currencyCode(),
+        'code' => $code = fake()->randomElement(['EUR', 'GBP', 'JPY', 'AUD', 'CHF', 'CAD', 'CNY', 'BRL']),
         'name' => $name = fake()->name(),
     ])
         ->assertOk()
