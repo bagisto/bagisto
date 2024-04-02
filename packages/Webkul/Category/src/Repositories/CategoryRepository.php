@@ -304,7 +304,8 @@ class CategoryRepository extends Repository
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getSearchedCategories() {
+    public function getSearchedCategories()
+    {
         return $this->model->scopeQuery(function ($query) {
             return $query
                 ->select('categories.*')
