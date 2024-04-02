@@ -1921,7 +1921,8 @@ it('should place a simple product order for a guest user', function () {
 
         OrderPayment::class => [
             [
-                'method'   => $paymentMethod,
+                'method'       => $paymentMethod,
+                'method_title' => $methodTitle,
             ],
         ],
 
@@ -2081,7 +2082,8 @@ it('should place a simple product order for a guest user and send mail to guest 
 
         OrderPayment::class => [
             [
-                'method'   => $paymentMethod,
+                'method'       => $paymentMethod,
+                'method_title' => $methodTitle,
             ],
         ],
 
@@ -2251,7 +2253,8 @@ it('should place a simple product order for a customer', function () {
 
         OrderPayment::class => [
             [
-                'method'   => $paymentMethod,
+                'method'       => $paymentMethod,
+                'method_title' => $methodTitle,
             ],
         ],
 
@@ -2418,7 +2421,8 @@ it('should place a simple product order for a customer and send email to the cus
 
         OrderPayment::class => [
             [
-                'method'   => $paymentMethod,
+                'method'       => $paymentMethod,
+                'method_title' => $methodTitle,
             ],
         ],
 
@@ -2596,7 +2600,8 @@ it('should place a configurable product order for a guest user', function () {
 
         OrderPayment::class => [
             [
-                'method'   => $paymentMethod,
+                'method'       => $paymentMethod,
+                'method_title' => $methodTitle,
             ],
         ],
 
@@ -2777,7 +2782,8 @@ it('should place a configurable product order for a guest user and send email to
 
         OrderPayment::class => [
             [
-                'method'   => $paymentMethod,
+                'method'       => $paymentMethod,
+                'method_title' => $methodTitle,
             ],
         ],
 
@@ -2964,7 +2970,8 @@ it('should place a configurable product order for a customer', function () {
 
         OrderPayment::class => [
             [
-                'method'   => $paymentMethod,
+                'method'       => $paymentMethod,
+                'method_title' => $methodTitle,
             ],
         ],
 
@@ -3147,7 +3154,8 @@ it('should place a configurable product order for a customer and send email to t
 
         OrderPayment::class => [
             [
-                'method'   => $paymentMethod,
+                'method'       => $paymentMethod,
+                'method_title' => $methodTitle,
             ],
         ],
 

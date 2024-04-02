@@ -116,7 +116,7 @@ it('should update the existing attribute families', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.families.update', $attributeFamily->id), [
-        'code' => $updatedCode = strtolower(fake()->words(1, true)),
+        'code' => $updatedCode = fake()->numerify('code#######'),
         'name' => $attributeFamily->name,
     ])
         ->assertRedirectToRoute('admin.catalog.families.index')
