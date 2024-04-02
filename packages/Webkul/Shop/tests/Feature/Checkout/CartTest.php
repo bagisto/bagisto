@@ -576,8 +576,6 @@ it('should fails the validation error when the product id not provided when add 
 
 it('should add a downloadable product to the cart', function () {
     // Arrange
-    $this->loginAsCustomer();
-
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -602,6 +600,8 @@ it('should add a downloadable product to the cart', function () {
     ]))->getDownloadableProductFactory()->create();
 
     // Act and Assert
+    $this->loginAsCustomer();
+
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'quantity'   => 1,

@@ -83,8 +83,6 @@ it('should fails the validation error when the certain inputs not provided when 
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for all customer group type', function () {
     // Arrange
-    $this->loginAsCustomer();
-
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -137,6 +135,8 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
     ]);
 
     // Act and Assert
+    $this->loginAsCustomer();
+
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'quantity'   => 1,
