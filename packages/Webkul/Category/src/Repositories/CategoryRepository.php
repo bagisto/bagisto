@@ -13,6 +13,13 @@ use Webkul\Core\Eloquent\Repository;
 class CategoryRepository extends Repository
 {
     /**
+     * Static pagination count.
+     *
+     * @var int
+     */
+    const COUNT = 10;
+
+    /**
      * Specify model class name.
      */
     public function model(): string
@@ -240,8 +247,6 @@ class CategoryRepository extends Repository
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type.'.'.$imageId;
 
-                $dir = 'category/'.$category->id;
-
                 if (request()->hasFile($file)) {
                     if ($category->{$type}) {
                         Storage::delete($category->{$type});
@@ -292,6 +297,24 @@ class CategoryRepository extends Repository
         }
 
         return $trimmed;
+    }
+
+    /**
+     * Get searched categories.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getSearchedCategories() {
+        return $this->model->scopeQuery(function ($query) {
+            return $query
+                ->select('categories.*')
+                ->leftJoin('category_translations', function ($query) {
+                    $query->on('categories.id', '=', 'category_translations.category_id')
+                        ->where('category_translations.locale', app()->getLocale());
+                })
+                ->where('category_translations.name', 'like', '%'.urldecode(request()->input('query')).'%')
+                ->orderBy('created_at', 'desc');
+        })->paginate(self::COUNT);
     }
 
     /**
