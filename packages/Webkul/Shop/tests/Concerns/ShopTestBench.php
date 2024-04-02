@@ -2,11 +2,18 @@
 
 namespace Webkul\Shop\Tests\Concerns;
 
+use Webkul\CartRule\Contracts\CartRule;
+use Webkul\CartRule\Contracts\CartRuleCoupon;
+use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\Checkout\Contracts\Cart;
 use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Checkout\Contracts\CartPayment;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
+use Webkul\Sales\Contracts\InvoiceItem;
+use Webkul\Sales\Contracts\Order;
+use Webkul\Sales\Contracts\OrderItem;
+use Webkul\Sales\Contracts\OrderPayment;
 
 trait ShopTestBench
 {
@@ -171,5 +178,288 @@ trait ShopTestBench
             'vat_id'            => $address->vat_id,
             'address'           => $address->address,
         ]);
+    }
+
+    /**
+     * Assert Order.
+     */
+    public function assertOrder(Order $order): void
+    {
+        $order->refresh();
+
+        $this->assertModelWise([
+            Order::class => [
+                [
+                    'status'                        => $order->status,
+                    'channel_name'                  => $order->channel_name,
+                    'is_guest'                      => $order->is_guest,
+                    'customer_email'                => $order->customer_email,
+                    'customer_first_name'           => $order->customer_first_name,
+                    'customer_last_name'            => $order->customer_last_name,
+                    'shipping_method'               => $order->shipping_method,
+                    'shipping_title'                => $order->shipping_title,
+                    'shipping_description'          => $order->shipping_description,
+                    'coupon_code'                   => $order->coupon_code,
+                    'is_gift'                       => $order->is_gift,
+                    'total_item_count'              => $order->total_item_count,
+                    'total_qty_ordered'             => $order->total_qty_ordered,
+                    'base_currency_code'            => $order->base_currency_code,
+                    'channel_currency_code'         => $order->channel_currency_code,
+                    'order_currency_code'           => $order->order_currency_code,
+                    'grand_total'                   => $order->grand_total,
+                    'base_grand_total'              => $order->base_grand_total,
+                    'grand_total_invoiced'          => $order->grand_total_invoiced,
+                    'base_grand_total_invoiced'     => $order->base_grand_total_invoiced,
+                    'grand_total_refunded'          => $order->grand_total_refunded,
+                    'base_grand_total_refunded'     => $order->base_grand_total_refunded,
+                    'sub_total'                     => $order->sub_total,
+                    'base_sub_total'                => $order->base_sub_total,
+                    'sub_total_invoiced'            => $order->sub_total_invoiced,
+                    'grand_total_refunded'          => $order->grand_total_refunded,
+                    'base_grand_total_refunded'     => $order->base_grand_total_refunded,
+                    'sub_total'                     => $order->sub_total,
+                    'base_sub_total'                => $order->base_sub_total,
+                    'sub_total_invoiced'            => $order->sub_total_invoiced,
+                    'base_sub_total_invoiced'       => $order->base_sub_total_invoiced,
+                    'sub_total_refunded'            => $order->sub_total_refunded,
+                    'discount_percent'              => $order->discount_percent,
+                    'discount_amount'               => $order->discount_amount,
+                    'base_discount_amount'          => $order->base_discount_amount,
+                    'discount_invoiced'             => $order->discount_invoiced,
+                    'base_discount_invoiced'        => $order->base_discount_invoiced,
+                    'discount_refunded'             => $order->discount_refunded,
+                    'base_discount_refunded'        => $order->base_discount_refunded,
+                    'tax_amount'                    => $order->tax_amount,
+                    'base_tax_amount'               => $order->base_tax_amount,
+                    'tax_amount_invoiced'           => $order->tax_amount_invoiced,
+                    'base_tax_amount_invoiced'      => $order->base_tax_amount_invoiced,
+                    'tax_amount_refunded'           => $order->tax_amount_refunded,
+                    'base_tax_amount_refunded'      => $order->base_tax_amount_refunded,
+                    'shipping_amount'               => $order->shipping_amount,
+                    'base_shipping_amount'          => $order->base_shipping_amount,
+                    'shipping_invoiced'             => $order->shipping_invoiced,
+                    'base_shipping_invoiced'        => $order->base_shipping_invoiced,
+                    'shipping_refunded'             => $order->shipping_refunded,
+                    'base_shipping_refunded'        => $order->base_shipping_refunded,
+                    'shipping_discount_amount'      => $order->shipping_discount_amount,
+                    'base_shipping_discount_amount' => $order->base_shipping_discount_amount,
+                    'customer_id'                   => $order->customer_id,
+                    'customer_type'                 => $order->customer_type,
+                    'channel_id'                    => $order->channel_id,
+                    'channel_type'                  => $order->channel_type,
+                    'cart_id'                       => $order->cart_id,
+                    'applied_cart_rule_ids'         => $order->applied_cart_rule_ids,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Assert order item.
+     */
+    public function assertOrderItem(OrderItem $orderItem): void
+    {
+        $orderItem->refresh();
+
+        $this->assertModelWise([
+            OrderItem::class => [
+                [
+                    'id'                     => $orderItem->id,
+                    'sku'                    => $orderItem->sku,
+                    'type'                   => $orderItem->type,
+                    'name'                   => $orderItem->name,
+                    'coupon_code'            => $orderItem->coupon_code,
+                    'weight'                 => $orderItem->weight,
+                    'total_weight'           => $orderItem->total_weight,
+                    'qty_ordered'            => $orderItem->qty_ordered,
+                    'qty_shipped'            => $orderItem->qty_shipped,
+                    'qty_invoiced'           => $orderItem->qty_invoiced,
+                    'qty_canceled'           => $orderItem->qty_canceled,
+                    'qty_refunded'           => $orderItem->qty_refunded,
+                    'price'                  => $orderItem->price,
+                    'base_price'             => $orderItem->base_price,
+                    'total'                  => $orderItem->total,
+                    'base_total'             => $orderItem->base_total,
+                    'total_invoiced'         => $orderItem->total_invoiced,
+                    'base_total_invoiced'    => $orderItem->base_total_invoiced,
+                    'amount_refunded'        => $orderItem->amount_refunded,
+                    'base_amount_refunded'   => $orderItem->base_amount_refunded,
+                    'discount_percent'       => $orderItem->discount_percent,
+                    'discount_amount'        => $orderItem->discount_amount,
+                    'base_discount_amount'   => $orderItem->base_discount_amount,
+                    'discount_invoiced'      => $orderItem->discount_invoiced,
+                    'base_discount_invoiced' => $orderItem->base_discount_invoiced,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Assert order payment
+     */
+    public function assertOrderPayment(OrderPayment $orderPayment): void
+    {
+        $orderPayment->refresh();
+
+        $this->assertModelWise([
+            OrderPayment::class => [
+                [
+                    'order_id'     => $orderPayment->order_id,
+                    'method'       => $orderPayment->method,
+                    'method_title' => $orderPayment->method_title,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Assert invoice item.
+     */
+    public function assertInvoiceItem(InvoiceItem $invoiceItem): void
+    {
+        $invoiceItem->refresh();
+
+        $this->assertModelWise([
+            InvoiceItem::class => [
+                [
+                    'id'                   => $invoiceItem->id,
+                    'parent_id'            => $invoiceItem->parent_id,
+                    'name'                 => $invoiceItem->name,
+                    'description'          => $invoiceItem->description,
+                    'sku'                  => $invoiceItem->sku,
+                    'qty'                  => $invoiceItem->qty,
+                    'price'                => $invoiceItem->price,
+                    'base_price'           => $invoiceItem->base_price,
+                    'total'                => $invoiceItem->total,
+                    'base_total'           => $invoiceItem->base_total,
+                    'tax_amount'           => $invoiceItem->tax_amount,
+                    'base_tax_amount'      => $invoiceItem->base_tax_amount,
+                    'discount_percent'     => $invoiceItem->discount_percent,
+                    'discount_amount'      => $invoiceItem->discount_amount,
+                    'base_discount_amount' => $invoiceItem->base_discount_amount,
+                    'product_id'           => $invoiceItem->product_id,
+                    'product_type'         => $invoiceItem->product_type,
+                    'order_item_id'        => $invoiceItem->order_item_id,
+                    'invoice_id'           => $invoiceItem->invoice_id,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Assert Cart Rule.
+     */
+    public function assertCartRule(CartRule $cartRule): void
+    {
+        $cartRule->refresh();
+
+        $this->assertModelWise([
+            CartRule::class => [
+                [
+                    'id'                        => $cartRule->id,
+                    'name'                      => $cartRule->name,
+                    'description'               => $cartRule->description,
+                    'starts_from'               => $cartRule->starts_from,
+                    'ends_till'                 => $cartRule->ends_till,
+                    'status'                    => $cartRule->status,
+                    'coupon_type'               => $cartRule->coupon_type,
+                    'use_auto_generation'       => $cartRule->use_auto_generation,
+                    'usage_per_customer'        => $cartRule->usage_per_customer,
+                    'uses_per_coupon'           => $cartRule->uses_per_coupon,
+                    'times_used'                => $cartRule->times_used,
+                    'condition_type'            => $cartRule->condition_type,
+                    'end_other_rules'           => $cartRule->end_other_rules,
+                    'uses_attribute_conditions' => $cartRule->uses_attribute_conditions,
+                    'action_type'               => $cartRule->action_type,
+                    'discount_amount'           => $cartRule->discount_amount,
+                    'discount_quantity'         => $cartRule->discount_quantity,
+                    'discount_step'             => $cartRule->discount_step,
+                    'apply_to_shipping'         => $cartRule->apply_to_shipping,
+                    'free_shipping'             => $cartRule->free_shipping,
+                    'sort_order'                => $cartRule->sort_order,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Assert cart rule customer group.
+     */
+    public function assertCartRuleCustomerGroup(CartRule $cartRule): void
+    {
+        foreach ($cartRule->cart_rule_customer_groups as $cartRuleCustomerGroup) {
+            $this->assertDatabaseHas('cart_rule_customer_groups', [
+                'cart_rule_id'      => $cartRule->id,
+                'customer_group_id' => $cartRuleCustomerGroup->id,
+            ]);
+        }
+    }
+
+    /**
+     * Assert cart rule.
+     */
+    public function assertCartRuleChannel(CartRule $cartRule): void
+    {
+        foreach ($cartRule->cart_rule_channels as $cartRuleChannel) {
+            $this->assertDatabaseHas('cart_rule_channels', [
+                'cart_rule_id' => $cartRule->id,
+                'channel_id'   => $cartRuleChannel->id,
+            ]);
+        }
+    }
+
+    /**
+     * Assert Cart Rule Coupon.
+     */
+    public function assertCartRuleCoupon(CartRuleCoupon $cartRuleCoupon): void
+    {
+        $cartRuleCoupon->refresh();
+
+        $this->assertModelWise([
+            CartRuleCoupon::class => [
+                [
+                    'code'               => $cartRuleCoupon->code,
+                    'usage_limit'        => $cartRuleCoupon->usage_limit,
+                    'usage_per_customer' => $cartRuleCoupon->usage_per_customer,
+                    'times_used'         => $cartRuleCoupon->times_used,
+                    'type'               => $cartRuleCoupon->type,
+                    'is_primary'         => $cartRuleCoupon->is_primary,
+                    'expired_at'         => $cartRuleCoupon->expired_at,
+                ],
+            ],
+        ]);
+    }
+
+    public function assertCatalogRuleCoupon(CatalogRule $catalogRule)
+    {
+        $catalogRule->refresh();
+
+        $this->assertModelWise([
+            CatalogRule::class => [
+                [
+                    'name'            => $catalogRule->name,
+                    'description'     => $catalogRule->description,
+                    'starts_from'     => $catalogRule->starts_from,
+                    'ends_till'       => $catalogRule->ends_till,
+                    'status'          => $catalogRule->status,
+                    'condition_type'  => $catalogRule->condition_type,
+                    'conditions'      => $catalogRule->conditions,
+                    'end_other_rules' => $catalogRule->end_other_rules,
+                    'action_type'     => $catalogRule->action_type,
+                    'discount_amount' => $catalogRule->discount_amount,
+                    'sort_order'      => $catalogRule->sort_order,
+                ],
+            ],
+        ]);
+    }
+
+    public function assertCatalogRuleChannel(CatalogRule $catalogRule)
+    {
+        foreach ($catalogRule->channels as $catalogRuleChannel) {
+            $this->assertDatabaseHas('catalog_rule_channels', [
+                'catalog_rule_id' => $catalogRule->id,
+                'channel_id'      => $catalogRuleChannel->id,
+            ]);
+        }
     }
 }
