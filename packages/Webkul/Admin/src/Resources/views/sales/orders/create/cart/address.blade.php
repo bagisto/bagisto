@@ -229,7 +229,10 @@
                         </template>
 
                         <!-- Proceed Button -->
-                        <div class="flex justify-end mt-4">
+                        <div
+                            class="flex justify-end mt-4"
+                            v-if="customerSavedAddresses.billing.length"
+                        >
                             <x-admin::button
                                 class="primary-button"
                                 :title="trans('shop::app.checkout.onepage.address.proceed')"
@@ -397,7 +400,7 @@
 
                     if (! address) {
                         if (params.save_address) {
-                            this.createCustomerAddress(params)
+                            this.createCustomerAddress(params, { setErrors })
                                 .then((response) => {
                                     this.addAddressToList(response.data.data);
                                 });
@@ -410,17 +413,19 @@
 
                     if (params.save_address) {
                         if (address.address_type == 'customer') {
-                            this.updateCustomerAddress(params.id, params)
+                            this.updateCustomerAddress(params.id, params, { setErrors })
                                 .then((response) => {
                                     this.updateAddressInList(response.data.data);
-                                });
+                                })
+                                .catch((error) => {});
                         } else {
                             this.removeAddressFromList(params);
 
-                            this.createCustomerAddress(params)
+                            this.createCustomerAddress(params, { setErrors })
                                 .then((response) => {
                                     this.addAddressToList(response.data.data);
-                                });
+                                })
+                                .catch((error) => {});
                         }
                     } else {
                         this.updateAddressInList(params);
@@ -460,7 +465,7 @@
                     this.customerSavedAddresses[this.activeAddressForm] = this.customerSavedAddresses[this.activeAddressForm].filter(address => address.id != params.id);
                 },
 
-                createCustomerAddress(params) {
+                createCustomerAddress(params, { setErrors }) {
                     this.isStoring = true;
 
                     return this.$axios.post('{{ route('admin.customers.customers.addresses.store', $cart->customer_id) }}', params)
@@ -475,12 +480,20 @@
                             this.isStoring = false;
 
                             if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
+                                let errors = {};
+
+                                Object.keys(error.response.data.errors).forEach(key => {
+                                    errors[this.activeAddressForm + '.' + key] = error.response.data.errors[key];
+                                });
+
+                                setErrors(errors);
                             }
+
+                            return Promise.reject(error);
                         });
                 },
 
-                updateCustomerAddress(id, params) {
+                updateCustomerAddress(id, params, { setErrors }) {
                     this.isStoring = true;
 
                     params['default_address'] = this.selectedAddressForEdit.default_address;
@@ -497,8 +510,16 @@
                             this.isStoring = false;
 
                             if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
+                                let errors = {};
+
+                                Object.keys(error.response.data.errors).forEach(key => {
+                                    errors[this.activeAddressForm + '.' + key] = error.response.data.errors[key];
+                                });
+
+                                setErrors(errors);
                             }
+
+                            return Promise.reject(error);
                         });
                 },
 

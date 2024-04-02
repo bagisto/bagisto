@@ -101,7 +101,7 @@
                     <!-- Discount -->
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.coupon.before') !!}
 
-                    <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between">
+                    <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-items-end">
                         <p class="text-base text-gray-600 font-medium">
                             @lang('admin::app.sales.orders.create.cart.summary.apply-coupon')
                         </p>
