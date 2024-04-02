@@ -82,7 +82,7 @@
 
                     minRange: parseInt(this.defaultMinRange ?? 0),
 
-                    maxRange: this.defaultMaxRange ?? 100,
+                    maxRange: parseInt(this.defaultMaxRange ?? 100),
                 };
             },
 
@@ -95,10 +95,47 @@
             },
 
             mounted() {
+                this.init();
+
                 this.handleProgressBar();
             },
 
             methods: {
+                init() {
+                    /**
+                     * If someone is passing invalid props, this case will check first if they are valid, then continue.
+                     */
+                     if (this.isTypeSupported()) {
+                        switch (this.defaultType) {
+                            case 'float':
+                                return {
+                                    formattedAllowedMinRange: parseFloat(this.defaultAllowedMinRange),
+                                    formattedAllowedMaxRange: parseFloat(this.defaultAllowedMaxRange),
+                                    formattedMinRange: parseFloat(this.defaultMinRange),
+                                    formattedMaxRange: parseFloat(this.defaultMaxRange)
+                                }
+
+                            default:
+                                return {
+                                    formattedAllowedMinRange: parseInt(this.defaultAllowedMinRange),
+                                    formattedAllowedMaxRange: parseInt(this.defaultAllowedMaxRange),
+                                    formattedMinRange: parseInt(this.defaultMinRange),
+                                    formattedMaxRange: parseInt(this.defaultMaxRange)
+                                }
+                        }
+                    }
+
+                    /**
+                     * Otherwise, we will load the default parses.
+                     */
+                    return {
+                        formattedAllowedMinRange: this.defaultAllowedMinRange,
+                        formattedAllowedMaxRange: this.defaultAllowedMaxRange,
+                        formattedMinRange: this.defaultMinRange,
+                        formattedMaxRange: this.defaultMaxRange
+                    }
+                },
+
                 getData() {
                     return {
                         allowedMinRange: this.allowedMinRange,
