@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => '代码',
-                    'create-btn'     => '创建货币',
-                    'decimal'        => '小数',
-                    'delete-warning' => '确定要执行此操作吗？',
-                    'general'        => '常规',
-                    'name'           => '名称',
-                    'save-btn'       => '保存货币',
-                    'symbol'         => '符号',
-                    'title'          => '创建新货币',
+                    'code'              => '代码',
+                    'create-btn'        => '创建货币',
+                    'currency-position' => '货币位置',
+                    'decimal'           => '小数',
+                    'decimal-separator' => '小数点分隔符',
+                    'delete-warning'    => '确定要执行此操作吗？',
+                    'general'           => '常规',
+                    'group-separator'   => '分组分隔符',
+                    'name'              => '名称',
+                    'save-btn'          => '保存货币',
+                    'symbol'            => '符号',
+                    'title'             => '创建新货币',
                 ],
 
                 'edit' => [
@@ -2914,6 +2917,7 @@ return [
                 'url'                           => '网址',
                 'value'                         => '值：:value',
                 'value-input'                   => '值',
+
                 'services-content'              => [
                     'add-btn'            => '添加服务',
                     'channels'           => '渠道',
@@ -3073,6 +3077,8 @@ return [
             'save-btn'                     => '保存配置',
             'save-message'                 => '配置保存成功',
             'search'                       => '搜索',
+            'select-country'               => '选择国家',
+            'select-state'                 => '选择州',
             'title'                        => '配置',
 
             'general' => [

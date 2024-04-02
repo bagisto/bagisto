@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'Code',
-                    'create-btn'     => 'Valuta Aanmaken',
-                    'decimal'        => 'Decimalen',
-                    'delete-warning' => 'Weet je zeker dat je deze actie wilt uitvoeren?',
-                    'general'        => 'Algemeen',
-                    'name'           => 'Naam',
-                    'save-btn'       => 'Valuta Opslaan',
-                    'symbol'         => 'Symbool',
-                    'title'          => 'Nieuwe Valuta Aanmaken',
+                    'code'              => 'Code',
+                    'create-btn'        => 'Valuta Aanmaken',
+                    'currency-position' => 'Valutapositie',
+                    'decimal'           => 'Decimalen',
+                    'decimal-separator' => 'Decimaalscheidingsteken',
+                    'delete-warning'    => 'Weet je zeker dat je deze actie wilt uitvoeren?',
+                    'general'           => 'Algemeen',
+                    'group-separator'   => 'Groepsscheidingsteken',
+                    'name'              => 'Naam',
+                    'save-btn'          => 'Valuta Opslaan',
+                    'symbol'            => 'Symbool',
+                    'title'             => 'Nieuwe Valuta Aanmaken',
                 ],
 
                 'edit' => [
@@ -2914,6 +2917,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Waarde: :value',
                 'value-input'                   => 'Waarde',
+
                 'services-content'              => [
                     'add-btn'            => 'Diensten toevoegen',
                     'channels'           => 'Kanalen',
@@ -3073,6 +3077,8 @@ return [
             'save-btn'                     => 'Instellingen Opslaan',
             'save-message'                 => 'Instellingen succesvol opgeslagen',
             'search'                       => 'Zoekopdracht',
+            'select-country'               => 'Land selecteren',
+            'select-state'                 => 'Staat selecteren',
             'title'                        => 'Instellingen',
 
             'general' => [

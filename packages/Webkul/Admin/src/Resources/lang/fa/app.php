@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'کد',
-                    'create-btn'     => 'ساخت ارز',
-                    'decimal'        => 'معادله اعشار',
-                    'delete-warning' => 'آیا مطمئن هستید که می‌خواهید این عملیات را انجام دهید؟',
-                    'general'        => 'عمومی',
-                    'name'           => 'نام',
-                    'save-btn'       => 'ذخیره ارز',
-                    'symbol'         => 'نماد',
-                    'title'          => 'ساخت ارز جدید',
+                    'code'              => 'کد',
+                    'create-btn'        => 'ساخت ارز',
+                    'currency-position' => 'موقعیت ارز',
+                    'decimal'           => 'معادله اعشار',
+                    'decimal-separator' => 'جداکننده اعشار',
+                    'delete-warning'    => 'آیا مطمئن هستید که می‌خواهید این عملیات را انجام دهید؟',
+                    'general'           => 'عمومی',
+                    'group-separator'   => 'جداکننده گروه',
+                    'name'              => 'نام',
+                    'save-btn'          => 'ذخیره ارز',
+                    'symbol'            => 'نماد',
+                    'title'             => 'ساخت ارز جدید',
                 ],
 
                 'edit' => [
@@ -2914,6 +2917,7 @@ return [
                 'url'                           => 'آدرس اینترنتی',
                 'value'                         => 'مقدار: :value',
                 'value-input'                   => 'مقدار',
+
                 'services-content'              => [
                     'add-btn'               => 'افزودن خدمات',
                     'channels'              => 'کانال ها',
@@ -3073,6 +3077,8 @@ return [
             'save-btn'                     => 'ذخیره پیکربندی',
             'save-message'                 => 'پیکربندی با موفقیت ذخیره شد',
             'search'                       => 'جستجو کردن',
+            'select-country'               => 'انتخاب کشور',
+            'select-state'                 => 'انتخاب استان',
             'title'                        => 'پیکربندی',
 
             'general' => [

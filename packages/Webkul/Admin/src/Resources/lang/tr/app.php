@@ -2275,15 +2275,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'Kodu',
-                    'create-btn'     => 'Para Birimi Oluştur',
-                    'decimal'        => 'Ondalık',
-                    'delete-warning' => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
-                    'general'        => 'Genel',
-                    'name'           => 'Adı',
-                    'save-btn'       => 'Para Birimini Kaydet',
-                    'symbol'         => 'Sembol',
-                    'title'          => 'Yeni Para Birimi Oluştur',
+                    'code'              => 'Kodu',
+                    'create-btn'        => 'Para Birimi Oluştur',
+                    'currency-position' => 'Para Birimi Pozisyonu',
+                    'decimal'           => 'Ondalık',
+                    'decimal-separator' => 'Ondalık Ayırıcı',
+                    'delete-warning'    => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
+                    'general'           => 'Genel',
+                    'group-separator'   => 'Grup Ayırıcı',
+                    'name'              => 'Adı',
+                    'save-btn'          => 'Para Birimini Kaydet',
+                    'symbol'            => 'Sembol',
+                    'title'             => 'Yeni Para Birimi Oluştur',
                 ],
 
                 'edit' => [
@@ -2915,6 +2918,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Değer: :value',
                 'value-input'                   => 'Değer',
+
                 'services-content'              => [
                     'add-btn'            => 'Hizmetler Ekle',
                     'channels'           => 'Kanallar',
@@ -3074,6 +3078,8 @@ return [
             'save-btn'                     => 'Yapılandırmayı Kaydet',
             'save-message'                 => 'Yapılandırma başarıyla kaydedildi',
             'search'                       => 'Aramak',
+            'select-country'               => 'Ülke seçiniz',
+            'select-state'                 => 'Eyalet seçiniz',
             'title'                        => 'Yapılandırma',
 
             'general' => [

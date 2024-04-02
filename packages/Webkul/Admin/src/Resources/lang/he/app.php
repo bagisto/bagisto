@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'קוד',
-                    'create-btn'     => 'צור מטבע',
-                    'decimal'        => 'עשרוני',
-                    'delete-warning' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
-                    'general'        => 'כללי',
-                    'name'           => 'שם',
-                    'save-btn'       => 'שמור מטבע',
-                    'symbol'         => 'סמל',
-                    'title'          => 'צור מטבע חדש',
+                    'code'              => 'קוד',
+                    'create-btn'        => 'צור מטבע',
+                    'currency-position' => 'מיקום המטבע',
+                    'decimal'           => 'עשרוני',
+                    'decimal-separator' => 'מפריד עשרוני',
+                    'delete-warning'    => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                    'general'           => 'כללי',
+                    'group-separator'   => 'מפריד קבוצה',
+                    'name'              => 'שם',
+                    'save-btn'          => 'שמור מטבע',
+                    'symbol'            => 'סמל',
+                    'title'             => 'צור מטבע חדש',
                 ],
 
                 'edit' => [
@@ -2914,6 +2917,7 @@ return [
                 'url'                           => 'קישור',
                 'value'                         => 'ערך: :value',
                 'value-input'                   => 'ערך',
+
                 'services-content'              => [
                     'add-btn'            => 'הוסף שירותים',
                     'channels'           => 'ערוצים',
@@ -3073,6 +3077,8 @@ return [
             'save-btn'                     => 'שמור הגדרות',
             'save-message'                 => 'ההגדרות נשמרו בהצלחה',
             'search'                       => 'לחפש',
+            'select-country'               => 'בחר מדינה',
+            'select-state'                 => 'בחר מדינה',
             'title'                        => 'הגדרות',
 
             'general' => [

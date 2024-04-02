@@ -2274,15 +2274,18 @@ return [
                 ],
 
                 'create' => [
-                    'code'           => 'コード',
-                    'create-btn'     => '通貨を作成',
-                    'decimal'        => '小数点',
-                    'delete-warning' => '本当にこのアクションを実行しますか？',
-                    'general'        => '一般',
-                    'name'           => '名前',
-                    'save-btn'       => '通貨を保存',
-                    'symbol'         => '記号',
-                    'title'          => '新しい通貨を作成',
+                    'code'              => 'コード',
+                    'create-btn'        => '通貨を作成',
+                    'currency-position' => '通貨位置',
+                    'decimal'           => '小数点',
+                    'decimal-separator' => '小数点区切り文字',
+                    'delete-warning'    => '本当にこのアクションを実行しますか？',
+                    'general'           => '一般',
+                    'group-separator'   => 'グループ区切り',
+                    'name'              => '名前',
+                    'save-btn'          => '通貨を保存',
+                    'symbol'            => '記号',
+                    'title'             => '新しい通貨を作成',
                 ],
 
                 'edit' => [
@@ -2914,6 +2917,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => '値：:value',
                 'value-input'                   => '値',
+
                 'services-content'              => [
                     'add-btn'            => 'サービスを追加',
                     'channels'           => 'チャンネル',
@@ -3073,6 +3077,8 @@ return [
             'save-btn'                     => '設定を保存',
             'save-message'                 => '設定が正常に保存されました',
             'search'                       => '検索',
+            'select-country'               => '国を選択',
+            'select-state'                 => '州を選択',
             'title'                        => '設定',
 
             'general' => [
