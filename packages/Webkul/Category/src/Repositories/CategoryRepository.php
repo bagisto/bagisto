@@ -302,20 +302,20 @@ class CategoryRepository extends Repository
     /**
      * Get searched categories.
      *
-     * @return \Illuminate\Support\Collection
+     * @return void
      */
-    public function getSearchedCategories()
+    public function getSearchedCategories(array $params = [])
     {
-        return $this->model->scopeQuery(function ($query) {
-            return $query
-                ->select('categories.*')
-                ->leftJoin('category_translations', function ($query) {
-                    $query->on('categories.id', '=', 'category_translations.category_id')
-                        ->where('category_translations.locale', app()->getLocale());
-                })
-                ->where('category_translations.name', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orderBy('created_at', 'desc');
-        })->paginate(self::COUNT);
+        $queryBuilder = $this->query()
+            ->select('categories.*')
+            ->leftJoin('category_translations', function ($join) {
+                $join->on('categories.id', '=', 'category_translations.category_id')
+                    ->where('category_translations.locale', app()->getLocale());
+            })
+            ->where('category_translations.name', 'like', '%'.urldecode($params['query']).'%')
+            ->orderBy('created_at', 'desc');
+
+        return $queryBuilder->paginate($params['limit'] ?? 10);
     }
 
     /**
