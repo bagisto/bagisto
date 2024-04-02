@@ -29,35 +29,39 @@ trait ShopTestBench
     {
         $cart->refresh();
 
-        $this->assertDatabaseHas('cart', [
-            'id'                    => $cart->id,
-            'customer_email'        => $cart->customer_email,
-            'customer_first_name'   => $cart->customer_first_name,
-            'customer_last_name'    => $cart->customer_last_name,
-            'shipping_method'       => $cart->shipping_method,
-            'coupon_code'           => $cart->coupon_code,
-            'is_gift'               => $cart->is_gift,
-            'items_count'           => $cart->items_count,
-            'items_qty'             => $cart->items_qty,
-            'exchange_rate'         => $cart->exchange_rate,
-            'global_currency_code'  => $cart->global_currency_code,
-            'base_currency_code'    => $cart->base_currency_code,
-            'channel_currency_code' => $cart->channel_currency_code,
-            'cart_currency_code'    => $cart->cart_currency_code,
-            'grand_total'           => $cart->grand_total,
-            'base_grand_total'      => $cart->base_grand_total,
-            'sub_total'             => $cart->sub_total,
-            'base_sub_total'        => $cart->base_sub_total,
-            'tax_total'             => $cart->tax_total,
-            'base_tax_total'        => $cart->base_tax_total,
-            'discount_amount'       => $cart->discount_amount,
-            'base_discount_amount'  => $cart->base_discount_amount,
-            'checkout_method'       => $cart->checkout_method,
-            'is_guest'              => $cart->is_guest,
-            'is_active'             => $cart->is_active,
-            'applied_cart_rule_ids' => $cart->applied_cart_rule_ids,
-            'customer_id'           => $cart->customer_id,
-            'channel_id'            => $cart->channel_id,
+        $this->assertModelWise([
+            Cart::class => [
+                [
+                    'id'                    => $cart->id,
+                    'customer_email'        => $cart->customer_email,
+                    'customer_first_name'   => $cart->customer_first_name,
+                    'customer_last_name'    => $cart->customer_last_name,
+                    'shipping_method'       => $cart->shipping_method,
+                    'coupon_code'           => $cart->coupon_code,
+                    'is_gift'               => $cart->is_gift,
+                    'items_count'           => $cart->items_count,
+                    'items_qty'             => $cart->items_qty,
+                    'exchange_rate'         => $cart->exchange_rate,
+                    'global_currency_code'  => $cart->global_currency_code,
+                    'base_currency_code'    => $cart->base_currency_code,
+                    'channel_currency_code' => $cart->channel_currency_code,
+                    'cart_currency_code'    => $cart->cart_currency_code,
+                    'grand_total'           => $cart->grand_total,
+                    'base_grand_total'      => $cart->base_grand_total,
+                    'sub_total'             => $cart->sub_total,
+                    'base_sub_total'        => $cart->base_sub_total,
+                    'tax_total'             => $cart->tax_total,
+                    'base_tax_total'        => $cart->base_tax_total,
+                    'discount_amount'       => $cart->discount_amount,
+                    'base_discount_amount'  => $cart->base_discount_amount,
+                    'checkout_method'       => $cart->checkout_method,
+                    'is_guest'              => $cart->is_guest,
+                    'is_active'             => $cart->is_active,
+                    'applied_cart_rule_ids' => $cart->applied_cart_rule_ids,
+                    'customer_id'           => $cart->customer_id,
+                    'channel_id'            => $cart->channel_id,
+                ],
+            ],
         ]);
     }
 
@@ -78,31 +82,39 @@ trait ShopTestBench
     {
         $cartItem->refresh();
 
-        $this->assertDatabaseHas('cart_items', [
-            'quantity'              => $cartItem->quantity,
-            'sku'                   => $cartItem->sku,
-            'type'                  => $cartItem->type,
-            'name'                  => $cartItem->name,
-            'coupon_code'           => $cartItem->coupon_code,
-            'weight'                => $cartItem->weight,
-            'total_weight'          => $cartItem->total_weight,
-            'base_total_weight'     => $cartItem->base_total_weight,
-            'price'                 => core()->convertPrice($cartItem->price),
-            'base_price'            => $cartItem->base_price,
-            'custom_price'          => $cartItem->custom_price,
-            'total'                 => $cartItem->total,
-            'base_total'            => $cartItem->base_total,
-            'tax_percent'           => $cartItem->tax_percent,
-            'tax_amount'            => $cartItem->tax_amount,
-            'base_tax_amount'       => $cartItem->base_tax_amount,
-            'discount_percent'      => $cartItem->discount_percent,
-            'discount_amount'       => $cartItem->discount_amount,
-            'base_discount_amount'  => $cartItem->base_discount_amount,
-            'parent_id'             => $cartItem->parent_id,
-            'product_id'            => $cartItem->product_id,
-            'cart_id'               => $cartItem->cart_id,
-            'tax_category_id'       => $cartItem->tax_category_id,
-            'applied_cart_rule_ids' => $cartItem->applied_cart_rule_ids,
+        $this->assertModelWise([
+            CartItem::class => [
+                [
+                    'quantity'              => $cartItem->quantity,
+                    'sku'                   => $cartItem->sku,
+                    'type'                  => $cartItem->type,
+                    'name'                  => $cartItem->name,
+                    'coupon_code'           => $cartItem->coupon_code,
+                    'weight'                => $cartItem->weight,
+                    'total_weight'          => $cartItem->total_weight,
+                    'base_total_weight'     => $cartItem->base_total_weight,
+                    'price'                 => core()->convertPrice($cartItem->price),
+                    'base_price'            => $cartItem->base_price,
+                    'custom_price'          => $cartItem->custom_price,
+                    'total'                 => $cartItem->total,
+                    'base_total'            => $cartItem->base_total,
+                    'tax_percent'           => $cartItem->tax_percent,
+                    'tax_amount'            => $cartItem->tax_amount,
+                    'base_tax_amount'       => $cartItem->base_tax_amount,
+                    'discount_percent'      => $cartItem->discount_percent,
+                    'base_discount_amount'  => $cartItem->base_discount_amount,
+                    'tax_percent'           => number_format($cartItem->tax_percent, 4),
+                    'tax_amount'            => number_format($cartItem->tax_amount, 4),
+                    'base_tax_amount'       => number_format($cartItem->base_tax_amount, 4),
+                    'discount_amount'       => number_format($cartItem->discount_amount, 4),
+                    'base_discount_amount'  => number_format($cartItem->base_discount_amount, 4),
+                    'parent_id'             => $cartItem->parent_id,
+                    'product_id'            => $cartItem->product_id,
+                    'cart_id'               => $cartItem->cart_id,
+                    'tax_category_id'       => $cartItem->tax_category_id,
+                    'applied_cart_rule_ids' => $cartItem->applied_cart_rule_ids,
+                ],
+            ],
         ]);
     }
 
@@ -113,10 +125,14 @@ trait ShopTestBench
     {
         $cartPayment->refresh();
 
-        $this->assertDatabaseHas('cart_payment', [
-            'cart_id'      => $cartPayment->cart_id,
-            'method'       => $cartPayment->method,
-            'method_title' => $cartPayment->method_title,
+        $this->assertModelWise([
+            CartPayment::class => [
+                [
+                    'cart_id'      => $cartPayment->cart_id,
+                    'method'       => $cartPayment->method,
+                    'method_title' => $cartPayment->method_title,
+                ],
+            ],
         ]);
     }
 
