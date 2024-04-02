@@ -204,7 +204,7 @@
                                     <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
                                 </div>
 
-                                <div>{{ core()->getConfigData('sales.shipping.origin.address1') ?? '' }}</div>
+                                <div>{{ core()->getConfigData('sales.shipping.origin.address') ?? '' }}</div>
 
                                 <div>
                                     <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ?? '' }}</span>
@@ -299,7 +299,7 @@
                                     <td>
                                         <p>{{ $invoice->order->billing_address->company_name ?? '' }}</p>
                                         <p>{{ $invoice->order->billing_address->name }}</p>
-                                        <p>{{ $invoice->order->billing_address->address1 }}</p>
+                                        <p>{{ $invoice->order->billing_address->address }}</p>
                                         <p>{{ $invoice->order->billing_address->city }}</p>
                                         <p>{{ $invoice->order->billing_address->state }}</p>
                                         <p>
@@ -314,7 +314,7 @@
                                     <td>
                                         <p>{{ $invoice->order->shipping_address->company_name ?? '' }}</p>
                                         <p>{{ $invoice->order->shipping_address->name }}</p>
-                                        <p>{{ $invoice->order->shipping_address->address1 }}</p>
+                                        <p>{{ $invoice->order->shipping_address->address }}</p>
                                         <p>{{ $invoice->order->shipping_address->city }}</p>
                                         <p>{{ $invoice->order->shipping_address->state }}</p>
                                         <p>{{ core()->country_name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>

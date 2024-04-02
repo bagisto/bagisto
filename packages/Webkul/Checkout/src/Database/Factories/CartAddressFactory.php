@@ -23,7 +23,7 @@ class CartAddressFactory extends Factory
             'first_name'   => $this->faker->firstName(),
             'last_name'    => $this->faker->lastName(),
             'phone'        => $this->faker->numerify('98########'),
-            'address1'     => $this->faker->streetAddress(),
+            'address'      => $this->faker->streetAddress(),
             'country'      => $this->faker->randomElement(['IN']),
             'state'        => $this->faker->randomElement(['Delhi', 'Mumbai', 'Kolkata', 'Rajasthan']),
             'city'         => $this->faker->city(),

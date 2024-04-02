@@ -144,8 +144,10 @@ class CartController extends APIController
      */
     public function moveToWishlist(): JsonResource
     {
-        foreach (request()->input('ids') as $id) {
-            Cart::moveToWishlist($id);
+        foreach (request()->input('ids') as $index => $id) {
+            $qty = request()->input('qty')[$index];
+
+            Cart::moveToWishlist($id, $qty);
         }
 
         return new JsonResource([

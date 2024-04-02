@@ -81,6 +81,10 @@ class CustomerController extends Controller
             'is_verified' => 1,
         ]);
 
+        if (empty($data['phone'])) {
+            $data['phone'] = null;
+        }
+
         $customer = $this->customerRepository->create($data);
 
         if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer')) {
@@ -99,7 +103,7 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(int $id)
     {
@@ -112,9 +116,7 @@ class CustomerController extends Controller
             'phone'         => 'unique:customers,phone,'.$id,
         ]);
 
-        Event::dispatch('customer.update.before', $id);
-
-        $customer = $this->customerRepository->update(request()->only([
+        $data = request()->only([
             'first_name',
             'last_name',
             'gender',
@@ -124,7 +126,15 @@ class CustomerController extends Controller
             'customer_group_id',
             'status',
             'is_suspended',
-        ]), $id);
+        ]);
+
+        if (empty($data['phone'])) {
+            $data['phone'] = null;
+        }
+
+        Event::dispatch('customer.update.before', $id);
+
+        $customer = $this->customerRepository->update($data, $id);
 
         Event::dispatch('customer.update.after', $customer);
 
@@ -237,7 +247,7 @@ class CustomerController extends Controller
     {
         $customers = $this->customerRepository->scopeQuery(function ($query) {
             return $query->where('email', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orWhere(DB::raw('CONCAT('.DB::getTablePrefix().'first_name, " ", '.DB::getTablePrefix().'last_name)'), 'like', '%'.urldecode(request()->input('query')).'%')
+                ->orWhere(DB::raw('CONCAT(first_name, " ", last_name)'), 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orderBy('created_at', 'desc');
         })->paginate(self::COUNT);
 

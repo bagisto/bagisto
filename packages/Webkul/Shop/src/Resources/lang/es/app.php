@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Ya se envió el correo de restablecimiento de contraseña.',
             'back'                 => 'Volver a iniciar sesión',
             'bagisto'              => 'Bagisto',
             'email'                => 'Correo electrónico',
@@ -411,11 +412,14 @@ return [
 
             'table' => [
                 'actions'              => 'Acciones',
-                'next-page'            => 'Siguiente página',
+                'next-page'            => 'Siguiente Página',
                 'no-records-available' => 'No hay registros disponibles.',
-                'page-navigation'      => 'Navegación de página',
-                'page-number'          => 'Número de página',
-                'previous-page'        => 'Página anterior',
+                'of'                   => 'de :total entradas',
+                'page-navigation'      => 'Navegación de Página',
+                'page-number'          => 'Número de Página',
+                'previous-page'        => 'Página Anterior',
+                'showing'              => 'Mostrando :firstItem',
+                'to'                   => 'a :lastItem',
             ],
         ],
 
@@ -692,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'Agregar nueva dirección',
-                    'back'                               => 'Atrás',
-                    'billing-address'                    => 'Dirección de Facturación',
-                    'city'                               => 'Ciudad',
-                    'company-name'                       => 'Nombre de la Compañía',
-                    'confirm'                            => 'Confirmar',
-                    'country'                            => 'País',
-                    'email'                              => 'Correo Electrónico',
-                    'first-name'                         => 'Nombre',
-                    'last-name'                          => 'Apellido',
-                    'postcode'                           => 'Código Postal',
-                    'proceed'                            => 'Proceder',
-                    'save'                               => 'ahorrar',
-                    'use-different-address-for-shipping' => 'La dirección es la misma que la de facturación',
-                    'save-address'                       => 'Guardar esta dirección',
-                    'select-country'                     => 'Seleccionar País',
-                    'select-state'                       => 'Seleccionar Estado',
-                    'state'                              => 'Estado',
-                    'street-address'                     => 'Dirección',
-                    'telephone'                          => 'Teléfono',
-                ],
-
-                'index' => [
-                    'bagisto' => 'Bagisto',
-                    'confirm' => 'Confirmar',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'Agregar nueva dirección',
-                    'back'             => 'Atrás',
-                    'city'             => 'Ciudad',
-                    'company-name'     => 'Nombre de la Compañía',
-                    'confirm'          => 'Confirmar',
-                    'country'          => 'País',
-                    'email'            => 'Correo Electrónico',
-                    'first-name'       => 'Nombre',
-                    'last-name'        => 'Apellido',
-                    'postcode'         => 'Código Postal',
-                    'proceed'          => 'Proceder',
-                    'save'             => 'ahorrar',
-                    'save-address'     => 'Guardar esta dirección',
-                    'select-country'   => 'Seleccionar País',
-                    'select-state'     => 'Seleccionar Estado',
-                    'shipping-address' => 'Dirección de Envío',
-                    'state'            => 'Estado',
-                    'street-address'   => 'Dirección',
-                    'telephone'        => 'Teléfono',
-                ],
-
-                'title' => 'Dirección',
+            'address' => [
+                'add-new-address'  => 'Agregar nueva dirección',
+                'add-new'          => 'Agregar nueva dirección',
+                'back'             => 'Volver',
+                'billing-address'  => 'Dirección de facturación',
+                'city'             => 'Ciudad',
+                'company-name'     => 'Nombre de la empresa',
+                'confirm'          => 'Confirmar',
+                'country'          => 'País',
+                'email'            => 'Correo electrónico',
+                'first-name'       => 'Nombre',
+                'last-name'        => 'Apellido',
+                'postcode'         => 'Código postal',
+                'proceed'          => 'Continuar',
+                'same-as-billing'  => '¿Usar la misma dirección para el envío?',
+                'save-address'     => 'Guardar en la libreta de direcciones',
+                'save'             => 'Guardar',
+                'select-country'   => 'Seleccionar país',
+                'select-state'     => 'Seleccionar estado',
+                'shipping-address' => 'Dirección de envío',
+                'state'            => 'Estado',
+                'street-address'   => 'Dirección',
+                'telephone'        => 'Teléfono',
+                'title'            => 'Dirección',
             ],
 
             'index' => [
@@ -778,6 +754,12 @@ return [
             'offer'               => 'Erhalten Sie BIS ZU 40 % RABATT auf Ihre erste Bestellung JETZT SHOPPEN',
             'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
             'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Mostrando :firstItem a :lastItem de :total entradas',
         ],
     ],
 

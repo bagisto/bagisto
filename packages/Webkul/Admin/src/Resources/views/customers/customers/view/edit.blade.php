@@ -20,7 +20,7 @@
             </div>
         @endif
 
-        {!! view_render_event('bagisto.admin.customers.customers.edit.edit_form_controls.before') !!}
+        {!! view_render_event('bagisto.admin.customers.customers.view.edit.edit_form_controls.before') !!}
 
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
@@ -38,7 +38,7 @@
     
                     <!-- Modal Content -->
                     <x-slot:content>
-                        {!! view_render_event('bagisto.admin.customers.customers.edit.before') !!}
+                        {!! view_render_event('bagisto.admin.customers.customers.view.edit.before') !!}
 
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!--First Name -->
@@ -236,7 +236,7 @@
                             </x-admin::form.control-group>
                         </div>
                         
-                        {!! view_render_event('bagisto.admin.customers.customers.edit.after') !!}
+                        {!! view_render_event('bagisto.admin.customers.customers.view.edit.after') !!}
                     </x-slot>
 
                     <!-- Modal Footer -->
@@ -254,7 +254,7 @@
             </form>
         </x-admin::form>
 
-        {!! view_render_event('bagisto.admin.customers.customers.edit.edit_form_controls.after') !!}
+        {!! view_render_event('bagisto.admin.customers.customers.view.edit.edit_form_controls.after') !!}
     </script>
 
     <script type="module">

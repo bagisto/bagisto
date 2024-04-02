@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Mail de réinitialisation de mot de passe déjà envoyé.',
             'back'                 => 'Retour à la connexion ?',
             'bagisto'              => 'Bagisto',
             'email'                => 'E-mail',
@@ -413,9 +414,12 @@ return [
                 'actions'              => 'Actions',
                 'next-page'            => 'Page suivante',
                 'no-records-available' => 'Aucun enregistrement disponible.',
+                'of'                   => 'de :total entrées',
                 'page-navigation'      => 'Navigation de page',
                 'page-number'          => 'Numéro de page',
                 'previous-page'        => 'Page précédente',
+                'showing'              => 'Affichage de :firstItem',
+                'to'                   => 'à :lastItem',
             ],
         ],
 
@@ -692,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'Ajouter une nouvelle adresse',
-                    'back'                               => 'Retour',
-                    'billing-address'                    => 'Adresse de facturation',
-                    'city'                               => 'Ville',
-                    'company-name'                       => 'Nom de l\'entreprise',
-                    'confirm'                            => 'Confirmer',
-                    'country'                            => 'Pays',
-                    'email'                              => 'E-mail',
-                    'first-name'                         => 'Prénom',
-                    'last-name'                          => 'Nom de famille',
-                    'postcode'                           => 'Code postal',
-                    'proceed'                            => 'Procéder',
-                    'save'                               => 'sauvegarder',
-                    'use-different-address-for-shipping' => 'L\'adresse est la même que celle de ma facturation',
-                    'save-address'                       => 'Enregistrer cette adresse',
-                    'select-country'                     => 'Sélectionner le pays',
-                    'select-state'                       => 'Sélectionner l\'État',
-                    'state'                              => 'État',
-                    'street-address'                     => 'Adresse',
-                    'telephone'                          => 'Téléphone',
-                ],
-
-                'index' => [
-                    'bagisto' => 'Bagisto',
-                    'confirm' => 'Confirmer',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'Ajouter une nouvelle adresse',
-                    'back'             => 'Retour',
-                    'city'             => 'Ville',
-                    'company-name'     => 'Nom de l\'entreprise',
-                    'confirm'          => 'Confirmer',
-                    'country'          => 'Pays',
-                    'email'            => 'E-mail',
-                    'first-name'       => 'Prénom',
-                    'last-name'        => 'Nom de famille',
-                    'postcode'         => 'Code postal',
-                    'proceed'          => 'Procéder',
-                    'save'             => 'sauvegarder',
-                    'save-address'     => 'Enregistrer cette adresse',
-                    'select-country'   => 'Sélectionner le pays',
-                    'select-state'     => 'Sélectionner l\'État',
-                    'shipping-address' => 'Adresse de livraison',
-                    'state'            => 'État',
-                    'street-address'   => 'Adresse',
-                    'telephone'        => 'Téléphone',
-                ],
-
-                'title' => 'Adresse',
+            'address' => [
+                'add-new-address'  => 'Ajouter une nouvelle adresse',
+                'add-new'          => 'Ajouter une nouvelle adresse',
+                'back'             => 'Retour',
+                'billing-address'  => 'Adresse de facturation',
+                'city'             => 'Ville',
+                'company-name'     => 'Nom de l\'entreprise',
+                'confirm'          => 'Confirmer',
+                'country'          => 'Pays',
+                'email'            => 'E-mail',
+                'first-name'       => 'Prénom',
+                'last-name'        => 'Nom de famille',
+                'postcode'         => 'Code postal',
+                'proceed'          => 'Continuer',
+                'same-as-billing'  => 'Utiliser la même adresse pour la livraison ?',
+                'save-address'     => 'Enregistrer dans le carnet d\'adresses',
+                'save'             => 'Enregistrer',
+                'select-country'   => 'Sélectionner le pays',
+                'select-state'     => 'Sélectionner l\'état',
+                'shipping-address' => 'Adresse de livraison',
+                'state'            => 'État',
+                'street-address'   => 'Adresse de rue',
+                'telephone'        => 'Téléphone',
+                'title'            => 'Adresse',
             ],
 
             'index' => [
@@ -778,6 +754,12 @@ return [
             'offer'               => 'Bénéficiez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
             'resend-verify-email' => 'Renvoyer l\'e-mail de vérification',
             'verify-email'        => 'Vérifiez votre adresse e-mail',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Affichage de :firstItem à :lastItem sur :total entrées',
         ],
     ],
 

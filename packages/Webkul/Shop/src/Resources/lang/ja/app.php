@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'すでにパスワードリセットメールが送信されました。',
             'back'                 => 'サインインに戻る？',
             'bagisto'              => 'バギスト',
             'email'                => 'メール',
@@ -413,9 +414,12 @@ return [
                 'actions'              => 'アクション',
                 'next-page'            => '次のページ',
                 'no-records-available' => '利用可能なレコードはありません。',
+                'of'                   => 'の合計 :total エントリ',
                 'page-navigation'      => 'ページナビゲーション',
                 'page-number'          => 'ページ番号',
                 'previous-page'        => '前のページ',
+                'showing'              => ':firstItem を表示',
+                'to'                   => ':lastItem まで',
             ],
         ],
 
@@ -692,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => '新しい住所を追加',
-                    'back'                               => '戻る',
-                    'billing-address'                    => '請求先住所',
-                    'city'                               => '市区町村',
-                    'company-name'                       => '会社名',
-                    'confirm'                            => '確認',
-                    'country'                            => '国',
-                    'email'                              => 'メール',
-                    'first-name'                         => '名',
-                    'last-name'                          => '姓',
-                    'postcode'                           => '郵便番号',
-                    'proceed'                            => '進む',
-                    'save'                               => '保存',
-                    'use-different-address-for-shipping' => '住所は請求先住所と同じです',
-                    'save-address'                       => 'この住所を保存',
-                    'select-country'                     => '国を選択',
-                    'select-state'                       => '都道府県を選択',
-                    'state'                              => '都道府県',
-                    'street-address'                     => '住所',
-                    'telephone'                          => '電話番号',
-                ],
-
-                'index' => [
-                    'bagisto' => 'バギスト',
-                    'confirm' => '確認',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => '新しい住所を追加',
-                    'back'             => '戻る',
-                    'city'             => '市区町村',
-                    'company-name'     => '会社名',
-                    'confirm'          => '確認',
-                    'country'          => '国',
-                    'email'            => 'メール',
-                    'first-name'       => '名',
-                    'last-name'        => '姓',
-                    'postcode'         => '郵便番号',
-                    'proceed'          => '進む',
-                    'save'             => '保存',
-                    'save-address'     => 'この住所を保存',
-                    'select-country'   => '国を選択',
-                    'select-state'     => '都道府県を選択',
-                    'shipping-address' => '配送先住所',
-                    'state'            => '都道府県',
-                    'street-address'   => '住所',
-                    'telephone'        => '電話番号',
-                ],
-
-                'title' => '住所',
+            'address' => [
+                'add-new-address'  => '新しい住所を追加',
+                'add-new'          => '新しい住所を追加',
+                'back'             => '戻る',
+                'billing-address'  => '請求先住所',
+                'city'             => '市町村',
+                'company-name'     => '会社名',
+                'confirm'          => '確認',
+                'country'          => '国',
+                'email'            => 'メールアドレス',
+                'first-name'       => '名',
+                'last-name'        => '姓',
+                'postcode'         => '郵便番号',
+                'proceed'          => '進む',
+                'same-as-billing'  => '配送のために同じ住所を使用しますか？',
+                'save-address'     => 'アドレス帳に保存',
+                'save'             => '保存',
+                'select-country'   => '国を選択',
+                'select-state'     => '都道府県を選択',
+                'shipping-address' => '配送先住所',
+                'state'            => '都道府県',
+                'street-address'   => '住所',
+                'telephone'        => '電話番号',
+                'title'            => '住所',
             ],
 
             'index' => [
@@ -778,6 +754,12 @@ return [
             'offer'               => '初めての注文で最大40%OFF 今すぐショッピング',
             'resend-verify-email' => '確認メールを再送信',
             'verify-email'        => 'メールアカウントを確認',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => '合計 :total エントリのうち :firstItem から :lastItem を表示',
         ],
     ],
 

@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="relative overflow-x-auto mt-8 border rounded-xl">
-                    <table class="w-full text-sm text-left ">
+                    <table class="w-full text-sm text-left">
                         <thead class="bg-[#F5F5F5] border-b border-[#E9E9E9] text-sm text-black">
                             <tr>
                                 <th

@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'تم بالفعل إعادة تعيين كلمة المرور للبريد المرسل.',
             'back'                 => 'العودة إلى تسجيل الدخول؟',
             'bagisto'              => 'باغيستو',
             'email'                => 'البريد الإلكتروني',
@@ -410,12 +411,15 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'الإجراءات',
+                'actions'              => 'إجراءات',
                 'next-page'            => 'الصفحة التالية',
                 'no-records-available' => 'لا تتوفر سجلات.',
+                'of'                   => 'من :total إدخالات',
                 'page-navigation'      => 'تنقل الصفحة',
                 'page-number'          => 'رقم الصفحة',
                 'previous-page'        => 'الصفحة السابقة',
+                'showing'              => 'يتم عرض :firstItem',
+                'to'                   => 'إلى :lastItem',
             ],
         ],
 
@@ -692,58 +696,30 @@ return [
         ],
 
         'onepage' => [
-            'addresses' => [
-                'billing' => [
-                    'add-new-address'                    => 'إضافة عنوان جديد',
-                    'back'                               => 'رجوع',
-                    'billing-address'                    => 'عنوان الفواتير',
-                    'city'                               => 'المدينة',
-                    'company-name'                       => 'اسم الشركة',
-                    'confirm'                            => 'تأكيد',
-                    'country'                            => 'البلد',
-                    'email'                              => 'البريد الإلكتروني',
-                    'first-name'                         => 'الاسم الأول',
-                    'last-name'                          => 'اسم العائلة',
-                    'postcode'                           => 'الرمز البريدي',
-                    'proceed'                            => 'استمر',
-                    'save'                               => 'يحفظ',
-                    'use-different-address-for-shipping' => 'العنوان هو نفس عنوان الفواتير',
-                    'save-address'                       => 'حفظ هذا العنوان',
-                    'select-country'                     => 'اختر البلد',
-                    'select-state'                       => 'اختر الولاية',
-                    'state'                              => 'الولاية',
-                    'street-address'                     => 'عنوان الشارع',
-                    'telephone'                          => 'رقم الهاتف',
-                ],
-
-                'index' => [
-                    'bagisto' => 'باغيستو',
-                    'confirm' => 'تأكيد',
-                ],
-
-                'shipping' => [
-                    'add-new-address'  => 'إضافة عنوان جديد',
-                    'back'             => 'رجوع',
-                    'city'             => 'المدينة',
-                    'company-name'     => 'اسم الشركة',
-                    'confirm'          => 'تأكيد',
-                    'country'          => 'البلد',
-                    'email'            => 'البريد الإلكتروني',
-                    'first-name'       => 'الاسم الأول',
-                    'last-name'        => 'اسم العائلة',
-                    'postcode'         => 'الرمز البريدي',
-                    'proceed'          => 'استمر',
-                    'save'             => 'يحفظ',
-                    'save-address'     => 'حفظ هذا العنوان',
-                    'select-country'   => 'اختر البلد',
-                    'select-state'     => 'اختر الولاية',
-                    'shipping-address' => 'عنوان الشحن',
-                    'state'            => 'الولاية',
-                    'street-address'   => 'عنوان الشارع',
-                    'telephone'        => 'رقم الهاتف',
-                ],
-
-                'title' => 'عنوان',
+            'address' => [
+                'add-new-address'  => 'إضافة عنوان جديد',
+                'add-new'          => 'إضافة عنوان جديد',
+                'back'             => 'العودة',
+                'billing-address'  => 'عنوان الفواتير',
+                'city'             => 'المدينة',
+                'company-name'     => 'اسم الشركة',
+                'confirm'          => 'تأكيد',
+                'country'          => 'الدولة',
+                'email'            => 'البريد الإلكتروني',
+                'first-name'       => 'الاسم الأول',
+                'last-name'        => 'الاسم الأخير',
+                'postcode'         => 'الرمز البريدي',
+                'proceed'          => 'المتابعة',
+                'same-as-billing'  => 'استخدم نفس العنوان للشحن؟',
+                'save-address'     => 'حفظ هذا في دفتر العناوين',
+                'save'             => 'حفظ',
+                'select-country'   => 'اختر الدولة',
+                'select-state'     => 'اختر الولاية',
+                'shipping-address' => 'عنوان الشحن',
+                'state'            => 'الولاية',
+                'street-address'   => 'عنوان الشارع',
+                'telephone'        => 'الهاتف',
+                'title'            => 'العنوان',
             ],
 
             'index' => [
@@ -778,6 +754,12 @@ return [
             'offer'               => 'احصل على خصم يصل إلى 40٪ على طلبك الأول اشتر الآن',
             'resend-verify-email' => 'إعادة إرسال رسالة التحقق من البريد الإلكتروني',
             'verify-email'        => 'تحقق من حساب بريدك الإلكتروني',
+        ],
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'عرض :firstItem إلى :lastItem من :total مقالات',
         ],
     ],
 

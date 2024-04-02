@@ -13,118 +13,166 @@ return [
     |
     */
 
-    'accepted'             => ':attribute को स्वीकार किया जाना चाहिए।',
-    'active_url'           => ':attribute एक मान्य URL नहीं है।',
-    'after'                => 'द :attribute :डेट के बाद की तारीख होनी चाहिए।',
-    'after_or_equal'       => 'द :attribute :डेट के बाद या उसके बराबर की तारीख होनी चाहिए।',
-    'alpha'                => ':attribute में केवल अक्षर हो सकते हैं।',
-    'alpha_dash'           => ':attribute में केवल अक्षर, संख्याएं, डैश और अंडरस्कोर हो सकते हैं।',
-    'alpha_num'            => ':attribute में केवल अक्षर और संख्याएँ हो सकती हैं।',
-    'array'                => ':attribute एक सरणी होनी चाहिए।',
-    'before'               => 'द :attribute :डेट से पहले की तारीख होनी चाहिए।',
-    'before_or_equal'      => 'द :attribute :डेट से पहले या उसके बराबर की तारीख होनी चाहिए।',
+    'accepted'        => 'फ़ील्ड :attribute स्वीकृत होना चाहिए।',
+    'accepted_if'     => 'जब :other :value हो, तो :attribute फ़ील्ड स्वीकृत होना चाहिए।',
+    'active_url'      => 'फ़ील्ड :attribute एक मान्य URL होना चाहिए।',
+    'after'           => 'फ़ील्ड :attribute :date के बाद की तारीख होनी चाहिए।',
+    'after_or_equal'  => 'फ़ील्ड :attribute :date के बाद या उसके बराबर की तारीख होनी चाहिए।',
+    'alpha'           => 'फ़ील्ड :attribute में केवल अक्षर होने चाहिए।',
+    'alpha_dash'      => 'फ़ील्ड :attribute में केवल अक्षर, संख्या, डैश और अंडरस्कोर होने चाहिए।',
+    'alpha_num'       => 'फ़ील्ड :attribute में केवल अक्षर और संख्याएँ होनी चाहिए।',
+    'array'           => 'फ़ील्ड :attribute एक एरे होना चाहिए।',
+    'ascii'           => 'फ़ील्ड :attribute केवल एकल-बाइट वाले अक्षरमाला और प्रतीक होने चाहिए।',
+    'before'          => 'फ़ील्ड :attribute :date के पहले की तारीख होनी चाहिए।',
+    'before_or_equal' => 'फ़ील्ड :attribute :date के पहले या उसके बराबर की तारीख होनी चाहिए।',
 
-    'between'              => [
-        'numeric' => ': विशेषता :min और :max के बीच होनी चाहिए।',
-        'file'    => ': विशेषता :min और :max किलोबाइट्स के बीच होनी चाहिए।',
-        'string'  => ': विशेषता :min और :max वर्णों के बीच होनी चाहिए।',
-        'array'   => ': विशेषता :min और :max आइटम के बीच होनी चाहिए।',
+    'between' => [
+        'array'   => 'फ़ील्ड :attribute में :min और :max आइटम्स होने चाहिए।',
+        'file'    => 'फ़ील्ड :attribute :min और :max किलोबाइट्स के बीच होना चाहिए।',
+        'numeric' => 'फ़ील्ड :attribute :min और :max के बीच होना चाहिए।',
+        'string'  => 'फ़ील्ड :attribute :min और :max वर्णों के बीच होना चाहिए।',
     ],
 
-    'boolean'              => ':attribute क्षेत्र सही या गलत होना चाहिए।',
-    'confirmed'            => ':attribute पुष्टि मेल नहीं खाती।',
-    'date'                 => ':attribute मान्य तिथि नहीं है।',
-    'date_format'          => ':attribute प्रारूप :format से मेल नहीं खाती।',
-    'different'            => ':attribute और :अन्य अलग-अलग होने चाहिए।',
-    'digits'               => ':attribute :अंक अंक होना चाहिए।',
-    'digits_between'       => ':attribute :मिनट और :अधिकतम अंकों के बीच होनी चाहिए।',
-    'dimensions'           => ':attribute में अमान्य छवि आयाम हैं।',
-    'distinct'             => ':attribute फ़ील्ड में एक डुप्लिकेट मान होता है।',
-    'email'                => ':attribute एक मान्य ईमेल पता होना चाहिए।',
-    'exists'               => 'चयनित :attribute अमान्य है।',
-    'file'                 => ':attribute एक फ़ाइल होनी चाहिए।',
-    'filled'               => ':attribute फ़ील्ड में एक मान होना चाहिए।',
+    'boolean'           => 'फ़ील्ड :attribute सही या गलत होना चाहिए।',
+    'can'               => 'फ़ील्ड :attribute अनधिकृत मान शामिल करता है।',
+    'confirmed'         => 'फ़ील्ड :attribute पुष्टिकरण मेल नहीं खाता।',
+    'current_password'  => 'पासवर्ड गलत है।',
+    'date'              => 'फ़ील्ड :attribute में एक मान्य तारीख होनी चाहिए।',
+    'date_equals'       => 'फ़ील्ड :attribute को :date के बराबर तारीख होनी चाहिए।',
+    'date_format'       => 'फ़ील्ड :attribute को :format स्वरूप के साथ मेल नहीं खाता।',
+    'decimal'           => 'फ़ील्ड :attribute में :decimal दशमलव स्थान होने चाहिए।',
+    'declined'          => 'फ़ील्ड :attribute को अस्वीकार किया जाना चाहिए।',
+    'declined_if'       => 'जब :other :value हो, तो :attribute फ़ील्ड को अस्वीकार किया जाना चाहिए।',
+    'different'         => 'फ़ील्ड :attribute और :other अलग होना चाहिए।',
+    'digits'            => 'फ़ील्ड :attribute में :digits अंक होने चाहिए।',
+    'digits_between'    => 'फ़ील्ड :attribute में :min और :max अंकों के बीच होने चाहिए।',
+    'dimensions'        => 'फ़ील्ड :attribute में अमान्य चित्र आयाम हैं।',
+    'distinct'          => 'फ़ील्ड :attribute में एक से अधिक मान नहीं हो सकते।',
+    'doesnt_end_with'   => 'फ़ील्ड :attribute को निम्नलिखित में से किसी एक के साथ समाप्त नहीं किया जाना चाहिए: :values।',
+    'doesnt_start_with' => 'फ़ील्ड :attribute को निम्नलिखित में से किसी एक के साथ प्रारंभ नहीं किया जाना चाहिए: :values।',
+    'email'             => 'फ़ील्ड :attribute एक मान्य ईमेल पता होना चाहिए।',
+    'ends_with'         => 'फ़ील्ड :attribute को निम्नलिखित में से किसी एक के साथ समाप्त किया जाना चाहिए: :values।',
+    'enum'              => 'चयनित :attribute अमान्य है।',
+    'exists'            => 'चयनित :attribute अमान्य है।',
+    'extensions'        => 'फ़ील्ड :attribute में निम्नलिखित में से कोई भी एक एक्सटेंशन होना चाहिए: :values।',
+    'file'              => 'फ़ील्ड :attribute एक फ़ाइल होनी चाहिए।',
+    'filled'            => 'फ़ील्ड :attribute का मान होना आवश्यक है।',
 
-    'gt'                   => [
-        'numeric' => ':attribute :value से बड़ी होनी चाहिए।',
-        'file'    => 'द :attribute :value किलोबाइट्स से बड़ा होना चाहिए।',
-        'string'  => 'द :attribute :value कैरेक्टर्स से बड़ा होना चाहिए।',
-        'array'   => 'द :attribute में :value आइटम्स से अधिक होना चाहिए।',
+    'gt' => [
+        'array'   => 'फ़ील्ड :attribute में :value आइटम्स से अधिक होने चाहिए।',
+        'file'    => 'फ़ील्ड :attribute :value किलोबाइट्स से अधिक होना चाहिए।',
+        'numeric' => 'फ़ील्ड :attribute :value से अधिक होना चाहिए।',
+        'string'  => 'फ़ील्ड :attribute :value वर्णों से अधिक होना चाहिए।',
     ],
 
-    'gte'                  => [
-        'numeric' => ':attribute :value से अधिक या बराबर होनी चाहिए।',
-        'file'    => ':attribute से बड़ा या बराबर होना चाहिए:value किलोबाइट्स।',
-        'string'  => ': attribute इससे बड़ा या बराबर होना चाहिए:value वर्ण।',
-        'array'   => 'द :attribute में :value आइटम्स या अधिक होना चाहिए।',
+    'gte' => [
+        'array'   => 'फ़ील्ड :attribute में :value आइटम्स या उससे अधिक होने चाहिए।',
+        'file'    => 'फ़ील्ड :attribute :value किलोबाइट्स से अधिक या उसके बराबर होना चाहिए।',
+        'numeric' => 'फ़ील्ड :attribute :value से अधिक या उसके बराबर होना चाहिए।',
+        'string'  => 'फ़ील्ड :attribute :value वर्णों से अधिक या उसके बराबर होना चाहिए।',
     ],
 
-    'image'                => ':attribute एक छवि होनी चाहिए।',
-    'in'                   => 'चयनित :attribute अमान्य है।',
-    'in_array'             => "द :attribute फील्ड :other' में मौजूद नहीं है।",
-    'integer'              => ':attribute एक पूर्णांक होना चाहिए।',
-    'ip'                   => ':attribute एक वैध आईपी पता होना चाहिए।',
-    'ipv4'                 => ':attribute एक मान्य IPv4 पता होना चाहिए।',
-    'ipv6'                 => ':attribute एक मान्य IPv6 पता होना चाहिए।',
-    'json'                 => ':attribute एक वैध JSON स्ट्रिंग होनी चाहिए।',
+    'hex_color'    => 'फ़ील्ड :attribute एक मान्य हेक्साडेसिमल रंग होना चाहिए।',
+    'image'        => 'फ़ील्ड :attribute एक छवि होनी चाहिए।',
+    'in'           => 'चयनित :attribute अमान्य है।',
+    'in_array'     => 'फ़ील्ड :attribute :other में मौजूद नहीं है।',
+    'integer'      => 'फ़ील्ड :attribute एक पूर्णांक होना चाहिए।',
+    'ip'           => 'फ़ील्ड :attribute एक मान्य IP पता होना चाहिए।',
+    'ipv4'         => 'फ़ील्ड :attribute एक मान्य IPv4 पता होना चाहिए।',
+    'ipv6'         => 'फ़ील्ड :attribute एक मान्य IPv6 पता होना चाहिए।',
+    'json'         => 'फ़ील्ड :attribute एक मान्य JSON स्ट्रिंग होनी चाहिए।',
+    'lowercase'    => 'फ़ील्ड :attribute लोअरकेस होना चाहिए।',
 
-    'lt'                   => [
-        'numeric' => ':attribute :value से कम होनी चाहिए।',
-        'file'    => ':attribute :value किलोबाइट से कम होनी चाहिए।',
-        'string'  => ':attribute :value वर्णों से कम होनी चाहिए।',
-        'array'   => ':attribute में :value आइटम से कम होना चाहिए।',
+    'lt' => [
+        'array'   => 'फ़ील्ड :attribute में :value आइटम्स से कम होने चाहिए।',
+        'file'    => 'फ़ील्ड :attribute :value किलोबाइट्स से कम होना चाहिए।',
+        'numeric' => 'फ़ील्ड :attribute :value से कम होना चाहिए।',
+        'string'  => 'फ़ील्ड :attribute :value वर्णों से कम होना चाहिए।',
     ],
 
-    'lte'                  => [
-        'numeric' => ': attribute कम या बराबर होनी चाहिए: मान।',
-        'file'    => ': attribute कम या बराबर होनी चाहिए: मान किलोबाइट्स।',
-        'string'  => ': attribute कम या बराबर होनी चाहिए: मान वर्ण।',
-        'array'   => ': attribute में :value आइटम्स से अधिक नहीं होना चाहिए।',
+    'lte' => [
+        'array'   => 'फ़ील्ड :attribute में :value आइटम्स से अधिक नहीं होना चाहिए।',
+        'file'    => 'फ़ील्ड :attribute :value किलोबाइट्स से अधिक या उसके बराबर होना चाहिए।',
+        'numeric' => 'फ़ील्ड :attribute :value से अधिक या उसके बराबर होना चाहिए।',
+        'string'  => 'फ़ील्ड :attribute :value वर्णों से अधिक नहीं होना चाहिए।',
     ],
 
-    'max'                  => [
-        'numeric' => ":attribute :max' से अधिक नहीं हो सकती है।",
-        'file'    => ':attribute :max किलोबाइट से अधिक नहीं हो सकती है।',
-        'string'  => ':attribute :max वर्णों से अधिक नहीं हो सकती है।',
-        'array'   => ':attribute में :max आइटम्स से अधिक नहीं हो सकते हैं।',
+    'mac_address' => 'फ़ील्ड :attribute एक मान्य MAC पता होना चाहिए।',
+
+    'max' => [
+        'array'   => 'फ़ील्ड :attribute :max आइटम्स से अधिक नहीं होना चाहिए।',
+        'file'    => 'फ़ील्ड :attribute :max किलोबाइट्स से अधिक नहीं होना चाहिए।',
+        'numeric' => 'फ़ील्ड :attribute :max से अधिक नहीं होना चाहिए।',
+        'string'  => 'फ़ील्ड :attribute :max वर्णों से अधिक नहीं होना चाहिए।',
     ],
 
-    'mimes'                => ':attribute एक प्रकार की फ़ाइल होनी चाहिए::value',
-    'mimetypes'            => ':attribute एक प्रकार की फ़ाइल होनी चाहिए::value',
+    'max_digits' => 'फ़ील्ड :attribute में :max अंकों से अधिक नहीं होना चाहिए।',
+    'mimes'      => 'फ़ील्ड :attribute एक फ़ाइल के प्रकार :values होनी चाहिए।',
+    'mimetypes'  => 'फ़ील्ड :attribute एक फ़ाइल के प्रकार :values होनी चाहिए।',
 
-    'min'                  => [
-        'numeric' => ':attribute कम से कम :min होनी चाहिए।',
-        'file'    => ':attribute कम से कम :min किलोबाइट्स होनी चाहिए।',
-        'string'  => ':attribute कम से कम :min कैरेक्टर का होना चाहिए।',
-        'array'   => ':attribute में कम से कम :min आइटम होना चाहिए।',
+    'min' => [
+        'array'   => 'फ़ील्ड :attribute में कम से कम :min आइटम्स होने चाहिए।',
+        'file'    => 'फ़ील्ड :attribute कम से कम :min किलोबाइट्स होने चाहिए।',
+        'numeric' => 'फ़ील्ड :attribute कम से कम :min होना चाहिए।',
+        'string'  => 'फ़ील्ड :attribute कम से कम :min वर्ण होने चाहिए।',
     ],
 
-    'not_in'               => 'चयनित :attribute अमान्य है।',
-    'not_regex'            => ':attribute प्रारूप अमान्य है।',
-    'numeric'              => ':attribute एक संख्या होनी चाहिए।',
-    'present'              => ':attribute फ़ील्ड मौजूद होना चाहिए।',
-    'regex'                => ':attribute प्रारूप अमान्य है।',
-    'required'             => ':attribute फ़ील्ड आवश्यक है।',
-    'required_if'          => ':attribute फ़ील्ड आवश्यक है जब:other है: value',
-    'required_unless'      => ':attribute फ़ील्ड आवश्यक है जब तक कि :other :values में न हो।',
-    'required_with'        => ':attribute फ़ील्ड आवश्यक है जब:value मौजूद है।',
-    'required_with_all'    => ':attribute फ़ील्ड आवश्यक है जब:value मौजूद है।',
-    'required_without'     => ':attribute फ़ील्ड आवश्यक है जब:value मौजूद नहीं है।',
-    'required_without_all' => ':attribute फ़ील्ड आवश्यक है जब कोई भी: value मौजूद नहीं है।',
-    'same'                 => 'द :attribute और :other मैच होना चाहिए।',
+    'min_digits'       => 'फ़ील्ड :attribute में कम से कम :min अंक होने चाहिए।',
+    'missing'          => 'फ़ील्ड :attribute अनुपस्थित होना चाहिए।',
+    'missing_if'       => 'फ़ील्ड :attribute :other :value होने पर अनुपस्थित होना चाहिए।',
+    'missing_unless'   => 'फ़ील्ड :attribute :other :value नहीं होने पर अनुपस्थित होना चाहिए।',
+    'missing_with'     => 'फ़ील्ड :attribute :values मौजूद होने पर अनुपस्थित होना चाहिए।',
+    'missing_with_all' => 'फ़ील्ड :attribute :values मौजूद होने पर अनुपस्थित होना चाहिए।',
+    'multiple_of'      => 'फ़ील्ड :attribute :value की एक गुणा होनी चाहिए।',
+    'not_in'           => 'चयनित :attribute अमान्य है।',
+    'not_regex'        => 'फ़ील्ड :attribute का प्रारूप अमान्य है।',
+    'numeric'          => 'फ़ील्ड :attribute एक संख्या होनी चाहिए।',
 
-    'size'                 => [
-        'numeric' => ':attribute होना चाहिए:size',
-        'file'    => ':attribute होना चाहिए:size किलोबाइट्स।',
-        'string'  => ':attribute होना चाहिए:size वर्ण।',
-        'array'   => 'इस विशेषता में :size के आइटम शामिल होने चाहिए।',
+    'password' => [
+        'letters'       => 'फ़ील्ड :attribute में कम से कम एक अक्षर होना चाहिए।',
+        'mixed'         => 'फ़ील्ड :attribute में कम से कम एक बड़ा और एक छोटा अक्षर होना चाहिए।',
+        'numbers'       => 'फ़ील्ड :attribute में कम से कम एक संख्या होनी चाहिए।',
+        'symbols'       => 'फ़ील्ड :attribute में कम से कम एक विशेष चिह्न होना चाहिए।',
+        'uncompromised' => 'दी गई :attribute डेटा लीक में प्रकट हो चुका है। कृपया एक अलग :attribute चुनें।',
     ],
 
-    'string'               => ':attribute एक स्ट्रिंग होनी चाहिए।',
-    'timezone'             => ':attribute एक मान्य क्षेत्र होना चाहिए।',
-    'unique'               => ':attribute पहले ही ली जा चुकी है।',
-    'uploaded'             => ':attribute अपलोड करने में विफल रही।',
-    'url'                  => ':attribute प्रारूप अमान्य है।',
+    'present'              => 'फ़ील्ड :attribute मौजूद होना चाहिए।',
+    'present_if'           => 'फ़ील्ड :attribute मौजूद होना चाहिए जब :other :value हो।',
+    'present_unless'       => 'फ़ील्ड :attribute मौजूद होना चाहिए जब तक :other :value नहीं है।',
+    'present_with'         => 'फ़ील्ड :attribute मौजूद होना चाहिए जब :values मौजूद है।',
+    'present_with_all'     => 'फ़ील्ड :attribute मौजूद होना चाहिए जब :values मौजूद हैं।',
+    'prohibited'           => 'फ़ील्ड :attribute निषिद्ध है।',
+    'prohibited_if'        => 'फ़ील्ड :attribute :other :value होने पर निषिद्ध है।',
+    'prohibited_unless'    => 'फ़ील्ड :attribute :other :values में नहीं होने पर निषिद्ध है।',
+    'prohibits'            => 'फ़ील्ड :attribute :other को मौजूद न होने देता है।',
+    'regex'                => 'फ़ील्ड :attribute का प्रारूप अमान्य है।',
+    'required'             => 'फ़ील्ड :attribute आवश्यक है।',
+    'required_array_keys'  => 'फ़ील्ड :attribute में निम्नलिखित लिए दर्ज की गई आइटम्स होने चाहिए: :values।',
+    'required_if'          => 'फ़ील्ड :attribute आवश्यक है जब :other :value हो।',
+    'required_if_accepted' => 'फ़ील्ड :attribute आवश्यक है जब :other स्वीकृत हो।',
+    'required_unless'      => 'फ़ील्ड :attribute आवश्यक है जब तक :other :values में नहीं है।',
+    'required_with'        => 'फ़ील्ड :attribute आवश्यक है जब :values मौजूद है।',
+    'required_with_all'    => 'फ़ील्ड :attribute आवश्यक है जब :values मौजूद हैं।',
+    'required_without'     => 'फ़ील्ड :attribute आवश्यक है जब :values मौजूद नहीं है।',
+    'required_without_all' => 'फ़ील्ड :attribute आवश्यक है जब :values में से कोई भी मौजूद नहीं हैं।',
+    'same'                 => 'फ़ील्ड :attribute और :other मेल खाने चाहिए।',
+
+    'size' => [
+        'array'   => 'फ़ील्ड :attribute में :size आइटम होने चाहिए।',
+        'file'    => 'फ़ील्ड :attribute :size किलोबाइट्स होना चाहिए।',
+        'numeric' => 'फ़ील्ड :attribute का मान :size होना चाहिए।',
+        'string'  => 'फ़ील्ड :attribute :size अक्षरों का होना चाहिए।',
+    ],
+
+    'starts_with' => 'फ़ील्ड :attribute निम्नलिखित में से किसी एक से शुरू होना चाहिए: :values।',
+    'string'      => 'फ़ील्ड :attribute स्ट्रिंग होनी चाहिए।',
+    'timezone'    => 'फ़ील्ड :attribute मान्य समय क्षेत्र होना चाहिए।',
+    'unique'      => 'फ़ील्ड :attribute पहले से ही लिया गया है।',
+    'uploaded'    => 'फ़ाइल :attribute अपलोड करने में विफल रही।',
+    'uppercase'   => 'फ़ील्ड :attribute अपरकेस होना चाहिए।',
+    'url'         => 'फ़ील्ड :attribute मान्य URL होना चाहिए।',
+    'ulid'        => 'फ़ील्ड :attribute मान्य ULID होना चाहिए।',
+    'uuid'        => 'फ़ील्ड :attribute मान्य UUID होना चाहिए।',
 
     /*
     |--------------------------------------------------------------------------
@@ -139,7 +187,7 @@ return [
 
     'custom' => [
         'attribute-name' => [
-            'rule-name' => 'सीमा शुल्क संदेश',
+            'rule-name' => 'custom-message',
         ],
     ],
 
@@ -148,9 +196,9 @@ return [
     | Custom Validation Attributes
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used to swap attribute place-holders
-    | with something more reader friendly such as E-Mail Address instead
-    | of "email". This simply helps us make messages a little cleaner.
+    | The following language lines are used to swap our attribute placeholder
+    | with something more reader friendly such as "E-Mail Address" instead
+    | of "email". This simply helps us make our message more expressive.
     |
     */
 

@@ -48,6 +48,8 @@ class SitemapRepository extends Repository
         $sitemap = parent::update($attributes, $id);
 
         $this->generateSitemap($sitemap);
+
+        return $sitemap;
     }
 
     /**
