@@ -26,6 +26,7 @@ class CurrencyTableSeeder extends Seeder
         'IRR' => '﷼',
         'AFN' => '؋',
         'TRY' => '₺',
+        'BRL' => 'R$',
     ];
 
     /**
