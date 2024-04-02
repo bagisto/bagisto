@@ -492,7 +492,7 @@
                                 } else {
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
 
-                                    if(response.data.data.redirect) {
+                                    if (response.data.data.redirect) {
                                         setTimeout(() => {
                                             window.location.href = response.data.data.redirect
                                         }, 1000)
