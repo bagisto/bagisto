@@ -737,7 +737,7 @@
                             </p>
 
                             <p class="text-gray-600 dark:text-gray-300">
-                                @{{ "@lang('admin::app.customers.customers.view.phone')".replace(':phone', customer.phone) }}
+                                @{{ "@lang('admin::app.customers.customers.view.phone')".replace(':phone', customer.phone ?? 'N/A') }}
                             </p>
 
                             <p class="text-gray-600 dark:text-gray-300">

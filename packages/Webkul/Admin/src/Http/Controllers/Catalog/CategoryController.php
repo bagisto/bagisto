@@ -123,7 +123,7 @@ class CategoryController extends Controller
             'display_mode',
             'status',
             'attributes',
-            core()->getCurrentLocale()->code
+            $categoryRequest->input('locale')
         ), $id);
 
         Event::dispatch('catalog.category.update.after', $category);
@@ -154,15 +154,11 @@ class CategoryController extends Controller
             Event::dispatch('catalog.category.delete.after', $id);
 
             return new JsonResponse([
-                'message' => trans('admin::app.catalog.categories.delete-success', [
-                    'name' => trans('admin::app.catalog.categories.category'),
-                ]),
+                'message' => trans('admin::app.catalog.categories.delete-success'),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.catalog.categories.delete-failed', [
-                    'name' => trans('admin::app.catalog.categories.category'),
-                ]),
+                'message' => trans('admin::app.catalog.categories.delete-failed'),
             ], 500);
         }
     }

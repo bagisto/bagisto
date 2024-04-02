@@ -3038,6 +3038,8 @@ return [
             'save-btn'                     => 'Salvar Configuração',
             'save-message'                 => 'Configuração salva com sucesso',
             'search'                       => 'Procurar',
+            'select-country'               => 'Selecionar país',
+            'select-state'                 => 'Selecionar estado',
             'title'                        => 'Configuração',
 
             'general' => [

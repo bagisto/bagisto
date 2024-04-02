@@ -3038,6 +3038,8 @@ return [
             'save-btn'                     => 'שמור הגדרות',
             'save-message'                 => 'ההגדרות נשמרו בהצלחה',
             'search'                       => 'לחפש',
+            'select-country'               => 'בחר מדינה',
+            'select-state'                 => 'בחר מדינה',
             'title'                        => 'הגדרות',
 
             'general' => [

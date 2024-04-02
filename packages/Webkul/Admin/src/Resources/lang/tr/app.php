@@ -3039,6 +3039,8 @@ return [
             'save-btn'                     => 'Yapılandırmayı Kaydet',
             'save-message'                 => 'Yapılandırma başarıyla kaydedildi',
             'search'                       => 'Aramak',
+            'select-country'               => 'Ülke seçiniz',
+            'select-state'                 => 'Eyalet seçiniz',
             'title'                        => 'Yapılandırma',
 
             'general' => [

@@ -3038,6 +3038,8 @@ return [
             'save-btn'                     => 'حفظ الإعدادات',
             'save-message'                 => 'تم حفظ الإعدادات بنجاح',
             'search'                       => 'يبحث',
+            'select-country'               => 'اختر البلد',
+            'select-state'                 => 'اختر الولاية',
             'title'                        => 'الإعدادات',
 
             'general' => [
