@@ -669,7 +669,7 @@ it('should only remove one product from the cart for now the cart will contains 
 
     $this->assertCart($cart);
 
-    $this->assertCartItem($cartItem);
+    $this->assertCartItem($cartItem2);
 });
 
 it('should only remove one product from the cart for now the cart will contains two products for a customer', function () {

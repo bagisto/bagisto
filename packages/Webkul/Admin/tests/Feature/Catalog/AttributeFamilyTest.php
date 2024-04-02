@@ -49,7 +49,7 @@ it('should store newly created attribute family', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.families.store'), [
-        'code'             => $code = strtolower(fake()->words(1, true)),
+        'code'             => $code = fake()->numerify('code########'),
         'name'             => $name = fake()->name(),
         'attribute_groups' => [
             [

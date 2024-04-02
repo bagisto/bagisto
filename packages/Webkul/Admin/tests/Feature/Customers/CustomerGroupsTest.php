@@ -32,7 +32,7 @@ it('should store the newly created customers group', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.groups.store'), [
-        'code' => $code = strtolower(fake()->words(1, true)),
+        'code' => $code = fake()->numerify('code########'),
         'name' => $name = fake()->name(),
     ])
         ->assertOk()

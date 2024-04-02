@@ -73,7 +73,7 @@ it('should store newly created attribute', function () {
 
     postJson(route('admin.catalog.attributes.store'), [
         'admin_name'    => $name = fake()->name(),
-        'code'          => $code = strtolower(fake()->word()),
+        'code'          => $code = fake()->numerify('code########'),
         'type'          => 'text',
         'default_value' => 1,
     ])
