@@ -354,7 +354,7 @@ return [
                 'discount'              => 'Discount - :discount',
                 'download-pdf'          => 'Download PDF',
                 'fraud'                 => 'Fraud',
-                
+
             ],
 
             'view' => [
