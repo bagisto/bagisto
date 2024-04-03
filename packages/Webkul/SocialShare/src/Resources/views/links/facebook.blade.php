@@ -13,7 +13,7 @@
     >
         <li class="transition-all hover:opacity-[0.8]">
             <a 
-                href="#"
+                :href="shareUrl"
                 @click="openSharePopup"
                 aria-label="Facebook"
                 role="button"
@@ -28,14 +28,14 @@
         app.component('v-facebook-share', {
             template: '#v-facebook-share-template',
 
-            data: function () {
+            data() {
                 return {
                     shareUrl: '{{ $facebookURL }}'
                 }
             },
 
             methods: {
-                openSharePopup: function () {
+                openSharePopup() {
                     window.open(this.shareUrl, '_blank', 'resizable=yes,top=500,left=500,width=500,height=500')
                 }
             }

@@ -1,7 +1,7 @@
 @php
     $url = route('shop.product_or_category.index', $product->url_key);
 
-    $message = empty($message) ? $product->name : $message;
+    $message ??= $product->name;
 
     $emailURL = 'mailto:your@email.com?subject=' . $message . '&body=' . $message . ' ' . $url;
 @endphp
