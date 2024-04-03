@@ -75,9 +75,9 @@ it('should display the cart items for a guest user', function () {
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
         ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0);
 
-    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+    $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
-    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
+    $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -161,9 +161,9 @@ it('should display the cart items for a customer', function () {
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
         ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0);
 
-    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+    $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
-    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
+    $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -653,9 +653,9 @@ it('should only remove one product from the cart for now the cart will contains 
         ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
 
-    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+    $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
-    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
+    $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -779,9 +779,9 @@ it('should only remove one product from the cart for now the cart will contains 
         ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
 
-    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+    $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
-    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
+    $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -1093,9 +1093,9 @@ it('should update cart quantities for guest user', function () {
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
         ->assertJsonPath('message', trans('shop::app.checkout.cart.index.quantity-update'));
 
-    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+    $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
-    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
+    $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -1213,9 +1213,9 @@ it('should update cart quantities for customer', function () {
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
         ->assertJsonPath('message', trans('shop::app.checkout.cart.index.quantity-update'));
 
-    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+    $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
-    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
+    $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -1311,11 +1311,11 @@ it('should add a simple product to the cart for guest user', function () {
         ->assertJsonPath('data.payment_method', null)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality($product->price * $quantity, $response['data']['grand_total']);
+    $this->assertPrice($product->price * $quantity, $response['data']['grand_total']);
 
-    $this->assertEquality($product->price * $quantity, $response['data']['sub_total']);
+    $this->assertPrice($product->price * $quantity, $response['data']['sub_total']);
 });
 
 it('should add a simple product to the cart for customer', function () {
@@ -1363,11 +1363,11 @@ it('should add a simple product to the cart for customer', function () {
         ->assertJsonPath('data.payment_method', null)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality($product->price * $quantity, $response['data']['grand_total']);
+    $this->assertPrice($product->price * $quantity, $response['data']['grand_total']);
 
-    $this->assertEquality($product->price * $quantity, $response['data']['sub_total']);
+    $this->assertPrice($product->price * $quantity, $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the product id not provided add a bundle product to the cart', function () {
@@ -1493,9 +1493,9 @@ it('should add a bundle product to the cart for guest user', function () {
         ->assertJsonPath('data.payment_method', null)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
-    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
 });
 
 it('should add a bundle product to the cart for customer', function () {
@@ -1565,9 +1565,9 @@ it('should add a bundle product to the cart for customer', function () {
         ->assertJsonPath('data.payment_method', null)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
-    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
 });
 
 it('should fails the validation when the product id not provided when add a configurable product to the cart', function () {
@@ -1668,9 +1668,9 @@ it('should add a configurable product to the cart for guest user', function () {
         ->assertJsonPath('data.payment_method', null)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
-    $this->assertEquality($childProduct->price, $response['data']['grand_total']);
+    $this->assertPrice($childProduct->price, $response['data']['grand_total']);
 
-    $this->assertEquality($childProduct->price, $response['data']['sub_total']);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 });
 
 it('should add a configurable product to the cart for customer', function () {
@@ -1727,9 +1727,9 @@ it('should add a configurable product to the cart for customer', function () {
         ->assertJsonPath('data.base_tax_total', 0)
         ->assertJsonPath('data.base_discount_amount', 0);
 
-    $this->assertEquality($childProduct->price, $response['data']['grand_total']);
+    $this->assertPrice($childProduct->price, $response['data']['grand_total']);
 
-    $this->assertEquality($childProduct->price, $response['data']['sub_total']);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the product id not provided when add a downloadable product to the cart', function () {
@@ -1818,9 +1818,9 @@ it('should add a downloadable product to the cart for guest user', function () {
         ->assertJsonPath('data.base_tax_total', 0)
         ->assertJsonPath('data.base_discount_amount', 0);
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality($product->price, $response['data']['grand_total']);
+    $this->assertPrice($product->price, $response['data']['grand_total']);
 });
 
 it('should add a downloadable product to the cart for customer', function () {
@@ -1871,9 +1871,9 @@ it('should add a downloadable product to the cart for customer', function () {
         ->assertJsonPath('data.base_tax_total', 0)
         ->assertJsonPath('data.base_discount_amount', 0);
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality($product->price, $response['data']['grand_total']);
+    $this->assertPrice($product->price, $response['data']['grand_total']);
 });
 
 it('should fails the validation error when the product id not provided when add a grouped product to the cart', function () {
@@ -2149,9 +2149,9 @@ it('should add a virtual product to the cart for guest user', function () {
         ->assertJsonPath('data.base_tax_total', 0)
         ->assertJsonPath('data.base_discount_amount', 0);
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality($product->price * $quantity, $response['data']['grand_total']);
+    $this->assertPrice($product->price * $quantity, $response['data']['grand_total']);
 });
 
 it('should add a virtual product to the cart for customer', function () {
@@ -2199,7 +2199,7 @@ it('should add a virtual product to the cart for customer', function () {
         ->assertJsonPath('data.base_tax_total', 0)
         ->assertJsonPath('data.base_discount_amount', 0);
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality($product->price * $quantity, $response['data']['grand_total']);
+    $this->assertPrice($product->price * $quantity, $response['data']['grand_total']);
 });

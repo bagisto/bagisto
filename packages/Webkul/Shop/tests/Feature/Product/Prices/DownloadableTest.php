@@ -151,11 +151,11 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality($cartRule->discount_amount, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
 
-    $this->assertEquality($product->price - $cartRule->discount_amount, $response['data']['grand_total']);
+    $this->assertPrice($product->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
     $this->assertCartRule($cartRule);
 
@@ -299,11 +299,11 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
         ->assertJsonPath('data.items.0.quantity', $quantity);
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality($cartRule->discount_amount, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
 
-    $this->assertEquality($product->price - $cartRule->discount_amount, $response['data']['grand_total']);
+    $this->assertPrice($product->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
     $this->assertCartRule($cartRule);
 
@@ -448,9 +448,9 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
         ->assertJsonPath('data.items.0.quantity', $quantity)
         ->assertJsonPath('data.discount_amount', $cartRule->discount_amount);
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality(($product->price * $quantity) - $cartRule->discount_amount, $response['data']['grand_total']);
+    $this->assertPrice(($product->price * $quantity) - $cartRule->discount_amount, $response['data']['grand_total']);
 
     $this->assertCartRule($cartRule);
 
@@ -595,9 +595,9 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
         ->assertJsonPath('data.items.0.quantity', $quantity)
         ->assertJsonPath('data.discount_amount', $cartRule->discount_amount);
 
-    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
+    $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquality(($product->price * $quantity) - $cartRule->discount_amount, $response['data']['grand_total']);
+    $this->assertPrice(($product->price * $quantity) - $cartRule->discount_amount, $response['data']['grand_total']);
 
     $this->assertCartRule($cartRule);
 
@@ -793,7 +793,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.id', $cart->id)
         ->assertJsonPath('data.discount_amount', $discountAmount);
 
-    $this->assertEquality($product->price, $response['data']['sub_total']);
+    $this->assertPrice($product->price, $response['data']['sub_total']);
 
     $this->assertCartRule($cartRule);
 
@@ -985,7 +985,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.id', $cart->id)
         ->assertJsonPath('data.discount_amount', $discountAmount);
 
-    $this->assertEquality($product->price, $response['data']['sub_total']);
+    $this->assertPrice($product->price, $response['data']['sub_total']);
 
     $this->assertCartRule($cartRule);
 
@@ -1179,7 +1179,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.id', $cart->id)
         ->assertJsonPath('data.discount_amount', $discountAmount);
 
-    $this->assertEquality($product->price, $response['data']['sub_total']);
+    $this->assertPrice($product->price, $response['data']['sub_total']);
 
     $this->assertCartRule($cartRule);
 
@@ -1373,9 +1373,9 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.id', $cart->id)
         ->assertJsonPath('data.discount_amount', $discountAmount);
 
-    $this->assertEquality($product->price, $response['data']['sub_total']);
+    $this->assertPrice($product->price, $response['data']['sub_total']);
 
-    $this->assertEquality($product->price - $discountAmount, $response['data']['grand_total']);
+    $this->assertPrice($product->price - $discountAmount, $response['data']['grand_total']);
 
     $this->assertCartRule($cartRule);
 
@@ -1471,13 +1471,13 @@ it('should check tax is applying for the downloadable product into the cart for 
         ->assertOk()
         ->assertJsonPath('data.id', $cart->id);
 
-    $this->assertEquality($cart->base_tax_total, $response['data']['base_tax_total']);
+    $this->assertPrice($cart->base_tax_total, $response['data']['base_tax_total']);
 
-    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+    $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
-    $this->assertEquality($product->price, $response['data']['sub_total']);
+    $this->assertPrice($product->price, $response['data']['sub_total']);
 
-    $this->assertEquality($cart->tax_total, $response['data']['tax_total']);
+    $this->assertPrice($cart->tax_total, $response['data']['tax_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with fixed price type for downloadable product', function () {
@@ -1579,7 +1579,7 @@ it('should check customer group price for guest customer with fixed price type f
         ->assertJsonPath('data.items.0.quantity', $customerGroupPrice->qty)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['grand_total']);
+    $this->assertPrice($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['grand_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
         'id'                 => $customerGroupPrice->id,
@@ -1693,9 +1693,9 @@ it('should check customer group price for guest customer with discount price typ
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
         'id'                 => $customerGroupPrice->id,
@@ -1806,9 +1806,9 @@ it('should check customer group price for general customer with fixed price type
         ->assertJsonPath('data.items.0.quantity', $customerGroupPrice->qty)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['grand_total']);
+    $this->assertPrice($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['grand_total']);
 
-    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['sub_total']);
+    $this->assertPrice($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
         'id'                 => $customerGroupPrice->id,
@@ -1922,9 +1922,9 @@ it('should check customer group price for general customer with discount price t
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
         'id'                 => $customerGroupPrice->id,
@@ -2035,9 +2035,9 @@ it('should check customer group price for wholesale customer with fixed price ty
         ->assertJsonPath('data.items.0.quantity', $customerGroupPrice->qty)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['grand_total']);
+    $this->assertPrice($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['grand_total']);
 
-    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['sub_total']);
+    $this->assertPrice($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
         'id'                 => $customerGroupPrice->id,
@@ -2151,9 +2151,9 @@ it('should check customer group price for wholesale customer with discount price
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
     $this->assertDatabaseHas('product_customer_group_prices', [
         'id'                 => $customerGroupPrice->id,
@@ -2264,9 +2264,9 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
     $this->assertCatalogRule($catalogRule);
 
@@ -2374,9 +2374,9 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
     $this->assertCatalogRule($catalogRule);
 
@@ -2484,9 +2484,9 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
     $this->assertCatalogRule($catalogRule);
 
@@ -2594,9 +2594,9 @@ it('should check discount price if catalog rule applied for fixed price for down
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['grand_total']);
+    $this->assertPrice($product->price - $catalogRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
+    $this->assertPrice($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
 
     $this->assertCatalogRule($catalogRule);
 
@@ -2706,9 +2706,9 @@ it('should check discount price if catalog rule applied for fixed price for down
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['grand_total']);
+    $this->assertPrice($product->price - $catalogRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
+    $this->assertPrice($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
 
     $this->assertCatalogRule($catalogRule);
 
@@ -2824,9 +2824,9 @@ it('should check discount price if catalog rule applied for fixed price for down
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['grand_total']);
+    $this->assertPrice($product->price - $catalogRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
+    $this->assertPrice($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
 
     $this->assertCatalogRule($catalogRule);
 

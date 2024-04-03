@@ -12,6 +12,7 @@ use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\ProductInventoryIndex;
 use Webkul\Product\Models\ProductOrderedInventory;
 use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 use Webkul\Shop\Mail\Order\CreatedNotification as ShopOrderCreatedNotification;
@@ -1636,11 +1637,11 @@ it('should store the payment method for guest user', function () {
         ->assertJsonPath('cart.payment_method_title', 'Cash On Delivery')
         ->assertOk();
 
-    $this->assertEquality($product->price, $response['cart']['grand_total']);
+    $this->assertPrice($product->price, $response['cart']['grand_total']);
 
-    $this->assertEquality($cartItem->total, $response['cart']['items']['0']['total']);
+    $this->assertPrice($cartItem->total, $response['cart']['items']['0']['total']);
 
-    $this->assertEquality($product->price, $response['cart']['sub_total']);
+    $this->assertPrice($product->price, $response['cart']['sub_total']);
 });
 
 it('should store the payment method for customer', function () {
@@ -1775,11 +1776,11 @@ it('should store the payment method for customer', function () {
         ->assertJsonPath('cart.payment_method_title', 'Cash On Delivery')
         ->assertOk();
 
-    $this->assertEquality($product->price, $response['cart']['grand_total']);
+    $this->assertPrice($product->price, $response['cart']['grand_total']);
 
-    $this->assertEquality($cartItem->total, $response['cart']['items']['0']['total']);
+    $this->assertPrice($cartItem->total, $response['cart']['items']['0']['total']);
 
-    $this->assertEquality($product->price, $response['cart']['sub_total']);
+    $this->assertPrice($product->price, $response['cart']['sub_total']);
 });
 
 it('should place a simple product order for a guest user', function () {
@@ -1845,7 +1846,7 @@ it('should place a simple product order for a guest user', function () {
         'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
@@ -1864,80 +1865,75 @@ it('should place a simple product order for a guest user', function () {
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'customer_id'          => null,
-                'is_guest'             => 1,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'base_price'   => $price,
-                'total'        => $price,
-                'base_total'   => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItems($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'       => $paymentMethod,
-                'method_title' => $methodTitle,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
             [
-                'qty'        => $quantity,
+                'qty'        => $cartItem->quantity,
                 'product_id' => $product->id,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'qty'        => $product->inventory_source_qty(1) - $cartItem->quantity,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $cartShippingAddress->address_type = OrderAddress::ADDRESS_TYPE_SHIPPING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
         ],
     ]);
 });
@@ -2914,7 +2910,13 @@ it('should place a configurable product order for a customer', function () {
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
+
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+    ]);
 
     $this->assertCartItem($cartItem);
 

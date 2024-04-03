@@ -19,7 +19,7 @@ trait CoreAssertions
     /**
      * Assert that two numbers are equal with optional decimal precision.
      */
-    public function assertEquality(float $expected, float $actual, ?int $decimal = null): void
+    public function assertPrice(float $expected, float $actual, ?int $decimal = null): void
     {
         $decimal = $decimal ?? core()->getCurrentChannel()->decimal;
 

@@ -95,7 +95,7 @@ it('should fails the validation error when certain inputs not provided when add 
 
     $this->assertCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);    
+    $this->assertCartRuleChannel($cartRule);
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for all customer group type', function () {
@@ -177,11 +177,11 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality($cartRule->discount_amount * 4, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
     $this->assertCartRule($cartRule);
 
@@ -352,11 +352,11 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality($cartRule->discount_amount * 4, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
     $this->assertCartRule($cartRule);
 
@@ -527,11 +527,11 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality($cartRule->discount_amount * 4, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
     $this->assertCartRule($cartRule);
 
@@ -702,11 +702,11 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality($cartRule->discount_amount * 4, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 });
 
 it('should fails the validation error when certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
@@ -796,7 +796,7 @@ it('should fails the validation error when certain inputs not provided when add 
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
-        
+
     $this->assertCartRule($cartRule);
 
     $this->assertCartRuleCustomerGroup($cartRule);
@@ -898,11 +898,11 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality($cartRule->discount_amount * 4, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
     $this->assertCartRule($cartRule);
 
@@ -1102,11 +1102,11 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality($cartRule->discount_amount * 4, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
     $this->assertCartRule($cartRule);
 
@@ -1315,11 +1315,11 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality($cartRule->discount_amount * 4, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
     $this->assertCartRule($cartRule);
 
@@ -1526,11 +1526,11 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']) - ($cartRule->discount_amount * 4), $response['data']['grand_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality($cartRule->discount_amount * 4, $response['data']['discount_amount']);
+    $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
     $this->assertCartRule($cartRule);
 
@@ -1630,9 +1630,9 @@ it('should check tax is applying for the grouped product into the cart for group
         ->assertJsonPath('data.tax_total', $cart->tax_total)
         ->assertJsonPath('data.base_tax_total', $cart->base_tax_total);
 
-    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+    $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
-    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
+    $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with fixed price type for grouped product', function () {
@@ -1694,6 +1694,10 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertUnprocessable();
 
     foreach ($productCustomerGroupPrices as $key => $productCustomerGroupPrice) {
+        if (is_null($productCustomerGroupPrice[$key])) {
+            continue;
+        }
+
         $this->assertDatabaseHas('product_customer_group_prices', [
             'id'                 => $productCustomerGroupPrice[$key]->id,
             'qty'                => $productCustomerGroupPrice[$key]->qty,
@@ -1766,11 +1770,15 @@ it('should check customer group price for guest customer with fixed price type f
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
 
     foreach ($productCustomerGroupPrices as $key => $productCustomerGroupPrice) {
+        if (is_null($productCustomerGroupPrice[$key])) {
+            continue;
+        }
+
         $this->assertDatabaseHas('product_customer_group_prices', [
             'id'                 => $productCustomerGroupPrice[$key]->id,
             'qty'                => $productCustomerGroupPrice[$key]->qty,
@@ -1841,6 +1849,10 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertUnprocessable();
 
     foreach ($productCustomerGroupPrices as $key => $productCustomerGroupPrice) {
+        if (is_null($productCustomerGroupPrice[$key])) {
+            continue;
+        }
+
         $this->assertDatabaseHas('product_customer_group_prices', [
             'id'                 => $productCustomerGroupPrice[$key]->id,
             'qty'                => $productCustomerGroupPrice[$key]->qty,
@@ -1913,9 +1925,9 @@ it('should check customer group price for general customer with fixed price type
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
 
     foreach ($productCustomerGroupPrices as $key => $productCustomerGroupPrice) {
         if (is_null($productCustomerGroupPrice[$key])) {
@@ -2049,9 +2061,9 @@ it('should check customer group price for wholesaler customer with fixed price t
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with discount price type for grouped product', function () {
@@ -2170,7 +2182,7 @@ it('should check customer group price for guest customer with discount price typ
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs nor provided when check customer group price for general customer with discount price type for grouped product', function () {
@@ -2289,7 +2301,7 @@ it('should check customer group price for general customer with discount price t
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for wholesaler customer with discount price type for grouped product', function () {
@@ -2408,7 +2420,7 @@ it('should check customer group price for wholesaler customer with discount pric
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for grouped product for guest customer into cart', function () {
@@ -2528,8 +2540,8 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 4)
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['grand_total']);
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for grouped product for general customer into cart', function () {
@@ -2649,8 +2661,8 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 4)
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['grand_total']);
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for grouped product for wholesaler customer into cart', function () {
@@ -2770,8 +2782,8 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 4)
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['grand_total']);
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for grouped product for guest customer into cart', function () {
@@ -2893,8 +2905,8 @@ it('should check discount price if catalog rule applied for fixed price for grou
         ->assertJsonPath('data.items_count', 4)
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['grand_total']);
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for grouped product for general customer into cart', function () {
@@ -3016,8 +3028,8 @@ it('should check discount price if catalog rule applied for fixed price for grou
         ->assertJsonPath('data.items_count', 4)
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['grand_total']);
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for grouped product for wholesaler customer into cart', function () {
@@ -3139,8 +3151,8 @@ it('should check discount price if catalog rule applied for fixed price for grou
         ->assertJsonPath('data.items_count', 4)
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
 
-    $this->assertEquality(array_sum($data['prices']), $response['data']['grand_total']);
-    $this->assertEquality(array_sum($data['prices']), $response['data']['sub_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
+    $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
 it('should check discount price if catalog rule applied for fixed price for grouped product for guest customer', function () {

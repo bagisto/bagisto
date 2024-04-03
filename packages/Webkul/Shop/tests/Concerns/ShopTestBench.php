@@ -8,12 +8,13 @@ use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\Checkout\Contracts\Cart;
 use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Checkout\Contracts\CartPayment;
+use Webkul\Checkout\Contracts\CartShippingRate;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
 use Webkul\Sales\Contracts\InvoiceItem;
-use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Contracts\OrderItem;
 use Webkul\Sales\Contracts\OrderPayment;
+use Webkul\Sales\Models\Order;
 
 trait ShopTestBench
 {
@@ -30,133 +31,201 @@ trait ShopTestBench
     }
 
     /**
-     * Assert the cart.
+     * Prepare order for assertion.
      */
-    public function assertCart(Cart $cart): void
+    public function prepareOrder(Cart $cart): array
     {
-        $cart->refresh();
-
-        $this->assertModelWise([
-            Cart::class => [
-                [
-                    'id'                    => $cart->id,
-                    'customer_email'        => $cart->customer_email,
-                    'customer_first_name'   => $cart->customer_first_name,
-                    'customer_last_name'    => $cart->customer_last_name,
-                    'shipping_method'       => $cart->shipping_method,
-                    'coupon_code'           => $cart->coupon_code,
-                    'is_gift'               => $cart->is_gift,
-                    'items_count'           => $cart->items_count,
-                    'items_qty'             => $cart->items_qty,
-                    'exchange_rate'         => $cart->exchange_rate,
-                    'global_currency_code'  => $cart->global_currency_code,
-                    'base_currency_code'    => $cart->base_currency_code,
-                    'channel_currency_code' => $cart->channel_currency_code,
-                    'cart_currency_code'    => $cart->cart_currency_code,
-                    'grand_total'           => $cart->grand_total,
-                    'base_grand_total'      => $cart->base_grand_total,
-                    'sub_total'             => $cart->sub_total,
-                    'base_sub_total'        => $cart->base_sub_total,
-                    'tax_total'             => $cart->tax_total,
-                    'base_tax_total'        => $cart->base_tax_total,
-                    'discount_amount'       => $cart->discount_amount,
-                    'base_discount_amount'  => $cart->base_discount_amount,
-                    'checkout_method'       => $cart->checkout_method,
-                    'is_guest'              => $cart->is_guest,
-                    'is_active'             => $cart->is_active,
-                    'applied_cart_rule_ids' => $cart->applied_cart_rule_ids,
-                    'customer_id'           => $cart->customer_id,
-                    'channel_id'            => $cart->channel_id,
-                ],
-            ],
-        ]);
+        return [
+            'cart_id'               => $cart->id,
+            'customer_id'           => $cart->customer_id,
+            'is_guest'              => $cart->is_guest,
+            'customer_email'        => $cart->customer_email,
+            'customer_first_name'   => $cart->customer_first_name,
+            'customer_last_name'    => $cart->customer_last_name,
+            'total_item_count'      => $cart->items_count,
+            'total_qty_ordered'     => $cart->items_qty,
+            'base_currency_code'    => $cart->base_currency_code,
+            'channel_currency_code' => $cart->channel_currency_code,
+            'order_currency_code'   => $cart->cart_currency_code,
+            'grand_total'           => $cart->grand_total,
+            'base_grand_total'      => $cart->base_grand_total,
+            'sub_total'             => $cart->sub_total,
+            'base_sub_total'        => $cart->base_sub_total,
+            'tax_amount'            => $cart->tax_total,
+            'base_tax_amount'       => $cart->base_tax_total,
+            'coupon_code'           => $cart->coupon_code,
+            'applied_cart_rule_ids' => $cart->applied_cart_rule_ids,
+            'discount_amount'       => $cart->discount_amount,
+            'base_discount_amount'  => $cart->base_discount_amount,
+        ];
     }
 
     /**
-     * Assert multiple Cart Items.
+     * Prepare order items for assertion.
      */
-    public function assertCartItems(array $cartItems): void
+    public function prepareOrderItems(CartItem $cartItem)
     {
+        return [
+            'product_id'           => $cartItem->product_id,
+            'sku'                  => $cartItem->sku,
+            'type'                 => $cartItem->type,
+            'name'                 => $cartItem->name,
+            'weight'               => $cartItem->weight,
+            'total_weight'         => $cartItem->total_weight,
+            'qty_ordered'          => $cartItem->quantity,
+            'price'                => $cartItem->price,
+            'base_price'           => $cartItem->base_price,
+            'total'                => $cartItem->total,
+            'base_total'           => $cartItem->base_total,
+            'tax_percent'          => $cartItem->tax_percent,
+            'tax_amount'           => $cartItem->tax_amount,
+            'base_tax_amount'      => $cartItem->base_tax_amount,
+            'tax_category_id'      => $cartItem->tax_category_id,
+            'discount_percent'     => $cartItem->discount_percent,
+            'discount_amount'      => $cartItem->discount_amount,
+            'base_discount_amount' => $cartItem->base_discount_amount,
+        ];
+    }
+
+    /**
+     * Prepare Order Payment Assertion.
+     */
+    public function prepareOrderPayment(CartPayment $cartPayment): array
+    {
+        return [
+            'method'       => $cartPayment->method,
+            'method_title' => $cartPayment->method_title,
+        ];
+    }
+
+    /**
+     * Prepare the cart for assertion.
+     */
+    public function prepareCart(Cart $cart): array
+    {
+        return [
+            'id'                    => $cart->id,
+            'customer_email'        => $cart->customer_email,
+            'customer_first_name'   => $cart->customer_first_name,
+            'customer_last_name'    => $cart->customer_last_name,
+            'shipping_method'       => $cart->shipping_method,
+            'coupon_code'           => $cart->coupon_code,
+            'is_gift'               => $cart->is_gift,
+            'items_count'           => $cart->items_count,
+            'items_qty'             => $cart->items_qty,
+            'exchange_rate'         => $cart->exchange_rate,
+            'global_currency_code'  => $cart->global_currency_code,
+            'base_currency_code'    => $cart->base_currency_code,
+            'channel_currency_code' => $cart->channel_currency_code,
+            'cart_currency_code'    => $cart->cart_currency_code,
+            'grand_total'           => $cart->grand_total,
+            'base_grand_total'      => $cart->base_grand_total,
+            'sub_total'             => $cart->sub_total,
+            'base_sub_total'        => $cart->base_sub_total,
+            'tax_total'             => $cart->tax_total,
+            'base_tax_total'        => $cart->base_tax_total,
+            'discount_amount'       => $cart->discount_amount,
+            'base_discount_amount'  => $cart->base_discount_amount,
+            'checkout_method'       => $cart->checkout_method,
+            'is_guest'              => $cart->is_guest,
+            'is_active'             => $cart->is_active,
+            'applied_cart_rule_ids' => $cart->applied_cart_rule_ids,
+            'customer_id'           => $cart->customer_id,
+            'channel_id'            => $cart->channel_id,
+        ];
+    }
+
+    /**
+     * Prepare cart items for assertions.
+     */
+    public function prepareCartItems(array $cartItems): array
+    {
+        $cartItems = [];
+
         foreach ($cartItems as $cartItem) {
-            $this->assertCartItem($cartItem);
+            $cartItems[] = $this->assertCartItem($cartItem);
         }
+
+        return $cartItems;
     }
 
     /**
-     * Assert cart items.
+     * Prepare cart item for assertion.
      */
-    public function assertCartItem(CartItem $cartItem): void
+    public function prepareCartItem(CartItem $cartItem): array
     {
-        $cartItem->refresh();
-
-        $this->assertModelWise([
-            CartItem::class => [
-                [
-                    'quantity'              => $cartItem->quantity,
-                    'sku'                   => $cartItem->sku,
-                    'type'                  => $cartItem->type,
-                    'name'                  => $cartItem->name,
-                    'coupon_code'           => $cartItem->coupon_code,
-                    'weight'                => $cartItem->weight,
-                    'total_weight'          => $cartItem->total_weight,
-                    'base_total_weight'     => $cartItem->base_total_weight,
-                    'price'                 => core()->convertPrice($cartItem->price),
-                    'base_price'            => $cartItem->base_price,
-                    'custom_price'          => $cartItem->custom_price,
-                    'total'                 => $cartItem->total,
-                    'base_total'            => $cartItem->base_total,
-                    'tax_percent'           => $cartItem->tax_percent,
-                    'tax_amount'            => $cartItem->tax_amount,
-                    'base_tax_amount'       => $cartItem->base_tax_amount,
-                    'discount_percent'      => $cartItem->discount_percent,
-                    'base_discount_amount'  => $cartItem->base_discount_amount,
-                    'tax_percent'           => number_format($cartItem->tax_percent, 4),
-                    'tax_amount'            => number_format($cartItem->tax_amount, 4),
-                    'base_tax_amount'       => number_format($cartItem->base_tax_amount, 4),
-                    'discount_amount'       => number_format($cartItem->discount_amount, 4),
-                    'base_discount_amount'  => number_format($cartItem->base_discount_amount, 4),
-                    'parent_id'             => $cartItem->parent_id,
-                    'product_id'            => $cartItem->product_id,
-                    'cart_id'               => $cartItem->cart_id,
-                    'tax_category_id'       => $cartItem->tax_category_id,
-                    'applied_cart_rule_ids' => $cartItem->applied_cart_rule_ids,
-                ],
-            ],
-        ]);
+        return [
+            'quantity'              => $cartItem->quantity,
+            'sku'                   => $cartItem->sku,
+            'type'                  => $cartItem->type,
+            'name'                  => $cartItem->name,
+            'coupon_code'           => $cartItem->coupon_code,
+            'weight'                => $cartItem->weight,
+            'total_weight'          => $cartItem->total_weight,
+            'base_total_weight'     => $cartItem->base_total_weight,
+            'price'                 => core()->convertPrice($cartItem->price),
+            'base_price'            => $cartItem->base_price,
+            'custom_price'          => $cartItem->custom_price,
+            'total'                 => $cartItem->total,
+            'base_total'            => $cartItem->base_total,
+            'tax_percent'           => $cartItem->tax_percent,
+            'tax_amount'            => $cartItem->tax_amount,
+            'base_tax_amount'       => $cartItem->base_tax_amount,
+            'discount_percent'      => $cartItem->discount_percent,
+            'base_discount_amount'  => $cartItem->base_discount_amount,
+            'tax_percent'           => number_format($cartItem->tax_percent, 4),
+            'tax_amount'            => number_format($cartItem->tax_amount, 4),
+            'base_tax_amount'       => number_format($cartItem->base_tax_amount, 4),
+            'discount_amount'       => number_format($cartItem->discount_amount, 4),
+            'base_discount_amount'  => number_format($cartItem->base_discount_amount, 4),
+            'parent_id'             => $cartItem->parent_id,
+            'product_id'            => $cartItem->product_id,
+            'cart_id'               => $cartItem->cart_id,
+            'tax_category_id'       => $cartItem->tax_category_id,
+            'applied_cart_rule_ids' => $cartItem->applied_cart_rule_ids,
+        ];
     }
 
     /**
-     * Assert cart payment.
+     * Prepare cart payment for assertion.
      */
-    public function assertCartPayment(CartPayment $cartPayment): void
+    public function prepareCartPayment(CartPayment $cartPayment): array
     {
-        $cartPayment->refresh();
-
-        $this->assertModelWise([
-            CartPayment::class => [
-                [
-                    'cart_id'      => $cartPayment->cart_id,
-                    'method'       => $cartPayment->method,
-                    'method_title' => $cartPayment->method_title,
-                ],
-            ],
-        ]);
+        return [
+            'cart_id'      => $cartPayment->cart_id,
+            'method'       => $cartPayment->method,
+            'method_title' => $cartPayment->method_title,
+        ];
     }
 
     /**
-     * Assert address.
+     * Prepare cart shipping rate for assertion.
      */
-    public function assertAddress(mixed $address): void
+    public function prepareCartShippingRate(CartShippingRate $cartShippingRate): array
+    {
+        return [
+            'carrier'            => $cartShippingRate->carrier,
+            'carrier_title'      => $cartShippingRate->carrier_title,
+            'method'             => $cartShippingRate->method,
+            'method_title'       => $cartShippingRate->method_title,
+            'method_description' => $cartShippingRate->method_description,
+            'cart_address_id'    => $cartShippingRate->cart_address_id,
+        ];
+    }
+
+    /**
+     * Prepare address for assertion.
+     */
+    public function prepareAddress(mixed $address): array
     {
         $address->refresh();
 
-        $this->assertDatabaseHas('addresses', [
+        return [
             'parent_address_id' => $address->parent_address_id,
             'customer_id'       => $address->customer_id,
             'additional'        => $address->additional,
             'address'           => $address->address,
             'address_type'      => $address->address_type,
-            'cart_id'           => $address->cart_id,
             'city'              => $address->city,
             'company_name'      => $address->company_name,
             'country'           => $address->country,
@@ -166,10 +235,13 @@ trait ShopTestBench
             'email'             => $address->email,
             'first_name'        => $address->first_name,
             'gender'            => $address->gender,
-            'id'                => $address->id,
             'last_name'         => $address->last_name,
+
+            'cart_id'           => $address->cart_id,
+            'id'                => $address->id,
             'order_id'          => $address->order_id,
             'parent_address_id' => $address->parent_address_id,
+
             'phone'             => $address->phone,
             'postcode'          => $address->postcode,
             'state'             => $address->state,
@@ -177,7 +249,7 @@ trait ShopTestBench
             'use_for_shipping'  => $address->use_for_shipping,
             'vat_id'            => $address->vat_id,
             'address'           => $address->address,
-        ]);
+        ];
     }
 
     /**
