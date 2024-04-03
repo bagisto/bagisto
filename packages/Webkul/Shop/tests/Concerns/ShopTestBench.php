@@ -430,7 +430,7 @@ trait ShopTestBench
         ]);
     }
 
-    public function assertCatalogRuleCoupon(CatalogRule $catalogRule)
+    public function assertCatalogRule(CatalogRule $catalogRule)
     {
         $catalogRule->refresh();
 
@@ -453,12 +453,56 @@ trait ShopTestBench
         ]);
     }
 
-    public function assertCatalogRuleChannel(CatalogRule $catalogRule)
+    /**
+     * Assert Catalog Rule Coupon
+     */
+    public function assertCatalogRuleCoupon(CatalogRule $catalogRule): void
+    {
+        $catalogRule->refresh();
+
+        $this->assertModelWise([
+            CatalogRule::class => [
+                [
+                    'name'            => $catalogRule->name,
+                    'description'     => $catalogRule->description,
+                    'starts_from'     => $catalogRule->starts_from,
+                    'ends_till'       => $catalogRule->ends_till,
+                    'status'          => $catalogRule->status,
+                    'condition_type'  => $catalogRule->condition_type,
+                    'conditions'      => $catalogRule->conditions,
+                    'end_other_rules' => $catalogRule->end_other_rules,
+                    'action_type'     => $catalogRule->action_type,
+                    'discount_amount' => $catalogRule->discount_amount,
+                    'sort_order'      => $catalogRule->sort_order,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * Assert Catalog Rule Channel.
+     */
+    public function assertCatalogRuleChannel(CatalogRule $catalogRule): void
     {
         foreach ($catalogRule->channels as $catalogRuleChannel) {
             $this->assertDatabaseHas('catalog_rule_channels', [
                 'catalog_rule_id' => $catalogRule->id,
                 'channel_id'      => $catalogRuleChannel->id,
+            ]);
+        }
+    }
+
+    /**
+     * Assert Catalog Rule Customer Group.
+     */
+    public function assertCatalogRuleCustomerGroup(CatalogRule $catalogRule): void
+    {
+        $catalogRule->refresh();
+
+        foreach ($catalogRule->customer_groups as $customerGroup) {
+            $this->assertDatabaseHas('catalog_rule_customer_groups', [
+                'catalog_rule_id'   => $catalogRule->id,
+                'customer_group_id' => $customerGroup->id,
             ]);
         }
     }

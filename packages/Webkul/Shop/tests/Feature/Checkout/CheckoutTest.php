@@ -2839,12 +2839,12 @@ it('should place a configurable product order for a customer', function () {
     }
 
     $additional = [
-        'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
         'is_buy_now'                   => '0',
         'rating'                       => '0',
         'quantity'                     => '1',
         'super_attribute'              => $superAttributes ?? [],
+        'selected_configurable_option' => $childProduct->id,
     ];
 
     $customer = Customer::factory()->create();

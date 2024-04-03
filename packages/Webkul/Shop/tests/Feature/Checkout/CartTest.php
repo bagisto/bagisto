@@ -770,8 +770,9 @@ it('should only remove one product from the cart for now the cart will contains 
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
         ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0)
-        ->assertJsonPath('data.grand_total', $cart->grand_total)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
+
+    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);

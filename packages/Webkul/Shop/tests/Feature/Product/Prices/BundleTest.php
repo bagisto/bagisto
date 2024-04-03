@@ -845,11 +845,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -945,11 +941,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1054,11 +1046,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -1154,11 +1142,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1263,11 +1247,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer();
@@ -1365,11 +1345,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer();
@@ -1478,11 +1454,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1582,11 +1554,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1676,11 +1644,7 @@ it('should check tax is applying for the bundle product into the cart for bundle
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     CustomerAddress::factory()->create([
         'email'        => $customer->email,
@@ -1741,8 +1705,10 @@ it('should fails the validation error when the certain inputs not provided check
 
     $grandTotal = 0;
 
-    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $option) {
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 2,
             'value_type'        => 'fixed',
             'value'             => rand(20, 50),
@@ -1754,7 +1720,7 @@ it('should fails the validation error when the certain inputs not provided check
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $grandTotal += $customerGroupPrice->value;
+        $grandTotal += $productCustomerGroupPrices[$key]->value;
     }
 
     // Act and Assert
@@ -1767,6 +1733,16 @@ it('should fails the validation error when the certain inputs not provided check
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should check customer group price for guest customer with fixed price type for bundle product', function () {
@@ -1802,8 +1778,10 @@ it('should check customer group price for guest customer with fixed price type f
 
     $grandTotal = 0;
 
-    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $option) {
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 2,
             'value_type'        => 'fixed',
             'value'             => rand(20, 50),
@@ -1815,7 +1793,7 @@ it('should check customer group price for guest customer with fixed price type f
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $grandTotal += $customerGroupPrice->value;
+        $grandTotal += $productCustomerGroupPrices[$key]->value;
     }
 
     // Act and Assert
@@ -1833,6 +1811,16 @@ it('should check customer group price for guest customer with fixed price type f
         ->assertJsonPath('data.items_qty', 1);
 
     $this->assertEquality($grandTotal * $quantity, $response['data']['grand_total']);
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for general customer with fixed price type for bundle product', function () {
@@ -1863,8 +1851,10 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $grandTotal = 0;
 
-    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $option) {
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 10,
             'value_type'        => 'fixed',
             'value'             => rand(20, 50),
@@ -1876,7 +1866,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $grandTotal += $customerGroupPrice->value;
+        $grandTotal += $productCustomerGroupPrices[$key]->value;
     }
 
     $customer = Customer::factory()->create();
@@ -1893,6 +1883,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should check customer group price for general customer with fixed price type for bundle product', function () {
@@ -1923,8 +1923,10 @@ it('should check customer group price for general customer with fixed price type
 
     $grandTotal = 0;
 
-    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $option) {
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 10,
             'value_type'        => 'fixed',
             'value'             => rand(20, 50),
@@ -1936,7 +1938,7 @@ it('should check customer group price for general customer with fixed price type
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $grandTotal += $customerGroupPrice->value;
+        $grandTotal += $productCustomerGroupPrices[$key]->value;
     }
 
     $customer = Customer::factory()->create();
@@ -1958,6 +1960,16 @@ it('should check customer group price for general customer with fixed price type
         ->assertJsonPath('data.items_qty', 1);
 
     $this->assertEquality($grandTotal * $quantity, $response['data']['grand_total']);
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for wholesaler customer with fixed price type for bundle product', function () {
@@ -1989,8 +2001,10 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $grandTotal = 0;
 
-    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $option) {
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 50,
             'value_type'        => 'fixed',
             'value'             => rand(20, 50),
@@ -2002,7 +2016,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $grandTotal += $customerGroupPrice->value;
+        $grandTotal += $productCustomerGroupPrices[$key]->value;
     }
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
@@ -2019,6 +2033,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should check customer group price for wholesaler customer with fixed price type for bundle product', function () {
@@ -2050,8 +2074,10 @@ it('should check customer group price for wholesaler customer with fixed price t
 
     $grandTotal = 0;
 
-    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $option) {
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products')->get() as $key => $option) {
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 50,
             'value_type'        => 'fixed',
             'value'             => rand(20, 50),
@@ -2063,7 +2089,7 @@ it('should check customer group price for wholesaler customer with fixed price t
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $grandTotal += $customerGroupPrice->value;
+        $grandTotal += $productCustomerGroupPrices[$key]->value;
     }
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
@@ -2085,6 +2111,16 @@ it('should check customer group price for wholesaler customer with fixed price t
         ->assertJsonPath('data.items_qty', 1);
 
     $this->assertEquality($grandTotal * $quantity, $response['data']['grand_total']);
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with discount price type for bundle product', function () {
@@ -2118,10 +2154,12 @@ it('should fails the validation error when the certain inputs not provided when 
         'grand_total'              => [],
     ];
 
-    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $option) {
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $key => $option) {
         $bundleProduct = $option->bundle_option_products[0]->product;
 
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 2,
             'value_type'        => 'discount',
             'value'             => rand(20, 50),
@@ -2133,7 +2171,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $customerGroupPrice->value / 100)) * $customerGroupPrice->qty;
+        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $productCustomerGroupPrices[$key]->value / 100)) * $productCustomerGroupPrices[$key]->qty;
     }
 
     // Act and Assert
@@ -2146,6 +2184,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should check customer group price for guest customer with discount price type for bundle product', function () {
@@ -2179,10 +2227,12 @@ it('should check customer group price for guest customer with discount price typ
         'grand_total'              => [],
     ];
 
-    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $option) {
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $key => $option) {
         $bundleProduct = $option->bundle_option_products[0]->product;
 
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 2,
             'value_type'        => 'discount',
             'value'             => rand(20, 50),
@@ -2194,7 +2244,7 @@ it('should check customer group price for guest customer with discount price typ
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $customerGroupPrice->value / 100)) * $customerGroupPrice->qty;
+        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $productCustomerGroupPrices[$key]->value / 100)) * $productCustomerGroupPrices[$key]->qty;
     }
 
     // Act and Assert
@@ -2211,6 +2261,16 @@ it('should check customer group price for guest customer with discount price typ
         ->assertJsonPath('data.items_qty', 1);
 
     $this->assertEquality(array_sum($bundleOptions['grand_total']), $response['data']['grand_total']);
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for general customer with discount price type for bundle product', function () {
@@ -2242,10 +2302,12 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $customer = Customer::factory()->create();
 
-    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $option) {
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $key => $option) {
         $bundleProduct = $option->bundle_option_products[0]->product;
 
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 2,
             'value_type'        => 'discount',
             'value'             => rand(20, 50),
@@ -2257,7 +2319,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $customerGroupPrice->value / 100)) * $customerGroupPrice->qty;
+        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $productCustomerGroupPrices[$key]->value / 100)) * $productCustomerGroupPrices[$key]->qty;
     }
 
     // Act and Assert
@@ -2272,6 +2334,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should check customer group price for general customer with discount price type for bundle product', function () {
@@ -2303,10 +2375,12 @@ it('should check customer group price for general customer with discount price t
 
     $customer = Customer::factory()->create();
 
-    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $option) {
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $key => $option) {
         $bundleProduct = $option->bundle_option_products[0]->product;
 
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 2,
             'value_type'        => 'discount',
             'value'             => rand(20, 50),
@@ -2318,7 +2392,7 @@ it('should check customer group price for general customer with discount price t
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $customerGroupPrice->value / 100)) * $customerGroupPrice->qty;
+        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $productCustomerGroupPrices[$key]->value / 100)) * $productCustomerGroupPrices[$key]->qty;
     }
 
     // Act and Assert
@@ -2337,6 +2411,16 @@ it('should check customer group price for general customer with discount price t
         ->assertJsonPath('data.items_qty', 1);
 
     $this->assertEquality(array_sum($bundleOptions['grand_total']), $response['data']['grand_total']);
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for wholesaler customer with discount price type for bundle product', function () {
@@ -2368,10 +2452,12 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $option) {
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $key => $option) {
         $bundleProduct = $option->bundle_option_products[0]->product;
 
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 2,
             'value_type'        => 'discount',
             'value'             => rand(20, 50),
@@ -2383,7 +2469,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $customerGroupPrice->value / 100)) * $customerGroupPrice->qty;
+        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $productCustomerGroupPrices[$key]->value / 100)) * $productCustomerGroupPrices[$key]->qty;
     }
 
     // Act and Assert
@@ -2398,6 +2484,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should check customer group price for wholesaler customer with discount price type for bundle product', function () {
@@ -2429,10 +2525,12 @@ it('should check customer group price for wholesaler customer with discount pric
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $option) {
+    $productCustomerGroupPrices = [];
+
+    foreach ($product->bundle_options()->with('bundle_option_products.product')->get() as $key => $option) {
         $bundleProduct = $option->bundle_option_products[0]->product;
 
-        $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        $productCustomerGroupPrices[$key] = ProductCustomerGroupPrice::factory()->create([
             'qty'               => $quantity = 2,
             'value_type'        => 'discount',
             'value'             => rand(20, 50),
@@ -2444,7 +2542,7 @@ it('should check customer group price for wholesaler customer with discount pric
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
-        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $customerGroupPrice->value / 100)) * $customerGroupPrice->qty;
+        $bundleOptions['grand_total'][] = ($bundleProduct->price - ($bundleProduct->price * $productCustomerGroupPrices[$key]->value / 100)) * $productCustomerGroupPrices[$key]->qty;
     }
 
     // Act and Assert
@@ -2463,6 +2561,16 @@ it('should check customer group price for wholesaler customer with discount pric
         ->assertJsonPath('data.items_qty', 1);
 
     $this->assertEquality(array_sum($bundleOptions['grand_total']), $response['data']['grand_total']);
+
+    foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
+        $this->assertDatabaseHas('product_customer_group_prices', [
+            'qty'               => $productCustomerGroupPrice->qty,
+            'value_type'        => $productCustomerGroupPrice->value_type,
+            'value'             => $productCustomerGroupPrice->value,
+            'product_id'        => $productCustomerGroupPrice->product_id,
+            'customer_group_id' => $productCustomerGroupPrice->customer_group_id,
+        ]);
+    }
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for bundle product for guest customer into cart', function () {
@@ -2525,6 +2633,10 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 
     $this->assertCatalogRuleCoupon($catalogRule);
 
@@ -2598,6 +2710,10 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertEquality(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
+
     $this->assertCatalogRuleCoupon($catalogRule);
 
     $this->assertCatalogRuleChannel($catalogRule);
@@ -2663,6 +2779,10 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 
     $this->assertCatalogRuleCoupon($catalogRule);
 
@@ -2736,6 +2856,10 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertEquality(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
+
     $this->assertCatalogRuleCoupon($catalogRule);
 
     $this->assertCatalogRuleChannel($catalogRule);
@@ -2801,6 +2925,10 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 
     $this->assertCatalogRuleCoupon($catalogRule);
 
@@ -2874,6 +3002,10 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertEquality(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
+
     $this->assertCatalogRuleCoupon($catalogRule);
 
     $this->assertCatalogRuleChannel($catalogRule);
@@ -2938,6 +3070,10 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 
     $this->assertCatalogRuleCoupon($catalogRule);
 
@@ -3010,6 +3146,10 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
     $this->assertEquality(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
+
     $this->assertCatalogRuleCoupon($catalogRule);
 
     $this->assertCatalogRuleChannel($catalogRule);
@@ -3078,6 +3218,10 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 
     $this->assertCatalogRuleCoupon($catalogRule);
 
@@ -3153,6 +3297,10 @@ it('should check discount price if catalog rule applied for fixed price for bund
     $this->assertEquality(array_sum($bundleOptions['prices']), $response['data']['grand_total']);
 
     $this->assertEquality(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 
     $this->assertCatalogRuleCoupon($catalogRule);
 
