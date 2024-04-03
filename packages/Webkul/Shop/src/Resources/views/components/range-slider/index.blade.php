@@ -105,7 +105,7 @@
                     /**
                      * If someone is passing invalid props, this case will check first if they are valid, then continue.
                      */
-                     if (this.isTypeSupported()) {
+                    if (this.isTypeSupported()) {
                         switch (this.defaultType) {
                             case 'float':
                                 return {
@@ -149,7 +149,7 @@
                     /**
                      * If someone is passing invalid props, this case will check first if they are valid, then continue.
                      */
-                     if (this.isTypeSupported()) {
+                    if (this.isTypeSupported()) {
                         switch (this.defaultType) {
                             case 'price':
                                 return {
