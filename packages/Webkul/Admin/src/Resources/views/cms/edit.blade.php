@@ -250,7 +250,7 @@
                         </x-admin::form.control-group.label>
 
                         @foreach(core()->getAllChannels() as $channel)
-                            <x-admin::form.control-group class="flex gap-2.5 !mb-2 last:!mb-0 select-none">
+                            <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2 last:!mb-0 select-none">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     :id="'channels_' . $channel->id"
