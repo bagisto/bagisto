@@ -341,7 +341,7 @@
                     createCart(customer) {
                         this.$axios.post("{{ route('admin.sales.cart.store') }}", {customer_id: customer.id})
                             .then(function(response) {
-                                window.location.href = "{{ route('admin.sales.orders.create', 'cartId') }}".replace('cartId', response.data.data.id);
+                                window.location.href = response.data.redirect_url;
                             })
                             .catch(function (error) {
                                 this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });

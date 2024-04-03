@@ -51,10 +51,12 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url').'/c
                 Route::delete('{id}/compare-items', 'destroy')->name('admin.customers.customers.compare.items.delete');
             });
 
-            Route::controller(CartController::class)->group(function () {
-                Route::get('{id}/cart-items', 'items')->name('admin.customers.customers.cart.items');
+            Route::controller(CartController::class)->prefix('{id}/cart')->group(function () {
+                Route::post('create', 'store')->name('admin.customers.customers.cart.store');
 
-                Route::delete('{id}/cart-items', 'destroy')->name('admin.customers.customers.cart.items.delete');
+                Route::get('items', 'items')->name('admin.customers.customers.cart.items');
+
+                Route::delete('items', 'destroy')->name('admin.customers.customers.cart.items.delete');
             });
 
             Route::controller(OrderController::class)->group(function () {

@@ -134,7 +134,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => '订单',
+                'create-btn' => '创建订单',
+                'title'      => '订单',
+
+                'search-customer' => [
+                    'create-btn'  => '创建客户',
+                    'empty-info'  => '没有可用于搜索条件的客户。',
+                    'empty-title' => '未找到客户',
+                    'search-by'   => '按电子邮件或姓名搜索',
+                    'title'       => '选择客户',
+                ],
 
                 'datagrid' => [
                     'canceled'         => '已取消',
@@ -152,13 +161,174 @@ return [
                     'order-id'         => '订单编号',
                     'pay-by'           => '支付方式 - :method',
                     'pay-via'          => '支付方式',
-                    'pending'          => '待处理',
                     'pending-payment'  => '待付款',
+                    'pending'          => '待处理',
                     'processing'       => '处理中',
                     'product-count'    => ':count + 更多产品',
                     'status'           => '状态',
                     'success'          => '成功',
                     'view'             => '查看',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => '添加到购物车',
+                'back-btn'                => '返回',
+                'check-billing-address'   => '缺少账单地址。',
+                'check-shipping-address'  => '缺少送货地址。',
+                'configuration'           => '配置',
+                'coupon-already-applied'  => '优惠券已经应用。',
+                'coupon-applied'          => '优惠券已成功应用。',
+                'coupon-error'            => '无法应用优惠券。',
+                'coupon-not-found'        => '找不到优惠券',
+                'coupon-remove'           => '优惠券已成功移除。',
+                'error'                   => '出现错误',
+                'minimum-order-error'     => '未达到最低订单金额。',
+                'order-placed-success'    => '订单已成功下单。',
+                'payment-not-supported'   => '不支持此支付方式',
+                'save-btn'                => '创建订单',
+                'specify-payment-method'  => '缺少支付方式。',
+                'specify-shipping-method' => '缺少配送方式。',
+                'title'                   => '为 :name 创建订单',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => '请选择一个选项',
+                    ],
+
+                    'bundle' => [
+                        'none'         => '无',
+                        'total-amount' => '总金额',
+                    ],
+
+                    'grouped' => [
+                        'name' => '名称',
+                    ],
+
+                    'downloadable' => [
+                        'title' => '链接',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => '产品已成功添加到购物车',
+                    'success-remove'      => '项目已成功从购物车中移除',
+                    'success-update'      => '购物车项目已成功更新',
+
+                    'items' => [
+                        'add-product'       => '添加产品',
+                        'amount-per-unit'   => ':amount 每单位 x :qty 数量',
+                        'delete'            => '删除',
+                        'empty-description' => '购物车中没有找到任何商品。',
+                        'empty-title'       => '购物车为空',
+                        'move-to-wishlist'  => '移到心愿单',
+                        'see-details'       => '查看详情',
+                        'sku'               => 'SKU - :sku',
+                        'sub-total'         => '小计 - :sub_total',
+                        'title'             => '购物车商品',
+
+                        'search' => [
+                            'add-to-cart'   => '添加到购物车',
+                            'available-qty' => ':qty 可用',
+                            'empty-info'    => '没有可用于搜索词的产品。',
+                            'empty-title'   => '未找到产品',
+                            'product-image' => '产品图片',
+                            'qty'           => ':qty 可用',
+                            'qty'           => '数量',
+                            'sku'           => 'SKU - :sku',
+                            'title'         => '搜索产品',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => '添加地址',
+                        'add-new-address'  => '添加新地址',
+                        'add-new'          => '添加新地址',
+                        'addresses'        => '地址',
+                        'back'             => '返回',
+                        'billing-address'  => '账单地址',
+                        'city'             => '城市',
+                        'company-name'     => '公司名称',
+                        'confirm'          => '确认',
+                        'country'          => '国家',
+                        'edit-btn'         => '编辑地址',
+                        'email'            => '电子邮件',
+                        'first-name'       => '名字',
+                        'last-name'        => '姓氏',
+                        'postcode'         => '邮政编码',
+                        'proceed'          => '继续',
+                        'same-as-billing'  => '使用相同地址作为送货地址？',
+                        'save-address'     => '保存到地址簿',
+                        'save'             => '保存',
+                        'select-country'   => '选择国家',
+                        'select-state'     => '选择省/州',
+                        'shipping-address' => '送货地址',
+                        'state'            => '省/州',
+                        'street-address'   => '街道地址',
+                        'telephone'        => '电话',
+                        'title'            => '地址',
+                        'title'            => '地址',
+                    ],
+
+                    'payment' => [
+                        'title' => '支付',
+                    ],
+
+                    'shipping' => [
+                        'title' => '配送',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => '应用优惠券',
+                        'discount-amount' => '折扣金额',
+                        'enter-your-code' => '输入您的代码',
+                        'grand-total'     => '总计',
+                        'place-order'     => '下单',
+                        'processing'      => '处理中',
+                        'shipping-amount' => '运费',
+                        'sub-total'       => '小计',
+                        'tax'             => '税费',
+                        'title'           => '订单摘要',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => '添加到购物车',
+                    'delete'            => '删除',
+                    'empty-description' => '购物车中没有找到任何商品。',
+                    'empty-title'       => '购物车为空',
+                    'see-details'       => '查看详情',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => '购物车商品',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => '添加到购物车',
+                    'empty-description' => '最近订单中没有找到任何商品。',
+                    'empty-title'       => '订单为空',
+                    'see-details'       => '查看详情',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => '最近订单商品',
+                    'view'              => '查看',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => '添加到购物车',
+                    'delete'            => '删除',
+                    'empty-description' => '心愿单中没有找到任何商品。',
+                    'empty-title'       => '心愿单为空',
+                    'see-details'       => '查看详情',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => '心愿单商品',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => '添加到购物车',
+                    'delete'            => '删除',
+                    'empty-description' => '比较列表中没有找到任何商品。',
+                    'empty-title'       => '比较列表为空',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => '比较商品',
                 ],
             ],
 
@@ -1363,8 +1533,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => '发票 (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => '发票 (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1378,14 +1548,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => '订单 (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => '总收入 - :revenue',
+                    'count'         => '订单 (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => '总收入 - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'ID - :id',
-                    'count'       => '评论 (:count)',
+                    'id'    => 'ID - :id',
+                    'count' => '评论 (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => '成功删除购物车商品。',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => '成功删除心愿单商品。',
+                ],
+
+                'compare' => [
+                    'delete-success' => '成功删除对比商品。',
                 ],
             ],
 

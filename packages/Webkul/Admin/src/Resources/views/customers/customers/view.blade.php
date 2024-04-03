@@ -94,6 +94,33 @@
                     </div>
                 @endif
 
+                <!-- Create Order button -->
+                @if (bouncer()->hasPermission('sales.orders.create'))
+                    <div
+                        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
+                        @click="$emitter.emit('open-confirm-modal', {
+                            message: '@lang('admin::app.customers.customers.view.order-create-confirmation')',
+
+                            agree: () => {
+                                this.$refs['create-order'].submit()
+                            }
+                        })"
+                    >
+                        <span class="icon-cart text-2xl"></span>
+
+                        @lang('admin::app.customers.customers.view.create-order')
+
+                        <!-- Create Order Form -->
+                        <form
+                            method="post"
+                            action="{{ route('admin.customers.customers.cart.store', $customer->id) }}"
+                            ref="create-order"
+                        >
+                            @csrf
+                        </form>
+                    </div>
+                @endif
+
                 <a
                     class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                     href="{{ route('admin.customers.customers.login_as_customer', $customer->id) }}"

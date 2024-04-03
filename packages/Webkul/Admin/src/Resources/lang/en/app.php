@@ -1398,11 +1398,12 @@ return [
                 'active'                      => 'Active',
                 'address-delete-confirmation' => 'Are you sure you want to delete this address?',
                 'back-btn'                    => 'Back',
+                'create-order'                => 'Create Order',
                 'customer'                    => 'Customer',
                 'date-of-birth'               => 'DOB - :dob',
                 'default-address'             => 'Default Address',
-                'delete'                      => 'Delete',
                 'delete-account'              => 'Delete Account',
+                'delete'                      => 'Delete',
                 'email'                       => 'Email - :email',
                 'empty-description'           => 'Create New Addresses for Customer',
                 'empty-title'                 => 'Add Customer Address',
@@ -1411,10 +1412,12 @@ return [
                 'inactive'                    => 'Inactive',
                 'login-as-customer'           => 'Login as customer',
                 'note-created-success'        => 'Note Created Successfully',
+                'order-create-confirmation'   => 'Are you sure you want to create order for this customer?',
                 'phone'                       => 'Phone - :phone',
                 'set-as-default'              => 'Set as Default',
                 'suspended'                   => 'Suspended',
                 'title'                       => 'Customer View',
+
 
                 'address' => [
                     'count'  => 'Addresses (:count)',
@@ -1534,8 +1537,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'Invoices (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'Invoices (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1549,14 +1552,14 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'Orders (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'Total Revenue - :revenue',
+                    'count'         => 'Orders (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'Total Revenue - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'            => 'ID - :id',
-                    'count'         => 'Reviews (:count)',
+                    'id'    => 'ID - :id',
+                    'count' => 'Reviews (:count)',
                 ],
 
                 'cart' => [

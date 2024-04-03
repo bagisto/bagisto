@@ -134,7 +134,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => '注文',
+                'create-btn' => '注文を作成する',
+                'title'      => '注文',
+
+                'search-customer' => [
+                    'create-btn'  => '顧客を作成',
+                    'empty-info'  => '検索条件に一致する顧客はありません。',
+                    'empty-title' => '顧客が見つかりません',
+                    'search-by'   => 'メールアドレスまたは名前で検索',
+                    'title'       => '顧客を選択',
+                ],
 
                 'datagrid' => [
                     'canceled'        => 'キャンセル',
@@ -152,13 +161,174 @@ return [
                     'order-id'        => '注文ID',
                     'pay-by'          => ':method で支払う',
                     'pay-via'         => '支払い方法',
-                    'pending'         => '保留中',
                     'pending-payment' => '支払い保留中',
+                    'pending'         => '保留中',
                     'processing'      => '処理中',
                     'product-count'   => ':count + 他の製品',
                     'status'          => 'ステータス',
                     'success'         => '成功',
                     'view'            => '表示',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'カートに追加',
+                'back-btn'                => '戻る',
+                'check-billing-address'   => '請求先住所がありません。',
+                'check-shipping-address'  => '配送先住所がありません。',
+                'configuration'           => '設定',
+                'coupon-already-applied'  => 'クーポンコードは既に適用されています。',
+                'coupon-applied'          => 'クーポンコードが正常に適用されました。',
+                'coupon-error'            => 'クーポンコードは適用できません。',
+                'coupon-not-found'        => 'クーポンが見つかりません',
+                'coupon-remove'           => 'クーポンコードが正常に削除されました。',
+                'error'                   => 'エラーが発生しました',
+                'minimum-order-error'     => '最小注文金額が満たされていません。',
+                'order-placed-success'    => '注文が正常に完了しました。',
+                'payment-not-supported'   => 'この支払い方法はサポートされていません',
+                'save-btn'                => '注文を作成',
+                'specify-payment-method'  => '支払い方法がありません。',
+                'specify-shipping-method' => '配送方法がありません。',
+                'title'                   => ':name の注文を作成',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'オプションを選択してください',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'なし',
+                        'total-amount' => '合計金額',
+                    ],
+
+                    'grouped' => [
+                        'name' => '名前',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'リンク',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => '商品がカートに追加されました',
+                    'success-remove'      => 'アイテムがカートから正常に削除されました',
+                    'success-update'      => 'カートアイテムが正常に更新されました',
+
+                    'items' => [
+                        'add-product'       => '商品を追加',
+                        'amount-per-unit'   => ':amount 単位あたり x :qty 個数',
+                        'delete'            => '削除',
+                        'empty-description' => 'カートに商品が見つかりません。',
+                        'empty-title'       => 'カートが空です',
+                        'move-to-wishlist'  => 'ウィッシュリストに移動',
+                        'see-details'       => '詳細を見る',
+                        'sku'               => 'SKU - :sku',
+                        'sub-total'         => '小計 - :sub_total',
+                        'title'             => 'カートアイテム',
+
+                        'search' => [
+                            'add-to-cart'   => 'カートに追加',
+                            'available-qty' => ':qty 個利用可能',
+                            'empty-info'    => '検索用語に該当する商品はありません。',
+                            'empty-title'   => '商品が見つかりません',
+                            'product-image' => '商品画像',
+                            'qty'           => ':qty 個利用可能',
+                            'qty'           => '数量',
+                            'sku'           => 'SKU - :sku',
+                            'title'         => '商品を検索',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => '住所を追加',
+                        'add-new-address'  => '新しい住所を追加',
+                        'add-new'          => '新しい住所を追加',
+                        'addresses'        => '住所',
+                        'back'             => '戻る',
+                        'billing-address'  => '請求先住所',
+                        'city'             => '市区町村',
+                        'company-name'     => '会社名',
+                        'confirm'          => '確認',
+                        'country'          => '国',
+                        'edit-btn'         => '住所を編集',
+                        'email'            => 'メール',
+                        'first-name'       => '名',
+                        'last-name'        => '姓',
+                        'postcode'         => '郵便番号',
+                        'proceed'          => '進む',
+                        'same-as-billing'  => '配送先にも同じ住所を使用しますか？',
+                        'save-address'     => 'この住所を住所帳に保存',
+                        'save'             => '保存',
+                        'select-country'   => '国を選択',
+                        'select-state'     => '都道府県を選択',
+                        'shipping-address' => '配送先住所',
+                        'state'            => '都道府県',
+                        'street-address'   => '住所',
+                        'telephone'        => '電話番号',
+                        'title'            => '住所',
+                        'title'            => '住所',
+                    ],
+
+                    'payment' => [
+                        'title' => '支払い',
+                    ],
+
+                    'shipping' => [
+                        'title' => '配送',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'クーポンを適用',
+                        'discount-amount' => '割引額',
+                        'enter-your-code' => 'コードを入力してください',
+                        'grand-total'     => '合計金額',
+                        'place-order'     => '注文する',
+                        'processing'      => '処理中',
+                        'shipping-amount' => '配送料',
+                        'sub-total'       => '小計',
+                        'tax'             => '税金',
+                        'title'           => '注文の概要',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'カートに追加',
+                    'delete'            => '削除',
+                    'empty-description' => 'カートに商品が見つかりません。',
+                    'empty-title'       => 'カートが空です',
+                    'see-details'       => '詳細を見る',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'カートアイテム',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'カートに追加',
+                    'empty-description' => '最近の注文で商品が見つかりません。',
+                    'empty-title'       => '注文がありません',
+                    'see-details'       => '詳細を見る',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => '最近の注文アイテム',
+                    'view'              => '表示',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'カートに追加',
+                    'delete'            => '削除',
+                    'empty-description' => 'ウィッシュリストに商品が見つかりません。',
+                    'empty-title'       => 'ウィッシュリストが空です',
+                    'see-details'       => '詳細を見る',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'ウィッシュリストアイテム',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'カートに追加',
+                    'delete'            => '削除',
+                    'empty-description' => '比較リストに商品が見つかりません。',
+                    'empty-title'       => '比較リストが空です',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => '比較アイテム',
                 ],
             ],
 
@@ -1364,8 +1534,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => '請求書 (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => '請求書 (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1379,14 +1549,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => '注文 (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => '総収益 - :revenue',
+                    'count'         => '注文 (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => '総収益 - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'ID - :id',
-                    'count'       => 'レビュー (:count)',
+                    'id'    => 'ID - :id',
+                    'count' => 'レビュー (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'カートアイテムが正常に削除されました。',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'ウィッシュリストアイテムが正常に削除されました。',
+                ],
+
+                'compare' => [
+                    'delete-success' => '比較アイテムが正常に削除されました。',
                 ],
             ],
 

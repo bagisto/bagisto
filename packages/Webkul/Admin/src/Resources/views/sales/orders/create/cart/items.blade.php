@@ -148,10 +148,6 @@
                         >
                             @lang('admin::app.sales.orders.create.cart.items.delete')
                         </p>
-
-                        <p class="text-emerald-600 cursor-pointer transition-all hover:underline">
-                            @lang('admin::app.sales.orders.create.cart.items.move-to-wishlist')
-                        </p>
                     </div>
                 </div>
             </div>

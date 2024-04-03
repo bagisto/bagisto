@@ -134,7 +134,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'आदेश',
+                'create-btn' => 'आदेश बनाएं',
+                'title'      => 'आदेश',
+
+                'search-customer' => [
+                    'create-btn'  => 'ग्राहक बनाएं',
+                    'empty-info'  => 'खोज शब्द के लिए कोई ग्राहक उपलब्ध नहीं है।',
+                    'empty-title' => 'कोई ग्राहक नहीं मिला',
+                    'search-by'   => 'ईमेल या नाम से खोजें',
+                    'title'       => 'ग्राहक चुनें',
+                ],
 
                 'datagrid' => [
                     'canceled'        => 'रद्द हुआ',
@@ -152,13 +161,174 @@ return [
                     'order-id'        => 'आदेश आईडी',
                     'pay-by'          => ':method के द्वारा भुगतान करें',
                     'pay-via'         => 'द्वारा भुगतान करें',
-                    'pending'         => 'बेकारी',
                     'pending-payment' => 'बकाया भुगतान',
+                    'pending'         => 'बेकारी',
                     'processing'      => 'प्रोसेसिंग',
                     'product-count'   => ':count + और अधिक उत्पाद',
                     'status'          => 'स्थिति',
                     'success'         => 'सफलता',
                     'view'            => 'देखें',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'कार्ट में जोड़ें',
+                'back-btn'                => 'वापस जाएं',
+                'check-billing-address'   => 'बिलिंग पता अनुपलब्ध है।',
+                'check-shipping-address'  => 'शिपिंग पता अनुपलब्ध है।',
+                'configuration'           => 'कॉन्फ़िगरेशन',
+                'coupon-already-applied'  => 'कूपन कोड पहले से ही लागू किया गया है।',
+                'coupon-applied'          => 'कूपन कोड सफलतापूर्वक लागू किया गया है।',
+                'coupon-error'            => 'कूपन कोड लागू नहीं किया जा सकता।',
+                'coupon-not-found'        => 'कूपन नहीं मिला',
+                'coupon-remove'           => 'कूपन कोड सफलतापूर्वक हटा दिया गया है।',
+                'error'                   => 'कुछ गलत हो गया है',
+                'minimum-order-error'     => 'न्यूनतम आदेश राशि पूरी नहीं हुई है।',
+                'order-placed-success'    => 'आदेश सफलतापूर्वक रखा गया है।',
+                'payment-not-supported'   => 'यह भुगतान विधि समर्थित नहीं है',
+                'save-btn'                => 'आदेश बनाएं',
+                'specify-payment-method'  => 'भुगतान विधि अनुपलब्ध है।',
+                'specify-shipping-method' => 'शिपिंग विधि अनुपलब्ध है।',
+                'title'                   => ':name के लिए आदेश बनाएं',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'कृपया एक विकल्प चुनें',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
+                    ],
+
+                    'grouped' => [
+                        'name' => 'नाम',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'लिंक',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => 'उत्पाद सफलतापूर्वक कार्ट में जोड़ा गया',
+                    'success-remove'      => 'आइटम सफलतापूर्वक कार्ट से हटा दिया गया',
+                    'success-update'      => 'कार्ट आइटम सफलतापूर्वक अपडेट किया गया',
+
+                    'items' => [
+                        'add-product'       => 'उत्पाद जोड़ें',
+                        'amount-per-unit'   => ':amount प्रति इकाई x :qty मात्रा',
+                        'delete'            => 'हटाएं',
+                        'empty-description' => 'आपके कार्ट में कोई आइटम नहीं मिला।',
+                        'empty-title'       => 'खाली कार्ट आइटम',
+                        'move-to-wishlist'  => 'विशलिस्ट में ले जाएं',
+                        'see-details'       => 'विवरण देखें',
+                        'sku'               => 'एसकेयू - :sku',
+                        'sub-total'         => 'उप कुल - :sub_total',
+                        'title'             => 'कार्ट आइटम',
+
+                        'search' => [
+                            'add-to-cart'   => 'कार्ट में जोड़ें',
+                            'available-qty' => ':qty उपलब्ध',
+                            'empty-info'    => 'खोज शब्द के लिए कोई उत्पाद उपलब्ध नहीं है।',
+                            'empty-title'   => 'कोई उत्पाद नहीं मिला',
+                            'product-image' => 'उत्पाद छवि',
+                            'qty'           => ':qty उपलब्ध',
+                            'qty'           => 'मात्रा',
+                            'sku'           => 'एसकेयू - :sku',
+                            'title'         => 'उत्पाद खोजें',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => 'पता जोड़ें',
+                        'add-new-address'  => 'नया पता जोड़ें',
+                        'add-new'          => 'नया पता जोड़ें',
+                        'addresses'        => 'पते',
+                        'back'             => 'वापस',
+                        'billing-address'  => 'बिलिंग पता',
+                        'city'             => 'शहर',
+                        'company-name'     => 'कंपनी का नाम',
+                        'confirm'          => 'पुष्टि करें',
+                        'country'          => 'देश',
+                        'edit-btn'         => 'पता संपादित करें',
+                        'email'            => 'ईमेल',
+                        'first-name'       => 'पहला नाम',
+                        'last-name'        => 'अंतिम नाम',
+                        'postcode'         => 'पिनकोड',
+                        'proceed'          => 'आगे बढ़ें',
+                        'same-as-billing'  => 'शिपिंग के लिए एक ही पता उपयोग करें?',
+                        'save-address'     => 'इसे पता पुस्तिका में सहेजें',
+                        'save'             => 'सहेजें',
+                        'select-country'   => 'देश चुनें',
+                        'select-state'     => 'राज्य चुनें',
+                        'shipping-address' => 'शिपिंग पता',
+                        'state'            => 'राज्य',
+                        'street-address'   => 'सड़क का पता',
+                        'telephone'        => 'टेलीफोन',
+                        'title'            => 'पता',
+                        'title'            => 'पता',
+                    ],
+
+                    'payment' => [
+                        'title' => 'भुगतान',
+                    ],
+
+                    'shipping' => [
+                        'title' => 'शिपिंग',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'कूपन लागू करें',
+                        'discount-amount' => 'छूट राशि',
+                        'enter-your-code' => 'अपना कोड दर्ज करें',
+                        'grand-total'     => 'कुल योग',
+                        'place-order'     => 'आदेश दें',
+                        'processing'      => 'प्रोसेसिंग',
+                        'shipping-amount' => 'शिपिंग राशि',
+                        'sub-total'       => 'उप कुल',
+                        'tax'             => 'कर',
+                        'title'           => 'आदेश सारांश',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'कार्ट में जोड़ें',
+                    'delete'            => 'हटाएं',
+                    'empty-description' => 'आपके कार्ट में कोई आइटम नहीं मिला।',
+                    'empty-title'       => 'खाली कार्ट',
+                    'see-details'       => 'विवरण देखें',
+                    'sku'               => 'एसकेयू - :sku',
+                    'title'             => 'कार्ट आइटम',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'कार्ट में जोड़ें',
+                    'empty-description' => 'आपके हाल के आदेशों में कोई आइटम नहीं मिला।',
+                    'empty-title'       => 'खाली आदेश',
+                    'see-details'       => 'विवरण देखें',
+                    'sku'               => 'एसकेयू - :sku',
+                    'title'             => 'हाल के आदेश आइटम',
+                    'view'              => 'देखें',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'कार्ट में जोड़ें',
+                    'delete'            => 'हटाएं',
+                    'empty-description' => 'आपकी विशलिस्ट में कोई आइटम नहीं मिला।',
+                    'empty-title'       => 'खाली विशलिस्ट आइटम',
+                    'see-details'       => 'विवरण देखें',
+                    'sku'               => 'एसकेयू - :sku',
+                    'title'             => 'विशलिस्ट आइटम',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'कार्ट में जोड़ें',
+                    'delete'            => 'हटाएं',
+                    'empty-description' => 'आपकी तुलना सूची में कोई आइटम नहीं मिला।',
+                    'empty-title'       => 'खाली तुलना आइटम',
+                    'sku'               => 'एसकेयू - :sku',
+                    'title'             => 'तुलना आइटम',
                 ],
             ],
 
@@ -1364,8 +1534,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'चालान (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'चालान (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1379,14 +1549,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'ऑर्डर (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'कुल राजस्व - :revenue',
+                    'count'         => 'ऑर्डर (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'कुल राजस्व - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'आईडी - :id',
-                    'count'       => 'समीक्षाएँ (:count)',
+                    'id'    => 'आईडी - :id',
+                    'count' => 'समीक्षाएँ (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'कार्ट आइटम सफलतापूर्वक हटा दिया गया।',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'विशलिस्ट आइटम सफलतापूर्वक हटा दिया गया।',
+                ],
+
+                'compare' => [
+                    'delete-success' => 'कंपेयर आइटम सफलतापूर्वक हटा दिया गया।',
                 ],
             ],
 
