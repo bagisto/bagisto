@@ -28,6 +28,7 @@ class CategoryRepository extends Repository
     public function getAll(array $params = [])
     {
         $queryBuilder = $this->query()
+            ->select('categories.*')
             ->leftJoin('category_translations', 'category_translations.category_id', '=', 'categories.id');
 
         foreach ($params as $key => $value) {
@@ -290,25 +291,6 @@ class CategoryRepository extends Repository
         }
 
         return $trimmed;
-    }
-
-    /**
-     * Get searched categories.
-     *
-     * @return void
-     */
-    public function getSearchedCategories(array $params = [])
-    {
-        $queryBuilder = $this->query()
-            ->select('categories.*')
-            ->leftJoin('category_translations', function ($join) {
-                $join->on('categories.id', '=', 'category_translations.category_id')
-                    ->where('category_translations.locale', app()->getLocale());
-            })
-            ->where('category_translations.name', 'like', '%'.urldecode($params['query']).'%')
-            ->orderBy('created_at', 'desc');
-
-        return $queryBuilder->paginate($params['limit'] ?? 10);
     }
 
     /**
