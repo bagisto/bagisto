@@ -73,8 +73,11 @@ it('should display the cart items for a guest user', function () {
         ->assertJsonPath('data.base_tax_total', ! empty($cart->base_tax_total) ? $cart->base_tax_total : 0)
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
-        ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0)
-        ->assertJsonPath('data.grand_total', $cart->grand_total);
+        ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0);
+
+    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+
+    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -159,6 +162,8 @@ it('should display the cart items for a customer', function () {
         ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0);
 
     $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+
+    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -650,6 +655,8 @@ it('should only remove one product from the cart for now the cart will contains 
 
     $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
 
+    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
+
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
         $response->assertJsonPath('data.items.'.$key.'.quantity', $cartItem->quantity);
@@ -773,6 +780,8 @@ it('should only remove one product from the cart for now the cart will contains 
         ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
 
     $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+
+    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -1082,8 +1091,11 @@ it('should update cart quantities for guest user', function () {
         ->assertJsonPath('data.base_tax_total', ! empty($cart->base_tax_total) ? $cart->base_tax_total : 0)
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
-        ->assertJsonPath('data.grand_total', $cart->grand_total)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.index.quantity-update'));
+
+    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+
+    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
@@ -1199,8 +1211,11 @@ it('should update cart quantities for customer', function () {
         ->assertJsonPath('data.base_tax_total', ! empty($cart->base_tax_total) ? $cart->base_tax_total : 0)
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
-        ->assertJsonPath('data.grand_total', $cart->grand_total)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.index.quantity-update'));
+
+    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+
+    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
 
     foreach ($cart->items as $key => $cartItem) {
         $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);

@@ -1531,11 +1531,14 @@ it('should check tax is applying for the configurable product into the cart for 
 
     $cart->refresh();
 
-    getJson(route('shop.checkout.onepage.summary'))
+    $response = getJson(route('shop.checkout.onepage.summary'))
         ->assertJsonPath('data.id', $cart->id)
         ->assertJsonPath('data.tax_total', $cart->tax_total)
-        ->assertJsonPath('data.base_tax_total', $cart->base_tax_total)
-        ->assertJsonPath('data.grand_total', $cart->grand_total);
+        ->assertJsonPath('data.base_tax_total', $cart->base_tax_total);
+
+    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
+
+    $this->assertEquality($cart->sub_total, $response['data']['sub_total']);
 });
 
 it('should check customer group price for guest customer with fixed price type for configurable product', function () {
