@@ -1418,7 +1418,6 @@ return [
                 'suspended'                   => 'Suspended',
                 'title'                       => 'Customer View',
 
-
                 'address' => [
                     'count'  => 'Addresses (:count)',
 
