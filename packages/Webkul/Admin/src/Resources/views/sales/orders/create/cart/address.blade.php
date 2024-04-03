@@ -46,7 +46,7 @@
                         </div>
 
                         <!-- Billing Address Container -->
-                        <div class="flex gap-8">
+                        <div class="flex gap-8 flex-wrap">
                             <!-- Address Cards -->
                             <div
                                 class="flex gap-2"
@@ -160,7 +160,7 @@
                                 </div>
 
                                 <!-- Shipping Address Container -->
-                                <div class="flex gap-8">
+                                <div class="flex gap-8 flex-wrap">
                                     <!-- Address Cards -->
                                     <div
                                         class="flex gap-2"
@@ -439,6 +439,8 @@
 
                     this.selectedAddresses[this.activeAddressForm + '_address_id'] = address.id;
 
+                    this.$refs.updateCreateModal.close();
+
                     this.activeAddressForm = null;
                 },
 
@@ -456,6 +458,8 @@
 
                             this.selectedAddresses[this.activeAddressForm + '_address_id'] = params.id;
 
+                            this.$refs.updateCreateModal.close();
+
                             this.activeAddressForm = null;
                         }
                     });
@@ -471,8 +475,6 @@
                     return this.$axios.post('{{ route('admin.customers.customers.addresses.store', $cart->customer_id) }}', params)
                         .then((response) => {
                             this.isStoring = false;
-
-                            this.$refs.updateCreateModal.close();
 
                             return response;
                         })
@@ -501,8 +503,6 @@
                     return this.$axios.put('{{ route('admin.customers.customers.addresses.update', ':id') }}'.replace(':id', id), params)
                         .then((response) => {
                             this.isStoring = false;
-
-                            this.$refs.updateCreateModal.close();
 
                             return response;
                         })
