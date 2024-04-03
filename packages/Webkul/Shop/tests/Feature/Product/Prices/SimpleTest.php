@@ -613,11 +613,7 @@ it('should fails the validation error when the product id not provided add a sim
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -702,11 +698,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -795,11 +787,7 @@ it('should fails the validation error when the product id not provided add a sim
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -881,11 +869,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -973,11 +957,7 @@ it('should fails the validation error when the product id not provided add a sim
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1067,11 +1047,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1161,11 +1137,7 @@ it('should fails the validation error when the product id not provided add a sim
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1248,11 +1220,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1327,11 +1295,7 @@ it('should check tax is applying for the simple product into the cart for simple
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     CustomerAddress::factory()->create([
         'email'        => $customer->email,

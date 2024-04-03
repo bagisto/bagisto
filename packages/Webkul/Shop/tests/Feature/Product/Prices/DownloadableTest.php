@@ -42,7 +42,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
         $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
 
         $cartRule->cart_rule_channels()->sync([1]);
@@ -79,6 +79,12 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for all customer group type', function () {
@@ -145,11 +151,17 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'));
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['items'][0]['price'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertEquality($cartRule->discount_amount, $response['data']['discount_amount']);
 
-    $this->assertEquals(round($product->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price - $cartRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for guest customer', function () {
@@ -177,7 +189,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
         $cartRule->cart_rule_customer_groups()->sync([1]);
 
         $cartRule->cart_rule_channels()->sync([1]);
@@ -214,6 +226,12 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for guest customer', function () {
@@ -281,11 +299,17 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
         ->assertJsonPath('data.items.0.quantity', $quantity);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['items'][0]['price'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertEquality($cartRule->discount_amount, $response['data']['discount_amount']);
 
-    $this->assertEquals(round($product->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price - $cartRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for general customer', function () {
@@ -309,7 +333,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
         $cartRule->cart_rule_customer_groups()->sync([2]);
 
         $cartRule->cart_rule_channels()->sync([1]);
@@ -350,6 +374,12 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for general customer', function () {
@@ -418,9 +448,15 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
         ->assertJsonPath('data.items.0.quantity', $quantity)
         ->assertJsonPath('data.discount_amount', $cartRule->discount_amount);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['items'][0]['price'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquals(round(($product->price * $quantity) - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality(($product->price * $quantity) - $cartRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
@@ -444,7 +480,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
         $cartRule->cart_rule_customer_groups()->sync([3]);
 
         $cartRule->cart_rule_channels()->sync([1]);
@@ -485,6 +521,12 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
@@ -553,9 +595,15 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
         ->assertJsonPath('data.items.0.quantity', $quantity)
         ->assertJsonPath('data.discount_amount', $cartRule->discount_amount);
 
-    $this->assertEquals(round($product->price, 2), $response['data']['items'][0]['price']);
+    $this->assertEquality($product->price, $response['data']['items'][0]['price']);
 
-    $this->assertEquals(round(($product->price * $quantity) - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality(($product->price * $quantity) - $cartRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
@@ -611,7 +659,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -638,16 +686,20 @@ it('should fails the validation error when certain inputs not provided when add 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
+
+    $this->assertCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
@@ -703,7 +755,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -730,11 +782,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -745,7 +793,15 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.id', $cart->id)
         ->assertJsonPath('data.discount_amount', $discountAmount);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['sub_total']);
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
+
+    $this->assertCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for guest customer', function () {
@@ -801,7 +857,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -825,16 +881,20 @@ it('should fails the validation error when certain inputs not provided when add 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
+
+    $this->assertCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for guest customer', function () {
@@ -890,7 +950,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -914,11 +974,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -929,7 +985,15 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.id', $cart->id)
         ->assertJsonPath('data.discount_amount', $discountAmount);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['sub_total']);
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
+
+    $this->assertCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for general customer', function () {
@@ -981,7 +1045,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -1008,11 +1072,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1020,6 +1080,14 @@ it('should fails the validation error when the certain inputs not provided when 
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
+
+    $this->assertCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for general customer', function () {
@@ -1071,7 +1139,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -1098,11 +1166,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1115,7 +1179,15 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.id', $cart->id)
         ->assertJsonPath('data.discount_amount', $discountAmount);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['sub_total']);
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
+
+    $this->assertCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
@@ -1167,7 +1239,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -1194,11 +1266,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1206,6 +1274,14 @@ it('should fails the validation error when the certain inputs not provided when 
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
+
+    $this->assertCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
@@ -1257,7 +1333,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -1284,11 +1360,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -1301,7 +1373,17 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.id', $cart->id)
         ->assertJsonPath('data.discount_amount', $discountAmount);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['sub_total']);
+
+    $this->assertEquality($product->price - $discountAmount, $response['data']['grand_total']);
+
+    $this->assertCartRule($cartRule);
+
+    $this->assertCartRuleCustomerGroup($cartRule);
+
+    $this->assertCartRuleChannel($cartRule);
+
+    $this->assertCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should check tax is applying for the downloadable product into the cart for downloadable product', function () {
@@ -1365,11 +1447,7 @@ it('should check tax is applying for the downloadable product into the cart for 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
+    cart()->putCart($cart);
 
     CustomerAddress::factory()->create([
         'email'        => $customer->email,
@@ -1393,13 +1471,13 @@ it('should check tax is applying for the downloadable product into the cart for 
         ->assertOk()
         ->assertJsonPath('data.id', $cart->id);
 
-    $this->assertEquals(round($cart->base_tax_total, 2), round($response['data']['base_tax_total'], 2), '', 0.00000001);
+    $this->assertEquality($cart->base_tax_total, $response['data']['base_tax_total']);
 
-    $this->assertEquals(round($cart->grand_total, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($cart->grand_total, $response['data']['grand_total']);
 
-    $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price, $response['data']['sub_total']);
 
-    $this->assertEquals(round($cart->tax_total, 2), round($response['data']['tax_total'], 2), '', 0.00000001);
+    $this->assertEquality($cart->tax_total, $response['data']['tax_total']);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with fixed price type for downloadable product', function () {
@@ -1444,6 +1522,15 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'fixed',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for guest customer with fixed price type for downloadable product', function () {
@@ -1492,7 +1579,16 @@ it('should check customer group price for guest customer with fixed price type f
         ->assertJsonPath('data.items.0.quantity', $customerGroupPrice->qty)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquals(round($customerGroupPrice->value * $customerGroupPrice->qty, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['grand_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'fixed',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with discount price type for downloadable product', function () {
@@ -1528,10 +1624,6 @@ it('should fails the validation error when the certain inputs not provided when 
         'customer_group_id' => 1,
     ]);
 
-    $totalAmount = $product->price * $customerGroupPrice->qty;
-
-    $grandTotal = ($totalAmount - ($totalAmount * ($customerGroupPrice->value / 100)));
-
     // Act and Assert
     postJson(route('shop.api.checkout.cart.store', [
         'quantity'   => $customerGroupPrice->qty,
@@ -1541,6 +1633,15 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'discount',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for guest customer with discount price type for downloadable product', function () {
@@ -1592,7 +1693,18 @@ it('should check customer group price for guest customer with discount price typ
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+
+    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'discount',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for general customer with fixed price type for downloadable product', function () {
@@ -1637,6 +1749,15 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'fixed',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for general customer with fixed price type for downloadable product', function () {
@@ -1685,7 +1806,18 @@ it('should check customer group price for general customer with fixed price type
         ->assertJsonPath('data.items.0.quantity', $customerGroupPrice->qty)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquals(round($customerGroupPrice->value * $customerGroupPrice->qty, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['grand_total']);
+
+    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'fixed',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for general customer with discount price type for downloadable product', function () {
@@ -1730,6 +1862,15 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'discount',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for general customer with discount price type for downloadable product', function () {
@@ -1781,7 +1922,18 @@ it('should check customer group price for general customer with discount price t
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+
+    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'discount',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for wholesale customer with fixed price type for downloadable product', function () {
@@ -1826,6 +1978,15 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'fixed',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for wholesale customer with fixed price type for downloadable product', function () {
@@ -1874,7 +2035,18 @@ it('should check customer group price for wholesale customer with fixed price ty
         ->assertJsonPath('data.items.0.quantity', $customerGroupPrice->qty)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquals(round($customerGroupPrice->value * $customerGroupPrice->qty, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['grand_total']);
+
+    $this->assertEquality($customerGroupPrice->value * $customerGroupPrice->qty, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'fixed',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for wholesale customer with discount price type for downloadable product', function () {
@@ -1919,6 +2091,15 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'discount',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for wholesale customer with discount price type for downloadable product', function () {
@@ -1970,7 +2151,18 @@ it('should check customer group price for wholesale customer with discount price
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+
+    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'id'                 => $customerGroupPrice->id,
+        'qty'                => $customerGroupPrice->qty,
+        'value_type'         => 'discount',
+        'value'              => $customerGroupPrice->value,
+        'product_id'         => $customerGroupPrice->product_id,
+        'customer_group_id'  => $customerGroupPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for downloadable product for guest customer into cart', function () {
@@ -2007,8 +2199,6 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    $grandTotal = $product->price - ($product->price * ($catalogRule->discount_amount / 100));
-
     // Act and Assert
     postJson(route('shop.api.checkout.cart.store', [
         'quantity'   => 1,
@@ -2018,6 +2208,12 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for guest customer into cart', function () {
@@ -2068,15 +2264,22 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+
+    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for downloadable product for general customer into cart', function () {
     // Arrange
     $customer = Customer::factory()->create();
 
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([2]);
@@ -2115,6 +2318,12 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for general customer into cart', function () {
@@ -2165,15 +2374,22 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+
+    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for downloadable product for wholesaler customer into cart', function () {
     // Arrange
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([3]);
@@ -2212,6 +2428,12 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for wholesaler customer into cart', function () {
@@ -2262,13 +2484,20 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($grandTotal, $response['data']['grand_total']);
+
+    $this->assertEquality($grandTotal, $response['data']['sub_total']);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for downloadable product for guest customer into cart', function () {
     // Arrange
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([1]);
@@ -2310,6 +2539,12 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for guest customer into cart', function () {
@@ -2359,8 +2594,15 @@ it('should check discount price if catalog rule applied for fixed price for down
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not defined when check discount price if catalog rule applied for fixed price for downloadable product for general customer into cart', function () {
@@ -2464,15 +2706,22 @@ it('should check discount price if catalog rule applied for fixed price for down
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for downloadable product for wholesaler customer into cart', function () {
     // Arrange
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([3]);
@@ -2516,6 +2765,12 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for wholesaler customer into cart', function () {
@@ -2569,8 +2824,15 @@ it('should check discount price if catalog rule applied for fixed price for down
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertEquality($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for guest customer', function () {
@@ -2619,6 +2881,12 @@ it('should check discount price if catalog rule applied for fixed price for down
             ],
         ],
     ]);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for general customer', function () {
@@ -2667,6 +2935,12 @@ it('should check discount price if catalog rule applied for fixed price for down
             ],
         ],
     ]);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for wholesaler customer', function () {
@@ -2715,6 +2989,12 @@ it('should check discount price if catalog rule applied for fixed price for down
             ],
         ],
     ]);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for guest customer', function () {
@@ -2762,6 +3042,12 @@ it('should check discount price if catalog rule applied for percentage price for
             ],
         ],
     ]);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for general customer', function () {
@@ -2809,6 +3095,12 @@ it('should check discount price if catalog rule applied for percentage price for
             ],
         ],
     ]);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for wholesaler customer', function () {
@@ -2856,4 +3148,10 @@ it('should check discount price if catalog rule applied for percentage price for
             ],
         ],
     ]);
+
+    $this->assertCatalogRule($catalogRule);
+
+    $this->assertCatalogRuleChannel($catalogRule);
+
+    $this->assertCatalogRuleCustomerGroup($catalogRule);
 });
