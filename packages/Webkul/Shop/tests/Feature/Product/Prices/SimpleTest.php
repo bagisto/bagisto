@@ -713,7 +713,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertEquals(round($discountAmount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
@@ -892,7 +892,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertEquals(round($discountAmount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
@@ -986,7 +986,7 @@ it('should fails the validation error when the product id not provided add a sim
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertEquals(round($discountAmount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
@@ -1080,7 +1080,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertEquals(round($discountAmount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
@@ -1261,7 +1261,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertEquals(round($discountAmount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);

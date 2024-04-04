@@ -113,7 +113,7 @@
     <!-- Apply Coupon -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.coupon.before') !!}
 
-    @include('shop::checkout.cart.coupon')
+    @include('shop::checkout.coupon')
 
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.coupon.after') !!}
 
