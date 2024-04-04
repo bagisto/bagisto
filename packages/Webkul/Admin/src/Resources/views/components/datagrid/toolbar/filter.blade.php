@@ -551,6 +551,8 @@
                     }
 
                     this.$emit('applyFilter', this.filters);
+
+                    this.$refs.filterDrawer.close();
                 },
 
                 /**
@@ -676,6 +678,8 @@
                     }
 
                     this.$emit('removeFilter', this.filters);
+
+                    this.$refs.filterDrawer.close();
                 },
 
                 /**
