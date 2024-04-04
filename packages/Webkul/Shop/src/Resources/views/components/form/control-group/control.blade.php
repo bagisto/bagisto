@@ -70,11 +70,16 @@
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-3 px-5 shadow border rounded-lg text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
             </textarea>
-        </v-field>
 
-        @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
-            <x-shop::tinymce :selector="'textarea#' . $attributes->get('id')" />
-        @endif
+            @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
+                <x-shop::tinymce 
+                    :selector="'textarea#' . $attributes->get('id')"
+                    :prompt="stripcslashes($attributes->get('prompt', ''))"
+                    ::field="field"
+                >
+                </x-shop::tinymce>
+            @endif
+        </v-field>
 
         @break
 

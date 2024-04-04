@@ -1,32 +1,43 @@
 <v-tinymce {{ $attributes }}></v-tinymce>
 
 @pushOnce('scripts')
-    <!--
-        TODO (@devansh-webkul): Only this portion is pending; it just needs to be integrated using the Vite bundler. Currently,
-        there is an issue with relative paths in the plugins. I intend to address this task at the end.
-    -->
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.6.2/tinymce.min.js"
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
     ></script>
 
+    <script
+        type="text/x-template"
+        id="v-tinymce-template"
+    >
+    </script>
+
     <script type="module">
         app.component('v-tinymce', {
-            props: ['selector'],
+            template: '#v-tinymce-template',
+                
+            props: ['selector', 'field',],
 
             mounted() {
                 this.init();
+
+                this.$emitter.on('change-theme', (theme) => {
+                    tinymce.activeEditor.destroy();
+
+                    this.init();
+                });
             },
 
             methods: {
                 init() {
-                    // TODO (@devansh-webkul): Need to refactor this full method.
+                    let self = this;
+
                     let tinyMCEHelper = {
                         initTinyMCE: function(extraConfiguration) {
-                            let self = this;
+                            let self2 = this;
 
-                            let config = {
+                            let config = {  
                                 relative_urls: false,
                                 menubar: false,
                                 remove_script_host: false,
@@ -36,16 +47,18 @@
                                 ...extraConfiguration,
                             };
 
+                            const image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
+                                self2.uploadImageHandler(config, blobInfo, resolve, reject, progress);
+                            });
+
                             tinymce.init({
                                 ...config,
 
                                 file_picker_callback: function(cb, value, meta) {
-                                    self.filePickerCallback(config, cb, value, meta);
+                                    self2.filePickerCallback(config, cb, value, meta);
                                 },
 
-                                images_upload_handler: function(blobInfo, success, failure, progress) {
-                                    self.uploadImageHandler(config, blobInfo, success, failure, progress);
-                                },
+                                images_upload_handler: image_upload_handler,
                             });
                         },
 
@@ -61,19 +74,22 @@
                                 reader.readAsDataURL(file);
                                 reader.onload = function() {
                                     let id = 'blobid' + new Date().getTime();
-                                    let blobCache = tinymce.get().editorUpload.blobCache;
+                                    let blobCache = tinymce.activeEditor.editorUpload.blobCache;
                                     let base64 = reader.result.split(',')[1];
                                     let blobInfo = blobCache.create(id, file, base64);
+
                                     blobCache.add(blobInfo);
+
                                     cb(blobInfo.blobUri(), {
                                         title: file.name
                                     });
                                 };
                             };
+
                             input.click();
                         },
 
-                        uploadImageHandler: function(config, blobInfo, success, failure, progress) {
+                        uploadImageHandler: function(config, blobInfo, resolve, reject, progress) {
                             let xhr, formData;
 
                             xhr = new XMLHttpRequest();
@@ -82,15 +98,13 @@
 
                             xhr.open('POST', config.uploadRoute);
 
-                            xhr.upload.onprogress = function(e) {
-                                progress((e.loaded / e.total) * 100);
-                            };
+                            xhr.upload.onprogress = ((e) => progress((e.loaded / e.total) * 100));
 
                             xhr.onload = function() {
                                 let json;
 
                                 if (xhr.status === 403) {
-                                    failure("@lang('admin::app.error.tinymce.http-error')" {
+                                    reject("@lang('admin::app.error.tinymce.http-error')", {
                                         remove: true
                                     });
 
@@ -98,25 +112,23 @@
                                 }
 
                                 if (xhr.status < 200 || xhr.status >= 300) {
-                                    failure("@lang('admin::app.error.tinymce.http-error')");
+                                    reject("@lang('admin::app.error.tinymce.http-error')");
 
                                     return;
                                 }
 
                                 json = JSON.parse(xhr.responseText);
 
-                                if (!json || typeof json.location != 'string') {
-                                    failure("@lang('admin::app.error.tinymce.invalid-json') " + xhr.responseText);
+                                if (! json || typeof json.location != 'string') {
+                                    reject("@lang('admin::app.error.tinymce.invalid-json')" + xhr.responseText);
 
                                     return;
                                 }
 
-                                success(json.location);
+                                resolve(json.location);
                             };
 
-                            xhr.onerror = function() {
-                                failure("@lang('admin::app.error.tinymce.upload-failed')");
-                            };
+                            xhr.onerror = (()=>reject("@lang('admin::app.error.tinymce.upload-failed')"));
 
                             formData = new FormData();
                             formData.append('_token', config.csrfToken);
@@ -129,17 +141,15 @@
                     tinyMCEHelper.initTinyMCE({
                         selector: this.selector,
                         plugins: 'image media wordcount save fullscreen code table lists link',
-                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table',
+                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor image alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table | aibutton',
                         image_advtab: true,
-                        valid_elements: '*[*]',
+                        directionality : "{{ core()->getCurrentLocale()->direction }}",
 
                         setup: editor => {
-                            editor.on('keyup', () => {
-                                this.content = editor.getContent();
-                            });
+                            editor.on('keyup', () => this.field.onInput(editor.getContent()));
                         },
                     });
-                }
+                },
             },
         })
     </script>
