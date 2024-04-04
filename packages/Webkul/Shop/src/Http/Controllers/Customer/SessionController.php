@@ -14,11 +14,13 @@ class SessionController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function show()
+    public function index()
     {
-        return auth()->guard('customer')->check()
-            ? redirect()->route('shop.home.index')
-            : view('shop::customers.sign-in');
+        if (auth()->guard('customer')->check()) {
+            return redirect()->route('shop.home.index');
+        }
+
+        return view('shop::customers.sign-in');
     }
 
     /**
@@ -26,7 +28,7 @@ class SessionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(LoginRequest $loginRequest)
+    public function store(LoginRequest $loginRequest)
     {
         if (! auth()->guard('customer')->attempt($loginRequest->only(['email', 'password']))) {
             session()->flash('error', trans('shop::app.customers.login-form.invalid-credentials'));

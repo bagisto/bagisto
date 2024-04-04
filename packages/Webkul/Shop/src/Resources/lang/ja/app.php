@@ -650,22 +650,6 @@ return [
                 'total'                    => '合計',
                 'update-cart'              => 'カートを更新',
                 'view-cart'                => 'カートを表示',
-            ],
-
-            'coupon'   => [
-                'already-applied' => 'クーポンコードは既に適用されています。',
-                'applied'         => 'クーポンが適用されました',
-                'apply'           => 'クーポンを適用',
-                'apply-issue'     => 'クーポンコードは適用できません。',
-                'button-title'    => '適用',
-                'code'            => 'クーポンコード',
-                'discount'        => 'クーポン割引',
-                'enter-your-code' => 'コードを入力してください',
-                'error'           => '何か問題が発生しました',
-                'invalid'         => 'クーポンコードが無効です。',
-                'remove'          => 'クーポンを削除',
-                'subtotal'        => '小計',
-                'success-apply'   => 'クーポンコードが正常に適用されました。',
 
                 'cross-sell' => [
                     'title' => 'さらなる選択肢',
@@ -746,6 +730,28 @@ return [
                 'sub-total'        => '小計',
                 'tax'              => '税金',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'クーポンコードは既に適用されています。',
+            'applied'         => 'クーポンが適用されました',
+            'apply'           => 'クーポンを適用',
+            'apply-issue'     => 'クーポンコードは適用できません。',
+            'button-title'    => '適用',
+            'code'            => 'クーポンコード',
+            'discount'        => 'クーポン割引',
+            'enter-your-code' => 'コードを入力してください',
+            'error'           => '何か問題が発生しました',
+            'invalid'         => 'クーポンコードが無効です。',
+            'remove'          => 'クーポンを削除',
+            'subtotal'        => '小計',
+            'success-apply'   => 'クーポンコードが正常に適用されました。',
+        ],
+
+        'login' => [
+            'email'    => 'メールアドレス',
+            'password' => 'パスワード',
+            'title'    => 'サインイン',
         ],
     ],
 

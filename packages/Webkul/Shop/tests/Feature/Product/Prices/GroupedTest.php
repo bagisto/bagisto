@@ -852,7 +852,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
@@ -1048,7 +1048,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
@@ -1253,7 +1253,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
@@ -1456,7 +1456,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']))
         ->assertJsonPath('data.items_count', 4);
 
