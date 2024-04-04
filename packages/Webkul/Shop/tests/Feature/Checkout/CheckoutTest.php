@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Mail\Order\CreatedNotification as AdminOrderCreatedNotification;
 use Webkul\Checkout\Models\Cart;
@@ -8,6 +9,7 @@ use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\ProductInventoryIndex;
 use Webkul\Product\Models\ProductOrderedInventory;
@@ -80,18 +82,12 @@ it('should handle certain validation errors when storing the guest user address 
         ->assertJsonValidationErrorFor('billing.email')
         ->assertJsonValidationErrorFor('billing.address')
         ->assertJsonValidationErrorFor('billing.city')
-        ->assertJsonValidationErrorFor('billing.country')
-        ->assertJsonValidationErrorFor('billing.state')
-        ->assertJsonValidationErrorFor('billing.postcode')
         ->assertJsonValidationErrorFor('billing.phone')
         ->assertJsonValidationErrorFor('shipping.first_name')
         ->assertJsonValidationErrorFor('shipping.last_name')
         ->assertJsonValidationErrorFor('shipping.email')
         ->assertJsonValidationErrorFor('shipping.address')
         ->assertJsonValidationErrorFor('shipping.city')
-        ->assertJsonValidationErrorFor('shipping.country')
-        ->assertJsonValidationErrorFor('shipping.state')
-        ->assertJsonValidationErrorFor('shipping.postcode')
         ->assertJsonValidationErrorFor('shipping.phone')
         ->assertUnprocessable();
 });
@@ -160,18 +156,12 @@ it('should handle certain validation errors when storing the customer address fo
         ->assertJsonValidationErrorFor('billing.email')
         ->assertJsonValidationErrorFor('billing.address')
         ->assertJsonValidationErrorFor('billing.city')
-        ->assertJsonValidationErrorFor('billing.country')
-        ->assertJsonValidationErrorFor('billing.state')
-        ->assertJsonValidationErrorFor('billing.postcode')
         ->assertJsonValidationErrorFor('billing.phone')
         ->assertJsonValidationErrorFor('shipping.first_name')
         ->assertJsonValidationErrorFor('shipping.last_name')
         ->assertJsonValidationErrorFor('shipping.email')
         ->assertJsonValidationErrorFor('shipping.address')
         ->assertJsonValidationErrorFor('shipping.city')
-        ->assertJsonValidationErrorFor('shipping.country')
-        ->assertJsonValidationErrorFor('shipping.state')
-        ->assertJsonValidationErrorFor('shipping.postcode')
         ->assertJsonValidationErrorFor('shipping.phone')
         ->assertUnprocessable();
 });
@@ -229,21 +219,10 @@ it('should store the shipping address as the billing address when use_for_shippi
 
     // Act and Assert.
     $response = postJson(route('shop.checkout.onepage.addresses.store'), [
-        'billing' => [
-            'address' => $address = [
-                fake()->address(),
-                fake()->address(),
-            ],
-            'company_name'     => $companyName = fake()->company(),
-            'first_name'       => $firstName = fake()->firstName(),
-            'last_name'        => $lastName = fake()->lastName(),
-            'email'            => $email = fake()->email(),
-            'country'          => $country = fake()->countryCode(),
-            'state'            => $state = fake()->state(),
-            'city'             => $city = fake()->city(),
-            'postcode'         => $postCode = rand(111111, 999999),
-            'phone'            => $phone = fake()->e164PhoneNumber(),
-            'use_for_shipping' => true,
+        'billing' => $billingAddress = [
+            ...CustomerAddress::factory()->create()->toArray(),
+            'use_for_shipping' => 1,
+            'address'          => [fake()->address()],
         ],
     ])
         ->assertOk()
@@ -265,50 +244,26 @@ it('should store the shipping address as the billing address when use_for_shippi
         ->assertJsonPath('data.shippingMethods.free.rates.0.base_price', 0);
 
     $response->assertJsonPath('data.shippingMethods.flatrate.rates.0.cart_address_id', $cart->shipping_address->id);
+
     $response->assertJsonPath('data.shippingMethods.free.rates.0.cart_address_id', $cart->shipping_address->id);
 
     $this->assertModelWise([
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_BILLING,
-                'parent_address_id' => null,
-                'customer_id'       => null,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $firstName,
-                'last_name'         => $lastName,
-                'gender'            => null,
-                'company_name'      => $companyName,
-                'address'           => implode("\n", $address),
-                'city'              => $city,
-                'state'             => $state,
-                'country'           => $country,
-                'email'             => $email,
-                'postcode'          => $postCode,
-                'phone'             => $phone,
-                'use_for_shipping'  => 1,
+                'address'          => implode("\n", $billingAddress['address']),
+                'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+                'cart_id'          => $cart->id,
+                'use_for_shipping' => $billingAddress['use_for_shipping'],
+                ...Arr::only($billingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
 
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_SHIPPING,
-                'parent_address_id' => null,
-                'customer_id'       => null,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $firstName,
-                'last_name'         => $lastName,
-                'gender'            => null,
-                'company_name'      => $companyName,
-                'address'           => implode("\n", $address),
-                'city'              => $city,
-                'state'             => $state,
-                'country'           => $country,
-                'email'             => $email,
-                'postcode'          => $postCode,
-                'phone'             => $phone,
-                'use_for_shipping'  => 0,
+                'address'      => implode("\n", $billingAddress['address']),
+                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'cart_id'      => $cart->id,
+                ...Arr::only($billingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
     ]);
@@ -367,36 +322,15 @@ it('should store the billing and shipping address for guest user', function () {
 
     // Act and Assert.
     $response = postJson(route('shop.checkout.onepage.addresses.store'), [
-        'billing' => [
-            'address' => $billingAddress = [
-                fake()->address(),
-                fake()->address(),
-            ],
-            'company_name'     => $billingCompanyName = fake()->company(),
-            'first_name'       => $billingFirstName = fake()->firstName(),
-            'last_name'        => $billingLastName = fake()->lastName(),
-            'email'            => $billingEmail = fake()->email(),
-            'country'          => $billingCountry = fake()->countryCode(),
-            'state'            => $billingState = fake()->state(),
-            'city'             => $billingCity = fake()->city(),
-            'postcode'         => $billingPostCode = rand(111111, 999999),
-            'phone'            => $billingPhone = fake()->e164PhoneNumber(),
+        'billing' => $billingAddress = [
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address'          => [fake()->address()],
+            'use_for_shipping' => 0,
         ],
 
-        'shipping' => [
-            'address' => $shippingAddress = [
-                fake()->address(),
-                fake()->address(),
-            ],
-            'company_name'     => $shippingCompanyName = fake()->company(),
-            'first_name'       => $shippingFirstName = fake()->firstName(),
-            'last_name'        => $shippingLastName = fake()->lastName(),
-            'email'            => $shippingEmail = fake()->email(),
-            'country'          => $shippingCountry = fake()->countryCode(),
-            'state'            => $shippingState = fake()->state(),
-            'city'             => $shippingCity = fake()->city(),
-            'postcode'         => $shippingPostCode = rand(111111, 999999),
-            'phone'            => $shippingPhone = fake()->e164PhoneNumber(),
+        'shipping' => $shippingAddress = [
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address' => [fake()->address()],
         ],
     ])
         ->assertOk()
@@ -423,43 +357,20 @@ it('should store the billing and shipping address for guest user', function () {
     $this->assertModelWise([
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_BILLING,
-                'parent_address_id' => null,
-                'customer_id'       => null,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $billingFirstName,
-                'last_name'         => $billingLastName,
-                'gender'            => null,
-                'company_name'      => $billingCompanyName,
-                'address'           => implode("\n", $billingAddress),
-                'city'              => $billingCity,
-                'state'             => $billingState,
-                'country'           => $billingCountry,
-                'email'             => $billingEmail,
-                'postcode'          => $billingPostCode,
-                'phone'             => $billingPhone,
+                'address'          => implode("\n", $billingAddress['address']),
+                'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+                'cart_id'          => $cart->id,
+                'use_for_shipping' => $billingAddress['use_for_shipping'],
+                ...Arr::only($billingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
 
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_SHIPPING,
-                'parent_address_id' => null,
-                'customer_id'       => null,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $shippingFirstName,
-                'last_name'         => $shippingLastName,
-                'gender'            => null,
-                'company_name'      => $shippingCompanyName,
-                'address'           => implode("\n", $shippingAddress),
-                'city'              => $shippingCity,
-                'state'             => $shippingState,
-                'country'           => $shippingCountry,
-                'email'             => $shippingEmail,
-                'postcode'          => $shippingPostCode,
-                'phone'             => $shippingPhone,
+                'address'      => implode("\n", $shippingAddress['address']),
+                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'cart_id'      => $cart->id,
+                ...Arr::only($shippingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
     ]);
@@ -518,21 +429,10 @@ it('should store the billing address for non stockable items for guest user', fu
 
     // Act and Assert.
     postJson(route('shop.checkout.onepage.addresses.store'), [
-        'billing' => [
-            'address' => $billingAddress = [
-                fake()->address(),
-                fake()->address(),
-            ],
-            'company_name'     => $billingCompanyName = fake()->company(),
-            'first_name'       => $billingFirstName = fake()->firstName(),
-            'last_name'        => $billingLastName = fake()->lastName(),
-            'email'            => $billingEmail = fake()->email(),
-            'country'          => $billingCountry = fake()->countryCode(),
-            'state'            => $billingState = fake()->state(),
-            'city'             => $billingCity = fake()->city(),
-            'postcode'         => $billingPostCode = rand(111111, 999999),
-            'phone'            => $billingPhone = fake()->e164PhoneNumber(),
-            'use_for_shipping' => true,
+        'billing' => $billingAddress = [
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address'          => [fake()->address()],
+            'use_for_shipping' => 1,
         ],
     ])
         ->assertOk()
@@ -553,22 +453,11 @@ it('should store the billing address for non stockable items for guest user', fu
     $this->assertModelWise([
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_BILLING,
-                'parent_address_id' => null,
-                'customer_id'       => null,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $billingFirstName,
-                'last_name'         => $billingLastName,
-                'gender'            => null,
-                'company_name'      => $billingCompanyName,
-                'address'           => implode("\n", $billingAddress),
-                'city'              => $billingCity,
-                'state'             => $billingState,
-                'country'           => $billingCountry,
-                'email'             => $billingEmail,
-                'postcode'          => $billingPostCode,
-                'phone'             => $billingPhone,
+                'address'          => implode("\n", $billingAddress['address']),
+                'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+                'cart_id'          => $cart->id,
+                'use_for_shipping' => $billingAddress['use_for_shipping'],
+                ...Arr::only($billingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
     ]);
@@ -630,21 +519,10 @@ it('should store the shipping address as the billing address when use_for_shippi
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.checkout.onepage.addresses.store'), [
-        'billing' => [
-            'address' => $address = [
-                fake()->address(),
-                fake()->address(),
-            ],
-            'company_name'     => $companyName = fake()->company(),
-            'first_name'       => $firstName = fake()->firstName(),
-            'last_name'        => $lastName = fake()->lastName(),
-            'email'            => $email = fake()->email(),
-            'country'          => $country = fake()->countryCode(),
-            'state'            => $state = fake()->state(),
-            'city'             => $city = fake()->city(),
-            'postcode'         => $postCode = rand(111111, 999999),
-            'phone'            => $phone = fake()->e164PhoneNumber(),
-            'use_for_shipping' => true,
+        'billing' => $billingAddress = [
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address'          => [fake()->address()],
+            'use_for_shipping' => 1,
         ],
     ])
         ->assertOk()
@@ -671,45 +549,20 @@ it('should store the shipping address as the billing address when use_for_shippi
     $this->assertModelWise([
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_BILLING,
-                'parent_address_id' => null,
-                'customer_id'       => $customer->id,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $firstName,
-                'last_name'         => $lastName,
-                'gender'            => null,
-                'company_name'      => $companyName,
-                'address'           => implode("\n", $address),
-                'city'              => $city,
-                'state'             => $state,
-                'country'           => $country,
-                'email'             => $email,
-                'postcode'          => $postCode,
-                'phone'             => $phone,
-                'use_for_shipping'  => 1,
+                'address'          => implode("\n", $billingAddress['address']),
+                'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+                'cart_id'          => $cart->id,
+                'use_for_shipping' => $billingAddress['use_for_shipping'],
+                ...Arr::only($billingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
 
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_SHIPPING,
-                'parent_address_id' => null,
-                'customer_id'       => $customer->id,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $firstName,
-                'last_name'         => $lastName,
-                'gender'            => null,
-                'company_name'      => $companyName,
-                'address'           => implode("\n", $address),
-                'city'              => $city,
-                'state'             => $state,
-                'country'           => $country,
-                'email'             => $email,
-                'postcode'          => $postCode,
-                'phone'             => $phone,
-                'use_for_shipping'  => 0,
+                'address'      => implode("\n", $billingAddress['address']),
+                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'cart_id'      => $cart->id,
+                ...Arr::only($billingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
     ]);
@@ -771,36 +624,15 @@ it('should store the billing and shipping address for customer', function () {
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.checkout.onepage.addresses.store'), [
-        'billing' => [
-            'address' => $billingAddress = [
-                fake()->address(),
-                fake()->address(),
-            ],
-            'company_name'     => $billingCompanyName = fake()->company(),
-            'first_name'       => $billingFirstName = fake()->firstName(),
-            'last_name'        => $billingLastName = fake()->lastName(),
-            'email'            => $billingEmail = fake()->email(),
-            'country'          => $billingCountry = fake()->countryCode(),
-            'state'            => $billingState = fake()->state(),
-            'city'             => $billingCity = fake()->city(),
-            'postcode'         => $billingPostCode = rand(111111, 999999),
-            'phone'            => $billingPhone = fake()->e164PhoneNumber(),
+        'billing' => $billingAddress = [
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address'          => [fake()->address()],
+            'use_for_shipping' => 0,
         ],
 
-        'shipping' => [
-            'address' => $shippingAddress = [
-                fake()->address(),
-                fake()->address(),
-            ],
-            'company_name'     => $shippingCompanyName = fake()->company(),
-            'first_name'       => $shippingFirstName = fake()->firstName(),
-            'last_name'        => $shippingLastName = fake()->lastName(),
-            'email'            => $shippingEmail = fake()->email(),
-            'country'          => $shippingCountry = fake()->countryCode(),
-            'state'            => $shippingState = fake()->state(),
-            'city'             => $shippingCity = fake()->city(),
-            'postcode'         => $shippingPostCode = rand(111111, 999999),
-            'phone'            => $shippingPhone = fake()->e164PhoneNumber(),
+        'shipping' => $shippingAddress = [
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address' => [fake()->address()],
         ],
     ])
         ->assertOk()
@@ -827,43 +659,20 @@ it('should store the billing and shipping address for customer', function () {
     $this->assertModelWise([
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_BILLING,
-                'parent_address_id' => null,
-                'customer_id'       => $customer->id,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $billingFirstName,
-                'last_name'         => $billingLastName,
-                'gender'            => null,
-                'company_name'      => $billingCompanyName,
-                'address'           => implode("\n", $billingAddress),
-                'city'              => $billingCity,
-                'state'             => $billingState,
-                'country'           => $billingCountry,
-                'email'             => $billingEmail,
-                'postcode'          => $billingPostCode,
-                'phone'             => $billingPhone,
+                'address'          => implode("\n", $billingAddress['address']),
+                'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+                'cart_id'          => $cart->id,
+                'use_for_shipping' => $billingAddress['use_for_shipping'],
+                ...Arr::only($billingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
 
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_SHIPPING,
-                'parent_address_id' => null,
-                'customer_id'       => $customer->id,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $shippingFirstName,
-                'last_name'         => $shippingLastName,
-                'gender'            => null,
-                'company_name'      => $shippingCompanyName,
-                'address'           => implode("\n", $shippingAddress),
-                'city'              => $shippingCity,
-                'state'             => $shippingState,
-                'country'           => $shippingCountry,
-                'email'             => $shippingEmail,
-                'postcode'          => $shippingPostCode,
-                'phone'             => $shippingPhone,
+                'address'      => implode("\n", $shippingAddress['address']),
+                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'cart_id'      => $cart->id,
+                ...Arr::only($shippingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
     ]);
@@ -925,21 +734,10 @@ it('should store the billing address for non stockable items for customer', func
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
-        'billing' => [
-            'address' => $billingAddress = [
-                fake()->address(),
-                fake()->address(),
-            ],
-            'company_name'     => $billingCompanyName = fake()->company(),
-            'first_name'       => $billingFirstName = fake()->firstName(),
-            'last_name'        => $billingLastName = fake()->lastName(),
-            'email'            => $billingEmail = fake()->email(),
-            'country'          => $billingCountry = fake()->countryCode(),
-            'state'            => $billingState = fake()->state(),
-            'city'             => $billingCity = fake()->city(),
-            'postcode'         => $billingPostCode = rand(111111, 999999),
-            'phone'            => $billingPhone = fake()->e164PhoneNumber(),
-            'use_for_shipping' => true,
+        'billing' => $billingAddress = [
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address'          => [fake()->address()],
+            'use_for_shipping' => 1,
         ],
     ])
         ->assertOk()
@@ -960,22 +758,11 @@ it('should store the billing address for non stockable items for customer', func
     $this->assertModelWise([
         CartAddress::class => [
             [
-                'address_type'      => CartAddress::ADDRESS_TYPE_BILLING,
-                'parent_address_id' => null,
-                'customer_id'       => $customer->id,
-                'cart_id'           => $cart->id,
-                'order_id'          => null,
-                'first_name'        => $billingFirstName,
-                'last_name'         => $billingLastName,
-                'gender'            => null,
-                'company_name'      => $billingCompanyName,
-                'address'           => implode("\n", $billingAddress),
-                'city'              => $billingCity,
-                'state'             => $billingState,
-                'country'           => $billingCountry,
-                'email'             => $billingEmail,
-                'postcode'          => $billingPostCode,
-                'phone'             => $billingPhone,
+                'address'          => implode("\n", $billingAddress['address']),
+                'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+                'cart_id'          => $cart->id,
+                'use_for_shipping' => $billingAddress['use_for_shipping'],
+                ...Arr::only($billingAddress, ['first_name', 'last_name', 'company_name', 'city', 'state', 'country', 'email', 'postcode', 'phone']),
             ],
         ],
     ]);
@@ -1038,16 +825,8 @@ it('should fails the certain validation errors when use for shipping is set to f
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
+            ...CustomerAddress::factory()->create()->toArray(),
             'address'          => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
             'use_for_shipping' => false,
         ],
     ])
@@ -1056,9 +835,6 @@ it('should fails the certain validation errors when use for shipping is set to f
         ->assertJsonValidationErrorFor('shipping.email')
         ->assertJsonValidationErrorFor('shipping.address')
         ->assertJsonValidationErrorFor('shipping.city')
-        ->assertJsonValidationErrorFor('shipping.country')
-        ->assertJsonValidationErrorFor('shipping.state')
-        ->assertJsonValidationErrorFor('shipping.postcode')
         ->assertJsonValidationErrorFor('shipping.phone')
         ->assertUnprocessable();
 });
@@ -1117,16 +893,8 @@ it('should fails the certain validation errors when use for shipping is set to f
     // Act and Assert.
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
+            ...CustomerAddress::factory()->create()->toArray(),
             'address'          => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
             'use_for_shipping' => false,
         ],
     ])
@@ -1135,9 +903,6 @@ it('should fails the certain validation errors when use for shipping is set to f
         ->assertJsonValidationErrorFor('shipping.email')
         ->assertJsonValidationErrorFor('shipping.address')
         ->assertJsonValidationErrorFor('shipping.city')
-        ->assertJsonValidationErrorFor('shipping.country')
-        ->assertJsonValidationErrorFor('shipping.state')
-        ->assertJsonValidationErrorFor('shipping.postcode')
         ->assertJsonValidationErrorFor('shipping.phone')
         ->assertUnprocessable();
 });
@@ -1903,7 +1668,7 @@ it('should place a simple product order for a guest user', function () {
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItems($cartItem),
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
@@ -1931,9 +1696,9 @@ it('should place a simple product order for a guest user', function () {
 
     $this->assertModelWise([
         OrderAddress::class => [
-            $this->prepareAddress($cartBillingAddress),
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
 
-            $this->prepareAddress($cartShippingAddress),
+            $this->prepareAddress($cartShippingAddress, OrderAddress::ADDRESS_TYPE_SHIPPING),
         ],
     ]);
 });
@@ -2003,7 +1768,7 @@ it('should place a simple product order for a guest user and send mail to guest 
         'cart_id'      => $cart->id,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'cart_address_id'    => $cartShippingAddress->id,
@@ -2022,79 +1787,75 @@ it('should place a simple product order for a guest user and send mail to guest 
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 1,
-                'customer_id'          => null,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'total'        => $price,
-                'base_total'   => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'       => $paymentMethod,
-                'method_title' => $methodTitle,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
             [
-                'qty'        => $quantity,
+                'qty'        => $cartItem->quantity,
                 'product_id' => $product->id,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'qty'        => $product->inventory_source_qty(1) - $cartItem->quantity,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $cartShippingAddress->address_type = OrderAddress::ADDRESS_TYPE_SHIPPING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
+
+            $this->prepareAddress($cartShippingAddress, OrderAddress::ADDRESS_TYPE_SHIPPING),
         ],
     ]);
 
@@ -2174,7 +1935,7 @@ it('should place a simple product order for a customer', function () {
         'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
@@ -2195,77 +1956,71 @@ it('should place a simple product order for a customer', function () {
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'       => $paymentMethod,
-                'method_title' => $methodTitle,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
             [
-                'qty'        => $quantity,
+                'qty'        => $cartItem->quantity,
                 'product_id' => $product->id,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'qty'        => $product->inventory_source_qty(1) - $cartItem->quantity,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
+
+            $this->prepareAddress($cartShippingAddress, OrderAddress::ADDRESS_TYPE_SHIPPING),
         ],
     ]);
 });
@@ -2342,7 +2097,7 @@ it('should place a simple product order for a customer and send email to the cus
         'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
@@ -2363,77 +2118,75 @@ it('should place a simple product order for a customer and send email to the cus
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'       => $paymentMethod,
-                'method_title' => $methodTitle,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
             [
-                'qty'        => $quantity,
+                'qty'        => $cartItem->quantity,
                 'product_id' => $product->id,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'qty'        => $product->inventory_source_qty(1) - $cartItem->quantity,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $cartShippingAddress->address_type = OrderAddress::ADDRESS_TYPE_SHIPPING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
+
+            $this->prepareAddress($cartShippingAddress, OrderAddress::ADDRESS_TYPE_SHIPPING),
         ],
     ]);
 
@@ -2516,7 +2269,7 @@ it('should place a configurable product order for a guest user', function () {
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
@@ -2541,64 +2294,49 @@ it('should place a configurable product order for a guest user', function () {
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
         Order::class => [
-            [
-                'shipping_method'      => 'free_free',
-                'grand_total'          => $childProduct->price,
-                'cart_id'              => $cart->id,
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 1,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'product_id'   => $childProduct->id,
-                'price'        => $childProduct->price,
-                'type'         => $childProduct->type,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'       => $paymentMethod,
-                'method_title' => $methodTitle,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -2613,6 +2351,18 @@ it('should place a configurable product order for a guest user', function () {
                 'qty'        => $childProduct->inventory_source_qty(1) - $additional['quantity'],
                 'product_id' => $childProduct->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $cartShippingAddress->address_type = OrderAddress::ADDRESS_TYPE_SHIPPING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
+
+            $this->prepareAddress($cartShippingAddress, OrderAddress::ADDRESS_TYPE_SHIPPING),
         ],
     ]);
 });
@@ -2691,7 +2441,7 @@ it('should place a configurable product order for a guest user and send email to
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
@@ -2716,71 +2466,49 @@ it('should place a configurable product order for a guest user and send email to
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
         CartPayment::class => [
-            [
-                'cart_id' => $cart->id,
-                'method'  => $paymentMethod,
-            ],
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
         ],
 
         Order::class => [
-            [
-                'shipping_method'      => 'free_free',
-                'grand_total'          => $childProduct->price,
-                'cart_id'              => $cart->id,
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 1,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'product_id'   => $childProduct->id,
-                'price'        => $childProduct->price,
-                'type'         => $childProduct->type,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'       => $paymentMethod,
-                'method_title' => $methodTitle,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -2795,6 +2523,18 @@ it('should place a configurable product order for a guest user and send email to
                 'qty'        => $childProduct->inventory_source_qty(1) - $additional['quantity'],
                 'product_id' => $childProduct->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $cartShippingAddress->address_type = OrderAddress::ADDRESS_TYPE_SHIPPING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
+
+            $this->prepareAddress($cartShippingAddress, OrderAddress::ADDRESS_TYPE_SHIPPING),
         ],
     ]);
 
@@ -2883,7 +2623,7 @@ it('should place a configurable product order for a customer', function () {
         'customer_id'  => $customer->id,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
@@ -2912,69 +2652,47 @@ it('should place a configurable product order for a customer', function () {
 
     $cart->refresh();
 
+    $cartItem->refresh();
+
+    $cartPayment->refresh();
+
+    $cartBillingAddress->refresh();
+
+    $cartShippingAddress->refresh();
+
     $this->assertModelWise([
         Cart::class => [
             $this->prepareCart($cart),
         ],
-    ]);
 
-    $this->assertCartItem($cartItem);
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
 
-    $this->assertCartPayment($cartPayment);
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
 
-    $this->assertAddress($cartBillingAddress);
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
 
-    $this->assertAddress($cartShippingAddress);
+            $this->prepareAddress($cartShippingAddress),
+        ],
 
-    $cartBillingAddress->address_type = 'order_billing';
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
 
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
-
-    $this->assertModelWise([
         Order::class => [
-            [
-                'shipping_method'      => 'free_free',
-                'grand_total'          => $childProduct->price,
-                'cart_id'              => $cart->id,
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'product_id'   => $childProduct->id,
-                'price'        => $childProduct->price,
-                'type'         => $childProduct->type,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'       => $paymentMethod,
-                'method_title' => $methodTitle,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -2989,6 +2707,18 @@ it('should place a configurable product order for a customer', function () {
                 'qty'        => $childProduct->inventory_source_qty(1) - $additional['quantity'],
                 'product_id' => $childProduct->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $cartShippingAddress->address_type = OrderAddress::ADDRESS_TYPE_SHIPPING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
+
+            $this->prepareAddress($cartShippingAddress, OrderAddress::ADDRESS_TYPE_SHIPPING),
         ],
     ]);
 });
@@ -3073,7 +2803,7 @@ it('should place a configurable product order for a customer and send email to t
         'customer_id'  => $customer->id,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
@@ -3100,65 +2830,49 @@ it('should place a configurable product order for a customer and send email to t
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
         Order::class => [
-            [
-                'shipping_method'      => 'free_free',
-                'grand_total'          => $childProduct->price,
-                'cart_id'              => $cart->id,
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'product_id'   => $childProduct->id,
-                'price'        => $childProduct->price,
-                'type'         => $childProduct->type,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'       => $paymentMethod,
-                'method_title' => $methodTitle,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -3173,6 +2887,18 @@ it('should place a configurable product order for a customer and send email to t
                 'qty'        => $childProduct->inventory_source_qty(1) - $additional['quantity'],
                 'product_id' => $childProduct->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $cartShippingAddress->address_type = OrderAddress::ADDRESS_TYPE_SHIPPING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
+
+            $this->prepareAddress($cartShippingAddress, OrderAddress::ADDRESS_TYPE_SHIPPING),
         ],
     ]);
 
@@ -3256,70 +2982,61 @@ it('should place a virtual product order for a guest user', function () {
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 1,
-                'customer_id'          => null,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => null,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method' => $paymentMethod,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
             [
-                'qty'        => $quantity,
+                'qty'        => $cartItem->quantity,
                 'product_id' => $product->id,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'qty'        => $product->inventory_source_qty(1) - $cartItem->quantity,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
         ],
     ]);
 });
@@ -3399,70 +3116,63 @@ it('should place a virtual product order for a guest user and send email to the 
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 1,
-                'customer_id'          => null,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => null,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method' => $paymentMethod,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
             [
-                'qty'        => $quantity,
+                'qty'        => $cartItem->quantity,
                 'product_id' => $product->id,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'qty'        => $product->inventory_source_qty(1) - $cartItem->quantity,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
         ],
     ]);
 
@@ -3552,70 +3262,63 @@ it('should place a virtual product order for a customer', function () {
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method' => $paymentMethod,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
             [
-                'qty'        => $quantity,
+                'qty'        => $cartItem->quantity,
                 'product_id' => $product->id,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'qty'        => $product->inventory_source_qty(1) - $cartItem->quantity,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
         ],
     ]);
 });
@@ -3701,70 +3404,63 @@ it('should place a virtual product order for a customer and send email to the us
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method' => $paymentMethod,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
             [
-                'qty'        => $quantity,
+                'qty'        => $cartItem->quantity,
                 'product_id' => $product->id,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'qty'        => $product->inventory_source_qty(1) - $cartItem->quantity,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
         ],
     ]);
 
@@ -3857,56 +3553,41 @@ it('should place a downloadable product order for a customer', function () {
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'  => $paymentMethod,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductInventoryIndex::class => [
@@ -3914,6 +3595,14 @@ it('should place a downloadable product order for a customer', function () {
                 'qty'        => 0,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
         ],
     ]);
 });
@@ -4002,56 +3691,41 @@ it('should place a downloadable product order for a customer and send email to t
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 1,
-                'total_qty_ordered'    => 1,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'grand_total'          => $cart->grand_total,
-                'base_grand_total'     => $cart->base_grand_total,
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $cartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $price,
-                'type'         => $product->type,
-                'product_id'   => $product->id,
-            ],
+            $this->prepareOrderItem($cartItem),
         ],
 
         OrderPayment::class => [
-            [
-                'method'  => $paymentMethod,
-            ],
+            $this->prepareOrderPayment($cart->payment),
         ],
 
         ProductInventoryIndex::class => [
@@ -4059,6 +3733,14 @@ it('should place a downloadable product order for a customer and send email to t
                 'qty'        => 0,
                 'product_id' => $product->id,
             ],
+        ],
+    ]);
+
+    $cartBillingAddress->address_type = OrderAddress::ADDRESS_TYPE_BILLING;
+
+    $this->assertModelWise([
+        OrderAddress::class => [
+            $this->prepareAddress($cartBillingAddress, OrderAddress::ADDRESS_TYPE_BILLING),
         ],
     ]);
 
@@ -4148,30 +3830,14 @@ it('should not return the cash on delivery payment method if product is download
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
+            ...CustomerAddress::factory()->create()->toArray(),
             'address'          => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
             'use_for_shipping' => false,
         ],
 
         'shipping' => [
-            'address'          => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address' => [fake()->address()],
         ],
     ])
         ->assertOk()
@@ -4259,30 +3925,14 @@ it('should not return the shipping methods if product is downloadable', function
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
+            ...CustomerAddress::factory()->create()->toArray(),
             'address'          => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
             'use_for_shipping' => false,
         ],
 
         'shipping' => [
-            'address'          => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address' => [fake()->address()],
         ],
     ])
         ->assertOk()
@@ -4369,30 +4019,14 @@ it('should not return the cash on delivery payment method if product is virtual'
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
+            ...CustomerAddress::factory()->create()->toArray(),
             'address'          => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
-            'use_for_shipping' => fake()->boolean(),
+            'use_for_shipping' => 0,
         ],
 
         'shipping' => [
-            'address'      => [fake()->address()],
-            'company_name' => fake()->company(),
-            'first_name'   => fake()->firstName(),
-            'last_name'    => fake()->lastName(),
-            'email'        => fake()->email(),
-            'country'      => fake()->countryCode(),
-            'state'        => fake()->state(),
-            'city'         => fake()->city(),
-            'postcode'     => rand(111111, 999999),
-            'phone'        => fake()->e164PhoneNumber(),
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address' => [fake()->address()],
         ],
     ])
         ->assertOk()
@@ -4480,30 +4114,14 @@ it('should not return the shipping methods if product is virtual', function () {
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
+            ...CustomerAddress::factory()->create()->toArray(),
             'address'          => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
             'use_for_shipping' => fake()->boolean(),
         ],
 
         'shipping' => [
-            'address'      => [fake()->address()],
-            'company_name' => fake()->company(),
-            'first_name'   => fake()->firstName(),
-            'last_name'    => fake()->lastName(),
-            'email'        => fake()->email(),
-            'country'      => fake()->countryCode(),
-            'state'        => fake()->state(),
-            'city'         => fake()->city(),
-            'postcode'     => rand(111111, 999999),
-            'phone'        => fake()->e164PhoneNumber(),
+            ...CustomerAddress::factory()->create()->toArray(),
+            'address' => [fake()->address()],
         ],
     ])
         ->assertOk()
@@ -4630,7 +4248,7 @@ it('should place order with two products with simple and configurable product ty
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
@@ -4657,104 +4275,95 @@ it('should place order with two products with simple and configurable product ty
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($configurableProductCartItem);
+    $configurableProductCartItem->refresh();
 
-    $this->assertCartItem($simpleProductCartItem);
+    $simpleProductCartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($configurableProductCartItem),
+
+            $this->prepareCartItem($simpleProductCartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
         Order::class => [
-            [
-                'shipping_method'      => 'free_free',
-                'grand_total'          => $childProduct->price + $simpleProduct->price,
-                'cart_id'              => $cart->id,
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 2,
-                'total_qty_ordered'    => 2,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'base_grand_total'     => $cart->base_grand_total,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $configurableProductCartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'product_id'   => $configurableProduct->id,
-                'price'        => $childProduct->price,
-                'type'         => $configurableProduct->type,
-            ],
-        ],
+            $this->prepareOrderItem($configurableProductCartItem),
 
-        OrderItem::class => [
-            [
-                'qty_ordered'  => $quantity = $configurableProductCartItem->quantity,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'product_id'   => $simpleProduct->id,
-                'price'        => $simpleProduct->price,
-                'type'         => $simpleProduct->type,
-            ],
+            $this->prepareOrderItem($simpleProductCartItem),
         ],
 
         OrderPayment::class => [
+            $this->prepareOrderPayment($cart->payment),
+        ],
+
+        ProductOrderedInventory::class => [
             [
-                'method' => $paymentMethod,
+                'qty'        => $simpleProductCartItem->quantity,
+                'product_id' => $simpleProduct->id,
+            ],
+        ],
+
+        ProductInventoryIndex::class => [
+            [
+                'qty'        => $simpleProduct->inventory_source_qty(1) - $simpleProduct->quantity,
+                'product_id' => $simpleProduct->id,
             ],
         ],
 
         ProductOrderedInventory::class => [
             [
                 'product_id' => $childProduct->id,
-                'qty'        => $quantity,
+                'qty'        => $configurableProductCartItem->quantity,
             ],
         ],
 
         ProductOrderedInventory::class => [
             [
                 'product_id' => $simpleProduct->id,
-                'qty'        => $quantity,
+                'qty'        => $simpleProductCartItem->quantity,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $childProduct->inventory_source_qty(1) - $quantity,
+                'qty'        => $childProduct->inventory_source_qty(1) - $configurableProductCartItem->quantity,
                 'product_id' => $childProduct->id,
             ],
         ],
 
         ProductInventoryIndex::class => [
             [
-                'qty'        => $simpleProduct->inventory_source_qty(1) - $quantity,
+                'qty'        => $simpleProduct->inventory_source_qty(1) - $configurableProductCartItem->quantity,
                 'product_id' => $simpleProduct->id,
             ],
         ],
@@ -4881,13 +4490,13 @@ it('should place order with two products with simple and grouped product type', 
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartPayment::factory()->create([
+    $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
@@ -4908,57 +4517,77 @@ it('should place order with two products with simple and grouped product type', 
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($simpleProductCartItem);
+    $simpleProductCartItem->refresh();
 
-    $this->assertCartItems($bundleProductCartItems);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartBillingAddress);
-
-    $this->assertAddress($cartShippingAddress);
-
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
-        Order::class => [
-            [
-                'shipping_method'      => 'free_free',
-                'grand_total'          => array_sum($data['grand_total']),
-                'cart_id'              => $cart->id,
-                'status'               => Order::STATUS_PENDING,
-                'total_item_count'     => 5,
-                'total_qty_ordered'    => array_sum($data['qty']),
-                'customer_id'          => $customer->id,
-                'status'               => Order::STATUS_PENDING,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-            ],
+        Cart::class => [
+            $this->prepareCart($cart),
         ],
-
+    
+        CartItem::class => [
+            $this->prepareCartItem($simpleProductCartItem),
+        ],
+    
         CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+    
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+    
+            $this->prepareAddress($cartShippingAddress),
+        ],
+    
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+    
+        Order::class => [
+            $this->prepareOrder($cart),
+        ],
+
+        OrderItem::class => [
+            $this->prepareOrderItem($simpleProductCartItem),
+        ],
+    
+        OrderPayment::class => [
+            $this->prepareOrderPayment($cart->payment),
+        ],
+
+        ProductOrderedInventory::class => [
             [
-                'cart_id' => $cart->id,
-                'method'  => $paymentMethod,
+                'product_id' => $simpleProduct->id,
+                'qty'        => 1,
             ],
         ],
 
-        OrderPayment::class => [
+        ProductInventoryIndex::class => [
             [
-                'method' => $paymentMethod,
+                'qty'        => $simpleProduct->inventory_source_qty(1) - 1,
+                'product_id' => $simpleProduct->id,
             ],
         ],
     ]);
+
+    foreach ($bundleProductCartItems as $bundleProductCartItem) {
+        $bundleProductCartItem->refresh();
+
+        $this->assertModelWise([
+            CartItem::class => [
+                $this->prepareCartItem($bundleProductCartItem),
+            ],
+
+            OrderItem::class => [
+                $this->prepareOrderItem($bundleProductCartItem),
+            ],
+        ]);
+    }
 
     foreach ($bundleProducts as $bundleProduct) {
         $this->assertModelWise([
@@ -4975,50 +4604,8 @@ it('should place order with two products with simple and grouped product type', 
                     'product_id' => $bundleProduct->associated_product->id,
                 ],
             ],
-
-            OrderItem::class => [
-                [
-                    'qty_ordered'  => $bundleProduct->qty,
-                    'qty_shipped'  => 0,
-                    'qty_invoiced' => 0,
-                    'qty_canceled' => 0,
-                    'qty_refunded' => 0,
-                    'product_id'   => $bundleProduct->associated_product->id,
-                    'price'        => $bundleProduct->associated_product->price,
-                    'type'         => $bundleProduct->associated_product->type,
-                ],
-            ],
         ]);
     }
-
-    $this->assertModelWise([
-        ProductOrderedInventory::class => [
-            [
-                'product_id' => $simpleProduct->id,
-                'qty'        => 1,
-            ],
-        ],
-
-        ProductInventoryIndex::class => [
-            [
-                'qty'        => $simpleProduct->inventory_source_qty(1) - 1,
-                'product_id' => $simpleProduct->id,
-            ],
-        ],
-
-        OrderItem::class => [
-            [
-                'qty_ordered'  => 1,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'product_id'   => $simpleProduct->id,
-                'price'        => $simpleProduct->price,
-                'type'         => $simpleProduct->type,
-            ],
-        ],
-    ]);
 });
 
 it('should place order with two products with simple and downloadable product type', function () {
@@ -5135,7 +4722,7 @@ it('should place order with two products with simple and downloadable product ty
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
@@ -5144,7 +4731,7 @@ it('should place order with two products with simple and downloadable product ty
         'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
-    CartPayment::factory()->create([
+    $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
@@ -5162,74 +4749,68 @@ it('should place order with two products with simple and downloadable product ty
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($simpleProductCartItem);
+    $simpleProductCartItem->refresh();
 
-    $this->assertCartItem($downloadableProductCartItem);
+    $downloadableProductCartItem->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartPayment->refresh();
 
-    $this->assertAddress($cartShippingAddress);
+    $cartBillingAddress->refresh();
 
-    $cartBillingAddress->address_type = 'order_billing';
-
-    $this->assertAddress($cartBillingAddress);
-
-    $cartShippingAddress->address_type = 'order_shipping';
-
-    $this->assertAddress($cartShippingAddress);
+    $cartShippingAddress->refresh();
 
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($simpleProductCartItem),
+
+            $this->prepareCartItem($downloadableProductCartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
         Order::class => [
-            [
-                'status'               => Order::STATUS_PENDING,
-                'grand_total'          => $downloadableProductCartItem->price + $simpleProductCartItem->price,
-                'cart_id'              => $cart->id,
-                'channel_name'         => core()->getCurrentChannel()->name,
-                'is_guest'             => 0,
-                'customer_id'          => $customer->id,
-                'channel_id'           => core()->getCurrentChannel()->id,
-                'customer_email'       => $cart->customer_email,
-                'customer_first_name'  => $cart->customer_first_name,
-                'customer_last_name'   => $cart->customer_last_name,
-                'shipping_method'      => $cart->shipping_method,
-                'total_item_count'     => 2,
-                'total_qty_ordered'    => 2,
-                'base_currency_code'   => core()->getBaseCurrencyCode(),
-                'cart_id'              => $cart->id,
-            ],
+            $this->prepareOrder($cart),
         ],
 
         OrderItem::class => [
-            [
-                'qty_ordered'  => 1,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $downloadableProduct->price,
-                'type'         => $downloadableProduct->type,
-                'product_id'   => $downloadableProduct->id,
-            ],
-        ],
+            $this->prepareOrderItem($simpleProductCartItem),
 
-        OrderItem::class => [
-            [
-                'qty_ordered'  => 1,
-                'qty_shipped'  => 0,
-                'qty_invoiced' => 0,
-                'qty_canceled' => 0,
-                'qty_refunded' => 0,
-                'price'        => $simpleProduct->price,
-                'type'         => $simpleProduct->type,
-                'product_id'   => $simpleProduct->id,
-            ],
+            $this->prepareOrderItem($downloadableProductCartItem),
         ],
 
         OrderPayment::class => [
+            $this->prepareOrderPayment($cart->payment),
+        ],
+
+        ProductOrderedInventory::class => [
             [
-                'method' => $paymentMethod,
+                'qty'        => $simpleProductCartItem->quantity,
+                'product_id' => $simpleProduct->id,
+            ],
+        ],
+
+        ProductInventoryIndex::class => [
+            [
+                'qty'        => $simpleProduct->inventory_source_qty(1) - $simpleProductCartItem->quantity,
+                'product_id' => $simpleProduct->id,
             ],
         ],
 

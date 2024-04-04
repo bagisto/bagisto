@@ -63,7 +63,7 @@ trait ShopTestBench
     /**
      * Prepare order items for assertion.
      */
-    public function prepareOrderItems(CartItem $cartItem)
+    public function prepareOrderItem(CartItem $cartItem)
     {
         return [
             'product_id'           => $cartItem->product_id,
@@ -136,20 +136,6 @@ trait ShopTestBench
     }
 
     /**
-     * Prepare cart items for assertions.
-     */
-    public function prepareCartItems(array $cartItems): array
-    {
-        $cartItems = [];
-
-        foreach ($cartItems as $cartItem) {
-            $cartItems[] = $this->assertCartItem($cartItem);
-        }
-
-        return $cartItems;
-    }
-
-    /**
      * Prepare cart item for assertion.
      */
     public function prepareCartItem(CartItem $cartItem): array
@@ -216,39 +202,25 @@ trait ShopTestBench
     /**
      * Prepare address for assertion.
      */
-    public function prepareAddress(mixed $address): array
+    public function prepareAddress(mixed $address, $type = null): array
     {
-        $address->refresh();
-
         return [
-            'parent_address_id' => $address->parent_address_id,
-            'customer_id'       => $address->customer_id,
             'additional'        => $address->additional,
             'address'           => $address->address,
-            'address_type'      => $address->address_type,
+            'address_type'      => $type ?? $address->address_type,
             'city'              => $address->city,
             'company_name'      => $address->company_name,
             'country'           => $address->country,
-            'created_at'        => $address->created_at,
-            'customer_id'       => $address->customer_id,
             'default_address'   => $address->default_address,
             'email'             => $address->email,
             'first_name'        => $address->first_name,
             'gender'            => $address->gender,
             'last_name'         => $address->last_name,
-
-            'cart_id'           => $address->cart_id,
-            'id'                => $address->id,
-            'order_id'          => $address->order_id,
-            'parent_address_id' => $address->parent_address_id,
-
             'phone'             => $address->phone,
             'postcode'          => $address->postcode,
             'state'             => $address->state,
-            'updated_at'        => $address->updated_at,
-            'use_for_shipping'  => $address->use_for_shipping,
             'vat_id'            => $address->vat_id,
-            'address'           => $address->address,
+            'customer_id'       => ! $type ? $address->customer_id : null,
         ];
     }
 
@@ -257,8 +229,6 @@ trait ShopTestBench
      */
     public function assertOrder(Order $order): void
     {
-        $order->refresh();
-
         $this->assertModelWise([
             Order::class => [
                 [
@@ -331,8 +301,6 @@ trait ShopTestBench
      */
     public function assertOrderItem(OrderItem $orderItem): void
     {
-        $orderItem->refresh();
-
         $this->assertModelWise([
             OrderItem::class => [
                 [
@@ -371,8 +339,6 @@ trait ShopTestBench
      */
     public function assertOrderPayment(OrderPayment $orderPayment): void
     {
-        $orderPayment->refresh();
-
         $this->assertModelWise([
             OrderPayment::class => [
                 [
@@ -389,8 +355,6 @@ trait ShopTestBench
      */
     public function assertInvoiceItem(InvoiceItem $invoiceItem): void
     {
-        $invoiceItem->refresh();
-
         $this->assertModelWise([
             InvoiceItem::class => [
                 [
@@ -423,8 +387,6 @@ trait ShopTestBench
      */
     public function assertCartRule(CartRule $cartRule): void
     {
-        $cartRule->refresh();
-
         $this->assertModelWise([
             CartRule::class => [
                 [
@@ -485,8 +447,6 @@ trait ShopTestBench
      */
     public function assertCartRuleCoupon(CartRuleCoupon $cartRuleCoupon): void
     {
-        $cartRuleCoupon->refresh();
-
         $this->assertModelWise([
             CartRuleCoupon::class => [
                 [
@@ -504,8 +464,6 @@ trait ShopTestBench
 
     public function assertCatalogRule(CatalogRule $catalogRule)
     {
-        $catalogRule->refresh();
-
         $this->assertModelWise([
             CatalogRule::class => [
                 [
@@ -530,8 +488,6 @@ trait ShopTestBench
      */
     public function assertCatalogRuleCoupon(CatalogRule $catalogRule): void
     {
-        $catalogRule->refresh();
-
         $this->assertModelWise([
             CatalogRule::class => [
                 [
@@ -569,8 +525,6 @@ trait ShopTestBench
      */
     public function assertCatalogRuleCustomerGroup(CatalogRule $catalogRule): void
     {
-        $catalogRule->refresh();
-
         foreach ($catalogRule->customer_groups as $customerGroup) {
             $this->assertDatabaseHas('catalog_rule_customer_groups', [
                 'catalog_rule_id'   => $catalogRule->id,

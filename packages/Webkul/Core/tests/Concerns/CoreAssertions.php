@@ -21,7 +21,7 @@ trait CoreAssertions
      */
     public function assertPrice(float $expected, float $actual, ?int $decimal = null): void
     {
-        $decimal = $decimal ?? core()->getCurrentChannel()->decimal;
+        $decimal = $decimal ?? core()->getCurrentCurrency()->decimal;
 
         $expectedFormatted = number_format($expected, $decimal);
 
