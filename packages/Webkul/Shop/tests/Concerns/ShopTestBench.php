@@ -304,7 +304,7 @@ trait ShopTestBench
     /**
      * Prepare address for assertion.
      */
-    public function prepareAddress(mixed $address, $type = null): array
+    public function prepareAddress(mixed $address, ?string $type = null): array
     {
         return [
             'additional'        => $address->additional,
