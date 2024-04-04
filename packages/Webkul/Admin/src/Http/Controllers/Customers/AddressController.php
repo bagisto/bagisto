@@ -54,15 +54,16 @@ class AddressController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'company_name' => [new AlphaNumericSpace],
-            'address'      => ['required', 'array'],
-            'country'      => ['required', new AlphaNumericSpace],
-            'state'        => ['required', new AlphaNumericSpace],
-            'city'         => ['required', 'string'],
-            'postcode'     => ['required', 'numeric'],
-            'phone'        => ['required', new PhoneNumber],
-            'vat_id'       => [new VatIdRule()],
-            'email'        => ['required'],
+            'company_name'    => [new AlphaNumericSpace],
+            'address'         => ['required', 'array'],
+            'country'         => ['required', new AlphaNumericSpace],
+            'state'           => ['required', new AlphaNumericSpace],
+            'city'            => ['required', 'string'],
+            'postcode'        => ['required', 'numeric'],
+            'phone'           => ['required', new PhoneNumber],
+            'vat_id'          => [new VatIdRule()],
+            'email'           => ['required'],
+            'default_address' => ['required', 'in:0,1'],
         ]);
 
         $data = array_merge(request()->only([
@@ -90,7 +91,8 @@ class AddressController extends Controller
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
         return new JsonResponse([
-            'message' => trans('admin::app.customers.addresses.create-success'),
+            'message' => trans('admin::app.customers.customers.view.address.create-success'),
+            'data'    => $customerAddress,
         ]);
     }
 
@@ -112,15 +114,16 @@ class AddressController extends Controller
     public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
-            'company_name' => [new AlphaNumericSpace],
-            'address'      => ['required', 'array'],
-            'country'      => ['required', new AlphaNumericSpace],
-            'state'        => ['required', new AlphaNumericSpace],
-            'city'         => ['required', 'string'],
-            'postcode'     => ['required', 'numeric'],
-            'phone'        => ['required', new PhoneNumber],
-            'vat_id'       => [new VatIdRule()],
-            'email'        => ['required'],
+            'company_name'    => [new AlphaNumericSpace],
+            'address'         => ['required', 'array'],
+            'country'         => ['required', new AlphaNumericSpace],
+            'state'           => ['required', new AlphaNumericSpace],
+            'city'            => ['required', 'string'],
+            'postcode'        => ['required', 'numeric'],
+            'phone'           => ['required', new PhoneNumber],
+            'vat_id'          => [new VatIdRule()],
+            'email'           => ['required'],
+            'default_address' => ['required', 'in:0,1'],
         ]);
 
         $data = array_merge(request()->only([
@@ -148,7 +151,8 @@ class AddressController extends Controller
         Event::dispatch('customer.addresses.update.after', $customerAddress);
 
         return new JsonResponse([
-            'message' => trans('admin::app.customers.addresses.update-success'),
+            'message' => trans('admin::app.customers.customers.view.address.update-success'),
+            'data'    => $customerAddress,
         ]);
     }
 
@@ -169,13 +173,12 @@ class AddressController extends Controller
             'customer_id'     => $id,
         ]);
 
-        if ($address) {
-            $address->update(['default_address' => 1]);
+        $address->update(['default_address' => 1]);
 
-            session()->flash('success', trans('admin::app.customers.customers.view.set-default-success'));
-        }
-
-        return redirect()->back();
+        return new JsonResponse([
+            'message' => trans('admin::app.customers.customers.view.address.set-default-success'),
+            'data'    => $address,
+        ]);
     }
 
     /**
@@ -191,8 +194,8 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        session()->flash('success', trans('admin::app.customers.customers.view.address-delete-success'));
-
-        return redirect()->back();
+        return new JsonResponse([
+            'message' => trans('admin::app.customers.customers.view.address.address-delete-success'),
+        ]);
     }
 }

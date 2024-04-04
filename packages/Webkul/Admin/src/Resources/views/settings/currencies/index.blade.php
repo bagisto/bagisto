@@ -12,7 +12,7 @@
             </p>
 
             <div class="flex gap-x-2.5 items-center">
-                <!-- Create currency Button -->
+                <!-- Create Currency Button -->
                 @if (bouncer()->hasPermission('settings.currencies.create'))
                     <button
                         type="button"
@@ -41,12 +41,12 @@
                 </p>
 
                 <div class="flex gap-x-2.5 items-center">
-                    <!-- Create currency Button -->
+                    <!-- Create Currency Button -->
                     @if (bouncer()->hasPermission('settings.currencies.create'))
                         <button
                             type="button"
                             class="primary-button"
-                            @click="selectedCurrencies=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
+                            @click="isEditable=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle();"
                         >
                             @lang('admin::app.settings.currencies.index.create-btn')
                         </button>
@@ -127,7 +127,7 @@
                         <x-slot:header>
                             <p
                                 class="text-lg text-gray-800 dark:text-white font-bold"
-                                v-if="selectedCurrencies"
+                                v-if="isEditable"
                             >
                                 @lang('admin::app.settings.currencies.index.edit.title')
                             </p>
@@ -221,7 +221,80 @@
                                     :placeholder="trans('admin::app.settings.currencies.index.create.decimal')"
                                 />
 
-                                <x-admin::form.control-group.error control-name="decimal" />
+                                <x-admin::form.control-group.error
+                                    control-name="decimal"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Thousand Separator -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.group-separator')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="group_separator"
+                                    :value="old('group_separator')"
+                                    v-model="selectedCurrency.group_separator"
+                                    :label="trans('admin::app.settings.currencies.index.create.group-separator')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.group-separator')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="group_separator"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Decimal Separator -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.decimal-separator')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="decimal_separator"
+                                    :value="old('decimal_separator')"
+                                    v-model="selectedCurrency.decimal_separator"
+                                    :label="trans('admin::app.settings.currencies.index.create.decimal-separator')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.decimal-separator')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="decimal_separator"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Currency Position -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.currency-position')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="currency_position"
+                                    v-model="selectedCurrency.currency_position"
+                                    :label="trans('admin::app.settings.currencies.index.create.currency-position')"
+                                >
+                                    <option value="">@lang('admin::app.settings.taxes.categories.index.create.select')</option>
+
+                                    <option
+                                        v-for="(position, key) in positions"
+                                        :value="key"
+                                        :text="position"
+                                        :selected="key == selectedCurrency.currency_position"
+                                    >
+                                    </option>
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error control-name="currency_position" />
                             </x-admin::form.control-group>
 
                             {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
@@ -249,10 +322,12 @@
 
                 data() {
                     return {
+                        isEditable: 0,
+
                         selectedCurrency: {},
 
-                        selectedCurrencies: 0,
-                    }
+                        positions: @json($currencyPositions),
+                    };
                 },
 
                 computed: {
@@ -272,7 +347,7 @@
                 },
 
                 methods: {
-                    updateOrCreate(params, { resetForm, setErrors  }) {
+                    updateOrCreate(params, { resetForm, setErrors }) {
                         let formData = new FormData(this.$refs.currencyCreateForm);
 
                         if (params.id) {
@@ -280,20 +355,20 @@
                         }
 
                         this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : "{{ route('admin.settings.currencies.store') }}", formData)
-                        .then((response) => {
-                            this.$refs.currencyUpdateOrCreateModal.close();
+                            .then((response) => {
+                                this.$refs.currencyUpdateOrCreateModal.close();
 
-                            this.$refs.datagrid.get();
+                                this.$refs.datagrid.get();
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            resetForm();
-                        })
-                        .catch(error => {
-                            if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
-                            }
-                        });
+                                resetForm();
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
                     },
 
                     editModal(url) {
@@ -304,7 +379,7 @@
                                 this.$refs.currencyUpdateOrCreateModal.toggle();
                             })
                             .catch(error => {
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                             });
                     },
                 }

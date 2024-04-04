@@ -656,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon'   => [
-                'already-applied' => 'Couponcode is al toegepast.',
-                'applied'         => 'Coupon toegepast',
-                'apply'           => 'Coupon toepassen',
-                'apply-issue'     => 'Couponcode kan niet worden toegepast.',
-                'button-title'    => 'Toepassen',
-                'code'            => 'Couponcode',
-                'discount'        => 'Kortingsbon',
-                'enter-your-code' => 'Voer uw code in',
-                'error'           => 'Er is iets misgegaan',
-                'invalid'         => 'Couponcode is ongeldig.',
-                'remove'          => 'Coupon verwijderen',
-                'subtotal'        => 'Subtotaal',
-                'success-apply'   => 'Couponcode succesvol toegepast.',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'Ga verder naar afrekenen',
                 'empty-cart'           => 'Uw winkelwagen is leeg',
@@ -746,6 +730,28 @@ return [
                 'sub-total'        => 'Subtotaal',
                 'tax'              => 'Belasting',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Couponcode is al toegepast.',
+            'applied'         => 'Coupon toegepast',
+            'apply'           => 'Coupon toepassen',
+            'apply-issue'     => 'Couponcode kan niet worden toegepast.',
+            'button-title'    => 'Toepassen',
+            'code'            => 'Couponcode',
+            'discount'        => 'Kortingsbon',
+            'enter-your-code' => 'Voer uw code in',
+            'error'           => 'Er is iets misgegaan',
+            'invalid'         => 'Couponcode is ongeldig.',
+            'remove'          => 'Coupon verwijderen',
+            'subtotal'        => 'Subtotaal',
+            'success-apply'   => 'Couponcode succesvol toegepast.',
+        ],
+
+        'login' => [
+            'email'    => 'E-mail',
+            'password' => 'Wachtwoord',
+            'title'    => 'Inloggen',
         ],
     ],
 
