@@ -407,7 +407,40 @@
                     options: @json($theme->translate($currentLocale->code)['options'] ?? null),
 
                     filters: {
-                        available: [],
+                        available: [
+                            {
+                                id: 'new',
+                                code: 'new',
+                                type: 'select',
+                                name: '@lang('admin::app.settings.themes.edit.new')',
+                                options: [
+                                    {
+                                        'id': 0,
+                                        'name': '@lang('admin::app.settings.themes.edit.no')',
+                                    },
+                                    {
+                                        'id': 1,
+                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
+                                    },
+                                ],
+                            },
+                            {
+                                id: 'featured',
+                                code: 'featured',
+                                type: 'select',
+                                name: '@lang('admin::app.settings.themes.edit.featured')',
+                                options: [
+                                    {
+                                        'id': 0,
+                                        'name': '@lang('admin::app.settings.themes.edit.no')',
+                                    },
+                                    {
+                                        'id': 1,
+                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
+                                    },
+                                ],
+                            },
+                        ],
 
                         applied: [],
                     },
@@ -453,45 +486,10 @@
                 getFilters() {
                     this.$axios.get('{{ route('shop.api.categories.attributes') }}')
                         .then((response) => {
-                            let additionalFilters = [{
-                                id: 'new',
-                                code: 'new',
-                                type: 'select',
-                                name: '@lang('admin::app.settings.themes.edit.new')',
-                                options: [
-                                    {
-                                        'id': 0,
-                                        'name': '@lang('admin::app.settings.themes.edit.no')',
-                                    },
-                                    {
-                                        'id': 1,
-                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
-                                    },
-                                ],
-                            },
-                            {
-                                id: 'featured',
-                                code: 'featured',
-                                type: 'select',
-                                name: '@lang('admin::app.settings.themes.edit.featured')',
-                                options: [
-                                    {
-                                        'id': 0,
-                                        'name': '@lang('admin::app.settings.themes.edit.no')',
-                                    },
-                                    {
-                                        'id': 1,
-                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
-                                    },
-                                ],
-                            }];
-
                             this.filters.available = [
-                                ...additionalFilters,
+                                ...this.filters.available,
                                 ...response.data.data,
                             ];
-
-                            this.filters.applied = additionalFilters.shift();
                         })
                         .catch((error) => {});
                 },
