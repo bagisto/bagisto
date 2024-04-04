@@ -91,11 +91,15 @@ it('should fails the validation error when certain inputs not provided when add 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for all customer group type', function () {
@@ -183,11 +187,15 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
 
     $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the no coupon type for guest customer', function () {
@@ -266,11 +274,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for guest customer', function () {
@@ -358,11 +370,15 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
 
     $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the no coupon type for general customer', function () {
@@ -441,11 +457,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for general customer', function () {
@@ -533,11 +553,15 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
 
     $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
@@ -616,11 +640,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
@@ -797,13 +825,17 @@ it('should fails the validation error when certain inputs not provided when add 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a grouped product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
@@ -904,13 +936,17 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 
     $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for guest customer', function () {
@@ -1001,13 +1037,17 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a grouped product to the cart with a cart rule of the specific coupon type for guest customer', function () {
@@ -1108,13 +1148,17 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 
     $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for general customer', function () {
@@ -1209,13 +1253,17 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a grouped product to the cart with a cart rule of the specific coupon type for general customer', function () {
@@ -1321,13 +1369,17 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 
     $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
@@ -1421,13 +1473,17 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a grouped product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
@@ -1532,13 +1588,17 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 
     $this->assertPrice($cartRule->discount_amount * 4, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should check tax is applying for the grouped product into the cart for grouped product', function () {
@@ -1626,9 +1686,11 @@ it('should check tax is applying for the grouped product into the cart for group
     $cart->refresh();
 
     $response = getJson(route('shop.checkout.onepage.summary'))
-        ->assertJsonPath('data.id', $cart->id)
-        ->assertJsonPath('data.tax_total', $cart->tax_total)
-        ->assertJsonPath('data.base_tax_total', $cart->base_tax_total);
+        ->assertJsonPath('data.id', $cart->id);
+
+    $this->assertPrice($cart->tax_total, $response['data']['tax_total']);
+
+    $this->assertPrice($cart->base_tax_total, $response['data']['base_tax_total']);
 
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 

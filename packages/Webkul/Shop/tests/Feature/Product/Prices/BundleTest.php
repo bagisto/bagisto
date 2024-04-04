@@ -96,11 +96,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a bundle product to the cart with a cart rule of the no coupon type for all customer group type', function () {
@@ -193,11 +197,15 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     $this->assertPrice($response['data']['sub_total'], $grandTotal);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a bundle product to the cart with a cart rule of the no coupon type for guest customer', function () {
@@ -281,11 +289,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a bundle product to the cart with a cart rule of the no coupon type for guest customer', function () {
@@ -376,11 +388,15 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a bundle product to the cart with a cart rule of the no coupon type for general customer', function () {
@@ -468,11 +484,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a bundle product to the cart with a cart rule of the no coupon type for general customer', function () {
@@ -567,11 +587,15 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a bundle product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
@@ -659,11 +683,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a bundle product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
@@ -758,11 +786,15 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a bundle product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
@@ -852,13 +884,17 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a bundle product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
@@ -957,13 +993,17 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
     $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when certain inputs not provided when add a bundle product to the cart with a cart rule of the specific coupon type for guest customer', function () {
@@ -1053,13 +1093,17 @@ it('should fails the validation error when certain inputs not provided when add 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a bundle product to the cart with a cart rule of the specific coupon type for guest customer', function () {
@@ -1158,13 +1202,17 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
     $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a bundle product to the cart with a cart rule of the specific coupon type for general customer', function () {
@@ -1256,13 +1304,17 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a bundle product to the cart with a cart rule of the specific coupon type for general customer', function () {
@@ -1363,13 +1415,17 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
     $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a bundle product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
@@ -1463,13 +1519,17 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a bundle product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
@@ -1572,13 +1632,17 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
     $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should check tax is applying for the bundle product into the cart for bundle product', function () {
@@ -1666,9 +1730,11 @@ it('should check tax is applying for the bundle product into the cart for bundle
 
     // Act and Assert
     $response = getJson(route('shop.checkout.onepage.summary'))
-        ->assertJsonPath('data.id', $cart->id)
-        ->assertJsonPath('data.tax_total', $cart->tax_total)
-        ->assertJsonPath('data.base_tax_total', $cart->base_tax_total);
+        ->assertJsonPath('data.id', $cart->id);
+
+    $this->assertPrice($cart->tax_total, $response['data']['tax_total']);
+
+    $this->assertPrice($cart->base_tax_total, $response['data']['tax_total']);
 
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
@@ -2115,6 +2181,8 @@ it('should check customer group price for wholesaler customer with fixed price t
 
     $this->assertPrice($grandTotal * $quantity, $response['data']['grand_total']);
 
+    $this->assertPrice($grandTotal * $quantity, $response['data']['sub_total']);
+
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
             'qty'               => $productCustomerGroupPrice->qty,
@@ -2415,6 +2483,8 @@ it('should check customer group price for general customer with discount price t
 
     $this->assertPrice(array_sum($bundleOptions['grand_total']), $response['data']['grand_total']);
 
+    $this->assertPrice(array_sum($bundleOptions['grand_total']), $response['data']['sub_total']);
+
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
             'qty'               => $productCustomerGroupPrice->qty,
@@ -2565,6 +2635,8 @@ it('should check customer group price for wholesaler customer with discount pric
 
     $this->assertPrice(array_sum($bundleOptions['grand_total']), $response['data']['grand_total']);
 
+    $this->assertPrice(array_sum($bundleOptions['grand_total']), $response['data']['sub_total']);
+
     foreach ($productCustomerGroupPrices as $productCustomerGroupPrice) {
         $this->assertDatabaseHas('product_customer_group_prices', [
             'qty'               => $productCustomerGroupPrice->qty,
@@ -2637,13 +2709,19 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should check discount price if catalog rule applied for percentage price for bundle product for guest customer into cart', function () {
@@ -2713,13 +2791,19 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertPrice(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for bundle product for general customer into cart', function () {
@@ -2783,13 +2867,19 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should check discount price if catalog rule applied for percentage price for bundle product for general customer into cart', function () {
@@ -2859,13 +2949,19 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertPrice(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for bundle product for wholesaler customer into cart', function () {
@@ -2929,13 +3025,19 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should check discount price if catalog rule applied for percentage price for bundle product for wholesaler customer into cart', function () {
@@ -3005,13 +3107,19 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertPrice(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for bundle product for guest customer into cart', function () {
@@ -3074,13 +3182,19 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should check discount price if catalog rule applied for fixed price for bundle product for guest customer into cart', function () {
@@ -3149,13 +3263,19 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
     $this->assertPrice(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for bundle product for general customer into cart', function () {
@@ -3222,13 +3342,19 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should check discount price if catalog rule applied for fixed price for bundle product for general customer into cart', function () {
@@ -3301,13 +3427,19 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
     $this->assertPrice(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $this->prepareCatalogRuleCoupon($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for bundle product for wholesaler customer into cart', function () {
@@ -3374,9 +3506,19 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
+
+    $this->prepareCatalogRuleCoupon($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should check discount price if catalog rule applied for fixed price for bundle product for wholesaler customer into cart', function () {
@@ -3449,9 +3591,19 @@ it('should check discount price if catalog rule applied for fixed price for bund
 
     $this->assertPrice(array_sum($bundleOptions['prices']), $response['data']['sub_total']);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
+
+    $this->prepareCatalogRuleCoupon($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 });
 
 it('should check discount price if catalog rule applied for fixed price for bundle product for guest customer', function () {
@@ -3490,9 +3642,19 @@ it('should check discount price if catalog rule applied for fixed price for bund
     ]))->getBundleProductFactory()->create();
 
     // Act and Assert
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
+
+    $this->prepareCatalogRuleCoupon($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 
     foreach ($product->bundle_options as $bundleOption) {
         $this->assertModelWise([
@@ -3543,9 +3705,19 @@ it('should check discount price if catalog rule applied for fixed price for bund
     // Act and Assert
     $this->loginAsCustomer($customer);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
+
+    $this->prepareCatalogRuleCoupon($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 
     foreach ($product->bundle_options as $bundleOption) {
         $this->assertModelWise([
@@ -3596,9 +3768,19 @@ it('should check discount price if catalog rule applied for fixed price for bund
     // Act and Assert
     $this->loginAsCustomer($customer);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
+
+    $this->prepareCatalogRuleCoupon($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 
     foreach ($product->bundle_options as $bundleOption) {
         $this->assertModelWise([
@@ -3648,9 +3830,19 @@ it('should check discount price if catalog rule applied for percentage price for
     ]))->getBundleProductFactory()->create();
 
     // Act and Assert
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
+
+    $this->prepareCatalogRuleCoupon($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 
     foreach ($product->bundle_options as $bundleOption) {
         $this->assertModelWise([
@@ -3700,10 +3892,19 @@ it('should check discount price if catalog rule applied for percentage price for
     // Act and Assert
     $this->loginAsCustomer($customer);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 
+    $this->prepareCatalogRuleCoupon($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
     foreach ($product->bundle_options as $bundleOption) {
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
@@ -3752,9 +3953,19 @@ it('should check discount price if catalog rule applied for percentage price for
     // Act and Assert
     $this->loginAsCustomer($customer);
 
-    $this->assertCatalogRuleCoupon($catalogRule);
+    $catalogRule->refresh();
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
+
+    $this->prepareCatalogRuleCoupon($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->assertModelWise([
+        CatalogRule::class => [
+            $this->prepareCatalogRule($catalogRule),
+        ],
+    ]);
 
     foreach ($product->bundle_options as $bundleOption) {
         $this->assertModelWise([

@@ -70,10 +70,12 @@ it('should display the cart items for a guest user', function () {
         ->assertJsonPath('data.items_count', $cart->items_count)
         ->assertJsonPath('data.items_qty', $cart->items_qty)
         ->assertJsonPath('data.base_sub_total', core()->formatPrice($cart->base_sub_total))
-        ->assertJsonPath('data.base_tax_total', ! empty($cart->base_tax_total) ? $cart->base_tax_total : 0)
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
-        ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
-        ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0);
+        ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount));
+
+    $this->assertPrice(! empty($cart->base_tax_total) ? $cart->base_tax_total : 0, $response['data']['base_tax_total']);
+
+    $this->assertPrice(! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0, $response['data']['base_discount_amount']);
 
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
@@ -156,10 +158,12 @@ it('should display the cart items for a customer', function () {
         ->assertJsonPath('data.items_count', $cart->items_count)
         ->assertJsonPath('data.items_qty', $cart->items_qty)
         ->assertJsonPath('data.base_sub_total', core()->formatPrice($cart->base_sub_total))
-        ->assertJsonPath('data.base_tax_total', ! empty($cart->base_tax_total) ? $cart->base_tax_total : 0)
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
-        ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
-        ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0);
+        ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount));
+
+    $this->assertPrice(! empty($cart->base_tax_total) ? $cart->base_tax_total : 0, $response['data']['base_tax_total']);
+
+    $this->assertPrice(! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0, $response['data']['base_discount_amount']);
 
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
@@ -647,11 +651,13 @@ it('should only remove one product from the cart for now the cart will contains 
         ->assertJsonPath('data.items_count', $cart->items_count)
         ->assertJsonPath('data.items_qty', $cart->items_qty)
         ->assertJsonPath('data.base_sub_total', core()->formatPrice($cart->base_sub_total))
-        ->assertJsonPath('data.base_tax_total', ! empty($cart->base_tax_total) ? $cart->base_tax_total : 0)
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
-        ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
+
+    $this->assertPrice(! empty($cart->base_tax_total) ? $cart->base_tax_total : 0, $response['data']['base_tax_total']);
+
+    $this->assertPrice(! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0, $response['data']['base_discount_amount']);
 
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
@@ -674,9 +680,19 @@ it('should only remove one product from the cart for now the cart will contains 
         'id' => $cartItem1->id,
     ]);
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem2);
+    $cartItem->refresh();
+
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+    ]);
 });
 
 it('should only remove one product from the cart for now the cart will contains two products for a customer', function () {
@@ -773,11 +789,13 @@ it('should only remove one product from the cart for now the cart will contains 
         ->assertJsonPath('data.items_count', $cart->items_count)
         ->assertJsonPath('data.items_qty', $cart->items_qty)
         ->assertJsonPath('data.base_sub_total', core()->formatPrice($cart->base_sub_total))
-        ->assertJsonPath('data.base_tax_total', ! empty($cart->base_tax_total) ? $cart->base_tax_total : 0)
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
-        ->assertJsonPath('data.base_discount_amount', ! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0)
         ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
+
+    $this->assertPrice(! empty($cart->base_tax_total) ? $cart->base_tax_total : 0, $response['data']['base_tax_total']);
+
+    $this->assertPrice(! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0, $response['data']['base_discount_amount']);
 
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
@@ -800,9 +818,19 @@ it('should only remove one product from the cart for now the cart will contains 
         'id' => $cartItem1->id,
     ]);
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem2->refresh();
+
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem2),
+        ],
+    ]);
 });
 
 it('should remove all products from the cart for a guest user', function () {
@@ -1088,26 +1116,38 @@ it('should update cart quantities for guest user', function () {
         ->assertJsonPath('data.items_count', $cart->items_count)
         ->assertJsonPath('data.items_qty', $cart->items_qty)
         ->assertJsonPath('data.base_sub_total', core()->formatPrice($cart->base_sub_total))
-        ->assertJsonPath('data.base_tax_total', ! empty($cart->base_tax_total) ? $cart->base_tax_total : 0)
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
         ->assertJsonPath('message', trans('shop::app.checkout.cart.index.quantity-update'));
+
+    $this->assertPrice(! empty($cart->base_tax_total) ? $cart->base_tax_total : 0, $response['data']['base_tax_total']);
+
+    $this->assertPrice(! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0, $response['data']['base_discount_amount']);
 
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
     $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 
-    foreach ($cart->items as $key => $cartItem) {
-        $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
-        $response->assertJsonPath('data.items.'.$key.'.quantity', $cartItem->quantity);
-        $response->assertJsonPath('data.items.'.$key.'.type', $cartItem->type);
-        $response->assertJsonPath('data.items.'.$key.'.name', $cartItem->name);
-        $response->assertJsonPath('data.items.'.$key.'.price', $cartItem->price);
-        $response->assertJsonPath('data.items.'.$key.'.formatted_price', core()->formatPrice($cartItem->price));
-        $response->assertJsonPath('data.items.'.$key.'.total', $cartItem->total);
-        $response->assertJsonPath('data.items.'.$key.'.formatted_total', core()->formatPrice($cartItem->total));
-        $response->assertJsonPath('data.items.'.$key.'.options', $cartItem->options ?? []);
-        $response->assertJsonPath('data.items.'.$key.'.product_url_key', $cartItem->product->url_key);
+    $cart->refresh();
+
+    $cartItem1->refresh();
+
+    $cartItem2->refresh();
+
+    $this->assertModelWise([
+        CartItem::class => [
+            $this->prepareCartItem($cartItem1),
+
+            $this->prepareCartItem($cartItem2),
+        ],
+    ]);
+
+    foreach ($cart->items as $cartItem) {
+        $this->assertModelWise([
+            CartItem::class => [
+                $this->prepareCartItem($cartItem),
+            ],
+        ]);
     }
 });
 
@@ -1208,26 +1248,38 @@ it('should update cart quantities for customer', function () {
         ->assertJsonPath('data.items_count', $cart->items_count)
         ->assertJsonPath('data.items_qty', $cart->items_qty)
         ->assertJsonPath('data.base_sub_total', core()->formatPrice($cart->base_sub_total))
-        ->assertJsonPath('data.base_tax_total', ! empty($cart->base_tax_total) ? $cart->base_tax_total : 0)
         ->assertJsonPath('data.base_tax_amounts.0', core()->currency($cart->base_tax_amounts))
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency($cart->base_discount_amount))
         ->assertJsonPath('message', trans('shop::app.checkout.cart.index.quantity-update'));
+
+    $this->assertPrice(! empty($cart->base_tax_total) ? $cart->base_tax_total : 0, $response['data']['base_tax_total']);
+
+    $this->assertPrice(! empty($cart->base_discount_amount) ? $cart->base_discount_amount : 0, $response['data']['base_discount_amount']);
 
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
     $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 
-    foreach ($cart->items as $key => $cartItem) {
-        $response->assertJsonPath('data.items.'.$key.'.id', $cartItem->id);
-        $response->assertJsonPath('data.items.'.$key.'.quantity', $cartItem->quantity);
-        $response->assertJsonPath('data.items.'.$key.'.type', $cartItem->type);
-        $response->assertJsonPath('data.items.'.$key.'.name', $cartItem->name);
-        $response->assertJsonPath('data.items.'.$key.'.price', $cartItem->price);
-        $response->assertJsonPath('data.items.'.$key.'.formatted_price', core()->formatPrice($cartItem->price));
-        $response->assertJsonPath('data.items.'.$key.'.total', $cartItem->total);
-        $response->assertJsonPath('data.items.'.$key.'.formatted_total', core()->formatPrice($cartItem->total));
-        $response->assertJsonPath('data.items.'.$key.'.options', $cartItem->options ?? []);
-        $response->assertJsonPath('data.items.'.$key.'.product_url_key', $cartItem->product->url_key);
+    $cart->refresh();
+
+    $cartItem1->refresh();
+
+    $cartItem2->refresh();
+
+    $this->assertModelWise([
+        CartItem::class => [
+            $this->prepareCartItem($cartItem1),
+
+            $this->prepareCartItem($cartItem2),
+        ],
+    ]);
+
+    foreach ($cart->items as $cartItem) {
+        $this->assertModelWise([
+            CartItem::class => [
+                $this->prepareCartItem($cartItem),
+            ],
+        ]);
     }
 });
 

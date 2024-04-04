@@ -80,11 +80,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for all customer group type', function () {
@@ -157,11 +161,15 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
 
     $this->assertPrice($product->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for guest customer', function () {
@@ -227,11 +235,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for guest customer', function () {
@@ -305,11 +317,15 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
 
     $this->assertPrice($product->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for general customer', function () {
@@ -375,11 +391,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for general customer', function () {
@@ -452,11 +472,15 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
 
     $this->assertPrice(($product->price * $quantity) - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
@@ -522,11 +546,15 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
@@ -599,11 +627,15 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
 
     $this->assertPrice(($product->price * $quantity) - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
@@ -693,13 +725,17 @@ it('should fails the validation error when certain inputs not provided when add 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
@@ -795,13 +831,17 @@ it('should add a downloadable product to the cart with a cart rule of the specif
 
     $this->assertPrice($product->price, $response['data']['sub_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for guest customer', function () {
@@ -888,13 +928,17 @@ it('should fails the validation error when certain inputs not provided when add 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for guest customer', function () {
@@ -987,13 +1031,17 @@ it('should add a downloadable product to the cart with a cart rule of the specif
 
     $this->assertPrice($product->price, $response['data']['sub_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for general customer', function () {
@@ -1081,13 +1129,17 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for general customer', function () {
@@ -1181,13 +1233,17 @@ it('should add a downloadable product to the cart with a cart rule of the specif
 
     $this->assertPrice($product->price, $response['data']['sub_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
@@ -1275,13 +1331,17 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
@@ -1377,13 +1437,17 @@ it('should add a downloadable product to the cart with a cart rule of the specif
 
     $this->assertPrice($product->price - $discountAmount, $response['data']['grand_total']);
 
-    $this->assertCartRule($cartRule);
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
 
-    $this->assertCartRuleCustomerGroup($cartRule);
+    $this->prepareCartRuleCustomerGroup($cartRule);
 
-    $this->assertCartRuleChannel($cartRule);
+    $this->prepareCartRuleChannel($cartRule);
 
-    $this->assertCartRuleCoupon($cartRuleCoupon);
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should check tax is applying for the downloadable product into the cart for downloadable product', function () {
@@ -2209,11 +2273,11 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for guest customer into cart', function () {
@@ -2268,11 +2332,11 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for downloadable product for general customer into cart', function () {
@@ -2319,11 +2383,11 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for general customer into cart', function () {
@@ -2378,11 +2442,11 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for downloadable product for wholesaler customer into cart', function () {
@@ -2429,11 +2493,11 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for wholesaler customer into cart', function () {
@@ -2488,11 +2552,11 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for downloadable product for guest customer into cart', function () {
@@ -2540,11 +2604,11 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for guest customer into cart', function () {
@@ -2598,11 +2662,11 @@ it('should check discount price if catalog rule applied for fixed price for down
 
     $this->assertPrice($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not defined when check discount price if catalog rule applied for fixed price for downloadable product for general customer into cart', function () {
@@ -2710,11 +2774,11 @@ it('should check discount price if catalog rule applied for fixed price for down
 
     $this->assertPrice($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for downloadable product for wholesaler customer into cart', function () {
@@ -2766,11 +2830,11 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for wholesaler customer into cart', function () {
@@ -2828,11 +2892,11 @@ it('should check discount price if catalog rule applied for fixed price for down
 
     $this->assertPrice($product->price - $catalogRule->discount_amount, $response['data']['sub_total']);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for guest customer', function () {
@@ -2882,11 +2946,11 @@ it('should check discount price if catalog rule applied for fixed price for down
         ],
     ]);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for general customer', function () {
@@ -2936,11 +3000,11 @@ it('should check discount price if catalog rule applied for fixed price for down
         ],
     ]);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for wholesaler customer', function () {
@@ -2990,11 +3054,11 @@ it('should check discount price if catalog rule applied for fixed price for down
         ],
     ]);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for guest customer', function () {
@@ -3043,11 +3107,11 @@ it('should check discount price if catalog rule applied for percentage price for
         ],
     ]);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for general customer', function () {
@@ -3096,11 +3160,11 @@ it('should check discount price if catalog rule applied for percentage price for
         ],
     ]);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for wholesaler customer', function () {
@@ -3149,9 +3213,9 @@ it('should check discount price if catalog rule applied for percentage price for
         ],
     ]);
 
-    $this->assertCatalogRule($catalogRule);
+    $this->prepareCatalogRule($catalogRule);
 
-    $this->assertCatalogRuleChannel($catalogRule);
+    $this->prepareCatalogRuleChannel($catalogRule);
 
-    $this->assertCatalogRuleCustomerGroup($catalogRule);
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });

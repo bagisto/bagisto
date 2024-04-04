@@ -1664,15 +1664,15 @@ it('should place a simple product order for a guest user', function () {
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -1821,15 +1821,15 @@ it('should place a simple product order for a guest user and send mail to guest 
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -1990,15 +1990,15 @@ it('should place a simple product order for a customer', function () {
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -2152,15 +2152,15 @@ it('should place a simple product order for a customer and send email to the cus
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -2328,15 +2328,15 @@ it('should place a configurable product order for a guest user', function () {
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -2500,15 +2500,15 @@ it('should place a configurable product order for a guest user and send email to
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -2684,15 +2684,15 @@ it('should place a configurable product order for a customer', function () {
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -2864,15 +2864,15 @@ it('should place a configurable product order for a customer and send email to t
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -3008,15 +3008,15 @@ it('should place a virtual product order for a guest user', function () {
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -3142,15 +3142,15 @@ it('should place a virtual product order for a guest user and send email to the 
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -3288,15 +3288,15 @@ it('should place a virtual product order for a customer', function () {
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -3430,15 +3430,15 @@ it('should place a virtual product order for a customer and send email to the us
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -3579,15 +3579,15 @@ it('should place a downloadable product order for a customer', function () {
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductInventoryIndex::class => [
@@ -3717,15 +3717,15 @@ it('should place a downloadable product order for a customer and send email to t
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($cartItem),
+            $this->prepareOrderItemUsingCartItem($cartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductInventoryIndex::class => [
@@ -4313,17 +4313,17 @@ it('should place order with two products with simple and configurable product ty
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($configurableProductCartItem),
+            $this->prepareOrderItemUsingCartItem($configurableProductCartItem),
 
-            $this->prepareOrderItem($simpleProductCartItem),
+            $this->prepareOrderItemUsingCartItem($simpleProductCartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -4529,35 +4529,35 @@ it('should place order with two products with simple and grouped product type', 
         Cart::class => [
             $this->prepareCart($cart),
         ],
-    
+
         CartItem::class => [
             $this->prepareCartItem($simpleProductCartItem),
         ],
-    
+
         CartPayment::class => [
             $this->prepareCartPayment($cartPayment),
         ],
-    
+
         CartAddress::class => [
             $this->prepareAddress($cartBillingAddress),
-    
+
             $this->prepareAddress($cartShippingAddress),
         ],
-    
+
         CartShippingRate::class => [
             $this->prepareCartShippingRate($cartShippingRate),
         ],
-    
+
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($simpleProductCartItem),
+            $this->prepareOrderItemUsingCartItem($simpleProductCartItem),
         ],
-    
+
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [
@@ -4584,7 +4584,7 @@ it('should place order with two products with simple and grouped product type', 
             ],
 
             OrderItem::class => [
-                $this->prepareOrderItem($bundleProductCartItem),
+                $this->prepareOrderItemUsingCartItem($bundleProductCartItem),
             ],
         ]);
     }
@@ -4787,17 +4787,17 @@ it('should place order with two products with simple and downloadable product ty
         ],
 
         Order::class => [
-            $this->prepareOrder($cart),
+            $this->prepareOrderUsingCart($cart),
         ],
 
         OrderItem::class => [
-            $this->prepareOrderItem($simpleProductCartItem),
+            $this->prepareOrderItemUsingCartItem($simpleProductCartItem),
 
-            $this->prepareOrderItem($downloadableProductCartItem),
+            $this->prepareOrderItemUsingCartItem($downloadableProductCartItem),
         ],
 
         OrderPayment::class => [
-            $this->prepareOrderPayment($cart->payment),
+            $this->prepareOrderPaymentUsingCartPayment($cart->payment),
         ],
 
         ProductOrderedInventory::class => [

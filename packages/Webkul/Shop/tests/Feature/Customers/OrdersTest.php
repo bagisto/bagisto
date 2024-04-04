@@ -143,37 +143,65 @@ it('should view the order', function () {
         ->assertSeeText(trans('shop::app.customers.account.orders.view.information.total-due'))
         ->assertSeeText(trans('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id]));
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartShippingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
+    $orderBillingAddress->refresh();
 
-    $customerAddress->address_type = 'customer';
+    $orderShippingAddress->refresh();
 
-    $this->assertAddress($customerAddress);
+    $order->refresh();
 
-    $cartBillingAddress->address_type = 'order_billing';
+    $orderItem->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
 
-    $cartShippingAddress->address_type = 'order_shipping';
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
 
-    $this->assertAddress($cartShippingAddress);
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
 
-    $this->assertOrder($order);
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
 
-    $this->assertOrderItem($orderItem);
+        CartAddress::class => [
+            $this->prepareAddress($cartShippingAddress),
+        ],
 
-    $this->assertAddress($orderBillingAddress);
+        CustomerAddress::class => [
+            $this->prepareAddress($customerAddress),
+        ],
 
-    $this->assertAddress($orderShippingAddress);
+        Order::class => [
+            $this->prepareOrder($order),
+        ],
 
-    $this->assertOrderPayment($orderPayment);
+        OrderItem::class => [
+            $this->prepareOrderItem($orderItem),
+        ],
+
+        OrderAddress::class => [
+            $this->prepareAddress($orderBillingAddress),
+
+            $this->prepareAddress($orderShippingAddress),
+        ],
+
+        OrderPayment::class => [
+            $this->prepareOrderPayment($orderPayment),
+        ],
+    ]);
 });
 
 it('should cancel the customer order', function () {
@@ -288,37 +316,65 @@ it('should cancel the customer order', function () {
     postJson(route('shop.customers.account.orders.cancel', $order->id))
         ->assertRedirect();
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartShippingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
+    $orderBillingAddress->refresh();
 
-    $customerAddress->address_type = 'customer';
+    $orderShippingAddress->refresh();
 
-    $this->assertAddress($customerAddress);
+    $order->refresh();
 
-    $cartBillingAddress->address_type = 'order_billing';
+    $orderItem->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
 
-    $cartShippingAddress->address_type = 'order_shipping';
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
 
-    $this->assertAddress($cartShippingAddress);
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
 
-    $this->assertOrder($order);
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
 
-    $this->assertOrderItem($orderItem);
+        CartAddress::class => [
+            $this->prepareAddress($cartShippingAddress),
+        ],
 
-    $this->assertAddress($orderBillingAddress);
+        CustomerAddress::class => [
+            $this->prepareAddress($customerAddress),
+        ],
 
-    $this->assertAddress($orderShippingAddress);
+        Order::class => [
+            $this->prepareOrder($order),
+        ],
 
-    $this->assertOrderPayment($orderPayment);
+        OrderItem::class => [
+            $this->prepareOrderItem($orderItem),
+        ],
+
+        OrderAddress::class => [
+            $this->prepareAddress($orderBillingAddress),
+
+            $this->prepareAddress($orderShippingAddress),
+        ],
+
+        OrderPayment::class => [
+            $this->prepareOrderPayment($orderPayment),
+        ],
+    ]);
 });
 
 it('should print the order invoice', function () {
@@ -457,37 +513,69 @@ it('should print the order invoice', function () {
     getJson(route('shop.customers.account.orders.print-invoice', $invoice->id))
         ->assertDownload('invoice-'.$invoice->created_at->format('d-m-Y').'.pdf');
 
-    $this->assertCart($cart);
+    $cart->refresh();
 
-    $this->assertCartItem($cartItem);
+    $cartItem->refresh();
 
-    $this->assertCartPayment($cartPayment);
+    $cartBillingAddress->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $cartShippingAddress->refresh();
 
-    $this->assertAddress($cartShippingAddress);
+    $orderBillingAddress->refresh();
 
-    $customerAddress->address_type = 'customer';
+    $orderShippingAddress->refresh();
 
-    $this->assertAddress($customerAddress);
+    $order->refresh();
 
-    $cartBillingAddress->address_type = 'order_billing';
+    $orderItem->refresh();
 
-    $this->assertAddress($cartBillingAddress);
+    $invoiceItem->refresh();
 
-    $cartShippingAddress->address_type = 'order_shipping';
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
 
-    $this->assertAddress($cartShippingAddress);
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
 
-    $this->assertOrder($order);
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
 
-    $this->assertOrderItem($orderItem);
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
 
-    $this->assertAddress($orderBillingAddress);
+        CartAddress::class => [
+            $this->prepareAddress($cartShippingAddress),
+        ],
 
-    $this->assertAddress($orderShippingAddress);
+        CustomerAddress::class => [
+            $this->prepareAddress($customerAddress),
+        ],
 
-    $this->assertOrderPayment($orderPayment);
+        Order::class => [
+            $this->prepareOrder($order),
+        ],
 
-    $this->assertInvoiceItem($invoiceItem);
+        OrderItem::class => [
+            $this->prepareOrderItem($orderItem),
+        ],
+
+        OrderAddress::class => [
+            $this->prepareAddress($orderBillingAddress),
+
+            $this->prepareAddress($orderShippingAddress),
+        ],
+
+        OrderPayment::class => [
+            $this->prepareOrderPayment($orderPayment),
+        ],
+
+        InvoiceItem::class => [
+            $this->prepareInvoiceItem($invoiceItem),
+        ],
+    ]);
 });
