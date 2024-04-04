@@ -32,7 +32,7 @@
                     <form @submit="handleSubmit($event, addAddressToCart)">
                         <!-- Billing Address Header -->
                         <div class="flex justify-between items-center mb-4">
-                            <p class="text-base font-medium text-gray-600">
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.create.cart.address.billing-address')
                             </p>
 
@@ -127,7 +127,7 @@
                                 />
 
                                 <label
-                                    class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
+                                    class="text-base text-[#6E6E6E] dark:text-gray-400 max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
                                     for="use_for_shipping"
                                 >
                                     @lang('admin::app.sales.orders.create.cart.address.same-as-billing')
@@ -142,7 +142,7 @@
                             >
                                 <!-- Shipping Address Header -->
                                 <div class="flex justify-between items-center mb-4">
-                                    <p class="text-base font-medium text-gray-600">
+                                    <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.orders.create.cart.address.shipping-address')
                                     </p>
 

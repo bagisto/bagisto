@@ -30,11 +30,11 @@
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.sub_total.before') !!}
 
                     <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between">
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @lang('admin::app.sales.orders.create.cart.summary.sub-total')
                         </p>
 
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @{{ cart.base_sub_total }}
                         </p>
                     </div>
@@ -50,11 +50,11 @@
                         v-for="(amount, index) in cart.base_tax_amounts"
                         v-if="parseFloat(cart.base_tax_total)"
                     >
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @lang('admin::app.sales.orders.create.cart.summary.tax') (@{{ index }})%
                         </p>
 
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @{{ amount }}
                         </p>
                     </div>
@@ -68,11 +68,11 @@
                         class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between"
                         v-if="cart.selected_shipping_rate"
                     >
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @lang('admin::app.sales.orders.create.cart.summary.shipping-amount')
                         </p>
 
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @{{ cart.selected_shipping_rate }}
                         </p>
                     </div>
@@ -86,11 +86,11 @@
                         class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between"
                         v-if="parseFloat(cart.base_discount_amount)"
                     >
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @lang('admin::app.sales.orders.create.cart.summary.discount-amount')
                         </p>
 
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @{{ cart.formatted_base_discount_amount }}
                         </p>
                     </div>
@@ -102,7 +102,7 @@
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.coupon.before') !!}
 
                     <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-items-end">
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @lang('admin::app.sales.orders.create.cart.summary.apply-coupon')
                         </p>
 
@@ -138,11 +138,11 @@
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.grand_total.before') !!}
 
                     <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between">
-                        <p class="text-lg font-semibold">
+                        <p class="text-lg font-semibold dark:text-white">
                             @lang('admin::app.sales.orders.create.cart.summary.grand-total')
                         </p>
 
-                        <p class="text-lg font-semibold">
+                        <p class="text-lg font-semibold dark:text-white">
                             @{{ cart.base_grand_total }}
                         </p>
                     </div>
@@ -174,7 +174,7 @@
                     <!-- Apply coupon modal -->
                     <x-admin::modal ref="couponModel">
                         <!-- Modal Header -->
-                        <x-slot:header>
+                        <x-slot:header class="dark:text-white">
                             @lang('admin::app.sales.orders.create.cart.summary.apply-coupon')
                         </x-slot>
 

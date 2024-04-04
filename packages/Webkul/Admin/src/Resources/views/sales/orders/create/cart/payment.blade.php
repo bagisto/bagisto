@@ -50,7 +50,7 @@
                             @change="store(payment)"
                         />
 
-                        <p class="text-base text-gray-600 font-medium">
+                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
                             @{{ payment.method_title }}
                         </p>
                     </label>

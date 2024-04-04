@@ -53,7 +53,7 @@
                                         @change="store(rate.method)"
                                     />
 
-                                    <p class="text-base text-gray-600 font-medium">
+                                    <p class="text-base text-gray-600 dark:text-gray-200 font-medium">
                                         @{{ rate.method_title }}
                                     </p>
                                 </div>
@@ -63,7 +63,7 @@
                                 </p>
                             </div>
 
-                            <p class="text-base text-gray-600">
+                            <p class="text-base text-gray-600 dark:text-gray-400">
                                 @{{ rate.method_description }}
                             </p>
                         </label>
