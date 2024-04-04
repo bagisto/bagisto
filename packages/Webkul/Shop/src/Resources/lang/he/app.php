@@ -656,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon'   => [
-                'already-applied' => 'קוד הקופון כבר הוחל.',
-                'applied'         => 'הקופון הוחל',
-                'apply'           => 'החל קופון',
-                'apply-issue'     => 'לא ניתן להחיל את קוד הקופון.',
-                'button-title'    => 'החל',
-                'code'            => 'קוד קופון',
-                'discount'        => 'הנחת קופון',
-                'enter-your-code' => 'הזן את קודך',
-                'error'           => 'משהו השתבש',
-                'invalid'         => 'קוד קופון אינו חוקי.',
-                'remove'          => 'הסר קופון',
-                'subtotal'        => 'סכום ביניים',
-                'success-apply'   => 'קוד הקופון הוחל בהצלחה.',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'המשך לתשלום',
                 'empty-cart'           => 'עגלת הקניות שלך ריקה',
@@ -746,6 +730,28 @@ return [
                 'sub-total'        => 'תת סך הכל',
                 'tax'              => 'מס',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'קוד הקופון כבר הוחל.',
+            'applied'         => 'הקופון הוחל',
+            'apply'           => 'החל קופון',
+            'apply-issue'     => 'לא ניתן להחיל את קוד הקופון.',
+            'button-title'    => 'החל',
+            'code'            => 'קוד קופון',
+            'discount'        => 'הנחת קופון',
+            'enter-your-code' => 'הזן את קודך',
+            'error'           => 'משהו השתבש',
+            'invalid'         => 'קוד קופון אינו חוקי.',
+            'remove'          => 'הסר קופון',
+            'subtotal'        => 'סכום ביניים',
+            'success-apply'   => 'קוד הקופון הוחל בהצלחה.',
+        ],
+
+        'login' => [
+            'email'    => 'אימייל',
+            'password' => 'סיסמה',
+            'title'    => 'התחברות',
         ],
     ],
 

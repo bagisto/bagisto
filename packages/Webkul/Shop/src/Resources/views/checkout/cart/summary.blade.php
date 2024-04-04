@@ -85,7 +85,7 @@
         <!-- Apply Coupon -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.before') !!}
         
-        @include('shop::checkout.cart.coupon')
+        @include('shop::checkout.coupon')
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.after') !!}
    

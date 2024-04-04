@@ -656,22 +656,6 @@ return [
                 ],
             ],
 
-            'coupon'   => [
-                'already-applied' => 'Gutscheincode wurde bereits angewendet.',
-                'applied'         => 'Gutschein angewendet',
-                'apply'           => 'Gutschein anwenden',
-                'apply-issue'     => 'Der Gutscheincode kann nicht angewendet werden.',
-                'button-title'    => 'Anwenden',
-                'code'            => 'Gutscheincode',
-                'discount'        => 'Gutscheinrabatt',
-                'enter-your-code' => 'Geben Sie Ihren Code ein',
-                'error'           => 'Etwas ist schiefgelaufen',
-                'invalid'         => 'Gutscheincode ist ungültig.',
-                'remove'          => 'Gutschein entfernen',
-                'subtotal'        => 'Zwischensumme',
-                'success-apply'   => 'Gutscheincode erfolgreich angewendet.',
-            ],
-
             'mini-cart' => [
                 'continue-to-checkout' => 'Weiter zur Kasse',
                 'empty-cart'           => 'Ihr Warenkorb ist leer',
@@ -746,6 +730,28 @@ return [
                 'sub-total'        => 'Zwischensumme',
                 'tax'              => 'Steuer',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Gutscheincode wurde bereits angewendet.',
+            'applied'         => 'Gutschein angewendet',
+            'apply'           => 'Gutschein anwenden',
+            'apply-issue'     => 'Der Gutscheincode kann nicht angewendet werden.',
+            'button-title'    => 'Anwenden',
+            'code'            => 'Gutscheincode',
+            'discount'        => 'Gutscheinrabatt',
+            'enter-your-code' => 'Geben Sie Ihren Code ein',
+            'error'           => 'Etwas ist schiefgelaufen',
+            'invalid'         => 'Gutscheincode ist ungültig.',
+            'remove'          => 'Gutschein entfernen',
+            'subtotal'        => 'Zwischensumme',
+            'success-apply'   => 'Gutscheincode erfolgreich angewendet.',
+        ],
+
+        'login' => [
+            'email'    => 'E-Mail',
+            'password' => 'Passwort',
+            'title'    => 'Anmelden',
         ],
     ],
 

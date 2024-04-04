@@ -948,7 +948,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
@@ -1149,7 +1149,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
@@ -1354,7 +1354,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);
@@ -1563,7 +1563,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'code' => $couponCode,
     ])
         ->assertOk()
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.coupon.success-apply'))
+        ->assertJsonPath('message', trans('shop::app.checkout.coupon.success-apply'))
         ->assertJsonPath('data.id', $cart->id);
 
     $this->assertPrice($grandTotal, $response['data']['sub_total']);

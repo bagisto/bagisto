@@ -650,22 +650,6 @@ return [
                 'total'                    => 'Total',
                 'update-cart'              => 'Actualizar Carrito',
                 'view-cart'                => 'Ver Carrito',
-            ],
-
-            'coupon' => [
-                'already-applied' => 'El código de cupón ya ha sido aplicado.',
-                'applied'         => 'Cupón aplicado',
-                'apply'           => 'Aplicar Cupón',
-                'apply-issue'     => 'No se puede aplicar el código de cupón.',
-                'button-title'    => 'Aplicar',
-                'code'            => 'Código de Cupón',
-                'discount'        => 'Descuento de Cupón',
-                'enter-your-code' => 'Ingresa tu código',
-                'error'           => 'Algo salió mal',
-                'invalid'         => 'El código de cupón no es válido.',
-                'remove'          => 'Eliminar Cupón',
-                'subtotal'        => 'Subtotal',
-                'success-apply'   => 'Código de cupón aplicado con éxito.',
 
                 'cross-sell' => [
                     'title' => 'Más opciones',
@@ -746,6 +730,28 @@ return [
                 'sub-total'        => 'Subtotal',
                 'tax'              => 'Impuesto',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'El código de cupón ya ha sido aplicado.',
+            'applied'         => 'Cupón aplicado',
+            'apply'           => 'Aplicar Cupón',
+            'apply-issue'     => 'No se puede aplicar el código de cupón.',
+            'button-title'    => 'Aplicar',
+            'code'            => 'Código de Cupón',
+            'discount'        => 'Descuento de Cupón',
+            'enter-your-code' => 'Ingresa tu código',
+            'error'           => 'Algo salió mal',
+            'invalid'         => 'El código de cupón no es válido.',
+            'remove'          => 'Eliminar Cupón',
+            'subtotal'        => 'Subtotal',
+            'success-apply'   => 'Código de cupón aplicado con éxito.',
+        ],
+
+        'login' => [
+            'email'    => 'Correo electrónico',
+            'password' => 'Contraseña',
+            'title'    => 'Iniciar sesión',
         ],
     ],
 

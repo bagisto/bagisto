@@ -29,8 +29,8 @@
         content="{{ url()->to('/') }}"
     >
     <meta
-        name="currency-code"
-        content="{{ core()->getBaseCurrencyCode() }}"
+        name="currency"
+        content="{{ core()->getBaseCurrency()->toJson() }}"
     >
 
     @stack('meta')
