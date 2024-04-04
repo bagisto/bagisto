@@ -375,7 +375,7 @@
 
             methods: {
                 getCustomerSavedAddresses() {
-                    this.$axios.get('{{ route('api.shop.customers.account.addresses.index') }}')
+                    this.$axios.get('{{ route('shop.api.customers.account.addresses.index') }}')
                         .then(response => {
                             this.initializeAddresses('billing', structuredClone(response.data.data));
 
@@ -499,7 +499,7 @@
                 createCustomerAddress(params) {
                     this.isStoring = true;
 
-                    return this.$axios.post('{{ route('api.shop.customers.account.addresses.store') }}', params)
+                    return this.$axios.post('{{ route('shop.api.customers.account.addresses.store') }}', params)
                         .then((response) => {
                             this.isStoring = false;
 
@@ -517,7 +517,7 @@
                 updateCustomerAddress(id, params) {
                     this.isStoring = true;
 
-                    return this.$axios.put('{{ route('api.shop.customers.account.addresses.update') }}/' + id, params)
+                    return this.$axios.put('{{ route('shop.api.customers.account.addresses.update') }}/' + id, params)
                         .then((response) => {
                             this.isStoring = false;
 

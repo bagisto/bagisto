@@ -18,7 +18,7 @@
     >
         <li class="transition-all hover:opacity-[0.8]">
             <a 
-                href="#" 
+                :href="shareUrl" 
                 @click="openSharePopup"
                 aria-label="Linkedin"
                 role="button"
@@ -33,14 +33,14 @@
         app.component('v-linkedin-share', {
             template: '#v-linkedin-share-template',
 
-            data: function () {
+            data() {
                 return {
                     shareUrl: '{{ $linkedinURL }}'
                 }
             },
 
             methods: {
-                openSharePopup: function () {
+                openSharePopup() {
                     window.open(this.shareUrl, '_blank', 'resizable=yes,top=500,left=500,width=500,height=500')
                 }
             }

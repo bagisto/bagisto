@@ -153,7 +153,7 @@ it('should return the view page of order', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    // Act And Assert
+    // Act and Assert
     $this->loginAsAdmin();
 
     get(route('admin.sales.orders.view', $order->id))

@@ -1,8 +1,8 @@
-<v-create-customer-address>
+<v-create-customer-address @address-created="addressCreated">
     <div class="inline-flex gap-x-2 mr-1 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
         <span class="icon-location text-2xl"></span>
 
-        @lang('admin::app.customers.customers.view.addresses.create.create-address-btn')
+        @lang('admin::app.customers.customers.view.address.create.create-address-btn')
     </div>
 </v-create-customer-address>
 
@@ -16,37 +16,34 @@
         <!-- Address Create Button -->
         @if (bouncer()->hasPermission('customers.addresses.create'))
             <div 
-                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
-                @click="$refs.CustomerAddress.toggle()"
+                class="flex gap-1.5 items-center justify-between px-2.5 text-blue-600 cursor-pointer transition-all hover:underline"
+                @click="$refs.createAddress.toggle()"
             >
-                <span class="icon-location text-2xl"></span>
-
-                @lang('admin::app.customers.customers.view.addresses.create.create-address-btn')
+                @lang('admin::app.customers.customers.view.address.create.create-btn')
             </div>
         @endif
 
-        {!! view_render_event('bagisto.admin.customers.customers.view.addresses.create.before') !!}
+        {!! view_render_event('bagisto.admin.customers.addresses.create.before') !!}
 
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
         >
             <form @submit="handleSubmit($event, create)">
-
-                {!! view_render_event('bagisto.admin.customers.customers.view.addresses.create.create_form_controls.before') !!}
+                {!! view_render_event('bagisto.admin.customers.addresses.create.create_form_controls.before') !!}
 
                 <!-- Address Create Modal -->
-                <x-admin::modal ref="CustomerAddress">
+                <x-admin::modal ref="createAddress">
                     <!-- Modal Header -->
                     <x-slot:header>
                         <p class="text-lg text-gray-800 dark:text-white font-bold">
-                            @lang('admin::app.customers.customers.view.addresses.create.title')
+                            @lang('admin::app.customers.customers.view.address.create.title')
                         </p>    
                     </x-slot>
     
                     <!-- Modal Content -->
                     <x-slot:content>
-                        {!! view_render_event('bagisto.admin.customers.customers.view.addresses.create.before') !!}
+                        {!! view_render_event('bagisto.admin.customers.addresses.create.before') !!}
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.control
@@ -60,14 +57,14 @@
                             <!-- Company Name -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label>
-                                    @lang('admin::app.customers.customers.view.addresses.create.company-name')
+                                    @lang('admin::app.customers.customers.view.address.create.company-name')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="company_name"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.company-name')"
-                                    :placeholder="trans('admin::app.customers.customers.view.addresses.create.company-name')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.company-name')"
+                                    :placeholder="trans('admin::app.customers.customers.view.address.create.company-name')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="company_name" />
@@ -76,14 +73,14 @@
                             <!-- Vat Id -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label>
-                                    @lang('admin::app.customers.customers.view.addresses.create.vat-id')
+                                    @lang('admin::app.customers.customers.view.address.create.vat-id')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="vat_id"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.vat-id')"
-                                    :placeholder="trans('admin::app.customers.customers.view.addresses.create.vat-id')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.vat-id')"
+                                    :placeholder="trans('admin::app.customers.customers.view.address.create.vat-id')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="vat_id" />
@@ -94,15 +91,15 @@
                             <!-- First Name -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.customers.view.addresses.create.first-name')
+                                    @lang('admin::app.customers.customers.view.address.create.first-name')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="first_name"
                                     rules="required"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.first-name')"
-                                    :placeholder="trans('admin::app.customers.customers.view.addresses.create.first-name')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.first-name')"
+                                    :placeholder="trans('admin::app.customers.customers.view.address.create.first-name')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="first_name" />
@@ -111,15 +108,15 @@
                             <!-- Last Name -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.customers.view.addresses.create.last-name')
+                                    @lang('admin::app.customers.customers.view.address.create.last-name')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="last_name"
                                     rules="required"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.last-name')"
-                                    :placeholder="trans('admin::app.customers.customers.view.addresses.create.last-name')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.last-name')"
+                                    :placeholder="trans('admin::app.customers.customers.view.address.create.last-name')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="last_name" />
@@ -129,16 +126,22 @@
                         <!-- Street Address -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.customers.customers.view.addresses.create.street-address')
+                                @lang('admin::app.customers.customers.view.address.create.street-address')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                id="address[]"
-                                name="address[]"
-                                rules="required|address"
-                                :label="trans('admin::app.customers.customers.view.addresses.create.street-address')"
-                                :placeholder="trans('admin::app.customers.customers.view.addresses.create.street-address')"
+                                id="address[0]"
+                                name="address[0]"
+                                class="mb-2"
+                                rules="required"
+                                :label="trans('admin::app.customers.customers.view.address.create.street-address')"
+                                :placeholder="trans('admin::app.customers.customers.view.address.create.street-address')"
+                            />
+
+                            <x-admin::form.control-group.error
+                                class="mb-2"
+                                control-name="address[0]"
                             />
 
                             <x-admin::form.control-group.error control-name="address[]" />
@@ -149,10 +152,8 @@
                                         type="text"
                                         id="address[{{ $i }}]"
                                         name="address[{{ $i }}]"
-                                        class="mt-2"
-                                        rules="address"
-                                        :label="trans('admin::app.customers.customers.view.addresses.create.street-address')"
-                                        :placeholder="trans('admin::app.customers.customers.view.addresses.create.street-address')"
+                                        :label="trans('admin::app.customers.customers.view.address.create.street-address')"
+                                        :placeholder="trans('admin::app.customers.customers.view.address.create.street-address')"
                                     />
 
                                     <x-admin::form.control-group.error control-name="address[{{ $i }}]" />
@@ -164,15 +165,15 @@
                             <!-- City -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.customers.view.addresses.create.city')
+                                    @lang('admin::app.customers.customers.view.address.create.city')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="city"
                                     rules="required"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.city')"
-                                    :placeholder="trans('admin::app.customers.customers.view.addresses.create.city')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.city')"
+                                    :placeholder="trans('admin::app.customers.customers.view.address.create.city')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="city" />
@@ -181,15 +182,15 @@
                             <!-- PostCode -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.customers.view.addresses.create.post-code')
+                                    @lang('admin::app.customers.customers.view.address.create.post-code')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="postcode"
                                     rules="required|integer"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.post-code')"
-                                    :placeholder="trans('admin::app.customers.customers.view.addresses.create.post-code')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.post-code')"
+                                    :placeholder="trans('admin::app.customers.customers.view.address.create.post-code')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="postcode" />
@@ -200,7 +201,7 @@
                             <!-- Country Name -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.customers.view.addresses.create.country')
+                                    @lang('admin::app.customers.customers.view.address.create.country')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
@@ -208,7 +209,7 @@
                                     name="country"
                                     rules="required"
                                     v-model="country"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.country')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.country')"
                                 >
                                     @foreach (core()->countries() as $country)
                                         <option value="{{ $country->code }}">{{ $country->name }}</option>
@@ -221,7 +222,7 @@
                             <!-- State Name -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.customers.view.addresses.create.state')
+                                    @lang('admin::app.customers.customers.view.address.create.state')
                                 </x-admin::form.control-group.label>
 
                                 <template v-if="haveStates()">
@@ -231,8 +232,8 @@
                                         name="state"
                                         rules="required"
                                         v-model="state"
-                                        :label="trans('admin::app.customers.customers.view.addresses.create.state')"
-                                        :placeholder="trans('admin::app.customers.customers.view.addresses.create.state')"
+                                        :label="trans('admin::app.customers.customers.view.address.create.state')"
+                                        :placeholder="trans('admin::app.customers.customers.view.address.create.state')"
                                     >
                                         <option 
                                             v-for='(state, index) in countryStates[country]'
@@ -248,8 +249,8 @@
                                         type="text"
                                         name="state"
                                         rules="required"
-                                        :label="trans('admin::app.customers.customers.view.addresses.create.state')"
-                                        :placeholder="trans('admin::app.customers.customers.view.addresses.create.state')"
+                                        :label="trans('admin::app.customers.customers.view.address.create.state')"
+                                        :placeholder="trans('admin::app.customers.customers.view.address.create.state')"
                                     />
                                 </template>
 
@@ -261,15 +262,15 @@
                             <!--Phone number -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.customers.view.addresses.create.phone')
+                                    @lang('admin::app.customers.customers.view.address.create.phone')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="phone"
                                     rules="required|integer"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.phone')"
-                                    :placeholder="trans('admin::app.customers.customers.view.addresses.create.phone')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.phone')"
+                                    :placeholder="trans('admin::app.customers.customers.view.address.create.phone')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="phone" />
@@ -278,15 +279,15 @@
                             <!-- E-mail -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.customers.view.addresses.create.email')
+                                    @lang('admin::app.customers.customers.view.address.create.email')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="email"
                                     rules="required|email"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.email')"
-                                    :placeholder="trans('admin::app.customers.customers.view.addresses.create.email')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.email')"
+                                    :placeholder="trans('admin::app.customers.customers.view.address.create.email')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="email" />
@@ -302,7 +303,7 @@
                                     name="default_address"
                                     :value="1"
                                     for="default_address"
-                                    :label="trans('admin::app.customers.customers.view.addresses.create.default-address')"
+                                    :label="trans('admin::app.customers.customers.view.address.create.default-address')"
                                     :checked="false"
                                 />
 
@@ -310,9 +311,11 @@
                                     class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                     for="default_address"
                                 >
-                                    @lang('admin::app.customers.customers.view.addresses.create.default-address')
+                                    @lang('admin::app.customers.customers.view.address.create.default-address')
                                 </label>
                             </x-admin::form.control-group>
+
+                            <x-admin::form.control-group.error control-name="default_address" />
                         </div>
 
                         {!! view_render_event('bagisto.admin.customers.create.after') !!}
@@ -321,23 +324,22 @@
                     <!-- Modal Footer -->
                     <x-slot:footer>
                         <!-- Modal Submission -->
-                        <div class="flex gap-x-2.5 items-center">
-                            <button 
-                                type="submit"
-                                class="primary-button"
-                            >
-                                @lang('admin::app.customers.customers.view.addresses.create.save-btn-title') 
-                            </button>
-                        </div>
+                        <x-admin::button
+                            button-type="submit"
+                            class="primary-button justify-center"
+                            :title="trans('admin::app.customers.customers.view.address.create.save-btn-title')"
+                            ::loading="isUpdating"
+                            ::disabled="isUpdating"
+                        />
                     </x-slot>
                 </x-admin::modal>
 
-                {!! view_render_event('bagisto.admin.customers.customers.view.addresses.create.create_form_controls.after') !!}
+                {!! view_render_event('bagisto.admin.customers.addresses.create.create_form_controls.after') !!}
 
             </form>
         </x-admin::form>
 
-        {!! view_render_event('bagisto.admin.customers.customers.view.addresses.create.after') !!}
+        {!! view_render_event('bagisto.admin.customers.addresses.create.after') !!}
 
     </script>
 
@@ -345,42 +347,48 @@
         app.component('v-create-customer-address', {
             template: '#v-create-customer-address-template',
 
-            data: function () {
+            emits: ['address-created'],
+
+            data() {
                 return {
                     country: "",
 
                     state: "",
 
                     countryStates: @json(core()->groupedStatesByCountries()),
-                }
+
+                    isUpdating: false,
+                };
             },
 
             methods: {
                 create(params, { resetForm, setErrors }) {
-                    this.$axios.post('{{ route("admin.customers.customers.addresses.store", $customer->id) }}', params,
-                        {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        })
-                    
-                        .then((response) => {
-                            this.$refs.CustomerAddress.toggle();
+                    this.isUpdating = true;
 
+                    params.default_address = params.default_address ?? 0;
+
+                    this.$axios.post('{{ route('admin.customers.customers.addresses.store', $customer->id) }}', params)
+                        .then((response) => {
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            window.location.reload();
+                            this.$emit('address-created', response.data.data);
 
                             resetForm();
+
+                            this.isUpdating = false;
+
+                            this.$refs.createAddress.toggle();
                         })
                         .catch(error => {
-                            if (error.response.status ==422) {
+                            this.isUpdating = false;
+
+                            if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
                             }
                         });
                 },
 
-                haveStates: function () {
+                haveStates() {
                     /*
                     * The double negation operator is used to convert the value to a boolean.
                     * It ensures that the final result is a boolean value,
@@ -388,7 +396,7 @@
                     */
                     return !!this.countryStates[this.country]?.length;
                 },
-            }
-        })
+            },
+        });
     </script>
 @endPushOnce
