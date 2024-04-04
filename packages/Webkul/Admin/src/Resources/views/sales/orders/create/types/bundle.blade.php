@@ -24,24 +24,24 @@
 
             <div class="p-4">
                 <div class="flex justify-between items-center my-[20px]">
-                    <p class="text-sm">
+                    <p class="text-sm dark:text-white">
                         @lang('admin::app.sales.orders.create.types.bundle.total-amount')
                     </p>
 
-                    <p class="text-lg font-medium">
+                    <p class="text-lg font-medium dark:text-white">
                         @{{ formattedTotalPrice }}
                     </p>
                 </div>
 
                 <ul class="grid gap-2.5 text-base">
                     <li v-for="option in options">
-                        <span class="inline-block mb-1.5">
+                        <span class="inline-block mb-1.5 dark:text-white">
                             @{{ option.label }}
                         </span>
 
                         <template v-for="product in option.products">
                             <div
-                                class="text-[#6E6E6E]"
+                                class="text-[#6E6E6E] dark:text-gray-300"
                                 :key="product.id"
                                 v-if="product.is_default"
                             >
@@ -108,7 +108,7 @@
                             />
 
                             <label
-                                class="text-sm text-[#6E6E6E] cursor-pointer"
+                                class="text-sm text-[#6E6E6E] dark:text-gray-300 cursor-pointer"
                                 :for="'bundle_options[' + option.id + '][' + index + ']'"
                             >
                                 @lang('admin::app.sales.orders.create.types.bundle.none')
@@ -132,12 +132,12 @@
                             />
 
                             <label
-                                class="text-sm text-[#6E6E6E] cursor-pointer"
+                                class="text-sm text-[#6E6E6E] dark:text-gray-300 cursor-pointer"
                                 :for="'bundle_options[' + option.id + '][' + index + ']'"
                             >
                                 @{{ product.name }}
 
-                                <span class="text-black">
+                                <span class="text-black dark:text-white">
                                     @{{ '+ ' + product.price.final.formatted_price }}
                                 </span>
                             </label>
@@ -164,12 +164,12 @@
                             />
 
                             <label
-                                class="text-sm text-[#6E6E6E] cursor-pointer"
+                                class="text-sm text-[#6E6E6E] dark:text-gray-300 cursor-pointer"
                                 :for="'bundle_options[' + option.id + '][' + index + ']'"
                             >
                                 @{{ product.name }}
 
-                                <span class="text-black">
+                                <span class="text-black dark:text-white">
                                     @{{ '+ ' + product.price.final.formatted_price }}
                                 </span>
                             </label>

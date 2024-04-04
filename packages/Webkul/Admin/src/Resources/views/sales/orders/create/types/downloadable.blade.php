@@ -13,7 +13,7 @@
         id="v-product-downloadable-options-template"
     >
         <x-admin::form.control-group class="p-4">
-            <x-admin::form.control-group.label class="!mt-0">
+            <x-admin::form.control-group.label class="!mt-0 dark:text-white">
                 @lang('admin::app.sales.orders.create.types.downloadable.title')
             </x-admin::form.control-group.label>
 
@@ -34,7 +34,7 @@
                     />
 
                     <label
-                        class="text-sm text-[#6E6E6E] cursor-pointer"
+                        class="text-sm text-[#6E6E6E] dark:text-gray-300 cursor-pointer"
                         :for="'links[' + index + ']'"
                     >
                         @{{ link.title + ' + ' + link.formatted_price }}

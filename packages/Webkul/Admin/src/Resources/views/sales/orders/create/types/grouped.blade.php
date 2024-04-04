@@ -18,11 +18,11 @@
                 v-for="product in associatedProducts"
             >
                 <div class="grid gap-1.5">
-                    <p class="text-sm font-medium">
+                    <p class="text-sm font-medium dark:text-white">
                         @lang('admin::app.sales.orders.create.types.grouped.name')
                     </p>
 
-                    <p class="text-sm text-[#6E6E6E]">
+                    <p class="text-sm text-[#6E6E6E] dark:text-gray-300">
                         @{{ product.name + ' + ' + product.formatted_price }}
                     </p>
                 </div>
