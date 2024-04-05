@@ -31,7 +31,6 @@
                                 class="text-base text-gray-800 leading-none dark:text-white font-semibold"
                                 v-text="report.statistics.visitors.total"
                             >
-                                @{{  }}
                             </p>
 
                             <p class="text-xs text-gray-600 leading-none dark:text-gray-300 font-semibold">
