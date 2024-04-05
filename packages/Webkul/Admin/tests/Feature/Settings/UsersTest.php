@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Webkul\User\Models\Admin;
 
@@ -53,6 +55,9 @@ it('should store the newly created user/admin', function () {
         'email'                 => $email = fake()->email,
         'password'              => $password = fake()->password,
         'password_confirmation' => $password,
+        'image'                 => [
+            UploadedFile::fake()->image('avatar.jpg'),
+        ],
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.create-success'));
@@ -66,6 +71,24 @@ it('should store the newly created user/admin', function () {
             ],
         ],
     ]);
+});
+
+it('should fails the validation error with tempered avatar provided when store the user/admin', function () {
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.users.store'), [
+        'name'                  => fake()->name(),
+        'role_id'               => 1,
+        'email'                 => fake()->email(),
+        'password'              => $password = fake()->password(),
+        'password_confirmation' => $password,
+        'image'                 => [
+            UploadedFile::fake()->image('avatar.php'),
+        ],
+    ])
+        ->assertJsonValidationErrorFor('image.0')
+        ->assertUnprocessable();
 });
 
 it('should returns the user and its roles', function () {
@@ -108,9 +131,12 @@ it('should update the existing user/admin', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.settings.users.update'), [
+    putJson(route('admin.settings.users.update'), $data = [
         'id'                    => $user->id,
         'name'                  => $user->name,
+        'image'                 => [
+            UploadedFile::fake()->image('avatar.jpg'),
+        ],
         'role_id'               => 1,
         'email'                 => $email = fake()->email,
         'password'              => $password = fake()->password,
@@ -121,14 +147,27 @@ it('should update the existing user/admin', function () {
 
     $this->assertModelWise([
         Admin::class => [
-            [
-                'id'      => $user->id,
-                'name'    => $user->name,
-                'role_id' => 1,
-                'email'   => $email,
-            ],
+            Arr::except($data, ['image', 'password_confirmation', 'password']),
         ],
     ]);
+});
+
+it('should fails the validation error with tempered avatar provided when store the user/adminf', function () {
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.users.store'), [
+        'name'                  => fake()->name(),
+        'role_id'               => 1,
+        'email'                 => fake()->email(),
+        'password'              => $password = fake()->password(),
+        'password_confirmation' => $password,
+        'image'                 => [
+            UploadedFile::fake()->image('avatar.php'),
+        ],
+    ])
+        ->assertJsonValidationErrorFor('image.0')
+        ->assertUnprocessable();
 });
 
 it('should delete the existing user/admin', function () {

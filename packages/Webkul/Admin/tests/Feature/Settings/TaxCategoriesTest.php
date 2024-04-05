@@ -35,7 +35,7 @@ it('should store the tax category', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.taxes.categories.store'), [
-        'code'        => $code = fake()->uuid(),
+        'code'        => $code = fake()->numerify('code#######'),
         'name'        => $name = fake()->words(2, true),
         'description' => $description = fake()->sentence(10),
         'taxrates'    => TaxRate::factory()->count(2)->create()->pluck('id')->toArray(),
@@ -94,7 +94,7 @@ it('should update the tax category', function () {
 
     putJson(route('admin.settings.taxes.categories.update'), [
         'id'          => $taxCategory->id,
-        'code'        => $code = fake()->uuid(),
+        'code'        => $code = fake()->numerify('code#######'),
         'name'        => $name = fake()->words(2, true),
         'description' => $description = fake()->sentence(10),
         'taxrates'    => TaxRate::factory()->count(2)->create()->pluck('id')->toArray(),
