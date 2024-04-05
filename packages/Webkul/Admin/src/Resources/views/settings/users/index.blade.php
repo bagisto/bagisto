@@ -53,7 +53,7 @@
 
             <!-- Datagrid -->
             <x-admin::datagrid
-                src="{{ route('admin.settings.users.index') }}"
+                :src="route('admin.settings.users.index')"
                 ref="datagrid"
             >
                 @php

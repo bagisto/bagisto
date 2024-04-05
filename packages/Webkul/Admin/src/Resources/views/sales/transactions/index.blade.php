@@ -12,7 +12,7 @@
         <div class="flex gap-x-2.5 items-center">
 
             <!-- Export Modal -->
-            <x-admin::datagrid.export  src="{{ route('admin.sales.transactions.index') }}" />
+            <x-admin::datagrid.export :src="route('admin.sales.transactions.index')" />
 
             <v-create-transaction-form>
                 <button
@@ -34,7 +34,7 @@
             id="v-transaction-drawer-template"
         >
             <x-admin::datagrid
-                src="{{ route('admin.sales.transactions.index') }}"
+                :src="route('admin.sales.transactions.index')"
                 :isMultiRow="true"
                 ref="datagrid"
             >

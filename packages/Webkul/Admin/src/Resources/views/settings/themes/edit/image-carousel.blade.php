@@ -84,8 +84,10 @@
                                             <div> 
                                                 @lang('admin::app.settings.themes.edit.image-title'): 
 
-                                                <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                    @{{ image.title }}
+                                                <span
+                                                    class="text-gray-600 dark:text-gray-300 transition-all"
+                                                    v-text="image.title"
+                                                >
                                                 </span>
                                             </div>
                                         </p>
@@ -94,8 +96,10 @@
                                             <div> 
                                                 @lang('admin::app.settings.themes.edit.link'): 
 
-                                                <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                    @{{ image.link }}
+                                                <span
+                                                    class="text-gray-600 dark:text-gray-300 transition-all"
+                                                    v-text="image.link"
+                                                >
                                                 </span>
                                             </div>
                                         </p>

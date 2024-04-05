@@ -11,7 +11,7 @@
 
         <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.sales.refunds.index') }}" />
+            <x-admin::datagrid.export :src="route('admin.sales.refunds.index')" />
         </div>
     </div>
 

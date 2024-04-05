@@ -53,7 +53,10 @@
                 </div>
             </div>
 
-            <x-admin::datagrid :src="route('admin.settings.locales.index')" ref="datagrid">
+            <x-admin::datagrid
+                :src="route('admin.settings.locales.index')"
+                ref="datagrid"
+            >
                 <!-- DataGrid Body -->
                 <template #body="{ columns, records, performAction }">
                     <div
