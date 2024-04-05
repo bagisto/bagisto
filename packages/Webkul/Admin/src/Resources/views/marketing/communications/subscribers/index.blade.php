@@ -23,7 +23,7 @@
             <div>
                 <!-- DataGrid -->
                 <x-admin::datagrid
-                    src="{{ route('admin.marketing.communications.subscribers.index') }}"
+                    :src="route('admin.marketing.communications.subscribers.index')"
                     ref="datagrid"
                 >
                     <!-- DataGrid Body -->

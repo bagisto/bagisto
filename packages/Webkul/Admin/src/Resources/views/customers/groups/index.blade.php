@@ -40,7 +40,10 @@
                 {!! view_render_event('bagisto.admin.customers.groups.list.before') !!}
 
                 <!-- DataGrid -->
-                <x-admin::datagrid src="{{ route('admin.customers.groups.index') }}" ref="datagrid">
+                <x-admin::datagrid
+                    :src="route('admin.customers.groups.index')"
+                    ref="datagrid"
+                >
                     <!-- DataGrid Body -->
                     <template #body="{ columns, records, performAction }">
                         <div

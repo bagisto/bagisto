@@ -26,7 +26,7 @@
                 <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.cms.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.cms.edit.back-btn')
                 </a>
@@ -142,13 +142,13 @@
                         <x-admin::form.control-group.control
                             type="text"
                             id="meta_title"
-                            name="{{$currentLocale->code}}[meta_title]"
+                            name="{{ $currentLocale->code }}[meta_title]"
                             :value="old($currentLocale->code)['meta_title'] ?? ($page->translate($currentLocale->code)['meta_title'] ?? '') "
                             :label="trans('admin::app.cms.edit.meta-title')"
                             :placeholder="trans('admin::app.cms.edit.meta-title')"
                         />
 
-                        <x-admin::form.control-group.error control-name="{{$currentLocale->code}}[meta_title]" />
+                        <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[meta_title]" />
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group>
@@ -159,14 +159,14 @@
                         <x-admin::form.control-group.control
                             type="text"
                             id="url_key"
-                            name="{{$currentLocale->code}}[url_key]"
+                            name="{{ $currentLocale->code }}[url_key]"
                             rules="required"
                             :value="old($currentLocale->code)['url_key'] ?? ($page->translate($currentLocale->code)['url_key'] ?? '')"
                             :label="trans('admin::app.cms.edit.url-key')"
                             :placeholder="trans('admin::app.cms.edit.url-key')"
                         />
 
-                        <x-admin::form.control-group.error control-name="{{$currentLocale->code}}[url_key]" />
+                        <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[url_key]" />
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group>
@@ -178,13 +178,13 @@
                             type="textarea"
                             class="text-gray-600 dark:text-gray-300"
                             id="meta_keywords"
-                            name="{{$currentLocale->code}}[meta_keywords]"
+                            name="{{ $currentLocale->code }}[meta_keywords]"
                             :value="old($currentLocale->code)['meta_keywords'] ?? ($page->translate($currentLocale->code)['meta_keywords'] ?? '')"
                             :label="trans('admin::app.cms.edit.meta-keywords')"
                             :placeholder="trans('admin::app.cms.edit.meta-keywords')"
                         />
 
-                        <x-admin::form.control-group.error control-name="{{$currentLocale->code}}[meta_keywords]" />
+                        <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[meta_keywords]" />
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group class="!mb-0">
@@ -196,13 +196,13 @@
                             type="textarea"
                             class="text-gray-600 dark:text-gray-300"
                             id="meta_description"
-                            name="{{$currentLocale->code}}[meta_description]"
+                            name="{{ $currentLocale->code }}[meta_description]"
                             :value="old($currentLocale->code)['meta_description'] ?? ($page->translate($currentLocale->code)['meta_description'] ?? '')"
                             :label="trans('admin::app.cms.edit.meta-description')"
                             :placeholder="trans('admin::app.cms.edit.meta-description')"
                         />
 
-                        <x-admin::form.control-group.error control-name="{{$currentLocale->code}}[meta_description]" />
+                        <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[meta_description]" />
                     </x-admin::form.control-group>
                 </div>
 

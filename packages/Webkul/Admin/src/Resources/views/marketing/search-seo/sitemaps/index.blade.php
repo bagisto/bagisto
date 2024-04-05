@@ -51,7 +51,7 @@
             {!! view_render_event('bagisto.admin.marketing.search_seo.sitemaps.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.sitemaps.index') }}"
+                :src="route('admin.marketing.search_seo.sitemaps.index')"
                 ref="datagrid"
             >
                 <!-- DataGrid Body -->

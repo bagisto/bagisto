@@ -37,7 +37,11 @@
 
     {!! view_render_event('bagisto.admin.customers.customers.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.customers.customers.index') }}" ref="customer_data" :isMultiRow="true">
+    <x-admin::datagrid
+        :src="route('admin.customers.customers.index')"
+        ref="customer_data"
+        :isMultiRow="true"
+    >
         @php 
             $hasPermission = bouncer()->hasPermission('customers.customers.edit') || bouncer()->hasPermission('customers.customers.delete');
         @endphp

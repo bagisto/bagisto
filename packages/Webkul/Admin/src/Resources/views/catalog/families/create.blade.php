@@ -62,7 +62,7 @@
                                 type="text"
                                 name="code"
                                 rules="required"
-                                value="{{ old('code') }}"
+                                :value="old('code')"
                                 :label="trans('admin::app.catalog.families.create.code')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-code')"
                             />
@@ -79,7 +79,7 @@
                                 type="text"
                                 name="name"
                                 rules="required"
-                                value="{{ old('name') }}"
+                                :value="old('name')"
                                 :label="trans('admin::app.catalog.families.create.name')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-name')"
                             />

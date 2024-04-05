@@ -10,7 +10,7 @@
 
         <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.catalog.products.index') }}" />
+            <x-admin::datagrid.export :src="route('admin.catalog.products.index')" />
 
             {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
 
@@ -32,7 +32,10 @@
     {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
     <!-- Datagrid -->
-    <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}" :isMultiRow="true">
+    <x-admin::datagrid
+        :src="route('admin.catalog.products.index')"
+        :isMultiRow="true"
+    >
         <!-- Datagrid Header -->
         @php
             $hasPermission = bouncer()->hasPermission('catalog.products.edit') || bouncer()->hasPermission('catalog.products.delete');

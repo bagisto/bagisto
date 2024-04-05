@@ -21,14 +21,14 @@
                         <!-- Current Channel -->
                         <div class="p-1.5 items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md">
                             <p class="text-gray-600 dark:text-gray-300  font-semibold leading-6">
-                                Channel - {{ core()->getCurrentChannel()->name }}
+                                @lang('admin::app.cms.index.chanel') - {{ core()->getCurrentChannel()->name }}
                             </p>
                         </div>
 
                         <!-- Current Locale -->
                         <div class="p-1.5 items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md">
                             <p class="text-gray-600 dark:text-gray-300 font-semibold leading-6">
-                                Language - {{ core()->getCurrentLocale()->name }}
+                                @lang('admin::app.cms.index.language') - {{ core()->getCurrentLocale()->name }}
                             </p>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
             </x-admin::dropdown>
 
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.cms.index') }}" />
+            <x-admin::datagrid.export :src="route('admin.cms.index')" />
 
             <!-- Create New Pages Button -->
             @if (bouncer()->hasPermission('cms.create'))
@@ -52,7 +52,7 @@
 
     {!! view_render_event('bagisto.admin.cms.pages.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.cms.index') }}" />
+    <x-admin::datagrid :src="route('admin.cms.index')" />
     
     {!! view_render_event('bagisto.admin.cms.pages.list.after') !!}
 

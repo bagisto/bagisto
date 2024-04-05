@@ -51,7 +51,7 @@
             {!! view_render_event('bagisto.admin.marketing.search_seo.search_synonyms.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.search_synonyms.index') }}"
+                :src="route('admin.marketing.search_seo.search_synonyms.index')"
                 ref="datagrid"
             >
                 <!-- DataGrid Body -->

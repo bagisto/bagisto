@@ -508,7 +508,7 @@
                     /**
                      * Clean up is done here. If there are no applied values present, there is no point in including the applied column as well.
                      */
-                    if (!appliedColumn.value.length) {
+                    if (! appliedColumn.value.length) {
                         this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
                     }
 

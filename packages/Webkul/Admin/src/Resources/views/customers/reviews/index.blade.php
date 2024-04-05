@@ -24,7 +24,7 @@
             {!! view_render_event('bagisto.admin.customers.reviews.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.customers.customers.review.index') }}"
+                :src="route('admin.customers.customers.review.index')"
                 :isMultiRow="true"
                 ref="review_data"
             >

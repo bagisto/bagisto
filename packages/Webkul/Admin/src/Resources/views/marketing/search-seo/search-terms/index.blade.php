@@ -51,7 +51,7 @@
             {!! view_render_event('admin.marketing.search_seo.search_terms.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.search_terms.index') }}"
+                :src="route('admin.marketing.search_seo.search_terms.index')"
                 ref="datagrid"
             >
                 <!-- DataGrid Body -->

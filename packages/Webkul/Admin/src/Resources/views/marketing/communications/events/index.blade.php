@@ -51,7 +51,7 @@
 
             <!-- Datagrid -->
             <x-admin::datagrid
-                src="{{ route('admin.marketing.communications.events.index') }}"
+                :src="route('admin.marketing.communications.events.index')"
                 ref="datagrid"
             >
                  <!-- DataGrid Body -->

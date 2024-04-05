@@ -51,7 +51,7 @@
             {!! view_render_event('bagisto.admin.marketing.search_seo.url_rewrites.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.url_rewrites.index') }}"
+                :src="route('admin.marketing.search_seo.url_rewrites.index')"
                 ref="datagrid"
             >
                 <!-- DataGrid Body -->
