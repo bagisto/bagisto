@@ -11,7 +11,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should display the cart items for a guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -61,7 +61,7 @@ it('should display the cart items for a guest user', function () {
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $response = get(route('shop.api.checkout.cart.index'))
         ->assertOk()
         ->assertJsonPath('data.id', $cart->id)
@@ -96,7 +96,7 @@ it('should display the cart items for a guest user', function () {
 });
 
 it('should display the cart items for a customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -147,7 +147,7 @@ it('should display the cart items for a customer', function () {
 
     cart()->setCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = get(route('shop.api.checkout.cart.index'))
@@ -184,7 +184,7 @@ it('should display the cart items for a customer', function () {
 });
 
 it('should fails the validation error when the cart item id not provided when remove product items into the cart for a guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -232,14 +232,14 @@ it('should fails the validation error when the cart item id not provided when re
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     deleteJson(route('shop.api.checkout.cart.destroy'))
         ->assertJsonValidationErrorFor('cart_item_id')
         ->assertUnprocessable();
 });
 
 it('should fails the validation error when the cart item id not provided when remove product items into the cart for a customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -290,7 +290,7 @@ it('should fails the validation error when the cart item id not provided when re
 
     cart()->setCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     deleteJson(route('shop.api.checkout.cart.destroy'))
@@ -299,7 +299,7 @@ it('should fails the validation error when the cart item id not provided when re
 });
 
 it('should fails the validation error when the wrong cart item id provided when remove product items to the cart for a guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -347,7 +347,7 @@ it('should fails the validation error when the wrong cart item id provided when 
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     deleteJson(route('shop.api.checkout.cart.destroy'), [
         'cart_item_id' => 'WRONG_ID',
     ])
@@ -356,7 +356,7 @@ it('should fails the validation error when the wrong cart item id provided when 
 });
 
 it('should fails the validation error when the wrong cart item id provided when remove product items to the cart for a customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -409,7 +409,7 @@ it('should fails the validation error when the wrong cart item id provided when 
 
     $this->loginAsCustomer($customer);
 
-    // Act and Assert
+    // Act and Assert.
     deleteJson(route('shop.api.checkout.cart.destroy'), [
         'cart_item_id' => 'WRONG_ID',
     ])
@@ -418,7 +418,7 @@ it('should fails the validation error when the wrong cart item id provided when 
 });
 
 it('should remove only one product item from the cart for the guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -470,7 +470,7 @@ it('should remove only one product item from the cart for the guest user', funct
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     deleteJson(route('shop.api.checkout.cart.destroy', [
         'cart_item_id' => $cartItem->id,
     ]))
@@ -488,7 +488,7 @@ it('should remove only one product item from the cart for the guest user', funct
 });
 
 it('should remove only one product item from the cart for the customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -541,7 +541,7 @@ it('should remove only one product item from the cart for the customer', functio
 
     cart()->setCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     deleteJson(route('shop.api.checkout.cart.destroy', [
@@ -561,7 +561,7 @@ it('should remove only one product item from the cart for the customer', functio
 });
 
 it('should only remove one product from the cart for now the cart will contains two products for a guest user', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -640,7 +640,7 @@ it('should only remove one product from the cart for now the cart will contains 
 
     cart()->setCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $response = deleteJson(route('shop.api.checkout.cart.destroy'), [
         'cart_item_id' => $cartItem1->id,
     ])
@@ -696,7 +696,7 @@ it('should only remove one product from the cart for now the cart will contains 
 });
 
 it('should only remove one product from the cart for now the cart will contains two products for a customer', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -776,7 +776,7 @@ it('should only remove one product from the cart for now the cart will contains 
 
     cart()->setCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     $response = deleteJson(route('shop.api.checkout.cart.destroy'), [
@@ -834,7 +834,7 @@ it('should only remove one product from the cart for now the cart will contains 
 });
 
 it('should remove all products from the cart for a guest user', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -911,7 +911,7 @@ it('should remove all products from the cart for a guest user', function () {
 
     cart()->setCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     deleteJson(route('shop.api.checkout.cart.destroy_selected'), [
         'ids' => [$cartItem1->id, $cartItem2->id],
     ]);
@@ -926,7 +926,7 @@ it('should remove all products from the cart for a guest user', function () {
 });
 
 it('should remove all products from the cart for a customer', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1006,7 +1006,7 @@ it('should remove all products from the cart for a customer', function () {
 
     cart()->setCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     deleteJson(route('shop.api.checkout.cart.destroy_selected'), [
@@ -1023,7 +1023,7 @@ it('should remove all products from the cart for a customer', function () {
 });
 
 it('should update cart quantities for guest user', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1102,7 +1102,7 @@ it('should update cart quantities for guest user', function () {
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $response = putJson(route('shop.api.checkout.cart.update'), [
         'qty' => [
             $cartItem1->id => rand(2, 10),
@@ -1152,7 +1152,7 @@ it('should update cart quantities for guest user', function () {
 });
 
 it('should update cart quantities for customer', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1232,7 +1232,7 @@ it('should update cart quantities for customer', function () {
 
     cart()->setCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     $response = putJson(route('shop.api.checkout.cart.update'), [
@@ -1284,7 +1284,7 @@ it('should update cart quantities for customer', function () {
 });
 
 it('should fails the validation error when the product id not provided when add a simple product to the cart', function () {
-    // Arrange
+    // Arrange.
     (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1308,7 +1308,7 @@ it('should fails the validation error when the product id not provided when add 
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'quantity' => rand(1, 10),
     ]))
@@ -1317,7 +1317,7 @@ it('should fails the validation error when the product id not provided when add 
 });
 
 it('should add a simple product to the cart for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1341,7 +1341,7 @@ it('should add a simple product to the cart for guest user', function () {
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'quantity'   => $quantity = rand(1, 10),
@@ -1371,7 +1371,7 @@ it('should add a simple product to the cart for guest user', function () {
 });
 
 it('should add a simple product to the cart for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1391,7 +1391,7 @@ it('should add a simple product to the cart for customer', function () {
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $customer = $this->loginAsCustomer();
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -1423,7 +1423,7 @@ it('should add a simple product to the cart for customer', function () {
 });
 
 it('should fails the validation error when the product id not provided add a bundle product to the cart', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1464,7 +1464,7 @@ it('should fails the validation error when the product id not provided add a bun
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'quantity'          => 1,
         'is_buy_now'        => '0',
@@ -1477,7 +1477,7 @@ it('should fails the validation error when the product id not provided add a bun
 });
 
 it('should add a bundle product to the cart for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1518,7 +1518,7 @@ it('should add a bundle product to the cart for guest user', function () {
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id'        => $product->id,
         'quantity'          => 1,
@@ -1551,7 +1551,7 @@ it('should add a bundle product to the cart for guest user', function () {
 });
 
 it('should add a bundle product to the cart for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1588,7 +1588,7 @@ it('should add a bundle product to the cart for customer', function () {
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    // Act and Assert
+    // Act and Assert.
     $customer = $this->loginAsCustomer();
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -1623,7 +1623,7 @@ it('should add a bundle product to the cart for customer', function () {
 });
 
 it('should fails the validation when the product id not provided when add a configurable product to the cart', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1649,7 +1649,7 @@ it('should fails the validation when the product id not provided when add a conf
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
         'is_buy_now'                   => '0',
@@ -1665,7 +1665,7 @@ it('should fails the validation when the product id not provided when add a conf
 });
 
 it('should add a configurable product to the cart for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1691,7 +1691,7 @@ it('should add a configurable product to the cart for guest user', function () {
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
@@ -1726,7 +1726,7 @@ it('should add a configurable product to the cart for guest user', function () {
 });
 
 it('should add a configurable product to the cart for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1748,7 +1748,7 @@ it('should add a configurable product to the cart for customer', function () {
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $customer = $this->loginAsCustomer();
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -1785,7 +1785,7 @@ it('should add a configurable product to the cart for customer', function () {
 });
 
 it('should fails the validation error when the product id not provided when add a downloadable product to the cart', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1809,7 +1809,7 @@ it('should fails the validation error when the product id not provided when add 
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'quantity'   => 1,
         'is_buy_now' => '0',
@@ -1821,7 +1821,7 @@ it('should fails the validation error when the product id not provided when add 
 });
 
 it('should add a downloadable product to the cart for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1845,7 +1845,7 @@ it('should add a downloadable product to the cart for guest user', function () {
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -1876,7 +1876,7 @@ it('should add a downloadable product to the cart for guest user', function () {
 });
 
 it('should add a downloadable product to the cart for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1896,7 +1896,7 @@ it('should add a downloadable product to the cart for customer', function () {
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $customer = $this->loginAsCustomer();
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -1929,7 +1929,7 @@ it('should add a downloadable product to the cart for customer', function () {
 });
 
 it('should fails the validation error when the product id not provided when add a grouped product to the cart', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1966,7 +1966,7 @@ it('should fails the validation error when the product id not provided when add 
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'quantity'   => 1,
         'is_buy_now' => '0',
@@ -1978,7 +1978,7 @@ it('should fails the validation error when the product id not provided when add 
 });
 
 it('should add a grouped product to the cart for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2015,7 +2015,7 @@ it('should add a grouped product to the cart for guest user', function () {
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -2049,7 +2049,7 @@ it('should add a grouped product to the cart for guest user', function () {
 });
 
 it('should add a grouped product to the cart for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2086,7 +2086,7 @@ it('should add a grouped product to the cart for customer', function () {
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $customer = $this->loginAsCustomer();
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -2122,7 +2122,7 @@ it('should add a grouped product to the cart for customer', function () {
 });
 
 it('should fails the validation error when the product id not provided when add a virtual product to the cart', function () {
-    // Arrange
+    // Arrange.
     (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2146,7 +2146,7 @@ it('should fails the validation error when the product id not provided when add 
         ],
     ]))->getVirtualProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'quantity' => rand(1, 10),
     ]))
@@ -2155,7 +2155,7 @@ it('should fails the validation error when the product id not provided when add 
 });
 
 it('should add a virtual product to the cart for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2179,7 +2179,7 @@ it('should add a virtual product to the cart for guest user', function () {
         ],
     ]))->getVirtualProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'quantity'   => $quantity = rand(1, 10),
@@ -2207,7 +2207,7 @@ it('should add a virtual product to the cart for guest user', function () {
 });
 
 it('should add a virtual product to the cart for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2227,7 +2227,7 @@ it('should add a virtual product to the cart for customer', function () {
         ],
     ]))->getVirtualProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $customer = $this->loginAsCustomer();
 
     $response = postJson(route('shop.api.checkout.cart.store', [

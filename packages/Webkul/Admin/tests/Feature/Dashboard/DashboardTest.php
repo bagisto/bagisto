@@ -18,7 +18,7 @@ use Webkul\Sales\Models\OrderPayment;
 use function Pest\Laravel\get;
 
 it('should return the dashboard index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.index'))
@@ -31,7 +31,7 @@ it('should return the dashboard index page', function () {
 });
 
 it('should show the dashboard over all stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -176,7 +176,7 @@ it('should show the dashboard over all stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [
@@ -189,7 +189,7 @@ it('should show the dashboard over all stats', function () {
 });
 
 it('should show the dashboard today stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -334,7 +334,7 @@ it('should show the dashboard today stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [
@@ -350,7 +350,7 @@ it('should show the dashboard today stats', function () {
 });
 
 it('should show the dashboard stock threshold products stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -495,7 +495,7 @@ it('should show the dashboard stock threshold products stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [
@@ -507,7 +507,7 @@ it('should show the dashboard stock threshold products stats', function () {
 });
 
 it('should show the dashboard total sales stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -652,7 +652,7 @@ it('should show the dashboard total sales stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [
@@ -664,7 +664,7 @@ it('should show the dashboard total sales stats', function () {
 });
 
 it('should show the dashboard total visitors stats', function () {
-    // Arrange
+    // Arrange.
     (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -681,7 +681,7 @@ it('should show the dashboard total visitors stats', function () {
 
     visitor()->visit();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [
@@ -693,7 +693,7 @@ it('should show the dashboard total visitors stats', function () {
 });
 
 it('should show the dashboard top selling products stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -710,7 +710,7 @@ it('should show the dashboard top selling products stats', function () {
 
     $customer = Customer::factory()->create();
 
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -860,7 +860,7 @@ it('should show the dashboard top selling products stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [
@@ -871,7 +871,7 @@ it('should show the dashboard top selling products stats', function () {
 });
 
 it('should show the dashboard top customers stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -1016,7 +1016,7 @@ it('should show the dashboard top customers stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [

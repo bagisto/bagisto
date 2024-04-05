@@ -9,7 +9,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the user index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.users.index'))
@@ -19,7 +19,7 @@ it('should returns the user index page', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the users', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.users.store'))
@@ -30,7 +30,7 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should fail the validation with errors when confirm password not provided when store the users', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.users.store'), [
@@ -44,7 +44,7 @@ it('should fail the validation with errors when confirm password not provided wh
 });
 
 it('should store the newly created user/admin', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.users.store'), [
@@ -69,10 +69,10 @@ it('should store the newly created user/admin', function () {
 });
 
 it('should returns the user and its roles', function () {
-    // Arrange
+    // Arrange.
     $user = Admin::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.users.edit', $user->id))
@@ -84,10 +84,10 @@ it('should returns the user and its roles', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update the users', function () {
-    // Arrange
+    // Arrange.
     $user = Admin::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.users.update'), [
@@ -102,10 +102,10 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the existing user/admin', function () {
-    // Arrange
+    // Arrange.
     $user = Admin::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.users.update'), [
@@ -132,10 +132,10 @@ it('should update the existing user/admin', function () {
 });
 
 it('should delete the existing user/admin', function () {
-    // Arrange
+    // Arrange.
     $user = Admin::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.users.delete', $user->id))
@@ -148,12 +148,12 @@ it('should delete the existing user/admin', function () {
 });
 
 it('should delete self user/admin', function () {
-    // Arrange
+    // Arrange.
     $admin = Admin::factory()->create([
         'password' => Hash::make($password = fake()->password()),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin($admin);
 
     putJson(route('admin.settings.users.destroy'), [

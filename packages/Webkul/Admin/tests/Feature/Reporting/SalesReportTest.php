@@ -19,7 +19,7 @@ use Webkul\Sales\Models\OrderPayment;
 use function Pest\Laravel\get;
 
 it('should return the sales index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.index'))
@@ -30,7 +30,7 @@ it('should return the sales index page', function () {
 });
 
 it('should returns the sales stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -143,7 +143,7 @@ it('should returns the sales stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
@@ -156,7 +156,7 @@ it('should returns the sales stats', function () {
 });
 
 it('should returns the purchase funnel stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -303,7 +303,7 @@ it('should returns the purchase funnel stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
@@ -316,7 +316,7 @@ it('should returns the purchase funnel stats', function () {
 });
 
 it('should returns the abandoned carts stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -339,7 +339,7 @@ it('should returns the abandoned carts stats', function () {
         ])->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
@@ -352,7 +352,7 @@ it('should returns the abandoned carts stats', function () {
 });
 
 it('should returns the total orders stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -497,7 +497,7 @@ it('should returns the total orders stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
@@ -510,7 +510,7 @@ it('should returns the total orders stats', function () {
 });
 
 it('should returns the average sale stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -655,7 +655,7 @@ it('should returns the average sale stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
@@ -670,7 +670,7 @@ it('should returns the average sale stats', function () {
 });
 
 it('should returns the shipping collected stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -815,7 +815,7 @@ it('should returns the shipping collected stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
@@ -828,7 +828,7 @@ it('should returns the shipping collected stats', function () {
 });
 
 it('should returns the tax collected stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -974,7 +974,7 @@ it('should returns the tax collected stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
@@ -987,7 +987,7 @@ it('should returns the tax collected stats', function () {
 });
 
 it('should returns the refunds stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -1134,7 +1134,7 @@ it('should returns the refunds stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
@@ -1147,7 +1147,7 @@ it('should returns the refunds stats', function () {
 });
 
 it('should returns the top payment methods stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -1294,7 +1294,7 @@ it('should returns the top payment methods stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
@@ -1308,7 +1308,7 @@ it('should returns the top payment methods stats', function () {
 });
 
 it('should return the view page of sales stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -1388,7 +1388,7 @@ it('should return the view page of sales stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.view', [
@@ -1399,7 +1399,7 @@ it('should return the view page of sales stats', function () {
 });
 
 it('should export the sales stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -1544,7 +1544,7 @@ it('should export the sales stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     $period = fake()->randomElement(['day', 'month', 'year']);

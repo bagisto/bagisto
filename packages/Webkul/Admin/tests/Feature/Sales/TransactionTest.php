@@ -21,7 +21,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('should return the index page of transactions', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.transactions.index'))
@@ -30,7 +30,7 @@ it('should return the index page of transactions', function () {
 });
 
 it('should fails the validation error when store the transaction when certain inputs not provided', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -179,7 +179,7 @@ it('should fails the validation error when store the transaction when certain in
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.transactions.store'))
@@ -190,7 +190,7 @@ it('should fails the validation error when store the transaction when certain in
 });
 
 it('should store the order transaction', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -346,7 +346,7 @@ it('should store the order transaction', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.transactions.store'), [
@@ -369,7 +369,7 @@ it('should store the order transaction', function () {
 });
 
 it('should view the transaction', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -506,7 +506,7 @@ it('should view the transaction', function () {
         'amount'         => $invoice->grand_total,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.transactions.view', $transaction->id))

@@ -21,7 +21,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('should return the refund index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.refunds.index'))
@@ -30,7 +30,7 @@ it('should return the refund index page', function () {
 });
 
 it('should fails the validation error when refund items data not provided', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -151,7 +151,7 @@ it('should fails the validation error when refund items data not provided', func
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.store', $order->id))
@@ -160,7 +160,7 @@ it('should fails the validation error when refund items data not provided', func
 });
 
 it('should fails the validation error when refund items data provided with wrong way', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -281,7 +281,7 @@ it('should fails the validation error when refund items data provided with wrong
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.store', $order->id), [
@@ -296,7 +296,7 @@ it('should fails the validation error when refund items data provided with wrong
 });
 
 it('should store the order refund', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -426,7 +426,7 @@ it('should store the order refund', function () {
         }
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.store', $order->id), [
@@ -451,7 +451,7 @@ it('should store the order refund', function () {
 });
 
 it('should store the order refund and send email to the customer', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -583,7 +583,7 @@ it('should store the order refund and send email to the customer', function () {
         }
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.store', $order->id), [
@@ -614,7 +614,7 @@ it('should store the order refund and send email to the customer', function () {
 });
 
 it('should return the order refunded data', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -765,7 +765,7 @@ it('should return the order refunded data', function () {
 
     $summary['grand_total']['price'] += $summary['subtotal']['price'] + $summary['tax']['price'] + $summary['shipping']['price'] - $summary['discount']['price'];
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.update_qty', $order->id), $items)
@@ -774,7 +774,7 @@ it('should return the order refunded data', function () {
 });
 
 it('should return the view page of refund', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -899,7 +899,7 @@ it('should return the view page of refund', function () {
         'order_id' => $order->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.refunds.view', $refund->id))

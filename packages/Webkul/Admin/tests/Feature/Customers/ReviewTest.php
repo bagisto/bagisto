@@ -14,7 +14,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the review page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.customers.customers.review.index'))
@@ -23,7 +23,7 @@ it('should returns the review page', function () {
 });
 
 it('should return the edit page of the review', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -57,7 +57,7 @@ it('should return the edit page of the review', function () {
         'mime_type' => $fileType[1],
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.customers.customers.review.edit', $productReview->id))
@@ -93,7 +93,7 @@ it('should return the edit page of the review', function () {
 });
 
 it('should fail the validation with errors for status for review update', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -127,7 +127,7 @@ it('should fail the validation with errors for status for review update', functi
         'mime_type' => $fileType[1],
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.customers.customers.review.update', $productReview->id))
@@ -161,7 +161,7 @@ it('should fail the validation with errors for status for review update', functi
 });
 
 it('should update the status of the review', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -195,7 +195,7 @@ it('should update the status of the review', function () {
         'mime_type' => $fileType[1],
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.customers.customers.review.update', $productReview->id), [
@@ -231,7 +231,7 @@ it('should update the status of the review', function () {
 });
 
 it('should delete the review', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -265,7 +265,7 @@ it('should delete the review', function () {
         'mime_type' => $fileType[1],
     ]);
 
-    // Act and assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.customers.customers.review.delete', $productReview->id))
@@ -284,7 +284,7 @@ it('should delete the review', function () {
 });
 
 it('should mass delete the product review', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -309,8 +309,8 @@ it('should mass delete the product review', function () {
 
     $productReviewAttachments = [];
 
-    foreach ($productReviews as $productReview) {
-        $attachment = UploadedFile::fake()->image('test.png');
+    foreach ($productReviews as $key => $productReview) {
+        $attachment = UploadedFile::fake()->image('test_'.$key.'.png');
 
         $fileType = explode('/', $attachment->getMimeType());
 
@@ -322,7 +322,7 @@ it('should mass delete the product review', function () {
         ]);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.review.mass_delete', [
@@ -347,7 +347,7 @@ it('should mass delete the product review', function () {
 });
 
 it('should mass update the product review', function () {
-    // Arrange
+    // Arrange.
     $status = Arr::random(['approved', 'disapproved', 'pending']);
 
     $product = (new ProductFaker([
@@ -369,7 +369,7 @@ it('should mass update the product review', function () {
         'product_id' => $product->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.review.mass_update', [

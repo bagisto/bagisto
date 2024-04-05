@@ -16,7 +16,7 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
 it('should fails the validation error when certain inputs not provided when add a grouped product to the cart with a cart rule of the no coupon type for all customer group type', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -81,7 +81,7 @@ it('should fails the validation error when certain inputs not provided when add 
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'quantity'   => 1,
         'is_buy_now' => '0',
@@ -103,7 +103,7 @@ it('should fails the validation error when certain inputs not provided when add 
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for all customer group type', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -168,7 +168,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -199,7 +199,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the no coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -264,7 +264,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'quantity'   => 1,
         'is_buy_now' => '0',
@@ -286,7 +286,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -351,7 +351,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -382,7 +382,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the no coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -445,7 +445,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -469,7 +469,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -532,7 +532,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -565,7 +565,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -628,7 +628,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -652,7 +652,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -715,7 +715,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
         $data['prices'][] = $groupedProduct->associated_product->price * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -738,7 +738,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
 });
 
 it('should fails the validation error when certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -820,7 +820,7 @@ it('should fails the validation error when certain inputs not provided when add 
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
@@ -839,7 +839,7 @@ it('should fails the validation error when certain inputs not provided when add 
 });
 
 it('should add a grouped product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -921,7 +921,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
         'code' => $couponCode,
     ])
@@ -950,7 +950,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1032,7 +1032,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
@@ -1051,7 +1051,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should add a grouped product to the cart with a cart rule of the specific coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1133,7 +1133,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
         'code' => $couponCode,
     ])
@@ -1162,7 +1162,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1246,7 +1246,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -1267,7 +1267,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should add a grouped product to the cart with a cart rule of the specific coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1352,7 +1352,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1383,7 +1383,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 });
 
 it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1466,7 +1466,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -1487,7 +1487,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should add a grouped product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1571,7 +1571,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1602,7 +1602,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
 });
 
 it('should check tax is applying for the grouped product into the cart for grouped product', function () {
-    // Arrange
+    // Arrange.
     $taxCategory = TaxCategory::factory()->create();
 
     $taxRate = TaxRate::factory()->create([
@@ -1698,7 +1698,7 @@ it('should check tax is applying for the grouped product into the cart for group
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with fixed price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1745,7 +1745,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = ($productCustomerGroupPrices[$key]->value * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'quantity'   => 1,
         'is_buy_now' => '0',
@@ -1772,7 +1772,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check customer group price for guest customer with fixed price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1819,7 +1819,7 @@ it('should check customer group price for guest customer with fixed price type f
         $data['prices'][] = ($productCustomerGroupPrices[$key]->value * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -1853,7 +1853,7 @@ it('should check customer group price for guest customer with fixed price type f
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for general customer with fixed price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1898,7 +1898,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = ($productCustomerGroupPrices[$key]->value * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -1927,7 +1927,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check customer group price for general customer with fixed price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1972,7 +1972,7 @@ it('should check customer group price for general customer with fixed price type
         $data['prices'][] = ($productCustomerGroupPrices[$key]->value * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -2008,7 +2008,7 @@ it('should check customer group price for general customer with fixed price type
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for wholesaler customer with fixed price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2051,7 +2051,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = ($productCustomerPrice->value * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -2065,7 +2065,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check customer group price for wholesaler customer with fixed price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2108,7 +2108,7 @@ it('should check customer group price for wholesaler customer with fixed price t
         $data['prices'][] = ($productCustomerPrice->value * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -2129,7 +2129,7 @@ it('should check customer group price for wholesaler customer with fixed price t
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with discount price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2174,7 +2174,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = (($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($productCustomerPrice->value / 100))) * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'quantity'   => 1,
         'is_buy_now' => '0',
@@ -2186,7 +2186,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check customer group price for guest customer with discount price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2231,7 +2231,7 @@ it('should check customer group price for guest customer with discount price typ
         $data['prices'][] = (($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($productCustomerPrice->value / 100))) * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'product_id' => $product->id,
         'quantity'   => 1,
@@ -2248,7 +2248,7 @@ it('should check customer group price for guest customer with discount price typ
 });
 
 it('should fails the validation error when the certain inputs nor provided when check customer group price for general customer with discount price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2291,7 +2291,7 @@ it('should fails the validation error when the certain inputs nor provided when 
         $data['prices'][] = (($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($productCustomerPrice->value / 100))) * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -2305,7 +2305,7 @@ it('should fails the validation error when the certain inputs nor provided when 
 });
 
 it('should check customer group price for general customer with discount price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2348,7 +2348,7 @@ it('should check customer group price for general customer with discount price t
         $data['prices'][] = (($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($productCustomerPrice->value / 100))) * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -2367,7 +2367,7 @@ it('should check customer group price for general customer with discount price t
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for wholesaler customer with discount price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2410,7 +2410,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = (($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($productCustomerPrice->value / 100))) * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -2424,7 +2424,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check customer group price for wholesaler customer with discount price type for grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2467,7 +2467,7 @@ it('should check customer group price for wholesaler customer with discount pric
         $data['prices'][] = (($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($productCustomerPrice->value / 100))) * $groupedProduct->qty);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -2486,7 +2486,7 @@ it('should check customer group price for wholesaler customer with discount pric
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for grouped product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2532,7 +2532,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = ($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * $catalogRule->discount_amount / 100)) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'quantity'   => '',
         'is_buy_now' => '0',
@@ -2544,7 +2544,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check discount price if catalog rule applied for percentage price for grouped product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2590,7 +2590,7 @@ it('should check discount price if catalog rule applied for percentage price for
         $data['prices'][] = ($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * $catalogRule->discount_amount / 100)) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'product_id' => $product->id,
         'quantity'   => '',
@@ -2607,7 +2607,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for grouped product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2651,7 +2651,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = ($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * $catalogRule->discount_amount / 100)) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -2665,7 +2665,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check discount price if catalog rule applied for percentage price for grouped product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2709,7 +2709,7 @@ it('should check discount price if catalog rule applied for percentage price for
         $data['prices'][] = ($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * $catalogRule->discount_amount / 100)) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -2728,7 +2728,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for grouped product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2772,7 +2772,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = ($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * $catalogRule->discount_amount / 100)) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -2786,7 +2786,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check discount price if catalog rule applied for percentage price for grouped product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2830,7 +2830,7 @@ it('should check discount price if catalog rule applied for percentage price for
         $data['prices'][] = ($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * $catalogRule->discount_amount / 100)) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -2849,7 +2849,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for grouped product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2896,7 +2896,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = ($groupedProduct->associated_product->price - $catalogRule->discount_amount) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'quantity'   => '',
         'is_buy_now' => '0',
@@ -2908,7 +2908,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check discount price if catalog rule applied for fixed price for grouped product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2955,7 +2955,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
         $data['prices'][] = ($groupedProduct->associated_product->price - $catalogRule->discount_amount) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'product_id' => $product->id,
         'quantity'   => '',
@@ -2972,7 +2972,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for grouped product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3017,7 +3017,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = ($groupedProduct->associated_product->price - $catalogRule->discount_amount) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -3031,7 +3031,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check discount price if catalog rule applied for fixed price for grouped product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3076,7 +3076,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
         $data['prices'][] = ($groupedProduct->associated_product->price - $catalogRule->discount_amount) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -3095,7 +3095,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for grouped product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3140,7 +3140,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $data['prices'][] = ($groupedProduct->associated_product->price - $catalogRule->discount_amount) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -3154,7 +3154,7 @@ it('should fails the validation error when the certain inputs not provided when 
 });
 
 it('should check discount price if catalog rule applied for fixed price for grouped product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3199,7 +3199,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
         $data['prices'][] = ($groupedProduct->associated_product->price - $catalogRule->discount_amount) * $groupedProduct->qty;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -3218,7 +3218,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
 });
 
 it('should check discount price if catalog rule applied for fixed price for grouped product for guest customer', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -3265,7 +3265,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
 });
 
 it('should check discount price if catalog rule applied for fixed price for grouped product for general customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3299,7 +3299,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
 
     $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     foreach ($groupedProducts as $groupedProduct) {
@@ -3317,7 +3317,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
 });
 
 it('should check discount price if catalog rule applied for fixed price for grouped product for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3351,7 +3351,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
 
     $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     foreach ($groupedProducts as $groupedProduct) {
@@ -3369,7 +3369,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
 });
 
 it('should check discount price if catalog rule applied for percentage price for grouped product for guest customer', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -3415,7 +3415,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should check discount price if catalog rule applied for percentage price for grouped product for general customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3448,7 +3448,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     foreach ($groupedProducts as $groupedProduct) {
@@ -3466,7 +3466,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should check discount price if catalog rule applied for percentage price for grouped product for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3499,7 +3499,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     foreach ($groupedProducts as $groupedProduct) {

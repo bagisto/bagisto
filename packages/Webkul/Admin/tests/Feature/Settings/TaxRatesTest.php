@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the tax rate index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.taxes.rates.index'))
@@ -18,7 +18,7 @@ it('should returns the tax rate index page', function () {
 });
 
 it('should returns the create page of tax rate', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.taxes.rates.create'))
@@ -28,7 +28,7 @@ it('should returns the create page of tax rate', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the tax rates', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.taxes.rates.store'))
@@ -39,7 +39,7 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created tax rates', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.taxes.rates.store'), [
@@ -62,10 +62,10 @@ it('should store the newly created tax rates', function () {
 });
 
 it('should returns the edit page of the tax rate', function () {
-    // Arrange
+    // Arrange.
     $taxRate = TaxRate::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.taxes.rates.edit', $taxRate->id))
@@ -75,10 +75,10 @@ it('should returns the edit page of the tax rate', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update the tax rates', function () {
-    // Arrange
+    // Arrange.
     $taxRate = TaxRate::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.taxes.rates.update', $taxRate->id))
@@ -89,10 +89,10 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the tax rate', function () {
-    // Arrange
+    // Arrange.
     $taxRate = TaxRate::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.taxes.rates.update', $taxRate->id), [
@@ -115,10 +115,10 @@ it('should update the tax rate', function () {
 });
 
 it('should delete the tax rate', function () {
-    // Arrange
+    // Arrange.
     $taxRate = TaxRate::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.taxes.rates.delete', $taxRate->id))

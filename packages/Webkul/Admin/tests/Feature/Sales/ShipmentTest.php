@@ -23,7 +23,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('should returns the shipment page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.shipments.index'))
@@ -32,7 +32,7 @@ it('should returns the shipment page', function () {
 });
 
 it('should fails the validation error when store the the shipment to the order', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -159,7 +159,7 @@ it('should fails the validation error when store the the shipment to the order',
         }
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.shipments.store', $order->id))
@@ -168,7 +168,7 @@ it('should fails the validation error when store the the shipment to the order',
 });
 
 it('should store the shipment to the order', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -297,7 +297,7 @@ it('should store the shipment to the order', function () {
         }
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.shipments.store', $order->id), [
@@ -323,7 +323,7 @@ it('should store the shipment to the order', function () {
 });
 
 it('should store the shipment to the order and send email to the admin', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     CoreConfig::factory()->create([
@@ -459,7 +459,7 @@ it('should store the shipment to the order and send email to the admin', functio
         }
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.shipments.store', $order->id), [
@@ -493,7 +493,7 @@ it('should store the shipment to the order and send email to the admin', functio
 });
 
 it('should return the view page of shipments', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -628,7 +628,7 @@ it('should return the view page of shipments', function () {
         'inventory_source_name' => 'Default',
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.shipments.view', $shipment->id))

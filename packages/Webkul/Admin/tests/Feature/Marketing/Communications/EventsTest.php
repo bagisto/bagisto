@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should return the events index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.events.index'))
@@ -18,7 +18,7 @@ it('should return the events index page', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in events', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.events.store'))
@@ -29,7 +29,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should store the newly create event', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.events.store', [
@@ -52,10 +52,10 @@ it('should store the newly create event', function () {
 });
 
 it('should edit the events template', function () {
-    // Arrange
+    // Arrange.
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.events.edit', $event->id))
@@ -67,10 +67,10 @@ it('should edit the events template', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in events', function () {
-    // Arrange
+    // Arrange.
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.events.store', $event->id))
@@ -81,10 +81,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update the existing the events', function () {
-    // Arrange
+    // Arrange.
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.events.update'), [
@@ -109,10 +109,10 @@ it('should update the existing the events', function () {
 });
 
 it('should delete the specified events', function () {
-    // Arrange
+    // Arrange.
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.communications.events.delete', $event->id))

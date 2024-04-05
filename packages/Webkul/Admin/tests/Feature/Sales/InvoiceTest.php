@@ -23,7 +23,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('should returns the invoice index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.invoices.index'))
@@ -32,7 +32,7 @@ it('should returns the invoice index page', function () {
 });
 
 it('should fails the validation error when the invoice item quantity not provided', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -158,7 +158,7 @@ it('should fails the validation error when the invoice item quantity not provide
         'state'    => 'paid',
     ])->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.invoices.store', $invoice->order_id))
@@ -167,7 +167,7 @@ it('should fails the validation error when the invoice item quantity not provide
 });
 
 it('should fails the validation error when the invoice item quantity is string', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -288,7 +288,7 @@ it('should fails the validation error when the invoice item quantity is string',
         'order_id' => $order->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.invoices.store', $order->id), [
@@ -303,7 +303,7 @@ it('should fails the validation error when the invoice item quantity is string',
 });
 
 it('should store the invoice', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -422,7 +422,7 @@ it('should store the invoice', function () {
         $items[$item->id] = $item->qty_to_invoice;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.invoices.store', $order->id), [
@@ -435,7 +435,7 @@ it('should store the invoice', function () {
 });
 
 it('should store the invoice and send email to the customer and admin', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -556,7 +556,7 @@ it('should store the invoice and send email to the customer and admin', function
         $items[$item->id] = $item->qty_to_invoice;
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.invoices.store', $order->id), [
@@ -575,7 +575,7 @@ it('should store the invoice and send email to the customer and admin', function
 });
 
 it('should return the view page of the invoice', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -724,7 +724,7 @@ it('should return the view page of the invoice', function () {
         'order_id'   => $order->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.invoices.view', $invoice->id))
@@ -735,7 +735,7 @@ it('should return the view page of the invoice', function () {
 });
 
 it('should send duplicate mail to provided email address', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -890,7 +890,7 @@ it('should send duplicate mail to provided email address', function () {
         'order_id'   => $order->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.invoices.send_duplicate_email', $invoice->id), [
@@ -914,7 +914,7 @@ it('should send duplicate mail to provided email address', function () {
 });
 
 it('should print/download the invoice', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -1065,7 +1065,7 @@ it('should print/download the invoice', function () {
 
     $fileName = 'invoice-'.$invoice->created_at->format('d-m-Y').'.pdf';
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.invoices.print', $invoice->id))

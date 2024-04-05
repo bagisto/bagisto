@@ -10,7 +10,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the cms page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.cms.index'))
@@ -20,7 +20,7 @@ it('should returns the cms page', function () {
 });
 
 it('should returns the listing cms', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.cms.index'), [
@@ -34,7 +34,7 @@ it('should returns the listing cms', function () {
 });
 
 it('should return the cms create page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.cms.create'))
@@ -44,7 +44,7 @@ it('should return the cms create page', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in cms page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.cms.store'))
@@ -56,7 +56,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail with the error URL key not provided in the correct format', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.cms.store'), [
@@ -67,7 +67,7 @@ it('should fail with the error URL key not provided in the correct format', func
 });
 
 it('should store newly created cms pages', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.cms.store'), [
@@ -99,10 +99,10 @@ it('should store newly created cms pages', function () {
 });
 
 it('should show the edit cms page', function () {
-    // Arrange
+    // Arrange.
     $cms = Page::factory()->hasTranslations()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.cms.edit', $cms->id))
@@ -112,12 +112,12 @@ it('should show the edit cms page', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in cms page', function () {
-    // Arrange
+    // Arrange.
     $cms = Page::factory()->hasTranslations()->create();
 
     $localeCode = core()->getRequestedLocaleCode();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.cms.update', $cms->id))
@@ -129,12 +129,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update the cms page', function () {
-    // Arrange
+    // Arrange.
     $cms = Page::factory()->hasTranslations()->create();
 
     $localeCode = core()->getCurrentLocale()->code;
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.cms.update', $cms->id), [
@@ -165,10 +165,10 @@ it('should update the cms page', function () {
 });
 
 it('should delete the cms page', function () {
-    // Arrange
+    // Arrange.
     $cms = Page::factory()->hasTranslations()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.cms.delete', $cms->id))
@@ -181,10 +181,10 @@ it('should delete the cms page', function () {
 });
 
 it('should mass delete cms pages', function () {
-    // Arrange
+    // Arrange.
     $cmsPages = Page::factory()->count(2)->hasTranslations()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.cms.mass_delete'), [

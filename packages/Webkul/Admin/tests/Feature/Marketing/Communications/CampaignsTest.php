@@ -10,7 +10,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should return the campaign index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.campaigns.index'))
@@ -20,7 +20,7 @@ it('should return the campaign index page', function () {
 });
 
 it('should returns the create page of campaigns', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.campaigns.create'))
@@ -30,7 +30,7 @@ it('should returns the create page of campaigns', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in campaigns', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.campaigns.store'))
@@ -44,7 +44,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors when certain inputs are not provided and if provided bad status type when store in campaigns', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.campaigns.store'), [
@@ -61,12 +61,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should store the newly created campaigns', function () {
-    // Arrange
+    // Arrange.
     $emailTemplate = Template::factory()->create();
 
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.campaigns.store'), [
@@ -95,10 +95,10 @@ it('should store the newly created campaigns', function () {
 });
 
 it('should show the edit page of campaigns', function () {
-    // Arrange
+    // Arrange.
     $campaign = Campaign::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.campaigns.edit', $campaign->id))
@@ -108,10 +108,10 @@ it('should show the edit page of campaigns', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in campaigns', function () {
-    // Arrange
+    // Arrange.
     $campaign = Campaign::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.campaigns.update', $campaign->id))
@@ -125,10 +125,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors when certain inputs are not provided and if provided bad status type when update in campaigns', function () {
-    // Arrange
+    // Arrange.
     $campaign = Campaign::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.campaigns.update', $campaign->id), [
@@ -145,12 +145,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update specified the campaigns', function () {
-    // Arrange
+    // Arrange.
     $campaign = Campaign::factory()->create(['marketing_template_id' => Template::factory()->create()->id]);
 
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.campaigns.edit', $campaign->id), [
@@ -180,10 +180,10 @@ it('should update specified the campaigns', function () {
 });
 
 it('should delete the campaign', function () {
-    // Arrange
+    // Arrange.
     $campaign = Campaign::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.communications.campaigns.delete', $campaign->id))

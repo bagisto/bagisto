@@ -23,7 +23,7 @@ use Webkul\Sales\Models\OrderPayment;
 use function Pest\Laravel\get;
 
 it('should returns the reporting product page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.index'))
@@ -40,7 +40,7 @@ it('should returns the reporting product page', function () {
 });
 
 it('should return the product reporting stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -186,7 +186,7 @@ it('should return the product reporting stats', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.stats', [
@@ -198,7 +198,7 @@ it('should return the product reporting stats', function () {
 });
 
 it('should return the total products added to wishlist reporting stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -221,7 +221,7 @@ it('should return the total products added to wishlist reporting stats', functio
         'customer_id' => $customer->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.stats', [
@@ -233,7 +233,7 @@ it('should return the total products added to wishlist reporting stats', functio
 });
 
 it('should return the top selling products by revenue reporting stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -382,7 +382,7 @@ it('should return the top selling products by revenue reporting stats', function
         'product_type'         => $orderItem->product_type,
         'additional'           => $orderItem->additional,
     ]);
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.stats', [
@@ -395,7 +395,7 @@ it('should return the top selling products by revenue reporting stats', function
 });
 
 it('should return the top selling products by quantity reporting stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -545,7 +545,7 @@ it('should return the top selling products by quantity reporting stats', functio
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.stats', [
@@ -557,7 +557,7 @@ it('should return the top selling products by quantity reporting stats', functio
 });
 
 it('should return the products with most reviews reporting stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -581,7 +581,7 @@ it('should return the products with most reviews reporting stats', function () {
         'customer_id' => $customer->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.stats', [
@@ -595,7 +595,7 @@ it('should return the products with most reviews reporting stats', function () {
 });
 
 it('should return the products with most visits reporting stats', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -610,7 +610,7 @@ it('should return the products with most visits reporting stats', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     visitor()->visit($product);
@@ -627,7 +627,7 @@ it('should return the products with most visits reporting stats', function () {
 });
 
 it('should return the last search terms reporting stats', function () {
-    // Arrange
+    // Arrange.
     (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -644,7 +644,7 @@ it('should return the last search terms reporting stats', function () {
 
     $searchTerm = SearchTerm::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.stats', [
@@ -657,7 +657,7 @@ it('should return the last search terms reporting stats', function () {
 });
 
 it('should return top search terms reporting stats', function () {
-    // Arrange
+    // Arrange.
     (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -672,7 +672,7 @@ it('should return top search terms reporting stats', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     $searchTerm = SearchTerm::factory()->create();
@@ -687,7 +687,7 @@ it('should return top search terms reporting stats', function () {
 });
 
 it('should return the downloadable response for product stats', function () {
-    // Arrange
+    // Arrange.
     $period = fake()->randomElement(['day', 'month', 'year']);
 
     $start = Carbon::now();
@@ -700,7 +700,7 @@ it('should return the downloadable response for product stats', function () {
         $end = $start->copy()->addYear();
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.export', [
@@ -715,7 +715,7 @@ it('should return the downloadable response for product stats', function () {
 });
 
 it('should return the product view page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.view', [
@@ -728,7 +728,7 @@ it('should return the product view page', function () {
 });
 
 it('should returns the report the product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -874,7 +874,7 @@ it('should returns the report the product', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.products.view.stats', [

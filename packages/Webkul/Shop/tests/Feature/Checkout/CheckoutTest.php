@@ -22,7 +22,7 @@ use Webkul\Shop\Mail\Order\CreatedNotification as ShopOrderCreatedNotification;
 use function Pest\Laravel\postJson;
 
 it('should handle certain validation errors when storing the guest user address for cart billing and shipping', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -93,7 +93,7 @@ it('should handle certain validation errors when storing the guest user address 
 });
 
 it('should handle certain validation errors when storing the customer address for cart billing and shipping', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -167,7 +167,7 @@ it('should handle certain validation errors when storing the customer address fo
 });
 
 it('should store the shipping address as the billing address when use_for_shipping key is set to true in billing for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -270,7 +270,7 @@ it('should store the shipping address as the billing address when use_for_shippi
 });
 
 it('should store the billing and shipping address for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -377,7 +377,7 @@ it('should store the billing and shipping address for guest user', function () {
 });
 
 it('should store the billing address for non stockable items for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -464,7 +464,7 @@ it('should store the billing address for non stockable items for guest user', fu
 });
 
 it('should store the shipping address as the billing address when use_for_shipping key is set to true in billing for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -569,7 +569,7 @@ it('should store the shipping address as the billing address when use_for_shippi
 });
 
 it('should store the billing and shipping address for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -679,7 +679,7 @@ it('should store the billing and shipping address for customer', function () {
 });
 
 it('should store the billing address for non stockable items for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -769,7 +769,7 @@ it('should store the billing address for non stockable items for customer', func
 });
 
 it('should fails the certain validation errors when use for shipping is set to false in billing address and shipping address not provided for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -840,7 +840,7 @@ it('should fails the certain validation errors when use for shipping is set to f
 });
 
 it('should fails the certain validation errors when use for shipping is set to false in billing address and shipping address not provided for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -908,7 +908,7 @@ it('should fails the certain validation errors when use for shipping is set to f
 });
 
 it('should fails the validation error when shipping method not providing when store the shipping method for the guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -973,7 +973,7 @@ it('should fails the validation error when shipping method not providing when st
 });
 
 it('should fails the validation error when shipping method not providing when store the shipping method for the customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1043,7 +1043,7 @@ it('should fails the validation error when shipping method not providing when st
 });
 
 it('should store the shipping method for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1125,7 +1125,7 @@ it('should store the shipping method for guest user', function () {
 });
 
 it('should store the shipping method for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1212,7 +1212,7 @@ it('should store the shipping method for customer', function () {
 });
 
 it('should fails the validation error when store the payment method for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1277,7 +1277,7 @@ it('should fails the validation error when store the payment method for guest us
 });
 
 it('should store the payment method for guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1410,7 +1410,7 @@ it('should store the payment method for guest user', function () {
 });
 
 it('should store the payment method for customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1549,7 +1549,7 @@ it('should store the payment method for customer', function () {
 });
 
 it('should place a simple product order for a guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1704,7 +1704,7 @@ it('should place a simple product order for a guest user', function () {
 });
 
 it('should place a simple product order for a guest user and send mail to guest and admin', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -1867,7 +1867,7 @@ it('should place a simple product order for a guest user and send mail to guest 
 });
 
 it('should place a simple product order for a customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2026,7 +2026,7 @@ it('should place a simple product order for a customer', function () {
 });
 
 it('should place a simple product order for a customer and send email to the customer', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -2198,7 +2198,7 @@ it('should place a simple product order for a customer and send email to the cus
 });
 
 it('should place a configurable product order for a guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2368,7 +2368,7 @@ it('should place a configurable product order for a guest user', function () {
 });
 
 it('should place a configurable product order for a guest user and send email to the guest user', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -2546,7 +2546,7 @@ it('should place a configurable product order for a guest user and send email to
 });
 
 it('should place a configurable product order for a customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2724,7 +2724,7 @@ it('should place a configurable product order for a customer', function () {
 });
 
 it('should place a configurable product order for a customer and send email to the user', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -2910,7 +2910,7 @@ it('should place a configurable product order for a customer and send email to t
 });
 
 it('should place a virtual product order for a guest user', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -3042,7 +3042,7 @@ it('should place a virtual product order for a guest user', function () {
 });
 
 it('should place a virtual product order for a guest user and send email to the guest user', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -3184,7 +3184,7 @@ it('should place a virtual product order for a guest user and send email to the 
 });
 
 it('should place a virtual product order for a customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -3324,7 +3324,7 @@ it('should place a virtual product order for a customer', function () {
 });
 
 it('should place a virtual product order for a customer and send email to the user', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -3472,7 +3472,7 @@ it('should place a virtual product order for a customer and send email to the us
 });
 
 it('should place a downloadable product order for a customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -3608,7 +3608,7 @@ it('should place a downloadable product order for a customer', function () {
 });
 
 it('should place a downloadable product order for a customer and send email to the user', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -3752,7 +3752,7 @@ it('should place a downloadable product order for a customer and send email to t
 });
 
 it('should not return the cash on delivery payment method if product is downloadable', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -3847,7 +3847,7 @@ it('should not return the cash on delivery payment method if product is download
 });
 
 it('should not return the shipping methods if product is downloadable', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -3941,7 +3941,7 @@ it('should not return the shipping methods if product is downloadable', function
 });
 
 it('should not return the cash on delivery payment method if product is virtual', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -4036,7 +4036,7 @@ it('should not return the cash on delivery payment method if product is virtual'
 });
 
 it('should not return the shipping methods if product is virtual', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -4130,7 +4130,7 @@ it('should not return the shipping methods if product is virtual', function () {
 });
 
 it('should place order with two products with simple and configurable product type', function () {
-    // Arrange
+    // Arrange.
     $simpleProduct = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -4371,7 +4371,7 @@ it('should place order with two products with simple and configurable product ty
 });
 
 it('should place order with two products with simple and grouped product type', function () {
-    // Arrange
+    // Arrange.
     $simpleProduct = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -4609,7 +4609,7 @@ it('should place order with two products with simple and grouped product type', 
 });
 
 it('should place order with two products with simple and downloadable product type', function () {
-    // Arrange
+    // Arrange.
     $simpleProduct = (new ProductFaker([
         'attributes' => [
             5  => 'new',

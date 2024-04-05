@@ -10,7 +10,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should fail the validation with errors when certain inputs are not provided when store in bundle product', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'))
@@ -21,12 +21,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should return the create page of bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
     $productId = $product->id + 1;
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'), [
@@ -49,10 +49,10 @@ it('should return the create page of bundle product', function () {
 });
 
 it('should return the edit page of bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.edit', $product->id))
@@ -66,10 +66,10 @@ it('should return the edit page of bundle product', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id))
@@ -82,10 +82,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors if certain data is not provided correctly in bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -109,7 +109,7 @@ it('should fail the validation with errors if certain data is not provided corre
 });
 
 it('should update the bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
     $options = [];
@@ -136,7 +136,7 @@ it('should update the bundle product', function () {
         ];
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -210,10 +210,10 @@ it('should update the bundle product', function () {
 });
 
 it('should delete a bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.products.delete', $product->id))

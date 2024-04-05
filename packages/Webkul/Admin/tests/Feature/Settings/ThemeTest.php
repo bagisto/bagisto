@@ -8,7 +8,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('should returns the theme index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.themes.index'))
@@ -18,7 +18,7 @@ it('should returns the theme index page', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the theme', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.themes.store'))
@@ -30,11 +30,11 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should fail the validation with errors when correct type not provided when store the theme', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.themes.store'), [
-        'type' => fake()->word(),
+        'type' => 'INVALID_TYPE',
     ])
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('sort_order')
@@ -44,12 +44,12 @@ it('should fail the validation with errors when correct type not provided when s
 });
 
 it('should store the newly created theme', function () {
-    // Arrange
+    // Arrange.
     $lastThemeId = ThemeCustomization::factory()->create()->id + 1;
 
     $types = ['product_carousel', 'category_carousel', 'image_carousel', 'footer_links', 'services_content'];
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.themes.store'), [
@@ -74,10 +74,10 @@ it('should store the newly created theme', function () {
 });
 
 it('should fail the validation with errors when correct type not provided when update the theme', function () {
-    // Arrange
+    // Arrange.
     $theme = ThemeCustomization::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.themes.update', $theme->id))
@@ -168,7 +168,7 @@ it('should update the theme customizations', function () {
     $data['channel_id'] = core()->getCurrentChannel()->id;
     $data['status'] = 'on';
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.themes.update', $theme->id), $data)
@@ -187,10 +187,10 @@ it('should update the theme customizations', function () {
 });
 
 it('should delete the theme', function () {
-    // Arrange
+    // Arrange.
     $theme = ThemeCustomization::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.themes.delete', $theme->id))

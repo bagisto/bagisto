@@ -15,7 +15,7 @@ use Webkul\Sales\Models\OrderPayment;
 use function Pest\Laravel\get;
 
 it('should return the index page of customers reporting', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.customers.index'))
@@ -30,7 +30,7 @@ it('should return the index page of customers reporting', function () {
 });
 
 it('should return the customers stats report', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     Customer::factory()->count(2)->create();
@@ -43,7 +43,7 @@ it('should return the customers stats report', function () {
 });
 
 it('should return the customers with most reviews stats report', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $product = (new ProductFaker([
@@ -67,7 +67,7 @@ it('should return the customers with most reviews stats report', function () {
         'product_id'  => $product->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.customers.stats', [
@@ -80,10 +80,10 @@ it('should return the customers with most reviews stats report', function () {
 });
 
 it('should return the top customers group stats report', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.customers.stats', [
@@ -95,12 +95,12 @@ it('should return the top customers group stats report', function () {
 });
 
 it('should return the customers traffic stats report', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     visitor()->visit($customer);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.customers.stats', [
@@ -112,7 +112,7 @@ it('should return the customers traffic stats report', function () {
 });
 
 it('should return the customers with most orders stats report', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -192,7 +192,7 @@ it('should return the customers with most orders stats report', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.customers.stats', [
@@ -206,7 +206,7 @@ it('should return the customers with most orders stats report', function () {
 });
 
 it('should return the customers with most sales stats report', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -286,7 +286,7 @@ it('should return the customers with most sales stats report', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.reporting.customers.stats', [

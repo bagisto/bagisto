@@ -23,7 +23,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('should return the index page of Orders page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.orders.index'))
@@ -32,7 +32,7 @@ it('should return the index page of Orders page', function () {
 });
 
 it('should return the view page of order', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -153,7 +153,7 @@ it('should return the view page of order', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.orders.view', $order->id))
@@ -166,7 +166,7 @@ it('should return the view page of order', function () {
 });
 
 it('should cancel the order', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -287,7 +287,7 @@ it('should cancel the order', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.orders.cancel', $order->id))
@@ -305,7 +305,7 @@ it('should cancel the order', function () {
 });
 
 it('should cancel the order and send the notification to the customer', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     CoreConfig::factory()->create([
@@ -438,7 +438,7 @@ it('should cancel the order and send the notification to the customer', function
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.orders.cancel', $order->id))
@@ -462,7 +462,7 @@ it('should cancel the order and send the notification to the customer', function
 });
 
 it('should give validation error when store the comment to the order', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -583,7 +583,7 @@ it('should give validation error when store the comment to the order', function 
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.orders.comment', $order->id))
@@ -592,7 +592,7 @@ it('should give validation error when store the comment to the order', function 
 });
 
 it('should comment to the order', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -733,7 +733,7 @@ it('should comment to the order', function () {
 });
 
 it('should comment to the order and send mail to the customer', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -881,7 +881,7 @@ it('should comment to the order and send mail to the customer', function () {
 });
 
 it('should search the order', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',

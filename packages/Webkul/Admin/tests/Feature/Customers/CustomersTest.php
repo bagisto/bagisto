@@ -15,7 +15,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the customers page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.customers.customers.index'))
@@ -25,12 +25,12 @@ it('should returns the customers page', function () {
 });
 
 it('should return listing items of customers', function () {
-    // Arrange
+    // Arrange.
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.customers.customers.index'), [
@@ -44,12 +44,12 @@ it('should return listing items of customers', function () {
 });
 
 it('should return the view page of customer', function () {
-    // Arrange
+    // Arrange.
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.customers.customers.view', $customer->id))
@@ -63,7 +63,7 @@ it('should return the view page of customer', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in customer', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.store'))
@@ -75,7 +75,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should create a new customer', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.store'), [
@@ -135,12 +135,12 @@ it('should create a new customer and send notification to the customer', functio
 });
 
 it('should search the customers for mega search', function () {
-    // Arrange
+    // Arrange.
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.customers.customers.search'), [
@@ -153,12 +153,12 @@ it('should search the customers for mega search', function () {
 });
 
 it('should login the customer from the admin panel', function () {
-    // Arrange
+    // Arrange.
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.customers.customers.login_as_customer', $customer->id))
@@ -167,12 +167,12 @@ it('should login the customer from the admin panel', function () {
 });
 
 it('should fail the validation with errors for notes', function () {
-    // Arrange
+    // Arrange.
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customer.note.store', $customer->id))
@@ -181,12 +181,12 @@ it('should fail the validation with errors for notes', function () {
 });
 
 it('should store the notes for the customer', function () {
-    // Arrange
+    // Arrange.
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customer.note.store', $customer->id), [
@@ -205,14 +205,14 @@ it('should store the notes for the customer', function () {
 });
 
 it('should store the notes for the customer and send email to the customer', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customer.note.store', $customer->id), [
@@ -236,12 +236,12 @@ it('should store the notes for the customer and send email to the customer', fun
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in customer', function () {
-    // Arrange
+    // Arrange.
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.customers.customers.update', $customer->id))
@@ -253,12 +253,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update the the existing customer', function () {
-    // Arrange
+    // Arrange.
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.customers.customers.update', $customer->id), [
@@ -283,12 +283,12 @@ it('should update the the existing customer', function () {
 });
 
 it('should mass delete the customers', function () {
-    // Arrange
+    // Arrange.
     $customers = (new CustomerFaker())->factory()->count(2)->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.mass_delete'), [
@@ -305,12 +305,12 @@ it('should mass delete the customers', function () {
 });
 
 it('should mass update the customers', function () {
-    // Arrange
+    // Arrange.
     $customers = (new CustomerFaker())->factory()->count(2)->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.mass_update'), [
@@ -333,12 +333,12 @@ it('should mass update the customers', function () {
 });
 
 it('should delete a specific customer', function () {
-    // Arrange
+    // Arrange.
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.delete', $customer->id))

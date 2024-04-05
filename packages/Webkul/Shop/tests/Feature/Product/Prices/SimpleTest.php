@@ -18,7 +18,7 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
 it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the no coupon type for all customer group type', function () {
-    // Arrange
+    // Arrange.
     (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -70,7 +70,7 @@ it('should fails the validation error when the product id not provided add a sim
         'ends_till'                 => null,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'quantity' => rand(1, 10),
     ]))
@@ -89,7 +89,7 @@ it('should fails the validation error when the product id not provided add a sim
 });
 
 it('should add a simple product to the cart with a cart rule of the no coupon type for all customer group type', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -141,7 +141,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
         'ends_till'                 => null,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'quantity'   => $quantity = rand(1, 10),
@@ -168,7 +168,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 });
 
 it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the no coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -220,7 +220,7 @@ it('should fails the validation error when the product id not provided add a sim
         'ends_till'                 => null,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'quantity' => rand(1, 10),
     ]))
@@ -239,7 +239,7 @@ it('should fails the validation error when the product id not provided add a sim
 });
 
 it('should add a simple product to the cart with a cart rule of the no coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -291,7 +291,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
         'ends_till'                 => null,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'quantity'   => $quantity = rand(1, 10),
@@ -318,7 +318,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 });
 
 it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the no coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -368,7 +368,7 @@ it('should fails the validation error when the product id not provided add a sim
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -389,7 +389,7 @@ it('should fails the validation error when the product id not provided add a sim
 });
 
 it('should add a simple product to the cart with a cart rule of the no coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -439,7 +439,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -468,7 +468,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 });
 
 it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -518,7 +518,7 @@ it('should fails the validation error when the product id not provided add a sim
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -539,7 +539,7 @@ it('should fails the validation error when the product id not provided add a sim
 });
 
 it('should add a simple product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -589,7 +589,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -617,7 +617,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
 });
 
 it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -695,7 +695,7 @@ it('should fails the validation error when the product id not provided add a sim
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
@@ -714,7 +714,7 @@ it('should fails the validation error when the product id not provided add a sim
 });
 
 it('should add a simple product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -792,7 +792,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
         'code' => $couponCode,
     ])
@@ -818,7 +818,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 });
 
 it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the specific coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -893,7 +893,7 @@ it('should fails the validation error when the product id not provided add a sim
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
@@ -912,7 +912,7 @@ it('should fails the validation error when the product id not provided add a sim
 });
 
 it('should add a simple product to the cart with a cart rule of the specific coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -987,7 +987,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
         'code' => $couponCode,
     ])
@@ -1013,7 +1013,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 });
 
 it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the specific coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1087,7 +1087,7 @@ it('should fails the validation error when the product id not provided add a sim
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1115,7 +1115,7 @@ it('should fails the validation error when the product id not provided add a sim
 });
 
 it('should add a simple product to the cart with a cart rule of the specific coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1189,7 +1189,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1217,7 +1217,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 });
 
 it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1291,7 +1291,7 @@ it('should fails the validation error when the product id not provided add a sim
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -1312,7 +1312,7 @@ it('should fails the validation error when the product id not provided add a sim
 });
 
 it('should add a simple product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1386,7 +1386,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 
     cart()->putCart($cart);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1414,7 +1414,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
 });
 
 it('should check tax is applying for the simple product into the cart for simple product', function () {
-    // Arrange
+    // Arrange.
     $taxCategory = TaxCategory::factory()->create();
 
     $taxRate = TaxRate::factory()->create([
@@ -1505,7 +1505,7 @@ it('should check tax is applying for the simple product into the cart for simple
 });
 
 it('should fails the validation error when the product id not provided check customer group price for guest customer with fixed price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1537,7 +1537,7 @@ it('should fails the validation error when the product id not provided check cus
         'customer_group_id' => 1,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'quantity'   => $productCustomerGroupPrice->qty,
     ]))
@@ -1554,7 +1554,7 @@ it('should fails the validation error when the product id not provided check cus
 });
 
 it('should check customer group price for guest customer with fixed price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1586,7 +1586,7 @@ it('should check customer group price for guest customer with fixed price type f
         'customer_group_id' => 1,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'quantity'   => $productCustomerGroupPrice->qty,
@@ -1610,7 +1610,7 @@ it('should check customer group price for guest customer with fixed price type f
 });
 
 it('should fails the validation error when the product id not provided check customer group price for guest customer with discount price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1642,7 +1642,7 @@ it('should fails the validation error when the product id not provided check cus
         'customer_group_id' => 1,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'quantity'   => $productCustomerGroupPrice->qty,
     ]))
@@ -1659,7 +1659,7 @@ it('should fails the validation error when the product id not provided check cus
 });
 
 it('should check customer group price for guest customer with discount price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1695,7 +1695,7 @@ it('should check customer group price for guest customer with discount price typ
 
     $grandTotal = ($totalAmount - ($totalAmount * ($productCustomerGroupPrice->value / 100)));
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'quantity'   => $productCustomerGroupPrice->qty,
@@ -1718,7 +1718,7 @@ it('should check customer group price for guest customer with discount price typ
 });
 
 it('should fails the validation when product id not provided when check customer group price for general customer with fixed price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1748,7 +1748,7 @@ it('should fails the validation when product id not provided when check customer
 
     $customer = Customer::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -1767,7 +1767,7 @@ it('should fails the validation when product id not provided when check customer
 });
 
 it('should check customer group price for general customer with fixed price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1797,7 +1797,7 @@ it('should check customer group price for general customer with fixed price type
 
     $customer = Customer::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -1823,7 +1823,7 @@ it('should check customer group price for general customer with fixed price type
 });
 
 it('should fails the validation error when product id not provided when check customer group price for general customer with discount price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1853,7 +1853,7 @@ it('should fails the validation error when product id not provided when check cu
 
     $customer = Customer::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -1872,7 +1872,7 @@ it('should fails the validation error when product id not provided when check cu
 });
 
 it('should check customer group price for general customer with discount price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1906,7 +1906,7 @@ it('should check customer group price for general customer with discount price t
 
     $grandTotal = ($totalAmount - ($totalAmount * ($productCustomerGroupPrice->value / 100)));
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -1931,7 +1931,7 @@ it('should check customer group price for general customer with discount price t
 });
 
 it('should fails the validation error when product id not provided check customer group price for wholesale customer with fixed price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1961,7 +1961,7 @@ it('should fails the validation error when product id not provided check custome
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -1980,7 +1980,7 @@ it('should fails the validation error when product id not provided check custome
 });
 
 it('should check customer group price for wholesale customer with fixed price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2010,7 +2010,7 @@ it('should check customer group price for wholesale customer with fixed price ty
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2036,7 +2036,7 @@ it('should check customer group price for wholesale customer with fixed price ty
 });
 
 it('should fails the validation error when product id not provided check customer group price for wholesale customer with discount price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2066,7 +2066,7 @@ it('should fails the validation error when product id not provided check custome
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -2085,7 +2085,7 @@ it('should fails the validation error when product id not provided check custome
 });
 
 it('should check customer group price for wholesale customer with discount price type for simple product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2119,7 +2119,7 @@ it('should check customer group price for wholesale customer with discount price
 
     $grandTotal = ($totalAmount - ($totalAmount * ($productCustomerGroupPrice->value / 100)));
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2144,7 +2144,7 @@ it('should check customer group price for wholesale customer with discount price
 });
 
 it('should fails the validation error when product id not provided check discount price if catalog rule applied for percentage price for simple product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2154,7 +2154,7 @@ it('should fails the validation error when product id not provided check discoun
         'sort_order' => 1,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'is_buy_now' => '0',
         'quantity'   => '1',
@@ -2165,7 +2165,7 @@ it('should fails the validation error when product id not provided check discoun
 });
 
 it('should check discount price if catalog rule applied for percentage price for simple product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2200,7 +2200,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $grandTotal = $product->price - ($product->price * ($catalogRule->discount_amount / 100));
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'is_buy_now' => '0',
@@ -2231,7 +2231,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should fails the validation error when product id not provided check discount price if catalog rule applied for percentage price for simple product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2243,7 +2243,7 @@ it('should fails the validation error when product id not provided check discoun
         'sort_order' => 1,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -2270,7 +2270,7 @@ it('should fails the validation error when product id not provided check discoun
 });
 
 it('should check discount price if catalog rule applied for percentage price for simple product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2303,7 +2303,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $grandTotal = $product->price - ($product->price * ($catalogRule->discount_amount / 100));
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2336,7 +2336,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should fails the validation error when the product id not provided check discount price if catalog rule applied for percentage price for simple product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2348,7 +2348,7 @@ it('should fails the validation error when the product id not provided check dis
         'sort_order' => 1,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -2375,7 +2375,7 @@ it('should fails the validation error when the product id not provided check dis
 });
 
 it('should check discount price if catalog rule applied for percentage price for simple product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2408,7 +2408,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $grandTotal = $product->price - ($product->price * ($catalogRule->discount_amount / 100));
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2441,7 +2441,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should fails the validation error when the product id not provided check discount price if catalog rule applied for fixed price for simple product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2452,7 +2452,7 @@ it('should fails the validation error when the product id not provided check dis
         'action_type' => 'by_fixed',
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'is_buy_now' => '0',
         'quantity'   => '1',
@@ -2477,7 +2477,7 @@ it('should fails the validation error when the product id not provided check dis
 });
 
 it('should check discount price if catalog rule applied for fixed price for simple product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2511,7 +2511,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'product_id' => $product->id,
         'is_buy_now' => '0',
@@ -2542,7 +2542,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
 });
 
 it('should fails the validation error when the product id not provided check discount price if catalog rule applied for fixed price for simple product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2555,7 +2555,7 @@ it('should fails the validation error when the product id not provided check dis
         'action_type' => 'by_fixed',
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -2582,7 +2582,7 @@ it('should fails the validation error when the product id not provided check dis
 });
 
 it('should check discount price if catalog rule applied for fixed price for simple product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2618,7 +2618,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2651,7 +2651,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
 });
 
 it('should fails the validation error when the product id not provided check discount price if catalog rule applied for fixed price for simple product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2664,7 +2664,7 @@ it('should fails the validation error when the product id not provided check dis
         'action_type' => 'by_fixed',
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -2691,7 +2691,7 @@ it('should fails the validation error when the product id not provided check dis
 });
 
 it('should check discount price if catalog rule applied for fixed price for simple product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2727,7 +2727,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2760,7 +2760,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
 });
 
 it('should check discount price if catalog rule applied for fixed price for simple product for guest customer', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2794,7 +2794,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
@@ -2822,7 +2822,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
 });
 
 it('should check discount price if catalog rule applied for fixed price for simple product for general customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2854,7 +2854,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $this->assertModelWise([
@@ -2884,7 +2884,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
 });
 
 it('should check discount price if catalog rule applied for fixed price for simple product for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2916,7 +2916,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $this->assertModelWise([
@@ -2932,7 +2932,7 @@ it('should check discount price if catalog rule applied for fixed price for simp
 });
 
 it('should check discount price if catalog rule applied for percentage price for simple product for guest customer', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2965,7 +2965,7 @@ it('should check discount price if catalog rule applied for percentage price for
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
@@ -2993,7 +2993,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should check discount price if catalog rule applied for percentage price for simple product for general customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3024,7 +3024,7 @@ it('should check discount price if catalog rule applied for percentage price for
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $this->assertModelWise([
@@ -3054,7 +3054,7 @@ it('should check discount price if catalog rule applied for percentage price for
 });
 
 it('should check discount price if catalog rule applied for percentage price for simple product for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3085,7 +3085,7 @@ it('should check discount price if catalog rule applied for percentage price for
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $this->assertModelWise([

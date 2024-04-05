@@ -19,7 +19,7 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
 it('should returns the index page customers orders', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     get(route('shop.customers.account.orders.index'))
@@ -28,7 +28,7 @@ it('should returns the index page customers orders', function () {
 });
 
 it('should view the order', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -133,7 +133,7 @@ it('should view the order', function () {
         'order_id' => $order->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     get(route('shop.customers.account.orders.view', $order->id))
@@ -205,7 +205,7 @@ it('should view the order', function () {
 });
 
 it('should cancel the customer order', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -310,7 +310,7 @@ it('should cancel the customer order', function () {
         'order_id' => $order->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.customers.account.orders.cancel', $order->id))
@@ -378,7 +378,7 @@ it('should cancel the customer order', function () {
 });
 
 it('should print the order invoice', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -507,7 +507,7 @@ it('should print the order invoice', function () {
         'additional'           => $orderItem->additional,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     getJson(route('shop.customers.account.orders.print-invoice', $invoice->id))

@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should return the email template index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.email_templates.index'))
@@ -18,7 +18,7 @@ it('should return the email template index page', function () {
 });
 
 it('should return the create page of email template', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.email_templates.create'))
@@ -28,7 +28,7 @@ it('should return the create page of email template', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in email template', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.email_templates.store'))
@@ -39,7 +39,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors when certain inputs are not provided also status field not provided correctly when store in email template', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.email_templates.store'), [
@@ -52,7 +52,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should store the newly create email template', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.email_templates.store', [
@@ -75,10 +75,10 @@ it('should store the newly create email template', function () {
 });
 
 it('should edit the email template', function () {
-    // Arrange
+    // Arrange.
     $emailTemplate = Template::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.email_templates.edit', $emailTemplate->id))
@@ -89,10 +89,10 @@ it('should edit the email template', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in email template', function () {
-    // Arrange
+    // Arrange.
     $emailTemplate = Template::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.email_templates.update', $emailTemplate->id))
@@ -103,10 +103,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors when certain inputs are not provided also status field not provided correctly when update in email template', function () {
-    // Arrange
+    // Arrange.
     $emailTemplate = Template::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.email_templates.update', $emailTemplate->id))
@@ -117,10 +117,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update the existing the template', function () {
-    // Arrange
+    // Arrange.
     $emailTemplate = Template::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.email_templates.update', $emailTemplate->id), [
@@ -143,10 +143,10 @@ it('should update the existing the template', function () {
 });
 
 it('should delete the specified email template', function () {
-    // Arrange
+    // Arrange.
     $emailTemplate = Template::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.communications.email_templates.delete', $emailTemplate->id))
