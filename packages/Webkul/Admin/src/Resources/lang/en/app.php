@@ -3420,6 +3420,10 @@ return [
                     'shop-email-from'       => 'Shop Email Address',
                     'shop-email-from-tip'   => 'The email address of this channel to send emails to your customers',
                     'title'                 => 'Email Settings',
+                    'contact-email'         => 'Contact Email',
+                    'contact-email-tip'     => 'The email address will be shown at the bottom of your emails',
+                    'contact-name'          => 'Contact Name',
+                    'contact-name-tip'      => 'This name will be shown at the bottom of your emails',
                 ],
 
                 'notifications' => [
