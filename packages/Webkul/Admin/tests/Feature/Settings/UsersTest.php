@@ -45,7 +45,7 @@ it('should fail the validation with errors when confirm password not provided wh
         ->assertUnprocessable();
 });
 
-it('should store the newly created user/admin', function () {
+it('should store the newly created admin', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
@@ -73,7 +73,7 @@ it('should store the newly created user/admin', function () {
     ]);
 });
 
-it('should fails the validation error with tempered avatar provided when store the user/admin', function () {
+it('should fails the validation error with tempered avatar provided when store the admin', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
@@ -93,28 +93,28 @@ it('should fails the validation error with tempered avatar provided when store t
 
 it('should returns the user and its roles', function () {
     // Arrange.
-    $user = Admin::factory()->create();
+    $admin = Admin::factory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
 
-    get(route('admin.settings.users.edit', $user->id))
+    get(route('admin.settings.users.edit', $admin->id))
         ->assertOk()
         ->assertJsonPath('roles.0.id', 1)
         ->assertJsonPath('roles.0.name', 'Administrator')
-        ->assertJsonPath('user.id', $user->id)
-        ->assertJsonPath('user.email', $user->email);
+        ->assertJsonPath('user.id', $admin->id)
+        ->assertJsonPath('user.email', $admin->email);
 });
 
 it('should fail the validation with errors when certain field not provided when update the users', function () {
     // Arrange.
-    $user = Admin::factory()->create();
+    $admin = Admin::factory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.users.update'), [
-        'id'       => $user->id,
+        'id'       => $admin->id,
         'password' => 'admin123',
     ])
         ->assertJsonValidationErrorFor('name')
@@ -124,22 +124,22 @@ it('should fail the validation with errors when certain field not provided when 
         ->assertUnprocessable();
 });
 
-it('should update the existing user/admin', function () {
+it('should update the existing admin', function () {
     // Arrange.
-    $user = Admin::factory()->create();
+    $admin = Admin::factory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.users.update'), $data = [
-        'id'                    => $user->id,
-        'name'                  => $user->name,
+        'id'                    => $admin->id,
+        'name'                  => $admin->name,
         'image'                 => [
             UploadedFile::fake()->image('avatar.jpg'),
         ],
         'role_id'               => 1,
-        'email'                 => $email = fake()->email,
-        'password'              => $password = fake()->password,
+        'email'                 => fake()->email(),
+        'password'              => $password = fake()->password(),
         'password_confirmation' => $password,
     ])
         ->assertOk()
@@ -152,41 +152,45 @@ it('should update the existing user/admin', function () {
     ]);
 });
 
-it('should fails the validation error with tempered avatar provided when store the user/adminf', function () {
+it('should fails the validation error with tempered avatar provided when update the admin', function () {
+    // Arrange.
+    $admin = Admin::factory()->create();
+
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.settings.users.store'), [
-        'name'                  => fake()->name(),
+    putJson(route('admin.settings.users.update'), [
+        'id'                    => $admin->id,
+        'name'                  => $admin->name,
+        'image'                 => [
+            UploadedFile::fake()->image('avatar.php'),
+        ],
         'role_id'               => 1,
         'email'                 => fake()->email(),
         'password'              => $password = fake()->password(),
         'password_confirmation' => $password,
-        'image'                 => [
-            UploadedFile::fake()->image('avatar.php'),
-        ],
     ])
         ->assertJsonValidationErrorFor('image.0')
         ->assertUnprocessable();
 });
 
-it('should delete the existing user/admin', function () {
+it('should delete the existing admin', function () {
     // Arrange.
-    $user = Admin::factory()->create();
+    $admin = Admin::factory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.settings.users.delete', $user->id))
+    deleteJson(route('admin.settings.users.delete', $admin->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.delete-success'));
 
     $this->assertDatabaseMissing('admins', [
-        'id' => $user->id,
+        'id' => $admin->id,
     ]);
 });
 
-it('should delete self user/admin', function () {
+it('should delete self admin', function () {
     // Arrange.
     $admin = Admin::factory()->create([
         'password' => Hash::make($password = fake()->password()),
