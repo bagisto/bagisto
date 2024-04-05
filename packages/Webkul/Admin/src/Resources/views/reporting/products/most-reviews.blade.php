@@ -41,7 +41,11 @@
                                 class="grid"
                                 v-for="product in report.statistics"
                             >
-                                <p class="dark:text-white">@{{ product.product_name }}</p>
+                                <p
+                                    class="dark:text-white"
+                                    v-text="product.product_name"
+                                >
+                                </p>
 
                                 <div class="flex gap-5 items-center">
                                     <div class="w-full h-2 relative bg-slate-100">
@@ -51,8 +55,10 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-sm text-gray-600 dark:text-gray-300 font-semibold">
-                                        @{{ product.reviews }}
+                                    <p
+                                        class="text-sm text-gray-600 dark:text-gray-300 font-semibold"
+                                        v-text="product.reviews"
+                                    >
                                     </p>
                                 </div>
                             </div>
@@ -69,8 +75,10 @@
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-xs dark:text-gray-300">
-                                @{{ report.date_range.current }}
+                            <p
+                                class="text-xs dark:text-gray-300"
+                                v-text="report.date_range.current"
+                            >
                             </p>
                         </div>
                     </div>

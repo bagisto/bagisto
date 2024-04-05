@@ -64,17 +64,11 @@
                                 style="grid-template-columns: repeat(3, minmax(0, 1fr));"
                                 v-for="record in report.statistics"
                             >
-                                <p>
-                                    @{{ record.term }}
-                                </p>
+                                <p v-text="record.term"></p>
 
-                                <p>
-                                    @{{ record.results }}
-                                </p>
+                                <p v-text="record.results"></p>
 
-                                <p>
-                                    @{{ record.uses }}
-                                </p>
+                                <p v-text="record.uses"></p>
                             </div>
                         </div>
                     </template>
@@ -89,8 +83,10 @@
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-xs dark:text-gray-300">
-                                @{{ report.date_range.current }}
+                            <p
+                                class="text-xs dark:text-gray-300"
+                                v-text="report.date_range.current"
+                            >
                             </p>
                         </div>
                     </div>

@@ -41,7 +41,11 @@
                                 class="grid"
                                 v-for="customer in report.statistics"
                             >
-                                <p class="dark:text-white">@{{ customer.full_name }}</p>
+                                <p
+                                    class="dark:text-white"
+                                    v-text="customer.full_name"
+                                >
+                                </p>
 
                                 <div class="flex gap-5 items-center">
                                     <div class="w-full h-2 relative bg-slate-100">
@@ -51,8 +55,10 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-sm text-gray-600 dark:text-gray-300 font-semibold">
-                                        @{{ customer.reviews }}
+                                    <p
+                                        class="text-sm text-gray-600 dark:text-gray-300 font-semibold"
+                                        v-text="customer.reviews"
+                                    >
                                     </p>
                                 </div>
                             </div>

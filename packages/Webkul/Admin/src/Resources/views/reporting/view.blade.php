@@ -109,8 +109,10 @@
                                 class="flex gap-2.5 cursor-pointer"
                                 v-for="column in reporing.statistics.columns"
                             >
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    @{{ column.label }}
+                                <p
+                                    class="text-gray-600 dark:text-gray-300"
+                                    v-text="column.label"
+                                >
                                 </p>
                             </div>
                         </div>
@@ -124,8 +126,8 @@
                         >
                             <p
                                 v-for="column in reporing.statistics.columns"
+                                v-text="record[column.key]"
                             >
-                                @{{ record[column.key] }}
                             </p>
                         </div>
 

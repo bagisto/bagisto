@@ -34,8 +34,10 @@
                 <!-- Content -->
                 <div class="grid gap-4">
                     <div class="flex gap-4 justify-between">
-                        <p class="text-3xl text-gray-600 dark:text-gray-300 font-bold leading-9">
-                            @{{ report.statistics.shipping_collected.formatted_total }}
+                        <p
+                            class="text-3xl text-gray-600 dark:text-gray-300 font-bold leading-9"
+                            v-text="report.statistics.shipping_collected.formatted_total"
+                        >
                         </p>
                         
                         <div class="flex gap-0.5 items-center">
@@ -68,16 +70,20 @@
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-xs dark:text-gray-300">
-                                @{{ report.date_range.previous }}
+                            <p
+                                class="text-xs dark:text-gray-300"
+                                v-text="report.date_range.previous"
+                            >
                             </p>
                         </div>
 
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-sky-400"></span>
 
-                            <p class="text-xs dark:text-gray-300">
-                                @{{ report.date_range.current }}
+                            <p
+                                class="text-xs dark:text-gray-300"
+                                v-text="report.date_range.current"
+                            >
                             </p>
                         </div>
                     </div>
@@ -94,7 +100,11 @@
                                 class="grid"
                                 v-for="method in report.statistics.top_methods"
                             >
-                                <p class="dark:text-white">@{{ method.title }}</p>
+                                <p  
+                                    class="dark:text-white"
+                                    v-text="method.title"
+                                >
+                                </p>
 
                                 <div class="flex gap-5 items-center">
                                     <div class="w-full h-2 relative bg-slate-100">
@@ -104,8 +114,10 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-sm text-gray-600 dark:text-gray-300 font-semibold">
-                                        @{{ method.formatted_total }}
+                                    <p
+                                        class="text-sm text-gray-600 dark:text-gray-300 font-semibold"
+                                        v-text="method.formatted_total"
+                                    >
                                     </p>
                                 </div>
                             </div>
@@ -122,8 +134,10 @@
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-xs dark:text-gray-300">
-                                @{{ report.date_range.current }}
+                            <p
+                                class="text-xs dark:text-gray-300"
+                                v-text="report.date_range.current"
+                            >
                             </p>
                         </div>
                     </div>

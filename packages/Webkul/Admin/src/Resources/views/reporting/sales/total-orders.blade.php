@@ -34,8 +34,10 @@
                 <!-- Content -->
                 <div class="grid gap-4">
                     <div class="flex gap-4 justify-between">
-                        <p class="text-3xl text-gray-600 dark:text-gray-300 font-bold leading-9">
-                            @{{ report.statistics.orders.current }}
+                        <p
+                            class="text-3xl text-gray-600 dark:text-gray-300 font-bold leading-9"
+                            v-text="report.statistics.orders.current"
+                        >
                         </p>
                         
                         <div class="flex gap-0.5 items-center">
@@ -68,16 +70,20 @@
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-xs dark:text-gray-300">
-                                @{{ report.date_range.previous }}
+                            <p
+                                class="text-xs dark:text-gray-300"
+                                v-text="report.date_range.previous"
+                            >
                             </p>
                         </div>
 
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-sky-400"></span>
 
-                            <p class="text-xs dark:text-gray-300">
-                                @{{ report.date_range.current }}
+                            <p
+                                class="text-xs dark:text-gray-300"
+                                v-text="report.date_range.current"
+                            >
                             </p>
                         </div>
                     </div>

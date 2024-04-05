@@ -36,8 +36,10 @@
                     <div class="flex gap-4 justify-between">
                         <!-- Abandoned Revenue -->
                         <div class="grid gap-1">
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-                                @{{ report.statistics.sales.formatted_total }}
+                            <p
+                                class="text-base text-gray-800 leading-none dark:text-white font-semibold"
+                                v-text="report.statistics.sales.formatted_total"
+                            >
                             </p>
 
                             <p class="text-xs text-gray-600 leading-none dark:text-gray-300 font-semibold">
@@ -61,8 +63,10 @@
 
                         <!-- Abandoned Cart -->
                         <div class="grid gap-1">
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-                                @{{ report.statistics.carts.current }}
+                            <p
+                                class="text-base text-gray-800 leading-none dark:text-white font-semibold"
+                                v-text="report.statistics.carts.current"
+                            >
                             </p>
 
                             <p class="text-xs text-gray-600 leading-none dark:text-gray-300 font-semibold">
@@ -132,7 +136,11 @@
                                 class="grid"
                                 v-for="product in report.statistics.products"
                             >
-                                <p class="dark:text-white">@{{ product.name }}</p>
+                                <p  
+                                    class="dark:text-white"
+                                    v-text="product.name"
+                                >
+                                </p>
 
                                 <div class="flex gap-5 items-center">
                                     <div class="w-full h-2 relative bg-slate-100">
@@ -142,8 +150,10 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-sm text-gray-600 dark:text-gray-300 font-semibold">
-                                        @{{ product.count }}
+                                    <p
+                                        class="text-sm text-gray-600 dark:text-gray-300 font-semibold"
+                                        v-text="product.count"
+                                    >
                                     </p>
                                 </div>
                             </div>
@@ -160,8 +170,10 @@
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-blue-500"></span>
 
-                            <p class="text-xs dark:text-gray-300">
-                                @{{ report.date_range.current }}
+                            <p  
+                                class="text-xs dark:text-gray-300"
+                                v-text="report.date_range.current"
+                            >
                             </p>
                         </div>
                     </div>

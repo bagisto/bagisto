@@ -64,9 +64,7 @@
                     >
                     </span>
 
-                    <a
-                        href="javascript:void(0);"
-                    >
+                    <a href="javascript:void(0);">
                         @lang('admin::app.sales.orders.view.cancel')    
                     </a>
                 </div>
