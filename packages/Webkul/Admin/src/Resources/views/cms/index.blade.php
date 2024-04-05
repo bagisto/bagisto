@@ -21,7 +21,7 @@
                         <!-- Current Channel -->
                         <div class="p-1.5 items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md">
                             <p class="text-gray-600 dark:text-gray-300  font-semibold leading-6">
-                                @lang('admin::app.cms.index.chanel') - {{ core()->getCurrentChannel()->name }}
+                                @lang('admin::app.cms.index.channel') - {{ core()->getCurrentChannel()->name }}
                             </p>
                         </div>
 
