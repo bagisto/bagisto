@@ -2158,9 +2158,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => 'Il :name è già stato preso.',
-            'create-btn'        => 'Crea Pagina',
-            'title'             => 'Pagine',
+            'already-taken' => 'Il :name è già stato preso.',
+            'create-btn'    => 'Crea Pagina',
+            'channel'       => 'Canale',
+            'language'      => 'Lingua',
+            'title'         => 'Pagine',
 
             'datagrid' => [
                 'delete'              => 'Elimina',

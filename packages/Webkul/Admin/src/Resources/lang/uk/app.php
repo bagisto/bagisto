@@ -2158,8 +2158,10 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => 'Назва :name вже використовується.',
+            'already-taken' => 'Це ім\'я :name вже використовується.',
             'create-btn'    => 'Створити сторінку',
+            'channel'       => 'Канал',
+            'language'      => 'Мова',
             'title'         => 'Сторінки',
 
             'datagrid' => [

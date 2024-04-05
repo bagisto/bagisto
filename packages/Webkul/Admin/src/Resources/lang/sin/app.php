@@ -2159,9 +2159,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name මෙය දැක්කාකාරීත්වයේ සහිතව පවතියි.',
-            'create-btn'        => 'පිටද සාදන්න',
-            'title'             => 'පිටවල',
+            'already-taken' => 'මෙම :name දැනටමත් අර්ථයක් ඇතුළත් විය.',
+            'create-btn'    => 'පිටුව සාදන්න',
+            'channel'       => 'චැනල්',
+            'language'      => 'භාෂාව',
+            'title'         => 'පිටුවෙන්',
 
             'datagrid' => [
                 'delete'              => 'මකනවා',

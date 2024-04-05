@@ -2158,9 +2158,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name כבר תפוס.',
-            'create-btn'        => 'צור עמוד',
-            'title'             => 'עמודים',
+            'already-taken' => 'ה-:name כבר תפוס.',
+            'create-btn'    => 'צור עמוד',
+            'channel'       => 'ערוץ',
+            'language'      => 'שפה',
+            'title'         => 'עמודים',
 
             'datagrid' => [
                 'delete'              => 'מחק',

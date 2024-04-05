@@ -2158,9 +2158,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name قبلا استفاده شده است.',
-            'create-btn'        => 'ایجاد صفحه',
-            'title'             => 'صفحه‌ها',
+            'already-taken' => 'این :name قبلاً استفاده شده است.',
+            'create-btn'    => 'ایجاد صفحه',
+            'channel'       => 'کانال',
+            'language'      => 'زبان',
+            'title'         => 'صفحه‌ها',
 
             'datagrid' => [
                 'delete'              => 'حذف',

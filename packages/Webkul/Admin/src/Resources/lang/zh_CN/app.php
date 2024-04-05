@@ -2158,9 +2158,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name 已被使用。',
-            'create-btn'        => '创建页面',
-            'title'             => '页面',
+            'already-taken' => '该 :name 已被使用。',
+            'create-btn'    => '创建页面',
+            'channel'       => '渠道',
+            'language'      => '语言',
+            'title'         => '页面',
 
             'datagrid' => [
                 'delete'              => '删除',

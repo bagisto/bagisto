@@ -2158,9 +2158,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => ':name ইতিমধ্যে নেওয়া হয়েছে।',
+            'already-taken' => 'এই :name ইতিমধ্যে নেওয়া হয়েছে।',
             'create-btn'    => 'পৃষ্ঠা তৈরি করুন',
-            'title'         => 'পৃষ্ঠাগুলি',
+            'channel'       => 'চ্যানেল',
+            'language'      => 'ভাষা',
+            'title'         => 'পৃষ্ঠা',
 
             'datagrid' => [
                 'delete'              => 'মুছে ফেলা',

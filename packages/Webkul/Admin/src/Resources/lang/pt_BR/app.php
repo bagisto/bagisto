@@ -2158,9 +2158,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => 'O :name já está em uso.',
-            'create-btn'        => 'Criar Página',
-            'title'             => 'Páginas',
+            'already-taken' => 'O :name já foi utilizado.',
+            'create-btn'    => 'Criar Página',
+            'channel'       => 'Canal',
+            'language'      => 'Idioma',
+            'title'         => 'Páginas',
 
             'datagrid' => [
                 'delete'              => 'Excluir',

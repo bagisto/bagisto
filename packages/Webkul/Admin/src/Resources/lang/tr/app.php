@@ -2158,9 +2158,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name zaten alınmıştır.',
-            'create-btn'        => 'Sayfa Oluştur',
-            'title'             => 'Sayfalar',
+            'already-taken' => ':name zaten alınmış.',
+            'create-btn'    => 'Sayfa Oluştur',
+            'channel'       => 'Kanal',
+            'language'      => 'Dil',
+            'title'         => 'Sayfalar',
 
             'datagrid' => [
                 'delete'              => 'Sil',

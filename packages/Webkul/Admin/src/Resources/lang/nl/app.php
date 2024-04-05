@@ -2159,8 +2159,10 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'De :name is al in gebruik.',
-            'create-btn'    => 'Pagina Maken',
-            'title'         => 'Pagina’s',
+            'create-btn'    => 'Pagina aanmaken',
+            'channel'       => 'Kanaal',
+            'language'      => 'Taal',
+            'title'         => 'Pagina\'s',
 
             'datagrid' => [
                 'delete'              => 'Verwijderen',

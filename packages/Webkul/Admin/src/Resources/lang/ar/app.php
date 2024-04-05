@@ -2158,8 +2158,10 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => ':name تم أخذه بالفعل.',
+            'already-taken' => 'تم استخدام :name بالفعل.',
             'create-btn'    => 'إنشاء صفحة',
+            'channel'       => 'القناة',
+            'language'      => 'اللغة',
             'title'         => 'الصفحات',
 
             'datagrid' => [

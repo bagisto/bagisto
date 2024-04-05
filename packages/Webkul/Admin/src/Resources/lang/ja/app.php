@@ -2160,6 +2160,8 @@ return [
         'index' => [
             'already-taken' => ':name は既に使用されています。',
             'create-btn'    => 'ページを作成',
+            'channel'       => 'チャンネル',
+            'language'      => '言語',
             'title'         => 'ページ',
 
             'datagrid' => [

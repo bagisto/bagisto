@@ -2158,9 +2158,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name पहले से ले लिया गया है।',
-            'create-btn'        => 'पेज बनाएं',
-            'title'             => 'पेज',
+            'already-taken' => 'यह :name पहले से ही लिया जा चुका है।',
+            'create-btn'    => 'पेज बनाएं',
+            'channel'       => 'चैनल',
+            'language'      => 'भाषा',
+            'title'         => 'पेज',
 
             'datagrid' => [
                 'delete'              => 'हटाएं',

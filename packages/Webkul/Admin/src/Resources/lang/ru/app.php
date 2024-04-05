@@ -2158,9 +2158,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => 'Такое имя :name уже занято.',
-            'create-btn'        => 'Создать страницу',
-            'title'             => 'Страницы',
+            'already-taken' => 'Это имя :name уже занято.',
+            'create-btn'    => 'Создать страницу',
+            'channel'       => 'Канал',
+            'language'      => 'Язык',
+            'title'         => 'Страницы',
 
             'datagrid' => [
                 'delete'              => 'Удалить',
