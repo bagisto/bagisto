@@ -709,6 +709,8 @@ it('should fails the validation error when the product id not provided add a sim
     $this->prepareCartRuleCustomerGroup($cartRule);
 
     $this->prepareCartRuleChannel($cartRule);
+
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a simple product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
@@ -1593,6 +1595,8 @@ it('should check customer group price for guest customer with fixed price type f
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items.0.quantity', $productCustomerGroupPrice->qty)
         ->assertJsonPath('data.items_qty', $productCustomerGroupPrice->qty);
+
+    $this->assertPrice($productCustomerGroupPrice->value * $productCustomerGroupPrice->qty, $response['data']['grand_total']);
 
     $this->assertPrice($productCustomerGroupPrice->value * $productCustomerGroupPrice->qty, $response['data']['grand_total']);
 
