@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
+use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\ProductReview;
+use Webkul\Product\Models\ProductReviewAttachment;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -34,18 +38,58 @@ it('should return the edit page of the review', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $review = ProductReview::factory()->create([
-        'product_id' => $product->id,
+    $customer = Customer::factory()->create();
+
+    $productReview = ProductReview::factory()->create([
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+        'name'        => $customer->name,
+    ]);
+
+    $attachment = UploadedFile::fake()->image('test.png');
+
+    $fileType = explode('/', $attachment->getMimeType());
+
+    $productReviewAttachment = ProductReviewAttachment::factory()->create([
+        'path'      => $attachment->store('review/'.$productReview->id),
+        'review_id' => $productReview->id,
+        'type'      => $fileType[0],
+        'mime_type' => $fileType[1],
     ]);
 
     // Act and Assert
     $this->loginAsAdmin();
 
-    get(route('admin.customers.customers.review.edit', $review->id))
+    get(route('admin.customers.customers.review.edit', $productReview->id))
         ->assertOk()
-        ->assertJsonPath('data.id', $review->id)
-        ->assertJsonPath('data.title', $review->title)
-        ->assertJsonPath('data.comment', $review->comment);
+        ->assertJsonPath('data.id', $productReview->id)
+        ->assertJsonPath('data.title', $productReview->title)
+        ->assertJsonPath('data.comment', $productReview->comment);
+
+    $this->assertModelWise([
+        ProductReviewAttachment::class => [
+            [
+                'review_id' => $productReview->id,
+                'path'      => $productReviewAttachment->path,
+                'type'      => $productReviewAttachment->type,
+                'mime_type' => $productReviewAttachment->mime_type,
+            ],
+        ],
+
+        ProductReview::class => [
+            [
+                'name'        => $productReview->name,
+                'title'       => $productReview->title,
+                'rating'      => $productReview->rating,
+                'comment'     => $productReview->comment,
+                'status'      => $productReview->status,
+                'product_id'  => $productReview->product_id,
+                'customer_id' => $productReview->customer_id,
+            ],
+        ],
+    ]);
+
+    Storage::assertExists($productReviewAttachment->path);
 });
 
 it('should fail the validation with errors for status for review update', function () {
@@ -64,16 +108,56 @@ it('should fail the validation with errors for status for review update', functi
         ->getSimpleProductFactory()
         ->create();
 
-    $review = ProductReview::factory()->create([
-        'product_id' => $product->id,
+    $customer = Customer::factory()->create();
+
+    $productReview = ProductReview::factory()->create([
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+        'name'        => $customer->name,
+    ]);
+
+    $attachment = UploadedFile::fake()->image('test.png');
+
+    $fileType = explode('/', $attachment->getMimeType());
+
+    $productReviewAttachment = ProductReviewAttachment::factory()->create([
+        'path'      => $attachment->store('review/'.$productReview->id),
+        'review_id' => $productReview->id,
+        'type'      => $fileType[0],
+        'mime_type' => $fileType[1],
     ]);
 
     // Act and Assert
     $this->loginAsAdmin();
 
-    putJson(route('admin.customers.customers.review.update', $review->id))
+    putJson(route('admin.customers.customers.review.update', $productReview->id))
         ->assertJsonValidationErrorFor('status')
         ->assertUnprocessable();
+
+    $this->assertModelWise([
+        ProductReviewAttachment::class => [
+            [
+                'review_id' => $productReview->id,
+                'path'      => $productReviewAttachment->path,
+                'type'      => $productReviewAttachment->type,
+                'mime_type' => $productReviewAttachment->mime_type,
+            ],
+        ],
+
+        ProductReview::class => [
+            [
+                'name'        => $productReview->name,
+                'title'       => $productReview->title,
+                'rating'      => $productReview->rating,
+                'comment'     => $productReview->comment,
+                'status'      => $productReview->status,
+                'product_id'  => $productReview->product_id,
+                'customer_id' => $productReview->customer_id,
+            ],
+        ],
+    ]);
+
+    Storage::assertExists($productReviewAttachment->path);
 });
 
 it('should update the status of the review', function () {
@@ -92,27 +176,58 @@ it('should update the status of the review', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $review = ProductReview::factory()->create([
-        'product_id' => $product->id,
+    $customer = Customer::factory()->create();
+
+    $productReview = ProductReview::factory()->create([
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+        'name'        => $customer->name,
+    ]);
+
+    $attachment = UploadedFile::fake()->image('test.png');
+
+    $fileType = explode('/', $attachment->getMimeType());
+
+    $productReviewAttachment = ProductReviewAttachment::factory()->create([
+        'path'      => $attachment->store('review/'.$productReview->id),
+        'review_id' => $productReview->id,
+        'type'      => $fileType[0],
+        'mime_type' => $fileType[1],
     ]);
 
     // Act and Assert
     $this->loginAsAdmin();
 
-    putJson(route('admin.customers.customers.review.update', $review->id), [
+    putJson(route('admin.customers.customers.review.update', $productReview->id), [
         'status' => $status = Arr::random(['approved', 'disapproved', 'pending']),
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.customers.reviews.update-success'));
 
     $this->assertModelWise([
+        ProductReviewAttachment::class => [
+            [
+                'review_id' => $productReview->id,
+                'path'      => $productReviewAttachment->path,
+                'type'      => $productReviewAttachment->type,
+                'mime_type' => $productReviewAttachment->mime_type,
+            ],
+        ],
+
         ProductReview::class => [
             [
-                'id'     => $review->id,
-                'status' => $status,
+                'name'        => $productReview->name,
+                'title'       => $productReview->title,
+                'rating'      => $productReview->rating,
+                'comment'     => $productReview->comment,
+                'status'      => $status,
+                'product_id'  => $productReview->product_id,
+                'customer_id' => $productReview->customer_id,
             ],
         ],
     ]);
+
+    Storage::assertExists($productReviewAttachment->path);
 });
 
 it('should delete the review', function () {
@@ -131,20 +246,41 @@ it('should delete the review', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $review = ProductReview::factory()->create([
-        'product_id' => $product->id,
+    $customer = Customer::factory()->create();
+
+    $productReview = ProductReview::factory()->create([
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+        'name'        => $customer->name,
+    ]);
+
+    $attachment = UploadedFile::fake()->image('test.png');
+
+    $fileType = explode('/', $attachment->getMimeType());
+
+    $productReviewAttachment = ProductReviewAttachment::factory()->create([
+        'path'      => $attachment->store('review/'.$productReview->id),
+        'review_id' => $productReview->id,
+        'type'      => $fileType[0],
+        'mime_type' => $fileType[1],
     ]);
 
     // Act and assert
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.customers.customers.review.delete', $review->id))
+    deleteJson(route('admin.customers.customers.review.delete', $productReview->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.delete-success'));
 
     $this->assertDatabaseMissing('product_reviews', [
-        'id' => $review->id,
+        'id' => $productReview->id,
     ]);
+
+    $this->assertDatabaseMissing('product_review_attachments', [
+        'id' => $productReviewAttachment->id,
+    ]);
+
+    Storage::assertDirectoryEmpty($productReviewAttachment->path);
 });
 
 it('should mass delete the product review', function () {
@@ -163,23 +299,50 @@ it('should mass delete the product review', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $reviews = ProductReview::factory()->count(2)->create([
-        'product_id' => $product->id,
+    $customer = Customer::factory()->create();
+
+    $productReviews = ProductReview::factory()->count(5)->create([
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+        'name'        => $customer->name,
     ]);
+
+    $productReviewAttachments = [];
+
+    foreach ($productReviews as $productReview) {
+        $attachment = UploadedFile::fake()->image('test.png');
+
+        $fileType = explode('/', $attachment->getMimeType());
+
+        $productReviewAttachments[] = ProductReviewAttachment::factory()->create([
+            'path'      => $attachment->store('review/'.$productReview->id),
+            'review_id' => $productReview->id,
+            'type'      => $fileType[0],
+            'mime_type' => $fileType[1],
+        ]);
+    }
 
     // Act and Assert
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.review.mass_delete', [
-        'indices' => $reviews->pluck('id')->toArray(),
+        'indices' => $productReviews->pluck('id')->toArray(),
     ]))
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.mass-delete-success'));
 
-    foreach ($reviews as $review) {
+    foreach ($productReviews as $productReview) {
         $this->assertDatabaseMissing('product_reviews', [
-            'id' => $review->id,
+            'id' => $productReview->id,
         ]);
+    }
+
+    foreach ($productReviewAttachments as $productReviewAttachment) {
+        $this->assertDatabaseMissing('product_review_attachments', [
+            'id' => $productReviewAttachment->id,
+        ]);
+
+        Storage::assertDirectoryEmpty($productReviewAttachment->path);
     }
 });
 
@@ -201,7 +364,7 @@ it('should mass update the product review', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $reviews = ProductReview::factory()->count(2)->create([
+    $productReviews = ProductReview::factory()->count(2)->create([
         'status'     => $status,
         'product_id' => $product->id,
     ]);
@@ -210,18 +373,18 @@ it('should mass update the product review', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.review.mass_update', [
-        'indices' => $reviews->pluck('id')->toArray(),
+        'indices' => $productReviews->pluck('id')->toArray(),
         'value'   => $status,
     ]))
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.mass-update-success'));
 
-    foreach ($reviews as $review) {
+    foreach ($productReviews as $productReview) {
         $this->assertModelWise([
             ProductReview::class => [
                 [
-                    'id'     => $review->id,
-                    'status' => $review->status,
+                    'id'     => $productReview->id,
+                    'status' => $productReview->status,
                 ],
             ],
         ]);

@@ -33,7 +33,7 @@ it('should returns the listing cms', function () {
         ->assertJsonPath('meta.total', 11);
 });
 
-it('should create the new cms page', function () {
+it('should return the cms create page', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
@@ -55,15 +55,29 @@ it('should fail the validation with errors when certain inputs are not provided 
         ->assertUnprocessable();
 });
 
+it('should fail with the error URL key not provided in the correct format', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.cms.store'), [
+        'url_key' => 'invalid url key',
+    ])
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertUnprocessable();
+});
+
 it('should store newly created cms pages', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
     postJson(route('admin.cms.store'), [
-        'url_key'      => $slug = fake()->slug(),
-        'page_title'   => $pageTitle = fake()->title(),
-        'html_content' => $htmlContent = substr(fake()->paragraph(), 0, 50),
-        'channels'     => [
+        'url_key'          => $slug = fake()->slug(),
+        'page_title'       => $pageTitle = fake()->title(),
+        'html_content'     => $htmlContent = substr(fake()->paragraph(), 0, 50),
+        'meta_title'       => $metaTitle = fake()->title(),
+        'meta_keywords'    => $metaKeywords = fake()->word(),
+        'meta_description' => $metaDescription = fake()->paragraph(3),
+        'channels'         => [
             'value' => 1,
         ],
     ])
@@ -73,9 +87,12 @@ it('should store newly created cms pages', function () {
     $this->assertModelWise([
         PageTranslation::class => [
             [
-                'url_key'      => $slug,
-                'page_title'   => $pageTitle,
-                'html_content' => $htmlContent,
+                'url_key'          => $slug,
+                'page_title'       => $pageTitle,
+                'html_content'     => $htmlContent,
+                'meta_title'       => $metaTitle,
+                'meta_keywords'    => $metaKeywords,
+                'meta_description' => $metaDescription,
             ],
         ],
     ]);

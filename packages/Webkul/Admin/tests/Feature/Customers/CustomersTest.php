@@ -54,6 +54,11 @@ it('should return the view page of customer', function () {
 
     get(route('admin.customers.customers.view', $customer->id))
         ->assertOk()
+        ->assertSeeText($customer->first_name)
+        ->assertSeeText($customer->last_name)
+        ->assertSeeText($customer->gender)
+        ->assertSeeText($customer->email)
+        ->assertSeeText($customer->phone)
         ->assertSeeText(trans('admin::app.customers.customers.view.title'));
 });
 
