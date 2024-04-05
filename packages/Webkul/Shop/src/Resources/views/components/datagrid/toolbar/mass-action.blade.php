@@ -92,9 +92,9 @@
 
                 <div class="ltr:pl-2.5 rtl:pr-2.5">
                     <p class="text-sm font-light text-gray-800">
-                        @{{ "@lang('admin::app.components.datagrid.toolbar.length-of')".replace(':length', massActions.indices.length) }}
+                        @{{ "@lang('shop::app.components.datagrid.toolbar.length-of')".replace(':length', massActions.indices.length) }}
 
-                        @{{ "@lang('admin::app.components.datagrid.toolbar.selected')".replace(':total', available.meta.total) }}
+                        @{{ "@lang('shop::app.components.datagrid.toolbar.selected')".replace(':total', available.meta.total) }}
                     </p>
                 </div>
             </div>
@@ -136,13 +136,13 @@
                  */
                 validateMassAction() {
                     if (! this.massActions.indices.length) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.no-records-selected')" });
+                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.components.datagrid.toolbar.mass-actions.no-records-selected')" });
 
                         return false;
                     }
 
                     if (! this.massActions.meta.action) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.must-select-a-mass-action')" });
+                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.components.datagrid.toolbar.mass-actions.must-select-a-mass-action')" });
 
                         return false;
                     }
@@ -151,7 +151,7 @@
                         this.massActions.meta.action?.options?.length &&
                         this.massActions.value === null
                     ) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.must-select-a-mass-action-option')" });
+                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.components.datagrid.toolbar.mass-actions.must-select-a-mass-action-option')" });
 
                         return false;
                     }

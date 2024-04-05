@@ -20,7 +20,7 @@
             :get-searched-values="getSearchedValues"
         >
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.toolbar.search />
+                <x-shop::shimmer.datagrid.toolbar.search />
             </template>
 
             <template v-else>
@@ -45,8 +45,8 @@
 
                     <!-- Information Panel -->
                     <div class="ltr:pl-2.5 rtl:pr-2.5">
-                        <p class="text-sm font-light text-gray-800 dark:text-white">
-                            @{{ "@lang('admin::app.components.datagrid.toolbar.results')".replace(':total', available.meta.total) }}
+                        <p class="text-sm font-light text-gray-800">
+                            @{{ "@lang('shop::app.components.datagrid.toolbar.results')".replace(':total', available.meta.total) }}
                         </p>
                     </div>
                 </div>

@@ -368,58 +368,50 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Aktion auswählen',
-                    'select-option' => 'Option auswählen',
-                    'submit'        => 'Absenden',
-                ],
+                'length-of' => ':length von',
+                'results'   => ':total Ergebnisse',
+                'selected'  => ':total Ausgewählt',
 
-                'filter' => [
-                    'title' => 'Filter',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Sie müssen eine Massenaktion auswählen.',
+                    'must-select-a-mass-action-option' => 'Sie müssen eine Option für die Massenaktion auswählen.',
+                    'no-records-selected'              => 'Es wurden keine Datensätze ausgewählt.',
+                    'select-action'                    => 'Aktion auswählen',
                 ],
 
                 'search' => [
-                    'title' => 'Suchen',
+                    'title' => 'Suche',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Filter anwenden',
+                'filter' => [
+                    'apply-filter' => 'Filter anwenden',
+                    'title'        => 'Filter',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Escribe al menos 2 caracteres...',
-                        'no-results'        => 'No se encontraron resultados...',
+                    'dropdown' => [
+                        'select' => 'Auswählen',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Geben Sie mindestens 2 Zeichen ein...',
+                            'no-results'         => 'Kein Ergebnis gefunden...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Alle löschen',
-                    'title'     => 'Benutzerdefinierte Filter',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Letzter Monat',
-                    'last-six-months'   => 'Letzte 6 Monate',
-                    'last-three-months' => 'Letzte 3 Monate',
-                    'this-month'        => 'Diesen Monat',
-                    'this-week'         => 'Diese Woche',
-                    'this-year'         => 'Dieses Jahr',
-                    'today'             => 'Heute',
-                    'yesterday'         => 'Gestern',
+                    'custom-filters' => [
+                        'clear-all' => 'Alles löschen',
+                    ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'Acciones',
-                'next-page'            => 'Siguiente Página',
-                'no-records-available' => 'No hay registros disponibles.',
-                'of'                   => 'de :total entradas',
-                'page-navigation'      => 'Navegación de Página',
-                'page-number'          => 'Número de Página',
-                'previous-page'        => 'Página Anterior',
-                'showing'              => 'Mostrando :firstItem',
-                'to'                   => 'a :lastItem',
+                'actions'              => 'Aktionen',
+                'next-page'            => 'Nächste Seite',
+                'no-records-available' => 'Keine Datensätze verfügbar.',
+                'of'                   => 'von :total Einträgen',
+                'page-navigation'      => 'Seitennavigation',
+                'page-number'          => 'Seitennummer',
+                'previous-page'        => 'Vorherige Seite',
+                'showing'              => 'Zeige :firstItem',
+                'to'                   => 'bis :lastItem',
             ],
         ],
 

@@ -368,58 +368,50 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Eylem Seç',
-                    'select-option' => 'Seçenek Seç',
-                    'submit'        => 'Gönder',
-                ],
+                'length-of' => ':length adet',
+                'results'   => ':total Sonuç',
+                'selected'  => ':total Seçildi',
 
-                'filter' => [
-                    'title' => 'Filtre',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Bir toplu işlem seçmelisiniz.',
+                    'must-select-a-mass-action-option' => 'Bir toplu işlem seçeneği seçmelisiniz.',
+                    'no-records-selected'              => 'Hiçbir kayıt seçilmedi.',
+                    'select-action'                    => 'İşlem Seç',
                 ],
 
                 'search' => [
                     'title' => 'Ara',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Filtreleri Uygula',
+                'filter' => [
+                    'apply-filter' => 'Filtreleri Uygula',
+                    'title'        => 'Filtrele',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'En az 2 karakter yazın...',
-                        'no-results'        => 'Sonuç bulunamadı...',
+                    'dropdown' => [
+                        'select' => 'Seç',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'En az 2 karakter girin...',
+                            'no-results'         => 'Sonuç bulunamadı...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Tümünü Temizle',
-                    'title'     => 'Özel Filtreler',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Geçen Ay',
-                    'last-six-months'   => 'Son 6 Ay',
-                    'last-three-months' => 'Son 3 Ay',
-                    'this-month'        => 'Bu Ay',
-                    'this-week'         => 'Bu Hafta',
-                    'this-year'         => 'Bu Yıl',
-                    'today'             => 'Bugün',
-                    'yesterday'         => 'Dün',
+                    'custom-filters' => [
+                        'clear-all' => 'Tümünü Temizle',
+                    ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'Eylemler',
+                'actions'              => 'İşlemler',
                 'next-page'            => 'Sonraki Sayfa',
                 'no-records-available' => 'Kayıt bulunamadı.',
-                'of'                   => 'toplam :total girdi',
+                'of'                   => 'toplam :total kayıt',
                 'page-navigation'      => 'Sayfa Gezinme',
                 'page-number'          => 'Sayfa Numarası',
                 'previous-page'        => 'Önceki Sayfa',
                 'showing'              => 'Gösteriliyor :firstItem',
-                'to'                   => 'ilâ :lastItem',
+                'to'                   => ':lastItem arasında',
             ],
         ],
 

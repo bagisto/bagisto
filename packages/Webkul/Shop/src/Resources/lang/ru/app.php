@@ -368,45 +368,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Выбрать действие',
-                    'select-option' => 'Выбрать опцию',
-                    'submit'        => 'Отправить',
-                ],
+                'length-of' => ':length из',
+                'results'   => ':total Результаты',
+                'selected'  => ':total Выбрано',
 
-                'filter' => [
-                    'title' => 'Фильтр',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Вы должны выбрать массовое действие.',
+                    'must-select-a-mass-action-option' => 'Вы должны выбрать опцию массового действия.',
+                    'no-records-selected'              => 'Не выбрано ни одной записи.',
+                    'select-action'                    => 'Выберите действие',
                 ],
 
                 'search' => [
                     'title' => 'Поиск',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Применить фильтры',
+                'filter' => [
+                    'apply-filter' => 'Применить фильтры',
+                    'title'        => 'Фильтр',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Введите как минимум 2 символа...',
-                        'no-results'        => 'Результатов не найдено...',
+                    'dropdown' => [
+                        'select' => 'Выбрать',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Введите хотя бы 2 символа...',
+                            'no-results'         => 'Результаты не найдены...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Очистить все',
-                    'title'     => 'Пользовательские фильтры',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Последний месяц',
-                    'last-six-months'   => 'Последние 6 месяцев',
-                    'last-three-months' => 'Последние 3 месяца',
-                    'this-month'        => 'В этом месяце',
-                    'this-week'         => 'На этой неделе',
-                    'this-year'         => 'В этом году',
-                    'today'             => 'Сегодня',
-                    'yesterday'         => 'Вчера',
+                    'custom-filters' => [
+                        'clear-all' => 'Очистить все',
+                    ],
                 ],
             ],
 

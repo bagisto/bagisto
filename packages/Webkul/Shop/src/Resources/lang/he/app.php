@@ -368,56 +368,48 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'בחר פעולה',
-                    'select-option' => 'בחר אפשרות',
-                    'submit'        => 'שלח',
-                ],
+                'length-of' => ':length של',
+                'results'   => ':total תוצאות',
+                'selected'  => ':total נבחרו',
 
-                'filter' => [
-                    'title' => 'סנן',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'עליך לבחור פעולה כוללת.',
+                    'must-select-a-mass-action-option' => 'עליך לבחור אפשרות לפעולה כוללת.',
+                    'no-records-selected'              => 'לא נבחרו רשומות.',
+                    'select-action'                    => 'בחר פעולה',
                 ],
 
                 'search' => [
-                    'title' => 'חפש',
+                    'title' => 'חיפוש',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'החל מסננים',
+                'filter' => [
+                    'apply-filter' => 'החל מסננים',
+                    'title'        => 'סינון',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'הקלד לפחות 2 תווים...',
-                        'no-results'        => 'לא נמצאו תוצאות...',
+                    'dropdown' => [
+                        'select' => 'בחר',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'הקלד לפחות 2 תווים...',
+                            'no-results'         => 'לא נמצאו תוצאות...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'נקה הכל',
-                    'title'     => 'סננים מותאמים אישית',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'החודש הקודם',
-                    'last-six-months'   => 'ה-6 חודשים האחרונים',
-                    'last-three-months' => 'ה-3 חודשים האחרונים',
-                    'this-month'        => 'החודש',
-                    'this-week'         => 'השבוע',
-                    'this-year'         => 'השנה',
-                    'today'             => 'היום',
-                    'yesterday'         => 'אתמול',
+                    'custom-filters' => [
+                        'clear-all' => 'נקה הכל',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'פעולות',
-                'next-page'            => 'העמוד הבא',
+                'next-page'            => 'עמוד הבא',
                 'no-records-available' => 'אין רשומות זמינות.',
                 'of'                   => 'מתוך :total רשומות',
                 'page-navigation'      => 'ניווט בעמודים',
                 'page-number'          => 'מספר עמוד',
-                'previous-page'        => 'העמוד הקודם',
+                'previous-page'        => 'עמוד קודם',
                 'showing'              => 'מציג :firstItem',
                 'to'                   => 'עד :lastItem',
             ],
