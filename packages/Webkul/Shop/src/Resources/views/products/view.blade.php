@@ -19,7 +19,7 @@
 
     @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
         <script type="application/ld+json">
-            {{ app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) }}
+            {!! app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) !!}
         </script>
     @endif
 

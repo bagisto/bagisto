@@ -8,7 +8,7 @@
         id="v-product-gallery-template"
     >
         <div>
-            <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
+            <div class="flex gap-8 h-max sticky top-20 max-1180:hidden">
                 <!-- Product Image Slider -->
                 <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] min-w-[100px] flex-wrap">
                     <span
@@ -17,7 +17,7 @@
                         aria-label="@lang('shop::app.components.products.carousel.previous')"
                         tabindex="0"
                         @click="swipeDown"
-                        v-if= "lengthOfMedia"
+                        v-if="lengthOfMedia"
                     >
                     </span>
 
@@ -25,7 +25,7 @@
                         ref="swiperContainer"
                         class="flex flex-col max-h-[540px] gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
                     >
-                        <img 
+                        <img
                             :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === `image_${index}` ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                             v-for="(image, index) in media.images"
                             :src="image.small_image_url"
@@ -36,12 +36,12 @@
                         />
 
                         <!-- Need to Set Play Button  -->
-                        <video 
+                        <video
                             :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === `video_${index}` ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                             v-for="(video, index) in media.videos"
                             @click="change(video, `video_${index}`)"
                         >
-                            <source 
+                            <source
                                 :src="video.video_url"
                                 type="video/mp4"
                             />
@@ -72,12 +72,13 @@
                     v-show="! isMediaLoading"
                 >
                     <img
-                        class="min-w-[450px] rounded-xl" 
-                        :src="baseFile.path" 
+                        class="min-w-[450px] rounded-xl cursor-pointer"
+                        :src="baseFile.path"
                         v-if="baseFile.type == 'image'"
                         alt="{{ $product->name }}"
                         width="560"
                         height="610"
+                        @click="$emitter.emit('v-show-images-zoomer', activeIndex)"
                         @load="onMediaLoad()"
                     />
 
@@ -90,7 +91,7 @@
                             width="475"
                             @loadeddata="onMediaLoad()"
                         >
-                            <source 
+                            <source
                                 :src="baseFile.path"
                                 type="video/mp4"
                             />
@@ -104,9 +105,13 @@
                 <x-shop::media.images.lazy
                     ::src="image.large_image_url"
                     class="min-w-[450px] max-sm:min-w-full w-[490px]"
-                    v-for="image in media.images"
+                    v-for="(image, index) in media.images"
+                    @click="$emitter.emit('v-show-images-zoomer', `image_${index}`)"
                 />
             </div>
+
+            <!-- Gallery Images Zoomer -->
+            <x-shop::products.gallery-zoomer ::images="media.images"></x-shop::products.gallery-zoomer>
         </div>
     </script>
 
@@ -211,10 +216,10 @@
 
                 swipeDown() {
                     const container = this.$refs.swiperContainer;
-                    
+
                     container.scrollTop += this.containerOffset;
                 },
-            }
-        })
+            },
+        });
     </script>
 @endpushOnce
