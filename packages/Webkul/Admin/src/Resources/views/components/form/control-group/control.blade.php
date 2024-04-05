@@ -189,7 +189,7 @@
             v-slot="{ field }"
             type="checkbox"
             class="hidden"
-            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
             name="{{ $name }}"
         >
             <input
@@ -197,20 +197,20 @@
                 name="{{ $name }}"
                 v-bind="field"
                 class="sr-only peer"
-                {{ $attributes->except(['rules', 'label', ':label']) }}
+                {{ $attributes->except(['rules', 'label', ':label', 'key', ':key']) }}
             />
 
-            <v-checkbox-handler
+            <v-checked-handler
                 :field="field"
                 checked="{{ $attributes->get('checked') }}"
             >
-            </v-checkbox-handler>
+            </v-checked-handler>
         </v-field>
 
         <label
              {{ 
                 $attributes
-                    ->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])
+                    ->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key'])
                     ->merge(['class' => 'icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600'])
                     ->merge(['class' => $attributes->get('disabled') ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'])
             }}
@@ -224,7 +224,7 @@
             type="radio"
             class="hidden"
             v-slot="{ field }"
-            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
             name="{{ $name }}"
         >
             <input
@@ -232,13 +232,20 @@
                 name="{{ $name }}"
                 v-bind="field"
                 class="sr-only peer"
-                {{ $attributes->except(['rules', 'label', ':label']) }}
+                {{ $attributes->except(['rules', 'label', ':label', 'key', ':key']) }}
             />
+                
+            <v-checked-handler
+                class="hidden"
+                :field="field"
+                checked="{{ $attributes->get('checked') }}"
+            >
+            </v-checked-handler>
         </v-field>
 
         <label
             class="icon-radio-normal text-2xl peer-checked:icon-radio-selected peer-checked:text-blue-600 cursor-pointer"
-            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
         >
         </label>
 
@@ -250,7 +257,7 @@
                 type="checkbox"
                 class="hidden"
                 v-slot="{ field }"
-                {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+                {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
                 name="{{ $name }}"
             >
                 <input
@@ -259,15 +266,15 @@
                     id="{{ $name }}"
                     class="sr-only peer"
                     v-bind="field"
-                    {{ $attributes->except(['v-model', 'rules', ':rules', 'label', ':label']) }}
+                    {{ $attributes->except(['v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
                 />
                 
-                <v-checkbox-handler
+                <v-checked-handler
                     class="hidden"
                     :field="field"
                     checked="{{ $attributes->get('checked') }}"
                 >
-                </v-checkbox-handler>
+                </v-checked-handler>
             </v-field>
 
             <label
@@ -294,12 +301,12 @@
 @endswitch
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-checkbox-handler-template">
+    <script type="text/x-template" id="v-checked-handler-template">
     </script>
 
     <script type="module">
-        app.component('v-checkbox-handler', {
-            template: '#v-checkbox-handler-template',
+        app.component('v-checked-handler', {
+            template: '#v-checked-handler-template',
 
             props: ['field', 'checked'],
 
