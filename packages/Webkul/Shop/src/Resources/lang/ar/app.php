@@ -118,7 +118,7 @@ return [
                     'title'            => 'العنوان',
                     'update-success'   => 'تم تحديث العنوان بنجاح.',
                 ],
-                
+
                 'create' => [
                     'add-address'    => 'إضافة عنوان',
                     'city'           => 'المدينة',

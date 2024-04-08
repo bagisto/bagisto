@@ -118,7 +118,7 @@ return [
                     'title'            => 'Adres',
                     'update-success'   => 'Adres succesvol bijgewerkt.',
                 ],
-                
+
                 'create' => [
                     'add-address'    => 'Adres Toevoegen',
                     'city'           => 'Stad',

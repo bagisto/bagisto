@@ -118,7 +118,7 @@ return [
                     'title'            => 'पता',
                     'update-success'   => 'पता सफलतापूर्वक अपडेट हो गया है।',
                 ],
-                
+
                 'create' => [
                     'add-address'    => 'पता जोड़ें',
                     'city'           => 'शहर',

@@ -118,7 +118,7 @@ return [
                     'title'            => 'Adresse',
                     'update-success'   => 'L\'adresse a été mise à jour avec succès.',
                 ],
-                
+
                 'create' => [
                     'add-address'    => 'Ajouter une adresse',
                     'city'           => 'Ville',

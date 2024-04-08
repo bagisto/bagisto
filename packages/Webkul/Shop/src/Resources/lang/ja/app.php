@@ -118,7 +118,7 @@ return [
                     'title'            => '住所',
                     'update-success'   => '住所が正常に更新されました。',
                 ],
-                
+
                 'create' => [
                     'add-address'    => '住所を追加',
                     'city'           => '市区町村',
