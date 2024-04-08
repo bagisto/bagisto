@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Webkul\Tax\Models\TaxCategory;
 use Webkul\Tax\Models\TaxRate;
 
@@ -34,10 +35,10 @@ it('should store the tax category', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.settings.taxes.categories.store'), [
-        'code'        => $code = fake()->numerify('code#######'),
-        'name'        => $name = fake()->words(2, true),
-        'description' => $description = fake()->sentence(10),
+    postJson(route('admin.settings.taxes.categories.store'), $data = [
+        'code'        => fake()->numerify('code#######'),
+        'name'        => fake()->words(2, true),
+        'description' => fake()->sentence(10),
         'taxrates'    => TaxRate::factory()->count(2)->create()->pluck('id')->toArray(),
     ])
         ->assertOk()
@@ -46,9 +47,9 @@ it('should store the tax category', function () {
     $this->assertModelWise([
         TaxCategory::class => [
             [
-                'code'        => $code,
-                'name'        => $name,
-                'description' => $description,
+                'code'        => $data['code'],
+                'name'        => $data['name'],
+                'description' => $data['description'],
             ],
         ],
     ]);
@@ -63,9 +64,7 @@ it('should returns the edit page of the tax category', function () {
 
     get(route('admin.settings.taxes.categories.edit', $taxCategory->id))
         ->assertOk()
-        ->assertJsonPath('data.id', $taxCategory->id)
-        ->assertJsonPath('data.code', $taxCategory->code)
-        ->assertJsonPath('data.name', $taxCategory->name);
+        ->assertJsonFragment(Arr::except($taxCategory->toArray(), ['created_at', 'updated_at']));
 });
 
 it('should fail the validation with errors when certain field not provided when update the tax categories', function () {
@@ -92,11 +91,11 @@ it('should update the tax category', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.settings.taxes.categories.update'), [
+    putJson(route('admin.settings.taxes.categories.update'), $data = [
         'id'          => $taxCategory->id,
-        'code'        => $code = fake()->numerify('code#######'),
-        'name'        => $name = fake()->words(2, true),
-        'description' => $description = fake()->sentence(10),
+        'code'        => fake()->numerify('code#######'),
+        'name'        => fake()->words(2, true),
+        'description' => fake()->sentence(10),
         'taxrates'    => TaxRate::factory()->count(2)->create()->pluck('id')->toArray(),
     ])
         ->assertOk()
@@ -105,9 +104,9 @@ it('should update the tax category', function () {
     $this->assertModelWise([
         TaxCategory::class => [
             [
-                'code'        => $code,
-                'name'        => $name,
-                'description' => $description,
+                'code'        => $data['code'],
+                'name'        => $data['name'],
+                'description' => $data['description'],
             ],
         ],
     ]);

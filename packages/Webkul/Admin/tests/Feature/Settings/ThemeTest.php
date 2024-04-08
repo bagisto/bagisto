@@ -47,13 +47,17 @@ it('should store the newly created theme', function () {
     // Arrange.
     $lastThemeId = ThemeCustomization::factory()->create()->id + 1;
 
-    $types = ['product_carousel', 'category_carousel', 'image_carousel', 'footer_links', 'services_content'];
-
     // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.themes.store'), [
-        'type'       => $type = fake()->randomElement($types),
+        'type'       => $type = fake()->randomElement([
+            'product_carousel',
+            'category_carousel',
+            'image_carousel',
+            'footer_links',
+            'services_content',
+        ]),
         'name'       => $name = fake()->name(),
         'sort_order' => $lastThemeId,
         'channel_id' => $channelId = core()->getCurrentChannel()->id,
@@ -107,6 +111,7 @@ it('should update the theme customizations', function () {
             ];
 
             break;
+
         case ThemeCustomization::CATEGORY_CAROUSEL:
             $data[app()->getLocale()] = [
                 'options' => [
@@ -120,6 +125,7 @@ it('should update the theme customizations', function () {
             ];
 
             break;
+
         case ThemeCustomization::IMAGE_CAROUSEL:
             $data[app()->getLocale()] = [
                 'options' => [
@@ -132,6 +138,7 @@ it('should update the theme customizations', function () {
             ];
 
             break;
+
         case ThemeCustomization::FOOTER_LINKS:
             $data[app()->getLocale()] = [
                 'options' => [
@@ -199,5 +206,9 @@ it('should delete the theme', function () {
 
     $this->assertDatabaseMissing('theme_customizations', [
         'id' => $theme->id,
+    ]);
+
+    $this->assertDatabaseMissing('theme_customization_translations', [
+        'theme_customization_id' => $theme->id,
     ]);
 });

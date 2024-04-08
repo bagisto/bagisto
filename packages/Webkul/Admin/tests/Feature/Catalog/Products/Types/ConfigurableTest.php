@@ -115,16 +115,16 @@ it('should update the configurable product', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.products.update', $product->id), [
+    putJson(route('admin.catalog.products.update', $product->id), $data = [
         'sku'               => $product->sku,
         'url_key'           => $product->url_key,
         'channel'           => core()->getCurrentChannelCode(),
         'locale'            => app()->getLocale(),
-        'short_description' => $shortDescription = fake()->sentence(),
-        'description'       => $description = fake()->paragraph(),
-        'name'              => $name = fake()->words(3, true),
-        'price'             => $price = fake()->randomFloat(2, 1, 1000),
-        'weight'            => $weight = fake()->numberBetween(0, 100),
+        'short_description' => fake()->sentence(),
+        'description'       => fake()->paragraph(),
+        'name'              => fake()->words(3, true),
+        'price'             => fake()->randomFloat(2, 1, 1000),
+        'weight'            => fake()->numberBetween(0, 100),
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
@@ -146,11 +146,11 @@ it('should update the configurable product', function () {
                 'product_id'        => $product->id,
                 'type'              => 'configurable',
                 'sku'               => $product->sku,
-                'short_description' => $shortDescription,
-                'description'       => $description,
-                'name'              => $name,
-                'price'             => $price,
-                'weight'            => $weight,
+                'short_description' => $data['short_description'],
+                'description'       => $data['description'],
+                'name'              => $data['name'],
+                'price'             => $data['price'],
+                'weight'            => $data['weight'],
             ],
         ],
     ]);

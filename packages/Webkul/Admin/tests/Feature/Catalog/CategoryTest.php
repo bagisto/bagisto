@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
@@ -47,7 +48,22 @@ it('should return listing items of categories', function () {
         ->assertJsonPath('meta.total', 2);
 });
 
-it('should create a category', function () {
+it('should fail the validation with errors of logo path is not an array and image', function () {
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.categories.store'), [
+        'logo_path'   => fake()->word(),
+        'banner_path' => [UploadedFile::fake()->create('banner.jpg')],
+    ])
+        ->assertJsonValidationErrorFor('logo_path')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('position')
+        ->assertJsonValidationErrorFor('slug')
+        ->assertUnprocessable();
+});
+
+it('should fails the image validation error when provided tempered logo and banner', function () {
     // Arrange.
     $attributes = Attribute::where('is_filterable', 1)->pluck('id')->toArray();
 
@@ -55,11 +71,42 @@ it('should create a category', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.store'), [
-        'slug'        => $slug = fake()->slug(),
-        'name'        => $name = fake()->name(),
+        'slug'        => fake()->slug(),
+        'name'        => fake()->name(),
         'position'    => rand(1, 5),
-        'description' => $description = substr(fake()->paragraph(), 0, 50),
+        'description' => substr(fake()->paragraph(), 0, 50),
         'attributes'  => $attributes,
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo.php'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner.js'),
+        ],
+    ])
+        ->assertJsonValidationErrorFor('logo_path.0')
+        ->assertJsonValidationErrorFor('banner_path.0')
+        ->assertUnprocessable();
+});
+
+it('should create a category', function () {
+    // Arrange.
+    $attributes = Attribute::where('is_filterable', 1)->pluck('id')->toArray();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.categories.store'), $data = [
+        'slug'        => fake()->slug(),
+        'name'        => fake()->name(),
+        'position'    => rand(1, 5),
+        'description' => substr(fake()->paragraph(), 0, 50),
+        'attributes'  => $attributes,
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo.png'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner.png'),
+        ],
     ])
         ->assertRedirect(route('admin.catalog.categories.index'))
         ->isRedirection();
@@ -67,9 +114,9 @@ it('should create a category', function () {
     $this->assertModelWise([
         CategoryTranslation::class => [
             [
-                'slug'        => $slug,
-                'name'        => $name,
-                'description' => $description,
+                'slug'        => $data['slug'],
+                'name'        => $data['name'],
+                'description' => $data['description'],
             ],
         ],
     ]);
@@ -96,23 +143,6 @@ it('should fail the validation with errors of description if display mode produc
     ])
         ->assertJsonValidationErrorFor('attributes')
         ->assertJsonValidationErrorFor('description')
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('position')
-        ->assertJsonValidationErrorFor('slug')
-        ->assertUnprocessable();
-});
-
-it('should fail the validation with errors of logo_path and banner_path is not an array and image', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.catalog.categories.store'), [
-        'logo_path'   => fake()->word(),
-        'banner_path' => fake()->word(),
-    ])
-        ->assertJsonValidationErrorFor('attributes')
-        ->assertJsonValidationErrorFor('banner_path')
-        ->assertJsonValidationErrorFor('logo_path')
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('position')
         ->assertJsonValidationErrorFor('slug')
@@ -170,7 +200,7 @@ it('should fail the validation with errors when certain inputs are not provided 
         ->assertUnprocessable();
 });
 
-it('should update a category', function () {
+it('should fails the validation with certain provided inputs', function () {
     // Arrange.
     $category = (new CategoryFaker())->factory()->create();
 
@@ -185,10 +215,45 @@ it('should update a category', function () {
             'slug'        => $category->slug,
             'description' => $description = substr(fake()->paragraph(), 0, 50),
         ],
+        'locale'      => config('app.locale'),
+        'attributes'  => $attributes,
+        'position'    => rand(1, 5),
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo.py'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner.js'),
+        ],
+    ])
+        ->assertJsonValidationErrorFor('logo_path.0')
+        ->assertJsonValidationErrorFor('banner_path.0')
+        ->assertUnprocessable();
+});
 
-        'locale'     => config('app.locale'),
-        'attributes' => $attributes,
-        'position'   => rand(1, 5),
+it('should update a category', function () {
+    // Arrange.
+    $category = (new CategoryFaker())->factory()->create();
+
+    $attributes = Attribute::where('is_filterable', 1)->pluck('id')->toArray();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.categories.update', $category->id), [
+        'en' => $data = [
+            'name'        => fake()->name(),
+            'description' => substr(fake()->paragraph(), 0, 50),
+            'slug'        => $category->slug,
+        ],
+        'locale'      => config('app.locale'),
+        'attributes'  => $attributes,
+        'position'    => rand(1, 5),
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo.png'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner.png'),
+        ],
     ])
         ->assertRedirect(route('admin.catalog.categories.index'))
         ->isRedirection();
@@ -196,9 +261,9 @@ it('should update a category', function () {
     $this->assertModelWise([
         CategoryTranslation::class => [
             [
-                'name'        => $name,
+                'name'        => $data['name'],
                 'slug'        => $category->slug,
-                'description' => $description,
+                'description' => $data['description'],
             ],
         ],
     ]);

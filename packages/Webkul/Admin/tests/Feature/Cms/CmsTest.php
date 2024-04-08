@@ -178,6 +178,10 @@ it('should delete the cms page', function () {
     $this->assertDatabaseMissing('cms_pages', [
         'id' => $cms->id,
     ]);
+
+    $this->assertDatabaseMissing('cms_page_translations', [
+        'cms_page_id' => $cms->id,
+    ]);
 });
 
 it('should mass delete cms pages', function () {
@@ -196,6 +200,10 @@ it('should mass delete cms pages', function () {
     foreach ($cmsPages as $page) {
         $this->assertDatabaseMissing('cms_pages', [
             'id' => $page->id,
+        ]);
+
+        $this->assertDatabaseMissing('cms_page_translations', [
+            'cms_page_id' => $page->id,
         ]);
     }
 });

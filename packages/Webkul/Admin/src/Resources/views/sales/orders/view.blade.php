@@ -15,7 +15,7 @@
                 </p>
 
                 <!-- Order Status -->
-            <span class="label-{{ $order->status }} text-sm mx-1.5">
+                <span class="label-{{ $order->status }} text-sm mx-1.5">
                     @lang("admin::app.sales.orders.view.$order->status")
                 </span>
             </div>

@@ -115,8 +115,8 @@ it('should update the existing attribute families', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.families.update', $attributeFamily->id), [
-        'code' => $updatedCode = fake()->numerify('code#######'),
+    putJson(route('admin.catalog.families.update', $attributeFamily->id), $data = [
+        'code' => fake()->numerify('code#######'),
         'name' => $attributeFamily->name,
     ])
         ->assertRedirectToRoute('admin.catalog.families.index')
@@ -124,10 +124,7 @@ it('should update the existing attribute families', function () {
 
     $this->assertModelWise([
         AttributeFamilyModel::class => [
-            [
-                'code' => $updatedCode,
-                'name' => $attributeFamily->name,
-            ],
+            $data,
         ],
     ]);
 });

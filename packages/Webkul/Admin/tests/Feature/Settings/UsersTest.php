@@ -49,11 +49,11 @@ it('should store the newly created admin', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.settings.users.store'), [
-        'name'                  => $name = fake()->name(),
+    postJson(route('admin.settings.users.store'), $data = [
+        'name'                  => fake()->name(),
         'role_id'               => 1,
-        'email'                 => $email = fake()->email,
-        'password'              => $password = fake()->password,
+        'email'                 => fake()->email,
+        'password'              => $password = fake()->password(),
         'password_confirmation' => $password,
         'image'                 => [
             UploadedFile::fake()->image('avatar.jpg'),
@@ -65,9 +65,9 @@ it('should store the newly created admin', function () {
     $this->assertModelWise([
         Admin::class => [
             [
-                'name'    => $name,
+                'name'    => $data['name'],
+                'email'   => $data['email'],
                 'role_id' => 1,
-                'email'   => $email,
             ],
         ],
     ]);

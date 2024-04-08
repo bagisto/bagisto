@@ -136,9 +136,9 @@ it('should update the specified locale', function () {
     $this->assertModelWise([
         Locale::class => [
             [
-                'code'      => $locale->code,
                 'name'      => $data['name'],
                 'code'      => $data['code'],
+                'direction' => $data['direction'],
                 'logo_path' => 'locales/'.$locale->code.'.png',
             ],
         ],

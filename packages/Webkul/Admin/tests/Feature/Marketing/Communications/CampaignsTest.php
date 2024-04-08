@@ -62,20 +62,20 @@ it('should fail the validation with errors when certain inputs are not provided 
 
 it('should store the newly created campaigns', function () {
     // Arrange.
-    $emailTemplate = Template::factory()->create();
+    $marketingTemplate = Template::factory()->create();
 
     $event = Event::factory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.marketing.communications.campaigns.store'), [
-        'name'                  => $name = fake()->name(),
-        'subject'               => $subject = fake()->title(),
-        'marketing_template_id' => $emailTemplate->id,
+    postJson(route('admin.marketing.communications.campaigns.store'), $data = [
+        'name'                  => fake()->name(),
+        'subject'               => fake()->title(),
+        'marketing_template_id' => $marketingTemplate->id,
         'marketing_event_id'    => $event->id,
         'channel_id'            => 1,
-        'customer_group_id'     => $customerGroupId = rand(1, 3),
+        'customer_group_id'     => rand(1, 3),
     ])
         ->assertRedirect(route('admin.marketing.communications.campaigns.index'))
         ->isRedirect();
@@ -83,12 +83,12 @@ it('should store the newly created campaigns', function () {
     $this->assertModelWise([
         Campaign::class => [
             [
-                'name'                  => $name,
-                'subject'               => $subject,
-                'marketing_template_id' => $emailTemplate->id,
+                'name'                  => $data['name'],
+                'subject'               => $data['subject'],
+                'marketing_template_id' => $marketingTemplate->id,
                 'marketing_event_id'    => $event->id,
                 'channel_id'            => 1,
-                'customer_group_id'     => $customerGroupId,
+                'customer_group_id'     => $data['customer_group_id'],
             ],
         ],
     ]);
@@ -153,9 +153,9 @@ it('should update specified the campaigns', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.marketing.communications.campaigns.edit', $campaign->id), [
+    putJson(route('admin.marketing.communications.campaigns.edit', $campaign->id), $data = [
         'name'                  => $campaign->name,
-        'subject'               => $subject = fake()->title(),
+        'subject'               => fake()->title(),
         'marketing_template_id' => $campaign->marketing_template_id,
         'marketing_event_id'    => $event->id,
         'channel_id'            => 1,
@@ -169,7 +169,7 @@ it('should update specified the campaigns', function () {
             [
                 'id'                    => $campaign->id,
                 'name'                  => $campaign->name,
-                'subject'               => $subject,
+                'subject'               => $data['subject'],
                 'marketing_template_id' => $campaign->marketing_template_id,
                 'marketing_event_id'    => $event->id,
                 'channel_id'            => 1,

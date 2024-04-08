@@ -222,16 +222,16 @@ it('should update the downloadable product', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.products.update', $product->id), [
+    putJson(route('admin.catalog.products.update', $product->id), $data = [
         'sku'                => $product->sku,
         'url_key'            => $product->url_key,
-        'short_description'  => $shortDescription = fake()->sentence(),
-        'description'        => $description = fake()->paragraph(),
-        'name'               => $name = fake()->words(3, true),
-        'price'              => $price = fake()->randomFloat(2, 1, 1000),
-        'weight'             => $weight = fake()->numberBetween(0, 100),
-        'channel'            => $channel = core()->getCurrentChannelCode(),
-        'locale'             => $locale = app()->getLocale(),
+        'short_description'  => fake()->sentence(),
+        'description'        => fake()->paragraph(),
+        'name'               => fake()->words(3, true),
+        'price'              => fake()->randomFloat(2, 1, 1000),
+        'weight'             => fake()->numberBetween(0, 100),
+        'channel'            => core()->getCurrentChannelCode(),
+        'locale'             => app()->getLocale(),
         'downloadable_links' => [
             'link_0' => [
                 'en' => [
@@ -298,13 +298,13 @@ it('should update the downloadable product', function () {
                 'type'              => 'downloadable',
                 'sku'               => $product->sku,
                 'url_key'           => $product->url_key,
-                'name'              => $name,
-                'short_description' => $shortDescription,
-                'description'       => $description,
-                'price'             => $price,
-                'weight'            => $weight,
-                'locale'            => $locale,
-                'channel'           => $channel,
+                'name'              => $data['name'],
+                'short_description' => $data['short_description'],
+                'description'       => $data['description'],
+                'price'             => $data['price'],
+                'weight'            => $data['weight'],
+                'locale'            => $data['locale'],
+                'channel'           => $data['channel'],
             ],
         ],
     ]);

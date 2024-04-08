@@ -42,10 +42,10 @@ it('should store the newly created tax rates', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.settings.taxes.rates.store'), [
-        'identifier' => $identifier = strtolower(fake()->name()),
-        'country'    => $country = fake()->country(),
-        'tax_rate'   => $taxRate = rand(1, 50),
+    postJson(route('admin.settings.taxes.rates.store'), $data = [
+        'identifier' => strtolower(fake()->name()),
+        'country'    => fake()->country(),
+        'tax_rate'   => rand(1, 50),
     ])
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
         ->isRedirection();
@@ -53,9 +53,9 @@ it('should store the newly created tax rates', function () {
     $this->assertModelWise([
         TaxRate::class => [
             [
-                'identifier' => $identifier,
-                'country'    => $country,
-                'tax_rate'   => $taxRate,
+                'identifier' => $data['identifier'],
+                'country'    => $data['country'],
+                'tax_rate'   => $data['tax_rate'],
             ],
         ],
     ]);
@@ -95,9 +95,9 @@ it('should update the tax rate', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.settings.taxes.rates.update', $taxRate->id), [
-        'identifier' => $identifier = fake()->name(),
-        'country'    => $country = fake()->country(),
+    putJson(route('admin.settings.taxes.rates.update', $taxRate->id), $data = [
+        'identifier' => fake()->name(),
+        'country'    => fake()->country(),
         'tax_rate'   => $taxRate->tax_rate,
     ])
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
@@ -106,8 +106,8 @@ it('should update the tax rate', function () {
     $this->assertModelWise([
         TaxRate::class => [
             [
-                'identifier' => $identifier,
-                'country'    => $country,
+                'identifier' => $data['identifier'],
+                'country'    => $data['country'],
                 'tax_rate'   => $taxRate->tax_rate,
             ],
         ],

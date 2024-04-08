@@ -42,10 +42,10 @@ it('should store the newly created roles', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.settings.roles.store'), [
-        'name'            => $name = fake()->name(),
-        'permission_type' => $permissionType = fake()->randomElement(['custom', 'all']),
-        'description'     => $description = fake()->sentence(),
+    postJson(route('admin.settings.roles.store'), $data = [
+        'name'            => fake()->name(),
+        'permission_type' => fake()->randomElement(['custom', 'all']),
+        'description'     => fake()->sentence(),
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
@@ -53,9 +53,9 @@ it('should store the newly created roles', function () {
     $this->assertModelWise([
         Role::class => [
             [
-                'name'            => $name,
-                'permission_type' => $permissionType,
-                'description'     => $description,
+                'name'            => $data['name'],
+                'permission_type' => $data['permission_type'],
+                'description'     => $data['description'],
             ],
         ],
     ]);
@@ -68,10 +68,10 @@ it('should returns the edit page of roles', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.settings.roles.edit', $role->id), [
-        'name'            => $name = fake()->name(),
-        'permission_type' => $permissionType = fake()->randomElement(['custom', 'all']),
-        'description'     => $description = fake()->sentence(),
+    putJson(route('admin.settings.roles.edit', $role->id), $data = [
+        'name'            => fake()->name(),
+        'permission_type' => fake()->randomElement(['custom', 'all']),
+        'description'     => fake()->sentence(),
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
@@ -79,9 +79,9 @@ it('should returns the edit page of roles', function () {
     $this->assertModelWise([
         Role::class => [
             [
-                'name'            => $name,
-                'permission_type' => $permissionType,
-                'description'     => $description,
+                'name'            => $data['name'],
+                'permission_type' => $data['permission_type'],
+                'description'     => $data['description'],
             ],
         ],
     ]);
@@ -108,10 +108,10 @@ it('should update the existing role', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.settings.roles.update', $role->id), [
-        'name'            => $name = fake()->name(),
-        'permission_type' => $permissionType = fake()->randomElement(['custom', 'all']),
-        'description'     => $description = fake()->sentence(),
+    putJson(route('admin.settings.roles.update', $role->id), $data = [
+        'name'            => fake()->name(),
+        'permission_type' => fake()->randomElement(['custom', 'all']),
+        'description'     => fake()->sentence(),
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
@@ -119,9 +119,9 @@ it('should update the existing role', function () {
     $this->assertModelWise([
         Role::class => [
             [
-                'name'            => $name,
-                'permission_type' => $permissionType,
-                'description'     => $description,
+                'name'            => $data['name'],
+                'permission_type' => $data['permission_type'],
+                'description'     => $data['description'],
             ],
         ],
     ]);

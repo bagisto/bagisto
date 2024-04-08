@@ -24,9 +24,7 @@ it('should show the edit page of campaign', function () {
 
     get(route('admin.marketing.communications.subscribers.edit', $subscriber->id))
         ->assertOk()
-        ->assertJsonPath('data.id', $subscriber->id)
-        ->assertJsonPath('data.email', $subscriber->email)
-        ->assertJsonPath('data.is_subscribed', $subscriber->is_subscribed);
+        ->assertJsonFragment($subscriber->toArray());
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in news letter subscription', function () {

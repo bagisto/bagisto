@@ -32,10 +32,10 @@ it('should store the newly create event', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.marketing.communications.events.store', [
-        'name'        => $name = fake()->name,
-        'description' => $description = substr(fake()->paragraph(), 0, 50),
-        'date'        => $date = fake()->date(),
+    postJson(route('admin.marketing.communications.events.store', $data = [
+        'name'        => fake()->name(),
+        'description' => substr(fake()->paragraph(), 0, 50),
+        'date'        => fake()->date(),
     ]))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.events.index.create.success'));
@@ -43,9 +43,9 @@ it('should store the newly create event', function () {
     $this->assertModelWise([
         Event::class => [
             [
-                'name'        => $name,
-                'description' => $description,
-                'date'        => $date,
+                'name'        => $data['name'],
+                'description' => $data['description'],
+                'date'        => $data['date'],
             ],
         ],
     ]);
@@ -60,10 +60,7 @@ it('should edit the events template', function () {
 
     get(route('admin.marketing.communications.events.edit', $event->id))
         ->assertOk()
-        ->assertJsonPath('id', $event->id)
-        ->assertJsonPath('name', $event->name)
-        ->assertJsonPath('description', $event->description)
-        ->assertJsonPath('date', $event->date);
+        ->assertJsonFragment($event->toArray());
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in events', function () {

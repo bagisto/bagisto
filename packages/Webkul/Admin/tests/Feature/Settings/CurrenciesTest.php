@@ -60,14 +60,7 @@ it('should return the currencies for edit', function () {
 
     get(route('admin.settings.currencies.edit', $currency->id))
         ->assertOk()
-        ->assertJsonPath('id', $currency->id)
-        ->assertJsonPath('code', $currency->code)
-        ->assertJsonPath('name', $currency->name)
-        ->assertJsonPath('symbol', $currency->symbol)
-        ->assertJsonPath('decimal', $currency->decimal)
-        ->assertJsonPath('group_separator', $currency->group_separator)
-        ->assertJsonPath('decimal_separator', $currency->decimal_separator)
-        ->assertJsonPath('currency_position', $currency->currency_position);
+        ->assertJsonFragment($currency->toArray());
 });
 
 it('should fail the validation with errors when certain field not provided when update the currencies', function () {
@@ -78,7 +71,7 @@ it('should fail the validation with errors when certain field not provided when 
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.currencies.update'), [
-        'id'   => $currency->id,
+        'id' => $currency->id,
     ])
         ->assertJsonValidationErrorFor('code')
         ->assertJsonValidationErrorFor('name')

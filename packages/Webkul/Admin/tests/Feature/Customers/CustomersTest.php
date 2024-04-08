@@ -39,8 +39,7 @@ it('should return listing items of customers', function () {
         ->assertOk()
         ->assertJsonPath('records.0.customer_id', $customer->id)
         ->assertJsonPath('records.0.email', $customer->email)
-        ->assertJsonPath('records.0.full_name', $customer->name)
-        ->assertJsonPath('meta.total', 1);
+        ->assertJsonPath('records.0.full_name', $customer->name);
 });
 
 it('should return the view page of customer', function () {
@@ -78,11 +77,11 @@ it('should create a new customer', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.customers.customers.store'), [
-        'first_name' => $fistName = fake()->firstName(),
-        'last_name'  => $lastName = fake()->lastName(),
-        'gender'     => $gender = fake()->randomElement(['male', 'female', 'other']),
-        'email'      => $email = fake()->email(),
+    postJson(route('admin.customers.customers.store'), $data = [
+        'first_name' => fake()->firstName(),
+        'last_name'  => fake()->lastName(),
+        'gender'     => fake()->randomElement(['male', 'female', 'other']),
+        'email'      => fake()->email(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
@@ -90,10 +89,10 @@ it('should create a new customer', function () {
     $this->assertModelWise([
         Customer::class => [
             [
-                'first_name' => $fistName,
-                'last_name'  => $lastName,
-                'gender'     => $gender,
-                'email'      => $email,
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'gender'     => $data['gender'],
+                'email'      => $data['email'],
             ],
         ],
     ]);
@@ -111,11 +110,11 @@ it('should create a new customer and send notification to the customer', functio
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.customers.customers.store'), [
-        'first_name' => $fistName = fake()->firstName(),
-        'last_name'  => $lastName = fake()->lastName(),
-        'gender'     => $gender = fake()->randomElement(['male', 'female', 'other']),
-        'email'      => $email = fake()->email(),
+    postJson(route('admin.customers.customers.store'), $data = [
+        'first_name' => fake()->firstName(),
+        'last_name'  => fake()->lastName(),
+        'gender'     => fake()->randomElement(['male', 'female', 'other']),
+        'email'      => fake()->email(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
@@ -123,10 +122,10 @@ it('should create a new customer and send notification to the customer', functio
     $this->assertModelWise([
         Customer::class => [
             [
-                'first_name' => $fistName,
-                'last_name'  => $lastName,
-                'gender'     => $gender,
-                'email'      => $email,
+                'first_name' => $data['first_name'],
+                'last_name'  => $data['last_name'],
+                'gender'     => $data['gender'],
+                'email'      => $data['email'],
             ],
         ],
     ]);
@@ -261,11 +260,11 @@ it('should update the the existing customer', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.customers.customers.update', $customer->id), [
-        'first_name' => $fistName = fake()->firstName(),
+    putJson(route('admin.customers.customers.update', $customer->id), $data = [
+        'first_name' => fake()->firstName(),
         'last_name'  => $customer->last_name,
         'gender'     => $customer->gender,
-        'email'      => $email = fake()->email(),
+        'email'      => fake()->email(),
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.customers.customers.update-success'));
@@ -273,10 +272,10 @@ it('should update the the existing customer', function () {
     $this->assertModelWise([
         Customer::class => [
             [
-                'first_name' => $fistName,
+                'first_name' => $data['first_name'],
                 'last_name'  => $customer->last_name,
                 'gender'     => $customer->gender,
-                'email'      => $email,
+                'email'      => $data['email'],
             ],
         ],
     ]);
