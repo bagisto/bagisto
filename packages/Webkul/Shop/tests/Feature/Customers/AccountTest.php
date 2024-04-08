@@ -215,7 +215,7 @@ it('should returns the address page of the customer', function () {
         ->assertSeeText($customerAddress->city)
         ->assertSeeText($customerAddress->state)
         ->assertSeeText($customerAddress->company_name)
-        ->assertSeeText(trans('shop::app.customers.account.addresses.add-address'));
+        ->assertSeeText(trans('shop::app.customers.account.addresses.index.add-address'));
 });
 
 it('should returns the create page of address', function () {
@@ -224,12 +224,12 @@ it('should returns the create page of address', function () {
 
     get(route('shop.customers.account.addresses.create'))
         ->assertOk()
-        ->assertSeeText(trans('shop::app.customers.account.addresses.add-address'))
-        ->assertSeeText(trans('shop::app.customers.account.addresses.first-name'))
-        ->assertSeeText(trans('shop::app.customers.account.addresses.last-name'))
-        ->assertSeeText(trans('shop::app.customers.account.addresses.vat-id'))
-        ->assertSeeText(trans('shop::app.customers.account.addresses.street-address'))
-        ->assertSeeText(trans('shop::app.customers.account.addresses.company-name'));
+        ->assertSeeText(trans('shop::app.customers.account.addresses.index.add-address'))
+        ->assertSeeText(trans('shop::app.customers.account.addresses.create.first-name'))
+        ->assertSeeText(trans('shop::app.customers.account.addresses.create.last-name'))
+        ->assertSeeText(trans('shop::app.customers.account.addresses.create.vat-id'))
+        ->assertSeeText(trans('shop::app.customers.account.addresses.create.street-address'))
+        ->assertSeeText(trans('shop::app.customers.account.addresses.create.company-name'));
 });
 
 it('should fails the validation error when certain inputs not provided when store the customer address', function () {
@@ -302,9 +302,9 @@ it('should edit the customer address', function () {
 
     get(route('shop.customers.account.addresses.edit', $customerAddress->id))
         ->assertOk()
-        ->assertSeeText(trans('shop::app.customers.account.addresses.edit'))
-        ->assertSeeText(trans('shop::app.customers.account.addresses.title'))
-        ->assertSeeText(trans('shop::app.customers.account.addresses.save'));
+        ->assertSeeText(trans('shop::app.customers.account.addresses.edit.edit'))
+        ->assertSeeText(trans('shop::app.customers.account.addresses.edit.title'))
+        ->assertSeeText(trans('shop::app.customers.account.addresses.edit.save'));
 });
 
 it('should fails the validation error when certain inputs not provided update the customer address', function () {
