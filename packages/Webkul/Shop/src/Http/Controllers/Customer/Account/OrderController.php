@@ -2,12 +2,12 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\OrderDataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Checkout\Facades\Cart;
 
 class OrderController extends Controller
 {
