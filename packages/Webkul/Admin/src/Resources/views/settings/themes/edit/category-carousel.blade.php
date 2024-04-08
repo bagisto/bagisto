@@ -102,7 +102,11 @@
                         v-for="(filter, index) in options.filters"
                     >
                         <!-- Hidden Input -->
-                        <input type="hidden" :name="'{{ $currentLocale->code }}[options][filters][' + filter.key +']'" :value="filter.value"> 
+                        <input
+                            type="hidden"
+                            :name="'{{ $currentLocale->code }}[options][filters][' + filter.key +']'"
+                            :value="filter.value"
+                        > 
                     
                         <!-- Details -->
                         <div 
@@ -181,7 +185,11 @@
                     </x-slot>
                 
                     <x-slot:content>
-                        <input type="hidden" name="type" value="category_carousel">
+                        <input
+                            type="hidden"
+                            name="type"
+                            value="category_carousel"
+                        >
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">

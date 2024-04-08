@@ -93,8 +93,10 @@
 
                         <!-- Actions -->
                         <div class="grid gap-1 place-content-start text-right">
-                            <p class="text-gray-800 font-semibold dark:text-white">
-                                @{{ $admin.formatPrice(product.price) }}    
+                            <p
+                                class="text-gray-800 font-semibold dark:text-white"
+                                v-text="$admin.formatPrice(product.price)"
+                            >
                             </p>
 
                             <p

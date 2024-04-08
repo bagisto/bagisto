@@ -78,7 +78,11 @@
                                 :placeholder="trans('admin::app.catalog.families.edit.enter-code')"
                             />
 
-                            <input type="hidden" name="code" value="{{ $attributeFamily->code }}"/>
+                            <input
+                                type="hidden"
+                                name="code"
+                                value="{{ $attributeFamily->code }}"
+                            />
 
                             <x-admin::form.control-group.error control-name="code" />
                         </x-admin::form.control-group>
@@ -256,8 +260,10 @@
                                                     :class="[parseInt(element.is_user_defined) ? 'icon-attribute' : 'icon-attribute-block']"
                                                 ></i>
                                                 
-                                                <span class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs">
-                                                    @{{ element.admin_name }}
+                                                <span
+                                                    class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
+                                                    v-text="element.admin_name"
+                                                >
                                                 </span>
 
                                                 <input
@@ -311,8 +317,10 @@
 
                                     <i class="icon-attribute text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
-                                    <span class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs">
-                                        @{{ element.admin_name }}
+                                    <span
+                                        class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
+                                        v-text="element.admin_name"
+                                    >
                                     </span>
                                 </div>
                             </template>

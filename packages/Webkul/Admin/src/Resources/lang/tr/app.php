@@ -36,6 +36,8 @@ return [
         'description-text' => 'Tüm Bildirimleri Listele',
         'marked-success'   => 'Bildirim Başarıyla İşaretlendi',
         'no-record'        => 'Kayıt Bulunamadı',
+        'of'               => 'of',
+        'per-page'         => 'Sayfa Başına',
         'read-all'         => 'Tümünü Okundu Olarak İşaretle',
         'title'            => 'Bildirimler',
         'view-all'         => 'Tümünü Görüntüle',

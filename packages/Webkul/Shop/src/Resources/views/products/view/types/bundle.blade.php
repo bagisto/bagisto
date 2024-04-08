@@ -22,18 +22,22 @@
 
                 <div class="flex justify-between items-center my-[20px]">
                     <p class="text-sm">
-                        @lang('Total Amount')
+                        @lang('shop::app.products.view.type.bundle.total-amount')
                     </p>
 
-                    <p class="text-lg font-medium">
-                        @{{ formattedTotalPrice }}
+                    <p
+                        class="text-lg font-medium"
+                        v-text="formattedTotalPrice"
+                    >
                     </p>
                 </div>
 
                 <ul class="grid gap-2.5 text-base">
                     <li v-for="option in options">
-                        <span class="inline-block mb-1.5">
-                            @{{ option.label }}
+                        <span
+                            class="inline-block mb-1.5"
+                            v-text="option.label"
+                        >
                         </span>
 
                         <template v-for="product in option.products">
@@ -53,8 +57,10 @@
         <script type="text/x-template" id="v-product-bundle-option-item-template">
             <div class="mt-8 border-b border-[#E9E9E9] pb-4">
                 <div>
-                    <label class="block text-base mb-1.5">
-                        @{{ option.label }}
+                    <label
+                        class="block text-base mb-1.5"
+                        v-text="option.label"
+                    >
                     </label>
 
                     <div v-if="option.type == 'select'">

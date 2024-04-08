@@ -73,8 +73,10 @@
 
                                 <!-- Details -->
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
-                                        @{{ element.associated_product.name }}
+                                    <p
+                                        class="text-base text-gray-800 dark:text-white font-semibold"
+                                        v-text="element.associated_product.name"
+                                    >
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
@@ -85,8 +87,10 @@
 
                             <!-- Actions -->
                             <div class="grid gap-1 place-content-start text-right">
-                                <p class="text-gray-800 font-semibold dark:text-white">
-                                    @{{ $admin.formatPrice(element.associated_product.price) }}    
+                                <p
+                                    class="text-gray-800 font-semibold dark:text-white"
+                                    v-text="$admin.formatPrice(element.associated_product.price)"
+                                >
                                 </p>
 
                                 

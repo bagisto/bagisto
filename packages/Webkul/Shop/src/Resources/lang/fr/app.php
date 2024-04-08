@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Aucun',
+                    'none'         => 'Aucun',
+                    'total-amount' => 'Montant total',
                 ],
 
                 'downloadable' => [

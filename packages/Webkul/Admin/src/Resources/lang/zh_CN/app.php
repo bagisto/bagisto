@@ -36,6 +36,8 @@ return [
         'description-text' => '列出所有通知',
         'marked-success'   => '通知标记成功',
         'no-record'        => '未找到记录',
+        'of'               => '的',
+        'per-page'         => '每页',
         'read-all'         => '标记为已读',
         'title'            => '通知',
         'view-all'         => '查看全部',

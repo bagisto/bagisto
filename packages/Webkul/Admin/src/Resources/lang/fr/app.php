@@ -36,6 +36,8 @@ return [
         'description-text' => 'Lister toutes les notifications',
         'marked-success'   => 'Notification marquée avec succès',
         'no-record'        => 'Aucun enregistrement trouvé',
+        'of'               => 'de',
+        'per-page'         => 'Par page',
         'read-all'         => 'Marquer comme lu',
         'title'            => 'Notifications',
         'view-all'         => 'Voir tout',

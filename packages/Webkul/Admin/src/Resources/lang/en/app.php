@@ -36,6 +36,8 @@ return [
         'description-text'      => 'List all the Notifications',
         'marked-success'        => 'Notification Marked Successfully',
         'no-record'             => 'No Record Found',
+        'of'                    => 'of',
+        'per-page'              => 'Per Page',
         'read-all'              => 'Mark as Read',
         'title'                 => 'Notifications',
         'view-all'              => 'View All',

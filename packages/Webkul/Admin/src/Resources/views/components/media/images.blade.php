@@ -358,7 +358,11 @@
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 
-                    <input type="hidden" :name="name + '[' + image.id + ']'" v-if="! image.is_new"/>
+                    <input
+                        type="hidden"
+                        :name="name + '[' + image.id + ']'"
+                        v-if="! image.is_new"
+                    />
 
                     <input
                         type="file"

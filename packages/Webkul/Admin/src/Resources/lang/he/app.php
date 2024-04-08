@@ -36,6 +36,8 @@ return [
         'description-text' => 'לרשום את כל ההתראות',
         'marked-success'   => 'התראה סומנה בהצלחה',
         'no-record'        => 'לא נמצאו רשומות',
+        'of'               => 'מתוך',
+        'per-page'         => 'לעמוד',
         'read-all'         => 'סמן כנקרא',
         'title'            => 'התראות',
         'view-all'         => 'הצג הכל',

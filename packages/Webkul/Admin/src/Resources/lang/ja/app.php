@@ -36,6 +36,8 @@ return [
         'description-text' => 'すべての通知をリストアップ',
         'marked-success'   => 'お知らせが正常にマークされました',
         'no-record'        => '記録が見つかりません',
+        'of'               => 'の',
+        'per-page'         => 'ページごと',
         'read-all'         => 'すべてを既読にする',
         'title'            => 'お知らせ',
         'view-all'         => 'すべて表示',

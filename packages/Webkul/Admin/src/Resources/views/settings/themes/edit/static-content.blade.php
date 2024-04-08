@@ -115,7 +115,11 @@
                     </x-slot>
                 
                     <x-slot:content>
-                        <input type="hidden" name="type" value="static_content">
+                        <input
+                            type="hidden"
+                            name="type"
+                            value="static_content"
+                        />
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">

@@ -747,11 +747,19 @@
                 </template>
 
                 <template v-for="inventorySource in inventorySources">
-                    <input type="hidden" :name="'variants[' + variant.id + '][inventories][' + inventorySource.id + ']'" :value="variant.inventories[inventorySource.id]"/>
+                    <input
+                        type="hidden"
+                        :name="'variants[' + variant.id + '][inventories][' + inventorySource.id + ']'"
+                        :value="variant.inventories[inventorySource.id]"
+                    />
                 </template>
 
                 <template v-for="(image, index) in variant.images">
-                    <input type="hidden" :name="'variants[' + variant.id + '][images][files][' + image.id + ']'" v-if="! image.is_new"/>
+                    <input
+                        type="hidden"
+                        :name="'variants[' + variant.id + '][images][files][' + image.id + ']'"
+                        v-if="! image.is_new"
+                    />
 
                     <input
                         type="file"

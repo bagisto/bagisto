@@ -52,7 +52,11 @@
                         @lang('shop::app.components.media.add-attachments')
                     </label>
 
-                    <input type="hidden" :name="name" v-if="! uploadedFiles.isPicked"/>
+                    <input
+                        type="hidden"
+                        :name="name"
+                        v-if="! uploadedFiles.isPicked"
+                    />
 
                     <v-field
                         type="file"

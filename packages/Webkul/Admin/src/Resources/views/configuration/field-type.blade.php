@@ -14,7 +14,11 @@
     $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 @endphp
 
-<input type="hidden" name="keys[]" value="{{ json_encode($item) }}">
+<input
+    type="hidden"
+    name="keys[]"
+    value="{{ json_encode($item) }}"
+/>
 
 <x-admin::form.control-group>
     @if (! empty($field['depends']))
@@ -192,7 +196,11 @@
                 $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ($field['default_value'] ?? '');
             @endphp
 
-            <input type="hidden" name="{{ $name }}" value="0" />
+            <input
+                type="hidden"
+                name="{{ $name }}"
+                value="0"
+            />
 
             <label class="relative inline-flex items-center cursor-pointer">
                 <input  

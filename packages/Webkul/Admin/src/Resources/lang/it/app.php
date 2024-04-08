@@ -33,12 +33,14 @@ return [
     ],
 
     'notifications' => [
-        'description-text'      => 'Elenca tutte le notifiche',
-        'marked-success'        => 'Notifica contrassegnata con successo',
-        'no-record'             => 'Nessun Record Trovato',
-        'read-all'              => 'Segna come Letto',
-        'title'                 => 'Notifiche',
-        'view-all'              => 'Visualizza Tutte',
+        'description-text' => 'Elenca tutte le notifiche',
+        'marked-success'   => 'Notifica contrassegnata con successo',
+        'no-record'        => 'Nessun Record Trovato',
+        'of'               => 'di',
+        'per-page'         => 'Per pagina',
+        'read-all'         => 'Segna come Letto',
+        'title'            => 'Notifiche',
+        'view-all'         => 'Visualizza Tutte',
 
         'order-status-messages' => [
             'canceled'        => 'Ordine Annullato',

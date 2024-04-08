@@ -346,7 +346,11 @@
                                 </template>
 
                                 <template v-else>
-                                    <input type="hidden" name="status" v-model="data.user.status">
+                                    <input
+                                        type="hidden"
+                                        name="status"
+                                        v-model="data.user.status"
+                                    />
                                 </template>
                             </div>
 

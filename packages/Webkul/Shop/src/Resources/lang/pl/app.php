@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Brak',
+                    'none'         => 'Brak',
+                    'total-amount' => 'Całkowita Kwota',
                 ],
 
                 'downloadable' => [

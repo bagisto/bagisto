@@ -192,13 +192,13 @@
                                             <span class="icon-download text-2xl"></span>
                                         </a>
                                     @elseif ($customAttributeValue['type'] == 'image')
-                                        <a 
-                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                        <a
+                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
-                                            <img 
-                                                class="h-5 w-5 min-h-5 min-w-5" 
-                                                src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                            <img
+                                                class="h-5 w-5 min-h-5 min-w-5"
+                                                src="{{ Storage::url($customAttributeValue['value']) }}"
                                             />
                                         </a>
                                     @else
@@ -207,7 +207,7 @@
                                                 {{ $customAttributeValue['value'] ?? '-' }}
                                             </p>
                                         </div>
-                                    @endif 
+                                    @endif
                                 @endif
                             @endforeach
                         </div>
@@ -254,9 +254,9 @@
                     ref="formData"
                     @submit="handleSubmit($event, addToCart)"
                 >
-                    <input 
-                        type="hidden" 
-                        name="product_id" 
+                    <input
+                        type="hidden"
+                        name="product_id"
                         value="{{ $product->id }}"
                     >
 
@@ -265,10 +265,10 @@
                         name="is_buy_now"
                         v-model="is_buy_now"
                     >
-                    
-                    <input 
-                        type="hidden" 
-                        name="quantity" 
+
+                    <input
+                        type="hidden"
+                        name="quantity"
                         :value="qty"
                     >
 

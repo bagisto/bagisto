@@ -36,6 +36,8 @@ return [
         'description-text' => 'Alle Benachrichtigungen auflisten',
         'marked-success'   => 'Benachrichtigung erfolgreich markiert',
         'no-record'        => 'Kein Datensatz gefunden',
+        'of'               => 'von',
+        'per-page'         => 'Pro Seite',
         'read-all'         => 'Als gelesen markieren',
         'title'            => 'Benachrichtigungen',
         'view-all'         => 'Alle anzeigen',

@@ -77,8 +77,10 @@
                                     @{{ orderType[notification.order.status].message }}
                                 </p>
     
-                                <p class="text-xs text-gray-600 dark:text-gray-300">
-                                    @{{ notification.order.datetime }}
+                                <p
+                                    class="text-xs text-gray-600 dark:text-gray-300"
+                                    v-text="notification.order.datetime"
+                                >
                                 </p>
                             </div>
                         </a>
@@ -101,7 +103,9 @@
                     >
                     </div>
 
-                    <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">per Page</span>
+                    <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                        @lang('admin::app.notifications.per-page')
+                    </span>
 
                     <p
                         class="text-gray-600 dark:text-gray-300 whitespace-nowrap"
@@ -109,7 +113,9 @@
                     >
                     </p>
 
-                    <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">of</span>
+                    <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                        @lang('admin::app.notifications.of')
+                    </span>
 
                     <p
                         class="text-gray-600 dark:text-gray-300 whitespace-nowrap"

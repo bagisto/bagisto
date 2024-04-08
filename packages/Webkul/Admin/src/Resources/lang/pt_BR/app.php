@@ -36,6 +36,8 @@ return [
         'description-text' => 'Listar todas as notificações',
         'marked-success'   => 'Notificação Marcada com Sucesso',
         'no-record'        => 'Nenhum Registro Encontrado',
+        'of'               => 'de',
+        'per-page'         => 'Por página',
         'read-all'         => 'Marcar como Lido',
         'title'            => 'Notificações',
         'view-all'         => 'Ver Todas',

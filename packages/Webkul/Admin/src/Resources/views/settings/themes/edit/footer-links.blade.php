@@ -176,7 +176,11 @@
                         </x-slot>
                     
                         <x-slot:content>
-                            <input type="hidden" name="type" value="footer_links">
+                            <input
+                                type="hidden"
+                                name="type"
+                                value="footer_links"
+                            />
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">

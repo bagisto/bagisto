@@ -36,6 +36,8 @@ return [
         'description-text' => 'Alle meldingen weergeven',
         'marked-success'   => 'Melding Succesvol Gemarkeerd',
         'no-record'        => 'Geen Records Gevonden',
+        'of'               => 'van',
+        'per-page'         => 'Per pagina',
         'read-all'         => 'Markeer als Gelezen',
         'title'            => 'Meldingen',
         'view-all'         => 'Alles Bekijken',

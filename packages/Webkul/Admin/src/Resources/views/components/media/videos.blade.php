@@ -116,7 +116,11 @@
                         :for="$.uid + '_videoInput_' + index"
                     ></label>
 
-                    <input type="hidden" :name="name + '[' + video.id + ']'" v-if="! video.is_new"/>
+                    <input
+                        type="hidden"
+                        :name="name + '[' + video.id + ']'"
+                        v-if="! video.is_new"
+                    />
 
                     <input
                         type="file"

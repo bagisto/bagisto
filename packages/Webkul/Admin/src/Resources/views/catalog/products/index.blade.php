@@ -142,15 +142,11 @@
                             >
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.sku-value')".replace(':sku', record.sku) }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.attribute-family-value')".replace(':attribute_family', record.attribute_family) }}
                             </p>
                         </div>

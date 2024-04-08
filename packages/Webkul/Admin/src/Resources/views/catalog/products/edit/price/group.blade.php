@@ -35,17 +35,35 @@
                     v-for="(item, index) in prices"
                 >
                     <!-- Hidden Inputs -->
-                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][customer_group_id]'" :value="item.customer_group_id"/>
+                    <input
+                        type="hidden"
+                        :name="'customer_group_prices[' + item.id + '][customer_group_id]'"
+                        :value="item.customer_group_id"
+                    />
 
-                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][qty]'" :value="item.qty"/>
+                    <input
+                        type="hidden"
+                        :name="'customer_group_prices[' + item.id + '][qty]'"
+                        :value="item.qty"
+                    />
 
-                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][value_type]'" :value="item.value_type"/>
+                    <input
+                        type="hidden"
+                        :name="'customer_group_prices[' + item.id + '][value_type]'"
+                        :value="item.value_type"
+                    />
 
-                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][value]'" :value="item.value"/>
+                    <input
+                        type="hidden"
+                        :name="'customer_group_prices[' + item.id + '][value]'"
+                        :value="item.value"
+                    />
 
                     <div class="flex justify-between">
-                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
-                            @{{ getGroupNameById(item.customer_group_id) }}
+                        <p
+                            class="text-gray-600 dark:text-gray-300 font-semibold"
+                            v-text="getGroupNameById(item.customer_group_id)"
+                        >
                         </p>
 
                         <p

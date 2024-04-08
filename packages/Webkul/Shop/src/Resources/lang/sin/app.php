@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'කිසිවක්ද නෑ',
+                    'none'         => 'කිසිවක්ද නෑ',
+                    'total-amount' => 'මුළු මුදල',
                 ],
 
                 'downloadable' => [

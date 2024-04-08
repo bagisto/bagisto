@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Нет',
+                    'none'         => 'Нет',
+                    'total-amount' => 'Общая сумма',
                 ],
 
                 'downloadable' => [

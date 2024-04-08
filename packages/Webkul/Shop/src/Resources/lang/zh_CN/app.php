@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => '无',
+                    'none'         => '无',
+                    'total-amount' => '总金额',
                 ],
 
                 'downloadable' => [
