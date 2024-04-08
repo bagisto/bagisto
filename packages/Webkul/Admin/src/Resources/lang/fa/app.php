@@ -381,6 +381,7 @@ return [
                 'refund'                => 'بازپرداخت',
                 'refund-id'             => 'بازپرداخت #:refund',
                 'refunded'              => 'بازپرداخت',
+                'reorder'               => 'مرتب سازی مجدد',
                 'ship'                  => 'ارسال',
                 'shipment'              => 'ارسال #:shipment',
                 'shipments'             => 'ارسال‌ها',

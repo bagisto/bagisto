@@ -381,6 +381,7 @@ return [
                 'refund'                => 'Zwrot',
                 'refund-id'             => 'Zwrot #:refund',
                 'refunded'              => 'Zwrócone',
+                'reorder'               => 'Przeorganizuj',
                 'ship'                  => 'Wysyłka',
                 'shipment'              => 'Przesyłka #:shipment',
                 'shipments'             => 'Przesyłki',

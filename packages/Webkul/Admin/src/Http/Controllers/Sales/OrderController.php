@@ -129,6 +129,26 @@ class OrderController extends Controller
     }
 
     /**
+     * Reorder action for the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reorder(int $id)
+    {
+        $order = $this->orderRepository->findOrFail($id);
+
+        foreach ($order->items as $item) {
+            try {
+                Cart::addProduct($item->product, $item->additional);
+            } catch (\Exception $e) {
+                // do nothing
+            }
+        }
+
+        return redirect()->route('shop.checkout.cart.index');
+    }
+
+    /**
      * Cancel action for the specified resource.
      *
      * @return \Illuminate\Http\Response

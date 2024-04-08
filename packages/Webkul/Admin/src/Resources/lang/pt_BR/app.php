@@ -381,6 +381,7 @@ return [
                 'refund'                => 'Reembolso',
                 'refund-id'             => 'Reembolso #:refund',
                 'refunded'              => 'Reembolsado',
+                'reorder'               => 'Reorganizar',
                 'ship'                  => 'Enviar',
                 'shipment'              => 'Remessa #:shipment',
                 'shipments'             => 'Remessas',

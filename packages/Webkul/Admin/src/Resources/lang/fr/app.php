@@ -381,6 +381,7 @@ return [
                 'refund'                => 'Remboursement',
                 'refund-id'             => 'Remboursement n°:refund',
                 'refunded'              => 'Remboursé',
+                'reorder'               => 'Réorganiser',
                 'ship'                  => 'Expédier',
                 'shipment'              => 'Expédition n°:shipment',
                 'shipments'             => 'Expéditions',

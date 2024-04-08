@@ -381,6 +381,7 @@ return [
                 'refund'                => '返金',
                 'refund-id'             => '返金 #:refund',
                 'refunded'              => '返金済み',
+                'reorder'               => '並べ替える',
                 'ship'                  => '発送',
                 'shipment'              => '出荷 #:shipment',
                 'shipments'             => '出荷情報',

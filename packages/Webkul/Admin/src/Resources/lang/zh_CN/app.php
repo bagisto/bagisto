@@ -381,6 +381,7 @@ return [
                 'refund'                => '退款',
                 'refund-id'             => '退款 #:refund',
                 'refunded'              => '已退款',
+                'reorder'               => '重新排序',
                 'ship'                  => '发货',
                 'shipment'              => '发货 #:shipment',
                 'shipments'             => '发货',

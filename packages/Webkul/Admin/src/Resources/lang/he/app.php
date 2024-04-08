@@ -381,6 +381,7 @@ return [
                 'refund'                => 'החזר',
                 'refund-id'             => 'החזר #:refund',
                 'refunded'              => 'הוחזר',
+                'reorder'               => 'להזמין מחדש',
                 'ship'                  => 'שלח',
                 'shipment'              => 'משלוח #:shipment',
                 'shipments'             => 'משלוחים',

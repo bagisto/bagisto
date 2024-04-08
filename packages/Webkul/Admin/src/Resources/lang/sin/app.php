@@ -381,6 +381,7 @@ return [
                 'refund'                => 'ආදානය',
                 'refund-id'             => 'ආදානය #:refund',
                 'refunded'              => 'ආදානයේ',
+                'reorder'               => 'නැවත තේරීම',
                 'ship'                  => 'වෙළෙන්ද කරන්න',
                 'shipment'              => 'වෙළෙන්ද #:shipment',
                 'shipments'             => 'වෙළෙන්ද',

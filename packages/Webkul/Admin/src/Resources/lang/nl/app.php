@@ -381,6 +381,7 @@ return [
                 'refund'                => 'Terugbetaling',
                 'refund-id'             => 'Terugbetaling #:refund',
                 'refunded'              => 'Terugbetaald',
+                'reorder'               => 'Herordenen',
                 'ship'                  => 'Verzenden',
                 'shipment'              => 'Verzending #:shipment',
                 'shipments'             => 'Verzendingen',

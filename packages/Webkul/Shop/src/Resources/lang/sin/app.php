@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'ඔබගේ ඇණවුම අවලංගු කර ඇත',
                     'page-title'         => 'ඇණවුම #:order_id',
                     'payment-method'     => 'ගෙවීමේ ක්‍රමය',
+                    'reorder-btn-title'  => 'නැවත තේරීම',
                     'shipping-address'   => 'ගෙවීමේ ලිපිනය',
                     'shipping-method'    => 'භාණ්ඩ ප්රවාහන ක්රමය',
                     'title'              => 'දරුවනය',

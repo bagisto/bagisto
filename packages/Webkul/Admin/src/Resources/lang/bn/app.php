@@ -381,6 +381,7 @@ return [
                 'refund'                => 'ফেরত',
                 'refund-id'             => 'ফেরত দেওয়া #:refund',
                 'refunded'              => 'ফেরত দেওয়া',
+                'reorder'               => 'পুনরায় বাছাই করুন',
                 'ship'                  => 'প্রেরণ',
                 'shipment'              => 'প্রেরণ #:shipment',
                 'shipments'             => 'প্রেরণ',

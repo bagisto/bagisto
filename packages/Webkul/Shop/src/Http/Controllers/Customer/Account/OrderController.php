@@ -7,6 +7,7 @@ use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shop\DataGrids\OrderDataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Checkout\Facades\Cart;
 
 class OrderController extends Controller
 {
@@ -53,6 +54,33 @@ class OrderController extends Controller
         abort_if(! $order, 404);
 
         return view('shop::customers.account.orders.view', compact('order'));
+    }
+
+    /**
+     * Reorder action for the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reorder(int $id)
+    {
+        $order = $this->orderRepository->findOrFail($id);
+
+        $cart = Cart::createCart([
+            'customer'  => $order->customer,
+            'is_active' => false,
+        ]);
+
+        Cart::setCart($cart);
+
+        foreach ($order->items as $item) {
+            try {
+                Cart::addProduct($item->product, $item->additional);
+            } catch (\Exception $e) {
+                // do nothing
+            }
+        }
+
+        return redirect()->route('admin.sales.orders.create', $cart->id);
     }
 
     /**

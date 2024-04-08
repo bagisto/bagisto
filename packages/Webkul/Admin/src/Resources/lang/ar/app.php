@@ -406,6 +406,7 @@ return [
                 'refund'                => 'استرداد',
                 'refund-id'             => 'الاسترداد #:refund',
                 'refunded'              => 'تم الاسترداد',
+                'reorder'               => 'إعادة ترتيب',
                 'ship'                  => 'شحن',
                 'shipment'              => 'الشحنة #:shipment',
                 'shipments'             => 'الشحنات',

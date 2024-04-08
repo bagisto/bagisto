@@ -381,6 +381,7 @@ return [
                 'refund'                => 'Rückerstattung',
                 'refund-id'             => 'Rückerstattung #:refund',
                 'refunded'              => 'Erstattet',
+                'reorder'               => 'Neu anordnen',
                 'ship'                  => 'Versenden',
                 'shipment'              => 'Sendung #:shipment',
                 'shipments'             => 'Sendungen',

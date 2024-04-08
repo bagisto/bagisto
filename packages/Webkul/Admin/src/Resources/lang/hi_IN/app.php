@@ -381,6 +381,7 @@ return [
                 'refund'                => 'वापसी',
                 'refund-id'             => 'वापसी #:refund',
                 'refunded'              => 'वापसी की गई',
+                'reorder'               => 'पुनः क्रमबद्ध करें',
                 'ship'                  => 'भेजें',
                 'shipment'              => 'भेजा गया #:shipment',
                 'shipments'             => 'भेजवाने',

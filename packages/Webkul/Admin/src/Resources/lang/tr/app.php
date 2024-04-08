@@ -381,6 +381,7 @@ return [
                 'refund'                => 'İade',
                 'refund-id'             => 'İade #:refund',
                 'refunded'              => 'İade Edildi',
+                'reorder'               => 'Yeniden düzenle',
                 'ship'                  => 'Gönder',
                 'shipment'              => 'Gönderi #:shipment',
                 'shipments'             => 'Gönderiler',

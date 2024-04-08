@@ -34,7 +34,7 @@ class OrderItemResource extends JsonResource
             'discount_percent'     => $this->discount_percent,
             'discount_amount'      => $this->discount_amount,
             'base_discount_amount' => $this->base_discount_amount,
-            'additional'           => array_merge($data['additional'] ?? [], ['locale' => core()->getCurrentLocale()->code]),
+            'additional'           => array_merge($this->resource->additional ?? [], ['locale' => core()->getCurrentLocale()->code]),
             'children'             => self::collection($this->children)->jsonSerialize(),
         ];
     }
