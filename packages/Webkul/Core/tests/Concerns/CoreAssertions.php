@@ -13,6 +13,7 @@ use Webkul\Sales\Contracts\Invoice;
 use Webkul\Sales\Contracts\InvoiceItem;
 use Webkul\Sales\Contracts\OrderItem;
 use Webkul\Sales\Contracts\OrderPayment;
+use Webkul\Sales\Contracts\OrderTransaction;
 use Webkul\Sales\Models\Order;
 
 trait CoreAssertions
@@ -210,6 +211,19 @@ trait CoreAssertions
         return [
             'method'       => $cartPayment->method,
             'method_title' => $cartPayment->method_title,
+        ];
+    }
+
+    public function prepareOrderTransaction(OrderTransaction $orderTransaction): array
+    {
+        return [
+            'order_id'       => $orderTransaction->order_id,
+            'invoice_id'     => $orderTransaction->invoice_id,
+            'transaction_id' => $orderTransaction->transaction_id,
+            'type'           => $orderTransaction->type,
+            'payment_method' => $orderTransaction->payment_method,
+            'status'         => $orderTransaction->status,
+            'amount'         => $orderTransaction->amount,
         ];
     }
 

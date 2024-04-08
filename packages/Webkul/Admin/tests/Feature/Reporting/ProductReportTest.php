@@ -526,6 +526,10 @@ it('should return the top selling products by revenue reporting stats', function
         InvoiceItem::class => [
             $this->prepareInvoiceItem($invoiceItem),
         ],
+
+        OrderTransaction::class => [
+            $this->prepareOrderTransaction($orderTransaction),
+        ],
     ]);
 });
 
@@ -784,6 +788,10 @@ it('should return the top selling products by quantity reporting stats', functio
 
         InvoiceItem::class => [
             $this->prepareInvoiceItem($invoiceItem),
+        ],
+
+        OrderTransaction::class => [
+            $this->prepareOrderTransaction($orderTransaction),
         ],
     ]);
 });
