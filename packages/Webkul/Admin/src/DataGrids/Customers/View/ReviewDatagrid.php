@@ -51,7 +51,9 @@ class ReviewDatagrid extends DataGrid
                 'product_reviews.comment',
                 'product_reviews.product_id',
             )
-            ->where('customer_id', request()->route('id'));
+            ->where('customer_id', request()->route('id'))
+            ->where('channel', core()->getCurrentChannelCode())
+            ->where('locale', app()->getLocale());
 
         $this->addFilter('product_review_id', 'product_reviews.id');
         $this->addFilter('created_at', 'product_reviews.created_at');

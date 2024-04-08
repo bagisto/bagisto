@@ -164,7 +164,7 @@
                             <x-slot:content>
                                 <div class="grid gap-y-2.5">
                                     <p
-                                        lass="text-gray-800 font-semibold dark:text-white"
+                                        class="text-gray-800 font-semibold dark:text-white"
                                         v-text="`${customer.first_name} ${customer.last_name}`"
                                     >
                                     </p>
