@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should show the url rewrite index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.search_seo.url_rewrites.index'))
@@ -18,7 +18,7 @@ it('should show the url rewrite index page', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the url rewrites', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.url_rewrites.store'))
@@ -31,7 +31,7 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created url', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.url_rewrites.store'), [
@@ -58,10 +58,10 @@ it('should store the newly created url', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update the url rewrites', function () {
-    // Arrange
+    // Arrange.
     $urlRewrite = URLRewrite::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.url_rewrites.update', $urlRewrite->id))
@@ -74,10 +74,10 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the existing url rewrite', function () {
-    // Arrange
+    // Arrange.
     $urlRewrite = URLRewrite::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.url_rewrites.update'), [
@@ -106,10 +106,10 @@ it('should update the existing url rewrite', function () {
 });
 
 it('should delete the existing url rewrite', function () {
-    // Arrange
+    // Arrange.
     $urlRewrite = URLRewrite::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.search_seo.url_rewrites.delete', $urlRewrite->id))
@@ -122,10 +122,10 @@ it('should delete the existing url rewrite', function () {
 });
 
 it('should mass delete the existing url rewrites', function () {
-    // Arrange
+    // Arrange.
     $urlRewrites = URLRewrite::factory()->count(2)->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.url_rewrites.mass_delete'), [

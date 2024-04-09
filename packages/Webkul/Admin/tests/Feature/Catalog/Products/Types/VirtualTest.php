@@ -10,7 +10,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should fail the validation with errors when certain inputs are not provided when store in virtual product', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'))
@@ -21,12 +21,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should return the create page of virtual product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
     $productId = $product->id + 1;
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'), [
@@ -49,10 +49,10 @@ it('should return the create page of virtual product', function () {
 });
 
 it('should return the edit page of virtual product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getVirtualProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.edit', $product->id))
@@ -66,10 +66,10 @@ it('should return the edit page of virtual product', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in virtual product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getVirtualProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id))
@@ -83,10 +83,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors if certain data is not provided correctly in virtual product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getVirtualProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -111,22 +111,22 @@ it('should fail the validation with errors if certain data is not provided corre
 });
 
 it('should update the virtual product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getVirtualProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.products.update', $product->id), [
+    putJson(route('admin.catalog.products.update', $product->id), $data = [
         'sku'               => $product->sku,
         'url_key'           => $product->url_key,
-        'short_description' => $shortDescription = fake()->sentence(),
-        'description'       => $description = fake()->paragraph(),
-        'name'              => $name = fake()->words(3, true),
-        'price'             => $price = fake()->randomFloat(2, 1, 1000),
-        'weight'            => $weight = fake()->numberBetween(0, 100),
-        'channel'           => $channel = core()->getCurrentChannelCode(),
-        'locale'            => $locale = app()->getLocale(),
+        'short_description' => fake()->sentence(),
+        'description'       => fake()->paragraph(),
+        'name'              => fake()->words(3, true),
+        'price'             => fake()->randomFloat(2, 1, 1000),
+        'weight'            => fake()->numberBetween(0, 100),
+        'channel'           => core()->getCurrentChannelCode(),
+        'locale'            => app()->getLocale(),
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
@@ -146,23 +146,23 @@ it('should update the virtual product', function () {
                 'type'              => $product->type,
                 'url_key'           => $product->url_key,
                 'sku'               => $product->sku,
-                'name'              => $name,
-                'short_description' => $shortDescription,
-                'description'       => $description,
-                'price'             => $price,
-                'weight'            => $weight,
-                'locale'            => $locale,
-                'channel'           => $channel,
+                'name'              => $data['name'],
+                'short_description' => $data['short_description'],
+                'description'       => $data['description'],
+                'price'             => $data['price'],
+                'weight'            => $data['weight'],
+                'locale'            => $data['locale'],
+                'channel'           => $data['channel'],
             ],
         ],
     ]);
 });
 
 it('should delete a virtual product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.products.delete', $product->id))

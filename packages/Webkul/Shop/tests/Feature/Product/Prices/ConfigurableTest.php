@@ -16,7 +16,7 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
 it('should fails the validation error when the certain inputs not provided when add a configurable product to the cart with a cart rule of the no coupon type for all customer group type', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -40,7 +40,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]))->getConfigurableProductFactory()->create();
 
-    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
         $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
 
         $cartRule->cart_rule_channels()->sync([1]);
@@ -70,7 +70,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
         'is_buy_now'                   => '0',
@@ -83,10 +83,20 @@ it('should fails the validation error when the certain inputs not provided when 
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a configurable product to the cart with a cart rule of the no coupon type for all customer group type', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -140,7 +150,7 @@ it('should add a configurable product to the cart with a cart rule of the no cou
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
@@ -157,15 +167,25 @@ it('should add a configurable product to the cart with a cart rule of the no cou
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($childProduct->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquals(round($childProduct->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a configurable product to the cart with a cart rule of the no coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -189,7 +209,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]))->getConfigurableProductFactory()->create();
 
-    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
         $cartRule->cart_rule_customer_groups()->sync([1]);
 
         $cartRule->cart_rule_channels()->sync([1]);
@@ -219,7 +239,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
         'is_buy_now'                   => '0',
@@ -232,10 +252,20 @@ it('should fails the validation error when the certain inputs not provided when 
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a configurable product to the cart with a cart rule of the no coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -289,7 +319,7 @@ it('should add a configurable product to the cart with a cart rule of the no cou
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
@@ -306,15 +336,25 @@ it('should add a configurable product to the cart with a cart rule of the no cou
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($childProduct->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquals(round($childProduct->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when certain inputs not provided when add a configurable product to the cart with a cart rule of the no coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -340,7 +380,7 @@ it('should fails the validation error when certain inputs not provided when add 
 
     $customer = Customer::factory()->create();
 
-    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
         $cartRule->cart_rule_customer_groups()->sync([2]);
 
         $cartRule->cart_rule_channels()->sync([1]);
@@ -370,7 +410,7 @@ it('should fails the validation error when certain inputs not provided when add 
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -385,10 +425,20 @@ it('should fails the validation error when certain inputs not provided when add 
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a configurable product to the cart with a cart rule of the no coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -444,7 +494,7 @@ it('should add a configurable product to the cart with a cart rule of the no cou
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -463,15 +513,25 @@ it('should add a configurable product to the cart with a cart rule of the no cou
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($childProduct->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquals(round($childProduct->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a configurable product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -497,7 +557,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
         $cartRule->cart_rule_customer_groups()->sync([3]);
 
         $cartRule->cart_rule_channels()->sync([1]);
@@ -527,7 +587,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -542,10 +602,20 @@ it('should fails the validation error when the certain inputs not provided when 
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should add a configurable product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -601,7 +671,7 @@ it('should add a configurable product to the cart with a cart rule of the no cou
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -620,15 +690,25 @@ it('should add a configurable product to the cart with a cart rule of the no cou
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($childProduct->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquals(round($childProduct->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when add a configurable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -680,7 +760,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -701,20 +781,28 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    cart()->putCart($cart);
 
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
+
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a configurable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -766,7 +854,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -787,13 +875,9 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    cart()->putCart($cart);
 
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
         'code' => $couponCode,
     ])
@@ -802,15 +886,27 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($childProduct->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquals(round($childProduct->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
+
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when certain inputs not provided when add a configurable product to the cart with a cart rule of the specific coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -862,7 +958,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -883,20 +979,28 @@ it('should fails the validation error when certain inputs not provided when add 
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    cart()->putCart($cart);
 
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
+
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a configurable product to the cart with a cart rule of the specific coupon type for guest customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -948,7 +1052,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -969,13 +1073,9 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    cart()->putCart($cart);
 
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
         'code' => $couponCode,
     ])
@@ -984,15 +1084,27 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($childProduct->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquals($childProduct->price, round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
+
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain inputs not provided when  add a configurable product to the cart with a cart rule of the specific coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1046,7 +1158,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -1067,22 +1179,30 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    cart()->putCart($cart);
 
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
+
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a configurable product to the cart with a cart rule of the specific coupon type for general customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1136,7 +1256,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -1157,13 +1277,9 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    cart()->putCart($cart);
 
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1174,15 +1290,27 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($childProduct->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquals(round($childProduct->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
+
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should fails the validation error when the certain input not provided when add a configurable product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1236,7 +1364,7 @@ it('should fails the validation error when the certain input not provided when a
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -1257,22 +1385,30 @@ it('should fails the validation error when the certain input not provided when a
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    cart()->putCart($cart);
 
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.coupon.apply'))
         ->assertJsonValidationErrorFor('code')
         ->assertUnprocessable();
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
+
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should add a configurable product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1326,7 +1462,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         'ends_till'                 => null,
     ]);
 
-    CartRuleCoupon::factory()->create([
+    $cartRuleCoupon = CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
         'code'         => $couponCode = fake()->numerify('bagisto-########'),
         'type'         => 0,
@@ -1347,13 +1483,9 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    cart()->putCart($cart);
 
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1364,15 +1496,27 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.items_qty', 1)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($childProduct->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $cartRule->discount_amount, $response['data']['grand_total']);
 
-    $this->assertEquals(round($childProduct->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price, $response['data']['sub_total']);
 
-    $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
+    $this->assertPrice($cartRule->discount_amount, $response['data']['discount_amount']);
+
+    $this->assertModelWise([
+        CartRule::class => [
+            $this->prepareCartRule($cartRule),
+        ],
+    ]);
+
+    $this->prepareCartRuleCustomerGroup($cartRule);
+
+    $this->prepareCartRuleChannel($cartRule);
+
+    $this->prepareCartRuleCoupon($cartRuleCoupon);
 });
 
 it('should check tax is applying for the configurable product into the cart for configurable product', function () {
-    // Arrange
+    // Arrange.
     $taxCategory = TaxCategory::factory()->create();
 
     $taxRate = TaxRate::factory()->create([
@@ -1451,15 +1595,20 @@ it('should check tax is applying for the configurable product into the cart for 
 
     $cart->refresh();
 
-    getJson(route('shop.checkout.onepage.summary'))
-        ->assertJsonPath('data.id', $cart->id)
-        ->assertJsonPath('data.tax_total', $cart->tax_total)
-        ->assertJsonPath('data.base_tax_total', $cart->base_tax_total)
-        ->assertJsonPath('data.grand_total', $cart->grand_total);
+    $response = getJson(route('shop.checkout.onepage.summary'))
+        ->assertJsonPath('data.id', $cart->id);
+
+    $this->assertPrice($cart->tax_total, $response['data']['tax_total']);
+
+    $this->assertPrice($cart->base_tax_total, $response['data']['base_tax_total']);
+
+    $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
+
+    $this->assertPrice($cart->sub_total, $response['data']['sub_total']);
 });
 
 it('should check customer group price for guest customer with fixed price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1493,7 +1642,7 @@ it('should check customer group price for guest customer with fixed price type f
         'customer_group_id' => 1,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
@@ -1510,13 +1659,21 @@ it('should check customer group price for guest customer with fixed price type f
         ->assertJsonPath('data.items_qty', $productCustomerPrice->qty)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($productCustomerPrice->value * $productCustomerPrice->qty, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($productCustomerPrice->value * $productCustomerPrice->qty, $response['data']['grand_total']);
 
-    $this->assertEquals(round($productCustomerPrice->value * $productCustomerPrice->qty, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($productCustomerPrice->value * $productCustomerPrice->qty, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain input not provided when check customer group price for general customer with fixed price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1552,7 +1709,7 @@ it('should fails the validation error when the certain input not provided when c
         'customer_group_id' => 2,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -1567,10 +1724,18 @@ it('should fails the validation error when the certain input not provided when c
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for general customer with fixed price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1606,7 +1771,7 @@ it('should check customer group price for general customer with fixed price type
         'customer_group_id' => 2,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -1625,13 +1790,21 @@ it('should check customer group price for general customer with fixed price type
         ->assertJsonPath('data.items_qty', $productCustomerPrice->qty)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($productCustomerPrice->value * $productCustomerPrice->qty, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($productCustomerPrice->value * $productCustomerPrice->qty, $response['data']['grand_total']);
 
-    $this->assertEquals(round($productCustomerPrice->value * $productCustomerPrice->qty, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($productCustomerPrice->value * $productCustomerPrice->qty, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for wholesaler customer with fixed price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1663,7 +1836,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'customer_group_id' => 3,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -1678,10 +1851,18 @@ it('should fails the validation error when the certain inputs not provided when 
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for wholesaler customer with fixed price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1713,7 +1894,7 @@ it('should check customer group price for wholesaler customer with fixed price t
         'customer_group_id' => 3,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -1732,13 +1913,21 @@ it('should check customer group price for wholesaler customer with fixed price t
         ->assertJsonPath('data.items_qty', $productCustomerPrice->qty)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($productCustomerPrice->value * $productCustomerPrice->qty, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($productCustomerPrice->value * $productCustomerPrice->qty, $response['data']['grand_total']);
 
-    $this->assertEquals(round($productCustomerPrice->value * $productCustomerPrice->qty, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($productCustomerPrice->value * $productCustomerPrice->qty, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with discount price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1772,7 +1961,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'customer_group_id' => 1,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
         'is_buy_now'                   => '0',
@@ -1785,10 +1974,18 @@ it('should fails the validation error when the certain inputs not provided when 
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for guest customer with discount price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1824,7 +2021,7 @@ it('should check customer group price for guest customer with discount price typ
 
     $grandTotal = ($childProduct->price - ($childProduct->price * $productCustomerPrice->value / 100)) * $productCustomerPrice->qty;
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store'), [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
@@ -1841,13 +2038,21 @@ it('should check customer group price for guest customer with discount price typ
         ->assertJsonPath('data.items_qty', $productCustomerPrice->qty)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for general customer with discount price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1883,7 +2088,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'customer_group_id' => 2,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -1898,10 +2103,18 @@ it('should fails the validation error when the certain inputs not provided when 
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for general customer with discount price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -1939,7 +2152,7 @@ it('should check customer group price for general customer with discount price t
 
     $grandTotal = (($childProduct->price - ($childProduct->price * ($productCustomerPrice->value / 100))) * $productCustomerPrice->qty);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -1958,13 +2171,21 @@ it('should check customer group price for general customer with discount price t
         ->assertJsonPath('data.items_qty', $productCustomerPrice->qty)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round(floor($grandTotal), 2), round(floor($response['data']['grand_total']), 2), '', 0.00000001);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquals(round(floor($grandTotal), 2), round(floor($response['data']['sub_total']), 2), '', 0.00000001);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check customer group price for wholesaler customer with discount price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2000,7 +2221,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'customer_group_id' => 3,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store'), [
@@ -2015,10 +2236,18 @@ it('should fails the validation error when the certain inputs not provided when 
     ])
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should check customer group price for wholesaler customer with discount price type for configurable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -2056,7 +2285,7 @@ it('should check customer group price for wholesaler customer with discount pric
 
     $grandTotal = (($childProduct->price - ($childProduct->price * ($productCustomerPrice->value / 100))) * $productCustomerPrice->qty);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store'), [
@@ -2075,14 +2304,22 @@ it('should check customer group price for wholesaler customer with discount pric
         ->assertJsonPath('data.items_qty', $productCustomerPrice->qty)
         ->assertJsonPath('data.items_count', 1);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
+
+    $this->assertDatabaseHas('product_customer_group_prices', [
+        'qty'               => $productCustomerPrice->qty,
+        'value_type'        => $productCustomerPrice->value_type,
+        'value'             => $productCustomerPrice->value,
+        'product_id'        => $productCustomerPrice->product_id,
+        'customer_group_id' => $productCustomerPrice->customer_group_id,
+    ]);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for configurable product for guest customer into cart', function () {
-    // Arrange
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    // Arrange.
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([1]);
@@ -2116,7 +2353,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'selected_configurable_option' => $childProduct->id,
         'is_buy_now'                   => '0',
@@ -2129,10 +2366,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for configurable product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2169,7 +2412,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $grandTotal = $childProduct->price - ($childProduct->price * ($catalogRule->discount_amount / 100));
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
@@ -2185,15 +2428,22 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
+
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for configurable product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([2]);
@@ -2223,7 +2473,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -2238,10 +2488,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for configurable product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2276,7 +2532,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $grandTotal = $childProduct->price - ($childProduct->price * ($catalogRule->discount_amount / 100));
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2294,15 +2550,22 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
+
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for configurable product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([3]);
@@ -2332,7 +2595,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -2347,10 +2610,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for configurable product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2385,7 +2654,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $grandTotal = $product->price - ($childProduct->price * ($catalogRule->discount_amount / 100));
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2403,13 +2672,20 @@ it('should check discount price if catalog rule applied for percentage price for
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($grandTotal, $response['data']['grand_total']);
+
+    $this->assertPrice($grandTotal, $response['data']['sub_total']);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided check discount price if catalog rule applied for fixed price for configurable product for guest customer into cart', function () {
-    // Arrange
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    // Arrange.
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([1]);
@@ -2444,7 +2720,7 @@ it('should fails the validation error when the certain inputs not provided check
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.api.checkout.cart.store', [
         'selected_configurable_option' => $childProduct->id,
         'is_buy_now'                   => '0',
@@ -2457,10 +2733,16 @@ it('should fails the validation error when the certain inputs not provided check
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for configurable product for guest customer into cart', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2496,7 +2778,7 @@ it('should check discount price if catalog rule applied for fixed price for conf
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.store', [
         'selected_configurable_option' => $childProduct->id,
         'product_id'                   => $product->id,
@@ -2512,15 +2794,22 @@ it('should check discount price if catalog rule applied for fixed price for conf
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($childProduct->price - $catalogRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($childProduct->price - $catalogRule->discount_amount, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $catalogRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertPrice($childProduct->price - $catalogRule->discount_amount, $response['data']['sub_total']);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for configurable product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([2]);
@@ -2555,7 +2844,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -2570,10 +2859,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for configurable product for general customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2611,7 +2906,7 @@ it('should check discount price if catalog rule applied for fixed price for conf
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2629,15 +2924,22 @@ it('should check discount price if catalog rule applied for fixed price for conf
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($childProduct->price - $catalogRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($childProduct->price - $catalogRule->discount_amount, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $catalogRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertPrice($childProduct->price - $catalogRule->discount_amount, $response['data']['sub_total']);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for configurable product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
-    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
         $catalogRule->customer_groups()->sync([3]);
@@ -2672,7 +2974,7 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.checkout.cart.store', [
@@ -2687,10 +2989,16 @@ it('should fails the validation error when the certain inputs not provided when 
     ]))
         ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for configurable product for wholesaler customer into cart', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2728,7 +3036,7 @@ it('should check discount price if catalog rule applied for fixed price for conf
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $response = postJson(route('shop.api.checkout.cart.store', [
@@ -2746,12 +3054,19 @@ it('should check discount price if catalog rule applied for fixed price for conf
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', 1);
 
-    $this->assertEquals(round($childProduct->price - $catalogRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
-    $this->assertEquals(round($childProduct->price - $catalogRule->discount_amount, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertPrice($childProduct->price - $catalogRule->discount_amount, $response['data']['grand_total']);
+
+    $this->assertPrice($childProduct->price - $catalogRule->discount_amount, $response['data']['sub_total']);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for configurable product for guest customer', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2787,7 +3102,7 @@ it('should check discount price if catalog rule applied for fixed price for conf
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
@@ -2798,10 +3113,16 @@ it('should check discount price if catalog rule applied for fixed price for conf
             ],
         ],
     ]);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for configurable product for general customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2835,7 +3156,7 @@ it('should check discount price if catalog rule applied for fixed price for conf
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $this->assertModelWise([
@@ -2848,10 +3169,16 @@ it('should check discount price if catalog rule applied for fixed price for conf
             ],
         ],
     ]);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for fixed price for configurable product for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2885,7 +3212,7 @@ it('should check discount price if catalog rule applied for fixed price for conf
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $this->assertModelWise([
@@ -2898,10 +3225,16 @@ it('should check discount price if catalog rule applied for fixed price for conf
             ],
         ],
     ]);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for configurable product for guest customer', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
 
@@ -2936,7 +3269,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->assertModelWise([
         CatalogRuleProductPrice::class => [
             [
@@ -2947,10 +3280,16 @@ it('should check discount price if catalog rule applied for percentage price for
             ],
         ],
     ]);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for configurable product for general customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create();
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -2983,7 +3322,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $this->assertModelWise([
@@ -2996,10 +3335,16 @@ it('should check discount price if catalog rule applied for percentage price for
             ],
         ],
     ]);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
 
 it('should check discount price if catalog rule applied for percentage price for configurable product for wholesaler customer', function () {
-    // Arrange
+    // Arrange.
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
 
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -3032,7 +3377,7 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $childProduct = $product->variants()->first();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     $this->assertModelWise([
@@ -3045,4 +3390,10 @@ it('should check discount price if catalog rule applied for percentage price for
             ],
         ],
     ]);
+
+    $this->prepareCatalogRule($catalogRule);
+
+    $this->prepareCatalogRuleChannel($catalogRule);
+
+    $this->prepareCatalogRuleCustomerGroup($catalogRule);
 });
