@@ -24,6 +24,7 @@ class ProductResource extends JsonResource
             'images'              => $this->images,
             'inventories'         => $this->inventories,
             'is_options_required' => ! $this->getTypeInstance()->canBeAddedToCartWithoutOptions(),
+            'is_saleable'         => $this->getTypeInstance()->isSaleable(),
         ];
     }
 }
