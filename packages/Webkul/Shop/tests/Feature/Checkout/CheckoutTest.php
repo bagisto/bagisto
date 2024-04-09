@@ -1023,7 +1023,7 @@ it('should fails the validation error when shipping method not providing when st
     ]);
 
     cart()->setCart($cart);
-    
+
     // Act and Assert.
     $this->loginAsCustomer($customer);
 

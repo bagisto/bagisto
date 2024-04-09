@@ -1293,7 +1293,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'name'       => $product->name,
         'cart_id'    => $cart->id,
     ]);
-    
+
     cart()->setCart($cart);
 
     cart()->collectTotals();

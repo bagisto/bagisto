@@ -982,7 +982,7 @@ it('should fails the validation error when certain inputs not provided when add 
             24 => '7',
         ],
     ]);
-    
+
     cart()->setCart($cart);
 
     cart()->collectTotals();
