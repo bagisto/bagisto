@@ -340,10 +340,17 @@ return [
                 'search-text'       => 'यहां प्रोडक्ट्स खोजें',
                 'sign-in'           => 'साइन इन करें',
                 'sign-up'           => 'साइन अप करें',
+                'submit'            => 'सबमिट करें',
                 'title'             => 'खाता',
                 'welcome'           => 'स्वागत है',
                 'welcome-guest'     => 'स्वागतम अतिथि',
                 'wishlist'          => 'विशलिस्ट',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'डिफ़ॉल्ट भाषा',
+                    ],
+                ],
             ],
 
             'footer' => [

@@ -31,10 +31,12 @@
                     class="shimmer w-20 h-6 rounded"
                     role="presentation"
                 ></span>
+
                 <span
                     class="shimmer w-20 h-6 rounded"
                     role="presentation"
                 ></span>
+
                 <span
                     class="shimmer w-20 h-6 rounded"
                     role="presentation"
@@ -77,7 +79,12 @@
                     required
                 >
 
-                <button type="submit" class="hidden" aria-label="Submit"></button>
+                <button
+                    type="submit"
+                    class="hidden"
+                    aria-label="@lang('shop::app.components.layouts.header.submit')"
+                >
+                </button>
 
                 @if (core()->getConfigData('general.content.shop.image_search'))
                     @include('shop::search.images.index')
@@ -235,7 +242,10 @@
 </div>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-desktop-category-template">
+    <script
+        type="text/x-template"
+        id="v-desktop-category-template"
+    >
         <div
             class="flex gap-5 items-center"
             v-if="isLoading"
@@ -244,10 +254,12 @@
                 class="shimmer w-20 h-6 rounded"
                 role="presentation"
             ></span>
+
             <span
                 class="shimmer w-20 h-6 rounded"
                 role="presentation"
             ></span>
+
             <span
                 class="shimmer w-20 h-6 rounded"
                 role="presentation"

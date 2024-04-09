@@ -340,10 +340,17 @@ return [
                 'search-text'       => 'Ürünleri burada ara',
                 'sign-in'           => 'Giriş Yap',
                 'sign-up'           => 'Kaydol',
+                'submit'            => 'Gönder',
                 'title'             => 'Hesap',
                 'welcome'           => 'Hoş geldiniz',
                 'welcome-guest'     => 'Hoş geldiniz Misafir',
                 'wishlist'          => 'İstek Listesi',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Varsayılan yerel ayar',
+                    ],
+                ],
             ],
 
             'footer' => [

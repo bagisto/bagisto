@@ -340,10 +340,17 @@ return [
                 'search-text'       => 'Zoek hier producten',
                 'sign-in'           => 'Inloggen',
                 'sign-up'           => 'Aanmelden',
+                'submit'            => 'Verzenden',
                 'title'             => 'Account',
                 'welcome'           => 'Welkom',
                 'welcome-guest'     => 'Welkom Gast',
                 'wishlist'          => 'Verlanglijst',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Standaard taal',
+                    ],
+                ],
             ],
 
             'footer' => [

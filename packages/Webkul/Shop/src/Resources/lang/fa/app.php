@@ -340,10 +340,17 @@ return [
                 'search-text'       => 'محصولات را اینجا جستجو کنید',
                 'sign-in'           => 'ورود',
                 'sign-up'           => 'عضویت',
+                'submit'            => 'ارسال',
                 'title'             => 'حساب کاربری',
                 'welcome'           => 'خوش آمدید',
                 'welcome-guest'     => 'خوش آمدید مهمان',
                 'wishlist'          => 'لیست علاقه‌مندی',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'زبان پیش‌فرض',
+                    ],
+                ],
             ],
 
             'footer' => [

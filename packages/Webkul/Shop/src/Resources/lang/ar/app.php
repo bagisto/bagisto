@@ -340,10 +340,17 @@ return [
                 'search-text'       => 'ابحث عن المنتجات هنا',
                 'sign-in'           => 'تسجيل الدخول',
                 'sign-up'           => 'سجل',
+                'submit'            => 'إرسال',
                 'title'             => 'الحساب',
                 'welcome'           => 'مرحبًا',
                 'welcome-guest'     => 'مرحبًا بكم زائرًا',
                 'wishlist'          => 'قائمة المفضلة',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'اللغة الافتراضية',
+                    ],
+                ],
             ],
 
             'footer' => [

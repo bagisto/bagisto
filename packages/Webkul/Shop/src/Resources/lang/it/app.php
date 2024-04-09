@@ -340,10 +340,17 @@ return [
                 'search-text'       => 'Cerca prodotti qui',
                 'sign-in'           => 'Accedi',
                 'sign-up'           => 'Registrati',
+                'submit'            => 'Invia',
                 'title'             => 'Account',
                 'welcome'           => 'Benvenuto',
                 'welcome-guest'     => 'Benvenuto Ospite',
                 'wishlist'          => 'Lista dei desideri',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Lingua predefinita',
+                    ],
+                ],
             ],
 
             'footer' => [

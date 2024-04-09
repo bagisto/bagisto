@@ -340,10 +340,17 @@ return [
                 'search-text'       => 'උදා: උදාමාන්ද්‍ර',
                 'sign-in'           => 'පිවිසීම',
                 'sign-up'           => 'ලියාපදිංචිය',
+                'submit'            => 'ඉදිරිපත් කරන්න',
                 'title'             => 'ගිණුම',
                 'welcome'           => 'ස්වයං',
                 'welcome-guest'     => 'උරුම පරිසරය',
                 'wishlist'          => 'පෙරනිම',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'පෙරනිමි භාෂාව',
+                    ],
+                ],
             ],
 
             'footer' => [
