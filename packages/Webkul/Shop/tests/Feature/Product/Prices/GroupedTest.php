@@ -3214,6 +3214,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
         ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
 
     $this->assertPrice(array_sum($data['prices']), $response['data']['grand_total']);
+
     $this->assertPrice(array_sum($data['prices']), $response['data']['sub_total']);
 });
 
