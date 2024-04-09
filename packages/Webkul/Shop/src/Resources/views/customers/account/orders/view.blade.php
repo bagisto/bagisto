@@ -22,7 +22,7 @@
         <div class="flex gap-1.5">
             @if ($order->canCancel())
                 <a
-                    href="{{ route('admin.sales.orders.reorder', $order->id) }}"
+                    href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
                     class="secondary-button flex items-center gap-x-2.5 py-3 px-5 border-[#E9E9E9] font-normal"
                 >
                     @lang('shop::app.customers.account.orders.view.reorder-btn-title')

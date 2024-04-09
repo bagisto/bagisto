@@ -65,13 +65,6 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->findOrFail($id);
 
-        $cart = Cart::createCart([
-            'customer'  => $order->customer,
-            'is_active' => false,
-        ]);
-
-        Cart::setCart($cart);
-
         foreach ($order->items as $item) {
             try {
                 Cart::addProduct($item->product, $item->additional);
@@ -80,7 +73,7 @@ class OrderController extends Controller
             }
         }
 
-        return redirect()->route('admin.sales.orders.create', $cart->id);
+        return redirect()->route('shop.checkout.cart.index');
     }
 
     /**
