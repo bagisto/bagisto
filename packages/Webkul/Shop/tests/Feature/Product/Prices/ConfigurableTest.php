@@ -781,7 +781,9 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -875,7 +877,9 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -978,8 +982,10 @@ it('should fails the validation error when certain inputs not provided when add 
             24 => '7',
         ],
     ]);
+    
+    cart()->setCart($cart);
 
-    cart()->putCart($cart);
+    cart()->collectTotals();
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -1073,7 +1079,9 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1179,7 +1187,9 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1277,7 +1287,9 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1385,7 +1397,9 @@ it('should fails the validation error when the certain input not provided when a
         ],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1483,7 +1497,9 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1572,10 +1588,9 @@ it('should check tax is applying for the configurable product into the cart for 
         ],
     ]);
 
-    $cartTemp = new \stdClass();
-    $cartTemp->id = $cart->id;
+    cart()->setCart($cart);
 
-    session()->put('cart', $cartTemp);
+    cart()->collectTotals();
 
     CustomerAddress::factory()->create([
         'email'        => $customer->email,
