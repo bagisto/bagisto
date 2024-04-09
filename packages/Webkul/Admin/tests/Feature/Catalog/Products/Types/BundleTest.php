@@ -29,10 +29,10 @@ it('should return the create page of bundle product', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.catalog.products.store'), [
+    postJson(route('admin.catalog.products.store'), $data = [
         'type'                => 'bundle',
         'attribute_family_id' => 1,
-        'sku'                 => $sku = fake()->slug(),
+        'sku'                 => fake()->slug(),
     ])
         ->assertOk()
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
@@ -41,8 +41,8 @@ it('should return the create page of bundle product', function () {
         ProductModel::class => [
             [
                 'id'   => $productId,
-                'type' => 'bundle',
-                'sku'  => $sku,
+                'type' => $data['type'],
+                'sku'  => $data['sku'],
             ],
         ],
     ]);

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Webkul\CMS\Models\Page;
 use Webkul\CMS\Models\PageTranslation;
 
@@ -70,13 +71,13 @@ it('should store newly created cms pages', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.cms.store'), [
-        'url_key'          => $slug = fake()->slug(),
-        'page_title'       => $pageTitle = fake()->title(),
-        'html_content'     => $htmlContent = substr(fake()->paragraph(), 0, 50),
-        'meta_title'       => $metaTitle = fake()->title(),
-        'meta_keywords'    => $metaKeywords = fake()->word(),
-        'meta_description' => $metaDescription = fake()->paragraph(3),
+    postJson(route('admin.cms.store'), $data = [
+        'url_key'          => fake()->slug(),
+        'page_title'       => fake()->title(),
+        'html_content'     => substr(fake()->paragraph(), 0, 50),
+        'meta_title'       => fake()->title(),
+        'meta_keywords'    => fake()->word(),
+        'meta_description' => fake()->paragraph(3),
         'channels'         => [
             'value' => 1,
         ],
@@ -86,14 +87,7 @@ it('should store newly created cms pages', function () {
 
     $this->assertModelWise([
         PageTranslation::class => [
-            [
-                'url_key'          => $slug,
-                'page_title'       => $pageTitle,
-                'html_content'     => $htmlContent,
-                'meta_title'       => $metaTitle,
-                'meta_keywords'    => $metaKeywords,
-                'meta_description' => $metaDescription,
-            ],
+            Arr::except($data, ['channels']),
         ],
     ]);
 });
@@ -138,10 +132,10 @@ it('should update the cms page', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.cms.update', $cms->id), [
-        $localeCode => [
+        $localeCode => $data = [
             'url_key'      => $cms->url_key,
-            'page_title'   => $pageTitle = fake()->word(),
-            'html_content' => $htmlContent = substr(fake()->paragraph(), 0, 50),
+            'page_title'   => fake()->word(),
+            'html_content' => substr(fake()->paragraph(), 0, 50),
         ],
 
         'locale' => $localeCode,
@@ -156,9 +150,9 @@ it('should update the cms page', function () {
     $this->assertModelWise([
         PageTranslation::class => [
             [
-                'url_key'      => $cms->url_key,
-                'page_title'   => $pageTitle,
-                'html_content' => $htmlContent,
+                'url_key'      => $data['url_key'],
+                'page_title'   => $data['page_title'],
+                'html_content' => $data['html_content'],
             ],
         ],
     ]);
