@@ -20,15 +20,17 @@ class CartAddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name'   => $this->faker->firstName(),
-            'last_name'    => $this->faker->lastName(),
-            'phone'        => $this->faker->numerify('98########'),
-            'address'      => $this->faker->streetAddress(),
-            'country'      => $this->faker->randomElement(['IN']),
-            'state'        => $this->faker->randomElement(['Delhi', 'Mumbai', 'Kolkata', 'Rajasthan']),
-            'city'         => $this->faker->city(),
-            'postcode'     => $this->faker->numerify('######'),
-            'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+            'address'          => implode(PHP_EOL, [$this->faker->address()]),
+            'company_name'     => $this->faker->company(),
+            'first_name'       => $this->faker->firstName(),
+            'last_name'        => $this->faker->lastName(),
+            'email'            => $this->faker->email(),
+            'country'          => $this->faker->countryCode(),
+            'state'            => $this->faker->randomElement(['Delhi', 'Mumbai', 'Kolkata', 'Rajasthan']),
+            'city'             => $this->faker->city(),
+            'postcode'         => $this->faker->numerify('######'),
+            'phone'            => $this->faker->e164PhoneNumber(),
+            'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
         ];
     }
 }

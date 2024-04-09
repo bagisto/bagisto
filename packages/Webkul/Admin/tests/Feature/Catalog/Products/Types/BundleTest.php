@@ -10,7 +10,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should fail the validation with errors when certain inputs are not provided when store in bundle product', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'))
@@ -21,18 +21,18 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should return the create page of bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
     $productId = $product->id + 1;
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.catalog.products.store'), [
+    postJson(route('admin.catalog.products.store'), $data = [
         'type'                => 'bundle',
         'attribute_family_id' => 1,
-        'sku'                 => $sku = fake()->slug(),
+        'sku'                 => fake()->slug(),
     ])
         ->assertOk()
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
@@ -41,18 +41,18 @@ it('should return the create page of bundle product', function () {
         ProductModel::class => [
             [
                 'id'   => $productId,
-                'type' => 'bundle',
-                'sku'  => $sku,
+                'type' => $data['type'],
+                'sku'  => $data['sku'],
             ],
         ],
     ]);
 });
 
 it('should return the edit page of bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.edit', $product->id))
@@ -66,10 +66,10 @@ it('should return the edit page of bundle product', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id))
@@ -82,10 +82,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors if certain data is not provided correctly in bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -109,7 +109,7 @@ it('should fail the validation with errors if certain data is not provided corre
 });
 
 it('should update the bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
     $options = [];
@@ -136,19 +136,19 @@ it('should update the bundle product', function () {
         ];
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.products.update', $product->id), [
+    putJson(route('admin.catalog.products.update', $product->id), $data = [
         'sku'                  => $product->sku,
         'url_key'              => $product->url_key,
-        'short_description'    => $shortDescription = fake()->sentence(),
-        'description'          => $description = fake()->paragraph(),
-        'name'                 => $name = fake()->words(3, true),
-        'price'                => $price = fake()->randomFloat(2, 1, 1000),
-        'weight'               => $weight = fake()->numberBetween(0, 100),
-        'channel'              => $channel = core()->getCurrentChannelCode(),
-        'locale'               => $locale = app()->getLocale(),
+        'short_description'    => fake()->sentence(),
+        'description'          => fake()->paragraph(),
+        'name'                 => fake()->words(3, true),
+        'price'                => fake()->randomFloat(2, 1, 1000),
+        'weight'               => fake()->numberBetween(0, 100),
+        'channel'              => core()->getCurrentChannelCode(),
+        'locale'               => app()->getLocale(),
         'bundle_options'       => $options,
         'new'                  => '1',
         'featured'             => '1',
@@ -175,14 +175,14 @@ it('should update the bundle product', function () {
             [
                 'url_key'           => $product->url_key,
                 'type'              => 'bundle',
-                'name'              => $name,
-                'short_description' => $shortDescription,
-                'description'       => $description,
-                'price'             => $price,
-                'weight'            => $weight,
-                'locale'            => $locale,
                 'product_id'        => $product->id,
-                'channel'           => $channel,
+                'name'              => $data['name'],
+                'short_description' => $data['short_description'],
+                'description'       => $data['description'],
+                'price'             => $data['price'],
+                'weight'            => $data['weight'],
+                'locale'            => $data['locale'],
+                'channel'           => $data['channel'],
             ],
         ],
     ]);
@@ -200,9 +200,9 @@ it('should update the bundle product', function () {
                     'description'       => $product->description,
                     'price'             => $product->price,
                     'weight'            => $product->weight,
-                    'locale'            => $locale,
+                    'locale'            => $data['locale'],
                     'product_id'        => $product->id,
-                    'channel'           => $channel,
+                    'channel'           => $data['channel'],
                 ],
             ],
         ]);
@@ -210,10 +210,10 @@ it('should update the bundle product', function () {
 });
 
 it('should delete a bundle product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.products.delete', $product->id))
