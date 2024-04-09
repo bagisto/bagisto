@@ -818,7 +818,9 @@ it('should fails the validation error when certain inputs not provided when add 
         'qty'        => $data['quantities'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -919,7 +921,9 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'qty'        => $data['quantities'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1030,7 +1034,9 @@ it('should fails the validation error when the certain inputs not provided when 
         'qty'        => $data['quantities'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -1131,7 +1137,9 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'qty'        => $data['quantities'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1244,7 +1252,9 @@ it('should fails the validation error when the certain inputs not provided when 
         'qty'        => $data['quantities'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1350,7 +1360,9 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'qty'        => $data['quantities'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1464,7 +1476,9 @@ it('should fails the validation error when the certain inputs not provided when 
         'qty'        => $data['quantities'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1569,7 +1583,9 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'qty'        => $data['quantities'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1665,7 +1681,9 @@ it('should check tax is applying for the grouped product into the cart for group
         'qty'        => $data['quantities'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     CustomerAddress::factory()->create([
         'email'        => $customer->email,
