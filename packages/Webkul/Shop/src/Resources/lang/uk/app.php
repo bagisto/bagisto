@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Ваш заказ был отменен',
                     'page-title'         => 'Заказ #:order_id',
                     'payment-method'     => 'Способ оплаты',
+                    'reorder-btn-title'  => 'Перепорядкувати',
                     'shipping-address'   => 'Адрес доставки',
                     'shipping-method'    => 'Способ доставки',
                     'title'              => 'Просмотр',

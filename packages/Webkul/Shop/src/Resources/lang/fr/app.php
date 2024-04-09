@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Votre commande a été annulée',
                     'page-title'         => 'Commande #:order_id',
                     'payment-method'     => 'Mode de paiement',
+                    'reorder-btn-title'  => 'Réorganiser',
                     'shipping-address'   => 'Adresse de livraison',
                     'shipping-method'    => 'Mode de livraison',
                     'title'              => 'Voir',

@@ -37,39 +37,17 @@
             {!! view_render_event('bagisto.admin.sales.order.page_action.before', ['order' => $order]) !!}
 
             @if (
-                $order->canCancel()
-                && bouncer()->hasPermission('sales.orders.cancel')
+                $order->canReorder()
+                && bouncer()->hasPermission('sales.orders.create')
             )
-               <form
-                    method="POST"
-                    ref="cancelOrderForm"
-                    action="{{ route('admin.sales.orders.cancel', $order->id) }}"
+                <a
+                    href="{{ route('admin.sales.orders.reorder', $order->id) }}"
+                    class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
-                    @csrf
-                </form>
+                    <span class="icon-cart text-2xl"></span> 
 
-                <div 
-                    class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
-                    @click="$emitter.emit('open-confirm-modal', {
-                        message: '@lang('admin::app.sales.orders.view.cancel-msg')',
-                        agree: () => {
-                            this.$refs['cancelOrderForm'].submit()
-                        }
-                    })"
-                >
-                    <span
-                        class="icon-cancel text-2xl"
-                        role="presentation"
-                        tabindex="0"
-                    >
-                    </span>
-
-                    <a
-                        href="javascript:void(0);"
-                    >
-                        @lang('admin::app.sales.orders.view.cancel')    
-                    </a>
-                </div>
+                    @lang('admin::app.sales.orders.view.reorder')
+                </a>
             @endif
 
             @if (
@@ -92,6 +70,42 @@
                 && bouncer()->hasPermission('sales.refunds.create')
             )
                 @include('admin::sales.refunds.create')
+            @endif
+
+            @if (
+                $order->canCancel()
+                && bouncer()->hasPermission('sales.orders.cancel')
+            )
+               <form
+                    method="POST"
+                    ref="cancelOrderForm"
+                    action="{{ route('admin.sales.orders.cancel', $order->id) }}"
+                >
+                    @csrf
+                </form>
+
+                <div 
+                    class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                    @click="$emitter.emit('open-confirm-modal', {
+                        message: '@lang('admin::app.sales.orders.view.cancel-msg')',
+                        agree: () => {
+                            this.$refs['cancelOrderForm'].submit()
+                        }
+                    })"
+                >
+                    <span
+                        class="icon-cancel text-2xl"
+                        role="presentation"
+                        tabindex="0"
+                    >
+                    </span>
+
+                    <a
+                        href="javascript:void(0);"
+                    >
+                        @lang('admin::app.sales.orders.view.cancel')
+                    </a>
+                </div>
             @endif
 
             {!! view_render_event('bagisto.admin.sales.order.page_action.after', ['order' => $order]) !!}
@@ -242,7 +256,7 @@
                             </p>
                         </div>
 
-                        <div class="flex  flex-col gap-y-1.5">
+                        <div class="flex flex-col gap-y-1.5">
                             <p class="text-gray-600 dark:text-gray-300 font-semibold !leading-5">
                                 {{ core()->formatBasePrice($order->base_sub_total) }}
                             </p>

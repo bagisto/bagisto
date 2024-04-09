@@ -869,7 +869,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
         'is_buy_now'        => '0',
@@ -877,7 +877,9 @@ it('should fails the validation error when the certain inputs not provided when 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -969,7 +971,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
         'is_buy_now'        => '0',
@@ -977,7 +979,9 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1078,7 +1082,7 @@ it('should fails the validation error when certain inputs not provided when add 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
         'is_buy_now'        => '0',
@@ -1086,7 +1090,9 @@ it('should fails the validation error when certain inputs not provided when add 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     postJson(route('shop.api.checkout.cart.coupon.apply'))
@@ -1178,7 +1184,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
         'is_buy_now'        => '0',
@@ -1186,7 +1192,9 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $response = postJson(route('shop.api.checkout.cart.coupon.apply'), [
@@ -1287,7 +1295,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
         'is_buy_now'        => '0',
@@ -1295,7 +1303,9 @@ it('should fails the validation error when the certain inputs not provided when 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer();
@@ -1389,7 +1399,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
         'is_buy_now'        => '0',
@@ -1397,7 +1407,9 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer();
@@ -1502,7 +1514,7 @@ it('should fails the validation error when the certain inputs not provided when 
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
         'is_buy_now'        => '0',
@@ -1510,7 +1522,9 @@ it('should fails the validation error when the certain inputs not provided when 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1606,7 +1620,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
         'is_buy_now'        => '0',
@@ -1614,7 +1628,9 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    cart()->putCart($cart);
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
 
     // Act and Assert.
     $this->loginAsCustomer($customer);
@@ -1700,15 +1716,13 @@ it('should check tax is applying for the bundle product into the cart for bundle
         $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
     }
 
-    $cart = cart()->addProduct($product->id, [
+    $cart = cart()->addProduct($product, [
         'product_id'        => $product->id,
         'quantity'          => 1,
         'is_buy_now'        => '0',
         'rating'            => '0',
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
-
-    cart()->putCart($cart);
 
     CustomerAddress::factory()->create([
         'email'        => $customer->email,
@@ -1723,6 +1737,8 @@ it('should check tax is applying for the bundle product into the cart for bundle
         'cart_id'      => $cart->id,
         'address_type' => 'cart_shipping',
     ]);
+
+    cart()->setCart($cart);
 
     cart()->collectTotals();
 

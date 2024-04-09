@@ -36,15 +36,20 @@ return [
         'route' => 'admin.sales.orders.index',
         'sort'  => 1,
     ], [
+        'key'   => 'sales.orders.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.sales.orders.create',
+        'sort'  => 1,
+    ], [
         'key'   => 'sales.orders.view',
         'name'  => 'admin::app.acl.view',
         'route' => 'admin.sales.orders.view',
-        'sort'  => 1,
+        'sort'  => 2,
     ], [
         'key'   => 'sales.orders.cancel',
         'name'  => 'admin::app.acl.cancel',
         'route' => 'admin.sales.orders.cancel',
-        'sort'  => 2,
+        'sort'  => 3,
     ], [
         'key'   => 'sales.invoices',
         'name'  => 'admin::app.acl.invoices',
