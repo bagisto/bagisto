@@ -286,7 +286,7 @@
                                             <x-admin::form.control-group.error name="qty" />
                                         </x-admin::form.control-group>
 
-                                        <Button
+                                        <button
                                             class="text-sm text-blue-600 cursor-pointer transition-all hover:underline"
                                             :disabled="! product.is_saleable"
                                         >
