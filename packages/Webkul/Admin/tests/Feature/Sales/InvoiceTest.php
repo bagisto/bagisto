@@ -610,6 +610,10 @@ it('should store the invoice', function () {
         OrderPayment::class => [
             $this->prepareOrderPayment($orderPayment),
         ],
+
+        Invoice::class => [
+            $this->prepareInvoice($order, $orderItem),
+        ],
     ]);
 });
 
@@ -812,6 +816,10 @@ it('should store the invoice and send email to the customer and admin', function
 
         OrderPayment::class => [
             $this->prepareOrderPayment($orderPayment),
+        ],
+
+        Invoice::class => [
+            $this->prepareInvoice($order, $orderItem),
         ],
     ]);
 
@@ -1069,7 +1077,7 @@ it('should return the view page of the invoice', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -1331,7 +1339,7 @@ it('should send duplicate mail to provided email address', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -1596,7 +1604,7 @@ it('should print/download the invoice', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [

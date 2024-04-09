@@ -283,7 +283,7 @@ it('should returns the sales stats', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -547,7 +547,7 @@ it('should returns the purchase funnel stats', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -877,7 +877,7 @@ it('should returns the total orders stats', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -1140,7 +1140,7 @@ it('should returns the average sale stats', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -1399,7 +1399,7 @@ it('should returns the shipping collected stats', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -1659,7 +1659,7 @@ it('should returns the tax collected stats', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -1919,7 +1919,7 @@ it('should returns the refunds stats', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -2178,7 +2178,7 @@ it('should returns the top payment methods stats', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -2434,7 +2434,7 @@ it('should return the view page of sales stats', function () {
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [

@@ -368,7 +368,7 @@ trait CoreAssertions
     /**
      * Prepare invoice for assertion.
      */
-    public function prepareInvoice(Invoice $invoice, Order $order, OrderItem $orderItem): array
+    public function prepareInvoice(Order $order, OrderItem $orderItem): array
     {
         return [
             'order_id'              => $order->id,

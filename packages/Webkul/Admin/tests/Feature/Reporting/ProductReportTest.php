@@ -520,7 +520,7 @@ it('should return the top selling products by revenue reporting stats', function
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
@@ -783,7 +783,7 @@ it('should return the top selling products by quantity reporting stats', functio
         ],
 
         Invoice::class => [
-            $this->prepareInvoice($invoice, $order, $orderItem),
+            $this->prepareInvoice($order, $orderItem),
         ],
 
         InvoiceItem::class => [
