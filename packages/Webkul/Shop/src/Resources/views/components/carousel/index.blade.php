@@ -40,7 +40,7 @@
                 role="button"
                 aria-label="@lang('shop::components.carousel.previous')"
                 tabindex="0"
-                v-if="images?.length >= 2"
+                v-if="images?.length >= 2 && ! isMobile"
                 @click="navigate('prev')"
             >
             </span>
@@ -54,7 +54,7 @@
                 role="button"
                 aria-label="@lang('shop::components.carousel.next')"
                 tabindex="0"
-                v-if="images?.length >= 2"
+                v-if="images?.length >= 2 && ! isMobile"
                 @click="navigate('next')"
             >
             </span>
@@ -109,6 +109,12 @@
                 this.play();
             },
 
+            computed: {
+                isMobile() {
+                    return window.innerWidth < 768;
+                }
+            },
+
             methods: {
                 init() {
                     this.direction = document.dir;
@@ -120,39 +126,43 @@
                     this.slides.forEach((slide, index) => {
                         slide.querySelector('img')?.addEventListener('dragstart', (e) => e.preventDefault());
 
-                        slide.addEventListener('pointerdown', this.pointerDown(index));
+                        slide.addEventListener('mousedown', this.handleDragStart);
 
-                        slide.addEventListener('pointerup', this.pointerUp);
+                        slide.addEventListener('touchstart', this.handleDragStart);
 
-                        slide.addEventListener('pointerleave', this.pointerUp);
+                        slide.addEventListener('mouseup', this.handleDragEnd);
 
-                        slide.addEventListener('pointermove', this.pointerMove);
+                        slide.addEventListener('mouseleave', this.handleDragEnd);
+
+                        slide.addEventListener('touchend', this.handleDragEnd);
+
+                        slide.addEventListener('mousemove', this.handleDrag);
+
+                        slide.addEventListener('touchmove', this.handleDrag, { passive: true });
                     });
 
                     window.addEventListener('resize', this.setPositionByIndex);
                 },
 
-                pointerDown(index) {
-                    return (event) => {
-                        this.startPos = event.clientX;
+                handleDragStart(event) {
+                    this.startPos = event.type === 'mousedown' ? event.clientX : event.touches[0].clientX;
 
-                        this.isDragging = true;
+                    this.isDragging = true;
 
-                        this.animationID = requestAnimationFrame(this.animation);
-                    };
+                    this.animationID = requestAnimationFrame(this.animation);
                 },
 
-                pointerMove(event) {
+                handleDrag(event) {
                     if (! this.isDragging) {
                         return;
                     }
 
-                    const currentPosition = event.clientX;
+                    const currentPosition = event.type === 'mousemove' ? event.clientX : event.touches[0].clientX;
 
                     this.currentTranslate = this.prevTranslate + currentPosition - this.startPos;
                 },
 
-                pointerUp(event) {
+                handleDragEnd(event) {
                     clearInterval(this.autoPlayInterval);
 
                     cancelAnimationFrame(this.animationID);
@@ -219,11 +229,9 @@
                 },
 
                 visitLink(image) {
-                    if (! image.link) {
-                        return;
+                    if (image.link) {
+                        window.location.href = image.link;
                     }
-
-                    window.location.href = image.link;
                 },
 
                 navigate(type) {
