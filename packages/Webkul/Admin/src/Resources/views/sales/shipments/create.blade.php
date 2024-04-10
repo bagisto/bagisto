@@ -1,7 +1,7 @@
 <!-- Shipment Vue Components -->
 <v-create-shipment>
     <div
-        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
+        class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
     >
         <span class="icon-ship text-2xl"></span> 
 
@@ -16,7 +16,7 @@
     >
         <div>
             <div
-                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
+                class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 @click="$refs.shipment.open()"
             >
                 <span

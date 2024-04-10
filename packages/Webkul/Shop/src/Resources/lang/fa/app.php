@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'سفارش شما لغو شده است',
                     'page-title'         => 'سفارش #:order_id',
                     'payment-method'     => 'روش پرداخت',
+                    'reorder-btn-title'  => 'مرتب سازی مجدد',
                     'shipping-address'   => 'آدرس ارسال',
                     'shipping-method'    => 'روش ارسال',
                     'title'              => 'مشاهده',

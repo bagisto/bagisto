@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -53,6 +54,26 @@ class OrderController extends Controller
         abort_if(! $order, 404);
 
         return view('shop::customers.account.orders.view', compact('order'));
+    }
+
+    /**
+     * Reorder action for the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reorder(int $id)
+    {
+        $order = $this->orderRepository->findOrFail($id);
+
+        foreach ($order->items as $item) {
+            try {
+                Cart::addProduct($item->product, $item->additional);
+            } catch (\Exception $e) {
+                // do nothing
+            }
+        }
+
+        return redirect()->route('shop.checkout.cart.index');
     }
 
     /**

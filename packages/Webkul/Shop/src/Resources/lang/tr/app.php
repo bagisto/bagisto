@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Siparişiniz iptal edildi',
                     'page-title'         => 'Sipariş #:order_id',
                     'payment-method'     => 'Ödeme Yöntemi',
+                    'reorder-btn-title'  => 'Yeniden düzenle',
                     'shipping-address'   => 'Teslimat Adresi',
                     'shipping-method'    => 'Teslimat Yöntemi',
                     'title'              => 'Görüntüle',
