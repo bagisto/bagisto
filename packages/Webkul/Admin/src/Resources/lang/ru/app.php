@@ -136,7 +136,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'Заказы',
+                'create-btn' => 'Создать заказ',
+                'title'      => 'Заказы',
+
+                'search-customer' => [
+                    'create-btn'  => 'Создать клиента',
+                    'empty-info'  => 'Нет доступных клиентов для данного поискового запроса.',
+                    'empty-title' => 'Клиенты не найдены',
+                    'search-by'   => 'Поиск по электронной почте или имени',
+                    'title'       => 'Выберите клиента',
+                ],
 
                 'datagrid' => [
                     'canceled'         => 'Отменено',
@@ -154,13 +163,174 @@ return [
                     'order-id'         => 'Номер заказа',
                     'pay-by'           => 'Оплата через - :method',
                     'pay-via'          => 'Оплачено через',
-                    'pending'          => 'В ожидании',
                     'pending-payment'  => 'Ожидание оплаты',
+                    'pending'          => 'В ожидании',
                     'processing'       => 'Обработка',
                     'product-count'    => ':count + Еще продукты',
                     'status'           => 'Статус',
                     'success'          => 'Успешно',
                     'view'             => 'Просмотр',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'Добавить в корзину',
+                'back-btn'                => 'Назад',
+                'check-billing-address'   => 'Отсутствует платежный адрес.',
+                'check-shipping-address'  => 'Отсутствует адрес доставки.',
+                'configuration'           => 'Конфигурация',
+                'coupon-already-applied'  => 'Код купона уже применен.',
+                'coupon-applied'          => 'Код купона успешно применен.',
+                'coupon-error'            => 'Невозможно применить код купона.',
+                'coupon-not-found'        => 'Код купона не найден',
+                'coupon-remove'           => 'Код купона успешно удален.',
+                'error'                   => 'Что-то пошло не так',
+                'minimum-order-error'     => 'Минимальная сумма заказа не достигнута.',
+                'order-placed-success'    => 'Заказ успешно размещен.',
+                'payment-not-supported'   => 'Этот способ оплаты не поддерживается',
+                'save-btn'                => 'Создать заказ',
+                'specify-payment-method'  => 'Отсутствует способ оплаты.',
+                'specify-shipping-method' => 'Отсутствует способ доставки.',
+                'title'                   => 'Создать заказ для :name',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'Пожалуйста, выберите опцию',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'Нет',
+                        'total-amount' => 'Общая сумма',
+                    ],
+
+                    'grouped' => [
+                        'name' => 'Название',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'Ссылки',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => 'Товар успешно добавлен в корзину',
+                    'success-remove'      => 'Товар успешно удален из корзины',
+                    'success-update'      => 'Товар в корзине успешно обновлен',
+
+                    'items' => [
+                        'add-product'       => 'Добавить товар',
+                        'amount-per-unit'   => ':amount за единицу x :qty Количество',
+                        'delete'            => 'Удалить',
+                        'empty-description' => 'В корзине нет товаров.',
+                        'empty-title'       => 'Пустая корзина',
+                        'move-to-wishlist'  => 'Переместить в список желаний',
+                        'see-details'       => 'Подробнее',
+                        'sku'               => 'Артикул - :sku',
+                        'sub-total'         => 'Подитог - :sub_total',
+                        'title'             => 'Товары в корзине',
+
+                        'search' => [
+                            'add-to-cart'   => 'Добавить в корзину',
+                            'available-qty' => ':qty доступно',
+                            'empty-info'    => 'Нет товаров, доступных для данного поискового запроса.',
+                            'empty-title'   => 'Товары не найдены',
+                            'product-image' => 'Изображение товара',
+                            'qty'           => ':qty доступно',
+                            'qty'           => 'Количество',
+                            'sku'           => 'Артикул - :sku',
+                            'title'         => 'Поиск товаров',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => 'Добавить адрес',
+                        'add-new-address'  => 'Добавить новый адрес',
+                        'add-new'          => 'Добавить новый адрес',
+                        'addresses'        => 'Адреса',
+                        'back'             => 'Назад',
+                        'billing-address'  => 'Платежный адрес',
+                        'city'             => 'Город',
+                        'company-name'     => 'Название компании',
+                        'confirm'          => 'Подтвердить',
+                        'country'          => 'Страна',
+                        'edit-btn'         => 'Редактировать адрес',
+                        'email'            => 'Email',
+                        'first-name'       => 'Имя',
+                        'last-name'        => 'Фамилия',
+                        'postcode'         => 'Индекс',
+                        'proceed'          => 'Продолжить',
+                        'same-as-billing'  => 'Использовать тот же адрес для доставки?',
+                        'save-address'     => 'Сохранить в адресной книге',
+                        'save'             => 'Сохранить',
+                        'select-country'   => 'Выберите страну',
+                        'select-state'     => 'Выберите регион',
+                        'shipping-address' => 'Адрес доставки',
+                        'state'            => 'Регион',
+                        'street-address'   => 'Улица, дом',
+                        'telephone'        => 'Телефон',
+                        'title'            => 'Адрес',
+                        'title'            => 'Адрес',
+                    ],
+
+                    'payment' => [
+                        'title' => 'Оплата',
+                    ],
+
+                    'shipping' => [
+                        'title' => 'Доставка',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'Применить купон',
+                        'discount-amount' => 'Сумма скидки',
+                        'enter-your-code' => 'Введите код',
+                        'grand-total'     => 'Общая сумма',
+                        'place-order'     => 'Оформить заказ',
+                        'processing'      => 'Обработка',
+                        'shipping-amount' => 'Стоимость доставки',
+                        'sub-total'       => 'Подитог',
+                        'tax'             => 'Налог',
+                        'title'           => 'Сводка заказа',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'Добавить в корзину',
+                    'delete'            => 'Удалить',
+                    'empty-description' => 'В корзине нет товаров.',
+                    'empty-title'       => 'Пустая корзина',
+                    'see-details'       => 'Подробнее',
+                    'sku'               => 'Артикул - :sku',
+                    'title'             => 'Товары в корзине',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'Добавить в корзину',
+                    'empty-description' => 'В ваших последних заказах нет товаров.',
+                    'empty-title'       => 'Пустые заказы',
+                    'see-details'       => 'Подробнее',
+                    'sku'               => 'Артикул - :sku',
+                    'title'             => 'Товары последнего заказа',
+                    'view'              => 'Просмотр',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'Добавить в корзину',
+                    'delete'            => 'Удалить',
+                    'empty-description' => 'В списке желаний нет товаров.',
+                    'empty-title'       => 'Пустой список желаний',
+                    'see-details'       => 'Подробнее',
+                    'sku'               => 'Артикул - :sku',
+                    'title'             => 'Товары в списке желаний',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'Добавить в корзину',
+                    'delete'            => 'Удалить',
+                    'empty-description' => 'В списке сравнения нет товаров.',
+                    'empty-title'       => 'Пустой список сравнения',
+                    'sku'               => 'Артикул - :sku',
+                    'title'             => 'Товары в списке сравнения',
                 ],
             ],
 
@@ -213,6 +383,7 @@ return [
                 'refund'                => 'Возврат',
                 'refund-id'             => 'Возврат #:refund',
                 'refunded'              => 'Возвращено',
+                'reorder'               => 'Переупорядочить',
                 'ship'                  => 'Отправить',
                 'shipment'              => 'Отправка #:shipment',
                 'shipments'             => 'Отправки',
@@ -1230,11 +1401,12 @@ return [
                 'active'                      => 'Активен',
                 'address-delete-confirmation' => 'Вы уверены, что хотите удалить этот адрес?',
                 'back-btn'                    => 'Назад',
+                'create-order'                => 'Создать заказ',
                 'customer'                    => 'Клиент',
                 'date-of-birth'               => 'Дата рождения - :dob',
                 'default-address'             => 'Адрес по умолчанию',
-                'delete'                      => 'Удалить',
                 'delete-account'              => 'Удалить аккаунт',
+                'delete'                      => 'Удалить',
                 'email'                       => 'Эл. почта - :email',
                 'empty-description'           => 'Создайте новые адреса для клиента',
                 'empty-title'                 => 'Добавить адрес клиента',
@@ -1243,6 +1415,7 @@ return [
                 'inactive'                    => 'Неактивен',
                 'login-as-customer'           => 'Войти как клиент',
                 'note-created-success'        => 'Примечание успешно создано',
+                'order-create-confirmation'   => 'Вы уверены, что хотите создать заказ для этого клиента?',
                 'phone'                       => 'Телефон - :phone',
                 'set-as-default'              => 'Установить по умолчанию',
                 'suspended'                   => 'Приостановлен',
@@ -1366,8 +1539,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'Счета (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'Счета (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1381,14 +1554,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'Заказы (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'Общий доход - :revenue',
+                    'count'         => 'Заказы (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'Общий доход - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'ID - :id',
-                    'count'       => 'Отзывы (:count)',
+                    'id'    => 'ID - :id',
+                    'count' => 'Отзывы (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'Элемент корзины успешно удален.',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'Элемент списка желаний успешно удален.',
+                ],
+
+                'compare' => [
+                    'delete-success' => 'Элемент сравнения успешно удален.',
                 ],
             ],
 

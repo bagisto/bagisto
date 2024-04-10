@@ -136,7 +136,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'অর্ডার',
+                'create-btn' => 'অর্ডার তৈরি করুন',
+                'title'      => 'অর্ডারস',
+
+                'search-customer' => [
+                    'create-btn'  => 'গ্রাহক তৈরি করুন',
+                    'empty-info'  => 'কোন গ্রাহক খুঁজে পাওয়া যায়নি।',
+                    'empty-title' => 'কোন গ্রাহক পাওয়া যায়নি',
+                    'search-by'   => 'ইমেইল বা নাম দ্বারা অনুসন্ধান করুন',
+                    'title'       => 'গ্রাহক নির্বাচন করুন',
+                ],
 
                 'datagrid' => [
                     'canceled'        => 'বাতিল',
@@ -154,13 +163,174 @@ return [
                     'order-id'        => 'অর্ডার আইডি',
                     'pay-by'          => ':method দ্বারা পরিশোধ করুন',
                     'pay-via'         => 'পেমেন্ট দ্বারা',
-                    'pending'         => 'মুলতুবি',
                     'pending-payment' => 'মুলতুবি পেমেন্ট',
+                    'pending'         => 'মুলতুবি',
                     'processing'      => 'প্রসেসিং',
                     'product-count'   => ':count + আরও পণ্য',
                     'status'          => 'স্থিতি',
                     'success'         => 'সাফল্য',
                     'view'            => 'দেখুন',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'কার্টে যোগ করুন',
+                'back-btn'                => 'পিছনে যান',
+                'check-billing-address'   => 'বিলিং ঠিকানা অনুপস্থিত।',
+                'check-shipping-address'  => 'শিপিং ঠিকানা অনুপস্থিত।',
+                'configuration'           => 'কনফিগারেশন',
+                'coupon-already-applied'  => 'কুপন কোড ইতিমধ্যেই প্রয়োগ করা হয়েছে।',
+                'coupon-applied'          => 'কুপন কোড সফলভাবে প্রয়োগ করা হয়েছে।',
+                'coupon-error'            => 'কুপন কোড প্রয়োগ করা যায় না।',
+                'coupon-not-found'        => 'কুপন পাওয়া যায়নি',
+                'coupon-remove'           => 'কুপন কোড সফলভাবে সরানো হয়েছে।',
+                'error'                   => 'কিছু ভুল হয়েছে',
+                'minimum-order-error'     => 'সর্বনিম্ন অর্ডার পরিমাণ পূরণ হয়নি।',
+                'order-placed-success'    => 'অর্ডার সফলভাবে স্থাপিত হয়েছে।',
+                'payment-not-supported'   => 'এই পেমেন্ট পদ্ধতি সমর্থিত নয়',
+                'save-btn'                => 'অর্ডার তৈরি করুন',
+                'specify-payment-method'  => 'পেমেন্ট পদ্ধতি অনুলিপি করুন।',
+                'specify-shipping-method' => 'শিপিং পদ্ধতি অনুলিপি করুন।',
+                'title'                   => ':name এর জন্য অর্ডার তৈরি করুন',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'দয়া করে একটি বিকল্প নির্বাচন করুন',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'কোনটিই নয়',
+                        'total-amount' => 'মোট পরিমাণ',
+                    ],
+
+                    'grouped' => [
+                        'name' => 'নাম',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'লিঙ্কগুলি',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => 'পণ্যটি সফলভাবে কার্টে যোগ করা হয়েছে',
+                    'success-remove'      => 'আইটেমটি সফলভাবে কার্ট থেকে সরানো হয়েছে',
+                    'success-update'      => 'কার্ট আইটেমটি সফলভাবে আপডেট হয়েছে',
+
+                    'items' => [
+                        'add-product'       => 'পণ্য যোগ করুন',
+                        'amount-per-unit'   => ':amount প্রতি ইউনিট x :qty পরিমাণ',
+                        'delete'            => 'মুছে ফেলুন',
+                        'empty-description' => 'কার্টে কোনও আইটেম পাওয়া যায়নি।',
+                        'empty-title'       => 'খালি কার্ট আইটেমগুলি',
+                        'move-to-wishlist'  => 'উইশলিস্টে সরান',
+                        'see-details'       => 'বিস্তারিত দেখুন',
+                        'sku'               => 'এসকিউ - :sku',
+                        'sub-total'         => 'সাব টোটাল - :sub_total',
+                        'title'             => 'কার্ট আইটেমগুলি',
+
+                        'search' => [
+                            'add-to-cart'   => 'কার্টে যোগ করুন',
+                            'available-qty' => ':qty পাওয়া যায়',
+                            'empty-info'    => 'অনুসন্ধান শব্দের জন্য কোনও পণ্য পাওয়া যায় নি।',
+                            'empty-title'   => 'কোনও পণ্য পাওয়া যায়নি',
+                            'product-image' => 'পণ্যের চিত্র',
+                            'qty'           => ':qty পাওয়া যায়',
+                            'qty'           => 'পরিমাণ',
+                            'sku'           => 'এসকিউ - :sku',
+                            'title'         => 'পণ্য অনুসন্ধান করুন',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => 'ঠিকানা যোগ করুন',
+                        'add-new-address'  => 'নতুন ঠিকানা যোগ করুন',
+                        'add-new'          => 'নতুন ঠিকানা যোগ করুন',
+                        'addresses'        => 'ঠিকানা',
+                        'back'             => 'পিছনে যান',
+                        'billing-address'  => 'বিলিং ঠিকানা',
+                        'city'             => 'শহর',
+                        'company-name'     => 'কোম্পানির নাম',
+                        'confirm'          => 'নিশ্চিত করুন',
+                        'country'          => 'দেশ',
+                        'edit-btn'         => 'ঠিকানা সম্পাদনা করুন',
+                        'email'            => 'ইমেল',
+                        'first-name'       => 'নামের প্রথম অংশ',
+                        'last-name'        => 'নামের শেষাংশ',
+                        'postcode'         => 'জিপ / পোস্টকোড',
+                        'proceed'          => 'এগিয়ে যান',
+                        'same-as-billing'  => 'শিপিং জন্য একই ঠিকানা ব্যবহার করবেন?',
+                        'save-address'     => 'এটি ঠিকানা বইয়ে সংরক্ষণ করুন',
+                        'save'             => 'সংরক্ষণ করুন',
+                        'select-country'   => 'দেশ নির্বাচন করুন',
+                        'select-state'     => 'রাষ্ট্র নির্বাচন করুন',
+                        'shipping-address' => 'শিপিং ঠিকানা',
+                        'state'            => 'রাষ্ট্র',
+                        'street-address'   => 'রাস্তার ঠিকানা',
+                        'telephone'        => 'টেলিফোন',
+                        'title'            => 'ঠিকানা',
+                        'title'            => 'ঠিকানা',
+                    ],
+
+                    'payment' => [
+                        'title' => 'পেমেন্ট',
+                    ],
+
+                    'shipping' => [
+                        'title' => 'শিপিং',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'কুপন প্রয়োগ করুন',
+                        'discount-amount' => 'ছাড় পরিমাণ',
+                        'enter-your-code' => 'আপনার কোড লিখুন',
+                        'grand-total'     => 'সর্বমোট',
+                        'place-order'     => 'অর্ডার করুন',
+                        'processing'      => 'প্রসেসিং',
+                        'shipping-amount' => 'শিপিং পরিমাণ',
+                        'sub-total'       => 'সাবটোটাল',
+                        'tax'             => 'কর',
+                        'title'           => 'অর্ডার সংক্ষেপ',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'কার্টে যোগ করুন',
+                    'delete'            => 'মুছে ফেলুন',
+                    'empty-description' => 'কার্টে কোনও আইটেম পাওয়া যায়নি।',
+                    'empty-title'       => 'খালি কার্ট',
+                    'see-details'       => 'বিস্তারিত দেখুন',
+                    'sku'               => 'এসকিউ - :sku',
+                    'title'             => 'কার্ট আইটেমগুলি',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'কার্টে যোগ করুন',
+                    'empty-description' => 'আপনার সাম্প্রতিক অর্ডারে কোনও আইটেম পাওয়া যায়নি।',
+                    'empty-title'       => 'খালি অর্ডারগুলি',
+                    'see-details'       => 'বিস্তারিত দেখুন',
+                    'sku'               => 'এসকিউ - :sku',
+                    'title'             => 'সাম্প্রতিক অর্ডার আইটেমগুলি',
+                    'view'              => 'দেখুন',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'কার্টে যোগ করুন',
+                    'delete'            => 'মুছে ফেলুন',
+                    'empty-description' => 'আপনার উইশলিস্টে কোনও আইটেম পাওয়া যায়নি।',
+                    'empty-title'       => 'খালি উইশলিস্ট আইটেমগুলি',
+                    'see-details'       => 'বিস্তারিত দেখুন',
+                    'sku'               => 'এসকিউ - :sku',
+                    'title'             => 'উইশলিস্ট আইটেমগুলি',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'কার্টে যোগ করুন',
+                    'delete'            => 'মুছে ফেলুন',
+                    'empty-description' => 'আপনার তুলনা তালিকায় কোনও আইটেম পাওয়া যায়নি।',
+                    'empty-title'       => 'খালি তুলনা আইটেমগুলি',
+                    'sku'               => 'এসকিউ - :sku',
+                    'title'             => 'তুলনা আইটেমগুলি',
                 ],
             ],
 
@@ -213,6 +383,7 @@ return [
                 'refund'                => 'ফেরত',
                 'refund-id'             => 'ফেরত দেওয়া #:refund',
                 'refunded'              => 'ফেরত দেওয়া',
+                'reorder'               => 'পুনরায় বাছাই করুন',
                 'ship'                  => 'প্রেরণ',
                 'shipment'              => 'প্রেরণ #:shipment',
                 'shipments'             => 'প্রেরণ',
@@ -1230,11 +1401,12 @@ return [
                 'active'                      => 'সক্রিয়',
                 'address-delete-confirmation' => 'আপনি কি এই ঠিকানা মুছতে চান?',
                 'back-btn'                    => 'পিছনে যান',
+                'create-order'                => 'অর্ডার তৈরি করুন',
                 'customer'                    => 'গ্রাহক',
                 'date-of-birth'               => 'জন্ম তারিখ - :dob',
                 'default-address'             => 'ডিফল্ট ঠিকানা',
-                'delete'                      => 'মুছুন',
                 'delete-account'              => 'অ্যাকাউন্ট মুছুন',
+                'delete'                      => 'মুছুন',
                 'email'                       => 'ইমেইল - :email',
                 'empty-description'           => 'গ্রাহকের জন্য নতুন ঠিকানা তৈরি করুন',
                 'empty-title'                 => 'গ্রাহক ঠিকানা যোগ করুন',
@@ -1243,6 +1415,7 @@ return [
                 'inactive'                    => 'নিষ্ক্রিয়',
                 'login-as-customer'           => 'গ্রাহক হিসেবে লগইন করুন',
                 'note-created-success'        => 'নোট সফলভাবে তৈরি হয়েছে',
+                'order-create-confirmation'   => 'আপনি কি এই গ্রাহকের জন্য অর্ডার তৈরি করতে চান?',
                 'phone'                       => 'ফোন - :phone',
                 'set-as-default'              => 'ডিফল্ট হিসেবে সেট করুন',
                 'suspended'                   => 'স্থগিত',
@@ -1366,8 +1539,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'চালান (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'চালান (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1381,14 +1554,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'অর্ডার (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'মোট আয় - :revenue',
+                    'count'         => 'অর্ডার (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'মোট আয় - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'আইডি - :id',
-                    'count'       => 'রিভিউ (:count)',
+                    'id'    => 'আইডি - :id',
+                    'count' => 'রিভিউ (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'কার্ট আইটেম সফলভাবে মুছে ফেলা হয়েছে।',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'উইশলিস্ট আইটেম সফলভাবে মুছে ফেলা হয়েছে।',
+                ],
+
+                'compare' => [
+                    'delete-success' => 'তুলনা আইটেম সফলভাবে মুছে ফেলা হয়েছে।',
                 ],
             ],
 

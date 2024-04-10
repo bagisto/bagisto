@@ -61,6 +61,13 @@ class Configurable extends AbstractType
     protected $showQuantityBox = true;
 
     /**
+     * Product can be added to cart with options or not.
+     *
+     * @var bool
+     */
+    protected $canBeAddedToCartWithoutOptions = false;
+
+    /**
      * Has child products i.e. variants.
      *
      * @var bool

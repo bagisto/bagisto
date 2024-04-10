@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'تم إلغاء طلبك بنجاح',
                     'page-title'         => 'الطلب #:order_id',
                     'payment-method'     => 'طريقة الدفع',
+                    'reorder-btn-title'  => 'إعادة ترتيب',
                     'shipping-address'   => 'عنوان الشحن',
                     'shipping-method'    => 'طريقة الشحن',
                     'title'              => 'عرض',

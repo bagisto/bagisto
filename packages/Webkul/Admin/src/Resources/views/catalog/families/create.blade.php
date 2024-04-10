@@ -178,7 +178,7 @@
                                         <div
                                             class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group cursor-pointer transition-all group-hover:text-gray-800 dark:group-hover:text-white"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
-                                            @click="groupSelected(element)"
+                                            @click.stop="groupSelected(element)"
                                         >
                                             <i class="icon-drag text-xl text-inherit transition-all group-hover:text-gray-800 dark:group-hover:text-white cursor-grab"></i>
 
