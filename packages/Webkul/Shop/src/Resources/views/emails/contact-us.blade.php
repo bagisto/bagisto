@@ -5,7 +5,18 @@
         </p>
     </div>
 
-    <p style="font-size: 16px;color: #384860;line-height: 24px;margin-bottom: 40px">
-        You can reply to this email to contact <a href="mailto:{{ request()->email }}">{{ request()->email }}</a>.
+        <p style="font-size: 16px;color: #384860;line-height: 24px;margin-bottom: 40px">
+            @lang('shop::app.emails.contact.to')
+            
+            <a href="mailto:{{ request()->email }}">{{ request()->email }}</a>,
+
+            @lang('shop::app.emails.contact.reply-to-mail')
+
+            @if(request()->contact)
+                @lang('shop::app.emails.contact.reach-via-phone')
+
+                <a href="tel:{{ request()->contact }}">{{ request()->contact }}</a>.
+            @endif
+        </p>
     </p>
 @endcomponent

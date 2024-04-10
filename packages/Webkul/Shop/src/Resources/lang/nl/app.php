@@ -877,6 +877,12 @@ return [
             ],
         ],
 
+        'contact' => [
+            'reply-to-mail'   => 'reageer alstublieft op deze e-mail.',
+            'reach-via-phone' => 'U kunt ons ook telefonisch bereiken op',
+            'to'              => 'Om contact op te nemen met',
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => 'Bedankt voor je bestelling :order_id geplaatst op :created_at',

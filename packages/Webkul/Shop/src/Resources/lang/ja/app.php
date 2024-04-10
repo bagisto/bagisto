@@ -877,6 +877,12 @@ return [
             ],
         ],
 
+        'contact' => [
+            'reply-to-mail'   => 'このメールに返信してください。',
+            'reach-via-phone' => 'または、電話でお問い合わせいただけます。',
+            'to'              => '以下の連絡先にお問い合わせください。',
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => ':created_at に注文 :order_id をご注文いただき、ありがとうございます',

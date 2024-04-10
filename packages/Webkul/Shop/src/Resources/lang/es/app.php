@@ -877,6 +877,12 @@ return [
             ],
         ],
 
+        'contact' => [
+            'reply-to-mail'   => 'por favor responda a este correo electrónico.',
+            'reach-via-phone' => 'Alternativamente, puede comunicarse con nosotros por teléfono al',
+            'to'              => 'Para contactar a',
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => 'Vielen Dank für Ihre Bestellung :order_id, aufgegeben am :created_at',

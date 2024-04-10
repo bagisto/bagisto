@@ -877,6 +877,12 @@ return [
             ],
         ],
 
+        'contact' => [
+            'reply-to-mail'   => 'lütfen bu e-postaya yanıt verin.',
+            'reach-via-phone' => 'Alternatif olarak, bize telefonla şu numaradan ulaşabilirsiniz:',
+            'to'              => 'İletişim için',
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => ':created_at tarihindeki :order_id numaralı siparişiniz için teşekkürler',

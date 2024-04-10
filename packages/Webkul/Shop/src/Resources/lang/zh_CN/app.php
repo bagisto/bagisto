@@ -877,6 +877,12 @@ return [
             ],
         ],
 
+        'contact' => [
+            'reply-to-mail'   => '请回复此电子邮件。',
+            'reach-via-phone' => '或者，您可以通过电话联系我们：',
+            'to'              => '联系',
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => '感谢您的订单 :order_id，下单时间 :created_at',
