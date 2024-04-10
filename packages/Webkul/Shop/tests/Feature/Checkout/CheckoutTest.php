@@ -211,12 +211,14 @@ it('should store the shipping address as the billing address when use_for_shippi
         'additional'        => $additional,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
     $response = postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => $billingAddress = [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'use_for_shipping' => 1,
             'address'          => [fake()->address()],
         ],
@@ -312,18 +314,20 @@ it('should store the billing and shipping address for guest user', function () {
         'additional'        => $additional,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
     $response = postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => $billingAddress = [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => 0,
         ],
 
         'shipping' => $shippingAddress = [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address' => [fake()->address()],
         ],
     ])
@@ -417,12 +421,14 @@ it('should store the billing address for non stockable items for guest user', fu
         'additional'        => $additional,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => $billingAddress = [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => 1,
         ],
@@ -505,6 +511,8 @@ it('should store the shipping address as the billing address when use_for_shippi
         'additional'        => $additional,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
@@ -512,7 +520,7 @@ it('should store the shipping address as the billing address when use_for_shippi
 
     $response = postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => $billingAddress = [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => 1,
         ],
@@ -610,6 +618,8 @@ it('should store the billing and shipping address for customer', function () {
         'additional'        => $additional,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
@@ -617,13 +627,13 @@ it('should store the billing and shipping address for customer', function () {
 
     $response = postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => $billingAddress = [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => 0,
         ],
 
         'shipping' => $shippingAddress = [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address' => [fake()->address()],
         ],
     ])
@@ -720,6 +730,8 @@ it('should store the billing address for non stockable items for customer', func
         'additional'        => $additional,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
@@ -727,7 +739,7 @@ it('should store the billing address for non stockable items for customer', func
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => $billingAddress = [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => 1,
         ],
@@ -810,6 +822,8 @@ it('should fails the certain validation errors when use for shipping is set to f
         'additional'        => $additional,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
@@ -817,7 +831,7 @@ it('should fails the certain validation errors when use for shipping is set to f
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => false,
         ],
@@ -878,12 +892,14 @@ it('should fails the certain validation errors when use for shipping is set to f
         'additional'        => $additional,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => false,
         ],
@@ -3806,6 +3822,8 @@ it('should not return the cash on delivery payment method if product is download
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
@@ -3821,13 +3839,13 @@ it('should not return the cash on delivery payment method if product is download
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => false,
         ],
 
         'shipping' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address' => [fake()->address()],
         ],
     ])
@@ -3901,6 +3919,8 @@ it('should not return the shipping methods if product is downloadable', function
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
@@ -3916,13 +3936,13 @@ it('should not return the shipping methods if product is downloadable', function
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => false,
         ],
 
         'shipping' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address' => [fake()->address()],
         ],
     ])
@@ -3995,6 +4015,8 @@ it('should not return the cash on delivery payment method if product is virtual'
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
@@ -4010,13 +4032,13 @@ it('should not return the cash on delivery payment method if product is virtual'
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => 0,
         ],
 
         'shipping' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address' => [fake()->address()],
         ],
     ])
@@ -4090,6 +4112,8 @@ it('should not return the shipping methods if product is virtual', function () {
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
@@ -4105,13 +4129,13 @@ it('should not return the shipping methods if product is virtual', function () {
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address'          => [fake()->address()],
             'use_for_shipping' => fake()->boolean(),
         ],
 
         'shipping' => [
-            ...CustomerAddress::factory()->create()->toArray(),
+            ...$customerAddress,
             'address' => [fake()->address()],
         ],
     ])
