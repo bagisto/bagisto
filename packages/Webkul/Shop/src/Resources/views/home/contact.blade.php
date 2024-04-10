@@ -26,6 +26,7 @@
 
                         <x-shop::form.control-group.control
                             type="text"
+                            class="!p-[20px_25px] rounded-lg"
                             name="name"
                             rules="required"
                             :value="old('name')"
@@ -65,6 +66,7 @@
 
                         <x-shop::form.control-group.control
                             type="number"
+                            class="!p-[20px_25px] rounded-lg"
                             name="contact"
                             :value="old('contact')"
                             :label="trans('shop::app.home.contact.phone-number')"
@@ -82,6 +84,7 @@
 
                         <x-shop::form.control-group.control
                             type="textarea"
+                            class="!p-[20px_25px] rounded-lg"
                             name="message"
                             rules="required"
                             :label="trans('shop::app.home.contact.message')"
