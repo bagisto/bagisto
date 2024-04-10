@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email'        => 'Verifieer je e-mailaccount',
         ],
+
+        'contact' => [
+            'about'         => 'Stuur ons een bericht en we zullen zo snel mogelijk reageren',
+            'desc'          => 'Waar denk je aan?',
+            'describe-here' => 'Beschrijf hier',
+            'email'         => 'E-mail',
+            'message'       => 'Bericht',
+            'name'          => 'Naam',
+            'phone-number'  => 'Telefoonnummer',
+            'submit'        => 'Verzenden',
+            'title'         => 'Neem contact met ons op',
+        ],
     ],
 
     'partials' => [

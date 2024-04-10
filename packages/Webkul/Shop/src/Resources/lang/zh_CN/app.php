@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => '重新发送验证电子邮件',
             'verify-email'        => '验证您的电子邮件帐户',
         ],
+
+        'contact' => [
+            'about'         => '给我们留言，我们会尽快回复您',
+            'desc'          => '您有什么问题？',
+            'describe-here' => '在这里描述',
+            'email'         => '电子邮件',
+            'message'       => '留言',
+            'name'          => '姓名',
+            'phone-number'  => '电话号码',
+            'submit'        => '提交',
+            'title'         => '联系我们',
+        ],
     ],
     'partials' => [
         'pagination' => [

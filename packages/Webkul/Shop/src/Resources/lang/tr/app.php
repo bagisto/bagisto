@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => 'Doğrulama E-postası Tekrar Gönder',
             'verify-email'        => 'E-posta hesabınızı doğrulayın',
         ],
+
+        'contact' => [
+            'about'         => 'Bize bir not bırakın ve en kısa sürede size geri döneceğiz',
+            'desc'          => 'Aklınızda ne var?',
+            'describe-here' => 'Burayı açıklayın',
+            'email'         => 'E-posta',
+            'message'       => 'Mesaj',
+            'name'          => 'Ad',
+            'phone-number'  => 'Telefon Numarası',
+            'submit'        => 'Gönder',
+            'title'         => 'Bize Ulaşın',
+        ],
     ],
 
     'partials' => [

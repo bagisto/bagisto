@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => 'Reenviar E-mail de Verificação',
             'verify-email'        => 'Verifique sua conta de e-mail',
         ],
+
+        'contact' => [
+            'about'         => 'Deixe-nos uma mensagem e entraremos em contato o mais rápido possível',
+            'desc'          => 'No que você está pensando?',
+            'describe-here' => 'Descreva aqui',
+            'email'         => 'E-mail',
+            'message'       => 'Mensagem',
+            'name'          => 'Nome',
+            'phone-number'  => 'Número de telefone',
+            'submit'        => 'Enviar',
+            'title'         => 'Entre em contato',
+        ],
     ],
 
     'partials' => [

@@ -758,9 +758,21 @@ return [
 
     'home' => [
         'index' => [
-            'offer'               => 'Bénéficiez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
+            'offer'               => 'Profitez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
             'resend-verify-email' => 'Renvoyer l\'e-mail de vérification',
             'verify-email'        => 'Vérifiez votre adresse e-mail',
+        ],
+
+        'contact' => [
+            'about'         => 'Laissez-nous une note et nous vous répondrons dès que possible',
+            'desc'          => 'Qu\'est-ce qui vous préoccupe ?',
+            'describe-here' => 'Décrivez ici',
+            'email'         => 'E-mail',
+            'message'       => 'Message',
+            'name'          => 'Nom',
+            'phone-number'  => 'Numéro de téléphone',
+            'submit'        => 'Envoyer',
+            'title'         => 'Contactez-nous',
         ],
     ],
 

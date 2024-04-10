@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
             'verify-email'        => 'Zweryfikuj swoje konto e-mail',
         ],
+
+        'contact' => [
+            'about'         => 'Napisz do nas, a odpowiemy tak szybko, jak to możliwe',
+            'desc'          => 'Co Cię nurtuje?',
+            'describe-here' => 'Opisz tutaj',
+            'email'         => 'E-mail',
+            'message'       => 'Wiadomość',
+            'name'          => 'Imię',
+            'phone-number'  => 'Numer telefonu',
+            'submit'        => 'Wyślij',
+            'title'         => 'Skontaktuj się z nami',
+        ],
     ],
 
     'partials' => [

@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => 'Rispedisci l\'email di verifica',
             'verify-email'        => 'Verifica il tuo account email',
         ],
+
+        'contact' => [
+            'about'         => 'Scrivici una nota e ti risponderemo il prima possibile',
+            'desc'          => 'Cosa hai in mente?',
+            'describe-here' => 'Descrivi qui',
+            'email'         => 'Email',
+            'message'       => 'Messaggio',
+            'name'          => 'Nome',
+            'phone-number'  => 'Numero di telefono',
+            'submit'        => 'Invia',
+            'title'         => 'Contattaci',
+        ],
     ],
 
     'partials' => [

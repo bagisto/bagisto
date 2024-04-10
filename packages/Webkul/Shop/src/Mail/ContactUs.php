@@ -5,7 +5,6 @@ namespace Webkul\Shop\Mail;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Webkul\Shop\Mail\Mailable;
 
 class ContactUs extends Mailable
 {

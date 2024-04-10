@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => 'Resend Verification Email',
             'verify-email'        => 'Verify your email account',
         ],
+
+        'contact' => [
+            'about'         => 'Jot us a note, and we’ll get back to you as quickly as possible',
+            'desc'          => ' What’s on your mind?',
+            'describe-here' => 'Describe Here',
+            'email'         => 'Email',
+            'message'       => 'Message',
+            'name'          => 'Name',
+            'phone-number'  => 'Phone Number',
+            'submit'        => 'Submit',
+            'title'         => 'Contact Us',
+        ],
     ],
 
     'partials' => [

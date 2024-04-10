@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => '確認メールを再送信',
             'verify-email'        => 'メールアカウントを確認',
         ],
+
+        'contact' => [
+            'about'         => '私たちにメモを書いてください。できるだけ早く返信いたします。',
+            'desc'          => ' 何をお考えですか？',
+            'describe-here' => 'ここに説明してください',
+            'email'         => 'メール',
+            'message'       => 'メッセージ',
+            'name'          => '名前',
+            'phone-number'  => '電話番号',
+            'submit'        => '送信',
+            'title'         => 'お問い合わせ',
+        ],
     ],
 
     'partials' => [

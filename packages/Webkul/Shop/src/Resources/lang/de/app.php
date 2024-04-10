@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
             'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
         ],
+
+        'contact' => [
+            'about'         => 'Schreiben Sie uns eine Nachricht und wir werden uns so schnell wie möglich bei Ihnen melden',
+            'desc'          => 'Was beschäftigt Sie?',
+            'describe-here' => 'Hier beschreiben',
+            'email'         => 'E-Mail',
+            'message'       => 'Nachricht',
+            'name'          => 'Name',
+            'phone-number'  => 'Telefonnummer',
+            'submit'        => 'Absenden',
+            'title'         => 'Kontaktieren Sie uns',
+        ],
     ],
 
     'partials' => [

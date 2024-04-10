@@ -762,6 +762,18 @@ return [
             'resend-verify-email' => 'שלח מחדש אימייל לאימות',
             'verify-email'        => 'אמת את חשבון האימייל שלך',
         ],
+
+        'contact' => [
+            'about'         => 'שלח לנו הודעה ונחזור אליך בהקדם האפשרי',
+            'desc'          => 'מה על דעתך?',
+            'describe-here' => 'תיאור כאן',
+            'email'         => 'אימייל',
+            'message'       => 'הודעה',
+            'name'          => 'שם',
+            'phone-number'  => 'מספר טלפון',
+            'submit'        => 'שלח',
+            'title'         => 'צור קשר',
+        ],
     ],
 
     'partials' => [

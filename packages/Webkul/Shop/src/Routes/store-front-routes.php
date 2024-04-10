@@ -16,13 +16,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     Route::get('page/{slug}', [PageController::class, 'view'])
         ->name('shop.cms.page')
         ->middleware('cacheResponse');
-    Route::get('contact-us', [PageController::class, 'contact'])
-        ->name('shop.contact_us')
-        ->middleware('cacheResponse');
-
-    Route::post('contact-us', [PageController::class, 'store'])
-        ->name('shop.contact_us.store')
-        ->middleware('cacheResponse');
 
     /**
      * Fallback route.
@@ -36,6 +29,14 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
      */
     Route::get('/', [HomeController::class, 'index'])
         ->name('shop.home.index')
+        ->middleware('cacheResponse');
+
+    Route::get('contact-us', [HomeController::class, 'contact'])
+        ->name('shop.home.contact')
+        ->middleware('cacheResponse');
+
+    Route::post('contact-us', [HomeController::class, 'store'])
+        ->name('shop.home.contact.store')
         ->middleware('cacheResponse');
 
     /**

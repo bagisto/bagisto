@@ -758,9 +758,21 @@ return [
 
     'home' => [
         'index' => [
-            'offer'               => 'Erhalten Sie BIS ZU 40 % RABATT auf Ihre erste Bestellung JETZT SHOPPEN',
-            'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
-            'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
+            'offer'               => 'Obtén HASTA UN 40 % DE DESCUENTO en tu primera compra ¡COMPRA AHORA!',
+            'resend-verify-email' => 'Reenviar correo de verificación',
+            'verify-email'        => 'Verifica tu dirección de correo electrónico',
+        ],
+
+        'contact' => [
+            'about'         => 'Déjanos una nota y te responderemos lo más rápido posible',
+            'desc'          => '¿En qué estás pensando?',
+            'describe-here' => 'Describe aquí',
+            'email'         => 'Correo electrónico',
+            'message'       => 'Mensaje',
+            'name'          => 'Nombre',
+            'phone-number'  => 'Número de teléfono',
+            'submit'        => 'Enviar',
+            'title'         => 'Contáctanos',
         ],
     ],
 

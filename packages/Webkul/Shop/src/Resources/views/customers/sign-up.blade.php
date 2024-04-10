@@ -163,7 +163,6 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.password_confirmation.after') !!}
 
-
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
                         <div class="flex mb-5">
                             {!! Captcha::render() !!}

@@ -2,10 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Illuminate\Support\Facades\Mail;
 use Webkul\CMS\Repositories\PageRepository;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
-use Webkul\Shop\Mail\ContactUs;
 
 class PageController extends Controller
 {
@@ -43,30 +41,5 @@ class PageController extends Controller
         }
 
         return view('shop::cms.page')->with('page', $page);
-    }
-
-    public function contact()
-    {
-        return view('shop::cms.page');
-    }
-
-    public function store()
-    {
-        try {
-            Mail::queue(new ContactUs(request()->only([
-                'name',
-                'email',
-                'contact',
-                'message'
-            ])));
-
-            session()->flash('success', trans('contact successfully sent to the site'));
-        } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
-
-            report($e);
-        }
-
-        return back();
     }
 }
