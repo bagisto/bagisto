@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => 'आपका आर्डर रद्द कर दिया गया है',
                     'page-title'         => 'आर्डर #:order_id',
                     'payment-method'     => 'भुगतान मेथड',
+                    'reorder-btn-title'  => 'पुनः क्रमबद्ध करें',
                     'shipping-address'   => 'शिपिंग पता',
                     'shipping-method'    => 'शिपिंग मेथड',
                     'title'              => 'देखें',

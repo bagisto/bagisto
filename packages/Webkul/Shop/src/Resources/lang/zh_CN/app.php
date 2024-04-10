@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => '您的订单已取消',
                     'page-title'         => '订单 #:order_id',
                     'payment-method'     => '付款方式',
+                    'reorder-btn-title'  => '重新排序',
                     'shipping-address'   => '送货地址',
                     'shipping-method'    => '送货方式',
                     'title'              => '查看',

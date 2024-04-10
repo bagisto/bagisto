@@ -78,7 +78,7 @@
 
                                     <div class="flex justify-between items-center">
                                         <p class="text-base font-medium">
-                                            @{{ address.first_name }} @{{ address.last_name }}
+                                            @{{ address.first_name + ' ' + address.last_name }}
 
                                             <template v-if="address.company_name">
                                                 (@{{ address.company_name }})
@@ -198,7 +198,7 @@
 
                                             <div class="flex justify-between items-center">
                                                 <p class="text-base font-medium">
-                                                    @{{ address.first_name }} @{{ address.last_name }}
+                                                    @{{ address.first_name + ' ' + address.last_name }}
 
                                                     <template v-if="address.company_name">
                                                         (@{{ address.company_name }})
@@ -433,10 +433,11 @@
 
                     if (! address) {
                         if (params.save_address) {
-                            this.createCustomerAddress(params)
+                            this.createCustomerAddress(params, { setErrors })
                                 .then((response) => {
                                     this.addAddressToList(response.data.data);
-                                });
+                                })
+                                .catch((error) => {});
                         } else {
                             this.addAddressToList(params);
                         }
@@ -446,17 +447,19 @@
 
                     if (params.save_address) {
                         if (address.address_type == 'customer') {
-                            this.updateCustomerAddress(params.id, params)
+                            this.updateCustomerAddress(params.id, params, { setErrors })
                                 .then((response) => {
                                     this.updateAddressInList(response.data.data);
-                                });
+                                })
+                                .catch((error) => {});
                         } else {
                             this.removeAddressFromList(params);
 
-                            this.createCustomerAddress(params)
+                            this.createCustomerAddress(params, { setErrors })
                                 .then((response) => {
                                     this.addAddressToList(response.data.data);
-                                });
+                                })
+                                .catch((error) => {});
                         }
                     } else {
                         this.updateAddressInList(params);
@@ -496,7 +499,7 @@
                     this.customerSavedAddresses[this.activeAddressForm] = this.customerSavedAddresses[this.activeAddressForm].filter(address => address.id != params.id);
                 },
 
-                createCustomerAddress(params) {
+                createCustomerAddress(params, { setErrors }) {
                     this.isStoring = true;
 
                     return this.$axios.post('{{ route('shop.api.customers.account.addresses.store') }}', params)
@@ -509,12 +512,20 @@
                             this.isStoring = false;
 
                             if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
+                                let errors = {};
+
+                                Object.keys(error.response.data.errors).forEach(key => {
+                                    errors[this.activeAddressForm + '.' + key] = error.response.data.errors[key];
+                                });
+
+                                setErrors(errors);
                             }
+
+                            return Promise.reject(error);
                         });
                 },
 
-                updateCustomerAddress(id, params) {
+                updateCustomerAddress(id, params, { setErrors }) {
                     this.isStoring = true;
 
                     return this.$axios.put('{{ route('shop.api.customers.account.addresses.update') }}/' + id, params)
@@ -527,8 +538,16 @@
                             this.isStoring = false;
 
                             if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
+                                let errors = {};
+
+                                Object.keys(error.response.data.errors).forEach(key => {
+                                    errors[this.activeAddressForm + '.' + key] = error.response.data.errors[key];
+                                });
+
+                                setErrors(errors);
                             }
+
+                            return Promise.reject(error);
                         });
                 },
 

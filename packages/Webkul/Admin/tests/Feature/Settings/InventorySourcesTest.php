@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the inventory sources index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.inventory_sources.index'))
@@ -18,7 +18,7 @@ it('should returns the inventory sources index page', function () {
 });
 
 it('should return the inventory sources create page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.inventory_sources.create'))
@@ -28,7 +28,7 @@ it('should return the inventory sources create page', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the inventory sources', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.inventory_sources.store'))
@@ -46,7 +46,7 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created inventory sources', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.inventory_sources.store'), [
@@ -81,10 +81,10 @@ it('should store the newly created inventory sources', function () {
 });
 
 it('should return the edit of the inventory sources', function () {
-    // Arrange
+    // Arrange.
     $inventorySource = InventorySource::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.inventory_sources.edit', $inventorySource->id))
@@ -95,10 +95,10 @@ it('should return the edit of the inventory sources', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update the inventory sources', function () {
-    // Arrange
+    // Arrange.
     $inventorySources = InventorySource::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.inventory_sources.update', $inventorySources->id))
@@ -116,14 +116,14 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the inventory sources', function () {
-    // Arrange
+    // Arrange.
     $inventorySources = InventorySource::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.inventory_sources.update', $inventorySources->id), [
-        'code'           => $code = strtolower(fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/')),
+        'code'           => $code = strtolower(fake()->numerify('code######')),
         'name'           => $name = fake()->name(),
         'priority'       => $priority = rand(1, 10),
         'contact_number' => $contactNumber = rand(1111111111, 9999999999),
@@ -154,10 +154,10 @@ it('should update the inventory sources', function () {
 });
 
 it('should delete the inventory source', function () {
-    // Arrange
+    // Arrange.
     $inventorySource = InventorySource::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.inventory_sources.delete', $inventorySource->id))

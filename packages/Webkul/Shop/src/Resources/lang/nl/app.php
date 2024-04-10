@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => 'Uw bestelling is geannuleerd',
                     'page-title'         => 'Bestelling #:order_id',
                     'payment-method'     => 'Betalingsmethode',
+                    'reorder-btn-title'  => 'Herordenen',
                     'shipping-address'   => 'Verzendadres',
                     'shipping-method'    => 'Verzendmethode',
                     'title'              => 'Bekijken',

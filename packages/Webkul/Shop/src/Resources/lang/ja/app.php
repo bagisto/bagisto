@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => '注文がキャンセルされました',
                     'page-title'         => '注文 #:order_id',
                     'payment-method'     => '支払い方法',
+                    'reorder-btn-title'  => '並べ替える',
                     'shipping-address'   => '配送先住所',
                     'shipping-method'    => '配送方法',
                     'title'              => '表示',

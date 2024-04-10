@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => 'Tu pedido ha sido cancelado',
                     'page-title'         => 'Pedido #:order_id',
                     'payment-method'     => 'Método de Pago',
+                    'reorder-btn-title'  => 'Reordenar',
                     'shipping-address'   => 'Dirección de Envío',
                     'shipping-method'    => 'Método de Envío',
                     'title'              => 'Ver',

@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => 'הזמנתך בוטלה בהצלחה',
                     'page-title'         => 'הזמנה #:order_id',
                     'payment-method'     => 'אמצעי תשלום',
+                    'reorder-btn-title'  => 'להזמין מחדש',
                     'shipping-address'   => 'כתובת למשלוח',
                     'shipping-method'    => 'שיטת משלוח',
                     'title'              => 'צפייה',

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Webkul\Core\Models\Channel;
 
 use function Pest\Laravel\deleteJson;
@@ -8,7 +9,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the channel index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.channels.index'))
@@ -18,7 +19,7 @@ it('should returns the channel index page', function () {
 });
 
 it('should return the create page of channel', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.channels.create'))
@@ -28,7 +29,7 @@ it('should return the create page of channel', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the channels', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.channels.store'))
@@ -47,13 +48,13 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created channels', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.settings.channels.store'), [
-        'code'              => $code = fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
+    postJson(route('admin.settings.channels.store'), $data = [
+        'code'              => $code = fake()->numerify('code######'),
         'theme'             => $code,
-        'hostname'          => $hostName = 'http://'.fake()->ipv4(),
+        'hostname'          => 'http://'.fake()->ipv4(),
         'root_category_id'  => 1,
         'default_locale_id' => 1,
         'base_currency_id'  => 1,
@@ -66,6 +67,12 @@ it('should store the newly created channels', function () {
         'seo_description'   => substr(fake()->paragraph(), 0, 50),
         'seo_keywords'      => fake()->name(),
         'is_maintenance_on' => fake()->boolean(),
+        'logo'              => [
+            UploadedFile::fake()->image('logo.png'),
+        ],
+        'favicon'           => [
+            UploadedFile::fake()->image('favicon.png'),
+        ],
     ])
         ->assertRedirect(route('admin.settings.channels.index'))
         ->isRedirection();
@@ -73,19 +80,22 @@ it('should store the newly created channels', function () {
     $this->assertModelWise([
         Channel::class => [
             [
-                'code'     => $code,
-                'theme'    => $code,
-                'hostname' => $hostName,
+                'code'              => $data['code'],
+                'theme'             => $data['theme'],
+                'hostname'          => $data['hostname'],
+                'root_category_id'  => $data['root_category_id'],
+                'default_locale_id' => $data['default_locale_id'],
+                'base_currency_id'  => $data['base_currency_id'],
             ],
         ],
     ]);
 });
 
 it('should returns the edit page of channels', function () {
-    // Arrange
+    // Arrange.
     $channel = Channel::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.channels.edit', $channel->id))
@@ -95,36 +105,36 @@ it('should returns the edit page of channels', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update the channels', function () {
-    // Arrange
+    // Arrange.
     $channel = Channel::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.channels.update', $channel->id))
         ->assertJsonValidationErrorFor('code')
         ->assertJsonValidationErrorFor('en.name')
+        ->assertJsonValidationErrorFor('en.seo_title')
+        ->assertJsonValidationErrorFor('en.seo_description')
+        ->assertJsonValidationErrorFor('en.seo_keywords')
         ->assertJsonValidationErrorFor('inventory_sources')
         ->assertJsonValidationErrorFor('root_category_id')
         ->assertJsonValidationErrorFor('locales')
         ->assertJsonValidationErrorFor('default_locale_id')
         ->assertJsonValidationErrorFor('currencies')
         ->assertJsonValidationErrorFor('base_currency_id')
-        ->assertJsonValidationErrorFor('en.seo_title')
-        ->assertJsonValidationErrorFor('en.seo_description')
-        ->assertJsonValidationErrorFor('en.seo_keywords')
         ->assertUnprocessable();
 });
 
 it('should update the existing channel', function () {
-    // Arrange
+    // Arrange.
     $channel = Channel::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.settings.channels.update', $channel->id), [
-        'code'              => $code = strtolower(fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/')),
+    putJson(route('admin.settings.channels.update', $channel->id), $data = [
+        'code'              => strtolower(fake()->numerify('code######')),
 
         app()->getLocale()  => [
             'name'            => fake()->name(),
@@ -149,7 +159,9 @@ it('should update the existing channel', function () {
     $this->assertModelWise([
         Channel::class => [
             [
-                'code'              => $code,
+                'code'              => $data['code'],
+                'hostname'          => $data['hostname'],
+                'is_maintenance_on' => $data['is_maintenance_on'],
                 'base_currency_id'  => 1,
                 'root_category_id'  => 1,
                 'default_locale_id' => 1,
@@ -159,13 +171,15 @@ it('should update the existing channel', function () {
 });
 
 it('should delete the existing channel', function () {
-    // Arrange
+    // Arrange.
     $channel = Channel::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.channels.delete', $channel->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.channels.index.delete-success'));
+
+    $this->assertDatabaseMissing('channels', ['id' => $channel->id]);
 });

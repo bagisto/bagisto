@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => 'Twoje zamówienie zostało anulowane',
                     'page-title'         => 'Zamówienie #:order_id',
                     'payment-method'     => 'Metoda płatności',
+                    'reorder-btn-title'  => 'Przeorganizuj',
                     'shipping-address'   => 'Adres dostawy',
                     'shipping-method'    => 'Metoda dostawy',
                     'title'              => 'Zobacz',

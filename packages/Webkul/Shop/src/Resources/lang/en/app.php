@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => 'Your order has been canceled',
                     'page-title'         => 'Order #:order_id',
                     'payment-method'     => 'Payment Method',
+                    'reorder-btn-title'  => 'Reorder',
                     'shipping-address'   => 'Shipping Address',
                     'shipping-method'    => 'Shipping Method',
                     'title'              => 'View',

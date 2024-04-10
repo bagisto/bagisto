@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => 'Ihre Bestellung wurde storniert',
                     'page-title'         => 'Bestellung #:order_id',
                     'payment-method'     => 'Zahlungsmethode',
+                    'reorder-btn-title'  => 'Neu anordnen',
                     'shipping-address'   => 'Lieferadresse',
                     'shipping-method'    => 'Versandmethode',
                     'title'              => 'Ansicht',

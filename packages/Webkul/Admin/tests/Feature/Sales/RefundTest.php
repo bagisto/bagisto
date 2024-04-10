@@ -21,7 +21,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('should return the refund index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.refunds.index'))
@@ -30,7 +30,7 @@ it('should return the refund index page', function () {
 });
 
 it('should fails the validation error when refund items data not provided', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -48,46 +48,39 @@ it('should fails the validation error when refund items data not provided', func
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
     ]);
 
-    CartItem::factory()->create([
-        'quantity'          => $quantity = 1,
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $cartItem = CartItem::factory()->create([
+        'cart_id'           => $cart->id,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
         'name'              => $product->name,
-        'type'              => $product->type,
-        'cart_id'           => $cart->id,
-        'price'             => $convertedPrice = core()->convertPrice($price),
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
         'base_price'        => $price,
-        'total'             => $convertedPrice * $quantity,
-        'base_total'        => $price * $quantity,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
         'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $quantity,
-        'base_total_weight' => ($product->weight ?? 0) * $quantity,
-        'additional'        => [
-            'quantity'   => $quantity,
-            'product_id' => $product->id,
-        ],
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
     ]);
 
-    CustomerAddress::factory()->create([
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
@@ -98,25 +91,25 @@ it('should fails the validation error when refund items data not provided', func
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    CartAddress::factory()->create([
+    $cartShippingAddress = CartAddress::factory()->create([
         'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartPayment::factory()->create([
+    $cartPayment = CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
-        'cart_id'      => $cart->id,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartBillingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
@@ -127,7 +120,7 @@ it('should fails the validation error when refund items data not provided', func
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
         'sku'        => $product->sku,
@@ -135,32 +128,96 @@ it('should fails the validation error when refund items data not provided', func
         'name'       => $product->name,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderBillingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderShippingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    // Act and Assert
+    $orderPayment = OrderPayment::factory()->create([
+        'order_id' => $order->id,
+    ]);
+
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.store', $order->id))
         ->assertJsonValidationErrorFor('refund.items')
         ->assertUnprocessable();
+
+    $cart->refresh();
+
+    $cartItem->refresh();
+
+    $cartBillingAddress->refresh();
+
+    $cartShippingAddress->refresh();
+
+    $orderBillingAddress->refresh();
+
+    $orderShippingAddress->refresh();
+
+    $order->refresh();
+
+    $orderItem->refresh();
+
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
+        CustomerAddress::class => [
+            $this->prepareAddress($customerAddress),
+        ],
+
+        Order::class => [
+            $this->prepareOrder($order),
+        ],
+
+        OrderItem::class => [
+            $this->prepareOrderItem($orderItem),
+        ],
+
+        OrderAddress::class => [
+            $this->prepareAddress($orderBillingAddress),
+
+            $this->prepareAddress($orderShippingAddress),
+        ],
+
+        OrderPayment::class => [
+            $this->prepareOrderPayment($orderPayment),
+        ],
+    ]);
 });
 
 it('should fails the validation error when refund items data provided with wrong way', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -178,46 +235,39 @@ it('should fails the validation error when refund items data provided with wrong
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
     ]);
 
-    CartItem::factory()->create([
-        'quantity'          => $quantity = 1,
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $cartItem = CartItem::factory()->create([
+        'cart_id'           => $cart->id,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
         'name'              => $product->name,
-        'type'              => $product->type,
-        'cart_id'           => $cart->id,
-        'price'             => $convertedPrice = core()->convertPrice($price),
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
         'base_price'        => $price,
-        'total'             => $convertedPrice * $quantity,
-        'base_total'        => $price * $quantity,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
         'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $quantity,
-        'base_total_weight' => ($product->weight ?? 0) * $quantity,
-        'additional'        => [
-            'quantity'   => $quantity,
-            'product_id' => $product->id,
-        ],
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
     ]);
 
-    CustomerAddress::factory()->create([
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
@@ -228,25 +278,25 @@ it('should fails the validation error when refund items data provided with wrong
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    CartAddress::factory()->create([
+    $cartShippingAddress = CartAddress::factory()->create([
         'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartPayment::factory()->create([
+    $cartPayment = CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
-        'cart_id'      => $cart->id,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartBillingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
@@ -257,7 +307,7 @@ it('should fails the validation error when refund items data provided with wrong
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
         'sku'        => $product->sku,
@@ -265,23 +315,23 @@ it('should fails the validation error when refund items data provided with wrong
         'name'       => $product->name,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderBillingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderShippingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    // Act and Assert
+    $orderPayment = OrderPayment::factory()->create([
+        'order_id' => $order->id,
+    ]);
+
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.store', $order->id), [
@@ -293,10 +343,74 @@ it('should fails the validation error when refund items data provided with wrong
     ])
         ->assertJsonValidationErrorFor('refund.items.0')
         ->assertUnprocessable();
+
+    $cart->refresh();
+
+    $cartItem->refresh();
+
+    $cartBillingAddress->refresh();
+
+    $cartShippingAddress->refresh();
+
+    $orderBillingAddress->refresh();
+
+    $orderShippingAddress->refresh();
+
+    $order->refresh();
+
+    $orderItem->refresh();
+
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
+        CustomerAddress::class => [
+            $this->prepareAddress($customerAddress),
+        ],
+
+        Order::class => [
+            $this->prepareOrder($order),
+        ],
+
+        OrderItem::class => [
+            $this->prepareOrderItem($orderItem),
+        ],
+
+        OrderAddress::class => [
+            $this->prepareAddress($orderBillingAddress),
+
+            $this->prepareAddress($orderShippingAddress),
+        ],
+
+        OrderPayment::class => [
+            $this->prepareOrderPayment($orderPayment),
+        ],
+    ]);
 });
 
 it('should store the order refund', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -314,46 +428,39 @@ it('should store the order refund', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
     ]);
 
-    CartItem::factory()->create([
-        'quantity'          => $quantity = 1,
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $cartItem = CartItem::factory()->create([
+        'cart_id'           => $cart->id,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
         'name'              => $product->name,
-        'type'              => $product->type,
-        'cart_id'           => $cart->id,
-        'price'             => $convertedPrice = core()->convertPrice($price),
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
         'base_price'        => $price,
-        'total'             => $convertedPrice * $quantity,
-        'base_total'        => $price * $quantity,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
         'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $quantity,
-        'base_total_weight' => ($product->weight ?? 0) * $quantity,
-        'additional'        => [
-            'quantity'   => $quantity,
-            'product_id' => $product->id,
-        ],
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
     ]);
 
-    CustomerAddress::factory()->create([
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
@@ -364,25 +471,25 @@ it('should store the order refund', function () {
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    CartAddress::factory()->create([
+    $cartShippingAddress = CartAddress::factory()->create([
         'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartPayment::factory()->create([
+    $cartPayment = CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
-        'cart_id'      => $cart->id,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartBillingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
@@ -393,7 +500,7 @@ it('should store the order refund', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id'   => $product->id,
         'order_id'     => $order->id,
         'sku'          => $product->sku,
@@ -404,20 +511,20 @@ it('should store the order refund', function () {
         'qty_canceled' => 1,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderBillingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderShippingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    $orderPayment = OrderPayment::factory()->create([
+        'order_id' => $order->id,
     ]);
 
     foreach ($order->items as $item) {
@@ -426,7 +533,7 @@ it('should store the order refund', function () {
         }
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.store', $order->id), [
@@ -440,7 +547,69 @@ it('should store the order refund', function () {
         ->assertRedirect(route('admin.sales.refunds.index'))
         ->isRedirection();
 
+    $cart->refresh();
+
+    $cartItem->refresh();
+
+    $cartBillingAddress->refresh();
+
+    $cartShippingAddress->refresh();
+
+    $orderBillingAddress->refresh();
+
+    $orderShippingAddress->refresh();
+
+    $order->refresh();
+
+    $orderItem->refresh();
+
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
+        CustomerAddress::class => [
+            $this->prepareAddress($customerAddress),
+        ],
+
+        Order::class => [
+            $this->prepareOrder($order),
+        ],
+
+        OrderItem::class => [
+            $this->prepareOrderItem($orderItem),
+        ],
+
+        OrderAddress::class => [
+            $this->prepareAddress($orderBillingAddress),
+
+            $this->prepareAddress($orderShippingAddress),
+        ],
+
+        OrderPayment::class => [
+            $this->prepareOrderPayment($orderPayment),
+        ],
+
         Refund::class => [
             [
                 'state'    => 'refunded',
@@ -451,7 +620,7 @@ it('should store the order refund', function () {
 });
 
 it('should store the order refund and send email to the customer', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $product = (new ProductFaker([
@@ -471,46 +640,39 @@ it('should store the order refund and send email to the customer', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
     ]);
 
-    CartItem::factory()->create([
-        'quantity'          => $quantity = 1,
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $cartItem = CartItem::factory()->create([
+        'cart_id'           => $cart->id,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
         'name'              => $product->name,
-        'type'              => $product->type,
-        'cart_id'           => $cart->id,
-        'price'             => $convertedPrice = core()->convertPrice($price),
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
         'base_price'        => $price,
-        'total'             => $convertedPrice * $quantity,
-        'base_total'        => $price * $quantity,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
         'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $quantity,
-        'base_total_weight' => ($product->weight ?? 0) * $quantity,
-        'additional'        => [
-            'quantity'   => $quantity,
-            'product_id' => $product->id,
-        ],
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
     ]);
 
-    CustomerAddress::factory()->create([
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
@@ -521,25 +683,25 @@ it('should store the order refund and send email to the customer', function () {
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    CartAddress::factory()->create([
+    $cartShippingAddress = CartAddress::factory()->create([
         'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartPayment::factory()->create([
+    $cartPayment = CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
-        'cart_id'      => $cart->id,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartBillingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
@@ -550,7 +712,7 @@ it('should store the order refund and send email to the customer', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id'   => $product->id,
         'order_id'     => $order->id,
         'sku'          => $product->sku,
@@ -561,20 +723,20 @@ it('should store the order refund and send email to the customer', function () {
         'qty_canceled' => 1,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderBillingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderShippingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    $orderPayment = OrderPayment::factory()->create([
+        'order_id' => $order->id,
     ]);
 
     foreach ($order->items as $item) {
@@ -583,7 +745,7 @@ it('should store the order refund and send email to the customer', function () {
         }
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.store', $order->id), [
@@ -597,7 +759,69 @@ it('should store the order refund and send email to the customer', function () {
         ->assertRedirect(route('admin.sales.refunds.index'))
         ->isRedirection();
 
+    $cart->refresh();
+
+    $cartItem->refresh();
+
+    $cartBillingAddress->refresh();
+
+    $cartShippingAddress->refresh();
+
+    $orderBillingAddress->refresh();
+
+    $orderShippingAddress->refresh();
+
+    $order->refresh();
+
+    $orderItem->refresh();
+
     $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
+        CustomerAddress::class => [
+            $this->prepareAddress($customerAddress),
+        ],
+
+        Order::class => [
+            $this->prepareOrder($order),
+        ],
+
+        OrderItem::class => [
+            $this->prepareOrderItem($orderItem),
+        ],
+
+        OrderAddress::class => [
+            $this->prepareAddress($orderBillingAddress),
+
+            $this->prepareAddress($orderShippingAddress),
+        ],
+
+        OrderPayment::class => [
+            $this->prepareOrderPayment($orderPayment),
+        ],
+
         Refund::class => [
             [
                 'state'    => 'refunded',
@@ -614,7 +838,7 @@ it('should store the order refund and send email to the customer', function () {
 });
 
 it('should return the order refunded data', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -632,46 +856,39 @@ it('should return the order refunded data', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
     ]);
 
-    CartItem::factory()->create([
-        'quantity'          => $quantity = 1,
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $cartItem = CartItem::factory()->create([
+        'cart_id'           => $cart->id,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
         'name'              => $product->name,
-        'type'              => $product->type,
-        'cart_id'           => $cart->id,
-        'price'             => $convertedPrice = core()->convertPrice($price),
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
         'base_price'        => $price,
-        'total'             => $convertedPrice * $quantity,
-        'base_total'        => $price * $quantity,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
         'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $quantity,
-        'base_total_weight' => ($product->weight ?? 0) * $quantity,
-        'additional'        => [
-            'quantity'   => $quantity,
-            'product_id' => $product->id,
-        ],
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
     ]);
 
-    CustomerAddress::factory()->create([
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
@@ -682,25 +899,25 @@ it('should return the order refunded data', function () {
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    CartAddress::factory()->create([
+    $cartShippingAddress = CartAddress::factory()->create([
         'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartPayment::factory()->create([
+    $cartPayment = CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
-        'cart_id'      => $cart->id,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartBillingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
@@ -711,7 +928,7 @@ it('should return the order refunded data', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
         'sku'        => $product->sku,
@@ -719,20 +936,20 @@ it('should return the order refunded data', function () {
         'name'       => $product->name,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderBillingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderShippingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    $orderPayment = OrderPayment::factory()->create([
+        'order_id' => $order->id,
     ]);
 
     $summary = [
@@ -765,16 +982,80 @@ it('should return the order refunded data', function () {
 
     $summary['grand_total']['price'] += $summary['subtotal']['price'] + $summary['tax']['price'] + $summary['shipping']['price'] - $summary['discount']['price'];
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.update_qty', $order->id), $items)
         ->assertOk()
         ->assertJsonPath('grand_total.price', $summary['grand_total']['price']);
+
+    $cart->refresh();
+
+    $cartItem->refresh();
+
+    $cartBillingAddress->refresh();
+
+    $cartShippingAddress->refresh();
+
+    $orderBillingAddress->refresh();
+
+    $orderShippingAddress->refresh();
+
+    $order->refresh();
+
+    $orderItem->refresh();
+
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
+        CustomerAddress::class => [
+            $this->prepareAddress($customerAddress),
+        ],
+
+        Order::class => [
+            $this->prepareOrder($order),
+        ],
+
+        OrderItem::class => [
+            $this->prepareOrderItem($orderItem),
+        ],
+
+        OrderAddress::class => [
+            $this->prepareAddress($orderBillingAddress),
+
+            $this->prepareAddress($orderShippingAddress),
+        ],
+
+        OrderPayment::class => [
+            $this->prepareOrderPayment($orderPayment),
+        ],
+    ]);
 });
 
 it('should return the view page of refund', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -792,46 +1073,39 @@ it('should return the view page of refund', function () {
     $customer = Customer::factory()->create();
 
     $cart = Cart::factory()->create([
-        'channel_id'            => core()->getCurrentChannel()->id,
-        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-        'base_currency_code'    => $baseCurrencyCode,
-        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-        'items_count'           => 1,
-        'items_qty'             => 1,
-        'grand_total'           => $price = $product->price,
-        'base_grand_total'      => $price,
-        'sub_total'	            => $price,
-        'base_sub_total'        => $price,
-        'shipping_method'       => 'free_free',
-        'customer_id'           => $customer->id,
-        'is_active'             => 1,
-        'customer_email'        => $customer->email,
-        'customer_first_name'   => $customer->first_name,
-        'customer_last_name'    => $customer->last_name,
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
     ]);
 
-    CartItem::factory()->create([
-        'quantity'          => $quantity = 1,
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    $cartItem = CartItem::factory()->create([
+        'cart_id'           => $cart->id,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
         'name'              => $product->name,
-        'type'              => $product->type,
-        'cart_id'           => $cart->id,
-        'price'             => $convertedPrice = core()->convertPrice($price),
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
         'base_price'        => $price,
-        'total'             => $convertedPrice * $quantity,
-        'base_total'        => $price * $quantity,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
         'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $quantity,
-        'base_total_weight' => ($product->weight ?? 0) * $quantity,
-        'additional'        => [
-            'quantity'   => $quantity,
-            'product_id' => $product->id,
-        ],
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
     ]);
 
-    CustomerAddress::factory()->create([
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
     ]);
@@ -842,25 +1116,25 @@ it('should return the view page of refund', function () {
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    CartAddress::factory()->create([
+    $cartShippingAddress = CartAddress::factory()->create([
         'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    CartPayment::factory()->create([
+    $cartPayment = CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
-        'cart_id'      => $cart->id,
     ]);
 
-    CartShippingRate::factory()->create([
+    $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
         'method'             => 'free_free',
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartBillingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
     $order = Order::factory()->create([
@@ -871,39 +1145,106 @@ it('should return the view page of refund', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
-        'product_id' => $product->id,
-        'order_id'   => $order->id,
-        'sku'        => $product->sku,
-        'type'       => $product->type,
-        'name'       => $product->name,
-    ]);
-
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
-    OrderAddress::factory()->create([
+    $orderItem = OrderItem::factory()->create([
+        'product_id'   => $product->id,
         'order_id'     => $order->id,
+        'sku'          => $product->sku,
+        'type'         => $product->type,
+        'name'         => $product->name,
+        'qty_shipped'  => 1,
+        'qty_invoiced' => 1,
+        'qty_canceled' => 1,
+    ]);
+
+    $orderBillingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    OrderAddress::factory()->create([
-        'order_id'     => $order->id,
+    $orderShippingAddress = OrderAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    $orderPayment = OrderPayment::factory()->create([
+        'order_id' => $order->id,
     ]);
 
     $refund = Refund::factory()->create([
         'order_id' => $order->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.sales.refunds.view', $refund->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.sales.refunds.view.title', ['refund_id' => $refund->id]))
         ->assertSeeText(trans('admin::app.sales.refunds.view.product-ordered'));
+
+    $cart->refresh();
+
+    $cartItem->refresh();
+
+    $cartBillingAddress->refresh();
+
+    $cartShippingAddress->refresh();
+
+    $orderBillingAddress->refresh();
+
+    $orderShippingAddress->refresh();
+
+    $order->refresh();
+
+    $orderItem->refresh();
+
+    $this->assertModelWise([
+        Cart::class => [
+            $this->prepareCart($cart),
+        ],
+
+        CartItem::class => [
+            $this->prepareCartItem($cartItem),
+        ],
+
+        CartPayment::class => [
+            $this->prepareCartPayment($cartPayment),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartBillingAddress),
+        ],
+
+        CartAddress::class => [
+            $this->prepareAddress($cartShippingAddress),
+        ],
+
+        CartShippingRate::class => [
+            $this->prepareCartShippingRate($cartShippingRate),
+        ],
+
+        CustomerAddress::class => [
+            $this->prepareAddress($customerAddress),
+        ],
+
+        Order::class => [
+            $this->prepareOrder($order),
+        ],
+
+        OrderItem::class => [
+            $this->prepareOrderItem($orderItem),
+        ],
+
+        OrderAddress::class => [
+            $this->prepareAddress($orderBillingAddress),
+
+            $this->prepareAddress($orderShippingAddress),
+        ],
+
+        OrderPayment::class => [
+            $this->prepareOrderPayment($orderPayment),
+        ],
+    ]);
 });

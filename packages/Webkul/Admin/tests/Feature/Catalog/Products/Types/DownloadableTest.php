@@ -14,7 +14,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should fail the validation with errors when certain inputs are not provided when store in downloadable product', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'))
@@ -25,12 +25,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should return the create page of downloadable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
     $productId = $product->id + 1;
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'), [
@@ -68,10 +68,10 @@ it('should return the create page of downloadable product', function () {
 });
 
 it('should return the edit page of downloadable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.edit', $product->id))
@@ -85,10 +85,10 @@ it('should return the edit page of downloadable product', function () {
 });
 
 it('should upload link the product upload link', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.catalog.products.upload_link', $product->id), [
@@ -103,10 +103,10 @@ it('should upload link the product upload link', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in downloadable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id))
@@ -120,10 +120,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors if certain data is not provided correctly in downloadable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -148,10 +148,10 @@ it('should fail the validation with errors if certain data is not provided corre
 });
 
 it('should upload the sample file', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.catalog.products.upload_sample', $product->id), [
@@ -166,7 +166,7 @@ it('should upload the sample file', function () {
 });
 
 it('should download the product which is downloadable', function () {
-    // Arrange
+    // Arrange.
     $attribute = Attribute::factory()->create([
         'type' => 'file',
     ]);
@@ -191,7 +191,7 @@ it('should download the product which is downloadable', function () {
     $attributeValues->text_value = $fileName;
     $attributeValues->save();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.file.download', [$product->id, $attribute->id]))
@@ -201,7 +201,7 @@ it('should download the product which is downloadable', function () {
 });
 
 it('should update the downloadable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -219,19 +219,19 @@ it('should update the downloadable product', function () {
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.products.update', $product->id), [
+    putJson(route('admin.catalog.products.update', $product->id), $data = [
         'sku'                => $product->sku,
         'url_key'            => $product->url_key,
-        'short_description'  => $shortDescription = fake()->sentence(),
-        'description'        => $description = fake()->paragraph(),
-        'name'               => $name = fake()->words(3, true),
-        'price'              => $price = fake()->randomFloat(2, 1, 1000),
-        'weight'             => $weight = fake()->numberBetween(0, 100),
-        'channel'            => $channel = core()->getCurrentChannelCode(),
-        'locale'             => $locale = app()->getLocale(),
+        'short_description'  => fake()->sentence(),
+        'description'        => fake()->paragraph(),
+        'name'               => fake()->words(3, true),
+        'price'              => fake()->randomFloat(2, 1, 1000),
+        'weight'             => fake()->numberBetween(0, 100),
+        'channel'            => core()->getCurrentChannelCode(),
+        'locale'             => app()->getLocale(),
         'downloadable_links' => [
             'link_0' => [
                 'en' => [
@@ -298,23 +298,23 @@ it('should update the downloadable product', function () {
                 'type'              => 'downloadable',
                 'sku'               => $product->sku,
                 'url_key'           => $product->url_key,
-                'name'              => $name,
-                'short_description' => $shortDescription,
-                'description'       => $description,
-                'price'             => $price,
-                'weight'            => $weight,
-                'locale'            => $locale,
-                'channel'           => $channel,
+                'name'              => $data['name'],
+                'short_description' => $data['short_description'],
+                'description'       => $data['description'],
+                'price'             => $data['price'],
+                'weight'            => $data['weight'],
+                'locale'            => $data['locale'],
+                'channel'           => $data['channel'],
             ],
         ],
     ]);
 });
 
 it('should delete a downloadable product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.products.delete', $product->id))

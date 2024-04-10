@@ -15,23 +15,6 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * Create.
-     *
-     * @return \Webkul\Sales\Contracts\OrderItem
-     */
-    public function create(array $data)
-    {
-        if (! empty($data['product'])) {
-            $data['product_id'] = $data['product']->id;
-            $data['product_type'] = get_class($data['product']);
-
-            unset($data['product']);
-        }
-
-        return parent::create($data);
-    }
-
-    /**
      * Collect totals.
      *
      * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem

@@ -190,6 +190,7 @@ return [
                     'cancel-success'     => 'আপনার অর্ডার বাতিল হয়েছে',
                     'page-title'         => 'অর্ডার #:order_id',
                     'payment-method'     => 'পেমেন্ট মেথড',
+                    'reorder-btn-title'  => 'পুনরায় বাছাই করুন',
                     'shipping-address'   => 'শিপিং ঠিকানা',
                     'shipping-method'    => 'শিপিং মেথড',
                     'title'              => 'দেখুন',
