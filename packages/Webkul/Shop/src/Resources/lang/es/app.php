@@ -757,12 +757,6 @@ return [
     ],
 
     'home' => [
-        'index' => [
-            'offer'               => 'Obtén HASTA UN 40 % DE DESCUENTO en tu primera compra ¡COMPRA AHORA!',
-            'resend-verify-email' => 'Reenviar correo de verificación',
-            'verify-email'        => 'Verifica tu dirección de correo electrónico',
-        ],
-
         'contact' => [
             'about'         => 'Déjanos una nota y te responderemos lo más rápido posible',
             'desc'          => '¿En qué estás pensando?',
@@ -774,6 +768,14 @@ return [
             'submit'        => 'Enviar',
             'title'         => 'Contáctanos',
         ],
+
+        'index' => [
+            'offer'               => 'Obtén HASTA UN 40 % DE DESCUENTO en tu primera compra ¡COMPRA AHORA!',
+            'resend-verify-email' => 'Reenviar correo de verificación',
+            'verify-email'        => 'Verifica tu dirección de correo electrónico',
+        ],
+
+        'thanks-for-contact' => 'Gracias por contactarnos con tus comentarios y preguntas. Te responderemos muy pronto.',
     ],
 
     'partials' => [

@@ -757,12 +757,6 @@ return [
     ],
 
     'home' => [
-        'index' => [
-            'offer'               => '1. siparişinizde %40\'a varan İNDİRİM ALIŞVERİŞ YAPIN',
-            'resend-verify-email' => 'Doğrulama E-postası Tekrar Gönder',
-            'verify-email'        => 'E-posta hesabınızı doğrulayın',
-        ],
-
         'contact' => [
             'about'         => 'Bize bir not bırakın ve en kısa sürede size geri döneceğiz',
             'desc'          => 'Aklınızda ne var?',
@@ -774,6 +768,14 @@ return [
             'submit'        => 'Gönder',
             'title'         => 'Bize Ulaşın',
         ],
+
+        'index' => [
+            'offer'               => '1. siparişinizde %40\'a varan İNDİRİM ALIŞVERİŞ YAPIN',
+            'resend-verify-email' => 'Doğrulama E-postası Tekrar Gönder',
+            'verify-email'        => 'E-posta hesabınızı doğrulayın',
+        ],
+
+        'thanks-for-contact' => 'Yorumlarınız ve sorularınız için bize başvurduğunuz için teşekkür ederiz. Size çok yakında yanıt vereceğiz.',
     ],
 
     'partials' => [

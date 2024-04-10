@@ -757,12 +757,6 @@ return [
     ],
 
     'home' => [
-        'index' => [
-            'offer'               => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie. ZAKUP TERAZ',
-            'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
-            'verify-email'        => 'Zweryfikuj swoje konto e-mail',
-        ],
-
         'contact' => [
             'about'         => 'Napisz do nas, a odpowiemy tak szybko, jak to możliwe',
             'desc'          => 'Co Cię nurtuje?',
@@ -774,6 +768,14 @@ return [
             'submit'        => 'Wyślij',
             'title'         => 'Skontaktuj się z nami',
         ],
+
+        'index' => [
+            'offer'               => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie. ZAKUP TERAZ',
+            'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
+            'verify-email'        => 'Zweryfikuj swoje konto e-mail',
+        ],
+
+        'thanks-for-contact' => 'Dziękujemy za skontaktowanie się z nami. Odpowiemy na Twoje uwagi i pytania wkrótce.',
     ],
 
     'partials' => [

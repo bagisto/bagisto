@@ -5,7 +5,6 @@
         @lang('shop::app.home.contact.title')
     </x-slot>
 
-    <!-- Page Content -->
     <div class="container mt-8 px-[60px] max-lg:px-8">
         <!-- Form Container -->
 		<div class="w-full max-w-[870px] m-auto px-[90px] p-16 border border-[#E9E9E9] rounded-xl max-md:px-8 max-md:py-8">
@@ -18,7 +17,9 @@
             </p>
 
             <div class="mt-14 rounded max-sm:mt-8">
+                <!-- Contact Form -->
                 <x-shop::form :action="route('shop.home.contact.store')">
+                    <!-- Name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.home.contact.name')
@@ -39,6 +40,7 @@
                         <x-shop::form.control-group.error control-name="name" />
                     </x-shop::form.control-group>
 
+                    <!-- Email -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.home.contact.email')
@@ -59,6 +61,7 @@
                         <x-shop::form.control-group.error control-name="email" />
                     </x-shop::form.control-group>
 
+                    <!-- Contact -->
                     <x-shop::form.control-group class="mb-6">
                         <x-shop::form.control-group.label>
                             @lang('shop::app.home.contact.phone-number')
@@ -77,6 +80,7 @@
                         <x-shop::form.control-group.error control-name="contact" />
                     </x-shop::form.control-group>
 
+                    <!-- Message -->
                     <x-shop::form.control-group class="mb-6">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.home.contact.desc')
@@ -97,12 +101,14 @@
                         <x-shop::form.control-group.error control-name="message" />
                     </x-shop::form.control-group>
 
+                    <!-- Recaptcha -->
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
                         <div class="flex mb-5">
                             {!! Captcha::render() !!}
                         </div>
                     @endif
 
+                    <!-- Submit Button -->
                     <div class="flex gap-9 flex-wrap items-center mt-8">
                         <button
                             class="primary-button block w-full max-w-[374px] py-4 px-11 mx-auto m-0 ltr:ml-0 rtl:mr-0 rounded-2xl text-base text-center"

@@ -757,12 +757,6 @@ return [
     ],
 
     'home' => [
-        'index' => [
-            'offer'               => 'Erhalten Sie BIS ZU 40% RABATT auf Ihre 1. Bestellung. JETZT EINKAUFEN',
-            'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
-            'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
-        ],
-
         'contact' => [
             'about'         => 'Schreiben Sie uns eine Nachricht und wir werden uns so schnell wie möglich bei Ihnen melden',
             'desc'          => 'Was beschäftigt Sie?',
@@ -774,6 +768,14 @@ return [
             'submit'        => 'Absenden',
             'title'         => 'Kontaktieren Sie uns',
         ],
+
+        'index' => [
+            'offer'               => 'Erhalten Sie BIS ZU 40% RABATT auf Ihre 1. Bestellung. JETZT EINKAUFEN',
+            'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
+            'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
+        ],
+
+        'thanks-for-contact' => 'Vielen Dank für Ihre Kontaktaufnahme. Wir werden Ihnen sehr bald antworten.',
     ],
 
     'partials' => [

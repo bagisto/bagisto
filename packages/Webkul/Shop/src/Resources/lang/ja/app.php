@@ -757,15 +757,9 @@ return [
     ],
 
     'home' => [
-        'index' => [
-            'offer'               => '初めての注文で最大40%OFF 今すぐショッピング',
-            'resend-verify-email' => '確認メールを再送信',
-            'verify-email'        => 'メールアカウントを確認',
-        ],
-
         'contact' => [
-            'about'         => '私たちにメモを書いてください。できるだけ早く返信いたします。',
-            'desc'          => ' 何をお考えですか？',
+            'about'         => '私たちについて',
+            'desc'          => '何をお考えですか？',
             'describe-here' => 'ここに説明してください',
             'email'         => 'メール',
             'message'       => 'メッセージ',
@@ -774,6 +768,14 @@ return [
             'submit'        => '送信',
             'title'         => 'お問い合わせ',
         ],
+
+        'index' => [
+            'offer'               => '初めての注文で最大40%OFF 今すぐショッピング',
+            'resend-verify-email' => '確認メールを再送信',
+            'verify-email'        => 'メールアカウントを確認',
+        ],
+
+        'thanks-for-contact' => 'ご意見やご質問をお寄せいただきありがとうございます。返信いたしますので、しばらくお待ちください。',
     ],
 
     'partials' => [

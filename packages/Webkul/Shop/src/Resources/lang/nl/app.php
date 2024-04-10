@@ -757,12 +757,6 @@ return [
     ],
 
     'home' => [
-        'index' => [
-            'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
-            'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
-            'verify-email'        => 'Verifieer je e-mailaccount',
-        ],
-
         'contact' => [
             'about'         => 'Stuur ons een bericht en we zullen zo snel mogelijk reageren',
             'desc'          => 'Waar denk je aan?',
@@ -774,6 +768,14 @@ return [
             'submit'        => 'Verzenden',
             'title'         => 'Neem contact met ons op',
         ],
+
+        'index' => [
+            'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
+            'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
+            'verify-email'        => 'Verifieer je e-mailaccount',
+        ],
+
+        'thanks-for-contact' => 'Bedankt voor het contact met ons opnemen met uw opmerkingen en vragen. We zullen spoedig reageren.',
     ],
 
     'partials' => [
