@@ -24,7 +24,7 @@ class ContactUs extends Mailable
     {
         return new Envelope(
             to: [
-                new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
+                new Address(env('ADMIN_MAIL_ADDRESS'), env('ADMIN_MAIL_NAME')),
             ],
             subject: trans('Inquiry from '.request()->name.' via Website Contact Form'),
         );
