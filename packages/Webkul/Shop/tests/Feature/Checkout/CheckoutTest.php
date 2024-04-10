@@ -350,6 +350,7 @@ it('should store the billing and shipping address for guest user', function () {
         ->assertJsonPath('data.shippingMethods.free.rates.0.base_price', 0);
 
     $response->assertJsonPath('data.shippingMethods.flatrate.rates.0.cart_address_id', $cart->shipping_address->id);
+
     $response->assertJsonPath('data.shippingMethods.free.rates.0.cart_address_id', $cart->shipping_address->id);
 
     $this->assertModelWise([
@@ -544,6 +545,7 @@ it('should store the shipping address as the billing address when use_for_shippi
         ->assertJsonPath('data.shippingMethods.free.rates.0.base_price', 0);
 
     $response->assertJsonPath('data.shippingMethods.flatrate.rates.0.cart_address_id', $cart->shipping_address->id);
+
     $response->assertJsonPath('data.shippingMethods.free.rates.0.cart_address_id', $cart->shipping_address->id);
 
     $this->assertModelWise([
@@ -656,6 +658,7 @@ it('should store the billing and shipping address for customer', function () {
         ->assertJsonPath('data.shippingMethods.free.rates.0.base_price', 0);
 
     $response->assertJsonPath('data.shippingMethods.flatrate.rates.0.cart_address_id', $cart->shipping_address->id);
+
     $response->assertJsonPath('data.shippingMethods.free.rates.0.cart_address_id', $cart->shipping_address->id);
 
     $this->assertModelWise([
