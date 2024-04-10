@@ -4,6 +4,8 @@ use Illuminate\Support\Arr;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Models\CartPayment;
+use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
 use Webkul\Faker\Helpers\Product as ProductFaker;
@@ -14,7 +16,7 @@ use function Pest\Laravel\putJson;
 
 it('should search the customers via email or name', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->count(5)->create()->first();
+    $customer = (new CustomerFaker())->factory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -25,6 +27,10 @@ it('should search the customers via email or name', function () {
         ->assertOk()
         ->assertJsonPath('data.0.id', $customer->id)
         ->assertJsonPath('data.0.first_name', $customer->first_name)
+        ->assertJsonPath('data.0.last_name', $customer->last_name)
+        ->assertJsonPath('data.0.gender', $customer->gender)
+        ->assertJsonPath('data.0.status', $customer->status)
+        ->assertJsonPath('data.0.customer_group_id', $customer->customer_group_id)
         ->assertJsonPath('data.0.email', $customer->email);
 });
 
@@ -69,9 +75,7 @@ it('should search the products via name for adding products to the cart', functi
         ],
     ]))
         ->getSimpleProductFactory()
-        ->count(5)
-        ->create()
-        ->first();
+        ->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -80,10 +84,10 @@ it('should search the products via name for adding products to the cart', functi
         'query' => $product->name,
     ])
         ->assertOk()
-        ->assertSeeText($product->id)
-        ->assertSeeText($product->name)
-        ->assertSeeText($product->type)
-        ->assertSeeText($product->sku);
+        ->assertJsonPath('data.0.id', $product->id)
+        ->assertJsonPath('data.0.name', $product->name)
+        ->assertJsonPath('data.0.type', $product->type)
+        ->assertJsonPath('data.0.sku', $product->sku);
 });
 
 it('should add product to the cart after search the product', function () {
@@ -194,6 +198,8 @@ it('should update the cart item after add product to the cart', function () {
         'customer_last_name'  => $customer->last_name,
         'customer_email'      => $customer->email,
         'is_guest'            => 0,
+        'is_active'           => 0,
+        'items_count'         => null,
     ]);
 
     $additional = [
@@ -287,6 +293,8 @@ it('should fails the validation error if billing and shipping address is not pro
         'customer_last_name'  => $customer->last_name,
         'customer_email'      => $customer->email,
         'is_guest'            => 0,
+        'is_active'           => 0,
+        'items_count'         => null,
     ]);
 
     $additional = [
@@ -363,6 +371,8 @@ it('should add billing address after add item to the cart', function () {
         'customer_last_name'  => $customer->last_name,
         'customer_email'      => $customer->email,
         'is_guest'            => 0,
+        'is_active'           => 0,
+        'items_count'         => null,
     ]);
 
     $additional = [
@@ -473,6 +483,8 @@ it('should add billing and shipping address after add item to the cart', functio
         'customer_last_name'  => $customer->last_name,
         'customer_email'      => $customer->email,
         'is_guest'            => 0,
+        'is_active'           => 0,
+        'items_count'         => null,
     ]);
 
     $additional = [
@@ -585,7 +597,17 @@ it('should the shipping rates after storing address', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $cart = Cart::factory()->create();
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
+        'is_active'           => 0,
+        'items_count'         => null,
+    ]);
 
     $additional = [
         'product_id' => $product->id,
@@ -613,11 +635,13 @@ it('should the shipping rates after storing address', function () {
 
     CartAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_Id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     CartAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_Id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
@@ -669,7 +693,17 @@ it('should store the payment method after storing the shipping method', function
         ->getSimpleProductFactory()
         ->create();
 
-    $cart = Cart::factory()->create();
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
+        'is_active'           => 0,
+        'items_count'         => null,
+    ]);
 
     $additional = [
         'product_id' => $product->id,
@@ -697,6 +731,7 @@ it('should store the payment method after storing the shipping method', function
 
     $cartBillingAddress = CartAddress::factory()->create([
         'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
@@ -719,9 +754,9 @@ it('should store the payment method after storing the shipping method', function
         ],
     ])
         ->assertJsonPath('cart.id', $cart->id)
-        ->assertJsonPath('cart.is_guest', 1)
+        ->assertJsonPath('cart.is_guest', 0)
         ->assertJsonPath('cart.items_count', 1)
-        ->assertJsonPath('cart.customer_id', null)
+        ->assertJsonPath('cart.customer_id', $customer->id)
         ->assertJsonPath('cart.items_count', 1)
         ->assertJsonPath('cart.items_qty', 1)
         ->assertJsonPath('cart.base_sub_total', core()->formatBasePrice($product->price))
@@ -779,4 +814,102 @@ it('should store the payment method after storing the shipping method', function
     $this->assertPrice($cartItem->total, $response['cart']['items']['0']['total']);
 
     $this->assertPrice($product->price, $response['cart']['sub_total']);
+});
+
+it('should place order via admin', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
+        'shipping_method'     => 'free_free',
+        'is_active'           => 0,
+    ]);
+
+    $additional = [
+        'product_id' => $product->id,
+        'rating'     => '0',
+        'is_buy_now' => '0',
+        'quantity'   => '1',
+    ];
+
+    CartItem::factory()->create([
+        'cart_id'           => $cart->id,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'quantity'          => $additional['quantity'],
+        'name'              => $product->name,
+        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $additional['quantity'],
+        'base_total'        => $price * $additional['quantity'],
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
+        'type'              => $product->type,
+        'additional'        => $additional,
+    ]);
+
+    CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
+
+    CartShippingRate::factory()->create([
+        'carrier'            => 'free',
+        'carrier_title'      => 'Free shipping',
+        'method'             => 'free_free',
+        'method_title'       => 'Free Shipping',
+        'method_description' => 'Free Shipping',
+        'cart_address_id'    => $cartShippingAddress->id,
+    ]);
+
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.orders.store', $cart->id))
+        ->assertOk()
+        ->assertJsonPath('data.redirect', true);
+
+    $this->assertDatabaseMissing('cart', [
+        'id' => $cart->id,
+    ]);
 });
