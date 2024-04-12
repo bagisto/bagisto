@@ -54,9 +54,9 @@
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-100"
                                             href="javascript:void(0);"
-                                            v-text="option.label"
                                             @click="performMassAction(massAction, option)"
                                         >
+                                            @{{ option.label }}
                                         </a>
                                     </li>
                                 </ul>
@@ -121,7 +121,7 @@
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
                     <button class="flex justify-between items-center gap-4 max-w-[200px] w-full ltr:pl-4 rtl:pr-4 ltr:pr-3 rtl:pl-3 py-2 rounded-lg bg-white border border-[#E9E9E9] text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:ltr:pr-2.5 max-md:rtl:pl-2.5 max-md:ltr:pl-2.5 max-md:rtl:pr-2.5 cursor-pointer">
-                        <span v-text="applied.pagination.perPage"></span>
+                        <span>@{{ applied.pagination.perPage }}</span>
 
                         <span class="icon-arrow-down text-2xl"></span>
                     </button>

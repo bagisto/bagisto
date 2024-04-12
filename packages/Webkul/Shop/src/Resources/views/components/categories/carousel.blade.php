@@ -47,10 +47,8 @@
                             :href="category.slug"
                             class=""
                         >
-                            <p
-                                class="text-center text-black text-lg max-sm:font-normal"
-                                v-text="category.name"
-                            >
+                            <p class="text-center text-black text-lg max-sm:font-normal">
+                                @{{ category.name }}
                             </p>
                         </a>
                     </div>

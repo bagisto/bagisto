@@ -128,7 +128,7 @@
                                         <span
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 max-sm:place-self-center"
                                             :class="action.icon"
-                                            v-text="!action.icon ? action.title : ''"
+                                            v-text="! action.icon ? action.title : ''"
                                             v-for="action in record.actions"
                                             @click="$parent.performAction(action)"
                                         >

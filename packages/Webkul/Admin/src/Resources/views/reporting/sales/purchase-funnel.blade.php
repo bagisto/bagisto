@@ -27,10 +27,8 @@
                     <!-- Total Visits -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p
-                                class="text-base text-gray-800 leading-none dark:text-white font-semibold"
-                                v-text="report.statistics.visitors.total"
-                            >
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                @{{ report.statistics.visitors.total }}
                             </p>
 
                             <p class="text-xs text-gray-600 leading-none dark:text-gray-300 font-semibold">
@@ -53,10 +51,8 @@
                     <!-- Total Product Visits -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p
-                                class="text-base text-gray-800 leading-none dark:text-white font-semibold"
-                                v-text="report.statistics.product_visitors.total"
-                            >
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                @{{ report.statistics.product_visitors.total }}
                             </p>
 
                             <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
@@ -80,10 +76,8 @@
                     <!-- Total Added To Cart -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p
-                                class="text-base text-gray-800 leading-none dark:text-white font-semibold"
-                                v-text="report.statistics.carts.total"
-                            >
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                @{{ report.statistics.carts.total }}
                             </p>
 
                             <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
@@ -107,10 +101,8 @@
                     <!-- Total Purchased -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p
-                                class="text-base text-gray-800 leading-none dark:text-white font-semibold"
-                                v-text="report.statistics.orders.total"
-                            >
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                @{{ report.statistics.orders.total }}
                             </p>
 
                             <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
@@ -137,10 +129,8 @@
                     <div class="flex gap-1 items-center">
                         <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                        <p
-                            class="text-xs dark:text-gray-300"
-                            v-text="report.date_range.current"
-                        >
+                        <p class="text-xs dark:text-gray-300">
+                            @{{ report.date_range.current }}
                         </p>
                     </div>
                 </div>

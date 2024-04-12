@@ -108,10 +108,8 @@
                                                 <div> 
                                                     @lang('admin::app.settings.themes.edit.sort-order'):
 
-                                                    <span
-                                                        class="text-gray-600 dark:text-gray-300 transition-all"
-                                                        v-text="link.sort_order"
-                                                    >
+                                                    <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                        @{{ link.sort_order }}
                                                     </span>
                                                 </div>
                                             </p>

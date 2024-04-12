@@ -108,7 +108,7 @@
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
-                        <p v-text="record.user_id"></p>
+                        <p>@{{ record.user_id }}</p>
 
                         <!-- User Profile -->
                         <p>
@@ -128,29 +128,25 @@
                                     class="profile-info-icon"
                                     v-else
                                 >
-                                    <button
-                                        class="flex justify-center items-center w-9 h-9 bg-blue-400 rounded-full text-sm text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500"
-                                        v-text="record.user_name[0].toUpperCase()"
-                                    >
+                                    <button class="flex justify-center items-center w-9 h-9 bg-blue-400 rounded-full text-sm text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500">
+                                        @{{ record.user_name[0].toUpperCase() }}
                                     </button>
                                 </div>
 
-                                <div
-                                    class="text-sm"
-                                    v-text="record.user_name"
-                                >
+                                <div class="text-sm">
+                                    @{{ record.user_name }}
                                 </div>
                             </div>
                         </p>
 
                         <!-- Status -->
-                        <p v-text="record.status"></p>
+                        <p>@{{ record.status }}</p>
 
                         <!-- Email -->
-                        <p v-text="record.email"></p>
+                        <p>@{{ record.email }}</p>
 
                         <!-- Role -->
-                        <p v-text="record.role_name"></p>
+                        <p>@{{ record.role_name }}</p>
 
                         <!-- Actions -->
                         <div class="flex justify-end">

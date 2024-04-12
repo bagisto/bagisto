@@ -269,8 +269,8 @@
                     <a
                         :href="category.url"
                         class="inline-block px-5 uppercase"
-                        v-text="category.name"
                     >
+                        @{{ category.name }}
                     </a>
                 </span>
 
@@ -285,10 +285,8 @@
                         >
                             <template v-for="secondLevelCategory in pairCategoryChildren">
                                 <p class="text-navyBlue font-medium">
-                                    <a
-                                        :href="secondLevelCategory.url"
-                                        v-text="secondLevelCategory.name"
-                                    >
+                                    <a :href="secondLevelCategory.url">
+                                        @{{ secondLevelCategory.name }}
                                     </a>
                                 </p>
 
@@ -300,10 +298,8 @@
                                         class="text-sm font-medium text-[#6E6E6E]"
                                         v-for="thirdLevelCategory in secondLevelCategory.children"
                                     >
-                                        <a
-                                            :href="thirdLevelCategory.url"
-                                            v-text="thirdLevelCategory.name"
-                                        >
+                                        <a :href="thirdLevelCategory.url">
+                                            @{{ thirdLevelCategory.name }}
                                         </a>
                                     </li>
                                 </ul>

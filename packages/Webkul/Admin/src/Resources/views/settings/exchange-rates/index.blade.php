@@ -80,13 +80,13 @@
                         :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
                         <!-- Id -->
-                        <p v-text="record.currency_exchange_id"></p>
+                        <p>@{{ record.currency_exchange_id }}</p>
 
                         <!-- Status -->
-                        <p v-text="record.currency_name"></p>
+                        <p>@{{ record.currency_name }}</p>
 
                         <!-- Email -->
-                        <p v-text="record.currency_rate"></p>
+                        <p>@{{ record.currency_rate }}</p>
 
                         <!-- Actions -->
                         <div class="flex justify-end">

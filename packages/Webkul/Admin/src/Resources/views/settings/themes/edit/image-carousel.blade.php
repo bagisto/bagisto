@@ -84,10 +84,8 @@
                                             <div> 
                                                 @lang('admin::app.settings.themes.edit.image-title'): 
 
-                                                <span
-                                                    class="text-gray-600 dark:text-gray-300 transition-all"
-                                                    v-text="image.title"
-                                                >
+                                                <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                    @{{ image.title }}
                                                 </span>
                                             </div>
                                         </p>
@@ -96,10 +94,8 @@
                                             <div> 
                                                 @lang('admin::app.settings.themes.edit.link'): 
 
-                                                <span
-                                                    class="text-gray-600 dark:text-gray-300 transition-all"
-                                                    v-text="image.link"
-                                                >
+                                                <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                    @{{ image.link }}
                                                 </span>
                                             </div>
                                         </p>
@@ -115,10 +111,8 @@
                                                         target="_blank"
                                                         class="ltr:ml-2 rtl:mr-2 text-blue-600 transition-all hover:underline"
                                                     >
-                                                        <span 
-                                                            :ref="'imageName_' + index"
-                                                            v-text="image.image"
-                                                        ></span>
+                                                        <span :ref="'imageName_' + index">
+                                                            @{{ image.image }}
                                                     </a>
                                                 </span>
                                             </div>

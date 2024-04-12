@@ -155,10 +155,8 @@
                 <!-- Filter Item Header -->
                 <x-slot:header class="px-0 py-2.5">
                     <div class="flex justify-between items-center">
-                        <p
-                            class="text-lg font-semibold"
-                            v-text="filter.name"
-                        >
+                        <p class="text-lg font-semibold">
+                            @{{ filter.name }}
                         </p>
                     </div>
                 </x-slot>
@@ -210,8 +208,8 @@
                                     :for="'option_' + option.id"
                                     role="button"
                                     tabindex="0"
-                                    v-text="option.name"
                                 >
+                                    @{{ option.name }}
                                 </label>
                             </div>
                         </li>

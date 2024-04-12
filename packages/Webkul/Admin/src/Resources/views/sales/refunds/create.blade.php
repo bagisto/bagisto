@@ -293,28 +293,20 @@
                                 </div>
 
                                 <div class="flex flex-col gap-y-1.5">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.subtotal.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ refund.summary.subtotal.formatted_price }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.discount.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ refund.summary.discount.formatted_price }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.tax.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ refund.summary.tax.formatted_price }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.grand_total.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ refund.summary.grand_total.formatted_price }}
                                     </p>
                                 </div>
                             </div>
