@@ -500,6 +500,8 @@
                             })
                             .catch(error => {
                                 this.isStoring[operation] = false;
+
+                                this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
                             });
                     },
 

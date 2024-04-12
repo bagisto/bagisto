@@ -614,8 +614,9 @@ return [
         ],
 
         'cart' => [
-            'continue-to-checkout'      => 'Continue to Checkout',
+            'continue-to-checkout'      => 'المتابعة إلى الدفع',
             'illegal'                   => 'الكمية لا يمكن أن تكون أقل من واحدة.',
+            'inactive-add'              => 'لا يمكن إضافة المنتج الغير نشط إلى السلة.',
             'inactive'                  => 'تم إلغاء تنشيط المنتج وبالتالي إزالته من السلة.',
             'inventory-warning'         => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
             'item-add-to-cart'          => 'تمت إضافة العنصر بنجاح',
