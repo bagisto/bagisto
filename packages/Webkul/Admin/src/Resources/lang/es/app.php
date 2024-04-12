@@ -1499,18 +1499,18 @@ return [
                     'title'      => 'Campañas',
 
                     'datagrid' => [
-                        'active'   => 'Active',
-                        'delete'   => 'Delete',
-                        'edit'     => 'Edit',
+                        'active'   => 'Activo',
+                        'delete'   => 'Eliminar',
+                        'edit'     => 'Editar',
                         'id'       => 'ID',
-                        'inactive' => 'Inactive',
-                        'name'     => 'Name',
-                        'status'   => 'Status',
-                        'subject'  => 'Subject',
+                        'inactive' => 'Inactivo',
+                        'name'     => 'Nombre',
+                        'status'   => 'Estado',
+                        'subject'  => 'Asunto',
                     ],
                 ],
 
-                'create'    => [
+                'create' => [
                     'active'          => 'Activo',
                     'back-btn'        => 'Atrás',
                     'channel'         => 'Canal',

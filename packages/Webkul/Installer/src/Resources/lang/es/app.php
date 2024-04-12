@@ -309,7 +309,7 @@ return [
         'user'      => [
             'roles' => [
                 'description' => 'Los usuarios con este rol tendrán acceso a todo',
-                'name'        => 'Administrator',
+                'name'        => 'Administrador',
             ],
 
             'users' => [
