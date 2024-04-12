@@ -7,7 +7,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\putJson;
 
 it('should return the subscription index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.subscribers.index'))
@@ -16,21 +16,19 @@ it('should return the subscription index page', function () {
 });
 
 it('should show the edit page of campaign', function () {
-    // Arrange
+    // Arrange.
     $subscriber = SubscribersList::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.subscribers.edit', $subscriber->id))
         ->assertOk()
-        ->assertJsonPath('data.id', $subscriber->id)
-        ->assertJsonPath('data.email', $subscriber->email)
-        ->assertJsonPath('data.is_subscribed', $subscriber->is_subscribed);
+        ->assertJsonFragment($subscriber->toArray());
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in news letter subscription', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.subscribers.update'))
@@ -40,10 +38,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors when is subscribed not passed in update in news letter subscription', function () {
-    // Arrange
+    // Arrange.
     $subscriber = SubscribersList::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.subscribers.update'), [
@@ -54,7 +52,7 @@ it('should fail the validation with errors when is subscribed not passed in upda
 });
 
 it('should fail the validation with errors when id is not passed in update in news letter subscription', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.subscribers.update'), [
@@ -65,10 +63,10 @@ it('should fail the validation with errors when id is not passed in update in ne
 });
 
 it('should update the subscriber', function () {
-    // Arrange
+    // Arrange.
     $subscriber = SubscribersList::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.subscribers.update'), [
@@ -89,10 +87,10 @@ it('should update the subscriber', function () {
 });
 
 it('should delete the specific subscriber', function () {
-    // Arrange
+    // Arrange.
     $subscriber = SubscribersList::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.communications.subscribers.delete', $subscriber->id))

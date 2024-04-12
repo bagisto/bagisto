@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Twoje zamówienie zostało anulowane',
                     'page-title'         => 'Zamówienie #:order_id',
                     'payment-method'     => 'Metoda płatności',
+                    'reorder-btn-title'  => 'Przeorganizuj',
                     'shipping-address'   => 'Adres dostawy',
                     'shipping-method'    => 'Metoda dostawy',
                     'title'              => 'Zobacz',
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Przejdź do realizacji zamówienia',
             'illegal'                   => 'Ilość nie może być mniejsza niż jeden',
+            'inactive-add'              => 'Nieaktywny produkt nie może zostać dodany do koszyka.',
             'inactive'                  => 'Produkt został dezaktywowany i usunięty z koszyka',
             'inventory-warning'         => 'Żądana ilość nie jest dostępna, prosimy spróbować ponownie później',
             'item-add-to-cart'          => 'Produkt został pomyślnie dodany do koszyka',

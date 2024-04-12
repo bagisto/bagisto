@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'سفارش شما لغو شده است',
                     'page-title'         => 'سفارش #:order_id',
                     'payment-method'     => 'روش پرداخت',
+                    'reorder-btn-title'  => 'مرتب سازی مجدد',
                     'shipping-address'   => 'آدرس ارسال',
                     'shipping-method'    => 'روش ارسال',
                     'title'              => 'مشاهده',
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'ادامه به تسویه حساب',
             'illegal'                   => 'تعداد نمی‌تواند کمتر از یک باشد.',
+            'inactive-add'              => 'مورد غیرفعال نمی‌تواند به سبد خرید اضافه شود.',
             'inactive'                  => 'این مورد غیرفعال شده و بعداً از سبد خرید حذف می‌شود.',
             'inventory-warning'         => 'تعداد درخواستی موجود نیست، لطفاً بعداً دوباره امتحان کنید.',
             'item-add-to-cart'          => 'کالا با موفقیت اضافه شد',

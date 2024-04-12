@@ -2,7 +2,6 @@
 
 namespace Webkul\Checkout;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
 use Webkul\Checkout\Exceptions\BillingAddressNotFoundException;
@@ -11,11 +10,11 @@ use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Repositories\CartAddressRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Checkout\Traits\CartCoupons;
-use Webkul\Checkout\Traits\CartTools;
-use Webkul\Checkout\Traits\CartValidators;
+use Webkul\Customer\Contracts\Customer as CustomerContract;
+use Webkul\Customer\Contracts\Wishlist as WishlistContract;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Product\Contracts\Product as ProductContract;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Tax\Helpers\Tax;
@@ -23,8 +22,6 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Cart
 {
-    use CartCoupons, CartTools, CartValidators;
-
     /**
      * @var \Webkul\Checkout\Contracts\Cart
      */
@@ -48,13 +45,51 @@ class Cart
     }
 
     /**
-     * Returns cart.
-     *
-     * @return \Webkul\Checkout\Contracts\Cart|null
+     * Initialize cart
      */
-    public function initCart()
+    public function initCart(?CustomerContract $customer = null): void
     {
-        $this->getCart();
+        if (! $customer) {
+            $customer = auth()->guard()->user();
+        }
+
+        if ($customer) {
+            $this->cart = $this->cartRepository->findOneWhere([
+                'customer_id' => $customer->id,
+                'is_active'   => 1,
+            ]);
+        } elseif (session()->has('cart')) {
+            $this->cart = $this->cartRepository->find(session()->get('cart')->id);
+        }
+    }
+
+    /**
+     * Returns cart
+     */
+    public function refreshCart(): void
+    {
+        if (! $this->cart) {
+            return;
+        }
+
+        $this->cart = $this->cartRepository->find($this->cart->id);
+    }
+
+    /**
+     * Set cart
+     */
+    public function setCart(Contracts\Cart $cart): void
+    {
+        $this->cart = $cart;
+
+        if ($this->cart->customer) {
+            return;
+        }
+
+        $cartTemp = new \stdClass();
+        $cartTemp->id = $this->cart->id;
+
+        session()->put('cart', $cartTemp);
     }
 
     /**
@@ -62,148 +97,158 @@ class Cart
      */
     public function getCart(): ?Contracts\Cart
     {
-        if ($this->cart) {
-            return $this->cart;
-        }
-
-        if (auth()->guard()->check()) {
-            $this->cart = $this->cartRepository->findOneWhere([
-                'customer_id' => auth()->guard()->user()->id,
-                'is_active'   => 1,
-            ]);
-        } elseif (session()->has('cart')) {
-            $this->cart = $this->cartRepository->find(session()->get('cart')->id);
-        }
-
         return $this->cart;
     }
 
     /**
-     * Set cart model to the variable for reuse
-     *
-     * @param \Webkul\Checkout\Contracts\Cart
-     * @return void
+     * Create new cart instance.
      */
-    public function setCart($cart)
+    public function createCart(array $data): ?Contracts\Cart
     {
-        $this->cart = $cart;
+        $data = array_merge([
+            'is_guest'              => 1,
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+        ], $data);
+
+        $customer = $data['customer'] ?? auth()->guard()->user();
+
+        if ($customer) {
+            $data = array_merge($data, [
+                'is_guest'            => 0,
+                'customer_id'         => $customer->id,
+                'customer_first_name' => $customer->first_name,
+                'customer_last_name'  => $customer->last_name,
+                'customer_email'      => $customer->email,
+            ]);
+        }
+
+        $cart = $this->cartRepository->create($data);
+
+        $this->setCart($cart);
+
+        return $cart;
+    }
+
+    /**
+     * Remove cart and destroy the session
+     */
+    public function removeCart(Contracts\Cart $cart): void
+    {
+        $this->cartRepository->delete($cart->id);
+
+        if (session()->has('cart')) {
+            session()->forget('cart');
+        }
+
+        $this->resetCart();
     }
 
     /**
      * Reset cart
-     *
-     * @return void
      */
-    public function resetCart()
+    public function resetCart(): void
     {
         $this->cart = null;
     }
 
     /**
-     * Remove the item from the cart.
-     *
-     * @param  int  $itemId
-     * @return bool
+     * Activate the cart by id.
      */
-    public function removeItem($itemId)
+    public function activateCart(int $cartId): void
     {
-        $cart = $this->getCart();
+        $cart = $this->cartRepository->update([
+            'is_active' => true,
+        ], $cartId);
 
-        if (! $cart) {
-            return false;
-        }
-
-        Event::dispatch('checkout.cart.delete.before', $itemId);
-
-        Shipping::removeAllShippingRates();
-
-        $result = $this->cartItemRepository->delete($itemId);
-
-        Event::dispatch('checkout.cart.delete.after', $itemId);
-
-        return $result;
+        $this->setCart($cart);
     }
 
     /**
-     * Remove all items from cart.
-     *
-     * @return void
+     * Deactivates current cart.
      */
-    public function emptyCart()
+    public function deActivateCart(): void
     {
-        $cart = $this->getCart();
-
-        if (! $cart) {
+        if (! $this->cart) {
             return;
         }
 
-        Event::dispatch('checkout.cart.delete.all.before', $cart);
-
-        $this->cartRepository->delete($cart->id);
+        $this->cartRepository->update(['is_active' => false], $this->cart->id);
 
         $this->resetCart();
 
-        Event::dispatch('checkout.cart.delete.all.after', $cart);
+        if (session()->has('cart')) {
+            session()->forget('cart');
+        }
     }
 
     /**
-     * Get cart item by product.
-     *
-     * @param  array  $data
-     * @param  array|null  $parentData
-     * @return \Webkul\Checkout\Contracts\CartItem|void
+     * This method handles when guest has some of cart products and then logs in.
      */
-    public function getItemByProduct($data, $parentData = null)
+    public function mergeCart(CustomerContract $customer): void
     {
-        $items = $this->getCart()->all_items;
+        if (! session()->has('cart')) {
+            return;
+        }
 
-        foreach ($items as $item) {
-            if ($item->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
-                if (! isset($data['additional']['parent_id'])) {
-                    return $item;
-                }
+        $cart = $this->cartRepository->findOneWhere([
+            'customer_id' => $customer->id,
+            'is_active'   => 1,
+        ]);
 
-                if ($item->parent->getTypeInstance()->compareOptions($item->parent->additional, $parentData ?: request()->all())) {
-                    return $item;
-                }
+        $guestCart = $this->cartRepository->find(session()->get('cart')->id);
+
+        /**
+         * When the logged in customer is not having any of the cart instance previously and are active.
+         */
+        if (! $cart) {
+            $this->cartRepository->update([
+                'customer_id'         => $customer->id,
+                'is_guest'            => 0,
+                'customer_first_name' => $customer->first_name,
+                'customer_last_name'  => $customer->last_name,
+                'customer_email'      => $customer->email,
+            ], $guestCart->id);
+
+            session()->forget('cart');
+
+            return;
+        }
+
+        $this->setCart($cart);
+
+        foreach ($guestCart->items as $guestCartItem) {
+            try {
+                $this->addProduct($guestCartItem->product, $guestCartItem->additional);
+            } catch (\Exception $e) {
+                //Ignore exception
             }
         }
+
+        $this->collectTotals();
+
+        $this->removeCart($guestCart);
     }
 
     /**
      * Add items in a cart with some cart and item details.
-     *
-     * @param  int  $productId
-     * @param  array  $data
-     * @return \Webkul\Checkout\Contracts\Cart|string|array
-     *
-     * @throws Exception
      */
-    public function addProduct($productId, $data)
+    public function addProduct(ProductContract $product, array $data): Contracts\Cart|\Exception
     {
-        Event::dispatch('checkout.cart.add.before', $productId);
+        Event::dispatch('checkout.cart.add.before', $product->id);
 
-        $cart = $this->getCart();
-
-        if (! $cart) {
-            $cart = $this->create($data);
-        }
-
-        if (! $cart) {
-            return ['warning' => __('shop::app.checkout.cart.item.error-add')];
-        }
-
-        $product = $this->productRepository->find($productId);
-
-        if (! $product->status) {
-            return ['info' => __('shop::app.checkout.cart.item.inactive-add')];
+        if (! $this->cart) {
+            $this->createCart([]);
         }
 
         $cartProducts = $product->getTypeInstance()->prepareForCart($data);
 
         if (is_string($cartProducts)) {
-            if (! $cart->all_items->count()) {
-                $this->removeCart($cart);
+            if (! $this->cart->all_items->count()) {
+                $this->removeCart($this->cart);
             } else {
                 $this->collectTotals();
             }
@@ -220,14 +265,14 @@ class Cart
                 }
 
                 if (! $cartItem) {
-                    $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
+                    $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, ['cart_id' => $this->cart->id]));
                 } else {
                     if (
                         isset($cartProduct['parent_id'])
                         && $cartItem->parent_id !== $parentCartItem->id
                     ) {
                         $cartItem = $this->cartItemRepository->create(array_merge($cartProduct, [
-                            'cart_id' => $cart->id,
+                            'cart_id' => $this->cart->id,
                         ]));
                     } else {
                         $cartItem = $this->cartItemRepository->update($cartProduct, $cartItem->id);
@@ -240,69 +285,37 @@ class Cart
             }
         }
 
-        Event::dispatch('checkout.cart.add.after', $cart);
-
         $this->collectTotals();
 
-        return $this->getCart();
+        Event::dispatch('checkout.cart.add.after', $this->cart);
+
+        return $this->cart;
     }
 
     /**
-     * Create new cart instance.
-     *
-     * @param  array  $data
-     * @return \Webkul\Checkout\Contracts\Cart|null
+     * Remove the item from the cart.
      */
-    public function create($data)
+    public function removeItem(int $itemId): bool
     {
-        $cartData = [
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'items_count'           => 1,
-        ];
-
-        /**
-         * Fill in the customer data, as far as possible.
-         */
-        if (auth()->guard()->check()) {
-            $customer = auth()->guard()->user();
-
-            $cartData = array_merge($cartData, [
-                'customer_id'         => $customer->id,
-                'is_guest'            => 0,
-                'customer_first_name' => $customer->first_name,
-                'customer_last_name'  => $customer->last_name,
-                'customer_email'      => $customer->email,
-            ]);
-        } else {
-            $cartData['is_guest'] = 1;
+        if (! $this->cart) {
+            return false;
         }
 
-        $cart = $this->cartRepository->create($cartData);
+        Event::dispatch('checkout.cart.delete.before', $itemId);
 
-        if (! $cart) {
-            session()->flash('error', __('shop::app.checkout.cart.create-error'));
+        Shipping::removeAllShippingRates();
 
-            return;
-        }
+        $result = $this->cartItemRepository->delete($itemId);
 
-        $this->setCart($cart);
+        Event::dispatch('checkout.cart.delete.after', $itemId);
 
-        $this->putCart($cart);
-
-        return $cart;
+        return $result;
     }
 
     /**
      * Update cart items information.
-     *
-     * @param  array  $data
-     * @return bool|void|Exception
      */
-    public function updateItems($data)
+    public function updateItems(array $data): bool|\Exception
     {
         foreach ($data['qty'] as $itemId => $quantity) {
             $item = $this->cartItemRepository->find($itemId);
@@ -346,6 +359,28 @@ class Cart
     }
 
     /**
+     * Get cart item by product.
+     */
+    public function getItemByProduct(array $data, ?array $parentData = null): ?Contracts\CartItem
+    {
+        $items = $this->cart->all_items;
+
+        foreach ($items as $item) {
+            if ($item->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
+                if (! isset($data['additional']['parent_id'])) {
+                    return $item;
+                }
+
+                if ($item->parent->getTypeInstance()->compareOptions($item->parent->additional, $parentData ?: request()->all())) {
+                    return $item;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Update or create billing address.
      */
     public function saveAddresses(array $params): void
@@ -354,7 +389,7 @@ class Cart
 
         $this->updateOrCreateShippingAddress($params['shipping'] ?? []);
 
-        $this->saveCustomerDetails();
+        $this->setCustomerPersonnelDetails();
 
         $this->resetShippingMethod();
     }
@@ -458,38 +493,21 @@ class Cart
     /**
      * Save customer details.
      */
-    public function saveCustomerDetails(): void
+    public function setCustomerPersonnelDetails(): void
     {
-        if (
-            ($user = auth()->guard()->user())
-            && (
-                $user->email
-                && $user->first_name
-                && $user->last_name
-            )
-        ) {
-            $this->cart->customer_email = $user->email;
-            $this->cart->customer_first_name = $user->first_name;
-            $this->cart->customer_last_name = $user->last_name;
-        } else {
-            $this->cart->customer_email = $this->cart->billing_address->email;
-            $this->cart->customer_first_name = $this->cart->billing_address->first_name;
-            $this->cart->customer_last_name = $this->cart->billing_address->last_name;
-        }
+        $this->cart->customer_email = $this->cart->customer?->email ?? $this->cart->billing_address->email;
+        $this->cart->customer_first_name = $this->cart->customer?->first_name ?? $this->cart->billing_address->email;
+        $this->cart->customer_last_name = $this->cart->customer?->last_name ?? $this->cart->billing_address->email;
 
         $this->cart->save();
     }
 
     /**
      * Save shipping method for cart.
-     *
-     * @param  string  $shippingMethodCode
      */
-    public function saveShippingMethod($shippingMethodCode): bool
+    public function saveShippingMethod(string $shippingMethodCode): bool
     {
-        $cart = $this->getCart();
-
-        if (! $cart) {
+        if (! $this->cart) {
             return false;
         }
 
@@ -497,8 +515,8 @@ class Cart
             return false;
         }
 
-        $cart->shipping_method = $shippingMethodCode;
-        $cart->save();
+        $this->cart->shipping_method = $shippingMethodCode;
+        $this->cart->save();
 
         return true;
     }
@@ -508,119 +526,261 @@ class Cart
      */
     public function resetShippingMethod(): bool
     {
-        $cart = $this->getCart();
-
-        if (! $cart) {
+        if (! $this->cart) {
             return false;
         }
 
         Shipping::removeAllShippingRates();
 
-        $cart->shipping_method = null;
-        $cart->save();
+        $this->cart->shipping_method = null;
+        $this->cart->save();
 
         return true;
     }
 
     /**
      * Save payment method for cart.
-     *
-     * @param  string  $payment
-     * @return \Webkul\Checkout\Contracts\CartPayment
      */
-    public function savePaymentMethod($payment)
+    public function savePaymentMethod(array $params): bool|Contracts\CartPayment
     {
-        $cart = $this->getCart();
-
-        if (! $cart) {
+        if (! $this->cart) {
             return false;
         }
 
-        if ($cartPayment = $cart->payment) {
+        if ($cartPayment = $this->cart->payment) {
             $cartPayment->delete();
         }
 
         $cartPayment = new CartPayment;
 
-        $cartPayment->method = $payment['method'];
-        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$payment['method'].'.title');
-        $cartPayment->cart_id = $cart->id;
+        $cartPayment->method = $params['method'];
+        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$params['method'].'.title');
+        $cartPayment->cart_id = $this->cart->id;
         $cartPayment->save();
 
         return $cartPayment;
     }
 
     /**
+     * Set coupon code to the cart.
+     */
+    public function setCouponCode(?string $code): self
+    {
+        $this->cart->coupon_code = $code;
+
+        $this->cart->save();
+
+        return $this;
+    }
+
+    /**
+     * Set coupon code to the cart.
+     */
+    public function removeCouponCode(): self
+    {
+        return $this->setCouponCode(null);
+    }
+
+    /**
+     * Move a wishlist item to cart.
+     */
+    public function moveToCart(WishlistContract $wishlistItem, ?int $quantity = 1): bool
+    {
+        if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
+            return false;
+        }
+
+        if (! $wishlistItem->additional) {
+            $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
+        }
+
+        $additional = [
+            ...$wishlistItem->additional,
+            'quantity' => $quantity,
+        ];
+
+        $result = $this->addProduct($wishlistItem->product, $additional);
+
+        if ($result) {
+            $this->wishlistRepository->delete($wishlistItem->id);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Move to wishlist items.
+     */
+    public function moveToWishlist(int $itemId, int $quantity = 1): bool
+    {
+        $cartItem = $this->cart->items()->find($itemId);
+
+        if (! $cartItem) {
+            return false;
+        }
+
+        $wishlistItems = $this->wishlistRepository->findWhere([
+            'customer_id' => $this->cart->customer_id,
+            'product_id'  => $cartItem->product_id,
+        ]);
+
+        $found = false;
+
+        foreach ($wishlistItems as $wishlistItem) {
+            $options = $wishlistItem->item_options;
+
+            if (! $options) {
+                $options = ['product_id' => $wishlistItem->product_id];
+            }
+
+            if ($cartItem->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
+                $found = true;
+            }
+        }
+
+        if (! $found) {
+            $this->wishlistRepository->create([
+                'channel_id'  => $this->cart->channel_id,
+                'customer_id' => $this->cart->customer_id,
+                'product_id'  => $cartItem->product_id,
+                'additional'  => [
+                    ...$cartItem->additional,
+                    'quantity' => $quantity,
+                ],
+            ]);
+        }
+
+        if (! $this->cart->items->count()) {
+            $this->cartRepository->delete($this->cart->id);
+
+            $this->refreshCart();
+        } else {
+            $this->cartItemRepository->delete($itemId);
+
+            $this->refreshCart();
+
+            $this->collectTotals();
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if cart has any error.
+     */
+    public function hasError(): bool
+    {
+        if (
+            ! $this->cart
+            || ! $this->isItemsHaveSufficientQuantity()
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if all cart items have sufficient quantity.
+     */
+    public function isItemsHaveSufficientQuantity(): bool
+    {
+        if (! $this->cart) {
+            return false;
+        }
+
+        foreach ($this->cart->items as $item) {
+            if (! $this->isItemHaveQuantity($item)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if all cart items have sufficient quantity.
+     */
+    public function isItemHaveQuantity(Contracts\CartItem $item): bool
+    {
+        return $item->getTypeInstance()->isItemHaveQuantity($item);
+    }
+
+    /**
      * Updates cart totals.
      */
-    public function collectTotals(): void
+    public function collectTotals(): self
     {
         if (! $this->validateItems()) {
             /**
              * Reset the cart so that fresh copy of cart can be created.
              */
-            $this->resetCart();
+            $this->refreshCart();
         }
 
-        if (! $cart = $this->getCart()) {
-            return;
+        if (! $this->cart) {
+            return $this;
         }
 
-        Event::dispatch('checkout.cart.collect.totals.before', $cart);
+        Event::dispatch('checkout.cart.collect.totals.before', $this->cart);
 
         $this->calculateItemsTax();
 
-        $cart->refresh();
+        $this->refreshCart();
 
-        $cart->sub_total = $cart->base_sub_total = 0;
-        $cart->grand_total = $cart->base_grand_total = 0;
-        $cart->tax_total = $cart->base_tax_total = 0;
-        $cart->discount_amount = $cart->base_discount_amount = 0;
+        $this->cart->sub_total = $this->cart->base_sub_total = 0;
+        $this->cart->grand_total = $this->cart->base_grand_total = 0;
+        $this->cart->tax_total = $this->cart->base_tax_total = 0;
+        $this->cart->discount_amount = $this->cart->base_discount_amount = 0;
 
         $quantities = 0;
 
-        foreach ($cart->items as $item) {
-            $cart->discount_amount += $item->discount_amount;
-            $cart->base_discount_amount += $item->base_discount_amount;
+        foreach ($this->cart->items as $item) {
+            $this->cart->discount_amount += $item->discount_amount;
+            $this->cart->base_discount_amount += $item->base_discount_amount;
 
-            $cart->sub_total = (float) $cart->sub_total + $item->total;
-            $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_total;
+            $this->cart->sub_total = (float) $this->cart->sub_total + $item->total;
+            $this->cart->base_sub_total = (float) $this->cart->base_sub_total + $item->base_total;
 
             $quantities += $item->quantity;
         }
 
-        $cart->items_qty = $quantities;
+        $this->cart->items_qty = $quantities;
 
-        $cart->items_count = $cart->items->count();
+        $this->cart->items_count = $this->cart->items->count();
 
-        $cart->tax_total = Tax::getTaxTotal($cart, false);
-        $cart->base_tax_total = Tax::getTaxTotal($cart, true);
+        $this->cart->tax_total = Tax::getTaxTotal($this->cart, false);
+        $this->cart->base_tax_total = Tax::getTaxTotal($this->cart, true);
 
-        $cart->grand_total = $cart->sub_total + $cart->tax_total - $cart->discount_amount;
-        $cart->base_grand_total = $cart->base_sub_total + $cart->base_tax_total - $cart->base_discount_amount;
+        $this->cart->grand_total = $this->cart->sub_total + $this->cart->tax_total - $this->cart->discount_amount;
+        $this->cart->base_grand_total = $this->cart->base_sub_total + $this->cart->base_tax_total - $this->cart->base_discount_amount;
 
-        if ($shipping = $cart->selected_shipping_rate) {
-            $cart->grand_total = (float) $cart->grand_total + $shipping->price - $shipping->discount_amount;
-            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
+        if ($shipping = $this->cart->selected_shipping_rate) {
+            $this->cart->grand_total = (float) $this->cart->grand_total + $shipping->price - $shipping->discount_amount;
+            $this->cart->base_grand_total = (float) $this->cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
 
-            $cart->discount_amount += $shipping->discount_amount;
-            $cart->base_discount_amount += $shipping->base_discount_amount;
+            $this->cart->discount_amount += $shipping->discount_amount;
+            $this->cart->base_discount_amount += $shipping->base_discount_amount;
         }
 
-        $cart->discount_amount = round($cart->discount_amount, 2);
-        $cart->base_discount_amount = round($cart->base_discount_amount, 2);
+        $this->cart->discount_amount = round($this->cart->discount_amount, 2);
+        $this->cart->base_discount_amount = round($this->cart->base_discount_amount, 2);
 
-        $cart->sub_total = round($cart->sub_total, 2);
-        $cart->base_sub_total = round($cart->base_sub_total, 2);
+        $this->cart->sub_total = round($this->cart->sub_total, 2);
+        $this->cart->base_sub_total = round($this->cart->base_sub_total, 2);
 
-        $cart->grand_total = round($cart->grand_total, 2);
-        $cart->base_grand_total = round($cart->base_grand_total, 2);
+        $this->cart->grand_total = round($this->cart->grand_total, 2);
+        $this->cart->base_grand_total = round($this->cart->base_grand_total, 2);
 
-        $cart->cart_currency_code = core()->getCurrentCurrencyCode();
+        $this->cart->cart_currency_code = core()->getCurrentCurrencyCode();
 
-        $cart->save();
+        $this->cart->save();
 
-        Event::dispatch('checkout.cart.collect.totals.after', $cart);
+        Event::dispatch('checkout.cart.collect.totals.after', $this->cart);
+
+        return $this;
     }
 
     /**
@@ -628,21 +788,19 @@ class Cart
      */
     public function validateItems(): bool
     {
-        $cart = $this->getCart();
-
-        if (! $cart) {
+        if (! $this->cart) {
             return false;
         }
 
-        if (! $cart->items->count()) {
-            $this->removeCart($cart);
+        if (! $this->cart->items->count()) {
+            $this->removeCart($this->cart);
 
             return false;
         }
 
         $isInvalid = false;
 
-        foreach ($cart->items as $item) {
+        foreach ($this->cart->items as $item) {
             $validationResult = $item->getTypeInstance()->validateCartItem($item);
 
             if ($validationResult->isItemInactive()) {
@@ -676,15 +834,15 @@ class Cart
      */
     public function calculateItemsTax(): void
     {
-        if (! $cart = $this->getCart()) {
+        if (! $this->cart) {
             return;
         }
 
-        Event::dispatch('checkout.cart.calculate.items.tax.before', $cart);
+        Event::dispatch('checkout.cart.calculate.items.tax.before', $this->cart);
 
         $taxCategories = [];
 
-        foreach ($cart->items as $item) {
+        foreach ($this->cart->items as $item) {
             $taxCategoryId = $item->product->tax_category_id;
 
             if (empty($taxCategoryId)) {
@@ -700,13 +858,13 @@ class Cart
             }
 
             if ($item->getTypeInstance()->isStockable()) {
-                $address = $cart->shipping_address;
+                $address = $this->cart->shipping_address;
             } else {
-                $address = $cart->billing_address;
+                $address = $this->cart->billing_address;
             }
 
-            if ($address === null && auth()->guard()->check()) {
-                $address = auth()->guard()->user()->addresses()
+            if ($address === null && $this->cart->customer) {
+                $address = $this->cart->customer->addresses()
                     ->where('default_address', 1)->first();
             }
 
@@ -729,274 +887,6 @@ class Cart
             $item->save();
         }
 
-        Event::dispatch('checkout.cart.calculate.items.tax.after', $cart);
-    }
-
-    /**
-     * Collect customer address.
-     *
-     * @param  array  $address
-     */
-    private function collectAddress($address): array
-    {
-        if (isset($address['address_id'])) {
-            $address = $this->customerAddressRepository->find($address['address_id'])?->toArray();
-        }
-
-        return [
-            ...$this->fillCustomerAttributes(),
-            ...$this->fillAddressAttributes($address),
-        ];
-    }
-
-    /**
-     * Fill customer attributes.
-     */
-    private function fillCustomerAttributes(): array
-    {
-        $user = auth()->guard()->user();
-
-        if (! $user) {
-            return [];
-        }
-
-        return [
-            'first_name'  => $user->first_name,
-            'last_name'   => $user->last_name,
-            'email'       => $user->email,
-            'customer_id' => $user->id,
-        ];
-    }
-
-    /**
-     * Fill address attributes.
-     */
-    private function fillAddressAttributes(array $addressAttributes): array
-    {
-        $attributes = [];
-
-        $cartAddress = new CartAddress();
-
-        foreach ($cartAddress->getFillable() as $attribute) {
-            if (! isset($addressAttributes[$attribute])) {
-                continue;
-            }
-
-            $attributes[$attribute] = $addressAttributes[$attribute];
-        }
-
-        return $attributes;
-    }
-
-    /**
-     * Link addresses.
-     *
-     * @param  \Webkul\Checkout\Cart|null  $cart
-     * @param  array  $billingAddressData
-     * @param  array  $shippingAddressData
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     */
-    private function updateOrCreateAddress(
-        Models\Cart $cart,
-        array $billingAddress,
-        array $shippingAddress
-    ): void {
-        if ($cart->billing_address) {
-            /**
-             * Update billing address
-             */
-            $this->cartAddressRepository->update(array_merge($billingAddress, [
-                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-            ]), $cart->billing_address->id);
-
-            /**
-             * If cart have stockable items then update or create shipping address
-             */
-            if ($cart->haveStockableItems()) {
-                if ($cart->shipping_address) {
-                    /**
-                     * Update shipping address
-                     */
-                    $this->cartAddressRepository->update(
-                        array_merge(
-                            (
-                                ! empty($billingAddress['use_for_shipping'])
-                                ? $billingAddress
-                                : $shippingAddress
-                            ), [
-                                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                            ]),
-                        $cart->shipping_address->id
-                    );
-                } else {
-                    /**
-                     * Create shipping address
-                     */
-                    $this->cartAddressRepository->create(
-                        array_merge(
-                            (
-                                ! empty($billingAddress['use_for_shipping'])
-                                ? $billingAddress
-                                : $shippingAddress
-                            ), [
-                                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                            ])
-                    );
-                }
-            }
-        } else {
-            /**
-             * Create billing address
-             */
-            $this->cartAddressRepository->create(array_merge($billingAddress, [
-                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-            ]));
-
-            if ($cart->haveStockableItems()) {
-                $this->cartAddressRepository->create(
-                    array_merge(
-                        (
-                            ! empty($billingAddress['use_for_shipping'])
-                            ? $billingAddress
-                            : $shippingAddress
-                        ), [
-                            'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                        ])
-                );
-            }
-        }
-    }
-
-    /**
-     * Prepare data for order.
-     */
-    public function prepareDataForOrder(): array
-    {
-        $data = $this->toArray();
-
-        $finalData = [
-            'cart_id'               => $this->getCart()->id,
-            'customer_id'           => $data['customer_id'],
-            'is_guest'              => $data['is_guest'],
-            'customer_email'        => $data['customer_email'],
-            'customer_first_name'   => $data['customer_first_name'],
-            'customer_last_name'    => $data['customer_last_name'],
-            'customer'              => auth()->guard()->check() ? auth()->guard()->user() : null,
-            'total_item_count'      => $data['items_count'],
-            'total_qty_ordered'     => $data['items_qty'],
-            'base_currency_code'    => $data['base_currency_code'],
-            'channel_currency_code' => $data['channel_currency_code'],
-            'order_currency_code'   => $data['cart_currency_code'],
-            'grand_total'           => $data['grand_total'],
-            'base_grand_total'      => $data['base_grand_total'],
-            'sub_total'             => $data['sub_total'],
-            'base_sub_total'        => $data['base_sub_total'],
-            'tax_amount'            => $data['tax_total'],
-            'base_tax_amount'       => $data['base_tax_total'],
-            'coupon_code'           => $data['coupon_code'],
-            'applied_cart_rule_ids' => $data['applied_cart_rule_ids'],
-            'discount_amount'       => $data['discount_amount'],
-            'base_discount_amount'  => $data['base_discount_amount'],
-            'billing_address'       => Arr::except($data['billing_address'], ['id', 'cart_id']),
-            'payment'               => Arr::except($data['payment'], ['id', 'cart_id']),
-            'channel'               => core()->getCurrentChannel(),
-        ];
-
-        if ($this->getCart()->haveStockableItems()) {
-            $finalData = array_merge($finalData, [
-                'shipping_method'               => $data['selected_shipping_rate']['method'],
-                'shipping_title'                => $data['selected_shipping_rate']['carrier_title'].' - '.$data['selected_shipping_rate']['method_title'],
-                'shipping_description'          => $data['selected_shipping_rate']['method_description'],
-                'shipping_amount'               => $data['selected_shipping_rate']['price'],
-                'base_shipping_amount'          => $data['selected_shipping_rate']['base_price'],
-                'shipping_address'              => Arr::except($data['shipping_address'], ['id', 'cart_id']),
-                'shipping_discount_amount'      => $data['selected_shipping_rate']['discount_amount'],
-                'base_shipping_discount_amount' => $data['selected_shipping_rate']['base_discount_amount'],
-            ]);
-        }
-
-        foreach ($data['items'] as $item) {
-            $finalData['items'][] = $this->prepareDataForOrderItem($item);
-        }
-
-        if ($finalData['payment']['method'] === 'paypal_smart_button') {
-            $finalData['payment']['additional'] = request()->get('orderData');
-        }
-
-        return $finalData;
-    }
-
-    /**
-     * Prepares data for order item.
-     *
-     * @param  array  $data
-     */
-    public function prepareDataForOrderItem($data): array
-    {
-        $finalData = [
-            'product'              => $this->productRepository->find($data['product_id']),
-            'sku'                  => $data['sku'],
-            'type'                 => $data['type'],
-            'name'                 => $data['name'],
-            'weight'               => $data['weight'],
-            'total_weight'         => $data['total_weight'],
-            'qty_ordered'          => $data['quantity'],
-            'price'                => $data['price'],
-            'base_price'           => $data['base_price'],
-            'total'                => $data['total'],
-            'base_total'           => $data['base_total'],
-            'tax_percent'          => $data['tax_percent'],
-            'tax_amount'           => $data['tax_amount'],
-            'base_tax_amount'      => $data['base_tax_amount'],
-            'tax_category_id'      => $data['tax_category_id'],
-            'discount_percent'     => $data['discount_percent'],
-            'discount_amount'      => $data['discount_amount'],
-            'base_discount_amount' => $data['base_discount_amount'],
-            'additional'           => array_merge($data['additional'] ?? [], ['locale' => core()->getCurrentLocale()->code]),
-        ];
-
-        if (! empty($data['children'])) {
-            foreach ($data['children'] as $child) {
-                /**
-                 * - For bundle, child quantity will not be zero.
-                 *
-                 * - For configurable, parent one will be added as child one is zero.
-                 *
-                 * - In testing phase.
-                 */
-                $child['quantity'] = $child['quantity'] ? $child['quantity'] * $data['quantity'] : $data['quantity'];
-
-                $finalData['children'][] = $this->prepareDataForOrderItem($child);
-            }
-        }
-
-        return $finalData;
-    }
-
-    /**
-     * Returns cart details in array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $cart = $this->getCart();
-
-        $data = $cart->toArray();
-
-        $data['billing_address'] = $cart->billing_address->toArray();
-
-        if ($cart->haveStockableItems()) {
-            $data['shipping_address'] = $cart->shipping_address->toArray();
-
-            $data['selected_shipping_rate'] = $cart->selected_shipping_rate?->toArray() ?? 0;
-        }
-
-        $data['payment'] = $cart->payment->toArray();
-
-        $data['items'] = $cart->items()->with('children')->get()->toArray();
-
-        return $data;
+        Event::dispatch('checkout.cart.calculate.items.tax.after', $this->cart);
     }
 }

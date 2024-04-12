@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should show the search terms index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.search_seo.search_terms.index'))
@@ -18,7 +18,7 @@ it('should show the search terms index page', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the search term', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_terms.store'))
@@ -29,7 +29,7 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created search term', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_terms.store'), [
@@ -54,10 +54,10 @@ it('should store the newly created search term', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update the search term', function () {
-    // Arrange
+    // Arrange.
     $searchTerm = SearchTerm::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.search_terms.update', $searchTerm->id))
@@ -68,10 +68,10 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the search term', function () {
-    // Arrange
+    // Arrange.
     $searchTerm = SearchTerm::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.search_terms.update'), [
@@ -96,10 +96,10 @@ it('should update the search term', function () {
 });
 
 it('should delete the search term', function () {
-    // Arrange
+    // Arrange.
     $searchTerm = SearchTerm::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.search_seo.search_terms.delete', $searchTerm->id))
@@ -112,10 +112,10 @@ it('should delete the search term', function () {
 });
 
 it('should mass delete the search term', function () {
-    // Arrange
+    // Arrange.
     $searchTerms = SearchTerm::factory()->count(2)->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_terms.mass_delete'), [
