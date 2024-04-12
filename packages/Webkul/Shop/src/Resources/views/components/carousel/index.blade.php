@@ -32,7 +32,7 @@
 
             <!-- Navigation -->
             <span
-                class="icon-arrow-left text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 left-2.5 bg-black/80 transition-all opacity-30 rounded-full"
+                class="icon-arrow-left text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 left-2.5 bg-black/80 transition-all opacity-30 rounded-full hidden md:inline-block"
                 :class="{
                     'cursor-not-allowed': direction == 'ltr' && currentIndex == 0,
                     'cursor-pointer hover:opacity-100': direction == 'ltr' ? currentIndex > 0 : currentIndex <= 0
@@ -40,13 +40,13 @@
                 role="button"
                 aria-label="@lang('shop::components.carousel.previous')"
                 tabindex="0"
-                v-if="images?.length >= 2 && ! isMobile"
+                v-if="images?.length >= 2"
                 @click="navigate('prev')"
             >
             </span>
 
             <span
-                class="icon-arrow-right text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 right-2.5 bg-black/80 transition-all opacity-30 rounded-full"
+                class="icon-arrow-right text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 right-2.5 bg-black/80 transition-all opacity-30 rounded-full hidden md:inline-block"
                 :class="{
                     'cursor-not-allowed': direction == 'rtl' && currentIndex == 0,
                     'cursor-pointer hover:opacity-100': direction == 'rtl' ? currentIndex < 0 : currentIndex >= 0
@@ -54,7 +54,7 @@
                 role="button"
                 aria-label="@lang('shop::components.carousel.next')"
                 tabindex="0"
-                v-if="images?.length >= 2 && ! isMobile"
+                v-if="images?.length >= 2"
                 @click="navigate('next')"
             >
             </span>
@@ -107,12 +107,6 @@
                 this.init();
 
                 this.play();
-            },
-
-            computed: {
-                isMobile() {
-                    return window.innerWidth < 768;
-                }
             },
 
             methods: {
