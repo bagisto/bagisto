@@ -66,9 +66,9 @@
                             >
                                 <p>@{{ record.term }}</p>
 
-                                <p>{{ record.results }}</p>
+                                <p>@{{ record.results }}</p>
 
-                                <p>{{ record.uses }}</p>
+                                <p>@{{ record.uses }}</p>
                             </div>
                         </div>
                     </template>
