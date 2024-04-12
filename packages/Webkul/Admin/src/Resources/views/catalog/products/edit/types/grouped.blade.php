@@ -74,7 +74,7 @@
                                 <!-- Details -->
                                 <div class="grid gap-1.5 place-content-start">
                                     <p class="text-base text-gray-800 dark:text-white font-semibold">
-                                        @{{ element.associated_product.name}}
+                                        @{{ element.associated_product.name }}
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
