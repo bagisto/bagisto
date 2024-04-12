@@ -130,7 +130,7 @@ return [
         'core'      => [
             'channels'   => [
                 'meta-description' => 'Demo-Shop Meta-Beschreibung',
-                'meta-keywords'    => 'Demo-Shop Meta-Stichwörter',
+                'meta-keywords'    => 'Demo-Shop Meta-Schlüsselwörter',
                 'meta-title'       => 'Demo-Shop',
                 'name'             => 'Standard',
             ],
@@ -139,7 +139,7 @@ return [
                 'AED' => 'Dirham',
                 'AFN' => 'Israelischer Schekel',
                 'CNY' => 'Chinesischer Yuan',
-                'EUR' => 'EURO',
+                'EUR' => 'Euro',
                 'GBP' => 'Pfund Sterling',
                 'INR' => 'Indische Rupie',
                 'IRR' => 'Iranischer Rial',
@@ -153,7 +153,7 @@ return [
 
             'locales'    => [
                 'ar'    => 'Arabisch',
-                'bn'    => 'Bengali',
+                'bn'    => 'Bengalisch',
                 'de'    => 'Deutsch',
                 'en'    => 'Englisch',
                 'es'    => 'Spanisch',
@@ -221,7 +221,7 @@ return [
                         'customer-service' => 'Kundenservice',
                         'payment-policy'   => 'Zahlungsrichtlinie',
                         'privacy-policy'   => 'Datenschutzrichtlinie',
-                        'refund-policy'    => 'Erstattungsrichtlinie',
+                        'refund-policy'    => 'Rückgaberichtlinie',
                         'return-policy'    => 'Rückgaberichtlinie',
                         'shipping-policy'  => 'Versandrichtlinie',
                         'terms-conditions' => 'Allgemeine Geschäftsbedingungen',

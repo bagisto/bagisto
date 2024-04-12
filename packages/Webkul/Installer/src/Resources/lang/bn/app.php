@@ -322,9 +322,9 @@ return [
         'index' => [
             'create-administrator'      => [
                 'admin'            => 'অ্যাডমিন',
-                'bagisto'          => 'বাগিস্টো',
+                'bagisto'          => 'বাগিস্তো',
                 'confirm-password' => 'পাসওয়ার্ড নিশ্চিত করুন',
-                'email-address'    => 'admin@example.com',
+                'email-address'    => 'ইমেল ঠিকানা',
                 'email'            => 'ইমেল',
                 'password'         => 'পাসওয়ার্ড',
                 'title'            => 'প্রশাসক তৈরি করুন',
@@ -334,7 +334,7 @@ return [
                 'allowed-currencies'  => 'অনুমোদিত মুদ্রা',
                 'allowed-locales'     => 'অনুমোদিত লোকেল',
                 'application-name'    => 'অ্যাপ্লিকেশনের নাম',
-                'bagisto'             => 'Bagisto',
+                'bagisto'             => 'বাগিস্তো',
                 'chinese-yuan'        => 'চীনা ইউয়ান (CNY)',
                 'database-connection' => 'ডাটাবেস সংযোগ',
                 'database-hostname'   => 'ডাটাবেস হোস্টনাম',
@@ -370,16 +370,16 @@ return [
 
             'installation-processing'   => [
                 'bagisto-info'     => 'ডাটাবেস টেবিল তৈরি করা হচ্ছে, এটি কিছুটা সময় নিতে পারে',
-                'bagisto'          => 'ইনস্টলেশন Bagisto',
+                'bagisto'          => 'ইনস্টলেশন বাগিস্তো',
                 'title'            => 'ইনস্টলেশন',
             ],
 
             'installation-completed'    => [
                 'admin-panel'                => 'অ্যাডমিন প্যানেল',
-                'bagisto-forums'             => 'বাগিস্টো ফোরাম',
+                'bagisto-forums'             => 'বাগিস্তো ফোরাম',
                 'customer-panel'             => 'কাস্টমার প্যানেল',
-                'explore-bagisto-extensions' => 'বাগিস্টো এক্সটেনশন অন্বেষণ করুন',
-                'title-info'                 => 'বাগিস্টো সফলভাবে আপনার সিস্টেমে ইনস্টল করা হয়েছে।',
+                'explore-bagisto-extensions' => 'বাগিস্তো এক্সটেনশন অন্বেষণ করুন',
+                'title-info'                 => 'বাগিস্তো সফলভাবে আপনার সিস্টেমে ইনস্টল করা হয়েছে।',
                 'title'                      => 'ইনস্টলেশন সম্পন্ন',
             ],
 
