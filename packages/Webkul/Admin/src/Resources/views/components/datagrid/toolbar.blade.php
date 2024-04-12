@@ -57,9 +57,9 @@
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
                                             href="javascript:void(0);"
-                                            v-text="option.label"
                                             @click="performMassAction(massAction, option)"
                                         >
+                                            @{{ option.label }}
                                         </a>
                                     </li>
                                 </ul>
@@ -178,7 +178,7 @@
                             type="button"
                             class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                         >
-                            <span v-text="applied.pagination.perPage"></span>
+                            <span>@{{ applied.pagination.perPage }}</span>
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
@@ -188,9 +188,9 @@
                     <x-slot:menu>
                         <x-admin::dropdown.menu.item
                             v-for="perPageOption in available.meta.per_page_options"
-                            v-text="perPageOption"
                             @click="changePerPageOption(perPageOption)"
                         >
+                            @{{ perPageOption }}
                         </x-admin::dropdown.menu.item>
                     </x-slot>
                 </x-admin::dropdown>
@@ -209,7 +209,7 @@
                 <div class="whitespace-nowrap text-gray-600 dark:text-gray-300">
                     <span> @lang('admin::app.components.datagrid.toolbar.of') </span>
 
-                    <span v-text="available.meta.last_page"></span>
+                    <span>@{{ available.meta.last_page }}</span>
                 </div>
 
                 <!-- Pagination -->

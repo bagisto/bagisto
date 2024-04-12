@@ -252,10 +252,8 @@
                     class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-xl bg-[#F5F5F5] max-sm:hidden"
                     :title="review.name"
                 >
-                    <span
-                        class="text-2xl text-[#6E6E6E] font-semibold"
-                        v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
-                    >
+                    <span class="text-2xl text-[#6E6E6E] font-semibold">
+                        @{{ review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('') }}
                     </span>
                 </div>
             </div>

@@ -153,10 +153,8 @@
                                 @{{ record.email }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.phone ?? 'N/A'"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.phone ?? 'N/A' }}
                             </p>
                         </div>
                     </div>
@@ -181,16 +179,12 @@
                             </span>
                         </div>
 
-                        <p
-                            class="text-gray-600 dark:text-gray-300"
-                            v-text="record.gender ?? 'N/A'"
-                        >
+                        <p class="text-gray-600 dark:text-gray-300">
+                            @{{ record.gender ?? 'N/A' }}
                         </p>
 
-                        <p
-                            class="text-gray-600 dark:text-gray-300"
-                            v-text="record.group ?? 'N/A'"
-                        >
+                        <p class="text-gray-600 dark:text-gray-300">
+                            @{{ record.group ?? 'N/A' }}
                         </p>
                     </div>
 

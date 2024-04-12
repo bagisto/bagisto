@@ -235,10 +235,8 @@
                                                 @lang('admin::app.customers.reviews.index.edit.customer')
                                             </p>
 
-                                            <p 
-                                                class="text-gray-800 font-semibold dark:text-white" 
-                                                v-text="review.name !== '' ? review.name : 'N/A'"
-                                            >
+                                            <p class="text-gray-800 font-semibold dark:text-white">
+                                                @{{ review.name !== '' ? review.name : 'N/A' }}
                                             </p>
                                         </div>
 

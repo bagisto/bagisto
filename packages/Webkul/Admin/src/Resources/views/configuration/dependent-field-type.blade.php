@@ -185,18 +185,17 @@
                 v-if="isRequire"
                 class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
                 :for="`${name}-info`"
-                v-text="info"
             >
+                @{{ info }}
             </label>
 
             <v-error-message
                 :name="name"
                 v-slot="{ message }"
             >
-                <p
-                    class="mt-1 text-red-600 text-xs italic"
-                    v-text="message"
-                ></p>
+                <p class="mt-1 text-red-600 text-xs italic">
+                    @{{ message }}
+                </p>
             </v-error-message>
         </div>
     </script>

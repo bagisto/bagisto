@@ -183,7 +183,7 @@
                             <!-- Parent Product Quantity -->
                             <div v-if="['configurable', 'bundle', 'grouped'].includes(record.type)">
                                 <p class="text-gray-600 dark:text-gray-300">
-                                    <span class="text-red-600" v-text="'N/A'"></span>
+                                    <span class="text-red-600">N/A</span>
                                 </p>
                             </div>
 
@@ -220,10 +220,8 @@
                                 @{{ record.status ? "@lang('admin::app.catalog.products.index.datagrid.active')" : "@lang('admin::app.catalog.products.index.datagrid.disable')" }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.category_name ?? 'N/A'"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.category_name ?? 'N/A' }}
                             </p>
 
                             <p class="text-gray-600 dark:text-gray-300">

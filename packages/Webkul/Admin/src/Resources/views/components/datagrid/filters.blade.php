@@ -3,10 +3,8 @@
         <!-- Boolean -->
         <div v-if="column.type === 'boolean'">
             <div class="flex items-center justify-between">
-                <p
-                    class="text-sm font-medium leading-6 dark:text-white text-gray-800"
-                    v-text="column.label"
-                >
+                <p class="text-sm font-medium leading-6 dark:text-white text-gray-800">
+                    @{{ column.label }}
                 </p>
 
                 <div
@@ -30,10 +28,8 @@
                             type="button"
                             class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                         >
-                            <span 
-                                class="text-sm text-gray-400 dark:text-gray-400" 
-                                v-text="'@lang('admin::app.components.datagrid.filters.select')'"
-                            >
+                            <span class="text-sm text-gray-400 dark:text-gray-400">
+                                @lang('admin::app.components.datagrid.filters.select')
                             </span>
 
                             <span class="icon-sort-down text-2xl"></span>
@@ -74,10 +70,8 @@
             <!-- Basic -->
             <div v-if="column.options.type === 'basic'">
                 <div class="flex items-center justify-between">
-                    <p
-                        class="text-sm font-medium leading-6 dark:text-white text-gray-800"
-                        v-text="column.label"
-                    >
+                    <p class="text-sm font-medium leading-6 dark:text-white text-gray-800">
+                        @{{ column.label }}
                     </p>
 
                     <div
@@ -101,10 +95,8 @@
                                 type="button"
                                 class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
                             >
-                                <span 
-                                    class="text-sm text-gray-400 dark:text-gray-400" 
-                                    v-text="'@lang('admin::app.components.datagrid.filters.select')'"
-                                >
+                                <span class="text-sm text-gray-400 dark:text-gray-400">
+                                    @lang('admin::app.components.datagrid.filters.select')
                                 </span>
 
                                 <span class="icon-sort-down text-2xl"></span>
@@ -115,9 +107,9 @@
                         <x-slot:menu>
                             <x-admin::dropdown.menu.item
                                 v-for="option in column.options.params.options"
-                                v-text="option.label"
                                 @click="filterPage(option.value, column)"
                             >
+                                @{{ option.label }}
                             </x-admin::dropdown.menu.item>
                         </x-slot>
                     </x-admin::dropdown>
@@ -143,10 +135,8 @@
             <!-- Searchable -->
             <div v-else-if="column.options.type === 'searchable'">
                 <div class="flex items-center justify-between">
-                    <p
-                        class="text-sm font-medium leading-6 dark:text-white text-gray-800"
-                        v-text="column.label"
-                    >
+                    <p class="text-sm font-medium leading-6 dark:text-white text-gray-800">
+                        @{{ column.label }}
                     </p>
 
                     <div
@@ -176,7 +166,7 @@
                         class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
-                        <span v-text="appliedColumnValue"></span>
+                        <span>@{{ appliedColumnValue }}</span>
 
                         <span
                             class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -191,10 +181,8 @@
         <!-- Date Range -->
         <div v-else-if="column.type === 'date_range'">
             <div class="flex items-center justify-between">
-                <p
-                    class="text-sm font-medium leading-6 dark:text-white"
-                    v-text="column.label"
-                >
+                <p class="text-sm font-medium leading-6 dark:text-white">
+                    @{{ column.label }}
                 </p>
 
                 <div
@@ -275,10 +263,8 @@
         <!-- Date Time Range -->
         <div v-else-if="column.type === 'datetime_range'">
             <div class="flex items-center justify-between">
-                <p
-                    class="text-sm font-medium leading-6 dark:text-white"
-                    v-text="column.label"
-                >
+                <p class="text-sm font-medium leading-6 dark:text-white">
+                    @{{ column.label }}
                 </p>
 
                 <div
@@ -359,10 +345,8 @@
         <!-- Rest -->
         <div v-else>
             <div class="flex items-center justify-between">
-                <p
-                    class="text-sm font-medium leading-6 dark:text-white"
-                    v-text="column.label"
-                >
+                <p class="text-sm font-medium leading-6 dark:text-white">
+                    @{{ column.label }}
                 </p>
 
                 <div
@@ -393,7 +377,7 @@
                     class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
-                    <span v-text="appliedColumnValue"></span>
+                    <span>@{{ appliedColumnValue }}</span>
 
                     <span
                         class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -418,10 +402,8 @@
                     type="button"
                     class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                 >
-                    <span
-                        class="text-sm text-gray-400 dark:text-gray-400" 
-                        v-text="'@lang('admin::app.components.datagrid.filters.select')'"
-                    >
+                    <span class="text-sm text-gray-400 dark:text-gray-400">
+                        @lang('admin::app.components.datagrid.filters.select')
                     </span>
 
                     <span class="icon-sort-down text-2xl"></span>
@@ -442,18 +424,14 @@
 
                             <ul class="p-2">
                                 <li v-if="!isMinimumCharacters">
-                                    <p
-                                        class="block p-2 text-gray-600 dark:text-gray-300"
-                                        v-text="'@lang('admin::app.components.datagrid.filters.dropdown.searchable.atleast-two-chars')'"
-                                    >
+                                    <p class="block p-2 text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.components.datagrid.filters.dropdown.searchable.atleast-two-chars')
                                     </p>
                                 </li>
 
                                 <li v-else-if="!searchedOptions.length">
-                                    <p
-                                        class="block p-2 text-gray-600 dark:text-gray-300"
-                                        v-text="'@lang('admin::app.components.datagrid.filters.dropdown.searchable.no-results')'"
-                                    >
+                                    <p class="block p-2 text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.components.datagrid.filters.dropdown.searchable.no-results')
                                     </p>
                                 </li>
 
@@ -463,9 +441,9 @@
                                 >
                                     <p
                                         class="text-sm text-gray-600 dark:text-gray-300 p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950"
-                                        v-text="option.label"
                                         @click="selectOption(option)"
                                     >
+                                        @{{ option.label }}
                                     </p>
                                 </li>
                             </ul>

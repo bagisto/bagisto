@@ -41,10 +41,8 @@
                                 @{{ data.message }}
                             </p>
 
-                            <span
-                                class="text-xs text-white font-semibold py-px px-1.5 bg-gray-400 rounded-[35px]"
-                                v-text="data.status_count ?? '0'"
-                            >
+                            <span class="text-xs text-white font-semibold py-px px-1.5 bg-gray-400 rounded-[35px]">
+                                @{{ data.status_count ?? '0' }}
                             </span>
                         </div>    
 

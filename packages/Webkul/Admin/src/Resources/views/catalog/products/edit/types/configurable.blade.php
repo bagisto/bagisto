@@ -801,10 +801,8 @@
 
                 <!-- Details -->
                 <div class="grid gap-1.5 place-content-start">
-                    <p
-                        class="text-base text-gray-800 dark:text-white font-semibold"
-                        v-text="variant.name ?? 'N/A'"
-                    >
+                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                        @{{ variant.name ?? 'N/A' }}
                     </p>
 
                     <p class="text-gray-600 dark:text-gray-300">
