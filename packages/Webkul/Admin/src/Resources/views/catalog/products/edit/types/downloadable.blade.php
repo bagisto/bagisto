@@ -620,10 +620,8 @@
                                 <i class="icon-drag text-xl text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
 
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p
-                                        class="text-base text-gray-800 dark:text-white font-semibold"
-                                        v-text="element.title"
-                                    >
+                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                        @{{ element.title }}
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
@@ -635,8 +633,8 @@
                                                     :href="element.file_url"
                                                     target="_blank"
                                                     class="text-blue-600 break-all transition-all hover:underline"
-                                                    v-text="element.file_name"
                                                 >
+                                                    @{{ element.file_name}}
                                                 </a>
                                             </div>
                                         </template>
@@ -649,8 +647,8 @@
                                                     :href="element.url"
                                                     target="_blank"
                                                     class="text-blue-600 break-all transition-all hover:underline"
-                                                    v-text="element.url"
                                                 >
+                                                    @{{ element.url }}
                                                 </a>
                                             </div>
                                         </template>
@@ -821,8 +819,8 @@
                                                 target="_blank"
                                                 class="text-blue-600 text-sm break-all transition-all hover:underline"
                                                 v-if="selectedSample.file_url"
-                                                v-text="selectedSample.file_name"
                                             >
+                                                @{{ selectedSample.file_name }}
                                             </a>
                     
                                             <x-admin::form.control-group.error control-name="file" />

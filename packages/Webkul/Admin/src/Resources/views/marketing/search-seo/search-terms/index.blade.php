@@ -81,16 +81,16 @@
                             </p>
 
                             <!-- Id -->
-                            <p v-text="record.id"></p>
+                            <p>@{{ record.id }}</p>
 
                             <!-- Search Query -->
-                            <p v-text="record.term"></p>
+                            <p>@{{ record.term }}</p>
 
                             <!-- Search Results -->
-                            <p v-text="record.results"></p>
+                            <p>@{{ record.results }}</p>
 
                             <!-- Uses -->
-                            <p v-text="record.uses"></p>
+                            <p>@{{ record.uses }}</p>
 
                             <!-- URL -->
                             <p class="break-all">
@@ -100,10 +100,10 @@
                             </p>
 
                             <!-- Channel -->
-                            <p v-text="record.channel_name"></p>
+                            <p>@{{ record.channel_name }}</p>
 
                             <!-- Locale -->
-                            <p v-text="record.locale"></p>
+                            <p>@{{ record.locale }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">

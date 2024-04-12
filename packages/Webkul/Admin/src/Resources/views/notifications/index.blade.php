@@ -37,10 +37,8 @@
                             v-for="data in orderType"
                             @click="status=data.status; getNotification()"
                         >
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="data.message"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ data.message }}
                             </p>
 
                             <span
@@ -77,10 +75,8 @@
                                     @{{ orderType[notification.order.status].message }}
                                 </p>
     
-                                <p
-                                    class="text-xs text-gray-600 dark:text-gray-300"
-                                    v-text="notification.order.datetime"
-                                >
+                                <p class="text-xs text-gray-600 dark:text-gray-300">
+                                    @{{ notification.order.datetime }}
                                 </p>
                             </div>
                         </a>
@@ -97,30 +93,24 @@
 
                 <!-- Pagination -->
                 <div class="flex gap-x-2 items-center p-4 border-t dark:border-gray-800">
-                    <div
-                        class="inline-flex gap-x-1 items-center justify-between w-full max-w-max py-1.5 px-2 ltr:ml-2 rtl:mr-2 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-gray-600 dark:text-gray-300 leading-6 text-center marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
-                        v-text="pagination.per_page"
-                    >
+                    <div class="inline-flex gap-x-1 items-center justify-between w-full max-w-max py-1.5 px-2 ltr:ml-2 rtl:mr-2 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-gray-600 dark:text-gray-300 leading-6 text-center marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden">
+                        @{{ pagination.per_page }}
                     </div>
 
                     <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">
                         @lang('admin::app.notifications.per-page')
                     </span>
 
-                    <p
-                        class="text-gray-600 dark:text-gray-300 whitespace-nowrap"
-                        v-text="pagination.current_page"
-                    >
+                    <p class="text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                        @{{ pagination.current_page }}
                     </p>
 
                     <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">
                         @lang('admin::app.notifications.of')
                     </span>
 
-                    <p
-                        class="text-gray-600 dark:text-gray-300 whitespace-nowrap"
-                        v-text="pagination.last_page"
-                    >
+                    <p class="text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                        @{{ pagination.last_page }}
                     </p>
 
                     <!-- Prev & Next Page Button -->

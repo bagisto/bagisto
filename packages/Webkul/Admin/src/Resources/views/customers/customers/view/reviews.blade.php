@@ -63,10 +63,8 @@
                     <div class="flex justify-start [&amp;>*]:flex-1">
                         <div class="flex flex-col gap-1.5">
                             <!-- Review Name -->
-                            <p  
-                                class="text-base text-gray-800 leading-none dark:text-white font-semibold"
-                                v-text="record.name"
-                            >
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                @{{ record.name }}
                             </p>
 
                             <!-- Product Name -->
@@ -110,17 +108,13 @@
                     <div class="flex justify-between gap-x-4 items-center">
                         <div class="flex flex-col gap-1.5">
                             <!-- Review Title -->
-                            <p
-                                class="text-base text-gray-800 leading-none dark:text-white font-semibold"
-                                v-text="record.title"
-                            >
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                @{{ record.title }}
                             </p>
 
                             <!-- Review Comment -->
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.comment"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.comment }}
                             </p>
                         </div>
 

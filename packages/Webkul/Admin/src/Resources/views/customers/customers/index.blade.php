@@ -145,16 +145,12 @@
                         @endif
 
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base text-gray-800 dark:text-white font-semibold"
-                                v-text="record.full_name"
-                            >
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                @{{ record.full_name }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.email"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.email }}
                             </p>
 
                             <p
@@ -200,10 +196,8 @@
 
                     <div class="flex gap-x-4 justify-between items-center">
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base text-gray-800 dark:text-white font-semibold"
-                                v-text="$admin.formatPrice(record.revenue)"
-                            >
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                @{{ $admin.formatPrice(record.revenue) }}
                             </p>
 
                             <p class="text-gray-600 dark:text-gray-300">

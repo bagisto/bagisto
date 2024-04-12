@@ -34,13 +34,13 @@
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Id -->
-                            <p v-text="record.id"></p>
+                            <p>@{{ record.id }}</p>
 
                             <!-- Status -->
-                            <p v-text="record.status"></p>
+                            <p>@{{ record.status }}</p>
 
                             <!-- Email -->
-                            <p v-text="record.email"></p>
+                            <p>@{{ record.email }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">

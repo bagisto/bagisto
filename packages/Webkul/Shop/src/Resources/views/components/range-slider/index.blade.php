@@ -11,10 +11,8 @@
                     @lang('shop::app.components.range-slider.range')
                 </p>
 
-                <p
-                    class="text-sm font-semibold"
-                    v-text="rangeText"
-                >
+                <p class="text-sm font-semibold">
+                    @{{ rangeText }}
                 </p>
             </div>
 

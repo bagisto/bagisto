@@ -62,13 +62,13 @@
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
                         <!-- Id -->
-                        <p v-text="record.id"></p>
+                        <p>@{{ record.id }}</p>
 
                         <!-- Status -->
-                        <p v-text="record.name"></p>
+                        <p>@{{ record.name }}</p>
 
                         <!-- Email -->
-                        <p v-text="record.date"></p>
+                        <p>@{{ record.date }}</p>
 
                         <!-- Actions -->
                         @if (

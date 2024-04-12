@@ -60,10 +60,8 @@
                     />
 
                     <div class="flex justify-between">
-                        <p
-                            class="text-gray-600 dark:text-gray-300 font-semibold"
-                            v-text="getGroupNameById(item.customer_group_id)"
-                        >
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                            @{{ getGroupNameById(item.customer_group_id) }}
                         </p>
 
                         <p

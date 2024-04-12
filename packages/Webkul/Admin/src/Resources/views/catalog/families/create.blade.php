@@ -191,8 +191,8 @@
                                             <span
                                                 class="text-sm text-inherit font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white"
                                                 v-show="editableGroup.id != element.id"
-                                                v-text="element.name"
                                             >
+                                                @{{ element.name }}
                                             </span>
 
                                             <input
@@ -247,10 +247,8 @@
                                                 </i>
                                                 
 
-                                                <span 
-                                                    class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
-                                                    v-text="element.admin_name"
-                                                >
+                                                <span class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs">
+                                                    @{{ element.admin_name }}
                                                 </span>
 
                                                 <input
@@ -302,10 +300,8 @@
 
                                     <i class="text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
-                                    <span 
-                                        class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
-                                        v-text="element.admin_name"    
-                                    >
+                                    <span class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs">
+                                        @{{ element.admin_name }}
                                     </span>
                                 </div>
                             </template>

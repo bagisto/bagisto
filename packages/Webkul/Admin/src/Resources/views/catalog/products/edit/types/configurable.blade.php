@@ -131,10 +131,8 @@
                                     :name="attribute.code"
                                     v-slot="{ message }"
                                 >
-                                    <p
-                                        class="mt-1 text-red-600 text-xs italic"
-                                        v-text="message"
-                                    >
+                                    <p class="mt-1 text-red-600 text-xs italic">
+                                        @{{ message }}
                                     </p>
                                 </v-error-message>
                             </x-admin::form.control-group>
@@ -345,10 +343,8 @@
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         v-slot="{ message }"
                                                     >
-                                                        <p
-                                                            class="mt-1 text-red-600 text-xs italic"
-                                                            v-text="message"
-                                                        >
+                                                        <p class="mt-1 text-red-600 text-xs italic">
+                                                            @{{ message }}
                                                         </p>
                                                     </v-error-message>
                                                 </x-admin::form.control-group>
@@ -509,10 +505,8 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p
-                                                class="mt-1 text-red-600 text-xs italic"
-                                                v-text="message"
-                                            >
+                                            <p class="mt-1 text-red-600 text-xs italic">
+                                                @{{ message }}
                                             </p>
                                         </v-error-message>
                                     </x-admin::form.control-group>
@@ -537,10 +531,8 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p
-                                                class="mt-1 text-red-600 text-xs italic"
-                                                v-text="message"
-                                            >
+                                            <p class="mt-1 text-red-600 text-xs italic">
+                                                @{{ message }}
                                             </p>
                                         </v-error-message>
                                     </x-admin::form.control-group>
@@ -572,10 +564,8 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p
-                                                class="mt-1 text-red-600 text-xs italic"
-                                                v-text="message"
-                                            >
+                                            <p class="mt-1 text-red-600 text-xs italic">
+                                                @{{ message }}
                                             </p>
                                         </v-error-message>
                                     </x-admin::form.control-group>
@@ -606,10 +596,8 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p
-                                                class="mt-1 text-red-600 text-xs italic"
-                                                v-text="message"
-                                            >
+                                            <p class="mt-1 text-red-600 text-xs italic">
+                                                @{{ message }}
                                             </p>
                                         </v-error-message>
                                     </x-admin::form.control-group>
@@ -641,10 +629,8 @@
                                                     :name="'variants[variant_' + variant.id + '][' + inventorySource.id + ']'"
                                                     v-slot="{ message }"
                                                 >
-                                                    <p
-                                                        class="mt-1 text-red-600 text-xs italic"
-                                                        v-text="message"
-                                                    >
+                                                    <p class="mt-1 text-red-600 text-xs italic">
+                                                        @{{ message }}
                                                     </p>
                                                 </v-error-message>
                                             </x-admin::form.control-group>
@@ -678,10 +664,8 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p
-                                                class="mt-1 text-red-600 text-xs italic"
-                                                v-text="message"
-                                            >
+                                            <p class="mt-1 text-red-600 text-xs italic">
+                                                @{{ message }}
                                             </p>
                                         </v-error-message>
                                     </x-admin::form.control-group>
@@ -809,10 +793,8 @@
                     <template v-else>
                         <img :src="variant.images[0].url">
 
-                        <span
-                            class="absolute bottom-px ltr:left-px rtl:right-px text-xs font-bold text-white leading-normal bg-darkPink rounded-full px-1.5"
-                            v-text="variant.images.length"
-                        >
+                        <span class="absolute bottom-px ltr:left-px rtl:right-px text-xs font-bold text-white leading-normal bg-darkPink rounded-full px-1.5">
+                            @{{ variant.images.length }}
                         </span>
                     </template>
                 </div>
@@ -833,10 +815,8 @@
                         :name="'variants[' + variant.id + '].sku'"
                         v-slot="{ message }"
                     >
-                        <p
-                            class="mt-1 text-red-600 text-xs italic"
-                            v-text="message"
-                        >
+                        <p class="mt-1 text-red-600 text-xs italic">
+                            @{{ message }}
                         </p>
                     </v-error-message>
 
@@ -1040,10 +1020,8 @@
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         v-slot="{ message }"
                                                     >
-                                                        <p
-                                                            class="mt-1 text-red-600 text-xs italic"
-                                                            v-text="message"
-                                                        >
+                                                        <p class="mt-1 text-red-600 text-xs italic">
+                                                            @{{ message }}
                                                         </p>
                                                     </v-error-message>
                                                 </x-admin::form.control-group>

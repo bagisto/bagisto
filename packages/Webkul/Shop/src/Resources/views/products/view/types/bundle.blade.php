@@ -25,19 +25,15 @@
                         @lang('shop::app.products.view.type.bundle.total-amount')
                     </p>
 
-                    <p
-                        class="text-lg font-medium"
-                        v-text="formattedTotalPrice"
-                    >
+                    <p class="text-lg font-medium">
+                        @{{ formattedTotalPrice }}
                     </p>
                 </div>
 
                 <ul class="grid gap-2.5 text-base">
                     <li v-for="option in options">
-                        <span
-                            class="inline-block mb-1.5"
-                            v-text="option.label"
-                        >
+                        <span class="inline-block mb-1.5">
+                            @{{ option.label}}
                         </span>
 
                         <template v-for="product in option.products">

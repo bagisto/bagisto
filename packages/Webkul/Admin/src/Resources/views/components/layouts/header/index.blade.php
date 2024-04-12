@@ -267,10 +267,8 @@
 
                                     <!-- Details -->
                                     <div class="grid gap-1.5 place-content-start">
-                                        <p
-                                            class="text-base  text-gray-600 dark:text-gray-300 font-semibold"
-                                            v-text="product.name"
-                                        >
+                                        <p class="text-base  text-gray-600 dark:text-gray-300 font-semibold">
+                                            @{{ product.name }}
                                         </p>
 
                                         <p class="text-gray-500">
@@ -281,10 +279,8 @@
 
                                 <!-- Right Information -->
                                 <div class="grid gap-1 place-content-center text-right">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300 font-semibold"
-                                        v-text="product.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                                        @{{ product.formatted_price }}
                                     </p>
                                 </div>
                             </a>
@@ -550,9 +546,9 @@
                 
                     <span
                         class="flex justify-center items-center min-w-5 h-5 absolute -top-2 p-1.5 ltr:left-5 rtl:right-5 bg-blue-600 rounded-full text-white text-[10px] font-semibold leading-[9px] cursor-pointer"
-                        v-text="totalUnRead"
                         v-if="totalUnRead"
                     >
+                        @{{ totalUnRead }}
                     </span>
                 </span>
             </x-slot>

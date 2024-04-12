@@ -224,8 +224,8 @@
                             <option 
                                 v-for='(state, index) in countryStates[addressData.country]'
                                 :value="state.code"
-                                v-text="state.default_name"
                             >
+                                @{{ state.default_name }}
                             </option>
                         </x-shop::form.control-group.control>
                     </template>

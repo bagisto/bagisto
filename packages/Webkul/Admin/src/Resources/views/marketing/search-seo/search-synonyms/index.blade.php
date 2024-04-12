@@ -81,13 +81,13 @@
                             </p>
 
                             <!-- Id -->
-                            <p v-text="record.id"></p>
+                            <p>@{{ record.id }}</p>
 
                             <!-- Name -->
-                            <p v-text="record.name"></p>
+                            <p>@{{ record.name }}</p>
 
                             <!-- Terms -->
-                            <p v-text="record.terms"></p>
+                            <p>@{{ record.terms }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">

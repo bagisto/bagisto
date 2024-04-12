@@ -136,10 +136,8 @@
                         @endif
 
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base text-gray-800 dark:text-white font-semibold"
-                                v-text="record.name"
-                            >
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                @{{ record.name }}
                             </p>
 
                             <p class="text-gray-600 dark:text-gray-300">
@@ -161,10 +159,8 @@
                                     :src=`{{ Storage::url('') }}${record.base_image}`
                                 />
 
-                                <span
-                                    class="absolute bottom-px ltr:left-px rtl:right-px text-xs font-bold text-white leading-normal bg-darkPink rounded-full px-1.5"
-                                    v-text="record.images_count"
-                                >
+                                <span class="absolute bottom-px ltr:left-px rtl:right-px text-xs font-bold text-white leading-normal bg-darkPink rounded-full px-1.5">
+                                    @{{ record.images_count }}
                                 </span>
                             </template>
 
@@ -180,10 +176,8 @@
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base text-gray-800 dark:text-white font-semibold"
-                                v-text="$admin.formatPrice(record.price)"
-                            >
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                @{{ $admin.formatPrice(record.price) }}
                             </p>
 
                             <!-- Parent Product Quantity -->
@@ -232,10 +226,8 @@
                             >
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.type"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.type }}
                             </p>
                         </div>
 
@@ -377,10 +369,8 @@
                                         class="mb-2.5"
                                         v-for="attribute in attributes"
                                     >
-                                        <label
-                                            class="block leading-6 text-xs text-gray-800 dark:text-white font-medium"
-                                            v-text="attribute.name"
-                                        >
+                                        <label class="block leading-6 text-xs text-gray-800 dark:text-white font-medium">
+                                            @{{ attribute.name }}
                                         </label>
 
                                         <div class="flex flex-wrap gap-1 min-h-[38px] p-1.5 border dark:border-gray-800 rounded-md">

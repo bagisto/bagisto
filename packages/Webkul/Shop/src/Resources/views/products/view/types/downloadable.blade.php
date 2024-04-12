@@ -75,10 +75,8 @@
                 name="links[]"
                 v-slot="{ message }"
             >
-                <p
-                    class="text-red-500 text-xs italic"
-                    v-text="message"
-                >
+                <p class="text-red-500 text-xs italic">
+                    @{{ message }}
                 </p>
             </v-error-message>
         </div>

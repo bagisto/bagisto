@@ -262,10 +262,8 @@
 
             <div class="w-full">
                 <div class="flex justify-between">
-                    <p
-                        class="text-xl font-medium max-sm:text-base"
-                        v-text="review.name"
-                    >
+                    <p class="text-xl font-medium max-sm:text-base">
+                        @{{ review.name }}
                     </p>
 
                     <div class="flex items-center">
@@ -276,22 +274,16 @@
                     </div>
                 </div>
 
-                <p
-                    class="mt-2.5 text-sm font-medium max-sm:text-xs"
-                    v-text="review.created_at"
-                >
+                <p class="mt-2.5 text-sm font-medium max-sm:text-xs">
+                    @{{ review.created_at }}
                 </p>
 
-                <p
-                    class="mt-5 text-base text-[#6E6E6E] font-semibold max-sm:text-xs"
-                    v-text="review.title"
-                >
+                <p class="mt-5 text-base text-[#6E6E6E] font-semibold max-sm:text-xs">
+                    @{{ review.title }}
                 </p>
 
-                <p
-                    class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs"
-                    v-text="review.comment"
-                >
+                <p class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs">
+                    @{{ review.comment }}
                 </p>
 
                 <button

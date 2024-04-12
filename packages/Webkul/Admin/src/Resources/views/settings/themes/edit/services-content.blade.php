@@ -84,10 +84,8 @@
                                             <div> 
                                                 @lang('admin::app.settings.themes.edit.services-content.title'): 
 
-                                                <span
-                                                    class="text-gray-600 dark:text-gray-300 transition-all"
-                                                    v-text="service_details.title"
-                                                >
+                                                <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                    @{{ service_details.title }}
                                                 </span>
                                             </div>
                                         </p>
@@ -96,10 +94,8 @@
                                             <div> 
                                                 @lang('admin::app.settings.themes.edit.services-content.description'): 
 
-                                                <span
-                                                    class="text-gray-600 dark:text-gray-300 transition-all"
-                                                    v-text="service_details.description"
-                                                >
+                                                <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                    @{{ service_details.description }}
                                                 </span>
                                             </div>
                                         </p>
@@ -108,10 +104,8 @@
                                             <div class="flex justify-between"> 
                                                 @lang('admin::app.settings.themes.edit.services-content.service-icon'): 
 
-                                                <span
-                                                    class="text-gray-600 dark:text-gray-300 transition-all"
-                                                    v-text="service_details.service_icon"
-                                                >
+                                                <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                    @{{ service_details.service_icon }}
                                                 </span>
                                             </div>
                                         </p>

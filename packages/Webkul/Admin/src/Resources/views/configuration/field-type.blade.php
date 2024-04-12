@@ -358,8 +358,8 @@
                                     <option
                                         v-for='(state, index) in countryStates[country]'
                                         :value="state.code"
-                                        v-text="state.default_name"
                                     >
+                                        @{{ state.default_name }}
                                     </option>
                                 </x-admin::form.control-group.control>
                             </x-admin::form.control-group>

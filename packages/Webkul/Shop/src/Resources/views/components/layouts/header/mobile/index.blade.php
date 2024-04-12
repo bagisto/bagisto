@@ -330,8 +330,8 @@
                     <a
                         :href="category.url"
                         class="flex items-center justify-between pb-5 mt-5"
-                        v-text="category.name"
                     >
+                        @{{ category.name }}
                     </a>
 
                     <span
@@ -352,8 +352,8 @@
                                 <a
                                     :href="secondLevelCategory.url"
                                     class="flex items-center justify-between pb-5 mt-5"
-                                    v-text="secondLevelCategory.name"
                                 >
+                                    @{{ secondLevelCategory.name }}
                                 </a>
 
                                 <span
@@ -374,8 +374,8 @@
                                             <a
                                                 :href="thirdLevelCategory.url"
                                                 class="flex items-center justify-between mt-5 ltr:ml-3 rtl:mr-3 pb-5"
-                                                v-text="thirdLevelCategory.name"
                                             >
+                                                @{{ thirdLevelCategory.Name }}
                                             </a>
                                         </div>
                                     </li>

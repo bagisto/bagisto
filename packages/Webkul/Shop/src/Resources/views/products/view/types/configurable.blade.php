@@ -28,10 +28,9 @@
                         v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'"
                     >
                         <!-- Dropdown Label -->
-                        <h2
-                            class="mb-4 text-xl max-sm:text-base"
-                            v-text="attribute.label"
-                        ></h2>
+                        <h2 class="mb-4 text-xl max-sm:text-base">
+                            @{{ attribute.label }}
+                        </h2>
                         
                         <!-- Dropdown Options -->
                         <v-field
@@ -59,10 +58,9 @@
                     <!-- Swatch Options Container -->
                     <template v-else>
                         <!-- Option Label -->
-                        <h2
-                            class="mb-4 text-xl max-sm:text-base"
-                            v-text="attribute.label"
-                        ></h2>
+                        <h2 class="mb-4 text-xl max-sm:text-base">
+                            @{{ attribute.label }}
+                        </h2>
 
                         <!-- Swatch Options -->
                         <div class="flex gap-3 items-center">
@@ -164,10 +162,9 @@
                                             />
                                         </v-field>
 
-                                        <span
-                                            class="text-lg max-sm:text-sm"
-                                            v-text="option.label"
-                                        ></span>
+                                        <span class="text-lg max-sm:text-sm">
+                                            @{{ option.label }}
+                                        </span>
 
                                         <span class="absolute -inset-px rounded-full pointer-events-none"></span>
                                     </label>
@@ -187,10 +184,8 @@
                         :name="['super_attribute[' + attribute.id + ']']"
                         v-slot="{ message }"
                     >
-                        <p
-                            class="mt-1 text-red-500 text-xs italic"
-                            v-text="message"
-                        >
+                        <p class="mt-1 text-red-500 text-xs italic">
+                            @{{ message }}
                         </p>
                     </v-error-message>
                 </div>

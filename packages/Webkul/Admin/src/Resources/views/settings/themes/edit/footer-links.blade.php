@@ -88,8 +88,8 @@
                                                         :href="link.url"
                                                         target="_blank"
                                                         class="text-blue-600 transition-all hover:underline"
-                                                        v-text="link.url"
                                                     >
+                                                        @{{ link.url }}
                                                     </a>
                                                 </div>
                                             </p>
@@ -98,10 +98,8 @@
                                                 <div> 
                                                     @lang('admin::app.settings.themes.edit.filter-title'):
 
-                                                    <span
-                                                        class="text-gray-600 dark:text-gray-300 transition-all"
-                                                        v-text="link.title"
-                                                    >
+                                                    <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                        @{{ link.title }}
                                                     </span>
                                                 </div>
                                             </p>

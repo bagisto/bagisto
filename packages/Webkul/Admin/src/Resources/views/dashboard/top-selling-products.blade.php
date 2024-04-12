@@ -57,23 +57,17 @@
 
                         <!-- Product Detailes -->
                         <div class="flex flex-col gap-1.5 w-full">
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="item.name"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ item.name }}
                             </p>
 
                             <div class="flex justify-between">
-                                <p
-                                    class="text-gray-600 dark:text-gray-300 font-semibold"
-                                    v-text="item.formatted_price"
-                                >
+                                <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                                    @{{ item.formatted_price }}
                                 </p>
 
-                                <p
-                                    class="text-base text-gray-800 dark:text-white font-semibold"
-                                    v-text="item.formatted_revenue"
-                                >
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                    @{{ item.formatted_revenue }}
                                 </p>
                             </div>
                         </div>

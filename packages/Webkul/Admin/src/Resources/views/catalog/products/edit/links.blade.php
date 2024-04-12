@@ -17,16 +17,12 @@
             >
                 <div class="flex gap-5 justify-between mb-2.5 p-4">
                     <div class="flex flex-col gap-2">
-                        <p
-                            class="text-base text-gray-800 dark:text-white font-semibold"
-                            v-text="type.title"
-                        >
+                        <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            @{{ type.title }}
                         </p>
 
-                        <p
-                            class="text-xs text-gray-500 dark:text-gray-300 font-medium"
-                            v-text="type.info"
-                        >
+                        <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
+                            @{{ type.info }}
                         </p>
                     </div>
                     
@@ -79,10 +75,8 @@
 
                             <!-- Details -->
                             <div class="grid gap-1.5 place-content-start">
-                                <p
-                                    class="text-base text-gray-800 dark:text-white font-semibold"
-                                    v-text="product.name"
-                                >
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                    @{{ product.name }}
                                 </p>
 
                                 <p class="text-gray-600 dark:text-gray-300">
@@ -93,10 +87,8 @@
 
                         <!-- Actions -->
                         <div class="grid gap-1 place-content-start text-right">
-                            <p
-                                class="text-gray-800 font-semibold dark:text-white"
-                                v-text="$admin.formatPrice(product.price)"
-                            >
+                            <p class="text-gray-800 font-semibold dark:text-white">
+                                @{{ $admin.formatPrice(product.price) }}
                             </p>
 
                             <p
@@ -126,10 +118,8 @@
                             @lang('admin::app.catalog.products.edit.links.empty-title')
                         </p>
 
-                        <p
-                            class="text-gray-400"
-                            v-text="type.empty_info"
-                        >
+                        <p class="text-gray-400">
+                            @{{ type.empty_info }}
                         </p>
                     </div>
                 </div>
