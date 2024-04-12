@@ -269,7 +269,7 @@
 
                                             @{{ address.city }},
                                             @{{ address.state }},
-                                            @{{ address.country }}
+                                            @{{ address.country }},
                                             @{{ address.postcode }}
                                         </p>
 
@@ -415,20 +415,20 @@
                         });
                     },
 
-                    addressUpdated(address) {
-                        if (address.default_address) {
-                            this.customer.addresses.forEach(address => address.default_address = false);
+                    addressUpdated(updatedAddress) {
+                        if (updatedAddress.default_address) {
+                        this.customer.addresses.forEach(address => address.default_address = false);
                         }
 
-                        this.customer.addresses = this.customer.addresses.map(address => {
-                            if (address.id === address.id) {
-                                return {
-                                ...address,
-                                address: address.address.join('\n'),
-                                };
-                            }
+                        this.customer.addresses =this.customer.addresses.map(address => {
+                        if (address.id === updatedAddress.id) {
+                            return {
+                                ...updatedAddress,
+                                address: updatedAddress.address.join('\n'),
+                            };
+                        }
 
-                            return address;
+                        return address;
                         });
                     },
                 },
