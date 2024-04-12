@@ -394,7 +394,7 @@ class Order extends Model implements OrderContract
         }
 
         foreach ($this->items as $item) {
-            if (! $item->product->getTypeInstance()->isSaleable()) {
+            if (! $item->product?->getTypeInstance()->isSaleable()) {
                 return false;
             }
         }
