@@ -89,7 +89,10 @@
         </div>
 
         @pushOnce('scripts')
-            <script type="text/x-template" id="v-server-requirements-template">
+            <script
+                type="text/x-template"
+                id="v-server-requirements-template"
+            >
                 <!-- Left Side Welcome to Installation -->
                 <div class="flex flex-col justify-center">
                     <div class="grid items-end max-w-[362px] m-auto h-[100vh]">

@@ -235,7 +235,10 @@
 </div>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-desktop-category-template">
+    <script
+        type="text/x-template"
+        id="v-desktop-category-template"
+    >
         <div
             class="flex gap-5 items-center"
             v-if="isLoading"

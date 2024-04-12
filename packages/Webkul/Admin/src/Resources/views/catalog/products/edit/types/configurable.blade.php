@@ -159,7 +159,10 @@
     </script>
 
     <!-- Variations Mass Action Template -->
-    <script type="text/x-template" id="v-product-variations-mass-action-template">
+    <script
+        type="text/x-template"
+        id="v-product-variations-mass-action-template"
+    >
         <!-- Mass Actions -->
         <div class="flex gap-1.5 items-center px-4">
             <span
@@ -702,7 +705,10 @@
     </script>
 
     <!-- Variation Item Template -->
-    <script type="text/x-template" id="v-product-variation-item-template"> 
+    <script
+        type="text/x-template"
+        id="v-product-variation-item-template"
+    >
         <div class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800">
 
             <!-- Information -->

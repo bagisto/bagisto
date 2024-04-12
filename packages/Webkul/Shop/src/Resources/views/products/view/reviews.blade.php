@@ -233,7 +233,10 @@
     </script>
 
     <!-- Product Review Item Template -->
-    <script type="text/x-template" id="v-product-review-item-template">
+    <script
+        type="text/x-template"
+        id="v-product-review-item-template"
+    >
         <div class="flex gap-5 p-6 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap max-xl:mb-5">
             <div>
                 <img

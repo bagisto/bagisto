@@ -80,7 +80,10 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-media-video-item-template">
+    <script
+        type="text/x-template"
+        id="v-media-video-item-template"
+    >
         <div class="grid justify-items-center h-[120px] max-w-[210px] min-w-[210px] max-h-[120px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded overflow-hidden transition-all hover:border-gray-400 group">
             <!-- Video Preview -->
             <video

@@ -1,5 +1,8 @@
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-create-customer-form-template">
+    <script
+        type="text/x-template"
+        id="v-create-customer-form-template"
+    >
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"

@@ -19,7 +19,10 @@
     </v-create-customer-address>
 
     @push('scripts')
-        <script type="text/x-template" id="v-create-customer-address-template">
+        <script
+            type="text/x-template"
+            id="v-create-customer-address-template"
+        >
             <div>
                 <x-shop::form :action="route('shop.customers.account.addresses.store')">
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.before') !!}

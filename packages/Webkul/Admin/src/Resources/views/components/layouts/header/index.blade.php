@@ -199,7 +199,10 @@
 </x-admin::drawer>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-mega-search-template">
+    <script
+        type="text/x-template"
+        id="v-mega-search-template"
+    >
         <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5 max-lg:w-[400px]">
             <i class="icon-search text-2xl flex items-center absolute ltr:left-3 rtl:right-3 top-1.5"></i>
 
@@ -531,7 +534,10 @@
         });
     </script>
 
-    <script type="text/x-template" id="v-notifications-template">
+    <script
+        type="text/x-template"
+        id="v-notifications-template"
+    >
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <!-- Notification Toggle -->
             <x-slot:toggle>
@@ -714,7 +720,10 @@
         });
     </script>
 
-    <script type="text/x-template" id="v-dark-template">
+    <script
+        type="text/x-template"
+        id="v-dark-template"
+    >
         <div class="flex">
             <span
                 class="p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"

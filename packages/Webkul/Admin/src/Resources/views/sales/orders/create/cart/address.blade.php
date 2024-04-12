@@ -12,7 +12,10 @@
 @include('admin::sales.orders.create.cart.address.form')
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-cart-addresses-template">
+    <script
+        type="text/x-template"
+        id="v-cart-addresses-template"
+    >
         <div
             class="bg-white dark:bg-gray-900 rounded box-shadow"
             id="address-step-container"

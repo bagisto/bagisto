@@ -27,7 +27,10 @@
     </v-edit-customer-address>
 
     @push('scripts')
-        <script type="text/x-template" id="v-edit-customer-address-template">
+        <script
+            type="text/x-template"
+            id="v-edit-customer-address-template"
+        >
 
             <!-- Edit Address Form -->
             <x-shop::form

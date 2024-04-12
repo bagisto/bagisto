@@ -13,7 +13,10 @@
 
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-previous-cart-items-template">
+    <script
+        type="text/x-template"
+        id="v-previous-cart-items-template"
+    >
         <template v-if="isLoading">
             <!-- Items Shimmer Effect -->
             <x-admin::shimmer.sales.orders.create.items />

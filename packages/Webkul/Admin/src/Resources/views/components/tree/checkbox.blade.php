@@ -1,5 +1,8 @@
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-tree-checkbox-template">
+    <script
+        type="text/x-template"
+        id="v-tree-checkbox-template"
+    >
         <label
             :for="id"
             class="inline-flex gap-2.5 w-max p-1.5 items-center cursor-pointer select-none group"

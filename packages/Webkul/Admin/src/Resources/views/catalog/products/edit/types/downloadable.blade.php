@@ -529,7 +529,10 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-downloadable-samples-template">
+    <script
+        type="text/x-template"
+        id="v-downloadable-samples-template"
+    >
         <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">

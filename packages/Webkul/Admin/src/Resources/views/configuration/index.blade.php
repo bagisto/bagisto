@@ -71,7 +71,10 @@
     </div>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-configuration-search-template">
+        <script 
+            type="text/x-template"
+            id="v-configuration-search-template"
+        >
             <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5 max-lg:w-[400px]">
                 <i class="icon-search text-2xl flex items-center absolute ltr:left-3 rtl:right-3 top-1.5"></i>
 

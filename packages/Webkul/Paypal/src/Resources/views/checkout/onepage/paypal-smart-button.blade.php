@@ -15,7 +15,10 @@
         >
         </script>
 
-        <script type="text/x-template" id="v-paypal-smart-button-template">
+        <script
+            type="text/x-template"
+            id="v-paypal-smart-button-template"
+        >
             <div class="w-full paypal-button-container"></div>
         </script>
 

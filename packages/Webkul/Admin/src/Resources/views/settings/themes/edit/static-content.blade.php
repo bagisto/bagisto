@@ -218,24 +218,27 @@
     </script>
 
     <!-- Html Editor Template -->
-    <script type="text/x-template" id="v-html-editor-theme-template">
-        <div>
-            <div ref="html"></div>
-        </div>
+    <script
+        type="text/x-template"
+        id="v-html-editor-theme-template"
+    >
+        <div ref="html"></div>
     </script>
 
     <!-- Css Editor Template -->
-    <script type="text/x-template" id="v-css-editor-theme-template">
-        <div>
-            <div ref="css"></div>
-        </div>
+    <script
+        type="text/x-template"
+        id="v-css-editor-theme-template"
+    >
+        <div ref="css"></div>
     </script>
 
     <!-- Static Content Previewer -->
-    <script type="text/x-template" id="v-static-content-previewer-template">
-        <div>   
-            <div v-html="getPreviewContent()"></div>
-        </div>
+    <script
+        type="text/x-template"
+        id="v-static-content-previewer-template"
+    >
+        <div v-html="getPreviewContent()"></div>
     </script>
 
     <script type="module">

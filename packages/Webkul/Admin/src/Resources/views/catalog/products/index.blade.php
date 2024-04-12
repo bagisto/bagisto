@@ -262,7 +262,10 @@
     {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-product-form-template">
+        <script
+            type="text/x-template"
+            id="v-create-product-form-template"
+        >
             <div>
                 <!-- Product Create Button -->
                 @if (bouncer()->hasPermission('catalog.products.create'))

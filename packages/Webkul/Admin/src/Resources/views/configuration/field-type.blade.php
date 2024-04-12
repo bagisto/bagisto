@@ -401,7 +401,10 @@
 
 @if ($field['type'] == 'country')
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-country-template">
+        <script
+            type="text/x-template"
+            id="v-country-template"
+        >
             <div>
                 <slot
                     :changeCountry="changeCountry"
@@ -432,7 +435,10 @@
             });
         </script>
 
-        <script type="text/x-template" id="v-state-template">
+        <script
+            type="text/x-template"
+            id="v-state-template"
+        >
             <div>
                 <slot
                     :country="country"

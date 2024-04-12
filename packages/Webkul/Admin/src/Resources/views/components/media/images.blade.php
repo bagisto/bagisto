@@ -20,7 +20,10 @@
 </v-media-images>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-media-images-template">
+    <script
+        type="text/x-template"
+        id="v-media-images-template"
+    >
         <!-- Panel Content -->
         <div class="grid">
             <div class="flex flex-wrap gap-1">
@@ -334,7 +337,10 @@
         </div>  
     </script>
 
-    <script type="text/x-template" id="v-media-image-item-template">
+    <script
+        type="text/x-template"
+        id="v-media-image-item-template"
+    >
         <div class="grid justify-items-center min-w-[120px] max-h-[120px] relative rounded overflow-hidden transition-all hover:border-gray-400 group">
             <!-- Image Preview -->
             <img

@@ -116,7 +116,10 @@
     </x-admin::form>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-family-attributes-template">
+        <script
+            type="text/x-template"
+            id="v-family-attributes-template"
+        >
             <div class="">
                 <!-- Panel Header -->
                 <div class="flex gap-2.5 justify-between flex-wrap mb-2.5 p-4">

@@ -391,7 +391,10 @@
 </div>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-datagrid-searchable-dropdown-template">
+    <script
+        type="text/x-template"
+        id="v-datagrid-searchable-dropdown-template"
+    >
         <x-shop::dropdown ::close-on-click="false">
             <!-- Dropdown Toggler -->
             <x-slot:toggle>

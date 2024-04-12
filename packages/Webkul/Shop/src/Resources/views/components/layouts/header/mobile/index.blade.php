@@ -318,7 +318,10 @@
 </div>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-mobile-category-template">
+    <script
+        type="text/x-template"
+        id="v-mobile-category-template"
+    >
         <div>
             <template v-for="(category) in categories">
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.before') !!}

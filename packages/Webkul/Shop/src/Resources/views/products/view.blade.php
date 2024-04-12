@@ -245,7 +245,10 @@
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-product-template">
+        <script
+            type="text/x-template"
+            id="v-product-template"
+        >
             <x-shop::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"

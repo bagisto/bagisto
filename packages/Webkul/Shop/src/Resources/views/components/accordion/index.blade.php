@@ -41,7 +41,10 @@
 </div>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-accordion-template">
+    <script
+        type="text/x-template"
+        id="v-accordion-template"
+    >
         <div>
             <slot
                 name="header"

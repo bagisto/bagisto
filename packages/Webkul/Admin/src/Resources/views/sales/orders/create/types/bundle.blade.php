@@ -54,7 +54,10 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-product-bundle-option-item-template">
+    <script
+        type="text/x-template"
+        id="v-product-bundle-option-item-template"
+    >
         <div class="border-b border-[#E9E9E9] p-4">
             <x-admin::form.control-group>
                 <!-- Dropdown Options Container -->
