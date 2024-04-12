@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Checkout\Contracts\Cart as CartContract;
 use Webkul\Checkout\Database\Factories\CartFactory;
+use Webkul\Core\Models\ChannelProxy;
+use Webkul\Customer\Models\CustomerProxy;
 
 class Cart extends Model implements CartContract
 {
@@ -38,6 +40,22 @@ class Cart extends Model implements CartContract
     protected $casts = [
         'additional' => 'json',
     ];
+
+    /**
+     * Get the customer record associated with the address.
+     */
+    public function customer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(CustomerProxy::modelClass());
+    }
+
+    /**
+     * Get the channel record associated with the address.
+     */
+    public function channel(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(ChannelProxy::modelClass());
+    }
 
     /**
      * To get relevant associated items with the cart instance.

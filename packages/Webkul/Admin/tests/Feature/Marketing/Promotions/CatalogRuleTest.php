@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the catalog rule page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.catalog_rules.index'))
@@ -18,7 +18,7 @@ it('should returns the catalog rule page', function () {
 });
 
 it('should returns the create page of catalog rules', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.catalog_rules.create'))
@@ -29,7 +29,7 @@ it('should returns the create page of catalog rules', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the catalog rule', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.promotions.catalog_rules.store'))
@@ -42,7 +42,7 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created catalog rule', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.promotions.catalog_rules.store', [
@@ -81,13 +81,13 @@ it('should store the newly created catalog rule', function () {
 });
 
 it('should returns the edit page of catalog rules', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
         $catalogRule->customer_groups()->sync([1, 2, 3]);
     })->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.catalog_rules.edit', $catalogRule->id))
@@ -97,13 +97,13 @@ it('should returns the edit page of catalog rules', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update the catalog rule', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
         $catalogRule->customer_groups()->sync([1, 2, 3]);
     })->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule))
@@ -116,13 +116,13 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the catalog rule', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
         $catalogRule->customer_groups()->sync([1, 2, 3]);
     })->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id), [
@@ -159,13 +159,13 @@ it('should update the catalog rule', function () {
 });
 
 it('should delete a specific catalog rule', function () {
-    // Arrange
+    // Arrange.
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);
         $catalogRule->customer_groups()->sync([1, 2, 3]);
     })->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.promotions.catalog_rules.delete', $catalogRule->id))

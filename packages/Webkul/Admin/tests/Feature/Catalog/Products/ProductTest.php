@@ -8,7 +8,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('should return the product index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.index'))
@@ -18,10 +18,10 @@ it('should return the product index page', function () {
 });
 
 it('should copy the existing product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.copy', $product->id))
@@ -38,10 +38,10 @@ it('should copy the existing product', function () {
 });
 
 it('should perform the mass action from update status for products', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.mass_update'), [
@@ -65,10 +65,10 @@ it('should perform the mass action from update status for products', function ()
 });
 
 it('should perform the mass action for delete for products', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.mass_delete'), [
@@ -87,10 +87,10 @@ it('should perform the mass action for delete for products', function () {
 });
 
 it('should search the product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker)->getSimpleProductFactory()->count(2)->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.search', [

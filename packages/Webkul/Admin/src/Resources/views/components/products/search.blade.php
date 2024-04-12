@@ -35,7 +35,16 @@
                             v-debounce="500"
                         />
 
-                        <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                        <template v-if="isSearching">
+                            <img
+                                class="animate-spin h-5 w-5 absolute ltr:right-3 rtl:left-3 top-2.5"
+                                src="{{ bagisto_asset('images/spinner.svg') }}"
+                            />
+                        </template>
+
+                        <template v-else>
+                            <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                        </template>
                     </div>
                 </div>
             </x-slot>
@@ -158,6 +167,8 @@
                     searchTerm: '',
 
                     searchedProducts: [],
+
+                    isSearching: false,
                 }
             },
 
@@ -169,7 +180,7 @@
 
             watch: {
                 searchTerm: function(newVal, oldVal) {
-                    this.search()
+                    this.search();
                 }
             },
 
@@ -185,6 +196,8 @@
                         return;
                     }
 
+                    this.isSearching = true;
+
                     let self = this;
                     
                     this.$axios.get("{{ route('admin.catalog.products.search') }}", {
@@ -194,10 +207,12 @@
                             }
                         })
                         .then(function(response) {
+                            self.isSearching = false;
+
                             self.searchedProducts = response.data.data;
                         })
                         .catch(function (error) {
-                        })
+                        });
                 },
 
                 addSelected() {

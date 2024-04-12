@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the tax rate index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.taxes.rates.index'))
@@ -18,7 +18,7 @@ it('should returns the tax rate index page', function () {
 });
 
 it('should returns the create page of tax rate', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.taxes.rates.create'))
@@ -28,7 +28,7 @@ it('should returns the create page of tax rate', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the tax rates', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.taxes.rates.store'))
@@ -39,13 +39,13 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created tax rates', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.settings.taxes.rates.store'), [
-        'identifier' => $identifier = strtolower(fake()->name()),
-        'country'    => $country = fake()->country(),
-        'tax_rate'   => $taxRate = rand(1, 50),
+    postJson(route('admin.settings.taxes.rates.store'), $data = [
+        'identifier' => strtolower(fake()->name()),
+        'country'    => fake()->country(),
+        'tax_rate'   => rand(1, 50),
     ])
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
         ->isRedirection();
@@ -53,19 +53,19 @@ it('should store the newly created tax rates', function () {
     $this->assertModelWise([
         TaxRate::class => [
             [
-                'identifier' => $identifier,
-                'country'    => $country,
-                'tax_rate'   => $taxRate,
+                'identifier' => $data['identifier'],
+                'country'    => $data['country'],
+                'tax_rate'   => $data['tax_rate'],
             ],
         ],
     ]);
 });
 
 it('should returns the edit page of the tax rate', function () {
-    // Arrange
+    // Arrange.
     $taxRate = TaxRate::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.taxes.rates.edit', $taxRate->id))
@@ -75,10 +75,10 @@ it('should returns the edit page of the tax rate', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update the tax rates', function () {
-    // Arrange
+    // Arrange.
     $taxRate = TaxRate::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.taxes.rates.update', $taxRate->id))
@@ -89,15 +89,15 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the tax rate', function () {
-    // Arrange
+    // Arrange.
     $taxRate = TaxRate::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.settings.taxes.rates.update', $taxRate->id), [
-        'identifier' => $identifier = fake()->name(),
-        'country'    => $country = fake()->country(),
+    putJson(route('admin.settings.taxes.rates.update', $taxRate->id), $data = [
+        'identifier' => fake()->name(),
+        'country'    => fake()->country(),
         'tax_rate'   => $taxRate->tax_rate,
     ])
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
@@ -106,8 +106,8 @@ it('should update the tax rate', function () {
     $this->assertModelWise([
         TaxRate::class => [
             [
-                'identifier' => $identifier,
-                'country'    => $country,
+                'identifier' => $data['identifier'],
+                'country'    => $data['country'],
                 'tax_rate'   => $taxRate->tax_rate,
             ],
         ],
@@ -115,10 +115,10 @@ it('should update the tax rate', function () {
 });
 
 it('should delete the tax rate', function () {
-    // Arrange
+    // Arrange.
     $taxRate = TaxRate::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.taxes.rates.delete', $taxRate->id))
