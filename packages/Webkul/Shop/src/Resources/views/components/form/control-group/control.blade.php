@@ -156,21 +156,21 @@
             type="checkbox"
             class="hidden"
             v-slot="{ field }"
-            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
             name="{{ $name }}"
         >
             <input
                 type="checkbox"
                 v-bind="field"
                 class="sr-only peer"
-                {{ $attributes->except(['rules', 'label', ':label']) }}
+                {{ $attributes->except(['rules', 'label', ':label', 'key', ':key']) }}
                 name="{{ $name }}"
             />
         </v-field>
 
         <label
             class="icon-uncheck text-2xl peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
         >
         </label>
 
@@ -181,7 +181,7 @@
             type="radio"
             class="hidden"
             v-slot="{ field }"
-            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
             name="{{ $name }}"
         >
             <input
@@ -189,13 +189,13 @@
                 name="{{ $name }}"
                 v-bind="field"
                 class="sr-only peer"
-                {{ $attributes->except(['rules', 'label', ':label']) }}
+                {{ $attributes->except(['rules', 'label', ':label', 'key', ':key']) }}
             />
         </v-field>
 
         <label
             class="icon-radio-unselect text-2xl peer-checked:icon-radio-select peer-checked:text-navyBlue cursor-pointer"
-            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
         >
         </label>
 
@@ -207,7 +207,7 @@
                 type="checkbox"
                 class="hidden"
                 v-slot="{ field }"
-                {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+                {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
                 name="{{ $name }}"
             >
                 <input
@@ -216,7 +216,7 @@
                     id="{{ $name }}"
                     class="sr-only peer"
                     v-bind="field"
-                    {{ $attributes->except(['v-model', 'rules', ':rules', 'label', ':label']) }}
+                    {{ $attributes->except(['v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
                 />
             </v-field>
 

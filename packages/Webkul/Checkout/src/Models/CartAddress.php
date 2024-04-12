@@ -67,7 +67,7 @@ class CartAddress extends Address implements CartAddressContract
      */
     public function cart(): BelongsTo
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(CartProxy::modelClass());
     }
 
     /**

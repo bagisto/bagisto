@@ -19,29 +19,40 @@
             </h2>
         </div>
 
-        @if ($order->canCancel())
-            <form
-                method="POST"
-                ref="cancelOrderForm"
-                action="{{ route('shop.customers.account.orders.cancel', $order->id) }}"
-            >
-                @csrf
-            </form>
+        <div class="flex gap-1.5">
+            @if ($order->canCancel())
+                <a
+                    href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
+                    class="secondary-button flex items-center gap-x-2.5 py-3 px-5 border-[#E9E9E9] font-normal"
+                >
+                    @lang('shop::app.customers.account.orders.view.reorder-btn-title')
+                </a>
+            @endif
 
-            <a
-                class="secondary-button flex items-center gap-x-2.5 py-3 px-5 border-[#E9E9E9] font-normal"
-                href="javascript:void(0);"
-                @click="$emitter.emit('open-confirm-modal', {
-                    message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
+            @if ($order->canCancel())
+                <form
+                    method="POST"
+                    ref="cancelOrderForm"
+                    action="{{ route('shop.customers.account.orders.cancel', $order->id) }}"
+                >
+                    @csrf
+                </form>
 
-                    agree: () => {
-                        this.$refs['cancelOrderForm'].submit()
-                    }
-                })"
-            >
-                @lang('shop::app.customers.account.orders.view.cancel-btn-title')
-            </a>
-        @endif
+                <a
+                    class="secondary-button flex items-center gap-x-2.5 py-3 px-5 border-[#E9E9E9] font-normal"
+                    href="javascript:void(0);"
+                    @click="$emitter.emit('open-confirm-modal', {
+                        message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
+
+                        agree: () => {
+                            this.$refs['cancelOrderForm'].submit()
+                        }
+                    })"
+                >
+                    @lang('shop::app.customers.account.orders.view.cancel-btn-title')
+                </a>
+            @endif
+        </div>
     </div>
 
     {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
