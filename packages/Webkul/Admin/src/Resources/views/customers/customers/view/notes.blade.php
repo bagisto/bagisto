@@ -1,11 +1,11 @@
 <!-- Notes Form -->
-<div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+<div class="box-shadow rounded bg-white p-4 last:pb-0 dark:bg-gray-900">
     <p class="p-4 pb-0 text-base font-semibold leading-none text-gray-800 dark:text-white">
         @lang('admin::app.customers.customers.view.notes.add-note')
     </p>
 
     <x-admin::form :action="route('admin.customer.note.store', $customer->id)">
-        <div class="p-4">
+        <div class="border-b p-4 dark:border-gray-800">
             <!-- Note -->
             <x-admin::form.control-group>
                 <x-admin::form.control-group.control
@@ -53,10 +53,8 @@
     </x-admin::form>
 
     <!-- Notes List -->
-    <span class="block w-full border-b dark:border-gray-800"></span>
-
     @foreach ($customer->notes as $note)
-        <div class="grid gap-1.5 p-4">
+        <div class="grid gap-1.5 border-b p-4 last:border-none dark:border-gray-800">
             <p class="text-base leading-6 text-gray-800 dark:text-white">
                 {{$note->note}}
             </p>
@@ -74,7 +72,5 @@
                 @endif
             </p>
         </div>
-
-        <span class="block w-full border-b dark:border-gray-800"></span>
     @endforeach
 </div>

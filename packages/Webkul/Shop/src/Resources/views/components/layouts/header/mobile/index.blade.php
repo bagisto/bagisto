@@ -65,8 +65,12 @@
                         @endauth
                     </div>
 
+                    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.categories.before') !!}
+
                     <!-- Mobile category view -->
                     <v-mobile-category></v-mobile-category>
+
+                    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.categories.after') !!}
 
                     <!-- Localization & Currency Section -->
                     <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-5 justify-between items-center mb-4">
@@ -399,6 +403,72 @@
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.after') !!}
             </template>
         </div>
+
+        <!-- Localization & Currency Section -->
+        <div class="absolute flex gap-x-5 justify-between items-center w-full p-4 bottom-0 left-0 bg-white shadow-lg">
+            <x-shop::dropdown position="top-left">
+                <!-- Dropdown Toggler -->
+                <x-slot:toggle>
+                    <div
+                        class="w-full flex gap-2.5 justify-between items-center cursor-pointer"
+                        role="button"
+                        @click="currencyToggler = ! currencyToggler"
+                    >
+                        <span>
+                            {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
+                        </span>
+
+                        <span
+                            class="text-2xl"
+                            :class="{'icon-arrow-up': currencyToggler, 'icon-arrow-down': ! currencyToggler}"
+                            role="presentation"
+                        ></span>
+                    </div>
+                </x-slot>
+
+                <!-- Dropdown Content -->
+                <x-slot:content class="!p-0">
+                    <v-currency-switcher></v-currency-switcher>
+                </x-slot>
+            </x-shop::dropdown>
+
+            <x-shop::dropdown position="top-right">
+                <x-slot:toggle>
+                    <!-- Dropdown Toggler -->
+                    <div
+                        class="w-full flex gap-2.5 justify-between items-center cursor-pointer"
+                        role="button"
+                        @click="localeToggler = ! localeToggler"
+                    >
+                        <img
+                            src="{{ ! empty(core()->getCurrentLocale()->logo_url)
+                                    ? core()->getCurrentLocale()->logo_url
+                                    : bagisto_asset('images/default-language.svg')
+                                }}"
+                            class="h-full"
+                            alt="Default locale"
+                            width="24"
+                            height="16"
+                        />
+
+                        <span>
+                            {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
+                        </span>
+
+                        <span
+                            class="text-2xl"
+                            :class="{'icon-arrow-up': localeToggler, 'icon-arrow-down': ! localeToggler}"
+                            role="presentation"
+                        ></span>
+                    </div>
+                </x-slot>
+
+                <!-- Dropdown Content -->
+                <x-slot:content class="!p-0">
+                    <v-locale-switcher></v-locale-switcher>
+                </x-slot>
+            </x-shop::dropdown>
+        </div>
     </script>
 
     <script type="module">
@@ -408,6 +478,10 @@
             data() {
                 return  {
                     categories: [],
+
+                    currencyToggler: '',
+
+                    localeToggler: '',
                 }
             },
 

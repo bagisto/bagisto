@@ -54,7 +54,7 @@ class CartController extends APIController
 
         try {
             if (! $product->status) {
-                throw new \Exception(trans('shop::app.checkout.cart.item.inactive-add'));
+                throw new \Exception(trans('shop::app.checkout.cart.inactive-add'));
             }
 
             $response = [];
@@ -74,7 +74,7 @@ class CartController extends APIController
         } catch (\Exception $exception) {
             return response()->json([
                 'redirect_uri' => request()->get('is_buy_now') ? route('shop.product_or_category.index', $product->url_key) : null,
-                'message'      => trans('shop::app.checkout.cart.item.inactive-add'),
+                'message'      => trans('shop::app.checkout.cart.inactive-add'),
             ], Response::HTTP_BAD_REQUEST);
         }
     }

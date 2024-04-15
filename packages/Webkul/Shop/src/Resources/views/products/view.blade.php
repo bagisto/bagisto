@@ -198,7 +198,8 @@
                                         >
                                             <img 
                                                 class="h-5 w-5 min-h-5 min-w-5" 
-                                                src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                                src="{{ Storage::url($customAttributeValue['value']) }}"
+                                                alt="Product Image"
                                             />
                                         </a>
                                     @else
@@ -497,6 +498,8 @@
                             })
                             .catch(error => {
                                 this.isStoring[operation] = false;
+
+                                this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
                             });
                     },
 

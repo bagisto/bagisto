@@ -233,7 +233,6 @@ return [
                             'empty-info'    => '検索用語に該当する商品はありません。',
                             'empty-title'   => '商品が見つかりません',
                             'product-image' => '商品画像',
-                            'qty'           => ':qty 個利用可能',
                             'qty'           => '数量',
                             'sku'           => 'SKU - :sku',
                             'title'         => '商品を検索',
@@ -266,7 +265,6 @@ return [
                         'state'            => '都道府県',
                         'street-address'   => '住所',
                         'telephone'        => '電話番号',
-                        'title'            => '住所',
                         'title'            => '住所',
                     ],
 

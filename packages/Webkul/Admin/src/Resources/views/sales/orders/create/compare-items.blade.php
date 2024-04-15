@@ -72,19 +72,20 @@
 
                             <!-- Item Actions -->
                             <div class="mt-2 flex gap-2.5">
-                                <p
-                                    class="cursor-pointer text-red-600 transition-all hover:underline"
+                                <button
+                                    class="cursor-pointer text-sm text-red-600 transition-all hover:underline"
                                     @click="removeItem(item)"
                                 >
                                     @lang('admin::app.sales.orders.create.compare-items.delete')
-                                </p>
+                                </button>
 
-                                <p
-                                    class="cursor-pointer text-emerald-600 transition-all hover:underline"
+                                <button
+                                    class="cursor-pointer text-sm text-emerald-600 transition-all hover:underline"
+                                    :disabled="! item.product.is_saleable"
                                     @click="moveToCart(item)"
                                 >
                                     @lang('admin::app.sales.orders.create.compare-items.add-to-cart')
-                                </p>
+                                </button>
                             </div>
                         </div>
                     </div>

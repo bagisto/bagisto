@@ -233,7 +233,6 @@ return [
                             'empty-info'    => 'لا توجد منتجات متاحة لمصطلح البحث.',
                             'empty-title'   => 'لم يتم العثور على منتجات',
                             'product-image' => 'صورة المنتج',
-                            'qty'           => ':qty متاح',
                             'qty'           => 'الكمية',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'البحث عن المنتجات',
@@ -266,7 +265,6 @@ return [
                         'state'            => 'المنطقة',
                         'street-address'   => 'عنوان الشارع',
                         'telephone'        => 'رقم الهاتف',
-                        'title'            => 'العنوان',
                         'title'            => 'العنوان',
                     ],
 
@@ -330,31 +328,6 @@ return [
                     'sku'               => 'SKU - :sku',
                     'title'             => 'عناصر قائمة المقارنة',
                 ],
-            ],
-
-            'view' => [
-                'amount-per-unit'       => ':amount per unit x :qty quantity',
-                'billing-address'       => 'Billing Address',
-                'cancel'                => 'Cancel',
-                'cancel-msg'            => 'Are you sure you want to cancel this order?',
-                'cancel-success'        => 'Order cancelled successfully',
-                'canceled'              => 'Cancelled',
-                'channel'               => 'Channel',
-                'closed'                => 'Closed',
-                'comment-success'       => 'Comment added successfully.',
-                'comments'              => 'Comments',
-                'completed'             => 'Completed',
-                'contact'               => 'Contact',
-                'create-success'        => 'Order created successfully',
-                'currency'              => 'Currency',
-                'customer'              => 'Customer',
-                'customer-group'        => 'Customer Group',
-                'customer-not-notified' => ':date | Customer <b>not notified</b>',
-                'customer-notified'     => ':date | Customer <b>notified</b>',
-                'discount'              => 'Discount - :discount',
-                'download-pdf'          => 'Download PDF',
-                'fraud'                 => 'Fraud',
-
             ],
 
             'view' => [
