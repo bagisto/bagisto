@@ -23,7 +23,7 @@ Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
 // Home > My Account > Profile > Edit
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
     $trail->parent('profile');
-    $trail->push(trans('shop::app.customers.account.profile.edit'), route('shop.customers.account.profile.index'));
+    $trail->push(trans('shop::app.customers.account.profile.edit.edit'), route('shop.customers.account.profile.index'));
 });
 
 // Home > My Account > Address

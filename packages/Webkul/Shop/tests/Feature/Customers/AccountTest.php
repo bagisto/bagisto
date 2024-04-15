@@ -23,8 +23,8 @@ it('should returns the profile page', function () {
 
     get(route('shop.customers.account.profile.index'))
         ->assertOk()
-        ->assertSeeText(trans('shop::app.customers.account.profile.edit'))
-        ->assertSeeText(trans('shop::app.customers.account.profile.delete'))
+        ->assertSeeText(trans('shop::app.customers.account.profile.index.edit'))
+        ->assertSeeText(trans('shop::app.customers.account.profile.index.delete'))
         ->assertSeeText($customer->first_name)
         ->assertSeeText($customer->last_name)
         ->assertSeeText($customer->email);
@@ -38,7 +38,7 @@ it('should returns the edit page of the customer', function () {
         ->assertOk()
         ->assertSeeText($customer->email)
         ->assertSeeText($customer->first_name)
-        ->assertSeeText(trans('shop::app.customers.account.profile.edit-profile'));
+        ->assertSeeText(trans('shop::app.customers.account.profile.edit.edit-profile'));
 });
 
 it('should fails the validations error when certain inputs are not provided when update the customer', function () {
