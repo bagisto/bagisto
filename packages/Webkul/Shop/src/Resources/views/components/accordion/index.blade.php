@@ -10,7 +10,7 @@
         @isset($header)
             <template v-slot:header="{ toggle, isOpen }">
                 <div
-                    {{ $header->attributes->merge(['class' => 'flex justify-between items-center p-4 cursor-pointer select-none']) }}
+                    {{ $header->attributes->merge(['class' => 'flex cursor-pointer select-none items-center justify-between p-4']) }}
                     role="button"
                     tabindex="0"
                     @click="toggle"
@@ -18,7 +18,7 @@
                     {{ $header }}
 
                     <span
-                        :class="`text-2xl ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
+                        :class="`${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'} text-2xl`"
                         role="button"
                         aria-label="Toggle accordion"
                         tabindex="0"
@@ -30,7 +30,7 @@
         @isset($content)
             <template v-slot:content="{ isOpen }">
                 <div
-                    {{ $content->attributes->merge(['class' => 'p-1.5 z-10 bg-white rounded-lg']) }}
+                    {{ $content->attributes->merge(['class' => 'z-10 rounded-lg bg-white p-1.5']) }}
                     v-show="isOpen"
                 >
                     {{ $content }}

@@ -2,7 +2,7 @@
     :customer="customer"
     @update-customer="updateCustomer"
 >
-    <div class="flex gap-1.5 items-center justify-between px-2.5 text-blue-600 cursor-pointer transition-all hover:underline"></div>
+    <div class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"></div>
 </v-customer-edit>
 
 @pushOnce('scripts')
@@ -13,7 +13,7 @@
         <!-- Customer Edit Button -->
         @if (bouncer()->hasPermission('customers.customers.edit'))
             <div 
-                class="flex gap-1.5 items-center justify-between px-2.5 text-blue-600 cursor-pointer transition-all hover:underline"
+                class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"
                 @click="$refs.customerEditModal.toggle()"
             >
                 @lang('admin::app.customers.customers.view.edit.edit-btn')
@@ -34,7 +34,7 @@
                 <x-admin::modal ref="customerEditModal">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="text-lg text-gray-800 dark:text-white font-bold">
+                        <p class="text-lg font-bold text-gray-800 dark:text-white">
                             @lang('admin::app.customers.customers.view.edit.title')
                         </p>    
                     </x-slot>
@@ -45,7 +45,7 @@
 
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!--First Name -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="mb-2.5 w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.customers.view.edit.first-name')
                                 </x-admin::form.control-group.label>
@@ -64,7 +64,7 @@
                             </x-admin::form.control-group>
             
                             <!--Last Name -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="mb-2.5 w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.customers.view.edit.last-name')
                                 </x-admin::form.control-group.label>
@@ -104,7 +104,7 @@
             
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Phone -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="mb-2.5 w-full">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.customers.customers.view.edit.contact-number')
                                 </x-admin::form.control-group.label>
@@ -123,7 +123,7 @@
                             </x-admin::form.control-group>
             
                             <!-- Date -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="mb-2.5 w-full">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.customers.customers.view.edit.date-of-birth')
                                 </x-admin::form.control-group.label>

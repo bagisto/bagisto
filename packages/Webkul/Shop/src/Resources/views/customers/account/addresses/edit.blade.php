@@ -302,7 +302,7 @@
 
                 <button
                     type="submit"
-                    class="primary-button m-0 block text-base w-max py-3 px-11 rounded-2xl text-center"
+                    class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base"
                 >
                     @lang('shop::app.customers.account.addresses.save')
                 </button>

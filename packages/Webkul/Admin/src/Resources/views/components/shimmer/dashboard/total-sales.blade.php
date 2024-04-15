@@ -1,21 +1,21 @@
 @props(['count' => 30])
 
-<div class="w-full grid gap-4 px-4 py-2 border-b dark:border-gray-800">
+<div class="grid w-full gap-4 border-b px-4 py-2 dark:border-gray-800">
     <!-- Total Sales -->
-    <div class="w-full h-[38px] flex gap-2 justify-between">
-        <div class="flex flex-col gap-1 justify-between">
-            <div class="shimmer w-[85px] h-[17px]"></div>
+    <div class="flex h-[38px] w-full justify-between gap-2">
+        <div class="flex flex-col justify-between gap-1">
+            <div class="shimmer h-[17px] w-[85px]"></div>
 
             <!-- Total Sales Amount -->
-            <div class="shimmer w-[85px] h-[17px]"></div>
+            <div class="shimmer h-[17px] w-[85px]"></div>
         </div>
 
-        <div class="flex flex-col gap-1 justify-between">
+        <div class="flex flex-col justify-between gap-1">
             <!-- Date -->
-            <div class="shimmer w-[83px] h-[17px]"></div>
+            <div class="shimmer h-[17px] w-[83px]"></div>
 
             <!-- Total Orders -->
-            <div class="shimmer w-14 h-[17px] self-end"></div>
+            <div class="shimmer h-[17px] w-14 self-end"></div>
         </div>
     </div>
 
@@ -24,23 +24,23 @@
     <div class="flex gap-1.5">
         <div class="grid">
             @foreach (range(1, 10) as $i)
-                <div class="shimmer w-[34px] h-2.5">
+                <div class="shimmer h-2.5 w-[34px]">
                 </div>
             @endforeach
         </div>
 
-        <div class="w-full grid gap-1.5">
-            <div class="flex items-end w-[285px] h-[180px] pl-2.5 border-l border-b dark:border-gray-800 aspect-[2]">
-                <div class="w-full flex gap-2.5 justify-between items-end aspect-[2]">
+        <div class="grid w-full gap-1.5">
+            <div class="flex aspect-[2] h-[180px] w-[285px] items-end border-b border-l pl-2.5 dark:border-gray-800">
+                <div class="flex aspect-[2] w-full items-end justify-between gap-2.5">
                     @foreach (range(1, 14) as $i)
-                        <div class="flex shimmer w-full" style="height: {{ rand(10, 100) }}%"></div>
+                        <div class="shimmer flex w-full" style="height: {{ rand(10, 100) }}%"></div>
                     @endforeach
                 </div>
             </div>
 
-            <div class="flex gap-5 justify-between pl-2.5 max-lg:gap-4 max-sm:gap-2.5">
+            <div class="flex justify-between gap-5 pl-2.5 max-lg:gap-4 max-sm:gap-2.5">
                 @foreach (range(1, 10) as $i)
-                    <div class="shimmer rotate-45 flex w-full mt-1 h-[42px]"></div>
+                    <div class="shimmer mt-1 flex h-[42px] w-full rotate-45"></div>
                 @endforeach
             </div>
         </div>

@@ -32,7 +32,7 @@
                                 v-if="massAction?.options?.length"
                             >
                                 <a
-                                    class="whitespace-no-wrap flex cursor-not-allowed justify-between gap-1.5 !rounded-0 px-4 py-2 bg-white hover:bg-gray-100"
+                                    class="whitespace-no-wrap !rounded-0 flex cursor-not-allowed justify-between gap-1.5 bg-white px-4 py-2 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                 >
                                     <i
@@ -49,7 +49,7 @@
                                     <i class="!icon-arrow-right text-2xl"></i>
                                 </a>
 
-                                <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] rounded border border-gray-300 bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
+                                <ul class="absolute top-0 z-10 hidden w-max min-w-[150px] rounded border border-gray-300 bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block ltr:left-full rtl:right-full">
                                     <li v-for="option in massAction.options">
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-100"
@@ -101,13 +101,13 @@
                         <input
                             type="text"
                             name="search"
-                            class="rounded-lg border border-gray-300 bg-white px-3 py-2 ltr:pr-8 rtl:pl-8 text-base text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                            class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 ltr:pr-8 rtl:pl-8"
                             :value="getAppliedColumnValues('all')"
                             placeholder="@lang('shop::app.components.datagrid.toolbar.search.title')"
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute rtl:left-2.5 ltr:right-2.5 top-2 flex items-center text-xl">
+                        <div class="icon-search pointer-events-none absolute top-2 flex items-center text-xl ltr:right-2.5 rtl:left-2.5">
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
             <x-shop::dropdown position="bottom-left">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
-                    <button class="flex justify-between items-center gap-4 max-w-[200px] w-full ltr:pl-4 rtl:pr-4 ltr:pr-3 rtl:pl-3 py-2 rounded-lg bg-white border border-[#E9E9E9] text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:ltr:pr-2.5 max-md:rtl:pl-2.5 max-md:ltr:pl-2.5 max-md:rtl:pr-2.5 cursor-pointer">
+                    <button class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-[#E9E9E9] bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 ltr:pl-4 ltr:pr-3 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-3 rtl:pr-4 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5">
                         <span v-text="applied.pagination.perPage"></span>
 
                         <span class="icon-arrow-down text-2xl"></span>
@@ -141,10 +141,10 @@
             <x-shop::drawer width="350px" ref="filterDrawer">
                 <x-slot:toggle>
                     <button 
-                        class="flex justify-between items-center gap-4 max-w-[200px] w-full ltr:pl-3 rtl:pr-3 ltr:pr-4 rtl:pl-4 py-2 rounded-lg bg-white border border-[#E9E9E9] text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:ltr:pr-2.5 max-md:rtl:pl-2.5 max-md:ltr:pl-2.5 max-md:rtl:pr-2.5 max-md:w-[110px] cursor-pointer"
+                        class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-[#E9E9E9] bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-[110px] ltr:pl-3 ltr:pr-4 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-4 rtl:pr-3 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5"
                         :class="{'[&>*]:text-blue-600': applied.filters.columns.length > 1}"
                     >
-                        <span class="flex justify-between items-center gap-1.5">
+                        <span class="flex items-center justify-between gap-1.5">
                             <span class="icon-filter text-2xl"></span>
 
                             @lang('shop::app.components.datagrid.toolbar.filter.title')

@@ -16,9 +16,9 @@
 
         <!-- Purchase Funnel Section -->
         <template v-else>
-            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+            <div class="box-shadow relative flex-1 rounded bg-white p-4 dark:bg-gray-900">
                 <!-- Header -->
-                <p class="text-base text-gray-600 dark:text-white font-semibold mb-4">
+                <p class="mb-4 text-base font-semibold text-gray-600 dark:text-white">
                     @lang('admin::app.reporting.sales.index.purchase-funnel')
                 </p>
                 
@@ -27,18 +27,18 @@
                     <!-- Total Visits -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                            <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
                                 @{{ report.statistics.visitors.total }}
                             </p>
 
-                            <p class="text-xs text-gray-600 leading-none dark:text-gray-300 font-semibold">
+                            <p class="text-xs font-semibold leading-none text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.reporting.sales.index.total-visits')
                             </p>
                         </div>
 
-                        <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
+                        <div class="relative aspect-[0.5/1] w-full bg-slate-100">
                             <div
-                                class="w-full absolute bottom-0 bg-emerald-400"
+                                class="absolute bottom-0 w-full bg-emerald-400"
                                 :style="{ 'height': report.statistics.visitors.progress + '%' }"
                             ></div>
                         </div>
@@ -51,18 +51,18 @@
                     <!-- Total Product Visits -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                            <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
                                 @{{ report.statistics.product_visitors.total }}
                             </p>
 
-                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.reporting.sales.index.product-views')
                             </p>
                         </div>
 
-                        <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
+                        <div class="relative aspect-[0.5/1] w-full bg-slate-100">
                             <div
-                                class="w-full absolute bottom-0 bg-emerald-400"
+                                class="absolute bottom-0 w-full bg-emerald-400"
                                 :style="{ 'height': (report.statistics.product_visitors.progress).toFixed(2) + '%' }"
                             ></div>
                         </div>
@@ -76,18 +76,18 @@
                     <!-- Total Added To Cart -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                            <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
                                 @{{ report.statistics.carts.total }}
                             </p>
 
-                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.reporting.sales.index.added-to-cart')
                             </p>
                         </div>
 
-                        <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
+                        <div class="relative aspect-[0.5/1] w-full bg-slate-100">
                             <div
-                                class="w-full absolute bottom-0 bg-emerald-400"
+                                class="absolute bottom-0 w-full bg-emerald-400"
                                 :style="{ 'height': (report.statistics.carts.progress).toFixed(2) + '%' }"
                             ></div>
                         </div>
@@ -101,18 +101,18 @@
                     <!-- Total Purchased -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                            <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
                                 @{{ report.statistics.orders.total }}
                             </p>
 
-                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.reporting.sales.index.purchased')
                             </p>
                         </div>
 
-                        <div class="w-full relative bg-slate-100 dark:text-gray-300 aspect-[0.5/1]">
+                        <div class="relative aspect-[0.5/1] w-full bg-slate-100 dark:text-gray-300">
                             <div
-                                class="w-full absolute bottom-0 bg-emerald-400"
+                                class="absolute bottom-0 w-full bg-emerald-400"
                                 :style="{ 'height': report.statistics.orders.progress + '%' }"
                             ></div>
                         </div>
@@ -125,9 +125,9 @@
                 </div>
 
                 <!-- Date Range Section -->
-                <div class="flex gap-5 justify-end mt-6">
-                    <div class="flex gap-1 items-center">
-                        <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
+                <div class="mt-6 flex justify-end gap-5">
+                    <div class="flex items-center gap-1">
+                        <span class="h-3.5 w-3.5 rounded-md bg-emerald-400"></span>
 
                         <p class="text-xs dark:text-gray-300">
                             @{{ report.date_range.current }}

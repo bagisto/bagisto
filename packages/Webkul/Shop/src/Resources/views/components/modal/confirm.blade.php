@@ -9,15 +9,15 @@
             <transition
                 tag="div"
                 name="modal-overlay"
-                enter-class="ease-out duration-300"
+                enter-class="duration-300 ease-out"
                 enter-from-class="opacity-0"
                 enter-to-class="opacity-100"
-                leave-class="ease-in duration-200"
+                leave-class="duration-200 ease-in"
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-20"
+                    class="fixed inset-0 z-20 bg-gray-500 bg-opacity-50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -25,35 +25,35 @@
             <transition
                 tag="div"
                 name="modal-content"
-                enter-class="ease-out duration-300"
-                enter-from-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
-                enter-to-class="opacity-100 translate-y-0 md:scale-100"
-                leave-class="ease-in duration-200"
-                leave-from-class="opacity-100 translate-y-0 md:scale-100"
-                leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+                enter-class="duration-300 ease-out"
+                enter-from-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
+                enter-to-class="translate-y-0 opacity-100 md:scale-100"
+                leave-class="duration-200 ease-in"
+                leave-from-class="translate-y-0 opacity-100 md:scale-100"
+                leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-20 transform transition overflow-y-auto" v-show="isOpen"
+                    class="fixed inset-0 z-20 transform overflow-y-auto transition" v-show="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <div class="w-full max-w-[475px] z-[999] absolute left-1/2 top-1/2 p-5 rounded-xl bg-white overflow-hidden max-md:w-[90%] -translate-x-1/2 -translate-y-1/2">
+                        <div class="absolute left-1/2 top-1/2 z-[999] w-full max-w-[475px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-white p-5 max-md:w-[90%]">
                             <div class="flex gap-2.5">
                                 <div>
-                                    <span class="flex p-2.5 border border-[rgba(6,12,59,0.20)] rounded-full">
+                                    <span class="flex rounded-full border border-[rgba(6,12,59,0.20)] p-2.5">
                                         <i class="icon-error text-3xl"></i>
                                     </span>
                                 </div>
 
                                 <div>
-                                    <div class="flex gap-5 justify-between items-center text-xl">
+                                    <div class="flex items-center justify-between gap-5 text-xl">
                                         @{{ title }}
                                     </div>
 
-                                    <div class="pt-1.5 pb-5 text-sm text-[#727272] text-left">
+                                    <div class="pb-5 pt-1.5 text-left text-sm text-[#727272]">
                                         @{{ message }}
                                     </div>
 
-                                    <div class="flex gap-2.5 justify-end">
+                                    <div class="flex justify-end gap-2.5">
                                         <button type="button" class="secondary-button" @click="disagree">
                                             @{{ options.btnDisagree }}
                                         </button>

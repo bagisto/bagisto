@@ -12,26 +12,26 @@
         <div class="grid gap-2.5">
             <!-- Panel -->
             <div
-                class="relative bg-white dark:bg-gray-900 rounded box-shadow"
+                class="box-shadow relative rounded bg-white dark:bg-gray-900"
                 v-for="type in types"
             >
-                <div class="flex gap-5 justify-between mb-2.5 p-4">
+                <div class="mb-2.5 flex justify-between gap-5 p-4">
                     <div class="flex flex-col gap-2">
                         <p
-                            class="text-base text-gray-800 dark:text-white font-semibold"
+                            class="text-base font-semibold text-gray-800 dark:text-white"
                             v-text="type.title"
                         >
                         </p>
 
                         <p
-                            class="text-xs text-gray-500 dark:text-gray-300 font-medium"
+                            class="text-xs font-medium text-gray-500 dark:text-gray-300"
                             v-text="type.info"
                         >
                         </p>
                     </div>
                     
                     <!-- Add Button -->
-                    <div class="flex gap-x-1 items-center">
+                    <div class="flex items-center gap-x-1">
                         <div
                             class="secondary-button"
                             @click="selectedType = type.key; $refs.productSearch.openDrawer()"
@@ -47,7 +47,7 @@
                     v-if="addedProducts[type.key].length"
                 >
                     <div
-                        class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800"
+                        class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800"
                         v-for="product in addedProducts[type.key]"
                     >
                         <!-- Hidden Input -->
@@ -61,13 +61,13 @@
                         <div class="flex gap-2.5">
                             <!-- Image -->
                             <div
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
-                                :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! product.images.length}"
+                                class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                                :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                             >
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                 
-                                    <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                                    <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                         @lang('admin::app.catalog.products.edit.links.image-placeholder')
                                     </p>
                                 </template>
@@ -78,9 +78,9 @@
                             </div>
 
                             <!-- Details -->
-                            <div class="grid gap-1.5 place-content-start">
+                            <div class="grid place-content-start gap-1.5">
                                 <p
-                                    class="text-base text-gray-800 dark:text-white font-semibold"
+                                    class="text-base font-semibold text-gray-800 dark:text-white"
                                     v-text="product.name"
                                 >
                                 </p>
@@ -92,13 +92,13 @@
                         </div>
 
                         <!-- Actions -->
-                        <div class="grid gap-1 place-content-start text-right">
-                            <p class="text-gray-800 font-semibold dark:text-white">
+                        <div class="grid place-content-start gap-1 text-right">
+                            <p class="font-semibold text-gray-800 dark:text-white">
                                 @{{ $admin.formatPrice(product.price) }}    
                             </p>
 
                             <p
-                                class="text-red-600 cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-red-600 transition-all hover:underline"
                                 @click="remove(type.key, product)"
                             >
                                 @lang('admin::app.catalog.products.edit.links.delete')
@@ -109,18 +109,18 @@
 
                 <!-- For Empty Variations -->
                 <div
-                    class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                    class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                     v-else
                 >
                     <!-- Placeholder Image -->
                     <img
                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                        class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                        class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                     />
 
                     <!-- Add Variants Information -->
-                    <div class="flex flex-col gap-1.5 items-center">
-                        <p class="text-base text-gray-400 font-semibold">
+                    <div class="flex flex-col items-center gap-1.5">
+                        <p class="text-base font-semibold text-gray-400">
                             @lang('admin::app.catalog.products.edit.links.empty-title')
                         </p>
 
