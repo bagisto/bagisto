@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'ここで製品を検索',
                 'sign-in'           => 'サインイン',
                 'sign-up'           => '新規登録',
+                'submit'            => '送信',
                 'title'             => 'アカウント',
                 'welcome'           => 'ようこそ',
                 'welcome-guest'     => 'ゲストさん、ようこそ',
                 'wishlist'          => 'ウィッシュリスト',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'デフォルトのロケール',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -615,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'チェックアウトに進む',
             'illegal'                   => '数量は1未満にできません。',
+            'inactive-add'              => '非アクティブなアイテムはカートに追加できません。',
             'inactive'                  => 'アイテムは無効になり、カートから削除されました。',
             'inventory-warning'         => '要求された数量は利用できません。後でやり直してください。',
             'item-add-to-cart'          => 'アイテムが正常に追加されました',

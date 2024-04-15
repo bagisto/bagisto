@@ -51,7 +51,9 @@ class ReviewDatagrid extends DataGrid
                 'product_reviews.comment',
                 'product_reviews.product_id',
             )
-            ->where('customer_id', request()->route('id'));
+            ->where('customer_id', request()->route('id'))
+            ->where('channel', core()->getCurrentChannelCode())
+            ->where('locale', app()->getLocale());
 
         $this->addFilter('product_review_id', 'product_reviews.id');
         $this->addFilter('created_at', 'product_reviews.created_at');
@@ -138,18 +140,19 @@ class ReviewDatagrid extends DataGrid
                     ],
                 ],
             ],
+
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($row) {
-                switch ('approved') {
-                    case 'approved':
+                switch ($row->status) {
+                    case self::STATUS_APPROVED:
                         return '<p class="label-active">'.trans('admin::app.customers.customers.view.datagrid.reviews.approved').'</p>';
 
-                    case 'pending':
+                    case self::STATUS_PENDING:
                         return '<p class="label-pending">'.trans('admin::app.customers.customers.view.datagrid.reviews.pending').'</p>';
 
-                    case 'disapproved':
+                    case self::STATUS_DISAPPROVED:
                         return '<p class="label-canceled">'.trans('admin::app.customers.customers.view.datagrid.reviews.disapproved').'</p>';
                 }
             },
