@@ -885,9 +885,11 @@ return [
             ],
         ],
 
-        'contact' => [
+        'contact-us' => [
+            'contact-from'    => 'Web Sitesi İletişim Formu aracılığıyla',
             'reply-to-mail'   => 'lütfen bu e-postaya yanıt verin.',
             'reach-via-phone' => 'Alternatif olarak, bize telefonla şu numaradan ulaşabilirsiniz:',
+            'inquiry-from'    => 'Şuradan gelen talep',
             'to'              => 'İletişim için',
         ],
 

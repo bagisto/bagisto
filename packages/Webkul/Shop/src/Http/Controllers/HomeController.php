@@ -51,21 +51,21 @@ class HomeController extends Controller
     }
 
     /**
-     * Summary of contact
+     * Summary of contact.
      *
      * @return \Illuminate\View\View
      */
-    public function contact()
+    public function contactUs()
     {
-        return view('shop::home.contact');
+        return view('shop::home.contact-us');
     }
 
     /**
-     * Summary of store
+     * Summary of store.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ContactRequest $contactRequest)
+    public function sendContactUsMail(ContactRequest $contactRequest)
     {
         try {
             Mail::queue(new ContactUs($contactRequest->only([

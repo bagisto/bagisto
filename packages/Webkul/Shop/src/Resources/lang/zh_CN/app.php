@@ -885,9 +885,11 @@ return [
             ],
         ],
 
-        'contact' => [
+        'contact-us' => [
+            'contact-from'    => '通过网站联系表格',
             'reply-to-mail'   => '请回复此电子邮件。',
             'reach-via-phone' => '或者，您可以通过电话联系我们：',
+            'inquiry-from'    => '来自的查询',
             'to'              => '联系',
         ],
 

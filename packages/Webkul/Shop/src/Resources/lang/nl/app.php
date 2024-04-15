@@ -885,9 +885,11 @@ return [
             ],
         ],
 
-        'contact' => [
-            'reply-to-mail'   => 'reageer alstublieft op deze e-mail.',
+        'contact-us' => [
+            'contact-from'    => 'via het contactformulier op de website',
+            'reply-to-mail'   => 'antwoord alstublieft op deze e-mail.',
             'reach-via-phone' => 'U kunt ons ook telefonisch bereiken op',
+            'inquiry-from'    => 'Vraag van',
             'to'              => 'Om contact op te nemen met',
         ],
 

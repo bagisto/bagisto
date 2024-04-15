@@ -885,9 +885,11 @@ return [
             ],
         ],
 
-        'contact' => [
+        'contact-us' => [
+            'contact-from'    => 'via Website Contact Form',
             'reply-to-mail'   => 'please reply to this email.',
             'reach-via-phone' => 'Alternatively, you can reach us by phone at',
+            'inquiry-from'    => 'Inquiry from',
             'to'              => 'To contact',
         ],
 

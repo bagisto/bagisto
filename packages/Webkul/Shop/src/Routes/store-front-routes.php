@@ -31,12 +31,12 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
         ->name('shop.home.index')
         ->middleware('cacheResponse');
 
-    Route::get('contact-us', [HomeController::class, 'contact'])
-        ->name('shop.home.contact')
+    Route::get('contact-us', [HomeController::class, 'contactUs'])
+        ->name('shop.home.contact_us')
         ->middleware('cacheResponse');
 
-    Route::post('contact-us', [HomeController::class, 'store'])
-        ->name('shop.home.contact.store')
+    Route::post('contact-us', [HomeController::class, 'sendContactUsMail'])
+        ->name('shop.home.contact.send_contact_us_mail')
         ->middleware('cacheResponse');
 
     /**

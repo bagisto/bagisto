@@ -18,7 +18,7 @@
 
             <div class="mt-14 rounded max-sm:mt-8">
                 <!-- Contact Form -->
-                <x-shop::form :action="route('shop.home.contact.store')">
+                <x-shop::form :action="route('shop.home.contact.send_contact_us_mail')">
                     <!-- Name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">

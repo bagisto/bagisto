@@ -885,10 +885,12 @@ return [
             ],
         ],
 
-        'contact' => [
+        'contact-us' => [
+            'contact-from'    => 'via Formulário de Contato do Website',
             'reply-to-mail'   => 'por favor, responda a este e-mail.',
             'reach-via-phone' => 'Alternativamente, você pode nos contatar por telefone em',
-            'to'              => 'Para entrar em contato com',
+            'inquiry-from'    => 'Consulta de',
+            'to'              => 'Para entrar em contato',
         ],
 
         'orders' => [
