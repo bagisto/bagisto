@@ -233,7 +233,6 @@ return [
                             'empty-info'    => 'No products available for search term.',
                             'empty-title'   => 'No products found',
                             'product-image' => 'Product Image',
-                            'qty'           => ':qty Available',
                             'qty'           => 'Qty',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Search Products',
@@ -266,7 +265,6 @@ return [
                         'state'            => 'State',
                         'street-address'   => 'Street Address',
                         'telephone'        => 'Telephone',
-                        'title'            => 'Address',
                         'title'            => 'Address',
                     ],
 

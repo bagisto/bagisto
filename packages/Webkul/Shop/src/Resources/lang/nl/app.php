@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'Zoek hier producten',
                 'sign-in'           => 'Inloggen',
                 'sign-up'           => 'Aanmelden',
+                'submit'            => 'Verzenden',
                 'title'             => 'Account',
                 'welcome'           => 'Welkom',
                 'welcome-guest'     => 'Welkom Gast',
                 'wishlist'          => 'Verlanglijst',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Standaard taal',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -607,6 +614,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Ga verder naar afrekenen',
             'illegal'                   => 'De hoeveelheid kan niet minder zijn dan één.',
+            'inactive-add'              => 'Inactief item kan niet aan winkelwagen worden toegevoegd.',
             'inactive'                  => 'Het item is gedeactiveerd en vervolgens uit de winkelwagen verwijderd.',
             'inventory-warning'         => 'De aangevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
             'item-add-to-cart'          => 'Item succesvol toegevoegd',
