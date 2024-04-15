@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'এখানে পণ্য খুঁজুন',
                 'sign-in'           => 'সাইন ইন',
                 'sign-up'           => 'সাইন আপ',
+                'submit'            => 'জমা দিন',
                 'title'             => 'একাউন্ট',
                 'welcome'           => 'স্বাগতম',
                 'welcome-guest'     => 'স্বাগতম অতিথি',
                 'wishlist'          => 'ইচ্ছেসূচি',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'ডিফল্ট লোকেল',
+                    ],
+                ],
             ],
 
             'footer' => [
