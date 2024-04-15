@@ -89,7 +89,7 @@
                 <!-- Validation Results -->
                 <div
                     class="flex w-full place-content-between rounded-sm border p-3"
-                    :class="isValid ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'"
+                    :class="isValid ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'"
                     v-else-if="importResource.state == 'validated'"
                 >
                     <!-- Import Stats -->

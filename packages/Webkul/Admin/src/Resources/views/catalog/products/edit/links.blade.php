@@ -62,7 +62,7 @@
                             <!-- Image -->
                             <div
                                 class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
-                                :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! product.images.length}"
+                                :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                             >
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">

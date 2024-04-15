@@ -467,9 +467,9 @@
 
                             <div
                                 class="border-b py-4 last:border-b-0 dark:border-gray-800"
-                                :class="{'grid grid-cols-2 gap-3 justify-between items-center': [
+                                :class="{'grid grid-cols-2 items-center justify-between gap-3': [
                                         'editName', 'editSku',
-                                ].includes(selectedType), 'flex justify-between items-center' : [
+                                ].includes(selectedType), 'flex items-center justify-between' : [
                                     'editWeight', 'editPrices', 'editStatus',
                                 ].includes(selectedType)}"
                                 v-for="variant in tempSelectedVariants"
@@ -782,7 +782,7 @@
                 <!-- Image -->
                 <div
                     class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
-                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! variant.images.length}"
+                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! variant.images.length}"
                 >
                     <template v-if="! variant.images.length">
                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
