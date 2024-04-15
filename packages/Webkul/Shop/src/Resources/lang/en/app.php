@@ -366,10 +366,17 @@ return [
                 'search-text'       => 'Search products here',
                 'sign-in'           => 'Sign In',
                 'sign-up'           => 'Sign Up',
+                'submit'            => 'Submit',
                 'title'             => 'Account',
                 'welcome'           => 'Welcome',
                 'welcome-guest'     => 'Welcome Guest',
                 'wishlist'          => 'Wishlist',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Default locale',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -640,6 +647,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continue to Checkout',
             'illegal'                   => 'Quantity cannot be lesser than one.',
+            'inactive-add'              => 'Inactive item cannot be added to cart.',
             'inactive'                  => 'The item has been deactivated and subsequently removed from the cart.',
             'inventory-warning'         => 'The requested quantity is not available, please try again later.',
             'item-add-to-cart'          => 'Item Added Successfully',

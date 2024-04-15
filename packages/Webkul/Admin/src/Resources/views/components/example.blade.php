@@ -526,4 +526,15 @@
     :fallback-locale="config('app.fallback_locale')"
 />
 
-<div class="label-processing"></div>
+<!-- Status  Label -->
+<div class="label-canceled">Canceled</div>
+
+<div class="label-info">Information</div>
+
+<div class="label-completed">Completed</div>
+
+<div class="label-closed">Closed</div>
+
+<div class="label-processing">Processing</div>
+
+<div class="label-pending">Pending</div>

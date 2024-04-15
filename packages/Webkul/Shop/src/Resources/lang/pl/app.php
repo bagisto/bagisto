@@ -366,10 +366,17 @@ return [
                 'search-text'       => 'Szukaj produktów tutaj',
                 'sign-in'           => 'Zaloguj się',
                 'sign-up'           => 'Zarejestruj się',
+                'submit'            => 'Wyślij',
                 'title'             => 'Konto',
                 'welcome'           => 'Witaj',
                 'welcome-guest'     => 'Witaj, Gościu',
                 'wishlist'          => 'Lista życzeń',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Domyślna lokalizacja',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -640,6 +647,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Przejdź do realizacji zamówienia',
             'illegal'                   => 'Ilość nie może być mniejsza niż jeden',
+            'inactive-add'              => 'Nieaktywny produkt nie może zostać dodany do koszyka.',
             'inactive'                  => 'Produkt został dezaktywowany i usunięty z koszyka',
             'inventory-warning'         => 'Żądana ilość nie jest dostępna, prosimy spróbować ponownie później',
             'item-add-to-cart'          => 'Produkt został pomyślnie dodany do koszyka',

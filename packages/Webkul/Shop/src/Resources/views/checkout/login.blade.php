@@ -12,14 +12,16 @@
         type="text/x-template"
         id="v-checkout-login-template"
     >
-        <div class="flex items-center">
-            <span
-                class="text-base font-medium text-[#0A49A7] cursor-pointer"
-                role="button"
-                @click="$refs.loginModel.open()"
-            >
-                @lang('shop::app.checkout.login.title')
-            </span>
+        <div>
+            <div class="flex items-center">
+                <span
+                    class="text-base font-medium text-[#0A49A7] cursor-pointer"
+                    role="button"
+                    @click="$refs.loginModel.open()"
+                >
+                    @lang('shop::app.checkout.login.title')
+                </span>
+            </div>
 
             <!-- Login Form -->
             <x-shop::form
