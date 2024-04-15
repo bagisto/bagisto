@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should show the sitemap index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.search_seo.sitemaps.index'))
@@ -18,7 +18,7 @@ it('should show the sitemap index page', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store in the sitemap', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.sitemaps.store'))
@@ -28,7 +28,7 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created sitemap', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.sitemaps.store'), [
@@ -49,10 +49,10 @@ it('should store the newly created sitemap', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update in the sitemap', function () {
-    // Arrange
+    // Arrange.
     $sitemap = Sitemap::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.sitemaps.update', $sitemap->id))
@@ -62,10 +62,10 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the sitemap', function () {
-    // Arrange
+    // Arrange.
     $sitemap = Sitemap::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.sitemaps.update'), [
@@ -88,10 +88,10 @@ it('should update the sitemap', function () {
 });
 
 it('should delete the sitemap', function () {
-    // Arrange
+    // Arrange.
     $sitemap = Sitemap::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.search_seo.sitemaps.delete', $sitemap->id))

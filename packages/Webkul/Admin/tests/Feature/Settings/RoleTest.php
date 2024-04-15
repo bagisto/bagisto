@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the role index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.roles.index'))
@@ -18,7 +18,7 @@ it('should returns the role index page', function () {
 });
 
 it('should returns the create page of role', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.roles.create'))
@@ -28,7 +28,7 @@ it('should returns the create page of role', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the roles', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.roles.store'))
@@ -39,13 +39,13 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created roles', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.settings.roles.store'), [
-        'name'            => $name = fake()->name(),
-        'permission_type' => $permissionType = fake()->randomElement(['custom', 'all']),
-        'description'     => $description = fake()->sentence(),
+    postJson(route('admin.settings.roles.store'), $data = [
+        'name'            => fake()->name(),
+        'permission_type' => fake()->randomElement(['custom', 'all']),
+        'description'     => fake()->sentence(),
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
@@ -53,25 +53,25 @@ it('should store the newly created roles', function () {
     $this->assertModelWise([
         Role::class => [
             [
-                'name'            => $name,
-                'permission_type' => $permissionType,
-                'description'     => $description,
+                'name'            => $data['name'],
+                'permission_type' => $data['permission_type'],
+                'description'     => $data['description'],
             ],
         ],
     ]);
 });
 
 it('should returns the edit page of roles', function () {
-    // Arrange
+    // Arrange.
     $role = Role::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.settings.roles.edit', $role->id), [
-        'name'            => $name = fake()->name(),
-        'permission_type' => $permissionType = fake()->randomElement(['custom', 'all']),
-        'description'     => $description = fake()->sentence(),
+    putJson(route('admin.settings.roles.edit', $role->id), $data = [
+        'name'            => fake()->name(),
+        'permission_type' => fake()->randomElement(['custom', 'all']),
+        'description'     => fake()->sentence(),
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
@@ -79,19 +79,19 @@ it('should returns the edit page of roles', function () {
     $this->assertModelWise([
         Role::class => [
             [
-                'name'            => $name,
-                'permission_type' => $permissionType,
-                'description'     => $description,
+                'name'            => $data['name'],
+                'permission_type' => $data['permission_type'],
+                'description'     => $data['description'],
             ],
         ],
     ]);
 });
 
 it('should fail the validation with errors when certain field not provided when update the roles', function () {
-    // Arrange
+    // Arrange.
     $role = Role::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.roles.update', $role->id))
@@ -102,16 +102,16 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the existing role', function () {
-    // Arrange
+    // Arrange.
     $role = Role::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.settings.roles.update', $role->id), [
-        'name'            => $name = fake()->name(),
-        'permission_type' => $permissionType = fake()->randomElement(['custom', 'all']),
-        'description'     => $description = fake()->sentence(),
+    putJson(route('admin.settings.roles.update', $role->id), $data = [
+        'name'            => fake()->name(),
+        'permission_type' => fake()->randomElement(['custom', 'all']),
+        'description'     => fake()->sentence(),
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
@@ -119,19 +119,19 @@ it('should update the existing role', function () {
     $this->assertModelWise([
         Role::class => [
             [
-                'name'            => $name,
-                'permission_type' => $permissionType,
-                'description'     => $description,
+                'name'            => $data['name'],
+                'permission_type' => $data['permission_type'],
+                'description'     => $data['description'],
             ],
         ],
     ]);
 });
 
 it('should delete the existing role', function () {
-    // Arrange
+    // Arrange.
     $role = Role::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.roles.delete', $role->id))

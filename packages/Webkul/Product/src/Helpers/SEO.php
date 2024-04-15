@@ -27,7 +27,7 @@ class SEO
         }
 
         if (core()->getConfigData('catalog.rich_snippets.products.show_weight')) {
-            $data['image'] = $product->weight;
+            $data['weight'] = $product->weight;
         }
 
         if (core()->getConfigData('catalog.rich_snippets.products.show_categories')) {

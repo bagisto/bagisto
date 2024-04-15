@@ -22,7 +22,7 @@ class ProductReviewFactory extends Factory
         return [
             'title'   => $this->faker->words(5, true),
             'rating'  => $this->faker->numberBetween(0, 10),
-            'status'  => 1,
+            'status'  => 'pending',
             'comment' => $this->faker->sentence(20),
         ];
     }

@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => '您的订单已取消',
                     'page-title'         => '订单 #:order_id',
                     'payment-method'     => '付款方式',
+                    'reorder-btn-title'  => '重新排序',
                     'shipping-address'   => '送货地址',
                     'shipping-method'    => '送货方式',
                     'title'              => '查看',
@@ -621,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => '继续结帐',
             'illegal'                   => '数量不能少于一。',
+            'inactive-add'              => '无法将停用的项目添加到购物车。',
             'inactive'                  => '该项目已停用，随后从购物车中移除。',
             'inventory-warning'         => '请求的数量不可用，请稍后再试。',
             'item-add-to-cart'          => '已成功添加项目',

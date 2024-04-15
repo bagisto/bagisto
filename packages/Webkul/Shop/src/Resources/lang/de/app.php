@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Ihre Bestellung wurde storniert',
                     'page-title'         => 'Bestellung #:order_id',
                     'payment-method'     => 'Zahlungsmethode',
+                    'reorder-btn-title'  => 'Neu anordnen',
                     'shipping-address'   => 'Lieferadresse',
                     'shipping-method'    => 'Versandmethode',
                     'title'              => 'Ansicht',
@@ -621,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Weiter zur Kasse',
             'illegal'                   => 'Die Menge darf nicht weniger als eins sein.',
+            'inactive-add'              => 'Inaktive Artikel können nicht zum Warenkorb hinzugefügt werden.',
             'inactive'                  => 'Der Artikel wurde deaktiviert und wurde daher aus dem Warenkorb entfernt.',
             'inventory-warning'         => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
             'item-add-to-cart'          => 'Artikel erfolgreich hinzugefügt',

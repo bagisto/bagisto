@@ -11,7 +11,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should fail the validation with errors when certain inputs are not provided when store in grouped product', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'))
@@ -22,12 +22,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should return the create page of grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
     $productId = $product->id + 1;
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'), [
@@ -50,10 +50,10 @@ it('should return the create page of grouped product', function () {
 });
 
 it('should return the grouped edit page', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getGroupedProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.edit', $product->id), [
@@ -77,10 +77,10 @@ it('should return the grouped edit page', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getGroupedProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id))
@@ -93,10 +93,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors if certain data is not provided correctly in grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getGroupedProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -120,22 +120,22 @@ it('should fail the validation with errors if certain data is not provided corre
 });
 
 it('should update the grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getGroupedProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.products.update', $product->id), [
+    putJson(route('admin.catalog.products.update', $product->id), $data = [
         'sku'               => $product->sku,
         'url_key'           => $product->url_key,
-        'short_description' => $shortDescription = fake()->sentence(),
-        'description'       => $description = fake()->paragraph(),
-        'name'              => $name = fake()->words(3, true),
-        'price'             => $price = fake()->randomFloat(2, 1, 1000),
-        'weight'            => $weight = fake()->numberBetween(0, 100),
-        'channel'           => $channel = core()->getCurrentChannelCode(),
-        'locale'            => $locale = app()->getLocale(),
+        'short_description' => fake()->sentence(),
+        'description'       => fake()->paragraph(),
+        'name'              => fake()->words(3, true),
+        'price'             => fake()->randomFloat(2, 1, 1000),
+        'weight'            => fake()->numberBetween(0, 100),
+        'channel'           => core()->getCurrentChannelCode(),
+        'locale'            => app()->getLocale(),
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
@@ -158,20 +158,20 @@ it('should update the grouped product', function () {
                 'type'              => 'grouped',
                 'sku'               => $product->sku,
                 'url_key'           => $product->url_key,
-                'name'              => $name,
-                'short_description' => $shortDescription,
-                'description'       => $description,
-                'price'             => $price,
-                'weight'            => $weight,
-                'locale'            => $locale,
-                'channel'           => $channel,
+                'name'              => $data['name'],
+                'short_description' => $data['short_description'],
+                'description'       => $data['description'],
+                'price'             => $data['price'],
+                'weight'            => $data['weight'],
+                'locale'            => $data['locale'],
+                'channel'           => $data['channel'],
             ],
         ],
     ]);
 });
 
 it('should update the grouped product options', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getGroupedProductFactory()->create();
 
     $links = [];
@@ -182,7 +182,7 @@ it('should update the grouped product options', function () {
         $links[$simpleProduct->id]['qty'] = rand(10, 100);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -228,10 +228,10 @@ it('should update the grouped product options', function () {
 });
 
 it('should delete a grouped product', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())->getGroupedProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.products.delete', $product->id))
