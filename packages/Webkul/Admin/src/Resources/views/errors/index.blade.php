@@ -49,7 +49,7 @@
                     @lang('admin::app.errors.support', [
                         'link'  => 'mailto:support@example.com',
                         'email' => 'support@example.com',
-                        'class' => 'text-blue-600 font-semibold transition-all hover:underline',
+                        'class' => 'font-semibold text-blue-600 transition-all hover:underline',
                     ])
                 </p>
             </div>
