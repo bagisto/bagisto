@@ -65,8 +65,12 @@
                         @endauth
                     </div>
 
+                    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.categories.before') !!}
+
                     <!-- Mobile category view -->
                     <v-mobile-category></v-mobile-category>
+
+                    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.categories.after') !!}
 
                     <!-- Localization & Currency Section -->
                     <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-5 justify-between items-center mb-4">
