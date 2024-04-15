@@ -191,7 +191,7 @@
                             <x-slot:content>
                                 <div class="grid gap-y-2.5">
                                     <p
-                                        lass="text-gray-800 font-semibold dark:text-white"
+                                        class="text-gray-800 font-semibold dark:text-white"
                                         v-text="`${customer.first_name} ${customer.last_name}`"
                                     >
                                     </p>
@@ -417,18 +417,18 @@
 
                     addressUpdated(updatedAddress) {
                         if (updatedAddress.default_address) {
-                        this.customer.addresses.forEach(address => address.default_address = false);
+                            this.customer.addresses.forEach(address => address.default_address = false);
                         }
 
                         this.customer.addresses =this.customer.addresses.map(address => {
-                        if (address.id === updatedAddress.id) {
-                            return {
-                                ...updatedAddress,
-                                address: updatedAddress.address.join('\n'),
-                            };
-                        }
+                            if (address.id === updatedAddress.id) {
+                                return {
+                                    ...updatedAddress,
+                                    address: updatedAddress.address.join('\n'),
+                                };
+                            }
 
-                        return address;
+                            return address;
                         });
                     },
                 },

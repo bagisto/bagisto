@@ -233,7 +233,6 @@ return [
                             'empty-info'    => 'Arama terimi için ürün bulunamadı.',
                             'empty-title'   => 'Ürün bulunamadı',
                             'product-image' => 'Ürün Görseli',
-                            'qty'           => ':qty Mevcut',
                             'qty'           => 'Adet',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Ürünleri Ara',
@@ -266,7 +265,6 @@ return [
                         'state'            => 'Eyalet',
                         'street-address'   => 'Adres',
                         'telephone'        => 'Telefon',
-                        'title'            => 'Adres',
                         'title'            => 'Adres',
                     ],
 
