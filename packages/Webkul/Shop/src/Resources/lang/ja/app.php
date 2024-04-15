@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'ここで製品を検索',
                 'sign-in'           => 'サインイン',
                 'sign-up'           => '新規登録',
+                'submit'            => '送信',
                 'title'             => 'アカウント',
                 'welcome'           => 'ようこそ',
                 'welcome-guest'     => 'ゲストさん、ようこそ',
                 'wishlist'          => 'ウィッシュリスト',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'デフォルトのロケール',
+                    ],
+                ],
             ],
 
             'footer' => [

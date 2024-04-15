@@ -235,7 +235,6 @@ return [
                             'empty-info'    => 'Brak produktów dostępnych dla podanego terminu wyszukiwania.',
                             'empty-title'   => 'Nie znaleziono produktów',
                             'product-image' => 'Obraz produktu',
-                            'qty'           => ':qty dostępne',
                             'qty'           => 'Ilość',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Wyszukiwanie produktów',
@@ -268,7 +267,6 @@ return [
                         'state'            => 'Stan',
                         'street-address'   => 'Adres ulicy',
                         'telephone'        => 'Telefon',
-                        'title'            => 'Adres',
                         'title'            => 'Adres',
                     ],
 

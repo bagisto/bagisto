@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'Recherchez des produits ici',
                 'sign-in'           => 'Se connecter',
                 'sign-up'           => 'S\'inscrire',
+                'submit'            => 'Soumettre',
                 'title'             => 'Compte',
                 'welcome'           => 'Bienvenue',
                 'welcome-guest'     => 'Bienvenue, invité',
                 'wishlist'          => 'Liste de souhaits',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Langue par défaut',
+                    ],
+                ],
             ],
 
             'footer' => [

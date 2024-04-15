@@ -57,7 +57,7 @@
             <template v-if="! isLoading">
                 <div 
                     v-if="available.meta.total"
-                    class="grid gap-y-4 p-4 pt-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="grid gap-y-4 p-4 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="(record, index) in records"
                 >
                     <div class="flex justify-start [&amp;>*]:flex-1">
@@ -126,12 +126,6 @@
                         >
                         </a>
                     </div>
-
-                    <span
-                        v-if="index != records.length - 1"
-                        class="block w-full border-b dark:border-gray-800"
-                    >
-                    </span>
                 </div>
 
                 <div    

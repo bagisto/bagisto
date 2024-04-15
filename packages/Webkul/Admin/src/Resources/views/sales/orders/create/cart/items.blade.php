@@ -289,7 +289,10 @@
                                             <x-admin::form.control-group.error name="qty" />
                                         </x-admin::form.control-group>
 
-                                        <button class="text-sm text-blue-600 cursor-pointer transition-all hover:underline">
+                                        <button
+                                            class="text-sm text-blue-600 cursor-pointer transition-all hover:underline"
+                                            :disabled="! product.is_saleable"
+                                        >
                                             @lang('admin::app.sales.orders.create.cart.items.search.add-to-cart')
                                         </button>
                                     </div>

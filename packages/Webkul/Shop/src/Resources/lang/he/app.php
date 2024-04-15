@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'חפש מוצרים כאן',
                 'sign-in'           => 'התחבר',
                 'sign-up'           => 'הרשם',
+                'submit'            => 'שלח',
                 'title'             => 'חשבון',
                 'welcome'           => 'ברוך הבא',
                 'welcome-guest'     => 'ברוך הבא אורח',
                 'wishlist'          => 'רשימת משאלות',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'שפת ברירת מחדל',
+                    ],
+                ],
             ],
 
             'footer' => [

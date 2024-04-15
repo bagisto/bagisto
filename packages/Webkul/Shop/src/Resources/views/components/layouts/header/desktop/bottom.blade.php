@@ -31,10 +31,12 @@
                     class="shimmer w-20 h-6 rounded"
                     role="presentation"
                 ></span>
+
                 <span
                     class="shimmer w-20 h-6 rounded"
                     role="presentation"
                 ></span>
+
                 <span
                     class="shimmer w-20 h-6 rounded"
                     role="presentation"
@@ -77,7 +79,12 @@
                     required
                 >
 
-                <button type="submit" class="hidden" aria-label="Submit"></button>
+                <button
+                    type="submit"
+                    class="hidden"
+                    aria-label="@lang('shop::app.components.layouts.header.submit')"
+                >
+                </button>
 
                 @if (core()->getConfigData('general.content.shop.image_search'))
                     @include('shop::search.images.index')
@@ -247,10 +254,12 @@
                 class="shimmer w-20 h-6 rounded"
                 role="presentation"
             ></span>
+
             <span
                 class="shimmer w-20 h-6 rounded"
                 role="presentation"
             ></span>
+
             <span
                 class="shimmer w-20 h-6 rounded"
                 role="presentation"

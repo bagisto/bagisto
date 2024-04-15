@@ -235,7 +235,6 @@ return [
                             'empty-info'    => 'ප්‍රමාණයක් සඳහා නොපවතීයි.',
                             'empty-title'   => 'නිෂ්පාදන හමු නොවීය',
                             'product-image' => 'නිෂ්පාදන රූපය',
-                            'qty'           => ':qty ලබාදුන්',
                             'qty'           => 'ප්ලාස්',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'නිෂ්පාදන සෙවුම්',
@@ -268,7 +267,6 @@ return [
                         'state'            => 'පළාත',
                         'street-address'   => 'වීදි ලිපිනය',
                         'telephone'        => 'දුරකථන',
-                        'title'            => 'ලිපිනය',
                         'title'            => 'ලිපිනය',
                     ],
 

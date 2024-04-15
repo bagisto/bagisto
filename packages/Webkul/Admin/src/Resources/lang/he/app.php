@@ -235,7 +235,6 @@ return [
                             'empty-info'    => 'אין מוצרים זמינים עבור מונח החיפוש.',
                             'empty-title'   => 'לא נמצאו מוצרים',
                             'product-image' => 'תמונת מוצר',
-                            'qty'           => ':qty זמין',
                             'qty'           => 'כמות',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'חיפוש מוצרים',
@@ -268,7 +267,6 @@ return [
                         'state'            => 'מדינה',
                         'street-address'   => 'כתובת',
                         'telephone'        => 'טלפון',
-                        'title'            => 'כתובת',
                         'title'            => 'כתובת',
                     ],
 

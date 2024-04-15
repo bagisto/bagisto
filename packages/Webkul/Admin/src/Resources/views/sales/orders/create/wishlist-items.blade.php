@@ -110,19 +110,20 @@
 
                             <!-- Item Actions -->
                             <div class="flex gap-2.5 mt-2">
-                                <p
-                                    class="text-red-600 cursor-pointer transition-all hover:underline"
+                                <button
+                                    class="text-sm text-red-600 cursor-pointer transition-all hover:underline"
                                     @click="removeItem(item)"
                                 >
                                     @lang('admin::app.sales.orders.create.wishlist-items.delete')
-                                </p>
+                                </button>
 
-                                <p
-                                    class="text-emerald-600 cursor-pointer transition-all hover:underline"
+                                <button
+                                    class="text-sm text-emerald-600 cursor-pointer transition-all hover:underline"
+                                    :disabled="! item.product.is_saleable"
                                     @click="moveToCart(item)"
                                 >
                                     @lang('admin::app.sales.orders.create.wishlist-items.add-to-cart')
-                                </p>
+                                </button>
                             </div>
                         </div>
                     </div>

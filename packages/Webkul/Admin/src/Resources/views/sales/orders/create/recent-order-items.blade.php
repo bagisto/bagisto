@@ -118,12 +118,13 @@
                                     @lang('admin::app.sales.orders.create.recent-order-items.view')
                                 </a>
 
-                                <p
-                                    class="text-emerald-600 cursor-pointer transition-all hover:underline"
+                                <button
+                                    class="text-sm text-emerald-600 cursor-pointer transition-all hover:underline"
+                                    :disabled="! item.product.is_saleable"
                                     @click="moveToCart(item)"
                                 >
                                     @lang('admin::app.sales.orders.create.recent-order-items.add-to-cart')
-                                </p>
+                                </button>
                             </div>
                         </div>
                     </div>

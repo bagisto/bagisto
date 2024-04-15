@@ -235,7 +235,6 @@ return [
                             'empty-info'    => 'Geen producten beschikbaar voor zoekterm.',
                             'empty-title'   => 'Geen producten gevonden',
                             'product-image' => 'Productafbeelding',
-                            'qty'           => ':qty beschikbaar',
                             'qty'           => 'Aantal',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Producten zoeken',
@@ -268,7 +267,6 @@ return [
                         'state'            => 'Provincie',
                         'street-address'   => 'Straatnaam en huisnummer',
                         'telephone'        => 'Telefoonnummer',
-                        'title'            => 'Adres',
                         'title'            => 'Adres',
                     ],
 

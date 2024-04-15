@@ -235,7 +235,6 @@ return [
                             'empty-info'    => '没有可用于搜索词的产品。',
                             'empty-title'   => '未找到产品',
                             'product-image' => '产品图片',
-                            'qty'           => ':qty 可用',
                             'qty'           => '数量',
                             'sku'           => 'SKU - :sku',
                             'title'         => '搜索产品',
@@ -268,7 +267,6 @@ return [
                         'state'            => '省/州',
                         'street-address'   => '街道地址',
                         'telephone'        => '电话',
-                        'title'            => '地址',
                         'title'            => '地址',
                     ],
 

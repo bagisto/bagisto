@@ -311,7 +311,7 @@
 
                                                 @foreach ($locales as $value => $label)
                                                     <option value="{{ $value }}">
-                                                        @lang("installer::app.installer.index.$label")
+                                                        {{ ucfirst($label) }}
                                                     </option>
                                                 @endforeach
                                             </x-installer::form.control-group.control>
