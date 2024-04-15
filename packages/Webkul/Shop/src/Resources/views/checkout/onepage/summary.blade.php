@@ -4,7 +4,7 @@
 </h1>
 
 <!-- Cart Items -->
-<div class="grid mt-10 border-b border-[#E9E9E9] max-sm:mt-5">
+<div class="mt-10 grid border-b border-[#E9E9E9] max-sm:mt-5">
     <div
         class="flex gap-x-4 pb-5"
         v-for="item in cart.items"
@@ -12,7 +12,7 @@
         {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_image.before') !!}
 
         <img
-            class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
+            class="h-[90px] max-h-[90px] w-[90px] max-w-[90px] rounded-md"
             :src="item.base_image.small_image_url"
             :alt="item.name"
             width="110"
@@ -38,11 +38,11 @@
 </div>
 
 <!-- Cart Totals -->
-<div class="grid gap-4 mt-6 mb-8">
+<div class="mb-8 mt-6 grid gap-4">
     <!-- Sub Total -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.sub_total.before') !!}
 
-    <div class="flex text-right justify-between">
+    <div class="flex justify-between text-right">
         <p class="text-base max-sm:text-sm max-sm:font-normal">
             @lang('shop::app.checkout.onepage.summary.sub-total')
         </p>
@@ -59,7 +59,7 @@
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.tax.before') !!}
 
     <div
-        class="flex text-right justify-between"
+        class="flex justify-between text-right"
         v-for="(amount, index) in cart.base_tax_amounts"
         v-if="parseFloat(cart.base_tax_total)"
     >
@@ -78,7 +78,7 @@
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
 
     <div
-        class="flex text-right justify-between"
+        class="flex justify-between text-right"
         v-if="cart.selected_shipping_rate"
     >
         <p class="text-base">
@@ -96,7 +96,7 @@
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.discount_amount.before') !!}
 
     <div
-        class="flex text-right justify-between"
+        class="flex justify-between text-right"
         v-if="cart.base_discount_amount && parseFloat(cart.base_discount_amount) > 0"
     >
         <p class="text-base">
@@ -120,7 +120,7 @@
     <!-- Cart Grand Total -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.grand_total.before') !!}
 
-    <div class="flex text-right justify-between">
+    <div class="flex justify-between text-right">
         <p class="text-lg font-semibold">
             @lang('shop::app.checkout.onepage.summary.grand-total')
         </p>

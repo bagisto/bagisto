@@ -21,15 +21,15 @@
             <div class="relative">
                 <div
                     ref="swiperContainer"
-                    class="flex gap-10 overflow-auto scroll-smooth scrollbar-hide max-sm:gap-4"
+                    class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth max-sm:gap-4"
                 >
                     <div
-                        class="grid grid-cols-1 gap-4 justify-items-center min-w-[120px] max-w-[120px] font-medium"
+                        class="grid min-w-[120px] max-w-[120px] grid-cols-1 justify-items-center gap-4 font-medium"
                         v-for="category in categories"
                     >
                         <a
                             :href="category.slug"
-                            class="w-[110px] h-[110px] bg-[#F5F5F5] rounded-full"
+                            class="h-[110px] w-[110px] rounded-full bg-[#F5F5F5]"
                             :aria-label="category.name"
                         >
                             <template v-if="category.images.logo_url">
@@ -37,7 +37,7 @@
                                     ::src="category.images.logo_url"
                                     width="110"
                                     height="110"
-                                    class="w-[110px] h-[110px] rounded-full"
+                                    class="h-[110px] w-[110px] rounded-full"
                                     ::alt="category.name"
                                 />
                             </template>
@@ -48,7 +48,7 @@
                             class=""
                         >
                             <p
-                                class="text-center text-black text-lg max-sm:font-normal"
+                                class="text-center text-lg text-black max-sm:font-normal"
                                 v-text="category.name"
                             >
                             </p>
@@ -57,7 +57,7 @@
                 </div>
 
                 <span
-                    class="flex items-center justify-center absolute top-9 -left-10 w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-left-stylish text-2xl hover:bg-black hover:text-white max-lg:-left-7 cursor-pointer"
+                    class="icon-arrow-left-stylish absolute -left-10 top-9 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-left-7"
                     role="button"
                     aria-label="@lang('shop::components.carousel.previous')"
                     tabindex="0"
@@ -66,7 +66,7 @@
                 </span>
 
                 <span
-                    class="flex items-center justify-center absolute top-9 -right-6 w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-right-stylish text-2xl hover:bg-black hover:text-white max-lg:-right-7 cursor-pointer"
+                    class="icon-arrow-right-stylish absolute -right-6 top-9 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-right-7"
                     role="button"
                     aria-label="@lang('shop::components.carousel.next')"
                     tabindex="0"
