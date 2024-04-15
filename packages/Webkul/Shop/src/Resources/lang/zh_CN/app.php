@@ -341,10 +341,17 @@ return [
                 'search-text'       => '在此搜索产品',
                 'sign-in'           => '登录',
                 'sign-up'           => '注册',
+                'submit'            => '提交',
                 'title'             => '账户',
                 'welcome'           => '欢迎',
                 'welcome-guest'     => '欢迎访客',
                 'wishlist'          => '心愿单',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => '默认语言环境',
+                    ],
+                ],
             ],
 
             'footer' => [
