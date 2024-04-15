@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Il tuo ordine è stato annullato',
                     'page-title'         => 'Ordine #:order_id',
                     'payment-method'     => 'Metodo di Pagamento',
+                    'reorder-btn-title'  => 'Riordinare',
                     'shipping-address'   => 'Indirizzo di Spedizione',
                     'shipping-method'    => 'Metodo di Spedizione',
                     'title'              => 'Visualizza',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Cerca prodotti qui',
                 'sign-in'           => 'Accedi',
                 'sign-up'           => 'Registrati',
+                'submit'            => 'Invia',
                 'title'             => 'Account',
                 'welcome'           => 'Benvenuto',
                 'welcome-guest'     => 'Benvenuto Ospite',
                 'wishlist'          => 'Lista dei desideri',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Lingua predefinita',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continua al pagamento',
             'illegal'                   => 'La quantità non può essere inferiore a uno.',
+            'inactive-add'              => 'L\'articolo inattivo non può essere aggiunto al carrello.',
             'inactive'                  => 'L\'articolo è stato disattivato e rimosso dal carrello.',
             'inventory-warning'         => 'La quantità richiesta non è disponibile, riprova più tardi.',
             'item-add-to-cart'          => 'Articolo aggiunto con successo',

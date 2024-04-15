@@ -134,7 +134,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'Замовлення',
+                'create-btn' => 'Створити замовлення',
+                'title'      => 'Замовлення',
+
+                'search-customer' => [
+                    'create-btn'  => 'Створити клієнта',
+                    'empty-info'  => 'Немає доступних клієнтів за вказаним пошуковим запитом.',
+                    'empty-title' => 'Клієнти не знайдені',
+                    'search-by'   => 'Пошук за електронною поштою або ім\'ям',
+                    'title'       => 'Вибрати клієнта',
+                ],
 
                 'datagrid' => [
                     'canceled'         => 'Скасовано',
@@ -152,13 +161,172 @@ return [
                     'order-id'         => 'Номер замовлення',
                     'pay-by'           => 'Сплачено через - :method',
                     'pay-via'          => 'Сплатити через',
-                    'pending'          => 'В очікуванні',
                     'pending-payment'  => 'Очікується оплата',
+                    'pending'          => 'В очікуванні',
                     'processing'       => 'Обробка',
                     'product-count'    => ':count + Ще більше продуктів',
                     'status'           => 'Статус',
                     'success'          => 'Успішно',
                     'view'             => 'Перегляд',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'Додати в кошик',
+                'back-btn'                => 'Назад',
+                'check-billing-address'   => 'Відсутня адреса для виставлення рахунку.',
+                'check-shipping-address'  => 'Відсутня адреса доставки.',
+                'configuration'           => 'Конфігурація',
+                'coupon-already-applied'  => 'Код купона вже застосований.',
+                'coupon-applied'          => 'Код купона успішно застосований.',
+                'coupon-error'            => 'Не вдалося застосувати код купона.',
+                'coupon-not-found'        => 'Код купона не знайдено',
+                'coupon-remove'           => 'Код купона успішно видалено.',
+                'error'                   => 'Щось пішло не так',
+                'minimum-order-error'     => 'Мінімальна сума замовлення не досягнута.',
+                'order-placed-success'    => 'Замовлення успішно оформлено.',
+                'payment-not-supported'   => 'Цей спосіб оплати не підтримується',
+                'save-btn'                => 'Створити замовлення',
+                'specify-payment-method'  => 'Відсутній спосіб оплати.',
+                'specify-shipping-method' => 'Відсутній спосіб доставки.',
+                'title'                   => 'Створити замовлення для :name',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'Будь ласка, виберіть опцію',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'Немає',
+                        'total-amount' => 'Загальна сума',
+                    ],
+
+                    'grouped' => [
+                        'name' => 'Назва',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'Посилання',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => 'Товар успішно додано в кошик',
+                    'success-remove'      => 'Елемент успішно видалено з кошика',
+                    'success-update'      => 'Елемент кошика успішно оновлено',
+
+                    'items' => [
+                        'add-product'       => 'Додати товар',
+                        'amount-per-unit'   => ':amount за одиницю x :qty Кількість',
+                        'delete'            => 'Видалити',
+                        'empty-description' => 'В кошику немає товарів.',
+                        'empty-title'       => 'Порожній кошик',
+                        'move-to-wishlist'  => 'Перемістити в список бажань',
+                        'see-details'       => 'Детальніше',
+                        'sku'               => 'Артикул - :sku',
+                        'sub-total'         => 'Підсумок - :sub_total',
+                        'title'             => 'Товари в кошику',
+
+                        'search' => [
+                            'add-to-cart'   => 'Додати в кошик',
+                            'available-qty' => ':qty доступно',
+                            'empty-info'    => 'Немає товарів за вказаним пошуковим запитом.',
+                            'empty-title'   => 'Товари не знайдені',
+                            'product-image' => 'Зображення товару',
+                            'qty'           => 'Кількість',
+                            'sku'           => 'Артикул - :sku',
+                            'title'         => 'Пошук товарів',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => 'Додати адресу',
+                        'add-new-address'  => 'Додати нову адресу',
+                        'add-new'          => 'Додати нову адресу',
+                        'addresses'        => 'Адреси',
+                        'back'             => 'Назад',
+                        'billing-address'  => 'Адреса для виставлення рахунку',
+                        'city'             => 'Місто',
+                        'company-name'     => 'Назва компанії',
+                        'confirm'          => 'Підтвердити',
+                        'country'          => 'Країна',
+                        'edit-btn'         => 'Редагувати адресу',
+                        'email'            => 'Електронна пошта',
+                        'first-name'       => 'Ім\'я',
+                        'last-name'        => 'Прізвище',
+                        'postcode'         => 'Поштовий індекс',
+                        'proceed'          => 'Продовжити',
+                        'same-as-billing'  => 'Використовувати ту саму адресу для доставки?',
+                        'save-address'     => 'Зберегти в адресну книгу',
+                        'save'             => 'Зберегти',
+                        'select-country'   => 'Виберіть країну',
+                        'select-state'     => 'Виберіть область',
+                        'shipping-address' => 'Адреса доставки',
+                        'state'            => 'Область',
+                        'street-address'   => 'Вулиця, будинок',
+                        'telephone'        => 'Телефон',
+                        'title'            => 'Адреса',
+                    ],
+
+                    'payment' => [
+                        'title' => 'Оплата',
+                    ],
+
+                    'shipping' => [
+                        'title' => 'Доставка',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'Застосувати купон',
+                        'discount-amount' => 'Сума знижки',
+                        'enter-your-code' => 'Введіть код',
+                        'grand-total'     => 'Загальна сума',
+                        'place-order'     => 'Оформити замовлення',
+                        'processing'      => 'Обробка',
+                        'shipping-amount' => 'Вартість доставки',
+                        'sub-total'       => 'Підсумок',
+                        'tax'             => 'Податок',
+                        'title'           => 'Підсумок замовлення',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'Додати в кошик',
+                    'delete'            => 'Видалити',
+                    'empty-description' => 'В кошику немає товарів.',
+                    'empty-title'       => 'Порожній кошик',
+                    'see-details'       => 'Детальніше',
+                    'sku'               => 'Артикул - :sku',
+                    'title'             => 'Товари в кошику',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'Додати в кошик',
+                    'empty-description' => 'В вашому списку останніх замовлень немає товарів.',
+                    'empty-title'       => 'Порожні замовлення',
+                    'see-details'       => 'Детальніше',
+                    'sku'               => 'Артикул - :sku',
+                    'title'             => 'Товари з останніх замовлень',
+                    'view'              => 'Перегляд',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'Додати в кошик',
+                    'delete'            => 'Видалити',
+                    'empty-description' => 'В вашому списку бажань немає товарів.',
+                    'empty-title'       => 'Порожній список бажань',
+                    'see-details'       => 'Детальніше',
+                    'sku'               => 'Артикул - :sku',
+                    'title'             => 'Товари в списку бажань',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'Додати в кошик',
+                    'delete'            => 'Видалити',
+                    'empty-description' => 'В вашому списку порівняння немає товарів.',
+                    'empty-title'       => 'Порожній список порівняння',
+                    'sku'               => 'Артикул - :sku',
+                    'title'             => 'Товари в списку порівняння',
                 ],
             ],
 
@@ -211,6 +379,7 @@ return [
                 'refund'                => 'Повернення',
                 'refund-id'             => 'Повернення #:refund',
                 'refunded'              => 'Повернуто',
+                'reorder'               => 'Перепорядкувати',
                 'ship'                  => 'Відправити',
                 'shipment'              => 'Відвантаження #:shipment',
                 'shipments'             => 'Відвантаження',
@@ -1228,11 +1397,12 @@ return [
                 'active'                      => 'Активний',
                 'address-delete-confirmation' => 'Ви впевнені, що хочете видалити цю адресу?',
                 'back-btn'                    => 'Назад',
+                'create-order'                => 'Створити замовлення',
                 'customer'                    => 'Клієнт',
                 'date-of-birth'               => 'Дата народження - :dob',
                 'default-address'             => 'Адреса за замовчуванням',
-                'delete'                      => 'Видалити',
                 'delete-account'              => 'Видалити обліковий запис',
+                'delete'                      => 'Видалити',
                 'email'                       => 'Електронна пошта - :email',
                 'empty-description'           => 'Створіть нові адреси для клієнта',
                 'empty-title'                 => 'Додати адресу клієнта',
@@ -1241,6 +1411,7 @@ return [
                 'inactive'                    => 'Неактивний',
                 'login-as-customer'           => 'Увійти як клієнт',
                 'note-created-success'        => 'Примітка успішно створена',
+                'order-create-confirmation'   => 'Ви впевнені, що хочете створити замовлення для цього клієнта?',
                 'phone'                       => 'Телефон - :phone',
                 'set-as-default'              => 'Встановити за замовчуванням',
                 'suspended'                   => 'Призупинено',
@@ -1364,8 +1535,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'Рахунки-фактури (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'Рахунки-фактури (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1379,14 +1550,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'Замовлення (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'Загальний дохід - :revenue',
+                    'count'         => 'Замовлення (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'Загальний дохід - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'Ідентифікатор - :id',
-                    'count'       => 'Відгуки (:count)',
+                    'id'    => 'Ідентифікатор - :id',
+                    'count' => 'Відгуки (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'Елемент кошика успішно видалено.',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'Елемент списку бажань успішно видалено.',
+                ],
+
+                'compare' => [
+                    'delete-success' => 'Елемент порівняння успішно видалено.',
                 ],
             ],
 

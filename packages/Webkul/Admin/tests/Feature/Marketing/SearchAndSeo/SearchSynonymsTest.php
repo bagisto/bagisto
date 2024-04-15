@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should show the search synonyms index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.search_seo.search_synonyms.index'))
@@ -18,7 +18,7 @@ it('should show the search synonyms index page', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when store the search synonyms', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_synonyms.store'))
@@ -28,7 +28,7 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should store the newly created search synonyms', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_synonyms.store'), [
@@ -49,10 +49,10 @@ it('should store the newly created search synonyms', function () {
 });
 
 it('should fail the validation with errors when certain field not provided when update the search synonyms', function () {
-    // Arrange
+    // Arrange.
     $searchSynonym = SearchSynonym::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.search_synonyms.update', $searchSynonym->id))
@@ -62,10 +62,10 @@ it('should fail the validation with errors when certain field not provided when 
 });
 
 it('should update the search synonyms', function () {
-    // Arrange
+    // Arrange.
     $searchSynonym = SearchSynonym::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.search_synonyms.update'), [
@@ -88,10 +88,10 @@ it('should update the search synonyms', function () {
 });
 
 it('should delete the search synonyms', function () {
-    // Arrange
+    // Arrange.
     $searchSynonym = SearchSynonym::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.search_seo.search_synonyms.delete', $searchSynonym->id))
@@ -104,10 +104,10 @@ it('should delete the search synonyms', function () {
 });
 
 it('should mass delete the search synonyms', function () {
-    // Arrange
+    // Arrange.
     $searchSynonyms = SearchSynonym::factory()->count(2)->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_synonyms.mass_delete'), [

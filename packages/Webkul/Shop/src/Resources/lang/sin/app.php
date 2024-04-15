@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'ඔබගේ ඇණවුම අවලංගු කර ඇත',
                     'page-title'         => 'ඇණවුම #:order_id',
                     'payment-method'     => 'ගෙවීමේ ක්‍රමය',
+                    'reorder-btn-title'  => 'නැවත තේරීම',
                     'shipping-address'   => 'ගෙවීමේ ලිපිනය',
                     'shipping-method'    => 'භාණ්ඩ ප්රවාහන ක්රමය',
                     'title'              => 'දරුවනය',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'උදා: උදාමාන්ද්‍ර',
                 'sign-in'           => 'පිවිසීම',
                 'sign-up'           => 'ලියාපදිංචිය',
+                'submit'            => 'ඉදිරිපත් කරන්න',
                 'title'             => 'ගිණුම',
                 'welcome'           => 'ස්වයං',
                 'welcome-guest'     => 'උරුම පරිසරය',
                 'wishlist'          => 'පෙරනිම',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'පෙරනිමි භාෂාව',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'පරියේෂයට කිරීමට සහාය',
             'illegal'                   => 'අයිතමයක් එක් අඩංගු වේ නැත.',
+            'inactive-add'              => 'අක්‍රීය අයිතමය කරුණු කැට්එකට එක් කළ නොහැක.',
             'inactive'                  => 'අයිතමය අක්‍රීය වී ඇත්තේ, එවිට සාර්ථකව ඉවත් කරන ලදි.',
             'inventory-warning'         => 'ඉල්ලීම් ප්රමාණය සඳහා ඉල්ලීම් නොමැත, කරුණු නැවත උත්සාහ කරන්න.',
             'item-add-to-cart'          => 'අයිතමය සාර්ථකයි',

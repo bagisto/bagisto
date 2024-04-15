@@ -9,7 +9,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should return attribute family listing page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.families.index'))
@@ -19,10 +19,10 @@ it('should return attribute family listing page', function () {
 });
 
 it('should return listing items of attribute family', function () {
-    // Arrange
+    // Arrange.
     $attributeFamily = AttributeFamilyModel::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.catalog.families.index'), [
@@ -35,7 +35,7 @@ it('should return listing items of attribute family', function () {
 });
 
 it('should return attribute family create page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.families.create'))
@@ -45,11 +45,11 @@ it('should return attribute family create page', function () {
 });
 
 it('should store newly created attribute family', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.families.store'), [
-        'code'             => $code = strtolower(fake()->words(1, true)),
+        'code'             => $code = fake()->numerify('code########'),
         'name'             => $name = fake()->name(),
         'attribute_groups' => [
             [
@@ -73,7 +73,7 @@ it('should store newly created attribute family', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in attribute family', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.families.store'))
@@ -83,10 +83,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should return edit page of attribute families', function () {
-    // Arrange
+    // Arrange.
     $attributeFamily = AttributeFamilyModel::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.families.edit', $attributeFamily->id))
@@ -96,10 +96,10 @@ it('should return edit page of attribute families', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in attribute family', function () {
-    // Arrange
+    // Arrange.
     $attributeFamily = AttributeFamilyModel::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.families.update', $attributeFamily->id))
@@ -109,14 +109,14 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update the existing attribute families', function () {
-    // Arrange
+    // Arrange.
     $attributeFamily = AttributeFamilyModel::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.families.update', $attributeFamily->id), [
-        'code' => $updatedCode = strtolower(fake()->words(1, true)),
+    putJson(route('admin.catalog.families.update', $attributeFamily->id), $data = [
+        'code' => fake()->numerify('code#######'),
         'name' => $attributeFamily->name,
     ])
         ->assertRedirectToRoute('admin.catalog.families.index')
@@ -124,19 +124,16 @@ it('should update the existing attribute families', function () {
 
     $this->assertModelWise([
         AttributeFamilyModel::class => [
-            [
-                'code' => $updatedCode,
-                'name' => $attributeFamily->name,
-            ],
+            $data,
         ],
     ]);
 });
 
 it('should delete the existing attribute family', function () {
-    // Arrange
+    // Arrange.
     $attributeFamily = AttributeFamilyModel::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.families.delete', $attributeFamily->id))
@@ -149,7 +146,7 @@ it('should delete the existing attribute family', function () {
 });
 
 it('should not be able to delete the attribute family if the attribute family is the only one present', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.families.delete', $attributeFamilyId = 1))
