@@ -28,7 +28,7 @@
                 <x-shop::accordion class="!border-b-0">
                     <!-- Accordion Blade Component Header -->
                     <x-slot:header class="!p-0">
-                        <div class="flex justify-between items-center">
+                        <div class="flex items-center justify-between">
                             <h2 class="text-2xl font-medium max-sm:text-xl">
                                 @lang('shop::app.checkout.onepage.payment.payment-method')
                             </h2>
@@ -36,10 +36,10 @@
                     </x-slot>
     
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="!p-0 mt-8">
+                    <x-slot:content class="mt-8 !p-0">
                         <div class="flex flex-wrap gap-7">
                             <div 
-                                class="relative max-sm:max-w-full max-sm:flex-auto cursor-pointer"
+                                class="relative cursor-pointer max-sm:max-w-full max-sm:flex-auto"
                                 v-for="(payment, index) in methods"
                             >
                                 {!! view_render_event('bagisto.shop.checkout.payment-method.before') !!}
@@ -49,24 +49,24 @@
                                     name="payment[method]" 
                                     :value="payment.payment"
                                     :id="payment.method"
-                                    class="hidden peer"    
+                                    class="peer hidden"    
                                     @change="store(payment)"
                                 >
     
                                 <label 
                                     :for="payment.method" 
-                                    class="absolute ltr:right-5 rtl:left-5 top-5 icon-radio-unselect text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                    class="icon-radio-unselect peer-checked:icon-radio-select absolute top-5 cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5"
                                 >
                                 </label>
 
                                 <label 
                                     :for="payment.method" 
-                                    class="w-[190px] p-5 block border border-[#E9E9E9] rounded-xl max-sm:w-full cursor-pointer"
+                                    class="block w-[190px] cursor-pointer rounded-xl border border-[#E9E9E9] p-5 max-sm:w-full"
                                 >
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.before') !!}
 
                                     <img
-                                        class="max-w-[55px] max-h-[45px]"
+                                        class="max-h-[45px] max-w-[55px]"
                                         :src="payment.image"
                                         width="55"
                                         height="55"
@@ -78,7 +78,7 @@
 
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.before') !!}
 
-                                    <p class="text-sm font-semibold mt-1.5">
+                                    <p class="mt-1.5 text-sm font-semibold">
                                         @{{ payment.method_title }}
                                     </p>
                                     
@@ -86,7 +86,7 @@
 
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.before') !!}
 
-                                    <p class="text-xs font-medium mt-2.5">
+                                    <p class="mt-2.5 text-xs font-medium">
                                         @{{ payment.description }}
                                     </p> 
 

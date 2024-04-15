@@ -9,9 +9,9 @@
         type="text/x-template"
         id="v-table-template"
     >
-        <div class="w-full overflow-x-auto border rounded-xl">
+        <div class="w-full overflow-x-auto rounded-xl border">
             <!-- Main Table -->
-            <div class="table-responsive grid w-full box-shadow rounded bg-white overflow-hidden">
+            <div class="table-responsive box-shadow grid w-full overflow-hidden rounded bg-white">
                 <slot name="header">
                     <template v-if="$parent.isLoading">
                         <x-shop::shimmer.datagrid.table.head :isMultiRow="$isMultiRow" />
@@ -19,7 +19,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid gap-2.5 px-6 py-4 font-medium border-b border-[#E9E9E9] text-sm bg-[#F5F5F5] text-black items-center"
+                            class="row grid items-center gap-2.5 border-b border-[#E9E9E9] bg-[#F5F5F5] px-6 py-4 text-sm font-medium text-black"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -57,7 +57,7 @@
                                 @{{ column.label }}
 
                                 <i
-                                    class="text-base text-gray-800 align-text-bottom"
+                                    class="align-text-bottom text-base text-gray-800"
                                     :class="[$parent.applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
                                     v-if="column.index == $parent.applied.sort.column"
                                 ></i>
@@ -83,7 +83,7 @@
                         <template v-if="$parent.available.records.length">
                             <div>
                                 <div
-                                    class="row grid gap-2.5 items-center px-6 py-4 bg-white border-b text-gray-600 transition-all font-medium"
+                                    class="row grid items-center gap-2.5 border-b bg-white px-6 py-4 font-medium text-gray-600 transition-all"
                                     v-for="record in $parent.available.records"
                                     :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                                 >
@@ -100,7 +100,7 @@
                                                 @change="$parent.setCurrentSelectionMode"
                                             >
 
-                                            <span class="icon-uncheck cursor-pointer rounded-md text-2xl peer-checked:icon-check-box">
+                                            <span class="icon-uncheck peer-checked:icon-check-box cursor-pointer rounded-md text-2xl">
                                             </span>
                                         </label>
                                     </p>
@@ -139,7 +139,7 @@
                         </template>
 
                         <template v-else>
-                            <div class="row grid px-4 py-4 border-b border-gray-300 text-gray-600 text-center">
+                            <div class="row grid border-b border-gray-300 px-4 py-4 text-center text-gray-600">
                                 <p>
                                     @lang('shop::app.components.datagrid.table.no-records-available')
                                 </p>
@@ -155,7 +155,7 @@
 
                     <template v-else>
                         <!-- Information Panel -->
-                        <div v-if="$parent.available.records.length" class="flex justify-between items-center p-6">
+                        <div v-if="$parent.available.records.length" class="flex items-center justify-between p-6">
                             <p class="text-xs font-medium">
                                 <p class="text-xs font-medium">
                                     @{{ "@lang('shop::app.components.datagrid.table.showing')".replace(':firstItem', $parent.available.meta.from) }}
@@ -186,7 +186,7 @@
                                     <li @click="$parent.changePage('previous')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] ltr:rounded-l-lg rtl:rounded-r-lg leading-normal font-medium hover:bg-gray-100"
+                                            class="flex h-[37px] w-[35px] items-center justify-center border border-[#E9E9E9] font-medium leading-normal hover:bg-gray-100 ltr:rounded-l-lg rtl:rounded-r-lg"
                                             aria-label="@lang('shop::app.components.datagrid.table.previous-page')"
                                         >
                                             <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
@@ -197,7 +197,7 @@
                                         <input
                                             type="text"
                                             :value="$parent.available.meta.current_page"
-                                            class="px-4 pt-1.5 pb-1.5 max-w-[42px] border border-[#E9E9E9] leading-normal text-black font-medium text-center hover:bg-gray-100"
+                                            class="max-w-[42px] border border-[#E9E9E9] px-4 pb-1.5 pt-1.5 text-center font-medium leading-normal text-black hover:bg-gray-100"
                                             @change="$parent.changePage(parseInt($event.target.value))"
                                             aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                         >
@@ -206,7 +206,7 @@
                                     <li @click="$parent.changePage('next')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] ltr:rounded-r-lg rtl:rounded-l-lg leading-normal font-medium hover:bg-gray-100"
+                                            class="flex h-[37px] w-[35px] items-center justify-center border border-[#E9E9E9] font-medium leading-normal hover:bg-gray-100 ltr:rounded-r-lg rtl:rounded-l-lg"
                                             aria-label="@lang('shop::app.components.datagrid.table.next-page')"
                                         >
                                             <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>

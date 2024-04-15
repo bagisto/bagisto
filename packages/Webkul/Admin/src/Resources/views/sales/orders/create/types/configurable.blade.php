@@ -22,7 +22,7 @@
             <template v-for='(attribute, index) in childAttributes'>
                 <x-admin::form.control-group>
                     <!-- Dropdown Options Container -->
-                    <x-admin::form.control-group.label class="!mt-0 required">
+                    <x-admin::form.control-group.label class="required !mt-0">
                         @{{ attribute.label }}
                     </x-admin::form.control-group.label>
                     

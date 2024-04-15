@@ -20,7 +20,7 @@
     >
         <div class="flex">
             <span
-                class="icon-star-fill text-2xl cursor-pointer"
+                class="icon-star-fill cursor-pointer text-2xl"
                 role="presentation"
                 v-for="rating in availableRatings"
                 v-if="! disabled"

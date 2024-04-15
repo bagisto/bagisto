@@ -14,27 +14,27 @@
         id="v-cart-summary-template"
     >
         <div
-            class="bg-white dark:bg-gray-900 rounded box-shadow"
+            class="box-shadow rounded bg-white dark:bg-gray-900"
             id="review-step-container"
         >
-            <div class="flex items-center p-4 border-b dark:border-gray-800">
-                <p class="text-base text-gray-800 dark:text-white font-semibold">
+            <div class="flex items-center border-b p-4 dark:border-gray-800">
+                <p class="text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.sales.orders.create.cart.summary.title')
                 </p>
             </div>
 
             <!-- Cart Totals -->
-            <div class="grid w-full gap-2.5 justify-end p-4 border-b dark:border-gray-800">
+            <div class="grid w-full justify-end gap-2.5 border-b p-4 dark:border-gray-800">
                 <div class="grid gap-4">
                     <!-- Sub Total -->
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.sub_total.before') !!}
 
-                    <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between">
-                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
+                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.orders.create.cart.summary.sub-total')
                         </p>
 
-                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
+                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @{{ cart.base_sub_total }}
                         </p>
                     </div>
@@ -46,15 +46,15 @@
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.tax.before') !!}
 
                     <div
-                        class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between"
+                        class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right"
                         v-for="(amount, index) in cart.base_tax_amounts"
                         v-if="parseFloat(cart.base_tax_total)"
                     >
-                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
+                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.orders.create.cart.summary.tax') (@{{ index }})%
                         </p>
 
-                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
+                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @{{ amount }}
                         </p>
                     </div>
@@ -65,14 +65,14 @@
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.delivery_charges.before') !!}
 
                     <div
-                        class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between"
+                        class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right"
                         v-if="cart.selected_shipping_rate"
                     >
-                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
+                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.orders.create.cart.summary.shipping-amount')
                         </p>
 
-                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
+                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @{{ cart.selected_shipping_rate }}
                         </p>
                     </div>
@@ -83,14 +83,14 @@
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.discount_amount.before') !!}
 
                     <div
-                        class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between"
+                        class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right"
                         v-if="parseFloat(cart.base_discount_amount)"
                     >
-                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
+                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.orders.create.cart.summary.discount-amount')
                         </p>
 
-                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
+                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @{{ cart.formatted_base_discount_amount }}
                         </p>
                     </div>
@@ -101,17 +101,17 @@
                     <!-- Discount -->
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.coupon.before') !!}
 
-                    <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-items-end">
-                        <p class="text-base text-gray-600 dark:text-gray-300 font-medium">
+                    <div class="row grid grid-cols-2 grid-rows-1 justify-items-end gap-4 text-right">
+                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.orders.create.cart.summary.apply-coupon')
                         </p>
 
                         <template v-if="cart.coupon_code">
-                            <p class="flex gap-1 items-center text-base text-green-600 font-medium">
+                            <p class="flex items-center gap-1 text-base font-medium text-green-600">
                                 @{{ cart.coupon_code }}
 
                                 <span
-                                    class="icon-cancel text-2xl cursor-pointer"
+                                    class="icon-cancel cursor-pointer text-2xl"
                                     @click="destroyCoupon"
                                 >
                                 </span>
@@ -119,9 +119,9 @@
                         </template>
 
                         <template v-else>
-                            <p class="text-base text-gray-600 font-medium">
+                            <p class="text-base font-medium text-gray-600">
                                 <span
-                                    class="text-blue-600 cursor-pointer"
+                                    class="cursor-pointer text-blue-600"
                                     @click="$refs.couponModel.open()"
                                 >
                                     @lang('admin::app.sales.orders.create.cart.summary.apply-coupon')
@@ -137,7 +137,7 @@
                     <!-- Cart Grand Total -->
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.grand_total.before') !!}
 
-                    <div class="row grid-cols-2 grid-rows-1 grid gap-4 text-right justify-between">
+                    <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
                         <p class="text-lg font-semibold dark:text-white">
                             @lang('admin::app.sales.orders.create.cart.summary.grand-total')
                         </p>
@@ -154,7 +154,7 @@
             <div class="flex w-full justify-end p-4">
                 <x-shop::button
                     type="button"
-                    class="primary-button w-max py-3 px-11"
+                    class="primary-button w-max px-11 py-3"
                     :title="trans('shop::app.checkout.onepage.summary.place-order')"
                     ::disabled="isPlacingOrder"
                     ::loading="isPlacingOrder"

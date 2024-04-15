@@ -22,16 +22,16 @@
 
                 {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.edit_form_controls.before') !!}
 
-                <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                    <p class="text-xl text-gray-800 dark:text-white font-bold">
+                <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+                    <p class="text-xl font-bold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.taxes.rates.edit.title')
                     </p>
     
-                    <div class="flex gap-x-2.5 items-center">
+                    <div class="flex items-center gap-x-2.5">
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.settings.taxes.rates.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                            class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                         >
                             @lang('admin::app.settings.taxes.rates.edit.back-btn')
                         </a>
@@ -47,10 +47,10 @@
                 </div>
     
                 <!-- Tax Rates Informations -->
-                <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+                <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                     <!-- Left component -->
-                    <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
-                        <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                    <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
+                        <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                             <!-- Identifier -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -169,14 +169,14 @@
                     </div>
                 
                     <!-- Right sub-component -->
-                    <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+                    <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
                         {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.card.accordion.basic_settings.before') !!}
 
                         <!-- Basic Settings -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.settings.taxes.rates.edit.basic-settings')
                                 </p>
                             </x-slot>

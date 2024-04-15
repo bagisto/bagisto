@@ -20,7 +20,7 @@
             <div class="grid gap-2">
                 <!-- Links -->
                 <div
-                    class="flex gap-x-4 items-center select-none"
+                    class="flex select-none items-center gap-x-4"
                     v-for="(link, index) in links"
                 >
                     <x-admin::form.control-group.control
@@ -34,7 +34,7 @@
                     />
 
                     <label
-                        class="text-sm text-[#6E6E6E] dark:text-gray-300 cursor-pointer"
+                        class="cursor-pointer text-sm text-[#6E6E6E] dark:text-gray-300"
                         :for="'links[' + index + ']'"
                     >
                         @{{ link.title + ' + ' + link.formatted_price }}
