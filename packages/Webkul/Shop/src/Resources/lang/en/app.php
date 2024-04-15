@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'Search products here',
                 'sign-in'           => 'Sign In',
                 'sign-up'           => 'Sign Up',
+                'submit'            => 'Submit',
                 'title'             => 'Account',
                 'welcome'           => 'Welcome',
                 'welcome-guest'     => 'Welcome Guest',
                 'wishlist'          => 'Wishlist',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Default locale',
+                    ],
+                ],
             ],
 
             'footer' => [
