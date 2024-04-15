@@ -496,8 +496,8 @@ class Cart
     public function setCustomerPersonnelDetails(): void
     {
         $this->cart->customer_email = $this->cart->customer?->email ?? $this->cart->billing_address->email;
-        $this->cart->customer_first_name = $this->cart->customer?->first_name ?? $this->cart->billing_address->email;
-        $this->cart->customer_last_name = $this->cart->customer?->last_name ?? $this->cart->billing_address->email;
+        $this->cart->customer_first_name = $this->cart->customer?->first_name ?? $this->cart->billing_address->first_name;
+        $this->cart->customer_last_name = $this->cart->customer?->last_name ?? $this->cart->billing_address->last_name;
 
         $this->cart->save();
     }
