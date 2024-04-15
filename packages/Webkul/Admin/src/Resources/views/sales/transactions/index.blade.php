@@ -4,12 +4,12 @@
         @lang('admin::app.sales.transactions.index.title')
     </x-slot>
 
-    <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="text-xl text-gray-800 dark:text-white font-bold">
+    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+        <p class="text-xl font-bold text-gray-800 dark:text-white">
             @lang('admin::app.sales.transactions.index.title')
         </p>
 
-        <div class="flex gap-x-2.5 items-center">
+        <div class="flex items-center gap-x-2.5">
 
             <!-- Export Modal -->
             <x-admin::datagrid.export  src="{{ route('admin.sales.transactions.index') }}" />
@@ -53,7 +53,7 @@
                     <template v-else>
                         <div
                             v-for="record in available.records"
-                            class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- ID -->
@@ -111,7 +111,7 @@
                                         @click="view(record.actions.find(action => action.title === 'View')?.url)"
                                     >
                                         <span
-                                            class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                            class="icon-sort-right cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
                                             role="button"
                                             tabindex="0"
                                         >
@@ -125,7 +125,7 @@
             </x-admin::datagrid>
 
             <!-- Drawer content -->
-            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
                 <x-admin::drawer ref="transaction">
                     <!-- Drawer Header -->
                     <x-slot:header>
@@ -139,7 +139,7 @@
                     <!-- Drawer Content -->
                     <x-slot:content>
                         <div class="flex flex-col gap-4 px-1.5 py-2.5">
-                            <p class="text-lg text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-lg font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.transactions.index.view.transaction-data')
                             </p>
 
@@ -251,7 +251,7 @@
                         <x-admin::modal ref="transactionModel">
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <p class="text-lg text-gray-800 dark:text-white font-bold">
+                                <p class="text-lg font-bold text-gray-800 dark:text-white">
                                     @lang('admin::app.sales.transactions.index.create.create-transaction')
                                 </p>
                             </x-slot>
@@ -259,7 +259,7 @@
                             <!-- Modal Content -->
                             <x-slot:content>
                                 <!-- Invoice Id -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="mb-2.5 w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.sales.transactions.index.create.invoice-id')
                                     </x-admin::form.control-group.label>
@@ -277,7 +277,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Payment Method -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="mb-2.5 w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.sales.transactions.index.create.payment-method')
                                     </x-admin::form.control-group.label>
@@ -302,7 +302,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Amount -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="mb-2.5 w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.sales.transactions.index.create.amount')
                                     </x-admin::form.control-group.label>
@@ -323,7 +323,7 @@
                             <!-- Modal Footer -->
                             <x-slot:footer>
                                 <!-- Modal Submission -->
-                                <div class="flex gap-x-2.5 items-center">
+                                <div class="flex items-center gap-x-2.5">
                                     <!-- Save Button -->
                                     <button
                                         type="submit"

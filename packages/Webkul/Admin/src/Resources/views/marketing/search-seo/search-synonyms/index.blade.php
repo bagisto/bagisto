@@ -7,8 +7,8 @@
 
     <!-- Create Sitemap Vue Component -->
     <v-create-sitemaps>
-        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.marketing.search-seo.search-synonyms.index.title')
             </p>
 
@@ -31,8 +31,8 @@
             type="text/x-template"
             id="v-create-sitemaps-template"
         >
-            <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                <p class="text-xl text-gray-800 dark:text-white font-bold">
+            <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+                <p class="text-xl font-bold text-gray-800 dark:text-white">
                     @lang('admin::app.marketing.search-seo.search-synonyms.index.title')
                 </p>
 
@@ -68,7 +68,7 @@
                     <template v-else>
                         <div
                             v-for="record in available.records"
-                            class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -83,7 +83,7 @@
                                         v-model="applied.massActions.indices"
                                     >
 
-                                    <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-2xl">
+                                    <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600">
                                     </span>
                                 </label>
                             </p>
@@ -142,7 +142,7 @@
                         <x-slot:header>
                             <!-- Create Modal title -->
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-if="selectedSitemap"
                             >
                                 @lang('admin::app.marketing.search-seo.search-synonyms.index.edit.title')
@@ -150,7 +150,7 @@
 
                             <!-- Edit Modal title -->
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-else
                             >
                                 @lang('admin::app.marketing.search-seo.search-synonyms.index.create.title')
@@ -198,7 +198,7 @@
 
                                 <x-admin::form.control-group.error control-name="terms" />
 
-                                <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs text-gray-600 dark:text-gray-300 font-medium">
+                                <p class="mt-2 text-xs font-medium text-gray-600 dark:text-gray-300 ltr:ml-1 rtl:mr-1">
                                     @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms-info')
                                 </p>
                             </x-admin::form.control-group>

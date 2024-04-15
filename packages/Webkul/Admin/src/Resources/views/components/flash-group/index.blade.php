@@ -9,12 +9,12 @@
             tag='div'
             name="flash-group"
             enter-from-class="ltr:translate-x-full rtl:-translate-x-full"
-            enter-active-class="transform transition ease-in-out duration-200"
+            enter-active-class="transform transition duration-200 ease-in-out"
             enter-to-class="ltr:translate-x-0 rtl:-translate-x-0"
             leave-from-class="ltr:translate-x-0 rtl:-translate-x-0"
-            leave-active-class="transform transition ease-in-out duration-200"
+            leave-active-class="transform transition duration-200 ease-in-out"
             leave-to-class="ltr:translate-x-full rtl:-translate-x-full"
-            class='grid gap-2.5 fixed top-5 ltr:right-5 rtl:left-5 z-[10002] justify-items-end'
+            class='fixed top-5 z-[10002] grid justify-items-end gap-2.5 ltr:right-5 rtl:left-5'
         >
             <x-admin::flash-group.item />
         </transition-group>

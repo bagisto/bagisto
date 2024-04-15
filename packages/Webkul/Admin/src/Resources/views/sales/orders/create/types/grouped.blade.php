@@ -14,7 +14,7 @@
     >
         <div class="grid gap-5 p-4">
             <div
-                class="flex gap-2 justify-between items-center"
+                class="flex items-center justify-between gap-2"
                 v-for="product in associatedProducts"
             >
                 <div class="grid gap-1.5">
@@ -30,7 +30,7 @@
                 <x-admin::quantity-changer
                     ::name="'qty[' + product.id + ']'"
                     ::value="product.qty"
-                    class="gap-x-4 w-max rounded-l py-1 px-4"
+                    class="w-max gap-x-4 rounded-l px-4 py-1"
                     @change="updateItem($event)"
                 />
             </div>

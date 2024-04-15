@@ -11,15 +11,15 @@
         id="v-flash-item-template"
     >
         <div
-            class="flex gap-12 justify-between w-max max-w-[408px] px-5 py-3 rounded-lg"
+            class="flex w-max max-w-[408px] justify-between gap-12 rounded-lg px-5 py-3"
             :style="typeStyles[flash.type]['container']"
         >
             <p
-                class="flex text-sm break-all"
+                class="flex break-all text-sm"
                 :style="typeStyles[flash.type]['message']"
             >
                 <span
-                    class="icon-toast-done ltr:mr-2.5 rtl:ml-2.5 text-2xl"
+                    class="icon-toast-done text-2xl ltr:mr-2.5 rtl:ml-2.5"
                     :class="iconClasses[flash.type]"
                     :style="typeStyles[flash.type]['icon']"
                 ></span>

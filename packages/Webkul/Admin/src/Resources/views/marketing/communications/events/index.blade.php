@@ -4,12 +4,12 @@
     </x-slot>
 
     <v-events>
-        <div class="flex gap-4 justify-between max-sm:flex-wrap">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex justify-between gap-4 max-sm:flex-wrap">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.marketing.communications.events.index.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
+            <div class="flex items-center gap-x-2.5">
                 <!-- Create Button -->
                 @if (bouncer()->hasPermission('marketing.communications.events.create'))
                     <div class="primary-button">
@@ -28,12 +28,12 @@
             type="text/x-template"
             id="v-events-template"
         >
-            <div class="flex gap-4 justify-between max-sm:flex-wrap">
-                <p class="text-xl text-gray-800 dark:text-white font-bold">
+            <div class="flex justify-between gap-4 max-sm:flex-wrap">
+                <p class="text-xl font-bold text-gray-800 dark:text-white">
                     @lang('admin::app.marketing.communications.events.index.title')
                 </p>
 
-                <div class="flex gap-x-2.5 items-center">
+                <div class="flex items-center gap-x-2.5">
                     <!-- Create Button -->
                     @if (bouncer()->hasPermission('marketing.communications.events.create'))
                         <div
@@ -67,7 +67,7 @@
                     <template v-else>
                         <div
                             v-for="record in available.records"
-                            class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- ID -->
@@ -134,14 +134,14 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-if="selectedEvents"
                             >
                                 @lang('admin::app.marketing.communications.events.index.create.title')
                             </p>
 
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-else
                             >
                                 @lang('admin::app.settings.users.index.create.title')

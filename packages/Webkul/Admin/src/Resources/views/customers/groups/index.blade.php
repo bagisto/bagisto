@@ -15,13 +15,13 @@
             id="v-create-group-template"
         >
             <div>
-                <div class="flex justify-between items-center">
-                    <p class="text-xl text-gray-800 dark:text-white font-bold">
+                <div class="flex items-center justify-between">
+                    <p class="text-xl font-bold text-gray-800 dark:text-white">
                         @lang('admin::app.customers.groups.index.title')
                     </p>
 
-                    <div class="flex gap-x-2.5 items-center">
-                        <div class="flex gap-x-2.5 items-center">
+                    <div class="flex items-center gap-x-2.5">
+                        <div class="flex items-center gap-x-2.5">
                             <!-- Create a new Group -->
                             @if (bouncer()->hasPermission('customers.groups.create'))
                                 <button
@@ -54,7 +54,7 @@
                         <template v-else>
                             <div
                                 v-for="record in available.records"
-                                class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                             >
                                 <!-- ID -->
@@ -111,7 +111,7 @@
                         <x-admin::modal ref="groupUpdateOrCreateModal">
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <p class="text-lg text-gray-800 dark:text-white font-bold">
+                                <p class="text-lg font-bold text-gray-800 dark:text-white">
                                     <span v-if="selectedGroups">
                                         @lang('admin::app.customers.groups.index.edit.title')
                                     </span>
@@ -166,7 +166,7 @@
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
-                                <div class="flex gap-x-2.5 items-center">
+                                <div class="flex items-center gap-x-2.5">
                                     <button
                                         type="submit"
                                         class="primary-button"

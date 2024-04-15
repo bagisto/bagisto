@@ -5,12 +5,11 @@
     </x-slot>
 
 	<div class="container mt-8 px-[60px] max-lg:px-8">
-		<div class="grid gap-y-5 place-items-center">
+		<div class="grid place-items-center gap-y-5">
 			{{ view_render_event('bagisto.shop.checkout.success.image.before', ['order' => $order]) }}
 
 			<img 
-				class="" 
-				src="{{ bagisto_asset('images/thank-you.png') }}" 
+				class="" src="{{ bagisto_asset('images/thank-you.png') }}" 
 				alt="thankyou" 
 				title=""
 			>
@@ -42,7 +41,7 @@
 			{{ view_render_event('bagisto.shop.checkout.success.continue-shopping.before', ['order' => $order]) }}
 
 			<a href="{{ route('shop.home.index') }}">
-				<div class="block w-max mx-auto m-auto py-3 px-11 bg-navyBlue rounded-2xl text-white text-basefont-medium text-center cursor-pointer">
+				<div class="text-basefont-medium m-auto mx-auto block w-max cursor-pointer rounded-2xl bg-navyBlue px-11 py-3 text-center text-white">
              		@lang('shop::app.checkout.cart.index.continue-shopping')
 				</div> 
 			</a>

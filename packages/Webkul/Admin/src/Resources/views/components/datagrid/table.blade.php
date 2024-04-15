@@ -17,7 +17,7 @@
         id="v-datagrid-table-template"
     >
         <div class="w-full">
-            <div class="table-responsive grid w-full box-shadow rounded bg-white dark:bg-gray-900 overflow-hidden">
+            <div class="table-responsive box-shadow grid w-full overflow-hidden rounded bg-white dark:bg-gray-900">
                 <slot
                     name="header"
                     :is-loading="isLoading"
@@ -33,7 +33,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid gap-2.5 min-h-[47px] px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold items-center"
+                            class="row grid min-h-[47px] items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -63,14 +63,14 @@
                             <!-- Columns -->
                             <p
                                 v-for="column in available.columns"
-                                class="flex gap-1.5 items-center break-words"
+                                class="flex items-center gap-1.5 break-words"
                                 :class="{'cursor-pointer select-none hover:text-gray-800 dark:hover:text-white': column.sortable}"
                                 @click="sort(column)"
                             >
                                 @{{ column.label }}
 
                                 <i
-                                    class="text-base  text-gray-600 dark:text-gray-300 align-text-bottom"
+                                    class="align-text-bottom text-base text-gray-600 dark:text-gray-300"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="column.index == applied.sort.column"
                                 ></i>
@@ -103,7 +103,7 @@
                     <template v-else>
                         <template v-if="available.records.length">
                             <div
-                                class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                                 v-for="record in available.records"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                             >
@@ -119,7 +119,7 @@
                                             v-model="applied.massActions.indices"
                                         >
 
-                                        <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-2xl">
+                                        <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600">
                                         </span>
                                     </label>
                                 </p>
@@ -159,7 +159,7 @@
                         </template>
 
                         <template v-else>
-                            <div class="row grid px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center">
+                            <div class="row grid border-b px-4 py-4 text-center text-gray-600 dark:border-gray-800 dark:text-gray-300">
                                 <p>
                                     @lang('admin::app.components.datagrid.table.no-records-available')
                                 </p>

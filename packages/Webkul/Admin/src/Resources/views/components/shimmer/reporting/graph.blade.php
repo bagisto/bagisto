@@ -3,25 +3,25 @@
 <div class="flex gap-1.5">
     <div class="grid">
         @foreach (range(1, 10) as $i)
-            <div class="shimmer w-[39px] h-[15px]"></div>
+            <div class="shimmer h-[15px] w-[39px]"></div>
         @endforeach
     </div>
 
-    <div class="w-full grid gap-1.5">
-        <div class="flex items-end w-full pl-2.5 border-l border-b dark:border-gray-800 aspect-[3.23/1]">
-            <div class="flex gap-5 justify-between items-end w-full aspect-[3.23/1] max-lg:gap-4 max-sm:gap-2.5">
+    <div class="grid w-full gap-1.5">
+        <div class="flex aspect-[3.23/1] w-full items-end border-b border-l pl-2.5 dark:border-gray-800">
+            <div class="flex aspect-[3.23/1] w-full items-end justify-between gap-5 max-lg:gap-4 max-sm:gap-2.5">
                 @foreach (range(1, $count) as $i)
                     <div
-                        class="flex shimmer w-full"
+                        class="shimmer flex w-full"
                         style="height: {{ rand(10, 100) }}%"
                     ></div>
                 @endforeach
             </div>
         </div>
 
-        <div class="flex gap-5 justify-between pl-2.5 max-lg:gap-4 max-sm:gap-2.5">
+        <div class="flex justify-between gap-5 pl-2.5 max-lg:gap-4 max-sm:gap-2.5">
             @foreach (range(1, $count) as $i)
-                <div class="shimmer flex w-full h-[15px]"></div>
+                <div class="shimmer flex h-[15px] w-full"></div>
             @endforeach
         </div>
     </div>
