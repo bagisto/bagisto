@@ -5,12 +5,12 @@
     </x-slot>
 
     <v-users>
-        <div class="flex justify-between items-center">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.settings.users.index.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
+            <div class="flex items-center gap-x-2.5">
                 <!-- Create User Button -->
                 @if (bouncer()->hasPermission('settings.users.users.create'))
                     <button
@@ -32,12 +32,12 @@
             type="text/x-template"
             id="v-users-template"
         >
-            <div class="flex justify-between items-center">
-                <p class="text-xl text-gray-800 dark:text-white font-bold">
+            <div class="flex items-center justify-between">
+                <p class="text-xl font-bold text-gray-800 dark:text-white">
                     @lang('admin::app.settings.users.index.title')
                 </p>
 
-                <div class="flex gap-x-2.5 items-center">
+                <div class="flex items-center gap-x-2.5">
                     <!-- User Create Button -->
                     @if (bouncer()->hasPermission('settings.users.users.create'))
                         <button
@@ -63,7 +63,7 @@
                 <template #header="{columns, records, sortPage, applied}">
                     <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
                         <div
-                            class="flex gap-2.5 cursor-pointer"
+                            class="flex cursor-pointer gap-2.5"
                             v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name']"
                         >
                             <p class="text-gray-600 dark:text-gray-300">
@@ -71,7 +71,7 @@
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
-                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == columnGroup,
+                                            'font-medium text-gray-800 dark:text-white': applied.sort.column == columnGroup,
                                             'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                         }"
                                         @click="
@@ -84,7 +84,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ltr:ml-1.5 rtl:mr-1.5 text-base  text-gray-800 dark:text-white align-text-bottom"
+                                    class="align-text-bottom text-base text-gray-800 dark:text-white ltr:ml-1.5 rtl:mr-1.5"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -93,7 +93,7 @@
 
                         <!-- Actions -->
                         @if ($hasPermission)
-                            <p class="flex gap-2.5 justify-end">
+                            <p class="flex justify-end gap-2.5">
                                 @lang('admin::app.components.datagrid.table.actions')
                             </p>
                         @endif
@@ -104,7 +104,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
@@ -112,13 +112,13 @@
 
                         <!-- User Profile -->
                         <p>
-                            <div class="flex gap-2.5 items-center">
+                            <div class="flex items-center gap-2.5">
                                 <div
-                                    class="inline-block w-9 h-9 rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden"
+                                    class="border-3 mr-2 inline-block h-9 w-9 overflow-hidden rounded-full border-gray-800 text-center align-middle"
                                     v-if="record.user_img"
                                 >
                                     <img
-                                        class="w-9 h-9"
+                                        class="h-9 w-9"
                                         :src="record.user_img"
                                         alt="record.user_name"
                                     />
@@ -128,7 +128,7 @@
                                     class="profile-info-icon"
                                     v-else
                                 >
-                                    <button class="flex justify-center items-center w-9 h-9 bg-blue-400 rounded-full text-sm text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500">
+                                    <button class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-blue-400 text-sm font-semibold leading-6 text-white transition-all hover:bg-blue-500 focus:bg-blue-500">
                                         @{{ record.user_name[0].toUpperCase() }}
                                     </button>
                                 </div>
@@ -185,14 +185,14 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-if="isUpdating"
                             >
                                 @lang('admin::app.settings.users.index.edit.title')
                             </p>
 
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-else
                             >
                                 @lang('admin::app.settings.users.index.create.title')
@@ -248,7 +248,7 @@
 
                             <div class="flex gap-4">
                                 <!-- Password -->
-                                <x-admin::form.control-group class="flex-1 mb-2.5">
+                                <x-admin::form.control-group class="mb-2.5 flex-1">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.users.index.create.password')
                                     </x-admin::form.control-group.label>
@@ -289,7 +289,7 @@
 
                             <div class="flex gap-4">
                                 <!-- Role -->
-                                <x-admin::form.control-group class="flex-1 w-full">
+                                <x-admin::form.control-group class="w-full flex-1">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.users.index.create.role')
                                     </x-admin::form.control-group.label>
@@ -302,7 +302,7 @@
                                     >
                                         <select
                                             name="role_id"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                            class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                             :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                             v-model="data.user.role_id"
                                         >
@@ -321,12 +321,12 @@
                                 </x-admin::form.control-group>
 
                                 <template v-if="currentUserId != data.user.id">
-                                    <x-admin::form.control-group class="w-full flex-1 !mb-0">
+                                    <x-admin::form.control-group class="!mb-0 w-full flex-1">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.users.index.create.status')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="gap-2.5 w-full mt-2.5">
+                                        <div class="mt-2.5 w-full gap-2.5">
                                             <x-admin::form.control-group.control
                                                 type="switch"
                                                 name="status"
@@ -372,7 +372,7 @@
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex gap-x-2.5 items-center">
+                            <div class="flex items-center gap-x-2.5">
                                 <button
                                     type="submit"
                                     class="primary-button"
@@ -397,7 +397,7 @@
                     <x-admin::modal ref="confirmPasswordModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-lg text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('Confirm Password Before DELETE')
                             </p>
                         </x-slot>
@@ -425,7 +425,7 @@
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex gap-x-2.5 items-center">
+                            <div class="flex items-center gap-x-2.5">
                                 <button
                                     type="submit"
                                     class="primary-button"

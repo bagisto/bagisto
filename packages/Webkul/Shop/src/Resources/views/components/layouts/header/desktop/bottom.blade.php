@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.before') !!}
 
-<div class="w-full flex justify-between min-h-[78px] px-[60px] border border-t-0 border-b border-l-0 border-r-0 max-1180:px-8">
+<div class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1180:px-8">
     <!--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
@@ -26,19 +26,19 @@
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.before') !!}
 
         <v-desktop-category>
-            <div class="flex gap-5 items-center">
+            <div class="flex items-center gap-5">
                 <span
-                    class="shimmer w-20 h-6 rounded"
+                    class="shimmer h-6 w-20 rounded"
                     role="presentation"
                 ></span>
 
                 <span
-                    class="shimmer w-20 h-6 rounded"
+                    class="shimmer h-6 w-20 rounded"
                     role="presentation"
                 ></span>
 
                 <span
-                    class="shimmer w-20 h-6 rounded"
+                    class="shimmer h-6 w-20 rounded"
                     role="presentation"
                 ></span>
             </div>
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Right Nagivation Section -->
-    <div class="flex gap-x-9 items-center max-lg:gap-x-8 max-[1100px]:gap-x-6">
+    <div class="flex items-center gap-x-9 max-[1100px]:gap-x-6 max-lg:gap-x-8">
 
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.search_bar.before') !!}
 
@@ -56,7 +56,7 @@
         <div class="relative w-full">
             <form
                 action="{{ route('shop.search.index') }}"
-                class="flex items-center max-w-[445px]"
+                class="flex max-w-[445px] items-center"
                 role="search"
             >
                 <label
@@ -66,13 +66,13 @@
                     @lang('shop::app.components.layouts.header.search')
                 </label>
 
-                <div class="icon-search flex items-center  absolute ltr:left-3 rtl:right-3 top-2.5 text-xl pointer-events-none"></div>
+                <div class="icon-search pointer-events-none absolute top-2.5 flex items-center text-xl ltr:left-3 rtl:right-3"></div>
 
                 <input
                     type="text"
                     name="query"
                     value="{{ request('query') }}"
-                    class="block w-full px-11 py-3 bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
+                    class="block w-full rounded-lg border border-transparent bg-[#F5F5F5] px-11 py-3 text-xs font-medium text-gray-900 transition-all hover:border-gray-400 focus:border-gray-400"
                     placeholder="@lang('shop::app.components.layouts.header.search-text')"
                     aria-label="@lang('shop::app.components.layouts.header.search-text')"
                     aria-required="true"
@@ -95,7 +95,7 @@
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.search_bar.after') !!}
 
         <!-- Right Navigation Links -->
-        <div class="flex gap-x-8 mt-1.5 max-lg:gap-x-8 max-[1100px]:gap-x-6">
+        <div class="mt-1.5 flex gap-x-8 max-[1100px]:gap-x-6 max-lg:gap-x-8">
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.compare.before') !!}
 
@@ -106,7 +106,7 @@
                     aria-label="@lang('shop::app.components.layouts.header.compare')"
                 >
                     <span
-                        class="icon-compare inline-block text-2xl cursor-pointer"
+                        class="icon-compare inline-block cursor-pointer text-2xl"
                         role="presentation"
                     ></span>
                 </a>
@@ -127,7 +127,7 @@
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span
-                        class="icon-users inline-block text-2xl cursor-pointer"
+                        class="icon-users inline-block cursor-pointer text-2xl"
                         role="button"
                         aria-label="@lang('shop::app.components.layouts.header.profile')"
                         tabindex="0"
@@ -138,7 +138,7 @@
                 @guest('customer')
                     <x-slot:content>
                         <div class="grid gap-2.5">
-                            <p class="text-xl font-dmserif">
+                            <p class="font-dmserif text-xl">
                                 @lang('shop::app.components.layouts.header.welcome-guest')
                             </p>
 
@@ -147,21 +147,21 @@
                             </p>
                         </div>
 
-                        <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
+                        <p class="py-2px mt-3 w-full border border-[#E9E9E9]"></p>
 
-                        <div class="flex gap-4 mt-6">
+                        <div class="mt-6 flex gap-4">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
 
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="primary-button block w-max px-7 mx-auto m-0 ltr:ml-0 rtl:mr-0 rounded-2xl text-base text-center"
+                                class="primary-button m-0 mx-auto block w-max rounded-2xl px-7 text-center text-base ltr:ml-0 rtl:mr-0"
                             >
                                 @lang('shop::app.components.layouts.header.sign-in')
                             </a>
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
-                                class="secondary-button block w-max m-0 ltr:ml-0 rtl:mr-0 mx-auto px-7 border-2 rounded-2xl text-base text-center"
+                                class="secondary-button m-0 mx-auto block w-max rounded-2xl border-2 px-7 text-center text-base ltr:ml-0 rtl:mr-0"
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
@@ -175,7 +175,7 @@
                 @auth('customer')
                     <x-slot:content class="!p-0">
                         <div class="grid gap-2.5 p-5 pb-0">
-                            <p class="text-xl font-dmserif">
+                            <p class="font-dmserif text-xl">
                                 @lang('shop::app.components.layouts.header.welcome')’
                                 {{ auth()->guard('customer')->user()->first_name }}
                             </p>
@@ -185,20 +185,20 @@
                             </p>
                         </div>
 
-                        <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
+                        <p class="py-2px mt-3 w-full border border-[#E9E9E9]"></p>
 
-                        <div class="grid gap-1 mt-2.5 pb-2.5">
+                        <div class="mt-2.5 grid gap-1 pb-2.5">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile_dropdown.links.before') !!}
 
                             <a
-                                class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
+                                class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                 href="{{ route('shop.customers.account.profile.index') }}"
                             >
                                 @lang('shop::app.components.layouts.header.profile')
                             </a>
 
                             <a
-                                class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
+                                class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                 href="{{ route('shop.customers.account.orders.index') }}"
                             >
                                 @lang('shop::app.components.layouts.header.orders')
@@ -206,7 +206,7 @@
 
                             @if (core()->getConfigData('general.content.shop.wishlist_option'))
                                 <a
-                                    class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
+                                    class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                     href="{{ route('shop.customers.account.wishlist.index') }}"
                                 >
                                     @lang('shop::app.components.layouts.header.wishlist')
@@ -222,7 +222,7 @@
                                 />
 
                                 <a
-                                    class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
+                                    class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                     href="{{ route('shop.customer.session.destroy') }}"
                                     onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
                                 >
@@ -247,21 +247,21 @@
         id="v-desktop-category-template"
     >
         <div
-            class="flex gap-5 items-center"
+            class="flex items-center gap-5"
             v-if="isLoading"
         >
             <span
-                class="shimmer w-20 h-6 rounded"
+                class="shimmer h-6 w-20 rounded"
                 role="presentation"
             ></span>
 
             <span
-                class="shimmer w-20 h-6 rounded"
+                class="shimmer h-6 w-20 rounded"
                 role="presentation"
             ></span>
 
             <span
-                class="shimmer w-20 h-6 rounded"
+                class="shimmer h-6 w-20 rounded"
                 role="presentation"
             ></span>
         </div>
@@ -271,7 +271,7 @@
             v-else
         >
             <div
-                class="flex items-center relative h-[77px] group border-b-[4px] border-transparent hover:border-b-[4px] hover:border-navyBlue"
+                class="group relative flex h-[77px] items-center border-b-[4px] border-transparent hover:border-b-[4px] hover:border-navyBlue"
                 v-for="category in categories"
             >
                 <span>
@@ -284,16 +284,16 @@
                 </span>
 
                 <div
-                    class="w-max absolute top-[78px] max-h-[580px] max-w-[1260px] p-9 z-[1] overflow-auto overflow-x-auto bg-white shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 ltr:-left-9 rtl:-right-9"
+                    class="pointer-events-none absolute top-[78px] z-[1] max-h-[580px] w-max max-w-[1260px] translate-y-1 overflow-auto overflow-x-auto border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] bg-white p-9 opacity-0 shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] transition duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:duration-200 group-hover:ease-in ltr:-left-9 rtl:-right-9"
                     v-if="category.children.length"
                 >
-                    <div class="flex aigns gap-x-[70px] justify-between">
+                    <div class="aigns flex justify-between gap-x-[70px]">
                         <div
-                            class="grid grid-cols-[1fr] gap-5 content-start w-full flex-auto min-w-max max-w-[150px]"
+                            class="grid w-full min-w-max max-w-[150px] flex-auto grid-cols-[1fr] content-start gap-5"
                             v-for="pairCategoryChildren in pairCategoryChildren(category)"
                         >
                             <template v-for="secondLevelCategory in pairCategoryChildren">
-                                <p class="text-navyBlue font-medium">
+                                <p class="font-medium text-navyBlue">
                                     <a :href="secondLevelCategory.url">
                                         @{{ secondLevelCategory.name }}
                                     </a>

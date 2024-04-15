@@ -17,11 +17,11 @@
         id="v-cart-shipping-methods-template"
     >
         <div
-            class="bg-white dark:bg-gray-900 rounded box-shadow"
+            class="box-shadow rounded bg-white dark:bg-gray-900"
             id="shipping-step-container"
         >
-            <div class="flex items-center p-4 border-b dark:border-gray-800">
-                <p class="text-base text-gray-800 dark:text-white font-semibold">
+            <div class="flex items-center border-b p-4 dark:border-gray-800">
+                <p class="text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.sales.orders.create.cart.shipping.title')
                 </p>
             </div>
@@ -38,12 +38,12 @@
                         {!! view_render_event('bagisto.admin.sales.order.create.cart.shipping.before') !!}
 
                         <label
-                            class="grid gap-4 p-4 border-b dark:border-gray-800 cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="grid cursor-pointer gap-4 border-b p-4 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                             v-for="rate in method.rates"
                             :for="rate.method"
                         >
-                            <div class="flex gap-4 justify-between">
-                                <div class="flex gap-2 items-center">
+                            <div class="flex justify-between gap-4">
+                                <div class="flex items-center gap-2">
                                     <x-admin::form.control-group.control
                                         type="radio"
                                         name="shipping_method"
@@ -53,7 +53,7 @@
                                         @change="store(rate.method)"
                                     />
 
-                                    <p class="text-base text-gray-600 dark:text-gray-200 font-medium">
+                                    <p class="text-base font-medium text-gray-600 dark:text-gray-200">
                                         @{{ rate.method_title }}
                                     </p>
                                 </div>

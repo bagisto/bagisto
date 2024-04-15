@@ -17,11 +17,11 @@
         id="v-cart-addresses-template"
     >
         <div
-            class="bg-white dark:bg-gray-900 rounded box-shadow"
+            class="box-shadow rounded bg-white dark:bg-gray-900"
             id="address-step-container"
         >
-            <div class="flex items-center p-4 border-b dark:border-gray-800">
-                <p class="text-base text-gray-800 dark:text-white font-semibold">
+            <div class="flex items-center border-b p-4 dark:border-gray-800">
+                <p class="text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.sales.orders.create.cart.address.title')
                 </p>
             </div>
@@ -34,13 +34,13 @@
                 >
                     <form @submit="handleSubmit($event, addAddressToCart)">
                         <!-- Billing Address Header -->
-                        <div class="flex justify-between items-center mb-4">
+                        <div class="mb-4 flex items-center justify-between">
                             <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.create.cart.address.billing-address')
                             </p>
 
                             <p
-                                class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-blue-600 transition-all hover:underline"
                                 @click="activeAddressForm = 'billing'; selectedAddressForEdit = null; $refs.updateCreateModal.open()"
                                 v-if="! cart.billing_address"
                             >
@@ -49,13 +49,13 @@
                         </div>
 
                         <!-- Billing Address Container -->
-                        <div class="flex gap-8 flex-wrap">
+                        <div class="flex flex-wrap gap-8">
                             <!-- Address Cards -->
                             <div
                                 class="flex gap-2"
                                 v-for="address in customerSavedAddresses.billing"
                             >
-                                <x-admin::form.control-group class="flex gap-2.5 items-center self-start !mb-0">
+                                <x-admin::form.control-group class="!mb-0 flex items-center gap-2.5 self-start">
                                     <x-admin::form.control-group.control
                                         type="radio"
                                         name="billing.id"
@@ -71,7 +71,7 @@
 
                                 <div class="grid gap-3">
                                     <label
-                                        class="grid gap-1.5 cursor-pointer"
+                                        class="grid cursor-pointer gap-1.5"
                                         :for="`billing_address_id_${address.id}`"
                                     >
                                         <p class="text-base text-gray-800 dark:text-white">
@@ -99,7 +99,7 @@
 
                                     <!-- Edit Action -->
                                     <p
-                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                        class="cursor-pointer text-blue-600 transition-all hover:underline"
                                         @click="
                                             selectedAddressForEdit = address;
                                             activeAddressForm = 'billing';
@@ -119,7 +119,7 @@
                         <!-- Shipping Address Block if have stockable items -->
                         <template v-if="cart.have_stockable_items">
                             <!-- Use for Shipping Checkbox -->
-                            <x-admin::form.control-group class="flex items-center gap-2.5 mt-5 !mb-0">
+                            <x-admin::form.control-group class="!mb-0 mt-5 flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="billing.use_for_shipping"
@@ -131,7 +131,7 @@
                                 />
 
                                 <label
-                                    class="text-base text-[#6E6E6E] dark:text-gray-400 max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
+                                    class="cursor-pointer select-none text-base text-[#6E6E6E] dark:text-gray-400 max-sm:text-xs ltr:pl-0 rtl:pr-0"
                                     for="use_for_shipping"
                                 >
                                     @lang('admin::app.sales.orders.create.cart.address.same-as-billing')
@@ -145,13 +145,13 @@
                                 v-if="! useBillingAddressForShipping"
                             >
                                 <!-- Shipping Address Header -->
-                                <div class="flex justify-between items-center mb-4">
+                                <div class="mb-4 flex items-center justify-between">
                                     <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.orders.create.cart.address.shipping-address')
                                     </p>
 
                                     <p
-                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                        class="cursor-pointer text-blue-600 transition-all hover:underline"
                                         @click="
                                             activeAddressForm = 'shipping';
                                             selectedAddressForEdit = null;
@@ -164,13 +164,13 @@
                                 </div>
 
                                 <!-- Shipping Address Container -->
-                                <div class="flex gap-8 flex-wrap">
+                                <div class="flex flex-wrap gap-8">
                                     <!-- Address Cards -->
                                     <div
                                         class="flex gap-2"
                                         v-for="address in customerSavedAddresses.shipping"
                                     >
-                                        <x-admin::form.control-group class="flex gap-2.5 items-center self-start !mb-0">
+                                        <x-admin::form.control-group class="!mb-0 flex items-center gap-2.5 self-start">
                                             <x-admin::form.control-group.control
                                                 type="radio"
                                                 name="shipping.id"
@@ -186,7 +186,7 @@
 
                                         <div class="grid gap-3">
                                             <label
-                                                class="grid gap-1.5 cursor-pointer"
+                                                class="grid cursor-pointer gap-1.5"
                                                 :for="`shipping_address_id_${address.id}`"
                                             >
                                                 <p class="text-base text-gray-800 dark:text-white">
@@ -214,7 +214,7 @@
 
                                             <!-- Edit Action -->
                                             <p
-                                                class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                                class="cursor-pointer text-blue-600 transition-all hover:underline"
                                                 @click="
                                                     selectedAddressForEdit = address;
                                                     activeAddressForm = 'shipping';
@@ -235,7 +235,7 @@
 
                         <!-- Proceed Button -->
                         <div
-                            class="flex justify-end mt-4"
+                            class="mt-4 flex justify-end"
                             v-if="customerSavedAddresses.billing.length"
                         >
                             <x-admin::button
@@ -258,7 +258,7 @@
                     <x-admin::modal ref="updateCreateModal">
                         <!-- Model Header -->
                         <x-slot:header>
-                            <p class="text-lg text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 <template v-if="activeAddressForm == 'billing'">
                                     @lang('admin::app.sales.orders.create.cart.address.billing-address')
                                 </template>
@@ -278,7 +278,7 @@
                             ></v-checkout-address-form>
 
                             <!-- Save Address to Address Book Checkbox -->
-                            <x-admin::form.control-group class="flex items-center gap-2.5 !mb-0">
+                            <x-admin::form.control-group class="!mb-0 flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     ::name="activeAddressForm + '.save_address'"
@@ -290,7 +290,7 @@
                                 />
 
                                 <label
-                                    class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
+                                    class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0"
                                     for="save_address"
                                 >
                                     @lang('shop::app.checkout.onepage.address.save-address')
@@ -300,7 +300,7 @@
 
                         <!-- Model Footer -->
                         <x-slot:footer>
-                            <div class="flex gap-x-2.5 items-center">
+                            <div class="flex items-center gap-x-2.5">
                                 <x-admin::button
                                     class="primary-button"
                                     :title="trans('shop::app.checkout.onepage.address.save')"

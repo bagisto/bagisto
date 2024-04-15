@@ -31,7 +31,7 @@
             <!-- First Name -->
             <div class="grid grid-cols-2 gap-x-5">
                 <x-admin::form.control-group>
-                    <x-admin::form.control-group.label class="!mt-0 required">
+                    <x-admin::form.control-group.label class="required !mt-0">
                         @lang('admin::app.sales.orders.create.cart.address.first-name')
                     </x-admin::form.control-group.label>
 
@@ -51,7 +51,7 @@
 
                 <!-- Last Name -->
                 <x-admin::form.control-group>
-                    <x-admin::form.control-group.label class="!mt-0 required">
+                    <x-admin::form.control-group.label class="required !mt-0">
                         @lang('admin::app.sales.orders.create.cart.address.last-name')
                     </x-admin::form.control-group.label>
 
@@ -72,7 +72,7 @@
 
             <!-- Email -->
             <x-admin::form.control-group>
-                <x-admin::form.control-group.label class="!mt-0 required">
+                <x-admin::form.control-group.label class="required !mt-0">
                     @lang('admin::app.sales.orders.create.cart.address.email')
                 </x-admin::form.control-group.label>
 
@@ -92,7 +92,7 @@
 
             <!-- Street Address -->
             <x-admin::form.control-group>
-                <x-admin::form.control-group.label class="!mt-0 required">
+                <x-admin::form.control-group.label class="required !mt-0">
                     @lang('admin::app.sales.orders.create.cart.address.street-address')
                 </x-admin::form.control-group.label>
 
@@ -214,7 +214,7 @@
             <div class="grid grid-cols-2 gap-x-5">
                 <!-- City -->
                 <x-admin::form.control-group>
-                    <x-admin::form.control-group.label class="!mt-0 required">
+                    <x-admin::form.control-group.label class="required !mt-0">
                         @lang('admin::app.sales.orders.create.cart.address.city')
                     </x-admin::form.control-group.label>
 
@@ -255,7 +255,7 @@
 
             <!-- Phone Number -->
             <x-admin::form.control-group>
-                <x-admin::form.control-group.label class="!mt-0 required">
+                <x-admin::form.control-group.label class="required !mt-0">
                     @lang('admin::app.sales.orders.create.cart.address.telephone')
                 </x-admin::form.control-group.label>
 

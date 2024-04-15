@@ -25,16 +25,16 @@
                 enctype="multipart/form-data"
                 method="PUT"
             >
-                <div class="flex justify-between items-center">
-                    <p class="text-xl text-gray-800 dark:text-white font-bold">
+                <div class="flex items-center justify-between">
+                    <p class="text-xl font-bold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.attributes.edit.title')
                     </p>
 
-                    <div class="flex gap-x-2.5 items-center">
+                    <div class="flex items-center gap-x-2.5">
                         <!-- Back Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                            class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                         >
                             @lang('admin::app.catalog.attributes.edit.back-btn')
                         </a>
@@ -50,15 +50,15 @@
                 </div>
 
                 <!-- body content -->
-                <div class="flex gap-2.5 mt-3.5">
+                <div class="mt-3.5 flex gap-2.5">
                     <!-- Left sub Component -->
-                    <div class="flex flex-col flex-1 gap-2 overflow-auto">
+                    <div class="flex flex-1 flex-col gap-2 overflow-auto">
 
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
                         <!-- Label -->
-                        <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
-                            <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                        <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                            <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.edit.label')
                             </p>
 
@@ -106,8 +106,8 @@
                             class="p-4 bg-white dark:bg-gray-900 box-shadow rounded {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
                             v-if="showSwatch"
                         >
-                            <div class="flex justify-between items-center mb-3">
-                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                            <div class="mb-3 flex items-center justify-between">
+                                <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.attributes.edit.options')
                                 </p>
 
@@ -122,10 +122,10 @@
 
                             <!-- For Attribute Options If Data Exist -->
                             <div class="mt-4 overflow-x-auto">
-                                <div class="flex gap-4 items-center max-sm:flex-wrap">
+                                <div class="flex items-center gap-4 max-sm:flex-wrap">
                                     <!-- Input Options -->
                                     <x-admin::form.control-group
-                                        class="w-full mb-2.5"
+                                        class="mb-2.5 w-full"
                                         v-if="this.showSwatch"
                                     >
                                         <x-admin::form.control-group.label for="swatchType">
@@ -151,26 +151,26 @@
 
                                     <!-- checkbox -->
                                     <div class="w-full">
-                                        <div class="flex gap-2.5 items-center w-max !mb-0 cursor-pointer select-none">
+                                        <div class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5">
                                             <input
                                                 type="checkbox"
                                                 name="empty_option"
                                                 id="empty_option"
                                                 for="empty_option"
-                                                class="hidden peer"
+                                                class="peer hidden"
                                                 v-model="isNullOptionChecked"
                                                 @click="$refs.addOptionsRow.toggle()"
                                             >
 
                                             <label
                                                 for="empty_option"
-                                                class="icon-uncheckbox text-2xl rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                                class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"
                                             >
                                             </label>
 
                                             <label
                                                 for="empty_option"
-                                                class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                                class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                             >
                                                 @lang('admin::app.catalog.attributes.edit.create-empty-option')
                                             </label>
@@ -241,7 +241,7 @@
     
                                                         <!-- Draggable Icon -->
                                                         <x-admin::table.td class="!px-0 text-center">
-                                                            <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
+                                                            <i class="icon-drag cursor-grab text-xl transition-all group-hover:text-gray-700"></i>
     
                                                             <input
                                                                 type="hidden"
@@ -271,7 +271,7 @@
                                                             <!-- Swatch Color -->
                                                             <div v-if="swatchType == 'color'">
                                                                 <div
-                                                                    class="w-[25px] h-[25px] border border-gray-200 dark:border-gray-800 rounded-md"
+                                                                    class="h-[25px] w-[25px] rounded-md border border-gray-200 dark:border-gray-800"
                                                                     :style="{ background: element.swatch_value }"
                                                                 >
                                                                 </div>
@@ -313,13 +313,13 @@
                                                         <!-- Actions Button -->
                                                         <x-admin::table.td class="!px-0">
                                                             <span
-                                                                class="icon-edit p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                                class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                                 @click="editOptions(element)"
                                                             >
                                                             </span>
     
                                                             <span
-                                                                class="icon-delete p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
+                                                                class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                                 @click="removeOption(element.id)"
                                                             >
                                                             </span>
@@ -333,17 +333,17 @@
 
                                 <!-- For Empty Attribute Options -->
                                 <template v-else>
-                                    <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
+                                    <div class="grid justify-items-center gap-3.5 px-2.5 py-10">
                                         <!-- Attribute Option Image -->
                                         <img
-                                            class="w-[120px] h-[120px] dark:invert dark:mix-blend-exclusion"
+                                            class="h-[120px] w-[120px] dark:mix-blend-exclusion dark:invert"
                                             src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                             alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
                                         >
 
                                         <!-- Add Attribute Options Information -->
-                                        <div class="flex flex-col gap-1.5 items-center">
-                                            <p class="text-base text-gray-400 font-semibold">
+                                        <div class="flex flex-col items-center gap-1.5">
+                                            <p class="text-base font-semibold text-gray-400">
                                                 @lang('admin::app.catalog.attributes.edit.add-attribute-options')
                                             </p>
 
@@ -366,13 +366,13 @@
                     </div>
 
                     <!-- Right sub-component -->
-                    <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+                    <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
-                        <div class="bg-white dark:bg-gray-900 box-shadow rounded">
-                            <div class="flex justify-between items-center p-1.5">
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                        <div class="box-shadow rounded bg-white dark:bg-gray-900">
+                            <div class="flex items-center justify-between p-1.5">
+                                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.attributes.edit.general')
                                 </p>
                             </div>
@@ -499,7 +499,7 @@
                         <!-- Validations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.attributes.edit.validations')
                                 </p>
                             </x-slot>
@@ -545,7 +545,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Required -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     @php
                                         $selectedOption = old('is_required') ?? $attribute->is_required
                                     @endphp
@@ -566,7 +566,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_required"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-required')
@@ -574,7 +574,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Unique -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 select-none">
+                                <x-admin::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_unique"
@@ -586,7 +586,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_unique"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-unique')
@@ -608,14 +608,14 @@
                         <!-- Configurations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.attributes.edit.configuration')
                                 </p>
                             </x-slot>
 
                             <x-slot:content>
                                 <!-- Value Per Locale -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 opacity-70 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5 opacity-70">
                                     @php
                                         $valuePerLocale = old('value_per_locale') ?? $attribute->value_per_locale;
                                     @endphp
@@ -630,7 +630,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-not-allowed"
+                                        class="cursor-not-allowed text-xs font-medium text-gray-600 dark:text-gray-300"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.value-per-locale')
                                     </label>   
@@ -643,7 +643,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Value Per Channel -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 opacity-70 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5 opacity-70">
                                     @php
                                         $valuePerChannel = old('value_per_channel') ?? $attribute->value_per_channel
                                     @endphp
@@ -658,7 +658,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-not-allowed"
+                                        class="cursor-not-allowed text-xs font-medium text-gray-600 dark:text-gray-300"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.value-per-channel')
                                     </label>   
@@ -671,7 +671,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use in Layered -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     @php
                                         $isFilterable = old('is_filterable') ?? $attribute->is_filterable;
                                     @endphp
@@ -686,7 +686,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_filterable"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-filterable')
@@ -700,7 +700,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use to create configuable product -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     @php
                                         $isConfigurable = old('is_configurable') ?? $attribute->is_configurable;
                                     @endphp
@@ -715,7 +715,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_configurable"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-configurable')
@@ -729,7 +729,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Visible On Product View Page On Fornt End -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     @php
                                         $isVisibleOnFront = old('is_visible_on_front') ?? $attribute->is_visible_on_front;
                                     @endphp
@@ -744,7 +744,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_visible_on_front"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
@@ -758,7 +758,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute is Comparable -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 select-none">
+                                <x-admin::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
                                     @php
                                         $isComparable = old('is_comparable') ?? $attribute->is_comparable
                                     @endphp
@@ -773,7 +773,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_comparable"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')
@@ -810,7 +810,7 @@
                     >
                         <!-- Modal Header !-->
                         <x-slot:header>
-                            <p class="text-lg text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.edit.add-option')
                             </p>
                         </x-slot>
@@ -876,7 +876,7 @@
                                 />
 
                                 <!-- Admin Input -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="mb-2.5 w-full">
                                     <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.edit.admin')
                                     </x-admin::form.control-group.label>
@@ -895,7 +895,7 @@
 
                                 <!-- Locales Input -->
                                 @foreach ($allLocales as $locale)
-                                    <x-admin::form.control-group class="w-full mb-2.5">
+                                    <x-admin::form.control-group class="mb-2.5 w-full">
                                         <x-admin::form.control-group.label ::class="{ '{{ core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>

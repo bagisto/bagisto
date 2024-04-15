@@ -33,7 +33,7 @@
                             <!-- Modal Toggler -->
                             <x-slot:toggle>
                                 <span 
-                                    class="text-[#0A49A7] cursor-pointer"
+                                    class="cursor-pointer text-[#0A49A7]"
                                     role="button"
                                     tabindex="0"
                                     v-if="! cart.coupon_code"
@@ -54,7 +54,7 @@
                                 <x-shop::form.control-group class="!mb-0">
                                     <x-shop::form.control-group.control
                                         type="text"
-                                        class="py-5 px-6"
+                                        class="px-6 py-5"
                                         name="code"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.coupon.enter-your-code')"
@@ -70,8 +70,8 @@
                             <!-- Modal Footer -->
                             <x-slot:footer>
                                 <!-- Coupon Form Action Container -->
-                                <div class="flex items-center gap-4 flex-wrap">
-                                    <div class="flex gap-4 items-center">
+                                <div class="flex flex-wrap items-center gap-4">
+                                    <div class="flex items-center gap-4">
                                         <p class="text-sm font-medium text-[#6E6E6E]">
                                             @lang('shop::app.checkout.coupon.subtotal')
                                         </p>
@@ -82,7 +82,7 @@
                                     </div>
 
                                     <x-shop::button
-                                        class="primary-button flex-auto max-w-none py-3 px-11 rounded-2xl"
+                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3"
                                         :title="trans('shop::app.checkout.coupon.button-title')"
                                         ::loading="isStoring"
                                         ::disabled="isStoring"
@@ -97,7 +97,7 @@
 
                 <!-- Applied Coupon Information Container -->
                 <div 
-                    class="flex justify-between items-center text-xs font-small "
+                    class="font-small flex items-center justify-between text-xs"
                     v-if="cart.coupon_code"
                 >
                     <p 
@@ -108,7 +108,7 @@
                     </p>
 
                     <span 
-                        class="icon-cancel text-2xl cursor-pointer"
+                        class="icon-cancel cursor-pointer text-2xl"
                         title="@lang('shop::app.checkout.coupon.remove')"
                         @click="destroyCoupon"
                     >

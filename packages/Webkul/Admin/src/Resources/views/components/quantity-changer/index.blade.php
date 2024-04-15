@@ -4,7 +4,7 @@
 ])
 
 <v-quantity-changer
-    {{ $attributes->merge(['class' => 'flex border dark:border-gray-300 items-center']) }}
+    {{ $attributes->merge(['class' => 'flex items-center border dark:border-gray-300']) }}
     name="{{ $name }}"
     value="{{ $value }}"
 >
@@ -17,18 +17,18 @@
     >
         <div>
             <span 
-                class="text-2xl dark:text-gray-300 cursor-pointer"
+                class="cursor-pointer text-2xl dark:text-gray-300"
                 @click="decrease"
             >
                 -
             </span>
 
-            <p class="w-2.5 text-center dark:text-gray-300 select-none">
+            <p class="w-2.5 select-none text-center dark:text-gray-300">
                 @{{ quantity }}
             </p>
             
             <span 
-                class="text-2xl dark:text-gray-300 cursor-pointer"
+                class="cursor-pointer text-2xl dark:text-gray-300"
                 @click="increase"
             >
                 +

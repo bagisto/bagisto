@@ -7,16 +7,16 @@
         @endphp
 
         @if ($groupedProducts->count())
-            <div class="grid gap-5 mt-8">
+            <div class="mt-8 grid gap-5">
                 @foreach ($groupedProducts as $groupedProduct)
                     @if ($groupedProduct->associated_product->getTypeInstance()->isSaleable())
-                        <div class="flex gap-5 justify-between items-center">
+                        <div class="flex items-center justify-between gap-5">
                             <div class="text-sm font-medium">
                                 <p class="">
                                     @lang('shop::app.products.view.type.grouped.name')
                                 </p>
 
-                                <p class="text-[#6E6E6E] mt-1.5">
+                                <p class="mt-1.5 text-[#6E6E6E]">
                                     {{ $groupedProduct->associated_product->name . ' + ' . core()->currency($groupedProduct->associated_product->getTypeInstance()->getFinalPrice()) }}
                                 </p>
 
@@ -25,7 +25,7 @@
                             <x-shop::quantity-changer
                                 name="qty[{{$groupedProduct->associated_product_id}}]"
                                 :value="$groupedProduct->qty"
-                                class="gap-x-4 py-2.5 px-3 rounded-xl"
+                                class="gap-x-4 rounded-xl px-3 py-2.5"
                                 @change="updateItem($event)"
                             />
                         </div>

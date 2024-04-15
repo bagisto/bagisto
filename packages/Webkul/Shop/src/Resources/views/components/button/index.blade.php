@@ -18,7 +18,7 @@
         >
             <!-- Spinner -->
             <svg
-                class="absolute animate-spin h-5 w-5 text-blue"
+                class="text-blue absolute h-5 w-5 animate-spin"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none" 
                 aria-hidden="true"
@@ -42,7 +42,7 @@
                 </path>
             </svg>
 
-            <span class="opacity-0 realative h-full w-full">
+            <span class="realative h-full w-full opacity-0">
                 @{{ title }}
             </span>
         </button>

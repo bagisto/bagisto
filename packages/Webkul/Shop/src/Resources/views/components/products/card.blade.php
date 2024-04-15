@@ -11,10 +11,10 @@
     >
         <!-- Grid Card -->
         <div
-            class='grid gap-2.5 content-start w-full relative'
+            class='relative grid w-full content-start gap-2.5'
             v-if="mode != 'list'"
         >
-            <div class="relative overflow-hidden group max-w-[291px] max-h-[300px] rounded">
+            <div class="group relative max-h-[300px] max-w-[291px] overflow-hidden rounded">
 
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
@@ -23,7 +23,7 @@
                     :aria-label="product.name + ' '"
                 >
                     <x-shop::media.images.lazy
-                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
+                        class="after:content-[' '] relative bg-[#F5F5F5] transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
                         ::src="product.base_image.medium_image_url"
                         ::key="product.id"
                         ::index="product.id"
@@ -37,26 +37,26 @@
 
                 <div class="action-items bg-black">
                     <p
-                        class="inline-block absolute top-5 ltr:left-5 rtl:right-5 px-2.5  bg-[#E51A1A] rounded-[44px] text-white text-sm"
+                        class="absolute top-5 inline-block rounded-[44px] bg-[#E51A1A] px-2.5 text-sm text-white ltr:left-5 rtl:right-5"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-5 ltr:left-5 rtl:right-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
+                        class="absolute top-5 inline-block rounded-[44px] bg-navyBlue px-2.5 text-sm text-white ltr:left-5 rtl:right-5"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
                     </p>
 
-                    <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300 max-sm:opacity-100 max-lg:opacity-100">
+                    <div class="opacity-0 transition-all duration-300 group-hover:bottom-0 group-hover:opacity-100 max-lg:opacity-100 max-sm:opacity-100">
 
                         {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span
-                                class="flex justify-center items-center absolute top-5 ltr:right-5 rtl:left-5 w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-2xl max-sm:text-xl"
+                                class="absolute top-5 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl max-sm:text-xl ltr:right-5 rtl:left-5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -72,7 +72,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span
-                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-16 ltr:right-5 rtl:left-5 bg-white rounded-md cursor-pointer text-2xl max-sm:text-xl"
+                                class="icon-compare absolute top-16 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl max-sm:text-xl ltr:right-5 rtl:left-5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -86,7 +86,7 @@
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
 
                         <button
-                            class="absolute bottom-4 left-1/2 py-3 px-11 bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-1/2 translate-y-14 group-hover:translate-y-0 transition-all duration-300 max-sm:translate-y-2.5 max-sm:group-hover:translate-y-2.5 max-lg:translate-y-2.5 max-sm:px-7 max-sm:py-2"
+                            class="absolute bottom-4 left-1/2 w-max -translate-x-1/2 translate-y-14 cursor-pointer rounded-xl bg-white px-11 py-3 text-xs font-medium text-navyBlue transition-all duration-300 group-hover:translate-y-0 max-lg:translate-y-2.5 max-sm:translate-y-2.5 max-sm:px-7 max-sm:py-2 max-sm:group-hover:translate-y-2.5"
                             :disabled="! product.is_saleable || isAddingToCart"
                             @click="addToCart()"
                         >
@@ -98,7 +98,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-2.5 content-start max-w-[291px]">
+            <div class="grid max-w-[291px] content-start gap-2.5">
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
 
@@ -111,7 +111,7 @@
                 {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
 
                 <div
-                    class="flex gap-2.5 items-center font-semibold text-lg"
+                    class="flex items-center gap-2.5 text-lg font-semibold"
                     v-html="product.price_html"
                 >
                 </div>
@@ -119,26 +119,26 @@
                 {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
 
                 <!-- Needs to implement that in future -->
-                <div class="hidden flex gap-4 mt-2">
-                    <span class="block w-[30px] h-[30px] bg-[#B5DCB4] rounded-full cursor-pointer"></span>
+                <div class="mt-2 flex hidden gap-4">
+                    <span class="block h-[30px] w-[30px] cursor-pointer rounded-full bg-[#B5DCB4]"></span>
 
-                    <span class="block w-[30px] h-[30px] bg-[#5C5C5C] rounded-full cursor-pointer"></span>
+                    <span class="block h-[30px] w-[30px] cursor-pointer rounded-full bg-[#5C5C5C]"></span>
                 </div>
             </div>
         </div>
 
         <!-- List Card -->
         <div
-            class="flex gap-4 grid-cols-2 max-w-max relative max-sm:flex-wrap rounded overflow-hidden"
+            class="relative flex max-w-max grid-cols-2 gap-4 overflow-hidden rounded max-sm:flex-wrap"
             v-else
         >
-            <div class="relative max-w-[250px] max-h-[258px] overflow-hidden group"> 
+            <div class="group relative max-h-[258px] max-w-[250px] overflow-hidden"> 
 
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
                 <a :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`">
                     <x-shop::media.images.lazy
-                        class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
+                        class="after:content-[' '] relative min-w-[250px] bg-[#F5F5F5] transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
                         ::src="product.base_image.medium_image_url"
                         ::key="product.id"
                         ::index="product.id"
@@ -152,26 +152,26 @@
 
                 <div class="action-items bg-black">
                     <p
-                        class="inline-block absolute top-5 ltr:left-5 rtl:right-5 px-2.5 bg-[#E51A1A] rounded-[44px] text-white text-sm"
+                        class="absolute top-5 inline-block rounded-[44px] bg-[#E51A1A] px-2.5 text-sm text-white ltr:left-5 rtl:right-5"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-5 ltr:left-5 rtl:right-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
+                        class="absolute top-5 inline-block rounded-[44px] bg-navyBlue px-2.5 text-sm text-white ltr:left-5 rtl:right-5"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
                     </p>
 
-                    <div class="group-hover:bottom-0 opacity-0 transition-all duration-300 max-sm:opacity-100 group-hover:opacity-100">
+                    <div class="opacity-0 transition-all duration-300 group-hover:bottom-0 group-hover:opacity-100 max-sm:opacity-100">
 
                         {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span 
-                                class="flex justify-center items-center absolute top-5 ltr:right-5 rtl:left-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
+                                class="absolute top-5 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl ltr:right-5 rtl:left-5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -187,7 +187,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span
-                                class="icon-compare flex justify-center items-center absolute top-16 ltr:right-5 rtl:left-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
+                                class="icon-compare absolute top-16 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl ltr:right-5 rtl:left-5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -201,7 +201,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-4 content-start">
+            <div class="grid content-start gap-4">
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
 
@@ -222,11 +222,11 @@
                 {!! view_render_event('bagisto.shop.components.products.card.price.after') !!}
 
                 <!-- Needs to implement that in future -->
-                <div class="hidden flex gap-4">
-                    <span class="block w-[30px] h-[30px] rounded-full bg-[#B5DCB4]">
+                <div class="flex hidden gap-4">
+                    <span class="block h-[30px] w-[30px] rounded-full bg-[#B5DCB4]">
                     </span>
 
-                    <span class="block w-[30px] h-[30px] rounded-full bg-[#5C5C5C]">
+                    <span class="block h-[30px] w-[30px] rounded-full bg-[#5C5C5C]">
                     </span>
                 </div>
 
@@ -250,7 +250,7 @@
                 {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
 
                 <x-shop::button
-                    class="primary-button px-8 py-2.5 whitespace-nowrap"
+                    class="primary-button whitespace-nowrap px-8 py-2.5"
                     :title="trans('shop::app.components.products.card.add-to-cart')"
                     ::loading="isAddingToCart"
                     ::disabled="! product.is_saleable || isAddingToCart"

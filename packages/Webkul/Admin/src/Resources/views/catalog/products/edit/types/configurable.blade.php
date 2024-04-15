@@ -10,21 +10,21 @@
         type="text/x-template"
         id="v-product-variations-template"
     >
-        <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
+        <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
             <!-- Panel Header -->
-            <div class="flex flex-wrap gap-2.5 justify-between mb-2.5 p-4">
+            <div class="mb-2.5 flex flex-wrap justify-between gap-2.5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.products.edit.types.configurable.title')
                     </p>
 
-                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
                         @lang('admin::app.catalog.products.edit.types.configurable.info')
                     </p>
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-1 items-center">
+                <div class="flex items-center gap-x-1">
                     <div
                         class="secondary-button"
                         @click="$refs.variantCreateModal.open()"
@@ -59,16 +59,16 @@
 
             <!-- For Empty Variations -->
             <template v-else>
-                <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5">
+                <div class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10">
                     <!-- Placeholder Image -->
                     <img
                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                        class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                        class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                     />
 
                     <!-- Add Variants Information -->
-                    <div class="flex flex-col gap-1.5 items-center">
-                        <p class="text-base text-gray-400 font-semibold">
+                    <div class="flex flex-col items-center gap-1.5">
+                        <p class="text-base font-semibold text-gray-400">
                             @lang('admin::app.catalog.products.edit.types.configurable.empty-title')
                         </p>
 
@@ -97,7 +97,7 @@
                     <x-admin::modal ref="variantCreateModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-lg text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.products.edit.types.configurable.create.title')
                             </p>
                         </x-slot>
@@ -114,7 +114,7 @@
                                 <v-field
                                     as="select"
                                     :name="attribute.code"
-                                    class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                    class="custom-select flex min-h-[39px] w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                     :class="[errors[attribute.code] ? 'border border-red-500' : '']"
                                     rules="required"
                                     :label="attribute.admin_name"
@@ -131,8 +131,10 @@
                                     :name="attribute.code"
                                     v-slot="{ message }"
                                 >
-                                    <p class="mt-1 text-red-600 text-xs italic">
-                                        @{{ message }}
+                                    <p
+                                        class="mt-1 text-xs italic text-red-600"
+                                        v-text="message"
+                                    >
                                     </p>
                                 </v-error-message>
                             </x-admin::form.control-group>
@@ -141,7 +143,7 @@
                         <!-- Modal Footer -->
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-2.5 items-center">
+                            <div class="flex items-center gap-x-2.5">
                                 <button 
                                     type="submit"
                                     class="primary-button"
@@ -162,9 +164,9 @@
         id="v-product-variations-mass-action-template"
     >
         <!-- Mass Actions -->
-        <div class="flex gap-1.5 items-center px-4">
+        <div class="flex items-center gap-1.5 px-4">
             <span
-                class="flex icon-uncheckbox text-2xl cursor-pointer select-none"
+                class="icon-uncheckbox flex cursor-pointer select-none text-2xl"
                 :class="{
                     '!icon-checked text-blue-600': variants.length == selectedVariants.length,
                     '!icon-checkbox-partial text-blue-600': selectedVariants.length && variants.length != selectedVariants.length
@@ -180,7 +182,7 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-1.5 rounded-md text-xs text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
+                        class="flex cursor-pointer items-center rounded-md p-1.5 text-xs font-semibold text-blue-600 transition-all hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-950"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-variants')
 
@@ -192,7 +194,7 @@
                 <x-slot:content class="px-0 py-4">
                     <template v-for="attribute in superAttributes">
                         <label
-                            class="flex gap-2.5 items-center px-5 py-2 text-sm text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  select-none"
+                            class="flex cursor-pointer select-none items-center gap-2.5 px-5 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"
                             :for="'attribute_' + attribute.id + '_option_' + option.id"
                             v-for="option in usedAttributeOptions(attribute)"
                         >
@@ -200,19 +202,19 @@
                                 <input
                                     type="checkbox"
                                     :id="'attribute_' + attribute.id + '_option_' + option.id"
-                                    class="hidden peer"
+                                    class="peer hidden"
                                     :checked="isAttributeOptionChecked(attribute, option)"
                                     @change="selectVariantsByAttributeOption(attribute, option)"
                                 >
 
                                 <label
-                                    class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
+                                    class="icon-uncheckbox peer-checked:icon-checked cursor-pointer text-2xl peer-checked:text-blue-600"
                                     :for="'attribute_' + attribute.id + '_option_' + option.id"
                                 >
                                 </label>
                             </div>
 
-                            <div class="flex gap-1.5 items-center">
+                            <div class="flex items-center gap-1.5">
                                 <span class="text-gray-800 dark:text-white">
                                     @{{ attribute.admin_name }}
                                 </span>
@@ -232,7 +234,7 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-1.5 rounded-md text-xs text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
+                        class="flex cursor-pointer items-center rounded-md p-1.5 text-xs font-semibold text-blue-600 transition-all hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-950"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-action')
 
@@ -264,13 +266,13 @@
                     >
                         <!-- Drawer Header -->
                         <x-slot:header>
-                            <div class="flex justify-between items-center">
+                            <div class="flex items-center justify-between">
                                 <p class="text-xl font-medium dark:text-white">
                                     @{{ updateTypes[selectedType].title }}
                                 </p>
 
                                 <button
-                                    class="ltr:mr-11 rtl:ml-11 primary-button"
+                                    class="primary-button ltr:mr-11 rtl:ml-11"
                                     type="submit"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
@@ -287,15 +289,15 @@
                                 <form @submit="handleSubmit($event, update)">
                                     <!-- Mass Update -->
                                     <template v-if="selectedType == 'editPrices'">
-                                        <div class="pb-2.5 border-b dark:border-gray-800">
-                                            <div class="flex gap-2.5 items-end">
-                                                <x-admin::form.control-group class="flex-1 !mb-0">
+                                        <div class="border-b pb-2.5 dark:border-gray-800">
+                                            <div class="flex items-end gap-2.5">
+                                                <x-admin::form.control-group class="!mb-0 flex-1">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
                                                     </x-admin::form.control-group.label>
                         
                                                     <div class="relative">
-                                                        <span class="absolute ltr:left-4 rtl:right-4 top-1/2 -translate-y-1/2 text-gray-500">
+                                                        <span class="absolute top-1/2 -translate-y-1/2 text-gray-500 ltr:left-4 rtl:right-4">
                                                             {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
                                                         </span>
 
@@ -319,8 +321,8 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editInventories'">
-                                        <div class="pb-2.5 border-b dark:border-gray-800">
-                                            <div class="grid grid-cols-3 gap-4 mb-2.5">
+                                        <div class="border-b pb-2.5 dark:border-gray-800">
+                                            <div class="mb-2.5 grid grid-cols-3 gap-4">
                                                 <x-admin::form.control-group
                                                     class="!mb-0"
                                                     v-for='inventorySource in inventorySources'
@@ -332,7 +334,7 @@
                                                     <v-field
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
-                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                        class="flex min-h-[39px] w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="required|numeric|min:0"
                                                         :label="inventorySource.name"
@@ -343,7 +345,7 @@
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         v-slot="{ message }"
                                                     >
-                                                        <p class="mt-1 text-red-600 text-xs italic">
+                                                        <p class="mt-1 text-xs italic text-red-600">
                                                             @{{ message }}
                                                         </p>
                                                     </v-error-message>
@@ -357,7 +359,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'addImages'">
-                                        <div class="pb-2.5 border-b dark:border-gray-800">
+                                        <div class="border-b pb-2.5 dark:border-gray-800">
                                             <v-media-images
                                                 name="images"
                                                 class="mb-2.5"
@@ -373,9 +375,9 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editWeight'">
-                                        <div class="pb-2.5 border-b dark:border-gray-800">
-                                            <div class="flex gap-2.5 items-end">
-                                                <x-admin::form.control-group class="flex-1 !mb-0">
+                                        <div class="border-b pb-2.5 dark:border-gray-800">
+                                            <div class="flex items-end gap-2.5">
+                                                <x-admin::form.control-group class="!mb-0 flex-1">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-weight')
                                                     </x-admin::form.control-group.label>
@@ -401,9 +403,9 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editName'">
-                                        <div class="pb-2.5 border-b dark:border-gray-800">
-                                            <div class="flex gap-2.5 items-end">
-                                                <x-admin::form.control-group class="flex-1 !mb-0">
+                                        <div class="border-b pb-2.5 dark:border-gray-800">
+                                            <div class="flex items-end gap-2.5">
+                                                <x-admin::form.control-group class="!mb-0 flex-1">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-name')
                                                     </x-admin::form.control-group.label>
@@ -428,9 +430,9 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editStatus'">
-                                        <div class="pb-2.5 border-b dark:border-gray-800">
-                                            <div class="flex gap-2.5 items-end">
-                                                <x-admin::form.control-group class="flex-1 !mb-0">
+                                        <div class="border-b pb-2.5 dark:border-gray-800">
+                                            <div class="flex items-end gap-2.5">
+                                                <x-admin::form.control-group class="!mb-0 flex-1">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-status')
                                                     </x-admin::form.control-group.label>
@@ -465,17 +467,17 @@
                             </x-admin::form>
 
                             <div
-                                class="py-4 border-b dark:border-gray-800 last:border-b-0"
-                                :class="{'grid grid-cols-2 gap-3 justify-between items-center': [
+                                class="border-b py-4 last:border-b-0 dark:border-gray-800"
+                                :class="{'grid grid-cols-2 items-center justify-between gap-3': [
                                         'editName', 'editSku',
-                                ].includes(selectedType), 'flex justify-between items-center' : [
+                                ].includes(selectedType), 'flex items-center justify-between' : [
                                     'editWeight', 'editPrices', 'editStatus',
                                 ].includes(selectedType)}"
                                 v-for="variant in tempSelectedVariants"
                             >
                                 <div class="text-sm text-gray-800">
                                     <span
-                                        class="dark:text-white after:content-['_/_'] last:after:content-['']"
+                                        class="after:content-['_/_'] last:after:content-[''] dark:text-white"
                                         v-for='(attribute, index) in superAttributes'
                                     >
                                         @{{ optionName(attribute, variant[attribute.code]) }}
@@ -483,15 +485,15 @@
                                 </div>
 
                                 <template v-if="selectedType == 'editPrices'">
-                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                    <x-admin::form.control-group class="mb-0 max-w-[115px] flex-1">
                                         <div class="relative">
-                                            <span class="absolute ltr:left-4 rtl:right-4 top-1/2 -translate-y-1/2 text-gray-500">
+                                            <span class="absolute top-1/2 -translate-y-1/2 text-gray-500 ltr:left-4 rtl:right-4">
                                                 {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
                                             </span>
 
                                             <v-field
                                                 type="text"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-8 rtl:pr-8 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex min-h-[39px] w-full rounded-md border bg-white py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-8 rtl:pr-8"
                                                 :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :name="'variants[variant_' + variant.id + ']'"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
@@ -505,7 +507,7 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p class="mt-1 text-red-600 text-xs italic">
+                                            <p class="mt-1 text-xs italic text-red-600">
                                                 @{{ message }}
                                             </p>
                                         </v-error-message>
@@ -513,11 +515,11 @@
                                 </template>
 
                                 <template v-if="selectedType == 'editWeight'">
-                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                    <x-admin::form.control-group class="mb-0 max-w-[115px] flex-1">
                                         <div class="relative">
                                             <v-field
                                                 type="text"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex min-h-[39px] w-full rounded-md border bg-white py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-2.5 rtl:pr-2.5"
                                                 :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
@@ -531,7 +533,7 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p class="mt-1 text-red-600 text-xs italic">
+                                            <p class="mt-1 text-xs italic text-red-600">
                                                 @{{ message }}
                                             </p>
                                         </v-error-message>
@@ -539,11 +541,11 @@
                                 </template>
 
                                 <template v-if="selectedType == 'editStatus'">
-                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                    <x-admin::form.control-group class="mb-0 max-w-[115px] flex-1">
                                         <div class="relative">
                                             <v-field
                                                 as="select"
-                                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="custom-select flex min-h-[39px] w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                 :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
@@ -564,7 +566,7 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p class="mt-1 text-red-600 text-xs italic">
+                                            <p class="mt-1 text-xs italic text-red-600">
                                                 @{{ message }}
                                             </p>
                                         </v-error-message>
@@ -573,7 +575,7 @@
 
                                 <template v-if="selectedType == 'editName'">
                                     <x-admin::form.control-group 
-                                        class="flex-1 mb-0"
+                                        class="mb-0 flex-1"
                                         ::class="{ 
                                             'max-w-[115px]' : selectedType !== 'editName',
                                             '!mb-0': selectedType === 'editName'
@@ -582,7 +584,7 @@
                                         <div class="relative">
                                             <v-field
                                                 type="text"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex min-h-[39px] w-full rounded-md border bg-white py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-2.5 rtl:pr-2.5"
                                                 :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
@@ -596,7 +598,7 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p class="mt-1 text-red-600 text-xs italic">
+                                            <p class="mt-1 text-xs italic text-red-600">
                                                 @{{ message }}
                                             </p>
                                         </v-error-message>
@@ -604,8 +606,8 @@
                                 </template>
 
                                 <template v-if="selectedType == 'editInventories'">
-                                    <x-admin::form.control-group class="mt-2.5 mb-0">
-                                        <div class="grid grid-cols-3 gap-4 mb-2.5">
+                                    <x-admin::form.control-group class="mb-0 mt-2.5">
+                                        <div class="mb-2.5 grid grid-cols-3 gap-4">
                                             <x-admin::form.control-group
                                                 class="!mb-0"
                                                 v-for='inventorySource in inventorySources'
@@ -616,7 +618,7 @@
 
                                                 <v-field
                                                     type="text"
-                                                    class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                    class="flex min-h-[39px] w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                     :class="[errors['variants[variant_' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                     :name="'variants[variant_' + variant.id + '][' + inventorySource.id + ']'"
                                                     rules="required|numeric|min:0"
@@ -629,7 +631,7 @@
                                                     :name="'variants[variant_' + variant.id + '][' + inventorySource.id + ']'"
                                                     v-slot="{ message }"
                                                 >
-                                                    <p class="mt-1 text-red-600 text-xs italic">
+                                                    <p class="mt-1 text-xs italic text-red-600">
                                                         @{{ message }}
                                                     </p>
                                                 </v-error-message>
@@ -640,7 +642,7 @@
 
                                 <template v-if="selectedType == 'editSku'">
                                     <x-admin::form.control-group 
-                                        class="flex-1 mb-0"
+                                        class="mb-0 flex-1"
                                         ::class="{ 
                                             'max-w-[115px]' : selectedType !== 'editSku',
                                             '!mb-0': selectedType === 'editSku'
@@ -649,7 +651,7 @@
                                         <div class="relative">
                                             <v-field
                                                 type="text"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex min-h-[39px] w-full rounded-md border bg-white py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-2.5 rtl:pr-2.5"
                                                 :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
@@ -664,7 +666,7 @@
                                             :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
-                                            <p class="mt-1 text-red-600 text-xs italic">
+                                            <p class="mt-1 text-xs italic text-red-600">
                                                 @{{ message }}
                                             </p>
                                         </v-error-message>
@@ -693,7 +695,7 @@
         type="text/x-template"
         id="v-product-variation-item-template"
     >
-        <div class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800">
+        <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800">
 
             <!-- Information -->
             <div class="flex gap-2.5">
@@ -767,25 +769,25 @@
                     <input
                         type="checkbox"
                         :id="'variant_' + variant.id"
-                        class="hidden peer"
+                        class="peer hidden"
                         v-model="variant.selected"
                     >
 
                     <label
-                        class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
+                        class="icon-uncheckbox peer-checked:icon-checked cursor-pointer text-2xl peer-checked:text-blue-600"
                         :for="'variant_' + variant.id"
                     ></label>
                 </div>
 
                 <!-- Image -->
                 <div
-                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
-                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! variant.images.length}"
+                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! variant.images.length}"
                 >
                     <template v-if="! variant.images.length">
                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                     
-                        <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                             @lang('admin::app.catalog.products.edit.types.configurable.image-placeholder')
                         </p>
                     </template>
@@ -793,15 +795,15 @@
                     <template v-else>
                         <img :src="variant.images[0].url">
 
-                        <span class="absolute bottom-px ltr:left-px rtl:right-px text-xs font-bold text-white leading-normal bg-darkPink rounded-full px-1.5">
+                        <span class="absolute bottom-px rounded-full bg-darkPink px-1.5 text-xs font-bold leading-normal text-white ltr:left-px rtl:right-px">
                             @{{ variant.images.length }}
                         </span>
                     </template>
                 </div>
 
                 <!-- Details -->
-                <div class="grid gap-1.5 place-content-start">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                <div class="grid place-content-start gap-1.5">
+                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @{{ variant.name ?? 'N/A' }}
                     </p>
 
@@ -813,12 +815,12 @@
                         :name="'variants[' + variant.id + '].sku'"
                         v-slot="{ message }"
                     >
-                        <p class="mt-1 text-red-600 text-xs italic">
+                        <p class="mt-1 text-xs italic text-red-600">
                             @{{ message }}
                         </p>
                     </v-error-message>
 
-                    <div class="flex gap-1.5 place-items-start">
+                    <div class="flex place-items-start gap-1.5">
                         <span
                             class="label-active"
                             v-if="isDefault"
@@ -839,19 +841,19 @@
             </div>
 
             <!-- Actions -->
-            <div class="grid gap-1 place-content-start text-right">
-                <p class="text-gray-800 font-semibold dark:text-white">
+            <div class="grid place-content-start gap-1 text-right">
+                <p class="font-semibold text-gray-800 dark:text-white">
                     @{{ $admin.formatPrice(variant.price) }}  
                 </p>
 
-                <p class="text-gray-800 font-semibold dark:text-white">
+                <p class="font-semibold text-gray-800 dark:text-white">
                     @{{ "@lang('admin::app.catalog.products.edit.types.configurable.qty')".replace(':qty', totalQty) }}
                 </p>
 
                 <div class="flex gap-2.5">
                     <!-- Remove -->
                     <p
-                        class="text-red-600 cursor-pointer transition-all hover:underline"
+                        class="cursor-pointer text-red-600 transition-all hover:underline"
                         @click="remove"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.delete-btn')
@@ -860,7 +862,7 @@
                     <!-- Edit -->
                     <div>
                         <p
-                            class="text-emerald-600 cursor-pointer transition-all hover:underline"
+                            class="cursor-pointer text-emerald-600 transition-all hover:underline"
                             @click="$refs.editVariantDrawer.open()"
                         >
                             @lang('admin::app.catalog.products.edit.types.configurable.edit-btn')
@@ -879,12 +881,12 @@
                                 >
                                     <!-- Drawer Header -->
                                     <x-slot:header>
-                                        <div class="flex justify-between items-center">
+                                        <div class="flex items-center justify-between">
                                             <p class="text-xl font-medium dark:text-white">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.title')
                                             </p>
 
-                                            <button class="ltr:mr-11 rtl:ml-11 primary-button">
+                                            <button class="primary-button ltr:mr-11 rtl:ml-11">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
                                             </button>
                                         </div>
@@ -930,7 +932,7 @@
                                             <x-admin::form.control-group.error control-name="sku" />
                                         </x-admin::form.control-group>
 
-                                        <div class="flex gap-4 mb-2.5">
+                                        <div class="mb-2.5 flex gap-4">
                                             <x-admin::form.control-group class="flex-1">
                                                 <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.catalog.products.edit.types.configurable.edit.price')
@@ -989,12 +991,12 @@
                                         </x-admin::form.control-group>
 
                                         <!-- Inventories -->
-                                        <div class="grid mt-5">
-                                            <p class="mb-2.5 text-gray-800 dark:text-white font-semibold">
+                                        <div class="mt-5 grid">
+                                            <p class="mb-2.5 font-semibold text-gray-800 dark:text-white">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.quantities')
                                             </p>
 
-                                            <div class="grid grid-cols-3 gap-4 mb-2.5">
+                                            <div class="mb-2.5 grid grid-cols-3 gap-4">
                                                 <x-admin::form.control-group
                                                     class="!mb-0"
                                                     v-for='inventorySource in inventorySources'
@@ -1005,7 +1007,7 @@
 
                                                     <v-field
                                                         type="text"
-                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                        class="flex min-h-[39px] w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         rules="numeric|min:0"
@@ -1018,7 +1020,7 @@
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         v-slot="{ message }"
                                                     >
-                                                        <p class="mt-1 text-red-600 text-xs italic">
+                                                        <p class="mt-1 text-xs italic text-red-600">
                                                             @{{ message }}
                                                         </p>
                                                     </v-error-message>
@@ -1028,7 +1030,7 @@
 
                                         <!-- Images -->
                                         <div class="mb-2.5">
-                                            <p class="mb-2.5 text-gray-800 dark:text-white font-semibold">
+                                            <p class="mb-2.5 font-semibold text-gray-800 dark:text-white">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.images')
                                             </p>
 
@@ -1042,7 +1044,7 @@
 
                                         <!-- Actions -->
                                         <div
-                                            class="mt-2.5 text-sm text-gray-800 dark:text-white font-semibold"
+                                            class="mt-2.5 text-sm font-semibold text-gray-800 dark:text-white"
                                             v-if="typeof variant.id !== 'string'"
                                         >
                                             @lang('admin::app.catalog.products.edit.types.configurable.edit.edit-info')

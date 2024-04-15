@@ -9,15 +9,15 @@
             <transition
                 tag="div"
                 name="modal-overlay"
-                enter-class="ease-out duration-300"
+                enter-class="duration-300 ease-out"
                 enter-from-class="opacity-0"
                 enter-to-class="opacity-100"
-                leave-class="ease-in duration-200"
+                leave-class="duration-200 ease-in"
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-10"
+                    class="fixed inset-0 z-10 bg-gray-500 bg-opacity-50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -25,31 +25,31 @@
             <transition
                 tag="div"
                 name="modal-content"
-                enter-class="ease-out duration-300"
-                enter-from-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
-                enter-to-class="opacity-100 translate-y-0 md:scale-100"
-                leave-class="ease-in duration-200"
-                leave-from-class="opacity-100 translate-y-0 md:scale-100"
-                leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+                enter-class="duration-300 ease-out"
+                enter-from-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
+                enter-to-class="translate-y-0 opacity-100 md:scale-100"
+                leave-class="duration-200 ease-in"
+                leave-from-class="translate-y-0 opacity-100 md:scale-100"
+                leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen"
+                    class="fixed inset-0 z-10 transform overflow-y-auto transition" v-show="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <div @click="handleOuterClick" class="w-full h-full z-[999] absolute left-1/2 top-1/2 bg-white max-md:w-[100%] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
-                            <div class="flex gap-5 justify-between items-center p-2 bg-white">
+                        <div @click="handleOuterClick" class="absolute left-1/2 top-1/2 z-[999] h-full w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-white max-md:w-[100%]">
+                            <div class="flex items-center justify-between gap-5 bg-white p-2">
                                 <span class="text-sm">@{{ getCurrentImageStatus }}</span>
 
                                 <span
-                                    class="icon-cancel text-3xl cursor-pointer"
+                                    class="icon-cancel cursor-pointer text-3xl"
                                     @click="toggle"
                                 >
                                 </span>
                             </div>
 
-                            <div class="w-full h-full overflow-hidden">
+                            <div class="h-full w-full overflow-hidden">
                                 <div
-                                    class="flex items-center justify-center relative m-auto w-full"
+                                    class="relative m-auto flex w-full items-center justify-center"
                                     :class="{
                                         'h-full': ! isZooming,
                                         'h-auto': isZooming
@@ -57,12 +57,12 @@
                                 >
                                     <div
                                         v-for="(image, index) in images"
-                                        class="items-center justify-center h-full"
+                                        class="h-full items-center justify-center"
                                         ref="slides"
                                     >
                                         <img
                                             :src="image.original_image_url"
-                                            class="max-w-full max-h-full transition-transform duration-300 ease-out"
+                                            class="max-h-full max-w-full transition-transform duration-300 ease-out"
                                             :class="{
                                                 'cursor-zoom-in': ! isZooming,
                                                 'cursor-grab': ! isDragging && isZooming,
@@ -79,14 +79,14 @@
                                     </div>
 
                                     <span
-                                        class="icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] fixed top-1/2 left-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                                        class="icon-arrow-left fixed left-[10px] top-1/2 -mt-[22px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-[12px] text-[24px] font-bold text-white opacity-30 transition-all hover:opacity-100"
                                         v-if="images?.length >= 2 && ! isZooming"
                                         @click="navigate(currentIndex -= 1)"
                                     >
                                     </span>
 
                                     <span
-                                        class="icon-arrow-right text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] fixed top-1/2 right-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                                        class="icon-arrow-right fixed right-[10px] top-1/2 -mt-[22px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-[12px] text-[24px] font-bold text-white opacity-30 transition-all hover:opacity-100"
                                         v-if="images?.length >= 2  && ! isZooming"
                                         @click="navigate(currentIndex += 1)"
                                     >

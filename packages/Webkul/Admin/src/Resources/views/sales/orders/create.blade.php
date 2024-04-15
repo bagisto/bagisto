@@ -5,9 +5,9 @@
     </x-slot>
 
     <!-- Page Header -->
-    <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
+    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
         <div class="grid gap-1.5">
-            <p class="text-xl text-gray-800 dark:text-white font-bold leading-6">
+            <p class="text-xl font-bold leading-6 text-gray-800 dark:text-white">
                 @lang('admin::app.sales.orders.create.title', ['name' => $cart->customer->name])
             </p>
         </div>
@@ -15,7 +15,7 @@
         <!-- Back Button -->
         <a
             href="{{ route('admin.sales.orders.index') }}"
-            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+            class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
         >
             @lang('admin::app.sales.orders.create.back-btn')
         </a>
@@ -32,12 +32,12 @@
             type="text/x-template"
             id="v-create-order-template"
         >
-            <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+            <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <!-- Left Component -->
                 {!! view_render_event('bagisto.admin.sales.order.create.left_component.before') !!}
                 
                 <div
-                    class="flex flex-col gap-2 flex-1 max-xl:flex-auto overflow-y-auto"
+                    class="flex flex-1 flex-col gap-2 overflow-y-auto max-xl:flex-auto"
                     id="steps-container"
                 >
                     <!-- Cart Items Component -->
@@ -75,7 +75,7 @@
                             <x-admin::drawer ref="productConfigurationDrawer">
                                 <!-- Drawer Header -->
                                 <x-slot:header>
-                                    <div class="flex justify-between items-center">
+                                    <div class="flex items-center justify-between">
                                         <p class="text-xl font-medium dark:text-white">
                                         @lang('admin::app.sales.orders.create.configuration')
                                         </p>
@@ -123,7 +123,7 @@
                 <!-- Right Component -->
                 {!! view_render_event('bagisto.admin.sales.order.right_component.before') !!}
 
-                <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
                     <!-- Cart Items Component -->
                     @include('admin::sales.orders.create.cart-items')
 

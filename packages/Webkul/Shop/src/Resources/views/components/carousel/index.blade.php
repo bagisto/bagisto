@@ -2,7 +2,7 @@
 
 <v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
     <div class="overflow-hidden">
-        <div class="shimmer max-h-screen w-screen aspect-[2.743/1]"></div>
+        <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
     </div>
 </v-carousel>
 
@@ -11,20 +11,20 @@
         type="text/x-template"
         id="v-carousel-template"
     >
-        <div class="flex w-full relative m-auto overflow-hidden">
+        <div class="relative m-auto flex w-full overflow-hidden">
             <!-- Slider -->
             <div 
-                class="inline-flex translate-x-0 will-change-transform transition-transform duration-700 ease-out cursor-pointer"
+                class="inline-flex translate-x-0 cursor-pointer transition-transform duration-700 ease-out will-change-transform"
                 ref="sliderContainer"
             >
                 <div
-                    class="max-h-screen w-screen bg-no-repeat bg-cover"
+                    class="max-h-screen w-screen bg-cover bg-no-repeat"
                     v-for="(image, index) in images"
                     @click="visitLink(image)"
                     ref="slide"
                 >
                     <x-shop::media.images.lazy
-                        class="w-full max-w-full max-h-full transition-transform duration-300 ease-in-out select-none aspect-[2.743/1]"
+                        class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out"
                         ::lazy="false"
                         ::src="image.image"
                         ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
@@ -35,7 +35,7 @@
 
             <!-- Navigation -->
             <span
-                class="icon-arrow-left text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 left-2.5 bg-black/80 transition-all opacity-30 rounded-full hidden md:inline-block"
+                class="icon-arrow-left absolute left-2.5 top-1/2 -mt-[22px] hidden w-auto rounded-full bg-black/80 p-3 text-2xl font-bold text-white opacity-30 transition-all md:inline-block"
                 :class="{
                     'cursor-not-allowed': direction == 'ltr' && currentIndex == 0,
                     'cursor-pointer hover:opacity-100': direction == 'ltr' ? currentIndex > 0 : currentIndex <= 0
@@ -49,7 +49,7 @@
             </span>
 
             <span
-                class="icon-arrow-right text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 right-2.5 bg-black/80 transition-all opacity-30 rounded-full hidden md:inline-block"
+                class="icon-arrow-right absolute right-2.5 top-1/2 -mt-[22px] hidden w-auto rounded-full bg-black/80 p-3 text-2xl font-bold text-white opacity-30 transition-all md:inline-block"
                 :class="{
                     'cursor-not-allowed': direction == 'rtl' && currentIndex == 0,
                     'cursor-pointer hover:opacity-100': direction == 'rtl' ? currentIndex < 0 : currentIndex >= 0
@@ -63,10 +63,10 @@
             </span>
 
             <!-- Pagination -->
-            <div class="absolute bottom-5 left-0 flex justify-center w-full">
+            <div class="absolute bottom-5 left-0 flex w-full justify-center">
                 <div
                     v-for="(image, index) in images"
-                    class="w-3 h-3 rounded-full mx-1 cursor-pointer"
+                    class="mx-1 h-3 w-3 cursor-pointer rounded-full"
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
                     @click="navigateByPagination(index)"
                 >

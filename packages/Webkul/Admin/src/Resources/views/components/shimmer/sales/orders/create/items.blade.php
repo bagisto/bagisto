@@ -1,31 +1,31 @@
-<div class="bg-white dark:bg-gray-900 rounded box-shadow">
+<div class="box-shadow rounded bg-white dark:bg-gray-900">
     <div class="flex items-center justify-between p-4">
-        <div class="shimmer w-[108px] h-[17px]"></div>
+        <div class="shimmer h-[17px] w-[108px]"></div>
 
-        <div class="shimmer w-[82px] h-[17px]"></div>
+        <div class="shimmer h-[17px] w-[82px]"></div>
     </div>
 
     <div class="flex flex-col">
         @for ($i = 1; $i <= 3; $i++)
-            <div class="flex gap-2.5 p-4 border-b dark:border-gray-800 last:border-b-0">
+            <div class="flex gap-2.5 border-b p-4 last:border-b-0 dark:border-gray-800">
                 <!-- Product Image -->
-                <div class="shimmer w-[65px] h-[65px] rounded"></div>
+                <div class="shimmer h-[65px] w-[65px] rounded"></div>
 
                 <!-- Product Detailes -->
-                <div class="flex flex-col gap-1.5 w-[251px]">
+                <div class="flex w-[251px] flex-col gap-1.5">
                     <!-- Product Name -->
-                    <div class="shimmer w-full h-[17px]"></div>
+                    <div class="shimmer h-[17px] w-full"></div>
 
-                    <div class="shimmer w-[65px] h-[17px]"></div>
+                    <div class="shimmer h-[17px] w-[65px]"></div>
 
-                    <div class="shimmer w-[65px] h-[17px]"></div>
+                    <div class="shimmer h-[17px] w-[65px]"></div>
 
-                    <div class="flex gap-2.5 mt-2">
+                    <div class="mt-2 flex gap-2.5">
                         <!-- Product Price -->
-                        <div class="shimmer w-[42px] h-[17px]"></div>
+                        <div class="shimmer h-[17px] w-[42px]"></div>
 
                         <!-- Grand Total -->
-                        <div class="shimmer w-[82px] h-[17px]"></div>
+                        <div class="shimmer h-[17px] w-[82px]"></div>
                     </div>
                 </div>
             </div>

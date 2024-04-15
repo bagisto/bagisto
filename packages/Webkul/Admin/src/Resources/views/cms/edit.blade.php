@@ -17,16 +17,16 @@
 
         {!! view_render_event('bagisto.admin.cms.pages.edit.create_form_controls.before', ['page' => $page]) !!}
 
-        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.cms.edit.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
+            <div class="flex items-center gap-x-2.5">
                 <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.cms.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                    class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                 >
                     @lang('admin::app.cms.edit.back-btn')
                 </a>
@@ -52,15 +52,15 @@
             </div>
         </div>
 
-        <div class="flex  gap-4 justify-between items-center mt-7 max-md:flex-wrap">
-            <div class="flex gap-x-1 items-center">
+        <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
+            <div class="flex items-center gap-x-1">
                 <!-- Locale Switcher -->
                 <x-admin::dropdown :class="core()->getAllLocales()->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
                         >
                             <span class="icon-language text-2xl"></span>
 
@@ -92,15 +92,15 @@
         </div>
 
           <!-- body content -->
-          <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+          <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
             <!-- Left sub-component -->
-            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.content.before', ['page' => $page]) !!}
 
                 <!--Content -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.cms.edit.description')
                     </p>
 
@@ -130,8 +130,8 @@
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.seo.before', ['page' => $page]) !!}
 
                 <!-- SEO Input Fields -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.cms.edit.seo')
                     </p>
 
@@ -215,7 +215,7 @@
             </div>
 
             <!-- Right sub-component -->
-            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
                 <!-- General -->
 
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.accordion.seo.before', ['page' => $page]) !!}
@@ -223,7 +223,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
+                            <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.cms.create.general')
                             </p>
                         </div>
@@ -254,7 +254,7 @@
                         </x-admin::form.control-group.label>
 
                         @foreach(core()->getAllChannels() as $channel)
-                            <x-admin::form.control-group class="flex gap-2.5 !mb-2 last:!mb-0 select-none">
+                            <x-admin::form.control-group class="!mb-2 flex select-none gap-2.5 last:!mb-0">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     :id="'channels_' . $channel->id"
@@ -267,7 +267,7 @@
                                 />
 
                                 <label
-                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                    class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                     for="channels_{{ $channel->id }}" 
                                 >
                                     {{ core()->getChannelName($channel) }}
