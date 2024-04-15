@@ -83,10 +83,10 @@
                 tag="div"
                 name="drawer"
                 :enter-from-class="enterFromLeaveToClasses"
-                enter-active-class="transform transition ease-in-out duration-200"
+                enter-active-class="transform transition duration-200 ease-in-out"
                 enter-to-class="translate-x-0"
                 leave-from-class="translate-x-0"
-                leave-active-class="transform transition ease-in-out duration-200"
+                leave-active-class="transform transition duration-200 ease-in-out"
                 :leave-to-class="enterFromLeaveToClasses"
             >
                 <div

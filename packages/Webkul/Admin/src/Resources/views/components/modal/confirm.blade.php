@@ -9,10 +9,10 @@
             <transition
                 tag="div"
                 name="modal-overlay"
-                enter-class="ease-out duration-300"
+                enter-class="duration-300 ease-out"
                 enter-from-class="opacity-0"
                 enter-to-class="opacity-100"
-                leave-class="ease-in duration-200"
+                leave-class="duration-200 ease-in"
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0"
             >
@@ -25,12 +25,12 @@
             <transition
                 tag="div"
                 name="modal-content"
-                enter-class="ease-out duration-300"
-                enter-from-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
-                enter-to-class="opacity-100 translate-y-0 md:scale-100"
-                leave-class="ease-in duration-200"
-                leave-from-class="opacity-100 translate-y-0 md:scale-100"
-                leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+                enter-class="duration-300 ease-out"
+                enter-from-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
+                enter-to-class="translate-y-0 opacity-100 md:scale-100"
+                leave-class="duration-200 ease-in"
+                leave-from-class="translate-y-0 opacity-100 md:scale-100"
+                leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
             >
                 <div
                     class="fixed inset-0 z-[10002] transform overflow-y-auto transition"
