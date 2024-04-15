@@ -40,6 +40,7 @@
                             :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === `video_${index}` ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                             v-for="(video, index) in media.videos"
                             @click="change(video, `video_${index}`)"
+                            alt="{{ $product->name }}"
                         >
                             <source
                                 :src="video.video_url"
@@ -90,6 +91,7 @@
                             controls
                             width="475"
                             @loadeddata="onMediaLoad()"
+                            alt="{{ $product->name }}"
                         >
                             <source
                                 :src="baseFile.path"

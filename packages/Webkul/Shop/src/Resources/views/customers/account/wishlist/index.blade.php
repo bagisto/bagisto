@@ -67,6 +67,7 @@
                                                 <img 
                                                     class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-xl"
                                                     :src="item.product.base_image.small_image_url" 
+                                                    alt="Product Image"
                                                 /> 
                                             </a>
 
@@ -187,7 +188,7 @@
                         <img
                             src="{{ bagisto_asset('images/wishlist.png') }}"
                             class=""
-                            alt=""
+                            alt="Empty wishlist"
                             title=""
                         >
 
