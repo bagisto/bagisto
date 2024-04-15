@@ -33,7 +33,7 @@
     >
         <div>
             <div
-                class="select-none flex"
+                class="flex select-none"
                 ref="toggleBlock"
                 @click="toggle()"
             >
@@ -51,7 +51,7 @@
                 leave-to-class="transform opacity-0 scale-95"
             >
                 <div
-                    class="absolute bg-white dark:bg-gray-900 shadow-[0px_8px_10px_0px_rgba(0,0,0,0.20),0px_6px_30px_0px_rgba(0,0,0,0.12),0px_16px_24px_0px_rgba(0,0,0,0.14)] rounded w-max z-10"
+                    class="absolute z-10 w-max rounded bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.20),0px_6px_30px_0px_rgba(0,0,0,0.12),0px_16px_24px_0px_rgba(0,0,0,0.14)] dark:bg-gray-900"
                     :style="positionStyles"
                     v-show="isActive"
                 >

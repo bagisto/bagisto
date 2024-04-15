@@ -16,16 +16,16 @@
         enctype="multipart/form-data"
         v-slot="{ errors }"
     >
-        <div class="flex justify-between items-center">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.settings.themes.edit.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
-                <div class="flex gap-x-2.5 items-center">
+            <div class="flex items-center gap-x-2.5">
+                <div class="flex items-center gap-x-2.5">
                     <a
                         href="{{ route('admin.settings.themes.index') }}"
-                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                        class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                     >
                         @lang('admin::app.settings.themes.edit.back')
                     </a>
@@ -41,15 +41,15 @@
         </div>
 
         <!-- Channel and Locale Switcher -->
-        <div class="flex  gap-4 justify-between items-center mt-7 max-md:flex-wrap">
-            <div class="flex gap-x-1 items-center">
+        <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
+            <div class="flex items-center gap-x-1">
                 <!-- Locale Switcher -->
                 <x-admin::dropdown :class="$currentChannel->locales->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
                         >
                             <span class="icon-language text-2xl"></span>
 

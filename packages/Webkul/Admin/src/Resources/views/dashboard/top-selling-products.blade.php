@@ -18,11 +18,11 @@
         <template v-else>
             <div class="border-b dark:border-gray-800">
                 <div class="flex items-center justify-between p-4">
-                    <p class="text-gray-600 dark:text-gray-300 text-base  font-semibold">
+                    <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
                         @lang('admin::app.dashboard.index.top-selling-products')
                     </p>
 
-                    <p class="text-xs text-gray-400 font-semibold">
+                    <p class="text-xs font-semibold text-gray-400">
                         @{{ report.date_range }}
                     </p>
                 </div>
@@ -34,29 +34,29 @@
                 >
                     <a
                         :href="`{{route('admin.catalog.products.edit', '')}}/${item.id}`"
-                        class="flex gap-2.5 p-4 border-b dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="flex gap-2.5 border-b p-4 transition-all last:border-b-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                         v-for="item in report.statistics"
                     >
                         <!-- Product Item -->
                         <img
                             v-if="item.images?.length"
-                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded overflow-hidden"
+                            class="relative h-[65px] max-h-[65px] w-full max-w-[65px] overflow-hidden rounded"
                             :src="item.images[0]?.url"
                         />
 
                         <div
                             v-else
-                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded overflow-hidden dark:invert dark:mix-blend-exclusion"
+                            class="relative h-[65px] max-h-[65px] w-full max-w-[65px] overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                         >
                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                             
-                            <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                            <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                 @lang('admin::app.dashboard.index.product-image')
                             </p>
                         </div>
 
                         <!-- Product Detailes -->
-                        <div class="flex flex-col gap-1.5 w-full">
+                        <div class="flex w-full flex-col gap-1.5">
                             <p
                                 class="text-gray-600 dark:text-gray-300"
                                 v-text="item.name"
@@ -65,13 +65,13 @@
 
                             <div class="flex justify-between">
                                 <p
-                                    class="text-gray-600 dark:text-gray-300 font-semibold"
+                                    class="font-semibold text-gray-600 dark:text-gray-300"
                                     v-text="item.formatted_price"
                                 >
                                 </p>
 
                                 <p
-                                    class="text-base text-gray-800 dark:text-white font-semibold"
+                                    class="text-base font-semibold text-gray-800 dark:text-white"
                                     v-text="item.formatted_revenue"
                                 >
                                 </p>
@@ -85,16 +85,16 @@
                     class="flex flex-col gap-8 p-4"
                     v-else
                 >
-                    <div class="grid gap-3.5 justify-center justify-items-center py-2.5">
+                    <div class="grid justify-center justify-items-center gap-3.5 py-2.5">
                         <!-- Placeholder Image -->
                         <img
                             src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                            class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                            class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                         >
 
                         <!-- Add Variants Information -->
                         <div class="flex flex-col items-center">
-                            <p class="text-base text-gray-400 font-semibold">
+                            <p class="text-base font-semibold text-gray-400">
                                 @lang('admin::app.dashboard.index.add-product')
                             </p>
 

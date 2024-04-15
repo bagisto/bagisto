@@ -18,7 +18,7 @@
                 {{ $header }}
 
                 <span
-                    class="icon-cancel-1 text-3xl  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
+                    class="icon-cancel-1 cursor-pointer text-3xl hover:rounded-md hover:bg-gray-100 dark:hover:bg-gray-950"
                     @click="toggle"
                 >
                 </span>
@@ -62,7 +62,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[10001]"
+                    class="fixed inset-0 z-[10001] bg-gray-500 bg-opacity-50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -78,11 +78,11 @@
                 leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-[10002] transform transition overflow-y-auto"
+                    class="fixed inset-0 z-[10002] transform overflow-y-auto transition"
                     v-if="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
-                        <div class="w-full max-w-[568px] z-[999] absolute ltr:left-1/2 rtl:right-1/2 top-1/2 rounded-lg bg-white dark:bg-gray-900 box-shadow max-md:w-[90%] ltr:-translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2">
+                        <div class="box-shadow absolute top-1/2 z-[999] w-full max-w-[568px] -translate-y-1/2 rounded-lg bg-white dark:bg-gray-900 max-md:w-[90%] ltr:left-1/2 ltr:-translate-x-1/2 rtl:right-1/2 rtl:translate-x-1/2">
                             <!-- Header Slot -->
                             <slot
                                 name="header"

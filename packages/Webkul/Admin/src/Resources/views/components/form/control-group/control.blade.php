@@ -32,7 +32,7 @@
             name="{{ $name }}"
         >
             <div
-                class="flex items-center w-full border rounded-md overflow-hidden text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus-within:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                class="flex w-full items-center overflow-hidden rounded-md border text-sm text-gray-600 transition-all focus-within:border-gray-400 hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                 :class="[errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
             >
                 @if (isset($currency))
@@ -40,7 +40,7 @@
                         {{ $currency }}
                     </span>
                 @else
-                    <span class="ltr:pl-4 rtl:pr-4 py-2.5 text-gray-500">
+                    <span class="py-2.5 text-gray-500 ltr:pl-4 rtl:pr-4">
                         {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
                     </span>
                 @endif
@@ -196,7 +196,7 @@
                 type="checkbox"
                 name="{{ $name }}"
                 v-bind="field"
-                class="sr-only peer"
+                class="peer sr-only"
                 {{ $attributes->except(['rules', 'label', ':label', 'key', ':key']) }}
             />
 
@@ -231,7 +231,7 @@
                 type="radio"
                 name="{{ $name }}"
                 v-bind="field"
-                class="sr-only peer"
+                class="peer sr-only"
                 {{ $attributes->except(['rules', 'label', ':label', 'key', ':key']) }}
             />
                 
@@ -244,7 +244,7 @@
         </v-field>
 
         <label
-            class="icon-radio-normal text-2xl peer-checked:icon-radio-selected peer-checked:text-blue-600 cursor-pointer"
+            class="icon-radio-normal peer-checked:icon-radio-selected cursor-pointer text-2xl peer-checked:text-blue-600"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
         >
         </label>
@@ -252,7 +252,7 @@
         @break
 
     @case('switch')
-        <label class="relative inline-flex items-center cursor-pointer">
+        <label class="relative inline-flex cursor-pointer items-center">
             <v-field
                 type="checkbox"
                 class="hidden"
@@ -264,7 +264,7 @@
                     type="checkbox"
                     name="{{ $name }}"
                     id="{{ $name }}"
-                    class="sr-only peer"
+                    class="peer sr-only"
                     v-bind="field"
                     {{ $attributes->except(['v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
                 />
@@ -278,7 +278,7 @@
             </v-field>
 
             <label
-                class="rounded-full w-9 h-5 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white dark:after:bg-white after:border-gray-300 dark:after:border-white peer-checked:bg-blue-600 dark:peer-checked:bg-gray-950 peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:ltr:left-0.5 after:rtl:right-0.5 peer-focus:outline-none after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:bg-gray-800"
+                class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
                 for="{{ $name }}"
             ></label>
         </label>

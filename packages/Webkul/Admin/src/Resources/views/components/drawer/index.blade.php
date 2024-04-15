@@ -23,7 +23,7 @@
 
                 <div class="absolute top-3 ltr:right-3 rtl:left-3">
                     <span
-                        class="icon-cross text-3xl  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
+                        class="icon-cross cursor-pointer text-3xl hover:rounded-md hover:bg-gray-100 dark:hover:bg-gray-950"
                         @click="close"
                     >
                     </span>
@@ -73,7 +73,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0  bg-gray-500 bg-opacity-50 transition-opacity z-[10001]"
+                    class="fixed inset-0 z-[10001] bg-gray-500 bg-opacity-50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -100,10 +100,10 @@
                     :style="'width:' + width"
                     v-if="isOpen"
                 >
-                    <div class="w-full h-full overflow-auto bg-white dark:bg-gray-900 pointer-events-auto">
-                        <div class="flex flex-col h-full w-full">
-                            <div class="flex-1 min-h-0 min-w-0 overflow-auto">
-                                <div class="flex flex-col h-full">
+                    <div class="pointer-events-auto h-full w-full overflow-auto bg-white dark:bg-gray-900">
+                        <div class="flex h-full w-full flex-col">
+                            <div class="min-h-0 min-w-0 flex-1 overflow-auto">
+                                <div class="flex h-full flex-col">
                                     <!-- Header Slot-->
                                     <slot
                                         name="header"

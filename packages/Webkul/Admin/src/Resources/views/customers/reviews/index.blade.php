@@ -3,8 +3,8 @@
         @lang('admin::app.customers.reviews.index.title')
     </x-slot>
 
-    <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="py-3 text-xl text-gray-800 dark:text-white font-bold">
+    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+        <p class="py-3 text-xl font-bold text-gray-800 dark:text-white">
             @lang('admin::app.customers.reviews.index.title')
         </p>
     </div>
@@ -35,21 +35,21 @@
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
                     <template v-if="! isLoading">
-                        <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-4 py-2.5 border-b dark:border-gray-800">
+                        <div class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
                             <div
-                                class="flex gap-2.5 items-center"
+                                class="flex items-center gap-2.5"
                                 v-for="(columnGroup, index) in [['customer_full_name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
                             >
                                 @if ($hasPermission)
                                     <label
-                                        class="flex gap-1 w-max items-center cursor-pointer select-none"
+                                        class="flex w-max cursor-pointer select-none items-center gap-1"
                                         for="mass_action_select_all_records"
                                         v-if="! index"
                                     >
                                         <input 
                                             type="checkbox" 
                                             id="mass_action_select_all_records"
-                                            class="hidden peer"
+                                            class="peer hidden"
                                             name="mass_action_select_all_records"
                                             :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
                                             @change="selectAllRecords"
@@ -87,7 +87,7 @@
                                     </span>
 
                                     <i
-                                        class="ltr:ml-1.5 rtl:mr-1.5 text-base  text-gray-800 dark:text-white align-text-bottom"
+                                        class="align-text-bottom text-base text-gray-800 dark:text-white ltr:ml-1.5 rtl:mr-1.5"
                                         :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                         v-if="columnGroup.includes(applied.sort.column)"
                                     ></i>
@@ -105,7 +105,7 @@
                 <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading, performAction }">
                     <template v-if="! isLoading">
                         <div
-                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                             v-for="record in records"
                         >
                             <!-- Name, Product, Description -->
@@ -114,7 +114,7 @@
                                     <input 
                                         type="checkbox" 
                                         :id="`mass_action_select_record_${record.product_review_id}`"
-                                        class="hidden peer"
+                                        class="peer hidden"
                                         :name="`mass_action_select_record_${record.product_review_id}`"
                                         :value="record.product_review_id"
                                         v-model="applied.massActions.indices"
@@ -122,14 +122,14 @@
                                     >
                         
                                     <label 
-                                        class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                        class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"
                                         :for="`mass_action_select_record_${record.product_review_id}`"
                                     ></label>
                                 @endif
 
                                 <div class="flex flex-col gap-1.5">
                                     <p
-                                        class="text-base text-gray-800 dark:text-white font-semibold"
+                                        class="text-base font-semibold text-gray-800 dark:text-white"
                                         v-text="record.customer_full_name"
                                     >
                                     </p>
@@ -169,7 +169,7 @@
                             <!-- Title, Description -->
                             <div class="flex flex-col gap-1.5">
                                 <p
-                                    class="text-base text-gray-800 dark:text-white font-semibold"
+                                    class="text-base font-semibold text-gray-800 dark:text-white"
                                     v-text="record.title"
                                 >
                                 </p>
@@ -181,12 +181,12 @@
                                 </p>
                             </div>
 
-                            <div class="flex gap-1.5 place-content-end items-center self-center">
+                            <div class="flex place-content-end items-center gap-1.5 self-center">
                                 <!-- Review Delete Button -->
                                 <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
                                     <span
                                         :class="record.actions.find(action => action.index === 'delete')?.icon"
-                                        class="text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
                                     >
                                     </span>
                                 </a>
@@ -196,7 +196,7 @@
                                     v-if="record.actions.find(action => action.index === 'edit')"
                                     @click="edit(record.actions.find(action => action.index === 'edit')?.url)"
                                 >
-                                    <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                    <span class="icon-sort-right cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                                 </a>
                             </div>
                         </div>
@@ -212,7 +212,7 @@
             {!! view_render_event('bagisto.admin.customers.reviews.list.after') !!}
 
             <!-- Drawer content -->
-            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -224,12 +224,12 @@
                         <x-admin::drawer ref="review">
                             <!-- Drawer Header -->
                             <x-slot:header>
-                                <div class="flex justify-between items-center">
+                                <div class="flex items-center justify-between">
                                     <p class="text-xl font-medium dark:text-white">
                                         @lang('admin::app.customers.reviews.index.edit.title')
                                     </p>
                 
-                                    <button class="ltr:mr-11 rtl:ml-11 primary-button">
+                                    <button class="primary-button ltr:mr-11 rtl:ml-11">
                                         @lang('admin::app.customers.reviews.index.edit.save-btn')
                                     </button>
                                 </div>
@@ -241,48 +241,48 @@
                                     <div class="grid grid-cols-2 gap-4">
                                         <div class="">
                                             <!-- Customer Name -->
-                                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.customers.reviews.index.edit.customer')
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold dark:text-white" 
+                                                class="font-semibold text-gray-800 dark:text-white" 
                                                 v-text="review.name !== '' ? review.name : 'N/A'"
                                             >
                                             </p>
                                         </div>
 
                                         <div class="">
-                                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.customers.reviews.index.edit.product')
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold dark:text-white" 
+                                                class="font-semibold text-gray-800 dark:text-white" 
                                                 v-text="review.product.name"
                                             >
                                             </p>
                                         </div>
                 
                                         <div class="">
-                                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.customers.reviews.index.edit.id')
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold dark:text-white" 
+                                                class="font-semibold text-gray-800 dark:text-white" 
                                                 v-text="review.id"
                                             >
                                             </p>
                                         </div>
                 
                                         <div class="">
-                                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.customers.reviews.index.edit.date')
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold dark:text-white" 
+                                                class="font-semibold text-gray-800 dark:text-white" 
                                                 v-text="review.date"
                                             >
                                             </p>
@@ -326,7 +326,7 @@
                                     </div>
                 
                                     <div class="w-full">
-                                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                                        <p class="font-semibold text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.reviews.index.edit.rating') 
                                         </p>
 
@@ -339,19 +339,19 @@
                                     </div>
                 
                                     <div class="w-full">
-                                        <p class="block text-xs text-gray-800 dark:text-white font-medium leading-6">
+                                        <p class="block text-xs font-medium leading-6 text-gray-800 dark:text-white">
                                             @lang('admin::app.customers.reviews.index.edit.review-title') 
                                         </p>
 
                                         <p 
-                                            class="text-gray-800 font-semibold dark:text-white" 
+                                            class="font-semibold text-gray-800 dark:text-white" 
                                             v-text="review.title"
                                         >
                                         </p>
                                     </div>
                 
                                     <div class="w-full">
-                                        <p class="block text-xs text-gray-600 dark:text-gray-300 font-semibold leading-6">
+                                        <p class="block text-xs font-semibold leading-6 text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.reviews.index.edit.review-comment')     
                                         </p>
 

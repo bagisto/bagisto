@@ -7,7 +7,7 @@
         is-active="{{ $isActive }}"
         {{ $attributes }}
     >
-        <x-admin::shimmer.accordion class="w-[360px] h-[271px]" />
+        <x-admin::shimmer.accordion class="h-[271px] w-[360px]" />
 
         @isset($header)
             <template v-slot:header="{ toggle, isOpen }">

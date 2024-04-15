@@ -12,34 +12,34 @@
             </x-slot>
 
             <div class="grid">
-                <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                    <div class="flex gap-2.5 items-center">
+                <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+                    <div class="flex items-center gap-2.5">
                         <template
                             v-if="! customer"
                             class="flex gap-5"
                         >
-                            <p class="w-32 p-2.5 shimmer"></p>
+                            <p class="shimmer w-32 p-2.5"></p>
 
-                            <p class="w-14 p-2.5 shimmer"></p>
+                            <p class="shimmer w-14 p-2.5"></p>
                         </template>
 
                         <template v-else>
                             <h1
                                 v-if="customer"
-                                class="text-xl text-gray-800 dark:text-white font-bold leading-6"
+                                class="text-xl font-bold leading-6 text-gray-800 dark:text-white"
                                 v-text="`${customer.first_name} ${customer.last_name}`"
                             ></h1>
 
                             <span
                                 v-if="customer.status"
-                                class="label-active text-sm mx-1.5"
+                                class="label-active mx-1.5 text-sm"
                             >
                                 @lang('admin::app.customers.customers.view.active')
                             </span>
 
                             <span
                                 v-else
-                                class="label-canceled text-sm mx-1.5"
+                                class="label-canceled mx-1.5 text-sm"
                             >
                                 @lang('admin::app.customers.customers.view.inactive')
                             </span>
@@ -56,7 +56,7 @@
                     <!-- Back Button -->
                     <a
                         href="{{ route('admin.customers.customers.index') }}"
-                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                        class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                     >
                         @lang('admin::app.customers.customers.view.back-btn')
                     </a>
@@ -66,11 +66,11 @@
             {!! view_render_event('bagisto.admin.customers.customers.view.filters.before') !!}
 
             <!-- Filters -->
-            <div class="flex gap-x-1 gap-y-2 items-center flex-wrap mt-7">
+            <div class="mt-7 flex flex-wrap items-center gap-x-1 gap-y-2">
                 <!-- Create Order button -->
                 @if (bouncer()->hasPermission('sales.orders.create'))
                     <div
-                        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
+                        class="inline-flex w-full max-w-max cursor-pointer items-center justify-between gap-x-2 px-1 py-1.5 text-center font-semibold text-gray-600 transition-all hover:rounded-md hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
                         @click="$emitter.emit('open-confirm-modal', {
                             message: '@lang('admin::app.customers.customers.view.order-create-confirmation')',
 
@@ -95,7 +95,7 @@
                 @endif
 
                 <a
-                    class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
+                    class="inline-flex w-full max-w-max cursor-pointer items-center justify-between gap-x-2 px-1 py-1.5 text-center font-semibold text-gray-600 transition-all hover:rounded-md hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
                     href="{{ route('admin.customers.customers.login_as_customer', $customer->id) }}"
                     target="_blank"
                 >
@@ -107,7 +107,7 @@
                 <!-- Account Delete button -->
                 @if (bouncer()->hasPermission('customers.customers.delete'))
                     <div
-                        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
+                        class="inline-flex w-full max-w-max cursor-pointer items-center justify-between gap-x-2 px-1 py-1.5 text-center font-semibold text-gray-600 transition-all hover:rounded-md hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
                         @click="$emitter.emit('open-confirm-modal', {
                             message: '@lang('admin::app.customers.customers.view.account-delete-confirmation')',
 
@@ -135,9 +135,9 @@
             {!! view_render_event('bagisto.admin.customers.customers.view.filters.after') !!}
 
             <!-- Content -->
-            <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+            <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <!-- Left Component -->
-                <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.before') !!}
 
                     @include('admin::customers.customers.view.orders')
@@ -164,7 +164,7 @@
                 </div>
 
                 <!-- Right Component -->
-                <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.before') !!}
 
@@ -172,14 +172,14 @@
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
 
                     <template v-if="! customer">
-                        <x-admin::shimmer.accordion class="w-[360px] h-[271px]"/>
+                        <x-admin::shimmer.accordion class="h-[271px] w-[360px]"/>
                     </template>
 
                     <template v-else>
                         <x-admin::accordion>
                             <x-slot:header>
                                 <div class="flex w-full">
-                                    <p class="w-full p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
+                                    <p class="w-full p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                         @lang('admin::app.customers.customers.view.customer')
                                     </p>
 
@@ -223,7 +223,7 @@
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.before') !!}
 
                     <template v-if="! customer">
-                        <x-admin::shimmer.accordion class="w-[360px] h-[271px]"/>
+                        <x-admin::shimmer.accordion class="h-[271px] w-[360px]"/>
                     </template>
 
                     <template v-else>
@@ -232,7 +232,7 @@
                             <x-slot:header>
                                 <div class="flex w-full">
                                     <!-- Address Title -->
-                                    <p class="w-full p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
+                                    <p class="w-full p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                         @{{ "@lang('admin::app.customers.customers.view.address.count')".replace(':count', customer.addresses.length) }}
                                     </p>
 
@@ -254,7 +254,7 @@
                                             @lang('admin::app.customers.customers.view.default-address')
                                         </p>
 
-                                        <p class="text-gray-800 font-semibold dark:text-white">
+                                        <p class="font-semibold text-gray-800 dark:text-white">
                                             @{{ `${address.first_name} ${address.last_name}` }}
 
                                             <template v-if="address.company_name">
@@ -289,7 +289,7 @@
                                             <!-- Delete Address -->
                                             @if (bouncer()->hasPermission('customers.addresses.delete'))
                                                 <p
-                                                    class="text-red-600 cursor-pointer transition-all hover:underline"
+                                                    class="cursor-pointer text-red-600 transition-all hover:underline"
                                                     @click="deleteAddress(address.id)"
                                                 >
                                                     @lang('admin::app.customers.customers.view.delete')
@@ -300,7 +300,7 @@
                                             <template v-if="! address.default_address">
                                                 <x-admin::button
                                                     button-type="button"
-                                                    class="flex justify-center text-sm text-blue-600 cursor-pointer transition-all hover:underline"
+                                                    class="flex cursor-pointer justify-center text-sm text-blue-600 transition-all hover:underline"
                                                     :title="trans('admin::app.customers.customers.view.set-as-default')"
                                                     ::loading="isUpdating[index]"
                                                     ::disabled="isUpdating[index]"
@@ -311,21 +311,21 @@
 
                                         <span
                                             v-if="index != customer?.addresses.length - 1"
-                                            class="block w-full mb-4 mt-4 border-b dark:border-gray-800"
+                                            class="mb-4 mt-4 block w-full border-b dark:border-gray-800"
                                         ></span>
                                     </div>
                                 </template>
 
                                 <template v-else>
                                     <!-- Empty Address Container -->
-                                    <div class="flex gap-5 items-center py-2.5">
+                                    <div class="flex items-center gap-5 py-2.5">
                                         <img
                                             src="{{ bagisto_asset('images/settings/address.svg') }}"
-                                            class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                                            class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                                         />
 
                                         <div class="flex flex-col gap-1.5">
-                                            <p class="text-base text-gray-400 font-semibold">
+                                            <p class="text-base font-semibold text-gray-400">
                                                 @lang('admin::app.customers.customers.view.empty-title')
                                             </p>
 

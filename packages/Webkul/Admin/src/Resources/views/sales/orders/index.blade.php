@@ -4,12 +4,12 @@
         @lang('admin::app.sales.orders.index.title')
     </x-slot>
 
-    <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="py-3 text-xl text-gray-800 dark:text-white font-bold">
+    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+        <p class="py-3 text-xl font-bold text-gray-800 dark:text-white">
             @lang('admin::app.sales.orders.index.title')
         </p>
 
-        <div class="flex gap-x-2.5 items-center">
+        <div class="flex items-center gap-x-2.5">
             <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.sales.orders.index') }}" />
 
@@ -34,9 +34,9 @@
         <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
              <template v-if="! isLoading">
-                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-4 py-2.5 border-b dark:border-gray-800">
+                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
                     <div
-                        class="flex gap-2.5 items-center select-none"
+                        class="flex select-none items-center gap-2.5"
                         v-for="(columnGroup, index) in [['increment_id', 'created_at', 'status'], ['base_grand_total', 'method', 'channel_name'], ['full_name', 'customer_email', 'location', 'image']]"
                     >
                         <p class="text-gray-600 dark:text-gray-300">
@@ -58,7 +58,7 @@
                             </span>
 
                             <i
-                                class="ltr:ml-1.5 rtl:mr-1.5 text-base  text-gray-800 dark:text-white align-text-bottom"
+                                class="align-text-bottom text-base text-gray-800 dark:text-white ltr:ml-1.5 rtl:mr-1.5"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -76,7 +76,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-4 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="row grid grid-cols-4 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                     v-for="record in records"
                 >
                     <!-- Order Id, Created, Status Section -->
@@ -84,7 +84,7 @@
                         <div class="flex gap-2.5">
                             <div class="flex flex-col gap-1.5">
                                 <p
-                                    class="text-base text-gray-800 dark:text-white font-semibold"
+                                    class="text-base font-semibold text-gray-800 dark:text-white"
                                 >
                                     @{{ "@lang('admin::app.sales.orders.index.datagrid.id')".replace(':id', record.increment_id) }}
                                 </p>
@@ -113,7 +113,7 @@
                     <!-- Total Amount, Pay Via, Channel -->
                     <div class="">
                         <div class="flex flex-col gap-1.5">
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @{{ $admin.formatPrice(record.base_grand_total) }}
                             </p>
 
@@ -133,7 +133,7 @@
                     <div class="">
                         <div class="flex flex-col gap-1.5">
                             <p
-                                class="text-base  text-gray-800 dark:text-white"
+                                class="text-base text-gray-800 dark:text-white"
                                 v-text="record.full_name"
                             >
                             </p>
@@ -153,7 +153,7 @@
                     </div>
 
                     <!-- Imgaes Section -->
-                    <div class="flex gap-x-2 justify-between items-center">
+                    <div class="flex items-center justify-between gap-x-2">
                         <div class="flex flex-col gap-1.5">
                             <p
                                 v-if="record.is_closure"
@@ -172,7 +172,7 @@
                         </div>
 
                         <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
-                            <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
+                            <span class="icon-sort-right cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                         </a>
                     </div>
                 </div>
@@ -208,7 +208,7 @@
                             <div class="relative w-full">
                                 <input
                                     type="text"
-                                    class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-3 rtl:pr-3 ltr:pr-10 rtl:pl-10 py-1.5 leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                    class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"
                                     placeholder="@lang('admin::app.sales.orders.index.search-customer.search-by')"
                                     v-model.lazy="searchTerm"
                                     v-debounce="500"
@@ -216,13 +216,13 @@
 
                                 <template v-if="isSearching">
                                     <img
-                                        class="animate-spin h-5 w-5 absolute ltr:right-3 rtl:left-3 top-2.5"
+                                        class="absolute top-2.5 h-5 w-5 animate-spin ltr:right-3 rtl:left-3"
                                         src="{{ bagisto_asset('images/spinner.svg') }}"
                                     />
                                 </template>
 
                                 <template v-else>
-                                    <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                                    <span class="icon-search pointer-events-none absolute top-1.5 flex items-center text-2xl ltr:right-3 rtl:left-3"></span>
                                 </template>
                             </div>
                         </div>
@@ -235,11 +235,11 @@
                             v-if="searchedCustomers.length"
                         >
                             <div
-                                class="grid gap-1.5 place-content-start p-4 border-b border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="grid cursor-pointer place-content-start gap-1.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
                                 v-for="customer in searchedCustomers"
                                 @click="createCart(customer)"
                             >
-                                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
+                                <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
                                     @{{ customer.first_name + ' ' + customer.last_name }}
                                 </p>
 
@@ -251,18 +251,18 @@
 
                         <!-- For Empty Variations -->
                         <div
-                            class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                            class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                             v-else
                         >
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/customers.svg') }}"
-                                class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                                class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                             />
 
                             <!-- Add Variants Information -->
-                            <div class="flex flex-col gap-1.5 items-center">
-                                <p class="text-base text-gray-400 font-semibold">
+                            <div class="flex flex-col items-center gap-1.5">
+                                <p class="text-base font-semibold text-gray-400">
                                     @lang('admin::app.sales.orders.index.search-customer.empty-title')
                                 </p>
 

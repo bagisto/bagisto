@@ -17,19 +17,19 @@
     >
         <div>
             <span 
-                class="text-2xl dark:text-gray-300 cursor-pointer"
+                class="cursor-pointer text-2xl dark:text-gray-300"
                 @click="decrease"
             >
                 -
             </span>
 
             <p
-                class="w-2.5 text-center dark:text-gray-300 select-none"
+                class="w-2.5 select-none text-center dark:text-gray-300"
                 v-text="quantity"
             ></p>
             
             <span 
-                class="text-2xl dark:text-gray-300 cursor-pointer"
+                class="cursor-pointer text-2xl dark:text-gray-300"
                 @click="increase"
             >
                 +
