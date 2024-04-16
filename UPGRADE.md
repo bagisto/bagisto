@@ -2,7 +2,7 @@
 
 ### Checkout
 
-#### The `Cart` model
+#### The `Webkul\Checkout\Models\Cart` model
 
 1. We've removed the `addresses` function as this function is no longer needed.
 
