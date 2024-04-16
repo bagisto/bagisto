@@ -13,7 +13,7 @@
             <!-- Address Edit Button -->
             @if (bouncer()->hasPermission('customers.addresses.edit'))
                 <p 
-                    class="text-blue-600 cursor-pointer transition-all hover:underline"
+                    class="cursor-pointer text-blue-600 transition-all hover:underline"
                     @click="$refs.customerAddressModal.toggle()"
                 >
                     @lang('admin::app.customers.customers.view.address.edit.edit-btn')
@@ -36,7 +36,7 @@
                     <x-admin::modal ref="customerAddressModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-lg text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('admin::app.customers.customers.view.address.edit.title')
                             </p>    
                         </x-slot>
@@ -318,7 +318,7 @@
 
                             <!-- Default Address -->
                             <div class="w-full">
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0">
+                                <x-admin::form.control-group class="!mb-0 flex items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="default_address"
@@ -330,7 +330,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="default_address"
                                     >
                                         @lang('admin::app.customers.customers.view.address.edit.default-address')

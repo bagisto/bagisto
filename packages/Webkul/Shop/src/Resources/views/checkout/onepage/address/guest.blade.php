@@ -27,7 +27,7 @@
                     {!! view_render_event('bagisto.shop.checkout.onepage.address.guest.billing.before') !!}
 
                     <!-- Billing Address Header -->
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center justify-between">
                         <h2 class="text-xl font-medium max-sm:text-xl">
                             @lang('shop::app.checkout.onepage.address.billing-address')
                         </h2>
@@ -41,7 +41,7 @@
 
                     <!-- Use for Shipping Checkbox -->
                     <x-shop::form.control-group
-                        class="flex items-center gap-2.5 !mb-0"
+                        class="!mb-0 flex items-center gap-2.5"
                         v-if="cart.have_stockable_items"
                     >
                         <x-shop::form.control-group.control
@@ -55,7 +55,7 @@
                         />
 
                         <label
-                            class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
+                            class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0"
                             for="use_for_shipping"
                         >
                             @lang('shop::app.checkout.onepage.address.same-as-billing')
@@ -74,7 +74,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.address.guest.shipping.before') !!}
 
                         <!-- Shipping Address Header -->
-                        <div class="flex justify-between items-center">
+                        <div class="flex items-center justify-between">
                             <h2 class="text-xl font-medium max-sm:text-xl">
                                 @lang('shop::app.checkout.onepage.address.shipping-address')
                             </h2>
@@ -91,9 +91,9 @@
                 </template>
 
                 <!-- Proceed Button -->
-                <div class="flex justify-end mt-4">
+                <div class="mt-4 flex justify-end">
                     <x-shop::button
-                        class="primary-button py-3 px-11 rounded-2xl"
+                        class="primary-button rounded-2xl px-11 py-3"
                         :title="trans('shop::app.checkout.onepage.address.proceed')"
                         ::loading="isStoring"
                         ::disabled="isStoring"

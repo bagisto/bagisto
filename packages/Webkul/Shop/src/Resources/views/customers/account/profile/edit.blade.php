@@ -25,7 +25,7 @@
         <x-shop::form.control-group class="mt-4">
             <x-shop::form.control-group.control
                 type="image"
-                class="!p-0 rounded-xl text-gray-700 mb-0"
+                class="mb-0 rounded-xl !p-0 text-gray-700"
                 name="image[]"
                 :label="trans('Image')"
                 :is-multiple="false"
@@ -219,22 +219,22 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.new_password_confirmation.after') !!}
 
-        <div class="select-none items-center flex gap-1.5 mb-4">
+        <div class="mb-4 flex select-none items-center gap-1.5">
             <input
                 type="checkbox"
                 name="subscribed_to_news_letter"
                 id="is-subscribed"
-                class="hidden peer"
+                class="peer hidden"
                 @checked($customer->subscribed_to_news_letter)
             />
 
             <label
-                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                 for="is-subscribed"
             ></label>
 
             <label
-                class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
+                class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0"
                 for="is-subscribed"
             >
                 @lang('shop::app.customers.account.profile.edit.subscribe-to-newsletter')
@@ -243,7 +243,7 @@
 
         <button
             type="submit"
-            class="primary-button block m-0 w-max py-3 px-11 rounded-2xl text-base text-center"
+            class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base"
         >
             @lang('shop::app.customers.account.profile.edit.save')
         </button>

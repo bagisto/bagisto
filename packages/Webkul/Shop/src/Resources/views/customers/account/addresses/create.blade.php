@@ -293,23 +293,23 @@
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.phone.after') !!}
 
                     <!-- Set As Default -->
-                    <div class="flex gap-x-1.5 items-center mb-4 text-md text-[#6E6E6E] select-none">
+                    <div class="text-md mb-4 flex select-none items-center gap-x-1.5 text-[#6E6E6E]">
                         <input
                             type="checkbox"
                             name="default_address"
                             value="1"
                             id="default_address"
-                            class="hidden peer cursor-pointer"
+                            class="peer hidden cursor-pointer"
                         >
 
                         <label
-                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                            class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                             for="default_address"
                         >
                         </label>
 
                         <label 
-                            class="block text-base cursor-pointer"
+                            class="block cursor-pointer text-base"
                             for="default_address"
                         >
                             @lang('shop::app.customers.account.addresses.create.set-as-default')
@@ -318,7 +318,7 @@
 
                     <button
                         type="submit"
-                        class="primary-button m-0 block text-base w-max py-3 px-11 rounded-2xl text-center"
+                        class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base"
                     >
                         @lang('shop::app.customers.account.addresses.create.save')
                     </button>

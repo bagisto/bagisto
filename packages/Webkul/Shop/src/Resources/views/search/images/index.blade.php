@@ -1,7 +1,7 @@
 <v-image-search>
     <button
         type="button"
-        class="icon-camera flex items-center absolute top-2.5 ltr:right-3 rtl:left-3 ltr:pr-3 rtl:pl-3 text-xl"
+        class="icon-camera absolute top-2.5 flex items-center text-xl ltr:right-3 ltr:pr-3 rtl:left-3 rtl:pl-3"
         aria-label="@lang('shop::app.search.images.index.search')"
     >
     </button>
@@ -14,7 +14,7 @@
     >
         <div>
             <label
-                class="icon-camera flex items-center absolute top-2.5 ltr:right-3 rtl:left-3 ltr:pr-3 rtl:pl-3 text-xl cursor-pointer"
+                class="icon-camera absolute top-2.5 flex cursor-pointer items-center text-xl ltr:right-3 ltr:pr-3 rtl:left-3 rtl:pl-3"
                 aria-label="@lang('shop::app.search.images.index.search')"
                 :for="'v-image-search-' + $.uid"
                 v-if="! isSearching"
@@ -22,12 +22,12 @@
             </label>
 
             <label
-                class="flex items-center absolute top-2.5 ltr:right-3 rtl:left-3 ltr:pr-3 rtl:pl-3 text-xl cursor-pointer"
+                class="absolute top-2.5 flex cursor-pointer items-center text-xl ltr:right-3 ltr:pr-3 rtl:left-3 rtl:pl-3"
                 v-else
             >
                 <!-- Spinner -->
                 <svg
-                    class="animate-spin h-6 w-6 text-black"
+                    class="h-6 w-6 animate-spin text-black"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

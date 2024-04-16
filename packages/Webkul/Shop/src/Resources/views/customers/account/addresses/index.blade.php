@@ -8,7 +8,7 @@
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses" />
     @endSection
-    <div class="flex justify-between items-center">
+    <div class="flex items-center justify-between">
         <div class="">
             <h2 class="text-2xl font-medium">
                 @lang('shop::app.customers.account.addresses.index.title')
@@ -17,7 +17,7 @@
 
         <a
             href="{{ route('shop.customers.account.addresses.create') }}"
-            class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9] font-normal"
+            class="secondary-button flex items-center gap-x-2.5 border-[#E9E9E9] px-5 py-3 font-normal"
         >
             <span class="icon-location text-2xl"></span>
 
@@ -30,10 +30,10 @@
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.list.before', ['addresses' => $addresses]) !!}
 
-        <div class="grid grid-cols-2 gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
+        <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr]">
             @foreach ($addresses as $address)
-                <div class="p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
-                    <div class="flex justify-between items-center">
+                <div class="rounded-xl border border-[#e5e5e5] p-5 max-sm:flex-wrap">
+                    <div class="flex items-center justify-between">
                         <p class="text-base font-medium">
                             {{ $address->first_name }} {{ $address->last_name }}
 
@@ -42,7 +42,7 @@
                             @endif
                         </p>
 
-                        <div class="flex gap-4 items-center">
+                        <div class="flex items-center gap-4">
 
                             @if ($address->default_address)
                                 <div class="label-pending block w-max px-1.5 py-1">
@@ -54,7 +54,7 @@
                             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                                 <x-slot:toggle>
                                     <button 
-                                        class="icon-more px-1.5 py-1 rounded-md text-2xl text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black" 
+                                        class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-[#6E6E6E] transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black" 
                                         aria-label="More Options"
                                     >
                                     </button>
@@ -124,7 +124,7 @@
                         </div>
                     </div>
 
-                    <p class="text-[#6E6E6E] mt-6">
+                    <p class="mt-6 text-[#6E6E6E]">
                         {{ $address->address }},
 
                         {{ $address->city }}, 
@@ -139,10 +139,9 @@
 
     @else
         <!-- Address Empty Page -->
-        <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
+        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
             <img 
-                class="" 
-                src="{{ bagisto_asset('images/no-address.png') }}" 
+                class="" src="{{ bagisto_asset('images/no-address.png') }}" 
                 alt="" 
                 title=""
             >

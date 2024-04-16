@@ -25,16 +25,16 @@
 
                 {!! view_render_event('bagisto.admin.settings.roles.edit.edit_form_controls.before') !!}
 
-                <div class="flex justify-between items-center">
-                    <p class="text-xl text-gray-800 dark:text-white font-bold">
+                <div class="flex items-center justify-between">
+                    <p class="text-xl font-bold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.roles.edit.title')
                     </p>
 
-                    <div class="flex gap-x-2.5 items-center">
+                    <div class="flex items-center gap-x-2.5">
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.settings.roles.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                            class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                         >
                             @lang('admin::app.settings.roles.edit.back-btn')
                         </a>
@@ -50,15 +50,15 @@
                 </div>
 
                 <!-- body content -->
-                <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+                <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                     <!-- Left sub-component -->
-                    <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                    <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
                         {!! view_render_event('bagisto.admin.settings.roles.edit.card.access-control.before') !!}
 
                         <!-- Access Control Input Fields -->
-                        <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                            <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
+                        <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                            <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.settings.roles.edit.access-control')
                             </p>
 
@@ -106,14 +106,14 @@
                     </div>
 
                     <!-- Right sub-component -->
-                    <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+                    <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
                         {!! view_render_event('bagisto.admin.settings.roles.edit.card.accordion.general.before') !!}
 
                         <x-admin::accordion>
                             <x-slot:header>
                                 <div class="flex items-center justify-between">
-                                    <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
+                                    <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                         @lang('admin::app.settings.roles.edit.general')
                                     </p>
                                 </div>

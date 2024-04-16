@@ -28,16 +28,16 @@
                 {!! view_render_event('bagisto.admin.catalog.attributes.create.create_form_controls.before') !!}
 
                 <!-- actions buttons -->
-                <div class="flex justify-between items-center">
-                    <p class="text-xl text-gray-800 dark:text-white font-bold">
+                <div class="flex items-center justify-between">
+                    <p class="text-xl font-bold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.attributes.create.title')
                     </p>
 
-                    <div class="flex gap-x-2.5 items-center">
+                    <div class="flex items-center gap-x-2.5">
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                            class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                         >
                             @lang('admin::app.catalog.attributes.create.back-btn')
                         </a>
@@ -53,15 +53,15 @@
                 </div>
 
                 <!-- body content -->
-                <div class="flex gap-2.5 mt-3.5">
+                <div class="mt-3.5 flex gap-2.5">
 
                     {!! view_render_event('bagisto.admin.catalog.attributes.create.card.label.before') !!}
 
                     <!-- Left sub Component -->
-                    <div class="flex flex-col gap-2 flex-1 overflow-auto">
+                    <div class="flex flex-1 flex-col gap-2 overflow-auto">
                         <!-- Label -->
-                        <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
-                            <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                        <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                            <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.create.label')
                             </p>
 
@@ -102,7 +102,7 @@
 
                         <!-- Options -->
                         <div
-                            class="p-4 bg-white dark:bg-gray-900 box-shadow rounded"
+                            class="box-shadow rounded bg-white p-4 dark:bg-gray-900"
                             v-if="swatchAttribute && (
                                     attributeType == 'select'
                                     || attributeType == 'multiselect'
@@ -110,8 +110,8 @@
                                     || attributeType == 'checkbox'
                                 )"
                         >
-                            <div class="flex justify-between items-center mb-3">
-                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                            <div class="mb-3 flex items-center justify-between">
+                                <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.attributes.create.options')
                                 </p>
 
@@ -128,7 +128,7 @@
                             <div class="mt-4 overflow-x-auto">
                                 <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- Input Options -->
-                                    <x-admin::form.control-group class="w-full mb-2.5">
+                                    <x-admin::form.control-group class="mb-2.5 w-full">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.catalog.attributes.create.input-options')
                                         </x-admin::form.control-group.label>
@@ -154,16 +154,16 @@
                                         />
                                     </x-admin::form.control-group>
 
-                                    <div class="w-full mb-2.5">
+                                    <div class="mb-2.5 w-full">
                                         <!-- checkbox -->
                                         <x-admin::form.control-group.label class="invisible">
                                             @lang('admin::app.catalog.attributes.create.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                        <div class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5 p-1.5">
                                             <input
                                                 type="checkbox"
-                                                class="hidden peer"
+                                                class="peer hidden"
                                                 id="empty_option"
                                                 name="empty_option"
                                                 v-model="isNullOptionChecked"
@@ -173,13 +173,13 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="icon-uncheckbox text-2xl rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                                class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"
                                             >
                                             </label>
 
                                             <label
                                                 for="empty_option"
-                                                class="text-sm text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
+                                                class="cursor-pointer text-sm font-semibold text-gray-600 dark:text-gray-300"
                                             >
                                                 @lang('admin::app.catalog.attributes.create.create-empty-option')
                                             </label>
@@ -229,7 +229,7 @@
                                                 <x-admin::table.thead.tr class="hover:bg-gray-50 dark:hover:bg-gray-950">
                                                     <!-- Draggable Icon -->
                                                     <x-admin::table.td class="!px-0 text-center">
-                                                        <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
+                                                        <i class="icon-drag cursor-grab text-xl transition-all group-hover:text-gray-700"></i>
 
                                                         <input
                                                             type="hidden"
@@ -244,7 +244,7 @@
                                                         <div v-if="swatchType == 'image'">
                                                             <img
                                                                 src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
-                                                                class="h-[50px] w-[50px] dark:invert dark:mix-blend-exclusion"
+                                                                class="h-[50px] w-[50px] dark:mix-blend-exclusion dark:invert"
                                                                 :ref="'image_' + element.params.id"
                                                             />
 
@@ -259,7 +259,7 @@
                                                         <!-- Swatch Color -->
                                                         <div v-if="swatchType == 'color'">
                                                             <div
-                                                                class="w-[25px] h-[25px] border border-gray-200 dark:border-gray-800 rounded-md"
+                                                                class="h-[25px] w-[25px] rounded-md border border-gray-200 dark:border-gray-800"
                                                                 :style="{ background: element.params.swatch_value }"
                                                             >
                                                             </div>
@@ -304,13 +304,13 @@
                                                     <!-- Actions button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
-                                                            class="icon-edit p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                            class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="editModal(element)"
                                                         >
                                                         </span>
 
                                                         <span
-                                                            class="icon-delete p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                            class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
                                                         >
                                                         </span>
@@ -323,17 +323,17 @@
 
                                 <!-- For Empty Attribute Options -->
                                 <template v-else>
-                                    <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
+                                    <div class="grid justify-items-center gap-3.5 px-2.5 py-10">
                                         <!-- Attribute Option Image -->
                                         <img
-                                            class="w-[120px] h-[120px] dark:invert dark:mix-blend-exclusion"
+                                            class="h-[120px] w-[120px] dark:mix-blend-exclusion dark:invert"
                                             src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                             alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
                                         />
 
                                         <!-- Add Attribute Options Information -->
-                                        <div class="flex flex-col gap-1.5 items-center">
-                                            <p class="text-base text-gray-400 font-semibold">
+                                        <div class="flex flex-col items-center gap-1.5">
+                                            <p class="text-base font-semibold text-gray-400">
                                                 @lang('admin::app.catalog.attributes.create.add-attribute-options')
                                             </p>
 
@@ -352,11 +352,11 @@
                     {!! view_render_event('bagisto.admin.catalog.attributes.create.card.general.before') !!}
 
                     <!-- Right sub-component -->
-                    <div class="flex flex-col gap-2 w-[360px] max-w-full">
+                    <div class="flex w-[360px] max-w-full flex-col gap-2">
                         <!-- General -->
-                        <div class="bg-white dark:bg-gray-900 box-shadow rounded">
-                            <div class="flex justify-between items-center p-1.5">
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                        <div class="box-shadow rounded bg-white dark:bg-gray-900">
+                            <div class="flex items-center justify-between p-1.5">
+                                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.attributes.create.general')
                                 </p>
                             </div>
@@ -380,7 +380,7 @@
                                             type="text"
                                             id="code"
                                             :class="[errors['{{ 'code' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:focus:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                            class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                             name="slug"
                                             v-bind="field"
                                             placeholder="{{ trans('admin::app.catalog.attributes.create.code') }}"
@@ -454,7 +454,7 @@
                         <!-- Validations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.attributes.create.validations')
                                 </p>
                             </x-slot>
@@ -505,7 +505,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Required -->
-                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2">
+                                 <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_required"
@@ -515,7 +515,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_required"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-required')
@@ -523,7 +523,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Unique -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 select-none">
+                                <x-admin::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_unique"
@@ -533,7 +533,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_unique"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-unique')
@@ -545,14 +545,14 @@
                         <!-- Configurations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.attributes.create.configuration')
                                 </p>
                             </x-slot>
 
                             <x-slot:content>
                                 <!-- Value Per Locale -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="value_per_locale"
@@ -562,7 +562,7 @@
                                     />
                 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="value_per_locale"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.value-per-locale')
@@ -570,7 +570,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Value Per Channel -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="value_per_channel"
@@ -580,7 +580,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="value_per_channel"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.value-per-channel')
@@ -588,7 +588,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use to create configuable product -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_configurable"
@@ -598,7 +598,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_configurable"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-configurable')
@@ -606,7 +606,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Visible On Product View Page On Fornt End -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_visible_on_front"
@@ -616,7 +616,7 @@
                                     />
                                   
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_visible_on_front"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
@@ -624,7 +624,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute is Comparable -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_comparable"
@@ -634,7 +634,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_comparable"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')
@@ -642,11 +642,11 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use in Layered -->
-                                <div class="flex gap-2.5 items-center !mb-0">
+                                <div class="!mb-0 flex items-center gap-2.5">
                                     <input
                                         type="checkbox"
                                         id="is_filterable"
-                                        class="hidden peer"
+                                        class="peer hidden"
                                         name="is_filterable"
                                         value="1"
                                         :disabled="attributeType == 'price' ||  attributeType == 'checkbox'
@@ -655,10 +655,10 @@
                                         "
                                     />
 
-                                    <span class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
+                                    <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"></span>
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_filterable"
                                     >
                                         @lang('admin::app.catalog.attributes.create.is-filterable')
@@ -692,7 +692,7 @@
                     >
                         <!-- Modal Header !-->
                         <x-slot:header>
-                            <p class="text-lg text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.create.add-option')
                             </p>
                         </x-slot>
@@ -755,7 +755,7 @@
                                 />
 
                                 <!-- Admin Input -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="mb-2.5 w-full">
                                     <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.create.admin')
                                     </x-admin::form.control-group.label>
@@ -773,7 +773,7 @@
 
                                 <!-- Locales Input -->
                                 @foreach ($allLocales as $locale)
-                                    <x-admin::form.control-group class="w-full mb-2.5">
+                                    <x-admin::form.control-group class="mb-2.5 w-full">
                                         <x-admin::form.control-group.label ::class="{ '{{core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>

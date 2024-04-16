@@ -16,16 +16,16 @@
 
         <!-- Total Sales Section -->
         <template v-else>
-            <div class="relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+            <div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
                 <!-- Header -->
-                <div class="flex items-center justify-between mb-4">
-                    <p class="text-base text-gray-600 dark:text-white font-semibold">
+                <div class="mb-4 flex items-center justify-between">
+                    <p class="text-base font-semibold text-gray-600 dark:text-white">
                         @lang('admin::app.reporting.sales.index.total-sales')
                     </p>
 
                     <a
                         href="{{ route('admin.reporting.sales.view', ['type' => 'total-sales']) }}"
-                        class="text-sm text-blue-600 cursor-pointer transition-all hover:underline"
+                        class="cursor-pointer text-sm text-blue-600 transition-all hover:underline"
                     >
                         @lang('admin::app.reporting.sales.index.view-details')
                     </a>
@@ -33,27 +33,27 @@
                 
                 <!-- Content -->
                 <div class="grid gap-4">
-                    <div class="flex gap-4 place-content-start">
-                        <p class="text-3xl text-gray-600 dark:text-gray-300 font-bold leading-9">
+                    <div class="flex place-content-start gap-4">
+                        <p class="text-3xl font-bold leading-9 text-gray-600 dark:text-gray-300">
                             @{{ report.statistics.sales.formatted_total }}
                         </p>
                         
-                        <div class="flex gap-0.5 items-center">
+                        <div class="flex items-center gap-0.5">
                             <p
-                                class="text-base  text-emerald-500"
+                                class="text-base text-emerald-500"
                                 :class="[report.statistics.sales.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                             >
                                 @{{ Math.abs(report.statistics.sales.progress.toFixed(2)) }}%
                             </p>
 
                             <span
-                                class="text-base  text-emerald-500"
+                                class="text-base text-emerald-500"
                                 :class="[report.statistics.sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                             ></span>
                         </div>
                     </div>
 
-                    <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
+                    <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
                         @lang('admin::app.reporting.sales.index.sales-over-time')
                     </p>
 
@@ -64,17 +64,17 @@
                     />
 
                     <!-- Date Range Section -->
-                    <div class="flex gap-5 justify-center">
-                        <div class="flex gap-1 items-center">
-                            <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
+                    <div class="flex justify-center gap-5">
+                        <div class="flex items-center gap-1">
+                            <span class="h-3.5 w-3.5 rounded-md bg-emerald-400"></span>
 
                             <p class="text-xs dark:text-gray-300">
                                 @{{ report.date_range.previous }}
                             </p>
                         </div>
 
-                        <div class="flex gap-1 items-center">
-                            <span class="w-3.5 h-3.5 rounded-md bg-sky-400"></span>
+                        <div class="flex items-center gap-1">
+                            <span class="h-3.5 w-3.5 rounded-md bg-sky-400"></span>
 
                             <p class="text-xs dark:text-gray-300">
                                 @{{ report.date_range.current }}
