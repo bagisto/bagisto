@@ -13,7 +13,7 @@
 
 ## Branch Selection
 <!--- Please specify the target branch for this pull request. -->
-- [ ] Target Branch: $master 
+- [ ] Target Branch: master 
 
 ## Pint
 <!---  Please make sure all the pint tests are passed. -->
