@@ -11,6 +11,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Marketing\Repositories\SearchSynonymRepository;
+use Webkul\Product\Contracts\Product;
 
 class ProductRepository extends Repository
 {
@@ -35,7 +36,7 @@ class ProductRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\Product';
+        return Product::class;
     }
 
     /**
@@ -138,16 +139,13 @@ class ProductRepository extends Repository
 
     /**
      * Retrieve product from slug without throwing an exception.
-     *
-     * @param  string  $slug
-     * @return \Webkul\Product\Contracts\Product
      */
-    public function findBySlug($slug)
+    public function findBySlug(string $slug): ?Product
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
-            request()->query->add(['url_key' => $slug]);
-
-            $indices = $this->elasticSearchRepository->search(null, [
+            $indices = $this->elasticSearchRepository->search([
+                'url_key' => $slug,
+            ], [
                 'type'  => '',
                 'from'  => 0,
                 'limit' => 1,
@@ -163,11 +161,8 @@ class ProductRepository extends Repository
 
     /**
      * Retrieve product from slug.
-     *
-     * @param  string  $slug
-     * @return \Webkul\Product\Contracts\Product
      */
-    public function findBySlugOrFail($slug)
+    public function findBySlugOrFail(string $slug): ?Product
     {
         $product = $this->findBySlug($slug);
 
@@ -183,37 +178,29 @@ class ProductRepository extends Repository
     /**
      * Get all products.
      *
-     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
-     * good request parameter with an array type as an argument. Make a clean pull request for
-     * this to have track record.
-     *
      * @return \Illuminate\Support\Collection
      */
-    public function getAll()
+    public function getAll(array $params = [])
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
-            return $this->searchFromElastic();
+            return $this->searchFromElastic($params);
         }
 
-        return $this->searchFromDatabase();
+        return $this->searchFromDatabase($params);
     }
 
     /**
      * Search product from database.
      *
-     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
-     * good request parameter with an array type as an argument. Make a clean pull request for
-     * this to have track record.
-     *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromDatabase()
+    public function searchFromDatabase(array $params = [])
     {
         $params = array_merge([
             'status'               => 1,
             'visible_individually' => 1,
             'url_key'              => null,
-        ], request()->input());
+        ], $params);
 
         if (! empty($params['query'])) {
             $params['name'] = $params['query'];
@@ -394,18 +381,15 @@ class ProductRepository extends Repository
      *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromElastic()
+    public function searchFromElastic(array $params = [])
     {
-        $params = request()->input();
-
         $currentPage = Paginator::resolveCurrentPage('page');
 
         $limit = $this->getPerPageLimit($params);
 
         $sortOptions = $this->getSortOptions($params);
 
-        $indices = $this->elasticSearchRepository->search($params['category_id'] ?? null, [
-            'type'  => $params['type'] ?? '',
+        $indices = $this->elasticSearchRepository->search($params, [
             'from'  => ($currentPage * $limit) - $limit,
             'limit' => $limit,
             'sort'  => $sortOptions['sort'],
@@ -434,7 +418,7 @@ class ProductRepository extends Repository
 
         $results = new LengthAwarePaginator($items, $indices['total'], $limit, $currentPage, [
             'path'  => request()->url(),
-            'query' => request()->query(),
+            'query' => $params,
         ]);
 
         return $results;

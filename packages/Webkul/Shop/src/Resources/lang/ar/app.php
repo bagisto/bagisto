@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'تم إلغاء طلبك بنجاح',
                     'page-title'         => 'الطلب #:order_id',
                     'payment-method'     => 'طريقة الدفع',
+                    'reorder-btn-title'  => 'إعادة ترتيب',
                     'shipping-address'   => 'عنوان الشحن',
                     'shipping-method'    => 'طريقة الشحن',
                     'title'              => 'عرض',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'ابحث عن المنتجات هنا',
                 'sign-in'           => 'تسجيل الدخول',
                 'sign-up'           => 'سجل',
+                'submit'            => 'إرسال',
                 'title'             => 'الحساب',
                 'welcome'           => 'مرحبًا',
                 'welcome-guest'     => 'مرحبًا بكم زائرًا',
                 'wishlist'          => 'قائمة المفضلة',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'اللغة الافتراضية',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -612,8 +620,9 @@ return [
         ],
 
         'cart' => [
-            'continue-to-checkout'      => 'Continue to Checkout',
+            'continue-to-checkout'      => 'المتابعة إلى الدفع',
             'illegal'                   => 'الكمية لا يمكن أن تكون أقل من واحدة.',
+            'inactive-add'              => 'لا يمكن إضافة المنتج الغير نشط إلى السلة.',
             'inactive'                  => 'تم إلغاء تنشيط المنتج وبالتالي إزالته من السلة.',
             'inventory-warning'         => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
             'item-add-to-cart'          => 'تمت إضافة العنصر بنجاح',
@@ -654,22 +663,6 @@ return [
                 'cross-sell' => [
                     'title' => 'المزيد من الخيارات',
                 ],
-            ],
-
-            'coupon'   => [
-                'already-applied' => 'تم تطبيق كود الكوبون بالفعل.',
-                'applied'         => 'تم تطبيق الكوبون',
-                'apply'           => 'تطبيق الكوبون',
-                'apply-issue'     => 'لا يمكن تطبيق كود الكوبون.',
-                'button-title'    => 'تطبيق',
-                'code'            => 'كود الكوبون',
-                'discount'        => 'خصم الكوبون',
-                'enter-your-code' => 'أدخل كودك',
-                'error'           => 'حدث خطأ ما',
-                'invalid'         => 'كود الكوبون غير صالح.',
-                'remove'          => 'إزالة الكوبون',
-                'subtotal'        => 'المجموع الفرعي',
-                'success-apply'   => 'تم تطبيق كود الكوبون بنجاح.',
             ],
 
             'mini-cart' => [
@@ -746,6 +739,28 @@ return [
                 'sub-total'        => 'المجموع الفرعي',
                 'tax'              => 'الضريبة',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'تم تطبيق كود الكوبون بالفعل.',
+            'applied'         => 'تم تطبيق الكوبون',
+            'apply'           => 'تطبيق الكوبون',
+            'apply-issue'     => 'لا يمكن تطبيق كود الكوبون.',
+            'button-title'    => 'تطبيق',
+            'code'            => 'كود الكوبون',
+            'discount'        => 'خصم الكوبون',
+            'enter-your-code' => 'أدخل كودك',
+            'error'           => 'حدث خطأ ما',
+            'invalid'         => 'كود الكوبون غير صالح.',
+            'remove'          => 'إزالة الكوبون',
+            'subtotal'        => 'المجموع الفرعي',
+            'success-apply'   => 'تم تطبيق كود الكوبون بنجاح.',
+        ],
+
+        'login' => [
+            'email'    => 'البريد الإلكتروني',
+            'password' => 'كلمة السر',
+            'title'    => 'تسجيل الدخول',
         ],
     ],
 

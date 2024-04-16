@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'הזמנתך בוטלה בהצלחה',
                     'page-title'         => 'הזמנה #:order_id',
                     'payment-method'     => 'אמצעי תשלום',
+                    'reorder-btn-title'  => 'להזמין מחדש',
                     'shipping-address'   => 'כתובת למשלוח',
                     'shipping-method'    => 'שיטת משלוח',
                     'title'              => 'צפייה',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'חפש מוצרים כאן',
                 'sign-in'           => 'התחבר',
                 'sign-up'           => 'הרשם',
+                'submit'            => 'שלח',
                 'title'             => 'חשבון',
                 'welcome'           => 'ברוך הבא',
                 'welcome-guest'     => 'ברוך הבא אורח',
                 'wishlist'          => 'רשימת משאלות',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'שפת ברירת מחדל',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'המשך לתשלום',
             'illegal'                   => 'הכמות לא יכולה להיות פחות מאחד.',
+            'inactive-add'              => 'פריט לא פעיל לא ניתן להוסיף לעגלה.',
             'inactive'                  => 'הפריט הושבת ונמחק מהעגלה.',
             'inventory-warning'         => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
             'item-add-to-cart'          => 'הפריט התווסף בהצלחה',
@@ -654,22 +663,6 @@ return [
                 'cross-sell' => [
                     'title' => 'אפשרויות נוספות',
                 ],
-            ],
-
-            'coupon'   => [
-                'already-applied' => 'קוד הקופון כבר הוחל.',
-                'applied'         => 'הקופון הוחל',
-                'apply'           => 'החל קופון',
-                'apply-issue'     => 'לא ניתן להחיל את קוד הקופון.',
-                'button-title'    => 'החל',
-                'code'            => 'קוד קופון',
-                'discount'        => 'הנחת קופון',
-                'enter-your-code' => 'הזן את קודך',
-                'error'           => 'משהו השתבש',
-                'invalid'         => 'קוד קופון אינו חוקי.',
-                'remove'          => 'הסר קופון',
-                'subtotal'        => 'סכום ביניים',
-                'success-apply'   => 'קוד הקופון הוחל בהצלחה.',
             ],
 
             'mini-cart' => [
@@ -746,6 +739,28 @@ return [
                 'sub-total'        => 'תת סך הכל',
                 'tax'              => 'מס',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'קוד הקופון כבר הוחל.',
+            'applied'         => 'הקופון הוחל',
+            'apply'           => 'החל קופון',
+            'apply-issue'     => 'לא ניתן להחיל את קוד הקופון.',
+            'button-title'    => 'החל',
+            'code'            => 'קוד קופון',
+            'discount'        => 'הנחת קופון',
+            'enter-your-code' => 'הזן את קודך',
+            'error'           => 'משהו השתבש',
+            'invalid'         => 'קוד קופון אינו חוקי.',
+            'remove'          => 'הסר קופון',
+            'subtotal'        => 'סכום ביניים',
+            'success-apply'   => 'קוד הקופון הוחל בהצלחה.',
+        ],
+
+        'login' => [
+            'email'    => 'אימייל',
+            'password' => 'סיסמה',
+            'title'    => 'התחברות',
         ],
     ],
 

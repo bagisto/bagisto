@@ -1,10 +1,10 @@
 <!-- Most Reviews Shimmer -->
-<div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+<div class="box-shadow relative flex-1 rounded bg-white p-4 dark:bg-gray-900">
     <!-- Header -->
-    <div class="flex items-center justify-between mb-4">
-        <div class="shimmer w-[150px] h-[17px]"></div>
+    <div class="mb-4 flex items-center justify-between">
+        <div class="shimmer h-[17px] w-[150px]"></div>
 
-        <div class="shimmer w-[79px] h-[21px]"></div>
+        <div class="shimmer h-[21px] w-[79px]"></div>
     </div>
     
     <!-- Progress Bar Shimmer -->

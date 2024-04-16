@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Seu pedido foi cancelado',
                     'page-title'         => 'Pedido #:order_id',
                     'payment-method'     => 'Método de Pagamento',
+                    'reorder-btn-title'  => 'Reorganizar',
                     'shipping-address'   => 'Endereço de Envio',
                     'shipping-method'    => 'Método de Envio',
                     'title'              => 'Visualizar',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Pesquise produtos aqui',
                 'sign-in'           => 'Entrar',
                 'sign-up'           => 'Registrar',
+                'submit'            => 'Enviar',
                 'title'             => 'Conta',
                 'welcome'           => 'Bem-vindo',
                 'welcome-guest'     => 'Bem-vindo, Visitante',
                 'wishlist'          => 'Lista de Desejos',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Idioma padrão',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuar para o Checkout',
             'illegal'                   => 'A quantidade não pode ser menor que um.',
+            'inactive-add'              => 'Item inativo não pode ser adicionado ao carrinho.',
             'inactive'                  => 'O item foi desativado e, portanto, removido do carrinho.',
             'inventory-warning'         => 'A quantidade solicitada não está disponível, por favor, tente novamente mais tarde.',
             'item-add-to-cart'          => 'Item Adicionado com Sucesso',
@@ -654,22 +663,6 @@ return [
                 'cross-sell' => [
                     'title' => 'Mais escolhas',
                 ],
-            ],
-
-            'coupon'   => [
-                'already-applied' => 'Código do cupom já aplicado.',
-                'applied'         => 'Cupom aplicado',
-                'apply'           => 'Aplicar Cupom',
-                'apply-issue'     => 'O código do cupom não pode ser aplicado.',
-                'button-title'    => 'Aplicar',
-                'code'            => 'Código do Cupom',
-                'discount'        => 'Desconto do Cupom',
-                'enter-your-code' => 'Digite seu código',
-                'error'           => 'Algo deu errado',
-                'invalid'         => 'Código do cupom é inválido.',
-                'remove'          => 'Remover Cupom',
-                'subtotal'        => 'Subtotal',
-                'success-apply'   => 'Código do cupom aplicado com sucesso.',
             ],
 
             'mini-cart' => [
@@ -746,6 +739,28 @@ return [
                 'sub-total'        => 'Subtotal',
                 'tax'              => 'Imposto',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Código do cupom já aplicado.',
+            'applied'         => 'Cupom aplicado',
+            'apply'           => 'Aplicar Cupom',
+            'apply-issue'     => 'O código do cupom não pode ser aplicado.',
+            'button-title'    => 'Aplicar',
+            'code'            => 'Código do Cupom',
+            'discount'        => 'Desconto do Cupom',
+            'enter-your-code' => 'Digite seu código',
+            'error'           => 'Algo deu errado',
+            'invalid'         => 'Código do cupom é inválido.',
+            'remove'          => 'Remover Cupom',
+            'subtotal'        => 'Subtotal',
+            'success-apply'   => 'Código do cupom aplicado com sucesso.',
+        ],
+
+        'login' => [
+            'email'    => 'E-mail',
+            'password' => 'Senha',
+            'title'    => 'Entrar',
         ],
     ],
 

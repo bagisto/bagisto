@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Ihre Bestellung wurde storniert',
                     'page-title'         => 'Bestellung #:order_id',
                     'payment-method'     => 'Zahlungsmethode',
+                    'reorder-btn-title'  => 'Neu anordnen',
                     'shipping-address'   => 'Lieferadresse',
                     'shipping-method'    => 'Versandmethode',
                     'title'              => 'Ansicht',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Produkte hier suchen',
                 'sign-in'           => 'Anmelden',
                 'sign-up'           => 'Registrieren',
+                'submit'            => 'Absenden',
                 'title'             => 'Konto',
                 'welcome'           => 'Willkommen',
                 'welcome-guest'     => 'Willkommen Gast',
                 'wishlist'          => 'Wunschliste',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Standard-Sprache',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Weiter zur Kasse',
             'illegal'                   => 'Die Menge darf nicht weniger als eins sein.',
+            'inactive-add'              => 'Inaktive Artikel können nicht zum Warenkorb hinzugefügt werden.',
             'inactive'                  => 'Der Artikel wurde deaktiviert und wurde daher aus dem Warenkorb entfernt.',
             'inventory-warning'         => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
             'item-add-to-cart'          => 'Artikel erfolgreich hinzugefügt',
@@ -654,22 +663,6 @@ return [
                 'cross-sell' => [
                     'title' => 'Mehr Auswahlmöglichkeiten',
                 ],
-            ],
-
-            'coupon'   => [
-                'already-applied' => 'Gutscheincode wurde bereits angewendet.',
-                'applied'         => 'Gutschein angewendet',
-                'apply'           => 'Gutschein anwenden',
-                'apply-issue'     => 'Der Gutscheincode kann nicht angewendet werden.',
-                'button-title'    => 'Anwenden',
-                'code'            => 'Gutscheincode',
-                'discount'        => 'Gutscheinrabatt',
-                'enter-your-code' => 'Geben Sie Ihren Code ein',
-                'error'           => 'Etwas ist schiefgelaufen',
-                'invalid'         => 'Gutscheincode ist ungültig.',
-                'remove'          => 'Gutschein entfernen',
-                'subtotal'        => 'Zwischensumme',
-                'success-apply'   => 'Gutscheincode erfolgreich angewendet.',
             ],
 
             'mini-cart' => [
@@ -746,6 +739,28 @@ return [
                 'sub-total'        => 'Zwischensumme',
                 'tax'              => 'Steuer',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Gutscheincode wurde bereits angewendet.',
+            'applied'         => 'Gutschein angewendet',
+            'apply'           => 'Gutschein anwenden',
+            'apply-issue'     => 'Der Gutscheincode kann nicht angewendet werden.',
+            'button-title'    => 'Anwenden',
+            'code'            => 'Gutscheincode',
+            'discount'        => 'Gutscheinrabatt',
+            'enter-your-code' => 'Geben Sie Ihren Code ein',
+            'error'           => 'Etwas ist schiefgelaufen',
+            'invalid'         => 'Gutscheincode ist ungültig.',
+            'remove'          => 'Gutschein entfernen',
+            'subtotal'        => 'Zwischensumme',
+            'success-apply'   => 'Gutscheincode erfolgreich angewendet.',
+        ],
+
+        'login' => [
+            'email'    => 'E-Mail',
+            'password' => 'Passwort',
+            'title'    => 'Anmelden',
         ],
     ],
 

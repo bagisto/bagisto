@@ -13,13 +13,13 @@
             <!-- Drawer Header -->
             <x-slot:header>
                 <div class="grid gap-3">
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center justify-between">
                         <p class="text-xl font-medium dark:text-white">
                             @lang('admin::app.components.products.search.title')
                         </p>
 
                         <div
-                            class="ltr:mr-11 rtl:ml-11 primary-button"
+                            class="primary-button ltr:mr-11 rtl:ml-11"
                             @click="addSelected"
                         >
                             @lang('admin::app.components.products.search.add-btn')
@@ -29,13 +29,22 @@
                     <div class="relative w-full">
                         <input
                             type="text"
-                            class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-3 rtl:pr-3 ltr:pr-10 rtl:pl-10 py-1.5 leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                            class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"
                             placeholder="Search by name"
                             v-model.lazy="searchTerm"
                             v-debounce="500"
                         />
 
-                        <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                        <template v-if="isSearching">
+                            <img
+                                class="absolute top-2.5 h-5 w-5 animate-spin ltr:right-3 rtl:left-3"
+                                src="{{ bagisto_asset('images/spinner.svg') }}"
+                            />
+                        </template>
+
+                        <template v-else>
+                            <span class="icon-search pointer-events-none absolute top-1.5 flex items-center text-2xl ltr:right-3 rtl:left-3"></span>
+                        </template>
                     </div>
                 </div>
             </x-slot>
@@ -47,7 +56,7 @@
                     v-if="filteredSearchedProducts.length"
                 >
                     <div
-                        class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800"
+                        class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800"
                         v-for="product in filteredSearchedProducts"
                     >
                         <!-- Information -->
@@ -56,13 +65,13 @@
                             <div class="">
                                 <input
                                     type="checkbox"
-                                    class="sr-only peer"
+                                    class="peer sr-only"
                                     :id="'searched-product' + product.id"
                                     v-model="product.selected"
                                 />
 
                                 <label
-                                    class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
+                                    class="icon-uncheckbox peer-checked:icon-checked cursor-pointer text-2xl peer-checked:text-blue-600"
                                     :for="'searched-product' + product.id"
                                 >
                                 </label>
@@ -70,13 +79,13 @@
 
                             <!-- Image -->
                             <div
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
-                                :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! product.images.length}"
+                                class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                                :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                             >
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                 
-                                    <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                                    <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                         @lang('admin::app.components.products.search.product-image')
                                     </p>
                                 </template>
@@ -87,8 +96,8 @@
                             </div>
 
                             <!-- Details -->
-                            <div class="grid gap-1.5 place-content-start">
-                                <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            <div class="grid place-content-start gap-1.5">
+                                <p class="text-base font-semibold text-gray-800 dark:text-white">
                                     @{{ product.name }}
                                 </p>
 
@@ -99,8 +108,8 @@
                         </div>
 
                         <!-- Actions -->
-                        <div class="grid gap-1 place-content-start text-right">
-                            <p class="text-gray-800 font-semibold dark:text-white">
+                        <div class="grid place-content-start gap-1 text-right">
+                            <p class="font-semibold text-gray-800 dark:text-white">
                                 @{{ product.formatted_price }}
                             </p>
 
@@ -113,18 +122,18 @@
 
                 <!-- For Empty Variations -->
                 <div
-                    class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                    class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                     v-else
                 >
                     <!-- Placeholder Image -->
                     <img
                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                        class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                        class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                     />
 
                     <!-- Add Variants Information -->
-                    <div class="flex flex-col gap-1.5 items-center">
-                        <p class="text-base text-gray-400 font-semibold">
+                    <div class="flex flex-col items-center gap-1.5">
+                        <p class="text-base font-semibold text-gray-400">
                             @lang('admin::app.components.products.search.empty-title')
                         </p>
 
@@ -158,6 +167,8 @@
                     searchTerm: '',
 
                     searchedProducts: [],
+
+                    isSearching: false,
                 }
             },
 
@@ -169,7 +180,7 @@
 
             watch: {
                 searchTerm: function(newVal, oldVal) {
-                    this.search()
+                    this.search();
                 }
             },
 
@@ -185,6 +196,8 @@
                         return;
                     }
 
+                    this.isSearching = true;
+
                     let self = this;
                     
                     this.$axios.get("{{ route('admin.catalog.products.search') }}", {
@@ -194,10 +207,12 @@
                             }
                         })
                         .then(function(response) {
+                            self.isSearching = false;
+
                             self.searchedProducts = response.data.data;
                         })
                         .catch(function (error) {
-                        })
+                        });
                 },
 
                 addSelected() {

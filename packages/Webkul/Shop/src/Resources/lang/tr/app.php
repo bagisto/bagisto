@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Siparişiniz iptal edildi',
                     'page-title'         => 'Sipariş #:order_id',
                     'payment-method'     => 'Ödeme Yöntemi',
+                    'reorder-btn-title'  => 'Yeniden düzenle',
                     'shipping-address'   => 'Teslimat Adresi',
                     'shipping-method'    => 'Teslimat Yöntemi',
                     'title'              => 'Görüntüle',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Ürünleri burada ara',
                 'sign-in'           => 'Giriş Yap',
                 'sign-up'           => 'Kaydol',
+                'submit'            => 'Gönder',
                 'title'             => 'Hesap',
                 'welcome'           => 'Hoş geldiniz',
                 'welcome-guest'     => 'Hoş geldiniz Misafir',
                 'wishlist'          => 'İstek Listesi',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Varsayılan yerel ayar',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Ödemeye Devam Et',
             'illegal'                   => 'Miktar sıfırdan küçük olamaz.',
+            'inactive-add'              => 'Devre dışı ürün sepete eklenemez.',
             'inactive'                  => 'Ürün devre dışı bırakıldı ve sepetten kaldırıldı',
             'inventory-warning'         => 'İstenen miktar şu anda stokta bulunmuyor, lütfen daha sonra tekrar deneyin',
             'item-add-to-cart'          => 'Ürün Başarıyla Eklendi',
@@ -654,22 +663,6 @@ return [
                 'cross-sell' => [
                     'title' => 'Daha fazla seçenek',
                 ],
-            ],
-
-            'coupon'   => [
-                'already-applied' => 'Kupon kodu zaten uygulanmış.',
-                'applied'         => 'Kupon uygulandı',
-                'apply'           => 'Kuponu Uygula',
-                'apply-issue'     => 'Kupon kodu uygulanamıyor.',
-                'button-title'    => 'Uygula',
-                'code'            => 'Kupon Kodu',
-                'discount'        => 'Kupon İndirimi',
-                'enter-your-code' => 'Kodunuzu girin',
-                'error'           => 'Bir şeyler yanlış gitti',
-                'invalid'         => 'Kupon kodu geçersiz.',
-                'remove'          => 'Kuponu Kaldır',
-                'subtotal'        => 'Ara Toplam',
-                'success-apply'   => 'Kupon kodu başarıyla uygulandı.',
             ],
 
             'mini-cart' => [
@@ -746,6 +739,28 @@ return [
                 'sub-total'        => 'Ara Toplam',
                 'tax'              => 'Vergi',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'Kupon kodu zaten uygulanmış.',
+            'applied'         => 'Kupon uygulandı',
+            'apply'           => 'Kuponu Uygula',
+            'apply-issue'     => 'Kupon kodu uygulanamıyor.',
+            'button-title'    => 'Uygula',
+            'code'            => 'Kupon Kodu',
+            'discount'        => 'Kupon İndirimi',
+            'enter-your-code' => 'Kodunuzu girin',
+            'error'           => 'Bir şeyler yanlış gitti',
+            'invalid'         => 'Kupon kodu geçersiz.',
+            'remove'          => 'Kuponu Kaldır',
+            'subtotal'        => 'Ara Toplam',
+            'success-apply'   => 'Kupon kodu başarıyla uygulandı.',
+        ],
+
+        'login' => [
+            'email'    => 'E-posta',
+            'password' => 'Şifre',
+            'title'    => 'Giriş Yap',
         ],
     ],
 

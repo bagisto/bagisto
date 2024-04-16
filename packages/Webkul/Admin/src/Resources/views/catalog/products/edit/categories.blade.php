@@ -1,9 +1,9 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.categories.before', ['product' => $product]) !!}
 
 <!-- Panel -->
-<div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+<div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
     <!-- Panel Header -->
-    <p class="flex justify-between text-base text-gray-800 dark:text-white font-semibold mb-4">
+    <p class="mb-4 flex justify-between text-base font-semibold text-gray-800 dark:text-white">
         @lang('admin::app.catalog.products.edit.categories.title')
     </p>
 

@@ -11,7 +11,7 @@
     {!! view_render_event('bagisto.shop.checkout.cart.summary.title.after') !!}
 
     <!-- Cart Totals -->
-    <div class="grid gap-4 mt-6">
+    <div class="mt-6 grid gap-4">
         <!-- Sub Total -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.sub_total.before') !!}
 
@@ -68,7 +68,7 @@
         {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
 
         <div
-            class="flex text-right justify-between"
+            class="flex justify-between text-right"
             v-if="cart.selected_shipping_rate"
         >
             <p class="text-base">
@@ -85,7 +85,7 @@
         <!-- Apply Coupon -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.before') !!}
         
-        @include('shop::checkout.cart.coupon')
+        @include('shop::checkout.coupon')
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.after') !!}
    
@@ -108,7 +108,7 @@
 
         <a
             href="{{ route('shop.checkout.onepage.index') }}"
-            class="primary-button place-self-end py-3 mt-4 px-11 rounded-2xl"
+            class="primary-button mt-4 place-self-end rounded-2xl px-11 py-3"
         >
             @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>

@@ -14,11 +14,11 @@
 
     @isset($header)
         <template v-slot:header="{ toggle, isOpen }">
-            <div {{ $header->attributes->merge(['class' => 'flex gap-5 justify-between items-center p-8 bg-white border-b border-[#E9E9E9]']) }}>
+            <div {{ $header->attributes->merge(['class' => 'flex items-center justify-between gap-5 border-b border-[#E9E9E9] bg-white p-8']) }}>
                 {{ $header }}
 
                 <span
-                    class="icon-cancel text-3xl cursor-pointer"
+                    class="icon-cancel cursor-pointer text-3xl"
                     @click="toggle"
                 >
                 </span>
@@ -28,7 +28,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'p-8 bg-white']) }}>
+            <div {{ $content->attributes->merge(['class' => 'bg-white p-8']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -36,7 +36,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div {{ $content->attributes->merge(['class' => 'p-8 bg-white mt-5']) }}>
+            <div {{ $content->attributes->merge(['class' => 'mt-5 bg-white p-8']) }}>
                 {{ $footer }}
             </div>
         </template>
@@ -57,15 +57,15 @@
             <transition
                 tag="div"
                 name="modal-overlay"
-                enter-class="ease-out duration-300"
+                enter-class="duration-300 ease-out"
                 enter-from-class="opacity-0"
                 enter-to-class="opacity-100"
-                leave-class="ease-in duration-200"
+                leave-class="duration-200 ease-in"
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-10"
+                    class="fixed inset-0 z-10 bg-gray-500 bg-opacity-50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -73,18 +73,18 @@
             <transition
                 tag="div"
                 name="modal-content"
-                enter-class="ease-out duration-300"
-                enter-from-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
-                enter-to-class="opacity-100 translate-y-0 md:scale-100"
-                leave-class="ease-in duration-200"
-                leave-from-class="opacity-100 translate-y-0 md:scale-100"
-                leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+                enter-class="duration-300 ease-out"
+                enter-from-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
+                enter-to-class="translate-y-0 opacity-100 md:scale-100"
+                leave-class="duration-200 ease-in"
+                leave-from-class="translate-y-0 opacity-100 md:scale-100"
+                leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen"
+                    class="fixed inset-0 z-10 transform overflow-y-auto transition" v-show="isOpen"
                 >
-                    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <div class="w-full max-w-[595px] z-[999] absolute left-1/2 top-1/2 bg-[#F5F5F5] max-md:w-[90%] -translate-x-1/2 -translate-y-1/2">
+                    <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
+                        <div class="absolute left-1/2 top-1/2 z-[999] w-full max-w-[595px] -translate-x-1/2 -translate-y-1/2 bg-[#F5F5F5] max-md:w-[90%]">
                             <!-- Header Slot-->
                             <slot
                                 name="header"

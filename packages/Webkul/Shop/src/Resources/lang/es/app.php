@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Tu pedido ha sido cancelado',
                     'page-title'         => 'Pedido #:order_id',
                     'payment-method'     => 'Método de Pago',
+                    'reorder-btn-title'  => 'Reordenar',
                     'shipping-address'   => 'Dirección de Envío',
                     'shipping-method'    => 'Método de Envío',
                     'title'              => 'Ver',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Produkte hier suchen',
                 'sign-in'           => 'Anmelden',
                 'sign-up'           => 'Registrieren',
+                'submit'            => 'Enviar',
                 'title'             => 'Konto',
                 'welcome'           => 'Willkommen',
                 'welcome-guest'     => 'Willkommen Gast',
                 'wishlist'          => 'Wunschliste',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Idioma predeterminado',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuar con el Pago',
             'illegal'                   => 'La cantidad no puede ser menor que uno.',
+            'inactive-add'              => 'El artículo inactivo no se puede agregar al carrito.',
             'inactive'                  => 'El artículo ha sido desactivado y posteriormente eliminado del carrito.',
             'inventory-warning'         => 'La cantidad solicitada no está disponible, por favor inténtalo de nuevo más tarde.',
             'item-add-to-cart'          => 'Producto Agregado Exitosamente',
@@ -650,22 +659,6 @@ return [
                 'total'                    => 'Total',
                 'update-cart'              => 'Actualizar Carrito',
                 'view-cart'                => 'Ver Carrito',
-            ],
-
-            'coupon' => [
-                'already-applied' => 'El código de cupón ya ha sido aplicado.',
-                'applied'         => 'Cupón aplicado',
-                'apply'           => 'Aplicar Cupón',
-                'apply-issue'     => 'No se puede aplicar el código de cupón.',
-                'button-title'    => 'Aplicar',
-                'code'            => 'Código de Cupón',
-                'discount'        => 'Descuento de Cupón',
-                'enter-your-code' => 'Ingresa tu código',
-                'error'           => 'Algo salió mal',
-                'invalid'         => 'El código de cupón no es válido.',
-                'remove'          => 'Eliminar Cupón',
-                'subtotal'        => 'Subtotal',
-                'success-apply'   => 'Código de cupón aplicado con éxito.',
 
                 'cross-sell' => [
                     'title' => 'Más opciones',
@@ -746,6 +739,28 @@ return [
                 'sub-total'        => 'Subtotal',
                 'tax'              => 'Impuesto',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => 'El código de cupón ya ha sido aplicado.',
+            'applied'         => 'Cupón aplicado',
+            'apply'           => 'Aplicar Cupón',
+            'apply-issue'     => 'No se puede aplicar el código de cupón.',
+            'button-title'    => 'Aplicar',
+            'code'            => 'Código de Cupón',
+            'discount'        => 'Descuento de Cupón',
+            'enter-your-code' => 'Ingresa tu código',
+            'error'           => 'Algo salió mal',
+            'invalid'         => 'El código de cupón no es válido.',
+            'remove'          => 'Eliminar Cupón',
+            'subtotal'        => 'Subtotal',
+            'success-apply'   => 'Código de cupón aplicado con éxito.',
+        ],
+
+        'login' => [
+            'email'    => 'Correo electrónico',
+            'password' => 'Contraseña',
+            'title'    => 'Iniciar sesión',
         ],
     ],
 

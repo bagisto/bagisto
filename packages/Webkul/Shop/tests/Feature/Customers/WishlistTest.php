@@ -9,7 +9,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('should returns the wishlist index page', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -41,7 +41,7 @@ it('should returns the wishlist index page', function () {
         'customer_id' => $customer->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     get(route('shop.customers.account.wishlist.index'))
@@ -50,7 +50,7 @@ it('should returns the wishlist index page', function () {
 });
 
 it('should returns all the wishlisted items', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -86,7 +86,7 @@ it('should returns all the wishlisted items', function () {
         ]);
     }
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     get(route('shop.api.customers.account.wishlist.index'))
@@ -104,7 +104,7 @@ it('should returns all the wishlisted items', function () {
 });
 
 it('should fails the validation error when product id is not provide when add the products to the wishlist', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     postJson(route('shop.api.customers.account.wishlist.store'))
@@ -113,7 +113,7 @@ it('should fails the validation error when product id is not provide when add th
 });
 
 it('should add the products to the wishlist', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -137,7 +137,7 @@ it('should add the products to the wishlist', function () {
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     postJson(route('shop.api.customers.account.wishlist.store'), [
@@ -148,7 +148,7 @@ it('should add the products to the wishlist', function () {
 });
 
 it('should move wishlisted product to the cart', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -180,7 +180,7 @@ it('should move wishlisted product to the cart', function () {
         'customer_id' => $customer->id,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.customers.account.wishlist.move_to_cart', $wishList->id))
@@ -189,7 +189,7 @@ it('should move wishlisted product to the cart', function () {
 });
 
 it('should remove all wishlisted items', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -225,7 +225,7 @@ it('should remove all wishlisted items', function () {
         ]);
     }
 
-    // Act and Assert
+    // Act and Assert.
 
     $this->loginAsCustomer($customer);
 
@@ -235,7 +235,7 @@ it('should remove all wishlisted items', function () {
 });
 
 it('should remove specified wishlisted item', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',

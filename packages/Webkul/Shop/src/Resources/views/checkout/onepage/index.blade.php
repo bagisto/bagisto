@@ -19,7 +19,7 @@
 
     <!-- Page Header -->
     <div class="flex-wrap">
-        <div class="w-full flex justify-between px-[60px] py-4 border border-t-0 border-b border-l-0 border-r-0 max-lg:px-8 max-sm:px-4">
+        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-sm:px-4">
             <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 <a
                     href="{{ route('shop.home.index') }}"
@@ -34,6 +34,10 @@
                     >
                 </a>
             </div>
+
+            @guest('customer')
+                @include('shop::checkout.login')
+            @endguest
         </div>
     </div>
 
@@ -89,7 +93,7 @@
                     </div>
 
                     <!-- Included Checkout Summary Blade File -->
-                    <div class="sticky top-8 h-max w-[442px] max-w-full ltr:pl-8 rtl:pr-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:ltr:pl-0 max-lg:rtl:pr-0">
+                    <div class="sticky top-8 h-max w-[442px] max-w-full max-lg:w-auto max-lg:max-w-[442px] ltr:pl-8 max-lg:ltr:pl-0 rtl:pr-8 max-lg:rtl:pr-0">
                         @include('shop::checkout.onepage.summary')
 
                         <div
@@ -107,7 +111,7 @@
                             <template v-else>
                                 <x-shop::button
                                     type="button"
-                                    class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
+                                    class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-sm:mb-10 max-sm:px-6 max-sm:text-sm"
                                     :title="trans('shop::app.checkout.onepage.summary.place-order')"
                                     ::disabled="isPlacingOrder"
                                     ::loading="isPlacingOrder"
@@ -127,8 +131,6 @@
                 data() {
                     return {
                         cart: null,
-
-                        isCartLoading: true,
 
                         isPlacingOrder: false,
 
@@ -152,8 +154,6 @@
                             .then(response => {
                                 this.cart = response.data.data;
 
-                                this.isCartLoading = false;
-                                
                                 this.scrollToCurrentStep();
                             })
                             .catch(error => {});

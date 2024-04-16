@@ -31,21 +31,21 @@
                 >
                     <form @submit="handleSubmit($event, addAddressToCart)">
                         <!-- Billing Address Header -->
-                        <div class="flex justify-between items-center mb-4">
+                        <div class="mb-4 flex items-center justify-between">
                             <h2 class="text-xl font-medium max-sm:text-xl">
                                 @lang('shop::app.checkout.onepage.address.billing-address')
                             </h2>
                         </div>
 
                         <!-- Saved Customer Addresses Cards -->
-                        <div class="grid gap-5 grid-cols-2 mb-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
+                        <div class="mb-2 grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:mt-4 max-sm:grid-cols-1">
                             <div
-                                class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
+                                class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-[#e5e5e5] p-0 max-sm:flex-wrap"
                                 v-for="address in customerSavedAddresses.billing"
                             >
                                 <!-- Actions -->
-                                <div class="flex gap-2 absolute top-5 ltr:right-5 rtl:left-5">
-                                    <x-shop::form.control-group class="flex items-center gap-2.5 !mb-0">
+                                <div class="absolute top-5 flex gap-2 ltr:right-5 rtl:left-5">
+                                    <x-shop::form.control-group class="!mb-0 flex items-center gap-2.5">
                                         <x-shop::form.control-group.control
                                             type="radio"
                                             name="billing.id"
@@ -60,7 +60,7 @@
 
                                     <!-- Edit Icon -->
                                     <span
-                                        class="icon-edit text-2xl cursor-pointer"
+                                        class="icon-edit cursor-pointer text-2xl"
                                         @click="
                                             selectedAddressForEdit = address;
                                             activeAddressForm = 'billing';
@@ -71,14 +71,14 @@
 
                                 <!-- Details -->
                                 <label
-                                    class="block p-5 rounded-xl cursor-pointer"
+                                    class="block cursor-pointer rounded-xl p-5"
                                     :for="`billing_address_id_${address.id}`"
                                 >
                                     <span class="icon-checkout-address text-6xl text-navyBlue"></span>
 
-                                    <div class="flex justify-between items-center">
+                                    <div class="flex items-center justify-between">
                                         <p class="text-base font-medium">
-                                            @{{ address.first_name }} @{{ address.last_name }}
+                                            @{{ address.first_name + ' ' + address.last_name }}
 
                                             <template v-if="address.company_name">
                                                 (@{{ address.company_name }})
@@ -100,17 +100,17 @@
 
                             <!-- New Address Card -->
                             <div
-                                class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
+                                class="flex max-w-[414px] cursor-pointer items-center justify-center rounded-xl border border-[#e5e5e5] p-5 max-sm:flex-wrap"
                                 @click="activeAddressForm = 'billing'"
                                 v-if="! cart.billing_address"
                             >
                                 <div
-                                    class="flex gap-x-2.5 items-center"
+                                    class="flex items-center gap-x-2.5"
                                     role="button"
                                     tabindex="0"
                                 >
                                     <span
-                                        class="icon-plus p-2.5 border border-black rounded-full text-3xl"
+                                        class="icon-plus rounded-full border border-black p-2.5 text-3xl"
                                         role="presentation"
                                     ></span>
 
@@ -125,7 +125,7 @@
                         <!-- Shipping Address Block if have stockable items -->
                         <template v-if="cart.have_stockable_items">
                             <!-- Use for Shipping Checkbox -->
-                            <x-shop::form.control-group class="flex items-center gap-2.5 mt-5 !mb-0">
+                            <x-shop::form.control-group class="!mb-0 mt-5 flex items-center gap-2.5">
                                 <x-shop::form.control-group.control
                                     type="checkbox"
                                     name="billing.use_for_shipping"
@@ -137,7 +137,7 @@
                                 />
 
                                 <label
-                                    class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
+                                    class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0"
                                     for="use_for_shipping"
                                 >
                                     @lang('shop::app.checkout.onepage.address.same-as-billing')
@@ -151,21 +151,21 @@
                                 v-if="! useBillingAddressForShipping"
                             >
                                 <!-- Shipping Address Header -->
-                                <div class="flex justify-between items-center mb-4">
+                                <div class="mb-4 flex items-center justify-between">
                                     <h2 class="text-xl font-medium max-sm:text-xl">
                                         @lang('shop::app.checkout.onepage.address.shipping-address')
                                     </h2>
                                 </div>
 
                                 <!-- Saved Customer Addresses Cards -->
-                                <div class="grid gap-5 grid-cols-2 mb-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
+                                <div class="mb-2 grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:mt-4 max-sm:grid-cols-1">
                                     <div
-                                        class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
+                                        class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-[#e5e5e5] p-0 max-sm:flex-wrap"
                                         v-for="address in customerSavedAddresses.shipping"
                                     >
                                         <!-- Actions -->
-                                        <div class="flex gap-5 absolute top-5 ltr:right-5 rtl:left-5">
-                                            <x-shop::form.control-group class="flex items-center gap-2.5 !mb-0">
+                                        <div class="absolute top-5 flex gap-5 ltr:right-5 rtl:left-5">
+                                            <x-shop::form.control-group class="!mb-0 flex items-center gap-2.5">
                                                 <x-shop::form.control-group.control
                                                     type="radio"
                                                     name="shipping.id"
@@ -180,7 +180,7 @@
 
                                             <!-- Edit Icon -->
                                             <span
-                                                class="icon-edit text-2xl cursor-pointer"
+                                                class="icon-edit cursor-pointer text-2xl"
                                                 @click="
                                                     selectedAddressForEdit = address;
                                                     activeAddressForm = 'shipping';
@@ -191,14 +191,14 @@
 
                                         <!-- Details -->
                                         <label
-                                            class="block p-5 rounded-xl cursor-pointer"
+                                            class="block cursor-pointer rounded-xl p-5"
                                             :for="`shipping_address_id_${address.id}`"
                                         >
                                             <span class="icon-checkout-address text-6xl text-navyBlue"></span>
 
-                                            <div class="flex justify-between items-center">
+                                            <div class="flex items-center justify-between">
                                                 <p class="text-base font-medium">
-                                                    @{{ address.first_name }} @{{ address.last_name }}
+                                                    @{{ address.first_name + ' ' + address.last_name }}
 
                                                     <template v-if="address.company_name">
                                                         (@{{ address.company_name }})
@@ -220,17 +220,17 @@
 
                                     <!-- New Address Card -->
                                     <div
-                                        class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
+                                        class="flex max-w-[414px] cursor-pointer items-center justify-center rounded-xl border border-[#e5e5e5] p-5 max-sm:flex-wrap"
                                         @click="selectedAddressForEdit = null; activeAddressForm = 'shipping'"
                                         v-if="! cart.shipping_address"
                                     >
                                         <div
-                                            class="flex gap-x-2.5 items-center"
+                                            class="flex items-center gap-x-2.5"
                                             role="button"
                                             tabindex="0"
                                         >
                                             <span
-                                                class="icon-plus p-2.5 border border-black rounded-full text-3xl"
+                                                class="icon-plus rounded-full border border-black p-2.5 text-3xl"
                                                 role="presentation"
                                             ></span>
 
@@ -244,9 +244,9 @@
                         </template>
 
                         <!-- Proceed Button -->
-                        <div class="flex justify-end mt-4">
+                        <div class="mt-4 flex justify-end">
                             <x-shop::button
-                                class="primary-button py-3 px-11 rounded-2xl"
+                                class="primary-button rounded-2xl px-11 py-3"
                                 :title="trans('shop::app.checkout.onepage.address.proceed')"
                                 ::loading="isStoring"
                                 ::disabled="isStoring"
@@ -264,7 +264,7 @@
                 >
                     <form @submit="handleSubmit($event, updateOrCreateAddress)">
                         <!-- Billing Address Header -->
-                        <div class="flex justify-between items-center mb-4">
+                        <div class="mb-4 flex items-center justify-between">
                             <h2 class="text-xl font-medium max-sm:text-xl">
                                 <template v-if="activeAddressForm == 'billing'">
                                     @lang('shop::app.checkout.onepage.address.billing-address')
@@ -276,7 +276,7 @@
                             </h2>
 
                             <span
-                                class="flex justify-end cursor-pointer"
+                                class="flex cursor-pointer justify-end"
                                 v-show="customerSavedAddresses.billing.length && ['billing', 'shipping'].includes(activeAddressForm)"
                                 @click="selectedAddressForEdit = null; activeAddressForm = null"
                             >
@@ -293,7 +293,7 @@
                         ></v-checkout-address-form>
 
                         <!-- Save Address to Address Book Checkbox -->
-                        <x-shop::form.control-group class="flex items-center gap-2.5 !mb-0">
+                        <x-shop::form.control-group class="!mb-0 flex items-center gap-2.5">
                             <x-shop::form.control-group.control
                                 type="checkbox"
                                 ::name="activeAddressForm + '.save_address'"
@@ -305,7 +305,7 @@
                             />
 
                             <label
-                                class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
+                                class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0"
                                 for="save_address"
                             >
                                 @lang('shop::app.checkout.onepage.address.save-address')
@@ -313,9 +313,9 @@
                         </x-shop::form.control-group>
 
                         <!-- Save Button -->
-                        <div class="flex justify-end mt-4">
+                        <div class="mt-4 flex justify-end">
                             <x-shop::button
-                                class="primary-button py-3 px-11 rounded-2xl"
+                                class="primary-button rounded-2xl px-11 py-3"
                                 :title="trans('shop::app.checkout.onepage.address.save')"
                                 ::loading="isStoring"
                                 ::disabled="isStoring"
@@ -375,7 +375,7 @@
 
             methods: {
                 getCustomerSavedAddresses() {
-                    this.$axios.get('{{ route('api.shop.customers.account.addresses.index') }}')
+                    this.$axios.get('{{ route('shop.api.customers.account.addresses.index') }}')
                         .then(response => {
                             this.initializeAddresses('billing', structuredClone(response.data.data));
 
@@ -433,10 +433,11 @@
 
                     if (! address) {
                         if (params.save_address) {
-                            this.createCustomerAddress(params)
+                            this.createCustomerAddress(params, { setErrors })
                                 .then((response) => {
                                     this.addAddressToList(response.data.data);
-                                });
+                                })
+                                .catch((error) => {});
                         } else {
                             this.addAddressToList(params);
                         }
@@ -446,17 +447,19 @@
 
                     if (params.save_address) {
                         if (address.address_type == 'customer') {
-                            this.updateCustomerAddress(params.id, params)
+                            this.updateCustomerAddress(params.id, params, { setErrors })
                                 .then((response) => {
                                     this.updateAddressInList(response.data.data);
-                                });
+                                })
+                                .catch((error) => {});
                         } else {
                             this.removeAddressFromList(params);
 
-                            this.createCustomerAddress(params)
+                            this.createCustomerAddress(params, { setErrors })
                                 .then((response) => {
                                     this.addAddressToList(response.data.data);
-                                });
+                                })
+                                .catch((error) => {});
                         }
                     } else {
                         this.updateAddressInList(params);
@@ -496,10 +499,10 @@
                     this.customerSavedAddresses[this.activeAddressForm] = this.customerSavedAddresses[this.activeAddressForm].filter(address => address.id != params.id);
                 },
 
-                createCustomerAddress(params) {
+                createCustomerAddress(params, { setErrors }) {
                     this.isStoring = true;
 
-                    return this.$axios.post('{{ route('api.shop.customers.account.addresses.store') }}', params)
+                    return this.$axios.post('{{ route('shop.api.customers.account.addresses.store') }}', params)
                         .then((response) => {
                             this.isStoring = false;
 
@@ -509,15 +512,23 @@
                             this.isStoring = false;
 
                             if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
+                                let errors = {};
+
+                                Object.keys(error.response.data.errors).forEach(key => {
+                                    errors[this.activeAddressForm + '.' + key] = error.response.data.errors[key];
+                                });
+
+                                setErrors(errors);
                             }
+
+                            return Promise.reject(error);
                         });
                 },
 
-                updateCustomerAddress(id, params) {
+                updateCustomerAddress(id, params, { setErrors }) {
                     this.isStoring = true;
 
-                    return this.$axios.put('{{ route('api.shop.customers.account.addresses.update') }}/' + id, params)
+                    return this.$axios.put('{{ route('shop.api.customers.account.addresses.update') }}/' + id, params)
                         .then((response) => {
                             this.isStoring = false;
 
@@ -527,8 +538,16 @@
                             this.isStoring = false;
 
                             if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
+                                let errors = {};
+
+                                Object.keys(error.response.data.errors).forEach(key => {
+                                    errors[this.activeAddressForm + '.' + key] = error.response.data.errors[key];
+                                });
+
+                                setErrors(errors);
                             }
+
+                            return Promise.reject(error);
                         });
                 },
 

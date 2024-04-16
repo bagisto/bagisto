@@ -18,12 +18,12 @@
 
     @isset($header)
         <template v-slot:header="{ close }">
-            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-3 border-b dark:border-gray-800 max-sm:px-4']) }}>
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 border-b p-3 dark:border-gray-800 max-sm:px-4']) }}>
                 {{ $header }}
 
-                <div class="absolute top-4 ltr:right-3 rtl:left-3">
+                <div class="absolute top-3 ltr:right-3 rtl:left-3">
                     <span
-                        class="icon-cross text-3xl  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
+                        class="icon-cross cursor-pointer text-3xl hover:rounded-md hover:bg-gray-100 dark:hover:bg-gray-950"
                         @click="close"
                     >
                     </span>
@@ -34,7 +34,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'p-3 overflow-auto flex-1 max-sm:px-4']) }}>
+            <div {{ $content->attributes->merge(['class' => 'flex-1 overflow-auto p-3 max-sm:px-4']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -73,7 +73,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0  bg-gray-500 bg-opacity-50 transition-opacity z-[10001]"
+                    class="fixed inset-0 z-[10001] bg-gray-500 bg-opacity-50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -83,10 +83,10 @@
                 tag="div"
                 name="drawer"
                 :enter-from-class="enterFromLeaveToClasses"
-                enter-active-class="transform transition ease-in-out duration-200"
+                enter-active-class="transform transition duration-200 ease-in-out"
                 enter-to-class="translate-x-0"
                 leave-from-class="translate-x-0"
-                leave-active-class="transform transition ease-in-out duration-200"
+                leave-active-class="transform transition duration-200 ease-in-out"
                 :leave-to-class="enterFromLeaveToClasses"
             >
                 <div
@@ -100,10 +100,10 @@
                     :style="'width:' + width"
                     v-if="isOpen"
                 >
-                    <div class="w-full h-full overflow-auto bg-white dark:bg-gray-900 pointer-events-auto">
-                        <div class="flex flex-col h-full w-full">
-                            <div class="flex-1 min-h-0 min-w-0 overflow-auto">
-                                <div class="flex flex-col h-full">
+                    <div class="pointer-events-auto h-full w-full overflow-auto bg-white dark:bg-gray-900">
+                        <div class="flex h-full w-full flex-col">
+                            <div class="min-h-0 min-w-0 flex-1 overflow-auto">
+                                <div class="flex h-full flex-col">
                                     <!-- Header Slot-->
                                     <slot
                                         name="header"

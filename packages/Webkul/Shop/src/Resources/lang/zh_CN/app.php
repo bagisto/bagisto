@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => '您的订单已取消',
                     'page-title'         => '订单 #:order_id',
                     'payment-method'     => '付款方式',
+                    'reorder-btn-title'  => '重新排序',
                     'shipping-address'   => '送货地址',
                     'shipping-method'    => '送货方式',
                     'title'              => '查看',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => '在此搜索产品',
                 'sign-in'           => '登录',
                 'sign-up'           => '注册',
+                'submit'            => '提交',
                 'title'             => '账户',
                 'welcome'           => '欢迎',
                 'welcome-guest'     => '欢迎访客',
                 'wishlist'          => '心愿单',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => '默认语言环境',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => '继续结帐',
             'illegal'                   => '数量不能少于一。',
+            'inactive-add'              => '无法将停用的项目添加到购物车。',
             'inactive'                  => '该项目已停用，随后从购物车中移除。',
             'inventory-warning'         => '请求的数量不可用，请稍后再试。',
             'item-add-to-cart'          => '已成功添加项目',
@@ -654,22 +663,6 @@ return [
                 'cross-sell' => [
                     'title' => '更多选择',
                 ],
-            ],
-
-            'coupon' => [
-                'already-applied' => '优惠券码已应用。',
-                'applied'         => '已应用优惠券',
-                'apply'           => '应用优惠券',
-                'apply-issue'     => '无法应用优惠券码。',
-                'button-title'    => '应用',
-                'code'            => '优惠券码',
-                'discount'        => '优惠券折扣',
-                'enter-your-code' => '输入您的代码',
-                'error'           => '出了点问题',
-                'invalid'         => '优惠券码无效。',
-                'remove'          => '删除优惠券',
-                'subtotal'        => '小计',
-                'success-apply'   => '优惠券码已成功应用。',
             ],
 
             'mini-cart' => [
@@ -746,6 +739,28 @@ return [
                 'sub-total'        => '小计',
                 'tax'              => '税',
             ],
+        ],
+
+        'coupon' => [
+            'already-applied' => '优惠券码已应用。',
+            'applied'         => '已应用优惠券',
+            'apply'           => '应用优惠券',
+            'apply-issue'     => '无法应用优惠券码。',
+            'button-title'    => '应用',
+            'code'            => '优惠券码',
+            'discount'        => '优惠券折扣',
+            'enter-your-code' => '输入您的代码',
+            'error'           => '出了点问题',
+            'invalid'         => '优惠券码无效。',
+            'remove'          => '删除优惠券',
+            'subtotal'        => '小计',
+            'success-apply'   => '优惠券码已成功应用。',
+        ],
+
+        'login' => [
+            'email'    => '电子邮件',
+            'password' => '密码',
+            'title'    => '登录',
         ],
     ],
 

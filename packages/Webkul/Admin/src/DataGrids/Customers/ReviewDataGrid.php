@@ -10,7 +10,7 @@ class ReviewDataGrid extends DataGrid
     /**
      * Prepare query builder.
      *
-     * @return string
+     * @var string
      */
     protected $primaryColumn = 'product_review_id';
 

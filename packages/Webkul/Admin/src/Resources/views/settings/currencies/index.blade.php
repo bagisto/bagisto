@@ -6,13 +6,13 @@
     {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
     <v-currencies>
-        <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.settings.currencies.index.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
-                <!-- Create currency Button -->
+            <div class="flex items-center gap-x-2.5">
+                <!-- Create Currency Button -->
                 @if (bouncer()->hasPermission('settings.currencies.create'))
                     <button
                         type="button"
@@ -35,18 +35,18 @@
             type="text/x-template"
             id="v-currencies-template"
         >
-            <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                <p class="text-xl text-gray-800 dark:text-white font-bold">
+            <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+                <p class="text-xl font-bold text-gray-800 dark:text-white">
                     @lang('admin::app.settings.currencies.index.title')
                 </p>
 
-                <div class="flex gap-x-2.5 items-center">
-                    <!-- Create currency Button -->
+                <div class="flex items-center gap-x-2.5">
+                    <!-- Create Currency Button -->
                     @if (bouncer()->hasPermission('settings.currencies.create'))
                         <button
                             type="button"
                             class="primary-button"
-                            @click="selectedCurrencies=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
+                            @click="isEditable=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle();"
                         >
                             @lang('admin::app.settings.currencies.index.create-btn')
                         </button>
@@ -62,7 +62,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                         :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
                         <!-- Id -->
@@ -77,7 +77,7 @@
                         <!-- Actions -->
                         <div class="flex justify-end">
                             @if (bouncer()->hasPermission('settings.currencies.edit'))
-                                <a @click="selectedCurrencies=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
+                                <a @click="isEditable=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
                                     <span
                                         :class="record.actions.find(action => action.index === 'edit')?.icon"
                                         class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
@@ -114,14 +114,14 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
-                                v-if="selectedCurrencies"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
+                                v-if="isEditable"
                             >
                                 @lang('admin::app.settings.currencies.index.edit.title')
                             </p>
 
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-else
                             >
                                 @lang('admin::app.settings.currencies.index.create.title')
@@ -209,7 +209,80 @@
                                     :placeholder="trans('admin::app.settings.currencies.index.create.decimal')"
                                 />
 
-                                <x-admin::form.control-group.error control-name="decimal" />
+                                <x-admin::form.control-group.error
+                                    control-name="decimal"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Thousand Separator -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.group-separator')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="group_separator"
+                                    :value="old('group_separator')"
+                                    v-model="selectedCurrency.group_separator"
+                                    :label="trans('admin::app.settings.currencies.index.create.group-separator')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.group-separator')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="group_separator"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Decimal Separator -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.decimal-separator')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="decimal_separator"
+                                    :value="old('decimal_separator')"
+                                    v-model="selectedCurrency.decimal_separator"
+                                    :label="trans('admin::app.settings.currencies.index.create.decimal-separator')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.decimal-separator')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="decimal_separator"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Currency Position -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.currency-position')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="currency_position"
+                                    v-model="selectedCurrency.currency_position"
+                                    :label="trans('admin::app.settings.currencies.index.create.currency-position')"
+                                >
+                                    <option value="">@lang('admin::app.settings.taxes.categories.index.create.select')</option>
+
+                                    <option
+                                        v-for="(position, key) in positions"
+                                        :value="key"
+                                        :text="position"
+                                        :selected="key == selectedCurrency.currency_position"
+                                    >
+                                    </option>
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error control-name="currency_position" />
                             </x-admin::form.control-group>
 
                             {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
@@ -217,7 +290,7 @@
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex gap-x-2.5 items-center">
+                            <div class="flex items-center gap-x-2.5">
                                <button
                                     type="submit"
                                     class="primary-button"
@@ -237,10 +310,12 @@
 
                 data() {
                     return {
+                        isEditable: 0,
+
                         selectedCurrency: {},
 
-                        selectedCurrencies: 0,
-                    }
+                        positions: @json($currencyPositions),
+                    };
                 },
 
                 computed: {
@@ -260,7 +335,7 @@
                 },
 
                 methods: {
-                    updateOrCreate(params, { resetForm, setErrors  }) {
+                    updateOrCreate(params, { resetForm, setErrors }) {
                         let formData = new FormData(this.$refs.currencyCreateForm);
 
                         if (params.id) {
@@ -268,20 +343,20 @@
                         }
 
                         this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : "{{ route('admin.settings.currencies.store') }}", formData)
-                        .then((response) => {
-                            this.$refs.currencyUpdateOrCreateModal.close();
+                            .then((response) => {
+                                this.$refs.currencyUpdateOrCreateModal.close();
 
-                            this.$refs.datagrid.get();
+                                this.$refs.datagrid.get();
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            resetForm();
-                        })
-                        .catch(error => {
-                            if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
-                            }
-                        });
+                                resetForm();
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
                     },
 
                     editModal(url) {
@@ -292,7 +367,7 @@
                                 this.$refs.currencyUpdateOrCreateModal.toggle();
                             })
                             .catch(error => {
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                             });
                     },
                 }

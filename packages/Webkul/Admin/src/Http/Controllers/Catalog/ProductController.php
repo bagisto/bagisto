@@ -12,6 +12,7 @@ use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\Admin\Http\Requests\ProductForm;
 use Webkul\Admin\Http\Resources\AttributeResource;
+use Webkul\Admin\Http\Resources\ProductResource;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Rules\Slug;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
@@ -325,7 +326,7 @@ class ProductController extends Controller
     {
         $results = [];
 
-        request()->query->add([
+        $products = $this->productRepository->searchFromDatabase([
             'status'               => null,
             'visible_individually' => null,
             'name'                 => request('query'),
@@ -333,23 +334,7 @@ class ProductController extends Controller
             'order'                => 'desc',
         ]);
 
-        $products = $this->productRepository->searchFromDatabase();
-
-        foreach ($products as $product) {
-            $results[] = [
-                'id'              => $product->id,
-                'sku'             => $product->sku,
-                'name'            => $product->name,
-                'price'           => $product->price,
-                'formatted_price' => core()->formatBasePrice($product->price),
-                'images'          => $product->images,
-                'inventories'     => $product->inventories,
-            ];
-        }
-
-        $products->setCollection(collect($results));
-
-        return response()->json($products);
+        return ProductResource::collection($products);
     }
 
     /**

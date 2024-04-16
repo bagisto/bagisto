@@ -12,7 +12,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
 it('returns a successful response', function () {
-    // Act & Assert
+    // Act and Assert.
     get(route('shop.home.index'))
         ->assertOk();
 });
@@ -89,7 +89,7 @@ it('should returns the home page of the sore', function () {
 });
 
 it('should returns the search page of the products', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -113,7 +113,7 @@ it('should returns the search page of the products', function () {
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     get(route('shop.search.index', [
         'query' => $query = $product->name,
     ]))
@@ -123,14 +123,14 @@ it('should returns the search page of the products', function () {
 });
 
 it('should fails the validation error when provided wrong email address when subscribe to the shop', function () {
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.subscription.store'))
         ->assertJsonValidationErrorFor('email')
         ->assertUnprocessable();
 });
 
 it('should store the subscription of the shop', function () {
-    // Act and Assert
+    // Act and Assert.
     postJson(route('shop.subscription.store'), [
         'email' => $email = fake()->email(),
     ])
@@ -147,7 +147,7 @@ it('should store the subscription of the shop', function () {
 });
 
 it('should store the subscription of the shop and send the mail to the admin', function () {
-    // Act and Assert
+    // Act and Assert.
     Mail::fake();
 
     postJson(route('shop.subscription.store'), [
@@ -170,10 +170,10 @@ it('should store the subscription of the shop and send the mail to the admin', f
 });
 
 it('should unsubscribe from the shop', function () {
-    // Arrange
+    // Arrange.
     $subscriber = SubscribersList::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     get(route('shop.subscription.destroy', [
         'token' => $subscriber->token,
     ]))
@@ -185,7 +185,7 @@ it('should unsubscribe from the shop', function () {
 });
 
 it('should store the products to the compare list', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -209,7 +209,7 @@ it('should store the products to the compare list', function () {
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     postJson(route('shop.api.compare.store'), [
@@ -220,7 +220,7 @@ it('should store the products to the compare list', function () {
 });
 
 it('should fails the validation error when not provided product id when move the compare list item', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     postJson(route('shop.api.compare.store'))
@@ -229,7 +229,7 @@ it('should fails the validation error when not provided product id when move the
 });
 
 it('should remove product from compare list', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -253,7 +253,7 @@ it('should remove product from compare list', function () {
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     CompareItem::factory()->create([
@@ -269,7 +269,7 @@ it('should remove product from compare list', function () {
 });
 
 it('should remove all the products from compare list', function () {
-    // Arrange
+    // Arrange.
     $products = (new ProductFaker([
         'attributes' => [
             5  => 'new',
@@ -293,7 +293,7 @@ it('should remove all the products from compare list', function () {
         ],
     ]))->getSimpleProductFactory()->count(5)->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsCustomer();
 
     foreach ($products as $product) {

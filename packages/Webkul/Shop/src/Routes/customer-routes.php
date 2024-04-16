@@ -37,9 +37,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
          * Login routes.
          */
         Route::controller(SessionController::class)->prefix('login')->group(function () {
-            Route::get('', 'show')->name('shop.customer.session.index');
+            Route::get('', 'index')->name('shop.customer.session.index');
 
-            Route::post('', 'create')->name('shop.customer.session.create');
+            Route::post('', 'store')->name('shop.customer.session.create');
         });
 
         /**
@@ -128,6 +128,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     Route::get('', 'index')->name('shop.customers.account.orders.index');
 
                     Route::get('view/{id}', 'view')->name('shop.customers.account.orders.view');
+
+                    Route::get('reorder/{id}', 'reorder')->name('shop.customers.account.orders.reorder');
 
                     Route::post('cancel/{id}', 'cancel')->name('shop.customers.account.orders.cancel');
 
