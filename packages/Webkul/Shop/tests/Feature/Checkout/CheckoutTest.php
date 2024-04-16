@@ -1609,6 +1609,7 @@ it('should place a simple product order for a guest user', function () {
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     cart()->setCart($cart);
@@ -1762,10 +1763,11 @@ it('should place a simple product order for a guest user and send mail to guest 
     $cartShippingRate = CartShippingRate::factory()->create([
         'carrier'            => 'free',
         'carrier_title'      => 'Free shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
         'method'             => 'free_free',
         'method_description' => 'Free Shipping',
         'method_title'       => 'Free Shipping',
+        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     cart()->setCart($cart);
@@ -1933,6 +1935,7 @@ it('should place a simple product order for a customer', function () {
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     cart()->setCart($cart);
@@ -2095,6 +2098,7 @@ it('should place a simple product order for a customer and send email to the cus
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     cart()->setCart($cart);
@@ -2262,11 +2266,12 @@ it('should place a configurable product order for a guest user', function () {
 
     $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
+        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
@@ -2434,11 +2439,12 @@ it('should place a configurable product order for a guest user and send email to
 
     $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
+        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
@@ -2616,11 +2622,12 @@ it('should place a configurable product order for a customer', function () {
 
     $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
+        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
@@ -2796,11 +2803,12 @@ it('should place a configurable product order for a customer and send email to t
 
     $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
+        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
@@ -4241,11 +4249,12 @@ it('should place order with two products with simple and configurable product ty
 
     $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
+        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
@@ -4489,11 +4498,12 @@ it('should place order with two products with simple and grouped product type', 
 
     $cartShippingRate = CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
+        'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     cart()->setCart($cart);
@@ -4720,6 +4730,7 @@ it('should place order with two products with simple and downloadable product ty
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     $cartPayment = CartPayment::factory()->create([
