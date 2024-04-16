@@ -685,6 +685,16 @@ return [
                 'proceed-to-checkout' => 'Ga naar afrekenen',
                 'sub-total'           => 'Subtotaal',
                 'tax'                 => 'Belasting',
+
+                'estimate-shipping' => [
+                    'country'        => 'Land',
+                    'info'           => 'Voer uw bestemming in om een schatting te krijgen van de verzend- en belastingkosten.',
+                    'postcode'       => 'Postcode',
+                    'select-country' => 'Selecteer land',
+                    'select-state'   => 'Selecteer provincie',
+                    'state'          => 'Provincie',
+                    'title'          => 'Verzend- en belastingkosten schatten',
+                ],
             ],
         ],
 

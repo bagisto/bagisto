@@ -685,6 +685,16 @@ return [
                 'proceed-to-checkout' => 'Zur Kasse gehen',
                 'sub-total'           => 'Zwischensumme',
                 'tax'                 => 'Steuer',
+
+                'estimate-shipping' => [
+                    'country'        => 'Land',
+                    'info'           => 'Geben Sie Ihr Ziel ein, um eine Schätzung für Versand und Steuer zu erhalten.',
+                    'postcode'       => 'PLZ/Postleitzahl',
+                    'select-country' => 'Land auswählen',
+                    'select-state'   => 'Bundesland auswählen',
+                    'state'          => 'Bundesland',
+                    'title'          => 'Versand und Steuer schätzen',
+                ],
             ],
         ],
 
