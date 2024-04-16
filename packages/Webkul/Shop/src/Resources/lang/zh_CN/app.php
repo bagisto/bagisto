@@ -354,7 +354,7 @@ return [
         ],
 
         'drawer' => [
-            'default-toggle'  => '默认切换',
+            'default-toggle' => '默认切换',
         ],
 
         'media' => [
@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => '欢迎访客',
                 'wishlist'          => '心愿单',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
-                        'default-locale' => '默认语言环境',
+                        'default-locale' => '默认区域设置',
+                        'offer'          => '首次订单最高可享受40%折扣',
+                        'shop-now'       => '立即购买',
                     ],
                 ],
             ],
@@ -480,14 +482,14 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-cart'                 => '添加到购物车',
-                'add-to-compare'              => '添加到比较列表',
-                'add-to-compare-success'      => '商品已成功添加到比较列表。',
-                'add-to-wishlist'             => '添加到愿望清单',
-                'already-in-compare'          => '商品已经在比较列表中。',
-                'new'                         => '新品',
-                'review-description'          => '成为第一个评价这个产品的人',
-                'sale'                        => '特卖',
+                'add-to-cart'            => '添加到购物车',
+                'add-to-compare'         => '添加到比较列表',
+                'add-to-compare-success' => '商品已成功添加到比较列表。',
+                'add-to-wishlist'        => '添加到愿望清单',
+                'already-in-compare'     => '商品已经在比较列表中。',
+                'new'                    => '新品',
+                'review-description'     => '成为第一个评价这个产品的人',
+                'sale'                   => '特卖',
             ],
 
             'carousel' => [
@@ -527,7 +529,7 @@ return [
         ],
 
         'sort-by' => [
-            'title'   => '排序方式',
+            'title' => '排序方式',
         ],
 
         'view' => [
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => '分析关键词：',
+                'analyzed-keywords' => '分析关键词：',
             ],
         ],
     ],
@@ -813,7 +815,7 @@ return [
     ],
 
     'errors' => [
-        'go-to-home'   => '转到主页',
+        'go-to-home' => '转到主页',
 
         '404' => [
             'description' => '糟糕！您正在寻找的页面正在度假中。看来我们找不到您要搜索的内容。',

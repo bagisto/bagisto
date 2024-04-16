@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'ゲストさん、ようこそ',
                 'wishlist'          => 'ウィッシュリスト',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
                         'default-locale' => 'デフォルトのロケール',
+                        'offer'          => '初回注文で最大40％オフ',
+                        'shop-now'       => '今すぐ購入',
                     ],
                 ],
             ],
@@ -480,14 +482,14 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-cart'                 => 'カートに追加',
-                'add-to-compare'              => '比較リストに追加',
-                'add-to-compare-success'      => 'アイテムが比較リストに追加されました。',
-                'add-to-wishlist'             => 'ウィッシュリストに追加',
-                'already-in-compare'          => 'アイテムはすでに比較リストに追加されています。',
-                'new'                         => '新着',
-                'review-description'          => 'この製品の最初のレビュアになる',
-                'sale'                        => 'セール',
+                'add-to-cart'            => 'カートに追加',
+                'add-to-compare'         => '比較リストに追加',
+                'add-to-compare-success' => 'アイテムが比較リストに追加されました。',
+                'add-to-wishlist'        => 'ウィッシュリストに追加',
+                'already-in-compare'     => 'アイテムはすでに比較リストに追加されています。',
+                'new'                    => '新着',
+                'review-description'     => 'この製品の最初のレビュアになる',
+                'sale'                   => 'セール',
             ],
 
             'carousel' => [
@@ -527,7 +529,7 @@ return [
         ],
 
         'sort-by' => [
-            'title'   => '並び替え',
+            'title' => '並び替え',
         ],
 
         'view' => [
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => '分析されたキーワード:',
+                'analyzed-keywords' => '分析されたキーワード:',
             ],
         ],
     ],
@@ -814,7 +816,7 @@ return [
     ],
 
     'errors' => [
-        'go-to-home'   => 'ホームに戻る',
+        'go-to-home' => 'ホームに戻る',
 
         '404' => [
             'description' => 'おっと！お探しのページは休暇中のようです。お探しのものが見つかりませんでした。',

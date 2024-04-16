@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'Bem-vindo, Visitante',
                 'wishlist'          => 'Lista de Desejos',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
                         'default-locale' => 'Idioma padrão',
+                        'offer'          => 'Obtenha ATÉ 40% DE DESCONTO no seu 1º pedido',
+                        'shop-now'       => 'COMPRAR AGORA',
                     ],
                 ],
             ],
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'Palavras-chave Analisadas:',
+                'analyzed-keywords' => 'Palavras-chave Analisadas:',
             ],
         ],
     ],

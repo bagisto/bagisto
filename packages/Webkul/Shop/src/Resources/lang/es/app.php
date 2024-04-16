@@ -178,7 +178,7 @@ return [
                 'title'       => 'Pedidos',
                 'total'       => 'Total',
 
-                'status'        => [
+                'status' => [
                     'title' => 'Estado',
 
                     'options' => [
@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'Willkommen Gast',
                 'wishlist'          => 'Wunschliste',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
                         'default-locale' => 'Idioma predeterminado',
+                        'offer'          => 'Obtén HASTA 40% DE DESCUENTO en tu primer pedido',
+                        'shop-now'       => 'COMPRAR AHORA',
                     ],
                 ],
             ],
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'Palabras clave analizadas:',
+                'analyzed-keywords' => 'Palabras clave analizadas:',
             ],
         ],
     ],
@@ -814,7 +816,7 @@ return [
     ],
 
     'errors' => [
-        'go-to-home'   => 'Zur Startseite gehen',
+        'go-to-home' => 'Zur Startseite gehen',
 
         '404' => [
             'description' => 'Hoppla! Die Seite, nach der Sie suchen, macht gerade Urlaub. Es scheint, wir konnten nicht finden, wonach Sie gesucht haben.',

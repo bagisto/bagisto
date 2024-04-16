@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'Willkommen Gast',
                 'wishlist'          => 'Wunschliste',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
-                        'default-locale' => 'Standard-Sprache',
+                        'default-locale' => 'Standardsprache',
+                        'offer'          => 'Erhalten Sie bis zu 40% Rabatt auf Ihre erste Bestellung',
+                        'shop-now'       => 'JETZT KAUFEN',
                     ],
                 ],
             ],
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'Analysierte Schlüsselwörter:',
+                'analyzed-keywords' => 'Analysierte Schlüsselwörter:',
             ],
         ],
     ],
@@ -814,7 +816,7 @@ return [
     ],
 
     'errors' => [
-        'go-to-home'   => 'Zur Startseite gehen',
+        'go-to-home' => 'Zur Startseite gehen',
 
         '404' => [
             'description' => 'Hoppla! Die Seite, die Sie suchen, ist im Urlaub. Es scheint, dass wir nicht finden konnten, wonach Sie gesucht haben.',

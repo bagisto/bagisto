@@ -70,7 +70,7 @@ return [
         ],
 
         'account' => [
-            'home'      => 'হোম',
+            'home' => 'হোম',
 
             'profile' => [
                 'index' => [
@@ -178,7 +178,7 @@ return [
                 'title'       => 'অর্ডারগুলি',
                 'total'       => 'মোট',
 
-                'status'        => [
+                'status' => [
                     'title' => 'অবস্থা',
 
                     'options' => [
@@ -304,7 +304,7 @@ return [
                 ],
             ],
 
-            'reviews'    => [
+            'reviews' => [
                 'empty-review' => 'আপনি এখনো কোনও পণ্য পর্যালোচনা করেননি',
                 'title'        => 'পর্যালোচনা',
             ],
@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'স্বাগতম অতিথি',
                 'wishlist'          => 'ইচ্ছেসূচি',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
                         'default-locale' => 'ডিফল্ট লোকেল',
+                        'offer'          => 'আপনার ১ম অর্ডারে ৪০% ছাড়',
+                        'shop-now'       => 'এখনই কিনুন',
                     ],
                 ],
             ],
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'বিশ্লেষণ করা শব্দ:',
+                'analyzed-keywords' => 'বিশ্লেষণ করা শব্দ:',
             ],
         ],
     ],

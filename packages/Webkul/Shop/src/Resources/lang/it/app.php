@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'Benvenuto Ospite',
                 'wishlist'          => 'Lista dei desideri',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
                         'default-locale' => 'Lingua predefinita',
+                        'offer'          => 'Ottieni FINO AL 40% DI SCONTO sul tuo primo ordine',
+                        'shop-now'       => 'ACQUISTA ORA',
                     ],
                 ],
             ],
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'Parole chiave analizzate:',
+                'analyzed-keywords' => 'Parole chiave analizzate:',
             ],
         ],
     ],
@@ -814,7 +816,7 @@ return [
     ],
 
     'errors' => [
-        'go-to-home'   => 'Vai alla Home',
+        'go-to-home' => 'Vai alla Home',
 
         '404' => [
             'description' => 'Oops! La pagina che stai cercando è in vacanza. Sembra che non siamo riusciti a trovare quello che cercavi.',

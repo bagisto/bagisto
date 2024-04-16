@@ -304,7 +304,7 @@ return [
                 ],
             ],
 
-            'reviews'    => [
+            'reviews' => [
                 'empty-review' => 'You have not reviewed any product yet',
                 'title'        => 'Reviews',
             ],
@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'Welcome Guest',
                 'wishlist'          => 'Wishlist',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
                         'default-locale' => 'Default locale',
+                        'offer'          => 'Get UPTO 40% OFF on your 1st order',
+                        'shop-now'       => 'SHOP NOW',
                     ],
                 ],
             ],
@@ -480,14 +482,14 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-cart'                 => 'Add To Cart',
-                'add-to-compare'              => 'Add To Compare',
-                'add-to-compare-success'      => 'Item added successfully to compare list.',
-                'add-to-wishlist'             => 'Add To Wishlist',
-                'already-in-compare'          => 'Item is already added to compare list.',
-                'new'                         => 'New',
-                'review-description'          => 'Be the first to review this product',
-                'sale'                        => 'Sale',
+                'add-to-cart'            => 'Add To Cart',
+                'add-to-compare'         => 'Add To Compare',
+                'add-to-compare-success' => 'Item added successfully to compare list.',
+                'add-to-wishlist'        => 'Add To Wishlist',
+                'already-in-compare'     => 'Item is already added to compare list.',
+                'new'                    => 'New',
+                'review-description'     => 'Be the first to review this product',
+                'sale'                   => 'Sale',
             ],
 
             'carousel' => [
@@ -527,7 +529,7 @@ return [
         ],
 
         'sort-by' => [
-            'title'   => 'Sort By',
+            'title' => 'Sort By',
         ],
 
         'view' => [
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'Analysed Keywords:',
+                'analyzed-keywords' => 'Analyzed Keywords:',
             ],
         ],
     ],
@@ -814,7 +816,7 @@ return [
     ],
 
     'errors' => [
-        'go-to-home'   => 'Go To Home',
+        'go-to-home' => 'Go To Home',
 
         '404' => [
             'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',

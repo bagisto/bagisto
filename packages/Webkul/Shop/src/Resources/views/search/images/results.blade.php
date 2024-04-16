@@ -2,7 +2,7 @@
     <div class="mt-8 rounded-lg border border-gray-200 p-5">
         <div class="flex gap-12">
             <x-shop::media.images.lazy class="h-[110px] max-h-[110px] w-[110px] min-w-[110px] max-w-[110px] rounded-sm" />
-             
+
             <div class="flex flex-col gap-4">
                 <span class="shimmer h-10 w-[200px]"></span>
 
@@ -35,7 +35,7 @@
 
                 <div class="flex flex-col gap-4">
                     <h2 class="text-2xl font-medium">
-                        @lang('shop::app.search.images.results.analysed-keywords')
+                        @lang('shop::app.search.images.results.analyzed-keywords')
                     </h2>
 
                     <div class="flex flex-wrap gap-2">

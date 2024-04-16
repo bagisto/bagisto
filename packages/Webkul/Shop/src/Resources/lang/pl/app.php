@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'Witaj, Gościu',
                 'wishlist'          => 'Lista życzeń',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
-                        'default-locale' => 'Domyślna lokalizacja',
+                        'default-locale' => 'Domyślny język',
+                        'offer'          => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie',
+                        'shop-now'       => 'KUP TERAZ',
                     ],
                 ],
             ],
@@ -480,14 +482,14 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-cart'                 => 'Dodaj do koszyka',
-                'add-to-compare'              => 'Dodaj do listy porównań',
-                'add-to-compare-success'      => 'Przedmiot został pomyślnie dodany do listy porównań.',
-                'add-to-wishlist'             => 'Dodaj do listy życzeń',
-                'already-in-compare'          => 'Przedmiot jest już dodany do listy porównań.',
-                'new'                         => 'Nowy',
-                'review-description'          => 'Bądź pierwszym, który oceni ten produkt',
-                'sale'                        => 'Wyprzedaż',
+                'add-to-cart'            => 'Dodaj do koszyka',
+                'add-to-compare'         => 'Dodaj do listy porównań',
+                'add-to-compare-success' => 'Przedmiot został pomyślnie dodany do listy porównań.',
+                'add-to-wishlist'        => 'Dodaj do listy życzeń',
+                'already-in-compare'     => 'Przedmiot jest już dodany do listy porównań.',
+                'new'                    => 'Nowy',
+                'review-description'     => 'Bądź pierwszym, który oceni ten produkt',
+                'sale'                   => 'Wyprzedaż',
             ],
 
             'carousel' => [
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'Zanalizowane Słowa Kluczowe:',
+                'analyzed-keywords' => 'Zanalizowane Słowa Kluczowe:',
             ],
         ],
     ],

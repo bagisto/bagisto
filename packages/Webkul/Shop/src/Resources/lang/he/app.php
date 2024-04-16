@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'ברוך הבא אורח',
                 'wishlist'          => 'רשימת משאלות',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
-                        'default-locale' => 'שפת ברירת מחדל',
+                        'default-locale' => 'שפת ברירת המחדל',
+                        'offer'          => 'קבל עד 40% הנחה על הזמנתך הראשונה',
+                        'shop-now'       => 'קנה עכשיו',
                     ],
                 ],
             ],
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'מילות מפתח שנבדקו:',
+                'analyzed-keywords' => 'מילות מפתח שנבדקו:',
             ],
         ],
     ],

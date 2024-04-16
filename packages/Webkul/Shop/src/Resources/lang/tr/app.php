@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'Hoş geldiniz Misafir',
                 'wishlist'          => 'İstek Listesi',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
-                        'default-locale' => 'Varsayılan yerel ayar',
+                        'default-locale' => 'Varsayılan dil',
+                        'offer'          => 'İlk siparişinizde %40\'a varan İNDİRİM alın',
+                        'shop-now'       => 'ŞİMDİ ALIŞVERİŞ YAP',
                     ],
                 ],
             ],
@@ -480,14 +482,14 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-cart'                 => 'Sepete Ekle',
-                'add-to-compare'              => 'Karşılaştırma Listesine Ekle',
-                'add-to-compare-success'      => 'Öğe karşılaştırma listesine başarıyla eklendi.',
-                'add-to-wishlist'             => 'Dilek Listesine Ekle',
-                'already-in-compare'          => 'Öğe zaten karşılaştırma listesine eklenmiş.',
-                'new'                         => 'Yeni',
-                'review-description'          => 'Bu ürünü değerlendiren ilk kişi olun',
-                'sale'                        => 'Satış',
+                'add-to-cart'            => 'Sepete Ekle',
+                'add-to-compare'         => 'Karşılaştırma Listesine Ekle',
+                'add-to-compare-success' => 'Öğe karşılaştırma listesine başarıyla eklendi.',
+                'add-to-wishlist'        => 'Dilek Listesine Ekle',
+                'already-in-compare'     => 'Öğe zaten karşılaştırma listesine eklenmiş.',
+                'new'                    => 'Yeni',
+                'review-description'     => 'Bu ürünü değerlendiren ilk kişi olun',
+                'sale'                   => 'Satış',
             ],
 
             'carousel' => [
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'Analiz Edilen Anahtar Kelimeler:',
+                'analyzed-keywords' => 'Analiz Edilen Anahtar Kelimeler:',
             ],
         ],
     ],
@@ -657,8 +659,8 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Ödemeye Devam Et',
             'illegal'                   => 'Miktar sıfırdan küçük olamaz.',
-            'inactive-add'              => 'Devre dışı ürün sepete eklenemez.',
             'inactive'                  => 'Ürün devre dışı bırakıldı ve sepetten kaldırıldı',
+            'inactive-add'              => 'Devre dışı ürün sepete eklenemez.',
             'inventory-warning'         => 'İstenen miktar şu anda stokta bulunmuyor, lütfen daha sonra tekrar deneyin',
             'item-add-to-cart'          => 'Ürün Başarıyla Eklendi',
             'minimum-order-message'     => 'Minimum sipariş miktarı: :amount',
@@ -814,7 +816,7 @@ return [
     ],
 
     'errors' => [
-        'go-to-home'   => 'Anasayfaya Git',
+        'go-to-home' => 'Anasayfaya Git',
 
         '404' => [
             'description' => 'Üzgünüz! Aradığınız sayfa tatilde. Aradığınızı bulamadık gibi görünüyor.',

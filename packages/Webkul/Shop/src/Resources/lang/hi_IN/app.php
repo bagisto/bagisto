@@ -178,7 +178,7 @@ return [
                 'title'       => 'आदेश',
                 'total'       => 'कुल',
 
-                'status'        => [
+                'status' => [
                     'title' => 'स्थिति',
 
                     'options' => [
@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'स्वागतम अतिथि',
                 'wishlist'          => 'विशलिस्ट',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
                         'default-locale' => 'डिफ़ॉल्ट भाषा',
+                        'offer'          => 'अपने पहले ऑर्डर पर उपयोग करें 40% तक का छूट',
+                        'shop-now'       => 'अभी खरीदें',
                     ],
                 ],
             ],
@@ -527,7 +529,7 @@ return [
         ],
 
         'sort-by' => [
-            'title'   => 'क्रमबद्ध करें',
+            'title' => 'क्रमबद्ध करें',
         ],
 
         'view' => [
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'विश्लेषित की गई कीवर्ड:',
+                'analyzed-keywords' => 'विश्लेषित की गई कीवर्ड:',
             ],
         ],
     ],

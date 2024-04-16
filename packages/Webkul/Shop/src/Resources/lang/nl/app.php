@@ -382,9 +382,11 @@ return [
                 'welcome-guest'     => 'Welkom Gast',
                 'wishlist'          => 'Verlanglijst',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
-                        'default-locale' => 'Standaard taal',
+                        'default-locale' => 'Standaardtaal',
+                        'offer'          => 'Krijg TOT 40% KORTING op je 1e bestelling',
+                        'shop-now'       => 'KOOP NU',
                     ],
                 ],
             ],
@@ -629,7 +631,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'Geanalyseerde Trefwoorden:',
+                'analyzed-keywords' => 'Geanalyseerde Trefwoorden:',
             ],
         ],
     ],
@@ -814,7 +816,7 @@ return [
     ],
 
     'errors' => [
-        'go-to-home'   => 'Ga naar de startpagina',
+        'go-to-home' => 'Ga naar de startpagina',
 
         '404' => [
             'description' => 'Oeps! De pagina die je zoekt, is met vakantie. Het lijkt erop dat we niet hebben gevonden wat je zocht.',
