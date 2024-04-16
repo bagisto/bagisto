@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'মুলতুবি পেমেন্ট',
             'processing'      => 'অর্ডার প্রসেসিং হচ্ছে',
         ],
-
-        'status' => [
-            'all'        => 'সব',
-            'canceled'   => 'বাতিল',
-            'closed'     => 'বন্ধ',
-            'completed'  => 'সম্পন্ন',
-            'pending'    => 'মুলতুবি',
-            'processing' => 'প্রসেসিং',
-        ],
     ],
 
     'account' => [

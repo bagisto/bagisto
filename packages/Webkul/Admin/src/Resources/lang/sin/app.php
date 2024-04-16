@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'වාරික ගෙවීමට නැත',
             'processing'      => 'ඇනවුම සකසා ඇත',
         ],
-
-        'status' => [
-            'all'        => 'සියල්ල',
-            'canceled'   => 'අවලංගු කරන ලදි',
-            'closed'     => 'වසා ඇත',
-            'completed'  => 'සාර්ථකව ලබාගත හැක',
-            'pending'    => 'සහිතයි',
-            'processing' => 'සකසා ඇත',
-        ],
     ],
 
     'account' => [
