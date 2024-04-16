@@ -1,6 +1,8 @@
 # UPGRADE FROM `v2.1.0` TO `v2.2.0`
 
-### Webkul\Checkout\Models\Cart model updates
+### Checkout
+
+#### The `Cart` model
 
 1. We've removed the `addresses` function as this function is no longer needed.
 
