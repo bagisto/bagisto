@@ -6,11 +6,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Resources\CartResource;
 use Webkul\Shop\Http\Resources\ProductResource;
-use Webkul\Checkout\Models\CartAddress;
-use Webkul\Shipping\Facades\Shipping;
 
 class CartController extends APIController
 {
