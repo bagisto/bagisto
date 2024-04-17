@@ -802,11 +802,25 @@ return [
     ],
 
     'home' => [
-        'index' => [
-            'offer'               => 'Erhalten Sie BIS ZU 40 % RABATT auf Ihre erste Bestellung JETZT SHOPPEN',
-            'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
-            'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
+        'contact' => [
+            'about'         => 'Déjanos una nota y te responderemos lo más rápido posible',
+            'desc'          => '¿En qué estás pensando?',
+            'describe-here' => 'Describe aquí',
+            'email'         => 'Correo electrónico',
+            'message'       => 'Mensaje',
+            'name'          => 'Nombre',
+            'phone-number'  => 'Número de teléfono',
+            'submit'        => 'Enviar',
+            'title'         => 'Contáctanos',
         ],
+
+        'index' => [
+            'offer'               => 'Obtén HASTA UN 40 % DE DESCUENTO en tu primera compra ¡COMPRA AHORA!',
+            'resend-verify-email' => 'Reenviar correo de verificación',
+            'verify-email'        => 'Verifica tu dirección de correo electrónico',
+        ],
+
+        'thanks-for-contact' => 'Gracias por contactarnos con tus comentarios y preguntas. Te responderemos muy pronto.',
     ],
 
     'partials' => [
@@ -906,6 +920,14 @@ return [
                 'subject'     => 'Sie! Abonnieren Sie unseren Newsletter',
                 'unsubscribe' => 'Abmelden',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'a través del formulario de contacto del sitio web',
+            'reply-to-mail'   => 'por favor responda a este correo electrónico.',
+            'reach-via-phone' => 'Alternativamente, puede comunicarse con nosotros por teléfono al',
+            'inquiry-from'    => 'Consulta de',
+            'to'              => 'Para contactar a',
         ],
 
         'orders' => [

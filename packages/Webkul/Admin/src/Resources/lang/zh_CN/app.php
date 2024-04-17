@@ -48,15 +48,6 @@ return [
             'pending-payment' => '待付款订单',
             'processing'      => '订单处理中',
         ],
-
-        'status' => [
-            'all'        => '全部',
-            'canceled'   => '已取消',
-            'closed'     => '已关闭',
-            'completed'  => '已完成',
-            'pending'    => '待处理',
-            'processing' => '处理中',
-        ],
     ],
 
     'account' => [

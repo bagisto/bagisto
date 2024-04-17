@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'In Afwachting van Betaling',
             'processing'      => 'Bestelling In Verwerking',
         ],
-
-        'status' => [
-            'all'        => 'Alle',
-            'canceled'   => 'Geannuleerd',
-            'closed'     => 'Gesloten',
-            'completed'  => 'Voltooid',
-            'pending'    => 'In Afwachting',
-            'processing' => 'In Verwerking',
-        ],
     ],
 
     'account' => [

@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'در انتظار پرداخت',
             'processing'      => 'سفارش در حال پردازش',
         ],
-
-        'status' => [
-            'all'        => 'همه',
-            'canceled'   => 'کنسل شده',
-            'closed'     => 'بسته شده',
-            'completed'  => 'تکمیل شده',
-            'pending'    => 'در انتظار',
-            'processing' => 'در حال پردازش',
-        ],
     ],
 
     'account' => [
