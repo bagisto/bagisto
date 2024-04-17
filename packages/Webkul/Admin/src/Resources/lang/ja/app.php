@@ -593,7 +593,7 @@ return [
                 'title'                  => '請求書 #:invoice_id',
             ],
 
-            'create'   => [
+            'create' => [
                 'amount-per-unit'    => '1単位あたりの:amount × :qty 個数',
                 'create-invoice'     => '請求書を作成する',
                 'create-success'     => '請求書が正常に作成されました',
@@ -1255,7 +1255,7 @@ return [
             'update-success'       => 'カテゴリが正常に更新されました。',
         ],
 
-        'families'   => [
+        'families' => [
             'index' => [
                 'add'   => '属性ファミリーを作成',
                 'title' => 'ファミリー',
@@ -1639,7 +1639,7 @@ return [
                     'update-success' => '更新成功',
                 ],
 
-                'datagrid'   => [
+                'datagrid' => [
                     'approved'            => '承認済み',
                     'comment'             => 'コメント',
                     'customer-names'      => '名前',
@@ -1732,7 +1732,7 @@ return [
                     ],
                 ],
 
-                'create'    => [
+                'create' => [
                     'active'          => 'アクティブ',
                     'back-btn'        => '戻る',
                     'channel'         => 'チャンネル',
@@ -1754,7 +1754,7 @@ return [
                     'title'           => 'キャンペーンを作成',
                 ],
 
-                'edit'    => [
+                'edit' => [
                     'active'          => 'アクティブ',
                     'audience'        => '対象',
                     'back-btn'        => '戻る',
@@ -1796,7 +1796,7 @@ return [
                         'name'    => '名前',
                     ],
 
-                    'create'   => [
+                    'create' => [
                         'date'           => '日付',
                         'delete-warning' => 'このアクションを実行してもよろしいですか？',
                         'description'    => '説明',
@@ -2395,7 +2395,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'ロケールを作成',
                 'locale'     => 'ロケール',
@@ -2437,7 +2437,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => '通貨を作成',
                 'currency'   => '通貨',
@@ -2483,9 +2483,9 @@ return [
             ],
         ],
 
-        'data-transfer'     => [
+        'data-transfer' => [
             'imports' => [
-                'create'            => [
+                'create' => [
                     'action'              => 'アクション',
                     'allowed-errors'      => '許可されたエラー',
                     'back-btn'            => '戻る',
@@ -2509,7 +2509,7 @@ return [
                     'validation-strategy' => 'バリデーション戦略',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'アクション',
                     'allowed-errors'      => '許可されたエラー',
                     'back-btn'            => '戻る',
@@ -2533,11 +2533,11 @@ return [
                     'validation-strategy' => '検証戦略',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'インポートの作成',
                     'title'        => '輸入品',
 
-                    'datagrid'     => [
+                    'datagrid' => [
                         'actions'       => '行動',
                         'completed-at'  => '完了日',
                         'created'       => '作成した',
@@ -2554,7 +2554,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => '戻る',
                     'completed-batches'       => '完了したバッチの合計:',
                     'download-error-report'   => '完全なレポートをダウンロード',
@@ -2589,7 +2589,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => '為替レートを作成',
                 'exchange-rate' => '為替レート',
@@ -2708,7 +2708,7 @@ return [
             'update-success'    => '在庫ソースが正常に更新されました',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => '本当に削除しますか？',
@@ -2748,7 +2748,7 @@ return [
                 ],
             ],
 
-            'rates'   => [
+            'rates' => [
                 'index' => [
                     'button-title' => '税率を作成する',
                     'tax-rate'     => '税率',
@@ -3101,7 +3101,7 @@ return [
                 'value'                         => '値：:value',
                 'value-input'                   => '値',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'            => 'サービスを追加',
                     'channels'           => 'チャンネル',
                     'delete'             => '削除',

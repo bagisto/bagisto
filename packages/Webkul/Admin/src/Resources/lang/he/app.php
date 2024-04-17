@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    => [
+            'create' => [
                 'email'           => 'אימייל רשום',
                 'email-not-exist' => 'אימייל לא קיים',
                 'page-title'      => 'שכחתי סיסמה',
@@ -161,8 +161,8 @@ return [
                     'order-id'        => 'מזהה הזמנה',
                     'pay-by'          => 'שלם באמצעות - :שיטה',
                     'pay-via'         => 'שלם דרך',
-                    'pending-payment' => 'תשלום ממתין',
                     'pending'         => 'ממתינה',
+                    'pending-payment' => 'תשלום ממתין',
                     'processing'      => 'מעבדת',
                     'product-count'   => ':count + מוצרים נוספים',
                     'status'          => 'מצב',
@@ -593,7 +593,7 @@ return [
                 'title'                  => 'חשבונית #:invoice_id',
             ],
 
-            'create'   => [
+            'create' => [
                 'amount-per-unit'    => ':amount לכל יחידה x :qty כמות',
                 'create-invoice'     => 'צור חשבונית',
                 'create-success'     => 'חשבונית נוצרה בהצלחה',
@@ -710,30 +710,30 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'פעיל',
-                    'attribute-family'              => 'משפחת מאפיינים',
-                    'attribute-family-value'        => 'משפחת מאפיינים - :attribute_family',
-                    'category'                      => 'קטגוריה',
-                    'copy-of'                       => 'העתק של :value',
-                    'copy-of-slug'                  => 'העתק-של-:value',
-                    'delete'                        => 'מחק',
-                    'disable'                       => 'השבת',
-                    'id'                            => 'מזהה',
-                    'id-value'                      => 'מזהה - :id',
-                    'image'                         => 'תמונה',
-                    'mass-delete-success'           => 'מוצרים שנבחרו נמחקו בהצלחה',
-                    'mass-update-success'           => 'מוצרים שנבחרו עודכנו בהצלחה',
-                    'name'                          => 'שם',
-                    'out-of-stock'                  => 'אזל מהמלאי',
-                    'price'                         => 'מחיר',
-                    'product-image'                 => 'תמונת המוצר',
-                    'qty'                           => 'כמות',
-                    'qty-value'                     => ':qty זמינים',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'מצב',
-                    'type'                          => 'סוג',
-                    'update-status'                 => 'עדכן מצב',
+                    'active'                 => 'פעיל',
+                    'attribute-family'       => 'משפחת מאפיינים',
+                    'attribute-family-value' => 'משפחת מאפיינים - :attribute_family',
+                    'category'               => 'קטגוריה',
+                    'copy-of'                => 'העתק של :value',
+                    'copy-of-slug'           => 'העתק-של-:value',
+                    'delete'                 => 'מחק',
+                    'disable'                => 'השבת',
+                    'id'                     => 'מזהה',
+                    'id-value'               => 'מזהה - :id',
+                    'image'                  => 'תמונה',
+                    'mass-delete-success'    => 'מוצרים שנבחרו נמחקו בהצלחה',
+                    'mass-update-success'    => 'מוצרים שנבחרו עודכנו בהצלחה',
+                    'name'                   => 'שם',
+                    'out-of-stock'           => 'אזל מהמלאי',
+                    'price'                  => 'מחיר',
+                    'product-image'          => 'תמונת המוצר',
+                    'qty'                    => 'כמות',
+                    'qty-value'              => ':qty זמינים',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'מצב',
+                    'type'                   => 'סוג',
+                    'update-status'          => 'עדכן מצב',
                 ],
             ],
 
@@ -2341,9 +2341,9 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name כבר תפוס.',
-            'create-btn'        => 'צור עמוד',
-            'title'             => 'עמודים',
+            'already-taken' => ':name כבר תפוס.',
+            'create-btn'    => 'צור עמוד',
+            'title'         => 'עמודים',
 
             'datagrid' => [
                 'delete'              => 'מחק',
@@ -2395,7 +2395,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'צור אזור',
                 'locale'     => 'אזור',
@@ -2424,7 +2424,7 @@ return [
                     'title'            => 'צור אזור',
                 ],
 
-                'edit'  => [
+                'edit' => [
                     'title' => 'ערוך אזורים',
                 ],
 
@@ -2437,7 +2437,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => 'צור מטבע',
                 'currency'   => 'מטבע',
@@ -2483,7 +2483,7 @@ return [
             ],
         ],
 
-        'data-transfer'     => [
+        'data-transfer' => [
             'imports' => [
                 'create' => [
                     'action'              => 'פעולה',
@@ -2589,7 +2589,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'צור שער חליפין',
                 'exchange-rate' => 'שער חליפין',
@@ -2607,7 +2607,7 @@ return [
                 ],
 
                 'edit' => [
-                    'title'   => 'ערוך שערי חליפין',
+                    'title' => 'ערוך שערי חליפין',
                 ],
 
                 'datagrid' => [
@@ -2619,15 +2619,15 @@ return [
                     'id'            => 'מזהה',
                 ],
 
-                'create-success'  => 'שער חליפין נוצר בהצלחה',
-                'delete-error'    => 'שגיאה במחיקת שער חליפין',
-                'delete-success'  => 'שער חליפין נמחק בהצלחה',
-                'update-success'  => 'שער חליפין עודכן בהצלחה',
+                'create-success' => 'שער חליפין נוצר בהצלחה',
+                'delete-error'   => 'שגיאה במחיקת שער חליפין',
+                'delete-success' => 'שער חליפין נמחק בהצלחה',
+                'update-success' => 'שער חליפין עודכן בהצלחה',
             ],
         ],
 
         'inventory-sources' => [
-            'index'  => [
+            'index' => [
                 'create-btn' => 'צור מקור אחסון',
                 'title'      => 'מקורות מלאי',
 
@@ -2708,7 +2708,7 @@ return [
             'update-success'    => 'מקורות מלאי עודכנו בהצלחה',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'האם אתה בטוח שברצונך למחוק?',
@@ -2738,7 +2738,7 @@ return [
                     ],
 
                     'edit' => [
-                        'title'   => 'ערוך קטגוריות מס',
+                        'title' => 'ערוך קטגוריות מס',
                     ],
 
                     'create-success' => 'קטגוריית מס חדשה נוצרה בהצלחה',
@@ -2748,7 +2748,7 @@ return [
                 ],
             ],
 
-            'rates'   => [
+            'rates' => [
                 'index' => [
                     'button-title' => 'צור שיעור מס',
                     'tax-rate'     => 'שער מס',
@@ -2934,7 +2934,7 @@ return [
                 ],
 
                 'edit' => [
-                    'title'    => 'ערוך משתמש',
+                    'title' => 'ערוך משתמש',
                 ],
             ],
 
@@ -3101,7 +3101,7 @@ return [
                 'value'                         => 'ערך: :value',
                 'value-input'                   => 'ערך',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'            => 'הוסף שירותים',
                     'channels'           => 'ערוצים',
                     'delete'             => 'מחק',
@@ -3273,10 +3273,10 @@ return [
                     'title' => 'כללי',
 
                     'unit-options' => [
-                        'info'              => 'הגדרות אפשרויות היחידה.',
-                        'title'             => 'אפשרויות היחידה',
-                        'title-info'        => 'גודל, צבע, חומר, התאמה, עליית מרת קונום של מרוצה והתאמת רכישות.',
-                        'weight-unit'       => 'יחידת משקל',
+                        'info'        => 'הגדרות אפשרויות היחידה.',
+                        'title'       => 'אפשרויות היחידה',
+                        'title-info'  => 'גודל, צבע, חומר, התאמה, עליית מרת קונום של מרוצה והתאמת רכישות.',
+                        'weight-unit' => 'יחידת משקל',
                     ],
                 ],
 
@@ -3305,10 +3305,10 @@ return [
                     'title' => 'עיצוב',
 
                     'admin-logo' => [
-                        'favicon'         => 'סמל Favicon',
-                        'logo-image'      => 'תמונת לוגו',
-                        'title'           => 'לוגו המנהל',
-                        'title-info'      => 'לוגו המנהל הוא הדימוי או התמונה המיוחסת שמייצגת את ממשק הניהול של מערכת או אתר, וניתנת להתאמה אישית ממועדפת.',
+                        'favicon'    => 'סמל Favicon',
+                        'logo-image' => 'תמונת לוגו',
+                        'title'      => 'לוגו המנהל',
+                        'title-info' => 'לוגו המנהל הוא הדימוי או התמונה המיוחסת שמייצגת את ממשק הניהול של מערכת או אתר, וניתנת להתאמה אישית ממועדפת.',
                     ],
                 ],
 
@@ -3317,12 +3317,12 @@ return [
                     'title' => 'בינה מלאכותית קסומה',
 
                     'settings' => [
-                        'api-key'           => 'מפתח API',
-                        'enabled'           => 'מופעל',
-                        'llm-api-domain'    => 'דומיין API של LLM',
-                        'organization'      => 'ארגון',
-                        'title'             => 'הגדרות כלליות',
-                        'title-info'        => 'שפר את חווייתך עם תכלית ה- Magic AI על ידי הזנת מפתח API הבלעדי שלך וציון הארגון הרלוונטי לאינטגרציה ללא מאמץ. תפוס שליטה מעל פרטי הכניסה שלך ל-OpenAI והתאם אישית את ההגדרות לפי צרכיך הספציפיים.',
+                        'api-key'        => 'מפתח API',
+                        'enabled'        => 'מופעל',
+                        'llm-api-domain' => 'דומיין API של LLM',
+                        'organization'   => 'ארגון',
+                        'title'          => 'הגדרות כלליות',
+                        'title-info'     => 'שפר את חווייתך עם תכלית ה- Magic AI על ידי הזנת מפתח API הבלעדי שלך וציון הארגון הרלוונטי לאינטגרציה ללא מאמץ. תפוס שליטה מעל פרטי הכניסה שלך ל-OpenAI והתאם אישית את ההגדרות לפי צרכיך הספציפיים.',
                     ],
 
                     'content-generation' => [
@@ -3391,9 +3391,9 @@ return [
                     'title' => 'מלאי',
 
                     'stock-options' => [
-                        'allow-back-orders'  => 'התר משמעת מלאי מאוחרות',
-                        'title'              => 'אפשרויות מלאי',
-                        'title-info'         => 'אפשרויות המלאי הן הסכמות לרכישת תעודות סל שנותנות את הזכות לקנות או למכור מניות חברות לפי מחיר מוקצה, ומשפיעות על רווחים אפשריים.',
+                        'allow-back-orders' => 'התר משמעת מלאי מאוחרות',
+                        'title'             => 'אפשרויות מלאי',
+                        'title-info'        => 'אפשרויות המלאי הן הסכמות לרכישת תעודות סל שנותנות את הזכות לקנות או למכור מניות חברות לפי מחיר מוקצה, ומשפיעות על רווחים אפשריים.',
                     ],
                 ],
 

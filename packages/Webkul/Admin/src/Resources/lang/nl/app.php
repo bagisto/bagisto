@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    => [
+            'create' => [
                 'email'           => 'Geregistreerd E-mailadres',
                 'email-not-exist' => 'E-mailadres Bestaat Niet',
                 'page-title'      => 'Wachtwoord Vergeten',
@@ -593,7 +593,7 @@ return [
                 'title'                  => 'Factuur #:invoice_id',
             ],
 
-            'create'   => [
+            'create' => [
                 'amount-per-unit'    => ':amount Per Eenheid x :qty Hoeveelheid',
                 'create-invoice'     => 'Factuur Maken',
                 'create-success'     => 'Factuur succesvol aangemaakt',
@@ -698,7 +698,7 @@ return [
                 'create-btn'    => 'Product aanmaken',
                 'title'         => 'Producten',
 
-                'create'     => [
+                'create' => [
                     'back-btn'                => 'Terug',
                     'configurable-attributes' => 'Configureerbare Eigenschappen',
                     'create-btn'              => 'Product aanmaken',
@@ -709,7 +709,7 @@ return [
                     'type'                    => 'Type',
                 ],
 
-                'datagrid'   => [
+                'datagrid' => [
                     'active'                        => 'Actief',
                     'attribute-family'              => 'Attribuutfamilie',
                     'attribute-family-value'        => 'Attribuutfamilie - :attribute_family',
@@ -2395,7 +2395,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'Taal Aanmaken',
                 'locale'     => 'Taal',
@@ -2437,7 +2437,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => 'Valuta Aanmaken',
                 'currency'   => 'Valuta',
@@ -2485,7 +2485,7 @@ return [
 
         'data-transfer'     => [
             'imports' => [
-                'create'            => [
+                'create' => [
                     'action'              => 'Actie',
                     'allowed-errors'      => 'Toegestane Fouten',
                     'back-btn'            => 'Terug',
@@ -2493,9 +2493,9 @@ return [
                     'delete'              => 'Verwijderen',
                     'download-sample'     => 'Voorbeeld Downloaden',
                     'field-separator'     => 'Veldscheider',
-                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/app/import/product-images.',
-                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/app/import, bijv. productafbeeldingen, importafbeeldingen.',
                     'file'                => 'Bestand',
+                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/app/import, bijv. productafbeeldingen, importafbeeldingen.',
+                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/app/import/product-images.',
                     'general'             => 'Algemeen',
                     'images-directory'    => 'Pad naar Afbeeldingenmap',
                     'process-in-queue'    => 'Verwerken In Wachtrij',
@@ -2509,7 +2509,7 @@ return [
                     'validation-strategy' => 'Validatiestrategie',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'Actie',
                     'allowed-errors'      => 'Toegestane Fouten',
                     'back-btn'            => 'Terug',
@@ -2517,9 +2517,9 @@ return [
                     'delete'              => 'Verwijderen',
                     'download-sample'     => 'Voorbeeld Downloaden',
                     'field-separator'     => 'Veldscheider',
-                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/app/import/product-images.',
-                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/app/import, bijv. productafbeeldingen, importafbeeldingen.',
                     'file'                => 'Bestand',
+                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/app/import, bijv. productafbeeldingen, importafbeeldingen.',
+                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/app/import/product-images.',
                     'general'             => 'Algemeen',
                     'images-directory'    => 'Pad naar Afbeeldingenmap',
                     'process-in-queue'    => 'Verwerken In Wachtrij',
@@ -2533,7 +2533,7 @@ return [
                     'validation-strategy' => 'Validatiestrategie',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'Import Maken',
                     'title'        => 'Imports',
 
@@ -2554,7 +2554,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => 'Terug',
                     'completed-batches'       => 'Totaal voltooide batches:',
                     'download-error-report'   => 'Volledig rapport downloaden',
@@ -2589,7 +2589,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'Wisselkoers Aanmaken',
                 'exchange-rate' => 'Wisselkoers',
@@ -2708,7 +2708,7 @@ return [
             'update-success'    => 'Voorraadbronnen succesvol bijgewerkt',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Weet je zeker dat je wilt verwijderen?',
@@ -3101,7 +3101,7 @@ return [
                 'value'                         => 'Waarde: :value',
                 'value-input'                   => 'Waarde',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'            => 'Diensten toevoegen',
                     'channels'           => 'Kanalen',
                     'delete'             => 'Verwijderen',
@@ -3669,40 +3669,40 @@ return [
                 ],
 
                 'payment-methods' => [
-                    'accepted-currencies'            => 'Geaccepteerde valuta',
-                    'accepted-currencies-info'       => 'Voeg valutacodes toe, gescheiden door een komma, bijv. USD, INR,...',
-                    'business-account'               => 'Zakelijk account',
-                    'cash-on-delivery'               => 'Rembours',
-                    'cash-on-delivery-info'          => 'Betaalmethode waarbij klanten contant betalen bij ontvangst van goederen of diensten aan hun deur.',
-                    'client-id'                      => 'Klant-ID',
-                    'client-id-info'                 => 'Gebruik "sb" voor testen.',
-                    'client-secret'                  => 'Geheime sleutel van klant',
-                    'client-secret-info'             => 'Voeg hier je geheime sleutel toe',
-                    'description'                    => 'Beschrijving',
-                    'generate-invoice'               => 'Genereer automatisch de factuur na het plaatsen van een bestelling',
-                    'generate-invoice-applicable'    => 'Van toepassing indien automatisch factuur genereren is ingeschakeld',
-                    'info'                           => 'Stel informatie over betaalmethoden in',
-                    'instructions'                   => 'Instructies',
-                    'logo'                           => 'Logo',
-                    'logo-information'               => 'Beeldresolutie moet zijn zoals 55px x 45px',
-                    'mailing-address'                => 'Stuur cheque naar',
-                    'money-transfer'                 => 'Geldoverdracht',
-                    'money-transfer-info'            => 'Overdracht van geld van de ene persoon of rekening naar de andere, vaak elektronisch, voor verschillende doeleinden zoals transacties of overmakingen.',
-                    'page-title'                     => 'Betaalmethoden',
-                    'paid'                           => 'Betaald',
-                    'paypal-smart-button'            => 'PayPal',
-                    'paypal-smart-button-info'       => 'PayPal Smart Button: Vereenvoudigt online betalingen met aanpasbare knoppen voor veilige, multimethodetransacties op websites en apps.',
-                    'paypal-standard'                => 'PayPal Standaard',
-                    'paypal-standard-info'           => 'PayPal Standaard is een basis PayPal-betalingsoptie voor online bedrijven, waarmee klanten kunnen betalen met hun PayPal-account of credit-/debetkaarten.',
-                    'pending'                        => 'In behandeling',
-                    'pending-payment'                => 'Betaling in behandeling',
-                    'processing'                     => 'Verwerking',
-                    'sandbox'                        => 'Zandbak',
-                    'set-invoice-status'             => 'Stel de factuurstatus in na het maken van de factuur op',
-                    'set-order-status'               => 'Stel de bestelstatus in na het maken van de factuur op',
-                    'sort-order'                     => 'Sorteervolgorde',
-                    'status'                         => 'Status',
-                    'title'                          => 'Titel',
+                    'accepted-currencies'         => 'Geaccepteerde valuta',
+                    'accepted-currencies-info'    => 'Voeg valutacodes toe, gescheiden door een komma, bijv. USD, INR,...',
+                    'business-account'            => 'Zakelijk account',
+                    'cash-on-delivery'            => 'Rembours',
+                    'cash-on-delivery-info'       => 'Betaalmethode waarbij klanten contant betalen bij ontvangst van goederen of diensten aan hun deur.',
+                    'client-id'                   => 'Klant-ID',
+                    'client-id-info'              => 'Gebruik "sb" voor testen.',
+                    'client-secret'               => 'Geheime sleutel van klant',
+                    'client-secret-info'          => 'Voeg hier je geheime sleutel toe',
+                    'description'                 => 'Beschrijving',
+                    'generate-invoice'            => 'Genereer automatisch de factuur na het plaatsen van een bestelling',
+                    'generate-invoice-applicable' => 'Van toepassing indien automatisch factuur genereren is ingeschakeld',
+                    'info'                        => 'Stel informatie over betaalmethoden in',
+                    'instructions'                => 'Instructies',
+                    'logo'                        => 'Logo',
+                    'logo-information'            => 'Beeldresolutie moet zijn zoals 55px x 45px',
+                    'mailing-address'             => 'Stuur cheque naar',
+                    'money-transfer'              => 'Geldoverdracht',
+                    'money-transfer-info'         => 'Overdracht van geld van de ene persoon of rekening naar de andere, vaak elektronisch, voor verschillende doeleinden zoals transacties of overmakingen.',
+                    'page-title'                  => 'Betaalmethoden',
+                    'paid'                        => 'Betaald',
+                    'paypal-smart-button'         => 'PayPal',
+                    'paypal-smart-button-info'    => 'PayPal Smart Button: Vereenvoudigt online betalingen met aanpasbare knoppen voor veilige, multimethodetransacties op websites en apps.',
+                    'paypal-standard'             => 'PayPal Standaard',
+                    'paypal-standard-info'        => 'PayPal Standaard is een basis PayPal-betalingsoptie voor online bedrijven, waarmee klanten kunnen betalen met hun PayPal-account of credit-/debetkaarten.',
+                    'pending'                     => 'In behandeling',
+                    'pending-payment'             => 'Betaling in behandeling',
+                    'processing'                  => 'Verwerking',
+                    'sandbox'                     => 'Zandbak',
+                    'set-invoice-status'          => 'Stel de factuurstatus in na het maken van de factuur op',
+                    'set-order-status'            => 'Stel de bestelstatus in na het maken van de factuur op',
+                    'sort-order'                  => 'Sorteervolgorde',
+                    'status'                      => 'Status',
+                    'title'                       => 'Titel',
                 ],
 
                 'order-settings' => [

@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    => [
+            'create' => [
                 'email'           => 'Kayıtlı E-posta',
                 'email-not-exist' => 'E-posta Bulunamadı',
                 'page-title'      => 'Şifremi Unuttum',
@@ -146,28 +146,28 @@ return [
                 ],
 
                 'datagrid' => [
-                    'canceled'         => 'İptal Edildi',
-                    'channel-name'     => 'Kanal',
-                    'closed'           => 'Kapatıldı',
-                    'completed'        => 'Tamamlandı',
-                    'customer'         => 'Müşteri',
-                    'date'             => 'Tarih',
-                    'email'            => 'E-posta',
-                    'fraud'            => 'Dolandırıcılık',
-                    'grand-total'      => 'Genel Toplam',
-                    'id'               => '#:id',
-                    'images'           => 'Görseller',
-                    'location'         => 'Konum',
-                    'order-id'         => 'Sipariş Kimliği',
-                    'pay-by'           => 'Şunu İle Ödeme Yap - :method',
-                    'pay-via'          => 'Şunu İle Ödeme Yap - :method',
-                    'pending-payment'  => 'Ödeme Bekliyor',
-                    'pending'          => 'Bekliyor',
-                    'processing'       => 'İşleniyor',
-                    'product-count'    => ':count + Daha Fazla Ürün',
-                    'status'           => 'Durum',
-                    'success'          => 'Başarılı',
-                    'view'             => 'Görüntüle',
+                    'canceled'        => 'İptal Edildi',
+                    'channel-name'    => 'Kanal',
+                    'closed'          => 'Kapatıldı',
+                    'completed'       => 'Tamamlandı',
+                    'customer'        => 'Müşteri',
+                    'date'            => 'Tarih',
+                    'email'           => 'E-posta',
+                    'fraud'           => 'Dolandırıcılık',
+                    'grand-total'     => 'Genel Toplam',
+                    'id'              => '#:id',
+                    'images'          => 'Görseller',
+                    'location'        => 'Konum',
+                    'order-id'        => 'Sipariş Kimliği',
+                    'pay-by'          => 'Şunu İle Ödeme Yap - :method',
+                    'pay-via'         => 'Şunu İle Ödeme Yap - :method',
+                    'pending-payment' => 'Ödeme Bekliyor',
+                    'pending'         => 'Bekliyor',
+                    'processing'      => 'İşleniyor',
+                    'product-count'   => ':count + Daha Fazla Ürün',
+                    'status'          => 'Durum',
+                    'success'         => 'Başarılı',
+                    'view'            => 'Görüntüle',
                 ],
             ],
 
@@ -593,7 +593,7 @@ return [
                 'title'                  => 'Fatura #:invoice_id',
             ],
 
-            'create'   => [
+            'create' => [
                 'amount-per-unit'    => ':amount Birim Başına x :qty Miktar',
                 'create-invoice'     => 'Fatura Oluştur',
                 'create-success'     => 'Fatura başarıyla oluşturuldu',
@@ -698,7 +698,7 @@ return [
                 'create-btn'    => 'Ürün Oluştur',
                 'title'         => 'Ürünler',
 
-                'create'     => [
+                'create' => [
                     'back-btn'                => 'Geri',
                     'configurable-attributes' => 'Yapılandırılabilir Özellikler',
                     'create-btn'              => 'Ürün Oluştur',
@@ -709,31 +709,31 @@ return [
                     'type'                    => 'Tür',
                 ],
 
-                'datagrid'   => [
-                    'active'                        => 'Aktif',
-                    'attribute-family'              => 'Özellik Ailesi',
-                    'attribute-family-value'        => 'Özellik Ailesi - :attribute_family',
-                    'category'                      => 'Kategori',
-                    'copy-of'                       => 'Kopyası :value',
-                    'copy-of-slug'                  => 'kopyası-:value',
-                    'delete'                        => 'Sil',
-                    'disable'                       => 'Devre Dışı',
-                    'id'                            => 'Kimlik',
-                    'id-value'                      => 'Kimlik - :id',
-                    'image'                         => 'Resim',
-                    'mass-delete-success'           => 'Seçilen Ürünler Başarıyla Silindi',
-                    'mass-update-success'           => 'Seçilen Ürünler Başarıyla Güncellendi',
-                    'name'                          => 'Ad',
-                    'out-of-stock'                  => 'Stokta Yok',
-                    'price'                         => 'Fiyat',
-                    'product-image'                 => 'Ürün Resmi',
-                    'qty'                           => 'Miktar',
-                    'qty-value'                     => ':qty Mevcut',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'Durum',
-                    'type'                          => 'Tür',
-                    'update-status'                 => 'Durumu Güncelle',
+                'datagrid' => [
+                    'active'                 => 'Aktif',
+                    'attribute-family'       => 'Özellik Ailesi',
+                    'attribute-family-value' => 'Özellik Ailesi - :attribute_family',
+                    'category'               => 'Kategori',
+                    'copy-of'                => 'Kopyası :value',
+                    'copy-of-slug'           => 'kopyası-:value',
+                    'delete'                 => 'Sil',
+                    'disable'                => 'Devre Dışı',
+                    'id'                     => 'Kimlik',
+                    'id-value'               => 'Kimlik - :id',
+                    'image'                  => 'Resim',
+                    'mass-delete-success'    => 'Seçilen Ürünler Başarıyla Silindi',
+                    'mass-update-success'    => 'Seçilen Ürünler Başarıyla Güncellendi',
+                    'name'                   => 'Ad',
+                    'out-of-stock'           => 'Stokta Yok',
+                    'price'                  => 'Fiyat',
+                    'product-image'          => 'Ürün Resmi',
+                    'qty'                    => 'Miktar',
+                    'qty-value'              => ':qty Mevcut',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'Durum',
+                    'type'                   => 'Tür',
+                    'update-status'          => 'Durumu Güncelle',
                 ],
             ],
 
@@ -1169,17 +1169,17 @@ return [
                 'title'   => 'Kategoriler',
 
                 'datagrid' => [
-                    'active'            => 'Aktif',
-                    'delete'            => 'Sil',
-                    'delete-success'    => 'Seçilen :resource başarıyla silindi',
-                    'edit'              => 'Düzenle',
-                    'id'                => 'ID',
-                    'inactive'          => 'Pasif',
-                    'name'              => 'Adı',
-                    'no-of-products'    => 'Ürün Sayısı',
-                    'position'          => 'Pozisyon',
-                    'status'            => 'Menüde Görünür',
-                    'update-status'     => 'Durumu Güncelle',
+                    'active'         => 'Aktif',
+                    'delete'         => 'Sil',
+                    'delete-success' => 'Seçilen :resource başarıyla silindi',
+                    'edit'           => 'Düzenle',
+                    'id'             => 'ID',
+                    'inactive'       => 'Pasif',
+                    'name'           => 'Adı',
+                    'no-of-products' => 'Ürün Sayısı',
+                    'position'       => 'Pozisyon',
+                    'status'         => 'Menüde Görünür',
+                    'update-status'  => 'Durumu Güncelle',
                 ],
             ],
 
@@ -1418,7 +1418,7 @@ return [
                 'title'                       => 'Müşteri Görünümü',
 
                 'address' => [
-                    'count'  => 'Adresler (:count)',
+                    'count' => 'Adresler (:count)',
 
                     'create' => [
                         'city'               => 'Şehir',
@@ -2041,6 +2041,7 @@ return [
                     'uses-per-customer-control-info'            => 'Yalnızca giriş yapmış müşteriler için kullanılacaktır.',
                     'yes'                                       => 'Evet',
                 ],
+
                 'delete-failed'  => 'Sepet Kuralı Silme Başarısız',
                 'delete-success' => 'Sepet Kuralı Başarıyla Silindi',
             ],
@@ -2341,9 +2342,9 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name zaten alınmıştır.',
-            'create-btn'        => 'Sayfa Oluştur',
-            'title'             => 'Sayfalar',
+            'already-taken' => ':name zaten alınmıştır.',
+            'create-btn'    => 'Sayfa Oluştur',
+            'title'         => 'Sayfalar',
 
             'datagrid' => [
                 'delete'              => 'Sil',
@@ -2396,7 +2397,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'Yerel Oluştur',
                 'locale'     => 'Yerel',
@@ -2438,7 +2439,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'title'      => 'Para Birimleri',
                 'create-btn' => 'Para Birimi Oluştur',
@@ -2484,9 +2485,9 @@ return [
             ],
         ],
 
-        'data-transfer'     => [
+        'data-transfer' => [
             'imports' => [
-                'create'            => [
+                'create' => [
                     'action'              => 'Aksiyon',
                     'allowed-errors'      => 'İzin Verilen Hatalar',
                     'back-btn'            => 'Geri',
@@ -2510,7 +2511,7 @@ return [
                     'validation-strategy' => 'Doğrulama Yaklaşımı',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'Aksiyon',
                     'allowed-errors'      => 'İzin Verilen Hatalar',
                     'back-btn'            => 'Geri',
@@ -2534,7 +2535,7 @@ return [
                     'validation-strategy' => 'Doğrulama Yaklaşımı',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'Import Oluştur',
                     'title'        => 'Importlar',
 
@@ -2555,7 +2556,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => 'Geri',
                     'completed-batches'       => 'Toplam Tamamlanan Batches:',
                     'download-error-report'   => 'Tam Hata Raporu İndir',
@@ -2590,7 +2591,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'Döviz Kuru Oluştur',
                 'exchange-rate' => 'Döviz Kuru',
@@ -2608,7 +2609,7 @@ return [
                 ],
 
                 'edit' => [
-                    'title'   => 'Döviz Kurlarını Düzenle',
+                    'title' => 'Döviz Kurlarını Düzenle',
                 ],
 
                 'datagrid' => [
@@ -2709,7 +2710,7 @@ return [
             'update-success'    => 'Envanter Kaynakları Başarıyla Güncellendi',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Silmek istediğinizden emin misiniz?',
@@ -2749,7 +2750,7 @@ return [
                 ],
             ],
 
-            'rates'   => [
+            'rates' => [
                 'index' => [
                     'button-title' => 'Vergi Oranı Oluştur',
                     'tax-rate'     => 'Vergi Oranı',
@@ -2935,7 +2936,7 @@ return [
                 ],
 
                 'edit' => [
-                    'title'    => 'Kullanıcıyı Düzenle',
+                    'title' => 'Kullanıcıyı Düzenle',
                 ],
             ],
 
@@ -3102,7 +3103,7 @@ return [
                 'value'                         => 'Değer: :value',
                 'value-input'                   => 'Değer',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'            => 'Hizmetler Ekle',
                     'channels'           => 'Kanallar',
                     'delete'             => 'Sil',
@@ -3305,10 +3306,10 @@ return [
                     'title' => 'Tasarım',
 
                     'admin-logo' => [
-                        'favicon'         => 'Favicon',
-                        'logo-image'      => 'Logo Resmi',
-                        'title'           => 'Yönetici Logosu',
-                        'title-info'      => 'Yönetici logosu, bir sistemin veya web sitesinin yönetim arayüzünü temsil eden karakteristik bir resim veya simgedir, genellikle özelleştirilebilir.',
+                        'favicon'    => 'Favicon',
+                        'logo-image' => 'Logo Resmi',
+                        'title'      => 'Yönetici Logosu',
+                        'title-info' => 'Yönetici logosu, bir sistemin veya web sitesinin yönetim arayüzünü temsil eden karakteristik bir resim veya simgedir, genellikle özelleştirilebilir.',
                     ],
                 ],
 
@@ -3317,12 +3318,12 @@ return [
                     'title' => 'Sihirli AI',
 
                     'settings' => [
-                        'api-key'           => 'API Anahtarı',
-                        'enabled'           => 'Etkin',
-                        'llm-api-domain'    => 'LLM API Alanı',
-                        'organization'      => 'Organizasyon',
-                        'title'             => 'Genel Ayarlar',
-                        'title-info'        => 'Magic AI özelliğini etkinleştirerek deneyiminizi artırın. Özel API Anahtarınızı girin ve sorunsuz entegrasyon için ilgili Organizasyonu belirtin. OpenAI kimlik bilgileriniz üzerinde kontrol sağlayın ve ayarları özel ihtiyaçlarınıza göre özelleştirin.',
+                        'api-key'        => 'API Anahtarı',
+                        'enabled'        => 'Etkin',
+                        'llm-api-domain' => 'LLM API Alanı',
+                        'organization'   => 'Organizasyon',
+                        'title'          => 'Genel Ayarlar',
+                        'title-info'     => 'Magic AI özelliğini etkinleştirerek deneyiminizi artırın. Özel API Anahtarınızı girin ve sorunsuz entegrasyon için ilgili Organizasyonu belirtin. OpenAI kimlik bilgileriniz üzerinde kontrol sağlayın ve ayarları özel ihtiyaçlarınıza göre özelleştirin.',
                     ],
 
                     'content-generation' => [
@@ -3391,9 +3392,9 @@ return [
                     'title' => 'Envanter',
 
                     'stock-options' => [
-                        'allow-back-orders'  => 'Geri Siparişlere İzin Ver',
-                        'title'              => 'Stok Seçenekleri',
-                        'title-info'         => 'Stok seçenekleri, şirket hisselerini belirli bir fiyattan satın alma veya satma hakkını veren yatırım sözleşmeleridir ve potansiyel karları etkiler.',
+                        'allow-back-orders' => 'Geri Siparişlere İzin Ver',
+                        'title'             => 'Stok Seçenekleri',
+                        'title-info'        => 'Stok seçenekleri, şirket hisselerini belirli bir fiyattan satın alma veya satma hakkını veren yatırım sözleşmeleridir ve potansiyel karları etkiler.',
                     ],
                 ],
 
@@ -3592,17 +3593,17 @@ return [
                 'title' => 'E-posta',
 
                 'email-settings' => [
-                    'admin-email'            => 'Yönetici E-postası',
-                    'admin-email-tip'        => 'Bu kanalın yöneticisinin e-posta adresi, e-postaları almak için',
-                    'admin-name'             => 'Yönetici Adı',
-                    'admin-name-tip'         => 'Bu isim tüm yönetici e-postalarında görüntülenecektir',
-                    'admin-page-limit'       => 'Varsayılan Sayfa Başına Öğe (Yönetici)',
-                    'email-sender-name'      => 'E-posta Gönderen Adı',
-                    'email-sender-name-tip'  => 'Bu isim müşterilerin gelen kutusunda görüntülenecektir',
-                    'info'                   => 'E-posta gönderen adını, mağaza e-posta adresini, yönetici adını ve yönetici e-posta adresini ayarlayın.',
-                    'shop-email-from'        => 'Mağaza E-posta Adresi',
-                    'shop-email-from-tip'    => 'Bu kanalın müşterilerine e-posta göndermek için e-posta adresi',
-                    'title'                  => 'E-posta Ayarları',
+                    'admin-email'           => 'Yönetici E-postası',
+                    'admin-email-tip'       => 'Bu kanalın yöneticisinin e-posta adresi, e-postaları almak için',
+                    'admin-name'            => 'Yönetici Adı',
+                    'admin-name-tip'        => 'Bu isim tüm yönetici e-postalarında görüntülenecektir',
+                    'admin-page-limit'      => 'Varsayılan Sayfa Başına Öğe (Yönetici)',
+                    'email-sender-name'     => 'E-posta Gönderen Adı',
+                    'email-sender-name-tip' => 'Bu isim müşterilerin gelen kutusunda görüntülenecektir',
+                    'info'                  => 'E-posta gönderen adını, mağaza e-posta adresini, yönetici adını ve yönetici e-posta adresini ayarlayın.',
+                    'shop-email-from'       => 'Mağaza E-posta Adresi',
+                    'shop-email-from-tip'   => 'Bu kanalın müşterilerine e-posta göndermek için e-posta adresi',
+                    'title'                 => 'E-posta Ayarları',
                 ],
 
                 'notifications' => [
@@ -3710,12 +3711,12 @@ return [
                     'title' => 'Sipariş Ayarları',
 
                     'order-number' => [
-                        'generator'   => 'Sipariş Numarası Oluşturucu',
-                        'length'      => 'Sipariş Numarası Uzunluğu',
-                        'prefix'      => 'Sipariş Numarası Öneki',
-                        'suffix'      => 'Sipariş Numarası Soneki',
-                        'title'       => 'Sipariş Numarası Ayarları',
-                        'title-info'  => 'Belirli bir müşteri siparişine atanmış benzersiz bir tanımlayıcıdır ve satın alma süreci boyunca izlemeye, iletişime ve referansa yardımcı olur.',
+                        'generator'  => 'Sipariş Numarası Oluşturucu',
+                        'length'     => 'Sipariş Numarası Uzunluğu',
+                        'prefix'     => 'Sipariş Numarası Öneki',
+                        'suffix'     => 'Sipariş Numarası Soneki',
+                        'title'      => 'Sipariş Numarası Ayarları',
+                        'title-info' => 'Belirli bir müşteri siparişine atanmış benzersiz bir tanımlayıcıdır ve satın alma süreci boyunca izlemeye, iletişime ve referansa yardımcı olur.',
                     ],
 
                     'minimum-order' => [
