@@ -14,7 +14,9 @@
 - [Moved `coupon.blade.php`](#moved-coupon-blade)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
-- [Renamed Shop API Routes Names](#renamed-shop-api-routes-names)
+- [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
+- [Shop Event parameter updated](#event-parameter-updated)
+- [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
 
 </div>
@@ -68,21 +70,18 @@ There is no dependency needed to be updated at for this upgrade.
 <a name="the-cart-model"></a>
 #### The `Webkul\Checkout\Models\Cart` model
 
-1. We've removed the `addresses` function as this function is no longer needed.
+1. The `addresses` method has been removed. It was previously utilized in the `billing_address` and `shipping_address` methods. We have now revised both the `billing_address` and `shipping_address` relationships, rendering the addresses method unnecessary.
 
 ```diff
-
 - public function addresses(): \Illuminate\Database\Eloquent\Relations\HasMany
 - {
 -     return $this->hasMany(CartAddressProxy::modelClass());
 - }
-
 ```
 
-2. We've updated the `billing_address` function to return HasOne object instead of HasMany and have removed `getBillingAddressAttribute` accessor as `billing_address` will work same as this
+2. We have revised the `billing_address` method to return a HasOne object instead of a HasMany object. Additionally, we have removed the `getBillingAddressAttribute` accessor, as the `billing_address` method now methods identically to it.
 
 ```diff
-
 - public function billing_address(): \Illuminate\Database\Eloquent\Relations\HasMany
 - {
 -     return $this->addresses()
@@ -97,13 +96,11 @@ There is no dependency needed to be updated at for this upgrade.
 - {
 -     return $this->billing_address()->first();
 - }
-
 ```
 
-3. We've updated the `shipping_address` function to return HasOne object instead of HasMany and have removed `getShippingAddressAttribute' accessor as `shipping_address` will work same as this
+3. We have revised the `shipping_address` method to return a HasOne object instead of a HasMany object. Additionally, we have removed the `getShippingAddressAttribute` accessor, as the `shipping_address` method now methods identically to it.
 
 ```diff
-
 - public function shipping_address(): \Illuminate\Database\Eloquent\Relations\HasMany
 - {
 -     return $this->addresses()
@@ -118,13 +115,11 @@ There is no dependency needed to be updated at for this upgrade.
 - {
 -     return $this->shipping_address()->first();
 - }
-
 ```
 
-4. We've updated the `shipping_rates` function to return HasMany object instead of HasManyThrough object as shipping rates are now directly related to the cart.
+4. We have updated the `shipping_rates` method to return a HasMany object instead of a HasManyThrough object, as shipping rates are now directly associated with the cart.
 
 ```diff
-
 - public function shipping_rates(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
 - {
 -     return $this->hasManyThrough(CartShippingRateProxy::modelClass(), CartAddressProxy::modelClass(), 'cart_id', 'cart_address_id');
@@ -133,14 +128,13 @@ There is no dependency needed to be updated at for this upgrade.
 + {
 +     return $this->hasMany(CartShippingRateProxy::modelClass());
 + }
-
 ```
 
 
 <a name="removed-cart-traits"></a>
 #### Removed Cart Traits
 
-The following traits has been removed and all the function has been moved to the `Webkul\Checkout\Cart` class (Reference #9595)
+All methods from the following traits have been relocated to the `Webkul\Checkout\Cart` class, and the traits have been removed (Reference #9595).
 
 <div class="content-list" markdown="1">
 
@@ -154,7 +148,7 @@ The following traits has been removed and all the function has been moved to the
 <a name="the-cart-class"></a>
 #### The `Webkul\Checkout\Cart` class
 
-1. The `initCart` function now accept a optional `$customer` model instance and initialize the cart based on this parameter
+1. The `initCart` method now accepts an optional `Webkul\Customer\Models\Customer` model instance and initializes the cart based on this parameter.
 
 
 ```diff
@@ -163,9 +157,9 @@ The following traits has been removed and all the function has been moved to the
 
 ```
 
-2. The `getCart` function now only returns the cart means from now on it will not fetch the current cart
+2. The `getCart` method now exclusively returns the cart itself, meaning it will no longer retrieve the current cart.
 
-3. We've updated the `addProduct` method to accept first parameter as product model instance instead of product id
+3. We have updated the `addProduct` method to accept the `Webkul\Product\Models\Product` model instance as the first parameter instead of the product ID.
 
 ```diff
 
@@ -174,22 +168,61 @@ The following traits has been removed and all the function has been moved to the
 
 ```
 
-4. We've renamed the `create` function to `createCart`
+4. We've renamed the `create` method to `createCart`
 
 ```diff
-
 - public function create($data)
 + public function createCart(array $data): ?Contracts\Cart
-
 ```
 
-4. We've renamed the `emptyCart` function to `removeCart` and now it accept cart model instance
+5. The `emptyCart` method has been renamed to `removeCart`, and it now accepts a cart model instance.
 
 ```diff
-
 - public function emptyCart()
 + public function removeCart(Contracts\Cart $cart): void
+```
 
+6. We have introduced a new method called `refreshCart`. This method retrieves a refreshed cart instance from the database.
+
+```diff
++ public function refreshCart(): void
+```
+
+7. The `putCart` method previously found in CartTools has been eliminated. It is now managed within the setCart method in the Webkul\Checkout\Cart class.
+
+```diff
+- public function putCart($cart)
+```
+
+8. We've enhanced the mergeCart method to now accept an instance of the `Webkul\Customer\Models\Customer` model. Previously, we merged the guest cart with the logged-in customer's cart by fetching the current customer within this method. However, it now directly accepts the `Webkul\Customer\Models\Customer` model instance.
+
+```diff
+- public function mergeCart(): void
++ public function mergeCart(CustomerContract $customer): void
+```
+
+9. The `saveCustomerDetails` method has been renamed to `setCustomerPersonnelDetails`
+
+```diff
+- public function saveCustomerDetails(): void
++ public function setCustomerPersonnelDetails(): void
+```
+
+10. We have removed the following methods and relocated the cart data transformation to a separate resource class named `Webkul\Sales\Transformers\OrderResource`.
+
+```diff
+- public function prepareDataForOrder(): array
+
+- public function prepareDataForOrderItem(): array
+
+- public function toArray(): array
+```
+
+11. The `collectTotals` method now returns a self instance instead of void, allowing for chaining multiple methods with the Cart facade.
+
+```diff
+- public function collectTotals(): void
++ public function collectTotals(): self
 ```
 
 
@@ -200,7 +233,7 @@ The following traits has been removed and all the function has been moved to the
 <a name="moved-coupon-blade"></a>
 #### Moved `coupon.blade.php`
 
-1. `packages/Webkul/Shop/src/Resources/views/checkout/cart/coupon.blade.php` moved to `packages/Webkul/Shop/src/Resources/views/checkout/coupon.blade.php` directory as this file is being including in both checkout and cart page
+1. The file `packages/Webkul/Shop/src/Resources/views/checkout/cart/coupon.blade.php` has been relocated to the `packages/Webkul/Shop/src/Resources/views/checkout/coupon.blade.php` directory. This move was made because the file is included on both the checkout and cart pages.
 
 
 
@@ -210,64 +243,78 @@ The following traits has been removed and all the function has been moved to the
 <a name="the-elastic-search-repository"></a>
 #### The `Webkul\Product\Repositories\ElasticSearchRepository` Repository
 
-1. We've updated the `search` function to accept two arguments, the first argument is an array containing the search parameters (Eg. category_id, etc) and the second argument is an array containing the options.
+1. We have enhanced the `search` method to accept two arguments. The first argument is an array containing the search parameters (e.g., category_id, etc.), while the second argument is an array containing the options.
 
 ```diff
-
 - public function search($categoryId, $options)
 + public function search(array $params, array $options): array
-
 ```
 
-2.  We've updated the `getFilters` function to accept an array of parameters because request params will come from the search function itself
+2.  We've enhanced the `getFilters` method to now accept an array of parameters, as request parameters will originate from the search method itself.
 
 ```diff
-
 - public function getFilters()
 + public function getFilters(array $params): array
-
 ```
 
 
 <a name="the-product-repository"></a>
 #### The `Webkul\Product\Repositories\ProductRepository` Repository
 
-1. We've updated the `getAll` function to accept optional search params
+1. We've made revisions to the `getAll` method to allow for optional search parameters.
 
 ```diff
-
 - public function getAll()
 + public function getAll(array $params = [])
-
 ```
 
-2. We've updated the `searchFromDatabase` function to accept optional search params
+2. We've made revisions to the `searchFromDatabase` method to allow for optional search parameters.
 
 ```diff
-
 - public function searchFromDatabase()
 + public function searchFromDatabase(array $params = [])
-
 ```
 
-3. We've updated the `searchFromElastic` function to accept optional search params
+3. We've made revisions to the `searchFromElastic` method to allow for optional search parameters.
 
 ```diff
-
 - public function searchFromElastic()
 + public function searchFromElastic(array $params = [])
-
 ```
 
 
 
-<a name="shop-api"></a>
-### Shop API
+<a name="Sales"></a>
+### Sales
+
+<a name="the-order-item-repository"></a>
+#### The `Webkul\Sales\Repositories\OrderItemRepository` Repository
+
+1. The `create` method has been removed. Previously, it was overridden to set product_id and product_type for the polymorphic relation between `Webkul\Sales\Models\OrderItem` and `Webkul\Product\Models\Product`. Now, this information is obtained from the cart transformer `Webkul\Sales\Transformers\OrderResource`.
+
+```diff
+- public function create(array $data)
+```
+
+
+
+<a name="shop"></a>
+### Shop
+
+<a name="event-parameter-updated"></a>
+#### Shop Event parameter updated
+
+1. The event data previously containing an email address has been updated to include an instance of the `Webkul\Customer\Models\Customer` model.
+
+```diff
+- Event::dispatch('customer.after.login', $loginRequest->get('email'));
++ Event::dispatch('customer.after.login', auth()->guard()->user());
+```
 
 <a name="renamed-shop-api-routes-names"></a>
 #### Renamed Shop API Route Names
 
-Following routes name is renamed for the consistency in `packages/Webkul/Shop/src/Routes/api.php` route file (Reference #9586)
+1. The routes names have been renamed for consistency in the `packages/Webkul/Shop/src/Routes/api.php` route file (Reference #9586).
 
 
 ```diff
@@ -284,7 +331,7 @@ Following routes name is renamed for the consistency in `packages/Webkul/Shop/sr
 <a name="renamed-shop-controller-method-names"></a>
 #### Renamed Shop Controller Method Names
 
-Controller action names has renamed for the following routes to match consistency in `packages/Webkul/Shop/src/Routes/customer-routes.php` route file (Reference #9586)
+1. The controller action names for the following routes have been renamed to ensure consistency with the `packages/Webkul/Shop/src/Routes/customer-routes.php` route file (Reference #9586).
 
 ```diff
 - Route::get('', 'show')->name('shop.customer.session.index');
