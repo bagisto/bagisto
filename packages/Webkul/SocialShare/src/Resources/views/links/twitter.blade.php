@@ -14,7 +14,7 @@
     >
         <li class="transition-all hover:opacity-[0.8]">
             <a 
-                href="#" 
+                :href="shareUrl" 
                 @click="openSharePopup"
                 aria-label="Twitter"
                 role="button"

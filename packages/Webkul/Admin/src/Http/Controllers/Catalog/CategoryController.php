@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Catalog\CategoryDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -123,7 +124,7 @@ class CategoryController extends Controller
             'display_mode',
             'status',
             'attributes',
-            core()->getCurrentLocale()->code
+            $categoryRequest->input('locale')
         ), $id);
 
         Event::dispatch('catalog.category.update.after', $category);
@@ -218,9 +219,7 @@ class CategoryController extends Controller
     public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
         try {
-            $data = $massUpdateRequest->all();
-
-            $categoryIds = $data['indices'];
+            $categoryIds = $massUpdateRequest->input('indices');
 
             foreach ($categoryIds as $categoryId) {
                 Event::dispatch('catalog.categories.mass-update.before', $categoryId);
@@ -264,10 +263,8 @@ class CategoryController extends Controller
 
     /**
      * Get all categories in tree format.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function tree()
+    public function tree(): JsonResource
     {
         $categories = $this->categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
 
@@ -275,24 +272,16 @@ class CategoryController extends Controller
     }
 
     /**
-     * Result of search customer.
+     * Get all the searched categories.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function search()
     {
-        $results = [];
-
-        $categories = $this->categoryRepository->scopeQuery(function ($query) {
-            return $query
-                ->select('categories.*')
-                ->leftJoin('category_translations', function ($query) {
-                    $query->on('categories.id', '=', 'category_translations.category_id')
-                        ->where('category_translations.locale', app()->getLocale());
-                })
-                ->where('category_translations.name', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orderBy('created_at', 'desc');
-        })->paginate(10);
+        $categories = $this->categoryRepository->getAll([
+            'name'   => request()->input('query'),
+            'locale' => app()->getLocale(),
+        ]);
 
         return response()->json($categories);
     }

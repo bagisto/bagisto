@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Tu pedido ha sido cancelado',
                     'page-title'         => 'Pedido #:order_id',
                     'payment-method'     => 'Método de Pago',
+                    'reorder-btn-title'  => 'Reordenar',
                     'shipping-address'   => 'Dirección de Envío',
                     'shipping-method'    => 'Método de Envío',
                     'title'              => 'Ver',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Produkte hier suchen',
                 'sign-in'           => 'Anmelden',
                 'sign-up'           => 'Registrieren',
+                'submit'            => 'Enviar',
                 'title'             => 'Konto',
                 'welcome'           => 'Willkommen',
                 'welcome-guest'     => 'Willkommen Gast',
                 'wishlist'          => 'Wunschliste',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Idioma predeterminado',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuar con el Pago',
             'illegal'                   => 'La cantidad no puede ser menor que uno.',
+            'inactive-add'              => 'El artículo inactivo no se puede agregar al carrito.',
             'inactive'                  => 'El artículo ha sido desactivado y posteriormente eliminado del carrito.',
             'inventory-warning'         => 'La cantidad solicitada no está disponible, por favor inténtalo de nuevo más tarde.',
             'item-add-to-cart'          => 'Producto Agregado Exitosamente',
@@ -756,11 +765,25 @@ return [
     ],
 
     'home' => [
-        'index' => [
-            'offer'               => 'Erhalten Sie BIS ZU 40 % RABATT auf Ihre erste Bestellung JETZT SHOPPEN',
-            'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
-            'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
+        'contact' => [
+            'about'         => 'Déjanos una nota y te responderemos lo más rápido posible',
+            'desc'          => '¿En qué estás pensando?',
+            'describe-here' => 'Describe aquí',
+            'email'         => 'Correo electrónico',
+            'message'       => 'Mensaje',
+            'name'          => 'Nombre',
+            'phone-number'  => 'Número de teléfono',
+            'submit'        => 'Enviar',
+            'title'         => 'Contáctanos',
         ],
+
+        'index' => [
+            'offer'               => 'Obtén HASTA UN 40 % DE DESCUENTO en tu primera compra ¡COMPRA AHORA!',
+            'resend-verify-email' => 'Reenviar correo de verificación',
+            'verify-email'        => 'Verifica tu dirección de correo electrónico',
+        ],
+
+        'thanks-for-contact' => 'Gracias por contactarnos con tus comentarios y preguntas. Te responderemos muy pronto.',
     ],
 
     'partials' => [
@@ -860,6 +883,14 @@ return [
                 'subject'     => 'Sie! Abonnieren Sie unseren Newsletter',
                 'unsubscribe' => 'Abmelden',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'a través del formulario de contacto del sitio web',
+            'reply-to-mail'   => 'por favor responda a este correo electrónico.',
+            'reach-via-phone' => 'Alternativamente, puede comunicarse con nosotros por teléfono al',
+            'inquiry-from'    => 'Consulta de',
+            'to'              => 'Para contactar a',
         ],
 
         'orders' => [

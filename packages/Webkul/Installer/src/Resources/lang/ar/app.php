@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'seeders'   => [
+    'seeders' => [
         'attribute' => [
             'attribute-families' => [
                 'default' => 'الافتراضي',
             ],
 
-            'attribute-groups'   => [
-                'description'       => 'الوصف',
-                'general'           => 'عام',
-                'inventories'       => 'المخزونات',
-                'meta-description'  => 'الوصف الواجب',
-                'price'             => 'السعر',
-                'settings'          => 'الإعدادات',
-                'shipping'          => 'الشحن',
+            'attribute-groups' => [
+                'description'      => 'الوصف',
+                'general'          => 'عام',
+                'inventories'      => 'المخزونات',
+                'meta-description' => 'الوصف الواجب',
+                'price'            => 'السعر',
+                'settings'         => 'الإعدادات',
+                'shipping'         => 'الشحن',
             ],
 
-            'attributes'         => [
+            'attributes' => [
                 'brand'                => 'العلامة التجارية',
                 'color'                => 'اللون',
                 'cost'                 => 'التكلفة',
@@ -37,9 +37,9 @@ return [
                 'short-description'    => 'وصف مختصر',
                 'size'                 => 'الحجم',
                 'sku'                  => 'رمز المنتج',
+                'special-price'        => 'السعر الخاص',
                 'special-price-from'   => 'السعر الخاص من',
                 'special-price-to'     => 'السعر الخاص حتى',
-                'special-price'        => 'السعر الخاص',
                 'status'               => 'الحالة',
                 'tax-category'         => 'فئة الضريبة',
                 'url-key'              => 'الرابط المميز',
@@ -48,7 +48,7 @@ return [
                 'width'                => 'العرض',
             ],
 
-            'attribute-options'  => [
+            'attribute-options' => [
                 'black'  => 'أسود',
                 'green'  => 'أخضر',
                 'l'      => 'كبير',
@@ -61,21 +61,21 @@ return [
             ],
         ],
 
-        'category'  => [
+        'category' => [
             'categories' => [
                 'description' => 'وصف الفئة الرئيسية',
                 'name'        => 'الرئيسية',
             ],
         ],
 
-        'cms'       => [
+        'cms' => [
             'pages' => [
-                'about-us'         => [
+                'about-us' => [
                     'content' => 'محتوى صفحة من نحن',
                     'title'   => 'من نحن',
                 ],
 
-                'contact-us'       => [
+                'contact-us' => [
                     'content' => 'محتوى صفحة اتصل بنا',
                     'title'   => 'اتصل بنا',
                 ],
@@ -90,22 +90,22 @@ return [
                     'title'   => 'سياسة الدفع',
                 ],
 
-                'privacy-policy'   => [
+                'privacy-policy' => [
                     'content' => 'محتوى صفحة سياسة الخصوصية',
                     'title'   => 'سياسة الخصوصية',
                 ],
 
-                'refund-policy'    => [
+                'refund-policy' => [
                     'content' => 'محتوى صفحة سياسة الاسترداد',
                     'title'   => 'سياسة الاسترداد',
                 ],
 
-                'return-policy'    => [
+                'return-policy' => [
                     'content' => 'محتوى صفحة سياسة الإرجاع',
                     'title'   => 'سياسة الإرجاع',
                 ],
 
-                'shipping-policy'  => [
+                'shipping-policy' => [
                     'content' => 'محتوى صفحة سياسة الشحن',
                     'title'   => 'سياسة الشحن',
                 ],
@@ -115,20 +115,20 @@ return [
                     'title'   => 'الشروط والأحكام',
                 ],
 
-                'terms-of-use'     => [
+                'terms-of-use' => [
                     'content' => 'محتوى صفحة شروط الاستخدام',
                     'title'   => 'شروط الاستخدام',
                 ],
 
-                'whats-new'        => [
+                'whats-new' => [
                     'content' => 'محتوى صفحة ما الجديد',
                     'title'   => 'ما الجديد',
                 ],
             ],
         ],
 
-        'core'      => [
-            'channels'   => [
+        'core' => [
+            'channels' => [
                 'meta-description' => 'وصف متجر تجريبي',
                 'meta-keywords'    => 'الكلمات الرئيسية للمتجر التجريبي',
                 'meta-title'       => 'متجر تجريبي',
@@ -151,7 +151,7 @@ return [
                 'USD' => 'الدولار الأمريكي',
             ],
 
-            'locales'    => [
+            'locales' => [
                 'ar'    => 'العربية',
                 'bn'    => 'البنغالية',
                 'de'    => 'الألمانية',
@@ -174,7 +174,7 @@ return [
             ],
         ],
 
-        'customer'  => [
+        'customer' => [
             'customer-groups' => [
                 'general'   => 'عام',
                 'guest'     => 'زائر',
@@ -190,38 +190,38 @@ return [
 
         'shop'      => [
             'theme-customizations' => [
-                'all-products'           => [
-                    'name'    => 'جميع المنتجات',
+                'all-products' => [
+                    'name' => 'جميع المنتجات',
 
                     'options' => [
                         'title' => 'جميع المنتجات',
                     ],
                 ],
 
-                'bold-collections'       => [
+                'bold-collections' => [
                     'content' => [
                         'btn-title'   => 'عرض الكل',
                         'description' => 'نقدم لك مجموعاتنا البارزة الجديدة! قم بتحسين أناقتك مع تصاميم جريئة وعبارات حيوية. استكشف أنماطًا بارزة وألوانًا جريئة تعيد تعريف خزانتك. استعد لاعتناق الاستثنائية!',
                         'title'       => 'استعد لمجموعاتنا البارزة الجديدة!',
                     ],
 
-                    'name'    => 'مجموعات بارزة',
+                    'name' => 'مجموعات بارزة',
                 ],
 
                 'categories-collections' => [
                     'name' => 'تصنيفات المجموعات',
                 ],
 
-                'featured-collections'   => [
-                    'name'    => 'مجموعات مميزة',
+                'featured-collections' => [
+                    'name' => 'مجموعات مميزة',
 
                     'options' => [
                         'title' => 'منتجات مميزة',
                     ],
                 ],
 
-                'footer-links'           => [
-                    'name'    => 'روابط الذيل',
+                'footer-links' => [
+                    'name' => 'روابط الذيل',
 
                     'options' => [
                         'about-us'         => 'معلومات عنا',
@@ -238,25 +238,25 @@ return [
                     ],
                 ],
 
-                'game-container'         => [
+                'game-container' => [
                     'content' => [
                         'sub-title-1' => 'مجموعاتنا',
                         'sub-title-2' => 'مجموعاتنا',
                         'title'       => 'اللعبة مع إضافاتنا الجديدة!',
                     ],
 
-                    'name'    => 'حاوية اللعبة',
+                    'name' => 'حاوية اللعبة',
                 ],
 
-                'image-carousel'         => [
-                    'name'    => 'عرض الصور',
+                'image-carousel' => [
+                    'name' => 'عرض الصور',
 
                     'sliders' => [
                         'title' => 'استعد للمجموعة الجديدة',
                     ],
                 ],
 
-                'new-products'           => [
+                'new-products' => [
                     'name'    => 'منتجات جديدة',
 
                     'options' => [
@@ -264,15 +264,15 @@ return [
                     ],
                 ],
 
-                'offer-information'      => [
+                'offer-information' => [
                     'content' => [
                         'title' => 'احصل على خصم يصل إلى 40% على طلبك الأول. تسوق الآن',
                     ],
 
-                    'name'    => 'معلومات العرض',
+                    'name' => 'معلومات العرض',
                 ],
 
-                'services-content'       => [
+                'services-content' => [
                     'description' => [
                         'emi-available-info'   => 'توفر EMI بدون تكلفة على جميع بطاقات الائتمان الرئيسية',
                         'free-shipping-info'   => 'استمتع بالشحن المجاني على جميع الطلبات',
@@ -280,9 +280,9 @@ return [
                         'time-support-info'    => 'دعم مخصص على مدار الساعة عبر الدردشة والبريد الإلكتروني',
                     ],
 
-                    'name'        => 'محتوى الخدمات',
+                    'name' => 'محتوى الخدمات',
 
-                    'title'       => [
+                    'title' => [
                         'emi-available'   => 'توفر EMI',
                         'free-shipping'   => 'الشحن المجاني',
                         'product-replace' => 'استبدال المنتج',
@@ -290,7 +290,7 @@ return [
                     ],
                 ],
 
-                'top-collections'        => [
+                'top-collections' => [
                     'content' => [
                         'sub-title-1' => 'مجموعاتنا',
                         'sub-title-2' => 'مجموعاتنا',
@@ -301,12 +301,12 @@ return [
                         'title'       => 'اللعبة مع إضافاتنا الجديدة!',
                     ],
 
-                    'name'    => 'أفضل المجموعات',
+                    'name' => 'أفضل المجموعات',
                 ],
             ],
         ],
 
-        'user'      => [
+        'user' => [
             'roles' => [
                 'description' => 'سيكون لدى مستخدمي هذا الدور وصولًا كاملاً',
                 'name'        => 'مدير',
@@ -320,12 +320,12 @@ return [
 
     'installer' => [
         'index' => [
-            'create-administrator'      => [
+            'create-administrator' => [
                 'admin'            => 'المشرف',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'تأكيد كلمة المرور',
-                'email-address'    => 'admin@example.com',
                 'email'            => 'البريد الإلكتروني',
+                'email-address'    => 'admin@example.com',
                 'password'         => 'كلمة المرور',
                 'title'            => 'إنشاء المسؤول',
             ],
@@ -346,8 +346,8 @@ return [
                 'default-currency'    => 'العملة الافتراضية',
                 'default-locale'      => 'اللغة الافتراضية',
                 'default-timezone'    => 'المنطقة الزمنية الافتراضية',
-                'default-url-link'    => 'https://localhost',
                 'default-url'         => 'الرابط الافتراضي',
+                'default-url-link'    => 'https://localhost',
                 'dirham'              => 'الدرهم (AED)',
                 'euro'                => 'اليورو (EUR)',
                 'iranian'             => 'ريال إيراني (IRR)',
@@ -368,32 +368,32 @@ return [
                 'warning-message'     => 'تنبيه! إعدادات لغات النظام الافتراضية والعملة الافتراضية دائمة ولا يمكن تغييرها مرة أخرى أبدًا.',
             ],
 
-            'installation-processing'   => [
-                'bagisto-info'     => 'إنشاء جداول قاعدة البيانات، وقد يستغرق ذلك بضع دقائق',
+            'installation-processing' => [
                 'bagisto'          => 'تثبيت Bagisto',
+                'bagisto-info'     => 'إنشاء جداول قاعدة البيانات، وقد يستغرق ذلك بضع دقائق',
                 'title'            => 'التثبيت',
             ],
 
-            'installation-completed'    => [
+            'installation-completed' => [
                 'admin-panel'                => 'لوحة المشرف',
                 'bagisto-forums'             => 'منتديات Bagisto',
                 'customer-panel'             => 'لوحة العميل',
                 'explore-bagisto-extensions' => 'استكشاف امتدادات Bagisto',
-                'title-info'                 => 'تم تثبيت Bagisto بنجاح على نظامك.',
                 'title'                      => 'اكتمال التثبيت',
+                'title-info'                 => 'تم تثبيت Bagisto بنجاح على نظامك.',
             ],
 
-            'ready-for-installation'    => [
+            'ready-for-installation' => [
                 'create-databsae-table'   => 'إنشاء جدول قاعدة البيانات',
-                'install-info-button'     => 'انقر على الزر أدناه ل',
-                'install-info'            => 'Bagisto للتثبيت',
                 'install'                 => 'التثبيت',
+                'install-info'            => 'Bagisto للتثبيت',
+                'install-info-button'     => 'انقر على الزر أدناه ل',
                 'populate-database-table' => 'ملء جداول قاعدة البيانات',
                 'start-installation'      => 'بدء التثبيت',
                 'title'                   => 'جاهز للتثبيت',
             ],
 
-            'start'                     => [
+            'start' => [
                 'locale'        => 'اللغة',
                 'main'          => 'بداية',
                 'select-locale' => 'اختر اللغة',
@@ -401,7 +401,7 @@ return [
                 'welcome-title' => 'مرحبًا بك في Bagisto 2.0.',
             ],
 
-            'server-requirements'       => [
+            'server-requirements' => [
                 'calendar'    => 'التقويم',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
@@ -416,45 +416,43 @@ return [
                 'openssl'     => 'openssl',
                 'pcre'        => 'pcre',
                 'pdo'         => 'pdo',
-                'php-version' => '8.1 أو أعلى',
                 'php'         => 'PHP',
+                'php-version' => '8.1 أو أعلى',
                 'session'     => 'الجلسة',
                 'title'       => 'متطلبات الخادم',
                 'tokenizer'   => 'tokenizer',
                 'xml'         => 'XML',
             ],
 
-            'arabic'                    => 'العربية',
-            'back'                      => 'رجوع',
-            'bagisto-info'              => 'مشروع مجتمعي من قبل',
-            'bagisto-logo'              => 'شعار Bagisto',
-            'bagisto'                   => 'Bagisto',
-            'bengali'                   => 'البنغالية',
-            'chinese'                   => 'الصينية',
-            'continue'                  => 'متابعة',
-            'dutch'                     => 'هولندي',
-            'english'                   => 'الإنجليزية',
-            'french'                    => 'الفرنسية',
-            'german'                    => 'ألماني',
-            'hebrew'                    => 'العبرية',
-            'hindi'                     => 'الهندية',
-            'installation-description'  => 'تتضمن عملية تثبيت Bagisto عادة عدة خطوات. إليك مخطط عام لعملية التثبيت لـ Bagisto:',
-            'installation-info'         => 'نحن سعداء برؤيتك هنا!',
-            'installation-title'        => 'مرحبًا بك في التثبيت',
-            'italian'                   => 'الإيطالية',
-            'japanese'                  => 'اليابانية',
-            'persian'                   => 'الفارسية',
-            'polish'                    => 'البولندية',
-            'portuguese'                => 'البرتغالية البرازيلية',
-            'russian'                   => 'الروسية',
-            'save-configuration'        => 'حفظ الإعدادات',
-            'sinhala'                   => 'السنهالية',
-            'skip'                      => 'تخطى',
-            'spanish'                   => 'الإسبانية',
-            'title'                     => 'مثبت Bagisto',
-            'turkish'                   => 'التركية',
-            'ukrainian'                 => 'الأوكرانية',
-            'webkul'                    => 'Webkul',
+            'arabic'                   => 'العربية',
+            'back'                     => 'رجوع',
+            'bagisto'                  => 'Bagisto',
+            'bagisto-info'             => 'مشروع مجتمعي من قبل',
+            'bagisto-logo'             => 'شعار Bagisto',
+            'bengali'                  => 'البنغالية',
+            'chinese'                  => 'الصينية',
+            'continue'                 => 'متابعة',
+            'dutch'                    => 'هولندي',
+            'english'                  => 'الإنجليزية',
+            'french'                   => 'الفرنسية',
+            'german'                   => 'ألماني',
+            'hebrew'                   => 'العبرية',
+            'hindi'                    => 'الهندية',
+            'installation-description' => 'تتضمن عملية تثبيت Bagisto عادة عدة خطوات. إليك مخطط عام لعملية التثبيت لـ Bagisto:',
+            'installation-info'        => 'نحن سعداء برؤيتك هنا!',
+            'installation-title'       => 'مرحبًا بك في التثبيت',
+            'italian'                  => 'الإيطالية',
+            'japanese'                 => 'اليابانية',
+            'persian'                  => 'الفارسية',
+            'polish'                   => 'البولندية',
+            'portuguese'               => 'البرتغالية البرازيلية',
+            'russian'                  => 'الروسية',
+            'sinhala'                  => 'السنهالية',
+            'spanish'                  => 'الإسبانية',
+            'title'                    => 'مثبت Bagisto',
+            'turkish'                  => 'التركية',
+            'ukrainian'                => 'الأوكرانية',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'seeders'   => [
+    'seeders' => [
         'attribute' => [
             'attribute-families' => [
                 'default' => 'ডিফল্ট',
             ],
 
-            'attribute-groups'  => [
-                'description'       => 'বর্ণনা',
-                'general'           => 'সাধারণ',
-                'inventories'       => 'মালামালের মৌলিক বিশেষত্ব',
-                'meta-description'  => 'মেটা বর্ণনা',
-                'price'             => 'মূল্য',
-                'settings'          => 'সেটিংস',
-                'shipping'          => 'শিপিং',
+            'attribute-groups' => [
+                'description'      => 'বর্ণনা',
+                'general'          => 'সাধারণ',
+                'inventories'      => 'মালামালের মৌলিক বিশেষত্ব',
+                'meta-description' => 'মেটা বর্ণনা',
+                'price'            => 'মূল্য',
+                'settings'         => 'সেটিংস',
+                'shipping'         => 'শিপিং',
             ],
 
-            'attributes'        => [
+            'attributes' => [
                 'brand'                => 'ব্র্যান্ড',
                 'color'                => 'রঙ',
                 'cost'                 => 'মূল্য',
@@ -37,9 +37,9 @@ return [
                 'short-description'    => 'সংক্ষিপ্ত বর্ণনা',
                 'size'                 => 'আকার',
                 'sku'                  => 'SKU',
+                'special-price'        => 'বিশেষ মূল্য',
                 'special-price-from'   => 'বিশেষ মূল্য থেকে',
                 'special-price-to'     => 'বিশেষ মূল্য প্রায়',
-                'special-price'        => 'বিশেষ মূল্য',
                 'status'               => 'অবস্থা',
                 'tax-category'         => 'কর বিভাগ',
                 'url-key'              => 'URL কী',
@@ -61,21 +61,21 @@ return [
             ],
         ],
 
-        'category'  => [
+        'category' => [
             'categories' => [
                 'description' => 'মূল বর্গের বর্ণনা',
                 'name'        => 'মূল',
             ],
         ],
 
-        'cms'       => [
+        'cms' => [
             'pages' => [
-                'about-us'         => [
+                'about-us' => [
                     'content' => 'আমাদের সম্পর্কে পাতা সামগ্রী',
                     'title'   => 'আমাদের সম্পর্কে',
                 ],
 
-                'contact-us'       => [
+                'contact-us' => [
                     'content' => 'যোগাযোগ করুন পাতা সামগ্রী',
                     'title'   => 'যোগাযোগ করুন',
                 ],
@@ -85,12 +85,12 @@ return [
                     'title'   => 'গ্রাহক সেবা',
                 ],
 
-                'payment-policy'   => [
+                'payment-policy' => [
                     'content' => 'পেমেন্ট নীতি পাতা সামগ্রী',
                     'title'   => 'পেমেন্ট নীতি',
                 ],
 
-                'privacy-policy'   => [
+                'privacy-policy' => [
                     'content' => 'গোপনীয়তা নীতি পাতা সামগ্রী',
                     'title'   => 'গোপনীয়তা নীতি',
                 ],
@@ -100,12 +100,12 @@ return [
                     'title'   => 'ফেরত নেওয়া নীতি',
                 ],
 
-                'return-policy'    => [
+                'return-policy' => [
                     'content' => 'ফেরত নেওয়া নীতি পাতা সামগ্রী',
                     'title'   => 'ফেরত নেওয়া নীতি',
                 ],
 
-                'shipping-policy'  => [
+                'shipping-policy' => [
                     'content' => 'পরিবহন নীতি পাতা সামগ্রী',
                     'title'   => 'পরিবহন নীতি',
                 ],
@@ -115,24 +115,24 @@ return [
                     'title'   => 'শর্তাবলী',
                 ],
 
-                'terms-of-use'     => [
+                'terms-of-use' => [
                     'content' => 'ব্যবহারের শর্ত পাতা সামগ্রী',
                     'title'   => 'ব্যবহারের শর্ত',
                 ],
 
-                'whats-new'        => [
+                'whats-new' => [
                     'content' => 'আমাদের নতুন জিনিস পাতা সামগ্রী',
                     'title'   => 'কি নতুন',
                 ],
             ],
         ],
 
-        'core'      => [
-            'channels'   => [
-                'meta-description' => 'ডেমো স্টোর মেটা বর্ণনা',
-                'meta-keywords'    => 'ডেমো স্টোর মেটা কীওয়ার্ড',
-                'meta-title'       => 'ডেমো স্টোর',
+        'core' => [
+            'channels' => [
                 'name'             => 'ডিফল্ট',
+                'meta-title'       => 'ডেমো স্টোর',
+                'meta-keywords'    => 'ডেমো স্টোর মেটা কীওয়ার্ড',
+                'meta-description' => 'ডেমো স্টোর মেটা বর্ণনা',
             ],
 
             'currencies' => [
@@ -151,7 +151,7 @@ return [
                 'USD' => 'মার্কিন ডলার',
             ],
 
-            'locales'    => [
+            'locales' => [
                 'ar'    => 'আরবি',
                 'bn'    => 'বাংলা',
                 'de'    => 'জার্মান',
@@ -174,7 +174,7 @@ return [
             ],
         ],
 
-        'customer'  => [
+        'customer' => [
             'customer-groups' => [
                 'general'   => 'সাধারণ',
                 'guest'     => 'অতিথি',
@@ -188,32 +188,32 @@ return [
             ],
         ],
 
-        'shop'      => [
+        'shop' => [
             'theme-customizations' => [
-                'all-products'           => [
-                    'name'    => 'সব পণ্য',
+                'all-products' => [
+                    'name' => 'সব পণ্য',
 
                     'options' => [
                         'title' => 'সমস্ত পণ্য',
                     ],
                 ],
 
-                'bold-collections'       => [
+                'bold-collections' => [
                     'content' => [
                         'btn-title'   => 'সব দেখুন',
                         'description' => 'আমাদের নতুন বোল্ড সংগ্রহ পরিচিত করার জন্য আপনার শৈলীকে ধৈর্যশীল ডিজাইন এবং জীবন্ত বক্তব্যগুলি দিয়ে আপনার গার্ডরোব পরিভ্রান্ত করুন। আকর্ষণীয় মোটীর্দে প্যাটার্ন এবং বোল্ড রঙের অনুসন্ধান করুন, যা আপনার সাড়াদে পরিভ্রান্ত করে। অসাধারণ দেখার জন্য প্রস্তুত হোন!',
                         'title'       => 'আমাদের নতুন বোল্ড সংগ্রহের জন্য প্রস্তুত হোন!',
                     ],
 
-                    'name'    => 'বোল্ড সংগ্রহ',
+                    'name' => 'বোল্ড সংগ্রহ',
                 ],
 
                 'categories-collections' => [
                     'name' => 'বিভাগ সংগ্রহ',
                 ],
 
-                'footer-links'           => [
-                    'name'    => 'পাদচরণ লিঙ্কস',
+                'footer-links' => [
+                    'name' => 'পাদচরণ লিঙ্কস',
 
                     'options' => [
                         'about-us'         => 'আমাদের সম্পর্কে',
@@ -230,41 +230,41 @@ return [
                     ],
                 ],
 
-                'featured-collections'   => [
-                    'name'    => 'নির্দেশিত সংগ্রহ',
+                'featured-collections' => [
+                    'name' => 'নির্দেশিত সংগ্রহ',
 
                     'options' => [
                         'title' => 'নির্দেশিত পণ্য',
                     ],
                 ],
 
-                'game-container'         => [
+                'game-container' => [
                     'content' => [
                         'sub-title-1' => 'আমাদের সংগ্রহ',
                         'sub-title-2' => 'আমাদের সংগ্রহ',
                         'title'       => 'আমাদের নতুন যোগাযোগে খেলা!',
                     ],
 
-                    'name'    => 'খেলা সংগ্রহ',
+                    'name' => 'খেলা সংগ্রহ',
                 ],
 
-                'image-carousel'         => [
-                    'name'    => 'চিত্র ক্যারোসেল',
+                'image-carousel' => [
+                    'name' => 'চিত্র ক্যারোসেল',
 
                     'sliders' => [
                         'title' => 'নতুন সংগ্রহের জন্য প্রস্তুত হোন',
                     ],
                 ],
 
-                'new-products'           => [
-                    'name'    => 'নতুন পণ্য',
+                'new-products' => [
+                    'name' => 'নতুন পণ্য',
 
                     'options' => [
                         'title' => 'নতুন পণ্য',
                     ],
                 ],
 
-                'offer-information'      => [
+                'offer-information' => [
                     'content' => [
                         'title' => 'আপনার 1টি মান অর্ডারে 40% ছাড় পেতে SHOP NOW',
                     ],
@@ -272,7 +272,7 @@ return [
                     'name' => 'অফার তথ্য',
                 ],
 
-                'services-content'       => [
+                'services-content' => [
                     'name'  => 'সেবা সামগ্রী',
 
                     'title' => [
@@ -290,7 +290,7 @@ return [
                     ],
                 ],
 
-                'top-collections'        => [
+                'top-collections' => [
                     'content' => [
                         'sub-title-1' => 'আমাদের সংগ্রহ',
                         'sub-title-2' => 'আমাদের সংগ্রহ',
@@ -301,12 +301,12 @@ return [
                         'title'       => 'আমাদের নতুন যোগাযোগে খেলা!',
                     ],
 
-                    'name'    => 'শীর্ষ সংগ্রহ',
+                    'name' => 'শীর্ষ সংগ্রহ',
                 ],
             ],
         ],
 
-        'user'      => [
+        'user' => [
             'roles' => [
                 'description' => 'এই ভূমিকা ব্যবহারকারীদের সমস্ত অ্যাক্সেস থাকবে',
                 'name'        => 'প্রশাসক',
@@ -320,11 +320,11 @@ return [
 
     'installer' => [
         'index' => [
-            'create-administrator'      => [
+            'create-administrator' => [
                 'admin'            => 'অ্যাডমিন',
-                'bagisto'          => 'বাগিস্টো',
+                'bagisto'          => 'বাগিস্তো',
                 'confirm-password' => 'পাসওয়ার্ড নিশ্চিত করুন',
-                'email-address'    => 'admin@example.com',
+                'email-address'    => 'ইমেল ঠিকানা',
                 'email'            => 'ইমেল',
                 'password'         => 'পাসওয়ার্ড',
                 'title'            => 'প্রশাসক তৈরি করুন',
@@ -334,7 +334,7 @@ return [
                 'allowed-currencies'  => 'অনুমোদিত মুদ্রা',
                 'allowed-locales'     => 'অনুমোদিত লোকেল',
                 'application-name'    => 'অ্যাপ্লিকেশনের নাম',
-                'bagisto'             => 'Bagisto',
+                'bagisto'             => 'বাগিস্তো',
                 'chinese-yuan'        => 'চীনা ইউয়ান (CNY)',
                 'database-connection' => 'ডাটাবেস সংযোগ',
                 'database-hostname'   => 'ডাটাবেস হোস্টনাম',
@@ -368,22 +368,22 @@ return [
                 'warning-message'     => 'সাবধান! আপনার ডিফল্ট সিস্টেম ভাষা এবং ডিফল্ট মুদ্রা সেটিংস স্থায়ী এবং একবার আর পরিবর্তন করা যাবে না।',
             ],
 
-            'installation-processing'   => [
+            'installation-processing' => [
                 'bagisto-info'     => 'ডাটাবেস টেবিল তৈরি করা হচ্ছে, এটি কিছুটা সময় নিতে পারে',
-                'bagisto'          => 'ইনস্টলেশন Bagisto',
+                'bagisto'          => 'ইনস্টলেশন বাগিস্তো',
                 'title'            => 'ইনস্টলেশন',
             ],
 
-            'installation-completed'    => [
+            'installation-completed' => [
                 'admin-panel'                => 'অ্যাডমিন প্যানেল',
-                'bagisto-forums'             => 'বাগিস্টো ফোরাম',
+                'bagisto-forums'             => 'বাগিস্তো ফোরাম',
                 'customer-panel'             => 'কাস্টমার প্যানেল',
-                'explore-bagisto-extensions' => 'বাগিস্টো এক্সটেনশন অন্বেষণ করুন',
-                'title-info'                 => 'বাগিস্টো সফলভাবে আপনার সিস্টেমে ইনস্টল করা হয়েছে।',
+                'explore-bagisto-extensions' => 'বাগিস্তো এক্সটেনশন অন্বেষণ করুন',
+                'title-info'                 => 'বাগিস্তো সফলভাবে আপনার সিস্টেমে ইনস্টল করা হয়েছে।',
                 'title'                      => 'ইনস্টলেশন সম্পন্ন',
             ],
 
-            'ready-for-installation'    => [
+            'ready-for-installation' => [
                 'create-databsae-table'   => 'ডাটাবেস টেবিল তৈরি করুন',
                 'install-info-button'     => 'নীচের বাটনে ক্লিক করুন',
                 'install-info'            => 'ইনস্টলেশনের জন্য Bagisto',
@@ -393,7 +393,7 @@ return [
                 'title'                   => 'ইনস্টলেশনের জন্য প্রস্তুত',
             ],
 
-            'start'                     => [
+            'start' => [
                 'locale'        => 'লোকেল',
                 'main'          => 'শুরু',
                 'select-locale' => 'লোকেল নির্বাচন করুন',
@@ -401,7 +401,7 @@ return [
                 'welcome-title' => 'Bagisto 2.0-এ আপনাকে স্বাগতম।',
             ],
 
-            'server-requirements'       => [
+            'server-requirements' => [
                 'calendar'    => 'ক্যালেন্ডার',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
@@ -424,37 +424,35 @@ return [
                 'xml'         => 'XML',
             ],
 
-            'arabic'                    => 'আরবি',
-            'back'                      => 'পিছনে',
-            'bagisto-info'              => 'একটি সম্প্রদায়িক প্রকল্প দ্বারা',
-            'bagisto-logo'              => 'বাগিস্তো লোগো',
-            'bagisto'                   => 'বাগিস্তো',
-            'bengali'                   => 'বাংলা',
-            'chinese'                   => 'চীনা',
-            'continue'                  => 'চালিয়ে যান',
-            'dutch'                     => 'ডাচ',
-            'english'                   => 'ইংরেজি',
-            'french'                    => 'ফরাসি',
-            'german'                    => 'জার্মান',
-            'hebrew'                    => 'হিব্রু',
-            'hindi'                     => 'হিন্দি',
-            'installation-description'  => 'বাগিস্তো ইনস্টলেশন সাধারণত একাধিক পদক্ষেপ শামিল করে। বাগিস্তোর ইনস্টলেশন প্রক্রিয়ার জন্য এটি সাধারণ বর্ণনা:',
-            'installation-info'         => 'আমরা আপনাকে এখানে দেখা দেখার খুশি!',
-            'installation-title'        => 'ইনস্টলেশনে আপনাকে স্বাগতম',
-            'italian'                   => 'ইটালিয়ান',
-            'japanese'                  => 'জাপানি',
-            'persian'                   => 'পার্সি',
-            'polish'                    => 'পোলিশ',
-            'portuguese'                => 'পর্তুগিজ',
-            'russian'                   => 'রুশ',
-            'save-configuration'        => 'কনফিগারেশন সংরক্ষণ করুন',
-            'sinhala'                   => 'সিংহলি',
-            'skip'                      => 'পার্থক্য',
-            'spanish'                   => 'স্পেনীয়',
-            'title'                     => 'বাগিস্তো ইনস্টলার',
-            'turkish'                   => 'তুর্কি',
-            'ukrainian'                 => 'ইউক্রেনীয়',
-            'webkul'                    => 'ওয়েবকুল',
+            'arabic'                   => 'আরবি',
+            'back'                     => 'পিছনে',
+            'bagisto-info'             => 'একটি সম্প্রদায়িক প্রকল্প দ্বারা',
+            'bagisto-logo'             => 'বাগিস্তো লোগো',
+            'bagisto'                  => 'বাগিস্তো',
+            'bengali'                  => 'বাংলা',
+            'chinese'                  => 'চীনা',
+            'continue'                 => 'চালিয়ে যান',
+            'dutch'                    => 'ডাচ',
+            'english'                  => 'ইংরেজি',
+            'french'                   => 'ফরাসি',
+            'german'                   => 'জার্মান',
+            'hebrew'                   => 'হিব্রু',
+            'hindi'                    => 'হিন্দি',
+            'installation-description' => 'বাগিস্তো ইনস্টলেশন সাধারণত একাধিক পদক্ষেপ শামিল করে। বাগিস্তোর ইনস্টলেশন প্রক্রিয়ার জন্য এটি সাধারণ বর্ণনা:',
+            'installation-info'        => 'আমরা আপনাকে এখানে দেখা দেখার খুশি!',
+            'installation-title'       => 'ইনস্টলেশনে আপনাকে স্বাগতম',
+            'italian'                  => 'ইটালিয়ান',
+            'japanese'                 => 'জাপানি',
+            'persian'                  => 'পার্সি',
+            'polish'                   => 'পোলিশ',
+            'portuguese'               => 'পর্তুগিজ',
+            'russian'                  => 'রুশ',
+            'sinhala'                  => 'সিংহলি',
+            'spanish'                  => 'স্পেনীয়',
+            'title'                    => 'বাগিস্তো ইনস্টলার',
+            'turkish'                  => 'তুর্কি',
+            'ukrainian'                => 'ইউক্রেনীয়',
+            'webkul'                   => 'ওয়েবকুল',
         ],
     ],
 ];

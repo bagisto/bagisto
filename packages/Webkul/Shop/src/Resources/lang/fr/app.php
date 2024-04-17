@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Votre commande a été annulée',
                     'page-title'         => 'Commande #:order_id',
                     'payment-method'     => 'Mode de paiement',
+                    'reorder-btn-title'  => 'Réorganiser',
                     'shipping-address'   => 'Adresse de livraison',
                     'shipping-method'    => 'Mode de livraison',
                     'title'              => 'Voir',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Recherchez des produits ici',
                 'sign-in'           => 'Se connecter',
                 'sign-up'           => 'S\'inscrire',
+                'submit'            => 'Soumettre',
                 'title'             => 'Compte',
                 'welcome'           => 'Bienvenue',
                 'welcome-guest'     => 'Bienvenue, invité',
                 'wishlist'          => 'Liste de souhaits',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Langue par défaut',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuer vers la caisse',
             'illegal'                   => 'La quantité ne peut pas être inférieure à un.',
+            'inactive-add'              => 'L\'article inactif ne peut pas être ajouté au panier.',
             'inactive'                  => 'L\'article a été désactivé et retiré du panier.',
             'inventory-warning'         => 'La quantité demandée n\'est pas disponible, veuillez réessayer ultérieurement.',
             'item-add-to-cart'          => 'Article ajouté avec succès',
@@ -756,11 +765,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Laissez-nous une note et nous vous répondrons dès que possible',
+            'desc'          => 'Qu\'est-ce qui vous préoccupe ?',
+            'describe-here' => 'Décrivez ici',
+            'email'         => 'E-mail',
+            'message'       => 'Message',
+            'name'          => 'Nom',
+            'phone-number'  => 'Numéro de téléphone',
+            'submit'        => 'Envoyer',
+            'title'         => 'Contactez-nous',
+        ],
+
         'index' => [
-            'offer'               => 'Bénéficiez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
+            'offer'               => 'Profitez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
             'resend-verify-email' => 'Renvoyer l\'e-mail de vérification',
             'verify-email'        => 'Vérifiez votre adresse e-mail',
         ],
+
+        'thanks-for-contact' => 'Merci de nous contacter avec vos commentaires et questions. Nous vous répondrons très bientôt.',
     ],
 
     'partials' => [
@@ -860,6 +883,14 @@ return [
                 'subject'     => 'Vous êtes abonné à notre newsletter',
                 'unsubscribe' => 'Se désabonner',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via Formulaire de contact du site',
+            'reply-to-mail'   => 'veuillez répondre à cet e-mail.',
+            'reach-via-phone' => 'Alternativement, vous pouvez nous joindre par téléphone au',
+            'inquiry-from'    => 'Demande de',
+            'to'              => 'Pour contacter',
         ],
 
         'orders' => [

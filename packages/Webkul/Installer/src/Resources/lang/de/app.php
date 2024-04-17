@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'seeders'   => [
+    'seeders' => [
         'attribute' => [
             'attribute-families' => [
                 'default' => 'Standard',
             ],
 
-            'attribute-groups'   => [
-                'description'       => 'Beschreibung',
-                'general'           => 'Allgemein',
-                'inventories'       => 'Bestände',
-                'meta-description'  => 'Meta-Beschreibung',
-                'price'             => 'Preis',
-                'settings'          => 'Einstellungen',
-                'shipping'          => 'Versand',
+            'attribute-groups' => [
+                'description'      => 'Beschreibung',
+                'general'          => 'Allgemein',
+                'inventories'      => 'Bestände',
+                'meta-description' => 'Meta-Beschreibung',
+                'price'            => 'Preis',
+                'settings'         => 'Einstellungen',
+                'shipping'         => 'Versand',
             ],
 
-            'attributes'         => [
+            'attributes' => [
                 'brand'                => 'Marke',
                 'color'                => 'Farbe',
                 'cost'                 => 'Kosten',
@@ -37,9 +37,9 @@ return [
                 'short-description'    => 'Kurzbeschreibung',
                 'size'                 => 'Größe',
                 'sku'                  => 'Artikelnummer (SKU)',
+                'special-price'        => 'Sonderpreis',
                 'special-price-from'   => 'Sonderpreis Von',
                 'special-price-to'     => 'Sonderpreis Bis',
-                'special-price'        => 'Sonderpreis',
                 'status'               => 'Status',
                 'tax-category'         => 'Steuerkategorie',
                 'url-key'              => 'URL-Schlüssel',
@@ -61,21 +61,21 @@ return [
             ],
         ],
 
-        'category'  => [
+        'category' => [
             'categories' => [
                 'description' => 'Beschreibung der Wurzelkategorie',
                 'name'        => 'Wurzel',
             ],
         ],
 
-        'cms'       => [
+        'cms' => [
             'pages' => [
-                'about-us'         => [
+                'about-us' => [
                     'content' => 'Über uns Seitensinhalt',
                     'title'   => 'Über uns',
                 ],
 
-                'contact-us'       => [
+                'contact-us' => [
                     'content' => 'Kontaktiere uns Seitensinhalt',
                     'title'   => 'Kontaktiere uns',
                 ],
@@ -85,27 +85,27 @@ return [
                     'title'   => 'Kundenservice',
                 ],
 
-                'payment-policy'   => [
+                'payment-policy' => [
                     'content' => 'Zahlungsrichtlinie Seitensinhalt',
                     'title'   => 'Zahlungsrichtlinie',
                 ],
 
-                'privacy-policy'   => [
+                'privacy-policy' => [
                     'content' => 'Datenschutzrichtlinie Seitensinhalt',
                     'title'   => 'Datenschutzrichtlinie',
                 ],
 
-                'refund-policy'    => [
+                'refund-policy' => [
                     'content' => 'Rückgaberecht Seitensinhalt',
                     'title'   => 'Rückgaberecht',
                 ],
 
-                'return-policy'    => [
+                'return-policy' => [
                     'content' => 'Rückgaberecht Seitensinhalt',
                     'title'   => 'Rückgaberecht',
                 ],
 
-                'shipping-policy'  => [
+                'shipping-policy' => [
                     'content' => 'Versandrichtlinie Seitensinhalt',
                     'title'   => 'Versandrichtlinie',
                 ],
@@ -115,22 +115,25 @@ return [
                     'title'   => 'Nutzungsbedingungen',
                 ],
 
-                'terms-of-use'     => [
+                'terms-of-use' => [
                     'content' => 'Nutzungsbedingungen Seitensinhalt',
                     'title'   => 'Nutzungsbedingungen',
                 ],
 
-                'whats-new'        => [
+                'whats-new' => [
                     'content' => 'Inhaltsseite für Neuigkeiten',
                     'title'   => 'Was gibt es Neues',
                 ],
             ],
         ],
 
-        'core'      => [
-            'channels'   => [
-                'meta-description' => 'Demo-Shop Meta-Beschreibung',
+        'core' => [
+            'channels' => [
+                'name'             => 'Standard',
+                'meta-title'       => 'Demo-Shop',
                 'meta-keywords'    => 'Demo-Shop Meta-Stichwörter',
+                'meta-description' => 'Demo-Shop Meta-Beschreibung',
+                'meta-keywords'    => 'Demo-Shop Meta-Schlüsselwörter',
                 'meta-title'       => 'Demo-Shop',
                 'name'             => 'Standard',
             ],
@@ -139,7 +142,7 @@ return [
                 'AED' => 'Dirham',
                 'AFN' => 'Israelischer Schekel',
                 'CNY' => 'Chinesischer Yuan',
-                'EUR' => 'EURO',
+                'EUR' => 'Euro',
                 'GBP' => 'Pfund Sterling',
                 'INR' => 'Indische Rupie',
                 'IRR' => 'Iranischer Rial',
@@ -151,9 +154,9 @@ return [
                 'USD' => 'US-Dollar',
             ],
 
-            'locales'    => [
+            'locales' => [
                 'ar'    => 'Arabisch',
-                'bn'    => 'Bengali',
+                'bn'    => 'Bengalisch',
                 'de'    => 'Deutsch',
                 'en'    => 'Englisch',
                 'es'    => 'Spanisch',
@@ -174,7 +177,7 @@ return [
             ],
         ],
 
-        'customer'  => [
+        'customer' => [
             'customer-groups' => [
                 'general'   => 'Allgemein',
                 'guest'     => 'Gast',
@@ -188,32 +191,32 @@ return [
             ],
         ],
 
-        'shop'      => [
+        'shop' => [
             'theme-customizations' => [
-                'all-products'           => [
-                    'name'    => 'Alle Produkte',
+                'all-products' => [
+                    'name' => 'Alle Produkte',
 
                     'options' => [
                         'title' => 'Alle Produkte',
                     ],
                 ],
 
-                'bold-collections'       => [
+                'bold-collections' => [
                     'content' => [
                         'btn-title'   => 'Alle anzeigen',
                         'description' => 'Einführung unserer neuen fetten Kollektionen! Heben Sie Ihren Stil mit gewagten Designs und lebhaften Statements hervor. Erkunden Sie auffällige Muster und kräftige Farben, die Ihre Garderobe neu definieren. Machen Sie sich bereit, das Außergewöhnliche zu umarmen!',
                         'title'       => 'Machen Sie sich bereit für unsere neuen fetten Kollektionen!',
                     ],
 
-                    'name'    => 'Fette Kollektionen',
+                    'name' => 'Fette Kollektionen',
                 ],
 
                 'categories-collections' => [
                     'name' => 'Kategorienkollektionen',
                 ],
 
-                'footer-links'           => [
-                    'name'    => 'Fußzeilenlinks',
+                'footer-links' => [
+                    'name' => 'Fußzeilenlinks',
 
                     'options' => [
                         'about-us'         => 'Über uns',
@@ -221,7 +224,7 @@ return [
                         'customer-service' => 'Kundenservice',
                         'payment-policy'   => 'Zahlungsrichtlinie',
                         'privacy-policy'   => 'Datenschutzrichtlinie',
-                        'refund-policy'    => 'Erstattungsrichtlinie',
+                        'refund-policy'    => 'Rückgaberichtlinie',
                         'return-policy'    => 'Rückgaberichtlinie',
                         'shipping-policy'  => 'Versandrichtlinie',
                         'terms-conditions' => 'Allgemeine Geschäftsbedingungen',
@@ -230,49 +233,49 @@ return [
                     ],
                 ],
 
-                'featured-collections'   => [
-                    'name'    => 'Hervorgehobene Kollektionen',
+                'featured-collections' => [
+                    'name' => 'Hervorgehobene Kollektionen',
 
                     'options' => [
                         'title' => 'Hervorgehobene Produkte',
                     ],
                 ],
 
-                'game-container'         => [
+                'game-container' => [
                     'content' => [
                         'sub-title-1' => 'Unsere Kollektionen',
                         'sub-title-2' => 'Unsere Kollektionen',
                         'title'       => 'Das Spiel mit unseren neuen Ergänzungen!',
                     ],
 
-                    'name'    => 'Spielercontainer',
+                    'name' => 'Spielercontainer',
                 ],
 
-                'image-carousel'         => [
-                    'name'    => 'Bildkarussell',
+                'image-carousel' => [
+                    'name' => 'Bildkarussell',
 
                     'sliders' => [
                         'title' => 'Bereit für die neue Kollektion',
                     ],
                 ],
 
-                'new-products'           => [
-                    'name'    => 'Neue Produkte',
+                'new-products' => [
+                    'name' => 'Neue Produkte',
 
                     'options' => [
                         'title' => 'Neue Produkte',
                     ],
                 ],
 
-                'offer-information'      => [
+                'offer-information' => [
                     'content' => [
                         'title' => 'Bis zu 40% Rabatt auf Ihre erste Bestellung JETZT KAUFEN',
                     ],
 
-                    'name'    => 'Angebotsinformation',
+                    'name' => 'Angebotsinformation',
                 ],
 
-                'services-content'       => [
+                'services-content' => [
                     'description' => [
                         'emi-available-info'   => 'Keine Kosten EMI verfügbar auf allen gängigen Kreditkarten',
                         'free-shipping-info'   => 'Kostenloser Versand für alle Bestellungen',
@@ -280,9 +283,9 @@ return [
                         'time-support-info'    => 'Dedizierte 24/7 Unterstützung über Chat und E-Mail',
                     ],
 
-                    'name'        => 'Services Content',
+                    'name' => 'Services Content',
 
-                    'title'       => [
+                    'title' => [
                         'emi-available'   => 'EMI verfügbar',
                         'free-shipping'   => 'Kostenloser Versand',
                         'product-replace' => 'Produkt austauschen',
@@ -290,7 +293,7 @@ return [
                     ],
                 ],
 
-                'top-collections'        => [
+                'top-collections' => [
                     'content' => [
                         'sub-title-1' => 'Unsere Kollektionen',
                         'sub-title-2' => 'Unsere Kollektionen',
@@ -301,12 +304,12 @@ return [
                         'title'       => 'Das Spiel mit unseren neuen Ergänzungen!',
                     ],
 
-                    'name'    => 'Top-Kollektionen',
+                    'name' => 'Top-Kollektionen',
                 ],
             ],
         ],
 
-        'user'      => [
+        'user' => [
             'roles' => [
                 'description' => 'Benutzer mit dieser Rolle haben vollen Zugriff.',
                 'name'        => 'Administrator',
@@ -320,12 +323,12 @@ return [
 
     'installer' => [
         'index' => [
-            'create-administrator'      => [
+            'create-administrator' => [
                 'admin'            => 'Administrator',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Passwort bestätigen',
-                'email-address'    => 'admin@example.com',
                 'email'            => 'E-Mail',
+                'email-address'    => 'admin@example.com',
                 'password'         => 'Passwort',
                 'title'            => 'Administrator erstellen',
             ],
@@ -346,8 +349,8 @@ return [
                 'default-currency'    => 'Standardwährung',
                 'default-locale'      => 'Standard-Sprachumgebung',
                 'default-timezone'    => 'Standard-Zeitzone',
-                'default-url-link'    => 'https://localhost',
                 'default-url'         => 'Standard-URL',
+                'default-url-link'    => 'https://localhost',
                 'dirham'              => 'Dirham (AED)',
                 'euro'                => 'Euro (EUR)',
                 'iranian'             => 'Iranischer Rial (IRR)',
@@ -359,8 +362,8 @@ return [
                 'rupee'               => 'Indische Rupie (INR)',
                 'russian-ruble'       => 'Russischer Rubel (RUB)',
                 'saudi'               => 'Saudi-Riyal (SAR)',
-                'sqlsrv'              => 'SQLSRV',
                 'select-timezone'     => 'Wähle Zeitzone aus',
+                'sqlsrv'              => 'SQLSRV',
                 'title'               => 'Umgebungskonfiguration',
                 'turkish-lira'        => 'Türkische Lira (TRY)',
                 'ukrainian-hryvnia'   => 'Ukrainische Hrywnja (UAH)',
@@ -368,32 +371,32 @@ return [
                 'warning-message'     => 'Vorsicht! Die Einstellungen für Ihre Standardsystemsprachen sowie die Standardsystemwährung sind dauerhaft und können niemals wieder geändert werden.',
             ],
 
-            'installation-completed'    => [
+            'installation-completed' => [
                 'admin-panel'                => 'Admin-Panel',
                 'bagisto-forums'             => 'Bagisto Forum',
                 'customer-panel'             => 'Kundenpanel',
                 'explore-bagisto-extensions' => 'Erkunden Sie Bagisto-Erweiterungen',
-                'title-info'                 => 'Bagisto wurde erfolgreich auf Ihrem System installiert.',
                 'title'                      => 'Installation abgeschlossen',
+                'title-info'                 => 'Bagisto wurde erfolgreich auf Ihrem System installiert.',
             ],
 
-            'installation-processing'   => [
+            'installation-processing' => [
+                'title'            => 'Installation',
                 'bagisto-info'     => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
                 'bagisto'          => 'Installation Bagisto',
-                'title'            => 'Installation',
             ],
 
-            'ready-for-installation'    => [
+            'ready-for-installation' => [
                 'create-databsae-table'   => 'Datenbanktabelle erstellen',
-                'install-info-button'     => 'Klicke auf die Schaltfläche unten, um',
-                'install-info'            => 'Bagisto zur Installation',
                 'install'                 => 'Installation',
+                'install-info'            => 'Bagisto zur Installation',
+                'install-info-button'     => 'Klicke auf die Schaltfläche unten, um',
                 'populate-database-table' => 'Datenbanktabellen füllen',
                 'start-installation'      => 'Installation starten',
                 'title'                   => 'Bereit zur Installation',
             ],
 
-            'start'                     => [
+            'start' => [
                 'locale'        => 'Lokale',
                 'main'          => 'Start',
                 'select-locale' => 'Wähle Lokale',
@@ -401,7 +404,7 @@ return [
                 'welcome-title' => 'Willkommen bei Bagisto 2.0.',
             ],
 
-            'server-requirements'       => [
+            'server-requirements' => [
                 'calendar'    => 'Kalender',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
@@ -416,45 +419,43 @@ return [
                 'openssl'     => 'openssl',
                 'pcre'        => 'pcre',
                 'pdo'         => 'pdo',
-                'php-version' => '8.1 oder höher',
                 'php'         => 'PHP',
+                'php-version' => '8.1 oder höher',
                 'session'     => 'Sitzung',
                 'title'       => 'Serveranforderungen',
                 'tokenizer'   => 'Tokenizer',
                 'xml'         => 'XML',
             ],
 
-            'arabic'                    => 'Arabisch',
-            'back'                      => 'Zurück',
-            'bagisto-info'              => 'Ein Gemeinschaftsprojekt von',
-            'bagisto-logo'              => 'Bagisto Logo',
-            'bagisto'                   => 'Bagisto',
-            'bengali'                   => 'Bengalisch',
-            'chinese'                   => 'Chinesisch',
-            'continue'                  => 'Weiter',
-            'dutch'                     => 'Niederländisch',
-            'english'                   => 'Englisch',
-            'french'                    => 'Französisch',
-            'german'                    => 'Deutsch',
-            'hebrew'                    => 'Hebräisch',
-            'hindi'                     => 'Hindi',
-            'installation-description'  => 'Die Installation von Bagisto umfasst in der Regel mehrere Schritte. Hier ist ein grober Überblick über den Installationsprozess für Bagisto:',
-            'installation-info'         => 'Wir freuen uns, Sie hier zu sehen!',
-            'installation-title'        => 'Willkommen zur Installation',
-            'italian'                   => 'Italienisch',
-            'japanese'                  => 'Japanisch',
-            'persian'                   => 'Persisch',
-            'polish'                    => 'Polnisch',
-            'portuguese'                => 'Brasilianisches Portugiesisch',
-            'russian'                   => 'Russisch',
-            'save-configuration'        => 'Konfiguration speichern',
-            'sinhala'                   => 'Singhalesisch',
-            'skip'                      => 'Überspringen',
-            'spanish'                   => 'Spanisch',
-            'title'                     => 'Bagisto Installer',
-            'turkish'                   => 'Türkisch',
-            'ukrainian'                 => 'Ukrainisch',
-            'webkul'                    => 'Webkul',
+            'arabic'                   => 'Arabisch',
+            'back'                     => 'Zurück',
+            'bagisto'                  => 'Bagisto',
+            'bagisto-info'             => 'Ein Gemeinschaftsprojekt von',
+            'bagisto-logo'             => 'Bagisto Logo',
+            'bengali'                  => 'Bengalisch',
+            'chinese'                  => 'Chinesisch',
+            'continue'                 => 'Weiter',
+            'dutch'                    => 'Niederländisch',
+            'english'                  => 'Englisch',
+            'french'                   => 'Französisch',
+            'german'                   => 'Deutsch',
+            'hebrew'                   => 'Hebräisch',
+            'hindi'                    => 'Hindi',
+            'installation-description' => 'Die Installation von Bagisto umfasst in der Regel mehrere Schritte. Hier ist ein grober Überblick über den Installationsprozess für Bagisto:',
+            'installation-info'        => 'Wir freuen uns, Sie hier zu sehen!',
+            'installation-title'       => 'Willkommen zur Installation',
+            'italian'                  => 'Italienisch',
+            'japanese'                 => 'Japanisch',
+            'persian'                  => 'Persisch',
+            'polish'                   => 'Polnisch',
+            'portuguese'               => 'Brasilianisches Portugiesisch',
+            'russian'                  => 'Russisch',
+            'sinhala'                  => 'Singhalesisch',
+            'spanish'                  => 'Spanisch',
+            'title'                    => 'Bagisto Installer',
+            'turkish'                  => 'Türkisch',
+            'ukrainian'                => 'Ukrainisch',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

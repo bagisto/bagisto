@@ -38,17 +38,18 @@
                 
                             @if (! $reviews->isEmpty())
                                 <!-- Review Information -->
-                                <div class="grid gap-5 mt-14 max-1060:grid-cols-[1fr]">
+                                <div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr]">
                                     @foreach($reviews as $review)
                                         <a
                                             href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
                                             id="{{ $review->product_id }}"
+                                            aria-label="{{ $review->title }}"
                                         >
-                                            <div class="flex gap-5 p-6 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
+                                            <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:flex-wrap">
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
 
                                                 <x-shop::media.images.lazy
-                                                    class="max-w-[128px] max-h-[146px] min-w-[128px] w-[128px] h-[146px] rounded-xl" 
+                                                    class="h-[146px] max-h-[146px] w-[128px] min-w-[128px] max-w-[128px] rounded-xl" 
                                                     src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
                                                     alt="Review Image"                   
                                                 />
@@ -67,7 +68,7 @@
                 
                                                         {!! view_render_event('bagisto.shop.customers.account.reviews.rating.before', ['reviews' => $reviews]) !!}
 
-                                                        <div class="flex gap-0.5 items-center">
+                                                        <div class="flex items-center gap-0.5">
                                                             @for ($i = 1; $i <= 5; $i++)
                                                                 <span class="icon-star-fill text-2xl {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-[#6E6E6E]' }}"></span>
                                                             @endfor
@@ -101,7 +102,7 @@
                                 </div>
                             @else
                                 <!-- Review Empty Page -->
-                                <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
+                                <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
                                     <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
                 
                                     <p class="text-xl">

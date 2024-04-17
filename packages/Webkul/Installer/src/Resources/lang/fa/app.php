@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'seeders'   => [
+    'seeders' => [
         'attribute' => [
             'attribute-families' => [
                 'default' => 'پیش‌فرض',
             ],
 
-            'attribute-groups'   => [
-                'description'       => 'توضیحات',
-                'general'           => 'عمومی',
-                'inventories'       => 'موجودی‌ها',
-                'meta-description'  => 'توضیحات متا',
-                'price'             => 'قیمت',
-                'settings'          => 'تنظیمات',
-                'shipping'          => 'حمل و نقل',
+            'attribute-groups' => [
+                'description'      => 'توضیحات',
+                'general'          => 'عمومی',
+                'inventories'      => 'موجودی‌ها',
+                'meta-description' => 'توضیحات متا',
+                'price'            => 'قیمت',
+                'settings'         => 'تنظیمات',
+                'shipping'         => 'حمل و نقل',
             ],
 
-            'attributes'         => [
+            'attributes' => [
                 'brand'                => 'برند',
                 'color'                => 'رنگ',
                 'cost'                 => 'هزینه',
@@ -37,9 +37,9 @@ return [
                 'short-description'    => 'توضیح کوتاه',
                 'size'                 => 'اندازه',
                 'sku'                  => 'SKU',
+                'special-price'        => 'قیمت ویژه',
                 'special-price-from'   => 'قیمت ویژه از',
                 'special-price-to'     => 'قیمت ویژه تا',
-                'special-price'        => 'قیمت ویژه',
                 'status'               => 'وضعیت',
                 'tax-category'         => 'دسته مالیاتی',
                 'url-key'              => 'کلید URL',
@@ -48,7 +48,7 @@ return [
                 'width'                => 'عرض',
             ],
 
-            'attribute-options'  => [
+            'attribute-options' => [
                 'black'  => 'سیاه',
                 'green'  => 'سبز',
                 'l'      => 'L',
@@ -61,21 +61,21 @@ return [
             ],
         ],
 
-        'category'  => [
+        'category' => [
             'categories' => [
                 'description' => 'توضیح دسته اصلی',
                 'name'        => 'اصلی',
             ],
         ],
 
-        'cms'       => [
+        'cms' => [
             'pages' => [
-                'about-us'         => [
+                'about-us' => [
                     'content' => 'محتوای درباره ما',
                     'title'   => 'درباره ما',
                 ],
 
-                'contact-us'       => [
+                'contact-us' => [
                     'content' => 'محتوای تماس با ما',
                     'title'   => 'تماس با ما',
                 ],
@@ -85,27 +85,27 @@ return [
                     'title'   => 'خدمات مشتری',
                 ],
 
-                'payment-policy'   => [
+                'payment-policy' => [
                     'content' => 'محتوای سیاست پرداخت',
                     'title'   => 'سیاست پرداخت',
                 ],
 
-                'privacy-policy'   => [
+                'privacy-policy' => [
                     'content' => 'محتوای سیاست حفظ حریم خصوصی',
                     'title'   => 'سیاست حفظ حریم خصوصی',
                 ],
 
-                'refund-policy'    => [
+                'refund-policy' => [
                     'content' => 'محتوای سیاست بازپرداخت',
                     'title'   => 'سیاست بازپرداخت',
                 ],
 
-                'return-policy'    => [
+                'return-policy' => [
                     'content' => 'محتوای سیاست بازگشت',
                     'title'   => 'سیاست بازگشت',
                 ],
 
-                'shipping-policy'  => [
+                'shipping-policy' => [
                     'content' => 'محتوای سیاست حمل و نقل',
                     'title'   => 'سیاست حمل و نقل',
                 ],
@@ -115,24 +115,24 @@ return [
                     'title'   => 'شرایط و مقررات',
                 ],
 
-                'terms-of-use'     => [
+                'terms-of-use' => [
                     'content' => 'محتوای شرایط استفاده',
                     'title'   => 'شرایط استفاده',
                 ],
 
-                'whats-new'        => [
+                'whats-new' => [
                     'content' => 'محتوای جدید چیست',
                     'title'   => 'جدید چیست',
                 ],
             ],
         ],
 
-        'core'      => [
+        'core' => [
             'channels' => [
-                'meta-description' => 'فروشگاه نمونه توضیحات متا',
-                'meta-keywords'    => 'فروشگاه نمونه کلمات کلیدی متا',
-                'meta-title'       => 'فروشگاه نمونه',
                 'name'             => 'پیش‌فرض',
+                'meta-title'       => 'فروشگاه نمونه',
+                'meta-keywords'    => 'فروشگاه نمونه کلمات کلیدی متا',
+                'meta-description' => 'فروشگاه نمونه توضیحات متا',
             ],
 
             'currencies' => [
@@ -174,7 +174,7 @@ return [
             ],
         ],
 
-        'customer'  => [
+        'customer' => [
             'customer-groups' => [
                 'general'   => 'عمومی',
                 'guest'     => 'مهمان',
@@ -188,24 +188,24 @@ return [
             ],
         ],
 
-        'shop'      => [
+        'shop' => [
             'theme-customizations' => [
-                'all-products'           => [
-                    'name'    => 'همه محصولات',
+                'all-products' => [
+                    'name' => 'همه محصولات',
 
                     'options' => [
                         'title' => 'همه محصولات',
                     ],
                 ],
 
-                'bold-collections'       => [
+                'bold-collections' => [
                     'content' => [
                         'btn-title'   => 'مشاهده همه',
                         'description' => 'معرفی مجموعه‌های جسور جدید ما! سبک خود را با طراحی‌های جسور و اظهارات جذاب بالا ببرید. الگوها و رنگ‌های جسوری را کشف کنید که لباس‌درمانی‌تان را بازتعریف می‌کنند. برای پذیرش بی‌نظیری آماده شوید!',
                         'title'       => 'برای مجموعه‌های جسور جدیدمان آماده شوید!',
                     ],
 
-                    'name'    => 'مجموعه‌های جسور',
+                    'name' => 'مجموعه‌های جسور',
                 ],
 
                 'categories-collections' => [
@@ -213,7 +213,7 @@ return [
                 ],
 
                 'footer-links'           => [
-                    'name'    => 'پیوندهای فوتر',
+                    'name' => 'پیوندهای فوتر',
 
                     'options' => [
                         'about-us'         => 'درباره ما',
@@ -230,16 +230,16 @@ return [
                     ],
                 ],
 
-                'featured-collections'   => [
-                    'name'    => 'مجموعه‌های ویژه',
+                'featured-collections' => [
+                    'name' => 'مجموعه‌های ویژه',
 
                     'options' => [
                         'title' => 'محصولات ویژه',
                     ],
                 ],
 
-                'game-container'         => [
-                    'name'    => 'ظروف بازی',
+                'game-container' => [
+                    'name' => 'ظروف بازی',
 
                     'content' => [
                         'sub-title-1' => 'مجموعه‌های ما',
@@ -248,31 +248,31 @@ return [
                     ],
                 ],
 
-                'image-carousel'         => [
-                    'name'    => 'اسلایدر تصاویر',
+                'image-carousel' => [
+                    'name' => 'اسلایدر تصاویر',
 
                     'sliders' => [
                         'title' => 'آماده‌اید برای مجموعه جدید',
                     ],
                 ],
 
-                'new-products'           => [
-                    'name'    => 'محصولات جدید',
+                'new-products' => [
+                    'name' => 'محصولات جدید',
 
                     'options' => [
                         'title' => 'محصولات جدید',
                     ],
                 ],
 
-                'offer-information'      => [
+                'offer-information' => [
                     'content' => [
                         'title' => 'تا 40٪ تخفیف در سفارش اولتان، همین الان سفارش دهید',
                     ],
 
-                    'name'    => 'اطلاعات پیشنهاد',
+                    'name' => 'اطلاعات پیشنهاد',
                 ],
 
-                'services-content'       => [
+                'services-content' => [
                     'description' => [
                         'emi-available-info'   => 'EMI بدون هزینه در تمام کارت‌های اعتباری اصلی در دسترس است',
                         'free-shipping-info'   => 'از ارسال رایگان در تمام سفارش‌ها لذت ببرید',
@@ -280,7 +280,7 @@ return [
                         'time-support-info'    => 'پشتیبانی اختصاصی 24/7 از طریق چت و ایمیل',
                     ],
 
-                    'name'  => 'محتوای خدمات',
+                    'name' => 'محتوای خدمات',
 
                     'title' => [
                         'emi-available'   => 'EMI در دسترس است',
@@ -290,7 +290,7 @@ return [
                     ],
                 ],
 
-                'top-collections'        => [
+                'top-collections' => [
                     'content' => [
                         'sub-title-1' => 'مجموعه‌های ما',
                         'sub-title-2' => 'مجموعه‌های ما',
@@ -301,12 +301,12 @@ return [
                         'title'       => 'با افزودن‌های جدیدمان بازی کنید!',
                     ],
 
-                    'name'    => 'مجموعه‌های برتر',
+                    'name' => 'مجموعه‌های برتر',
                 ],
             ],
         ],
 
-        'user'      => [
+        'user' => [
             'roles' => [
                 'description' => 'این نقش دسترسی‌هایی را برای کاربران فراهم می‌کند',
                 'name'        => 'مدیر سیستم',
@@ -320,12 +320,12 @@ return [
 
     'installer' => [
         'index' => [
-            'create-administrator'      => [
+            'create-administrator' => [
                 'admin'            => 'مدیر',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'تایید رمز عبور',
-                'email-address'    => 'admin@example.com',
                 'email'            => 'ایمیل',
+                'email-address'    => 'admin@example.com',
                 'password'         => 'رمز عبور',
                 'title'            => 'ایجاد مدیر',
             ],
@@ -346,8 +346,8 @@ return [
                 'default-currency'    => 'واحد پول پیش‌فرض',
                 'default-locale'      => 'زبان پیش‌فرض',
                 'default-timezone'    => 'منطقه زمانی پیش‌فرض',
-                'default-url-link'    => 'https://localhost',
                 'default-url'         => 'آدرس پیش‌فرض',
+                'default-url-link'    => 'https://localhost',
                 'dirham'              => 'درهم (AED)',
                 'euro'                => 'یورو (EUR)',
                 'iranian'             => 'ریال ایرانی (IRR)',
@@ -368,32 +368,32 @@ return [
                 'warning-message'     => 'هشدار! تنظیمات زبان‌های سیستمی پیش‌فرض و ارز پیش‌فرض شما دائمی است و هرگز دیگر قابل تغییر نیست.',
             ],
 
-            'installation-processing'   => [
-                'bagisto-info'     => 'ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
+            'installation-processing' => [
                 'bagisto'          => 'نصب Bagisto',
+                'bagisto-info'     => 'ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
                 'title'            => 'نصب',
             ],
 
-            'installation-completed'    => [
+            'installation-completed' => [
                 'admin-panel'                => 'پنل مدیریت',
                 'bagisto-forums'             => 'انجمن Bagisto',
                 'customer-panel'             => 'پنل مشتریان',
                 'explore-bagisto-extensions' => 'کاوش در افزونه‌های Bagisto',
-                'title-info'                 => 'Bagisto با موفقیت بر روی سیستم شما نصب شده است.',
                 'title'                      => 'نصب با موفقیت انجام شد',
+                'title-info'                 => 'Bagisto با موفقیت بر روی سیستم شما نصب شده است.',
             ],
 
-            'ready-for-installation'    => [
+            'ready-for-installation' => [
                 'create-database-table'   => 'ایجاد جدول پایگاه‌داده',
-                'install-info-button'     => 'برای شروع کلیک کنید',
-                'install-info'            => 'Bagisto برای نصب',
                 'install'                 => 'نصب',
+                'install-info'            => 'Bagisto برای نصب',
+                'install-info-button'     => 'برای شروع کلیک کنید',
                 'populate-database-table' => 'پر کردن جدول‌های پایگاه‌داده',
                 'start-installation'      => 'شروع نصب',
                 'title'                   => 'آماده نصب',
             ],
 
-            'start'                     => [
+            'start' => [
                 'locale'        => 'محلی',
                 'main'          => 'شروع',
                 'select-locale' => 'انتخاب محلی',
@@ -401,7 +401,7 @@ return [
                 'welcome-title' => 'خوش آمدید به Bagisto 2.0.',
             ],
 
-            'server-requirements'       => [
+            'server-requirements' => [
                 'calendar'    => 'تقویم',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
@@ -416,45 +416,43 @@ return [
                 'openssl'     => 'OpenSSL',
                 'pcre'        => 'pcre',
                 'pdo'         => 'pdo',
-                'php-version' => '8.1 یا بالاتر',
                 'php'         => 'PHP',
+                'php-version' => '8.1 یا بالاتر',
                 'session'     => 'نشست',
                 'title'       => 'نیازمندی‌های سرور',
                 'tokenizer'   => 'Tokenizer',
                 'xml'         => 'XML',
             ],
 
-            'arabic'                    => 'عربی',
-            'bengali'                   => 'بنگالی',
-            'bagisto-logo'              => 'لوگوی Bagisto',
-            'back'                      => 'بازگشت',
-            'bagisto-info'              => 'یک پروژه جامعه‌ای توسط',
-            'bagisto'                   => 'Bagisto',
-            'chinese'                   => 'چینی',
-            'continue'                  => 'ادامه',
-            'dutch'                     => 'هلندی',
-            'english'                   => 'انگلیسی',
-            'french'                    => 'فرانسوی',
-            'german'                    => 'آلمانی',
-            'hebrew'                    => 'عبری',
-            'hindi'                     => 'هندی',
-            'installation-title'        => 'به نصب Bagisto خوش آمدید',
-            'installation-info'         => 'خوشحالیم که شما را اینجا می‌بینیم!',
-            'installation-description'  => 'نصب Bagisto به طور معمول شامل چندین مرحله است. در اینجا یک خلاصه عمومی از فرا یند نصب Bagisto آورده شده است:',
-            'italian'                   => 'ایتالیایی',
-            'japanese'                  => 'ژاپنی',
-            'persian'                   => 'فارسی',
-            'polish'                    => 'لهستانی',
-            'portuguese'                => 'پرتغالی برزیلی',
-            'russian'                   => 'روسی',
-            'spanish'                   => 'اسپانیایی',
-            'sinhala'                   => 'سینهالا',
-            'skip'                      => 'رد کردن',
-            'save-configuration'        => 'ذخیره تنظیمات',
-            'title'                     => 'نصب‌کننده Bagisto',
-            'turkish'                   => 'ترکی',
-            'ukrainian'                 => 'اوکراینی',
-            'webkul'                    => 'Webkul',
+            'arabic'                   => 'عربی',
+            'back'                     => 'بازگشت',
+            'bagisto'                  => 'Bagisto',
+            'bagisto-info'             => 'یک پروژه جامعه‌ای توسط',
+            'bagisto-logo'             => 'لوگوی Bagisto',
+            'bengali'                  => 'بنگالی',
+            'chinese'                  => 'چینی',
+            'continue'                 => 'ادامه',
+            'dutch'                    => 'هلندی',
+            'english'                  => 'انگلیسی',
+            'french'                   => 'فرانسوی',
+            'german'                   => 'آلمانی',
+            'hebrew'                   => 'عبری',
+            'hindi'                    => 'هندی',
+            'installation-description' => 'نصب Bagisto به طور معمول شامل چندین مرحله است. در اینجا یک خلاصه عمومی از فرا یند نصب Bagisto آورده شده است:',
+            'installation-info'        => 'خوشحالیم که شما را اینجا می‌بینیم!',
+            'installation-title'       => 'به نصب Bagisto خوش آمدید',
+            'italian'                  => 'ایتالیایی',
+            'japanese'                 => 'ژاپنی',
+            'persian'                  => 'فارسی',
+            'polish'                   => 'لهستانی',
+            'portuguese'               => 'پرتغالی برزیلی',
+            'russian'                  => 'روسی',
+            'sinhala'                  => 'سینهالا',
+            'spanish'                  => 'اسپانیایی',
+            'title'                    => 'نصب‌کننده Bagisto',
+            'turkish'                  => 'ترکی',
+            'ukrainian'                => 'اوکراینی',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

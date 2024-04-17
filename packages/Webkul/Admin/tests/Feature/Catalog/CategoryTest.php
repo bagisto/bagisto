@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
@@ -12,7 +13,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should show category page', function () {
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.categories.index'))
@@ -21,10 +22,10 @@ it('should show category page', function () {
 });
 
 it('should show category edit page', function () {
-    // Arrange
+    // Arrange.
     $category = (new CategoryFaker())->factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.categories.edit', $category->id))
@@ -33,10 +34,10 @@ it('should show category edit page', function () {
 });
 
 it('should return listing items of categories', function () {
-    // Arrange
+    // Arrange.
     $category = (new CategoryFaker())->factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.catalog.categories.index'), [
@@ -47,19 +48,65 @@ it('should return listing items of categories', function () {
         ->assertJsonPath('meta.total', 2);
 });
 
-it('should create a category', function () {
-    // Arrange
-    $attributes = Attribute::where('is_filterable', 1)->pluck('id')->toArray();
-
-    // Act & Assert
+it('should fail the validation with errors of logo path is not an array and image', function () {
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.store'), [
-        'slug'        => $slug = fake()->slug(),
-        'name'        => $name = fake()->name(),
+        'logo_path'   => fake()->word(),
+        'banner_path' => [UploadedFile::fake()->create('banner.jpg')],
+    ])
+        ->assertJsonValidationErrorFor('logo_path')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('position')
+        ->assertJsonValidationErrorFor('slug')
+        ->assertUnprocessable();
+});
+
+it('should fails the image validation error when provided tempered logo and banner', function () {
+    // Arrange.
+    $attributes = Attribute::where('is_filterable', 1)->pluck('id')->toArray();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.categories.store'), [
+        'slug'        => fake()->slug(),
+        'name'        => fake()->name(),
         'position'    => rand(1, 5),
-        'description' => $description = substr(fake()->paragraph(), 0, 50),
+        'description' => substr(fake()->paragraph(), 0, 50),
         'attributes'  => $attributes,
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo.php'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner.js'),
+        ],
+    ])
+        ->assertJsonValidationErrorFor('logo_path.0')
+        ->assertJsonValidationErrorFor('banner_path.0')
+        ->assertUnprocessable();
+});
+
+it('should create a category', function () {
+    // Arrange.
+    $attributes = Attribute::where('is_filterable', 1)->pluck('id')->toArray();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.categories.store'), $data = [
+        'slug'        => fake()->slug(),
+        'name'        => fake()->name(),
+        'position'    => rand(1, 5),
+        'description' => substr(fake()->paragraph(), 0, 50),
+        'attributes'  => $attributes,
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo.png'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner.png'),
+        ],
     ])
         ->assertRedirect(route('admin.catalog.categories.index'))
         ->isRedirection();
@@ -67,16 +114,16 @@ it('should create a category', function () {
     $this->assertModelWise([
         CategoryTranslation::class => [
             [
-                'slug'        => $slug,
-                'name'        => $name,
-                'description' => $description,
+                'slug'        => $data['slug'],
+                'name'        => $data['name'],
+                'description' => $data['description'],
             ],
         ],
     ]);
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in category', function () {
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.store'))
@@ -88,7 +135,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors of description if display mode products_and_description when store', function () {
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.store'), [
@@ -102,25 +149,8 @@ it('should fail the validation with errors of description if display mode produc
         ->assertUnprocessable();
 });
 
-it('should fail the validation with errors of logo_path and banner_path is not an array and image', function () {
-    // Act & Assert
-    $this->loginAsAdmin();
-
-    postJson(route('admin.catalog.categories.store'), [
-        'logo_path'   => fake()->word(),
-        'banner_path' => fake()->word(),
-    ])
-        ->assertJsonValidationErrorFor('attributes')
-        ->assertJsonValidationErrorFor('banner_path')
-        ->assertJsonValidationErrorFor('logo_path')
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('position')
-        ->assertJsonValidationErrorFor('slug')
-        ->assertUnprocessable();
-});
-
 it('should fail the validation with errors slug is already taken', function () {
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.store'), [
@@ -134,12 +164,12 @@ it('should fail the validation with errors slug is already taken', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in category', function () {
-    // Arrange
+    // Arrange.
     $category = (new CategoryFaker())->factory()->create();
 
     $localeCode = core()->getRequestedLocaleCode();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.categories.update', $category->id))
@@ -151,12 +181,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should fail the validation with errors when certain inputs are not provided and display mode products and description when update in category', function () {
-    // Arrange
+    // Arrange.
     $category = (new CategoryFaker())->factory()->create();
 
     $localeCode = core()->getRequestedLocaleCode();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.categories.update', $category->id), [
@@ -170,13 +200,13 @@ it('should fail the validation with errors when certain inputs are not provided 
         ->assertUnprocessable();
 });
 
-it('should update a category', function () {
-    // Arrange
+it('should fails the validation with certain provided inputs', function () {
+    // Arrange.
     $category = (new CategoryFaker())->factory()->create();
 
     $attributes = Attribute::where('is_filterable', 1)->pluck('id')->toArray();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.categories.update', $category->id), [
@@ -185,10 +215,45 @@ it('should update a category', function () {
             'slug'        => $category->slug,
             'description' => $description = substr(fake()->paragraph(), 0, 50),
         ],
+        'locale'      => config('app.locale'),
+        'attributes'  => $attributes,
+        'position'    => rand(1, 5),
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo.py'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner.js'),
+        ],
+    ])
+        ->assertJsonValidationErrorFor('logo_path.0')
+        ->assertJsonValidationErrorFor('banner_path.0')
+        ->assertUnprocessable();
+});
 
-        'locale'     => config('app.locale'),
-        'attributes' => $attributes,
-        'position'   => rand(1, 5),
+it('should update a category', function () {
+    // Arrange.
+    $category = (new CategoryFaker())->factory()->create();
+
+    $attributes = Attribute::where('is_filterable', 1)->pluck('id')->toArray();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.categories.update', $category->id), [
+        'en' => $data = [
+            'name'        => fake()->name(),
+            'description' => substr(fake()->paragraph(), 0, 50),
+            'slug'        => $category->slug,
+        ],
+        'locale'      => config('app.locale'),
+        'attributes'  => $attributes,
+        'position'    => rand(1, 5),
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo.png'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner.png'),
+        ],
     ])
         ->assertRedirect(route('admin.catalog.categories.index'))
         ->isRedirection();
@@ -196,19 +261,19 @@ it('should update a category', function () {
     $this->assertModelWise([
         CategoryTranslation::class => [
             [
-                'name'        => $name,
+                'name'        => $data['name'],
                 'slug'        => $category->slug,
-                'description' => $description,
+                'description' => $data['description'],
             ],
         ],
     ]);
 });
 
 it('should delete a category', function () {
-    // Arrange
+    // Arrange.
     $category = (new CategoryFaker())->factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.categories.delete', $category->id))
@@ -221,10 +286,10 @@ it('should delete a category', function () {
 });
 
 it('should delete mass categories', function () {
-    // Arrange
+    // Arrange.
     $categories = (new CategoryFaker())->create(5);
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.mass_delete', [
@@ -241,10 +306,10 @@ it('should delete mass categories', function () {
 });
 
 it('should update mass categories', function () {
-    // Arrange
+    // Arrange.
     $categories = (new CategoryFaker())->create(5);
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.categories.mass_update', [
@@ -267,10 +332,10 @@ it('should update mass categories', function () {
 });
 
 it('should search categories with mega search', function () {
-    // Arrange
+    // Arrange.
     $category = (new CategoryFaker())->factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.catalog.categories.search', [
@@ -282,10 +347,10 @@ it('should search categories with mega search', function () {
 });
 
 it('should show the tree view of categories', function () {
-    // Arrange
+    // Arrange.
     $category = (new CategoryFaker())->factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.catalog.categories.tree'))

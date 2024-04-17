@@ -1,35 +1,35 @@
 <!-- Sold Quantities Shimmer -->
-<div class="relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+<div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
     <!-- Header -->
-    <div class="flex items-center justify-between mb-4">
-        <div class="shimmer w-[150px] h-[17px]"></div>
+    <div class="mb-4 flex items-center justify-between">
+        <div class="shimmer h-[17px] w-[150px]"></div>
 
-        <div class="shimmer w-[79px] h-[21px]"></div>
+        <div class="shimmer h-[21px] w-[79px]"></div>
     </div>
 
     <div class="grid gap-4">
-        <div class="flex gap-4 place-content-start">
-            <div class="flex gap-4 items-center">
-                <div class="shimmer w-[120px] h-9"></div>
-                <div class="shimmer w-[75px] h-[17px]"></div>
+        <div class="flex place-content-start gap-4">
+            <div class="flex items-center gap-4">
+                <div class="shimmer h-9 w-[120px]"></div>
+                <div class="shimmer h-[17px] w-[75px]"></div>
             </div>
         </div>
 
-        <div class="shimmer w-[120px] h-5"></div>
+        <div class="shimmer h-5 w-[120px]"></div>
 
         <!-- Graph Shimmer -->
         <x-admin::shimmer.reporting.graph :count=15 />
 
         <!-- Date Range -->
-        <div class="flex gap-5 justify-center">
-            <div class="flex gap-1 items-center">
-                <div class="shimmer w-3.5 h-3.5 rounded-md"></div>
-                <div class="shimmer w-[143px] h-[17px]"></div>
+        <div class="flex justify-center gap-5">
+            <div class="flex items-center gap-1">
+                <div class="shimmer h-3.5 w-3.5 rounded-md"></div>
+                <div class="shimmer h-[17px] w-[143px]"></div>
             </div>
             
-            <div class="flex gap-1 items-center">
-                <div class="shimmer w-3.5 h-3.5 rounded-md"></div>
-                <div class="shimmer w-[143px] h-[17px]"></div>
+            <div class="flex items-center gap-1">
+                <div class="shimmer h-3.5 w-3.5 rounded-md"></div>
+                <div class="shimmer h-[17px] w-[143px]"></div>
             </div>
         </div>
     </div>

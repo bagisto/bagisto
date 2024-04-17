@@ -15,7 +15,7 @@ Homestead.yaml
 /node_modules
 npm-debug.log
 package-lock.json
-/public/css
+/public/css 
 /public/fonts
 /public/js
 /public/hot

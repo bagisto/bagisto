@@ -17,7 +17,7 @@
 <!-- Features -->
 @if ($customization)
     <div class="container mt-20 max-lg:px-8 max-sm:mt-8">
-        <div class="flex gap-6 justify-center max-lg:flex-wrap">
+        <div class="flex justify-center gap-6 max-lg:flex-wrap">
             @foreach ($customization->options['services'] as $service)
                 <div class="flex items-center gap-5 bg-white">
                     <span
@@ -27,10 +27,10 @@
 
                     <div class="">
                         <!-- Service Title -->
-                        <p class="text-base font-medium font-dmserif">{{$service['title']}}</p>
+                        <p class="font-dmserif text-base font-medium">{{$service['title']}}</p>
 
                         <!-- Service Description -->
-                        <p class="text-sm font-medium mt-2.5 text-[#6E6E6E] max-w-[217px]">
+                        <p class="mt-2.5 max-w-[217px] text-sm font-medium text-[#6E6E6E]">
                             {{$service['description']}}
                         </p>
                     </div>

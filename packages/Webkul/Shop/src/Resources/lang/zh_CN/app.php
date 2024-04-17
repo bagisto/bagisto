@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => '您的订单已取消',
                     'page-title'         => '订单 #:order_id',
                     'payment-method'     => '付款方式',
+                    'reorder-btn-title'  => '重新排序',
                     'shipping-address'   => '送货地址',
                     'shipping-method'    => '送货方式',
                     'title'              => '查看',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => '在此搜索产品',
                 'sign-in'           => '登录',
                 'sign-up'           => '注册',
+                'submit'            => '提交',
                 'title'             => '账户',
                 'welcome'           => '欢迎',
                 'welcome-guest'     => '欢迎访客',
                 'wishlist'          => '心愿单',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => '默认语言环境',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => '继续结帐',
             'illegal'                   => '数量不能少于一。',
+            'inactive-add'              => '无法将停用的项目添加到购物车。',
             'inactive'                  => '该项目已停用，随后从购物车中移除。',
             'inventory-warning'         => '请求的数量不可用，请稍后再试。',
             'item-add-to-cart'          => '已成功添加项目',
@@ -756,12 +765,27 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => '给我们留言，我们会尽快回复您',
+            'desc'          => '您有什么问题？',
+            'describe-here' => '在这里描述',
+            'email'         => '电子邮件',
+            'message'       => '留言',
+            'name'          => '姓名',
+            'phone-number'  => '电话号码',
+            'submit'        => '提交',
+            'title'         => '联系我们',
+        ],
+
         'index' => [
             'offer'               => '首次下单立减40%，现在开始购物',
             'resend-verify-email' => '重新发送验证电子邮件',
             'verify-email'        => '验证您的电子邮件帐户',
         ],
+
+        'thanks-for-contact' => '感谢您与我们联系，提供您的意见和问题。我们会尽快回复您。',
     ],
+
     'partials' => [
         'pagination' => [
             'pagination-showing' => '显示 :total 个条目中的 :firstItem 到 :lastItem',
@@ -859,6 +883,14 @@ return [
                 'subject'     => '您！订阅我们的新闻通讯',
                 'unsubscribe' => '取消订阅',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => '通过网站联系表格',
+            'reply-to-mail'   => '请回复此电子邮件。',
+            'reach-via-phone' => '或者，您可以通过电话联系我们：',
+            'inquiry-from'    => '来自的查询',
+            'to'              => '联系',
         ],
 
         'orders' => [

@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'seeders'   => [
+    'seeders' => [
         'attribute' => [
             'attribute-families' => [
                 'default' => 'デフォルト',
             ],
 
-            'attribute-groups'   => [
+            'attribute-groups' => [
                 'description'       => '説明',
                 'general'           => '一般',
                 'inventories'       => '在庫',
@@ -17,7 +17,7 @@ return [
                 'shipping'          => '配送',
             ],
 
-            'attributes'         => [
+            'attributes' => [
                 'brand'                => 'ブランド',
                 'color'                => '色',
                 'cost'                 => 'コスト',
@@ -37,9 +37,9 @@ return [
                 'short-description'    => '短い説明',
                 'size'                 => 'サイズ',
                 'sku'                  => 'SKU',
+                'special-price'        => '特別価格',
                 'special-price-from'   => '特別価格 開始',
                 'special-price-to'     => '特別価格 終了',
-                'special-price'        => '特別価格',
                 'status'               => 'ステータス',
                 'tax-category'         => '税カテゴリー',
                 'url-key'              => 'URLキー',
@@ -48,7 +48,7 @@ return [
                 'width'                => '幅',
             ],
 
-            'attribute-options'  => [
+            'attribute-options' => [
                 'black'  => '黒',
                 'green'  => '緑',
                 'l'      => 'L',
@@ -61,21 +61,21 @@ return [
             ],
         ],
 
-        'category'  => [
+        'category' => [
             'categories' => [
                 'description' => 'ルートカテゴリの説明',
                 'name'        => 'ルート',
             ],
         ],
 
-        'cms'       => [
+        'cms' => [
             'pages' => [
-                'about-us'         => [
+                'about-us' => [
                     'content' => '会社概要ページのコンテンツ',
                     'title'   => '会社概要',
                 ],
 
-                'contact-us'       => [
+                'contact-us' => [
                     'content' => 'お問い合わせページのコンテンツ',
                     'title'   => 'お問い合わせ',
                 ],
@@ -85,27 +85,27 @@ return [
                     'title'   => 'カスタマーサービス',
                 ],
 
-                'payment-policy'   => [
+                'payment-policy' => [
                     'content' => '支払いポリシー ページのコンテンツ',
                     'title'   => '支払いポリシー',
                 ],
 
-                'privacy-policy'   => [
+                'privacy-policy' => [
                     'content' => 'プライバシーポリシー ページのコンテンツ',
                     'title'   => 'プライバシーポリシー',
                 ],
 
-                'refund-policy'    => [
+                'refund-policy' => [
                     'content' => '返品ポリシー ページのコンテンツ',
                     'title'   => '返品ポリシー',
                 ],
 
-                'return-policy'    => [
+                'return-policy' => [
                     'content' => '返却ポリシー ページのコンテンツ',
                     'title'   => '返却ポリシー',
                 ],
 
-                'shipping-policy'  => [
+                'shipping-policy' => [
                     'content' => '配送ポリシー ページのコンテンツ',
                     'title'   => '配送ポリシー',
                 ],
@@ -115,20 +115,20 @@ return [
                     'title'   => '利用規約',
                 ],
 
-                'terms-of-use'     => [
+                'terms-of-use' => [
                     'content' => '利用規約ページのコンテンツ',
                     'title'   => '利用規約',
                 ],
 
-                'whats-new'        => [
+                'whats-new' => [
                     'content' => '新着情報ページのコンテンツ',
                     'title'   => '新着情報',
                 ],
             ],
         ],
 
-        'core'      => [
-            'channels'   => [
+        'core' => [
+            'channels' => [
                 'meta-description' => 'デモストアのメタ説明',
                 'meta-keywords'    => 'デモストアのメタキーワード',
                 'meta-title'       => 'デモストア',
@@ -151,7 +151,7 @@ return [
                 'USD' => '米ドル',
             ],
 
-            'locales'    => [
+            'locales' => [
                 'ar'    => 'アラビア語',
                 'bn'    => 'ベンガル語',
                 'de'    => 'ドイツ語',
@@ -174,7 +174,7 @@ return [
             ],
         ],
 
-        'customer'  => [
+        'customer' => [
             'customer-groups' => [
                 'general'   => '一般',
                 'guest'     => 'ゲスト',
@@ -188,24 +188,24 @@ return [
             ],
         ],
 
-        'shop'      => [
+        'shop' => [
             'theme-customizations' => [
-                'all-products'           => [
-                    'name'    => 'すべての製品',
+                'all-products' => [
+                    'name' => 'すべての製品',
 
                     'options' => [
                         'title' => 'すべての製品',
                     ],
                 ],
 
-                'bold-collections'       => [
+                'bold-collections' => [
                     'content' => [
                         'btn-title'   => 'すべて表示',
                         'description' => '新しいボールドコレクションを紹介します！ 大胆なデザインと鮮やかなステートメントでスタイルを引き立てましょう。 ワードローブを再定義する印象的なパターンと大胆な色を探索します。 途方もないものを受け入れる準備をしましょう！',
                         'title'       => '新しいボールドコレクションに備えて',
                     ],
 
-                    'name'    => 'ボールドコレクション',
+                    'name' => 'ボールドコレクション',
                 ],
 
                 'categories-collections' => [
@@ -213,15 +213,15 @@ return [
                 ],
 
                 'featured-collections'   => [
-                    'name'    => '特集コレクション',
+                    'name' => '特集コレクション',
 
                     'options' => [
                         'title' => '注目製品',
                     ],
                 ],
 
-                'footer-links'           => [
-                    'name'    => 'フッターリンク',
+                'footer-links' => [
+                    'name' => 'フッターリンク',
 
                     'options' => [
                         'about-us'         => '当社について',
@@ -238,59 +238,59 @@ return [
                     ],
                 ],
 
-                'game-container'         => [
+                'game-container' => [
                     'content' => [
                         'sub-title-1' => '私たちのコレクション',
                         'sub-title-2' => '私たちのコレクション',
                         'title'       => '新アイテムでゲームを楽しむ！',
                     ],
 
-                    'name'    => 'ゲームコンテナ',
+                    'name' => 'ゲームコンテナ',
                 ],
 
-                'image-carousel'         => [
-                    'name'    => 'イメージカルーセル',
+                'image-carousel' => [
+                    'name' => 'イメージカルーセル',
 
                     'sliders' => [
                         'title' => '新コレクションに備えて',
                     ],
                 ],
 
-                'new-products'           => [
-                    'name'    => '新製品',
+                'new-products' => [
+                    'name' => '新製品',
 
                     'options' => [
                         'title' => '新製品',
                     ],
                 ],
 
-                'offer-information'      => [
+                'offer-information' => [
                     'content' => [
                         'title' => '初回注文で最大40％OFF ショッピングを今すぐ開始',
                     ],
 
-                    'name'   => '特売情報',
+                    'name' => '特売情報',
                 ],
 
-                'services-content'       => [
-                    'name'  => 'サービスコンテンツ',
+                'services-content' => [
+                    'name' => 'サービスコンテンツ',
 
                     'title' => [
+                        'emi-available'   => 'EMI利用可能',
                         'free-shipping'   => '送料無料',
                         'product-replace' => '製品の交換',
-                        'emi-available'   => 'EMI利用可能',
                         'time-support'    => '24/7サポート',
                     ],
 
                     'description' => [
+                        'emi-available-info'   => 'すべての主要クレジットカードで費用のかからないEMIが利用可能です',
                         'free-shipping-info'   => 'すべての注文で送料無料をお楽しみください',
                         'product-replace-info' => '簡単な製品交換が可能です！',
-                        'emi-available-info'   => 'すべての主要クレジットカードで費用のかからないEMIが利用可能です',
                         'time-support-info'    => 'チャットやメールでの専用24/7サポート',
                     ],
                 ],
 
-                'top-collections'        => [
+                'top-collections' => [
                     'content' => [
                         'sub-title-1' => '私たちのコレクション',
                         'sub-title-2' => '私たちのコレクション',
@@ -301,12 +301,12 @@ return [
                         'title'       => '新アイテムでゲームを楽しむ！',
                     ],
 
-                    'name'    => 'トップコレクション',
+                    'name' => 'トップコレクション',
                 ],
             ],
         ],
 
-        'user'      => [
+        'user' => [
             'roles' => [
                 'description' => 'このロールのユーザーにはすべてのアクセス権があります',
                 'name'        => '管理者',
@@ -320,12 +320,12 @@ return [
 
     'installer' => [
         'index' => [
-            'create-administrator'      => [
+            'create-administrator' => [
                 'admin'            => '管理者',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'パスワードの確認',
-                'email-address'    => 'admin@example.com',
                 'email'            => 'メール',
+                'email-address'    => 'admin@example.com',
                 'password'         => 'パスワード',
                 'title'            => '管理者の作成',
             ],
@@ -346,8 +346,8 @@ return [
                 'default-currency'    => 'デフォルト通貨',
                 'default-locale'      => 'デフォルトロケール',
                 'default-timezone'    => 'デフォルトタイムゾーン',
-                'default-url-link'    => 'https://localhost',
                 'default-url'         => 'デフォルトURL',
+                'default-url-link'    => 'https://localhost',
                 'dirham'              => 'ディルハム（AED）',
                 'euro'                => 'ユーロ（EUR）',
                 'iranian'             => 'イランリアル（IRR）',
@@ -368,32 +368,32 @@ return [
                 'warning-message'     => '警告！デフォルトのシステム言語設定およびデフォルト通貨設定は恒久的で、二度と変更できません。',
             ],
 
-            'installation-processing'   => [
-                'bagisto-info'     => 'データベーステーブルの作成中、これには数分かかることがあります',
+            'installation-processing' => [
                 'bagisto'          => 'Bagistoのインストール',
+                'bagisto-info'     => 'データベーステーブルの作成中、これには数分かかることがあります',
                 'title'            => 'インストール',
             ],
 
-            'installation-completed'    => [
+            'installation-completed' => [
                 'admin-panel'                => '管理パネル',
                 'bagisto-forums'             => 'Bagistoフォーラム',
                 'customer-panel'             => '顧客パネル',
                 'explore-bagisto-extensions' => 'Bagisto拡張機能の探索',
-                'title-info'                 => 'Bagistoがシステムに正常にインストールされました。',
                 'title'                      => 'インストールが完了しました',
+                'title-info'                 => 'Bagistoがシステムに正常にインストールされました。',
             ],
 
-            'ready-for-installation'    => [
+            'ready-for-installation' => [
                 'create-databsae-table'   => 'データベーステーブルを作成する',
-                'install-info-button'     => '以下のボタンをクリックしてください',
-                'install-info'            => 'インストール用のBagisto',
                 'install'                 => 'インストール',
+                'install-info'            => 'インストール用のBagisto',
+                'install-info-button'     => '以下のボタンをクリックしてください',
                 'populate-database-table' => 'データベーステーブルを作成する',
                 'start-installation'      => 'インストールを開始',
                 'title'                   => 'インストール準備完了',
             ],
 
-            'start'                     => [
+            'start' => [
                 'locale'        => 'ロケール',
                 'main'          => '開始',
                 'select-locale' => 'ロケールを選択',
@@ -401,7 +401,7 @@ return [
                 'welcome-title' => 'Bagisto 2.0へようこそ。',
             ],
 
-            'server-requirements'       => [
+            'server-requirements' => [
                 'calendar'    => 'カレンダー',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
@@ -416,45 +416,43 @@ return [
                 'openssl'     => 'OpenSSL',
                 'pcre'        => 'pcre',
                 'pdo'         => 'pdo',
-                'php-version' => '8.1以上',
                 'php'         => 'PHP',
+                'php-version' => '8.1以上',
                 'session'     => 'セッション',
                 'title'       => 'サーバーの要件',
                 'tokenizer'   => 'トークン生成',
                 'xml'         => 'XML',
             ],
 
-            'arabic'                    => 'アラビア語',
-            'back'                      => '戻る',
-            'bagisto-info'              => 'コミュニティプロジェクト by',
-            'bagisto-logo'              => 'Bagistoロゴ',
-            'bagisto'                   => 'Bagisto',
-            'bengali'                   => 'ベンガル語',
-            'chinese'                   => '中国語',
-            'continue'                  => '続行',
-            'dutch'                     => 'オランダ語',
-            'english'                   => '英語',
-            'french'                    => 'フランス語',
-            'german'                    => 'ドイツ語',
-            'hebrew'                    => 'ヘブライ語',
-            'hindi'                     => 'ヒンディー語',
-            'installation-description'  => '通常、Bagistoのインストールにはいくつかのステップが含まれます。ここにBagistoのインストールプロセスの概要を示します:',
-            'installation-info'         => 'ここにいてくれてうれしいです！',
-            'installation-title'        => 'Bagistoインストールへようこそ',
-            'italian'                   => 'イタリア語',
-            'japanese'                  => '日本語',
-            'persian'                   => 'ペルシャ語',
-            'polish'                    => 'ポーランド語',
-            'portuguese'                => 'ブラジルポルトガル語',
-            'russian'                   => 'ロシア語',
-            'save-configuration'        => '設定を保存',
-            'sinhala'                   => 'シンハラ語',
-            'skip'                      => 'スキップ',
-            'spanish'                   => 'スペイン語',
-            'title'                     => 'Bagistoインストーラ',
-            'turkish'                   => 'トルコ語',
-            'ukrainian'                 => 'ウクライナ語',
-            'webkul'                    => 'Webkul',
+            'arabic'                   => 'アラビア語',
+            'back'                     => '戻る',
+            'bagisto'                  => 'Bagisto',
+            'bagisto-info'             => 'コミュニティプロジェクト by',
+            'bagisto-logo'             => 'Bagistoロゴ',
+            'bengali'                  => 'ベンガル語',
+            'chinese'                  => '中国語',
+            'continue'                 => '続行',
+            'dutch'                    => 'オランダ語',
+            'english'                  => '英語',
+            'french'                   => 'フランス語',
+            'german'                   => 'ドイツ語',
+            'hebrew'                   => 'ヘブライ語',
+            'hindi'                    => 'ヒンディー語',
+            'installation-description' => '通常、Bagistoのインストールにはいくつかのステップが含まれます。ここにBagistoのインストールプロセスの概要を示します:',
+            'installation-info'        => 'ここにいてくれてうれしいです！',
+            'installation-title'       => 'Bagistoインストールへようこそ',
+            'italian'                  => 'イタリア語',
+            'japanese'                 => '日本語',
+            'persian'                  => 'ペルシャ語',
+            'polish'                   => 'ポーランド語',
+            'portuguese'               => 'ブラジルポルトガル語',
+            'russian'                  => 'ロシア語',
+            'sinhala'                  => 'シンハラ語',
+            'spanish'                  => 'スペイン語',
+            'title'                    => 'Bagistoインストーラ',
+            'turkish'                  => 'トルコ語',
+            'ukrainian'                => 'ウクライナ語',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

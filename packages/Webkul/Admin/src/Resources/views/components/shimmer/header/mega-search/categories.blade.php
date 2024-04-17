@@ -1,5 +1,5 @@
 @for ($i = 0; $i < 3; $i++)
-    <div class="p-4 border-b border-slate-300 dark:border-gray-800">
-        <p class="shimmer w-[150px] h-[17px]"></p>
+    <div class="border-b border-slate-300 p-4 dark:border-gray-800">
+        <p class="shimmer h-[17px] w-[150px]"></p>
     </div>
 @endfor

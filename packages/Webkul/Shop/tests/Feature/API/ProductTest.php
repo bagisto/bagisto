@@ -6,7 +6,7 @@ use Webkul\Faker\Helpers\Product as ProductFaker;
 use function Pest\Laravel\getJson;
 
 it('returns a new products listing', function () {
-    // Arrange
+    // Arrange.
     $newProductOptions = [
         'attributes' => [
             5 => 'new',
@@ -35,7 +35,7 @@ it('returns a new products listing', function () {
 });
 
 it('returns a featured products listing', function () {
-    // Arrange
+    // Arrange.
     $featuredProductOptions = [
         'attributes' => [
             6 => 'featured',
@@ -64,12 +64,12 @@ it('returns a featured products listing', function () {
 });
 
 it('returns all products listing', function () {
-    // Arrange
+    // Arrange.
     $product = (new ProductFaker())
         ->getSimpleProductFactory()
         ->create();
 
-    // Act & Assert
+    // Act and Assert.
     getJson(route('shop.api.products.index'))
         ->assertOk()
         ->assertJsonIsArray('data')

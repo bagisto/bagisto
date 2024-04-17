@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should return the events index page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.events.index'))
@@ -18,7 +18,7 @@ it('should return the events index page', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in events', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.events.store'))
@@ -29,13 +29,13 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should store the newly create event', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.marketing.communications.events.store', [
-        'name'        => $name = fake()->name,
-        'description' => $description = substr(fake()->paragraph(), 0, 50),
-        'date'        => $date = fake()->date(),
+    postJson(route('admin.marketing.communications.events.store', $data = [
+        'name'        => fake()->name(),
+        'description' => substr(fake()->paragraph(), 0, 50),
+        'date'        => fake()->date(),
     ]))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.events.index.create.success'));
@@ -43,34 +43,31 @@ it('should store the newly create event', function () {
     $this->assertModelWise([
         Event::class => [
             [
-                'name'        => $name,
-                'description' => $description,
-                'date'        => $date,
+                'name'        => $data['name'],
+                'description' => $data['description'],
+                'date'        => $data['date'],
             ],
         ],
     ]);
 });
 
 it('should edit the events template', function () {
-    // Arrange
+    // Arrange.
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.events.edit', $event->id))
         ->assertOk()
-        ->assertJsonPath('id', $event->id)
-        ->assertJsonPath('name', $event->name)
-        ->assertJsonPath('description', $event->description)
-        ->assertJsonPath('date', $event->date);
+        ->assertJsonFragment($event->toArray());
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in events', function () {
-    // Arrange
+    // Arrange.
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.events.store', $event->id))
@@ -81,10 +78,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update the existing the events', function () {
-    // Arrange
+    // Arrange.
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.events.update'), [
@@ -109,10 +106,10 @@ it('should update the existing the events', function () {
 });
 
 it('should delete the specified events', function () {
-    // Arrange
+    // Arrange.
     $event = Event::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.communications.events.delete', $event->id))

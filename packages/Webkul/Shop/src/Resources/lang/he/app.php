@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'הזמנתך בוטלה בהצלחה',
                     'page-title'         => 'הזמנה #:order_id',
                     'payment-method'     => 'אמצעי תשלום',
+                    'reorder-btn-title'  => 'להזמין מחדש',
                     'shipping-address'   => 'כתובת למשלוח',
                     'shipping-method'    => 'שיטת משלוח',
                     'title'              => 'צפייה',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'חפש מוצרים כאן',
                 'sign-in'           => 'התחבר',
                 'sign-up'           => 'הרשם',
+                'submit'            => 'שלח',
                 'title'             => 'חשבון',
                 'welcome'           => 'ברוך הבא',
                 'welcome-guest'     => 'ברוך הבא אורח',
                 'wishlist'          => 'רשימת משאלות',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'שפת ברירת מחדל',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'המשך לתשלום',
             'illegal'                   => 'הכמות לא יכולה להיות פחות מאחד.',
+            'inactive-add'              => 'פריט לא פעיל לא ניתן להוסיף לעגלה.',
             'inactive'                  => 'הפריט הושבת ונמחק מהעגלה.',
             'inventory-warning'         => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
             'item-add-to-cart'          => 'הפריט התווסף בהצלחה',
@@ -756,11 +765,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'שלח לנו הודעה ונחזור אליך בהקדם האפשרי',
+            'desc'          => 'מה על דעתך?',
+            'describe-here' => 'תיאור כאן',
+            'email'         => 'אימייל',
+            'message'       => 'הודעה',
+            'name'          => 'שם',
+            'phone-number'  => 'מספר טלפון',
+            'submit'        => 'שלח',
+            'title'         => 'צור קשר',
+        ],
+
         'index' => [
             'offer'               => 'עד 40% הנחה על הזמנתך הראשונה! קנה עכשיו',
             'resend-verify-email' => 'שלח מחדש אימייל לאימות',
             'verify-email'        => 'אמת את חשבון האימייל שלך',
         ],
+
+        'thanks-for-contact' => 'תודה על פנייתך אלינו עם הערות ושאלותיך. אנחנו נשיב לך בהקדם האפשרי.',
     ],
 
     'partials' => [
@@ -860,6 +883,14 @@ return [
                 'subject'     => 'הצטרפת לניוזלטר שלנו',
                 'unsubscribe' => 'הסר מהרשימה',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'באמצעות טופס יצירת קשר באתר',
+            'reply-to-mail'   => 'אנא השב למייל זה.',
+            'reach-via-phone' => 'בנוסף, תוכל ליצור קשר איתנו בטלפון במספר',
+            'inquiry-from'    => 'שאילתה מ',
+            'to'              => 'כדי ליצור קשר עם',
         ],
 
         'orders' => [

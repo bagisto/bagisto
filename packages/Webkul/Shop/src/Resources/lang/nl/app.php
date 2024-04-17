@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Uw bestelling is geannuleerd',
                     'page-title'         => 'Bestelling #:order_id',
                     'payment-method'     => 'Betalingsmethode',
+                    'reorder-btn-title'  => 'Herordenen',
                     'shipping-address'   => 'Verzendadres',
                     'shipping-method'    => 'Verzendmethode',
                     'title'              => 'Bekijken',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Zoek hier producten',
                 'sign-in'           => 'Inloggen',
                 'sign-up'           => 'Aanmelden',
+                'submit'            => 'Verzenden',
                 'title'             => 'Account',
                 'welcome'           => 'Welkom',
                 'welcome-guest'     => 'Welkom Gast',
                 'wishlist'          => 'Verlanglijst',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Standaard taal',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Ga verder naar afrekenen',
             'illegal'                   => 'De hoeveelheid kan niet minder zijn dan één.',
+            'inactive-add'              => 'Inactief item kan niet aan winkelwagen worden toegevoegd.',
             'inactive'                  => 'Het item is gedeactiveerd en vervolgens uit de winkelwagen verwijderd.',
             'inventory-warning'         => 'De aangevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
             'item-add-to-cart'          => 'Item succesvol toegevoegd',
@@ -756,11 +765,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Stuur ons een bericht en we zullen zo snel mogelijk reageren',
+            'desc'          => 'Waar denk je aan?',
+            'describe-here' => 'Beschrijf hier',
+            'email'         => 'E-mail',
+            'message'       => 'Bericht',
+            'name'          => 'Naam',
+            'phone-number'  => 'Telefoonnummer',
+            'submit'        => 'Verzenden',
+            'title'         => 'Neem contact met ons op',
+        ],
+
         'index' => [
             'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email'        => 'Verifieer je e-mailaccount',
         ],
+
+        'thanks-for-contact' => 'Bedankt voor het contact met ons opnemen met uw opmerkingen en vragen. We zullen spoedig reageren.',
     ],
 
     'partials' => [
@@ -860,6 +883,14 @@ return [
                 'subject'     => 'Je! Abonneer je op onze nieuwsbrief',
                 'unsubscribe' => 'Afmelden',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via het contactformulier op de website',
+            'reply-to-mail'   => 'antwoord alstublieft op deze e-mail.',
+            'reach-via-phone' => 'U kunt ons ook telefonisch bereiken op',
+            'inquiry-from'    => 'Vraag van',
+            'to'              => 'Om contact op te nemen met',
         ],
 
         'orders' => [

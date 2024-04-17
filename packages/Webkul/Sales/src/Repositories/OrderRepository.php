@@ -45,21 +45,6 @@ class OrderRepository extends Repository
         try {
             Event::dispatch('checkout.order.save.before', [$data]);
 
-            if (! empty($data['customer'])) {
-                $data['customer_id'] = $data['customer']->id;
-                $data['customer_type'] = get_class($data['customer']);
-            } else {
-                unset($data['customer']);
-            }
-
-            if (! empty($data['channel'])) {
-                $data['channel_id'] = $data['channel']->id;
-                $data['channel_type'] = get_class($data['channel']);
-                $data['channel_name'] = $data['channel']->name;
-            } else {
-                unset($data['channel']);
-            }
-
             $data['status'] = 'pending';
 
             $order = $this->model->create(array_merge($data, ['increment_id' => $this->generateIncrementId()]));
@@ -67,12 +52,8 @@ class OrderRepository extends Repository
             $order->payment()->create($data['payment']);
 
             if (isset($data['shipping_address'])) {
-                unset($data['shipping_address']['customer_id']);
-
                 $order->addresses()->create($data['shipping_address']);
             }
-
-            unset($data['billing_address']['customer_id']);
 
             $order->addresses()->create($data['billing_address']);
 

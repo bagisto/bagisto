@@ -9,7 +9,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should show attribute page', function () {
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.attributes.index'))
@@ -19,10 +19,10 @@ it('should show attribute page', function () {
 });
 
 it('should return listing items of attributes', function () {
-    // Arrange
+    // Arrange.
     $attribute = Attribute::factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.catalog.attributes.index'), [
@@ -35,10 +35,10 @@ it('should return listing items of attributes', function () {
 });
 
 it('should returns attributes options', function () {
-    // Arrange
+    // Arrange.
     $attribute = Attribute::factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.attributes.options', $attribute->id))
@@ -47,7 +47,7 @@ it('should returns attributes options', function () {
 });
 
 it('should show create page of attribute', function () {
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.attributes.create'))
@@ -57,7 +57,7 @@ it('should show create page of attribute', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in attribute', function () {
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.attributes.store'))
@@ -68,12 +68,12 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should store newly created attribute', function () {
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.catalog.attributes.store'), [
-        'admin_name'    => $name = fake()->name(),
-        'code'          => $code = strtolower(fake()->word()),
+    postJson(route('admin.catalog.attributes.store'), $data = [
+        'admin_name'    => fake()->name(),
+        'code'          => fake()->numerify('code########'),
         'type'          => 'text',
         'default_value' => 1,
     ])
@@ -82,21 +82,16 @@ it('should store newly created attribute', function () {
 
     $this->assertModelWise([
         Attribute::class => [
-            [
-                'admin_name'    => $name,
-                'code'          => $code,
-                'type'          => 'text',
-                'default_value' => 1,
-            ],
+            $data,
         ],
     ]);
 });
 
 it('should show edit page of attribute', function () {
-    // Arrange
+    // Arrange.
     $attribute = Attribute::factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.catalog.attributes.edit', $attribute->id))
@@ -106,7 +101,7 @@ it('should show edit page of attribute', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in attribute', function () {
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.attributes.store'))
@@ -117,14 +112,14 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update an attribute', function () {
-    // Arrange
+    // Arrange.
     $attribute = Attribute::factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.attributes.update', $attribute->id), [
-        'admin_name'    => $updatedName = fake()->name(),
+    putJson(route('admin.catalog.attributes.update', $attribute->id), $data = [
+        'admin_name'    => fake()->name(),
         'code'          => $attribute->code,
         'type'          => $attribute->type,
         'default_value' => 1,
@@ -134,21 +129,16 @@ it('should update an attribute', function () {
 
     $this->assertModelWise([
         Attribute::class => [
-            [
-                'admin_name'    => $updatedName,
-                'code'          => $attribute->code,
-                'type'          => $attribute->type,
-                'default_value' => 1,
-            ],
+            $data,
         ],
     ]);
 });
 
 it('should destroy an attribute', function () {
-    // Arrange
+    // Arrange.
     $attribute = Attribute::factory()->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.attributes.delete', $attribute->id))
@@ -161,12 +151,12 @@ it('should destroy an attribute', function () {
 });
 
 it('should not destroy an attribute if it is not user-defined', function () {
-    // Arrange
+    // Arrange.
     $attribute = Attribute::factory()->create([
         'is_user_defined' => false,
     ]);
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.catalog.attributes.delete', $attribute->id))
@@ -183,10 +173,10 @@ it('should not destroy an attribute if it is not user-defined', function () {
 });
 
 it('should mass delete attributes', function () {
-    // Arrange
+    // Arrange.
     $attributes = Attribute::factory()->count(2)->create();
 
-    // Act & Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.attributes.mass_delete', [

@@ -2,40 +2,45 @@
 <div class="mt-8">
     <!-- Section Title -->
     <div class="mb-4">
-        <h2 class="shimmer w-[150px] h-[28px]"></h2>
+        <h2 class="shimmer h-7 w-[150px]"></h2>
     </div>
 
     <!-- Address Cards -->
-    <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
+    <div class="grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:mt-4 max-sm:grid-cols-1">
         <!-- Single card addredd -->
-        <div class="max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
-            <div class="flex gap-2.5 justify-between items-center">
-                <p class="shimmer w-[150px] h-6"></p>
-
-                <div class="flex gap-6 items-center">
-                    <div class="shimmer block w-6 h-6 m-0 ltr:ml-0 rtl:mr-0 rounded-xl"></div>
+        <div class="relative max-w-[414px] rounded-xl border border-[#e5e5e5] p-0">
+            <div class="absolute top-5 flex gap-2 ltr:right-5 rtl:left-5">
+                <div class="mb-4 flex items-center gap-2.5">
+                    <span class="shimmer h-6 w-6 rounded-full"></span>
                 </div>
+
+                <span class="shimmer h-6 w-6"></span>
             </div>
 
-            <p class="shimmer w-full h-[21px] mt-6"></p>
+            <div class="block rounded-xl p-5">
+                <div class="shimmer mb-3 h-14 w-14 rounded-full"></div>
+
+                <p class="shimmer h-6 w-40"></p>
+                
+                <p class="shimmer mt-4 h-6 w-full"></p>
+            </div>
         </div>
 
         <!-- Single card addredd -->
-        <div
-            class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
-            <div class="flex gap-x-2.5 items-center">
-                <span class="shimmer w-[52px] h-[52px] rounded-full"></span>
+        <div class="flex max-w-[414px] items-center justify-center rounded-xl border border-[#e5e5e5] p-5 max-sm:flex-wrap">
+            <div class="flex items-center gap-x-2.5">
+                <span class="shimmer h-14 w-14 rounded-full"></span>
 
-                <p class="shimmer w-[140px] h-6"></p>
+                <p class="shimmer h-6 w-36"></p>
             </div>
         </div>
     </div>
 
     <!-- Save Address Checkbox -->
-    <p class="shimmer w-2/5 h-6 mt-5"></p>
+    <p class="shimmer mt-5 h-6 w-2/5"></p>
 
     <!-- Confirm Button -->
-    <div class="flex justify-end mt-4">
-        <div class="shimmer w-[155px] h-[50px] rounded-2xl"></div>
+    <div class="mt-4 flex justify-end">
+        <div class="shimmer h-14 w-40 rounded-2xl"></div>
     </div>
 </div>

@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Twoje zamówienie zostało anulowane',
                     'page-title'         => 'Zamówienie #:order_id',
                     'payment-method'     => 'Metoda płatności',
+                    'reorder-btn-title'  => 'Przeorganizuj',
                     'shipping-address'   => 'Adres dostawy',
                     'shipping-method'    => 'Metoda dostawy',
                     'title'              => 'Zobacz',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Szukaj produktów tutaj',
                 'sign-in'           => 'Zaloguj się',
                 'sign-up'           => 'Zarejestruj się',
+                'submit'            => 'Wyślij',
                 'title'             => 'Konto',
                 'welcome'           => 'Witaj',
                 'welcome-guest'     => 'Witaj, Gościu',
                 'wishlist'          => 'Lista życzeń',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Domyślna lokalizacja',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Przejdź do realizacji zamówienia',
             'illegal'                   => 'Ilość nie może być mniejsza niż jeden',
+            'inactive-add'              => 'Nieaktywny produkt nie może zostać dodany do koszyka.',
             'inactive'                  => 'Produkt został dezaktywowany i usunięty z koszyka',
             'inventory-warning'         => 'Żądana ilość nie jest dostępna, prosimy spróbować ponownie później',
             'item-add-to-cart'          => 'Produkt został pomyślnie dodany do koszyka',
@@ -756,11 +765,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Napisz do nas, a odpowiemy tak szybko, jak to możliwe',
+            'desc'          => 'Co Cię nurtuje?',
+            'describe-here' => 'Opisz tutaj',
+            'email'         => 'E-mail',
+            'message'       => 'Wiadomość',
+            'name'          => 'Imię',
+            'phone-number'  => 'Numer telefonu',
+            'submit'        => 'Wyślij',
+            'title'         => 'Skontaktuj się z nami',
+        ],
+
         'index' => [
             'offer'               => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie. ZAKUP TERAZ',
             'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
             'verify-email'        => 'Zweryfikuj swoje konto e-mail',
         ],
+
+        'thanks-for-contact' => 'Dziękujemy za skontaktowanie się z nami. Odpowiemy na Twoje uwagi i pytania wkrótce.',
     ],
 
     'partials' => [
@@ -860,6 +883,14 @@ return [
                 'subject'     => 'Zapisano się na nasz newsletter',
                 'unsubscribe' => 'Wypisz się',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'za pośrednictwem formularza kontaktowego na stronie',
+            'reply-to-mail'   => 'prosimy o odpowiedź na ten adres e-mail.',
+            'reach-via-phone' => 'Alternatywnie, możesz się z nami skontaktować telefonicznie pod numerem',
+            'inquiry-from'    => 'Zapytanie od',
+            'to'              => 'Aby skontaktować się z',
         ],
 
         'orders' => [

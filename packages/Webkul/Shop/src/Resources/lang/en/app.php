@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Your order has been canceled',
                     'page-title'         => 'Order #:order_id',
                     'payment-method'     => 'Payment Method',
+                    'reorder-btn-title'  => 'Reorder',
                     'shipping-address'   => 'Shipping Address',
                     'shipping-method'    => 'Shipping Method',
                     'title'              => 'View',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Search products here',
                 'sign-in'           => 'Sign In',
                 'sign-up'           => 'Sign Up',
+                'submit'            => 'Submit',
                 'title'             => 'Account',
                 'welcome'           => 'Welcome',
                 'welcome-guest'     => 'Welcome Guest',
                 'wishlist'          => 'Wishlist',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Default locale',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -614,6 +622,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continue to Checkout',
             'illegal'                   => 'Quantity cannot be lesser than one.',
+            'inactive-add'              => 'Inactive item cannot be added to cart.',
             'inactive'                  => 'The item has been deactivated and subsequently removed from the cart.',
             'inventory-warning'         => 'The requested quantity is not available, please try again later.',
             'item-add-to-cart'          => 'Item Added Successfully',
@@ -756,11 +765,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Jot us a note, and we’ll get back to you as quickly as possible',
+            'desc'          => ' What’s on your mind?',
+            'describe-here' => 'Describe Here',
+            'email'         => 'Email',
+            'message'       => 'Message',
+            'name'          => 'Name',
+            'phone-number'  => 'Phone Number',
+            'submit'        => 'Submit',
+            'title'         => 'Contact Us',
+        ],
+
         'index' => [
             'offer'               => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
             'resend-verify-email' => 'Resend Verification Email',
             'verify-email'        => 'Verify your email account',
         ],
+
+        'thanks-for-contact' => 'Thanks for contacting us with your comments and questions. We all respond to you very soon.',
     ],
 
     'partials' => [
@@ -860,6 +883,14 @@ return [
                 'subject'     => 'You! Subscribe to Our Newsletter',
                 'unsubscribe' => 'Unsubscribe',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via Website Contact Form',
+            'reply-to-mail'   => 'please reply to this email.',
+            'reach-via-phone' => 'Alternatively, you can reach us by phone at',
+            'inquiry-from'    => 'Inquiry from',
+            'to'              => 'To contact',
         ],
 
         'orders' => [

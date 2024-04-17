@@ -11,14 +11,14 @@ use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
 
 it('returns a successful response', function () {
-    // Act & Assert
+    // Act and Assert.
     get(route('shop.customers.register.index'))
         ->assertOk()
         ->assertSeeText(trans('shop::app.customers.signup-form.page-title'));
 });
 
 it('should fails validation error when certain inputs are invalid when register', function () {
-    // Act & Assert
+    // Act and Assert.
     postJson(route('shop.customers.register.store'))
         ->assertJsonValidationErrorFor('first_name')
         ->assertJsonValidationErrorFor('last_name')
@@ -28,7 +28,7 @@ it('should fails validation error when certain inputs are invalid when register'
 });
 
 it('should fails validation error when email is not valid when register', function () {
-    // Act & Assert
+    // Act and Assert.
     postJson(route('shop.customers.register.store'), [
         'email' => 'invalid.email.com',
     ])
@@ -40,7 +40,7 @@ it('should fails validation error when email is not valid when register', functi
 });
 
 it('should fails validation error when password length is not valid when register', function () {
-    // Act & Assert
+    // Act and Assert.
     postJson(route('shop.customers.register.store'), [
         'password' => 'shop',
     ])
@@ -52,7 +52,7 @@ it('should fails validation error when password length is not valid when registe
 });
 
 it('successfully registers a customer', function () {
-    // Arrange
+    // Arrange.
     $requestedCustomer = [
         'first_name'            => fake()->firstName(),
         'last_name'             => fake()->lastName(),
@@ -61,14 +61,14 @@ it('successfully registers a customer', function () {
         'password_confirmation' => 'admin123',
     ];
 
-    // Act & Assert
+    // Act and Assert.
     post(route('shop.customers.register.store'), $requestedCustomer)
         ->assertRedirectToRoute('shop.customer.session.index')
         ->assertSessionHas('success', trans('shop::app.customers.signup-form.success'));
 });
 
 it('successfully registers a customer and send mail to the customer that you have successfully registered', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $requestedCustomer = [
@@ -87,7 +87,7 @@ it('successfully registers a customer and send mail to the customer that you hav
         'value' => 1,
     ]);
 
-    // Act & Assert
+    // Act and Assert.
     post(route('shop.customers.register.store'), $requestedCustomer)
         ->assertRedirectToRoute('shop.customer.session.index')
         ->assertSessionHas('success', trans('shop::app.customers.signup-form.success'));
@@ -100,7 +100,7 @@ it('successfully registers a customer and send mail to the customer that you hav
 });
 
 it('successfully registers a customer and send mail to the customer that you need to verify the mail', function () {
-    // Arrange
+    // Arrange.
     Mail::fake();
 
     $requestedCustomer = [
@@ -116,7 +116,7 @@ it('successfully registers a customer and send mail to the customer that you nee
         'value' => 1,
     ]);
 
-    // Act & Assert
+    // Act and Assert.
     post(route('shop.customers.register.store'), $requestedCustomer)
         ->assertRedirectToRoute('shop.customer.session.index')
         ->assertSessionHas('success', trans('shop::app.customers.signup-form.success-verify'));

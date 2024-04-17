@@ -28,6 +28,7 @@ class CategoryRepository extends Repository
     public function getAll(array $params = [])
     {
         $queryBuilder = $this->query()
+            ->select('categories.*')
             ->leftJoin('category_translations', 'category_translations.category_id', '=', 'categories.id');
 
         foreach ($params as $key => $value) {
@@ -239,8 +240,6 @@ class CategoryRepository extends Repository
         if (isset($data[$type])) {
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type.'.'.$imageId;
-
-                $dir = 'category/'.$category->id;
 
                 if (request()->hasFile($file)) {
                     if ($category->{$type}) {
