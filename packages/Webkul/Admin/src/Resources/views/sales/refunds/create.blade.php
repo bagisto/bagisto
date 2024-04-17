@@ -172,7 +172,7 @@
                                                             @lang('admin::app.sales.refunds.create.tax-amount')
                                                         </p>
 
-                                                        @if ($order->base_discount_amount)
+                                                        @if ($order->base_discount_amount > 0)
                                                             <p class="text-gray-600 dark:text-gray-300"> 
                                                                 @lang('admin::app.sales.refunds.create.discount-amount')
                                                             </p>
@@ -196,7 +196,7 @@
                                                             {{ core()->formatBasePrice($item->base_tax_amount) }} 
                                                         </p>
 
-                                                        @if ($order->base_discount_amount)
+                                                        @if ($order->base_discount_amount > 0)
                                                             <p class="text-gray-600 dark:text-gray-300">
                                                                 {{ core()->formatBasePrice($item->base_discount_amount) }}
                                                             </p>
