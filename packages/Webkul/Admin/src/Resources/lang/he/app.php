@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'הזמנה ממתינה לתשלום',
             'processing'      => 'הזמנה בעיבוד',
         ],
-
-        'status'  => [
-            'all'        => 'הכל',
-            'canceled'   => 'בוטל',
-            'closed'     => 'נסגר',
-            'completed'  => 'הושלם',
-            'pending'    => 'ממתין',
-            'processing' => 'בעיבוד',
-        ],
     ],
 
     'account' => [

@@ -48,15 +48,6 @@ return [
             'pending-payment' => '支払い保留中',
             'processing'      => '注文処理中',
         ],
-
-        'status' => [
-            'all'        => 'すべて',
-            'canceled'   => 'キャンセル済み',
-            'closed'     => '終了済み',
-            'completed'  => '完了済み',
-            'pending'    => '保留中',
-            'processing' => '処理中',
-        ],
     ],
 
     'account' => [
