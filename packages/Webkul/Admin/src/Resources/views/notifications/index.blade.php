@@ -15,9 +15,9 @@
             type="text/x-template"
             id="v-notification-list-template"
         >
-            <div class="flex gap-4 justify-between items-center mb-5 max-sm:flex-wrap">
+            <div class="mb-5 flex items-center justify-between gap-4 max-sm:flex-wrap">
                 <div class="grid gap-1.5">
-                    <p class="pt-1.5 text-xl text-gray-800 dark:text-white font-bold leading-6">
+                    <p class="pt-1.5 text-xl font-bold leading-6 text-gray-800 dark:text-white">
                         @lang('admin::app.notifications.title')
                     </p>
 
@@ -27,11 +27,11 @@
                 </div>
             </div>
 
-            <div class="flex flex-col justify-between max-w-max bg-white dark:bg-gray-900 rounded-md box-shadow h-[calc(100vh-179px)]">
+            <div class="box-shadow flex h-[calc(100vh-179px)] max-w-max flex-col justify-between rounded-md bg-white dark:bg-gray-900">
                 <div class="">
-                    <div class="flex border-b dark:border-gray-800 overflow-auto journal-scroll">
+                    <div class="journal-scroll flex overflow-auto border-b dark:border-gray-800">
                         <div
-                            class="flex py-4 px-4 gap-1 border-b-2 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                            class="flex cursor-pointer gap-1 border-b-2 px-4 py-4 hover:bg-gray-100 dark:hover:bg-gray-950"
                             :class="{'border-blue-600 dark:border-blue-600': status == data.status}"
                             ref="tabs"
                             v-for="data in orderType"
@@ -44,7 +44,7 @@
                             </p>
 
                             <span
-                                class="text-xs text-white font-semibold py-px px-1.5 bg-gray-400 rounded-[35px]"
+                                class="rounded-[35px] bg-gray-400 px-1.5 py-px text-xs font-semibold text-white"
                                 v-text="data.status_count ?? '0'"
                             >
                             </span>
@@ -53,17 +53,17 @@
                     </div>
 
                     <div
-                        class="grid max-h-[calc(100vh-330px)] overflow-auto journal-scroll"
+                        class="journal-scroll grid max-h-[calc(100vh-330px)] overflow-auto"
                         v-if="notifications.length"
                     >
                         <a
                             :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
-                            class="flex gap-1.5 h-14 p-4 items-start hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="flex h-14 items-start gap-1.5 p-4 hover:bg-gray-50 dark:hover:bg-gray-950"
                             v-for="notification in notifications"
                         >
                             <span
                                 v-if="notification.order.status in orderType"
-                                class="h-fit text-2xl rounded-full"
+                                class="h-fit rounded-full text-2xl"
                                 :class="orderType[notification.order.status].icon"
                             >
                             </span>
@@ -86,7 +86,7 @@
 
                     <!-- For Empty Data -->
                     <div
-                        class="px-6 py-3 text-gray-600 dark:text-gray-300 max-h-[calc(100vh-330px)]"
+                        class="max-h-[calc(100vh-330px)] px-6 py-3 text-gray-600 dark:text-gray-300"
                         v-else
                     >
                         @lang('admin::app.notifications.no-record')
@@ -94,40 +94,40 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex gap-x-2 items-center p-4 border-t dark:border-gray-800">
+                <div class="flex items-center gap-x-2 border-t p-4 dark:border-gray-800">
                     <div
-                        class="inline-flex gap-x-1 items-center justify-between w-full max-w-max py-1.5 px-2 ltr:ml-2 rtl:mr-2 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-gray-600 dark:text-gray-300 leading-6 text-center marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
+                        class="inline-flex w-full max-w-max appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-2 py-1.5 text-center leading-6 text-gray-600 marker:shadow focus:outline-none focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 max-sm:hidden ltr:ml-2 rtl:mr-2"
                         v-text="pagination.per_page"
                     >
                     </div>
 
-                    <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">per Page</span>
+                    <span class="whitespace-nowrap text-gray-600 dark:text-gray-300">per Page</span>
 
                     <p
-                        class="text-gray-600 dark:text-gray-300 whitespace-nowrap"
+                        class="whitespace-nowrap text-gray-600 dark:text-gray-300"
                         v-text="pagination.current_page"
                     >
                     </p>
 
-                    <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">of</span>
+                    <span class="whitespace-nowrap text-gray-600 dark:text-gray-300">of</span>
 
                     <p
-                        class="text-gray-600 dark:text-gray-300 whitespace-nowrap"
+                        class="whitespace-nowrap text-gray-600 dark:text-gray-300"
                         v-text="pagination.last_page"
                     >
                     </p>
 
                     <!-- Prev & Next Page Button -->
-                    <div class="flex gap-1 items-center">
+                    <div class="flex items-center gap-1">
                         <a @click="getResults(pagination.prev_page_url)">
-                            <div class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-2 rtl:mr-2 p-1.5 bg-white dark:bg-gray-900 border rounded-md dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                            <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white p-1.5 text-center text-gray-600 transition-all marker:shadow hover:border hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-950 ltr:ml-2 rtl:mr-2">
                                 <span class="icon-sort-left text-2xl"></span>
                             </div>
                         </a>
 
                         <a @click="getResults(pagination.next_page_url)">
                             <div
-                                class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-2 rtl:mr-2 p-1.5 bg-white dark:bg-gray-900 border rounded-md dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white p-1.5 text-center text-gray-600 transition-all marker:shadow hover:border hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-950 ltr:ml-2 rtl:mr-2">
                                 <span class="icon-sort-right text-2xl"></span>
                             </div>
                         </a>

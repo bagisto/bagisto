@@ -31,13 +31,13 @@
                     ! empty($field['channel_based'])
                     && $channels->count() > 1
                 )
-                    <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
+                    <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
                         {{ $currentChannel->name }}
                     </span>
                 @endif
 
                 @if (! empty($field['locale_based']))
-                    <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
+                    <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
                         {{ $currentLocale->name }}
                     </span>
                 @endif
@@ -159,7 +159,7 @@
             >
                 <select
                     name="{{ $name }}[]"
-                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                    class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                     :class="[errors['{{ $name }}[]'] ? 'border border-red-600 hover:border-red-600' : '']"
                     multiple
                 >
@@ -194,17 +194,17 @@
 
             <input type="hidden" name="{{ $name }}" value="0" />
 
-            <label class="relative inline-flex items-center cursor-pointer">
+            <label class="relative inline-flex cursor-pointer items-center">
                 <input  
                     type="checkbox"
                     name="{{ $name }}"
                     value="1"
                     id="{{ $name }}"
-                    class="sr-only peer"
+                    class="peer sr-only"
                     {{ $selectedOption ? 'checked' : '' }}
                 >
 
-                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <div class="peer h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none dark:border-gray-600 dark:bg-gray-700 rtl:peer-checked:after:-translate-x-full"></div>
             </label>
 
         @elseif ($field['type'] == 'image')
@@ -214,7 +214,7 @@
                 $result = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code);
             @endphp
 
-            <div class="flex justify-center items-center">
+            <div class="flex items-center justify-center">
                 @if ($result)
                     <a
                         href="{{ $src }}"
@@ -222,7 +222,7 @@
                     >
                         <img
                             src="{{ $src }}"
-                            class="relative mr-5 h-[33px] w-[33px] top-15 rounded-3 border-3 border-gray-500"
+                            class="top-15 rounded-3 border-3 relative mr-5 h-[33px] w-[33px] border-gray-500"
                         />
                     </a>
                 @endif
@@ -237,7 +237,7 @@
             </div>
 
             @if ($result)
-                <x-admin::form.control-group class="flex gap-1.5 items-center w-max mt-1.5 cursor-pointer select-none">
+                <x-admin::form.control-group class="mt-1.5 flex w-max cursor-pointer select-none items-center gap-1.5">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         class="peer"
@@ -249,7 +249,7 @@
 
                     <label
                         for="{{ $name }}[delete]"
-                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                        class="cursor-pointer !text-sm !font-semibold !text-gray-600 dark:!text-gray-300"
                     >
                         @lang('admin::app.configuration.index.delete')
                     </label>
@@ -280,7 +280,7 @@
             />
 
             @if ($result)
-                <div class="flex gap-2.5 cursor-pointer">
+                <div class="flex cursor-pointer gap-2.5">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         class="peer"
@@ -376,7 +376,7 @@
 
         @if (isset($field['info']))
             <label
-                class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
+                class="block text-xs font-medium leading-5 text-gray-600 dark:text-gray-300"
                 for="{{ $name }}-info"
             >
                 {!! trans($field['info']) !!}

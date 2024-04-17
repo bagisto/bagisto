@@ -9,15 +9,15 @@
             <transition
                 tag="div"
                 name="modal-overlay"
-                enter-class="ease-out duration-300"
+                enter-class="duration-300 ease-out"
                 enter-from-class="opacity-0"
                 enter-to-class="opacity-100"
-                leave-class="ease-in duration-200"
+                leave-class="duration-200 ease-in"
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[10002]"
+                    class="fixed inset-0 z-[10002] bg-gray-500 bg-opacity-50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -25,28 +25,28 @@
             <transition
                 tag="div"
                 name="modal-content"
-                enter-class="ease-out duration-300"
-                enter-from-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
-                enter-to-class="opacity-100 translate-y-0 md:scale-100"
-                leave-class="ease-in duration-200"
-                leave-from-class="opacity-100 translate-y-0 md:scale-100"
-                leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+                enter-class="duration-300 ease-out"
+                enter-from-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
+                enter-to-class="translate-y-0 opacity-100 md:scale-100"
+                leave-class="duration-200 ease-in"
+                leave-from-class="translate-y-0 opacity-100 md:scale-100"
+                leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-[10002] transform transition overflow-y-auto"
+                    class="fixed inset-0 z-[10002] transform overflow-y-auto transition"
                     v-if="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-5 sm:items-center sm:p-0">
-                        <div class="w-full max-w-[400px] z-[999] absolute left-1/2 top-1/2 rounded-lg bg-white dark:bg-gray-900 box-shadow max-md:w-[90%] -translate-x-1/2 -translate-y-1/2">
-                            <div class="flex justify-between items-center gap-2.5 px-4 py-3 border-b dark:border-gray-800 text-lg text-gray-800 dark:text-white font-bold">
+                        <div class="box-shadow absolute left-1/2 top-1/2 z-[999] w-full max-w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white dark:bg-gray-900 max-md:w-[90%]">
+                            <div class="flex items-center justify-between gap-2.5 border-b px-4 py-3 text-lg font-bold text-gray-800 dark:border-gray-800 dark:text-white">
                                 @{{ title }}
                             </div>
 
-                            <div class="px-4 py-3 text-gray-600 dark:text-gray-300 text-left">
+                            <div class="px-4 py-3 text-left text-gray-600 dark:text-gray-300">
                                 @{{ message }}
                             </div>
 
-                            <div class="flex gap-2.5 justify-end px-4 py-2.5">
+                            <div class="flex justify-end gap-2.5 px-4 py-2.5">
                                 <button type="button" class="transparent-button" @click="disagree">
                                     @{{ options.btnDisagree }}
                                 </button>

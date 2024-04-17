@@ -7,10 +7,10 @@
         type="text/x-template"
         id="v-date-picker-template"
     >
-        <span class="w-full relative inline-block">
+        <span class="relative inline-block w-full">
             <slot></slot>
 
-            <i class="icon-calendar text-2xl text-gray-400 absolute ltr:right-2 rtl:left-2 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            <i class="icon-calendar pointer-events-none absolute top-1/2 -translate-y-1/2 text-2xl text-gray-400 ltr:right-2 rtl:left-2"></i>
         </span>
     </script>
 

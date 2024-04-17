@@ -20,9 +20,9 @@
         </template>
 
         <template v-else>
-            <div class="bg-white dark:bg-gray-900 rounded box-shadow">
-                <div class="flex justify-between items-center p-4">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+            <div class="box-shadow rounded bg-white dark:bg-gray-900">
+                <div class="flex items-center justify-between p-4">
+                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.sales.orders.create.compare-items.title')
                     </p>
                 </div>
@@ -33,18 +33,18 @@
                     v-if="items.length"
                 >
                     <div
-                        class="row flex gap-2.5 p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row flex gap-2.5 border-b bg-white p-4 transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-950"
                         v-for="item in items"
                     >
                         <!-- Image -->
                         <div
-                            class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
-                            :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! item.product.images.length}"
+                            class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                            :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! item.product.images.length}"
                         >
                             <template v-if="! item.product.images.length">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                             
-                                <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                                <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                     @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
                                 </p>
                             </template>
@@ -57,7 +57,7 @@
                         <!-- Item Information -->
                         <div class="grid gap-1.5">
                             <!-- Item Name -->
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @{{ item.product.name }}
                             </p>
 
@@ -66,21 +66,21 @@
                                 @{{ "@lang('admin::app.sales.orders.create.compare-items.sku', ['sku' => ':replace'])".replace(':replace', item.product.sku) }}
                             </p>
                             
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @{{ item.product.formatted_price }}
                             </p>
 
                             <!-- Item Actions -->
-                            <div class="flex gap-2.5 mt-2">
+                            <div class="mt-2 flex gap-2.5">
                                 <button
-                                    class="text-sm text-red-600 cursor-pointer transition-all hover:underline"
+                                    class="cursor-pointer text-sm text-red-600 transition-all hover:underline"
                                     @click="removeItem(item)"
                                 >
                                     @lang('admin::app.sales.orders.create.compare-items.delete')
                                 </button>
 
                                 <button
-                                    class="text-sm text-emerald-600 cursor-pointer transition-all hover:underline"
+                                    class="cursor-pointer text-sm text-emerald-600 transition-all hover:underline"
                                     :disabled="! item.product.is_saleable"
                                     @click="moveToCart(item)"
                                 >
@@ -93,13 +93,13 @@
 
                 <!-- Empty Items Box -->
                 <div
-                    class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                    class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                     v-else
                 >
-                    <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-20 h-20 dark:invert dark:mix-blend-exclusion">
+                    <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="h-20 w-20 dark:mix-blend-exclusion dark:invert">
                     
-                    <div class="flex flex-col gap-1.5 items-center">
-                        <p class="text-base text-gray-400 font-semibold">
+                    <div class="flex flex-col items-center gap-1.5">
+                        <p class="text-base font-semibold text-gray-400">
                             @lang('admin::app.sales.orders.create.compare-items.empty-title')
                         </p>
     

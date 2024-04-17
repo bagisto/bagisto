@@ -16,8 +16,8 @@
     </canvas>
 
     <!-- Error page Information -->
-	<div class="container absolute left-1/2 top-0 px-[60px] max-lg:px-8 max-sm:px-4 -translate-x-1/2">
-		<div class="grid w-full h-[100vh]">
+	<div class="container absolute left-1/2 top-0 -translate-x-1/2 px-[60px] max-lg:px-8 max-sm:px-4">
+		<div class="grid h-[100vh] w-full">
 			<div class="wrapper-404 max-868:!text-[294px] max-md:!text-[140px]">
 				<div class="glow-404">
                     {{ $errorCode }}
@@ -27,12 +27,12 @@
                     {{ $errorCode }}
                 </div>
 
-				<div class="absolute left-1/2 top-[74%] -translate-x-1/2 -translate-y-1/2 text-center mt-10 max-868:w-full">
+				<div class="absolute left-1/2 top-[74%] mt-10 -translate-x-1/2 -translate-y-1/2 text-center max-868:w-full">
 					<h1 class="text-3xl font-semibold">
                         @lang("admin::app.errors.{$errorCode}.title")
                     </h1>
 
-					<p class="text-lg text-[#6E6E6E] mt-4">
+					<p class="mt-4 text-lg text-[#6E6E6E]">
                         {{ 
                             $errorCode === 503 && core()->getCurrentChannel()->maintenance_mode_text != ""
                             ? core()->getCurrentChannel()->maintenance_mode_text : trans("admin::app.errors.{$errorCode}.description")
@@ -41,7 +41,7 @@
 
 					<a 
                         href="{{ route('shop.home.index') }}"
-						class="block w-max mt-8 m-auto py-4 px-10 bg-navyBlue rounded-[45px] text-white text-base font-medium text-center cursor-pointer max-sm:text-sm max-sm:px-6 max-sm:mb-10"
+						class="m-auto mt-8 block w-max cursor-pointer rounded-[45px] bg-navyBlue px-10 py-4 text-center text-base font-medium text-white max-sm:mb-10 max-sm:px-6 max-sm:text-sm"
                     >
 						@lang('shop::app.errors.go-to-home') 
                     </a>

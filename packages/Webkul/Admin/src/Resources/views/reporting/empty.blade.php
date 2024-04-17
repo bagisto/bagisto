@@ -1,12 +1,12 @@
-<div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5">
+<div class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10">
     <img
-        class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
+        class="h-[120px] w-[120px] p-2 dark:mix-blend-exclusion dark:invert"
         src="{{ bagisto_asset('images/empty-placeholders/report-empty.svg') }}"
     >
 
-    <div class="flex flex-col gap-1.5 items-center">
+    <div class="flex flex-col items-center gap-1.5">
 
-        <p class="text-base text-gray-400 font-semibold">
+        <p class="text-base font-semibold text-gray-400">
             @lang('admin::app.reporting.empty.title')
         </p>
         

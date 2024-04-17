@@ -1,15 +1,15 @@
 <div>
-    <div class="flex gap-4 items-center">
-        <p class="shimmer w-12 h-[20px]"></p>
+    <div class="flex items-center gap-4">
+        <p class="shimmer h-[20px] w-12"></p>
 
-        <p class="shimmer w-28 h-[20px]"></p>
+        <p class="shimmer h-[20px] w-28"></p>
     </div>
 
     <!-- Price range slider effect -->
-    <div class="flex justify-center relative items-center w-full h-20 mx-auto p-2">
-        <div class="shimmer relative w-full h-1 bg-gray-200 rounded-2xl">
-            <div class="shimmer absolute -top-2.5 -left-1 w-6 h-6 rounded-full"></div>
-            <div class="shimmer absolute -top-2.5 -right-1 w-6 h-6 rounded-full"></div>
+    <div class="relative mx-auto flex h-20 w-full items-center justify-center p-2">
+        <div class="shimmer relative h-1 w-full rounded-2xl bg-gray-200">
+            <div class="shimmer absolute -left-1 -top-2.5 h-6 w-6 rounded-full"></div>
+            <div class="shimmer absolute -right-1 -top-2.5 h-6 w-6 rounded-full"></div>
         </div>
 
     </div>

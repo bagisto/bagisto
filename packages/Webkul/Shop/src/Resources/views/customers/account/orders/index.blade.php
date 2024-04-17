@@ -9,7 +9,7 @@
         <x-shop::breadcrumbs name="orders" />
     @endSection
 
-    <div class="flex justify-between items-center">
+    <div class="flex items-center justify-between">
         <div class="">
             <h2 class="text-2xl font-medium">
                 @lang('shop::app.customers.account.orders.title')

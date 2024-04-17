@@ -282,7 +282,7 @@
             </div>
 
             <div class="invoice-summary">
-                <div class="table address">
+                <div class="address table">
                     <table>
                         <thead>
                             <tr>
@@ -326,7 +326,7 @@
                     </table>
                 </div>
 
-                <div class="table payment-shipment">
+                <div class="payment-shipment table">
                     <table>
                         <thead>
                             <tr>
@@ -367,12 +367,12 @@
                     </table>
                 </div>
 
-                <div class="table items">
+                <div class="items table">
                     <table>
                         <thead>
                             <tr>
                                 @foreach (['sku', 'product-name', 'price', 'qty', 'subtotal', 'tax-amount', 'grand-total'] as $item)
-                                    <th class="text-center table-header">
+                                    <th class="table-header text-center">
                                         @lang('shop::app.customers.account.orders.invoice-pdf.' . $item)
                                     </th>
                                 @endforeach

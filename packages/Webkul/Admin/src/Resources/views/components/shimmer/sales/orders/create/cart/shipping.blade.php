@@ -1,18 +1,18 @@
 @for ($i = 1; $i <= 2; $i++)
-    <div class="grid gap-4 p-4 border-b dark:border-gray-800 last:border-b-0">
-        <div class="flex gap-4 justify-between">
+    <div class="grid gap-4 border-b p-4 last:border-b-0 dark:border-gray-800">
+        <div class="flex justify-between gap-4">
             <!-- Infomration -->
-            <div class="flex gap-2 items-center">
-                <div class="shimmer w-[24px] h-[24px]"></div>
+            <div class="flex items-center gap-2">
+                <div class="shimmer h-[24px] w-[24px]"></div>
 
-                <div class="shimmer w-[70px] h-[17px]"></div>
+                <div class="shimmer h-[17px] w-[70px]"></div>
             </div>
 
             <!-- Total -->
-            <div class="shimmer w-[49px] h-[24px]"></div>
+            <div class="shimmer h-[24px] w-[49px]"></div>
         </div>
 
         <!-- Description -->
-        <div class="shimmer w-[150px] h-[17px]"></div>
+        <div class="shimmer h-[17px] w-[150px]"></div>
     </div>
 @endfor

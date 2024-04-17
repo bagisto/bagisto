@@ -23,7 +23,7 @@
             </v-product-bundle-option-item>
 
             <div class="p-4">
-                <div class="flex justify-between items-center my-[20px]">
+                <div class="my-[20px] flex items-center justify-between">
                     <p class="text-sm dark:text-white">
                         @lang('admin::app.sales.orders.create.types.bundle.total-amount')
                     </p>
@@ -35,7 +35,7 @@
 
                 <ul class="grid gap-2.5 text-base">
                     <li v-for="option in options">
-                        <span class="inline-block mb-1.5 dark:text-white">
+                        <span class="mb-1.5 inline-block dark:text-white">
                             @{{ option.label }}
                         </span>
 
@@ -93,7 +93,7 @@
                     <div class="grid gap-2">
                         <!-- None radio option if option is not required -->
                         <div
-                            class="flex gap-x-4 select-none"
+                            class="flex select-none gap-x-4"
                             v-if="! option.is_required"
                         >
                             <x-admin::form.control-group.control
@@ -108,7 +108,7 @@
                             />
 
                             <label
-                                class="text-sm text-[#6E6E6E] dark:text-gray-300 cursor-pointer"
+                                class="cursor-pointer text-sm text-[#6E6E6E] dark:text-gray-300"
                                 :for="'bundle_options[' + option.id + '][' + index + ']'"
                             >
                                 @lang('admin::app.sales.orders.create.types.bundle.none')
@@ -117,7 +117,7 @@
 
                         <!-- Options -->
                         <div
-                            class="flex gap-x-4 items-center select-none"
+                            class="flex select-none items-center gap-x-4"
                             v-for="(product, index) in option.products"
                         >
                             <x-admin::form.control-group.control
@@ -132,7 +132,7 @@
                             />
 
                             <label
-                                class="text-sm text-[#6E6E6E] dark:text-gray-300 cursor-pointer"
+                                class="cursor-pointer text-sm text-[#6E6E6E] dark:text-gray-300"
                                 :for="'bundle_options[' + option.id + '][' + index + ']'"
                             >
                                 @{{ product.name }}
@@ -149,7 +149,7 @@
                     <div class="grid gap-2">
                         <!-- Options -->
                         <div
-                            class="flex gap-x-4 items-center select-none"
+                            class="flex select-none items-center gap-x-4"
                             v-for="(product, index) in option.products"
                         >
                             <x-admin::form.control-group.control
@@ -164,7 +164,7 @@
                             />
 
                             <label
-                                class="text-sm text-[#6E6E6E] dark:text-gray-300 cursor-pointer"
+                                class="cursor-pointer text-sm text-[#6E6E6E] dark:text-gray-300"
                                 :for="'bundle_options[' + option.id + '][' + index + ']'"
                             >
                                 @{{ product.name }}
@@ -209,7 +209,7 @@
                 <x-admin::quantity-changer
                     ::name="'bundle_option_qty[' + option?.id + ']'"
                     ::value="productQty"
-                    class="gap-x-4 w-max rounded-l py-1 px-4 mt-5"
+                    class="mt-5 w-max gap-x-4 rounded-l px-4 py-1"
                     @change="qtyUpdated($event)"
                 />
             </template>

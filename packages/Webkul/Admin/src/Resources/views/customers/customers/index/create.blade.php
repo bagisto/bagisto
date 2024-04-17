@@ -9,7 +9,7 @@
                 <x-admin::modal ref="customerCreateModal">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="text-lg text-gray-800 dark:text-white font-bold">
+                        <p class="text-lg font-bold text-gray-800 dark:text-white">
                             @lang('admin::app.customers.customers.index.create.title')
                         </p>
                     </x-slot>
@@ -20,7 +20,7 @@
 
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- First Name -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="mb-2.5 w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.customers.index.create.first-name')
                                 </x-admin::form.control-group.label>
@@ -38,7 +38,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Last Name -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="mb-2.5 w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.customers.index.create.last-name')
                                 </x-admin::form.control-group.label>
@@ -174,7 +174,7 @@
                     <!-- Modal Footer -->
                     <x-slot:footer>
                         <!-- Modal Submission -->
-                        <div class="flex gap-x-2.5 items-center">
+                        <div class="flex items-center gap-x-2.5">
                             <!-- Save Button -->
                             <x-admin::button
                                 button-type="submit"

@@ -16,35 +16,35 @@
 
         <!-- Total Sales Section -->
         <template v-else>
-            <div class="rounded box-shadow">
-                <div class="flex gap-4 flex-wrap p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800">
+            <div class="box-shadow rounded">
+                <div class="flex flex-wrap gap-4 border-b bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
                     <!-- Today's Sales -->
-                    <div class="flex gap-2.5 flex-1">
+                    <div class="flex flex-1 gap-2.5">
                         <img
-                            class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
+                            class="h-[60px] max-h-[60px] w-full max-w-[60px] dark:mix-blend-exclusion dark:invert"
                             src="{{ bagisto_asset('images/total-sales.svg')}}"
                             title="@lang('admin::app.dashboard.index.today-sales')"
                         >
 
                         <!-- Sales Stats -->
-                        <div class="grid gap-1 place-content-start">
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                        <div class="grid place-content-start gap-1">
+                            <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
                                 @{{ report.statistics.total_sales.formatted_total }}
                             </p>
 
-                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.dashboard.index.today-sales')
                             </p>
 
                             <!-- Percentage Of Sales -->
-                            <div class="flex gap-0.5 items-center">
+                            <div class="flex items-center gap-0.5">
                                 <span
-                                    class="text-base  text-emerald-500"
+                                    class="text-base text-emerald-500"
                                     :class="[report.statistics.total_sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-xs text-emerald-500 font-semibold"
+                                    class="text-xs font-semibold text-emerald-500"
                                     :class="[report.statistics.total_sales.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.total_sales.progress.toFixed(2)) }}%
@@ -54,32 +54,32 @@
                     </div>
 
                     <!-- Today's Orders -->
-                    <div class="flex gap-2.5 flex-1">
+                    <div class="flex flex-1 gap-2.5">
                         <img
-                            class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
+                            class="h-[60px] max-h-[60px] w-full max-w-[60px] dark:mix-blend-exclusion dark:invert"
                             src="{{ bagisto_asset('images/total-orders.svg')}}"
                             title="@lang('admin::app.dashboard.index.today-orders')"
                         >
 
                         <!-- Orders Stats -->
-                        <div class="grid gap-1 place-content-start">
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                        <div class="grid place-content-start gap-1">
+                            <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
                                 @{{ report.statistics.total_orders.current }}
                             </p>
 
-                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.dashboard.index.today-orders')
                             </p>
 
                             <!-- Orders Percentage -->
-                            <div class="flex gap-0.5 items-center">
+                            <div class="flex items-center gap-0.5">
                                 <span
-                                    class="text-base  text-emerald-500"
+                                    class="text-base text-emerald-500"
                                     :class="[report.statistics.total_orders.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-xs text-emerald-500 font-semibold"
+                                    class="text-xs font-semibold text-emerald-500"
                                     :class="[report.statistics.total_orders.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.total_orders.progress.toFixed(2)) }}%
@@ -89,32 +89,32 @@
                     </div>
 
                     <!-- Today's Customers -->
-                    <div class="flex gap-2.5 flex-1">
+                    <div class="flex flex-1 gap-2.5">
                         <img
-                            class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
+                            class="h-[60px] max-h-[60px] w-full max-w-[60px] dark:mix-blend-exclusion dark:invert"
                             src="{{ bagisto_asset('images/customers.svg')}}"
                             title="@lang('admin::app.dashboard.index.today-customers')"
                         >
 
                         <!-- Customers Stats -->
-                        <div class="grid gap-1 place-content-start">
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                        <div class="grid place-content-start gap-1">
+                            <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
                                 @{{ report.statistics.total_customers.current }}
                             </p>
 
-                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.dashboard.index.today-customers')
                             </p>
 
                             <!-- Customers Percentage -->
-                            <div class="flex gap-0.5 items-center">
+                            <div class="flex items-center gap-0.5">
                                 <span
-                                    class="text-base  text-emerald-500"
+                                    class="text-base text-emerald-500"
                                     :class="[report.statistics.total_customers.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-xs text-emerald-500 font-semibold"
+                                    class="text-xs font-semibold text-emerald-500"
                                     :class="[report.statistics.total_customers.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.total_customers.progress.toFixed(2)) }}%
@@ -127,14 +127,14 @@
                 <!-- Today Orders Details -->
                 <div 
                     v-for="order in report.statistics.orders"
-                    class="p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="border-b bg-white p-4 transition-all hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-950"
                 >
-                    <div class="flex gap-4 flex-wrap">
+                    <div class="flex flex-wrap gap-4">
                         <!-- Total Sales -->
-                        <div class="flex gap-2.5 flex-1 min-w-[180px]">
+                        <div class="flex min-w-[180px] flex-1 gap-2.5">
                             <div class="flex flex-col gap-1.5">
                                 <!-- Order Id -->
-                                <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
                                     @{{ "@lang('admin::app.dashboard.index.order-id', ['id' => ':replace'])".replace(':replace', order.increment_id) }}
                                 </p>
     
@@ -149,9 +149,9 @@
                             </div>
                         </div>
 
-                        <div class="flex gap-2.5 flex-1 min-w-[180px]">
+                        <div class="flex min-w-[180px] flex-1 gap-2.5">
                             <div class="flex flex-col gap-1.5">
-                                <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
                                     @{{ order.formatted_base_grand_total }}
                                 </p>
         
@@ -167,14 +167,14 @@
                             </div>
                         </div>
 
-                        <div class="flex gap-2.5 flex-1 min-w-[200px]">
+                        <div class="flex min-w-[200px] flex-1 gap-2.5">
                             <div class="flex flex-col gap-1.5">
                             <!-- Customer Detailes -->
                                 <p class="text-base text-gray-800 dark:text-white">
                                     @{{ order.customer_name }}
                                 </p>
         
-                                <p class="text-gray-600 dark:text-gray-300 break-words max-w-[180px]">
+                                <p class="max-w-[180px] break-words text-gray-600 dark:text-gray-300">
                                     @{{ order.customer_email }}
                                 </p>
         
@@ -185,11 +185,11 @@
                             </div>
                         </div>
  
-                        <div class="flex gap-2.5 flex-1 min-w-[180px] justify-between items-center">
+                        <div class="flex min-w-[180px] flex-1 items-center justify-between gap-2.5">
                             <div class="flex flex-col gap-1.5">
                                 <!-- Ordered Product Images -->
                                 <div
-                                    class="flex gap-1.5 flex-wrap"
+                                    class="flex flex-wrap gap-1.5"
                                     v-html="order.image"
                                 >
                                 </div>
@@ -197,7 +197,7 @@
 
                              <!-- View More Icon -->
                              <a :href="'{{ route('admin.sales.orders.view', ':replace') }}'.replace(':replace', order.id)">
-                                <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
+                                <span class="icon-sort-right cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                             </a>
                         </div>
                     </div>

@@ -1,8 +1,8 @@
 @for ($i = 1; $i <= 4; $i++)
     <!-- Infomration -->
-    <div class="flex gap-2 items-center p-4 border-b dark:border-gray-800 last:border-b-0">
-        <div class="shimmer w-[24px] h-[24px]"></div>
+    <div class="flex items-center gap-2 border-b p-4 last:border-b-0 dark:border-gray-800">
+        <div class="shimmer h-[24px] w-[24px]"></div>
 
-        <div class="shimmer w-[70px] h-[17px]"></div>
+        <div class="shimmer h-[17px] w-[70px]"></div>
     </div>
 @endfor
