@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'مشتریان',
+            'title' => 'مشتریان',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'ایمیل: \'%s\' بیش از یک بار در فایل واردات پیدا شده است.',
                     'duplicate-phone'        => 'تلفن: \'%s\' بیش از یک بار در فایل واردات پیدا شده است.',
-                    'invalid-customer-group' => 'گروه مشتری نامعتبر یا پشتیبانی نمی‌شود',
                     'email-not-found'        => 'ایمیل: \'%s\' در سیستم یافت نشد.',
+                    'invalid-customer-group' => 'گروه مشتری نامعتبر یا پشتیبانی نمی‌شود',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'محصولات',
+        'products' => [
+            'title' => 'محصولات',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'نرخ‌های مالیاتی',
+            'title' => 'نرخ‌های مالیاتی',
 
             'validation' => [
                 'errors' => [

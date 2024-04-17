@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'Müşteriler',
+            'title' => 'Müşteriler',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'E-posta: \'%s\' içe aktarma dosyasında birden fazla kez bulunuyor.',
                     'duplicate-phone'        => 'Telefon: \'%s\' içe aktarma dosyasında birden fazla kez bulunuyor.',
-                    'invalid-customer-group' => 'Müşteri grubu geçersiz veya desteklenmiyor',
                     'email-not-found'        => 'E-posta: \'%s\' sistemde bulunamadı.',
+                    'invalid-customer-group' => 'Müşteri grubu geçersiz veya desteklenmiyor',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'Ürünler',
+        'products' => [
+            'title' => 'Ürünler',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'Vergi Oranları',
+            'title' => 'Vergi Oranları',
 
             'validation' => [
                 'errors' => [
