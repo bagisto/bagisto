@@ -1,6 +1,6 @@
 # UPGRADE Guide
 
-- [Upgrading To v2.1.0 From v2.2.0](#upgrade-2.2.0)
+- [Upgrading To v2.2.0 From v2.1.0](#upgrade-2.2.0)
 
 <a name="high-impact-changes"></a>
 ## High Impact Changes
@@ -8,16 +8,7 @@
 <div class="content-list" markdown="1">
 
 - [Updating Dependencies](#updating-dependencies)
-- [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
-- [Removed Cart Traits](#removed-cart-traits)
 - [The `Webkul\Checkout\Cart` class](#the-cart-class)
-- [Moved `coupon.blade.php`](#moved-coupon-blade)
-- [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
-- [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
-- [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
-- [Shop Event parameter updated](#event-parameter-updated)
-- [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
-- [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
 
 </div>
 
@@ -25,17 +16,30 @@
 ## Medium Impact Changes
 
 <div class="content-list" markdown="1">
+
+- [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
+- [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
+- [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
+- [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
+- [Shop Event parameter updated](#event-parameter-updated)
+
 </div>
 
 <a name="low-impact-changes"></a>
 ## Low Impact Changes
 
 <div class="content-list" markdown="1">
+
+- [Removed Cart Traits](#removed-cart-traits)
+- [Moved `coupon.blade.php`](#moved-coupon-blade)
+- [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
+- [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
+
 </div>
 
 
 <a name="upgrade-2.2.0"></a>
-## Upgrading To v2.1.0 From v2.2.0
+## Upgrading To v2.2.0 From v2.1.0
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
@@ -45,7 +49,7 @@
 <a name="updating-dependencies"></a>
 ### Updating Dependencies
 
-**Likelihood Of Impact: High**
+**Impact Probability: High**
 
 #### PHP 8.2.0 Required
 
@@ -69,6 +73,8 @@ There is no dependency needed to be updated at for this upgrade.
 
 <a name="the-cart-model"></a>
 #### The `Webkul\Checkout\Models\Cart` model
+
+**Impact Probability: Medium**
 
 1. The `addresses` method has been removed. It was previously utilized in the `billing_address` and `shipping_address` methods. We have now revised both the `billing_address` and `shipping_address` relationships, rendering the addresses method unnecessary.
 
@@ -134,6 +140,8 @@ There is no dependency needed to be updated at for this upgrade.
 <a name="removed-cart-traits"></a>
 #### Removed Cart Traits
 
+**Impact Probability: Low**
+
 All methods from the following traits have been relocated to the `Webkul\Checkout\Cart` class, and the traits have been removed (Reference #9595).
 
 <div class="content-list" markdown="1">
@@ -147,6 +155,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 <a name="the-cart-class"></a>
 #### The `Webkul\Checkout\Cart` class
+
+**Impact Probability: High**
 
 1. The `initCart` method now accepts an optional `Webkul\Customer\Models\Customer` model instance and initializes the cart based on this parameter.
 
@@ -233,12 +243,16 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 <a name="moved-coupon-blade"></a>
 #### Moved `coupon.blade.php`
 
+**Impact Probability: Low**
+
 1. The file `packages/Webkul/Shop/src/Resources/views/checkout/cart/coupon.blade.php` has been relocated to the `packages/Webkul/Shop/src/Resources/views/checkout/coupon.blade.php` directory. This move was made because the file is included on both the checkout and cart pages.
 
 
 
 <a name="product"></a>
 ### Product
+
+**Impact Probability: Medium**
 
 <a name="the-elastic-search-repository"></a>
 #### The `Webkul\Product\Repositories\ElasticSearchRepository` Repository
@@ -260,6 +274,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 <a name="the-product-repository"></a>
 #### The `Webkul\Product\Repositories\ProductRepository` Repository
+
+**Impact Probability: Medium**
 
 1. We've made revisions to the `getAll` method to allow for optional search parameters.
 
@@ -287,6 +303,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 <a name="Sales"></a>
 ### Sales
 
+**Impact Probability: Low**
+
 <a name="the-order-item-repository"></a>
 #### The `Webkul\Sales\Repositories\OrderItemRepository` Repository
 
@@ -304,6 +322,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 <a name="event-parameter-updated"></a>
 #### Shop Event parameter updated
 
+**Impact Probability: Medium**
+
 1. The event data previously containing an email address has been updated to include an instance of the `Webkul\Customer\Models\Customer` model.
 
 ```diff
@@ -313,6 +333,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 <a name="renamed-shop-api-routes-names"></a>
 #### Renamed Shop API Route Names
+
+**Impact Probability: Low**
 
 1. The routes names have been renamed for consistency in the `packages/Webkul/Shop/src/Routes/api.php` route file (Reference #9586).
 
@@ -330,6 +352,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 <a name="renamed-shop-controller-method-names"></a>
 #### Renamed Shop Controller Method Names
+
+**Impact Probability: Low**
 
 1. The controller action names for the following routes have been renamed to ensure consistency with the `packages/Webkul/Shop/src/Routes/customer-routes.php` route file (Reference #9586).
 
