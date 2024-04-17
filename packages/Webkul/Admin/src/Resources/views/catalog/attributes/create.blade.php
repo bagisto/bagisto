@@ -275,7 +275,7 @@
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
                                                         <p class="dark:text-white">
-                                                            @{{ element.params.admin_name}}
+                                                            @{{ element.params.admin_name }}
                                                         </p>
 
                                                         <input

@@ -33,7 +33,7 @@
                 <ul class="grid gap-2.5 text-base">
                     <li v-for="option in options">
                         <span class="mb-1.5 inline-block">
-                            @{{ option.label}}
+                            @{{ option.label }}
                         </span>
 
                         <template v-for="product in option.products">

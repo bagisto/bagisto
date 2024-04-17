@@ -634,7 +634,7 @@
                                                     target="_blank"
                                                     class="break-all text-blue-600 transition-all hover:underline"
                                                 >
-                                                    @{{ element.file_name}}
+                                                    @{{ element.file_name }}
                                                 </a>
                                             </div>
                                         </template>
