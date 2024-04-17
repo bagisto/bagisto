@@ -53,7 +53,7 @@
 
 #### PHP 8.2.0 Required
 
-Laravel now requires PHP 8.2.0 or greater.
+Laravel now requires PHP 8.1.0 or greater.
 
 #### curl 7.34.0 Required
 
