@@ -142,7 +142,7 @@ There is no dependency needed to be updated at for this upgrade.
 
 **Impact Probability: Low**
 
-All methods from the following traits have been relocated to the `Webkul\Checkout\Cart` class, and the traits have been removed (Reference #9595).
+All methods from the following traits have been relocated to the `Webkul\Checkout\Cart` class, and the traits have been removed.
 
 <div class="content-list" markdown="1">
 
@@ -336,7 +336,7 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 **Impact Probability: Low**
 
-1. The routes names have been renamed for consistency in the `packages/Webkul/Shop/src/Routes/api.php` route file (Reference #9586).
+1. The routes names have been renamed for consistency in the `packages/Webkul/Shop/src/Routes/api.php` route file.
 
 
 ```diff
@@ -355,7 +355,7 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 **Impact Probability: Low**
 
-1. The controller action names for the following routes have been renamed to ensure consistency with the `packages/Webkul/Shop/src/Routes/customer-routes.php` route file (Reference #9586).
+1. The controller action names for the following routes have been renamed to ensure consistency with the `packages/Webkul/Shop/src/Routes/customer-routes.php` route file.
 
 ```diff
 - Route::get('', 'show')->name('shop.customer.session.index');
