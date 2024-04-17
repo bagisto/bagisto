@@ -264,12 +264,12 @@
 
                                         <p class="text-gray-600 dark:text-gray-300">
                                             <template v-if="address.address">
-                                                @{{ address.address.split('\n').join(', ') }}
+                                                @{{ address.address.split('\n').join(', ') }},
                                             </template>
 
                                             @{{ address.city }},
                                             @{{ address.state }},
-                                            @{{ address.country }}
+                                            @{{ address.country }},
                                             @{{ address.postcode }}
                                         </p>
 
@@ -409,7 +409,10 @@
                             this.customer.addresses.forEach(address => address.default_address = false);
                         }
 
-                        this.customer.addresses.push(address);
+                        this.customer.addresses.push({
+                            ...address,
+                            address: address.address.join('\n'),
+                        });
                     },
 
                     addressUpdated(updatedAddress) {
@@ -417,13 +420,16 @@
                             this.customer.addresses.forEach(address => address.default_address = false);
                         }
 
-                        let toUpdate = this.customer.addresses.find(address => address.id == updatedAddress.id);
+                        this.customer.addresses =this.customer.addresses.map(address => {
+                            if (address.id === updatedAddress.id) {
+                                return {
+                                    ...updatedAddress,
+                                    address: updatedAddress.address.join('\n'),
+                                };
+                            }
 
-                        if (! toUpdate) {
-                            return;
-                        }
-
-                        Object.assign(toUpdate, updatedAddress);
+                            return address;
+                        });
                     },
                 },
             });
