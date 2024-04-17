@@ -7,18 +7,18 @@
 
     <div class="container mt-8 px-[60px] max-lg:px-8">
         <!-- Form Container -->
-		<div class="w-full max-w-[870px] m-auto px-[90px] p-16 border border-[#E9E9E9] rounded-xl max-md:px-8 max-md:py-8">
-			<h1 class="text-4xl font-dmserif max-sm:text-2xl">
+		<div class="m-auto w-full max-w-[870px] rounded-xl border border-[#E9E9E9] p-16 px-[90px] max-md:px-8 max-md:py-8">
+			<h1 class="font-dmserif text-4xl max-sm:text-2xl">
                 @lang('shop::app.home.contact.title')
             </h1>
 
-			<p class="mt-4 text-[#6E6E6E] text-xl max-sm:text-base">
+			<p class="mt-4 text-xl text-[#6E6E6E] max-sm:text-base">
                 @lang('shop::app.home.contact.about')
             </p>
 
             <div class="mt-14 rounded max-sm:mt-8">
                 <!-- Contact Form -->
-                <x-shop::form :action="route('shop.home.contact.send_contact_us_mail')">
+                <x-shop::form :action="route('shop.home.contact_us.send_mail')">
                     <!-- Name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
@@ -27,7 +27,7 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="!p-[20px_25px] rounded-lg"
+                            class="rounded-lg !p-[20px_25px]"
                             name="name"
                             rules="required"
                             :value="old('name')"
@@ -48,7 +48,7 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="!p-[20px_25px] rounded-lg"
+                            class="rounded-lg !p-[20px_25px]"
                             name="email"
                             rules="required|email"
                             :value="old('email')"
@@ -69,7 +69,7 @@
 
                         <x-shop::form.control-group.control
                             type="number"
-                            class="!p-[20px_25px] rounded-lg"
+                            class="rounded-lg !p-[20px_25px]"
                             name="contact"
                             :value="old('contact')"
                             :label="trans('shop::app.home.contact.phone-number')"
@@ -88,7 +88,7 @@
 
                         <x-shop::form.control-group.control
                             type="textarea"
-                            class="!p-[20px_25px] rounded-lg"
+                            class="rounded-lg !p-[20px_25px]"
                             name="message"
                             rules="required"
                             :label="trans('shop::app.home.contact.message')"
@@ -103,15 +103,15 @@
 
                     <!-- Recaptcha -->
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
-                        <div class="flex mb-5">
+                        <div class="mb-5 flex">
                             {!! Captcha::render() !!}
                         </div>
                     @endif
 
                     <!-- Submit Button -->
-                    <div class="flex gap-9 flex-wrap items-center mt-8">
+                    <div class="mt-8 flex flex-wrap items-center gap-9">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-4 px-11 mx-auto m-0 ltr:ml-0 rtl:mr-0 rounded-2xl text-base text-center"
+                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base ltr:ml-0 rtl:mr-0"
                             type="submit"
                         >
                             @lang('shop::app.home.contact.submit')

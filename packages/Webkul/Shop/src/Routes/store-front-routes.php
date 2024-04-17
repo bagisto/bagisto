@@ -35,8 +35,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
         ->name('shop.home.contact_us')
         ->middleware('cacheResponse');
 
-    Route::post('contact-us', [HomeController::class, 'sendContactUsMail'])
-        ->name('shop.home.contact.send_contact_us_mail')
+    Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail'])
+        ->name('shop.home.contact_us.send_mail')
         ->middleware('cacheResponse');
 
     /**
