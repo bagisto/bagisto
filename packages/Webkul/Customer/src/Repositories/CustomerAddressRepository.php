@@ -24,6 +24,8 @@ class CustomerAddressRepository extends Repository
     {
         $defaultAddress = $this->findOneWhere(['customer_id' => $data['customer_id'], 'default_address' => 1]);
 
+        $data['default_address'] = $data['default_address'] ?? 0;
+
         if (
             $defaultAddress
             && $data['default_address']
