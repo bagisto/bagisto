@@ -559,6 +559,11 @@
                                                 disabled
                                             >
                                         </v-field>
+
+                                        <!-- Regex Info -->
+                                        <p class="mt-2 text-xs font-medium text-gray-500 dark:text-gray-300">
+                                            @lang('admin::app.catalog.attributes.create.regex-info')
+                                        </p>
                                     </x-admin::form.control-group>
                                 @endif
 
