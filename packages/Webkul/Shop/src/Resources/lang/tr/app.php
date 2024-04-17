@@ -765,11 +765,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Bize bir not bırakın ve en kısa sürede size geri döneceğiz',
+            'desc'          => 'Aklınızda ne var?',
+            'describe-here' => 'Burayı açıklayın',
+            'email'         => 'E-posta',
+            'message'       => 'Mesaj',
+            'name'          => 'Ad',
+            'phone-number'  => 'Telefon Numarası',
+            'submit'        => 'Gönder',
+            'title'         => 'Bize Ulaşın',
+        ],
+
         'index' => [
             'offer'               => '1. siparişinizde %40\'a varan İNDİRİM ALIŞVERİŞ YAPIN',
             'resend-verify-email' => 'Doğrulama E-postası Tekrar Gönder',
             'verify-email'        => 'E-posta hesabınızı doğrulayın',
         ],
+
+        'thanks-for-contact' => 'Yorumlarınız ve sorularınız için bize başvurduğunuz için teşekkür ederiz. Size çok yakında yanıt vereceğiz.',
     ],
 
     'partials' => [
@@ -869,6 +883,14 @@ return [
                 'subject'     => 'Bültenimize Abone Oldunuz',
                 'unsubscribe' => 'Aboneliği iptal et',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'Web Sitesi İletişim Formu aracılığıyla',
+            'reply-to-mail'   => 'lütfen bu e-postaya yanıt verin.',
+            'reach-via-phone' => 'Alternatif olarak, bize telefonla şu numaradan ulaşabilirsiniz:',
+            'inquiry-from'    => 'Şuradan gelen talep',
+            'to'              => 'İletişim için',
         ],
 
         'orders' => [

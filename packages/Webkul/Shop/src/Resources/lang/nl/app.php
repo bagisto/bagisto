@@ -765,11 +765,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Stuur ons een bericht en we zullen zo snel mogelijk reageren',
+            'desc'          => 'Waar denk je aan?',
+            'describe-here' => 'Beschrijf hier',
+            'email'         => 'E-mail',
+            'message'       => 'Bericht',
+            'name'          => 'Naam',
+            'phone-number'  => 'Telefoonnummer',
+            'submit'        => 'Verzenden',
+            'title'         => 'Neem contact met ons op',
+        ],
+
         'index' => [
             'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email'        => 'Verifieer je e-mailaccount',
         ],
+
+        'thanks-for-contact' => 'Bedankt voor het contact met ons opnemen met uw opmerkingen en vragen. We zullen spoedig reageren.',
     ],
 
     'partials' => [
@@ -869,6 +883,14 @@ return [
                 'subject'     => 'Je! Abonneer je op onze nieuwsbrief',
                 'unsubscribe' => 'Afmelden',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via het contactformulier op de website',
+            'reply-to-mail'   => 'antwoord alstublieft op deze e-mail.',
+            'reach-via-phone' => 'U kunt ons ook telefonisch bereiken op',
+            'inquiry-from'    => 'Vraag van',
+            'to'              => 'Om contact op te nemen met',
         ],
 
         'orders' => [
