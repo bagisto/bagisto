@@ -198,7 +198,7 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + public function refreshCart(): void
 ```
 
-7. The `putCart` method previously found in CartTools has been eliminated. It is now managed within the setCart method in the Webkul\Checkout\Cart class.
+7. The `putCart` method previously found in CartTools has been eliminated. It is now managed within the setCart method in the `Webkul\Checkout\Cart` class.
 
 ```diff
 - public function putCart($cart)
