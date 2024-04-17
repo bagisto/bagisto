@@ -27,7 +27,7 @@
                     </p>
                 </div>
 
-                <!-- Top Selling Products Detailes -->
+                <!-- Top Selling Products Details -->
                 <div
                     class="flex flex-col"
                     v-if="report.statistics.length"
@@ -55,7 +55,7 @@
                             </p>
                         </div>
 
-                        <!-- Product Detailes -->
+                        <!-- Product Details -->
                         <div class="flex w-full flex-col gap-1.5">
                             <p
                                 class="text-gray-600 dark:text-gray-300"

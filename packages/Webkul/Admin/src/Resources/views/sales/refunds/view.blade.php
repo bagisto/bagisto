@@ -61,7 +61,7 @@
                                         {{ $item->name }}
                                     </p>
 
-                                    <!-- Product Attribute Detailes -->
+                                    <!-- Product Attribute Details -->
                                     <div class="flex flex-col place-items-start gap-1.5">
                                         @if (isset($item->additional['attributes']))
                                             @foreach ($item->additional['attributes'] as $attribute)

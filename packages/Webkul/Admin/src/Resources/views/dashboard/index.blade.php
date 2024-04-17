@@ -3,7 +3,7 @@
         @lang('admin::app.dashboard.index.title')
     </x-slot>
 
-    <!-- User Detailes Section -->
+    <!-- User Details Section -->
     <div class="mb-5 flex items-center justify-between gap-4 max-sm:flex-wrap">
         <div class="grid gap-1.5">
             <p class="text-xl font-bold !leading-normal text-gray-800 dark:text-white">
@@ -29,9 +29,9 @@
     <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
         <!-- Left Section -->
         <div class="flex flex-1 flex-col gap-8 max-xl:flex-auto">
-            {!! view_render_event('bagisto.admin.dashboard.overall_detailes.before') !!}
+            {!! view_render_event('bagisto.admin.dashboard.overall_details.before') !!}
 
-            <!-- Overall Detailes -->
+            <!-- Overall Details -->
             <div class="flex flex-col gap-2">
                 <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
                     @lang('admin::app.dashboard.index.overall-details')
@@ -41,9 +41,9 @@
                 @include('admin::dashboard.over-all-details')
             </div>
 
-            {!! view_render_event('bagisto.admin.dashboard.overall_detailes.after') !!}
+            {!! view_render_event('bagisto.admin.dashboard.overall_details.after') !!}
 
-            {!! view_render_event('bagisto.admin.dashboard.todays_detailes.before') !!}
+            {!! view_render_event('bagisto.admin.dashboard.todays_details.before') !!}
 
             <!-- Todays Details -->
             <div class="flex flex-col gap-2">
@@ -55,7 +55,7 @@
                 @include('admin::dashboard.todays-details')
             </div>
 
-            {!! view_render_event('bagisto.admin.dashboard.todays_detailes.after') !!}
+            {!! view_render_event('bagisto.admin.dashboard.todays_details.after') !!}
 
             {!! view_render_event('bagisto.admin.dashboard.stock_thereshold.before') !!}
             <!-- Stock Thereshold -->
@@ -81,10 +81,10 @@
 
             <!-- Store Stats -->
             <div class="box-shadow rounded bg-white dark:bg-gray-900">
-                <!-- Total Sales Detailes -->
+                <!-- Total Sales Details -->
                 @include('admin::dashboard.total-sales')
 
-                <!-- Total Visitors Detailes -->
+                <!-- Total Visitors Details -->
                 @include('admin::dashboard.total-visitors')
 
                 <!-- Top Selling Products -->
