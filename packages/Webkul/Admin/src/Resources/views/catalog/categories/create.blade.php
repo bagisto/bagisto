@@ -81,7 +81,7 @@
                                 v-bind="field"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.name') }}"
                                 v-slugify-target:slug="setValues"
-                            >
+                            />
                         </v-field>
 
                         <x-admin::form.control-group.error control-name="name" />
@@ -183,7 +183,7 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Componnet -->
-                    <x-admin::seo/>
+                    <x-admin::seo />
 
                     <div class="mt-8">
                         <!-- Meta Title -->
@@ -225,7 +225,7 @@
                                     v-bind="field"
                                     placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
                                     v-slugify-target:slug
-                                >
+                                />
                             </v-field>
 
                             <x-admin::form.control-group.error control-name="slug" />

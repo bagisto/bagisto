@@ -1,11 +1,9 @@
 <!-- Invoice Create Vue Component -->
 <v-create-invoices>
-    <div
-        class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
-    >
-        <span class="icon-sales text-2xl"></span> 
+    <div class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+        <span class="icon-sales text-2xl"></span>
 
-        @lang('admin::app.sales.invoices.create.invoice')     
+        @lang('admin::app.sales.invoices.create.invoice')
     </div>
 </v-create-invoices>
 

@@ -116,7 +116,7 @@
                                 class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.name') }}"
                                 v-slugify-target:{{$currentLocale->code . '[slug]'}}="setValues"
-                            >
+                            />
                         </v-field>
 
                         <x-admin::form.control-group.error control-name="{{ $currentLocale->code}}[name]" />
@@ -269,7 +269,7 @@
                                     v-bind="field"
                                     placeholder="{{ trans('admin::app.catalog.categories.edit.slug') }}"
                                     v-slugify-target:slug
-                                >
+                                />
                             </v-field>
 
                             <x-admin::form.control-group.error control-name="{{$currentLocale->code}}[slug]" />
