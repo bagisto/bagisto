@@ -3605,6 +3605,10 @@ return [
                     'shop-email-from'        => '商店电子邮件地址',
                     'shop-email-from-tip'    => '用于向客户发送电子邮件的该频道的电子邮件地址',
                     'title'                  => '电子邮件设置',
+                    'contact-email'          => '联系邮箱',
+                    'contact-email-tip'      => '该邮箱地址将显示在您邮件的底部',
+                    'contact-name'           => '联系人姓名',
+                    'contact-name-tip'       => '该姓名将显示在您邮件的底部',
                 ],
 
                 'notifications' => [

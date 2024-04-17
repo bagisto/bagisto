@@ -3605,6 +3605,10 @@ return [
                     'shop-email-from'        => 'ショップの電子メールアドレス',
                     'shop-email-from-tip'    => 'このチャネルから顧客に電子メールを送信するための電子メールアドレス',
                     'title'                  => '電子メール設定',
+                    'contact-email'          => '連絡先メール',
+                    'contact-email-tip'      => 'このメールアドレスは、あなたのメールの最下部に表示されます',
+                    'contact-name'           => '連絡先の名前',
+                    'contact-name-tip'       => 'この名前は、あなたのメールの最下部に表示されます',
                 ],
 
                 'notifications' => [

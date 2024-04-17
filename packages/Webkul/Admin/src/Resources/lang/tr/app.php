@@ -3605,6 +3605,10 @@ return [
                     'shop-email-from'        => 'Mağaza E-posta Adresi',
                     'shop-email-from-tip'    => 'Bu kanalın müşterilerine e-posta göndermek için e-posta adresi',
                     'title'                  => 'E-posta Ayarları',
+                    'contact-email'          => 'İletişim E-postası',
+                    'contact-email-tip'      => 'Bu e-posta adresi e-postalarınızın alt kısmında gösterilecek',
+                    'contact-name'           => 'İletişim Adı',
+                    'contact-name-tip'       => 'Bu isim e-postalarınızın alt kısmında gösterilecek',
                 ],
 
                 'notifications' => [

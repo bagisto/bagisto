@@ -3605,6 +3605,10 @@ return [
                     'shop-email-from'        => 'Endereço de E-mail da Loja',
                     'shop-email-from-tip'    => 'O endereço de e-mail deste canal para enviar e-mails aos seus clientes',
                     'title'                  => 'Configurações de E-mail',
+                    'contact-email'          => 'E-mail de Contato',
+                    'contact-email-tip'      => 'O endereço de e-mail será mostrado no final de seus e-mails',
+                    'contact-name'           => 'Nome de Contato',
+                    'contact-name-tip'       => 'Este nome será mostrado no final de seus e-mails',
                 ],
 
                 'notifications' => [

@@ -3605,6 +3605,10 @@ return [
                     'shop-email-from'       => 'Dirección de Correo Electrónico de la Tienda',
                     'shop-email-from-tip'   => 'Dirección de correo electrónico desde la cual los clientes recibirán correos electrónicos.',
                     'title'                 => 'Configuración de Correo Electrónico',
+                    'contact-email'         => 'Correo Electrónico de Contacto',
+                    'contact-email-tip'     => 'Esta dirección de correo electrónico se utilizará para recibir correos electrónicos en este canal.',
+                    'contact-name'          => 'Nombre de Contacto',
+                    'contact-name-tip'      => 'Este nombre se mostrará en todos los correos electrónicos de contacto.',
                 ],
 
                 'notifications' => [
