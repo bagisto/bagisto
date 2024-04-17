@@ -50,15 +50,6 @@ return [
             'pending-payment' => 'Oczekuje na płatność',
             'processing'      => 'Zamówienie w trakcie realizacji',
         ],
-
-        'status'  => [
-            'all'        => 'Wszystkie',
-            'canceled'   => 'Anulowane',
-            'closed'     => 'Zamknięte',
-            'completed'  => 'Zakończone',
-            'pending'    => 'Oczekujące',
-            'processing' => 'W trakcie',
-        ],
     ],
 
     'account' => [

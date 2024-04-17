@@ -50,15 +50,6 @@ return [
             'pending-payment' => 'Ожидается оплата',
             'processing'      => 'Заказ в обработке',
         ],
-
-        'status' => [
-            'all'        => 'Все',
-            'canceled'   => 'Отменен',
-            'closed'     => 'Закрыт',
-            'completed'  => 'Завершен',
-            'pending'    => 'В ожидании',
-            'processing' => 'В обработке',
-        ],
     ],
 
     'account' => [

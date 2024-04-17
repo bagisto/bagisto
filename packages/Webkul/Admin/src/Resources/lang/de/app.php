@@ -50,15 +50,6 @@ return [
             'pending-payment' => 'Zahlung ausstehend',
             'processing'      => 'Bestellung in Bearbeitung',
         ],
-
-        'status' => [
-            'all'        => 'Alle',
-            'canceled'   => 'Storniert',
-            'closed'     => 'Geschlossen',
-            'completed'  => 'Abgeschlossen',
-            'pending'    => 'Ausstehend',
-            'processing' => 'In Bearbeitung',
-        ],
     ],
 
     'account' => [

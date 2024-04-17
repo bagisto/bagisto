@@ -50,15 +50,6 @@ return [
             'pending-payment' => 'Pagamento Pendente',
             'processing'      => 'Pedido em Processamento',
         ],
-
-        'status' => [
-            'all'        => 'Todos',
-            'canceled'   => 'Cancelado',
-            'closed'     => 'Fechado',
-            'completed'  => 'Concluído',
-            'pending'    => 'Pendente',
-            'processing' => 'Processamento',
-        ],
     ],
 
     'account' => [

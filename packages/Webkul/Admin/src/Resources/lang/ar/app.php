@@ -50,15 +50,6 @@ return [
             'pending-payment' => 'انتظار الدفع',
             'processing'      => 'جاري معالجة الطلب',
         ],
-
-        'status' => [
-            'all'        => 'الكل',
-            'canceled'   => 'ملغى',
-            'closed'     => 'مغلق',
-            'completed'  => 'مكتمل',
-            'pending'    => 'معلق',
-            'processing' => 'قيد المعالجة',
-        ],
     ],
 
     'account' => [

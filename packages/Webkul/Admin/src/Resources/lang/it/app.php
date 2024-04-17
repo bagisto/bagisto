@@ -50,15 +50,6 @@ return [
             'pending-payment' => 'Pagamento in Sospeso',
             'processing'      => 'Ordine in Elaborazione',
         ],
-
-        'status'  => [
-            'all'        => 'Tutti',
-            'canceled'   => 'Annullato',
-            'closed'     => 'Chiuso',
-            'completed'  => 'Completato',
-            'pending'    => 'In Sospeso',
-            'processing' => 'In Elaborazione',
-        ],
     ],
 
     'account' => [

@@ -50,15 +50,6 @@ return [
             'pending-payment' => 'लंबित भुगतान',
             'processing'      => 'ऑर्डर प्रसंस्कृत हो रहा है',
         ],
-
-        'status' => [
-            'all'        => 'सभी',
-            'canceled'   => 'रद्द',
-            'closed'     => 'बंद',
-            'completed'  => 'पूर्ण',
-            'pending'    => 'लंबित',
-            'processing' => 'प्रसंस्कृत हो रहा है',
-        ],
     ],
 
     'account' => [

@@ -50,15 +50,6 @@ return [
             'pending-payment' => 'Bekleyen Ödeme',
             'processing'      => 'Sipariş İşleniyor',
         ],
-
-        'status' => [
-            'all'        => 'Tümü',
-            'canceled'   => 'İptal Edildi',
-            'closed'     => 'Kapatıldı',
-            'completed'  => 'Tamamlandı',
-            'pending'    => 'Bekliyor',
-            'processing' => 'İşleniyor',
-        ],
     ],
 
     'account' => [

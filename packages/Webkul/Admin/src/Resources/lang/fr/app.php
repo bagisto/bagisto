@@ -50,15 +50,6 @@ return [
             'pending-payment' => 'Paiement en attente',
             'processing'      => 'Commande en cours de traitement',
         ],
-
-        'status' => [
-            'all'        => 'Tous',
-            'canceled'   => 'Annulée',
-            'closed'     => 'Fermée',
-            'completed'  => 'Terminée',
-            'pending'    => 'En attente',
-            'processing' => 'En cours de traitement',
-        ],
     ],
 
     'account' => [
