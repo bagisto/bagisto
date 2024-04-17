@@ -287,7 +287,7 @@
                                                         <!-- Admin-->
                                                         <x-admin::table.td>
                                                             <p class="dark:text-white">
-                                                            @{{ element.admin_name }}
+                                                                @{{ element.admin_name }}
                                                             </p>
     
                                                             <input
