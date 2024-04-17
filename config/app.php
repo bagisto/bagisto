@@ -45,6 +45,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Debug Allowed IPs
+    |--------------------------------------------------------------------------
+    |
+    | This value is used to allow the debug mode only for the specified IPs.
+    | This is useful when you want to debug the application on the production
+    | server without enabling it for everyone.
+    */
+
+    'debug_allowed_ips' => env('APP_DEBUG_ALLOWED_IPS', null),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application URL
     |--------------------------------------------------------------------------
     |

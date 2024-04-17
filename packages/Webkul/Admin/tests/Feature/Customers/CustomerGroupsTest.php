@@ -8,7 +8,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should return the listing page of customer groups', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.customers.groups.index'))
@@ -18,7 +18,7 @@ it('should return the listing page of customer groups', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in customer groups', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.groups.store'))
@@ -28,11 +28,11 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should store the newly created customers group', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.groups.store'), [
-        'code' => $code = strtolower(fake()->words(1, true)),
+        'code' => $code = fake()->numerify('code########'),
         'name' => $name = fake()->name(),
     ])
         ->assertOk()
@@ -49,10 +49,10 @@ it('should store the newly created customers group', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in customer groups', function () {
-    // Arrange
+    // Arrange.
     $customerGroup = CustomerGroup::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.customers.groups.update', $customerGroup->id))
@@ -62,10 +62,10 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update the existing customers group', function () {
-    // Arrange
+    // Arrange.
     $customerGroup = CustomerGroup::factory()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.customers.groups.update'), [
@@ -88,12 +88,12 @@ it('should update the existing customers group', function () {
 });
 
 it('should delete the existing customers groups', function () {
-    // Arrange
+    // Arrange.
     $customerGroup = CustomerGroup::factory()->create([
         'is_user_defined' => true,
     ]);
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.customers.groups.delete', $customerGroup->id))

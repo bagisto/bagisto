@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Siparişiniz iptal edildi',
                     'page-title'         => 'Sipariş #:order_id',
                     'payment-method'     => 'Ödeme Yöntemi',
+                    'reorder-btn-title'  => 'Yeniden düzenle',
                     'shipping-address'   => 'Teslimat Adresi',
                     'shipping-method'    => 'Teslimat Yöntemi',
                     'title'              => 'Görüntüle',
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Ödemeye Devam Et',
             'illegal'                   => 'Miktar sıfırdan küçük olamaz.',
+            'inactive-add'              => 'Devre dışı ürün sepete eklenemez.',
             'inactive'                  => 'Ürün devre dışı bırakıldı ve sepetten kaldırıldı',
             'inventory-warning'         => 'İstenen miktar şu anda stokta bulunmuyor, lütfen daha sonra tekrar deneyin',
             'item-add-to-cart'          => 'Ürün Başarıyla Eklendi',
