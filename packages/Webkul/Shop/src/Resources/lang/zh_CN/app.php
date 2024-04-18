@@ -722,6 +722,16 @@ return [
                 'proceed-to-checkout' => '继续结帐',
                 'sub-total'           => '小计',
                 'tax'                 => '税',
+
+                'estimate-shipping' => [
+                    'country'        => '国家',
+                    'info'           => '输入您的目的地以获取运费和税费估计。',
+                    'postcode'       => '邮政编码',
+                    'select-country' => '选择国家',
+                    'select-state'   => '选择省份',
+                    'state'          => '省份',
+                    'title'          => '估计运费和税费',
+                ],
             ],
         ],
 

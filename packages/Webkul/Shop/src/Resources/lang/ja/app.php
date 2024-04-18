@@ -722,6 +722,16 @@ return [
                 'proceed-to-checkout' => 'チェックアウトに進む',
                 'sub-total'           => '小計',
                 'tax'                 => '税金',
+
+                'estimate-shipping' => [
+                    'country'        => '国',
+                    'info'           => '配送先を入力して、配送料と税金の見積もりを取得してください。',
+                    'postcode'       => '郵便番号',
+                    'select-country' => '国を選択',
+                    'select-state'   => '都道府県を選択',
+                    'state'          => '都道府県',
+                    'title'          => '配送料と税金の見積もり',
+                ],
             ],
         ],
 

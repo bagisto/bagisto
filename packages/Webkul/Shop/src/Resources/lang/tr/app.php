@@ -722,6 +722,16 @@ return [
                 'proceed-to-checkout' => 'Ödeme İşlemine Devam Et',
                 'sub-total'           => 'Ara Toplam',
                 'tax'                 => 'Vergi',
+
+                'estimate-shipping' => [
+                    'country'        => 'Ülke',
+                    'info'           => 'Kargo ve vergi tahmini almak için hedefinizi girin.',
+                    'postcode'       => 'Posta Kodu',
+                    'select-country' => 'Ülke Seçin',
+                    'select-state'   => 'Bölge Seçin',
+                    'state'          => 'Bölge',
+                    'title'          => 'Kargo ve Vergi Tahmini',
+                ],
             ],
         ],
 

@@ -722,6 +722,16 @@ return [
                 'proceed-to-checkout' => 'Passer à la caisse',
                 'sub-total'           => 'Sous-total',
                 'tax'                 => 'Taxes',
+
+                'estimate-shipping' => [
+                    'country'        => 'Pays',
+                    'info'           => 'Entrez votre destination pour obtenir une estimation des frais de livraison et des taxes.',
+                    'postcode'       => 'Code postal',
+                    'select-country' => 'Sélectionner le pays',
+                    'select-state'   => 'Sélectionner l\'état',
+                    'state'          => 'État',
+                    'title'          => 'Estimation des frais de livraison et des taxes',
+                ],
             ],
         ],
 
