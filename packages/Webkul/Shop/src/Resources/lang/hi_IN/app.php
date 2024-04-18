@@ -686,6 +686,16 @@ return [
                 'proceed-to-checkout' => 'चेकआउट करें',
                 'sub-total'           => 'उप-कुल',
                 'tax'                 => 'कर',
+
+                'estimate-shipping' => [
+                    'country'        => 'देश',
+                    'info'           => 'अपने गंतव्य को दर्ज करें और शिपिंग और कर का अनुमान प्राप्त करें।',
+                    'postcode'       => 'पिन कोड',
+                    'select-country' => 'देश चुनें',
+                    'select-state'   => 'राज्य चुनें',
+                    'state'          => 'राज्य',
+                    'title'          => 'शिपिंग और कर का अनुमान',
+                ],
             ],
         ],
 

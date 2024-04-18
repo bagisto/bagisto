@@ -686,6 +686,16 @@ return [
                 'proceed-to-checkout' => 'Proceed To Checkout',
                 'sub-total'           => 'Subtotal',
                 'tax'                 => 'Tax',
+
+                'estimate-shipping' => [
+                    'country'        => 'Country',
+                    'info'           => 'Enter your destination to get a shipping and tax estimate.',
+                    'postcode'       => 'Zip/Postcode',
+                    'select-country' => 'Select Country',
+                    'select-state'   => 'Select State',
+                    'state'          => 'State',
+                    'title'          => 'Estimate Shipping and Tax',
+                ],
             ],
         ],
 

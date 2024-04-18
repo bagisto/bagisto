@@ -686,6 +686,16 @@ return [
                 'proceed-to-checkout' => 'Przejdź do realizacji zamówienia',
                 'sub-total'           => 'Suma częściowa',
                 'tax'                 => 'Podatek',
+
+                'estimate-shipping' => [
+                    'country'        => 'Kraj',
+                    'info'           => 'Wprowadź miejsce docelowe, aby uzyskać szacunkowy koszt wysyłki i podatku.',
+                    'postcode'       => 'Kod pocztowy',
+                    'select-country' => 'Wybierz kraj',
+                    'select-state'   => 'Wybierz województwo',
+                    'state'          => 'Województwo',
+                    'title'          => 'Szacowanie kosztów wysyłki i podatku',
+                ],
             ],
         ],
 

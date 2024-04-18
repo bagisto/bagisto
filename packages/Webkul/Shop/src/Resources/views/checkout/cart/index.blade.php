@@ -92,7 +92,7 @@
                         class="mt-8 flex flex-wrap gap-20 pb-8 max-1060:flex-col"
                         v-if="cart?.items?.length"
                     >
-                        <div class="grid flex-1 gap-6">
+                        <div class="flex flex-1 flex-col gap-6">
 
                             {!! view_render_event('bagisto.shop.checkout.cart.cart_mass_actions.before') !!}
 
@@ -412,6 +412,10 @@
                                 }
                             })
                             .catch(error => {});
+                    },
+
+                    setCart(cart) {
+                        this.cart = cart;
                     },
 
                     selectAll() {

@@ -686,6 +686,16 @@ return [
                 'proceed-to-checkout' => 'Prosseguir para o Checkout',
                 'sub-total'           => 'Subtotal',
                 'tax'                 => 'Imposto',
+
+                'estimate-shipping' => [
+                    'country'        => 'País',
+                    'info'           => 'Digite o destino para obter uma estimativa de frete e imposto.',
+                    'postcode'       => 'CEP',
+                    'select-country' => 'Selecionar País',
+                    'select-state'   => 'Selecionar Estado',
+                    'state'          => 'Estado',
+                    'title'          => 'Estimar Frete e Imposto',
+                ],
             ],
         ],
 

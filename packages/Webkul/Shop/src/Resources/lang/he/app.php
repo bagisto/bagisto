@@ -686,6 +686,16 @@ return [
                 'proceed-to-checkout' => 'המשך לתשלום',
                 'sub-total'           => 'סכום ביניים',
                 'tax'                 => 'מס',
+
+                'estimate-shipping' => [
+                    'country'        => 'מדינה',
+                    'info'           => 'הזן את היעד שלך כדי לקבל חישוב של משלוח ומס.',
+                    'postcode'       => 'מיקוד',
+                    'select-country' => 'בחר מדינה',
+                    'select-state'   => 'בחר מדינה',
+                    'state'          => 'מדינה',
+                    'title'          => 'חישוב משלוח ומס',
+                ],
             ],
         ],
 
