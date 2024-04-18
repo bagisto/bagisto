@@ -34,6 +34,7 @@
 - [Moved `coupon.blade.php`](#moved-coupon-blade)
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
+- [Renamed Admin View render event Names](#renamed-admin-view-render-event-names)
 
 </div>
 
@@ -363,5 +364,32 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 - Route::post('', 'create')->name('shop.customer.session.create');
 + Route::post('', 'store')->name('shop.customer.session.create');
+
+```
+
+
+
+<a name="Admin"></a>
+### Admin
+
+<a name="renamed-admin-view-render-event-names"></a>
+#### Admin View render event Names updated
+
+**Impact Probability: Low**
+
+1. The View render event names have been updated for consistency in the `packages/Webkul/Admin/src/Resources/views/dashboard/index.blade.php` blade file.
+
+```diff
+- {!! view_render_event('bagisto.admin.dashboard.overall_detailes.before') !!}
++ {!! view_render_event('bagisto.admin.dashboard.overall_details.before') !!}
+
+- {!! view_render_event('bagisto.admin.dashboard.overall_detailes.after') !!}
++ {!! view_render_event('bagisto.admin.dashboard.overall_details.after') !!}
+
+- {!! view_render_event('bagisto.admin.dashboard.todays_detailes.before') !!}
++ {!! view_render_event('bagisto.admin.dashboard.todays_details.before') !!}
+
+- {!! view_render_event('bagisto.admin.dashboard.todays_detailes.after') !!}
++ {!! view_render_event('bagisto.admin.dashboard.todays_details.after') !!}
 
 ```
