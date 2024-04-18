@@ -27,7 +27,7 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="name"
                             rules="required"
                             :value="old('name')"
@@ -48,7 +48,7 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="email"
                             rules="required|email"
                             :value="old('email')"
@@ -69,7 +69,7 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="contact"
                             :value="old('contact')"
                             :label="trans('shop::app.home.contact.phone-number')"
@@ -88,7 +88,7 @@
 
                         <x-shop::form.control-group.control
                             type="textarea"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="message"
                             rules="required"
                             :label="trans('shop::app.home.contact.message')"
