@@ -121,15 +121,6 @@ class CMSPagesTableSeeder extends Seeder
                     'meta_keywords'    => 'term, use',
                 ], [
                     'locale'           => $locale,
-                    'cms_page_id'      => 6,
-                    'url_key'          => 'contact-us',
-                    'html_content'     => '<div class="static-container"><div class="mb-5">'.trans('installer::app.seeders.cms.pages.contact-us.content', [], $locale).'</div></div>',
-                    'page_title'       => trans('installer::app.seeders.cms.pages.contact-us.title', [], $locale),
-                    'meta_title'       => 'Contact Us',
-                    'meta_description' => '',
-                    'meta_keywords'    => 'contact, us',
-                ], [
-                    'locale'           => $locale,
                     'cms_page_id'      => 7,
                     'url_key'          => 'customer-service',
                     'html_content'     => '<div class="static-container"><div class="mb-5">'.trans('installer::app.seeders.cms.pages.customer-service.content', [], $locale).'</div></div>',

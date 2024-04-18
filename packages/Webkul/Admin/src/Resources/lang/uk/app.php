@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'Очікується оплата',
             'processing'      => 'Замовлення обробляється',
         ],
-
-        'status'  => [
-            'all'        => 'Всі',
-            'canceled'   => 'Скасовано',
-            'closed'     => 'Закрито',
-            'completed'  => 'Завершено',
-            'pending'    => 'Очікує на оплату',
-            'processing' => 'Обробляється',
-        ],
     ],
 
     'account' => [

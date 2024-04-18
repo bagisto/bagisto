@@ -685,6 +685,16 @@ return [
                 'proceed-to-checkout' => 'Przejdź do realizacji zamówienia',
                 'sub-total'           => 'Suma częściowa',
                 'tax'                 => 'Podatek',
+
+                'estimate-shipping' => [
+                    'country'        => 'Kraj',
+                    'info'           => 'Wprowadź miejsce docelowe, aby uzyskać szacunkowy koszt wysyłki i podatku.',
+                    'postcode'       => 'Kod pocztowy',
+                    'select-country' => 'Wybierz kraj',
+                    'select-state'   => 'Wybierz województwo',
+                    'state'          => 'Województwo',
+                    'title'          => 'Szacowanie kosztów wysyłki i podatku',
+                ],
             ],
         ],
 
@@ -765,11 +775,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Napisz do nas, a odpowiemy tak szybko, jak to możliwe',
+            'desc'          => 'Co Cię nurtuje?',
+            'describe-here' => 'Opisz tutaj',
+            'email'         => 'E-mail',
+            'message'       => 'Wiadomość',
+            'name'          => 'Imię',
+            'phone-number'  => 'Numer telefonu',
+            'submit'        => 'Wyślij',
+            'title'         => 'Skontaktuj się z nami',
+        ],
+
         'index' => [
             'offer'               => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie. ZAKUP TERAZ',
             'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
             'verify-email'        => 'Zweryfikuj swoje konto e-mail',
         ],
+
+        'thanks-for-contact' => 'Dziękujemy za skontaktowanie się z nami. Odpowiemy na Twoje uwagi i pytania wkrótce.',
     ],
 
     'partials' => [
@@ -869,6 +893,14 @@ return [
                 'subject'     => 'Zapisano się na nasz newsletter',
                 'unsubscribe' => 'Wypisz się',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'za pośrednictwem formularza kontaktowego na stronie',
+            'reply-to-mail'   => 'prosimy o odpowiedź na ten adres e-mail.',
+            'reach-via-phone' => 'Alternatywnie, możesz się z nami skontaktować telefonicznie pod numerem',
+            'inquiry-from'    => 'Zapytanie od',
+            'to'              => 'Aby skontaktować się z',
         ],
 
         'orders' => [

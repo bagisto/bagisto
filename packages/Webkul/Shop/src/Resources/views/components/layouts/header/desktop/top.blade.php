@@ -1,6 +1,52 @@
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.before') !!}
 
-<v-topbar></v-topbar>
+<v-topbar>
+    <!-- Shimmer Effect -->
+    <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 px-16 py-3">
+        <!-- Currencies -->
+        <div class="flex w-[80px] items-center justify-between gap-2.5">
+            <div
+                class="shimmer h-6 w-[46px] rounded"
+                role="presentation"
+            >
+            </div>
+
+            <div
+                class="shimmer h-6 w-6 rounded"
+                role="presentation"
+            >
+            </div>
+        </div>
+
+        <!-- Offers -->
+        <div
+            class="shimmer h-6 w-[280px] rounded"
+            role="presentation"
+        >
+        </div>
+
+        <!-- Locales -->
+        <div class="flex w-[124px] items-center justify-between gap-2.5">
+            <div
+                class="shimmer h-6 w-6"
+                role="presentation"
+            >
+            </div>
+
+            <div
+                class="shimmer h-6 w-[56px] rounded"
+                role="presentation"
+            >
+            </div>
+
+            <div
+                class="shimmer h-6 w-6"
+                role="presentation"
+            >
+            </div>
+        </div>
+    </div>
+</v-topbar>
 
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.after') !!}
 

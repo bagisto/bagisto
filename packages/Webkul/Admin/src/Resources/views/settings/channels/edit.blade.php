@@ -209,11 +209,6 @@
                             :value="old('theme') ?? $channel->theme"
                             :label="trans('admin::app.settings.channels.edit.theme')"
                         >
-                            <!-- Default Option -->
-                            <option value="">
-                                @lang('admin::app.settings.channels.create.select-theme')
-                            </option>
-
                             @foreach (config('themes.shop') as $themeCode => $theme)
                                 <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
                                     {{ $theme['name'] }}

@@ -685,6 +685,16 @@ return [
                 'proceed-to-checkout' => 'Prosseguir para o Checkout',
                 'sub-total'           => 'Subtotal',
                 'tax'                 => 'Imposto',
+
+                'estimate-shipping' => [
+                    'country'        => 'País',
+                    'info'           => 'Digite o destino para obter uma estimativa de frete e imposto.',
+                    'postcode'       => 'CEP',
+                    'select-country' => 'Selecionar País',
+                    'select-state'   => 'Selecionar Estado',
+                    'state'          => 'Estado',
+                    'title'          => 'Estimar Frete e Imposto',
+                ],
             ],
         ],
 
@@ -765,11 +775,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Deixe-nos uma mensagem e entraremos em contato o mais rápido possível',
+            'desc'          => 'No que você está pensando?',
+            'describe-here' => 'Descreva aqui',
+            'email'         => 'E-mail',
+            'message'       => 'Mensagem',
+            'name'          => 'Nome',
+            'phone-number'  => 'Número de telefone',
+            'submit'        => 'Enviar',
+            'title'         => 'Entre em contato',
+        ],
+
         'index' => [
             'offer'               => 'GANHE ATÉ 40% DE DESCONTO no seu 1º pedido. COMPRE AGORA',
             'resend-verify-email' => 'Reenviar E-mail de Verificação',
             'verify-email'        => 'Verifique sua conta de e-mail',
         ],
+
+        'thanks-for-contact' => 'Obrigado por entrar em contato conosco com seus comentários e perguntas. Responderemos a você em breve.',
     ],
 
     'partials' => [
@@ -869,6 +893,14 @@ return [
                 'subject'     => 'Você! Inscreva-se na Nossa Newsletter',
                 'unsubscribe' => 'Cancelar Inscrição',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via Formulário de Contato do Website',
+            'reply-to-mail'   => 'por favor, responda a este e-mail.',
+            'reach-via-phone' => 'Alternativamente, você pode nos contatar por telefone em',
+            'inquiry-from'    => 'Consulta de',
+            'to'              => 'Para entrar em contato',
         ],
 
         'orders' => [
