@@ -685,6 +685,16 @@ return [
                 'proceed-to-checkout' => 'Procedi con il pagamento',
                 'sub-total'           => 'Subtotale',
                 'tax'                 => 'Imposta',
+
+                'estimate-shipping' => [
+                    'country'        => 'Paese',
+                    'info'           => 'Inserisci la tua destinazione per ottenere una stima di spedizione e imposta.',
+                    'postcode'       => 'CAP',
+                    'select-country' => 'Seleziona Paese',
+                    'select-state'   => 'Seleziona Regione',
+                    'state'          => 'Regione',
+                    'title'          => 'Calcola Spedizione e Imposta',
+                ],
             ],
         ],
 

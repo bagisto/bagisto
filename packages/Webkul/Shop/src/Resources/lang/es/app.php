@@ -685,6 +685,16 @@ return [
                 'proceed-to-checkout' => 'Continuar con el Pago',
                 'sub-total'           => 'Subtotal',
                 'tax'                 => 'Impuesto',
+
+                'estimate-shipping' => [
+                    'country'        => 'País',
+                    'info'           => 'Ingrese su destino para obtener una estimación de envío e impuestos.',
+                    'postcode'       => 'Código Postal',
+                    'select-country' => 'Seleccionar País',
+                    'select-state'   => 'Seleccionar Estado',
+                    'state'          => 'Estado',
+                    'title'          => 'Calcular Envío y Impuestos',
+                ],
             ],
         ],
 

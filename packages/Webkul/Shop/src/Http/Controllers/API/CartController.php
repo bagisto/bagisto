@@ -6,7 +6,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Resources\CartResource;
 use Webkul\Shop\Http\Resources\ProductResource;
 
@@ -147,6 +149,53 @@ class CartController extends APIController
                 'message' => $exception->getMessage(),
             ]);
         }
+    }
+
+    /**
+     * Estimate Shipping and Tax amount
+     */
+    public function estimateShippingMethods(): JsonResource
+    {
+        $this->validate(request(), [
+            'country'         => 'required',
+            'state'           => 'required',
+            'postcode'        => 'required',
+            'shipping_method' => 'sometimes|required',
+        ]);
+
+        $cart = Cart::getCart();
+
+        $address = (new CartAddress)->fill([
+            'country'  => request()->input('country'),
+            'state'    => request()->input('state'),
+            'postcode' => request()->input('postcode'),
+            'cart_id'  => $cart->id,
+        ]);
+
+        $cart->setRelation('billing_address', $address);
+
+        $cart->setRelation('shipping_address', $address);
+
+        Cart::setCart($cart);
+
+        if (request()->has('shipping_method')) {
+            Cart::saveShippingMethod(request()->input('shipping_method'));
+        }
+
+        Cart::collectTotals();
+
+        $cartResource = (new CartResource(Cart::getCart()))->jsonSerialize();
+
+        Cart::resetShippingMethod();
+
+        Cart::collectTotals();
+
+        return new JsonResource([
+            'data'     => [
+                'cart'             => $cartResource,
+                'shipping_methods' => array_values(Shipping::collectRates()['shippingMethods']),
+            ],
+        ]);
     }
 
     /**

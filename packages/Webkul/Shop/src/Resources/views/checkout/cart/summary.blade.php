@@ -12,6 +12,11 @@
 
     <!-- Cart Totals -->
     <div class="mt-6 grid gap-4">
+        <!-- Estimate Tax and Shipping -->
+        <template v-if="cart.have_stockable_items">
+            @include('shop::checkout.cart.summary.estimate-shipping')
+        </template>
+
         <!-- Sub Total -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.sub_total.before') !!}
 
