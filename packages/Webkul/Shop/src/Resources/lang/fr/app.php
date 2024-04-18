@@ -677,6 +677,16 @@ return [
                 'proceed-to-checkout' => 'Passer à la caisse',
                 'sub-total'           => 'Sous-total',
                 'tax'                 => 'Taxes',
+
+                'estimate-shipping' => [
+                    'country'        => 'Pays',
+                    'info'           => 'Entrez votre destination pour obtenir une estimation des frais de livraison et des taxes.',
+                    'postcode'       => 'Code postal',
+                    'select-country' => 'Sélectionner le pays',
+                    'select-state'   => 'Sélectionner l\'état',
+                    'state'          => 'État',
+                    'title'          => 'Estimation des frais de livraison et des taxes',
+                ],
             ],
         ],
 
@@ -757,11 +767,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Laissez-nous une note et nous vous répondrons dès que possible',
+            'desc'          => 'Qu\'est-ce qui vous préoccupe ?',
+            'describe-here' => 'Décrivez ici',
+            'email'         => 'E-mail',
+            'message'       => 'Message',
+            'name'          => 'Nom',
+            'phone-number'  => 'Numéro de téléphone',
+            'submit'        => 'Envoyer',
+            'title'         => 'Contactez-nous',
+        ],
+
         'index' => [
-            'offer'               => 'Bénéficiez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
+            'offer'               => 'Profitez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
             'resend-verify-email' => 'Renvoyer l\'e-mail de vérification',
             'verify-email'        => 'Vérifiez votre adresse e-mail',
         ],
+
+        'thanks-for-contact' => 'Merci de nous contacter avec vos commentaires et questions. Nous vous répondrons très bientôt.',
     ],
 
     'partials' => [
@@ -861,6 +885,14 @@ return [
                 'subject'     => 'Vous êtes abonné à notre newsletter',
                 'unsubscribe' => 'Se désabonner',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via Formulaire de contact du site',
+            'reply-to-mail'   => 'veuillez répondre à cet e-mail.',
+            'reach-via-phone' => 'Alternativement, vous pouvez nous joindre par téléphone au',
+            'inquiry-from'    => 'Demande de',
+            'to'              => 'Pour contacter',
         ],
 
         'orders' => [

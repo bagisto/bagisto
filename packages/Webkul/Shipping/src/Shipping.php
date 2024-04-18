@@ -61,9 +61,7 @@ class Shipping
             return;
         }
 
-        foreach ($cart->shipping_rates()->get() as $rate) {
-            $rate->delete();
-        }
+        $cart->shipping_rates()->delete();
 
         $this->rates = [];
     }
@@ -86,6 +84,8 @@ class Shipping
         }
 
         foreach ($this->rates as $rate) {
+            $rate->cart_id = $cart->id;
+
             $rate->cart_address_id = $shippingAddress->id;
 
             $rate->save();
@@ -110,6 +110,7 @@ class Shipping
             }
 
             $rate['base_formatted_price'] = core()->currency($rate->base_price);
+
             $rates[$rate->carrier]['rates'][] = $rate;
         }
 

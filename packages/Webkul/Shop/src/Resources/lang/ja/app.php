@@ -677,6 +677,16 @@ return [
                 'proceed-to-checkout' => 'チェックアウトに進む',
                 'sub-total'           => '小計',
                 'tax'                 => '税金',
+
+                'estimate-shipping' => [
+                    'country'        => '国',
+                    'info'           => '配送先を入力して、配送料と税金の見積もりを取得してください。',
+                    'postcode'       => '郵便番号',
+                    'select-country' => '国を選択',
+                    'select-state'   => '都道府県を選択',
+                    'state'          => '都道府県',
+                    'title'          => '配送料と税金の見積もり',
+                ],
             ],
         ],
 
@@ -757,11 +767,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => '私たちについて',
+            'desc'          => '何をお考えですか？',
+            'describe-here' => 'ここに説明してください',
+            'email'         => 'メール',
+            'message'       => 'メッセージ',
+            'name'          => '名前',
+            'phone-number'  => '電話番号',
+            'submit'        => '送信',
+            'title'         => 'お問い合わせ',
+        ],
+
         'index' => [
             'offer'               => '初めての注文で最大40%OFF 今すぐショッピング',
             'resend-verify-email' => '確認メールを再送信',
             'verify-email'        => 'メールアカウントを確認',
         ],
+
+        'thanks-for-contact' => 'ご意見やご質問をお寄せいただきありがとうございます。返信いたしますので、しばらくお待ちください。',
     ],
 
     'partials' => [
@@ -861,6 +885,14 @@ return [
                 'subject'     => 'ニュースレターに登録しました',
                 'unsubscribe' => '登録解除',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'ウェブサイトのお問い合わせフォーム経由で',
+            'reply-to-mail'   => 'このメールに返信してください。',
+            'reach-via-phone' => 'または、電話でお問い合わせいただけます。',
+            'inquiry-from'    => 'お問い合わせ元',
+            'to'              => 'お問い合わせ先',
         ],
 
         'orders' => [

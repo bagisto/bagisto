@@ -269,7 +269,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.about-us', [], $locale),
                                     'sort_order' => 1,
                                 ], [
-                                    'url'        => $appUrl.'/page/contact-us',
+                                    'url'        => $appUrl.'/contact-us',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.contact-us', [], $locale),
                                     'sort_order' => 2,
                                 ], [

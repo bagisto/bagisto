@@ -677,6 +677,16 @@ return [
                 'proceed-to-checkout' => '继续结帐',
                 'sub-total'           => '小计',
                 'tax'                 => '税',
+
+                'estimate-shipping' => [
+                    'country'        => '国家',
+                    'info'           => '输入您的目的地以获取运费和税费估计。',
+                    'postcode'       => '邮政编码',
+                    'select-country' => '选择国家',
+                    'select-state'   => '选择省份',
+                    'state'          => '省份',
+                    'title'          => '估计运费和税费',
+                ],
             ],
         ],
 
@@ -757,12 +767,27 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => '给我们留言，我们会尽快回复您',
+            'desc'          => '您有什么问题？',
+            'describe-here' => '在这里描述',
+            'email'         => '电子邮件',
+            'message'       => '留言',
+            'name'          => '姓名',
+            'phone-number'  => '电话号码',
+            'submit'        => '提交',
+            'title'         => '联系我们',
+        ],
+
         'index' => [
             'offer'               => '首次下单立减40%，现在开始购物',
             'resend-verify-email' => '重新发送验证电子邮件',
             'verify-email'        => '验证您的电子邮件帐户',
         ],
+
+        'thanks-for-contact' => '感谢您与我们联系，提供您的意见和问题。我们会尽快回复您。',
     ],
+
     'partials' => [
         'pagination' => [
             'pagination-showing' => '显示 :total 个条目中的 :firstItem 到 :lastItem',
@@ -860,6 +885,14 @@ return [
                 'subject'     => '您！订阅我们的新闻通讯',
                 'unsubscribe' => '取消订阅',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => '通过网站联系表格',
+            'reply-to-mail'   => '请回复此电子邮件。',
+            'reach-via-phone' => '或者，您可以通过电话联系我们：',
+            'inquiry-from'    => '来自的查询',
+            'to'              => '联系',
         ],
 
         'orders' => [

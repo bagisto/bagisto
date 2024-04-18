@@ -103,7 +103,7 @@
             </div>
 
             <!-- Product slider Image with shimmer -->
-            <div class="scrollbar-hide flex gap-8 overflow-auto 1180:hidden">
+            <div class="scrollbar-hide flex w-screen gap-8 overflow-auto 1180:hidden">
                 <x-shop::media.images.lazy
                     ::src="image.large_image_url"
                     class="w-[490px] min-w-[450px] max-sm:min-w-full"

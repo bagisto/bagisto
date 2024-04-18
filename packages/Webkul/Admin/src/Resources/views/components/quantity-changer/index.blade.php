@@ -69,9 +69,9 @@
                 decrease() {
                     if (this.quantity > 1) {
                         this.quantity -= 1;
+                        
+                        this.$emit('change', this.quantity);
                     }
-
-                    this.$emit('change', this.quantity);
                 },
             }
         });
