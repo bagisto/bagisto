@@ -9,7 +9,10 @@
     </x-slot>
 
     <!-- Create Attributes Vue Components -->
-    <v-create-attributes :all-locales="{{ $allLocales->toJson() }}"></v-create-attributes>
+    <v-create-attributes :all-locales="{{ $allLocales->toJson() }}">
+        <!-- Shimmer Effect -->
+        <x-admin::shimmer.catalog.attributes :title="trans('admin::app.catalog.attributes.create.title')" />
+    </v-create-attributes>
 
     @pushOnce('scripts')
         <script
@@ -34,7 +37,7 @@
                     </p>
 
                     <div class="flex items-center gap-x-2.5">
-                        <!-- Cancel Button -->
+                        <!-- Back Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
                             class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"

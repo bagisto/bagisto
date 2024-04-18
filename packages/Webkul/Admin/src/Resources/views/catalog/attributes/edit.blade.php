@@ -9,7 +9,10 @@
     </x-slot>
 
     <!-- Edit Attributes Vue Components -->
-    <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}"></v-edit-attributes>
+    <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}">
+        <!-- Shimmer Effect -->
+        <x-admin::shimmer.catalog.attributes :title="trans('admin::app.catalog.attributes.edit.title')" />
+    </v-edit-attributes>
 
     @pushOnce('scripts')
         <script
@@ -82,7 +85,7 @@
 
                             <!-- Locales Inputs -->
                             @foreach ($allLocales as $locale)
-                                <x-admin::form.control-group>
+                                <x-admin::form.control-group class="last:!mb-0">
                                     <x-admin::form.control-group.label>
                                         {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
                                     </x-admin::form.control-group.label>
@@ -661,9 +664,7 @@
                                         :disabled="(boolean) $valuePerChannel"
                                     />
 
-                                    <label
-                                        class="cursor-not-allowed text-xs font-medium text-gray-600 dark:text-gray-300"
-                                    >
+                                    <label class="cursor-not-allowed text-xs font-medium text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.catalog.attributes.edit.value-per-channel')
                                     </label>   
 
@@ -942,7 +943,7 @@
 
                 props: ['allLocales'],
 
-                data: function() {
+                data() {
                     return {
                         showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
 
@@ -968,7 +969,7 @@
                     }
                 },
 
-                created: function () {
+                created () {
                     this.getAttributesOption();
                 },
 
