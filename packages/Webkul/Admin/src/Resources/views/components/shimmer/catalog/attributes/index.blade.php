@@ -1,26 +1,3 @@
-@props(['title'])
-
-<div class="flex items-center justify-between">
-    <p class="text-xl font-bold text-gray-800 dark:text-white">
-        {{ $title }}
-    </p>
-
-    <div class="flex items-center gap-x-2.5">
-        <!-- Back Button -->
-        <a class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
-            @lang('admin::app.catalog.attributes.create.back-btn')
-        </a>
-
-        <!-- Save Button -->
-        <button
-            type="submit"
-            class="primary-button"
-        >
-            @lang('admin::app.catalog.attributes.create.save-btn')
-        </button>
-    </div>
-</div>
-
 <!-- Pannel Content -->
 <div class="mt-3.5 flex gap-2.5">
     <!-- Left Component -->
@@ -32,19 +9,19 @@
                 <div class="mb-6 h-14 w-full">
                     <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2 dark:border-gray-800"></div>
                 </div>
 
                 <div class="mb-6 h-14 w-full">
                     <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2 dark:border-gray-800"></div>
                 </div>
 
                 <div class="mb-2 h-14 w-full">
                     <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2 dark:border-gray-800"></div>
                 </div>
             </div>
         </div>
@@ -64,19 +41,19 @@
                 <div class="mb-6 h-14 w-full">
                     <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="shimmer flex min-h-10 w-full rounded-md px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2 dark:border-gray-800"></div>
                 </div>
 
                 <div class="mb-6 h-14 w-full">
                     <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="shimmer flex min-h-10 w-full rounded-md px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2 dark:border-gray-800"></div>
                 </div>
 
                 <div class="mb-2 h-14 w-full">
                     <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2 dark:border-gray-800"></div>
                 </div>
             </div>
         </div>
