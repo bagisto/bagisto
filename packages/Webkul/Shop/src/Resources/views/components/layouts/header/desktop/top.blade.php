@@ -4,9 +4,9 @@
     <!-- Shimmer Effect -->
     <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 px-16 py-3">
         <!-- Currencies -->
-        <div class="flex w-[80px] items-center justify-between gap-2.5">
+        <div class="flex w-20 items-center justify-between gap-2.5">
             <div
-                class="shimmer h-6 w-[46px] rounded"
+                class="shimmer h-6 w-12 rounded"
                 role="presentation"
             >
             </div>
@@ -20,13 +20,13 @@
 
         <!-- Offers -->
         <div
-            class="shimmer h-6 w-[280px] rounded"
+            class="shimmer h-6 w-72 rounded"
             role="presentation"
         >
         </div>
 
         <!-- Locales -->
-        <div class="flex w-[124px] items-center justify-between gap-2.5">
+        <div class="flex w-32 items-center justify-between gap-2.5">
             <div
                 class="shimmer h-6 w-6"
                 role="presentation"
@@ -34,7 +34,7 @@
             </div>
 
             <div
-                class="shimmer h-6 w-[56px] rounded"
+                class="shimmer h-6 w-14 rounded"
                 role="presentation"
             >
             </div>

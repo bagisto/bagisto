@@ -59,13 +59,13 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="first_name"
                             rules="required"
                             :value="old('first_name')"
                             :label="trans('shop::app.customers.signup-form.first-name')"
                             :placeholder="trans('shop::app.customers.signup-form.first-name')"
-                            aria-label="@lang('shop::app.customers.signup-form.first-name')"
+                            :aria-label="trans('shop::app.customers.signup-form.first-name')"
                             aria-required="true"
                         />
 
@@ -81,7 +81,7 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="last_name"
                             rules="required"
                             :value="old('last_name')"
@@ -103,13 +103,13 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="email"
                             rules="required|email"
                             :value="old('email')"
                             :label="trans('shop::app.customers.signup-form.email')"
                             placeholder="email@example.com"
-                            aria-label="@lang('shop::app.customers.signup-form.email')"
+                            :aria-label="trans('shop::app.customers.signup-form.email')"
                             aria-required="true"
                         />
 
@@ -125,14 +125,14 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="password"
                             rules="required|min:6"
                             :value="old('password')"
                             :label="trans('shop::app.customers.signup-form.password')"
                             :placeholder="trans('shop::app.customers.signup-form.password')"
                             ref="password"
-                            aria-label="@lang('shop::app.customers.signup-form.password')"
+                            :aria-label="trans('shop::app.customers.signup-form.password')"
                             aria-required="true"
                         />
 
@@ -148,13 +148,13 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="password_confirmation"
                             rules="confirmed:@password"
                             value=""
                             :label="trans('shop::app.customers.signup-form.password')"
                             :placeholder="trans('shop::app.customers.signup-form.confirm-pass')"
-                            aria-label="@lang('shop::app.customers.signup-form.confirm-pass')"
+                            :aria-label="trans('shop::app.customers.signup-form.confirm-pass')"
                             aria-required="true"
                         />
 
