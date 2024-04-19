@@ -49,7 +49,7 @@
                                     @{{ data.message }}
                                 </p>
 
-                                <span class="rounded-[35px] bg-gray-400 px-1.5 py-px text-xs font-semibold text-white">
+                                <span class="rounded-full bg-gray-400 px-1.5 py-px text-xs font-semibold text-white">
                                     @{{ data.status_count ?? '0' }}
                                 </span>
                             </div>
