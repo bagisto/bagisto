@@ -25,26 +25,26 @@
 <div class="mt-3.5 flex gap-2.5">
     <!-- Left Component -->
     <div class="flex flex-1 flex-col gap-2 overflow-auto">
-        <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
-            <div class="shimmer mb-4 h-5 w-[50px]"></div>
+        <div class="box-shadow rounded p-4">
+            <div class="shimmer mb-4 h-4 w-11"></div>
 
             <div>
-                <div class="mb-6 h-[55px] w-full">
-                    <div class="shimmer mb-2 h-4 w-[100px]"></div>
+                <div class="mb-6 h-14 w-full">
+                    <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="shimmer flex min-h-[39px] w-full rounded-md px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2"></div>
                 </div>
 
-                <div class="mb-6 h-[55px] w-full">
-                    <div class="shimmer mb-2 h-4 w-[100px]"></div>
+                <div class="mb-6 h-14 w-full">
+                    <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="shimmer flex min-h-[39px] w-full rounded-md px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2"></div>
                 </div>
 
-                <div class="mb-2 h-[55px] w-full">
-                    <div class="shimmer mb-2 h-4 w-[100px]"></div>
+                <div class="mb-2 h-14 w-full">
+                    <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="shimmer flex min-h-[39px] w-full rounded-md px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2"></div>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
     <!-- Right Component -->
     <div class="flex w-[360px] max-w-full flex-col gap-2">
         <!-- General -->
-        <div class="box-shadow rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow rounded">
             <div class="flex items-center justify-between p-1.5">
                 <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.catalog.attributes.create.general')
@@ -61,28 +61,28 @@
             </div>
 
             <div class="px-4 pb-4">
-                <div class="mb-6 h-[55px] w-full">
-                    <div class="shimmer mb-2 h-4 w-[100px]"></div>
+                <div class="mb-6 h-14 w-full">
+                    <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="shimmer flex min-h-[39px] w-full rounded-md px-3 py-2"></div>
+                    <div class="shimmer flex min-h-10 w-full rounded-md px-3 py-2"></div>
                 </div>
 
-                <div class="mb-6 h-[55px] w-full">
-                    <div class="shimmer mb-2 h-4 w-[100px]"></div>
+                <div class="mb-6 h-14 w-full">
+                    <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="shimmer flex min-h-[39px] w-full rounded-md px-3 py-2"></div>
+                    <div class="shimmer flex min-h-10 w-full rounded-md px-3 py-2"></div>
                 </div>
 
-                <div class="mb-2 h-[55px] w-full">
-                    <div class="shimmer mb-2 h-4 w-[100px]"></div>
+                <div class="mb-2 h-14 w-full">
+                    <div class="shimmer mb-2 h-4 w-24"></div>
 
-                    <div class="shimmer flex min-h-[39px] w-full rounded-md px-3 py-2"></div>
+                    <div class="flex min-h-10 w-full rounded-md border px-3 py-2"></div>
                 </div>
             </div>
         </div>
 
         <!-- Validation Section -->
-        <div class="box-shadow rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow rounded">
             <div class="flex items-center justify-between p-1.5">
                 <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.catalog.attributes.create.validations')
@@ -107,24 +107,26 @@
         </div>
 
         <!-- Configuration Section -->
-        <div class="box-shadow rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow rounded">
             <div class="flex items-center justify-between p-1.5">
-                <div class="shimmer h-5 w-[90px]"></div>
+                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
+                    @lang('admin::app.catalog.attributes.edit.configuration')
+                </p>
 
                 <div class="shimmer mx-2.5 h-6 w-6 rounded"></div>
             </div>
 
             <div class="px-4 pb-4">
-                <div class="mb-3 flex items-center gap-5">
+                <div class="mb-3 flex gap-5">
                     <div class="shimmer h-5 w-6"></div>
 
-                    <div class="shimmer h-5 w-[64px]"></div>
+                    <div class="shimmer h-5 w-20"></div>
                 </div>
 
-                <div class="flex items-center gap-5">
+                <div class="flex gap-5">
                     <div class="shimmer h-5 w-6"></div>
 
-                    <div class="shimmer h-5 w-[64px]"></div>
+                    <div class="shimmer h-5 w-20"></div>
                 </div>
             </div>
         </div>
