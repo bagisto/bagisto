@@ -10,22 +10,6 @@ When filing a bug report, we kindly request you to include a clear and descripti
 
 It is our collective goal to foster collaboration and find effective solutions to the challenges encountered. By actively participating in bug reporting, you not only engage fellow community members in problem-solving but also contribute significantly to the ongoing enhancement of the Bagisto project.
 
-**Projects that you can contribute in:**
-
-1. Bagisto
-
-2. Bagisto docs
-
-3. Bagisto Booking Product
-
-4. Bagisto Rest API
-
-5. Laravel-aliexpress-dropship
-
-6. Laravel-aliexpress-dropship-chrome-extension
-
-7. Bagisto-custom-style-extension
-
 **Core development ideas or discussion:**
 
 If you propose a new feature, please implement at least some of the code needed to complete the quality.
