@@ -31,8 +31,8 @@ class CartRuleCouponController extends Controller
 
     /**
      * Generate coupon code for cart rule.
-     * 
-     * @param int|string $id
+     *
+     * @param  int|string  $id
      */
     public function store($id): JsonResponse
     {
