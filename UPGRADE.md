@@ -249,7 +249,7 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 ```diff
 - public function getAll()
 + public function getAll(array $params = [])
-
+```
 
 <a name="shop-blade-updates"></a>
 ### Shop Blade Updates
