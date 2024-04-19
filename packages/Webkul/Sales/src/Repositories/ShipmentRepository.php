@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Models\Order;
-use Webkul\Sales\Repositories\ShipmentItemRepository;
 
 class ShipmentRepository extends Repository
 {
