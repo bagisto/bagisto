@@ -7,8 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Webkul\Product\Helpers\Indexers\ElasticSearch;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Helpers\Indexers\ElasticSearch;
 
 class UpdateCreateIndex implements ShouldQueue
 {

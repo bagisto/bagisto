@@ -3,6 +3,8 @@
 namespace Webkul\CatalogRule\Helpers;
 
 use Carbon\Carbon;
+use Webkul\CatalogRule\Helpers\CatalogRuleProduct;
+use Webkul\CatalogRule\Helpers\CatalogRuleProductPrice;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
 
 class CatalogRuleIndex
@@ -10,8 +12,6 @@ class CatalogRuleIndex
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleProduct  $catalogRuleProductHelper
-     * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleProductPrice  $catalogRuleProductPriceHelper
      * @return void
      */
     public function __construct(
