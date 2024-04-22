@@ -1,8 +1,14 @@
 <!-- SEO Meta Content -->
 @push('meta')
-    <meta name="description" content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"/>
+    <meta 
+        name="description" 
+        content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"
+    />
 
-    <meta name="keywords" content="{{ $category->meta_keywords }}"/>
+    <meta 
+        name="keywords" 
+        content="{{ $category->meta_keywords }}"
+    />
 
     @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
         <script type="application/ld+json">
@@ -24,7 +30,7 @@
         <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:px-4">
             <div>
                 <img
-                    class="rounded-xl"
+                    class="aspect-[4/1] max-h-full max-w-full rounded-xl"
                     src="{{ $category->banner_url }}"
                     alt="{{ $category->name }}"
                     width="1320"
