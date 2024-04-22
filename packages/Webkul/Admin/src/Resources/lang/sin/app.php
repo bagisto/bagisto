@@ -2779,12 +2779,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'ආපරයකට',
-                    'basic-settings' => 'මූලික සැකසීම්',
                     'country'        => 'රට',
                     'identifier'     => 'හඳුනාගත්කරණය',
                     'save-btn'       => 'බදා අනුපාත සුරකින්න',
                     'select-country' => 'රට තෝරන්න',
                     'select-state'   => 'රාජකාරී තෝරන්න',
+                    'settings'       => 'සැකසුම්',
                     'state'          => 'රාජකාරී',
                     'tax-rate'       => 'අනුපාතය',
                     'title'          => 'බදා අනුපාතය සංස්කරණය කරන්න',

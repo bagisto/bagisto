@@ -2779,12 +2779,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'عودة',
-                    'basic-settings' => 'الإعدادات الأساسية',
                     'country'        => 'البلد',
                     'identifier'     => 'المعرف',
                     'save-btn'       => 'حفظ سعر الضريبة',
                     'select-country' => 'اختر البلد',
                     'select-state'   => 'اختر الولاية',
+                    'settings'       => 'الإعدادات',
                     'state'          => 'الولاية',
                     'tax-rate'       => 'السعر',
                     'title'          => 'تعديل سعر الضريبة',

@@ -186,7 +186,7 @@
                     <x-admin::accordion>
                         <x-slot:header>
                             <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
-                                @lang('admin::app.settings.taxes.rates.edit.basic-settings')
+                                @lang('admin::app.settings.taxes.rates.edit.settings')
                             </p>
                         </x-slot>
                     

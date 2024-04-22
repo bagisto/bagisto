@@ -2779,12 +2779,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Volver',
-                    'basic-settings' => 'Configuración Básica',
                     'country'        => 'País',
                     'identifier'     => 'Identificador',
                     'save-btn'       => 'Guardar Tasa de Impuestos',
                     'select-country' => 'Seleccionar País',
                     'select-state'   => 'Seleccionar Estado',
+                    'settings'       => 'Configuración',
                     'state'          => 'Estado',
                     'tax-rate'       => 'Tasa',
                     'title'          => 'Editar Tasa de Impuestos',

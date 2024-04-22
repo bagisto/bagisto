@@ -2779,12 +2779,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Wróć',
-                    'basic-settings' => 'Podstawowe Ustawienia',
                     'country'        => 'Kraj',
                     'identifier'     => 'Identyfikator',
                     'save-btn'       => 'Zapisz Stawkę Podatku',
                     'select-country' => 'Wybierz Kraj',
                     'select-state'   => 'Wybierz Stan',
+                    'settings'       => 'Ustawienia',
                     'state'          => 'Stan',
                     'tax-rate'       => 'Stawka',
                     'title'          => 'Edytuj Stawkę Podatku',

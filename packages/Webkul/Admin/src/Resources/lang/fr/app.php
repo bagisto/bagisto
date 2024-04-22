@@ -2779,12 +2779,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Retour',
-                    'basic-settings' => 'Paramètres de base',
                     'country'        => 'Pays',
                     'identifier'     => 'Identifiant',
                     'save-btn'       => 'Enregistrer le taux de taxe',
                     'select-country' => 'Sélectionner un pays',
                     'select-state'   => 'Sélectionner un État',
+                    'settings'       => 'Paramètres',
                     'state'          => 'État',
                     'tax-rate'       => 'Taux',
                     'title'          => 'Modifier le taux de taxe',

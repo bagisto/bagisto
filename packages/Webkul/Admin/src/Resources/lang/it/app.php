@@ -2779,12 +2779,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Indietro',
-                    'basic-settings' => 'Impostazioni di Base',
                     'country'        => 'Paese',
                     'identifier'     => 'Identificatore',
                     'save-btn'       => 'Salva Aliquota Fiscale',
                     'select-country' => 'Seleziona Paese',
                     'select-state'   => 'Seleziona Stato',
+                    'settings'       => 'Impostazioni',
                     'state'          => 'Stato',
                     'tax-rate'       => 'Aliquota',
                     'title'          => 'Modifica Aliquota Fiscale',
