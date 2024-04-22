@@ -80,7 +80,19 @@
             </div>
         </div>
 
-        <v-theme-customizer :errors="errors"></v-theme-customizer>
+        <v-theme-customizer :errors="errors">
+            <!-- Shimmer Effects -->
+            @switch($theme->type)
+                @case('image_carousel')
+                    <x-admin::shimmer.settings.themes.image-carousel />
+                    @break
+                @case('product_carousel')
+                     <x-admin::shimmer.settings.themes.product-carousel />
+                    @break
+                @default
+                    
+            @endswitch
+        </v-theme-customizer>
     </x-admin::form>
 
     @pushOnce('scripts')
