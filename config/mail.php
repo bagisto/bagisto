@@ -108,6 +108,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Global "Contact" Address
+    |--------------------------------------------------------------------------
+    |
+    | General contact address used in the footer of the email templates.
+    | Here, you may specify a name and address that is
+    | used globally for all e-mails that are sent by your application.
+    |
+    */
+    'contact' => [
+        'address' => env('CONTACT_MAIL_ADDRESS'),
+        'name'    => env('CONTACT_MAIL_NAME', 'Contact'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Markdown Mail Settings
     |--------------------------------------------------------------------------
     |
