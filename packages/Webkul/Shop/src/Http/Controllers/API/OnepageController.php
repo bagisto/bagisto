@@ -179,7 +179,7 @@ class OnepageController extends APIController
 
         Cart::deActivateCart();
 
-        session()->flash('order', $order);
+        session()->flash('order', $order->id);
 
         return new JsonResource([
             'redirect'     => true,
