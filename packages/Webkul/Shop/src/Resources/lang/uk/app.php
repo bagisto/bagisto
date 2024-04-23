@@ -376,54 +376,46 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Вибрати дію',
-                    'select-option' => 'Вибрати опцію',
-                    'submit'        => 'Підтвердити',
-                ],
+                'length-of' => ':length з',
+                'results'   => ':total Результати',
+                'selected'  => ':total Вибрано',
 
-                'filter' => [
-                    'title' => 'Фільтр',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Ви повинні вибрати масову дію.',
+                    'must-select-a-mass-action-option' => 'Ви повинні вибрати опцію масової дії.',
+                    'no-records-selected'              => 'Не вибрано жодного запису.',
+                    'select-action'                    => 'Вибрати дію',
                 ],
 
                 'search' => [
                     'title' => 'Пошук',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Застосувати фільтри',
+                'filter' => [
+                    'apply-filter' => 'Застосувати фільтри',
+                    'title'        => 'Фільтр',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Введіть щонайменше 2 символи ...',
-                        'no-results'        => 'Результати не знайдено ...',
+                    'dropdown' => [
+                        'select' => 'Вибрати',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Введіть принаймні 2 символи...',
+                            'no-results'         => 'Результатів не знайдено...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Очистити все',
-                    'title'     => 'Спеціальні фільтри',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Минулого місяця',
-                    'last-six-months'   => 'Останні 6 місяців',
-                    'last-three-months' => 'Останні 3 місяці',
-                    'this-month'        => 'Цього місяця',
-                    'this-week'         => 'Цього тижня',
-                    'this-year'         => 'Цього року',
-                    'today'             => 'Сьогодні',
-                    'yesterday'         => 'Вчора',
+                    'custom-filters' => [
+                        'clear-all' => 'Очистити все',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'Дії',
                 'next-page'            => 'Наступна сторінка',
-                'no-records-available' => 'Записи відсутні.',
+                'no-records-available' => 'Немає доступних записів.',
                 'of'                   => 'з :total записів',
-                'page-navigation'      => 'Навігація сторінками',
+                'page-navigation'      => 'Навігація сторінок',
                 'page-number'          => 'Номер сторінки',
                 'previous-page'        => 'Попередня сторінка',
                 'showing'              => 'Показано :firstItem',

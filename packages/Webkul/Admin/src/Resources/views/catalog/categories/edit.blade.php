@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.categories.edit.title')
     </x-slot>
@@ -247,7 +246,7 @@
                                 :label="trans('admin::app.catalog.categories.edit.meta-title')"
                                 :placeholder="trans('admin::app.catalog.categories.edit.meta-title')"
                             />
-                            
+
                         </x-admin::form.control-group>
 
                         <!-- Slug -->

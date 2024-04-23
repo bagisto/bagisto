@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.refunds.index.title')
     </x-slot>
@@ -16,5 +15,4 @@
     </div>
 
     <x-admin::datagrid :src="route('admin.sales.refunds.index')" />
-
 </x-admin::layouts>

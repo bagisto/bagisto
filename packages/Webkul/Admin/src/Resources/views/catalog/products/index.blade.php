@@ -41,8 +41,19 @@
             $hasPermission = bouncer()->hasPermission('catalog.products.edit') || bouncer()->hasPermission('catalog.products.delete');
         @endphp
 
-        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
-            <template v-if="! isLoading">
+        <template #header="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
                     <div
                         class="flex select-none items-center gap-2.5"
@@ -60,7 +71,7 @@
                                     id="mass_action_select_all_records"
                                     class="peer hidden"
                                     :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                                    @change="selectAllRecords"
+                                    @change="selectAll"
                                 >
 
                                 <span
@@ -82,13 +93,13 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'font-medium text-gray-800 dark:text-white': applied.sort.column == column,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': available.columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
-                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                            available.columns.find(columnTemp => columnTemp.index === column)?.sortable ? sort(available.columns.find(columnTemp => columnTemp.index === column)): {}
                                         "
                                     >
-                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                        @{{ available.columns.find(columnTemp => columnTemp.index === column)?.label }}
                                     </span>
                                 </template>
                             </span>
@@ -102,19 +113,24 @@
                     </div>
                 </div>
             </template>
-
-            <!-- Datagrid Head Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
-            </template>
         </template>
 
-        <!-- Datagrid Body -->
-        <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
-            <template v-if="! isLoading">
+        <template #body="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div
                     class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
-                    v-for="record in records"
+                    v-for="record in available.records"
                 >
                     <!-- Name, SKU, Attribute Family Columns -->
                     <div class="flex gap-2.5">
@@ -126,7 +142,6 @@
                                 :value="record.product_id"
                                 class="peer hidden"
                                 v-model="applied.massActions.indices"
-                                @change="setCurrentSelectionMode"
                             >
 
                             <label
@@ -233,18 +248,13 @@
                             <a :href=`{{ route('admin.catalog.products.copy', '') }}/${record.product_id}`>
                                 <span class="icon-copy cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                             </a>
-                            
+
                             <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
                                 <span class="icon-sort-right cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                             </a>
                         </div>
                     </div>
                 </div>
-            </template>
-
-            <!-- Datagrid Body Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
             </template>
         </template>
     </x-admin::datagrid>
@@ -482,5 +492,4 @@
             })
         </script>
     @endPushOnce
-
 </x-admin::layouts>

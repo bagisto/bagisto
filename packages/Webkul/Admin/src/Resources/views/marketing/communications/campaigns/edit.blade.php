@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.campaigns.edit.title')
     </x-slot>
@@ -29,8 +28,8 @@
                 </a>
 
                 <!-- Save Button -->
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     class="primary-button"
                 >
                     @lang('admin::app.marketing.communications.campaigns.edit.save-btn')
@@ -95,7 +94,7 @@
                             </x-admin::form.control-group.label>
 
                             @php $selectedOption = old('marketing_event_id') ?: $campaign->marketing_event_id @endphp
-                                
+
                             <x-admin::form.control-group.control
                                 type="select"
                                 class="cursor-pointer"
@@ -105,8 +104,8 @@
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.event')"
                             >
                                 @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
-                                    <option 
-                                        value="{{ $event->id }}" 
+                                    <option
+                                        value="{{ $event->id }}"
                                         {{ $selectedOption == $event->id ? 'selected' : '' }}
                                     >
                                         {{ $event->name }}
@@ -134,8 +133,8 @@
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.email-template')"
                             >
                                 @foreach ($templates as $template)
-                                    <option 
-                                        value="{{ $template->id }}" 
+                                    <option
+                                        value="{{ $template->id }}"
                                         {{ $selectedOption == $template->id ? 'selected' : '' }}
                                     >
                                         {{ $template->name }}
@@ -163,7 +162,7 @@
                             @lang('admin::app.marketing.communications.campaigns.create.setting')
                         </p>
                     </x-slot>
-                
+
                     <x-slot:content>
                          <!-- Channel -->
                          <x-admin::form.control-group>

@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.data-transfer.imports.import.title')
     </x-slot>
@@ -114,7 +113,7 @@
 
                             @lang('admin::app.settings.data-transfer.imports.import.validation-failed-info')
                         </p>
-                        
+
                         <p class="flex items-center gap-2">
                             <i
                                 class="icon-information rounded-full text-2xl"
@@ -365,7 +364,7 @@
 
                         <p class="flex items-center gap-2">
                             <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
-                            
+
                             <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-created')
                             </span>
@@ -375,7 +374,7 @@
 
                         <p class="flex items-center gap-2">
                             <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
-                            
+
                             <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-updated')
                             </span>
@@ -385,7 +384,7 @@
 
                         <p class="flex items-center gap-2">
                             <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
-                            
+
                             <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-deleted')
                             </span>

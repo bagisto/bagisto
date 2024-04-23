@@ -376,57 +376,49 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Seleziona azione',
-                    'select-option' => 'Seleziona opzione',
-                    'submit'        => 'Invia',
-                ],
+                'length-of' => ':length di',
+                'results'   => ':total Risultati',
+                'selected'  => ':total Selezionati',
 
-                'filter' => [
-                    'title' => 'Filtro',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Devi selezionare un\'azione di massa.',
+                    'must-select-a-mass-action-option' => 'Devi selezionare un\'opzione di azione di massa.',
+                    'no-records-selected'              => 'Nessun record selezionato.',
+                    'select-action'                    => 'Seleziona Azione',
                 ],
 
                 'search' => [
                     'title' => 'Cerca',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Applica filtri',
+                'filter' => [
+                    'apply-filter' => 'Applica Filtri',
+                    'title'        => 'Filtro',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Digita almeno 2 caratteri...',
-                        'no-results'        => 'Nessun risultato trovato...',
+                    'dropdown' => [
+                        'select' => 'Seleziona',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Digita almeno 2 caratteri...',
+                            'no-results'         => 'Nessun risultato trovato...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Cancella tutto',
-                    'title'     => 'Filtri personalizzati',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Mese scorso',
-                    'last-six-months'   => 'Ultimi 6 mesi',
-                    'last-three-months' => 'Ultimi 3 mesi',
-                    'this-month'        => 'Questo mese',
-                    'this-week'         => 'Questa settimana',
-                    'this-year'         => 'Quest\'anno',
-                    'today'             => 'Oggi',
-                    'yesterday'         => 'Ieri',
+                    'custom-filters' => [
+                        'clear-all' => 'Cancella Tutto',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'Azioni',
-                'next-page'            => 'Pagina successiva',
-                'no-records-available' => 'Nessun record disponibile.',
+                'next-page'            => 'Pagina Successiva',
+                'no-records-available' => 'Nessun Record Disponibile.',
                 'of'                   => 'di :total voci',
-                'page-navigation'      => 'Navigazione pagina',
-                'page-number'          => 'Numero di pagina',
-                'previous-page'        => 'Pagina precedente',
-                'showing'              => 'Mostra :firstItem',
+                'page-navigation'      => 'Navigazione Pagina',
+                'page-number'          => 'Numero Pagina',
+                'previous-page'        => 'Pagina Precedente',
+                'showing'              => 'Mostrando :firstItem',
                 'to'                   => 'a :lastItem',
             ],
         ],

@@ -376,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'क्रिया चुनें',
-                    'select-option' => 'विकल्प चुनें',
-                    'submit'        => 'प्रस्तुत करें',
-                ],
+                'length-of' => ':length का',
+                'results'   => ':total परिणाम',
+                'selected'  => ':total चयनित',
 
-                'filter' => [
-                    'title' => 'फ़िल्टर',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'आपको एक समूह क्रिया का चयन करना होगा।',
+                    'must-select-a-mass-action-option' => 'आपको एक समूह क्रिया के विकल्प का चयन करना होगा।',
+                    'no-records-selected'              => 'कोई रिकॉर्ड चयनित नहीं किया गया है।',
+                    'select-action'                    => 'क्रिया का चयन करें',
                 ],
 
                 'search' => [
                     'title' => 'खोजें',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'फ़िल्टर लागू करें',
+                'filter' => [
+                    'apply-filter' => 'फ़िल्टर लागू करें',
+                    'title'        => 'फ़िल्टर',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'कम से कम 2 अक्षर लिखें...',
-                        'no-results'        => 'कोई परिणाम नहीं मिला...',
+                    'dropdown' => [
+                        'select' => 'चुनें',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'कम से कम 2 अक्षर टाइप करें...',
+                            'no-results'         => 'कोई परिणाम नहीं मिला...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'सभी को हटाएँ',
-                    'title'     => 'कस्टम फ़िल्टर',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'पिछले महीने',
-                    'last-six-months'   => 'पिछले 6 महीने',
-                    'last-three-months' => 'पिछले 3 महीने',
-                    'this-month'        => 'इस महीने',
-                    'this-week'         => 'इस सप्ताह',
-                    'this-year'         => 'इस साल',
-                    'today'             => 'आज',
-                    'yesterday'         => 'कल',
+                    'custom-filters' => [
+                        'clear-all' => 'सभी साफ़ करें',
+                    ],
                 ],
             ],
 
@@ -422,12 +414,12 @@ return [
                 'actions'              => 'क्रियाएँ',
                 'next-page'            => 'अगला पृष्ठ',
                 'no-records-available' => 'कोई रिकॉर्ड उपलब्ध नहीं है।',
-                'of'                   => 'कुल :total एन्ट्री में से',
+                'of'                   => 'कुल :total प्रविष्टियों में से',
                 'page-navigation'      => 'पृष्ठ नेविगेशन',
                 'page-number'          => 'पृष्ठ संख्या',
                 'previous-page'        => 'पिछला पृष्ठ',
-                'showing'              => ':firstItem दिखा रहा है',
-                'to'                   => ':lastItem तक',
+                'showing'              => 'दिखा रहा है :firstItem',
+                'to'                   => 'से :lastItem',
             ],
         ],
 

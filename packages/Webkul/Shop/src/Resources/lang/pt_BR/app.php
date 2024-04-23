@@ -376,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Selecionar Ação',
-                    'select-option' => 'Selecionar Opção',
-                    'submit'        => 'Enviar',
-                ],
+                'length-of' => ':length de',
+                'results'   => ':total Resultados',
+                'selected'  => ':total Selecionados',
 
-                'filter' => [
-                    'title' => 'Filtrar',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Você deve selecionar uma ação em massa.',
+                    'must-select-a-mass-action-option' => 'Você deve selecionar uma opção de ação em massa.',
+                    'no-records-selected'              => 'Nenhum registro foi selecionado.',
+                    'select-action'                    => 'Selecionar Ação',
                 ],
 
                 'search' => [
-                    'title' => 'Buscar',
+                    'title' => 'Pesquisar',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Aplicar Filtros',
+                'filter' => [
+                    'apply-filter' => 'Aplicar Filtros',
+                    'title'        => 'Filtro',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Digite pelo menos 2 caracteres...',
-                        'no-results'        => 'Nenhum resultado encontrado...',
+                    'dropdown' => [
+                        'select' => 'Selecionar',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Digite pelo menos 2 caracteres...',
+                            'no-results'         => 'Nenhum resultado encontrado...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Limpar Tudo',
-                    'title'     => 'Filtros Personalizados',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Último Mês',
-                    'last-six-months'   => 'Últimos 6 Meses',
-                    'last-three-months' => 'Últimos 3 Meses',
-                    'this-month'        => 'Este Mês',
-                    'this-week'         => 'Esta Semana',
-                    'this-year'         => 'Este Ano',
-                    'today'             => 'Hoje',
-                    'yesterday'         => 'Ontem',
+                    'custom-filters' => [
+                        'clear-all' => 'Limpar Tudo',
+                    ],
                 ],
             ],
 
@@ -427,7 +419,7 @@ return [
                 'page-number'          => 'Número da Página',
                 'previous-page'        => 'Página Anterior',
                 'showing'              => 'Mostrando :firstItem',
-                'to'                   => 'até :lastItem',
+                'to'                   => 'a :lastItem',
             ],
         ],
 

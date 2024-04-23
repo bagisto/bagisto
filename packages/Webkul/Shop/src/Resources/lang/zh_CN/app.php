@@ -376,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => '选择操作',
-                    'select-option' => '选择选项',
-                    'submit'        => '提交',
-                ],
+                'length-of' => ':length of',
+                'results'   => ':total Results',
+                'selected'  => ':total Selected',
 
-                'filter' => [
-                    'title' => '筛选',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => '您必须选择一个批量操作。',
+                    'must-select-a-mass-action-option' => '您必须选择一个批量操作的选项。',
+                    'no-records-selected'              => '未选择任何记录。',
+                    'select-action'                    => '选择操作',
                 ],
 
                 'search' => [
                     'title' => '搜索',
                 ],
-            ],
 
-            'filters' => [
-                'title' => '应用筛选',
+                'filter' => [
+                    'apply-filter' => '应用过滤器',
+                    'title'        => '过滤器',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => '至少输入 2 个字符...',
-                        'no-results'        => '未找到结果...',
+                    'dropdown' => [
+                        'select' => '选择',
+
+                        'searchable' => [
+                            'at-least-two-chars' => '至少输入2个字符...',
+                            'no-results'         => '未找到结果...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => '清除所有',
-                    'title'     => '自定义筛选',
-                ],
-
-                'date-options' => [
-                    'last-month'        => '上个月',
-                    'last-six-months'   => '过去 6 个月',
-                    'last-three-months' => '过去 3 个月',
-                    'this-month'        => '本月',
-                    'this-week'         => '本周',
-                    'this-year'         => '今年',
-                    'today'             => '今天',
-                    'yesterday'         => '昨天',
+                    'custom-filters' => [
+                        'clear-all' => '清除所有',
+                    ],
                 ],
             ],
 
@@ -423,7 +415,7 @@ return [
                 'next-page'            => '下一页',
                 'no-records-available' => '没有可用的记录。',
                 'of'                   => '共 :total 条记录',
-                'page-navigation'      => '分页导航',
+                'page-navigation'      => '页面导航',
                 'page-number'          => '页码',
                 'previous-page'        => '上一页',
                 'showing'              => '显示 :firstItem',

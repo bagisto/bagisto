@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.search-seo.sitemaps.index.title')
     </x-slot>
@@ -54,52 +53,64 @@
                 :src="route('admin.marketing.search_seo.sitemaps.index')"
                 ref="datagrid"
             >
-                <!-- DataGrid Body -->
-                <template #body="{ columns, records, performAction }">
-                    <div
-                        v-for="record in records"
-                        class="row grid items-center gap-2.5 break-all border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
-                        :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
-                    >
-                        <!-- Id -->
-                        <p>@{{ record.id }}</p>
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.datagrid.table.body />
+                    </template>
 
-                        <!-- File Name -->
-                        <p>@{{ record.file_name }}</p>
+                    <template v-else>
+                        <div
+                            v-for="record in available.records"
+                            class="row grid items-center gap-2.5 break-all border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
+                            :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
+                        >
+                            <!-- ID -->
+                            <p>@{{ record.id }}</p>
 
-                        <!-- Path -->
-                        <p>@{{ record.path }}</p>
+                            <!-- File Name -->
+                            <p>@{{ record.file_name }}</p>
 
-                        <!-- URL -->
-                        <p>
-                            <a :href="record.url" target="_blank">
-                                @{{ record.url}}
-                            </a>
-                        </p>
+                            <!-- Path -->
+                            <p>@{{ record.path }}</p>
 
-                        <!-- Actions -->
-                        <div class="flex justify-end">
-                            @if (bouncer()->hasPermission('marketing.search_seo.sitemaps.edit'))
-                                <a @click="selectedSitemap=1; editModal(record)">
-                                    <span
-                                        :class="record.actions.find(action => action.index === 'edit')?.icon"
-                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
-                                    >
-                                    </span>
+                            <!-- URL -->
+                            <p>
+                                <a :href="record.url" target="_blank">
+                                    @{{ record.url}}
                                 </a>
-                            @endif
+                            </p>
 
-                            @if (bouncer()->hasPermission('marketing.search_seo.sitemaps.delete'))
-                                <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
-                                    <span
-                                        :class="record.actions.find(action => action.index === 'delete')?.icon"
-                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
-                                    >
-                                    </span>
-                                </a>
-                            @endif
+                            <!-- Actions -->
+                            <div class="flex justify-end">
+                                @if (bouncer()->hasPermission('marketing.search_seo.sitemaps.edit'))
+                                    <a @click="selectedSitemap=1; editModal(record)">
+                                        <span
+                                            :class="record.actions.find(action => action.index === 'edit')?.icon"
+                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                        >
+                                        </span>
+                                    </a>
+                                @endif
+
+                                @if (bouncer()->hasPermission('marketing.search_seo.sitemaps.delete'))
+                                    <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
+                                        <span
+                                            :class="record.actions.find(action => action.index === 'delete')?.icon"
+                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                        >
+                                        </span>
+                                    </a>
+                                @endif
+                            </div>
                         </div>
-                    </div>
+                    </template>
                 </template>
             </x-admin::datagrid>
 
@@ -138,7 +149,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Id -->
+                            <!-- ID -->
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
