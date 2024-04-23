@@ -12,7 +12,7 @@
                     <div class="mb-4 last:!mb-0">
                         <div class="shimmer mb-1.5 h-4 w-28"></div>
 
-                        <div class="h-11 w-full rounded-md border px-3 py-5 text-sm text-gray-600 transition-all last:!h-10 hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"></div>
+                        <div class="h-11 w-full rounded-md border px-3 py-5 text-sm text-gray-600 transition-all last:!h-10 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-gray-400"></div>
                     </div>
                 @endfor
             </div>
@@ -36,7 +36,7 @@
                 <div class="mb-1 mt-2 py-1.5">
                     <div class="shimmer mb-2 h-4 w-16"></div>
 
-                    <div class="h-10 w-full rounded-md border px-3 py-5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"></div>
+                    <div class="h-10 w-full rounded-md border px-3 py-5 text-sm text-gray-600 transition-all focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-gray-400"></div>
                 </div>
             </div>
         </div>

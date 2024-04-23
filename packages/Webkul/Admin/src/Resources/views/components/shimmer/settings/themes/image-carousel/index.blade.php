@@ -16,6 +16,7 @@
                     </div>
                 </div>
     
+                <!-- Image Carousel details -->
                 @for ($i = 1; $i < 5; $i++)
                     <div class="grid border-b border-slate-300 pt-4 last:!border-0 dark:border-gray-800">
                         <div class="flex justify-between gap-2.5 py-5">
