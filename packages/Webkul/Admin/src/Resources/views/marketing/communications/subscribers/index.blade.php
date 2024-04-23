@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.subscribers.index.title')
     </x-slot>
@@ -21,50 +20,61 @@
             id="v-subscribers-template"
         >
             <div>
-                <!-- DataGrid -->
                 <x-admin::datagrid
                     src="{{ route('admin.marketing.communications.subscribers.index') }}"
                     ref="datagrid"
                 >
-                    <!-- DataGrid Body -->
-                    <template #body="{ columns, records, performAction }">
-                        <div
-                            v-for="record in records"
-                            class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
+                    <template #body="{
+                        isLoading,
+                        available,
+                        applied,
+                        selectAll,
+                        sort,
+                        performAction
+                    }">
+                        <template v-if="isLoading">
+                            <x-admin::shimmer.datagrid.table.body />
+                        </template>
+
+                        <template v-else>
+                            <div
+                                v-for="record in available.records"
+                                class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
-                        >
-                            <!-- Id -->
-                            <p v-text="record.id"></p>
+                            >
+                                <!-- ID -->
+                                <p v-text="record.id"></p>
 
-                            <!-- Status -->
-                            <p v-text="record.status"></p>
+                                <!-- Status -->
+                                <p v-text="record.status"></p>
 
-                            <!-- Email -->
-                            <p v-text="record.email"></p>
+                                <!-- Email -->
+                                <p v-text="record.email"></p>
 
-                            <!-- Actions -->
-                            <div class="flex justify-end">
-                                @if (bouncer()->hasPermission('marketing.communications.subscribers.edit'))
-                                    <a @click="editModal(record.actions.find(action => action.index === 'edit')?.url)">
-                                        <span
-                                            :class="record.actions.find(action => action.index === 'edit')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                        >
-                                        </span>
-                                    </a>
-                                @endif
+                                <!-- Actions -->
+                                <div class="flex justify-end">
+                                    @if (bouncer()->hasPermission('marketing.communications.subscribers.edit'))
+                                        <a @click="editModal(record.actions.find(action => action.index === 'edit')?.url)">
+                                            <span
+                                                :class="record.actions.find(action => action.index === 'edit')?.icon"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
 
-                                @if (bouncer()->hasPermission('marketing.communications.subscribers.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
-                                        <span
-                                            :class="record.actions.find(action => action.index === 'delete')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                        >
-                                        </span>
-                                    </a>
-                                @endif
+                                    @if (bouncer()->hasPermission('marketing.communications.subscribers.delete'))
+                                        <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
+                                            <span
+                                                :class="record.actions.find(action => action.index === 'delete')?.icon"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        </template>
                     </template>
                 </x-admin::datagrid>
 
@@ -88,7 +98,7 @@
 
                             <!-- Modal Content -->
                             <x-slot:content>
-                                <!-- Id -->
+                                <!-- ID -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="id"
@@ -224,8 +234,8 @@
 
                                 this.$refs.groupCreateModal.toggle();
                             })
-                            .catch(error => this.$emitter.emit('add-flash', { 
-                                type: 'error', message: error.response.data.message 
+                            .catch(error => this.$emitter.emit('add-flash', {
+                                type: 'error', message: error.response.data.message
                             }));
                     }
                 }

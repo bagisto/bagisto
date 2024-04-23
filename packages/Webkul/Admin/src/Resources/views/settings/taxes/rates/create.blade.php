@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.rates.create.title')
     </x-slot>
@@ -284,8 +283,8 @@
                 methods: {
                     haveStates: function () {
                         /*
-                        * The double negation operator is used to convert the value to a boolean. 
-                        * It ensures that the final result is a boolean value, 
+                        * The double negation operator is used to convert the value to a boolean.
+                        * It ensures that the final result is a boolean value,
                         * true if the array has a length greater than 0, and otherwise false.
                         */
                         return !!this.countryStates[this.country]?.length;

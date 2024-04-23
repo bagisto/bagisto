@@ -376,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Select Action',
-                    'select-option' => 'Select Option',
-                    'submit'        => 'Submit',
-                ],
+                'length-of' => ':length of',
+                'results'   => ':total Results',
+                'selected'  => ':total Selected',
 
-                'filter' => [
-                    'title' => 'Filter',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'You must select a mass action.',
+                    'must-select-a-mass-action-option' => 'You must select a mass action\'s option.',
+                    'no-records-selected'              => 'No records have been selected.',
+                    'select-action'                    => 'Select Action',
                 ],
 
                 'search' => [
                     'title' => 'Search',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Apply Filters',
+                'filter' => [
+                    'apply-filter' => 'Apply Filters',
+                    'title'        => 'Filter',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Type atleast 2 characters...',
-                        'no-results'        => 'No result found...',
+                    'dropdown' => [
+                        'select' => 'Select',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Type at-least 2 characters...',
+                            'no-results'         => 'No result found...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Clear All',
-                    'title'     => 'Custom Filters',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Last Month',
-                    'last-six-months'   => 'Last 6 Months',
-                    'last-three-months' => 'Last 3 Months',
-                    'this-month'        => 'This Month',
-                    'this-week'         => 'This Week',
-                    'this-year'         => 'This Year',
-                    'today'             => 'Today',
-                    'yesterday'         => 'Yesterday',
+                    'custom-filters' => [
+                        'clear-all' => 'Clear All',
+                    ],
                 ],
             ],
 
