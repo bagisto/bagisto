@@ -396,7 +396,7 @@
                             })
                                 .then(response => {
                                     if (! response.data.data) {
-                                        window.location.reload();;
+                                        window.location.reload();
 
                                         return;
                                     }
