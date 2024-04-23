@@ -11,7 +11,7 @@
                 @lang('admin::app.settings.taxes.rates.create.title')
             </p>
 
-            <!-- Cancel Button -->
+            <!-- Back Button -->
             <div class="flex items-center gap-x-2.5">
                 <a
                     href="{{ route('admin.settings.taxes.rates.index') }}"
@@ -78,7 +78,7 @@
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.taxes.rates.create.country')
                             </x-admin::form.control-group.label>
-            
+
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="country"
@@ -99,10 +99,10 @@
                                     </option>
                                 @endforeach
                             </x-admin::form.control-group.control>
-            
+
                             <x-admin::form.control-group.error control-name="country" />
                         </x-admin::form.control-group>
-            
+
                         <!-- State -->
                         <x-admin::form.control-group>
                             <!-- Country Have States -->
@@ -110,7 +110,7 @@
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.taxes.rates.create.state')
                                 </x-admin::form.control-group.label>
-                
+
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="state"
@@ -140,7 +140,7 @@
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.taxes.rates.create.state')
                                 </x-admin::form.control-group.label>
-                
+
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="state"
@@ -181,7 +181,7 @@
                                 @lang('admin::app.settings.taxes.rates.create.settings')
                             </p>
                         </x-slot>
-                    
+
                         <x-slot:content>
                             <!-- Enable Zip Range -->
                             <x-admin::form.control-group>
