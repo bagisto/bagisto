@@ -5,7 +5,7 @@
         @lang('shop::app.home.contact.title')
     </x-slot>
 
-    <div class="container mt-8 px-[60px] max-lg:px-8">
+    <div class="container mt-8 max-1180:px-5">
         <!-- Form Container -->
 		<div class="m-auto w-full max-w-[870px] rounded-xl border border-[#E9E9E9] p-16 px-[90px] max-md:px-8 max-md:py-8">
 			<h1 class="font-dmserif text-4xl max-sm:text-2xl">
@@ -27,13 +27,13 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="name"
                             rules="required"
                             :value="old('name')"
                             :label="trans('shop::app.home.contact.name')"
                             :placeholder="trans('shop::app.home.contact.name')"
-                            aria-label="@lang('shop::app.home.contact.name')"
+                            :aria-label="trans('shop::app.home.contact.name')"
                             aria-required="true"
                         />
 
@@ -48,13 +48,13 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="email"
                             rules="required|email"
                             :value="old('email')"
                             :label="trans('shop::app.home.contact.email')"
                             :placeholder="trans('shop::app.home.contact.email')"
-                            aria-label="@lang('shop::app.home.contact.email')"
+                            :aria-label="trans('shop::app.home.contact.email')"
                             aria-required="true"
                         />
 
@@ -62,38 +62,38 @@
                     </x-shop::form.control-group>
 
                     <!-- Contact -->
-                    <x-shop::form.control-group class="mb-6">
+                    <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
                             @lang('shop::app.home.contact.phone-number')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
-                            type="number"
-                            class="rounded-lg !p-[20px_25px]"
+                            type="text"
+                            class="px-6 py-5"
                             name="contact"
                             :value="old('contact')"
                             :label="trans('shop::app.home.contact.phone-number')"
                             :placeholder="trans('shop::app.home.contact.phone-number')"
-                            aria-label="@lang('shop::app.home.contact.phone-number')"
+                            :aria-label="trans('shop::app.home.contact.phone-number')"
                         />
 
                         <x-shop::form.control-group.error control-name="contact" />
                     </x-shop::form.control-group>
 
                     <!-- Message -->
-                    <x-shop::form.control-group class="mb-6">
+                    <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.home.contact.desc')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
                             type="textarea"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="message"
                             rules="required"
                             :label="trans('shop::app.home.contact.message')"
                             :placeholder="trans('shop::app.home.contact.describe-here')"
-                            aria-label="@lang('shop::app.home.contact.message')"
+                            :aria-label="trans('shop::app.home.contact.message')"
                             aria-required="true"
                             rows="10"
                         />
@@ -111,7 +111,7 @@
                     <!-- Submit Button -->
                     <div class="mt-8 flex flex-wrap items-center gap-9">
                         <button
-                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base ltr:ml-0 rtl:mr-0"
+                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 text-center text-base ltr:ml-0 rtl:mr-0"
                             type="submit"
                         >
                             @lang('shop::app.home.contact.submit')

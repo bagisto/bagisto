@@ -67,6 +67,9 @@ class OrderInvoicesDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
+            'closure'    => function ($row) {
+                return core()->formatBasePrice($row->base_grand_total);
+            },
         ]);
 
         $this->addColumn([
