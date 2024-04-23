@@ -376,58 +376,50 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'পরিবর্তন নির্বাচন করুন',
-                    'select-option' => 'বিকল্প নির্বাচন করুন',
-                    'submit'        => 'জমা দিন',
-                ],
+                'length-of' => ':দৈর্ঘ্য',
+                'results'   => ':মোট ফলাফল',
+                'selected'  => ':নির্বাচিত ফলাফল',
 
-                'filter' => [
-                    'title' => 'ফিল্টার',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'আপনাকে একটি সমমূল্য কর্ম নির্বাচন করতে হবে।',
+                    'must-select-a-mass-action-option' => 'আপনাকে একটি সমমূল্য কর্ম বিকল্প নির্বাচন করতে হবে।',
+                    'no-records-selected'              => 'কোনও রেকর্ড নির্বাচিত হয়নি।',
+                    'select-action'                    => 'কর্ম নির্বাচন করুন',
                 ],
 
                 'search' => [
-                    'title' => 'খুঁজুন',
+                    'title' => 'অনুসন্ধান',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'ফিল্টার প্রয়োগ করুন',
+                'filter' => [
+                    'apply-filter' => 'ফিল্টার প্রয়োগ করুন',
+                    'title'        => 'ফিল্টার',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'কমপক্ষে 2 টি অক্ষর লিখুন...',
-                        'no-results'        => 'কোন ফলাফল পাওয়া যায়নি...',
+                    'dropdown' => [
+                        'select' => 'নির্বাচন করুন',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'কমপক্ষে 2 টি অক্ষর লিখুন...',
+                            'no-results'         => 'কোনও ফলাফল পাওয়া যায়নি...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'সব মুছুন',
-                    'title'     => 'কাস্টম ফিল্টার',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'গত মাস',
-                    'last-six-months'   => 'শেষ 6 মাস',
-                    'last-three-months' => 'শেষ 3 মাস',
-                    'this-month'        => 'এই মাস',
-                    'this-week'         => 'এই সপ্তাহ',
-                    'this-year'         => 'এই বছর',
-                    'today'             => 'আজ',
-                    'yesterday'         => 'গতকাল',
+                    'custom-filters' => [
+                        'clear-all' => 'সব মুছুন',
+                    ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'ক্রিয়াকলাপ',
+                'actions'              => 'কর্ম',
                 'next-page'            => 'পরবর্তী পৃষ্ঠা',
-                'no-records-available' => 'রেকর্ড পাওয়া যায়নি।',
-                'of'                   => 'মোট :total এন্ট্রির মধ্যে',
+                'no-records-available' => 'কোনও রেকর্ড পাওয়া যায়নি।',
+                'of'                   => 'মোট :মোট আইটেমের মধ্যে',
                 'page-navigation'      => 'পৃষ্ঠা নেভিগেশন',
                 'page-number'          => 'পৃষ্ঠা নম্বর',
-                'previous-page'        => 'আগের পৃষ্ঠা',
-                'showing'              => ':firstItem দেখাচ্ছে',
-                'to'                   => ':lastItem পর্যন্ত',
+                'previous-page'        => 'পূর্ববর্তী পৃষ্ঠা',
+                'showing'              => 'দেখাচ্ছে :firstItem',
+                'to'                   => 'পর্যন্ত :lastItem',
             ],
         ],
 

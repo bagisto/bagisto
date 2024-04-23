@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.events.index.title')
     </x-slot>
@@ -49,57 +48,68 @@
 
             {!! view_render_event('bagisto.admin.marketing.communications.events.list.before') !!}
 
-            <!-- Datagrid -->
             <x-admin::datagrid
                 src="{{ route('admin.marketing.communications.events.index') }}"
                 ref="datagrid"
             >
-                 <!-- DataGrid Body -->
-                 <template #body="{ columns, records, performAction }">
-                    <div
-                        v-for="record in records"
-                        class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.datagrid.table.body />
+                    </template>
+
+                    <template v-else>
+                        <div
+                            v-for="record in available.records"
+                            class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
-                    >
-                        <!-- Id -->
-                        <p v-text="record.id"></p>
+                        >
+                            <!-- ID -->
+                            <p v-text="record.id"></p>
 
-                        <!-- Status -->
-                        <p v-text="record.name"></p>
+                            <!-- Status -->
+                            <p v-text="record.name"></p>
 
-                        <!-- Email -->
-                        <p v-text="record.date"></p>
+                            <!-- Email -->
+                            <p v-text="record.date"></p>
 
-                        <!-- Actions -->
-                        @if (
-                            bouncer()->hasPermission('marketing.communications.events.edit') 
-                            || bouncer()->hasPermission('marketing.communications.events.delete')
-                        )
-                            <div class="flex justify-end">
-                                @if (bouncer()->hasPermission('marketing.communications.events.edit'))
-                                    <a @click="id=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
-                                        <span
-                                            :class="record.actions.find(action => action.index === 'edit')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                            :title="record.actions.find(action => action.title === '@lang('admin::app.marketing.communications.events.index.datagrid.edit')')?.title"
-                                        >
-                                        </span>
-                                    </a>
-                                @endif
+                            <!-- Actions -->
+                            @if (
+                                bouncer()->hasPermission('marketing.communications.events.edit')
+                                || bouncer()->hasPermission('marketing.communications.events.delete')
+                            )
+                                <div class="flex justify-end">
+                                    @if (bouncer()->hasPermission('marketing.communications.events.edit'))
+                                        <a @click="id=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
+                                            <span
+                                                :class="record.actions.find(action => action.index === 'edit')?.icon"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                :title="record.actions.find(action => action.title === '@lang('admin::app.marketing.communications.events.index.datagrid.edit')')?.title"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
 
-                                @if (bouncer()->hasPermission('marketing.communications.events.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
-                                        <span
-                                            :class="record.actions.find(action => action.index === 'delete')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                            :title="record.actions.find(action => action.title === '@lang('admin::app.marketing.communications.events.index.datagrid.delete')')?.title"
-                                        >
-                                        </span>
-                                    </a>
-                                @endif
-                            </div>
-                        @endif
-                    </div>
+                                    @if (bouncer()->hasPermission('marketing.communications.events.delete'))
+                                        <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
+                                            <span
+                                                :class="record.actions.find(action => action.index === 'delete')?.icon"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                :title="record.actions.find(action => action.title === '@lang('admin::app.marketing.communications.events.index.datagrid.delete')')?.title"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
+                                </div>
+                            @endif
+                        </div>
+                    </template>
                 </template>
             </x-admin::datagrid>
 
@@ -140,7 +150,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Id -->
+                            <!-- ID -->
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
@@ -284,8 +294,8 @@
                                     this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                                 }
                             })
-                            .catch(error => this.$emitter.emit('add-flash', { 
-                                type: 'error', message: error.response.data.message 
+                            .catch(error => this.$emitter.emit('add-flash', {
+                                type: 'error', message: error.response.data.message
                             }));
                     },
                 }
