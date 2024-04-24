@@ -1,12 +1,7 @@
 <?php
 
-namespace Webkul\Tax\Helpers;
+namespace Webkul\Tax;
 
-/**
- * Tax class.
- *
- * To Do (@devansh-webkul): Convert this to facade.
- */
 class Tax
 {
     /**
@@ -24,22 +19,30 @@ class Tax
     private const TAX_AMOUNT_PRECISION = 2;
 
     /**
-     * Is tax inclusive enabled in backend.
+     * Is product prices are tax inclusive.
      */
-    public static function isTaxInclusive(): bool
+    public function isInclusiveTaxProductPrices(): bool
     {
-        return (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive');
+        return core()->getConfigData('sales.taxes.calculation.product_prices') == 'including_tax';
+    }
+
+    /**
+     * Is shipping prices are tax inclusive.
+     */
+    public function isInclusiveTaxShippingPrices(): bool
+    {
+        return core()->getConfigData('sales.taxes.calculation.shipping_prices') == 'including_tax';
     }
 
     /**
      * Returns an array with tax rates and tax amount.
      */
-    public static function getTaxRatesWithAmount(object $that, bool $asBase = false): array
+    public function getTaxRatesWithAmount(object $that, bool $asBase = false): array
     {
         $taxes = [];
 
         foreach ($that->items as $item) {
-            $taxRate = (string) round((float) $item->tax_percent, self::TAX_RATE_PRECISION);
+            $taxRate = $item->applied_tax_rate.' ('.(string) round((float) $item->tax_percent, self::TAX_RATE_PRECISION).'%)';
 
             if (! array_key_exists($taxRate, $taxes)) {
                 $taxes[$taxRate] = 0;
@@ -48,7 +51,22 @@ class Tax
             $taxes[$taxRate] += $asBase ? $item->base_tax_amount : $item->tax_amount;
         }
 
-        /* finally round tax amounts now (to reduce rounding differences) */
+        if (
+            $that->selected_shipping_rate
+            && $that->selected_shipping_rate->tax_amount > 0
+        ) {
+            $taxRate = $that->selected_shipping_rate->applied_tax_rate.' ('.(string) round((float) $that->selected_shipping_rate->tax_percent, self::TAX_RATE_PRECISION).'%)';
+
+            if (! array_key_exists($taxRate, $taxes)) {
+                $taxes[$taxRate] = 0;
+            }
+
+            $taxes[$taxRate] += $asBase ? $that->selected_shipping_rate->base_tax_amount : $that->selected_shipping_rate->tax_amount;
+        }
+
+        /**
+         * Finally round tax amounts now (to reduce rounding differences)
+         */
         foreach ($taxes as $taxRate => $taxAmount) {
             $taxes[$taxRate] = round($taxAmount, self::TAX_AMOUNT_PRECISION);
         }
@@ -57,27 +75,11 @@ class Tax
     }
 
     /**
-     * Returns the total tax amount.
-     */
-    public static function getTaxTotal(object $that, bool $asBase = false): float
-    {
-        $taxes = self::getTaxRatesWithAmount($that, $asBase);
-
-        $result = 0;
-
-        foreach ($taxes as $taxRate => $taxAmount) {
-            $result += $taxAmount;
-        }
-
-        return $result;
-    }
-
-    /**
      * Get default address from core config.
      *
      * @return object
      */
-    public static function getDefaultAddress()
+    public function getDefaultAddress()
     {
         return new class()
         {
@@ -89,13 +91,13 @@ class Tax
 
             public function __construct()
             {
-                $this->country = core()->getConfigData('taxes.catalogue.default_location_calculation.country') != ''
-                    ? core()->getConfigData('taxes.catalogue.default_location_calculation.country')
+                $this->country = core()->getConfigData('sales.taxes.default_destination_calculation.country') != ''
+                    ? core()->getConfigData('sales.taxes.default_destination_calculation.country')
                     : strtoupper(config('app.default_country'));
 
-                $this->state = core()->getConfigData('taxes.catalogue.default_location_calculation.state');
+                $this->state = core()->getConfigData('sales.taxes.default_destination_calculation.state');
 
-                $this->postcode = core()->getConfigData('taxes.catalogue.default_location_calculation.post_code');
+                $this->postcode = core()->getConfigData('sales.taxes.default_destination_calculation.post_code');
             }
         };
     }
@@ -109,10 +111,14 @@ class Tax
      * @param  \Closure  $operation
      * @return void
      */
-    public static function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation)
+    public function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation)
     {
+        if (! $address?->country) {
+            return;
+        }
+
         $taxRates = $taxCategory->tax_rates()->where([
-            'country' => $address?->country,
+            'country' => $address->country,
         ])->orderBy('tax_rate', 'desc')->get();
 
         if (! $taxRates->count()) {
@@ -121,7 +127,7 @@ class Tax
 
         foreach ($taxRates as $rate) {
             if (
-                $rate->state != ''
+                $address->state != '*'
                 && $rate->state != $address->state
             ) {
                 continue;

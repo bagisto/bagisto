@@ -152,9 +152,12 @@ class Downloadable extends AbstractType
                 continue;
             }
 
-            $products[0]['price'] += core()->convertPrice($link->price);
+            $products[0]['price'] += ($price = core()->convertPrice($link->price));
+            $products[0]['price_incl_tax'] += $price;
             $products[0]['base_price'] += $link->price;
-            $products[0]['total'] += (core()->convertPrice($link->price) * $products[0]['quantity']);
+            $products[0]['base_price_incl_tax'] += $link->price;
+            $products[0]['total'] += ($total = core()->convertPrice($link->price) * $products[0]['quantity']);
+            $products[0]['total_incl_tax'] += $total;
             $products[0]['base_total'] += ($link->price * $products[0]['quantity']);
         }
 
@@ -228,27 +231,33 @@ class Downloadable extends AbstractType
             return $result;
         }
 
-        $price = $this->getFinalPrice($item->quantity);
+        $basePrice = $this->getFinalPrice($item->quantity);
 
         foreach ($item->product->downloadable_links as $link) {
             if (! in_array($link->id, $item->additional['links'])) {
                 continue;
             }
 
-            $price += $link->price;
+            $basePrice += $link->price;
         }
 
-        $price = round($price, 2);
+        $basePrice = round($basePrice, 2);
 
-        if ($price == $item->base_price) {
+        if ($basePrice == $item->base_price_incl_tax) {
             return $result;
         }
 
-        $item->base_price = $price;
-        $item->price = core()->convertPrice($price);
+        $item->base_price = $basePrice;
+        $item->base_price_incl_tax = $basePrice;
 
-        $item->base_total = $price * $item->quantity;
-        $item->total = core()->convertPrice($price * $item->quantity);
+        $item->price = ($price = core()->convertPrice($basePrice));
+        $item->price_incl_tax = $price;
+
+        $item->base_total = $basePrice * $item->quantity;
+        $item->base_total_incl_tax = $basePrice * $item->quantity;
+
+        $item->total = ($total = core()->convertPrice($basePrice * $item->quantity));
+        $item->total_incl_tax = $total;
 
         $item->save();
 

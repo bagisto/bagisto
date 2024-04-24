@@ -178,22 +178,24 @@ class Bundle extends AbstractType
         return [
             'from' => [
                 'regular' => [
-                    'price'           => core()->convertPrice($regularMinimalPrice = $this->evaluatePrice($this->getRegularMinimalPrice())),
+                    'price'           => core()->convertPrice($regularMinimalPrice = $this->getRegularMinimalPrice()),
                     'formatted_price' => core()->currency($regularMinimalPrice),
                 ],
+
                 'final'   => [
-                    'price'           => core()->convertPrice($minimalPrice = $this->evaluatePrice($this->getMinimalPrice())),
+                    'price'           => core()->convertPrice($minimalPrice = $this->getMinimalPrice()),
                     'formatted_price' => core()->currency($minimalPrice),
                 ],
             ],
 
             'to' => [
                 'regular' => [
-                    'price'           => core()->convertPrice($regularMaximumPrice = $this->evaluatePrice($this->getRegularMaximumPrice())),
+                    'price'           => core()->convertPrice($regularMaximumPrice = $this->getRegularMaximumPrice()),
                     'formatted_price' => core()->currency($regularMaximumPrice),
                 ],
+
                 'final'   => [
-                    'price'           => core()->convertPrice($maximumPrice = $this->evaluatePrice($this->getMaximumPrice())),
+                    'price'           => core()->convertPrice($maximumPrice = $this->getMaximumPrice()),
                     'formatted_price' => core()->currency($maximumPrice),
                 ],
             ],
@@ -266,9 +268,13 @@ class Bundle extends AbstractType
             $products = array_merge($products, $cartProduct);
 
             $products[0]['price'] += $cartProduct[0]['total'];
+            $products[0]['price_incl_tax'] += $cartProduct[0]['total'];
             $products[0]['base_price'] += $cartProduct[0]['base_total'];
+            $products[0]['base_price_incl_tax'] += $cartProduct[0]['base_total'];
             $products[0]['total'] += $cartProduct[0]['total'];
+            $products[0]['total_incl_tax'] += $cartProduct[0]['total'];
             $products[0]['base_total'] += $cartProduct[0]['base_total'];
+            $products[0]['base_total_incl_tax'] += $cartProduct[0]['base_total'];
             $products[0]['weight'] += ($cartProduct[0]['weight'] * $products[0]['quantity']);
             $products[0]['total_weight'] += ($cartProduct[0]['total_weight'] * $products[0]['quantity']);
             $products[0]['base_total_weight'] += ($cartProduct[0]['base_total_weight'] * $products[0]['quantity']);
@@ -397,6 +403,7 @@ class Bundle extends AbstractType
                 $label = $qty.' x '.$optionProduct->product->name;
 
                 $price = $optionProduct->product->getTypeInstance()->getMinimalPrice();
+
                 if ($price != 0) {
                     $label .= ' '.core()->currency($price);
                 }
@@ -462,7 +469,7 @@ class Bundle extends AbstractType
             return $result;
         }
 
-        $price = 0;
+        $basePrice = 0;
 
         foreach ($item->children as $childItem) {
             $childResult = $childItem->getTypeInstance()->validateCartItem($childItem);
@@ -475,20 +482,26 @@ class Bundle extends AbstractType
                 $result->cartIsInvalid();
             }
 
-            $price += $childItem->base_price * $childItem->quantity;
+            $basePrice += $childItem->base_price * $childItem->quantity;
         }
 
-        $price = round($price, 2);
+        $basePrice = round($basePrice, 4);
 
-        if ($price == $item->base_price) {
+        if ($basePrice == $item->base_price_incl_tax) {
             return $result;
         }
 
-        $item->base_price = $price;
-        $item->price = core()->convertPrice($price);
+        $item->base_price = $basePrice;
+        $item->base_price_incl_tax = $basePrice;
 
-        $item->base_total = $price * $item->quantity;
-        $item->total = core()->convertPrice($price * $item->quantity);
+        $item->price = ($price = core()->convertPrice($basePrice));
+        $item->price_incl_tax = $price;
+
+        $item->base_total = $basePrice * $item->quantity;
+        $item->base_total_incl_tax = $basePrice * $item->quantity;
+
+        $item->total = ($total = core()->convertPrice($basePrice * $item->quantity));
+        $item->total_incl_tax = $total;
 
         $item->additional = $this->getAdditionalOptions($item->additional);
 

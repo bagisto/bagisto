@@ -528,7 +528,7 @@ class Configurable extends AbstractType
      */
     public function getProductPrices()
     {
-        $minPrice = $this->evaluatePrice($this->getMinimalPrice());
+        $minPrice = $this->getMinimalPrice();
 
         return [
             'regular' => [
@@ -709,17 +709,23 @@ class Configurable extends AbstractType
             return $result;
         }
 
-        $price = $item->child->getTypeInstance()->getFinalPrice($item->quantity);
+        $basePrice = $item->child->getTypeInstance()->getFinalPrice($item->quantity);
 
-        if ($price == $item->base_price) {
+        if ($basePrice == $item->base_price_incl_tax) {
             return $result;
         }
 
-        $item->base_price = $price;
-        $item->price = core()->convertPrice($price);
+        $item->base_price = $basePrice;
+        $item->base_price_incl_tax = $basePrice;
 
-        $item->base_total = $price * $item->quantity;
-        $item->total = core()->convertPrice($price * $item->quantity);
+        $item->price = ($price = core()->convertPrice($basePrice));
+        $item->price_incl_tax = $price;
+
+        $item->base_total = $basePrice * $item->quantity;
+        $item->base_total_incl_tax = $basePrice * $item->quantity;
+
+        $item->total = ($total = core()->convertPrice($basePrice * $item->quantity));
+        $item->total_incl_tax = $total;
 
         $item->save();
 

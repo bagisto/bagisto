@@ -203,7 +203,7 @@
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            {{ $item->tax_percent }}%
+                                            {{ number_format($item->tax_percent, 2) }}%
                                             @lang('admin::app.sales.orders.view.tax', ['tax' => core()->formatBasePrice($item->base_tax_amount)])
                                         </p>
 

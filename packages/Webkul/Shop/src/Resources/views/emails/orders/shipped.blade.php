@@ -172,7 +172,7 @@
             </div>
         @endif
 
-        @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($shipment->order, false) as $taxRate => $taxAmount )
+        @foreach (Webkul\Tax\Facades\Tax::getTaxRatesWithAmount($shipment->order, false) as $taxRate => $taxAmount )
             <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
                 <span>
                     @lang('shop::app.emails.orders.tax') {{ $taxRate }} %

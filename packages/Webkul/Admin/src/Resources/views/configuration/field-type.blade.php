@@ -347,6 +347,10 @@
                                         @lang('admin::app.configuration.index.select-state')
                                     </option>
                                     
+                                    <option value="*">
+                                        *
+                                    </option>
+                                    
                                     <option
                                         v-for='(state, index) in countryStates[country]'
                                         :value="state.code"

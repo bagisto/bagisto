@@ -3750,27 +3750,60 @@ return [
                         'title-info'                 => 'Automated notifications or communications sent to customers to remind them of upcoming or overdue payments for invoices.',
                     ],
                 ],
-            ],
 
-            'taxes' => [
-                'title' => 'Taxes',
+                'taxes' => [
+                    'title'      => 'Taxes',
+                    'title-info' => 'Taxes are mandatory fees imposed by governments on goods, services, or transactions, collected by sellers and remitted to the authorities.',
 
-                'catalog' => [
-                    'title'      => 'Catalog',
-                    'title-info' => 'Set pricing and default location calculations',
-
-                    'pricing' => [
-                        'title'         => 'Pricing',
-                        'title-info'    => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
-                        'tax-inclusive' => 'Tax inclusive',
+                    'categories' => [
+                        'title'      => 'Tax Categories',
+                        'title-info' => 'Tax categories are classifications for different types of taxes, such as sales tax, value-added tax, or excise tax, used to categorize and apply tax rates to products or services.',
+                        'product'    => 'Product Default Tax Category',
+                        'shipping'   => 'Shipping Tax Category',
+                        'none'       => 'None',
                     ],
 
-                    'default-location-calculation' => [
+                    'calculation' => [
+                        'title'            => 'Calculation Settings',
+                        'title-info'       => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
+                        'based-on'         => 'Calculation Based On',
+                        'shipping-address' => 'Shipping Address',
+                        'billing-address'  => 'Billing Address',
+                        'shipping-origin'  => 'Shipping Origin',
+                        'product-prices'   => 'Product Prices',
+                        'shipping-prices'  => 'Shipping Prices',
+                        'excluding-tax'    => 'Excluding Tax',
+                        'including-tax'    => 'Including Tax',
+                    ],
+
+                    'default-destination-calculation' => [
                         'default-country'   => 'Default Country',
                         'default-post-code' => 'Default Post Code',
                         'default-state'     => 'Default State',
-                        'title'             => 'Default Location Calculation',
-                        'title-info'        => 'Automated determination of a standard or initial location based on predefined factors or settings.',
+                        'title'             => 'Default Destination Calculation',
+                        'title-info'        => 'Automated determination of a standard or initial destination based on predefined factors or settings.',
+                    ],
+
+                    'shopping-cart' => [
+                        'title'                   => 'Shopping Cart Display Settings',
+                        'title-info'              => 'Set the display of taxes in the shopping cart',
+                        'display-prices'          => 'Display Prices',
+                        'display-subtotal'        => 'Display Subtotal',
+                        'display-shipping-amount' => 'Display Shipping Amount',
+                        'excluding-tax'           => 'Excluding Tax',
+                        'including-tax'           => 'Including Tax',
+                        'both'                    => 'Excluding and Including Both',
+                    ],
+
+                    'sales' => [
+                        'title'                   => 'Orders, Invoices, Refunds Display Settings',
+                        'title-info'              => 'Set the display of taxes in the orders, invoices, and refunds',
+                        'display-prices'          => 'Display Prices',
+                        'display-subtotal'        => 'Display Subtotal',
+                        'display-shipping-amount' => 'Display Shipping Amount',
+                        'excluding-tax'           => 'Excluding Tax',
+                        'including-tax'           => 'Including Tax',
+                        'both'                    => 'Excluding and Including Both',
                     ],
                 ],
             ],
