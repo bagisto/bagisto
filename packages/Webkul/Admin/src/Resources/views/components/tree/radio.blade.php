@@ -56,7 +56,6 @@
                         label: this.label,
                         name: this.name,
                         value: this.value,
-                        isLoading: this.isLoading,
                     });
                 },
             },

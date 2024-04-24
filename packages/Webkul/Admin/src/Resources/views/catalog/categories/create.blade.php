@@ -101,6 +101,7 @@
                                 value-field="id"
                                 :items="json_encode($categories)"
                                 :fallback-locale="config('app.fallback_locale')"
+                                on-click='true'
                             />
                         </div>
                     </div>

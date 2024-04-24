@@ -91,6 +91,12 @@
                     required: false,
                     default: false
                 },
+
+                onClick: {
+                    type: String,
+                    required: false,
+                    default: false
+                },
             },
 
             data() {
@@ -230,7 +236,9 @@
                                             'text-2xl cursor-pointer'
                                         ],
                                         onClick: () => {
-                                            this.getSubtree(items[key], key);
+                                            if (this.onClick && ! hasChildren) {
+                                                this.getSubtree(items[key], key);
+                                            }
                                         },
                                     }),
 
