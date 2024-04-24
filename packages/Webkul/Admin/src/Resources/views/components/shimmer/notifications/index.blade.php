@@ -25,8 +25,8 @@
             </div>
 
             <!-- Notifications List -->
-            <div class="grid max-h-[calc(100vh-330px)]">
-                @for ($i = 1; $i < 6; $i++)
+            <div class="journal-scroll grid max-h-[calc(100vh-330px)] overflow-auto">
+                @for ($i = 1; $i < 10; $i++)
                     <div class="flex h-14 items-start gap-1.5 p-4">
                         <div class="shimmer h-6 w-6 rounded-full"></div>
 
