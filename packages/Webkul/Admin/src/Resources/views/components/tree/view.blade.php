@@ -98,6 +98,8 @@
                     formattedItems: null,
 
                     formattedValues: null,
+
+                    isLoading: false,
                 };
             },
 
@@ -227,6 +229,9 @@
                                             hasChildren ? 'icon-folder' : 'icon-attribute',
                                             'text-2xl cursor-pointer'
                                         ],
+                                        onClick: () => {
+                                            this.getSubtree(items[key], key);
+                                        },
                                     }),
 
                                     this.generateInputComponent({
@@ -234,6 +239,7 @@
                                         label: this.getLabel(items[key]),
                                         name: this.nameField,
                                         value: items[key][this.valueField],
+                                        isLoading: this.isLoading,
                                     }),
 
                                     this.generateTreeItemComponents(items[key][this.childrenField], level + 1),
@@ -243,6 +249,22 @@
                     }
 
                     return treeItems;
+                },
+
+                getSubtree(value, key) {
+                    this.isLoading = true;
+
+                    this.$axios.get(`{{ route('admin.catalog.categories.get_child_tree', '') }}/${value.id}`)
+                        .then(response => {
+                            value.children = response.data;
+
+                            this.isLoading = false;
+                        })
+                        .catch(error => {
+                            console.log(error.message);
+
+                            this.$emitter.emit('add-flash', { type: 'danger', message: error.message });
+                        });
                 },
 
                 generateTree() {

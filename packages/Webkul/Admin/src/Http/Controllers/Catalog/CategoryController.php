@@ -272,6 +272,16 @@ class CategoryController extends Controller
     }
 
     /**
+     * Get all sub categories of specific category.
+     */
+    public function getChildTree(int $id)
+    {
+        $categories = $this->categoryRepository->getCategorySubTree($id);
+
+        return $categories;
+    }
+
+    /**
      * Get all the searched categories.
      *
      * @return \Illuminate\Http\JsonResponse

@@ -136,20 +136,33 @@ class CategoryRepository extends Repository
     {
         return $id
             ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
-            : $this->model::orderBy('position', 'ASC')->get()->toTree();
+            : $this->model::orderBy('position', 'ASC')->where(function($query) {
+                $query->where('parent_id', 1)
+                      ->orWhere('id', 1);
+            })->get()->toTree();
+
     }
 
     /**
      * Specify category tree.
      *
-     * @param  int  $id
      * @return \Illuminate\Support\Collection
      */
-    public function getCategoryTreeWithoutDescendant($id = null)
+    public function getCategoryTreeWithoutDescendant(int $id = null)
     {
         return $id
             ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
             : $this->model::orderBy('position', 'ASC')->get()->toTree();
+    }
+
+    /**
+     * Specify category sub tree.
+     *
+     * @return \Webkul\Category\Contracts\Category
+     */
+    public function getCategorySubTree(int $id)
+    {
+        return $this->model::orderBy('position', 'ASC')->where('parent_id', '=', $id)->get()->toTree();
     }
 
     /**
