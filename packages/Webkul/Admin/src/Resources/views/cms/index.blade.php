@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.cms.index.title')
     </x-slot>
@@ -53,7 +52,7 @@
     {!! view_render_event('bagisto.admin.cms.pages.list.before') !!}
 
     <x-admin::datagrid src="{{ route('admin.cms.index') }}" />
-    
+
     {!! view_render_event('bagisto.admin.cms.pages.list.after') !!}
 
 </x-admin::layouts>

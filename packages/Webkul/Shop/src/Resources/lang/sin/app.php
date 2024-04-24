@@ -413,58 +413,50 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'යෙදුම තෝරන්න',
-                    'select-option' => 'නියෝජනය තෝරන්න',
-                    'submit'        => 'ඉදිරිපත් කරන්න',
-                ],
+                'length-of' => ':length යොමුවක්',
+                'results'   => ':total ප්‍රතිඵලයන්',
+                'selected'  => ':total තෝරාගත්',
 
-                'filter' => [
-                    'title' => 'වෙනත්',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'ඔබ තෝරාගැනීමට තෝරා ගැනීමක් අත්‍යවශ්‍ය වේ.',
+                    'must-select-a-mass-action-option' => 'ඔබ තෝරාගැනීමට තෝරා ගැනීමක් අත්‍යවශ්‍ය වේ.',
+                    'no-records-selected'              => 'කිසිදු වාර්තාවක් තෝරාගත නොහැක.',
+                    'select-action'                    => 'ක්‍රියාව තෝරන්න',
                 ],
 
                 'search' => [
                     'title' => 'සෙවුම',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'වෙනත්කරන්න',
+                'filter' => [
+                    'apply-filter' => 'පෙරහන් කිරීම',
+                    'title'        => 'පෙරහන් කිරීම',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'අනුලම් 2 අකුරු සඳහා වියදම්...',
-                        'no-results'        => 'ප්‍රතිඵලක් නැත...',
+                    'dropdown' => [
+                        'select' => 'තෝරන්න',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'කරුණාකර අවම වශයෙන් 2 අකුරු ටයිප් කරන්න...',
+                            'no-results'         => 'කිසිදු ප්‍රතිඵලක් හමු නොවීය...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'සියල්ල ඉවත් කරන්න',
-                    'title'     => 'අභිරුචි වෙනත්කරණ',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'අවසාන මාසය',
-                    'last-six-months'   => 'අවසාන 6 මාස',
-                    'last-three-months' => 'අවසාන 3 මාස',
-                    'this-month'        => 'මෙතද',
-                    'this-week'         => 'මෙතද',
-                    'this-year'         => 'මෙතද',
-                    'today'             => 'අද',
-                    'yesterday'         => 'ඊයේ',
+                    'custom-filters' => [
+                        'clear-all' => 'සියල්ල මකන්න',
+                    ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'ක්‍රියා',
+                'actions'              => 'ක්‍රියාවලිය',
                 'next-page'            => 'ඊළඟ පිටුව',
-                'no-records-available' => 'ලියාපදිංචි නොවේ.',
-                'of'                   => ':total ඇතුලු සටහන්',
-                'page-navigation'      => 'පිටු පාලනය',
-                'page-number'          => 'පිටුවේ අංකය',
+                'no-records-available' => 'ලබාදුන් නොමැත.',
+                'of'                   => 'මෙමෙයි :total ඇතුලත්වයන්ට',
+                'page-navigation'      => 'පිටුව පාලනය',
+                'page-number'          => 'පිටුව අංකය',
                 'previous-page'        => 'පෙර පිටුව',
-                'showing'              => ':firstItem පෙන්වනු ඇත',
-                'to'                   => ':lastItem දක්වනු ඇත',
+                'showing'              => 'පෙන්වන්නේ :firstItem',
+                'to'                   => 'දක්වාන්නේ :lastItem දක්වා',
             ],
         ],
 

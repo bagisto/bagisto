@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.users.index.title')
     </x-slot>
@@ -11,7 +10,7 @@
             </p>
 
             <div class="flex items-center gap-x-2.5">
-                <!-- Create User Button -->
+                <!-- Create Button -->
                 @if (bouncer()->hasPermission('settings.users.users.create'))
                     <button
                         type="button"
@@ -23,7 +22,6 @@
             </div>
         </div>
 
-        <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid />
     </v-users>
 
@@ -38,7 +36,6 @@
                 </p>
 
                 <div class="flex items-center gap-x-2.5">
-                    <!-- User Create Button -->
                     @if (bouncer()->hasPermission('settings.users.users.create'))
                         <button
                             type="button"
@@ -51,7 +48,6 @@
                 </div>
             </div>
 
-            <!-- Datagrid -->
             <x-admin::datagrid
                 src="{{ route('admin.settings.users.index') }}"
                 ref="datagrid"
@@ -59,8 +55,15 @@
                 @php
                     $hasPermission = bouncer()->hasPermission('settings.users.users.edit') || bouncer()->hasPermission('settings.users.users.delete');
                 @endphp
-                <!-- DataGrid Header -->
-                <template #header="{columns, records, sortPage, applied}">
+
+                <template #header="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
                     <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
                         <div
                             class="flex cursor-pointer gap-2.5"
@@ -71,17 +74,16 @@
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
-                                            'font-medium text-gray-800 dark:text-white': applied.sort.column == columnGroup,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == columnGroup,
+                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': available.columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                         }"
                                         @click="
-                                            columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
+                                            available.columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sort(available.columns.find(columnTemp => columnTemp.index === columnGroup)): {}
                                         "
                                     >
-                                        @{{ columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
+                                        @{{ available.columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
                                     </span>
                                 </span>
-
                                 <!-- Filter Arrow Icon -->
                                 <i
                                     class="align-text-bottom text-base text-gray-800 dark:text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -90,7 +92,6 @@
                                 ></i>
                             </p>
                         </div>
-
                         <!-- Actions -->
                         @if ($hasPermission)
                             <p class="flex justify-end gap-2.5">
@@ -100,77 +101,89 @@
                     </div>
                 </template>
 
-                <!-- DataGrid Body -->
-                <template #body="{ columns, records, performAction }">
-                    <div
-                        v-for="record in records"
-                        class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
-                    >
-                        <!-- Id -->
-                        <p v-text="record.user_id"></p>
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.datagrid.table.body />
+                    </template>
 
-                        <!-- User Profile -->
-                        <p>
-                            <div class="flex items-center gap-2.5">
-                                <div
-                                    class="border-3 mr-2 inline-block h-9 w-9 overflow-hidden rounded-full border-gray-800 text-center align-middle"
-                                    v-if="record.user_img"
-                                >
-                                    <img
-                                        class="h-9 w-9"
-                                        :src="record.user_img"
-                                        alt="record.user_name"
-                                    />
-                                </div>
+                    <template v-else>
+                        <div
+                            v-for="record in available.records"
+                            class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
+                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
+                        >
+                            <!-- ID -->
+                            <p v-text="record.user_id"></p>
 
-                                <div
-                                    class="profile-info-icon"
-                                    v-else
-                                >
-                                    <button
-                                        class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-blue-400 text-sm font-semibold leading-6 text-white transition-all hover:bg-blue-500 focus:bg-blue-500"
-                                        v-text="record.user_name[0].toUpperCase()"
+                            <!-- User Profile -->
+                            <p>
+                                <div class="flex items-center gap-2.5">
+                                    <div
+                                        class="border-3 mr-2 inline-block h-9 w-9 overflow-hidden rounded-full border-gray-800 text-center align-middle"
+                                        v-if="record.user_img"
                                     >
-                                    </button>
-                                </div>
+                                        <img
+                                            class="h-9 w-9"
+                                            :src="record.user_img"
+                                            alt="record.user_name"
+                                        />
+                                    </div>
 
-                                <div
-                                    class="text-sm"
-                                    v-text="record.user_name"
-                                >
+                                    <div
+                                        class="profile-info-icon"
+                                        v-else
+                                    >
+                                        <button
+                                            class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-blue-400 text-sm font-semibold leading-6 text-white transition-all hover:bg-blue-500 focus:bg-blue-500"
+                                            v-text="record.user_name[0].toUpperCase()"
+                                        >
+                                        </button>
+                                    </div>
+
+                                    <div
+                                        class="text-sm"
+                                        v-text="record.user_name"
+                                    >
+                                    </div>
                                 </div>
+                            </p>
+
+                            <!-- Status -->
+                            <p v-text="record.status"></p>
+
+                            <!-- Email -->
+                            <p v-text="record.email"></p>
+
+                            <!-- Role -->
+                            <p v-text="record.role_name"></p>
+
+                            <!-- Actions -->
+                            <div class="flex justify-end">
+                                <a @click="id=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
+                                    <span
+                                        :class="record.actions.find(action => action.index === 'edit')?.icon"
+                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    >
+                                    </span>
+                                </a>
+
+                                <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
+                                    <span
+                                        :class="record.actions.find(action => action.index === 'delete')?.icon"
+                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    >
+                                    </span>
+                                </a>
                             </div>
-                        </p>
-
-                        <!-- Status -->
-                        <p v-text="record.status"></p>
-
-                        <!-- Email -->
-                        <p v-text="record.email"></p>
-
-                        <!-- Role -->
-                        <p v-text="record.role_name"></p>
-
-                        <!-- Actions -->
-                        <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
-                                <span
-                                    :class="record.actions.find(action => action.index === 'edit')?.icon"
-                                    class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                >
-                                </span>
-                            </a>
-
-                            <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
-                                <span
-                                    :class="record.actions.find(action => action.index === 'delete')?.icon"
-                                    class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                >
-                                </span>
-                            </a>
                         </div>
-                    </div>
+                    </template>
                 </template>
             </x-admin::datagrid>
 
@@ -508,8 +521,8 @@
 
                                 this.$refs.userUpdateOrCreateModal.toggle();
                             })
-                            .catch(error => this.$emitter.emit('add-flash', { 
-                                type: 'error', message: error.response.data.message 
+                            .catch(error => this.$emitter.emit('add-flash', {
+                                type: 'error', message: error.response.data.message
                             }));
                     },
 

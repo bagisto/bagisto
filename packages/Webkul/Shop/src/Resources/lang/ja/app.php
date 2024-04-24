@@ -413,57 +413,49 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'アクションを選択',
-                    'select-option' => 'オプションを選択',
-                    'submit'        => '送信',
-                ],
+                'length-of' => ':length の',
+                'results'   => ':total 件の結果',
+                'selected'  => ':total 件選択済み',
 
-                'filter' => [
-                    'title' => 'フィルタ',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'マスアクションを選択する必要があります。',
+                    'must-select-a-mass-action-option' => 'マスアクションのオプションを選択する必要があります。',
+                    'no-records-selected'              => 'レコードが選択されていません。',
+                    'select-action'                    => 'アクションを選択',
                 ],
 
                 'search' => [
                     'title' => '検索',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'フィルタを適用',
+                'filter' => [
+                    'apply-filter' => 'フィルタを適用',
+                    'title'        => 'フィルタ',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => '少なくとも2文字入力してください...',
-                        'no-results'        => '結果が見つかりません...',
+                    'dropdown' => [
+                        'select' => '選択',
+
+                        'searchable' => [
+                            'at-least-two-chars' => '少なくとも2文字入力してください...',
+                            'no-results'         => '結果が見つかりません...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'すべてクリア',
-                    'title'     => 'カスタムフィルタ',
-                ],
-
-                'date-options' => [
-                    'last-month'        => '前月',
-                    'last-six-months'   => '過去6ヶ月',
-                    'last-three-months' => '過去3ヶ月',
-                    'this-month'        => '今月',
-                    'this-week'         => '今週',
-                    'this-year'         => '今年',
-                    'today'             => '今日',
-                    'yesterday'         => '昨日',
+                    'custom-filters' => [
+                        'clear-all' => 'すべてクリア',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'アクション',
                 'next-page'            => '次のページ',
-                'no-records-available' => '利用可能なレコードはありません。',
-                'of'                   => 'の合計 :total エントリ',
+                'no-records-available' => '利用可能なレコードがありません。',
+                'of'                   => '全 :total エントリー中',
                 'page-navigation'      => 'ページナビゲーション',
                 'page-number'          => 'ページ番号',
                 'previous-page'        => '前のページ',
-                'showing'              => ':firstItem を表示',
+                'showing'              => ':firstItem 件を表示中',
                 'to'                   => ':lastItem まで',
             ],
         ],

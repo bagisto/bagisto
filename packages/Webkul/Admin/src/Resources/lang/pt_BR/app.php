@@ -3382,9 +3382,9 @@ return [
                     'title' => 'Inventário',
 
                     'stock-options' => [
-                        'allow-back-orders'  => 'Permitir Pedidos em Atraso',
-                        'title'              => 'Opções de Estoque',
-                        'title-info'         => 'Opções de estoque são contratos de investimento que concedem o direito de comprar ou vender ações da empresa a um preço predeterminado, influenciando os lucros potenciais.',
+                        'allow-back-orders' => 'Permitir Pedidos em Atraso',
+                        'title'             => 'Opções de Estoque',
+                        'title-info'        => 'Opções de estoque são contratos de investimento que concedem o direito de comprar ou vender ações da empresa a um preço predeterminado, influenciando os lucros potenciais.',
                     ],
                 ],
 
@@ -3588,6 +3588,10 @@ return [
                     'admin-name'            => 'Nome do Admin',
                     'admin-name-tip'        => 'Este nome será exibido em todos os e-mails do admin',
                     'admin-page-limit'      => 'Itens por Página Padrão (Admin)',
+                    'contact-email'         => 'E-mail de Contato',
+                    'contact-email-tip'     => 'O endereço de e-mail será mostrado no final de seus e-mails',
+                    'contact-name'          => 'Nome de Contato',
+                    'contact-name-tip'      => 'Este nome será mostrado no final de seus e-mails',
                     'email-sender-name'     => 'Nome do Remetente de E-mail',
                     'email-sender-name-tip' => 'Este nome será exibido na caixa de entrada do cliente',
                     'info'                  => 'Defina o nome do remetente de e-mail, o endereço de e-mail da loja, o nome do admin e o endereço de e-mail do admin.',

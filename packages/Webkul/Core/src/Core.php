@@ -1052,6 +1052,26 @@ class Core
     }
 
     /**
+     * Get Contact email details.
+     *
+     * @return array
+     */
+    public function getContactEmailDetails()
+    {
+        $contactName = $this->getConfigData('emails.configure.email_settings.contact_name')
+            ?: (config('mail.contact.name')
+            ?: config('mail.from.name'));
+
+        $contactEmail = $this->getConfigData('emails.configure.email_settings.contact_email')
+            ?: config('mail.contact.address');
+
+        return [
+            'name'  => $contactName,
+            'email' => $contactEmail,
+        ];
+    }
+
+    /**
      * Array merge.
      *
      * @return array

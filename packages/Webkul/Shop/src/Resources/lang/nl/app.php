@@ -413,52 +413,44 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Selecteer Actie',
-                    'select-option' => 'Selecteer Optie',
-                    'submit'        => 'Verzenden',
-                ],
+                'length-of' => ':length van',
+                'results'   => ':total Resultaten',
+                'selected'  => ':total Geselecteerd',
 
-                'filter' => [
-                    'title' => 'Filter',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'U moet een massa-actie selecteren.',
+                    'must-select-a-mass-action-option' => 'U moet een optie voor massa-actie selecteren.',
+                    'no-records-selected'              => 'Er zijn geen records geselecteerd.',
+                    'select-action'                    => 'Selecteer Actie',
                 ],
 
                 'search' => [
                     'title' => 'Zoeken',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Filters toepassen',
+                'filter' => [
+                    'apply-filter' => 'Filters Toepassen',
+                    'title'        => 'Filteren',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Typ minimaal 2 tekens...',
-                        'no-results'        => 'Geen resultaten gevonden...',
+                    'dropdown' => [
+                        'select' => 'Selecteren',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Typ minimaal 2 tekens...',
+                            'no-results'         => 'Geen resultaat gevonden...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Alles wissen',
-                    'title'     => 'Aangepaste filters',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Vorige maand',
-                    'last-six-months'   => 'Laatste 6 maanden',
-                    'last-three-months' => 'Laatste 3 maanden',
-                    'this-month'        => 'Deze maand',
-                    'this-week'         => 'Deze week',
-                    'this-year'         => 'Dit jaar',
-                    'today'             => 'Vandaag',
-                    'yesterday'         => 'Gisteren',
+                    'custom-filters' => [
+                        'clear-all' => 'Alles wissen',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'Acties',
                 'next-page'            => 'Volgende Pagina',
-                'no-records-available' => 'Geen records beschikbaar.',
+                'no-records-available' => 'Geen Records Beschikbaar.',
                 'of'                   => 'van :total items',
                 'page-navigation'      => 'Pagina Navigatie',
                 'page-number'          => 'Paginanummer',

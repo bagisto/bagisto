@@ -413,54 +413,46 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'انتخاب عملیات',
-                    'select-option' => 'انتخاب گزینه',
-                    'submit'        => 'ثبت',
-                ],
+                'length-of' => ':length از',
+                'results'   => ':total نتیجه',
+                'selected'  => ':total انتخاب شده',
 
-                'filter' => [
-                    'title' => 'فیلتر',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'شما باید یک عملیات گروهی را انتخاب کنید.',
+                    'must-select-a-mass-action-option' => 'شما باید یک گزینه برای عملیات گروهی را انتخاب کنید.',
+                    'no-records-selected'              => 'هیچ رکوردی انتخاب نشده است.',
+                    'select-action'                    => 'عملیات را انتخاب کنید',
                 ],
 
                 'search' => [
                     'title' => 'جستجو',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'اعمال فیلترها',
+                'filter' => [
+                    'apply-filter' => 'اعمال فیلتر',
+                    'title'        => 'فیلتر',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'حداقل 2 حرف را تایپ کنید...',
-                        'no-results'        => 'هیچ نتیجه‌ای یافت نشد...',
+                    'dropdown' => [
+                        'select' => 'انتخاب',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'حداقل 2 کاراکتر وارد کنید...',
+                            'no-results'         => 'نتیجه‌ای یافت نشد...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'title'     => 'فیلترهای سفارشی',
-                    'clear-all' => 'پاک کردن همه',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'ماه گذشته',
-                    'last-six-months'   => 'شش ماه گذشته',
-                    'last-three-months' => 'سه ماه گذشته',
-                    'this-month'        => 'این ماه',
-                    'this-week'         => 'این هفته',
-                    'this-year'         => 'امسال',
-                    'today'             => 'امروز',
-                    'yesterday'         => 'دیروز',
+                    'custom-filters' => [
+                        'clear-all' => 'پاک کردن همه',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'عملیات',
                 'next-page'            => 'صفحه بعدی',
-                'no-records-available' => 'هیچ رکوردی موجود نیست.',
-                'of'                   => 'از :total ورودی',
-                'page-navigation'      => 'مسیریابی صفحه',
+                'no-records-available' => 'رکوردی موجود نیست.',
+                'of'                   => 'از :total رکورد',
+                'page-navigation'      => 'ناوبری صفحه',
                 'page-number'          => 'شماره صفحه',
                 'previous-page'        => 'صفحه قبلی',
                 'showing'              => 'نمایش :firstItem',

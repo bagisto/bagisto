@@ -22,6 +22,10 @@
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
 - [Shop Event parameter updated](#event-parameter-updated)
+- [Admin Customized Datagrid Header Parameters Updated](#admin-customized-datagrid-header-parameter-updated)
+- [Admin Customized Datagrid Body Parameters updated](#admin-customized-datagrid-body-parameter-updated)
+- [Shop Customized Datagrid Header Parameters Updated](#shop-customized-datagrid-header-parameter-updated)
+- [Shop Customized Datagrid Body Parameters Updated](#shop-customized-datagrid-body-parameter-updated)
 
 </div>
 
@@ -92,6 +96,52 @@ There is no dependency needed to be updated at for this upgrade.
 - {!! view_render_event('bagisto.admin.dashboard.todays_detailes.after') !!}
 + {!! view_render_event('bagisto.admin.dashboard.todays_details.after') !!}
 
+```
+
+<a name="admin-customized-datagrid-header-parameter-updated"></a>
+####  Admin Customized Datagrid Header Parameters Updated
+
+**Impact Probability: Medium**
+
+1. Previously, the data grid header was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+
+```diff
+- <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
+-    <!-- Header customization code -->
+- </template>
++ <template #header="{
++    isLoading,
++    available,
++    applied,
++    selectAll,
++    sort,
++    performAction
++ }">
++    <!-- Updated header customization code -->
++ </template>
+```
+
+<a name="admin-customized-datagrid-body-parameter-updated"></a>
+####  Admin Customized Datagrid Body Parameters Updated
+
+**Impact Probability: Medium**
+
+1. Previously, the data grid body was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+
+```diff
+- <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
+-    <!-- Updated body customization code -->
+- </template>
++ <template #body="{
++    isLoading,
++    available,
++    applied,
++    selectAll,
++    sort,
++    performAction
++ }">
++    <!-- Updated header customization code -->
++ </template>
 ```
 
 
@@ -346,6 +396,52 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 <a name="shop"></a>
 ### Shop
+
+<a name="shop-customized-datagrid-header-parameter-updated"></a>
+####  Shop Customized Datagrid Header Parameters Updated
+
+**Impact Probability: Medium**
+
+1. Previously, the data grid header was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+
+```diff
+- <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
+-    <!-- Header customization code -->
+- </template>
++ <template #header="{
++    isLoading,
++    available,
++    applied,
++    selectAll,
++    sort,
++    performAction
++ }">
++    <!-- Updated header customization code -->
++ </template>
+```
+
+<a name="shop-customized-datagrid-body-parameter-updated"></a>
+#### Shop Customized Datagrid Body Parameters Updated
+
+**Impact Probability: Medium**
+
+1. Previously, the data grid body was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+
+```diff
+- <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
+-    <!-- Updated body customization code -->
+- </template>
++ <template #body="{
++    isLoading,
++    available,
++    applied,
++    selectAll,
++    sort,
++    performAction
++ }">
++    <!-- Updated header customization code -->
++ </template>
+```
 
 <a name="event-parameter-updated"></a>
 #### Shop Event parameter updated

@@ -3,7 +3,6 @@
 @endphp
 
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.attributes.create.title')
     </x-slot>
@@ -560,7 +559,7 @@
                                         value="1"
                                         for="value_per_locale"
                                     />
-                
+
                                     <label
                                         class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="value_per_locale"
@@ -614,7 +613,7 @@
                                         value="1"
                                         for="is_visible_on_front"
                                     />
-                                  
+
                                     <label
                                         class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="is_visible_on_front"
