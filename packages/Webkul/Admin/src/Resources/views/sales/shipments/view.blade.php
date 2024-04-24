@@ -1,7 +1,6 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
-        @lang('admin::app.sales.shipments.view.title', ['shipment_id' => $shipment->id])  
+        @lang('admin::app.sales.shipments.view.title', ['shipment_id' => $shipment->id])
     </x-slot>
 
     @php $order = $shipment->order; @endphp
@@ -48,9 +47,9 @@
                                 @else
                                     <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                        
-                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400"> 
-                                            @lang('admin::app.sales.invoices.view.product-image') 
+
+                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
+                                            @lang('admin::app.sales.invoices.view.product-image')
                                         </p>
                                     </div>
                                 @endif
@@ -72,7 +71,7 @@
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.shipments.view.sku', ['sku' =>  $item->sku ])
                                         </p>
-                                        
+
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.shipments.view.qty', ['qty' =>  $item->qty ])
                                         </p>
@@ -124,7 +123,7 @@
                             </div>
 
                             @include ('admin::sales.address', ['address' => $order->billing_address])
-                            
+
                         @endif
 
                         <!-- Shipping Address -->
@@ -142,8 +141,8 @@
                         @endif
                     @endif
                 </x-slot>
-            </x-admin::accordion> 
-         
+            </x-admin::accordion>
+
             <!-- component 2 -->
             <x-admin::accordion>
                 <x-slot:header>
@@ -156,19 +155,19 @@
                     <div class="flex w-full justify-start gap-5">
                         <div class="flex flex-col gap-y-1.5">
                             <p class="text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.shipments.view.order-id')     
+                                @lang('admin::app.sales.shipments.view.order-id')
                             </p>
 
                             <p class="text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.shipments.view.order-date')     
+                                @lang('admin::app.sales.shipments.view.order-date')
                            </p>
 
                             <p class="text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.shipments.view.order-status')        
+                                @lang('admin::app.sales.shipments.view.order-status')
                             </p>
 
                             <p class="text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.shipments.view.channel')                     
+                                @lang('admin::app.sales.shipments.view.channel')
                             </p>
                         </div>
 
@@ -219,7 +218,7 @@
                         </p>
 
                         <!-- Currency Code -->
-                        <p class="pt-4 font-semibold text-gray-800 dark:text-white">  
+                        <p class="pt-4 font-semibold text-gray-800 dark:text-white">
                             {{ $order->order_currency_code }}
                         </p>
 
@@ -230,7 +229,7 @@
 
                     <!-- Horizontal Line -->
                     <span class="block w-full border-b dark:border-gray-800"></span>
-                
+
                     <div class="pt-4">
                         <!-- Shipping Menthod -->
                         <p class="font-semibold text-gray-800 dark:text-white">
@@ -267,7 +266,7 @@
                             <p class="pt-4 font-semibold text-gray-800 dark:text-white">
                                 {{ $shipment->carrier_title }}
                             </p>
-                            
+
                             <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.carrier-title')
                             </p>
@@ -284,7 +283,7 @@
                         @endif
                     </div>
                 </x-slot>
-            </x-admin::accordion> 
+            </x-admin::accordion>
         </div>
     </div>
 </x-admin::layouts>

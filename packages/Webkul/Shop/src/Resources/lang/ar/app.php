@@ -376,57 +376,49 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'حدد الإجراء',
-                    'select-option' => 'اختر الخيار',
-                    'submit'        => 'إرسال',
-                ],
+                'length-of' => ':طول',
+                'results'   => ':إجمالي النتائج',
+                'selected'  => ':محددة النتائج',
 
-                'filter' => [
-                    'title' => 'تصفية',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'يجب عليك تحديد إجراء جماعي.',
+                    'must-select-a-mass-action-option' => 'يجب عليك تحديد خيار الإجراء الجماعي.',
+                    'no-records-selected'              => 'لم يتم تحديد أي سجلات.',
+                    'select-action'                    => 'اختر إجراء',
                 ],
 
                 'search' => [
-                    'title' => 'بحث',
+                    'title' => 'البحث',
                 ],
-            ],
 
-            'filters' => [
-                'title'          => 'تطبيق الفلاتر',
+                'filter' => [
+                    'apply-filter' => 'تطبيق الفلاتر',
+                    'title'        => 'الفلتر',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'اكتب ما لا يقل عن حرفين...',
-                        'no-results'        => 'لم يتم العثور على نتائج...',
+                    'dropdown' => [
+                        'select' => 'اختر',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'اكتب ما لا يقل عن 2 حرفًا...',
+                            'no-results'         => 'لم يتم العثور على نتائج...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'امسح الكل',
-                    'title'     => 'تصفيات مخصصة',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'الشهر الماضي',
-                    'last-six-months'   => 'آخر 6 أشهر',
-                    'last-three-months' => 'آخر 3 أشهر',
-                    'this-month'        => 'هذا الشهر',
-                    'this-week'         => 'هذا الأسبوع',
-                    'this-year'         => 'هذا العام',
-                    'today'             => 'اليوم',
-                    'yesterday'         => 'أمس',
+                    'custom-filters' => [
+                        'clear-all' => 'مسح الكل',
+                    ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'إجراءات',
+                'actions'              => 'الإجراءات',
                 'next-page'            => 'الصفحة التالية',
-                'no-records-available' => 'لا تتوفر سجلات.',
-                'of'                   => 'من :total إدخالات',
+                'no-records-available' => 'لا توجد سجلات متاحة.',
+                'of'                   => 'من :إجمالي الإدخالات',
                 'page-navigation'      => 'تنقل الصفحة',
                 'page-number'          => 'رقم الصفحة',
                 'previous-page'        => 'الصفحة السابقة',
-                'showing'              => 'يتم عرض :firstItem',
+                'showing'              => 'عرض :firstItem',
                 'to'                   => 'إلى :lastItem',
             ],
         ],

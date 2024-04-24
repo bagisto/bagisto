@@ -12,8 +12,19 @@
             'type' => 'reviews'
         ])"
     >
-        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading, available }">
-            <template v-if="! isLoading">
+        <template #header="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center border-b border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
                     <div
                         class="flex select-none items-center gap-2.5"
@@ -26,13 +37,13 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'font-medium text-gray-800 dark:text-white': applied.sort.column == column,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': available.columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
-                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                            available.columns.find(columnTemp => columnTemp.index === column)?.sortable ? sort(available.columns.find(columnTemp => columnTemp.index === column)): {}
                                         "
                                     >
-                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                        @{{ available.columns.find(columnTemp => columnTemp.index === column)?.label }}
                                     </span>
                                 </template>
                             </span>
@@ -46,19 +57,25 @@
                     </div>
                 </div>
             </template>
-
-            <!-- Datagrid Head Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
-            </template>
         </template>
 
-        <template #body="{ columns, records, performAction, available, isLoading}">
-            <template v-if="! isLoading">
+        <template #body="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div 
                     v-if="available.meta.total"
-                    class="grid gap-y-4 p-4 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                    v-for="(record, index) in records"
+                    class="grid gap-y-4 border-b p-4 pt-0 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                    v-for="record in available.records"
                 >
                     <div class="flex justify-start [&amp;>*]:flex-1">
                         <div class="flex flex-col gap-1.5">
@@ -152,10 +169,6 @@
                         </div>
                     </div>
                 </div>
-            </template>
-
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
             </template>
         </template>
     </x-admin::datagrid>
