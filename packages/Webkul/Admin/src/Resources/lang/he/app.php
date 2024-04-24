@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'הוסף כתובת',
-                        'add-new-address'  => 'הוסף כתובת חדשה',
                         'add-new'          => 'הוסף כתובת חדשה',
+                        'add-new-address'  => 'הוסף כתובת חדשה',
                         'addresses'        => 'כתובות',
                         'back'             => 'חזור',
                         'billing-address'  => 'כתובת לחיוב',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => 'מיקוד',
                         'proceed'          => 'המשך',
                         'same-as-billing'  => 'השתמש באותה כתובת למשלוח?',
-                        'save-address'     => 'שמור בספר הכתובות',
                         'save'             => 'שמור',
+                        'save-address'     => 'שמור בספר הכתובות',
                         'select-country'   => 'בחר מדינה',
                         'select-state'     => 'בחר מדינה',
                         'shipping-address' => 'כתובת למשלוח',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => 'כתובת',
                         'telephone'        => 'טלפון',
                         'title'            => 'כתובת',
+                        'vat-id'           => 'מספר ת.מ.',
                     ],
 
                     'payment' => [

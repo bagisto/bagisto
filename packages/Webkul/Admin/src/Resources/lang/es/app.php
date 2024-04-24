@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Agregar dirección',
-                        'add-new-address'  => 'Agregar nueva dirección',
                         'add-new'          => 'Agregar nueva dirección',
+                        'add-new-address'  => 'Agregar nueva dirección',
                         'addresses'        => 'Direcciones',
                         'back'             => 'Volver',
                         'billing-address'  => 'Dirección de facturación',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => 'Código postal',
                         'proceed'          => 'Continuar',
                         'same-as-billing'  => '¿Usar la misma dirección para el envío?',
-                        'save-address'     => 'Guardar en la libreta de direcciones',
                         'save'             => 'Guardar',
+                        'save-address'     => 'Guardar en la libreta de direcciones',
                         'select-country'   => 'Seleccionar país',
                         'select-state'     => 'Seleccionar estado',
                         'shipping-address' => 'Dirección de envío',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => 'Dirección',
                         'telephone'        => 'Teléfono',
                         'title'            => 'Dirección',
+                        'vat-id'           => 'NIF',
                     ],
 
                     'payment' => [

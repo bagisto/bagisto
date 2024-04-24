@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => '住所を追加',
-                        'add-new-address'  => '新しい住所を追加',
                         'add-new'          => '新しい住所を追加',
+                        'add-new-address'  => '新しい住所を追加',
                         'addresses'        => '住所',
                         'back'             => '戻る',
                         'billing-address'  => '請求先住所',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => '郵便番号',
                         'proceed'          => '進む',
                         'same-as-billing'  => '配送先にも同じ住所を使用しますか？',
-                        'save-address'     => 'この住所を住所帳に保存',
                         'save'             => '保存',
+                        'save-address'     => 'この住所を住所帳に保存',
                         'select-country'   => '国を選択',
                         'select-state'     => '都道府県を選択',
                         'shipping-address' => '配送先住所',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => '住所',
                         'telephone'        => '電話番号',
                         'title'            => '住所',
+                        'vat-id'           => 'VAT番号',
                     ],
 
                     'payment' => [
