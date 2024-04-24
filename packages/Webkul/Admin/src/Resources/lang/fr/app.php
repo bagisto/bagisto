@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'Sous-total',
                 'tax-amount'                  => 'Montant de la taxe',
                 'title'                       => 'Créer un remboursement',
-                'update-quantity-btn'         => 'Mettre à jour la quantité',
+                'update-totals-btn'           => 'Mettre à jour la quantité',
             ],
         ],
 

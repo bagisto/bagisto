@@ -531,7 +531,7 @@ return [
                 'sku'                         => 'קוד מוצר - :sku',
                 'title'                       => 'צור החזר',
                 'tax-amount'                  => 'סכום מס',
-                'update-quantity-btn'         => 'עדכן כמות',
+                'update-totals-btn'           => 'עדכן כמות',
             ],
         ],
 

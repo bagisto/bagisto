@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'সাবটোটাল',
                 'tax-amount'                  => 'করের পরিমাণ',
                 'title'                       => 'ফেরত তৈরি করুন',
-                'update-quantity-btn'         => 'পরিমাণ আপডেট করুন',
+                'update-totals-btn'           => 'পরিমাণ আপডেট করুন',
             ],
         ],
 

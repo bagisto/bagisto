@@ -36,7 +36,7 @@
                 <span class="text-xs font-normal">
                     @lang('shop::app.checkout.onepage.summary.excl-tax')
 
-                    <span class="font-medium">@{{ item.formatted_total_excl_tax }}</span>
+                    <span class="font-medium">@{{ item.formatted_total }}</span>
                 </span>
             </p>
         </div>
@@ -67,7 +67,7 @@
             </p>
 
             <p class="text-base font-medium">
-                @{{ cart.formatted_sub_total_excl_tax }}
+                @{{ cart.formatted_sub_total }}
             </p>
         </div>
         
@@ -89,7 +89,7 @@
             </p>
 
             <p class="text-base font-medium">
-                @{{ cart.formatted_sub_total_excl_tax }}
+                @{{ cart.formatted_sub_total }}
             </p>
         </div>
     </template>
@@ -144,7 +144,7 @@
             </p>
 
             <p class="text-base font-medium">
-                @{{ cart.formatted_shipping_amount_excl_tax }}
+                @{{ cart.formatted_shipping_amount }}
             </p>
         </div>
         
@@ -166,7 +166,7 @@
             </p>
 
             <p class="text-base font-medium">
-                @{{ cart.formatted_shipping_amount_excl_tax }}
+                @{{ cart.formatted_shipping_amount }}
             </p>
         </div>
     </template>

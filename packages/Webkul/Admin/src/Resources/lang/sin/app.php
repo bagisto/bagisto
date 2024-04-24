@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'උප මුදල',
                 'tax-amount'                  => 'බදු මුදල',
                 'title'                       => 'ආදානය සාදන්න',
-                'update-quantity-btn'         => 'ප්රමාණය යාවත් කරන්න',
+                'update-totals-btn'           => 'ප්රමාණය යාවත් කරන්න',
             ],
         ],
 

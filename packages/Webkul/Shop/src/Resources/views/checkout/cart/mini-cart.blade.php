@@ -113,14 +113,14 @@
                                         <span class="text-xs">
                                             @lang('shop::app.checkout.cart.mini-cart.excl-tax')
 
-                                            <span class="font-medium">@{{ item.formatted_price_excl_tax }}</span>
+                                            <span class="font-medium">@{{ item.formatted_price }}</span>
                                         </span>
                                     </p>
                                 </template>
 
                                 <template v-else>
                                     <p class="text-lg">
-                                        @{{ item.formatted_price_excl_tax }}
+                                        @{{ item.formatted_price }}
                                     </p>
                                 </template>
 
@@ -237,14 +237,14 @@
                                     <span class="text-sm font-normal">
                                         @lang('shop::app.checkout.cart.mini-cart.excl-tax')
                                         
-                                        <span class="font-medium">@{{ cart.formatted_sub_total_excl_tax }}</span>
+                                        <span class="font-medium">@{{ cart.formatted_sub_total }}</span>
                                     </span>
                                 </p>
                             </template>
 
                             <template v-else>
                                 <p class="text-3xl font-semibold">
-                                    @{{ cart.formatted_sub_total_excl_tax }}
+                                    @{{ cart.formatted_sub_total }}
                                 </p>
                             </template>
                         </template>

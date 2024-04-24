@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'جمع جزئی',
                 'tax-amount'                  => 'مقدار مالیات',
                 'title'                       => 'ایجاد بازپرداخت',
-                'update-quantity-btn'         => 'به‌روزرسانی تعداد',
+                'update-totals-btn'           => 'به‌روزرسانی تعداد',
             ],
         ],
 

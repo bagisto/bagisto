@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'उपकुल',
                 'tax-amount'                  => 'कर राशि',
                 'title'                       => 'वापसी बनाएं',
-                'update-quantity-btn'         => 'मात्रा अपडेट करें',
+                'update-totals-btn'           => 'मात्रा अपडेट करें',
             ],
         ],
 

@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'المجموع الفرعي',
                 'tax-amount'                  => 'مبلغ الضريبة',
                 'title'                       => 'إنشاء استرداد',
-                'update-quantity-btn'         => 'تحديث الكمية',
+                'update-totals-btn'           => 'تحديث الكمية',
             ],
         ],
 

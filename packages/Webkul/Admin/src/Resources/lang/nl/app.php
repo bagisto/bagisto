@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'Subtotaal',
                 'tax-amount'                  => 'Belastingbedrag',
                 'title'                       => 'Terugbetaling aanmaken',
-                'update-quantity-btn'         => 'Hoeveelheid Bijwerken',
+                'update-totals-btn'           => 'Hoeveelheid Bijwerken',
             ],
         ],
 

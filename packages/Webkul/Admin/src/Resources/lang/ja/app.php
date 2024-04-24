@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => '小計',
                 'tax-amount'                  => '税額',
                 'title'                       => '返金を作成',
-                'update-quantity-btn'         => '数量を更新',
+                'update-totals-btn'           => '数量を更新',
             ],
         ],
 

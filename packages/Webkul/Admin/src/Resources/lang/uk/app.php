@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'Підсумок',
                 'tax-amount'                  => 'Сума податку',
                 'title'                       => 'Створити повернення',
-                'update-quantity-btn'         => 'Оновити кількість',
+                'update-totals-btn'           => 'Оновити кількість',
             ],
         ],
 

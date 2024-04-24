@@ -300,14 +300,14 @@
                                                 <span class="text-xs font-normal">
                                                     @lang('shop::app.checkout.cart.index.excl-tax')
                                                     
-                                                    <span class="font-medium">@{{ item.formatted_total_excl_tax }}</span>
+                                                    <span class="font-medium">@{{ item.formatted_total }}</span>
                                                 </span>
                                             </p>
                                         </template>
 
                                         <template v-else>
                                             <p class="text-lg font-semibold">
-                                                @{{ item.formatted_total_excl_tax }}
+                                                @{{ item.formatted_total }}
                                             </p>
                                         </template>
 

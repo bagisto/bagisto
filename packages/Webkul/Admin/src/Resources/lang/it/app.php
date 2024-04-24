@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'Subtotale',
                 'tax-amount'                  => 'Importo Imposta',
                 'title'                       => 'Crea Rimborso',
-                'update-quantity-btn'         => 'Aggiorna Quantità',
+                'update-totals-btn'           => 'Aggiorna Quantità',
             ],
         ],
 

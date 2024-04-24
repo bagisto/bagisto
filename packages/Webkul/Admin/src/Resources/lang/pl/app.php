@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'Suma częściowa',
                 'tax-amount'                  => 'Kwota podatku',
                 'title'                       => 'Utwórz zwrot',
-                'update-quantity-btn'         => 'Aktualizuj ilość',
+                'update-totals-btn'           => 'Aktualizuj ilość',
             ],
         ],
 

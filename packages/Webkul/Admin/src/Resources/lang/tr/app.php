@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'Ara Toplam',
                 'tax-amount'                  => 'Vergi Tutarı',
                 'title'                       => 'İade Oluştur',
-                'update-quantity-btn'         => 'Miktarı Güncelle',
+                'update-totals-btn'           => 'Miktarı Güncelle',
             ],
         ],
 

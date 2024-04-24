@@ -11,21 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->decimal('shipping_tax_amount', 12, 4)->default(0)->after('base_shipping_discount_amount');
+        Schema::table('refunds', function (Blueprint $table) {
+            $table->decimal('shipping_tax_amount', 12, 4)->default(0)->after('base_discount_amount');
             $table->decimal('base_shipping_tax_amount', 12, 4)->default(0)->after('shipping_tax_amount');
-
-            $table->decimal('shipping_tax_refunded', 12, 4)->default(0)->after('base_shipping_tax_amount');
-            $table->decimal('base_shipping_tax_refunded', 12, 4)->default(0)->after('shipping_tax_refunded');
-
-            $table->decimal('sub_total_incl_tax', 12, 4)->default(0)->after('base_shipping_tax_refunded');
+            
+            $table->decimal('sub_total_incl_tax', 12, 4)->default(0)->after('base_shipping_tax_amount');
             $table->decimal('base_sub_total_incl_tax', 12, 4)->default(0)->after('sub_total_incl_tax');
 
             $table->decimal('shipping_amount_incl_tax', 12, 4)->default(0)->after('base_sub_total_incl_tax');
             $table->decimal('base_shipping_amount_incl_tax', 12, 4)->default(0)->after('shipping_amount_incl_tax');
         });
 
-        DB::table('orders')->update([
+        DB::table('refunds')->update([
             'sub_total_incl_tax'            => DB::raw('sub_total + tax_amount'),
             'base_sub_total_incl_tax'       => DB::raw('base_sub_total + base_tax_amount'),
             'shipping_amount_incl_tax'      => DB::raw('shipping_amount'),
@@ -38,12 +35,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('refunds', function (Blueprint $table) {
             $table->dropColumn('shipping_tax_amount');
             $table->dropColumn('base_shipping_tax_amount');
-
-            $table->dropColumn('shipping_tax_refunded');
-            $table->dropColumn('base_shipping_tax_refunded');
 
             $table->dropColumn('sub_total_incl_tax');
             $table->dropColumn('base_sub_total_incl_tax');

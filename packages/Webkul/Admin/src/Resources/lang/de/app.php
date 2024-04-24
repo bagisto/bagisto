@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'Zwischensumme',
                 'tax-amount'                  => 'Steuerbetrag',
                 'title'                       => 'Rückerstattung erstellen',
-                'update-quantity-btn'         => 'Menge aktualisieren',
+                'update-totals-btn'           => 'Menge aktualisieren',
             ],
         ],
 

@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => 'Subtotal',
                 'tax-amount'                  => 'Monto de Impuestos',
                 'title'                       => 'Crear Reembolso',
-                'update-quantity-btn'         => 'Actualizar Cantidad',
+                'update-totals-btn'           => 'Actualizar Cantidad',
             ],
         ],
 

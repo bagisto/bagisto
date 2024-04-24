@@ -985,7 +985,7 @@ it('should return the order refunded data', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.refunds.update_qty', $order->id), $items)
+    postJson(route('admin.sales.refunds.update_totals', $order->id), $items)
         ->assertOk()
         ->assertJsonPath('grand_total.price', $summary['grand_total']['price']);
 

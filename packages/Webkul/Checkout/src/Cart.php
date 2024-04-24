@@ -979,7 +979,7 @@ class Cart
             return;
         }
 
-        if (! $taxCategoryId = core()->getConfigData('sales.taxes.categories.shipping')) {
+        if (! $taxCategoryId = 1/*core()->getConfigData('sales.taxes.categories.shipping')*/) {
             return;
         }
 

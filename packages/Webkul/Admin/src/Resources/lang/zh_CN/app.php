@@ -531,7 +531,7 @@ return [
                 'subtotal'                    => '小计',
                 'tax-amount'                  => '税额',
                 'title'                       => '创建退款',
-                'update-quantity-btn'         => '更新数量',
+                'update-totals-btn'           => '更新数量',
             ],
         ],
 
