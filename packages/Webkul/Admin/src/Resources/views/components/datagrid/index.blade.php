@@ -333,9 +333,7 @@
                     /**
                      * We need to reset the page on filtering.
                      */
-                    if (! appliedColumn.value.length) {
-                        this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
-                    }
+                    this.applied.pagination.page = 1;
 
                     this.get();
                 },

@@ -74,8 +74,6 @@
             <template v-else>
                 <div 
                     v-if="available.meta.total"
-                    class="grid gap-y-4 border-b p-4 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
-                    v-for="(record, index) in records"
                     class="grid gap-y-4 border-b p-4 pt-0 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                     v-for="record in available.records"
                 >
