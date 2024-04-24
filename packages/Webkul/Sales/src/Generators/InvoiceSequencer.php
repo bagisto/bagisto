@@ -27,7 +27,11 @@ class InvoiceSequencer extends Sequencer
         $prefixConfig = core()->getConfigData('sales.invoice_settings.invoice_number.invoice_number_prefix');
 
         if (strpos($prefixConfig, 'date(') !== false) {
-            $this->prefix = eval("return $prefixConfig;");
+            preg_match('/date\(\'([^\']+)\'\)/', $prefixConfig, $matches);
+
+            if (isset($matches[1])) {
+                $this->prefix = date($matches[1]);
+            }
         } else {
             $this->prefix = $prefixConfig;
         }
