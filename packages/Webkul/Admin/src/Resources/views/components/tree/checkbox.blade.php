@@ -22,6 +22,14 @@
                 v-text="label"
             >
             </div>
+
+            <!-- Spinner -->
+            <template v-if="isLoading">
+                <img
+                    class="ml-3 h-5 w-5 animate-spin"
+                    src="{{ bagisto_asset('images/spinner.svg') }}"
+                />
+            </template>
         </label>
     </script>
 
@@ -31,7 +39,7 @@
 
             name: 'v-tree-checkbox',
 
-            props: ['id', 'label', 'name', 'value'],
+            props: ['id', 'label', 'name', 'value', 'isLoading'],
 
             computed: {
                 isActive() {

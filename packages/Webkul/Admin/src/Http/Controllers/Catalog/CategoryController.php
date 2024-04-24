@@ -50,7 +50,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->categoryRepository->getCategoryTree(null, ['id']);
+        $categories = $this->categoryRepository->getCategoryTree();
 
         $attributes = $this->attributeRepository->findWhere(['is_filterable' => 1]);
 

@@ -129,10 +129,9 @@ class CategoryRepository extends Repository
     /**
      * Specify category tree.
      *
-     * @param  int  $id
      * @return \Webkul\Category\Contracts\Category
      */
-    public function getCategoryTree($id = null)
+    public function getCategoryTree(int $id = null)
     {
         return $id
             ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
@@ -188,14 +187,26 @@ class CategoryRepository extends Repository
     /**
      * get visible category tree.
      *
-     * @param  int  $id
      * @return \Illuminate\Support\Collection
      */
-    public function getVisibleCategoryTree($id = null)
+    public function getVisibleCategoryTree(int $id = null)
     {
-        return $id
-            ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsAndSelf($id)->toTree($id)
-            : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
+        if (! $id) {
+            return $this->model::where('status', 1)
+                ->orderBy('position', 'ASC')
+                ->whereIn('parent_id', [1, NULL])
+                ->get()->toTree();
+
+        }
+
+        return $this->model::where('status', 1)
+            ->orderBy('position', 'ASC')
+            ->where(function ($query) use ($id) {
+                $query->where('parent_id', $id)
+                    ->orWhere('id', $id);
+            })
+            ->descendantsAndSelf($id)
+            ->toTree($id);
     }
 
     /**
