@@ -376,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Sélectionnez l\'action',
-                    'select-option' => 'Sélectionnez une option',
-                    'submit'        => 'Soumettre',
-                ],
+                'length-of' => ':length de',
+                'results'   => ':total Résultats',
+                'selected'  => ':total Sélectionné',
 
-                'filter' => [
-                    'title' => 'Filtre',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Vous devez sélectionner une action de masse.',
+                    'must-select-a-mass-action-option' => 'Vous devez sélectionner une option d\'action de masse.',
+                    'no-records-selected'              => 'Aucun enregistrement n\'a été sélectionné.',
+                    'select-action'                    => 'Sélectionner une action',
                 ],
 
                 'search' => [
                     'title' => 'Rechercher',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Appliquer des filtres',
+                'filter' => [
+                    'apply-filter' => 'Appliquer les filtres',
+                    'title'        => 'Filtrer',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Tapez au moins 2 caractères...',
-                        'no-results'        => 'Aucun résultat trouvé...',
+                    'dropdown' => [
+                        'select' => 'Sélectionner',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Saisissez au moins 2 caractères...',
+                            'no-results'         => 'Aucun résultat trouvé...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Tout effacer',
-                    'title'     => 'Filtres personnalisés',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Mois dernier',
-                    'last-six-months'   => '6 derniers mois',
-                    'last-three-months' => '3 derniers mois',
-                    'this-month'        => 'Ce mois-ci',
-                    'this-week'         => 'Cette semaine',
-                    'this-year'         => 'Cette année',
-                    'today'             => 'Aujourd\'hui',
-                    'yesterday'         => 'Hier',
+                    'custom-filters' => [
+                        'clear-all' => 'Effacer tout',
+                    ],
                 ],
             ],
 
