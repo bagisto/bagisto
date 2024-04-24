@@ -64,8 +64,8 @@
                             >
                                 <template v-if="! item.product.images.length">
                                     <img
-                                        src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                         class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded" 
+                                        src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                     >
 
                                     <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
@@ -230,8 +230,8 @@
                                 >
                                     <template v-if="! product.images.length">
                                         <img
-                                            src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                             class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded" 
+                                            src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                         >
                                     
                                         <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
