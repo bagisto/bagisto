@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('price_incl_tax', 12, 4)->default(0)->after('base_tax_amount');
             $table->decimal('base_price_incl_tax', 12, 4)->default(0)->after('price_incl_tax');
 
-            $table->string('applied_tax_rate')->nullable()->after('base_total_incl_tax');
+            $table->string('applied_tax_rate')->nullable()->after('base_price_incl_tax');
         });
 
         DB::table('cart_items')->update([
