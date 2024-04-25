@@ -16,6 +16,7 @@ use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Tax\Facades\Tax;
 
 class Bundle extends AbstractType
 {
@@ -487,8 +488,14 @@ class Bundle extends AbstractType
 
         $basePrice = round($basePrice, 4);
 
-        if ($basePrice == $item->base_price_incl_tax) {
-            return $result;
+        if (Tax::isInclusiveTaxProductPrices()) {
+            $itemBasePrice = $item->base_price_incl_tax;
+        } else {
+            $itemBasePrice = $item->base_price;
+        }
+
+        if ($basePrice == $itemBasePrice) {
+            return $validation;
         }
 
         $item->base_price = $basePrice;

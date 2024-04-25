@@ -75,11 +75,39 @@ class Tax
     }
 
     /**
+     * Get shipping origin from core config.
+     *
+     * @return object
+     */
+    public function getShippingOriginAddress(): object
+    {
+        return new class()
+        {
+            public $country;
+
+            public $state;
+
+            public $postcode;
+
+            public function __construct()
+            {
+                $this->country = core()->getConfigData('sales.shipping.origin.country') != ''
+                    ? core()->getConfigData('sales.shipping.origin.country')
+                    : strtoupper(config('app.default_country'));
+
+                $this->state = core()->getConfigData('sales.shipping.origin.state');
+
+                $this->postcode = core()->getConfigData('sales.shipping.origin.postcode');
+            }
+        };
+    }
+
+    /**
      * Get default address from core config.
      *
      * @return object
      */
-    public function getDefaultAddress()
+    public function getDefaultAddress(): object
     {
         return new class()
         {
@@ -111,7 +139,7 @@ class Tax
      * @param  \Closure  $operation
      * @return void
      */
-    public function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation)
+    public function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation): void
     {
         if (! $address?->country) {
             return;
@@ -125,6 +153,7 @@ class Tax
             return;
         }
 
+        // dump($address);
         foreach ($taxRates as $rate) {
             if (
                 $address->state != '*'
@@ -132,6 +161,7 @@ class Tax
             ) {
                 continue;
             }
+            // dd($address->state, $address->state != '*');
 
             $haveTaxRate = false;
 

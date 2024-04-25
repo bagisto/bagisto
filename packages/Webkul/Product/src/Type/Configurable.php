@@ -8,6 +8,7 @@ use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
+use Webkul\Tax\Facades\Tax;
 
 class Configurable extends AbstractType
 {
@@ -701,18 +702,24 @@ class Configurable extends AbstractType
      */
     public function validateCartItem(CartItemModel $item): CartItemValidationResult
     {
-        $result = new CartItemValidationResult();
+        $validation = new CartItemValidationResult();
 
         if ($this->isCartItemInactive($item)) {
-            $result->itemIsInactive();
+            $validation->itemIsInactive();
 
-            return $result;
+            return $validation;
         }
 
         $basePrice = $item->child->getTypeInstance()->getFinalPrice($item->quantity);
 
-        if ($basePrice == $item->base_price_incl_tax) {
-            return $result;
+        if (Tax::isInclusiveTaxProductPrices()) {
+            $itemBasePrice = $item->base_price_incl_tax;
+        } else {
+            $itemBasePrice = $item->base_price;
+        }
+
+        if ($basePrice == $itemBasePrice) {
+            return $validation;
         }
 
         $item->base_price = $basePrice;
@@ -729,7 +736,7 @@ class Configurable extends AbstractType
 
         $item->save();
 
-        return $result;
+        return $validation;
     }
 
     /**
