@@ -259,7 +259,7 @@ class RefundRepository extends Repository
 
         $totals = array_map(function ($item) {
             $item['formatted_price'] = core()->formatBasePrice($item['price']);
-            
+
             return $item;
         }, $totals);
 

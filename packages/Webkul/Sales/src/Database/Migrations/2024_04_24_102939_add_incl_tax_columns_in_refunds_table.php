@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('refunds', function (Blueprint $table) {
             $table->decimal('shipping_tax_amount', 12, 4)->default(0)->after('base_discount_amount');
             $table->decimal('base_shipping_tax_amount', 12, 4)->default(0)->after('shipping_tax_amount');
-            
+
             $table->decimal('sub_total_incl_tax', 12, 4)->default(0)->after('base_shipping_tax_amount');
             $table->decimal('base_sub_total_incl_tax', 12, 4)->default(0)->after('sub_total_incl_tax');
 
