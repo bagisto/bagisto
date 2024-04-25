@@ -201,9 +201,9 @@
                                         class="flex flex-col px-6 py-4 font-medium text-black"
                                         data-value="@lang('shop::app.customers.account.orders.view.information.subtotal')"
                                     >
-                                        @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+                                        @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
                                             {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
-                                        @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+                                        @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
                                             {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
 
                                             <span class="whitespace-nowrap text-xs font-normal">
@@ -240,21 +240,21 @@
                                 @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
                                     <div class="flex w-full justify-between gap-x-5">
                                         <p>
-                                            @lang('shop::app.customers.account.orders.view.information.subtotal-incl-tax')
-                                        </p>
-
-                                        <p>
-                                            {{ core()->formatPrice($order->sub_total_incl_tax, $order->order_currency_code) }}
-                                        </p>
-                                    </div>
-                                    
-                                    <div class="flex w-full justify-between gap-x-5">
-                                        <p>
                                             @lang('shop::app.customers.account.orders.view.information.subtotal-excl-tax')
                                         </p>
 
                                         <p>
                                             {{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="flex w-full justify-between gap-x-5">
+                                        <p>
+                                            @lang('shop::app.customers.account.orders.view.information.subtotal-incl-tax')
+                                        </p>
+
+                                        <p>
+                                            {{ core()->formatPrice($order->sub_total_incl_tax, $order->order_currency_code) }}
                                         </p>
                                     </div>
                                 @else
@@ -283,21 +283,21 @@
                                     @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                                         <div class="flex w-full justify-between gap-x-5">
                                             <p>
-                                                @lang('shop::app.customers.account.orders.view.information.shipping-handling-incl-tax')
-                                            </p>
-
-                                            <p>
-                                                {{ core()->formatPrice($order->shipping_amount_incl_tax, $order->order_currency_code) }}
-                                            </p>
-                                        </div>
-
-                                        <div class="flex w-full justify-between gap-x-5">
-                                            <p>
                                                 @lang('shop::app.customers.account.orders.view.information.shipping-handling-excl-tax')
                                             </p>
 
                                             <p>
                                                 {{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}
+                                            </p>
+                                        </div>
+                                        
+                                        <div class="flex w-full justify-between gap-x-5">
+                                            <p>
+                                                @lang('shop::app.customers.account.orders.view.information.shipping-handling-incl-tax')
+                                            </p>
+
+                                            <p>
+                                                {{ core()->formatPrice($order->shipping_amount_incl_tax, $order->order_currency_code) }}
                                             </p>
                                         </div>
                                     @else
@@ -496,9 +496,9 @@
                                                 class="flex flex-col px-6 py-4 font-medium text-black"
                                                 data-value="@lang('shop::app.customers.account.orders.view.invoices.subtotal')"
                                             >
-                                                @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+                                                @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
                                                     {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
-                                                @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+                                                @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
                                                     {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
 
                                                     <span class="whitespace-nowrap text-xs font-normal">
@@ -535,21 +535,21 @@
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p>
-                                                    @lang('shop::app.customers.account.orders.view.invoices.subtotal-incl-tax')
-                                                </p>
-
-                                                <p>
-                                                    {{ core()->formatPrice($invoice->sub_total_incl_tax, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
-                                            
-                                            <div class="flex w-full justify-between gap-x-5">
-                                                <p>
                                                     @lang('shop::app.customers.account.orders.view.invoices.subtotal-excl-tax')
                                                 </p>
 
                                                 <p>
                                                     {{ core()->formatPrice($invoice->sub_total, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                            
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.subtotal-incl-tax')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($invoice->sub_total_incl_tax, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         @else
@@ -577,21 +577,21 @@
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p>
-                                                    @lang('shop::app.customers.account.orders.view.invoices.shipping-handling-incl-tax')
-                                                </p>
-
-                                                <p>
-                                                    {{ core()->formatPrice($invoice->shipping_amount_incl_tax, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
-                                            
-                                            <div class="flex w-full justify-between gap-x-5">
-                                                <p>
                                                     @lang('shop::app.customers.account.orders.view.invoices.shipping-handling-excl-tax')
                                                 </p>
 
                                                 <p>
                                                     {{ core()->formatPrice($invoice->shipping_amount, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                            
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.shipping-handling-incl-tax')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($invoice->shipping_amount_incl_tax, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         @else
@@ -824,9 +824,9 @@
                                                 class="flex flex-col px-6 py-4 font-medium text-black"
                                                 data-value="@lang('shop::app.customers.account.orders.view.refunds.subtotal')"
                                             >
-                                                @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+                                                @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
                                                     {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
-                                                @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+                                                @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
                                                     {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
 
                                                     <span class="whitespace-nowrap text-xs font-normal">
@@ -869,21 +869,21 @@
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
                                             <div class="flex w-full justify-between gap-x-5 text-sm">
                                                 <p>
-                                                    @lang('shop::app.customers.account.orders.view.refunds.subtotal-incl-tax')
-                                                </p>
-
-                                                <p>
-                                                    {{ core()->formatPrice($refund->sub_total_incl_tax, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
-                                            
-                                            <div class="flex w-full justify-between gap-x-5 text-sm">
-                                                <p>
                                                     @lang('shop::app.customers.account.orders.view.refunds.subtotal-excl-tax')
                                                 </p>
 
                                                 <p>
                                                     {{ core()->formatPrice($refund->sub_total, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                            
+                                            <div class="flex w-full justify-between gap-x-5 text-sm">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.subtotal-incl-tax')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($refund->sub_total_incl_tax, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         @else
@@ -911,21 +911,21 @@
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p>
-                                                    @lang('shop::app.customers.account.orders.view.refunds.shipping-handling-incl-tax')
-                                                </p>
-
-                                                <p>
-                                                    {{ core()->formatPrice($refund->shipping_amount_incl_tax, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
-                                            
-                                            <div class="flex w-full justify-between gap-x-5">
-                                                <p>
                                                     @lang('shop::app.customers.account.orders.view.refunds.shipping-handling-excl-tax')
                                                 </p>
 
                                                 <p>
                                                     {{ core()->formatPrice($refund->shipping_amount, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                            
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.shipping-handling-incl-tax')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($refund->shipping_amount_incl_tax, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         @else

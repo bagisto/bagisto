@@ -171,21 +171,21 @@
         @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
             <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
                 <span>
-                    @lang('shop::app.emails.orders.subtotal-incl-tax')
-                </span>
-
-                <span style="text-align: right;">
-                    {{ core()->formatPrice($order->sub_total, $order->order_currency_code_incl_tax) }}
-                </span>
-            </div>
-
-            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-                <span>
                     @lang('shop::app.emails.orders.subtotal-excl-tax')
                 </span>
 
                 <span style="text-align: right;">
                     {{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}
+                </span>
+            </div>
+
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <span>
+                    @lang('shop::app.emails.orders.subtotal-incl-tax')
+                </span>
+
+                <span style="text-align: right;">
+                    {{ core()->formatPrice($order->sub_total, $order->order_currency_code_incl_tax) }}
                 </span>
             </div>
         @else
@@ -214,21 +214,21 @@
             @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                 <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
                     <span>
-                        @lang('shop::app.emails.orders.shipping-handling-incl-tax')
-                    </span>
-
-                    <span style="text-align: right;">
-                        {{ core()->formatPrice($order->shipping_amount_incl_tax, $order->order_currency_code) }}
-                    </span>
-                </div>
-
-                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-                    <span>
                         @lang('shop::app.emails.orders.shipping-handling-excl-tax')
                     </span>
 
                     <span style="text-align: right;">
                         {{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}
+                    </span>
+                </div>
+                
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('shop::app.emails.orders.shipping-handling-incl-tax')
+                    </span>
+
+                    <span style="text-align: right;">
+                        {{ core()->formatPrice($order->shipping_amount_incl_tax, $order->order_currency_code) }}
                     </span>
                 </div>
             @else

@@ -171,21 +171,21 @@
         @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
             <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
                 <span>
-                    @lang('admin::app.emails.orders.subtotal-incl-tax')
-                </span>
-
-                <span style="text-align: right;">
-                    {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
-                </span>
-            </div>
-
-            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-                <span>
                     @lang('admin::app.emails.orders.subtotal-excl-tax')
                 </span>
 
                 <span style="text-align: right;">
                     {{ core()->formatBasePrice($order->base_sub_total) }}
+                </span>
+            </div>
+
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <span>
+                    @lang('admin::app.emails.orders.subtotal-incl-tax')
+                </span>
+
+                <span style="text-align: right;">
+                    {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
                 </span>
             </div>
         @else
@@ -214,21 +214,21 @@
             @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                 <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
                     <span>
-                        @lang('admin::app.emails.orders.shipping-handling-incl-tax')
-                    </span>
-
-                    <span style="text-align: right;">
-                        {{ core()->formatBasePrice($order->base_shipping_amount_incl_tax) }}
-                    </span>
-                </div>
-
-                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-                    <span>
                         @lang('admin::app.emails.orders.shipping-handling-excl-tax')
                     </span>
 
                     <span style="text-align: right;">
                         {{ core()->formatBasePrice($order->base_shipping_amount) }}
+                    </span>
+                </div>
+                
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('admin::app.emails.orders.shipping-handling-incl-tax')
+                    </span>
+
+                    <span style="text-align: right;">
+                        {{ core()->formatBasePrice($order->base_shipping_amount_incl_tax) }}
                     </span>
                 </div>
             @else

@@ -204,11 +204,11 @@
                                             </p>
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
                                             <p class="text-gray-600 dark:text-gray-300">
-                                                @lang('admin::app.sales.orders.view.price-incl-tax', ['price' => core()->formatBasePrice($item->base_price_incl_tax)])
-                                            </p>
-
-                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.orders.view.price-excl-tax', ['price' => core()->formatBasePrice($item->base_price)])
+                                            </p>
+                                            
+                                            <p class="text-gray-600 dark:text-gray-300">
+                                                @lang('admin::app.sales.orders.view.price-incl-tax', ['price' => core()->formatBasePrice($item->base_price_incl_tax)])
                                             </p>
                                         @else
                                             <p class="text-gray-600 dark:text-gray-300">
@@ -235,11 +235,11 @@
                                             </p>
                                         @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
                                             <p class="text-gray-600 dark:text-gray-300">
-                                                @lang('admin::app.sales.orders.view.sub-total-incl-tax', ['sub_total' => core()->formatBasePrice($item->base_total_incl_tax)])
-                                            </p>
-
-                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.orders.view.sub-total-excl-tax', ['sub_total' => core()->formatBasePrice($item->base_total)])
+                                            </p>
+                                            
+                                            <p class="text-gray-600 dark:text-gray-300">
+                                                @lang('admin::app.sales.orders.view.sub-total-incl-tax', ['sub_total' => core()->formatBasePrice($item->base_total_incl_tax)])
                                             </p>
                                         @else
                                             <p class="text-gray-600 dark:text-gray-300">
@@ -258,11 +258,11 @@
                         <div class="flex flex-col gap-y-1.5">
                             @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.sales.orders.view.summary-sub-total-incl-tax')
+                                    @lang('admin::app.sales.orders.view.summary-sub-total-excl-tax')
                                 </p>
                                 
                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.sales.orders.view.summary-sub-total-excl-tax')
+                                    @lang('admin::app.sales.orders.view.summary-sub-total-incl-tax')
                                 </p>
                             @else
                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
@@ -273,11 +273,11 @@
                             @if ($haveStockableItems = $order->haveStockableItems())
                                 @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                                     <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.sales.orders.view.shipping-and-handling-incl-tax')
-                                    </p>
-
-                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.orders.view.shipping-and-handling-excl-tax')
+                                    </p>
+                                    
+                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.orders.view.shipping-and-handling-incl-tax')
                                     </p>
                                 @else
                                     <p class="!leading-5 text-gray-600 dark:text-gray-300">
@@ -318,11 +318,11 @@
                                 </p>
                             @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
+                                    {{ core()->formatBasePrice($order->base_sub_total) }}
                                 </p>
                                 
                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    {{ core()->formatBasePrice($order->base_sub_total) }}
+                                    {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
                                 </p>
                             @else
                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
@@ -337,11 +337,11 @@
                                     </p>
                                 @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
                                     <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                        {{ core()->formatBasePrice($order->base_shipping_amount_incl_tax) }}
-                                    </p>
-
-                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
                                         {{ core()->formatBasePrice($order->base_shipping_amount) }}
+                                    </p>
+                                    
+                                    <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                        {{ core()->formatBasePrice($order->base_shipping_amount_incl_tax) }}
                                     </p>
                                 @else
                                     <p class="!leading-5 text-gray-600 dark:text-gray-300">
