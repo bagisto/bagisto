@@ -351,7 +351,7 @@
 
         <!-- Localization & Currency Section -->
         <div class="absolute bottom-0 left-0 flex w-full items-center justify-between gap-x-5 bg-white p-4 shadow-lg">
-            <x-shop::dropdown position="top-left">
+            <x-shop::dropdown position="top-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
                     <div
@@ -377,7 +377,7 @@
                 </x-slot>
             </x-shop::dropdown>
 
-            <x-shop::dropdown position="top-right">
+            <x-shop::dropdown position="top-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <!-- Dropdown Toggler -->
                     <div
