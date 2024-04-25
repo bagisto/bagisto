@@ -372,7 +372,7 @@
                 </x-slot>
 
                 <!-- Dropdown Content -->
-                <x-slot:content class="!p-0">
+                <x-slot:content class="max-h-96 overflow-y-auto !p-0">
                     <v-currency-switcher></v-currency-switcher>
                 </x-slot>
             </x-shop::dropdown>
