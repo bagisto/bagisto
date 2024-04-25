@@ -1,5 +1,8 @@
 <x-admin::layouts>
-    <v-customer-view></v-customer-view>
+    <v-customer-view>
+        <!-- Shimmer Effect -->
+        <x-admin::shimmer.customers.view />
+    </v-customer-view>
 
     @pushOnce('scripts')
         <script
@@ -191,7 +194,7 @@
                             <x-slot:content>
                                 <div class="grid gap-y-2.5">
                                     <p
-                                        class="text-gray-800 font-semibold dark:text-white"
+                                        class="font-semibold text-gray-800 dark:text-white"
                                         v-text="`${customer.first_name} ${customer.last_name}`"
                                     >
                                     </p>
