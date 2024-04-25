@@ -347,7 +347,7 @@ class Cart
                 'total'               => $total = core()->convertPrice($item->price_incl_tax * $quantity),
                 'total_incl_tax'      => $total,
                 'base_total'          => $item->price_incl_tax * $quantity,
-                'base_total_incl_tax' => $item->price_incl_tax * $quantity,
+                'base_total_incl_tax' => $item->base_price_incl_tax * $quantity,
                 'total_weight'        => $item->weight * $quantity,
                 'base_total_weight'   => $item->weight * $quantity,
             ], $itemId);
