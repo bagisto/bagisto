@@ -138,6 +138,7 @@
                                     :items="json_encode($categories)"
                                     :value="json_encode($category->parent_id)"
                                     :fallback-locale="config('app.fallback_locale')"
+                                    on-click="true"
                                 >
                                 </x-admin::tree.view>
                             </div>
