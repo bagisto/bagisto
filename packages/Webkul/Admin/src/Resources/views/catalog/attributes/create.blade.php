@@ -33,7 +33,7 @@
                     </p>
 
                     <div class="flex items-center gap-x-2.5">
-                        <!-- Cancel Button -->
+                        <!-- Back Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
                             class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
@@ -501,6 +501,11 @@
                                     />
 
                                     <x-admin::form.control-group.error control-name="regex" />
+
+                                    <!-- Regex Info -->
+                                    <p class="mt-2 text-xs font-medium text-gray-500 dark:text-gray-300">
+                                        @lang('admin::app.catalog.attributes.create.regex-info')
+                                    </p>
                                 </x-admin::form.control-group>
 
                                 <!-- Is Required -->
@@ -885,8 +890,8 @@
                         values.params.id = values.id;
 
                         this.swatchValue = {
-                            image: value.swatch_value_url
-                            ? [{ id: value.id, url: value.swatch_value_url }]
+                            image: values.swatch_value_url
+                            ? [{ id: values.id, url: values.swatch_value_url }]
                             : [],
                         };
 

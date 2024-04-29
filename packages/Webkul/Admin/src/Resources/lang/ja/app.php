@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => '住所を追加',
-                        'add-new-address'  => '新しい住所を追加',
                         'add-new'          => '新しい住所を追加',
+                        'add-new-address'  => '新しい住所を追加',
                         'addresses'        => '住所',
                         'back'             => '戻る',
                         'billing-address'  => '請求先住所',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => '郵便番号',
                         'proceed'          => '進む',
                         'same-as-billing'  => '配送先にも同じ住所を使用しますか？',
-                        'save-address'     => 'この住所を住所帳に保存',
                         'save'             => '保存',
+                        'save-address'     => 'この住所を住所帳に保存',
                         'select-country'   => '国を選択',
                         'select-state'     => '都道府県を選択',
                         'shipping-address' => '配送先住所',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => '住所',
                         'telephone'        => '電話番号',
                         'title'            => '住所',
+                        'vat-id'           => 'VAT番号',
                     ],
 
                     'payment' => [
@@ -1060,6 +1061,7 @@ return [
                 'position'              => '位置',
                 'price'                 => '価格',
                 'regex'                 => '正規表現',
+                'regex-info'            => '式はダブルクォートで囲む必要があります。',
                 'save-btn'              => '属性を保存',
                 'select'                => '選択',
                 'select-type'           => '属性タイプを選択',
@@ -1123,6 +1125,7 @@ return [
                 'position'              => '位置',
                 'price'                 => '価格',
                 'regex'                 => '正規表現',
+                'regex-info'            => '式はダブルクォートで囲む必要があります。',
                 'save-btn'              => '属性を保存',
                 'select'                => '選択',
                 'select-type'           => '属性タイプを選択',
@@ -2779,12 +2782,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => '戻る',
-                    'basic-settings' => '基本設定',
                     'country'        => '国',
                     'identifier'     => '識別子',
                     'save-btn'       => '税率を保存',
                     'select-country' => '国を選択',
                     'select-state'   => '州を選択',
+                    'settings'       => '設定',
                     'state'          => '州',
                     'tax-rate'       => '税率',
                     'title'          => '税率を編集',

@@ -11,7 +11,6 @@ class StandardController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
      * @return void
      */
     public function __construct(

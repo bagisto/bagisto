@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Adres toevoegen',
-                        'add-new-address'  => 'Nieuw adres toevoegen',
                         'add-new'          => 'Nieuw adres toevoegen',
+                        'add-new-address'  => 'Nieuw adres toevoegen',
                         'addresses'        => 'Adressen',
                         'back'             => 'Terug',
                         'billing-address'  => 'Factuuradres',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => 'Postcode',
                         'proceed'          => 'Doorgaan',
                         'same-as-billing'  => 'Hetzelfde adres gebruiken voor verzending?',
-                        'save-address'     => 'Opslaan in adresboek',
                         'save'             => 'Opslaan',
+                        'save-address'     => 'Opslaan in adresboek',
                         'select-country'   => 'Selecteer land',
                         'select-state'     => 'Selecteer provincie',
                         'shipping-address' => 'Verzendadres',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => 'Straatnaam en huisnummer',
                         'telephone'        => 'Telefoonnummer',
                         'title'            => 'Adres',
+                        'vat-id'           => 'BTW-nummer',
                     ],
 
                     'payment' => [
@@ -1060,6 +1061,7 @@ return [
                 'position'                => 'Positie',
                 'price'                   => 'Prijs',
                 'regex'                   => 'Regex',
+                'regex-info'              => 'Expressie moet tussen dubbele aanhalingstekens staan.',
                 'save-btn'                => 'Attribuut Opslaan',
                 'select'                  => 'Selecteren',
                 'select-type'             => 'Selecteer Attribuuttype',
@@ -1123,6 +1125,7 @@ return [
                 'position'              => 'Positie',
                 'price'                 => 'Prijs',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'Expressie moet tussen dubbele aanhalingstekens staan.',
                 'save-btn'              => 'Attribuut Opslaan',
                 'select'                => 'Selecteren',
                 'select-type'           => 'Selecteer Attribuuttype',
@@ -2779,12 +2782,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Terug',
-                    'basic-settings' => 'Basisinstellingen',
                     'country'        => 'Land',
                     'identifier'     => 'Identificatie',
                     'save-btn'       => 'Belastingtarief Opslaan',
                     'select-country' => 'Selecteer Land',
                     'select-state'   => 'Selecteer Provincie',
+                    'settings'       => 'Instellingen',
                     'state'          => 'Provincie',
                     'tax-rate'       => 'Tarief',
                     'title'          => 'Belastingtarief Bewerken',

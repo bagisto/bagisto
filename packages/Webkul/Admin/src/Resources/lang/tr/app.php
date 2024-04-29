@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Adres Ekle',
-                        'add-new-address'  => 'Yeni adres ekle',
                         'add-new'          => 'Yeni adres ekle',
+                        'add-new-address'  => 'Yeni adres ekle',
                         'addresses'        => 'Adresler',
                         'back'             => 'Geri',
                         'billing-address'  => 'Fatura Adresi',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => 'Posta Kodu',
                         'proceed'          => 'Devam Et',
                         'same-as-billing'  => 'Teslimat için aynı adresi kullan?',
-                        'save-address'     => 'Bu adresi adres defterine kaydet',
                         'save'             => 'Kaydet',
+                        'save-address'     => 'Bu adresi adres defterine kaydet',
                         'select-country'   => 'Ülke Seçin',
                         'select-state'     => 'Eyalet Seçin',
                         'shipping-address' => 'Teslimat Adresi',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => 'Adres',
                         'telephone'        => 'Telefon',
                         'title'            => 'Adres',
+                        'vat-id'           => 'Vergi Kimlik Numarası',
                     ],
 
                     'payment' => [
@@ -1060,6 +1061,7 @@ return [
                 'position'              => 'Konum',
                 'price'                 => 'Fiyat',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'İfade çift tırnak içinde olmalıdır.',
                 'save-btn'              => 'Özelliği Kaydet',
                 'select'                => 'Seçenek',
                 'select-type'           => 'Seçenek Özellik Türü',
@@ -1123,6 +1125,7 @@ return [
                 'position'              => 'Konum',
                 'price'                 => 'Fiyat',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'İfade çift tırnak içinde olmalıdır.',
                 'save-btn'              => 'Özelliği Kaydet',
                 'select'                => 'Seçenek',
                 'select-type'           => 'Seçenek Özellik Türü',
@@ -2780,12 +2783,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Geri',
-                    'basic-settings' => 'Temel Ayarlar',
                     'country'        => 'Ülke',
                     'identifier'     => 'Tanımlayıcı',
                     'save-btn'       => 'Vergi Oranını Kaydet',
                     'select-country' => 'Ülke Seç',
                     'select-state'   => 'Eyalet Seç',
+                    'settings'       => 'Ayarlar',
                     'state'          => 'Eyalet',
                     'tax-rate'       => 'Oran',
                     'title'          => 'Vergi Oranı Düzenle',
