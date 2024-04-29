@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'إضافة عنوان',
-                        'add-new-address'  => 'إضافة عنوان جديد',
                         'add-new'          => 'إضافة عنوان جديد',
+                        'add-new-address'  => 'إضافة عنوان جديد',
                         'addresses'        => 'العناوين',
                         'back'             => 'رجوع',
                         'billing-address'  => 'عنوان الفوترة',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => 'الرمز البريدي',
                         'proceed'          => 'المتابعة',
                         'same-as-billing'  => 'استخدم نفس العنوان للشحن؟',
-                        'save-address'     => 'حفظ هذا في دفتر العناوين',
                         'save'             => 'حفظ',
+                        'save-address'     => 'حفظ هذا في دفتر العناوين',
                         'select-country'   => 'اختر البلد',
                         'select-state'     => 'اختر المنطقة',
                         'shipping-address' => 'عنوان الشحن',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => 'عنوان الشارع',
                         'telephone'        => 'رقم الهاتف',
                         'title'            => 'العنوان',
+                        'vat-id'           => 'الرقم الضريبي',
                     ],
 
                     'payment' => [

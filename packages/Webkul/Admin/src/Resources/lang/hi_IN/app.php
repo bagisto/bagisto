@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'पता जोड़ें',
-                        'add-new-address'  => 'नया पता जोड़ें',
                         'add-new'          => 'नया पता जोड़ें',
+                        'add-new-address'  => 'नया पता जोड़ें',
                         'addresses'        => 'पते',
                         'back'             => 'वापस',
                         'billing-address'  => 'बिलिंग पता',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => 'पिनकोड',
                         'proceed'          => 'आगे बढ़ें',
                         'same-as-billing'  => 'शिपिंग के लिए एक ही पता उपयोग करें?',
-                        'save-address'     => 'इसे पता पुस्तिका में सहेजें',
                         'save'             => 'सहेजें',
+                        'save-address'     => 'इसे पता पुस्तिका में सहेजें',
                         'select-country'   => 'देश चुनें',
                         'select-state'     => 'राज्य चुनें',
                         'shipping-address' => 'शिपिंग पता',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => 'सड़क का पता',
                         'telephone'        => 'टेलीफोन',
                         'title'            => 'पता',
+                        'vat-id'           => 'वैट आईडी',
                     ],
 
                     'payment' => [

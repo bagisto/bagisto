@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'ලිපිනයක් එක් කරන්න',
-                        'add-new-address'  => 'නව ලිපිනයක් එක් කරන්න',
                         'add-new'          => 'නව ලිපිනයක් එක් කරන්න',
+                        'add-new-address'  => 'නව ලිපිනයක් එක් කරන්න',
                         'addresses'        => 'ලිපින',
                         'back'             => 'ආපසු',
                         'billing-address'  => 'බිල්පත් ලිපිනය',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => 'සහාය අංකය',
                         'proceed'          => 'ඉදිරියට',
                         'same-as-billing'  => 'නැවත ගෙවීම් ලිපිනය සඳහා එකතු කරන්න?',
-                        'save-address'     => 'ලිපිනයෙන් ලියාපදිංචි කරන්න',
                         'save'             => 'සුරකින්න',
+                        'save-address'     => 'ලිපිනයෙන් ලියාපදිංචි කරන්න',
                         'select-country'   => 'රටක් තෝරන්න',
                         'select-state'     => 'පළාත තෝරන්න',
                         'shipping-address' => 'නැවත ගෙවීම් ලිපිනය',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => 'වීදි ලිපිනය',
                         'telephone'        => 'දුරකථන',
                         'title'            => 'ලිපිනය',
+                        'vat-id'           => 'වැට් අංකය',
                     ],
 
                     'payment' => [

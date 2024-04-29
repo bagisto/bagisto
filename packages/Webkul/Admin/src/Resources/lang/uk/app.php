@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Додати адресу',
-                        'add-new-address'  => 'Додати нову адресу',
                         'add-new'          => 'Додати нову адресу',
+                        'add-new-address'  => 'Додати нову адресу',
                         'addresses'        => 'Адреси',
                         'back'             => 'Назад',
                         'billing-address'  => 'Адреса для виставлення рахунку',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => 'Поштовий індекс',
                         'proceed'          => 'Продовжити',
                         'same-as-billing'  => 'Використовувати ту саму адресу для доставки?',
-                        'save-address'     => 'Зберегти в адресну книгу',
                         'save'             => 'Зберегти',
+                        'save-address'     => 'Зберегти в адресну книгу',
                         'select-country'   => 'Виберіть країну',
                         'select-state'     => 'Виберіть область',
                         'shipping-address' => 'Адреса доставки',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => 'Вулиця, будинок',
                         'telephone'        => 'Телефон',
                         'title'            => 'Адреса',
+                        'vat-id'           => 'ІПН',
                     ],
 
                     'payment' => [

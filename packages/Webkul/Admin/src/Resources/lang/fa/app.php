@@ -232,8 +232,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'افزودن آدرس',
-                        'add-new-address'  => 'افزودن آدرس جدید',
                         'add-new'          => 'افزودن آدرس جدید',
+                        'add-new-address'  => 'افزودن آدرس جدید',
                         'addresses'        => 'آدرس‌ها',
                         'back'             => 'بازگشت',
                         'billing-address'  => 'آدرس صورتحساب',
@@ -248,8 +248,8 @@ return [
                         'postcode'         => 'کد پستی',
                         'proceed'          => 'ادامه',
                         'same-as-billing'  => 'استفاده از همان آدرس برای حمل و نقل؟',
-                        'save-address'     => 'ذخیره در دفترچه آدرس',
                         'save'             => 'ذخیره',
+                        'save-address'     => 'ذخیره در دفترچه آدرس',
                         'select-country'   => 'انتخاب کشور',
                         'select-state'     => 'انتخاب استان',
                         'shipping-address' => 'آدرس حمل و نقل',
@@ -257,6 +257,7 @@ return [
                         'street-address'   => 'آدرس خیابان',
                         'telephone'        => 'تلفن',
                         'title'            => 'آدرس',
+                        'vat-id'           => 'شناسه مالیاتی',
                     ],
 
                     'payment' => [
