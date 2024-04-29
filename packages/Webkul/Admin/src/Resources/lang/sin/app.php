@@ -291,6 +291,7 @@ return [
                     'delete'            => 'මකන්න',
                     'empty-description' => 'ඔබගේ නිෂ්පාදන තොරතුරු හමුවුණි.',
                     'empty-title'       => 'නිෂ්පාදන නොමැත',
+                    'excl-tax'          => 'අයිතමයේ නොවීම්',
                     'see-details'       => 'විස්තර බලන්න',
                     'sku'               => 'SKU - :sku',
                     'title'             => 'නිෂ්පාදන අයිතම්',
