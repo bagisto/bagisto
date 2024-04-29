@@ -63,7 +63,6 @@ trait CoreConfigField
             return $class->$method();
         }
 
-        return;
     }
 
     /**

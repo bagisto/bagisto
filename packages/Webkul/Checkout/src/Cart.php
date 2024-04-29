@@ -1082,7 +1082,7 @@ class Cart
 
         if (empty($shippingRate->applied_tax_rate)) {
             $shippingRate->price_incl_tax = $shippingRate->price;
-            
+
             $shippingRate->base_price_incl_tax = $shippingRate->base_price;
         }
 
