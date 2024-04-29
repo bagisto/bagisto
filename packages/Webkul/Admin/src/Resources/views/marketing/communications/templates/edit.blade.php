@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.templates.edit.title')
     </x-slot>
@@ -140,7 +139,7 @@
                         </x-slot>
                     </x-admin::accordion>
                 </div>
-                
+
                 {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.accordion.general.after') !!}
 
             </div>
