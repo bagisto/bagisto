@@ -903,8 +903,6 @@ class Cart
 
         $taxCategories = [];
 
-        \Log::info('Called');
-
         foreach ($this->cart->items as $key => $item) {
             $taxCategoryId = $item->tax_category_id;
 
@@ -1012,7 +1010,6 @@ class Cart
      */
     public function calculateShippingTax(): void
     {
-        return;
         if (! $this->cart) {
             return;
         }
@@ -1036,7 +1033,7 @@ class Cart
         if ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN) {
             $address = Tax::getShippingOriginAddress();
         } elseif (
-            $item->getTypeInstance()->isStockable()
+            $this->cart->haveStockableItems()
             && $calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS
         ) {
             $address = $this->cart->shipping_address;
@@ -1085,6 +1082,7 @@ class Cart
 
         if (empty($shippingRate->applied_tax_rate)) {
             $shippingRate->price_incl_tax = $shippingRate->price;
+            
             $shippingRate->base_price_incl_tax = $shippingRate->base_price;
         }
 

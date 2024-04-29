@@ -5,8 +5,6 @@
 
     $name = $coreConfigRepository->getNameField($nameKey);
 
-    $value = $coreConfigRepository->getValueByRepository($field);
-
     $validations = $coreConfigRepository->getValidations($field);
 
     $isRequired = Str::contains($validations, 'required') ? 'required' : '';
@@ -126,19 +124,19 @@
                 :label="trans($field['title'])"
             >
                 @if (isset($field['repository']))
-                    @foreach ($value as $key => $option)
+                    @foreach ($coreConfigRepository->getOptionsByRepository($field) as $option)
                         <option
-                            value="{{ $key }}"
-                            {{ $key == $selectedOption ? 'selected' : ''}}
+                            value="{{ $option['value'] }}"
+                            {{ $option['value'] == $selectedOption ? 'selected' : ''}}
                         >
-                            @lang($option)
+                            @lang($option['title'])
                         </option>
                     @endforeach
                 @else
                     @foreach ($field['options'] as $option)
                         <option
                             value="{{ $option['value'] ?? 0 }}"
-                            {{ $value == $selectedOption ? 'selected' : ''}}
+                            {{ $option['value'] == $selectedOption ? 'selected' : ''}}
                         >
                             @lang($option['title'])
                         </option>
@@ -164,19 +162,19 @@
                     multiple
                 >
                     @if (isset($field['repository']))
-                        @foreach ($value as $key => $option)
+                        @foreach ($coreConfigRepository->getOptionsByRepository($field) as $option)
                             <option 
-                                value="{{ $key }}"
-                                {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}
+                                value="{{ $option['value'] }}"
+                                {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}
                             >
-                                {{ trans($value[$key]) }}
+                                @lang($option['title'])
                             </option>
                         @endforeach
                     @else
                         @foreach ($field['options'] as $option)
                             <option 
-                                value="{{ $value = $option['value'] ?? 0 }}"
-                                {{ in_array($value, explode(',', $selectedOption)) ? 'selected' : ''}}
+                                value="{{ $option['value'] ?? 0 }}"
+                                {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}
                             >
                                 @lang($option['title'])
                             </option>

@@ -1663,27 +1663,17 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'    => 'shipping',
-                'title'   => 'admin::app.configuration.index.sales.taxes.categories.shipping',
-                'type'    => 'select',
-                'default' => 0,
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
-                        'value' => 0,
-                    ],
-                ],
+                'name'       => 'shipping',
+                'title'      => 'admin::app.configuration.index.sales.taxes.categories.shipping',
+                'type'       => 'select',
+                'default'    => 0,
+                'repository' => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
             ], [
-                'name'    => 'product',
-                'title'   => 'admin::app.configuration.index.sales.taxes.categories.product',
-                'type'    => 'select',
-                'default' => 0,
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
-                        'value' => 0,
-                    ],
-                ],
+                'name'       => 'product',
+                'title'      => 'admin::app.configuration.index.sales.taxes.categories.product',
+                'type'       => 'select',
+                'default'    => 0,
+                'repository' => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
             ],
         ],
     ], [
