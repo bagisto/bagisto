@@ -890,8 +890,8 @@
                         values.params.id = values.id;
 
                         this.swatchValue = {
-                            image: value.swatch_value_url
-                            ? [{ id: value.id, url: value.swatch_value_url }]
+                            image: values.swatch_value_url
+                            ? [{ id: values.id, url: values.swatch_value_url }]
                             : [],
                         };
 
