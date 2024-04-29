@@ -950,18 +950,18 @@ abstract class AbstractType
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        $result = new CartItemValidationResult();
+        $validation = new CartItemValidationResult();
 
         if ($this->isCartItemInactive($item)) {
-            $result->itemIsInactive();
+            $validation->itemIsInactive();
 
-            return $result;
+            return $validation;
         }
 
         $basePrice = round($this->getFinalPrice($item->quantity), 4);
 
         if ($basePrice == $item->base_price_incl_tax) {
-            return $result;
+            return $validation;
         }
 
         $item->base_price = $basePrice;
@@ -978,7 +978,7 @@ abstract class AbstractType
 
         $item->save();
 
-        return $result;
+        return $validation;
     }
 
     /**

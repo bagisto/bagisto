@@ -224,12 +224,12 @@ class Downloadable extends AbstractType
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        $result = new CartItemValidationResult();
+        $validation = new CartItemValidationResult();
 
         if (parent::isCartItemInactive($item)) {
-            $result->itemIsInactive();
+            $validation->itemIsInactive();
 
-            return $result;
+            return $validation;
         }
 
         $basePrice = $this->getFinalPrice($item->quantity);
@@ -268,7 +268,7 @@ class Downloadable extends AbstractType
 
         $item->save();
 
-        return $result;
+        return $validation;
     }
 
     /**

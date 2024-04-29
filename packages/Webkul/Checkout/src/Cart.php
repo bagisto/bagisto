@@ -1020,13 +1020,7 @@ class Cart
             return;
         }
 
-        $shippingRate->applied_tax_rate = null;
-
-        $shippingRate->tax_percent = $shippingRate->tax_amount = $shippingRate->base_tax_amount = 0;
-
         if (! $taxCategoryId = core()->getConfigData('sales.taxes.categories.shipping')) {
-            $shippingRate->save();
-
             return;
         }
 
