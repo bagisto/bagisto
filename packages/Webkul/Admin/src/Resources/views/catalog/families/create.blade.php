@@ -62,7 +62,7 @@
                                 type="text"
                                 name="code"
                                 rules="required"
-                                value="{{ old('code') }}"
+                                :value="old('code')"
                                 :label="trans('admin::app.catalog.families.create.code')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-code')"
                             />
@@ -79,7 +79,7 @@
                                 type="text"
                                 name="name"
                                 rules="required"
-                                value="{{ old('name') }}"
+                                :value="old('name')"
                                 :label="trans('admin::app.catalog.families.create.name')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-name')"
                             />
@@ -191,8 +191,8 @@
                                             <span
                                                 class="font-regular text-sm text-inherit transition-all group-hover:text-gray-800 dark:group-hover:text-white"
                                                 v-show="editableGroup.id != element.id"
-                                                v-text="element.name"
                                             >
+                                                @{{ element.name }}
                                             </span>
 
                                             <input
@@ -247,10 +247,8 @@
                                                 </i>
                                                 
 
-                                                <span 
-                                                    class="font-regular text-sm transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
-                                                    v-text="element.admin_name"
-                                                >
+                                                <span class="font-regular text-sm transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs">
+                                                    @{{ element.admin_name }}
                                                 </span>
 
                                                 <input
@@ -302,10 +300,8 @@
 
                                     <i class="text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
-                                    <span 
-                                        class="font-regular text-sm transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
-                                        v-text="element.admin_name"    
-                                    >
+                                    <span class="font-regular text-sm transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs">
+                                        @{{ element.admin_name }}
                                     </span>
                                 </div>
                             </template>

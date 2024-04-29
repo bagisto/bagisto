@@ -64,16 +64,12 @@
                             </p>
 
                             <div class="flex justify-between">
-                                <p
-                                    class="font-semibold text-gray-600 dark:text-gray-300"
-                                    v-text="item.formatted_price"
-                                >
+                                <p class="font-semibold text-gray-600 dark:text-gray-300">
+                                    @{{ item.formatted_price }}
                                 </p>
 
-                                <p
-                                    class="text-base font-semibold text-gray-800 dark:text-white"
-                                    v-text="item.formatted_revenue"
-                                >
+                                <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                    @{{ item.formatted_revenue }}
                                 </p>
                             </div>
                         </div>

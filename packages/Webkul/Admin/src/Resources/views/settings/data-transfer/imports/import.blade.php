@@ -31,7 +31,10 @@
     <v-import />
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-import-template">
+        <script
+            type="text/x-template"
+            id="v-import-template"
+        >
             <!-- Body Content -->
             <div class="box-shadow mt-3.5 grid gap-2.5 p-5 max-xl:flex-wrap">
                 <!-- Validate CSV File -->

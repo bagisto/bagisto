@@ -115,26 +115,26 @@
                                     @lang('admin::app.settings.taxes.rates.edit.state')
                                 </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="state"
-                                    rules="required"
-                                    value="{{ old('state') }}"
-                                    v-model="state"
-                                    :label="trans('admin::app.settings.taxes.rates.edit.state')"
-                                    :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
-                                >
-                                    <option value="">
-                                        @lang('admin::app.settings.taxes.rates.edit.select-state')
-                                    </option>
-                
-                                    <option 
-                                        v-for='(state, index) in countryStates[country]' 
-                                        :value="state.code"
-                                        v-text="state.default_name"
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="state"
+                                        rules="required"
+                                        value="{{ old('state') }}"
+                                        v-model="state"
+                                        :label="trans('admin::app.settings.taxes.rates.edit.state')"
+                                        :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
                                     >
-                                    </option>
-                                </x-admin::form.control-group.control>
+                                        <option value="">
+                                            @lang('admin::app.settings.taxes.rates.edit.select-state')
+                                        </option>
+                    
+                                        <option 
+                                            v-for='(state, index) in countryStates[country]' 
+                                            :value="state.code"
+                                        >
+                                            @{{ state.default_name }}
+                                        </option>
+                                    </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error control-name="state" />
                             </template>

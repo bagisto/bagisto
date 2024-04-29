@@ -13,8 +13,6 @@ class GenerateInvoice
     /**
      * Create the event listener.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param \Webkul\Sales\Repositories\InvoiceRepository invoiceRepository
      * @return void
      */
     public function __construct(

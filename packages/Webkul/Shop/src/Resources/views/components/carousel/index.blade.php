@@ -7,7 +7,10 @@
 </v-carousel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-carousel-template">
+    <script
+        type="text/x-template"
+        id="v-carousel-template"
+    >
         <div class="relative m-auto flex w-full overflow-hidden">
             <!-- Slider -->
             <div 

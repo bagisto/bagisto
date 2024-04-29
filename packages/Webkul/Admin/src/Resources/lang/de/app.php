@@ -36,6 +36,8 @@ return [
         'description-text' => 'Alle Benachrichtigungen auflisten',
         'marked-success'   => 'Benachrichtigung erfolgreich markiert',
         'no-record'        => 'Kein Datensatz gefunden',
+        'of'               => 'von',
+        'per-page'         => 'Pro Seite',
         'read-all'         => 'Als gelesen markieren',
         'title'            => 'Benachrichtigungen',
         'view-all'         => 'Alle anzeigen',
@@ -2335,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => 'Der :name wurde bereits verwendet.',
-            'create-btn'        => 'Seite erstellen',
-            'title'             => 'Seiten',
+            'already-taken' => 'Der :name wurde bereits verwendet.',
+            'create-btn'    => 'Seite erstellen',
+            'channel'       => 'Kanal',
+            'language'      => 'Sprache',
+            'title'         => 'Seiten',
 
             'datagrid' => [
                 'delete'              => 'Löschen',

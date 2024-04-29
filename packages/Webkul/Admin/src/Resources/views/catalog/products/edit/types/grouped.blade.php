@@ -86,7 +86,7 @@
                             <!-- Actions -->
                             <div class="grid place-content-start gap-1 text-right">
                                 <p class="font-semibold text-gray-800 dark:text-white">
-                                    @{{ $admin.formatPrice(element.associated_product.price) }}    
+                                    @{{ $admin.formatPrice(element.associated_product.price) }}
                                 </p>
 
                                 
@@ -123,10 +123,8 @@
                                         :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
                                         v-slot="{ message }"
                                     >
-                                        <p
-                                            class="mt-1 text-xs italic text-red-600"
-                                            v-text="message"
-                                        >
+                                        <p class="mt-1 text-xs italic text-red-600">
+                                            @{{ message }}
                                         </p>
                                     </v-error-message>
                                 </x-admin::form.control-group>
