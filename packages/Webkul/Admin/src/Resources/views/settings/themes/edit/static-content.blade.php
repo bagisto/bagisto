@@ -7,7 +7,7 @@
         id="v-static-content-template"
     >
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
-            <div class="flex min-w-[931px] flex-1 flex-col gap-2 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
                         <div class="flex flex-col gap-1">

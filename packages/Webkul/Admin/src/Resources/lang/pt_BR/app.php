@@ -234,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Adicionar Endereço',
-                        'add-new-address'  => 'Adicionar novo endereço',
                         'add-new'          => 'Adicionar novo endereço',
+                        'add-new-address'  => 'Adicionar novo endereço',
                         'addresses'        => 'Endereços',
                         'back'             => 'Voltar',
                         'billing-address'  => 'Endereço de Cobrança',
@@ -250,8 +250,8 @@ return [
                         'postcode'         => 'CEP',
                         'proceed'          => 'Continuar',
                         'same-as-billing'  => 'Usar o mesmo endereço para entrega?',
-                        'save-address'     => 'Salvar este endereço',
                         'save'             => 'Salvar',
+                        'save-address'     => 'Salvar este endereço',
                         'select-country'   => 'Selecionar País',
                         'select-state'     => 'Selecionar Estado',
                         'shipping-address' => 'Endereço de Entrega',
@@ -259,6 +259,7 @@ return [
                         'street-address'   => 'Endereço',
                         'telephone'        => 'Telefone',
                         'title'            => 'Endereço',
+                        'vat-id'           => 'NIF',
                     ],
 
                     'payment' => [
@@ -1062,6 +1063,7 @@ return [
                 'position'              => 'Posição',
                 'price'                 => 'Preço',
                 'regex'                 => 'Expressão Regular (Regex)',
+                'regex-info'            => 'A expressão deve estar entre aspas duplas.',
                 'save-btn'              => 'Salvar Atributo',
                 'select'                => 'Seleção',
                 'select-type'           => 'Selecionar Tipo de Atributo',
@@ -1125,6 +1127,7 @@ return [
                 'position'              => 'Posição',
                 'price'                 => 'Preço',
                 'regex'                 => 'Expressão Regular (Regex)',
+                'regex-info'            => 'A expressão deve estar entre aspas duplas.',
                 'save-btn'              => 'Salvar Atributo',
                 'select'                => 'Seleção',
                 'select-type'           => 'Selecionar Tipo de Atributo',
@@ -2783,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Voltar',
-                    'basic-settings' => 'Configurações Básicas',
                     'country'        => 'País',
                     'identifier'     => 'Identificador',
                     'save-btn'       => 'Salvar Taxa de Imposto',
                     'select-country' => 'Selecionar País',
                     'select-state'   => 'Selecionar Estado',
+                    'settings'       => 'Configurações',
                     'state'          => 'Estado',
                     'tax-rate'       => 'Taxa',
                     'title'          => 'Editar Taxa de Imposto',

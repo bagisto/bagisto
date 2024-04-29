@@ -234,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Aggiungi Indirizzo',
-                        'add-new-address'  => 'Aggiungi nuovo indirizzo',
                         'add-new'          => 'Aggiungi nuovo indirizzo',
+                        'add-new-address'  => 'Aggiungi nuovo indirizzo',
                         'addresses'        => 'Indirizzi',
                         'back'             => 'Indietro',
                         'billing-address'  => 'Indirizzo di Fatturazione',
@@ -250,8 +250,8 @@ return [
                         'postcode'         => 'CAP',
                         'proceed'          => 'Procedi',
                         'same-as-billing'  => 'Usa lo stesso indirizzo per la spedizione?',
-                        'save-address'     => 'Salva in rubrica',
                         'save'             => 'Salva',
+                        'save-address'     => 'Salva in rubrica',
                         'select-country'   => 'Seleziona Paese',
                         'select-state'     => 'Seleziona Stato',
                         'shipping-address' => 'Indirizzo di Spedizione',
@@ -259,6 +259,7 @@ return [
                         'street-address'   => 'Indirizzo',
                         'telephone'        => 'Telefono',
                         'title'            => 'Indirizzo',
+                        'vat-id'           => 'Partita IVA',
                     ],
 
                     'payment' => [
@@ -1062,6 +1063,7 @@ return [
                 'position'              => 'Posizione',
                 'price'                 => 'Prezzo',
                 'regex'                 => 'Espressione Regolare',
+                'regex-info'            => 'L\'espressione deve essere tra virgolette doppie.',
                 'save-btn'              => 'Salva Attributo',
                 'select'                => 'Seleziona',
                 'select-type'           => 'Seleziona Tipo di Attributo',
@@ -1125,6 +1127,7 @@ return [
                 'position'              => 'Posizione',
                 'price'                 => 'Prezzo',
                 'regex'                 => 'Espressione Regolare',
+                'regex-info'            => 'L\'espressione deve essere tra virgolette doppie.',
                 'save-btn'              => 'Salva Attributo',
                 'select'                => 'Seleziona',
                 'select-type'           => 'Seleziona Tipo di Attributo',
@@ -2783,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Indietro',
-                    'basic-settings' => 'Impostazioni di Base',
                     'country'        => 'Paese',
                     'identifier'     => 'Identificatore',
                     'save-btn'       => 'Salva Aliquota Fiscale',
                     'select-country' => 'Seleziona Paese',
                     'select-state'   => 'Seleziona Stato',
+                    'settings'       => 'Impostazioni',
                     'state'          => 'Stato',
                     'tax-rate'       => 'Aliquota',
                     'title'          => 'Modifica Aliquota Fiscale',

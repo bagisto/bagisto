@@ -234,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Adresse hinzufügen',
-                        'add-new-address'  => 'Neue Adresse hinzufügen',
                         'add-new'          => 'Neue Adresse hinzufügen',
+                        'add-new-address'  => 'Neue Adresse hinzufügen',
                         'addresses'        => 'Adressen',
                         'back'             => 'Zurück',
                         'billing-address'  => 'Rechnungsadresse',
@@ -250,8 +250,8 @@ return [
                         'postcode'         => 'PLZ',
                         'proceed'          => 'Weiter',
                         'same-as-billing'  => 'Gleiche Adresse für Versand verwenden?',
-                        'save-address'     => 'In Adressbuch speichern',
                         'save'             => 'Speichern',
+                        'save-address'     => 'In Adressbuch speichern',
                         'select-country'   => 'Land auswählen',
                         'select-state'     => 'Bundesland auswählen',
                         'shipping-address' => 'Lieferadresse',
@@ -259,6 +259,7 @@ return [
                         'street-address'   => 'Straße und Hausnummer',
                         'telephone'        => 'Telefon',
                         'title'            => 'Adresse',
+                        'vat-id'           => 'USt-IdNr.',
                     ],
 
                     'payment' => [
@@ -1062,6 +1063,7 @@ return [
                 'position'              => 'Position',
                 'price'                 => 'Preis',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'Der Ausdruck sollte in doppelten Anführungszeichen stehen.',
                 'save-btn'              => 'Attribut speichern',
                 'select'                => 'Auswählen',
                 'select-type'           => 'Attributtyp auswählen',
@@ -1125,6 +1127,7 @@ return [
                 'position'              => 'Position',
                 'price'                 => 'Preis',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'Der Ausdruck sollte in doppelten Anführungszeichen stehen.',
                 'save-btn'              => 'Attribut speichern',
                 'select'                => 'Auswählen',
                 'select-type'           => 'Attributtyp auswählen',
@@ -2783,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Zurück',
-                    'basic-settings' => 'Grundeinstellungen',
                     'country'        => 'Land',
                     'identifier'     => 'Bezeichner',
                     'save-btn'       => 'Steuersatz speichern',
                     'select-country' => 'Land auswählen',
                     'select-state'   => 'Bundesland auswählen',
+                    'settings'       => 'Einstellungen',
                     'state'          => 'Bundesland',
                     'tax-rate'       => 'Satz',
                     'title'          => 'Steuersatz bearbeiten',

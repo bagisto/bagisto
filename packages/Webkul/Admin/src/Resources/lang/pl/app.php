@@ -234,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Dodaj adres',
-                        'add-new-address'  => 'Dodaj nowy adres',
                         'add-new'          => 'Dodaj nowy adres',
+                        'add-new-address'  => 'Dodaj nowy adres',
                         'addresses'        => 'Adresy',
                         'back'             => 'Powrót',
                         'billing-address'  => 'Adres rozliczeniowy',
@@ -250,8 +250,8 @@ return [
                         'postcode'         => 'Kod pocztowy',
                         'proceed'          => 'Przejdź dalej',
                         'same-as-billing'  => 'Czy użyć tego samego adresu dla dostawy?',
-                        'save-address'     => 'Zapisz ten adres w książce adresowej',
                         'save'             => 'Zapisz',
+                        'save-address'     => 'Zapisz ten adres w książce adresowej',
                         'select-country'   => 'Wybierz kraj',
                         'select-state'     => 'Wybierz stan',
                         'shipping-address' => 'Adres dostawy',
@@ -259,6 +259,7 @@ return [
                         'street-address'   => 'Adres ulicy',
                         'telephone'        => 'Telefon',
                         'title'            => 'Adres',
+                        'vat-id'           => 'NIP',
                     ],
 
                     'payment' => [
@@ -1062,6 +1063,7 @@ return [
                 'position'              => 'Pozycja',
                 'price'                 => 'Cena',
                 'regex'                 => 'Wyrażenie Regularne',
+                'regex-info'            => 'Wyrażenie powinno być w podwójnych cudzysłowach.',
                 'save-btn'              => 'Zapisz Atrybut',
                 'select'                => 'Wybór',
                 'select-type'           => 'Wybierz Typ Atrybutu',
@@ -1125,6 +1127,7 @@ return [
                 'position'              => 'Pozycja',
                 'price'                 => 'Cena',
                 'regex'                 => 'Wyrażenie Regularne',
+                'regex-info'            => 'Wyrażenie powinno być w podwójnych cudzysłowach.',
                 'save-btn'              => 'Zapisz Atrybut',
                 'select'                => 'Wybierz',
                 'select-type'           => 'Wybierz Rodzaj Atrybutu',
@@ -2783,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Wróć',
-                    'basic-settings' => 'Podstawowe Ustawienia',
                     'country'        => 'Kraj',
                     'identifier'     => 'Identyfikator',
                     'save-btn'       => 'Zapisz Stawkę Podatku',
                     'select-country' => 'Wybierz Kraj',
                     'select-state'   => 'Wybierz Stan',
+                    'settings'       => 'Ustawienia',
                     'state'          => 'Stan',
                     'tax-rate'       => 'Stawka',
                     'title'          => 'Edytuj Stawkę Podatku',
