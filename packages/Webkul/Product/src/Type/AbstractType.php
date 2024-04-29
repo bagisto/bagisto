@@ -777,7 +777,7 @@ abstract class AbstractType
     {
         return [
             'regular' => [
-                'price'           => core()->convertPrice($regularPrice = $this->product->price),
+                'price'           => core()->convertPrice($this->product->price),
                 'formatted_price' => core()->currency($this->product->price),
             ],
 
