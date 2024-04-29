@@ -6,10 +6,13 @@ use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartShippingRate;
+use Webkul\Customer\Models\CompareItem;
 use Webkul\Customer\Models\CustomerAddress;
+use Webkul\Customer\Models\Wishlist;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 
+use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
@@ -886,7 +889,7 @@ it('should place order via admin', function () {
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     CartShippingRate::factory()->create([
@@ -896,6 +899,7 @@ it('should place order via admin', function () {
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
         'cart_address_id'    => $cartShippingAddress->id,
+        'cart_id'            => $cart->id,
     ]);
 
     cart()->setCart($cart);
@@ -912,4 +916,432 @@ it('should place order via admin', function () {
     $this->assertDatabaseMissing('cart', [
         'id' => $cart->id,
     ]);
+});
+
+it('should lists the all wishlist items related to the customer', function () {
+    // Arrange.
+    $products = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->count(5)
+        ->create();
+
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $wishlists = [];
+
+    foreach ($products as $product) {
+        $wishlists[] = Wishlist::factory()->create([
+            'channel_id'  => core()->getDefaultChannel()->id,
+            'product_id'  => $product->id,
+            'customer_id' => $customer->id,
+        ]);
+    }
+
+    // Act and assert.
+    $this->loginAsAdmin();
+
+    $response = getJson(route('admin.customers.customers.wishlist.items', $customer->id));
+
+    foreach ($wishlists as $key => $wishlist) {
+        $response->assertJsonPath('data.'.$key.'.id', $wishlist->id)
+            ->assertJsonPath('data.'.$key.'.product.id', $wishlist->product_id)
+            ->assertJsonPath('data.'.$key.'.product.name', $wishlist->product->name)
+            ->assertJsonPath('data.'.$key.'.product.sku', $wishlist->product->sku)
+            ->assertJsonPath('data.'.$key.'.product.type', $wishlist->product->type)
+            ->assertJsonPath('data.'.$key.'.product.price', $wishlist->product->price)
+            ->assertJsonPath('data.'.$key.'.product.formatted_price', core()->formatPrice($wishlist->product->price));
+    }
+});
+
+it('should remove item from the wishlist', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $wishlist = Wishlist::factory()->create([
+        'channel_id'  => core()->getDefaultChannel()->id,
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+    ]);
+
+    // Act and assert.
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.customers.customers.wishlist.items.delete', $customer->id), [
+        'data' => [
+            'item_id' => $wishlist->id,
+        ],
+    ]);
+
+    $this->assertDatabaseMissing('wishlist', [
+        'id' => $wishlist->id,
+    ]);
+});
+
+it('should add a simple product wishlisted item to the cart', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
+    ]);
+
+    $wishlist = Wishlist::factory()->create([
+        'channel_id'  => core()->getDefaultChannel()->id,
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+    ]);
+
+    // Act and assert.
+    $this->loginAsAdmin();
+
+    $response = postJson(route('admin.sales.cart.items.store', $cart->id), [
+        'data' => [
+            'item_id' => $wishlist->id,
+        ],
+        'product_id' => $product->id,
+        'quantity'   => 1,
+    ])
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.items_qty', 1)
+        ->assertJsonPath('data.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.items.0.cart_id', $cart->id)
+        ->assertJsonPath('data.items.0.product_id', $product->id)
+        ->assertJsonPath('data.items.0.sku', $product->sku)
+        ->assertJsonPath('data.items.0.type', 'simple')
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('message', trans('admin::app.sales.orders.create.cart.success-add-to-cart'));
+
+    $this->assertPrice($product->price, $response->json('data.items.0.price'));
+
+    $this->assertPrice($product->price, $response->json('data.items.0.total'));
+
+    $this->assertPrice($product->price, $response->json('data.grand_total'));
+
+    $this->assertPrice($product->price, $response->json('data.sub_total'));
+});
+
+it('should add a configurable product wishlisted item to the cart', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getConfigurableProductFactory()
+        ->create();
+
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
+    ]);
+
+    $wishlist = Wishlist::factory()->create([
+        'channel_id'  => core()->getDefaultChannel()->id,
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+    ]);
+
+    $childProduct = $product->variants()->first();
+
+    // Act and assert.
+    $this->loginAsAdmin();
+
+    $response = postJson(route('admin.sales.cart.items.store', $cart->id), [
+        'data' => [
+            'item_id' => $wishlist->id,
+        ],
+        'selected_configurable_option' => $childProduct->id,
+        'product_id'                   => $product->id,
+        'is_buy_now'                   => '0',
+        'rating'                       => '0',
+        'quantity'                     => '1',
+        'super_attribute'              => [
+            23 => '1',
+            24 => '7',
+        ],
+    ])
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.items_qty', 1)
+        ->assertJsonPath('data.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.items.0.cart_id', $cart->id)
+        ->assertJsonPath('data.items.0.product_id', $product->id)
+        ->assertJsonPath('data.items.0.sku', $product->sku)
+        ->assertJsonPath('data.items.0.type', 'configurable')
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('message', trans('admin::app.sales.orders.create.cart.success-add-to-cart'));
+
+    $this->assertPrice($childProduct->price, $response->json('data.items.0.price'));
+
+    $this->assertPrice($childProduct->price, $response->json('data.items.0.total'));
+
+    $this->assertPrice($childProduct->price, $response->json('data.grand_total'));
+
+    $this->assertPrice($childProduct->price, $response->json('data.sub_total'));
+});
+
+it('should return all the compare items related to the customer', function () {
+    // Arrange.
+    $products = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->count(5)
+        ->create();
+
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $compares = [];
+
+    foreach ($products as $product) {
+        $compares[] = CompareItem::factory()->create([
+            'product_id'  => $product->id,
+            'customer_id' => $customer->id,
+        ]);
+    }
+
+    // Act and assert.
+    $this->loginAsAdmin();
+
+    $response = getJson(route('admin.customers.customers.compare.items', $customer->id));
+
+    foreach ($compares as $key => $compare) {
+        $response->assertJsonPath('data.'.$key.'.id', $compare->id)
+            ->assertJsonPath('data.'.$key.'.product.id', $compare->product_id)
+            ->assertJsonPath('data.'.$key.'.product.name', $compare->product->name)
+            ->assertJsonPath('data.'.$key.'.product.sku', $compare->product->sku)
+            ->assertJsonPath('data.'.$key.'.product.type', $compare->product->type)
+            ->assertJsonPath('data.'.$key.'.product.price', $compare->product->price)
+            ->assertJsonPath('data.'.$key.'.product.formatted_price', core()->formatPrice($compare->product->price));
+    }
+});
+
+it('should remove compare items from the compared list item', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $compare = CompareItem::factory()->create([
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+    ]);
+
+    // Act and assert.
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.customers.customers.compare.items.delete', $customer->id), [
+        'item_id' => $compare->id,
+    ]);
+
+    $this->assertDatabaseMissing('compare_items', [
+        'id'          => $compare->id,
+        'product_id'  => $compare->product_id,
+        'customer_id' => $compare->customer_id,
+    ]);
+});
+
+it('show add a simple product to the cart from compared items', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
+    ]);
+
+    $compare = CompareItem::factory()->create([
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+    ]);
+
+    // Act and assert.
+    $this->loginAsAdmin();
+
+    $response = postJson(route('admin.sales.cart.items.store', $cart->id), [
+        'data' => [
+            'item_id' => $compare->id,
+        ],
+        'product_id' => $product->id,
+        'quantity'   => 1,
+    ])
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.items_qty', 1)
+        ->assertJsonPath('data.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.items.0.cart_id', $cart->id)
+        ->assertJsonPath('data.items.0.product_id', $product->id)
+        ->assertJsonPath('data.items.0.sku', $product->sku)
+        ->assertJsonPath('data.items.0.type', 'simple')
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('message', trans('admin::app.sales.orders.create.cart.success-add-to-cart'));
+
+    $this->assertPrice($product->price, $response->json('data.items.0.price'));
+
+    $this->assertPrice($product->price, $response->json('data.items.0.total'));
+
+    $this->assertPrice($product->price, $response->json('data.grand_total'));
+
+    $this->assertPrice($product->price, $response->json('data.sub_total'));
+});
+
+it('show add a configurable product to the cart from compared items', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getConfigurableProductFactory()
+        ->create();
+
+    $customer = (new CustomerFaker())->factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+        'customer_email'      => $customer->email,
+        'is_guest'            => 0,
+    ]);
+
+    $compare = CompareItem::factory()->create([
+        'product_id'  => $product->id,
+        'customer_id' => $customer->id,
+    ]);
+
+    $childProduct = $product->variants()->first();
+
+    // Act and assert.
+    $this->loginAsAdmin();
+
+    $response = postJson(route('admin.sales.cart.items.store', $cart->id), [
+        'data' => [
+            'item_id' => $compare->id,
+        ],
+        'selected_configurable_option' => $childProduct->id,
+        'product_id'                   => $product->id,
+        'is_buy_now'                   => '0',
+        'rating'                       => '0',
+        'quantity'                     => '1',
+        'super_attribute'              => [
+            23 => '1',
+            24 => '7',
+        ],
+    ])
+        ->assertJsonPath('data.customer_id', $customer->id)
+        ->assertJsonPath('data.items_count', 1)
+        ->assertJsonPath('data.items_qty', 1)
+        ->assertJsonPath('data.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.items.0.cart_id', $cart->id)
+        ->assertJsonPath('data.items.0.product_id', $product->id)
+        ->assertJsonPath('data.items.0.sku', $product->sku)
+        ->assertJsonPath('data.items.0.type', 'configurable')
+        ->assertJsonPath('data.have_stockable_items', true)
+        ->assertJsonPath('message', trans('admin::app.sales.orders.create.cart.success-add-to-cart'));
+
+    $this->assertPrice($childProduct->price, $response->json('data.items.0.price'));
+
+    $this->assertPrice($childProduct->price, $response->json('data.items.0.total'));
+
+    $this->assertPrice($childProduct->price, $response->json('data.grand_total'));
+
+    $this->assertPrice($childProduct->price, $response->json('data.sub_total'));
 });
