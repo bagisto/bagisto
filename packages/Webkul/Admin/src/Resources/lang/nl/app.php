@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Terug',
-                    'basic-settings' => 'Basisinstellingen',
                     'country'        => 'Land',
                     'identifier'     => 'Identificatie',
                     'save-btn'       => 'Belastingtarief Opslaan',
                     'select-country' => 'Selecteer Land',
                     'select-state'   => 'Selecteer Provincie',
+                    'settings'       => 'Instellingen',
                     'state'          => 'Provincie',
                     'tax-rate'       => 'Tarief',
                     'title'          => 'Belastingtarief Bewerken',

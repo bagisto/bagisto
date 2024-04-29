@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'পেছনে যান',
-                    'basic-settings' => 'মৌলিক সেটিংস',
                     'country'        => 'দেশ',
                     'identifier'     => 'সনাক্তক',
                     'save-btn'       => 'কর হার সংরক্ষণ করুন',
                     'select-country' => 'দেশ নির্বাচন করুন',
                     'select-state'   => 'রাজ্য নির্বাচন করুন',
+                    'settings'       => 'সেটিংস',
                     'state'          => 'রাজ্য',
                     'tax-rate'       => 'হার',
                     'title'          => 'কর হার সম্পাদনা করুন',

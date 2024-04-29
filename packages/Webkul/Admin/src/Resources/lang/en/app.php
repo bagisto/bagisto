@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Back',
-                    'basic-settings' => 'Basic Settings',
                     'country'        => 'Country',
                     'identifier'     => 'Identifier',
                     'save-btn'       => 'Save Tax Rate',
                     'select-country' => 'Select Country',
                     'select-state'   => 'Select State',
+                    'settings'       => 'Settings',
                     'state'          => 'State',
                     'tax-rate'       => 'Rate',
                     'title'          => 'Edit Tax Rate',

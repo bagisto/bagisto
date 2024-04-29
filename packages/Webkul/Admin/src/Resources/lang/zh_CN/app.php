@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => '返回',
-                    'basic-settings' => '基本设置',
                     'country'        => '国家',
                     'identifier'     => '标识符',
                     'save-btn'       => '保存税率',
                     'select-country' => '选择国家',
                     'select-state'   => '选择州',
+                    'settings'       => '设置',
                     'state'          => '州',
                     'tax-rate'       => '税率',
                     'title'          => '编辑税率',

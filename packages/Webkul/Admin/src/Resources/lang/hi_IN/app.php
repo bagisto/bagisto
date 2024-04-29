@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'पीछे',
-                    'basic-settings' => 'मूल सेटिंग्स',
                     'country'        => 'देश',
                     'identifier'     => 'पहचानकर्ता',
                     'save-btn'       => 'कर दर सहेजें',
                     'select-country' => 'देश चुनें',
                     'select-state'   => 'राज्य चुनें',
+                    'settings'       => 'सेटिंग्स',
                     'state'          => 'राज्य',
                     'tax-rate'       => 'दर',
                     'title'          => 'कर दर संपादित करें',

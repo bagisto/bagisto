@@ -2782,12 +2782,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Geri',
-                    'basic-settings' => 'Temel Ayarlar',
                     'country'        => 'Ülke',
                     'identifier'     => 'Tanımlayıcı',
                     'save-btn'       => 'Vergi Oranını Kaydet',
                     'select-country' => 'Ülke Seç',
                     'select-state'   => 'Eyalet Seç',
+                    'settings'       => 'Ayarlar',
                     'state'          => 'Eyalet',
                     'tax-rate'       => 'Oran',
                     'title'          => 'Vergi Oranı Düzenle',

@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Voltar',
-                    'basic-settings' => 'Configurações Básicas',
                     'country'        => 'País',
                     'identifier'     => 'Identificador',
                     'save-btn'       => 'Salvar Taxa de Imposto',
                     'select-country' => 'Selecionar País',
                     'select-state'   => 'Selecionar Estado',
+                    'settings'       => 'Configurações',
                     'state'          => 'Estado',
                     'tax-rate'       => 'Taxa',
                     'title'          => 'Editar Taxa de Imposto',

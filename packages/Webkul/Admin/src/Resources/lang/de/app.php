@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Zurück',
-                    'basic-settings' => 'Grundeinstellungen',
                     'country'        => 'Land',
                     'identifier'     => 'Bezeichner',
                     'save-btn'       => 'Steuersatz speichern',
                     'select-country' => 'Land auswählen',
                     'select-state'   => 'Bundesland auswählen',
+                    'settings'       => 'Einstellungen',
                     'state'          => 'Bundesland',
                     'tax-rate'       => 'Satz',
                     'title'          => 'Steuersatz bearbeiten',

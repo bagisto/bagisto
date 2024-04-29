@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'بازگشت',
-                    'basic-settings' => 'تنظیمات پایه',
                     'country'        => 'کشور',
                     'identifier'     => 'شناسه',
                     'save-btn'       => 'ذخیره نرخ مالیاتی',
                     'select-country' => 'انتخاب کشور',
                     'select-state'   => 'انتخاب استان',
+                    'settings'       => 'تنظیمات',
                     'state'          => 'استان',
                     'tax-rate'       => 'نرخ',
                     'title'          => 'ویرایش نرخ مالیات',

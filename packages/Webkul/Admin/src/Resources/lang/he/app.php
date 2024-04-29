@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'חזור',
-                    'basic-settings' => 'הגדרות בסיסיות',
                     'country'        => 'מדינה',
                     'identifier'     => 'מזהה',
                     'save-btn'       => 'שמור שער מס',
                     'select-country' => 'בחר מדינה',
                     'select-state'   => 'בחר מדינה',
+                    'settings'       => 'הגדרות',
                     'state'          => 'מדינה',
                     'tax-rate'       => 'שער',
                     'title'          => 'ערוך שער מס',

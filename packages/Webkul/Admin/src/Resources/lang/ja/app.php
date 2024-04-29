@@ -2781,12 +2781,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => '戻る',
-                    'basic-settings' => '基本設定',
                     'country'        => '国',
                     'identifier'     => '識別子',
                     'save-btn'       => '税率を保存',
                     'select-country' => '国を選択',
                     'select-state'   => '州を選択',
+                    'settings'       => '設定',
                     'state'          => '州',
                     'tax-rate'       => '税率',
                     'title'          => '税率を編集',
