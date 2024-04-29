@@ -17,13 +17,13 @@
 
 <div class="content-list" markdown="1">
 
+- [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
-- [Shop Event parameter updated](#event-parameter-updated)
-- [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
 - [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
+- [Shop Event parameter updated](#event-parameter-updated)
 
 </div>
 
