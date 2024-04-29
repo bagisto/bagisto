@@ -106,6 +106,34 @@ There is no dependency needed to be updated at for this upgrade.
 + core()->getConfigData('sales.taxes.default_destination_calculation.postcode')
 ```
 
+2: The `repository` option has been removed from the `select` type field in the system configuration. Now, you can use `options` as a closure to populate select field options from the database. Here's an example of how to update the configuration array:
+
+```diff
+'key'    => 'sales.taxes.categories',
+'name'   => 'admin::app.configuration.index.sales.taxes.categories.title',
+'info'   => 'admin::app.configuration.index.sales.taxes.categories.title-info',
+'sort'   => 1,
+'fields' => [
+    [
+        'name'       => 'shipping',
+        'title'      => 'admin::app.configuration.index.sales.taxes.categories.shipping',
+        'type'       => 'select',
+        'default'    => 0,
+-       'repository' => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
++       'options'    => function() {
++           return [
++               [
++                   'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
++                   'value' => 0,
++               ],
++           ];
++       }
++   ]
+}
+```
+
+In this example, the `repository` option has been replaced with `options`, which is defined as a closure returning an array of options. Adjust the closure to populate the select field options as needed.
+
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names
 
