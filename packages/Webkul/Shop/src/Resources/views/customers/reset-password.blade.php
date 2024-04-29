@@ -69,14 +69,14 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             id="email"
                             name="email"
                             rules="required|email"
                             :value="old('email')"
                             :label="trans('shop::app.customers.reset-password.email')"
                             placeholder="email@example.com"
-                            aria-label="@lang('shop::app.customers.reset-password.email')"
+                            :aria-label="trans('shop::app.customers.reset-password.email')"
                             aria-required="true"
                         />
 
@@ -91,14 +91,14 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="password"
                             rules="required|min:6"
                             value=""
                             :label="trans('shop::app.customers.reset-password.password')"
                             :placeholder="trans('shop::app.customers.reset-password.password')"
                             ref="password"
-                            aria-label="@lang('shop::app.customers.reset-password.password')"
+                            :aria-label="trans('shop::app.customers.reset-password.password')"
                             aria-required="true"
                         />
 
@@ -113,13 +113,13 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="password_confirmation"
                             rules="confirmed:@password"
                             value=""
                             :label="trans('shop::app.customers.reset-password.confirm-password')"
                             :placeholder="trans('shop::app.customers.reset-password.confirm-password')"
-                            aria-label="@lang('shop::app.customers.reset-password.confirm-password')"
+                            :aria-label="trans('shop::app.customers.reset-password.confirm-password')"
                             aria-required="true"
                         />
 
