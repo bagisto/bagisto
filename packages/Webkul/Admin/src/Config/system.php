@@ -1668,7 +1668,7 @@ return [
                 'title'      => 'admin::app.configuration.index.sales.taxes.categories.shipping',
                 'type'       => 'select',
                 'default'    => 0,
-                'options'    => function() {
+                'options'    => function () {
                     $options = [
                         [
                             'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
@@ -1690,7 +1690,7 @@ return [
                 'title'      => 'admin::app.configuration.index.sales.taxes.categories.product',
                 'type'       => 'select',
                 'default'    => 0,
-                'options'    => function() {
+                'options'    => function () {
                     $options = [
                         [
                             'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
