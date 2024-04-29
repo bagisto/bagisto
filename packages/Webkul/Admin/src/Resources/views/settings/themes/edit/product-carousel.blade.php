@@ -205,7 +205,11 @@
                     </x-slot>
                 
                     <x-slot:content>
-                        <input type="hidden" name="type" value="product_carousel">
+                        <input
+                            type="hidden"
+                            name="type"
+                            value="product_carousel"
+                        />
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">

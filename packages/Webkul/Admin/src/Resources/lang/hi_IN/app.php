@@ -36,6 +36,8 @@ return [
         'description-text' => 'सभी सूचनाएँ सूचीबद्ध करें',
         'marked-success'   => 'सूचना सफलतापूर्वक मार्क की गई',
         'no-record'        => 'कोई रिकॉर्ड नहीं मिला',
+        'of'               => 'का',
+        'per-page'         => 'प्रति पृष्ठ',
         'read-all'         => 'पढ़ा गया मार्क करें',
         'title'            => 'सूचनाएँ',
         'view-all'         => 'सभी देखें',
@@ -2371,9 +2373,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name पहले से ले लिया गया है।',
-            'create-btn'        => 'पेज बनाएं',
-            'title'             => 'पेज',
+            'already-taken' => 'यह :name पहले से ही लिया जा चुका है।',
+            'create-btn'    => 'पेज बनाएं',
+            'channel'       => 'चैनल',
+            'language'      => 'भाषा',
+            'title'         => 'पेज',
 
             'datagrid' => [
                 'delete'              => 'हटाएं',

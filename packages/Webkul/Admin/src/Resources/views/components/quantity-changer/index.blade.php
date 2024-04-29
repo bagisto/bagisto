@@ -23,10 +23,9 @@
                 -
             </span>
 
-            <p
-                class="w-2.5 select-none text-center dark:text-gray-300"
-                v-text="quantity"
-            ></p>
+            <p class="w-2.5 select-none text-center dark:text-gray-300">
+                @{{ quantity }}
+            </p>
             
             <span 
                 class="cursor-pointer text-2xl dark:text-gray-300"

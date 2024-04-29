@@ -36,6 +36,8 @@ return [
         'description-text' => 'لیست کل اعلان‌ها',
         'marked-success'   => 'اعلان با موفقیت علامت‌گذاری شد',
         'no-record'        => 'هیچ رکوردی یافت نشد',
+        'of'               => 'از',
+        'per-page'         => 'در هر صفحه',
         'read-all'         => 'علامت خوانده شده',
         'title'            => 'اعلان‌ها',
         'view-all'         => 'مشاهده همه',
@@ -2371,9 +2373,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name قبلا استفاده شده است.',
-            'create-btn'        => 'ایجاد صفحه',
-            'title'             => 'صفحه‌ها',
+            'already-taken' => 'این :name قبلاً استفاده شده است.',
+            'create-btn'    => 'ایجاد صفحه',
+            'channel'       => 'کانال',
+            'language'      => 'زبان',
+            'title'         => 'صفحه‌ها',
 
             'datagrid' => [
                 'delete'              => 'حذف',

@@ -21,7 +21,7 @@
 
     {!! view_render_event('bagisto.admin.marketing.communications.templates.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.marketing.communications.email_templates.index') }}" />
+    <x-admin::datagrid :src="route('admin.marketing.communications.email_templates.index')" />
 
     {!! view_render_event('bagisto.admin.marketing.communications.templates.list.after') !!}
 

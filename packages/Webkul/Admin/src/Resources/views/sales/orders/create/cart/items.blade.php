@@ -15,7 +15,10 @@
 {!! view_render_event('bagisto.admin.sales.order.create.cart.items.after') !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-cart-items-template">
+    <script
+        type="text/x-template"
+        id="v-cart-items-template"
+    >
         <div class="box-shadow rounded bg-white dark:bg-gray-900">
             <div class="flex justify-between p-4">
                 <p class="text-base font-semibold text-gray-800 dark:text-white">

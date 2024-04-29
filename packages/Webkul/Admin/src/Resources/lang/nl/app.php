@@ -36,6 +36,8 @@ return [
         'description-text' => 'Alle meldingen weergeven',
         'marked-success'   => 'Melding Succesvol Gemarkeerd',
         'no-record'        => 'Geen Records Gevonden',
+        'of'               => 'van',
+        'per-page'         => 'Per pagina',
         'read-all'         => 'Markeer als Gelezen',
         'title'            => 'Meldingen',
         'view-all'         => 'Alles Bekijken',
@@ -2372,8 +2374,10 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'De :name is al in gebruik.',
-            'create-btn'    => 'Pagina Maken',
-            'title'         => 'Pagina’s',
+            'create-btn'    => 'Pagina aanmaken',
+            'channel'       => 'Kanaal',
+            'language'      => 'Taal',
+            'title'         => 'Pagina\'s',
 
             'datagrid' => [
                 'delete'              => 'Verwijderen',

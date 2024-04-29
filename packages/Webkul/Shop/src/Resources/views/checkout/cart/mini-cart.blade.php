@@ -89,10 +89,8 @@
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
 
                                 <a  class="max-w-4/5" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
-                                    <p
-                                        class="text-base font-medium"
-                                        v-text="item.name"
-                                    >
+                                    <p class="text-base font-medium">
+                                        @{{ item.name }}
                                     </p>
                                 </a>
 

@@ -105,10 +105,8 @@
                                     @{{ "@lang('admin::app.sales.orders.index.datagrid.id')".replace(':id', record.increment_id) }}
                                 </p>
 
-                                <p
-                                    class="text-gray-600 dark:text-gray-300"
-                                    v-text="record.created_at"
-                                >
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ record.created_at }}
                                 </p>
 
                                 <p
@@ -117,10 +115,8 @@
                                 >
                                 </p>
 
-                                <p
-                                    v-else
-                                    v-text="record.status"
-                                >
+                                <p v-else>
+                                    @{{ record.status }}
                                 </p>
                             </div>
                         </div>
@@ -137,10 +133,8 @@
                                 @lang('admin::app.sales.orders.index.datagrid.pay-by', ['method' => ''])@{{ record.method }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.channel_name"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.channel_name }}
                             </p>
                         </div>
                     </div>
@@ -148,22 +142,16 @@
                     <!-- Custoemr, Email, Location Section -->
                     <div class="">
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base text-gray-800 dark:text-white"
-                                v-text="record.full_name"
-                            >
+                            <p class="text-base text-gray-800 dark:text-white">
+                                @{{ record.full_name }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.customer_email"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.customer_email }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.location"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.location }}
                             </p>
                         </div>
                     </div>

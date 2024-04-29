@@ -36,6 +36,8 @@ return [
         'description-text' => 'すべての通知をリストアップ',
         'marked-success'   => 'お知らせが正常にマークされました',
         'no-record'        => '記録が見つかりません',
+        'of'               => 'の',
+        'per-page'         => 'ページごと',
         'read-all'         => 'すべてを既読にする',
         'title'            => 'お知らせ',
         'view-all'         => 'すべて表示',
@@ -2373,6 +2375,8 @@ return [
         'index' => [
             'already-taken' => ':name は既に使用されています。',
             'create-btn'    => 'ページを作成',
+            'channel'       => 'チャンネル',
+            'language'      => '言語',
             'title'         => 'ページ',
 
             'datagrid' => [

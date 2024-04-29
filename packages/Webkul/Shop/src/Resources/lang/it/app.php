@@ -509,7 +509,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Nessuno',
+                    'none'         => 'Nessuno',
+                    'total-amount' => 'Importo totale',
                 ],
 
                 'downloadable' => [

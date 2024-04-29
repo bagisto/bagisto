@@ -51,40 +51,88 @@
                     <template #item="{ element, index }">
                         <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
                             <!-- Hidden Input -->
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][{{$currentLocale->code}}][title]'" :value="element.title"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][{{$currentLocale->code}}][title]'"
+                                :value="element.title"
+                            />
 
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][price]'" :value="element.price"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][price]'"
+                                :value="element.price"
+                            />
 
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][downloads]'" :value="element.downloads"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][downloads]'"
+                                :value="element.downloads"
+                            />
 
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][sort_order]'" :value="index"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][sort_order]'"
+                                :value="index"
+                            />
 
 
                             <!-- File Hidden Fields -->
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][type]'" :value="element.type"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][type]'"
+                                :value="element.type"
+                            />
 
                             <template v-if="element.type == 'file'">
-                                <input type="hidden" :name="'downloadable_links[' + element.id + '][file]'" :value="element.file"/>
+                                <input
+                                    type="hidden"
+                                    :name="'downloadable_links[' + element.id + '][file]'"
+                                    :value="element.file"
+                                />
 
-                                <input type="hidden" :name="['downloadable_links[' + element.id + '][file_name]']" v-model="element.file_name"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_links[' + element.id + '][file_name]']"
+                                    v-model="element.file_name"
+                                />
                             </template>
 
                             <template v-else>
-                                <input type="hidden" :name="['downloadable_links[' + element.id + '][url]']" v-model="element.url"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_links[' + element.id + '][url]']"
+                                    v-model="element.url"
+                                />
                             </template>
 
 
                             <!-- Sample Hidden Fields -->
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][sample_type]'" :value="element.sample_type"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][sample_type]'"
+                                :value="element.sample_type"
+                            />
 
                             <template v-if="element.sample_type == 'file'">
-                                <input type="hidden" :name="'downloadable_links[' + element.id + '][sample_file]'" :value="element.sample_file"/>
+                                <input
+                                    type="hidden"
+                                    :name="'downloadable_links[' + element.id + '][sample_file]'"
+                                    :value="element.sample_file"
+                                />
 
-                                <input type="hidden" :name="['downloadable_links[' + element.id + '][sample_file_name]']" v-model="element.sample_file_name"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_links[' + element.id + '][sample_file_name]']"
+                                    v-model="element.sample_file_name"
+                                />
                             </template>
 
                             <template v-else>
-                                <input type="hidden" :name="['downloadable_links[' + element.id + '][sample_url]']" v-model="element.sample_url"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_links[' + element.id + '][sample_url]']"
+                                    v-model="element.sample_url"
+                                />
                             </template>
 
                             <!-- Information -->
@@ -481,7 +529,10 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-downloadable-samples-template">
+    <script
+        type="text/x-template"
+        id="v-downloadable-samples-template"
+    >
         <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
             <!-- Panel Header -->
             <div class="mb-2.5 flex justify-between gap-5 p-4">
@@ -522,22 +573,45 @@
                     <template #item="{ element, index }">
                         <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
                             <!-- Hidden Input -->
-                            <input type="hidden" :name="'downloadable_samples[' + element.id + '][title]'" :value="element.title"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_samples[' + element.id + '][title]'"
+                                :value="element.title"
+                            />
 
-                            <input type="hidden" :name="'downloadable_samples[' + element.id + '][sort_order]'" :value="index"/>
-
+                            <input
+                                type="hidden"
+                                :name="'downloadable_samples[' + element.id + '][sort_order]'"
+                                :value="index"
+                            />
 
                             <!-- File Hidden Fields -->
-                            <input type="hidden" :name="'downloadable_samples[' + element.id + '][type]'" :value="element.type"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_samples[' + element.id + '][type]'"
+                                :value="element.type"
+                            />
 
                             <template v-if="element.type == 'file'">
-                                <input type="hidden" :name="'downloadable_samples[' + element.id + '][file]'" :value="element.file"/>
+                                <input
+                                    type="hidden"
+                                    :name="'downloadable_samples[' + element.id + '][file]'"
+                                    :value="element.file"
+                                />
 
-                                <input type="hidden" :name="['downloadable_samples[' + element.id + '][file_name]']" v-model="element.file_name"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_samples[' + element.id + '][file_name]']"
+                                    v-model="element.file_name"
+                                />
                             </template>
 
                             <template v-else>
-                                <input type="hidden" :name="['downloadable_samples[' + element.id + '][url]']" v-model="element.url"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_samples[' + element.id + '][url]']"
+                                    v-model="element.url"
+                                />
                             </template>
 
                             <!-- Information -->

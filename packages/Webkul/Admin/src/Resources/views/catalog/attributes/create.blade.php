@@ -273,10 +273,8 @@
 
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
-                                                        <p
-                                                            class="dark:text-white"
-                                                            v-text="element.params.admin_name"
-                                                        >
+                                                        <p class="dark:text-white">
+                                                            @{{ element.params.admin_name }}
                                                         </p>
 
                                                         <input
@@ -287,10 +285,8 @@
                                                     </x-admin::table.td>
 
                                                     <x-admin::table.td v-for="locale in allLocales">
-                                                        <p
-                                                            class="dark:text-white"
-                                                            v-text="element.params[locale.code]"
-                                                        >
+                                                        <p class="dark:text-white">
+                                                            @{{ element.params[locale.code] }}
                                                         </p>
 
                                                         <input
@@ -890,8 +886,8 @@
                         values.params.id = values.id;
 
                         this.swatchValue = {
-                            image: value.swatch_value_url
-                            ? [{ id: value.id, url: value.swatch_value_url }]
+                            image: values.swatch_value_url
+                            ? [{ id: values.id, url: values.swatch_value_url }]
                             : [],
                         };
 

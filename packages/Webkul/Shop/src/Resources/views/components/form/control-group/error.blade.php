@@ -8,9 +8,7 @@
     name="{{ $name ?? $controlName }}"
     v-slot="{ message }"
 >
-    <p
-        {{ $attributes->merge(['class' => 'text-xs italic text-red-500']) }}
-        v-text="message"
-    >
+    <p {{ $attributes->merge(['class' => 'text-xs italic text-red-500']) }}>
+        @{{ message }}
     </p>
 </v-error-message>

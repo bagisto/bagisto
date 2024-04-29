@@ -36,6 +36,8 @@ return [
         'description-text' => 'Listar todas las notificaciones',
         'marked-success'   => 'Notificación Marcada Exitosamente',
         'no-record'        => 'No se Encontraron Registros',
+        'of'               => 'de',
+        'per-page'         => 'Por página',
         'read-all'         => 'Marcar como Leído',
         'title'            => 'Notificaciones',
         'view-all'         => 'Ver Todas',
@@ -2371,9 +2373,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => 'El :name ya ha sido tomado.',
-            'create-btn'        => 'Crear Página',
-            'title'             => 'Páginas',
+            'already-taken' => 'El :name ya ha sido tomado.',
+            'create-btn'    => 'Crear Página',
+            'channel'       => 'Canal',
+            'language'      => 'Idioma',
+            'title'         => 'Páginas',
 
             'datagrid' => [
                 'delete'              => 'Eliminar',

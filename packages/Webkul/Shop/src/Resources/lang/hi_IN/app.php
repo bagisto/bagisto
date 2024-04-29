@@ -509,7 +509,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'कोई नहीं',
+                    'none'         => 'कोई नहीं',
+                    'total-amount' => 'कुल राशि',
                 ],
 
                 'downloadable' => [

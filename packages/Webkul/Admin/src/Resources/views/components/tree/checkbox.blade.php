@@ -1,5 +1,8 @@
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-tree-checkbox-template">
+    <script
+        type="text/x-template"
+        id="v-tree-checkbox-template"
+    >
         <label
             :for="id"
             class="group inline-flex w-max cursor-pointer select-none items-center gap-2.5 p-1.5"
@@ -12,15 +15,13 @@
                 class="peer hidden"
                 :checked="isActive"
                 @change="inputChanged()"
-            >
+            />
 
             <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600">
             </span>
 
-            <div
-                class="cursor-pointer text-sm text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white"
-                v-text="label"
-            >
+            <div class="cursor-pointer text-sm text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">
+                @{{ label }}
             </div>
         </label>
     </script>

@@ -22,7 +22,7 @@
     
     {!! view_render_event('bagisto.admin.marketing.promotions.cart-rules.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.marketing.promotions.cart_rules.index') }}" />
+    <x-admin::datagrid :src="route('admin.marketing.promotions.cart_rules.index')" />
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart-rules.list.after') !!}
 

@@ -7,7 +7,7 @@
     <!-- Price Range Filter Shimmer -->
     <div class="border-b border-[#E9E9E9]">
         <div class="flex items-center justify-between py-2.5">
-            <p class="shimmer h-[28px] w-2/5"></p>
+            <p class="shimmer h-7 w-2/5"></p>
             <span class="shimmer h-6 w-6"></span>
         </div>
 

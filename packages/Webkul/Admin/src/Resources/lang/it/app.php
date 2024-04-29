@@ -33,12 +33,14 @@ return [
     ],
 
     'notifications' => [
-        'description-text'      => 'Elenca tutte le notifiche',
-        'marked-success'        => 'Notifica contrassegnata con successo',
-        'no-record'             => 'Nessun Record Trovato',
-        'read-all'              => 'Segna come Letto',
-        'title'                 => 'Notifiche',
-        'view-all'              => 'Visualizza Tutte',
+        'description-text' => 'Elenca tutte le notifiche',
+        'marked-success'   => 'Notifica contrassegnata con successo',
+        'no-record'        => 'Nessun Record Trovato',
+        'of'               => 'di',
+        'per-page'         => 'Per pagina',
+        'read-all'         => 'Segna come Letto',
+        'title'            => 'Notifiche',
+        'view-all'         => 'Visualizza Tutte',
 
         'order-status-messages' => [
             'canceled'        => 'Ordine Annullato',
@@ -2371,9 +2373,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => 'Il :name è già stato preso.',
-            'create-btn'        => 'Crea Pagina',
-            'title'             => 'Pagine',
+            'already-taken' => 'Il :name è già stato preso.',
+            'create-btn'    => 'Crea Pagina',
+            'channel'       => 'Canale',
+            'language'      => 'Lingua',
+            'title'         => 'Pagine',
 
             'datagrid' => [
                 'delete'              => 'Elimina',

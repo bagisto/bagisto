@@ -10,7 +10,7 @@
 
         <div class="flex items-center gap-x-2.5">
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.catalog.products.index') }}" />
+            <x-admin::datagrid.export :src="route('admin.catalog.products.index')" />
 
             {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
 
@@ -31,7 +31,12 @@
 
     {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}" :isMultiRow="true">
+    <!-- Datagrid -->
+    <x-admin::datagrid
+        :src="route('admin.catalog.products.index')"
+        :isMultiRow="true"
+    >
+        <!-- Datagrid Header -->
         @php
             $hasPermission = bouncer()->hasPermission('catalog.products.edit') || bouncer()->hasPermission('catalog.products.delete');
         @endphp
@@ -146,21 +151,15 @@
                         @endif
 
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base font-semibold text-gray-800 dark:text-white"
-                                v-text="record.name"
-                            >
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                @{{ record.name }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.sku-value')".replace(':sku', record.sku) }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.attribute-family-value')".replace(':attribute_family', record.attribute_family) }}
                             </p>
                         </div>
@@ -175,10 +174,8 @@
                                     :src=`{{ Storage::url('') }}${record.base_image}`
                                 />
 
-                                <span
-                                    class="absolute bottom-px rounded-full bg-darkPink px-1.5 text-xs font-bold leading-normal text-white ltr:left-px rtl:right-px"
-                                    v-text="record.images_count"
-                                >
+                                <span class="absolute bottom-px rounded-full bg-darkPink px-1.5 text-xs font-bold leading-normal text-white ltr:left-px rtl:right-px">
+                                    @{{ record.images_count }}
                                 </span>
                             </template>
 
@@ -194,16 +191,14 @@
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base font-semibold text-gray-800 dark:text-white"
-                                v-text="$admin.formatPrice(record.price)"
-                            >
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                @{{ $admin.formatPrice(record.price) }}
                             </p>
 
                             <!-- Parent Product Quantity -->
                             <div v-if="['configurable', 'bundle', 'grouped'].includes(record.type)">
                                 <p class="text-gray-600 dark:text-gray-300">
-                                    <span class="text-red-600" v-text="'N/A'"></span>
+                                    <span class="text-red-600">N/A</span>
                                 </p>
                             </div>
 
@@ -240,16 +235,12 @@
                                 @{{ record.status ? "@lang('admin::app.catalog.products.index.datagrid.active')" : "@lang('admin::app.catalog.products.index.datagrid.disable')" }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.category_name ?? 'N/A'"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.category_name ?? 'N/A' }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.type"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.type }}
                             </p>
                         </div>
 
@@ -271,7 +262,10 @@
     {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-product-form-template">
+        <script
+            type="text/x-template"
+            id="v-create-product-form-template"
+        >
             <div>
                 <!-- Product Create Button -->
                 @if (bouncer()->hasPermission('catalog.products.create'))

@@ -102,7 +102,9 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
 
-                <p class="text-base" v-text="product.name"></p>
+                <p class="text-base">
+                    @{{ product.name }}
+                </p>
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.after') !!}
 
@@ -203,10 +205,8 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
 
-                <p
-                    class="text-base"
-                    v-text="product.name"
-                >
+                <p class="text-base">
+                    @{{ product.name }}
                 </p>
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.after') !!}

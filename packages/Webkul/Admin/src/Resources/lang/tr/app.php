@@ -36,6 +36,8 @@ return [
         'description-text' => 'Tüm Bildirimleri Listele',
         'marked-success'   => 'Bildirim Başarıyla İşaretlendi',
         'no-record'        => 'Kayıt Bulunamadı',
+        'of'               => 'of',
+        'per-page'         => 'Sayfa Başına',
         'read-all'         => 'Tümünü Okundu Olarak İşaretle',
         'title'            => 'Bildirimler',
         'view-all'         => 'Tümünü Görüntüle',
@@ -2371,9 +2373,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name zaten alınmıştır.',
-            'create-btn'        => 'Sayfa Oluştur',
-            'title'             => 'Sayfalar',
+            'already-taken' => ':name zaten alınmış.',
+            'create-btn'    => 'Sayfa Oluştur',
+            'channel'       => 'Kanal',
+            'language'      => 'Dil',
+            'title'         => 'Sayfalar',
 
             'datagrid' => [
                 'delete'              => 'Sil',

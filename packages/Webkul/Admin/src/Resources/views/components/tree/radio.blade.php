@@ -19,10 +19,8 @@
 
             <span class="icon-radio-normal peer-checked:icon-radio-selected mr-1 cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"></span>
 
-            <div
-                class="cursor-pointer text-sm text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white"
-                v-text="label"
-            >
+            <div class="cursor-pointer text-sm text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">
+                @{{ label }}
             </div>
         </label>
     </script>

@@ -412,6 +412,33 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 ```
 
 
+<a name="notification"></a>
+### Notification
+
+<a name="the-notification-repository"></a>
+#### The `Webkul\Notification\Repositories\NotificationRepository` Repository
+
+**Impact Probability: Medium**
+
+1. We've made revisions to the `getAll` method to allow for optional parameters.
+
+```diff
+- public function getAll()
++ public function getAll(array $params = [])
+```
+
+<a name="shop-blade-updates"></a>
+### Shop Blade Updates
+
+<a name="moved-coupon-blade"></a>
+#### Moved `coupon.blade.php`
+
+**Impact Probability: Low**
+
+1. The file `packages/Webkul/Shop/src/Resources/views/checkout/cart/coupon.blade.php` has been relocated to the `packages/Webkul/Shop/src/Resources/views/checkout/coupon.blade.php` directory. This move was made because the file is included on both the checkout and cart pages.
+
+
+
 <a name="product"></a>
 ### Product
 

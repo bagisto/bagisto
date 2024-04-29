@@ -20,7 +20,10 @@
 </v-media-images>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-media-images-template">
+    <script
+        type="text/x-template"
+        id="v-media-images-template"
+    >
         <!-- Panel Content -->
         <div class="grid">
             <div class="flex flex-wrap gap-1">
@@ -358,7 +361,11 @@
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 
-                    <input type="hidden" :name="name + '[' + image.id + ']'" v-if="! image.is_new"/>
+                    <input
+                        type="hidden"
+                        :name="name + '[' + image.id + ']'"
+                        v-if="! image.is_new"
+                    />
 
                     <input
                         type="file"
