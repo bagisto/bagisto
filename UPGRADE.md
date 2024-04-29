@@ -84,7 +84,7 @@ There is no dependency needed to be updated at for this upgrade.
 ### Admin
 
 <a name="The System Configuration Updates"></a>
-#### the-system-config-update
+#### The System Configuration Updates
 
 **Impact Probability: Medium**
 
