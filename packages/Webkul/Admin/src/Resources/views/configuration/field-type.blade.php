@@ -123,8 +123,8 @@
                 :value="$selectedOption"
                 :label="trans($field['title'])"
             >
-                @if (isset($field['repository']))
-                    @foreach ($coreConfigRepository->getOptionsByRepository($field) as $option)
+                @if (is_callable($field['options']))
+                    @foreach ($field['options']() as $option)
                         <option
                             value="{{ $option['value'] }}"
                             {{ $option['value'] == $selectedOption ? 'selected' : ''}}
@@ -161,8 +161,8 @@
                     :class="[errors['{{ $name }}[]'] ? 'border border-red-600 hover:border-red-600' : '']"
                     multiple
                 >
-                    @if (isset($field['repository']))
-                        @foreach ($coreConfigRepository->getOptionsByRepository($field) as $option)
+                    @if (is_callable($field['options']))
+                        @foreach ($field['options']() as $option)
                             <option 
                                 value="{{ $option['value'] }}"
                                 {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}

@@ -1,6 +1,7 @@
 <?php
 
 use Webkul\Sales\Models\Order;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 return [
     /**
@@ -1667,13 +1668,45 @@ return [
                 'title'      => 'admin::app.configuration.index.sales.taxes.categories.shipping',
                 'type'       => 'select',
                 'default'    => 0,
-                'repository' => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
+                'options'    => function () {
+                    $options = [
+                        [
+                            'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
+                            'value' => 0,
+                        ],
+                    ];
+
+                    foreach (app(TaxCategoryRepository::class)->all() as $taxCategory) {
+                        $options[] = [
+                            'title' => $taxCategory->name,
+                            'value' => $taxCategory->id,
+                        ];
+                    }
+
+                    return $options;
+                },
             ], [
                 'name'       => 'product',
                 'title'      => 'admin::app.configuration.index.sales.taxes.categories.product',
                 'type'       => 'select',
                 'default'    => 0,
-                'repository' => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
+                'options'    => function () {
+                    $options = [
+                        [
+                            'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
+                            'value' => 0,
+                        ],
+                    ];
+
+                    foreach (app(TaxCategoryRepository::class)->all() as $taxCategory) {
+                        $options[] = [
+                            'title' => $taxCategory->name,
+                            'value' => $taxCategory->id,
+                        ];
+                    }
+
+                    return $options;
+                },
             ],
         ],
     ], [
