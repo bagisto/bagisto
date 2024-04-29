@@ -156,7 +156,6 @@ class Tax
             ) {
                 continue;
             }
-            // dd($address->state, $address->state != '*');
 
             $haveTaxRate = false;
 
