@@ -3078,20 +3078,23 @@ it('should place a virtual product order for a guest user and send email to the 
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'cart_id'             => $cart->id,
+        'product_id'          => $product->id,
+        'sku'                 => $product->sku,
+        'quantity'            => $additional['quantity'],
+        'name'                => $product->name,
+        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax'      => $convertedPrice,
+        'base_price'          => $price,
+        'base_price_incl_tax' => $price,
+        'total'               => $convertedPrice * $additional['quantity'],
+        'total_incl_tax'      => $convertedPrice * $additional['quantity'],
+        'base_total'          => $price * $additional['quantity'],
+        'weight'              => $product->weight ?? 0,
+        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
+        'type'                => $product->type,
+        'additional'          => $additional,
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
