@@ -36,6 +36,8 @@ return [
         'description-text' => 'Tüm Bildirimleri Listele',
         'marked-success'   => 'Bildirim Başarıyla İşaretlendi',
         'no-record'        => 'Kayıt Bulunamadı',
+        'of'               => 'of',
+        'per-page'         => 'Sayfa Başına',
         'read-all'         => 'Tümünü Okundu Olarak İşaretle',
         'title'            => 'Bildirimler',
         'view-all'         => 'Tümünü Görüntüle',
@@ -232,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Adres Ekle',
-                        'add-new-address'  => 'Yeni adres ekle',
                         'add-new'          => 'Yeni adres ekle',
+                        'add-new-address'  => 'Yeni adres ekle',
                         'addresses'        => 'Adresler',
                         'back'             => 'Geri',
                         'billing-address'  => 'Fatura Adresi',
@@ -248,8 +250,8 @@ return [
                         'postcode'         => 'Posta Kodu',
                         'proceed'          => 'Devam Et',
                         'same-as-billing'  => 'Teslimat için aynı adresi kullan?',
-                        'save-address'     => 'Bu adresi adres defterine kaydet',
                         'save'             => 'Kaydet',
+                        'save-address'     => 'Bu adresi adres defterine kaydet',
                         'select-country'   => 'Ülke Seçin',
                         'select-state'     => 'Eyalet Seçin',
                         'shipping-address' => 'Teslimat Adresi',
@@ -257,6 +259,7 @@ return [
                         'street-address'   => 'Adres',
                         'telephone'        => 'Telefon',
                         'title'            => 'Adres',
+                        'vat-id'           => 'Vergi Kimlik Numarası',
                     ],
 
                     'payment' => [
@@ -1060,6 +1063,7 @@ return [
                 'position'              => 'Konum',
                 'price'                 => 'Fiyat',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'İfade çift tırnak içinde olmalıdır.',
                 'save-btn'              => 'Özelliği Kaydet',
                 'select'                => 'Seçenek',
                 'select-type'           => 'Seçenek Özellik Türü',
@@ -1123,6 +1127,7 @@ return [
                 'position'              => 'Konum',
                 'price'                 => 'Fiyat',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'İfade çift tırnak içinde olmalıdır.',
                 'save-btn'              => 'Özelliği Kaydet',
                 'select'                => 'Seçenek',
                 'select-type'           => 'Seçenek Özellik Türü',
@@ -2332,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name zaten alınmıştır.',
-            'create-btn'        => 'Sayfa Oluştur',
-            'title'             => 'Sayfalar',
+            'already-taken' => ':name zaten alınmış.',
+            'create-btn'    => 'Sayfa Oluştur',
+            'channel'       => 'Kanal',
+            'language'      => 'Dil',
+            'title'         => 'Sayfalar',
 
             'datagrid' => [
                 'delete'              => 'Sil',
@@ -2780,12 +2787,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Geri',
-                    'basic-settings' => 'Temel Ayarlar',
                     'country'        => 'Ülke',
                     'identifier'     => 'Tanımlayıcı',
                     'save-btn'       => 'Vergi Oranını Kaydet',
                     'select-country' => 'Ülke Seç',
                     'select-state'   => 'Eyalet Seç',
+                    'settings'       => 'Ayarlar',
                     'state'          => 'Eyalet',
                     'tax-rate'       => 'Oran',
                     'title'          => 'Vergi Oranı Düzenle',

@@ -25,7 +25,7 @@
             <div class="flex justify-between">
                 <div class="shimmer h-[18px] w-[77px]"></div>
 
-                <div class="shimmer h-[18px] w-[160px]"></div>
+                <div class="shimmer h-[18px] w-40"></div>
             </div>
 
             <div>

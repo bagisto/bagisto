@@ -44,7 +44,10 @@
 </v-modal>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-modal-template">
+    <script
+        type="text/x-template"
+        id="v-modal-template"
+    >
         <div>
             <div @click="toggle">
                 <slot name="toggle">

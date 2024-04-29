@@ -127,17 +127,13 @@
                     <div class="flex items-center justify-between gap-x-4">
                         <div class="flex flex-col gap-1.5">
                             <!-- Review Title -->
-                            <p
-                                class="text-base font-semibold leading-none text-gray-800 dark:text-white"
-                                v-text="record.title"
-                            >
+                            <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
+                                @{{ record.title }}
                             </p>
 
                             <!-- Review Comment -->
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.comment"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.comment }}
                             </p>
                         </div>
 

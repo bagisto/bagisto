@@ -13,7 +13,6 @@ class ShipmentRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Sales\Repositories\ShipmentItemRepository  $orderItemRepository
      * @return void
      */
     public function __construct(

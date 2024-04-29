@@ -17,14 +17,14 @@
                 @lang('admin::app.marketing.promotions.catalog-rules.create.title')
             </p>
 
-            <div class="flex items-center gap-x-2.5">
-                <!-- Back Button -->
-                <a
-                    href="{{ route('admin.marketing.promotions.catalog_rules.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
-                >
-                    @lang('admin::app.marketing.promotions.catalog-rules.create.back-btn')
-                </a>
+                        <div class="flex items-center gap-x-2.5">
+                            <!-- Back Button -->
+                            <a
+                                href="{{ route('admin.marketing.promotions.catalog_rules.index') }}"
+                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
+                            >
+                                @lang('admin::app.marketing.promotions.catalog-rules.create.back-btn')
+                            </a>
 
                 <!-- Save Button -->
                 <button
@@ -466,7 +466,10 @@
         </script>
 
         <!-- v catalog rule condition item form template -->
-        <script type="text/x-template" id="v-catalog-rule-condition-item-template">
+        <script
+            type="text/x-template"
+            id="v-catalog-rule-condition-item-template"
+        >
             <div class="mt-4 flex justify-between gap-4">
                 <div class="flex flex-1 gap-4 max-sm:flex-1 max-sm:flex-wrap">
                     <select

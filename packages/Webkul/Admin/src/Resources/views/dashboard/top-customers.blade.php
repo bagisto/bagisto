@@ -35,24 +35,18 @@
                     <a :href="customer.id ? `{{ route('admin.customers.customers.view', '') }}/${customer.id}` : '#'">
                         <div class="flex justify-between gap-1.5">
                             <div class="flex flex-col">
-                                <p
-                                    class="font-semibold text-gray-600 dark:text-gray-300"
-                                    v-text="customer.full_name"
-                                >
+                                <p class="font-semibold text-gray-600 dark:text-gray-300">
+                                    @{{ customer.full_name }}
                                 </p>
 
-                                <p
-                                    class="text-gray-600 dark:text-gray-300"
-                                    v-text="customer.email"
-                                >
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ customer.email }}
                                 </p>
                             </div>
 
                             <div class="flex flex-col">
-                                <p
-                                    class="font-semibold text-gray-800 dark:text-white"
-                                    v-text="customer.formatted_total"
-                                >
+                                <p class="font-semibold text-gray-800 dark:text-white">
+                                    @{{ customer.formatted_total }}
                                 </p>
 
                                 <p class="text-gray-600 dark:text-gray-300" v-if="customer.orders">

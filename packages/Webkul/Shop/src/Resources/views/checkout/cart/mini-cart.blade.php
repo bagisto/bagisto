@@ -89,20 +89,17 @@
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
 
                                 <a  class="max-w-4/5" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
-                                    <p
-                                        class="text-base font-medium"
-                                        v-text="item.name"
-                                    >
+                                    <p class="text-base font-medium">
+                                        @{{ item.name }}
                                     </p>
                                 </a>
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.after') !!}
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.before') !!}
-                                <p
-                                    class="text-lg"
-                                    v-text="item.formatted_price"
-                                >
+
+                                <p class="text-lg">
+                                    @{{ item.formatted_price }}
                                 </p>
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.after') !!}
@@ -207,8 +204,8 @@
                         <p
                             v-if="! isLoading"
                             class="text-3xl font-semibold"
-                            v-text="cart.formatted_grand_total"
                         >
+                            @{{ cart.formatted_grand_total }}
                         </p>
 
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.after') !!}
@@ -241,7 +238,9 @@
                                 ></path>
                             </svg>
                 
-                            <span class="realative text-3xl font-semibold opacity-0" v-text="cart.formatted_grand_total"></span>
+                            <span class="realative text-3xl font-semibold opacity-0">
+                                @{{ cart.formatted_grand_total }}
+                            </span>
                         </div>
                     </div>
 

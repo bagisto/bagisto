@@ -17,16 +17,12 @@
             >
                 <div class="mb-2.5 flex justify-between gap-5 p-4">
                     <div class="flex flex-col gap-2">
-                        <p
-                            class="text-base font-semibold text-gray-800 dark:text-white"
-                            v-text="type.title"
-                        >
+                        <p class="text-base font-semibold text-gray-800 dark:text-white">
+                            @{{ type.title }}
                         </p>
 
-                        <p
-                            class="text-xs font-medium text-gray-500 dark:text-gray-300"
-                            v-text="type.info"
-                        >
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
+                            @{{ type.info }}
                         </p>
                     </div>
                     
@@ -79,10 +75,8 @@
 
                             <!-- Details -->
                             <div class="grid place-content-start gap-1.5">
-                                <p
-                                    class="text-base font-semibold text-gray-800 dark:text-white"
-                                    v-text="product.name"
-                                >
+                                <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                    @{{ product.name }}
                                 </p>
 
                                 <p class="text-gray-600 dark:text-gray-300">
@@ -94,7 +88,7 @@
                         <!-- Actions -->
                         <div class="grid place-content-start gap-1 text-right">
                             <p class="font-semibold text-gray-800 dark:text-white">
-                                @{{ $admin.formatPrice(product.price) }}    
+                                @{{ $admin.formatPrice(product.price) }}
                             </p>
 
                             <p
@@ -124,10 +118,8 @@
                             @lang('admin::app.catalog.products.edit.links.empty-title')
                         </p>
 
-                        <p
-                            class="text-gray-400"
-                            v-text="type.empty_info"
-                        >
+                        <p class="text-gray-400">
+                            @{{ type.empty_info }}
                         </p>
                     </div>
                 </div>

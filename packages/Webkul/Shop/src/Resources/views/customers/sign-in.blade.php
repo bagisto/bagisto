@@ -63,13 +63,13 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             name="email"
                             rules="required|email"
                             value=""
                             :label="trans('shop::app.customers.login-form.email')"
                             placeholder="email@example.com"
-                            aria-label="@lang('shop::app.customers.login-form.email')"
+                            :aria-label="trans('shop::app.customers.login-form.email')"
                             aria-required="true"
                         />
 
@@ -84,14 +84,14 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="rounded-lg !p-[20px_25px]"
+                            class="px-6 py-5"
                             id="password"
                             name="password"
                             rules="required|min:6"
                             value=""
                             :label="trans('shop::app.customers.login-form.password')"
                             :placeholder="trans('shop::app.customers.login-form.password')"
-                            aria-label="@lang('shop::app.customers.login-form.password')"
+                            :aria-label="trans('shop::app.customers.login-form.password')"
                             aria-required="true"
                         />
 

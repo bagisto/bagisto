@@ -14,7 +14,11 @@
     $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 @endphp
 
-<input type="hidden" name="keys[]" value="{{ json_encode($item) }}">
+<input
+    type="hidden"
+    name="keys[]"
+    value="{{ json_encode($item) }}"
+/>
 
 <x-admin::form.control-group>
     @if (! empty($field['depends']))
@@ -192,7 +196,11 @@
                 $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ($field['default_value'] ?? '');
             @endphp
 
-            <input type="hidden" name="{{ $name }}" value="0" />
+            <input
+                type="hidden"
+                name="{{ $name }}"
+                value="0"
+            />
 
             <label class="relative inline-flex cursor-pointer items-center">
                 <input  
@@ -350,8 +358,8 @@
                                     <option
                                         v-for='(state, index) in countryStates[country]'
                                         :value="state.code"
-                                        v-text="state.default_name"
                                     >
+                                        @{{ state.default_name }}
                                     </option>
                                 </x-admin::form.control-group.control>
                             </x-admin::form.control-group>
@@ -393,7 +401,10 @@
 
 @if ($field['type'] == 'country')
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-country-template">
+        <script
+            type="text/x-template"
+            id="v-country-template"
+        >
             <div>
                 <slot
                     :changeCountry="changeCountry"
@@ -424,7 +435,10 @@
             });
         </script>
 
-        <script type="text/x-template" id="v-state-template">
+        <script
+            type="text/x-template"
+            id="v-state-template"
+        >
             <div>
                 <slot
                     :country="country"

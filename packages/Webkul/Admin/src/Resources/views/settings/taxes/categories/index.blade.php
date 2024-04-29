@@ -78,13 +78,13 @@
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- ID -->
-                            <p v-text="record.id"></p>
+                            <p>@{{ record.id }}</p>
 
                             <!-- Name -->
-                            <p v-text="record.name"></p>
+                            <p>@{{ record.name }}</p>
 
                             <!-- Code -->
-                            <p v-text="record.code"></p>
+                            <p>@{{ record.code }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">

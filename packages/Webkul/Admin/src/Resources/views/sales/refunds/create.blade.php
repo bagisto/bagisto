@@ -1,9 +1,9 @@
 <!-- Refund Vue Component -->
 <v-create-refund>
     <div class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
-        <span class="icon-cancel text-2xl"></span> 
+        <span class="icon-cancel text-2xl"></span>
 
-        @lang('admin::app.sales.orders.view.refund')     
+        @lang('admin::app.sales.orders.view.refund')
     </div>
 </v-create-refund>
 
@@ -22,13 +22,13 @@
                     role="presentation"
                     tabindex="0"
                 >
-                </span> 
+                </span>
 
-                @lang('admin::app.sales.orders.view.refund')     
+                @lang('admin::app.sales.orders.view.refund')
             </div>
 
             <!-- refund Create Drawer -->
-            <x-admin::form  
+            <x-admin::form
                 method="POST"
                 :action="route('admin.sales.refunds.store', $order->id)"
             >
@@ -43,9 +43,9 @@
 
                                 <div class="flex gap-x-2.5">
                                     <!-- Update Quantity Button -->
-                                 
+
                                     @if (bouncer()->hasPermission('sales.refunds.create'))
-                                        <div 
+                                        <div
                                             class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800"
                                             @click="updateQty"
                                         >
@@ -138,7 +138,7 @@
                                             <!-- Information -->
                                             <div class="flex justify-between">
                                                 <!-- Quantity to Refund -->
-                                                <div class="">
+                                                <div>
                                                     <x-admin::form.control-group.label class="required">
                                                         @lang('admin::app.sales.refunds.create.qty-to-refund')
                                                     </x-admin::form.control-group.label>
@@ -197,13 +197,13 @@
                                                         </p>
 
                                                         @if ($order->base_discount_amount > 0)
-                                                            <p class="text-gray-600 dark:text-gray-300"> 
+                                                            <p class="text-gray-600 dark:text-gray-300">
                                                                 {{ core()->formatBasePrice($item->base_discount_amount) }}
                                                             </p>
-                                                        @endif 
+                                                        @endif
 
-                                                        <p class="font-semibold text-gray-600 dark:text-gray-300"> 
-                                                            {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }} 
+                                                        <p class="font-semibold text-gray-600 dark:text-gray-300">
+                                                            {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -279,7 +279,7 @@
                                         @lang('admin::app.sales.refunds.create.subtotal')
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300"> 
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.refunds.create.discount-amount')
                                     </p>
 
@@ -293,28 +293,20 @@
                                 </div>
 
                                 <div class="flex flex-col gap-y-1.5">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.subtotal.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ refund.summary.subtotal.formatted_price }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.discount.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ refund.summary.discount.formatted_price }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.tax.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ refund.summary.tax.formatted_price }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.grand_total.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ refund.summary.grand_total.formatted_price }}
                                     </p>
                                 </div>
                             </div>
