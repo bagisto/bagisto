@@ -53,7 +53,7 @@ trait CoreConfigField
      * @param  array  $field
      * @return mixed
      */
-    public function getValueByRepository($field)
+    public function getOptionsByRepository($field)
     {
         if (isset($field['repository'])) {
             $temp = explode('@', $field['repository']);
@@ -63,7 +63,7 @@ trait CoreConfigField
             return $class->$method();
         }
 
-        return null;
+        return;
     }
 
     /**
