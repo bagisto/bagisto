@@ -713,6 +713,7 @@ return [
                 'type'          => 'text',
                 'validation'    => 'between:1,2',
                 'channel_based' => true,
+                'default_value' => 1,
             ],
         ],
     ], [
