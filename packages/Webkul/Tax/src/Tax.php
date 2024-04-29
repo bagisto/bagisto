@@ -76,8 +76,6 @@ class Tax
 
     /**
      * Get shipping origin from core config.
-     *
-     * @return object
      */
     public function getShippingOriginAddress(): object
     {
@@ -104,8 +102,6 @@ class Tax
 
     /**
      * Get default address from core config.
-     *
-     * @return object
      */
     public function getDefaultAddress(): object
     {
@@ -137,7 +133,6 @@ class Tax
      * @param  object  $address
      * @param  object  $taxCategory
      * @param  \Closure  $operation
-     * @return void
      */
     public function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation): void
     {
