@@ -149,7 +149,6 @@ return [
                 ],
 
                 'edit' => [
-                    'add-address'    => 'ঠিকানা যুক্ত করুন',
                     'city'           => 'শহর',
                     'company-name'   => 'কোম্পানির নাম',
                     'country'        => 'দেশ',

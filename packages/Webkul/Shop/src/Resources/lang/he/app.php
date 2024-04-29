@@ -149,7 +149,6 @@ return [
                 ],
 
                 'edit' => [
-                    'add-address'    => 'הוסף כתובת',
                     'city'           => 'עיר',
                     'company-name'   => 'שם החברה',
                     'country'        => 'מדינה',

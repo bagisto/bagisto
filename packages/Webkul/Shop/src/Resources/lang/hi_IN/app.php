@@ -149,7 +149,6 @@ return [
                 ],
 
                 'edit' => [
-                    'add-address'    => 'पता जोड़ें',
                     'city'           => 'शहर',
                     'company-name'   => 'कंपनी का नाम',
                     'country'        => 'देश',

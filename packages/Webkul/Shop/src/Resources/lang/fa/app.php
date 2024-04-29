@@ -149,7 +149,6 @@ return [
                 ],
 
                 'edit' => [
-                    'add-address'    => 'افزودن آدرس',
                     'city'           => 'شهر',
                     'company-name'   => 'نام شرکت',
                     'country'        => 'کشور',

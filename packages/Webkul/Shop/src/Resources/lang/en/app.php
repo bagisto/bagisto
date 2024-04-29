@@ -149,7 +149,6 @@ return [
                 ],
 
                 'edit' => [
-                    'add-address'    => 'Add Address',
                     'city'           => 'City',
                     'company-name'   => 'Company Name',
                     'country'        => 'Country',

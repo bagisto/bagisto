@@ -149,7 +149,6 @@ return [
                 ],
 
                 'edit' => [
-                    'add-address'    => 'Додати адресу',
                     'city'           => 'Місто',
                     'company-name'   => 'Назва компанії',
                     'country'        => 'Країна',

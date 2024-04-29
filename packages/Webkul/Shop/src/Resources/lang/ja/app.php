@@ -149,7 +149,6 @@ return [
                 ],
 
                 'edit' => [
-                    'add-address'    => '住所を追加',
                     'city'           => '市区町村',
                     'company-name'   => '会社名',
                     'country'        => '国',

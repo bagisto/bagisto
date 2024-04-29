@@ -149,7 +149,6 @@ return [
                 ],
 
                 'edit' => [
-                    'add-address'    => 'ලිපිනය එක් කරන්න',
                     'city'           => 'නගරය',
                     'company-name'   => 'කර්මාන්තයේ නම',
                     'country'        => 'රටේ',
