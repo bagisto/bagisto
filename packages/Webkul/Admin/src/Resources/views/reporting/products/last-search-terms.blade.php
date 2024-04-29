@@ -64,17 +64,11 @@
                                 style="grid-template-columns: repeat(3, minmax(0, 1fr));"
                                 v-for="record in report.statistics"
                             >
-                                <p>
-                                    @{{ record.term }}
-                                </p>
+                                <p>@{{ record.term }}</p>
 
-                                <p>
-                                    @{{ record.results }}
-                                </p>
+                                <p>@{{ record.results }}</p>
 
-                                <p>
-                                    @{{ record.uses }}
-                                </p>
+                                <p>@{{ record.uses }}</p>
                             </div>
                         </div>
                     </template>

@@ -49,7 +49,7 @@
             </div>
 
             <x-admin::datagrid
-                src="{{ route('admin.settings.users.index') }}"
+                :src="route('admin.settings.users.index')"
                 ref="datagrid"
             >
                 @php
@@ -120,7 +120,7 @@
                             :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
                         >
                             <!-- ID -->
-                            <p v-text="record.user_id"></p>
+                            <p>@{{ record.user_id }}</p>
 
                             <!-- User Profile -->
                             <p>
@@ -140,29 +140,25 @@
                                         class="profile-info-icon"
                                         v-else
                                     >
-                                        <button
-                                            class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-blue-400 text-sm font-semibold leading-6 text-white transition-all hover:bg-blue-500 focus:bg-blue-500"
-                                            v-text="record.user_name[0].toUpperCase()"
-                                        >
+                                        <button class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-blue-400 text-sm font-semibold leading-6 text-white transition-all hover:bg-blue-500 focus:bg-blue-500">
+                                            @{{ record.user_name[0].toUpperCase() }}
                                         </button>
                                     </div>
 
-                                    <div
-                                        class="text-sm"
-                                        v-text="record.user_name"
-                                    >
+                                    <div class="text-sm">
+                                        @{{ record.user_name }}
                                     </div>
                                 </div>
                             </p>
 
                             <!-- Status -->
-                            <p v-text="record.status"></p>
+                            <p>@{{ record.status }}</p>
 
                             <!-- Email -->
-                            <p v-text="record.email"></p>
+                            <p>@{{ record.email }}</p>
 
                             <!-- Role -->
-                            <p v-text="record.role_name"></p>
+                            <p>@{{ record.role_name }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">
@@ -359,7 +355,11 @@
                                 </template>
 
                                 <template v-else>
-                                    <input type="hidden" name="status" v-model="data.user.status">
+                                    <input
+                                        type="hidden"
+                                        name="status"
+                                        v-model="data.user.status"
+                                    />
                                 </template>
                             </div>
 

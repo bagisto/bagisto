@@ -36,6 +36,8 @@ return [
         'description-text' => 'Lister toutes les notifications',
         'marked-success'   => 'Notification marquée avec succès',
         'no-record'        => 'Aucun enregistrement trouvé',
+        'of'               => 'de',
+        'per-page'         => 'Par page',
         'read-all'         => 'Marquer comme lu',
         'title'            => 'Notifications',
         'view-all'         => 'Voir tout',
@@ -232,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Ajouter une adresse',
-                        'add-new-address'  => 'Ajouter une nouvelle adresse',
                         'add-new'          => 'Ajouter une nouvelle adresse',
+                        'add-new-address'  => 'Ajouter une nouvelle adresse',
                         'addresses'        => 'Adresses',
                         'back'             => 'Retour',
                         'billing-address'  => 'Adresse de facturation',
@@ -248,8 +250,8 @@ return [
                         'postcode'         => 'Code postal',
                         'proceed'          => 'Continuer',
                         'same-as-billing'  => 'Utiliser la même adresse pour la livraison?',
-                        'save-address'     => 'Enregistrer dans le carnet d\'adresses',
                         'save'             => 'Enregistrer',
+                        'save-address'     => 'Enregistrer dans le carnet d\'adresses',
                         'select-country'   => 'Sélectionner un pays',
                         'select-state'     => 'Sélectionner un état',
                         'shipping-address' => 'Adresse de livraison',
@@ -257,6 +259,7 @@ return [
                         'street-address'   => 'Adresse',
                         'telephone'        => 'Téléphone',
                         'title'            => 'Adresse',
+                        'vat-id'           => 'TVA',
                     ],
 
                     'payment' => [
@@ -1060,6 +1063,7 @@ return [
                 'position'              => 'Position',
                 'price'                 => 'Prix',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'L\'expression doit être entre guillemets doubles.',
                 'save-btn'              => 'Enregistrer l\'attribut',
                 'select'                => 'Sélectionner',
                 'select-type'           => 'Sélectionner le type d\'attribut',
@@ -1123,6 +1127,7 @@ return [
                 'position'              => 'Position',
                 'price'                 => 'Prix',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'L\'expression doit être entre guillemets doubles.',
                 'save-btn'              => 'Enregistrer l\'attribut',
                 'select'                => 'Sélectionner',
                 'select-type'           => 'Sélectionner le type d\'attribut',
@@ -2332,8 +2337,10 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => 'Le :name a déjà été pris.',
+            'already-taken' => 'Le :name est déjà pris.',
             'create-btn'    => 'Créer une page',
+            'channel'       => 'Canal',
+            'language'      => 'Langue',
             'title'         => 'Pages',
 
             'datagrid' => [
@@ -2779,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Retour',
-                    'basic-settings' => 'Paramètres de base',
                     'country'        => 'Pays',
                     'identifier'     => 'Identifiant',
                     'save-btn'       => 'Enregistrer le taux de taxe',
                     'select-country' => 'Sélectionner un pays',
                     'select-state'   => 'Sélectionner un État',
+                    'settings'       => 'Paramètres',
                     'state'          => 'État',
                     'tax-rate'       => 'Taux',
                     'title'          => 'Modifier le taux de taxe',

@@ -36,6 +36,8 @@ return [
         'description-text' => 'Wypisz wszystkie powiadomienia',
         'marked-success'   => 'Powiadomienie oznaczone jako przeczytane',
         'no-record'        => 'Brak dostępnych powiadomień',
+        'of'               => 'z',
+        'per-page'         => 'na stronę',
         'read-all'         => 'Oznacz jako przeczytane',
         'title'            => 'Powiadomienia',
         'view-all'         => 'Zobacz wszystkie',
@@ -232,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Dodaj adres',
-                        'add-new-address'  => 'Dodaj nowy adres',
                         'add-new'          => 'Dodaj nowy adres',
+                        'add-new-address'  => 'Dodaj nowy adres',
                         'addresses'        => 'Adresy',
                         'back'             => 'Powrót',
                         'billing-address'  => 'Adres rozliczeniowy',
@@ -248,8 +250,8 @@ return [
                         'postcode'         => 'Kod pocztowy',
                         'proceed'          => 'Przejdź dalej',
                         'same-as-billing'  => 'Czy użyć tego samego adresu dla dostawy?',
-                        'save-address'     => 'Zapisz ten adres w książce adresowej',
                         'save'             => 'Zapisz',
+                        'save-address'     => 'Zapisz ten adres w książce adresowej',
                         'select-country'   => 'Wybierz kraj',
                         'select-state'     => 'Wybierz stan',
                         'shipping-address' => 'Adres dostawy',
@@ -257,6 +259,7 @@ return [
                         'street-address'   => 'Adres ulicy',
                         'telephone'        => 'Telefon',
                         'title'            => 'Adres',
+                        'vat-id'           => 'NIP',
                     ],
 
                     'payment' => [
@@ -1060,6 +1063,7 @@ return [
                 'position'              => 'Pozycja',
                 'price'                 => 'Cena',
                 'regex'                 => 'Wyrażenie Regularne',
+                'regex-info'            => 'Wyrażenie powinno być w podwójnych cudzysłowach.',
                 'save-btn'              => 'Zapisz Atrybut',
                 'select'                => 'Wybór',
                 'select-type'           => 'Wybierz Typ Atrybutu',
@@ -1123,6 +1127,7 @@ return [
                 'position'              => 'Pozycja',
                 'price'                 => 'Cena',
                 'regex'                 => 'Wyrażenie Regularne',
+                'regex-info'            => 'Wyrażenie powinno być w podwójnych cudzysłowach.',
                 'save-btn'              => 'Zapisz Atrybut',
                 'select'                => 'Wybierz',
                 'select-type'           => 'Wybierz Rodzaj Atrybutu',
@@ -2332,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name zostało już zajęte.',
-            'create-btn'        => 'Utwórz stronę',
-            'title'             => 'Strony',
+            'already-taken' => 'Strona o nazwie :name już istnieje.',
+            'create-btn'    => 'Utwórz stronę',
+            'channel'       => 'Kanał',
+            'language'      => 'Język',
+            'title'         => 'Strony',
 
             'datagrid' => [
                 'delete'              => 'Usuń',
@@ -2779,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Wróć',
-                    'basic-settings' => 'Podstawowe Ustawienia',
                     'country'        => 'Kraj',
                     'identifier'     => 'Identyfikator',
                     'save-btn'       => 'Zapisz Stawkę Podatku',
                     'select-country' => 'Wybierz Kraj',
                     'select-state'   => 'Wybierz Stan',
+                    'settings'       => 'Ustawienia',
                     'state'          => 'Stan',
                     'tax-rate'       => 'Stawka',
                     'title'          => 'Edytuj Stawkę Podatku',

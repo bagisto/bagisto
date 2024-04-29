@@ -50,7 +50,10 @@
 </v-drawer>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-drawer-template">
+    <script
+        type="text/x-template"
+        id="v-drawer-template"
+    >
         <div>
             <!-- Toggler -->
             <div @click="open">

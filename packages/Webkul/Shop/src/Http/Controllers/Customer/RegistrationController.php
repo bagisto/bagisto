@@ -19,7 +19,6 @@ class RegistrationController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customer
      * @return void
      */
     public function __construct(

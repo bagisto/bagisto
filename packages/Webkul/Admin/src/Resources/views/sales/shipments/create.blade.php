@@ -93,7 +93,7 @@
                                     <x-admin::form.control-group.error control-name="shipment[track_number]" />
                                 </x-admin::form.control-group>
                             </div>
-                            
+
                             <!-- Resource -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">

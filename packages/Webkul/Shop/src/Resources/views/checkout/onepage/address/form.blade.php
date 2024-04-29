@@ -153,8 +153,8 @@
                         <option
                             v-for="country in countries"
                             :value="country.code"
-                            v-text="country.name"
                         >
+                            @{{ country.name }}
                         </option>
                     </x-shop::form.control-group.control>
 

@@ -57,7 +57,7 @@
                                     rules="required|email"
                                     :label="trans('shop::app.checkout.login.email')"
                                     placeholder="email@example.com"
-                                    aria-label="@lang('shop::app.checkout.login.email')"
+                                    :aria-label="trans('shop::app.checkout.login.email')"
                                     aria-required="true"
                                 />
 
@@ -77,7 +77,7 @@
                                     rules="required|min:6"
                                     :label="trans('shop::app.checkout.login.password')"
                                     :placeholder="trans('shop::app.checkout.login.password')"
-                                    aria-label="@lang('shop::app.checkout.login.password')"
+                                    :aria-label="trans('shop::app.checkout.login.password')"
                                     aria-required="true"
                                 />
 

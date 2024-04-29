@@ -1,7 +1,7 @@
 @props(['attributeCount' => 3, 'productCount' => 3])
 
 <div class="flex items-center justify-between">
-    <h2 class="shimmer h-[39px] w-[200px]"></h2>
+    <h2 class="shimmer h-8 w-[200px]"></h2>
 
     <div class="shimmer h-[50px] w-[150px] rounded-xl"></div>
 </div>
