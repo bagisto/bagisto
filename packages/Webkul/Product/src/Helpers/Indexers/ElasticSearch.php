@@ -61,7 +61,6 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Create a new indexer instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $channelRepository
      * @return void
      */
     public function __construct(

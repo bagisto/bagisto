@@ -407,6 +407,12 @@
                                 }
                             })
                                 .then(response => {
+                                    if (! response.data.data) {
+                                        window.location.reload();
+
+                                        return;
+                                    }
+
                                     this.$emit('remove-from-cart', response.data.data);
 
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });

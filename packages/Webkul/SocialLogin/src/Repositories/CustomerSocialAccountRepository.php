@@ -19,13 +19,11 @@ class CustomerSocialAccountRepository extends Repository
         protected CustomerGroupRepository $customerGroupRepository,
         Container $container
     ) {
-        $this->_config = request('_config');
-
         parent::__construct($container);
     }
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
      */
     public function model(): string
     {

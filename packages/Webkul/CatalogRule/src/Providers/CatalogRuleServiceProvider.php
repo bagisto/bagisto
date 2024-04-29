@@ -30,7 +30,7 @@ class CatalogRuleServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the console commands of this package
+     * Register the console commands of this package.
      */
     protected function registerCommands()
     {

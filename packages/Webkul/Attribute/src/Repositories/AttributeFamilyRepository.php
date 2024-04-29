@@ -48,11 +48,9 @@ class AttributeFamilyRepository extends Repository
             $attributeGroup = $family->attribute_groups()->create($group);
 
             foreach ($customAttributes as $key => $attribute) {
-                if (isset($attribute['id'])) {
-                    $attributeModel = $this->attributeRepository->find($attribute['id']);
-                } else {
-                    $attributeModel = $this->attributeRepository->findOneByField('code', $attribute['code']);
-                }
+                $attributeModel = isset($attribute['id'])
+                    ? $this->attributeRepository->find($attribute['id'])
+                    : $this->attributeRepository->findOneByField('code', $attribute['code']);
 
                 $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
             }
