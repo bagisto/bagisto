@@ -12,10 +12,10 @@
     </x-slot>
 
     <!-- Breadcrumb -->
-    <div class="flex justify-center mt-5 max-lg:hidden">
+    <div class="mt-5 flex justify-center max-lg:hidden">
         {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.before') !!}
 
-		<div class="flex gap-x-2.5 items-center">
+		<div class="flex items-center gap-x-2.5">
             <x-shop::breadcrumbs name="compare" />
 		</div>
 
@@ -23,7 +23,7 @@
 	</div>
 
     <!-- Compare Component -->
-    <div class="container px-[60px] max-lg:px-8 max-sm:px-4 mt-8">
+    <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:px-4">
         <v-compare>
             <!---- Shimmer Effect -->
             <x-shop::shimmer.compare :attributeCount="count($comparableAttributes)" />
@@ -39,7 +39,7 @@
                 {!! view_render_event('bagisto.shop.customers.account.compare.before') !!}
 
                 <div v-if="! isLoading">
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center justify-between">
 
                         {!! view_render_event('bagisto.shop.customers.account.compare.title.before') !!}
 
@@ -52,7 +52,7 @@
                         {!! view_render_event('bagisto.shop.customers.account.compare.remove_all.before') !!}
 
                         <div
-                            class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9] font-normal whitespace-nowrap"
+                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-[#E9E9E9] px-5 py-3 font-normal"
                             v-if="items.length"
                             @click="removeAll"
                         >
@@ -64,13 +64,13 @@
                     </div>
 
                     <div
-                        class="grid mt-16 overflow-auto journal-scroll"
+                        class="journal-scroll mt-16 grid overflow-auto"
                         v-if="items.length"
                     >
                         <template v-for="attribute in comparableAttributes">
                             <!-- Product Card -->
                             <div
-                                class="flex items-center max-w-full border-b border-[#E9E9E9]"
+                                class="flex max-w-full items-center border-b border-[#E9E9E9]"
                                 v-if="attribute.code == 'product'"
                             >
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.before') !!}
@@ -83,17 +83,17 @@
 
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.after') !!}
 
-                                <div class="flex gap-3 ltr:border-l-[1px] rtl:border-r-[1px] border-[#E9E9E9] max-sm:border-0">
+                                <div class="flex gap-3 border-[#E9E9E9] max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
-                                        class="relative group"
+                                        class="group relative"
                                         v-for="product in items"
                                     >
                                         <span
-                                            class="hidden absolute top-16 ltr:right-5 rtl:left-5 justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-2xl group-hover:flex group-hover:z-[1] transition-all duration-300"
+                                            class="icon-cancel absolute top-16 hidden h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl transition-all duration-300 group-hover:z-[1] group-hover:flex ltr:right-5 rtl:left-5"
                                             @click="remove(product.id)"
                                         ></span>
 
-                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 ltr:pr-0 rtl:pl-0 p-5 max-sm:ltr:pl-0 max-sm:rtl:pr-0" />
+                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] p-5 pt-0 ltr:pr-0 max-sm:ltr:pl-0 rtl:pl-0 max-sm:rtl:pr-0" />
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
 
                             <!-- Comparable Attributes -->
                             <div
-                                class="flex items-center max-w-full border-b border-[#E9E9E9] last:border-none"
+                                class="flex max-w-full items-center border-b border-[#E9E9E9] last:border-none"
                                 v-else
                             >
                                 <div class="min-w-[304px] max-w-full max-sm:hidden">
@@ -111,12 +111,12 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-3 ltr:border-l-[1px] rtl:border-r-[1px] border-[#E9E9E9] max-sm:border-0">
+                                <div class="flex gap-3 border-[#E9E9E9] max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
-                                        class="w-[311px] max-w-[311px] ltr:pr-0 rtl:pl-0 p-5 max-sm:ltr:pl-0 max-sm:rtl:pr-0"
+                                        class="w-[311px] max-w-[311px] p-5 ltr:pr-0 max-sm:ltr:pl-0 rtl:pl-0 max-sm:rtl:pr-0"
                                         v-for="(product, index) in items"
                                     >
-                                        <p class="hidden mb-1.5 text-sm font-medium max-sm:block">
+                                        <p class="mb-1.5 hidden text-sm font-medium max-sm:block">
                                             @{{ attribute.name ?? attribute.admin_name }} :
                                         </p>
 
@@ -134,7 +134,7 @@
                     </div>
 
                     <div
-                        class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center"
+                        class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center"
                         v-else
                     >
                         <img

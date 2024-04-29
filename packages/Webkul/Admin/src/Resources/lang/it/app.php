@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'Pagamento in Sospeso',
             'processing'      => 'Ordine in Elaborazione',
         ],
-
-        'status'  => [
-            'all'        => 'Tutti',
-            'canceled'   => 'Annullato',
-            'closed'     => 'Chiuso',
-            'completed'  => 'Completato',
-            'pending'    => 'In Sospeso',
-            'processing' => 'In Elaborazione',
-        ],
     ],
 
     'account' => [
@@ -233,7 +224,6 @@ return [
                             'empty-info'    => 'Nessun prodotto disponibile per il termine di ricerca.',
                             'empty-title'   => 'Nessun prodotto trovato',
                             'product-image' => 'Immagine del Prodotto',
-                            'qty'           => ':qty Disponibili',
                             'qty'           => 'Quantità',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Cerca Prodotti',
@@ -266,7 +256,6 @@ return [
                         'state'            => 'Stato',
                         'street-address'   => 'Indirizzo',
                         'telephone'        => 'Telefono',
-                        'title'            => 'Indirizzo',
                         'title'            => 'Indirizzo',
                     ],
 
@@ -3599,6 +3588,10 @@ return [
                     'admin-name'             => 'Nome Admin',
                     'admin-name-tip'         => 'Questo nome verrà visualizzato in tutte le email degli amministratori',
                     'admin-page-limit'       => 'Elementi predefiniti per pagina (Admin)',
+                    'contact-email'          => 'Email di contatto',
+                    'contact-email-tip'      => 'L’indirizzo email sarà mostrato in fondo alle tue email',
+                    'contact-name'           => 'Nome di contatto',
+                    'contact-name-tip'       => 'Questo nome sarà mostrato in fondo alle tue email',
                     'email-sender-name'      => 'Nome Mittente Email',
                     'email-sender-name-tip'  => 'Questo nome verrà visualizzato nella casella di posta dei clienti',
                     'info'                   => 'Imposta il nome del mittente email, l\'indirizzo email del negozio, il nome dell\'amministratore e l\'indirizzo email dell\'amministratore.',

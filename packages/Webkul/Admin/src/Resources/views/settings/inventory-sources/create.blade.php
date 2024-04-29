@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.inventory-sources.create.add-title')
     </x-slot>
@@ -19,28 +18,28 @@
             <div>
                 {!! view_render_event('bagisto.admin.settings.inventory_sources.create.before') !!}
 
-                <x-admin::form 
+                <x-admin::form
                     :action="route('admin.settings.inventory_sources.store')"
                     enctype="multipart/form-data"
                 >
                     {!! view_render_event('bagisto.admin.settings.inventory_sources.create.create_form_controls.before') !!}
 
-                    <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                        <p class="text-xl text-gray-800 dark:text-white font-bold">
+                    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+                        <p class="text-xl font-bold text-gray-800 dark:text-white">
                             @lang('admin::app.settings.inventory-sources.create.add-title')
                         </p>
 
-                        <div class="flex gap-x-2.5 items-center">
+                        <div class="flex items-center gap-x-2.5">
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.settings.inventory_sources.index') }}"
-                                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                             >
                                 @lang('admin::app.marketing.communications.campaigns.create.back-btn')
                             </a>
-                                
+
                             <!-- Save Inventory -->
-                            <button 
+                            <button
                                 type="submit"
                                 class="primary-button"
                             >
@@ -48,17 +47,17 @@
                             </button>
                         </div>
                     </div>
-                
+
                     <!-- Full Pannel -->
-                    <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+                    <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                         <!-- Left Section -->
-                        <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                        <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.general.before') !!}
 
                             <!-- General -->
-                            <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
-                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                            <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                                <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.settings.inventory-sources.create.general')
                                 </p>
 
@@ -108,7 +107,7 @@
 
                                     <x-admin::form.control-group.control
                                         type="textarea"
-                                        class="text-gray-600 dark:text-gray-300 !mb-0"
+                                        class="!mb-0 text-gray-600 dark:text-gray-300"
                                         id="description"
                                         name="description"
                                         :value="old('description')"
@@ -125,8 +124,8 @@
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.contact_info.before') !!}
 
                             <!-- Contact Information -->
-                            <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
-                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                            <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                                <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.settings.inventory-sources.create.contact-info')
                                 </p>
 
@@ -211,8 +210,8 @@
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.address.before') !!}
 
                             <!-- Source Address -->
-                            <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                            <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                                <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.settings.inventory-sources.create.address')
                                 </p>
 
@@ -221,7 +220,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.country')
                                     </x-admin::form.control-group.label>
-                    
+
                                     <x-admin::form.control-group.control
                                         type="select"
                                         id="country"
@@ -234,23 +233,23 @@
                                         <option value="">
                                             @lang('admin::app.settings.inventory-sources.create.select-country')
                                         </option>
-                    
+
                                         @foreach (core()->countries() as $country)
                                             <option value="{{ $country->code }}">
                                                 {{ $country->name }}
                                             </option>
                                         @endforeach
                                     </x-admin::form.control-group.control>
-                    
+
                                     <x-admin::form.control-group.error control-name="country" />
                                 </x-admin::form.control-group>
-                                        
+
                                 <!-- State -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.state')
                                     </x-admin::form.control-group.label>
-                    
+
                                     <template v-if="haveStates()">
                                         <x-admin::form.control-group.control
                                             type="select"
@@ -265,7 +264,7 @@
                                                 @lang('admin::app.settings.inventory-sources.create.select-state')
                                             </option>
 
-                                            <option 
+                                            <option
                                                 v-for='(state, index) in countryStates[country]'
                                                 :value="state.code"
                                                 v-text="state.default_name"
@@ -273,7 +272,7 @@
                                             </option>
                                         </x-admin::form.control-group.control>
                                     </template>
-                    
+
                                     <template v-else>
                                         <x-admin::form.control-group.control
                                             type="text"
@@ -351,9 +350,9 @@
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.address.after') !!}
 
                         </div>
-                
+
                         <!-- Right Section -->
-                        <div class="flex flex-col gap-2 w-[360px] max-w-full">
+                        <div class="flex w-[360px] max-w-full flex-col gap-2">
 
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.accordion.settings.before') !!}
 
@@ -361,12 +360,12 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between">
-                                        <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
+                                        <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                             @lang('admin::app.settings.inventory-sources.create.settings')
                                         </p>
                                     </div>
                                 </x-slot>
-                            
+
                                 <x-slot:content>
                                     <!-- Latitude -->
                                     <x-admin::form.control-group>
@@ -446,7 +445,7 @@
 
                         </div>
                     </div>
-            
+
                     {!! view_render_event('bagisto.admin.settings.inventory_sources.create.create_form_controls.after') !!}
 
                 </x-admin::form>

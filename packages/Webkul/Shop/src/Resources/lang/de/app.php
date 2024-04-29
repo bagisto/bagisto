@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'Produkte hier suchen',
                 'sign-in'           => 'Anmelden',
                 'sign-up'           => 'Registrieren',
+                'submit'            => 'Absenden',
                 'title'             => 'Konto',
                 'welcome'           => 'Willkommen',
                 'welcome-guest'     => 'Willkommen Gast',
                 'wishlist'          => 'Wunschliste',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Standard-Sprache',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -369,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Aktion auswählen',
-                    'select-option' => 'Option auswählen',
-                    'submit'        => 'Senden',
-                ],
+                'length-of' => 'Länge von',
+                'results'   => 'Gesamtergebnisse',
+                'selected'  => 'Ausgewählte Ergebnisse',
 
-                'filter' => [
-                    'title' => 'Filter',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Sie müssen eine Massenaktion auswählen.',
+                    'must-select-a-mass-action-option' => 'Sie müssen eine Massenaktionsoption auswählen.',
+                    'no-records-selected'              => 'Keine Datensätze ausgewählt.',
+                    'select-action'                    => 'Aktion auswählen',
                 ],
 
                 'search' => [
                     'title' => 'Suche',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Filter anwenden',
+                'filter' => [
+                    'apply-filter' => 'Filter anwenden',
+                    'title'        => 'Filter',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Mindestens 2 Zeichen eingeben...',
-                        'no-results'        => 'Keine Ergebnisse gefunden...',
+                    'dropdown' => [
+                        'select' => 'Auswählen',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Geben Sie mindestens 2 Zeichen ein...',
+                            'no-results'         => 'Keine Ergebnisse gefunden...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Alles löschen',
-                    'title'     => 'Benutzerdefinierte Filter',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Letzter Monat',
-                    'last-six-months'   => 'Letzte 6 Monate',
-                    'last-three-months' => 'Letzte 3 Monate',
-                    'this-month'        => 'Dieser Monat',
-                    'this-week'         => 'Diese Woche',
-                    'this-year'         => 'Dieses Jahr',
-                    'today'             => 'Heute',
-                    'yesterday'         => 'Gestern',
+                    'custom-filters' => [
+                        'clear-all' => 'Alles löschen',
+                    ],
                 ],
             ],
 
@@ -415,12 +414,12 @@ return [
                 'actions'              => 'Aktionen',
                 'next-page'            => 'Nächste Seite',
                 'no-records-available' => 'Keine Datensätze verfügbar.',
-                'of'                   => 'von :total Einträgen',
+                'of'                   => 'von insgesamt :total Elementen',
                 'page-navigation'      => 'Seitennavigation',
                 'page-number'          => 'Seitennummer',
                 'previous-page'        => 'Vorherige Seite',
-                'showing'              => 'Zeige :firstItem',
-                'to'                   => 'bis :lastItem',
+                'showing'              => 'Zeigt :firstItem bis :lastItem',
+                'to'                   => 'bis',
             ],
         ],
 
@@ -615,6 +614,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Weiter zur Kasse',
             'illegal'                   => 'Die Menge darf nicht weniger als eins sein.',
+            'inactive-add'              => 'Inaktive Artikel können nicht zum Warenkorb hinzugefügt werden.',
             'inactive'                  => 'Der Artikel wurde deaktiviert und wurde daher aus dem Warenkorb entfernt.',
             'inventory-warning'         => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
             'item-add-to-cart'          => 'Artikel erfolgreich hinzugefügt',
@@ -677,6 +677,16 @@ return [
                 'proceed-to-checkout' => 'Zur Kasse gehen',
                 'sub-total'           => 'Zwischensumme',
                 'tax'                 => 'Steuer',
+
+                'estimate-shipping' => [
+                    'country'        => 'Land',
+                    'info'           => 'Geben Sie Ihr Ziel ein, um eine Schätzung für Versand und Steuer zu erhalten.',
+                    'postcode'       => 'PLZ/Postleitzahl',
+                    'select-country' => 'Land auswählen',
+                    'select-state'   => 'Bundesland auswählen',
+                    'state'          => 'Bundesland',
+                    'title'          => 'Versand und Steuer schätzen',
+                ],
             ],
         ],
 
@@ -757,11 +767,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Schreiben Sie uns eine Nachricht und wir werden uns so schnell wie möglich bei Ihnen melden',
+            'desc'          => 'Was beschäftigt Sie?',
+            'describe-here' => 'Hier beschreiben',
+            'email'         => 'E-Mail',
+            'message'       => 'Nachricht',
+            'name'          => 'Name',
+            'phone-number'  => 'Telefonnummer',
+            'submit'        => 'Absenden',
+            'title'         => 'Kontaktieren Sie uns',
+        ],
+
         'index' => [
             'offer'               => 'Erhalten Sie BIS ZU 40% RABATT auf Ihre 1. Bestellung. JETZT EINKAUFEN',
             'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
             'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
         ],
+
+        'thanks-for-contact' => 'Vielen Dank für Ihre Kontaktaufnahme. Wir werden Ihnen sehr bald antworten.',
     ],
 
     'partials' => [
@@ -861,6 +885,14 @@ return [
                 'subject'     => 'Sie! Abonnement unseres Newsletters',
                 'unsubscribe' => 'Abmelden',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'über das Kontaktformular der Website',
+            'reply-to-mail'   => 'bitte antworten Sie auf diese E-Mail.',
+            'reach-via-phone' => 'Alternativ können Sie uns telefonisch erreichen unter',
+            'inquiry-from'    => 'Anfrage von',
+            'to'              => 'Um Kontakt aufzunehmen mit',
         ],
 
         'orders' => [

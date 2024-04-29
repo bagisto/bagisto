@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'Pago Pendiente',
             'processing'      => 'Pedido en Proceso',
         ],
-
-        'status'  => [
-            'all'        => 'Todos',
-            'canceled'   => 'Cancelado',
-            'closed'     => 'Cerrado',
-            'completed'  => 'Completado',
-            'pending'    => 'Pendiente',
-            'processing' => 'Procesando',
-        ],
     ],
 
     'account' => [
@@ -233,7 +224,6 @@ return [
                             'empty-info'    => 'No hay productos disponibles para el término de búsqueda.',
                             'empty-title'   => 'No se encontraron productos',
                             'product-image' => 'Imagen del producto',
-                            'qty'           => ':qty disponible',
                             'qty'           => 'Cantidad',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Buscar productos',
@@ -266,7 +256,6 @@ return [
                         'state'            => 'Estado',
                         'street-address'   => 'Dirección',
                         'telephone'        => 'Teléfono',
-                        'title'            => 'Dirección',
                         'title'            => 'Dirección',
                     ],
 
@@ -3599,6 +3588,10 @@ return [
                     'admin-name'            => 'Nombre del Administrador',
                     'admin-name-tip'        => 'Este nombre se mostrará en todos los correos electrónicos del administrador.',
                     'admin-page-limit'      => 'Límite de Páginas Predeterminado por Página (Administrador)',
+                    'contact-email'         => 'Correo Electrónico de Contacto',
+                    'contact-email-tip'     => 'Esta dirección de correo electrónico se utilizará para recibir correos electrónicos en este canal.',
+                    'contact-name'          => 'Nombre de Contacto',
+                    'contact-name-tip'      => 'Este nombre se mostrará en todos los correos electrónicos de contacto.',
                     'email-sender-name'     => 'Nombre del Remitente del Correo Electrónico',
                     'email-sender-name-tip' => 'Este nombre se mostrará en la bandeja de entrada del cliente.',
                     'info'                  => 'Establezca el nombre del remitente de correo electrónico, la dirección de correo electrónico de la tienda, el nombre del administrador y la dirección de correo electrónico del administrador.',

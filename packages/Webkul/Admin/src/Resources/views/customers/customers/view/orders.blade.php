@@ -1,12 +1,12 @@
-<div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+<div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
     <div class="flex justify-between">
         <!-- Total Order Count -->
-        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+        <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
             @lang('admin::app.customers.customers.view.orders.count', ['count' => count($customer->orders)])
         </p>
 
         <!-- Total Order Revenue -->
-        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+        <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
             @lang('admin::app.customers.customers.view.orders.total-revenue', ['revenue' => core()->formatPrice($customer->orders->whereNotIn('status', ['canceled', 'closed'])->sum('base_grand_total_invoiced'))])
         </p>
     </div>
@@ -18,11 +18,22 @@
         ])"
     >
         <!-- Datagrid Header -->
-        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading, available }">
-            <template v-if="! isLoading">
-                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-4 py-2.5 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <template #header="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+            </template>
+
+            <template v-else>
+                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center border-b border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
                     <div
-                        class="flex gap-2.5 items-center select-none"
+                        class="flex select-none items-center gap-2.5"
                         v-for="(columnGroup, index) in [['increment_id', 'created_at', 'status'], ['base_grand_total', 'method', 'channel_name'], ['full_name', 'customer_email', 'location', 'image']]"
                     >
                         <p class="text-gray-600 dark:text-gray-300">
@@ -31,20 +42,20 @@
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
-                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == column,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                            'font-medium text-gray-800 dark:text-white': applied.sort.column == column,
+                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': available.columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
-                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                            available.columns.find(columnTemp => columnTemp.index === column)?.sortable ? sort(available.columns.find(columnTemp => columnTemp.index === column)): {}
                                         "
                                     >
-                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                        @{{ available.columns.find(columnTemp => columnTemp.index === column)?.label }}
                                     </span>
                                 </template>
                             </span>
 
                             <i
-                                class="ltr:ml-1.5 rtl:mr-1.5 text-base  text-gray-800 dark:text-white align-text-bottom"
+                                class="align-text-bottom text-base text-gray-800 dark:text-white ltr:ml-1.5 rtl:mr-1.5"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -52,26 +63,32 @@
                     </div>
                 </div>
             </template>
-
-            <!-- Datagrid Head Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
-            </template>
         </template>
 
-        <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading, available }">
-            <template v-if="! isLoading">
+        <template #body="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div
                     v-if="available.meta.total"
-                    class="row grid grid-cols-4 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                    v-for="record in records"
+                    class="row grid grid-cols-4 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                    v-for="record in available.records"
                 >
                     <!-- Order Id, Created, Status Section -->
                     <div class="">
                         <div class="flex gap-2.5">
                             <div class="flex flex-col gap-1.5">
                                 <p
-                                    class="text-base text-gray-800 dark:text-white font-semibold"
+                                    class="text-base font-semibold text-gray-800 dark:text-white"
                                 >
                                     @{{ "@lang('admin::app.sales.orders.index.datagrid.id')".replace(':id', record.increment_id) }}
                                 </p>
@@ -100,7 +117,7 @@
                     <!-- Total Amount, Pay Via, Channel -->
                     <div class="">
                         <div class="flex flex-col gap-1.5">
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @{{ $admin.formatPrice(record.base_grand_total) }}
                             </p>
 
@@ -120,7 +137,7 @@
                     <div class="">
                         <div class="flex flex-col gap-1.5">
                             <p
-                                class="text-base  text-gray-800 dark:text-white"
+                                class="text-base text-gray-800 dark:text-white"
                                 v-text="record.full_name"
                             >
                             </p>
@@ -139,33 +156,28 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-x-2 justify-end items-center">
+                    <div class="flex items-center justify-end gap-x-2">
                         <a :href="`{{ route('admin.sales.orders.view', '') }}/${record.id}`">
-                            <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
+                            <span class="icon-sort-right cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                         </a>
                     </div>
                 </div>
 
                 <div v-else class="table-responsive grid w-full">
-                    <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5">
+                    <div class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10">
                         <!-- Placeholder Image -->
                         <img
                             src="{{ bagisto_asset('images/empty-placeholders/orders.svg') }}"
-                            class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                            class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                         />
 
                         <div class="flex flex-col items-center">
-                            <p class="text-base text-gray-400 font-semibold">
+                            <p class="text-base font-semibold text-gray-400">
                                 @lang('admin::app.customers.customers.view.datagrid.orders.empty-order')
                             </p>
                         </div>
                     </div>
                 </div>
-            </template>
-
-            <!-- Datagrid Body Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
             </template>
         </template>
     </x-admin::datagrid>

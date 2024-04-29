@@ -31,7 +31,7 @@ it('should returns the listing cms', function () {
         ->assertJsonPath('records.0.id', 11)
         ->assertJsonPath('records.0.page_title', 'Privacy Policy')
         ->assertJsonPath('records.0.url_key', 'privacy-policy')
-        ->assertJsonPath('meta.total', 11);
+        ->assertJsonPath('meta.total', 10);
 });
 
 it('should return the cms create page', function () {

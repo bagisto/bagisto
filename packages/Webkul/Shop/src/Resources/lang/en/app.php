@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'Search products here',
                 'sign-in'           => 'Sign In',
                 'sign-up'           => 'Sign Up',
+                'submit'            => 'Submit',
                 'title'             => 'Account',
                 'welcome'           => 'Welcome',
                 'welcome-guest'     => 'Welcome Guest',
                 'wishlist'          => 'Wishlist',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Default locale',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -369,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Select Action',
-                    'select-option' => 'Select Option',
-                    'submit'        => 'Submit',
-                ],
+                'length-of' => ':length of',
+                'results'   => ':total Results',
+                'selected'  => ':total Selected',
 
-                'filter' => [
-                    'title' => 'Filter',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'You must select a mass action.',
+                    'must-select-a-mass-action-option' => 'You must select a mass action\'s option.',
+                    'no-records-selected'              => 'No records have been selected.',
+                    'select-action'                    => 'Select Action',
                 ],
 
                 'search' => [
                     'title' => 'Search',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Apply Filters',
+                'filter' => [
+                    'apply-filter' => 'Apply Filters',
+                    'title'        => 'Filter',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Type atleast 2 characters...',
-                        'no-results'        => 'No result found...',
+                    'dropdown' => [
+                        'select' => 'Select',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Type at-least 2 characters...',
+                            'no-results'         => 'No result found...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Clear All',
-                    'title'     => 'Custom Filters',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Last Month',
-                    'last-six-months'   => 'Last 6 Months',
-                    'last-three-months' => 'Last 3 Months',
-                    'this-month'        => 'This Month',
-                    'this-week'         => 'This Week',
-                    'this-year'         => 'This Year',
-                    'today'             => 'Today',
-                    'yesterday'         => 'Yesterday',
+                    'custom-filters' => [
+                        'clear-all' => 'Clear All',
+                    ],
                 ],
             ],
 
@@ -615,6 +614,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continue to Checkout',
             'illegal'                   => 'Quantity cannot be lesser than one.',
+            'inactive-add'              => 'Inactive item cannot be added to cart.',
             'inactive'                  => 'The item has been deactivated and subsequently removed from the cart.',
             'inventory-warning'         => 'The requested quantity is not available, please try again later.',
             'item-add-to-cart'          => 'Item Added Successfully',
@@ -677,6 +677,16 @@ return [
                 'proceed-to-checkout' => 'Proceed To Checkout',
                 'sub-total'           => 'Subtotal',
                 'tax'                 => 'Tax',
+
+                'estimate-shipping' => [
+                    'country'        => 'Country',
+                    'info'           => 'Enter your destination to get a shipping and tax estimate.',
+                    'postcode'       => 'Zip/Postcode',
+                    'select-country' => 'Select Country',
+                    'select-state'   => 'Select State',
+                    'state'          => 'State',
+                    'title'          => 'Estimate Shipping and Tax',
+                ],
             ],
         ],
 
@@ -757,11 +767,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Jot us a note, and we’ll get back to you as quickly as possible',
+            'desc'          => ' What’s on your mind?',
+            'describe-here' => 'Describe Here',
+            'email'         => 'Email',
+            'message'       => 'Message',
+            'name'          => 'Name',
+            'phone-number'  => 'Phone Number',
+            'submit'        => 'Submit',
+            'title'         => 'Contact Us',
+        ],
+
         'index' => [
             'offer'               => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
             'resend-verify-email' => 'Resend Verification Email',
             'verify-email'        => 'Verify your email account',
         ],
+
+        'thanks-for-contact' => 'Thanks for contacting us with your comments and questions. We all respond to you very soon.',
     ],
 
     'partials' => [
@@ -861,6 +885,14 @@ return [
                 'subject'     => 'You! Subscribe to Our Newsletter',
                 'unsubscribe' => 'Unsubscribe',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via Website Contact Form',
+            'reply-to-mail'   => 'please reply to this email.',
+            'reach-via-phone' => 'Alternatively, you can reach us by phone at',
+            'inquiry-from'    => 'Inquiry from',
+            'to'              => 'To contact',
         ],
 
         'orders' => [

@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'Zahlung ausstehend',
             'processing'      => 'Bestellung in Bearbeitung',
         ],
-
-        'status' => [
-            'all'        => 'Alle',
-            'canceled'   => 'Storniert',
-            'closed'     => 'Geschlossen',
-            'completed'  => 'Abgeschlossen',
-            'pending'    => 'Ausstehend',
-            'processing' => 'In Bearbeitung',
-        ],
     ],
 
     'account' => [
@@ -233,7 +224,6 @@ return [
                             'empty-info'    => 'Keine Produkte für den Suchbegriff verfügbar.',
                             'empty-title'   => 'Keine Produkte gefunden',
                             'product-image' => 'Produktbild',
-                            'qty'           => ':qty verfügbar',
                             'qty'           => 'Menge',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Produkte suchen',
@@ -266,7 +256,6 @@ return [
                         'state'            => 'Bundesland',
                         'street-address'   => 'Straße und Hausnummer',
                         'telephone'        => 'Telefon',
-                        'title'            => 'Adresse',
                         'title'            => 'Adresse',
                     ],
 
@@ -3599,6 +3588,10 @@ return [
                     'admin-name'            => 'Admin-Name',
                     'admin-name-tip'        => 'Dieser Name wird in allen Admin-E-Mails angezeigt.',
                     'admin-page-limit'      => 'Standardseitenlimit pro Seite (Admin)',
+                    'contact-email'         => 'Kontakt-E-Mail',
+                    'contact-email-tip'     => 'Diese E-Mail-Adresse wird im Footer der Website angezeigt.',
+                    'contact-name'          => 'Kontaktname',
+                    'contact-name-tip'      => 'Dieser Name wird im Footer der Website angezeigt.',
                     'email-sender-name'     => 'Name des E-Mail-Senders',
                     'email-sender-name-tip' => 'Dieser Name wird im Posteingang des Kunden angezeigt.',
                     'info'                  => 'Legen Sie den Namen des E-Mail-Senders, die E-Mail-Adresse des Geschäfts, den Namen des Administrators und die E-Mail-Adresse des Administrators fest.',

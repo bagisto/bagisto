@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'محصولات را اینجا جستجو کنید',
                 'sign-in'           => 'ورود',
                 'sign-up'           => 'عضویت',
+                'submit'            => 'ارسال',
                 'title'             => 'حساب کاربری',
                 'welcome'           => 'خوش آمدید',
                 'welcome-guest'     => 'خوش آمدید مهمان',
                 'wishlist'          => 'لیست علاقه‌مندی',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'زبان پیش‌فرض',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -369,54 +376,46 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'انتخاب عملیات',
-                    'select-option' => 'انتخاب گزینه',
-                    'submit'        => 'ثبت',
-                ],
+                'length-of' => ':length از',
+                'results'   => ':total نتیجه',
+                'selected'  => ':total انتخاب شده',
 
-                'filter' => [
-                    'title' => 'فیلتر',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'شما باید یک عملیات گروهی را انتخاب کنید.',
+                    'must-select-a-mass-action-option' => 'شما باید یک گزینه برای عملیات گروهی را انتخاب کنید.',
+                    'no-records-selected'              => 'هیچ رکوردی انتخاب نشده است.',
+                    'select-action'                    => 'عملیات را انتخاب کنید',
                 ],
 
                 'search' => [
                     'title' => 'جستجو',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'اعمال فیلترها',
+                'filter' => [
+                    'apply-filter' => 'اعمال فیلتر',
+                    'title'        => 'فیلتر',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'حداقل 2 حرف را تایپ کنید...',
-                        'no-results'        => 'هیچ نتیجه‌ای یافت نشد...',
+                    'dropdown' => [
+                        'select' => 'انتخاب',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'حداقل 2 کاراکتر وارد کنید...',
+                            'no-results'         => 'نتیجه‌ای یافت نشد...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'title'     => 'فیلترهای سفارشی',
-                    'clear-all' => 'پاک کردن همه',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'ماه گذشته',
-                    'last-six-months'   => 'شش ماه گذشته',
-                    'last-three-months' => 'سه ماه گذشته',
-                    'this-month'        => 'این ماه',
-                    'this-week'         => 'این هفته',
-                    'this-year'         => 'امسال',
-                    'today'             => 'امروز',
-                    'yesterday'         => 'دیروز',
+                    'custom-filters' => [
+                        'clear-all' => 'پاک کردن همه',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'عملیات',
                 'next-page'            => 'صفحه بعدی',
-                'no-records-available' => 'هیچ رکوردی موجود نیست.',
-                'of'                   => 'از :total ورودی',
-                'page-navigation'      => 'مسیریابی صفحه',
+                'no-records-available' => 'رکوردی موجود نیست.',
+                'of'                   => 'از :total رکورد',
+                'page-navigation'      => 'ناوبری صفحه',
                 'page-number'          => 'شماره صفحه',
                 'previous-page'        => 'صفحه قبلی',
                 'showing'              => 'نمایش :firstItem',
@@ -615,6 +614,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'ادامه به تسویه حساب',
             'illegal'                   => 'تعداد نمی‌تواند کمتر از یک باشد.',
+            'inactive-add'              => 'مورد غیرفعال نمی‌تواند به سبد خرید اضافه شود.',
             'inactive'                  => 'این مورد غیرفعال شده و بعداً از سبد خرید حذف می‌شود.',
             'inventory-warning'         => 'تعداد درخواستی موجود نیست، لطفاً بعداً دوباره امتحان کنید.',
             'item-add-to-cart'          => 'کالا با موفقیت اضافه شد',
@@ -677,6 +677,16 @@ return [
                 'proceed-to-checkout' => 'ادامه به تسویه حساب',
                 'sub-total'           => 'جمع جزئیات',
                 'tax'                 => 'مالیات',
+
+                'estimate-shipping' => [
+                    'country'        => 'کشور',
+                    'info'           => 'مقصد خود را وارد کنید تا تخمینی از هزینه حمل و نقل و مالیات دریافت کنید.',
+                    'postcode'       => 'کد پستی',
+                    'select-country' => 'انتخاب کشور',
+                    'select-state'   => 'انتخاب استان',
+                    'state'          => 'استان',
+                    'title'          => 'تخمین حمل و نقل و مالیات',
+                ],
             ],
         ],
 
@@ -757,11 +767,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'یک یادداشت برای ما بنویسید و ما در اسرع وقت به شما پاسخ خواهیم داد',
+            'desc'          => 'درباره چی فکر می‌کنید؟',
+            'describe-here' => 'اینجا را توصیف کنید',
+            'email'         => 'ایمیل',
+            'message'       => 'پیام',
+            'name'          => 'نام',
+            'phone-number'  => 'شماره تلفن',
+            'submit'        => 'ارسال',
+            'title'         => 'تماس با ما',
+        ],
+
         'index' => [
-            'offer'               => 'تا 40% تخفیف برای سفارش اولتان دریافت کنید. همین الان خرید کنید',
+            'offer'               => 'تا ۴۰٪ تخفیف برای سفارش اولتان دریافت کنید. همین الان خرید کنید',
             'resend-verify-email' => 'ارسال مجدد ایمیل تأیید',
             'verify-email'        => 'ایمیل خود را تأیید کنید',
         ],
+
+        'thanks-for-contact' => 'از تماس شما با ما و ارسال نظرات و سوالات خود متشکریم. ما به زودی به شما پاسخ خواهیم داد.',
     ],
 
     'partials' => [
@@ -861,6 +885,14 @@ return [
                 'subject'     => 'شما! به خبرنامه ما مشترک شدید',
                 'unsubscribe' => 'لغو اشتراک',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'از طریق فرم تماس وبسایت',
+            'reply-to-mail'   => 'لطفاً به این ایمیل پاسخ دهید.',
+            'reach-via-phone' => 'همچنین می‌توانید با شماره تلفن زیر با ما تماس بگیرید',
+            'inquiry-from'    => 'درخواست از',
+            'to'              => 'برای تماس با',
         ],
 
         'orders' => [

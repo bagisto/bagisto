@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'এখানে পণ্য খুঁজুন',
                 'sign-in'           => 'সাইন ইন',
                 'sign-up'           => 'সাইন আপ',
+                'submit'            => 'জমা দিন',
                 'title'             => 'একাউন্ট',
                 'welcome'           => 'স্বাগতম',
                 'welcome-guest'     => 'স্বাগতম অতিথি',
                 'wishlist'          => 'ইচ্ছেসূচি',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'ডিফল্ট লোকেল',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -369,58 +376,50 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'পরিবর্তন নির্বাচন করুন',
-                    'select-option' => 'বিকল্প নির্বাচন করুন',
-                    'submit'        => 'জমা দিন',
-                ],
+                'length-of' => ':দৈর্ঘ্য',
+                'results'   => ':মোট ফলাফল',
+                'selected'  => ':নির্বাচিত ফলাফল',
 
-                'filter' => [
-                    'title' => 'ফিল্টার',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'আপনাকে একটি সমমূল্য কর্ম নির্বাচন করতে হবে।',
+                    'must-select-a-mass-action-option' => 'আপনাকে একটি সমমূল্য কর্ম বিকল্প নির্বাচন করতে হবে।',
+                    'no-records-selected'              => 'কোনও রেকর্ড নির্বাচিত হয়নি।',
+                    'select-action'                    => 'কর্ম নির্বাচন করুন',
                 ],
 
                 'search' => [
-                    'title' => 'খুঁজুন',
+                    'title' => 'অনুসন্ধান',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'ফিল্টার প্রয়োগ করুন',
+                'filter' => [
+                    'apply-filter' => 'ফিল্টার প্রয়োগ করুন',
+                    'title'        => 'ফিল্টার',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'কমপক্ষে 2 টি অক্ষর লিখুন...',
-                        'no-results'        => 'কোন ফলাফল পাওয়া যায়নি...',
+                    'dropdown' => [
+                        'select' => 'নির্বাচন করুন',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'কমপক্ষে 2 টি অক্ষর লিখুন...',
+                            'no-results'         => 'কোনও ফলাফল পাওয়া যায়নি...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'সব মুছুন',
-                    'title'     => 'কাস্টম ফিল্টার',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'গত মাস',
-                    'last-six-months'   => 'শেষ 6 মাস',
-                    'last-three-months' => 'শেষ 3 মাস',
-                    'this-month'        => 'এই মাস',
-                    'this-week'         => 'এই সপ্তাহ',
-                    'this-year'         => 'এই বছর',
-                    'today'             => 'আজ',
-                    'yesterday'         => 'গতকাল',
+                    'custom-filters' => [
+                        'clear-all' => 'সব মুছুন',
+                    ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'ক্রিয়াকলাপ',
+                'actions'              => 'কর্ম',
                 'next-page'            => 'পরবর্তী পৃষ্ঠা',
-                'no-records-available' => 'রেকর্ড পাওয়া যায়নি।',
-                'of'                   => 'মোট :total এন্ট্রির মধ্যে',
+                'no-records-available' => 'কোনও রেকর্ড পাওয়া যায়নি।',
+                'of'                   => 'মোট :মোট আইটেমের মধ্যে',
                 'page-navigation'      => 'পৃষ্ঠা নেভিগেশন',
                 'page-number'          => 'পৃষ্ঠা নম্বর',
-                'previous-page'        => 'আগের পৃষ্ঠা',
-                'showing'              => ':firstItem দেখাচ্ছে',
-                'to'                   => ':lastItem পর্যন্ত',
+                'previous-page'        => 'পূর্ববর্তী পৃষ্ঠা',
+                'showing'              => 'দেখাচ্ছে :firstItem',
+                'to'                   => 'পর্যন্ত :lastItem',
             ],
         ],
 
@@ -615,6 +614,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'চেকআউট চালিয়ে যান',
             'illegal'                   => 'পরিমাণ একের চেয়ে কম হতে পারে না।',
+            'inactive-add'              => 'নিষ্ক্রিয় আইটেমটি কার্টে যোগ করা যাবে না।',
             'inactive'                  => 'আইটেমটি নিষ্ক্রিয় হয়ে গিয়েছে এবং পরবর্তীকার কার্ট থেকে সরানো হয়েছে।',
             'inventory-warning'         => 'অনুরোধকৃত পরিমাণ উপলব্ধ নেই, দয়া করে পরে আবার চেষ্টা করুন।',
             'item-add-to-cart'          => 'পণ্য সফলভাবে যোগ করা হয়েছে',
@@ -677,6 +677,16 @@ return [
                 'proceed-to-checkout' => 'চেকআউট চালিয়ে যান',
                 'sub-total'           => 'সাবটোটাল',
                 'tax'                 => 'কর',
+
+                'estimate-shipping' => [
+                    'country'        => 'দেশ',
+                    'info'           => 'আপনার গন্তব্যের জন্য শিপিং এবং কর আনুমান পেতে দেশান্তর করুন।',
+                    'postcode'       => 'জিপ/পোস্টকোড',
+                    'select-country' => 'দেশ নির্বাচন করুন',
+                    'select-state'   => 'রাষ্ট্র নির্বাচন করুন',
+                    'state'          => 'রাষ্ট্র',
+                    'title'          => 'শিপিং এবং কর আনুমান করুন',
+                ],
             ],
         ],
 
@@ -757,11 +767,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'আমাদের একটি নোট লিখুন এবং আমরা সম্ভাব্যতঃ সবচেয়ে দ্রুত আপনাকে ফিরে যাব',
+            'desc'          => ' আপনার মনে কি আছে?',
+            'describe-here' => 'এখানে বর্ণনা করুন',
+            'email'         => 'ইমেইল',
+            'message'       => 'বার্তা',
+            'name'          => 'নাম',
+            'phone-number'  => 'ফোন নম্বর',
+            'submit'        => 'জমা দিন',
+            'title'         => 'যোগাযোগ করুন',
+        ],
+
         'index' => [
-            'offer'               => 'আপনার 1 ম অর্ডারে 40% ছাড় পেতে SHOP NOW',
+            'offer'               => 'এখন SHOP NOW করে 1 মিনিটে 40% ছাড় পান',
             'resend-verify-email' => 'ইমেইল পুনরায় পাঠান',
             'verify-email'        => 'আপনার ইমেইল অ্যাকাউন্ট যাচাই করুন',
         ],
+
+        'thanks-for-contact' => 'আপনার মন্তব্য এবং প্রশ্নের জন্য আমাদের সাথে যোগাযোগ করার জন্য আপনাকে ধন্যবাদ। আমরা খুব শীঘ্রই আপনাকে উত্তর দেব।',
     ],
 
     'partials' => [
@@ -861,6 +885,14 @@ return [
                 'subject'     => 'আপনি! আমাদের সংবাদপত্রে সদস্য হন',
                 'unsubscribe' => 'সদস্যপত্র প্রত্যাহার করুন',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'ওয়েবসাইট যোগাযোগ ফর্ম এর মাধ্যমে',
+            'reply-to-mail'   => 'এই ইমেইলে উত্তর দিন।',
+            'reach-via-phone' => 'অথবা, আপনি ফোনে যোগাযোগ করতে পারেন',
+            'inquiry-from'    => 'প্রশ্নাবলী থেকে',
+            'to'              => 'যোগাযোগ করতে',
         ],
 
         'orders' => [

@@ -341,10 +341,17 @@ return [
                 'search-text'       => '在此搜索产品',
                 'sign-in'           => '登录',
                 'sign-up'           => '注册',
+                'submit'            => '提交',
                 'title'             => '账户',
                 'welcome'           => '欢迎',
                 'welcome-guest'     => '欢迎访客',
                 'wishlist'          => '心愿单',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => '默认语言环境',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -369,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => '选择操作',
-                    'select-option' => '选择选项',
-                    'submit'        => '提交',
-                ],
+                'length-of' => ':length of',
+                'results'   => ':total Results',
+                'selected'  => ':total Selected',
 
-                'filter' => [
-                    'title' => '筛选',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => '您必须选择一个批量操作。',
+                    'must-select-a-mass-action-option' => '您必须选择一个批量操作的选项。',
+                    'no-records-selected'              => '未选择任何记录。',
+                    'select-action'                    => '选择操作',
                 ],
 
                 'search' => [
                     'title' => '搜索',
                 ],
-            ],
 
-            'filters' => [
-                'title' => '应用筛选',
+                'filter' => [
+                    'apply-filter' => '应用过滤器',
+                    'title'        => '过滤器',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => '至少输入 2 个字符...',
-                        'no-results'        => '未找到结果...',
+                    'dropdown' => [
+                        'select' => '选择',
+
+                        'searchable' => [
+                            'at-least-two-chars' => '至少输入2个字符...',
+                            'no-results'         => '未找到结果...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => '清除所有',
-                    'title'     => '自定义筛选',
-                ],
-
-                'date-options' => [
-                    'last-month'        => '上个月',
-                    'last-six-months'   => '过去 6 个月',
-                    'last-three-months' => '过去 3 个月',
-                    'this-month'        => '本月',
-                    'this-week'         => '本周',
-                    'this-year'         => '今年',
-                    'today'             => '今天',
-                    'yesterday'         => '昨天',
+                    'custom-filters' => [
+                        'clear-all' => '清除所有',
+                    ],
                 ],
             ],
 
@@ -416,7 +415,7 @@ return [
                 'next-page'            => '下一页',
                 'no-records-available' => '没有可用的记录。',
                 'of'                   => '共 :total 条记录',
-                'page-navigation'      => '分页导航',
+                'page-navigation'      => '页面导航',
                 'page-number'          => '页码',
                 'previous-page'        => '上一页',
                 'showing'              => '显示 :firstItem',
@@ -615,6 +614,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => '继续结帐',
             'illegal'                   => '数量不能少于一。',
+            'inactive-add'              => '无法将停用的项目添加到购物车。',
             'inactive'                  => '该项目已停用，随后从购物车中移除。',
             'inventory-warning'         => '请求的数量不可用，请稍后再试。',
             'item-add-to-cart'          => '已成功添加项目',
@@ -677,6 +677,16 @@ return [
                 'proceed-to-checkout' => '继续结帐',
                 'sub-total'           => '小计',
                 'tax'                 => '税',
+
+                'estimate-shipping' => [
+                    'country'        => '国家',
+                    'info'           => '输入您的目的地以获取运费和税费估计。',
+                    'postcode'       => '邮政编码',
+                    'select-country' => '选择国家',
+                    'select-state'   => '选择省份',
+                    'state'          => '省份',
+                    'title'          => '估计运费和税费',
+                ],
             ],
         ],
 
@@ -757,12 +767,27 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => '给我们留言，我们会尽快回复您',
+            'desc'          => '您有什么问题？',
+            'describe-here' => '在这里描述',
+            'email'         => '电子邮件',
+            'message'       => '留言',
+            'name'          => '姓名',
+            'phone-number'  => '电话号码',
+            'submit'        => '提交',
+            'title'         => '联系我们',
+        ],
+
         'index' => [
             'offer'               => '首次下单立减40%，现在开始购物',
             'resend-verify-email' => '重新发送验证电子邮件',
             'verify-email'        => '验证您的电子邮件帐户',
         ],
+
+        'thanks-for-contact' => '感谢您与我们联系，提供您的意见和问题。我们会尽快回复您。',
     ],
+
     'partials' => [
         'pagination' => [
             'pagination-showing' => '显示 :total 个条目中的 :firstItem 到 :lastItem',
@@ -860,6 +885,14 @@ return [
                 'subject'     => '您！订阅我们的新闻通讯',
                 'unsubscribe' => '取消订阅',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => '通过网站联系表格',
+            'reply-to-mail'   => '请回复此电子邮件。',
+            'reach-via-phone' => '或者，您可以通过电话联系我们：',
+            'inquiry-from'    => '来自的查询',
+            'to'              => '联系',
         ],
 
         'orders' => [

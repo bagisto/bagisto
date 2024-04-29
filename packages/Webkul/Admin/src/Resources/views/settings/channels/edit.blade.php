@@ -21,15 +21,15 @@
 
         {!! view_render_event('bagisto.admin.settings.channels.edit.edit_form_controls.before') !!}
 
-        <div class="flex justify-between items-center">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.settings.channels.edit.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
+            <div class="flex items-center gap-x-2.5">
                 <a
                     href="{{ route('admin.settings.channels.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                    class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                 >
                     @lang('admin::app.settings.channels.edit.back-btn')
                 </a>
@@ -44,15 +44,15 @@
             </div>
         </div>
 
-        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+        <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
             <!-- Left Component -->
-            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.general.before') !!}
 
                 <!-- General Information -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.channels.edit.general')
                     </p>
 
@@ -119,7 +119,7 @@
                         </x-admin::form.control-group.label>
                 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                            <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
+                            <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     :id="'inventory_sources_' . $inventorySource->id"
@@ -132,7 +132,7 @@
                                 />
 
                                 <label
-                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                    class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                     for="inventory_sources_{{ $inventorySource->id }}"
                                 >
                                     {{ $inventorySource->name }}
@@ -191,8 +191,8 @@
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.design.before') !!}
 
                 <!-- Logo and Design -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.channels.edit.design')
                     </p>
 
@@ -209,11 +209,6 @@
                             :value="old('theme') ?? $channel->theme"
                             :label="trans('admin::app.settings.channels.edit.theme')"
                         >
-                            <!-- Default Option -->
-                            <option value="">
-                                @lang('admin::app.settings.channels.create.select-theme')
-                            </option>
-
                             @foreach (config('themes.shop') as $themeCode => $theme)
                                 <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
                                     {{ $theme['name'] }}
@@ -226,7 +221,7 @@
 
                     <div class="flex justify-between">
                         <!-- Logo -->
-                        <div class="flex flex-col w-2/5">
+                        <div class="flex w-2/5 flex-col">
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.channels.edit.logo')
@@ -246,7 +241,7 @@
                         </div>
 
                         <!-- Favicon -->
-                        <div class="flex flex-col w-2/5">
+                        <div class="flex w-2/5 flex-col">
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.channels.edit.favicon')
@@ -276,8 +271,8 @@
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.seo.before') !!}
 
                 <!-- Home Page SEO -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.channels.edit.seo')
                     </p>
 
@@ -344,7 +339,7 @@
             </div>
 
             <!-- Right Compoenent -->
-            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.currencies_and_locales.before') !!}
 
@@ -352,7 +347,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
+                            <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.settings.channels.edit.currencies-and-locales')
                             </p>
                         </div>
@@ -368,7 +363,7 @@
                             @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray() @endphp
                             
                             @foreach (core()->getAllLocales() as $locale)
-                                <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
+                                <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         :id="'locales_' . $locale->id" 
@@ -381,7 +376,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="locales_{{ $locale->id }}"
                                     >
                                         {{ $locale->name }} 
@@ -425,7 +420,7 @@
                             @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray() @endphp
 
                             @foreach (core()->getAllCurrencies() as $currency)
-                                <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
+                                <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         :id="'currencies_' . $currency->id"
@@ -438,7 +433,7 @@
                                     />
 
                                     <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                         for="currencies_{{ $currency->id }}"
                                     >
                                         {{ $currency->name }} 
@@ -483,7 +478,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
+                            <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.settings.channels.edit.maintenance-mode')
                             </p>
                         </div>

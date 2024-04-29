@@ -424,9 +424,15 @@ class Cart
             ])
             ->toArray();
 
-        return $this->cart->billing_address
-            ? $this->cartAddressRepository->update($params, $this->cart->billing_address->id)
-            : $this->cartAddressRepository->create($params);
+        if ($this->cart->billing_address) {
+            $address = $this->cartAddressRepository->update($params, $this->cart->billing_address->id);
+        } else {
+            $address = $this->cartAddressRepository->create($params);
+        }
+
+        $this->cart->setRelation('billing_address', $address);
+
+        return $address;
     }
 
     /**
@@ -434,6 +440,13 @@ class Cart
      */
     public function updateOrCreateShippingAddress(array $params): ?CartAddressContract
     {
+        /**
+         * If cart is not having any stockable items then no need to save shipping address.
+         */
+        if (! $this->cart->haveStockableItems()) {
+            return null;
+        }
+
         if (! $this->cart->billing_address) {
             throw new BillingAddressNotFoundException;
         }
@@ -478,16 +491,15 @@ class Cart
                 ->toArray();
         }
 
-        /**
-         * If cart have stockable items then update or create shipping address.
-         */
-        if ($this->cart->haveStockableItems()) {
-            return $this->cart->shipping_address
-                ? $this->cartAddressRepository->update($params, $this->cart->shipping_address->id)
-                : $this->cartAddressRepository->create($params);
+        if ($this->cart->shipping_address) {
+            $address = $this->cartAddressRepository->update($params, $this->cart->shipping_address->id);
+        } else {
+            $address = $this->cartAddressRepository->create($params);
         }
 
-        return null;
+        $this->cart->setRelation('shipping_address', $address);
+
+        return $address;
     }
 
     /**
@@ -496,8 +508,8 @@ class Cart
     public function setCustomerPersonnelDetails(): void
     {
         $this->cart->customer_email = $this->cart->customer?->email ?? $this->cart->billing_address->email;
-        $this->cart->customer_first_name = $this->cart->customer?->first_name ?? $this->cart->billing_address->email;
-        $this->cart->customer_last_name = $this->cart->customer?->last_name ?? $this->cart->billing_address->email;
+        $this->cart->customer_first_name = $this->cart->customer?->first_name ?? $this->cart->billing_address->first_name;
+        $this->cart->customer_last_name = $this->cart->customer?->last_name ?? $this->cart->billing_address->last_name;
 
         $this->cart->save();
     }

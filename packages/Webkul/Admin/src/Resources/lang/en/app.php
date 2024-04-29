@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'Pending Payment',
             'processing'      => 'Order Processing',
         ],
-
-        'status'  => [
-            'all'        => 'All',
-            'canceled'   => 'Canceled',
-            'closed'     => 'Closed',
-            'completed'  => 'Completed',
-            'pending'    => 'Pending',
-            'processing' => 'Processing',
-        ],
     ],
 
     'account' => [
@@ -233,7 +224,6 @@ return [
                             'empty-info'    => 'No products available for search term.',
                             'empty-title'   => 'No products found',
                             'product-image' => 'Product Image',
-                            'qty'           => ':qty Available',
                             'qty'           => 'Qty',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Search Products',
@@ -266,7 +256,6 @@ return [
                         'state'            => 'State',
                         'street-address'   => 'Street Address',
                         'telephone'        => 'Telephone',
-                        'title'            => 'Address',
                         'title'            => 'Address',
                     ],
 
@@ -3599,6 +3588,10 @@ return [
                     'admin-name'            => 'Admin Name',
                     'admin-name-tip'        => 'This name will be displayed in all admin emails',
                     'admin-page-limit'      => 'Default Items Per Page (Admin)',
+                    'contact-email'         => 'Contact Email',
+                    'contact-email-tip'     => 'The email address will be shown at the bottom of your emails',
+                    'contact-name'          => 'Contact Name',
+                    'contact-name-tip'      => 'This name will be shown at the bottom of your emails',
                     'email-sender-name'     => 'Email Sender Name',
                     'email-sender-name-tip' => 'This name will be displayed in the customers inbox',
                     'info'                  => 'Set email sender name, shop email address, admin name and admin email address.',

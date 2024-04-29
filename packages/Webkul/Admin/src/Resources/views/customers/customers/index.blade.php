@@ -1,19 +1,18 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.customers.customers.index.title')
     </x-slot>
 
-    <div class="flex justify-between items-center">
-        <p class="text-xl text-gray-800 dark:text-white font-bold">
+    <div class="flex items-center justify-between">
+        <p class="text-xl font-bold text-gray-800 dark:text-white">
             @lang('admin::app.customers.customers.index.title')
         </p>
 
-        <div class="flex gap-x-2.5 items-center">
+        <div class="flex items-center gap-x-2.5">
             <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.customers.customers.index') }}" />
 
-            <div class="flex gap-x-2.5 items-center">
+            <div class="flex items-center gap-x-2.5">
                 <!-- Included customer create blade file -->
                 @if (bouncer()->hasPermission('customers.customers.create'))
                     {!! view_render_event('bagisto.admin.customers.customers.create.before') !!}
@@ -45,17 +44,27 @@
             $hasPermission = bouncer()->hasPermission('customers.customers.edit') || bouncer()->hasPermission('customers.customers.delete');
         @endphp
 
-        <!-- Datagrid Header -->
-        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
-            <template v-if="! isLoading">
-                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-4 py-2.5 border-b dark:border-gray-800">
+        <template #header="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+            </template>
+
+            <template v-else>
+                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
                     <div
-                        class="flex gap-2.5 items-center select-none"
+                        class="flex select-none items-center gap-2.5"
                         v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group'], ['revenue', 'order_count', 'address_count']]"
                     >
                         @if ($hasPermission)
                             <label
-                                class="flex gap-1 items-center w-max cursor-pointer select-none"
+                                class="flex w-max cursor-pointer select-none items-center gap-1"
                                 for="mass_action_select_all_records"
                                 v-if="! index"
                             >
@@ -63,9 +72,9 @@
                                     type="checkbox"
                                     name="mass_action_select_all_records"
                                     id="mass_action_select_all_records"
-                                    class="hidden peer"
+                                    class="peer hidden"
                                     :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                                    @change="selectAllRecords"
+                                    @change="selectAll"
                                 >
 
                                 <span
@@ -86,20 +95,20 @@
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
-                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == column,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                            'font-medium text-gray-800 dark:text-white': applied.sort.column == column,
+                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': available.columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
-                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                            available.columns.find(columnTemp => columnTemp.index === column)?.sortable ? sort(available.columns.find(columnTemp => columnTemp.index === column)): {}
                                         "
                                     >
-                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                        @{{ available.columns.find(columnTemp => columnTemp.index === column)?.label }}
                                     </span>
                                 </template>
                             </span>
 
                             <i
-                                class="ltr:ml-1.5 rtl:mr-1.5 text-base  text-gray-800 dark:text-white align-text-bottom"
+                                class="align-text-bottom text-base text-gray-800 dark:text-white ltr:ml-1.5 rtl:mr-1.5"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -107,19 +116,24 @@
                     </div>
                 </div>
             </template>
-
-            <!-- Datagrid Head Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
-            </template>
         </template>
 
-        <!-- Datagrid Body -->
-        <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
-            <template v-if="! isLoading">
+        <template #body="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div
-                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                    v-for="record in records"
+                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                    v-for="record in available.records"
                 >
                     <div class="flex gap-2.5">
                         @if ($hasPermission)
@@ -128,13 +142,13 @@
                                 :name="`mass_action_select_record_${record.customer_id}`"
                                 :id="`mass_action_select_record_${record.customer_id}`"
                                 :value="record.customer_id"
-                                class="hidden peer"
+                                class="peer hidden"
                                 v-model="applied.massActions.indices"
                                 @change="setCurrentSelectionMode"
                             >
 
                             <label
-                                class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"
                                 :for="`mass_action_select_record_${record.customer_id}`"
                             >
                             </label>
@@ -142,7 +156,7 @@
 
                         <div class="flex flex-col gap-1.5">
                             <p
-                                class="text-base text-gray-800 dark:text-white font-semibold"
+                                class="text-base font-semibold text-gray-800 dark:text-white"
                                 v-text="record.full_name"
                             >
                             </p>
@@ -194,10 +208,10 @@
                         </p>
                     </div>
 
-                    <div class="flex gap-x-4 justify-between items-center">
+                    <div class="flex items-center justify-between gap-x-4">
                         <div class="flex flex-col gap-1.5">
                             <p
-                                class="text-base text-gray-800 dark:text-white font-semibold"
+                                class="text-base font-semibold text-gray-800 dark:text-white"
                                 v-text="$admin.formatPrice(record.revenue)"
                             >
                             </p>
@@ -213,25 +227,20 @@
 
                         <div class="flex items-center">
                             <a
-                                class="icon-login text-2xl ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
+                                class="icon-login cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
                                 :href=`{{ route('admin.customers.customers.login_as_customer', '') }}/${record.customer_id}`
                                 target="_blank"
                             >
                             </a>
 
                             <a
-                                class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
+                                class="icon-sort-right cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
                                 :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
                             >
                             </a>
                         </div>
                     </div>
                 </div>
-            </template>
-
-            <!-- Datagrid Body Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
             </template>
         </template>
     </x-admin::datagrid>

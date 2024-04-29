@@ -341,10 +341,17 @@ return [
                 'search-text'       => 'උදා: උදාමාන්ද්‍ර',
                 'sign-in'           => 'පිවිසීම',
                 'sign-up'           => 'ලියාපදිංචිය',
+                'submit'            => 'ඉදිරිපත් කරන්න',
                 'title'             => 'ගිණුම',
                 'welcome'           => 'ස්වයං',
                 'welcome-guest'     => 'උරුම පරිසරය',
                 'wishlist'          => 'පෙරනිම',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'පෙරනිමි භාෂාව',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -369,58 +376,50 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'යෙදුම තෝරන්න',
-                    'select-option' => 'නියෝජනය තෝරන්න',
-                    'submit'        => 'ඉදිරිපත් කරන්න',
-                ],
+                'length-of' => ':length යොමුවක්',
+                'results'   => ':total ප්‍රතිඵලයන්',
+                'selected'  => ':total තෝරාගත්',
 
-                'filter' => [
-                    'title' => 'වෙනත්',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'ඔබ තෝරාගැනීමට තෝරා ගැනීමක් අත්‍යවශ්‍ය වේ.',
+                    'must-select-a-mass-action-option' => 'ඔබ තෝරාගැනීමට තෝරා ගැනීමක් අත්‍යවශ්‍ය වේ.',
+                    'no-records-selected'              => 'කිසිදු වාර්තාවක් තෝරාගත නොහැක.',
+                    'select-action'                    => 'ක්‍රියාව තෝරන්න',
                 ],
 
                 'search' => [
                     'title' => 'සෙවුම',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'වෙනත්කරන්න',
+                'filter' => [
+                    'apply-filter' => 'පෙරහන් කිරීම',
+                    'title'        => 'පෙරහන් කිරීම',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'අනුලම් 2 අකුරු සඳහා වියදම්...',
-                        'no-results'        => 'ප්‍රතිඵලක් නැත...',
+                    'dropdown' => [
+                        'select' => 'තෝරන්න',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'කරුණාකර අවම වශයෙන් 2 අකුරු ටයිප් කරන්න...',
+                            'no-results'         => 'කිසිදු ප්‍රතිඵලක් හමු නොවීය...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'සියල්ල ඉවත් කරන්න',
-                    'title'     => 'අභිරුචි වෙනත්කරණ',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'අවසාන මාසය',
-                    'last-six-months'   => 'අවසාන 6 මාස',
-                    'last-three-months' => 'අවසාන 3 මාස',
-                    'this-month'        => 'මෙතද',
-                    'this-week'         => 'මෙතද',
-                    'this-year'         => 'මෙතද',
-                    'today'             => 'අද',
-                    'yesterday'         => 'ඊයේ',
+                    'custom-filters' => [
+                        'clear-all' => 'සියල්ල මකන්න',
+                    ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'ක්‍රියා',
+                'actions'              => 'ක්‍රියාවලිය',
                 'next-page'            => 'ඊළඟ පිටුව',
-                'no-records-available' => 'ලියාපදිංචි නොවේ.',
-                'of'                   => ':total ඇතුලු සටහන්',
-                'page-navigation'      => 'පිටු පාලනය',
-                'page-number'          => 'පිටුවේ අංකය',
+                'no-records-available' => 'ලබාදුන් නොමැත.',
+                'of'                   => 'මෙමෙයි :total ඇතුලත්වයන්ට',
+                'page-navigation'      => 'පිටුව පාලනය',
+                'page-number'          => 'පිටුව අංකය',
                 'previous-page'        => 'පෙර පිටුව',
-                'showing'              => ':firstItem පෙන්වනු ඇත',
-                'to'                   => ':lastItem දක්වනු ඇත',
+                'showing'              => 'පෙන්වන්නේ :firstItem',
+                'to'                   => 'දක්වාන්නේ :lastItem දක්වා',
             ],
         ],
 
@@ -615,6 +614,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'පරියේෂයට කිරීමට සහාය',
             'illegal'                   => 'අයිතමයක් එක් අඩංගු වේ නැත.',
+            'inactive-add'              => 'අක්‍රීය අයිතමය කරුණු කැට්එකට එක් කළ නොහැක.',
             'inactive'                  => 'අයිතමය අක්‍රීය වී ඇත්තේ, එවිට සාර්ථකව ඉවත් කරන ලදි.',
             'inventory-warning'         => 'ඉල්ලීම් ප්රමාණය සඳහා ඉල්ලීම් නොමැත, කරුණු නැවත උත්සාහ කරන්න.',
             'item-add-to-cart'          => 'අයිතමය සාර්ථකයි',
@@ -677,6 +677,16 @@ return [
                 'proceed-to-checkout' => 'පරියේෂයට ඉදිරියට',
                 'sub-total'           => 'උපකරණය',
                 'tax'                 => 'බද',
+
+                'estimate-shipping' => [
+                    'country'        => 'රාජ්‍යය',
+                    'info'           => 'ඔබේ ගමන් ලයිස්තුව ලබා ගැනීමට පත් කරන්න.',
+                    'postcode'       => 'තැපැල් කේතය',
+                    'select-country' => 'රාජ්‍යය තෝරන්න',
+                    'select-state'   => 'රාජ්‍යය තෝරන්න',
+                    'state'          => 'රාජ්‍යය',
+                    'title'          => 'භාණ්ඩ සහ බදු අනුමත කිරීම',
+                ],
             ],
         ],
 
@@ -757,11 +767,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'අපගේ පිළිතුරු ලියන්න, අපි ඔබට ඉවස්වීමේදී ඉක්මනින් පිළිතුරු ලබා ගැනීමට අපට පෙර වෙන්නේය',
+            'desc'          => 'ඔබට කුමක්ද මගේ අත්දැකීම් පිළිතුරුද?',
+            'describe-here' => 'මෙහි විස්තර කරන්න',
+            'email'         => 'ඊමේල්',
+            'message'       => 'පණිවිඩය',
+            'name'          => 'නම',
+            'phone-number'  => 'දුරකථන අංකය',
+            'submit'        => 'ඉදිරිපත් කරන්න',
+            'title'         => 'අප අමතන්න',
+        ],
+
         'index' => [
             'offer'               => 'ඔබගේ 1 වන ඇණවුම එකට ඉහළ වෙනි 40% ඉටු SHOP NOW',
-            'resend-verify-email' => 'ඊ-පරිපාලකයාගේ ඊමේල් එක නැවත යවන්න',
+            'resend-verify-email' => 'ඊමේල් තහවුරු කිරීමේදී ඔබගේ ඊමේල් එක නැවත යවන්න',
             'verify-email'        => 'ඔබගේ ඊමේල් ගිණුම තහවුරු කරන්න',
         ],
+
+        'thanks-for-contact' => 'ඔබගේ අදහස් සහ ප්‍රශ්න සමඟ අපට ඇමතුම් කිරීම සඳහා ස්තූතියි. අපි ඔබට ඉවස්වේය.',
     ],
 
     'partials' => [
@@ -861,6 +885,14 @@ return [
                 'subject'     => 'ඔබට! අපේ නිළධාරාණයට දැක්කානට',
                 'unsubscribe' => 'අවිශ්‍යවන්',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'වෙබ් අමුතුම් පිටුවෙන් ඇමතුම් කිරීමේදී',
+            'reply-to-mail'   => 'කරුණාකර මෙම ඊමේල්ට පිළිතුරු යවන්න.',
+            'reach-via-phone' => 'එක්වන්නේ නිදහස් දුරකථන අංකයෙන් අපට පිටවීමක් හෝ',
+            'inquiry-from'    => 'විද්‍යුත් සඳහා',
+            'to'              => 'සම්බන්ද කිරීමට',
         ],
 
         'orders' => [

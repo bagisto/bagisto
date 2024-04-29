@@ -1,3 +1,3 @@
-<li {{ $attributes->merge(['class' => 'px-5 py-2 text-base cursor-pointer hover:bg-gray-100']) }}>
+<li {{ $attributes->merge(['class' => 'cursor-pointer px-5 py-2 text-base hover:bg-gray-100']) }}>
     {{ $slot }}
 </li>

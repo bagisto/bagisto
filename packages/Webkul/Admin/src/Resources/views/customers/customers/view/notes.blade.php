@@ -1,11 +1,11 @@
 <!-- Notes Form -->
-<div class="p-4 bg-white dark:bg-gray-900  rounded box-shadow">
-    <p class="p-4 pb-0 text-base text-gray-800 leading-none dark:text-white font-semibold">
+<div class="box-shadow rounded bg-white p-4 last:pb-0 dark:bg-gray-900">
+    <p class="p-4 pb-0 text-base font-semibold leading-none text-gray-800 dark:text-white">
         @lang('admin::app.customers.customers.view.notes.add-note')
     </p>
 
     <x-admin::form :action="route('admin.customer.note.store', $customer->id)">
-        <div class="p-4">
+        <div class="border-b p-4 dark:border-gray-800">
             <!-- Note -->
             <x-admin::form.control-group>
                 <x-admin::form.control-group.control
@@ -21,9 +21,9 @@
                 <x-admin::form.control-group.error control-name="note" />
             </x-admin::form.control-group>
 
-            <div class="flex justify-between items-center">
+            <div class="flex items-center justify-between">
                 <label
-                    class="flex gap-1 w-max items-center p-1.5 cursor-pointer select-none"
+                    class="flex w-max cursor-pointer select-none items-center gap-1 p-1.5"
                     for="customer_notified"
                 >
                     <input
@@ -31,12 +31,12 @@
                         name="customer_notified"
                         id="customer_notified"
                         value="1"
-                        class="hidden peer"
+                        class="peer hidden"
                     >
 
-                    <span class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
+                    <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"></span>
 
-                    <p class="flex gap-x-1 items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
+                    <p class="flex cursor-pointer items-center gap-x-1 font-semibold text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">
                         @lang('admin::app.customers.customers.view.notes.notify-customer')
                     </p>
                 </label>
@@ -53,28 +53,24 @@
     </x-admin::form>
 
     <!-- Notes List -->
-    <span class="block w-full border-b dark:border-gray-800"></span>
-
     @foreach ($customer->notes as $note)
-        <div class="grid gap-1.5 p-4">
-            <p class="text-base text-gray-800 dark:text-white leading-6">
+        <div class="grid gap-1.5 border-b p-4 last:border-none dark:border-gray-800">
+            <p class="text-base leading-6 text-gray-800 dark:text-white">
                 {{$note->note}}
             </p>
 
             <!-- Notes List Title and Time -->
-            <p class="flex gap-2 text-gray-600 dark:text-gray-300 items-center">
+            <p class="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                 @if ($note->customer_notified)
-                    <span class="h-fit text-2xl rounded-full icon-done text-blue-600 bg-blue-100"></span>
+                    <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600"></span>
 
                     @lang('admin::app.customers.customers.view.notes.customer-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @else
-                    <span class="h-fit text-2xl rounded-full icon-cancel-1 text-red-600 bg-red-100"></span>
+                    <span class="icon-cancel-1 h-fit rounded-full bg-red-100 text-2xl text-red-600"></span>
 
                     @lang('admin::app.customers.customers.view.notes.customer-not-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @endif
             </p>
         </div>
-
-        <span class="block w-full border-b dark:border-gray-800"></span>
     @endforeach
 </div>

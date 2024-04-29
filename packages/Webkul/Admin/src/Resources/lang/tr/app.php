@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'Bekleyen Ödeme',
             'processing'      => 'Sipariş İşleniyor',
         ],
-
-        'status' => [
-            'all'        => 'Tümü',
-            'canceled'   => 'İptal Edildi',
-            'closed'     => 'Kapatıldı',
-            'completed'  => 'Tamamlandı',
-            'pending'    => 'Bekliyor',
-            'processing' => 'İşleniyor',
-        ],
     ],
 
     'account' => [
@@ -233,7 +224,6 @@ return [
                             'empty-info'    => 'Arama terimi için ürün bulunamadı.',
                             'empty-title'   => 'Ürün bulunamadı',
                             'product-image' => 'Ürün Görseli',
-                            'qty'           => ':qty Mevcut',
                             'qty'           => 'Adet',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Ürünleri Ara',
@@ -266,7 +256,6 @@ return [
                         'state'            => 'Eyalet',
                         'street-address'   => 'Adres',
                         'telephone'        => 'Telefon',
-                        'title'            => 'Adres',
                         'title'            => 'Adres',
                     ],
 
@@ -3599,6 +3588,10 @@ return [
                     'admin-name'             => 'Yönetici Adı',
                     'admin-name-tip'         => 'Bu isim tüm yönetici e-postalarında görüntülenecektir',
                     'admin-page-limit'       => 'Varsayılan Sayfa Başına Öğe (Yönetici)',
+                    'contact-email'          => 'İletişim E-postası',
+                    'contact-email-tip'      => 'Bu e-posta adresi e-postalarınızın alt kısmında gösterilecek',
+                    'contact-name'           => 'İletişim Adı',
+                    'contact-name-tip'       => 'Bu isim e-postalarınızın alt kısmında gösterilecek',
                     'email-sender-name'      => 'E-posta Gönderen Adı',
                     'email-sender-name-tip'  => 'Bu isim müşterilerin gelen kutusunda görüntülenecektir',
                     'info'                   => 'E-posta gönderen adını, mağaza e-posta adresini, yönetici adını ve yönetici e-posta adresini ayarlayın.',

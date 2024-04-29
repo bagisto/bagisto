@@ -7,17 +7,17 @@ return [
                 'default' => 'За замовчуванням',
             ],
 
-            'attribute-groups'   => [
-                'description'       => 'Опис',
-                'general'           => 'Загальні',
-                'inventories'       => 'Запаси',
-                'meta-description'  => 'Мета-опис',
-                'price'             => 'Ціна',
-                'settings'          => 'Налаштування',
-                'shipping'          => 'Доставка',
+            'attribute-groups' => [
+                'description'      => 'Опис',
+                'general'          => 'Загальні',
+                'inventories'      => 'Запаси',
+                'meta-description' => 'Мета-опис',
+                'price'            => 'Ціна',
+                'settings'         => 'Налаштування',
+                'shipping'         => 'Доставка',
             ],
 
-            'attributes'         => [
+            'attributes' => [
                 'brand'                => 'Бренд',
                 'color'                => 'Колір',
                 'cost'                 => 'Вартість',
@@ -37,9 +37,9 @@ return [
                 'short-description'    => 'Короткий опис',
                 'size'                 => 'Розмір',
                 'sku'                  => 'Артикул',
+                'special-price'        => 'Спеціальна ціна',
                 'special-price-from'   => 'Спеціальна ціна від',
                 'special-price-to'     => 'Спеціальна ціна до',
-                'special-price'        => 'Спеціальна ціна',
                 'status'               => 'Статус',
                 'tax-category'         => 'Категорія податків',
                 'url-key'              => 'URL-ключ',
@@ -48,7 +48,7 @@ return [
                 'width'                => 'Ширина',
             ],
 
-            'attribute-options'  => [
+            'attribute-options' => [
                 'black'  => 'Чорний',
                 'green'  => 'Зелений',
                 'l'      => 'L',
@@ -61,21 +61,21 @@ return [
             ],
         ],
 
-        'category'  => [
+        'category' => [
             'categories' => [
                 'description' => 'Опис кореневої категорії',
                 'name'        => 'Коренева',
             ],
         ],
 
-        'cms'       => [
+        'cms' => [
             'pages' => [
-                'about-us'         => [
+                'about-us' => [
                     'content' => 'Зміст сторінки Про нас',
                     'title'   => 'Про нас',
                 ],
 
-                'contact-us'       => [
+                'contact-us' => [
                     'content' => 'Зміст сторінки Зв\'яжіться з нами',
                     'title'   => 'Зв\'яжіться з нами',
                 ],
@@ -85,27 +85,27 @@ return [
                     'title'   => 'Обслуговування клієнтів',
                 ],
 
-                'payment-policy'   => [
+                'payment-policy' => [
                     'content' => 'Зміст сторінки Політика оплати',
                     'title'   => 'Політика оплати',
                 ],
 
-                'privacy-policy'   => [
+                'privacy-policy' => [
                     'content' => 'Зміст сторінки Політика конфіденційності',
                     'title'   => 'Політика конфіденційності',
                 ],
 
-                'refund-policy'    => [
+                'refund-policy' => [
                     'content' => 'Зміст сторінки Політики повернення',
                     'title'   => 'Політика повернення',
                 ],
 
-                'return-policy'    => [
+                'return-policy' => [
                     'content' => 'Зміст сторінки Політики повернення',
                     'title'   => 'Політика повернення',
                 ],
 
-                'shipping-policy'  => [
+                'shipping-policy' => [
                     'content' => 'Зміст сторінки Політика доставки',
                     'title'   => 'Політика доставки',
                 ],
@@ -115,24 +115,24 @@ return [
                     'title'   => 'Умови та положення',
                 ],
 
-                'terms-of-use'     => [
+                'terms-of-use' => [
                     'content' => 'Зміст сторінки Умови використання',
                     'title'   => 'Умови використання',
                 ],
 
-                'whats-new'        => [
+                'whats-new' => [
                     'content' => 'Зміст сторінки Що нового',
                     'title'   => 'Що нового',
                 ],
             ],
         ],
 
-        'core'      => [
-            'channels'   => [
-                'meta-description' => 'Мета-опис демонстраційного магазину',
-                'meta-keywords'    => 'Мета-ключові слова демонстраційного магазину',
-                'meta-title'       => 'Демонстраційний магазин',
+        'core' => [
+            'channels' => [
                 'name'             => 'За замовчуванням',
+                'meta-title'       => 'Демонстраційний магазин',
+                'meta-keywords'    => 'Мета-ключові слова демонстраційного магазину',
+                'meta-description' => 'Мета-опис демонстраційного магазину',
             ],
 
             'currencies' => [
@@ -174,7 +174,7 @@ return [
             ],
         ],
 
-        'customer'  => [
+        'customer' => [
             'customer-groups' => [
                 'general'   => 'Загальний',
                 'guest'     => 'Гість',
@@ -190,38 +190,38 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products'           => [
-                    'name'    => 'Усі продукти',
+                'all-products' => [
+                    'name' => 'Усі продукти',
 
                     'options' => [
                         'title' => 'Усі продукти',
                     ],
                 ],
 
-                'bold-collections'       => [
+                'bold-collections' => [
                     'content' => [
                         'btn-title'   => 'Переглянути все',
                         'description' => 'Представляємо наші нові сміливі колекції! Підніміть свій стиль завдяки сміливим дизайнам та яскравим заявам. Відкрийте для себе вишукані малюнки та смілі кольори, які переосмислюють ваш гардероб. Готуйтеся прийняти надзвичайне!',
                         'title'       => 'Готуйтеся до наших нових сміливих колекцій!',
                     ],
 
-                    'name'    => 'Сміливі колекції',
+                    'name' => 'Сміливі колекції',
                 ],
 
                 'categories-collections' => [
                     'name' => 'Колекції за категоріями',
                 ],
 
-                'featured-collections'   => [
-                    'name'    => 'Виділені колекції',
+                'featured-collections' => [
+                    'name' => 'Виділені колекції',
 
                     'options' => [
                         'title' => 'Рекомендовані продукти',
                     ],
                 ],
 
-                'footer-links'           => [
-                    'name'    => 'Посилання у нижньому колонтитулі',
+                'footer-links' => [
+                    'name' => 'Посилання у нижньому колонтитулі',
 
                     'options' => [
                         'about-us'         => 'Про нас',
@@ -238,41 +238,41 @@ return [
                     ],
                 ],
 
-                'game-container'         => [
+                'game-container' => [
                     'content' => [
                         'sub-title-1' => 'Наші колекції',
                         'sub-title-2' => 'Наші колекції',
                         'title'       => 'Гра з нашими новими додатками!',
                     ],
 
-                    'name'    => 'Контейнер з грою',
+                    'name' => 'Контейнер з грою',
                 ],
 
-                'image-carousel'         => [
-                    'name'    => 'Карусель зображень',
+                'image-carousel' => [
+                    'name' => 'Карусель зображень',
 
                     'sliders' => [
                         'title' => 'Готуйтеся до нової колекції',
                     ],
                 ],
 
-                'new-products'           => [
-                    'name'    => 'Нові продукти',
+                'new-products' => [
+                    'name' => 'Нові продукти',
 
                     'options' => [
                         'title' => 'Нові продукти',
                     ],
                 ],
 
-                'offer-information'      => [
-                    'content'   => [
+                'offer-information' => [
+                    'content' => [
                         'title' => 'ЗНИЖКА до 40% на ваше 1-ше замовлення ЗАРАЗ',
                     ],
 
-                    'name'      => 'Інформація про пропозицію',
+                    'name' => 'Інформація про пропозицію',
                 ],
 
-                'services-content'       => [
+                'services-content' => [
                     'description' => [
                         'emi-available-info'   => 'EMI безкоштовно доступно на всіх основних кредитних картках',
                         'free-shipping-info'   => 'Насолоджуйтеся безкоштовною доставкою на всі замовлення',
@@ -280,9 +280,9 @@ return [
                         'time-support-info'    => 'Присвячена підтримка 24/7 через чат та електронну пошту',
                     ],
 
-                    'name'        => 'Вміст послуг',
+                    'name' => 'Вміст послуг',
 
-                    'title'       => [
+                    'title' => [
                         'emi-available'   => 'EMI доступно',
                         'free-shipping'   => 'Безкоштовна доставка',
                         'product-replace' => 'Заміна продукту',
@@ -290,7 +290,7 @@ return [
                     ],
                 ],
 
-                'top-collections'        => [
+                'top-collections' => [
                     'content' => [
                         'sub-title-1' => 'Наші колекції',
                         'sub-title-2' => 'Наші колекції',
@@ -320,12 +320,12 @@ return [
 
     'installer' => [
         'index' => [
-            'create-administrator'      => [
+            'create-administrator' => [
                 'admin'            => 'Адміністратор',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Підтвердіть пароль',
-                'email-address'    => 'admin@example.com',
                 'email'            => 'Електронна пошта',
+                'email-address'    => 'admin@example.com',
                 'password'         => 'Пароль',
                 'title'            => 'Створити адміністратора',
             ],
@@ -346,8 +346,8 @@ return [
                 'default-currency'    => 'Стандартна валюта',
                 'default-locale'      => 'Стандартна локаль',
                 'default-timezone'    => 'Стандартна часова зона',
-                'default-url-link'    => 'https://localhost',
                 'default-url'         => 'Стандартний URL',
+                'default-url-link'    => 'https://localhost',
                 'dirham'              => 'Дирхам (AED)',
                 'euro'                => 'Євро (EUR)',
                 'iranian'             => 'Іранський ріал (IRR)',
@@ -368,32 +368,32 @@ return [
                 'warning-message'     => 'Увага! Налаштування мов системи за замовчуванням, а також основна валюта є постійними і більше не можуть бути змінені.',
             ],
 
-            'installation-processing'   => [
-                'bagisto-info'     => 'Створення таблиць бази даних, це може зайняти кілька хвилин',
+            'installation-processing' => [
                 'bagisto'          => 'Установка Bagisto',
+                'bagisto-info'     => 'Створення таблиць бази даних, це може зайняти кілька хвилин',
                 'title'            => 'Установка',
             ],
 
-            'installation-completed'    => [
+            'installation-completed' => [
                 'admin-panel'                => 'Панель адміністратора',
                 'bagisto-forums'             => 'Форум Bagisto',
                 'customer-panel'             => 'Панель клієнта',
                 'explore-bagisto-extensions' => 'Досліджуйте розширення Bagisto',
-                'title-info'                 => 'Bagisto успішно встановлено на вашій системі.',
                 'title'                      => 'Установка завершена',
+                'title-info'                 => 'Bagisto успішно встановлено на вашій системі.',
             ],
 
-            'ready-for-installation'    => [
+            'ready-for-installation' => [
                 'create-databsae-table'   => 'Створення таблиці бази даних',
-                'install-info-button'     => 'Натисніть кнопку нижче, щоб',
-                'install-info'            => 'Bagisto для встановлення',
                 'install'                 => 'Встановлення',
+                'install-info'            => 'Bagisto для встановлення',
+                'install-info-button'     => 'Натисніть кнопку нижче, щоб',
                 'populate-database-table' => 'Заповнення таблиць бази даних',
                 'start-installation'      => 'Почати встановлення',
                 'title'                   => 'Готовий до встановлення',
             ],
 
-            'start'                     => [
+            'start' => [
                 'locale'        => 'Локаль',
                 'main'          => 'Початок',
                 'select-locale' => 'Вибір локалі',
@@ -401,7 +401,7 @@ return [
                 'welcome-title' => 'Ласкаво просимо до Bagisto 2.0.',
             ],
 
-            'server-requirements'       => [
+            'server-requirements' => [
                 'calendar'    => 'Календар',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
@@ -416,45 +416,43 @@ return [
                 'openssl'     => 'openssl',
                 'pcre'        => 'pcre',
                 'pdo'         => 'pdo',
-                'php-version' => '8.1 або вище',
                 'php'         => 'PHP',
+                'php-version' => '8.1 або вище',
                 'session'     => 'сесія',
                 'title'       => 'Вимоги до сервера',
                 'tokenizer'   => 'токенізатор',
                 'xml'         => 'XML',
             ],
 
-            'arabic'                    => 'Арабська',
-            'back'                      => 'Назад',
-            'bagisto-info'              => 'Спільний проект спільноти від Webkul',
-            'bagisto-logo'              => 'Логотип Bagisto',
-            'bagisto'                   => 'Bagisto',
-            'bengali'                   => 'Бенгальська',
-            'chinese'                   => 'Китайська',
-            'continue'                  => 'Продовжити',
-            'dutch'                     => 'Голландська',
-            'english'                   => 'Англійська',
-            'french'                    => 'Французька',
-            'german'                    => 'Німецька',
-            'hebrew'                    => 'Іврит',
-            'hindi'                     => 'Гінді',
-            'installation-description'  => 'Встановлення Bagisto, як правило, включає кілька етапів. Ось загальний опис процесу встановлення Bagisto:',
-            'installation-info'         => 'Ми раді вас бачити тут!',
-            'installation-title'        => 'Ласкаво просимо до встановлення Bagisto',
-            'italian'                   => 'Італійська',
-            'japanese'                  => 'Японська',
-            'persian'                   => 'Перська',
-            'polish'                    => 'Польська',
-            'portuguese'                => 'Бразильська португальська',
-            'russian'                   => 'Російська',
-            'save-configuration'        => 'Зберегти конфігурацію',
-            'sinhala'                   => 'Сингальська',
-            'skip'                      => 'Пропустити',
-            'spanish'                   => 'Іспанська',
-            'title'                     => 'Установник Bagisto',
-            'turkish'                   => 'Турецька',
-            'ukrainian'                 => 'Українська',
-            'webkul'                    => 'Webkul',
+            'arabic'                   => 'Арабська',
+            'back'                     => 'Назад',
+            'bagisto'                  => 'Bagisto',
+            'bagisto-info'             => 'Спільний проект спільноти від Webkul',
+            'bagisto-logo'             => 'Логотип Bagisto',
+            'bengali'                  => 'Бенгальська',
+            'chinese'                  => 'Китайська',
+            'continue'                 => 'Продовжити',
+            'dutch'                    => 'Голландська',
+            'english'                  => 'Англійська',
+            'french'                   => 'Французька',
+            'german'                   => 'Німецька',
+            'hebrew'                   => 'Іврит',
+            'hindi'                    => 'Гінді',
+            'installation-description' => 'Встановлення Bagisto, як правило, включає кілька етапів. Ось загальний опис процесу встановлення Bagisto:',
+            'installation-info'        => 'Ми раді вас бачити тут!',
+            'installation-title'       => 'Ласкаво просимо до встановлення Bagisto',
+            'italian'                  => 'Італійська',
+            'japanese'                 => 'Японська',
+            'persian'                  => 'Перська',
+            'polish'                   => 'Польська',
+            'portuguese'               => 'Бразильська португальська',
+            'russian'                  => 'Російська',
+            'sinhala'                  => 'Сингальська',
+            'spanish'                  => 'Іспанська',
+            'title'                    => 'Установник Bagisto',
+            'turkish'                  => 'Турецька',
+            'ukrainian'                => 'Українська',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

@@ -48,15 +48,6 @@ return [
             'pending-payment' => 'Oczekuje na płatność',
             'processing'      => 'Zamówienie w trakcie realizacji',
         ],
-
-        'status'  => [
-            'all'        => 'Wszystkie',
-            'canceled'   => 'Anulowane',
-            'closed'     => 'Zamknięte',
-            'completed'  => 'Zakończone',
-            'pending'    => 'Oczekujące',
-            'processing' => 'W trakcie',
-        ],
     ],
 
     'account' => [
@@ -233,7 +224,6 @@ return [
                             'empty-info'    => 'Brak produktów dostępnych dla podanego terminu wyszukiwania.',
                             'empty-title'   => 'Nie znaleziono produktów',
                             'product-image' => 'Obraz produktu',
-                            'qty'           => ':qty dostępne',
                             'qty'           => 'Ilość',
                             'sku'           => 'SKU - :sku',
                             'title'         => 'Wyszukiwanie produktów',
@@ -266,7 +256,6 @@ return [
                         'state'            => 'Stan',
                         'street-address'   => 'Adres ulicy',
                         'telephone'        => 'Telefon',
-                        'title'            => 'Adres',
                         'title'            => 'Adres',
                     ],
 
@@ -3599,6 +3588,10 @@ return [
                     'admin-name'             => 'Nazwa Administratora',
                     'admin-name-tip'         => 'Ta nazwa będzie wyświetlana we wszystkich wiadomościach e-mail administratora',
                     'admin-page-limit'       => 'Domyślna liczba pozycji na stronę (Administrator)',
+                    'contact-email'          => 'Email kontaktowy',
+                    'contact-email-tip'      => 'Adres email będzie pokazywany na dole twoich emaili',
+                    'contact-name'           => 'Nazwa kontaktowa',
+                    'contact-name-tip'       => 'Ta nazwa będzie pokazywana na dole twoich emaili',
                     'email-sender-name'      => 'Nazwa Wysyłającego E-mail',
                     'email-sender-name-tip'  => 'Ta nazwa będzie wyświetlana w skrzynce odbiorczej klientów',
                     'info'                   => 'Ustaw nazwę nadawcy e-maila, adres e-mail sklepu, nazwę administratora i adres e-mail administratora.',

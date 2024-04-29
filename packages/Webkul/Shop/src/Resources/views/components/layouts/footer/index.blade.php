@@ -19,8 +19,8 @@
 @endphp
 
 <footer class="mt-9 bg-lightOrange max-sm:mt-8">
-    <div class="flex gap-x-6 gap-y-8 justify-between p-[60px] max-1060:flex-wrap max-1060:flex-col-reverse max-sm:px-4">
-        <div class="flex gap-24 items-start flex-wrap max-1180:gap-6 max-1060:justify-between">
+    <div class="flex justify-between gap-x-6 gap-y-8 p-[60px] max-1060:flex-col-reverse max-1060:flex-wrap max-sm:px-4">
+        <div class="flex flex-wrap items-start gap-24 max-1180:gap-6 max-1060:justify-between">
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
                     <ul class="grid gap-5 text-sm">
@@ -48,7 +48,7 @@
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
             <div class="grid gap-2.5">
                 <p
-                    class="max-w-[288px] leading-[45px] text-3xl italic text-navyBlue"
+                    class="max-w-[288px] text-3xl italic leading-[45px] text-navyBlue"
                     role="heading"
                     aria-level="2"
                 >
@@ -66,7 +66,7 @@
                     <div class="relative w-full">
                         <x-shop::form.control-group.control
                             type="email"
-                            class="blockw-[420px] max-w-full px-5 py-5 p-28 bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-xl text-xs font-medium max-1060:w-full"
+                            class="blockw-[420px] max-w-full rounded-xl border-[2px] border-[#E9DECC] bg-[#F1EADF] p-28 px-5 py-5 text-xs font-medium max-1060:w-full"
                             name="email"
                             rules="required|email"
                             label="Email"
@@ -78,7 +78,7 @@
 
                         <button
                             type="submit"
-                            class=" absolute flex items-center top-2 w-max px-7 py-3.5 bg-white rounded-xl text-xs font-medium rtl:left-2 ltr:right-2"
+                            class="absolute top-2 flex w-max items-center rounded-xl bg-white px-7 py-3.5 text-xs font-medium ltr:right-2 rtl:left-2"
                         >
                             @lang('shop::app.components.layouts.footer.subscribe')
                         </button>
@@ -90,7 +90,7 @@
         {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.after') !!}
     </div>
 
-    <div class="flex justify-between  px-[60px] py-3.5 bg-[#F1EADF]">
+    <div class="flex justify-between bg-[#F1EADF] px-[60px] py-3.5">
         {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
 
         <p class="text-sm text-[#4D4D4D]">

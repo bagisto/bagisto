@@ -48,15 +48,6 @@ return [
             'pending-payment' => '支払い保留中',
             'processing'      => '注文処理中',
         ],
-
-        'status' => [
-            'all'        => 'すべて',
-            'canceled'   => 'キャンセル済み',
-            'closed'     => '終了済み',
-            'completed'  => '完了済み',
-            'pending'    => '保留中',
-            'processing' => '処理中',
-        ],
     ],
 
     'account' => [
@@ -233,7 +224,6 @@ return [
                             'empty-info'    => '検索用語に該当する商品はありません。',
                             'empty-title'   => '商品が見つかりません',
                             'product-image' => '商品画像',
-                            'qty'           => ':qty 個利用可能',
                             'qty'           => '数量',
                             'sku'           => 'SKU - :sku',
                             'title'         => '商品を検索',
@@ -266,7 +256,6 @@ return [
                         'state'            => '都道府県',
                         'street-address'   => '住所',
                         'telephone'        => '電話番号',
-                        'title'            => '住所',
                         'title'            => '住所',
                     ],
 
@@ -3599,6 +3588,10 @@ return [
                     'admin-name'             => '管理者名',
                     'admin-name-tip'         => 'この名前はすべての管理者の電子メールに表示されます',
                     'admin-page-limit'       => 'デフォルトの1ページあたりのアイテム数（管理者）',
+                    'contact-email'          => '連絡先メール',
+                    'contact-email-tip'      => 'このメールアドレスは、あなたのメールの最下部に表示されます',
+                    'contact-name'           => '連絡先の名前',
+                    'contact-name-tip'       => 'この名前は、あなたのメールの最下部に表示されます',
                     'email-sender-name'      => '電子メール送信者名',
                     'email-sender-name-tip'  => 'この名前は顧客の受信トレイに表示されます',
                     'info'                   => '電子メール送信者名、ショップの電子メールアドレス、管理者名、および管理者の電子メールアドレスを設定します。',

@@ -80,7 +80,7 @@
                 :is-selected="true"
             >
                 <div class="container mt-[60px] max-1180:px-5">
-                    <p class="text-[#6E6E6E] text-lg max-1180:text-sm">
+                    <p class="text-lg text-[#6E6E6E] max-1180:text-sm">
                         {!! $product->description !!}
                     </p>
                 </div>
@@ -96,7 +96,7 @@
                     :is-selected="false"
                 >
                     <div class="container mt-[60px] max-1180:px-5">
-                        <div class="grid gap-4 grid-cols-[auto_1fr] max-w-max mt-8">
+                        <div class="mt-8 grid max-w-max grid-cols-[auto_1fr] gap-4">
                             @foreach ($customAttributeValues as $customAttributeValue)
                                 @if (! empty($customAttributeValue['value']))
                                     <div class="grid">
@@ -118,7 +118,7 @@
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
                                             <img 
-                                                class="h-5 w-5 min-h-5 min-w-5" 
+                                                class="h-5 min-h-5 w-5 min-w-5" 
                                                 src="{{ Storage::url($customAttributeValue['value']) }}" 
                                             />
                                         </a>
@@ -158,7 +158,7 @@
             </x-slot>
 
             <x-slot:content>
-                <div class="text-[#7D7D7D] text-lg max-1180:text-sm mb-5">
+                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -175,7 +175,7 @@
 
                 <x-slot:content>
                     <div class="container mb-4 max-1180:px-5">
-                        <div class="grid gap-4 grid-cols-[auto_1fr] max-w-max text-[#6E6E6E] text-lg max-1180:text-sm">
+                        <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-lg text-[#6E6E6E] max-1180:text-sm">
                             @foreach ($customAttributeValues as $customAttributeValue)
                                 @if (! empty($customAttributeValue['value']))
                                     <div class="grid">
@@ -197,8 +197,9 @@
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
                                             <img 
-                                                class="h-5 w-5 min-h-5 min-w-5" 
-                                                src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                                class="h-5 min-h-5 w-5 min-w-5" 
+                                                src="{{ Storage::url($customAttributeValue['value']) }}"
+                                                alt="Product Image"
                                             />
                                         </a>
                                     @else
@@ -273,22 +274,22 @@
                     >
 
                     <div class="container px-[60px] max-1180:px-0">
-                        <div class="flex gap-9 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
+                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
 
                             <!-- Details -->
-                            <div class="max-w-[590px] relative max-1180:w-full max-1180:max-w-full max-1180:px-5">
+                            <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5">
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
-                                <div class="flex gap-4 justify-between">
+                                <div class="flex justify-between gap-4">
                                     <h1 class="text-3xl font-medium max-sm:text-xl">
                                         {{ $product->name }}
                                     </h1>
 
                                     @if (core()->getConfigData('general.content.shop.wishlist_option'))
                                         <div
-                                            class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-2xl transition-all hover:opacity-[0.8] cursor-pointer"
+                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition-all hover:opacity-[0.8]"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
@@ -304,14 +305,14 @@
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
-                                <div class="flex gap-4 items-center mt-4">
+                                <div class="mt-4 flex items-center gap-4">
                                     <x-shop::products.star-rating 
                                         :value="$avgRatings"
                                         :is-editable=false
                                     />
 
-                                    <div class="flex gap-4 items-center">
-                                        <p class="text-[#6E6E6E] text-sm">
+                                    <div class="flex items-center gap-4">
+                                        <p class="text-sm text-[#6E6E6E]">
                                             ({{ $product->approvedReviews->count() }} @lang('reviews'))
                                         </p>
                                     </div>
@@ -322,7 +323,7 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="flex gap-2.5 items-center mt-5 text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
+                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
 
                                     <span class="text-lg text-[#6E6E6E]">
@@ -336,7 +337,7 @@
                                 </p>
 
                                 @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
-                                    <div class="grid gap-1.5 mt-2.5">
+                                    <div class="mt-2.5 grid gap-1.5">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
                                             <p class="text-[#6E6E6E] [&>*]:text-black">
                                                 {!! $offer !!}
@@ -349,7 +350,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-6 text-lg text-[#6E6E6E] max-sm:text-sm max-sm:mt-4">
+                                <p class="mt-6 text-lg text-[#6E6E6E] max-sm:mt-4 max-sm:text-sm">
                                     {!! $product->short_description !!}
                                 </p>
 
@@ -365,7 +366,7 @@
 
 
                                 <!-- Product Actions and Qunatity Box -->
-                                <div class="flex gap-4 max-w-[470px] mt-8">
+                                <div class="mt-8 flex max-w-[470px] gap-4">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
@@ -373,7 +374,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-4 py-4 px-7 rounded-xl"
+                                            class="gap-x-4 rounded-xl px-7 py-4"
                                         />
                                     @endif
 
@@ -401,7 +402,7 @@
                                 @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                     <x-shop::button
                                         type="submit"
-                                        class="primary-button w-full max-w-[470px] mt-5"
+                                        class="primary-button mt-5 w-full max-w-[470px]"
                                         button-type="secondary-button"
                                         :title="trans('shop::app.products.view.buy-now')"
                                         :disabled="! $product->isSaleable(1)"
@@ -415,11 +416,11 @@
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="flex gap-9 mt-10 max-sm:flex-wrap max-sm:justify-center">
+                                <div class="mt-10 flex gap-9 max-sm:flex-wrap max-sm:justify-center">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div
-                                        class="flex gap-2.5 justify-center items-center cursor-pointer"
+                                        class="flex cursor-pointer items-center justify-center gap-2.5"
                                         role="button"
                                         tabindex="0"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"
@@ -497,6 +498,8 @@
                             })
                             .catch(error => {
                                 this.isStoring[operation] = false;
+
+                                this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
                             });
                     },
 

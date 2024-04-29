@@ -19,7 +19,7 @@
 
     <!-- Page Header -->
     <div class="flex flex-wrap">
-        <div class="w-full flex justify-between px-[60px] border border-t-0 border-b border-l-0 border-r-0 py-4 max-lg:px-8 max-sm:px-4">
+        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-sm:px-4">
             <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 {!! view_render_event('bagisto.shop.checkout.cart.logo.before') !!}
 
@@ -89,26 +89,26 @@
                 <!-- Cart Information -->
                 <template v-else>
                     <div 
-                        class="flex flex-wrap gap-20 mt-8 pb-8 max-1060:flex-col"
+                        class="mt-8 flex flex-wrap gap-20 pb-8 max-1060:flex-col"
                         v-if="cart?.items?.length"
                     >
-                        <div class="grid gap-6 flex-1">
+                        <div class="flex flex-1 flex-col gap-6">
 
                             {!! view_render_event('bagisto.shop.checkout.cart.cart_mass_actions.before') !!}
 
                             <!-- Cart Mass Action Container -->
-                            <div class="flex justify-between items-center pb-2.5 border-b border-[#E9E9E9] max-sm:block">
+                            <div class="flex items-center justify-between border-b border-[#E9E9E9] pb-2.5 max-sm:block">
                                 <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
                                         id="select-all"
-                                        class="hidden peer"
+                                        class="peer hidden"
                                         v-model="allSelected"
                                         @change="selectAll"
                                     >
 
                                     <label
-                                        class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                                         for="select-all"
                                         role="button"
                                         tabindex="0"
@@ -125,11 +125,11 @@
                                 </div>
 
                                 <div 
-                                    class="max-sm:ltr:ml-9 max-sm:rtl:mr-9 max-sm:mt-2.5"
+                                    class="max-sm:mt-2.5 max-sm:ltr:ml-9 max-sm:rtl:mr-9"
                                     v-if="selectedItemsCount"
                                 >
                                     <span
-                                        class="text-base text-[#0A49A7] cursor-pointer" 
+                                        class="cursor-pointer text-base text-[#0A49A7]" 
                                         role="button"
                                         tabindex="0"
                                         @click="removeSelectedItems"
@@ -141,7 +141,7 @@
                                         <span class="mx-2.5 border-r-[2px] border-[#E9E9E9]"></span>
 
                                         <span
-                                            class="text-base text-[#0A49A7] cursor-pointer" 
+                                            class="cursor-pointer text-base text-[#0A49A7]" 
                                             role="button"
                                             tabindex="0"
                                             @click="moveToWishlistSelectedItems"
@@ -161,19 +161,19 @@
                                 class="grid gap-y-6" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex gap-x-2.5 justify-between flex-wrap pb-5 border-b border-[#E9E9E9]">
+                                <div class="flex flex-wrap justify-between gap-x-2.5 border-b border-[#E9E9E9] pb-5">
                                     <div class="flex gap-x-5">
-                                        <div class="select-none mt-11">
+                                        <div class="mt-11 select-none">
                                             <input
                                                 type="checkbox"
                                                 :id="'item_' + item.id"
-                                                class="hidden peer"
+                                                class="peer hidden"
                                                 v-model="item.selected"
                                                 @change="updateAllSelected"
                                             >
 
                                             <label
-                                                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                                                 :for="'item_' + item.id"
                                                 role="button"
                                                 tabindex="0"
@@ -186,7 +186,7 @@
                                         <!-- Cart Item Image -->
                                         <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                             <x-shop::media.images.lazy
-                                                class="h-[110px] min-w-[110px] max-w[110px] rounded-xl"
+                                                class="max-w[110px] h-[110px] min-w-[110px] rounded-xl"
                                                 ::src="item.base_image.small_image_url"
                                                 ::alt="item.name"
                                                 width="110"
@@ -216,13 +216,13 @@
 
                                             <!-- Cart Item Options Container -->
                                             <div
-                                                class="grid gap-x-2.5 gap-y-1.5 select-none"
+                                                class="grid select-none gap-x-2.5 gap-y-1.5"
                                                 v-if="item.options.length"
                                             >
                                                 <!-- Details Toggler -->
                                                 <div class="">
                                                     <p
-                                                        class="flex gap-x-1.5 text-base items-center cursor-pointer whitespace-nowrap"
+                                                        class="flex cursor-pointer items-center gap-x-1.5 whitespace-nowrap text-base"
                                                         @click="item.option_show = ! item.option_show"
                                                     >
                                                         @lang('shop::app.checkout.cart.index.see-details')
@@ -260,7 +260,7 @@
                                                 </p>
                                                 
                                                 <span
-                                                    class="text-base text-[#0A49A7] cursor-pointer"
+                                                    class="cursor-pointer text-base text-[#0A49A7]"
                                                     role="button"
                                                     tabindex="0"
                                                     @click="removeItem(item.id)"
@@ -274,7 +274,7 @@
                                             {!! view_render_event('bagisto.shop.checkout.cart.quantity_changer.before') !!}
 
                                             <x-shop::quantity-changer
-                                                class="flex gap-x-2.5 border rounded-[54px] border-navyBlue py-1.5 px-3.5 items-center max-w-max"
+                                                class="flex max-w-max items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5"
                                                 name="quantity"
                                                 ::value="item?.quantity"
                                                 @change="setItemQuantity(item.id, $event)"
@@ -284,7 +284,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="max-sm:hidden text-right">
+                                    <div class="text-right max-sm:hidden">
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.total.before') !!}
 
@@ -300,7 +300,7 @@
                                         
                                         <!-- Cart Item Remove Button -->
                                         <span
-                                            class="text-base text-[#0A49A7] cursor-pointer" 
+                                            class="cursor-pointer text-base text-[#0A49A7]" 
                                             role="button"
                                             tabindex="0"
                                             @click="removeItem(item.id)"
@@ -318,7 +318,7 @@
                             {!! view_render_event('bagisto.shop.checkout.cart.controls.before') !!}
         
                             <!-- Cart Item Actions -->
-                            <div class="flex flex-wrap gap-8 justify-end">
+                            <div class="flex flex-wrap justify-end gap-8">
                                 {!! view_render_event('bagisto.shop.checkout.cart.continue_shopping.before') !!}
 
                                 <a
@@ -356,7 +356,7 @@
 
                     <!-- Empty Cart Section -->
                     <div
-                        class="grid items-center justify-items-center w-full m-auto h-[476px] place-content-center text-center"
+                        class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center"
                         v-else
                     >
                         <img
@@ -418,6 +418,10 @@
                                 }
                             })
                             .catch(error => {});
+                    },
+
+                    setCart(cart) {
+                        this.cart = cart;
                     },
 
                     selectAll() {

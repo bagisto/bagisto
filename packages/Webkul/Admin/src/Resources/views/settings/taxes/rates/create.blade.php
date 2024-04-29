@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.rates.create.title')
     </x-slot>
@@ -18,23 +17,23 @@
 
                 {!! view_render_event('bagisto.admin.settings.taxes.rates.create.create_form_controls.before') !!}
 
-                <div class="flex justify-between items-center">
-                    <p class="text-xl text-gray-800 dark:text-white font-bold">
+                <div class="flex items-center justify-between">
+                    <p class="text-xl font-bold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.taxes.rates.create.title')
                     </p>
 
                     <!-- Cancel Button -->
-                    <div class="flex gap-x-2.5 items-center">
+                    <div class="flex items-center gap-x-2.5">
                         <a
                             href="{{ route('admin.settings.taxes.rates.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                            class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                         >
                             @lang('admin::app.settings.taxes.rates.create.back-btn')
                         </a>
 
                         <!-- Save Button -->
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             class="primary-button"
                         >
                             @lang('admin::app.settings.taxes.rates.create.save-btn')
@@ -43,11 +42,11 @@
                 </div>
 
                 <!-- Tax Rates Informations -->
-                <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+                <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                     <!-- Left Component -->
-                    <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
-                        <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                            <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
+                    <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
+                        <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                            <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.settings.taxes.rates.create.general')
                             </p>
 
@@ -74,7 +73,7 @@
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.taxes.rates.create.country')
                                 </x-admin::form.control-group.label>
-                
+
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="country"
@@ -95,10 +94,10 @@
                                         </option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
-                
+
                                 <x-admin::form.control-group.error control-name="country" />
                             </x-admin::form.control-group>
-                
+
                             <!-- State -->
                             <x-admin::form.control-group>
                                 <!-- Country Have States -->
@@ -106,7 +105,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.rates.create.state')
                                     </x-admin::form.control-group.label>
-                    
+
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="state"
@@ -120,8 +119,8 @@
                                             @lang('admin::app.settings.taxes.rates.edit.select-state')
                                         </option>
 
-                                        <option 
-                                            v-for='(state, index) in countryStates[country]' 
+                                        <option
+                                            v-for='(state, index) in countryStates[country]'
                                             :value="state.code"
                                             v-text="state.default_name"
                                         >
@@ -136,7 +135,7 @@
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.taxes.rates.create.state')
                                     </x-admin::form.control-group.label>
-                    
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="state"
@@ -170,14 +169,14 @@
                     </div>
 
                     <!-- Right Component -->
-                    <div class="flex flex-col gap-2 w-[360px] max-w-full max-md:w-full">
+                    <div class="flex w-[360px] max-w-full flex-col gap-2 max-md:w-full">
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.settings.taxes.rates.create.settings')
                                 </p>
                             </x-slot>
-                        
+
                             <x-slot:content>
                                 <!-- Enable Zip Range -->
                                 <x-admin::form.control-group>
@@ -283,8 +282,8 @@
                 methods: {
                     haveStates: function () {
                         /*
-                        * The double negation operator is used to convert the value to a boolean. 
-                        * It ensures that the final result is a boolean value, 
+                        * The double negation operator is used to convert the value to a boolean.
+                        * It ensures that the final result is a boolean value,
                         * true if the array has a length greater than 0, and otherwise false.
                         */
                         return !!this.countryStates[this.country]?.length;

@@ -20,7 +20,7 @@
                 >
                 </v-product-bundle-option-item>
 
-                <div class="flex justify-between items-center my-[20px]">
+                <div class="my-[20px] flex items-center justify-between">
                     <p class="text-sm">
                         @lang('Total Amount')
                     </p>
@@ -32,7 +32,7 @@
 
                 <ul class="grid gap-2.5 text-base">
                     <li v-for="option in options">
-                        <span class="inline-block mb-1.5">
+                        <span class="mb-1.5 inline-block">
                             @{{ option.label }}
                         </span>
 
@@ -89,7 +89,7 @@
                         <div class="grid gap-2">
                             <!-- None radio option if option is not required -->
                             <div
-                                class="flex gap-x-4 select-none"
+                                class="flex select-none gap-x-4"
                                 v-if="! option.is_required"
                             >
                                 <x-shop::form.control-group.control
@@ -104,7 +104,7 @@
                                 />
 
                                 <label
-                                    class="text-[#6E6E6E] cursor-pointer"
+                                    class="cursor-pointer text-[#6E6E6E]"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @lang('shop::app.products.view.type.bundle.none')
@@ -113,7 +113,7 @@
 
                             <!-- Options -->
                             <div
-                                class="flex gap-x-4 items-center select-none"
+                                class="flex select-none items-center gap-x-4"
                                 v-for="(product, index) in option.products"
                             >
                                 <x-shop::form.control-group.control
@@ -128,7 +128,7 @@
                                 />
 
                                 <label
-                                    class="text-[#6E6E6E] cursor-pointer"
+                                    class="cursor-pointer text-[#6E6E6E]"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
@@ -145,7 +145,7 @@
                         <div class="grid gap-2">
                         <!-- Options -->
                             <div
-                                class="flex gap-x-4 items-center select-none"
+                                class="flex select-none items-center gap-x-4"
                                 v-for="(product, index) in option.products"
                             >
                                 <x-shop::form.control-group.control
@@ -160,7 +160,7 @@
                                 />
 
                                 <label
-                                    class="text-[#6E6E6E] cursor-pointer"
+                                    class="cursor-pointer text-[#6E6E6E]"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
@@ -205,7 +205,7 @@
                     <x-shop::quantity-changer
                         ::name="'bundle_option_qty[' + option?.id + ']'"
                         ::value="productQty"
-                        class="gap-x-4 w-max rounded-xl py-2.5 px-4 mt-5 !border-[#E9E9E9]"
+                        class="mt-5 w-max gap-x-4 rounded-xl !border-[#E9E9E9] px-4 py-2.5"
                         @change="qtyUpdated($event)"
                     />
                 </template>
