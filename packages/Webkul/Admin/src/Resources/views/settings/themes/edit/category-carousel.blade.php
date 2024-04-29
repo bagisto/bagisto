@@ -102,7 +102,11 @@
                         v-for="(filter, index) in options.filters"
                     >
                         <!-- Hidden Input -->
-                        <input type="hidden" :name="'{{ $currentLocale->code }}[options][filters][' + filter.key +']'" :value="filter.value"> 
+                        <input
+                            type="hidden"
+                            :name="'{{ $currentLocale->code }}[options][filters][' + filter.key +']'"
+                            :value="filter.value"
+                        > 
                     
                         <!-- Details -->
                         <div 
@@ -181,7 +185,11 @@
                     </x-slot>
                 
                     <x-slot:content>
-                        <input type="hidden" name="type" value="category_carousel">
+                        <input
+                            type="hidden"
+                            name="type"
+                            value="category_carousel"
+                        >
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
@@ -276,73 +284,73 @@
                     </x-slot>
                 </x-admin::accordion>
             </div>
-
-            <!-- For Fitler Form -->
-            <x-admin::form
-                v-slot="{ meta, errors, handleSubmit }"
-                as="div"
-            >
-                <form @submit="handleSubmit($event, addFilter)">
-                    <x-admin::modal ref="categoryFilterModal">
-                        <!-- Modal Header -->
-                        <x-slot:header>
-                            <p class="text-lg font-bold text-gray-800 dark:text-white">
-                                @lang('admin::app.settings.themes.edit.create-filter')
-                            </p>
-                        </x-slot>
-
-                        <!-- Modal Content -->
-                        <x-slot:content>
-                            <!-- Key -->
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.themes.edit.key-input')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="key"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.key-input')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.key-input')"
-                                />
-
-                                <x-admin::form.control-group.error control-name="key" />
-                            </x-admin::form.control-group>
-
-                            <!-- Value -->
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.themes.edit.value-input')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="value"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.value-input')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')"
-                                />
-
-                                <x-admin::form.control-group.error control-name="value" />
-                            </x-admin::form.control-group>
-                        </x-slot>
-
-                        <!-- Modal Footer -->
-                        <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <button 
-                                    type="submit"
-                                    class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
-                                >
-                                    @lang('admin::app.settings.themes.edit.save-btn')
-                                </button>
-                            </div>
-                        </x-slot>
-                    </x-admin::modal>
-                </form>
-            </x-admin::form>
         </div>
+
+        <!-- For Fitler Form -->
+        <x-admin::form
+            v-slot="{ meta, errors, handleSubmit }"
+            as="div"
+        >
+            <form @submit="handleSubmit($event, addFilter)">
+                <x-admin::modal ref="categoryFilterModal">
+                    <!-- Modal Header -->
+                    <x-slot:header>
+                        <p class="text-lg font-bold text-gray-800 dark:text-white">
+                            @lang('admin::app.settings.themes.edit.create-filter')
+                        </p>
+                    </x-slot>
+
+                    <!-- Modal Content -->
+                    <x-slot:content>
+                        <!-- Key -->
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.themes.edit.key-input')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="key"
+                                rules="required"
+                                :label="trans('admin::app.settings.themes.edit.key-input')"
+                                :placeholder="trans('admin::app.settings.themes.edit.key-input')"
+                            />
+
+                            <x-admin::form.control-group.error control-name="key" />
+                        </x-admin::form.control-group>
+
+                        <!-- Value -->
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.themes.edit.value-input')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="value"
+                                rules="required"
+                                :label="trans('admin::app.settings.themes.edit.value-input')"
+                                :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                            />
+
+                            <x-admin::form.control-group.error control-name="value" />
+                        </x-admin::form.control-group>
+                    </x-slot>
+
+                    <!-- Modal Footer -->
+                    <x-slot:footer>
+                        <div class="flex items-center gap-x-2.5">
+                            <button 
+                                type="submit"
+                                class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
+                            >
+                                @lang('admin::app.settings.themes.edit.save-btn')
+                            </button>
+                        </div>
+                    </x-slot>
+                </x-admin::modal>
+            </form>
+        </x-admin::form>
     </script>
 
     <script type="module">

@@ -314,6 +314,20 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 ```
 
 
+<a name="notification"></a>
+### Notification
+
+<a name="the-notification-repository"></a>
+#### The `Webkul\Notification\Repositories\NotificationRepository` Repository
+
+**Impact Probability: Medium**
+
+1. We've made revisions to the `getAll` method to allow for optional parameters.
+
+```diff
+- public function getAll()
++ public function getAll(array $params = [])
+```
 
 <a name="shop-blade-updates"></a>
 ### Shop Blade Updates

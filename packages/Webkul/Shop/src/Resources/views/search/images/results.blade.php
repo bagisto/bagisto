@@ -44,10 +44,8 @@
                             v-for="term in searchedTerms"
                             @click="search(term)"
                         >
-                            <span
-                                class="max-w-full flex-initial p-2.5 text-xs font-normal leading-none"
-                                v-text="term.name"
-                            >
+                            <span class="max-w-full flex-initial p-2.5 text-xs font-normal leading-none">
+                                @{{ term.name }}
                             </span>
                         </span>
                     </div>

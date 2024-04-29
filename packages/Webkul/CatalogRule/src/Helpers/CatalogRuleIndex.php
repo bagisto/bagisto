@@ -10,8 +10,6 @@ class CatalogRuleIndex
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleProduct  $catalogRuleProductHelper
-     * @param  \Webkul\CatalogRuleProduct\Helpers\CatalogRuleProductPrice  $catalogRuleProductPriceHelper
      * @return void
      */
     public function __construct(

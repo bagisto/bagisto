@@ -36,6 +36,8 @@ return [
         'description-text'      => 'List all the Notifications',
         'marked-success'        => 'Notification Marked Successfully',
         'no-record'             => 'No Record Found',
+        'of'                    => 'of',
+        'per-page'              => 'Per Page',
         'read-all'              => 'Mark as Read',
         'title'                 => 'Notifications',
         'view-all'              => 'View All',
@@ -232,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'Add Address',
-                        'add-new-address'  => 'Add new address',
                         'add-new'          => 'Add new address',
+                        'add-new-address'  => 'Add new address',
                         'addresses'        => 'Addresses',
                         'back'             => 'Back',
                         'billing-address'  => 'Billing Address',
@@ -248,8 +250,8 @@ return [
                         'postcode'         => 'Zip/Postcode',
                         'proceed'          => 'Proceed',
                         'same-as-billing'  => 'Use same address for shipping?',
-                        'save-address'     => 'Save this to address book',
                         'save'             => 'Save',
+                        'save-address'     => 'Save this to address book',
                         'select-country'   => 'Select Country',
                         'select-state'     => 'Select State',
                         'shipping-address' => 'Shipping Address',
@@ -257,6 +259,7 @@ return [
                         'street-address'   => 'Street Address',
                         'telephone'        => 'Telephone',
                         'title'            => 'Address',
+                        'vat-id'           => 'Vat ID',
                     ],
 
                     'payment' => [
@@ -1060,6 +1063,7 @@ return [
                 'position'              => 'Position',
                 'price'                 => 'Price',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'Expression should be in double quotes.',
                 'save-btn'              => 'Save Attribute',
                 'select'                => 'Select',
                 'select-type'           => 'Select Attribute Type',
@@ -1123,6 +1127,7 @@ return [
                 'position'              => 'Position',
                 'price'                 => 'Price',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'Expression should be in double quotes.',
                 'save-btn'              => 'Save Attribute',
                 'select'                => 'Select',
                 'select-type'           => 'Select Attribute Type',
@@ -2332,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => 'The :name has already been taken.',
-            'create-btn'        => 'Create Page',
-            'title'             => 'Pages',
+            'already-taken' => 'The :name has already been taken.',
+            'create-btn'    => 'Create Page',
+            'channel'       => 'Channel',
+            'language'      => 'Language',
+            'title'         => 'Pages',
 
             'datagrid' => [
                 'delete'              => 'Delete',
@@ -2779,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Back',
-                    'basic-settings' => 'Basic Settings',
                     'country'        => 'Country',
                     'identifier'     => 'Identifier',
                     'save-btn'       => 'Save Tax Rate',
                     'select-country' => 'Select Country',
                     'select-state'   => 'Select State',
+                    'settings'       => 'Settings',
                     'state'          => 'State',
                     'tax-rate'       => 'Rate',
                     'title'          => 'Edit Tax Rate',

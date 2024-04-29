@@ -531,7 +531,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'אין',
+                    'none'         => 'אין',
+                    'total-amount' => 'סכום כולל',
                 ],
 
                 'downloadable' => [

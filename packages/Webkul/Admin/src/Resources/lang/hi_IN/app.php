@@ -36,6 +36,8 @@ return [
         'description-text' => 'सभी सूचनाएँ सूचीबद्ध करें',
         'marked-success'   => 'सूचना सफलतापूर्वक मार्क की गई',
         'no-record'        => 'कोई रिकॉर्ड नहीं मिला',
+        'of'               => 'का',
+        'per-page'         => 'प्रति पृष्ठ',
         'read-all'         => 'पढ़ा गया मार्क करें',
         'title'            => 'सूचनाएँ',
         'view-all'         => 'सभी देखें',
@@ -232,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'पता जोड़ें',
-                        'add-new-address'  => 'नया पता जोड़ें',
                         'add-new'          => 'नया पता जोड़ें',
+                        'add-new-address'  => 'नया पता जोड़ें',
                         'addresses'        => 'पते',
                         'back'             => 'वापस',
                         'billing-address'  => 'बिलिंग पता',
@@ -248,8 +250,8 @@ return [
                         'postcode'         => 'पिनकोड',
                         'proceed'          => 'आगे बढ़ें',
                         'same-as-billing'  => 'शिपिंग के लिए एक ही पता उपयोग करें?',
-                        'save-address'     => 'इसे पता पुस्तिका में सहेजें',
                         'save'             => 'सहेजें',
+                        'save-address'     => 'इसे पता पुस्तिका में सहेजें',
                         'select-country'   => 'देश चुनें',
                         'select-state'     => 'राज्य चुनें',
                         'shipping-address' => 'शिपिंग पता',
@@ -257,6 +259,7 @@ return [
                         'street-address'   => 'सड़क का पता',
                         'telephone'        => 'टेलीफोन',
                         'title'            => 'पता',
+                        'vat-id'           => 'वैट आईडी',
                     ],
 
                     'payment' => [
@@ -1060,6 +1063,7 @@ return [
                 'position'              => 'स्थिति',
                 'price'                 => 'मूल्य',
                 'regex'                 => 'रेगेक्स',
+                'regex-info'            => 'व्यक्ति दोहरे उद्धरण में होना चाहिए।',
                 'save-btn'              => 'गुण सहेजें',
                 'select'                => 'चयन',
                 'select-type'           => 'विशेषता प्रकार चुनें',
@@ -1123,6 +1127,7 @@ return [
                 'position'              => 'स्थिति',
                 'price'                 => 'मूल्य',
                 'regex'                 => 'रेगेक्स',
+                'regex-info'            => 'व्यक्ति दोहरे उद्धरण द्वारा अभिव्यक्ति होनी चाहिए।',
                 'save-btn'              => 'गुण सहेजें',
                 'select'                => 'चयन',
                 'select-type'           => 'विशेषता प्रकार चुनें',
@@ -2332,8 +2337,10 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => ':name पहले से ले लिया गया है।',
+            'already-taken' => 'यह :name पहले से ही लिया जा चुका है।',
+            'channel'       => 'चैनल',
             'create-btn'    => 'पेज बनाएं',
+            'language'      => 'भाषा',
             'title'         => 'पेज',
 
             'datagrid' => [
@@ -2779,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'पीछे',
-                    'basic-settings' => 'मूल सेटिंग्स',
                     'country'        => 'देश',
                     'identifier'     => 'पहचानकर्ता',
                     'save-btn'       => 'कर दर सहेजें',
                     'select-country' => 'देश चुनें',
                     'select-state'   => 'राज्य चुनें',
+                    'settings'       => 'सेटिंग्स',
                     'state'          => 'राज्य',
                     'tax-rate'       => 'दर',
                     'title'          => 'कर दर संपादित करें',

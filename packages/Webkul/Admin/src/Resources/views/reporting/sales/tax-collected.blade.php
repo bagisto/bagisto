@@ -94,7 +94,9 @@
                                 class="grid"
                                 v-for="category in report.statistics.top_categories"
                             >
-                                <p class="dark:text-white">@{{ category.name }}</p>
+                                <p class="dark:text-white">
+                                    @{{ category.name }}
+                                </p>
 
                                 <div class="flex items-center gap-5">
                                     <div class="relative h-2 w-full bg-slate-100">

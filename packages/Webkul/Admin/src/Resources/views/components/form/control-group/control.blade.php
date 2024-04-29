@@ -301,7 +301,10 @@
 @endswitch
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-checked-handler-template">
+    <script
+        type="text/x-template"
+        id="v-checked-handler-template"
+    >
     </script>
 
     <script type="module">

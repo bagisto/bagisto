@@ -15,7 +15,7 @@
             </p>
 
             <div class="flex items-center gap-x-2.5">
-                 <!-- Cancel Button -->
+                 <!-- Back Button -->
                 <a
                     href="{{ route('admin.dashboard.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"

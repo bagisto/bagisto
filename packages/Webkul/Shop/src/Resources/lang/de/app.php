@@ -531,7 +531,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Keine',
+                    'none'         => 'Keine',
+                    'total-amount' => 'Gesamtsumme',
                 ],
 
                 'downloadable' => [

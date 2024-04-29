@@ -520,7 +520,8 @@ return [
         ],
 
         'sort-by' => [
-            'title'   => 'ترتيب حسب',
+            'title'        => 'ترتيب حسب',
+            'total-amount' => 'إجمالي المبلغ',
         ],
 
         'view' => [

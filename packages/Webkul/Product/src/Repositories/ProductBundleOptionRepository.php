@@ -11,7 +11,6 @@ class ProductBundleOptionRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
      * @return void
      */
     public function __construct(

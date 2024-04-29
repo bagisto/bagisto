@@ -531,7 +531,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Hiçbiri',
+                    'none'         => 'Hiçbiri',
+                    'total-amount' => 'Toplam Tutar',
                 ],
 
                 'downloadable' => [

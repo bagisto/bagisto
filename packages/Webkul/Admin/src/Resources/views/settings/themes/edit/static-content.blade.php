@@ -7,7 +7,7 @@
         id="v-static-content-template"
     >
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
-            <div class="flex min-w-[931px] flex-1 flex-col gap-2 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
                         <div class="flex flex-col gap-1">
@@ -115,7 +115,11 @@
                     </x-slot>
                 
                     <x-slot:content>
-                        <input type="hidden" name="type" value="static_content">
+                        <input
+                            type="hidden"
+                            name="type"
+                            value="static_content"
+                        />
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
@@ -214,24 +218,27 @@
     </script>
 
     <!-- Html Editor Template -->
-    <script type="text/x-template" id="v-html-editor-theme-template">
-        <div>
-            <div ref="html"></div>
-        </div>
+    <script
+        type="text/x-template"
+        id="v-html-editor-theme-template"
+    >
+        <div ref="html"></div>
     </script>
 
     <!-- Css Editor Template -->
-    <script type="text/x-template" id="v-css-editor-theme-template">
-        <div>
-            <div ref="css"></div>
-        </div>
+    <script
+        type="text/x-template"
+        id="v-css-editor-theme-template"
+    >
+        <div ref="css"></div>
     </script>
 
     <!-- Static Content Previewer -->
-    <script type="text/x-template" id="v-static-content-previewer-template">
-        <div>   
-            <div v-html="getPreviewContent()"></div>
-        </div>
+    <script
+        type="text/x-template"
+        id="v-static-content-previewer-template"
+    >
+        <div v-html="getPreviewContent()"></div>
     </script>
 
     <script type="module">

@@ -13,7 +13,7 @@
                 @lang('admin::app.sales.refunds.view.title', ['refund_id' => $refund->id])
             </p>
 
-            <!-- Cancel Button -->
+            <!-- Back Button -->
             <div class="flex items-center gap-x-2.5">
                 <a
                     href="{{ route('admin.sales.refunds.index') }}"

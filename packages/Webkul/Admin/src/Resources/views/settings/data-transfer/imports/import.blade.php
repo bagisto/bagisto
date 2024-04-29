@@ -9,7 +9,7 @@
         </p>
 
         <div class="flex items-center gap-x-2.5">
-            <!-- Cancel Button -->
+            <!-- Back Button -->
             <a
                 href="{{ route('admin.settings.data_transfer.imports.index') }}"
                 class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
@@ -31,7 +31,10 @@
     <v-import />
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-import-template">
+        <script
+            type="text/x-template"
+            id="v-import-template"
+        >
             <!-- Body Content -->
             <div class="box-shadow mt-3.5 grid gap-2.5 p-5 max-xl:flex-wrap">
                 <!-- Validate CSV File -->

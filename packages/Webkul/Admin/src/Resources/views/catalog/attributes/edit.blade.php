@@ -285,10 +285,8 @@
 
                                                         <!-- Admin-->
                                                         <x-admin::table.td>
-                                                            <p
-                                                                class="dark:text-white"
-                                                                v-text="element.admin_name"
-                                                            >
+                                                            <p class="dark:text-white">
+                                                                @{{ element.admin_name }}
                                                             </p>
 
                                                             <input
@@ -300,10 +298,8 @@
 
                                                         <!-- Loacles -->
                                                         <x-admin::table.td v-for="locale in allLocales">
-                                                            <p
-                                                                class="dark:text-white"
-                                                                v-text="element['locales'][locale.code]"
-                                                            >
+                                                            <p class="dark:text-white">
+                                                                @{{ element['locales'][locale.code] }}
                                                             </p>
 
                                                             <input
@@ -517,14 +513,14 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            class="cursor-pointer"
+                                            class="cursor-not-allowed"
                                             name="validation"
                                             :value="$attribute->validation"
-                                            v-model="validationType"
+                                            disabled="disabled"
                                         >
                                             <!-- Here! All Needed types are defined -->
                                             @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
-                                                <option value="{{ $type }}">
+                                                <option value="{{ $type }}" {{ $attribute->validation == $type ? 'selected' : '' }}>
                                                     @lang('admin::app.catalog.attributes.edit.' . $type)
                                                 </option>
                                             @endforeach
@@ -533,19 +529,38 @@
                                 @endif
 
                                 <!-- REGEX -->
-                                <x-admin::form.control-group v-if="validationType === 'regex'">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.catalog.attributes.create.regex')
-                                    </x-admin::form.control-group.label>
+                                @if($attribute->validation == "regex")
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.catalog.attributes.create.regex')
+                                        </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="regex"
-                                        v-model="validationType"
-                                    />
+                                        <v-field
+                                            type="text"
+                                            name="regex"
+                                            :value="{{ json_encode($attribute->regex) }}"
+                                            label="{{ trans('admin::app.catalog.attributes.create.regex') }}"
+                                            v-slot="{ field }"
+                                        >
+                                            <input
+                                                type="text"
+                                                name="regex"
+                                                id="regex"
+                                                v-bind="field"
+                                                :value="{{ json_encode($attribute->regex) }}"
+                                                :class="[errors['{{ $attribute->regex }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                                class="flex min-h-[39px] w-full cursor-not-allowed rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                                placeholder="{{ trans('admin::app.catalog.attributes.create.regex') }}"
+                                                disabled
+                                            >
+                                        </v-field>
 
-                                    <x-admin::form.control-group.error control-name="regex" />
-                                </x-admin::form.control-group>
+                                        <!-- Regex Info -->
+                                        <p class="mt-2 text-xs font-medium text-gray-500 dark:text-gray-300">
+                                            @lang('admin::app.catalog.attributes.create.regex-info')
+                                        </p>
+                                    </x-admin::form.control-group>
+                                @endif
 
                                 <!-- Is Required -->
                                 <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
@@ -947,8 +962,6 @@
 
                         swatchType: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
 
-                        validationType: "{{ $attribute->validation }}",
-
                         isNullOptionChecked: false,
 
                         swatchValue: [
@@ -962,8 +975,6 @@
                         optionIsNew: true,
 
                         optionId: 0,
-
-                        src: "{{ route('admin.catalog.attributes.options', $attribute->id) }}",
                     }
                 },
 
@@ -1036,7 +1047,7 @@
                     },
 
                     getAttributesOption() {
-                        this.$axios.get(`${this.src}`)
+                        this.$axios.get(`{{ route('admin.catalog.attributes.options', $attribute->id) }}`)
                             .then(response => {
                                 let options = response.data;
 

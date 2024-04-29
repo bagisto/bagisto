@@ -531,7 +531,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'কোনটি নেই',
+                    'none'         => 'কোনটি নেই',
+                    'total-amount' => 'মোট পরিমাণ',
                 ],
 
                 'downloadable' => [

@@ -531,7 +531,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'なし',
+                    'none'         => 'なし',
+                    'total-amount' => '合計金額',
                 ],
 
                 'downloadable' => [
