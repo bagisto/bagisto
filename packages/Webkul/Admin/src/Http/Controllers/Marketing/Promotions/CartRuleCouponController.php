@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CartRuleCouponDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
@@ -81,10 +82,8 @@ class CartRuleCouponController extends Controller
 
     /**
      * Mass delete the coupons.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function massDelete(MassDestroyRequest $massDestroyRequest)
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
     {
         $couponIds = $massDestroyRequest->input('indices');
 
@@ -92,12 +91,16 @@ class CartRuleCouponController extends Controller
             $coupon = $this->cartRuleCouponRepository->find($couponId);
 
             if ($coupon) {
+                Event::dispatch('cart_rules.coupons.delete.before', $coupon);
+
                 $this->cartRuleCouponRepository->delete($couponId);
+
+                Event::dispatch('cart_rules.coupons.delete.after', $coupon);
             }
         }
 
-        session()->flash('success', trans('admin::app.marketing.promotions.cart-rules-coupons.mass-delete-success'));
-
-        return redirect()->back();
+        return new JsonResponse([
+            'message' => trans('admin::app.marketing.promotions.cart-rules-coupons.mass-delete-success'),
+        ]);
     }
 }
