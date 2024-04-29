@@ -462,25 +462,25 @@ class Bundle extends AbstractType
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        $result = new CartItemValidationResult();
+        $validation = new CartItemValidationResult();
 
         if (parent::isCartItemInactive($item)) {
-            $result->itemIsInactive();
+            $validation->itemIsInactive();
 
-            return $result;
+            return $validation;
         }
 
         $basePrice = 0;
 
         foreach ($item->children as $childItem) {
-            $childResult = $childItem->getTypeInstance()->validateCartItem($childItem);
+            $childValidation = $childItem->getTypeInstance()->validateCartItem($childItem);
 
-            if ($childResult->isItemInactive()) {
-                $result->itemIsInactive();
+            if ($childValidation->isItemInactive()) {
+                $validation->itemIsInactive();
             }
 
-            if ($childResult->isCartInvalid()) {
-                $result->cartIsInvalid();
+            if ($childValidation->isCartInvalid()) {
+                $validation->cartIsInvalid();
             }
 
             $basePrice += $childItem->base_price * $childItem->quantity;
@@ -514,7 +514,7 @@ class Bundle extends AbstractType
 
         $item->save();
 
-        return $result;
+        return $validation;
     }
 
     /**

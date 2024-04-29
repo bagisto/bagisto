@@ -1050,10 +1050,6 @@ class Cart
             $address = Tax::getDefaultAddress();
         }
 
-        $shippingRate->applied_tax_rate = null;
-
-        $shippingRate->tax_percent = $shippingRate->tax_amount = $shippingRate->base_tax_amount = 0;
-
         Event::dispatch('checkout.cart.calculate.shipping.tax.before', $this->cart);
 
         Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use ($shippingRate) {
