@@ -64,7 +64,7 @@ class CartController extends APIController
             if (request()->get('is_buy_now')) {
                 Cart::deActivateCart();
 
-                $response['redirect'] = route('shop.checkout.onepage.index');
+                $response['redirect'] = route('shop.product_or_category.index', $product->url_key);
             }
 
             $cart = Cart::addProduct($product, request()->all());
