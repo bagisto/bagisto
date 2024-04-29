@@ -36,6 +36,8 @@ return [
         'description-text' => 'Wypisz wszystkie powiadomienia',
         'marked-success'   => 'Powiadomienie oznaczone jako przeczytane',
         'no-record'        => 'Brak dostępnych powiadomień',
+        'of'               => 'z',
+        'per-page'         => 'na stronę',
         'read-all'         => 'Oznacz jako przeczytane',
         'title'            => 'Powiadomienia',
         'view-all'         => 'Zobacz wszystkie',
@@ -2335,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name zostało już zajęte.',
-            'create-btn'        => 'Utwórz stronę',
-            'title'             => 'Strony',
+            'already-taken' => 'Strona o nazwie :name już istnieje.',
+            'create-btn'    => 'Utwórz stronę',
+            'channel'       => 'Kanał',
+            'language'      => 'Język',
+            'title'         => 'Strony',
 
             'datagrid' => [
                 'delete'              => 'Usuń',

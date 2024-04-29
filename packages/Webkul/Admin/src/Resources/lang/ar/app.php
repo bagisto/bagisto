@@ -36,6 +36,8 @@ return [
         'description-text' => 'قائمة جميع الإشعارات',
         'marked-success'   => 'تم وضع علامة على الإشعار بنجاح',
         'no-record'        => 'لم يتم العثور على سجلات',
+        'of'               => 'من',
+        'per-page'         => 'في الصفحة',
         'read-all'         => 'وضع علامة كمقروء',
         'title'            => 'الإشعارات',
         'view-all'         => 'عرض الكل',
@@ -2335,8 +2337,10 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => ':name تم أخذه بالفعل.',
+            'already-taken' => 'تم استخدام :name بالفعل.',
             'create-btn'    => 'إنشاء صفحة',
+            'channel'       => 'القناة',
+            'language'      => 'اللغة',
             'title'         => 'الصفحات',
 
             'datagrid' => [

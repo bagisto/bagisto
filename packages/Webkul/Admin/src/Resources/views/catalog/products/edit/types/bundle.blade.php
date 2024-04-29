@@ -200,7 +200,10 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-bundle-option-item-template">
+    <script
+        type="text/x-template"
+        id="v-bundle-option-item-template"
+    >
         <!-- Panel -->
         <div>
             <!-- Hidden Inputs -->

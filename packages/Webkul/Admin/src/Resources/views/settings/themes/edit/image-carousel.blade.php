@@ -103,23 +103,21 @@
                                         <div class="flex justify-between"> 
                                             @lang('admin::app.settings.themes.edit.image'): 
 
-                                            <span class="text-gray-600 transition-all dark:text-gray-300">
-                                                <a
-                                                    :href="'{{ config('app.url') }}/' + image.image"
-                                                    :ref="'image_' + index"
-                                                    target="_blank"
-                                                    class="text-blue-600 transition-all hover:underline ltr:ml-2 rtl:mr-2"
-                                                >
-                                                    <span 
-                                                        :ref="'imageName_' + index"
-                                                        v-text="image.image"
-                                                    ></span>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </p>
+                                                <span class="text-gray-600 transition-all dark:text-gray-300">
+                                                    <a
+                                                        :href="'{{ config('app.url') }}/' + image.image"
+                                                        :ref="'image_' + index"
+                                                        target="_blank"
+                                                        class="text-blue-600 transition-all hover:underline ltr:ml-2 rtl:mr-2"
+                                                    >
+                                                        <span :ref="'imageName_' + index">
+                                                            @{{ image.image }}
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
 
                             <!-- Actions -->
                             <div class="grid place-content-start gap-1 text-right">

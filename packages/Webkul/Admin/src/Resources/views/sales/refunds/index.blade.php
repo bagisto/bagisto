@@ -9,7 +9,8 @@
         </p>
 
         <div class="flex items-center gap-x-2.5">
-            <x-admin::datagrid.export src="{{ route('admin.sales.refunds.index') }}" />
+            <!-- Export Modal -->
+            <x-admin::datagrid.export :src="route('admin.sales.refunds.index')" />
         </div>
     </div>
 

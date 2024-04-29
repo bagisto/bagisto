@@ -50,7 +50,7 @@
             {!! view_render_event('bagisto.admin.marketing.search_seo.search_synonyms.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.search_synonyms.index') }}"
+                :src="route('admin.marketing.search_seo.search_synonyms.index')"
                 ref="datagrid"
             >
                 <template #body="{
@@ -88,14 +88,14 @@
                                 </label>
                             </p>
 
-                            <!-- ID -->
-                            <p v-text="record.id"></p>
+                            <!-- Id -->
+                            <p>@{{ record.id }}</p>
 
                             <!-- Name -->
-                            <p v-text="record.name"></p>
+                            <p>@{{ record.name }}</p>
 
                             <!-- Terms -->
-                            <p v-text="record.terms"></p>
+                            <p>@{{ record.terms }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">

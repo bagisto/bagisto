@@ -398,7 +398,10 @@
     {!! view_render_event('bagisto.admin.catalog.categories.create.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-description-template">
+        <script
+            type="text/x-template"
+            id="v-description-template"
+        >
             <div>
                 <slot :is-description-required="isDescriptionRequired"></slot>
             </div>

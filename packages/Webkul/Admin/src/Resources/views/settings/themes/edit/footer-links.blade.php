@@ -80,24 +80,24 @@
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.settings.themes.edit.url'):
 
-                                            <a
-                                                :href="link.url"
-                                                target="_blank"
-                                                class="text-blue-600 transition-all hover:underline"
-                                                v-text="link.url"
-                                            >
-                                            </a>
-                                        </p>
+                                                    <a
+                                                        :href="link.url"
+                                                        target="_blank"
+                                                        class="text-blue-600 transition-all hover:underline"
+                                                    >
+                                                        @{{ link.url }}
+                                                    </a>
+                                                </div>
+                                            </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.settings.themes.edit.filter-title'):
 
-                                            <span
-                                                class="text-gray-600 transition-all dark:text-gray-300"
-                                                v-text="link.title"
-                                            >
-                                            </span>
-                                        </p>
+                                                    <span class="text-gray-600 transition-all dark:text-gray-300">
+                                                        @{{ link.title }}
+                                                    </span>
+                                                </div>
+                                            </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.settings.themes.edit.sort-order'):
@@ -149,25 +149,29 @@
                                 
                             </p>
 
-                            <p class="text-gray-400">
-                                @lang('admin::app.settings.themes.edit.footer-link-description')
-                            </p>
+                                <p class="text-gray-400">
+                                    @lang('admin::app.settings.themes.edit.footer-link-description')
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        
-            <!-- General -->
-            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
-                <x-admin::accordion>
-                    <x-slot:header>
-                        <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
-                            @lang('admin::app.settings.themes.edit.general')
-                        </p>
-                    </x-slot>
-                
-                    <x-slot:content>
-                        <input type="hidden" name="type" value="footer_links">
+            
+                <!-- General -->
+                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+                    <x-admin::accordion>
+                        <x-slot:header>
+                            <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
+                                @lang('admin::app.settings.themes.edit.general')
+                            </p>
+                        </x-slot>
+                    
+                        <x-slot:content>
+                            <input
+                                type="hidden"
+                                name="type"
+                                value="footer_links"
+                            />
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">

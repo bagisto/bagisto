@@ -41,7 +41,9 @@
                                 class="grid"
                                 v-for="customer in report.statistics"
                             >
-                                <p class="dark:text-white">@{{ customer.group_name }}</p>
+                                <p class="dark:text-white">
+                                    @{{ customer.group_name }}
+                                </p>
 
                                 <div class="flex items-center gap-5">
                                     <div class="relative h-2 w-full bg-slate-100">

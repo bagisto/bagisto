@@ -36,6 +36,8 @@ return [
         'description-text' => 'Lister toutes les notifications',
         'marked-success'   => 'Notification marquée avec succès',
         'no-record'        => 'Aucun enregistrement trouvé',
+        'of'               => 'de',
+        'per-page'         => 'Par page',
         'read-all'         => 'Marquer comme lu',
         'title'            => 'Notifications',
         'view-all'         => 'Voir tout',
@@ -2335,8 +2337,10 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => 'Le :name a déjà été pris.',
+            'already-taken' => 'Le :name est déjà pris.',
             'create-btn'    => 'Créer une page',
+            'channel'       => 'Canal',
+            'language'      => 'Langue',
             'title'         => 'Pages',
 
             'datagrid' => [

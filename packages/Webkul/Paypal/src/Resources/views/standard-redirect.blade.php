@@ -9,7 +9,11 @@
 
         @foreach ($paypalStandard->getFormFields() as $name => $value)
 
-            <input type="hidden" name="{{ $name }}" value="{{ $value }}">
+            <input
+                type="hidden"
+                name="{{ $name }}"
+                value="{{ $value }}"
+            />
 
         @endforeach
     </form>

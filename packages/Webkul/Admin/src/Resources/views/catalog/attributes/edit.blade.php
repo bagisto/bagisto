@@ -285,10 +285,8 @@
 
                                                         <!-- Admin-->
                                                         <x-admin::table.td>
-                                                            <p
-                                                                class="dark:text-white"
-                                                                v-text="element.admin_name"
-                                                            >
+                                                            <p class="dark:text-white">
+                                                                @{{ element.admin_name }}
                                                             </p>
 
                                                             <input
@@ -300,10 +298,8 @@
 
                                                         <!-- Loacles -->
                                                         <x-admin::table.td v-for="locale in allLocales">
-                                                            <p
-                                                                class="dark:text-white"
-                                                                v-text="element['locales'][locale.code]"
-                                                            >
+                                                            <p class="dark:text-white">
+                                                                @{{ element['locales'][locale.code] }}
                                                             </p>
 
                                                             <input

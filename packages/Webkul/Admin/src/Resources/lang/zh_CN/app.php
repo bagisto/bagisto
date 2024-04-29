@@ -36,6 +36,8 @@ return [
         'description-text' => '列出所有通知',
         'marked-success'   => '通知标记成功',
         'no-record'        => '未找到记录',
+        'of'               => '的',
+        'per-page'         => '每页',
         'read-all'         => '标记为已读',
         'title'            => '通知',
         'view-all'         => '查看全部',
@@ -2335,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name 已被使用。',
-            'create-btn'        => '创建页面',
-            'title'             => '页面',
+            'already-taken' => '该 :name 已被使用。',
+            'create-btn'    => '创建页面',
+            'channel'       => '渠道',
+            'language'      => '语言',
+            'title'         => '页面',
 
             'datagrid' => [
                 'delete'              => '删除',

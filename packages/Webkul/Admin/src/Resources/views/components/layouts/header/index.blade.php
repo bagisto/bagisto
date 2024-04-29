@@ -199,7 +199,10 @@
 </x-admin::drawer>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-mega-search-template">
+    <script
+        type="text/x-template"
+        id="v-mega-search-template"
+    >
         <div class="relative flex w-[525px] max-w-[525px] items-center max-lg:w-[400px] ltr:ml-2.5 rtl:mr-2.5">
             <i class="icon-search absolute top-1.5 flex items-center text-2xl ltr:left-3 rtl:right-3"></i>
 
@@ -264,10 +267,8 @@
 
                                     <!-- Details -->
                                     <div class="grid place-content-start gap-1.5">
-                                        <p
-                                            class="text-base font-semibold text-gray-600 dark:text-gray-300"
-                                            v-text="product.name"
-                                        >
+                                        <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+                                            @{{ product.name }}
                                         </p>
 
                                         <p class="text-gray-500">
@@ -278,10 +279,8 @@
 
                                 <!-- Right Information -->
                                 <div class="grid place-content-center gap-1 text-right">
-                                    <p
-                                        class="font-semibold text-gray-600 dark:text-gray-300"
-                                        v-text="product.formatted_price"
-                                    >
+                                    <p class="font-semibold text-gray-600 dark:text-gray-300">
+                                        @{{ product.formatted_price }}
                                     </p>
                                 </div>
                             </a>
@@ -531,7 +530,10 @@
         });
     </script>
 
-    <script type="text/x-template" id="v-notifications-template">
+    <script
+        type="text/x-template"
+        id="v-notifications-template"
+    >
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <!-- Notification Toggle -->
             <x-slot:toggle>
@@ -544,9 +546,9 @@
                 
                     <span
                         class="absolute -top-2 flex h-5 min-w-5 cursor-pointer items-center justify-center rounded-full bg-blue-600 p-1.5 text-[10px] font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5"
-                        v-text="totalUnRead"
                         v-if="totalUnRead"
                     >
+                        @{{ totalUnRead }}
                     </span>
                 </span>
             </x-slot>
@@ -714,7 +716,10 @@
         });
     </script>
 
-    <script type="text/x-template" id="v-dark-template">
+    <script
+        type="text/x-template"
+        id="v-dark-template"
+    >
         <div class="flex">
             <span
                 class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950"

@@ -233,7 +233,10 @@
     </script>
 
     <!-- Product Review Item Template -->
-    <script type="text/x-template" id="v-product-review-item-template">
+    <script
+        type="text/x-template"
+        id="v-product-review-item-template"
+    >
         <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-xl:mb-5 max-sm:flex-wrap">
             <div>
                 <img
@@ -249,20 +252,16 @@
                     class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-[#F5F5F5] max-sm:hidden"
                     :title="review.name"
                 >
-                    <span
-                        class="text-2xl font-semibold text-[#6E6E6E]"
-                        v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
-                    >
+                    <span class="text-2xl font-semibold text-[#6E6E6E]">
+                        @{{ review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('') }}
                     </span>
                 </div>
             </div>
 
             <div class="w-full">
                 <div class="flex justify-between">
-                    <p
-                        class="text-xl font-medium max-sm:text-base"
-                        v-text="review.name"
-                    >
+                    <p class="text-xl font-medium max-sm:text-base">
+                        @{{ review.name }}
                     </p>
 
                     <div class="flex items-center">
@@ -273,22 +272,16 @@
                     </div>
                 </div>
 
-                <p
-                    class="mt-2.5 text-sm font-medium max-sm:text-xs"
-                    v-text="review.created_at"
-                >
+                <p class="mt-2.5 text-sm font-medium max-sm:text-xs">
+                    @{{ review.created_at }}
                 </p>
 
-                <p
-                    class="mt-5 text-base font-semibold text-[#6E6E6E] max-sm:text-xs"
-                    v-text="review.title"
-                >
+                <p class="mt-5 text-base font-semibold text-[#6E6E6E] max-sm:text-xs">
+                    @{{ review.title }}
                 </p>
 
-                <p
-                    class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs"
-                    v-text="review.comment"
-                >
+                <p class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs">
+                    @{{ review.comment }}
                 </p>
 
                 <button
