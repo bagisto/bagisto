@@ -1,11 +1,10 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.account.edit.title')
     </x-slot>
 
     <!-- Input Form -->
-    <x-admin::form 
+    <x-admin::form
         :action="route('admin.account.update')"
         enctype="multipart/form-data"
         method="PUT"

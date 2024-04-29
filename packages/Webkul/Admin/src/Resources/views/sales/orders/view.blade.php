@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
     </x-slot>
@@ -8,7 +7,7 @@
     <div class="grid">
         <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
             {!! view_render_event('bagisto.admin.sales.order.title.before', ['order' => $order]) !!}
-            
+
             <div class="flex items-center gap-2.5">
                 <p class="text-xl font-bold leading-6 text-gray-800 dark:text-white">
                     @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
@@ -143,13 +142,13 @@
                                     @else
                                         <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                            
-                                            <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400"> 
-                                                @lang('admin::app.sales.invoices.view.product-image') 
+
+                                            <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
+                                                @lang('admin::app.sales.invoices.view.product-image')
                                             </p>
                                         </div>
                                     @endif
-                    
+
                                     <div class="grid place-content-start gap-1.5">
                                         <p class="text-base font-semibold text-gray-800 dark:text-white">
                                             {{ $item->name }}
@@ -382,7 +381,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Customer's comment form -->
                 <div class="box-shadow rounded bg-white dark:bg-gray-900">
                     <p class="p-4 pb-0 text-base font-semibold text-gray-800 dark:text-white">
@@ -396,7 +395,7 @@
                                     <x-admin::form.control-group.control
                                         type="textarea"
                                         id="comment"
-                                        name="comment" 
+                                        name="comment"
                                         rules="required"
                                         :label="trans('admin::app.sales.orders.view.comments')"
                                         :placeholder="trans('admin::app.sales.orders.view.write-your-comment')"
@@ -426,12 +425,12 @@
                                         tabindex="0"
                                     >
                                     </span>
-                        
+
                                     <p class="flex cursor-pointer items-center gap-x-1 font-semibold text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100">
                                         @lang('admin::app.sales.orders.view.notify-customer')
                                     </p>
                                 </label>
-                                
+
                                 <button
                                     type="submit"
                                     class="secondary-button"
@@ -441,7 +440,7 @@
                                 </button>
                             </div>
                         </div>
-                    </x-admin::form> 
+                    </x-admin::form>
 
                     <span class="block w-full border-b dark:border-gray-800"></span>
 
@@ -453,9 +452,9 @@
                             </p>
 
                             <!-- Notes List Title and Time -->
-                            <p class="flex items-center gap-2 text-gray-600 dark:text-gray-300">  
+                            <p class="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                                 @if ($comment->customer_notified)
-                                    <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600"></span> 
+                                    <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600"></span>
 
                                     @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @else
@@ -507,7 +506,7 @@
                                 {!! view_render_event('bagisto.admin.sales.order.customer_group.after', ['order' => $order]) !!}
                             </div>
                         </div>
-                        
+
                         <!-- Billing Address -->
                         @if ($order->billing_address)
                             <span class="block w-full border-b dark:border-gray-800"></span>
@@ -541,7 +540,7 @@
                             {!! view_render_event('bagisto.admin.sales.order.shipping_address.after', ['order' => $order]) !!}
                         @endif
                     </x-slot>
-                </x-admin::accordion> 
+                </x-admin::accordion>
 
                 <!-- Order Information -->
                 <x-admin::accordion>
@@ -566,7 +565,7 @@
                                     @lang('admin::app.sales.orders.view.channel')
                                 </p>
                             </div>
-                    
+
                             <div class="flex flex-col gap-y-1.5">
                                 {!! view_render_event('bagisto.admin.sales.order.created_at.before', ['order' => $order]) !!}
 
@@ -576,12 +575,12 @@
                                 </p>
 
                                 {!! view_render_event('bagisto.admin.sales.order.created_at.after', ['order' => $order]) !!}
-                            
+
                                 <!-- Order Status -->
                                 <p class="text-gray-600 dark:text-gray-300">
                                     {{$order->status_label}}
                                 </p>
-                            
+
                                 {!! view_render_event('bagisto.admin.sales.order.status_label.after', ['order' => $order]) !!}
 
                                 <!-- Order Channel -->
@@ -593,7 +592,7 @@
                             </div>
                         </div>
                     </x-slot>
-                </x-admin::accordion> 
+                </x-admin::accordion>
 
                 <!-- Payment and Shipping Information-->
                 <x-admin::accordion>
@@ -664,7 +663,7 @@
                             {!! view_render_event('bagisto.admin.sales.order.shipping-method.after', ['order' => $order]) !!}
                         @endif
                     </x-slot>
-                </x-admin::accordion> 
+                </x-admin::accordion>
 
                 <!-- Invoice Information-->
                 <x-admin::accordion>
@@ -707,13 +706,13 @@
                             @if ($index < count($order->invoices) - 1)
                                 <span class="mb-4 mt-4 block w-full border-b dark:border-gray-800"></span>
                             @endif
-                        @empty 
+                        @empty
                             <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.no-invoice-found')
                             </p>
                         @endforelse
                     </x-slot>
-                </x-admin::accordion> 
+                </x-admin::accordion>
 
                 <!-- Shipment Information-->
                 <x-admin::accordion>
@@ -747,15 +746,15 @@
                                     </a>
                                 </div>
                             </div>
-                        @empty 
+                        @empty
                             <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.no-shipment-found')
                             </p>
                         @endforelse
                     </x-slot>
-                </x-admin::accordion> 
+                </x-admin::accordion>
 
-                <!-- Refund Information-->
+                <!-- Refund Information -->
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-2.5 text-base font-semibold text-gray-600 dark:text-gray-300">
@@ -788,8 +787,8 @@
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.sales.orders.view.refunded') 
-                                        
+                                        @lang('admin::app.sales.orders.view.refunded')
+
                                         <span class="font-semibold text-gray-800 dark:text-white">
                                             {{ core()->formatBasePrice($refund->base_grand_total) }}
                                         </span>
@@ -805,14 +804,14 @@
                                     </a>
                                 </div>
                             </div>
-                        @empty 
+                        @empty
                             <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.no-refund-found')
                             </p>
                         @endforelse
                     </x-slot>
                 </x-admin::accordion>
-                
+
                 {!! view_render_event('bagisto.admin.sales.order.right_component.after', ['order' => $order]) !!}
             </div>
         </div>
