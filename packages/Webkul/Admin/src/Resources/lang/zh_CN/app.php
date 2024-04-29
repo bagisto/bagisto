@@ -233,8 +233,8 @@ return [
 
                     'address' => [
                         'add-btn'          => '添加地址',
-                        'add-new-address'  => '添加新地址',
                         'add-new'          => '添加新地址',
+                        'add-new-address'  => '添加新地址',
                         'addresses'        => '地址',
                         'back'             => '返回',
                         'billing-address'  => '账单地址',
@@ -249,8 +249,8 @@ return [
                         'postcode'         => '邮政编码',
                         'proceed'          => '继续',
                         'same-as-billing'  => '使用相同地址作为送货地址？',
-                        'save-address'     => '保存到地址簿',
                         'save'             => '保存',
+                        'save-address'     => '保存到地址簿',
                         'select-country'   => '选择国家',
                         'select-state'     => '选择省/州',
                         'shipping-address' => '送货地址',
@@ -258,6 +258,7 @@ return [
                         'street-address'   => '街道地址',
                         'telephone'        => '电话',
                         'title'            => '地址',
+                        'vat-id'           => '增值税号码',
                     ],
 
                     'payment' => [
@@ -1096,6 +1097,7 @@ return [
                 'position'              => '位置',
                 'price'                 => '价格',
                 'regex'                 => '正则表达式',
+                'regex-info'            => '表达式应该用双引号括起来。',
                 'save-btn'              => '保存属性',
                 'select'                => '选择',
                 'select-type'           => '选择属性类型',
@@ -1159,6 +1161,7 @@ return [
                 'position'              => '位置',
                 'price'                 => '价格',
                 'regex'                 => '正则表达式',
+                'regex-info'            => '表达式应该用双引号括起来。',
                 'save-btn'              => '保存属性',
                 'select'                => '选择',
                 'select-type'           => '选择属性类型',
@@ -2815,12 +2818,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => '返回',
-                    'basic-settings' => '基本设置',
                     'country'        => '国家',
                     'identifier'     => '标识符',
                     'save-btn'       => '保存税率',
                     'select-country' => '选择国家',
                     'select-state'   => '选择州',
+                    'settings'       => '设置',
                     'state'          => '州',
                     'tax-rate'       => '税率',
                     'title'          => '编辑税率',

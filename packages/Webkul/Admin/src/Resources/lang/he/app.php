@@ -233,8 +233,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'הוסף כתובת',
-                        'add-new-address'  => 'הוסף כתובת חדשה',
                         'add-new'          => 'הוסף כתובת חדשה',
+                        'add-new-address'  => 'הוסף כתובת חדשה',
                         'addresses'        => 'כתובות',
                         'back'             => 'חזור',
                         'billing-address'  => 'כתובת לחיוב',
@@ -249,8 +249,8 @@ return [
                         'postcode'         => 'מיקוד',
                         'proceed'          => 'המשך',
                         'same-as-billing'  => 'השתמש באותה כתובת למשלוח?',
-                        'save-address'     => 'שמור בספר הכתובות',
                         'save'             => 'שמור',
+                        'save-address'     => 'שמור בספר הכתובות',
                         'select-country'   => 'בחר מדינה',
                         'select-state'     => 'בחר מדינה',
                         'shipping-address' => 'כתובת למשלוח',
@@ -258,6 +258,7 @@ return [
                         'street-address'   => 'כתובת',
                         'telephone'        => 'טלפון',
                         'title'            => 'כתובת',
+                        'vat-id'           => 'מספר ת.מ.',
                     ],
 
                     'payment' => [
@@ -1096,6 +1097,7 @@ return [
                 'position'              => 'מיקום',
                 'price'                 => 'מחיר',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'הביטוי צריך להיות בציטוטיים כפולים.',
                 'save-btn'              => 'שמור תכונה',
                 'select'                => 'בחירה',
                 'select-type'           => 'סוג תכונה',
@@ -1159,6 +1161,7 @@ return [
                 'position'              => 'מיקום',
                 'price'                 => 'מחיר',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'הביטוי צריך להיות בציטוטיים כפולים.',
                 'save-btn'              => 'שמור מאפיין',
                 'select'                => 'בחירה',
                 'select-type'           => 'סוג מאפיין בחירה',
@@ -2815,12 +2818,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'חזור',
-                    'basic-settings' => 'הגדרות בסיסיות',
                     'country'        => 'מדינה',
                     'identifier'     => 'מזהה',
                     'save-btn'       => 'שמור שער מס',
                     'select-country' => 'בחר מדינה',
                     'select-state'   => 'בחר מדינה',
+                    'settings'       => 'הגדרות',
                     'state'          => 'מדינה',
                     'tax-rate'       => 'שער',
                     'title'          => 'ערוך שער מס',
