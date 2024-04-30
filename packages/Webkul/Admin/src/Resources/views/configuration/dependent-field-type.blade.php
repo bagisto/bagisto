@@ -7,7 +7,7 @@
 
     $dependName = $coreConfigRepository->getNameField($dependNameKey);
 
-    $field['options'] = $coreConfigRepository->getDependentFieldOptions($field, $value);
+    $field['options'] = $coreConfigRepository->getDependentFieldOptions($field, $field['options'] ?? null);
 
     $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '';
 

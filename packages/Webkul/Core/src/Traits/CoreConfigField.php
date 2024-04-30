@@ -80,6 +80,10 @@ trait CoreConfigField
 
         $options = [];
 
+        if (is_callable($dependentValues)) {
+            $dependentValues = $dependentValues();
+        }
+
         foreach ($dependentValues as $key => $result) {
             $options[] = [
                 'title' => $result,
