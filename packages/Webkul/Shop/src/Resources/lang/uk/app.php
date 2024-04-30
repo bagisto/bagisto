@@ -163,6 +163,7 @@ return [
                     'cancel-confirm-msg' => 'Вы уверены, что хотите отменить этот заказ?',
                     'cancel-error'       => 'Ваш заказ не может быть отменен.',
                     'cancel-success'     => 'Ваш заказ был отменен',
+                    'contact'            => 'Контакт',
                     'page-title'         => 'Заказ #:order_id',
                     'payment-method'     => 'Способ оплаты',
                     'reorder-btn-title'  => 'Перепорядкувати',

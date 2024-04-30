@@ -163,6 +163,7 @@ return [
                     'cancel-confirm-msg' => 'Êtes-vous sûr de vouloir annuler cette commande ?',
                     'cancel-error'       => 'Votre commande ne peut pas être annulée.',
                     'cancel-success'     => 'Votre commande a été annulée',
+                    'contact'            => 'Contact',
                     'page-title'         => 'Commande #:order_id',
                     'payment-method'     => 'Mode de paiement',
                     'reorder-btn-title'  => 'Réorganiser',

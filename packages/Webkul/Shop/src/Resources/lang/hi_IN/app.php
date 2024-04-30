@@ -163,6 +163,7 @@ return [
                     'cancel-confirm-msg' => 'क्या आप वाकई इस आर्डर को रद्द करना चाहते हैं?',
                     'cancel-error'       => 'आपका आर्डर रद्द नहीं किया जा सकता है।',
                     'cancel-success'     => 'आपका आर्डर रद्द कर दिया गया है',
+                    'contact'            => 'संपर्क',
                     'page-title'         => 'आर्डर #:order_id',
                     'payment-method'     => 'भुगतान मेथड',
                     'reorder-btn-title'  => 'पुनः क्रमबद्ध करें',

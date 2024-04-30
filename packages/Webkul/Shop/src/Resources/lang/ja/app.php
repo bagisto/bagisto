@@ -163,6 +163,7 @@ return [
                     'cancel-confirm-msg' => 'この注文をキャンセルしてもよろしいですか？',
                     'cancel-error'       => '注文をキャンセルできません。',
                     'cancel-success'     => '注文がキャンセルされました',
+                    'contact'            => '連絡先',
                     'page-title'         => '注文 #:order_id',
                     'payment-method'     => '支払い方法',
                     'reorder-btn-title'  => '並べ替える',
