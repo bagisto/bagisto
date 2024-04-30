@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Webkul\Core\Rules\AlphaNumericSpace;
 use Webkul\Core\Rules\PhoneNumber;
 
 class ProfileRequest extends FormRequest
@@ -27,8 +28,8 @@ class ProfileRequest extends FormRequest
         $id = auth()->guard('customer')->user()->id;
 
         return [
-            'first_name'                => ['required'],
-            'last_name'                 => ['required'],
+            'first_name'                => ['required', new AlphaNumericSpace()],
+            'last_name'                 => ['required', new AlphaNumericSpace()],
             'gender'                    => 'required|in:Other,Male,Female',
             'date_of_birth'             => 'date|before:today',
             'email'                     => 'email|unique:customers,email,'.$id,
