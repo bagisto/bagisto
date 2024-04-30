@@ -82,15 +82,21 @@
                                 :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! item.product.images.length}"
                             >
                                 <template v-if="! item.product.images.length">
-                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                
+                                    <img
+                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded" 
+                                        src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                    >
+
                                     <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                         @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
                                     </p>
                                 </template>
 
                                 <template v-else>
-                                    <img :src="item.product.images[0].url">
+                                    <img
+                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded" 
+                                        :src="item.product.images[0].url"
+                                    >
                                 </template>
                             </div>
 
@@ -260,7 +266,10 @@
                                     :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                                 >
                                     <template v-if="! product.images.length">
-                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                        <img
+                                            class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded" 
+                                            src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                        >
                                     
                                         <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                             @lang('admin::app.sales.orders.create.cart.items.search.product-image')
@@ -268,7 +277,10 @@
                                     </template>
 
                                     <template v-else>
-                                        <img :src="product.images[0].url">
+                                        <img
+                                            class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                            :src="product.images[0].url"
+                                        >
                                     </template>
                                 </div>
 
