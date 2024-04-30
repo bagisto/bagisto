@@ -26,8 +26,8 @@
                 <!-- Accordion Blade Component -->
                 <x-shop::accordion class="!border-b-0">
                     <!-- Accordion Blade Component Header -->
-                    <x-slot:header class="!py-4 !px-0">
-                        <div class="flex justify-between items-center">
+                    <x-slot:header class="!px-0 !py-4">
+                        <div class="flex items-center justify-between">
                             <h2 class="text-2xl font-medium max-sm:text-xl">
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
                             </h2>
@@ -35,48 +35,48 @@
                     </x-slot>
 
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="!p-0 mt-8">
+                    <x-slot:content class="mt-8 !p-0">
                         <div class="flex flex-wrap gap-8">
-                            <div
-                                class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
-                                v-for="method in methods"
-                            >
+                            <template v-for="method in methods">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
 
-                                <div v-for="rate in method.rates">
+                                <div
+                                    class="relative max-w-[218px] select-none max-sm:max-w-full max-sm:flex-auto"
+                                    v-for="rate in method.rates"
+                                >
                                     <input 
                                         type="radio"
                                         name="shipping_method"
                                         :id="rate.method"
                                         :value="rate.method"
-                                        class="hidden peer"
+                                        class="peer hidden"
                                         @change="store(rate.method)"
                                     >
 
                                     <label 
-                                        class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                        class="icon-radio-unselect peer-checked:icon-radio-select absolute top-5 cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5"
                                         :for="rate.method"
                                     >
                                     </label>
 
                                     <label 
-                                        class="block p-5 border border-[#E9E9E9] rounded-xl cursor-pointer"
+                                        class="block cursor-pointer rounded-xl border border-[#E9E9E9] p-5"
                                         :for="rate.method"
                                     >
                                         <span class="icon-flate-rate text-6xl text-navyBlue"></span>
 
-                                        <p class="text-2xl mt-1.5 font-semibold max-sm:text-xl">
+                                        <p class="mt-1.5 text-2xl font-semibold max-sm:text-xl">
                                             @{{ rate.base_formatted_price }}
                                         </p>
                                         
-                                        <p class="text-xs mt-2.5 font-medium">
+                                        <p class="mt-2.5 text-xs font-medium">
                                             <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                         </p>
                                     </label>
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping.after') !!}
-                            </div>
+                            </template>
                         </div>
                     </x-slot>
                 </x-shop::accordion>

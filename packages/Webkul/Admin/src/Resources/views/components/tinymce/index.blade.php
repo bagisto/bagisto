@@ -24,7 +24,7 @@
                 <x-admin::modal ref="magicAIModal">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="flex gap-2.5 items-center text-lg text-gray-800 dark:text-white font-bold">
+                        <p class="flex items-center gap-2.5 text-lg font-bold text-gray-800 dark:text-white">
                             <span class="icon-magic text-2xl text-gray-800"></span>
 
                             @lang('admin::app.components.tinymce.ai-generation.title')
@@ -117,7 +117,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Modal Submission -->
-                        <div class="flex gap-x-2.5 items-center">
+                        <div class="flex items-center gap-x-2.5">
                             <button
                                 type="submit"
                                 class="secondary-button"
@@ -125,7 +125,7 @@
                                 <!-- Spinner -->
                                 <template v-if="isLoading">
                                     <img
-                                        class="animate-spin h-5 w-5 text-blue-600"
+                                        class="h-5 w-5 animate-spin"
                                         src="{{ bagisto_asset('images/spinner.svg') }}"
                                     />
 
@@ -161,7 +161,7 @@
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
-                        <div class="flex gap-x-2.5 items-center">
+                        <div class="flex items-center gap-x-2.5">
                             <button
                                 type="button"
                                 class="primary-button"

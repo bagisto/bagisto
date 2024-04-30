@@ -2,11 +2,11 @@
     $admin = auth()->guard('admin')->user();
 @endphp
 
-<header class="flex justify-between items-center px-4 py-2.5 bg-white dark:bg-gray-900  border-b dark:border-gray-800 sticky top-0 z-[10001]">
-    <div class="flex gap-1.5 items-center">
+<header class="sticky top-0 z-[10001] flex items-center justify-between border-b bg-white px-4 py-2.5 dark:border-gray-800 dark:bg-gray-900">
+    <div class="flex items-center gap-1.5">
         <!-- Hamburger Menu -->
         <i
-            class="hidden icon-menu text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 max-lg:block"
+            class="icon-menu hidden cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-100 dark:hover:bg-gray-950 max-lg:block"
             @click="$refs.sidebarMenuDrawer.open()"
         >
         </i>
@@ -30,19 +30,19 @@
 
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search>
-            <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5 max-lg:w-[400px]">
-                <i class="icon-search absolute flex items-center ltr:left-3 rtl:right-3 text-2xl top-1.5"></i>
+            <div class="relative flex w-[525px] max-w-[525px] items-center max-lg:w-[400px] ltr:ml-2.5 rtl:mr-2.5">
+                <i class="icon-search absolute top-1.5 flex items-center text-2xl ltr:left-3 rtl:right-3"></i>
 
                 <input 
                     type="text" 
-                    class="w-full px-10 py-1.5 block bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="block w-full rounded-lg border bg-white px-10 py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                     placeholder="@lang('admin::app.components.layouts.header.mega-search.title')" 
                 >
             </div>
         </v-mega-search>
     </div>
 
-    <div class="flex gap-2.5 items-center">
+    <div class="flex items-center gap-2.5">
         <!-- Dark mode Switcher -->
         <v-dark>
             <div class="flex">
@@ -58,7 +58,7 @@
             class="flex"
         >
             <span 
-                class="icon-store p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                class="icon-store cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 title="@lang('admin::app.components.layouts.header.visit-shop')"
             >
             </span>
@@ -66,9 +66,9 @@
 
        <!-- Notification Component -->
         <v-notifications {{ $attributes }}>
-            <span class="flex relative">
+            <span class="relative flex">
                 <span 
-                    class="icon-notification p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
+                    class="icon-notification cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
                     title="@lang('admin::app.components.layouts.header.notifications')"
                 >
                 </span>
@@ -79,14 +79,14 @@
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <x-slot:toggle>
                 @if ($admin->image)
-                    <button class="flex w-9 h-9 overflow-hidden rounded-full cursor-pointer hover:opacity-80 focus:opacity-80">
+                    <button class="flex h-9 w-9 cursor-pointer overflow-hidden rounded-full hover:opacity-80 focus:opacity-80">
                         <img
                             src="{{ $admin->image_url }}"
                             class="w-full"
                         />
                     </button>
                 @else
-                    <button class="flex justify-center items-center w-9 h-9 bg-blue-400 rounded-full text-sm text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500">
+                    <button class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-blue-400 text-sm font-semibold leading-6 text-white transition-all hover:bg-blue-500 focus:bg-blue-500">
                         {{ substr($admin->name, 0, 1) }}
                     </button>
                 @endif
@@ -94,7 +94,7 @@
 
             <!-- Admin Dropdown -->
             <x-slot:content class="!p-0">
-                <div class="flex gap-1.5 items-center px-5 py-2.5 border border-b-gray-300 dark:border-gray-800">
+                <div class="flex items-center gap-1.5 border border-b-gray-300 px-5 py-2.5 dark:border-gray-800">
                     <img
                         src="{{ url('cache/logo/bagisto.png') }}"
                         width="24"
@@ -109,7 +109,7 @@
 
                 <div class="grid gap-1 pb-2.5">
                     <a
-                        class="px-5 py-2 text-base  text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                        class="cursor-pointer px-5 py-2 text-base text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
                         href="{{ route('admin.account.edit') }}"
                     >
                         @lang('admin::app.components.layouts.header.my-account')
@@ -124,7 +124,7 @@
                     </x-admin::form>
 
                     <a
-                        class="px-5 py-2 text-base  text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                        class="cursor-pointer px-5 py-2 text-base text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
                         href="{{ route('admin.session.destroy') }}"
                         onclick="event.preventDefault(); document.getElementById('adminLogout').submit();"
                     >
@@ -144,7 +144,7 @@
 >
     <!-- Drawer Header -->
     <x-slot:header>
-        <div class="flex justify-between items-center">
+        <div class="flex items-center justify-between">
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
                     class="h-10"
@@ -163,11 +163,11 @@
 
     <!-- Drawer Content -->
     <x-slot:content class="p-4">
-        <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll">
-            <nav class="grid gap-2 w-full">
+        <div class="journal-scroll h-[calc(100vh-100px)] overflow-auto">
+            <nav class="grid w-full gap-2">
                 <!-- Navigation Menu -->
                 @foreach ($menu->items as $menuItem)
-                    <div class="relative group/item">
+                    <div class="group/item relative">
                         <a
                             href="{{ $menuItem['url'] }}"
                             class="flex gap-2.5 p-1.5 items-center cursor-pointer {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 dark:hover:bg-gray-950 ' }} peer"
@@ -199,13 +199,16 @@
 </x-admin::drawer>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-mega-search-template">
-        <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5 max-lg:w-[400px]">
-            <i class="icon-search text-2xl flex items-center absolute ltr:left-3 rtl:right-3 top-1.5"></i>
+    <script
+        type="text/x-template"
+        id="v-mega-search-template"
+    >
+        <div class="relative flex w-[525px] max-w-[525px] items-center max-lg:w-[400px] ltr:ml-2.5 rtl:mr-2.5">
+            <i class="icon-search absolute top-1.5 flex items-center text-2xl ltr:left-3 rtl:right-3"></i>
 
             <input 
                 type="text"
-                class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full px-10 py-1.5 leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 peer"
+                class="peer block w-full rounded-lg border bg-white px-10 py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                 :class="{'border-gray-400': isDropdownOpen}"
                 placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 v-model.lazy="searchTerm"
@@ -214,13 +217,13 @@
             >
 
             <div
-                class="absolute top-10 w-full bg-white dark:bg-gray-900 shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border dark:border-gray-800 rounded-lg z-10"
+                class="absolute top-10 z-10 w-full rounded-lg border bg-white shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] dark:border-gray-800 dark:bg-gray-900"
                 v-if="isDropdownOpen"
             >
                 <!-- Search Tabs -->
-                <div class="flex border-b dark:border-gray-800 text-sm text-gray-600 dark:text-gray-300">
+                <div class="flex border-b text-sm text-gray-600 dark:border-gray-800 dark:text-gray-300">
                     <div
-                        class="p-4 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                        class="cursor-pointer p-4 hover:bg-gray-100 dark:hover:bg-gray-950"
                         :class="{ 'border-b-2 border-blue-600': activeTab == tab.key }"
                         v-for="tab in tabs"
                         @click="activeTab = tab.key; search();"
@@ -239,20 +242,20 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.products.edit', ':id') }}'.replace(':id', product.id)"
-                                class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="flex cursor-pointer justify-between gap-2.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
                                 v-for="product in searchedResults.products.data"
                             >
                                 <!-- Left Information -->
                                 <div class="flex gap-2.5">
                                     <!-- Image -->
                                     <div
-                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
-                                        :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! product.images.length}"
+                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                                        :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                                     >
                                         <template v-if="! product.images.length">
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                         
-                                            <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                                            <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                                 @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
                                             </p>
                                         </template>
@@ -263,11 +266,9 @@
                                     </div>
 
                                     <!-- Details -->
-                                    <div class="grid gap-1.5 place-content-start">
-                                        <p
-                                            class="text-base  text-gray-600 dark:text-gray-300 font-semibold"
-                                            v-text="product.name"
-                                        >
+                                    <div class="grid place-content-start gap-1.5">
+                                        <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+                                            @{{ product.name }}
                                         </p>
 
                                         <p class="text-gray-500">
@@ -277,20 +278,18 @@
                                 </div>
 
                                 <!-- Right Information -->
-                                <div class="grid gap-1 place-content-center text-right">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300 font-semibold"
-                                        v-text="product.formatted_price"
-                                    >
+                                <div class="grid place-content-center gap-1 text-right">
+                                    <p class="font-semibold text-gray-600 dark:text-gray-300">
+                                        @{{ product.formatted_price }}
                                     </p>
                                 </div>
                             </a>
                         </div>
 
-                        <div class="flex p-3 border-t dark:border-gray-800">
+                        <div class="flex border-t p-3 dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.catalog.products.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                                 v-if="searchedResults.products.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-products')".replace(':query', searchTerm).replace(':count', searchedResults.products.total) }}
@@ -298,7 +297,7 @@
 
                             <a
                                 href="{{ route('admin.catalog.products.index') }}"
-                                class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-products')
@@ -316,10 +315,10 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', order.id)"
-                                class="grid gap-1.5 place-content-start p-4 border-b border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="grid cursor-pointer place-content-start gap-1.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
                                 v-for="order in searchedResults.orders.data"
                             >
-                                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
+                                <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
                                     #@{{ order.increment_id }}
                                 </p>
 
@@ -329,10 +328,10 @@
                             </a>
                         </div>
 
-                        <div class="flex p-3 border-t dark:border-gray-800">
+                        <div class="flex border-t p-3 dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.sales.orders.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                                 v-if="searchedResults.orders.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-orders')".replace(':query', searchTerm).replace(':count', searchedResults.orders.total) }}
@@ -340,7 +339,7 @@
 
                             <a
                                 href="{{ route('admin.sales.orders.index') }}"
-                                class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-orders')
@@ -358,17 +357,17 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
-                                class="p-4 border-b dark:border-gray-800 text-sm text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="cursor-pointer border-b p-4 text-sm font-semibold text-gray-600 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                                 v-for="category in searchedResults.categories.data"
                             >
                                 @{{ category.name }}
                             </a>
                         </div>
 
-                        <div class="flex p-3 border-t dark:border-gray-800">
+                        <div class="flex border-t p-3 dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.catalog.categories.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                                 v-if="searchedResults.categories.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-categories')".replace(':query', searchTerm).replace(':count', searchedResults.categories.total) }}
@@ -376,7 +375,7 @@
 
                             <a
                                 href="{{ route('admin.catalog.categories.index') }}"
-                                class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-categories')
@@ -394,10 +393,10 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.customers.customers.view', ':id') }}'.replace(':id', customer.id)"
-                                class="grid gap-1.5 place-content-start p-4 border-b border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="grid cursor-pointer place-content-start gap-1.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
                                 v-for="customer in searchedResults.customers.data"
                             >
-                                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
+                                <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
                                     @{{ customer.first_name + ' ' + customer.last_name }}
                                 </p>
 
@@ -407,10 +406,10 @@
                             </a>
                         </div>
 
-                        <div class="flex p-3 border-t dark:border-gray-800">
+                        <div class="flex border-t p-3 dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.customers.customers.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                                 v-if="searchedResults.customers.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-customers')".replace(':query', searchTerm).replace(':count', searchedResults.customers.total) }}
@@ -418,7 +417,7 @@
 
                             <a
                                 href="{{ route('admin.customers.customers.index') }}"
-                                class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-customers')
@@ -531,37 +530,40 @@
         });
     </script>
 
-    <script type="text/x-template" id="v-notifications-template">
+    <script
+        type="text/x-template"
+        id="v-notifications-template"
+    >
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <!-- Notification Toggle -->
             <x-slot:toggle>
-                <span class="flex relative">
+                <span class="relative flex">
                     <span
-                        class="icon-notification p-1.5 rounded-md text-2xl text-red cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
+                        class="icon-notification text-red cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
                         title="@lang('admin::app.components.layouts.header.notifications')"
                     >
                     </span>
                 
                     <span
-                        class="flex justify-center items-center min-w-5 h-5 absolute -top-2 p-1.5 ltr:left-5 rtl:right-5 bg-blue-600 rounded-full text-white text-[10px] font-semibold leading-[9px] cursor-pointer"
-                        v-text="totalUnRead"
+                        class="absolute -top-2 flex h-5 min-w-5 cursor-pointer items-center justify-center rounded-full bg-blue-600 p-1.5 text-[10px] font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5"
                         v-if="totalUnRead"
                     >
+                        @{{ totalUnRead }}
                     </span>
                 </span>
             </x-slot>
 
             <!-- Notification Content -->
-            <x-slot:content class="!p-0 min-w-[250px] max-w-[250px]">
+            <x-slot:content class="min-w-[250px] max-w-[250px] !p-0">
                 <!-- Header -->
-                <div class="text-base  p-3 text-gray-600 dark:text-gray-300 font-semibold border-b dark:border-gray-800">
+                <div class="border-b p-3 text-base font-semibold text-gray-600 dark:border-gray-800 dark:text-gray-300">
                     @lang('admin::app.notifications.title', ['read' => 0])
                 </div>
 
                 <!-- Content -->
                 <div class="grid">
                     <a
-                        class="flex gap-1.5 items-start p-3 hover:bg-gray-50 dark:hover:bg-gray-950 border-b dark:border-gray-800 last:border-b-0"
+                        class="flex items-start gap-1.5 border-b p-3 last:border-b-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                         v-for="notification in notifications"
                         :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
                     >
@@ -589,16 +591,16 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="flex gap-1.5 justify-between h-[47px] py-4 px-6 border-t dark:border-gray-800">
+                <div class="flex h-[47px] justify-between gap-1.5 border-t px-6 py-4 dark:border-gray-800">
                     <a
                         href="{{ route('admin.notification.index') }}"
-                        class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                        class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                     >
                         @lang('admin::app.notifications.view-all')
                     </a>
 
                     <a
-                        class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                        class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                         v-if="notifications?.length"
                         @click="readAll()"
                     >
@@ -714,10 +716,13 @@
         });
     </script>
 
-    <script type="text/x-template" id="v-dark-template">
+    <script
+        type="text/x-template"
+        id="v-dark-template"
+    >
         <div class="flex">
             <span
-                class="p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 :class="[isDarkMode ? 'icon-light' : 'icon-dark']"
                 @click="toggle"
             ></span>

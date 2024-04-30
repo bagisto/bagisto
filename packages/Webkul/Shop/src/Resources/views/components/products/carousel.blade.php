@@ -16,15 +16,13 @@
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
-                <h2
-                    class="text-3xl font-dmserif max-sm:text-2xl"
-                    v-text="title"
-                >
+                <h2 class="font-dmserif text-3xl max-sm:text-2xl">
+                    @{{ title }}
                 </h2>
 
-                <div class="flex gap-8 justify-between items-center">
+                <div class="flex items-center justify-between gap-8">
                     <span
-                        class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block text-2xl cursor-pointer"
+                        class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block cursor-pointer text-2xl"
                         role="button"
                         aria-label="@lang('shop::app.components.products.carousel.previous')"
                         tabindex="0"
@@ -33,7 +31,7 @@
                     </span>
 
                     <span
-                        class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block text-2xl cursor-pointer"
+                        class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block cursor-pointer text-2xl"
                         role="button"
                         aria-label="@lang('shop::app.components.products.carousel.next')"
                         tabindex="0"
@@ -55,7 +53,7 @@
 
             <a
                 :href="navigationLink"
-                class="secondary-button block w-max mt-14 mx-auto py-3 px-11 rounded-2xl text-base text-center"
+                class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base"
                 v-if="navigationLink"
             >
                 @lang('shop::app.components.products.carousel.view-all')

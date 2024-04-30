@@ -23,7 +23,7 @@
 
                 <div class="absolute top-5 ltr:right-5 rtl:left-5">
                     <span
-                        class="icon-cancel text-3xl cursor-pointer"
+                        class="icon-cancel cursor-pointer text-3xl"
                         @click="close"
                     >
                     </span>
@@ -34,7 +34,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div class="px-6 overflow-auto flex-1 max-sm:px-4">
+            <div class="flex-1 overflow-auto px-6 max-sm:px-4">
                 {{ $content }}
             </div>
         </template>
@@ -50,7 +50,10 @@
 </v-drawer>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-drawer-template">
+    <script
+        type="text/x-template"
+        id="v-drawer-template"
+    >
         <div>
             <!-- Toggler -->
             <div @click="open">
@@ -63,15 +66,15 @@
             <transition
                 tag="div"
                 name="drawer-overlay"
-                enter-class="ease-out duration-300"
+                enter-class="duration-300 ease-out"
                 enter-from-class="opacity-0"
                 enter-to-class="opacity-100"
-                leave-class="ease-in duration-200"
+                leave-class="duration-200 ease-in"
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-20"
+                    class="fixed inset-0 z-20 bg-gray-500 bg-opacity-50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -81,14 +84,14 @@
                 tag="div"
                 name="drawer"
                 :enter-from-class="enterFromLeaveToClasses"
-                enter-active-class="transform transition ease-in-out duration-200"
+                enter-active-class="transform transition duration-200 ease-in-out"
                 enter-to-class="translate-x-0"
                 leave-from-class="translate-x-0"
-                leave-active-class="transform transition ease-in-out duration-200"
+                leave-active-class="transform transition duration-200 ease-in-out"
                 :leave-to-class="enterFromLeaveToClasses"
             >
                 <div
-                    class="fixed z-[1000] bg-white overflow-hidden max-sm:!w-full"
+                    class="fixed z-[1000] overflow-hidden bg-white max-sm:!w-full"
                     :class="{
                         'inset-x-0 top-0': position == 'top',
                         'inset-x-0 bottom-0': position == 'bottom',
@@ -98,10 +101,10 @@
                     :style="'width:' + width"
                     v-show="isOpen"
                 >
-                    <div class="w-full h-full overflow-auto bg-white pointer-events-auto">
-                        <div class="flex flex-col h-full w-full">
-                            <div class="flex-1 min-h-0 min-w-0 overflow-auto">
-                                <div class="flex flex-col h-full">
+                    <div class="pointer-events-auto h-full w-full overflow-auto bg-white">
+                        <div class="flex h-full w-full flex-col">
+                            <div class="min-h-0 min-w-0 flex-1 overflow-auto">
+                                <div class="flex h-full flex-col">
                                     <slot
                                         name="header"
                                         :close="close"

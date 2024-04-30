@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.search-seo.search-terms.index.title')
     </x-slot>
@@ -8,8 +7,8 @@
 
     <!-- Create Sitemap Vue Component -->
     <v-create-sitemaps>
-        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.marketing.search-seo.search-terms.index.title')
             </p>
 
@@ -32,8 +31,8 @@
             type="text/x-template"
             id="v-create-sitemaps-template"
         >
-            <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                <p class="text-xl text-gray-800 dark:text-white font-bold">
+            <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+                <p class="text-xl font-bold text-gray-800 dark:text-white">
                     @lang('admin::app.marketing.search-seo.search-terms.index.title')
                 </p>
 
@@ -51,15 +50,25 @@
             {!! view_render_event('admin.marketing.search_seo.search_terms.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.search_terms.index') }}"
+                :src="route('admin.marketing.search_seo.search_terms.index')"
                 ref="datagrid"
             >
-                <!-- DataGrid Body -->
-                <template #body="{ columns, records, setCurrentSelectionMode, performAction, available, applied, isLoading }">
-                    <template v-if="! isLoading">
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.datagrid.table.body />
+                    </template>
+
+                    <template v-else>
                         <div
-                            v-for="record in records"
-                            class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            v-for="record in available.records"
+                            class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -72,25 +81,24 @@
                                         :name="`mass_action_select_record_${record[available.meta.primary_column]}`"
                                         :value="record[available.meta.primary_column]"
                                         v-model="applied.massActions.indices"
-                                        @change="setCurrentSelectionMode"
                                     >
 
-                                    <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-2xl">
+                                    <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600">
                                     </span>
                                 </label>
                             </p>
 
                             <!-- Id -->
-                            <p v-text="record.id"></p>
+                            <p>@{{ record.id }}</p>
 
                             <!-- Search Query -->
-                            <p v-text="record.term"></p>
+                            <p>@{{ record.term }}</p>
 
                             <!-- Search Results -->
-                            <p v-text="record.results"></p>
+                            <p>@{{ record.results }}</p>
 
                             <!-- Uses -->
-                            <p v-text="record.uses"></p>
+                            <p>@{{ record.uses }}</p>
 
                             <!-- URL -->
                             <p class="break-all">
@@ -100,10 +108,10 @@
                             </p>
 
                             <!-- Channel -->
-                            <p v-text="record.channel_name"></p>
+                            <p>@{{ record.channel_name }}</p>
 
                             <!-- Locale -->
-                            <p v-text="record.locale"></p>
+                            <p>@{{ record.locale }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">
@@ -129,11 +137,6 @@
                             </div>
                         </div>
                     </template>
-
-                    <!-- Datagrid Body Shimmer -->
-                    <template v-else>
-                        <x-admin::shimmer.datagrid.table.body />
-                    </template>
                 </template>
             </x-admin::datagrid>
 
@@ -155,7 +158,7 @@
                         <x-slot:header>
                             <!-- Create Modal title -->
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-if="selectedSitemap"
                             >
                                 @lang('admin::app.marketing.search-seo.search-terms.index.edit.title')
@@ -163,7 +166,7 @@
 
                             <!-- Edit Modal title -->
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-else
                             >
                                 @lang('admin::app.marketing.search-seo.search-terms.index.create.title')
@@ -172,7 +175,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Id -->
+                            <!-- ID -->
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
@@ -261,7 +264,7 @@
                                 >
                                     @foreach (core()->getAllChannels() as $channel)
                                         <option value="{{ $channel->id }}">{{ $channel->name }}</option>
-                                    @endforeach 
+                                    @endforeach
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error control-name="channel_id" />
@@ -281,7 +284,7 @@
                                 >
                                     @foreach (core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->code }}">{{ $locale->name }}</option>
-                                    @endforeach 
+                                    @endforeach
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error control-name="locale" />

@@ -1,8 +1,14 @@
 <!-- SEO Meta Content -->
 @push('meta')
-    <meta name="description" content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"/>
+    <meta 
+        name="description" 
+        content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"
+    />
 
-    <meta name="keywords" content="{{ $category->meta_keywords }}"/>
+    <meta 
+        name="keywords" 
+        content="{{ $category->meta_keywords }}"
+    />
 
     @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
         <script type="application/ld+json">
@@ -24,7 +30,7 @@
         <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:px-4">
             <div>
                 <img
-                    class="rounded-xl"
+                    class="aspect-[4/1] max-h-full max-w-full rounded-xl"
                     src="{{ $category->banner_url }}"
                     alt="{{ $category->name }}"
                     width="1320"
@@ -62,7 +68,7 @@
             id="v-category-template"
         >
             <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
-                <div class="flex gap-10 items-start md:mt-10 max-lg:gap-5">
+                <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
@@ -75,7 +81,7 @@
 
                         <!-- Product List Card Container -->
                         <div
-                            class="grid grid-cols-1 gap-6 mt-8"
+                            class="mt-8 grid grid-cols-1 gap-6"
                             v-if="filters.toolbar.mode === 'list'"
                         >
                             <!-- Product Card Shimmer Effect -->
@@ -96,7 +102,7 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
+                                    <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
                                         <img 
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
@@ -139,7 +145,7 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
+                                    <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
                                         <img 
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
@@ -162,7 +168,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="secondary-button block mx-auto w-max py-3 mt-14 px-11 rounded-2xl text-base text-center"
+                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base"
                             @click="loadMoreProducts"
                             v-if="links.next && ! loader"
                         >
@@ -171,11 +177,11 @@
 
                         <button
                             v-else-if="links.next"
-                            class="secondary-button block w-max mx-auto py-3.5 mt-14 px-[74.5px] rounded-2xl text-base text-center"
+                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-[74.5px] py-3.5 text-center text-base"
                         >
                             <!-- Spinner -->
                             <img
-                                class="animate-spin h-5 w-5 text-navyBlue"
+                                class="h-5 w-5 animate-spin text-navyBlue"
                                 src="{{ bagisto_asset('images/spinner.svg') }}"
                                 alt="Loading"
                             />

@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Seu pedido foi cancelado',
                     'page-title'         => 'Pedido #:order_id',
                     'payment-method'     => 'Método de Pagamento',
+                    'reorder-btn-title'  => 'Reorganizar',
                     'shipping-address'   => 'Endereço de Envio',
                     'shipping-method'    => 'Método de Envio',
                     'title'              => 'Visualizar',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Pesquise produtos aqui',
                 'sign-in'           => 'Entrar',
                 'sign-up'           => 'Registrar',
+                'submit'            => 'Enviar',
                 'title'             => 'Conta',
                 'welcome'           => 'Bem-vindo',
                 'welcome-guest'     => 'Bem-vindo, Visitante',
                 'wishlist'          => 'Lista de Desejos',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Idioma padrão',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -368,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Selecionar Ação',
-                    'select-option' => 'Selecionar Opção',
-                    'submit'        => 'Enviar',
-                ],
+                'length-of' => ':length de',
+                'results'   => ':total Resultados',
+                'selected'  => ':total Selecionados',
 
-                'filter' => [
-                    'title' => 'Filtrar',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Você deve selecionar uma ação em massa.',
+                    'must-select-a-mass-action-option' => 'Você deve selecionar uma opção de ação em massa.',
+                    'no-records-selected'              => 'Nenhum registro foi selecionado.',
+                    'select-action'                    => 'Selecionar Ação',
                 ],
 
                 'search' => [
-                    'title' => 'Buscar',
+                    'title' => 'Pesquisar',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Aplicar Filtros',
+                'filter' => [
+                    'apply-filter' => 'Aplicar Filtros',
+                    'title'        => 'Filtro',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Digite pelo menos 2 caracteres...',
-                        'no-results'        => 'Nenhum resultado encontrado...',
+                    'dropdown' => [
+                        'select' => 'Selecionar',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Digite pelo menos 2 caracteres...',
+                            'no-results'         => 'Nenhum resultado encontrado...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Limpar Tudo',
-                    'title'     => 'Filtros Personalizados',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Último Mês',
-                    'last-six-months'   => 'Últimos 6 Meses',
-                    'last-three-months' => 'Últimos 3 Meses',
-                    'this-month'        => 'Este Mês',
-                    'this-week'         => 'Esta Semana',
-                    'this-year'         => 'Este Ano',
-                    'today'             => 'Hoje',
-                    'yesterday'         => 'Ontem',
+                    'custom-filters' => [
+                        'clear-all' => 'Limpar Tudo',
+                    ],
                 ],
             ],
 
@@ -419,7 +419,7 @@ return [
                 'page-number'          => 'Número da Página',
                 'previous-page'        => 'Página Anterior',
                 'showing'              => 'Mostrando :firstItem',
-                'to'                   => 'até :lastItem',
+                'to'                   => 'a :lastItem',
             ],
         ],
 
@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Nenhum',
+                    'none'         => 'Nenhum',
+                    'total-amount' => 'Valor Total',
                 ],
 
                 'downloadable' => [
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuar para o Checkout',
             'illegal'                   => 'A quantidade não pode ser menor que um.',
+            'inactive-add'              => 'Item inativo não pode ser adicionado ao carrinho.',
             'inactive'                  => 'O item foi desativado e, portanto, removido do carrinho.',
             'inventory-warning'         => 'A quantidade solicitada não está disponível, por favor, tente novamente mais tarde.',
             'item-add-to-cart'          => 'Item Adicionado com Sucesso',
@@ -676,6 +678,16 @@ return [
                 'proceed-to-checkout' => 'Prosseguir para o Checkout',
                 'sub-total'           => 'Subtotal',
                 'tax'                 => 'Imposto',
+
+                'estimate-shipping' => [
+                    'country'        => 'País',
+                    'info'           => 'Digite o destino para obter uma estimativa de frete e imposto.',
+                    'postcode'       => 'CEP',
+                    'select-country' => 'Selecionar País',
+                    'select-state'   => 'Selecionar Estado',
+                    'state'          => 'Estado',
+                    'title'          => 'Estimar Frete e Imposto',
+                ],
             ],
         ],
 
@@ -756,11 +768,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Deixe-nos uma mensagem e entraremos em contato o mais rápido possível',
+            'desc'          => 'No que você está pensando?',
+            'describe-here' => 'Descreva aqui',
+            'email'         => 'E-mail',
+            'message'       => 'Mensagem',
+            'name'          => 'Nome',
+            'phone-number'  => 'Número de telefone',
+            'submit'        => 'Enviar',
+            'title'         => 'Entre em contato',
+        ],
+
         'index' => [
             'offer'               => 'GANHE ATÉ 40% DE DESCONTO no seu 1º pedido. COMPRE AGORA',
             'resend-verify-email' => 'Reenviar E-mail de Verificação',
             'verify-email'        => 'Verifique sua conta de e-mail',
         ],
+
+        'thanks-for-contact' => 'Obrigado por entrar em contato conosco com seus comentários e perguntas. Responderemos a você em breve.',
     ],
 
     'partials' => [
@@ -860,6 +886,14 @@ return [
                 'subject'     => 'Você! Inscreva-se na Nossa Newsletter',
                 'unsubscribe' => 'Cancelar Inscrição',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via Formulário de Contato do Website',
+            'reply-to-mail'   => 'por favor, responda a este e-mail.',
+            'reach-via-phone' => 'Alternativamente, você pode nos contatar por telefone em',
+            'inquiry-from'    => 'Consulta de',
+            'to'              => 'Para entrar em contato',
         ],
 
         'orders' => [

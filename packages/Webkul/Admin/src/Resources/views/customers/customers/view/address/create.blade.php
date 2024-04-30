@@ -1,5 +1,5 @@
 <v-create-customer-address @address-created="addressCreated">
-    <div class="inline-flex gap-x-2 mr-1 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
+    <div class="mr-1 inline-flex w-full max-w-max cursor-pointer items-center justify-between gap-x-2 px-1 py-1.5 text-center font-semibold text-gray-600 transition-all hover:rounded-md hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800">
         <span class="icon-location text-2xl"></span>
 
         @lang('admin::app.customers.customers.view.address.create.create-address-btn')
@@ -16,7 +16,7 @@
         <!-- Address Create Button -->
         @if (bouncer()->hasPermission('customers.addresses.create'))
             <div 
-                class="flex gap-1.5 items-center justify-between px-2.5 text-blue-600 cursor-pointer transition-all hover:underline"
+                class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"
                 @click="$refs.createAddress.toggle()"
             >
                 @lang('admin::app.customers.customers.view.address.create.create-btn')
@@ -36,7 +36,7 @@
                 <x-admin::modal ref="createAddress">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="text-lg text-gray-800 dark:text-white font-bold">
+                        <p class="text-lg font-bold text-gray-800 dark:text-white">
                             @lang('admin::app.customers.customers.view.address.create.title')
                         </p>    
                     </x-slot>
@@ -238,8 +238,8 @@
                                         <option 
                                             v-for='(state, index) in countryStates[country]'
                                             :value="state.code"
-                                            v-text="state.default_name"
                                         >
+                                            @{{ state.default_name }}
                                         </option>
                                     </x-admin::form.control-group.control>
                                 </template>
@@ -296,7 +296,7 @@
 
                         <!-- Default Address -->
                         <div class="w-full">
-                            <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0">
+                            <x-admin::form.control-group class="!mb-0 flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     id="default_address"
@@ -308,7 +308,7 @@
                                 />
 
                                 <label
-                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                    class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                     for="default_address"
                                 >
                                     @lang('admin::app.customers.customers.view.address.create.default-address')

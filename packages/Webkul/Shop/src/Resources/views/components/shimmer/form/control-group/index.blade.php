@@ -2,8 +2,8 @@
 
 @for ($i = 0;  $i < $count; $i++)
     <div class="grid gap-2">
-        <div class="shimmer w-32 h-6"></div>
+        <div class="shimmer h-6 w-32"></div>
 
-        <div class="shimmer w-full rounded-lg mb-8 h-12"></div>
+        <div class="shimmer mb-8 h-12 w-full rounded-lg"></div>
     </div>
 @endfor

@@ -385,6 +385,24 @@ class Order extends Model implements OrderContract
     }
 
     /**
+     * Checks if order can be reorder or not
+     */
+    public function canReorder(): bool
+    {
+        if ($this->is_guest) {
+            return false;
+        }
+
+        foreach ($this->items as $item) {
+            if (! $item->product?->getTypeInstance()->isSaleable()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Create a new factory instance for the model.
      */
     protected static function newFactory(): Factory

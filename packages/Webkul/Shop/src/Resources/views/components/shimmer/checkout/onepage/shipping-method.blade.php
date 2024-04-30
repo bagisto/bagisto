@@ -1,29 +1,29 @@
 <div class="mb-7">
-    <div class="flex justify-between items-center py-4">
-        <h2 class="shimmer w-[223px] h-[32px]"></h2>
-        <span class="shimmer w-6 h-6"></span>
+    <div class="flex items-center justify-between py-4">
+        <h2 class="shimmer h-8 w-56"></h2>
+        <span class="shimmer h-6 w-6"></span>
     </div>
 
-    <div class="flex flex-wrap gap-8 mt-8">
+    <div class="mt-8 flex flex-wrap gap-8">
         <div class="relative max-w-[217px] select-none max-sm:max-w-full max-sm:flex-auto">
-            <span class="shimmer w-6 h-6 absolute ltr:right-5 rtl:left-5 top-5 rounded-full"></span>
+            <span class="shimmer absolute top-5 h-6 w-6 rounded-full ltr:right-5 rtl:left-5"></span>
 
-            <label class="block p-5 border border-[#E9E9E9] rounded-xl ">
-                <span class="shimmer block w-[60px] h-[60px]"></span>
+            <label class="block rounded-xl border border-[#E9E9E9] p-5">
+                <span class="shimmer block h-[60px] w-[60px]"></span>
                 
-                <p class="shimmer w-3/5 h-[37.5px] mt-2"></p>
-                <p class="shimmer w-[180px] h-[18px] mt-2.5"></p>
+                <p class="shimmer mt-2 h-[37.5px] w-3/5"></p>
+                <p class="shimmer mt-2.5 h-[18px] w-[180px]"></p>
             </label>
         </div>
 
-        <div class="relative max-w-[217px] select-none max-sm:max-w-full max-sm:flex-auto ">
-            <span class="shimmer w-6 h-6 absolute ltr:right-5 rtl:left-5 top-5 rounded-full"></span>
+        <div class="relative max-w-[217px] select-none max-sm:max-w-full max-sm:flex-auto">
+            <span class="shimmer absolute top-5 h-6 w-6 rounded-full ltr:right-5 rtl:left-5"></span>
 
-            <label class="block p-5 border border-[#E9E9E9] rounded-xl ">
-                <span class="shimmer block w-[60px] h-[60px]"></span>
+            <label class="block rounded-xl border border-[#E9E9E9] p-5">
+                <span class="shimmer block h-[60px] w-[60px]"></span>
 
-                <p class="shimmer w-3/5 h-[37.5px] mt-2"></p>
-                <p class="shimmer w-[180px] h-[18px] mt-2.5"></p>
+                <p class="shimmer mt-1.5 h-8 w-3/5"></p>
+                <p class="shimmer mt-2.5 h-4 w-[180px]"></p>
             </label>
         </div>
     </div>

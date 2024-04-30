@@ -1,8 +1,6 @@
 @props(['isMultiRow' => false])
 
 <v-datagrid {{ $attributes }}>
-    <x-admin::shimmer.datagrid :isMultiRow="$isMultiRow" />
-
     {{ $slot }}
 </v-datagrid>
 
@@ -12,40 +10,47 @@
         id="v-datagrid-template"
     >
         <div>
+            <!-- Toolbar -->
             <x-admin::datagrid.toolbar />
 
-            <div class="flex mt-4">
+            <div class="mt-4 flex">
                 <x-admin::datagrid.table :isMultiRow="$isMultiRow">
-                    <template #header>
+                    <template #header="{
+                        isLoading,
+                        available,
+                        applied,
+                        selectAll,
+                        sort,
+                        performAction
+                    }">
                         <slot
                             name="header"
-                            :columns="available.columns"
-                            :actions="available.actions"
-                            :mass-actions="available.massActions"
-                            :records="available.records"
-                            :meta="available.meta"
-                            :sort-page="sortPage"
-                            :selectAllRecords="selectAllRecords"
+                            :is-loading="isLoading"
                             :available="available"
                             :applied="applied"
-                            :is-loading="isLoading"
+                            :select-all="selectAll"
+                            :sort="sort"
+                            :perform-action="performAction"
                         >
                         </slot>
                     </template>
 
-                    <template #body>
+                    <template #body="{
+                        isLoading,
+                        available,
+                        applied,
+                        selectAll,
+                        sort,
+                        performAction
+                    }">
                         <slot
                             name="body"
-                            :columns="available.columns"
-                            :actions="available.actions"
-                            :mass-actions="available.massActions"
-                            :records="available.records"
-                            :meta="available.meta"
-                            :setCurrentSelectionMode="setCurrentSelectionMode"
-                            :performAction="performAction"
+                            :is-loading="isLoading"
                             :available="available"
                             :applied="applied"
-                            :is-loading="isLoading"
+                            :select-all="selectAll"
+                            :sort="sort"
+                            :perform-action="performAction"
                         >
                         </slot>
                     </template>
@@ -113,6 +118,20 @@
                         },
                     },
                 };
+            },
+
+            watch: {
+                'available.records': function (newRecords, oldRecords) {
+                    this.setCurrentSelectionMode();
+
+                    this.updateDatagrids();
+
+                    this.updateExportComponent();
+                },
+
+                'applied.massActions.indices': function (newIndices, oldIndices) {
+                    this.setCurrentSelectionMode();
+                },
             },
 
             mounted() {
@@ -191,8 +210,6 @@
 
                     this.isLoading = true;
 
-                    this.$refs['filterDrawer'].close();
-
                     this.$axios
                         .get(this.src, {
                             params: { ...params, ...extraParams }
@@ -222,65 +239,22 @@
 
                             this.available.meta = meta;
 
-                            this.setCurrentSelectionMode();
-
-                            this.updateDatagrids();
-
-                           /**
-                            * This event should be fired at the end, but only in the GET method. This allows the export feature to listen to it
-                            * and update its properties accordingly.
-                            */
-                            this.$emitter.emit('change-datagrid', {
-                                available: this.available,
-                                applied: this.applied
-                            });
-
                             this.isLoading = false;
                         });
                 },
 
                 /**
-                 * Change Page.
+                 * Change Page. When the child component has handled all the cases, it will send the
+                 * valid new page; otherwise, it will block. Here, we are certain that we have
+                 * a new page, so the parent will simply call the AJAX based on the new page.
                  *
-                 * The reason for choosing the numeric approach over the URL approach is to prevent any conflicts with our existing
-                 * URLs. If we were to use the URL approach, it would introduce additional arguments in the `get` method, necessitating
-                 * the addition of a `url` prop. Instead, by using the numeric approach, we can let Axios handle all the query parameters
-                 * using the `applied` prop. This allows for a cleaner and more straightforward implementation.
-                 *
-                 * @param {string|integer} directionOrPageNumber
+                 * @param {integer} newPage
                  * @returns {void}
                  */
-                changePage(directionOrPageNumber) {
-                    let newPage;
+                changePage(newPage) {
+                    this.applied.pagination.page = newPage;
 
-                    if (typeof directionOrPageNumber === 'string') {
-                        if (directionOrPageNumber === 'previous') {
-                            newPage = this.available.meta.current_page - 1;
-                        } else if (directionOrPageNumber === 'next') {
-                            newPage = this.available.meta.current_page + 1;
-                        } else {
-                            console.warn('Invalid Direction Provided : ' + directionOrPageNumber);
-
-                            return;
-                        }
-                    }  else if (typeof directionOrPageNumber === 'number') {
-                        newPage = directionOrPageNumber;
-                    } else {
-                        console.warn('Invalid Input Provided: ' + directionOrPageNumber);
-
-                        return;
-                    }
-
-                    /**
-                     * Check if the `newPage` is within the valid range.
-                     */
-                    if (newPage >= 1 && newPage <= this.available.meta.last_page) {
-                        this.applied.pagination.page = newPage;
-
-                        this.get();
-                    } else {
-                        console.warn('Invalid Page Provided: ' + newPage);
-                    }
+                    this.get();
                 },
 
                 /**
@@ -303,12 +277,12 @@
                 },
 
                 /**
-                 * Sort Page.
+                 * Sort results.
                  *
                  * @param {object} column
                  * @returns {void}
                  */
-                sortPage(column) {
+                sort(column) {
                     if (column.sortable) {
                         this.applied.sort = {
                             column: column.index,
@@ -325,58 +299,16 @@
                 },
 
                 /**
-                 * Filter Page.
+                 * Search results.
                  *
-                 * @param {object} $event
-                 * @param {object} column
-                 * @param {object} additional
+                 * @param {object} filters
                  * @returns {void}
                  */
-                filterPage($event, column = null, additional = {}) {
-                    let quickFilter = additional?.quickFilter;
-
-                    if (quickFilter?.isActive) {
-                        let options = quickFilter.selectedFilter;
-
-                        switch (column.type) {
-                            case 'date_range':
-                            case 'datetime_range':
-                                this.applyFilter(column, options.from, {
-                                    range: {
-                                        name: 'from'
-                                    }
-                                });
-
-                                this.applyFilter(column, options.to, {
-                                    range: {
-                                        name: 'to'
-                                    }
-                                });
-
-                                break;
-
-                            default:
-                                break;
-                        }
-                    } else {
-                        /**
-                         * Here, either a real event will come or a string value. If a string value is present, then
-                         * we create a similar event-like structure to avoid any breakage and make it easy to use.
-                         */
-                        if ($event?.target?.value === undefined) {
-                            $event = {
-                                target: {
-                                    value: $event,
-                                }
-                            };
-                        }
-
-                        this.applyFilter(column, $event.target.value, additional);
-
-                        if (column) {
-                            $event.target.value = '';
-                        }
-                    }
+                search(filters) {
+                    this.applied.filters.columns = [
+                        ...(this.applied.filters.columns.filter((column) => column.index !== 'all')),
+                        ...filters.columns,
+                    ];
 
                     /**
                      * We need to reset the page on filtering.
@@ -386,145 +318,31 @@
                     this.get();
                 },
 
-                applyFilter(column, requestedValue, additional = {}) {
-                    let appliedColumn = this.findAppliedColumn(column?.index);
+                /**
+                 * Filter results.
+                 *
+                 * @param {object} filters
+                 * @returns {void}
+                 */
+                 filter(filters) {
+                    this.applied.filters.columns = [
+                        ...(this.applied.filters.columns.filter((column) => column.index === 'all')),
+                        ...filters.columns,
+                    ];
 
                     /**
-                     * If no column is found, it means that search from the toolbar have been
-                     * activated. In this case, we will search for `all` indices and update the
-                     * value accordingly.
+                     * We need to reset the page on filtering.
                      */
-                    if (! column) {
-                        let appliedColumn = this.findAppliedColumn('all');
-
-                        if (! requestedValue) {
-                            appliedColumn.value = [];
-
-                            return;
-                        }
-
-                        if (appliedColumn) {
-                            appliedColumn.value = [requestedValue];
-                        } else {
-                            this.applied.filters.columns.push({
-                                index: 'all',
-                                value: [requestedValue]
-                            });
-                        }
-
-                        /**
-                         * Else, we will look into the sidebar filters and update the value accordingly.
-                         */
-                    } else {
-                        /**
-                         * Here if value already exists, we will not do anything.
-                         */
-                        if (
-                            requestedValue === undefined ||
-                            requestedValue === '' ||
-                            appliedColumn?.value.includes(requestedValue)
-                        ) {
-                            return;
-                        }
-
-                        switch (column.type) {
-                            case 'date_range':
-                            case 'datetime_range':
-                                let {
-                                    range
-                                } = additional;
-
-                                if (appliedColumn) {
-                                    let appliedRanges = appliedColumn.value[0];
-
-                                    if (range.name == 'from') {
-                                        appliedRanges[0] = requestedValue;
-                                    }
-
-                                    if (range.name == 'to') {
-                                        appliedRanges[1] = requestedValue;
-                                    }
-
-                                    appliedColumn.value = [appliedRanges];
-                                } else {
-                                    let appliedRanges = ['', ''];
-
-                                    if (range.name == 'from') {
-                                        appliedRanges[0] = requestedValue;
-                                    }
-
-                                    if (range.name == 'to') {
-                                        appliedRanges[1] = requestedValue;
-                                    }
-
-                                    this.applied.filters.columns.push({
-                                        ...column,
-                                        value: [appliedRanges]
-                                    });
-                                }
-
-                                break;
-
-                            default:
-                                if (appliedColumn) {
-                                    appliedColumn.value.push(requestedValue);
-                                } else {
-                                    this.applied.filters.columns.push({
-                                        ...column,
-                                        value: [requestedValue]
-                                    });
-                                }
-
-                                break;
-                        }
-                    }
-                },
-
-                //================================================================
-                // Filters logic, will move it from here once completed.
-                //================================================================
-
-                findAppliedColumn(columnIndex) {
-                    return this.applied.filters.columns.find(column => column.index === columnIndex);
-                },
-
-                hasAnyAppliedColumnValues(columnIndex) {
-                    let appliedColumn = this.findAppliedColumn(columnIndex);
-
-                    return appliedColumn?.value.length > 0;
-                },
-
-                getAppliedColumnValues(columnIndex) {
-                    let appliedColumn = this.findAppliedColumn(columnIndex);
-
-                    return appliedColumn?.value ?? [];
-                },
-
-                removeAppliedColumnValue(columnIndex, appliedColumnValue) {
-                    let appliedColumn = this.findAppliedColumn(columnIndex);
-
-                    appliedColumn.value = appliedColumn?.value.filter(value => value !== appliedColumnValue);
-
-                    /**
-                     * Clean up is done here. If there are no applied values present, there is no point in including the applied column as well.
-                     */
-                    if (!appliedColumn.value.length) {
-                        this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
-                    }
+                    this.applied.pagination.page = 1;
 
                     this.get();
                 },
 
-                removeAppliedColumnAllValues(columnIndex) {
-                    this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
-
-                    this.get();
-                },
-
-                //================================================================
-                // Mass actions logic, will move it from here once completed.
-                //================================================================
-
+                /**
+                 * This will analyze the current selection mode based on the mass action indices.
+                 *
+                 * @returns {void}
+                 */
                 setCurrentSelectionMode() {
                     this.applied.massActions.meta.mode = 'none';
 
@@ -549,9 +367,12 @@
                     }
                 },
 
-                selectAllRecords() {
-                    this.setCurrentSelectionMode();
-
+                /**
+                 * This will select all records and update the mass action indices.
+                 *
+                 * @returns {void}
+                 */
+                selectAll() {
                     if (['all', 'partial'].includes(this.applied.massActions.meta.mode)) {
                         this.available.records.forEach(record => {
                             const id = record[this.available.meta.primary_column];
@@ -566,8 +387,11 @@
 
                             let found = this.applied.massActions.indices.find(selectedId => selectedId === id);
 
-                            if (!found) {
-                                this.applied.massActions.indices.push(id);
+                            if (! found) {
+                                this.applied.massActions.indices = [
+                                    ...this.applied.massActions.indices,
+                                    id,
+                                ];
                             }
                         });
 
@@ -575,92 +399,19 @@
                     }
                 },
 
-                validateMassAction() {
-                    if (! this.applied.massActions.indices.length) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.no-records-selected')" });
-
-                        return false;
-                    }
-
-                    if (! this.applied.massActions.meta.action) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.must-select-a-mass-action')" });
-
-                        return false;
-                    }
-
-                    if (
-                        this.applied.massActions.meta.action?.options?.length &&
-                        this.applied.massActions.value === null
-                    ) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.must-select-a-mass-action-option')" });
-
-                        return false;
-                    }
-
-                    return true;
-                },
-
-                performMassAction(currentAction, currentOption = null) {
-                    this.applied.massActions.meta.action = currentAction;
-
-                    if (currentOption) {
-                        this.applied.massActions.value = currentOption.value;
-                    }
-
-                    if (! this.validateMassAction()) {
-                        return;
-                    }
-
-                    const {
-                        action
-                    } = this.applied.massActions.meta;
-
-                    const method = action.method.toLowerCase();
-
-                    this.$emitter.emit('open-confirm-modal', {
-                        agree: () => {
-                            switch (method) {
-                                case 'post':
-                                case 'put':
-                                case 'patch':
-                                    this.$axios[method](action.url, {
-                                            indices: this.applied.massActions.indices,
-                                            value: this.applied.massActions.value,
-                                        })
-                                        .then(response => {
-                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
-                                            this.get();
-                                        })
-                                        .catch((error) => {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                                        });
-
-                                    break;
-
-                                case 'delete':
-                                    this.$axios[method](action.url, {
-                                            indices: this.applied.massActions.indices
-                                        })
-                                        .then(response => {
-                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
-                                            this.get();
-                                        })
-                                        .catch((error) => {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                                        });
-
-                                    break;
-
-                                default:
-                                    console.error('Method not supported.');
-
-                                    break;
-                            }
-
-                            this.applied.massActions.indices  = [];
-                        }
+                /**
+                 * Updates the export component properties whenever new results appear in the datagrid.
+                 *
+                 * @returns {void}
+                 */
+                 updateExportComponent() {
+                    /**
+                     * This event should be fired whenever new results appear. This allows the export feature to
+                     * listen to it and update its properties accordingly.
+                     */
+                     this.$emitter.emit('change-datagrid', {
+                        available: this.available,
+                        applied: this.applied
                     });
                 },
 
@@ -668,6 +419,11 @@
                 // Support for previous applied values in datagrids. All code is based on local storage.
                 //=======================================================================================
 
+                /**
+                 * Updates the datagrids stored in local storage with the latest data.
+                 *
+                 * @returns {void}
+                 */
                 updateDatagrids() {
                     let datagrids = this.getDatagrids();
 
@@ -697,6 +453,11 @@
                     this.setDatagrids(datagrids);
                 },
 
+                /**
+                 * Returns the initial properties for a datagrid.
+                 *
+                 * @returns {object} Initial properties for a datagrid.
+                 */
                 getDatagridInitialProperties() {
                     return {
                         src: this.src,
@@ -706,10 +467,20 @@
                     };
                 },
 
+                /**
+                 * Returns the storage key for datagrids in local storage.
+                 *
+                 * @returns {string} Storage key for datagrids.
+                 */
                 getDatagridsStorageKey() {
                     return 'datagrids';
                 },
 
+                /**
+                 * Retrieves the datagrids stored in local storage.
+                 *
+                 * @returns {Array} Datagrids stored in local storage.
+                 */
                 getDatagrids() {
                     let datagrids = localStorage.getItem(
                         this.getDatagridsStorageKey()
@@ -718,52 +489,17 @@
                     return JSON.parse(datagrids) ?? [];
                 },
 
+                /**
+                 * Sets the datagrids in local storage.
+                 *
+                 * @param {Array} datagrids - Datagrids to be stored in local storage.
+                 * @returns {void}
+                 */
                 setDatagrids(datagrids) {
                     localStorage.setItem(
                         this.getDatagridsStorageKey(),
                         JSON.stringify(datagrids)
                     );
-                },
-
-                //================================================================
-                // Remaining logic, will check.
-                //================================================================
-
-                // refactor when not in that much use case...
-                performAction(action) {
-                    const method = action.method.toLowerCase();
-
-                    switch (method) {
-                        case 'get':
-                            window.location.href = action.url;
-
-                            break;
-
-                        case 'post':
-                        case 'put':
-                        case 'patch':
-                        case 'delete':
-                            this.$emitter.emit('open-confirm-modal', {
-                                agree: () => {
-                                    this.$axios[method](action.url)
-                                        .then(response => {
-                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
-                                            this.get();
-                                        })
-                                        .catch((error) => {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                                        });
-                                }
-                            });
-
-                            break;
-
-                        default:
-                            console.error('Method not supported.');
-
-                            break;
-                    }
                 },
             },
         });

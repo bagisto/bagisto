@@ -36,6 +36,8 @@ return [
         'description-text' => 'Wypisz wszystkie powiadomienia',
         'marked-success'   => 'Powiadomienie oznaczone jako przeczytane',
         'no-record'        => 'Brak dostępnych powiadomień',
+        'of'               => 'z',
+        'per-page'         => 'na stronę',
         'read-all'         => 'Oznacz jako przeczytane',
         'title'            => 'Powiadomienia',
         'view-all'         => 'Zobacz wszystkie',
@@ -47,15 +49,6 @@ return [
             'pending'         => 'Zamówienie w trakcie',
             'pending-payment' => 'Oczekuje na płatność',
             'processing'      => 'Zamówienie w trakcie realizacji',
-        ],
-
-        'status'  => [
-            'all'        => 'Wszystkie',
-            'canceled'   => 'Anulowane',
-            'closed'     => 'Zamknięte',
-            'completed'  => 'Zakończone',
-            'pending'    => 'Oczekujące',
-            'processing' => 'W trakcie',
         ],
     ],
 
@@ -134,7 +127,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'Zamówienia',
+                'create-btn' => 'Utwórz Zamówienie',
+                'title'      => 'Zamówienia',
+
+                'search-customer' => [
+                    'create-btn'  => 'Utwórz Klienta',
+                    'empty-info'  => 'Brak dostępnych klientów dla podanego terminu wyszukiwania.',
+                    'empty-title' => 'Nie znaleziono klientów',
+                    'search-by'   => 'Wyszukaj po adresie e-mail lub imieniu',
+                    'title'       => 'Wybierz Klienta',
+                ],
 
                 'datagrid' => [
                     'canceled'         => 'Anulowane',
@@ -152,13 +154,173 @@ return [
                     'order-id'         => 'ID Zamówienia',
                     'pay-by'           => 'Płać Przez - :method',
                     'pay-via'          => 'Płać Via',
-                    'pending'          => 'Oczekujące',
                     'pending-payment'  => 'Oczekująca Płatność',
+                    'pending'          => 'Oczekujące',
                     'processing'       => 'W trakcie realizacji',
                     'product-count'    => ':count + Więcej produktów',
                     'status'           => 'Status',
                     'success'          => 'Sukces',
                     'view'             => 'Podgląd',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'Dodaj do koszyka',
+                'back-btn'                => 'Powrót',
+                'check-billing-address'   => 'Brakuje adresu rozliczeniowego.',
+                'check-shipping-address'  => 'Brakuje adresu dostawy.',
+                'configuration'           => 'Konfiguracja',
+                'coupon-already-applied'  => 'Kod kuponu został już zastosowany.',
+                'coupon-applied'          => 'Kod kuponu został pomyślnie zastosowany.',
+                'coupon-error'            => 'Nie można zastosować kodu kuponu.',
+                'coupon-not-found'        => 'Nie znaleziono kodu kuponu',
+                'coupon-remove'           => 'Kod kuponu został pomyślnie usunięty.',
+                'error'                   => 'Wystąpił błąd',
+                'minimum-order-error'     => 'Minimalna wartość zamówienia nie została osiągnięta.',
+                'order-placed-success'    => 'Zamówienie zostało pomyślnie złożone.',
+                'payment-not-supported'   => 'Ta metoda płatności nie jest obsługiwana',
+                'save-btn'                => 'Utwórz zamówienie',
+                'specify-payment-method'  => 'Brakuje metody płatności.',
+                'specify-shipping-method' => 'Brakuje metody dostawy.',
+                'title'                   => 'Utwórz zamówienie dla :name',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'Proszę wybrać opcję',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'Brak',
+                        'total-amount' => 'Całkowita kwota',
+                    ],
+
+                    'grouped' => [
+                        'name' => 'Nazwa',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'Linki',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => 'Produkt został pomyślnie dodany do koszyka',
+                    'success-remove'      => 'Element został pomyślnie usunięty z koszyka',
+                    'success-update'      => 'Element koszyka został pomyślnie zaktualizowany',
+
+                    'items' => [
+                        'add-product'       => 'Dodaj produkt',
+                        'amount-per-unit'   => ':amount za jednostkę x :qty ilość',
+                        'delete'            => 'Usuń',
+                        'empty-description' => 'Brak produktów w koszyku.',
+                        'empty-title'       => 'Pusty koszyk',
+                        'move-to-wishlist'  => 'Przenieś do listy życzeń',
+                        'see-details'       => 'Zobacz szczegóły',
+                        'sku'               => 'SKU - :sku',
+                        'sub-total'         => 'Suma częściowa - :sub_total',
+                        'title'             => 'Produkty w koszyku',
+
+                        'search' => [
+                            'add-to-cart'   => 'Dodaj do koszyka',
+                            'available-qty' => ':qty dostępne',
+                            'empty-info'    => 'Brak produktów dostępnych dla podanego terminu wyszukiwania.',
+                            'empty-title'   => 'Nie znaleziono produktów',
+                            'product-image' => 'Obraz produktu',
+                            'qty'           => 'Ilość',
+                            'sku'           => 'SKU - :sku',
+                            'title'         => 'Wyszukiwanie produktów',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => 'Dodaj adres',
+                        'add-new'          => 'Dodaj nowy adres',
+                        'add-new-address'  => 'Dodaj nowy adres',
+                        'addresses'        => 'Adresy',
+                        'back'             => 'Powrót',
+                        'billing-address'  => 'Adres rozliczeniowy',
+                        'city'             => 'Miasto',
+                        'company-name'     => 'Nazwa firmy',
+                        'confirm'          => 'Potwierdź',
+                        'country'          => 'Kraj',
+                        'edit-btn'         => 'Edytuj adres',
+                        'email'            => 'Email',
+                        'first-name'       => 'Imię',
+                        'last-name'        => 'Nazwisko',
+                        'postcode'         => 'Kod pocztowy',
+                        'proceed'          => 'Przejdź dalej',
+                        'same-as-billing'  => 'Czy użyć tego samego adresu dla dostawy?',
+                        'save'             => 'Zapisz',
+                        'save-address'     => 'Zapisz ten adres w książce adresowej',
+                        'select-country'   => 'Wybierz kraj',
+                        'select-state'     => 'Wybierz stan',
+                        'shipping-address' => 'Adres dostawy',
+                        'state'            => 'Stan',
+                        'street-address'   => 'Adres ulicy',
+                        'telephone'        => 'Telefon',
+                        'title'            => 'Adres',
+                        'vat-id'           => 'NIP',
+                    ],
+
+                    'payment' => [
+                        'title' => 'Płatność',
+                    ],
+
+                    'shipping' => [
+                        'title' => 'Dostawa',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'Zastosuj kupon',
+                        'discount-amount' => 'Kwota rabatu',
+                        'enter-your-code' => 'Wprowadź swój kod',
+                        'grand-total'     => 'Suma ogólna',
+                        'place-order'     => 'Złóż zamówienie',
+                        'processing'      => 'Przetwarzanie',
+                        'shipping-amount' => 'Kwota dostawy',
+                        'sub-total'       => 'Suma częściowa',
+                        'tax'             => 'Podatek',
+                        'title'           => 'Podsumowanie zamówienia',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'Dodaj do koszyka',
+                    'delete'            => 'Usuń',
+                    'empty-description' => 'Brak produktów w koszyku.',
+                    'empty-title'       => 'Pusty koszyk',
+                    'see-details'       => 'Zobacz szczegóły',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Produkty w koszyku',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'Dodaj do koszyka',
+                    'empty-description' => 'Brak produktów w twoich ostatnich zamówieniach.',
+                    'empty-title'       => 'Puste zamówienia',
+                    'see-details'       => 'Zobacz szczegóły',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Produkty z ostatnich zamówień',
+                    'view'              => 'Podgląd',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'Dodaj do koszyka',
+                    'delete'            => 'Usuń',
+                    'empty-description' => 'Brak produktów na Twojej liście życzeń.',
+                    'empty-title'       => 'Puste elementy na liście życzeń',
+                    'see-details'       => 'Zobacz szczegóły',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Elementy na liście życzeń',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'Dodaj do koszyka',
+                    'delete'            => 'Usuń',
+                    'empty-description' => 'Brak produktów na Twojej liście porównawczej.',
+                    'empty-title'       => 'Puste elementy na liście porównawczej',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Elementy na liście porównawczej',
                 ],
             ],
 
@@ -211,6 +373,7 @@ return [
                 'refund'                => 'Zwrot',
                 'refund-id'             => 'Zwrot #:refund',
                 'refunded'              => 'Zwrócone',
+                'reorder'               => 'Przeorganizuj',
                 'ship'                  => 'Wysyłka',
                 'shipment'              => 'Przesyłka #:shipment',
                 'shipments'             => 'Przesyłki',
@@ -900,6 +1063,7 @@ return [
                 'position'              => 'Pozycja',
                 'price'                 => 'Cena',
                 'regex'                 => 'Wyrażenie Regularne',
+                'regex-info'            => 'Wyrażenie powinno być w podwójnych cudzysłowach.',
                 'save-btn'              => 'Zapisz Atrybut',
                 'select'                => 'Wybór',
                 'select-type'           => 'Wybierz Typ Atrybutu',
@@ -963,6 +1127,7 @@ return [
                 'position'              => 'Pozycja',
                 'price'                 => 'Cena',
                 'regex'                 => 'Wyrażenie Regularne',
+                'regex-info'            => 'Wyrażenie powinno być w podwójnych cudzysłowach.',
                 'save-btn'              => 'Zapisz Atrybut',
                 'select'                => 'Wybierz',
                 'select-type'           => 'Wybierz Rodzaj Atrybutu',
@@ -1228,11 +1393,12 @@ return [
                 'active'                      => 'Aktywny',
                 'address-delete-confirmation' => 'Czy na pewno chcesz usunąć ten adres?',
                 'back-btn'                    => 'Powrót',
+                'create-order'                => 'Utwórz zamówienie',
                 'customer'                    => 'Klient',
                 'date-of-birth'               => 'Data urodzenia - :dob',
                 'default-address'             => 'Domyślny adres',
-                'delete'                      => 'Usuń',
                 'delete-account'              => 'Usuń konto',
+                'delete'                      => 'Usuń',
                 'email'                       => 'E-mail - :email',
                 'empty-description'           => 'Utwórz nowe adresy dla klienta',
                 'empty-title'                 => 'Dodaj adres klienta',
@@ -1241,6 +1407,7 @@ return [
                 'inactive'                    => 'Nieaktywny',
                 'login-as-customer'           => 'Zaloguj się jako klient',
                 'note-created-success'        => 'Notatka utworzona pomyślnie',
+                'order-create-confirmation'   => 'Czy na pewno chcesz utworzyć zamówienie dla tego klienta?',
                 'phone'                       => 'Telefon - :phone',
                 'set-as-default'              => 'Ustaw jako domyślny',
                 'suspended'                   => 'Zawieszony',
@@ -1364,8 +1531,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'Faktury (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'Faktury (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1379,14 +1546,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'Zamówienia (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'Całkowity dochód - :revenue',
+                    'count'         => 'Zamówienia (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'Całkowity dochód - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'ID - :id',
-                    'count'       => 'Recenzje (:count)',
+                    'id'    => 'ID - :id',
+                    'count' => 'Recenzje (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'Pomyślnie usunięto przedmiot z koszyka.',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'Pomyślnie usunięto przedmiot z listy życzeń.',
+                ],
+
+                'compare' => [
+                    'delete-success' => 'Pomyślnie usunięto przedmiot z porównywarki.',
                 ],
             ],
 
@@ -2158,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name zostało już zajęte.',
-            'create-btn'        => 'Utwórz stronę',
-            'title'             => 'Strony',
+            'already-taken' => 'Strona o nazwie :name już istnieje.',
+            'create-btn'    => 'Utwórz stronę',
+            'channel'       => 'Kanał',
+            'language'      => 'Język',
+            'title'         => 'Strony',
 
             'datagrid' => [
                 'delete'              => 'Usuń',
@@ -2605,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Wróć',
-                    'basic-settings' => 'Podstawowe Ustawienia',
                     'country'        => 'Kraj',
                     'identifier'     => 'Identyfikator',
                     'save-btn'       => 'Zapisz Stawkę Podatku',
                     'select-country' => 'Wybierz Kraj',
                     'select-state'   => 'Wybierz Stan',
+                    'settings'       => 'Ustawienia',
                     'state'          => 'Stan',
                     'tax-rate'       => 'Stawka',
                     'title'          => 'Edytuj Stawkę Podatku',
@@ -3418,6 +3599,10 @@ return [
                     'admin-name'             => 'Nazwa Administratora',
                     'admin-name-tip'         => 'Ta nazwa będzie wyświetlana we wszystkich wiadomościach e-mail administratora',
                     'admin-page-limit'       => 'Domyślna liczba pozycji na stronę (Administrator)',
+                    'contact-email'          => 'Email kontaktowy',
+                    'contact-email-tip'      => 'Adres email będzie pokazywany na dole twoich emaili',
+                    'contact-name'           => 'Nazwa kontaktowa',
+                    'contact-name-tip'       => 'Ta nazwa będzie pokazywana na dole twoich emaili',
                     'email-sender-name'      => 'Nazwa Wysyłającego E-mail',
                     'email-sender-name-tip'  => 'Ta nazwa będzie wyświetlana w skrzynce odbiorczej klientów',
                     'info'                   => 'Ustaw nazwę nadawcy e-maila, adres e-mail sklepu, nazwę administratora i adres e-mail administratora.',

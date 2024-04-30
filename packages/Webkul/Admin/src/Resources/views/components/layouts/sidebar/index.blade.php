@@ -1,6 +1,6 @@
-<div class="fixed top-14 h-full bg-white dark:bg-gray-900 pt-4 w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px]">
-    <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll group-[.sidebar-collapsed]/container:overflow-visible">
-        <nav class="grid gap-2 w-full">
+<div class="fixed top-14 z-[1000] h-full w-[270px] bg-white pt-4 shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px] dark:bg-gray-900 max-lg:hidden">
+    <div class="journal-scroll h-[calc(100vh-100px)] overflow-auto group-[.sidebar-collapsed]/container:overflow-visible">
+        <nav class="grid w-full gap-2">
             <!-- Navigation Menu -->
             @foreach ($menu->items as $menuItem)
                 <div
@@ -40,15 +40,18 @@
 </div>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-sidebar-collapse-template">
+    <script
+        type="text/x-template"
+        id="v-sidebar-collapse-template"
+    >
         <div
-            class="bg-white dark:bg-gray-900 fixed w-full max-w-[270px] bottom-0 px-4 hover:bg-gray-100 dark:hover:bg-gray-950 border-t border-gray-200 dark:border-gray-800 transition-all duration-300 cursor-pointer"
+            class="fixed bottom-0 w-full max-w-[270px] cursor-pointer border-t border-gray-200 bg-white px-4 transition-all duration-300 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-950"
             :class="{'max-w-[70px]': isCollapsed}"
             @click="toggle"
         >
-            <div class="flex gap-2.5 p-1.5 items-center">
+            <div class="flex items-center gap-2.5 p-1.5">
                 <span
-                    class="icon-collapse transition-all text-2xl"
+                    class="icon-collapse text-2xl transition-all"
                     :class="[isCollapsed ? 'ltr:rotate-[180deg] rtl:rotate-[0]' : 'ltr:rotate-[0] rtl:rotate-[180deg]']"
                 ></span>
             </div>

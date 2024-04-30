@@ -12,7 +12,7 @@
                 type="text"
                 id="{{ $attribute->code }}"
                 :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                class="w-full py-2.5 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                 name="{{ $attribute->code }}"
                 v-bind="field"
                 @if ($attribute->code == 'url_key') v-slugify @endif
@@ -130,7 +130,7 @@
         @endphp
 
         @foreach ($attribute->options as $option)
-            <div class="flex gap-2.5 mb-2 last:!mb-0 items-center">
+            <div class="mb-2 flex items-center gap-2.5 last:!mb-0">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :id="$attribute->code . '_' . $option->id"
@@ -143,7 +143,7 @@
                 />
 
                 <label
-                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer select-none"
+                    class="cursor-pointer select-none text-xs font-medium text-gray-600 dark:text-gray-300"
                     for="{{ $attribute->code . '_' . $option->id }}"
                 >
                     {{ $option->admin_name }}
@@ -176,16 +176,20 @@
                     @if ($attribute->type == 'image')
                         <img
                             src="{{ Storage::url($product[$attribute->code]) }}"
-                            class="w-[45px] h-[45px] border dark:border-gray-800 rounded overflow-hidden hover:border-gray-400"
+                            class="h-[45px] w-[45px] overflow-hidden rounded border hover:border-gray-400 dark:border-gray-800"
                         />
                     @else
-                        <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300">
+                        <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
                             <i class="icon-down-stat text-2xl"></i>
                         </div>
                     @endif
                 </a>
 
-                <input type="hidden" name="{{ $attribute->code }}" value="{{ $product[$attribute->code] }}"/>
+                <input
+                    type="hidden"
+                    name="{{ $attribute->code }}"
+                    value="{{ $product[$attribute->code] }}"
+                />
             @endif
 
             <v-field
@@ -200,7 +204,7 @@
                     type="file"
                     id="{{ $attribute->code }}"
                     :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                    class="w-full py-2.5 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:file:bg-gray-800 dark:file:dark:text-white focus:border-gray-400 dark:focus:border-gray-400 dark:border-gray-800"
+                    class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:file:bg-gray-800 dark:file:dark:text-white dark:hover:border-gray-400 dark:focus:border-gray-400"
                     name="{{ $attribute->code }}"
                     @change="handleChange"
                     @blur="handleBlur"
@@ -209,7 +213,7 @@
         </div>
 
         @if ($product[$attribute->code])
-            <div class="flex gap-2.5 items-center mt-2.5">
+            <div class="mt-2.5 flex items-center gap-2.5">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :id="$attribute->code . '_delete'"
@@ -220,7 +224,7 @@
 
                 <label
                     for="{{ $attribute->code . '_delete' }}"
-                    class="text-sm text-gray-600 dark:text-gray-300 cursor-pointer select-none"
+                    class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-300"
                 >
                     @lang('admin::app.catalog.products.edit.remove')
                 </label>

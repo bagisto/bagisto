@@ -1,39 +1,34 @@
-<div class="flex gap-4 mt-7 justify-between items-center max-md:flex-wrap">
+<div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
     <!-- Left Toolbar -->
     <div class="flex gap-x-1">
-        <!-- Mass Actions Panel --><!-- Filters And Search Panel -->
-        <div class="flex gap-x-1 w-full items-center">
-            <!-- Search Panel -->
-            <div class="shimmer w-[302px] h-[38px] rounded-lg"></div>
+        <div class="flex w-full items-center gap-x-1">
+            <div class="shimmer h-[38px] w-[302px] rounded-lg"></div>
 
-            <!-- Information Panel -->
             <div class="ltr:pl-2.5 rtl:pr-2.5">
-                <p class="shimmer w-[75px] h-[17px]"></p>
+                <p class="shimmer h-[17px] w-[75px]"></p>
             </div>
         </div>
     </div>
 
     <!-- Right Toolbar -->
     <div class="flex gap-x-4">
-        <!-- Filters Activation Button -->
         <div class="">
-            <div class="shimmer w-[94px] h-[38px] rounded-md"></div>
+            <div class="shimmer h-[38px] w-[94px] rounded-md"></div>
         </div>
 
         <div class="flex items-center gap-x-2">
-            <div class="shimmer w-[72px] h-[38px] rounded-md"></div>
+            <div class="shimmer h-[38px] w-[72px] rounded-md"></div>
 
-            <p class="shimmer w-14 h-6"></p>
+            <p class="shimmer h-6 w-14"></p>
 
-            <div class="shimmer w-10 h-[38px] rounded-md"></div>
+            <div class="shimmer h-[38px] w-10 rounded-md"></div>
 
-            <div class="shimmer w-[37px] h-6"></div>
+            <div class="shimmer h-6 w-[37px]"></div>
 
-            <!-- Pagination -->
             <div class="flex items-center gap-1">
-                <div class="shimmer w-[38px] h-[38px] rounded-md"></div>
+                <div class="shimmer h-[38px] w-[38px] rounded-md"></div>
 
-                <div class="shimmer w-[38px] h-[38px] rounded-md"></div>
+                <div class="shimmer h-[38px] w-[38px] rounded-md"></div>
             </div>
         </div>
     </div>

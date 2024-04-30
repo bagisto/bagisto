@@ -9,21 +9,21 @@
         type="text/x-template"
         id="v-group-products-template"
     >
-        <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
+        <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
             <!-- Panel Header -->
-            <div class="flex gap-5 justify-between mb-2.5 p-4">
+            <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.products.edit.types.grouped.title')
                     </p>
 
-                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
                         @lang('admin::app.catalog.products.edit.types.grouped.info')
                     </p>
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-1 items-center">
+                <div class="flex items-center gap-x-1">
                     <div
                         class="secondary-button"
                         @click="$refs.productSearch.openDrawer()"
@@ -47,21 +47,21 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800">
+                        <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-xl text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag cursor-grab text-xl text-gray-600 transition-all dark:text-gray-300"></i>
                                 
                                 <!-- Image -->
                                 <div
-                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
-                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.associated_product.images.length}"
+                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                                    :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! element.associated_product.images.length}"
                                 >
                                     <template v-if="! element.associated_product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                     
-                                        <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                             @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
                                         </p>
                                     </template>
@@ -72,8 +72,8 @@
                                 </div>
 
                                 <!-- Details -->
-                                <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                <div class="grid place-content-start gap-1.5">
+                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                                         @{{ element.associated_product.name }}
                                     </p>
 
@@ -84,9 +84,9 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-1 place-content-start text-right">
-                                <p class="text-gray-800 font-semibold dark:text-white">
-                                    @{{ $admin.formatPrice(element.associated_product.price) }}    
+                            <div class="grid place-content-start gap-1 text-right">
+                                <p class="font-semibold text-gray-800 dark:text-white">
+                                    @{{ $admin.formatPrice(element.associated_product.price) }}
                                 </p>
 
                                 
@@ -112,7 +112,7 @@
                                         type="text"
                                         :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex min-h-[39px] w-[86px] rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                         :class="[errors['links[' + (element.id ? element.id : 'link_' + index) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                         label="@lang('admin::app.catalog.products.edit.types.grouped.default-qty')"
@@ -123,16 +123,14 @@
                                         :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
                                         v-slot="{ message }"
                                     >
-                                        <p
-                                            class="mt-1 text-red-600 text-xs italic"
-                                            v-text="message"
-                                        >
+                                        <p class="mt-1 text-xs italic text-red-600">
+                                            @{{ message }}
                                         </p>
                                     </v-error-message>
                                 </x-admin::form.control-group>
 
                                 <p
-                                    class="text-red-600 cursor-pointer transition-all hover:underline"
+                                    class="cursor-pointer text-red-600 transition-all hover:underline"
                                     @click="remove(element)"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.grouped.delete')
@@ -145,18 +143,18 @@
 
             <!-- For Empty Variations -->
             <div
-                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                 v-else
             >
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                    class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-1.5 items-center">
-                    <p class="text-base text-gray-400 font-semibold">
+                <div class="flex flex-col items-center gap-1.5">
+                    <p class="text-base font-semibold text-gray-400">
                         @lang('admin::app.catalog.products.edit.types.grouped.empty-title')
                     </p>
 

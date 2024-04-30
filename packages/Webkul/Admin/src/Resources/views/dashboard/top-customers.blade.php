@@ -18,41 +18,35 @@
         <template v-else>
             <div class="border-b dark:border-gray-800">
                 <div class="flex items-center justify-between p-4">
-                    <p class="text-gray-600 dark:text-gray-300 text-base  font-semibold">
+                    <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
                         @lang('admin::app.dashboard.index.customer-with-most-sales')
                     </p>
 
-                    <p class="text-xs text-gray-400 font-semibold">
+                    <p class="text-xs font-semibold text-gray-400">
                         @{{ report.date_range }}
                     </p>
                 </div>
 
                 <div
-                    class="flex flex-col gap-8 p-4 border-b dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="flex flex-col gap-8 border-b p-4 transition-all last:border-b-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                     v-if="report.statistics.length"
                     v-for="customer in report.statistics"
                 >
                     <a :href="customer.id ? `{{ route('admin.customers.customers.view', '') }}/${customer.id}` : '#'">
                         <div class="flex justify-between gap-1.5">
                             <div class="flex flex-col">
-                                <p
-                                    class="text-gray-600 dark:text-gray-300 font-semibold"
-                                    v-text="customer.full_name"
-                                >
+                                <p class="font-semibold text-gray-600 dark:text-gray-300">
+                                    @{{ customer.full_name }}
                                 </p>
 
-                                <p
-                                    class="text-gray-600 dark:text-gray-300"
-                                    v-text="customer.email"
-                                >
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ customer.email }}
                                 </p>
                             </div>
 
                             <div class="flex flex-col">
-                                <p
-                                    class="text-gray-800 font-semibold dark:text-white"
-                                    v-text="customer.formatted_total"
-                                >
+                                <p class="font-semibold text-gray-800 dark:text-white">
+                                    @{{ customer.formatted_total }}
                                 </p>
 
                                 <p class="text-gray-600 dark:text-gray-300" v-if="customer.orders">
@@ -67,16 +61,16 @@
                     class="flex flex-col gap-8 p-4"
                     v-else
                 >
-                    <div class="grid gap-3.5 justify-center justify-items-center py-2.5">
+                    <div class="grid justify-center justify-items-center gap-3.5 py-2.5">
                         <!-- Placeholder Image -->
                         <img
                             src="{{ bagisto_asset('images/empty-placeholders/customers.svg') }}"
-                            class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                            class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                         />
 
                         <!-- Add Variants Information -->
                         <div class="flex flex-col items-center">
-                            <p class="text-base text-gray-400 font-semibold">
+                            <p class="text-base font-semibold text-gray-400">
                                 @lang('admin::app.dashboard.index.add-customer')
                             </p>
 

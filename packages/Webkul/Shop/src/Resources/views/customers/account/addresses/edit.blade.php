@@ -27,7 +27,10 @@
     </v-edit-customer-address>
 
     @push('scripts')
-        <script type="text/x-template" id="v-edit-customer-address-template">
+        <script
+            type="text/x-template"
+            id="v-edit-customer-address-template"
+        >
 
             <!-- Edit Address Form -->
             <x-shop::form
@@ -221,8 +224,8 @@
                             <option 
                                 v-for='(state, index) in countryStates[addressData.country]'
                                 :value="state.code"
-                                v-text="state.default_name"
                             >
+                                @{{ state.default_name }}
                             </option>
                         </x-shop::form.control-group.control>
                     </template>
@@ -302,7 +305,7 @@
 
                 <button
                     type="submit"
-                    class="primary-button m-0 block text-base w-max py-3 px-11 rounded-2xl text-center"
+                    class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base"
                 >
                     @lang('shop::app.customers.account.addresses.save')
                 </button>

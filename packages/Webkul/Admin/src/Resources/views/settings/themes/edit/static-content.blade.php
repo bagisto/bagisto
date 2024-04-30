@@ -6,16 +6,16 @@
         type="text/x-template"
         id="v-static-content-template"
     >
-        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
-            <div class="flex flex-col gap-2 flex-1 min-w-[931px] max-xl:flex-auto">
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
+        <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
                         <div class="flex flex-col gap-1">
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.settings.themes.edit.static-content')
                             </p>
 
-                            <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
+                            <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
                                 @lang('admin::app.settings.themes.edit.static-content-description')
                             </p>
                         </div>
@@ -45,13 +45,13 @@
                         </div>
                     </div>
                     
-                    <div class="text-sm font-medium text-center pt-4 text-gray-500">
+                    <div class="pt-4 text-center text-sm font-medium text-gray-500">
                         <div class="tabs">
-                            <div class="flex gap-4 mb-4 pt-2 border-b-2 max-sm:hidden">
+                            <div class="mb-4 flex gap-4 border-b-2 pt-2 max-sm:hidden">
                                 <!-- HTML Tab Header -->
                                 <p @click="switchEditor('v-html-editor-theme', 1)">
                                     <div
-                                        class="transition pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                                        class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-600 transition dark:text-gray-300"
                                         :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.html')
@@ -61,7 +61,7 @@
                                 <!-- CSS Tab Editor -->
                                 <p @click="switchEditor('v-css-editor-theme', 0);">
                                     <div
-                                        class="transition pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                                        class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-600 transition dark:text-gray-300"
                                         :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-css-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.css')
@@ -71,7 +71,7 @@
                                 <!-- Preview Tab Editor -->
                                 <p @click="switchEditor('v-static-content-previewer', 0);">
                                     <div
-                                        class="transition pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                                        class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-600 transition dark:text-gray-300"
                                         :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-static-content-previewer'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.preview')
@@ -106,16 +106,20 @@
             </div>
 
             <!-- General -->
-            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                        <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                             @lang('admin::app.settings.themes.edit.general')
                         </p>
                     </x-slot>
                 
                     <x-slot:content>
-                        <input type="hidden" name="type" value="static_content">
+                        <input
+                            type="hidden"
+                            name="type"
+                            value="static_content"
+                        />
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
@@ -126,7 +130,7 @@
                                 type="text"
                                 name="name"
                                 value="{{ $theme->name }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                 :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.name')"
@@ -147,7 +151,7 @@
                                 name="sort_order"
                                 value="{{ $theme->sort_order }}"
                                 rules="required|min_value:1"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                 :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 label="@lang('admin::app.settings.themes.edit.sort-order')"
                                 placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -181,7 +185,7 @@
                                 @lang('admin::app.settings.themes.edit.status')
                             </x-admin::form.control-group.label>
 
-                            <label class="relative inline-flex items-center cursor-pointer">
+                            <label class="relative inline-flex cursor-pointer items-center">
                                 <v-field
                                     type="checkbox"
                                     name="status"
@@ -193,14 +197,14 @@
                                         type="checkbox"
                                         name="status"
                                         id="status"
-                                        class="sr-only peer"
+                                        class="peer sr-only"
                                         v-bind="field"
                                         :checked="{{ $theme->status }}"
                                     />
                                 </v-field>
                     
                                 <label
-                                    class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-9 h-5 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:ltr:left-0.5 after:rtl:right-0.5 peer-focus:outline-none after:border after:rounded-full after:h-4 after:w-4 after:transition-all"
+                                    class="peer-checked:bg-navyBlue peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
                                     for="status"
                                 ></label>
                             </label>
@@ -214,24 +218,27 @@
     </script>
 
     <!-- Html Editor Template -->
-    <script type="text/x-template" id="v-html-editor-theme-template">
-        <div>
-            <div ref="html"></div>
-        </div>
+    <script
+        type="text/x-template"
+        id="v-html-editor-theme-template"
+    >
+        <div ref="html"></div>
     </script>
 
     <!-- Css Editor Template -->
-    <script type="text/x-template" id="v-css-editor-theme-template">
-        <div>
-            <div ref="css"></div>
-        </div>
+    <script
+        type="text/x-template"
+        id="v-css-editor-theme-template"
+    >
+        <div ref="css"></div>
     </script>
 
     <!-- Static Content Previewer -->
-    <script type="text/x-template" id="v-static-content-previewer-template">
-        <div>   
-            <div v-html="getPreviewContent()"></div>
-        </div>
+    <script
+        type="text/x-template"
+        id="v-static-content-previewer-template"
+    >
+        <div v-html="getPreviewContent()"></div>
     </script>
 
     <script type="module">

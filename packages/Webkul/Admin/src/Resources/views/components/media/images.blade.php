@@ -16,11 +16,14 @@
     height="{{ $height }}"
     :errors="errors"
 >
-    <x-admin::shimmer.image class="w-[110px] h-[110px] rounded" />
+    <x-admin::shimmer.image class="h-[110px] w-[110px] rounded" />
 </v-media-images>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-media-images-template">
+    <script
+        type="text/x-template"
+        id="v-media-images-template"
+    >
         <!-- Panel Content -->
         <div class="grid">
             <div class="flex flex-wrap gap-1">
@@ -28,7 +31,7 @@
                 <template v-if="allowMultiple || images.length == 0">
                     <!-- AI Image Generation Button -->
                     <label
-                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-blue-300 rounded cursor-pointer transition-all hover:border-blue-600 dark:invert dark:mix-blend-exclusion"
+                        class="grid h-[120px] max-h-[120px] min-h-[110px] w-full min-w-[110px] max-w-[120px] cursor-pointer items-center justify-items-center rounded border border-dashed border-blue-300 transition-all hover:border-blue-600 dark:mix-blend-exclusion dark:invert"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         v-if="ai.enabled"
                         @click="resetAIModal(); $refs.magicAIImageModal.open()"
@@ -36,7 +39,7 @@
                         <div class="flex flex-col items-center">
                             <span class="icon-magic text-2xl text-blue-600"></span>
 
-                            <p class="grid text-sm text-blue-600 font-semibold text-center">
+                            <p class="grid text-center text-sm font-semibold text-blue-600">
                                 @lang('admin::app.components.media.images.ai-add-image-btn')
                                 
                                 <span class="text-xs">
@@ -48,14 +51,14 @@
 
                     <!-- Upload Image Button -->
                     <label
-                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-gray-300 dark:border-gray-800 rounded cursor-pointer transition-all hover:border-gray-400 dark:invert dark:mix-blend-exclusion"
+                        class="grid h-[120px] max-h-[120px] min-h-[110px] w-full min-w-[110px] max-w-[120px] cursor-pointer items-center justify-items-center rounded border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         :for="$.uid + '_imageInput'"
                     >
                         <div class="flex flex-col items-center">
                             <span class="icon-image text-2xl"></span>
 
-                            <p class="grid text-sm text-gray-600 dark:text-gray-300 font-semibold text-center">
+                            <p class="grid text-center text-sm font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.components.media.images.add-image-btn')
                                 
                                 <span class="text-xs">
@@ -101,12 +104,12 @@
                 <template v-if="showPlaceholders && ! images.length">
                     <!-- Front Placeholder -->
                     <div
-                        class="w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
+                        class="relative h-[120px] max-h-[120px] w-full min-w-[120px] max-w-[120px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                         v-for="placeholder in placeholders"
                     >
                         <img :src="placeholder.image">
 
-                        <p class="w-full absolute bottom-4 text-xs text-gray-400 text-center font-semibold">
+                        <p class="absolute bottom-4 w-full text-center text-xs font-semibold text-gray-400">
                             @{{ placeholder.label }}
                         </p>
                     </div>
@@ -122,7 +125,7 @@
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <template v-if="! ai.images.length">
-                                    <p class="flex gap-2.5 items-center text-lg text-gray-800 dark:text-white font-bold">
+                                    <p class="flex items-center gap-2.5 text-lg font-bold text-gray-800 dark:text-white">
                                         <span class="icon-magic text-2xl text-gray-800"></span>
 
                                         @lang('admin::app.components.media.images.ai-generation.title')
@@ -130,9 +133,9 @@
                                 </template>
 
                                 <template v-else>
-                                    <p class="text-lg text-gray-800 truncate dark:text-white font-bold">
+                                    <p class="truncate text-lg font-bold text-gray-800 dark:text-white">
                                         <span
-                                            class="align-middle mr-1 icon-arrow-right text-2xl cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
+                                            class="icon-arrow-right mr-1 cursor-pointer align-middle text-2xl hover:rounded-md hover:bg-gray-100 dark:hover:bg-gray-950"
                                             @click="ai.images = []"
                                         ></span>
 
@@ -259,14 +262,14 @@
                                 <div v-show="ai.images.length">
                                     <div class="grid grid-cols-4 gap-5">
                                         <div
-                                            class="grid justify-items-center min-w-[120px] max-h-[120px] relative border-[3px] border-transparent rounded overflow-hidden transition-all hover:opacity-80 cursor-pointer"
+                                            class="relative grid max-h-[120px] min-w-[120px] cursor-pointer justify-items-center overflow-hidden rounded border-[3px] border-transparent transition-all hover:opacity-80"
                                             :class="{'!border-blue-600': image.selected}"
                                             v-for="image in ai.images"
                                             @click="image.selected = ! image.selected"
                                         >
                                             <!-- Image Preview -->
                                             <img
-                                                class="w-[120px] h-[120px]"
+                                                class="h-[120px] w-[120px]"
                                                 :src="image.url"
                                             />
                                         </div>
@@ -276,13 +279,13 @@
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
-                                <div class="flex gap-x-2.5 items-center">
+                                <div class="flex items-center gap-x-2.5">
                                     <template v-if="! ai.images.length">
                                         <button class="secondary-button">
                                             <!-- Spinner -->
                                             <template v-if="isLoading">
                                                 <img
-                                                    class="animate-spin h-5 w-5 text-blue-600"
+                                                    class="h-5 w-5 animate-spin"
                                                     src="{{ bagisto_asset('images/spinner.svg') }}"
                                                 />
 
@@ -290,7 +293,7 @@
                                             </template>
 
                                             <template v-else>
-                                                <span class="icon-magic  text-blue-600"></span>
+                                                <span class="icon-magic text-blue-600"></span>
                                                 
                                                 @lang('admin::app.components.media.images.ai-generation.generate')
                                             </template>
@@ -302,7 +305,7 @@
                                             <!-- Spinner -->
                                             <template v-if="isLoading">
                                                 <img
-                                                    class="animate-spin h-5 w-5 text-blue-600"
+                                                    class="h-5 w-5 animate-spin"
                                                     src="{{ bagisto_asset('images/spinner.svg') }}"
                                                 />
 
@@ -335,30 +338,34 @@
     </script>
 
     <script type="text/x-template" id="v-media-image-item-template">
-        <div class="grid justify-items-center min-w-[120px] max-h-[120px] relative rounded overflow-hidden transition-all hover:border-gray-400 group">
+        <div class="group relative grid max-h-[120px] min-w-[120px] justify-items-center overflow-hidden rounded transition-all hover:border-gray-400">
             <!-- Image Preview -->
             <img
                 :src="image.url"
                 :style="{'width': this.width, 'height': this.height}"
             />
 
-            <div class="flex flex-col justify-between invisible w-full p-3 bg-white dark:bg-gray-900 absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
+            <div class="invisible absolute bottom-0 top-0 flex w-full flex-col justify-between bg-white p-3 opacity-80 transition-all group-hover:visible dark:bg-gray-900">
                 <!-- Image Name -->
-                <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
+                <p class="break-all text-xs font-semibold text-gray-600 dark:text-gray-300"></p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
                     <span
-                        class="icon-delete text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+                        class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
                         @click="remove"
                     ></span>
 
                     <label
-                        class="icon-edit text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+                        class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 
-                    <input type="hidden" :name="name + '[' + image.id + ']'" v-if="! image.is_new"/>
+                    <input
+                        type="hidden"
+                        :name="name + '[' + image.id + ']'"
+                        v-if="! image.is_new"
+                    />
 
                     <input
                         type="file"

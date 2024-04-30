@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Votre commande a été annulée',
                     'page-title'         => 'Commande #:order_id',
                     'payment-method'     => 'Mode de paiement',
+                    'reorder-btn-title'  => 'Réorganiser',
                     'shipping-address'   => 'Adresse de livraison',
                     'shipping-method'    => 'Mode de livraison',
                     'title'              => 'Voir',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Recherchez des produits ici',
                 'sign-in'           => 'Se connecter',
                 'sign-up'           => 'S\'inscrire',
+                'submit'            => 'Soumettre',
                 'title'             => 'Compte',
                 'welcome'           => 'Bienvenue',
                 'welcome-guest'     => 'Bienvenue, invité',
                 'wishlist'          => 'Liste de souhaits',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Langue par défaut',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -368,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Sélectionnez l\'action',
-                    'select-option' => 'Sélectionnez une option',
-                    'submit'        => 'Soumettre',
-                ],
+                'length-of' => ':length de',
+                'results'   => ':total Résultats',
+                'selected'  => ':total Sélectionné',
 
-                'filter' => [
-                    'title' => 'Filtre',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Vous devez sélectionner une action de masse.',
+                    'must-select-a-mass-action-option' => 'Vous devez sélectionner une option d\'action de masse.',
+                    'no-records-selected'              => 'Aucun enregistrement n\'a été sélectionné.',
+                    'select-action'                    => 'Sélectionner une action',
                 ],
 
                 'search' => [
                     'title' => 'Rechercher',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Appliquer des filtres',
+                'filter' => [
+                    'apply-filter' => 'Appliquer les filtres',
+                    'title'        => 'Filtrer',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Tapez au moins 2 caractères...',
-                        'no-results'        => 'Aucun résultat trouvé...',
+                    'dropdown' => [
+                        'select' => 'Sélectionner',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Saisissez au moins 2 caractères...',
+                            'no-results'         => 'Aucun résultat trouvé...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Tout effacer',
-                    'title'     => 'Filtres personnalisés',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Mois dernier',
-                    'last-six-months'   => '6 derniers mois',
-                    'last-three-months' => '3 derniers mois',
-                    'this-month'        => 'Ce mois-ci',
-                    'this-week'         => 'Cette semaine',
-                    'this-year'         => 'Cette année',
-                    'today'             => 'Aujourd\'hui',
-                    'yesterday'         => 'Hier',
+                    'custom-filters' => [
+                        'clear-all' => 'Effacer tout',
+                    ],
                 ],
             ],
 
@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Aucun',
+                    'none'         => 'Aucun',
+                    'total-amount' => 'Montant total',
                 ],
 
                 'downloadable' => [
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continuer vers la caisse',
             'illegal'                   => 'La quantité ne peut pas être inférieure à un.',
+            'inactive-add'              => 'L\'article inactif ne peut pas être ajouté au panier.',
             'inactive'                  => 'L\'article a été désactivé et retiré du panier.',
             'inventory-warning'         => 'La quantité demandée n\'est pas disponible, veuillez réessayer ultérieurement.',
             'item-add-to-cart'          => 'Article ajouté avec succès',
@@ -676,6 +678,16 @@ return [
                 'proceed-to-checkout' => 'Passer à la caisse',
                 'sub-total'           => 'Sous-total',
                 'tax'                 => 'Taxes',
+
+                'estimate-shipping' => [
+                    'country'        => 'Pays',
+                    'info'           => 'Entrez votre destination pour obtenir une estimation des frais de livraison et des taxes.',
+                    'postcode'       => 'Code postal',
+                    'select-country' => 'Sélectionner le pays',
+                    'select-state'   => 'Sélectionner l\'état',
+                    'state'          => 'État',
+                    'title'          => 'Estimation des frais de livraison et des taxes',
+                ],
             ],
         ],
 
@@ -756,11 +768,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Laissez-nous une note et nous vous répondrons dès que possible',
+            'desc'          => 'Qu\'est-ce qui vous préoccupe ?',
+            'describe-here' => 'Décrivez ici',
+            'email'         => 'E-mail',
+            'message'       => 'Message',
+            'name'          => 'Nom',
+            'phone-number'  => 'Numéro de téléphone',
+            'submit'        => 'Envoyer',
+            'title'         => 'Contactez-nous',
+        ],
+
         'index' => [
-            'offer'               => 'Bénéficiez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
+            'offer'               => 'Profitez de jusqu\'à 40% de réduction sur votre 1ère commande. FAITES VOS ACHATS MAINTENANT',
             'resend-verify-email' => 'Renvoyer l\'e-mail de vérification',
             'verify-email'        => 'Vérifiez votre adresse e-mail',
         ],
+
+        'thanks-for-contact' => 'Merci de nous contacter avec vos commentaires et questions. Nous vous répondrons très bientôt.',
     ],
 
     'partials' => [
@@ -860,6 +886,14 @@ return [
                 'subject'     => 'Vous êtes abonné à notre newsletter',
                 'unsubscribe' => 'Se désabonner',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via Formulaire de contact du site',
+            'reply-to-mail'   => 'veuillez répondre à cet e-mail.',
+            'reach-via-phone' => 'Alternativement, vous pouvez nous joindre par téléphone au',
+            'inquiry-from'    => 'Demande de',
+            'to'              => 'Pour contacter',
         ],
 
         'orders' => [

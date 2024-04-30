@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => '注文がキャンセルされました',
                     'page-title'         => '注文 #:order_id',
                     'payment-method'     => '支払い方法',
+                    'reorder-btn-title'  => '並べ替える',
                     'shipping-address'   => '配送先住所',
                     'shipping-method'    => '配送方法',
                     'title'              => '表示',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'ここで製品を検索',
                 'sign-in'           => 'サインイン',
                 'sign-up'           => '新規登録',
+                'submit'            => '送信',
                 'title'             => 'アカウント',
                 'welcome'           => 'ようこそ',
                 'welcome-guest'     => 'ゲストさん、ようこそ',
                 'wishlist'          => 'ウィッシュリスト',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'デフォルトのロケール',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -368,57 +376,49 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'アクションを選択',
-                    'select-option' => 'オプションを選択',
-                    'submit'        => '送信',
-                ],
+                'length-of' => ':length の',
+                'results'   => ':total 件の結果',
+                'selected'  => ':total 件選択済み',
 
-                'filter' => [
-                    'title' => 'フィルタ',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'マスアクションを選択する必要があります。',
+                    'must-select-a-mass-action-option' => 'マスアクションのオプションを選択する必要があります。',
+                    'no-records-selected'              => 'レコードが選択されていません。',
+                    'select-action'                    => 'アクションを選択',
                 ],
 
                 'search' => [
                     'title' => '検索',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'フィルタを適用',
+                'filter' => [
+                    'apply-filter' => 'フィルタを適用',
+                    'title'        => 'フィルタ',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => '少なくとも2文字入力してください...',
-                        'no-results'        => '結果が見つかりません...',
+                    'dropdown' => [
+                        'select' => '選択',
+
+                        'searchable' => [
+                            'at-least-two-chars' => '少なくとも2文字入力してください...',
+                            'no-results'         => '結果が見つかりません...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'すべてクリア',
-                    'title'     => 'カスタムフィルタ',
-                ],
-
-                'date-options' => [
-                    'last-month'        => '前月',
-                    'last-six-months'   => '過去6ヶ月',
-                    'last-three-months' => '過去3ヶ月',
-                    'this-month'        => '今月',
-                    'this-week'         => '今週',
-                    'this-year'         => '今年',
-                    'today'             => '今日',
-                    'yesterday'         => '昨日',
+                    'custom-filters' => [
+                        'clear-all' => 'すべてクリア',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'アクション',
                 'next-page'            => '次のページ',
-                'no-records-available' => '利用可能なレコードはありません。',
-                'of'                   => 'の合計 :total エントリ',
+                'no-records-available' => '利用可能なレコードがありません。',
+                'of'                   => '全 :total エントリー中',
                 'page-navigation'      => 'ページナビゲーション',
                 'page-number'          => 'ページ番号',
                 'previous-page'        => '前のページ',
-                'showing'              => ':firstItem を表示',
+                'showing'              => ':firstItem 件を表示中',
                 'to'                   => ':lastItem まで',
             ],
         ],
@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'なし',
+                    'none'         => 'なし',
+                    'total-amount' => '合計金額',
                 ],
 
                 'downloadable' => [
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'チェックアウトに進む',
             'illegal'                   => '数量は1未満にできません。',
+            'inactive-add'              => '非アクティブなアイテムはカートに追加できません。',
             'inactive'                  => 'アイテムは無効になり、カートから削除されました。',
             'inventory-warning'         => '要求された数量は利用できません。後でやり直してください。',
             'item-add-to-cart'          => 'アイテムが正常に追加されました',
@@ -676,6 +678,16 @@ return [
                 'proceed-to-checkout' => 'チェックアウトに進む',
                 'sub-total'           => '小計',
                 'tax'                 => '税金',
+
+                'estimate-shipping' => [
+                    'country'        => '国',
+                    'info'           => '配送先を入力して、配送料と税金の見積もりを取得してください。',
+                    'postcode'       => '郵便番号',
+                    'select-country' => '国を選択',
+                    'select-state'   => '都道府県を選択',
+                    'state'          => '都道府県',
+                    'title'          => '配送料と税金の見積もり',
+                ],
             ],
         ],
 
@@ -756,11 +768,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => '私たちについて',
+            'desc'          => '何をお考えですか？',
+            'describe-here' => 'ここに説明してください',
+            'email'         => 'メール',
+            'message'       => 'メッセージ',
+            'name'          => '名前',
+            'phone-number'  => '電話番号',
+            'submit'        => '送信',
+            'title'         => 'お問い合わせ',
+        ],
+
         'index' => [
             'offer'               => '初めての注文で最大40%OFF 今すぐショッピング',
             'resend-verify-email' => '確認メールを再送信',
             'verify-email'        => 'メールアカウントを確認',
         ],
+
+        'thanks-for-contact' => 'ご意見やご質問をお寄せいただきありがとうございます。返信いたしますので、しばらくお待ちください。',
     ],
 
     'partials' => [
@@ -860,6 +886,14 @@ return [
                 'subject'     => 'ニュースレターに登録しました',
                 'unsubscribe' => '登録解除',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'ウェブサイトのお問い合わせフォーム経由で',
+            'reply-to-mail'   => 'このメールに返信してください。',
+            'reach-via-phone' => 'または、電話でお問い合わせいただけます。',
+            'inquiry-from'    => 'お問い合わせ元',
+            'to'              => 'お問い合わせ先',
         ],
 
         'orders' => [

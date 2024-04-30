@@ -1,19 +1,18 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.data-transfer.imports.import.title')
     </x-slot>
 
-    <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="text-xl text-gray-800 dark:text-white font-bold">
+    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+        <p class="text-xl font-bold text-gray-800 dark:text-white">
             @lang('admin::app.settings.data-transfer.imports.import.title')
         </p>
 
-        <div class="flex gap-x-2.5 items-center">
-            <!-- Cancel Button -->
+        <div class="flex items-center gap-x-2.5">
+            <!-- Back Button -->
             <a
                 href="{{ route('admin.settings.data_transfer.imports.index') }}"
-                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
             >
                 @lang('admin::app.settings.data-transfer.imports.import.back-btn')
             </a>
@@ -32,16 +31,19 @@
     <v-import />
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-import-template">
+        <script
+            type="text/x-template"
+            id="v-import-template"
+        >
             <!-- Body Content -->
-            <div class="grid gap-2.5 mt-3.5 p-5 max-xl:flex-wrap box-shadow">
+            <div class="box-shadow mt-3.5 grid gap-2.5 p-5 max-xl:flex-wrap">
                 <!-- Validate CSV File -->
                 <div
-                    class="flex place-content-between items-center w-full p-3 bg-orange-50 border border-orange-200 rounded-sm"
+                    class="flex w-full place-content-between items-center rounded-sm border border-orange-200 bg-orange-50 p-3"
                     v-if="importResource.state == 'pending'"
                 >
-                    <p class="flex gap-2 items-center">
-                        <i class="icon-information text-2xl text-orange-600 bg-orange-200 rounded-full"></i>
+                    <p class="flex items-center gap-2">
+                        <i class="icon-information rounded-full bg-orange-200 text-2xl text-orange-600"></i>
 
                         @lang('admin::app.settings.data-transfer.imports.import.validate-info')
                     </p>
@@ -56,16 +58,16 @@
 
                 <!-- Validation In Process -->
                 <div
-                    class="flex place-content-between items-center w-full p-3 bg-blue-50 border border-blue-200 rounded-sm"
+                    class="flex w-full place-content-between items-center rounded-sm border border-blue-200 bg-blue-50 p-3"
                     v-if="importResource.state == 'validating'"
                 >
-                    <p class="flex gap-2 items-center">
-                        <i class="icon-information text-2xl text-blue-600 bg-blue-200 rounded-full"></i>
+                    <p class="flex items-center gap-2">
+                        <i class="icon-information rounded-full bg-blue-200 text-2xl text-blue-600"></i>
 
                         @lang('admin::app.settings.data-transfer.imports.import.validating-info')
 
                         <!-- Spinner -->
-                        <svg class="animate-spin h-5 w-5 ml-2 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"  aria-hidden="true" viewBox="0 0 24 24">
+                        <svg class="ml-2 h-5 w-5 animate-spin text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"  aria-hidden="true" viewBox="0 0 24 24">
                             <circle
                                 class="opacity-25"
                                 cx="12"
@@ -88,14 +90,14 @@
 
                 <!-- Validation Results -->
                 <div
-                    class="flex place-content-between w-full p-3 border rounded-sm"
-                    :class="isValid ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'"
+                    class="flex w-full place-content-between rounded-sm border p-3"
+                    :class="isValid ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'"
                     v-else-if="importResource.state == 'validated'"
                 >
                     <!-- Import Stats -->
                     <div class="grid gap-2">
                         <p
-                            class="flex gap-2 items-center mb-2"
+                            class="mb-2 flex items-center gap-2"
                             v-if="isValid"
                         >
                             <i class="icon-done h-fit rounded-full bg-green-200 text-2xl text-green-600"></i>
@@ -104,47 +106,47 @@
                         </p>
 
                         <p
-                            class="flex gap-2 items-center"
+                            class="flex items-center gap-2"
                             v-else
                         >
                             <i class="icon-cross h-fit rounded-full bg-red-200 text-2xl text-red-600"></i>
 
                             @lang('admin::app.settings.data-transfer.imports.import.validation-failed-info')
                         </p>
-                        
-                        <p class="flex gap-2 items-center">
+
+                        <p class="flex items-center gap-2">
                             <i
-                                class="icon-information text-2xl rounded-full"
+                                class="icon-information rounded-full text-2xl"
                                 :class="isValid ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'"
                             ></i>
 
-                            <span class="text-gray-800 font-medium">
+                            <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-rows-processed')
                             </span>
 
                             @{{ importResource.processed_rows_count }}
                         </p>
 
-                        <p class="flex gap-2 items-center">
+                        <p class="flex items-center gap-2">
                             <i
-                                class="icon-information text-2xl rounded-full"
+                                class="icon-information rounded-full text-2xl"
                                 :class="isValid ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'"
                             ></i>
 
-                            <span class="text-gray-800 font-medium">
+                            <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-invalid-rows')
                             </span>
 
                             @{{ importResource.invalid_rows_count }}
                         </p>
 
-                        <p class="flex gap-2 items-center">
+                        <p class="flex items-center gap-2">
                             <i
-                                class="icon-information text-2xl rounded-full"
+                                class="icon-information rounded-full text-2xl"
                                 :class="isValid ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'"
                             ></i>
 
-                            <span class="text-gray-800 font-medium">
+                            <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-errors')
                             </span>
 
@@ -152,10 +154,10 @@
                         </p>
 
                         <div
-                            class="flex gap-2 items-center place-items-start"
+                            class="flex place-items-start items-center gap-2"
                             v-if="importResource.errors.length"
                         >
-                            <i class="icon-information bg-red-200 text-red-600 text-2xl rounded-full"></i>
+                            <i class="icon-information rounded-full bg-red-200 text-2xl text-red-600"></i>
 
                             <div class="grid gap-2">
                                 <p
@@ -191,64 +193,64 @@
 
                 <!-- Import In Process -->
                 <div
-                    class="grid gap-2 w-full p-3 bg-green-50 border border-green-200 rounded-sm"
+                    class="grid w-full gap-2 rounded-sm border border-green-200 bg-green-50 p-3"
                     v-else-if="importResource.state == 'processing'"
                 >
-                    <p class="flex gap-2 items-center">
+                    <p class="flex items-center gap-2">
                         <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
 
                         @lang('admin::app.settings.data-transfer.imports.import.importing-info')
                     </p>
 
-                    <div class="w-full bg-green-200 rounded-sm h-5 dark:bg-green-700">
+                    <div class="h-5 w-full rounded-sm bg-green-200 dark:bg-green-700">
                         <div
-                            class="bg-green-600 h-5 rounded-sm"
+                            class="h-5 rounded-sm bg-green-600"
                             :style="{ 'width': stats.progress + '%' }"
                         ></div>
                     </div>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.progress')
                         </span>
 
                         @{{ stats.progress }}%
                     </p>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.total-batches')
                         </span>
 
                         @{{ stats.batches.total }}
                     </p>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.completed-batches')
                         </span>
 
                         @{{ stats.batches.completed }}
                     </p>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.total-created')
                         </span>
 
                         @{{ stats.summary.created }}
                     </p>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.total-updated')
                         </span>
 
                         @{{ stats.summary.updated }}
                     </p>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.total-deleted')
                         </span>
 
@@ -258,41 +260,41 @@
 
                 <!-- Linking In Process -->
                 <div
-                    class="grid gap-2 w-full p-3 bg-green-50 border border-green-200 rounded-sm"
+                    class="grid w-full gap-2 rounded-sm border border-green-200 bg-green-50 p-3"
                     v-else-if="importResource.state == 'linking'"
                 >
 
-                    <p class="flex gap-2 items-center">
+                    <p class="flex items-center gap-2">
                         <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
 
                         @lang('admin::app.settings.data-transfer.imports.import.linking-info')
                     </p>
 
-                    <div class="w-full bg-green-200 rounded-sm h-5 dark:bg-green-700">
+                    <div class="h-5 w-full rounded-sm bg-green-200 dark:bg-green-700">
                         <div
-                            class="bg-green-600 h-5 rounded-sm"
+                            class="h-5 rounded-sm bg-green-600"
                             :style="{ 'width': stats.progress + '%' }"
                         ></div>
                     </div>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.progress')
                         </span>
 
                         @{{ stats.progress }}%
                     </p>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.total-batches')
                         </span>
 
                         @{{ stats.batches.total }}
                     </p>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.completed-batches')
                         </span>
 
@@ -302,41 +304,41 @@
 
                 <!-- Indexing In Process -->
                 <div
-                    class="grid gap-2 w-full p-3 bg-green-50 border border-green-200 rounded-sm"
+                    class="grid w-full gap-2 rounded-sm border border-green-200 bg-green-50 p-3"
                     v-else-if="importResource.state == 'indexing'"
                 >
 
-                    <p class="flex gap-2 items-center">
+                    <p class="flex items-center gap-2">
                         <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
 
                         @lang('admin::app.settings.data-transfer.imports.import.indexing-info')
                     </p>
 
-                    <div class="w-full bg-green-200 rounded-sm h-5 dark:bg-green-700">
+                    <div class="h-5 w-full rounded-sm bg-green-200 dark:bg-green-700">
                         <div
-                            class="bg-green-600 h-5 rounded-sm"
+                            class="h-5 rounded-sm bg-green-600"
                             :style="{ 'width': stats.progress + '%' }"
                         ></div>
                     </div>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.progress')
                         </span>
 
                         @{{ stats.progress }}%
                     </p>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.total-batches')
                         </span>
 
                         @{{ stats.batches.total }}
                     </p>
 
-                    <p class="flex gap-2 items-center">
-                        <span class="text-gray-800 font-medium">
+                    <p class="flex items-center gap-2">
+                        <span class="font-medium text-gray-800">
                             @lang('admin::app.settings.data-transfer.imports.import.completed-batches')
                         </span>
 
@@ -346,13 +348,13 @@
 
                 <!-- Import Completed -->
                 <div
-                    class="flex place-content-between w-full p-3 bg-green-50 border border-green-200 rounded-sm"
+                    class="flex w-full place-content-between rounded-sm border border-green-200 bg-green-50 p-3"
                     v-else-if="importResource.state == 'completed'"
                 >
                     <!-- Stats -->
                     <div class="grid gap-2">
                         <p
-                            class="flex gap-2 items-center mb-2 text-base"
+                            class="mb-2 flex items-center gap-2 text-base"
                             v-if="isValid"
                         >
                             <i class="icon-done h-fit rounded-full bg-green-200 text-2xl text-green-600"></i>
@@ -360,30 +362,30 @@
                             @lang('admin::app.settings.data-transfer.imports.import.imported-info')
                         </p>
 
-                        <p class="flex gap-2 items-center">
-                            <i class="icon-information text-2xl text-green-600 bg-green-200 rounded-full"></i>
-                            
-                            <span class="text-gray-800 font-medium">
+                        <p class="flex items-center gap-2">
+                            <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
+
+                            <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-created')
                             </span>
 
                             @{{ importResource.summary.created }}
                         </p>
 
-                        <p class="flex gap-2 items-center">
-                            <i class="icon-information text-2xl text-green-600 bg-green-200 rounded-full"></i>
-                            
-                            <span class="text-gray-800 font-medium">
+                        <p class="flex items-center gap-2">
+                            <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
+
+                            <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-updated')
                             </span>
 
                             @{{ importResource.summary.updated }}
                         </p>
 
-                        <p class="flex gap-2 items-center">
-                            <i class="icon-information text-2xl text-green-600 bg-green-200 rounded-full"></i>
-                            
-                            <span class="text-gray-800 font-medium">
+                        <p class="flex items-center gap-2">
+                            <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
+
+                            <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-deleted')
                             </span>
 

@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'seeders'   => [
+    'seeders' => [
         'attribute' => [
             'attribute-families' => [
                 'default' => 'По умолчанию',
             ],
 
-            'attribute-groups'   => [
-                'description'       => 'Описание',
-                'general'           => 'Общее',
-                'inventories'       => 'Инвентарь',
-                'meta-description'  => 'Мета-описание',
-                'price'             => 'Цена',
-                'settings'          => 'Настройки',
-                'shipping'          => 'Доставка',
+            'attribute-groups' => [
+                'description'      => 'Описание',
+                'general'          => 'Общее',
+                'inventories'      => 'Инвентарь',
+                'meta-description' => 'Мета-описание',
+                'price'            => 'Цена',
+                'settings'         => 'Настройки',
+                'shipping'         => 'Доставка',
             ],
 
-            'attributes'         => [
+            'attributes' => [
                 'brand'                => 'Бренд',
                 'color'                => 'Цвет',
                 'cost'                 => 'Стоимость',
@@ -37,9 +37,9 @@ return [
                 'short-description'    => 'Краткое описание',
                 'size'                 => 'Размер',
                 'sku'                  => 'Артикул товара (SKU)',
+                'special-price'        => 'Специальная цена',
                 'special-price-from'   => 'Специальная цена от',
                 'special-price-to'     => 'Специальная цена до',
-                'special-price'        => 'Специальная цена',
                 'status'               => 'Статус',
                 'tax-category'         => 'Категория налога',
                 'url-key'              => 'Ключ URL',
@@ -48,7 +48,7 @@ return [
                 'width'                => 'Ширина',
             ],
 
-            'attribute-options'  => [
+            'attribute-options' => [
                 'black'  => 'Черный',
                 'green'  => 'Зеленый',
                 'l'      => 'L',
@@ -61,21 +61,21 @@ return [
             ],
         ],
 
-        'category'  => [
+        'category' => [
             'categories' => [
                 'description' => 'Описание корневой категории',
                 'name'        => 'Корень',
             ],
         ],
 
-        'cms'       => [
+        'cms' => [
             'pages' => [
-                'about-us'         => [
+                'about-us' => [
                     'content' => 'Содержание страницы "О нас"',
                     'title'   => 'О нас',
                 ],
 
-                'contact-us'       => [
+                'contact-us' => [
                     'content' => 'Содержание страницы "Свяжитесь с нами"',
                     'title'   => 'Свяжитесь с нами',
                 ],
@@ -85,27 +85,27 @@ return [
                     'title'   => 'Служба поддержки клиентов',
                 ],
 
-                'payment-policy'   => [
+                'payment-policy' => [
                     'content' => 'Содержание страницы "Политика оплаты"',
                     'title'   => 'Политика оплаты',
                 ],
 
-                'privacy-policy'   => [
+                'privacy-policy' => [
                     'content' => 'Содержание страницы "Политика конфиденциальности"',
                     'title'   => 'Политика конфиденциальности',
                 ],
 
-                'refund-policy'    => [
+                'refund-policy' => [
                     'content' => 'Содержание страницы "Политика возврата"',
                     'title'   => 'Политика возврата',
                 ],
 
-                'return-policy'    => [
+                'return-policy' => [
                     'content' => 'Содержание страницы "Политика возврата"',
                     'title'   => 'Политика возврата',
                 ],
 
-                'shipping-policy'  => [
+                'shipping-policy' => [
                     'content' => 'Содержание страницы "Политика доставки"',
                     'title'   => 'Политика доставки',
                 ],
@@ -115,20 +115,20 @@ return [
                     'title'   => 'Условия и положения',
                 ],
 
-                'terms-of-use'     => [
+                'terms-of-use' => [
                     'content' => 'Содержание страницы "Условия использования"',
                     'title'   => 'Условия использования',
                 ],
 
-                'whats-new'        => [
+                'whats-new' => [
                     'content' => 'Содержание страницы "Что нового"',
                     'title'   => 'Что нового',
                 ],
             ],
         ],
 
-        'core'      => [
-            'channels'   => [
+        'core' => [
+            'channels' => [
                 'meta-description' => 'Мета-описание демонстрационного магазина',
                 'meta-keywords'    => 'Мета-ключевые слова демонстрационного магазина',
                 'meta-title'       => 'Демонстрационный магазин',
@@ -151,7 +151,7 @@ return [
                 'USD' => 'Доллар США',
             ],
 
-            'locales'    => [
+            'locales' => [
                 'ar'    => 'Арабский',
                 'bn'    => 'Бенгальский',
                 'de'    => 'Немецкий',
@@ -174,7 +174,7 @@ return [
             ],
         ],
 
-        'customer'  => [
+        'customer' => [
             'customer-groups' => [
                 'general'   => 'Общий',
                 'guest'     => 'Гость',
@@ -188,17 +188,17 @@ return [
             ],
         ],
 
-        'shop'      => [
+        'shop' => [
             'theme-customizations' => [
-                'all-products'           => [
-                    'name'    => 'Все товары',
+                'all-products' => [
+                    'name' => 'Все товары',
 
                     'options' => [
                         'title' => 'Все товары',
                     ],
                 ],
 
-                'bold-collections'       => [
+                'bold-collections' => [
                     'content' => [
                         'btn-title'   => 'Посмотреть все',
                         'description' => 'Представляем наши новые смелые коллекции! Поднимите свой стиль с смелыми дизайнами и яркими заявлениями. Исследуйте выдающиеся узоры и яркие цвета, которые переопределяют ваш гардероб. Готовьтесь встретить нечто необычное!',
@@ -212,16 +212,16 @@ return [
                     'name' => 'Категории и коллекции',
                 ],
 
-                'featured-collections'   => [
-                    'name'    => 'Избранные коллекции',
+                'featured-collections' => [
+                    'name' => 'Избранные коллекции',
 
                     'options' => [
                         'title' => 'Популярные товары',
                     ],
                 ],
 
-                'footer-links'           => [
-                    'name'    => 'Ссылки внизу страницы',
+                'footer-links' => [
+                    'name' => 'Ссылки внизу страницы',
 
                     'options' => [
                         'about-us'         => 'О нас',
@@ -238,41 +238,41 @@ return [
                     ],
                 ],
 
-                'game-container'         => [
+                'game-container' => [
                     'content' => [
                         'sub-title-1' => 'Наши коллекции',
                         'sub-title-2' => 'Наши коллекции',
                         'title'       => 'Игра с нашими новыми добавлениями!',
                     ],
 
-                    'name'    => 'Игровой контейнер',
+                    'name' => 'Игровой контейнер',
                 ],
 
-                'image-carousel'         => [
-                    'name'    => 'Карусель изображений',
+                'image-carousel' => [
+                    'name' => 'Карусель изображений',
 
                     'sliders' => [
                         'title' => 'Готовьтесь к новой коллекции',
                     ],
                 ],
 
-                'new-products'           => [
-                    'name'    => 'Новые товары',
+                'new-products' => [
+                    'name' => 'Новые товары',
 
                     'options' => [
                         'title' => 'Новые товары',
                     ],
                 ],
 
-                'offer-information'      => [
+                'offer-information' => [
                     'content' => [
                         'title' => 'Скидка до 40% на ваш первый заказ! ПОКУПАЙТЕ СЕЙЧАС',
                     ],
 
-                    'name'    => 'Информация о предложениях',
+                    'name' => 'Информация о предложениях',
                 ],
 
-                'services-content'       => [
+                'services-content' => [
                     'description' => [
                         'emi-available-info'   => 'EMI без затрат доступно на всех основных кредитных картах',
                         'free-shipping-info'   => 'Наслаждайтесь бесплатной доставкой на все заказы',
@@ -280,9 +280,9 @@ return [
                         'time-support-info'    => 'Посвященная поддержка 24/7 через чат и электронную почту',
                     ],
 
-                    'name'        => 'Содержание услуг',
+                    'name' => 'Содержание услуг',
 
-                    'title'       => [
+                    'title' => [
                         'emi-available'   => 'EMI доступно',
                         'free-shipping'   => 'Бесплатная доставка',
                         'product-replace' => 'Замена продукта',
@@ -290,7 +290,7 @@ return [
                     ],
                 ],
 
-                'top-collections'        => [
+                'top-collections' => [
                     'content' => [
                         'sub-title-1' => 'Наши коллекции',
                         'sub-title-2' => 'Наши коллекции',
@@ -306,7 +306,7 @@ return [
             ],
         ],
 
-        'user'      => [
+        'user' => [
             'roles' => [
                 'description' => 'Эта роль предоставляет пользователям полный доступ',
                 'name'        => 'Администратор',
@@ -320,12 +320,12 @@ return [
 
     'installer' => [
         'index' => [
-            'create-administrator'      => [
+            'create-administrator' => [
                 'admin'            => 'Администратор',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Подтвердите пароль',
-                'email-address'    => 'admin@example.com',
                 'email'            => 'E-mail',
+                'email-address'    => 'admin@example.com',
                 'password'         => 'Пароль',
                 'title'            => 'Создать администратора',
             ],
@@ -346,8 +346,8 @@ return [
                 'default-currency'    => 'Валюта по умолчанию',
                 'default-locale'      => 'Локаль по умолчанию',
                 'default-timezone'    => 'Часовой пояс по умолчанию',
-                'default-url-link'    => 'https://localhost',
                 'default-url'         => 'URL по умолчанию',
+                'default-url-link'    => 'https://localhost',
                 'dirham'              => 'Дирхам (AED)',
                 'euro'                => 'Евро (EUR)',
                 'iranian'             => 'Иранский риал (IRR)',
@@ -368,32 +368,32 @@ return [
                 'warning-message'     => 'Внимание! Настройки языков системы по умолчанию и базовой валюты являются постоянными и больше не могут быть изменены.',
             ],
 
-            'installation-processing'   => [
-                'bagisto-info'     => 'Создание таблиц в базе данных может занять несколько моментов',
+            'installation-processing' => [
                 'bagisto'          => 'Установка Bagisto',
+                'bagisto-info'     => 'Создание таблиц в базе данных может занять несколько моментов',
                 'title'            => 'Установка',
             ],
 
-            'installation-completed'    => [
+            'installation-completed' => [
                 'admin-panel'                => 'Панель администратора',
                 'bagisto-forums'             => 'Форум Bagisto',
                 'customer-panel'             => 'Панель клиента',
                 'explore-bagisto-extensions' => 'Изучите расширения Bagisto',
-                'title-info'                 => 'Bagisto успешно установлен на вашей системе.',
                 'title'                      => 'Установка завершена',
+                'title-info'                 => 'Bagisto успешно установлен на вашей системе.',
             ],
 
-            'ready-for-installation'    => [
+            'ready-for-installation' => [
                 'create-databsae-table'   => 'Создать таблицу базы данных',
-                'install-info-button'     => 'Нажмите кнопку ниже, чтобы',
-                'install-info'            => 'Bagisto для установки',
                 'install'                 => 'Установка',
+                'install-info'            => 'Bagisto для установки',
+                'install-info-button'     => 'Нажмите кнопку ниже, чтобы',
                 'populate-database-table' => 'Заполнить таблицы базы данных',
                 'start-installation'      => 'Начать установку',
                 'title'                   => 'Готово к установке',
             ],
 
-            'start'                     => [
+            'start' => [
                 'locale'        => 'Локаль',
                 'main'          => 'Начало',
                 'select-locale' => 'Выбрать локаль',
@@ -401,7 +401,7 @@ return [
                 'welcome-title' => 'Добро пожаловать в Bagisto 2.0.',
             ],
 
-            'server-requirements'       => [
+            'server-requirements' => [
                 'calendar'    => 'Календарь',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
@@ -416,45 +416,43 @@ return [
                 'openssl'     => 'OpenSSL',
                 'pcre'        => 'PCRE',
                 'pdo'         => 'PDO',
-                'php-version' => '8.1 или выше',
                 'php'         => 'PHP',
+                'php-version' => '8.1 или выше',
                 'session'     => 'Сессия',
                 'title'       => 'Требования к серверу',
                 'tokenizer'   => 'tokenizer',
                 'xml'         => 'XML',
             ],
 
-            'arabic'                    => 'Арабский',
-            'back'                      => 'Назад',
-            'bagisto-info'              => 'Проект сообщества от',
-            'bagisto-logo'              => 'Логотип Bagisto',
-            'bagisto'                   => 'Bagisto',
-            'bengali'                   => 'Бенгальский',
-            'chinese'                   => 'Китайский',
-            'continue'                  => 'Продолжить',
-            'dutch'                     => 'Голландский',
-            'english'                   => 'Английский',
-            'french'                    => 'Французский',
-            'german'                    => 'Немецкий',
-            'hebrew'                    => 'Иврит',
-            'hindi'                     => 'Хинди',
-            'installation-description'  => 'Установка Bagisto обычно включает несколько шагов. Вот общий контур процесса установки для Bagisto:',
-            'installation-info'         => 'Мы рады видеть вас здесь!',
-            'installation-title'        => 'Добро пожаловать к установке',
-            'italian'                   => 'Итальянский',
-            'japanese'                  => 'Японский',
-            'persian'                   => 'Персидский',
-            'polish'                    => 'Польский',
-            'portuguese'                => 'Португальский (Бразильский)',
-            'russian'                   => 'Русский',
-            'save-configuration'        => 'Сохранить конфигурацию',
-            'sinhala'                   => 'Сингальский',
-            'skip'                      => 'Пропустить',
-            'spanish'                   => 'Испанский',
-            'title'                     => 'Установщик Bagisto',
-            'turkish'                   => 'Турецкий',
-            'ukrainian'                 => 'Украинский',
-            'webkul'                    => 'Webkul',
+            'arabic'                   => 'Арабский',
+            'back'                     => 'Назад',
+            'bagisto'                  => 'Bagisto',
+            'bagisto-info'             => 'Проект сообщества от',
+            'bagisto-logo'             => 'Логотип Bagisto',
+            'bengali'                  => 'Бенгальский',
+            'chinese'                  => 'Китайский',
+            'continue'                 => 'Продолжить',
+            'dutch'                    => 'Голландский',
+            'english'                  => 'Английский',
+            'french'                   => 'Французский',
+            'german'                   => 'Немецкий',
+            'hebrew'                   => 'Иврит',
+            'hindi'                    => 'Хинди',
+            'installation-description' => 'Установка Bagisto обычно включает несколько шагов. Вот общий контур процесса установки для Bagisto:',
+            'installation-info'        => 'Мы рады видеть вас здесь!',
+            'installation-title'       => 'Добро пожаловать к установке',
+            'italian'                  => 'Итальянский',
+            'japanese'                 => 'Японский',
+            'persian'                  => 'Персидский',
+            'polish'                   => 'Польский',
+            'portuguese'               => 'Португальский (Бразильский)',
+            'russian'                  => 'Русский',
+            'sinhala'                  => 'Сингальский',
+            'spanish'                  => 'Испанский',
+            'title'                    => 'Установщик Bagisto',
+            'turkish'                  => 'Турецкий',
+            'ukrainian'                => 'Украинский',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

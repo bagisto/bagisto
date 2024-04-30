@@ -10,16 +10,16 @@
 
         {!! view_render_event('bagisto.admin.marketing.communications.templates.create.create_form_controls.before') !!}
 
-        <div class="flex justify-between items-center">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.marketing.communications.templates.create.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
-                <!-- Cancel Button -->
+            <div class="flex items-center gap-x-2.5">
+                <!-- Back Button -->
                 <a
                     href="{{ route('admin.marketing.communications.email_templates.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                    class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                 >
                     @lang('admin::app.marketing.communications.templates.create.back-btn')
                 </a>
@@ -35,14 +35,14 @@
         </div>
 
         <!-- body content -->
-        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+        <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
             <!-- Left sub-component -->
-            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.templates.create.card.content.before') !!}
 
                 <!--Content -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     <div class="mb-2.5">
                         <!-- Template Textarea -->
                         <x-admin::form.control-group>
@@ -71,23 +71,23 @@
             </div>
 
             <!-- Right sub-component -->
-            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
                 <!-- General -->
-                <div class="bg-white dark:bg-gray-900 rounded box-shadow">
+                <div class="box-shadow rounded bg-white dark:bg-gray-900">
 
                     {!! view_render_event('bagisto.admin.marketing.communications.templates.create.card.accordion.general.before') !!}
 
                     <x-admin::accordion>
                         <x-slot:header>
                             <div class="flex items-center justify-between">
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
+                                <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.marketing.communications.templates.create.general')
                                 </p>
                             </div>
                         </x-slot>
 
                         <x-slot:content>
-                            <div class="w-full mb-2.5">
+                            <div class="mb-2.5 w-full">
                                 <!-- Template Name -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">

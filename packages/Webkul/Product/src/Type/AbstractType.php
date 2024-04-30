@@ -64,6 +64,13 @@ abstract class AbstractType
     protected $canBeMovedFromWishlistToCart = true;
 
     /**
+     * Product can be added to cart with options or not.
+     *
+     * @var bool
+     */
+    protected $canBeAddedToCartWithoutOptions = true;
+
+    /**
      * Products of this type can be copied in the admin backend.
      *
      * @var bool
@@ -574,6 +581,16 @@ abstract class AbstractType
     public function canBeMovedFromWishlistToCart($item)
     {
         return $this->canBeMovedFromWishlistToCart;
+    }
+
+    /**
+     * Return true if product can be added to cart without options.
+     *
+     * @return bool
+     */
+    public function canBeAddedToCartWithoutOptions()
+    {
+        return $this->canBeAddedToCartWithoutOptions;
     }
 
     /**

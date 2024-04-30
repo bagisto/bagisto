@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Il tuo ordine è stato annullato',
                     'page-title'         => 'Ordine #:order_id',
                     'payment-method'     => 'Metodo di Pagamento',
+                    'reorder-btn-title'  => 'Riordinare',
                     'shipping-address'   => 'Indirizzo di Spedizione',
                     'shipping-method'    => 'Metodo di Spedizione',
                     'title'              => 'Visualizza',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Cerca prodotti qui',
                 'sign-in'           => 'Accedi',
                 'sign-up'           => 'Registrati',
+                'submit'            => 'Invia',
                 'title'             => 'Account',
                 'welcome'           => 'Benvenuto',
                 'welcome-guest'     => 'Benvenuto Ospite',
                 'wishlist'          => 'Lista dei desideri',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Lingua predefinita',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -368,57 +376,49 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Seleziona azione',
-                    'select-option' => 'Seleziona opzione',
-                    'submit'        => 'Invia',
-                ],
+                'length-of' => ':length di',
+                'results'   => ':total Risultati',
+                'selected'  => ':total Selezionati',
 
-                'filter' => [
-                    'title' => 'Filtro',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Devi selezionare un\'azione di massa.',
+                    'must-select-a-mass-action-option' => 'Devi selezionare un\'opzione di azione di massa.',
+                    'no-records-selected'              => 'Nessun record selezionato.',
+                    'select-action'                    => 'Seleziona Azione',
                 ],
 
                 'search' => [
                     'title' => 'Cerca',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Applica filtri',
+                'filter' => [
+                    'apply-filter' => 'Applica Filtri',
+                    'title'        => 'Filtro',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Digita almeno 2 caratteri...',
-                        'no-results'        => 'Nessun risultato trovato...',
+                    'dropdown' => [
+                        'select' => 'Seleziona',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Digita almeno 2 caratteri...',
+                            'no-results'         => 'Nessun risultato trovato...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Cancella tutto',
-                    'title'     => 'Filtri personalizzati',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Mese scorso',
-                    'last-six-months'   => 'Ultimi 6 mesi',
-                    'last-three-months' => 'Ultimi 3 mesi',
-                    'this-month'        => 'Questo mese',
-                    'this-week'         => 'Questa settimana',
-                    'this-year'         => 'Quest\'anno',
-                    'today'             => 'Oggi',
-                    'yesterday'         => 'Ieri',
+                    'custom-filters' => [
+                        'clear-all' => 'Cancella Tutto',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'Azioni',
-                'next-page'            => 'Pagina successiva',
-                'no-records-available' => 'Nessun record disponibile.',
+                'next-page'            => 'Pagina Successiva',
+                'no-records-available' => 'Nessun Record Disponibile.',
                 'of'                   => 'di :total voci',
-                'page-navigation'      => 'Navigazione pagina',
-                'page-number'          => 'Numero di pagina',
-                'previous-page'        => 'Pagina precedente',
-                'showing'              => 'Mostra :firstItem',
+                'page-navigation'      => 'Navigazione Pagina',
+                'page-number'          => 'Numero Pagina',
+                'previous-page'        => 'Pagina Precedente',
+                'showing'              => 'Mostrando :firstItem',
                 'to'                   => 'a :lastItem',
             ],
         ],
@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Nessuno',
+                    'none'         => 'Nessuno',
+                    'total-amount' => 'Importo totale',
                 ],
 
                 'downloadable' => [
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Continua al pagamento',
             'illegal'                   => 'La quantità non può essere inferiore a uno.',
+            'inactive-add'              => 'L\'articolo inattivo non può essere aggiunto al carrello.',
             'inactive'                  => 'L\'articolo è stato disattivato e rimosso dal carrello.',
             'inventory-warning'         => 'La quantità richiesta non è disponibile, riprova più tardi.',
             'item-add-to-cart'          => 'Articolo aggiunto con successo',
@@ -676,6 +678,16 @@ return [
                 'proceed-to-checkout' => 'Procedi con il pagamento',
                 'sub-total'           => 'Subtotale',
                 'tax'                 => 'Imposta',
+
+                'estimate-shipping' => [
+                    'country'        => 'Paese',
+                    'info'           => 'Inserisci la tua destinazione per ottenere una stima di spedizione e imposta.',
+                    'postcode'       => 'CAP',
+                    'select-country' => 'Seleziona Paese',
+                    'select-state'   => 'Seleziona Regione',
+                    'state'          => 'Regione',
+                    'title'          => 'Calcola Spedizione e Imposta',
+                ],
             ],
         ],
 
@@ -756,11 +768,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Scrivici una nota e ti risponderemo il prima possibile',
+            'desc'          => 'Cosa hai in mente?',
+            'describe-here' => 'Descrivi qui',
+            'email'         => 'Email',
+            'message'       => 'Messaggio',
+            'name'          => 'Nome',
+            'phone-number'  => 'Numero di telefono',
+            'submit'        => 'Invia',
+            'title'         => 'Contattaci',
+        ],
+
         'index' => [
             'offer'               => 'Ottieni FINO AL 40% DI SCONTO sul tuo primo ordine ACQUISTA ORA',
             'resend-verify-email' => 'Rispedisci l\'email di verifica',
             'verify-email'        => 'Verifica il tuo account email',
         ],
+
+        'thanks-for-contact' => 'Grazie per averci contattato con i tuoi commenti e domande. Ti risponderemo molto presto.',
     ],
 
     'partials' => [
@@ -860,6 +886,14 @@ return [
                 'subject'     => 'Ti sei iscritto alla nostra newsletter!',
                 'unsubscribe' => 'Annulla iscrizione',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'tramite modulo di contatto del sito web',
+            'reply-to-mail'   => 'si prega di rispondere a questa email.',
+            'reach-via-phone' => 'In alternativa, puoi contattarci telefonicamente al',
+            'inquiry-from'    => 'Richiesta da',
+            'to'              => 'Per contattare',
         ],
 
         'orders' => [

@@ -8,7 +8,7 @@ use Webkul\Customer\Contracts\CustomerAddress;
 class CustomerAddressRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      */
     public function model(): string
     {
@@ -16,18 +16,13 @@ class CustomerAddressRepository extends Repository
     }
 
     /**
-     * Create a new customer address
-     *
-     * @return \Webkul\Customer\Contracts\CustomerAddress
+     * Create a new customer address.
      */
-    public function create(array $data)
+    public function create(array $data): CustomerAddress
     {
         $defaultAddress = $this->findOneWhere(['customer_id' => $data['customer_id'], 'default_address' => 1]);
 
-        if (
-            $defaultAddress
-            && $data['default_address']
-        ) {
+        if ($defaultAddress) {
             $defaultAddress->update(['default_address' => 0]);
         }
 
@@ -40,9 +35,8 @@ class CustomerAddressRepository extends Repository
      * Update customer address.
      *
      * @param  int  $id
-     * @return \Webkul\Customer\Contracts\CustomerAddress
      */
-    public function update(array $data, $id)
+    public function update(array $data, $id): CustomerAddress
     {
         $address = $this->find($id);
 

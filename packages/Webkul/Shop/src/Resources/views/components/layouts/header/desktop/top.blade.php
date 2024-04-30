@@ -1,87 +1,149 @@
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.before') !!}
 
-<div class="flex justify-between items-center w-full py-3 px-16 border border-t-0 border-b border-l-0 border-r-0">
-    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.before') !!}
-
-    <!-- Currency Switcher -->
-    <x-shop::dropdown>
-        <!-- Dropdown Toggler -->
-        <x-slot:toggle>
+<v-topbar>
+    <!-- Shimmer Effect -->
+    <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 px-16 py-3">
+        <!-- Currencies -->
+        <div class="flex w-20 items-center justify-between gap-2.5">
             <div
-                class="flex gap-2.5 cursor-pointer"
-                role="button"
-                tabindex="0"
+                class="shimmer h-6 w-12 rounded"
+                role="presentation"
             >
-                <span>
-                    {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
-                </span>
-
-                <span
-                    class="text-2xl icon-arrow-down"
-                    role="presentation"
-                ></span>
             </div>
-        </x-slot>
 
-        <!-- Dropdown Content -->
-        <x-slot:content class="!p-0">
-            <v-currency-switcher></v-currency-switcher>
-        </x-slot>
-    </x-shop::dropdown>
-
-    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.after') !!}
-
-    <p class="text-xs font-medium">
-        Get UPTO 40% OFF on your 1st order <a href="{{ route('shop.home.index') }}" class="underline">SHOP NOW</a>
-    </p>
-
-    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.before') !!}
-
-    <!-- Locales Switcher -->
-    <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
-        <x-slot:toggle>
-            <!-- Dropdown Toggler -->
             <div
-                class="flex items-center gap-2.5 cursor-pointer"
-                role="button"
-                tabindex="0"
+                class="shimmer h-6 w-6 rounded"
+                role="presentation"
             >
-                <img 
-                    src="{{ ! empty(core()->getCurrentLocale()->logo_url) 
-                            ? core()->getCurrentLocale()->logo_url 
-                            : bagisto_asset('images/default-language.svg') 
-                        }}"
-                    class="h-full"
-                    alt="Default locale"
-                    width="24"
-                    height="16"
-                />
-                
-                <span>
-                    {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
-                </span>
-
-                <span
-                    class="icon-arrow-down text-2xl"
-                    role="presentation"
-                ></span>
             </div>
-        </x-slot>
-    
-        <!-- Dropdown Content -->
-        <x-slot:content class="!p-0">
-            <v-locale-switcher></v-locale-switcher>
-        </x-slot>
-    </x-shop::dropdown>
+        </div>
 
-    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.after') !!}
-</div>
+        <!-- Offers -->
+        <div
+            class="shimmer h-6 w-72 rounded"
+            role="presentation"
+        >
+        </div>
+
+        <!-- Locales -->
+        <div class="flex w-32 items-center justify-between gap-2.5">
+            <div
+                class="shimmer h-6 w-6"
+                role="presentation"
+            >
+            </div>
+
+            <div
+                class="shimmer h-6 w-14 rounded"
+                role="presentation"
+            >
+            </div>
+
+            <div
+                class="shimmer h-6 w-6"
+                role="presentation"
+            >
+            </div>
+        </div>
+    </div>
+</v-topbar>
+
+{!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.after') !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-currency-switcher-template">
-        <div class="grid gap-1 mt-2.5 pb-2.5">
+    <script
+        type="text/x-template"
+        id="v-topbar-template"
+    >
+        <div class="flex w-full items-center justify-between border border-b border-l-0 border-r-0 border-t-0 px-16 py-3">
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.before') !!}
+
+            <!-- Currency Switcher -->
+            <x-shop::dropdown>
+                <!-- Dropdown Toggler -->
+                <x-slot:toggle>
+                    <div
+                        class="flex cursor-pointer gap-2.5"
+                        role="button"
+                        tabindex="0"
+                        @click="currencyToggler = ! currencyToggler"
+                    >
+                        <span>
+                            {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
+                        </span>
+
+                        <span
+                            class="text-2xl"
+                            :class="{'icon-arrow-up': currencyToggler, 'icon-arrow-down': ! currencyToggler}"
+                            role="presentation"
+                        ></span>
+                    </div>
+                </x-slot>
+
+                <!-- Dropdown Content -->
+                <x-slot:content class="!p-0">
+                    <v-currency-switcher></v-currency-switcher>
+                </x-slot>
+            </x-shop::dropdown>
+
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.after') !!}
+
+            <p class="text-xs font-medium">
+                Get UPTO 40% OFF on your 1st order <a href="{{ route('shop.home.index') }}" class="underline">SHOP NOW</a>
+            </p>
+
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.before') !!}
+
+            <!-- Locales Switcher -->
+            <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
+                <x-slot:toggle>
+                    <!-- Dropdown Toggler -->
+                    <div
+                        class="flex cursor-pointer items-center gap-2.5"
+                        role="button"
+                        tabindex="0"
+                        @click="localeToggler = ! localeToggler"
+                    >
+                        <img
+                            src="{{ ! empty(core()->getCurrentLocale()->logo_url)
+                                    ? core()->getCurrentLocale()->logo_url
+                                    : bagisto_asset('images/default-language.svg')
+                                }}"
+                            class="h-full"
+                            alt="@lang('shop::app.components.layouts.header.desktop.top.default-locale')"
+                            width="24"
+                            height="16"
+                        />
+                        
+                        <span>
+                            {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
+                        </span>
+
+                        <span
+                            class="text-2xl"
+                            :class="{'icon-arrow-up': localeToggler, 'icon-arrow-down': ! localeToggler}"
+                            role="presentation"
+                        ></span>
+                    </div>
+                </x-slot>
+            
+                <!-- Dropdown Content -->
+                <x-slot:content class="!p-0">
+                    <v-locale-switcher></v-locale-switcher>
+                </x-slot>
+            </x-shop::dropdown>
+
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.after') !!}
+        </div>
+    </script>
+
+    <script
+        type="text/x-template"
+        id="v-currency-switcher-template"
+    >
+        <div class="mt-2.5 grid gap-1 pb-2.5">
             <span
-                class="px-5 py-2 text-base cursor-pointer hover:bg-gray-100"
+                class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                 v-for="currency in currencies"
                 :class="{'bg-gray-100': currency.code == '{{ core()->getCurrentCurrencyCode() }}'}"
                 @click="change(currency)"
@@ -91,12 +153,15 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-locale-switcher-template">
-        <div class="grid gap-1 mt-2.5 pb-2.5">
+    <script
+        type="text/x-template"
+        id="v-locale-switcher-template"
+    >
+        <div class="mt-2.5 grid gap-1 pb-2.5">
             <span
-                class="flex items-center gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100"
-                v-for="locale in locales"
+                class="flex cursor-pointer items-center gap-2.5 px-5 py-2 text-base hover:bg-gray-100"
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
+                v-for="locale in locales"
                 @click="change(locale)"                  
             >
                 <img
@@ -111,6 +176,18 @@
     </script>
 
     <script type="module">
+        app.component('v-topbar', {
+            template: '#v-topbar-template',
+
+            data() {
+                return {
+                    localeToggler: '',
+
+                    currencyToggler: '',
+                };
+            },
+        });
+
         app.component('v-currency-switcher', {
             template: '#v-currency-switcher-template',
 
@@ -152,5 +229,3 @@
         });
     </script>
 @endPushOnce
-
-{!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.after') !!}

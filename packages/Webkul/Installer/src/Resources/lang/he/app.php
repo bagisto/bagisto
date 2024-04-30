@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'seeders'   => [
+    'seeders' => [
         'attribute' => [
             'attribute-families' => [
                 'default' => 'ברירת מחדל',
             ],
 
-            'attribute-groups'   => [
-                'description'       => 'תיאור',
-                'general'           => 'כללי',
-                'inventories'       => 'מלאי',
-                'meta-description'  => 'תיאור מטא',
-                'price'             => 'מחיר',
-                'settings'          => 'הגדרות',
-                'shipping'          => 'משלוח',
+            'attribute-groups' => [
+                'description'      => 'תיאור',
+                'general'          => 'כללי',
+                'inventories'      => 'מלאי',
+                'meta-description' => 'תיאור מטא',
+                'price'            => 'מחיר',
+                'settings'         => 'הגדרות',
+                'shipping'         => 'משלוח',
             ],
 
-            'attributes'         => [
+            'attributes' => [
                 'brand'                => 'מותג',
                 'color'                => 'צבע',
                 'cost'                 => 'עלות',
@@ -37,9 +37,9 @@ return [
                 'short-description'    => 'תיאור קצר',
                 'size'                 => 'גודל',
                 'sku'                  => 'קוד מוצר',
+                'special-price'        => 'מחיר מיוחד',
                 'special-price-from'   => 'מחיר מיוחד מ',
                 'special-price-to'     => 'מחיר מיוחד עד',
-                'special-price'        => 'מחיר מיוחד',
                 'status'               => 'סטטוס',
                 'tax-category'         => 'קטגוריית מס',
                 'url-key'              => 'מפתח URL',
@@ -48,7 +48,7 @@ return [
                 'width'                => 'רוחב',
             ],
 
-            'attribute-options'  => [
+            'attribute-options' => [
                 'black'  => 'שחור',
                 'green'  => 'ירוק',
                 'l'      => 'L',
@@ -61,21 +61,21 @@ return [
             ],
         ],
 
-        'category'  => [
+        'category' => [
             'categories' => [
                 'description' => 'תיאור קטגוריה ראשית',
                 'name'        => 'ראשית',
             ],
         ],
 
-        'cms'       => [
+        'cms' => [
             'pages' => [
-                'about-us'         => [
+                'about-us' => [
                     'content' => 'תוכן עמוד אודות',
                     'title'   => 'אודות',
                 ],
 
-                'contact-us'       => [
+                'contact-us' => [
                     'content' => 'תוכן עמוד צור קשר',
                     'title'   => 'צור קשר',
                 ],
@@ -85,27 +85,27 @@ return [
                     'title'   => 'שירות לקוחות',
                 ],
 
-                'payment-policy'   => [
+                'payment-policy' => [
                     'content' => 'תוכן עמוד מדיניות תשלום',
                     'title'   => 'מדיניות תשלום',
                 ],
 
-                'privacy-policy'   => [
+                'privacy-policy' => [
                     'content' => 'תוכן עמוד מדיניות פרטיות',
                     'title'   => 'מדיניות פרטיות',
                 ],
 
-                'refund-policy'    => [
+                'refund-policy' => [
                     'content' => 'תוכן עמוד מדיניות החזרים',
                     'title'   => 'מדיניות החזרים',
                 ],
 
-                'return-policy'    => [
+                'return-policy' => [
                     'content' => 'תוכן עמוד מדיניות החזרים',
                     'title'   => 'מדיניות החזרים',
                 ],
 
-                'shipping-policy'  => [
+                'shipping-policy' => [
                     'content' => 'תוכן עמוד מדיניות משלוח',
                     'title'   => 'מדיניות משלוח',
                 ],
@@ -115,24 +115,24 @@ return [
                     'title'   => 'תנאים והגבלות',
                 ],
 
-                'terms-of-use'     => [
+                'terms-of-use' => [
                     'content' => 'תוכן עמוד תנאי השימוש',
                     'title'   => 'תנאי שימוש',
                 ],
 
-                'whats-new'       => [
+                'whats-new' => [
                     'content' => 'תוכן עמוד "מה חדש"',
                     'title'   => 'מה חדש',
                 ],
             ],
         ],
 
-        'core'      => [
-            'channels'   => [
-                'meta-description' => 'תיאור מטא לחנות הדגמה',
-                'meta-keywords'    => 'מילות מפתח לחנות הדגמה',
-                'meta-title'       => 'חנות הדגמה',
+        'core' => [
+            'channels' => [
                 'name'             => 'ברירת מחדל',
+                'meta-title'       => 'חנות הדגמה',
+                'meta-keywords'    => 'מילות מפתח לחנות הדגמה',
+                'meta-description' => 'תיאור מטא לחנות הדגמה',
             ],
 
             'currencies' => [
@@ -151,7 +151,7 @@ return [
                 'USD' => 'דולר אמריקאי',
             ],
 
-            'locales'    => [
+            'locales' => [
                 'ar'    => 'ערבית',
                 'bn'    => 'בנגלי',
                 'de'    => 'גרמנית',
@@ -174,7 +174,7 @@ return [
             ],
         ],
 
-        'customer'  => [
+        'customer' => [
             'customer-groups' => [
                 'general'   => 'כללי',
                 'guest'     => 'אורח',
@@ -188,40 +188,40 @@ return [
             ],
         ],
 
-        'shop'      => [
+        'shop' => [
             'theme-customizations' => [
-                'all-products'           => [
-                    'name'    => 'כל המוצרים',
+                'all-products' => [
+                    'name' => 'כל המוצרים',
 
                     'options' => [
                         'title' => 'כל המוצרים',
                     ],
                 ],
 
-                'bold-collections'       => [
+                'bold-collections' => [
                     'content' => [
                         'btn-title'   => 'צפייה בהכל',
                         'description' => 'הצג את הקולקציות המסוכנות שלנו! הרמת מלבוש עם עיצובים אימים והצהרות חיוניות. גלה דפוסים מודגשים וצבעים מוסריים שמחדשים את הארון שלך. הכן לקבל את המדהים!',
                         'title'       => 'הכנס לקולקציות המסירות החדשות שלנו!',
                     ],
 
-                    'name'    => 'אוספי מסירות',
+                    'name' => 'אוספי מסירות',
                 ],
 
                 'categories-collections' => [
                     'name' => 'אוספי קטגוריות',
                 ],
 
-                'featured-collections'   => [
-                    'name'    => 'קולקציות מומלצות',
+                'featured-collections' => [
+                    'name' => 'קולקציות מומלצות',
 
                     'options' => [
                         'title' => 'מוצרים מומלצים',
                     ],
                 ],
 
-                'footer-links'           => [
-                    'name'    => 'קישורי תחתית',
+                'footer-links' => [
+                    'name' => 'קישורי תחתית',
 
                     'options' => [
                         'about-us'         => 'אודותינו',
@@ -238,41 +238,41 @@ return [
                     ],
                 ],
 
-                'game-container'         => [
+                'game-container' => [
                     'content' => [
                         'sub-title-1' => 'אוספינו',
                         'sub-title-2' => 'אוספינו',
                         'title'       => 'המשחק עם ההוספות החדשות שלנו!',
                     ],
 
-                    'name'    => 'מגירת משחק',
+                    'name' => 'מגירת משחק',
                 ],
 
-                'image-carousel'         => [
-                    'name'    => 'מסלול תמונה',
+                'image-carousel' => [
+                    'name' => 'מסלול תמונה',
 
                     'sliders' => [
                         'title' => 'הכנס לאוסף החדש',
                     ],
                 ],
 
-                'new-products'           => [
-                    'name'    => 'מוצרים חדשים',
+                'new-products' => [
+                    'name' => 'מוצרים חדשים',
 
                     'options' => [
                         'title' => 'מוצרים חדשים',
                     ],
                 ],
 
-                'offer-information'      => [
+                'offer-information' => [
                     'content' => [
                         'title' => 'קבל עד 40% הנחה על הזמנה ראשונה - קנה עכשיו',
                     ],
 
-                    'name'    => 'מידע על הצעה',
+                    'name' => 'מידע על הצעה',
                 ],
 
-                'services-content'       => [
+                'services-content' => [
                     'description' => [
                         'emi-available-info'   => 'EMI ללא עלות זמין על כל כרטיסי האשראי המרכזיים',
                         'free-shipping-info'   => 'תהנו ממשלוח חינם על כל ההזמנות',
@@ -280,9 +280,9 @@ return [
                         'time-support-info'    => 'תמיכה ייעודית 24/7 באמצעות צ\'אט ואימייל',
                     ],
 
-                    'name'        => 'תוכן שירותים',
+                    'name' => 'תוכן שירותים',
 
-                    'title'       => [
+                    'title' => [
                         'free-shipping'   => 'משלוח חינם',
                         'product-replace' => 'החלפת מוצר',
                         'emi-available'   => 'EMI זמין',
@@ -290,7 +290,7 @@ return [
                     ],
                 ],
 
-                'top-collections'        => [
+                'top-collections' => [
                     'content' => [
                         'sub-title-1' => 'אוספינו',
                         'sub-title-2' => 'אוספינו',
@@ -301,12 +301,12 @@ return [
                         'title'       => 'המשחק עם ההוספות החדשות שלנו!',
                     ],
 
-                    'name'    => 'אוספי מובילים',
+                    'name' => 'אוספי מובילים',
                 ],
             ],
         ],
 
-        'user'      => [
+        'user' => [
             'roles' => [
                 'description' => 'תפקיד זה מעניק למשתמשים גישה מלאה',
                 'name'        => 'מנהל',
@@ -320,12 +320,12 @@ return [
 
     'installer' => [
         'index' => [
-            'create-administrator'      => [
+            'create-administrator' => [
                 'admin'            => 'מנהל מערכת',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'אשר סיסמה',
-                'email-address'    => 'admin@example.com',
                 'email'            => 'כתובת דוא"ל',
+                'email-address'    => 'admin@example.com',
                 'password'         => 'סיסמה',
                 'title'            => 'יצירת מנהל מערכת',
             ],
@@ -346,8 +346,8 @@ return [
                 'default-currency'    => 'מטבע ברירת מחדל',
                 'default-locale'      => 'אזור ברירת מחדל',
                 'default-timezone'    => 'איזור זמן ברירת מחדל',
-                'default-url-link'    => 'https://localhost',
                 'default-url'         => 'כתובת URL ברירת מחדל',
+                'default-url-link'    => 'https://localhost',
                 'dirham'              => 'דירהאם (AED)',
                 'euro'                => 'יורו (EUR)',
                 'iranian'             => 'ריאל איראני (IRR)',
@@ -368,32 +368,32 @@ return [
                 'warning-message'     => 'אזהרה! הגדרות שפות המערכת המוגדרות כברירת מחדל והמטבע המוגדר כברירת מחדל הם קבועים ואינם יכולים להשתנות שוב.',
             ],
 
-            'installation-processing'   => [
-                'bagisto-info'     => 'יצירת טבלאות מסד הנתונים, זה עשוי לקחת מספר רגעים',
-                'bagisto'          => 'התקנת Bagisto',
-                'title'            => 'התקנה',
+            'installation-processing' => [
+                'bagisto'      => 'התקנת Bagisto',
+                'bagisto-info' => 'יצירת טבלאות מסד הנתונים, זה עשוי לקחת מספר רגעים',
+                'title'        => 'התקנה',
             ],
 
-            'installation-completed'    => [
+            'installation-completed' => [
                 'admin-panel'                => 'פנל מנהל המערכת',
                 'bagisto-forums'             => 'פורום Bagisto',
                 'customer-panel'             => 'פנל לקוח',
                 'explore-bagisto-extensions' => 'גלה הרחבות Bagisto',
-                'title-info'                 => 'Bagisto הותקן בהצלחה במערכת שלך.',
                 'title'                      => 'התקנה הושלמה',
+                'title-info'                 => 'Bagisto הותקן בהצלחה במערכת שלך.',
             ],
 
-            'ready-for-installation'    => [
+            'ready-for-installation' => [
                 'create-database-table'   => 'יצירת טבלת מסד הנתונים',
-                'install-info-button'     => 'לחץ על הכפתור למטה כדי',
-                'install-info'            => 'Bagisto להתקנה',
                 'install'                 => 'התקנה',
+                'install-info'            => 'Bagisto להתקנה',
+                'install-info-button'     => 'לחץ על הכפתור למטה כדי',
                 'populate-database-table' => 'מילוי הטבלאות במסד הנתונים',
                 'start-installation'      => 'התחל התקנה',
                 'title'                   => 'מוכן להתקנה',
             ],
 
-            'start'                     => [
+            'start' => [
                 'locale'        => 'אזור',
                 'main'          => 'הַתְחָלָה',
                 'select-locale' => 'בחר אזור',
@@ -401,7 +401,7 @@ return [
                 'welcome-title' => 'ברוך הבא ל-Bagisto 2.0.',
             ],
 
-            'server-requirements'       => [
+            'server-requirements' => [
                 'calendar'    => 'לוח שנה',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
@@ -416,45 +416,43 @@ return [
                 'openssl'     => 'OpenSSL',
                 'pcre'        => 'PCRE',
                 'pdo'         => 'PDO',
-                'php-version' => '8.1 או גבוהה יותר',
                 'php'         => 'PHP',
+                'php-version' => '8.1 או גבוהה יותר',
                 'session'     => 'Session',
                 'title'       => 'דרישות השרת',
                 'tokenizer'   => 'מפרק מחרוזת',
                 'xml'         => 'XML',
             ],
 
-            'arabic'                    => 'ערבית',
-            'back'                      => 'חזרה',
-            'bagisto-info'              => 'פרויקט קהילתי על ידי',
-            'bagisto-logo'              => 'לוגו Bagisto',
-            'bagisto'                   => 'Bagisto',
-            'bengali'                   => 'בנגלי',
-            'chinese'                   => 'סיני',
-            'continue'                  => 'המשך',
-            'dutch'                     => 'הולנדי',
-            'english'                   => 'אנגלית',
-            'french'                    => 'צרפתי',
-            'german'                    => 'גרמני',
-            'hebrew'                    => 'עברית',
-            'hindi'                     => 'הינדי',
-            'installation-description'  => 'התקנת Bagisto בדרך כלל כוללת מספר שלבים. הנה סקירה כללית של תהליך ההתקנה עבור  Bagisto:',
-            'installation-info'         => 'אנו שמחים לראותך כאן!',
-            'installation-title'        => 'ברוך הבא להתקנת Bagisto',
-            'italian'                   => 'איטלקי',
-            'japanese'                  => 'יפני',
-            'persian'                   => 'פרסי',
-            'polish'                    => 'פולני',
-            'portuguese'                => 'פורטוגזי ברזילאי',
-            'russian'                   => 'רוסי',
-            'save-configuration'        => 'שמור הגדרות',
-            'sinhala'                   => 'סינהלה',
-            'skip'                      => 'דילוג',
-            'spanish'                   => 'ספרדית',
-            'title'                     => 'מתקין Bagisto',
-            'turkish'                   => 'טורקי',
-            'ukrainian'                 => 'אוקראיני',
-            'webkul'                    => 'Webkul',
+            'arabic'                   => 'ערבית',
+            'back'                     => 'חזרה',
+            'bagisto'                  => 'Bagisto',
+            'bagisto-info'             => 'פרויקט קהילתי על ידי',
+            'bagisto-logo'             => 'לוגו Bagisto',
+            'bengali'                  => 'בנגלי',
+            'chinese'                  => 'סיני',
+            'continue'                 => 'המשך',
+            'dutch'                    => 'הולנדי',
+            'english'                  => 'אנגלית',
+            'french'                   => 'צרפתי',
+            'german'                   => 'גרמני',
+            'hebrew'                   => 'עברית',
+            'hindi'                    => 'הינדי',
+            'installation-description' => 'התקנת Bagisto בדרך כלל כוללת מספר שלבים. הנה סקירה כללית של תהליך ההתקנה עבור  Bagisto:',
+            'installation-info'        => 'אנו שמחים לראותך כאן!',
+            'installation-title'       => 'ברוך הבא להתקנת Bagisto',
+            'italian'                  => 'איטלקי',
+            'japanese'                 => 'יפני',
+            'persian'                  => 'פרסי',
+            'polish'                   => 'פולני',
+            'portuguese'               => 'פורטוגזי ברזילאי',
+            'russian'                  => 'רוסי',
+            'sinhala'                  => 'סינהלה',
+            'spanish'                  => 'ספרדית',
+            'title'                    => 'מתקין Bagisto',
+            'turkish'                  => 'טורקי',
+            'ukrainian'                => 'אוקראיני',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

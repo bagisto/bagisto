@@ -4,15 +4,15 @@
         @lang('admin::app.sales.transactions.index.title')
     </x-slot>
 
-    <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="text-xl text-gray-800 dark:text-white font-bold">
+    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+        <p class="text-xl font-bold text-gray-800 dark:text-white">
             @lang('admin::app.sales.transactions.index.title')
         </p>
 
-        <div class="flex gap-x-2.5 items-center">
+        <div class="flex items-center gap-x-2.5">
 
             <!-- Export Modal -->
-            <x-admin::datagrid.export  src="{{ route('admin.sales.transactions.index') }}" />
+            <x-admin::datagrid.export :src="route('admin.sales.transactions.index')" />
 
             <v-create-transaction-form>
                 <button
@@ -34,86 +34,98 @@
             id="v-transaction-drawer-template"
         >
             <x-admin::datagrid
-                src="{{ route('admin.sales.transactions.index') }}"
+                :src="route('admin.sales.transactions.index')"
                 :isMultiRow="true"
                 ref="datagrid"
             >
-                <!-- DataGrid Body -->
-                <template #body="{ columns, records, performAction }">
-                    <div
-                        v-for="record in records"
-                        class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
-                    >
-                        <!-- Id -->
-                        <p
-                            class="break-words"
-                            v-text="record.id"
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.datagrid.table.body />
+                    </template>
+
+                    <template v-else>
+                        <div
+                            v-for="record in available.records"
+                            class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
+                            :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
-                        </p>
+                            <!-- ID -->
+                            <p
+                                class="break-words"
+                                v-text="record.id"
+                            >
+                            </p>
 
-                        <!-- Transaction ID-->
-                        <p
-                            class="break-words"
-                            v-text="record.transaction_id"
-                        >
-                        </p>
+                            <!-- Transaction ID -->
+                            <p
+                                class="break-words"
+                                v-text="record.transaction_id"
+                            >
+                            </p>
 
-                        <!-- Amount -->
-                        <p class="break-words">
-                            @{{ $admin.formatPrice(record.amount) }}
-                        </p>
+                            <!-- Amount -->
+                            <p class="break-words">
+                                @{{ $admin.formatPrice(record.amount) }}
+                            </p>
 
-                        <!-- Invoice Id -->
-                        <p
-                            class="break-words"
-                            v-text="record.invoice_id"
-                        >
-                        </p>
+                            <!-- Invoice ID -->
+                            <p
+                                class="break-words"
+                                v-text="record.invoice_id"
+                            >
+                            </p>
 
-                        <!-- Order Id -->
-                        <p
-                            class="break-words"
-                            v-text="record.order_id"
-                        >
-                        </p>
+                            <!-- Order ID -->
+                            <p
+                                class="break-words"
+                                v-text="record.order_id"
+                            >
+                            </p>
 
-                        <!-- Status -->
-                        <p
-                            class="break-words"
-                            v-html="record.status"
-                        >
-                        </p>
+                            <!-- Status -->
+                            <p
+                                class="break-words"
+                                v-html="record.status"
+                            >
+                            </p>
 
-                        <!-- Date -->
-                        <p
-                            class="break-words"
-                            v-text="record.created_at"
-                        >
-                        </p>
+                            <!-- Date -->
+                            <p
+                                class="break-words"
+                                v-text="record.created_at"
+                            >
+                            </p>
 
-                        <!-- Actions -->
-                        @if (bouncer()->hasPermission('sales.transactions.view'))
-                            <div class="flex justify-end">
-                                <a
-                                    v-if="record.actions.find(action => action.title === 'View')"
-                                    @click="view(record.actions.find(action => action.title === 'View')?.url)"
-                                >
-                                    <span
-                                        class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
-                                        role="button"
-                                        tabindex="0"
+                            <!-- Actions -->
+                            @if (bouncer()->hasPermission('sales.transactions.view'))
+                                <div class="flex justify-end">
+                                    <a
+                                        v-if="record.actions.find(action => action.title === 'View')"
+                                        @click="view(record.actions.find(action => action.title === 'View')?.url)"
                                     >
-                                    </span>
-                                </a>
-                            </div>
-                        @endif
-                    </div>
+                                        <span
+                                            class="icon-sort-right cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
+                                            role="button"
+                                            tabindex="0"
+                                        >
+                                        </span>
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
+                    </template>
                 </template>
             </x-admin::datagrid>
 
             <!-- Drawer content -->
-            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
                 <x-admin::drawer ref="transaction">
                     <!-- Drawer Header -->
                     <x-slot:header>
@@ -127,7 +139,7 @@
                     <!-- Drawer Content -->
                     <x-slot:content>
                         <div class="flex flex-col gap-4 px-1.5 py-2.5">
-                            <p class="text-lg text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-lg font-semibold text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.transactions.index.view.transaction-data')
                             </p>
 
@@ -217,7 +229,7 @@
             </div>
         </script>
 
-        <script 
+        <script
             type="text/x-template"
             id="v-create-transaction-form-template"
         >
@@ -239,7 +251,7 @@
                         <x-admin::modal ref="transactionModel">
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <p class="text-lg text-gray-800 dark:text-white font-bold">
+                                <p class="text-lg font-bold text-gray-800 dark:text-white">
                                     @lang('admin::app.sales.transactions.index.create.create-transaction')
                                 </p>
                             </x-slot>
@@ -247,7 +259,7 @@
                             <!-- Modal Content -->
                             <x-slot:content>
                                 <!-- Invoice Id -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="mb-2.5 w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.sales.transactions.index.create.invoice-id')
                                     </x-admin::form.control-group.label>
@@ -265,7 +277,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Payment Method -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="mb-2.5 w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.sales.transactions.index.create.payment-method')
                                     </x-admin::form.control-group.label>
@@ -278,7 +290,7 @@
                                         :label="trans('admin::app.sales.transactions.index.create.payment-method')"
                                         :placeholder="trans('admin::app.sales.transactions.index.create.payment-method')"
                                     >
-                                        <option 
+                                        <option
                                             v-for="paymentMethod in paymentMethods"
                                             :value="paymentMethod.method"
                                             v-text="paymentMethod.method_title"
@@ -290,7 +302,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Amount -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="mb-2.5 w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.sales.transactions.index.create.amount')
                                     </x-admin::form.control-group.label>
@@ -311,7 +323,7 @@
                             <!-- Modal Footer -->
                             <x-slot:footer>
                                 <!-- Modal Submission -->
-                                <div class="flex gap-x-2.5 items-center">
+                                <div class="flex items-center gap-x-2.5">
                                     <!-- Save Button -->
                                     <button
                                         type="submit"

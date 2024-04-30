@@ -1,15 +1,15 @@
 <v-image-search-result-component>
-    <div class="mt-8 p-5 border border-gray-200 rounded-lg">
+    <div class="mt-8 rounded-lg border border-gray-200 p-5">
         <div class="flex gap-12">
-            <x-shop::media.images.lazy class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-sm" />
+            <x-shop::media.images.lazy class="h-[110px] max-h-[110px] w-[110px] min-w-[110px] max-w-[110px] rounded-sm" />
              
             <div class="flex flex-col gap-4">
-                <span class="shimmer w-[200px] h-10"></span>
+                <span class="shimmer h-10 w-[200px]"></span>
 
-                <div class="flex gap-2 flex-wrap">
+                <div class="flex flex-wrap gap-2">
                     @for ($i = 1; $i < 10; $i++)
-                        <div class="shimmer flex justify-center items-center m-1 font-medium rounded-full cursor-pointer">
-                            <span class="shimmer w-20 h-10 rounded-full"></span>
+                        <div class="shimmer m-1 flex cursor-pointer items-center justify-center rounded-full font-medium">
+                            <span class="shimmer h-10 w-20 rounded-full"></span>
                         </div>
                     @endfor
                 </div>
@@ -23,10 +23,10 @@
         type="text/x-template"
         id="v-image-search-result-component-template"
     >
-        <div class="mt-8 p-5 bg-gray-100 border border-gray-200 rounded-lg">
+        <div class="mt-8 rounded-lg border border-gray-200 bg-gray-100 p-5">
             <div class="flex gap-12">
                 <img 
-                    class="max-w-[110px] max-h-[110px] min-h-[110px] w-[110px] h-[110px] rounded-sm" 
+                    class="h-[110px] max-h-[110px] min-h-[110px] w-[110px] max-w-[110px] rounded-sm" 
                     :src="searchedImageUrl"
                     alt="search image"
                     height="110"
@@ -38,16 +38,14 @@
                         @lang('shop::app.search.images.results.analysed-keywords')
                     </h2>
 
-                    <div class="flex gap-2 flex-wrap">
+                    <div class="flex flex-wrap gap-2">
                         <span 
-                            class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full border cursor-pointer"
+                            class="m-1 flex cursor-pointer items-center justify-center rounded-full border bg-white px-2 py-1 font-medium"
                             v-for="term in searchedTerms"
                             @click="search(term)"
                         >
-                            <span
-                                class="p-2.5 text-xs font-normal leading-none max-w-full flex-initial"
-                                v-text="term.name"
-                            >
+                            <span class="max-w-full flex-initial p-2.5 text-xs font-normal leading-none">
+                                @{{ term.name }}
                             </span>
                         </span>
                     </div>

@@ -36,6 +36,8 @@ return [
         'description-text' => 'सभी सूचनाएँ सूचीबद्ध करें',
         'marked-success'   => 'सूचना सफलतापूर्वक मार्क की गई',
         'no-record'        => 'कोई रिकॉर्ड नहीं मिला',
+        'of'               => 'का',
+        'per-page'         => 'प्रति पृष्ठ',
         'read-all'         => 'पढ़ा गया मार्क करें',
         'title'            => 'सूचनाएँ',
         'view-all'         => 'सभी देखें',
@@ -47,15 +49,6 @@ return [
             'pending'         => 'ऑर्डर लंबित है',
             'pending-payment' => 'लंबित भुगतान',
             'processing'      => 'ऑर्डर प्रसंस्कृत हो रहा है',
-        ],
-
-        'status' => [
-            'all'        => 'सभी',
-            'canceled'   => 'रद्द',
-            'closed'     => 'बंद',
-            'completed'  => 'पूर्ण',
-            'pending'    => 'लंबित',
-            'processing' => 'प्रसंस्कृत हो रहा है',
         ],
     ],
 
@@ -134,7 +127,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'आदेश',
+                'create-btn' => 'आदेश बनाएं',
+                'title'      => 'आदेश',
+
+                'search-customer' => [
+                    'create-btn'  => 'ग्राहक बनाएं',
+                    'empty-info'  => 'खोज शब्द के लिए कोई ग्राहक उपलब्ध नहीं है।',
+                    'empty-title' => 'कोई ग्राहक नहीं मिला',
+                    'search-by'   => 'ईमेल या नाम से खोजें',
+                    'title'       => 'ग्राहक चुनें',
+                ],
 
                 'datagrid' => [
                     'canceled'        => 'रद्द हुआ',
@@ -152,13 +154,173 @@ return [
                     'order-id'        => 'आदेश आईडी',
                     'pay-by'          => ':method के द्वारा भुगतान करें',
                     'pay-via'         => 'द्वारा भुगतान करें',
-                    'pending'         => 'बेकारी',
                     'pending-payment' => 'बकाया भुगतान',
+                    'pending'         => 'बेकारी',
                     'processing'      => 'प्रोसेसिंग',
                     'product-count'   => ':count + और अधिक उत्पाद',
                     'status'          => 'स्थिति',
                     'success'         => 'सफलता',
                     'view'            => 'देखें',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'कार्ट में जोड़ें',
+                'back-btn'                => 'वापस जाएं',
+                'check-billing-address'   => 'बिलिंग पता अनुपलब्ध है।',
+                'check-shipping-address'  => 'शिपिंग पता अनुपलब्ध है।',
+                'configuration'           => 'कॉन्फ़िगरेशन',
+                'coupon-already-applied'  => 'कूपन कोड पहले से ही लागू किया गया है।',
+                'coupon-applied'          => 'कूपन कोड सफलतापूर्वक लागू किया गया है।',
+                'coupon-error'            => 'कूपन कोड लागू नहीं किया जा सकता।',
+                'coupon-not-found'        => 'कूपन नहीं मिला',
+                'coupon-remove'           => 'कूपन कोड सफलतापूर्वक हटा दिया गया है।',
+                'error'                   => 'कुछ गलत हो गया है',
+                'minimum-order-error'     => 'न्यूनतम आदेश राशि पूरी नहीं हुई है।',
+                'order-placed-success'    => 'आदेश सफलतापूर्वक रखा गया है।',
+                'payment-not-supported'   => 'यह भुगतान विधि समर्थित नहीं है',
+                'save-btn'                => 'आदेश बनाएं',
+                'specify-payment-method'  => 'भुगतान विधि अनुपलब्ध है।',
+                'specify-shipping-method' => 'शिपिंग विधि अनुपलब्ध है।',
+                'title'                   => ':name के लिए आदेश बनाएं',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'कृपया एक विकल्प चुनें',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'कोई नहीं',
+                        'total-amount' => 'कुल राशि',
+                    ],
+
+                    'grouped' => [
+                        'name' => 'नाम',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'लिंक',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => 'उत्पाद सफलतापूर्वक कार्ट में जोड़ा गया',
+                    'success-remove'      => 'आइटम सफलतापूर्वक कार्ट से हटा दिया गया',
+                    'success-update'      => 'कार्ट आइटम सफलतापूर्वक अपडेट किया गया',
+
+                    'items' => [
+                        'add-product'       => 'उत्पाद जोड़ें',
+                        'amount-per-unit'   => ':amount प्रति इकाई x :qty मात्रा',
+                        'delete'            => 'हटाएं',
+                        'empty-description' => 'आपके कार्ट में कोई आइटम नहीं मिला।',
+                        'empty-title'       => 'खाली कार्ट आइटम',
+                        'move-to-wishlist'  => 'विशलिस्ट में ले जाएं',
+                        'see-details'       => 'विवरण देखें',
+                        'sku'               => 'एसकेयू - :sku',
+                        'sub-total'         => 'उप कुल - :sub_total',
+                        'title'             => 'कार्ट आइटम',
+
+                        'search' => [
+                            'add-to-cart'   => 'कार्ट में जोड़ें',
+                            'available-qty' => ':qty उपलब्ध',
+                            'empty-info'    => 'खोज शब्द के लिए कोई उत्पाद उपलब्ध नहीं है।',
+                            'empty-title'   => 'कोई उत्पाद नहीं मिला',
+                            'product-image' => 'उत्पाद छवि',
+                            'qty'           => 'मात्रा',
+                            'sku'           => 'एसकेयू - :sku',
+                            'title'         => 'उत्पाद खोजें',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => 'पता जोड़ें',
+                        'add-new'          => 'नया पता जोड़ें',
+                        'add-new-address'  => 'नया पता जोड़ें',
+                        'addresses'        => 'पते',
+                        'back'             => 'वापस',
+                        'billing-address'  => 'बिलिंग पता',
+                        'city'             => 'शहर',
+                        'company-name'     => 'कंपनी का नाम',
+                        'confirm'          => 'पुष्टि करें',
+                        'country'          => 'देश',
+                        'edit-btn'         => 'पता संपादित करें',
+                        'email'            => 'ईमेल',
+                        'first-name'       => 'पहला नाम',
+                        'last-name'        => 'अंतिम नाम',
+                        'postcode'         => 'पिनकोड',
+                        'proceed'          => 'आगे बढ़ें',
+                        'same-as-billing'  => 'शिपिंग के लिए एक ही पता उपयोग करें?',
+                        'save'             => 'सहेजें',
+                        'save-address'     => 'इसे पता पुस्तिका में सहेजें',
+                        'select-country'   => 'देश चुनें',
+                        'select-state'     => 'राज्य चुनें',
+                        'shipping-address' => 'शिपिंग पता',
+                        'state'            => 'राज्य',
+                        'street-address'   => 'सड़क का पता',
+                        'telephone'        => 'टेलीफोन',
+                        'title'            => 'पता',
+                        'vat-id'           => 'वैट आईडी',
+                    ],
+
+                    'payment' => [
+                        'title' => 'भुगतान',
+                    ],
+
+                    'shipping' => [
+                        'title' => 'शिपिंग',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'कूपन लागू करें',
+                        'discount-amount' => 'छूट राशि',
+                        'enter-your-code' => 'अपना कोड दर्ज करें',
+                        'grand-total'     => 'कुल योग',
+                        'place-order'     => 'आदेश दें',
+                        'processing'      => 'प्रोसेसिंग',
+                        'shipping-amount' => 'शिपिंग राशि',
+                        'sub-total'       => 'उप कुल',
+                        'tax'             => 'कर',
+                        'title'           => 'आदेश सारांश',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'कार्ट में जोड़ें',
+                    'delete'            => 'हटाएं',
+                    'empty-description' => 'आपके कार्ट में कोई आइटम नहीं मिला।',
+                    'empty-title'       => 'खाली कार्ट',
+                    'see-details'       => 'विवरण देखें',
+                    'sku'               => 'एसकेयू - :sku',
+                    'title'             => 'कार्ट आइटम',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'कार्ट में जोड़ें',
+                    'empty-description' => 'आपके हाल के आदेशों में कोई आइटम नहीं मिला।',
+                    'empty-title'       => 'खाली आदेश',
+                    'see-details'       => 'विवरण देखें',
+                    'sku'               => 'एसकेयू - :sku',
+                    'title'             => 'हाल के आदेश आइटम',
+                    'view'              => 'देखें',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'कार्ट में जोड़ें',
+                    'delete'            => 'हटाएं',
+                    'empty-description' => 'आपकी विशलिस्ट में कोई आइटम नहीं मिला।',
+                    'empty-title'       => 'खाली विशलिस्ट आइटम',
+                    'see-details'       => 'विवरण देखें',
+                    'sku'               => 'एसकेयू - :sku',
+                    'title'             => 'विशलिस्ट आइटम',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'कार्ट में जोड़ें',
+                    'delete'            => 'हटाएं',
+                    'empty-description' => 'आपकी तुलना सूची में कोई आइटम नहीं मिला।',
+                    'empty-title'       => 'खाली तुलना आइटम',
+                    'sku'               => 'एसकेयू - :sku',
+                    'title'             => 'तुलना आइटम',
                 ],
             ],
 
@@ -211,6 +373,7 @@ return [
                 'refund'                => 'वापसी',
                 'refund-id'             => 'वापसी #:refund',
                 'refunded'              => 'वापसी की गई',
+                'reorder'               => 'पुनः क्रमबद्ध करें',
                 'ship'                  => 'भेजें',
                 'shipment'              => 'भेजा गया #:shipment',
                 'shipments'             => 'भेजवाने',
@@ -900,6 +1063,7 @@ return [
                 'position'              => 'स्थिति',
                 'price'                 => 'मूल्य',
                 'regex'                 => 'रेगेक्स',
+                'regex-info'            => 'व्यक्ति दोहरे उद्धरण में होना चाहिए।',
                 'save-btn'              => 'गुण सहेजें',
                 'select'                => 'चयन',
                 'select-type'           => 'विशेषता प्रकार चुनें',
@@ -963,6 +1127,7 @@ return [
                 'position'              => 'स्थिति',
                 'price'                 => 'मूल्य',
                 'regex'                 => 'रेगेक्स',
+                'regex-info'            => 'व्यक्ति दोहरे उद्धरण द्वारा अभिव्यक्ति होनी चाहिए।',
                 'save-btn'              => 'गुण सहेजें',
                 'select'                => 'चयन',
                 'select-type'           => 'विशेषता प्रकार चुनें',
@@ -1228,11 +1393,12 @@ return [
                 'active'                      => 'सक्रिय',
                 'address-delete-confirmation' => 'क्या आप निश्चित हैं कि आप इस पते को हटाना चाहते हैं?',
                 'back-btn'                    => 'पीछे जाएं',
+                'create-order'                => 'आदेश बनाएं',
                 'customer'                    => 'ग्राहक',
                 'date-of-birth'               => 'जन्मतिथि - :dob',
                 'default-address'             => 'डिफ़ॉल्ट पता',
-                'delete'                      => 'हटाएं',
                 'delete-account'              => 'खाता हटाएं',
+                'delete'                      => 'हटाएं',
                 'email'                       => 'ईमेल - :email',
                 'empty-description'           => 'ग्राहक के लिए नए पते बनाएं',
                 'empty-title'                 => 'ग्राहक पता जोड़ें',
@@ -1241,6 +1407,7 @@ return [
                 'inactive'                    => 'निष्क्रिय',
                 'login-as-customer'           => 'ग्राहक के रूप में लॉगिन करें',
                 'note-created-success'        => 'नोट सफलतापूर्वक बनाया गया',
+                'order-create-confirmation'   => 'क्या आप निश्चित हैं कि आप इस ग्राहक के लिए आदेश बनाना चाहते हैं?',
                 'phone'                       => 'फ़ोन - :phone',
                 'set-as-default'              => 'डिफ़ॉल्ट के रूप में सेट करें',
                 'suspended'                   => 'सस्पेंड',
@@ -1364,8 +1531,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'चालान (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'चालान (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1379,14 +1546,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'ऑर्डर (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'कुल राजस्व - :revenue',
+                    'count'         => 'ऑर्डर (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'कुल राजस्व - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'आईडी - :id',
-                    'count'       => 'समीक्षाएँ (:count)',
+                    'id'    => 'आईडी - :id',
+                    'count' => 'समीक्षाएँ (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'कार्ट आइटम सफलतापूर्वक हटा दिया गया।',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'विशलिस्ट आइटम सफलतापूर्वक हटा दिया गया।',
+                ],
+
+                'compare' => [
+                    'delete-success' => 'कंपेयर आइटम सफलतापूर्वक हटा दिया गया।',
                 ],
             ],
 
@@ -2158,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name पहले से ले लिया गया है।',
-            'create-btn'        => 'पेज बनाएं',
-            'title'             => 'पेज',
+            'already-taken' => 'यह :name पहले से ही लिया जा चुका है।',
+            'create-btn'    => 'पेज बनाएं',
+            'channel'       => 'चैनल',
+            'language'      => 'भाषा',
+            'title'         => 'पेज',
 
             'datagrid' => [
                 'delete'              => 'हटाएं',
@@ -2605,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'पीछे',
-                    'basic-settings' => 'मूल सेटिंग्स',
                     'country'        => 'देश',
                     'identifier'     => 'पहचानकर्ता',
                     'save-btn'       => 'कर दर सहेजें',
                     'select-country' => 'देश चुनें',
                     'select-state'   => 'राज्य चुनें',
+                    'settings'       => 'सेटिंग्स',
                     'state'          => 'राज्य',
                     'tax-rate'       => 'दर',
                     'title'          => 'कर दर संपादित करें',
@@ -3418,6 +3599,10 @@ return [
                     'admin-name'            => 'व्यवस्थापक का नाम',
                     'admin-name-tip'        => 'यह नाम सभी व्यवस्थापक ईमेल में प्रदर्शित किया जाएगा',
                     'admin-page-limit'      => 'पृष्ठ प्रति डिफ़ॉल्ट आइटम (व्यवस्थापक)',
+                    'contact-email'         => 'संपर्क ईमेल',
+                    'contact-email-tip'     => 'यह ईमेल पता आपके ईमेलों के निचले हिस्से में दिखाया जाएगा',
+                    'contact-name'          => 'संपर्क नाम',
+                    'contact-name-tip'      => 'यह नाम आपके ईमेलों के निचले हिस्से में दिखाई देगा',
                     'email-sender-name'     => 'ईमेल भेजने वाले का नाम',
                     'email-sender-name-tip' => 'यह नाम ग्राहक के इनबॉक्स में प्रदर्शित किया जाएगा',
                     'info'                  => 'ईमेल भेजने वाले का नाम, दुकान ईमेल पता, व्यवस्थापक का नाम, और व्यवस्थापक ईमेल पता सेट करें।',

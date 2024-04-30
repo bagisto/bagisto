@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Uw bestelling is geannuleerd',
                     'page-title'         => 'Bestelling #:order_id',
                     'payment-method'     => 'Betalingsmethode',
+                    'reorder-btn-title'  => 'Herordenen',
                     'shipping-address'   => 'Verzendadres',
                     'shipping-method'    => 'Verzendmethode',
                     'title'              => 'Bekijken',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Zoek hier producten',
                 'sign-in'           => 'Inloggen',
                 'sign-up'           => 'Aanmelden',
+                'submit'            => 'Verzenden',
                 'title'             => 'Account',
                 'welcome'           => 'Welkom',
                 'welcome-guest'     => 'Welkom Gast',
                 'wishlist'          => 'Verlanglijst',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Standaard taal',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -368,52 +376,44 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Selecteer Actie',
-                    'select-option' => 'Selecteer Optie',
-                    'submit'        => 'Verzenden',
-                ],
+                'length-of' => ':length van',
+                'results'   => ':total Resultaten',
+                'selected'  => ':total Geselecteerd',
 
-                'filter' => [
-                    'title' => 'Filter',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'U moet een massa-actie selecteren.',
+                    'must-select-a-mass-action-option' => 'U moet een optie voor massa-actie selecteren.',
+                    'no-records-selected'              => 'Er zijn geen records geselecteerd.',
+                    'select-action'                    => 'Selecteer Actie',
                 ],
 
                 'search' => [
                     'title' => 'Zoeken',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Filters toepassen',
+                'filter' => [
+                    'apply-filter' => 'Filters Toepassen',
+                    'title'        => 'Filteren',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'Typ minimaal 2 tekens...',
-                        'no-results'        => 'Geen resultaten gevonden...',
+                    'dropdown' => [
+                        'select' => 'Selecteren',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'Typ minimaal 2 tekens...',
+                            'no-results'         => 'Geen resultaat gevonden...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Alles wissen',
-                    'title'     => 'Aangepaste filters',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Vorige maand',
-                    'last-six-months'   => 'Laatste 6 maanden',
-                    'last-three-months' => 'Laatste 3 maanden',
-                    'this-month'        => 'Deze maand',
-                    'this-week'         => 'Deze week',
-                    'this-year'         => 'Dit jaar',
-                    'today'             => 'Vandaag',
-                    'yesterday'         => 'Gisteren',
+                    'custom-filters' => [
+                        'clear-all' => 'Alles wissen',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'Acties',
                 'next-page'            => 'Volgende Pagina',
-                'no-records-available' => 'Geen records beschikbaar.',
+                'no-records-available' => 'Geen Records Beschikbaar.',
                 'of'                   => 'van :total items',
                 'page-navigation'      => 'Pagina Navigatie',
                 'page-number'          => 'Paginanummer',
@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Geen',
+                    'none'         => 'Geen',
+                    'total-amount' => 'Totaalbedrag',
                 ],
 
                 'downloadable' => [
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Ga verder naar afrekenen',
             'illegal'                   => 'De hoeveelheid kan niet minder zijn dan één.',
+            'inactive-add'              => 'Inactief item kan niet aan winkelwagen worden toegevoegd.',
             'inactive'                  => 'Het item is gedeactiveerd en vervolgens uit de winkelwagen verwijderd.',
             'inventory-warning'         => 'De aangevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
             'item-add-to-cart'          => 'Item succesvol toegevoegd',
@@ -676,6 +678,16 @@ return [
                 'proceed-to-checkout' => 'Ga naar afrekenen',
                 'sub-total'           => 'Subtotaal',
                 'tax'                 => 'Belasting',
+
+                'estimate-shipping' => [
+                    'country'        => 'Land',
+                    'info'           => 'Voer uw bestemming in om een schatting te krijgen van de verzend- en belastingkosten.',
+                    'postcode'       => 'Postcode',
+                    'select-country' => 'Selecteer land',
+                    'select-state'   => 'Selecteer provincie',
+                    'state'          => 'Provincie',
+                    'title'          => 'Verzend- en belastingkosten schatten',
+                ],
             ],
         ],
 
@@ -756,11 +768,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Stuur ons een bericht en we zullen zo snel mogelijk reageren',
+            'desc'          => 'Waar denk je aan?',
+            'describe-here' => 'Beschrijf hier',
+            'email'         => 'E-mail',
+            'message'       => 'Bericht',
+            'name'          => 'Naam',
+            'phone-number'  => 'Telefoonnummer',
+            'submit'        => 'Verzenden',
+            'title'         => 'Neem contact met ons op',
+        ],
+
         'index' => [
             'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email'        => 'Verifieer je e-mailaccount',
         ],
+
+        'thanks-for-contact' => 'Bedankt voor het contact met ons opnemen met uw opmerkingen en vragen. We zullen spoedig reageren.',
     ],
 
     'partials' => [
@@ -860,6 +886,14 @@ return [
                 'subject'     => 'Je! Abonneer je op onze nieuwsbrief',
                 'unsubscribe' => 'Afmelden',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'via het contactformulier op de website',
+            'reply-to-mail'   => 'antwoord alstublieft op deze e-mail.',
+            'reach-via-phone' => 'U kunt ons ook telefonisch bereiken op',
+            'inquiry-from'    => 'Vraag van',
+            'to'              => 'Om contact op te nemen met',
         ],
 
         'orders' => [

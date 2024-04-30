@@ -36,6 +36,8 @@ return [
         'description-text' => 'Listar todas as notificações',
         'marked-success'   => 'Notificação Marcada com Sucesso',
         'no-record'        => 'Nenhum Registro Encontrado',
+        'of'               => 'de',
+        'per-page'         => 'Por página',
         'read-all'         => 'Marcar como Lido',
         'title'            => 'Notificações',
         'view-all'         => 'Ver Todas',
@@ -47,15 +49,6 @@ return [
             'pending'         => 'Pedido Pendente',
             'pending-payment' => 'Pagamento Pendente',
             'processing'      => 'Pedido em Processamento',
-        ],
-
-        'status' => [
-            'all'        => 'Todos',
-            'canceled'   => 'Cancelado',
-            'closed'     => 'Fechado',
-            'completed'  => 'Concluído',
-            'pending'    => 'Pendente',
-            'processing' => 'Processamento',
         ],
     ],
 
@@ -134,7 +127,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'Pedidos',
+                'create-btn' => 'Criar Pedido',
+                'title'      => 'Pedidos',
+
+                'search-customer' => [
+                    'create-btn'  => 'Criar Cliente',
+                    'empty-info'  => 'Nenhum cliente disponível para o termo de pesquisa.',
+                    'empty-title' => 'Nenhum cliente encontrado',
+                    'search-by'   => 'Pesquisar por email ou nome',
+                    'title'       => 'Selecionar Cliente',
+                ],
 
                 'datagrid' => [
                     'canceled'        => 'Cancelado',
@@ -152,13 +154,173 @@ return [
                     'order-id'        => 'ID do Pedido',
                     'pay-by'          => 'Pagar Por - :method',
                     'pay-via'         => 'Pagar Via',
-                    'pending'         => 'Pendente',
                     'pending-payment' => 'Pagamento Pendente',
+                    'pending'         => 'Pendente',
                     'processing'      => 'Processando',
                     'product-count'   => ':count + Mais produtos',
                     'status'          => 'Status',
                     'success'         => 'Sucesso',
                     'view'            => 'Visualizar',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'Adicionar ao Carrinho',
+                'back-btn'                => 'Voltar',
+                'check-billing-address'   => 'Endereço de cobrança está faltando.',
+                'check-shipping-address'  => 'Endereço de entrega está faltando.',
+                'configuration'           => 'Configuração',
+                'coupon-already-applied'  => 'Código do cupom já aplicado.',
+                'coupon-applied'          => 'Código do cupom aplicado com sucesso.',
+                'coupon-error'            => 'Não foi possível aplicar o código do cupom.',
+                'coupon-not-found'        => 'Cupom não encontrado',
+                'coupon-remove'           => 'Código do cupom removido com sucesso.',
+                'error'                   => 'Algo deu errado',
+                'minimum-order-error'     => 'O valor mínimo do pedido não foi atingido.',
+                'order-placed-success'    => 'Pedido realizado com sucesso.',
+                'payment-not-supported'   => 'Este método de pagamento não é suportado',
+                'save-btn'                => 'Criar Pedido',
+                'specify-payment-method'  => 'Método de pagamento está faltando.',
+                'specify-shipping-method' => 'Método de entrega está faltando.',
+                'title'                   => 'Criar Pedido para :name',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'Por favor, selecione uma opção',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'Nenhum',
+                        'total-amount' => 'Valor Total',
+                    ],
+
+                    'grouped' => [
+                        'name' => 'Nome',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'Links',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => 'Produto adicionado ao carrinho com sucesso',
+                    'success-remove'      => 'Item removido do carrinho com sucesso',
+                    'success-update'      => 'Item do carrinho atualizado com sucesso',
+
+                    'items' => [
+                        'add-product'       => 'Adicionar Produto',
+                        'amount-per-unit'   => ':amount Por Unidade x :qty Quantidade',
+                        'delete'            => 'Excluir',
+                        'empty-description' => 'Nenhum item encontrado no seu carrinho.',
+                        'empty-title'       => 'Carrinho Vazio',
+                        'move-to-wishlist'  => 'Mover para a Lista de Desejos',
+                        'see-details'       => 'Ver Detalhes',
+                        'sku'               => 'SKU - :sku',
+                        'sub-total'         => 'Subtotal - :sub_total',
+                        'title'             => 'Itens do Carrinho',
+
+                        'search' => [
+                            'add-to-cart'   => 'Adicionar ao Carrinho',
+                            'available-qty' => ':qty Disponível',
+                            'empty-info'    => 'Nenhum produto disponível para o termo de pesquisa.',
+                            'empty-title'   => 'Nenhum produto encontrado',
+                            'product-image' => 'Imagem do Produto',
+                            'qty'           => 'Quantidade',
+                            'sku'           => 'SKU - :sku',
+                            'title'         => 'Pesquisar Produtos',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => 'Adicionar Endereço',
+                        'add-new'          => 'Adicionar novo endereço',
+                        'add-new-address'  => 'Adicionar novo endereço',
+                        'addresses'        => 'Endereços',
+                        'back'             => 'Voltar',
+                        'billing-address'  => 'Endereço de Cobrança',
+                        'city'             => 'Cidade',
+                        'company-name'     => 'Nome da Empresa',
+                        'confirm'          => 'Confirmar',
+                        'country'          => 'País',
+                        'edit-btn'         => 'Editar Endereço',
+                        'email'            => 'Email',
+                        'first-name'       => 'Nome',
+                        'last-name'        => 'Sobrenome',
+                        'postcode'         => 'CEP',
+                        'proceed'          => 'Continuar',
+                        'same-as-billing'  => 'Usar o mesmo endereço para entrega?',
+                        'save'             => 'Salvar',
+                        'save-address'     => 'Salvar este endereço',
+                        'select-country'   => 'Selecionar País',
+                        'select-state'     => 'Selecionar Estado',
+                        'shipping-address' => 'Endereço de Entrega',
+                        'state'            => 'Estado',
+                        'street-address'   => 'Endereço',
+                        'telephone'        => 'Telefone',
+                        'title'            => 'Endereço',
+                        'vat-id'           => 'NIF',
+                    ],
+
+                    'payment' => [
+                        'title' => 'Pagamento',
+                    ],
+
+                    'shipping' => [
+                        'title' => 'Entrega',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'Aplicar Cupom',
+                        'discount-amount' => 'Valor do Desconto',
+                        'enter-your-code' => 'Digite o código',
+                        'grand-total'     => 'Total Geral',
+                        'place-order'     => 'Finalizar Pedido',
+                        'processing'      => 'Processando',
+                        'shipping-amount' => 'Valor do Frete',
+                        'sub-total'       => 'Subtotal',
+                        'tax'             => 'Imposto',
+                        'title'           => 'Resumo do Pedido',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'Adicionar ao Carrinho',
+                    'delete'            => 'Excluir',
+                    'empty-description' => 'Nenhum item encontrado no seu carrinho.',
+                    'empty-title'       => 'Carrinho Vazio',
+                    'see-details'       => 'Ver Detalhes',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Itens do Carrinho',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'Adicionar ao Carrinho',
+                    'empty-description' => 'Nenhum item encontrado nos seus pedidos recentes.',
+                    'empty-title'       => 'Pedidos Vazios',
+                    'see-details'       => 'Ver Detalhes',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Itens dos Pedidos Recentes',
+                    'view'              => 'Visualizar',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'Adicionar ao Carrinho',
+                    'delete'            => 'Excluir',
+                    'empty-description' => 'Nenhum item encontrado na sua lista de desejos.',
+                    'empty-title'       => 'Itens da Lista de Desejos Vazios',
+                    'see-details'       => 'Ver Detalhes',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Itens da Lista de Desejos',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'Adicionar ao Carrinho',
+                    'delete'            => 'Excluir',
+                    'empty-description' => 'Nenhum item encontrado na sua lista de comparação.',
+                    'empty-title'       => 'Itens da Lista de Comparação Vazios',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Itens da Lista de Comparação',
                 ],
             ],
 
@@ -211,6 +373,7 @@ return [
                 'refund'                => 'Reembolso',
                 'refund-id'             => 'Reembolso #:refund',
                 'refunded'              => 'Reembolsado',
+                'reorder'               => 'Reorganizar',
                 'ship'                  => 'Enviar',
                 'shipment'              => 'Remessa #:shipment',
                 'shipments'             => 'Remessas',
@@ -900,6 +1063,7 @@ return [
                 'position'              => 'Posição',
                 'price'                 => 'Preço',
                 'regex'                 => 'Expressão Regular (Regex)',
+                'regex-info'            => 'A expressão deve estar entre aspas duplas.',
                 'save-btn'              => 'Salvar Atributo',
                 'select'                => 'Seleção',
                 'select-type'           => 'Selecionar Tipo de Atributo',
@@ -963,6 +1127,7 @@ return [
                 'position'              => 'Posição',
                 'price'                 => 'Preço',
                 'regex'                 => 'Expressão Regular (Regex)',
+                'regex-info'            => 'A expressão deve estar entre aspas duplas.',
                 'save-btn'              => 'Salvar Atributo',
                 'select'                => 'Seleção',
                 'select-type'           => 'Selecionar Tipo de Atributo',
@@ -1228,11 +1393,12 @@ return [
                 'active'                      => 'Ativo',
                 'address-delete-confirmation' => 'Tem certeza de que deseja excluir este endereço?',
                 'back-btn'                    => 'Voltar',
+                'create-order'                => 'Criar Pedido',
                 'customer'                    => 'Cliente',
                 'date-of-birth'               => 'Nasc. - :dob',
                 'default-address'             => 'Endereço Padrão',
-                'delete'                      => 'Excluir',
                 'delete-account'              => 'Excluir Conta',
+                'delete'                      => 'Excluir',
                 'email'                       => 'E-mail - :email',
                 'empty-description'           => 'Criar novos endereços para o cliente',
                 'empty-title'                 => 'Adicionar Endereço do Cliente',
@@ -1241,6 +1407,7 @@ return [
                 'inactive'                    => 'Inativo',
                 'login-as-customer'           => 'Login como cliente',
                 'note-created-success'        => 'Nota criada com sucesso',
+                'order-create-confirmation'   => 'Tem certeza de que deseja criar um pedido para este cliente?',
                 'phone'                       => 'Telefone - :phone',
                 'set-as-default'              => 'Definir como padrão',
                 'suspended'                   => 'Suspenso',
@@ -1364,8 +1531,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'Faturas (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'Faturas (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1379,14 +1546,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'Pedidos (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'Receita Total - :revenue',
+                    'count'         => 'Pedidos (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'Receita Total - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'ID - :id',
-                    'count'       => 'Avaliações (:count)',
+                    'id'    => 'ID - :id',
+                    'count' => 'Avaliações (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'Item do carrinho removido com sucesso.',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'Item da lista de desejos removido com sucesso.',
+                ],
+
+                'compare' => [
+                    'delete-success' => 'Item de comparação removido com sucesso.',
                 ],
             ],
 
@@ -2158,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => 'O :name já está em uso.',
-            'create-btn'        => 'Criar Página',
-            'title'             => 'Páginas',
+            'already-taken' => 'O :name já foi utilizado.',
+            'create-btn'    => 'Criar Página',
+            'channel'       => 'Canal',
+            'language'      => 'Idioma',
+            'title'         => 'Páginas',
 
             'datagrid' => [
                 'delete'              => 'Excluir',
@@ -2605,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Voltar',
-                    'basic-settings' => 'Configurações Básicas',
                     'country'        => 'País',
                     'identifier'     => 'Identificador',
                     'save-btn'       => 'Salvar Taxa de Imposto',
                     'select-country' => 'Selecionar País',
                     'select-state'   => 'Selecionar Estado',
+                    'settings'       => 'Configurações',
                     'state'          => 'Estado',
                     'tax-rate'       => 'Taxa',
                     'title'          => 'Editar Taxa de Imposto',
@@ -3418,6 +3599,10 @@ return [
                     'admin-name'             => 'Nome do Admin',
                     'admin-name-tip'         => 'Este nome será exibido em todos os e-mails do admin',
                     'admin-page-limit'       => 'Itens por Página Padrão (Admin)',
+                    'contact-email'          => 'E-mail de Contato',
+                    'contact-email-tip'      => 'O endereço de e-mail será mostrado no final de seus e-mails',
+                    'contact-name'           => 'Nome de Contato',
+                    'contact-name-tip'       => 'Este nome será mostrado no final de seus e-mails',
                     'email-sender-name'      => 'Nome do Remetente de E-mail',
                     'email-sender-name-tip'  => 'Este nome será exibido na caixa de entrada do cliente',
                     'info'                   => 'Defina o nome do remetente de e-mail, o endereço de e-mail da loja, o nome do admin e o endereço de e-mail do admin.',

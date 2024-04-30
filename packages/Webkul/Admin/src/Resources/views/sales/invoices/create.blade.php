@@ -1,11 +1,9 @@
 <!-- Invoice Create Vue Component -->
 <v-create-invoices>
-    <div
-        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
-    >
-        <span class="icon-sales text-2xl"></span> 
+    <div class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+        <span class="icon-sales text-2xl"></span>
 
-        @lang('admin::app.sales.invoices.create.invoice')     
+        @lang('admin::app.sales.invoices.create.invoice')
     </div>
 </v-create-invoices>
 
@@ -16,7 +14,7 @@
     >
         <div>
             <div
-                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
+                class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                     @click="$refs.invoice.open()"
                 >
                     <span
@@ -36,8 +34,8 @@
                 <x-admin::drawer ref="invoice">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid gap-3 h-8">
-                            <div class="flex justify-between items-center">
+                        <div class="grid h-8 gap-3">
+                            <div class="flex items-center justify-between">
                                 <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.invoices.create.new-invoice')         
                                 </p>
@@ -45,7 +43,7 @@
                                 @if (bouncer()->hasPermission('sales.invoices.create'))
                                     <button
                                         type="submit"
-                                        class="ltr:mr-11 rtl:ml-11 primary-button"
+                                        class="primary-button ltr:mr-11 rtl:ml-11"
                                     >
                                         @lang('admin::app.sales.invoices.create.create-invoice')        
                                     </button>
@@ -59,29 +57,29 @@
                         <div class="grid p-4 !pt-0">
                             @foreach ($order->items as $item)
                                 @if ($item->qty_to_invoice)
-                                    <div class="flex gap-2.5 justify-between py-4 border-b border-slate-300 dark:border-gray-800">
+                                    <div class="flex justify-between gap-2.5 border-b border-slate-300 py-4 dark:border-gray-800">
                                         <div class="flex gap-2.5">
                                             @if ($item->product?->base_image_url)
                                                 <img
-                                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
+                                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
                                                     src="{{ $item->product?->base_image_url }}"
                                                 />
                                             @else
-                                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
+                                                <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                     
-                                                    <p class="absolute w-full bottom-1.5 text-[6px] text-gray-400 text-center font-semibold"> 
+                                                    <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400"> 
                                                         @lang('admin::app.sales.invoices.create.product-image')
                                                     </p>
                                                 </div>
                                             @endif
             
-                                            <div class="grid gap-1.5 place-content-start">
-                                                <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                            <div class="grid place-content-start gap-1.5">
+                                                <p class="text-base font-semibold text-gray-800 dark:text-white">
                                                     {{ $item->name }}
                                                 </p>
             
-                                                <div class="flex flex-col gap-1.5 place-items-start">
+                                                <div class="flex flex-col place-items-start gap-1.5">
                                                     <p class="text-gray-600 dark:text-gray-300">
                                                         @lang('admin::app.sales.invoices.create.amount-per-unit', [
                                                             'amount' => core()->formatBasePrice($item->base_price),
@@ -128,7 +126,7 @@
                             @endforeach
 
                             <!-- Create Transaction Button -->
-                            <x-admin::form.control-group class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
+                            <x-admin::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5 p-1.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="can_create_transaction"
@@ -139,7 +137,7 @@
 
                                 <label
                                     for="can_create_transaction"
-                                    class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                    class="cursor-pointer !text-sm !font-semibold !text-gray-600 dark:!text-gray-300"
                                 >
                                     @lang('admin::app.sales.invoices.create.create-transaction')
                                 </label>

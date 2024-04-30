@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'تم إلغاء طلبك بنجاح',
                     'page-title'         => 'الطلب #:order_id',
                     'payment-method'     => 'طريقة الدفع',
+                    'reorder-btn-title'  => 'إعادة ترتيب',
                     'shipping-address'   => 'عنوان الشحن',
                     'shipping-method'    => 'طريقة الشحن',
                     'title'              => 'عرض',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'ابحث عن المنتجات هنا',
                 'sign-in'           => 'تسجيل الدخول',
                 'sign-up'           => 'سجل',
+                'submit'            => 'إرسال',
                 'title'             => 'الحساب',
                 'welcome'           => 'مرحبًا',
                 'welcome-guest'     => 'مرحبًا بكم زائرًا',
                 'wishlist'          => 'قائمة المفضلة',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'اللغة الافتراضية',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -368,57 +376,49 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'حدد الإجراء',
-                    'select-option' => 'اختر الخيار',
-                    'submit'        => 'إرسال',
-                ],
+                'length-of' => ':طول',
+                'results'   => ':إجمالي النتائج',
+                'selected'  => ':محددة النتائج',
 
-                'filter' => [
-                    'title' => 'تصفية',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'يجب عليك تحديد إجراء جماعي.',
+                    'must-select-a-mass-action-option' => 'يجب عليك تحديد خيار الإجراء الجماعي.',
+                    'no-records-selected'              => 'لم يتم تحديد أي سجلات.',
+                    'select-action'                    => 'اختر إجراء',
                 ],
 
                 'search' => [
-                    'title' => 'بحث',
+                    'title' => 'البحث',
                 ],
-            ],
 
-            'filters' => [
-                'title'          => 'تطبيق الفلاتر',
+                'filter' => [
+                    'apply-filter' => 'تطبيق الفلاتر',
+                    'title'        => 'الفلتر',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'اكتب ما لا يقل عن حرفين...',
-                        'no-results'        => 'لم يتم العثور على نتائج...',
+                    'dropdown' => [
+                        'select' => 'اختر',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'اكتب ما لا يقل عن 2 حرفًا...',
+                            'no-results'         => 'لم يتم العثور على نتائج...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'امسح الكل',
-                    'title'     => 'تصفيات مخصصة',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'الشهر الماضي',
-                    'last-six-months'   => 'آخر 6 أشهر',
-                    'last-three-months' => 'آخر 3 أشهر',
-                    'this-month'        => 'هذا الشهر',
-                    'this-week'         => 'هذا الأسبوع',
-                    'this-year'         => 'هذا العام',
-                    'today'             => 'اليوم',
-                    'yesterday'         => 'أمس',
+                    'custom-filters' => [
+                        'clear-all' => 'مسح الكل',
+                    ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'إجراءات',
+                'actions'              => 'الإجراءات',
                 'next-page'            => 'الصفحة التالية',
-                'no-records-available' => 'لا تتوفر سجلات.',
-                'of'                   => 'من :total إدخالات',
+                'no-records-available' => 'لا توجد سجلات متاحة.',
+                'of'                   => 'من :إجمالي الإدخالات',
                 'page-navigation'      => 'تنقل الصفحة',
                 'page-number'          => 'رقم الصفحة',
                 'previous-page'        => 'الصفحة السابقة',
-                'showing'              => 'يتم عرض :firstItem',
+                'showing'              => 'عرض :firstItem',
                 'to'                   => 'إلى :lastItem',
             ],
         ],
@@ -484,7 +484,8 @@ return [
         ],
 
         'sort-by' => [
-            'title'   => 'ترتيب حسب',
+            'title'        => 'ترتيب حسب',
+            'total-amount' => 'إجمالي المبلغ',
         ],
 
         'view' => [
@@ -612,8 +613,9 @@ return [
         ],
 
         'cart' => [
-            'continue-to-checkout'      => 'Continue to Checkout',
+            'continue-to-checkout'      => 'المتابعة إلى الدفع',
             'illegal'                   => 'الكمية لا يمكن أن تكون أقل من واحدة.',
+            'inactive-add'              => 'لا يمكن إضافة المنتج الغير نشط إلى السلة.',
             'inactive'                  => 'تم إلغاء تنشيط المنتج وبالتالي إزالته من السلة.',
             'inventory-warning'         => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
             'item-add-to-cart'          => 'تمت إضافة العنصر بنجاح',
@@ -676,6 +678,16 @@ return [
                 'proceed-to-checkout' => 'المتابعة للسداد',
                 'sub-total'           => 'المجموع الفرعي',
                 'tax'                 => 'الضريبة',
+
+                'estimate-shipping' => [
+                    'country'        => 'الدولة',
+                    'info'           => 'أدخل وجهتك للحصول على تقدير لتكلفة التوصيل والضرائب.',
+                    'postcode'       => 'الرمز البريدي',
+                    'select-country' => 'اختر الدولة',
+                    'select-state'   => 'اختر الولاية',
+                    'state'          => 'الولاية',
+                    'title'          => 'تقدير التوصيل والضرائب',
+                ],
             ],
         ],
 
@@ -756,11 +768,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'أكتب لنا ملاحظة وسنعود إليك في أقرب وقت ممكن',
+            'desc'          => 'ما الذي يجول في ذهنك؟',
+            'describe-here' => 'صف هنا',
+            'email'         => 'البريد الإلكتروني',
+            'message'       => 'الرسالة',
+            'name'          => 'الاسم',
+            'phone-number'  => 'رقم الهاتف',
+            'submit'        => 'إرسال',
+            'title'         => 'اتصل بنا',
+        ],
+
         'index' => [
             'offer'               => 'احصل على خصم يصل إلى 40٪ على طلبك الأول اشتر الآن',
             'resend-verify-email' => 'إعادة إرسال رسالة التحقق من البريد الإلكتروني',
             'verify-email'        => 'تحقق من حساب بريدك الإلكتروني',
         ],
+
+        'thanks-for-contact' => 'شكرًا للتواصل معنا بتعليقاتك وأسئلتك. سنرد عليك قريبًا جدًا.',
     ],
 
     'partials' => [
@@ -860,6 +886,14 @@ return [
                 'subject'     => 'أنت مشترك في نشرتنا الإخبارية',
                 'unsubscribe' => 'إلغاء الاشتراك',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'عبر نموذج الاتصال بالموقع',
+            'reply-to-mail'   => 'يرجى الرد على هذا البريد الإلكتروني.',
+            'reach-via-phone' => 'بالإضافة إلى ذلك، يمكنك الاتصال بنا عبر الهاتف على',
+            'inquiry-from'    => 'استفسار من',
+            'to'              => 'للتواصل مع',
         ],
 
         'orders' => [

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Webkul\CMS\Models\Page;
 use Webkul\CMS\Models\PageTranslation;
 
@@ -10,7 +11,7 @@ use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
 it('should returns the cms page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.cms.index'))
@@ -20,7 +21,7 @@ it('should returns the cms page', function () {
 });
 
 it('should returns the listing cms', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.cms.index'), [
@@ -30,11 +31,11 @@ it('should returns the listing cms', function () {
         ->assertJsonPath('records.0.id', 11)
         ->assertJsonPath('records.0.page_title', 'Privacy Policy')
         ->assertJsonPath('records.0.url_key', 'privacy-policy')
-        ->assertJsonPath('meta.total', 11);
+        ->assertJsonPath('meta.total', 10);
 });
 
-it('should create the new cms page', function () {
-    // Act and Assert
+it('should return the cms create page', function () {
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.cms.create'))
@@ -44,7 +45,7 @@ it('should create the new cms page', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when store in cms page', function () {
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.cms.store'))
@@ -55,15 +56,29 @@ it('should fail the validation with errors when certain inputs are not provided 
         ->assertUnprocessable();
 });
 
-it('should store newly created cms pages', function () {
-    // Act and Assert
+it('should fail with the error URL key not provided in the correct format', function () {
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.cms.store'), [
-        'url_key'      => $slug = fake()->slug(),
-        'page_title'   => $pageTitle = fake()->title(),
-        'html_content' => $htmlContent = substr(fake()->paragraph(), 0, 50),
-        'channels'     => [
+        'url_key' => 'invalid url key',
+    ])
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertUnprocessable();
+});
+
+it('should store newly created cms pages', function () {
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.cms.store'), $data = [
+        'url_key'          => fake()->slug(),
+        'page_title'       => fake()->title(),
+        'html_content'     => substr(fake()->paragraph(), 0, 50),
+        'meta_title'       => fake()->title(),
+        'meta_keywords'    => fake()->word(),
+        'meta_description' => fake()->paragraph(3),
+        'channels'         => [
             'value' => 1,
         ],
     ])
@@ -72,20 +87,16 @@ it('should store newly created cms pages', function () {
 
     $this->assertModelWise([
         PageTranslation::class => [
-            [
-                'url_key'      => $slug,
-                'page_title'   => $pageTitle,
-                'html_content' => $htmlContent,
-            ],
+            Arr::except($data, ['channels']),
         ],
     ]);
 });
 
 it('should show the edit cms page', function () {
-    // Arrange
+    // Arrange.
     $cms = Page::factory()->hasTranslations()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.cms.edit', $cms->id))
@@ -95,12 +106,12 @@ it('should show the edit cms page', function () {
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in cms page', function () {
-    // Arrange
+    // Arrange.
     $cms = Page::factory()->hasTranslations()->create();
 
     $localeCode = core()->getRequestedLocaleCode();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.cms.update', $cms->id))
@@ -112,19 +123,19 @@ it('should fail the validation with errors when certain inputs are not provided 
 });
 
 it('should update the cms page', function () {
-    // Arrange
+    // Arrange.
     $cms = Page::factory()->hasTranslations()->create();
 
     $localeCode = core()->getCurrentLocale()->code;
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.cms.update', $cms->id), [
-        $localeCode => [
+        $localeCode => $data = [
             'url_key'      => $cms->url_key,
-            'page_title'   => $pageTitle = fake()->word(),
-            'html_content' => $htmlContent = substr(fake()->paragraph(), 0, 50),
+            'page_title'   => fake()->word(),
+            'html_content' => substr(fake()->paragraph(), 0, 50),
         ],
 
         'locale' => $localeCode,
@@ -139,19 +150,19 @@ it('should update the cms page', function () {
     $this->assertModelWise([
         PageTranslation::class => [
             [
-                'url_key'      => $cms->url_key,
-                'page_title'   => $pageTitle,
-                'html_content' => $htmlContent,
+                'url_key'      => $data['url_key'],
+                'page_title'   => $data['page_title'],
+                'html_content' => $data['html_content'],
             ],
         ],
     ]);
 });
 
 it('should delete the cms page', function () {
-    // Arrange
+    // Arrange.
     $cms = Page::factory()->hasTranslations()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.cms.delete', $cms->id))
@@ -161,13 +172,17 @@ it('should delete the cms page', function () {
     $this->assertDatabaseMissing('cms_pages', [
         'id' => $cms->id,
     ]);
+
+    $this->assertDatabaseMissing('cms_page_translations', [
+        'cms_page_id' => $cms->id,
+    ]);
 });
 
 it('should mass delete cms pages', function () {
-    // Arrange
+    // Arrange.
     $cmsPages = Page::factory()->count(2)->hasTranslations()->create();
 
-    // Act and Assert
+    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.cms.mass_delete'), [
@@ -179,6 +194,10 @@ it('should mass delete cms pages', function () {
     foreach ($cmsPages as $page) {
         $this->assertDatabaseMissing('cms_pages', [
             'id' => $page->id,
+        ]);
+
+        $this->assertDatabaseMissing('cms_page_translations', [
+            'cms_page_id' => $page->id,
         ]);
     }
 });

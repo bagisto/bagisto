@@ -1,9 +1,7 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.campaigns.create.title')
     </x-slot>
-    
 
     {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.before') !!}
 
@@ -12,23 +10,23 @@
 
         {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.create_form_controls.before') !!}
 
-        <div class="flex justify-between items-center">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.marketing.communications.campaigns.create.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
-                <!-- Cancel Button -->
+            <div class="flex items-center gap-x-2.5">
+                <!-- Back Button -->
                 <a
                     href="{{ route('admin.marketing.communications.campaigns.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                    class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                 >
                     @lang('admin::app.marketing.communications.campaigns.create.back-btn')
                 </a>
 
                 <!-- Save Button -->
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     class="primary-button"
                 >
                     @lang('admin::app.marketing.communications.campaigns.create.save-btn')
@@ -36,15 +34,15 @@
             </div>
         </div>
         <!-- Informations -->
-        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+        <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
             <!-- Left Section -->
-            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.general.before') !!}
 
                 <!-- General Section -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.marketing.communications.campaigns.create.general')
                     </p>
 
@@ -105,8 +103,8 @@
                                 </option>
 
                                 @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
-                                    <option 
-                                        value="{{ $event->id }}" 
+                                    <option
+                                        value="{{ $event->id }}"
                                         {{ old('marketing_event_id') == $event->id ? 'selected' : '' }}
                                     >
                                         {{ $event->name }}
@@ -137,8 +135,8 @@
                                 </option>
 
                                 @foreach ($templates as $template)
-                                    <option 
-                                        value="{{ $template->id }}" 
+                                    <option
+                                        value="{{ $template->id }}"
                                         {{ old('marketing_template_id') == $template->id ? 'selected' : '' }}
                                     >
                                         {{ $template->name }}
@@ -155,18 +153,18 @@
             </div>
 
             <!-- Right Section -->
-            <div class="flex flex-col gap-2 w-[360px] max-w-full max-md:w-full">
+            <div class="flex w-[360px] max-w-full flex-col gap-2 max-md:w-full">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.accordion.setting.before') !!}
 
                 <!-- Setting -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
+                        <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                             @lang('admin::app.marketing.communications.campaigns.create.setting')
                         </p>
                     </x-slot>
-                    
+
                     <x-slot:content>
                         <!-- Channel -->
                         <x-admin::form.control-group>
@@ -188,8 +186,8 @@
                                 </option>
 
                                 @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
-                                    <option 
-                                        value="{{ $channel->id }}" 
+                                    <option
+                                        value="{{ $channel->id }}"
                                         {{ old('channel_id') == $channel->id ? 'selected' : '' }}
                                     >
                                         {{ core()->getChannelName($channel) }}
@@ -220,8 +218,8 @@
                                 </option>
 
                                 @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                    <option 
-                                        value="{{ $customerGroup->id }}" 
+                                    <option
+                                        value="{{ $customerGroup->id }}"
                                         {{ old('customer_group_id') == $customerGroup->id ? 'selected' : '' }}
                                     >
                                         {{ $customerGroup->name }}

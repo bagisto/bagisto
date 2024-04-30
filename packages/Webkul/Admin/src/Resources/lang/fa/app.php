@@ -36,6 +36,8 @@ return [
         'description-text' => 'لیست کل اعلان‌ها',
         'marked-success'   => 'اعلان با موفقیت علامت‌گذاری شد',
         'no-record'        => 'هیچ رکوردی یافت نشد',
+        'of'               => 'از',
+        'per-page'         => 'در هر صفحه',
         'read-all'         => 'علامت خوانده شده',
         'title'            => 'اعلان‌ها',
         'view-all'         => 'مشاهده همه',
@@ -47,15 +49,6 @@ return [
             'pending'         => 'سفارش در انتظار',
             'pending-payment' => 'در انتظار پرداخت',
             'processing'      => 'سفارش در حال پردازش',
-        ],
-
-        'status'  => [
-            'all'        => 'همه',
-            'canceled'   => 'کنسل شده',
-            'closed'     => 'بسته شده',
-            'completed'  => 'تکمیل شده',
-            'pending'    => 'در انتظار',
-            'processing' => 'در حال پردازش',
         ],
     ],
 
@@ -134,7 +127,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'سفارش‌ها',
+                'create-btn' => 'ایجاد سفارش',
+                'title'      => 'سفارش‌ها',
+
+                'search-customer' => [
+                    'create-btn'  => 'ایجاد مشتری',
+                    'empty-info'  => 'هیچ مشتری برای عبارت جستجو موجود نیست.',
+                    'empty-title' => 'مشتری یافت نشد',
+                    'search-by'   => 'جستجو بر اساس ایمیل یا نام',
+                    'title'       => 'انتخاب مشتری',
+                ],
 
                 'datagrid' => [
                     'canceled'        => 'لغو شده',
@@ -152,13 +154,173 @@ return [
                     'order-id'        => 'شماره سفارش',
                     'pay-by'          => 'پرداخت توسط - :method',
                     'pay-via'         => 'پرداخت توسط',
-                    'pending'         => 'در انتظار',
                     'pending-payment' => 'در انتظار پرداخت',
+                    'pending'         => 'در انتظار',
                     'processing'      => 'در حال پردازش',
                     'product-count'   => ':count + محصولات بیشتر',
                     'status'          => 'وضعیت',
                     'success'         => 'موفقیت',
                     'view'            => 'مشاهده',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'افزودن به سبد خرید',
+                'back-btn'                => 'بازگشت',
+                'check-billing-address'   => 'آدرس صورتحساب موجود نیست.',
+                'check-shipping-address'  => 'آدرس حمل و نقل موجود نیست.',
+                'configuration'           => 'پیکربندی',
+                'coupon-already-applied'  => 'کد تخفیف قبلاً اعمال شده است.',
+                'coupon-applied'          => 'کد تخفیف با موفقیت اعمال شد.',
+                'coupon-error'            => 'کد تخفیف قابل اعمال نیست.',
+                'coupon-not-found'        => 'کد تخفیف یافت نشد',
+                'coupon-remove'           => 'کد تخفیف با موفقیت حذف شد.',
+                'error'                   => 'مشکلی پیش آمد',
+                'minimum-order-error'     => 'حداقل مبلغ سفارش برآورده نشده است.',
+                'order-placed-success'    => 'سفارش با موفقیت ثبت شد.',
+                'payment-not-supported'   => 'این روش پرداخت پشتیبانی نمی شود',
+                'save-btn'                => 'ایجاد سفارش',
+                'specify-payment-method'  => 'روش پرداخت موجود نیست.',
+                'specify-shipping-method' => 'روش حمل و نقل موجود نیست.',
+                'title'                   => 'ایجاد سفارش برای :name',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'لطفاً یک گزینه را انتخاب کنید',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'هیچ',
+                        'total-amount' => 'مجموع مبلغ',
+                    ],
+
+                    'grouped' => [
+                        'name' => 'نام',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'لینک‌ها',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => 'محصول با موفقیت به سبد خرید اضافه شد',
+                    'success-remove'      => 'مورد با موفقیت از سبد خرید حذف شد',
+                    'success-update'      => 'مورد سبد خرید با موفقیت به روز شد',
+
+                    'items' => [
+                        'add-product'       => 'افزودن محصول',
+                        'amount-per-unit'   => ':amount در واحد x :qty تعداد',
+                        'delete'            => 'حذف',
+                        'empty-description' => 'هیچ موردی در سبد خرید شما یافت نشد.',
+                        'empty-title'       => 'موارد سبد خرید خالی',
+                        'move-to-wishlist'  => 'انتقال به لیست علاقه‌مندی‌ها',
+                        'see-details'       => 'مشاهده جزئیات',
+                        'sku'               => 'شناسه محصول - :sku',
+                        'sub-total'         => 'جمع جزئی - :sub_total',
+                        'title'             => 'موارد سبد خرید',
+
+                        'search' => [
+                            'add-to-cart'   => 'افزودن به سبد خرید',
+                            'available-qty' => ':qty موجود است',
+                            'empty-info'    => 'هیچ محصولی برای عبارت جستجوی وارد شده یافت نشد.',
+                            'empty-title'   => 'محصولی یافت نشد',
+                            'product-image' => 'تصویر محصول',
+                            'qty'           => 'تعداد',
+                            'sku'           => 'شناسه محصول - :sku',
+                            'title'         => 'جستجوی محصولات',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => 'افزودن آدرس',
+                        'add-new'          => 'افزودن آدرس جدید',
+                        'add-new-address'  => 'افزودن آدرس جدید',
+                        'addresses'        => 'آدرس‌ها',
+                        'back'             => 'بازگشت',
+                        'billing-address'  => 'آدرس صورتحساب',
+                        'city'             => 'شهر',
+                        'company-name'     => 'نام شرکت',
+                        'confirm'          => 'تأیید',
+                        'country'          => 'کشور',
+                        'edit-btn'         => 'ویرایش آدرس',
+                        'email'            => 'ایمیل',
+                        'first-name'       => 'نام',
+                        'last-name'        => 'نام خانوادگی',
+                        'postcode'         => 'کد پستی',
+                        'proceed'          => 'ادامه',
+                        'same-as-billing'  => 'استفاده از همان آدرس برای حمل و نقل؟',
+                        'save'             => 'ذخیره',
+                        'save-address'     => 'ذخیره در دفترچه آدرس',
+                        'select-country'   => 'انتخاب کشور',
+                        'select-state'     => 'انتخاب استان',
+                        'shipping-address' => 'آدرس حمل و نقل',
+                        'state'            => 'استان',
+                        'street-address'   => 'آدرس خیابان',
+                        'telephone'        => 'تلفن',
+                        'title'            => 'آدرس',
+                        'vat-id'           => 'شناسه مالیاتی',
+                    ],
+
+                    'payment' => [
+                        'title' => 'پرداخت',
+                    ],
+
+                    'shipping' => [
+                        'title' => 'حمل و نقل',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'اعمال کد تخفیف',
+                        'discount-amount' => 'مقدار تخفیف',
+                        'enter-your-code' => 'کد خود را وارد کنید',
+                        'grand-total'     => 'مجموع کل',
+                        'place-order'     => 'ثبت سفارش',
+                        'processing'      => 'در حال پردازش',
+                        'shipping-amount' => 'مبلغ حمل و نقل',
+                        'sub-total'       => 'جمع جزئی',
+                        'tax'             => 'مالیات',
+                        'title'           => 'خلاصه سفارش',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'افزودن به سبد خرید',
+                    'delete'            => 'حذف',
+                    'empty-description' => 'هیچ موردی در سبد خرید شما یافت نشد.',
+                    'empty-title'       => 'سبد خرید خالی',
+                    'see-details'       => 'مشاهده جزئیات',
+                    'sku'               => 'شناسه محصول - :sku',
+                    'title'             => 'موارد سبد خرید',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'افزودن به سبد خرید',
+                    'empty-description' => 'هیچ موردی در سفارشات اخیر شما یافت نشد.',
+                    'empty-title'       => 'سفارشات خالی',
+                    'see-details'       => 'مشاهده جزئیات',
+                    'sku'               => 'شناسه محصول - :sku',
+                    'title'             => 'موارد سفارشات اخیر',
+                    'view'              => 'مشاهده',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'افزودن به سبد خرید',
+                    'delete'            => 'حذف',
+                    'empty-description' => 'هیچ موردی در لیست علاقه‌مندی‌ها یافت نشد.',
+                    'empty-title'       => 'موارد لیست علاقه‌مندی‌ها خالی',
+                    'see-details'       => 'مشاهده جزئیات',
+                    'sku'               => 'شناسه محصول - :sku',
+                    'title'             => 'موارد لیست علاقه‌مندی‌ها',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'افزودن به سبد خرید',
+                    'delete'            => 'حذف',
+                    'empty-description' => 'هیچ موردی در لیست مقایسه یافت نشد.',
+                    'empty-title'       => 'موارد لیست مقایسه خالی',
+                    'sku'               => 'شناسه محصول - :sku',
+                    'title'             => 'موارد لیست مقایسه',
                 ],
             ],
 
@@ -211,6 +373,7 @@ return [
                 'refund'                => 'بازپرداخت',
                 'refund-id'             => 'بازپرداخت #:refund',
                 'refunded'              => 'بازپرداخت',
+                'reorder'               => 'مرتب سازی مجدد',
                 'ship'                  => 'ارسال',
                 'shipment'              => 'ارسال #:shipment',
                 'shipments'             => 'ارسال‌ها',
@@ -900,6 +1063,7 @@ return [
                 'position'              => 'موقعیت',
                 'price'                 => 'قیمت',
                 'regex'                 => 'عبارت باقاعده (Regex)',
+                'regex-info'            => 'عبارت باید در دو نقطه‌گذاری دوتایی باشد.',
                 'save-btn'              => 'ذخیره ویژگی',
                 'select'                => 'انتخابی',
                 'select-type'           => 'نوع ویژگی انتخابی',
@@ -963,6 +1127,7 @@ return [
                 'position'              => 'موقعیت',
                 'price'                 => 'قیمت',
                 'regex'                 => 'عبارت باقاعده (Regex)',
+                'regex-info'            => 'عبارت باید در دو نقطه‌گذاری دوتایی باشد.',
                 'save-btn'              => 'ذخیره ویژگی',
                 'select'                => 'انتخابی',
                 'select-type'           => 'نوع ویژگی انتخابی',
@@ -1228,11 +1393,12 @@ return [
                 'active'                      => 'فعال',
                 'address-delete-confirmation' => 'آیا مطمئن هستید که می‌خواهید این آدرس را حذف کنید؟',
                 'back-btn'                    => 'بازگشت',
+                'create-order'                => 'ایجاد سفارش',
                 'customer'                    => 'مشتری',
                 'date-of-birth'               => 'تاریخ تولد - :dob',
                 'default-address'             => 'آدرس پیش‌فرض',
-                'delete'                      => 'حذف',
                 'delete-account'              => 'حذف حساب',
+                'delete'                      => 'حذف',
                 'email'                       => 'ایمیل - :email',
                 'empty-description'           => 'برای مشتری آدرس جدید ایجاد کنید',
                 'empty-title'                 => 'افزودن آدرس مشتری',
@@ -1241,6 +1407,7 @@ return [
                 'inactive'                    => 'غیرفعال',
                 'login-as-customer'           => 'ورود به عنوان مشتری',
                 'note-created-success'        => 'یادداشت با موفقیت ایجاد شد',
+                'order-create-confirmation'   => 'آیا مطمئن هستید که می‌خواهید سفارشی برای این مشتری ایجاد کنید؟',
                 'phone'                       => 'تلفن - :phone',
                 'set-as-default'              => 'تنظیم به عنوان پیش‌فرض',
                 'suspended'                   => 'تعلیق شده',
@@ -1364,8 +1531,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'فاکتورها (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'فاکتورها (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1379,14 +1546,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'سفارش‌ها (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'درآمد کل - :revenue',
+                    'count'         => 'سفارش‌ها (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'درآمد کل - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'شناسه - :id',
-                    'count'       => 'نقدها (:count)',
+                    'id'    => 'شناسه - :id',
+                    'count' => 'نقدها (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'مورد سبد خرید با موفقیت حذف شد.',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'مورد لیست علاقه‌مندی‌ها با موفقیت حذف شد.',
+                ],
+
+                'compare' => [
+                    'delete-success' => 'مورد مقایسه با موفقیت حذف شد.',
                 ],
             ],
 
@@ -2158,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name قبلا استفاده شده است.',
-            'create-btn'        => 'ایجاد صفحه',
-            'title'             => 'صفحه‌ها',
+            'already-taken' => 'این :name قبلاً استفاده شده است.',
+            'create-btn'    => 'ایجاد صفحه',
+            'channel'       => 'کانال',
+            'language'      => 'زبان',
+            'title'         => 'صفحه‌ها',
 
             'datagrid' => [
                 'delete'              => 'حذف',
@@ -2605,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'بازگشت',
-                    'basic-settings' => 'تنظیمات پایه',
                     'country'        => 'کشور',
                     'identifier'     => 'شناسه',
                     'save-btn'       => 'ذخیره نرخ مالیاتی',
                     'select-country' => 'انتخاب کشور',
                     'select-state'   => 'انتخاب استان',
+                    'settings'       => 'تنظیمات',
                     'state'          => 'استان',
                     'tax-rate'       => 'نرخ',
                     'title'          => 'ویرایش نرخ مالیات',
@@ -3418,6 +3599,10 @@ return [
                     'admin-name'            => 'نام مدیر',
                     'admin-name-tip'        => 'این نام در تمامی ایمیل‌های مدیر نمایش داده می‌شود.',
                     'admin-page-limit'      => 'محدودیت تعداد صفحات پیش‌فرض (مدیر)',
+                    'contact-email'         => 'ایمیل تماس',
+                    'contact-email-tip'     => 'این آدرس ایمیل برای نمایش در پایین ایمیل‌ها استفاده می‌شود.',
+                    'contact-name'          => 'نام تماس',
+                    'contact-name-tip'      => 'این نام برای نمایش در پایین ایمیل‌ها استفاده می‌شود.',
                     'email-sender-name'     => 'نام فرستنده ایمیل',
                     'email-sender-name-tip' => 'این نام در صندوق ورودی مشتری نمایش داده می‌شود.',
                     'info'                  => 'نام فرستنده ایمیل، آدرس ایمیل فروشگاه، نام مدیر و آدرس ایمیل مدیر را تنظیم کنید.',

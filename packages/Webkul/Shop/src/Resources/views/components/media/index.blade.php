@@ -1,6 +1,6 @@
 <v-media {{ $attributes }} >
     <x-shop::media.images.lazy
-        class="w-[284px] h-[284px] mb-4 rounded-xl"
+        class="mb-4 h-[284px] w-[284px] rounded-xl"
     />
 </v-media>
 
@@ -9,14 +9,14 @@
         type="text/x-template"
         id="v-media-template"
     >
-        <div class="flex flex-col mb-4 rounded-lg cursor-pointer">
+        <div class="mb-4 flex cursor-pointer flex-col rounded-lg">
             <div :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl': isDragOver }">
                 <div
-                    class="flex flex-col items-center justify-center w-[284px] h-[284px] bg-[#F5F5F5] rounded-xl cursor-pointer hover:bg-gray-100 dark:hover:gray-950"
+                    class="dark:hover:gray-950 flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-[#F5F5F5] hover:bg-gray-100"
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 
-                        class="group flex justify-center relative w-[284px] h-[284px]"
+                        class="group relative flex h-[284px] w-[284px] justify-center"
                         @mouseenter="uploadedFiles.showDeleteButton = true"
                         @mouseleave="uploadedFiles.showDeleteButton = false"
                     >
@@ -27,9 +27,9 @@
                             alt="Uploaded Image"
                         >
 
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
                             <span 
-                                class="icon-bin text-2xl text-black cursor-pointer"
+                                class="icon-bin cursor-pointer text-2xl text-black"
                                 @click="removeFile"
                             >
                             </span>
@@ -39,7 +39,7 @@
 
                 <label 
                     for="file-input"
-                    class="flex flex-col items-center justify-center w-[284px] h-[284px] bg-[#F5F5F5] rounded-xl hover:bg-gray-100 cursor-pointer"
+                    class="flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-[#F5F5F5] hover:bg-gray-100"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"
@@ -47,12 +47,16 @@
                 >
                     <label 
                         for="file-input"
-                        class="primary-button block w-max m-0 mx-auto py-3 px-11 rounded-2xl text-base text-center"
+                        class="primary-button m-0 mx-auto block w-max rounded-2xl px-11 py-3 text-center text-base"
                     >
                         @lang('shop::app.components.media.add-attachments')
                     </label>
 
-                    <input type="hidden" :name="name" v-if="! uploadedFiles.isPicked"/>
+                    <input
+                        type="hidden"
+                        :name="name"
+                        v-if="! uploadedFiles.isPicked"
+                    />
 
                     <v-field
                         type="file"
@@ -72,27 +76,27 @@
                 class="flex items-center"
                 v-if="isMultiple"
             >
-                <ul class="flex gap-2.5 flex-wrap justify-left mt-2">
+                <ul class="justify-left mt-2 flex flex-wrap gap-2.5">
                     <li 
                         v-for="(file, index) in uploadedFiles"
                         :key="index"
                     >
                         <template v-if="isImage(file)">
                             <div 
-                                class="relative group flex justify-center h-12 w-12"
+                                class="group relative flex h-12 w-12 justify-center"
                                 @mouseenter="file.showDeleteButton = true"
                                 @mouseleave="file.showDeleteButton = false"
                             >
                                 <img
                                     :src="file.url"
                                     :alt="file.name"
-                                    class="rounded-xl min-w-12 max-h-12"
+                                    class="max-h-12 min-w-12 rounded-xl"
                                     :class="{'opacity-25' : file.showDeleteButton}"
                                 >
 
-                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
                                     <span 
-                                        class="icon-bin text-2xl text-black cursor-pointer"
+                                        class="icon-bin cursor-pointer text-2xl text-black"
                                         @click="removeFile(index)"
                                     >
                                     </span>
@@ -102,21 +106,21 @@
 
                         <template v-else>
                             <div
-                                class="relative group flex justify-center h-12 w-12"
+                                class="group relative flex h-12 w-12 justify-center"
                                 @mouseenter="file.showDeleteButton = true"
                                 @mouseleave="file.showDeleteButton = false"
                             >
                                 <video
                                     :src="file.url"
                                     :alt="file.name"
-                                    class="min-w-[50px] max-h-[50px] rounded-xl"
+                                    class="max-h-[50px] min-w-[50px] rounded-xl"
                                     :class="{'opacity-25' : file.showDeleteButton}"
                                 >
                                 </video>
 
-                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
                                     <span 
-                                        class="icon-bin text-2xl text-black cursor-pointer"
+                                        class="icon-bin cursor-pointer text-2xl text-black"
                                         @click="removeFile(index)"
                                     >
                                     </span>

@@ -9,15 +9,15 @@
         {!! view_render_event('bagisto.admin.catalog.families.create.create_form_controls.before') !!}
 
         <!-- Page Header -->
-        <div class="flex justify-between items-center">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.catalog.families.create.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
+            <div class="flex items-center gap-x-2.5">
                 <a
                     href="{{ route('admin.catalog.families.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                    class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                 >
                     @lang('admin::app.catalog.families.create.back-btn')
                 </a>
@@ -32,21 +32,21 @@
         </div>
 
         <!-- Container -->
-        <div class="flex gap-2.5 mt-3.5">
+        <div class="mt-3.5 flex gap-2.5">
             <!-- Left Container -->
-            <div class="flex flex-col gap-2 flex-1 bg-white dark:bg-gray-900 rounded box-shadow">
+            <div class="box-shadow flex flex-1 flex-col gap-2 rounded bg-white dark:bg-gray-900">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel />
                 </v-family-attributes>
             </div>
 
             <!-- Right Container -->
-            <div class="flex flex-col gap-2 w-[360px] max-w-full select-none">
+            <div class="flex w-[360px] max-w-full select-none flex-col gap-2">
                 <!-- General Pannel -->
                 <x-admin::accordion>
                     <!-- Panel Header -->
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                        <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                             @lang('admin::app.catalog.families.create.general')
                         </p>
                     </x-slot>
@@ -62,7 +62,7 @@
                                 type="text"
                                 name="code"
                                 rules="required"
-                                value="{{ old('code') }}"
+                                :value="old('code')"
                                 :label="trans('admin::app.catalog.families.create.code')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-code')"
                             />
@@ -79,7 +79,7 @@
                                 type="text"
                                 name="name"
                                 rules="required"
-                                value="{{ old('name') }}"
+                                :value="old('name')"
                                 :label="trans('admin::app.catalog.families.create.name')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-name')"
                             />
@@ -102,23 +102,23 @@
         >
             <div>
                 <!-- Panel Header -->
-                <div class="flex flex-wrap gap-2.5 justify-between mb-2.5 p-4">
+                <div class="mb-2.5 flex flex-wrap justify-between gap-2.5 p-4">
                     <!-- Panel Header -->
                     <div class="flex flex-col gap-2">
-                        <p class="text-base text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base font-semibold text-gray-800 dark:text-white">
                             @lang('admin::app.catalog.families.create.groups')
                         </p>
 
-                        <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
                             @lang('admin::app.catalog.families.create.groups-info')
                         </p>
                     </div>
                     
                     <!-- Panel Content -->
-                    <div class="flex gap-x-1 items-center">
+                    <div class="flex items-center gap-x-1">
                         <!-- Delete Group Button -->
                         <div
-                            class="px-3 py-1.5 border-2 border-transparent rounded-md text-red-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                            class="cursor-pointer whitespace-nowrap rounded-md border-2 border-transparent px-3 py-1.5 font-semibold text-red-600 transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                             @click="deleteGroup"
                         >
                             @lang('admin::app.catalog.families.create.delete-group-btn')
@@ -139,8 +139,8 @@
                     <!-- Attributes Groups Container -->
                     <div v-for="(groups, column) in columnGroups">
                         <!-- Attributes Groups Header -->
-                        <div class="flex flex-col mb-4">
-                            <p class="text-gray-600 dark:text-gray-300 font-semibold leading-6">
+                        <div class="mb-4 flex flex-col">
+                            <p class="font-semibold leading-6 text-gray-600 dark:text-gray-300">
                                 @{{
                                     column == 1
                                     ? "@lang('admin::app.catalog.families.create.main-column')"
@@ -148,14 +148,14 @@
                                 }}
                             </p>
                             
-                            <p class="text-xs text-gray-800 dark:text-white font-medium">
+                            <p class="text-xs font-medium text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.families.create.edit-group-info')
                             </p>
                         </div>
 
                         <!-- Draggable Attribute Groups -->
                         <draggable
-                            class="h-[calc(100vh-285px)] pb-4 overflow-auto ltr:border-r rtl:border-l border-gray-200"
+                            class="h-[calc(100vh-285px)] overflow-auto border-gray-200 pb-4 ltr:border-r rtl:border-l"
                             ghost-class="draggable-ghost"
                             handle=".icon-drag"
                             v-bind="{animation: 200}"
@@ -166,21 +166,21 @@
                             <template #item="{ element, index }">
                                 <div class="">
                                     <!-- Group Container -->
-                                    <div class="flex items-center group">
+                                    <div class="group flex items-center">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-xl rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 group-hover:text-gray-800 dark:group-hover:text-white"
+                                            class="icon-sort-down cursor-pointer rounded-md text-xl transition-all hover:bg-gray-100 group-hover:text-gray-800 dark:hover:bg-gray-950 dark:group-hover:text-white"
                                             @click="element.hide = ! element.hide"
                                         >
                                         </i>
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group cursor-pointer transition-all group-hover:text-gray-800 dark:group-hover:text-white"
+                                            class="group_node group flex max-w-max cursor-pointer gap-1.5 rounded py-1.5 text-gray-600 transition-all group-hover:text-gray-800 dark:text-gray-300 dark:group-hover:text-white ltr:pr-1.5 rtl:pl-1.5"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
-                                            @click="groupSelected(element)"
+                                            @click.stop="groupSelected(element)"
                                         >
-                                            <i class="icon-drag text-xl text-inherit transition-all group-hover:text-gray-800 dark:group-hover:text-white cursor-grab"></i>
+                                            <i class="icon-drag cursor-grab text-xl text-inherit transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
                                             <i
                                                 class="text-xl text-inherit transition-all group-hover:text-gray-800 dark:group-hover:text-white"
@@ -189,10 +189,10 @@
                                             </i>
 
                                             <span
-                                                class="text-sm text-inherit font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white"
+                                                class="font-regular text-sm text-inherit transition-all group-hover:text-gray-800 dark:group-hover:text-white"
                                                 v-show="editableGroup.id != element.id"
-                                                v-text="element.name"
                                             >
+                                                @{{ element.name }}
                                             </span>
 
                                             <input
@@ -237,8 +237,8 @@
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
-                                            <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group">
-                                                <i class="icon-drag text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white cursor-grab"></i>
+                                            <div class="group flex max-w-max gap-1.5 rounded py-1.5 text-gray-600 dark:text-gray-300 ltr:pr-1.5 rtl:pl-1.5">
+                                                <i class="icon-drag cursor-grab text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
                                                 <i
                                                     class="text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"
@@ -247,10 +247,8 @@
                                                 </i>
                                                 
 
-                                                <span 
-                                                    class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
-                                                    v-text="element.admin_name"
-                                                >
+                                                <span class="font-regular text-sm transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs">
+                                                    @{{ element.admin_name }}
                                                 </span>
 
                                                 <input
@@ -275,12 +273,12 @@
                     <!-- Unassigned Attributes Container -->
                     <div class="">
                         <!-- Unassigned Attributes Header -->
-                        <div class="flex flex-col mb-4">
-                            <p class="text-gray-600 dark:text-gray-300 font-semibold leading-6">
+                        <div class="mb-4 flex flex-col">
+                            <p class="font-semibold leading-6 text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.catalog.families.create.unassigned-attributes')
                             </p>
 
-                            <p class="text-xs text-gray-800 dark:text-white font-medium ">
+                            <p class="text-xs font-medium text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.families.create.unassigned-attributes-info')
                             </p>
                         </div>
@@ -288,7 +286,7 @@
                         <!-- Draggable Unassigned Attributes -->
                         <draggable
                             id="unassigned-attributes"
-                            class="h-[calc(100vh-285px)] pb-4 overflow-auto"
+                            class="h-[calc(100vh-285px)] overflow-auto pb-4"
                             ghost-class="draggable-ghost"
                             handle=".icon-drag"
                             v-bind="{animation: 200}"
@@ -297,15 +295,13 @@
                             group="attributes"
                         >
                             <template #item="{ element }">
-                                <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group">
-                                    <i class="icon-drag text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white cursor-grab"></i>
+                                <div class="group flex max-w-max gap-1.5 rounded py-1.5 text-gray-600 dark:text-gray-300 ltr:pr-1.5 rtl:pl-1.5">
+                                    <i class="icon-drag cursor-grab text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
                                     <i class="text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
-                                    <span 
-                                        class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
-                                        v-text="element.admin_name"    
-                                    >
+                                    <span class="font-regular text-sm transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs">
+                                        @{{ element.admin_name }}
                                     </span>
                                 </div>
                             </template>
@@ -322,7 +318,7 @@
                         <x-admin::modal ref="addGroupModal">
                             <!-- Model Header -->
                             <x-slot:header>
-                                <p class="text-lg text-gray-800 dark:text-white font-bold">
+                                <p class="text-lg font-bold text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.families.create.add-group-title')
                                 </p>
                             </x-slot>
@@ -365,7 +361,7 @@
 
                                 <!-- Select Group Type -->
                                 <x-admin::form.control-group class="mb-4">
-                                    <x-admin::form.control-group.label class="required !text-gray-800 font-medium">
+                                    <x-admin::form.control-group.label class="required font-medium !text-gray-800">
                                         @lang('admin::app.catalog.families.create.column')
                                     </x-admin::form.control-group.label>
 
@@ -395,7 +391,7 @@
 
                             <!-- Model Footer -->
                             <x-slot:footer>
-                                <div class="flex gap-x-2.5 items-center">
+                                <div class="flex items-center gap-x-2.5">
                                     <!-- Add Group Button -->
                                     <button 
                                         type="submit"

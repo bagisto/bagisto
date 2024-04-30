@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'Siparişiniz iptal edildi',
                     'page-title'         => 'Sipariş #:order_id',
                     'payment-method'     => 'Ödeme Yöntemi',
+                    'reorder-btn-title'  => 'Yeniden düzenle',
                     'shipping-address'   => 'Teslimat Adresi',
                     'shipping-method'    => 'Teslimat Yöntemi',
                     'title'              => 'Görüntüle',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'Ürünleri burada ara',
                 'sign-in'           => 'Giriş Yap',
                 'sign-up'           => 'Kaydol',
+                'submit'            => 'Gönder',
                 'title'             => 'Hesap',
                 'welcome'           => 'Hoş geldiniz',
                 'welcome-guest'     => 'Hoş geldiniz Misafir',
                 'wishlist'          => 'İstek Listesi',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'Varsayılan yerel ayar',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -368,58 +376,50 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'Eylem Seç',
-                    'select-option' => 'Seçenek Seç',
-                    'submit'        => 'Gönder',
-                ],
+                'length-of' => ':length adet',
+                'results'   => ':total Sonuç',
+                'selected'  => ':total Seçildi',
 
-                'filter' => [
-                    'title' => 'Filtre',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'Bir toplu işlem seçmelisiniz.',
+                    'must-select-a-mass-action-option' => 'Bir toplu işlem seçeneği seçmelisiniz.',
+                    'no-records-selected'              => 'Hiçbir kayıt seçilmedi.',
+                    'select-action'                    => 'İşlem Seç',
                 ],
 
                 'search' => [
                     'title' => 'Ara',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'Filtreleri Uygula',
+                'filter' => [
+                    'apply-filter' => 'Filtreleri Uygula',
+                    'title'        => 'Filtrele',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'En az 2 karakter yazın...',
-                        'no-results'        => 'Sonuç bulunamadı...',
+                    'dropdown' => [
+                        'select' => 'Seç',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'En az 2 karakter girin...',
+                            'no-results'         => 'Sonuç bulunamadı...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'Tümünü Temizle',
-                    'title'     => 'Özel Filtreler',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'Geçen Ay',
-                    'last-six-months'   => 'Son 6 Ay',
-                    'last-three-months' => 'Son 3 Ay',
-                    'this-month'        => 'Bu Ay',
-                    'this-week'         => 'Bu Hafta',
-                    'this-year'         => 'Bu Yıl',
-                    'today'             => 'Bugün',
-                    'yesterday'         => 'Dün',
+                    'custom-filters' => [
+                        'clear-all' => 'Tümünü Temizle',
+                    ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'Eylemler',
+                'actions'              => 'İşlemler',
                 'next-page'            => 'Sonraki Sayfa',
                 'no-records-available' => 'Kayıt bulunamadı.',
-                'of'                   => 'toplam :total girdi',
+                'of'                   => 'toplam :total kayıt',
                 'page-navigation'      => 'Sayfa Gezinme',
                 'page-number'          => 'Sayfa Numarası',
                 'previous-page'        => 'Önceki Sayfa',
                 'showing'              => 'Gösteriliyor :firstItem',
-                'to'                   => 'ilâ :lastItem',
+                'to'                   => ':lastItem arasında',
             ],
         ],
 
@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'Hiçbiri',
+                    'none'         => 'Hiçbiri',
+                    'total-amount' => 'Toplam Tutar',
                 ],
 
                 'downloadable' => [
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'Ödemeye Devam Et',
             'illegal'                   => 'Miktar sıfırdan küçük olamaz.',
+            'inactive-add'              => 'Devre dışı ürün sepete eklenemez.',
             'inactive'                  => 'Ürün devre dışı bırakıldı ve sepetten kaldırıldı',
             'inventory-warning'         => 'İstenen miktar şu anda stokta bulunmuyor, lütfen daha sonra tekrar deneyin',
             'item-add-to-cart'          => 'Ürün Başarıyla Eklendi',
@@ -676,6 +678,16 @@ return [
                 'proceed-to-checkout' => 'Ödeme İşlemine Devam Et',
                 'sub-total'           => 'Ara Toplam',
                 'tax'                 => 'Vergi',
+
+                'estimate-shipping' => [
+                    'country'        => 'Ülke',
+                    'info'           => 'Kargo ve vergi tahmini almak için hedefinizi girin.',
+                    'postcode'       => 'Posta Kodu',
+                    'select-country' => 'Ülke Seçin',
+                    'select-state'   => 'Bölge Seçin',
+                    'state'          => 'Bölge',
+                    'title'          => 'Kargo ve Vergi Tahmini',
+                ],
             ],
         ],
 
@@ -756,11 +768,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'Bize bir not bırakın ve en kısa sürede size geri döneceğiz',
+            'desc'          => 'Aklınızda ne var?',
+            'describe-here' => 'Burayı açıklayın',
+            'email'         => 'E-posta',
+            'message'       => 'Mesaj',
+            'name'          => 'Ad',
+            'phone-number'  => 'Telefon Numarası',
+            'submit'        => 'Gönder',
+            'title'         => 'Bize Ulaşın',
+        ],
+
         'index' => [
             'offer'               => '1. siparişinizde %40\'a varan İNDİRİM ALIŞVERİŞ YAPIN',
             'resend-verify-email' => 'Doğrulama E-postası Tekrar Gönder',
             'verify-email'        => 'E-posta hesabınızı doğrulayın',
         ],
+
+        'thanks-for-contact' => 'Yorumlarınız ve sorularınız için bize başvurduğunuz için teşekkür ederiz. Size çok yakında yanıt vereceğiz.',
     ],
 
     'partials' => [
@@ -860,6 +886,14 @@ return [
                 'subject'     => 'Bültenimize Abone Oldunuz',
                 'unsubscribe' => 'Aboneliği iptal et',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'Web Sitesi İletişim Formu aracılığıyla',
+            'reply-to-mail'   => 'lütfen bu e-postaya yanıt verin.',
+            'reach-via-phone' => 'Alternatif olarak, bize telefonla şu numaradan ulaşabilirsiniz:',
+            'inquiry-from'    => 'Şuradan gelen talep',
+            'to'              => 'İletişim için',
         ],
 
         'orders' => [

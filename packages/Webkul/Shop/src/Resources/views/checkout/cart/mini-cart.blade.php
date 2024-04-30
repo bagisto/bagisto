@@ -1,7 +1,7 @@
 <!-- Mini Cart Vue Component -->
 <v-mini-cart>
     <span
-        class="icon-cart text-2xl cursor-pointer"
+        class="icon-cart cursor-pointer text-2xl"
         role="button"
         aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
     ></span>
@@ -21,14 +21,14 @@
 
                 <span class="relative">
                     <span
-                        class="icon-cart text-2xl cursor-pointer"
+                        class="icon-cart cursor-pointer text-2xl"
                         role="button"
                         aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
                         tabindex="0"
                     ></span>
 
                     <span
-                        class="absolute px-2 -top-4 ltr:left-5 rtl:right-5 py-1.5 bg-[#060C3B] rounded-[44px] text-white text-xs font-semibold leading-[9px]"
+                        class="absolute -top-4 rounded-[44px] bg-[#060C3B] px-2 py-1.5 text-xs font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5"
                         v-if="cart?.items_qty"
                     >
                         @{{ cart.items_qty }}
@@ -42,7 +42,7 @@
             <x-slot:header>
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.header.before') !!}
 
-                <div class="flex justify-between items-center">
+                <div class="flex items-center justify-between">
                     <p class="text-2xl font-medium">
                         @lang('shop::app.checkout.cart.mini-cart.shopping-cart')
                     </p>
@@ -61,7 +61,7 @@
 
                 <!-- Cart Item Listing -->
                 <div 
-                    class="grid gap-12 mt-9" 
+                    class="mt-9 grid gap-12" 
                     v-if="cart?.items?.length"
                 >
                     <div 
@@ -75,7 +75,7 @@
                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                 <img
                                     :src="item.base_image.small_image_url"
-                                    class="max-w-[110px] max-h-[110px] rounded-xl"
+                                    class="max-h-[110px] max-w-[110px] rounded-xl"
                                 />
                             </a>
                         </div>
@@ -83,26 +83,23 @@
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.image.after') !!}
 
                         <!-- Cart Item Information -->
-                        <div class="grid flex-1 gap-y-2.5 place-content-start justify-stretch">
+                        <div class="grid flex-1 place-content-start justify-stretch gap-y-2.5">
                             <div class="flex flex-wrap justify-between">
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
 
                                 <a  class="max-w-4/5" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
-                                    <p
-                                        class="text-base font-medium"
-                                        v-text="item.name"
-                                    >
+                                    <p class="text-base font-medium">
+                                        @{{ item.name }}
                                     </p>
                                 </a>
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.after') !!}
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.before') !!}
-                                <p
-                                    class="text-lg"
-                                    v-text="item.formatted_price"
-                                >
+
+                                <p class="text-lg">
+                                    @{{ item.formatted_price }}
                                 </p>
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.after') !!}
@@ -110,7 +107,7 @@
 
                             <!-- Cart Item Options Container -->
                             <div
-                                class="grid gap-x-2.5 gap-y-1.5 select-none"
+                                class="grid select-none gap-x-2.5 gap-y-1.5"
                                 v-if="item.options.length"
                             >
 
@@ -119,7 +116,7 @@
                                 <!-- Details Toggler -->
                                 <div class="">
                                     <p
-                                        class="flex gap-x-[15px] items-center text-base cursor-pointer"
+                                        class="flex cursor-pointer items-center gap-x-[15px] text-base"
                                         @click="item.option_show = ! item.option_show"
                                     >
                                         @lang('shop::app.checkout.cart.mini-cart.see-details')
@@ -147,12 +144,12 @@
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.product_details.after') !!}
                             </div>
 
-                            <div class="flex gap-5 items-center flex-wrap">
+                            <div class="flex flex-wrap items-center gap-5">
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.quantity_changer.before') !!}
 
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
-                                    class="gap-x-2.5 max-w-[150px] max-h-9 py-1.5 px-3.5 rounded-[54px]"
+                                    class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5"
                                     name="quantity"
                                     ::value="item?.quantity"
                                     @change="updateItem($event, item)"
@@ -182,7 +179,7 @@
                     class="pb-8"
                     v-else
                 >
-                    <div class="grid gap-y-5 b-0 place-items-center">
+                    <div class="b-0 grid place-items-center gap-y-5">
                         <img src="{{ bagisto_asset('images/thank-you.png') }}">
 
                         <p class="text-xl">
@@ -197,7 +194,7 @@
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
-                    <div class="flex justify-between items-center mt-8 mb-8 px-6 pb-2 border-b border-[#E9E9E9]">
+                    <div class="mb-8 mt-8 flex items-center justify-between border-b border-[#E9E9E9] px-6 pb-2">
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
 
                         <p class="text-sm font-medium text-[#6E6E6E]">
@@ -207,19 +204,19 @@
                         <p
                             v-if="! isLoading"
                             class="text-3xl font-semibold"
-                            v-text="cart.formatted_grand_total"
                         >
+                            @{{ cart.formatted_grand_total }}
                         </p>
 
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.after') !!}
                         
                         <div
                             v-else
-                            class="flex justify-center items-center"
+                            class="flex items-center justify-center"
                         >
                             <!-- Spinner -->
                             <svg
-                                class="absolute animate-spin  h-8 w-8  text-[5px] font-semibold text-blue"
+                                class="text-blue absolute h-8 w-8 animate-spin text-[5px] font-semibold"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 aria-hidden="true"
@@ -241,7 +238,9 @@
                                 ></path>
                             </svg>
                 
-                            <span class="opacity-0 realative text-3xl font-semibold" v-text="cart.formatted_grand_total"></span>
+                            <span class="realative text-3xl font-semibold opacity-0">
+                                @{{ cart.formatted_grand_total }}
+                            </span>
                         </div>
                     </div>
 
@@ -253,14 +252,14 @@
 
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
-                            class="block w-full mx-auto py-4 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer max-sm:px-5"
+                            class="mx-auto block w-full cursor-pointer rounded-2xl bg-navyBlue px-11 py-4 text-center text-base font-medium text-white max-sm:px-5"
                         >
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>
 
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.continue_to_checkout.after') !!}
 
-                        <div class="block text-base text-center font-medium cursor-pointer">
+                        <div class="block cursor-pointer text-center text-base font-medium">
                             <a href="{{ route('shop.checkout.cart.index') }}">
                                 @lang('shop::app.checkout.cart.mini-cart.view-cart')
                             </a>

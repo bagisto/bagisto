@@ -19,7 +19,7 @@
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'text-[14px] text-gray-600 appearance-none border rounded-md w-full py-2 px-3 transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full appearance-none rounded-md border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
         </v-field>
 
@@ -35,7 +35,7 @@
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'inline-flex gap-x-1 items-center justify-between text-gray-600 text-[14px] font-normal py-[0.8rem] px-3 w-full bg-white border border-gray-300 rounded-md cursor-pointer transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'inline-flex w-full cursor-pointer items-center justify-between gap-x-1 rounded-md border border-gray-300 bg-white px-3 py-[0.8rem] text-[14px] font-normal text-gray-600 transition-all hover:border-gray-400']) }}
             >
                 {{ $slot }}
             </select>
@@ -55,7 +55,7 @@
                 type="checkbox"
                 name="{{ $name }}"
                 v-bind="field"
-                class="sr-only peer"
+                class="peer sr-only"
                 {{ $attributes->except(['rules', 'label', ':label']) }}
             />
 
@@ -67,7 +67,7 @@
         </v-field>
 
         <label
-            class="icon-checkbox-normal text-[24px] peer-checked:icon-checkbox-active peer-checked:text-blue-600  cursor-pointer"
+            class="icon-checkbox-normal peer-checked:icon-checkbox-active cursor-pointer text-[24px] peer-checked:text-blue-600"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
         </label>

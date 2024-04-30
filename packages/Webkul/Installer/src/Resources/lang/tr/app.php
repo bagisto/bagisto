@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'seeders'   => [
+    'seeders' => [
         'attribute' => [
             'attribute-families' => [
                 'default' => 'Varsayılan',
             ],
 
-            'attribute-groups'   => [
-                'description'       => 'Açıklama',
-                'general'           => 'Genel',
-                'inventories'       => 'Envanterler',
-                'meta-description'  => 'Meta Açıklama',
-                'price'             => 'Fiyat',
-                'settings'          => 'Ayarlar',
-                'shipping'          => 'Nakliye',
+            'attribute-groups' => [
+                'description'      => 'Açıklama',
+                'general'          => 'Genel',
+                'inventories'      => 'Envanterler',
+                'meta-description' => 'Meta Açıklama',
+                'price'            => 'Fiyat',
+                'settings'         => 'Ayarlar',
+                'shipping'         => 'Nakliye',
             ],
 
-            'attributes'         => [
+            'attributes' => [
                 'brand'                => 'Marka',
                 'color'                => 'Renk',
                 'cost'                 => 'Maliyet',
@@ -37,9 +37,9 @@ return [
                 'short-description'    => 'Kısa Açıklama',
                 'size'                 => 'Boyut',
                 'sku'                  => 'Stok Kodu',
+                'special-price'        => 'Özel Fiyat',
                 'special-price-from'   => 'Özel Fiyat Başlangıç',
                 'special-price-to'     => 'Özel Fiyat Bitiş',
-                'special-price'        => 'Özel Fiyat',
                 'status'               => 'Durum',
                 'tax-category'         => 'Vergi Kategorisi',
                 'url-key'              => 'URL Anahtarı',
@@ -48,7 +48,7 @@ return [
                 'width'                => 'Genişlik',
             ],
 
-            'attribute-options'  => [
+            'attribute-options' => [
                 'black'  => 'Siyah',
                 'green'  => 'Yeşil',
                 'l'      => 'L',
@@ -61,21 +61,21 @@ return [
             ],
         ],
 
-        'category'  => [
+        'category' => [
             'categories' => [
                 'description' => 'Kök Kategori Açıklaması',
                 'name'        => 'Kök',
             ],
         ],
 
-        'cms'       => [
+        'cms' => [
             'pages' => [
-                'about-us'         => [
+                'about-us' => [
                     'content' => 'Hakkımızda Sayfası İçeriği',
                     'title'   => 'Hakkımızda',
                 ],
 
-                'contact-us'       => [
+                'contact-us' => [
                     'content' => 'Bize Ulaşın Sayfa İçeriği',
                     'title'   => 'Bize Ulaşın',
                 ],
@@ -85,27 +85,27 @@ return [
                     'title'   => 'Müşteri Hizmetleri',
                 ],
 
-                'payment-policy'   => [
+                'payment-policy' => [
                     'content' => 'Ödeme Politikası Sayfa İçeriği',
                     'title'   => 'Ödeme Politikası',
                 ],
 
-                'privacy-policy'   => [
+                'privacy-policy' => [
                     'content' => 'Gizlilik Politikası Sayfa İçeriği',
                     'title'   => 'Gizlilik Politikası',
                 ],
 
-                'refund-policy'    => [
+                'refund-policy' => [
                     'content' => 'İade Politikası Sayfa İçeriği',
                     'title'   => 'İade Politikası',
                 ],
 
-                'return-policy'    => [
+                'return-policy' => [
                     'content' => 'İade Politikası Sayfa İçeriği',
                     'title'   => 'İade Politikası',
                 ],
 
-                'shipping-policy'  => [
+                'shipping-policy' => [
                     'content' => 'Kargo Politikası Sayfa İçeriği',
                     'title'   => 'Kargo Politikası',
                 ],
@@ -115,24 +115,24 @@ return [
                     'title'   => 'Şartlar ve Koşullar',
                 ],
 
-                'terms-of-use'     => [
+                'terms-of-use' => [
                     'content' => 'Kullanım Koşulları Sayfa İçeriği',
                     'title'   => 'Kullanım Koşulları',
                 ],
 
-                'whats-new'        => [
+                'whats-new' => [
                     'content' => 'Yenilikler Sayfa İçeriği',
                     'title'   => 'Yenilikler',
                 ],
             ],
         ],
 
-        'core'      => [
-            'channels'   => [
-                'meta-description' => 'Demo Mağaza Meta Açıklama',
-                'meta-keywords'    => 'Demo Mağaza Meta Anahtar Kelimeler',
-                'meta-title'       => 'Demo Mağaza',
+        'core' => [
+            'channels' => [
                 'name'             => 'Varsayılan',
+                'meta-title'       => 'Demo Mağaza',
+                'meta-keywords'    => 'Demo Mağaza Meta Anahtar Kelimeler',
+                'meta-description' => 'Demo Mağaza Meta Açıklama',
             ],
 
             'currencies' => [
@@ -174,7 +174,7 @@ return [
             ],
         ],
 
-        'customer'  => [
+        'customer' => [
             'customer-groups' => [
                 'general'   => 'Genel',
                 'guest'     => 'Misafir',
@@ -188,40 +188,40 @@ return [
             ],
         ],
 
-        'shop'      => [
+        'shop' => [
             'theme-customizations' => [
-                'all-products'           => [
-                    'name'    => 'All Products',
+                'all-products' => [
+                    'name' => 'All Products',
 
                     'options' => [
                         'title' => 'All Products',
                     ],
                 ],
 
-                'bold-collections'       => [
+                'bold-collections' => [
                     'content' => [
                         'btn-title'   => 'View All',
                         'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
                         'title'       => 'Get Ready for our new Bold Collections!',
                     ],
 
-                    'name'    => 'Bold Collections',
+                    'name' => 'Bold Collections',
                 ],
 
                 'categories-collections' => [
                     'name' => 'Categories Collections',
                 ],
 
-                'featured-collections'   => [
-                    'name'    => 'Featured Collections',
+                'featured-collections' => [
+                    'name' => 'Featured Collections',
 
                     'options' => [
                         'title' => 'Featured Products',
                     ],
                 ],
 
-                'footer-links'           => [
-                    'name'    => 'Footer Links',
+                'footer-links' => [
+                    'name' => 'Footer Links',
 
                     'options' => [
                         'about-us'         => 'About Us',
@@ -238,41 +238,41 @@ return [
                     ],
                 ],
 
-                'game-container'         => [
+                'game-container' => [
                     'content' => [
                         'sub-title-1' => 'Our Collections',
                         'sub-title-2' => 'Our Collections',
                         'title'       => 'The game with our new additions!',
                     ],
 
-                    'name'    => 'Game Container',
+                    'name' => 'Game Container',
                 ],
 
-                'image-carousel'         => [
-                    'name'    => 'Image Carousel',
+                'image-carousel' => [
+                    'name' => 'Image Carousel',
 
                     'sliders' => [
                         'title' => 'Get Ready For New Collection',
                     ],
                 ],
 
-                'new-products'           => [
-                    'name'    => 'New Products',
+                'new-products' => [
+                    'name' => 'New Products',
 
                     'options' => [
                         'title' => 'New Products',
                     ],
                 ],
 
-                'offer-information'      => [
+                'offer-information' => [
                     'content' => [
                         'title' => 'Get UP TO 40% OFF on your 1st order SHOP NOW',
                     ],
 
-                    'name'    => 'Offer Information',
+                    'name' => 'Offer Information',
                 ],
 
-                'services-content'       => [
+                'services-content' => [
                     'description' => [
                         'emi-available-info'   => 'Tüm ana kredi kartlarında ücretsiz EMI mevcut',
                         'free-shipping-info'   => 'Tüm siparişlerde ücretsiz kargo keyfini çıkarın',
@@ -280,9 +280,9 @@ return [
                         'time-support-info'    => 'Sohbet ve e-posta yoluyla adanmış 7/24 destek',
                     ],
 
-                    'name'        => 'Hizmet İçeriği',
+                    'name' => 'Hizmet İçeriği',
 
-                    'title'       => [
+                    'title' => [
                         'emi-available'   => 'EMI Mevcut',
                         'free-shipping'   => 'Ücretsiz Kargo',
                         'product-replace' => 'Ürün Değiştirme',
@@ -290,7 +290,7 @@ return [
                     ],
                 ],
 
-                'top-collections'        => [
+                'top-collections' => [
                     'content' => [
                         'sub-title-1' => 'Our Collections',
                         'sub-title-2' => 'Our Collections',
@@ -301,12 +301,12 @@ return [
                         'title'       => 'The game with our new additions!',
                     ],
 
-                    'name'    => 'Top Collections',
+                    'name' => 'Top Collections',
                 ],
             ],
         ],
 
-        'user'      => [
+        'user' => [
             'roles' => [
                 'description' => 'This role users will have all the access',
                 'name'        => 'Administrator',
@@ -320,12 +320,12 @@ return [
 
     'installer' => [
         'index' => [
-            'create-administrator'      => [
+            'create-administrator' => [
                 'admin'            => 'Yönetici',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Parolayı Onayla',
-                'email-address'    => 'admin@example.com',
                 'email'            => 'E-posta',
+                'email-address'    => 'admin@example.com',
                 'password'         => 'Parola',
                 'title'            => 'Yönetici Oluştur',
             ],
@@ -346,8 +346,8 @@ return [
                 'default-currency'    => 'Varsayılan Para Birimi',
                 'default-locale'      => 'Varsayılan Yerel',
                 'default-timezone'    => 'Varsayılan Zaman Dilimi',
-                'default-url-link'    => 'https://localhost',
                 'default-url'         => 'Varsayılan URL',
+                'default-url-link'    => 'https://localhost',
                 'dirham'              => 'Dirham (AED)',
                 'euro'                => 'Euro (EUR)',
                 'iranian'             => 'İran Riyali (IRR)',
@@ -368,32 +368,32 @@ return [
                 'warning-message'     => 'Dikkat! Varsayılan sistem dilleri ve varsayılan para birimi ayarlarınız kalıcıdır ve bir daha asla değiştirilemez.',
             ],
 
-            'installation-processing'   => [
-                'bagisto-info'     => 'Veritabanı tabloları oluşturuluyor, bu birkaç dakika sürebilir',
+            'installation-processing' => [
                 'bagisto'          => 'Bagisto Kurulumu',
+                'bagisto-info'     => 'Veritabanı tabloları oluşturuluyor, bu birkaç dakika sürebilir',
                 'title'            => 'Kurulum',
             ],
 
-            'installation-completed'    => [
+            'installation-completed' => [
                 'admin-panel'                => 'Yönetici Paneli',
                 'bagisto-forums'             => 'Bagisto Forumu',
                 'customer-panel'             => 'Müşteri Paneli',
                 'explore-bagisto-extensions' => 'Bagisto Uzantılarını Keşfedin',
-                'title-info'                 => 'Bagisto sisteminize başarıyla kuruldu.',
                 'title'                      => 'Kurulum Tamamlandı',
+                'title-info'                 => 'Bagisto sisteminize başarıyla kuruldu.',
             ],
 
-            'ready-for-installation'    => [
+            'ready-for-installation' => [
                 'create-databsae-table'   => 'Veritabanı tablosu oluştur',
-                'install-info-button'     => 'Aşağıdaki düğmeye tıklayın',
-                'install-info'            => 'Kurulum için Bagisto',
                 'install'                 => 'Yükleme',
+                'install-info'            => 'Kurulum için Bagisto',
+                'install-info-button'     => 'Aşağıdaki düğmeye tıklayın',
                 'populate-database-table' => 'Veritabanı tablolarını doldur',
                 'start-installation'      => 'Kurulumu Başlat',
                 'title'                   => 'Kurulum için Hazır',
             ],
 
-            'start'                     => [
+            'start' => [
                 'locale'        => 'Yerel',
                 'main'          => 'Başlangıç',
                 'select-locale' => 'Yerel Seçin',
@@ -401,7 +401,7 @@ return [
                 'welcome-title' => 'Bagisto 2.0\'a hoş geldiniz.',
             ],
 
-            'server-requirements'       => [
+            'server-requirements' => [
                 'calendar'    => 'Takvim',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
@@ -416,45 +416,43 @@ return [
                 'openssl'     => 'openssl',
                 'pcre'        => 'pcre',
                 'pdo'         => 'pdo',
-                'php-version' => '8.1 veya üstü',
                 'php'         => 'PHP',
+                'php-version' => '8.1 veya üstü',
                 'session'     => 'oturum',
                 'title'       => 'Sunucu Gereksinimleri',
                 'tokenizer'   => 'tokenizer',
                 'xml'         => 'XML',
             ],
 
-            'arabic'                    => 'Arapça',
-            'back'                      => 'Geri',
-            'bagisto-info'              => 'Webkul tarafından geliştirilen bir Topluluk Projesi',
-            'bagisto-logo'              => 'Bagisto Logosu',
-            'bagisto'                   => 'Bagisto',
-            'bengali'                   => 'Bengalce',
-            'chinese'                   => 'Çince',
-            'continue'                  => 'Devam Et',
-            'dutch'                     => 'Hollandaca',
-            'english'                   => 'İngilizce',
-            'french'                    => 'Fransızca',
-            'german'                    => 'Almanca',
-            'hebrew'                    => 'İbranice',
-            'hindi'                     => 'Hintçe',
-            'installation-description'  => 'Bagisto kurulumu genellikle birkaç adım içerir. İşte Bagisto kurulum sürecinin genel bir taslağı:',
-            'installation-info'         => 'Sizi burada görmekten mutluluk duyuyoruz!',
-            'installation-title'        => 'Kurulum\'a Hoş Geldiniz',
-            'italian'                   => 'İtalyanca',
-            'japanese'                  => 'Japonca',
-            'persian'                   => 'Farsça',
-            'polish'                    => 'Lehçe',
-            'portuguese'                => 'Brezilya Portekizcesi',
-            'russian'                   => 'Rusça',
-            'save-configuration'        => 'Yapılandırmayı Kaydet',
-            'sinhala'                   => 'Sinhala',
-            'skip'                      => 'Atla',
-            'spanish'                   => 'İspanyolca',
-            'title'                     => 'Bagisto Kurulum Sihirbazı',
-            'turkish'                   => 'Türkçe',
-            'ukrainian'                 => 'Ukraynaca',
-            'webkul'                    => 'Webkul',
+            'arabic'                   => 'Arapça',
+            'back'                     => 'Geri',
+            'bagisto'                  => 'Bagisto',
+            'bagisto-info'             => 'Webkul tarafından geliştirilen bir Topluluk Projesi',
+            'bagisto-logo'             => 'Bagisto Logosu',
+            'bengali'                  => 'Bengalce',
+            'chinese'                  => 'Çince',
+            'continue'                 => 'Devam Et',
+            'dutch'                    => 'Hollandaca',
+            'english'                  => 'İngilizce',
+            'french'                   => 'Fransızca',
+            'german'                   => 'Almanca',
+            'hebrew'                   => 'İbranice',
+            'hindi'                    => 'Hintçe',
+            'installation-description' => 'Bagisto kurulumu genellikle birkaç adım içerir. İşte Bagisto kurulum sürecinin genel bir taslağı:',
+            'installation-info'        => 'Sizi burada görmekten mutluluk duyuyoruz!',
+            'installation-title'       => 'Kurulum\'a Hoş Geldiniz',
+            'italian'                  => 'İtalyanca',
+            'japanese'                 => 'Japonca',
+            'persian'                  => 'Farsça',
+            'polish'                   => 'Lehçe',
+            'portuguese'               => 'Brezilya Portekizcesi',
+            'russian'                  => 'Rusça',
+            'sinhala'                  => 'Sinhala',
+            'spanish'                  => 'İspanyolca',
+            'title'                    => 'Bagisto Kurulum Sihirbazı',
+            'turkish'                  => 'Türkçe',
+            'ukrainian'                => 'Ukraynaca',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

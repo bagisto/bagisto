@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'आपका आर्डर रद्द कर दिया गया है',
                     'page-title'         => 'आर्डर #:order_id',
                     'payment-method'     => 'भुगतान मेथड',
+                    'reorder-btn-title'  => 'पुनः क्रमबद्ध करें',
                     'shipping-address'   => 'शिपिंग पता',
                     'shipping-method'    => 'शिपिंग मेथड',
                     'title'              => 'देखें',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'यहां प्रोडक्ट्स खोजें',
                 'sign-in'           => 'साइन इन करें',
                 'sign-up'           => 'साइन अप करें',
+                'submit'            => 'सबमिट करें',
                 'title'             => 'खाता',
                 'welcome'           => 'स्वागत है',
                 'welcome-guest'     => 'स्वागतम अतिथि',
                 'wishlist'          => 'विशलिस्ट',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'डिफ़ॉल्ट भाषा',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -368,45 +376,37 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'क्रिया चुनें',
-                    'select-option' => 'विकल्प चुनें',
-                    'submit'        => 'प्रस्तुत करें',
-                ],
+                'length-of' => ':length का',
+                'results'   => ':total परिणाम',
+                'selected'  => ':total चयनित',
 
-                'filter' => [
-                    'title' => 'फ़िल्टर',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'आपको एक समूह क्रिया का चयन करना होगा।',
+                    'must-select-a-mass-action-option' => 'आपको एक समूह क्रिया के विकल्प का चयन करना होगा।',
+                    'no-records-selected'              => 'कोई रिकॉर्ड चयनित नहीं किया गया है।',
+                    'select-action'                    => 'क्रिया का चयन करें',
                 ],
 
                 'search' => [
                     'title' => 'खोजें',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'फ़िल्टर लागू करें',
+                'filter' => [
+                    'apply-filter' => 'फ़िल्टर लागू करें',
+                    'title'        => 'फ़िल्टर',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'कम से कम 2 अक्षर लिखें...',
-                        'no-results'        => 'कोई परिणाम नहीं मिला...',
+                    'dropdown' => [
+                        'select' => 'चुनें',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'कम से कम 2 अक्षर टाइप करें...',
+                            'no-results'         => 'कोई परिणाम नहीं मिला...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'सभी को हटाएँ',
-                    'title'     => 'कस्टम फ़िल्टर',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'पिछले महीने',
-                    'last-six-months'   => 'पिछले 6 महीने',
-                    'last-three-months' => 'पिछले 3 महीने',
-                    'this-month'        => 'इस महीने',
-                    'this-week'         => 'इस सप्ताह',
-                    'this-year'         => 'इस साल',
-                    'today'             => 'आज',
-                    'yesterday'         => 'कल',
+                    'custom-filters' => [
+                        'clear-all' => 'सभी साफ़ करें',
+                    ],
                 ],
             ],
 
@@ -414,12 +414,12 @@ return [
                 'actions'              => 'क्रियाएँ',
                 'next-page'            => 'अगला पृष्ठ',
                 'no-records-available' => 'कोई रिकॉर्ड उपलब्ध नहीं है।',
-                'of'                   => 'कुल :total एन्ट्री में से',
+                'of'                   => 'कुल :total प्रविष्टियों में से',
                 'page-navigation'      => 'पृष्ठ नेविगेशन',
                 'page-number'          => 'पृष्ठ संख्या',
                 'previous-page'        => 'पिछला पृष्ठ',
-                'showing'              => ':firstItem दिखा रहा है',
-                'to'                   => ':lastItem तक',
+                'showing'              => 'दिखा रहा है :firstItem',
+                'to'                   => 'से :lastItem',
             ],
         ],
 
@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'कोई नहीं',
+                    'none'         => 'कोई नहीं',
+                    'total-amount' => 'कुल राशि',
                 ],
 
                 'downloadable' => [
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'जारी रखने के लिए जारी रखें',
             'illegal'                   => 'मात्रा एक से कम नहीं हो सकती।',
+            'inactive-add'              => 'निष्क्रिय आइटम को कार्ट में जोड़ा नहीं जा सकता।',
             'inactive'                  => 'आइटम निष्क्रिय कर दिया गया है और इसके बाद से कार्ट से हटा दिया गया है।',
             'inventory-warning'         => 'अनुरोधित मात्रा उपलब्ध नहीं है, कृपया बाद में पुनः प्रयास करें।',
             'item-add-to-cart'          => 'आइटम सफलतापूर्वक कार्ट में जोड़ दिया गया',
@@ -676,6 +678,16 @@ return [
                 'proceed-to-checkout' => 'चेकआउट करें',
                 'sub-total'           => 'उप-कुल',
                 'tax'                 => 'कर',
+
+                'estimate-shipping' => [
+                    'country'        => 'देश',
+                    'info'           => 'अपने गंतव्य को दर्ज करें और शिपिंग और कर का अनुमान प्राप्त करें।',
+                    'postcode'       => 'पिन कोड',
+                    'select-country' => 'देश चुनें',
+                    'select-state'   => 'राज्य चुनें',
+                    'state'          => 'राज्य',
+                    'title'          => 'शिपिंग और कर का अनुमान',
+                ],
             ],
         ],
 
@@ -756,11 +768,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'हमें एक नोट लिखें और हम आपके पास जितनी जल्दी हो सके वापस आएंगे',
+            'desc'          => 'आपके दिमाग में क्या है?',
+            'describe-here' => 'यहां विवरण दें',
+            'email'         => 'ईमेल',
+            'message'       => 'संदेश',
+            'name'          => 'नाम',
+            'phone-number'  => 'फ़ोन नंबर',
+            'submit'        => 'सबमिट करें',
+            'title'         => 'हमसे संपर्क करें',
+        ],
+
         'index' => [
             'offer'               => 'पहले आदेश पर अपटू 40% तक की छूट पाएं अभी खरीदें',
             'resend-verify-email' => 'सत्यापन ईमेल फिर से भेजें',
             'verify-email'        => 'अपने ईमेल खाता सत्यापित करें',
         ],
+
+        'thanks-for-contact' => 'आपके टिप्पणियों और प्रश्नों के साथ हमसे संपर्क करने के लिए धन्यवाद। हम आपको बहुत जल्द ही जवाब देंगे।',
     ],
 
     'partials' => [
@@ -860,6 +886,14 @@ return [
                 'subject'     => 'आपने हमारी समाचार पत्रिका में सदस्यता ली है!',
                 'unsubscribe' => 'सदस्यता रद्द करें',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'वेबसाइट संपर्क फ़ॉर्म के माध्यम से',
+            'reply-to-mail'   => 'कृपया इस ईमेल का जवाब दें।',
+            'reach-via-phone' => 'वैकल्पिक रूप से, आप हमें फ़ोन पर संपर्क कर सकते हैं',
+            'inquiry-from'    => 'से पूछताछ',
+            'to'              => 'संपर्क करने के लिए',
         ],
 
         'orders' => [

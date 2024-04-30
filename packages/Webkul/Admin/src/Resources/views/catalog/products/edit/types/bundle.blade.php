@@ -18,21 +18,21 @@
         type="text/x-template"
         id="v-bundle-options-template"
     >
-        <div class="relative bg-white dark:bg-gray-900  rounded box-shadow">
+        <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
             <!-- Panel Header -->
-            <div class="flex gap-5 justify-between mb-2.5 p-4">
+            <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.products.edit.types.bundle.title')
                     </p>
 
-                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
                         @lang('admin::app.catalog.products.edit.types.bundle.info')
                     </p>
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-1 items-center">
+                <div class="flex items-center gap-x-1">
                     <div
                         class="secondary-button"
                         @click="resetForm(); $refs.updateCreateOptionModal.open()"
@@ -62,18 +62,18 @@
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                 v-else
             >
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-options.svg') }}"
-                    class="w-20 h-20 border border-dashed dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
+                    class="h-20 w-20 rounded border border-dashed dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-1.5 items-center">
-                    <p class="text-base text-gray-400 font-semibold">
+                <div class="flex flex-col items-center gap-1.5">
+                    <p class="text-base font-semibold text-gray-400">
                         @lang('admin::app.catalog.products.edit.types.bundle.empty-title')
                     </p>
 
@@ -100,7 +100,7 @@
                     <x-admin::modal ref="updateCreateOptionModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-lg text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.title')
                             </p>
                         </x-slot>
@@ -185,7 +185,7 @@
                         <!-- Modal Footer -->
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-2.5 items-center">
+                            <div class="flex items-center gap-x-2.5">
                                 <button 
                                     type="submit"
                                     class="primary-button"
@@ -200,7 +200,10 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-bundle-option-item-template">
+    <script
+        type="text/x-template"
+        id="v-bundle-option-item-template"
+    >
         <!-- Panel -->
         <div>
             <!-- Hidden Inputs -->
@@ -229,38 +232,38 @@
             />
 
             <!-- Panel Header -->
-            <div class="flex gap-5 justify-between mb-2.5 p-4">
+            <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <div class="flex flex-col gap-2">
                     <p
-                        class="text-base text-gray-800 dark:text-white font-semibold"
-                        :class="{'required': option.is_required}"
+                        class="text-base font-semibold text-gray-800 dark:text-white"
+                        :class="{'required': option.is_required == 1}"
                     >
                         @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
                     </p>
 
-                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
                         @{{ types[option.type].info }}
                     </p>
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-5 items-center">
+                <div class="flex items-center gap-x-5">
                     <p
-                        class="text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                        class="cursor-pointer font-semibold text-blue-600 transition-all hover:underline"
                         @click="$refs['productSearch' + option.id].openDrawer()"
                     >
                         @lang('admin::app.catalog.products.edit.types.bundle.option.add-btn')
                     </p>
 
                     <p
-                        class="text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                        class="cursor-pointer font-semibold text-blue-600 transition-all hover:underline"
                         @click="edit"
                     >
                         @lang('admin::app.catalog.products.edit.types.bundle.option.edit-btn')
                     </p>
 
                     <p
-                        class="text-red-600 font-semibold cursor-pointer transition-all hover:underline"
+                        class="cursor-pointer font-semibold text-red-600 transition-all hover:underline"
                         @click="remove"
                     >
                         @lang('admin::app.catalog.products.edit.types.bundle.option.delete-btn')
@@ -282,12 +285,12 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800">
+                        <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
                                 <div>
-                                    <i class="icon-drag text-xl dark:text-gray-300 hover:text-gray-700 transition-all cursor-grab"></i>
+                                    <i class="icon-drag cursor-grab text-xl transition-all hover:text-gray-700 dark:text-gray-300"></i>
                                 </div>
 
                                 <!-- Is Default Option -->
@@ -295,7 +298,7 @@
                                     <input
                                         :type="[option.type == 'checkbox' || option.type == 'multiselect' ? 'checkbox' : 'radio']"
                                         :id="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
-                                        class="sr-only peer"
+                                        class="peer sr-only"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
                                         :value="element.is_default"
                                         :checked="element.is_default"
@@ -303,7 +306,7 @@
                                     />
 
                                     <label
-                                        class="text-2xl peer-checked:text-blue-600 cursor-pointer"
+                                        class="cursor-pointer text-2xl peer-checked:text-blue-600"
                                         :class="[option.type == 'checkbox' || option.type == 'multiselect' ? 'icon-uncheckbox  peer-checked:icon-checked' : 'icon-radio-normal peer-checked:icon-radio-selected']"
                                         :for="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
                                     >
@@ -312,13 +315,13 @@
                                 
                                 <!-- Image -->
                                 <div
-                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
-                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.product.images.length}"
+                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                                    :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! element.product.images.length}"
                                 >
                                     <template v-if="! element.product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                     
-                                        <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
                                             @lang('admin::app.catalog.products.edit.types.bundle.image-placeholder')
                                         </p>
                                     </template>
@@ -329,8 +332,8 @@
                                 </div>
 
                                 <!-- Details -->
-                                <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                <div class="grid place-content-start gap-1.5">
+                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                                         @{{ element.product.name }}
                                     </p>
 
@@ -341,8 +344,8 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-1 place-content-start text-right">
-                                <p class="text-gray-800 font-semibold dark:text-white">
+                            <div class="grid place-content-start gap-1 text-right">
+                                <p class="font-semibold text-gray-800 dark:text-white">
                                     @{{ $admin.formatPrice(element.product.price) }}    
                                 </p>
                                 
@@ -368,14 +371,14 @@
                                         type="text"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex min-h-[39px] w-[86px] rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                         :class="[errors['bundle_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>
                                 </x-admin::form.control-group>
 
                                 <p
-                                    class="text-red-600 cursor-pointer transition-all hover:underline"
+                                    class="cursor-pointer text-red-600 transition-all hover:underline"
                                     @click="removeProduct(element)"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.bundle.option.delete-btn')
@@ -388,18 +391,18 @@
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                 v-else
             >
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                    class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-1.5 items-center">
-                    <p class="text-base text-gray-400 font-semibold">
+                <div class="flex flex-col items-center gap-1.5">
+                    <p class="text-base font-semibold text-gray-400">
                         @lang('admin::app.catalog.products.edit.types.bundle.option.empty-title')
                     </p>
 

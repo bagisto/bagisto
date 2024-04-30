@@ -36,6 +36,8 @@ return [
         'description-text' => 'Alle meldingen weergeven',
         'marked-success'   => 'Melding Succesvol Gemarkeerd',
         'no-record'        => 'Geen Records Gevonden',
+        'of'               => 'van',
+        'per-page'         => 'Per pagina',
         'read-all'         => 'Markeer als Gelezen',
         'title'            => 'Meldingen',
         'view-all'         => 'Alles Bekijken',
@@ -47,15 +49,6 @@ return [
             'pending'         => 'Bestelling In Afwachting',
             'pending-payment' => 'In Afwachting van Betaling',
             'processing'      => 'Bestelling In Verwerking',
-        ],
-
-        'status' => [
-            'all'        => 'Alle',
-            'canceled'   => 'Geannuleerd',
-            'closed'     => 'Gesloten',
-            'completed'  => 'Voltooid',
-            'pending'    => 'In Afwachting',
-            'processing' => 'In Verwerking',
         ],
     ],
 
@@ -134,7 +127,16 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'Bestellingen',
+                'create-btn' => 'Bestelling aanmaken',
+                'title'      => 'Bestellingen',
+
+                'search-customer' => [
+                    'create-btn'  => 'Klant aanmaken',
+                    'empty-info'  => 'Geen klanten beschikbaar voor zoekterm.',
+                    'empty-title' => 'Geen klanten gevonden',
+                    'search-by'   => 'Zoeken op e-mail of naam',
+                    'title'       => 'Selecteer Klant',
+                ],
 
                 'datagrid' => [
                     'canceled'        => 'Geannuleerd',
@@ -152,13 +154,173 @@ return [
                     'order-id'        => 'Bestelnummer',
                     'pay-by'          => 'Betaal Via - :method',
                     'pay-via'         => 'Betaal Via',
-                    'pending'         => 'In behandeling',
                     'pending-payment' => 'In afwachting van betaling',
+                    'pending'         => 'In behandeling',
                     'processing'      => 'Verwerking',
                     'product-count'   => ':count + Meer producten',
                     'status'          => 'Status',
                     'success'         => 'Succes',
                     'view'            => 'Bekijken',
+                ],
+            ],
+
+            'create' => [
+                'add-to-cart'             => 'Toevoegen aan winkelwagen',
+                'back-btn'                => 'Terug',
+                'check-billing-address'   => 'Factuuradres ontbreekt.',
+                'check-shipping-address'  => 'Verzendadres ontbreekt.',
+                'configuration'           => 'Configuratie',
+                'coupon-already-applied'  => 'Couponcode is al toegepast.',
+                'coupon-applied'          => 'Couponcode succesvol toegepast.',
+                'coupon-error'            => 'Couponcode kan niet worden toegepast.',
+                'coupon-not-found'        => 'Coupon niet gevonden',
+                'coupon-remove'           => 'Couponcode succesvol verwijderd.',
+                'error'                   => 'Er is iets misgegaan',
+                'minimum-order-error'     => 'Het minimum bestelbedrag is niet bereikt.',
+                'order-placed-success'    => 'Bestelling succesvol geplaatst.',
+                'payment-not-supported'   => 'Deze betaalmethode wordt niet ondersteund',
+                'save-btn'                => 'Bestelling aanmaken',
+                'specify-payment-method'  => 'Betaalmethode ontbreekt.',
+                'specify-shipping-method' => 'Verzendmethode ontbreekt.',
+                'title'                   => 'Bestelling aanmaken voor :name',
+
+                'types' => [
+                    'configurable' => [
+                        'select-options' => 'Selecteer een optie',
+                    ],
+
+                    'bundle' => [
+                        'none'         => 'Geen',
+                        'total-amount' => 'Totaalbedrag',
+                    ],
+
+                    'grouped' => [
+                        'name' => 'Naam',
+                    ],
+
+                    'downloadable' => [
+                        'title' => 'Links',
+                    ],
+                ],
+
+                'cart' => [
+                    'success-add-to-cart' => 'Product succesvol toegevoegd aan winkelwagen',
+                    'success-remove'      => 'Item succesvol verwijderd uit winkelwagen',
+                    'success-update'      => 'Winkelwagenitem succesvol bijgewerkt',
+
+                    'items' => [
+                        'add-product'       => 'Product toevoegen',
+                        'amount-per-unit'   => ':amount Per Eenheid x :qty Hoeveelheid',
+                        'delete'            => 'Verwijderen',
+                        'empty-description' => 'Geen items gevonden in uw winkelwagen.',
+                        'empty-title'       => 'Lege winkelwagen',
+                        'move-to-wishlist'  => 'Verplaatsen naar verlanglijst',
+                        'see-details'       => 'Details bekijken',
+                        'sku'               => 'SKU - :sku',
+                        'sub-total'         => 'Subtotaal - :sub_total',
+                        'title'             => 'Winkelwagenitems',
+
+                        'search' => [
+                            'add-to-cart'   => 'Toevoegen aan winkelwagen',
+                            'available-qty' => ':qty beschikbaar',
+                            'empty-info'    => 'Geen producten beschikbaar voor zoekterm.',
+                            'empty-title'   => 'Geen producten gevonden',
+                            'product-image' => 'Productafbeelding',
+                            'qty'           => 'Aantal',
+                            'sku'           => 'SKU - :sku',
+                            'title'         => 'Producten zoeken',
+                        ],
+                    ],
+
+                    'address' => [
+                        'add-btn'          => 'Adres toevoegen',
+                        'add-new'          => 'Nieuw adres toevoegen',
+                        'add-new-address'  => 'Nieuw adres toevoegen',
+                        'addresses'        => 'Adressen',
+                        'back'             => 'Terug',
+                        'billing-address'  => 'Factuuradres',
+                        'city'             => 'Stad',
+                        'company-name'     => 'Bedrijfsnaam',
+                        'confirm'          => 'Bevestigen',
+                        'country'          => 'Land',
+                        'edit-btn'         => 'Adres bewerken',
+                        'email'            => 'E-mail',
+                        'first-name'       => 'Voornaam',
+                        'last-name'        => 'Achternaam',
+                        'postcode'         => 'Postcode',
+                        'proceed'          => 'Doorgaan',
+                        'same-as-billing'  => 'Hetzelfde adres gebruiken voor verzending?',
+                        'save'             => 'Opslaan',
+                        'save-address'     => 'Opslaan in adresboek',
+                        'select-country'   => 'Selecteer land',
+                        'select-state'     => 'Selecteer provincie',
+                        'shipping-address' => 'Verzendadres',
+                        'state'            => 'Provincie',
+                        'street-address'   => 'Straatnaam en huisnummer',
+                        'telephone'        => 'Telefoonnummer',
+                        'title'            => 'Adres',
+                        'vat-id'           => 'BTW-nummer',
+                    ],
+
+                    'payment' => [
+                        'title' => 'Betaling',
+                    ],
+
+                    'shipping' => [
+                        'title' => 'Verzending',
+                    ],
+
+                    'summary' => [
+                        'apply-coupon'    => 'Coupon toepassen',
+                        'discount-amount' => 'Korting',
+                        'enter-your-code' => 'Voer uw code in',
+                        'grand-total'     => 'Totaalbedrag',
+                        'place-order'     => 'Bestelling plaatsen',
+                        'processing'      => 'Verwerken',
+                        'shipping-amount' => 'Verzendkosten',
+                        'sub-total'       => 'Subtotaal',
+                        'tax'             => 'Belasting',
+                        'title'           => 'Besteloverzicht',
+                    ],
+                ],
+
+                'cart-items' => [
+                    'add-to-cart'       => 'Toevoegen aan winkelwagen',
+                    'delete'            => 'Verwijderen',
+                    'empty-description' => 'Geen items gevonden in uw winkelwagen.',
+                    'empty-title'       => 'Lege winkelwagen',
+                    'see-details'       => 'Details bekijken',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Winkelwagenitems',
+                ],
+
+                'recent-order-items' => [
+                    'add-to-cart'       => 'Toevoegen aan winkelwagen',
+                    'empty-description' => 'Geen items gevonden in uw recente bestellingen.',
+                    'empty-title'       => 'Lege bestellingen',
+                    'see-details'       => 'Details bekijken',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Recente bestelitems',
+                    'view'              => 'Bekijken',
+                ],
+
+                'wishlist-items' => [
+                    'add-to-cart'       => 'Toevoegen aan winkelwagen',
+                    'delete'            => 'Verwijderen',
+                    'empty-description' => 'Geen items gevonden in uw verlanglijst.',
+                    'empty-title'       => 'Lege verlanglijstitems',
+                    'see-details'       => 'Details bekijken',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Verlanglijstitems',
+                ],
+
+                'compare-items' => [
+                    'add-to-cart'       => 'Toevoegen aan winkelwagen',
+                    'delete'            => 'Verwijderen',
+                    'empty-description' => 'Geen items gevonden in uw vergelijkingslijst.',
+                    'empty-title'       => 'Lege vergelijkingsitems',
+                    'sku'               => 'SKU - :sku',
+                    'title'             => 'Vergelijkingsitems',
                 ],
             ],
 
@@ -211,6 +373,7 @@ return [
                 'refund'                => 'Terugbetaling',
                 'refund-id'             => 'Terugbetaling #:refund',
                 'refunded'              => 'Terugbetaald',
+                'reorder'               => 'Herordenen',
                 'ship'                  => 'Verzenden',
                 'shipment'              => 'Verzending #:shipment',
                 'shipments'             => 'Verzendingen',
@@ -900,6 +1063,7 @@ return [
                 'position'                => 'Positie',
                 'price'                   => 'Prijs',
                 'regex'                   => 'Regex',
+                'regex-info'              => 'Expressie moet tussen dubbele aanhalingstekens staan.',
                 'save-btn'                => 'Attribuut Opslaan',
                 'select'                  => 'Selecteren',
                 'select-type'             => 'Selecteer Attribuuttype',
@@ -963,6 +1127,7 @@ return [
                 'position'              => 'Positie',
                 'price'                 => 'Prijs',
                 'regex'                 => 'Regex',
+                'regex-info'            => 'Expressie moet tussen dubbele aanhalingstekens staan.',
                 'save-btn'              => 'Attribuut Opslaan',
                 'select'                => 'Selecteren',
                 'select-type'           => 'Selecteer Attribuuttype',
@@ -1228,11 +1393,12 @@ return [
                 'active'                      => 'Actief',
                 'address-delete-confirmation' => 'Weet je zeker dat je dit adres wilt verwijderen?',
                 'back-btn'                    => 'Terug',
+                'create-order'                => 'Bestelling aanmaken',
                 'customer'                    => 'Klant',
                 'date-of-birth'               => 'Geboortedatum - :dob',
                 'default-address'             => 'Standaard Adres',
-                'delete'                      => 'Verwijderen',
                 'delete-account'              => 'Account verwijderen',
+                'delete'                      => 'Verwijderen',
                 'email'                       => 'E-mail - :email',
                 'empty-description'           => 'Maak nieuwe adressen aan voor de klant',
                 'empty-title'                 => 'Klantadres toevoegen',
@@ -1241,6 +1407,7 @@ return [
                 'inactive'                    => 'Inactief',
                 'login-as-customer'           => 'Inloggen als klant',
                 'note-created-success'        => 'Notitie succesvol aangemaakt',
+                'order-create-confirmation'   => 'Weet je zeker dat je een bestelling wilt aanmaken voor deze klant?',
                 'phone'                       => 'Telefoon - :phone',
                 'set-as-default'              => 'Instellen als Standaard',
                 'suspended'                   => 'Opgeschort',
@@ -1364,8 +1531,8 @@ return [
                 ],
 
                 'invoices' => [
-                    'count'         => 'Facturen (:count)',
-                    'increment-id'  => '# :increment_id',
+                    'count'        => 'Facturen (:count)',
+                    'increment-id' => '# :increment_id',
                 ],
 
                 'notes' => [
@@ -1379,14 +1546,26 @@ return [
                 ],
 
                 'orders' => [
-                    'count'           => 'Bestellingen (:count)',
-                    'increment-id'    => '# :increment_id',
-                    'total-revenue'   => 'Totale omzet - :revenue',
+                    'count'         => 'Bestellingen (:count)',
+                    'increment-id'  => '# :increment_id',
+                    'total-revenue' => 'Totale omzet - :revenue',
                 ],
 
                 'reviews' => [
-                    'id'          => 'ID - :id',
-                    'count'       => 'Beoordelingen (:count)',
+                    'id'    => 'ID - :id',
+                    'count' => 'Beoordelingen (:count)',
+                ],
+
+                'cart' => [
+                    'delete-success' => 'Item succesvol verwijderd uit winkelwagen.',
+                ],
+
+                'wishlist' => [
+                    'delete-success' => 'Item succesvol verwijderd uit verlanglijst.',
+                ],
+
+                'compare' => [
+                    'delete-success' => 'Item succesvol verwijderd uit vergelijking.',
                 ],
             ],
 
@@ -2159,8 +2338,10 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'De :name is al in gebruik.',
-            'create-btn'    => 'Pagina Maken',
-            'title'         => 'Pagina’s',
+            'create-btn'    => 'Pagina aanmaken',
+            'channel'       => 'Kanaal',
+            'language'      => 'Taal',
+            'title'         => 'Pagina\'s',
 
             'datagrid' => [
                 'delete'              => 'Verwijderen',
@@ -2605,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'Terug',
-                    'basic-settings' => 'Basisinstellingen',
                     'country'        => 'Land',
                     'identifier'     => 'Identificatie',
                     'save-btn'       => 'Belastingtarief Opslaan',
                     'select-country' => 'Selecteer Land',
                     'select-state'   => 'Selecteer Provincie',
+                    'settings'       => 'Instellingen',
                     'state'          => 'Provincie',
                     'tax-rate'       => 'Tarief',
                     'title'          => 'Belastingtarief Bewerken',
@@ -3413,17 +3594,21 @@ return [
                 'title' => 'Email',
 
                 'email-settings' => [
-                    'admin-email'            => 'Admin Email',
-                    'admin-email-tip'        => 'The email address of the admin for this channel to receive emails',
-                    'admin-name'             => 'Admin Name',
-                    'admin-name-tip'         => 'This name will be displayed in all admin emails',
-                    'admin-page-limit'       => 'Default Items Per Page (Admin)',
-                    'email-sender-name'      => 'Email Sender Name',
-                    'email-sender-name-tip'  => 'This name will be displayed in the customers inbox',
-                    'info'                   => 'Set email sender name, shop email address, admin name, and admin email address.',
-                    'shop-email-from'        => 'Shop Email Address',
-                    'shop-email-from-tip'    => 'The email address of this channel to send emails to your customers',
-                    'title'                  => 'Email Settings',
+                    'admin-email'           => 'Admin E-mail',
+                    'admin-email-tip'       => 'Het e-mailadres van de beheerder voor dit kanaal om e-mails te ontvangen',
+                    'admin-name'            => 'Beheerdersnaam',
+                    'admin-name-tip'        => 'Deze naam wordt weergegeven in alle administratieve e-mails',
+                    'admin-page-limit'      => 'Standaard aantal items per pagina (Beheerder)',
+                    'contact-email'         => 'Contact E-mail',
+                    'contact-email-tip'     => 'Het e-mailadres wordt onderaan uw e-mails getoond',
+                    'contact-name'          => 'Contactnaam',
+                    'contact-name-tip'      => 'Deze naam wordt onderaan uw e-mails getoond',
+                    'email-sender-name'     => 'Naam e-mailafzender',
+                    'email-sender-name-tip' => 'Deze naam wordt weergegeven in de inbox van klanten',
+                    'info'                  => 'Stel naam e-mailafzender, e-mailadres winkel, naam beheerder en e-mailadres beheerder in.',
+                    'shop-email-from'       => 'Winkel e-mailadres',
+                    'shop-email-from-tip'   => 'Het e-mailadres van dit kanaal om e-mails naar uw klanten te sturen',
+                    'title'                 => 'E-mailinstellingen',
                 ],
 
                 'notifications' => [

@@ -11,21 +11,21 @@
         type="text/x-template"
         id="v-downloadable-links-template"
     >
-        <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
+        <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
             <!-- Panel Header -->
-            <div class="flex gap-5 justify-between mb-2.5 p-4">
+            <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.title')
                     </p>
 
-                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.info')
                     </p>
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-1 items-center">
+                <div class="flex items-center gap-x-1">
                     <div
                         class="secondary-button"
                         @click="resetForm(); $refs.updateCreateLinkDrawer.open()"
@@ -49,51 +49,99 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800">
+                        <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
                             <!-- Hidden Input -->
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][{{$currentLocale->code}}][title]'" :value="element.title"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][{{$currentLocale->code}}][title]'"
+                                :value="element.title"
+                            />
 
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][price]'" :value="element.price"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][price]'"
+                                :value="element.price"
+                            />
 
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][downloads]'" :value="element.downloads"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][downloads]'"
+                                :value="element.downloads"
+                            />
 
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][sort_order]'" :value="index"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][sort_order]'"
+                                :value="index"
+                            />
 
 
                             <!-- File Hidden Fields -->
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][type]'" :value="element.type"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][type]'"
+                                :value="element.type"
+                            />
 
                             <template v-if="element.type == 'file'">
-                                <input type="hidden" :name="'downloadable_links[' + element.id + '][file]'" :value="element.file"/>
+                                <input
+                                    type="hidden"
+                                    :name="'downloadable_links[' + element.id + '][file]'"
+                                    :value="element.file"
+                                />
 
-                                <input type="hidden" :name="['downloadable_links[' + element.id + '][file_name]']" v-model="element.file_name"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_links[' + element.id + '][file_name]']"
+                                    v-model="element.file_name"
+                                />
                             </template>
 
                             <template v-else>
-                                <input type="hidden" :name="['downloadable_links[' + element.id + '][url]']" v-model="element.url"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_links[' + element.id + '][url]']"
+                                    v-model="element.url"
+                                />
                             </template>
 
 
                             <!-- Sample Hidden Fields -->
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][sample_type]'" :value="element.sample_type"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_links[' + element.id + '][sample_type]'"
+                                :value="element.sample_type"
+                            />
 
                             <template v-if="element.sample_type == 'file'">
-                                <input type="hidden" :name="'downloadable_links[' + element.id + '][sample_file]'" :value="element.sample_file"/>
+                                <input
+                                    type="hidden"
+                                    :name="'downloadable_links[' + element.id + '][sample_file]'"
+                                    :value="element.sample_file"
+                                />
 
-                                <input type="hidden" :name="['downloadable_links[' + element.id + '][sample_file_name]']" v-model="element.sample_file_name"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_links[' + element.id + '][sample_file_name]']"
+                                    v-model="element.sample_file_name"
+                                />
                             </template>
 
                             <template v-else>
-                                <input type="hidden" :name="['downloadable_links[' + element.id + '][sample_url]']" v-model="element.sample_url"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_links[' + element.id + '][sample_url]']"
+                                    v-model="element.sample_url"
+                                />
                             </template>
 
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-xl text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag cursor-grab text-xl text-gray-600 transition-all dark:text-gray-300"></i>
 
-                                <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                <div class="grid place-content-start gap-1.5">
+                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                                         @{{ element.title }}
                                     </p>
 
@@ -105,7 +153,7 @@
                                                 <a
                                                     :href="element.file_url"
                                                     target="_blank"
-                                                    class="text-blue-600 break-all transition-all hover:underline"
+                                                    class="break-all text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.file_name }}
                                                 </a>
@@ -119,7 +167,7 @@
                                                 <a
                                                     :href="element.url"
                                                     target="_blank"
-                                                    class="text-blue-600 break-all transition-all hover:underline"
+                                                    class="break-all text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.url }}
                                                 </a>
@@ -135,7 +183,7 @@
                                                 <a
                                                     :href="element.sample_file_url"
                                                     target="_blank"
-                                                    class="text-blue-600 break-all transition-all hover:underline"
+                                                    class="break-all text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.sample_file_name }}
                                                 </a>
@@ -149,7 +197,7 @@
                                                 <a
                                                     :href="element.sample_url"
                                                     target="_blank"
-                                                    class="text-blue-600 break-all transition-all hover:underline"
+                                                    class="break-all text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.sample_url }}
                                                 </a>
@@ -160,21 +208,21 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-1 place-content-start text-right">
-                                <p class="text-gray-800 font-semibold dark:text-white">
+                            <div class="grid place-content-start gap-1 text-right">
+                                <p class="font-semibold text-gray-800 dark:text-white">
                                     @{{ $admin.formatPrice(element.price) }}    
                                 </p>
 
-                                <div class="flex gap-x-5 items-center">
+                                <div class="flex items-center gap-x-5">
                                     <p
-                                        class="text-red-600 cursor-pointer transition-all hover:underline"
+                                        class="cursor-pointer text-red-600 transition-all hover:underline"
                                         @click="remove(element)"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.delete-btn')
                                     </p>
 
                                     <p
-                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                        class="cursor-pointer text-blue-600 transition-all hover:underline"
                                         @click="selectedLink = element; $refs.updateCreateLinkDrawer.open()"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.edit-btn')
@@ -188,18 +236,18 @@
 
             <!-- For Empty Links -->
             <div
-                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                 v-else
             >
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                    class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-1.5 items-center">
-                    <p class="text-base text-gray-400 font-semibold">
+                <div class="flex flex-col items-center gap-1.5">
+                    <p class="text-base font-semibold text-gray-400">
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.empty-title')
                     </p>
 
@@ -229,12 +277,12 @@
                         <!-- Drawer Header -->
                         <x-slot:header>
                             <div class="grid gap-3">
-                                <div class="flex justify-between items-center">
+                                <div class="flex items-center justify-between">
                                     <p class="text-xl font-medium dark:text-white">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.title')
                                     </p>
 
-                                    <button class="ltr:mr-11 rtl:ml-11 primary-button">
+                                    <button class="primary-button ltr:mr-11 rtl:ml-11">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.save-btn')
                                     </button>
                                 </div>
@@ -349,7 +397,7 @@
 
                                             <input
                                                 type="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 name="file"
                                                 ref="file"
@@ -358,7 +406,7 @@
 
                                             <a
                                                 :href="selectedLink.sample_file_url"
-                                                class="text-blue-600 text-sm break-all transition-all hover:underline"
+                                                class="break-all text-sm text-blue-600 transition-all hover:underline"
                                                 target="_blank"
                                                 v-if="selectedLink.file_url"
                                             >
@@ -438,7 +486,7 @@
                                             <input
                                                 type="file"
                                                 name="sample_file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
                                                 ref="sample_file"
                                                 @change="uploadFile('sample_file')"
                                             />
@@ -446,7 +494,7 @@
                                             <a
                                                 :href="selectedLink.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 text-sm break-all transition-all hover:underline"
+                                                class="break-all text-sm text-blue-600 transition-all hover:underline"
                                                 v-if="selectedLink.sample_file_url"
                                             >
                                                 @{{ selectedLink.sample_file_name }}
@@ -481,22 +529,25 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-downloadable-samples-template">
-        <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
+    <script
+        type="text/x-template"
+        id="v-downloadable-samples-template"
+    >
+        <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
             <!-- Panel Header -->
-            <div class="flex gap-5 justify-between mb-2.5 p-4">
+            <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.title')
                     </p>
 
-                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.info')
                     </p>
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-1 items-center">
+                <div class="flex items-center gap-x-1">
                     <div
                         class="secondary-button"
                         @click="resetForm(); $refs.updateCreateSampleDrawer.open()"
@@ -520,33 +571,56 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800">
+                        <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
                             <!-- Hidden Input -->
-                            <input type="hidden" :name="'downloadable_samples[' + element.id + '][title]'" :value="element.title"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_samples[' + element.id + '][title]'"
+                                :value="element.title"
+                            />
 
-                            <input type="hidden" :name="'downloadable_samples[' + element.id + '][sort_order]'" :value="index"/>
-
+                            <input
+                                type="hidden"
+                                :name="'downloadable_samples[' + element.id + '][sort_order]'"
+                                :value="index"
+                            />
 
                             <!-- File Hidden Fields -->
-                            <input type="hidden" :name="'downloadable_samples[' + element.id + '][type]'" :value="element.type"/>
+                            <input
+                                type="hidden"
+                                :name="'downloadable_samples[' + element.id + '][type]'"
+                                :value="element.type"
+                            />
 
                             <template v-if="element.type == 'file'">
-                                <input type="hidden" :name="'downloadable_samples[' + element.id + '][file]'" :value="element.file"/>
+                                <input
+                                    type="hidden"
+                                    :name="'downloadable_samples[' + element.id + '][file]'"
+                                    :value="element.file"
+                                />
 
-                                <input type="hidden" :name="['downloadable_samples[' + element.id + '][file_name]']" v-model="element.file_name"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_samples[' + element.id + '][file_name]']"
+                                    v-model="element.file_name"
+                                />
                             </template>
 
                             <template v-else>
-                                <input type="hidden" :name="['downloadable_samples[' + element.id + '][url]']" v-model="element.url"/>
+                                <input
+                                    type="hidden"
+                                    :name="['downloadable_samples[' + element.id + '][url]']"
+                                    v-model="element.url"
+                                />
                             </template>
 
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-xl text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag cursor-grab text-xl text-gray-600 transition-all dark:text-gray-300"></i>
 
-                                <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                <div class="grid place-content-start gap-1.5">
+                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
                                         @{{ element.title }}
                                     </p>
 
@@ -558,7 +632,7 @@
                                                 <a
                                                     :href="element.file_url"
                                                     target="_blank"
-                                                    class="text-blue-600 break-all transition-all hover:underline"
+                                                    class="break-all text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.file_name }}
                                                 </a>
@@ -572,7 +646,7 @@
                                                 <a
                                                     :href="element.url"
                                                     target="_blank"
-                                                    class="text-blue-600 break-all transition-all hover:underline"
+                                                    class="break-all text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.url }}
                                                 </a>
@@ -583,17 +657,17 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-1 place-content-start text-right">
-                                <div class="flex gap-x-5 items-center">
+                            <div class="grid place-content-start gap-1 text-right">
+                                <div class="flex items-center gap-x-5">
                                     <p
-                                        class="text-red-600 cursor-pointer transition-all hover:underline"
+                                        class="cursor-pointer text-red-600 transition-all hover:underline"
                                         @click="remove(element)"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.delete-btn')
                                     </p>
 
                                     <p
-                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                        class="cursor-pointer text-blue-600 transition-all hover:underline"
                                         @click="selectedSample = element; $refs.updateCreateSampleDrawer.open()"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.edit-btn')
@@ -607,18 +681,18 @@
 
             <!-- For Empty Links -->
             <div
-                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
+                class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                 v-else
             >
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+                    class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-1.5 items-center">
-                    <p class="text-base text-gray-400 font-semibold">
+                <div class="flex flex-col items-center gap-1.5">
+                    <p class="text-base font-semibold text-gray-400">
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.empty-title')
                     </p>
 
@@ -647,12 +721,12 @@
                         <!-- Drawer Header -->
                         <x-slot:header>
                             <div class="grid gap-3">
-                                <div class="flex justify-between items-center">
+                                <div class="flex items-center justify-between">
                                     <p class="text-xl font-medium dark:text-white">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.title')
                                     </p>
 
-                                    <button class="ltr:mr-11 rtl:ml-11 primary-button">
+                                    <button class="primary-button ltr:mr-11 rtl:ml-11">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.save-btn')
                                     </button>
                                 </div>
@@ -734,7 +808,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"
@@ -743,7 +817,7 @@
                                             <a
                                                 :href="selectedSample.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 text-sm break-all transition-all hover:underline"
+                                                class="break-all text-sm text-blue-600 transition-all hover:underline"
                                                 v-if="selectedSample.file_url"
                                             >
                                                 @{{ selectedSample.file_name }}

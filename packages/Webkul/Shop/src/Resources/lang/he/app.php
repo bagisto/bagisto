@@ -165,6 +165,7 @@ return [
                     'cancel-success'     => 'הזמנתך בוטלה בהצלחה',
                     'page-title'         => 'הזמנה #:order_id',
                     'payment-method'     => 'אמצעי תשלום',
+                    'reorder-btn-title'  => 'להזמין מחדש',
                     'shipping-address'   => 'כתובת למשלוח',
                     'shipping-method'    => 'שיטת משלוח',
                     'title'              => 'צפייה',
@@ -340,10 +341,17 @@ return [
                 'search-text'       => 'חפש מוצרים כאן',
                 'sign-in'           => 'התחבר',
                 'sign-up'           => 'הרשם',
+                'submit'            => 'שלח',
                 'title'             => 'חשבון',
                 'welcome'           => 'ברוך הבא',
                 'welcome-guest'     => 'ברוך הבא אורח',
                 'wishlist'          => 'רשימת משאלות',
+
+                'desktop'           => [
+                    'top' => [
+                        'default-locale' => 'שפת ברירת מחדל',
+                    ],
+                ],
             ],
 
             'footer' => [
@@ -368,56 +376,48 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'mass-actions' => [
-                    'select-action' => 'בחר פעולה',
-                    'select-option' => 'בחר אפשרות',
-                    'submit'        => 'שלח',
-                ],
+                'length-of' => ':length של',
+                'results'   => ':total תוצאות',
+                'selected'  => ':total נבחרו',
 
-                'filter' => [
-                    'title' => 'סנן',
+                'mass-actions' => [
+                    'must-select-a-mass-action'        => 'עליך לבחור פעולה כוללת.',
+                    'must-select-a-mass-action-option' => 'עליך לבחור אפשרות לפעולה כוללת.',
+                    'no-records-selected'              => 'לא נבחרו רשומות.',
+                    'select-action'                    => 'בחר פעולה',
                 ],
 
                 'search' => [
-                    'title' => 'חפש',
+                    'title' => 'חיפוש',
                 ],
-            ],
 
-            'filters' => [
-                'title' => 'החל מסננים',
+                'filter' => [
+                    'apply-filter' => 'החל מסננים',
+                    'title'        => 'סינון',
 
-                'dropdown' => [
-                    'searchable' => [
-                        'atleast-two-chars' => 'הקלד לפחות 2 תווים...',
-                        'no-results'        => 'לא נמצאו תוצאות...',
+                    'dropdown' => [
+                        'select' => 'בחר',
+
+                        'searchable' => [
+                            'at-least-two-chars' => 'הקלד לפחות 2 תווים...',
+                            'no-results'         => 'לא נמצאו תוצאות...',
+                        ],
                     ],
-                ],
 
-                'custom-filters' => [
-                    'clear-all' => 'נקה הכל',
-                    'title'     => 'סננים מותאמים אישית',
-                ],
-
-                'date-options' => [
-                    'last-month'        => 'החודש הקודם',
-                    'last-six-months'   => 'ה-6 חודשים האחרונים',
-                    'last-three-months' => 'ה-3 חודשים האחרונים',
-                    'this-month'        => 'החודש',
-                    'this-week'         => 'השבוע',
-                    'this-year'         => 'השנה',
-                    'today'             => 'היום',
-                    'yesterday'         => 'אתמול',
+                    'custom-filters' => [
+                        'clear-all' => 'נקה הכל',
+                    ],
                 ],
             ],
 
             'table' => [
                 'actions'              => 'פעולות',
-                'next-page'            => 'העמוד הבא',
+                'next-page'            => 'עמוד הבא',
                 'no-records-available' => 'אין רשומות זמינות.',
                 'of'                   => 'מתוך :total רשומות',
                 'page-navigation'      => 'ניווט בעמודים',
                 'page-number'          => 'מספר עמוד',
-                'previous-page'        => 'העמוד הקודם',
+                'previous-page'        => 'עמוד קודם',
                 'showing'              => 'מציג :firstItem',
                 'to'                   => 'עד :lastItem',
             ],
@@ -495,7 +495,8 @@ return [
                 ],
 
                 'bundle' => [
-                    'none' => 'אין',
+                    'none'         => 'אין',
+                    'total-amount' => 'סכום כולל',
                 ],
 
                 'downloadable' => [
@@ -614,6 +615,7 @@ return [
         'cart' => [
             'continue-to-checkout'      => 'המשך לתשלום',
             'illegal'                   => 'הכמות לא יכולה להיות פחות מאחד.',
+            'inactive-add'              => 'פריט לא פעיל לא ניתן להוסיף לעגלה.',
             'inactive'                  => 'הפריט הושבת ונמחק מהעגלה.',
             'inventory-warning'         => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
             'item-add-to-cart'          => 'הפריט התווסף בהצלחה',
@@ -676,6 +678,16 @@ return [
                 'proceed-to-checkout' => 'המשך לתשלום',
                 'sub-total'           => 'סכום ביניים',
                 'tax'                 => 'מס',
+
+                'estimate-shipping' => [
+                    'country'        => 'מדינה',
+                    'info'           => 'הזן את היעד שלך כדי לקבל חישוב של משלוח ומס.',
+                    'postcode'       => 'מיקוד',
+                    'select-country' => 'בחר מדינה',
+                    'select-state'   => 'בחר מדינה',
+                    'state'          => 'מדינה',
+                    'title'          => 'חישוב משלוח ומס',
+                ],
             ],
         ],
 
@@ -756,11 +768,25 @@ return [
     ],
 
     'home' => [
+        'contact' => [
+            'about'         => 'שלח לנו הודעה ונחזור אליך בהקדם האפשרי',
+            'desc'          => 'מה על דעתך?',
+            'describe-here' => 'תיאור כאן',
+            'email'         => 'אימייל',
+            'message'       => 'הודעה',
+            'name'          => 'שם',
+            'phone-number'  => 'מספר טלפון',
+            'submit'        => 'שלח',
+            'title'         => 'צור קשר',
+        ],
+
         'index' => [
             'offer'               => 'עד 40% הנחה על הזמנתך הראשונה! קנה עכשיו',
             'resend-verify-email' => 'שלח מחדש אימייל לאימות',
             'verify-email'        => 'אמת את חשבון האימייל שלך',
         ],
+
+        'thanks-for-contact' => 'תודה על פנייתך אלינו עם הערות ושאלותיך. אנחנו נשיב לך בהקדם האפשרי.',
     ],
 
     'partials' => [
@@ -860,6 +886,14 @@ return [
                 'subject'     => 'הצטרפת לניוזלטר שלנו',
                 'unsubscribe' => 'הסר מהרשימה',
             ],
+        ],
+
+        'contact-us' => [
+            'contact-from'    => 'באמצעות טופס יצירת קשר באתר',
+            'reply-to-mail'   => 'אנא השב למייל זה.',
+            'reach-via-phone' => 'בנוסף, תוכל ליצור קשר איתנו בטלפון במספר',
+            'inquiry-from'    => 'שאילתה מ',
+            'to'              => 'כדי ליצור קשר עם',
         ],
 
         'orders' => [

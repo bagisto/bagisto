@@ -14,18 +14,18 @@
     >
         <div>
             <div
-                class="flex gap-8 justify-center pt-5 bg-[#F5F5F5] max-1180:hidden"
+                class="flex justify-center gap-8 bg-[#F5F5F5] pt-5 max-1180:hidden"
                 :style="positionStyles"
             >
                 <div
                     role="button"
                     tabindex="0"
                     v-for="tab in tabs"
-                    class="pb-5 px-8 text-xl font-medium text-[#6E6E6E] cursor-pointer"
-                    :class="{'text-black border-navyBlue border-b-2 transition': tab.isActive }"
-                    v-text="tab.title"
+                    class="cursor-pointer px-8 pb-5 text-xl font-medium text-[#6E6E6E]"
+                    :class="{'border-b-2 border-navyBlue text-black transition': tab.isActive }"
                     @click="change(tab)"
                 >
+                    @{{ tab.title }}
                 </div>
             </div>
 

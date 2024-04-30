@@ -31,7 +31,7 @@
             <!-- First Name -->
             <div class="grid grid-cols-2 gap-x-5">
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="!mt-0 required">
+                    <x-shop::form.control-group.label class="required !mt-0">
                         @lang('shop::app.checkout.onepage.address.first-name')
                     </x-shop::form.control-group.label>
 
@@ -51,7 +51,7 @@
 
                 <!-- Last Name -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="!mt-0 required">
+                    <x-shop::form.control-group.label class="required !mt-0">
                         @lang('shop::app.checkout.onepage.address.last-name')
                     </x-shop::form.control-group.label>
 
@@ -72,7 +72,7 @@
 
             <!-- Email -->
             <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="!mt-0 required">
+                <x-shop::form.control-group.label class="required !mt-0">
                     @lang('shop::app.checkout.onepage.address.email')
                 </x-shop::form.control-group.label>
 
@@ -92,7 +92,7 @@
 
             <!-- Street Address -->
             <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="!mt-0 required">
+                <x-shop::form.control-group.label class="required !mt-0">
                     @lang('shop::app.checkout.onepage.address.street-address')
                 </x-shop::form.control-group.label>
 
@@ -153,8 +153,8 @@
                         <option
                             v-for="country in countries"
                             :value="country.code"
-                            v-text="country.name"
                         >
+                            @{{ country.name }}
                         </option>
                     </x-shop::form.control-group.control>
 
@@ -169,36 +169,39 @@
                         @lang('shop::app.checkout.onepage.address.state')
                     </x-shop::form.control-group.label>
 
-                    <template v-if="haveStates(selectedCountry)">
-                        <x-shop::form.control-group.control
-                            type="select"
-                            ::name="controlName + '.state'"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                            :label="trans('shop::app.checkout.onepage.address.state')"
-                            :placeholder="trans('shop::app.checkout.onepage.address.state')"
-                        >
-                            <option value="">
-                                @lang('shop::app.checkout.onepage.address.select-state')
-                            </option>
-
-                            <option
-                                v-for='(state, index) in states[selectedCountry]'
-                                :value="state.code"
+                    <template v-if="states">
+                        <template v-if="haveStates">
+                            <x-shop::form.control-group.control
+                                type="select"
+                                ::name="controlName + '.state'"
+                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                ::value="address.state"
+                                :label="trans('shop::app.checkout.onepage.address.state')"
+                                :placeholder="trans('shop::app.checkout.onepage.address.state')"
                             >
-                                @{{ state.default_name }}
-                            </option>
-                        </x-shop::form.control-group.control>
-                    </template>
+                                <option value="">
+                                    @lang('shop::app.checkout.onepage.address.select-state')
+                                </option>
 
-                    <template v-else>
-                        <x-shop::form.control-group.control
-                            type="text"
-                            ::name="controlName + '.state'"
-                            ::value="address.state"
-                            rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                            :label="trans('shop::app.checkout.onepage.address.state')"
-                            :placeholder="trans('shop::app.checkout.onepage.address.state')"
-                        />
+                                <option
+                                    v-for='(state, index) in states[selectedCountry]'
+                                    :value="state.code"
+                                >
+                                    @{{ state.default_name }}
+                                </option>
+                            </x-shop::form.control-group.control>
+                        </template>
+
+                        <template v-else>
+                            <x-shop::form.control-group.control
+                                type="text"
+                                ::name="controlName + '.state'"
+                                ::value="address.state"
+                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                :label="trans('shop::app.checkout.onepage.address.state')"
+                                :placeholder="trans('shop::app.checkout.onepage.address.state')"
+                            />
+                        </template>
                     </template>
 
                     <x-shop::form.control-group.error ::name="controlName + '.state'" />
@@ -210,7 +213,7 @@
             <div class="grid grid-cols-2 gap-x-5">
                 <!-- City -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="!mt-0 required">
+                    <x-shop::form.control-group.label class="required !mt-0">
                         @lang('shop::app.checkout.onepage.address.city')
                     </x-shop::form.control-group.label>
 
@@ -251,7 +254,7 @@
 
             <!-- Phone Number -->
             <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="!mt-0 required">
+                <x-shop::form.control-group.label class="required !mt-0">
                     @lang('shop::app.checkout.onepage.address.telephone')
                 </x-shop::form.control-group.label>
 
@@ -306,8 +309,14 @@
 
                     countries: [],
 
-                    states: [],
+                    states: null,
                 }
+            },
+
+            computed: {
+                haveStates() {
+                    return !! this.states[this.selectedCountry]?.length;
+                },
             },
 
             mounted() {
@@ -331,10 +340,6 @@
                             this.states = response.data.data;
                         })
                         .catch(() => {});
-                },
-
-                haveStates(countryCode) {
-                    return !! this.states[countryCode]?.length;
                 },
             }
         });

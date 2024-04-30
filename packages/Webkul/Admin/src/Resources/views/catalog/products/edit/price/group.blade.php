@@ -1,5 +1,5 @@
 <!-- Seperator -->
-<span class="block w-full absolute ltr:left-0 rtl:right-0 my-1.5 border border-gray-200"></span>
+<span class="absolute my-1.5 block w-full border border-gray-200 ltr:left-0 rtl:right-0"></span>
 
 <v-product-customer-group-price>
     <x-admin::shimmer.products.edit.group-price />
@@ -14,13 +14,13 @@
     >
         <div>
             <!-- Header -->
-            <div class="flex items-center justify-between mt-1.5 py-4">
-                <p class="text-gray-800 text-base py-2.5 font-semibold dark:text-white">
+            <div class="mt-1.5 flex items-center justify-between py-4">
+                <p class="py-2.5 text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.catalog.products.edit.price.group.title')
                 </p>
 
                 <p
-                    class="text-blue-600 cursor-pointer transition-all hover:underline"
+                    class="cursor-pointer text-blue-600 transition-all hover:underline"
                     @click="resetForm(); $refs.groupPriceCreateModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.price.group.create-btn')
@@ -35,21 +35,37 @@
                     v-for="(item, index) in prices"
                 >
                     <!-- Hidden Inputs -->
-                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][customer_group_id]'" :value="item.customer_group_id"/>
+                    <input
+                        type="hidden"
+                        :name="'customer_group_prices[' + item.id + '][customer_group_id]'"
+                        :value="item.customer_group_id"
+                    />
 
-                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][qty]'" :value="item.qty"/>
+                    <input
+                        type="hidden"
+                        :name="'customer_group_prices[' + item.id + '][qty]'"
+                        :value="item.qty"
+                    />
 
-                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][value_type]'" :value="item.value_type"/>
+                    <input
+                        type="hidden"
+                        :name="'customer_group_prices[' + item.id + '][value_type]'"
+                        :value="item.value_type"
+                    />
 
-                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][value]'" :value="item.value"/>
+                    <input
+                        type="hidden"
+                        :name="'customer_group_prices[' + item.id + '][value]'"
+                        :value="item.value"
+                    />
 
                     <div class="flex justify-between">
-                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                        <p class="font-semibold text-gray-600 dark:text-gray-300">
                             @{{ getGroupNameById(item.customer_group_id) }}
                         </p>
 
                         <p
-                            class="text-blue-600 cursor-pointer transition-all hover:underline"
+                            class="cursor-pointer text-blue-600 transition-all hover:underline"
                             @click="selectedPrice = item; $refs.groupPriceCreateModal.open()"
                         >
                             @lang('admin::app.catalog.products.edit.price.group.edit-btn')
@@ -73,16 +89,16 @@
 
                 <!-- Empty Container -->
                 <div
-                    class="flex gap-5 items-center py-2.5"
+                    class="flex items-center gap-5 py-2.5"
                     v-if="! prices.length"
                 >
                     <img
                         src="{{ bagisto_asset('images/icon-discount.svg') }}"
-                        class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
+                        class="h-20 w-20 rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                     />
 
                     <div class="flex flex-col gap-1.5">
-                        <p class="text-base text-gray-400 font-semibold">
+                        <p class="text-base font-semibold text-gray-400">
                             @lang('admin::app.catalog.products.edit.price.group.add-group-price')
                         </p>
 
@@ -104,14 +120,14 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-if="! selectedPrice.id"
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.create-title')
                             </p>
 
                             <p
-                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-else
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.update-title')
@@ -210,10 +226,10 @@
                         <!-- Modal Footer -->
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-2.5 items-center">
+                            <div class="flex items-center gap-x-2.5">
                                 <button
                                     type="button"
-                                    class="text-red-600 font-semibold whitespace-nowrap px-3 py-1.5 border-2 border-transparent rounded-md transition-all hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                                    class="cursor-pointer whitespace-nowrap rounded-md border-2 border-transparent px-3 py-1.5 font-semibold text-red-600 transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                                     @click="remove"
                                     v-if="selectedPrice.id"
                                 >

@@ -26,7 +26,7 @@
                 >
                     <!-- Review Form -->
                     <form
-                        class="grid grid-cols-[auto_1fr] gap-10 justify-center max-md:grid-cols-[1fr]"
+                        class="grid grid-cols-[auto_1fr] justify-center gap-10 max-md:grid-cols-[1fr]"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
@@ -34,7 +34,7 @@
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
-                                    class="!p-0 !mb-0"
+                                    class="!mb-0 !p-0"
                                     name="attachments"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
@@ -50,7 +50,7 @@
                         
                         <div>
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="mt-0 required">
+                                <x-shop::form.control-group.label class="required mt-0">
                                     @lang('shop::app.products.view.reviews.rating')
                                 </x-shop::form.control-group.label>
 
@@ -123,9 +123,9 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="flex gap-4 justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-5 max-xl:mb-5">
+                            <div class="mt-4 flex justify-start gap-4 max-xl:mb-5 max-sm:mb-5 max-sm:flex-wrap max-sm:justify-center">
                                 <button
-                                    class="primary-button w-full max-w-[374px] py-4 px-11 rounded-2xl text-center"
+                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -133,7 +133,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center px-8 py-2.5 rounded-2xl max-sm:w-full max-sm:max-w-[374px]"
+                                    class="secondary-button items-center rounded-2xl px-8 py-2.5 max-sm:w-full max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -153,7 +153,7 @@
 
                 <template v-else>
                     <!-- Review Section Header -->
-                    <div class="flex gap-4 items-center justify-between  max-sm:flex-wrap">
+                    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
                         <h3 class="font-dmserif text-3xl max-sm:text-xl">
                             @lang('shop::app.products.view.reviews.customer-review')
                         </h3>
@@ -163,7 +163,7 @@
                             || auth()->guard('customer')->user()
                         )
                             <div
-                                class="flex gap-x-4 items-center px-4 py-2.5 border border-navyBlue rounded-xl cursor-pointer"
+                                class="flex cursor-pointer items-center gap-x-4 rounded-xl border border-navyBlue px-4 py-2.5"
                                 @click="canReview = true"
                             >
                                 <span class="icon-pen text-2xl"></span>
@@ -175,7 +175,7 @@
 
                     <template v-if="reviews.length">
                         <!-- Average Rating Section -->
-                        <div class="flex gap-4 justify-between items-center max-w-[365px] mt-8 max-sm:flex-wrap">
+                        <div class="mt-8 flex max-w-[365px] items-center justify-between gap-4 max-sm:flex-wrap">
                             <p class="text-3xl font-medium max-sm:text-base">{{ number_format($avgRatings, 1) }}</p>
 
                             <x-shop::products.star-rating :value="$avgRatings" />
@@ -186,21 +186,21 @@
                         </div>
 
                         <!-- Ratings By Individual Stars -->
-                        <div class="flex gap-x-5 items-center">
-                            <div class="grid gap-y-5 flex-wrap max-w-[365px] mt-2.5">
+                        <div class="flex items-center gap-x-5">
+                            <div class="mt-2.5 grid max-w-[365px] flex-wrap gap-y-5">
                                 @for ($i = 5; $i >= 1; $i--)
-                                    <div class="row grid grid-cols-[1fr_2fr] gap-2.5 items-center max-sm:flex-wrap">
+                                    <div class="row grid grid-cols-[1fr_2fr] items-center gap-2.5 max-sm:flex-wrap">
                                         <div class="text-base font-medium">{{ $i }} Stars</div>
 
-                                        <div class="h-4 w-[275px] max-w-full bg-[#E5E5E5] rounded-sm">
-                                            <div class="h-4 bg-[#FEA82B] rounded-sm" style="width: {{ $percentageRatings[$i] }}%"></div>
+                                        <div class="h-4 w-[275px] max-w-full rounded-sm bg-[#E5E5E5]">
+                                            <div class="h-4 rounded-sm bg-[#FEA82B]" style="width: {{ $percentageRatings[$i] }}%"></div>
                                         </div>
                                     </div>
                                 @endfor
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-[1fr_1fr] gap-5 mt-14 max-1060:grid-cols-[1fr]">
+                        <div class="mt-14 grid grid-cols-[1fr_1fr] gap-5 max-1060:grid-cols-[1fr]">
                             <!-- Product Review Item Vue Component -->
                             <v-product-review-item
                                 v-for='review in reviews'
@@ -209,7 +209,7 @@
                         </div>
 
                         <button
-                            class="block mx-auto w-max mt-14 py-3 px-11 bg-white border border-navyBlue rounded-2xl text-center text-navyBlue text-base font-medium"
+                            class="mx-auto mt-14 block w-max rounded-2xl border border-navyBlue bg-white px-11 py-3 text-center text-base font-medium text-navyBlue"
                             v-if="links?.next"
                             @click="get()"
                         >
@@ -219,7 +219,7 @@
 
                     <template v-else>
                         <!-- Empty Review Section -->
-                        <div class="grid items-center justify-items-center w-full m-auto h-[476px] place-content-center text-center">
+                        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
                             <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 
                             <p class="text-xl">
@@ -233,12 +233,15 @@
     </script>
 
     <!-- Product Review Item Template -->
-    <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-5 p-6 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap max-xl:mb-5">
+    <script
+        type="text/x-template"
+        id="v-product-review-item-template"
+    >
+        <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-xl:mb-5 max-sm:flex-wrap">
             <div>
                 <img
                     v-if="review.profile"
-                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-xl max-sm:hidden"
+                    class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl max-sm:hidden"
                     :src="review.profile"
                     :alt="review.name"
                     :title="review.name"
@@ -246,23 +249,19 @@
 
                 <div
                     v-else
-                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-xl bg-[#F5F5F5] max-sm:hidden"
+                    class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-[#F5F5F5] max-sm:hidden"
                     :title="review.name"
                 >
-                    <span
-                        class="text-2xl text-[#6E6E6E] font-semibold"
-                        v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
-                    >
+                    <span class="text-2xl font-semibold text-[#6E6E6E]">
+                        @{{ review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('') }}
                     </span>
                 </div>
             </div>
 
             <div class="w-full">
                 <div class="flex justify-between">
-                    <p
-                        class="text-xl font-medium max-sm:text-base"
-                        v-text="review.name"
-                    >
+                    <p class="text-xl font-medium max-sm:text-base">
+                        @{{ review.name }}
                     </p>
 
                     <div class="flex items-center">
@@ -273,32 +272,26 @@
                     </div>
                 </div>
 
-                <p
-                    class="mt-2.5 text-sm font-medium max-sm:text-xs"
-                    v-text="review.created_at"
-                >
+                <p class="mt-2.5 text-sm font-medium max-sm:text-xs">
+                    @{{ review.created_at }}
                 </p>
 
-                <p
-                    class="mt-5 text-base text-[#6E6E6E] font-semibold max-sm:text-xs"
-                    v-text="review.title"
-                >
+                <p class="mt-5 text-base font-semibold text-[#6E6E6E] max-sm:text-xs">
+                    @{{ review.title }}
                 </p>
 
-                <p
-                    class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs"
-                    v-text="review.comment"
-                >
+                <p class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs">
+                    @{{ review.comment }}
                 </p>
 
                 <button
-                    class="secondary-button min-h-[34px] mt-2.5 px-2 py-1 rounded-lg text-sm"
+                    class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-2 py-1 text-sm"
                     @click="translate"
                 >
                     <!-- Spinner -->
                     <template v-if="isLoading">
                         <img
-                            class="animate-spin h-5 w-5 text-blue-600"
+                            class="h-5 w-5 animate-spin text-blue-600"
                             src="{{ bagisto_asset('images/spinner.svg') }}"
                         />
 
@@ -314,18 +307,18 @@
 
                 <!-- Review Attachments -->
                 <div
-                    class="flex gap-2 flex-wrap mt-3"
+                    class="mt-3 flex flex-wrap gap-2"
                     v-if="review.images.length"
                 >
                     <template v-for="file in review.images">
                         <a
                             :href="file.url"
-                            class="h-12 w-12 flex"
+                            class="flex h-12 w-12"
                             target="_blank"
                             v-if="file.type == 'image'"
                         >
                             <img
-                                class="min-w-[50px] max-h-[50px] rounded-xl cursor-pointer"
+                                class="max-h-[50px] min-w-[50px] cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -339,7 +332,7 @@
                             v-else
                         >
                             <video
-                                class="min-w-[50px] max-h-[50px] rounded-xl cursor-pointer"
+                                class="max-h-[50px] min-w-[50px] cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"

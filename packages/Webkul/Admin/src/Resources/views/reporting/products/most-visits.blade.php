@@ -16,16 +16,16 @@
 
         <!-- Products with Most Visits Section -->
         <template v-else>
-            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+            <div class="box-shadow relative flex-1 rounded bg-white p-4 dark:bg-gray-900">
                 <!-- Header -->
-                <div class="flex items-center justify-between mb-4">
-                    <p class="text-base text-gray-600 dark:text-white font-semibold">
+                <div class="mb-4 flex items-center justify-between">
+                    <p class="text-base font-semibold text-gray-600 dark:text-white">
                         @lang('admin::app.reporting.products.index.products-with-most-visits')
                     </p>
 
                     <a
                         href="{{ route('admin.reporting.products.view', ['type' => 'products-with-most-visits']) }}"
-                        class="text-sm text-blue-600 cursor-pointer transition-all hover:underline"
+                        class="cursor-pointer text-sm text-blue-600 transition-all hover:underline"
                     >
                         @lang('admin::app.reporting.products.index.view-details')
                     </a>
@@ -41,17 +41,19 @@
                                 class="grid"
                                 v-for="product in report.statistics"
                             >
-                                <p class="dark:text-white">@{{ product.name }}</p>
+                                <p class="dark:text-white">
+                                    @{{ product.name }}
+                                </p>
 
-                                <div class="flex gap-5 items-center">
-                                    <div class="w-full h-2 relative bg-slate-100">
+                                <div class="flex items-center gap-5">
+                                    <div class="relative h-2 w-full bg-slate-100">
                                         <div
-                                            class="h-2 absolute left-0 bg-emerald-500"
+                                            class="absolute left-0 h-2 bg-emerald-500"
                                             :style="{ 'width': product.progress + '%' }"
                                         ></div>
                                     </div>
 
-                                    <p class="text-sm text-gray-600 dark:text-gray-300 font-semibold">
+                                    <p class="text-sm font-semibold text-gray-600 dark:text-gray-300">
                                         @{{ product.visits }}
                                     </p>
                                 </div>
@@ -65,9 +67,9 @@
                     </template>
 
                     <!-- Date Range -->
-                    <div class="flex gap-5 justify-end">
-                        <div class="flex gap-1 items-center">
-                            <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
+                    <div class="flex justify-end gap-5">
+                        <div class="flex items-center gap-1">
+                            <span class="h-3.5 w-3.5 rounded-md bg-emerald-400"></span>
 
                             <p class="text-xs dark:text-gray-300">
                                 @{{ report.date_range.current }}

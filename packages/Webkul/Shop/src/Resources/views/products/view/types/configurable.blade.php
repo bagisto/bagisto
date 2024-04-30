@@ -28,16 +28,15 @@
                         v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'"
                     >
                         <!-- Dropdown Label -->
-                        <h2
-                            class="mb-4 text-xl max-sm:text-base"
-                            v-text="attribute.label"
-                        ></h2>
+                        <h2 class="mb-4 text-xl max-sm:text-base">
+                            @{{ attribute.label }}
+                        </h2>
                         
                         <!-- Dropdown Options -->
                         <v-field
                             as="select"
                             :name="'super_attribute[' + attribute.id + ']'"
-                            class="custom-select block w-full mb-3 py-3 px-5 bg-white border border-[#E9E9E9] rounded-lg text-base text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                            class="custom-select mb-3 block w-full cursor-pointer rounded-lg border border-[#E9E9E9] bg-white px-5 py-3 text-base text-[#6E6E6E] focus:border-blue-500 focus:ring-blue-500 max-md:w-[110px] max-md:border-0 max-md:outline-none"
                             :class="[errors['super_attribute[' + attribute.id + ']'] ? 'border border-red-500' : '']"
                             :id="'attribute_' + attribute.id"
                             rules="required"
@@ -59,19 +58,18 @@
                     <!-- Swatch Options Container -->
                     <template v-else>
                         <!-- Option Label -->
-                        <h2
-                            class="mb-4 text-xl max-sm:text-base"
-                            v-text="attribute.label"
-                        ></h2>
+                        <h2 class="mb-4 text-xl max-sm:text-base">
+                            @{{ attribute.label }}
+                        </h2>
 
                         <!-- Swatch Options -->
-                        <div class="flex gap-3 items-center">
+                        <div class="flex items-center gap-3">
                             <template v-for="(option, index) in attribute.options">
                                 <!-- Color Swatch Options -->
                                 <template v-if="option.id">
                                     <label
-                                        class="relative flex -m-0.5 p-0.5 items-center justify-center rounded-full focus:outline-none cursor-pointer"
-                                        :class="{'ring-gray-900 ring ring-offset-1' : index == attribute.selectedIndex}"
+                                        class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
+                                        :class="{'ring ring-gray-900 ring-offset-1' : index == attribute.selectedIndex}"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'color'"
                                     >
@@ -91,20 +89,20 @@
                                                 v-bind="field"
                                                 :id="'attribute_' + attribute.id"
                                                 :aria-labelledby="'color-choice-' + index + '-label'"
-                                                class="sr-only peer"
+                                                class="peer sr-only"
                                                 @click="configure(attribute, $event.target.value)"
                                             />
                                         </v-field>
 
                                         <span
-                                            class="h-8 w-8 bg-navyBlue border border-navyBlue border-opacity-10 rounded-full max-sm:h-[25px] max-sm:w-[25px]"
+                                            class="h-8 w-8 rounded-full border border-navyBlue border-opacity-10 bg-navyBlue max-sm:h-[25px] max-sm:w-[25px]"
                                             :style="{ 'background-color': option.swatch_value }"
                                         ></span>
                                     </label>
 
                                     <!-- Image Swatch Options -->
                                     <label 
-                                        class="group relative flex items-center justify-center w-[60px] bg-white overflow-hidden rounded-full border h-[60px] hover:bg-gray-50 focus:outline-none text-gray-900 font-medium uppercase shadow-sm max-sm:w-[35px] max-sm:h-[35px] sm:py-6 cursor-pointer"
+                                        class="group relative flex h-[60px] w-[60px] cursor-pointer items-center justify-center overflow-hidden rounded-full border bg-white font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
                                         :class="{'ring-2 ring-navyBlue' : index == attribute.selectedIndex }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'image'"
@@ -125,7 +123,7 @@
                                                 v-bind="field"
                                                 :id="'attribute_' + attribute.id"
                                                 :aria-labelledby="'color-choice-' + index + '-label'"
-                                                class="sr-only peer"
+                                                class="peer sr-only"
                                                 @click="configure(attribute, $event.target.value)"
                                             />
                                         </v-field>
@@ -138,7 +136,7 @@
 
                                     <!-- Text Swatch Options -->
                                     <label 
-                                        class="group relative flex items-center justify-center min-w-[60px] bg-white py-3 px-4 rounded-full border h-[60px] hover:bg-gray-50 focus:outline-none text-gray-900 font-medium uppercase shadow-sm max-sm:w-[35px] max-sm:h-[35px] sm:py-6 cursor-pointer"
+                                        class="group relative flex h-[60px] min-w-[60px] cursor-pointer items-center justify-center rounded-full border bg-white px-4 py-3 font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
                                         :class="{'ring-2 ring-navyBlue' : index == attribute.selectedIndex }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'text'"
@@ -159,23 +157,22 @@
                                                 v-bind="field"
                                                 :id="'attribute_' + attribute.id"
                                                 :aria-labelledby="'color-choice-' + index + '-label'"
-                                                class="sr-only peer"
+                                                class="peer sr-only"
                                                 @click="configure(attribute, $event.target.value)"
                                             />
                                         </v-field>
 
-                                        <span
-                                            class="text-lg max-sm:text-sm"
-                                            v-text="option.label"
-                                        ></span>
+                                        <span class="text-lg max-sm:text-sm">
+                                            @{{ option.label }}
+                                        </span>
 
-                                        <span class="absolute -inset-px rounded-full pointer-events-none"></span>
+                                        <span class="pointer-events-none absolute -inset-px rounded-full"></span>
                                     </label>
                                 </template>
                             </template>
 
                             <span
-                                class="text-gray-600 text-sm max-sm:text-xs"
+                                class="text-sm text-gray-600 max-sm:text-xs"
                                 v-if="! attribute.options.length"
                             >
                                 @lang('shop::app.products.view.type.configurable.select-above-options')
@@ -187,10 +184,8 @@
                         :name="['super_attribute[' + attribute.id + ']']"
                         v-slot="{ message }"
                     >
-                        <p
-                            class="mt-1 text-red-500 text-xs italic"
-                            v-text="message"
-                        >
+                        <p class="mt-1 text-xs italic text-red-500">
+                            @{{ message }}
                         </p>
                     </v-error-message>
                 </div>

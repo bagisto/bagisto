@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.categories.create.title')
     </x-slot>
@@ -13,16 +12,16 @@
     >
         {!! view_render_event('bagisto.admin.catalog.categories.create.create_form_controls.before') !!}
 
-        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl text-gray-800 dark:text-white font-bold">
+        <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
+            <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.catalog.categories.create.title')
             </p>
 
-            <div class="flex gap-x-2.5 items-center">
-                <!-- Cancel Button -->
+            <div class="flex items-center gap-x-2.5">
+                <!-- Back Button -->
                 <a
                     href="{{ route('admin.catalog.categories.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
+                    class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                 >
                     @lang('admin::app.catalog.categories.create.back-btn')
                 </a>
@@ -38,16 +37,16 @@
         </div>
 
         <!-- Full Pannel -->
-        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+        <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
 
             <!-- Left Section -->
-            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.general.before') !!}
 
                 <!-- General -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.categories.create.general')
                     </p>
 
@@ -76,12 +75,12 @@
                                 type="text"
                                 id="name"
                                 :class="[errors['{{ 'name' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                 name="name"
                                 v-bind="field"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.name') }}"
                                 v-slugify-target:slug="setValues"
-                            >
+                            />
                         </v-field>
 
                         <x-admin::form.control-group.error control-name="name" />
@@ -89,7 +88,7 @@
 
                     <div>
                         <!-- Parent category -->
-                        <label class="block mb-2.5 text-xs text-gray-800 dark:text-white font-medium leading-6">
+                        <label class="mb-2.5 block text-xs font-medium leading-6 text-gray-800 dark:text-white">
                             @lang('admin::app.catalog.categories.create.parent-category')
                         </label>
 
@@ -112,8 +111,8 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.description_images.before') !!}
 
                 <!-- Description and images -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.categories.create.description-and-images')
                     </p>
 
@@ -142,8 +141,8 @@
 
                     <div class="flex pt-5">
                         <!-- Add Logo -->
-                        <div class="flex flex-col gap-2 w-2/5">
-                            <p class="text-gray-800 dark:text-white font-medium">
+                        <div class="flex w-2/5 flex-col gap-2">
+                            <p class="font-medium text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.categories.create.logo')
                             </p>
 
@@ -155,8 +154,8 @@
                         </div>
 
                         <!-- Add Banner -->
-                        <div class="flex flex-col gap-2 w-3/5">
-                            <p class="text-gray-800 dark:text-white font-medium">
+                        <div class="flex w-3/5 flex-col gap-2">
+                            <p class="font-medium text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.categories.create.banner')
                             </p>
 
@@ -177,13 +176,13 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.seo.before') !!}
 
                 <!-- SEO Deatils -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.categories.create.seo-details')
                     </p>
 
                     <!-- SEO Title & Description Blade Componnet -->
-                    <x-admin::seo/>
+                    <x-admin::seo />
 
                     <div class="mt-8">
                         <!-- Meta Title -->
@@ -220,12 +219,12 @@
                                     type="text"
                                     id="slug"
                                     :class="[errors['{{ 'slug' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                     name="slug"
                                     v-bind="field"
                                     placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
                                     v-slugify-target:slug
-                                >
+                                />
                             </v-field>
 
                             <x-admin::form.control-group.error control-name="slug" />
@@ -268,14 +267,14 @@
             </div>
 
             <!-- Right Section -->
-            <div class="flex flex-col gap-2 w-[360px] max-w-full">
+            <div class="flex w-[360px] max-w-full flex-col gap-2">
                 <!-- Settings -->
 
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.accordion.settings.before') !!}
 
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
+                        <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                             @lang('admin::app.catalog.categories.create.settings')
                         </p>
                     </x-slot>
@@ -301,7 +300,7 @@
 
                         <!-- Display Mode  -->
                         <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required text-gray-800 dark:text-white font-medium required">
+                            <x-admin::form.control-group.label class="required font-medium text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.categories.create.display-mode')
                             </x-admin::form.control-group.label>
 
@@ -333,7 +332,7 @@
 
                         <!-- Visible in menu -->
                         <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="text-gray-800 dark:text-white font-medium">
+                            <x-admin::form.control-group.label class="font-medium text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.categories.create.visible-in-menu')
                             </x-admin::form.control-group.label>
 
@@ -355,14 +354,14 @@
                 <!-- Filterable Attributes -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="required p-2.5 text-base text-gray-800 dark:text-white font-semibold">
+                        <p class="required p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                             @lang('admin::app.catalog.categories.create.filterable-attributes')
                         </p>
                     </x-slot>
 
                     <x-slot:content>
                         @foreach ($attributes as $attribute)
-                            <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none last:!mb-0">
+                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5 last:!mb-0">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     :id="$attribute->name ?? $attribute->admin_name"
@@ -375,7 +374,7 @@
                                 />
 
                                 <label
-                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                    class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
                                     for="{{ $attribute->name ?? $attribute->admin_name }}"
                                 >
                                     {{ $attribute->name ?? $attribute->admin_name }}
@@ -399,7 +398,10 @@
     {!! view_render_event('bagisto.admin.catalog.categories.create.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-description-template">
+        <script
+            type="text/x-template"
+            id="v-description-template"
+        >
             <div>
                 <slot :is-description-required="isDescriptionRequired"></slot>
             </div>

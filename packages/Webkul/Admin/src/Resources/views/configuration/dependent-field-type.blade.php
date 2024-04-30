@@ -50,7 +50,7 @@
         <div>
             <div class="flex justify-between">
                 <label
-                    class="flex gap-1.5 items-center text-xs text-gray-800 dark:text-white font-medium"
+                    class="flex items-center gap-1.5 text-xs font-medium text-gray-800 dark:text-white"
                     :class="{ 'required' : isRequire }"
                     :for="name"
                 >
@@ -60,13 +60,13 @@
                         ! empty($field['channel_based'])
                         && $channels->count() > 1
                     )
-                        <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
+                        <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
                             {{ $currentChannel->name }}
                         </span>
                     @endif
 
                     @if (! empty($field['locale_based']))
-                        <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
+                        <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
                             {{ $currentLocale->name }}
                         </span>
                     @endif
@@ -85,7 +85,7 @@
                 <select 
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full py-2 px-3 appearance-none border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full appearance-none rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
                 >
                     <option 
                         v-for='(option, index) in this.options' 
@@ -110,7 +110,7 @@
                     type="text"
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full py-2 px-3 appearance-none border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full appearance-none rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
                 />
             </v-field>
         </div>
@@ -123,10 +123,10 @@
         <div>
             <div
                 v-if="isRequire"
-                class="flex justify-between mt-4"
+                class="mt-4 flex justify-between"
             >
                 <label
-                    class="flex gap-1 items-center mb-1.5 text-xs text-gray-800 dark:text-white font-medium"
+                    class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white"
                     :class="{ 'required' : isRequire }"
                     :for="name"
                 >
@@ -134,7 +134,7 @@
                 </label>
 
                 <label
-                    class="flex gap-1 items-center mb-1.5 text-xs text-gray-800 dark:text-white font-medium"
+                    class="mb-1.5 flex items-center gap-1 text-xs font-medium text-gray-800 dark:text-white"
                     :for="name"
                 >
                     @{{ channel_locale }}
@@ -153,7 +153,7 @@
                 <select 
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full py-2 px-3 appearance-none border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full appearance-none rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
                 >
                     <option
                         v-for='option in this.options'
@@ -177,16 +177,16 @@
                     type="text"
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full appearance-none py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                    class="w-full appearance-none rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                 />
             </v-field>
 
             <label
                 v-if="isRequire"
-                class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
+                class="block text-xs font-medium leading-5 text-gray-600 dark:text-gray-300"
                 :for="`${name}-info`"
-                v-text="info"
             >
+                @{{ info }}
             </label>
 
             <v-error-message
@@ -194,7 +194,7 @@
                 v-slot="{ message }"
             >
                 <p
-                    class="mt-1 text-red-600 text-xs italic"
+                    class="mt-1 text-xs italic text-red-600"
                     v-text="message"
                 ></p>
             </v-error-message>

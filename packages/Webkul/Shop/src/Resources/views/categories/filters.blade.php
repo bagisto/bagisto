@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Naviation -->
 <div
-    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 ltr:left-0 rtl:right-0 px-5 bg-white border-t border-[#E9E9E9] z-50"
+    class="fixed bottom-0 z-50 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-[#E9E9E9] bg-white px-5 ltr:left-0 rtl:right-0"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -26,7 +26,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase cursor-pointer"
+                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase"
                 @click="isDrawerActive.filter = true"
             >
                 <span class="icon-filter-1 text-2xl"></span>
@@ -37,13 +37,13 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-5 border-b border-[#E9E9E9]">
+            <div class="flex items-center justify-between border-b border-[#E9E9E9] pb-5">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
 
                 <p
-                    class="ltr:mr-[50px] rtl:ml-[50px] text-xs font-medium cursor-pointer"
+                    class="cursor-pointer text-xs font-medium ltr:mr-[50px] rtl:ml-[50px]"
                     @click="clearFilters('filter', '')"
                 >
                     @lang('shop::app.categories.filters.clear-all')
@@ -76,7 +76,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase cursor-pointer"
+                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase"
                 @click="isDrawerActive.toolbar = true"
             >
                 <span class="icon-sort-1 text-2xl"></span>
@@ -87,7 +87,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-5 border-b border-[#E9E9E9]">
+            <div class="flex items-center justify-between border-b border-[#E9E9E9] pb-5">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
@@ -105,7 +105,10 @@
 
 @pushOnce('scripts')
     <!-- Filters Vue template -->
-    <script type="text/x-template" id="v-filters-template">
+    <script
+        type="text/x-template"
+        id="v-filters-template"
+    >
         <!-- Filter Shimmer Effect -->
         <template v-if="isLoading">
             <x-shop::shimmer.categories.filters />
@@ -113,15 +116,15 @@
 
         <!-- Filters Container -->
         <template v-else>
-            <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-7">
+            <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[400px] md:pr-7">
                 <!-- Filters Header Container -->
-                <div class="flex justify-between items-center h-[50px] pb-2.5 border-b border-[#E9E9E9] max-md:hidden">
+                <div class="flex h-[50px] items-center justify-between border-b border-[#E9E9E9] pb-2.5 max-md:hidden">
                     <p class="text-lg font-semibold">
                         @lang('shop::app.categories.filters.filters')
                     </p>
 
                     <p
-                        class="text-xs font-medium cursor-pointer"
+                        class="cursor-pointer text-xs font-medium"
                         tabindex="0"
                         @click="clear()"
                     >
@@ -143,16 +146,17 @@
     </script>
 
     <!-- Filter Item Vue template -->
-    <script type="text/x-template" id="v-filter-item-template">
+    <script
+        type="text/x-template"
+        id="v-filter-item-template"
+    >
         <template v-if="filter.type === 'price' || filter.options.length">
             <x-shop::accordion class="last:border-b-0">
                 <!-- Filter Item Header -->
                 <x-slot:header class="px-0 py-2.5">
-                    <div class="flex justify-between items-center">
-                        <p
-                            class="text-lg font-semibold"
-                            v-text="filter.name"
-                        >
+                    <div class="flex items-center justify-between">
+                        <p class="text-lg font-semibold">
+                            @{{ filter.name }}
                         </p>
                     </div>
                 </x-slot>
@@ -177,18 +181,18 @@
                             :key="option.id"
                             v-for="(option, optionIndex) in filter.options"
                         >
-                            <div class="items-center flex gap-x-4 ltr:pl-2 rtl:pr-2 rounded hover:bg-gray-100 select-none">
+                            <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 ltr:pl-2 rtl:pr-2">
                                 <input
                                     type="checkbox"
                                     :id="'option_' + option.id"
-                                    class="hidden peer"
+                                    class="peer hidden"
                                     :value="option.id"
                                     v-model="appliedValues"
                                     @change="applyValue"
                                 />
 
                                 <label
-                                    class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                                     role="checkbox"
                                     aria-checked="false"
                                     :aria-label="option.name"
@@ -199,13 +203,13 @@
                                 </label>
 
                                 <label
-                                    class="w-full p-2 ltr:pl-0 rtl:pr-0 text-base text-gray-900 cursor-pointer"
+                                    class="w-full cursor-pointer p-2 text-base text-gray-900 ltr:pl-0 rtl:pr-0"
                                     :id="'label_option_' + option.id"
                                     :for="'option_' + option.id"
                                     role="button"
                                     tabindex="0"
-                                    v-text="option.name"
                                 >
+                                    @{{ option.name }}
                                 </label>
                             </div>
                         </li>
@@ -215,7 +219,10 @@
         </template>
     </script>
 
-    <script type="text/x-template" id="v-price-filter-template">
+    <script
+        type="text/x-template"
+        id="v-price-filter-template"
+    >
         <div>
 
             <!-- Price range filter shimmer -->

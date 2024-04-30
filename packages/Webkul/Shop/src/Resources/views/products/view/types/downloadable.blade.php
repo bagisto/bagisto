@@ -3,7 +3,7 @@
 
     @if ($product->downloadable_samples->count())
         <div class="sample-list mb-6 mt-8">
-            <label class="flex mb-3 font-medium">
+            <label class="mb-3 flex font-medium">
                 @lang('shop::app.products.view.type.downloadable.samples')
             </label>
 
@@ -24,33 +24,33 @@
     @endif
 
     @if ($product->downloadable_links->count())
-        <label class="flex mt-8 mb-4 font-medium">
+        <label class="mb-4 mt-8 flex font-medium">
             @lang('shop::app.products.view.type.downloadable.links')
         </label>
 
         <div class="grid gap-4">
             @foreach ($product->downloadable_links as $link)
-                <div class="select-none flex gap-x-4">
+                <div class="flex select-none gap-x-4">
                     <div class="flex">
                         <v-field
                             type="checkbox"
                             name="links[]"
                             value="{{ $link->id }}"
                             id="{{ $link->id }}"
-                            class="hidden peer"
+                            class="peer hidden"
                             rules="required"
                             label="@lang('shop::app.products.view.type.downloadable.links')"
                         >
                         </v-field>
                         
                         <label
-                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                            class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                             for="{{ $link->id }}"
                         ></label>
                         
                         <label
                             for="{{ $link->id }}"
-                            class="ltr:ml-1 rtl:mr-1 cursor-pointer"
+                            class="cursor-pointer ltr:ml-1 rtl:mr-1"
                         >
                             {{ $link->title . ' + ' . core()->currency($link->price) }}
                         </label>
@@ -75,10 +75,8 @@
                 name="links[]"
                 v-slot="{ message }"
             >
-                <p
-                    class="text-red-500 text-xs italic"
-                    v-text="message"
-                >
+                <p class="text-xs italic text-red-500">
+                    @{{ message }}
                 </p>
             </v-error-message>
         </div>
