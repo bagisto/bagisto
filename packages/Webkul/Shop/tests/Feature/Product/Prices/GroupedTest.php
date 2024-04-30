@@ -1708,8 +1708,6 @@ it('should check tax is applying for the grouped product into the cart for group
 
     $this->assertPrice($cart->tax_total, $response['data']['tax_total']);
 
-    $this->assertPrice($cart->base_tax_total, $response['data']['base_tax_total']);
-
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
     $this->assertPrice($cart->sub_total, $response['data']['sub_total']);

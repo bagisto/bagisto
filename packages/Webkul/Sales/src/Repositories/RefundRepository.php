@@ -197,8 +197,10 @@ class RefundRepository extends Repository
             $refund->base_sub_total_incl_tax = (float) $refund->base_sub_total_incl_tax + $item->base_total_incl_tax;
         }
 
-        $refund->shipping_tax_amount = ($refund->order->shipping_tax_amount / $refund->order->shipping_invoiced) * $refund->shipping_amount;
-        $refund->base_shipping_tax_amount = ($refund->order->base_shipping_tax_amount / $refund->order->base_shipping_invoiced) * $refund->base_shipping_amount;
+        if ((float) $refund->order->shipping_invoiced) {
+            $refund->shipping_tax_amount = ($refund->order->shipping_tax_amount / $refund->order->shipping_invoiced) * $refund->shipping_amount;
+            $refund->base_shipping_tax_amount = ($refund->order->base_shipping_tax_amount / $refund->order->base_shipping_invoiced) * $refund->base_shipping_amount;
+        }
 
         $refund->shipping_amount_incl_tax = $refund->shipping_amount + $refund->shipping_tax_amount;
         $refund->base_shipping_amount_incl_tax = $refund->base_shipping_amount + $refund->base_shipping_tax_amount;
@@ -251,7 +253,9 @@ class RefundRepository extends Repository
             $totals['tax']['price'] += ($orderItem->base_tax_amount / $orderItem->qty_ordered) * $qty;
         }
 
-        $totals['tax']['price'] += ($order->base_shipping_tax_amount / $order->base_shipping_invoiced) * $data['shipping'];
+        if ((float) $order->base_shipping_invoiced) {
+            $totals['tax']['price'] += ($order->base_shipping_tax_amount / $order->base_shipping_invoiced) * $data['shipping'];
+        }
 
         $totals['shipping']['price'] += $data['shipping'];
 
