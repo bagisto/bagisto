@@ -2,13 +2,23 @@
 
 **BUGS:**
 
-At Bagisto, we highly value active collaboration among our community members to continually enhance our platform's performance and reliability. To facilitate this collaborative effort, we extend a warm invitation to both report bugs and submit pull requests.
+To encourage active collaboration, Bagisto encourages pull requests, not just bug reports. "Bug reports" may also be sent in the form of a pull request containing a negative test.
 
-Rather than solely reporting bugs, we encourage you to take an active role in resolving issues by submitting pull requests containing fixes or negative test cases that effectively highlight the problem. This approach not only identifies issues but also provides practical solutions for their resolution.
+However, when filing a bug report, your issue should contain a title and a clear description of the issue. You should also include as much relevant information as possible and a code sample that demonstrates the issue. The goal of a bug report is to make it easy for yourself - and others - to replicate the bug and develop a fix.
 
-When filing a bug report, we kindly request you to include a clear and descriptive title, along with a detailed description of the encountered problem. Additionally, please provide as much relevant information as possible, including a code sample that can reproduce the bug. Such comprehensive reports significantly expedite the troubleshooting process and enable swift resolution.
+Remember, bug reports are created in the hope that others with the same problem will collaborate with you on solving it. Creating a bug report serves to help yourself and others start on the path of fixing the problem.
 
-It is our collective goal to foster collaboration and find effective solutions to the challenges encountered. By actively participating in bug reporting, you not only engage fellow community members in problem-solving but also contribute significantly to the ongoing enhancement of the Bagisto project.
+**Projects that you can contribute in:**
+
+1. Bagisto
+
+2. Bagisto docs
+
+3. Laravel-aliexpress-dropship
+
+4. Laravel-aliexpress-dropship-chrome-extension
+
+5. Bagisto-custom-style-extension
 
 **Core development ideas or discussion:**
 
@@ -26,7 +36,7 @@ Major new features should always be sent to the master branch, which contains th
 
 **Compiling assets:**
 
-To determine the sorting order for Tailwind CSS classes, consult the official Tailwind CSS documentation for guidelines on class organization. Additionally, consider using the Tailwind Raw Reorder extension for VS Code to streamline the sorting process.
+If you are submitting a change that will affect a compiled file, such as most of the files in admin/resources/assets/sass or admin/resources/assets/js of the Bagisto repository, do not commit the compiled files. Due to their large size, they cannot realistically be reviewed by a maintainer. This could be exploited as a way to inject malicious code into Bagisto. To defensively prevent this, all compiled files will be generated and committed by Bagisto maintainers.
 
 **Code style:**
 
@@ -42,8 +52,10 @@ Below is an example of a valid Bagisto doc block. Note that the @param attribute
     * @param  string|array  $loader
     * @param  \Closure|string|null  $concrete
     * @param  bool  $shared
+    * @return void
+    * @throws \Exception
     */
-    protected function registerFacades($loader, $concrete = null, $shared = false): void
+    protected function registerFacades($loader, $concrete = null, $shared = false)
     {
         //
     }
