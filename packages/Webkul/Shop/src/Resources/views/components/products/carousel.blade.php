@@ -16,10 +16,8 @@
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
-                <h2
-                    class="font-dmserif text-3xl max-sm:text-2xl"
-                    v-text="title"
-                >
+                <h2 class="font-dmserif text-3xl max-sm:text-2xl">
+                    @{{ title }}
                 </h2>
 
                 <div class="flex items-center justify-between gap-8">

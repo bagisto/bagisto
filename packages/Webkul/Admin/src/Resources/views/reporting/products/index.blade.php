@@ -61,9 +61,16 @@
     </div>
 
     @pushOnce('scripts')
-        <script type="module" src="{{ bagisto_asset('js/chart.js') }}"></script>
+        <script
+            type="module"
+            src="{{ bagisto_asset('js/chart.js') }}"
+        >
+        </script>
 
-        <script type="text/x-template" id="v-reporting-filters-template">
+        <script
+            type="text/x-template"
+            id="v-reporting-filters-template"
+        >
             <div class="flex gap-1.5">
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input

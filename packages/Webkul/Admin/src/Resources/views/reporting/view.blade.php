@@ -122,9 +122,7 @@
                             v-if="reporing.statistics.records.length"
                             v-for="record in reporing.statistics.records"
                         >
-                            <p
-                                v-for="column in reporing.statistics.columns"
-                            >
+                            <p v-for="column in reporing.statistics.columns">
                                 @{{ record[column.key] }}
                             </p>
                         </div>

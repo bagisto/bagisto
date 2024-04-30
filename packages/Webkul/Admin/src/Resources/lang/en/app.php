@@ -36,6 +36,8 @@ return [
         'description-text'      => 'List all the Notifications',
         'marked-success'        => 'Notification Marked Successfully',
         'no-record'             => 'No Record Found',
+        'of'                    => 'of',
+        'per-page'              => 'Per Page',
         'read-all'              => 'Mark as Read',
         'title'                 => 'Notifications',
         'view-all'              => 'View All',
@@ -2335,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => 'The :name has already been taken.',
-            'create-btn'        => 'Create Page',
-            'title'             => 'Pages',
+            'already-taken' => 'The :name has already been taken.',
+            'create-btn'    => 'Create Page',
+            'channel'       => 'Channel',
+            'language'      => 'Language',
+            'title'         => 'Pages',
 
             'datagrid' => [
                 'delete'              => 'Delete',

@@ -481,7 +481,10 @@
         </script>
 
         <!-- v catalog rule condition item form template -->
-        <script type="text/x-template" id="v-catalog-rule-condition-item-template">
+        <script
+            type="text/x-template"
+            id="v-catalog-rule-condition-item-template"
+        >
             <div class="mt-4 flex justify-between gap-4">
                 <div class="flex flex-1 gap-4 max-sm:flex-1 max-sm:flex-wrap">
                     <select

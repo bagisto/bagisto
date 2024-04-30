@@ -22,7 +22,7 @@
 
                 <div class="my-[20px] flex items-center justify-between">
                     <p class="text-sm">
-                        @lang('Total Amount')
+                        @lang('shop::app.products.view.type.bundle.total-amount')
                     </p>
 
                     <p class="text-lg font-medium">
@@ -50,7 +50,10 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="v-product-bundle-option-item-template">
+        <script
+            type="text/x-template"
+            id="v-product-bundle-option-item-template"
+        >
             <div class="mt-8 border-b border-[#E9E9E9] pb-4">
                 <x-shop::form.control-group>
                     <!-- Dropdown Options Container -->

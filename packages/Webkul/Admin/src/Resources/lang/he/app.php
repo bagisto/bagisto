@@ -36,6 +36,8 @@ return [
         'description-text' => 'לרשום את כל ההתראות',
         'marked-success'   => 'התראה סומנה בהצלחה',
         'no-record'        => 'לא נמצאו רשומות',
+        'of'               => 'מתוך',
+        'per-page'         => 'לעמוד',
         'read-all'         => 'סמן כנקרא',
         'title'            => 'התראות',
         'view-all'         => 'הצג הכל',
@@ -2335,9 +2337,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken'     => ':name כבר תפוס.',
-            'create-btn'        => 'צור עמוד',
-            'title'             => 'עמודים',
+            'already-taken' => 'ה-:name כבר תפוס.',
+            'create-btn'    => 'צור עמוד',
+            'channel'       => 'ערוץ',
+            'language'      => 'שפה',
+            'title'         => 'עמודים',
 
             'datagrid' => [
                 'delete'              => 'מחק',

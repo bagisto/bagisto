@@ -78,7 +78,11 @@
                                 :placeholder="trans('admin::app.catalog.families.edit.enter-code')"
                             />
 
-                            <input type="hidden" name="code" value="{{ $attributeFamily->code }}"/>
+                            <input
+                                type="hidden"
+                                name="code"
+                                value="{{ $attributeFamily->code }}"
+                            />
 
                             <x-admin::form.control-group.error control-name="code" />
                         </x-admin::form.control-group>
@@ -112,7 +116,10 @@
     </x-admin::form>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-family-attributes-template">
+        <script
+            type="text/x-template"
+            id="v-family-attributes-template"
+        >
             <div class="">
                 <!-- Panel Header -->
                 <div class="mb-2.5 flex flex-wrap justify-between gap-2.5 p-4">

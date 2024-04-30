@@ -24,7 +24,7 @@
             {!! view_render_event('bagisto.admin.customers.reviews.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.customers.customers.review.index') }}"
+                :src="route('admin.customers.customers.review.index')"
                 :isMultiRow="true"
                 ref="review_data"
             >
@@ -144,16 +144,12 @@
                                 @endif
 
                                 <div class="flex flex-col gap-1.5">
-                                    <p
-                                        class="text-base font-semibold text-gray-800 dark:text-white"
-                                        v-text="record.customer_full_name"
-                                    >
+                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                        @{{ record.customer_full_name }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="record.product_name"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ record.product_name }}
                                     </p>
 
                                     <p v-html="record.product_review_status"></p>
@@ -169,10 +165,8 @@
                                     />
                                 </div>
 
-                                <p
-                                    class="text-gray-600 dark:text-gray-300"
-                                    v-text="record.created_at"
-                                >
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ record.created_at }}
                                 </p>
 
                                 <p
@@ -184,16 +178,12 @@
 
                             <!-- Title, Description -->
                             <div class="flex flex-col gap-1.5">
-                                <p
-                                    class="text-base font-semibold text-gray-800 dark:text-white"
-                                    v-text="record.title"
-                                >
+                                <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                    @{{ record.title }}
                                 </p>
 
-                                <p
-                                    class="text-gray-600 dark:text-gray-300"
-                                    v-text="record.comment"
-                                >
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ record.comment }}
                                 </p>
                             </div>
 
@@ -256,10 +246,8 @@
                                                 @lang('admin::app.customers.reviews.index.edit.customer')
                                             </p>
 
-                                            <p
-                                                class="font-semibold text-gray-800 dark:text-white"
-                                                v-text="review.name !== '' ? review.name : 'N/A'"
-                                            >
+                                            <p class="font-semibold text-gray-800 dark:text-white">
+                                                @{{ review.name !== '' ? review.name : 'N/A' }}
                                             </p>
                                         </div>
 
@@ -268,10 +256,8 @@
                                                 @lang('admin::app.customers.reviews.index.edit.product')
                                             </p>
 
-                                            <p
-                                                class="font-semibold text-gray-800 dark:text-white"
-                                                v-text="review.product.name"
-                                            >
+                                            <p class="font-semibold text-gray-800 dark:text-white">
+                                                @{{ review.product.name }}
                                             </p>
                                         </div>
 
@@ -280,10 +266,8 @@
                                                 @lang('admin::app.customers.reviews.index.edit.id')
                                             </p>
 
-                                            <p
-                                                class="font-semibold text-gray-800 dark:text-white"
-                                                v-text="review.id"
-                                            >
+                                            <p class="font-semibold text-gray-800 dark:text-white">
+                                                @{{ review.id }}
                                             </p>
                                         </div>
 
@@ -292,10 +276,8 @@
                                                 @lang('admin::app.customers.reviews.index.edit.date')
                                             </p>
 
-                                            <p
-                                                class="font-semibold text-gray-800 dark:text-white"
-                                                v-text="review.date"
-                                            >
+                                            <p class="font-semibold text-gray-800 dark:text-white">
+                                                @{{ review.date }}
                                             </p>
                                         </div>
                                     </div>
@@ -354,10 +336,8 @@
                                             @lang('admin::app.customers.reviews.index.edit.review-title')
                                         </p>
 
-                                        <p
-                                            class="font-semibold text-gray-800 dark:text-white"
-                                            v-text="review.title"
-                                        >
+                                        <p class="font-semibold text-gray-800 dark:text-white">
+                                            @{{ review.title }}
                                         </p>
                                     </div>
 
@@ -366,10 +346,8 @@
                                             @lang('admin::app.customers.reviews.index.edit.review-comment')
                                         </p>
 
-                                        <p
-                                            class="text-gray-800 dark:text-white"
-                                            v-text="review.comment"
-                                        >
+                                        <p class="text-gray-800 dark:text-white">
+                                            @{{ review.comment }}
                                         </p>
                                     </div>
 

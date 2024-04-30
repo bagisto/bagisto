@@ -105,7 +105,10 @@
 
 @pushOnce('scripts')
     <!-- Filters Vue template -->
-    <script type="text/x-template" id="v-filters-template">
+    <script
+        type="text/x-template"
+        id="v-filters-template"
+    >
         <!-- Filter Shimmer Effect -->
         <template v-if="isLoading">
             <x-shop::shimmer.categories.filters />
@@ -143,16 +146,17 @@
     </script>
 
     <!-- Filter Item Vue template -->
-    <script type="text/x-template" id="v-filter-item-template">
+    <script
+        type="text/x-template"
+        id="v-filter-item-template"
+    >
         <template v-if="filter.type === 'price' || filter.options.length">
             <x-shop::accordion class="last:border-b-0">
                 <!-- Filter Item Header -->
                 <x-slot:header class="px-0 py-2.5">
                     <div class="flex items-center justify-between">
-                        <p
-                            class="text-lg font-semibold"
-                            v-text="filter.name"
-                        >
+                        <p class="text-lg font-semibold">
+                            @{{ filter.name }}
                         </p>
                     </div>
                 </x-slot>
@@ -204,8 +208,8 @@
                                     :for="'option_' + option.id"
                                     role="button"
                                     tabindex="0"
-                                    v-text="option.name"
                                 >
+                                    @{{ option.name }}
                                 </label>
                             </div>
                         </li>
@@ -215,7 +219,10 @@
         </template>
     </script>
 
-    <script type="text/x-template" id="v-price-filter-template">
+    <script
+        type="text/x-template"
+        id="v-price-filter-template"
+    >
         <div>
 
             <!-- Price range filter shimmer -->

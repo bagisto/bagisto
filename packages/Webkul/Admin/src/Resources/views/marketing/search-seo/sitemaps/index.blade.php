@@ -50,7 +50,7 @@
             {!! view_render_event('bagisto.admin.marketing.search_seo.sitemaps.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.sitemaps.index') }}"
+                :src="route('admin.marketing.search_seo.sitemaps.index')"
                 ref="datagrid"
             >
                 <template #body="{
@@ -72,13 +72,13 @@
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- ID -->
-                            <p v-text="record.id"></p>
+                            <p>@{{ record.id }}</p>
 
                             <!-- File Name -->
-                            <p v-text="record.file_name"></p>
+                            <p>@{{ record.file_name }}</p>
 
                             <!-- Path -->
-                            <p v-text="record.path"></p>
+                            <p>@{{ record.path }}</p>
 
                             <!-- URL -->
                             <p>

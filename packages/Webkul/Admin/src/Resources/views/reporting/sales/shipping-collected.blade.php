@@ -94,7 +94,9 @@
                                 class="grid"
                                 v-for="method in report.statistics.top_methods"
                             >
-                                <p class="dark:text-white">@{{ method.title }}</p>
+                                <p class="dark:text-white">
+                                    @{{ method.title }}
+                                </p>
 
                                 <div class="flex items-center gap-5">
                                     <div class="relative h-2 w-full bg-slate-100">

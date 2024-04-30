@@ -58,7 +58,11 @@
 
                             {{ $currentLocale->name }}
 
-                            <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
+                            <input
+                                type="hidden"
+                                name="locale"
+                                value="{{ $currentLocale->code }}"
+                            />
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
@@ -455,7 +459,10 @@
     {!! view_render_event('bagisto.admin.catalog.categories.edit.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-description-template">
+        <script
+            type="text/x-template"
+            id="v-description-template"
+        >
             <div>
                <slot :is-description-required="isDescriptionRequired"></slot>
             </div>

@@ -40,7 +40,10 @@
 </div>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-sidebar-collapse-template">
+    <script
+        type="text/x-template"
+        id="v-sidebar-collapse-template"
+    >
         <div
             class="fixed bottom-0 w-full max-w-[270px] cursor-pointer border-t border-gray-200 bg-white px-4 transition-all duration-300 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-950"
             :class="{'max-w-[70px]': isCollapsed}"
