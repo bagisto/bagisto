@@ -17,20 +17,11 @@
                 @change="inputChanged()"
             />
 
-            <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600">
-            </span>
+            <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"></span>
 
             <div class="cursor-pointer text-sm text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">
                 @{{ label }}
             </div>
-
-            <!-- Spinner -->
-            <template v-if="isLoading">
-                <img
-                    class="ml-3 h-5 w-5 animate-spin"
-                    src="{{ bagisto_asset('images/spinner.svg') }}"
-                />
-            </template>
         </label>
     </script>
 
@@ -40,7 +31,7 @@
 
             name: 'v-tree-checkbox',
 
-            props: ['id', 'label', 'name', 'value', 'isLoading'],
+            props: ['id', 'label', 'name', 'value'],
 
             computed: {
                 isActive() {

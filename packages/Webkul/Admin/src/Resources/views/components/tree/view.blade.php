@@ -104,8 +104,6 @@
                     formattedItems: null,
 
                     formattedValues: null,
-
-                    isLoading: false,
                 };
             },
 
@@ -231,13 +229,10 @@
                                     }),
 
                                     this.generateFolderIconComponent({
-                                        class: [
-                                            hasChildren ? 'icon-folder' : 'icon-attribute',
-                                            'text-2xl cursor-pointer'
-                                        ],
-                                        onClick: () => {
-                                            if (this.onClick && ! hasChildren) {
-                                                this.getSubtree(items[key], key);
+                                        class: 'icon-folder text-2xl cursor-pointer',
+                                        onClick: (event) => {
+                                            if (this.onClick && !hasChildren) {
+                                                this.getSubtree(items[key], event);
                                             }
                                         },
                                     }),
@@ -247,7 +242,6 @@
                                         label: this.getLabel(items[key]),
                                         name: this.nameField,
                                         value: items[key][this.valueField],
-                                        isLoading: this.isLoading,
                                     }),
 
                                     this.generateTreeItemComponents(items[key][this.childrenField], level + 1),
@@ -259,14 +253,18 @@
                     return treeItems;
                 },
 
-                getSubtree(value, key) {
-                    this.isLoading = true;
+                getSubtree(value, event) {
+                    const image = document.createElement('img');
+                    image.classList.add('ml-3', 'h-5', 'w-5', 'animate-spin');
+                    image.src = '{{ bagisto_asset("images/spinner.svg") }}';
+
+                    event.target.nextElementSibling.lastChild.insertAdjacentElement("afterend", image);
 
                     this.$axios.get(`{{ route('admin.catalog.categories.get_child_tree', '') }}/${value.id}`)
                         .then(response => {
                             value.children = response.data;
 
-                            this.isLoading = false;
+                            image.remove();
                         })
                         .catch(error => {
                             console.log(error.message);
