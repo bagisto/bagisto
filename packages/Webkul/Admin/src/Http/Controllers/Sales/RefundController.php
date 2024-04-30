@@ -64,7 +64,7 @@ class RefundController extends Controller
         }
 
         $this->validate(request(), [
-            'refund.items'   => 'required|array',
+            'refund.items'   => 'array',
             'refund.items.*' => 'required|numeric|min:0',
         ]);
 

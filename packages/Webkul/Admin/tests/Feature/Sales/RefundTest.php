@@ -150,8 +150,17 @@ it('should fails the validation error when refund items data not provided', func
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.refunds.store', $order->id))
-        ->assertJsonValidationErrorFor('refund.items')
+    postJson(route('admin.sales.refunds.store', $order->id), [
+        'refund' => [
+            'items'             => [
+                'INVALID_DATA',
+            ],
+            'shipping'          => '0',
+            'adjustment_refund' => '0',
+            'adjustment_fee'    => '0',
+        ],
+    ])
+        ->assertJsonValidationErrorFor('refund.items.0')
         ->assertUnprocessable();
 
     $cart->refresh();
