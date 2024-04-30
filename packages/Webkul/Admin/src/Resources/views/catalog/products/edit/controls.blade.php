@@ -185,7 +185,11 @@
                     @endif
                 </a>
 
-                <input type="hidden" name="{{ $attribute->code }}" value="{{ $product[$attribute->code] }}"/>
+                <input
+                    type="hidden"
+                    name="{{ $attribute->code }}"
+                    value="{{ $product[$attribute->code] }}"
+                />
             @endif
 
             <v-field

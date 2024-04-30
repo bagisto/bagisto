@@ -21,7 +21,7 @@
         >
             <div>
                 <x-admin::datagrid
-                    src="{{ route('admin.marketing.communications.subscribers.index') }}"
+                    :src="route('admin.marketing.communications.subscribers.index')"
                     ref="datagrid"
                 >
                     <template #body="{
@@ -41,15 +41,15 @@
                                 v-for="record in available.records"
                                 class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
-                            >
-                                <!-- ID -->
-                                <p v-text="record.id"></p>
+                        >
+                            <!-- Id -->
+                            <p>@{{ record.id }}</p>
 
-                                <!-- Status -->
-                                <p v-text="record.status"></p>
+                            <!-- Status -->
+                            <p>@{{ record.status }}</p>
 
-                                <!-- Email -->
-                                <p v-text="record.email"></p>
+                            <!-- Email -->
+                            <p>@{{ record.email }}</p>
 
                                 <!-- Actions -->
                                 <div class="flex justify-end">

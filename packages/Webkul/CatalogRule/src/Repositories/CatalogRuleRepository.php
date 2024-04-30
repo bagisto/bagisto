@@ -42,8 +42,8 @@ class CatalogRuleRepository extends Repository
     public function create(array $data)
     {
         $data = array_merge($data, [
-            'starts_from' => ! empty($data['starts_from']) ? $data['starts_from'] : null,
-            'ends_till'   => ! empty($data['ends_till']) ? $data['ends_till'] : null,
+            'starts_from' => $data['starts_from'] ?? null,
+            'ends_till'   => $data['ends_till'] ?? null,
             'status'      => isset($data['status']),
         ]);
 
@@ -66,8 +66,8 @@ class CatalogRuleRepository extends Repository
     public function update(array $data, $id, $attribute = 'id')
     {
         $data = array_merge($data, [
-            'starts_from' => ! empty($data['starts_from']) ? $data['starts_from'] : null,
-            'ends_till'   => ! empty($data['ends_till']) ? $data['ends_till'] : null,
+            'starts_from' => $data['starts_from'] ?? null,
+            'ends_till'   => $data['ends_till'] ?? null,
             'status'      => isset($data['status']),
             'conditions'  => $data['conditions'] ?? [],
         ]);

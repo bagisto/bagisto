@@ -75,10 +75,8 @@
                                         </div>
 
                                         <div class="grid gap-y-2.5">
-                                            <p 
-                                                class="text-base font-medium" 
-                                                v-text="item.product.name"
-                                            >
+                                            <p class="text-base font-medium">
+                                                @{{ item.product.name }}
                                             </p>
 
                                             <!--Wishlist Item attributes -->

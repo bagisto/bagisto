@@ -42,10 +42,8 @@
                 </path>
             </svg>
 
-            <span
-                class="realative h-full w-full opacity-0"
-                v-text="title"
-            >
+            <span class="realative h-full w-full opacity-0">
+                @{{ title }}
             </span>
         </button>
     </script>

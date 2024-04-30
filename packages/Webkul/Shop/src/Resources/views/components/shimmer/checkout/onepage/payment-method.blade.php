@@ -1,6 +1,6 @@
 <div class="mb-7">
     <div class="flex items-center justify-between">
-        <h2 class="shimmer h-[32px] w-[225px]"></h2>
+        <h2 class="shimmer h-8 w-[225px]"></h2>
         <span class="shimmer h-6 w-6"></span>
     </div>
 

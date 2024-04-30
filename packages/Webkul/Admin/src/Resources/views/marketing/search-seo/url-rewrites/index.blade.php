@@ -50,7 +50,7 @@
             {!! view_render_event('bagisto.admin.marketing.search_seo.url_rewrites.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.url_rewrites.index') }}"
+                :src="route('admin.marketing.search_seo.url_rewrites.index')"
                 ref="datagrid"
             >
                 <template #body="{
@@ -88,23 +88,23 @@
                                 </label>
                             </p>
 
-                            <!-- ID -->
-                            <p v-text="record.id"></p>
+                            <!-- Id -->
+                            <p>@{{ record.id }}</p>
 
                             <!-- For -->
-                            <p v-text="record.entity_type"></p>
+                            <p>@{{ record.entity_type }}</p>
 
                             <!-- Request Path -->
-                            <p v-text="record.request_path"></p>
+                            <p>@{{ record.request_path }}</p>
 
                             <!-- Target Path -->
-                            <p v-text="record.target_path"></p>
+                            <p>@{{ record.target_path }}</p>
 
                             <!-- Redirect Type -->
-                            <p v-text="record.redirect_type"></p>
+                            <p>@{{ record.redirect_type }}</p>
 
                             <!-- Locale -->
-                            <p v-text="record.locale"></p>
+                            <p>@{{ record.locale }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">

@@ -39,7 +39,11 @@
 
     {!! view_render_event('bagisto.admin.customers.customers.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.customers.customers.index') }}" ref="customerDatagrid" :isMultiRow="true">
+    <x-admin::datagrid
+        :src="route('admin.customers.customers.index')"
+        ref="customer_data"
+        :isMultiRow="true"
+    >
         @php 
             $hasPermission = bouncer()->hasPermission('customers.customers.edit') || bouncer()->hasPermission('customers.customers.delete');
         @endphp
@@ -155,22 +159,16 @@
                         @endif
 
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base font-semibold text-gray-800 dark:text-white"
-                                v-text="record.full_name"
-                            >
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                @{{ record.full_name }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.email"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.email }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.phone ?? 'N/A'"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.phone ?? 'N/A' }}
                             </p>
                         </div>
                     </div>
@@ -195,25 +193,19 @@
                             </span>
                         </div>
 
-                        <p
-                            class="text-gray-600 dark:text-gray-300"
-                            v-text="record.gender ?? 'N/A'"
-                        >
+                        <p class="text-gray-600 dark:text-gray-300">
+                            @{{ record.gender ?? 'N/A' }}
                         </p>
 
-                        <p
-                            class="text-gray-600 dark:text-gray-300"
-                            v-text="record.group ?? 'N/A'"
-                        >
+                        <p class="text-gray-600 dark:text-gray-300">
+                            @{{ record.group ?? 'N/A' }}
                         </p>
                     </div>
 
                     <div class="flex items-center justify-between gap-x-4">
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base font-semibold text-gray-800 dark:text-white"
-                                v-text="$admin.formatPrice(record.revenue)"
-                            >
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                @{{ $admin.formatPrice(record.revenue) }}
                             </p>
 
                             <p class="text-gray-600 dark:text-gray-300">

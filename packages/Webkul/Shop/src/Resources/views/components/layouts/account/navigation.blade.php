@@ -73,7 +73,10 @@
 </div>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-account-navigation-template">
+    <script
+        type="text/x-template"
+        id="v-account-navigation-template"
+    >
         <div>
             <slot></slot>
         </div>

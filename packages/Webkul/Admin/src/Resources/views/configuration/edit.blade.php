@@ -61,7 +61,11 @@
 
                             {{ $currentChannel->name }}
 
-                            <input type="hidden" name="channel" value="{{ $currentChannel->code }}"/>
+                            <input
+                                type="hidden"
+                                name="channel"
+                                value="{{ $currentChannel->code }}"
+                            />
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
@@ -91,8 +95,12 @@
                             <span class="icon-language text-2xl"></span>
 
                             {{ $currentLocale->name }}
-
-                            <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
+                            
+                            <input
+                                type="hidden"
+                                name="locale"
+                                value="{{ $currentLocale->code }}"
+                            />
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>

@@ -80,7 +80,10 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-media-video-item-template">
+    <script
+        type="text/x-template"
+        id="v-media-video-item-template"
+    >
         <div class="group relative grid h-[120px] max-h-[120px] min-w-[210px] max-w-[210px] justify-items-center overflow-hidden rounded border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800">
             <!-- Video Preview -->
             <video
@@ -116,7 +119,11 @@
                         :for="$.uid + '_videoInput_' + index"
                     ></label>
 
-                    <input type="hidden" :name="name + '[' + video.id + ']'" v-if="! video.is_new"/>
+                    <input
+                        type="hidden"
+                        :name="name + '[' + video.id + ']'"
+                        v-if="! video.is_new"
+                    />
 
                     <input
                         type="file"

@@ -28,7 +28,10 @@
     </v-create-order>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-order-template">
+        <script
+            type="text/x-template"
+            id="v-create-order-template"
+        >
             <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <!-- Left Component -->
                 {!! view_render_event('bagisto.admin.sales.order.create.left_component.before') !!}

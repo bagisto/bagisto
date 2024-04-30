@@ -36,6 +36,8 @@ return [
         'description-text' => 'قائمة جميع الإشعارات',
         'marked-success'   => 'تم وضع علامة على الإشعار بنجاح',
         'no-record'        => 'لم يتم العثور على سجلات',
+        'of'               => 'من',
+        'per-page'         => 'في الصفحة',
         'read-all'         => 'وضع علامة كمقروء',
         'title'            => 'الإشعارات',
         'view-all'         => 'عرض الكل',
@@ -232,8 +234,8 @@ return [
 
                     'address' => [
                         'add-btn'          => 'إضافة عنوان',
-                        'add-new-address'  => 'إضافة عنوان جديد',
                         'add-new'          => 'إضافة عنوان جديد',
+                        'add-new-address'  => 'إضافة عنوان جديد',
                         'addresses'        => 'العناوين',
                         'back'             => 'رجوع',
                         'billing-address'  => 'عنوان الفوترة',
@@ -248,8 +250,8 @@ return [
                         'postcode'         => 'الرمز البريدي',
                         'proceed'          => 'المتابعة',
                         'same-as-billing'  => 'استخدم نفس العنوان للشحن؟',
-                        'save-address'     => 'حفظ هذا في دفتر العناوين',
                         'save'             => 'حفظ',
+                        'save-address'     => 'حفظ هذا في دفتر العناوين',
                         'select-country'   => 'اختر البلد',
                         'select-state'     => 'اختر المنطقة',
                         'shipping-address' => 'عنوان الشحن',
@@ -257,6 +259,7 @@ return [
                         'street-address'   => 'عنوان الشارع',
                         'telephone'        => 'رقم الهاتف',
                         'title'            => 'العنوان',
+                        'vat-id'           => 'الرقم الضريبي',
                     ],
 
                     'payment' => [
@@ -1060,6 +1063,7 @@ return [
                 'position'              => 'الموقع',
                 'price'                 => 'السعر',
                 'regex'                 => 'تعبير عادي',
+                'regex-info'            => 'يجب أن تكون التعبيرات بين علامات اقتباس مزدوجة.',
                 'save-btn'              => 'حفظ السمة',
                 'select'                => 'اختيار',
                 'select-type'           => 'نوع السمة المختارة',
@@ -1123,6 +1127,7 @@ return [
                 'position'              => 'الموقع',
                 'price'                 => 'السعر',
                 'regex'                 => 'تعبير عادي',
+                'regex-info'            => 'يجب أن تكون التعبيرات بين علامات اقتباس مزدوجة.',
                 'save-btn'              => 'حفظ السمة',
                 'select'                => 'اختيار',
                 'select-type'           => 'نوع السمة المختارة',
@@ -2332,8 +2337,10 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => ':name تم أخذه بالفعل.',
+            'already-taken' => 'تم استخدام :name بالفعل.',
             'create-btn'    => 'إنشاء صفحة',
+            'channel'       => 'القناة',
+            'language'      => 'اللغة',
             'title'         => 'الصفحات',
 
             'datagrid' => [
@@ -2779,12 +2786,12 @@ return [
 
                 'edit' => [
                     'back-btn'       => 'عودة',
-                    'basic-settings' => 'الإعدادات الأساسية',
                     'country'        => 'البلد',
                     'identifier'     => 'المعرف',
                     'save-btn'       => 'حفظ سعر الضريبة',
                     'select-country' => 'اختر البلد',
                     'select-state'   => 'اختر الولاية',
+                    'settings'       => 'الإعدادات',
                     'state'          => 'الولاية',
                     'tax-rate'       => 'السعر',
                     'title'          => 'تعديل سعر الضريبة',

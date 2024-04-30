@@ -200,7 +200,10 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-bundle-option-item-template">
+    <script
+        type="text/x-template"
+        id="v-bundle-option-item-template"
+    >
         <!-- Panel -->
         <div>
             <!-- Hidden Inputs -->
@@ -233,7 +236,7 @@
                 <div class="flex flex-col gap-2">
                     <p
                         class="text-base font-semibold text-gray-800 dark:text-white"
-                        :class="{'required': option.is_required}"
+                        :class="{'required': option.is_required == 1}"
                     >
                         @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
                     </p>
