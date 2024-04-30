@@ -141,12 +141,9 @@
                             @php ($hint = $field['title'] . '-hint')
 
                             @if ($hint !== __($hint))
-                                <label
-                                    for="@lang($hint)"
-                                    class="block text-xs font-medium leading-5 text-gray-600 dark:text-gray-300"
-                                >
+                                <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
                                     @lang($hint)
-                                </label>
+                                </p>
                             @endif
                         @endforeach
                     </div>

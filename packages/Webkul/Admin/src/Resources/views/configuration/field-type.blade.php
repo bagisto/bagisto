@@ -385,12 +385,9 @@
         @endif
 
         @if (isset($field['info']))
-            <label
-                class="block text-xs font-medium leading-5 text-gray-600 dark:text-gray-300"
-                for="{{ $name }}-info"
-            >
+            <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
                 {!! trans($field['info']) !!}
-            </label>
+            </p>
         @endif
 
         <!-- Input field validaitons error message -->
