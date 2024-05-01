@@ -5,22 +5,22 @@
                 <!-- Heading -->
                 <div class="flex flex-col gap-1">
                     <div class="shimmer h-4 w-24"></div>
-                    
+
                     <div class="shimmer h-4 w-[434px]"></div>
                 </div>
 
                 <!-- Button -->
                 <div class="flex gap-2.5">
-                    <div class="secondary-button h-10 w-32"></div>
+                    <div class="secondary-button h-[38px] w-[125px]"></div>
                 </div>
             </div>
 
             <!-- Service details -->
             @for ($i = 0; $i < 4; $i++)
-                <div class="mt-4 grid border-b border-slate-300 last:border-b-0 dark:border-gray-800">
-                    <div class="mt-1 flex cursor-pointer justify-between gap-2.5 py-5">
+                <div class="mt-3 grid border-b border-slate-300 last:border-b-0 dark:border-gray-800">
+                    <div class="my-1 flex cursor-pointer justify-between gap-2.5 py-5">
                         <div class="flex gap-2.5">
-                            <div class="grid place-content-start gap-1.5">                                    
+                            <div class="grid place-content-start gap-1.5">                    
                                 <div class="shimmer h-4 w-32"></div>
 
                                 <div class="shimmer h-4 w-72"></div>
