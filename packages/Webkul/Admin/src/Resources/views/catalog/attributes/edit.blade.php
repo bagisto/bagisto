@@ -374,14 +374,14 @@
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
                     <!-- General -->
-                    <div class="box-shadow rounded bg-white dark:bg-gray-900">
-                        <div class="flex items-center justify-between p-1.5">
+                    <x-admin::accordion>
+                        <x-slot:header>
                             <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.edit.general')
                             </p>
-                        </div>
+                        </x-slot>
 
-                        <div class="px-4 pb-4">
+                        <x-slot:content>
                             <!-- Attribute Code -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -493,9 +493,9 @@
 
                                 <x-admin::form.control-group.error control-name="default_value" />
                             </x-admin::form.control-group>
-                        </div>
-                    </div>
-
+                        </x-slot>
+                    </x-admin::accordion>
+                    
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.after', ['attribute' => $attribute]) !!}
 
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.before', ['attribute' => $attribute]) !!}

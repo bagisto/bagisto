@@ -357,14 +357,14 @@
                 <!-- Right sub-component -->
                 <div class="flex w-[360px] max-w-full flex-col gap-2">
                     <!-- General -->
-                    <div class="box-shadow rounded bg-white dark:bg-gray-900">
-                        <div class="flex items-center justify-between p-1.5">
+                    <x-admin::accordion>
+                        <x-slot:header>
                             <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.create.general')
                             </p>
-                        </div>
+                        </x-slot>
 
-                        <div class="px-4 pb-4">
+                        <x-slot:content>
                             <!-- Attribute Code -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -449,9 +449,9 @@
                                     :label="trans('admin::app.catalog.attributes.create.default-value')"
                                 />
                             </x-admin::form.control-group>
-                        </div>
-                    </div>
-
+                        </x-slot>
+                    </x-admin::accordion>
+                    
                     <!-- Validations -->
                     <x-admin::accordion>
                         <x-slot:header>
