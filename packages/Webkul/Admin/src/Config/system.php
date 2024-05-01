@@ -1420,7 +1420,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
                 'type'          => 'text',
                 'depends'       => 'active:1',
-                'validation'    => 'required_if:active,true',
+                'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [

@@ -8,10 +8,12 @@
     $dependName = $coreConfigRepository->getNameField($dependNameKey);
 
     $field['options'] = $coreConfigRepository->getDependentFieldOptions($field, $field['options'] ?? null);
-
+    // depend-options
     $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '';
+    // value
 
     $dependSelectedOption = core()->getConfigData($dependNameKey, $currentChannel->code, $currentLocale->code) ?? '';
+    // depend-selected-options
 @endphp
 
 @if (strpos($field['validation'], 'required_if') !== false)
@@ -21,9 +23,11 @@
         validations="{{ $validations }}"
         label="@lang($field['title'])"
         options="{{ json_decode($field['options']) }}"
+        {{-- depend-options --}}
         info="{{ trans($field['info'] ?? '') }}"
         depend="{{ $dependName }}"
         depend-result="{{ $dependSelectedOption }}"
+        {{-- depend-selected-options --}}
         channel_locale="{{ $channelLocaleInfo }}"
     >
     </v-required-if>
@@ -43,79 +47,6 @@
 @endif
 
 @pushOnce('scripts')
-    <script
-        type="text/x-template"
-        id="v-depends-template"
-    >
-        <div>
-            <div class="flex justify-between">
-                <label
-                    class="flex items-center gap-1.5 text-xs font-medium text-gray-800 dark:text-white"
-                    :class="{ 'required' : isRequire }"
-                    :for="name"
-                >
-                    @{{ label }}
-
-                    @if (
-                        ! empty($field['channel_based'])
-                        && $channels->count() > 1
-                    )
-                        <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
-                            {{ $currentChannel->name }}
-                        </span>
-                    @endif
-
-                    @if (! empty($field['locale_based']))
-                        <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
-                            {{ $currentLocale->name }}
-                        </span>
-                    @endif
-                </label>
-            </div>
-            
-            <v-field 
-                :name="name"
-                v-slot="{ field, errorMessage }"
-                :id="name"
-                v-model="value"
-                :rules="validations"
-                :label="field_name"
-                v-if="this.isVisible"
-            >
-                <select 
-                    v-bind="field"
-                    :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full appearance-none rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
-                >
-                    <option 
-                        v-for='(option, index) in this.options' 
-                        :value="option.value"
-                        :text="option.title"
-                    > 
-                    </option>
-                </select>
-            </v-field>
-
-            <v-field 
-                :name="name"
-                v-slot="{ field, errorMessage }"
-                :id="name"
-                :placeholder="info"
-                :rules="validations"
-                v-model="value"
-                :label="field_name"
-                v-else
-            >
-                <input 
-                    type="text"
-                    v-bind="field"
-                    :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full appearance-none rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
-                />
-            </v-field>
-        </div>
-    </script>
-
     <script
         type="text/x-template"
         id="v-required-if-template"
@@ -200,68 +131,6 @@
         </div>
     </script>
     
-    <script type="module">
-        app.component('v-depends', {
-            template: '#v-depends-template',
-
-            props: [
-                'options',
-                'name',
-                'validations',
-                'depend',
-                'value',
-                'label',
-                'channel_locale',
-                'repository',
-                'result'
-            ],
-
-            data() {
-                return {
-                    isRequire: false,
-                    isVisible: false,
-                    value: this.result,
-                };
-            },
-
-            mounted() {
-                if (this.validations || this.validations.indexOf("required") !== -1) {
-                    this.isRequire = true;
-                }
-
-                let dependentElement = document.getElementById(this.depend);
-
-                let dependValue = this.value;
-
-                if (dependValue === 'true') {
-                    dependValue = 1;
-                } else if (dependValue === 'false') {
-                    dependValue = 0;
-                }
-
-                document.addEventListener("change", (event) => {
-                    if (this.depend === event.target.name) {
-                        this.isVisible = this.value === event.target.value;
-                    }
-                });
-
-                if (dependentElement && dependentElement.value == dependValue) {
-                    this.isVisible = true;
-                } else {
-                    this.isVisible = false;
-                }
-
-                if (this.result) {
-                    if (dependentElement && dependentElement.value == this.value) {
-                        this.isVisible = true;
-                    } else {
-                        this.isVisible = false;
-                    }
-                }
-            },
-        });
-    </script>
-
     <script type="module">
         app.component('v-required-if', {
             template: '#v-required-if-template',
