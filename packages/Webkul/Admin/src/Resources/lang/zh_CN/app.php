@@ -771,7 +771,8 @@ return [
                 ],
 
                 'categories' => [
-                    'title' => '分类',
+                    'category-details' => '点击文件夹以获取子文件夹',
+                    'title'            => '分类',
                 ],
 
                 'images' => [
@@ -1185,6 +1186,7 @@ return [
                 'back-btn'                 => '返回',
                 'banner'                   => '横幅',
                 'banner-size'              => '横幅尺寸（1320px X 300px）',
+                'category-details'         => '点击文件夹以获取子文件夹',
                 'company-name'             => '名称',
                 'description'              => '描述',
                 'description-and-images'   => '描述和图片',
@@ -1217,6 +1219,7 @@ return [
                 'back-btn'                 => '返回',
                 'banner'                   => '横幅',
                 'banner-size'              => '横幅尺寸（1320px X 300px）',
+                'category-details'         => '点击文件夹以获取子文件夹',
                 'company-name'             => '名称*',
                 'description'              => '描述',
                 'description-and-images'   => '描述和图片',

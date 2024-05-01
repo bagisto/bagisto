@@ -771,7 +771,8 @@ return [
                 ],
 
                 'categories' => [
-                    'title' => 'Categorias',
+                    'category-details' => 'Clique nas pastas para obter a subpasta',
+                    'title'            => 'Categorias',
                 ],
 
                 'images' => [
@@ -1185,6 +1186,7 @@ return [
                 'back-btn'                 => 'Voltar',
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Proporção do banner (1320px X 300px)',
+                'category-details'         => 'Clique nas pastas para obter a subpasta',
                 'description'              => 'Descrição',
                 'description-and-images'   => 'Descrição e Imagens',
                 'description-only'         => 'Apenas Descrição',
@@ -1217,6 +1219,7 @@ return [
                 'back-btn'                 => 'Voltar',
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Proporção do banner (1320px X 300px)',
+                'category-details'         => 'Clique nas pastas para obter a subpasta',
                 'description'              => 'Descrição',
                 'description-and-images'   => 'Descrição e Imagens',
                 'description-only'         => 'Apenas Descrição',

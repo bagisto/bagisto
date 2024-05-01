@@ -156,10 +156,24 @@ class CategoryRepository extends Repository
                 ->get()->toTree();
         }
 
-        return $this->model::orderBy('position', 'ASC')
-            ->where('id', '!=', $id)
+        $category = $this->model::orderBy('position', 'ASC')
             ->whereNotDescendantOf($id)
-            ->get()
+            ->get();
+
+        if ($id == 1) {
+            return $category->where('id', '!=', $id)->toTree();
+        }
+
+        $primaryParentId = $category->where('id', $id)->value('parent_id');
+        $allParentIds = [$primaryParentId, null];
+
+        while ($primaryParentId) {
+            $primaryParentId = $category->where('id', $primaryParentId)->value('parent_id');
+            $allParentIds[] = $primaryParentId;
+        }
+
+        return $category->whereIn('parent_id', $allParentIds)
+            ->where('id', '!=', $id)
             ->toTree();
     }
 

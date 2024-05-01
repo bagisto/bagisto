@@ -771,7 +771,8 @@ return [
                 ],
 
                 'categories' => [
-                    'title' => 'বিভাগসমূহ',
+                    'category-details' => 'সাবফোল্ডার পেতে ফোল্ডারে ক্লিক করুন',
+                    'title'            => 'বিভাগসমূহ',
                 ],
 
                 'images' => [
@@ -1185,6 +1186,7 @@ return [
                 'back-btn'                 => 'পেছনে',
                 'banner'                   => 'ব্যানার',
                 'banner-size'              => 'ব্যানার অবস্থান অবস্থান (1320px X 300px)',
+                'category-details'         => 'সাবফোল্ডার পেতে ফোল্ডারে ক্লিক করুন',
                 'description'              => 'বিবরণ',
                 'description-and-images'   => 'বিবরণ এবং চিত্র',
                 'description-only'         => 'শুধুমাত্র বিবরণ',
@@ -1217,6 +1219,7 @@ return [
                 'back-btn'                 => 'পেছনে',
                 'banner'                   => 'ব্যানার',
                 'banner-size'              => 'ব্যানার অবস্থান অবস্থান (1320px X 300px)',
+                'category-details'         => 'সাবফোল্ডার পেতে ফোল্ডারে ক্লিক করুন',
                 'description'              => 'বিবরণ',
                 'description-and-images'   => 'বিবরণ এবং চিত্র',
                 'description-only'         => 'শুধুমাত্র বিবরণ',

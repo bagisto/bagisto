@@ -267,8 +267,6 @@
                             image.remove();
                         })
                         .catch(error => {
-                            console.log(error.message);
-
                             this.$emitter.emit('add-flash', { type: 'danger', message: error.message });
                         });
                 },

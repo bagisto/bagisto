@@ -771,7 +771,8 @@ return [
                 ],
 
                 'categories' => [
-                    'title' => 'Категории',
+                    'category-details' => 'Нажмите на папки, чтобы получить подпапку',
+                    'title'            => 'Категории',
                 ],
 
                 'images' => [
@@ -1185,6 +1186,7 @@ return [
                 'back-btn'                 => 'Назад',
                 'banner'                   => 'Баннер',
                 'banner-size'              => 'Соотношение сторон баннера (1320px X 300px)',
+                'category-details'         => 'Нажмите на папки, чтобы получить подпапку',
                 'description'              => 'Описание',
                 'description-and-images'   => 'Описание и изображения',
                 'description-only'         => 'Только описание',
@@ -1217,6 +1219,7 @@ return [
                 'back-btn'                 => 'Назад',
                 'banner'                   => 'Баннер',
                 'banner-size'              => 'Соотношение сторон баннера (1320px X 300px)',
+                'category-details'         => 'Нажмите на папки, чтобы получить подпапку',
                 'description'              => 'Описание',
                 'description-and-images'   => 'Описание и изображения',
                 'description-only'         => 'Только описание',

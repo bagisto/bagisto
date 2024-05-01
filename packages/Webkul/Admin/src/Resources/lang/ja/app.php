@@ -771,7 +771,8 @@ return [
                 ],
 
                 'categories' => [
-                    'title' => 'カテゴリー',
+                    'category-details' => 'サブフォルダを取得するにはフォルダをクリックしてください',
+                    'title'            => 'カテゴリー',
                 ],
 
                 'images' => [
@@ -1185,6 +1186,7 @@ return [
                 'back-btn'                 => '戻る',
                 'banner'                   => 'バナー',
                 'banner-size'              => 'バナーアスペクト比（1320px X 300px）',
+                'category-details'         => 'サブフォルダを取得するにはフォルダをクリックしてください',
                 'description'              => '説明',
                 'description-and-images'   => '説明と画像',
                 'description-only'         => '説明のみ',
@@ -1217,6 +1219,7 @@ return [
                 'back-btn'                 => '戻る',
                 'banner'                   => 'バナー',
                 'banner-size'              => 'バナーアスペクト比（1320px X 300px）',
+                'category-details'         => 'サブフォルダを取得するにはフォルダをクリックしてください',
                 'description'              => '説明',
                 'description-and-images'   => '説明と画像',
                 'description-only'         => '説明のみ',

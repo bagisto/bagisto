@@ -771,7 +771,8 @@ return [
                 ],
 
                 'categories' => [
-                    'title' => 'Catégories',
+                    'category-details' => 'Cliquez sur les dossiers pour obtenir les sous-dossiers',
+                    'title'            => 'Catégories',
                 ],
 
                 'images' => [
@@ -1185,6 +1186,7 @@ return [
                 'back-btn'                 => 'Retour',
                 'banner'                   => 'Bannière',
                 'banner-size'              => 'Format de bannière (1320px X 300px)',
+                'category-details'         => 'Cliquez sur les dossiers pour obtenir les sous-dossiers',
                 'description'              => 'Description',
                 'description-and-images'   => 'Description et images',
                 'description-only'         => 'Description uniquement',
@@ -1217,6 +1219,7 @@ return [
                 'back-btn'                 => 'Retour',
                 'banner'                   => 'Bannière',
                 'banner-size'              => 'Format de bannière (1320px X 300px)',
+                'category-details'         => 'Cliquez sur les dossiers pour obtenir les sous-dossiers',
                 'description'              => 'Description',
                 'description-and-images'   => 'Description et images',
                 'description-only'         => 'Description uniquement',
