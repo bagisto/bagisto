@@ -161,7 +161,6 @@
 
                             <p class="text-gray-400">
                                 @lang('admin::app.settings.themes.edit.category-carousel-description')
-
                             </p>
                         </div>
         
@@ -191,6 +190,7 @@
                             value="category_carousel"
                         >
 
+                        <!-- Name -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.name')
@@ -211,6 +211,7 @@
                             <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
+                        <!-- Sort Order -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
@@ -231,6 +232,7 @@
                             <x-admin::form.control-group.error control-name="sort_order" />
                         </x-admin::form.control-group>
 
+                        <!-- Channel -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.channels')
@@ -250,6 +252,7 @@
                             <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
+                        <!-- Status -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.status')
@@ -339,14 +342,12 @@
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
-                        <div class="flex items-center gap-x-2.5">
-                            <button 
-                                type="submit"
-                                class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
-                            >
-                                @lang('admin::app.settings.themes.edit.save-btn')
-                            </button>
-                        </div>
+                        <button 
+                            type="submit"
+                            class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
+                        >
+                            @lang('admin::app.settings.themes.edit.save-btn')
+                        </button>
                     </x-slot>
                 </x-admin::modal>
             </form>
