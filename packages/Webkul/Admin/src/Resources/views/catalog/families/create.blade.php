@@ -36,7 +36,7 @@
             <!-- Left Container -->
             <div class="box-shadow flex flex-1 flex-col gap-2 rounded bg-white dark:bg-gray-900">
                 <v-family-attributes>
-                    <x-admin::shimmer.families.attributes-panel />
+                    <x-admin::shimmer.catalog.families.attributes-panel />
                 </v-family-attributes>
             </div>
 
