@@ -11,25 +11,28 @@
 
     $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 
-    $field = collect($field)->map(function ($value, $key) {
+    $field = collect([
+        ...$field,
+        'isVisible' => true,
+    ])->map(function ($value, $key) {
         if ($key == 'options') {
             if (is_callable($value)) {
                 return collect($value())->map(function ($option) {
                     return [
-                        'value' => $option['value'],
-                        'title' => trans($option['title']),
+                        'title'   => trans($option['title']),
+                        'value'   => $option['value'],
+                        'isVisible' => true,
                     ];
                 })->toArray();
             }
 
             return collect($value)->map(function ($option) {
                 return [
-                    'value' => $option['value'],
-                    'title' => trans($option['title']),
+                    'value'   => $option['value'],
+                    'title'   => trans($option['title']),
+                    'isVisible' => true,
                 ];
             })->toArray();
-
-            return $value;
         }
 
         return $value;
@@ -39,14 +42,6 @@
         [$fieldName, $fieldValue] = explode(':' , $field['depends']);
 
         $dependNameKey = $item['key'] . '.' . $fieldName;
-
-        $dependName = $coreConfigRepository->getNameField($dependNameKey);
-
-        $field['options'] = $coreConfigRepository->getDependentFieldOptions($field, $field['options'] ?? null);
-
-        $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '';
-
-        $dependSelectedOption = core()->getConfigData($dependNameKey, $currentChannel->code, $currentLocale->code) ?? '';
     }
 @endphp
 
@@ -69,12 +64,7 @@
     info="{{ trans($field['info'] ?? '') }}"
     validations="{{ $validations }}"
     src="{{ Storage::url(core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
-    @if (! empty($field['depends']))
-        depend-name-key="{{ $item['key'] . '.' . $fieldName }}"
-        depend-name="{{ $coreConfigRepository->getNameField($dependNameKey) }}"
-        depend-field-options="{{ $coreConfigRepository->getDependentFieldOptions($field, $field['options'] ?? null) }}"
-        depend-selected-options="{{ core()->getConfigData($dependNameKey, $currentChannel->code, $currentLocale->code) ?? '' }}"
-    @endif
+    depend-name="{{ isset($field['depends']) ? $coreConfigRepository->getNameField($dependNameKey) : ''}}"
 >
 </v-configurable>
 
@@ -85,7 +75,10 @@
     >
         <x-admin::form.control-group>
             <!-- Title of the input field -->
-            <div class="flex justify-between">
+            <div    
+                v-if="field.isVisible"
+                class="flex justify-between"
+            >
                 <x-admin::form.control-group.label ::for="name">
                     @{{ label }} <span :class="isRequire"></span>
 
@@ -106,7 +99,7 @@
             </div>
         
             <!-- Text input -->
-            <template v-if="field.type == 'text'">
+            <template v-if="field.type == 'text' && field.isVisible">
                 <x-admin::form.control-group.control
                     type="text"
                     ::id="name"
@@ -118,7 +111,7 @@
             </template>
         
             <!-- Password input -->
-            <template v-if="field.type == 'password'">
+            <template v-if="field.type == 'password' && field.isVisible">
                 <x-admin::form.control-group.control
                     type="password"
                     ::id="name"
@@ -130,7 +123,7 @@
             </template>
         
             <!-- Number input -->
-            <template v-if="field.type == 'number'">
+            <template v-if="field.type == 'number' && field.isVisible">
                 <x-admin::form.control-group.control
                     type="number"
                     ::id="name"
@@ -143,7 +136,7 @@
             </template>
 
             <!-- Color Input -->
-            <template v-if="field.type == 'color'">
+            <template v-if="field.type == 'color' && field.isVisible">
                 <x-admin::form.control-group.control
                     type="color"
                     ::id="name"
@@ -155,7 +148,7 @@
             </template>
         
             <!-- Textarea Input -->
-            <template v-if="field.type == 'textarea'">
+            <template v-if="field.type == 'textarea' && field.isVisible">
                 <x-admin::form.control-group.control
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
@@ -168,7 +161,7 @@
             </template>
 
             <!-- Textarea with tinymce -->
-            <template v-if="field.type == 'editor'">
+            <template v-if="field.type == 'editor' && field.isVisible">
                 <x-admin::form.control-group.control
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
@@ -181,7 +174,7 @@
             </template>
         
             <!-- Select input -->
-            <template v-if="field.type == 'select'">
+            <template v-if="field.type == 'select' && field.isVisible">
                 <v-field
                     v-slot="data"
                     :id="name"
@@ -207,7 +200,7 @@
             </template>
 
             <!-- Multiselect Input -->
-            <template v-if="field.type == 'multiselect'">
+            <template v-if="field.type == 'multiselect' && field.isVisible">
                 <v-field
                     v-slot="data"
                     :id="name"
@@ -235,7 +228,7 @@
             </template>
            
             <!-- Boolean/Switch input -->
-            <template v-if="field.type == 'boolean'">
+            <template v-if="field.type == 'boolean' && field.isVisible">
                 <input
                     type="hidden"
                     :name="name"
@@ -245,19 +238,18 @@
                 <label class="relative inline-flex cursor-pointer items-center">
                     <input  
                         type="checkbox"
-                        :id="name"
                         :name="name"
                         :value="1"
+                        :id="name"
                         class="peer sr-only"
-                        :checked="value" 
-                        ref="field"
+                        :checked="parseInt(value)"
                     >
-        
+
                     <div class="peer h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none dark:border-gray-600 dark:bg-gray-700 rtl:peer-checked:after:-translate-x-full"></div>
                 </label>
             </template>
         
-            <template v-if="field.type == 'image'">
+            <template v-if="field.type == 'image' && field.isVisible">
                 <div class="flex items-center justify-center">
                     <a
                         :href="src"
@@ -273,8 +265,8 @@
                     
                     <x-admin::form.control-group.control
                         type="file"
-                        ::id="name"
                         ::name="name"
+                        ::id="name"
                         ::rules="validations"
                         ::label="label"
                     />
@@ -300,7 +292,7 @@
                 </template>
             </template>
 
-            <template v-if="field.type == 'file'">
+            <template v-if="field.type == 'file' && field.isVisible">
                 <a
                     v-if="value"
                     :href="`{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), '']) }}/${value.split('/')[1]}`"
@@ -338,7 +330,7 @@
                 </template>
             </template>
 
-            <template v-if="field.type == 'country'">
+            <template v-if="field.type == 'country' && field.isVisible">
                 <v-country ref="countryRef">
                     <template v-slot:default="{ changeCountry }">
                         <x-admin::form.control-group class="flex">
@@ -367,7 +359,7 @@
             </template>
         
             <!-- State select Vue component -->
-            <template v-if="field.type == 'country'">
+            <template v-if="field.type == 'country' && field.isVisible">
                 <v-state ref="stateRef">
                     <template v-slot:default="{ countryStates, country, haveStates, isStateComponenetLoaded }">
                         <div v-if="isStateComponenetLoaded">
@@ -416,8 +408,8 @@
                 </v-state>
             </template>
         
-            <p 
-                v-if="field.info"
+            <p
+                v-if="field.info && field.isVisible"
                 class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300"
                 v-text="info"
             >
@@ -478,36 +470,30 @@
                 'validations',
                 'src',
                 'info',
-                'dependNameKey',
                 'dependName',
-                'dependFieldOptions',
-                'dependSelectedOptions',
             ],
 
             data() {
                 return {
                     field: JSON.parse(this.fieldData),
-                    isFieldShow: false,
                 };
             },
 
             mounted() {
                 if (this.dependName) {
-                    console.log(this);
-
                     const dependElement = document.getElementById(this.dependName);
 
-                    const [rule] = this.field.validation.split(':');
-                }
-            },
+                    if (dependElement) {
+                        dependElement.addEventListener('change', (event) => {
+                            this.field['isVisible'] = 
+                                event.target.type === 'checkbox' 
+                                ? event.target.checked
+                                : this.validations.split(',').slice(1).includes(event.target.value);
+                        });
+                    }
 
-            methods: {
-                handleEvent(event) {
-                    this.isFieldShow = 
-                        event.target.type === 'checkbox' 
-                        ? event.target.checked
-                        : this.validations.split(',').slice(1).includes(event.target.value);
-                },
+                    dependElement.dispatchEvent(new Event('change'));
+                }
             },
         });
 
@@ -517,7 +503,7 @@
             data() {
                 return {
                     country: "{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}",
-                }
+                };
             },
 
             mounted() {
@@ -541,7 +527,7 @@
                     isStateComponenetLoaded: false,
 
                     countryStates: @json(core()->groupedStatesByCountries())
-                }
+                };
             },
 
             created() {
