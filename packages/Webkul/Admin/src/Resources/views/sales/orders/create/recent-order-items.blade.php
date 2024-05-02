@@ -11,7 +11,6 @@
 
 {!! view_render_event('bagisto.admin.sales.order.create.recent_order_items.after') !!}
 
-
 @pushOnce('scripts')
     <script
         type="text/x-template"
