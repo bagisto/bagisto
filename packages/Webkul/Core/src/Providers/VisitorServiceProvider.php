@@ -11,7 +11,6 @@ class VisitorServiceProvider extends BaseVisitorServiceProvider
     /**
      * Perform post-registration booting of services.
      *
-     * @return void
      */
     public function boot(): void
     {
@@ -21,7 +20,6 @@ class VisitorServiceProvider extends BaseVisitorServiceProvider
     /**
      * Register any package services.
      *
-     * @return void
      */
     public function register(): void
     {
