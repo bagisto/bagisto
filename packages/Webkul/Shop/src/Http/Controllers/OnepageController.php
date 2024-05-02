@@ -83,7 +83,7 @@ class OnepageController extends Controller
      */
     public function success(OrderRepository $orderRepository)
     {
-        if (! $order = $orderRepository->find(session('order'))) {
+        if (! $order = $orderRepository->find(session('order_id'))) {
             return redirect()->route('shop.checkout.cart.index');
         }
 
