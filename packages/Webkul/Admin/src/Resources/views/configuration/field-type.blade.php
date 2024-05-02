@@ -137,14 +137,21 @@
 
             <!-- Color Input -->
             <template v-if="field.type == 'color' && field.isVisible">
-                <x-admin::form.control-group.control
-                    type="color"
-                    ::id="name"
-                    ::name="name"
-                    ::rules="validations"
-                    ::value="value"
-                    ::label="label"
-                />
+                <v-field
+                    v-slot="{ field, errors }"
+                    :id="name"
+                    :name="name"
+                    :value="value != '' ? value : '#ffffff'"
+                    :label="label"
+                    :rules="validations"
+                >
+                    <input
+                        type="color"
+                        v-bind="field"
+                        :class="[errors.length ? 'border border-red-500' : '']"
+                        class="w-full appearance-none rounded-md border text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300 dark:hover:border-gray-400"
+                    />
+                </v-field>
             </template>
         
             <!-- Textarea Input -->
