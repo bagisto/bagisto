@@ -490,20 +490,24 @@
             },
 
             mounted() {
-                if (this.dependName) {
-                    const dependElement = document.getElementById(this.dependName);
-
-                    if (dependElement) {
-                        dependElement.addEventListener('change', (event) => {
-                            this.field['isVisible'] = 
-                                event.target.type === 'checkbox' 
-                                ? event.target.checked
-                                : this.validations.split(',').slice(1).includes(event.target.value);
-                        });
-                    }
-
-                    dependElement.dispatchEvent(new Event('change'));
+                if (! this.dependName) {
+                    return;
                 }
+
+                const dependElement = document.getElementById(this.dependName);
+
+                if (! dependElement) {
+                    return;
+                }
+
+                dependElement.addEventListener('change', (event) => {
+                    this.field['isVisible'] = 
+                        event.target.type === 'checkbox' 
+                        ? event.target.checked
+                        : this.validations.split(',').slice(1).includes(event.target.value);
+                });
+
+                dependElement.dispatchEvent(new Event('change'));
             },
         });
 
