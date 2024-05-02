@@ -584,7 +584,10 @@
                         address.id = null;
                     }
 
-                    return address;
+                    return {
+                        ...address,
+                        default_address: 0,
+                    };
                 },
 
                 moveToNextStep() {
