@@ -194,6 +194,7 @@
                     :label="label"
                 >
                     <select
+                        :id="name"
                         :name="name"
                         v-bind="data.field"
                         :class="[data.errors.length ? 'border border-red-500' : '']"
