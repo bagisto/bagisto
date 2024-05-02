@@ -10,3 +10,13 @@
 ## Documentation
 - [ ] My pull request requires an update on the documentation repository.
 <!--- Please describe in detail what needs to be changed. --->
+
+## Branch Selection
+<!--- Please specify the target branch for this pull request. -->
+- [ ] Target Branch: master 
+
+## Pint
+<!---  Please make sure all the pint tests are passed. -->
+
+## Tailwind Reordering
+<!--- Please make sure all the Tailwind classes are reordered. -->
