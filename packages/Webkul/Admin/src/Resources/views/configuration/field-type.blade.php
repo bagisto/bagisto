@@ -340,7 +340,7 @@
             </template>
 
             <template v-if="field.type == 'country' && field.isVisible">
-                <v-country :select-country="value">
+                <v-country :selected-country="value">
                     <template v-slot:default="{ changeCountry }">
                         <x-admin::form.control-group class="flex">
                             <x-admin::form.control-group.control
@@ -513,11 +513,11 @@
         app.component('v-country', {
             template: '#v-country-template',
 
-            props: ['selectCountry'],
+            props: ['selectedCountry'],
 
             data() {
                 return {
-                    country: this.selectCountry,
+                    country: this.selectedCountry,
                 };
             },
 
