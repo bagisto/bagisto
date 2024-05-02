@@ -327,7 +327,6 @@
                             ::id="`${name}[delete]`"
                             ::name="`${name}[delete]`"
                             value="1"
-                            ref="field"
                         />
         
                         <label
@@ -341,7 +340,7 @@
             </template>
 
             <template v-if="field.type == 'country' && field.isVisible">
-                <v-country ref="countryRef">
+                <v-country :select-country="value">
                     <template v-slot:default="{ changeCountry }">
                         <x-admin::form.control-group class="flex">
                             <x-admin::form.control-group.control
@@ -369,8 +368,8 @@
             </template>
         
             <!-- State select Vue component -->
-            <template v-if="field.type == 'country' && field.isVisible">
-                <v-state ref="stateRef">
+            <template v-if="field.type == 'state' && field.isVisible">
+                <v-state>
                     <template v-slot:default="{ countryStates, country, haveStates, isStateComponenetLoaded }">
                         <div v-if="isStateComponenetLoaded">
                             <template v-if="haveStates()">
@@ -514,19 +513,21 @@
         app.component('v-country', {
             template: '#v-country-template',
 
+            props: ['selectCountry'],
+
             data() {
                 return {
-                    country: "{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}",
+                    country: this.selectCountry,
                 };
             },
 
             mounted() {
-                this.$root.$refs.stateRef.country = this.country;
+                this.$emitter.emit('country-changed', this.country);
             },
 
             methods: {
                 changeCountry(selectedCountryCode) {
-                    this.$root.$refs.stateRef.country = selectedCountryCode;
+                    this.$emitter.emit('country-changed', selectedCountryCode);
                 },
             },
         });
@@ -545,6 +546,8 @@
             },
 
             created() {
+                this.$emitter.on('country-changed', (value) => this.country = value);
+
                 setTimeout(() => {
                     this.isStateComponenetLoaded = true;
                 }, 0);
