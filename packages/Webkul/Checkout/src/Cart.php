@@ -502,6 +502,8 @@ class Cart
         if ($this->cart->shipping_address) {
             $address = $this->cartAddressRepository->update($params, $this->cart->shipping_address->id);
         } else {
+            $params['default_address'] = 0;
+
             $address = $this->cartAddressRepository->create($params);
         }
 
