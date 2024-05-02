@@ -21,6 +21,7 @@
                         </div>
                     </div>
 
+                    <!-- Sort -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.themes.edit.sort')
@@ -56,6 +57,7 @@
                         <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[options][sort]" />
                     </x-admin::form.control-group>
 
+                    <!-- Limit -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.themes.edit.limit')
@@ -149,7 +151,7 @@
                         v-else
                     >
                         <img
-                            class="h-[120px] w-[120px] p-2 dark:mix-blend-exclusion dark:invert"
+                            class="h-40 w-40 p-2 dark:mix-blend-exclusion dark:invert"
                             src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                             alt="@lang('admin::app.settings.themes.edit.category-carousel')"
                         >

@@ -21,14 +21,13 @@
                                 @lang('admin::app.settings.themes.edit.footer-link-description')
                             </p>
                         </div>
-        
-                        <div class="flex gap-2.5">
-                            <div
-                                class="secondary-button"
-                                @click="isUpdating=false;$refs.addLinksModal.toggle()"
-                            >
-                                @lang('admin::app.settings.themes.edit.add-link')
-                            </div>
+
+                        <!-- Add Link Button -->
+                        <div
+                            class="secondary-button"
+                            @click="isUpdating=false;$refs.addLinksModal.toggle()"
+                        >
+                            @lang('admin::app.settings.themes.edit.add-link')
                         </div>
                     </div>
 
@@ -172,6 +171,7 @@
                             value="footer_links"
                         />
 
+                        <!-- Name -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.name')
@@ -192,6 +192,7 @@
                             <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
+                        <!-- Sort Order -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
@@ -212,6 +213,7 @@
                             <x-admin::form.control-group.error control-name="sort_order" />
                         </x-admin::form.control-group>
 
+                        <!-- Channels -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.channels')
@@ -231,6 +233,7 @@
                             <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
+                        <!-- Status -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.status')
@@ -288,7 +291,8 @@
                             type="hidden"
                             name="key"
                         />
-                        
+
+                        <!-- Column Select -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.column')
@@ -310,6 +314,7 @@
                             <x-admin::form.control-group.error control-name="column" />
                         </x-admin::form.control-group>
 
+                        <!-- Title -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.footer-title')
@@ -326,6 +331,7 @@
                             <x-admin::form.control-group.error control-name="title" />
                         </x-admin::form.control-group>
 
+                        <!-- URL -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.url')
@@ -342,6 +348,7 @@
                             <x-admin::form.control-group.error control-name="url" />
                         </x-admin::form.control-group>
 
+                        <!-- Sort Order -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
@@ -361,14 +368,12 @@
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
-                        <div class="flex items-center gap-x-2.5">
-                            <button 
-                                type="submit"
-                                class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
-                            >
-                                @lang('admin::app.settings.themes.edit.save-btn')
-                            </button>
-                        </div>
+                        <button 
+                            type="submit"
+                            class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
+                        >
+                            @lang('admin::app.settings.themes.edit.save-btn')
+                        </button>
                     </x-slot>
                 </x-admin::modal>
             </form>

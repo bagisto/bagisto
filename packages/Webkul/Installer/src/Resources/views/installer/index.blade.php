@@ -543,7 +543,7 @@
 
                                 <!-- Database Password-->
                                 <x-installer::form.control-group class="mb-2.5">
-                                    <x-installer::form.control-group.label>
+                                    <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.database-password')
                                     </x-installer::form.control-group.label>
 
@@ -551,6 +551,7 @@
                                         type="password"
                                         name="db_password"
                                         ::value="envData.db_password"
+                                        rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-password')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-password')"
                                     />
