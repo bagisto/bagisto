@@ -15,7 +15,7 @@
         enctype="multipart/form-data"
         method="PUT"
     >
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.catalog.attributes.edit.title')
             </p>
@@ -54,9 +54,9 @@
             id="v-edit-attributes-template"
         >
             <!-- body content -->
-            <div class="mt-3.5 flex gap-2.5">
+            <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <!-- Left sub Component -->
-                <div class="flex flex-1 flex-col gap-2 overflow-auto">
+                <div class="flex flex-1 flex-col gap-2 overflow-auto max-xl:flex-auto">
 
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
@@ -107,7 +107,7 @@
 
                     <!-- Options -->
                     <div
-                        class="p-4 bg-white dark:bg-gray-900 box-shadow rounded {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
+                        class="box-shadow rounded bg-white p-4 dark:bg-gray-900 {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
                         v-if="showSwatch"
                     >
                         <div class="mb-3 flex items-center justify-between">

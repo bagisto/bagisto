@@ -1,7 +1,7 @@
 <!-- Pannel Content -->
-<div class="mt-3.5 flex gap-2.5">
+<div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
     <!-- Left Component -->
-    <div class="flex flex-1 flex-col gap-2 overflow-auto">
+    <div class="flex flex-1 flex-col gap-2 overflow-auto max-xl:flex-auto">
         <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
             <div class="shimmer mb-4 h-4 w-16"></div>
 
