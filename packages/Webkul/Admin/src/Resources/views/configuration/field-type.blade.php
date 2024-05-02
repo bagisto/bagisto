@@ -16,12 +16,10 @@
         'isVisible' => true,
     ])->map(function ($value, $key) {
         if ($key == 'options') {
-            return collect(is_callable($value) ? $value() : $value)->map(function ($option) {
-                return [
-                    'title'   => trans($option['title']),
-                    'value'   => $option['value'],
-                ];
-            })->toArray();
+            return collect(is_callable($value) ? $value() : $value)->map(fn ($option) => [
+                'title' => trans($option['title']),
+                'value' => $option['value'],
+            ])->toArray();
         }
 
         return $value;
