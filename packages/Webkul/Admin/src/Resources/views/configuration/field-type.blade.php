@@ -21,7 +21,6 @@
                     return [
                         'title'   => trans($option['title']),
                         'value'   => $option['value'],
-                        'isVisible' => true,
                     ];
                 })->toArray();
             }
@@ -30,7 +29,6 @@
                 return [
                     'value'   => $option['value'],
                     'title'   => trans($option['title']),
-                    'isVisible' => true,
                 ];
             })->toArray();
         }
@@ -66,6 +64,11 @@
     src="{{ Storage::url(core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
     depend-name="{{ isset($field['depends']) ? $coreConfigRepository->getNameField($dependNameKey) : ''}}"
 >
+    <div class="mb-4">
+        <div class="shimmer mb-1.5 h-4 w-24"></div>
+
+        <div class="shimmer flex h-[42px] w-full rounded-md"></div>
+    </div>
 </v-configurable>
 
 @pushOnce('scripts')
