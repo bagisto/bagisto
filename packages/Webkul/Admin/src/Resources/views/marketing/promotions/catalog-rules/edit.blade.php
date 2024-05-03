@@ -854,7 +854,7 @@
 
                         if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
                             this.condition.value = this.condition.value
-                                ? Array.isArray(this.condition.value) ? this.condition.value : []
+                                ? (Array.isArray(this.condition.value) ? this.condition.value : [])
                                 : [];
                         }
 
