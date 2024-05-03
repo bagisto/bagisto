@@ -55,13 +55,14 @@
                                         'h-auto': isZooming
                                     }"
                                 >
+                                @{{ images }}
                                     <div
                                         v-for="(image, index) in images"
                                         class="h-full items-center justify-center"
                                         ref="slides"
                                     >
                                         <img
-                                            :src="image.original_image_url"
+                                            :src="image"
                                             class="max-h-full max-w-full transition-transform duration-300 ease-out"
                                             :class="{
                                                 'cursor-zoom-in': ! isZooming,
@@ -254,7 +255,7 @@
                 handleMouseWheel(event) {
                     const deltaY = event.clientY - this.startDragY;
 
-                    let newTranslateY = this.translateY - event.deltaY / Math.abs(event.deltaY) * 100; // Subtract instead of add
+                    let newTranslateY = this.translateY - event.deltaY / Math.abs(event.deltaY) * 100;
 
                     const maxTranslateY = Math.min(0, window.innerHeight - event.srcElement.height);
 

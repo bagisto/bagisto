@@ -304,14 +304,14 @@
                         @lang('shop::app.products.view.reviews.translate')
                     </template>
                 </button>
-
+                
                 <!-- Review Attachments -->
                 <div
                     class="mt-3 flex flex-wrap gap-2"
                     v-if="review.images.length"
                 >
-                    <template v-for="file in review.images">
-                        <a
+                    <template v-for="(file, index) in review.images">
+                        <div
                             :href="file.url"
                             class="flex h-12 w-12"
                             target="_blank"
@@ -322,9 +322,10 @@
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
-                            >
-                        </a>
-
+                                @click="$emitter.emit('v-show-review-images-zoomer', `file_${index}`)"
+                            >  
+                        </div>
+                        
                         <a
                             :href="file.url"
                             class="flex h-12 w-12"
@@ -341,6 +342,8 @@
                         </a>
                     </template>
                 </div>
+
+                <x-shop::modal.image-zoomer ::images="[...review.images].map((img) => img.url)"></x-shop::modal.image-zoomer>
             </div>
         </div>
     </script>

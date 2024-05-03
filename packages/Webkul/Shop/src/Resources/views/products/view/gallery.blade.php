@@ -113,7 +113,7 @@
             </div>
 
             <!-- Gallery Images Zoomer -->
-            <x-shop::products.gallery-zoomer ::images="media.images"></x-shop::products.gallery-zoomer>
+            <x-shop::modal.image-zoomer ::images="[...media.images].map((img) => img.original_image_url)"></x-shop::modal.image-zoomer>
         </div>
     </script>
 
