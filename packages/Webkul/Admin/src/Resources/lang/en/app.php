@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    => [
+            'create' => [
                 'email'           => 'Registered Email',
                 'email-not-exist' => 'Email Not Exists',
                 'page-title'      => 'Forget Password',
@@ -1287,7 +1287,7 @@ return [
             'update-success'       => 'category updated successfully.',
         ],
 
-        'families'   => [
+        'families' => [
             'index' => [
                 'add'   => 'Create Attribute Family',
                 'title' => 'Families',
@@ -1450,7 +1450,7 @@ return [
                 'title'                       => 'Customer View',
 
                 'address' => [
-                    'count'  => 'Addresses (:count)',
+                    'count' => 'Addresses (:count)',
 
                     'create' => [
                         'city'               => 'City',
@@ -1671,7 +1671,7 @@ return [
                     'update-success' => 'Review Update Successfully',
                 ],
 
-                'datagrid'   => [
+                'datagrid' => [
                     'approved'            => 'Approved',
                     'comment'             => 'Comment',
                     'customer-names'      => 'Name',
@@ -1764,7 +1764,7 @@ return [
                     ],
                 ],
 
-                'create'    => [
+                'create' => [
                     'active'          => 'Active',
                     'back-btn'        => 'Back',
                     'channel'         => 'Channel',
@@ -1786,7 +1786,7 @@ return [
                     'title'           => 'Create Campaign',
                 ],
 
-                'edit'    => [
+                'edit' => [
                     'active'          => 'Active',
                     'audience'        => 'Audience',
                     'back-btn'        => 'Back',
@@ -1828,7 +1828,7 @@ return [
                         'name'    => 'Name',
                     ],
 
-                    'create'   => [
+                    'create' => [
                         'date'           => 'Date',
                         'delete-warning' => 'Are you sure, you want to perform this action?',
                         'description'    => 'Description',
@@ -2429,7 +2429,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'Create Locale',
                 'locale'     => 'Locale',
@@ -2471,7 +2471,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => 'Create Currency',
                 'currency'   => 'Currency',
@@ -2517,9 +2517,9 @@ return [
             ],
         ],
 
-        'data-transfer'     => [
+        'data-transfer' => [
             'imports' => [
-                'create'            => [
+                'create' => [
                     'action'              => 'Action',
                     'allowed-errors'      => 'Allowed Errors',
                     'back-btn'            => 'Back',
@@ -2527,9 +2527,9 @@ return [
                     'delete'              => 'Delete',
                     'download-sample'     => 'Download Sample',
                     'field-separator'     => 'Field Separator',
-                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/app/import/product-images folder.',
-                    'file-info'           => 'Use relative path to /project-root/storage/app/import, e.g. product-images, import-images.',
                     'file'                => 'File',
+                    'file-info'           => 'Use relative path to /project-root/storage/app/import, e.g. product-images, import-images.',
+                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/app/import/product-images folder.',
                     'general'             => 'General',
                     'images-directory'    => 'Images Directory Path',
                     'process-in-queue'    => 'Process In Queue',
@@ -2543,7 +2543,7 @@ return [
                     'validation-strategy' => 'Validation Strategy',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'Action',
                     'allowed-errors'      => 'Allowed Errors',
                     'back-btn'            => 'Back',
@@ -2551,9 +2551,9 @@ return [
                     'delete'              => 'Delete',
                     'download-sample'     => 'Download Sample',
                     'field-separator'     => 'Field Separator',
-                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/app/import/product-images folder.',
-                    'file-info'           => 'Use relative path to /project-root/storage/app/import, e.g. product-images, import-images.',
                     'file'                => 'File',
+                    'file-info'           => 'Use relative path to /project-root/storage/app/import, e.g. product-images, import-images.',
+                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/app/import/product-images folder.',
                     'general'             => 'General',
                     'images-directory'    => 'Images Directory Path',
                     'process-in-queue'    => 'Process In Queue',
@@ -2567,7 +2567,7 @@ return [
                     'validation-strategy' => 'Validation Strategy',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'Create Import',
                     'title'        => 'Imports',
 
@@ -2588,7 +2588,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => 'Back',
                     'completed-batches'       => 'Total Batches Completed:',
                     'download-error-report'   => 'Download Full Report',
@@ -2606,8 +2606,8 @@ return [
                     'total-invalid-rows'      => 'Total Invalid Rows:',
                     'total-rows-processed'    => 'Total Rows Processed:',
                     'total-updated'           => 'Total Records Updated:',
-                    'validate-info'           => 'Click on Validate Data to check your import.',
                     'validate'                => 'Validate',
+                    'validate-info'           => 'Click on Validate Data to check your import.',
                     'validating-info'         => 'The data started reading and Validating',
                     'validation-failed-info'  => 'Your import is invalid. Please fix the following errors and try again.',
                     'validation-success-info' => 'Your import is valid. Click on Import to start the import process.',
@@ -2623,7 +2623,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'Create Exchange Rate',
                 'exchange-rate' => 'Exchange Rate',
@@ -2742,7 +2742,7 @@ return [
             'update-success'    => 'Inventory Sources Updated Successfully',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Are You sure you want to delete ?',
@@ -2782,7 +2782,7 @@ return [
                 ],
             ],
 
-            'rates'   => [
+            'rates' => [
                 'index' => [
                     'button-title' => 'Create Tax Rate',
                     'tax-rate'     => 'Tax Rate',
@@ -2967,8 +2967,8 @@ return [
                     'status'   => 'Status',
                 ],
 
-                'edit'  => [
-                    'title'  => 'Edit User',
+                'edit' => [
+                    'title' => 'Edit User',
                 ],
             ],
 
@@ -3050,7 +3050,7 @@ return [
                 'create-btn' => 'Create Theme',
                 'title'      => 'Themes',
 
-                'datagrid'   => [
+                'datagrid' => [
                     'active'       => 'Active',
                     'channel_name' => 'Channel Name',
                     'delete'       => 'Delete',
@@ -3070,7 +3070,7 @@ return [
                 'sort-order' => 'Sort Order',
                 'title'      => 'Create Theme',
 
-                'type'       => [
+                'type' => [
                     'category-carousel' => 'Category Carousel',
                     'footer-links'      => 'Footer Links',
                     'image-carousel'    => 'Image Carousel',
@@ -3135,7 +3135,7 @@ return [
                 'value'                         => 'Value: :value',
                 'value-input'                   => 'Value',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'            => 'Add Services',
                     'channels'           => 'Channels',
                     'delete'             => 'Delete',
@@ -3307,10 +3307,10 @@ return [
                     'title' => 'General',
 
                     'unit-options' => [
-                        'info'              => 'Set units options.',
-                        'title'             => 'Unit Options',
-                        'title-info'        => 'Size, color, material, customization, enhancing customer satisfaction and tailoring purchases.',
-                        'weight-unit'       => 'Weight Unit',
+                        'info'        => 'Set units options.',
+                        'title'       => 'Unit Options',
+                        'title-info'  => 'Size, color, material, customization, enhancing customer satisfaction and tailoring purchases.',
+                        'weight-unit' => 'Weight Unit',
                     ],
                 ],
 
@@ -3339,10 +3339,10 @@ return [
                     'title' => 'Design',
 
                     'admin-logo' => [
-                        'favicon'         => 'Favicon',
-                        'logo-image'      => 'Logo Image',
-                        'title'           => 'Admin Logo',
-                        'title-info'      => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
+                        'favicon'    => 'Favicon',
+                        'logo-image' => 'Logo Image',
+                        'title'      => 'Admin Logo',
+                        'title-info' => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
                     ],
                 ],
 
@@ -3351,12 +3351,12 @@ return [
                     'title' => 'Magic AI',
 
                     'settings' => [
-                        'api-key'           => 'API Key',
-                        'enabled'           => 'Enabled',
-                        'llm-api-domain'    => 'LLM API Domain',
-                        'organization'      => 'Organization',
-                        'title'             => 'General Settings',
-                        'title-info'        => 'Enhance your experience with the Magic AI feature by entering your exclusive API Key and indicating the pertinent Organization for effortless integration. Seize command over your OpenAI credentials and customize the settings according to your specific needs.',
+                        'api-key'        => 'API Key',
+                        'enabled'        => 'Enabled',
+                        'llm-api-domain' => 'LLM API Domain',
+                        'organization'   => 'Organization',
+                        'title'          => 'General Settings',
+                        'title-info'     => 'Enhance your experience with the Magic AI feature by entering your exclusive API Key and indicating the pertinent Organization for effortless integration. Seize command over your OpenAI credentials and customize the settings according to your specific needs.',
                     ],
 
                     'content-generation' => [
@@ -3425,9 +3425,9 @@ return [
                     'title' => 'Inventory',
 
                     'stock-options' => [
-                        'allow-back-orders'  => 'Allow Back orders',
-                        'title'              => 'Stock Options',
-                        'title-info'         => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
+                        'allow-back-orders' => 'Allow Back orders',
+                        'title'             => 'Stock Options',
+                        'title-info'        => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
                     ],
                 ],
 
