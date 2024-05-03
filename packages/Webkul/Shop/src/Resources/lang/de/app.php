@@ -163,6 +163,7 @@ return [
                     'cancel-confirm-msg' => 'Sind Sie sicher, dass Sie diese Bestellung stornieren möchten?',
                     'cancel-error'       => 'Ihre Bestellung kann nicht storniert werden.',
                     'cancel-success'     => 'Ihre Bestellung wurde storniert',
+                    'contact'            => 'Kontakt',
                     'page-title'         => 'Bestellung #:order_id',
                     'payment-method'     => 'Zahlungsmethode',
                     'reorder-btn-title'  => 'Neu anordnen',

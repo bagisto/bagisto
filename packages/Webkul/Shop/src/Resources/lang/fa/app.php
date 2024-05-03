@@ -163,6 +163,7 @@ return [
                     'cancel-confirm-msg' => 'آیا مطمئنید که می‌خواهید این سفارش را لغو کنید؟',
                     'cancel-error'       => 'سفارش شما قابل لغو نیست.',
                     'cancel-success'     => 'سفارش شما لغو شده است',
+                    'contact'            => 'تماس',
                     'page-title'         => 'سفارش #:order_id',
                     'payment-method'     => 'روش پرداخت',
                     'reorder-btn-title'  => 'مرتب سازی مجدد',

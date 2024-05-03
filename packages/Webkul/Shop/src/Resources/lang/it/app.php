@@ -163,6 +163,7 @@ return [
                     'cancel-confirm-msg' => 'Sei sicuro di voler cancellare questo ordine?',
                     'cancel-error'       => 'Il tuo ordine non può essere annullato.',
                     'cancel-success'     => 'Il tuo ordine è stato annullato',
+                    'contact'            => 'Contatto',
                     'page-title'         => 'Ordine #:order_id',
                     'payment-method'     => 'Metodo di Pagamento',
                     'reorder-btn-title'  => 'Riordinare',

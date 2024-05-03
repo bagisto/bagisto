@@ -163,6 +163,7 @@ return [
                     'cancel-confirm-msg' => 'Bu siparişi iptal etmek istediğinizden emin misiniz ?',
                     'cancel-error'       => 'Siparişiniz iptal edilemez.',
                     'cancel-success'     => 'Siparişiniz iptal edildi',
+                    'contact'            => 'İletişim',
                     'page-title'         => 'Sipariş #:order_id',
                     'payment-method'     => 'Ödeme Yöntemi',
                     'reorder-btn-title'  => 'Yeniden düzenle',

@@ -163,6 +163,7 @@ return [
                     'cancel-confirm-msg' => 'האם אתה בטוח שברצונך לבטל הזמנה זו?',
                     'cancel-error'       => 'לא ניתן לבטל הזמנה זו.',
                     'cancel-success'     => 'הזמנתך בוטלה בהצלחה',
+                    'contact'            => 'צור קשר',
                     'page-title'         => 'הזמנה #:order_id',
                     'payment-method'     => 'אמצעי תשלום',
                     'reorder-btn-title'  => 'להזמין מחדש',
