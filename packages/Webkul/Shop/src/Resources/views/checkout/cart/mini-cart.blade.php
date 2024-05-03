@@ -198,7 +198,7 @@
 
                 <!-- Empty Cart Section -->
                 <div
-                    class="pb-8"
+                    class="mt-[128px] pb-8 max-sm:mt-[150px]"
                     v-else
                 >
                     <div class="b-0 grid place-items-center gap-y-5">
