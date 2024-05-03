@@ -18,12 +18,12 @@
 
     @isset($header)
         <template v-slot:header="{ close }">
-            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-6 pb-5 max-sm:px-4']) }}>
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-6 pb-5 max-sm:gap-y-1.5 max-sm:border-b max-sm:border-[#E9E9E9] max-sm:p-4']) }}>
                 {{ $header }}
 
                 <div class="absolute top-5 ltr:right-5 rtl:left-5">
                     <span
-                        class="icon-cancel cursor-pointer text-3xl"
+                        class="icon-cancel cursor-pointer text-3xl max-sm:text-2xl"
                         @click="close"
                     >
                     </span>
@@ -42,7 +42,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div class="pb-8">
+            <div class="pb-8 max-sm:pb-2">
                 {{ $footer }}
             </div>
         </template>
