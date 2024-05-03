@@ -10,20 +10,16 @@ class VisitorServiceProvider extends BaseVisitorServiceProvider
 {
     /**
      * Perform post-registration booting of services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerMacroHelpers();
     }
 
     /**
      * Register any package services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         /**
          * Bind to service container.
