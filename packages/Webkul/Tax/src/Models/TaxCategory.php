@@ -15,18 +15,25 @@ class TaxCategory extends Model implements TaxCategoryContract
 
     /**
      * The attributes that are mass assignable.
-     *
-     * @var array
+     * 
+     * @var string
      */
     protected $table = 'tax_categories';
 
+    /**
+     * Fillable property for the model.
+     * 
+     * @var array
+     */
     protected $fillable = [
         'code',
         'name',
         'description',
     ];
 
-    //for joining the two way pivot table
+    /**
+     * For joining the two way pivot table.
+     */
     public function tax_rates(): BelongsToMany
     {
         return $this->belongsToMany(TaxRateProxy::modelClass(), 'tax_categories_tax_rates', 'tax_category_id')
