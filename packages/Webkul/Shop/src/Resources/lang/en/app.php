@@ -72,65 +72,99 @@ return [
         'account' => [
             'home' => 'Home',
 
-            'profile'   => [
-                'confirm-password'        => 'Confirm Password',
-                'current-password'        => 'Current Password',
-                'delete'                  => 'Delete',
-                'delete-failed'           => 'Error encountered while deleting customer.',
-                'delete-profile'          => 'Delete Profile',
-                'delete-success'          => 'Customer deleted successfully',
-                'dob'                     => 'Date of Birth',
-                'edit'                    => 'Edit',
-                'edit-profile'            => 'Edit Profile',
-                'edit-success'            => 'Profile Updated Successfully',
-                'email'                   => 'Email',
-                'enter-password'          => 'Enter Your password',
-                'female'                  => 'Female',
-                'first-name'              => 'First Name',
-                'gender'                  => 'Gender',
-                'last-name'               => 'Last Name',
-                'male'                    => 'Male',
-                'new-password'            => 'New Password',
-                'order-pending'           => 'Cannot delete customer account because some Order(s) are pending or processing state.',
-                'other'                   => 'Other',
-                'phone'                   => 'Phone',
-                'save'                    => 'Save',
-                'select-gender'           => 'Select Gender',
-                'subscribe-to-newsletter' => 'Subscribe to newsletter',
-                'title'                   => 'Profile',
-                'unmatch'                 => 'The old password does not match.',
-                'wrong-password'          => 'Wrong Password !',
+            'profile' => [
+                'index' => [
+                    'delete'         => 'Delete',
+                    'delete-failed'  => 'Error encountered while deleting customer.',
+                    'delete-profile' => 'Delete Profile',
+                    'delete-success' => 'Customer deleted successfully',
+                    'dob'            => 'Date of Birth',
+                    'edit'           => 'Edit',
+                    'edit-success'   => 'Profile Updated Successfully',
+                    'email'          => 'Email',
+                    'enter-password' => 'Enter Your password',
+                    'first-name'     => 'First Name',
+                    'gender'         => 'Gender',
+                    'last-name'      => 'Last Name',
+                    'order-pending'  => 'Cannot delete customer account because some Order(s) are pending or processing state.',
+                    'title'          => 'Profile',
+                    'unmatched'      => 'The old password does not match.',
+                    'wrong-password' => 'Wrong Password !',
+                ],
+
+                'edit' => [
+                    'confirm-password'        => 'Confirm Password',
+                    'current-password'        => 'Current Password',
+                    'dob'                     => 'Date of Birth',
+                    'edit'                    => 'Edit',
+                    'edit-profile'            => 'Edit Profile',
+                    'email'                   => 'Email',
+                    'female'                  => 'Female',
+                    'first-name'              => 'First Name',
+                    'gender'                  => 'Gender',
+                    'last-name'               => 'Last Name',
+                    'male'                    => 'Male',
+                    'new-password'            => 'New Password',
+                    'other'                   => 'Other',
+                    'phone'                   => 'Phone',
+                    'save'                    => 'Save',
+                    'subscribe-to-newsletter' => 'Subscribe to newsletter',
+                ],
             ],
 
             'addresses' => [
-                'add-address'      => 'Add Address',
-                'address-1'        => 'Address 1',
-                'address-2'        => 'Address 2',
-                'city'             => 'City',
-                'company-name'     => 'Company Name',
-                'country'          => 'Country',
-                'create-success'   => 'Address have been successfully added.',
-                'default-address'  => 'Default Address',
-                'default-delete'   => 'Default address cannot be changed.',
-                'delete'           => 'Delete',
-                'delete-success'   => 'Address successfully deleted',
-                'edit'             => 'Edit',
-                'edit-address'     => 'Edit Address',
-                'edit-success'     => 'Address updated successfully.',
-                'email'            => 'Email',
-                'empty-address'    => 'You have not added an address to your account yet.',
-                'first-name'       => 'First Name',
-                'last-name'        => 'Last Name',
-                'phone'            => 'Phone',
-                'post-code'        => 'Post Code',
-                'save'             => 'Save',
-                'security-warning' => 'Suspicious activity found!!!',
-                'select-country'   => 'Select Country',
-                'set-as-default'   => 'Set as Default',
-                'state'            => 'State',
-                'street-address'   => 'Street Address',
-                'title'            => 'Address',
-                'vat-id'           => 'Vat ID',
+                'index' => [
+                    'add-address'      => 'Add Address',
+                    'create-success'   => 'Address have been successfully added.',
+                    'default-address'  => 'Default Address',
+                    'default-delete'   => 'Default address cannot be changed.',
+                    'delete'           => 'Delete',
+                    'delete-success'   => 'Address successfully deleted',
+                    'edit'             => 'Edit',
+                    'edit-success'     => 'Address updated successfully.',
+                    'empty-address'    => 'You have not added an address to your account yet.',
+                    'security-warning' => 'Suspicious activity found!!!',
+                    'set-as-default'   => 'Set as Default',
+                    'title'            => 'Address',
+                    'update-success'   => 'Address have been updated successfully.',
+                ],
+
+                'create' => [
+                    'add-address'    => 'Add Address',
+                    'city'           => 'City',
+                    'company-name'   => 'Company Name',
+                    'country'        => 'Country',
+                    'email'          => 'Email',
+                    'first-name'     => 'First Name',
+                    'last-name'      => 'Last Name',
+                    'phone'          => 'Phone',
+                    'post-code'      => 'Post Code',
+                    'save'           => 'Save',
+                    'select-country' => 'Select Country',
+                    'set-as-default' => 'Set as Default',
+                    'state'          => 'State',
+                    'street-address' => 'Street Address',
+                    'title'          => 'Address',
+                    'vat-id'         => 'Vat ID',
+                ],
+
+                'edit' => [
+                    'city'           => 'City',
+                    'company-name'   => 'Company Name',
+                    'country'        => 'Country',
+                    'edit'           => 'Edit',
+                    'email'          => 'Email',
+                    'first-name'     => 'First Name',
+                    'last-name'      => 'Last Name',
+                    'phone'          => 'Phone',
+                    'post-code'      => 'Post Code',
+                    'save'           => 'Save',
+                    'select-country' => 'Select Country',
+                    'state'          => 'State',
+                    'street-address' => 'Street Address',
+                    'title'          => 'Address',
+                    'vat-id'         => 'Vat ID',
+                ],
             ],
 
             'orders' => [
@@ -270,7 +304,7 @@ return [
                 ],
             ],
 
-            'reviews'    => [
+            'reviews' => [
                 'empty-review' => 'You have not reviewed any product yet',
                 'title'        => 'Reviews',
             ],
@@ -348,9 +382,11 @@ return [
                 'welcome-guest'     => 'Welcome Guest',
                 'wishlist'          => 'Wishlist',
 
-                'desktop'           => [
+                'desktop' => [
                     'top' => [
                         'default-locale' => 'Default locale',
+                        'offer'          => 'Get UPTO 40% OFF on your 1st order',
+                        'shop-now'       => 'SHOP NOW',
                     ],
                 ],
             ],
@@ -438,14 +474,14 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-cart'                 => 'Add To Cart',
-                'add-to-compare'              => 'Add To Compare',
-                'add-to-compare-success'      => 'Item added successfully to compare list.',
-                'add-to-wishlist'             => 'Add To Wishlist',
-                'already-in-compare'          => 'Item is already added to compare list.',
-                'new'                         => 'New',
-                'review-description'          => 'Be the first to review this product',
-                'sale'                        => 'Sale',
+                'add-to-cart'            => 'Add To Cart',
+                'add-to-compare'         => 'Add To Compare',
+                'add-to-compare-success' => 'Item added successfully to compare list.',
+                'add-to-wishlist'        => 'Add To Wishlist',
+                'already-in-compare'     => 'Item is already added to compare list.',
+                'new'                    => 'New',
+                'review-description'     => 'Be the first to review this product',
+                'sale'                   => 'Sale',
             ],
 
             'carousel' => [
@@ -485,7 +521,7 @@ return [
         ],
 
         'sort-by' => [
-            'title'   => 'Sort By',
+            'title' => 'Sort By',
         ],
 
         'view' => [
@@ -588,7 +624,7 @@ return [
             ],
 
             'results' => [
-                'analysed-keywords' => 'Analysed Keywords:',
+                'analyzed-keywords' => 'Analyzed Keywords:',
             ],
         ],
     ],
@@ -797,7 +833,7 @@ return [
     ],
 
     'errors' => [
-        'go-to-home'   => 'Go To Home',
+        'go-to-home' => 'Go To Home',
 
         '404' => [
             'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',

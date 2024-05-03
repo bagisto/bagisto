@@ -17,7 +17,7 @@
                         <!-- Product Image -->
                         <div class="shimmer h-[65px] w-[65px] rounded"></div>
 
-                        <!-- Product Detailes -->
+                        <!-- Product Details -->
                         <div class="flex w-[251px] flex-col gap-1.5">
                             <!-- Product Name -->
                             <div class="shimmer h-[17px] w-full"></div>
