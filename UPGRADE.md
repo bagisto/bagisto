@@ -17,15 +17,13 @@
 
 <div class="content-list" markdown="1">
 
+- [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
+- [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
 - [Shop Event parameter updated](#event-parameter-updated)
-- [Admin Customized Datagrid Header Parameters Updated](#admin-customized-datagrid-header-parameter-updated)
-- [Admin Customized Datagrid Body Parameters updated](#admin-customized-datagrid-body-parameter-updated)
-- [Shop Customized Datagrid Header Parameters Updated](#shop-customized-datagrid-header-parameter-updated)
-- [Shop Customized Datagrid Body Parameters Updated](#shop-customized-datagrid-body-parameter-updated)
 
 </div>
 
@@ -75,12 +73,12 @@ There is no dependency needed to be updated at for this upgrade.
 <a name="admin"></a>
 ### Admin
 
-<a name="admin-customized-datagrid-header-parameter-updated"></a>
-####  Admin Customized Datagrid Header Parameters Updated
+<a name="admin-customized-datagrid-parameters-updated"></a>
+####  Admin Customized Datagrid Parameters Updated
 
 **Impact Probability: Medium**
 
-1. Previously, the data grid header was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+1. Previously, the data grid `header` was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
 
 ```diff
 - <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
@@ -98,12 +96,7 @@ There is no dependency needed to be updated at for this upgrade.
 + </template>
 ```
 
-<a name="admin-customized-datagrid-body-parameter-updated"></a>
-####  Admin Customized Datagrid Body Parameters Updated
-
-**Impact Probability: Medium**
-
-1. Previously, the data grid body was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+2. Previously, the data grid `body` was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
 
 ```diff
 - <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
@@ -117,7 +110,7 @@ There is no dependency needed to be updated at for this upgrade.
 +    sort,
 +    performAction
 + }">
-+    <!-- Updated header customization code -->
++    <!-- Updated body customization code -->
 + </template>
 ```
 
@@ -388,12 +381,12 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 <a name="shop"></a>
 ### Shop
 
-<a name="shop-customized-datagrid-header-parameter-updated"></a>
-####  Shop Customized Datagrid Header Parameters Updated
+<a name="shop-customized-datagrid-parameters-updated"></a>
+####  Shop Customized Datagrid Parameters Updated
 
 **Impact Probability: Medium**
 
-1. Previously, the data grid header was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+1. Previously, the data grid `header` was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
 
 ```diff
 - <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
@@ -411,12 +404,7 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + </template>
 ```
 
-<a name="shop-customized-datagrid-body-parameter-updated"></a>
-#### Shop Customized Datagrid Body Parameters Updated
-
-**Impact Probability: Medium**
-
-1. Previously, the data grid body was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+2. Previously, the data grid `body` was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
 
 ```diff
 - <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
@@ -430,7 +418,7 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 +    sort,
 +    performAction
 + }">
-+    <!-- Updated header customization code -->
++    <!-- Updated body customization code -->
 + </template>
 ```
 
