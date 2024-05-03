@@ -151,7 +151,7 @@
                                                     }
                                                 });
                                             } catch (error) {
-                                                this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.something-went-wrong')'});
+                                                self.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.something-went-wrong')'});
                                             }
 
                                             localStorage.searchedImageUrl = self.uploadedImageUrl;

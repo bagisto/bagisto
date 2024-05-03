@@ -92,6 +92,7 @@
                             @lang('admin::app.catalog.categories.create.parent-category')
                         </label>
 
+                        <!-- Parent category info -->
                         <p class="mb-2 block text-xs text-gray-500">
                             @lang('admin::app.catalog.categories.create.category-details')
                         </p>
@@ -105,7 +106,7 @@
                                 value-field="id"
                                 :items="json_encode($categories)"
                                 :fallback-locale="config('app.fallback_locale')"
-                                on-click='true'
+                                on-click="true"
                             />
                         </div>
                     </div>
