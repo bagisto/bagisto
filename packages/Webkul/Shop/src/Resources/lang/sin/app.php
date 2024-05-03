@@ -197,6 +197,7 @@ return [
                     'cancel-confirm-msg' => 'ඔබට මෙය අවලංගු කිරීමට අවශ්‍යද?',
                     'cancel-error'       => 'ඔබගේ ඇණවුම අවලංගු කළ නොහැක.',
                     'cancel-success'     => 'ඔබගේ ඇණවුම අවලංගු කර ඇත',
+                    'contact'            => 'සබඳතාව',
                     'page-title'         => 'ඇණවුම #:order_id',
                     'payment-method'     => 'ගෙවීමේ ක්‍රමය',
                     'reorder-btn-title'  => 'නැවත තේරීම',

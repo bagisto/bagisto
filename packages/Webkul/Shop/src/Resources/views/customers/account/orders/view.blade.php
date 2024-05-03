@@ -914,7 +914,7 @@
 
                     <div class="grid gap-2.5">
                         <p class="text-sm">
-                            @include ('admin::sales.address', ['address' => $order->billing_address])
+                            @include ('shop::customers.account.orders.view.address', ['address' => $order->billing_address])
                         </p>
 
                         {!! view_render_event('bagisto.shop.customers.account.orders.view.billing_address.after', ['order' => $order]) !!}
@@ -931,7 +931,7 @@
 
                     <div class="grid gap-2.5">
                         <p class="text-sm">
-                            @include ('admin::sales.address', ['address' => $order->shipping_address])
+                            @include ('shop::customers.account.orders.view.address', ['address' => $order->shipping_address])
 
                             {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address.after', ['order' => $order]) !!}
                         </p>

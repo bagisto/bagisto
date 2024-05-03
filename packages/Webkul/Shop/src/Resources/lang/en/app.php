@@ -197,6 +197,7 @@ return [
                     'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
                     'cancel-error'       => 'Your order can not be canceled.',
                     'cancel-success'     => 'Your order has been canceled',
+                    'contact'            => 'Contact',
                     'page-title'         => 'Order #:order_id',
                     'payment-method'     => 'Payment Method',
                     'reorder-btn-title'  => 'Reorder',

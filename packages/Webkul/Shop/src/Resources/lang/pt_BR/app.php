@@ -197,6 +197,7 @@ return [
                     'cancel-confirm-msg' => 'Tem certeza de que deseja cancelar este pedido?',
                     'cancel-error'       => 'Seu pedido não pode ser cancelado.',
                     'cancel-success'     => 'Seu pedido foi cancelado',
+                    'contact'            => 'Contato',
                     'page-title'         => 'Pedido #:order_id',
                     'payment-method'     => 'Método de Pagamento',
                     'reorder-btn-title'  => 'Reorganizar',

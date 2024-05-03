@@ -197,6 +197,7 @@ return [
                     'cancel-confirm-msg' => 'Czy na pewno chcesz anulować to zamówienie?',
                     'cancel-error'       => 'Nie można anulować twojego zamówienia.',
                     'cancel-success'     => 'Twoje zamówienie zostało anulowane',
+                    'contact'            => 'Kontakt',
                     'page-title'         => 'Zamówienie #:order_id',
                     'payment-method'     => 'Metoda płatności',
                     'reorder-btn-title'  => 'Przeorganizuj',

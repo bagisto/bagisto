@@ -197,6 +197,7 @@ return [
                     'cancel-confirm-msg' => '您确定要取消此订单吗？',
                     'cancel-error'       => '无法取消您的订单',
                     'cancel-success'     => '您的订单已取消',
+                    'contact'            => '联系方式',
                     'page-title'         => '订单 #:order_id',
                     'payment-method'     => '付款方式',
                     'reorder-btn-title'  => '重新排序',

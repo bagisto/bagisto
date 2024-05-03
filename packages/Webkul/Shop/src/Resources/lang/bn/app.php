@@ -197,6 +197,7 @@ return [
                     'cancel-confirm-msg' => 'আপনি কি নিশ্চিত যে আপনি এই অর্ডারটি বাতিল করতে চান?',
                     'cancel-error'       => 'আপনার অর্ডার বাতিল করা সম্ভব হয়নি',
                     'cancel-success'     => 'আপনার অর্ডার বাতিল হয়েছে',
+                    'contact'            => 'যোগাযোগ',
                     'page-title'         => 'অর্ডার #:order_id',
                     'payment-method'     => 'পেমেন্ট মেথড',
                     'reorder-btn-title'  => 'পুনরায় বাছাই করুন',

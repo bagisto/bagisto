@@ -197,6 +197,7 @@ return [
                     'cancel-confirm-msg' => 'Weet u zeker dat u deze bestelling wilt annuleren?',
                     'cancel-error'       => 'Uw bestelling kan niet worden geannuleerd.',
                     'cancel-success'     => 'Uw bestelling is geannuleerd',
+                    'contact'            => 'Contactpersoon',
                     'page-title'         => 'Bestelling #:order_id',
                     'payment-method'     => 'Betalingsmethode',
                     'reorder-btn-title'  => 'Herordenen',

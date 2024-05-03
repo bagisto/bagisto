@@ -197,6 +197,7 @@ return [
                     'cancel-confirm-msg' => 'هل أنت متأكد أنك تريد إلغاء هذا الطلب؟',
                     'cancel-error'       => 'لا يمكن إلغاء طلبك.',
                     'cancel-success'     => 'تم إلغاء طلبك بنجاح',
+                    'contact'            => 'اتصل بنا',
                     'page-title'         => 'الطلب #:order_id',
                     'payment-method'     => 'طريقة الدفع',
                     'reorder-btn-title'  => 'إعادة ترتيب',
