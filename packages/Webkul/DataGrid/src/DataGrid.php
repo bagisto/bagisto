@@ -4,6 +4,7 @@ namespace Webkul\DataGrid;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Webkul\Admin\Exports\DataGridExport;
@@ -135,6 +136,11 @@ abstract class DataGrid
      */
     public function addColumn(array $column): void
     {
+        $this->dispatchEvent('add_column.before', [
+            'datagrid' => $this,
+            'column'   => $column,
+        ]);
+
         $this->columns[] = new Column(
             index: $column['index'],
             label: $column['label'],
@@ -145,6 +151,11 @@ abstract class DataGrid
             sortable: $column['sortable'],
             closure: $column['closure'] ?? null,
         );
+
+        $this->dispatchEvent('add_column.after', [
+            'datagrid' => $this,
+            'column'   => $this->columns[count($this->columns) - 1],
+        ]);
     }
 
     /**
@@ -152,6 +163,11 @@ abstract class DataGrid
      */
     public function addAction(array $action): void
     {
+        $this->dispatchEvent('add_action.before', [
+            'datagrid' => $this,
+            'action'   => $action,
+        ]);
+
         $this->actions[] = new Action(
             index: $action['index'] ?? '',
             icon: $action['icon'] ?? '',
@@ -159,6 +175,11 @@ abstract class DataGrid
             method: $action['method'],
             url: $action['url'],
         );
+
+        $this->dispatchEvent('add_action.after', [
+            'datagrid' => $this,
+            'action'   => $this->actions[count($this->actions) - 1],
+        ]);
     }
 
     /**
@@ -166,6 +187,11 @@ abstract class DataGrid
      */
     public function addMassAction(array $massAction): void
     {
+        $this->dispatchEvent('add_mass_action.before', [
+            'datagrid'    => $this,
+            'mass_action' => $massAction,
+        ]);
+
         $this->massActions[] = new MassAction(
             icon: $massAction['icon'] ?? '',
             title: $massAction['title'],
@@ -173,20 +199,11 @@ abstract class DataGrid
             url: $massAction['url'],
             options: $massAction['options'] ?? [],
         );
-    }
 
-    /**
-     * Map your filter.
-     */
-    public function addFilter(string $datagridColumn, mixed $queryColumn): void
-    {
-        foreach ($this->columns as $column) {
-            if ($column->index === $datagridColumn) {
-                $column->setDatabaseColumnName($queryColumn);
-
-                break;
-            }
-        }
+        $this->dispatchEvent('add_mass_action.after', [
+            'datagrid'    => $this,
+            'mass_action' => $this->massActions[count($this->massActions) - 1],
+        ]);
     }
 
     /**
@@ -196,7 +213,51 @@ abstract class DataGrid
      */
     public function setQueryBuilder($queryBuilder = null): void
     {
+        $this->dispatchEvent('set_query_builder.before', [
+            'datagrid' => $this,
+            'builder'  => $queryBuilder,
+        ]);
+
         $this->queryBuilder = $queryBuilder ?: $this->prepareQueryBuilder();
+
+        $this->dispatchEvent('set_query_builder.after', [
+            'datagrid' => $this,
+            'builder'  => $this->queryBuilder,
+        ]);
+    }
+
+    /**
+     * Get query builder.
+     */
+    public function getQueryBuilder(): mixed
+    {
+        return $this->queryBuilder;
+    }
+
+    /**
+     * Map your filter.
+     */
+    public function addFilter(string $datagridColumn, mixed $queryColumn): void
+    {
+        $this->dispatchEvent('add_filter.before', [
+            'datagrid'        => $this,
+            'datagrid_column' => $datagridColumn,
+            'query_column'    => $queryColumn,
+        ]);
+
+        foreach ($this->columns as $column) {
+            if ($column->index === $datagridColumn) {
+                $column->setDatabaseColumnName($queryColumn);
+
+                break;
+            }
+        }
+
+        $this->dispatchEvent('add_filter.after', [
+            'datagrid'        => $this,
+            'datagrid_column' => $datagridColumn,
+            'query_column'    => $queryColumn,
+        ]);
     }
 
     /**
@@ -321,10 +382,38 @@ abstract class DataGrid
     }
 
     /**
+     * Process paginated request.
+     */
+    public function processPaginatedRequest(array $requestedParams): void
+    {
+        $this->dispatchEvent('process_request.paginated.before', $this);
+
+        $this->paginator = $this->processRequestedPagination($requestedParams['pagination'] ?? []);
+
+        $this->dispatchEvent('process_request.paginated.after', $this);
+    }
+
+    /**
+     * Process export request.
+     */
+    public function processExportRequest(array $requestedParams): void
+    {
+        $this->dispatchEvent('process_request.export.before', $this);
+
+        $this->exportable = true;
+
+        $this->setExportFile($this->queryBuilder->get(), $requestedParams['format']);
+
+        $this->dispatchEvent('process_request.export.after', $this);
+    }
+
+    /**
      * Process request.
      */
     public function processRequest(): void
     {
+        $this->dispatchEvent('process_request.before', $this);
+
         /**
          * Store all request parameters in this variable; avoid using direct request helpers afterward.
          */
@@ -338,15 +427,11 @@ abstract class DataGrid
          * The `export` parameter is validated as a boolean in the `validatedRequest`. An `empty` function will not work,
          * as it will always be treated as true because of "0" and "1".
          */
-        if (isset($requestedParams['export']) && (bool) $requestedParams['export']) {
-            $this->exportable = true;
+        isset($requestedParams['export']) && (bool) $requestedParams['export']
+            ? $this->processExportRequest($requestedParams)
+            : $this->processPaginatedRequest($requestedParams);
 
-            $this->setExportFile($this->queryBuilder->get(), $requestedParams['format']);
-
-            return;
-        }
-
-        $this->paginator = $this->processRequestedPagination($requestedParams['pagination'] ?? []);
+        $this->dispatchEvent('process_request.after', $this);
     }
 
     /**
@@ -358,7 +443,11 @@ abstract class DataGrid
      */
     public function setExportFile($records, $format = 'csv')
     {
+        $this->dispatchEvent('set_export_file.before', $this);
+
         $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36).'.'.$format);
+
+        $this->dispatchEvent('set_export_file.after', $this);
     }
 
     /**
@@ -369,6 +458,31 @@ abstract class DataGrid
     public function downloadExportFile()
     {
         return $this->exportFile;
+    }
+
+    /**
+     * Prepare all the setup for datagrid.
+     */
+    public function sanitizeRow($row): \stdClass
+    {
+        /**
+         * Convert stdClass to array.
+         */
+        $tempRow = json_decode(json_encode($row), true);
+
+        foreach ($tempRow as $column => $value) {
+            if (! is_string($tempRow[$column])) {
+                continue;
+            }
+
+            if (is_array($value)) {
+                return $this->sanitizeRow($tempRow[$column]);
+            } else {
+                $row->{$column} = strip_tags($value);
+            }
+        }
+
+        return $row;
     }
 
     /**
@@ -433,44 +547,43 @@ abstract class DataGrid
     }
 
     /**
-     * Prepare all the setup for datagrid.
+     * Dispatch event.
      */
-    public function prepare(): void
+    public function dispatchEvent(string $eventName, mixed $payload): void
     {
-        $this->prepareColumns();
+        $reflection = new \ReflectionClass($this);
 
-        $this->prepareActions();
+        $datagridName = Str::snake($reflection->getShortName());
 
-        $this->prepareMassActions();
-
-        $this->setQueryBuilder();
-
-        $this->processRequest();
+        Event::dispatch("datagrids.{$datagridName}.{$eventName}", $payload);
     }
 
     /**
      * Prepare all the setup for datagrid.
      */
-    public function sanitizeRow($row): \stdClass
+    public function prepare(): void
     {
-        /**
-         * Convert stdClass to array.
-         */
-        $tempRow = json_decode(json_encode($row), true);
+        $this->dispatchEvent('prepare.before', $this);
 
-        foreach ($tempRow as $column => $value) {
-            if (! is_string($tempRow[$column])) {
-                continue;
-            }
+        $this->prepareColumns();
 
-            if (is_array($value)) {
-                return $this->sanitizeRow($tempRow[$column]);
-            } else {
-                $row->{$column} = strip_tags($value);
-            }
-        }
+        $this->dispatchEvent('prepare_columns.after', $this);
 
-        return $row;
+        $this->prepareActions();
+
+        $this->dispatchEvent('prepare_actions.after', $this);
+
+        $this->prepareMassActions();
+
+        $this->dispatchEvent('prepare_mass_actions.after', $this);
+
+        $this->setQueryBuilder();
+
+        $this->dispatchEvent('prepare_query_builder.after', $this);
+
+        $this->processRequest();
+
+        $this->dispatchEvent('prepare.after', $this);
     }
 
     /**
