@@ -15,7 +15,7 @@
         type="text/x-template"
         id="v-payment-methods-template"
     >
-        <div class="mb-7">
+        <div class="mb-7 max-sm:last:!mb-0">
             <template v-if="! methods">
                 <!-- Payment Method shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.payment-method />
@@ -27,7 +27,7 @@
                 <!-- Accordion Blade Component -->
                 <x-shop::accordion class="!border-b-0">
                     <!-- Accordion Blade Component Header -->
-                    <x-slot:header class="!p-0">
+                    <x-slot:header class="!p-0 max-sm:!py-4">
                         <div class="flex items-center justify-between">
                             <h2 class="text-2xl font-medium max-sm:text-xl">
                                 @lang('shop::app.checkout.onepage.payment.payment-method')
@@ -36,8 +36,8 @@
                     </x-slot>
     
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="mt-8 !p-0">
-                        <div class="flex flex-wrap gap-7">
+                    <x-slot:content class="mt-8 !p-0 max-sm:mt-0">
+                        <div class="flex flex-wrap gap-7 max-sm:gap-2.5">
                             <div 
                                 class="relative cursor-pointer max-sm:max-w-full max-sm:flex-auto"
                                 v-for="(payment, index) in methods"
@@ -61,7 +61,7 @@
 
                                 <label 
                                     :for="payment.method" 
-                                    class="block w-[190px] cursor-pointer rounded-xl border border-[#E9E9E9] p-5 max-sm:w-full"
+                                    class="block w-[190px] cursor-pointer rounded-xl border border-[#E9E9E9] p-5 max-sm:flex max-sm:w-full max-sm:gap-2.5"
                                 >
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.before') !!}
 
@@ -76,21 +76,24 @@
 
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.after') !!}
 
-                                    {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.before') !!}
+                                    <div>
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.before') !!}
 
-                                    <p class="mt-1.5 text-sm font-semibold">
-                                        @{{ payment.method_title }}
-                                    </p>
-                                    
-                                    {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.after') !!}
+                                        <p class="mt-1.5 text-sm font-semibold max-sm:mt-0">
+                                            @{{ payment.method_title }}
+                                        </p>
+                                        
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.after') !!}
 
-                                    {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.before') !!}
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.before') !!}
 
-                                    <p class="mt-2.5 text-xs font-medium">
-                                        @{{ payment.description }}
-                                    </p> 
+                                        <p class="mt-2.5 text-xs font-medium">
+                                            @{{ payment.description }}
+                                        </p> 
 
-                                    {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.after') !!}
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.after') !!}
+ 
+                                    </div>
                                 </label>
 
                                 {!! view_render_event('bagisto.shop.checkout.payment-method.after') !!}

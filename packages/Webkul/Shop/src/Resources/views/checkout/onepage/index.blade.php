@@ -72,6 +72,11 @@
 
             <template v-else>
                 <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
+                    <!-- Included Checkout Summary Blade File For Mobile view -->
+                    <div class="hidden max-sm:block">
+                        @include('shop::checkout.onepage.summary')
+                    </div>
+
                     <div
                         class="overflow-y-auto"
                         id="steps-container"
@@ -92,9 +97,11 @@
                         </template>
                     </div>
 
-                    <!-- Included Checkout Summary Blade File -->
-                    <div class="sticky top-8 h-max w-[442px] max-w-full max-lg:w-auto max-lg:max-w-[442px] ltr:pl-8 max-lg:ltr:pl-0 rtl:pr-8 max-lg:rtl:pr-0">
-                        @include('shop::checkout.onepage.summary')
+                    <!-- Included Checkout Summary Blade File For Desktop view -->
+                    <div class="sticky top-8 block h-max w-[442px] max-w-full max-lg:w-auto max-lg:max-w-[442px] ltr:pl-8 max-lg:ltr:pl-0 rtl:pr-8 max-lg:rtl:pr-0">
+                        <div class="block max-sm:hidden">
+                            @include('shop::checkout.onepage.summary')
+                        </div>
 
                         <div
                             class="flex justify-end"
@@ -111,7 +118,7 @@
                             <template v-else>
                                 <x-shop::button
                                     type="button"
-                                    class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-sm:mb-10 max-sm:px-6 max-sm:text-sm"
+                                    class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-sm:mb-4 max-sm:w-full max-sm:max-w-full"
                                     :title="trans('shop::app.checkout.onepage.summary.place-order')"
                                     ::disabled="isPlacingOrder"
                                     ::loading="isPlacingOrder"

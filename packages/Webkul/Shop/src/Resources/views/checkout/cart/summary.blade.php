@@ -1,8 +1,8 @@
-<div class="w-[418px] max-w-full">
+<div class="w-[418px] max-w-full max-sm:w-full">
     {!! view_render_event('bagisto.shop.checkout.cart.summary.title.before') !!}
 
     <p
-        class="text-2xl font-medium"
+        class="text-2xl font-medium max-sm:text-xl"
         role="heading"
     >
         @lang('shop::app.checkout.cart.summary.cart-summary')
@@ -11,7 +11,7 @@
     {!! view_render_event('bagisto.shop.checkout.cart.summary.title.after') !!}
 
     <!-- Cart Totals -->
-    <div class="mt-6 grid gap-4">
+    <div class="mt-6 grid gap-4 max-sm:gap-2.5">
         <!-- Estimate Tax and Shipping -->
         <template v-if="cart.have_stockable_items">
 
@@ -209,11 +209,11 @@
         {!! view_render_event('bagisto.shop.checkout.cart.summary.grand_total.before') !!}
 
         <div class="flex justify-between text-right">
-            <p class="text-lg font-semibold">
+            <p class="text-lg font-semibold max-sm:text-base">
                 @lang('shop::app.checkout.cart.summary.grand-total')
             </p>
 
-            <p class="text-lg font-semibold">
+            <p class="text-lg font-semibold max-sm:text-base">
                 @{{ cart.formatted_grand_total }}
             </p>
         </div>
@@ -224,7 +224,7 @@
 
         <a
             href="{{ route('shop.checkout.onepage.index') }}"
-            class="primary-button mt-4 place-self-end rounded-2xl px-11 py-3"
+            class="primary-button mt-4 place-self-end rounded-2xl px-11 py-3 max-sm:my-4 max-sm:w-full max-sm:max-w-full max-sm:py-3.5 max-sm:text-sm"
         >
             @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>

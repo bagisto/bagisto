@@ -1,18 +1,18 @@
 <!-- Header -->
-<h1 class="text-2xl font-medium max-sm:text-xl">
+<h1 class="text-2xl font-medium max-sm:py-3.5 max-sm:text-xl">
     @lang('shop::app.checkout.onepage.summary.cart-summary')
 </h1>
 
 <!-- Cart Items -->
-<div class="mt-10 grid border-b border-[#E9E9E9] max-sm:mt-5">
+<div class="mt-10 grid border-b border-[#E9E9E9] max-sm:mt-0">
     <div
-        class="flex gap-x-4 pb-5"
+        class="flex gap-x-4 pb-5 max-sm:gap-x-3 max-sm:pb-4"
         v-for="item in cart.items"
     >
         {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_image.before') !!}
 
         <img
-            class="h-[90px] max-h-[90px] w-[90px] max-w-[90px] rounded-md"
+            class="h-[90px] max-h-[90px] w-[90px] max-w-[90px] rounded-md max-sm:h-[80px] max-sm:max-h-[80px] max-sm:max-w-[80px]"
             :src="item.base_image.small_image_url"
             :alt="item.name"
             width="110"
@@ -44,7 +44,7 @@
 </div>
 
 <!-- Cart Totals -->
-<div class="mb-8 mt-6 grid gap-4">
+<div class="mb-8 mt-6 grid gap-4 max-sm:mb-0">
     <!-- Sub Total -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.sub_total.before') !!}
 

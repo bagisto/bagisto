@@ -35,8 +35,8 @@
                     </x-slot>
 
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="mt-8 !p-0">
-                        <div class="flex flex-wrap gap-8">
+                    <x-slot:content class="mt-8 !p-0 max-sm:mt-0">
+                        <div class="flex flex-wrap gap-8 max-sm:gap-2.5">
                             <template v-for="method in methods">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
 
@@ -60,18 +60,20 @@
                                     </label>
 
                                     <label 
-                                        class="block cursor-pointer rounded-xl border border-[#E9E9E9] p-5"
+                                        class="block cursor-pointer rounded-xl border border-[#E9E9E9] p-5 max-sm:flex max-sm:gap-4 max-sm:px-4 max-sm:py-2.5"
                                         :for="rate.method"
                                     >
                                         <span class="icon-flate-rate text-6xl text-navyBlue"></span>
 
-                                        <p class="mt-1.5 text-2xl font-semibold max-sm:text-xl">
-                                            @{{ rate.base_formatted_price }}
-                                        </p>
-                                        
-                                        <p class="mt-2.5 text-xs font-medium">
-                                            <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
-                                        </p>
+                                        <div>
+                                            <p class="mt-1.5 text-2xl font-semibold max-sm:text-xl">
+                                                @{{ rate.base_formatted_price }}
+                                            </p>
+                                            
+                                            <p class="mt-2.5 text-xs font-medium">
+                                                <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
+                                            </p>
+                                        </div>
                                     </label>
                                 </div>
 
