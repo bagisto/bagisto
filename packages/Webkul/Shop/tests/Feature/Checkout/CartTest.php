@@ -5,7 +5,6 @@ use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
-use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Tax\Models\TaxCategory;
 use Webkul\Tax\Models\TaxMap;
@@ -2311,7 +2310,7 @@ it('should check including tax rate when add a product to the cart based on ship
         'code'  => 'sales.taxes.calculation.product_prices',
         'value' => 'including_tax',
     ])->create([
-        'code' => 'sales.taxes.calculation.shipping_prices',
+        'code'  => 'sales.taxes.calculation.shipping_prices',
         'value' => 'including_tax',
     ]);
 
@@ -2601,7 +2600,7 @@ it('should check excluding tax rate when add a product to the cart based on ship
         'code'  => 'sales.taxes.calculation.product_prices',
         'value' => 'excluding_tax',
     ])->create([
-        'code' => 'sales.taxes.calculation.shipping_prices',
+        'code'  => 'sales.taxes.calculation.shipping_prices',
         'value' => 'excluding_tax',
     ]);
 

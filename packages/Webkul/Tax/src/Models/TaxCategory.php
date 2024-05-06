@@ -15,14 +15,14 @@ class TaxCategory extends Model implements TaxCategoryContract
 
     /**
      * The attributes that are mass assignable.
-     * 
+     *
      * @var string
      */
     protected $table = 'tax_categories';
 
     /**
      * Fillable property for the model.
-     * 
+     *
      * @var array
      */
     protected $fillable = [
