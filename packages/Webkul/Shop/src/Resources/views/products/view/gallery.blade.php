@@ -79,7 +79,7 @@
                         alt="{{ $product->name }}"
                         width="560"
                         height="610"
-                        @click="isShow =! isShow"
+                        @click="isImageZooming =! isImageZooming"
                         @load="onMediaLoad()"
                     />
 
@@ -108,12 +108,12 @@
                     ::src="image.large_image_url"
                     class="w-[490px] min-w-[450px] max-sm:min-w-full"
                     v-for="(image, index) in media.images"
-                    @click="isShow = !isShow"
+                    @click="isImageZooming = !isImageZooming"
                 />
             </div>
 
             <!-- Gallery Images Zoomer -->
-            <x-shop::modal.image-zoomer ::images="[...media.images].map((img) => img.original_image_url)" ::is-show="isShow" ::initial-index="'image_'+activeIndex"></x-shop::modal.image-zoomer>
+            <x-shop::modal.image-zoomer ::images="[...media.images].map((img) => img.original_image_url)" ::is-image-zooming="isImageZooming" ::initial-index="'image_'+activeIndex"></x-shop::modal.image-zoomer>
         </div>
     </script>
 
@@ -123,7 +123,7 @@
 
             data() {
                 return {
-                    isShow: false,
+                    isImageZooming: false,
                     
                     isMediaLoading: true,
 

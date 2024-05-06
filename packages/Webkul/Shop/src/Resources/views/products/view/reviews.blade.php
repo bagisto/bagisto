@@ -322,7 +322,7 @@
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
-                                @click="isShow =! isShow; activeIndex = index"
+                                @click="isImageZooming =! isImageZooming; activeIndex = index"
                             >
                         </div>
                         
@@ -343,7 +343,8 @@
                     </template>
                 </div>
 
-                <x-shop::modal.image-zoomer ::images="[...review.images].map((img) => img.url)" ::is-show="isShow" ::initial-index="'file_'+activeIndex"></x-shop::modal.image-zoomer>
+                <!-- Review Images zoomer -->
+                <x-shop::modal.image-zoomer ::images="[...review.images].map((img) => img.url)" ::is-image-zooming="isImageZooming" ::initial-index="'file_'+activeIndex"></x-shop::modal.image-zoomer>
             </div>
         </div>
     </script>
@@ -436,7 +437,7 @@
                 return {
                     isLoading: false,
 
-                    isShow: false,
+                    isImageZooming: false,
                 }
             },
 

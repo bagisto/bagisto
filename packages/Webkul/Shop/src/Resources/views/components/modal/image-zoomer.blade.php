@@ -111,7 +111,7 @@
                     required: true,
                 },
 
-                isShow: {
+                isImageZooming: {
                     type: Boolean,
 
                     default: false,
@@ -119,16 +119,14 @@
 
                 initialIndex: {
                     type: String,
+                    
                     default: 0,
                 },
             },
 
             watch: {
-                isShow(newVal, oldVal) {   
-                    console.log(this.initialIndex);
-                    
+                isImageZooming(newVal, oldVal) {  
                     this.currentIndex = parseInt(this.initialIndex.split('_').pop()) + 1;
-
 
                     this.navigate(this.currentIndex);
 
@@ -138,7 +136,7 @@
         
             data() {
                 return {
-                    isOpen: this.isShow,
+                    isOpen: this.isImageZooming,
 
                     isDragging: false,
 
