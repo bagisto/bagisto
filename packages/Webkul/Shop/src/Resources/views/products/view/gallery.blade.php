@@ -79,7 +79,7 @@
                         alt="{{ $product->name }}"
                         width="560"
                         height="610"
-                        @click="isImageZooming =! isImageZooming"
+                        @click="isImageZooming = !isImageZooming"
                         @load="onMediaLoad()"
                     />
 

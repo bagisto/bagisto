@@ -322,7 +322,7 @@
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
-                                @click="isImageZooming =! isImageZooming; activeIndex = index"
+                                @click="isImageZooming = !isImageZooming; activeIndex = index"
                             >
                         </div>
                         
