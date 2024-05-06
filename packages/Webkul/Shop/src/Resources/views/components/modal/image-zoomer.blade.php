@@ -55,7 +55,6 @@
                                         'h-auto': isZooming
                                     }"
                                 >
-                                @{{ images }}
                                     <div
                                         v-for="(image, index) in images"
                                         class="h-full items-center justify-center"
@@ -108,13 +107,38 @@
             props: {
                 images: {
                     type: Object,
+
                     required: true,
+                },
+
+                isShow: {
+                    type: Boolean,
+
+                    default: false,
+                },
+
+                initialIndex: {
+                    type: String,
+                    default: 0,
                 },
             },
 
+            watch: {
+                isShow(newVal, oldVal) {   
+                    console.log(this.initialIndex);
+                    
+                    this.currentIndex = parseInt(this.initialIndex.split('_').pop()) + 1;
+
+
+                    this.navigate(this.currentIndex);
+
+                    this.toggle();
+                },
+            },
+        
             data() {
                 return {
-                    isOpen: false,
+                    isOpen: this.isShow,
 
                     isDragging: false,
 
@@ -135,21 +159,11 @@
                     isMouseDownTriggered: false,
                 };
             },
-
+            
             computed: {
                 getCurrentImageStatus() {
                     return `${this.currentIndex} / ${this.images.length}`;
                 },
-            },
-
-            mounted() {
-                this.$emitter.on('v-show-images-zoomer', (currentIndex) =>  {
-                    this.currentIndex = parseInt(currentIndex.split('_').pop()) + 1;
-
-                    this.navigate(this.currentIndex);
-
-                    this.toggle();
-                });
             },
 
             methods: {
@@ -183,7 +197,7 @@
 
                         slides[i].style.display = 'none';
                     }
-
+                    
                     slides[this.currentIndex - 1].style.display = 'flex';
 
                     this.isZooming = false;
