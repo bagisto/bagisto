@@ -322,8 +322,8 @@
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
-                                @click="$emitter.emit('v-show-review-images-zoomer', `file_${index}`)"
-                            >  
+                                @click="isShow =! isShow; activeIndex = index"
+                            >
                         </div>
                         
                         <a
@@ -343,7 +343,7 @@
                     </template>
                 </div>
 
-                <x-shop::modal.image-zoomer ::images="[...review.images].map((img) => img.url)"></x-shop::modal.image-zoomer>
+                <x-shop::modal.image-zoomer ::images="[...review.images].map((img) => img.url)" ::is-show="isShow" ::initial-index="'file_'+activeIndex"></x-shop::modal.image-zoomer>
             </div>
         </div>
     </script>
@@ -367,6 +367,8 @@
                     },
 
                     meta: {},
+
+                    activeIndex: 0,
                 }
             },
 
@@ -429,10 +431,12 @@
             template: '#v-product-review-item-template',
 
             props: ['review'],
-
+            
             data() {
                 return {
                     isLoading: false,
+
+                    isShow: false,
                 }
             },
 
