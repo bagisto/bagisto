@@ -222,6 +222,8 @@ it('should store the shipping address as the billing address when use_for_shippi
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
@@ -325,6 +327,8 @@ it('should store the billing and shipping address for guest user', function () {
         'type'                => $product->type,
         'additional'          => $additional,
     ]);
+
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
 
@@ -439,6 +443,8 @@ it('should store the billing address for non stockable items for guest user', fu
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
@@ -532,6 +538,8 @@ it('should store the shipping address as the billing address when use_for_shippi
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
@@ -563,6 +571,7 @@ it('should store the shipping address as the billing address when use_for_shippi
         ->assertJsonPath('data.shippingMethods.free.rates.0.base_price', 0);
 
     $response->assertJsonPath('data.shippingMethods.flatrate.rates.0.cart_address_id', $cart->shipping_address->id);
+
     $response->assertJsonPath('data.shippingMethods.free.rates.0.cart_address_id', $cart->shipping_address->id);
 
     $this->assertModelWise([
@@ -642,6 +651,8 @@ it('should store the billing and shipping address for customer', function () {
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
@@ -678,6 +689,7 @@ it('should store the billing and shipping address for customer', function () {
         ->assertJsonPath('data.shippingMethods.free.rates.0.base_price', 0);
 
     $response->assertJsonPath('data.shippingMethods.flatrate.rates.0.cart_address_id', $cart->shipping_address->id);
+
     $response->assertJsonPath('data.shippingMethods.free.rates.0.cart_address_id', $cart->shipping_address->id);
 
     $this->assertModelWise([
@@ -754,6 +766,8 @@ it('should store the billing address for non stockable items for customer', func
         'type'                => $product->type,
         'additional'          => $additional,
     ]);
+
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
 
@@ -852,6 +866,8 @@ it('should fails the certain validation errors when use for shipping is set to f
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     cart()->setCart($cart);
 
     // Act and Assert.
@@ -922,6 +938,8 @@ it('should fails the certain validation errors when use for shipping is set to f
         'type'                => $product->type,
         'additional'          => $additional,
     ]);
+
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
 
@@ -1668,7 +1686,7 @@ it('should place a simple product order for a guest user', function () {
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
@@ -1828,7 +1846,7 @@ it('should place a simple product order for a guest user and send mail to guest 
 
     $cartPayment = CartPayment::factory()->create([
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
         'cart_id'      => $cart->id,
     ]);
 
@@ -2000,7 +2018,7 @@ it('should place a simple product order for a customer', function () {
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
@@ -2166,7 +2184,7 @@ it('should place a simple product order for a customer and send email to the cus
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $cartShippingRate = CartShippingRate::factory()->create([
@@ -2355,7 +2373,7 @@ it('should place a configurable product order for a guest user', function () {
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -2528,7 +2546,7 @@ it('should place a configurable product order for a guest user and send email to
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -2711,7 +2729,7 @@ it('should place a configurable product order for a customer', function () {
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -2892,7 +2910,7 @@ it('should place a configurable product order for a customer and send email to t
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -3049,7 +3067,7 @@ it('should place a virtual product order for a guest user', function () {
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -3186,7 +3204,7 @@ it('should place a virtual product order for a guest user and send email to the 
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -3333,7 +3351,7 @@ it('should place a virtual product order for a customer', function () {
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -3478,7 +3496,7 @@ it('should place a virtual product order for a customer and send email to the us
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -3630,7 +3648,7 @@ it('should place a downloadable product order for a customer', function () {
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -3771,7 +3789,7 @@ it('should place a downloadable product order for a customer and send email to t
     $cartPayment = CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     cart()->setCart($cart);
@@ -3913,10 +3931,12 @@ it('should not return the cash on delivery payment method if product is download
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
@@ -4013,10 +4033,12 @@ it('should not return the shipping methods if product is downloadable', function
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
@@ -4112,10 +4134,12 @@ it('should not return the cash on delivery payment method if product is virtual'
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
@@ -4212,10 +4236,12 @@ it('should not return the shipping methods if product is virtual', function () {
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create()->toArray();
+
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
         'method'       => $paymentMethod = 'cashondelivery',
-        'method_title' => $methodTitle = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
     $customerAddress = CustomerAddress::factory()->create()->toArray();
