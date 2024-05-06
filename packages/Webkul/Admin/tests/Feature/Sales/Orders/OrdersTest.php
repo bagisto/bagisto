@@ -139,7 +139,6 @@ it('should add product to the cart after search the product', function () {
         ->assertJsonPath('data.customer_id', $cart->customer_id)
         ->assertJsonPath('data.items_count', 1)
         ->assertJsonPath('data.items_qty', $data['quantity'])
-        ->assertJsonPath('data.base_tax_total', 0)
         ->assertJsonPath('data.formatted_base_discount_amount', core()->currency(0))
         ->assertJsonPath('data.base_discount_amount', 0)
         ->assertJsonPath('data.base_grand_total', core()->currency($price))

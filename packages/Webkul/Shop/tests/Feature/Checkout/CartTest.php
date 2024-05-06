@@ -2639,3 +2639,5 @@ it('should check excluding tax rate when add a product to the cart based on ship
 
     $this->assertPrice($product->price, $response->json('data.cart.items.0.price'));
 });
+
+// it('should check including ')
