@@ -1,4 +1,4 @@
-<x-shop::layouts>
+<x-shop::layouts :has-feature="false">
     <!-- Page Title -->
     <x-slot:title>
         {{ $title ?? '' }}

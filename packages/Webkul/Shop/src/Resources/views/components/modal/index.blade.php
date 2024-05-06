@@ -14,11 +14,11 @@
 
     @isset($header)
         <template v-slot:header="{ toggle, isOpen }">
-            <div {{ $header->attributes->merge(['class' => 'flex items-center justify-between gap-5 border-b border-[#E9E9E9] bg-white p-8']) }}>
+            <div {{ $header->attributes->merge(['class' => 'flex items-center justify-between gap-5 border-b border-[#E9E9E9] bg-white p-8 max-sm:p-4']) }}>
                 {{ $header }}
 
                 <span
-                    class="icon-cancel cursor-pointer text-3xl"
+                    class="icon-cancel cursor-pointer text-3xl max-sm:text-2xl"
                     @click="toggle"
                 >
                 </span>
@@ -28,7 +28,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'bg-white p-8']) }}>
+            <div {{ $content->attributes->merge(['class' => 'bg-white p-8 max-sm:p-5']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -36,7 +36,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div {{ $content->attributes->merge(['class' => 'mt-5 bg-white p-8']) }}>
+            <div {{ $content->attributes->merge(['class' => 'mt-5 bg-white p-8 max-sm:mt-1.5 max-sm:py-5 max-sm:px-4']) }}>
                 {{ $footer }}
             </div>
         </template>

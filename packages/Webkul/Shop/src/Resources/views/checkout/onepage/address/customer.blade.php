@@ -244,9 +244,9 @@
                         </template>
 
                         <!-- Proceed Button -->
-                        <div class="mt-4 flex justify-end">
+                        <div class="mt-4 flex justify-end max-sm:my-4">
                             <x-shop::button
-                                class="primary-button rounded-2xl px-11 py-3"
+                                class="primary-button rounded-2xl px-11 py-3 max-sm:w-full max-sm:max-w-full"
                                 :title="trans('shop::app.checkout.onepage.address.proceed')"
                                 ::loading="isStoring"
                                 ::disabled="isStoring"

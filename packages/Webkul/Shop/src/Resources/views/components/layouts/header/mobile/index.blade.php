@@ -38,10 +38,10 @@
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
                     <div class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-[#E9E9E9] p-2.5">
-                        <div class="">
+                        <div>
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
-                                class="h-[60px] w-[60px] rounded-full"
+                                class="h-[60px] w-[60px] rounded-full max-sm:rounded-lg"
                             >
                         </div>
 

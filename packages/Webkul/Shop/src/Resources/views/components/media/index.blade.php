@@ -39,7 +39,7 @@
 
                 <label 
                     for="file-input"
-                    class="flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-[#F5F5F5] hover:bg-gray-100"
+                    class="flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-[#F5F5F5] hover:bg-gray-100 max-sm:h-[157px] max-sm:w-[157px]"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"
@@ -47,7 +47,7 @@
                 >
                     <label 
                         for="file-input"
-                        class="primary-button m-0 mx-auto block w-max rounded-2xl px-11 py-3 text-center text-base"
+                        class="primary-button m-0 mx-auto block w-max rounded-2xl px-11 py-3 text-center text-base max-sm:rounded-xl max-sm:px-3 max-sm:py-1 max-sm:text-sm"
                     >
                         @lang('shop::app.components.media.add-attachments')
                     </label>

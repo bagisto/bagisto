@@ -44,7 +44,7 @@
 
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <h2 class="text-2xl font-medium max-sm:text-xl">
+                                <h2 class="text-2xl font-medium max-sm:text-base">
                                     @lang('shop::app.checkout.coupon.apply')
                                 </h2>
                             </x-slot>
@@ -54,7 +54,7 @@
                                 <x-shop::form.control-group class="!mb-0">
                                     <x-shop::form.control-group.control
                                         type="text"
-                                        class="px-6 py-5"
+                                        class="px-6 py-5 max-sm:!mb-0 max-sm:!p-2.5"
                                         name="code"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.coupon.enter-your-code')"
@@ -70,19 +70,19 @@
                             <!-- Modal Footer -->
                             <x-slot:footer>
                                 <!-- Coupon Form Action Container -->
-                                <div class="flex flex-wrap items-center gap-4">
-                                    <div class="flex items-center gap-4">
-                                        <p class="text-sm font-medium text-[#6E6E6E]">
+                                <div class="flex flex-wrap items-center gap-4 max-sm:justify-between">
+                                    <div class="flex gap-4 max-sm:block">
+                                        <p class="text-sm font-medium text-[#6E6E6E] max-sm:text-xs">
                                             @lang('shop::app.checkout.coupon.subtotal')
                                         </p>
 
-                                        <p class="text-3xl font-semibold max-sm:text-xl">
+                                        <p class="text-3xl font-semibold max-sm:text-lg">
                                             @{{ cart.formatted_sub_total }}
                                         </p>
                                     </div>
 
                                     <x-shop::button
-                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3"
+                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-sm:max-w-[153px]"
                                         :title="trans('shop::app.checkout.coupon.button-title')"
                                         ::loading="isStoring"
                                         ::disabled="isStoring"

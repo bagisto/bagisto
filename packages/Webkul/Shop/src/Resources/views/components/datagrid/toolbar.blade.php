@@ -3,7 +3,7 @@
 </template>
 
 <template v-else>
-    <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
+    <div class="mt-7 flex items-center justify-between gap-4 max-sm:block">
         <!-- Left Toolbar -->
         <div class="flex gap-x-1">
             <!-- Mass Actions Panel -->
@@ -52,7 +52,7 @@
         </div>
 
         <!-- Right Toolbar -->
-        <div class="flex gap-x-4">
+        <div class="flex gap-x-4 max-sm:my-4 max-sm:justify-between">
             <!-- Pagination Panel -->
             <x-shop::datagrid.toolbar.pagination>
                 <template #pagination="{

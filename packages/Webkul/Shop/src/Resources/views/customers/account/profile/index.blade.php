@@ -30,7 +30,7 @@
     <div class="mt-8 grid grid-cols-1 gap-y-6">
         {!! view_render_event('bagisto.shop.customers.account.profile.first_name.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3 max-sm:px-0">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.first-name')
             </p>
@@ -44,7 +44,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.last_name.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3 max-sm:px-0">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.last-name')
             </p>
@@ -58,7 +58,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.gender.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3 max-sm:px-0">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.gender')
             </p>
@@ -72,7 +72,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.date_of_birth.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3 max-sm:px-0">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.dob')
             </p>
@@ -86,7 +86,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.email.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3 max-sm:px-0">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.email')
             </p>
@@ -101,14 +101,10 @@
         {!! view_render_event('bagisto.shop.customers.account.profile.delete.before') !!}
 
         <!-- Profile Delete modal -->
-        <x-shop::form
-            action="{{ route('shop.customers.account.profile.destroy') }}"
-        >
+        <x-shop::form action="{{ route('shop.customers.account.profile.destroy') }}">
             <x-shop::modal>
                 <x-slot:toggle>
-                    <div
-                        class="primary-button rounded-2xl px-11 py-3"
-                    >
+                    <div class="primary-button rounded-2xl px-11 py-3 max-sm:w-full max-sm:max-w-full">
                         @lang('shop::app.customers.account.profile.index.delete-profile')
                     </div>
                 </x-slot>

@@ -9,7 +9,7 @@
         <x-shop::breadcrumbs name="profile.edit" />
     @endSection
 
-    <h2 class="mb-8 text-2xl font-medium">
+    <h2 class="mb-8 text-2xl font-medium max-sm:mb-5">
         @lang('shop::app.customers.account.profile.edit.edit-profile')
     </h2>
 
@@ -234,7 +234,7 @@
             ></label>
 
             <label
-                class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0"
+                class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-sm ltr:pl-0 rtl:pr-0"
                 for="is-subscribed"
             >
                 @lang('shop::app.customers.account.profile.edit.subscribe-to-newsletter')
@@ -243,7 +243,7 @@
 
         <button
             type="submit"
-            class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base"
+            class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base max-sm:w-full max-sm:max-w-full"
         >
             @lang('shop::app.customers.account.profile.edit.save')
         </button>

@@ -110,6 +110,7 @@
                             <template v-if="cart.payment_method == 'paypal_smart_button'">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!}
 
+                                <!-- Paypal Smart Button Vue Component -->
                                 <v-paypal-smart-button></v-paypal-smart-button>
 
                                 {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!}

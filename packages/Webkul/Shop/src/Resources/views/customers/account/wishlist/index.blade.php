@@ -65,7 +65,7 @@
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
                                                 <img 
-                                                    class="h-[110px] max-h-[110px] w-[110px] min-w-[110px] max-w-[110px] rounded-xl"
+                                                    class="h-[110px] max-h-[110px] w-[110px] min-w-[110px] max-w-[110px] rounded-xl max-sm:h-[80px] max-sm:max-h-[80px] max-sm:w-[80px] max-sm:min-w-[80px] max-sm:max-w-[80px]"
                                                     :src="item.product.base_image.small_image_url" 
                                                     alt="Product Image"
                                                 /> 
@@ -75,7 +75,7 @@
                                         </div>
 
                                         <div class="grid gap-y-2.5">
-                                            <p class="text-base font-medium">
+                                            <p class="text-base font-medium max-sm:text-sm">
                                                 @{{ item.product.name }}
                                             </p>
 
@@ -119,7 +119,7 @@
 
                                             <div class="sm:hidden">
                                                 <p 
-                                                    class="text-lg font-semibold" 
+                                                    class="text-lg font-semibold max-sm:text-sm" 
                                                     v-html="item.product.min_price"
                                                 >
                                                 </p>
@@ -143,13 +143,13 @@
                                                 <x-shop::quantity-changer
                                                     name="quantity"
                                                     ::value="item.options.quantity ?? 1"
-                                                    class="flex max-h-10 items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5"
+                                                    class="flex max-h-10 items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5 max-sm:gap-x-1 max-sm:px-1.5 max-sm:py-1"
                                                     @change="setItemQuantity($event, item)"
                                                 />
 
                                                 <!--Wishlist Item Move-to-cart-->
                                                 <x-shop::button
-                                                    class="primary-button max-h-10 w-max rounded-2xl px-6 py-1.5 text-center text-base"
+                                                    class="primary-button max-h-10 w-max rounded-2xl px-6 py-1.5 text-center text-base max-sm:px-4 max-sm:py-1.5 max-sm:text-sm"
                                                     :title="trans('shop::app.customers.account.wishlist.move-to-cart')"
                                                     ::loading="isMovingToCart[item.id]"
                                                     ::disabled="isMovingToCart[item.id]"

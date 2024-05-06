@@ -10,7 +10,7 @@
     @endSection
     <div class="flex items-center justify-between">
         <div class="">
-            <h2 class="text-2xl font-medium">
+            <h2 class="text-2xl font-medium max-sm:text-xl">
                 @lang('shop::app.customers.account.addresses.index.title')
             </h2>
         </div>
@@ -19,7 +19,7 @@
             href="{{ route('shop.customers.account.addresses.create') }}"
             class="secondary-button flex items-center gap-x-2.5 border-[#E9E9E9] px-5 py-3 font-normal"
         >
-            <span class="icon-location text-2xl"></span>
+            <span class="icon-plus text-2xl"></span>
 
             @lang('shop::app.customers.account.addresses.index.add-address') 
         </a>
@@ -30,7 +30,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.list.before', ['addresses' => $addresses]) !!}
 
-        <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr]">
+        <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-sm:mt-[20px]">
             @foreach ($addresses as $address)
                 <div class="rounded-xl border border-[#e5e5e5] p-5 max-sm:flex-wrap">
                     <div class="flex items-center justify-between">
@@ -124,7 +124,7 @@
                         </div>
                     </div>
 
-                    <p class="mt-6 text-[#6E6E6E]">
+                    <p class="mt-6 text-[#6E6E6E] max-sm:mt-5 max-sm:text-sm">
                         {{ $address->address }},
 
                         {{ $address->city }}, 
