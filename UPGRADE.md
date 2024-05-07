@@ -457,6 +457,11 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 2. We have deprecated the 'toJson' method. Instead of 'toJson', please use the 'process' method.
 
+```diff
+- app(AttributeDataGrid::class)->toJson();
++ datagrid(AttributeDataGrid::class)->process();
+```
+
 <a name="notification"></a>
 ### Notification
 
