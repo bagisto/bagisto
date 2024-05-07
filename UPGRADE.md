@@ -14,6 +14,7 @@
 - [The System Configuration Updates](#the-system-config-update)
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The Checkout Tables Schema Updates](#the-checkout-tables-schema-updates)
+- [The `Webkul\DataGrid\DataGrid` class](#the-datagrid-class)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
@@ -76,8 +77,6 @@ There is no dependency needed to be updated at for this upgrade.
 
 <div class="content-list" markdown="1">
 </div>
-
-
 
 <a name="Admin"></a>
 ### Admin
@@ -207,8 +206,6 @@ In this example, the `repository` option has been replaced with `options`, which
 + </template>
 ```
 
-
-
 <a name="checkout"></a>
 ### Checkout
 
@@ -326,7 +323,6 @@ In this example, the `repository` option has been replaced with `options`, which
 + }
 ```
 
-
 <a name="removed-cart-traits"></a>
 #### Removed Cart Traits
 
@@ -342,14 +338,12 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 </div>
 
-
 <a name="the-cart-class"></a>
 #### The `Webkul\Checkout\Cart` class
 
 **Impact Probability: High**
 
 1. The `initCart` method now accepts an optional `Webkul\Customer\Models\Customer` model instance and initializes the cart based on this parameter.
-
 
 ```diff
 - public function initCart()
@@ -425,6 +419,41 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + public function collectTotals(): self
 ```
 
+<a name="datagrid"></a>
+### DataGrid
+
+<a name="the-datagrid-class"></a>
+#### The `Webkul\DataGrid\DataGrid` Class
+
+**Impact Probability: Medium**
+
+1. We have made some of the methods in this class private. Here are the methods, please have a look.
+
+```diff
+- public function validatedRequest(): array
++ private function validatedRequest(): array
+
+- public function processRequestedFilters(array $requestedFilters)
++ private function processRequestedFilters(array $requestedFilters)
+
+- public function processRequestedSorting($requestedSort)
++ private function processRequestedSorting($requestedSort)
+
+- public function processRequestedPagination($requestedPagination): LengthAwarePaginator
++ private function processRequestedPagination($requestedPagination): LengthAwarePaginator
+
+- public function processRequest(): void
++ private function processRequest(): void
+
+- public function sanitizeRow($row): \stdClass
++ private function sanitizeRow($row): \stdClass
+
+- public function formatData(): array
++ private function formatData(): array
+
+- public function prepare(): void
++ private function prepare(): void
+```
 
 <a name="notification"></a>
 ### Notification
@@ -462,7 +491,6 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 - public function getFilters()
 + public function getFilters(array $params): array
 ```
-
 
 <a name="the-product-repository"></a>
 #### The `Webkul\Product\Repositories\ProductRepository` Repository
@@ -618,8 +646,6 @@ If you've implemented your own product type or overridden existing type classes,
 - public function create(array $data)
 ```
 
-
-
 <a name="shop"></a>
 ### Shop
 
@@ -682,7 +708,6 @@ If you've implemented your own product type or overridden existing type classes,
 **Impact Probability: Low**
 
 1. The routes names have been renamed for consistency in the `packages/Webkul/Shop/src/Routes/api.php` route file.
-
 
 ```diff
 - Route::get('', 'index')->name('api.shop.customers.account.addresses.index');
