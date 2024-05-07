@@ -76,8 +76,6 @@ class ConfigurationController extends Controller
         );
 
         if ($groups) {
-            // dd($this->configTree, $groups);
-
             return view('admin::configuration.edit', [
                 'config' => $this->configTree,
                 'groups' => $groups,
