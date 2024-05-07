@@ -53,7 +53,7 @@
 
             <a
                 :href="navigationLink"
-                class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base max-sm:mt-0"
+                class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base max-sm:mt-0 max-sm:py-3.5"
                 v-if="navigationLink"
             >
                 @lang('shop::app.components.products.carousel.view-all')
