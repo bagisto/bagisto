@@ -136,10 +136,7 @@ abstract class DataGrid
      */
     public function addColumn(array $column): void
     {
-        $this->dispatchEvent('add_column.before', [
-            'datagrid' => $this,
-            'column'   => $column,
-        ]);
+        $this->dispatchEvent('add_column.before', [$this, $column]);
 
         $this->columns[] = new Column(
             index: $column['index'],
@@ -152,10 +149,7 @@ abstract class DataGrid
             closure: $column['closure'] ?? null,
         );
 
-        $this->dispatchEvent('add_column.after', [
-            'datagrid' => $this,
-            'column'   => $this->columns[count($this->columns) - 1],
-        ]);
+        $this->dispatchEvent('add_column.after', [$this, $this->columns[count($this->columns) - 1]]);
     }
 
     /**
@@ -163,10 +157,7 @@ abstract class DataGrid
      */
     public function addAction(array $action): void
     {
-        $this->dispatchEvent('add_action.before', [
-            'datagrid' => $this,
-            'action'   => $action,
-        ]);
+        $this->dispatchEvent('add_action.before', [$this, $action]);
 
         $this->actions[] = new Action(
             index: $action['index'] ?? '',
@@ -176,10 +167,7 @@ abstract class DataGrid
             url: $action['url'],
         );
 
-        $this->dispatchEvent('add_action.after', [
-            'datagrid' => $this,
-            'action'   => $this->actions[count($this->actions) - 1],
-        ]);
+        $this->dispatchEvent('add_action.after', [$this, $this->actions[count($this->actions) - 1]]);
     }
 
     /**
@@ -187,10 +175,7 @@ abstract class DataGrid
      */
     public function addMassAction(array $massAction): void
     {
-        $this->dispatchEvent('add_mass_action.before', [
-            'datagrid'    => $this,
-            'mass_action' => $massAction,
-        ]);
+        $this->dispatchEvent('add_mass_action.before', [$this, $massAction]);
 
         $this->massActions[] = new MassAction(
             icon: $massAction['icon'] ?? '',
@@ -200,10 +185,7 @@ abstract class DataGrid
             options: $massAction['options'] ?? [],
         );
 
-        $this->dispatchEvent('add_mass_action.after', [
-            'datagrid'    => $this,
-            'mass_action' => $this->massActions[count($this->massActions) - 1],
-        ]);
+        $this->dispatchEvent('add_mass_action.after', [$this, $this->massActions[count($this->massActions) - 1]]);
     }
 
     /**
@@ -213,17 +195,11 @@ abstract class DataGrid
      */
     public function setQueryBuilder($queryBuilder = null): void
     {
-        $this->dispatchEvent('set_query_builder.before', [
-            'datagrid' => $this,
-            'builder'  => $queryBuilder,
-        ]);
+        $this->dispatchEvent('set_query_builder.before', [$this, $queryBuilder]);
 
         $this->queryBuilder = $queryBuilder ?: $this->prepareQueryBuilder();
 
-        $this->dispatchEvent('set_query_builder.after', [
-            'datagrid' => $this,
-            'builder'  => $this->queryBuilder,
-        ]);
+        $this->dispatchEvent('set_query_builder.after', $this);
     }
 
     /**
@@ -239,11 +215,7 @@ abstract class DataGrid
      */
     public function addFilter(string $datagridColumn, mixed $queryColumn): void
     {
-        $this->dispatchEvent('add_filter.before', [
-            'datagrid'        => $this,
-            'datagrid_column' => $datagridColumn,
-            'query_column'    => $queryColumn,
-        ]);
+        $this->dispatchEvent('add_filter.before', [$this, $datagridColumn, $queryColumn]);
 
         foreach ($this->columns as $column) {
             if ($column->index === $datagridColumn) {
@@ -253,11 +225,7 @@ abstract class DataGrid
             }
         }
 
-        $this->dispatchEvent('add_filter.after', [
-            'datagrid'        => $this,
-            'datagrid_column' => $datagridColumn,
-            'query_column'    => $queryColumn,
-        ]);
+        $this->dispatchEvent('add_filter.after', [$this, $datagridColumn, $queryColumn]);
     }
 
     /**
