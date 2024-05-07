@@ -229,9 +229,57 @@ abstract class DataGrid
     }
 
     /**
+     * Set exportable.
+     */
+    public function setExportable(bool $exportable): void
+    {
+        $this->dispatchEvent('set_exportable.before', [$this, $exportable]);
+
+        $this->exportable = $exportable;
+
+        $this->dispatchEvent('set_exportable.after', $this);
+    }
+
+    /**
+     * Get exportable.
+     */
+    public function getExportable(): bool
+    {
+        return $this->exportable;
+    }
+
+    /**
+     * Set export file.
+     *
+     * @param  \Illuminate\Support\Collection  $records
+     * @param  string  $format
+     * @return void
+     */
+    public function setExportFile($records, $format = 'csv')
+    {
+        $this->dispatchEvent('set_export_file.before', $this);
+
+        $this->setExportable(true);
+
+        $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36).'.'.$format);
+
+        $this->dispatchEvent('set_export_file.after', $this);
+    }
+
+    /**
+     * Download export file.
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function downloadExportFile()
+    {
+        return $this->exportFile;
+    }
+
+    /**
      * Validated request.
      */
-    public function validatedRequest(): array
+    private function validatedRequest(): array
     {
         request()->validate([
             'filters'     => ['sometimes', 'required', 'array'],
@@ -249,7 +297,7 @@ abstract class DataGrid
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function processRequestedFilters(array $requestedFilters)
+    private function processRequestedFilters(array $requestedFilters)
     {
         foreach ($requestedFilters as $requestedColumn => $requestedValues) {
             if ($requestedColumn === 'all') {
@@ -271,12 +319,16 @@ abstract class DataGrid
                             }
                         });
 
+                        break;
+
                     case ColumnTypeEnum::INTEGER->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
                                 $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
                             }
                         });
+
+                        break;
 
                     case ColumnTypeEnum::DROPDOWN->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
@@ -298,6 +350,7 @@ abstract class DataGrid
                         });
 
                         break;
+
                     case ColumnTypeEnum::DATE_TIME_RANGE->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
@@ -327,7 +380,7 @@ abstract class DataGrid
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    public function processRequestedSorting($requestedSort)
+    private function processRequestedSorting($requestedSort)
     {
         if (! $this->sortColumn) {
             $this->sortColumn = $this->primaryColumn;
@@ -339,7 +392,7 @@ abstract class DataGrid
     /**
      * Process requested pagination.
      */
-    public function processRequestedPagination($requestedPagination): LengthAwarePaginator
+    private function processRequestedPagination($requestedPagination): LengthAwarePaginator
     {
         return $this->queryBuilder->paginate(
             $requestedPagination['per_page'] ?? $this->itemsPerPage,
@@ -352,7 +405,7 @@ abstract class DataGrid
     /**
      * Process paginated request.
      */
-    public function processPaginatedRequest(array $requestedParams): void
+    private function processPaginatedRequest(array $requestedParams): void
     {
         $this->dispatchEvent('process_request.paginated.before', $this);
 
@@ -364,11 +417,9 @@ abstract class DataGrid
     /**
      * Process export request.
      */
-    public function processExportRequest(array $requestedParams): void
+    private function processExportRequest(array $requestedParams): void
     {
         $this->dispatchEvent('process_request.export.before', $this);
-
-        $this->exportable = true;
 
         $this->setExportFile($this->queryBuilder->get(), $requestedParams['format']);
 
@@ -378,7 +429,7 @@ abstract class DataGrid
     /**
      * Process request.
      */
-    public function processRequest(): void
+    private function processRequest(): void
     {
         $this->dispatchEvent('process_request.before', $this);
 
@@ -403,35 +454,9 @@ abstract class DataGrid
     }
 
     /**
-     * Set export file.
-     *
-     * @param  \Illuminate\Support\Collection  $records
-     * @param  string  $format
-     * @return void
-     */
-    public function setExportFile($records, $format = 'csv')
-    {
-        $this->dispatchEvent('set_export_file.before', $this);
-
-        $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36).'.'.$format);
-
-        $this->dispatchEvent('set_export_file.after', $this);
-    }
-
-    /**
-     * Download export file.
-     *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     */
-    public function downloadExportFile()
-    {
-        return $this->exportFile;
-    }
-
-    /**
      * Prepare all the setup for datagrid.
      */
-    public function sanitizeRow($row): \stdClass
+    private function sanitizeRow($row): \stdClass
     {
         /**
          * Convert stdClass to array.
@@ -456,7 +481,7 @@ abstract class DataGrid
     /**
      * Format data.
      */
-    public function formatData(): array
+    private function formatData(): array
     {
         $paginator = $this->paginator->toArray();
 
@@ -517,7 +542,7 @@ abstract class DataGrid
     /**
      * Dispatch event.
      */
-    public function dispatchEvent(string $eventName, mixed $payload): void
+    private function dispatchEvent(string $eventName, mixed $payload): void
     {
         $reflection = new \ReflectionClass($this);
 
@@ -529,7 +554,7 @@ abstract class DataGrid
     /**
      * Prepare all the setup for datagrid.
      */
-    public function prepare(): void
+    private function prepare(): void
     {
         $this->dispatchEvent('prepare.before', $this);
 
@@ -561,7 +586,7 @@ abstract class DataGrid
     {
         $this->prepare();
 
-        if ($this->exportable) {
+        if ($this->getExportable()) {
             return $this->downloadExportFile();
         }
 
