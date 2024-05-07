@@ -65,7 +65,7 @@
         type="text/x-template"
         id="v-configurable-template"
     >
-        <x-admin::form.control-group>
+        <x-admin::form.control-group class="last:!mb-0">
             <!-- Title of the input field -->
             <div    
                 v-if="field.isVisible"
