@@ -10,7 +10,7 @@
     @endSection
 
     <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-medium">
+        <h2 class="text-2xl font-medium max-sm:text-xl">
             @lang('shop::app.customers.account.profile.index.title')
         </h2>
 

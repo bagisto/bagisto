@@ -9,7 +9,7 @@
         <x-shop::breadcrumbs name="profile.edit" />
     @endSection
 
-    <h2 class="mb-8 text-2xl font-medium max-sm:mb-5">
+    <h2 class="mb-8 text-2xl font-medium max-sm:mb-5 max-sm:text-xl">
         @lang('shop::app.customers.account.profile.edit.edit-profile')
     </h2>
 
@@ -243,7 +243,7 @@
 
         <button
             type="submit"
-            class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base max-sm:w-full max-sm:max-w-full"
+            class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-sm:w-full max-sm:max-w-full"
         >
             @lang('shop::app.customers.account.profile.edit.save')
         </button>

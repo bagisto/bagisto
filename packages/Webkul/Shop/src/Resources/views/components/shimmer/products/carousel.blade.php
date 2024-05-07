@@ -1,6 +1,6 @@
-<div class="container mt-20 max-lg:px-8 max-sm:mt-8">
+<div class="container mt-20 max-lg:px-8 max-sm:mt-8 max-sm:!px-4">
     <div class="flex justify-between">
-        <h3 class="shimmer h-[45px] w-[200px]"></h3>
+        <h3 class="shimmer h-[32px] w-[200px]"></h3>
 
         <div class="flex items-center justify-between gap-8">
             <span
@@ -15,9 +15,9 @@
         </div>
     </div>
 
-    <div class="scrollbar-hide mt-10 flex gap-8 overflow-auto max-sm:mt-5">
+    <div class="scrollbar-hide mt-10 flex gap-8 overflow-auto max-sm:mt-5 max-sm:gap-4">
         <x-shop::shimmer.products.cards.grid
-            class="min-w-[291px]"
+            class="min-w-[291px] max-sm:min-w-[198px]"
             :count="4"
         />
     </div>

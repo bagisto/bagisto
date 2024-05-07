@@ -13,7 +13,7 @@
         />
     @endSection
 
-    <h2 class="mb-8 text-2xl font-medium">
+    <h2 class="mb-8 text-2xl font-medium max-sm:mb-4 max-sm:text-xl">
         @lang('shop::app.customers.account.addresses.edit.edit')
         @lang('shop::app.customers.account.addresses.edit.title')
     </h2>
@@ -31,7 +31,6 @@
             type="text/x-template"
             id="v-edit-customer-address-template"
         >
-
             <!-- Edit Address Form -->
             <x-shop::form
                 method="PUT"
@@ -39,6 +38,7 @@
             >
                 {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.before', ['address' => $address]) !!}
 
+                <!-- Company Name -->
                 <x-shop::form.control-group>
                     <x-shop::form.control-group.label>
                         @lang('shop::app.customers.account.addresses.edit.company-name')
@@ -57,6 +57,7 @@
 
                 {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.company_name.after', ['address' => $address]) !!}
 
+                <!-- First Name -->
                 <x-shop::form.control-group>
                     <x-shop::form.control-group.label class="required">
                         @lang('shop::app.customers.account.addresses.edit.first-name')
@@ -76,6 +77,7 @@
 
                 {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.first_name.after', ['address' => $address]) !!}
 
+                <!-- Last Name -->
                 <x-shop::form.control-group>
                     <x-shop::form.control-group.label class="required">
                         @lang('shop::app.customers.account.addresses.edit.last-name')
@@ -115,6 +117,7 @@
 
                 {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.email.after', ['address' => $address]) !!}
 
+                <!-- Vat ID -->
                 <x-shop::form.control-group>
                     <x-shop::form.control-group.label>
                         @lang('shop::app.customers.account.addresses.edit.vat-id')
@@ -137,6 +140,7 @@
                     $addresses = explode(PHP_EOL, $address->address);
                 @endphp
 
+                <!-- Street Address -->
                 <x-shop::form.control-group>
                     <x-shop::form.control-group.label class="required">
                         @lang('shop::app.customers.account.addresses.edit.street-address')
@@ -305,7 +309,7 @@
 
                 <button
                     type="submit"
-                    class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base"
+                    class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-sm:w-full max-sm:max-w-full"
                 >
                     @lang('shop::app.customers.account.addresses.edit.save')
                 </button>

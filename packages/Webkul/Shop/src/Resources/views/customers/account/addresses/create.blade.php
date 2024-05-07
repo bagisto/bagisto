@@ -9,7 +9,7 @@
         <x-shop::breadcrumbs name="addresses.create" />
     @endSection
 
-    <h2 class="mb-8 text-2xl font-medium">
+    <h2 class="mb-8 text-2xl font-medium max-sm:mb-4 max-sm:text-xl">
         @lang('shop::app.customers.account.addresses.create.add-address')
     </h2>
 
@@ -312,7 +312,7 @@
                         </label>
 
                         <label 
-                            class="block cursor-pointer text-base"
+                            class="block cursor-pointer text-base max-sm:text-sm"
                             for="default_address"
                         >
                             @lang('shop::app.customers.account.addresses.create.set-as-default')
@@ -321,7 +321,7 @@
 
                     <button
                         type="submit"
-                        class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base"
+                        class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-sm:w-full max-sm:max-w-full"
                     >
                         @lang('shop::app.customers.account.addresses.create.save')
                     </button>

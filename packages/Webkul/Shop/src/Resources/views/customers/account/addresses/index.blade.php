@@ -33,7 +33,7 @@
         <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-sm:mt-[20px]">
             @foreach ($addresses as $address)
                 <div class="rounded-xl border border-[#e5e5e5] p-5 max-sm:flex-wrap">
-                    <div class="flex items-center justify-between">
+                    <div class="flex justify-between">
                         <p class="text-base font-medium">
                             {{ $address->first_name }} {{ $address->last_name }}
 
@@ -42,10 +42,10 @@
                             @endif
                         </p>
 
-                        <div class="flex items-center gap-4">
+                        <div class="flex gap-4">
 
                             @if ($address->default_address)
-                                <div class="label-pending block w-max px-1.5 py-1">
+                                <div class="label-pending block h-fit w-max px-2.5 py-1 max-sm:px-1.5">
                                     @lang('shop::app.customers.account.addresses.index.default-address') 
                                 </div>
                             @endif
@@ -54,7 +54,7 @@
                             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                                 <x-slot:toggle>
                                     <button 
-                                        class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-[#6E6E6E] transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black" 
+                                        class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-[#6E6E6E] transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black max-sm:p-0" 
                                         aria-label="More Options"
                                     >
                                     </button>

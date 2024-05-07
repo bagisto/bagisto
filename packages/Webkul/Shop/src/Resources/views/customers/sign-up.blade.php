@@ -193,7 +193,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.newsletter_subscription.after') !!}
 
-                    <div class="mt-8 flex flex-wrap items-center gap-9">
+                    <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:justify-center">
                         <button
                             class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base max-sm:p-3 ltr:ml-0 rtl:mr-0"
                             type="submit"

@@ -1,6 +1,6 @@
 <v-media {{ $attributes }} >
     <x-shop::media.images.lazy
-        class="mb-4 h-[284px] w-[284px] rounded-xl"
+        class="mb-4 h-[200px] w-[200px] rounded-xl max-sm:h-[100px] max-sm:w-[100px]"
     />
 </v-media>
 
@@ -12,11 +12,11 @@
         <div class="mb-4 flex cursor-pointer flex-col rounded-lg">
             <div :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl': isDragOver }">
                 <div
-                    class="dark:hover:gray-950 flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-[#F5F5F5] hover:bg-gray-100"
+                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center rounded-xl bg-[#F5F5F5] hover:bg-gray-100 max-sm:h-[100px] max-sm:w-[100px]"
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 
-                        class="group relative flex h-[284px] w-[284px] justify-center"
+                        class="group relative flex h-full w-full"
                         @mouseenter="uploadedFiles.showDeleteButton = true"
                         @mouseleave="uploadedFiles.showDeleteButton = false"
                     >
@@ -39,7 +39,7 @@
 
                 <label 
                     for="file-input"
-                    class="flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-[#F5F5F5] hover:bg-gray-100 max-sm:h-[157px] max-sm:w-[157px]"
+                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-[#F5F5F5] hover:bg-gray-100 max-sm:h-[100px] max-sm:w-[100px] max-sm:gap-1"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"
@@ -47,10 +47,11 @@
                 >
                     <label 
                         for="file-input"
-                        class="primary-button m-0 mx-auto block w-max rounded-2xl px-11 py-3 text-center text-base max-sm:rounded-xl max-sm:px-3 max-sm:py-1 max-sm:text-sm"
+                        class="icon-camera text-3xl max-sm:text-lg"
                     >
-                        @lang('shop::app.components.media.add-attachments')
                     </label>
+
+                    <p class="font-medium max-sm:text-xs">@lang('Add Image')</p>
 
                     <input
                         type="hidden"

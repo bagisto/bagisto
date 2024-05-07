@@ -31,7 +31,7 @@
                 <!-- Wishlist Information -->
                 <template v-else>
                     <div class="journal-scroll flex items-center justify-between overflow-auto">
-                        <h2 class="text-2xl font-medium">
+                        <h2 class="text-2xl font-medium max-sm:text-xl">
                             @lang('shop::app.customers.account.wishlist.page-title')
                         </h2>
 
@@ -52,20 +52,20 @@
                     <div 
                         v-if="wishlistItems.length" 
                         v-for="(item, index) in wishlistItems"
-                        class="mt-8 flex flex-wrap gap-20 max-1060:flex-col"
+                        class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-sm:my-5"
                     >
                         <div class="grid flex-1 gap-8">
                             <div class="grid gap-y-6">
                                 <!-- Wishlist item -->
-                                <div class="flex justify-between gap-x-2.5 border-b border-[#E9E9E9] pb-5">
+                                <div class="flex justify-between gap-x-2.5 border-b border-[#E9E9E9] pb-5 max-sm:border-none max-sm:pb-0">
                                     <div class="flex gap-x-5">
-                                        <div class="">
+                                        <div>
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.image.before') !!}
 
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
                                                 <img 
-                                                    class="h-[110px] max-h-[110px] w-[110px] min-w-[110px] max-w-[110px] rounded-xl max-sm:h-[80px] max-sm:max-h-[80px] max-sm:w-[80px] max-sm:min-w-[80px] max-sm:max-w-[80px]"
+                                                    class="h-28 max-h-28 w-28 max-w-28 rounded-xl max-sm:h-20 max-sm:max-h-20 max-sm:w-20 max-sm:max-w-20"
                                                     :src="item.product.base_image.small_image_url" 
                                                     alt="Product Image"
                                                 /> 
@@ -80,12 +80,12 @@
                                             </p>
 
                                             <!--Wishlist Item attributes -->
-                                            <div 
+                                            <div
                                                 class="flex flex-wrap gap-x-2.5 gap-y-1.5"
                                                 v-if="item.options?.attributes"
                                             >
                                                 <div class="grid gap-2">
-                                                    <div class="">
+                                                    <div>
                                                         <p
                                                             class="flex cursor-pointer items-center gap-x-4 text-base"
                                                             @click="item.option_show = ! item.option_show"
@@ -99,8 +99,8 @@
                                                             </span>
                                                         </p>
                                                     </div>
-        
-                                                    <div 
+
+                                                    <div
                                                         class="grid gap-2" 
                                                         v-show="item.option_show"
                                                     >
@@ -117,7 +117,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="sm:hidden">
+                                            <div class="max-sm:flex max-sm:justify-between sm:hidden">
                                                 <p 
                                                     class="text-lg font-semibold max-sm:text-sm" 
                                                     v-html="item.product.min_price"
@@ -128,13 +128,14 @@
 
                                                 <!--Wishlist Item removed button-->
                                                 <a 
-                                                    class="flex cursor-pointer justify-end text-base text-[#0A49A7]" 
+                                                    class="flex cursor-pointer justify-end text-base text-[#0A49A7] max-sm:text-xs" 
                                                     @click="remove(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.remove')
                                                 </a>
 
                                                 {!! view_render_event('bagisto.shop.customers.account.wishlist.remove_button.after') !!}
+
                                             </div>
 
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.perform_actions.before') !!}
@@ -187,8 +188,7 @@
                     >
                         <img
                             src="{{ bagisto_asset('images/wishlist.png') }}"
-                            class="" alt="Empty wishlist"
-                            title=""
+                            alt="Empty wishlist"
                         >
 
                         <p class="text-xl">

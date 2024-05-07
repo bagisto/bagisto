@@ -32,7 +32,7 @@
                 <template v-else>
                     <div class="flex-auto">
                         <div class="max-md:max-w-full">
-                            <h2 class="text-2xl font-medium">
+                            <h2 class="text-2xl font-medium max-sm:text-xl">
                                 @lang('shop::app.customers.account.reviews.title')
                             </h2>
                 

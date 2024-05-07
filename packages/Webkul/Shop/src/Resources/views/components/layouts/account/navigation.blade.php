@@ -16,7 +16,7 @@
     $customer = auth()->guard('customer')->user();
 @endphp
 
-<div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] max-w-[380px] grid-cols-[1fr] gap-8 overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] max-md:max-w-full">
+<div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] max-w-[380px] grid-cols-[1fr] gap-8 overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] max-md:max-w-full max-sm:gap-5">
     <!-- Account Profile Hero Section -->
     <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-[#E9E9E9] px-5 py-[25px]">
         <div class="">
@@ -39,8 +39,8 @@
         <div class="max-md:rounded-md max-md:border max-md:border-b max-md:border-l-[1px] max-md:border-r max-md:border-t-0 max-md:border-[#E9E9E9]">
             <v-account-navigation>
                 <!-- Account Navigation Toggler -->
-                <div class="accordian-toggle select-none pb-5 max-md:flex max-md:items-center max-md:justify-between max-md:gap-x-4 max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] max-md:bg-gray-100 max-md:px-6 max-md:py-5 md:pointer-events-none">
-                    <p class="text-xl md:font-medium">@lang($menuItem['name'])</p>
+                <div class="accordian-toggle select-none pb-5 max-md:flex max-md:items-center max-md:justify-between max-md:gap-x-4 max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] max-md:bg-gray-100 max-md:px-6 max-md:py-5 max-sm:p-4 md:pointer-events-none">
+                    <p class="text-xl max-sm:text-base max-sm:font-medium md:font-medium">@lang($menuItem['name'])</p>
 
                     <span class="icon-arrow-right text-2xl md:hidden"></span>
                 </div>
@@ -55,8 +55,8 @@
 
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
-                            <div class="flex justify-between px-6 py-5 border-t border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
-                                <p class="flex items-center gap-x-4 text-lg font-medium">
+                            <div class="flex justify-between px-6 py-5 border-t border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer max-sm:p-4 {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
+                                <p class="flex items-center gap-x-4 text-lg font-medium max-sm:text-base">
                                     <span class="{{ $subMenuItem['icon'] }}  text-2xl"></span>
 
                                     @lang($subMenuItem['name'])

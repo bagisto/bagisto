@@ -14,7 +14,7 @@
             class='relative grid w-full content-start gap-2.5'
             v-if="mode != 'list'"
         >
-            <div class="group relative max-h-[300px] max-w-[291px] overflow-hidden rounded">
+            <div class="group relative max-h-[300px] max-w-[291px] overflow-hidden rounded max-sm:max-h-[204px] max-sm:max-w-[200px]">
 
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
@@ -23,7 +23,7 @@
                     :aria-label="product.name + ' '"
                 >
                     <x-shop::media.images.lazy
-                        class="after:content-[' '] relative bg-[#F5F5F5] transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
+                        class="after:content-[' '] relative bg-[#F5F5F5] transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105 max-sm:h-[204px] max-sm:w-[198px]"
                         ::src="product.base_image.medium_image_url"
                         ::key="product.id"
                         ::index="product.id"

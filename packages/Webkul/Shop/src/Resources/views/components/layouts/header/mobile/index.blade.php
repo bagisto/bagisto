@@ -13,7 +13,7 @@
         <!-- Left Navigation -->
         <div class="flex items-center gap-x-1.5">
             {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.before') !!}
-
+            
             <x-shop::drawer
                 position="left"
                 width="80%"
@@ -88,7 +88,7 @@
                 <img
                     src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                     alt="{{ config('app.name') }}"
-                    width="131"
+                    class="max-sm:h-[28px] max-sm:w-[96px]" width="131"
                     height="29"
                 >
             </a>
@@ -98,7 +98,7 @@
 
         <!-- Right Navigation -->
         <div>
-            <div class="flex items-center gap-x-5">
+            <div class="flex items-center gap-x-5 max-sm:gap-x-4">
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.compare.before') !!}
 
                 @if($showCompare)

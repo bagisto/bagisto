@@ -14,7 +14,7 @@
     >
         <div>
             <label
-                class="icon-camera absolute top-2.5 flex cursor-pointer items-center text-xl ltr:right-3 ltr:pr-3 rtl:left-3 rtl:pl-3"
+                class="icon-camera absolute top-2.5 flex cursor-pointer items-center text-xl max-sm:top-3 ltr:right-3 ltr:pr-3 rtl:left-3 rtl:pl-3"
                 aria-label="@lang('shop::app.search.images.index.search')"
                 :for="'v-image-search-' + $.uid"
                 v-if="! isSearching"
