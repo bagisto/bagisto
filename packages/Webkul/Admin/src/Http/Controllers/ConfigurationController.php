@@ -37,7 +37,24 @@ class ConfigurationController extends Controller
     {
         $tree = Tree::create();
 
-        foreach (config('core') as $item) {
+        $items = collect(config('core'))
+            ->groupBy('key')
+            ->map(function ($items) {
+                $mergedFields = [];
+
+                foreach ($items as $item) {
+                    $mergedFields = array_merge($item['fields'] ?? [], $mergedFields);
+                }
+
+                return [
+                    ...$items->last(),
+                    'fields' => $mergedFields,
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        foreach ($items as $item) {
             $tree->add($item);
         }
 
@@ -59,6 +76,8 @@ class ConfigurationController extends Controller
         );
 
         if ($groups) {
+            // dd($this->configTree, $groups);
+
             return view('admin::configuration.edit', [
                 'config' => $this->configTree,
                 'groups' => $groups,
