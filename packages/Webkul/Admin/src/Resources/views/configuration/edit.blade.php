@@ -136,14 +136,26 @@
 
                     <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                         @foreach ($item['fields'] as $field)
+                            {!! view_render_event('bagisto.admin.configuration.field-type.'.$item['key'].'.'.$field['name'].'.after') !!}
+
                             @include ('admin::configuration.field-type')
 
-                            @php ($hint = $field['title'] . '-hint')
+                            {!! view_render_event('bagisto.admin.configuration.field-type.'.$item['key'].'.'.$field['name'].'.before') !!}
 
+                            @if ($loop->last)
+                                {!! view_render_event('bagisto.admin.configuration.field-type.'.$item['key'].'.'.$field['name'].'.last', ['field' => $field]) !!}
+                            @endif
+
+                            @php ($hint = $field['title'] . '-hint')
+                            
                             @if ($hint !== __($hint))
-                                <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang($hint)
-                                </p>
+                                {!! view_render_event('bagisto.admin.configuration.field-type.'.$item['key'].'.'.$field['name'].'.hint.after') !!}
+    
+                                    <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
+                                        @lang($hint)
+                                    </p>
+
+                                {!! view_render_event('bagisto.admin.configuration.field-type.'.$item['key'].'.'.$field['name'].'.hint.before') !!}
                             @endif
                         @endforeach
                     </div>
