@@ -24,12 +24,12 @@
                     class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth max-sm:gap-4"
                 >
                     <div
-                        class="grid min-w-[120px] max-w-[120px] grid-cols-1 justify-items-center gap-4 font-medium max-sm:min-w-[80px] max-sm:max-w-[80px] max-sm:gap-1.5"
+                        class="grid min-w-[120px] max-w-[120px] grid-cols-1 justify-items-center gap-4 font-medium max-sm:min-w-[60px] max-sm:max-w-[60px] max-sm:gap-1.5 max-sm:first:ml-4"
                         v-for="category in categories"
                     >
                         <a
                             :href="category.slug"
-                            class="h-[110px] w-[110px] rounded-full bg-[#F5F5F5] max-sm:h-[80px] max-sm:w-[80px]"
+                            class="h-[110px] w-[110px] rounded-full bg-[#F5F5F5] max-sm:h-[60px] max-sm:w-[60px]"
                             :aria-label="category.name"
                         >
                             <template v-if="category.images.logo_url">
@@ -37,7 +37,7 @@
                                     ::src="category.images.logo_url"
                                     width="110"
                                     height="110"
-                                    class="rounded-full max-sm:h-[80px] max-sm:w-[80px]"
+                                    class="rounded-full max-sm:h-[60px] max-sm:w-[60px]"
                                     ::alt="category.name"
                                 />
                             </template>
@@ -48,7 +48,7 @@
                             class=""
                         >
                             <p
-                                class="text-center text-lg text-black max-sm:font-normal"
+                                class="text-center text-lg text-black max-sm:text-sm max-sm:font-normal"
                                 v-text="category.name"
                             >
                             </p>

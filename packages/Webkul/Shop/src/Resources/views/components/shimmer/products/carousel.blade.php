@@ -2,14 +2,14 @@
     <div class="flex justify-between">
         <h3 class="shimmer h-[32px] w-[200px]"></h3>
 
-        <div class="flex items-center justify-between gap-8">
+        <div class="flex items-center justify-between gap-8 max-sm:hidden">
             <span
                 class="shimmer inline-block h-6 w-6"
                 role="presentation"
             ></span>
 
             <span
-                class="shimmer inline-block h-6 w-6"
+                class="shimmer inline-block h-6 w-6 max-sm:hidden"
                 role="presentation"
             ></span>
         </div>

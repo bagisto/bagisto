@@ -21,8 +21,20 @@
                 </h2>
 
                 <div class="flex items-center justify-between gap-8">
+                    
+                    <a
+                        :href="navigationLink"
+                        v-if="navigationLink"
+                    >
+                        <p class="hidden items-center text-sm max-sm:block">
+                            @lang('shop::app.components.products.carousel.view-all')
+
+                            <span class="icon-arrow-right text-sm"></span>
+                        </p>
+                    </a>
+
                     <span
-                        class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block cursor-pointer text-2xl"
+                        class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block cursor-pointer text-2xl max-sm:hidden"
                         role="button"
                         aria-label="@lang('shop::app.components.products.carousel.previous')"
                         tabindex="0"
@@ -31,7 +43,7 @@
                     </span>
 
                     <span
-                        class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block cursor-pointer text-2xl"
+                        class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block cursor-pointer text-2xl max-sm:hidden"
                         role="button"
                         aria-label="@lang('shop::app.components.products.carousel.next')"
                         tabindex="0"
@@ -53,7 +65,7 @@
 
             <a
                 :href="navigationLink"
-                class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base max-sm:mt-0 max-sm:py-3.5"
+                class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base max-sm:mt-0 max-sm:hidden max-sm:py-3.5"
                 v-if="navigationLink"
             >
                 @lang('shop::app.components.products.carousel.view-all')

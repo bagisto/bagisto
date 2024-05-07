@@ -102,7 +102,7 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
 
-                <p class="text-base">
+                <p class="text-base max-sm:text-sm">
                     @{{ product.name }}
                 </p>
 
@@ -111,7 +111,7 @@
                 {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
 
                 <div
-                    class="flex items-center gap-2.5 text-lg font-semibold"
+                    class="flex items-center gap-2.5 text-lg font-semibold max-sm:text-base"
                     v-html="product.price_html"
                 >
                 </div>
