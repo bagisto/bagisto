@@ -39,19 +39,19 @@
 />
 
 <v-configurable
-    name="{{ $name }}"
-    value="{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}"
-    is-require="{{ $isRequired }}"
-    label="{{ trans($field['title']) }}"
-    current-locale="{{ $currentLocale }}"
+    channel-count="{{ core()->getAllChannels()->count() }}"
     channel-locale="{{ $channelLocaleInfo }}"
     current-channel="{{ $currentChannel }}"
-    channel-count="{{ core()->getAllChannels()->count() }}"
+    current-locale="{{ $currentLocale }}"
+    depend-name="{{ isset($field['depends']) ? $coreConfigRepository->getNameField($dependNameKey) : ''}}"
     field-data="{{ json_encode($field) }}"
     info="{{ trans($field['info'] ?? '') }}"
-    validations="{{ $validations }}"
+    is-require="{{ $isRequired }}"
+    label="{{ trans($field['title']) }}"
+    name="{{ $name }}"
     src="{{ Storage::url(core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
-    depend-name="{{ isset($field['depends']) ? $coreConfigRepository->getNameField($dependNameKey) : ''}}"
+    validations="{{ $validations }}"
+    value="{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}"
 >
     <div class="mb-4">
         <div class="shimmer mb-1.5 h-4 w-24"></div>
@@ -457,19 +457,19 @@
             template: '#v-configurable-template',
 
             props: [
-                'name',
-                'value',
+                'channelCount',
+                'channelLocale',
+                'currentChannel',
+                'currentLocale',
+                'dependName',
+                'fieldData',
+                'info',
                 'isRequire',
                 'label',
-                'channelLocale',
-                'currentLocale',
-                'currentChannel',
-                'channelCount',
-                'fieldData',
-                'validations',
+                'name',
                 'src',
-                'info',
-                'dependName',
+                'validations',
+                'value',
             ],
 
             data() {
