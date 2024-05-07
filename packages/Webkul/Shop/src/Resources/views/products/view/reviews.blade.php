@@ -326,7 +326,7 @@
                             >
                         </div>
                         
-                        <a
+                        <div
                             :href="file.url"
                             class="flex h-12 w-12"
                             target="_blank"
@@ -337,14 +337,15 @@
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
+                                @click="isImageZooming = !isImageZooming; activeIndex = index"
                             >
                             </video>
-                        </a>
+                        </div>
                     </template>
                 </div>
 
                 <!-- Review Images zoomer -->
-                <x-shop::modal.image-zoomer ::images="[...review.images].map((img) => img.url)" ::is-image-zooming="isImageZooming" ::initial-index="'file_'+activeIndex"></x-shop::modal.image-zoomer>
+                <x-shop::modal.image-zoomer ::attachments="attachments" ::is-image-zooming="isImageZooming" ::initial-index="'file_'+activeIndex"></x-shop::modal.image-zoomer>
             </div>
         </div>
     </script>
@@ -438,6 +439,19 @@
                     isLoading: false,
 
                     isImageZooming: false,
+                }
+            },
+
+            computed: {
+                attachments() {
+                    let data = [...this.review.images].map((file) => {
+                        return {
+                            url: file.url,
+                            type: file.type,
+                        }
+                    });
+
+                    return data;
                 }
             },
 

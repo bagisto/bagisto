@@ -38,7 +38,7 @@
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <div @click="handleOuterClick" class="absolute left-1/2 top-1/2 z-[999] h-full w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-white max-md:w-[100%]">
                             <div class="flex items-center justify-between gap-5 bg-white p-2">
-                                <span class="text-sm">@{{ getCurrentImageStatus }}</span>
+                                <span class="text-sm">@{{ getCurrentAttachmentStatus }}</span>
 
                                 <span
                                     class="icon-cancel cursor-pointer text-3xl"
@@ -56,12 +56,23 @@
                                     }"
                                 >
                                     <div
-                                        v-for="(image, index) in images"
+                                        v-for="(attachment, index) in attachments"
                                         class="h-full items-center justify-center"
                                         ref="slides"
                                     >
+                                        <video 
+                                            width="800" 
+                                            controls 
+                                            v-if="attachment.type == 'video'"
+                                        >
+                                            <source :src="attachment.url" type="video/mp4">
+                                            <source :src="attachment.url" type="video/ogg">
+                                                Your browser does not support HTML video.
+                                        </video>
+                                        
                                         <img
-                                            :src="image"
+                                            v-if="attachment.type === 'image'"
+                                            :src="attachment.url"
                                             class="max-h-full max-w-full transition-transform duration-300 ease-out"
                                             :class="{
                                                 'cursor-zoom-in': ! isZooming,
@@ -80,14 +91,14 @@
 
                                     <span
                                         class="icon-arrow-left fixed left-[10px] top-1/2 -mt-[22px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-[12px] text-[24px] font-bold text-white opacity-30 transition-all hover:opacity-100"
-                                        v-if="images?.length >= 2 && ! isZooming"
+                                        v-if="attachments?.length >= 2 && ! isZooming"
                                         @click="navigate(currentIndex -= 1)"
                                     >
                                     </span>
 
                                     <span
                                         class="icon-arrow-right fixed right-[10px] top-1/2 -mt-[22px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-[12px] text-[24px] font-bold text-white opacity-30 transition-all hover:opacity-100"
-                                        v-if="images?.length >= 2  && ! isZooming"
+                                        v-if="attachments?.length >= 2  && ! isZooming"
                                         @click="navigate(currentIndex += 1)"
                                     >
                                     </span>
@@ -105,7 +116,7 @@
             template: '#v-gallery-zoomer-template',
 
             props: {
-                images: {
+                attachments: {
                     type: Object,
 
                     required: true,
@@ -159,8 +170,8 @@
             },
             
             computed: {
-                getCurrentImageStatus() {
-                    return `${this.currentIndex} / ${this.images.length}`;
+                getCurrentAttachmentStatus() {
+                    return `${this.currentIndex} / ${this.attachments.length}`;
                 },
             },
 
@@ -178,12 +189,12 @@
                 },
 
                 navigate(index) {
-                    if (index > this.images.length) {
+                    if (index > this.attachments.length) {
                         this.currentIndex = 1;
                     }
 
                     if (index < 1) {
-                        this.currentIndex = this.images.length;
+                        this.currentIndex = this.attachments.length;
                     }
 
                     let slides = this.$refs.slides;

@@ -25,28 +25,29 @@
                         ref="swiperContainer"
                         class="flex flex-col max-h-[540px] gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
                     >
-                        <img
-                            :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${activeIndex === `image_${index}` ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
-                            v-for="(image, index) in media.images"
-                            :src="image.small_image_url"
-                            alt="{{ $product->name }}"
-                            width="100"
-                            height="100"
-                            @click="change(image, `image_${index}`)"
-                        />
+                        <template v-for="(media, index) in [...media.images, ...media.videos]">
+                            <video
+                                v-if="media.type == 'videos'"
+                                :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${activeIndex === `video_${index}` ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
+                                @click="change(media, `video_${index}`)"
+                                alt="{{ $product->name }}"
+                            >
+                                <source
+                                    :src="media.video_url"
+                                    type="video/mp4"
+                                />
+                            </video>
 
-                        <!-- Need to Set Play Button  -->
-                        <video
-                            :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${activeIndex === `video_${index}` ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
-                            v-for="(video, index) in media.videos"
-                            @click="change(video, `video_${index}`)"
-                            alt="{{ $product->name }}"
-                        >
-                            <source
-                                :src="video.video_url"
-                                type="video/mp4"
+                            <img
+                                v-else
+                                :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${activeIndex === `image_${index}` ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
+                                :src="media.small_image_url"
+                                alt="{{ $product->name }}"
+                                width="100"
+                                height="100"
+                                @click="change(media, `image_${index}`)"
                             />
-                        </video>
+                        </template>
                     </div>
 
                     <span
@@ -92,6 +93,7 @@
                             width="475"
                             @loadeddata="onMediaLoad()"
                             alt="{{ $product->name }}"
+                            @click="isImageZooming = !isImageZooming"
                         >
                             <source
                                 :src="baseFile.path"
@@ -111,9 +113,9 @@
                     @click="isImageZooming = !isImageZooming"
                 />
             </div>
-
+            
             <!-- Gallery Images Zoomer -->
-            <x-shop::modal.image-zoomer ::images="[...media.images].map((img) => img.original_image_url)" ::is-image-zooming="isImageZooming" ::initial-index="'image_'+activeIndex"></x-shop::modal.image-zoomer>
+            <x-shop::modal.image-zoomer ::attachments="attachments" ::is-image-zooming="isImageZooming" ::initial-index="activeIndex"></x-shop::modal.image-zoomer>
         </div>
     </script>
 
@@ -158,7 +160,7 @@
                     },
                 },
             },
-
+        
             mounted() {
                 if (this.media.images.length) {
                     this.activeIndex = 'image_0';
@@ -180,7 +182,15 @@
                     if (this.media.images.length) {
                         return [...this.media.images, ...this.media.videos].length > 5;
                     }
-                }
+                },
+
+                attachments() {
+                    return [...this.media.images, ...this.media.videos].map(media => ({
+                        url: media.type === 'videos' ? media.video_url : media.original_image_url,
+                        
+                        type: media.type === 'videos' ? 'video' : 'image',
+                    }));
+                },
             },
 
             methods: {
