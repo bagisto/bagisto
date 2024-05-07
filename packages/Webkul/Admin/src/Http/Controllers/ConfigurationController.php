@@ -43,7 +43,14 @@ class ConfigurationController extends Controller
                 $mergedFields = [];
 
                 foreach ($items as $item) {
-                    $mergedFields = array_merge($item['fields'] ?? [], $mergedFields);
+                    if (! isset($item['fields'])) {
+                        continue;
+                    }
+
+                    $mergedFields = [
+                        ...$item['fields'],
+                        ...$mergedFields,
+                    ];
                 }
 
                 return [
