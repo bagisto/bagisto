@@ -257,7 +257,7 @@ abstract class DataGrid
      */
     public function setExportFile($records, $format = 'csv')
     {
-        $this->dispatchEvent('set_export_file.before', $this);
+        $this->dispatchEvent('set_export_file.before', [$this, $records, $format]);
 
         $this->setExportable(true);
 
@@ -279,7 +279,7 @@ abstract class DataGrid
     /**
      * Process the datagrid.
      *
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Illuminate\Http\JsonResponse
      */
     public function process()
     {
@@ -596,9 +596,12 @@ abstract class DataGrid
     }
 
     /**
-     * To json.
+     * To json. The reason for deprecation is that it is not an action returning JSON; instead,
+     * it is a process method which returns a download as well as a JSON response.
      *
      * @deprecated
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Illuminate\Http\JsonResponse
      */
     public function toJson()
     {
