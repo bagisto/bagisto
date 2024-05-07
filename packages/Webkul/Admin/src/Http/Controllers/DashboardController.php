@@ -3,6 +3,8 @@
 namespace Webkul\Admin\Http\Controllers;
 
 use Webkul\Admin\Helpers\Dashboard;
+use Webkul\Menu\Menu\MenuGroup;
+use Webkul\Menu\Menu\MenuItem;
 
 class DashboardController extends Controller
 {
@@ -37,6 +39,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        // dd([
+        //     MenuGroup::make(static fn () => __('moonshine::ui.resource.system'), [
+        //         MenuItem::make('Documentation', 'https://moonshine-laravel.com')
+        //             ->badge(fn () => 'Check'),
+        //         MenuItem::make('Documentation', 'https://moonshine-laravel.com')
+        //         ->badge(fn () => 'Check'),
+        //     ]),
+
+        // ]);
+
         return view('admin::dashboard.index')->with([
             'startDate' => $this->dashboardHelper->getStartDate(),
             'endDate'   => $this->dashboardHelper->getEndDate(),
