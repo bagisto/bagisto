@@ -60,7 +60,7 @@ class CustomerController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(CustomerDataGrid::class)->toJson();
+            return app(CustomerDataGrid::class)->process();
         }
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
@@ -247,13 +247,13 @@ class CustomerController extends Controller
         if (request()->ajax()) {
             switch (request()->query('type')) {
                 case self::ORDERS:
-                    return app(OrdersDataGrid::class)->toJson();
+                    return app(OrdersDataGrid::class)->process();
 
                 case self::INVOICES:
-                    return app(InvoicesDatagrid::class)->toJson();
+                    return app(InvoicesDatagrid::class)->process();
 
                 case self::REVIEWS:
-                    return app(ReviewDatagrid::class)->toJson();
+                    return app(ReviewDatagrid::class)->process();
             }
         }
 

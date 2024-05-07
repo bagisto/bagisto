@@ -33,7 +33,7 @@ class InvoiceController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(OrderInvoicesDataGrid::class)->toJson();
+            return app(OrderInvoicesDataGrid::class)->process();
         }
 
         return view('admin::sales.invoices.index');

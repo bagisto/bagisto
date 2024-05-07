@@ -30,7 +30,7 @@ class ShipmentController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(OrderShipmentsDataGrid::class)->toJson();
+            return app(OrderShipmentsDataGrid::class)->process();
         }
 
         return view('admin::sales.shipments.index');

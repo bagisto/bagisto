@@ -38,7 +38,7 @@ class TransactionController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(OrderTransactionsDataGrid::class)->toJson();
+            return app(OrderTransactionsDataGrid::class)->process();
         }
 
         $paymentMethods = Payment::getSupportedPaymentMethods();

@@ -27,7 +27,7 @@ class ChannelController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(ChannelDataGrid::class)->toJson();
+            return app(ChannelDataGrid::class)->process();
         }
 
         return view('admin::settings.channels.index');

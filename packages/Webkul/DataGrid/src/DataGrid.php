@@ -277,6 +277,22 @@ abstract class DataGrid
     }
 
     /**
+     * Process the datagrid.
+     *
+     * @return void
+     */
+    public function process()
+    {
+        $this->prepare();
+
+        if ($this->getExportable()) {
+            return $this->downloadExportFile();
+        }
+
+        return response()->json($this->formatData());
+    }
+
+    /**
      * Validated request.
      */
     private function validatedRequest(): array
@@ -581,6 +597,8 @@ abstract class DataGrid
 
     /**
      * To json.
+     *
+     * @deprecated
      */
     public function toJson()
     {

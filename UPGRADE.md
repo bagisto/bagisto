@@ -455,6 +455,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + private function prepare(): void
 ```
 
+2. We have deprecated the 'toJson' method. Instead of 'toJson', please use the 'process' method.
+
 <a name="notification"></a>
 ### Notification
 

@@ -28,7 +28,7 @@ class SitemapController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(SitemapDataGrid::class)->toJson();
+            return app(SitemapDataGrid::class)->process();
         }
 
         return view('admin::marketing.search-seo.sitemaps.index');

@@ -28,7 +28,7 @@ class InventorySourceController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(InventorySourcesDataGrid::class)->toJson();
+            return app(InventorySourcesDataGrid::class)->process();
         }
 
         return view('admin::settings.inventory-sources.index');

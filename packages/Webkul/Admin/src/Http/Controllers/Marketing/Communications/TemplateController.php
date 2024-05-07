@@ -27,7 +27,7 @@ class TemplateController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(EmailTemplateDataGrid::class)->toJson();
+            return app(EmailTemplateDataGrid::class)->process();
         }
 
         return view('admin::marketing.communications.templates.index');
