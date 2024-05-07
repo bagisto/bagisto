@@ -27,7 +27,7 @@ class CartRuleCouponController extends Controller
      */
     public function index(int $id)
     {
-        return app(CartRuleCouponDataGrid::class)->process();
+        return datagrid(CartRuleCouponDataGrid::class)->process();
     }
 
     /**

@@ -41,7 +41,7 @@ class OrderController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(OrderDataGrid::class)->process();
+            return datagrid(OrderDataGrid::class)->process();
         }
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);

@@ -32,7 +32,7 @@ class AttributeController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(AttributeDataGrid::class)->process();
+            return datagrid(AttributeDataGrid::class)->process();
         }
 
         return view('admin::catalog.attributes.index');

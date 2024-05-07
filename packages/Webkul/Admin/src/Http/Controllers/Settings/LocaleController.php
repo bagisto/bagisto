@@ -26,7 +26,7 @@ class LocaleController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(LocalesDataGrid::class)->process();
+            return datagrid(LocalesDataGrid::class)->process();
         }
 
         return view('admin::settings.locales.index');

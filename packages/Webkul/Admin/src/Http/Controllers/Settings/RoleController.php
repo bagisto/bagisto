@@ -30,7 +30,7 @@ class RoleController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(RolesDataGrid::class)->process();
+            return datagrid(RolesDataGrid::class)->process();
         }
 
         return view('admin::settings.roles.index');
