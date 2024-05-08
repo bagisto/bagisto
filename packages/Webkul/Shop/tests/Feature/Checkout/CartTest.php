@@ -1,12 +1,18 @@
 <?php
 
 use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Tax\Models\TaxCategory;
+use Webkul\Tax\Models\TaxMap;
+use Webkul\Tax\Models\TaxRate;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
@@ -2256,4 +2262,621 @@ it('should add a virtual product to the cart for customer', function () {
     $this->assertPrice($product->price, $response['data']['items'][0]['price']);
 
     $this->assertPrice($product->price * $quantity, $response['data']['grand_total']);
+});
+
+it('should check including tax rate when add a product to the cart based on shipping address', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => 100,
+            ],
+        ],
+    ]))->getSimpleProductFactory()->create();
+
+    $taxRate = TaxRate::factory()->create([
+        'country' => 'IN',
+        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+    ]);
+
+    $taxCategory = TaxCategory::factory()->create();
+
+    TaxMap::factory()->create([
+        'tax_category_id' => $taxCategory->id,
+        'tax_rate_id'     => $taxRate->id,
+    ]);
+
+    CoreConfig::factory()->create([
+        'code'  => 'sales.taxes.categories.shipping',
+        'value' => $taxCategory->id,
+    ])->create([
+        'code'  => 'sales.taxes.categories.product',
+        'value' => $taxCategory->id,
+    ])->create([
+        'code'  => 'sales.taxes.calculation.based_on',
+        'value' => 'shipping_address',
+    ])->create([
+        'code'  => 'sales.taxes.calculation.product_prices',
+        'value' => 'including_tax',
+    ])->create([
+        'code'  => 'sales.taxes.calculation.shipping_prices',
+        'value' => 'including_tax',
+    ]);
+
+    $cart = cart()->addProduct($product, [
+        'product_id' => $product->id,
+        'quantity'   => 1,
+    ]);
+
+    $inclTax = $product->price - ($product->price / (1 + ($taxRate->tax_rate / 100)));
+
+    // Act and Assert.
+    $response = postJson(route('shop.api.checkout.cart.estimate_shipping'), [
+        'country'  => $taxRate->country,
+        'state'    => $taxRate->state,
+        'postcode' => fake()->postcode(),
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.cart.id', $cart->id)
+        ->assertJsonPath('data.cart.formatted_tax_total', core()->formatPrice($inclTax))
+        ->assertJsonPath('data.cart.formatted_sub_total_incl_tax', core()->formatPrice($product->price))
+        ->assertJsonPath('data.cart.formatted_grand_total', core()->formatPrice($product->price))
+        ->assertJsonPath('data.cart.formatted_sub_total', core()->formatPrice($product->price - $inclTax))
+        ->assertJsonPath('data.cart.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.cart.items.0.quantity', 1)
+        ->assertJsonPath('data.cart.items.0.type', $product->type);
+
+    $this->assertPrice($inclTax, $response->json('data.cart.tax_total'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.sub_total_incl_tax'));
+
+    $this->assertPrice($product->price - $inclTax, $response->json('data.cart.sub_total'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.grand_total'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.items.0.price_incl_tax'));
+
+    $this->assertPrice($product->price - $inclTax, $response->json('data.cart.items.0.price'));
+});
+
+it('should check including tax rate when add a product to the cart based on billing address', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => 100,
+            ],
+        ],
+    ]))->getSimpleProductFactory()->create();
+
+    $taxRate = TaxRate::factory()->create([
+        'country' => 'IN',
+        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+    ]);
+
+    $taxCategory = TaxCategory::factory()->create();
+
+    TaxMap::factory()->create([
+        'tax_category_id' => $taxCategory->id,
+        'tax_rate_id'     => $taxRate->id,
+    ]);
+
+    CoreConfig::factory()->create([
+        'code'  => 'sales.taxes.categories.shipping',
+        'value' => $taxCategory->id,
+    ])->create([
+        'code'  => 'sales.taxes.categories.product',
+        'value' => $taxCategory->id,
+    ])->create([
+        'code'  => 'sales.taxes.calculation.based_on',
+        'value' => 'billing_address',
+    ])->create([
+        'code'  => 'sales.taxes.calculation.product_prices',
+        'value' => 'including_tax',
+    ])->create([
+        'code'  => 'sales.taxes.calculation.shipping_prices',
+        'value' => 'including_tax',
+    ]);
+
+    $cart = cart()->addProduct($product, [
+        'product_id' => $product->id,
+        'quantity'   => 1,
+    ]);
+
+    CartAddress::factory()->create([
+        'cart_id'          => $cart->id,
+        'country'          => $taxRate->country,
+        'state'            => $taxRate->state,
+        'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+        'use_for_shipping' => true,
+    ]);
+
+    CartAddress::factory()->create([
+        'cart_id'          => $cart->id,
+        'country'          => $taxRate->country,
+        'state'            => $taxRate->state,
+        'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+        'use_for_shipping' => true,
+    ]);
+
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
+
+    $inclTax = $product->price - ($product->price / (1 + ($taxRate->tax_rate / 100)));
+
+    // Act and Assert.
+    $response = getJson(route('shop.checkout.onepage.summary'))
+        ->assertOk()
+        ->assertJsonPath('data.id', $cart->id)
+        ->assertJsonPath('data.formatted_tax_total', core()->formatPrice($inclTax))
+        ->assertJsonPath('data.formatted_sub_total_incl_tax', core()->formatPrice($product->price))
+        ->assertJsonPath('data.formatted_grand_total', core()->formatPrice($product->price))
+        ->assertJsonPath('data.formatted_sub_total', core()->formatPrice($product->price - $inclTax))
+        ->assertJsonPath('data.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.items.0.quantity', 1)
+        ->assertJsonPath('data.items.0.type', $product->type);
+
+    $this->assertPrice($inclTax, $response->json('data.tax_total'));
+
+    $this->assertPrice($product->price, $response->json('data.sub_total_incl_tax'));
+
+    $this->assertPrice($product->price - $inclTax, $response->json('data.sub_total'));
+
+    $this->assertPrice($product->price, $response->json('data.grand_total'));
+
+    $this->assertPrice($product->price, $response->json('data.items.0.price_incl_tax'));
+
+    $this->assertPrice($product->price - $inclTax, $response->json('data.items.0.price'));
+});
+
+it('should check including tax rate when add a product to the cart based on shipping origin', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => 100,
+            ],
+        ],
+    ]))->getSimpleProductFactory()->create();
+
+    $taxRate = TaxRate::factory()->create([
+        'country' => 'IN',
+        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+    ]);
+
+    $taxCategory = TaxCategory::factory()->create();
+
+    TaxMap::factory()->create([
+        'tax_category_id' => $taxCategory->id,
+        'tax_rate_id'     => $taxRate->id,
+    ]);
+
+    CoreConfig::factory()->create([
+        'code'         => 'sales.shipping.origin.country',
+        'value'        => $taxRate->country,
+        'channel_code' => 'default',
+        'locale_code'  => 'en',
+    ])->create([
+        'code'         => 'sales.shipping.origin.state',
+        'value'        => $taxRate->state,
+        'channel_code' => 'default',
+        'locale_code'  => 'en',
+    ])->create([
+        'code'         => 'sales.shipping.origin.city',
+        'value'        => fake()->city(),
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.address',
+        'value'        => fake()->address(),
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.store_name',
+        'value'        => 'DEMO STORE',
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.contact',
+        'value'        => '1234567890',
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.bank_details',
+        'value'        => 'TEST BANK',
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.zipcode',
+        'value'        => '123456',
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.taxes.categories.shipping',
+        'value'        => $taxCategory->id,
+    ])->create([
+        'code'         => 'sales.taxes.categories.product',
+        'value'        => $taxCategory->id,
+    ])->create([
+        'code'         => 'sales.taxes.calculation.based_on',
+        'value'        => 'shipping_origin',
+    ])->create([
+        'code'         => 'sales.taxes.calculation.product_prices',
+        'value'        => 'including_tax',
+    ])->create([
+        'code'         => 'sales.taxes.calculation.shipping_prices',
+        'value'        => 'including_tax',
+    ]);
+
+    $cart = cart()->addProduct($product, [
+        'product_id' => $product->id,
+        'quantity'   => 1,
+    ]);
+
+    $inclTax = $product->price - ($product->price / (1 + ($taxRate->tax_rate / 100)));
+
+    // Act and Assert.
+    $response = postJson(route('shop.api.checkout.cart.estimate_shipping'), [
+        'country'  => $taxRate->country,
+        'state'    => $taxRate->state,
+        'postcode' => '123456',
+    ]);
+
+    $response->assertOk()
+        ->assertJsonPath('data.cart.id', $cart->id)
+        ->assertJsonPath('data.cart.formatted_tax_total', core()->formatPrice($inclTax))
+        ->assertJsonPath('data.cart.formatted_sub_total_incl_tax', core()->formatPrice($product->price))
+        ->assertJsonPath('data.cart.formatted_grand_total', core()->formatPrice($product->price))
+        ->assertJsonPath('data.cart.formatted_sub_total', core()->formatPrice($product->price - $inclTax))
+        ->assertJsonPath('data.cart.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.cart.items.0.quantity', 1)
+        ->assertJsonPath('data.cart.items.0.type', $product->type);
+
+    $this->assertPrice($inclTax, $response->json('data.cart.tax_total'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.sub_total_incl_tax'));
+
+    $this->assertPrice($product->price - $inclTax, $response->json('data.cart.sub_total'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.grand_total'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.items.0.price_incl_tax'));
+
+    $this->assertPrice($product->price - $inclTax, $response->json('data.cart.items.0.price'));
+});
+
+it('should check excluding tax rate when add a product to the cart based on billing address', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => 100,
+            ],
+        ],
+    ]))->getSimpleProductFactory()->create();
+
+    $taxRate = TaxRate::factory()->create([
+        'country' => 'IN',
+        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+    ]);
+
+    $taxCategory = TaxCategory::factory()->create();
+
+    TaxMap::factory()->create([
+        'tax_category_id' => $taxCategory->id,
+        'tax_rate_id'     => $taxRate->id,
+    ]);
+
+    CoreConfig::factory()->create([
+        'code'  => 'sales.taxes.categories.shipping',
+        'value' => $taxCategory->id,
+    ])->create([
+        'code'  => 'sales.taxes.categories.product',
+        'value' => $taxCategory->id,
+    ])->create([
+        'code'  => 'sales.taxes.calculation.based_on',
+        'value' => 'billing_address',
+    ])->create([
+        'code'  => 'sales.taxes.calculation.product_prices',
+        'value' => 'excluding_tax',
+    ])->create([
+        'code'  => 'sales.taxes.calculation.shipping_prices',
+        'value' => 'excluding_tax',
+    ]);
+
+    $cart = cart()->addProduct($product, [
+        'product_id' => $product->id,
+        'quantity'   => 1,
+    ]);
+
+    CartAddress::factory()->create([
+        'cart_id'          => $cart->id,
+        'country'          => $taxRate->country,
+        'state'            => $taxRate->state,
+        'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+        'use_for_shipping' => true,
+    ]);
+
+    CartAddress::factory()->create([
+        'cart_id'          => $cart->id,
+        'country'          => $taxRate->country,
+        'state'            => $taxRate->state,
+        'address_type'     => CartAddress::ADDRESS_TYPE_BILLING,
+        'use_for_shipping' => true,
+    ]);
+
+    cart()->setCart($cart);
+
+    cart()->collectTotals();
+
+    $exclTax = ($taxRate->tax_rate / 100) * $product->price;
+
+    // Act and Assert.
+    $response = getJson(route('shop.checkout.onepage.summary'))
+        ->assertOk()
+        ->assertJsonPath('data.id', $cart->id)
+        ->assertJsonPath('data.formatted_tax_total', core()->formatPrice($exclTax))
+        ->assertJsonPath('data.formatted_sub_total_incl_tax', core()->formatPrice($product->price + $exclTax))
+        ->assertJsonPath('data.formatted_grand_total', core()->formatPrice($product->price + $exclTax))
+        ->assertJsonPath('data.formatted_sub_total', core()->formatPrice($product->price))
+        ->assertJsonPath('data.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.items.0.quantity', 1)
+        ->assertJsonPath('data.items.0.type', $product->type);
+
+    $this->assertPrice($exclTax, $response->json('data.tax_total'));
+
+    $this->assertPrice($product->price + $exclTax, $response->json('data.sub_total_incl_tax'));
+
+    $this->assertPrice($product->price, $response->json('data.sub_total'));
+
+    $this->assertPrice($product->price + $exclTax, $response->json('data.grand_total'));
+
+    $this->assertPrice($product->price + $exclTax, $response->json('data.items.0.price_incl_tax'));
+
+    $this->assertPrice($product->price, $response->json('data.items.0.price'));
+});
+
+it('should check excluding tax rate when add a product to the cart based on shipping address', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => 100,
+            ],
+        ],
+    ]))->getSimpleProductFactory()->create();
+
+    $taxRate = TaxRate::factory()->create([
+        'country' => 'IN',
+        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+    ]);
+
+    $taxCategory = TaxCategory::factory()->create();
+
+    TaxMap::factory()->create([
+        'tax_category_id' => $taxCategory->id,
+        'tax_rate_id'     => $taxRate->id,
+    ]);
+
+    CoreConfig::factory()->create([
+        'code'  => 'sales.taxes.categories.shipping',
+        'value' => $taxCategory->id,
+    ])->create([
+        'code'  => 'sales.taxes.categories.product',
+        'value' => $taxCategory->id,
+    ])->create([
+        'code'  => 'sales.taxes.calculation.based_on',
+        'value' => 'shipping_address',
+    ])->create([
+        'code'  => 'sales.taxes.calculation.product_prices',
+        'value' => 'excluding_tax',
+    ])->create([
+        'code'  => 'sales.taxes.calculation.shipping_prices',
+        'value' => 'excluding_tax',
+    ]);
+
+    $cart = cart()->addProduct($product, [
+        'product_id' => $product->id,
+        'quantity'   => 1,
+    ]);
+
+    $exclTax = ($taxRate->tax_rate / 100) * $product->price;
+
+    // Act and Assert.
+    $response = postJson(route('shop.api.checkout.cart.estimate_shipping'), [
+        'country'  => $taxRate->country,
+        'state'    => $taxRate->state,
+        'postcode' => fake()->postcode(),
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.cart.id', $cart->id)
+        ->assertJsonPath('data.cart.formatted_tax_total', core()->formatPrice($exclTax))
+        ->assertJsonPath('data.cart.formatted_sub_total_incl_tax', core()->formatPrice($product->price + $exclTax))
+        ->assertJsonPath('data.cart.formatted_grand_total', core()->formatPrice($product->price + $exclTax))
+        ->assertJsonPath('data.cart.formatted_sub_total', core()->formatPrice($product->price))
+        ->assertJsonPath('data.cart.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.cart.items.0.quantity', 1)
+        ->assertJsonPath('data.cart.items.0.type', $product->type);
+
+    $this->assertPrice($exclTax, $response->json('data.cart.tax_total'));
+
+    $this->assertPrice($product->price + $exclTax, $response->json('data.cart.sub_total_incl_tax'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.sub_total'));
+
+    $this->assertPrice($product->price + $exclTax, $response->json('data.cart.grand_total'));
+
+    $this->assertPrice($product->price + $exclTax, $response->json('data.cart.items.0.price_incl_tax'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.items.0.price'));
+});
+
+it('should check excluding tax rate when add a product to the cart based on shipping origin', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => 100,
+            ],
+        ],
+    ]))->getSimpleProductFactory()->create();
+
+    $taxRate = TaxRate::factory()->create([
+        'country' => 'IN',
+        'state'   => fake()->randomElement(['UP', 'DL', 'HR', 'PB', 'RJ']),
+    ]);
+
+    $taxCategory = TaxCategory::factory()->create();
+
+    TaxMap::factory()->create([
+        'tax_category_id' => $taxCategory->id,
+        'tax_rate_id'     => $taxRate->id,
+    ]);
+
+    CoreConfig::factory()->create([
+        'code'         => 'sales.shipping.origin.country',
+        'value'        => $taxRate->country,
+        'channel_code' => 'default',
+        'locale_code'  => 'en',
+    ])->create([
+        'code'         => 'sales.shipping.origin.state',
+        'value'        => $taxRate->state,
+        'channel_code' => 'default',
+        'locale_code'  => 'en',
+    ])->create([
+        'code'         => 'sales.shipping.origin.city',
+        'value'        => fake()->city(),
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.address',
+        'value'        => fake()->address(),
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.store_name',
+        'value'        => 'DEMO STORE',
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.contact',
+        'value'        => '1234567890',
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.bank_details',
+        'value'        => 'TEST BANK',
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.shipping.origin.zipcode',
+        'value'        => '123456',
+        'channel_code' => 'default',
+    ])->create([
+        'code'         => 'sales.taxes.categories.shipping',
+        'value'        => $taxCategory->id,
+    ])->create([
+        'code'         => 'sales.taxes.categories.product',
+        'value'        => $taxCategory->id,
+    ])->create([
+        'code'         => 'sales.taxes.calculation.based_on',
+        'value'        => 'shipping_origin',
+    ])->create([
+        'code'         => 'sales.taxes.calculation.product_prices',
+        'value'        => 'excluding_tax',
+    ])->create([
+        'code'         => 'sales.taxes.calculation.shipping_prices',
+        'value'        => 'excluding_tax',
+    ]);
+
+    $cart = cart()->addProduct($product, [
+        'product_id' => $product->id,
+        'quantity'   => 1,
+    ]);
+
+    $exclTax = ($taxRate->tax_rate / 100) * $product->price;
+
+    // Act and Assert.
+    $response = postJson(route('shop.api.checkout.cart.estimate_shipping'), [
+        'country'  => $taxRate->country,
+        'state'    => $taxRate->state,
+        'postcode' => '123456',
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.cart.id', $cart->id)
+        ->assertJsonPath('data.cart.formatted_tax_total', core()->formatPrice($exclTax))
+        ->assertJsonPath('data.cart.formatted_sub_total_incl_tax', core()->formatPrice($product->price + $exclTax))
+        ->assertJsonPath('data.cart.formatted_grand_total', core()->formatPrice($product->price + $exclTax))
+        ->assertJsonPath('data.cart.formatted_sub_total', core()->formatPrice($product->price))
+        ->assertJsonPath('data.cart.items.0.id', $cart->items->first()->id)
+        ->assertJsonPath('data.cart.items.0.quantity', 1)
+        ->assertJsonPath('data.cart.items.0.type', $product->type);
+
+    $this->assertPrice($exclTax, $response->json('data.cart.tax_total'));
+
+    $this->assertPrice($product->price + $exclTax, $response->json('data.cart.sub_total_incl_tax'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.sub_total'));
+
+    $this->assertPrice($product->price + $exclTax, $response->json('data.cart.grand_total'));
+
+    $this->assertPrice($product->price + $exclTax, $response->json('data.cart.items.0.price_incl_tax'));
+
+    $this->assertPrice($product->price, $response->json('data.cart.items.0.price'));
 });

@@ -16,21 +16,10 @@
         'isVisible' => true,
     ])->map(function ($value, $key) {
         if ($key == 'options') {
-            if (is_callable($value)) {
-                return collect($value())->map(function ($option) {
-                    return [
-                        'title'   => trans($option['title']),
-                        'value'   => $option['value'],
-                    ];
-                })->toArray();
-            }
-
-            return collect($value)->map(function ($option) {
-                return [
-                    'value'   => $option['value'],
-                    'title'   => trans($option['title']),
-                ];
-            })->toArray();
+            return collect(is_callable($value) ? $value() : $value)->map(fn ($option) => [
+                'title' => trans($option['title']),
+                'value' => $option['value'],
+            ])->toArray();
         }
 
         return $value;
@@ -50,19 +39,19 @@
 />
 
 <v-configurable
-    name="{{ $name }}"
-    value="{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}"
-    is-require="{{ $isRequired }}"
-    label="{{ trans($field['title']) }}"
-    current-locale="{{ $currentLocale }}"
+    channel-count="{{ core()->getAllChannels()->count() }}"
     channel-locale="{{ $channelLocaleInfo }}"
     current-channel="{{ $currentChannel }}"
-    channel-count="{{ core()->getAllChannels()->count() }}"
+    current-locale="{{ $currentLocale }}"
+    depend-name="{{ isset($field['depends']) ? $coreConfigRepository->getNameField($dependNameKey) : ''}}"
     field-data="{{ json_encode($field) }}"
     info="{{ trans($field['info'] ?? '') }}"
-    validations="{{ $validations }}"
+    is-require="{{ $isRequired }}"
+    label="{{ trans($field['title']) }}"
+    name="{{ $name }}"
     src="{{ Storage::url(core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
-    depend-name="{{ isset($field['depends']) ? $coreConfigRepository->getNameField($dependNameKey) : ''}}"
+    validations="{{ $validations }}"
+    value="{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}"
 >
     <div class="mb-4">
         <div class="shimmer mb-1.5 h-4 w-24"></div>
@@ -76,7 +65,7 @@
         type="text/x-template"
         id="v-configurable-template"
     >
-        <x-admin::form.control-group>
+        <x-admin::form.control-group class="last:!mb-0">
             <!-- Title of the input field -->
             <div    
                 v-if="field.isVisible"
@@ -194,6 +183,7 @@
                     :label="label"
                 >
                     <select
+                        :id="name"
                         :name="name"
                         v-bind="data.field"
                         :class="[data.errors.length ? 'border border-red-500' : '']"
@@ -327,7 +317,6 @@
                             ::id="`${name}[delete]`"
                             ::name="`${name}[delete]`"
                             value="1"
-                            ref="field"
                         />
         
                         <label
@@ -341,7 +330,7 @@
             </template>
 
             <template v-if="field.type == 'country' && field.isVisible">
-                <v-country ref="countryRef">
+                <v-country :selected-country="value">
                     <template v-slot:default="{ changeCountry }">
                         <x-admin::form.control-group class="flex">
                             <x-admin::form.control-group.control
@@ -369,8 +358,8 @@
             </template>
         
             <!-- State select Vue component -->
-            <template v-if="field.type == 'country' && field.isVisible">
-                <v-state ref="stateRef">
+            <template v-if="field.type == 'state' && field.isVisible">
+                <v-state>
                     <template v-slot:default="{ countryStates, country, haveStates, isStateComponenetLoaded }">
                         <div v-if="isStateComponenetLoaded">
                             <template v-if="haveStates()">
@@ -468,19 +457,19 @@
             template: '#v-configurable-template',
 
             props: [
-                'name',
-                'value',
+                'channelCount',
+                'channelLocale',
+                'currentChannel',
+                'currentLocale',
+                'dependName',
+                'fieldData',
+                'info',
                 'isRequire',
                 'label',
-                'channelLocale',
-                'currentLocale',
-                'currentChannel',
-                'channelCount',
-                'fieldData',
-                'validations',
+                'name',
                 'src',
-                'info',
-                'dependName',
+                'validations',
+                'value',
             ],
 
             data() {
@@ -490,39 +479,45 @@
             },
 
             mounted() {
-                if (this.dependName) {
-                    const dependElement = document.getElementById(this.dependName);
-
-                    if (dependElement) {
-                        dependElement.addEventListener('change', (event) => {
-                            this.field['isVisible'] = 
-                                event.target.type === 'checkbox' 
-                                ? event.target.checked
-                                : this.validations.split(',').slice(1).includes(event.target.value);
-                        });
-                    }
-
-                    dependElement.dispatchEvent(new Event('change'));
+                if (! this.dependName) {
+                    return;
                 }
+
+                const dependElement = document.getElementById(this.dependName);
+
+                if (! dependElement) {
+                    return;
+                }
+
+                dependElement.addEventListener('change', (event) => {
+                    this.field['isVisible'] = 
+                        event.target.type === 'checkbox' 
+                        ? event.target.checked
+                        : this.validations.split(',').slice(1).includes(event.target.value);
+                });
+
+                dependElement.dispatchEvent(new Event('change'));
             },
         });
 
         app.component('v-country', {
             template: '#v-country-template',
 
+            props: ['selectedCountry'],
+
             data() {
                 return {
-                    country: "{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}",
+                    country: this.selectedCountry,
                 };
             },
 
             mounted() {
-                this.$root.$refs.stateRef.country = this.country;
+                this.$emitter.emit('country-changed', this.country);
             },
 
             methods: {
                 changeCountry(selectedCountryCode) {
-                    this.$root.$refs.stateRef.country = selectedCountryCode;
+                    this.$emitter.emit('country-changed', selectedCountryCode);
                 },
             },
         });
@@ -541,6 +536,8 @@
             },
 
             created() {
+                this.$emitter.on('country-changed', (value) => this.country = value);
+
                 setTimeout(() => {
                     this.isStateComponenetLoaded = true;
                 }, 0);

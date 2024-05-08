@@ -10,17 +10,41 @@
 
 ## Medium Impact Changes
 
+<<<<<<< HEAD
 - [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
 - [The System Configuration Updates](#the-system-config-update)
+=======
+<<<<<<< HEAD
+- [The System Configuration Updates](#the-system-config-update)
+=======
+<div class="content-list" markdown="1">
+
+- [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
+>>>>>>> upstream/master
+>>>>>>> b09c6bf48d587e071620de8202c53fd99cbdefc2
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The Checkout Tables Schema Updates](#the-checkout-tables-schema-updates)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
+<<<<<<< HEAD
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
 - [Shop Event Parameter Updates](#event-parameter-updated)
 - [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
+=======
+<<<<<<< HEAD
+- [Shop Event Parameter Updates](#event-parameter-updated)
+- [Admin Customized Datagrid Header Parameters Updated](#admin-customized-datagrid-header-parameter-updated)
+- [Admin Customized Datagrid Body Parameters updated](#admin-customized-datagrid-body-parameter-updated)
+- [Shop Customized Datagrid Header Parameters Updated](#shop-customized-datagrid-header-parameter-updated)
+- [Shop Customized Datagrid Body Parameters Updated](#shop-customized-datagrid-body-parameter-updated)
+- [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
+=======
+- [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
+- [Shop Event parameter updated](#event-parameter-updated)
+>>>>>>> upstream/master
+>>>>>>> b09c6bf48d587e071620de8202c53fd99cbdefc2
 
 ## Low Impact Changes
 
@@ -82,7 +106,12 @@ There is no dependency needed to be updated at for this upgrade.
 <a name="Admin"></a>
 ### Admin
 
+<<<<<<< HEAD
 <a name="the-system-config-update"></a>
+=======
+<<<<<<< HEAD
+<a name="The System Configuration Updates"></a>
+>>>>>>> b09c6bf48d587e071620de8202c53fd99cbdefc2
 #### The System Configuration Updates
 
 **Impact Probability: Medium**
@@ -145,6 +174,12 @@ In this example, the `repository` option has been replaced with `options`, which
 - Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
 + Route::post('update-totals/{order_id}', 'updateTotals')->name('admin.sales.refunds.update_totals');
 
+<<<<<<< HEAD
+=======
+<a name="admin-customized-datagrid-header-parameter-updated"></a>
+####  Admin Customized Datagrid Header Parameters Updated
+=======
+>>>>>>> b09c6bf48d587e071620de8202c53fd99cbdefc2
 <a name="renamed-admin-view-render-event-names"></a>
 #### Admin View render event Names updated
 
@@ -167,7 +202,12 @@ In this example, the `repository` option has been replaced with `options`, which
 ```
 
 <a name="admin-customized-datagrid-parameters-updated"></a>
+<<<<<<< HEAD
 #### Admin Customized Datagrid Parameters Updated
+=======
+####  Admin Customized Datagrid Parameters Updated
+>>>>>>> upstream/master
+>>>>>>> b09c6bf48d587e071620de8202c53fd99cbdefc2
 
 **Impact Probability: Medium**
 
