@@ -9,8 +9,9 @@
     >
         <div>
             <div class="sticky top-20 flex h-max gap-8 max-1180:hidden">
-                <!-- Product Image Slider -->
+                <!-- Product Image and Videos Slider -->
                 <div class="flex-24 h-509 flex min-w-[100px] max-w-[100px] flex-wrap place-content-start justify-center gap-2.5 overflow-y-auto overflow-x-hidden">
+                    <!-- Arrow Up -->
                     <span
                         class="icon-arrow-up cursor-pointer text-2xl"
                         role="button"
@@ -21,6 +22,7 @@
                     >
                     </span>
 
+                    <!-- Swiper Container -->
                     <div
                         ref="swiperContainer"
                         class="flex flex-col max-h-[540px] gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
@@ -28,8 +30,8 @@
                         <template v-for="(media, index) in [...media.images, ...media.videos]">
                             <video
                                 v-if="media.type == 'videos'"
-                                :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${activeIndex === `video_${index}` ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
-                                @click="change(media, `video_${index}`)"
+                                :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
+                                @click="change(media, index)"
                                 alt="{{ $product->name }}"
                             >
                                 <source
@@ -40,16 +42,17 @@
 
                             <img
                                 v-else
-                                :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${activeIndex === `image_${index}` ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
+                                :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
                                 :src="media.small_image_url"
                                 alt="{{ $product->name }}"
                                 width="100"
                                 height="100"
-                                @click="change(media, `image_${index}`)"
+                                @click="change(media, index)"
                             />
                         </template>
                     </div>
 
+                    <!-- Arrow Down -->
                     <span
                         class="icon-arrow-down cursor-pointer text-2xl"
                         v-if= "lengthOfMedia"
@@ -61,7 +64,7 @@
                     </span>
                 </div>
 
-                <!-- Media shimmer Effect -->
+                <!-- Product Base Image and Video with Shimmer-->
                 <div
                     class="max-h-[610px] max-w-[560px]"
                     v-show="isMediaLoading"
@@ -91,9 +94,9 @@
                         <video
                             controls
                             width="475"
-                            @loadeddata="onMediaLoad()"
                             alt="{{ $product->name }}"
                             @click="isImageZooming = !isImageZooming"
+                            @loadeddata="onMediaLoad()"
                         >
                             <source
                                 :src="baseFile.path"
@@ -104,7 +107,7 @@
                 </div>
             </div>
 
-            <!-- Product slider Image with shimmer -->
+            <!-- Product Images and Videos for Small Screen -->
             <div class="scrollbar-hide flex w-screen gap-8 overflow-auto 1180:hidden">
                 <x-shop::media.images.lazy
                     ::src="image.large_image_url"
@@ -115,7 +118,11 @@
             </div>
             
             <!-- Gallery Images Zoomer -->
-            <x-shop::modal.image-zoomer ::attachments="attachments" ::is-image-zooming="isImageZooming" ::initial-index="activeIndex"></x-shop::modal.image-zoomer>
+            <x-shop::modal.image-zoomer 
+                ::attachments="attachments" 
+                ::is-image-zooming="isImageZooming" 
+                ::initial-index="`media_${activeIndex}`"
+            />
         </div>
     </script>
 
@@ -144,7 +151,7 @@
                     activeIndex: 0,
 
                     containerOffset: 110,
-                }
+                };
             },
 
             watch: {
@@ -163,13 +170,11 @@
         
             mounted() {
                 if (this.media.images.length) {
-                    this.activeIndex = 'image_0';
 
                     this.baseFile.type = 'image';
 
                     this.baseFile.path = this.media.images[0].large_image_url;
                 } else if (this.media.videos.length) {
-                    this.activeIndex = 'video_0';
 
                     this.baseFile.type = 'video';
 
@@ -194,23 +199,27 @@
             },
 
             methods: {
+                isActiveMedia(index) {
+                    return index === this.activeIndex;
+                },
+                
                 onMediaLoad() {
                     this.isMediaLoading = false;
                 },
 
-                change(file, index) {
+                change(media, index) {
                     this.isMediaLoading = true;
 
-                    if (file.type == 'videos') {
+                    if (media.type == 'videos') {
                         this.baseFile.type = 'video';
 
-                        this.baseFile.path = file.video_url;
+                        this.baseFile.path = media.video_url;
 
                         this.onMediaLoad();
                     } else {
                         this.baseFile.type = 'image';
 
-                        this.baseFile.path = file.large_image_url;
+                        this.baseFile.path = media.large_image_url;
                     }
 
                     if (index > this.activeIndex) {

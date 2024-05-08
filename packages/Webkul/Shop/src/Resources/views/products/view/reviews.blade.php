@@ -345,7 +345,11 @@
                 </div>
 
                 <!-- Review Images zoomer -->
-                <x-shop::modal.image-zoomer ::attachments="attachments" ::is-image-zooming="isImageZooming" ::initial-index="'file_'+activeIndex"></x-shop::modal.image-zoomer>
+                <x-shop::modal.image-zoomer 
+                    ::attachments="attachments" 
+                    ::is-image-zooming="isImageZooming" 
+                    ::initial-index="'file_'+activeIndex"
+                />
             </div>
         </div>
     </script>
@@ -369,8 +373,6 @@
                     },
 
                     meta: {},
-
-                    activeIndex: 0,
                 }
             },
 
@@ -439,6 +441,8 @@
                     isLoading: false,
 
                     isImageZooming: false,
+
+                    activeIndex: 0,
                 }
             },
 
