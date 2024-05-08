@@ -2,7 +2,7 @@
 
 namespace Webkul\Menu\Traits;
 
-trait Makeable
+trait MakeAble
 {
     /**
      * Make.

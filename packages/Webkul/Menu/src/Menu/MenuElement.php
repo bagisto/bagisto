@@ -6,13 +6,13 @@ use Closure;
 use Webkul\Menu\Contracts\MenuFiller;
 use Webkul\Menu\Support\Condition;
 use Webkul\Menu\Traits\HasCanSee;
-use Webkul\Menu\Traits\Makeable;
+use Webkul\Menu\Traits\MakeAble;
 use Webkul\Menu\Traits\WithIcon;
 use Webkul\Menu\Traits\WithLabel;
 
 abstract class MenuElement
 {
-    use HasCanSee, Makeable, WithIcon, WithLabel;
+    use HasCanSee, MakeAble, WithIcon, WithLabel;
 
     /**
      * Route.
@@ -25,7 +25,7 @@ abstract class MenuElement
     protected Closure|bool $blank = false;
 
     /**
-     * forceActive.
+     * ForceActive.
      */
     protected Closure|bool|null $forceActive = null;
 
