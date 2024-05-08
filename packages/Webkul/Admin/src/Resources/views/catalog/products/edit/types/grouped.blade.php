@@ -84,7 +84,7 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid place-content-start gap-1 text-right">
+                            <div class="grid place-content-start gap-1 ltr:text-right rtl:text-left">
                                 <p class="font-semibold text-gray-800 dark:text-white">
                                     @{{ $admin.formatPrice(element.associated_product.price) }}
                                 </p>
