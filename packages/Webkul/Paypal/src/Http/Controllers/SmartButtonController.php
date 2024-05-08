@@ -232,7 +232,7 @@ class SmartButtonController extends Controller
 
             Cart::deActivateCart();
 
-            session()->flash('order', $order);
+            session()->flash('order_id', $order->id);
 
             return response()->json([
                 'success' => true,

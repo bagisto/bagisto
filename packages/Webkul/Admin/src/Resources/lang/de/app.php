@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    => [
+            'create' => [
                 'email'           => 'Registrierte E-Mail',
                 'email-not-exist' => 'E-Mail existiert nicht',
                 'page-title'      => 'Passwort vergessen',
@@ -618,7 +618,7 @@ return [
                 'title'                          => 'Rechnung #:invoice_id',
             ],
 
-            'create'   => [
+            'create' => [
                 'amount-per-unit'    => ':amount Pro Einheit x :qty Menge',
                 'create-invoice'     => 'Rechnung erstellen',
                 'create-success'     => 'Rechnung erfolgreich erstellt',
@@ -740,30 +740,30 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'Aktiv',
-                    'attribute-family'              => 'Attributfamilie',
-                    'attribute-family-value'        => 'Attributfamilie - :attribute_family',
-                    'category'                      => 'Kategorie',
-                    'copy-of'                       => 'Kopie von :value',
-                    'copy-of-slug'                  => 'kopie-von-:value',
-                    'delete'                        => 'Löschen',
-                    'disable'                       => 'Deaktivieren',
-                    'id'                            => 'ID',
-                    'id-value'                      => 'ID - :id',
-                    'image'                         => 'Bild',
-                    'mass-delete-success'           => 'Ausgewählte Produkte wurden erfolgreich gelöscht',
-                    'mass-update-success'           => 'Ausgewählte Produkte wurden erfolgreich aktualisiert',
-                    'name'                          => 'Name',
-                    'out-of-stock'                  => 'Nicht vorrätig',
-                    'price'                         => 'Preis',
-                    'product-image'                 => 'Produktbild',
-                    'qty'                           => 'Menge',
-                    'qty-value'                     => ':qty verfügbar',
-                    'sku'                           => 'Artikelnummer',
-                    'sku-value'                     => 'Artikelnummer - :sku',
-                    'status'                        => 'Status',
-                    'type'                          => 'Typ',
-                    'update-status'                 => 'Status aktualisieren',
+                    'active'                 => 'Aktiv',
+                    'attribute-family'       => 'Attributfamilie',
+                    'attribute-family-value' => 'Attributfamilie - :attribute_family',
+                    'category'               => 'Kategorie',
+                    'copy-of'                => 'Kopie von :value',
+                    'copy-of-slug'           => 'kopie-von-:value',
+                    'delete'                 => 'Löschen',
+                    'disable'                => 'Deaktivieren',
+                    'id'                     => 'ID',
+                    'id-value'               => 'ID - :id',
+                    'image'                  => 'Bild',
+                    'mass-delete-success'    => 'Ausgewählte Produkte wurden erfolgreich gelöscht',
+                    'mass-update-success'    => 'Ausgewählte Produkte wurden erfolgreich aktualisiert',
+                    'name'                   => 'Name',
+                    'out-of-stock'           => 'Nicht vorrätig',
+                    'price'                  => 'Preis',
+                    'product-image'          => 'Produktbild',
+                    'qty'                    => 'Menge',
+                    'qty-value'              => ':qty verfügbar',
+                    'sku'                    => 'Artikelnummer',
+                    'sku-value'              => 'Artikelnummer - :sku',
+                    'status'                 => 'Status',
+                    'type'                   => 'Typ',
+                    'update-status'          => 'Status aktualisieren',
                 ],
             ],
 
@@ -1115,7 +1115,7 @@ return [
                 'value-per-locale'      => 'Wert pro Sprache',
                 'yes'                   => 'Ja',
 
-                'option'                => [
+                'option' => [
                     'color'    => 'Farbschwamm',
                     'dropdown' => 'Dropdown',
                     'image'    => 'Bildschwamm',
@@ -1671,7 +1671,7 @@ return [
                     'update-success' => 'Erfolgreich aktualisiert',
                 ],
 
-                'datagrid'   => [
+                'datagrid' => [
                     'approved'            => 'Genehmigt',
                     'comment'             => 'Kommentar',
                     'customer-names'      => 'Name',
@@ -1764,7 +1764,7 @@ return [
                     ],
                 ],
 
-                'create'    => [
+                'create' => [
                     'active'          => 'Aktiv',
                     'back-btn'        => 'Zurück',
                     'channel'         => 'Kanal',
@@ -1786,7 +1786,7 @@ return [
                     'title'           => 'Kampagne erstellen',
                 ],
 
-                'edit'    => [
+                'edit' => [
                     'active'          => 'Aktiv',
                     'audience'        => 'Zielgruppe',
                     'back-btn'        => 'Zurück',
@@ -1828,7 +1828,7 @@ return [
                         'name'    => 'Name',
                     ],
 
-                    'create'   => [
+                    'create' => [
                         'date'           => 'Datum',
                         'delete-warning' => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
                         'description'    => 'Beschreibung',
@@ -2374,8 +2374,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'Der :name wurde bereits verwendet.',
-            'create-btn'    => 'Seite erstellen',
             'channel'       => 'Kanal',
+            'create-btn'    => 'Seite erstellen',
             'language'      => 'Sprache',
             'title'         => 'Seiten',
 
@@ -2429,7 +2429,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'Sprachversion erstellen',
                 'locale'     => 'Sprachversion',
@@ -2471,7 +2471,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => 'Währung erstellen',
                 'currency'   => 'Währung',
@@ -2517,9 +2517,9 @@ return [
             ],
         ],
 
-        'data-transfer'     => [
+        'data-transfer' => [
             'imports' => [
-                'create'            => [
+                'create' => [
                     'action'              => 'Aktion',
                     'allowed-errors'      => 'Zulässige Fehler',
                     'back-btn'            => 'Zurück',
@@ -2527,9 +2527,9 @@ return [
                     'delete'              => 'Löschen',
                     'download-sample'     => 'Beispiel herunterladen',
                     'field-separator'     => 'Feldtrennzeichen',
-                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /project-root/storage/app/import/product-images platziert werden.',
-                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /project-root/storage/app/import, z. B. Produktbilder, Import-Bilder.',
                     'file'                => 'Datei',
+                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /project-root/storage/app/import, z. B. Produktbilder, Import-Bilder.',
+                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /project-root/storage/app/import/product-images platziert werden.',
                     'general'             => 'Allgemein',
                     'images-directory'    => 'Bilder-Verzeichnispfad',
                     'process-in-queue'    => 'In der Warteschlange verarbeiten',
@@ -2543,7 +2543,7 @@ return [
                     'validation-strategy' => 'Validierungsstrategie',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'Aktion',
                     'allowed-errors'      => 'Zulässige Fehler',
                     'back-btn'            => 'Zurück',
@@ -2551,9 +2551,9 @@ return [
                     'delete'              => 'Löschen',
                     'download-sample'     => 'Beispiel herunterladen',
                     'field-separator'     => 'Feldtrennzeichen',
-                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /project-root/storage/app/import/product-images platziert werden.',
-                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /project-root/storage/app/import, z. B. Produktbilder, Import-Bilder.',
                     'file'                => 'Datei',
+                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /project-root/storage/app/import, z. B. Produktbilder, Import-Bilder.',
+                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /project-root/storage/app/import/product-images platziert werden.',
                     'general'             => 'Allgemein',
                     'images-directory'    => 'Bilder-Verzeichnispfad',
                     'process-in-queue'    => 'In der Warteschlange verarbeiten',
@@ -2567,11 +2567,11 @@ return [
                     'validation-strategy' => 'Validierungsstrategie',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'Import erstellen',
                     'title'        => 'Importe',
 
-                    'datagrid'     => [
+                    'datagrid' => [
                         'actions'       => 'Aktionen',
                         'completed-at'  => 'Abgeschlossen am',
                         'created'       => 'Erstellt',
@@ -2588,7 +2588,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => 'Zurück',
                     'completed-batches'       => 'Insgesamt abgeschlossene Chargen:',
                     'download-error-report'   => 'Vollständigen Bericht herunterladen',
@@ -2606,8 +2606,8 @@ return [
                     'total-invalid-rows'      => 'Insgesamt ungültige Zeilen:',
                     'total-rows-processed'    => 'Insgesamt verarbeitete Zeilen:',
                     'total-updated'           => 'Insgesamt aktualisierte Datensätze:',
-                    'validate-info'           => 'Klicken Sie auf "Daten validieren", um Ihren Import zu überprüfen.',
                     'validate'                => 'Validieren',
+                    'validate-info'           => 'Klicken Sie auf "Daten validieren", um Ihren Import zu überprüfen.',
                     'validating-info'         => 'Die Daten werden gelesen und validiert',
                     'validation-failed-info'  => 'Ihr Import ist ungültig. Bitte beheben Sie die folgenden Fehler und versuchen Sie es erneut.',
                     'validation-success-info' => 'Ihr Import ist gültig. Klicken Sie auf "Importieren", um den Importvorgang zu starten.',
@@ -2623,7 +2623,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'Wechselkurs erstellen',
                 'exchange-rate' => 'Wechselkurs',
@@ -2641,7 +2641,7 @@ return [
                 ],
 
                 'edit' => [
-                    'title'   => 'Wechselkurse bearbeiten',
+                    'title' => 'Wechselkurse bearbeiten',
                 ],
 
                 'datagrid' => [
@@ -2742,7 +2742,7 @@ return [
             'update-success'    => 'Lagerorte erfolgreich aktualisiert',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Möchten Sie wirklich löschen?',
@@ -2782,7 +2782,7 @@ return [
                 ],
             ],
 
-            'rates'   => [
+            'rates' => [
                 'index' => [
                     'button-title' => 'Steuerquote erstellen',
                     'tax-rate'     => 'Steuersatz',
@@ -2968,7 +2968,7 @@ return [
                 ],
 
                 'edit' => [
-                    'title'    => 'Benutzer bearbeiten',
+                    'title' => 'Benutzer bearbeiten',
                 ],
             ],
 
@@ -3135,7 +3135,7 @@ return [
                 'value'                         => 'Wert: :value',
                 'value-input'                   => 'Wert',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'            => 'Dienstleistungen hinzufügen',
                     'channels'           => 'Kanäle',
                     'delete'             => 'Löschen',
@@ -3307,10 +3307,10 @@ return [
                     'title' => 'Allgemein',
 
                     'unit-options' => [
-                        'info'              => 'Einheitsoptionen festlegen.',
-                        'title'             => 'Einheitsoptionen',
-                        'title-info'        => 'Größe, Farbe, Material, Anpassung, Steigerung der Kundenzufriedenheit und Anpassung von Käufen.',
-                        'weight-unit'       => 'Gewichtseinheit',
+                        'info'        => 'Einheitsoptionen festlegen.',
+                        'title'       => 'Einheitsoptionen',
+                        'title-info'  => 'Größe, Farbe, Material, Anpassung, Steigerung der Kundenzufriedenheit und Anpassung von Käufen.',
+                        'weight-unit' => 'Gewichtseinheit',
                     ],
                 ],
 
@@ -3339,10 +3339,10 @@ return [
                     'title' => 'Design',
 
                     'admin-logo' => [
-                        'favicon'         => 'Favicon',
-                        'logo-image'      => 'Logo-Bild',
-                        'title'           => 'Admin-Logo',
-                        'title-info'      => 'Das Admin-Logo ist das charakteristische Bild oder Emblem, das die Verwaltungsoberfläche eines Systems oder einer Website repräsentiert, oft anpassbar.',
+                        'favicon'    => 'Favicon',
+                        'logo-image' => 'Logo-Bild',
+                        'title'      => 'Admin-Logo',
+                        'title-info' => 'Das Admin-Logo ist das charakteristische Bild oder Emblem, das die Verwaltungsoberfläche eines Systems oder einer Website repräsentiert, oft anpassbar.',
                     ],
                 ],
 
@@ -3351,12 +3351,12 @@ return [
                     'title' => 'Magische KI',
 
                     'settings' => [
-                        'api-key'           => 'API-Schlüssel',
-                        'enabled'           => 'Aktiviert',
-                        'llm-api-domain'    => 'LLM API-Domäne',
-                        'organization'      => 'Organisation',
-                        'title'             => 'Allgemeine Einstellungen',
-                        'title-info'        => 'Verbessern Sie Ihre Erfahrung mit der Magic AI-Funktion, indem Sie Ihren exklusiven API-Schlüssel eingeben und die relevante Organisation für eine mühelose Integration angeben. Übernehmen Sie die Kontrolle über Ihre OpenAI-Anmeldeinformationen und passen Sie die Einstellungen nach Ihren spezifischen Anforderungen an.',
+                        'api-key'        => 'API-Schlüssel',
+                        'enabled'        => 'Aktiviert',
+                        'llm-api-domain' => 'LLM API-Domäne',
+                        'organization'   => 'Organisation',
+                        'title'          => 'Allgemeine Einstellungen',
+                        'title-info'     => 'Verbessern Sie Ihre Erfahrung mit der Magic AI-Funktion, indem Sie Ihren exklusiven API-Schlüssel eingeben und die relevante Organisation für eine mühelose Integration angeben. Übernehmen Sie die Kontrolle über Ihre OpenAI-Anmeldeinformationen und passen Sie die Einstellungen nach Ihren spezifischen Anforderungen an.',
                     ],
 
                     'content-generation' => [

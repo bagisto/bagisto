@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    => [
+            'create' => [
                 'email'           => 'Adresse e-mail enregistrée',
                 'email-not-exist' => 'L\'adresse e-mail n\'existe pas',
                 'page-title'      => 'Mot de passe oublié',
@@ -618,7 +618,7 @@ return [
                 'title'                          => 'Facture #:invoice_id',
             ],
 
-            'create'   => [
+            'create' => [
                 'amount-per-unit'    => ':amount Par Unité x :qty Quantité',
                 'create-invoice'     => 'Créer une Facture',
                 'create-success'     => 'Facture créée avec succès',
@@ -1115,7 +1115,7 @@ return [
                 'value-per-locale'      => 'Valeur par localisation',
                 'yes'                   => 'Oui',
 
-                'option'                => [
+                'option' => [
                     'color'    => 'Nuancier de couleurs',
                     'dropdown' => 'Menu déroulant',
                     'image'    => 'Nuancier d\'images',
@@ -1450,7 +1450,7 @@ return [
                 'title'                       => 'Vue du client',
 
                 'address' => [
-                    'count'  => 'Adresses (:count)',
+                    'count' => 'Adresses (:count)',
 
                     'create' => [
                         'city'               => 'Ville',
@@ -1671,7 +1671,7 @@ return [
                     'update-success' => 'Mise à jour réussie',
                 ],
 
-                'datagrid'   => [
+                'datagrid' => [
                     'approved'            => 'Approuvé',
                     'comment'             => 'Commentaire',
                     'customer-names'      => 'Nom',
@@ -1764,7 +1764,7 @@ return [
                     ],
                 ],
 
-                'create'    => [
+                'create' => [
                     'active'          => 'Actif',
                     'back-btn'        => 'Retour',
                     'channel'         => 'Canal',
@@ -1786,7 +1786,7 @@ return [
                     'title'           => 'Créer une campagne',
                 ],
 
-                'edit'    => [
+                'edit' => [
                     'active'          => 'Actif',
                     'audience'        => 'Audience',
                     'back-btn'        => 'Retour',
@@ -1828,7 +1828,7 @@ return [
                         'name'    => 'Nom',
                     ],
 
-                    'create'   => [
+                    'create' => [
                         'date'           => 'Date',
                         'delete-warning' => 'Êtes-vous sûr de vouloir effectuer cette action ?',
                         'description'    => 'Description',
@@ -2429,7 +2429,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'Créer une locale',
                 'locale'     => 'Locale',
@@ -2471,7 +2471,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => 'Créer une devise',
                 'currency'   => 'Devise',
@@ -2519,7 +2519,7 @@ return [
 
         'data-transfer'     => [
             'imports' => [
-                'create'            => [
+                'create' => [
                     'action'              => 'Action',
                     'allowed-errors'      => 'Erreurs Autorisées',
                     'back-btn'            => 'Retour',
@@ -2527,9 +2527,9 @@ return [
                     'delete'              => 'Supprimer',
                     'download-sample'     => 'Télécharger un Exemple',
                     'field-separator'     => 'Séparateur de Champ',
-                    'file-info-example'   => 'Par exemple, en cas d\'images de produits, les fichiers doivent être placés dans /project-root/storage/app/import/product-images.',
-                    'file-info'           => 'Utiliser le chemin relatif à /project-root/storage/app/import, par exemple, product-images, import-images.',
                     'file'                => 'Fichier',
+                    'file-info'           => 'Utiliser le chemin relatif à /project-root/storage/app/import, par exemple, product-images, import-images.',
+                    'file-info-example'   => 'Par exemple, en cas d\'images de produits, les fichiers doivent être placés dans /project-root/storage/app/import/product-images.',
                     'general'             => 'Général',
                     'images-directory'    => 'Chemin du Répertoire d\'Images',
                     'process-in-queue'    => 'Traitement dans la File d\'Attente',
@@ -2543,7 +2543,7 @@ return [
                     'validation-strategy' => 'Stratégie de Validation',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'Action',
                     'allowed-errors'      => 'Erreurs Autorisées',
                     'back-btn'            => 'Retour',
@@ -2551,9 +2551,9 @@ return [
                     'delete'              => 'Supprimer',
                     'download-sample'     => 'Télécharger un Exemple',
                     'field-separator'     => 'Séparateur de Champ',
-                    'file-info-example'   => 'Par exemple, en cas d\'images de produits, les fichiers doivent être placés dans /project-root/storage/app/import/product-images.',
-                    'file-info'           => 'Utiliser le chemin relatif à /project-root/storage/app/import, par exemple, product-images, import-images.',
                     'file'                => 'Fichier',
+                    'file-info'           => 'Utiliser le chemin relatif à /project-root/storage/app/import, par exemple, product-images, import-images.',
+                    'file-info-example'   => 'Par exemple, en cas d\'images de produits, les fichiers doivent être placés dans /project-root/storage/app/import/product-images.',
                     'general'             => 'Général',
                     'images-directory'    => 'Chemin du Répertoire d\'Images',
                     'process-in-queue'    => 'Traitement dans la File d\'Attente',
@@ -2567,11 +2567,11 @@ return [
                     'validation-strategy' => 'Stratégie de Validation',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'Créer une Importation',
                     'title'        => 'Importations',
 
-                    'datagrid'     => [
+                    'datagrid' => [
                         'actions'       => 'Actions',
                         'completed-at'  => 'Terminé à',
                         'created'       => 'Créé',
@@ -2588,7 +2588,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => 'Retour',
                     'completed-batches'       => 'Total de Lots Terminés :',
                     'download-error-report'   => 'Télécharger le Rapport Complet',
@@ -2623,7 +2623,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'Créer un taux de change',
                 'exchange-rate' => 'Taux de change',
@@ -2641,7 +2641,7 @@ return [
                 ],
 
                 'edit' => [
-                    'title'   => 'Modifier les taux de change',
+                    'title' => 'Modifier les taux de change',
                 ],
 
                 'datagrid' => [
@@ -2742,7 +2742,7 @@ return [
             'update-success'    => 'Sources d’inventaire mises à jour avec succès',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Êtes-vous sûr de vouloir supprimer ?',
@@ -2782,7 +2782,7 @@ return [
                 ],
             ],
 
-            'rates'   => [
+            'rates' => [
                 'index' => [
                     'button-title' => 'Créer un taux de taxe',
                     'tax-rate'     => 'Taux de taxe',
@@ -3135,7 +3135,7 @@ return [
                 'value'                         => 'Valeur : :value',
                 'value-input'                   => 'Valeur',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'               => 'Ajouter des services',
                     'channels'              => 'Canaux',
                     'delete'                => 'Supprimer',
@@ -3707,40 +3707,40 @@ return [
                 ],
 
                 'payment-methods' => [
-                    'accepted-currencies'            => 'Devises acceptées',
-                    'accepted-currencies-info'       => 'Ajoutez les codes de devise séparés par des virgules, par exemple USD, INR,...',
-                    'business-account'               => 'Compte professionnel',
-                    'cash-on-delivery'               => 'Contre-remboursement',
-                    'cash-on-delivery-info'          => 'Méthode de paiement où les clients paient en espèces à la réception des biens ou services à leur porte.',
-                    'client-id'                      => 'Identifiant client',
-                    'client-id-info'                 => 'Utilisez "sb" pour les tests.',
-                    'client-secret'                  => 'Secret client',
-                    'client-secret-info'             => 'Ajoutez votre clé secrète ici',
-                    'description'                    => 'Description',
-                    'generate-invoice'               => 'Générer automatiquement la facture après avoir passé une commande',
-                    'generate-invoice-applicable'    => 'Applicable si la génération automatique de la facture est activée',
-                    'info'                           => 'Définir les informations sur les méthodes de paiement',
-                    'instructions'                   => 'Instructions',
-                    'logo'                           => 'Logo',
-                    'logo-information'               => 'La résolution de l\'image doit être de 55px X 45px',
-                    'mailing-address'                => 'Envoyer le chèque à',
-                    'money-transfer'                 => 'Virement bancaire',
-                    'money-transfer-info'            => 'Transfert de fonds d\'une personne ou d\'un compte à un autre, souvent électroniquement, à des fins diverses telles que des transactions ou des envois d\'argent.',
-                    'page-title'                     => 'Méthodes de paiement',
-                    'paid'                           => 'Payé',
-                    'paypal-smart-button'            => 'PayPal',
-                    'paypal-smart-button-info'       => 'Bouton intelligent PayPal : simplifie les paiements en ligne avec des boutons personnalisables pour des transactions sécurisées et multi-méthodes sur les sites web et les applications.',
-                    'paypal-standard'                => 'PayPal Standard',
-                    'paypal-standard-info'           => 'PayPal Standard est une option de paiement PayPal de base pour les entreprises en ligne, permettant aux clients de payer avec leur compte PayPal ou par carte de crédit/débit.',
-                    'pending'                        => 'En attente',
-                    'pending-payment'                => 'Paiement en attente',
-                    'processing'                     => 'En cours de traitement',
-                    'sandbox'                        => 'Bac à sable',
-                    'set-invoice-status'             => 'Définir le statut de la facture après la création de la facture à',
-                    'set-order-status'               => 'Définir le statut de la commande après la création de la facture à',
-                    'sort-order'                     => 'Ordre de tri',
-                    'status'                         => 'Statut',
-                    'title'                          => 'Titre',
+                    'accepted-currencies'         => 'Devises acceptées',
+                    'accepted-currencies-info'    => 'Ajoutez les codes de devise séparés par des virgules, par exemple USD, INR,...',
+                    'business-account'            => 'Compte professionnel',
+                    'cash-on-delivery'            => 'Contre-remboursement',
+                    'cash-on-delivery-info'       => 'Méthode de paiement où les clients paient en espèces à la réception des biens ou services à leur porte.',
+                    'client-id'                   => 'Identifiant client',
+                    'client-id-info'              => 'Utilisez "sb" pour les tests.',
+                    'client-secret'               => 'Secret client',
+                    'client-secret-info'          => 'Ajoutez votre clé secrète ici',
+                    'description'                 => 'Description',
+                    'generate-invoice'            => 'Générer automatiquement la facture après avoir passé une commande',
+                    'generate-invoice-applicable' => 'Applicable si la génération automatique de la facture est activée',
+                    'info'                        => 'Définir les informations sur les méthodes de paiement',
+                    'instructions'                => 'Instructions',
+                    'logo'                        => 'Logo',
+                    'logo-information'            => 'La résolution de l\'image doit être de 55px X 45px',
+                    'mailing-address'             => 'Envoyer le chèque à',
+                    'money-transfer'              => 'Virement bancaire',
+                    'money-transfer-info'         => 'Transfert de fonds d\'une personne ou d\'un compte à un autre, souvent électroniquement, à des fins diverses telles que des transactions ou des envois d\'argent.',
+                    'page-title'                  => 'Méthodes de paiement',
+                    'paid'                        => 'Payé',
+                    'paypal-smart-button'         => 'PayPal',
+                    'paypal-smart-button-info'    => 'Bouton intelligent PayPal : simplifie les paiements en ligne avec des boutons personnalisables pour des transactions sécurisées et multi-méthodes sur les sites web et les applications.',
+                    'paypal-standard'             => 'PayPal Standard',
+                    'paypal-standard-info'        => 'PayPal Standard est une option de paiement PayPal de base pour les entreprises en ligne, permettant aux clients de payer avec leur compte PayPal ou par carte de crédit/débit.',
+                    'pending'                     => 'En attente',
+                    'pending-payment'             => 'Paiement en attente',
+                    'processing'                  => 'En cours de traitement',
+                    'sandbox'                     => 'Bac à sable',
+                    'set-invoice-status'          => 'Définir le statut de la facture après la création de la facture à',
+                    'set-order-status'            => 'Définir le statut de la commande après la création de la facture à',
+                    'sort-order'                  => 'Ordre de tri',
+                    'status'                      => 'Statut',
+                    'title'                       => 'Titre',
                 ],
 
                 'order-settings' => [

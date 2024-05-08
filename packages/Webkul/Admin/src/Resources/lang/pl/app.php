@@ -740,30 +740,30 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'Aktywny',
-                    'attribute-family'              => 'Rodzina atrybutów',
-                    'attribute-family-value'        => 'Rodzina atrybutów - :attribute_family',
-                    'category'                      => 'Kategoria',
-                    'copy-of'                       => 'Kopia :value',
-                    'copy-of-slug'                  => 'kopia-:value',
-                    'delete'                        => 'Usuń',
-                    'disable'                       => 'Wyłącz',
-                    'id'                            => 'Identyfikator',
-                    'id-value'                      => 'Identyfikator - :id',
-                    'image'                         => 'Obraz',
-                    'mass-delete-success'           => 'Wybrane produkty usunięte pomyślnie',
-                    'mass-update-success'           => 'Wybrane produkty zaktualizowane pomyślnie',
-                    'name'                          => 'Nazwa',
-                    'out-of-stock'                  => 'Brak w magazynie',
-                    'price'                         => 'Cena',
-                    'product-image'                 => 'Obraz produktu',
-                    'qty'                           => 'Ilość',
-                    'qty-value'                     => ':qty dostępny',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'Status',
-                    'type'                          => 'Typ',
-                    'update-status'                 => 'Zaktualizuj status',
+                    'active'                 => 'Aktywny',
+                    'attribute-family'       => 'Rodzina atrybutów',
+                    'attribute-family-value' => 'Rodzina atrybutów - :attribute_family',
+                    'category'               => 'Kategoria',
+                    'copy-of'                => 'Kopia :value',
+                    'copy-of-slug'           => 'kopia-:value',
+                    'delete'                 => 'Usuń',
+                    'disable'                => 'Wyłącz',
+                    'id'                     => 'Identyfikator',
+                    'id-value'               => 'Identyfikator - :id',
+                    'image'                  => 'Obraz',
+                    'mass-delete-success'    => 'Wybrane produkty usunięte pomyślnie',
+                    'mass-update-success'    => 'Wybrane produkty zaktualizowane pomyślnie',
+                    'name'                   => 'Nazwa',
+                    'out-of-stock'           => 'Brak w magazynie',
+                    'price'                  => 'Cena',
+                    'product-image'          => 'Obraz produktu',
+                    'qty'                    => 'Ilość',
+                    'qty-value'              => ':qty dostępny',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'Status',
+                    'type'                   => 'Typ',
+                    'update-status'          => 'Zaktualizuj status',
                 ],
             ],
 
@@ -861,7 +861,7 @@ return [
                         'sku'               => 'SKU - :sku',
                         'title'             => 'Warianty',
 
-                        'create'  => [
+                        'create' => [
                             'description'            => 'Opis',
                             'name'                   => 'Nazwa',
                             'save-btn'               => 'Dodaj',
@@ -1115,7 +1115,7 @@ return [
                 'value-per-locale'      => 'Wartość Na Lokalizację',
                 'yes'                   => 'Tak',
 
-                'option'                => [
+                'option' => [
                     'color'    => 'Próbka Kolorów',
                     'dropdown' => 'Rozwijane Menu',
                     'image'    => 'Próbka Obrazu',
@@ -1124,7 +1124,7 @@ return [
                 ],
             ],
 
-            'edit'  => [
+            'edit' => [
                 'add-attribute-options' => 'Dodaj Opcje Atrybutu',
                 'add-option'            => 'Dodaj Opcję',
                 'add-options-info'      => 'Aby tworzyć różne kombinacje Opcji Atrybutu na raz.',
@@ -1450,7 +1450,7 @@ return [
                 'title'                       => 'Widok klienta',
 
                 'address' => [
-                    'count'  => 'Adresy (:count)',
+                    'count' => 'Adresy (:count)',
 
                     'create' => [
                         'city'               => 'Miasto',
@@ -1671,7 +1671,7 @@ return [
                     'update-success' => 'Zaktualizowano pomyślnie',
                 ],
 
-                'datagrid'   => [
+                'datagrid' => [
                     'approved'            => 'Zatwierdzona',
                     'comment'             => 'Komentarz',
                     'customer-names'      => 'Nazwa',
@@ -1828,7 +1828,7 @@ return [
                         'name'    => 'Nazwa',
                     ],
 
-                    'create'   => [
+                    'create' => [
                         'date'           => 'Data',
                         'delete-warning' => 'Czy na pewno chcesz wykonać tę akcję?',
                         'description'    => 'Opis',
@@ -1839,7 +1839,7 @@ return [
                         'title'          => 'Utwórz Wydarzenia',
                     ],
 
-                    'edit'  => [
+                    'edit' => [
                         'success' => 'Wydarzenia zaktualizowane pomyślnie',
                         'title'   => 'Edytuj Wydarzenia',
                     ],
@@ -1865,7 +1865,7 @@ return [
                         'true'       => 'Tak',
                     ],
 
-                    'edit'  => [
+                    'edit' => [
                         'back-btn'      => 'Powrót',
                         'email'         => 'Email',
                         'false'         => 'Nie',
@@ -2374,8 +2374,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'Strona o nazwie :name już istnieje.',
-            'create-btn'    => 'Utwórz stronę',
             'channel'       => 'Kanał',
+            'create-btn'    => 'Utwórz stronę',
             'language'      => 'Język',
             'title'         => 'Strony',
 
@@ -2429,7 +2429,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'Utwórz Lokalizację',
                 'locale'     => 'Lokalizacja',
@@ -2471,7 +2471,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => 'Utwórz Walutę',
                 'currency'   => 'Waluta',
@@ -2517,9 +2517,9 @@ return [
             ],
         ],
 
-        'data-transfer'     => [
+        'data-transfer' => [
             'imports' => [
-                'create'            => [
+                'create' => [
                     'action'              => 'Akcja',
                     'allowed-errors'      => 'Dozwolone błędy',
                     'back-btn'            => 'Wstecz',
@@ -2543,7 +2543,7 @@ return [
                     'validation-strategy' => 'Strategia walidacji',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'Akcja',
                     'allowed-errors'      => 'Dozwolone błędy',
                     'back-btn'            => 'Powrót',
@@ -2567,11 +2567,11 @@ return [
                     'validation-strategy' => 'Strategia walidacji',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'Utwórz Import',
                     'title'        => 'Importy',
 
-                    'datagrid'     => [
+                    'datagrid' => [
                         'actions'       => 'Akcje',
                         'completed-at'  => 'Zakończono o',
                         'created'       => 'Utworzono',
@@ -2588,7 +2588,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => 'Powrót',
                     'completed-batches'       => 'Łączna liczba zakończonych partii:',
                     'download-error-report'   => 'Pobierz Pełne Sprawozdanie',
@@ -2623,7 +2623,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'Utwórz Kurs Walutowy',
                 'exchange-rate' => 'Kurs Walutowy',
@@ -2742,7 +2742,7 @@ return [
             'update-success'    => 'Źródła Inwentarza zaktualizowane pomyślnie',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Czy na pewno chcesz usunąć?',
@@ -2772,7 +2772,7 @@ return [
                     ],
 
                     'edit' => [
-                        'title'   => 'Edytuj Kategorie Podatków',
+                        'title' => 'Edytuj Kategorie Podatków',
                     ],
 
                     'create-success' => 'Nowa Kategoria Podatków utworzona',
@@ -3135,7 +3135,7 @@ return [
                 'value'                         => 'Wartość: :value',
                 'value-input'                   => 'Wartość',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'            => 'Dodaj usługi',
                     'channels'           => 'Kanały',
                     'delete'             => 'Usuń',
@@ -3307,10 +3307,10 @@ return [
                     'title' => 'Ogólne',
 
                     'unit-options' => [
-                        'info'              => 'Ustaw opcje jednostek.',
-                        'title'             => 'Opcje Jednostek',
-                        'title-info'        => 'Rozmiar, kolor, materiał, dostosowanie, zwiększanie satysfakcji klienta i dostosowywanie zakupów.',
-                        'weight-unit'       => 'Jednostka Wagi',
+                        'info'        => 'Ustaw opcje jednostek.',
+                        'title'       => 'Opcje Jednostek',
+                        'title-info'  => 'Rozmiar, kolor, materiał, dostosowanie, zwiększanie satysfakcji klienta i dostosowywanie zakupów.',
+                        'weight-unit' => 'Jednostka Wagi',
                     ],
                 ],
 
@@ -3339,10 +3339,10 @@ return [
                     'title' => 'Projekt',
 
                     'admin-logo' => [
-                        'favicon'         => 'Ikona Favicon',
-                        'logo-image'      => 'Obraz Logo',
-                        'title'           => 'Logo Administratora',
-                        'title-info'      => 'Logo administratora to charakterystyczny obraz lub emblem reprezentujący interfejs administracyjny systemu lub strony internetowej, często dostosowywany.',
+                        'favicon'    => 'Ikona Favicon',
+                        'logo-image' => 'Obraz Logo',
+                        'title'      => 'Logo Administratora',
+                        'title-info' => 'Logo administratora to charakterystyczny obraz lub emblem reprezentujący interfejs administracyjny systemu lub strony internetowej, często dostosowywany.',
                     ],
                 ],
 
@@ -3351,12 +3351,12 @@ return [
                     'title' => 'Magic AI',
 
                     'settings' => [
-                        'api-key'           => 'Klucz API',
-                        'enabled'           => 'Włączony',
-                        'llm-api-domain'    => 'Domena API LLM',
-                        'organization'      => 'Organizacja',
-                        'title'             => 'Ustawienia ogólne',
-                        'title-info'        => 'Ulepsz swoje doświadczenie z funkcją Magic AI, wprowadzając swój wyłączny klucz API i wskazując odpowiednią organizację dla bezproblemowej integracji. Przejęcie kontroli nad swoimi danymi uwierzytelniającymi OpenAI i dostosowanie ustawień zgodnie z własnymi potrzebami.',
+                        'api-key'        => 'Klucz API',
+                        'enabled'        => 'Włączony',
+                        'llm-api-domain' => 'Domena API LLM',
+                        'organization'   => 'Organizacja',
+                        'title'          => 'Ustawienia ogólne',
+                        'title-info'     => 'Ulepsz swoje doświadczenie z funkcją Magic AI, wprowadzając swój wyłączny klucz API i wskazując odpowiednią organizację dla bezproblemowej integracji. Przejęcie kontroli nad swoimi danymi uwierzytelniającymi OpenAI i dostosowanie ustawień zgodnie z własnymi potrzebami.',
                     ],
 
                     'content-generation' => [

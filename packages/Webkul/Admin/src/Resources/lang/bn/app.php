@@ -618,7 +618,7 @@ return [
                 'title'                          => 'চালান #:invoice_id',
             ],
 
-            'create'   => [
+            'create' => [
                 'amount-per-unit'    => ':amount প্রতি একক × :qty পরিমাণ',
                 'create-invoice'     => 'চালান তৈরি করুন',
                 'create-success'     => 'চালান সফলভাবে তৈরি হয়েছে',
@@ -728,7 +728,7 @@ return [
                 'create-btn'    => 'পণ্য তৈরি করুন',
                 'title'         => 'পণ্য',
 
-                'create'     => [
+                'create' => [
                     'back-btn'                => 'পিছনে যান',
                     'configurable-attributes' => 'কনফিগারেবল গুণগুলি',
                     'create-btn'              => 'পণ্য তৈরি করুন',
@@ -739,31 +739,31 @@ return [
                     'type'                    => 'প্রকার',
                 ],
 
-                'datagrid'   => [
-                    'active'                        => 'সক্রিয়',
-                    'attribute-family'              => 'গুণ পরিবার',
-                    'attribute-family-value'        => 'গুণ পরিবার - :attribute_family',
-                    'category'                      => 'বিভাগ',
-                    'copy-of'                       => 'কপি অব :value',
-                    'copy-of-slug'                  => 'কপি-অব-:value',
-                    'delete'                        => 'মুছে ফেলুন',
-                    'disable'                       => 'নিষ্ক্রিয় করুন',
-                    'id'                            => 'আইডি',
-                    'id-value'                      => 'আইডি - :id',
-                    'image'                         => 'চিত্র',
-                    'mass-delete-success'           => 'নির্বাচিত পণ্যগুলি সফলভাবে মুছে ফেলা হয়েছে',
-                    'mass-update-success'           => 'নির্বাচিত পণ্যগুলি সফলভাবে আপডেট হয়েছে',
-                    'name'                          => 'নাম',
-                    'out-of-stock'                  => 'স্টকে নেই',
-                    'price'                         => 'মূল্য',
-                    'product-image'                 => 'পণ্যের চিত্র',
-                    'qty'                           => 'পরিমাণ',
-                    'qty-value'                     => ':qty প্রাপ্য',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'স্থিতি',
-                    'type'                          => 'প্রকার',
-                    'update-status'                 => 'স্থিতি আপডেট করুন',
+                'datagrid' => [
+                    'active'                 => 'সক্রিয়',
+                    'attribute-family'       => 'গুণ পরিবার',
+                    'attribute-family-value' => 'গুণ পরিবার - :attribute_family',
+                    'category'               => 'বিভাগ',
+                    'copy-of'                => 'কপি অব :value',
+                    'copy-of-slug'           => 'কপি-অব-:value',
+                    'delete'                 => 'মুছে ফেলুন',
+                    'disable'                => 'নিষ্ক্রিয় করুন',
+                    'id'                     => 'আইডি',
+                    'id-value'               => 'আইডি - :id',
+                    'image'                  => 'চিত্র',
+                    'mass-delete-success'    => 'নির্বাচিত পণ্যগুলি সফলভাবে মুছে ফেলা হয়েছে',
+                    'mass-update-success'    => 'নির্বাচিত পণ্যগুলি সফলভাবে আপডেট হয়েছে',
+                    'name'                   => 'নাম',
+                    'out-of-stock'           => 'স্টকে নেই',
+                    'price'                  => 'মূল্য',
+                    'product-image'          => 'পণ্যের চিত্র',
+                    'qty'                    => 'পরিমাণ',
+                    'qty-value'              => ':qty প্রাপ্য',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'স্থিতি',
+                    'type'                   => 'প্রকার',
+                    'update-status'          => 'স্থিতি আপডেট করুন',
                 ],
             ],
 
@@ -1450,7 +1450,7 @@ return [
                 'title'                       => 'গ্রাহক দৃশ্য',
 
                 'address' => [
-                    'count'  => 'ঠিকানা (:count)',
+                    'count' => 'ঠিকানা (:count)',
 
                     'create' => [
                         'city'               => 'শহর',
@@ -1515,8 +1515,8 @@ return [
                         'completed'       => 'সম্পন্ন',
                         'customer-name'   => 'গ্রাহকের নাম',
                         'date'            => 'তারিখ',
-                        'empty-order'     => 'কোন অর্ডার পাওয়া যায়নি',
                         'email'           => 'ইমেইল',
+                        'empty-order'     => 'কোন অর্ডার পাওয়া যায়নি',
                         'fraud'           => 'প্রতারণা',
                         'grand-total'     => 'মোট মূল্য',
                         'location'        => 'অবস্থান',
@@ -2429,7 +2429,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'নতুন লোকাল তৈরি করুন',
                 'locale'     => 'লোকেল',
@@ -2471,7 +2471,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => 'মুদ্রা তৈরি করুন',
                 'currency'   => 'মুদ্রা',
@@ -2519,7 +2519,7 @@ return [
 
         'data-transfer'     => [
             'imports' => [
-                'create'            => [
+                'create'  => [
                     'action'              => 'অ্যাকশন',
                     'allowed-errors'      => 'অনুমোদিত ত্রুটিগুলি',
                     'back-btn'            => 'পুনরায় যান',
@@ -2527,9 +2527,9 @@ return [
                     'delete'              => 'মুছুন',
                     'download-sample'     => 'নমুনা ডাউনলোড করুন',
                     'field-separator'     => 'ক্ষেত্র পৃথককরণকারী',
-                    'file-info-example'   => 'উদাহরণস্বরূপ, পণ্য চিত্রে, ফাইলগুলি অবস্থান করতে হবে /project-root/storage/app/import/product-images',
-                    'file-info'           => 'ব্যবহার করুন /project-root/storage/app/import এর সাথে সম্পর্কিত পথ, উদাহরণস্বরূপ, পণ্য-চিত্র, ইম্পোর্ট-ইমেজ।',
                     'file'                => 'ফাইল',
+                    'file-info'           => 'ব্যবহার করুন /project-root/storage/app/import এর সাথে সম্পর্কিত পথ, উদাহরণস্বরূপ, পণ্য-চিত্র, ইম্পোর্ট-ইমেজ।',
+                    'file-info-example'   => 'উদাহরণস্বরূপ, পণ্য চিত্রে, ফাইলগুলি অবস্থান করতে হবে /project-root/storage/app/import/product-images',
                     'general'             => 'সাধারিত',
                     'images-directory'    => 'চিত্র ডিরেক্টরি পথ',
                     'process-in-queue'    => 'কিউতে প্রসেস',
@@ -2543,7 +2543,7 @@ return [
                     'validation-strategy' => 'যাচাইর পদক্ষেপ',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'অ্যাকশন',
                     'allowed-errors'      => 'অনুমোদিত ত্রুটিগুলি',
                     'back-btn'            => 'পুনরায় যান',
@@ -2551,9 +2551,9 @@ return [
                     'delete'              => 'মুছুন',
                     'download-sample'     => 'নমুনা ডাউনলোড করুন',
                     'field-separator'     => 'ক্ষেত্র পৃথককরণকারী',
-                    'file-info-example'   => 'উদাহরণস্বরূপ, পণ্য চিত্রে, ফাইলগুলি অবস্থান করতে হবে /project-root/storage/app/import/product-images',
-                    'file-info'           => 'ব্যবহার করুন /project-root/storage/app/import এর সাথে সম্পর্কিত পথ, উদাহরণস্বরূপ, পণ্য-চিত্র, ইম্পোর্ট-ইমেজ।',
                     'file'                => 'ফাইল',
+                    'file-info'           => 'ব্যবহার করুন /project-root/storage/app/import এর সাথে সম্পর্কিত পথ, উদাহরণস্বরূপ, পণ্য-চিত্র, ইম্পোর্ট-ইমেজ।',
+                    'file-info-example'   => 'উদাহরণস্বরূপ, পণ্য চিত্রে, ফাইলগুলি অবস্থান করতে হবে /project-root/storage/app/import/product-images',
                     'general'             => 'সাধারিত',
                     'images-directory'    => 'চিত্র ডিরেক্টরি পথ',
                     'process-in-queue'    => 'কিউতে প্রসেস',
@@ -2567,11 +2567,11 @@ return [
                     'validation-strategy' => 'যাচাইর পদক্ষেপ',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'ইম্পোর্ট তৈরি করুন',
                     'title'        => 'ইম্পোর্ট',
 
-                    'datagrid'     => [
+                    'datagrid' => [
                         'actions'       => 'অ্যাকশন',
                         'completed-at'  => 'সম্পন্ন হয়েছে',
                         'created'       => 'তৈরি হয়েছে',
@@ -2588,7 +2588,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => 'পুনরায় যান',
                     'completed-batches'       => 'মোট ব্যাচ সম্পন্ন:',
                     'download-error-report'   => 'পূর্ণ রিপোর্ট ডাউনলোড করুন',
@@ -2606,8 +2606,8 @@ return [
                     'total-invalid-rows'      => 'মোট অবৈধ সারি:',
                     'total-rows-processed'    => 'মোট সারি প্রক্রিয়াজাত:',
                     'total-updated'           => 'মোট রেকর্ড হালনাগাদ হয়েছে:',
-                    'validate-info'           => 'আপনার ইম্পোর্ট চেক করতে একবার ভ্যালিডেট ডেটা ক্লিক করুন।',
                     'validate'                => 'যাচাই করুন',
+                    'validate-info'           => 'আপনার ইম্পোর্ট চেক করতে একবার ভ্যালিডেট ডেটা ক্লিক করুন।',
                     'validating-info'         => 'ডেটা পড়া এবং যাচাই করা শুরু হয়েছে',
                     'validation-failed-info'  => 'আপনার ইম্পোর্ট অবৈধ। দয়া করে নিম্নলিখিত ত্রুটিগুলি ঠিক করুন এবং আবার চেষ্টা করুন।',
                     'validation-success-info' => 'আপনার ইম্পোর্ট বৈধ। ইম্পোর্ট করতে ইম্পোর্টে ক্লিক করুন।',
@@ -2623,7 +2623,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'বিনিময় হার তৈরি করুন',
                 'exchange-rate' => 'বিনিময় হার',
@@ -2742,7 +2742,7 @@ return [
             'update-success'    => 'ইনভেন্টরি উৎস সফলভাবে আপডেট হয়েছে',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'আপনি কি নিশ্চিত, আপনি ডিলিট করতে চান?',
@@ -3135,7 +3135,7 @@ return [
                 'value'                         => 'মান: :value',
                 'value-input'                   => 'মান',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'            => 'সেবা যোগ করুন',
                     'channels'           => 'চ্যানেল',
                     'delete'             => 'মুছে ফেলা',
@@ -3707,40 +3707,40 @@ return [
                 ],
 
                 'payment-methods' => [
-                    'accepted-currencies'            => 'গৃহীত মুদ্রা',
-                    'accepted-currencies-info'       => 'মুদ্রা কোড কমা দিয়ে যোগ করুন উদাহরণস্বরূপ USD, INR, ...',
-                    'business-account'               => 'ব্যবসায়িক অ্যাকাউন্ট',
-                    'cash-on-delivery'               => 'ডেলিভারির সময় নগদ পরিশোধ',
-                    'cash-on-delivery-info'          => 'এটি একটি অবলম্বনে অর্ডার দেওয়ার পর কাস্টমাররা তাদের পক্ষ থেকে পণ্য বা সেবা প্রাপ্তির পরিবর্তে নগদে পরিশোধ করে।',
-                    'client-id'                      => 'ক্লায়েন্ট আইডি',
-                    'client-id-info'                 => 'পরীক্ষার জন্য "এসব" ব্যবহার করুন।',
-                    'client-secret'                  => 'ক্লায়েন্ট সিক্রেট',
-                    'client-secret-info'             => 'এখানে আপনার গোপন কী যোগ করুন',
-                    'description'                    => 'বিবরণ',
-                    'generate-invoice'               => 'অর্ডার দেওয়ার পর স্বয়ংক্রিয় ভাবে চালান তৈরি করুন',
-                    'generate-invoice-applicable'    => 'যদি স্বয়ংক্রিয় ভাবে চালান তৈরি করা হয়',
-                    'info'                           => 'পেমেন্ট মেথড তথ্য সেট করুন',
-                    'instructions'                   => 'নির্দেশাবলী',
-                    'logo'                           => 'লোগো',
-                    'logo-information'               => 'চিত্র রেজোলিউশন হতে হবে যেমন 55px X 45px',
-                    'mailing-address'                => 'চেক প্রেরণ করুন',
-                    'money-transfer'                 => 'মানি ট্রান্সফার',
-                    'money-transfer-info'            => 'একজন বা একটি অ্যাকাউন্ট থেকে অন্য ব্যক্তি বা অ্যাকাউন্টে ধনের স্থানান্তর, সাধারিত ইলেকট্রনিকভাবে, বিভিন্ন উদ্দেশ্যে যেমন লেনদেন বা অনুদান।',
-                    'page-title'                     => 'পেমেন্ট মেথডস',
-                    'paid'                           => 'পরিশোধ করা হয়েছে',
-                    'paypal-smart-button'            => 'পেপ্যাল',
-                    'paypal-smart-button-info'       => 'পেপ্যাল স্মার্ট বোতাম: ওয়েবসাইট এবং অ্যাপ্লিকেশনে নিরাপদ, বহু-পদ্ধতিতে লেনদেনের জন্য কাস্টমাইজয়েবল বোতামের সাথে অনুভূতিশীল অনলাইন পেমেন্ট সুবিধা।',
-                    'paypal-standard'                => 'পেপ্যাল স্ট্যান্ডার্ড',
-                    'paypal-standard-info'           => 'পেপ্যাল স্ট্যান্ডার্ড হলো অনলাইন ব্যবসার জন্য একটি মৌলিক পেপ্যাল পেমেন্ট বিকল্প, যা গ্রাহকদেরকে তাদের পেপ্যাল অ্যাকাউন্ট বা ক্রেডিট/ডেবিট কার্ড ব্যবহার করে পরিশোধ করতে দেয়।',
-                    'pending'                        => 'অপেক্ষারত',
-                    'pending-payment'                => 'অপেক্ষারত পরিশোধ',
-                    'processing'                     => 'প্রসেসিং',
-                    'sandbox'                        => 'স্যান্ডবক্স',
-                    'set-invoice-status'             => 'চালান তৈরি হওয়ার পর চালানের অবস্থা সেট করুন',
-                    'set-order-status'               => 'চালান তৈরি হওয়ার পর আদেশের অবস্থা সেট করুন',
-                    'sort-order'                     => 'মূল্যায়ন ক্রম',
-                    'status'                         => 'অবস্থা',
-                    'title'                          => 'শিরোনাম',
+                    'accepted-currencies'         => 'গৃহীত মুদ্রা',
+                    'accepted-currencies-info'    => 'মুদ্রা কোড কমা দিয়ে যোগ করুন উদাহরণস্বরূপ USD, INR, ...',
+                    'business-account'            => 'ব্যবসায়িক অ্যাকাউন্ট',
+                    'cash-on-delivery'            => 'ডেলিভারির সময় নগদ পরিশোধ',
+                    'cash-on-delivery-info'       => 'এটি একটি অবলম্বনে অর্ডার দেওয়ার পর কাস্টমাররা তাদের পক্ষ থেকে পণ্য বা সেবা প্রাপ্তির পরিবর্তে নগদে পরিশোধ করে।',
+                    'client-id'                   => 'ক্লায়েন্ট আইডি',
+                    'client-id-info'              => 'পরীক্ষার জন্য "এসব" ব্যবহার করুন।',
+                    'client-secret'               => 'ক্লায়েন্ট সিক্রেট',
+                    'client-secret-info'          => 'এখানে আপনার গোপন কী যোগ করুন',
+                    'description'                 => 'বিবরণ',
+                    'generate-invoice'            => 'অর্ডার দেওয়ার পর স্বয়ংক্রিয় ভাবে চালান তৈরি করুন',
+                    'generate-invoice-applicable' => 'যদি স্বয়ংক্রিয় ভাবে চালান তৈরি করা হয়',
+                    'info'                        => 'পেমেন্ট মেথড তথ্য সেট করুন',
+                    'instructions'                => 'নির্দেশাবলী',
+                    'logo'                        => 'লোগো',
+                    'logo-information'            => 'চিত্র রেজোলিউশন হতে হবে যেমন 55px X 45px',
+                    'mailing-address'             => 'চেক প্রেরণ করুন',
+                    'money-transfer'              => 'মানি ট্রান্সফার',
+                    'money-transfer-info'         => 'একজন বা একটি অ্যাকাউন্ট থেকে অন্য ব্যক্তি বা অ্যাকাউন্টে ধনের স্থানান্তর, সাধারিত ইলেকট্রনিকভাবে, বিভিন্ন উদ্দেশ্যে যেমন লেনদেন বা অনুদান।',
+                    'page-title'                  => 'পেমেন্ট মেথডস',
+                    'paid'                        => 'পরিশোধ করা হয়েছে',
+                    'paypal-smart-button'         => 'পেপ্যাল',
+                    'paypal-smart-button-info'    => 'পেপ্যাল স্মার্ট বোতাম: ওয়েবসাইট এবং অ্যাপ্লিকেশনে নিরাপদ, বহু-পদ্ধতিতে লেনদেনের জন্য কাস্টমাইজয়েবল বোতামের সাথে অনুভূতিশীল অনলাইন পেমেন্ট সুবিধা।',
+                    'paypal-standard'             => 'পেপ্যাল স্ট্যান্ডার্ড',
+                    'paypal-standard-info'        => 'পেপ্যাল স্ট্যান্ডার্ড হলো অনলাইন ব্যবসার জন্য একটি মৌলিক পেপ্যাল পেমেন্ট বিকল্প, যা গ্রাহকদেরকে তাদের পেপ্যাল অ্যাকাউন্ট বা ক্রেডিট/ডেবিট কার্ড ব্যবহার করে পরিশোধ করতে দেয়।',
+                    'pending'                     => 'অপেক্ষারত',
+                    'pending-payment'             => 'অপেক্ষারত পরিশোধ',
+                    'processing'                  => 'প্রসেসিং',
+                    'sandbox'                     => 'স্যান্ডবক্স',
+                    'set-invoice-status'          => 'চালান তৈরি হওয়ার পর চালানের অবস্থা সেট করুন',
+                    'set-order-status'            => 'চালান তৈরি হওয়ার পর আদেশের অবস্থা সেট করুন',
+                    'sort-order'                  => 'মূল্যায়ন ক্রম',
+                    'status'                      => 'অবস্থা',
+                    'title'                       => 'শিরোনাম',
                 ],
 
                 'order-settings' => [

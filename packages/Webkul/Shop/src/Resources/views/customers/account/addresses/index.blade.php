@@ -1,7 +1,7 @@
 <x-shop::layouts.account>
     <!-- Page Title -->
     <x-slot:title>
-        @lang('shop::app.customers.account.addresses.add-address')
+        @lang('shop::app.customers.account.addresses.index.add-address')
     </x-slot>
     
     <!-- Breadcrumbs -->
@@ -11,7 +11,7 @@
     <div class="flex items-center justify-between">
         <div class="">
             <h2 class="text-2xl font-medium">
-                @lang('shop::app.customers.account.addresses.title')
+                @lang('shop::app.customers.account.addresses.index.title')
             </h2>
         </div>
 
@@ -21,7 +21,7 @@
         >
             <span class="icon-location text-2xl"></span>
 
-            @lang('shop::app.customers.account.addresses.add-address') 
+            @lang('shop::app.customers.account.addresses.index.add-address') 
         </a>
     </div>
 
@@ -46,7 +46,7 @@
 
                             @if ($address->default_address)
                                 <div class="label-pending block w-max px-1.5 py-1">
-                                    @lang('shop::app.customers.account.addresses.default-address') 
+                                    @lang('shop::app.customers.account.addresses.index.default-address') 
                                 </div>
                             @endif
 
@@ -64,7 +64,7 @@
                                     <x-shop::dropdown.menu.item>
                                         <a href="{{ route('shop.customers.account.addresses.edit', $address->id) }}">
                                             <p class="w-full">
-                                                @lang('shop::app.customers.account.addresses.edit')
+                                                @lang('shop::app.customers.account.addresses.index.edit')
                                             </p>
                                         </a>    
                                     </x-shop::dropdown.menu.item>
@@ -88,7 +88,7 @@
                                             })"
                                         >
                                             <p class="w-full">
-                                                @lang('shop::app.customers.account.addresses.delete')
+                                                @lang('shop::app.customers.account.addresses.index.delete')
                                             </p>
                                         </a>
                                     </x-shop::dropdown.menu.item>
@@ -114,7 +114,7 @@
                                                 })"
                                             >
                                                 <button>
-                                                    @lang('shop::app.customers.account.addresses.set-as-default')
+                                                    @lang('shop::app.customers.account.addresses.index.set-as-default')
                                                 </button>
                                             </a>
                                         </x-shop::dropdown.menu.item>
@@ -147,7 +147,7 @@
             >
             
             <p class="text-xl">
-                @lang('shop::app.customers.account.addresses.empty-address')
+                @lang('shop::app.customers.account.addresses.index.empty-address')
             </p>
         </div>    
     @endif

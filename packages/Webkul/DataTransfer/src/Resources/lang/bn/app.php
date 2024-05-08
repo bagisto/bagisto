@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'গ্রাহকগণ',
+            'title' => 'গ্রাহকগণ',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'ইমেল: \'%s\' ইম্পোর্ট ফাইলে একাধিকবার পাওয়া গেছে।',
                     'duplicate-phone'        => 'ফোন: \'%s\' ইম্পোর্ট ফাইলে একাধিকবার পাওয়া গেছে।',
-                    'invalid-customer-group' => 'গ্রাহক গ্রুপ অবৈধ বা সমর্থিত নয়',
                     'email-not-found'        => 'ইমেল: \'%s\' সিস্টেমে পাওয়া যায়নি।',
+                    'invalid-customer-group' => 'গ্রাহক গ্রুপ অবৈধ বা সমর্থিত নয়',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'পণ্যসমূহ',
+        'products' => [
+            'title' => 'পণ্যসমূহ',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'করের হার',
+            'title' => 'করের হার',
 
             'validation' => [
                 'errors' => [

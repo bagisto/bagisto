@@ -10,6 +10,7 @@
 
 ## Medium Impact Changes
 
+- [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
 - [The System Configuration Updates](#the-system-config-update)
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The Checkout Tables Schema Updates](#the-checkout-tables-schema-updates)
@@ -17,12 +18,9 @@
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
-- [Shop Event Parameter Updates](#event-parameter-updated)
-- [Admin Customized Datagrid Header Parameters Updated](#admin-customized-datagrid-header-parameter-updated)
-- [Admin Customized Datagrid Body Parameters updated](#admin-customized-datagrid-body-parameter-updated)
-- [Shop Customized Datagrid Header Parameters Updated](#shop-customized-datagrid-header-parameter-updated)
-- [Shop Customized Datagrid Body Parameters Updated](#shop-customized-datagrid-body-parameter-updated)
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
+- [Shop Event Parameter Updates](#event-parameter-updated)
+- [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
 
 ## Low Impact Changes
 
@@ -33,6 +31,7 @@
 - [Moved `coupon.blade.php`](#moved-coupon-blade)
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
+- [Renamed Admin View render event Names](#renamed-admin-view-render-event-names)
 
 ## Upgrading To v2.2.0 From v2.1.0
 
@@ -80,10 +79,10 @@ There is no dependency needed to be updated at for this upgrade.
 
 
 
-<a name="admin"></a>
+<a name="Admin"></a>
 ### Admin
 
-<a name="The System Configuration Updates"></a>
+<a name="the-system-config-update"></a>
 #### The System Configuration Updates
 
 **Impact Probability: Medium**
@@ -145,14 +144,34 @@ In this example, the `repository` option has been replaced with `options`, which
 ```diff
 - Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
 + Route::post('update-totals/{order_id}', 'updateTotals')->name('admin.sales.refunds.update_totals');
+
+<a name="renamed-admin-view-render-event-names"></a>
+#### Admin View render event Names updated
+
+**Impact Probability: Low**
+
+1. The View render event names have been updated for consistency in the `packages/Webkul/Admin/src/Resources/views/dashboard/index.blade.php` blade file.
+
+```diff
+- {!! view_render_event('bagisto.admin.dashboard.overall_detailes.before') !!}
++ {!! view_render_event('bagisto.admin.dashboard.overall_details.before') !!}
+
+- {!! view_render_event('bagisto.admin.dashboard.overall_detailes.after') !!}
++ {!! view_render_event('bagisto.admin.dashboard.overall_details.after') !!}
+
+- {!! view_render_event('bagisto.admin.dashboard.todays_detailes.before') !!}
++ {!! view_render_event('bagisto.admin.dashboard.todays_details.before') !!}
+
+- {!! view_render_event('bagisto.admin.dashboard.todays_detailes.after') !!}
++ {!! view_render_event('bagisto.admin.dashboard.todays_details.after') !!}
 ```
 
-<a name="admin-customized-datagrid-header-parameter-updated"></a>
-####  Admin Customized Datagrid Header Parameters Updated
+<a name="admin-customized-datagrid-parameters-updated"></a>
+#### Admin Customized Datagrid Parameters Updated
 
 **Impact Probability: Medium**
 
-1. Previously, the data grid header was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+1. Previously, the data grid `header` was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
 
 ```diff
 - <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
@@ -170,12 +189,7 @@ In this example, the `repository` option has been replaced with `options`, which
 + </template>
 ```
 
-<a name="admin-customized-datagrid-body-parameter-updated"></a>
-####  Admin Customized Datagrid Body Parameters Updated
-
-**Impact Probability: Medium**
-
-1. Previously, the data grid body was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+2. Previously, the data grid `body` was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
 
 ```diff
 - <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
@@ -189,7 +203,7 @@ In this example, the `repository` option has been replaced with `options`, which
 +    sort,
 +    performAction
 + }">
-+    <!-- Updated header customization code -->
++    <!-- Updated body customization code -->
 + </template>
 ```
 
@@ -609,12 +623,12 @@ If you've implemented your own product type or overridden existing type classes,
 <a name="shop"></a>
 ### Shop
 
-<a name="shop-customized-datagrid-header-parameter-updated"></a>
-####  Shop Customized Datagrid Header Parameters Updated
+<a name="shop-customized-datagrid-parameters-updated"></a>
+####  Shop Customized Datagrid Parameters Updated
 
 **Impact Probability: Medium**
 
-1. Previously, the data grid header was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+1. Previously, the data grid `header` was customized using parameters such as `columns`, `records`, `sortPage`, `selectAllRecords`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
 
 ```diff
 - <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
@@ -632,12 +646,7 @@ If you've implemented your own product type or overridden existing type classes,
 + </template>
 ```
 
-<a name="shop-customized-datagrid-body-parameter-updated"></a>
-#### Shop Customized Datagrid Body Parameters Updated
-
-**Impact Probability: Medium**
-
-1. Previously, the data grid body was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
+2. Previously, the data grid `body` was customized using parameters such as `columns`, `records`, `setCurrentSelectionMode`, `applied`, and `isLoading`. However, with the latest updates, the parameter names have been revised for clarity and consistency across components.
 
 ```diff
 - <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
@@ -651,7 +660,7 @@ If you've implemented your own product type or overridden existing type classes,
 +    sort,
 +    performAction
 + }">
-+    <!-- Updated header customization code -->
++    <!-- Updated body customization code -->
 + </template>
 ```
 
