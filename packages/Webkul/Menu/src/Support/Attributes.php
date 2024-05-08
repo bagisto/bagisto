@@ -11,23 +11,46 @@ use ReflectionException;
  */
 final class Attributes
 {
+    /**
+     * Current Method.
+     */
     protected ?string $currentMethod = null;
 
+    /**
+     * Current Property.
+     */
     protected ?string $currentProperty = null;
 
+    /**
+     * Current Attribute Property.
+     */
     protected ?string $currentAttributeProperty = null;
 
+    /**
+     * Create the new instance of the class.
+     *
+     * @param object $class
+     * @param string|null $currentAttribute
+     * 
+     * @return void
+     */
     public function __construct(
         protected object $class,
         protected ?string $currentAttribute = null
     ) {
     }
 
+    /**
+     * Attributes used for.
+     */
     public static function for(object $class, ?string $currentAttribute = null): self
     {
         return new Attributes($class, $currentAttribute);
     }
 
+    /**
+     * Method of attributes.
+     */
     public function method(string $method): self
     {
         $this->currentMethod = $method;
@@ -35,6 +58,9 @@ final class Attributes
         return $this;
     }
 
+    /**
+     * Property of the attribute.
+     */
     public function property(string $property): self
     {
         $this->currentProperty = $property;
@@ -43,16 +69,16 @@ final class Attributes
     }
 
     /**
-     * @template T
-     *
-     * @param  class-string<T>  $attribute
-     * @return self<T>
+     * Get Attributes.
      */
     public function attribute(string $attribute): self
     {
         return new Attributes($this->class, $attribute);
     }
 
+    /**
+     * Attributes Property.
+     */
     public function attributeProperty(string $property): self
     {
         $this->currentAttributeProperty = $property;
@@ -61,8 +87,9 @@ final class Attributes
     }
 
     /**
+     * Get the attribute.
+     * 
      * @return AttributeClass
-     *
      * @throws ReflectionException
      */
     public function get(): mixed
@@ -78,7 +105,6 @@ final class Attributes
         }
 
         if (! is_null($this->currentAttribute)) {
-            /* @var \ReflectionAttribute $attributes */
             $attributes = Arr::first($reflection->getAttributes($this->currentAttribute));
         } else {
             $attributes = $reflection->getAttributes();

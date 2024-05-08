@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
-use Webkul\Menu\Facades\Menu as FacadesMenu;
+use Webkul\Menu\Facades\Menu;
 use Webkul\Menu\Menu\MenuGroup;
 use Webkul\Menu\Menu\MenuItem;
 
@@ -82,7 +82,7 @@ class AdminServiceProvider extends ServiceProvider
         ], function ($view) {
             $tree = Tree::create();
 
-            foreach (config('menu.admin') as $index => $item) {
+            foreach (config('menu.admin') as $item) {
                 if (! bouncer()->hasPermission($item['key'])) {
                     continue;
                 }
@@ -113,16 +113,20 @@ class AdminServiceProvider extends ServiceProvider
                             $child['key'],
                         )
                             ->icon($child['icon']);
-                    })->values()->toArray();
+                    })
+                        ->values()
+                        ->toArray();
 
                 return MenuGroup::make(
                     static fn () => trans($item['name']),
                     $menuItems,
                     $item['icon'],
-                )->icon($item['icon']);
+                )
+                    ->icon($item['icon'])
+                    ->setUrl(route($item['route']));
             });
 
-            FacadesMenu::register($menus);
+            Menu::register($menus);
         });
 
         view()->composer([

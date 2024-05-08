@@ -166,27 +166,27 @@
         <div class="journal-scroll h-[calc(100vh-100px)] overflow-auto">
             <nav class="grid w-full gap-2">
                 <!-- Navigation Menu -->
-                @foreach ($menu->items as $menuItem)
+                @foreach(menu()->all() as $item)
                     <div class="group/item relative">
                         <a
-                            href="{{ $menuItem['url'] }}"
-                            class="flex gap-2.5 p-1.5 items-center cursor-pointer {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 dark:hover:bg-gray-950 ' }} peer"
+                            href="{{ $item->url() }}"
+                            class="flex gap-2.5 p-1.5 items-center cursor-pointer {{ $item->isActive() == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 dark:hover:bg-gray-950 ' }} peer"
                         >
-                            <span class="{{ $menuItem['icon'] }} text-2xl {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
-                            
-                            <p class="text-gray-600 dark:text-gray-300 font-semibold whitespace-nowrap {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
-                                @lang($menuItem['name'])
+                            <span class="{{ $item->getIcon() }} text-2xl {{ $item->isActive() ? 'text-white' : ''}}"></span>
+
+                            <p class="text-gray-600 dark:text-gray-300 font-semibold whitespace-nowrap {{ $item->isActive() ? 'text-white' : ''}}">
+                                {{ $item->label() }}
                             </p>
                         </a>
 
-                        @if (count($menuItem['children']))
-                            <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-lg z-[100]">
-                                @foreach ($menuItem['children'] as $subMenuItem)
+                        @if ($item->isGroup())
+                            <div class="{{ $item->isActive() ? ' !grid bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-lg z-[100]">
+                                @foreach ($item->items() as $child)
                                     <a
-                                        href="{{ $subMenuItem['url'] }}"
-                                        class="text-sm text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 dark:text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-300 whitespace-nowrap py-1 dark:hover:bg-gray-950"
+                                        href="{{ $child->url() }}" {!! $child->isBlank() ? 'target="_blank"' : '' !!}
+                                        class="text-sm text-{{ $child->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $child->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 dark:hover:bg-gray-950"
                                     >
-                                        @lang($subMenuItem['name'])
+                                        {{ $child->label() }}
                                     </a>
                                 @endforeach
                             </div>

@@ -40,21 +40,33 @@ abstract class MenuElement
         return $this;
     }
 
+    /**
+     * Is force active.
+     */
     public function isForceActive(): bool
     {
         return ! is_null($this->forceActive);
     }
 
+    /**
+     * Is Group.
+     */
     public function isGroup(): bool
     {
         return $this instanceof MenuGroup;
     }
 
+    /**
+     * Is Item.
+     */
     public function isItem(): bool
     {
         return $this instanceof MenuItem;
     }
 
+    /**
+     * Set Url.
+     */
     public function setUrl(string|Closure|null $url, Closure|bool $blank = false): static
     {
         $this->url = $url;
@@ -65,7 +77,7 @@ abstract class MenuElement
     }
 
     /**
-     * @throws Throwable
+     * Url.
      */
     public function url(): string
     {
@@ -119,6 +131,9 @@ abstract class MenuElement
         return request()->fullUrlIs($this->url() . '*');
     }
 
+    /**
+     * Redirect to another page.
+     */
     public function blank(Closure|bool $blankCondition = true): static
     {
         $this->blank = Condition::boolean($blankCondition, true);
@@ -126,6 +141,9 @@ abstract class MenuElement
         return $this;
     }
 
+    /**
+     * Is Blank.
+     */
     public function isBlank(): bool
     {
         return $this->blank;

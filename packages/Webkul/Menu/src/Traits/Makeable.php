@@ -7,7 +7,7 @@ trait Makeable
     /**
      * Make.
      *
-     * @param  array  ...$arguments
+     * @param  array|string  ...$arguments
      */
     public static function make(...$arguments): static
     {

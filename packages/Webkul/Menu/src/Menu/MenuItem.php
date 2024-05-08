@@ -9,8 +9,11 @@ use Webkul\Menu\Support\Attributes as SupportAttributes;
 
 class MenuItem extends MenuElement
 {
-    protected ?Closure $badge = null;
-
+    /**
+     * Create the new instance of menu item.
+     * 
+     * @return void
+     */
     final public function __construct(
         Closure|string $label,
         protected Closure|MenuFiller|string $filler,
@@ -32,6 +35,9 @@ class MenuItem extends MenuElement
         $this->blank($blank);
     }
 
+    /**
+     * Resolve the menu filler.
+     */
     protected function resolveMenuFiller(MenuFiller $filler): void
     {
         $this->setUrl(fn (): string => $filler->url());
@@ -41,34 +47,16 @@ class MenuItem extends MenuElement
             ->attributeProperty('icon')
             ->get();
 
-        if (method_exists($filler, 'getBadge')) {
-            $this->badge(fn () => $filler->getBadge());
-        }
-
         if (! is_null($icon) && $this->iconValue() === '') {
             $this->icon($icon);
         }
     }
 
+    /**
+     * Get filler.
+     */
     public function getFiller(): MenuFiller|Closure|string
     {
         return $this->filler;
-    }
-
-    public function badge(Closure $callback): static
-    {
-        $this->badge = $callback;
-
-        return $this;
-    }
-
-    public function hasBadge(): bool
-    {
-        return is_callable($this->badge);
-    }
-
-    public function getBadge(): mixed
-    {
-        return value($this->badge);
     }
 }
