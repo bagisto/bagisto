@@ -169,7 +169,7 @@
 
                         <div class="flex min-w-[200px] flex-1 gap-2.5">
                             <div class="flex flex-col gap-1.5">
-                            <!-- Customer Detailes -->
+                            <!-- Customer Details -->
                                 <p class="text-base text-gray-800 dark:text-white">
                                     @{{ order.customer_name }}
                                 </p>

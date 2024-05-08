@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'العملاء',
+            'title' => 'العملاء',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'البريد الإلكتروني: \'%s\' تم العثور عليه أكثر من مرة في ملف الاستيراد.',
                     'duplicate-phone'        => 'الهاتف: \'%s\' تم العثور عليه أكثر من مرة في ملف الاستيراد.',
-                    'invalid-customer-group' => 'مجموعة العملاء غير صالحة أو غير مدعومة',
                     'email-not-found'        => 'البريد الإلكتروني: \'%s\' غير موجود في النظام.',
+                    'invalid-customer-group' => 'مجموعة العملاء غير صالحة أو غير مدعومة',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'المنتجات',
+        'products' => [
+            'title' => 'المنتجات',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'معدلات الضريبة',
+            'title' => 'معدلات الضريبة',
 
             'validation' => [
                 'errors' => [

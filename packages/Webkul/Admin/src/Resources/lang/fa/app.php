@@ -618,7 +618,7 @@ return [
                 'title'                          => 'فاکتور #:invoice_id',
             ],
 
-            'create'   => [
+            'create' => [
                 'amount-per-unit'    => ':amount در هر واحد x :qty مقدار',
                 'create-invoice'     => 'ایجاد فاکتور',
                 'create-success'     => 'فاکتور با موفقیت ایجاد شد',
@@ -1115,7 +1115,7 @@ return [
                 'value-per-locale'      => 'مقدار برای مکان (Locale)',
                 'yes'                   => 'بله',
 
-                'option'                => [
+                'option' => [
                     'color'    => 'نمونه رنگ',
                     'dropdown' => 'لیست انتخابی',
                     'image'    => 'نمونه تصویر',
@@ -1671,7 +1671,7 @@ return [
                     'update-success' => 'با موفقیت به‌روزرسانی شد',
                 ],
 
-                'datagrid'   => [
+                'datagrid' => [
                     'approved'            => 'تایید شده',
                     'comment'             => 'نظر',
                     'customer-names'      => 'نام',
@@ -2373,11 +2373,11 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => 'این :name قبلاً استفاده شده است.',
-            'create-btn'    => 'ایجاد صفحه',
-            'channel'       => 'کانال',
-            'language'      => 'زبان',
-            'title'         => 'صفحه‌ها',
+            'already-taken' => 'The :name has already been taken.',
+            'create-btn'    => 'Create Page',
+            'channel'       => 'Channel',
+            'language'      => 'Language',
+            'title'         => 'Pages',
 
             'datagrid' => [
                 'delete'              => 'حذف',
@@ -2429,7 +2429,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'ایجاد زبان',
                 'locale'     => 'زبان',
@@ -2471,7 +2471,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => 'ساخت ارز',
                 'currency'   => 'ارز',
@@ -2517,9 +2517,9 @@ return [
             ],
         ],
 
-        'data-transfer'     => [
+        'data-transfer' => [
             'imports' => [
-                'create'            => [
+                'create' => [
                     'action'              => 'اقدام',
                     'allowed-errors'      => 'خطاهای مجاز',
                     'back-btn'            => 'بازگشت',
@@ -2527,9 +2527,9 @@ return [
                     'delete'              => 'حذف',
                     'download-sample'     => 'دانلود نمونه',
                     'field-separator'     => 'جداکننده فیلد',
-                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/app/import/product-images قرار گیرند.',
-                    'file-info'           => 'از مسیر نسبی به /project-root/storage/app/import استفاده کنید، به عنوان مثال product-images، import-images.',
                     'file'                => 'فایل',
+                    'file-info'           => 'از مسیر نسبی به /project-root/storage/app/import استفاده کنید، به عنوان مثال product-images، import-images.',
+                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/app/import/product-images قرار گیرند.',
                     'general'             => 'عمومی',
                     'images-directory'    => 'مسیر پوشه تصاویر',
                     'process-in-queue'    => 'پردازش در صف',
@@ -2543,7 +2543,7 @@ return [
                     'validation-strategy' => 'استراتژی اعتبارسنجی',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'اقدام',
                     'allowed-errors'      => 'خطاهای مجاز',
                     'back-btn'            => 'بازگشت',
@@ -2551,9 +2551,9 @@ return [
                     'delete'              => 'حذف',
                     'download-sample'     => 'دانلود نمونه',
                     'field-separator'     => 'جداکننده فیلد',
-                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/app/import/product-images قرار گیرند.',
-                    'file-info'           => 'از مسیر نسبی به /project-root/storage/app/import استفاده کنید، به عنوان مثال product-images، import-images.',
                     'file'                => 'فایل',
+                    'file-info'           => 'از مسیر نسبی به /project-root/storage/app/import استفاده کنید، به عنوان مثال product-images، import-images.',
+                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/app/import/product-images قرار گیرند.',
                     'general'             => 'عمومی',
                     'images-directory'    => 'مسیر پوشه تصاویر',
                     'process-in-queue'    => 'پردازش در صف',
@@ -2567,11 +2567,11 @@ return [
                     'validation-strategy' => 'استراتژی اعتبارسنجی',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'ایجاد ورودی',
                     'title'        => 'ورودی‌ها',
 
-                    'datagrid'     => [
+                    'datagrid' => [
                         'actions'       => 'اقدامات',
                         'completed-at'  => 'اتمام یافته در',
                         'created'       => 'ایجاد شده',
@@ -2588,7 +2588,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => 'بازگشت',
                     'completed-batches'       => 'کل دسته‌های انجام شده:',
                     'download-error-report'   => 'دانلود گزارش کامل',
@@ -2623,7 +2623,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'ساخت نرخ ارز',
                 'exchange-rate' => 'نرخ ارز',
@@ -2641,7 +2641,7 @@ return [
                 ],
 
                 'edit' => [
-                    'title'   => 'ویرایش نرخ‌های ارز',
+                    'title' => 'ویرایش نرخ‌های ارز',
                 ],
 
                 'datagrid' => [
@@ -2742,7 +2742,7 @@ return [
             'update-success'    => 'منابع موجودی با موفقیت به‌روزرسانی شدند.',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'آیا مطمئن هستید که می‌خواهید حذف کنید؟',
@@ -2772,7 +2772,7 @@ return [
                     ],
 
                     'edit' => [
-                        'title'   => 'ویرایش دسته‌بندی مالیاتی',
+                        'title' => 'ویرایش دسته‌بندی مالیاتی',
                     ],
 
                     'create-success' => 'دسته‌بندی مالیاتی جدید ایجاد شد.',
@@ -2782,7 +2782,7 @@ return [
                 ],
             ],
 
-            'rates'   => [
+            'rates' => [
                 'index' => [
                     'button-title' => 'ایجاد نرخ مالیات',
                     'tax-rate'     => 'نرخ مالیات',
@@ -2968,7 +2968,7 @@ return [
                 ],
 
                 'edit' => [
-                    'title'    => 'ویرایش کاربر',
+                    'title' => 'ویرایش کاربر',
                 ],
             ],
 
@@ -3135,7 +3135,7 @@ return [
                 'value'                         => 'مقدار: :value',
                 'value-input'                   => 'مقدار',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'               => 'افزودن خدمات',
                     'channels'              => 'کانال ها',
                     'delete'                => 'حذف',

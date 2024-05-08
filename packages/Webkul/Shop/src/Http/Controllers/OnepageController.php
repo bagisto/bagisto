@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\MagicAI\Facades\MagicAI;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class OnepageController extends Controller
 {
@@ -80,9 +81,9 @@ class OnepageController extends Controller
      *
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function success()
+    public function success(OrderRepository $orderRepository)
     {
-        if (! $order = session('order')) {
+        if (! $order = $orderRepository->find(session('order_id'))) {
             return redirect()->route('shop.checkout.cart.index');
         }
 
