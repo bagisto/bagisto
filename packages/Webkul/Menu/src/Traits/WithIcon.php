@@ -24,7 +24,7 @@ trait WithIcon
     /**
      * Get Icon.
      */
-    public function getIcon(): View|string 
+    public function getIcon(): View|string
     {
         return $this->iconValue();
     }

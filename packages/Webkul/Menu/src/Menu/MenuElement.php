@@ -3,13 +3,12 @@
 namespace Webkul\Menu\Menu;
 
 use Closure;
-use Throwable;
+use Webkul\Menu\Contracts\MenuFiller;
 use Webkul\Menu\Support\Condition;
 use Webkul\Menu\Traits\HasCanSee;
 use Webkul\Menu\Traits\Makeable;
 use Webkul\Menu\Traits\WithIcon;
 use Webkul\Menu\Traits\WithLabel;
-use Webkul\Menu\Contracts\MenuFiller;
 
 abstract class MenuElement
 {
@@ -86,7 +85,7 @@ abstract class MenuElement
 
     /**
      * Is active.
-     * 
+     *
      * @return void
      */
     public function isActive()
@@ -105,7 +104,7 @@ abstract class MenuElement
             return false;
         }
 
-        if(menu()->hasForceActive()) {
+        if (menu()->hasForceActive()) {
             return false;
         }
 
@@ -128,7 +127,7 @@ abstract class MenuElement
             return request()->path() === $path;
         }
 
-        return request()->fullUrlIs($this->url() . '*');
+        return request()->fullUrlIs($this->url().'*');
     }
 
     /**

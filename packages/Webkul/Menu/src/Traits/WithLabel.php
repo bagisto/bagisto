@@ -8,8 +8,6 @@ trait WithLabel
 {
     /**
      * Closure or string label.
-     *
-     * @var Closure|string
      */
     protected Closure|string $label = '';
 
@@ -34,7 +32,7 @@ trait WithLabel
             return __(
                 str($this->label)->when(
                     $this->translatableKey,
-                    fn ($str) => $str->prepend($this->translatableKey . '.')
+                    fn ($str) => $str->prepend($this->translatableKey.'.')
                 )->value()
             );
         }

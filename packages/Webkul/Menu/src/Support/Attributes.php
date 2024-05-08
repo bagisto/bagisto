@@ -29,9 +29,7 @@ final class Attributes
     /**
      * Create the new instance of the class.
      *
-     * @param object $class
-     * @param string|null $currentAttribute
-     * 
+     *
      * @return void
      */
     public function __construct(
@@ -88,8 +86,9 @@ final class Attributes
 
     /**
      * Get the attribute.
-     * 
+     *
      * @return AttributeClass
+     *
      * @throws ReflectionException
      */
     public function get(): mixed

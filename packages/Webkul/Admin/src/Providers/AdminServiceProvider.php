@@ -114,8 +114,8 @@ class AdminServiceProvider extends ServiceProvider
                         )
                             ->icon($child['icon']);
                     })
-                        ->values()
-                        ->toArray();
+                    ->values()
+                    ->toArray();
 
                 return MenuGroup::make(
                     static fn () => trans($item['name']),
