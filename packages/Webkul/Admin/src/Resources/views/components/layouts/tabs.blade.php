@@ -1,5 +1,5 @@
 <div class="tabs">
-    @if ($items = Arr::get($tabItems, implode('.children.', array_slice(explode('.', $menu->currentKey), 0, 2)) . '.children'))
+    @if ($items = Arr::get($menu->items, implode('.children.', array_slice(explode('.', $menu->currentKey), 0, 2)) . '.children'))
         <div class="mb-4 flex gap-4 border-b-2 pt-2 dark:border-gray-800 max-sm:hidden">
             @foreach ($items as $key => $item)
                 <a href="{{ $item['url'] }}">

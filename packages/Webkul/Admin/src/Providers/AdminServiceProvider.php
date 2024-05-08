@@ -58,7 +58,7 @@ class AdminServiceProvider extends ServiceProvider
         );
 
         $this->mergeConfigFrom(
-        dirname(__DIR__).'/Config/acl.php',
+            dirname(__DIR__).'/Config/acl.php',
             'acl'
         );
 
