@@ -75,7 +75,7 @@ class AdminServiceProvider extends ServiceProvider
             $view->with('menu', $tree = $this->createMenuTree());
 
             $menus = collect($tree->items)->map(function ($item) {
-                if (collect($item['children'])->isNotEmpty()) {
+                if (empty($item['children'])) {
                     return MenuItem::make(
                         static fn () => trans($item['name']),
                         $item['route'],
