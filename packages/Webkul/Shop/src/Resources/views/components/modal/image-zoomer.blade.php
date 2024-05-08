@@ -61,7 +61,7 @@
                                         ref="slides"
                                     >
                                         <video 
-                                            width="800" 
+                                            class="max-h-full max-w-full transition-transform duration-300 ease-out"
                                             controls 
                                             v-if="attachment.type == 'video'"
                                         >
