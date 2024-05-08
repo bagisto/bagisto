@@ -29,7 +29,7 @@ class MenuItem extends MenuElement
         if ($filler instanceof MenuFiller) {
             $this->resolveMenuFiller($filler);
         } else {
-            $this->setUrl($filler);
+            $this->setRoute($filler);
         }
 
         $this->blank($blank);
@@ -40,7 +40,7 @@ class MenuItem extends MenuElement
      */
     protected function resolveMenuFiller(MenuFiller $filler): void
     {
-        $this->setUrl(fn (): string => $filler->url());
+        $this->setRoute(fn (): string => $filler->route());
 
         $icon = SupportAttributes::for($filler)
             ->attribute(AttributesIcon::class)

@@ -15,9 +15,9 @@ abstract class MenuElement
     use HasCanSee, Makeable, WithIcon, WithLabel;
 
     /**
-     * Url.
+     * Route.
      */
-    protected Closure|string|null $url = null;
+    protected Closure|string|null $route = null;
 
     /**
      * Blank.
@@ -64,11 +64,11 @@ abstract class MenuElement
     }
 
     /**
-     * Set Url.
+     * Set Route.
      */
-    public function setUrl(string|Closure|null $url, Closure|bool $blank = false): static
+    public function setRoute(string|Closure|null $route, Closure|bool $blank = false): static
     {
-        $this->url = $url;
+        $this->route = $route;
 
         $this->blank($blank);
 
@@ -76,11 +76,23 @@ abstract class MenuElement
     }
 
     /**
-     * Url.
+     * Route.
+     */
+    public function route(): string
+    {
+        return value($this->route) ?? '';
+    }
+
+    /**
+     * Url of the route.
      */
     public function url(): string
     {
-        return value($this->url) ?? '';
+        if (empty($this->route())) {
+            return '';
+        }
+
+        return route($this->route());
     }
 
     /**
@@ -127,7 +139,7 @@ abstract class MenuElement
             return request()->path() === $path;
         }
 
-        return request()->fullUrlIs($this->url().'*');
+        return request()->fullUrlIs(route($this->route()).'*');
     }
 
     /**

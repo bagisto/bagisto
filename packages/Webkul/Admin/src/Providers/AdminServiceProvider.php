@@ -100,7 +100,7 @@ class AdminServiceProvider extends ServiceProvider
                 if (empty($item['children'])) {
                     return MenuItem::make(
                         trans($item['name']),
-                        route($item['route']),
+                        $item['route'],
                     )
                         ->icon($item['icon']);
                 }
@@ -109,7 +109,7 @@ class AdminServiceProvider extends ServiceProvider
                     ->map(function ($child) {
                         return MenuItem::make(
                             trans($child['name']),
-                            route($child['route']),
+                            $child['route'],
                             $child['key'],
                         )
                             ->icon($child['icon']);
@@ -123,7 +123,7 @@ class AdminServiceProvider extends ServiceProvider
                     $item['icon'],
                 )
                     ->icon($item['icon'])
-                    ->setUrl(route($item['route']));
+                    ->setRoute($item['route']);
             });
 
             Menu::register($menus);

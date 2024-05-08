@@ -183,7 +183,7 @@
                             <div class="{{ $item->isActive() ? ' !grid bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-lg z-[100]">
                                 @foreach ($item->items() as $child)
                                     <a
-                                        href="{{ $child->url() }}" {!! $child->isBlank() ? 'target="_blank"' : '' !!}
+                                        href="{{ $child->route() }}" {!! $child->isBlank() ? 'target="_blank"' : '' !!}
                                         class="text-sm text-{{ $child->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $child->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 dark:hover:bg-gray-950"
                                     >
                                         {{ $child->label() }}
