@@ -3384,17 +3384,6 @@ return [
                 'info'  => 'Catálogo',
                 'title' => 'Catálogo',
 
-                'inventory' => [
-                    'info'  => 'Defina pedidos em atraso',
-                    'title' => 'Inventário',
-
-                    'stock-options' => [
-                        'allow-back-orders' => 'Permitir Pedidos em Atraso',
-                        'title'             => 'Opções de Estoque',
-                        'title-info'        => 'Opções de estoque são contratos de investimento que concedem o direito de comprar ou vender ações da empresa a um preço predeterminado, influenciando os lucros potenciais.',
-                    ],
-                ],
-
                 'products' => [
                     'info'  => 'Configure o checkout de convidado, página de visualização de produtos, página de visualização de carrinho, frente de loja, revisão e compartilhamento social de atributos.',
                     'title' => 'Produtos',
@@ -3708,7 +3697,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Definir números de pedido e pedidos mínimos.',
+                    'info'  => 'Defina números de pedido, pedidos mínimos e pedidos em atraso.',
                     'title' => 'Configurações de Pedido',
 
                     'order-number' => [
@@ -3724,6 +3713,12 @@ return [
                         'minimum-order-amount' => 'Valor Mínimo do Pedido',
                         'title'                => 'Configurações de Pedido Mínimo',
                         'title-info'           => 'Critérios configurados especificando a quantidade ou valor mínimos necessários para que um pedido seja processado ou se qualifique para benefícios.',
+                    ],
+
+                    'stock-options' => [
+                        'allow-back-orders' => 'Permitir Pedidos em Atraso',
+                        'title'             => 'Opções de Estoque',
+                        'title-info'        => 'Opções de estoque são contratos de investimento que concedem o direito de comprar ou vender ações da empresa a um preço predeterminado, influenciando os lucros potenciais.',
                     ],
                 ],
 

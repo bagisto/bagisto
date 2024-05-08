@@ -18,6 +18,7 @@
 <div class="content-list" markdown="1">
 
 - [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
+- [Admin Stock Options Configuration Updated](#admin-stock-options-configuration-updated)
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
@@ -36,7 +37,7 @@
 - [Moved `coupon.blade.php`](#moved-coupon-blade)
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
-- [Renamed Admin View render event Names](#renamed-admin-view-render-event-names)
+- [Renamed Admin View Render Event Names](#renamed-admin-view-render-event-names)
 
 </div>
 
@@ -74,8 +75,20 @@ There is no dependency needed to be updated at for this upgrade.
 <a name="Admin"></a>
 ### Admin
 
+<a name="admin-stock-options-configuration-updated"></a>
+####  In the file `packages/Webkul/Admin/src/Config/system.php` Admin Stock Options Configuration Updated
+
+**Impact Probability: Medium**
+
+1. Please note that with the latest upgrade, the configuration for Inventory Stock Options, previously found in the catalog section, has been relocated to Order Settings within the sales section.
+
+```diff
+- 'key'  => 'catalog.inventory',
++ 'key'  => 'sales.order_settings.stock_options',
+```
+
 <a name="renamed-admin-view-render-event-names"></a>
-#### Admin View render event Names updated
+#### Renamed Admin View Render Event Names
 
 **Impact Probability: Low**
 
