@@ -15,10 +15,8 @@ class AdminServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
-    public function boot(Router $router)
+    public function boot(Router $router): void
     {
         Route::middleware('web')->group(__DIR__.'/../Routes/web.php');
 
@@ -37,20 +35,16 @@ class AdminServiceProvider extends ServiceProvider
 
     /**
      * Register services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerConfig();
     }
 
     /**
      * Register package config.
-     *
-     * @return void
      */
-    protected function registerConfig()
+    protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
             dirname(__DIR__).'/Config/menu.php',
@@ -70,36 +64,20 @@ class AdminServiceProvider extends ServiceProvider
 
     /**
      * Bind the data to the views.
-     *
-     * @return void
      */
-    protected function composeView()
+    protected function composeView(): void
     {
         view()->composer([
             'admin::components.layouts.header.index',
             'admin::components.layouts.sidebar.index',
             'admin::components.layouts.tabs',
         ], function ($view) {
-            $tree = Tree::create();
-
-            foreach (config('menu.admin') as $item) {
-                if (! bouncer()->hasPermission($item['key'])) {
-                    continue;
-                }
-
-                $tree->add($item, 'menu');
-            }
-
-            $tree->items = $tree->removeUnauthorizedUrls();
-
-            $tree->items = core()->sortItems($tree->items);
-
-            $view->with('menu', $tree);
+            $view->with('menu', $tree = $this->createMenuTree());
 
             $menus = collect($tree->items)->map(function ($item) {
-                if (empty($item['children'])) {
+                if (collect($item['children'])->isNotEmpty()) {
                     return MenuItem::make(
-                        trans($item['name']),
+                        static fn () => trans($item['name']),
                         $item['route'],
                     )
                         ->icon($item['icon']);
@@ -108,7 +86,7 @@ class AdminServiceProvider extends ServiceProvider
                 $menuItems = collect($item['children'])
                     ->map(function ($child) {
                         return MenuItem::make(
-                            trans($child['name']),
+                            static fn () => trans($child['name']),
                             $child['route'],
                             $child['key'],
                         )
@@ -139,10 +117,8 @@ class AdminServiceProvider extends ServiceProvider
 
     /**
      * Register ACL to entire application.
-     *
-     * @return void
      */
-    protected function registerACL()
+    protected function registerACL(): void
     {
         $this->app->singleton('acl', function () {
             return $this->createACL();
@@ -150,11 +126,37 @@ class AdminServiceProvider extends ServiceProvider
     }
 
     /**
-     * Create ACL tree.
-     *
-     * @return mixed
+     * Create menu tree.
      */
-    protected function createACL()
+    public function createMenuTree(): Tree
+    {
+        static $tree;
+
+        if ($tree) {
+            return $tree;
+        }
+
+        $tree = Tree::create();
+
+        foreach (config('menu.admin') as $item) {
+            if (! bouncer()->hasPermission($item['key'])) {
+                continue;
+            }
+
+            $tree->add($item, 'menu');
+        }
+
+        $tree->items = $tree->removeUnauthorizedUrls();
+
+        $tree->items = core()->sortItems($tree->items);
+
+        return $tree;
+    }
+
+    /**
+     * Create ACL tree.
+     */
+    protected function createACL(): Tree
     {
         static $tree;
 
