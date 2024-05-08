@@ -29,9 +29,12 @@
                     </h2>
 
                     <!-- Dropdown Options Container -->
-                    <template
-                        v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'"
-                    >
+                    <template v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
+                        <!-- Dropdown Label -->
+                        <h2 class="mb-4 text-xl max-sm:mb-1.5 max-sm:text-base max-sm:font-medium">
+                            @{{ attribute.label }}
+                        </h2>
+                        
                         <!-- Dropdown Options -->
                         <v-field
                             as="select"
@@ -57,6 +60,11 @@
 
                     <!-- Swatch Options Container -->
                     <template v-else>
+                        <!-- Option Label -->
+                        <h2 class="mb-4 text-xl max-sm:text-base">
+                            @{{ attribute.label }}
+                        </h2>
+
                         <!-- Swatch Options -->
                         <div class="flex items-center gap-3">
                             <template v-for="(option, index) in attribute.options">

@@ -148,17 +148,17 @@
     </div>
 
     <!-- Information Section -->
-    <div class="container mt-10 !p-0 max-1180:px-5 1180:hidden">
+    <div class="container mt-10 !p-0 max-1180:px-5 max-sm:mt-6 1180:hidden">
         <!-- Description Accordion -->
         <x-shop::accordion :is-active="true">
-            <x-slot:header class="bg-gray-100">
+            <x-slot:header class="bg-gray-100 max-sm:mb-2">
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.description')
                 </p>
             </x-slot>
 
-            <x-slot:content>
-                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm max-sm:px-5 max-sm:text-xs max-sm:font-normal">
+            <x-slot:content class="max-sm:px-0">
+                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm max-sm:mb-0 max-sm:px-5 max-sm:text-base max-sm:font-normal">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -271,12 +271,12 @@
                     >
 
                     <div class="container px-[60px] max-1180:px-0">
-                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
+                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-5">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
 
                             <!-- Details -->
-                            <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5">
+                            <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5 max-sm:px-4">
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex justify-between gap-4">
@@ -286,7 +286,7 @@
 
                                     @if (core()->getConfigData('general.content.shop.wishlist_option'))
                                         <div
-                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition-all hover:opacity-[0.8]"
+                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-8 max-sm:min-h-8 max-sm:min-w-8 max-sm:text-lg"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
@@ -302,7 +302,7 @@
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
-                                <div class="mt-4 flex items-center gap-4">
+                                <div class="mt-4 flex items-center gap-4 max-sm:mt-2.5">
                                     <x-shop::products.star-rating 
                                         :value="$avgRatings"
                                         :is-editable=false
@@ -320,7 +320,7 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
+                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-2.5 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
                                 </p>
 
@@ -344,7 +344,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-6 text-lg text-[#6E6E6E] max-sm:mt-4 max-sm:text-sm">
+                                <p class="mt-6 text-lg text-[#6E6E6E] max-sm:mt-2.5 max-sm:text-sm">
                                     {!! $product->short_description !!}
                                 </p>
 
@@ -410,11 +410,11 @@
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="mt-10 flex gap-9 max-sm:flex-wrap max-sm:justify-center">
+                                <div class="mt-10 flex gap-9 max-sm:mt-6 max-sm:flex-wrap max-sm:justify-center max-sm:gap-2.5">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div
-                                        class="flex cursor-pointer items-center justify-center gap-2.5"
+                                        class="flex cursor-pointer items-center justify-center gap-2.5 max-sm:text-base"
                                         role="button"
                                         tabindex="0"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"
