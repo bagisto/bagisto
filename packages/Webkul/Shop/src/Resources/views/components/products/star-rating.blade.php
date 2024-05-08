@@ -2,6 +2,7 @@
     'name'     => 'rating',
     'value'    => 0,
     'disabled' => true,
+    'size'     => 'text-2xl',
 ])
 
 <v-star-rating
@@ -9,6 +10,7 @@
     name="{{ $name }}"
     value="{{ $value }}"
     disabled="{{ $disabled }}"
+    size="{{ $size }}"
 >
     <x-shop::shimmer.products.reviews.ratings />
 </v-star-rating>
@@ -20,7 +22,8 @@
     >
         <div class="flex">
             <span
-                class="icon-star-fill cursor-pointer text-2xl"
+                class="icon-star-fill cursor-pointer"
+                :class="this.size"
                 role="presentation"
                 v-for="rating in availableRatings"
                 v-if="! disabled"
@@ -30,7 +33,8 @@
             </span>
 
             <span
-                class="icon-star-fill text-2xl"
+                class="icon-star-fill"
+                :class="this.size"
                 role="presentation"
                 v-for="rating in availableRatings"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
@@ -54,6 +58,7 @@
                 "name",
                 "value",
                 "disabled",
+                "size",
             ],
 
             data() {

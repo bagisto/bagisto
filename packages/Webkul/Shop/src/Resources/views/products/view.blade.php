@@ -158,7 +158,7 @@
             </x-slot>
 
             <x-slot:content>
-                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm">
+                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm max-sm:px-5 max-sm:text-xs max-sm:font-normal">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -218,7 +218,7 @@
         @endif
 
         <!-- Reviews Accordion -->
-        <x-shop::accordion class="bg-gray-100" :is-active="false">
+        <x-shop::accordion class="bg-gray-100 max-sm:border-none" :is-active="false">
             <x-slot:header>
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.review')

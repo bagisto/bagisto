@@ -1,7 +1,7 @@
 @if ($product->type == 'grouped')
     {!! view_render_event('bagisto.shop.products.view.grouped_products.before', ['product' => $product]) !!}
 
-    <div class="w-[455px] max-w-full">
+    <div class="w-[455px] max-w-full max-sm:w-full">
         @php
             $groupedProducts = $product->grouped_products()->orderBy('sort_order')->get();
         @endphp

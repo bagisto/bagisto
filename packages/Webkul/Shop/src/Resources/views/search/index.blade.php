@@ -24,8 +24,8 @@
             @include('shop::search.images.results')
         @endif
 
-        <div class="mt-8 flex items-center justify-between">
-            <h1 class="text-2xl font-medium">
+        <div class="mt-8 flex items-center justify-between max-sm:mt-5">
+            <h1 class="text-2xl font-medium max-sm:text-xl">
                 {{ $title }}
             </h1>
         </div>
@@ -101,6 +101,7 @@
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
+                                            :navigation-link="route('shop.search.index')"
                                         />
                                     </div>
                                 </template>

@@ -1,4 +1,4 @@
-<div class="container mt-20 max-lg:px-8 max-sm:mt-8 max-sm:!px-4">
+<div class="container mt-20 max-lg:px-8 max-sm:my-5 max-sm:!px-4">
     <div class="flex justify-between">
         <h3 class="shimmer h-[32px] w-[200px]"></h3>
 

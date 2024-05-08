@@ -224,7 +224,7 @@
 
         <a
             href="{{ route('shop.checkout.onepage.index') }}"
-            class="primary-button mt-4 place-self-end rounded-2xl px-11 py-3 max-sm:my-4 max-sm:w-full max-sm:max-w-full max-sm:py-3.5 max-sm:text-sm"
+            class="primary-button mt-4 place-self-end rounded-2xl px-11 py-3 max-sm:mt-4 max-sm:w-full max-sm:max-w-full max-sm:py-3.5 max-sm:text-sm"
         >
             @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>
