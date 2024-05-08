@@ -179,7 +179,7 @@
                             </p>
                         </a>
 
-                        @if ($item->isGroup())
+                        @if ($item->hasGroup())
                             <div class="{{ $item->isActive() ? ' !grid bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-lg z-[100]">
                                 @foreach ($item->items() as $child)
                                     <a

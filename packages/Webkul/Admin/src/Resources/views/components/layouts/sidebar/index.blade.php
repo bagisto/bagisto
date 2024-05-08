@@ -9,7 +9,7 @@
                 >
                     <x-menu::menu.item :item="$item" />
 
-                    @if($item->isGroup())
+                    @if($item->hasGroup())
                         <x-menu::menu.group :item="$item" />
                     @endif
                 </div>

@@ -48,15 +48,15 @@ abstract class MenuElement
     }
 
     /**
-     * Is Group.
+     * Item Has Group.
      */
-    public function isGroup(): bool
+    public function hasGroup(): bool
     {
         return $this instanceof MenuGroup;
     }
 
     /**
-     * Is Item.
+     * Is instance of MenuItem.
      */
     public function isItem(): bool
     {
