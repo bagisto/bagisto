@@ -3,14 +3,11 @@
 namespace Webkul\Menu\Traits;
 
 use Illuminate\Contracts\View\View;
-// use MoonShine\Components\Icon;
 
 trait WithIcon
 {
     /**
      * Icon.
-     *
-     * @var string|null
      */
     protected ?string $icon = null;
 
@@ -27,29 +24,13 @@ trait WithIcon
     /**
      * Get Icon.
      */
-    public function getIcon(
-        int $size = 8,
-        string $color = '',
-        string $class = ''
-    ): View|string 
+    public function getIcon(): View|string 
     {
-        if ($this->iconValue() === '') {
-            return '';
-        }
-
-
-        return 'Test Icon';
-        // return Icon::make(
-        //     $this->iconValue(),
-        //     $size,
-        //     $color
-        // )->customAttributes(['class' => $class])->render();
+        return $this->iconValue();
     }
 
     /**
      * Icon value.
-     *
-     * @return string
      */
     public function iconValue(): string
     {

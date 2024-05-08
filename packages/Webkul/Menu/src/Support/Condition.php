@@ -10,7 +10,6 @@ final class Condition
      * Returns the Boolean value of the condition
      *
      * @param  bool  $default  Default value. Return if condition not isset
-     *
      */
     public static function boolean(
         Closure|bool|null $condition,

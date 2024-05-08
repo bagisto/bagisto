@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
+use Webkul\Menu\Facades\Menu as FacadesMenu;
+use Webkul\Menu\Menu\MenuGroup;
+use Webkul\Menu\Menu\MenuItem;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -92,6 +95,34 @@ class AdminServiceProvider extends ServiceProvider
             $tree->items = core()->sortItems($tree->items);
 
             $view->with('menu', $tree);
+
+            $menus = collect($tree->items)->map(function ($item) {
+                if (empty($item['children'])) {
+                    return MenuItem::make(
+                        trans($item['name']),
+                        route($item['route']),
+                    )
+                        ->icon($item['icon']);
+                }
+
+                $menuItems = collect($item['children'])
+                    ->map(function ($child) {
+                        return MenuItem::make(
+                            trans($child['name']),
+                            route($child['route']),
+                            $child['key'],
+                        )
+                            ->icon($child['icon']);
+                    })->values()->toArray();
+
+                return MenuGroup::make(
+                    static fn () => trans($item['name']),
+                    $menuItems,
+                    $item['icon'],
+                )->icon($item['icon']);
+            });
+
+            FacadesMenu::register($menus);
         });
 
         view()->composer([

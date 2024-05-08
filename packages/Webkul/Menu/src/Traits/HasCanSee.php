@@ -8,16 +8,11 @@ trait HasCanSee
 {
     /**
      * Can see callback.
-     *
-     * @var Closure|null
      */
     protected ?Closure $canSeeCallback = null;
 
     /**
      * Can See.
-     *
-     * @param Closure $callback
-     * @return static
      */
     public function canSee(Closure $callback): static
     {
@@ -28,9 +23,6 @@ trait HasCanSee
 
     /**
      * Is See.
-     *
-     * @param mixed $data
-     * @return boolean
      */
     public function isSee(mixed $data): bool
     {

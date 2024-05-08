@@ -44,6 +44,7 @@ final class Attributes
 
     /**
      * @template T
+     *
      * @param  class-string<T>  $attribute
      * @return self<T>
      */
@@ -61,6 +62,7 @@ final class Attributes
 
     /**
      * @return AttributeClass
+     *
      * @throws ReflectionException
      */
     public function get(): mixed

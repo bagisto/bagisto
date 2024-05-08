@@ -3,27 +3,36 @@
 namespace Webkul\Menu\Menu;
 
 use Closure;
+use Throwable;
+use Webkul\Menu\Support\Condition;
 use Webkul\Menu\Traits\HasCanSee;
 use Webkul\Menu\Traits\Makeable;
 use Webkul\Menu\Traits\WithIcon;
 use Webkul\Menu\Traits\WithLabel;
-use Throwable;
 use Webkul\Menu\Contracts\MenuFiller;
-use Webkul\Menu\Support\Condition;
 
 abstract class MenuElement
 {
-    use Makeable;
-    use WithIcon;
-    use HasCanSee;
-    use WithLabel;
+    use HasCanSee, Makeable, WithIcon, WithLabel;
 
+    /**
+     * Url.
+     */
     protected Closure|string|null $url = null;
 
+    /**
+     * Blank.
+     */
     protected Closure|bool $blank = false;
 
+    /**
+     * forceActive.
+     */
     protected Closure|bool|null $forceActive = null;
 
+    /**
+     * Force active.
+     */
     public function forceActive(Closure|bool $forceActive): static
     {
         $this->forceActive = $forceActive;
@@ -64,9 +73,11 @@ abstract class MenuElement
     }
 
     /**
-     * @throws Throwable
+     * Is active.
+     * 
+     * @return void
      */
-    public function isActive(): bool
+    public function isActive()
     {
         if ($this->isForceActive() && value($this->forceActive) === true) {
             return true;
@@ -104,10 +115,6 @@ abstract class MenuElement
         if ($path === '/' && request()->host() === $host) {
             return request()->path() === $path;
         }
-
-        // if ($this->url() === moonshineRouter()->home()) {
-        //     return request()->fullUrlIs($this->url());
-        // }
 
         return request()->fullUrlIs($this->url() . '*');
     }

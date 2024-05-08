@@ -2,11 +2,11 @@
 
 namespace Webkul\Menu\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Menu\Facades\Menu as MenuFacade;
 use Webkul\Menu\Menu as Menu;
-
 
 class MenuServiceProvider extends ServiceProvider
 {
@@ -16,6 +16,8 @@ class MenuServiceProvider extends ServiceProvider
     public function boot(): void
     {
         include __DIR__.'/../Http/helpers.php';
+
+        Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'menu');
     }
 
     /**
