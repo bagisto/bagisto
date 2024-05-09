@@ -105,7 +105,7 @@
 
                                     <!-- Image Swatch Options -->
                                     <label 
-                                        class="group relative flex h-[60px] w-[60px] cursor-pointer items-center justify-center overflow-hidden rounded-full border bg-white font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
+                                        class="group relative flex h-[60px] w-[60px] cursor-pointer items-center justify-center overflow-hidden rounded-full border bg-white font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:py-6"
                                         :class="{'ring-2 ring-navyBlue' : option.id == attribute.selectedValue }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'image'"

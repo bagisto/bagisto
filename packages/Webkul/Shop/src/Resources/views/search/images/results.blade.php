@@ -23,10 +23,10 @@
         type="text/x-template"
         id="v-image-search-result-component-template"
     >
-        <div class="mt-8 rounded-lg border border-gray-200 bg-gray-100 p-5">
-            <div class="flex gap-12">
-                <img 
-                    class="h-[110px] max-h-[110px] min-h-[110px] w-[110px] max-w-[110px] rounded-sm" 
+        <div class="mt-8 rounded-lg border border-gray-200 bg-gray-100 p-5 max-sm:grid max-sm:gap-y-2.5 max-sm:p-2.5">
+            <div class="flex gap-12 max-sm:items-center max-sm:gap-4">
+                <img
+                    class="h-[110px] max-h-[110px] min-h-[110px] w-[110px] max-w-[110px] rounded-sm max-sm:h-[60px] max-sm:max-h-[60px] max-sm:min-h-[60px] max-sm:w-[60px] max-sm:max-w-[60px]"
                     :src="searchedImageUrl"
                     alt="search image"
                     height="110"
@@ -34,11 +34,11 @@
                 />
 
                 <div class="flex flex-col gap-4">
-                    <h2 class="text-2xl font-medium">
+                    <h2 class="text-2xl font-medium max-sm:text-base">
                         @lang('shop::app.search.images.results.analyzed-keywords')
                     </h2>
 
-                    <div class="flex flex-wrap gap-2">
+                    <div class="flex flex-wrap gap-2 max-sm:hidden">
                         <span 
                             class="m-1 flex cursor-pointer items-center justify-center rounded-full border bg-white px-2 py-1 font-medium"
                             v-for="term in searchedTerms"
@@ -50,6 +50,18 @@
                         </span>
                     </div>
                 </div>
+            </div>
+
+            <div class="hidden flex-wrap gap-2 max-sm:flex">
+                <span 
+                    class="flex cursor-pointer items-center justify-center rounded-full border bg-white font-medium"
+                    v-for="term in searchedTerms"
+                    @click="search(term)"
+                >
+                    <span class="max-w-full flex-initial px-2.5 py-2 text-xs font-normal leading-none">
+                        @{{ term.name }}
+                    </span>
+                </span>
             </div>
         </div>
     </script>

@@ -67,7 +67,7 @@
                         <div class="relative w-full">
                             <x-shop::form.control-group.control
                                 type="email"
-                                class="blockw-[420px] max-w-full rounded-xl border-[2px] border-[#E9DECC] bg-[#F1EADF] p-28 px-5 py-5 text-xs font-medium max-1060:w-full"
+                                class="block w-[420px] max-w-full rounded-xl border-[2px] border-[#E9DECC] bg-[#F1EADF] p-28 px-5 py-5 text-xs font-medium max-1060:w-full"
                                 name="email"
                                 rules="required|email"
                                 label="Email"
