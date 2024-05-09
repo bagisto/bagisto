@@ -12,7 +12,7 @@
         id="v-products-carousel-template"
     >
         <div
-            class="container mt-20 max-lg:px-8 max-sm:my-5 max-sm:!px-4"
+            class="container mt-20 max-lg:px-8 max-sm:mt-10 max-sm:!px-4"
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
@@ -29,7 +29,7 @@
                         <p class="hidden items-center text-sm max-sm:block">
                             @lang('shop::app.components.products.carousel.view-all')
 
-                            <span class="icon-arrow-right text-sm"></span>
+                            <span class="icon-arrow-right"></span>
                         </p>
                     </a>
 
@@ -55,7 +55,7 @@
 
             <div
                 ref="swiperContainer"
-                class="flex gap-8 [&>*]:flex-[0] mt-10 overflow-auto scroll-smooth scrollbar-hide max-sm:mt-5 max-sm:gap-4"
+                class="flex gap-8 [&>*]:flex-[0] mt-10 overflow-auto scroll-smooth scrollbar-hide max-sm:mt-5 max-sm:gap-4 max-sm:whitespace-nowrap"
             >
                 <x-shop::products.card
                     class="min-w-[291px] max-sm:h-fit max-sm:min-w-[198px]"

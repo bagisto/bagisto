@@ -158,7 +158,7 @@
             </x-slot>
 
             <x-slot:content class="max-sm:px-0">
-                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm max-sm:mb-0 max-sm:px-5 max-sm:text-base max-sm:font-normal">
+                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm max-sm:mb-0 max-sm:px-5 max-sm:text-sm max-sm:font-normal">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -166,8 +166,8 @@
 
         <!-- Additional Information Accordion -->
         @if (count($attributeData))
-            <x-shop::accordion class="bg-gray-100" :is-active="false">
-                <x-slot:header>
+            <x-shop::accordion :is-active="false">
+                <x-slot:header class="bg-gray-100 max-sm:mb-2">
                     <p class="text-base font-medium 1180:hidden">
                         @lang('shop::app.products.view.additional-information')
                     </p>

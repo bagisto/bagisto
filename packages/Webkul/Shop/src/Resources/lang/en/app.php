@@ -571,7 +571,7 @@ return [
                 'cancel'           => 'Cancel',
                 'comment'          => 'Comment',
                 'customer-review'  => 'Customer Reviews',
-                'empty-review'     => 'No Review found, be the first to review this product',
+                'empty-review'     => 'No Review found, Be the first to review this product',
                 'failed-to-upload' => 'The image failed to upload',
                 'load-more'        => 'Load More',
                 'name'             => 'Name',

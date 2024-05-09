@@ -18,7 +18,7 @@
     ]);
 @endphp
 
-<footer class="mt-9 bg-lightOrange max-sm:mt-7">
+<footer class="mt-9 bg-lightOrange max-sm:mt-10">
     <div class="flex justify-between gap-x-6 gap-y-8 p-[60px] max-1060:flex-col-reverse max-1060:flex-wrap max-sm:px-4 max-sm:py-5">
         <div class="flex flex-wrap items-start gap-24 max-1180:gap-6 max-1060:justify-between">
             @if ($customization?->options)

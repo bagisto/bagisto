@@ -61,7 +61,7 @@
                     <!-- Swatch Options Container -->
                     <template v-else>
                         <!-- Option Label -->
-                        <h2 class="mb-4 text-xl max-sm:text-base">
+                        <h2 class="mb-4 text-xl max-sm:mb-2 max-sm:text-base">
                             @{{ attribute.label }}
                         </h2>
 
@@ -140,7 +140,7 @@
 
                                     <!-- Text Swatch Options -->
                                     <label 
-                                        class="group relative flex h-[60px] min-w-[60px] cursor-pointer items-center justify-center rounded-full border bg-white px-4 py-3 font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
+                                        class="group relative flex h-fit min-w-fit cursor-pointer items-center justify-center rounded-full border bg-white px-5 py-3 font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none max-sm:h-fit max-sm:w-fit max-sm:px-3.5 max-sm:py-2"
                                         :class="{'ring-2 ring-navyBlue' : option.id == attribute.selectedValue }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'text'"

@@ -251,7 +251,7 @@
                                                     <div v-if="swatchType == 'image'">
                                                         <img
                                                             src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
-                                                            class="h-[50px] w-[50px] dark:mix-blend-exclusion dark:invert"
+                                                            class="h-[50px] w-[50px]"
                                                             :ref="'image_' + element.params.id"
                                                         />
 

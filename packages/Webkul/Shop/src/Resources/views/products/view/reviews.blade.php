@@ -163,7 +163,7 @@
                             || auth()->guard('customer')->user()
                         )
                             <div
-                                class="flex cursor-pointer items-center gap-x-4 rounded-xl border border-navyBlue px-4 py-2.5 max-sm:gap-x-2.5 max-sm:p-1.5 max-sm:text-xs"
+                                class="flex cursor-pointer items-center gap-x-4 rounded-xl border border-navyBlue px-4 py-2.5 max-sm:gap-x-1.5 max-sm:rounded-lg max-sm:px-3.5 max-sm:py-1.5 max-sm:text-xs"
                                 @click="canReview = true"
                             >
                                 <span class="icon-pen text-2xl"></span>
@@ -221,10 +221,10 @@
 
                     <template v-else>
                         <!-- Empty Review Section -->
-                        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
-                            <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
+                        <div class="m-auto grid w-full place-content-center items-center justify-items-center py-28 text-center max-sm:py-10">
+                            <img class="max-sm:h-[100px] max-sm:w-[100px]" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 
-                            <p class="text-xl">
+                            <p class="text-xl max-sm:text-xs">
                                 @lang('shop::app.products.view.reviews.empty-review')
                             </p>
                         </div>
@@ -407,7 +407,7 @@
                     </p>
     
                     <button
-                        class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-2 text-sm"
+                        class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-2 text-sm max-sm:px-4 max-sm:py-1.5 max-sm:text-xs"
                         @click="translate"
                     >
                         <!-- Spinner -->
