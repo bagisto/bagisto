@@ -3,9 +3,6 @@
         <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
             <div class="flex items-center justify-between gap-x-2.5">
                 <div class="flex flex-col gap-1">
-                    <div class="shimmer h-[17px] w-16"></div>
-                    
-                    <div class="shimmer h-[17px] w-52">
                     </div>
                     <div class="shimmer h-4 w-24"></div>
 
