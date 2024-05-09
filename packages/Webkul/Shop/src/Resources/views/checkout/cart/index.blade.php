@@ -281,12 +281,31 @@
                                     </div>
 
                                     <div class="text-right max-sm:hidden">
-
                                         {!! view_render_event('bagisto.shop.checkout.cart.total.before') !!}
+                                        
+                                        <template v-if="displayTax.prices == 'including_tax'">
+                                            <p class="text-lg font-semibold">
+                                                @{{ item.formatted_total_incl_tax }}
+                                            </p>
+                                        </template>
 
-                                        <p class="text-lg font-semibold">
-                                            @{{ item.formatted_total }}
-                                        </p>
+                                        <template v-else-if="displayTax.prices == 'both'">
+                                            <p class="flex flex-col text-lg font-semibold">
+                                                @{{ item.formatted_total_incl_tax }}
+
+                                                <span class="text-xs font-normal">
+                                                    @lang('shop::app.checkout.cart.index.excl-tax')
+                                                    
+                                                    <span class="font-medium">@{{ item.formatted_total }}</span>
+                                                </span>
+                                            </p>
+                                        </template>
+
+                                        <template v-else>
+                                            <p class="text-lg font-semibold">
+                                                @{{ item.formatted_total }}
+                                            </p>
+                                        </template>
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.total.after') !!}
 
@@ -342,7 +361,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.cart.summary.before') !!}
 
-                        <!-- Cart Summary -->
+                        <!-- Cart Summary Blade File -->
                         @include('shop::checkout.cart.summary')
 
                         {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
@@ -381,6 +400,14 @@
 
                         applied: {
                             quantity: {},
+                        },
+
+                        displayTax: {
+                            prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
+
+                            subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
+                            
+                            shipping: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_shipping_amount') }}",
                         },
 
                         isLoading: true,

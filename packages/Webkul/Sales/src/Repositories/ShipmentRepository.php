@@ -71,22 +71,25 @@ class ShipmentRepository extends Repository
                 }
 
                 $totalQty += $qty;
+
                 $totalWeight += $orderItem->weight * $qty;
 
                 $this->shipmentItemRepository->create([
-                    'shipment_id'   => $shipment->id,
-                    'order_item_id' => $orderItem->id,
-                    'name'          => $orderItem->name,
-                    'sku'           => $orderItem->getTypeInstance()->getOrderedItem($orderItem)->sku,
-                    'qty'           => $qty,
-                    'weight'        => $orderItem->weight * $qty,
-                    'price'         => $orderItem->price,
-                    'base_price'    => $orderItem->base_price,
-                    'total'         => $orderItem->price * $qty,
-                    'base_total'    => $orderItem->base_price * $qty,
-                    'product_id'    => $orderItem->product_id,
-                    'product_type'  => $orderItem->product_type,
-                    'additional'    => $orderItem->additional,
+                    'shipment_id'         => $shipment->id,
+                    'order_item_id'       => $orderItem->id,
+                    'name'                => $orderItem->name,
+                    'sku'                 => $orderItem->getTypeInstance()->getOrderedItem($orderItem)->sku,
+                    'qty'                 => $qty,
+                    'weight'              => $orderItem->weight * $qty,
+                    'price'               => $orderItem->price,
+                    'price_incl_tax'      => $orderItem->price_incl_tax,
+                    'base_price'          => $orderItem->base_price,
+                    'base_price_incl_tax' => $orderItem->base_price_incl_tax,
+                    'total'               => $orderItem->price * $qty,
+                    'base_total'          => $orderItem->base_price * $qty,
+                    'product_id'          => $orderItem->product_id,
+                    'product_type'        => $orderItem->product_type,
+                    'additional'          => $orderItem->additional,
                 ]);
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
