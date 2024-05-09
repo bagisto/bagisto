@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'Покупатели',
+            'title' => 'Покупатели',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'Email : \'%s\' встречается более одного раза в файле импорта.',
                     'duplicate-phone'        => 'Телефон : \'%s\' встречается более одного раза в файле импорта.',
-                    'invalid-customer-group' => 'Группа покупателей не поддерживается или неверна',
                     'email-not-found'        => 'Email : \'%s\' не найден в системе.',
+                    'invalid-customer-group' => 'Группа покупателей не поддерживается или неверна',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'Товары',
+        'products' => [
+            'title' => 'Товары',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'Ставки налогов',
+            'title' => 'Ставки налогов',
 
             'validation' => [
                 'errors' => [

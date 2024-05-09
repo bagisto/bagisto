@@ -1,12 +1,12 @@
 @php
-    $detailes = [
+    $details = [
         'mini'    => 'true',
         'url'     => route('shop.product_or_category.index', $product->url_key),
         'title'   => $product->name,
         'summary' => $message
     ];
 
-    $linkedinURL = 'https://www.linkedin.com/shareArticle?' . http_build_query($detailes);
+    $linkedinURL = 'https://www.linkedin.com/shareArticle?' . http_build_query($details);
 @endphp
 
 <v-linkedin-share></v-linkedin-share>

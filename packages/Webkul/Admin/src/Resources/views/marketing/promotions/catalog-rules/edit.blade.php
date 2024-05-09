@@ -841,7 +841,7 @@
                 },
 
                 computed: {
-                    matchedAttribute: function () {
+                    matchedAttribute() {
                         if (this.condition.attribute == '')
                             return;
 
@@ -854,10 +854,9 @@
                         });
 
                         if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
-
-                            this.condition.value = this.condition.value == '' && this.condition.value != undefined
-                                    ? []
-                                    : Array.isArray(this.condition.value) ? this.condition.value : [];
+                            this.condition.value = this.condition.value
+                                ? (Array.isArray(this.condition.value) ? this.condition.value : [])
+                                : [];
                         }
 
                         return matchedAttribute[0];

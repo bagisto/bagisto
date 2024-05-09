@@ -1028,15 +1028,21 @@
                     },
 
                     removeOption(id) {
-                        let foundIndex = this.optionsData.findIndex(item => item.id === id);
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                let foundIndex = this.optionsData.findIndex(item => item.id === id);
 
-                        if (foundIndex !== -1) {
-                            if (this.optionsData[foundIndex].isNew) {
-                                this.optionsData.splice(foundIndex, 1);
-                            } else {
-                                this.optionsData[foundIndex].isDelete = true;
+                                if (foundIndex !== -1) {
+                                    if (this.optionsData[foundIndex].isNew) {
+                                        this.optionsData.splice(foundIndex, 1);
+                                    } else {
+                                        this.optionsData[foundIndex].isDelete = true;
+                                    }
+                                }
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: "@lang('admin::app.catalog.attributes.edit.option-deleted')" });
                             }
-                        }
+                        });
                     },
 
                     listenModel(event) {
