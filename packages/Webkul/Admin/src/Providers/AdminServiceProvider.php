@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Providers;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -74,37 +75,7 @@ class AdminServiceProvider extends ServiceProvider
         ], function ($view) {
             $view->with('menu', $tree = $this->createMenuTree());
 
-            $menus = collect($tree->items)->map(function ($item) {
-                if (empty($item['children'])) {
-                    return MenuItem::make(
-                        static fn () => trans($item['name']),
-                        $item['route'],
-                    )
-                        ->icon($item['icon']);
-                }
-
-                $menuItems = collect($item['children'])
-                    ->map(function ($child) {
-                        return MenuItem::make(
-                            static fn () => trans($child['name']),
-                            $child['route'],
-                            $child['key'],
-                        )
-                            ->icon($child['icon']);
-                    })
-                    ->values()
-                    ->toArray();
-
-                return MenuGroup::make(
-                    static fn () => trans($item['name']),
-                    $menuItems,
-                    $item['icon'],
-                )
-                    ->icon($item['icon'])
-                    ->setRoute($item['route']);
-            });
-
-            Menu::register($menus);
+            Menu::register($this->mapMenuItems($tree->items));
         });
 
         view()->composer([
@@ -112,6 +83,29 @@ class AdminServiceProvider extends ServiceProvider
             'admin::settings.roles.edit',
         ], function ($view) {
             $view->with('acl', $this->createACL());
+        });
+    }
+
+    /**
+     * Mapping the menu items.
+     */
+    public function mapMenuItems(array $items): Collection
+    {
+        return collect($items)->map(function ($item) {
+            if (empty($item['children'])) {
+                return MenuItem::make(
+                    static fn () => trans($item['name']),
+                    $item['route'],
+                )->icon($item['icon']);
+            }
+
+            $menuItems = $this->mapMenuItems($item['children']);
+
+            return MenuGroup::make(
+                static fn () => trans($item['name']),
+                $menuItems,
+                $item['icon'],
+            )->icon($item['icon'])->setRoute($item['route']);
         });
     }
 
