@@ -270,6 +270,15 @@
                 <x-shop::form.control-group.error ::name="controlName + '.phone'" />
             </x-shop::form.control-group>
 
+            <!-- Hidden Field for default address -->
+            <x-shop::form.control-group>
+                <x-shop::form.control-group.control
+                    type="hidden"
+                    ::name="controlName + '.default_address'"
+                    ::value="address.default_address ? 1 : 0"
+                />
+            </x-shop::form.control-group>
+
             {!! view_render_event('bagisto.shop.checkout.onepage.address.form.phone.after') !!}
         </div>
     </script>

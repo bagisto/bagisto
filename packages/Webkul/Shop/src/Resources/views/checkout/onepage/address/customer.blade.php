@@ -55,6 +55,7 @@
                                             v-model="selectedAddresses.billing_address_id"
                                             rules="required"
                                             label="{{ trans('shop::app.checkout.onepage.address.billing-address') }}"
+                                            @input="$emit('processing', 'address')"
                                         />
                                     </x-shop::form.control-group>
 
@@ -175,6 +176,7 @@
                                                     v-model="selectedAddresses.shipping_address_id"
                                                     rules="required"
                                                     label="{{ trans('shop::app.checkout.onepage.address.shipping-address') }}"
+                                                    @input="$emit('processing', 'address')"
                                                 />
                                             </x-shop::form.control-group>
 
