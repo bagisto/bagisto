@@ -9,6 +9,7 @@
 
 - [Updating Dependencies](#updating-dependencies)
 - [The `Webkul\Checkout\Cart` class](#the-cart-class)
+- [Shop API Response Updates](#the-shop-api-response-updates)
 
 </div>
 
@@ -402,6 +403,29 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 <a name="shop"></a>
 ### Shop
+
+<a name="the-shop-api-response-updates"></a>
+#### Shop API Response Updates
+
+**Impact Probability: High**
+
+1. The response for the Shop route `shop.api.checkout.cart.store` API has been updated. If you are consuming this API, please make the necessary changes. we have refined the exception handling to provide more specific error responses and HTTP_BAD_REQUEST status code, ensuring better feedback for users.
+
+```diff
+- catch (\Exception $exception) {
+-   return new JsonResource([
+-       'redirect_uri' => route('shop.product_or_category.index', $product->product->url_key),
+-       'message'      => $exception->getMessage(),
+-   ]);
+- }
+
++ catch (\Exception $exception) {
++    return response()->json([
++        'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
++        'message'      => $exception->getMessage(),
++    ], Response::HTTP_BAD_REQUEST);
++ }
+```
 
 <a name="shop-customized-datagrid-parameters-updated"></a>
 ####  Shop Customized Datagrid Parameters Updated
