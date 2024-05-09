@@ -2,56 +2,66 @@
 
 - [Upgrading To v2.2.0 From v2.1.0](#upgrade-2.2.0)
 
-<a name="high-impact-changes"></a>
 ## High Impact Changes
-
-<div class="content-list" markdown="1">
 
 - [Updating Dependencies](#updating-dependencies)
 - [The `Webkul\Checkout\Cart` class](#the-cart-class)
 - [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
+- [Shop API Response Updates](#the-shop-api-response-updates)
 
-</div>
-
-<a name="medium-impact-changes"></a>
 ## Medium Impact Changes
 
-<div class="content-list" markdown="1">
-
 - [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
+- [The System Configuration Updates](#the-system-config-update)
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
+- [The Checkout Tables Schema Updates](#the-checkout-tables-schema-updates)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
+- [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
+- [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
+- [Shop Event Parameter Updates](#event-parameter-updated)
 - [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
-- [Shop Event parameter updated](#event-parameter-updated)
 - [Shop Class HTML Attribute updated](#shop-class-attribute-updated)
 
 </div>
 
-<a name="low-impact-changes"></a>
 ## Low Impact Changes
 
-<div class="content-list" markdown="1">
-
+- [Renamed Admin API Route Names](#renamed-admin-api-routes-names)
+- [Renamed Admin Controller Method Names](#renamed-admin-controller-method-names)
 - [Removed Cart Traits](#removed-cart-traits)
+- [The Product Types Classes Updates](#the-product-type-class)
 - [Moved `coupon.blade.php`](#moved-coupon-blade)
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
 - [Renamed Admin View render event Names](#renamed-admin-view-render-event-names)
 
-</div>
-
-
-<a name="upgrade-2.2.0"></a>
 ## Upgrading To v2.2.0 From v2.1.0
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 
+### Updating Dependencies
 
+**Impact Probability: High**
 
-<a name="updating-dependencies"></a>
+#### PHP 8.2.0 Required
+
+Laravel now requires PHP 8.1.0 or greater.
+
+#### curl 7.34.0 Required
+
+Laravel's HTTP client now requires curl 7.34.0 or greater.
+
+#### Composer Dependencies
+
+There is no dependency needed to be updated at for this upgrade.
+
+### Admin
+
+#### Admin Customized Datagrid Header Parameters Updated
+
 ### Updating Dependencies
 
 **Impact Probability: High**
@@ -76,6 +86,69 @@ There is no dependency needed to be updated at for this upgrade.
 <a name="Admin"></a>
 ### Admin
 
+<a name="the-system-config-update"></a>
+#### The System Configuration Updates
+
+**Impact Probability: Medium**
+
+1: The tax configuration has been relocated to the sales configuration, and the respective path for retrieving configuration values has been updated accordingly.
+
+```diff
+- core()->getConfigData('taxes.catalogue.pricing.tax_inclusive')
++ core()->getConfigData('sales.taxes.calculation.product_prices')
+
++ core()->getConfigData('sales.taxes.calculation.shipping_prices')
+
+- core()->getConfigData('taxes.catalogue.default_location_calculation.country')
++ core()->getConfigData('sales.taxes.default_destination_calculation.country')
+
+- core()->getConfigData('taxes.catalogue.default_location_calculation.state')
++ core()->getConfigData('sales.taxes.default_destination_calculation.state')
+
+- core()->getConfigData('taxes.catalogue.default_location_calculation.postcode')
++ core()->getConfigData('sales.taxes.default_destination_calculation.postcode')
+```
+
+2: The `repository` option has been removed from the `select` type field in the system configuration. Now, you can use `options` as a closure to populate select field options from the database. Here's an example of how to update the configuration array:
+
+```diff
+'key'    => 'sales.taxes.categories',
+'name'   => 'admin::app.configuration.index.sales.taxes.categories.title',
+'info'   => 'admin::app.configuration.index.sales.taxes.categories.title-info',
+'sort'   => 1,
+'fields' => [
+    [
+        'name'       => 'shipping',
+        'title'      => 'admin::app.configuration.index.sales.taxes.categories.shipping',
+        'type'       => 'select',
+        'default'    => 0,
+-       'repository' => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
++       'options'    => function() {
++           return [
++               [
++                   'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
++                   'value' => 0,
++               ],
++           ];
++       }
++   ]
+}
+```
+
+In this example, the `repository` option has been replaced with `options`, which is defined as a closure returning an array of options. Adjust the closure to populate the select field options as needed.
+
+<a name="renamed-admin-api-routes-names"></a>
+#### Renamed Admin API Route Names
+
+**Impact Probability: Low**
+
+1. In the `packages/Webkul/Admin/src/Routes/sales-routes.php` route file, route names and controller methods have been renamed to provide clearer and more meaningful representations.
+
+
+```diff
+- Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
++ Route::post('update-totals/{order_id}', 'updateTotals')->name('admin.sales.refunds.update_totals');
+
 <a name="renamed-admin-view-render-event-names"></a>
 #### Admin View render event Names updated
 
@@ -98,7 +171,7 @@ There is no dependency needed to be updated at for this upgrade.
 ```
 
 <a name="admin-customized-datagrid-parameters-updated"></a>
-####  Admin Customized Datagrid Parameters Updated
+#### Admin Customized Datagrid Parameters Updated
 
 **Impact Probability: Medium**
 
@@ -142,6 +215,55 @@ There is no dependency needed to be updated at for this upgrade.
 
 <a name="checkout"></a>
 ### Checkout
+
+<a name="the-checkout-tables-schema-updates"></a>
+#### The Checkout Tables Schema Updates
+
+**Impact Probability: Medium**
+
+1: New columns related to managing inclusive tax have been added to the `cart` table.
+
+```diff
++ Schema::table('cart', function (Blueprint $table) {
++     $table->decimal('shipping_amount', 12, 4)->default(0)->after('base_discount_amount');
++     $table->decimal('base_shipping_amount', 12, 4)->default(0)->after('shipping_amount');
++ 
++     $table->decimal('shipping_amount_incl_tax', 12, 4)->default(0)->after('base_shipping_amount');
++     $table->decimal('base_shipping_amount_incl_tax', 12, 4)->default(0)->after('shipping_amount_incl_tax');
++ 
++     $table->decimal('sub_total_incl_tax', 12, 4)->default(0)->after('base_shipping_amount_incl_tax');
++     $table->decimal('base_sub_total_incl_tax', 12, 4)->default(0)->after('sub_total_incl_tax');
++ });
+```
+
+2: New columns related to managing inclusive tax have been added to the `cart_items` table.
+
+```diff
++ Schema::table('cart_items', function (Blueprint $table) {
++     $table->decimal('price_incl_tax', 12, 4)->default(0)->after('base_discount_amount');
++     $table->decimal('base_price_incl_tax', 12, 4)->default(0)->after('price_incl_tax');
++ 
++     $table->decimal('total_incl_tax', 12, 4)->default(0)->after('base_price_incl_tax');
++     $table->decimal('base_total_incl_tax', 12, 4)->default(0)->after('total_incl_tax');
++ 
++     $table->string('applied_tax_rate')->nullable()->after('base_total_incl_tax');
++ });
+```
+
+3: New columns related to managing inclusive shipping tax have been added to the `cart_shipping_rates` table.
+
+```diff
++ Schema::table('cart_shipping_rates', function (Blueprint $table) {
++     $table->decimal('tax_percent', 12, 4)->default(0)->after('base_discount_amount');
++     $table->decimal('tax_amount', 12, 4)->default(0)->after('tax_percent');
++     $table->decimal('base_tax_amount', 12, 4)->default(0)->after('tax_amount');
++ 
++     $table->decimal('price_incl_tax', 12, 4)->default(0)->after('base_tax_amount');
++     $table->decimal('base_price_incl_tax', 12, 4)->default(0)->after('price_incl_tax');
++ 
++     $table->string('applied_tax_rate')->nullable()->after('base_price_incl_tax');
++ });
+```
 
 <a name="the-cart-model"></a>
 #### The `Webkul\Checkout\Models\Cart` model
@@ -323,18 +445,6 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + public function getAll(array $params = [])
 ```
 
-<a name="shop-blade-updates"></a>
-### Shop Blade Updates
-
-<a name="moved-coupon-blade"></a>
-#### Moved `coupon.blade.php`
-
-**Impact Probability: Low**
-
-1. The file `packages/Webkul/Shop/src/Resources/views/checkout/cart/coupon.blade.php` has been relocated to the `packages/Webkul/Shop/src/Resources/views/checkout/coupon.blade.php` directory. This move was made because the file is included on both the checkout and cart pages.
-
-
-
 <a name="product"></a>
 ### Product
 
@@ -384,6 +494,22 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + public function searchFromElastic(array $params = [])
 ```
 
+<a name="the-product-type-class"></a>
+#### The Product Types Classes Updates
+
+If you've implemented your own product type or overridden existing type classes, you'll need to update the following methods to include inclusive tax management.
+
+**Impact Probability: Low**
+
+1: The `evaluatePrice` and `getTaxInclusiveRate` methods have been removed. Please update your `getProductPrices` method accordingly to no longer use these methods.
+
+```diff
+- public function evaluatePrice($price)
+
+- public function getTaxInclusiveRate($totalPrice)
+```
+
+2: Please update your `prepareForCart` and `validateCartItem` methods to include the `*_incl_tax` columns for managing inclusive tax calculation for your product type. You can refer to the `Webkul\Product\Type\AbstractType` class and adjust your class accordingly.
 
 <a name="the-configurable-type-class"></a>
 #### The `Webkul\Product\Type\Configurable` Class
@@ -405,6 +531,102 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 <a name="Sales"></a>
 ### Sales
+
+<a name="the-sales-tables-schema-updates"></a>
+#### The Sales Tables Schema Updates
+
+**Impact Probability: Medium**
+
+1: New columns related to managing inclusive tax have been added to the `orders` table.
+
+```diff
++ Schema::table('orders', function (Blueprint $table) {
++     $table->decimal('shipping_tax_amount', 12, 4)->default(0)->after('base_shipping_discount_amount');
++     $table->decimal('base_shipping_tax_amount', 12, 4)->default(0)->after('shipping_tax_amount');
++ 
++     $table->decimal('shipping_tax_refunded', 12, 4)->default(0)->after('base_shipping_tax_amount');
++     $table->decimal('base_shipping_tax_refunded', 12, 4)->default(0)->after('shipping_tax_refunded');
++ 
++     $table->decimal('sub_total_incl_tax', 12, 4)->default(0)->after('base_shipping_tax_refunded');
++     $table->decimal('base_sub_total_incl_tax', 12, 4)->default(0)->after('sub_total_incl_tax');
++ 
++     $table->decimal('shipping_amount_incl_tax', 12, 4)->default(0)->after('base_sub_total_incl_tax');
++     $table->decimal('base_shipping_amount_incl_tax', 12, 4)->default(0)->after('shipping_amount_incl_tax');
++ });
+```
+
+2: New columns related to managing inclusive tax have been added to the `order_items` table.
+
+```diff
++ Schema::table('order_items', function (Blueprint $table) {
++     $table->decimal('price_incl_tax', 12, 4)->default(0)->after('base_tax_amount_refunded');
++     $table->decimal('base_price_incl_tax', 12, 4)->default(0)->after('price_incl_tax');
++
++     $table->decimal('total_incl_tax', 12, 4)->default(0)->after('base_price_incl_tax');
++     $table->decimal('base_total_incl_tax', 12, 4)->default(0)->after('total_incl_tax');
++ });
+```
+
+3: New columns related to managing inclusive tax have been added to the `invoices` table.
+
+```diff
++ Schema::table('invoices', function (Blueprint $table) {
++     $table->decimal('shipping_tax_amount', 12, 4)->default(0)->after('base_discount_amount');
++     $table->decimal('base_shipping_tax_amount', 12, 4)->default(0)->after('shipping_tax_amount');
++ 
++     $table->decimal('sub_total_incl_tax', 12, 4)->default(0)->after('base_shipping_tax_amount');
++     $table->decimal('base_sub_total_incl_tax', 12, 4)->default(0)->after('sub_total_incl_tax');
++ 
++     $table->decimal('shipping_amount_incl_tax', 12, 4)->default(0)->after('base_sub_total_incl_tax');
++     $table->decimal('base_shipping_amount_incl_tax', 12, 4)->default(0)->after('shipping_amount_incl_tax');
++ });
+```
+
+4: New columns related to managing inclusive tax have been added to the `invoice_items` table.
+
+```diff
++ Schema::table('invoice_items', function (Blueprint $table) {
++     $table->decimal('price_incl_tax', 12, 4)->default(0)->after('base_discount_amount');
++     $table->decimal('base_price_incl_tax', 12, 4)->default(0)->after('price_incl_tax');
++     $table->decimal('total_incl_tax', 12, 4)->default(0)->after('base_price_incl_tax');
++     $table->decimal('base_total_incl_tax', 12, 4)->default(0)->after('total_incl_tax');
++ });
+```
+
+5: New columns related to managing inclusive tax have been added to the `refunds` table.
+
+```diff
++ Schema::table('refunds', function (Blueprint $table) {
++     $table->decimal('shipping_tax_amount', 12, 4)->default(0)->after('base_discount_amount');
++     $table->decimal('base_shipping_tax_amount', 12, 4)->default(0)->after('shipping_tax_amount');
++ 
++     $table->decimal('sub_total_incl_tax', 12, 4)->default(0)->after('base_shipping_tax_amount');
++     $table->decimal('base_sub_total_incl_tax', 12, 4)->default(0)->after('sub_total_incl_tax');
++ 
++     $table->decimal('shipping_amount_incl_tax', 12, 4)->default(0)->after('base_sub_total_incl_tax');
++     $table->decimal('base_shipping_amount_incl_tax', 12, 4)->default(0)->after('shipping_amount_incl_tax');
++ });
+```
+
+6: New columns related to managing inclusive tax have been added to the `refund_items` table.
+
+```diff
++ Schema::table('refund_items', function (Blueprint $table) {
++     $table->decimal('price_incl_tax', 12, 4)->default(0)->after('base_discount_amount');
++     $table->decimal('base_price_incl_tax', 12, 4)->default(0)->after('price_incl_tax');
++     $table->decimal('total_incl_tax', 12, 4)->default(0)->after('base_price_incl_tax');
++     $table->decimal('base_total_incl_tax', 12, 4)->default(0)->after('total_incl_tax');
++ });
+```
+
+7: New columns related to managing inclusive tax have been added to the `shipment_items` table.
+
+```diff
++ Schema::table('shipment_items', function (Blueprint $table) {
++     $table->decimal('price_incl_tax', 12, 4)->default(0)->after('base_total');
++     $table->decimal('base_price_incl_tax', 12, 4)->default(0)->after('price_incl_tax');
++ });
+```
 
 **Impact Probability: Low**
 
@@ -465,7 +687,7 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 
 <a name="event-parameter-updated"></a>
-#### Shop Event parameter updated
+#### Shop Event Parameter Updates
 
 **Impact Probability: Medium**
 
@@ -521,4 +743,138 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 - Route::post('', 'create')->name('shop.customer.session.create');
 + Route::post('', 'store')->name('shop.customer.session.create');
 
+```
+
+<a name="the-shop-api-response-updates"></a>
+#### Shop API Response Updates
+
+**Impact Probability: High**
+
+1. The response for the Shop route `shop.api.checkout.cart.index` or `/api/checkout/cart` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+```diff
+{
+    data: {
+        "id": 243,
+        "is_guest": 0,
+        "customer_id": 1,
+        "items_count": 1,
+        "items_qty": 1,
+-       "base_tax_amounts": [
+-           "$0.00"
+-       ],
++       "applied_taxes": {
++           "US-AL (10%)": "$10.00"
++       },
+-       "base_tax_total": 10,
+        "tax_total": 10,
+        "formatted_tax_total": "$10.00",
+-       "base_sub_total": 100,
+        "sub_total": 100,
+        "formatted_sub_total": "$100.00",
++       "sub_total_incl_tax": 110,
++       "formatted_sub_total_incl_tax": "$110.00",
+        "coupon_code": null,
+-       "base_discount_amount": 0,
+-       "formatted_base_discount_amount": "$0.00",
+        "discount_amount": 0,
+        "formatted_discount_amount": "$0.00",
+-       "selected_shipping_rate_method": "",
+-       "selected_shipping_rate": "$0.00",
++       "shipping_method": "flatrate_flatrate",
++       "shipping_amount": 5,
++       "formatted_shipping_amount": "$5.00",
++       "shipping_amount_incl_tax": "5.0000",
++       "formatted_shipping_amount_incl_tax": "$5.00",
+-       "base_grand_total": 115,
+        "grand_total": 115,
+        "formatted_grand_total": "$115.00",
+        "have_stockable_items": true,
+        "payment_method": null,
+        "payment_method_title": null
+        "billing_address": null,
+        "shipping_address": null,
+        "items": [
+            {
+                "id": 544,
+                "quantity": 1,
+                "type": "configurable",
+                "name": "OmniHeat Men's Solid Hooded Puffer Jacket",
+                "price": "100.0000",
+                "formatted_price": "$100.00",
++               "price_incl_tax": "110.0000",
++               "formatted_price_incl_tax": "$110.00",
+                "total": "100.0000",
+                "formatted_total": "$100.00",
++               "total_incl_tax": "110.0000",
++               "formatted_total_incl_tax": "$110.00",
++               "discount_amount": "0.0000",
++               "formatted_discount_amount": "$0.00",
+                "options": [
+                    {
+                        "option_id": 7,
+                        "option_label": "M",
+                        "attribute_name": "Size"
+                    },
+                    {
+                        "option_id": 2,
+                        "option_label": "Green",
+                        "attribute_name": "Color"
+                    }
+                ],
+                "base_image": {
+                    "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/10/CvW2Q3eP4HNUKpQCjyrMUvnwEypVQZCf1VcLAnH4.webp",
+                    "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/10/CvW2Q3eP4HNUKpQCjyrMUvnwEypVQZCf1VcLAnH4.webp",
+                    "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/10/CvW2Q3eP4HNUKpQCjyrMUvnwEypVQZCf1VcLAnH4.webp",
+                    "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/10/CvW2Q3eP4HNUKpQCjyrMUvnwEypVQZCf1VcLAnH4.webp"
+                },
+                "product_url_key": "omniheat-mens-solid-hooded-puffer-jacket"
+            }
+        ]
+    }
+}
+```
+
+<a name="moved-coupon-blade"></a>
+#### Moved `coupon.blade.php`
+
+**Impact Probability: Low**
+
+1. The file `packages/Webkul/Shop/src/Resources/views/checkout/cart/coupon.blade.php` has been relocated to the `packages/Webkul/Shop/src/Resources/views/checkout/coupon.blade.php` directory. This move was made because the file is included on both the checkout and cart pages.
+
+
+
+<a name="tax"></a>
+### Tax
+
+<a name="moved-tax-helper-class"></a>
+#### The `Webkul\Tax\Helpers\Tax` Class Moved
+
+**Impact Probability: Low**
+
+1: The `Webkul\Tax\Helpers\Tax` class has been replaced with `Webkul\Tax\Tax`. Now, the `Webkul\Tax\Tax` class is bound to the `Webkul\Tax\Facades\Tax` facade, and all static methods have been converted to normal methods. However, you can still access these methods as static methods using the `Webkul\Tax\Facades\Tax` facade.
+
+```diff
+- public static function isTaxInclusive(): bool
++ public function isInclusiveTaxProductPrices(): bool
+
+- public static function getTaxRatesWithAmount(object $that, bool $asBase = false): array
++ public function getTaxRatesWithAmount(object $that, bool $asBase = false): array
+
+- public static function getTaxTotal(object $that, bool $asBase = false): float
+
+- public static function getDefaultAddress()
++ public function getDefaultAddress(): object
+
+- public static function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation)
++ public function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation): void
+```
+
+2: The new class for handling shipping tax inclusion now includes two additional methods: `isInclusiveTaxShippingPrices` and `getShippingOriginAddress`.
+
+
+```diff
++ public function isInclusiveTaxShippingPrices(): bool
+
++ public function getShippingOriginAddress(): object
 ```

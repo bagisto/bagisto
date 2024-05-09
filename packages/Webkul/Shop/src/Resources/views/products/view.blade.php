@@ -320,14 +320,11 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
+                                <p class="mt-5 grid items-center text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
 
-                                    <span class="text-lg text-[#6E6E6E]">
-                                        @if (
-                                            (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive') 
-                                            && $product->getTypeInstance()->getTaxCategory()
-                                        )
+                                    <span class="text-sm font-normal text-[#6E6E6E]">
+                                        @if (\Webkul\Tax\Facades\Tax::isInclusiveTaxProductPrices())
                                             @lang('shop::app.products.view.tax-inclusive')
                                         @endif
                                     </span>
