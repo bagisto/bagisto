@@ -270,12 +270,6 @@
                         v-model="is_buy_now"
                     >
 
-                    <input
-                        type="hidden"
-                        name="quantity"
-                        :value="qty"
-                    >
-
                     <div class="container px-[60px] max-1180:px-0">
                         <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
                             <!-- Gallery Blade Inclusion -->

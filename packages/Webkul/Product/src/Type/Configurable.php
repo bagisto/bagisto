@@ -89,55 +89,6 @@ class Configurable extends AbstractType
     protected $attributesById = [];
 
     /**
-     * Get default variant.
-     *
-     * @return \Webkul\Product\Models\Product
-     */
-    public function getDefaultVariant()
-    {
-        return $this->product->variants()->find($this->getDefaultVariantId());
-    }
-
-    /**
-     * Get default variant id.
-     *
-     * @return int
-     */
-    public function getDefaultVariantId()
-    {
-        return $this->product->additional['default_variant_id'] ?? null;
-    }
-
-    /**
-     * Set default variant id.
-     *
-     * @param  int  $defaultVariantId
-     * @return void
-     */
-    public function setDefaultVariantId($defaultVariantId)
-    {
-        $this->product->additional = array_merge($this->product->additional ?? [], [
-            'default_variant_id' => $defaultVariantId,
-        ]);
-    }
-
-    /**
-     * Update default variant id if present in request.
-     *
-     * @return void
-     */
-    public function updateDefaultVariantId()
-    {
-        if (! $defaultVariantId = request()->get('default_variant_id')) {
-            return;
-        }
-
-        $this->setDefaultVariantId($defaultVariantId);
-
-        $this->product->save();
-    }
-
-    /**
      * Create configurable product.
      *
      * @return \Webkul\Product\Contracts\Product
@@ -181,8 +132,6 @@ class Configurable extends AbstractType
     public function update(array $data, $id, $attribute = 'id')
     {
         $product = parent::update($data, $id, $attribute);
-
-        $this->updateDefaultVariantId();
 
         if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
             return $product;
@@ -562,11 +511,7 @@ class Configurable extends AbstractType
         $data['quantity'] = parent::handleQuantity((int) $data['quantity']);
 
         if (empty($data['selected_configurable_option'])) {
-            if ($this->getDefaultVariantId()) {
-                $data['selected_configurable_option'] = $this->getDefaultVariantId();
-            } else {
-                return trans('product::app.checkout.cart.missing-options');
-            }
+            return trans('product::app.checkout.cart.missing-options');
         }
 
         $data = $this->getQtyRequest($data);

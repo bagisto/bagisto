@@ -9,6 +9,7 @@
 
 - [Updating Dependencies](#updating-dependencies)
 - [The `Webkul\Checkout\Cart` class](#the-cart-class)
+- [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
 
 </div>
 
@@ -24,6 +25,7 @@
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
 - [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
 - [Shop Event parameter updated](#event-parameter-updated)
+- [Shop Class HTML Attribute updated](#shop-class-attribute-updated)
 
 </div>
 
@@ -383,6 +385,23 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 ```
 
 
+<a name="the-configurable-type-class"></a>
+#### The `Webkul\Product\Type\Configurable` Class
+
+**Impact Probability: High**
+
+1. We've removed the following methods from the `Webkul\Product\Type\Configurable` class as we no longer support default configurable variants.
+
+```diff
+- public function getDefaultVariant()
+
+- public function getDefaultVariantId()
+
+- public function setDefaultVariantId()
+
+- public function updateDefaultVariantId()
+```
+
 
 <a name="Sales"></a>
 ### Sales
@@ -444,6 +463,7 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + </template>
 ```
 
+
 <a name="event-parameter-updated"></a>
 #### Shop Event parameter updated
 
@@ -454,6 +474,18 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 ```diff
 - Event::dispatch('customer.after.login', $loginRequest->get('email'));
 + Event::dispatch('customer.after.login', auth()->guard()->user());
+```
+
+<a name="shop-class-attribute-updated"></a>
+#### Shop Class HTML Attribute updated
+
+**Impact Probability: Medium**
+
+1. We've modified the HTML attribute class in the `shop::products.prices.configurable` blade. If you've overridden this file or implemented any customizations, ensure to update the class name accordingly. Failure to do so may affect the price change functionality for configurable product option selection.
+
+```diff
+- <p class="special-price font-semibold">
++ <p class="final-price font-semibold">
 ```
 
 <a name="renamed-shop-api-routes-names"></a>
