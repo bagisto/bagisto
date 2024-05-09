@@ -168,28 +168,10 @@
                 <!-- Navigation Menu -->
                 @foreach(menu()->all() as $item)
                     <div class="group/item relative">
-                        <a
-                            href="{{ $item->url() }}"
-                            class="flex gap-2.5 p-1.5 items-center cursor-pointer {{ $item->isActive() == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 dark:hover:bg-gray-950 ' }} peer"
-                        >
-                            <span class="{{ $item->getIcon() }} text-2xl {{ $item->isActive() ? 'text-white' : ''}}"></span>
-
-                            <p class="text-gray-600 dark:text-gray-300 font-semibold whitespace-nowrap {{ $item->isActive() ? 'text-white' : ''}}">
-                                {{ $item->label() }}
-                            </p>
-                        </a>
+                        <x-menu::menu.item :item="$item" />
 
                         @if ($item->hasGroup())
-                            <div class="{{ $item->isActive() ? ' !grid bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-lg z-[100]">
-                                @foreach ($item->items() as $child)
-                                    <a
-                                        href="{{ $child->route() }}" {!! $child->isBlank() ? 'target="_blank"' : '' !!}
-                                        class="text-sm text-{{ $child->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $child->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 dark:hover:bg-gray-950"
-                                    >
-                                        {{ $child->label() }}
-                                    </a>
-                                @endforeach
-                            </div>
+                            <x-menu::menu.group :item="$item" />
                         @endif
                     </div>
                 @endforeach
