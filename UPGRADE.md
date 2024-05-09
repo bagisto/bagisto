@@ -58,26 +58,6 @@ Laravel's HTTP client now requires curl 7.34.0 or greater.
 
 There is no dependency needed to be updated at for this upgrade.
 
-### Admin
-
-#### Admin Customized Datagrid Header Parameters Updated
-
-### Updating Dependencies
-
-**Impact Probability: High**
-
-#### PHP 8.2.0 Required
-
-Laravel now requires PHP 8.1.0 or greater.
-
-#### curl 7.34.0 Required
-
-Laravel's HTTP client now requires curl 7.34.0 or greater.
-
-#### Composer Dependencies
-
-There is no dependency needed to be updated at for this upgrade.
-
 <div class="content-list" markdown="1">
 </div>
 
