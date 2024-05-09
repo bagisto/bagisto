@@ -18,7 +18,7 @@ class MenuServiceProvider extends ServiceProvider
         include __DIR__.'/../Http/helpers.php';
 
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'menu');
-        
+
         Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'menu');
 
         $this->app->register(EventServiceProvider::class);
