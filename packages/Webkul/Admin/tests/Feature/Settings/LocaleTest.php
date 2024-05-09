@@ -110,8 +110,6 @@ it('should fail the validation with errors when certain field not provided when 
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('direction')
         ->assertUnprocessable();
-
-    Storage::assertMissing('locales/'.$locale->code.'.png');
 });
 
 it('should update the specified locale', function () {

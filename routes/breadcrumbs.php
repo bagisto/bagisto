@@ -23,7 +23,7 @@ Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
 // Home > My Account > Profile > Edit
 Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
     $trail->parent('profile');
-    $trail->push(trans('shop::app.customers.account.profile.edit'), route('shop.customers.account.profile.index'));
+    $trail->push(trans('shop::app.customers.account.profile.edit.edit'), route('shop.customers.account.profile.index'));
 });
 
 // Home > My Account > Address
@@ -35,13 +35,13 @@ Breadcrumbs::for('addresses', function (BreadcrumbTrail $trail) {
 // Home > My Account > Address > Create
 Breadcrumbs::for('addresses.create', function (BreadcrumbTrail $trail) {
     $trail->parent('addresses');
-    $trail->push(trans('shop::app.customers.account.addresses.add-address'), route('shop.customers.account.addresses.create'));
+    $trail->push(trans('shop::app.customers.account.addresses.index.add-address'), route('shop.customers.account.addresses.create'));
 });
 
 // Home > My Account > Address > Edit
 Breadcrumbs::for('addresses.edit', function (BreadcrumbTrail $trail, $entity) {
     $trail->parent('addresses');
-    $trail->push(trans('shop::app.customers.account.addresses.edit'), route('shop.customers.account.addresses.edit', $entity->id));
+    $trail->push(trans('shop::app.customers.account.addresses.index.edit'), route('shop.customers.account.addresses.edit', $entity->id));
 });
 
 // Home > My Account > Orders

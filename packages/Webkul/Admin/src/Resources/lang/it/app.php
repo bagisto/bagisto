@@ -587,7 +587,7 @@ return [
                 'title'                  => 'Fattura #:invoice_id',
             ],
 
-            'create'   => [
+            'create' => [
                 'amount-per-unit'    => ':amount Per Unità x :qty Quantità',
                 'create-invoice'     => 'Crea Fattura',
                 'create-success'     => 'Fattura creata con successo',
@@ -703,31 +703,31 @@ return [
                     'type'                    => 'Tipo',
                 ],
 
-                'datagrid'   => [
-                    'active'                        => 'Attivo',
-                    'attribute-family'              => 'Famiglia di Attributi',
-                    'attribute-family-value'        => 'Famiglia di Attributi - :attribute_family',
-                    'category'                      => 'Categoria',
-                    'copy-of'                       => 'Copia di :value',
-                    'copy-of-slug'                  => 'copia-di-:value',
-                    'delete'                        => 'Elimina',
-                    'disable'                       => 'Disabilita',
-                    'id'                            => 'ID',
-                    'id-value'                      => 'ID - :id',
-                    'image'                         => 'Immagine',
-                    'mass-delete-success'           => 'Prodotti Selezionati Eliminati con Successo',
-                    'mass-update-success'           => 'Prodotti Selezionati Aggiornati con Successo',
-                    'name'                          => 'Nome',
-                    'out-of-stock'                  => 'Esaurito',
-                    'price'                         => 'Prezzo',
-                    'product-image'                 => 'Immagine Prodotto',
-                    'qty'                           => 'Quantità',
-                    'qty-value'                     => ':qty Disponibili',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'Stato',
-                    'type'                          => 'Tipo',
-                    'update-status'                 => 'Aggiorna Stato',
+                'datagrid' => [
+                    'active'                 => 'Attivo',
+                    'attribute-family'       => 'Famiglia di Attributi',
+                    'attribute-family-value' => 'Famiglia di Attributi - :attribute_family',
+                    'category'               => 'Categoria',
+                    'copy-of'                => 'Copia di :value',
+                    'copy-of-slug'           => 'copia-di-:value',
+                    'delete'                 => 'Elimina',
+                    'disable'                => 'Disabilita',
+                    'id'                     => 'ID',
+                    'id-value'               => 'ID - :id',
+                    'image'                  => 'Immagine',
+                    'mass-delete-success'    => 'Prodotti Selezionati Eliminati con Successo',
+                    'mass-update-success'    => 'Prodotti Selezionati Aggiornati con Successo',
+                    'name'                   => 'Nome',
+                    'out-of-stock'           => 'Esaurito',
+                    'price'                  => 'Prezzo',
+                    'product-image'          => 'Immagine Prodotto',
+                    'qty'                    => 'Quantità',
+                    'qty-value'              => ':qty Disponibili',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'Stato',
+                    'type'                   => 'Tipo',
+                    'update-status'          => 'Aggiorna Stato',
                 ],
             ],
 
@@ -1079,7 +1079,7 @@ return [
                 'value-per-locale'      => 'Valore per Lingua',
                 'yes'                   => 'Sì',
 
-                'option'                => [
+                'option' => [
                     'color'    => 'Campione Colore',
                     'dropdown' => 'Menu a Tendina',
                     'image'    => 'Campione Immagine',
@@ -1414,7 +1414,7 @@ return [
                 'title'                       => 'Vista cliente',
 
                 'address' => [
-                    'count'  => 'Indirizzi (:count)',
+                    'count' => 'Indirizzi (:count)',
 
                     'create' => [
                         'city'               => 'Città',
@@ -1728,7 +1728,7 @@ return [
                     ],
                 ],
 
-                'create'    => [
+                'create' => [
                     'active'          => 'Attivo',
                     'back-btn'        => 'Indietro',
                     'channel'         => 'Canale',
@@ -1750,7 +1750,7 @@ return [
                     'title'           => 'Crea Campagna',
                 ],
 
-                'edit'    => [
+                'edit' => [
                     'active'          => 'Attivo',
                     'audience'        => 'Pubblico',
                     'back-btn'        => 'Indietro',
@@ -1792,7 +1792,7 @@ return [
                         'name'    => 'Nome',
                     ],
 
-                    'create'   => [
+                    'create' => [
                         'date'           => 'Data',
                         'delete-warning' => 'Sei sicuro di voler eseguire questa azione?',
                         'description'    => 'Descrizione',
@@ -2338,8 +2338,8 @@ return [
     'cms' => [
         'index' => [
             'already-taken' => 'Il :name è già stato preso.',
-            'create-btn'    => 'Crea Pagina',
             'channel'       => 'Canale',
+            'create-btn'    => 'Crea Pagina',
             'language'      => 'Lingua',
             'title'         => 'Pagine',
 
@@ -2393,7 +2393,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'create-btn' => 'Crea Locale',
                 'locale'     => 'Locale',
@@ -2435,7 +2435,7 @@ return [
             ],
         ],
 
-        'currencies'        => [
+        'currencies' => [
             'index' => [
                 'create-btn' => 'Crea Valuta',
                 'currency'   => 'Valuta',
@@ -2481,9 +2481,9 @@ return [
             ],
         ],
 
-        'data-transfer'     => [
+        'data-transfer' => [
             'imports' => [
-                'create'            => [
+                'create' => [
                     'action'              => 'Azione',
                     'allowed-errors'      => 'Errori Consentiti',
                     'back-btn'            => 'Indietro',
@@ -2491,9 +2491,9 @@ return [
                     'delete'              => 'Elimina',
                     'download-sample'     => 'Scarica Esempio',
                     'field-separator'     => 'Separatore di Campi',
-                    'file-info-example'   => 'Ad esempio, nel caso delle immagini del prodotto, i file dovrebbero essere collocati nella cartella /project-root/storage/app/import/product-images.',
-                    'file-info'           => 'Usa il percorso relativo a /project-root/storage/app/import, ad esempio: product-images, import-images.',
                     'file'                => 'File',
+                    'file-info'           => 'Usa il percorso relativo a /project-root/storage/app/import, ad esempio: product-images, import-images.',
+                    'file-info-example'   => 'Ad esempio, nel caso delle immagini del prodotto, i file dovrebbero essere collocati nella cartella /project-root/storage/app/import/product-images.',
                     'general'             => 'Generale',
                     'images-directory'    => 'Percorso Directory Immagini',
                     'process-in-queue'    => 'Elabora nella Coda',
@@ -2507,7 +2507,7 @@ return [
                     'validation-strategy' => 'Strategia di Validazione',
                 ],
 
-                'edit'              => [
+                'edit' => [
                     'action'              => 'Azione',
                     'allowed-errors'      => 'Errori Consentiti',
                     'back-btn'            => 'Indietro',
@@ -2515,9 +2515,9 @@ return [
                     'delete'              => 'Elimina',
                     'download-sample'     => 'Scarica Esempio',
                     'field-separator'     => 'Separatore di Campi',
-                    'file-info-example'   => 'Ad esempio, nel caso delle immagini del prodotto, i file dovrebbero essere collocati nella cartella /project-root/storage/app/import/product-images.',
-                    'file-info'           => 'Usa il percorso relativo a /project-root/storage/app/import, ad esempio: product-images, import-images.',
                     'file'                => 'File',
+                    'file-info'           => 'Usa il percorso relativo a /project-root/storage/app/import, ad esempio: product-images, import-images.',
+                    'file-info-example'   => 'Ad esempio, nel caso delle immagini del prodotto, i file dovrebbero essere collocati nella cartella /project-root/storage/app/import/product-images.',
                     'general'             => 'Generale',
                     'images-directory'    => 'Percorso Directory Immagini',
                     'process-in-queue'    => 'Elabora nella Coda',
@@ -2531,7 +2531,7 @@ return [
                     'validation-strategy' => 'Strategia di Validazione',
                 ],
 
-                'index'             => [
+                'index' => [
                     'button-title' => 'Crea Importazione',
                     'title'        => 'Importazioni',
 
@@ -2552,7 +2552,7 @@ return [
                     ],
                 ],
 
-                'import'            => [
+                'import' => [
                     'back-btn'                => 'Indietro',
                     'completed-batches'       => 'Totale Batch Completati:',
                     'download-error-report'   => 'Scarica Rapporto Completo degli Errori',
@@ -2587,7 +2587,7 @@ return [
             ],
         ],
 
-        'exchange-rates'    => [
+        'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'Crea Tasso di Cambio',
                 'exchange-rate' => 'Tasso di Cambio',
@@ -2706,7 +2706,7 @@ return [
             'update-success'    => 'Sorgenti di Inventario Aggiornate con Successo',
         ],
 
-        'taxes'             => [
+        'taxes' => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Sei sicuro di voler eliminare?',
@@ -2736,7 +2736,7 @@ return [
                     ],
 
                     'edit' => [
-                        'title'   => 'Modifica Categorie Fiscali',
+                        'title' => 'Modifica Categorie Fiscali',
                     ],
 
                     'create-success' => 'Nuova Categoria Fiscale Creata',
@@ -2746,7 +2746,7 @@ return [
                 ],
             ],
 
-            'rates'   => [
+            'rates' => [
                 'index' => [
                     'button-title' => 'Crea aliquota fiscale',
                     'tax-rate'     => 'Aliquota Fiscale',
@@ -3099,7 +3099,7 @@ return [
                 'value'                         => 'Valore: :value',
                 'value-input'                   => 'Valore',
 
-                'services-content'              => [
+                'services-content' => [
                     'add-btn'            => 'Aggiungi Servizio',
                     'channels'           => 'Canali',
                     'delete'             => 'Elimina',
@@ -3271,10 +3271,10 @@ return [
                     'title' => 'Generale',
 
                     'opzioni-unita' => [
-                        'info'           => 'Imposta le opzioni delle unità.',
-                        'title'          => 'Opzioni dell\'unità',
-                        'title-info'     => 'Dimensioni, colore, materiale, personalizzazione, miglioramento della soddisfazione del cliente e adattamento degli acquisti.',
-                        'weight-unit'    => 'Unità di peso',
+                        'info'        => 'Imposta le opzioni delle unità.',
+                        'title'       => 'Opzioni dell\'unità',
+                        'title-info'  => 'Dimensioni, colore, materiale, personalizzazione, miglioramento della soddisfazione del cliente e adattamento degli acquisti.',
+                        'weight-unit' => 'Unità di peso',
                     ],
                 ],
 
@@ -3283,18 +3283,18 @@ return [
                     'title' => 'Contenuto',
 
                     'impostazioni' => [
-                        'compare-options'          => 'Opzioni di confronto',
-                        'image-search-option'      => 'Opzione di ricerca immagini',
-                        'title'                    => 'Impostazioni',
-                        'title-info'               => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un\'applicazione o di un dispositivo, personalizzate secondo le preferenze e le esigenze dell\'utente.',
-                        'wishlist-options'         => 'Opzioni della lista dei desideri',
+                        'compare-options'     => 'Opzioni di confronto',
+                        'image-search-option' => 'Opzione di ricerca immagini',
+                        'title'               => 'Impostazioni',
+                        'title-info'          => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un\'applicazione o di un dispositivo, personalizzate secondo le preferenze e le esigenze dell\'utente.',
+                        'wishlist-options'    => 'Opzioni della lista dei desideri',
                     ],
 
                     'script-personalizzati' => [
-                        'custom-css'                => 'CSS personalizzato',
-                        'custom-javascript'         => 'Javascript personalizzato',
-                        'title'                     => 'Script personalizzati',
-                        'title-info'                => 'Gli script personalizzati sono pezzi di codice personalizzati creati per aggiungere funzioni o caratteristiche specifiche al software, migliorandone unicità.',
+                        'custom-css'        => 'CSS personalizzato',
+                        'custom-javascript' => 'Javascript personalizzato',
+                        'title'             => 'Script personalizzati',
+                        'title-info'        => 'Gli script personalizzati sono pezzi di codice personalizzati creati per aggiungere funzioni o caratteristiche specifiche al software, migliorandone unicità.',
                     ],
                 ],
 
@@ -3315,12 +3315,12 @@ return [
                     'title' => 'Magic AI',
 
                     'settings' => [
-                        'api-key'           => 'Chiave API',
-                        'enabled'           => 'Abilitato',
-                        'llm-api-domain'    => 'Dominio API di LLM',
-                        'organization'      => 'Organizzazione',
-                        'title'             => 'Impostazioni generali',
-                        'title-info'        => 'Migliora la tua esperienza con la funzione Magic AI inserendo la tua esclusiva chiave API e indicando l\'organizzazione pertinente per un\'integrazione senza sforzo. Prendi il comando sulle tue credenziali OpenAI e personalizza le impostazioni secondo le tue specifiche esigenze.',
+                        'api-key'        => 'Chiave API',
+                        'enabled'        => 'Abilitato',
+                        'llm-api-domain' => 'Dominio API di LLM',
+                        'organization'   => 'Organizzazione',
+                        'title'          => 'Impostazioni generali',
+                        'title-info'     => 'Migliora la tua esperienza con la funzione Magic AI inserendo la tua esclusiva chiave API e indicando l\'organizzazione pertinente per un\'integrazione senza sforzo. Prendi il comando sulle tue credenziali OpenAI e personalizza le impostazioni secondo le tue specifiche esigenze.',
                     ],
 
                     'content-generation' => [

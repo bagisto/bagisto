@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'ग्राहक',
+            'title' => 'ग्राहक',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'ईमेल: \'%s\' आयात फ़ाइल में एक से अधिक बार पाया गया है।',
                     'duplicate-phone'        => 'फ़ोन: \'%s\' आयात फ़ाइल में एक से अधिक बार पाया गया है।',
-                    'invalid-customer-group' => 'ग्राहक समूह अमान्य या समर्थित नहीं है',
                     'email-not-found'        => 'ईमेल: \'%s\' सिस्टम में नहीं मिला।',
+                    'invalid-customer-group' => 'ग्राहक समूह अमान्य या समर्थित नहीं है',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'उत्पाद',
+        'products' => [
+            'title' => 'उत्पाद',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'कर दरें',
+            'title' => 'कर दरें',
 
             'validation' => [
                 'errors' => [

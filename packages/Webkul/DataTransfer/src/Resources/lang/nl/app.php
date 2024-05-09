@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'Klanten',
+            'title' => 'Klanten',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'E-mail: \'%s\' komt meer dan eens voor in het importbestand.',
                     'duplicate-phone'        => 'Telefoon: \'%s\' komt meer dan eens voor in het importbestand.',
-                    'invalid-customer-group' => 'Klantgroep is ongeldig of wordt niet ondersteund',
                     'email-not-found'        => 'E-mail: \'%s\' niet gevonden in het systeem.',
+                    'invalid-customer-group' => 'Klantgroep is ongeldig of wordt niet ondersteund',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'Producten',
+        'products' => [
+            'title' => 'Producten',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'Belastingtarieven',
+            'title' => 'Belastingtarieven',
 
             'validation' => [
                 'errors' => [

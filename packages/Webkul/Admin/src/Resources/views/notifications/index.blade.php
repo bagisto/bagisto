@@ -40,7 +40,7 @@
                     <div>
                         <div class="journal-scroll flex overflow-auto border-b dark:border-gray-800">
                             <div
-                                class="flex cursor-pointer gap-1 border-b-2 px-4 py-4 hover:bg-gray-100 dark:hover:bg-gray-950"
+                                class="flex cursor-pointer items-center gap-1 border-b-2 px-4 py-4 hover:bg-gray-100 dark:hover:bg-gray-950"
                                 :class="{'border-blue-600 dark:border-blue-600': status == data.status}"
                                 v-for="data in orderType"
                                 @click="status=data.status; getNotification()"
@@ -49,7 +49,7 @@
                                     @{{ data.message }}
                                 </p>
 
-                                <span class="rounded-[35px] bg-gray-400 px-1.5 py-px text-xs font-semibold text-white">
+                                <span class="rounded-full bg-gray-400 px-1.5 py-px text-xs font-semibold text-white">
                                     @{{ data.status_count ?? '0' }}
                                 </span>
                             </div>
