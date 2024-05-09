@@ -34,8 +34,24 @@
                     </template>
 
                     <template v-else>
-                        <p class="text-base font-semibold text-gray-800 dark:text-white">
-                            @{{ "@lang('admin::app.sales.orders.create.cart.items.sub-total', ['sub_total' => 'replace'])".replace('replace', cart.formatted_sub_total) }}
+                        <p class="flex flex-col gap-1 text-base font-semibold text-gray-800 dark:text-white">
+                            <template v-if="displayTax.subtotal == 'including_tax'">
+                                @{{ "@lang('admin::app.sales.orders.create.cart.items.sub-total', ['sub_total' => 'replace'])".replace('replace', cart.formatted_sub_total_incl_tax) }}
+                            </template>
+
+                            <template v-else-if="displayTax.subtotal == 'both'">
+                                @{{ "@lang('admin::app.sales.orders.create.cart.items.sub-total', ['sub_total' => 'replace'])".replace('replace', cart.formatted_sub_total_incl_tax) }}
+
+                                <span class="text-xs font-normal">
+                                    @lang('admin::app.sales.orders.create.cart.items.excl-tax')
+
+                                    <span class="font-medium">@{{ cart.formatted_sub_total }}</span>
+                                </span>
+                            </template>
+
+                            <template v-else>
+                                @{{ "@lang('admin::app.sales.orders.create.cart.items.sub-total', ['sub_total' => 'replace'])".replace('replace', cart.formatted_sub_total) }}
+                            </template>
                         </p>
                     </template>
 
@@ -136,8 +152,26 @@
                         </div>
 
                         <div class="flex flex-col gap-2">
-                            <p class="text-right text-base font-semibold text-gray-800 dark:text-white">
-                                @{{ item.formatted_total }}
+                            <p class="flex flex-col gap-1 text-right text-base font-semibold text-gray-800 dark:text-white">
+                                <template v-if="displayTax.subtotal == 'including_tax'">
+                                    @{{ item.formatted_total_incl_tax }}
+                                </template>
+
+                                <template v-else-if="displayTax.subtotal == 'both'">
+                                    @{{ item.formatted_total_incl_tax }}
+
+                                    <span class="text-xs font-normal">
+                                        @lang('admin::app.sales.orders.create.cart.items.excl-tax')
+
+                                        <span class="font-medium">
+                                            @{{ item.formatted_total }}
+                                        </span>
+                                    </span>
+                                </template>
+
+                                <template v-else>
+                                    @{{ item.formatted_total }}
+                                </template>
                             </p>
 
                             <x-admin::quantity-changer
@@ -350,6 +384,12 @@
 
             data() {
                 return {
+                    displayTax: {
+                        prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
+
+                        subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
+                    },
+
                     searchTerm: '',
 
                     searchedProducts: [],

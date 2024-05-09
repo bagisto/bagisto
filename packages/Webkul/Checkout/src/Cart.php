@@ -17,7 +17,7 @@ use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Contracts\Product as ProductContract;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shipping\Facades\Shipping;
-use Webkul\Tax\Helpers\Tax;
+use Webkul\Tax\Facades\Tax;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Cart
@@ -26,6 +26,12 @@ class Cart
      * @var \Webkul\Checkout\Contracts\Cart
      */
     private $cart;
+
+    const TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN = 'shipping_origin';
+
+    const TAX_CALCULATION_BASED_ON_BILLING_ADDRESS = 'billing_address';
+
+    const TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS = 'shipping_address';
 
     /**
      * Create a new class instance.
@@ -343,11 +349,13 @@ class Cart
             Event::dispatch('checkout.cart.update.before', $item);
 
             $this->cartItemRepository->update([
-                'quantity'          => $quantity,
-                'total'             => core()->convertPrice($item->price * $quantity),
-                'base_total'        => $item->price * $quantity,
-                'total_weight'      => $item->weight * $quantity,
-                'base_total_weight' => $item->weight * $quantity,
+                'quantity'            => $quantity,
+                'total'               => $total = core()->convertPrice($item->price_incl_tax * $quantity),
+                'total_incl_tax'      => $total,
+                'base_total'          => $item->price_incl_tax * $quantity,
+                'base_total_incl_tax' => $item->base_price_incl_tax * $quantity,
+                'total_weight'        => $item->weight * $quantity,
+                'base_total_weight'   => $item->weight * $quantity,
             ], $itemId);
 
             Event::dispatch('checkout.cart.update.after', $item);
@@ -494,6 +502,8 @@ class Cart
         if ($this->cart->shipping_address) {
             $address = $this->cartAddressRepository->update($params, $this->cart->shipping_address->id);
         } else {
+            $params['default_address'] = 0;
+
             $address = $this->cartAddressRepository->create($params);
         }
 
@@ -740,12 +750,20 @@ class Cart
 
         $this->calculateItemsTax();
 
+        $this->calculateShippingTax();
+
         $this->refreshCart();
 
         $this->cart->sub_total = $this->cart->base_sub_total = 0;
+        $this->cart->sub_total_incl_tax = $this->cart->base_sub_total_incl_tax = 0;
+
         $this->cart->grand_total = $this->cart->base_grand_total = 0;
         $this->cart->tax_total = $this->cart->base_tax_total = 0;
+
         $this->cart->discount_amount = $this->cart->base_discount_amount = 0;
+
+        $this->cart->shipping_amount = $this->cart->base_shipping_amount = 0;
+        $this->cart->shipping_amount_incl_tax = $this->cart->base_shipping_amount_incl_tax = 0;
 
         $quantities = 0;
 
@@ -753,8 +771,14 @@ class Cart
             $this->cart->discount_amount += $item->discount_amount;
             $this->cart->base_discount_amount += $item->base_discount_amount;
 
+            $this->cart->tax_total += $item->tax_amount;
+            $this->cart->base_tax_total += $item->base_tax_amount;
+
             $this->cart->sub_total = (float) $this->cart->sub_total + $item->total;
             $this->cart->base_sub_total = (float) $this->cart->base_sub_total + $item->base_total;
+
+            $this->cart->sub_total_incl_tax = (float) $this->cart->sub_total_incl_tax + $item->total_incl_tax;
+            $this->cart->base_sub_total_incl_tax = (float) $this->cart->base_sub_total_incl_tax + $item->base_total_incl_tax;
 
             $quantities += $item->quantity;
         }
@@ -763,15 +787,21 @@ class Cart
 
         $this->cart->items_count = $this->cart->items->count();
 
-        $this->cart->tax_total = Tax::getTaxTotal($this->cart, false);
-        $this->cart->base_tax_total = Tax::getTaxTotal($this->cart, true);
-
         $this->cart->grand_total = $this->cart->sub_total + $this->cart->tax_total - $this->cart->discount_amount;
         $this->cart->base_grand_total = $this->cart->base_sub_total + $this->cart->base_tax_total - $this->cart->base_discount_amount;
 
         if ($shipping = $this->cart->selected_shipping_rate) {
-            $this->cart->grand_total = (float) $this->cart->grand_total + $shipping->price - $shipping->discount_amount;
-            $this->cart->base_grand_total = (float) $this->cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
+            $this->cart->tax_total += $shipping->tax_amount;
+            $this->cart->base_tax_total += $shipping->base_tax_amount;
+
+            $this->cart->shipping_amount = $shipping->price;
+            $this->cart->base_shipping_amount = $shipping->base_price;
+
+            $this->cart->shipping_amount_incl_tax = $shipping->price_incl_tax;
+            $this->cart->base_shipping_amount_incl_tax = $shipping->base_price_incl_tax;
+
+            $this->cart->grand_total = (float) $this->cart->grand_total + $shipping->tax_amount + $shipping->price - $shipping->discount_amount;
+            $this->cart->base_grand_total = (float) $this->cart->base_grand_total + $shipping->base_tax_amount + $shipping->base_price - $shipping->base_discount_amount;
 
             $this->cart->discount_amount += $shipping->discount_amount;
             $this->cart->base_discount_amount += $shipping->base_discount_amount;
@@ -783,7 +813,11 @@ class Cart
         $this->cart->sub_total = round($this->cart->sub_total, 2);
         $this->cart->base_sub_total = round($this->cart->base_sub_total, 2);
 
+        $this->cart->sub_total_incl_tax = round($this->cart->sub_total_incl_tax, 2);
+        $this->cart->base_sub_total_incl_tax = round($this->cart->base_sub_total_incl_tax, 2);
+
         $this->cart->grand_total = round($this->cart->grand_total, 2);
+
         $this->cart->base_grand_total = round($this->cart->base_grand_total, 2);
 
         $this->cart->cart_currency_code = core()->getCurrentCurrencyCode();
@@ -812,7 +846,7 @@ class Cart
 
         $isInvalid = false;
 
-        foreach ($this->cart->items as $item) {
+        foreach ($this->cart->items as $key => $item) {
             $validationResult = $item->getTypeInstance()->validateCartItem($item);
 
             if ($validationResult->isItemInactive()) {
@@ -822,17 +856,34 @@ class Cart
 
                 session()->flash('info', __('shop::app.checkout.cart.inactive'));
             } else {
-                $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+                if (Tax::isInclusiveTaxProductPrices()) {
+                    $itemBasePrice = $item->base_price_incl_tax;
+                } else {
+                    $itemBasePrice = $item->base_price;
+                }
+
+                $basePrice = ! is_null($item->custom_price) ? $item->custom_price : $itemBasePrice;
+
+                $price = core()->convertPrice($basePrice);
 
                 /**
-                 * Handles exchange rate for cart item price.
+                 * Reset the item price every time to initial price if the inclusive price is enabled.
+                 * Update the item price if exchange rates changes with exclusive price is enabled.
                  */
-                $this->cartItemRepository->update([
-                    'price'      => core()->convertPrice($price),
-                    'base_price' => $price,
-                    'total'      => core()->convertPrice($price * $item->quantity),
-                    'base_total' => $price * $item->quantity,
-                ], $item->id);
+                if ($price != $item->price) {
+                    $item = $this->cartItemRepository->update([
+                        'price'               => $price,
+                        'price_incl_tax'      => $price,
+                        'base_price'          => $basePrice,
+                        'base_price_incl_tax' => $basePrice,
+                        'total'               => $total = core()->convertPrice($basePrice * $item->quantity),
+                        'total_incl_tax'      => $total,
+                        'base_total'          => ($baseTotal = $basePrice * $item->quantity),
+                        'base_total_incl_tax' => $baseTotal,
+                    ], $item->id);
+
+                    $this->cart->items->put($key, $item);
+                }
             }
 
             $isInvalid |= $validationResult->isCartInvalid();
@@ -854,8 +905,16 @@ class Cart
 
         $taxCategories = [];
 
-        foreach ($this->cart->items as $item) {
-            $taxCategoryId = $item->product->tax_category_id;
+        foreach ($this->cart->items as $key => $item) {
+            $taxCategoryId = $item->tax_category_id;
+
+            if (empty($taxCategoryId)) {
+                $taxCategoryId = $item->product->tax_category_id;
+            }
+
+            if (empty($taxCategoryId)) {
+                $taxCategoryId = core()->getConfigData('sales.taxes.categories.product');
+            }
 
             if (empty($taxCategoryId)) {
                 continue;
@@ -869,9 +928,19 @@ class Cart
                 continue;
             }
 
-            if ($item->getTypeInstance()->isStockable()) {
-                $address = $this->cart->shipping_address;
-            } else {
+            $calculationBasedOn = core()->getConfigData('sales.taxes.calculation.based_on');
+
+            $address = null;
+
+            if ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN) {
+                $address = Tax::getShippingOriginAddress();
+            } elseif ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS) {
+                if ($item->getTypeInstance()->isStockable()) {
+                    $address = $this->cart->shipping_address;
+                } else {
+                    $address = $this->cart->billing_address;
+                }
+            } elseif ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_BILLING_ADDRESS) {
                 $address = $this->cart->billing_address;
             }
 
@@ -884,21 +953,139 @@ class Cart
                 $address = Tax::getDefaultAddress();
             }
 
+            $item->applied_tax_rate = null;
+
             $item->tax_percent = $item->tax_amount = $item->base_tax_amount = 0;
 
             Tax::isTaxApplicableInCurrentAddress($taxCategories[$taxCategoryId], $address, function ($rate) use ($item, $taxCategoryId) {
+                $item->applied_tax_rate = $rate->identifier;
+
                 $item->tax_category_id = $taxCategoryId;
 
                 $item->tax_percent = $rate->tax_rate;
 
-                $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
+                if (Tax::isInclusiveTaxProductPrices()) {
+                    $item->tax_amount = round(($item->total_incl_tax * $rate->tax_rate) / (100 + $rate->tax_rate), 4);
 
-                $item->base_tax_amount = round(($item->base_total * $rate->tax_rate) / 100, 4);
+                    $item->base_tax_amount = round(($item->base_total_incl_tax * $rate->tax_rate) / (100 + $rate->tax_rate), 4);
+
+                    $item->total = $item->total_incl_tax - $item->tax_amount;
+
+                    $item->base_total = $item->base_total_incl_tax - $item->base_tax_amount;
+
+                    $item->price = $item->total / $item->quantity;
+
+                    $item->base_price = $item->base_total / $item->quantity;
+                } else {
+                    $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
+
+                    $item->base_tax_amount = round(($item->base_total * $rate->tax_rate) / 100, 4);
+
+                    $item->total_incl_tax = $item->total + $item->tax_amount;
+
+                    $item->base_total_incl_tax = $item->base_total + $item->base_tax_amount;
+
+                    $item->price_incl_tax = $item->price + ($item->tax_amount / $item->quantity);
+
+                    $item->base_price_incl_tax = $item->base_price + ($item->base_tax_amount / $item->quantity);
+                }
             });
 
+            if (empty($item->applied_tax_rate)) {
+                $item->price_incl_tax = $item->price;
+                $item->base_price_incl_tax = $item->base_price;
+
+                $item->total_incl_tax = $item->total;
+                $item->base_total_incl_tax = $item->base_total;
+            }
+
             $item->save();
+
+            $this->cart->items->put($key, $item);
         }
 
         Event::dispatch('checkout.cart.calculate.items.tax.after', $this->cart);
+    }
+
+    /**
+     * Calculates cart shipping tax.
+     */
+    public function calculateShippingTax(): void
+    {
+        if (! $this->cart) {
+            return;
+        }
+
+        $shippingRate = $this->cart->selected_shipping_rate;
+
+        if (! $shippingRate) {
+            return;
+        }
+
+        if (! $taxCategoryId = core()->getConfigData('sales.taxes.categories.shipping')) {
+            return;
+        }
+
+        $taxCategory = $this->taxCategoryRepository->find($taxCategoryId);
+
+        $calculationBasedOn = core()->getConfigData('sales.taxes.calculation.based_on');
+
+        $address = null;
+
+        if ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN) {
+            $address = Tax::getShippingOriginAddress();
+        } elseif (
+            $this->cart->haveStockableItems()
+            && $calculationBasedOn == self::TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS
+        ) {
+            $address = $this->cart->shipping_address;
+        } elseif ($calculationBasedOn == self::TAX_CALCULATION_BASED_ON_BILLING_ADDRESS) {
+            $address = $this->cart->billing_address;
+        }
+
+        if ($address === null && $this->cart->customer) {
+            $address = $this->cart->customer->addresses()
+                ->where('default_address', 1)->first();
+        }
+
+        if ($address === null) {
+            $address = Tax::getDefaultAddress();
+        }
+
+        Event::dispatch('checkout.cart.calculate.shipping.tax.before', $this->cart);
+
+        Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use ($shippingRate) {
+            $shippingRate->applied_tax_rate = $rate->identifier;
+
+            $shippingRate->tax_percent = $rate->tax_rate;
+
+            if (Tax::isInclusiveTaxShippingPrices()) {
+                $shippingRate->tax_amount = round(($shippingRate->price_incl_tax * $rate->tax_rate) / (100 + $rate->tax_rate), 4);
+
+                $shippingRate->base_tax_amount = round(($shippingRate->base_price_incl_tax * $rate->tax_rate) / (100 + $rate->tax_rate), 4);
+
+                $shippingRate->price = $shippingRate->price_incl_tax - $shippingRate->tax_amount;
+
+                $shippingRate->base_price = $shippingRate->base_price_incl_tax - $shippingRate->base_tax_amount;
+            } else {
+                $shippingRate->tax_amount = round(($shippingRate->price * $rate->tax_rate) / 100, 4);
+
+                $shippingRate->base_tax_amount = round(($shippingRate->base_price * $rate->tax_rate) / 100, 4);
+
+                $shippingRate->price_incl_tax = $shippingRate->price + $shippingRate->tax_amount;
+
+                $shippingRate->base_price_incl_tax = $shippingRate->base_price + $shippingRate->base_tax_amount;
+            }
+        });
+
+        if (empty($shippingRate->applied_tax_rate)) {
+            $shippingRate->price_incl_tax = $shippingRate->price;
+
+            $shippingRate->base_price_incl_tax = $shippingRate->base_price;
+        }
+
+        $shippingRate->save();
+
+        Event::dispatch('checkout.cart.calculate.shipping.tax.after', $this->cart);
     }
 }

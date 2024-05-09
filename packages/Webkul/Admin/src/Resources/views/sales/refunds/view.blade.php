@@ -94,9 +94,23 @@
 
                                 <div class="flex flex-col place-items-start items-end gap-1.5">
                                     <!-- Base Total -->
-                                    <p class="text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.sales.refunds.view.price', ['price' => core()->formatBasePrice($item->base_total)])
-                                    </p>
+                                    @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.refunds.view.price', ['price' => core()->formatBasePrice($item->base_price_incl_tax)])
+                                        </p>
+                                    @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.refunds.view.price-excl-tax', ['price' => core()->formatBasePrice($item->base_price)])
+                                        </p>
+                                        
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.refunds.view.price-incl-tax', ['price' => core()->formatBasePrice($item->base_price_incl_tax)])
+                                        </p>
+                                    @else
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.refunds.view.price', ['price' => core()->formatBasePrice($item->base_price)])
+                                        </p>
+                                    @endif
 
                                     <!-- Base Tax Amount -->
                                     <p class="text-gray-600 dark:text-gray-300">
@@ -108,10 +122,24 @@
                                         @lang('admin::app.sales.refunds.view.base-discounted-amount', ['base_discounted_amount' => core()->formatBasePrice($item->base_discount_amount)])
                                     </p>
 
-                                    <!-- Base Discount Amount -->
-                                    <p class="text-gray-600 dark:text-gray-300">
-                                        @lang('admin::app.sales.refunds.view.discounted-amount', ['discounted_amount' => core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount)])
-                                    </p>
+                                    <!-- Base Sub Total Amount -->
+                                    @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.refunds.view.sub-total-amount', ['discounted_amount' => core()->formatBasePrice($item->base_total_incl_tax)])
+                                        </p>
+                                    @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.refunds.view.sub-total-amount-excl-tax', ['discounted_amount' => core()->formatBasePrice($item->base_total)])
+                                        </p>
+                                        
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.refunds.view.sub-total-amount-incl-tax', ['discounted_amount' => core()->formatBasePrice($item->base_total_incl_tax)])
+                                        </p>
+                                    @else
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.refunds.view.sub-total-amount', ['discounted_amount' => core()->formatBasePrice($item->base_total)])
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -121,14 +149,34 @@
                 <!-- Subtotal / Grand Total od the page -->
                 <div class="mt-4 flex w-full justify-end gap-2.5 p-4">
                     <div class="flex flex-col gap-y-1.5">
-                        <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.sales.refunds.view.sub-total')
-                        </p>
+                        @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+                            <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.refunds.view.sub-total-excl-tax')
+                            </p>
+                            
+                            <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.refunds.view.sub-total-incl-tax')
+                            </p>
+                        @else
+                            <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.refunds.view.sub-total')
+                            </p>
+                        @endif
 
                         @if ($refund->base_shipping_amount > 0)
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.sales.refunds.view.shipping-handling')
-                            </p>
+                            @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.sales.refunds.view.shipping-handling-excl-tax')
+                                </p>
+                                
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.sales.refunds.view.shipping-handling-incl-tax')
+                                </p>
+                            @else
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.sales.refunds.view.shipping-handling')
+                                </p>
+                            @endif
                         @endif
 
                         @if ($refund->base_tax_amount > 0)
@@ -158,15 +206,43 @@
 
                     <div class="flex flex-col gap-y-1.5">
                         <!-- Base Sub Total -->
-                        <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                            {{ core()->formatBasePrice($refund->base_sub_total) }}
-                        </p>
+                        @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+                            <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                {{ core()->formatBasePrice($refund->base_sub_total_incl_tax) }}
+                            </p>
+                        @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+                            <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                {{ core()->formatBasePrice($refund->base_sub_total) }}
+                            </p>
+                            
+                            <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                {{ core()->formatBasePrice($refund->base_sub_total_incl_tax) }}
+                            </p>
+                        @else
+                            <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
+                                {{ core()->formatBasePrice($refund->base_sub_total) }}
+                            </p>
+                        @endif
 
                         <!-- Base Shipping Amount -->
                         @if ($refund->base_shipping_amount > 0)
-                            <p class="!leading-5 text-gray-600 dark:text-gray-300">
-                                {{ core()->formatBasePrice($refund->base_shipping_amount) }}
-                            </p>
+                            @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'including_tax')
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    {{ core()->formatBasePrice($refund->base_shipping_amount_incl_tax) }}
+                                </p>
+                            @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    {{ core()->formatBasePrice($refund->base_shipping_amount) }}
+                                </p>
+                                
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    {{ core()->formatBasePrice($refund->base_shipping_amount_incl_tax) }}
+                                </p>
+                            @else
+                                <p class="!leading-5 text-gray-600 dark:text-gray-300">
+                                    {{ core()->formatBasePrice($refund->base_shipping_amount) }}
+                                </p>
+                            @endif
                         @endif
 
                         <!-- Base Tax Amount -->
