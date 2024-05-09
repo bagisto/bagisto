@@ -44,7 +44,7 @@ class RefundRepository extends Repository
 
             $order = $this->orderRepository->find($data['order_id']);
 
-            $totalQty = array_sum($data['refund']['items']);
+            $totalQty = array_sum($data['refund']['items'] ?? []) ?? 0;
 
             $refund = parent::create([
                 'order_id'               => $order->id,
@@ -61,7 +61,7 @@ class RefundRepository extends Repository
                 'base_shipping_amount'   => $data['refund']['shipping'],
             ]);
 
-            foreach ($data['refund']['items'] as $itemId => $qty) {
+            foreach ($data['refund']['items'] ?? [] as $itemId => $qty) {
                 if (! $qty) {
                     continue;
                 }
@@ -72,6 +72,10 @@ class RefundRepository extends Repository
                     $qty = $orderItem->qty_to_refund;
                 }
 
+                $taxAmount = (($orderItem->tax_amount / $orderItem->qty_ordered) * $qty);
+
+                $baseTaxAmount = (($orderItem->base_tax_amount / $orderItem->qty_ordered) * $qty);
+
                 $refundItem = $this->refundItemRepository->create([
                     'refund_id'            => $refund->id,
                     'order_item_id'        => $orderItem->id,
@@ -79,11 +83,15 @@ class RefundRepository extends Repository
                     'sku'                  => $orderItem->sku,
                     'qty'                  => $qty,
                     'price'                => $orderItem->price,
+                    'price_incl_tax'       => $orderItem->price_incl_tax,
                     'base_price'           => $orderItem->base_price,
+                    'base_price_incl_tax'  => $orderItem->base_price_incl_tax,
                     'total'                => $orderItem->price * $qty,
+                    'total_incl_tax'       => ($orderItem->price * $qty) + $taxAmount,
                     'base_total'           => $orderItem->base_price * $qty,
-                    'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered) * $qty),
-                    'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered) * $qty),
+                    'base_total_incl_tax'  => ($orderItem->base_price * $qty) + $baseTaxAmount,
+                    'tax_amount'           => $taxAmount,
+                    'base_tax_amount'      => $baseTaxAmount,
                     'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered) * $qty),
                     'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered) * $qty),
                     'product_id'           => $orderItem->product_id,
@@ -170,19 +178,35 @@ class RefundRepository extends Repository
     public function collectTotals($refund)
     {
         $refund->sub_total = $refund->base_sub_total = 0;
+        $refund->sub_total_incl_tax = $refund->base_sub_total_incl_tax = 0;
         $refund->tax_amount = $refund->base_tax_amount = 0;
+        $refund->shipping_tax_amount = $refund->base_shipping_tax_amount = 0;
         $refund->discount_amount = $refund->base_discount_amount = 0;
 
-        foreach ($refund->items as $refundItem) {
-            $refund->sub_total += $refundItem->total;
-            $refund->base_sub_total += $refundItem->base_total;
+        foreach ($refund->items as $item) {
+            $refund->tax_amount += $item->tax_amount;
+            $refund->base_tax_amount += $item->base_tax_amount;
 
-            $refund->tax_amount += $refundItem->tax_amount;
-            $refund->base_tax_amount += $refundItem->base_tax_amount;
+            $refund->discount_amount += $item->discount_amount;
+            $refund->base_discount_amount += $item->base_discount_amount;
 
-            $refund->discount_amount += $refundItem->discount_amount;
-            $refund->base_discount_amount += $refundItem->base_discount_amount;
+            $refund->sub_total += $item->total;
+            $refund->base_sub_total += $item->base_total;
+
+            $refund->sub_total_incl_tax = (float) $refund->sub_total_incl_tax + $item->total_incl_tax;
+            $refund->base_sub_total_incl_tax = (float) $refund->base_sub_total_incl_tax + $item->base_total_incl_tax;
         }
+
+        if ((float) $refund->order->shipping_invoiced) {
+            $refund->shipping_tax_amount = ($refund->order->shipping_tax_amount / $refund->order->shipping_invoiced) * $refund->shipping_amount;
+            $refund->base_shipping_tax_amount = ($refund->order->base_shipping_tax_amount / $refund->order->base_shipping_invoiced) * $refund->base_shipping_amount;
+        }
+
+        $refund->shipping_amount_incl_tax = $refund->shipping_amount + $refund->shipping_tax_amount;
+        $refund->base_shipping_amount_incl_tax = $refund->base_shipping_amount + $refund->base_shipping_tax_amount;
+
+        $refund->tax_amount += $refund->shipping_tax_amount;
+        $refund->base_tax_amount += $refund->base_shipping_tax_amount;
 
         $refund->grand_total = $refund->sub_total + $refund->tax_amount + $refund->shipping_amount + $refund->adjustment_refund - $refund->adjustment_fee - $refund->discount_amount;
         $refund->base_grand_total = $refund->base_sub_total + $refund->base_tax_amount + $refund->base_shipping_amount + $refund->base_adjustment_refund - $refund->base_adjustment_fee - $refund->base_discount_amount;
@@ -197,13 +221,13 @@ class RefundRepository extends Repository
      *
      * @param  array  $data
      * @param  int  $orderId
-     * @return array|bool
+     * @return array|\Exception
      */
     public function getOrderItemsRefundSummary($data, $orderId)
     {
         $order = $this->orderRepository->find($orderId);
 
-        $summary = [
+        $totals = [
             'subtotal'    => ['price' => 0],
             'discount'    => ['price' => 0],
             'tax'         => ['price' => 0],
@@ -211,7 +235,7 @@ class RefundRepository extends Repository
             'grand_total' => ['price' => 0],
         ];
 
-        foreach ($data as $orderItemId => $qty) {
+        foreach ($data['items'] ?? [] as $orderItemId => $qty) {
             if (! $qty) {
                 continue;
             }
@@ -219,30 +243,30 @@ class RefundRepository extends Repository
             $orderItem = $this->orderItemRepository->find($orderItemId);
 
             if ($qty > $orderItem->qty_to_refund) {
-                return false;
+                throw new \Exception(trans('admin::app.sales.refunds.create.invalid-qty'));
             }
 
-            $summary['subtotal']['price'] += $orderItem->base_price * $qty;
+            $totals['subtotal']['price'] += $orderItem->base_price * $qty;
 
-            $summary['discount']['price'] += ($orderItem->base_discount_amount / $orderItem->qty_ordered) * $qty;
+            $totals['discount']['price'] += ($orderItem->base_discount_amount / $orderItem->qty_ordered) * $qty;
 
-            $summary['tax']['price'] += ($orderItem->tax_amount / $orderItem->qty_ordered) * $qty;
+            $totals['tax']['price'] += ($orderItem->base_tax_amount / $orderItem->qty_ordered) * $qty;
         }
 
-        $summary['shipping']['price'] += $order->base_shipping_invoiced - $order->base_shipping_refunded - $order->base_shipping_discount_amount;
+        if ((float) $order->base_shipping_invoiced) {
+            $totals['tax']['price'] += ($order->base_shipping_tax_amount / $order->base_shipping_invoiced) * $data['shipping'];
+        }
 
-        $summary['grand_total']['price'] += $summary['subtotal']['price'] + $summary['tax']['price'] + $summary['shipping']['price'] - $summary['discount']['price'];
+        $totals['shipping']['price'] += $data['shipping'];
 
-        $summary['subtotal']['formatted_price'] = core()->formatBasePrice($summary['subtotal']['price']);
+        $totals['grand_total']['price'] += $totals['subtotal']['price'] + $totals['tax']['price'] + $totals['shipping']['price'] + $data['adjustment_refund'] - $data['adjustment_fee'] - $totals['discount']['price'];
 
-        $summary['discount']['formatted_price'] = core()->formatBasePrice($summary['discount']['price']);
+        $totals = array_map(function ($item) {
+            $item['formatted_price'] = core()->formatBasePrice($item['price']);
 
-        $summary['tax']['formatted_price'] = core()->formatBasePrice($summary['tax']['price']);
+            return $item;
+        }, $totals);
 
-        $summary['shipping']['formatted_price'] = core()->formatBasePrice($summary['shipping']['price']);
-
-        $summary['grand_total']['formatted_price'] = core()->formatBasePrice($summary['grand_total']['price']);
-
-        return $summary;
+        return $totals;
     }
 }

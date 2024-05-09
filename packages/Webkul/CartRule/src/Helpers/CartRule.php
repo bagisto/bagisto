@@ -218,9 +218,9 @@ class CartRule
                 case 'by_percent':
                     $rulePercent = min(100, $rule->discount_amount);
 
-                    $discountAmount = ($quantity * $item->price + $item->tax_amount - $item->discount_amount) * ($rulePercent / 100);
+                    $discountAmount = ($quantity * $item->price - $item->discount_amount) * ($rulePercent / 100);
 
-                    $baseDiscountAmount = ($quantity * $item->base_price + $item->base_tax_amount - $item->base_discount_amount) * ($rulePercent / 100);
+                    $baseDiscountAmount = ($quantity * $item->base_price - $item->base_discount_amount) * ($rulePercent / 100);
 
                     if (
                         ! $rule->discount_quantity
@@ -286,11 +286,11 @@ class CartRule
 
             $item->discount_amount = min(
                 $item->discount_amount + $discountAmount,
-                $item->price * $quantity + $item->tax_amount
+                $item->price * $quantity
             );
             $item->base_discount_amount = min(
                 $item->base_discount_amount + $baseDiscountAmount,
-                $item->base_price * $quantity + $item->base_tax_amount
+                $item->base_price * $quantity
             );
 
             $appliedRuleIds[$rule->id] = $rule->id;
@@ -427,7 +427,11 @@ class CartRule
 
                 $selectedShipping->price = 0;
 
+                $selectedShipping->price_incl_tax = 0;
+
                 $selectedShipping->base_price = 0;
+
+                $selectedShipping->base_price_incl_tax = 0;
 
                 $selectedShipping->save();
 

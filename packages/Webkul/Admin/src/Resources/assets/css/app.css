@@ -64,7 +64,7 @@
     }
     
     .box-shadow {
-        @apply shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)] border-[1px] dark:border-gray-800;
+        @apply border-[1px] dark:border-gray-800 shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)];
     }
 
     .icon-magic:before {
@@ -398,15 +398,15 @@
     }
 
     .primary-button {
-        @apply flex gap-x-1 items-center place-content-center px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer transition-all hover:opacity-[0.9] focus:opacity-[0.9];
+        @apply bg-blue-600 border border-blue-700 cursor-pointer flex focus:opacity-[0.9] font-semibold gap-x-1 hover:opacity-[0.9] items-center place-content-center px-3 py-1.5 rounded-md text-gray-50 transition-all;
     }
 
     .secondary-button {
-        @apply flex gap-x-1 items-center place-content-center px-3 py-1.5 bg-white border-2 border-blue-600 rounded-md text-blue-600 font-semibold whitespace-nowrap cursor-pointer transition-all hover:bg-[#eff6ff61] focus:bg-[#eff6ff61] dark:border-gray-400 dark:bg-gray-800 dark:text-white dark:hover:opacity-80;
+        @apply flex cursor-pointer place-content-center items-center gap-x-1 whitespace-nowrap rounded-md border-2 border-blue-600 bg-white px-3 py-1.5 font-semibold text-blue-600 transition-all hover:bg-[#eff6ff61] focus:bg-[#eff6ff61] dark:border-gray-400 dark:bg-gray-800 dark:text-white dark:hover:opacity-80;
     }
 
     .transparent-button {
-        @apply flex gap-x-1 items-center place-content-center px-3 py-1.5 border-2 border-transparent rounded-md text-gray-600 font-semibold whitespace-nowrap cursor-pointer marker:shadow appearance-none transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100;
+        @apply flex cursor-pointer appearance-none place-content-center items-center gap-x-1 whitespace-nowrap rounded-md border-2 border-transparent px-3 py-1.5 font-semibold text-gray-600 transition-all marker:shadow hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-950;
     }
 
     .journal-scroll::-webkit-scrollbar {

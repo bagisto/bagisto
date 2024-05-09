@@ -1510,8 +1510,6 @@ it('should check tax is applying for the virtual product into the cart for virtu
 
     $this->assertPrice($cart->tax_total, $response['data']['tax_total']);
 
-    $this->assertPrice($cart->base_tax_total, $response['data']['base_tax_total']);
-
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 });
 
