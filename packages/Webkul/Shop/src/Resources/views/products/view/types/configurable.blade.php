@@ -393,7 +393,7 @@
                         });
 
                         if (galleryImages.length) {
-                            this.$parent.$parent.$refs.gallery.media.images =  { ...galleryImages };
+                            this.$parent.$parent.$refs.gallery.media.images =  [...galleryImages];
                         }
 
                         this.$emitter.emit('configurable-variant-update-images-event', galleryImages);
