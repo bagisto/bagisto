@@ -11,6 +11,9 @@
     dir="{{ core()->getCurrentLocale()->direction }}"
 >
     <head>
+
+        {!! view_render_event('bagisto.shop.layout.head.before') !!}
+
         <title>{{ $title ?? '' }}</title>
 
         <meta charset="UTF-8">
@@ -73,7 +76,8 @@
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
         </style>
 
-        {!! view_render_event('bagisto.shop.layout.head') !!}
+        {!! view_render_event('bagisto.shop.layout.head.after') !!}
+
     </head>
 
     <body>

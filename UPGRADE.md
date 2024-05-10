@@ -7,6 +7,8 @@
 - [Updating Dependencies](#updating-dependencies)
 - [The `Webkul\Checkout\Cart` class](#the-cart-class)
 - [Shop API Response Updates](#the-shop-api-response-updates)
+- [shop Event Inside Head Updated](#shop-event-inside-head-updated)
+- [Admin Event Inside Head Updated](#admin-event-inside-head-updated)
 
 ## Medium Impact Changes
 
@@ -19,7 +21,7 @@
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
-- [Shop Event Parameter Updates](#event-parameter-updated)
+- [Shop Event Parameter Updates](#shop-event-parameter-updated)
 - [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
 
 ## Low Impact Changes
@@ -664,7 +666,7 @@ If you've implemented your own product type or overridden existing type classes,
 + </template>
 ```
 
-<a name="event-parameter-updated"></a>
+<a name="shop-event-parameter-updated"></a>
 #### Shop Event Parameter Updates
 
 **Impact Probability: Medium**
@@ -799,6 +801,34 @@ If you've implemented your own product type or overridden existing type classes,
         ]
     }
 }
+```
+
+<a name="shop-event-inside-head-updated"></a>
+#### Shop Event Inside Head Updated
+
+**Impact Probability: High**
+
+1. The event that was previously added in Shop has now been updated in the new format. You can now directly add your own custom elements inside the <head> tag.
+
+```diff
++ {!! view_render_event('bagisto.shop.layout.head.before') !!}
+
+- {!! view_render_event('bagisto.shop.layout.head') !!}
++ {!! view_render_event('bagisto.shop.layout.head.after') !!}
+```
+
+<a name="admin-event-inside-head-updated"></a>
+#### Admin Event Inside Head Updated
+
+**Impact Probability: High**
+
+1. The event that was previously added in Admin has now been updated in the new format. You can now directly add your own custom elements inside the <head> tag.
+
+```diff
++ {!! view_render_event('bagisto.admin.layout.head.before') !!}
+
+- {!! view_render_event('bagisto.admin.layout.head') !!}
++ {!! view_render_event('bagisto.admin.layout.head.after') !!}
 ```
 
 <a name="moved-coupon-blade"></a>
