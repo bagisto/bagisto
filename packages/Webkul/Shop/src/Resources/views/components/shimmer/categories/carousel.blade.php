@@ -6,7 +6,7 @@
             @for ($i = 0;  $i < $count; $i++)
                 <div class="grid min-w-[120px] grid-cols-1 justify-items-center gap-4">
                     <div class="shimmer relative h-[110px] w-[110px] overflow-hidden rounded-full">
-                        <img class="rounded-sm bg-[#F5F5F5]">
+                        <img class="rounded-sm bg-zinc-100">
                     </div>
 
                     <p class="shimmer h-[27px] w-[90px] rounded-2xl"></p>

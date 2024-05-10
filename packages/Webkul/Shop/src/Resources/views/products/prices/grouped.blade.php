@@ -1,4 +1,4 @@
-<p class="text-sm text-[#6E6E6E]">
+<p class="text-sm text-zinc-500">
     @lang('shop::app.products.prices.grouped.starting-at')
 </p>
 

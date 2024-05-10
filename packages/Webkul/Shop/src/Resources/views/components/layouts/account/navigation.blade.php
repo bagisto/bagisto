@@ -18,7 +18,7 @@
 
 <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] max-w-[380px] grid-cols-[1fr] gap-8 overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] max-md:max-w-full">
     <!-- Account Profile Hero Section -->
-    <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-[#E9E9E9] px-5 py-[25px]">
+    <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 px-5 py-[25px]">
         <div class="">
             <img
                 src="{{ $customer->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -30,13 +30,13 @@
         <div class="flex flex-col justify-between">
             <p class="font-mediums text-2xl">Hello! {{ $customer->first_name }}</p>
 
-            <p class="text-[#6E6E6E]">{{ $customer->email }}</p>
+            <p class="text-zinc-500">{{ $customer->email }}</p>
         </div>
     </div>
 
     <!-- Account Navigation Menus -->
     @foreach ($menu->items as $menuItem)
-        <div class="max-md:rounded-md max-md:border max-md:border-b max-md:border-l-[1px] max-md:border-r max-md:border-t-0 max-md:border-[#E9E9E9]">
+        <div class="max-md:rounded-md max-md:border max-md:border-b max-md:border-l-[1px] max-md:border-r max-md:border-t-0 max-md:border-zinc-200">
             <v-account-navigation>
                 <!-- Account Navigation Toggler -->
                 <div class="accordian-toggle select-none pb-5 max-md:flex max-md:items-center max-md:justify-between max-md:gap-x-4 max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] max-md:bg-gray-100 max-md:px-6 max-md:py-5 md:pointer-events-none">
@@ -46,7 +46,7 @@
                 </div>
 
                 <!-- Account Navigation Content -->
-                <div class="accordian-content grid rounded-md border border-b border-l-[1px] border-r border-t-0 border-[#E9E9E9] max-md:hidden max-md:border-none">
+                <div class="accordian-content grid rounded-md border border-b border-l-[1px] border-r border-t-0 border-zinc-200 max-md:hidden max-md:border-none">
                     @if (! (bool) core()->getConfigData('general.content.shop.wishlist_option'))
                         @php
                             unset($menuItem['children']['wishlist']);
@@ -55,7 +55,7 @@
 
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
-                            <div class="flex justify-between px-6 py-5 border-t border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
+                            <div class="flex justify-between px-6 py-5 border-t border-zinc-200 hover:bg-zinc-100 cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-zinc-100' : '' }}">
                                 <p class="flex items-center gap-x-4 text-lg font-medium">
                                     <span class="{{ $subMenuItem['icon'] }}  text-2xl"></span>
 

@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Naviation -->
 <div
-    class="fixed bottom-0 z-50 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-[#E9E9E9] bg-white px-5 ltr:left-0 rtl:right-0"
+    class="fixed bottom-0 z-50 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -37,7 +37,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex items-center justify-between border-b border-[#E9E9E9] pb-5">
+            <div class="flex items-center justify-between border-b border-zinc-200 pb-5">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
@@ -65,7 +65,7 @@
     </x-shop::drawer>
 
     <!-- Seperator -->
-    <span class="h-5 w-0.5 bg-[#E9E9E9]"></span>
+    <span class="h-5 w-0.5 bg-zinc-200"></span>
 
     <!-- Sort Drawer -->
     <x-shop::drawer
@@ -87,7 +87,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex items-center justify-between border-b border-[#E9E9E9] pb-5">
+            <div class="flex items-center justify-between border-b border-zinc-200 pb-5">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
@@ -118,7 +118,7 @@
         <template v-else>
             <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[400px] md:pr-7">
                 <!-- Filters Header Container -->
-                <div class="flex h-[50px] items-center justify-between border-b border-[#E9E9E9] pb-2.5 max-md:hidden">
+                <div class="flex h-[50px] items-center justify-between border-b border-zinc-200 pb-2.5 max-md:hidden">
                     <p class="text-lg font-semibold">
                         @lang('shop::app.categories.filters.filters')
                     </p>

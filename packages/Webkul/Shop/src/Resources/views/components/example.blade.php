@@ -289,7 +289,7 @@
 
 <!-- Image/Media -->
 <x-shop::media.images.lazy
-    class="after:content-[' '] relative min-w-[250px] bg-[#F5F5F5] transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
+    class="after:content-[' '] relative min-w-[250px] bg-zinc-100 transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
     ::src="product.base_image.medium_image_url"
     ::key="product.id"
     ::index="product.id"

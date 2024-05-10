@@ -36,7 +36,7 @@
                         <v-field
                             as="select"
                             :name="'super_attribute[' + attribute.id + ']'"
-                            class="custom-select mb-3 block w-full cursor-pointer rounded-lg border border-[#E9E9E9] bg-white px-5 py-3 text-base text-[#6E6E6E] focus:border-blue-500 focus:ring-blue-500 max-md:w-[110px] max-md:border-0 max-md:outline-none"
+                            class="custom-select mb-3 block w-full cursor-pointer rounded-lg border border-zinc-200 bg-white px-5 py-3 text-base text-zinc-500 focus:border-blue-500 focus:ring-blue-500 max-md:w-[110px] max-md:border-0 max-md:outline-none"
                             :class="[errors['super_attribute[' + attribute.id + ']'] ? 'border border-red-500' : '']"
                             :id="'attribute_' + attribute.id"
                             rules="required"

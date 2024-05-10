@@ -38,7 +38,7 @@
 
                         <template v-for="product in option.products">
                             <div
-                                class="text-[#6E6E6E]"
+                                class="text-zinc-500"
                                 :key="product.id"
                                 v-if="product.is_default"
                             >
@@ -54,7 +54,7 @@
             type="text/x-template"
             id="v-product-bundle-option-item-template"
         >
-            <div class="mt-8 border-b border-[#E9E9E9] pb-4">
+            <div class="mt-8 border-b border-zinc-200 pb-4">
                 <x-shop::form.control-group>
                     <!-- Dropdown Options Container -->
                     <x-shop::form.control-group.label
@@ -107,7 +107,7 @@
                                 />
 
                                 <label
-                                    class="cursor-pointer text-[#6E6E6E]"
+                                    class="cursor-pointer text-zinc-500"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @lang('shop::app.products.view.type.bundle.none')
@@ -131,7 +131,7 @@
                                 />
 
                                 <label
-                                    class="cursor-pointer text-[#6E6E6E]"
+                                    class="cursor-pointer text-zinc-500"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
@@ -163,7 +163,7 @@
                                 />
 
                                 <label
-                                    class="cursor-pointer text-[#6E6E6E]"
+                                    class="cursor-pointer text-zinc-500"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
@@ -208,7 +208,7 @@
                     <x-shop::quantity-changer
                         ::name="'bundle_option_qty[' + option?.id + ']'"
                         ::value="productQty"
-                        class="mt-5 w-max gap-x-4 rounded-xl !border-[#E9E9E9] px-4 py-2.5"
+                        class="mt-5 w-max gap-x-4 rounded-xl !border-zinc-200 px-4 py-2.5"
                         @change="qtyUpdated($event)"
                     />
                 </template>

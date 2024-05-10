@@ -23,7 +23,7 @@
             @if ($order->canCancel())
                 <a
                     href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
-                    class="secondary-button flex items-center gap-x-2.5 border-[#E9E9E9] px-5 py-3 font-normal"
+                    class="secondary-button flex items-center gap-x-2.5 border-zinc-200 px-5 py-3 font-normal"
                 >
                     @lang('shop::app.customers.account.orders.view.reorder-btn-title')
                 </a>
@@ -39,7 +39,7 @@
                 </form>
 
                 <a
-                    class="secondary-button flex items-center gap-x-2.5 border-[#E9E9E9] px-5 py-3 font-normal"
+                    class="secondary-button flex items-center gap-x-2.5 border-zinc-200 px-5 py-3 font-normal"
                     href="javascript:void(0);"
                     @click="$emitter.emit('open-confirm-modal', {
                         message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
@@ -77,7 +77,7 @@
 
                 <div class="relative mt-8 overflow-x-auto rounded-xl border">
                     <table class="w-full text-left text-sm">
-                        <thead class="border-b border-[#E9E9E9] bg-[#F5F5F5] text-sm text-black">
+                        <thead class="border-b border-zinc-200 bg-zinc-100 text-sm text-black">
                             <tr>
                                 <th
                                     scope="col"
@@ -400,7 +400,7 @@
                             </div>
                             
                             <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
-                                <div class="secondary-button flex items-center gap-x-2.5 border-[#E9E9E9] px-5 py-3 font-normal">
+                                <div class="secondary-button flex items-center gap-x-2.5 border-zinc-200 px-5 py-3 font-normal">
                                     @lang('shop::app.customers.account.orders.view.invoices.print')
                                 </div>
                             </a>
@@ -408,7 +408,7 @@
 
                         <div class="relative mt-8 overflow-x-auto rounded-xl border">
                             <table class="w-full text-left text-sm">
-                                <thead class="border-b border-[#E9E9E9] bg-[#F5F5F5] text-sm text-black">
+                                <thead class="border-b border-zinc-200 bg-zinc-100 text-sm text-black">
                                     <tr>
                                         <th
                                             scope="col"
@@ -667,7 +667,7 @@
 
                         <div class="relative mt-8 overflow-x-auto rounded-xl border">
                             <table class="w-full text-left text-sm">
-                                <thead class="border-b border-[#E9E9E9] bg-[#F5F5F5] text-sm text-black">
+                                <thead class="border-b border-zinc-200 bg-zinc-100 text-sm text-black">
                                     <tr>
                                         <th
                                             scope="col"
@@ -736,7 +736,7 @@
 
                         <div class="relative mt-8 overflow-x-auto rounded-xl border">
                             <table class="w-full text-left text-sm">
-                                <thead class="border-b border-[#E9E9E9] bg-[#F5F5F5] text-sm text-black">
+                                <thead class="border-b border-zinc-200 bg-zinc-100 text-sm text-black">
                                     <tr>
                                         <th
                                             scope="col"
@@ -1003,11 +1003,11 @@
             @endif
         </x-shop::tabs>
 
-        <div class="mt-11 flex flex-wrap justify-between gap-x-11 gap-y-8 border-t border-[#E9E9E9] pt-7">
+        <div class="mt-11 flex flex-wrap justify-between gap-x-11 gap-y-8 border-t border-zinc-200 pt-7">
             <!-- Biiling Address -->
             @if ($order->billing_address)
                 <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-base text-[#6E6E6E]">
+                    <p class="text-base text-zinc-500">
                         @lang('shop::app.customers.account.orders.view.billing-address')
                     </p>
 
@@ -1024,7 +1024,7 @@
             <!-- Shipping Address -->
             @if ($order->shipping_address)
                 <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-base text-[#6E6E6E]">
+                    <p class="text-base text-zinc-500">
                         @lang('shop::app.customers.account.orders.view.shipping-address')
                     </p>
 
@@ -1039,7 +1039,7 @@
 
                 <!-- Shipping Method -->
                 <div class="grid max-w-[200px] place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-base text-[#6E6E6E]">
+                    <p class="text-base text-zinc-500">
                         @lang('shop::app.customers.account.orders.view.shipping-method')
                     </p>
 
@@ -1054,7 +1054,7 @@
 
             <!-- Billing Method -->
             <div class="grid max-w-[200px] place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                <p class="text-base text-[#6E6E6E]">
+                <p class="text-base text-zinc-500">
                     @lang('shop::app.customers.account.orders.view.payment-method')
                 </p>
 
