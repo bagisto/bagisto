@@ -159,7 +159,7 @@
                     deep: true,
 
                     handler(newImages, oldImages) {
-                        let selectedImage = newImages?.[this.activeIndex.split('_').pop()];
+                        let selectedImage = newImages?.[this.activeIndex];
 
                         if (JSON.stringify(newImages) !== JSON.stringify(oldImages) && selectedImage?.large_image_url) {
                             this.baseFile.path = selectedImage.large_image_url;
