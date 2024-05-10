@@ -78,6 +78,8 @@ There is no dependency needed to be updated at for this upgrade.
 <div class="content-list" markdown="1">
 </div>
 
+
+
 <a name="Admin"></a>
 ### Admin
 
@@ -138,7 +140,6 @@ In this example, the `repository` option has been replaced with `options`, which
 **Impact Probability: Low**
 
 1. In the `packages/Webkul/Admin/src/Routes/sales-routes.php` route file, route names and controller methods have been renamed to provide clearer and more meaningful representations.
-
 
 ```diff
 - Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
@@ -205,6 +206,8 @@ In this example, the `repository` option has been replaced with `options`, which
 +    <!-- Updated body customization code -->
 + </template>
 ```
+
+
 
 <a name="checkout"></a>
 ### Checkout
@@ -419,6 +422,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + public function collectTotals(): self
 ```
 
+
+
 <a name="datagrid"></a>
 ### DataGrid
 
@@ -462,6 +467,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + datagrid(AttributeDataGrid::class)->process();
 ```
 
+
+
 <a name="notification"></a>
 ### Notification
 
@@ -476,6 +483,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 - public function getAll()
 + public function getAll(array $params = [])
 ```
+
+
 
 <a name="product"></a>
 ### Product
@@ -541,6 +550,7 @@ If you've implemented your own product type or overridden existing type classes,
 ```
 
 2: Please update your `prepareForCart` and `validateCartItem` methods to include the `*_incl_tax` columns for managing inclusive tax calculation for your product type. You can refer to the `Webkul\Product\Type\AbstractType` class and adjust your class accordingly.
+
 
 
 <a name="Sales"></a>
@@ -652,6 +662,8 @@ If you've implemented your own product type or overridden existing type classes,
 ```diff
 - public function create(array $data)
 ```
+
+
 
 <a name="shop"></a>
 ### Shop
@@ -869,7 +881,6 @@ If you've implemented your own product type or overridden existing type classes,
 ```
 
 2: The new class for handling shipping tax inclusion now includes two additional methods: `isInclusiveTaxShippingPrices` and `getShippingOriginAddress`.
-
 
 ```diff
 + public function isInclusiveTaxShippingPrices(): bool
