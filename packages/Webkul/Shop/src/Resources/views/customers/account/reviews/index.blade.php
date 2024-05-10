@@ -102,10 +102,18 @@
                                 </div>
                             @else
                                 <!-- Review Empty Page -->
-                                <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
-                                    <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
-                
-                                    <p class="text-xl">
+                                <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
+                                    <img
+                                        class="max-sm:h-[100px] max-sm:w-[100px]"
+                                        src="{{ bagisto_asset('images/review.png') }}"
+                                        alt="Empty Review"
+                                        title=""
+                                    >
+
+                                    <p
+                                        class="text-xl max-sm:text-sm"
+                                        role="heading"
+                                    >
                                         @lang('shop::app.customers.account.reviews.empty-review')
                                     </p>
                                 </div>

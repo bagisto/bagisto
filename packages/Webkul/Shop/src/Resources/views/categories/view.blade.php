@@ -102,14 +102,15 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
-                                        <img 
+                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
+                                        <img
+                                            class="max-sm:h-[100px] max-sm:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                         />
                                   
                                         <p
-                                            class="text-xl"
+                                            class="text-xl max-sm:text-sm"
                                             role="heading"
                                         >
                                             @lang('shop::app.categories.view.empty')
@@ -145,14 +146,15 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
-                                        <img 
+                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
+                                        <img
+                                            class="max-sm:h-[100px] max-sm:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                         />
                                         
                                         <p
-                                            class="text-xl"
+                                            class="text-xl max-sm:text-sm"
                                             role="heading"
                                         >
                                             @lang('shop::app.categories.view.empty')

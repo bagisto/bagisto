@@ -201,10 +201,16 @@
                     class="mt-[128px] pb-8 max-sm:mt-[150px]"
                     v-else
                 >
-                    <div class="b-0 grid place-items-center gap-y-5">
-                        <img src="{{ bagisto_asset('images/thank-you.png') }}">
+                    <div class="b-0 grid place-items-center gap-y-5 max-sm:gap-y-0">
+                        <img
+                            class="max-sm:h-[100px] max-sm:w-[100px]"
+                            src="{{ bagisto_asset('images/thank-you.png') }}"
+                        >
 
-                        <p class="text-xl">
+                        <p
+                            class="text-xl max-sm:text-sm"
+                            role="heading"
+                        >
                             @lang('shop::app.checkout.cart.mini-cart.empty-cart')
                         </p>
                     </div>

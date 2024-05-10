@@ -13,7 +13,7 @@
     <meta name="keywords" content="{{ $title }}"/>
 @endPush
 
-<x-shop::layouts>
+<x-shop::layouts :has-feature="false">
     <!-- Page Title -->
     <x-slot:title>
         {{ $title }}
@@ -25,7 +25,7 @@
         @endif
 
         <div class="mt-8 flex items-center justify-between max-sm:mt-5">
-            <h1 class="text-2xl font-medium max-sm:text-xl">
+            <h1 class="text-2xl font-medium max-sm:text-base">
                 {{ $title }}
             </h1>
         </div>
@@ -42,7 +42,7 @@
             id="v-search-template"
         >
             <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
-                <div class="flex items-start gap-10 max-lg:gap-5 max-sm:min-h-[500px] md:mt-10">
+                <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
@@ -74,10 +74,17 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
-                                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
+                                        <img
+                                            class="max-sm:h-[100px] max-sm:w-[100px]"
+                                            src="{{ bagisto_asset('images/thank-you.png') }}"
+                                            alt="Empty result"
+                                        />
                                   
-                                        <p class="text-xl">
+                                        <p
+                                            class="text-xl max-sm:text-sm"
+                                            role="heading"
+                                        >
                                             @lang('shop::app.categories.view.empty')
                                         </p>
                                     </div>
@@ -108,10 +115,17 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
-                                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
-                                        
-                                        <p class="text-xl">
+                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
+                                        <img
+                                            class="max-sm:h-[100px] max-sm:w-[100px]"
+                                            src="{{ bagisto_asset('images/thank-you.png') }}"
+                                            alt="Empty result"
+                                        />
+
+                                        <p
+                                            class="text-xl max-sm:text-sm"
+                                            role="heading"
+                                        >
                                             @lang('shop::app.categories.view.empty')
                                         </p>
                                     </div>

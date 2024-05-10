@@ -139,14 +139,18 @@
 
     @else
         <!-- Address Empty Page -->
-        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
+        <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
             <img 
-                class="" src="{{ bagisto_asset('images/no-address.png') }}" 
-                alt="" 
+                class="max-sm:h-[100px] max-sm:w-[100px]"
+                src="{{ bagisto_asset('images/no-address.png') }}" 
+                alt="Empty Address" 
                 title=""
             >
             
-            <p class="text-xl">
+            <p
+                class="text-xl max-sm:text-sm"
+                role="heading"
+            >
                 @lang('shop::app.customers.account.addresses.index.empty-address')
             </p>
         </div>    

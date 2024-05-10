@@ -183,15 +183,19 @@
 
                     <!--Empty Wishlist-->
                     <div
-                        class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center"
+                        class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center"
                         v-else
                     >
                         <img
+                            class="max-sm:h-[100px] max-sm:w-[100px]"
                             src="{{ bagisto_asset('images/wishlist.png') }}"
                             alt="Empty wishlist"
                         >
 
-                        <p class="text-xl">
+                        <p
+                            class="text-xl max-sm:text-sm"
+                            role="heading"
+                        >
                             @lang('shop::app.customers.account.wishlist.empty')
                         </p>
                     </div>
