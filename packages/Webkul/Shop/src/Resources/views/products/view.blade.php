@@ -179,7 +179,7 @@
                             @foreach ($customAttributeValues as $customAttributeValue)
                                 @if (! empty($customAttributeValue['value']))
                                     <div class="grid">
-                                        <p class="text-base text-black">
+                                        <p class="text-base text-black max-sm:text-sm">
                                             {{ $customAttributeValue['label'] }}
                                         </p>
                                     </div>
@@ -189,7 +189,7 @@
                                             href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
-                                            <span class="icon-download text-2xl"></span>
+                                            <span class="icon-download text-2xl max-sm:text-lg"></span>
                                         </a>
                                     @elseif ($customAttributeValue['type'] == 'image')
                                         <a
@@ -197,14 +197,14 @@
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
                                             <img 
-                                                class="h-5 min-h-5 w-5 min-w-5" 
+                                                class="h-5 min-h-10 w-5 min-w-5 max-sm:h-10 max-sm:w-10 max-sm:min-w-10" 
                                                 src="{{ Storage::url($customAttributeValue['value']) }}"
                                                 alt="Product Image"
                                             />
                                         </a>
                                     @else
                                         <div class="grid">
-                                            <p class="text-base text-[#6E6E6E]">
+                                            <p class="text-base text-[#6E6E6E] max-sm:text-sm">
                                                 {{ $customAttributeValue['value'] ?? '-' }}
                                             </p>
                                         </div>

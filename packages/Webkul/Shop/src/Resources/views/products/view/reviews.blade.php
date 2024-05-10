@@ -221,8 +221,13 @@
 
                     <template v-else>
                         <!-- Empty Review Section -->
-                        <div class="m-auto grid w-full place-content-center items-center justify-items-center py-28 text-center max-sm:py-10">
-                            <img class="max-sm:h-[100px] max-sm:w-[100px]" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
+                        <div class="m-auto grid w-full place-content-center items-center justify-items-center py-28 text-center">
+                            <img
+                                class="max-sm:h-[100px] max-sm:w-[100px]"
+                                src="{{ bagisto_asset('images/review.png') }}"
+                                alt=""
+                                title=""
+                            >
 
                             <p class="text-xl max-sm:text-xs">
                                 @lang('shop::app.products.view.reviews.empty-review')
@@ -430,13 +435,13 @@
     
                 <!-- Review Attachments -->
                 <div
-                    class="mt-3 flex flex-wrap gap-2"
+                    class="journal-scroll mt-3 flex gap-2 overflow-auto"
                     v-if="review.images.length"
                 >
                     <template v-for="file in review.images">
                         <a
                             :href="file.url"
-                            class="flex h-12 w-12"
+                            class="flex h-12 w-12 max-sm:h-[60px] max-sm:w-[60px]"
                             target="_blank"
                             v-if="file.type == 'image'"
                         >
@@ -450,7 +455,7 @@
     
                         <a
                             :href="file.url"
-                            class="flex h-12 w-12"
+                            class="flex h-12 w-12 max-sm:h-[60px] max-sm:w-[60px]"
                             target="_blank"
                             v-else
                         >

@@ -84,14 +84,14 @@
                     >
                         <template v-if="isImage(file)">
                             <div 
-                                class="group relative flex h-12 w-12 justify-center"
+                                class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
                                 @mouseenter="file.showDeleteButton = true"
                                 @mouseleave="file.showDeleteButton = false"
                             >
                                 <img
                                     :src="file.url"
                                     :alt="file.name"
-                                    class="max-h-12 min-w-12 rounded-xl"
+                                    class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
                                     :class="{'opacity-25' : file.showDeleteButton}"
                                 >
 
@@ -107,14 +107,14 @@
 
                         <template v-else>
                             <div
-                                class="group relative flex h-12 w-12 justify-center"
+                                class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
                                 @mouseenter="file.showDeleteButton = true"
                                 @mouseleave="file.showDeleteButton = false"
                             >
                                 <video
                                     :src="file.url"
                                     :alt="file.name"
-                                    class="max-h-[50px] min-w-[50px] rounded-xl"
+                                    class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
                                     :class="{'opacity-25' : file.showDeleteButton}"
                                 >
                                 </video>
