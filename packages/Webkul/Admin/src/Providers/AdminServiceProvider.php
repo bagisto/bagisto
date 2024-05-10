@@ -73,9 +73,7 @@ class AdminServiceProvider extends ServiceProvider
             'admin::components.layouts.sidebar.index',
             'admin::components.layouts.tabs',
         ], function ($view) {
-            $view->with('menu', $tree = $this->createMenuTree());
-
-            Menu::register($this->mapMenuItems($tree->items));
+            $view->with('menu', $this->mapMenuItems(config('menu.admin')));
         });
 
         view()->composer([
@@ -92,20 +90,23 @@ class AdminServiceProvider extends ServiceProvider
     public function mapMenuItems(array $items): Collection
     {
         return collect($items)->map(function ($item) {
-            if (empty($item['children'])) {
+            if (empty($item['items'])) {
                 return MenuItem::make(
-                    static fn () => trans($item['name']),
-                    $item['route'],
-                )->icon($item['icon']);
+                    key: $item['key'],
+                    name: $item['name'],
+                    route: $item['route'],
+                    sort: $item['sort'],
+                    icon: $item['icon'],
+                );
             }
 
-            $menuItems = $this->mapMenuItems($item['children']);
-
             return MenuGroup::make(
-                static fn () => trans($item['name']),
-                $menuItems,
-                $item['icon'],
-            )->icon($item['icon'])->setRoute($item['route']);
+                name: $item['name'],
+                route: $item['route'],
+                icon: $item['icon'],
+                sort: $item['sort'],
+                menuItems: $this->mapMenuItems($item['items']),
+            );
         });
     }
 

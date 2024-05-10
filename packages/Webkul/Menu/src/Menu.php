@@ -4,67 +4,82 @@ namespace Webkul\Menu;
 
 use Closure;
 use Illuminate\Support\Collection;
-use Webkul\Menu\Menu\MenuElement;
 use Webkul\Menu\Menu\MenuGroup;
 
-class Menu
-{
+abstract class Menu {
     /**
-     * Collections of menus.
+     * Key of the menu
      */
-    protected Closure|Collection|array|null $menu = null;
+    public string $key;
 
     /**
-     * Register the menus.
+     * Name of the menu
      */
-    public function register(Closure|array|Collection|null $data): void
+    public string $name;
+
+    /**
+     * Route of the menu.
+     */
+    public string $route;
+
+    /**
+     * Route of the menu.
+     */
+    public string $sort;
+
+    /**
+     * Route of the icon
+     */
+    public string $icon;
+
+    /**
+     * Create a new instance of the controller.
+     *
+     * This method is commonly used within the controller for instantiating itself
+     * and can be used for dependency injection or method chaining.
+     *
+     * @param mixed ...$args Optional arguments to pass to the controller constructor.
+     * @return static An instance of the controller.
+     */
+    public static function make(...$args)
     {
-        $this->menu = $data;
+        return new static(...$args);
     }
 
     /**
-     * Fetch all the menus.
+     * Get the route of the menu.
      */
-    public function all(): Collection
+    public function route(): string
     {
-        return $this->prepareMenu(value($this->menu, request()));
+        return $this->route;
     }
 
     /**
-     * Force active the menu.
+     * Get the url of the menu route.
      */
-    public function hasForceActive(): bool
+    public function url(): string
     {
-        return $this->all()->contains(function (MenuElement $item) {
-            if ($item->isForceActive()) {
-                return true;
-            }
-
-            if ($item instanceof MenuGroup) {
-                return $item->items()->contains(fn (MenuElement $child): bool => $child->isForceActive());
-            }
-
-            return false;
-        });
+        return route($this->route());
     }
 
     /**
-     * Prepare the menu.
+     * Check Menu has group.
      */
-    public function prepareMenu(Collection|array|null $items = []): Collection
+    public function hasGroup(): bool
     {
-        return
-            collect($items)
-                ->filter(function (MenuElement $item): bool {
-                    if ($item instanceof MenuGroup) {
-                        $item->setItems(
-                            $item->items()->filter(
-                                fn (MenuElement $child): bool => $child->isSee(request())
-                            )
-                        );
-                    }
+        return $this instanceof MenuGroup;
+    }
 
-                    return $item->isSee(request());
-                });
+    /**
+     * Check menu is Item.
+     */
+    public function isItem(): bool
+    {
+        return ! $this->hasGroup();
+    }
+
+    public function isActive()
+    {
+        return $this->url() === request()->url();
     }
 }

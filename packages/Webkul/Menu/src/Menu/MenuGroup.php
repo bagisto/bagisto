@@ -2,43 +2,22 @@
 
 namespace Webkul\Menu\Menu;
 
-use Closure;
 use Illuminate\Support\Collection;
+use Webkul\Menu\Menu;
 
-class MenuGroup extends MenuElement
+class MenuGroup extends Menu
 {
     /**
-     * Create a new menu group.
-     *
+     * Create the new instance of the class
+     * 
      * @return void
      */
     public function __construct(
-        Closure|string $label,
-        protected iterable $items = [],
-        ?string $icon = null,
+        public string $name,
+        public string $route,
+        public string $icon,
+        public string $sort,
+        public Collection|array $menuItems = [],
     ) {
-        $this->setLabel($label);
-
-        if ($icon) {
-            $this->icon($icon);
-        }
-    }
-
-    /**
-     * Set items.
-     */
-    public function setItems(iterable $items): static
-    {
-        $this->items = $items;
-
-        return $this;
-    }
-
-    /**
-     * Get all group items.
-     */
-    public function items(): Collection
-    {
-        return collect($this->items);
     }
 }

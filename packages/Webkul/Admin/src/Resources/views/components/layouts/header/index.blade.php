@@ -166,15 +166,6 @@
         <div class="journal-scroll h-[calc(100vh-100px)] overflow-auto">
             <nav class="grid w-full gap-2">
                 <!-- Navigation Menu -->
-                @foreach(menu()->all() as $item)
-                    <div class="group/item relative">
-                        <x-menu::menu.item :item="$item" />
-
-                        @if ($item->hasGroup())
-                            <x-menu::menu.group :item="$item" />
-                        @endif
-                    </div>
-                @endforeach
             </nav>
         </div>
     </x-slot>

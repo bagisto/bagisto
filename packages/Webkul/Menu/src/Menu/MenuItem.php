@@ -2,61 +2,22 @@
 
 namespace Webkul\Menu\Menu;
 
-use Closure;
-use Webkul\Menu\Attributes\Icon as AttributesIcon;
-use Webkul\Menu\Contracts\MenuFiller;
-use Webkul\Menu\Support\Attributes as SupportAttributes;
+use Webkul\Menu\Menu;
 
-class MenuItem extends MenuElement
+class MenuItem extends Menu
 {
     /**
-     * Create the new instance of menu item.
-     *
+     * Create the new instance of the class
+     * 
      * @return void
      */
-    final public function __construct(
-        Closure|string $label,
-        protected Closure|MenuFiller|string $filler,
-        ?string $icon = null,
-        Closure|bool $blank = false
+    public function __construct(
+        public string $key,
+        public string $name,
+        public string $route,
+        public string $sort,
+        public string $icon,
+        public array|null $menuGroup = null,
     ) {
-        $this->setLabel($label);
-
-        if ($icon) {
-            $this->icon($icon);
-        }
-
-        if ($filler instanceof MenuFiller) {
-            $this->resolveMenuFiller($filler);
-        } else {
-            $this->setRoute($filler);
-        }
-
-        $this->blank($blank);
-    }
-
-    /**
-     * Resolve the menu filler.
-     */
-    protected function resolveMenuFiller(MenuFiller $filler): void
-    {
-        $this->setRoute(fn (): string => $filler->route());
-
-        $icon = SupportAttributes::for($filler)
-            ->attribute(AttributesIcon::class)
-            ->attributeProperty('icon')
-            ->get();
-
-        if (! is_null($icon) && $this->iconValue() === '') {
-            $this->icon($icon);
-        }
-    }
-
-    /**
-     * Get filler.
-     */
-    public function getFiller(): MenuFiller|Closure|string
-    {
-        return $this->filler;
     }
 }
