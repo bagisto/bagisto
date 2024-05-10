@@ -110,7 +110,7 @@
                     
                         <!-- Details -->
                         <div 
-                            class="flex cursor-pointer justify-between gap-2.5 py-5"
+                            class="flex cursor-pointer items-center justify-between gap-2.5 py-5"
                             :class="{
                                 'border-b border-slate-300 dark:border-gray-800': index < options.filters.length - 1
                             }"
