@@ -2,11 +2,10 @@
 
 namespace Webkul\Menu;
 
-use Closure;
-use Illuminate\Support\Collection;
 use Webkul\Menu\Menu\MenuGroup;
 
-abstract class Menu {
+abstract class Menu
+{
     /**
      * Key of the menu
      */
@@ -33,17 +32,29 @@ abstract class Menu {
     public string $icon;
 
     /**
+     * Contains the current item route.
+     */
+    public string $current;
+
+    /**
+     * Contains the current item key.
+     */
+    public string $currentKey;
+
+    /**
      * Create a new instance of the controller.
      *
      * This method is commonly used within the controller for instantiating itself
      * and can be used for dependency injection or method chaining.
      *
-     * @param mixed ...$args Optional arguments to pass to the controller constructor.
+     * @param  mixed  ...$args  Optional arguments to pass to the controller constructor.
      * @return static An instance of the controller.
      */
     public static function make(...$args)
     {
-        return new static(...$args);
+        $static = new static(...$args);
+
+        return $static;
     }
 
     /**

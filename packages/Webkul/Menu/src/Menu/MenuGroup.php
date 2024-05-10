@@ -9,7 +9,7 @@ class MenuGroup extends Menu
 {
     /**
      * Create the new instance of the class
-     * 
+     *
      * @return void
      */
     public function __construct(

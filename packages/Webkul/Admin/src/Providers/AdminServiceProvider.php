@@ -73,7 +73,7 @@ class AdminServiceProvider extends ServiceProvider
             'admin::components.layouts.sidebar.index',
             'admin::components.layouts.tabs',
         ], function ($view) {
-            $view->with('menu', $this->mapMenuItems(config('menu.admin')));
+            $view->with('menu', $this->createMenu(config('menu.admin')));
         });
 
         view()->composer([
@@ -87,7 +87,7 @@ class AdminServiceProvider extends ServiceProvider
     /**
      * Mapping the menu items.
      */
-    public function mapMenuItems(array $items): Collection
+    public function createMenu(array $items): Collection
     {
         return collect($items)->map(function ($item) {
             if (empty($item['items'])) {
@@ -105,7 +105,7 @@ class AdminServiceProvider extends ServiceProvider
                 route: $item['route'],
                 icon: $item['icon'],
                 sort: $item['sort'],
-                menuItems: $this->mapMenuItems($item['items']),
+                menuItems: $this->createMenu($item['items']),
             );
         });
     }
@@ -118,34 +118,6 @@ class AdminServiceProvider extends ServiceProvider
         $this->app->singleton('acl', function () {
             return $this->createACL();
         });
-    }
-
-    /**
-     * Create menu tree.
-     */
-    public function createMenuTree(): Tree
-    {
-        static $tree;
-
-        if ($tree) {
-            return $tree;
-        }
-
-        $tree = Tree::create();
-
-        foreach (config('menu.admin') as $item) {
-            if (! bouncer()->hasPermission($item['key'])) {
-                continue;
-            }
-
-            $tree->add($item, 'menu');
-        }
-
-        $tree->items = $tree->removeUnauthorizedUrls();
-
-        $tree->items = core()->sortItems($tree->items);
-
-        return $tree;
     }
 
     /**
