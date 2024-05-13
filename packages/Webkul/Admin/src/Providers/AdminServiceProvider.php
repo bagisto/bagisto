@@ -87,10 +87,11 @@ class AdminServiceProvider extends ServiceProvider
     /**
      * Mapping the menu items.
      */
-    public function createMenu(array $items): Collection
+    public function createMenu(array $items, $itemKey = null): Collection
     {
         return collect($items)
             ->sortBy('sort')
+            ->filter(fn ($item) => bouncer()->hasPermission($itemKey ? $itemKey.'.'.$item['key'] : $item['key']))
             ->map(function ($item) {
                 if (empty($item['items'])) {
                     return MenuItem::make(
@@ -108,7 +109,7 @@ class AdminServiceProvider extends ServiceProvider
                     route: $item['route'],
                     icon: $item['icon'],
                     sort: $item['sort'],
-                    menuItems: $this->createMenu($item['items']),
+                    menuItems: $this->createMenu($item['items'], $item['key']),
                 );
             });
     }
