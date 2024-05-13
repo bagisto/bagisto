@@ -87,7 +87,10 @@ abstract class MenuElement
         return request()->fullUrlIs($this->url().'*');
     }
 
-    public function getCurrentActiveItems()
+    /**
+     * Get current Active Item
+     */
+    public function getCurrentActiveItem(): ?MenuGroup
     {
         if ($this instanceof MenuGroup) {
             foreach ($this->menuItems as $item) {
