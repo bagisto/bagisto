@@ -174,10 +174,12 @@
                     class="flex"
                 >
                     @if ($attribute->type == 'image')
-                        <img
-                            src="{{ Storage::url($product[$attribute->code]) }}"
-                            class="h-[45px] w-[45px] overflow-hidden rounded border hover:border-gray-400 dark:border-gray-800"
-                        />
+                        @if (Storage::exists($product[$attribute->code]))
+                            <img
+                                src="{{ Storage::url($product[$attribute->code]) }}"
+                                class="h-[45px] w-[45px] overflow-hidden rounded border hover:border-gray-400 dark:border-gray-800"
+                            />
+                        @endif
                     @else
                         <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
                             <i class="icon-down-stat text-2xl"></i>
