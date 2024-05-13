@@ -89,8 +89,10 @@ abstract class MenuElement
 
     /**
      * Get current Active Item
+     * 
+     * @return mixed
      */
-    public function getCurrentActiveItem(): ?MenuGroup
+    public function getCurrentActiveItem()
     {
         if ($this instanceof MenuGroup) {
             foreach ($this->menuItems as $item) {
