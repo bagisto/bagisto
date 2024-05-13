@@ -89,7 +89,7 @@ abstract class MenuElement
 
     /**
      * Get current Active Item
-     * 
+     *
      * @return mixed
      */
     public function getCurrentActiveItem()
