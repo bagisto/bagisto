@@ -139,6 +139,12 @@
             },
 
             methods: {
+                testFilter(filter) {                    
+                    this.applied = filter.applied;
+
+                    this.get();
+                },
+                
                 /**
                  * Initialization: This function checks for any previously saved filters in local storage and applies them as needed.
                  *

@@ -2,8 +2,10 @@
     :is-loading="isLoading"
     :available="available"
     :applied="applied"
+    :src="src"
     @applyFilter="filter"
     @removeFilter="filter"
+    @testFilter="testFilter"
 >
     {{ $slot }}
 </v-datagrid-filter>
@@ -38,7 +40,7 @@
                     <x-slot:toggle>
                         <div>
                             <div
-                                class="relative inline-flex w-full max-w-max ltr:pl-3 rtl:pr-3 ltr:pr-5 rtl:pl-5 cursor-pointer select-none appearance-none items-center justify-between gap-x-1 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-1 py-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:ring-2"
+                                class="relative inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-1 py-1.5 text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 ltr:pl-3 ltr:pr-5 rtl:pl-5 rtl:pr-3"
                                 :class="{'[&>*]:text-blue-600 [&>*]:dark:text-white': filters.columns.length > 0}"
                             >
                                 <span class="icon-filter text-2xl"></span>
@@ -48,33 +50,80 @@
                                 </span>
 
                                 <span
-                                    class="icon-dot absolute top-1.5 right-2 text-sm font-bold"
+                                    class="icon-dot absolute right-2 top-1.5 text-sm font-bold"
                                     v-if="filters.columns.length > 0"
                                 >
                                 </span>
                             </div>
 
-                            <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white dark:bg-gray-900 shadow">
+                            <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white shadow dark:bg-gray-900">
                             </div>
                         </div>
                     </x-slot>
 
                     <x-slot:header>
-                        <div class="flex justify-between items-center p-3">
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                        <div class="flex items-center justify-between p-3">
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.components.datagrid.filters.title')
                             </p>
                         </div>
                     </x-slot>
 
                     <x-slot:content class="!p-5">
+                        <div class="mb-4 border-b">
+                            <p class="text-sm font-semibold text-gray-800 dark:text-white">
+                                @lang('Quick Filters')
+                            </p>
+
+                            <div 
+                                class="mb-2 mt-1.5 flex cursor-pointer flex-wrap items-center justify-between gap-2" 
+                                v-for="filter in filters.available"
+                            >
+                                <span 
+                                    class="text-sm dark:text-gray-300"
+                                    :class="filter.src == src ? 'text-blue-600' : 'text-gray-300'"
+                                    @click="testFilter(filter)"
+                                >
+                                    @{{ filter.name }}
+                                </span>
+
+                                <span
+                                    class="icon-cross cursor-pointer text-lg hover:rounded-sm hover:bg-gray-100 dark:hover:bg-gray-950"
+                                    @click="deleteSaveFilter()"
+                                >
+                                </span>
+                            </div>
+
+                            
+                            <p class="mt-4 text-sm font-medium leading-6 dark:text-white">
+                                @lang('Save filter')
+                            </p>
+                            
+                            <div class="mb-4 mt-1.5 flex items-center justify-between gap-4">
+                                <input
+                                    type="text"
+                                    class="w-full rounded-md border bg-white px-2 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                    name="name"
+                                    placeholder="save as"
+                                    v-model="filters.name"
+                                />
+                                
+                                <p 
+                                    class="secondary-button py-2"
+                                    @click="saveFilters()"
+                                >
+                                    @lang('Save Filter')
+                                </p>
+                            </div>
+                        </div>
+                        
                         <div v-for="column in available.columns">
                             <div v-if="column.filterable">
                                 <!-- Boolean -->
                                 <div v-if="column.type === 'boolean'">
                                     <div class="flex items-center justify-between">
                                         <p
-                                            class="text-sm font-medium leading-6 dark:text-white text-gray-800"
+                                            class="text-sm font-medium leading-6 text-gray-800 dark:text-white"
                                             v-text="column.label"
                                         >
                                         </p>
@@ -97,7 +146,7 @@
                                             <x-slot:toggle>
                                                 <button
                                                     type="button"
-                                                    class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                                                    class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                                 >
                                                     <span
                                                         class="text-sm text-gray-400 dark:text-gray-400"
@@ -120,7 +169,7 @@
                                         </x-admin::dropdown>
                                     </div>
 
-                                    <div class="mb-4 flex gap-2 flex-wrap">
+                                    <div class="mb-4 flex flex-wrap gap-2">
                                         <p
                                             class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                             v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -143,7 +192,7 @@
                                     <div v-if="column.options.type === 'basic'">
                                         <div class="flex items-center justify-between">
                                             <p
-                                                class="text-sm font-medium leading-6 dark:text-white text-gray-800"
+                                                class="text-sm font-medium leading-6 text-gray-800 dark:text-white"
                                                 v-text="column.label"
                                             >
                                             </p>
@@ -166,7 +215,7 @@
                                                 <x-slot:toggle>
                                                     <button
                                                         type="button"
-                                                        class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
+                                                        class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                                     >
                                                         <span
                                                             class="text-sm text-gray-400 dark:text-gray-400"
@@ -189,7 +238,7 @@
                                             </x-admin::dropdown>
                                         </div>
 
-                                        <div class="mb-4 flex gap-2 flex-wrap">
+                                        <div class="mb-4 flex flex-wrap gap-2">
                                             <p
                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -210,7 +259,7 @@
                                     <div v-else-if="column.options.type === 'searchable'">
                                         <div class="flex items-center justify-between">
                                             <p
-                                                class="text-sm font-medium leading-6 dark:text-white text-gray-800"
+                                                class="text-sm font-medium leading-6 text-gray-800 dark:text-white"
                                                 v-text="column.label"
                                             >
                                             </p>
@@ -237,7 +286,7 @@
                                             </v-datagrid-searchable-dropdown>
                                         </div>
 
-                                        <div class="mb-4 flex gap-2 flex-wrap">
+                                        <div class="mb-4 flex flex-wrap gap-2">
                                             <p
                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -278,7 +327,7 @@
 
                                     <div class="mt-1.5 grid grid-cols-2 gap-1.5">
                                         <p
-                                            class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
+                                            class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
                                             v-for="option in column.options"
                                             v-text="option.label"
                                             @click="applyFilter(
@@ -292,7 +341,7 @@
                                         <x-admin::flat-picker.date ::allow-input="false">
                                             <input
                                                 value=""
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                                 :type="column.input_type"
                                                 :name="`${column.index}[from]`"
                                                 :placeholder="column.label"
@@ -309,7 +358,7 @@
                                             <input
                                                 type="column.input_type"
                                                 value=""
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                                 :name="`${column.index}[to]`"
                                                 :placeholder="column.label"
                                                 :ref="`${column.index}[from]`"
@@ -321,7 +370,7 @@
                                             />
                                         </x-admin::flat-picker.date>
 
-                                        <div class="mb-4 flex gap-2 flex-wrap">
+                                        <div class="mb-4 flex flex-wrap gap-2">
                                             <p
                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -362,7 +411,7 @@
 
                                     <div class="my-4 grid grid-cols-2 gap-1.5">
                                         <p
-                                            class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
+                                            class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
                                             v-for="option in column.options"
                                             v-text="option.label"
                                             @click="applyFilter(
@@ -376,7 +425,7 @@
                                         <x-admin::flat-picker.datetime ::allow-input="false">
                                             <input
                                                 value=""
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                                 :type="column.input_type"
                                                 :name="`${column.index}[from]`"
                                                 :placeholder="column.label"
@@ -393,7 +442,7 @@
                                             <input
                                                 type="column.input_type"
                                                 value=""
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                                 :name="`${column.index}[to]`"
                                                 :placeholder="column.label"
                                                 :ref="`${column.index}[from]`"
@@ -405,7 +454,7 @@
                                             />
                                         </x-admin::flat-picker.datetime>
 
-                                        <div class="mb-4 flex gap-2 flex-wrap">
+                                        <div class="mb-4 flex flex-wrap gap-2">
                                             <p
                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -447,14 +496,14 @@
                                     <div class="mb-2 mt-1.5 grid">
                                         <input
                                             type="text"
-                                            class="block w-full rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2 py-1.5 text-sm leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                                            class="block w-full rounded-md border bg-white px-2 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                             :name="column.index"
                                             :placeholder="column.label"
                                             @keyup.enter="applyFilter($event, column)"
                                         />
                                     </div>
 
-                                    <div class="mb-4 flex gap-2 flex-wrap">
+                                    <div class="mb-4 flex flex-wrap gap-2">
                                         <p
                                             class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                             v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -481,21 +530,62 @@
         app.component('v-datagrid-filter', {
             template: '#v-datagrid-filter-template',
 
-            props: ['isLoading', 'available', 'applied'],
+            props: ['isLoading', 'available', 'applied', 'src'],
 
             data() {
                 return {
                     filters: {
                         columns: [],
+                        name: '',
+                        available: [],
                     },
                 };
             },
 
             mounted() {
                 this.filters.columns = this.applied.filters.columns.filter((column) => column.index !== 'all');
+
+                this.getFilters();
+
+                console.log(this);
             },
 
             methods: {
+                /**
+                 * Save filters to the database.
+                 *
+                 * @returns {void}
+                 */
+                saveFilters() {
+                    this.$axios.post('{{ route('datagrid.filters.store') }}', {
+                        user_id: {{ auth()->guard('admin')->user()->id }},
+                        src: this.src,
+                        name: this.filters.name,
+                        applied: this.applied,
+                     })
+                        .then(response => {
+                            window.location.reload();
+                        })
+                        .catch(error => {
+                            // Handle the error
+                        });
+                },
+
+                testFilter(filter) {
+                      this.$emit('testFilter', filter);
+                },
+
+                getFilters () {
+                    this.$axios.get('{{ route('datagrid.filters.index') }}', {
+                        params: {src: "{{request()->url()}}" }
+                     })
+                        .then(response => {
+                            this.filters.available = response.data;
+                        })
+                        .catch(error => {
+                        });
+                },
+                
                 /**
                  * Apply filter.
                  *
@@ -702,7 +792,7 @@
             <x-slot:toggle>
                 <button
                     type="button"
-                    class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                    class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                 >
                     <span
                         class="text-sm text-gray-400 dark:text-gray-400"
@@ -720,7 +810,7 @@
                         <ul class="list-reset">
                             <li class="p-2">
                                 <input
-                                    class="block w-full rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2 py-1.5 text-sm leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                                    class="block w-full rounded-md border bg-white px-2 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                     @keyup="lookUp($event)"
                                 >
                             </li>
@@ -747,7 +837,7 @@
                                     v-else
                                 >
                                     <p
-                                        class="text-sm text-gray-600 dark:text-gray-300 p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950"
+                                        class="cursor-pointer p-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-950"
                                         v-text="option.label"
                                         @click="selectOption(option)"
                                     >
