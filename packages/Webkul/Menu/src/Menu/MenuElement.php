@@ -56,7 +56,7 @@ abstract class MenuElement
     }
 
     /**
-     * Check Menu has group.
+     * Check menu has group.
      */
     public function hasGroup(): bool
     {
@@ -64,14 +64,17 @@ abstract class MenuElement
     }
 
     /**
-     * Check menu is Item.
+     * Check menu is item.
      */
     public function isItem(): bool
     {
         return ! $this->hasGroup();
     }
 
-    public function isActive()
+    /**
+     * Get the current menu active status.
+     */
+    public function isActive(): bool
     {
         if ($this instanceof MenuGroup) {
             foreach ($this->menuItems as $item) {
