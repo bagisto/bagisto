@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'Clientes',
+            'title' => 'Clientes',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'El correo electrónico: \'%s\' se encuentra más de una vez en el archivo de importación.',
                     'duplicate-phone'        => 'El teléfono: \'%s\' se encuentra más de una vez en el archivo de importación.',
-                    'invalid-customer-group' => 'El grupo de clientes no es válido o no está soportado',
                     'email-not-found'        => 'El correo electrónico: \'%s\' no se encontró en el sistema.',
+                    'invalid-customer-group' => 'El grupo de clientes no es válido o no está soportado',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'Productos',
+        'products' => [
+            'title' => 'Productos',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'Tasas de impuestos',
+            'title' => 'Tasas de impuestos',
 
             'validation' => [
                 'errors' => [

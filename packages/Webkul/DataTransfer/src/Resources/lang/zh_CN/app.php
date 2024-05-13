@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => '顾客',
+            'title' => '顾客',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => '电子邮件: \'%s\' 在导入文件中出现了多次。',
                     'duplicate-phone'        => '电话: \'%s\' 在导入文件中出现了多次。',
-                    'invalid-customer-group' => '客户组无效或不受支持。',
                     'email-not-found'        => '电子邮件: \'%s\' 在系统中未找到。',
+                    'invalid-customer-group' => '客户组无效或不受支持。',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => '产品',
+        'products' => [
+            'title' => '产品',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => '税率',
+            'title' => '税率',
 
             'validation' => [
                 'errors' => [

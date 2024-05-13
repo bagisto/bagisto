@@ -57,7 +57,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('create/{order_id}', 'store')->name('admin.sales.refunds.store');
 
-            Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
+            Route::post('update-totals/{order_id}', 'updateTotals')->name('admin.sales.refunds.update_totals');
 
             Route::get('view/{id}', 'view')->name('admin.sales.refunds.view');
         });

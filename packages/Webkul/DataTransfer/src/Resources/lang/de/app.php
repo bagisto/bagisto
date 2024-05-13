@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'Kunden',
+            'title' => 'Kunden',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'E-Mail: \'%s\' wurde mehrmals in der Importdatei gefunden.',
                     'duplicate-phone'        => 'Telefon: \'%s\' wurde mehrmals in der Importdatei gefunden.',
-                    'invalid-customer-group' => 'Kundengruppe ist ungültig oder wird nicht unterstützt',
                     'email-not-found'        => 'E-Mail: \'%s\' nicht im System gefunden.',
+                    'invalid-customer-group' => 'Kundengruppe ist ungültig oder wird nicht unterstützt',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'Produkte',
+        'products' => [
+            'title' => 'Produkte',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'Steuersätze',
+            'title' => 'Steuersätze',
 
             'validation' => [
                 'errors' => [

@@ -1,22 +1,22 @@
 <?php
 
 return [
-    'importers'  => [
+    'importers' => [
         'customers' => [
-            'title'      => 'לקוחות',
+            'title' => 'לקוחות',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'האימייל: \'%s\' נמצא יותר מפעם אחת בקובץ היבוא.',
                     'duplicate-phone'        => 'הטלפון: \'%s\' נמצא יותר מפעם אחת בקובץ היבוא.',
-                    'invalid-customer-group' => 'קבוצת הלקוחות אינה תקפה או לא נתמכת',
                     'email-not-found'        => 'האימייל: \'%s\' לא נמצא במערכת.',
+                    'invalid-customer-group' => 'קבוצת הלקוחות אינה תקפה או לא נתמכת',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'      => 'מוצרים',
+        'products' => [
+            'title' => 'מוצרים',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'שערי מס',
+            'title' => 'שערי מס',
 
             'validation' => [
                 'errors' => [

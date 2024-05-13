@@ -6,6 +6,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Paypal\Payment\SmartButton;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Transformers\OrderResource;
 
 class SmartButtonController extends Controller
 {
@@ -217,7 +218,11 @@ class SmartButtonController extends Controller
 
             $this->validateOrder();
 
-            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+            $cart = Cart::getCart();
+
+            $data = (new OrderResource($cart))->jsonSerialize();
+
+            $order = $this->orderRepository->create($data);
 
             $this->orderRepository->update(['status' => 'processing'], $order->id);
 
@@ -227,7 +232,7 @@ class SmartButtonController extends Controller
 
             Cart::deActivateCart();
 
-            session()->flash('order', $order);
+            session()->flash('order_id', $order->id);
 
             return response()->json([
                 'success' => true,

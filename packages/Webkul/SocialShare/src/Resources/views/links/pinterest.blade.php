@@ -1,13 +1,13 @@
 @php
     $productBaseImage = product_image()->getProductBaseImage($product);
 
-    $detailes = [
+    $details = [
         'url'         => route('shop.product_or_category.index', $product->url_key),
         'media'       => $productBaseImage['medium_image_url'] ?: asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
         'description' => $message,
     ];
 
-    $pinterestURL = 'https://pinterest.com/pin/create/button/?' . http_build_query($detailes);
+    $pinterestURL = 'https://pinterest.com/pin/create/button/?' . http_build_query($details);
 @endphp
 
 <v-pinterest-share></v-pinterest-share>

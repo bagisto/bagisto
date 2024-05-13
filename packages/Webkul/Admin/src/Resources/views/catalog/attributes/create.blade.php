@@ -892,7 +892,13 @@
                     },
 
                     removeOption(id) {
-                        this.options = this.options.filter(option => option.id !== id);
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                this.options = this.options.filter(option => option.id !== id);
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: "@lang('admin::app.catalog.attributes.create.option-deleted')" });
+                            }
+                        });
                     },
 
                     listenModal(event) {
