@@ -16,7 +16,7 @@
 
         <!-- Total Sales Section -->
         <template v-else>
-            <!-- Stock Threshold Products Detailes -->
+            <!-- Stock Threshold Products Details -->
             <div
                 class="box-shadow rounded"
                 v-if="report.statistics.length"

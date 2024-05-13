@@ -35,10 +35,14 @@ class CartItemFactory extends Factory
             $fallbackPrice = $this->faker->randomFloat(4, 0, 1000);
 
             return [
-                'base_price' => $fallbackPrice,
-                'price'      => $fallbackPrice,
-                'total'      => $fallbackPrice,
-                'base_total' => $fallbackPrice,
+                'price'               => $fallbackPrice,
+                'price_incl_tax'      => $fallbackPrice,
+                'base_price'          => $fallbackPrice,
+                'base_price_incl_tax' => $fallbackPrice,
+                'total'               => $fallbackPrice,
+                'total_incl_tax'      => $fallbackPrice,
+                'base_total'          => $fallbackPrice,
+                'base_total_incl_tax' => $fallbackPrice,
             ];
         });
     }

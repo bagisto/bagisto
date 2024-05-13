@@ -71,7 +71,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
-        session()->flash('success', trans('shop::app.customers.account.addresses.create-success'));
+        session()->flash('success', trans('shop::app.customers.account.addresses.index.create-success'));
 
         return redirect()->route('shop.customers.account.addresses.index');
     }
@@ -106,7 +106,7 @@ class AddressController extends Controller
         $customer = auth()->guard('customer')->user();
 
         if (! $customer->addresses()->find($id)) {
-            session()->flash('warning', trans('shop::app.customers.account.addresses.security-warning'));
+            session()->flash('warning', trans('shop::app.customers.account.addresses.index.security-warning'));
 
             return redirect()->route('shop.customers.account.addresses.index');
         }
@@ -133,7 +133,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.update.after', $customerAddress);
 
-        session()->flash('success', trans('shop::app.customers.account.addresses.edit-success'));
+        session()->flash('success', trans('shop::app.customers.account.addresses.index.edit-success'));
 
         return redirect()->route('shop.customers.account.addresses.index');
     }
@@ -155,7 +155,7 @@ class AddressController extends Controller
         if ($address = $customer->addresses()->find($id)) {
             $address->update(['default_address' => 1]);
         } else {
-            session()->flash('success', trans('shop::app.customers.account.addresses.default-delete'));
+            session()->flash('success', trans('shop::app.customers.account.addresses.index.default-delete'));
         }
 
         return redirect()->back();
@@ -184,7 +184,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        session()->flash('success', trans('shop::app.customers.account.addresses.delete-success'));
+        session()->flash('success', trans('shop::app.customers.account.addresses.index.delete-success'));
 
         return redirect()->route('shop.customers.account.addresses.index');
     }

@@ -113,33 +113,12 @@
                                 >
                                     @lang('shop::app.customers.account.orders.view.information.subtotal')
                                 </th>
-
-                                <th
-                                    scope="col"
-                                    class="px-6 py-4 font-medium"
-                                >
-                                    @lang('shop::app.customers.account.orders.view.information.tax-percent')
-                                </th>
-
-                                <th
-                                    scope="col"
-                                    class="px-6 py-4 font-medium"
-                                >
-                                    @lang('shop::app.customers.account.orders.view.information.tax-amount')
-                                </th>
-
-                                <th
-                                    scope="col"
-                                    class="px-6 py-4 font-medium"
-                                >
-                                    @lang('shop::app.customers.account.orders.view.information.grand-total')
-                                </th>
                             </tr>
                         </thead>
 
                         <tbody>
                             @foreach ($order->items as $item)
-                                <tr class="border-b bg-white">
+                                <tr class="border-b bg-white align-top">
                                     <td
                                         class="px-6 py-4 font-medium text-black"
                                         data-value="@lang('shop::app.customers.account.orders.view.information.sku')"
@@ -163,10 +142,24 @@
                                     </td>
 
                                     <td
-                                        class="px-6 py-4 font-medium text-black"
+                                        class="flex flex-col px-6 py-4 font-medium text-black"
                                         data-value="@lang('shop::app.customers.account.orders.view.information.price')"
                                     >
-                                        {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                        @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                            {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                        @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                            {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+
+                                            <span class="whitespace-nowrap text-xs font-normal">
+                                                @lang('shop::app.customers.account.orders.view.information.excl-tax')
+                                                
+                                                <span class="font-medium">
+                                                    {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                </span>
+                                            </span>
+                                        @else
+                                            {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                        @endif
                                     </td>
 
                                     <td
@@ -205,31 +198,24 @@
                                     </td>
 
                                     <td
-                                        class="px-6 py-4 font-medium text-black"
+                                        class="flex flex-col px-6 py-4 font-medium text-black"
                                         data-value="@lang('shop::app.customers.account.orders.view.information.subtotal')"
                                     >
-                                        {{ core()->formatPrice($item->total, $order->order_currency_code) }}
-                                    </td>
+                                        @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                            {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
+                                        @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                            {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
 
-                                    <td
-                                        class="px-6 py-4 font-medium text-black"
-                                        data-value="@lang('shop::app.customers.account.orders.view.information.tax-percent')"
-                                    >
-                                        {{ number_format($item->tax_percent, 2) }}%
-                                    </td>
-
-                                    <td
-                                        class="px-6 py-4 font-medium text-black"
-                                        data-value="@lang('shop::app.customers.account.orders.view.information.tax-amount')"
-                                    >
-                                        {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
-                                    </td>
-
-                                    <td
-                                        class="px-6 py-4 font-medium text-black"
-                                        data-value="@lang('shop::app.customers.account.orders.view.information.grand-total')"
-                                    >
-                                        {{ core()->formatPrice($item->total + $item->tax_amount - $item->discount_amount, $order->order_currency_code) }}
+                                            <span class="whitespace-nowrap text-xs font-normal">
+                                                @lang('shop::app.customers.account.orders.view.information.excl-tax')
+                                                
+                                                <span class="font-medium">
+                                                    {{ core()->formatPrice($item->total, $order->order_currency_code) }}
+                                                </span>
+                                            </span>
+                                        @else
+                                            {{ core()->formatPrice($item->total, $order->order_currency_code) }}
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -240,40 +226,106 @@
                 <div class="mt-8 flex items-start gap-10 max-lg:gap-5 max-md:grid">
                     <div class="flex-auto max-md:mt-8">
                         <div class="flex justify-end">
-                            <div class="grid max-w-max gap-2">
-                                <div class="flex w-full justify-between gap-x-5">
-                                    <p class="text-sm">
-                                        @lang('shop::app.customers.account.orders.view.information.subtotal')
-                                    </p>
+                            <div class="grid max-w-max gap-2 text-sm">
+                                @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+                                    <div class="flex w-full justify-between gap-x-5">
+                                        <p>
+                                            @lang('shop::app.customers.account.orders.view.information.subtotal')
+                                        </p>
 
-                                    <div class="flex gap-x-5">
-                                        <p class="text-sm">-</p>
+                                        <p>
+                                            {{ core()->formatPrice($order->sub_total_incl_tax, $order->order_currency_code) }}
+                                        </p>
+                                    </div>
+                                @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+                                    <div class="flex w-full justify-between gap-x-5">
+                                        <p>
+                                            @lang('shop::app.customers.account.orders.view.information.subtotal-excl-tax')
+                                        </p>
 
-                                        <p class="text-sm">
+                                        <p>
                                             {{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}
                                         </p>
                                     </div>
-                                </div>
-
-                                @if ($order->haveStockableItems())
+                                    
                                     <div class="flex w-full justify-between gap-x-5">
-                                        <p class="text-sm">
-                                            @lang('shop::app.customers.account.orders.view.information.shipping-handling')
+                                        <p>
+                                            @lang('shop::app.customers.account.orders.view.information.subtotal-incl-tax')
                                         </p>
 
-                                        <div class="flex gap-x-5">
-                                            <p class="text-sm">-</p>
+                                        <p>
+                                            {{ core()->formatPrice($order->sub_total_incl_tax, $order->order_currency_code) }}
+                                        </p>
+                                    </div>
+                                @else
+                                    <div class="flex w-full justify-between gap-x-5">
+                                        <p>
+                                            @lang('shop::app.customers.account.orders.view.information.subtotal')
+                                        </p>
 
-                                            <p class="text-sm">
-                                                {{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}
-                                            </p>
-                                        </div>
+                                        <p>
+                                            {{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}
+                                        </p>
                                     </div>
                                 @endif
 
+                                @if ($order->haveStockableItems())
+                                    @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'including_tax')
+                                        <div class="flex w-full justify-between gap-x-5">
+                                            <p>
+                                                @lang('shop::app.customers.account.orders.view.information.shipping-handling')
+                                            </p>
+
+                                            <p>
+                                                {{ core()->formatPrice($order->shipping_amount_incl_tax, $order->order_currency_code) }}
+                                            </p>
+                                        </div>
+                                    @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
+                                        <div class="flex w-full justify-between gap-x-5">
+                                            <p>
+                                                @lang('shop::app.customers.account.orders.view.information.shipping-handling-excl-tax')
+                                            </p>
+
+                                            <p>
+                                                {{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}
+                                            </p>
+                                        </div>
+                                        
+                                        <div class="flex w-full justify-between gap-x-5">
+                                            <p>
+                                                @lang('shop::app.customers.account.orders.view.information.shipping-handling-incl-tax')
+                                            </p>
+
+                                            <p>
+                                                {{ core()->formatPrice($order->shipping_amount_incl_tax, $order->order_currency_code) }}
+                                            </p>
+                                        </div>
+                                    @else
+                                        <div class="flex w-full justify-between gap-x-5">
+                                            <p>
+                                                @lang('shop::app.customers.account.orders.view.information.shipping-handling')
+                                            </p>
+
+                                            <p>
+                                                {{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}
+                                            </p>
+                                        </div>
+                                    @endif
+                                @endif
+
+                                <div class="flex w-full justify-between gap-x-5">
+                                    <p>
+                                        @lang('shop::app.customers.account.orders.view.information.tax')
+                                    </p>
+
+                                    <p>
+                                        {{ core()->formatPrice($order->tax_amount, $order->order_currency_code) }}
+                                    </p>
+                                </div>
+
                                 @if ($order->base_discount_amount > 0)
                                     <div class="flex w-full justify-between gap-x-5">
-                                        <p class="text-sm">
+                                        <p>
                                             @lang('shop::app.customers.account.orders.view.information.discount')
 
                                             @if ($order->coupon_code)
@@ -281,87 +333,54 @@
                                             @endif
                                         </p>
 
-                                        <div class="flex gap-x-5">
-                                            <p class="text-sm">-</p>
-
-                                            <p class="text-sm">
-                                                {{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}
-                                            </p>
-                                        </div>
+                                        <p>
+                                            {{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}
+                                        </p>
                                     </div>
                                 @endif
 
-                                <div class="flex w-full justify-between gap-x-5">
-                                    <p class="text-sm">
-                                        @lang('shop::app.customers.account.orders.view.information.tax')
-                                    </p>
-
-                                    <div class="flex gap-x-5">
-                                        <p class="text-sm">-</p>
-
-                                        <p class="text-sm">
-                                            {{ core()->formatPrice($order->tax_amount, $order->order_currency_code) }}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex w-full justify-between gap-x-5">
-                                    <p class="text-sm">
+                                <div class="flex w-full justify-between gap-x-5 font-semibold">
+                                    <p>
                                         @lang('shop::app.customers.account.orders.view.information.grand-total')
                                     </p>
 
-                                    <div class="flex gap-x-5">
-                                        <p class="text-sm">-</p>
-
-                                        <p class="text-sm">
-                                            {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
-                                        </p>
-                                    </div>
+                                    <p>
+                                        {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
+                                    </p>
                                 </div>
 
                                 <div class="flex w-full justify-between gap-x-5">
-                                    <p class="text-sm">
+                                    <p>
                                         @lang('shop::app.customers.account.orders.view.information.total-paid')
                                     </p>
 
-                                    <div class="flex gap-x-5">
-                                        <p class="text-sm">-</p>
-
-                                        <p class="text-sm">
-                                            {{ core()->formatPrice($order->grand_total_invoiced, $order->order_currency_code) }}
-                                        </p>
-                                    </div>
+                                    <p>
+                                        {{ core()->formatPrice($order->grand_total_invoiced, $order->order_currency_code) }}
+                                    </p>
                                 </div>
 
                                 <div class="flex w-full justify-between gap-x-5">
-                                    <p class="text-sm">
+                                    <p>
                                         @lang('shop::app.customers.account.orders.view.information.total-refunded')
                                     </p>
 
-                                    <div class="flex gap-x-5">
-                                        <p class="text-sm">-</p>
-
-                                        <p class="text-sm">
-                                            {{ core()->formatPrice($order->grand_total_refunded, $order->order_currency_code) }}
-                                        </p>
-                                    </div>
+                                    <p>
+                                        {{ core()->formatPrice($order->grand_total_refunded, $order->order_currency_code) }}
+                                    </p>
                                 </div>
+                                
                                 <div class="flex w-full justify-between gap-x-5">
-                                    <p class="text-sm">
+                                    <p>
                                         @lang('shop::app.customers.account.orders.view.information.total-due')
                                     </p>
 
-                                    <div class="flex gap-x-5">
-                                        <p class="text-sm">-</p>
-
-                                        <p class="text-sm">
-                                            @if($order->status !== \Webkul\Sales\Models\Order::STATUS_CANCELED)
-                                                {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
-                                            @else
-                                                {{ core()->formatPrice(0.00, $order->order_currency_code) }}
-                                            @endif
-                                        </p>
-                                    </div>
+                                    <p>
+                                        @if($order->status !== \Webkul\Sales\Models\Order::STATUS_CANCELED)
+                                            {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
+                                        @else
+                                            {{ core()->formatPrice(0.00, $order->order_currency_code) }}
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -425,20 +444,6 @@
                                         >
                                             @lang('shop::app.customers.account.orders.view.invoices.subtotal')
                                         </th>
-
-                                        <th
-                                            scope="col"
-                                            class="px-6 py-4 font-medium"
-                                        >
-                                            @lang('shop::app.customers.account.orders.view.invoices.tax-amount')
-                                        </th>
-
-                                        <th
-                                            scope="col"
-                                            class="px-6 py-4 font-medium"
-                                        >
-                                            @lang('shop::app.customers.account.orders.view.invoices.grand-total')
-                                        </th>
                                     </tr>
                                 </thead>
 
@@ -460,10 +465,24 @@
                                             </td>
 
                                             <td
-                                                class="px-6 py-4 font-medium text-black"
+                                                class="flex flex-col px-6 py-4 font-medium text-black"
                                                 data-value="@lang('shop::app.customers.account.orders.view.invoices.price')"
                                             >
-                                                {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                                    {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                                @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                                    {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+
+                                                    <span class="whitespace-nowrap text-xs font-normal">
+                                                        @lang('shop::app.customers.account.orders.view.information.excl-tax')
+                                                        
+                                                        <span class="font-medium">
+                                                            {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                        </span>
+                                                    </span>
+                                                @else
+                                                    {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                @endif
                                             </td>
 
                                             <td
@@ -474,24 +493,24 @@
                                             </td>
 
                                             <td
-                                                class="px-6 py-4 font-medium text-black"
+                                                class="flex flex-col px-6 py-4 font-medium text-black"
                                                 data-value="@lang('shop::app.customers.account.orders.view.invoices.subtotal')"
                                             >
-                                                {{ core()->formatPrice($item->total, $order->order_currency_code) }}
-                                            </td>
+                                                @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                                    {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
+                                                @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                                    {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
 
-                                            <td
-                                                class="px-6 py-4 font-medium text-black"
-                                                data-value="@lang('shop::app.customers.account.orders.view.invoices.tax-amount')"
-                                            >
-                                                {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
-                                            </td>
-
-                                            <td
-                                                class="px-6 py-4 font-medium text-black"
-                                                data-value="@lang('shop::app.customers.account.orders.view.invoices.grand-total')"
-                                            >
-                                                {{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}
+                                                    <span class="whitespace-nowrap text-xs font-normal">
+                                                        @lang('shop::app.customers.account.orders.view.invoices.excl-tax')
+                                                        
+                                                        <span class="font-medium">
+                                                            {{ core()->formatPrice($item->total, $order->order_currency_code) }}
+                                                        </span>
+                                                    </span>
+                                                @else
+                                                    {{ core()->formatPrice($item->total, $order->order_currency_code) }}
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -502,77 +521,121 @@
                         <div class="mt-8 flex items-start gap-10 max-lg:gap-5 max-md:grid">
                             <div class="flex-auto max-md:mt-8">
                                 <div class="flex justify-end">
-                                    <div class="grid max-w-max gap-2">
-                                        <div class="flex w-full justify-between gap-x-5">
-                                            <p class="text-sm">
-                                                @lang('shop::app.customers.account.orders.view.invoices.subtotal')
-                                            </p>
+                                    <div class="grid max-w-max gap-2 text-sm">
+                                        @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.subtotal')
+                                                </p>
 
-                                            <div class="flex gap-x-5">
-                                                <p class="text-sm">-</p>
+                                                <p>
+                                                    {{ core()->formatPrice($invoice->sub_total_incl_tax, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.subtotal-excl-tax')
+                                                </p>
 
-                                                <p class="text-sm">
+                                                <p>
                                                     {{ core()->formatPrice($invoice->sub_total, $order->order_currency_code) }}
                                                 </p>
                                             </div>
-                                        </div>
+                                            
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.subtotal-incl-tax')
+                                                </p>
 
-                                        <div class="flex w-full justify-between gap-x-5">
-                                            <p class="text-sm">
-                                                @lang('shop::app.customers.account.orders.view.invoices.shipping-handling')
-                                            </p>
+                                                <p>
+                                                    {{ core()->formatPrice($invoice->sub_total_incl_tax, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @else
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.subtotal')
+                                                </p>
 
-                                            <div class="flex gap-x-5">
-                                                <p class="text-sm">-</p>
+                                                <p>
+                                                    {{ core()->formatPrice($invoice->sub_total, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @endif
 
-                                                <p class="text-sm">
+                                        @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'including_tax')
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.shipping-handling')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($invoice->shipping_amount_incl_tax, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.shipping-handling-excl-tax')
+                                                </p>
+
+                                                <p>
                                                     {{ core()->formatPrice($invoice->shipping_amount, $order->order_currency_code) }}
                                                 </p>
                                             </div>
-                                        </div>
+                                            
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.shipping-handling-incl-tax')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($invoice->shipping_amount_incl_tax, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @else
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.invoices.shipping-handling')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($invoice->shipping_amount, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @endif
 
                                         @if ($invoice->base_discount_amount > 0)
                                             <div class="flex w-full justify-between gap-x-5">
-                                                <p class="text-sm">
+                                                <p>
                                                     @lang('shop::app.customers.account.orders.view.invoices.discount')
                                                 </p>
 
-                                                <div class="flex gap-x-5">
-                                                    <p class="text-sm">-</p>
-
-                                                    <p class="text-sm">
-                                                        {{ core()->formatPrice($invoice->discount_amount, $order->order_currency_code) }}
-                                                    </p>
-                                                </div>
+                                                <p>
+                                                    {{ core()->formatPrice($invoice->discount_amount, $order->order_currency_code) }}
+                                                </p>
                                             </div>
                                         @endif
 
                                         <div class="flex w-full justify-between gap-x-5">
-                                            <p class="text-sm">
+                                            <p>
                                                 @lang('shop::app.customers.account.orders.view.invoices.tax')
                                             </p>
 
-                                            <div class="flex gap-x-5">
-                                                <p class="text-sm">-</p>
-
-                                                <p class="text-sm">
-                                                    {{ core()->formatPrice($invoice->tax_amount, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
+                                            <p>
+                                                {{ core()->formatPrice($invoice->tax_amount, $order->order_currency_code) }}
+                                            </p>
                                         </div>
 
-                                        <div class="flex w-full justify-between gap-x-5">
-                                            <p class="text-sm">
+                                        <div class="flex w-full justify-between gap-x-5 font-semibold">
+                                            <p>
                                                 @lang('shop::app.customers.account.orders.view.invoices.grand-total')
                                             </p>
 
-                                            <div class="flex gap-x-5">
-                                                <p class="text-sm">-</p>
-
-                                                <p class="text-sm">
-                                                    {{ core()->formatPrice($invoice->grand_total, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
+                                            <p>
+                                                {{ core()->formatPrice($invoice->grand_total, $order->order_currency_code) }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -709,20 +772,6 @@
                                         >
                                             @lang('shop::app.customers.account.orders.view.refunds.subtotal')
                                         </th>
-
-                                        <th
-                                            scope="col"
-                                            class="px-6 py-4 font-medium"
-                                        >
-                                            @lang('shop::app.customers.account.orders.view.refunds.tax-amount')
-                                        </th>
-
-                                        <th
-                                            scope="col"
-                                            class="px-6 py-4 font-medium"
-                                        >
-                                            @lang('shop::app.customers.account.orders.view.refunds.grand-total')
-                                        </th>
                                     </tr>
                                 </thead>
 
@@ -744,10 +793,24 @@
                                             </td>
 
                                             <td
-                                                class="px-6 py-4 font-medium text-black"
+                                                class="flex flex-col px-6 py-4 font-medium text-black"
                                                 data-value="@lang('shop::app.customers.account.orders.view.refunds.price')"
                                             >
-                                                {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                                    {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                                @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                                    {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+
+                                                    <span class="whitespace-nowrap text-xs font-normal">
+                                                        @lang('shop::app.customers.account.orders.view.information.excl-tax')
+                                                        
+                                                        <span class="font-medium">
+                                                            {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                        </span>
+                                                    </span>
+                                                @else
+                                                    {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                @endif
                                             </td>
 
                                             <td
@@ -758,24 +821,24 @@
                                             </td>
 
                                             <td
-                                                class="px-6 py-4 font-medium text-black"
+                                                class="flex flex-col px-6 py-4 font-medium text-black"
                                                 data-value="@lang('shop::app.customers.account.orders.view.refunds.subtotal')"
                                             >
-                                                {{ core()->formatPrice($item->total, $order->order_currency_code) }}
-                                            </td>
+                                                @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                                    {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
+                                                @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                                    {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
 
-                                            <td
-                                                class="px-6 py-4 font-medium text-black"
-                                                data-value="@lang('shop::app.customers.account.orders.view.refunds.tax-amount')"
-                                            >
-                                                {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
-                                            </td>
-
-                                            <td
-                                                class="px-6 py-4 font-medium text-black"
-                                                data-value="@lang('shop::app.customers.account.orders.view.refunds.grand-total')"
-                                            >
-                                                {{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}
+                                                    <span class="whitespace-nowrap text-xs font-normal">
+                                                        @lang('shop::app.customers.account.orders.view.information.excl-tax')
+                                                        
+                                                        <span class="font-medium">
+                                                            {{ core()->formatPrice($item->total, $order->order_currency_code) }}
+                                                        </span>
+                                                    </span>
+                                                @else
+                                                    {{ core()->formatPrice($item->total, $order->order_currency_code) }}
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -792,107 +855,143 @@
                         <div class="mt-8 flex items-start gap-10 max-lg:gap-5 max-md:grid">
                             <div class="flex-auto max-md:mt-8">
                                 <div class="flex justify-end">
-                                    <div class="grid max-w-max gap-2">
-                                        <div class="flex w-full justify-between gap-x-5">
-                                            <p class="text-sm">
-                                                @lang('shop::app.customers.account.orders.view.refunds.subtotal')
-                                            </p>
+                                    <div class="grid max-w-max gap-2 text-sm">
+                                        @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+                                            <div class="flex w-full justify-between gap-x-5 text-sm">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.subtotal')
+                                                </p>
 
-                                            <div class="flex gap-x-5">
-                                                <p class="text-sm">-</p>
+                                                <p>
+                                                    {{ core()->formatPrice($refund->sub_total_incl_tax, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+                                            <div class="flex w-full justify-between gap-x-5 text-sm">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.subtotal-excl-tax')
+                                                </p>
 
-                                                <p class="text-sm">
+                                                <p>
                                                     {{ core()->formatPrice($refund->sub_total, $order->order_currency_code) }}
                                                 </p>
                                             </div>
-                                        </div>
+                                            
+                                            <div class="flex w-full justify-between gap-x-5 text-sm">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.subtotal-incl-tax')
+                                                </p>
 
-                                        <div class="flex w-full justify-between gap-x-5">
-                                            <p class="text-sm">
-                                                @lang('shop::app.customers.account.orders.view.refunds.shipping-handling')
-                                            </p>
+                                                <p>
+                                                    {{ core()->formatPrice($refund->sub_total_incl_tax, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @else
+                                            <div class="flex w-full justify-between gap-x-5 text-sm">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.subtotal')
+                                                </p>
 
-                                            <div class="flex gap-x-5">
-                                                <p class="text-sm">-</p>
+                                                <p>
+                                                    {{ core()->formatPrice($refund->sub_total, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @endif
 
-                                                <p class="text-sm">
+                                        @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'including_tax')
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.shipping-handling')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($refund->shipping_amount_incl_tax, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.shipping-handling-excl-tax')
+                                                </p>
+
+                                                <p>
                                                     {{ core()->formatPrice($refund->shipping_amount, $order->order_currency_code) }}
                                                 </p>
                                             </div>
-                                        </div>
+                                            
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.shipping-handling-incl-tax')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($refund->shipping_amount_incl_tax, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @else
+                                            <div class="flex w-full justify-between gap-x-5">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.refunds.shipping-handling')
+                                                </p>
+
+                                                <p>
+                                                    {{ core()->formatPrice($refund->shipping_amount, $order->order_currency_code) }}
+                                                </p>
+                                            </div>
+                                        @endif
 
                                         @if ($refund->discount_amount > 0)
                                             <div class="flex w-full justify-between gap-x-5">
-                                                <p class="text-sm">
+                                                <p>
                                                     @lang('shop::app.customers.account.orders.view.refunds.discount')
                                                 </p>
 
-                                                <div class="flex gap-x-5">
-                                                    <p class="text-sm">-</p>
-
-                                                    <p class="text-sm">
-                                                        {{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}
-                                                    </p>
-                                                </div>
+                                                <p>
+                                                    {{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}
+                                                </p>
                                             </div>
                                         @endif
 
                                         @if ($refund->tax_amount > 0)
                                             <div class="flex w-full justify-between gap-x-5">
-                                                <p class="text-sm">
+                                                <p>
                                                     @lang('shop::app.customers.account.orders.view.refunds.tax')
                                                 </p>
 
-                                                <div class="flex gap-x-5">
-                                                    <p class="text-sm">-</p>
-
-                                                    <p class="text-sm">
-                                                        {{ core()->formatPrice($refund->tax_amount, $order->order_currency_code) }}
-                                                    </p>
-                                                </div>
+                                                <p>
+                                                    {{ core()->formatPrice($refund->tax_amount, $order->order_currency_code) }}
+                                                </p>
                                             </div>
                                         @endif
 
                                         <div class="flex w-full justify-between gap-x-5">
-                                            <p class="text-sm">
+                                            <p>
                                                 @lang('shop::app.customers.account.orders.view.refunds.adjustment-refund')
                                             </p>
 
-                                            <div class="flex gap-x-5">
-                                                <p class="text-sm">-</p>
-
-                                                <p class="text-sm">
-                                                    {{ core()->formatPrice($refund->adjustment_refund, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
+                                            <p>
+                                                {{ core()->formatPrice($refund->adjustment_refund, $order->order_currency_code) }}
+                                            </p>
                                         </div>
 
                                         <div class="flex w-full justify-between gap-x-5">
-                                            <p class="text-sm">
+                                            <p>
                                                 @lang('shop::app.customers.account.orders.view.refunds.adjustment-fee')
                                             </p>
 
-                                            <div class="flex gap-x-5">
-                                                <p class="text-sm">-</p>
-
-                                                <p class="text-sm">
-                                                    {{ core()->formatPrice($refund->adjustment_fee, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
+                                            <p>
+                                                {{ core()->formatPrice($refund->adjustment_fee, $order->order_currency_code) }}
+                                            </p>
                                         </div>
 
-                                        <div class="flex w-full justify-between gap-x-5">
-                                            <p class="text-sm">
+                                        <div class="flex w-full justify-between gap-x-5 font-semibold">
+                                            <p>
                                                 @lang('shop::app.customers.account.orders.view.refunds.grand-total')
                                             </p>
 
-                                            <div class="flex gap-x-5">
-                                                <p class="text-sm">-</p>
-
-                                                <p class="text-sm">
-                                                    {{ core()->formatPrice($refund->grand_total, $order->order_currency_code) }}
-                                                </p>
-                                            </div>
+                                            <p>
+                                                {{ core()->formatPrice($refund->grand_total, $order->order_currency_code) }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -914,7 +1013,7 @@
 
                     <div class="grid gap-2.5">
                         <p class="text-sm">
-                            @include ('admin::sales.address', ['address' => $order->billing_address])
+                            @include ('shop::customers.account.orders.view.address', ['address' => $order->billing_address])
                         </p>
 
                         {!! view_render_event('bagisto.shop.customers.account.orders.view.billing_address.after', ['order' => $order]) !!}
@@ -931,7 +1030,7 @@
 
                     <div class="grid gap-2.5">
                         <p class="text-sm">
-                            @include ('admin::sales.address', ['address' => $order->shipping_address])
+                            @include ('shop::customers.account.orders.view.address', ['address' => $order->shipping_address])
 
                             {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address.after', ['order' => $order]) !!}
                         </p>
