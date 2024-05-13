@@ -40,15 +40,9 @@ abstract class MenuElement
     public string $currentKey;
 
     /**
-     * Create a new instance of the controller.
-     *
-     * This method is commonly used within the controller for instantiating itself
-     * and can be used for dependency injection or method chaining.
-     *
-     * @param  mixed  ...$args  Optional arguments to pass to the controller constructor.
-     * @return static An instance of the controller.
+     * Make the new instance of the class.
      */
-    public static function make(...$args)
+    public static function make(mixed ...$args): static
     {
         $static = new static(...$args);
 

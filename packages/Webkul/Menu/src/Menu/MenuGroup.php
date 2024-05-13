@@ -12,10 +12,11 @@ class MenuGroup extends MenuElement
      * @return void
      */
     public function __construct(
+        public string $key,
         public string $name,
         public string $route,
-        public string $icon,
         public string $sort,
+        public string $icon,
         public Collection|array $menuItems = [],
     ) {
     }

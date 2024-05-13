@@ -166,6 +166,33 @@
         <div class="journal-scroll h-[calc(100vh-100px)] overflow-auto">
             <nav class="grid w-full gap-2">
                 <!-- Navigation Menu -->
+                @foreach ($menu as $menuItem)
+                    <div class="group/item relative">
+                        <a
+                            href="{{ $menuItem->url() }}"
+                            class="flex gap-2.5 p-1.5 items-center cursor-pointer {{ $menuItem->isActive() == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 dark:hover:bg-gray-950 ' }} peer"
+                        >
+                            <span class="{{ $menuItem->icon }} text-2xl {{ $menuItem->isActive() ? 'text-white' : ''}}"></span>
+                            
+                            <p class="text-gray-600 dark:text-gray-300 font-semibold whitespace-nowrap {{ $menuItem->isActive() ? 'text-white' : ''}}">
+                                @lang($menuItem->name)
+                            </p>
+                        </a>
+
+                        @if ($menuItem->hasGroup())
+                            <div class="{{ $menuItem->isActive() ? ' !grid bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-lg z-[100]">
+                                @foreach ($menuItem->menuItems as $subMenuItem)
+                                    <a
+                                        href="{{ $subMenuItem->url() }}"
+                                        class="text-sm text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 dark:hover:bg-gray-950"
+                                    >
+                                        @lang($subMenuItem->name)
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
             </nav>
         </div>
     </x-slot>

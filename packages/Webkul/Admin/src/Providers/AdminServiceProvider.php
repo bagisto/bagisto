@@ -101,6 +101,7 @@ class AdminServiceProvider extends ServiceProvider
             }
 
             return MenuGroup::make(
+                key: $item['key'],
                 name: $item['name'],
                 route: $item['route'],
                 icon: $item['icon'],

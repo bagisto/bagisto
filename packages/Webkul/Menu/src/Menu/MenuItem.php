@@ -2,6 +2,8 @@
 
 namespace Webkul\Menu\Menu;
 
+use Illuminate\Support\Collection;
+
 class MenuItem extends MenuElement
 {
     /**
@@ -15,7 +17,7 @@ class MenuItem extends MenuElement
         public string $route,
         public string $sort,
         public string $icon,
-        public ?array $menuGroup = null,
+        public Collection|array $menuGroup = [],
     ) {
     }
 }
