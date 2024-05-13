@@ -91,6 +91,16 @@ abstract class Menu
 
     public function isActive()
     {
-        return $this->url() === request()->url();
+        if ($this instanceof MenuGroup) {
+            foreach ($this->menuItems as $item) {
+                if ($item->isActive()) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return request()->fullUrlIs(route($this->route()).'*');
     }
 }
