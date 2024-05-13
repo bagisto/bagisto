@@ -105,8 +105,7 @@
 
             <div class="max-w-full flex-1 bg-white px-4 pb-6 pt-3 transition-all duration-300 dark:bg-gray-950 max-lg:!px-4 ltr:pl-[286px] group-[.sidebar-collapsed]/container:ltr:pl-[85px] rtl:pr-[286px] group-[.sidebar-collapsed]/container:rtl:pr-[85px]">
                 <!-- Added dynamic tabs for third level menus  -->
-                <!-- Todo @suraj-webkul need to optimize below statement. -->
-                @if (!request()->routeIs('admin.configuration.index'))
+                @if (! request()->routeIs('admin.configuration.index'))
                     <x-admin::layouts.tabs />
                 @endif
 

@@ -20,12 +20,12 @@ abstract class MenuElement
     public string $route;
 
     /**
-     * Route of the menu.
+     * Sort the menu.
      */
     public string $sort;
 
     /**
-     * Route of the icon
+     * Icon of the menu.
      */
     public string $icon;
 
@@ -34,9 +34,7 @@ abstract class MenuElement
      */
     public static function make(mixed ...$args): static
     {
-        $static = new static(...$args);
-
-        return $static;
+        return new static(...$args);
     }
 
     /**
@@ -87,5 +85,18 @@ abstract class MenuElement
         }
 
         return request()->fullUrlIs($this->url().'*');
+    }
+
+    public function getCurrentActiveItems()
+    {
+        if ($this instanceof MenuGroup) {
+            foreach ($this->menuItems as $item) {
+                if ($item->isActive()) {
+                    return $item;
+                }
+            }
+        }
+
+        return $this;
     }
 }
