@@ -23,15 +23,15 @@
                     class="mt-5"
                     v-for='(attribute, index) in childAttributes'
                 >
+                    <!-- Dropdown Label -->
+                    <h2 class="mb-4 text-xl max-sm:text-base">
+                        @{{ attribute.label }}
+                    </h2>
+
                     <!-- Dropdown Options Container -->
                     <template
                         v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'"
                     >
-                        <!-- Dropdown Label -->
-                        <h2 class="mb-4 text-xl max-sm:text-base">
-                            @{{ attribute.label }}
-                        </h2>
-                        
                         <!-- Dropdown Options -->
                         <v-field
                             as="select"
@@ -57,16 +57,11 @@
 
                     <!-- Swatch Options Container -->
                     <template v-else>
-                        <!-- Option Label -->
-                        <h2 class="mb-4 text-xl max-sm:text-base">
-                            @{{ attribute.label }}
-                        </h2>
-
                         <!-- Swatch Options -->
                         <div class="flex items-center gap-3">
                             <template v-for="(option, index) in attribute.options">
-                                <!-- Color Swatch Options -->
                                 <template v-if="option.id">
+                                    <!-- Color Swatch Options -->
                                     <label
                                         class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
                                         :class="{'ring ring-gray-900 ring-offset-1' : option.id == attribute.selectedValue}"
@@ -261,7 +256,7 @@
                                 this.selectedOptionVariant = this.possibleOptionVariant;
                             }
                         } else {
-                            attribute.selectedValue = null;
+                            this.clearAttributeSelection(attribute);
 
                             this.clearAttributeSelection(attribute.nextAttribute);
 
