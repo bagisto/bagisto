@@ -49,7 +49,6 @@
                             <option
                                 v-for='(option, index) in attribute.options'
                                 :value="option.id"
-                                :selected="index == attribute.selectedIndex"
                             >
                                 @{{ option.label }}
                             </option>
@@ -70,7 +69,7 @@
                                 <template v-if="option.id">
                                     <label
                                         class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
-                                        :class="{'ring ring-gray-900 ring-offset-1' : index == attribute.selectedIndex}"
+                                        :class="{'ring ring-gray-900 ring-offset-1' : option.id == attribute.selectedValue}"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'color'"
                                     >
@@ -104,7 +103,7 @@
                                     <!-- Image Swatch Options -->
                                     <label 
                                         class="group relative flex h-[60px] w-[60px] cursor-pointer items-center justify-center overflow-hidden rounded-full border bg-white font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
-                                        :class="{'ring-2 ring-navyBlue' : index == attribute.selectedIndex }"
+                                        :class="{'ring-2 ring-navyBlue' : option.id == attribute.selectedValue }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'image'"
                                     >
@@ -139,7 +138,7 @@
                                     <!-- Text Swatch Options -->
                                     <label 
                                         class="group relative flex h-[60px] min-w-[60px] cursor-pointer items-center justify-center rounded-full border bg-white px-4 py-3 font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
-                                        :class="{'ring-2 ring-navyBlue' : index == attribute.selectedIndex }"
+                                        :class="{'ring-2 ring-navyBlue' : option.id == attribute.selectedValue }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'text'"
                                     >
@@ -250,10 +249,10 @@
                         if (optionId) {
                             attribute.selectedValue = optionId;
                             
-                            attribute.selectedIndex = attribute.options.findIndex(option => option.id == optionId);
-
                             if (attribute.nextAttribute) {
                                 attribute.nextAttribute.disabled = false;
+
+                                this.clearAttributeSelection(attribute.nextAttribute);
 
                                 this.fillAttributeOptions(attribute.nextAttribute);
 
@@ -262,13 +261,11 @@
                                 this.selectedOptionVariant = this.possibleOptionVariant;
                             }
                         } else {
-                            attribute.selectedValue = '';
-
-                            attribute.selectedIndex = 0;
-
-                            this.resetChildAttributes(attribute);
+                            attribute.selectedValue = null;
 
                             this.clearAttributeSelection(attribute.nextAttribute);
+
+                            this.resetChildAttributes(attribute);
                         }
 
                         this.reloadPrice();
@@ -289,8 +286,6 @@
                     fillAttributeOptions(attribute) {
                         let options = this.config.attributes.find(tempAttribute => tempAttribute.id === attribute.id)?.options;
 
-                        this.clearAttributeSelection(attribute);
-
                         attribute.options = [{
                             'id': '',
                             'label': "@lang('shop::app.products.view.type.configurable.select-options')",
@@ -301,7 +296,7 @@
                             return;
                         }
 
-                        let prevAttributeSelectedOption = attribute.prevAttribute?.options[attribute.prevAttribute.selectedIndex];
+                        let prevAttributeSelectedOption = attribute.prevAttribute?.options.find(option => option.id == attribute.prevAttribute.selectedValue);
 
                         let index = 1;
 
@@ -334,8 +329,6 @@
                         attribute.childAttributes.forEach(function (set) {
                             set.selectedValue = null;
 
-                            set.selectedIndex = 0;
-                            
                             set.disabled = true;
                         });
                     },
@@ -345,29 +338,13 @@
                             return;
                         }
 
-                        attribute.selectedIndex = null;
-
                         attribute.selectedValue = null;
 
                         this.selectedOptionVariant = null;
-
-                        if (! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown') {
-                            let element = document.getElementById('attribute_' + attribute.id);
-
-                            if (element) {
-                                element.selectedIndex = 0;
-                            }
-                        } else {
-                            let elements = document.getElementsByName('super_attribute[' + attribute.id + ']');
-
-                            elements.forEach(function(element) {
-                                element.checked = false;
-                            })
-                        }
                     },
 
                     reloadPrice () {
-                        let selectedOptionCount = this.childAttributes.filter(attribute => attribute.selectedIndex).length;
+                        let selectedOptionCount = this.childAttributes.filter(attribute => attribute.selectedValue).length;
 
                         if (this.childAttributes.length == selectedOptionCount) {
                             document.querySelector('.price-label').style.display = 'none';
