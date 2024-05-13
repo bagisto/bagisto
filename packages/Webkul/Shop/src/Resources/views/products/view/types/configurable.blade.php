@@ -36,6 +36,7 @@
                         <v-field
                             as="select"
                             :name="'super_attribute[' + attribute.id + ']'"
+                            v-model="attribute.selectedValue"
                             class="custom-select mb-3 block w-full cursor-pointer rounded-lg border border-[#E9E9E9] bg-white px-5 py-3 text-base text-[#6E6E6E] focus:border-blue-500 focus:ring-blue-500 max-md:w-[110px] max-md:border-0 max-md:outline-none"
                             :class="[errors['super_attribute[' + attribute.id + ']'] ? 'border border-red-500' : '']"
                             :id="'attribute_' + attribute.id"
@@ -110,6 +111,7 @@
                                         <v-field
                                             type="radio"
                                             :name="'super_attribute[' + attribute.id + ']'"
+                                            v-model="attribute.selectedValue"
                                             :value="option.id"
                                             v-slot="{ field }"
                                             rules="required"
@@ -145,6 +147,7 @@
                                             type="radio"
                                             :name="'super_attribute[' + attribute.id + ']'"
                                             :value="option.id"
+                                            v-model="attribute.selectedValue"
                                             v-slot="{ field }"
                                             rules="required"
                                             :label="attribute.label"
@@ -245,6 +248,8 @@
                         this.possibleOptionVariant = this.getPossibleOptionVariant(attribute, optionId);
 
                         if (optionId) {
+                            attribute.selectedValue = optionId;
+                            
                             attribute.selectedIndex = attribute.options.findIndex(option => option.id == optionId);
 
                             if (attribute.nextAttribute) {
@@ -253,17 +258,17 @@
                                 this.fillAttributeOptions(attribute.nextAttribute);
 
                                 this.resetChildAttributes(attribute.nextAttribute);
-
-                                this.clearAttributeSelection(attribute.nextAttribute);
                             } else {
                                 this.selectedOptionVariant = this.possibleOptionVariant;
                             }
                         } else {
+                            attribute.selectedValue = '';
+
                             attribute.selectedIndex = 0;
 
                             this.resetChildAttributes(attribute);
 
-                            this.clearAttributeSelection(attribute.nextAttribute)
+                            this.clearAttributeSelection(attribute.nextAttribute);
                         }
 
                         this.reloadPrice();
@@ -296,16 +301,16 @@
                             return;
                         }
 
-                        let prevSelectedOption = attribute.prevAttribute?.options[attribute.prevAttribute.selectedIndex];
-                        
+                        let prevAttributeSelectedOption = attribute.prevAttribute?.options[attribute.prevAttribute.selectedIndex];
+
                         let index = 1;
 
                         for (let i = 0; i < options.length; i++) {
                             let allowedProducts = [];
 
-                            if (prevSelectedOption) {
+                            if (prevAttributeSelectedOption) {
                                 for (let j = 0; j < options[i].products.length; j++) {
-                                    if (prevSelectedOption.allowedProducts && prevSelectedOption.allowedProducts.includes(options[i].products[j])) {
+                                    if (prevAttributeSelectedOption.allowedProducts && prevAttributeSelectedOption.allowedProducts.includes(options[i].products[j])) {
                                         allowedProducts.push(options[i].products[j]);
                                     }
                                 }
@@ -327,6 +332,8 @@
                         }
 
                         attribute.childAttributes.forEach(function (set) {
+                            set.selectedValue = null;
+
                             set.selectedIndex = 0;
                             
                             set.disabled = true;
@@ -340,13 +347,15 @@
 
                         attribute.selectedIndex = null;
 
+                        attribute.selectedValue = null;
+
                         this.selectedOptionVariant = null;
 
                         if (! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown') {
                             let element = document.getElementById('attribute_' + attribute.id);
 
                             if (element) {
-                                element.selectedIndex = "0";
+                                element.selectedIndex = 0;
                             }
                         } else {
                             let elements = document.getElementsByName('super_attribute[' + attribute.id + ']');
