@@ -2,9 +2,7 @@
 
 namespace Webkul\Menu\Menu;
 
-use Webkul\Menu\Menu;
-
-class MenuItem extends Menu
+class MenuItem extends MenuElement
 {
     /**
      * Create the new instance of the class

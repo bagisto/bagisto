@@ -1,10 +1,8 @@
 <?php
 
-namespace Webkul\Menu;
+namespace Webkul\Menu\Menu;
 
-use Webkul\Menu\Menu\MenuGroup;
-
-abstract class Menu
+abstract class MenuElement
 {
     /**
      * Key of the menu
@@ -101,6 +99,6 @@ abstract class Menu
             return false;
         }
 
-        return request()->fullUrlIs(route($this->route()).'*');
+        return request()->fullUrlIs($this->url().'*');
     }
 }

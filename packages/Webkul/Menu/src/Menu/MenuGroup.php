@@ -3,9 +3,8 @@
 namespace Webkul\Menu\Menu;
 
 use Illuminate\Support\Collection;
-use Webkul\Menu\Menu;
 
-class MenuGroup extends Menu
+class MenuGroup extends MenuElement
 {
     /**
      * Create the new instance of the class
