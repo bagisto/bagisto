@@ -351,7 +351,7 @@ return [
                         'sort'  => 2,
                         'icon'  => '',
                     ],
-                ]
+                ],
             ], [
                 'key'   => 'data_transfer',
                 'name'  => 'admin::app.components.layouts.sidebar.data-transfer',
@@ -366,7 +366,7 @@ return [
                         'sort'  => 1,
                         'icon'  => '',
                     ],
-                ]
+                ],
             ],
         ],
     ],

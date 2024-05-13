@@ -30,16 +30,6 @@ abstract class MenuElement
     public string $icon;
 
     /**
-     * Contains the current item route.
-     */
-    public string $current;
-
-    /**
-     * Contains the current item key.
-     */
-    public string $currentKey;
-
-    /**
      * Make the new instance of the class.
      */
     public static function make(mixed ...$args): static

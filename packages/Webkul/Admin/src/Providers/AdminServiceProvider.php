@@ -89,26 +89,28 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function createMenu(array $items): Collection
     {
-        return collect($items)->map(function ($item) {
-            if (empty($item['items'])) {
-                return MenuItem::make(
+        return collect($items)
+            ->sortBy('sort')
+            ->map(function ($item) {
+                if (empty($item['items'])) {
+                    return MenuItem::make(
+                        key: $item['key'],
+                        name: $item['name'],
+                        route: $item['route'],
+                        sort: $item['sort'],
+                        icon: $item['icon'],
+                    );
+                }
+
+                return MenuGroup::make(
                     key: $item['key'],
                     name: $item['name'],
                     route: $item['route'],
-                    sort: $item['sort'],
                     icon: $item['icon'],
+                    sort: $item['sort'],
+                    menuItems: $this->createMenu($item['items']),
                 );
-            }
-
-            return MenuGroup::make(
-                key: $item['key'],
-                name: $item['name'],
-                route: $item['route'],
-                icon: $item['icon'],
-                sort: $item['sort'],
-                menuItems: $this->createMenu($item['items']),
-            );
-        });
+            });
     }
 
     /**
