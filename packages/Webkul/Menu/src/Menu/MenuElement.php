@@ -97,6 +97,6 @@ abstract class MenuElement
             }
         }
 
-        return $this;
+        return false;
     }
 }

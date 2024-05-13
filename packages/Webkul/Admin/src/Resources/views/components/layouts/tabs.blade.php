@@ -1,8 +1,8 @@
 <div class="tabs">
     @foreach ($menu as $menuItem)
         @if (
-            $menuItem->isActive() 
-            && $tabs = $menuItem->getCurrentActiveItems()->menuItems
+            $menuItem->isActive()
+            && $tabs = $menuItem->getCurrentActiveItems()->menuItems ?? false
         )
             <div class="mb-4 flex gap-4 border-b-2 pt-2 dark:border-gray-800 max-sm:hidden">
                 @foreach ($tabs as $key => $tab)
