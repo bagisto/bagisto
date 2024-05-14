@@ -332,25 +332,6 @@ return [
         'info' => 'admin::app.configuration.index.catalog.info',
         'sort' => 2,
     ], [
-        'key'  => 'catalog.inventory',
-        'name' => 'admin::app.configuration.index.catalog.inventory.title',
-        'info' => 'admin::app.configuration.index.catalog.inventory.info',
-        'icon' => 'settings/store.svg',
-        'sort' => 1,
-    ], [
-        'key'    => 'catalog.inventory.stock_options',
-        'name'   => 'admin::app.configuration.index.catalog.inventory.stock-options.title',
-        'info'   => 'admin::app.configuration.index.catalog.inventory.stock-options.title-info',
-        'sort'   => 1,
-        'fields' => [
-            [
-                'name'          => 'back_orders',
-                'title'         => 'admin::app.configuration.index.catalog.inventory.stock-options.allow-back-orders',
-                'type'          => 'boolean',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
         'key'  => 'catalog.products',
         'name' => 'admin::app.configuration.index.catalog.products.title',
         'info' => 'admin::app.configuration.index.catalog.products.info',
@@ -1529,6 +1510,19 @@ return [
                 'validation'    => 'numeric',
                 'channel_based' => true,
                 'locale_based'  => true,
+            ],
+        ],
+    ], [
+        'key'    => 'sales.order_settings.stock_options',
+        'name'   => 'admin::app.configuration.index.sales.order-settings.stock-options.title',
+        'info'   => 'admin::app.configuration.index.sales.order-settings.stock-options.title-info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'          => 'back_orders',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.stock-options.allow-back-orders',
+                'type'          => 'boolean',
+                'channel_based' => true,
             ],
         ],
     ], [

@@ -36,7 +36,7 @@
 - [Moved `coupon.blade.php`](#moved-coupon-blade)
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
-- [Renamed Admin View render event Names](#renamed-admin-view-render-event-names)
+- [Renamed Admin View Render Event Names](#renamed-admin-view-render-event-names)
 
 ## Upgrading To v2.2.0 From v2.1.0
 
@@ -118,6 +118,13 @@ There is no dependency needed to be updated at for this upgrade.
 
 In this example, the `repository` option has been replaced with `options`, which is defined as a closure returning an array of options. Adjust the closure to populate the select field options as needed.
 
+3. The Inventory Stock Options configuration has been relocated to the Order Settings configuration, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('catalog.inventory.stock_options.back_orders')
++ core()->getConfigData('sales.order_settings.stock_options.back_orders')
+```
+
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names
 
@@ -130,7 +137,7 @@ In this example, the `repository` option has been replaced with `options`, which
 + Route::post('update-totals/{order_id}', 'updateTotals')->name('admin.sales.refunds.update_totals');
 
 <a name="renamed-admin-view-render-event-names"></a>
-#### Admin View render event Names updated
+#### Renamed Admin View Render Event Names
 
 **Impact Probability: Low**
 

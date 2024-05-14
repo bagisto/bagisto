@@ -3422,17 +3422,6 @@ return [
                 'info'  => 'Catalogus',
                 'title' => 'Catalogus',
 
-                'inventory' => [
-                    'info'  => 'Stel backorders in',
-                    'title' => 'Voorraad',
-
-                    'stock-options' => [
-                        'allow-back-orders'  => 'Sta backorders toe',
-                        'title'              => 'Voorraadopties',
-                        'title-info'         => 'Voorraadopties zijn investeringscontracten die het recht verlenen om bedrijfsaandelen te kopen of verkopen tegen een vooraf bepaalde prijs, wat invloed heeft op mogelijke winsten.',
-                    ],
-                ],
-
                 'products' => [
                     'info'  => 'Stel gastafrekening, productweergavepagina, winkelwagenweergavepagina, winkelvoorkant, beoordeling en attribuutsociale deling in.',
                     'title' => 'Producten',
@@ -3746,7 +3735,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Set order numbers and minimum orders.',
+                    'info'  => 'Bestelnummers, minimale bestellingen en backorders instellen.',
                     'title' => 'Order Settings',
 
                     'order-number' => [
@@ -3762,6 +3751,12 @@ return [
                         'minimum-order-amount' => 'Minimum Order Amount',
                         'title'                => 'Minimum Order Settings',
                         'title-info'           => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
+                    ],
+
+                    'stock-options' => [
+                        'allow-back-orders' => 'Sta backorders toe',
+                        'title'             => 'Voorraadopties',
+                        'title-info'        => 'Voorraadopties zijn investeringscontracten die het recht verlenen om bedrijfsaandelen te kopen of verkopen tegen een vooraf bepaalde prijs, wat invloed heeft op mogelijke winsten.',
                     ],
                 ],
 

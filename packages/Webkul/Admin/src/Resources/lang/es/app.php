@@ -3422,17 +3422,6 @@ return [
                 'info'  => 'Catálogo',
                 'title' => 'Catálogo',
 
-                'inventory' => [
-                    'title' => 'Inventario',
-                    'info'  => 'Configuración de pedidos atrasados',
-
-                    'stock-options' => [
-                        'allow-back-orders' => 'Permitir pedidos atrasados',
-                        'title'             => 'Opciones de stock',
-                        'title-info'        => 'Las opciones de stock son contratos de inversión que otorgan el derecho de comprar o vender acciones de una empresa a un precio predeterminado, lo que influye en las ganancias potenciales.',
-                    ],
-                ],
-
                 'products' => [
                     'info'  => 'Configurar el pago como invitado, página de vista de productos, página de vista de carrito, frente de la tienda, revisión y compartir atributos en redes sociales.',
                     'title' => 'Produkte',
@@ -3746,7 +3735,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Establecer número de orden y pedido mínimo',
+                    'info'  => 'Establecer números de pedido, pedidos mínimos y pedidos pendientes.',
                     'title' => 'Configuración de Pedido',
 
                     'order-number' => [
@@ -3762,6 +3751,12 @@ return [
                         'minimum-order-amount' => 'Monto Mínimo del Pedido',
                         'title'                => 'Configuración de Cantidad Mínima del Pedido',
                         'title-info'           => 'Configure la cantidad mínima del pedido o el valor predeterminado para el proceso de compra o ventaja.',
+                    ],
+
+                    'stock-options' => [
+                        'allow-back-orders' => 'Permitir pedidos atrasados',
+                        'title'             => 'Opciones de stock',
+                        'title-info'        => 'Las opciones de stock son contratos de inversión que otorgan el derecho de comprar o vender acciones de una empresa a un precio predeterminado, lo que influye en las ganancias potenciales.',
                     ],
                 ],
 
