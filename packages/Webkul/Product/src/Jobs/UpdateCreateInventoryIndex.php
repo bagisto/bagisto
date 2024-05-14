@@ -32,6 +32,10 @@ class UpdateCreateInventoryIndex implements ShouldQueue
      */
     public function handle()
     {
+        if (! count($this->productIds)) {
+            return;
+        }
+
         $ids = implode(',', $this->productIds);
 
         $products = app(ProductRepository::class)

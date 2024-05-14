@@ -7,6 +7,7 @@
         id="v-footer-links-template"
     >
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
+            <!-- Left Pannel -->
             <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     <!-- Add Links-->
@@ -20,14 +21,13 @@
                                 @lang('admin::app.settings.themes.edit.footer-link-description')
                             </p>
                         </div>
-        
-                        <div class="flex gap-2.5">
-                            <div
-                                class="secondary-button"
-                                @click="isUpdating=false;$refs.addLinksModal.toggle()"
-                            >
-                                @lang('admin::app.settings.themes.edit.add-link')
-                            </div>
+
+                        <!-- Add Link Button -->
+                        <div
+                            class="secondary-button"
+                            @click="isUpdating=false;$refs.addLinksModal.toggle()"
+                        >
+                            @lang('admin::app.settings.themes.edit.add-link')
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                         v-for="(footerLink, index) in footerLinks"
                     >
                         <!-- Information -->
-                        <div 
+                        <div
                             class="grid border-b border-slate-300 last:border-b-0 dark:border-gray-800"
                             v-for="(link, key) in footerLink"
                         >
@@ -80,24 +80,22 @@
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.settings.themes.edit.url'):
 
-                                                    <a
-                                                        :href="link.url"
-                                                        target="_blank"
-                                                        class="text-blue-600 transition-all hover:underline"
-                                                    >
-                                                        @{{ link.url }}
-                                                    </a>
-                                                </div>
-                                            </p>
+                                            <a
+                                                :href="link.url"
+                                                target="_blank"
+                                                class="text-blue-600 transition-all hover:underline"
+                                            >
+                                                @{{ link.url }}
+                                            </a>
+                                        </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.settings.themes.edit.filter-title'):
 
-                                                    <span class="text-gray-600 transition-all dark:text-gray-300">
-                                                        @{{ link.title }}
-                                                    </span>
-                                                </div>
-                                            </p>
+                                            <span class="text-gray-600 transition-all dark:text-gray-300">
+                                                @{{ link.title }}
+                                            </span>
+                                        </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.settings.themes.edit.sort-order'):
@@ -133,7 +131,7 @@
                         </div>
                     </div>
 
-                    <div   
+                    <div
                         v-if="isFooterLinksEmpty"
                         class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                     >
@@ -146,33 +144,34 @@
                         <div class="flex flex-col items-center gap-1.5">
                             <p class="text-base font-semibold text-gray-400">
                                 @lang('admin::app.settings.themes.edit.footer-link')
-                                
                             </p>
 
-                                <p class="text-gray-400">
-                                    @lang('admin::app.settings.themes.edit.footer-link-description')
-                                </p>
-                            </div>
+                            <p class="text-gray-400">
+                                @lang('admin::app.settings.themes.edit.footer-link-description')
+                            </p>
                         </div>
                     </div>
                 </div>
-            
-                <!-- General -->
-                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
-                    <x-admin::accordion>
-                        <x-slot:header>
-                            <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
-                                @lang('admin::app.settings.themes.edit.general')
-                            </p>
-                        </x-slot>
-                    
-                        <x-slot:content>
-                            <input
-                                type="hidden"
-                                name="type"
-                                value="footer_links"
-                            />
+            </div>
 
+            <!-- Right Panel -->
+            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+                <!-- General -->
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
+                            @lang('admin::app.settings.themes.edit.general')
+                        </p>
+                    </x-slot>
+                
+                    <x-slot:content>
+                        <input
+                            type="hidden"
+                            name="type"
+                            value="footer_links"
+                        />
+
+                        <!-- Name -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.name')
@@ -193,6 +192,7 @@
                             <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
+                        <!-- Sort Order -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
@@ -213,6 +213,7 @@
                             <x-admin::form.control-group.error control-name="sort_order" />
                         </x-admin::form.control-group>
 
+                        <!-- Channels -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.channels')
@@ -232,6 +233,7 @@
                             <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
+                        <!-- Status -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.status')
@@ -289,7 +291,8 @@
                             type="hidden"
                             name="key"
                         />
-                        
+
+                        <!-- Column Select -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.column')
@@ -311,6 +314,7 @@
                             <x-admin::form.control-group.error control-name="column" />
                         </x-admin::form.control-group>
 
+                        <!-- Title -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.footer-title')
@@ -327,6 +331,7 @@
                             <x-admin::form.control-group.error control-name="title" />
                         </x-admin::form.control-group>
 
+                        <!-- URL -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.url')
@@ -343,6 +348,7 @@
                             <x-admin::form.control-group.error control-name="url" />
                         </x-admin::form.control-group>
 
+                        <!-- Sort Order -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
@@ -362,14 +368,12 @@
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
-                        <div class="flex items-center gap-x-2.5">
-                            <button 
-                                type="submit"
-                                class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
-                            >
-                                @lang('admin::app.settings.themes.edit.save-btn')
-                            </button>
-                        </div>
+                        <button 
+                            type="submit"
+                            class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
+                        >
+                            @lang('admin::app.settings.themes.edit.save-btn')
+                        </button>
                     </x-slot>
                 </x-admin::modal>
             </form>

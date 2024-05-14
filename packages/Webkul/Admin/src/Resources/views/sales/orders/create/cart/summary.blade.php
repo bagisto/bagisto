@@ -29,15 +29,51 @@
                     <!-- Sub Total -->
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.sub_total.before') !!}
 
-                    <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
-                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.sales.orders.create.cart.summary.sub-total')
-                        </p>
+                    <template v-if="displayTax.subtotal == 'including_tax'">
+                        <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.orders.create.cart.summary.sub-total')
+                            </p>
 
-                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
-                            @{{ cart.base_sub_total }}
-                        </p>
-                    </div>
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @{{ cart.formatted_sub_total_incl_tax }}
+                            </p>
+                        </div>
+                    </template>
+
+                    <template v-else-if="displayTax.subtotal == 'both'">
+                        <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.orders.create.cart.summary.sub-total-excl-tax')
+                            </p>
+
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @{{ cart.formatted_sub_total }}
+                            </p>
+                        </div>
+                        
+                        <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.orders.create.cart.summary.sub-total-incl-tax')
+                            </p>
+
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @{{ cart.formatted_sub_total_incl_tax }}
+                            </p>
+                        </div>
+                    </template>
+
+                    <template v-else>
+                        <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.orders.create.cart.summary.sub-total')
+                            </p>
+
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @{{ cart.formatted_sub_total }}
+                            </p>
+                        </div>
+                    </template>
 
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.sub_total.after') !!}
 
@@ -47,11 +83,11 @@
 
                     <div
                         class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right"
-                        v-for="(amount, index) in cart.base_tax_amounts"
-                        v-if="parseFloat(cart.base_tax_total)"
+                        v-for="(amount, index) in cart.tax_amounts"
+                        v-if="parseFloat(cart.tax_total)"
                     >
                         <p class="text-base font-medium text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.sales.orders.create.cart.summary.tax') (@{{ index }})%
+                            @lang('admin::app.sales.orders.create.cart.summary.tax') (@{{ index }})
                         </p>
 
                         <p class="text-base font-medium text-gray-600 dark:text-gray-300">
@@ -64,18 +100,53 @@
                     <!-- Shipping Rates -->
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.delivery_charges.before') !!}
 
-                    <div
-                        class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right"
-                        v-if="cart.selected_shipping_rate"
-                    >
-                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.sales.orders.create.cart.summary.shipping-amount')
-                        </p>
+                    <template v-if="displayTax.shipping == 'including_tax'">
+                        <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.orders.create.cart.summary.shipping-amount')
+                            </p>
 
-                        <p class="text-base font-medium text-gray-600 dark:text-gray-300">
-                            @{{ cart.selected_shipping_rate }}
-                        </p>
-                    </div>
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @{{ cart.formatted_shipping_amount_incl_tax }}
+                            </p>
+                        </div>
+                    </template>
+
+                    <template v-else-if="displayTax.shipping == 'both'">
+                        <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.orders.create.cart.summary.shipping-amount-excl-tax')
+                            </p>
+
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @{{ cart.formatted_shipping_amount }}
+                            </p>
+                        </div>
+                        
+                        <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.orders.create.cart.summary.shipping-amount-incl-tax')
+                            </p>
+
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @{{ cart.formatted_shipping_amount_incl_tax }}
+                            </p>
+                        </div>
+                    </template>
+
+                    <template v-else>
+                        <div class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right">
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.sales.orders.create.cart.summary.shipping-amount')
+                            </p>
+
+                            <p class="text-base font-medium text-gray-600 dark:text-gray-300">
+                                @{{ cart.formatted_shipping_amount }}
+                            </p>
+                        </div>
+                    </template>
+
+
 
                     {!! view_render_event('bagisto.admin.sales.order.create.left_component.summary.delivery_charges.after') !!}
 
@@ -84,14 +155,14 @@
 
                     <div
                         class="row grid grid-cols-2 grid-rows-1 justify-between gap-4 text-right"
-                        v-if="parseFloat(cart.base_discount_amount)"
+                        v-if="parseFloat(cart.discount_amount)"
                     >
                         <p class="text-base font-medium text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.orders.create.cart.summary.discount-amount')
                         </p>
 
                         <p class="text-base font-medium text-gray-600 dark:text-gray-300">
-                            @{{ cart.formatted_base_discount_amount }}
+                            @{{ cart.formatted_discount_amount }}
                         </p>
                     </div>
 
@@ -143,7 +214,7 @@
                         </p>
 
                         <p class="text-lg font-semibold dark:text-white">
-                            @{{ cart.base_grand_total }}
+                            @{{ cart.formatted_grand_total }}
                         </p>
                     </div>
 
@@ -217,6 +288,14 @@
 
             data() {
                 return {
+                    displayTax: {
+                        prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
+
+                        subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
+                        
+                        shipping: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_shipping_amount') }}",
+                    },
+                    
                     isStoring: false,
 
                     isPlacingOrder: false,

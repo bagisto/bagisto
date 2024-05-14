@@ -31,6 +31,7 @@
             <x-admin::form
                 method="POST"
                 :action="route('admin.sales.refunds.store', $order->id)"
+                ref="refundForm"
             >
                 <x-admin::drawer ref="refund">
                     <!-- Drawer Header -->
@@ -45,11 +46,11 @@
                                     <!-- Update Quantity Button -->
 
                                     @if (bouncer()->hasPermission('sales.refunds.create'))
-                                        <div
-                                            class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800"
-                                            @click="updateQty"
+                                        <div 
+                                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800"
+                                            @click="updateTotals"
                                         >
-                                            @lang('admin::app.sales.refunds.create.update-quantity-btn')
+                                            @lang('admin::app.sales.refunds.create.update-totals-btn')
                                         </div>
 
                                         <!-- Refund Submit Button -->
@@ -214,7 +215,7 @@
                             </div>
 
                             <div
-                                v-if="refund.summary"
+                                v-if="totals"
                                 class="mt-2.5 grid grid-cols-3 gap-x-5"
                             >
                                 <!-- Refund Shipping -->
@@ -227,8 +228,8 @@
                                         type="text"
                                         id="refund[shipping]"
                                         name="refund[shipping]" 
+                                        v-model="refund.shipping"
                                         :rules="'required|min_value:0|max_value:' . $order->base_shipping_invoiced - $order->base_shipping_refunded"
-                                        v-model="refund.summary.shipping.price"
                                         :label="trans('admin::app.sales.refunds.create.refund-shipping')"
                                     />
 
@@ -245,7 +246,7 @@
                                         type="text"
                                         id="refund[adjustment_refund]" 
                                         name="refund[adjustment_refund]"
-                                        value="0"
+                                        v-model="refund.adjustment_refund"
                                         rules="required|min_value:0"
                                         :label="trans('admin::app.sales.refunds.create.adjustment-refund')"
                                     />
@@ -263,8 +264,8 @@
                                         type="text"
                                         id="refund[adjustment_fee]" 
                                         name="refund[adjustment_fee]"
+                                        v-model="refund.adjustment_fee"
                                         rules="required|min_value:0"
-                                        value="0"
                                         :label="trans('admin::app.sales.refunds.create.adjustment-fee')"
                                     />
 
@@ -294,19 +295,19 @@
 
                                 <div class="flex flex-col gap-y-1.5">
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @{{ refund.summary.subtotal.formatted_price }}
+                                        @{{ totals.subtotal.formatted_price }}
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @{{ refund.summary.discount.formatted_price }}
+                                        @{{ totals.discount.formatted_price }}
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @{{ refund.summary.tax.formatted_price }}
+                                        @{{ totals.tax.formatted_price }}
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        @{{ refund.summary.grand_total.formatted_price }}
+                                        @{{ totals.grand_total.formatted_price }}
                                     </p>
                                 </div>
                             </div>
@@ -326,8 +327,14 @@
                     refund: {
                         items: {},
 
-                        summary: null
-                    }
+                        shipping: "{{ $order->base_shipping_invoiced - $order->base_shipping_refunded - $order->base_shipping_discount_amount }}",
+
+                        adjustment_refund: 0,
+                        
+                        adjustment_fee: 0,
+                    },
+
+                    totals: null,
                 };
             },
 
@@ -336,21 +343,20 @@
                     this.refund.items[{{$item->id}}] = {{ $item->qty_to_refund }};
                 @endforeach
                 
-                this.updateQty();
+                this.updateTotals();
             },
 
             methods: {
-                updateQty() {
-                    this.$axios.post("{{ route('admin.sales.refunds.update_qty', $order->id) }}", this.refund.items)
+                updateTotals() {
+                    var self = this;
+                    
+                    this.$axios.post("{{ route('admin.sales.refunds.update_totals', $order->id) }}", this.refund)
                         .then((response) => {
-
-                            if (! response.data) {
-                                this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.sales.refunds.invalid-qty')" });
-                            } else {
-                                this.refund.summary = response.data;
-                            }
+                            this.totals = response.data;
                         })
-                        .catch((error) => {})
+                        .catch((error) => {
+                            self.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
+                        })
                 }
             },
         });

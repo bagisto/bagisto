@@ -32,7 +32,7 @@ class OrderController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(OrderDataGrid::class)->toJson();
+            return datagrid(OrderDataGrid::class)->process();
         }
 
         return view('shop::customers.account.orders.index');

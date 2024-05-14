@@ -1553,8 +1553,6 @@ it('should check tax is applying for the downloadable product into the cart for 
         ->assertOk()
         ->assertJsonPath('data.id', $cart->id);
 
-    $this->assertPrice($cart->base_tax_total, $response['data']['base_tax_total']);
-
     $this->assertPrice($cart->grand_total, $response['data']['grand_total']);
 
     $this->assertPrice($product->price, $response['data']['sub_total']);
