@@ -97,7 +97,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.after') !!}
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.before') !!}
-                                
+
                                 <template v-if="displayTax.prices == 'including_tax'">
                                     <p class="text-lg">
                                         @{{ item.formatted_price_incl_tax }}
@@ -254,7 +254,7 @@
                                 </p>
                             </template>
                         </template>
-                        
+
                         <template v-else>
                             <div class="flex items-center justify-center">
                                 <!-- Spinner -->
