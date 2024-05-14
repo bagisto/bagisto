@@ -2,8 +2,8 @@
 
 namespace Webkul\DataGrid\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Webkul\DataGrid\Contracts\Filter as FilterContract;
 
 class Filter extends Model implements FilterContract

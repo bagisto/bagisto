@@ -2,7 +2,6 @@
 
 namespace Webkul\DataGrid\Http\Controllers;
 
-
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\DataGrid\Repositories\FilterRepository;
 
@@ -20,7 +19,7 @@ class FilterController extends Controller
      */
     public function store()
     {
-        return  $this->filterRepository->create(request()->all());
+        return $this->filterRepository->create(request()->all());
     }
 
     /**
@@ -31,4 +30,3 @@ class FilterController extends Controller
         return $this->filterRepository->where('src', request()->get('src'))->get();
     }
 }
-
