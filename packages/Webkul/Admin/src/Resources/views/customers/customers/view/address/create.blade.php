@@ -268,7 +268,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="phone"
-                                    rules="required|integer"
+                                    rules="required|phone"
                                     :label="trans('admin::app.customers.customers.view.address.create.phone')"
                                     :placeholder="trans('admin::app.customers.customers.view.address.create.phone')"
                                 />
