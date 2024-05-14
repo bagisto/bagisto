@@ -191,8 +191,8 @@
 
                                         <!-- Information -->
                                         @foreach ($order->channel->inventory_sources as $inventorySource)
-                                            <div class="mt-2.5 flex justify-between gap-2.5 border-b border-slate-300 pb-2.5 dark:border-gray-800">
-                                                <div class="grid gap-2.5">
+                                            <div class="grid grid-cols-2 gap-2.5 border-b border-slate-300 py-2.5 dark:border-gray-800">
+                                                <div class="grid gap-1">
                                                     <!--Inventory Source -->
                                                     <p class="text-base font-semibold text-gray-800 dark:text-white">
                                                         {{ $inventorySource->name }}
@@ -212,17 +212,17 @@
                                                     </p>
                                                 </div>
 
-                                                <div class="flex items-center gap-2.5">
+                                                <div class="grid ltr:text-right rtl:text-left">
                                                     @php
                                                         $inputName = "shipment[items][$item->id][$inventorySource->id]";
                                                     @endphp
 
                                                     <!-- Quantity  To Ship -->
-                                                    <x-admin::form.control-group.label class="required">
-                                                        @lang('admin::app.sales.shipments.create.qty-to-ship')
-                                                    </x-admin::form.control-group.label>
-
                                                     <x-admin::form.control-group class="!mb-0">
+                                                        <x-admin::form.control-group.label class="required !block">
+                                                            @lang('admin::app.sales.shipments.create.qty-to-ship')
+                                                        </x-admin::form.control-group.label>
+                                                        
                                                         <x-admin::form.control-group.control
                                                             type="text"
                                                             class="!w-[100px]"

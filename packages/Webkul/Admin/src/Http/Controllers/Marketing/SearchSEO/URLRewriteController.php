@@ -29,7 +29,7 @@ class URLRewriteController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(URLRewriteDataGrid::class)->toJson();
+            return datagrid(URLRewriteDataGrid::class)->process();
         }
 
         return view('admin::marketing.search-seo.url-rewrites.index');

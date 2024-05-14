@@ -28,7 +28,7 @@ class CustomerGroupController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(GroupDataGrid::class)->toJson();
+            return datagrid(GroupDataGrid::class)->process();
         }
 
         return view('admin::customers.groups.index');

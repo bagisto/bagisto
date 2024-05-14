@@ -37,7 +37,7 @@ class Simple extends AbstractType
             return true;
         }
 
-        return $qty <= $this->totalQuantity() ?: (bool) core()->getConfigData('catalog.inventory.stock_options.back_orders');
+        return $qty <= $this->totalQuantity() ?: (bool) core()->getConfigData('sales.order_settings.stock_options.back_orders');
     }
 
     /**

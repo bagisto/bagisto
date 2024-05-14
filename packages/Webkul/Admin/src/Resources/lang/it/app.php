@@ -3422,17 +3422,6 @@ return [
                 'info'  => 'Catalogo',
                 'title' => 'Catalogo',
 
-                'inventory' => [
-                    'info'  => 'Imposta gli ordini differiti',
-                    'title' => 'Inventario',
-
-                    'stock-options' => [
-                        'allow-back-orders'  => 'Consenti ordini differiti',
-                        'title'              => 'Opzioni di Magazzino',
-                        'title-info'         => 'Le opzioni di magazzino sono contratti di investimento che concedono il diritto di acquistare o vendere azioni di una società a un prezzo predeterminato, influenzando i profitti potenziali.',
-                    ],
-                ],
-
                 'products' => [
                     'info'  => 'Imposta il checkout per gli ospiti, la pagina di visualizzazione del prodotto, la pagina del carrello, il front-end del negozio, la revisione e la condivisione sociale degli attributi.',
                     'title' => 'Prodotti',
@@ -3746,7 +3735,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Imposta i numeri d\'ordine e gli ordini minimi.',
+                    'info'  => 'Impostare numeri d\'ordine, ordini minimi e ordini di reintroito.',
                     'title' => 'Impostazioni degli Ordini',
 
                     'order-number' => [
@@ -3762,6 +3751,12 @@ return [
                         'minimum-order-amount' => 'Importo Minimo d\'Ordine',
                         'title'                => 'Impostazioni Ordine Minimo',
                         'title-info'           => 'Criteri configurati che specificano la quantità o il valore minimo richiesto per elaborare un ordine o per usufruire di vantaggi.',
+                    ],
+
+                    'stock-options' => [
+                        'allow-back-orders' => 'Consenti ordini differiti',
+                        'title'             => 'Opzioni di Magazzino',
+                        'title-info'        => 'Le opzioni di magazzino sono contratti di investimento che concedono il diritto di acquistare o vendere azioni di una società a un prezzo predeterminato, influenzando i profitti potenziali.',
                     ],
                 ],
 

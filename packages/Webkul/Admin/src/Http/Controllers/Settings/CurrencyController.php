@@ -28,7 +28,7 @@ class CurrencyController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(CurrencyDataGrid::class)->toJson();
+            return datagrid(CurrencyDataGrid::class)->process();
         }
 
         return view('admin::settings.currencies.index', [

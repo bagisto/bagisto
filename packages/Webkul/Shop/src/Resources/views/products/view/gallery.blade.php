@@ -111,7 +111,7 @@
             <div class="scrollbar-hide flex w-screen gap-8 overflow-auto 1180:hidden">
                 <x-shop::media.images.lazy
                     ::src="image.large_image_url"
-                    class="w-[490px] min-w-[450px] max-sm:min-w-full"
+                    class="h-[404px] w-[490px] max-sm:min-w-full"
                     v-for="(image, index) in media.images"
                     @click="isImageZooming = !isImageZooming"
                 />
