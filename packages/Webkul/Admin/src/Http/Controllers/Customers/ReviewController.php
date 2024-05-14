@@ -29,7 +29,7 @@ class ReviewController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(ReviewDataGrid::class)->toJson();
+            return datagrid(ReviewDataGrid::class)->process();
         }
 
         return view('admin::customers.reviews.index');

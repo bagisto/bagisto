@@ -1,7 +1,7 @@
 <x-shop::layouts.account>
     <!-- Page Title -->
     <x-slot:title>
-        @lang('shop::app.customers.account.addresses.add-address')
+        @lang('shop::app.customers.account.addresses.create.add-address')
     </x-slot>
 
     <!-- Breadcrumbs -->
@@ -10,7 +10,7 @@
     @endSection
 
     <h2 class="mb-8 text-2xl font-medium">
-        @lang('shop::app.customers.account.addresses.add-address')
+        @lang('shop::app.customers.account.addresses.create.add-address')
     </h2>
 
     <v-create-customer-address>
@@ -30,15 +30,15 @@
                     <!--Company Name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
-                            @lang('shop::app.customers.account.addresses.company-name')
+                            @lang('shop::app.customers.account.addresses.create.company-name')
                         </x-shop::form.control-group.label>
             
                         <x-shop::form.control-group.control
                             type="text"
                             name="company_name"
                             :value="old('company_name')"
-                            :label="trans('shop::app.customers.account.addresses.company-name')"
-                            :placeholder="trans('shop::app.customers.account.addresses.company-name')"
+                            :label="trans('shop::app.customers.account.addresses.create.company-name')"
+                            :placeholder="trans('shop::app.customers.account.addresses.create.company-name')"
                         />
             
                         <x-shop::form.control-group.error control-name="company_name" />
@@ -49,7 +49,7 @@
                     <!-- First Name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
-                            @lang('shop::app.customers.account.addresses.first-name')
+                            @lang('shop::app.customers.account.addresses.create.first-name')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
@@ -57,8 +57,8 @@
                             name="first_name"
                             rules="required"
                             :value="old('first_name')"
-                            :label="trans('shop::app.customers.account.addresses.first-name')"
-                            :placeholder="trans('shop::app.customers.account.addresses.first-name')"
+                            :label="trans('shop::app.customers.account.addresses.create.first-name')"
+                            :placeholder="trans('shop::app.customers.account.addresses.create.first-name')"
                         />
 
                         <x-shop::form.control-group.error control-name="first_name" />
@@ -69,7 +69,7 @@
                     <!-- Last Name  -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
-                            @lang('shop::app.customers.account.addresses.last-name')
+                            @lang('shop::app.customers.account.addresses.create.last-name')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
@@ -77,8 +77,8 @@
                             name="last_name"
                             rules="required"
                             :value="old('last_name')"
-                            :label="trans('shop::app.customers.account.addresses.last-name')"
-                            :placeholder="trans('shop::app.customers.account.addresses.last-name')"
+                            :label="trans('shop::app.customers.account.addresses.create.last-name')"
+                            :placeholder="trans('shop::app.customers.account.addresses.create.last-name')"
                         />
 
                         <x-shop::form.control-group.error control-name="last_name" />
@@ -89,7 +89,7 @@
                     <!-- E-mail -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
-                            @lang('shop::app.customers.account.addresses.email')
+                            @lang('shop::app.customers.account.addresses.create.email')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
@@ -97,8 +97,8 @@
                             name="email"
                             rules="required|email"
                             :value="old('email')"
-                            :label="trans('shop::app.customers.account.addresses.email')"
-                            :placeholder="trans('shop::app.customers.account.addresses.email')"
+                            :label="trans('shop::app.customers.account.addresses.create.email')"
+                            :placeholder="trans('shop::app.customers.account.addresses.create.email')"
                         />
 
                         <x-shop::form.control-group.error control-name="email" />
@@ -109,15 +109,15 @@
                     <!-- Vat Id -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
-                            @lang('shop::app.customers.account.addresses.vat-id')
+                            @lang('shop::app.customers.account.addresses.create.vat-id')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
                             type="text"
                             name="vat_id"
                             :value="old('vat_id')"
-                            :label="trans('shop::app.customers.account.addresses.vat-id')"
-                            :placeholder="trans('shop::app.customers.account.addresses.vat-id')"
+                            :label="trans('shop::app.customers.account.addresses.create.vat-id')"
+                            :placeholder="trans('shop::app.customers.account.addresses.create.vat-id')"
                         />
 
                         <x-shop::form.control-group.error control-name="vat_id" />
@@ -128,7 +128,7 @@
                     <!-- Street Address -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
-                            @lang('shop::app.customers.account.addresses.street-address')
+                            @lang('shop::app.customers.account.addresses.create.street-address')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
@@ -136,8 +136,8 @@
                             name="address[]"
                             rules="required|address"
                             :value="collect(old('address'))->first()"
-                            :label="trans('shop::app.customers.account.addresses.street-address')"
-                            :placeholder="trans('shop::app.customers.account.addresses.street-address')"
+                            :label="trans('shop::app.customers.account.addresses.create.street-address')"
+                            :placeholder="trans('shop::app.customers.account.addresses.create.street-address')"
                         />
 
                         <x-shop::form.control-group.error control-name="address[]" />
@@ -155,8 +155,8 @@
                                 name="address[{{ $i }}]"
                                 :value="old('address[{{ $i }}]')"
                                 rules="address"
-                                :label="trans('shop::app.customers.account.addresses.street-address')"
-                                :placeholder="trans('shop::app.customers.account.addresses.street-address')"
+                                :label="trans('shop::app.customers.account.addresses.create.street-address')"
+                                :placeholder="trans('shop::app.customers.account.addresses.create.street-address')"
                             />
 
                             <x-shop::form.control-group.error
@@ -171,7 +171,7 @@
                     <!-- Country List-->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }}">
-                            @lang('shop::app.customers.account.addresses.country')
+                            @lang('shop::app.customers.account.addresses.create.country')
                         </x-shop::form.control-group.label>
             
                         <x-shop::form.control-group.control
@@ -179,11 +179,11 @@
                             name="country"
                             rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                             v-model="country"
-                            aria-label="trans('shop::app.customers.account.addresses.country')"
-                            :label="trans('shop::app.customers.account.addresses.country')"
+                            aria-label="trans('shop::app.customers.account.addresses.create.country')"
+                            :label="trans('shop::app.customers.account.addresses.create.country')"
                         >
                             <option value="">
-                                @lang('shop::app.customers.account.addresses.select-country')
+                                @lang('shop::app.customers.account.addresses.create.select-country')
                             </option>
             
                             @foreach (core()->countries() as $country)
@@ -197,7 +197,7 @@
                     <!-- State Name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }}">
-                            @lang('shop::app.customers.account.addresses.state')
+                            @lang('shop::app.customers.account.addresses.create.state')
                         </x-shop::form.control-group.label>
         
                         <template v-if="haveStates()">
@@ -207,8 +207,8 @@
                                 name="state"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                 v-model="state"
-                                :label="trans('shop::app.customers.account.addresses.state')"
-                                :placeholder="trans('shop::app.customers.account.addresses.state')"
+                                :label="trans('shop::app.customers.account.addresses.create.state')"
+                                :placeholder="trans('shop::app.customers.account.addresses.create.state')"
                             >
                                 <option 
                                     v-for='(state, index) in countryStates[country]'
@@ -225,8 +225,8 @@
                                 name="state"
                                 :value="old('state')"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                                :label="trans('shop::app.customers.account.addresses.state')"
-                                :placeholder="trans('shop::app.customers.account.addresses.state')"
+                                :label="trans('shop::app.customers.account.addresses.create.state')"
+                                :placeholder="trans('shop::app.customers.account.addresses.create.state')"
                             />
                         </template>
         
@@ -238,7 +238,7 @@
                     <!-- City -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
-                            @lang('shop::app.customers.account.addresses.city')
+                            @lang('shop::app.customers.account.addresses.create.city')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
@@ -246,8 +246,8 @@
                             name="city"
                             rules="required"
                             :value="old('city')"
-                            :label="trans('shop::app.customers.account.addresses.city')"
-                            :placeholder="trans('shop::app.customers.account.addresses.city')"
+                            :label="trans('shop::app.customers.account.addresses.create.city')"
+                            :placeholder="trans('shop::app.customers.account.addresses.create.city')"
                         />
 
                         <x-shop::form.control-group.error control-name="city" />
@@ -258,7 +258,7 @@
                     <!-- Post Code -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }}">
-                            @lang('shop::app.customers.account.addresses.post-code')
+                            @lang('shop::app.customers.account.addresses.create.post-code')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
@@ -266,8 +266,8 @@
                             name="postcode"
                             rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|numeric"
                             :value="old('postcode')"
-                            :label="trans('shop::app.customers.account.addresses.post-code')"
-                            :placeholder="trans('shop::app.customers.account.addresses.post-code')"
+                            :label="trans('shop::app.customers.account.addresses.create.post-code')"
+                            :placeholder="trans('shop::app.customers.account.addresses.create.post-code')"
                         />
 
                         <x-shop::form.control-group.error control-name="postcode" />
@@ -278,16 +278,16 @@
                     <!-- Contact -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
-                            @lang('shop::app.customers.account.addresses.phone')
+                            @lang('shop::app.customers.account.addresses.create.phone')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
                             type="text"
                             name="phone"
-                            rules="required|integer"
+                            rules="required|phone"
                             :value="old('phone')"
-                            :label="trans('shop::app.customers.account.addresses.phone')"
-                            :placeholder="trans('shop::app.customers.account.addresses.phone')"
+                            :label="trans('shop::app.customers.account.addresses.create.phone')"
+                            :placeholder="trans('shop::app.customers.account.addresses.create.phone')"
                         />
 
                         <x-shop::form.control-group.error control-name="phone" />
@@ -315,7 +315,7 @@
                             class="block cursor-pointer text-base"
                             for="default_address"
                         >
-                            @lang('shop::app.customers.account.addresses.set-as-default')
+                            @lang('shop::app.customers.account.addresses.create.set-as-default')
                         </label>
                     </div>
 
@@ -323,7 +323,7 @@
                         type="submit"
                         class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base"
                     >
-                        @lang('shop::app.customers.account.addresses.save')
+                        @lang('shop::app.customers.account.addresses.create.save')
                     </button>
 
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.after') !!}

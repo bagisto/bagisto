@@ -102,25 +102,27 @@
                                             </div>
                                         </div>
 
-                                        <!-- Quantity Details -->
-                                        <x-admin::form.control-group>
-                                            <x-admin::form.control-group.label class="required">
-                                                @lang('admin::app.sales.invoices.create.qty-to-invoiced')
-                                            </x-admin::form.control-group.label>
-        
-                                            <x-admin::form.control-group.control
-                                                type="text"
-                                                class="!w-[100px]"
-                                                :id="'invoice[items][' . $item->id . ']'"
-                                                :name="'invoice[items][' . $item->id . ']'"
-                                                rules="required|numeric|min:0" 
-                                                :value="$item->qty_to_invoice"
-                                                :label="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
-                                                :placeholder="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
-                                            />
-        
-                                            <x-admin::form.control-group.error :control-name="'invoice[items][' . $item->id . ']'" />
-                                        </x-admin::form.control-group>
+                                        <div class="grid ltr:text-right rtl:text-left">
+                                            <!-- Quantity Details -->
+                                            <x-admin::form.control-group>
+                                                <x-admin::form.control-group.label class="required !block">
+                                                    @lang('admin::app.sales.invoices.create.qty-to-invoiced')
+                                                </x-admin::form.control-group.label>
+            
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    class="!w-[100px]"
+                                                    :id="'invoice[items][' . $item->id . ']'"
+                                                    :name="'invoice[items][' . $item->id . ']'"
+                                                    rules="required|numeric|min:0" 
+                                                    :value="$item->qty_to_invoice"
+                                                    :label="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
+                                                    :placeholder="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
+                                                />
+            
+                                                <x-admin::form.control-group.error :control-name="'invoice[items][' . $item->id . ']'" />
+                                            </x-admin::form.control-group>
+                                        </div>
                                     </div>
                                 @endif
                             @endforeach

@@ -131,7 +131,7 @@
                     </div>
 
                     <!-- Empty Page -->
-                    <div    
+                    <div
                         class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                         v-else
                     >
@@ -231,6 +231,7 @@
                             <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
+                        <!-- Status -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.services-content.status')

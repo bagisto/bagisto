@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(CategoryDataGrid::class)->toJson();
+            return datagrid(CategoryDataGrid::class)->process();
         }
 
         return view('admin::catalog.categories.index');

@@ -87,7 +87,7 @@
                                 type="text"
                                 id="phone"
                                 name="phone"
-                                rules="integer"
+                                rules="phone"
                                 :label="trans('admin::app.customers.customers.index.create.contact-number')"
                                 :placeholder="trans('admin::app.customers.customers.index.create.contact-number')"
                             />

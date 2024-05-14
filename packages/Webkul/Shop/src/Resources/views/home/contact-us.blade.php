@@ -71,6 +71,7 @@
                             type="text"
                             class="px-6 py-5"
                             name="contact"
+                            rules="phone"
                             :value="old('contact')"
                             :label="trans('shop::app.home.contact.phone-number')"
                             :placeholder="trans('shop::app.home.contact.phone-number')"

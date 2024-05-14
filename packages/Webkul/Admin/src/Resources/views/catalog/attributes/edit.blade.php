@@ -15,7 +15,7 @@
         enctype="multipart/form-data"
         method="PUT"
     >
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.catalog.attributes.edit.title')
             </p>
@@ -54,9 +54,9 @@
             id="v-edit-attributes-template"
         >
             <!-- body content -->
-            <div class="mt-3.5 flex gap-2.5">
+            <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <!-- Left sub Component -->
-                <div class="flex flex-1 flex-col gap-2 overflow-auto">
+                <div class="flex flex-1 flex-col gap-2 overflow-auto max-xl:flex-auto">
 
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
@@ -107,7 +107,7 @@
 
                     <!-- Options -->
                     <div
-                        class="p-4 bg-white dark:bg-gray-900 box-shadow rounded {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
+                        class="box-shadow rounded bg-white p-4 dark:bg-gray-900 {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
                         v-if="showSwatch"
                     >
                         <div class="mb-3 flex items-center justify-between">
@@ -374,14 +374,14 @@
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
                     <!-- General -->
-                    <div class="box-shadow rounded bg-white dark:bg-gray-900">
-                        <div class="flex items-center justify-between p-1.5">
+                    <x-admin::accordion>
+                        <x-slot:header>
                             <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.edit.general')
                             </p>
-                        </div>
+                        </x-slot>
 
-                        <div class="px-4 pb-4">
+                        <x-slot:content>
                             <!-- Attribute Code -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -493,9 +493,9 @@
 
                                 <x-admin::form.control-group.error control-name="default_value" />
                             </x-admin::form.control-group>
-                        </div>
-                    </div>
-
+                        </x-slot>
+                    </x-admin::accordion>
+                    
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.after', ['attribute' => $attribute]) !!}
 
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.before', ['attribute' => $attribute]) !!}
@@ -1028,15 +1028,21 @@
                     },
 
                     removeOption(id) {
-                        let foundIndex = this.optionsData.findIndex(item => item.id === id);
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                let foundIndex = this.optionsData.findIndex(item => item.id === id);
 
-                        if (foundIndex !== -1) {
-                            if (this.optionsData[foundIndex].isNew) {
-                                this.optionsData.splice(foundIndex, 1);
-                            } else {
-                                this.optionsData[foundIndex].isDelete = true;
+                                if (foundIndex !== -1) {
+                                    if (this.optionsData[foundIndex].isNew) {
+                                        this.optionsData.splice(foundIndex, 1);
+                                    } else {
+                                        this.optionsData[foundIndex].isDelete = true;
+                                    }
+                                }
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: "@lang('admin::app.catalog.attributes.edit.option-deleted')" });
                             }
-                        }
+                        });
                     },
 
                     listenModel(event) {

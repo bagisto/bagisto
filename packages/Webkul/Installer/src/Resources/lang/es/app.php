@@ -184,136 +184,136 @@ return [
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'Predeterminado',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'Todos los Productos',
 
                     'options' => [
-                        'title' => 'All Products',
+                        'title' => 'Todos los Productos',
                     ],
                 ],
 
                 'bold-collections' => [
                     'content' => [
-                        'btn-title'   => 'View All',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'title'       => 'Get Ready for our new Bold Collections!',
+                        'btn-title'   => 'Ver Todo',
+                        'description' => '¡Presentamos Nuestras Nuevas Colecciones Audaces! Eleva tu estilo con diseños atrevidos y declaraciones vibrantes. Explora patrones llamativos y colores audaces que redefinen tu armario. ¡Prepárate para abrazar lo extraordinario!',
+                        'title'       => '¡Prepárate para nuestras nuevas Colecciones Audaces!',
                     ],
 
-                    'name' => 'Bold Collections',
+                    'name' => 'Colecciones Audaces',
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'Colecciones de Categorías',
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'Colecciones Destacadas',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'Productos Destacados',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name' => 'Enlaces del Pie de Página',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'payment-policy'   => 'Payment Policy',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'refund-policy'    => 'Refund Policy',
-                        'return-policy'    => 'Return Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'terms-of-use'     => 'Terms of Use',
-                        'whats-new'        => 'What\'s New',
+                        'about-us'         => 'Acerca de Nosotros',
+                        'contact-us'       => 'Contáctenos',
+                        'customer-service' => 'Servicio al Cliente',
+                        'payment-policy'   => 'Política de Pago',
+                        'privacy-policy'   => 'Política de Privacidad',
+                        'refund-policy'    => 'Política de Devolución',
+                        'return-policy'    => 'Política de Retorno',
+                        'shipping-policy'  => 'Política de Envío',
+                        'terms-conditions' => 'Términos y Condiciones',
+                        'terms-of-use'     => 'Términos de Uso',
+                        'whats-new'        => 'Novedades',
                     ],
                 ],
 
                 'game-container' => [
                     'content' => [
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'title'       => 'The game with our new additions!',
+                        'sub-title-1' => 'Nuestras Colecciones',
+                        'sub-title-2' => 'Nuestras Colecciones',
+                        'title'       => '¡El juego con nuestras nuevas adiciones!',
                     ],
 
-                    'name' => 'Game Container',
+                    'name' => 'Contenedor de Juegos',
                 ],
 
                 'image-carousel' => [
-                    'name' => 'Image Carousel',
+                    'name' => 'Carrusel de Imágenes',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'Prepárate para la Nueva Colección',
                     ],
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'Nuevos Productos',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'Nuevos Productos',
                     ],
                 ],
 
                 'offer-information' => [
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => '¡Hasta un 40% DE DESCUENTO en tu primer pedido COMPRA AHORA!',
                     ],
 
-                    'name' => 'Offer Information',
+                    'name' => 'Información de Oferta',
                 ],
 
                 'services-content' => [
                     'description' => [
-                        'emi-available-info'   => 'Keine Kosten EMI auf allen gängigen Kreditkarten verfügbar',
-                        'free-shipping-info'   => 'Kostenloser Versand bei allen Bestellungen',
-                        'product-replace-info' => 'Einfacher Produktersatz verfügbar!',
-                        'time-support-info'    => 'Dedizierter 24/7 Support per Chat und E-Mail',
+                        'emi-available-info'   => 'EMI sin costo disponible en todas las tarjetas de crédito comunes',
+                        'free-shipping-info'   => 'Envío gratuito en todos los pedidos',
+                        'product-replace-info' => '¡Reemplazo de producto sencillo disponible!',
+                        'time-support-info'    => 'Soporte dedicado 24/7 por chat y correo electrónico',
                     ],
 
-                    'name' => 'Dienstleistungen Inhalt',
+                    'name' => 'Contenido de Servicios',
 
                     'title' => [
-                        'emi-available'   => 'EMI verfügbar',
-                        'free-shipping'   => 'Kostenloser Versand',
-                        'product-replace' => 'Produkt ersetzen',
-                        'time-support'    => '24/7 Support',
+                        'emi-available'   => 'EMI disponible',
+                        'free-shipping'   => 'Envío gratuito',
+                        'product-replace' => 'Reemplazo de producto',
+                        'time-support'    => 'Soporte 24/7',
                     ],
                 ],
 
                 'top-collections' => [
                     'content' => [
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
-                        'title'       => 'The game with our new additions!',
+                        'sub-title-1' => 'Nuestras Colecciones',
+                        'sub-title-2' => 'Nuestras Colecciones',
+                        'sub-title-3' => 'Nuestras Colecciones',
+                        'sub-title-4' => 'Nuestras Colecciones',
+                        'sub-title-5' => 'Nuestras Colecciones',
+                        'sub-title-6' => 'Nuestras Colecciones',
+                        'title'       => '¡El juego con nuestras nuevas adiciones!',
                     ],
 
-                    'name' => 'Top Collections',
+                    'name' => 'Mejores Colecciones',
                 ],
             ],
         ],
 
         'user' => [
             'roles' => [
-                'description' => 'This role users will have all the access',
-                'name'        => 'Administrator',
+                'description' => 'Los usuarios con este rol tendrán acceso a todo',
+                'name'        => 'Administrador',
             ],
 
             'users' => [
-                'name' => 'Example',
+                'name' => 'Ejemplo',
             ],
         ],
     ],

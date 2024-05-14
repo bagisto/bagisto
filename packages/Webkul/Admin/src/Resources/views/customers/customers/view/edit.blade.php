@@ -114,7 +114,7 @@
                                     name="phone"
                                     ::value="customer.phone"
                                     id="phone"
-                                    rules="integer"
+                                    rules="phone"
                                     :label="trans('admin::app.customers.customers.view.edit.contact-number')"
                                     :placeholder="trans('admin::app.customers.customers.view.edit.contact-number')"
                                 />

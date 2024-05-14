@@ -111,25 +111,40 @@
 
             <tbody style="font-size: 16px;font-weight: 400;color: #384860;">
                 @foreach ($refund->items as $item)
-                    <tr>
+                    <tr style="vertical-align: text-top;">
                         <td style="text-align: left;padding: 15px">
                             {{ $item->name }}
 
                             @if (isset($item->additional['attributes']))
                                 <div>
-
                                     @foreach ($item->additional['attributes'] as $attribute)
                                         <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
                                     @endforeach
-
                                 </div>
                             @endif
                         </td>
 
-                        <td style="text-align: left;padding: 15px">{{ core()->formatPrice($item->price, $refund->order_currency_code) }}
+                        <td style="display: flex;flex-direction: column;text-align: left;padding: 15px">
+                            @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                {{ core()->formatPrice($item->price_incl_tax, $refund->order_currency_code) }}
+                            @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                {{ core()->formatPrice($item->price_incl_tax, $refund->order_currency_code) }}
+
+                                <span style="font-size: 12px; white-space: nowrap">
+                                    @lang('shop::app.emails.orders.excl-tax')
+
+                                    <span style="font-weight: 600">
+                                        {{ core()->formatPrice($item->price, $refund->order_currency_code) }}
+                                    </span>
+                                </span>
+                            @else
+                                {{ core()->formatPrice($item->price, $refund->order_currency_code) }}
+                            @endif
                         </td>
 
-                        <td style="text-align: left;padding: 15px">{{ $item->qty }}</td>
+                        <td style="text-align: left;padding: 15px">
+                            {{ $item->qty }}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -137,39 +152,102 @@
     </div>
 
     <div style="display: grid;justify-content: end;font-size: 16px;color: #384860;line-height: 30px;padding-top: 20px;padding-bottom: 20px;">
-        <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-            <span>
-                @lang('shop::app.emails.orders.subtotal')
-            </span>
 
-            <span style="text-align: right;">
-                {{ core()->formatPrice($refund->sub_total, $refund->order_currency_code) }}
-            </span>
-        </div>
-
-        @if ($refund->order->shipping_address)
-            <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+        @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
                 <span>
-                    @lang('shop::app.emails.orders.shipping-handling')
+                    @lang('shop::app.emails.orders.subtotal')
                 </span>
 
                 <span style="text-align: right;">
-                    {{ core()->formatPrice($refund->shipping_amount, $refund->order_currency_code) }}
+                    {{ core()->formatPrice($refund->sub_total, $refund->order_currency_code_incl_tax) }}
+                </span>
+            </div>
+        @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <span>
+                    @lang('shop::app.emails.orders.subtotal-excl-tax')
+                </span>
+
+                <span style="text-align: right;">
+                    {{ core()->formatPrice($refund->sub_total, $refund->order_currency_code) }}
+                </span>
+            </div>
+
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <span>
+                    @lang('shop::app.emails.orders.subtotal-incl-tax')
+                </span>
+
+                <span style="text-align: right;">
+                    {{ core()->formatPrice($refund->sub_total, $refund->order_currency_code_incl_tax) }}
+                </span>
+            </div>
+        @else
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <span>
+                    @lang('shop::app.emails.orders.subtotal')
+                </span>
+
+                <span style="text-align: right;">
+                    {{ core()->formatPrice($refund->sub_total, $refund->order_currency_code) }}
                 </span>
             </div>
         @endif
 
-        @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($refund->order, false) as $taxRate => $taxAmount )
-            <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-                <span>
-                    @lang('shop::app.emails.orders.tax') {{ $taxRate }} %
-                </span>
+        @if ($refund->order->shipping_address)
+            @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'including_tax')
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('shop::app.emails.orders.shipping-handling')
+                    </span>
 
-                <span style="text-align: right;">
-                    {{ core()->formatPrice($refund->tax_amount, $refund->order_currency_code) }}
-                </span>
-            </div>
-        @endforeach
+                    <span style="text-align: right;">
+                        {{ core()->formatPrice($refund->shipping_amount_incl_tax, $refund->order_currency_code) }}
+                    </span>
+                </div>
+            @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('shop::app.emails.orders.shipping-handling-excl-tax')
+                    </span>
+
+                    <span style="text-align: right;">
+                        {{ core()->formatPrice($refund->shipping_amount, $refund->order_currency_code) }}
+                    </span>
+                </div>
+                
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('shop::app.emails.orders.shipping-handling-incl-tax')
+                    </span>
+
+                    <span style="text-align: right;">
+                        {{ core()->formatPrice($refund->shipping_amount_incl_tax, $refund->order_currency_code) }}
+                    </span>
+                </div>
+            @else
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('shop::app.emails.orders.shipping-handling')
+                    </span>
+
+                    <span style="text-align: right;">
+                        {{ core()->formatPrice($refund->shipping_amount, $refund->order_currency_code) }}
+                    </span>
+                </div>
+            @endif
+        @endif
+
+        <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+            <span>
+                @lang('shop::app.emails.orders.tax')
+            </span>
+
+            <span style="text-align: right;">
+                {{ core()->formatPrice($refund->tax_amount, $refund->order_currency_code) }}
+            </span>
+        </div>
 
         @if ($refund->discount_amount > 0)
             <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
