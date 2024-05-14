@@ -29,7 +29,7 @@ class SearchTermController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(SearchTermDataGrid::class)->toJson();
+            return datagrid(SearchTermDataGrid::class)->process();
         }
 
         return view('admin::marketing.search-seo.search-terms.index');
