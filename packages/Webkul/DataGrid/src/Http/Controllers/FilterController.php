@@ -35,6 +35,8 @@ class FilterController extends Controller
      */
     public function destroy()
     {
-        return $this->savedFilterRepository->delete(request()->get('src'));
+        return $this->savedFilterRepository->where('id', request()->get('id'))
+            ->where('user_id', request()->get('user_id'))
+            ->delete();
     }
 }

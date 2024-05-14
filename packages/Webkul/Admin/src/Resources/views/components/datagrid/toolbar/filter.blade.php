@@ -77,19 +77,19 @@
 
                             <div 
                                 class="mb-2 mt-1.5 flex cursor-pointer flex-wrap items-center justify-between gap-2" 
-                                v-for="filter in filters.available"
+                                v-for="(filter,index) in filters.available"
                             >
                                 <span 
                                     class="text-sm dark:text-gray-300"
                                     :class="filter.src == src ? 'text-blue-600' : 'text-gray-300'"
-                                    @click="applySaveFilter(filter)"
+                                    @click="applySaveFilter(filter, index)"
                                 >
                                     @{{ filter.name }}
                                 </span>
 
                                 <span
                                     class="icon-cross cursor-pointer text-lg hover:rounded-sm hover:bg-gray-100 dark:hover:bg-gray-950"
-                                    @click="deleteSaveFilter(filter)"
+                                    @click="deleteSavedFilter(filter)"
                                 >
                                 </span>
                             </div>
@@ -546,8 +546,6 @@
                 this.filters.columns = this.applied.filters.columns.filter((column) => column.index !== 'all');
 
                 this.getFilters();
-
-                console.log(this);
             },
 
             methods: {
@@ -564,7 +562,9 @@
                         applied: this.applied,
                      })
                         .then(response => {
-                            window.location.reload();
+                            this.filters.available.push(response.data);
+
+                            this.filters.name = '';
                         })
                         .catch(error => {
                             // Handle the error
@@ -598,13 +598,18 @@
                 /**
                  * Deletes the saved filter.
                  */
-                deleteSaveFilter(filter) {
-                    this.$axios.get('{{ route('datagrid.filters.destroy') }}', {
-                        params: {src: "{{request()->url()}}" }
+                deleteSavedFilter(filter, index) {
+                    this.$axios.delete('{{ route('datagrid.filters.destroy') }}', {
+                        params: {
+                            id: filter.id,
+                            user_id: filter.user_id
+                         }
                     })
 
                     .then(response => {
-                        //  
+                        if(response.data) {
+                            this.filters.available.splice(index, 1);
+                        }
                     })
                     .catch(error => {
                         //    
