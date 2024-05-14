@@ -30,7 +30,7 @@ class ExchangeRateController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(ExchangeRatesDataGrid::class)->toJson();
+            return datagrid(ExchangeRatesDataGrid::class)->process();
         }
 
         $currencies = $this->currencyRepository->with('exchange_rate')->all();
