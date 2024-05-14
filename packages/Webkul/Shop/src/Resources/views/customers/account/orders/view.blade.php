@@ -1015,10 +1015,13 @@
                         <p class="text-sm">
                             @include ('shop::customers.account.orders.view.address', ['address' => $order->billing_address])
                         </p>
-
-                        {!! view_render_event('bagisto.shop.customers.account.orders.view.billing_address.after', ['order' => $order]) !!}
                     </div>
+                    
+                    {!! view_render_event('bagisto.shop.customers.account.orders.view.billing_address_details.after', ['order' => $order]) !!}
                 </div>
+
+               {!! view_render_event('bagisto.shop.customers.account.orders.view.billing_address.after', ['order' => $order]) !!}
+
             @endif
 
             <!-- Shipping Address -->
@@ -1031,11 +1034,13 @@
                     <div class="grid gap-2.5">
                         <p class="text-sm">
                             @include ('shop::customers.account.orders.view.address', ['address' => $order->shipping_address])
-
-                            {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address.after', ['order' => $order]) !!}
                         </p>
                     </div>
+                    
+                    {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address_details.after', ['order' => $order]) !!}
                 </div>
+                
+               {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address.after', ['order' => $order]) !!}
 
                 <!-- Shipping Method -->
                 <div class="grid max-w-[200px] place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
@@ -1046,6 +1051,8 @@
                     <p class="text-sm">
                         {{ $order->shipping_title }}
                     </p>
+
+                    {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_method_details.after', ['order' => $order]) !!}
                 </div>
 
                 {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_method.after', ['order' => $order]) !!}
@@ -1067,11 +1074,12 @@
                         <label>{{ $additionalDetails['title'] }}</label>
                     </div>
                 @endif
-
-                {!! view_render_event('bagisto.shop.customers.account.orders.view.payment_method.after', ['order' => $order]) !!}
+                
+                {!! view_render_event('bagisto.shop.customers.account.orders.view.payment_method_details.after', ['order' => $order]) !!}
             </div>
+            
+            {!! view_render_event('bagisto.shop.customers.account.orders.view.payment_method.after', ['order' => $order]) !!}
         </div>
     </div>
-
     {!! view_render_event('bagisto.shop.customers.account.orders.view.after', ['order' => $order]) !!}
 </x-shop::layouts.account>
