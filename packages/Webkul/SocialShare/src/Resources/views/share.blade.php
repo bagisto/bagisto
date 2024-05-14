@@ -9,7 +9,7 @@
         <div class="hidden gap-2.5 justify-center items-center max-md:flex cursor-pointer">
             <span class="icon-share text-2xl"></span>
 
-            <a href="#" onclick="shareProduct()">
+            <a href="javascript:void(0);" onclick="shareProduct()">
                 @lang('admin::app.configuration.index.catalog.products.social-share.share')
             </a>
         </div>
@@ -32,8 +32,8 @@
     @push('scripts')
         <script>
             function shareProduct() {
-                var productName = "{{ $product->name }}";
-                var productUrl = "{{ route('shop.product_or_category.index', [$product->url_key]) }}";
+                let productName = "{{ $product->name }}";
+                let productUrl = "{{ route('shop.product_or_category.index', [$product->url_key]) }}";
 
                 if (navigator.share) {
                     navigator.share({
