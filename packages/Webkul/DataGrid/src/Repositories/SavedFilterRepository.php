@@ -3,15 +3,15 @@
 namespace Webkul\DataGrid\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Webkul\DataGrid\Contracts\Filter;
+use Webkul\DataGrid\Contracts\SavedFilter;
 
-class FilterRepository extends Repository
+class SavedFilterRepository extends Repository
 {
     /**
      * Specify Model class name
      */
     public function model(): string
     {
-        return Filter::class;
+        return SavedFilter::class;
     }
 }

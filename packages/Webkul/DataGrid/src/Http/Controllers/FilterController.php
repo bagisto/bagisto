@@ -3,14 +3,14 @@
 namespace Webkul\DataGrid\Http\Controllers;
 
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\DataGrid\Repositories\FilterRepository;
+use Webkul\DataGrid\Repositories\SavedFilterRepository;
 
 class FilterController extends Controller
 {
     /**
      * Create a new controller instance.
      */
-    public function __construct(protected FilterRepository $filterRepository)
+    public function __construct(protected SavedFilterRepository $savedFilterRepository)
     {
     }
 
@@ -19,7 +19,7 @@ class FilterController extends Controller
      */
     public function store()
     {
-        return $this->filterRepository->create(request()->all());
+        return $this->savedFilterRepository->create(request()->all());
     }
 
     /**
@@ -27,6 +27,14 @@ class FilterController extends Controller
      */
     public function get()
     {
-        return $this->filterRepository->where('src', request()->get('src'))->get();
+        return $this->savedFilterRepository->where('src', request()->get('src'))->get();
+    }
+
+    /**
+     * Destroy a filter.
+     */
+    public function destroy()
+    {
+        return $this->savedFilterRepository->delete(request()->get('src'));
     }
 }

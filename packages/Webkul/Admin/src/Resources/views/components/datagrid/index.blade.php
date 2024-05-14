@@ -139,7 +139,13 @@
             },
 
             methods: {
-                testFilter(filter) {                    
+                /**
+                 * Apply the saved filter.
+                 *
+                 * @param {Object} filter
+                 * @returns {void}
+                 */
+                applySaveFilter(filter) {                    
                     this.applied = filter.applied;
 
                     this.get();

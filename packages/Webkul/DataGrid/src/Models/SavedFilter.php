@@ -4,9 +4,9 @@ namespace Webkul\DataGrid\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Webkul\DataGrid\Contracts\Filter as FilterContract;
+use Webkul\DataGrid\Contracts\SavedFilter as SavedFilterContract;
 
-class Filter extends Model implements FilterContract
+class SavedFilter extends Model implements SavedFilterContract
 {
     use HasFactory;
 
@@ -15,7 +15,7 @@ class Filter extends Model implements FilterContract
      *
      * @var string
      */
-    protected $table = 'data_grid_filters';
+    protected $table = 'saved_filters';
 
     /**
      * Fillable property for the model.
@@ -34,10 +34,10 @@ class Filter extends Model implements FilterContract
     ];
 
     /**
-     * Get the order record associated with the order comment.
+     * Get the order record of Filter.
      */
     public function filter()
     {
-        return $this->belongsTo(FilterProxy::modelClass());
+        return $this->belongsTo(SavedFilterProxy::modelClass());
     }
 }

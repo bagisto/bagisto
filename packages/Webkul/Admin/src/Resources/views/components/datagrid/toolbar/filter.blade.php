@@ -5,7 +5,7 @@
     :src="src"
     @applyFilter="filter"
     @removeFilter="filter"
-    @testFilter="testFilter"
+    @applySaveFilter="applySaveFilter"
 >
     {{ $slot }}
 </v-datagrid-filter>
@@ -82,14 +82,14 @@
                                 <span 
                                     class="text-sm dark:text-gray-300"
                                     :class="filter.src == src ? 'text-blue-600' : 'text-gray-300'"
-                                    @click="testFilter(filter)"
+                                    @click="applySaveFilter(filter)"
                                 >
                                     @{{ filter.name }}
                                 </span>
 
                                 <span
                                     class="icon-cross cursor-pointer text-lg hover:rounded-sm hover:bg-gray-100 dark:hover:bg-gray-950"
-                                    @click="deleteSaveFilter()"
+                                    @click="deleteSaveFilter(filter)"
                                 >
                                 </span>
                             </div>
@@ -571,21 +571,47 @@
                         });
                 },
 
-                testFilter(filter) {
-                      this.$emit('testFilter', filter);
+                /**
+                 * Applies the saved filter.
+                 *
+                 * @param {Object} filter - The filter to be applied.
+                 * @emits applySaveFilter - Event emitted when the saved filter is applied.
+                 */
+                applySaveFilter(filter) {
+                    this.$emit('applySaveFilter', filter);
                 },
 
+                /**
+                 * Retrieves the filters updates the available filters.
+                 */
                 getFilters () {
                     this.$axios.get('{{ route('datagrid.filters.index') }}', {
                         params: {src: "{{request()->url()}}" }
-                     })
+                    })
                         .then(response => {
                             this.filters.available = response.data;
                         })
                         .catch(error => {
                         });
                 },
-                
+
+                /**
+                 * Deletes the saved filter.
+                 */
+                deleteSaveFilter(filter) {
+                    this.$axios.get('{{ route('datagrid.filters.destroy') }}', {
+                        params: {src: "{{request()->url()}}" }
+                    })
+
+                    .then(response => {
+                        //  
+                    })
+                    .catch(error => {
+                        //    
+                    });
+      
+                },
+
                 /**
                  * Apply filter.
                  *
