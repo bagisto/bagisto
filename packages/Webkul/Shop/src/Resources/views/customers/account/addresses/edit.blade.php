@@ -62,7 +62,7 @@
                     <!-- Vat Id -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
-                            @lang('shop::app.customers.account.addresses.create.vat-id')
+                            @lang('shop::app.customers.account.addresses.edit.vat-id')
                         </x-shop::form.control-group.label>
                             
                         <x-shop::form.control-group.control
