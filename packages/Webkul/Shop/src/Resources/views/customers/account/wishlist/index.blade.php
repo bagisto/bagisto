@@ -52,13 +52,13 @@
                     <div 
                         v-if="wishlistItems.length" 
                         v-for="(item, index) in wishlistItems"
-                        class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-sm:my-5"
+                        class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-sm:my-5 max-sm:last:mb-0"
                     >
                         <div class="grid flex-1 gap-8">
                             <div class="grid gap-y-6">
                                 <!-- Wishlist item -->
-                                <div class="flex justify-between gap-x-2.5 border-b border-[#E9E9E9] pb-5 max-sm:border-none max-sm:pb-0">
-                                    <div class="flex gap-x-5">
+                                <div class="flex justify-between gap-x-2.5 border-b border-[#E9E9E9] pb-5">
+                                    <div class="flex gap-x-5 max-sm:w-full">
                                         <div>
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.image.before') !!}
 
@@ -74,10 +74,18 @@
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.image.after') !!}
                                         </div>
 
-                                        <div class="grid gap-y-2.5">
-                                            <p class="text-base font-medium max-sm:text-sm">
-                                                @{{ item.product.name }}
-                                            </p>
+                                        <div class="grid gap-y-2.5 max-sm:w-full">
+                                            <div class="flex justify-between">
+                                                <p class="text-base font-medium max-sm:text-sm">
+                                                    @{{ item.product.name }}
+                                                </p>
+
+                                                <span
+                                                    @click="remove(item.id)" 
+                                                    class="icon-bin hidden text-2xl max-sm:block"
+                                                >
+                                                </span>
+                                            </div>
 
                                             <!--Wishlist Item attributes -->
                                             <div
@@ -128,7 +136,7 @@
 
                                                 <!--Wishlist Item removed button-->
                                                 <a 
-                                                    class="flex cursor-pointer justify-end text-base text-[#0A49A7] max-sm:text-xs" 
+                                                    class="flex cursor-pointer justify-end text-base text-[#0A49A7] max-sm:hidden" 
                                                     @click="remove(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.remove')
@@ -236,13 +244,17 @@
                     },
 
                     remove(id) {
-                        this.$axios.delete(`{{ route('shop.api.customers.account.wishlist.destroy', '') }}/${id}`)
-                            .then(response => {
-                                this.wishlistItems = this.wishlistItems.filter(item => item.id != id);
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                this.$axios.delete(`{{ route('shop.api.customers.account.wishlist.destroy', '') }}/${id}`)
+                                    .then(response => {
+                                        this.wishlistItems = this.wishlistItems.filter(item => item.id != id);
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                            })
-                            .catch(error => {});
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                    })
+                                    .catch(error => {});
+                                }
+                        });
                     },
 
                     removeAll() {

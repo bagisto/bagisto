@@ -303,7 +303,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.continue_to_checkout.after') !!}
 
-                        <div class="block cursor-pointer text-center text-base font-medium">
+                        <div class="block cursor-pointer text-center text-base font-medium max-sm:py-2.5">
                             <a href="{{ route('shop.checkout.cart.index') }}">
                                 @lang('shop::app.checkout.cart.mini-cart.view-cart')
                             </a>

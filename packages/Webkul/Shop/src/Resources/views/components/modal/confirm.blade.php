@@ -36,16 +36,16 @@
                     class="fixed inset-0 z-20 transform overflow-y-auto transition" v-show="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <div class="absolute left-1/2 top-1/2 z-[999] w-full max-w-[475px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-white p-5 max-md:w-[90%]">
+                        <div class="absolute left-1/2 top-1/2 z-[999] w-full max-w-[475px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-white p-5 max-md:w-[90%] max-sm:p-4">
                             <div class="flex gap-2.5">
                                 <div>
                                     <span class="flex rounded-full border border-[rgba(6,12,59,0.20)] p-2.5">
-                                        <i class="icon-error text-3xl"></i>
+                                        <i class="icon-error text-3xl max-sm:text-xl"></i>
                                     </span>
                                 </div>
 
                                 <div>
-                                    <div class="flex items-center justify-between gap-5 text-xl">
+                                    <div class="flex items-center justify-between gap-5 text-xl max-sm:text-lg">
                                         @{{ title }}
                                     </div>
 
@@ -54,11 +54,19 @@
                                     </div>
 
                                     <div class="flex justify-end gap-2.5">
-                                        <button type="button" class="secondary-button" @click="disagree">
+                                        <button
+                                            type="button"
+                                            class="secondary-button max-sm:px-6 max-sm:py-3"
+                                            @click="disagree"
+                                        >
                                             @{{ options.btnDisagree }}
                                         </button>
 
-                                        <button type="button" class="primary-button" @click="agree">
+                                        <button
+                                            type="button"
+                                            class="primary-button max-sm:px-6 max-sm:py-3"
+                                            @click="agree"
+                                        >
                                             @{{ options.btnAgree }} 
                                         </button>
                                     </div>

@@ -53,6 +53,8 @@
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.after') !!}
 
+        {{-- <x-shop::shimmer.checkout.onepage /> --}}
+
         <!-- Checkout Vue Component -->
         <v-checkout>
             <!-- Shimmer Effect -->

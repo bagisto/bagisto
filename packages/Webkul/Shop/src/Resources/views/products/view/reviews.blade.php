@@ -435,18 +435,18 @@
     
                 <!-- Review Attachments -->
                 <div
-                    class="journal-scroll mt-3 flex gap-2 overflow-auto"
+                    class="journal-scroll scrollbar-none mt-3 flex gap-2 overflow-auto"
                     v-if="review.images.length"
                 >
                     <template v-for="file in review.images">
                         <a
                             :href="file.url"
-                            class="flex h-12 w-12 max-sm:h-[60px] max-sm:w-[60px]"
+                            class="flex h-12 w-12 max-sm:h-[80px] max-sm:w-[80px]"
                             target="_blank"
                             v-if="file.type == 'image'"
                         >
                             <img
-                                class="max-h-[60px] min-w-[60px] cursor-pointer rounded-xl"
+                                class="max-h-860px] min-w-[80px] cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -455,12 +455,12 @@
     
                         <a
                             :href="file.url"
-                            class="flex h-12 w-12 max-sm:h-[60px] max-sm:w-[60px]"
+                            class="flex h-12 w-12 max-sm:h-[80px] max-sm:w-[80px]"
                             target="_blank"
                             v-else
                         >
                             <video
-                                class="max-h-[60px] min-w-[60px] cursor-pointer rounded-xl"
+                                class="max-h-[80px] min-w-[80px] cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
