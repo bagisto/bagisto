@@ -427,6 +427,7 @@ class Installer extends Command
         $selectedValues = multiselect(
             label: $question,
             options: array_values($choices),
+            required: true,
         );
 
         $selectedChoices = [];
