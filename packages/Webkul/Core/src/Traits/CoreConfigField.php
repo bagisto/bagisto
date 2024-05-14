@@ -48,25 +48,6 @@ trait CoreConfigField
     }
 
     /**
-     * Get value from repositories, if developer wants to do.
-     *
-     * @param  array  $field
-     * @return mixed
-     */
-    public function getValueByRepository($field)
-    {
-        if (isset($field['repository'])) {
-            $temp = explode('@', $field['repository']);
-            $class = app(current($temp));
-            $method = end($temp);
-
-            return $class->$method();
-        }
-
-        return null;
-    }
-
-    /**
      * Get dependent field or value based on arguments.
      *
      * @param  array  $field
@@ -98,6 +79,10 @@ trait CoreConfigField
         }
 
         $options = [];
+
+        if (is_callable($dependentValues)) {
+            $dependentValues = $dependentValues();
+        }
 
         foreach ($dependentValues as $key => $result) {
             $options[] = [

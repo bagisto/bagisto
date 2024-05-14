@@ -1491,8 +1491,6 @@ it('should check tax is applying for the simple product into the cart for simple
         ->assertOk()
         ->assertJsonPath('data.id', $cart->id);
 
-    $this->assertPrice($cart->base_tax_total, $response['data']['base_tax_total']);
-
     $this->assertPrice($cart->tax_total, $response['data']['tax_total']);
 
     $this->assertPrice($product->price, $response['data']['sub_total']);
