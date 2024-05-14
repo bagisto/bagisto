@@ -31,7 +31,7 @@ class AttributeFamilyController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(AttributeFamilyDataGrid::class)->toJson();
+            return datagrid(AttributeFamilyDataGrid::class)->process();
         }
 
         return view('admin::catalog.families.index');

@@ -30,7 +30,7 @@ class CampaignController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(CampaignDataGrid::class)->toJson();
+            return datagrid(CampaignDataGrid::class)->process();
         }
 
         return view('admin::marketing.communications.campaigns.index');

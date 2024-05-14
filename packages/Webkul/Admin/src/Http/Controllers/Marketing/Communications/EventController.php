@@ -27,7 +27,7 @@ class EventController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(EventDataGrid::class)->toJson();
+            return datagrid(EventDataGrid::class)->process();
         }
 
         return view('admin::marketing.communications.events.index');

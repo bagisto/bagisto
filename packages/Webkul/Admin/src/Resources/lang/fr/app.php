@@ -3422,17 +3422,6 @@ return [
                 'info'  => 'Catalogue',
                 'title' => 'Catalogue',
 
-                'inventory' => [
-                    'info'  => 'Configurer les retours',
-                    'title' => 'Inventaire',
-
-                    'stock-options' => [
-                        'allow-back-orders'  => 'Autoriser les commandes en attente',
-                        'title'              => 'Options de stock',
-                        'title-info'         => 'Les options de stock sont des contrats d\'inventaire qui donnent le droit d\'acheter ou de vendre des actions d\'entreprise à un prix fixé, influençant les bénéfices potentiels.',
-                    ],
-                ],
-
                 'products' => [
                     'info'  => 'Configurer le paiement en tant qu\'invité, la page de visualisation du produit, la page de visualisation du panier, la page d\'accueil du magasin, la revue et le partage social des attributs.',
                     'title' => 'Produits',
@@ -3746,7 +3735,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Bestellnummer und Mindestbestellung festlegen.',
+                    'info'  => 'Définir les numéros de commande, les commandes minimales et les commandes en attente.',
                     'title' => 'Bestelleinstellungen',
 
                     'order-number' => [
@@ -3762,6 +3751,12 @@ return [
                         'minimum-order-amount' => 'Mindestbestellmenge',
                         'title'                => 'Mindestbestellmengen-Einstellungen',
                         'title-info'           => 'Konfigurieren Sie die Mindestbestellmenge oder den Standardwert für die Verarbeitung oder den Vorteil des Kaufprozesses.',
+                    ],
+
+                    'stock-options' => [
+                        'allow-back-orders' => 'Autoriser les commandes en attente',
+                        'title'             => 'Options de stock',
+                        'title-info'        => 'Les options de stock sont des contrats d\'inventaire qui donnent le droit d\'acheter ou de vendre des actions d\'entreprise à un prix fixé, influençant les bénéfices potentiels.',
                     ],
                 ],
 
