@@ -3422,17 +3422,6 @@ return [
                 'info'  => '目录',
                 'title' => '目录',
 
-                'inventory' => [
-                    'info'  => '设置缺货订单',
-                    'title' => '库存',
-
-                    'stock-options' => [
-                        'allow-back-orders' => '允许缺货订单',
-                        'title'             => '库存选项',
-                        'title-info'        => '库存选项是指允许在预定价格下购买或销售公司股票的投资合同，影响潜在利润。',
-                    ],
-                ],
-
                 'products' => [
                     'info'  => '设置访客结帐，产品查看页面，购物车查看页面，商店前端，评论和属性社交分享。',
                     'title' => '产品',
@@ -3746,7 +3735,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => '设置订单号和最低订单要求。',
+                    'info'  => '设置订单编号、最低订单和退单。',
                     'title' => '订单设置',
 
                     'order-number' => [
@@ -3762,6 +3751,12 @@ return [
                         'minimum-order-amount' => '最低订单金额',
                         'title'                => '最低订单设置',
                         'title-info'           => '配置的条件，指定了订单要处理或符合某些福利的最低数量或值。',
+                    ],
+
+                    'stock-options' => [
+                        'allow-back-orders' => '允许缺货订单',
+                        'title'             => '库存选项',
+                        'title-info'        => '库存选项是指允许在预定价格下购买或销售公司股票的投资合同，影响潜在利润。',
                     ],
                 ],
 

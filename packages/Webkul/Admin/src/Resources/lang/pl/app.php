@@ -3422,17 +3422,6 @@ return [
                 'info'  => 'Katalog',
                 'title' => 'Katalog',
 
-                'inventory' => [
-                    'info'  => 'Ustawienia zamówień zwrotnych',
-                    'title' => 'Inwentarz',
-
-                    'stock-options' => [
-                        'allow-back-orders'  => 'Zezwalać na zamówienia zwrotne',
-                        'title'              => 'Opcje zapasów',
-                        'title-info'         => 'Opcje zapasów to umowy inwestycyjne, które przyznają prawo do kupna lub sprzedaży akcji firmy po określonej cenie, wpływając na potencjalne zyski.',
-                    ],
-                ],
-
                 'products' => [
                     'info'  => 'Skonfiguruj gościnne zamówienie, stronę wyświetlania produktów, stronę wyświetlania koszyka, stronę główną sklepu, recenzję i udostępnianie atrybutów społecznościowych.',
                     'title' => 'Produkty',
@@ -3746,7 +3735,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Ustawienia numerów zamówień i minimalnych zamówień.',
+                    'info'  => 'Ustaw numery zamówień, minimalne zamówienia i zamówienia wsteczne.',
                     'title' => 'Ustawienia zamówień',
 
                     'order-number' => [
@@ -3762,6 +3751,12 @@ return [
                         'minimum-order-amount' => 'Minimalna wartość zamówienia',
                         'title'                => 'Ustawienia minimalnego zamówienia',
                         'title-info'           => 'Skonfigurowane kryteria określające minimalną ilość lub wartość wymaganą do przetworzenia zamówienia lub zakwalifikowania się do korzyści.',
+                    ],
+
+                    'stock-options' => [
+                        'allow-back-orders' => 'Zezwalać na zamówienia zwrotne',
+                        'title'             => 'Opcje zapasów',
+                        'title-info'        => 'Opcje zapasów to umowy inwestycyjne, które przyznają prawo do kupna lub sprzedaży akcji firmy po określonej cenie, wpływając na potencjalne zyski.',
                     ],
                 ],
 

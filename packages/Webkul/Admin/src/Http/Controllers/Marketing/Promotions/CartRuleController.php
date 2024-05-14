@@ -30,7 +30,7 @@ class CartRuleController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(CartRuleDataGrid::class)->toJson();
+            return datagrid(CartRuleDataGrid::class)->process();
         }
 
         return view('admin::marketing.promotions.cart-rules.index');
