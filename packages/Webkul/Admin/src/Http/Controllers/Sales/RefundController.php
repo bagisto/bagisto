@@ -30,7 +30,7 @@ class RefundController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(OrderRefundDataGrid::class)->toJson();
+            return datagrid(OrderRefundDataGrid::class)->process();
         }
 
         return view('admin::sales.refunds.index');

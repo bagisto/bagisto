@@ -34,7 +34,7 @@ class UserController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(UserDataGrid::class)->toJson();
+            return datagrid(UserDataGrid::class)->process();
         }
 
         $roles = $this->roleRepository->all();

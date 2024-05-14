@@ -21,13 +21,11 @@
                         </div>
         
                         <!-- Add Slider Button -->
-                        <div class="flex gap-2.5">
-                            <div
-                                class="secondary-button"
-                                @click="$refs.addSliderModal.toggle()"
-                            >
-                                @lang('admin::app.settings.themes.edit.slider-add-btn')
-                            </div>
+                        <div
+                            class="secondary-button"
+                            @click="$refs.addSliderModal.toggle()"
+                        >
+                            @lang('admin::app.settings.themes.edit.slider-add-btn')
                         </div>
                     </div>
 
@@ -80,61 +78,54 @@
                             <div class="flex gap-2.5">
                                 <div class="grid place-content-start gap-1.5">
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        <div> 
-                                            @lang('admin::app.settings.themes.edit.image-title'): 
+                                        @lang('admin::app.settings.themes.edit.image-title'): 
 
-                                            <span class="text-gray-600 transition-all dark:text-gray-300">
-                                                @{{ image.title }}
-                                            </span>
-                                        </div>
+                                        <span class="text-gray-600 transition-all dark:text-gray-300">
+                                            @{{ image.title }}
+                                        </span>
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        <div> 
-                                            @lang('admin::app.settings.themes.edit.link'): 
+                                        @lang('admin::app.settings.themes.edit.link'): 
 
-                                            <span class="text-gray-600 transition-all dark:text-gray-300">
-                                                @{{ image.link }}
-                                            </span>
-                                        </div>
+                                        <span class="text-gray-600 transition-all dark:text-gray-300">
+                                            @{{ image.link }}
+                                        </span>
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        <div class="flex justify-between"> 
-                                            @lang('admin::app.settings.themes.edit.image'): 
+                                        @lang('admin::app.settings.themes.edit.image'): 
 
-                                                <span class="text-gray-600 transition-all dark:text-gray-300">
-                                                    <a
-                                                        :href="'{{ config('app.url') }}/' + image.image"
-                                                        :ref="'image_' + index"
-                                                        target="_blank"
-                                                        class="text-blue-600 transition-all hover:underline ltr:ml-2 rtl:mr-2"
-                                                    >
-                                                        <span :ref="'imageName_' + index">
-                                                            @{{ image.image }}
-                                                    </a>
+                                        <span class="text-gray-600 transition-all dark:text-gray-300">
+                                            <a
+                                                :href="'{{ config('app.url') }}/' + image.image"
+                                                :ref="'image_' + index"
+                                                target="_blank"
+                                                class="text-blue-600 transition-all hover:underline ltr:ml-2 rtl:mr-2"
+                                            >
+                                                <span :ref="'imageName_' + index">
+                                                    @{{ image.image }}
                                                 </span>
-                                            </div>
-                                        </p>
-                                    </div>
+                                            </a>
+                                        </span>
+                                    </p>
                                 </div>
+                            </div>
 
                             <!-- Actions -->
                             <div class="grid place-content-start gap-1 text-right">
-                                <div class="flex items-center gap-x-5">
-                                    <p 
-                                        class="cursor-pointer text-red-600 transition-all hover:underline"
-                                        @click="remove(image)"
-                                    > 
-                                        @lang('admin::app.settings.themes.edit.delete')
-                                    </p>
-                                </div>
+                                <p 
+                                    class="cursor-pointer text-red-600 transition-all hover:underline"
+                                    @click="remove(image)"
+                                > 
+                                    @lang('admin::app.settings.themes.edit.delete')
+                                </p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Empty Page -->
-                    <div    
+                    <div
                         class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                         v-else
                     >
@@ -173,6 +164,7 @@
                             value="image_carousel"
                         />
 
+                        <!-- Name -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.name')
@@ -192,6 +184,7 @@
                             <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
+                        <!-- Sort Order -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
@@ -212,6 +205,7 @@
                             <x-admin::form.control-group.error control-name="sort_order" />
                         </x-admin::form.control-group>
 
+                        <!-- Channels -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.channels')
@@ -231,6 +225,7 @@
                             <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
+                        <!-- Status -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.status')
@@ -262,7 +257,6 @@
 
                             <x-admin::form.control-group.error control-name="status" />
                         </x-admin::form.control-group>
-
                     </x-slot>
                 </x-admin::accordion>
             </div>
@@ -337,14 +331,12 @@
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
-                        <div class="flex items-center gap-x-2.5">
-                            <button 
-                                type="submit"
-                                class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
-                            >
-                                @lang('admin::app.settings.themes.edit.save-btn')
-                            </button>
-                        </div>
+                        <button 
+                            type="submit"
+                            class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
+                        >
+                            @lang('admin::app.settings.themes.edit.save-btn')
+                        </button>
                     </x-slot>
                 </x-admin::modal>
             </form>

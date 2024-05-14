@@ -45,9 +45,9 @@ class CartRuleRepository extends Repository
      */
     public function create(array $data)
     {
-        $data['starts_from'] = $data['starts_from'] ?? null;
+        $data['starts_from'] = $data['starts_from'] ?: null;
 
-        $data['ends_till'] = $data['ends_till'] ?? null;
+        $data['ends_till'] = $data['ends_till'] ?: null;
 
         $data['status'] = isset($data['status']);
 
@@ -82,8 +82,8 @@ class CartRuleRepository extends Repository
     public function update(array $data, $id, $attribute = 'id')
     {
         $data = array_merge($data, [
-            'starts_from' => $data['starts_from'] ?? null,
-            'ends_till'   => $data['ends_till'] ?? null,
+            'starts_from' => $data['starts_from'] ?: null,
+            'ends_till'   => $data['ends_till'] ?: null,
             'status'      => isset($data['status']),
             'conditions'  => $data['conditions'] ?? [],
         ]);

@@ -7,6 +7,9 @@
 >
 
 <head>
+
+    {!! view_render_event('bagisto.admin.layout.head.before') !!}
+
     <title>{{ $title ?? '' }}</title>
 
     <meta charset="UTF-8">
@@ -75,7 +78,7 @@
         {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
     </style>
 
-    {!! view_render_event('bagisto.admin.layout.head') !!}
+    {!! view_render_event('bagisto.admin.layout.head.after') !!}
 </head>
 
 <body class="h-full dark:bg-gray-950">
