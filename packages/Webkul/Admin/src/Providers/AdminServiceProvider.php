@@ -73,7 +73,8 @@ class AdminServiceProvider extends ServiceProvider
             'admin::components.layouts.sidebar.index',
             'admin::components.layouts.tabs',
         ], function ($view) {
-            $view->with('menu', $this->createMenu(config('menu.admin')));
+            $view->with('menu', []);
+            // $view->with('menu', $this->createMenu(config('menu.admin')));
         });
 
         view()->composer([

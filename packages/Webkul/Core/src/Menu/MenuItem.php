@@ -20,4 +20,12 @@ class MenuItem extends MenuElement
         public Collection|array $menuGroup = [],
     ) {
     }
+
+    /**
+     * Make the new instance of the class.
+     */
+    public static function make(mixed ...$args): static
+    {
+        return new static(...$args);
+    }
 }

@@ -8,9 +8,11 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Core;
+use Webkul\Core\Menu;
 use Webkul\Core\ElasticSearch;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
+use Webkul\Core\Facades\Menu as MenuFacade;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchFacade;
 use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
@@ -96,8 +98,14 @@ class CoreServiceProvider extends ServiceProvider
 
         $loader->alias('core', CoreFacade::class);
 
+        $loader->alias('menu', MenuFacade::class);
+
         $this->app->singleton('core', function () {
             return app()->make(Core::class);
+        });
+
+        $this->app->singleton('menu', function () {
+            return app()->make(Menu::class);
         });
 
         /**
