@@ -1,16 +1,16 @@
 @props(['count' => 0])
 
 <div class="journal-scroll flex items-center justify-between overflow-auto">
-    <h2 class="shimmer h-[32px] w-[110px]"></h2>
+    <div class="shimmer h-8 w-24"></div>
 </div>
 
-<div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr]">
+<div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-sm:mt-[20px]">
     @for ($i = 0;  $i < $count; $i++)
         <!-- Single card -->
-        <div class="flex gap-5 rounded-xl border p-6 max-sm:flex-wrap">
+        <div class="flex gap-5 rounded-xl border p-6">
             <x-shop::media.images.lazy
-                class="h-[146px] max-h-[146px] w-[128px] min-w-[128px] max-w-[128px] rounded-xl" 
-                alt="Review Image"                   
+                class="h-[146px] max-h-[146px] w-[128px] min-w-[128px] max-w-[128px] rounded-xl max-sm:h-[92px] max-sm:w-[80px] max-sm:min-w-[80px]"
+                alt="Review Image"
             />
 
             <div class="w-full">

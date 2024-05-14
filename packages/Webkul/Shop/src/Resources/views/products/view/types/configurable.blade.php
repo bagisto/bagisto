@@ -23,11 +23,6 @@
                     class="mt-5"
                     v-for='(attribute, index) in childAttributes'
                 >
-                    <!-- Dropdown Label -->
-                    <h2 class="mb-4 text-xl max-sm:text-base">
-                        @{{ attribute.label }}
-                    </h2>
-
                     <!-- Dropdown Options Container -->
                     <template v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
                         <!-- Dropdown Label -->

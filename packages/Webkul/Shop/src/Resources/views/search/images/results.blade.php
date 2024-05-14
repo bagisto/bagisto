@@ -38,13 +38,14 @@
                         @lang('shop::app.search.images.results.analyzed-keywords')
                     </h2>
 
-                    <div class="flex flex-wrap gap-2 max-sm:hidden">
+                    <div class="flex flex-wrap gap-5 max-sm:hidden">
                         <span 
-                            class="m-1 flex cursor-pointer items-center justify-center rounded-full border bg-white px-2 py-1 font-medium"
+                            class="flex cursor-pointer items-center justify-center rounded-full border border-[#060C3B] px-4 py-1.5 font-medium text-[#060C3B]"
+                            :class="{'rounded-full bg-[#060C3B] text-white': term.name.trim() === queryParameter.trim()}"
                             v-for="term in searchedTerms"
                             @click="search(term)"
                         >
-                            <span class="max-w-full flex-initial p-2.5 text-xs font-normal leading-none">
+                            <span class="max-w-full flex-initial py-1.5 text-xs font-medium leading-none">
                                 @{{ term.name }}
                             </span>
                         </span>
@@ -52,13 +53,17 @@
                 </div>
             </div>
 
+            <!-- For Mobile View -->
             <div class="hidden flex-wrap gap-2 max-sm:flex">
                 <span 
-                    class="flex cursor-pointer items-center justify-center rounded-full border bg-white font-medium"
+                    class="flex cursor-pointer items-center justify-center rounded-full border border-[#060C3B] bg-white font-medium text-[#060C3B]"
                     v-for="term in searchedTerms"
                     @click="search(term)"
                 >
-                    <span class="max-w-full flex-initial px-2.5 py-2 text-xs font-normal leading-none max-sm:px-3 max-sm:py-2.5">
+                    <span
+                        class="max-w-full flex-initial px-2.5 py-2 text-xs font-normal leading-none max-sm:px-3 max-sm:py-2.5"
+                        :class="{'rounded-full bg-[#060C3B] text-white': term.name.trim() === queryParameter.trim()}"
+                    >
                         @{{ term.name }}
                     </span>
                 </span>
@@ -74,6 +79,7 @@
                 return {
                     searchedTerms: [],
                     searchedImageUrl: localStorage.searchedImageUrl,
+                    queryParameter: "{{ request('query') }}",
                 };
             },
 
