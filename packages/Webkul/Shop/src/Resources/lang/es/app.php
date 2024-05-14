@@ -377,24 +377,24 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'           => 'Konto',
+                'account'           => 'Cuenta',
                 'bagisto'           => 'Bagisto',
-                'cart'              => 'Warenkorb',
-                'compare'           => 'Vergleichen',
-                'dropdown-text'     => 'Warenkorb, Bestellungen & Wunschliste verwalten',
-                'logout'            => 'Abmelden',
+                'cart'              => 'Carrito de compras',
+                'compare'           => 'Comparar',
+                'dropdown-text'     => 'Administrar carrito de compras, pedidos y lista de deseos',
+                'logout'            => 'Cerrar sesión',
                 'no-category-found' => 'No se encontró categoría.',
-                'orders'            => 'Bestellungen',
-                'profile'           => 'Profil',
-                'search'            => 'Suchen',
-                'search-text'       => 'Produkte hier suchen',
-                'sign-in'           => 'Anmelden',
-                'sign-up'           => 'Registrieren',
+                'orders'            => 'Pedidos',
+                'profile'           => 'Perfil',
+                'search'            => 'Buscar',
+                'search-text'       => 'Buscar productos aquí',
+                'sign-in'           => 'Iniciar sesión',
+                'sign-up'           => 'Registrarse',
                 'submit'            => 'Enviar',
-                'title'             => 'Konto',
-                'welcome'           => 'Willkommen',
-                'welcome-guest'     => 'Willkommen Gast',
-                'wishlist'          => 'Wunschliste',
+                'title'             => 'Cuenta',
+                'welcome'           => 'Bienvenido',
+                'welcome-guest'     => 'Bienvenido Invitado',
+                'wishlist'          => 'Lista de deseos',
 
                 'desktop' => [
                     'top' => [
@@ -406,71 +406,71 @@ return [
             ],
 
             'footer' => [
-                'about-us'               => 'Über uns',
-                'contact-us'             => 'Kontakt',
-                'currency'               => 'Währung',
-                'customer-service'       => 'Kundendienst',
+                'about-us'               => 'Acerca de nosotros',
+                'contact-us'             => 'Contacto',
+                'currency'               => 'Moneda',
+                'customer-service'       => 'Servicio al cliente',
                 'email'                  => 'Correo Electrónico',
                 'footer-text'            => '© Derechos de autor 2010 - :current_year, Webkul Software (registrada en India). Todos los derechos reservados.',
-                'locale'                 => 'Sprache',
-                'newsletter-text'        => 'Bereiten Sie sich auf unseren unterhaltsamen Newsletter vor!',
-                'order-return'           => 'Bestellung und Rückgabe',
-                'payment-policy'         => 'Zahlungsrichtlinie',
-                'privacy-cookies-policy' => 'Datenschutz- und Cookie-Richtlinie',
-                'shipping-policy'        => 'Versandrichtlinie',
-                'subscribe'              => 'Abonnieren',
-                'subscribe-newsletter'   => 'Newsletter abonnieren',
-                'subscribe-stay-touch'   => 'Abonnieren Sie, um in Kontakt zu bleiben.',
-                'whats-new'              => 'Neuheiten',
+                'locale'                 => 'Idioma',
+                'newsletter-text'        => '¡Prepárate para nuestro divertido boletín!',
+                'order-return'           => 'Pedido y devolución',
+                'payment-policy'         => 'Política de pagos',
+                'privacy-cookies-policy' => 'Política de privacidad y cookies',
+                'shipping-policy'        => 'Política de envíos',
+                'subscribe'              => 'Suscribirse',
+                'subscribe-newsletter'   => 'Suscribirse al boletín',
+                'subscribe-stay-touch'   => 'Suscríbete para mantenerte en contacto.',
+                'whats-new'              => 'Novedades',
             ],
         ],
 
         'datagrid' => [
             'toolbar' => [
-                'length-of' => ':length von',
-                'results'   => ':total Ergebnisse',
-                'selected'  => ':total Ausgewählt',
+                'length-of' => ':length de',
+                'results'   => ':total resultados',
+                'selected'  => ':total seleccionados',
 
                 'mass-actions' => [
-                    'must-select-a-mass-action'        => 'Sie müssen eine Massenaktion auswählen.',
-                    'must-select-a-mass-action-option' => 'Sie müssen eine Option für die Massenaktion auswählen.',
-                    'no-records-selected'              => 'Es wurden keine Datensätze ausgewählt.',
-                    'select-action'                    => 'Aktion auswählen',
+                    'must-select-a-mass-action'        => 'Debe seleccionar una acción masiva.',
+                    'must-select-a-mass-action-option' => 'Debe seleccionar una opción para la acción masiva.',
+                    'no-records-selected'              => 'No se han seleccionado registros.',
+                    'select-action'                    => 'Seleccionar acción',
                 ],
 
                 'search' => [
-                    'title' => 'Suche',
+                    'title' => 'Buscar',
                 ],
 
                 'filter' => [
-                    'apply-filter' => 'Filter anwenden',
-                    'title'        => 'Filter',
+                    'apply-filter' => 'Aplicar filtro',
+                    'title'        => 'Filtro',
 
                     'dropdown' => [
-                        'select' => 'Auswählen',
+                        'select' => 'Seleccionar',
 
                         'searchable' => [
-                            'at-least-two-chars' => 'Geben Sie mindestens 2 Zeichen ein...',
-                            'no-results'         => 'Kein Ergebnis gefunden...',
+                            'at-least-two-chars' => 'Ingrese al menos 2 caracteres...',
+                            'no-results'         => 'Sin resultados...',
                         ],
                     ],
 
                     'custom-filters' => [
-                        'clear-all' => 'Alles löschen',
+                        'clear-all' => 'Limpiar todo',
                     ],
                 ],
             ],
 
             'table' => [
-                'actions'              => 'Aktionen',
-                'next-page'            => 'Nächste Seite',
-                'no-records-available' => 'Keine Datensätze verfügbar.',
-                'of'                   => 'von :total Einträgen',
-                'page-navigation'      => 'Seitennavigation',
-                'page-number'          => 'Seitennummer',
-                'previous-page'        => 'Vorherige Seite',
-                'showing'              => 'Zeige :firstItem',
-                'to'                   => 'bis :lastItem',
+                'actions'              => 'Acciones',
+                'next-page'            => 'Siguiente página',
+                'no-records-available' => 'No hay registros disponibles.',
+                'of'                   => 'de :total registros',
+                'page-navigation'      => 'Navegación de página',
+                'page-number'          => 'Número de página',
+                'previous-page'        => 'Página anterior',
+                'showing'              => 'Mostrando :firstItem',
+                'to'                   => 'hasta :lastItem',
             ],
         ],
 
@@ -607,10 +607,10 @@ return [
 
     'categories' => [
         'filters' => [
-            'clear-all' => 'Alle löschen',
-            'filter'    => 'Filter',
-            'filters'   => 'Filter:',
-            'sort'      => 'Sortieren',
+            'clear-all' => 'Borrar todo',
+            'filter'    => 'Filtrar',
+            'filters'   => 'Filtros:',
+            'sort'      => 'Ordenar',
         ],
 
         'toolbar' => [
@@ -620,19 +620,19 @@ return [
         ],
 
         'view' => [
-            'empty'     => 'Keine Produkte in dieser Kategorie verfügbar',
-            'load-more' => 'Mehr laden',
+            'empty'     => 'No hay productos disponibles en esta categoría',
+            'load-more' => 'Cargar más',
         ],
     ],
 
     'search' => [
-        'title'   => 'Suchergebnisse für: :query',
+        'title'   => 'Resultados para: :query',
         'results' => 'Resultados de búsqueda',
 
         'images' => [
             'index' => [
                 'only-images-allowed'  => 'Solo se permiten imágenes (.jpeg, .jpg, .png, ..).',
-                'search'               => 'Suchen',
+                'search'               => 'Buscar',
                 'size-limit-error'     => 'Error de límite de tamaño',
                 'something-went-wrong' => 'Algo salió mal, por favor inténtelo de nuevo más tarde.',
             ],
@@ -644,23 +644,23 @@ return [
     ],
 
     'compare' => [
-        'already-added'      => 'Artikel wurde bereits zur Vergleichsliste hinzugefügt',
-        'delete-all'         => 'Alles löschen',
-        'empty-text'         => 'Sie haben keine Artikel in Ihrer Vergleichsliste',
-        'item-add-success'   => 'Artikel wurde erfolgreich zur Vergleichsliste hinzugefügt',
-        'product-compare'    => 'Produktvergleich',
-        'remove-all-success' => 'Alle Artikel erfolgreich entfernt.',
-        'remove-error'       => 'Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.',
-        'remove-success'     => 'Artikel wurde erfolgreich entfernt.',
-        'title'              => 'Produktvergleich',
+        'already-added'      => 'El artículo ya ha sido añadido a la lista de comparación',
+        'delete-all'         => 'Borrar todo',
+        'empty-text'         => 'No tienes artículos en tu lista de comparación',
+        'item-add-success'   => 'El artículo se ha añadido correctamente a la lista de comparación',
+        'product-compare'    => 'Comparación de productos',
+        'remove-all-success' => 'Todos los artículos fueron eliminados correctamente.',
+        'remove-error'       => 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.',
+        'remove-success'     => 'El artículo se ha eliminado correctamente.',
+        'title'              => 'Comparación de productos',
     ],
 
     'checkout' => [
         'success' => [
-            'info'          => 'Wir werden Ihnen Ihre Bestelldetails und Tracking-Informationen per E-Mail zusenden',
-            'order-id-info' => 'Ihre Bestellnummer lautet #:order_id',
-            'thanks'        => 'Vielen Dank für Ihre Bestellung!',
-            'title'         => 'Bestellung erfolgreich aufgegeben',
+            'info'          => 'Le enviaremos los detalles de su pedido y la información de seguimiento por correo electrónico',
+            'order-id-info' => 'Su número de pedido es #:order_id',
+            'thanks'        => '¡Gracias por su pedido!',
+            'title'         => 'Pedido realizado con éxito',
         ],
 
         'cart' => [
@@ -858,95 +858,95 @@ return [
     ],
 
     'errors' => [
-        'go-to-home' => 'Zur Startseite gehen',
+        'go-to-home' => 'Ir a inicio',
 
         '404' => [
-            'description' => 'Hoppla! Die Seite, nach der Sie suchen, macht gerade Urlaub. Es scheint, wir konnten nicht finden, wonach Sie gesucht haben.',
-            'title'       => '404 Seite nicht gefunden',
+            'description' => '¡Vaya! La página que busca está de vacaciones. Parece que no podemos encontrar lo que busca.',
+            'title'       => '404 Página no encontrada',
         ],
 
         '401' => [
-            'description' => 'Hoppla! Es sieht so aus, als hätten Sie keine Berechtigung, auf diese Seite zuzugreifen. Es scheint, dass Ihnen die notwendigen Zugangsdaten fehlen.',
-            'title'       => '401 Unbefugt',
+            'description' => '¡Vaya! Parece que no tiene permiso para acceder a esta página. Parece que le faltan las credenciales necesarias.',
+            'title'       => '401 No autorizado',
         ],
 
         '403' => [
-            'description' => 'Hoppla! Diese Seite ist tabu. Es sieht so aus, als hätten Sie nicht die erforderlichen Berechtigungen, um diesen Inhalt anzuzeigen.',
-            'title'       => '403 Verboten',
+            'description' => '¡Vaya! Esta página está prohibida. Parece que no tiene los permisos necesarios para ver este contenido.',
+            'title'       => '403 Prohibido',
         ],
 
         '500' => [
-            'description' => 'Hoppla! Etwas ist schiefgelaufen. Es scheint, dass wir Schwierigkeiten haben, die von Ihnen gesuchte Seite zu laden.',
-            'title'       => '500 Interner Serverfehler',
+            'description' => '¡Vaya! Algo salió mal. Parece que tenemos problemas para cargar la página que busca.',
+            'title'       => '500 Error interno del servidor',
         ],
 
         '503' => [
-            'description' => 'Hoppla! Es sieht so aus, als wären wir vorübergehend wegen Wartungsarbeiten offline. Bitte kommen Sie später wieder.',
-            'title'       => '503 Dienst nicht verfügbar',
+            'description' => '¡Vaya! Parece que estamos temporalmente fuera de línea por mantenimiento. Por favor, vuelva más tarde.',
+            'title'       => '503 Servicio no disponible',
         ],
     ],
 
     'layouts' => [
-        'address'               => 'Adresse',
-        'downloadable-products' => 'Downloadbare Produkte',
-        'my-account'            => 'Mein Konto',
-        'orders'                => 'Bestellungen',
-        'profile'               => 'Profil',
-        'reviews'               => 'Bewertungen',
-        'wishlist'              => 'Wunschliste',
+        'address'               => 'Dirección',
+        'downloadable-products' => 'Productos descargables',
+        'my-account'            => 'Mi cuenta',
+        'orders'                => 'Pedidos',
+        'profile'               => 'Perfil',
+        'reviews'               => 'Reseñas',
+        'wishlist'              => 'Lista de deseos',
     ],
 
     'subscription' => [
-        'already'             => 'Sie sind bereits für unseren Newsletter angemeldet.',
-        'subscribe-success'   => 'Sie haben sich erfolgreich für unseren Newsletter angemeldet.',
-        'unsubscribe-success' => 'Sie haben sich erfolgreich von unserem Newsletter abgemeldet.',
+        'already'             => 'Ya está suscrito a nuestro boletín.',
+        'subscribe-success'   => 'Se ha suscrito con éxito a nuestro boletín.',
+        'unsubscribe-success' => 'Se ha dado de baja con éxito de nuestro boletín.',
     ],
 
     'emails' => [
-        'dear'   => 'Sehr geehrte/r :customer_name',
-        'thanks' => 'Wenn Sie Hilfe benötigen, kontaktieren Sie uns bitte unter <a href=":link" style=":style">:email</a>.<br/>Vielen Dank!',
+        'dear'   => 'Estimado/a :customer_name',
+        'thanks' => 'Si necesita ayuda, contáctenos en <a href=":link" style=":style">:email</a>.<br/>¡Gracias!',
 
         'customers' => [
             'registration' => [
                 'credentials-description' => 'Su cuenta ha sido creada. Los detalles de su cuenta se encuentran a continuación:',
-                'description'             => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung können Sie auf weitere Dienste zugreifen, einschließlich der Überprüfung früherer Bestellungen, Wunschlisten und der Bearbeitung Ihrer Kontoinformationen.',
-                'greeting'                => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
+                'description'             => 'Su cuenta ha sido creada con éxito y puede iniciar sesión con su dirección de correo electrónico y contraseña. Después de iniciar sesión, podrá acceder a más servicios, incluyendo la revisión de pedidos anteriores, listas de deseos y la edición de su información de cuenta.',
+                'greeting'                => '¡Bienvenido y gracias por registrarse con nosotros!',
                 'password'                => 'Contraseña',
-                'sign-in'                 => 'Anmelden',
-                'subject'                 => 'Neue Kundenregistrierung',
+                'sign-in'                 => 'Iniciar sesión',
+                'subject'                 => 'Nuevo registro de cliente',
                 'username-email'          => 'Nombre de usuario/Correo electrónico',
             ],
 
             'forgot-password' => [
-                'description'    => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben.',
-                'greeting'       => 'Passwort vergessen!',
-                'reset-password' => 'Passwort zurücksetzen',
-                'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
+                'description'    => 'Recibe este correo electrónico porque hemos recibido una solicitud para restablecer la contraseña de su cuenta.',
+                'greeting'       => '¡Contraseña olvidada!',
+                'reset-password' => 'Restablecer contraseña',
+                'subject'        => 'Correo electrónico para restablecer la contraseña',
             ],
 
             'update-password' => [
-                'description' => 'Sie erhalten diese E-Mail, weil Sie Ihr Passwort aktualisiert haben.',
-                'greeting'    => 'Passwort aktualisiert!',
-                'subject'     => 'Passwort aktualisiert',
+                'description' => 'Recibe este correo electrónico porque ha actualizado su contraseña.',
+                'greeting'    => '¡Contraseña actualizada!',
+                'subject'     => 'Contraseña actualizada',
             ],
 
             'verification' => [
-                'description'  => 'Bitte klicken Sie auf den unten stehenden Button, um Ihre E-Mail-Adresse zu bestätigen.',
-                'greeting'     => 'Willkommen!',
-                'subject'      => 'E-Mail zur Kontoüberprüfung',
-                'verify-email' => 'E-Mail-Adresse bestätigen',
+                'description'  => 'Por favor, haga clic en el botón de abajo para confirmar su dirección de correo electrónico.',
+                'greeting'     => '¡Bienvenido!',
+                'subject'      => 'Correo electrónico de verificación de cuenta',
+                'verify-email' => 'Confirmar dirección de correo electrónico',
             ],
 
             'commented' => [
-                'description' => 'Notiz lautet - :note',
-                'subject'     => 'Neuer Kommentar hinzugefügt',
+                'description' => 'Nota - :note',
+                'subject'     => 'Nuevo comentario añadido',
             ],
 
             'subscribed' => [
-                'description' => 'Herzlichen Glückwunsch und willkommen in unserer Newsletter-Community! Wir freuen uns, Sie an Bord zu haben und Sie mit den neuesten Nachrichten, Trends und exklusiven Angeboten auf dem Laufenden zu halten.',
-                'greeting'    => 'Willkommen bei unserem Newsletter!',
-                'subject'     => 'Sie! Abonnieren Sie unseren Newsletter',
-                'unsubscribe' => 'Abmelden',
+                'description' => '¡Felicidades y bienvenido a nuestra comunidad de boletines! Estamos encantados de tenerte a bordo y mantenerte al día con las últimas noticias, tendencias y ofertas exclusivas.',
+                'greeting'    => '¡Bienvenido a nuestro boletín!',
+                'subject'     => '¡Usted! Suscríbase a nuestro boletín',
+                'unsubscribe' => 'Darse de baja',
             ],
         ],
 
