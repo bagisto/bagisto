@@ -184,8 +184,6 @@ class Installer extends Command
             $timezones
         );
 
-        // $this->info('Your Default Timezone is '.date_default_timezone_get());
-
         $defaultLocale = $this->updateEnvChoice(
             'APP_LOCALE',
             'Please select the default application locale',
