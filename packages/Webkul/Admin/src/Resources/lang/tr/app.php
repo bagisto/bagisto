@@ -3423,17 +3423,6 @@ return [
                 'info'  => 'Katalog',
                 'title' => 'Katalog',
 
-                'inventory' => [
-                    'info'  => 'Geri siparişleri ayarlayın',
-                    'title' => 'Envanter',
-
-                    'stock-options' => [
-                        'allow-back-orders' => 'Geri Siparişlere İzin Ver',
-                        'title'             => 'Stok Seçenekleri',
-                        'title-info'        => 'Stok seçenekleri, şirket hisselerini belirli bir fiyattan satın alma veya satma hakkını veren yatırım sözleşmeleridir ve potansiyel karları etkiler.',
-                    ],
-                ],
-
                 'products' => [
                     'info'  => 'Misafir ödeme, ürün görünüm sayfası, alışveriş sepeti görünüm sayfası, mağaza ön yüzü, inceleme ve özellik sosyal paylaşımını ayarlayın.',
                     'title' => 'Ürünler',
@@ -3747,7 +3736,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Sipariş numaralarını ve minimum siparişleri ayarlayın.',
+                    'info'  => 'Sipariş numaralarını, minimum siparişleri ve geri siparişleri ayarlayın.',
                     'title' => 'Sipariş Ayarları',
 
                     'order-number' => [
@@ -3763,6 +3752,12 @@ return [
                         'minimum-order-amount' => 'Minimum Sipariş Tutarı',
                         'title'                => 'Minimum Sipariş Ayarları',
                         'title-info'           => 'Siparişin işlenmesi veya avantajlardan yararlanabilmesi için gerekli en düşük miktar veya değeri belirleyen yapılandırılmış kriterler.',
+                    ],
+
+                    'stock-options' => [
+                        'allow-back-orders' => 'Geri Siparişlere İzin Ver',
+                        'title'             => 'Stok Seçenekleri',
+                        'title-info'        => 'Stok seçenekleri, şirket hisselerini belirli bir fiyattan satın alma veya satma hakkını veren yatırım sözleşmeleridir ve potansiyel karları etkiler.',
                     ],
                 ],
 

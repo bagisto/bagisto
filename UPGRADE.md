@@ -6,21 +6,25 @@
 
 - [Updating Dependencies](#updating-dependencies)
 - [The `Webkul\Checkout\Cart` class](#the-cart-class)
+- [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
 - [Shop API Response Updates](#the-shop-api-response-updates)
 
 ## Medium Impact Changes
 
 - [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
+- [Admin Event Updates](#admin-event-updates)
 - [The System Configuration Updates](#the-system-config-update)
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The Checkout Tables Schema Updates](#the-checkout-tables-schema-updates)
+- [The `Webkul\DataGrid\DataGrid` class](#the-datagrid-class)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
-- [Shop Event Parameter Updates](#event-parameter-updated)
+- [Shop Event Updates](#shop-event-updates)
 - [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
+- [Shop Class HTML Attribute updated](#shop-class-attribute-updated)
 
 ## Low Impact Changes
 
@@ -31,32 +35,12 @@
 - [Moved `coupon.blade.php`](#moved-coupon-blade)
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
-- [Renamed Admin View render event Names](#renamed-admin-view-render-event-names)
+- [Renamed Admin View Render Event Names](#renamed-admin-view-render-event-names)
 
 ## Upgrading To v2.2.0 From v2.1.0
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
-
-### Updating Dependencies
-
-**Impact Probability: High**
-
-#### PHP 8.2.0 Required
-
-Laravel now requires PHP 8.1.0 or greater.
-
-#### curl 7.34.0 Required
-
-Laravel's HTTP client now requires curl 7.34.0 or greater.
-
-#### Composer Dependencies
-
-There is no dependency needed to be updated at for this upgrade.
-
-### Admin
-
-#### Admin Customized Datagrid Header Parameters Updated
 
 ### Updating Dependencies
 
@@ -133,6 +117,13 @@ There is no dependency needed to be updated at for this upgrade.
 
 In this example, the `repository` option has been replaced with `options`, which is defined as a closure returning an array of options. Adjust the closure to populate the select field options as needed.
 
+3. The Inventory Stock Options configuration has been relocated to the Order Settings configuration, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('catalog.inventory.stock_options.back_orders')
++ core()->getConfigData('sales.order_settings.stock_options.back_orders')
+```
+
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names
 
@@ -140,13 +131,12 @@ In this example, the `repository` option has been replaced with `options`, which
 
 1. In the `packages/Webkul/Admin/src/Routes/sales-routes.php` route file, route names and controller methods have been renamed to provide clearer and more meaningful representations.
 
-
 ```diff
 - Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
 + Route::post('update-totals/{order_id}', 'updateTotals')->name('admin.sales.refunds.update_totals');
 
 <a name="renamed-admin-view-render-event-names"></a>
-#### Admin View render event Names updated
+#### Renamed Admin View Render Event Names
 
 **Impact Probability: Low**
 
@@ -326,7 +316,6 @@ In this example, the `repository` option has been replaced with `options`, which
 + }
 ```
 
-
 <a name="removed-cart-traits"></a>
 #### Removed Cart Traits
 
@@ -342,14 +331,12 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 </div>
 
-
 <a name="the-cart-class"></a>
 #### The `Webkul\Checkout\Cart` class
 
 **Impact Probability: High**
 
 1. The `initCart` method now accepts an optional `Webkul\Customer\Models\Customer` model instance and initializes the cart based on this parameter.
-
 
 ```diff
 - public function initCart()
@@ -426,6 +413,52 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 ```
 
 
+
+<a name="datagrid"></a>
+### DataGrid
+
+<a name="the-datagrid-class"></a>
+#### The `Webkul\DataGrid\DataGrid` Class
+
+**Impact Probability: Medium**
+
+1. We have made some of the methods in this class private. Here are the methods, please have a look.
+
+```diff
+- public function validatedRequest(): array
++ private function validatedRequest(): array
+
+- public function processRequestedFilters(array $requestedFilters)
++ private function processRequestedFilters(array $requestedFilters)
+
+- public function processRequestedSorting($requestedSort)
++ private function processRequestedSorting($requestedSort)
+
+- public function processRequestedPagination($requestedPagination): LengthAwarePaginator
++ private function processRequestedPagination($requestedPagination): LengthAwarePaginator
+
+- public function processRequest(): void
++ private function processRequest(): void
+
+- public function sanitizeRow($row): \stdClass
++ private function sanitizeRow($row): \stdClass
+
+- public function formatData(): array
++ private function formatData(): array
+
+- public function prepare(): void
++ private function prepare(): void
+```
+
+2. We have deprecated the 'toJson' method. Instead of 'toJson', please use the 'process' method.
+
+```diff
+- app(AttributeDataGrid::class)->toJson();
++ datagrid(AttributeDataGrid::class)->process();
+```
+
+
+
 <a name="notification"></a>
 ### Notification
 
@@ -440,6 +473,8 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 - public function getAll()
 + public function getAll(array $params = [])
 ```
+
+
 
 <a name="product"></a>
 ### Product
@@ -462,7 +497,6 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 - public function getFilters()
 + public function getFilters(array $params): array
 ```
-
 
 <a name="the-product-repository"></a>
 #### The `Webkul\Product\Repositories\ProductRepository` Repository
@@ -506,6 +540,23 @@ If you've implemented your own product type or overridden existing type classes,
 ```
 
 2: Please update your `prepareForCart` and `validateCartItem` methods to include the `*_incl_tax` columns for managing inclusive tax calculation for your product type. You can refer to the `Webkul\Product\Type\AbstractType` class and adjust your class accordingly.
+
+<a name="the-configurable-type-class"></a>
+#### The `Webkul\Product\Type\Configurable` Class
+
+**Impact Probability: High**
+
+1. We've removed the following methods from the `Webkul\Product\Type\Configurable` class as we no longer support default configurable variants.
+
+```diff
+- public function getDefaultVariant()
+
+- public function getDefaultVariantId()
+
+- public function setDefaultVariantId()
+
+- public function updateDefaultVariantId()
+```
 
 
 <a name="Sales"></a>
@@ -623,6 +674,29 @@ If you've implemented your own product type or overridden existing type classes,
 <a name="shop"></a>
 ### Shop
 
+<a name="the-shop-api-response-updates"></a>
+#### Shop API Response Updates
+
+**Impact Probability: High**
+
+1. The response for the Shop route `shop.api.checkout.cart.store` API has been updated. If you are consuming this API, please make the necessary changes. we have refined the exception handling to provide more specific error responses and HTTP_BAD_REQUEST status code, ensuring better feedback for users.
+
+```diff
+- catch (\Exception $exception) {
+-   return new JsonResource([
+-       'redirect_uri' => route('shop.product_or_category.index', $product->product->url_key),
+-       'message'      => $exception->getMessage(),
+-   ]);
+- }
+
++ catch (\Exception $exception) {
++    return response()->json([
++        'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
++        'message'      => $exception->getMessage(),
++    ], Response::HTTP_BAD_REQUEST);
++ }
+```
+
 <a name="shop-customized-datagrid-parameters-updated"></a>
 ####  Shop Customized Datagrid Parameters Updated
 
@@ -664,16 +738,30 @@ If you've implemented your own product type or overridden existing type classes,
 + </template>
 ```
 
-<a name="event-parameter-updated"></a>
-#### Shop Event Parameter Updates
+<a name="shop-event-updates"></a>
+#### Shop Event Updates
 
 **Impact Probability: Medium**
 
+##### Shop Event Parameter Updated
 1. The event data previously containing an email address has been updated to include an instance of the `Webkul\Customer\Models\Customer` model.
 
 ```diff
 - Event::dispatch('customer.after.login', $loginRequest->get('email'));
 + Event::dispatch('customer.after.login', auth()->guard()->user());
+```
+
+##### Shop Event Inside Head Updated
+
+**Impact Probability: High**
+
+1. The event that was previously added in Shop has now been updated in the new format. You can now directly add your own custom elements inside the <head> tag.
+
+```diff
++ {!! view_render_event('bagisto.shop.layout.head.before') !!}
+
+- {!! view_render_event('bagisto.shop.layout.head') !!}
++ {!! view_render_event('bagisto.shop.layout.head.after') !!}
 ```
 
 <a name="renamed-shop-api-routes-names"></a>
@@ -682,7 +770,6 @@ If you've implemented your own product type or overridden existing type classes,
 **Impact Probability: Low**
 
 1. The routes names have been renamed for consistency in the `packages/Webkul/Shop/src/Routes/api.php` route file.
-
 
 ```diff
 - Route::get('', 'index')->name('api.shop.customers.account.addresses.index');
@@ -801,6 +888,22 @@ If you've implemented your own product type or overridden existing type classes,
 }
 ```
 
+<a name="admin-event-updates"></a>
+#### Admin Event Updates
+
+**Impact Probability: High**
+
+#### Admin Event Inside Head Updated
+
+1. The event that was previously added in Admin has now been updated in the new format. You can now directly add your own custom elements inside the <head> tag.
+
+```diff
++ {!! view_render_event('bagisto.admin.layout.head.before') !!}
+
+- {!! view_render_event('bagisto.admin.layout.head') !!}
++ {!! view_render_event('bagisto.admin.layout.head.after') !!}
+```
+
 <a name="moved-coupon-blade"></a>
 #### Moved `coupon.blade.php`
 
@@ -837,7 +940,6 @@ If you've implemented your own product type or overridden existing type classes,
 ```
 
 2: The new class for handling shipping tax inclusion now includes two additional methods: `isInclusiveTaxShippingPrices` and `getShippingOriginAddress`.
-
 
 ```diff
 + public function isInclusiveTaxShippingPrices(): bool

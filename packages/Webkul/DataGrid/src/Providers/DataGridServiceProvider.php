@@ -11,6 +11,8 @@ class DataGridServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        include __DIR__.'/../Http/helpers.php';
+        
         $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
     }
 

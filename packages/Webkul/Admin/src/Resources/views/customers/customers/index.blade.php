@@ -41,7 +41,7 @@
 
     <x-admin::datagrid
         :src="route('admin.customers.customers.index')"
-        ref="customer_data"
+        ref="customerDatagrid"
         :isMultiRow="true"
     >
         @php 

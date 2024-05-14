@@ -532,9 +532,7 @@
                     let payload = {
                         billing: {
                             ...this.getSelectedAddress('billing', params.billing.id),
-                            ...{
-                                use_for_shipping: this.useBillingAddressForShipping
-                            }
+                            use_for_shipping: this.useBillingAddressForShipping,
                         },
                     };
 
@@ -584,7 +582,10 @@
                         address.id = null;
                     }
 
-                    return address;
+                    return {
+                        ...address,
+                        default_address: 0,
+                    };
                 },
 
                 moveToNextStep() {
