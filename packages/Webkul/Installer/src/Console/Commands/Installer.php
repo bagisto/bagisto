@@ -178,7 +178,7 @@ class Installer extends Command
         );
 
         $timezones = $this->getTimezones();
-        $defaultLocale = $this->updateEnvSuggest(
+        $defaultTimezone = $this->updateEnvSuggest(
             'APP_TIMEZONE',
             'Please select the application timezone',
             $timezones
