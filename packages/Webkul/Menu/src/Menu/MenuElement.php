@@ -74,7 +74,7 @@ abstract class MenuElement
      */
     public function isActive(): bool
     {
-        if ($this instanceof MenuGroup) {
+        if ($this->hasGroup()) {
             foreach ($this->menuItems as $item) {
                 if ($item->isActive()) {
                     return true;
@@ -94,7 +94,7 @@ abstract class MenuElement
      */
     public function getCurrentActiveItem()
     {
-        if ($this instanceof MenuGroup) {
+        if ($this->hasGroup()) {
             foreach ($this->menuItems as $item) {
                 if ($item->isActive()) {
                     return $item;
