@@ -6,6 +6,7 @@
 
 - [Updating Dependencies](#updating-dependencies)
 - [The `Webkul\Checkout\Cart` class](#the-cart-class)
+- [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
 - [Shop API Response Updates](#the-shop-api-response-updates)
 
 ## Medium Impact Changes
@@ -21,6 +22,9 @@
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
 - [Shop Event Parameter Updates](#event-parameter-updated)
 - [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
+- [Shop Class HTML Attribute updated](#shop-class-attribute-updated)
+
+</div>
 
 ## Low Impact Changes
 
@@ -37,26 +41,6 @@
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
-
-### Updating Dependencies
-
-**Impact Probability: High**
-
-#### PHP 8.2.0 Required
-
-Laravel now requires PHP 8.1.0 or greater.
-
-#### curl 7.34.0 Required
-
-Laravel's HTTP client now requires curl 7.34.0 or greater.
-
-#### Composer Dependencies
-
-There is no dependency needed to be updated at for this upgrade.
-
-### Admin
-
-#### Admin Customized Datagrid Header Parameters Updated
 
 ### Updating Dependencies
 
@@ -507,6 +491,23 @@ If you've implemented your own product type or overridden existing type classes,
 
 2: Please update your `prepareForCart` and `validateCartItem` methods to include the `*_incl_tax` columns for managing inclusive tax calculation for your product type. You can refer to the `Webkul\Product\Type\AbstractType` class and adjust your class accordingly.
 
+<a name="the-configurable-type-class"></a>
+#### The `Webkul\Product\Type\Configurable` Class
+
+**Impact Probability: High**
+
+1. We've removed the following methods from the `Webkul\Product\Type\Configurable` class as we no longer support default configurable variants.
+
+```diff
+- public function getDefaultVariant()
+
+- public function getDefaultVariantId()
+
+- public function setDefaultVariantId()
+
+- public function updateDefaultVariantId()
+```
+
 
 <a name="Sales"></a>
 ### Sales
@@ -664,6 +665,7 @@ If you've implemented your own product type or overridden existing type classes,
 + </template>
 ```
 
+
 <a name="event-parameter-updated"></a>
 #### Shop Event Parameter Updates
 
@@ -674,6 +676,18 @@ If you've implemented your own product type or overridden existing type classes,
 ```diff
 - Event::dispatch('customer.after.login', $loginRequest->get('email'));
 + Event::dispatch('customer.after.login', auth()->guard()->user());
+```
+
+<a name="shop-class-attribute-updated"></a>
+#### Shop Class HTML Attribute updated
+
+**Impact Probability: Medium**
+
+1. We've modified the HTML attribute class in the `shop::products.prices.configurable` blade. If you've overridden this file or implemented any customizations, ensure to update the class name accordingly. Failure to do so may affect the price change functionality for configurable product option selection.
+
+```diff
+- <p class="special-price font-semibold">
++ <p class="final-price font-semibold">
 ```
 
 <a name="renamed-shop-api-routes-names"></a>
