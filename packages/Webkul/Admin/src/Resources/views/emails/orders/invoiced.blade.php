@@ -110,8 +110,10 @@
 
             <tbody style="font-size: 16px;font-weight: 400;color: #384860;">
                 @foreach ($invoice->items as $item)
-                    <tr>
-                        <td style="text-align: left;padding: 15px">{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
+                    <tr style="vertical-align: text-top;">
+                        <td style="text-align: left;padding: 15px">
+                            {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
+                        </td>
 
                         <td style="text-align: left;padding: 15px">
                             {{ $item->name }}
@@ -127,10 +129,27 @@
                             @endif
                         </td>
 
-                        <td style="text-align: left;padding: 15px">{{ core()->formatPrice($item->price, $invoice->order_currency_code) }}
+                        <td style="display: flex;flex-direction: column;text-align: left;padding: 15px">
+                            @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                {{ core()->formatBasePrice($item->base_price_incl_tax) }}
+                            @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                {{ core()->formatBasePrice($item->base_price_incl_tax) }}
+
+                                <span style="font-size: 12px; white-space: nowrap">
+                                    @lang('admin::app.emails.orders.excl-tax')
+
+                                    <span style="font-weight: 600">
+                                        {{ core()->formatBasePrice($item->base_price) }}
+                                    </span>
+                                </span>
+                            @else
+                                {{ core()->formatBasePrice($item->base_price) }}
+                            @endif
                         </td>
 
-                        <td style="text-align: left;padding: 15px">{{ $item->qty }}</td>
+                        <td style="text-align: left;padding: 15px">
+                            {{ $item->qty }}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -138,42 +157,108 @@
     </div>
 
     <div style="display: grid;justify-content: end;font-size: 16px;color: #384860;line-height: 30px;padding-top: 20px;padding-bottom: 20px;">
-        <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-            <span>{{ __('admin::app.emails.orders.subtotal') }}</span>
-
-            <span style="text-align: right;">
-                {{ core()->formatPrice($invoice->sub_total, $invoice->order_currency_code) }}
-            </span>
-        </div>
-
-        @if ($invoice->order->shipping_address)
-            <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-                <span>{{ __('admin::app.emails.orders.shipping-handling') }}</span>
+        @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <span>
+                    @lang('admin::app.emails.orders.subtotal')
+                </span>
 
                 <span style="text-align: right;">
-                    {{ core()->formatPrice($invoice->shipping_amount, $invoice->order_currency_code) }}
+                    {{ core()->formatBasePrice($invoice->base_sub_total_incl_tax) }}
+                </span>
+            </div>
+        @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <span>
+                    @lang('admin::app.emails.orders.subtotal-excl-tax')
+                </span>
+
+                <span style="text-align: right;">
+                    {{ core()->formatBasePrice($invoice->base_sub_total) }}
+                </span>
+            </div>
+
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <span>
+                    @lang('admin::app.emails.orders.subtotal-incl-tax')
+                </span>
+
+                <span style="text-align: right;">
+                    {{ core()->formatBasePrice($invoice->base_sub_total_incl_tax) }}
+                </span>
+            </div>
+        @else
+            <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <span>
+                    @lang('admin::app.emails.orders.subtotal')
+                </span>
+
+                <span style="text-align: right;">
+                    {{ core()->formatBasePrice($invoice->base_sub_total) }}
                 </span>
             </div>
         @endif
 
-        @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($invoice->order, false) as $taxRate => $taxAmount )
-            <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-                <span>
-                    {{ __('admin::app.emails.orders.tax') }} {{ $taxRate }} %
-                </span>
+        @if ($invoice->order->shipping_address)
+            @if (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'including_tax')
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('admin::app.emails.orders.shipping-handling')
+                    </span>
 
-                <span style="text-align: right;">
-                    {{ core()->formatPrice($invoice->tax_amount, $invoice->order_currency_code) }}
-                </span>
-            </div>
-        @endforeach
+                    <span style="text-align: right;">
+                        {{ core()->formatBasePrice($invoice->base_shipping_amount_incl_tax) }}
+                    </span>
+                </div>
+            @elseif (core()->getConfigData('sales.taxes.sales.display_shipping_amount') == 'both')
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('admin::app.emails.orders.shipping-handling-excl-tax')
+                    </span>
+
+                    <span style="text-align: right;">
+                        {{ core()->formatBasePrice($invoice->base_shipping_amount) }}
+                    </span>
+                </div>
+                
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('admin::app.emails.orders.shipping-handling-incl-tax')
+                    </span>
+
+                    <span style="text-align: right;">
+                        {{ core()->formatBasePrice($invoice->base_shipping_amount_incl_tax) }}
+                    </span>
+                </div>
+            @else
+                <div style="display: grid;gap: 20px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                    <span>
+                        @lang('admin::app.emails.orders.shipping-handling')
+                    </span>
+
+                    <span style="text-align: right;">
+                        {{ core()->formatBasePrice($invoice->base_shipping_amount) }}
+                    </span>
+                </div>
+            @endif
+        @endif
+
+        <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
+            <span>
+                @lang('admin::app.emails.orders.tax')
+            </span>
+
+            <span style="text-align: right;">
+                {{ core()->formatBasePrice($invoice->base_tax_amount) }}
+            </span>
+        </div>
 
         @if ($invoice->discount_amount > 0)
             <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
                 <span>{{ __('admin::app.emails.orders.discount') }}</span>
 
                 <span style="text-align: right;">
-                    {{ core()->formatPrice($invoice->discount_amount, $invoice->order_currency_code) }}
+                    {{ core()->formatBasePrice($invoice->base_discount_amount) }}
                 </span>
             </div>
         @endif
@@ -182,7 +267,7 @@
             <span>{{ __('admin::app.emails.orders.grand-total') }}</span>
 
             <span style="text-align: right;">
-                {{ core()->formatPrice($invoice->grand_total, $invoice->order_currency_code) }}
+                {{ core()->formatBasePrice($invoice->base_grand_total) }}
             </span>
         </div>
     </div>

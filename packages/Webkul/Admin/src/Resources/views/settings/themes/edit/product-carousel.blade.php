@@ -21,6 +21,7 @@
                         </div>
                     </div>
 
+                    <!-- Title -->
                     <x-admin::form.control-group class="mb-2.5 pt-4">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.themes.edit.filter-title')
@@ -41,6 +42,7 @@
                         <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[options][title]" />
                     </x-admin::form.control-group>
 
+                    <!-- Sort -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.themes.edit.sort')
@@ -75,6 +77,7 @@
                         <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[options][filters][sort]" />
                     </x-admin::form.control-group>
 
+                    <!-- Limit -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.themes.edit.limit')
@@ -113,14 +116,13 @@
                                 @lang('admin::app.settings.themes.edit.filters')
                             </p>
                         </div>
-        
-                        <div class="flex gap-2.5">
-                            <div
-                                class="secondary-button"
-                                @click="$refs.productFilterModal.toggle()"
-                            >
-                                @lang('admin::app.settings.themes.edit.add-filter-btn')
-                            </div>
+
+                        <!-- Add Filter Button -->
+                        <div
+                            class="secondary-button"
+                            @click="$refs.productFilterModal.toggle()"
+                        >
+                            @lang('admin::app.settings.themes.edit.add-filter-btn')
                         </div>
                     </div>
 
@@ -139,7 +141,7 @@
                     
                         <!-- Details -->
                         <div 
-                            class="flex cursor-pointer justify-between gap-2.5 py-5"
+                            class="flex cursor-pointer items-center justify-between gap-2.5 py-5"
                             :class="{
                                 'border-b border-slate-300 dark:border-gray-800': index < options.filters.length - 1
                             }"
@@ -147,9 +149,7 @@
                             <div class="flex gap-2.5">
                                 <div class="grid place-content-start gap-1.5">
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        <div> 
-                                            @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
-                                        </div>
+                                        @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
@@ -160,19 +160,17 @@
 
                             <!-- Actions -->
                             <div class="grid place-content-start gap-1 text-right">
-                                <div class="flex items-center gap-x-5">
-                                    <p 
-                                        class="cursor-pointer text-red-600 transition-all hover:underline"
-                                        @click="remove(filter)"
-                                    > 
-                                        @lang('admin::app.settings.themes.edit.delete')
-                                    </p>
-                                </div>
+                                <p 
+                                    class="cursor-pointer text-red-600 transition-all hover:underline"
+                                    @click="remove(filter)"
+                                > 
+                                    @lang('admin::app.settings.themes.edit.delete')
+                                </p>
                             </div>
                         </div>
                     </div>
                     <!-- Filters Illustration -->
-                    <div    
+                    <div
                         class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                         v-else
                     >
@@ -211,6 +209,7 @@
                             value="product_carousel"
                         />
 
+                        <!-- Name -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.name')
@@ -231,6 +230,7 @@
                             <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
+                        <!-- Sort Order -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
@@ -251,6 +251,7 @@
                             <x-admin::form.control-group.error control-name="sort_order" />
                         </x-admin::form.control-group>
 
+                        <!-- Channels -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.channels')
@@ -360,14 +361,12 @@
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
-                        <div class="flex items-center gap-x-2.5">
-                            <button 
-                                type="submit"
-                                class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
-                            >
-                                @lang('admin::app.settings.themes.edit.save-btn')
-                            </button>
-                        </div>
+                        <button
+                            type="submit"
+                            class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
+                        >
+                            @lang('admin::app.settings.themes.edit.save-btn')
+                        </button>
                     </x-slot>
                 </x-admin::modal>
             </form>

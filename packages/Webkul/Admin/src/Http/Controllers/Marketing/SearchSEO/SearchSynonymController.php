@@ -29,7 +29,7 @@ class SearchSynonymController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(SearchSynonymDataGrid::class)->toJson();
+            return datagrid(SearchSynonymDataGrid::class)->process();
         }
 
         return view('admin::marketing.search-seo.search-synonyms.index');

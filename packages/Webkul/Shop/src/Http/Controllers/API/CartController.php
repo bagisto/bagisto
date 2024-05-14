@@ -186,10 +186,6 @@ class CartController extends APIController
 
         $cartResource = (new CartResource(Cart::getCart()))->jsonSerialize();
 
-        Cart::resetShippingMethod();
-
-        Cart::collectTotals();
-
         return new JsonResource([
             'data'     => [
                 'cart'             => $cartResource,

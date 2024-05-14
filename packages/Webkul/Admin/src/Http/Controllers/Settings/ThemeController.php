@@ -28,7 +28,7 @@ class ThemeController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(ThemeDatagrid::class)->toJson();
+            return datagrid(ThemeDatagrid::class)->process();
         }
 
         return view('admin::settings.themes.index');

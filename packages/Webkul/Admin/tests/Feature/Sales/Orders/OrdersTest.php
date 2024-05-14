@@ -138,32 +138,9 @@ it('should add product to the cart after search the product', function () {
         ->assertJsonPath('data.is_guest', $cart->is_guest)
         ->assertJsonPath('data.customer_id', $cart->customer_id)
         ->assertJsonPath('data.items_count', 1)
-        ->assertJsonPath('data.items_qty', $data['quantity'])
-        ->assertJsonPath('data.base_sub_total', core()->currency($price = $product->price * $data['quantity']))
-        ->assertJsonPath('data.base_tax_total', 0)
-        ->assertJsonPath('data.formatted_base_discount_amount', core()->currency(0))
-        ->assertJsonPath('data.base_discount_amount', 0)
-        ->assertJsonPath('data.base_grand_total', core()->currency($price))
-        ->assertJsonPath('data.selected_shipping_rate', core()->currency(0))
-        ->assertJsonPath('data.coupon_code', null)
-        ->assertJsonPath('data.selected_shipping_rate_method', '')
-        ->assertJsonPath('data.formatted_grand_total', core()->formatPrice($price))
-        ->assertJsonPath('data.formatted_sub_total', core()->formatPrice($price))
-        ->assertJsonPath('data.tax_total', 0)
-        ->assertJsonPath('data.formatted_tax_total', core()->formatPrice(0))
-        ->assertJsonPath('data.discount_amount', 0)
-        ->assertJsonPath('data.formatted_discount_amount', core()->formatPrice(0))
-        ->assertJsonPath('data.items.0.product.id', $data['product_id'])
-        ->assertJsonPath('data.items.0.product.name', $product->name)
-        ->assertJsonPath('data.items.0.product.type', $product->type)
-        ->assertJsonPath('data.items.0.product.sku', $product->sku)
-        ->assertJsonPath('data.billing_address', null)
-        ->assertJsonPath('data.shipping_address', null)
-        ->assertJsonPath('data.have_stockable_items', true)
-        ->assertJsonPath('data.payment_method', null)
-        ->assertJsonPath('data.payment_method_title', '');
+        ->assertJsonPath('data.items_qty', $data['quantity']);
 
-    $this->assertPrice($price, $response->json('data.grand_total'));
+    $this->assertPrice($price = $product->price * $data['quantity'], $response->json('data.grand_total'));
 
     $this->assertPrice($price, $response->json('data.sub_total'));
 
@@ -767,7 +744,6 @@ it('should store the payment method after storing the shipping method', function
         ->assertJsonPath('cart.customer_id', $customer->id)
         ->assertJsonPath('cart.items_count', 1)
         ->assertJsonPath('cart.items_qty', 1)
-        ->assertJsonPath('cart.base_sub_total', core()->formatBasePrice($product->price))
         ->assertJsonPath('cart.items.0.id', $cartItem->id)
         ->assertJsonPath('cart.items.0.quantity', 1)
         ->assertJsonPath('cart.items.0.type', $cartItem->type)

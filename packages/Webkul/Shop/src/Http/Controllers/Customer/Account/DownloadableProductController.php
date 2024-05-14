@@ -26,7 +26,7 @@ class DownloadableProductController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(DownloadableProductDataGrid::class)->toJson();
+            return datagrid(DownloadableProductDataGrid::class)->process();
         }
 
         return view('shop::customers.account.downloadable_products.index');
