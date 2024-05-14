@@ -289,7 +289,7 @@
                                         type="text"
                                         name="phone"
                                         ::value="address.phone"
-                                        rules="required|integer"
+                                        rules="required|phone"
                                         :label="trans('admin::app.customers.customers.view.address.edit.phone')"
                                         :placeholder="trans('admin::app.customers.customers.view.address.edit.phone')"
                                     />
