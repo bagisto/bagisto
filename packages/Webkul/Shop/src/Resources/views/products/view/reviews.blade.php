@@ -304,14 +304,14 @@
                         @lang('shop::app.products.view.reviews.translate')
                     </template>
                 </button>
-
+                
                 <!-- Review Attachments -->
                 <div
                     class="mt-3 flex flex-wrap gap-2"
                     v-if="review.images.length"
                 >
-                    <template v-for="file in review.images">
-                        <a
+                    <template v-for="(file, index) in review.images">
+                        <div
                             :href="file.url"
                             class="flex h-12 w-12"
                             target="_blank"
@@ -322,10 +322,11 @@
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
+                                @click="isImageZooming = !isImageZooming; activeIndex = index"
                             >
-                        </a>
-
-                        <a
+                        </div>
+                        
+                        <div
                             :href="file.url"
                             class="flex h-12 w-12"
                             target="_blank"
@@ -336,11 +337,19 @@
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
+                                @click="isImageZooming = !isImageZooming; activeIndex = index"
                             >
                             </video>
-                        </a>
+                        </div>
                     </template>
                 </div>
+
+                <!-- Review Images zoomer -->
+                <x-shop::modal.image-zoomer 
+                    ::attachments="attachments" 
+                    ::is-image-zooming="isImageZooming" 
+                    ::initial-index="'file_'+activeIndex"
+                />
             </div>
         </div>
     </script>
@@ -426,10 +435,27 @@
             template: '#v-product-review-item-template',
 
             props: ['review'],
-
+            
             data() {
                 return {
                     isLoading: false,
+
+                    isImageZooming: false,
+
+                    activeIndex: 0,
+                }
+            },
+
+            computed: {
+                attachments() {
+                    let data = [...this.review.images].map((file) => {
+                        return {
+                            url: file.url,
+                            type: file.type,
+                        }
+                    });
+
+                    return data;
                 }
             },
 

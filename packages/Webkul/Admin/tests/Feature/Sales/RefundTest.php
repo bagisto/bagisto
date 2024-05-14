@@ -63,20 +63,23 @@ it('should fails the validation error when refund items data not provided', func
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'cart_id'             => $cart->id,
+        'product_id'          => $product->id,
+        'sku'                 => $product->sku,
+        'quantity'            => $additional['quantity'],
+        'name'                => $product->name,
+        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax'      => $convertedPrice,
+        'base_price'          => $price,
+        'base_price_incl_tax' => $price,
+        'total'               => $total = $convertedPrice * $additional['quantity'],
+        'total_incl_tax'      => $total,
+        'base_total'          => $price * $additional['quantity'],
+        'weight'              => $product->weight ?? 0,
+        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
+        'type'                => $product->type,
+        'additional'          => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
@@ -147,8 +150,17 @@ it('should fails the validation error when refund items data not provided', func
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.refunds.store', $order->id))
-        ->assertJsonValidationErrorFor('refund.items')
+    postJson(route('admin.sales.refunds.store', $order->id), [
+        'refund' => [
+            'items'             => [
+                'INVALID_DATA',
+            ],
+            'shipping'          => '0',
+            'adjustment_refund' => '0',
+            'adjustment_fee'    => '0',
+        ],
+    ])
+        ->assertJsonValidationErrorFor('refund.items.0')
         ->assertUnprocessable();
 
     $cart->refresh();
@@ -250,20 +262,23 @@ it('should fails the validation error when refund items data provided with wrong
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'cart_id'             => $cart->id,
+        'product_id'          => $product->id,
+        'sku'                 => $product->sku,
+        'quantity'            => $additional['quantity'],
+        'name'                => $product->name,
+        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax'      => $convertedPrice,
+        'base_price'          => $price,
+        'base_price_incl_tax' => $price,
+        'total'               => $total = $convertedPrice * $additional['quantity'],
+        'total_incl_tax'      => $total,
+        'base_total'          => $price * $additional['quantity'],
+        'weight'              => $product->weight ?? 0,
+        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
+        'type'                => $product->type,
+        'additional'          => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
@@ -443,20 +458,23 @@ it('should store the order refund', function () {
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'cart_id'             => $cart->id,
+        'product_id'          => $product->id,
+        'sku'                 => $product->sku,
+        'quantity'            => $additional['quantity'],
+        'name'                => $product->name,
+        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax'      => $convertedPrice,
+        'base_price'          => $price,
+        'base_price_incl_tax' => $price,
+        'total'               => $total = $convertedPrice * $additional['quantity'],
+        'total_incl_tax'      => $total,
+        'base_total'          => $price * $additional['quantity'],
+        'weight'              => $product->weight ?? 0,
+        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
+        'type'                => $product->type,
+        'additional'          => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
@@ -655,20 +673,23 @@ it('should store the order refund and send email to the customer', function () {
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'cart_id'             => $cart->id,
+        'product_id'          => $product->id,
+        'sku'                 => $product->sku,
+        'quantity'            => $additional['quantity'],
+        'name'                => $product->name,
+        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax'      => $convertedPrice,
+        'base_price'          => $price,
+        'base_price_incl_tax' => $price,
+        'total'               => $total = $convertedPrice * $additional['quantity'],
+        'total_incl_tax'      => $total,
+        'base_total'          => $price * $additional['quantity'],
+        'weight'              => $product->weight ?? 0,
+        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
+        'type'                => $product->type,
+        'additional'          => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
@@ -871,20 +892,23 @@ it('should return the order refunded data', function () {
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'cart_id'             => $cart->id,
+        'product_id'          => $product->id,
+        'sku'                 => $product->sku,
+        'quantity'            => $additional['quantity'],
+        'name'                => $product->name,
+        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax'      => $convertedPrice,
+        'base_price'          => $price,
+        'base_price_incl_tax' => $price,
+        'total'               => $total = $convertedPrice * $additional['quantity'],
+        'total_incl_tax'      => $total,
+        'base_total'          => $price * $additional['quantity'],
+        'weight'              => $product->weight ?? 0,
+        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
+        'type'                => $product->type,
+        'additional'          => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([
@@ -982,10 +1006,17 @@ it('should return the order refunded data', function () {
 
     $summary['grand_total']['price'] += $summary['subtotal']['price'] + $summary['tax']['price'] + $summary['shipping']['price'] - $summary['discount']['price'];
 
+    $refund = [
+        'items'             => $items,
+        'shipping'          => $order->base_shipping_invoiced - $order->base_shipping_refunded - $order->base_shipping_discount_amount,
+        'adjustment_refund' => 0,
+        'adjustment_fee'    => 0,
+    ];
+
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.refunds.update_qty', $order->id), $items)
+    postJson(route('admin.sales.refunds.update_totals', $order->id), $refund)
         ->assertOk()
         ->assertJsonPath('grand_total.price', $summary['grand_total']['price']);
 
@@ -1088,20 +1119,23 @@ it('should return the view page of refund', function () {
     ];
 
     $cartItem = CartItem::factory()->create([
-        'cart_id'           => $cart->id,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'quantity'          => $additional['quantity'],
-        'name'              => $product->name,
-        'price'             => $convertedPrice = core()->convertPrice($price = $product->price),
-        'base_price'        => $price,
-        'total'             => $convertedPrice * $additional['quantity'],
-        'base_total'        => $price * $additional['quantity'],
-        'weight'            => $product->weight ?? 0,
-        'total_weight'      => ($product->weight ?? 0) * $additional['quantity'],
-        'base_total_weight' => ($product->weight ?? 0) * $additional['quantity'],
-        'type'              => $product->type,
-        'additional'        => $additional,
+        'cart_id'             => $cart->id,
+        'product_id'          => $product->id,
+        'sku'                 => $product->sku,
+        'quantity'            => $additional['quantity'],
+        'name'                => $product->name,
+        'price'               => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax'      => $convertedPrice,
+        'base_price'          => $price,
+        'base_price_incl_tax' => $price,
+        'total'               => $total = $convertedPrice * $additional['quantity'],
+        'total_incl_tax'      => $total,
+        'base_total'          => $price * $additional['quantity'],
+        'weight'              => $product->weight ?? 0,
+        'total_weight'        => ($product->weight ?? 0) * $additional['quantity'],
+        'base_total_weight'   => ($product->weight ?? 0) * $additional['quantity'],
+        'type'                => $product->type,
+        'additional'          => $additional,
     ]);
 
     $customerAddress = CustomerAddress::factory()->create([

@@ -1,6 +1,7 @@
 <?php
 
 use Webkul\Sales\Models\Order;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 return [
     /**
@@ -1400,7 +1401,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
                 'type'          => 'text',
                 'depends'       => 'active:1',
-                'validation'    => 'required_if:active,true',
+                'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1646,50 +1647,255 @@ return [
             ],
         ],
     ], [
-        'key'  => 'taxes',
-        'name' => 'admin::app.configuration.index.taxes.title',
-        'info' => 'admin::app.configuration.index.taxes.title',
+        'key'  => 'sales.taxes',
+        'name' => 'admin::app.configuration.index.sales.taxes.title',
+        'info' => 'admin::app.configuration.index.sales.taxes.title-info',
+        'icon' => 'settings/tax.svg',
         'sort' => 6,
     ], [
-        'key'  => 'taxes.catalogue',
-        'name' => 'admin::app.configuration.index.taxes.catalog.title',
-        'info' => 'admin::app.configuration.index.taxes.catalog.title-info',
-        'icon' => 'settings/tax.svg',
-        'sort' => 1,
-    ], [
-        'key'    => 'taxes.catalogue.pricing',
-        'name'   => 'admin::app.configuration.index.taxes.catalog.pricing.title',
-        'info'   => 'admin::app.configuration.index.taxes.catalog.pricing.title-info',
+        'key'    => 'sales.taxes.categories',
+        'name'   => 'admin::app.configuration.index.sales.taxes.categories.title',
+        'info'   => 'admin::app.configuration.index.sales.taxes.categories.title-info',
         'sort'   => 1,
         'fields' => [
             [
-                'name'       => 'tax_inclusive',
-                'title'      => 'admin::app.configuration.index.taxes.catalog.pricing.tax-inclusive',
-                'type'       => 'boolean',
-                'default'    => false,
+                'name'       => 'shipping',
+                'title'      => 'admin::app.configuration.index.sales.taxes.categories.shipping',
+                'type'       => 'select',
+                'default'    => 0,
+                'options'    => function () {
+                    $options = [
+                        [
+                            'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
+                            'value' => 0,
+                        ],
+                    ];
+
+                    foreach (app(TaxCategoryRepository::class)->all() as $taxCategory) {
+                        $options[] = [
+                            'title' => $taxCategory->name,
+                            'value' => $taxCategory->id,
+                        ];
+                    }
+
+                    return $options;
+                },
+            ], [
+                'name'       => 'product',
+                'title'      => 'admin::app.configuration.index.sales.taxes.categories.product',
+                'type'       => 'select',
+                'default'    => 0,
+                'options'    => function () {
+                    $options = [
+                        [
+                            'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
+                            'value' => 0,
+                        ],
+                    ];
+
+                    foreach (app(TaxCategoryRepository::class)->all() as $taxCategory) {
+                        $options[] = [
+                            'title' => $taxCategory->name,
+                            'value' => $taxCategory->id,
+                        ];
+                    }
+
+                    return $options;
+                },
             ],
         ],
     ], [
-        'key'    => 'taxes.catalogue.default_location_calculation',
-        'name'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.title',
-        'info'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.title-info',
-        'sort'   => 1,
+        'key'    => 'sales.taxes.calculation',
+        'name'   => 'admin::app.configuration.index.sales.taxes.calculation.title',
+        'info'   => 'admin::app.configuration.index.sales.taxes.calculation.title-info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'based_on',
+                'title'   => 'admin::app.configuration.index.sales.taxes.calculation.based-on',
+                'type'    => 'select',
+                'default' => 'shipping_address',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.shipping-address',
+                        'value' => 'shipping_address',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.billing-address',
+                        'value' => 'billing_address',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.shipping-origin',
+                        'value' => 'shipping_origin',
+                    ],
+                ],
+            ], [
+                'name'    => 'product_prices',
+                'title'   => 'admin::app.configuration.index.sales.taxes.calculation.product-prices',
+                'type'    => 'select',
+                'default' => 'excluding_tax',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.excluding-tax',
+                        'value' => 'excluding_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.including-tax',
+                        'value' => 'including_tax',
+                    ],
+                ],
+            ], [
+                'name'    => 'shipping_prices',
+                'title'   => 'admin::app.configuration.index.sales.taxes.calculation.shipping-prices',
+                'type'    => 'select',
+                'default' => 'excluding_tax',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.excluding-tax',
+                        'value' => 'excluding_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.including-tax',
+                        'value' => 'including_tax',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key'    => 'sales.taxes.default_destination_calculation',
+        'name'   => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.title',
+        'info'   => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.title-info',
+        'sort'   => 3,
         'fields' => [
             [
                 'name'    => 'country',
-                'title'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.default-country',
+                'title'   => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.default-country',
                 'type'    => 'country',
                 'default' => '',
             ], [
                 'name'    => 'state',
-                'title'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.default-state',
+                'title'   => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.default-state',
                 'type'    => 'state',
                 'default' => '',
             ], [
                 'name'    => 'post_code',
-                'title'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.default-post-code',
+                'title'   => 'admin::app.configuration.index.sales.taxes.default-destination-calculation.default-post-code',
                 'type'    => 'text',
                 'default' => '',
+            ],
+        ],
+    ], [
+        'key'    => 'sales.taxes.shopping_cart',
+        'name'   => 'admin::app.configuration.index.sales.taxes.shopping-cart.title',
+        'info'   => 'admin::app.configuration.index.sales.taxes.shopping-cart.title-info',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'    => 'display_prices',
+                'title'   => 'admin::app.configuration.index.sales.taxes.shopping-cart.display-prices',
+                'type'    => 'select',
+                'default' => 'excluding_tax',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.excluding-tax',
+                        'value' => 'excluding_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.including-tax',
+                        'value' => 'including_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.both',
+                        'value' => 'both',
+                    ],
+                ],
+            ], [
+                'name'    => 'display_subtotal',
+                'title'   => 'admin::app.configuration.index.sales.taxes.shopping-cart.display-subtotal',
+                'type'    => 'select',
+                'default' => 'excluding_tax',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.excluding-tax',
+                        'value' => 'excluding_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.including-tax',
+                        'value' => 'including_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.both',
+                        'value' => 'both',
+                    ],
+                ],
+            ], [
+                'name'    => 'display_shipping_amount',
+                'title'   => 'admin::app.configuration.index.sales.taxes.shopping-cart.display-shipping-amount',
+                'type'    => 'select',
+                'default' => 'excluding_tax',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.excluding-tax',
+                        'value' => 'excluding_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.including-tax',
+                        'value' => 'including_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.both',
+                        'value' => 'both',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key'    => 'sales.taxes.sales',
+        'name'   => 'admin::app.configuration.index.sales.taxes.sales.title',
+        'info'   => 'admin::app.configuration.index.sales.taxes.sales.title-info',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'    => 'display_prices',
+                'title'   => 'admin::app.configuration.index.sales.taxes.sales.display-prices',
+                'type'    => 'select',
+                'default' => 'excluding_tax',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.sales.excluding-tax',
+                        'value' => 'excluding_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.sales.including-tax',
+                        'value' => 'including_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.sales.both',
+                        'value' => 'both',
+                    ],
+                ],
+            ], [
+                'name'    => 'display_subtotal',
+                'title'   => 'admin::app.configuration.index.sales.taxes.sales.display-subtotal',
+                'type'    => 'select',
+                'default' => 'excluding_tax',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.sales.excluding-tax',
+                        'value' => 'excluding_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.sales.including-tax',
+                        'value' => 'including_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.sales.both',
+                        'value' => 'both',
+                    ],
+                ],
+            ], [
+                'name'    => 'display_shipping_amount',
+                'title'   => 'admin::app.configuration.index.sales.taxes.sales.display-shipping-amount',
+                'type'    => 'select',
+                'default' => 'excluding_tax',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.sales.excluding-tax',
+                        'value' => 'excluding_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.sales.including-tax',
+                        'value' => 'including_tax',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.sales.both',
+                        'value' => 'both',
+                    ],
+                ],
             ],
         ],
     ],
