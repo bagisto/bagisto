@@ -2,6 +2,7 @@
 
 namespace Webkul\Installer\Console\Commands;
 
+use DateTimeZone;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
@@ -12,6 +13,7 @@ use Webkul\Installer\Events\ComposerEvents;
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\password;
 use function Laravel\Prompts\select;
+use function Laravel\Prompts\suggest;
 use function Laravel\Prompts\text;
 
 class Installer extends Command
@@ -175,12 +177,14 @@ class Installer extends Command
             env('APP_URL', 'http://localhost:8000')
         );
 
-        $this->envUpdate(
+        $timezones = $this->getTimezones();
+        $defaultLocale = $this->updateEnvSuggest(
             'APP_TIMEZONE',
-            date_default_timezone_get()
+            'Please select the application timezone',
+            $timezones
         );
 
-        $this->info('Your Default Timezone is '.date_default_timezone_get());
+        // $this->info('Your Default Timezone is '.date_default_timezone_get());
 
         $defaultLocale = $this->updateEnvChoice(
             'APP_LOCALE',
@@ -420,6 +424,25 @@ class Installer extends Command
     }
 
     /**
+     * Method for suggesting choice based on the list of options.
+     *
+     * @return string
+     */
+    protected function updateEnvSuggest(string $key, string $question, array $choices)
+    {
+        $choice = suggest(
+            label: $question,
+            options: $choices,
+            default: env($key, ''),
+            required: true,
+        );
+
+        $this->envUpdate($key, $choice);
+
+        return $choice;
+    }
+
+    /**
      * Function for getting allowed choices based on the list of options.
      */
     protected function allowedChoice(string $question, array $choices)
@@ -481,5 +504,31 @@ class Installer extends Command
         }
 
         return false;
+    }
+
+    /**
+     * Get sorted list of timezone abbreviations.
+     *
+     * Retrieve a list of timezone abbreviations available in the PHP DateTimeZone class,
+     * and sorts them alphabetically.
+     *
+     * @return array Sorted array of timezone abbreviations.
+     */
+    protected static function getTimezones()
+    {
+        $timezoneAbbreviations = DateTimeZone::listAbbreviations();
+        $timezones = [];
+
+        foreach ($timezoneAbbreviations as $zones) {
+            foreach ($zones as $zone) {
+                if (! empty($zone['timezone_id'])) {
+                    $timezones[$zone['timezone_id']] = $zone['timezone_id'];
+                }
+            }
+        }
+
+        asort($timezones);
+
+        return $timezones;
     }
 }
