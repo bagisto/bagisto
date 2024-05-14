@@ -12,6 +12,7 @@
 ## Medium Impact Changes
 
 - [Admin Customized Datagrid Parameters Updated](admin-customized-datagrid-parameters-updated)
+- [Admin Event Updates](#admin-event-updates)
 - [The System Configuration Updates](#the-system-config-update)
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The Checkout Tables Schema Updates](#the-checkout-tables-schema-updates)
@@ -21,11 +22,9 @@
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
-- [Shop Event Parameter Updates](#event-parameter-updated)
+- [Shop Event Updates](#shop-event-updates)
 - [Shop Customized Datagrid Parameters Updated](#shop-customized-datagrid-parameters-updated)
 - [Shop Class HTML Attribute updated](#shop-class-attribute-updated)
-
-</div>
 
 ## Low Impact Changes
 
@@ -560,7 +559,6 @@ If you've implemented your own product type or overridden existing type classes,
 ```
 
 
-
 <a name="Sales"></a>
 ### Sales
 
@@ -717,12 +715,12 @@ If you've implemented your own product type or overridden existing type classes,
 + </template>
 ```
 
-
-<a name="event-parameter-updated"></a>
-#### Shop Event Parameter Updates
+<a name="shop-event-updates"></a>
+#### Shop Event Updates
 
 **Impact Probability: Medium**
 
+##### Shop Event Parameter Updated
 1. The event data previously containing an email address has been updated to include an instance of the `Webkul\Customer\Models\Customer` model.
 
 ```diff
@@ -730,16 +728,17 @@ If you've implemented your own product type or overridden existing type classes,
 + Event::dispatch('customer.after.login', auth()->guard()->user());
 ```
 
-<a name="shop-class-attribute-updated"></a>
-#### Shop Class HTML Attribute updated
+##### Shop Event Inside Head Updated
 
-**Impact Probability: Medium**
+**Impact Probability: High**
 
-1. We've modified the HTML attribute class in the `shop::products.prices.configurable` blade. If you've overridden this file or implemented any customizations, ensure to update the class name accordingly. Failure to do so may affect the price change functionality for configurable product option selection.
+1. The event that was previously added in Shop has now been updated in the new format. You can now directly add your own custom elements inside the <head> tag.
 
 ```diff
-- <p class="special-price font-semibold">
-+ <p class="final-price font-semibold">
++ {!! view_render_event('bagisto.shop.layout.head.before') !!}
+
+- {!! view_render_event('bagisto.shop.layout.head') !!}
++ {!! view_render_event('bagisto.shop.layout.head.after') !!}
 ```
 
 <a name="renamed-shop-api-routes-names"></a>
@@ -864,6 +863,22 @@ If you've implemented your own product type or overridden existing type classes,
         ]
     }
 }
+```
+
+<a name="admin-event-updates"></a>
+#### Admin Event Updates
+
+**Impact Probability: High**
+
+#### Admin Event Inside Head Updated
+
+1. The event that was previously added in Admin has now been updated in the new format. You can now directly add your own custom elements inside the <head> tag.
+
+```diff
++ {!! view_render_event('bagisto.admin.layout.head.before') !!}
+
+- {!! view_render_event('bagisto.admin.layout.head') !!}
++ {!! view_render_event('bagisto.admin.layout.head.after') !!}
 ```
 
 <a name="moved-coupon-blade"></a>
