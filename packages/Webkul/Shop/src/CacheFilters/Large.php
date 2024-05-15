@@ -28,6 +28,8 @@ class Large implements FilterInterface
                 : 610;
 
             return $image->fit($width, $height);
+        } elseif (Str::contains(url()->current(), '/attribute_option')) {
+            return $image->fit(330, 330);
         }
 
         /**
