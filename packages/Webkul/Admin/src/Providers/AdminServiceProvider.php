@@ -73,28 +73,6 @@ class AdminServiceProvider extends ServiceProvider
     protected function composeView()
     {
         view()->composer([
-            'admin::components.layouts.header.index',
-            'admin::components.layouts.sidebar.index',
-            'admin::components.layouts.tabs',
-        ], function ($view) {
-            $tree = Tree::create();
-
-            foreach (config('menu.admin') as $index => $item) {
-                if (! bouncer()->hasPermission($item['key'])) {
-                    continue;
-                }
-
-                $tree->add($item, 'menu');
-            }
-
-            $tree->items = $tree->removeUnauthorizedUrls();
-
-            $tree->items = core()->sortItems($tree->items);
-
-            $view->with('menu', $tree);
-        });
-
-        view()->composer([
             'admin::settings.roles.create',
             'admin::settings.roles.edit',
         ], function ($view) {
