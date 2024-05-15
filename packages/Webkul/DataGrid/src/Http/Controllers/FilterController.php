@@ -19,7 +19,12 @@ class FilterController extends Controller
      */
     public function store()
     {
-        return $this->savedFilterRepository->create(request()->all());
+        $data = $this->savedFilterRepository->create(request()->all());
+
+        return response()->json([
+            'data'    => $data,
+            'message' => trans('Filter has been saved successfully.'),
+        ], 200);
     }
 
     /**
@@ -35,8 +40,13 @@ class FilterController extends Controller
      */
     public function destroy()
     {
-        return $this->savedFilterRepository->where('id', request()->get('id'))
+        $data = $this->savedFilterRepository->where('id', request()->get('id'))
             ->where('user_id', request()->get('user_id'))
             ->delete();
+
+        return response()->json([
+            'data'    => $data,
+            'message' => trans('Filter has been deleted successfully.'),
+        ], 200);
     }
 }
