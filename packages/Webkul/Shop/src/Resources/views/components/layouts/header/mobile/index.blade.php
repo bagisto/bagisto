@@ -37,7 +37,7 @@
 
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
-                    <div class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-[#E9E9E9] p-2.5">
+                    <div class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-[#E9E9E9] p-2.5 max-sm:mt-4">
                         <div>
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -350,7 +350,7 @@
         </div>
 
         <!-- Localization & Currency Section -->
-        <div class="absolute bottom-0 left-0 flex w-full items-center justify-between gap-x-5 bg-white p-4 shadow-lg">
+        <div class="absolute bottom-0 left-0 flex w-full items-center justify-between gap-x-5 border-t bg-white p-3 shadow-lg">
             <x-shop::dropdown position="top-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>

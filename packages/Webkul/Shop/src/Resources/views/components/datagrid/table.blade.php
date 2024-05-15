@@ -35,7 +35,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid items-center gap-2.5 border-b border-[#E9E9E9] bg-[#F5F5F5] px-6 py-4 text-sm font-medium text-black"
+                            class="row grid items-center gap-2.5 border-b border-[#E9E9E9] bg-[#F5F5F5] px-6 py-4 text-sm font-medium text-black max-sm:p-4"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -80,7 +80,7 @@
 
                             <!-- Actions -->
                             <p
-                                class="place-self-end"
+                                class="place-self-end max-sm:place-self-auto"
                                 v-if="available.actions.length"
                             >
                                 @lang('shop::app.components.datagrid.table.actions')
@@ -105,7 +105,7 @@
                     <template v-else>
                         <template v-if="available.records.length">
                             <div
-                                class="row grid items-center gap-2.5 border-b bg-white px-6 py-4 font-medium text-gray-600 transition-all max-sm:text-xs"
+                                class="row grid items-center gap-2.5 border-b bg-white px-6 py-4 font-medium text-gray-600 transition-all max-sm:p-4 max-sm:text-xs"
                                 v-for="record in available.records"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                             >
@@ -131,6 +131,8 @@
                                     v-for="column in available.columns"
                                     v-html="record[column.index]"
                                     v-if="record.is_closure"
+                                    :class="!available.actions.length ? 'last:text-center' : ''"
+                                    v-else
                                 >
                                 </p>
 
@@ -142,12 +144,9 @@
                                 </p>
 
                                 <!-- Actions -->
-                                <p
-                                    class="place-self-end"
-                                    v-if="available.actions.length"
-                                >
+                                <p v-if="available.actions.length">
                                     <span
-                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        class="float-right cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200"
                                         :class="action.icon"
                                         v-for="action in record.actions"
                                         @click="performAction(action)"
