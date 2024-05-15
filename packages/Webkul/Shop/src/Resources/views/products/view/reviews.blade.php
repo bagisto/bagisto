@@ -435,7 +435,7 @@
     
                 <!-- Review Attachments -->
                 <div
-                    class="journal-scroll scrollbar-none mt-3 flex gap-2 overflow-auto"
+                    class="journal-scroll scrollbar-width-hidden mt-3 flex gap-2 overflow-auto"
                     v-if="review.images.length"
                 >
                     <template v-for="file in review.images">

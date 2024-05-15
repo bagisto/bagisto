@@ -341,6 +341,14 @@
         background-clip: content-box;
     }
 
+    .scrollbar-width-hidden {
+        -ms-overflow-style: none; 
+        scrollbar-width: none;
+    }
+    .scrollbar-width-hidden::-webkit-scrollbar { 
+        display: none;
+    }
+
     .custom-select {
         -webkit-appearance: none;
         -moz-appearance: none;

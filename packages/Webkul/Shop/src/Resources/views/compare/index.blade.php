@@ -64,7 +64,7 @@
                     </div>
 
                     <div
-                        class="journal-scroll mt-16 grid overflow-auto max-sm:mt-7"
+                        class="journal-scroll scrollbar-width-hidden mt-16 grid overflow-auto max-sm:mt-7"
                         v-if="items.length"
                     >
                         <template v-for="attribute in comparableAttributes">
@@ -89,7 +89,7 @@
                                         v-for="product in items"
                                     >
                                         <span
-                                            class="icon-cancel absolute top-16 hidden h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl transition-all duration-300 group-hover:z-[1] group-hover:flex max-sm:text-xl ltr:right-7 rtl:left-7"
+                                            class="icon-cancel absolute top-16 hidden h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl transition-all duration-300 group-hover:z-[1] group-hover:flex max-sm:text-xl ltr:right-9 rtl:left-7"
                                             @click="remove(product.id)"
                                         ></span>
 
@@ -102,7 +102,7 @@
 
                             <!-- Comparable Attributes -->
                             <div
-                                class="flex max-w-full items-center border-b border-[#E9E9E9] last:border-none"
+                                class="flex max-w-full items-center border-b border-[#E9E9E9]"
                                 v-else
                             >
                                 <div class="min-w-[304px] max-w-full max-sm:min-w-[110px]">
