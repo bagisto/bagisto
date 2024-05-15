@@ -30,7 +30,8 @@ class Menu
             $this->prepareMenuItems();
         }
 
-        return collect($this->menuItems);
+        return collect($this->menuItems)
+            ->sortBy('sort');
     }
 
     /**
@@ -48,7 +49,7 @@ class Menu
             $menuWithDotNotation[$item['key']] = $item;
         }
 
-        $menu = Arr::undot($menuWithDotNotation);
+        $menu = Arr::undot(Arr::sort($menuWithDotNotation));
 
         foreach ($menu as $menuItemKey => $menuItem) {
             $subMenuItems = $this->processSubMenuItems($menuItem);
@@ -70,6 +71,7 @@ class Menu
     protected function processSubMenuItems($menuItem): Collection
     {
         return collect($menuItem)
+            ->sortBy('sort')
             ->filter(fn ($value) => is_array($value))
             ->map(function ($subMenuItem, $subMenuItemKey) {
                 $subSubMenuItems = $this->processSubMenuItems($subMenuItem);
