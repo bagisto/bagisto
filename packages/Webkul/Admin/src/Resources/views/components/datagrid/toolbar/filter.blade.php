@@ -71,16 +71,16 @@
 
                     <x-slot:content class="!p-0">
                         <x-admin::accordion class="!box-shadow-none !rounded-none">
-                            <x-slot:header class="px-4 dark:text-white">
+                            <x-slot:header class="px-4 text-base font-semibold text-gray-600 dark:text-gray-300">
                                 Quick Filters
                             </x-slot>
 
                             <x-slot:content class="!p-0">
                                 <div class="!p-0">
-                                    <ul v-for="(filter,index) in filters.available">
+                                    <ul v-for="(filter,index) in savedFilters.available">
                                         <li 
                                             class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"  
-                                            :class="{'bg-red-500': filter.is_applied == true}"
+                                            :class="{'bg-red-500': filter.is_applied}"
                                             @click="applySaveFilter(filter)"
                                         >
                                             @{{ filter.name }}
@@ -95,7 +95,7 @@
                                 </div>
 
                                 <div class="mt-4 px-4">
-                                    <x-admin::form.control-group.label class="required !text-sm">
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('Save filter')
                                     </x-admin::form.control-group.label>
 
@@ -108,8 +108,8 @@
                                                 class="!px-2 !py-1.5 leading-6" 
                                                 rules="required"
                                                 :label="trans('name')"
-                                                :placeholder="trans('save as')"
-                                                v-model="filters.name"
+                                                :placeholder="trans('Save as')"
+                                                v-model="savedFilters.name"
                                             />
             
                                             <x-admin::form.control-group.error control-name="name" />
@@ -127,7 +127,7 @@
                         </x-admin::accordion>
                                            
                         <x-admin::accordion class="!box-shadow-none !rounded-none">
-                            <x-slot:header class="px-4 dark:text-white">
+                            <x-slot:header class="px-4 text-base font-semibold text-gray-600 dark:text-gray-300">
                                 Custom Filters
                             </x-slot>
 
@@ -139,7 +139,7 @@
                                             <div v-if="column.type === 'boolean'">
                                                 <div class="flex items-center justify-between">
                                                     <p
-                                                        class="text-sm font-medium leading-6 text-gray-800 dark:text-white"
+                                                        class="text-xs font-medium text-gray-800 dark:text-white"
                                                         v-text="column.label"
                                                     >
                                                     </p>
@@ -208,7 +208,7 @@
                                                 <div v-if="column.options.type === 'basic'">
                                                     <div class="flex items-center justify-between">
                                                         <p
-                                                            class="text-sm font-medium leading-6 text-gray-800 dark:text-white"
+                                                            class="text-xs font-medium text-gray-800 dark:text-white"
                                                             v-text="column.label"
                                                         >
                                                         </p>
@@ -275,7 +275,7 @@
                                                 <div v-else-if="column.options.type === 'searchable'">
                                                     <div class="flex items-center justify-between">
                                                         <p
-                                                            class="text-sm font-medium leading-6 text-gray-800 dark:text-white"
+                                                            class="text-xs font-medium text-gray-800 dark:text-white"
                                                             v-text="column.label"
                                                         >
                                                         </p>
@@ -323,7 +323,7 @@
                                             <div v-else-if="column.type === 'date_range'">
                                                 <div class="flex items-center justify-between">
                                                     <p
-                                                        class="text-sm font-medium leading-6 dark:text-white"
+                                                        class="text-xs font-medium text-gray-800 dark:text-white"
                                                         v-text="column.label"
                                                     >
                                                     </p>
@@ -407,7 +407,7 @@
                                             <div v-else-if="column.type === 'datetime_range'">
                                                 <div class="flex items-center justify-between">
                                                     <p
-                                                        class="text-sm font-medium leading-6 dark:text-white"
+                                                        class="text-xs font-medium text-gray-800 dark:text-white"
                                                         v-text="column.label"
                                                     >
                                                     </p>
@@ -491,7 +491,7 @@
                                             <div v-else>
                                                 <div class="flex items-center justify-between">
                                                     <p
-                                                        class="text-sm font-medium leading-6 dark:text-white"
+                                                        class="text-xs font-medium text-gray-800 dark:text-white"
                                                         v-text="column.label"
                                                     >
                                                     </p>
@@ -555,14 +555,14 @@
                 return {
                     savedFilters: {
                         available: [],
-                    },
-
-                    filters: {
-                        columns: [],
 
                         applied: null,
 
                         name: '',
+                    },
+
+                    filters: {
+                        columns: [],
                     },
                 };
             },
@@ -583,13 +583,13 @@
                     this.$axios.post('{{ route('datagrid.filters.store') }}', {
                         user_id: {{ auth()->guard('admin')->user()->id }},
                         src: this.src,
-                        name: this.filters.name,
+                        name: this.savedFilters.name,
                         applied: this.applied,
-                     })
+                    })
                         .then(response => {
-                            this.filters.available.push(response.data.data);
+                            this.savedFilters.available.push(response.data.data);
                             
-                            this.filters.name = '';
+                            this.savedFilters.name = '';
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
@@ -606,6 +606,14 @@
                  * @emits applySaveFilter - Event emitted when the saved filter is applied.
                  */
                 applySaveFilter(filter) {
+                    this.savedFilters.available = this.savedFilters.available.map((item) => {
+                        if (item.id === filter.id) {
+                            item.is_applied = true;
+                        }
+
+                        return item;
+                    });
+
                     this.$emit('applySaveFilter', filter);
                 },
 
@@ -614,13 +622,12 @@
                  */
                 getFilters () {
                     this.$axios.get('{{ route('datagrid.filters.index') }}', {
-                        params: {src: "{{request()->url()}}" }
+                        params: { src: "{{request()->url()}}" }
                     })
                         .then(response => {
-                            this.filters.available = response.data;
+                            this.savedFilters.available = response.data;
                         })
-                        .catch(error => {
-                        });
+                        .catch(error => {});
                 },
 
                 /**
