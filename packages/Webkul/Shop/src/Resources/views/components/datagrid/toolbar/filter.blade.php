@@ -49,7 +49,7 @@
                     </x-slot>
 
                     <x-slot:header class="border-b border-[#E9E9E9]">
-                            @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
+                        @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
                     </x-slot>
 
                     <x-slot:content>

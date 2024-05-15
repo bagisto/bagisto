@@ -128,11 +128,11 @@
 
                                 <!-- Columns -->
                                 <p
+                                    v-else
                                     v-for="column in available.columns"
+                                    :class="!available.actions.length ? 'last:text-center' : ''"
                                     v-html="record[column.index]"
                                     v-if="record.is_closure"
-                                    :class="!available.actions.length ? 'last:text-center' : ''"
-                                    v-else
                                 >
                                 </p>
 
