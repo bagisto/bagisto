@@ -126,20 +126,22 @@
                         <x-shop::form.control-group.error control-name="address[]" />
                     </x-shop::form.control-group>
                     
+                    {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.street_address.after') !!}
+                    
                     @if (
-                    core()->getConfigData('customer.address.information.street_lines')
-                    && core()->getConfigData('customer.address.information.street_lines') > 1
+                        core()->getConfigData('customer.address.information.street_lines')
+                        && core()->getConfigData('customer.address.information.street_lines') > 1
                     )
-                    @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
-                        <x-shop::form.control-group.control 
-                            type="text" 
-                            name="address[{{ $i }}]" 
-                            :value="old('address[{{ $i }}]')"
-                            rules="address" 
-                            :label="trans('shop::app.customers.account.addresses.create.street-address')"
-                            :placeholder="trans('shop::app.customers.account.addresses.create.street-address')" />
-                        <x-shop::form.control-group.error class="mb-2" name="address[{{ $i }}]" />
-                    @endfor
+                        @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
+                            <x-shop::form.control-group.control 
+                                type="text" 
+                                name="address[{{ $i }}]" 
+                                :value="old('address[{{ $i }}]')"
+                                rules="address" 
+                                :label="trans('shop::app.customers.account.addresses.create.street-address')"
+                                :placeholder="trans('shop::app.customers.account.addresses.create.street-address')" />
+                                <x-shop::form.control-group.error class="mb-2" name="address[{{ $i }}]" />
+                        @endfor
                     @endif
                     
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.street_address.after') !!}
