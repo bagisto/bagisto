@@ -49,7 +49,7 @@ class Menu
             $menuWithDotNotation[$item['key']] = $item;
         }
 
-        $menu = Arr::undot(Arr::sort($menuWithDotNotation));
+        $menu = Arr::undot(Arr::dot($menuWithDotNotation));
 
         foreach ($menu as $menuItemKey => $menuItem) {
             $subMenuItems = $this->processSubMenuItems($menuItem);
