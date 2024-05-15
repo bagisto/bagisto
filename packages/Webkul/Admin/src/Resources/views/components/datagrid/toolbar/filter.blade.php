@@ -71,7 +71,7 @@
 
                     <x-slot:content class="!p-0">
                         <x-admin::accordion class="!box-shadow-none !rounded-none">
-                            <x-slot:header class="px-4">
+                            <x-slot:header class="px-4 dark:text-white">
                                 Quick Filters
                             </x-slot>
 
@@ -79,25 +79,55 @@
                                 <div class="!p-0">
                                     <ul v-for="(filter,index) in filters.available">
                                         <li 
-                                            class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50"  
+                                            class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"  
                                             :class="{'bg-red-500': filter.is_applied == true}"
                                             @click="applySaveFilter(filter)"
                                         >
                                             @{{ filter.name }}
                                         
                                             <span 
-                                                class="icon-cross cursor-pointer p-1.5 text-xl hover:bg-gray-200"  
+                                                class="icon-cross cursor-pointer rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"  
                                                 @click="deleteSavedFilter(filter)"
                                             >
                                             </span>
                                         </li>
                                     </ul>
                                 </div>
+
+                                <div class="mt-4 px-4">
+                                    <x-admin::form.control-group.label class="required !text-sm">
+                                        @lang('Save filter')
+                                    </x-admin::form.control-group.label>
+
+                                    <div class="mb-4 mt-1.5 flex items-center justify-between gap-4">
+                                        <x-admin::form.control-group class="!mb-0">
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                id="name"
+                                                name="name"
+                                                class="!px-2 !py-1.5 leading-6" 
+                                                rules="required"
+                                                :label="trans('name')"
+                                                :placeholder="trans('save as')"
+                                                v-model="filters.name"
+                                            />
+            
+                                            <x-admin::form.control-group.error control-name="name" />
+                                        </x-admin::form.control-group>
+                                        
+                                        <p 
+                                            class="secondary-button"
+                                            @click="saveFilters()"
+                                        >
+                                            @lang('Save Filter')
+                                        </p>
+                                    </div>
+                                </div>
                             </x-slot>
                         </x-admin::accordion>
                                            
                         <x-admin::accordion class="!box-shadow-none !rounded-none">
-                            <x-slot:header class="px-4">
+                            <x-slot:header class="px-4 dark:text-white">
                                 Custom Filters
                             </x-slot>
 
