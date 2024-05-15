@@ -68,7 +68,7 @@ class Menu
     /**
      * Process sub menu items.
      */
-    protected function processSubMenuItems($menuItem): Collection
+    public function processSubMenuItems($menuItem): Collection
     {
         return collect($menuItem)
             ->sortBy('sort')

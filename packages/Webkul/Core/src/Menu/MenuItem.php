@@ -58,7 +58,11 @@ class MenuItem
      */
     public function haveItem(): bool
     {
-        return $this->menuItems->isNotEmpty();
+        if ($this->menuItems) {
+            return $this->menuItems->isNotEmpty();
+        }
+
+        return false;
     }
 
     /**
