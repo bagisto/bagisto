@@ -88,22 +88,4 @@ class Tree
 
         core()->array_set($this->items, $children, $item);
     }
-
-    /**
-     * Method to find the active links
-     *
-     * @param  array  $item
-     * @return string|void
-     */
-    public function getActive($item)
-    {
-        $url = trim($item['url'], '/');
-
-        if (
-            strpos($this->current, $url) !== false
-            || (strpos($this->currentKey, $item['key']) === 0)
-        ) {
-            return true;
-        }
-    }
 }
