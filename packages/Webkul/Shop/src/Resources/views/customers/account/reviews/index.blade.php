@@ -45,7 +45,7 @@
                                             id="{{ $review->product_id }}"
                                             aria-label="{{ $review->title }}"
                                         >
-                                            <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:flex-wrap">
+                                            <div class="flex gap-5 rounded-xl border border-zinc-200 p-6 max-sm:flex-wrap">
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
 
                                                 <x-shop::media.images.lazy
@@ -70,7 +70,7 @@
 
                                                         <div class="flex items-center gap-0.5">
                                                             @for ($i = 1; $i <= 5; $i++)
-                                                                <span class="icon-star-fill text-2xl {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-[#6E6E6E]' }}"></span>
+                                                                <span class="icon-star-fill text-2xl {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-zinc-500' }}"></span>
                                                             @endfor
                                                         </div>
 
@@ -87,7 +87,7 @@
 
                                                     {!! view_render_event('bagisto.shop.customers.account.reviews.comment.before', ['reviews' => $reviews]) !!}
 
-                                                    <p class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs">
+                                                    <p class="mt-5 text-base text-zinc-500 max-sm:text-xs">
                                                         {{ $review->comment }}
                                                     </p>
 

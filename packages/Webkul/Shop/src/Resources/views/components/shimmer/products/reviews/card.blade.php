@@ -1,7 +1,7 @@
 @props(['count' => 0])
 
 @for ($i = 0;  $i < $count; $i++)
-    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:flex-wrap">
+    <div class="flex gap-5 rounded-xl border border-zinc-200 p-6 max-sm:flex-wrap">
         <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
             <div class="shimmer h-[100px] w-[100px] rounded-xl"></div>
         </div>

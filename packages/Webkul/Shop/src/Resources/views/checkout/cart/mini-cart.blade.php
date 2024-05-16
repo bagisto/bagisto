@@ -214,10 +214,10 @@
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
-                    <div class="mb-8 mt-8 flex items-center justify-between border-b border-[#E9E9E9] px-6 pb-2">
+                    <div class="mb-8 mt-8 flex items-center justify-between border-b border-zinc-200 px-6 pb-2">
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
 
-                        <p class="text-sm font-medium text-[#6E6E6E]">
+                        <p class="text-sm font-medium text-zinc-500">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
 
