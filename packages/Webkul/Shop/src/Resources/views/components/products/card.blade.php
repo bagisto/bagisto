@@ -351,7 +351,6 @@
                 },
 
                 addToCart() {
-
                     this.isAddingToCart = true;
 
                     this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', {
@@ -359,10 +358,6 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            if (response.data.data.redirect_uri) {
-                                window.location.href = response.data.data.redirect_uri;
-                            }
-
                             if (response.data.message) {
                                 this.$emitter.emit('update-mini-cart', response.data.data );
 
@@ -374,9 +369,13 @@
                             this.isAddingToCart = false;
                         })
                         .catch(error => {
-                            this.isAddingToCart = false;
-
                             this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+
+                            if (error.response.data.redirect_uri) {
+                                window.location.href = error.response.data.redirect_uri;
+                            }
+                            
+                            this.isAddingToCart = false;
                         });
                 },
             },

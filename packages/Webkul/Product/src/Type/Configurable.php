@@ -695,7 +695,7 @@ class Configurable extends AbstractType
             }
         }
 
-        return (bool) core()->getConfigData('catalog.inventory.stock_options.back_orders');
+        return (bool) core()->getConfigData('sales.order_settings.stock_options.back_orders');
     }
 
     /**

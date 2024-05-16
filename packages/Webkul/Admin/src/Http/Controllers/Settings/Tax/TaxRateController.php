@@ -27,7 +27,7 @@ class TaxRateController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(TaxRateDataGrid::class)->toJson();
+            return datagrid(TaxRateDataGrid::class)->process();
         }
 
         return view('admin::settings.taxes.rates.index');
@@ -41,7 +41,7 @@ class TaxRateController extends Controller
     public function show()
     {
         if (request()->ajax()) {
-            return app(TaxRateDataGrid::class)->toJson();
+            return datagrid(TaxRateDataGrid::class)->process();
         }
 
         return view('admin::settings.taxes.rates.create');

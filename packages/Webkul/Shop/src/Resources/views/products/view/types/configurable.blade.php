@@ -64,7 +64,8 @@
                                     <!-- Color Swatch Options -->
                                     <label
                                         class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
-                                        :class="{'ring ring-gray-900 ring-offset-1' : option.id == attribute.selectedValue}"
+                                        :class="{'ring-2 ring-gray-900' : option.id == attribute.selectedValue}"
+                                        :style="{ '--tw-ring-color': option.swatch_value }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'color'"
                                     >
@@ -90,15 +91,15 @@
                                         </v-field>
 
                                         <span
-                                            class="h-8 w-8 rounded-full border border-navyBlue border-opacity-10 bg-navyBlue max-sm:h-[25px] max-sm:w-[25px]"
-                                            :style="{ 'background-color': option.swatch_value }"
+                                            class="h-8 w-8 rounded-full border border-opacity-10 max-sm:h-[25px] max-sm:w-[25px]"
+                                            :style="{ 'background-color': option.swatch_value, 'border-color': option.swatch_value}"
                                         ></span>
                                     </label>
 
                                     <!-- Image Swatch Options -->
                                     <label 
-                                        class="group relative flex h-[60px] w-[60px] cursor-pointer items-center justify-center overflow-hidden rounded-full border bg-white font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
-                                        :class="{'ring-2 ring-navyBlue' : option.id == attribute.selectedValue }"
+                                        class="group relative flex h-[60px] w-[60px] cursor-pointer items-center justify-center overflow-hidden rounded-md border bg-white font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
+                                        :class="{'border-navyBlue' : option.id == attribute.selectedValue }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'image'"
                                     >
@@ -132,8 +133,8 @@
 
                                     <!-- Text Swatch Options -->
                                     <label 
-                                        class="group relative flex h-[60px] min-w-[60px] cursor-pointer items-center justify-center rounded-full border bg-white px-4 py-3 font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
-                                        :class="{'ring-2 ring-navyBlue' : option.id == attribute.selectedValue }"
+                                        class="group relative flex h-[60px] min-w-[60px] cursor-pointer items-center justify-center rounded-full border border-gray-300 bg-white px-4 py-3 font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 max-sm:h-[35px] max-sm:w-[35px] sm:py-6"
+                                        :class="{'border-transparent !bg-navyBlue text-white' : option.id == attribute.selectedValue }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'text'"
                                     >
