@@ -118,7 +118,7 @@
             </div>
             
             <!-- Gallery Images Zoomer -->
-            <x-shop::modal.image-zoomer 
+            <x-shop::image-zoomer 
                 ::attachments="attachments" 
                 ::is-image-zooming="isImageZooming" 
                 ::initial-index="`media_${activeIndex}`"

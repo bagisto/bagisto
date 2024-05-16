@@ -345,7 +345,7 @@
                 </div>
 
                 <!-- Review Images zoomer -->
-                <x-shop::modal.image-zoomer 
+                <x-shop::image-zoomer 
                     ::attachments="attachments" 
                     ::is-image-zooming="isImageZooming" 
                     ::initial-index="'file_'+activeIndex"
