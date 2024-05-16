@@ -134,6 +134,7 @@ In this example, the `repository` option has been replaced with `options`, which
 ```diff
 - Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
 + Route::post('update-totals/{order_id}', 'updateTotals')->name('admin.sales.refunds.update_totals');
+```
 
 <a name="renamed-admin-view-render-event-names"></a>
 #### Renamed Admin View Render Event Names
