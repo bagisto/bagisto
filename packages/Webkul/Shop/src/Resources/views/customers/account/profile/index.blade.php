@@ -18,7 +18,7 @@
 
         <a
             href="{{ route('shop.customers.account.profile.edit') }}"
-            class="secondary-button border-[#E9E9E9] px-5 py-3 font-normal"
+            class="secondary-button border-[#E9E9E9] px-5 py-3 font-normal max-sm:py-1.5"
         >
             @lang('shop::app.customers.account.profile.index.edit')
         </a>

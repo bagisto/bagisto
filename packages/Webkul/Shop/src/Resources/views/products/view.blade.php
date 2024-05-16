@@ -368,7 +368,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-4 rounded-xl px-7 py-4"
+                                            class="gap-x-4 rounded-xl px-7 py-4 max-sm:py-3"
                                         />
                                     @endif
 
@@ -379,7 +379,7 @@
 
                                     <x-shop::button
                                         type="submit"
-                                        class="secondary-button w-full max-w-full"
+                                        class="secondary-button w-full max-w-full max-sm:py-3"
                                         button-type="secondary-button"
                                         :loading="false"
                                         :title="trans('shop::app.products.view.add-to-cart')"
@@ -396,7 +396,7 @@
                                 @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                     <x-shop::button
                                         type="submit"
-                                        class="primary-button mt-5 w-full max-w-[470px]"
+                                        class="primary-button mt-5 w-full max-w-[470px] max-sm:py-3"
                                         button-type="secondary-button"
                                         :title="trans('shop::app.products.view.buy-now')"
                                         :disabled="! $product->isSaleable(1)"

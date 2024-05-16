@@ -88,7 +88,7 @@
                 <img
                     src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                     alt="{{ config('app.name') }}"
-                    class="max-sm:h-[28px] max-sm:w-[96px]" width="131"
+                    width="131"
                     height="29"
                 >
             </a>
@@ -240,13 +240,11 @@
         </label>
 
         <div class="relative w-full">
-            <div
-                class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl ltr:left-3 rtl:right-3">
-            </div>
+            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-sm:top-2 max-sm:text-xl ltr:left-3 rtl:right-3"></div>
 
             <input
                 type="text"
-                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-xs font-medium text-gray-900"
+                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-xs font-medium text-gray-900 max-sm:rounded-lg max-sm:px-10 max-sm:py-2.5"
                 name="query"
                 value="{{ request('query') }}"
                 placeholder="@lang('shop::app.components.layouts.header.search-text')"
@@ -376,6 +374,9 @@
                     <v-currency-switcher></v-currency-switcher>
                 </x-slot>
             </x-shop::dropdown>
+
+            <!-- Seperator -->
+            <span class="h-5 w-0.5 bg-[#E9E9E9]"></span>
 
             <x-shop::dropdown position="top-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>

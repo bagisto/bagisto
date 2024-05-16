@@ -25,7 +25,6 @@
 
             <template v-else>
                 <div class="flex w-full items-center gap-x-1">
-                    <!-- Search Panel -->
                     <div class="flex max-w-[445px] items-center max-sm:w-full max-sm:max-w-[250px]">
                         <div class="relative w-full">
                             <input
@@ -44,7 +43,7 @@
                     </div>
 
                     <!-- Information Panel -->
-                    <div class="ltr:pl-2.5 rtl:pr-2.5">
+                    <div class="max-sm:hidden ltr:pl-2.5 rtl:pr-2.5">
                         <p class="text-sm font-light text-gray-800 max-sm:w-full">
                             @{{ "@lang('shop::app.components.datagrid.toolbar.results')".replace(':total', available.meta.total) }}
                         </p>

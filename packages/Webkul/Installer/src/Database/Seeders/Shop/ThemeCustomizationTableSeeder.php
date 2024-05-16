@@ -183,7 +183,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                         'locale'                 => $locale,
                         'options'                => json_encode([
                             'html' => '<div class="home-offer"><h1>'.trans('installer::app.seeders.shop.theme-customizations.offer-information.content.title', [], $locale).'</h1></div>',
-                            'css'  => '.home-offer h1 {display: block;font-weight: 500;text-align: center;font-size: 22px;font-family: DM Serif Display;background-color: #E8EDFE;padding-top: 20px;padding-bottom: 20px;}@media (max-width:768px){.home-offer h1 {font-size:18px;}@media (max-width:525px) {.home-offer h1 {font-size:14px;padding-top: 14px;padding-bottom: 14px;}}',
+                            'css'  => '.home-offer h1 {display: block;font-weight: 500;text-align: center;font-size: 22px;font-family: DM Serif Display;background-color: #E8EDFE;padding-top: 20px;padding-bottom: 20px;}@media (max-width:768px){.home-offer h1 {font-size:18px;}@media (max-width:525px) {.home-offer h1 {font-size:14px;padding-top: 6px;padding-bottom: 6px;}}',
                         ]),
                     ], [
                         'theme_customization_id' => 3,

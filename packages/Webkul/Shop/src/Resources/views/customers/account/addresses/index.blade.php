@@ -17,10 +17,8 @@
 
         <a
             href="{{ route('shop.customers.account.addresses.create') }}"
-            class="secondary-button flex items-center gap-x-2.5 border-[#E9E9E9] px-5 py-3 font-normal"
+            class="secondary-button border-[#E9E9E9] px-5 py-3 font-normal max-sm:py-1.5"
         >
-            <span class="icon-plus text-2xl"></span>
-
             @lang('shop::app.customers.account.addresses.index.add-address') 
         </a>
     </div>

@@ -37,13 +37,15 @@
                 >
                     <x-slot:toggle>
                         <div
-                            class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-[#E9E9E9] bg-white px-4 py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-[110px] max-sm:justify-center max-sm:px-2"
+                            class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-[#E9E9E9] bg-white px-4 py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-[110px] max-sm:w-fit max-sm:px-2 max-sm:py-1.5"
                             :class="{'[&>*]:text-blue-600': filters.columns.length > 0}"
                         >
                             <span class="flex items-center justify-between gap-1.5">
                                 <span class="icon-filter text-2xl"></span>
 
-                                @lang('shop::app.components.datagrid.toolbar.filter.title')
+                                <span class="max-sm:hidden">
+                                    @lang('shop::app.components.datagrid.toolbar.filter.title')
+                                </span>
                             </span>
                         </div>
                     </x-slot>
