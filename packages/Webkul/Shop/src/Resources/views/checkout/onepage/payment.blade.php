@@ -61,7 +61,7 @@
 
                                 <label 
                                     :for="payment.method" 
-                                    class="block w-[190px] cursor-pointer rounded-xl border border-[#E9E9E9] p-5 max-sm:w-full"
+                                    class="block w-[190px] cursor-pointer rounded-xl border border-zinc-200 p-5 max-sm:w-full"
                                 >
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.before') !!}
 

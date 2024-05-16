@@ -52,7 +52,7 @@
                         {!! view_render_event('bagisto.shop.customers.account.compare.remove_all.before') !!}
 
                         <div
-                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-[#E9E9E9] px-5 py-3 font-normal"
+                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal"
                             v-if="items.length"
                             @click="removeAll"
                         >
@@ -70,7 +70,7 @@
                         <template v-for="attribute in comparableAttributes">
                             <!-- Product Card -->
                             <div
-                                class="flex max-w-full items-center border-b border-[#E9E9E9]"
+                                class="flex max-w-full items-center border-b border-zinc-200"
                                 v-if="attribute.code == 'product'"
                             >
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.before') !!}
@@ -83,7 +83,7 @@
 
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.after') !!}
 
-                                <div class="flex gap-3 border-[#E9E9E9] max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
+                                <div class="flex gap-3 border-zinc-200 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
                                         class="group relative"
                                         v-for="product in items"
@@ -102,7 +102,7 @@
 
                             <!-- Comparable Attributes -->
                             <div
-                                class="flex max-w-full items-center border-b border-[#E9E9E9] last:border-none"
+                                class="flex max-w-full items-center border-b border-zinc-200 last:border-none"
                                 v-else
                             >
                                 <div class="min-w-[304px] max-w-full max-sm:hidden">
@@ -111,7 +111,7 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-3 border-[#E9E9E9] max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
+                                <div class="flex gap-3 border-zinc-200 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
                                         class="w-[311px] max-w-[311px] p-5 ltr:pr-0 max-sm:ltr:pl-0 rtl:pl-0 max-sm:rtl:pr-0"
                                         v-for="(product, index) in items"

@@ -37,7 +37,7 @@
 
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
-                    <div class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-[#E9E9E9] p-2.5">
+                    <div class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5">
                         <div class="">
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -60,7 +60,7 @@
                             <div class="flex flex-col justify-between gap-2.5">
                                 <p class="font-mediums text-2xl">Hello! {{ auth()->user()?->first_name }}</p>
 
-                                <p class="text-[#6E6E6E]">{{ auth()->user()?->email }}</p>
+                                <p class="text-zinc-500">{{ auth()->user()?->email }}</p>
                             </div>
                         @endauth
                     </div>
@@ -136,7 +136,7 @@
                                 </p>
                             </div>
 
-                            <p class="py-2px mt-3 w-full border border-[#E9E9E9]"></p>
+                            <p class="py-2px mt-3 w-full border border-zinc-200"></p>
 
                             <div class="mt-6 flex gap-4">
                                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.before') !!}
@@ -174,7 +174,7 @@
                                 </p>
                             </div>
 
-                            <p class="py-2px mt-3 w-full border border-[#E9E9E9]"></p>
+                            <p class="py-2px mt-3 w-full border border-zinc-200"></p>
 
                             <div class="mt-2.5 grid gap-1 pb-2.5">
                                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.profile_dropdown.links.before') !!}
@@ -272,7 +272,7 @@
             <template v-for="(category) in categories">
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.before') !!}
 
-                <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
+                <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100">
                     <a
                         :href="category.url"
                         class="mt-5 flex items-center justify-between pb-5"
@@ -294,7 +294,7 @@
                 >
                     <ul v-if="category.children.length">
                         <li v-for="secondLevelCategory in category.children">
-                            <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5] ltr:ml-3 rtl:mr-3">
+                            <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100 ltr:ml-3 rtl:mr-3">
                                 <a
                                     :href="secondLevelCategory.url"
                                     class="mt-5 flex items-center justify-between pb-5"
@@ -316,7 +316,7 @@
                             <div v-if="secondLevelCategory.category_show">
                                 <ul v-if="secondLevelCategory.children.length">
                                     <li v-for="thirdLevelCategory in secondLevelCategory.children">
-                                        <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5] ltr:ml-3 rtl:mr-3">
+                                        <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100 ltr:ml-3 rtl:mr-3">
                                             <a
                                                 :href="thirdLevelCategory.url"
                                                 class="mt-5 flex items-center justify-between pb-5 ltr:ml-3 rtl:mr-3"

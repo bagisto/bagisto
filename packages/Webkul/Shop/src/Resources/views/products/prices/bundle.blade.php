@@ -2,7 +2,7 @@
     @if ($prices['from']['regular']['price'] != $prices['from']['final']['price'])
         <p class="flex items-center gap-4 max-sm:text-lg">
             <span
-                class="text-[#6E6E6E] line-through max-sm:text-base"
+                class="text-zinc-500 line-through max-sm:text-base"
                 aria-label="{{ $prices['from']['regular']['formatted_price'] }}"
             >
                 {{ $prices['from']['regular']['formatted_price'] }}
@@ -25,7 +25,7 @@
         @if ($prices['to']['regular']['price'] != $prices['to']['final']['price'])
             <p class="flex items-center gap-4 max-sm:text-lg">
                 <span
-                    class="text-[#6E6E6E] line-through max-sm:text-base"
+                    class="text-zinc-500 line-through max-sm:text-base"
                     aria-label="{{ $prices['to']['regular']['formatted_price'] }}"
                 >
                     {{ $prices['to']['regular']['formatted_price'] }}

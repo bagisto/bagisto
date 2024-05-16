@@ -192,7 +192,7 @@
                                     <div class="row grid grid-cols-[1fr_2fr] items-center gap-2.5 max-sm:flex-wrap">
                                         <div class="text-base font-medium">{{ $i }} Stars</div>
 
-                                        <div class="h-4 w-[275px] max-w-full rounded-sm bg-[#E5E5E5]">
+                                        <div class="h-4 w-[275px] max-w-full rounded-sm bg-zinc-200">
                                             <div class="h-4 rounded-sm bg-[#FEA82B]" style="width: {{ $percentageRatings[$i] }}%"></div>
                                         </div>
                                     </div>
@@ -237,7 +237,7 @@
         type="text/x-template"
         id="v-product-review-item-template"
     >
-        <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-xl:mb-5 max-sm:flex-wrap">
+        <div class="flex gap-5 rounded-xl border border-zinc-200 p-6 max-xl:mb-5 max-sm:flex-wrap">
             <div>
                 <img
                     v-if="review.profile"
@@ -249,10 +249,10 @@
 
                 <div
                     v-else
-                    class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-[#F5F5F5] max-sm:hidden"
+                    class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-zinc-100 max-sm:hidden"
                     :title="review.name"
                 >
-                    <span class="text-2xl font-semibold text-[#6E6E6E]">
+                    <span class="text-2xl font-semibold text-zinc-500">
                         @{{ review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('') }}
                     </span>
                 </div>
@@ -276,11 +276,11 @@
                     @{{ review.created_at }}
                 </p>
 
-                <p class="mt-5 text-base font-semibold text-[#6E6E6E] max-sm:text-xs">
+                <p class="mt-5 text-base font-semibold text-zinc-500 max-sm:text-xs">
                     @{{ review.title }}
                 </p>
 
-                <p class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs">
+                <p class="mt-5 text-base text-zinc-500 max-sm:text-xs">
                     @{{ review.comment }}
                 </p>
 

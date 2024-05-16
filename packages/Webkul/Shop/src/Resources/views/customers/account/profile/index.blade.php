@@ -18,7 +18,7 @@
 
         <a
             href="{{ route('shop.customers.account.profile.edit') }}"
-            class="secondary-button border-[#E9E9E9] px-5 py-3 font-normal"
+            class="secondary-button border-zinc-200 px-5 py-3 font-normal"
         >
             @lang('shop::app.customers.account.profile.index.edit')
         </a>
@@ -30,12 +30,12 @@
     <div class="mt-8 grid grid-cols-1 gap-y-6">
         {!! view_render_event('bagisto.shop.customers.account.profile.first_name.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.first-name')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->first_name }}
             </p>
         </div>
@@ -44,12 +44,12 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.last_name.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.last-name')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->last_name }}
             </p>
         </div>
@@ -58,12 +58,12 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.gender.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.gender')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->gender ?? '-'}}
             </p>
         </div>
@@ -72,12 +72,12 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.date_of_birth.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.dob')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->date_of_birth ?? '-' }}
             </p>
         </div>
@@ -86,12 +86,12 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.email.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
                 @lang('shop::app.customers.account.profile.index.email')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->email }}
             </p>
         </div>
