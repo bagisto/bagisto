@@ -17,7 +17,7 @@ class MenuItem
         public string $route,
         public int $sort,
         public string $icon,
-        public ?Collection $menuItems,
+        public Collection $children,
     ) {
     }
 
@@ -56,25 +56,25 @@ class MenuItem
     /**
      * Check weather menu item have children or not.
      */
-    public function haveItem(): bool
+    public function haveChildren(): bool
     {
-        if ($this->menuItems) {
-            return $this->menuItems->isNotEmpty();
+        if (! $this->children) {
+            return false;
         }
-
-        return false;
+        
+        return $this->children->isNotEmpty();
     }
 
     /**
      * Get children of menu item.
      */
-    public function getChildren(): ?Collection
+    public function getChildren(): Collection
     {
-        if ($this->haveItem()) {
-            return $this->menuItems;
+        if (! $this->haveChildren()) {
+            return collect([]);
         }
 
-        return null;
+        return $this->children;
     }
 
     /**
@@ -86,7 +86,7 @@ class MenuItem
             return true;
         }
 
-        if ($this->haveItem()) {
+        if ($this->haveChildren()) {
             foreach ($this->getChildren() as $child) {
                 if ($child->isActive()) {
                     return true;
@@ -102,8 +102,8 @@ class MenuItem
      */
     public function getActiveItem(): ?MenuItem
     {
-        if ($this->haveItem()) {
-            foreach ($this->menuItems as $item) {
+        if ($this->haveChildren()) {
+            foreach ($this->children as $item) {
                 if ($item->isActive()) {
                     return $item;
                 }

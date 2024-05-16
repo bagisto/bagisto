@@ -2,7 +2,7 @@
     @foreach (menu()->getItems() as $menuItem)
         @if (
             $menuItem->isActive() 
-            && $tabs = $menuItem->getActiveItem()->menuItems
+            && $tabs = $menuItem->getActiveItem()->children
         )   
             @if ($tabs->isNotEmpty())
                 <div class="mb-4 flex gap-4 border-b-2 pt-2 dark:border-gray-800 max-sm:hidden">

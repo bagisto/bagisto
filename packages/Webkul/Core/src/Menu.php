@@ -11,14 +11,14 @@ class Menu
     /**
      * Menu items.
      */
-    protected array $menuItems = [];
+    protected array $items = [];
 
     /**
      * Add a new menu item.
      */
-    public function add(MenuItem $menuItem): void
+    public function addItem(MenuItem $menuItem): void
     {
-        $this->menuItems[] = $menuItem;
+        $this->items[] = $menuItem;
     }
 
     /**
@@ -26,11 +26,11 @@ class Menu
      */
     public function getItems(): Collection
     {
-        if (! $this->menuItems) {
+        if (! $this->items) {
             $this->prepareMenuItems();
         }
 
-        return collect($this->menuItems)
+        return collect($this->items)
             ->sortBy('sort');
     }
 
@@ -54,13 +54,13 @@ class Menu
         foreach ($menu as $menuItemKey => $menuItem) {
             $subMenuItems = $this->processSubMenuItems($menuItem);
 
-            $this->add(new MenuItem(
+            $this->addItem(new MenuItem(
                 key: $menuItemKey,
                 name: trans($menuItem['name']),
                 route: $menuItem['route'],
                 sort: $menuItem['sort'],
                 icon: $menuItem['icon'],
-                menuItems: $subMenuItems
+                children: $subMenuItems
             ));
         }
     }
@@ -82,7 +82,7 @@ class Menu
                     route: $subMenuItem['route'],
                     sort: $subMenuItem['sort'],
                     icon: $subMenuItem['icon'],
-                    menuItems: $subSubMenuItems
+                    children: $subSubMenuItems
                 );
             });
     }
