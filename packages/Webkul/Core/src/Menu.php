@@ -50,7 +50,7 @@ class Menu
             $this->prepareMenuItems();
         }
 
-        return collect($this->items)
+        return collect($this->removeUnauthorizedMenuItem())
             ->sortBy('sort');
     }
 
@@ -141,5 +141,31 @@ class Menu
         }
 
         return null;
+    }
+
+    /**
+     * Remove unauthorized urls.
+     */
+    private function removeUnauthorizedMenuItem(): Collection
+    {
+        return collect($this->items)->map(function ($item) {
+            $this->removeChildrenUnauthorizedMenuItem($item);
+
+            return $item;
+        });
+    }
+
+    /**
+     * Remove all children unauthorized urls. This will handle all levels.
+     */
+    private function removeChildrenUnauthorizedMenuItem(MenuItem &$menuItem): void
+    {
+        if ($menuItem->haveChildren()) {
+            $firstChildrenItem = $menuItem->getChildren()->first();
+
+            $menuItem->route = $firstChildrenItem->getRoute();
+
+            $this->removeChildrenUnauthorizedMenuItem($firstChildrenItem);
+        }
     }
 }
