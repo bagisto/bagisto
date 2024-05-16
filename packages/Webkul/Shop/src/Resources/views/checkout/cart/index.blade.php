@@ -97,7 +97,7 @@
                             {!! view_render_event('bagisto.shop.checkout.cart.cart_mass_actions.before') !!}
 
                             <!-- Cart Mass Action Container -->
-                            <div class="flex items-center justify-between border-b border-[#E9E9E9] pb-2.5 max-sm:py-2.5">
+                            <div class="flex items-center justify-between border-b border-zinc-200 pb-2.5 max-sm:py-2.5">
                                 <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
@@ -138,7 +138,7 @@
                                     </span>
 
                                     @if (auth()->guard()->check())
-                                        <span class="mx-2.5 border-r-[2px] border-[#E9E9E9]"></span>
+                                        <span class="mx-2.5 border-r-[2px] border-zinc-200"></span>
 
                                         <span
                                             class="cursor-pointer text-base text-[#0A49A7] max-sm:text-xs"
@@ -161,9 +161,9 @@
                                 class="grid gap-y-6" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex flex-wrap justify-between gap-x-2.5 border-b border-[#E9E9E9] pb-5 max-sm:pb-4">
-                                    <div class="flex gap-x-5 max-sm:gap-x-3.5">
-                                        <div class="mt-11 select-none max-sm:mt-0 max-sm:h-[80px] max-sm:leading-[80px]">
+                                <div class="flex flex-wrap justify-between gap-x-2.5 border-b border-[#E9E9E9] pb-5">
+                                    <div class="flex gap-x-5">
+                                        <div class="mt-11 select-none">
                                             <input
                                                 type="checkbox"
                                                 :id="'item_' + item.id"

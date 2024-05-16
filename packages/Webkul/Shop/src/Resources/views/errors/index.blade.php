@@ -32,7 +32,7 @@
                         @lang("admin::app.errors.{$errorCode}.title")
                     </h1>
 
-					<p class="mt-4 text-lg text-[#6E6E6E]">
+					<p class="mt-4 text-lg text-zinc-500">
                         {{ 
                             $errorCode === 503 && core()->getCurrentChannel()->maintenance_mode_text != ""
                             ? core()->getCurrentChannel()->maintenance_mode_text : trans("admin::app.errors.{$errorCode}.description")

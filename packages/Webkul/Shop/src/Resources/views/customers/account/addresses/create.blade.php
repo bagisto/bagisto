@@ -296,7 +296,7 @@
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.phone.after') !!}
 
                     <!-- Set As Default -->
-                    <div class="text-md mb-4 flex select-none items-center gap-x-1.5 text-[#6E6E6E]">
+                    <div class="text-md mb-4 flex select-none items-center gap-x-1.5 text-zinc-500">
                         <input
                             type="checkbox"
                             name="default_address"

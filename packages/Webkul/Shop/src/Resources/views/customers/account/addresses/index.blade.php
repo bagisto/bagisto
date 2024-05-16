@@ -17,7 +17,7 @@
 
         <a
             href="{{ route('shop.customers.account.addresses.create') }}"
-            class="secondary-button border-[#E9E9E9] px-5 py-3 font-normal max-sm:py-1.5"
+            class="secondary-button border-zinc-200 px-5 py-3 font-normal max-sm:py-1.5"
         >
             @lang('shop::app.customers.account.addresses.index.add-address') 
         </a>
@@ -30,7 +30,7 @@
 
         <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-sm:mt-[20px]">
             @foreach ($addresses as $address)
-                <div class="rounded-xl border border-[#e5e5e5] p-5 max-sm:flex-wrap">
+                <div class="rounded-xl border border-zinc-200 p-5 max-sm:flex-wrap">
                     <div class="flex justify-between">
                         <p class="text-base font-medium">
                             {{ $address->first_name }} {{ $address->last_name }}
@@ -52,7 +52,7 @@
                             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                                 <x-slot:toggle>
                                     <button 
-                                        class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-[#6E6E6E] transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black max-sm:p-0" 
+                                        class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-zinc-500 transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black max-sm:p-0" 
                                         aria-label="More Options"
                                     >
                                     </button>
@@ -122,7 +122,7 @@
                         </div>
                     </div>
 
-                    <p class="mt-6 text-[#6E6E6E] max-sm:mt-5 max-sm:text-sm">
+                    <p class="mt-6 text-zinc-500 max-sm:mt-5 max-sm:text-sm">
                         {{ $address->address }},
 
                         {{ $address->city }}, 

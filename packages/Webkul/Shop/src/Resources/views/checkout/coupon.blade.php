@@ -72,7 +72,7 @@
                                 <!-- Coupon Form Action Container -->
                                 <div class="flex flex-wrap items-center gap-4 max-sm:justify-between">
                                     <div class="flex gap-4 max-sm:block">
-                                        <p class="text-sm font-medium text-[#6E6E6E] max-sm:text-xs">
+                                        <p class="text-sm font-medium text-zinc-500 max-sm:text-xs">
                                             @lang('shop::app.checkout.coupon.subtotal')
                                         </p>
 

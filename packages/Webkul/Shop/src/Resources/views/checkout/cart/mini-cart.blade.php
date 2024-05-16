@@ -221,11 +221,14 @@
 
             <!-- Drawer Footer -->
             <x-slot:footer>
-                <div v-if="cart?.items?.length" class="grid-col-1 grid gap-5">
-                    <div class="my-8 flex items-center justify-between border-b border-[#E9E9E9] px-6 pb-2 max-sm:my-0 max-sm:border-t max-sm:px-5 max-sm:py-2">
+                <div
+                    v-if="cart?.items?.length"
+                    class="grid-col-1 grid gap-5"
+                >
+                    <div class="my-8 flex items-center justify-between border-b border-zinc-200 px-6 pb-2 max-sm:my-0 max-sm:border-t max-sm:px-5 max-sm:py-2">
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
 
-                        <p class="text-sm font-medium text-[#6E6E6E]">
+                        <p class="text-sm font-medium text-zinc-500">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
 

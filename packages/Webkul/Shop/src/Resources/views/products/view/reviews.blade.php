@@ -194,7 +194,7 @@
                                     <div class="grid grid-cols-[1fr_4fr] items-center gap-2.5 max-sm:flex-wrap">
                                         <div class="text-base font-medium max-sm:text-sm">{{ $i }} Stars</div>
 
-                                        <div class="h-4 w-[275px] max-w-full rounded-sm bg-[#E5E5E5] max-sm:w-full">
+                                        <div class="h-4 w-[275px] max-w-full rounded-sm bg-zinc-200 max-sm:w-full">
                                             <div class="h-4 rounded-sm bg-[#FEA82B]" style="width: {{ $percentageRatings[$i] }}%"></div>
                                         </div>
                                     </div>
@@ -244,7 +244,7 @@
         type="text/x-template"
         id="v-product-review-item-template"
     >
-        <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-xl:mb-5 max-sm:mb-0 max-sm:hidden max-sm:gap-4 max-sm:p-4">
+        <div class="flex gap-5 rounded-xl border border-zinc-200 p-6 max-xl:mb-5 max-sm:mb-0 max-sm:hidden max-sm:gap-4 max-sm:p-4">
             <div>
                 <img
                     v-if="review.profile"
@@ -256,10 +256,10 @@
 
                 <div
                     v-else
-                    class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-[#F5F5F5]"
+                    class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-zinc-100"
                     :title="review.name"
                 >
-                    <span class="text-2xl font-semibold text-[#6E6E6E] max-sm:text-sm">
+                    <span class="text-2xl font-semibold text-zinc-500 max-sm:text-sm">
                         @{{ review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('') }}
                     </span>
                 </div>
@@ -284,11 +284,11 @@
                     @{{ review.created_at }}
                 </p>
 
-                <p class="mt-5 text-base font-semibold text-[#6E6E6E] max-sm:mt-2.5 max-sm:text-sm">
+                <p class="mt-5 text-base font-semibold text-zinc-500 max-sm:mt-2.5 max-sm:text-sm">
                     @{{ review.title }}
                 </p>
 
-                <p class="mt-5 text-base text-[#6E6E6E] max-sm:mt-3 max-sm:text-sm">
+                <p class="mt-5 text-base text-zinc-500 max-sm:mt-3 max-sm:text-sm">
                     @{{ review.comment }}
                 </p>
 
@@ -353,7 +353,7 @@
                 </div>
 
                 <!-- Review Images zoomer -->
-                <x-shop::modal.image-zoomer 
+                <x-shop::image-zoomer 
                     ::attachments="attachments" 
                     ::is-image-zooming="isImageZooming" 
                     ::initial-index="'file_'+activeIndex"

@@ -63,7 +63,7 @@
 				@lang('shop::app.checkout.success.thanks')
 			</p>
 			
-			<p class="text-xl text-[#6E6E6E] max-sm:text-center max-sm:text-xs">
+			<p class="text-xl text-zinc-500 max-sm:text-center max-sm:text-xs">
 				@if (! empty($order->checkout_message))
 					{!! nl2br($order->checkout_message) !!}
 				@else

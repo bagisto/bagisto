@@ -55,7 +55,7 @@
                         />
 
                         <label
-                            class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0"
+                            class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-xs ltr:pl-0 rtl:pr-0"
                             for="use_for_shipping"
                         >
                             @lang('shop::app.checkout.onepage.address.same-as-billing')

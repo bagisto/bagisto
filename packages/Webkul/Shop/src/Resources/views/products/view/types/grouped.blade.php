@@ -16,7 +16,7 @@
                                     @lang('shop::app.products.view.type.grouped.name')
                                 </p>
 
-                                <p class="mt-1.5 text-[#6E6E6E]">
+                                <p class="mt-1.5 text-zinc-500">
                                     {{ $groupedProduct->associated_product->name . ' + ' . core()->currency($groupedProduct->associated_product->getTypeInstance()->getFinalPrice()) }}
                                 </p>
 

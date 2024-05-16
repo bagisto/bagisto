@@ -9,12 +9,12 @@
 <div class="journal-scroll mt-16 grid overflow-auto max-sm:mt-7">
     <!-- Single row -->
     @for ($i = 1; $i <= $attributeCount; $i++)
-        <div class="flex max-w-full items-center border-b border-[#E9E9E9]">
+        <div class="flex max-w-full items-center border-b border-zinc-200">
             <div class="min-w-[304px] max-w-full max-sm:min-w-[110px]">
                 <p class="shimmer h-[21px] w-[55%]"></p>
             </div>
 
-            <div class="flex gap-3 border-[#E9E9E9] max-sm:gap-0 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
+            <div class="flex gap-3 border-zinc-200 max-sm:gap-0 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                 <x-shop::shimmer.products.cards.grid
                     class="min-w-[311px] max-w-[311px] p-5 pt-0 max-sm:min-w-[190px] max-sm:px-2.5"
                     count="3"

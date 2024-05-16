@@ -72,7 +72,7 @@
                     type="text"
                     name="query"
                     value="{{ request('query') }}"
-                    class="block w-full rounded-lg border border-transparent bg-[#F5F5F5] px-11 py-3 text-xs font-medium text-gray-900 transition-all hover:border-gray-400 focus:border-gray-400"
+                    class="block w-full rounded-lg border border-transparent bg-zinc-100 px-11 py-3 text-xs font-medium text-gray-900 transition-all hover:border-gray-400 focus:border-gray-400"
                     placeholder="@lang('shop::app.components.layouts.header.search-text')"
                     aria-label="@lang('shop::app.components.layouts.header.search-text')"
                     aria-required="true"
@@ -147,7 +147,7 @@
                             </p>
                         </div>
 
-                        <p class="py-2px mt-3 w-full border border-[#E9E9E9]"></p>
+                        <p class="py-2px mt-3 w-full border border-zinc-200"></p>
 
                         <div class="mt-6 flex gap-4">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
@@ -185,7 +185,7 @@
                             </p>
                         </div>
 
-                        <p class="py-2px mt-3 w-full border border-[#E9E9E9]"></p>
+                        <p class="py-2px mt-3 w-full border border-zinc-200"></p>
 
                         <div class="mt-2.5 grid gap-1 pb-2.5">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile_dropdown.links.before') !!}
@@ -304,7 +304,7 @@
                                     v-if="secondLevelCategory.children.length"
                                 >
                                     <li
-                                        class="text-sm font-medium text-[#6E6E6E]"
+                                        class="text-sm font-medium text-zinc-500"
                                         v-for="thirdLevelCategory in secondLevelCategory.children"
                                     >
                                         <a :href="thirdLevelCategory.url">

@@ -29,7 +29,7 @@
                     >
                         <a
                             :href="category.slug"
-                            class="h-[110px] w-[110px] rounded-full bg-[#F5F5F5] max-sm:h-[60px] max-sm:w-[60px]"
+                            class="h-[110px] w-[110px] rounded-full bg-zinc-100 max-sm:h-[60px] max-sm:w-[60px]"
                             :aria-label="category.name"
                         >
                             <template v-if="category.images.logo_url">
