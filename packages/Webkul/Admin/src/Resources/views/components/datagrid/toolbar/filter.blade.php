@@ -1,11 +1,11 @@
 <v-datagrid-filter
+    :src="src"
     :is-loading="isLoading"
     :available="available"
     :applied="applied"
-    :src="src"
     @applyFilter="filter"
     @removeFilter="filter"
-    @applySaveFilter="applySaveFilter"
+    @applySavedFilter="applySavedFilter"
 >
     {{ $slot }}
 </v-datagrid-filter>
@@ -79,16 +79,16 @@
                                 <x-slot:content class="!p-0">
                                     <div class="!p-0">
                                         <ul v-for="(filter,index) in savedFilters.available">
-                                            <div 
-                                                class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"  
+                                            <div
+                                                class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"
                                                 :class="{ 'bg-gray-50 dark:bg-gray-950 font-semibold': filter.name == applied.savedFilterName }"
                                             >
-                                                <li @click="applySaveFilter(filter)">
+                                                <li @click="applySavedFilter(filter)">
                                                     @{{ filter.name }}
                                                 </li>
-                                            
-                                                <span 
-                                                    class="icon-cross cursor-pointer rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"  
+
+                                                <span
+                                                    class="icon-cross cursor-pointer rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"
                                                     @click="deleteSavedFilter(filter)"
                                                 >
                                                 </span>
@@ -97,7 +97,7 @@
                                     </div>
                                 </x-slot>
                             </x-admin::accordion>
-                                           
+
                             <x-admin::accordion class="!box-shadow-none !rounded-none">
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
                                     Custom Filters
@@ -115,7 +115,7 @@
                                                             v-text="column.label"
                                                         >
                                                         </p>
-            
+
                                                         <div
                                                             class="flex items-center gap-x-1.5"
                                                             @click="removeAppliedColumnAllValues(column.index)"
@@ -128,7 +128,7 @@
                                                             </p>
                                                         </div>
                                                     </div>
-            
+
                                                     <div class="mb-2 mt-1.5">
                                                         <x-admin::dropdown>
                                                             <x-slot:toggle>
@@ -141,11 +141,11 @@
                                                                         v-text="'@lang('admin::app.components.datagrid.filters.select')'"
                                                                     >
                                                                     </span>
-            
+
                                                                     <span class="icon-sort-down text-2xl"></span>
                                                                 </button>
                                                             </x-slot>
-            
+
                                                             <x-slot:menu>
                                                                 <x-admin::dropdown.menu.item
                                                                     v-for="option in column.options"
@@ -156,7 +156,7 @@
                                                             </x-slot>
                                                         </x-admin::dropdown>
                                                     </div>
-            
+
                                                     <div class="mb-4 flex flex-wrap gap-2">
                                                         <p
                                                             class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
@@ -164,7 +164,7 @@
                                                         >
                                                             <!-- Retrieving the label from the options based on the applied column value. -->
                                                             <span v-text="column.options.find((option => option.value == appliedColumnValue)).label"></span>
-            
+
                                                             <span
                                                                 class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                 @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
@@ -173,7 +173,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
-            
+
                                                 <!-- Dropdown -->
                                                 <div v-else-if="column.type === 'dropdown'">
                                                     <!-- Basic -->
@@ -184,7 +184,7 @@
                                                                 v-text="column.label"
                                                             >
                                                             </p>
-            
+
                                                             <div
                                                                 class="flex items-center gap-x-1.5"
                                                                 @click="removeAppliedColumnAllValues(column.index)"
@@ -197,7 +197,7 @@
                                                                 </p>
                                                             </div>
                                                         </div>
-            
+
                                                         <div class="mb-2 mt-1.5">
                                                             <x-admin::dropdown>
                                                                 <x-slot:toggle>
@@ -210,11 +210,11 @@
                                                                             v-text="'@lang('admin::app.components.datagrid.filters.select')'"
                                                                         >
                                                                         </span>
-            
+
                                                                         <span class="icon-sort-down text-2xl"></span>
                                                                     </button>
                                                                 </x-slot>
-            
+
                                                                 <x-slot:menu>
                                                                     <x-admin::dropdown.menu.item
                                                                         v-for="option in column.options.params.options"
@@ -225,7 +225,7 @@
                                                                 </x-slot>
                                                             </x-admin::dropdown>
                                                         </div>
-            
+
                                                         <div class="mb-4 flex flex-wrap gap-2">
                                                             <p
                                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
@@ -233,7 +233,7 @@
                                                             >
                                                                 <!-- Retrieving the label from the options based on the applied column value. -->
                                                                 <span v-text="column.options.params.options.find((option => option.value == appliedColumnValue)).label"></span>
-            
+
                                                                 <span
                                                                     class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                     @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
@@ -242,7 +242,7 @@
                                                             </p>
                                                         </div>
                                                     </div>
-            
+
                                                     <!-- Searchable -->
                                                     <div v-else-if="column.options.type === 'searchable'">
                                                         <div class="flex items-center justify-between">
@@ -251,7 +251,7 @@
                                                                 v-text="column.label"
                                                             >
                                                             </p>
-            
+
                                                             <div
                                                                 class="flex items-center gap-x-1.5"
                                                                 @click="removeAppliedColumnAllValues(column.index)"
@@ -264,7 +264,7 @@
                                                                 </p>
                                                             </div>
                                                         </div>
-            
+
                                                         <div class="mb-2 mt-1.5">
                                                             <v-datagrid-searchable-dropdown
                                                                 :datagrid-id="available.id"
@@ -273,14 +273,14 @@
                                                             >
                                                             </v-datagrid-searchable-dropdown>
                                                         </div>
-            
+
                                                         <div class="mb-4 flex flex-wrap gap-2">
                                                             <p
                                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                             >
                                                                 <span v-text="appliedColumnValue"></span>
-            
+
                                                                 <span
                                                                     class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                     @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
@@ -290,7 +290,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-            
+
                                                 <!-- Date Range -->
                                                 <div v-else-if="column.type === 'date_range'">
                                                     <div class="flex items-center justify-between">
@@ -299,7 +299,7 @@
                                                             v-text="column.label"
                                                         >
                                                         </p>
-            
+
                                                         <div
                                                             class="flex items-center gap-x-1.5"
                                                             @click="removeAppliedColumnAllValues(column.index)"
@@ -312,7 +312,7 @@
                                                             </p>
                                                         </div>
                                                     </div>
-            
+
                                                     <div class="mt-1.5 grid grid-cols-2 gap-1.5">
                                                         <p
                                                             class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
@@ -325,7 +325,7 @@
                                                             )"
                                                         >
                                                         </p>
-            
+
                                                         <x-admin::flat-picker.date ::allow-input="false">
                                                             <input
                                                                 value=""
@@ -341,7 +341,7 @@
                                                                 )"
                                                             />
                                                         </x-admin::flat-picker.date>
-            
+
                                                         <x-admin::flat-picker.date ::allow-input="false">
                                                             <input
                                                                 type="column.input_type"
@@ -357,14 +357,14 @@
                                                                 )"
                                                             />
                                                         </x-admin::flat-picker.date>
-            
+
                                                         <div class="mb-4 flex flex-wrap gap-2">
                                                             <p
                                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                             >
                                                                 <span v-text="appliedColumnValue.join(' to ')"></span>
-            
+
                                                                 <span
                                                                     class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                     @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
@@ -374,7 +374,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-            
+
                                                 <!-- Date Time Range -->
                                                 <div v-else-if="column.type === 'datetime_range'">
                                                     <div class="flex items-center justify-between">
@@ -383,7 +383,7 @@
                                                             v-text="column.label"
                                                         >
                                                         </p>
-            
+
                                                         <div
                                                             class="flex items-center gap-x-1.5"
                                                             @click="removeAppliedColumnAllValues(column.index)"
@@ -396,7 +396,7 @@
                                                             </p>
                                                         </div>
                                                     </div>
-            
+
                                                     <div class="my-4 grid grid-cols-2 gap-1.5">
                                                         <p
                                                             class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
@@ -409,7 +409,7 @@
                                                             )"
                                                         >
                                                         </p>
-            
+
                                                         <x-admin::flat-picker.datetime ::allow-input="false">
                                                             <input
                                                                 value=""
@@ -425,7 +425,7 @@
                                                                 )"
                                                             />
                                                         </x-admin::flat-picker.datetime>
-            
+
                                                         <x-admin::flat-picker.datetime ::allow-input="false">
                                                             <input
                                                                 type="column.input_type"
@@ -441,14 +441,14 @@
                                                                 )"
                                                             />
                                                         </x-admin::flat-picker.datetime>
-            
+
                                                         <div class="mb-4 flex flex-wrap gap-2">
                                                             <p
                                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                             >
                                                                 <span v-text="appliedColumnValue.join(' to ')"></span>
-            
+
                                                                 <span
                                                                     class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                     @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
@@ -458,7 +458,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-            
+
                                                 <!-- Rest -->
                                                 <div v-else>
                                                     <div class="flex items-center justify-between">
@@ -467,7 +467,7 @@
                                                             v-text="column.label"
                                                         >
                                                         </p>
-            
+
                                                         <div
                                                             class="flex items-center gap-x-1.5"
                                                             @click="removeAppliedColumnAllValues(column.index)"
@@ -480,7 +480,7 @@
                                                             </p>
                                                         </div>
                                                     </div>
-            
+
                                                     <div class="mb-2 mt-1.5 grid">
                                                         <input
                                                             type="text"
@@ -490,14 +490,14 @@
                                                             @keyup.enter="applyFilter($event, column)"
                                                         />
                                                     </div>
-            
+
                                                     <div class="mb-4 flex flex-wrap gap-2">
                                                         <p
                                                             class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                             v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                         >
                                                             <span v-text="appliedColumnValue"></span>
-            
+
                                                             <span
                                                                 class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                 @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
@@ -508,8 +508,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        <p 
+
+                                        <p
                                             v-if="filters.columns.length > 0"
                                             class="secondary-button"
                                             @click="isSaved = !isSaved"
@@ -527,7 +527,7 @@
                                     @lang('Add New Custom Filter')
                                 </p>
                             </div>
-                            
+
                             <div class="px-5 py-1" v-if="filters.columns.length > 0">
                                 <x-admin::form
                                     v-slot="{ meta, errors, handleSubmit }"
@@ -538,7 +538,7 @@
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('Save filter')
                                             </x-admin::form.control-group.label>
-                                            
+
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 id="name"
@@ -547,18 +547,18 @@
                                                 :label="trans('name')"
                                                 :placeholder="trans('Save as')"
                                             />
-            
+
                                             <x-admin::form.control-group.error control-name="name" />
                                         </x-admin::form.control-group>
 
                                         <div class="flex content-end items-center justify-end gap-6">
-                                            <div 
+                                            <div
                                                 @click="isSaved = !isSaved"
                                                 class="secondary-button"
                                             >
                                                 @lang('Back')
                                             </div>
-                                        
+
                                             <button
                                                 type="submit"
                                                 class="primary-button"
@@ -567,22 +567,22 @@
                                             </button>
                                         </div>
 
-                                        <div v-for="filter in filters.columns" :key="filter.label">
+                                        <div v-for="column in savedFilters.params.filters.columns">
                                             <p class="mb-2 text-xs font-medium text-gray-800 dark:text-white">
-                                                @{{ filter.label }}
+                                                @{{ column.label }}
                                             </p>
-                                            
+
                                             <div class="mb-4 flex flex-wrap gap-2">
                                                 <p
-                                                    v-for="availableValue in filter.value"
-                                                    :key="availableValue"
+                                                    v-for="columnValue in column.value"
                                                     class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                 >
-                                                    <span v-text="availableValue"></span>
+                                                    <span v-text="columnValue"></span>
+
                                                     <div>
                                                         <span
                                                             class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                            @click="removeSaveFilterOptions(filter, availableValue)"
+                                                            @click="removeSavedFilterColumnValue(column, columnValue)"
                                                         >
                                                         </span>
                                                     </div>
@@ -612,7 +612,11 @@
 
                         applied: null,
 
-                        name: '',
+                        params: {
+                            filters: {
+                                columns: [],
+                            },
+                        },
                     },
 
                     filters: {
@@ -626,7 +630,9 @@
             mounted() {
                 this.filters.columns = this.applied.filters.columns.filter((column) => column.index !== 'all');
 
-                this.getFilters();
+                this.savedFilters.params.filters.columns = this.applied.filters.columns.filter((column) => column.index !== 'all');
+
+                this.getSavedFilters();
             },
 
             methods: {
@@ -637,11 +643,11 @@
                  */
                 saveFilters(params) {
                     // event.preventDefault();
-                    
+
                     let applied = this.applied;
-                    
-                    applied.filters = applied.filters.filter((column) => column.index !== params)
-                    
+
+                    // applied.filters = applied.filters.filter((column) => column.index !== params)
+
                     this.$axios.post('{{ route('datagrid.filters.store') }}', {
                         user_id: {{ auth()->guard('admin')->user()->id }},
                         src: this.src,
@@ -651,50 +657,50 @@
                     })
                         .then(response => {
                             this.savedFilters.available.push(response.data.data);
-                            
+
                             this.savedFilters.name = '';
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            this.isSaved = false;   
+                            this.isSaved = false;
                         })
                         .catch(error => {
                             this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                         });
                 },
-                
+
                 /**
                  * Remove filter option from save filters.
+                 *
+                 * @returns {void}
                  */
-                removeSaveFilterOptions(filter, value) {
-                    let index = filter.value.indexOf(value);
-                    
-                    if (index > -1) {
-                        filter.value.splice(index, 1);
-                    } 
+                removeSavedFilterColumnValue(column, value) {
+                    column.value = column.value.filter((columnValue) => columnValue !== value);
+                },
+
+                /**
+                 * Retrieves the saved filters.
+                 *
+                 * @returns {void}
+                 */
+                getSavedFilters() {
+                    this.$axios
+                        .get('{{ route('datagrid.filters.index') }}', {
+                            params: { src: this.src }
+                        })
+                        .then(response => {
+                            this.savedFilters.available = response.data;
+                        })
+                        .catch(error => {});
                 },
 
                 /**
                  * Applies the saved filter.
                  *
                  * @param {Object} filter - The filter to be applied.
-                 * @emits applySaveFilter - Event emitted when the saved filter is applied.
                  */
-                applySaveFilter(filter) {
-                    this.$emit('applySaveFilter', filter);
-                },
-
-                /**
-                 * Retrieves the filters updates the available filters.
-                 */
-                getFilters () {
-                    this.$axios.get('{{ route('datagrid.filters.index') }}', {
-                        params: { src: "{{request()->url()}}" }
-                    })
-                        .then(response => {
-                            this.savedFilters.available = response.data;
-                        })
-                        .catch(error => {});
+                applySavedFilter(filter) {
+                    this.$emit('applySavedFilter', filter);
                 },
 
                 /**
@@ -709,11 +715,8 @@
                                     user_id: filter.user_id
                                 }
                             })
-
                             .then(response => {
-                                let index = this.savedFilters.available.indexOf(filter);
-
-                                this.savedFilters.available.splice(index, 1);
+                                this.savedFilters.available = this.savedFilters.available.filter((savedFilter) => savedFilter.id !== filter.id);
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })

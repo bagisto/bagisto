@@ -116,6 +116,8 @@
                                 },
                             ],
                         },
+
+                        savedFilterId: null,
                     },
                 };
             },
@@ -139,22 +141,6 @@
             },
 
             methods: {
-                /**
-                 * Apply the saved filter.
-                 *
-                 * @param {Object} filter
-                 * @returns {void}
-                 */
-                applySaveFilter(filter) {                    
-                    let { name, applied } = filter;
-
-                    this.applied = applied;
-
-                    this.applied.savedFilterName = name
-
-                    this.get();
-                },
-                
                 /**
                  * Initialization: This function checks for any previously saved filters in local storage and applies them as needed.
                  *
@@ -181,7 +167,7 @@
 
                             this.applied.filters = currentDatagrid.applied.filters;
 
-                            this.applied.savedFilterName = currentDatagrid.savedFilterName;
+                            this.applied.savedFilterId = currentDatagrid.applied.savedFilterId;
 
                             if (urlParams.has('search')) {
                                 let searchAppliedColumn = this.findAppliedColumn('all');
@@ -433,6 +419,20 @@
                     });
                 },
 
+                /**
+                 * Apply the saved filter.
+                 *
+                 * @param {Object} filter
+                 * @returns {void}
+                 */
+                applySavedFilter(filter) {
+                    this.applied = filter.applied;
+
+                    this.applied.savedFilterId = filter.id;
+
+                    this.get();
+                },
+
                 //=======================================================================================
                 // Support for previous applied values in datagrids. All code is based on local storage.
                 //=======================================================================================
@@ -456,7 +456,6 @@
                                         requestCount: ++datagrid.requestCount,
                                         available: this.available,
                                         applied: this.applied,
-                                        savedFilterName: this.applied.savedFilterName,
                                     };
                                 }
 
