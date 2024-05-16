@@ -37,7 +37,7 @@ class Menu
     /**
      * Prepare menu items.
      */
-    public function prepareMenuItems(): void
+    private function prepareMenuItems(): void
     {
         $menuWithDotNotation = [];
 
@@ -68,16 +68,16 @@ class Menu
     /**
      * Process sub menu items.
      */
-    public function processSubMenuItems($menuItem): Collection
+    private function processSubMenuItems($menuItem): Collection
     {
         return collect($menuItem)
             ->sortBy('sort')
             ->filter(fn ($value) => is_array($value))
-            ->map(function ($subMenuItem, $subMenuItemKey) {
+            ->map(function ($subMenuItem) {
                 $subSubMenuItems = $this->processSubMenuItems($subMenuItem);
 
                 return new MenuItem(
-                    key: $subMenuItemKey,
+                    key: $subMenuItem['key'],
                     name: trans($subMenuItem['name']),
                     route: $subMenuItem['route'],
                     sort: $subMenuItem['sort'],

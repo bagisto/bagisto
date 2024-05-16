@@ -4,201 +4,222 @@ use Illuminate\Support\Collection;
 use Webkul\Core\Menu;
 use Webkul\Core\Menu\MenuItem;
 
+/**
+ * Create config for menu items.
+ */
+beforeEach(function () {
+    config()->set('menu.admin', [
+        [
+            'key'        => 'dashboard',
+            'name'       => 'admin::app.components.layouts.sidebar.dashboard',
+            'route'      => 'admin.dashboard.index',
+            'sort'       => 1,
+            'icon'       => 'icon-dashboard',
+        ], [
+            'key'        => 'sales',
+            'name'       => 'admin::app.components.layouts.sidebar.sales',
+            'route'      => 'admin.sales.orders.index',
+            'sort'       => 2,
+            'icon'       => 'icon-sales',
+        ], [
+            'key'        => 'sales.orders',
+            'name'       => 'admin::app.components.layouts.sidebar.orders',
+            'route'      => 'admin.sales.orders.index',
+            'sort'       => 1,
+            'icon'       => '',
+        ],
+    ]);
+});
+
 it('should add and get menu items', function () {
+    // Arrange.
     $menu = new Menu();
 
-    $menu->add(new MenuItem(
-        key: 'key1',
-        name: 'Dashboard',
-        route: 'admin.dashboard.index',
-        sort: 1,
-        icon: 'icon-dashboard',
-        menuItems: collect([]),
-    ));
+    foreach (config('menu.admin') as $menuItem) {
+        $menu->add(new MenuItem(
+            key: $menuItem['key'],
+            name: trans($menuItem['name']),
+            route: $menuItem['route'],
+            sort: $menuItem['sort'],
+            icon: $menuItem['icon'],
+            menuItems: collect([]),
+        ));
+    }
 
-    $menu->add(new MenuItem(
-        key: 'key2',
-        name: 'Sales',
-        route: 'admin.sales.index',
-        sort: 2,
-        icon: 'icon-sales',
-        menuItems: collect([]),
-    ));
+    $menuItems = $menu->getItems();
 
-    expect($menu->getItems()->count())->toBe(2);
+    // Act and Assert.
+    $this->loginAsAdmin();
 
-    expect($menu->getItems()->first()->key)->toBe('key1');
+    expect($menuItems->first()->key)->toBe('dashboard');
 
-    expect($menu->getItems())->toBeInstanceOf(Collection::class);
+    expect($menuItems->first()->name)->toBe(trans('admin::app.components.layouts.sidebar.dashboard'));
 
-    expect($menu->getItems()->first())->toBeInstanceOf(MenuItem::class);
+    expect($menuItems->first()->route)->toBe('admin.dashboard.index');
+
+    expect($menuItems->first()->sort)->toBe(1);
+
+    expect($menuItems->first()->icon)->toBe('icon-dashboard');
+
+    expect($menuItems->last()->key)->toBe('sales');
 });
 
 it('should prepare menu items', function () {
+    // Arrange.
     $menu = new Menu();
 
-    $menu->prepareMenuItems();
+    $class = new ReflectionClass(Menu::class);
 
-    expect($menu->getItems())->toBeInstanceOf(Collection::class);
+    $method = $class->getMethod('prepareMenuItems');
+
+    $method->invoke($menu);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $menuItems = $menu->getItems();
+
+    expect($menuItems)->toBeInstanceOf(Collection::class);
+
+    expect($menuItems->count())->toBe(2);
+
+    expect($menuItems->first())->toBeInstanceOf(MenuItem::class);
+
+    expect($menuItems->first()->key)->toBe('dashboard');
+
+    expect($menuItems->first()->name)->toBe(trans('admin::app.components.layouts.sidebar.dashboard'));
+
+    expect($menuItems->first()->route)->toBe('admin.dashboard.index');
+
+    expect($menuItems->first()->sort)->toBe(1);
+
+    expect($menuItems->first()->icon)->toBe('icon-dashboard');
+
+    expect($menuItems->last()->key)->toBe('sales');
 });
 
 it('should process sub menu items', function () {
+    // Arrange.
     $menu = new Menu();
 
-    $subMenuItems = $menu->processSubMenuItems([
-        'sales' => [
-            'key'    => 'sales',
-            'name'   => 'admin::app.components.layouts.sidebar.sales',
-            'route'  => 'admin.sales.orders.index',
-            'sort'   => 2,
-            'icon'   => 'icon-sales',
-            'orders' => [
-                'key'   => 'sales.orders',
-                'name'  => 'admin::app.components.layouts.sidebar.orders',
-                'route' => 'admin.sales.orders.index',
-                'sort'  => 1,
-                'icon'  => '',
-            ],
-            'shipments' => [
-                'key'   => 'sales.shipments',
-                'name'  => 'admin::app.components.layouts.sidebar.shipments',
-                'route' => 'admin.sales.shipments.index',
-                'sort'  => 2,
-                'icon'  => '',
-            ],
-        ],
-    ]);
+    $class = new ReflectionClass(Menu::class);
 
-    expect($subMenuItems->count())->toBe(1);
+    $method = $class->getMethod('processSubMenuItems');
+
+    $subMenuItems = $method->invoke($menu, config('menu.admin'));
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    expect($subMenuItems)->toBeInstanceOf(Collection::class);
+
+    expect($subMenuItems->count())->toBe(3);
 
     expect($subMenuItems->first())->toBeInstanceOf(MenuItem::class);
 
-    expect($subMenuItems->first()->menuItems)->toBeInstanceOf(Collection::class);
+    expect($subMenuItems->first()->key)->toBe('dashboard');
 
-    expect($subMenuItems->first()->menuItems->first())->toBeInstanceOf(MenuItem::class);
+    expect($subMenuItems->first()->name)->toBe(trans('admin::app.components.layouts.sidebar.dashboard'));
 
-    expect($subMenuItems->first()->key)->toBe('sales');
+    expect($subMenuItems->first()->route)->toBe('admin.dashboard.index');
 
-    expect($subMenuItems->first()->icon)->toBe('icon-sales');
+    expect($subMenuItems->first()->sort)->toBe(1);
 
-    expect($subMenuItems->first()->sort)->toBe(2);
+    expect($subMenuItems->first()->icon)->toBe('icon-dashboard');
 
-    expect($subMenuItems->first()->menuItems->count())->toBe(2);
+    expect($subMenuItems->last()->key)->toBe('sales');
 
-    expect($subMenuItems->first()->menuItems->first()->key)->toBe('orders');
-
-    expect($subMenuItems->first()->menuItems->last()->key)->toBe('shipments');
-
-    expect($subMenuItems->first()->menuItems->first()->route)->toBe('admin.sales.orders.index');
-
-    expect($subMenuItems->first()->menuItems->first()->icon)->toBe('');
-
-    expect($subMenuItems->first()->menuItems->last()->icon)->toBe('');
-});
-
-it('should prepare menuitem', function () {
-    $menuItem = new MenuItem(
-        key: 'key1',
-        name: 'Dashboard',
-        route: 'admin.dashboard.index',
-        sort: 1,
-        icon: 'icon-dashboard',
-        menuItems: collect([]),
-    );
-
-    expect($menuItem->getName())->toBe('Dashboard');
-
-    expect($menuItem->getIcon())->toBe('icon-dashboard');
-
-    expect($menuItem->getRoute())->toBe('admin.dashboard.index');
-
-    expect($menuItem->getUrl())->toBe(route('admin.dashboard.index'));
-
-    expect($menuItem->haveItem())->toBe(false);
-});
-
-it('should prepare sub menu items', function () {
-    $menuItem = new MenuItem(
-        key: 'key1',
-        name: 'Dashboard',
-        route: 'admin.dashboard.index',
-        sort: 1,
-        icon: 'icon-dashboard',
-        menuItems: collect([
-            new MenuItem(
-                key: 'key2',
-                name: 'Sales',
-                route: 'admin.sales.index',
-                sort: 2,
-                icon: 'icon-sales',
-                menuItems: collect([]),
-            ),
-        ]),
-    );
-
-    expect($menuItem->haveItem())->toBe(true);
-
-    expect($menuItem->menuItems->count())->toBe(1);
-
-    expect($menuItem->menuItems->first())->toBeInstanceOf(MenuItem::class);
-
-    expect($menuItem->menuItems->first()->key)->toBe('key2');
-
-    expect($menuItem->menuItems->first()->name)->toBe('Sales');
-
-    expect($menuItem->menuItems->first()->route)->toBe('admin.sales.index');
-
-    expect($menuItem->menuItems->first()->sort)->toBe(2);
-});
-
-it('should prepare menu item with null menu items', function () {
-    $menuItem = new MenuItem(
-        key: 'key1',
-        name: 'Dashboard',
-        route: 'admin.dashboard.index',
-        sort: 1,
-        icon: 'icon-dashboard',
-        menuItems: null,
-    );
-
-    expect($menuItem->haveItem())->toBe(false);
+    expect($subMenuItems->last()->name)->toBe(trans('admin::app.components.layouts.sidebar.sales'));
 });
 
 it('should get children of menu item', function () {
-    $menuItem = new MenuItem(
-        key: 'key1',
-        name: 'Dashboard',
-        route: 'admin.dashboard.index',
-        sort: 1,
-        icon: 'icon-dashboard',
-        menuItems: collect([
-            new MenuItem(
-                key: 'key2',
-                name: 'Sales',
-                route: 'admin.sales.index',
-                sort: 2,
-                icon: 'icon-sales',
-                menuItems: collect([]),
-            ),
-        ]),
-    );
+    // Arrange.
+    $menu = new Menu();
 
-    expect($menuItem->getChildren())->toBeInstanceOf(Collection::class);
+    // Act and Assert.
+    $this->loginAsAdmin();
 
-    expect($menuItem->getChildren()->count())->toBe(1);
+    $menuItem = $menu->getItems();
 
-    expect($menuItem->getChildren()->first())->toBeInstanceOf(MenuItem::class);
+    expect($menuItem->first()->getChildren())->toBeNull();
+
+    expect($menuItem->last()->getChildren())->toBeInstanceOf(Collection::class);
+
+    expect($menuItem->last()->getChildren()->count())->toBe(1);
+
+    expect($menuItem->last()->getChildren()->first()->key)->toBe('sales.orders');
+
+    expect($menuItem->last()->getChildren()->first()->name)->toBe(trans('admin::app.components.layouts.sidebar.orders'));
+
+    expect($menuItem->last()->getChildren()->first()->route)->toBe('admin.sales.orders.index');
+
+    expect($menuItem->last()->getChildren()->first()->sort)->toBe(1);
+
+    expect($menuItem->last()->getChildren()->first()->icon)->toBe('');
 });
 
-it('should get null children of menu item', function () {
-    $menuItem = new MenuItem(
-        key: 'key1',
-        name: 'Dashboard',
-        route: 'admin.dashboard.index',
-        sort: 1,
-        icon: 'icon-dashboard',
-        menuItems: null,
-    );
+it('should check that menu item have children or not', function () {
+    // Arrange.
+    $menu = new Menu();
 
-    expect($menuItem->getChildren())->toBeNull();
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $menuItem = $menu->getItems();
+
+    expect($menuItem->first()->haveItem())->toBeFalse();
+
+    expect($menuItem->last()->haveItem())->toBeTrue();
+});
+
+it('should get the url of the menu item', function () {
+    // Arrange.
+    $menu = new Menu();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $menuItem = $menu->getItems();
+
+    expect($menuItem->first()->getUrl())->toBe(route('admin.dashboard.index'));
+
+    expect($menuItem->last()->getChildren()->first()->getUrl())->toBe(route('admin.sales.orders.index'));
+});
+
+it('should get the icon of menu item', function () {
+    // Arrange.
+    $menu = new Menu();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $menuItem = $menu->getItems();
+
+    expect($menuItem->first()->getIcon())->toBe('icon-dashboard');
+
+    expect($menuItem->last()->getChildren()->first()->getIcon())->toBe('');
+});
+
+it('should get the name of menu item', function () {
+    // Arrange.
+    $menu = new Menu();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $menuItem = $menu->getItems();
+
+    expect($menuItem->first()->getName())->toBe(trans('admin::app.components.layouts.sidebar.dashboard'));
+});
+
+it('should get the route of menu item', function () {
+    // Arrange.
+    $menu = new Menu();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $menuItem = $menu->getItems();
+
+    expect($menuItem->first()->getRoute())->toBe('admin.dashboard.index');
 });
