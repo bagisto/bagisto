@@ -146,7 +146,11 @@
                  * @returns {void}
                  */
                 applySaveFilter(filter) {                    
-                    this.applied = filter.applied;
+                    let { name, applied } = filter;
+
+                    this.applied = applied;
+
+                    this.applied.savedFilterName = name
 
                     this.get();
                 },
@@ -176,6 +180,8 @@
                             this.applied.sort = currentDatagrid.applied.sort;
 
                             this.applied.filters = currentDatagrid.applied.filters;
+
+                            this.applied.savedFilterName = currentDatagrid.savedFilterName;
 
                             if (urlParams.has('search')) {
                                 let searchAppliedColumn = this.findAppliedColumn('all');
@@ -450,6 +456,7 @@
                                         requestCount: ++datagrid.requestCount,
                                         available: this.available,
                                         applied: this.applied,
+                                        savedFilterName: this.applied.savedFilterName,
                                     };
                                 }
 

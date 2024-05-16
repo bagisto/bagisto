@@ -63,156 +63,59 @@
 
                     <x-slot:header>
                         <div class="flex items-center justify-between p-3">
-                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                            <p class="text-xl font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.components.datagrid.filters.title')
                             </p>
                         </div>
                     </x-slot>
 
                     <x-slot:content class="!p-0">
-                        <x-admin::accordion class="!box-shadow-none !rounded-none">
-                            <x-slot:header class="px-4 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                Quick Filters
-                            </x-slot>
+                        <template v-if="! isSaved">
+                            <x-admin::accordion class="!box-shadow-none !rounded-none">
+                                <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
+                                    Quick Filters
+                                </x-slot>
 
-                            <x-slot:content class="!p-0">
-                                <div class="!p-0">
-                                    <ul v-for="(filter,index) in savedFilters.available">
-                                        <li 
-                                            class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"  
-                                            :class="{'bg-red-500': filter.is_applied}"
-                                            @click="applySaveFilter(filter)"
-                                        >
-                                            @{{ filter.name }}
-                                        
-                                            <span 
-                                                class="icon-cross cursor-pointer rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"  
-                                                @click="deleteSavedFilter(filter)"
+                                <x-slot:content class="!p-0">
+                                    <div class="!p-0">
+                                        <ul v-for="(filter,index) in savedFilters.available">
+                                            <div 
+                                                class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"  
+                                                :class="{ 'bg-gray-50 dark:bg-gray-950 font-semibold': filter.name == applied.savedFilterName }"
                                             >
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="mt-4 px-4">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('Save filter')
-                                    </x-admin::form.control-group.label>
-
-                                    <div class="mb-4 mt-1.5 flex items-center justify-between gap-4">
-                                        <x-admin::form.control-group class="!mb-0">
-                                            <x-admin::form.control-group.control
-                                                type="text"
-                                                id="name"
-                                                name="name"
-                                                class="!px-2 !py-1.5 leading-6" 
-                                                rules="required"
-                                                :label="trans('name')"
-                                                :placeholder="trans('Save as')"
-                                                v-model="savedFilters.name"
-                                            />
-            
-                                            <x-admin::form.control-group.error control-name="name" />
-                                        </x-admin::form.control-group>
-                                        
-                                        <p 
-                                            class="secondary-button"
-                                            @click="saveFilters()"
-                                        >
-                                            @lang('Save Filter')
-                                        </p>
-                                    </div>
-                                </div>
-                            </x-slot>
-                        </x-admin::accordion>
-                                           
-                        <x-admin::accordion class="!box-shadow-none !rounded-none">
-                            <x-slot:header class="px-4 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                Custom Filters
-                            </x-slot>
-
-                            <x-slot:content class="!p-0">
-                                <div class="!p-5">
-                                    <div v-for="column in available.columns">
-                                        <div v-if="column.filterable">
-                                            <!-- Boolean -->
-                                            <div v-if="column.type === 'boolean'">
-                                                <div class="flex items-center justify-between">
-                                                    <p
-                                                        class="text-xs font-medium text-gray-800 dark:text-white"
-                                                        v-text="column.label"
-                                                    >
-                                                    </p>
-        
-                                                    <div
-                                                        class="flex items-center gap-x-1.5"
-                                                        @click="removeAppliedColumnAllValues(column.index)"
-                                                    >
-                                                        <p
-                                                            class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
-                                                            v-if="hasAnyAppliedColumnValues(column.index)"
-                                                        >
-                                                            @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
-                                                        </p>
-                                                    </div>
-                                                </div>
-        
-                                                <div class="mb-2 mt-1.5">
-                                                    <x-admin::dropdown>
-                                                        <x-slot:toggle>
-                                                            <button
-                                                                type="button"
-                                                                class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                                            >
-                                                                <span
-                                                                    class="text-sm text-gray-400 dark:text-gray-400"
-                                                                    v-text="'@lang('admin::app.components.datagrid.filters.select')'"
-                                                                >
-                                                                </span>
-        
-                                                                <span class="icon-sort-down text-2xl"></span>
-                                                            </button>
-                                                        </x-slot>
-        
-                                                        <x-slot:menu>
-                                                            <x-admin::dropdown.menu.item
-                                                                v-for="option in column.options"
-                                                                v-text="option.label"
-                                                                @click="applyFilter(option.value, column)"
-                                                            >
-                                                            </x-admin::dropdown.menu.item>
-                                                        </x-slot>
-                                                    </x-admin::dropdown>
-                                                </div>
-        
-                                                <div class="mb-4 flex flex-wrap gap-2">
-                                                    <p
-                                                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                        v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
-                                                    >
-                                                        <!-- Retrieving the label from the options based on the applied column value. -->
-                                                        <span v-text="column.options.find((option => option.value == appliedColumnValue)).label"></span>
-        
-                                                        <span
-                                                            class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                            @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
-                                                        >
-                                                        </span>
-                                                    </p>
-                                                </div>
+                                                <li @click="applySaveFilter(filter)">
+                                                    @{{ filter.name }}
+                                                </li>
+                                            
+                                                <span 
+                                                    class="icon-cross cursor-pointer rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"  
+                                                    @click="deleteSavedFilter(filter)"
+                                                >
+                                                </span>
                                             </div>
-        
-                                            <!-- Dropdown -->
-                                            <div v-else-if="column.type === 'dropdown'">
-                                                <!-- Basic -->
-                                                <div v-if="column.options.type === 'basic'">
+                                        </ul>
+                                    </div>
+                                </x-slot>
+                            </x-admin::accordion>
+                                           
+                            <x-admin::accordion class="!box-shadow-none !rounded-none">
+                                <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
+                                    Custom Filters
+                                </x-slot>
+
+                                <x-slot:content class="!p-0">
+                                    <div class="!p-5">
+                                        <div v-for="column in available.columns">
+                                            <div v-if="column.filterable">
+                                                <!-- Boolean -->
+                                                <div v-if="column.type === 'boolean'">
                                                     <div class="flex items-center justify-between">
                                                         <p
                                                             class="text-xs font-medium text-gray-800 dark:text-white"
                                                             v-text="column.label"
                                                         >
                                                         </p>
-        
+            
                                                         <div
                                                             class="flex items-center gap-x-1.5"
                                                             @click="removeAppliedColumnAllValues(column.index)"
@@ -225,7 +128,7 @@
                                                             </p>
                                                         </div>
                                                     </div>
-        
+            
                                                     <div class="mb-2 mt-1.5">
                                                         <x-admin::dropdown>
                                                             <x-slot:toggle>
@@ -238,14 +141,14 @@
                                                                         v-text="'@lang('admin::app.components.datagrid.filters.select')'"
                                                                     >
                                                                     </span>
-        
+            
                                                                     <span class="icon-sort-down text-2xl"></span>
                                                                 </button>
                                                             </x-slot>
-        
+            
                                                             <x-slot:menu>
                                                                 <x-admin::dropdown.menu.item
-                                                                    v-for="option in column.options.params.options"
+                                                                    v-for="option in column.options"
                                                                     v-text="option.label"
                                                                     @click="applyFilter(option.value, column)"
                                                                 >
@@ -253,15 +156,15 @@
                                                             </x-slot>
                                                         </x-admin::dropdown>
                                                     </div>
-        
+            
                                                     <div class="mb-4 flex flex-wrap gap-2">
                                                         <p
                                                             class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                             v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                         >
                                                             <!-- Retrieving the label from the options based on the applied column value. -->
-                                                            <span v-text="column.options.params.options.find((option => option.value == appliedColumnValue)).label"></span>
-        
+                                                            <span v-text="column.options.find((option => option.value == appliedColumnValue)).label"></span>
+            
                                                             <span
                                                                 class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                 @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
@@ -270,16 +173,133 @@
                                                         </p>
                                                     </div>
                                                 </div>
-        
-                                                <!-- Searchable -->
-                                                <div v-else-if="column.options.type === 'searchable'">
+            
+                                                <!-- Dropdown -->
+                                                <div v-else-if="column.type === 'dropdown'">
+                                                    <!-- Basic -->
+                                                    <div v-if="column.options.type === 'basic'">
+                                                        <div class="flex items-center justify-between">
+                                                            <p
+                                                                class="text-xs font-medium text-gray-800 dark:text-white"
+                                                                v-text="column.label"
+                                                            >
+                                                            </p>
+            
+                                                            <div
+                                                                class="flex items-center gap-x-1.5"
+                                                                @click="removeAppliedColumnAllValues(column.index)"
+                                                            >
+                                                                <p
+                                                                    class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
+                                                                    v-if="hasAnyAppliedColumnValues(column.index)"
+                                                                >
+                                                                    @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                                                                </p>
+                                                            </div>
+                                                        </div>
+            
+                                                        <div class="mb-2 mt-1.5">
+                                                            <x-admin::dropdown>
+                                                                <x-slot:toggle>
+                                                                    <button
+                                                                        type="button"
+                                                                        class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                                                    >
+                                                                        <span
+                                                                            class="text-sm text-gray-400 dark:text-gray-400"
+                                                                            v-text="'@lang('admin::app.components.datagrid.filters.select')'"
+                                                                        >
+                                                                        </span>
+            
+                                                                        <span class="icon-sort-down text-2xl"></span>
+                                                                    </button>
+                                                                </x-slot>
+            
+                                                                <x-slot:menu>
+                                                                    <x-admin::dropdown.menu.item
+                                                                        v-for="option in column.options.params.options"
+                                                                        v-text="option.label"
+                                                                        @click="applyFilter(option.value, column)"
+                                                                    >
+                                                                    </x-admin::dropdown.menu.item>
+                                                                </x-slot>
+                                                            </x-admin::dropdown>
+                                                        </div>
+            
+                                                        <div class="mb-4 flex flex-wrap gap-2">
+                                                            <p
+                                                                class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                                v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
+                                                            >
+                                                                <!-- Retrieving the label from the options based on the applied column value. -->
+                                                                <span v-text="column.options.params.options.find((option => option.value == appliedColumnValue)).label"></span>
+            
+                                                                <span
+                                                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                    @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
+                                                                >
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+            
+                                                    <!-- Searchable -->
+                                                    <div v-else-if="column.options.type === 'searchable'">
+                                                        <div class="flex items-center justify-between">
+                                                            <p
+                                                                class="text-xs font-medium text-gray-800 dark:text-white"
+                                                                v-text="column.label"
+                                                            >
+                                                            </p>
+            
+                                                            <div
+                                                                class="flex items-center gap-x-1.5"
+                                                                @click="removeAppliedColumnAllValues(column.index)"
+                                                            >
+                                                                <p
+                                                                    class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
+                                                                    v-if="hasAnyAppliedColumnValues(column.index)"
+                                                                >
+                                                                    @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                                                                </p>
+                                                            </div>
+                                                        </div>
+            
+                                                        <div class="mb-2 mt-1.5">
+                                                            <v-datagrid-searchable-dropdown
+                                                                :datagrid-id="available.id"
+                                                                :column="column"
+                                                                @select-option="applyFilter($event, column)"
+                                                            >
+                                                            </v-datagrid-searchable-dropdown>
+                                                        </div>
+            
+                                                        <div class="mb-4 flex flex-wrap gap-2">
+                                                            <p
+                                                                class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                                v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
+                                                            >
+                                                                <span v-text="appliedColumnValue"></span>
+            
+                                                                <span
+                                                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                    @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
+                                                                >
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                                <!-- Date Range -->
+                                                <div v-else-if="column.type === 'date_range'">
                                                     <div class="flex items-center justify-between">
                                                         <p
                                                             class="text-xs font-medium text-gray-800 dark:text-white"
                                                             v-text="column.label"
                                                         >
                                                         </p>
-        
+            
                                                         <div
                                                             class="flex items-center gap-x-1.5"
                                                             @click="removeAppliedColumnAllValues(column.index)"
@@ -292,23 +312,192 @@
                                                             </p>
                                                         </div>
                                                     </div>
-        
-                                                    <div class="mb-2 mt-1.5">
-                                                        <v-datagrid-searchable-dropdown
-                                                            :datagrid-id="available.id"
-                                                            :column="column"
-                                                            @select-option="applyFilter($event, column)"
+            
+                                                    <div class="mt-1.5 grid grid-cols-2 gap-1.5">
+                                                        <p
+                                                            class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
+                                                            v-for="option in column.options"
+                                                            v-text="option.label"
+                                                            @click="applyFilter(
+                                                                $event,
+                                                                column,
+                                                                { quickFilter: { isActive: true, selectedFilter: option } }
+                                                            )"
                                                         >
-                                                        </v-datagrid-searchable-dropdown>
+                                                        </p>
+            
+                                                        <x-admin::flat-picker.date ::allow-input="false">
+                                                            <input
+                                                                value=""
+                                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                                                :type="column.input_type"
+                                                                :name="`${column.index}[from]`"
+                                                                :placeholder="column.label"
+                                                                :ref="`${column.index}[from]`"
+                                                                @change="applyFilter(
+                                                                    $event,
+                                                                    column,
+                                                                    { range: { name: 'from' }, quickFilter: { isActive: false } }
+                                                                )"
+                                                            />
+                                                        </x-admin::flat-picker.date>
+            
+                                                        <x-admin::flat-picker.date ::allow-input="false">
+                                                            <input
+                                                                type="column.input_type"
+                                                                value=""
+                                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                                                :name="`${column.index}[to]`"
+                                                                :placeholder="column.label"
+                                                                :ref="`${column.index}[from]`"
+                                                                @change="applyFilter(
+                                                                    $event,
+                                                                    column,
+                                                                    { range: { name: 'to' }, quickFilter: { isActive: false } }
+                                                                )"
+                                                            />
+                                                        </x-admin::flat-picker.date>
+            
+                                                        <div class="mb-4 flex flex-wrap gap-2">
+                                                            <p
+                                                                class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                                v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
+                                                            >
+                                                                <span v-text="appliedColumnValue.join(' to ')"></span>
+            
+                                                                <span
+                                                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                    @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
+                                                                >
+                                                                </span>
+                                                            </p>
+                                                        </div>
                                                     </div>
-        
+                                                </div>
+            
+                                                <!-- Date Time Range -->
+                                                <div v-else-if="column.type === 'datetime_range'">
+                                                    <div class="flex items-center justify-between">
+                                                        <p
+                                                            class="text-xs font-medium text-gray-800 dark:text-white"
+                                                            v-text="column.label"
+                                                        >
+                                                        </p>
+            
+                                                        <div
+                                                            class="flex items-center gap-x-1.5"
+                                                            @click="removeAppliedColumnAllValues(column.index)"
+                                                        >
+                                                            <p
+                                                                class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
+                                                                v-if="hasAnyAppliedColumnValues(column.index)"
+                                                            >
+                                                                @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                                                            </p>
+                                                        </div>
+                                                    </div>
+            
+                                                    <div class="my-4 grid grid-cols-2 gap-1.5">
+                                                        <p
+                                                            class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
+                                                            v-for="option in column.options"
+                                                            v-text="option.label"
+                                                            @click="applyFilter(
+                                                                $event,
+                                                                column,
+                                                                { quickFilter: { isActive: true, selectedFilter: option } }
+                                                            )"
+                                                        >
+                                                        </p>
+            
+                                                        <x-admin::flat-picker.datetime ::allow-input="false">
+                                                            <input
+                                                                value=""
+                                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                                                :type="column.input_type"
+                                                                :name="`${column.index}[from]`"
+                                                                :placeholder="column.label"
+                                                                :ref="`${column.index}[from]`"
+                                                                @change="applyFilter(
+                                                                    $event,
+                                                                    column,
+                                                                    { range: { name: 'from' }, quickFilter: { isActive: false } }
+                                                                )"
+                                                            />
+                                                        </x-admin::flat-picker.datetime>
+            
+                                                        <x-admin::flat-picker.datetime ::allow-input="false">
+                                                            <input
+                                                                type="column.input_type"
+                                                                value=""
+                                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                                                :name="`${column.index}[to]`"
+                                                                :placeholder="column.label"
+                                                                :ref="`${column.index}[from]`"
+                                                                @change="applyFilter(
+                                                                    $event,
+                                                                    column,
+                                                                    { range: { name: 'to' }, quickFilter: { isActive: false } }
+                                                                )"
+                                                            />
+                                                        </x-admin::flat-picker.datetime>
+            
+                                                        <div class="mb-4 flex flex-wrap gap-2">
+                                                            <p
+                                                                class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                                v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
+                                                            >
+                                                                <span v-text="appliedColumnValue.join(' to ')"></span>
+            
+                                                                <span
+                                                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                    @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
+                                                                >
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                                <!-- Rest -->
+                                                <div v-else>
+                                                    <div class="flex items-center justify-between">
+                                                        <p
+                                                            class="text-xs font-medium text-gray-800 dark:text-white"
+                                                            v-text="column.label"
+                                                        >
+                                                        </p>
+            
+                                                        <div
+                                                            class="flex items-center gap-x-1.5"
+                                                            @click="removeAppliedColumnAllValues(column.index)"
+                                                        >
+                                                            <p
+                                                                class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
+                                                                v-if="hasAnyAppliedColumnValues(column.index)"
+                                                            >
+                                                                @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                                                            </p>
+                                                        </div>
+                                                    </div>
+            
+                                                    <div class="mb-2 mt-1.5 grid">
+                                                        <input
+                                                            type="text"
+                                                            class="block w-full rounded-md border bg-white px-2 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                                            :name="column.index"
+                                                            :placeholder="column.label"
+                                                            @keyup.enter="applyFilter($event, column)"
+                                                        />
+                                                    </div>
+            
                                                     <div class="mb-4 flex flex-wrap gap-2">
                                                         <p
                                                             class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                             v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                         >
                                                             <span v-text="appliedColumnValue"></span>
-        
+            
                                                             <span
                                                                 class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                 @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
@@ -316,229 +505,76 @@
                                                             </span>
                                                         </p>
                                                     </div>
-                                                </div>
-                                            </div>
-        
-                                            <!-- Date Range -->
-                                            <div v-else-if="column.type === 'date_range'">
-                                                <div class="flex items-center justify-between">
-                                                    <p
-                                                        class="text-xs font-medium text-gray-800 dark:text-white"
-                                                        v-text="column.label"
-                                                    >
-                                                    </p>
-        
-                                                    <div
-                                                        class="flex items-center gap-x-1.5"
-                                                        @click="removeAppliedColumnAllValues(column.index)"
-                                                    >
-                                                        <p
-                                                            class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
-                                                            v-if="hasAnyAppliedColumnValues(column.index)"
-                                                        >
-                                                            @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
-                                                        </p>
-                                                    </div>
-                                                </div>
-        
-                                                <div class="mt-1.5 grid grid-cols-2 gap-1.5">
-                                                    <p
-                                                        class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
-                                                        v-for="option in column.options"
-                                                        v-text="option.label"
-                                                        @click="applyFilter(
-                                                            $event,
-                                                            column,
-                                                            { quickFilter: { isActive: true, selectedFilter: option } }
-                                                        )"
-                                                    >
-                                                    </p>
-        
-                                                    <x-admin::flat-picker.date ::allow-input="false">
-                                                        <input
-                                                            value=""
-                                                            class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                                            :type="column.input_type"
-                                                            :name="`${column.index}[from]`"
-                                                            :placeholder="column.label"
-                                                            :ref="`${column.index}[from]`"
-                                                            @change="applyFilter(
-                                                                $event,
-                                                                column,
-                                                                { range: { name: 'from' }, quickFilter: { isActive: false } }
-                                                            )"
-                                                        />
-                                                    </x-admin::flat-picker.date>
-        
-                                                    <x-admin::flat-picker.date ::allow-input="false">
-                                                        <input
-                                                            type="column.input_type"
-                                                            value=""
-                                                            class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                                            :name="`${column.index}[to]`"
-                                                            :placeholder="column.label"
-                                                            :ref="`${column.index}[from]`"
-                                                            @change="applyFilter(
-                                                                $event,
-                                                                column,
-                                                                { range: { name: 'to' }, quickFilter: { isActive: false } }
-                                                            )"
-                                                        />
-                                                    </x-admin::flat-picker.date>
-        
-                                                    <div class="mb-4 flex flex-wrap gap-2">
-                                                        <p
-                                                            class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                            v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
-                                                        >
-                                                            <span v-text="appliedColumnValue.join(' to ')"></span>
-        
-                                                            <span
-                                                                class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
-                                                            >
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-        
-                                            <!-- Date Time Range -->
-                                            <div v-else-if="column.type === 'datetime_range'">
-                                                <div class="flex items-center justify-between">
-                                                    <p
-                                                        class="text-xs font-medium text-gray-800 dark:text-white"
-                                                        v-text="column.label"
-                                                    >
-                                                    </p>
-        
-                                                    <div
-                                                        class="flex items-center gap-x-1.5"
-                                                        @click="removeAppliedColumnAllValues(column.index)"
-                                                    >
-                                                        <p
-                                                            class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
-                                                            v-if="hasAnyAppliedColumnValues(column.index)"
-                                                        >
-                                                            @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
-                                                        </p>
-                                                    </div>
-                                                </div>
-        
-                                                <div class="my-4 grid grid-cols-2 gap-1.5">
-                                                    <p
-                                                        class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
-                                                        v-for="option in column.options"
-                                                        v-text="option.label"
-                                                        @click="applyFilter(
-                                                            $event,
-                                                            column,
-                                                            { quickFilter: { isActive: true, selectedFilter: option } }
-                                                        )"
-                                                    >
-                                                    </p>
-        
-                                                    <x-admin::flat-picker.datetime ::allow-input="false">
-                                                        <input
-                                                            value=""
-                                                            class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                                            :type="column.input_type"
-                                                            :name="`${column.index}[from]`"
-                                                            :placeholder="column.label"
-                                                            :ref="`${column.index}[from]`"
-                                                            @change="applyFilter(
-                                                                $event,
-                                                                column,
-                                                                { range: { name: 'from' }, quickFilter: { isActive: false } }
-                                                            )"
-                                                        />
-                                                    </x-admin::flat-picker.datetime>
-        
-                                                    <x-admin::flat-picker.datetime ::allow-input="false">
-                                                        <input
-                                                            type="column.input_type"
-                                                            value=""
-                                                            class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                                            :name="`${column.index}[to]`"
-                                                            :placeholder="column.label"
-                                                            :ref="`${column.index}[from]`"
-                                                            @change="applyFilter(
-                                                                $event,
-                                                                column,
-                                                                { range: { name: 'to' }, quickFilter: { isActive: false } }
-                                                            )"
-                                                        />
-                                                    </x-admin::flat-picker.datetime>
-        
-                                                    <div class="mb-4 flex flex-wrap gap-2">
-                                                        <p
-                                                            class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                            v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
-                                                        >
-                                                            <span v-text="appliedColumnValue.join(' to ')"></span>
-        
-                                                            <span
-                                                                class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
-                                                            >
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-        
-                                            <!-- Rest -->
-                                            <div v-else>
-                                                <div class="flex items-center justify-between">
-                                                    <p
-                                                        class="text-xs font-medium text-gray-800 dark:text-white"
-                                                        v-text="column.label"
-                                                    >
-                                                    </p>
-        
-                                                    <div
-                                                        class="flex items-center gap-x-1.5"
-                                                        @click="removeAppliedColumnAllValues(column.index)"
-                                                    >
-                                                        <p
-                                                            class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
-                                                            v-if="hasAnyAppliedColumnValues(column.index)"
-                                                        >
-                                                            @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
-                                                        </p>
-                                                    </div>
-                                                </div>
-        
-                                                <div class="mb-2 mt-1.5 grid">
-                                                    <input
-                                                        type="text"
-                                                        class="block w-full rounded-md border bg-white px-2 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                                        :name="column.index"
-                                                        :placeholder="column.label"
-                                                        @keyup.enter="applyFilter($event, column)"
-                                                    />
-                                                </div>
-        
-                                                <div class="mb-4 flex flex-wrap gap-2">
-                                                    <p
-                                                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                        v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
-                                                    >
-                                                        <span v-text="appliedColumnValue"></span>
-        
-                                                        <span
-                                                            class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                            @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
-                                                        >
-                                                        </span>
-                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <p 
+                                            v-if="filters.columns.length > 0"
+                                            class="secondary-button"
+                                            @click="isSaved = !isSaved"
+                                        >
+                                            @lang('Save Filter')
+                                        </p>
                                     </div>
-                                </div>  
-                            </x-slot>
-                        </x-admin::accordion>
+                                </x-slot>
+                            </x-admin::accordion>
+                        </template>
+
+                        <template v-else>
+                            <div class="flex items-center justify-between p-3 px-5">
+                                <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                    @lang('Add New Custom Filter')
+                                </p>
+                            </div>
+                            
+                            <div class="px-5 py-1" v-if="filters.columns.length > 0">
+                                <x-admin::form
+                                    v-slot="{ meta, errors, handleSubmit }"
+                                    as="div"
+                                >
+                                    <form @submit="handleSubmit($event, saveFilters)">
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('Save filter')
+                                            </x-admin::form.control-group.label>
+                                            
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                id="name"
+                                                name="name"
+                                                rules="required"
+                                                :label="trans('name')"
+                                                :placeholder="trans('Save as')"
+                                            />
+            
+                                            <x-admin::form.control-group.error control-name="name" />
+                                        </x-admin::form.control-group>
+
+                                        <div class="flex content-end items-center justify-end gap-6">
+                                            <div 
+                                                @click="isSaved = !isSaved"
+                                                class="secondary-button"
+                                            >
+                                                @lang('Back')
+                                            </div>
+                                        
+                                            <button
+                                                type="submit"
+                                                class="primary-button"
+                                            >
+                                                @lang('Save Filter')
+                                            </button>
+                                        </div>
+                                    </form>
+                                </x-admin::form>
+
+                                <div>
+                                    <div v-for="column in available.columns">
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
                     </x-slot>
                 </x-admin::drawer>
             </template>
@@ -549,7 +585,7 @@
         app.component('v-datagrid-filter', {
             template: '#v-datagrid-filter-template',
 
-            props: ['isLoading', 'available', 'applied', 'src'],
+            props: ['isLoading', 'available', 'applied', 'src', 'savedFilter'],
 
             data() {
                 return {
@@ -564,6 +600,8 @@
                     filters: {
                         columns: [],
                     },
+
+                    isSaved: false,
                 };
             },
 
@@ -579,11 +617,11 @@
                  *
                  * @returns {void}
                  */
-                saveFilters() {
+                saveFilters(params) {
                     this.$axios.post('{{ route('datagrid.filters.store') }}', {
                         user_id: {{ auth()->guard('admin')->user()->id }},
                         src: this.src,
-                        name: this.savedFilters.name,
+                        name: params.name,
                         applied: this.applied,
                     })
                         .then(response => {
@@ -606,14 +644,6 @@
                  * @emits applySaveFilter - Event emitted when the saved filter is applied.
                  */
                 applySaveFilter(filter) {
-                    this.savedFilters.available = this.savedFilters.available.map((item) => {
-                        if (item.id === filter.id) {
-                            item.is_applied = true;
-                        }
-
-                        return item;
-                    });
-
                     this.$emit('applySaveFilter', filter);
                 },
 
@@ -644,9 +674,9 @@
                             })
 
                             .then(response => {
-                                let index = this.filters.available.indexOf(filter);
+                                let index = this.savedFilters.available.indexOf(filter);
 
-                                this.filters.available.splice(index, 1);
+                                this.savedFilters.available.splice(index, 1);
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
