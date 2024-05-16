@@ -70,7 +70,7 @@
                     </x-slot>
 
                     <x-slot:content class="!p-0">
-                        <template v-if="! isSaved">
+                        <template v-if="! isShowSavedFilters">
                             <x-admin::accordion class="!box-shadow-none !rounded-none" v-if="savedFilters.available.length > 0">
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
                                     Quick Filters
@@ -81,7 +81,7 @@
                                         <ul v-for="(filter,index) in savedFilters.available">
                                             <div
                                                 class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"
-                                                :class="{ 'bg-gray-50 dark:bg-gray-950 font-semibold': filter.name == applied.savedFilterName }"
+                                                :class="{ 'bg-gray-50 dark:bg-gray-950 font-semibold': applied.savedFilterId == filter.id }"
                                             >
                                                 <li @click="applySavedFilter(filter)">
                                                     @{{ filter.name }}
@@ -512,7 +512,7 @@
                                         <p
                                             v-if="filters.columns.length > 0"
                                             class="secondary-button"
-                                            @click="isSaved = !isSaved"
+                                            @click="isShowSavedFilters = ! isShowSavedFilters"
                                         >
                                             @lang('Save Filter')
                                         </p>
@@ -553,7 +553,7 @@
 
                                         <div class="flex content-end items-center justify-end gap-6">
                                             <div
-                                                @click="isSaved = !isSaved"
+                                                @click="isShowSavedFilters = ! isShowSavedFilters"
                                                 class="secondary-button"
                                             >
                                                 @lang('Back')
@@ -568,7 +568,10 @@
                                         </div>
 
                                         <div v-for="column in savedFilters.params.filters.columns">
-                                            <p class="mb-2 text-xs font-medium text-gray-800 dark:text-white">
+                                            <p 
+                                                v-if="column.value.length > 0" 
+                                                class="mb-2 text-xs font-medium text-gray-800 dark:text-white"
+                                            >
                                                 @{{ column.label }}
                                             </p>
 
@@ -623,14 +626,14 @@
                         columns: [],
                     },
 
-                    isSaved: false,
+                    isShowSavedFilters: false,
                 };
             },
 
             mounted() {
                 this.filters.columns = this.applied.filters.columns.filter((column) => column.index !== 'all');
 
-                this.savedFilters.params.filters.columns = this.applied.filters.columns.filter((column) => column.index !== 'all');
+                this.savedFilters.params.filters.columns = this.filters.columns;
 
                 this.getSavedFilters();
             },
@@ -662,7 +665,7 @@
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            this.isSaved = false;
+                            this.isShowSavedFilters = false;
                         })
                         .catch(error => {
                             this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
