@@ -14,14 +14,14 @@ class Menu
     protected array $items = [];
 
     /**
-     * Contains current item route
+     * Contains current item route.
      */
     private string $current;
 
     /**
-     * Contains current item key
+     * Contains current item key.
      */
-    private string $currentKey;
+    private string $currentKey = '';
 
     /**
      * Create a new instance.
@@ -66,7 +66,7 @@ class Menu
                 continue;
             }
 
-            if ($this->current === route($item['route'])) {
+            if (strpos($this->current, route($item['route'])) !== false) {
                 $this->currentKey = $item['key'];
             }
 
@@ -84,7 +84,7 @@ class Menu
                 route: $menuItem['route'],
                 sort: $menuItem['sort'],
                 icon: $menuItem['icon'],
-                children: $subMenuItems
+                children: $subMenuItems,
             ));
         }
     }
@@ -106,11 +106,11 @@ class Menu
                     route: $subMenuItem['route'],
                     sort: $subMenuItem['sort'],
                     icon: $subMenuItem['icon'],
-                    children: $subSubMenuItems
+                    children: $subSubMenuItems,
                 );
             });
     }
-    
+
     /**
      * Get current active menu.
      */
@@ -120,7 +120,7 @@ class Menu
 
         return $this->findMatchingItem($this->getItems(), $currentKey);
     }
-    
+
     /**
      * Finding the matching item.
      */
@@ -130,7 +130,7 @@ class Menu
             if ($item->key == $currentKey) {
                 return $item;
             }
-    
+
             if ($item->haveChildren()) {
                 $matchingChild = $this->findMatchingItem($item->getChildren(), $currentKey);
 
@@ -139,7 +139,7 @@ class Menu
                 }
             }
         }
-    
+
         return null;
     }
 }

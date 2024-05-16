@@ -78,7 +78,7 @@ class MenuItem
      */
     public function isActive(): bool
     {
-        if (request()->routeIs($this->getRoute())) {
+        if (request()->fullUrlIs($this->getUrl().'*')) {
             return true;
         }
 
@@ -91,21 +91,5 @@ class MenuItem
         }
 
         return false;
-    }
-
-    /**
-     * Get active menu item.
-     */
-    public function getActiveItem(): ?MenuItem
-    {
-        if ($this->haveChildren()) {
-            foreach ($this->children as $item) {
-                if ($item->isActive()) {
-                    return $item;
-                }
-            }
-        }
-
-        return $this;
     }
 }
