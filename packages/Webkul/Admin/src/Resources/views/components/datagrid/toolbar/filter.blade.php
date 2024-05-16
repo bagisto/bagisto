@@ -62,7 +62,7 @@
                     </x-slot>
 
                     <x-slot:header>
-                        <div class="flex items-center justify-between p-3">
+                        <div class="flex items-center justify-between p-2">
                             <p class="text-xl font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.components.datagrid.filters.title')
                             </p>
@@ -71,7 +71,7 @@
 
                     <x-slot:content class="!p-0">
                         <template v-if="! isSaved">
-                            <x-admin::accordion class="!box-shadow-none !rounded-none">
+                            <x-admin::accordion class="!box-shadow-none !rounded-none" v-if="savedFilters.available.length > 0">
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
                                     Quick Filters
                                 </x-slot>
@@ -566,13 +566,31 @@
                                                 @lang('Save Filter')
                                             </button>
                                         </div>
+
+                                        <div v-for="filter in filters.columns" :key="filter.label">
+                                            <p class="mb-2 text-xs font-medium text-gray-800 dark:text-white">
+                                                @{{ filter.label }}
+                                            </p>
+                                            
+                                            <div class="mb-4 flex flex-wrap gap-2">
+                                                <p
+                                                    v-for="availableValue in filter.value"
+                                                    :key="availableValue"
+                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                >
+                                                    <span v-text="availableValue"></span>
+                                                    <div>
+                                                        <span
+                                                            class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                            @click="removeSaveFilterOptions(filter, availableValue)"
+                                                        >
+                                                        </span>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </div>
                                     </form>
                                 </x-admin::form>
-
-                                <div>
-                                    <div v-for="column in available.columns">
-                                    </div>
-                                </div>
                             </div>
                         </template>
                     </x-slot>
@@ -618,11 +636,18 @@
                  * @returns {void}
                  */
                 saveFilters(params) {
+                    // event.preventDefault();
+                    
+                    let applied = this.applied;
+                    
+                    applied.filters = applied.filters.filter((column) => column.index !== params)
+                    
                     this.$axios.post('{{ route('datagrid.filters.store') }}', {
                         user_id: {{ auth()->guard('admin')->user()->id }},
                         src: this.src,
                         name: params.name,
-                        applied: this.applied,
+                        filters: this.filters,
+                        applied,
                     })
                         .then(response => {
                             this.savedFilters.available.push(response.data.data);
@@ -631,10 +656,22 @@
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
+                            this.isSaved = false;   
                         })
                         .catch(error => {
                             this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                         });
+                },
+                
+                /**
+                 * Remove filter option from save filters.
+                 */
+                removeSaveFilterOptions(filter, value) {
+                    let index = filter.value.indexOf(value);
+                    
+                    if (index > -1) {
+                        filter.value.splice(index, 1);
+                    } 
                 },
 
                 /**
