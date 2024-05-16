@@ -551,7 +551,7 @@
                                             <x-admin::form.control-group.error control-name="name" />
                                         </x-admin::form.control-group>
 
-                                        <div class="flex content-end items-center justify-end gap-6">
+                                        <div class="flex content-end items-center justify-end gap-4">
                                             <div
                                                 @click="isShowSavedFilters = ! isShowSavedFilters"
                                                 class="secondary-button"
@@ -633,7 +633,7 @@
             mounted() {
                 this.filters.columns = this.applied.filters.columns.filter((column) => column.index !== 'all');
 
-                this.savedFilters.params.filters.columns = this.filters.columns;
+                this.savedFilters.params.filters.columns = JSON.parse(JSON.stringify(this.filters.columns));
 
                 this.getSavedFilters();
             },
