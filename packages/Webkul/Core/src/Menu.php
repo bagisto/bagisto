@@ -14,6 +14,26 @@ class Menu
     protected array $items = [];
 
     /**
+     * Contains current item route
+     */
+    private string $current;
+
+    /**
+     * Contains current item key
+     */
+    private string $currentKey;
+
+    /**
+     * Create a new instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->current = request()->url();
+    }
+
+    /**
      * Add a new menu item.
      */
     public function addItem(MenuItem $menuItem): void
@@ -44,6 +64,10 @@ class Menu
         foreach (config('menu.admin') as $item) {
             if (! bouncer()->hasPermission($item['key'])) {
                 continue;
+            }
+
+            if ($this->current === route($item['route'])) {
+                $this->currentKey = $item['key'];
             }
 
             $menuWithDotNotation[$item['key']] = $item;
@@ -85,5 +109,37 @@ class Menu
                     children: $subSubMenuItems
                 );
             });
+    }
+    
+    /**
+     * Get current active menu.
+     */
+    public function getCurrentActiveMenu(): ?MenuItem
+    {
+        $currentKey = implode('.', array_slice(explode('.', $this->currentKey), 0, 2));
+
+        return $this->findMatchingItem($this->getItems(), $currentKey);
+    }
+    
+    /**
+     * Finding the matching item.
+     */
+    private function findMatchingItem($items, $currentKey): ?MenuItem
+    {
+        foreach ($items as $item) {
+            if ($item->key == $currentKey) {
+                return $item;
+            }
+    
+            if ($item->haveChildren()) {
+                $matchingChild = $this->findMatchingItem($item->getChildren(), $currentKey);
+
+                if ($matchingChild) {
+                    return $matchingChild;
+                }
+            }
+        }
+    
+        return null;
     }
 }

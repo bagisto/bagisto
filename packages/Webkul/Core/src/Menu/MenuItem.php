@@ -58,10 +58,6 @@ class MenuItem
      */
     public function haveChildren(): bool
     {
-        if (! $this->children) {
-            return false;
-        }
-        
         return $this->children->isNotEmpty();
     }
 
