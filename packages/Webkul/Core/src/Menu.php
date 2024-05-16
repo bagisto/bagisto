@@ -144,7 +144,7 @@ class Menu
     }
 
     /**
-     * Remove unauthorized urls.
+     * Remove unauthorized menu item.
      */
     private function removeUnauthorizedMenuItem(): Collection
     {
@@ -156,7 +156,7 @@ class Menu
     }
 
     /**
-     * Remove all children unauthorized urls. This will handle all levels.
+     * Remove unauthorized menuItem's children. This will handle all levels.
      */
     private function removeChildrenUnauthorizedMenuItem(MenuItem &$menuItem): void
     {
