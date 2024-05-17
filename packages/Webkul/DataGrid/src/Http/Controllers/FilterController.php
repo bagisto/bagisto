@@ -19,6 +19,10 @@ class FilterController extends Controller
      */
     public function store()
     {
+        $this->validate(request(), [
+            'name' => 'required|unique:saved_filters,name,user_id,id,src,' . request('src'),
+        ]);
+        
         $data = $this->savedFilterRepository->create(request()->all());
 
         return response()->json([

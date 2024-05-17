@@ -334,6 +334,12 @@
                         ...filters.columns,
                     ];
 
+                    const allEmpty =this.applied.filters.columns.every((column) => column.value.length ===0);
+
+                    if (allEmpty) {
+                        this.applied.savedFilterId =null;
+                    }
+
                     /**
                      * We need to reset the page on filtering.
                      */

@@ -71,7 +71,7 @@
 
                     <x-slot:content class="!p-0">
                         <template v-if="! isShowSavedFilters">
-                            <x-admin::accordion class="!box-shadow-none !rounded-none" v-if="savedFilters.available.length > 0">
+                            <x-admin::accordion class="!rounded-none !shadow-none" v-if="savedFilters.available.length > 0">
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
                                     Quick Filters
                                 </x-slot>
@@ -98,7 +98,7 @@
                                 </x-slot>
                             </x-admin::accordion>
 
-                            <x-admin::accordion class="!box-shadow-none !rounded-none">
+                            <x-admin::accordion class="!rounded-none !shadow-none">
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
                                     Custom Filters
                                 </x-slot>
@@ -558,38 +558,38 @@
                                             >
                                                 @lang('Back')
                                             </div>
-
+                                            
                                             <button
                                                 type="submit"
                                                 class="primary-button"
+                                                :disabled="savedFilters.params.filters.columns.every((column) => column.length > 0)"
                                             >
                                                 @lang('Save Filter')
                                             </button>
                                         </div>
 
                                         <div v-for="column in savedFilters.params.filters.columns">
-                                            <p 
-                                                v-if="column.value.length > 0" 
-                                                class="mb-2 text-xs font-medium text-gray-800 dark:text-white"
-                                            >
-                                                @{{ column.label }}
-                                            </p>
-
-                                            <div class="mb-4 flex flex-wrap gap-2">
-                                                <p
-                                                    v-for="columnValue in column.value"
-                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                >
-                                                    <span v-text="columnValue"></span>
-
-                                                    <div>
-                                                        <span
-                                                            class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                            @click="removeSavedFilterColumnValue(column, columnValue)"
-                                                        >
-                                                        </span>
-                                                    </div>
+                                            <div v-if="column.value.length > 0" >
+                                                <p class="mb-2 text-xs font-medium text-gray-800 dark:text-white">
+                                                    @{{ column.label }}
                                                 </p>
+
+                                                <div class="mb-4 flex flex-wrap gap-2">
+                                                    <p
+                                                        v-for="columnValue in column.value"
+                                                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                    >
+                                                        <span v-text="columnValue"></span>
+
+                                                        <div>
+                                                            <span
+                                                                class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                @click="removeSavedFilterColumnValue(column, columnValue)"
+                                                            >
+                                                            </span>
+                                                        </div>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -644,12 +644,10 @@
                  *
                  * @returns {void}
                  */
-                saveFilters(params) {
-                    // event.preventDefault();
+                 saveFilters(params, { setErrors }) {
+                    let applied = JSON.parse(JSON.stringify(this.applied));
 
-                    let applied = this.applied;
-
-                    // applied.filters = applied.filters.filter((column) => column.index !== params)
+                    applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => column.value.length > 0);;
 
                     this.$axios.post('{{ route('datagrid.filters.store') }}', {
                         user_id: {{ auth()->guard('admin')->user()->id }},
@@ -668,7 +666,11 @@
                             this.isShowSavedFilters = false;
                         })
                         .catch(error => {
-                            this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'error',  message: response.data.message });
+                            }
                         });
                 },
 
