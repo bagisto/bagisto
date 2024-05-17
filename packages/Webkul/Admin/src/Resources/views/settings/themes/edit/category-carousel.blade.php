@@ -1,4 +1,4 @@
-<!-- Category Carousel Component -->
+<!-- Category Carousel Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"
