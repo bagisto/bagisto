@@ -906,52 +906,53 @@ If you've implemented your own product type or overridden existing type classes,
 {
     "data": [
         {
-        "id": 2,
-        "parent_id": 1,
-        "name": "Men",
-        "slug": "men",
-        "status": 1,
-        "position": 1,
-        "display_mode": "products_and_description",
-        "description": "<p>Men</p>",
--       "images": {
--           "banner_url": null,
--           "logo_url": "https://demo.bagisto.com/bagisto-common/storage/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp"
--       },
-+       "logo": {
-+           "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
-+           "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
-+           "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
-+           "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp"
-+       },
-+       "banner": {
-+           "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
-+           "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
-+           "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
-+           "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp"
-+       },
-        "meta": {
-            "title": "",
-            "keywords": "",
-            "description": ""
-        },
-        "translations": [
-            {
-                "id": 2,
-                "category_id": 2,
-                "name": "Men",
-                "slug": "men",
-                "url_path": "men",
-                "description": "<p>Men</p>",
-                "meta_title": "",
-                "meta_description": "",
-                "meta_keywords": "",
-                "locale_id": 1,
-                "locale": "en"
-            }
-        ],
-        "additional": []
-    }
+            "id": 2,
+            "parent_id": 1,
+            "name": "Men",
+            "slug": "men",
+            "status": 1,
+            "position": 1,
+            "display_mode": "products_and_description",
+            "description": "<p>Men</p>",
+-           "images": {
+-               "banner_url": null,
+-               "logo_url": "https://demo.bagisto.com/bagisto-common/storage/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp"
+-           },
++           "logo": {
++               "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp"
++           },
++           "banner": {
++               "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp"
++           },
+            "meta": {
+                "title": "",
+                "keywords": "",
+                "description": ""
+            },
+            "translations": [
+                {
+                    "id": 2,
+                    "category_id": 2,
+                    "name": "Men",
+                    "slug": "men",
+                    "url_path": "men",
+                    "description": "<p>Men</p>",
+                    "meta_title": "",
+                    "meta_description": "",
+                    "meta_keywords": "",
+                    "locale_id": 1,
+                    "locale": "en"
+                }
+            ],
+            "additional": []
+        }
+    ]
 }
 ```
 
