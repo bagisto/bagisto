@@ -113,6 +113,7 @@
                     ::src="image.large_image_url"
                     class="h-[404px] w-[490px] max-sm:min-w-full"
                     v-for="(image, index) in media.images"
+                    alt="{{ $product->name }}"
                     @click="isImageZooming = !isImageZooming"
                 />
             </div>

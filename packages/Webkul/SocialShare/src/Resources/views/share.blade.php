@@ -9,9 +9,9 @@
         <div class="hidden gap-2.5 justify-center items-center max-md:flex cursor-pointer">
             <span class="icon-share text-2xl"></span>
 
-            <a href="javascript:void(0);" onclick="shareProduct()">
+            <span onclick="shareProduct()">
                 @lang('admin::app.configuration.index.catalog.products.social-share.share')
-            </a>
+            </span>
         </div>
 
         <div class="max-md:hidden">

@@ -52,6 +52,7 @@
                     <!-- Upload Image Button -->
                     <label
                         class="grid h-[120px] max-h-[120px] min-h-[110px] w-full min-w-[110px] max-w-[120px] cursor-pointer items-center justify-items-center rounded border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
+                        :class="[errors['images.files[0]'] ? 'border border-red-500' : 'border-gray-300']"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         :for="$.uid + '_imageInput'"
                     >
