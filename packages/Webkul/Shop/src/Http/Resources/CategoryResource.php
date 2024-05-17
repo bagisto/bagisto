@@ -2,7 +2,6 @@
 
 namespace Webkul\Shop\Http\Resources;
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
