@@ -110,15 +110,16 @@
                                     <label
                                         class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                                         for="select-all"
-                                        role="button"
                                         tabindex="0"
                                         aria-label="@lang('shop::app.checkout.cart.index.select-all')"
+                                        aria-labelledby="select-all-label"
                                     >
                                     </label>
 
                                     <span
                                         class="text-xl max-md:text-xl max-sm:text-lg ltr:ml-2.5 rtl:mr-2.5"
                                         role="heading"
+                                        aria-level="2"
                                     >
                                         @{{ "@lang('shop::app.checkout.cart.index.items-selected')".replace(':count', selectedItemsCount) }}
                                     </span>
@@ -175,9 +176,9 @@
                                             <label
                                                 class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                                                 :for="'item_' + item.id"
-                                                role="button"
                                                 tabindex="0"
                                                 aria-label="@lang('shop::app.checkout.cart.index.select-cart-item')"
+                                                aria-labelledby="select-item-label"
                                             ></label>
                                         </div>
 
