@@ -3954,7 +3954,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => '筛选',
+                    'back-btn'          => '返回',
+                    'create-new-filter' => '创建新过滤器',
+                    'custom-filters'    => '自定义过滤器',
+                    'name'              => '名称',
+                    'quick-filters'     => '快速过滤器',
+                    'save-btn'          => '保存',
+                    'save-filter'       => '保存过滤器',
+                    'title'             => '过滤器',
                 ],
 
                 'search' => [

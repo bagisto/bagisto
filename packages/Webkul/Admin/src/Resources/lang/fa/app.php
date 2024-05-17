@@ -3954,7 +3954,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'فیلتر',
+                    'back-btn'          => 'بازگشت',
+                    'create-new-filter' => 'ایجاد فیلتر جدید',
+                    'custom-filters'    => 'فیلترهای سفارشی',
+                    'name'              => 'نام',
+                    'quick-filters'     => 'فیلترهای سریع',
+                    'save-btn'          => 'ذخیره',
+                    'save-filter'       => 'ذخیره فیلتر',
+                    'title'             => 'فیلتر',
                 ],
 
                 'search' => [

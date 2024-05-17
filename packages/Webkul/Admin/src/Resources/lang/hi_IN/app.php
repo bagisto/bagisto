@@ -3954,7 +3954,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'फ़िल्टर',
+                    'back-btn'          => 'वापस',
+                    'create-new-filter' => 'नया फिल्टर बनाएं',
+                    'custom-filters'    => 'कस्टम फिल्टर',
+                    'name'              => 'नाम',
+                    'quick-filters'     => 'त्वरित फिल्टर',
+                    'save-btn'          => 'सहेजें',
+                    'save-filter'       => 'फिल्टर सहेजें',
+                    'title'             => 'फिल्टर',
                 ],
 
                 'search' => [

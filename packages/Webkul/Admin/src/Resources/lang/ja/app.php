@@ -3954,7 +3954,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'フィルター',
+                    'back-btn'          => '戻る',
+                    'create-new-filter' => '新しいフィルタを作成',
+                    'custom-filters'    => 'カスタムフィルタ',
+                    'name'              => '名前',
+                    'quick-filters'     => 'クイックフィルタ',
+                    'save-btn'          => '保存',
+                    'save-filter'       => 'フィルタを保存',
+                    'title'             => 'フィルタ',
                 ],
 
                 'search' => [

@@ -3954,7 +3954,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'סנן',
+                    'back-btn'          => 'חזור',
+                    'create-new-filter' => 'צור פילטר חדש',
+                    'custom-filters'    => 'פילטרים מותאמים אישית',
+                    'name'              => 'שם',
+                    'quick-filters'     => 'פילטרים מהירים',
+                    'save-btn'          => 'שמור',
+                    'save-filter'       => 'שמור פילטר',
+                    'title'             => 'פילטר',
                 ],
 
                 'search' => [

@@ -3954,7 +3954,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'වෙනස් කරන්න',
+                    'back-btn'          => 'ආපසු',
+                    'create-new-filter' => 'නව පෙරහන් තනන්න',
+                    'custom-filters'    => 'සැකසුම් පෙරහන්',
+                    'name'              => 'නම',
+                    'quick-filters'     => 'කෙටුම් පෙරහන්',
+                    'save-btn'          => 'ඉතිරි කරන්න',
+                    'save-filter'       => 'පෙරහන් කරන්න',
+                    'title'             => 'පෙරහන',
                 ],
 
                 'search' => [

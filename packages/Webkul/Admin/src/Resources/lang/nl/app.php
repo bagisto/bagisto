@@ -3954,7 +3954,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filter',
+                    'back-btn'          => 'Terug',
+                    'create-new-filter' => 'Nieuwe Filter Maken',
+                    'custom-filters'    => 'Aangepaste Filters',
+                    'name'              => 'Naam',
+                    'quick-filters'     => 'Snelle Filters',
+                    'save-btn'          => 'Opslaan',
+                    'save-filter'       => 'Filter Opslaan',
+                    'title'             => 'Filter',
                 ],
 
                 'search' => [

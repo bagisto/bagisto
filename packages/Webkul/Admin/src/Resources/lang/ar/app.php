@@ -3954,7 +3954,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'تصفية',
+                    'back-btn'          => 'العودة',
+                    'create-new-filter' => 'إنشاء فلتر جديد',
+                    'custom-filters'    => 'الفلاتر المخصصة',
+                    'name'              => 'الاسم',
+                    'quick-filters'     => 'الفلاتر السريعة',
+                    'save-btn'          => 'حفظ',
+                    'save-filter'       => 'حفظ الفلتر',
+                    'title'             => 'فلتر',
                 ],
 
                 'search' => [

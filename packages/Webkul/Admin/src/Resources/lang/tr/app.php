@@ -3955,7 +3955,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtrele',
+                    'back-btn'          => 'Geri',
+                    'create-new-filter' => 'Yeni Filtre Oluştur',
+                    'custom-filters'    => 'Özel Filtreler',
+                    'name'              => 'Ad',
+                    'quick-filters'     => 'Hızlı Filtreler',
+                    'save-btn'          => 'Kaydet',
+                    'save-filter'       => 'Filtreyi Kaydet',
+                    'title'             => 'Filtre',
                 ],
 
                 'search' => [

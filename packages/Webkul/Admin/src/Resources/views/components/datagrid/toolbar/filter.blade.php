@@ -71,21 +71,27 @@
 
                     <x-slot:content class="!p-0">
                         <template v-if="! isShowSavedFilters">
-                            <x-admin::accordion class="!rounded-none !shadow-none" v-if="savedFilters.available.length > 0">
+                            <x-admin::accordion 
+                                class="!rounded-none !shadow-none" 
+                                v-if="savedFilters.available.length > 0"
+                            >
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
-                                    Quick Filters
+                                    @lang('admin::app.components.datagrid.toolbar.filter.quick-filters')
                                 </x-slot>
 
                                 <x-slot:content class="!p-0">
                                     <div class="!p-0">
-                                        <ul v-for="(filter,index) in savedFilters.available">
+                                        <div v-for="(filter,index) in savedFilters.available">
                                             <div
-                                                class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"
+                                                class="flex items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"
                                                 :class="{ 'bg-gray-50 dark:bg-gray-950 font-semibold': applied.savedFilterId == filter.id }"
                                             >
-                                                <li @click="applySavedFilter(filter)">
+                                                <span 
+                                                    class="cursor-pointer" 
+                                                    @click="applySavedFilter(filter)"
+                                                >
                                                     @{{ filter.name }}
-                                                </li>
+                                                </span>
 
                                                 <span
                                                     class="icon-cross cursor-pointer rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"
@@ -93,14 +99,14 @@
                                                 >
                                                 </span>
                                             </div>
-                                        </ul>
+                                        </div>
                                     </div>
                                 </x-slot>
                             </x-admin::accordion>
 
                             <x-admin::accordion class="!rounded-none !shadow-none">
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
-                                    Custom Filters
+                                    @lang('admin::app.components.datagrid.toolbar.filter.custom-filters')
                                 </x-slot>
 
                                 <x-slot:content class="!p-0">
@@ -509,13 +515,14 @@
                                             </div>
                                         </div>
 
-                                        <p
+                                        <button
+                                            type="button"
                                             v-if="filters.columns.length > 0"
-                                            class="secondary-button"
+                                            class="secondary-button w-full"
                                             @click="isShowSavedFilters = ! isShowSavedFilters"
                                         >
-                                            @lang('Save Filter')
-                                        </p>
+                                            @lang('admin::app.components.datagrid.toolbar.filter.save-filter')
+                                        </button>
                                     </div>
                                 </x-slot>
                             </x-admin::accordion>
@@ -524,11 +531,14 @@
                         <template v-else>
                             <div class="flex items-center justify-between p-3 px-5">
                                 <p class="text-base font-semibold text-gray-800 dark:text-white">
-                                    @lang('Add New Custom Filter')
+                                    @lang('admin::app.components.datagrid.toolbar.filter.create-new-filter')
                                 </p>
                             </div>
 
-                            <div class="px-5 py-1" v-if="filters.columns.length > 0">
+                            <div 
+                                class="px-5 py-1" 
+                                v-if="filters.columns.length > 0"
+                            >
                                 <x-admin::form
                                     v-slot="{ meta, errors, handleSubmit }"
                                     as="div"
@@ -536,16 +546,16 @@
                                     <form @submit="handleSubmit($event, saveFilters)">
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
-                                                @lang('Save filter')
+                                                @lang('admin::app.components.datagrid.toolbar.filter.name')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
                                                 type="text"
-                                                id="name"
                                                 name="name"
+                                                id="name"
                                                 rules="required"
-                                                :label="trans('name')"
-                                                :placeholder="trans('Save as')"
+                                                :label="trans('admin::app.components.datagrid.toolbar.filter.name')"
+                                                :placeholder="trans('admin::app.components.datagrid.toolbar.filter.name')"
                                             />
 
                                             <x-admin::form.control-group.error control-name="name" />
@@ -556,24 +566,29 @@
                                                 @click="isShowSavedFilters = ! isShowSavedFilters"
                                                 class="secondary-button"
                                             >
-                                                @lang('Back')
+                                                @lang('admin::app.components.datagrid.toolbar.filter.back-btn')
                                             </div>
                                             
                                             <button
                                                 type="submit"
                                                 class="primary-button"
-                                                :disabled="savedFilters.params.filters.columns.every((column) => column.length > 0)"
+                                                aria-label="@lang('admin::app.components.datagrid.toolbar.filter.save-btn')"
+                                                :disabled="savedFilters.params.filters.columns.every(column => column.value.length === 0)"
                                             >
-                                                @lang('Save Filter')
+                                                @lang('admin::app.components.datagrid.toolbar.filter.save-btn')
                                             </button>
                                         </div>
-
+                                        
                                         <div v-for="column in savedFilters.params.filters.columns">
+                                            <p class="py-4 text-base font-semibold text-gray-800 dark:text-white">
+                                                @lang('Select Filters')
+                                            </p>
+                                            
                                             <div v-if="column.value.length > 0" >
                                                 <p class="mb-2 text-xs font-medium text-gray-800 dark:text-white">
                                                     @{{ column.label }}
                                                 </p>
-
+                                                
                                                 <div class="mb-4 flex flex-wrap gap-2">
                                                     <p
                                                         v-for="columnValue in column.value"

@@ -3954,7 +3954,14 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtrer',
+                    'back-btn'          => 'Voltar',
+                    'create-new-filter' => 'Criar Novo Filtro',
+                    'custom-filters'    => 'Filtros Personalizados',
+                    'name'              => 'Nome',
+                    'quick-filters'     => 'Filtros Rápidos',
+                    'save-btn'          => 'Salvar',
+                    'save-filter'       => 'Salvar Filtro',
+                    'title'             => 'Filtro',
                 ],
 
                 'search' => [
