@@ -19,7 +19,7 @@
         id="v-datagrid-table-template"
     >
         <div class="w-full overflow-x-auto rounded-xl border max-sm:rounded-none max-sm:border-0">
-            <div class="table-responsive box-shadow grid w-full overflow-hidden rounded bg-white">
+            <div class="table-responsive grid w-full overflow-hidden rounded bg-white">
                 <slot
                     name="header"
                     :is-loading="isLoading"
@@ -190,14 +190,14 @@
                             <!-- Pagination -->
                             <div class="flex items-center gap-1">
                                 <div
-                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                                     @click="changePage('previous')"
                                 >
                                     <span class="icon-sort-left text-2xl"></span>
                                 </div>
         
                                 <div
-                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                                     @click="changePage('next')"
                                 >
                                     <span class="icon-sort-right text-2xl"></span>

@@ -140,7 +140,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="max-sm:flex max-sm:justify-between sm:hidden">
+                                            <div class="max-sm:block max-sm:justify-between sm:hidden">
                                                 <p 
                                                     class="text-lg font-semibold max-sm:text-sm" 
                                                     v-html="item.product.min_price"
@@ -163,7 +163,7 @@
 
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.perform_actions.before') !!}
 
-                                            <div class="flex flex-wrap gap-5">
+                                            <div class="flex gap-5">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
                                                     ::value="item.options.quantity ?? 1"

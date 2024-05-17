@@ -16,7 +16,7 @@
     $customer = auth()->guard('customer')->user();
 @endphp
 
-<div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] max-w-[380px] grid-cols-[1fr] gap-8 overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] max-md:max-w-full max-sm:gap-4">
+<div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] max-w-[380px] grid-cols-[1fr] gap-8 overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] max-md:max-w-full max-sm:gap-5">
     <!-- Account Profile Hero Section -->
     <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 px-5 py-[25px] max-sm:py-2.5">
         <div class="">
@@ -38,8 +38,8 @@
     @foreach ($menu->items as $menuItem)
         <div>
             <!-- Account Navigation Toggler -->
-            <div class="select-none pb-5 max-sm:pb-0">
-                <p class="text-xl font-medium max-md:font-semibold max-md:text-[#262338]">@lang($menuItem['name'])</p>
+            <div class="select-none pb-5 max-sm:pb-1.5">
+                <p class="text-xl font-medium">@lang($menuItem['name'])</p>
             </div>
 
             <!-- Account Navigation Content -->
@@ -52,7 +52,7 @@
 
                 @foreach ($menuItem['children'] as $subMenuItem)
                     <a href="{{ $subMenuItem['url'] }}">
-                        <div class="flex justify-between px-6 py-5 border-t border-zinc-200 hover:bg-zinc-100 cursor-pointer max-sm:p-4 max-md:border-0 max-sm:py-4 max-sm:px-0 {{ request()->routeIs($subMenuItem['route']) ? 'bg-zinc-100' : '' }}">
+                        <div class="flex justify-between px-6 py-5 border-t border-zinc-200 hover:bg-zinc-100 cursor-pointer max-sm:p-4 max-md:border-0 max-sm:py-3 max-sm:px-0 {{ request()->routeIs($subMenuItem['route']) ? 'bg-zinc-100' : '' }}">
                             <p class="flex items-center gap-x-4 text-lg font-medium max-sm:text-base">
                                 <span class="{{ $subMenuItem['icon'] }}  text-2xl"></span>
 

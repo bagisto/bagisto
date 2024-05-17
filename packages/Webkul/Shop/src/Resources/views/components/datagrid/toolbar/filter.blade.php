@@ -426,7 +426,7 @@
                                     <div class="mb-2 mt-1.5 grid">
                                         <input
                                             type="text"
-                                            class="mb-3 w-full rounded border px-3 py-2 text-sm text-gray-600 shadow transition-all hover:border-gray-400 focus:border-gray-400"
+                                            class="mb-3 w-full rounded border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                             :name="column.index"
                                             :placeholder="column.label"
                                             @keyup.enter="applyFilter($event, column)"

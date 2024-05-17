@@ -8,7 +8,7 @@
     $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
 @endphp
 
-<div class="hidden flex-wrap gap-4 px-4 pb-4 pt-6 shadow-sm max-lg:flex">
+<div class="hidden flex-wrap gap-4 px-4 pb-4 pt-6 max-lg:flex">
     <div class="flex w-full items-center justify-between">
         <!-- Left Navigation -->
         <div class="flex items-center gap-x-1.5">
@@ -37,11 +37,11 @@
 
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
-                    <div class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5">
-                        <div class="">
+                    <div class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5 max-sm:mt-4">
+                        <div>
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
-                                class="h-[60px] w-[60px] rounded-full max-sm:rounded-lg"
+                                class="h-[60px] w-[60px] rounded-full max-sm:rounded-full"
                             >
                         </div>
 
@@ -58,9 +58,9 @@
 
                         @auth('customer')
                             <div class="flex flex-col justify-between gap-2.5">
-                                <p class="font-mediums text-2xl">Hello! {{ auth()->user()?->first_name }}</p>
+                                <p class="font-mediums text-2xl max-sm:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
 
-                                <p class="text-zinc-500">{{ auth()->user()?->email }}</p>
+                                <p class="text-zinc-500 max-sm:text-sm">{{ auth()->user()?->email }}</p>
                             </div>
                         @endauth
                     </div>
@@ -118,47 +118,11 @@
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.after') !!}
 
-                 <!-- Guest Dropdown -->
-                 @guest('customer')
-                    <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
-                        <x-slot:toggle>
-                            <span class="icon-users cursor-pointer text-2xl"></span>
-                        </x-slot>
-
-                        <x-slot:content>
-                            <div class="grid gap-2.5">
-                                <p class="font-dmserif text-xl">
-                                    @lang('shop::app.components.layouts.header.welcome-guest')
-                                </p>
-
-                                <p class="text-sm">
-                                    @lang('shop::app.components.layouts.header.dropdown-text')
-                                </p>
-                            </div>
-
-                            <p class="py-2px mt-3 w-full border border-zinc-200"></p>
-
-                            <div class="mt-6 flex gap-4">
-                                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.before') !!}
-
-                                <a
-                                    href="{{ route('shop.customer.session.create') }}"
-                                    class="m-0 mx-auto block w-max cursor-pointer rounded-2xl bg-navyBlue px-7 py-4 text-center text-base font-medium text-white ltr:ml-0 rtl:mr-0"
-                                >
-                                    @lang('shop::app.components.layouts.header.sign-in')
-                                </a>
-
-                                <a
-                                    href="{{ route('shop.customers.register.index') }}"
-                                    class="m-0 mx-auto block w-max cursor-pointer rounded-2xl border-2 border-navyBlue bg-white px-7 py-3.5 text-center text-base font-medium text-navyBlue ltr:ml-0 rtl:mr-0"
-                                >
-                                    @lang('shop::app.components.layouts.header.sign-up')
-                                </a>
-
-                                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.after') !!}
-                            </div>
-                        </x-slot>
-                    </x-shop::dropdown>
+                <!-- Guest Dropdown -->
+                @guest('customer')
+                    <a href="{{ route('shop.customer.session.create') }}">
+                        <span class="icon-users cursor-pointer text-2xl"></span>
+                    </a>
                 @endguest
 
                 <!-- Customers Dropdown -->
@@ -291,7 +255,7 @@
         </div>
 
         <!-- Localization & Currency Section -->
-        <div class="absolute bottom-0 left-0 flex w-full items-center justify-between gap-x-5 border-t bg-white p-3 shadow-lg">
+        <div class="absolute bottom-0 left-0 flex w-full items-center justify-between gap-x-5 border-t bg-white p-3">
             <x-shop::dropdown position="top-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>

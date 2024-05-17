@@ -42,7 +42,7 @@
         </div>
 
         <!-- Profile Information -->
-        <div class="mt-8 grid grid-cols-1 gap-y-6">
+        <div class="mt-8 grid grid-cols-1 gap-y-6 max-sm:mt-5 max-sm:gap-y-5">
             {!! view_render_event('bagisto.shop.customers.account.profile.first_name.before') !!}
 
             <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3 max-sm:px-0">
@@ -119,7 +119,11 @@
             <x-shop::form action="{{ route('shop.customers.account.profile.destroy') }}">
                 <x-shop::modal>
                     <x-slot:toggle>
-                        <div class="primary-button rounded-2xl px-11 py-3 max-sm:w-full max-sm:max-w-full">
+                        <div class="primary-button rounded-2xl px-11 py-3 max-sm:hidden">
+                            @lang('shop::app.customers.account.profile.index.delete-profile')
+                        </div>
+
+                        <div class="rounded-2xl py-3 text-center font-medium text-red-500 max-sm:w-full max-sm:max-w-full sm:hidden">
                             @lang('shop::app.customers.account.profile.index.delete-profile')
                         </div>
                     </x-slot>

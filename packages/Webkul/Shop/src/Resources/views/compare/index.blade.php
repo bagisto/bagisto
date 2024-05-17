@@ -23,7 +23,7 @@
 	</div>
 
     <!-- Compare Component -->
-    <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:mt-7 max-sm:px-4">
+    <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:mt-7 max-sm:px-0">
         <v-compare>
             <!---- Shimmer Effect -->
             <x-shop::shimmer.compare :attributeCount="count($comparableAttributes)" />
@@ -75,8 +75,8 @@
                             >
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.before') !!}
 
-                                <div class="min-w-[304px] max-w-full max-sm:min-w-[110px]">
-                                    <p class="text-sm font-medium">
+                                <div class="min-w-[304px] max-w-full max-sm:grid max-sm:h-full max-sm:min-w-[110px] max-sm:items-center max-sm:bg-zinc-200">
+                                    <p class="text-sm font-medium max-sm:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
@@ -105,8 +105,8 @@
                                 class="flex max-w-full items-center border-b border-zinc-200"
                                 v-else
                             >
-                                <div class="min-w-[304px] max-w-full max-sm:min-w-[110px]">
-                                    <p class="text-sm font-medium">
+                                <div class="min-w-[304px] max-w-full max-sm:grid max-sm:h-full max-sm:min-w-[110px] max-sm:items-center max-sm:bg-zinc-200">
+                                    <p class="text-sm font-medium max-sm:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>

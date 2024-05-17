@@ -36,7 +36,7 @@
         </div>
 
         <!-- For Mobile View -->
-        <div class="hidden max-sm:block">
+        <div class="sm:hidden">
             <x-shop::datagrid :src="route('shop.customers.account.orders.index')">
                 <!-- Datagrid Header -->
                 <template #header="{

@@ -60,22 +60,23 @@
                                     id="{{ $review->product_id }}"
                                     aria-label="{{ $review->title }}"
                                 >
-                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:flex-wrap">
+                                    <!-- For Desktop View -->
+                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:hidden max-sm:gap-1.5">
                                         {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
 
                                         <x-shop::media.images.lazy
-                                            class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-sm:h-[92px] max-sm:w-[80px] max-sm:min-w-[80px]"
+                                            class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl"
                                             src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
                                             alt="Review Image"                   
                                         />
 
                                         {!! view_render_event('bagisto.shop.customers.account.reviews.image.after', ['reviews' => $reviews]) !!}
-        
+
                                         <div class="w-full">
                                             <div class="flex justify-between">
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.title.before', ['reviews' => $reviews]) !!}
 
-                                                <p class="text-xl font-medium max-sm:text-sm">
+                                                <p class="text-xl font-medium">
                                                     {{ $review->title}}
                                                 </p>
 
@@ -83,9 +84,9 @@
         
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.rating.before', ['reviews' => $reviews]) !!}
 
-                                                <div class="flex items-center gap-0.5 max-sm:gap-0">
+                                                <div class="flex items-center gap-0.5">
                                                     @for ($i = 1; $i <= 5; $i++)
-                                                        <span class="icon-star-fill text-2xl max-sm:text-sm {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-zinc-500' }}"></span>
+                                                        <span class="icon-star-fill text-2xl {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-zinc-500' }}"></span>
                                                     @endfor
                                                 </div>
 
@@ -94,7 +95,7 @@
         
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
 
-                                            <p class="mt-2.5 text-sm font-medium max-sm:text-xs">
+                                            <p class="mt-2.5 text-sm font-medium">
                                                 {{ $review->created_at }}
                                             </p>
         
@@ -102,7 +103,62 @@
 
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.comment.before', ['reviews' => $reviews]) !!}
 
-                                            <p class="mt-5 text-base text-zinc-500 max-sm:mt-2 max-sm:text-xs">
+                                            <p class="mt-5 text-base text-zinc-500 max-sm:mt-2">
+                                                {{ $review->comment }}
+                                            </p>
+
+                                            {!! view_render_event('bagisto.shop.customers.account.reviews.comment.after', ['reviews' => $reviews]) !!}
+                                        </div>
+                                       
+                                    </div>
+
+                                    <!-- For Mobile View -->
+                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:grid max-sm:gap-1.5 max-sm:p-4 sm:hidden">
+                                        <div class="flex gap-2.5">
+                                            {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
+    
+                                            <x-shop::media.images.lazy
+                                                class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-sm:h-[80px] max-sm:w-[80px] max-sm:min-w-[80px] max-sm:rounded-md"
+                                                src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
+                                                alt="Review Image"                   
+                                            />
+    
+                                            {!! view_render_event('bagisto.shop.customers.account.reviews.image.after', ['reviews' => $reviews]) !!}
+
+                                            <div class="justify-between">
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.title.before', ['reviews' => $reviews]) !!}
+
+                                                <p class="text-xl font-medium max-sm:text-base">
+                                                    {{ $review->title}}
+                                                </p>
+
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.title.after', ['reviews' => $reviews]) !!}
+
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
+
+                                                <p class="mt-1.5 font-normal text-[#757575] max-sm:text-xs">
+                                                    {{ $review->created_at }}
+                                                </p>
+            
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.after', ['reviews' => $reviews]) !!}
+        
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.rating.before', ['reviews' => $reviews]) !!}
+
+                                                <div class="mt-1 flex items-center">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <span class="icon-star-fill text-2xl {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-zinc-500' }}"></span>
+                                                    @endfor
+                                                </div>
+
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.rating.after', ['reviews' => $reviews]) !!}
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+                                            {!! view_render_event('bagisto.shop.customers.account.reviews.comment.before', ['reviews' => $reviews]) !!}
+
+                                            <p class="text-xs text-zinc-500">
                                                 {{ $review->comment }}
                                             </p>
 
