@@ -21,6 +21,8 @@
         show-placeholders="true"
         :uploaded-images="$product->images"
     />
+
+    <x-admin::form.control-group.error control-name='images.files[0]' />
 </div>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.images.after', ['product' => $product]) !!}
