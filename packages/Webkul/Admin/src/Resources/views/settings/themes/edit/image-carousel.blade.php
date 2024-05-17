@@ -1,4 +1,4 @@
-<!-- image carousel vue component -->
+<!-- Image Carousel Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"

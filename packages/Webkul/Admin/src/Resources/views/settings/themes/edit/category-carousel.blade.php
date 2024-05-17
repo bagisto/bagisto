@@ -1,4 +1,4 @@
-<!-- category carousel component -->
+<!-- Category Carousel Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"

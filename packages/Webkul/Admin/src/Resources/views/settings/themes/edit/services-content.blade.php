@@ -1,4 +1,4 @@
-<!-- services content vue component -->
+<!-- Services Content Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"

@@ -1,4 +1,4 @@
-<!-- footer link vue component -->
+<!-- Footer Link Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"

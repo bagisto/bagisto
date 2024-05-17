@@ -1,4 +1,4 @@
-<!-- product carousel vue component -->
+<!-- Product Carousel Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"
