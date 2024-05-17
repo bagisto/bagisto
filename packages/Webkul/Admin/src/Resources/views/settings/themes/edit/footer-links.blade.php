@@ -1,6 +1,4 @@
-<!-- Todays Details Vue Component -->
-<v-footer-links></v-footer-links>
-
+<!-- footer link vue component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"

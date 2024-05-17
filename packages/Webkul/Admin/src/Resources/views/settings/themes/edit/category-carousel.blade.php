@@ -1,6 +1,4 @@
-<!-- Category Carousel Component -->
-<v-category-carousel></v-category-carousel>
-
+<!-- category carousel component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"
