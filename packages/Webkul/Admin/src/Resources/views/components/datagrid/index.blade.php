@@ -334,10 +334,10 @@
                         ...filters.columns,
                     ];
 
-                    const allEmpty =this.applied.filters.columns.every((column) => column.value.length ===0);
+                    const emptyColumnValue = this.applied.filters.columns.every((column) => column.value.length === 0);
 
-                    if (allEmpty) {
-                        this.applied.savedFilterId =null;
+                    if (emptyColumnValue) {
+                        this.applied.savedFilterId = null;
                     }
 
                     /**

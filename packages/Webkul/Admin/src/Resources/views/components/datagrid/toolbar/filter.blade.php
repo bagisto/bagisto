@@ -650,10 +650,8 @@
                     applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => column.value.length > 0);;
 
                     this.$axios.post('{{ route('datagrid.filters.store') }}', {
-                        user_id: {{ auth()->guard('admin')->user()->id }},
                         src: this.src,
                         name: params.name,
-                        filters: this.filters,
                         applied,
                     })
                         .then(response => {
@@ -714,12 +712,8 @@
                 deleteSavedFilter(filter) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
-                            this.$axios.delete('{{ route('datagrid.filters.destroy') }}', {
-                                params: {
-                                    id: filter.id,
-                                    user_id: filter.user_id
-                                }
-                            })
+                            this.$axios.delete(`{{ route('datagrid.filters.destroy', '') }}/${filter.id}`)
+                            
                             .then(response => {
                                 this.savedFilters.available = this.savedFilters.available.filter((savedFilter) => savedFilter.id !== filter.id);
 

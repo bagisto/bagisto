@@ -21,6 +21,7 @@ return [
         \Webkul\CMS\Providers\ModuleServiceProvider::class,
         \Webkul\Customer\Providers\ModuleServiceProvider::class,
         \Webkul\DataTransfer\Providers\ModuleServiceProvider::class,
+        \Webkul\DataGrid\Providers\ModuleServiceProvider::class,
         \Webkul\Inventory\Providers\ModuleServiceProvider::class,
         \Webkul\Marketing\Providers\ModuleServiceProvider::class,
         \Webkul\Notification\Providers\ModuleServiceProvider::class,
@@ -36,6 +37,5 @@ return [
         \Webkul\Theme\Providers\ModuleServiceProvider::class,
         \Webkul\User\Providers\ModuleServiceProvider::class,
         \Webkul\Sitemap\Providers\ModuleServiceProvider::class,
-        \Webkul\DataGrid\Providers\ModuleServiceProvider::class,
     ],
 ];

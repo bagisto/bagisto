@@ -13,6 +13,8 @@ class DataGridServiceProvider extends ServiceProvider
     {
         include __DIR__.'/../Http/helpers.php';
 
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+
         $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
     }
 
@@ -21,6 +23,5 @@ class DataGridServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
 }
