@@ -2,7 +2,7 @@
 @inject ('productViewHelper', 'Webkul\Product\Helpers\View')
 
 @php
-    $avgRatings = round($reviewHelper->getAverageRating($product));
+    $avgRatings = $reviewHelper->getAverageRating($product);
 
     $percentageRatings = $reviewHelper->getPercentageRating($product);
 
@@ -308,18 +308,14 @@
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
-                                <div class="mt-4 flex items-center gap-4">
-                                    <x-shop::products.star-rating 
-                                        :value="$avgRatings"
-                                        :is-editable=false
-                                    />
-
-                                    <div class="flex items-center gap-4">
-                                        <p class="text-sm text-[#6E6E6E]">
-                                            ({{ $product->approvedReviews->count() }} @lang('reviews'))
-                                        </p>
+                                @if ($totalRatings = $reviewHelper->getTotalRating($product))
+                                    <div class="mt-4">
+                                        <x-shop::products.ratings
+                                            :average="$avgRatings"
+                                            :total="$totalRatings"
+                                        />
                                     </div>
-                                </div>
+                                @endif
 
                                 {!! view_render_event('bagisto.shop.products.rating.after', ['product' => $product]) !!}
 

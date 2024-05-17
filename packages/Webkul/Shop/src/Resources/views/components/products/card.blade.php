@@ -107,6 +107,21 @@
                 </p>
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.after') !!}
+                
+                {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
+
+                <p
+                    class="text-sm"
+                    v-if="product.ratings.total"
+                >
+                    <x-shop::products.ratings
+                        class="!px-2 !py-1"
+                        ::average="product.ratings.average"
+                        ::total="product.ratings.total"
+                    />
+                </p>
+
+                {!! view_render_event('bagisto.shop.components.products.card.average_ratings.after') !!}
 
                 {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
 
@@ -232,17 +247,21 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.price.after') !!}
 
-                <p class="text-sm text-[#6E6E6E]" v-if="! product.avg_ratings">
-                    @lang('shop::app.components.products.card.review-description')
-                </p>
-
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
 
-                <p v-else class="text-sm text-[#6E6E6E]">
-                    <x-shop::products.star-rating
-                        ::value="product && product.avg_ratings ? product.avg_ratings : 0"
-                        :is-editable=false
-                    />
+                <p class="text-sm text-[#6E6E6E]">
+                    <template  v-if="! product.ratings.total">
+                        <p class="text-sm text-[#6E6E6E]">
+                            @lang('shop::app.components.products.card.review-description')
+                        </p>
+                    </template>
+
+                    <template v-else>
+                        <x-shop::products.ratings
+                            ::average="product.ratings.average"
+                            ::total="product.ratings.total"
+                        />
+                    </template>
                 </p>
 
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.after') !!}
