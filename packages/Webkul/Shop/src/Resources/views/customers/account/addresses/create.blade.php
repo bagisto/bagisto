@@ -9,14 +9,31 @@
         <x-shop::breadcrumbs name="addresses.create" />
     @endSection
 
-    <h2 class="mb-8 text-2xl font-medium max-sm:mb-4 max-sm:text-xl">
-        @lang('shop::app.customers.account.addresses.create.add-address')
-    </h2>
+    <div class="max-md:hidden">
+        <x-shop::layouts.account.navigation />
+    </div>
 
-    <v-create-customer-address>
-        <!--Address Shimmer-->
-        <x-shop::shimmer.form.control-group :count="10" />
-    </v-create-customer-address>
+    <div class="flex-auto">
+        <div class="mb-8 flex items-center max-sm:mb-5">
+            <!-- Back Button -->
+            <a
+                class="grid md:hidden"
+                href="{{ route('shop.customers.account.addresses.index') }}"
+            >
+                <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
+            </a>
+
+            <h2 class="text-2xl font-medium max-sm:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                @lang('shop::app.customers.account.addresses.create.add-address')
+            </h2>
+        </div>
+
+        <v-create-customer-address>
+            <!--Address Shimmer-->
+            <x-shop::shimmer.form.control-group :count="10" />
+        </v-create-customer-address>
+
+    </div>
 
     @push('scripts')
         <script

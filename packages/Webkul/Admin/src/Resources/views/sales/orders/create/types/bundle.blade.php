@@ -58,7 +58,7 @@
         type="text/x-template"
         id="v-product-bundle-option-item-template"
     >
-        <div class="border-b border-[#E9E9E9] p-4">
+        <div class="border-b border-zinc-200 p-4">
             <x-admin::form.control-group>
                 <!-- Dropdown Options Container -->
                 <x-admin::form.control-group.label

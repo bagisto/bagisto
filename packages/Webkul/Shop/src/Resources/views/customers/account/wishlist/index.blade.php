@@ -9,11 +9,17 @@
         <x-shop::breadcrumbs name="wishlist" />
     @endSection
 
-    <!-- Wishlist Vue Component -->
-    <v-wishlist-products>
-        <!-- Wishlist Shimmer Effect -->
-        <x-shop::shimmer.customers.account.wishlist :count="4" />
-    </v-wishlist-products>
+    <div class="max-md:hidden">
+        <x-shop::layouts.account.navigation />
+    </div>
+
+    <div class="flex-auto">
+        <!-- Wishlist Vue Component -->
+        <v-wishlist-products>
+            <!-- Wishlist Shimmer Effect -->
+            <x-shop::shimmer.customers.account.wishlist :count="4" />
+        </v-wishlist-products>
+    </div>
 
     @pushOnce('scripts')
         <script
@@ -30,10 +36,20 @@
 
                 <!-- Wishlist Information -->
                 <template v-else>
-                    <div class="journal-scroll flex items-center justify-between overflow-auto">
-                        <h2 class="text-2xl font-medium max-sm:text-xl">
-                            @lang('shop::app.customers.account.wishlist.page-title')
-                        </h2>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <!-- Back Button -->
+                            <a
+                                class="grid md:hidden"
+                                href="{{ route('shop.customers.account.index') }}"
+                            >
+                                <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>                                    
+                            </a>
+
+                            <h2 class="text-2xl font-medium max-sm:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                                @lang('shop::app.customers.account.wishlist.page-title')
+                            </h2>
+                        </div>
 
                         {!! view_render_event('bagisto.shop.customers.account.wishlist.delete_all.before') !!}
 

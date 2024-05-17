@@ -9,11 +9,32 @@
         <x-shop::breadcrumbs name="reviews" />
     @endSection
 
-    <!-- Reviews Vue Component -->
-    <v-product-reviews>
-        <!-- Reviews Shimmer Effect -->
-        <x-shop::shimmer.customers.account.reviews :count="4" />
-    </v-product-reviews>
+    <div class="max-md:hidden">
+        <x-shop::layouts.account.navigation />
+    </div>
+
+    <div class="flex-auto">
+        <div class="mb-8 flex items-center max-sm:mb-5">
+            <!-- Back Button -->
+            <a
+                class="grid md:hidden"
+                href="{{ route('shop.customers.account.index') }}"
+            >
+                <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
+            </a>
+
+            <h2 class="text-2xl font-medium max-sm:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                @lang('shop::app.customers.account.reviews.title')
+            </h2>
+        </div>
+
+        <!-- Reviews Vue Component -->
+        <v-product-reviews>
+            <!-- Reviews Shimmer Effect -->
+            <x-shop::shimmer.customers.account.reviews :count="4" />
+        </v-product-reviews>
+
+    </div>
 
     @pushOnce('scripts')
         <script
@@ -30,96 +51,88 @@
 
                 <!-- Reviews Information -->
                 <template v-else>
-                    <div class="flex-auto">
-                        <div class="max-md:max-w-full">
-                            <h2 class="text-2xl font-medium max-sm:text-xl">
-                                @lang('shop::app.customers.account.reviews.title')
-                            </h2>
-                
-                            @if (! $reviews->isEmpty())
-                                <!-- Review Information -->
-                                <div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-sm:mt-[20px]">
-                                    @foreach($reviews as $review)
-                                        <a
-                                            href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
-                                            id="{{ $review->product_id }}"
-                                            aria-label="{{ $review->title }}"
-                                        >
-                                            <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:flex-wrap">
-                                                {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
+                    @if (! $reviews->isEmpty())
+                        <!-- Review Information -->
+                        <div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-sm:mt-[20px]">
+                            @foreach($reviews as $review)
+                                <a
+                                    href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
+                                    id="{{ $review->product_id }}"
+                                    aria-label="{{ $review->title }}"
+                                >
+                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:flex-wrap">
+                                        {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
 
-                                                <x-shop::media.images.lazy
-                                                    class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-sm:h-[92px] max-sm:w-[80px] max-sm:min-w-[80px]"
-                                                    src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
-                                                    alt="Review Image"                   
-                                                />
+                                        <x-shop::media.images.lazy
+                                            class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-sm:h-[92px] max-sm:w-[80px] max-sm:min-w-[80px]"
+                                            src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
+                                            alt="Review Image"                   
+                                        />
 
-                                                {!! view_render_event('bagisto.shop.customers.account.reviews.image.after', ['reviews' => $reviews]) !!}
-                
-                                                <div class="w-full">
-                                                    <div class="flex justify-between">
-                                                        {!! view_render_event('bagisto.shop.customers.account.reviews.title.before', ['reviews' => $reviews]) !!}
+                                        {!! view_render_event('bagisto.shop.customers.account.reviews.image.after', ['reviews' => $reviews]) !!}
+        
+                                        <div class="w-full">
+                                            <div class="flex justify-between">
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.title.before', ['reviews' => $reviews]) !!}
 
-                                                        <p class="text-xl font-medium max-sm:text-sm">
-                                                            {{ $review->title}}
-                                                        </p>
+                                                <p class="text-xl font-medium max-sm:text-sm">
+                                                    {{ $review->title}}
+                                                </p>
 
-                                                        {!! view_render_event('bagisto.shop.customers.account.reviews.title.after', ['reviews' => $reviews]) !!}
-                
-                                                        {!! view_render_event('bagisto.shop.customers.account.reviews.rating.before', ['reviews' => $reviews]) !!}
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.title.after', ['reviews' => $reviews]) !!}
+        
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.rating.before', ['reviews' => $reviews]) !!}
 
-                                                        <div class="flex items-center gap-0.5 max-sm:gap-0">
-                                                            @for ($i = 1; $i <= 5; $i++)
-                                                                <span class="icon-star-fill text-2xl max-sm:text-sm {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-zinc-500' }}"></span>
-                                                            @endfor
-                                                        </div>
-
-                                                        {!! view_render_event('bagisto.shop.customers.account.reviews.rating.after', ['reviews' => $reviews]) !!}
-                                                    </div>
-                
-                                                    {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
-
-                                                    <p class="mt-2.5 text-sm font-medium max-sm:text-xs">
-                                                        {{ $review->created_at }}
-                                                    </p>
-                
-                                                    {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.after', ['reviews' => $reviews]) !!}
-
-                                                    {!! view_render_event('bagisto.shop.customers.account.reviews.comment.before', ['reviews' => $reviews]) !!}
-
-                                                    <p class="mt-5 text-base text-zinc-500 max-sm:mt-2 max-sm:text-xs">
-                                                        {{ $review->comment }}
-                                                    </p>
-
-                                                    {!! view_render_event('bagisto.shop.customers.account.reviews.comment.after', ['reviews' => $reviews]) !!}
+                                                <div class="flex items-center gap-0.5 max-sm:gap-0">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <span class="icon-star-fill text-2xl max-sm:text-sm {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-zinc-500' }}"></span>
+                                                    @endfor
                                                 </div>
+
+                                                {!! view_render_event('bagisto.shop.customers.account.reviews.rating.after', ['reviews' => $reviews]) !!}
                                             </div>
-                                        </a>
-                                    @endforeach
+        
+                                            {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
 
-                                    <!-- Pagination -->
-                                    {{ $reviews->links() }}
-                                </div>
-                            @else
-                                <!-- Review Empty Page -->
-                                <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
-                                    <img
-                                        class="max-sm:h-[100px] max-sm:w-[100px]"
-                                        src="{{ bagisto_asset('images/review.png') }}"
-                                        alt="Empty Review"
-                                        title=""
-                                    >
+                                            <p class="mt-2.5 text-sm font-medium max-sm:text-xs">
+                                                {{ $review->created_at }}
+                                            </p>
+        
+                                            {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.after', ['reviews' => $reviews]) !!}
 
-                                    <p
-                                        class="text-xl max-sm:text-sm"
-                                        role="heading"
-                                    >
-                                        @lang('shop::app.customers.account.reviews.empty-review')
-                                    </p>
-                                </div>
-                            @endif
+                                            {!! view_render_event('bagisto.shop.customers.account.reviews.comment.before', ['reviews' => $reviews]) !!}
+
+                                            <p class="mt-5 text-base text-zinc-500 max-sm:mt-2 max-sm:text-xs">
+                                                {{ $review->comment }}
+                                            </p>
+
+                                            {!! view_render_event('bagisto.shop.customers.account.reviews.comment.after', ['reviews' => $reviews]) !!}
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+
+                            <!-- Pagination -->
+                            {{ $reviews->links() }}
                         </div>
-                    </div>
+                    @else
+                        <!-- Review Empty Page -->
+                        <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
+                            <img
+                                class="max-sm:h-[100px] max-sm:w-[100px]"
+                                src="{{ bagisto_asset('images/review.png') }}"
+                                alt="Empty Review"
+                                title=""
+                            >
+
+                            <p
+                                class="text-xl max-sm:text-sm"
+                                role="heading"
+                            >
+                                @lang('shop::app.customers.account.reviews.empty-review')
+                            </p>
+                        </div>
+                    @endif
                 </template>
 
                 {!! view_render_event('bagisto.shop.customers.account.reviews.list.after', ['reviews' => $reviews]) !!}
