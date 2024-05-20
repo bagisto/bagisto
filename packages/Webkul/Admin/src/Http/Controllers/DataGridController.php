@@ -5,7 +5,6 @@ namespace Webkul\Admin\Http\Controllers;
 use Illuminate\Support\Facades\Crypt;
 use Webkul\DataGrid\Repositories\SavedFilterRepository;
 
-
 class DataGridController extends Controller
 {
     /**
@@ -64,7 +63,7 @@ class DataGridController extends Controller
 
         return response()->json([
             'data'    => $data,
-            'message' => trans('Filter has been saved successfully.'),
+            'message' => trans('admin::app.components.datagrid.toolbar.filter.saved-success'),
         ], 200);
     }
 
@@ -90,7 +89,7 @@ class DataGridController extends Controller
         ]);
 
         return response()->json([
-            'message' => trans('Filter has been deleted successfully.'),
+            'message' => trans('admin::app.components.datagrid.toolbar.filter.delete-success'),
         ], 200);
     }
 }

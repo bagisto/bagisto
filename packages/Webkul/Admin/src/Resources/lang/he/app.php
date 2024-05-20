@@ -3954,17 +3954,19 @@ return [
                 ],
 
                 'filter' => [
-                    'back-btn'          => 'חזרה',
-                    'create-new-filter' => 'צור מסנן חדש',
-                    'custom-filters'    => 'מסננים מותאמים אישית',
-                    'empty-description' => 'אין מסננים נבחרים לשמירה. אנא בחר מסננים לשמירה.',
-                    'empty-title'       => 'הוסף מסננים לשמירה',
+                    'back-btn'          => 'חזור',
+                    'create-new-filter' => 'צור פילטר חדש',
+                    'custom-filters'    => 'פילטרים מותאמים אישית',
+                    'delete-success'    => 'הפילטר נמחק בהצלחה.',
+                    'empty-description' => 'אין פילטרים נבחרים זמינים לשמירה. יש לבחור פילטרים לשמירה.',
+                    'empty-title'       => 'הוסף פילטרים לשמירה',
                     'name'              => 'שם',
-                    'quick-filters'     => 'מסננים מהירים',
+                    'quick-filters'     => 'פילטרים מהירים',
                     'save-btn'          => 'שמור',
-                    'save-filter'       => 'שמור מסנן',
-                    'selected-filters'  => 'מסננים נבחרים',
-                    'title'             => 'מסנן',
+                    'save-filter'       => 'שמור פילטר',
+                    'saved-success'     => 'הפילטר נשמר בהצלחה.',
+                    'selected-filters'  => 'פילטרים נבחרים',
+                    'title'             => 'פילטר',
                 ],
 
                 'search' => [
