@@ -75,11 +75,8 @@ trait CoreConfigField
 
     /**
      * Returns the select options for the field.
-     *
-     * @param  array|string  $options
-     * @return mixed
      */
-    public function getOptions($options)
+    public function getOptions(array|string $options): array
     {
         if (is_array($options)) {
             return $options;
