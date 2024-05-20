@@ -7,11 +7,13 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Core\Acl;
 use Webkul\Core\Core;
 use Webkul\Core\ElasticSearch;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchFacade;
+use Webkul\Core\Facades\Acl as AclFacade;
 use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
 
@@ -96,8 +98,14 @@ class CoreServiceProvider extends ServiceProvider
 
         $loader->alias('core', CoreFacade::class);
 
+        $loader->alias('acl', AclFacade::class);
+
         $this->app->singleton('core', function () {
             return app()->make(Core::class);
+        });
+
+        $this->app->singleton('acl', function () {
+            return app()->make(Acl::class);
         });
 
         /**
