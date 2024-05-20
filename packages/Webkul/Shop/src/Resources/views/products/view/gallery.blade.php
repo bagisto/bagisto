@@ -88,7 +88,7 @@
                     />
 
                     <div
-                        class="min-w-[450px] rounded-xl"
+                        class="min-w-[450px] cursor-pointer rounded-xl"
                         v-if="baseFile.type == 'video'"
                     >
                         <video
@@ -97,11 +97,8 @@
                             alt="{{ $product->name }}"
                             @click="isImageZooming = !isImageZooming"
                             @loadeddata="onMediaLoad()"
+                            :src="baseFile.path"
                         >
-                            <source
-                                :src="baseFile.path"
-                                type="video/mp4"
-                            />
                         </video>
                     </div>
                 </div>
