@@ -26,6 +26,12 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
      */
     Route::get('datagrid/look-up', [DataGridController::class, 'lookUp'])->name('admin.datagrid.look_up');
 
+    Route::controller(DataGridController::class)->prefix('datagrid/saved-filters')->group(function () {
+        Route::post('', 'store')->name('datagrid.filters.saved_filters.store');
+        Route::get('', 'get')->name('datagrid.filters.saved_filters.index');
+        Route::delete('{id}', 'destroy')->name('datagrid.filters.saved_filters.destroy');
+    });
+
     /**
      * Tinymce file upload handler.
      */

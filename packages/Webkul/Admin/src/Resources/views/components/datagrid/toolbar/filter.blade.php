@@ -73,7 +73,7 @@
                         <div v-else class="flex items-center gap-x-2">
                             <span 
                                 class="icon-arrow-right rtl:icon-arrow-left mt-0.5 cursor-pointer text-3xl hover:rounded-md hover:bg-gray-100 dark:hover:bg-gray-950"
-                                @click="isShowSavedFilters = ! isShowSavedFilters"
+                                @click="backToFilters"
                             >
                             </span>
                             
@@ -758,7 +758,7 @@
                 },
 
                 /**
-                 * Deletes the saved filter.
+                 * Delete the saved filter.
                  */
                 deleteSavedFilter(filter) {
                     this.$emitter.emit('open-confirm-modal', {
@@ -775,6 +775,15 @@
                             });
                         }
                     });
+                },
+
+                /**
+                 * Go back to filters.
+                 */
+                backToFilters() {
+                    this.savedFilters.params.filters.columns = JSON.parse(JSON.stringify(this.filters.columns));
+
+                    this.isShowSavedFilters = ! this.isShowSavedFilters;
                 },
 
                 /**
