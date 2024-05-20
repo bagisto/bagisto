@@ -4,8 +4,8 @@ namespace Webkul\Core;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Webkul\Core\Menu\MenuItem;
 use Illuminate\Support\Str;
+use Webkul\Core\Menu\MenuItem;
 
 class Menu
 {
@@ -98,8 +98,7 @@ class Menu
         foreach (
             $this->isForAdmin
             ? $this->forAdmin()
-            : $this->forShop()
-            as $item
+            : $this->forShop() as $item
         ) {
             if (strpos($this->current, route($item['route'])) !== false) {
                 $this->currentKey = $item['key'];
