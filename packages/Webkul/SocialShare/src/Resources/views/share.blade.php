@@ -15,7 +15,7 @@
                 class="max-sm:text-base"
             >
                 @lang('admin::app.configuration.index.catalog.products.social-share.share')
-            </a>
+            </span>
         </div>
 
         <div class="max-md:hidden">

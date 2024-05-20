@@ -124,7 +124,7 @@
                                         </a>
                                     @else
                                         <div class="grid">
-                                            <p class="text-base text-[#7D7D7D]">
+                                            <p class="text-base text-zinc-500">
                                                 {!! $customAttributeValue['value'] !!}
                                             </p>
                                         </div>
@@ -158,7 +158,7 @@
             </x-slot>
 
             <x-slot:content class="max-sm:px-0">
-                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm max-sm:mb-0 max-sm:px-5 max-sm:text-sm max-sm:font-normal">
+                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm max-sm:mb-0 max-sm:px-5 max-sm:text-sm max-sm:font-normal">
                     {!! $product->description !!}
                 </div>
             </x-slot>

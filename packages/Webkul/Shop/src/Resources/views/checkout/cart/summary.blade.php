@@ -4,6 +4,7 @@
     <p
         class="text-2xl font-medium max-sm:text-xl"
         role="heading"
+        aria-level="1"
     >
         @lang('shop::app.checkout.cart.summary.cart-summary')
     </p>

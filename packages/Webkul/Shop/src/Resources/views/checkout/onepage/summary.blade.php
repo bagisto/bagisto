@@ -31,13 +31,23 @@
             {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_name.after') !!}
 
             <p class="mt-2.5 flex flex-col text-lg font-medium max-sm:text-sm max-sm:font-normal">
-                @lang('shop::app.checkout.onepage.summary.price_&_qty', ['price' => '@{{ item.formatted_price_incl_tax }}', 'qty' => '@{{ item.quantity }}'])
+                <template v-if="displayTax.prices == 'including_tax'">
+                    @lang('shop::app.checkout.onepage.summary.price_&_qty', ['price' => '@{{ item.formatted_price_incl_tax }}', 'qty' => '@{{ item.quantity }}'])
+                </template>
 
-                <span class="text-xs font-normal">
-                    @lang('shop::app.checkout.onepage.summary.excl-tax')
+                <template v-else-if="displayTax.prices == 'both'">
+                    @lang('shop::app.checkout.onepage.summary.price_&_qty', ['price' => '@{{ item.formatted_price_incl_tax }}', 'qty' => '@{{ item.quantity }}'])
 
-                    <span class="font-medium">@{{ item.formatted_total }}</span>
-                </span>
+                    <span class="text-xs font-normal">
+                        @lang('shop::app.checkout.onepage.summary.excl-tax')
+
+                        <span class="font-medium">@{{ item.formatted_total }}</span>
+                    </span>
+                </template>
+
+                <template v-else>
+                    @lang('shop::app.checkout.onepage.summary.price_&_qty', ['price' => '@{{ item.formatted_price }}', 'qty' => '@{{ item.quantity }}'])
+                </template>
             </p>
         </div>
     </div>

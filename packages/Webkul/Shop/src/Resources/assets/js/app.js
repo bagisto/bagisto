@@ -18,8 +18,6 @@ window.app = createApp({
 
     mounted() {
         this.lazyImages();
-
-        this.animateBoxes();
     },
 
     methods: {
@@ -48,28 +46,6 @@ window.app = createApp({
                 lazyImageObserver.observe(lazyImage);
             });
         },
-
-        animateBoxes() {
-            let animateBoxes = document.querySelectorAll('.scroll-trigger');
-
-            if (! animateBoxes.length) {
-                return;
-            }
-
-            animateBoxes.forEach((animateBox) => {
-                let animateBoxObserver = new IntersectionObserver(function(entries, observer) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            animateBox.classList.remove('scroll-trigger--offscreen');
-
-                            animateBoxObserver.unobserve(animateBox);
-                        }
-                    });
-                });
-
-                animateBoxObserver.observe(animateBox);
-            });
-        }
     },
 });
 
