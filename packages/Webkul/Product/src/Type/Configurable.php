@@ -8,6 +8,7 @@ use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
+use Webkul\Tax\Facades\Tax;
 
 class Configurable extends AbstractType
 {
@@ -89,55 +90,6 @@ class Configurable extends AbstractType
     protected $attributesById = [];
 
     /**
-     * Get default variant.
-     *
-     * @return \Webkul\Product\Models\Product
-     */
-    public function getDefaultVariant()
-    {
-        return $this->product->variants()->find($this->getDefaultVariantId());
-    }
-
-    /**
-     * Get default variant id.
-     *
-     * @return int
-     */
-    public function getDefaultVariantId()
-    {
-        return $this->product->additional['default_variant_id'] ?? null;
-    }
-
-    /**
-     * Set default variant id.
-     *
-     * @param  int  $defaultVariantId
-     * @return void
-     */
-    public function setDefaultVariantId($defaultVariantId)
-    {
-        $this->product->additional = array_merge($this->product->additional ?? [], [
-            'default_variant_id' => $defaultVariantId,
-        ]);
-    }
-
-    /**
-     * Update default variant id if present in request.
-     *
-     * @return void
-     */
-    public function updateDefaultVariantId()
-    {
-        if (! $defaultVariantId = request()->get('default_variant_id')) {
-            return;
-        }
-
-        $this->setDefaultVariantId($defaultVariantId);
-
-        $this->product->save();
-    }
-
-    /**
      * Create configurable product.
      *
      * @return \Webkul\Product\Contracts\Product
@@ -181,8 +133,6 @@ class Configurable extends AbstractType
     public function update(array $data, $id, $attribute = 'id')
     {
         $product = parent::update($data, $id, $attribute);
-
-        $this->updateDefaultVariantId();
 
         if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
             return $product;
@@ -528,7 +478,7 @@ class Configurable extends AbstractType
      */
     public function getProductPrices()
     {
-        $minPrice = $this->evaluatePrice($this->getMinimalPrice());
+        $minPrice = $this->getMinimalPrice();
 
         return [
             'regular' => [
@@ -562,11 +512,7 @@ class Configurable extends AbstractType
         $data['quantity'] = parent::handleQuantity((int) $data['quantity']);
 
         if (empty($data['selected_configurable_option'])) {
-            if ($this->getDefaultVariantId()) {
-                $data['selected_configurable_option'] = $this->getDefaultVariantId();
-            } else {
-                return trans('product::app.checkout.cart.missing-options');
-            }
+            return trans('product::app.checkout.cart.missing-options');
         }
 
         $data = $this->getQtyRequest($data);
@@ -701,29 +647,41 @@ class Configurable extends AbstractType
      */
     public function validateCartItem(CartItemModel $item): CartItemValidationResult
     {
-        $result = new CartItemValidationResult();
+        $validation = new CartItemValidationResult();
 
         if ($this->isCartItemInactive($item)) {
-            $result->itemIsInactive();
+            $validation->itemIsInactive();
 
-            return $result;
+            return $validation;
         }
 
-        $price = $item->child->getTypeInstance()->getFinalPrice($item->quantity);
+        $basePrice = $item->child->getTypeInstance()->getFinalPrice($item->quantity);
 
-        if ($price == $item->base_price) {
-            return $result;
+        if (Tax::isInclusiveTaxProductPrices()) {
+            $itemBasePrice = $item->base_price_incl_tax;
+        } else {
+            $itemBasePrice = $item->base_price;
         }
 
-        $item->base_price = $price;
-        $item->price = core()->convertPrice($price);
+        if ($basePrice == $itemBasePrice) {
+            return $validation;
+        }
 
-        $item->base_total = $price * $item->quantity;
-        $item->total = core()->convertPrice($price * $item->quantity);
+        $item->base_price = $basePrice;
+        $item->base_price_incl_tax = $basePrice;
+
+        $item->price = ($price = core()->convertPrice($basePrice));
+        $item->price_incl_tax = $price;
+
+        $item->base_total = $basePrice * $item->quantity;
+        $item->base_total_incl_tax = $basePrice * $item->quantity;
+
+        $item->total = ($total = core()->convertPrice($basePrice * $item->quantity));
+        $item->total_incl_tax = $total;
 
         $item->save();
 
-        return $result;
+        return $validation;
     }
 
     /**
@@ -737,7 +695,7 @@ class Configurable extends AbstractType
             }
         }
 
-        return (bool) core()->getConfigData('catalog.inventory.stock_options.back_orders');
+        return (bool) core()->getConfigData('sales.order_settings.stock_options.back_orders');
     }
 
     /**

@@ -3,20 +3,20 @@
 return [
     'importers' => [
         'customers' => [
-            'title'  => 'කළමනාකරු',
+            'title' => 'කළමනාකරු',
 
             'validation' => [
                 'errors' => [
                     'duplicate-email'        => 'Email: \'%s\' එකතු ලැබුණු එක එක පිළිබඳ එකතු ලැබීය ඇත.',
                     'duplicate-phone'        => 'Phone: \'%s\' එකතු ලැබුණු එක එක පිළිබඳ එකතු ලැබීය ඇත.',
-                    'invalid-customer-group' => 'කළමනාකරු කොටස වැඩි හොඳ හොඳ අත්දැකිම අත්දැකි වේ.',
                     'email-not-found'        => 'Email: \'%s\' සිස්ටීම පිළිබඳ එකතු ලැබීය නොමැත.',
+                    'invalid-customer-group' => 'කළමනාකරු කොටස වැඩි හොඳ හොඳ අත්දැකිම අත්දැකි වේ.',
                 ],
             ],
         ],
 
-        'products'  => [
-            'title'  => 'පද්ධති',
+        'products' => [
+            'title' => 'පද්ධති',
 
             'validation' => [
                 'errors' => [
@@ -30,7 +30,7 @@ return [
         ],
 
         'tax-rates' => [
-            'title'      => 'බදු අනුවාද',
+            'title' => 'බදු අනුවාද',
 
             'validation' => [
                 'errors' => [

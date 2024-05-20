@@ -30,7 +30,7 @@ class RefundController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(OrderRefundDataGrid::class)->toJson();
+            return datagrid(OrderRefundDataGrid::class)->process();
         }
 
         return view('admin::sales.refunds.index');
@@ -64,7 +64,7 @@ class RefundController extends Controller
         }
 
         $this->validate(request(), [
-            'refund.items'   => 'required|array',
+            'refund.items'   => 'array',
             'refund.items.*' => 'required|numeric|min:0',
         ]);
 
@@ -74,7 +74,7 @@ class RefundController extends Controller
             $data['refund']['shipping'] = 0;
         }
 
-        $totals = $this->refundRepository->getOrderItemsRefundSummary($data['refund']['items'], $orderId);
+        $totals = $this->refundRepository->getOrderItemsRefundSummary($data['refund'], $orderId);
 
         if (! $totals) {
             session()->flash('error', trans('admin::app.sales.refunds.create.invalid-qty'));
@@ -112,12 +112,14 @@ class RefundController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse|mixed
      */
-    public function updateQty(int $orderId)
+    public function updateTotals(int $orderId)
     {
-        $data = $this->refundRepository->getOrderItemsRefundSummary(request()->input(), $orderId);
-
-        if (! $data) {
-            return response('');
+        try {
+            $data = $this->refundRepository->getOrderItemsRefundSummary(request()->input(), $orderId);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 400);
         }
 
         return response()->json($data);

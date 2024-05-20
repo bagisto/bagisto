@@ -18,7 +18,7 @@
         {!! view_render_event('bagisto.admin.catalog.attributes.create.create_form_controls.before') !!}
 
         <!-- actions buttons -->
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
                 @lang('admin::app.catalog.attributes.create.title')
             </p>
@@ -60,12 +60,12 @@
             id="v-create-attributes-template"
         >
             <!-- body content -->
-            <div class="mt-3.5 flex gap-2.5">
+            <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
 
                 {!! view_render_event('bagisto.admin.catalog.attributes.create.card.label.before') !!}
 
                 <!-- Left sub Component -->
-                <div class="flex flex-1 flex-col gap-2 overflow-auto">
+                <div class="flex flex-1 flex-col gap-2 overflow-auto max-xl:flex-auto">
                     <!-- Label -->
                     <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                         <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
@@ -357,14 +357,14 @@
                 <!-- Right sub-component -->
                 <div class="flex w-[360px] max-w-full flex-col gap-2">
                     <!-- General -->
-                    <div class="box-shadow rounded bg-white dark:bg-gray-900">
-                        <div class="flex items-center justify-between p-1.5">
+                    <x-admin::accordion>
+                        <x-slot:header>
                             <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.create.general')
                             </p>
-                        </div>
+                        </x-slot>
 
-                        <div class="px-4 pb-4">
+                        <x-slot:content>
                             <!-- Attribute Code -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -449,9 +449,9 @@
                                     :label="trans('admin::app.catalog.attributes.create.default-value')"
                                 />
                             </x-admin::form.control-group>
-                        </div>
-                    </div>
-
+                        </x-slot>
+                    </x-admin::accordion>
+                    
                     <!-- Validations -->
                     <x-admin::accordion>
                         <x-slot:header>
@@ -892,7 +892,13 @@
                     },
 
                     removeOption(id) {
-                        this.options = this.options.filter(option => option.id !== id);
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                this.options = this.options.filter(option => option.id !== id);
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: "@lang('admin::app.catalog.attributes.create.option-deleted')" });
+                            }
+                        });
                     },
 
                     listenModal(event) {

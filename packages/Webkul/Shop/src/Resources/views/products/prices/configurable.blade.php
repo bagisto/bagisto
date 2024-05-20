@@ -1,7 +1,7 @@
-<p class="price-label text-sm text-[#6E6E6E]">
+<p class="price-label text-sm text-zinc-500">
     @lang('shop::app.products.prices.configurable.as-low-as')
 </p>
 
-<p class="special-price font-semibold">
+<p class="final-price font-semibold">
     {{ $prices['regular']['formatted_price'] }}
 </p>

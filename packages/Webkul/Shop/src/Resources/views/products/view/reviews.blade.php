@@ -192,7 +192,7 @@
                                     <div class="row grid grid-cols-[1fr_2fr] items-center gap-2.5 max-sm:flex-wrap">
                                         <div class="text-base font-medium">{{ $i }} Stars</div>
 
-                                        <div class="h-4 w-[275px] max-w-full rounded-sm bg-[#E5E5E5]">
+                                        <div class="h-4 w-[275px] max-w-full rounded-sm bg-zinc-200">
                                             <div class="h-4 rounded-sm bg-[#FEA82B]" style="width: {{ $percentageRatings[$i] }}%"></div>
                                         </div>
                                     </div>
@@ -237,7 +237,7 @@
         type="text/x-template"
         id="v-product-review-item-template"
     >
-        <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-xl:mb-5 max-sm:flex-wrap">
+        <div class="flex gap-5 rounded-xl border border-zinc-200 p-6 max-xl:mb-5 max-sm:flex-wrap">
             <div>
                 <img
                     v-if="review.profile"
@@ -249,10 +249,10 @@
 
                 <div
                     v-else
-                    class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-[#F5F5F5] max-sm:hidden"
+                    class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-zinc-100 max-sm:hidden"
                     :title="review.name"
                 >
-                    <span class="text-2xl font-semibold text-[#6E6E6E]">
+                    <span class="text-2xl font-semibold text-zinc-500">
                         @{{ review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('') }}
                     </span>
                 </div>
@@ -276,11 +276,11 @@
                     @{{ review.created_at }}
                 </p>
 
-                <p class="mt-5 text-base font-semibold text-[#6E6E6E] max-sm:text-xs">
+                <p class="mt-5 text-base font-semibold text-zinc-500 max-sm:text-xs">
                     @{{ review.title }}
                 </p>
 
-                <p class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs">
+                <p class="mt-5 text-base text-zinc-500 max-sm:text-xs">
                     @{{ review.comment }}
                 </p>
 
@@ -304,14 +304,14 @@
                         @lang('shop::app.products.view.reviews.translate')
                     </template>
                 </button>
-
+                
                 <!-- Review Attachments -->
                 <div
                     class="mt-3 flex flex-wrap gap-2"
                     v-if="review.images.length"
                 >
-                    <template v-for="file in review.images">
-                        <a
+                    <template v-for="(file, index) in review.images">
+                        <div
                             :href="file.url"
                             class="flex h-12 w-12"
                             target="_blank"
@@ -322,10 +322,11 @@
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
+                                @click="isImageZooming = !isImageZooming; activeIndex = index"
                             >
-                        </a>
-
-                        <a
+                        </div>
+                        
+                        <div
                             :href="file.url"
                             class="flex h-12 w-12"
                             target="_blank"
@@ -336,11 +337,19 @@
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
+                                @click="isImageZooming = !isImageZooming; activeIndex = index"
                             >
                             </video>
-                        </a>
+                        </div>
                     </template>
                 </div>
+
+                <!-- Review Images zoomer -->
+                <x-shop::image-zoomer 
+                    ::attachments="attachments" 
+                    ::is-image-zooming="isImageZooming" 
+                    ::initial-index="'file_'+activeIndex"
+                />
             </div>
         </div>
     </script>
@@ -426,10 +435,27 @@
             template: '#v-product-review-item-template',
 
             props: ['review'],
-
+            
             data() {
                 return {
                     isLoading: false,
+
+                    isImageZooming: false,
+
+                    activeIndex: 0,
+                }
+            },
+
+            computed: {
+                attachments() {
+                    let data = [...this.review.images].map((file) => {
+                        return {
+                            url: file.url,
+                            type: file.type,
+                        }
+                    });
+
+                    return data;
                 }
             },
 

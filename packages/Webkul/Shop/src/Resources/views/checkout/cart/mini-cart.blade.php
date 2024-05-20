@@ -97,10 +97,30 @@
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.after') !!}
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.before') !!}
+                                
+                                <template v-if="displayTax.prices == 'including_tax'">
+                                    <p class="text-lg">
+                                        @{{ item.formatted_price_incl_tax }}
+                                    </p>
+                                </template>
 
-                                <p class="text-lg">
-                                    @{{ item.formatted_price }}
-                                </p>
+                                <template v-else-if="displayTax.prices == 'both'">
+                                    <p class="flex flex-col text-lg">
+                                        @{{ item.formatted_price_incl_tax }}
+
+                                        <span class="text-xs">
+                                            @lang('shop::app.checkout.cart.mini-cart.excl-tax')
+
+                                            <span class="font-medium">@{{ item.formatted_price }}</span>
+                                        </span>
+                                    </p>
+                                </template>
+
+                                <template v-else>
+                                    <p class="text-lg">
+                                        @{{ item.formatted_price }}
+                                    </p>
+                                </template>
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.after') !!}
                             </div>
@@ -194,54 +214,70 @@
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
-                    <div class="mb-8 mt-8 flex items-center justify-between border-b border-[#E9E9E9] px-6 pb-2">
+                    <div class="mb-8 mt-8 flex items-center justify-between border-b border-zinc-200 px-6 pb-2">
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
 
-                        <p class="text-sm font-medium text-[#6E6E6E]">
+                        <p class="text-sm font-medium text-zinc-500">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
 
-                        <p
-                            v-if="! isLoading"
-                            class="text-3xl font-semibold"
-                        >
-                            @{{ cart.formatted_grand_total }}
-                        </p>
+                        <template v-if="! isLoading">
+                            <template v-if="displayTax.subtotal == 'including_tax'">
+                                <p class="text-3xl font-semibold">
+                                    @{{ cart.formatted_sub_total_incl_tax }}
+                                </p>
+                            </template>
+
+                            <template v-else-if="displayTax.subtotal == 'both'">
+                                <p class="flex flex-col text-3xl font-semibold">
+                                    @{{ cart.formatted_sub_total_incl_tax }}
+                                    
+                                    <span class="text-sm font-normal">
+                                        @lang('shop::app.checkout.cart.mini-cart.excl-tax')
+                                        
+                                        <span class="font-medium">@{{ cart.formatted_sub_total }}</span>
+                                    </span>
+                                </p>
+                            </template>
+
+                            <template v-else>
+                                <p class="text-3xl font-semibold">
+                                    @{{ cart.formatted_sub_total }}
+                                </p>
+                            </template>
+                        </template>
+                        
+                        <template v-else>
+                            <div class="flex items-center justify-center">
+                                <!-- Spinner -->
+                                <svg
+                                    class="text-blue absolute h-8 w-8 animate-spin text-[5px] font-semibold"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    aria-hidden="true"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <circle
+                                        class="opacity-25"
+                                        cx="12"
+                                        cy="12"
+                                        r="10"
+                                        stroke="currentColor"
+                                        stroke-width="4"
+                                    ></circle>
+                    
+                                    <path
+                                        class="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    ></path>
+                                </svg>
+                    
+                                <span class="realative text-3xl font-semibold opacity-0" v-text="cart.formatted_grand_total"></span>
+                            </div>
+                        </template>
 
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.after') !!}
-                        
-                        <div
-                            v-else
-                            class="flex items-center justify-center"
-                        >
-                            <!-- Spinner -->
-                            <svg
-                                class="text-blue absolute h-8 w-8 animate-spin text-[5px] font-semibold"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                aria-hidden="true"
-                                viewBox="0 0 24 24"
-                            >
-                                <circle
-                                    class="opacity-25"
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    stroke="currentColor"
-                                    stroke-width="4"
-                                ></circle>
-                
-                                <path
-                                    class="opacity-75"
-                                    fill="currentColor"
-                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                ></path>
-                            </svg>
-                
-                            <span class="realative text-3xl font-semibold opacity-0">
-                                @{{ cart.formatted_grand_total }}
-                            </span>
-                        </div>
                     </div>
 
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.action.before') !!}
@@ -283,6 +319,11 @@
                     cart: null,
 
                     isLoading:false,
+
+                    displayTax: {
+                        prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
+                        subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
+                    },
                 }
             },
 

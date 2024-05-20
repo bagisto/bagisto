@@ -80,7 +80,7 @@
                 :is-selected="true"
             >
                 <div class="container mt-[60px] max-1180:px-5">
-                    <p class="text-lg text-[#6E6E6E] max-1180:text-sm">
+                    <p class="text-lg text-zinc-500 max-1180:text-sm">
                         {!! $product->description !!}
                     </p>
                 </div>
@@ -124,7 +124,7 @@
                                         </a>
                                     @else
                                         <div class="grid">
-                                            <p class="text-base text-[#7D7D7D]">
+                                            <p class="text-base text-zinc-500">
                                                 {!! $customAttributeValue['value'] !!}
                                             </p>
                                         </div>
@@ -158,7 +158,7 @@
             </x-slot>
 
             <x-slot:content>
-                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm">
+                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -175,7 +175,7 @@
 
                 <x-slot:content>
                     <div class="container mb-4 max-1180:px-5">
-                        <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-lg text-[#6E6E6E] max-1180:text-sm">
+                        <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-lg text-zinc-500 max-1180:text-sm">
                             @foreach ($customAttributeValues as $customAttributeValue)
                                 @if (! empty($customAttributeValue['value']))
                                     <div class="grid">
@@ -204,7 +204,7 @@
                                         </a>
                                     @else
                                         <div class="grid">
-                                            <p class="text-base text-[#6E6E6E]">
+                                            <p class="text-base text-zinc-500">
                                                 {{ $customAttributeValue['value'] ?? '-' }}
                                             </p>
                                         </div>
@@ -270,12 +270,6 @@
                         v-model="is_buy_now"
                     >
 
-                    <input
-                        type="hidden"
-                        name="quantity"
-                        :value="qty"
-                    >
-
                     <div class="container px-[60px] max-1180:px-0">
                         <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
                             <!-- Gallery Blade Inclusion -->
@@ -315,7 +309,7 @@
                                     />
 
                                     <div class="flex items-center gap-4">
-                                        <p class="text-sm text-[#6E6E6E]">
+                                        <p class="text-sm text-zinc-500">
                                             ({{ $product->approvedReviews->count() }} @lang('reviews'))
                                         </p>
                                     </div>
@@ -328,21 +322,18 @@
 
                                 <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
-
-                                    <span class="text-lg text-[#6E6E6E]">
-                                        @if (
-                                            (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive') 
-                                            && $product->getTypeInstance()->getTaxCategory()
-                                        )
-                                            @lang('shop::app.products.view.tax-inclusive')
-                                        @endif
-                                    </span>
                                 </p>
+
+                                @if (\Webkul\Tax\Facades\Tax::isInclusiveTaxProductPrices())
+                                    <span class="text-sm font-normal text-zinc-500">
+                                        @lang('shop::app.products.view.tax-inclusive')
+                                    </span>
+                                @endif
 
                                 @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
                                     <div class="mt-2.5 grid gap-1.5">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
-                                            <p class="text-[#6E6E6E] [&>*]:text-black">
+                                            <p class="text-zinc-500 [&>*]:text-black">
                                                 {!! $offer !!}
                                             </p>
                                         @endforeach
@@ -353,7 +344,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-6 text-lg text-[#6E6E6E] max-sm:mt-4 max-sm:text-sm">
+                                <p class="mt-6 text-lg text-zinc-500 max-sm:mt-4 max-sm:text-sm">
                                     {!! $product->short_description !!}
                                 </p>
 

@@ -97,7 +97,7 @@
                             {!! view_render_event('bagisto.shop.checkout.cart.cart_mass_actions.before') !!}
 
                             <!-- Cart Mass Action Container -->
-                            <div class="flex items-center justify-between border-b border-[#E9E9E9] pb-2.5 max-sm:block">
+                            <div class="flex items-center justify-between border-b border-zinc-200 pb-2.5 max-sm:block">
                                 <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
@@ -110,15 +110,16 @@
                                     <label
                                         class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                                         for="select-all"
-                                        role="button"
                                         tabindex="0"
                                         aria-label="@lang('shop::app.checkout.cart.index.select-all')"
+                                        aria-labelledby="select-all-label"
                                     >
                                     </label>
 
                                     <span
                                         class="text-xl max-md:text-xl max-sm:text-lg ltr:ml-2.5 rtl:mr-2.5"
                                         role="heading"
+                                        aria-level="2"
                                     >
                                         @{{ "@lang('shop::app.checkout.cart.index.items-selected')".replace(':count', selectedItemsCount) }}
                                     </span>
@@ -138,7 +139,7 @@
                                     </span>
 
                                     @if (auth()->guard()->check())
-                                        <span class="mx-2.5 border-r-[2px] border-[#E9E9E9]"></span>
+                                        <span class="mx-2.5 border-r-[2px] border-zinc-200"></span>
 
                                         <span
                                             class="cursor-pointer text-base text-[#0A49A7]" 
@@ -161,7 +162,7 @@
                                 class="grid gap-y-6" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex flex-wrap justify-between gap-x-2.5 border-b border-[#E9E9E9] pb-5">
+                                <div class="flex flex-wrap justify-between gap-x-2.5 border-b border-zinc-200 pb-5">
                                     <div class="flex gap-x-5">
                                         <div class="mt-11 select-none">
                                             <input
@@ -175,9 +176,9 @@
                                             <label
                                                 class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
                                                 :for="'item_' + item.id"
-                                                role="button"
                                                 tabindex="0"
                                                 aria-label="@lang('shop::app.checkout.cart.index.select-cart-item')"
+                                                aria-labelledby="select-item-label"
                                             ></label>
                                         </div>
 
@@ -281,12 +282,31 @@
                                     </div>
 
                                     <div class="text-right max-sm:hidden">
-
                                         {!! view_render_event('bagisto.shop.checkout.cart.total.before') !!}
+                                        
+                                        <template v-if="displayTax.prices == 'including_tax'">
+                                            <p class="text-lg font-semibold">
+                                                @{{ item.formatted_total_incl_tax }}
+                                            </p>
+                                        </template>
 
-                                        <p class="text-lg font-semibold">
-                                            @{{ item.formatted_total }}
-                                        </p>
+                                        <template v-else-if="displayTax.prices == 'both'">
+                                            <p class="flex flex-col text-lg font-semibold">
+                                                @{{ item.formatted_total_incl_tax }}
+
+                                                <span class="text-xs font-normal">
+                                                    @lang('shop::app.checkout.cart.index.excl-tax')
+                                                    
+                                                    <span class="font-medium">@{{ item.formatted_total }}</span>
+                                                </span>
+                                            </p>
+                                        </template>
+
+                                        <template v-else>
+                                            <p class="text-lg font-semibold">
+                                                @{{ item.formatted_total }}
+                                            </p>
+                                        </template>
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.total.after') !!}
 
@@ -342,7 +362,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.cart.summary.before') !!}
 
-                        <!-- Cart Summary -->
+                        <!-- Cart Summary Blade File -->
                         @include('shop::checkout.cart.summary')
 
                         {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
@@ -381,6 +401,14 @@
 
                         applied: {
                             quantity: {},
+                        },
+
+                        displayTax: {
+                            prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
+
+                            subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
+                            
+                            shipping: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_shipping_amount') }}",
                         },
 
                         isLoading: true,

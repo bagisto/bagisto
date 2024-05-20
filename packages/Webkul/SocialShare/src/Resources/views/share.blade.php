@@ -9,9 +9,9 @@
         <div class="hidden gap-2.5 justify-center items-center max-md:flex cursor-pointer">
             <span class="icon-share text-2xl"></span>
 
-            <a href="intent://share/#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT={{ rawurlencode($product->name . ' ' . route('shop.product_or_category.index', [$product->url_key])) }};end">
+            <span onclick="shareProduct()">
                 @lang('admin::app.configuration.index.catalog.products.social-share.share')
-            </a>
+            </span>
         </div>
 
         <div class="max-md:hidden">
@@ -28,4 +28,24 @@
 
         {!! view_render_event('bagisto.shop.products.view.share.after', ['product' => $product]) !!}
     </div>
+
+    @push('scripts')
+        <script>
+            function shareProduct() {
+                let productName = "{{ $product->name }}";
+                let productUrl = "{{ route('shop.product_or_category.index', [$product->url_key]) }}";
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: productName,
+                        text: productName + ' ' + productUrl,
+                        url: productUrl
+                    })
+                    .catch((error) => console.error('Error sharing:', error));
+                } else {
+                    alert('Your browser does not support sharing.');
+                }
+            }
+        </script>    
+    @endpush
 @endif

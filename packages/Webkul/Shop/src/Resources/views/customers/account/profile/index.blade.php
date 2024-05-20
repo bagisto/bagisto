@@ -1,7 +1,7 @@
 <x-shop::layouts.account>
     <!-- Page Title -->
     <x-slot:title>
-        @lang('shop::app.customers.account.profile.title')
+        @lang('shop::app.customers.account.profile.index.title')
     </x-slot>
 
     <!-- Breadcrumbs -->
@@ -11,16 +11,16 @@
 
     <div class="flex items-center justify-between">
         <h2 class="text-2xl font-medium">
-            @lang('shop::app.customers.account.profile.title')
+            @lang('shop::app.customers.account.profile.index.title')
         </h2>
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_button.before') !!}
 
         <a
             href="{{ route('shop.customers.account.profile.edit') }}"
-            class="secondary-button border-[#E9E9E9] px-5 py-3 font-normal"
+            class="secondary-button border-zinc-200 px-5 py-3 font-normal"
         >
-            @lang('shop::app.customers.account.profile.edit')
+            @lang('shop::app.customers.account.profile.index.edit')
         </a>
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_button.after') !!}
@@ -30,12 +30,12 @@
     <div class="mt-8 grid grid-cols-1 gap-y-6">
         {!! view_render_event('bagisto.shop.customers.account.profile.first_name.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
-                @lang('shop::app.customers.account.profile.first-name')
+                @lang('shop::app.customers.account.profile.index.first-name')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->first_name }}
             </p>
         </div>
@@ -44,12 +44,12 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.last_name.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
-                @lang('shop::app.customers.account.profile.last-name')
+                @lang('shop::app.customers.account.profile.index.last-name')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->last_name }}
             </p>
         </div>
@@ -58,12 +58,12 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.gender.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
-                @lang('shop::app.customers.account.profile.gender')
+                @lang('shop::app.customers.account.profile.index.gender')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->gender ?? '-'}}
             </p>
         </div>
@@ -72,12 +72,12 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.date_of_birth.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
-                @lang('shop::app.customers.account.profile.dob')
+                @lang('shop::app.customers.account.profile.index.dob')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->date_of_birth ?? '-' }}
             </p>
         </div>
@@ -86,12 +86,12 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.email.before') !!}
 
-        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-[#E9E9E9] px-8 py-3">
+        <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3">
             <p class="text-sm font-medium">
-                @lang('shop::app.customers.account.profile.email')
+                @lang('shop::app.customers.account.profile.index.email')
             </p>
 
-            <p class="text-sm font-medium text-[#6E6E6E]">
+            <p class="text-sm font-medium text-zinc-500">
                 {{ $customer->email }}
             </p>
         </div>
@@ -109,13 +109,13 @@
                     <div
                         class="primary-button rounded-2xl px-11 py-3"
                     >
-                        @lang('shop::app.customers.account.profile.delete-profile')
+                        @lang('shop::app.customers.account.profile.index.delete-profile')
                     </div>
                 </x-slot>
 
                 <x-slot:header>
                     <h2 class="text-2xl font-medium max-sm:text-xl">
-                        @lang('shop::app.customers.account.profile.enter-password')
+                        @lang('shop::app.customers.account.profile.index.enter-password')
                     </h2>
                 </x-slot>
 
@@ -142,7 +142,7 @@
                         type="submit"
                         class="primary-button flex rounded-2xl px-11 py-3 max-sm:px-6 max-sm:text-sm"
                     >
-                        @lang('shop::app.customers.account.profile.delete')
+                        @lang('shop::app.customers.account.profile.index.delete')
                     </button>
                 </x-slot>
             </x-shop::modal>

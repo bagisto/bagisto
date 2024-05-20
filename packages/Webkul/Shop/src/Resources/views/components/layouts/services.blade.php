@@ -30,7 +30,7 @@
                         <p class="font-dmserif text-base font-medium">{{$service['title']}}</p>
 
                         <!-- Service Description -->
-                        <p class="mt-2.5 max-w-[217px] text-sm font-medium text-[#6E6E6E]">
+                        <p class="mt-2.5 max-w-[217px] text-sm font-medium text-zinc-500">
                             {{$service['description']}}
                         </p>
                     </div>

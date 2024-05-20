@@ -8,7 +8,7 @@
         <div class="relative max-sm:max-w-full max-sm:flex-auto">
             <span class="shimmer absolute top-5 block h-6 w-6 rounded-full ltr:right-5 rtl:left-5"></span>
 
-            <label class="block w-[190px] rounded-xl border border-[#E9E9E9] p-5 max-sm:w-full">
+            <label class="block w-[190px] rounded-xl border border-zinc-200 p-5 max-sm:w-full">
                 <div class="shimmer h-[45px] w-[45px]"></div>
 
                 <p class="shimmer mt-1.5 h-[21px] w-full"></p>
@@ -19,7 +19,7 @@
         <div class="relative max-sm:max-w-full max-sm:flex-auto">
             <span class="shimmer absolute top-5 block h-6 w-6 rounded-full ltr:right-5 rtl:left-5"></span>
 
-            <label class="block w-[190px] rounded-xl border border-[#E9E9E9] p-5 max-sm:w-full">
+            <label class="block w-[190px] rounded-xl border border-zinc-200 p-5 max-sm:w-full">
                 <div class="shimmer h-[45px] w-[45px]"></div>
 
                 <p class="shimmer mt-1.5 h-[21px] w-full"></p>
@@ -30,7 +30,7 @@
         <div class="relative max-sm:max-w-full max-sm:flex-auto">
             <span class="shimmer absolute top-5 block h-6 w-6 rounded-full ltr:right-5 rtl:left-5"></span>
 
-            <label class="block w-[190px] rounded-xl border border-[#E9E9E9] p-5 max-sm:w-full">
+            <label class="block w-[190px] rounded-xl border border-zinc-200 p-5 max-sm:w-full">
                 <div class="shimmer h-[45px] w-[45px]"></div>
 
                 <p class="shimmer mt-1.5 h-[21px] w-full"></p>
@@ -41,7 +41,7 @@
         <div class="relative max-sm:max-w-full max-sm:flex-auto">
             <span class="shimmer absolute top-5 block h-6 w-6 rounded-full ltr:right-5 rtl:left-5"></span>
 
-            <label class="block w-[190px] rounded-xl border border-[#E9E9E9] p-5 max-sm:w-full">
+            <label class="block w-[190px] rounded-xl border border-zinc-200 p-5 max-sm:w-full">
                 <div class="shimmer h-[45px] w-[45px]"></div>
 
                 <p class="shimmer mt-1.5 h-[21px] w-full"></p>
