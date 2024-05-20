@@ -317,6 +317,7 @@
                                         @click="scrollToReview"
                                     >
                                         <x-shop::products.ratings
+                                            class="transition-all hover:border-gray-400"
                                             :average="$avgRatings"
                                             :total="$totalRatings"
                                         />
