@@ -54,6 +54,14 @@ class MenuItem
     }
 
     /**
+     * Get the key of the menu item.
+     */
+    public function getKey(): string
+    {
+        return $this->key;
+    }
+
+    /**
      * Check weather menu item have children or not.
      */
     public function haveChildren(): bool
@@ -67,7 +75,7 @@ class MenuItem
     public function getChildren(): Collection
     {
         if (! $this->haveChildren()) {
-            return collect([]);
+            return collect();
         }
 
         return $this->children;

@@ -14,6 +14,16 @@ class Menu
     protected array $items = [];
 
     /**
+     * Config menu.
+     */
+    protected array $configMenu = [];
+
+    /**
+     * Is admin menu.
+     */
+    protected bool $isForAdmin = false;
+
+    /**
      * Contains current item route.
      */
     private string $current;
@@ -55,17 +65,40 @@ class Menu
     }
 
     /**
+     * Get admin config.
+     */
+    public function forAdmin(): self
+    {
+        $this->isForAdmin = true;
+
+        $this->configMenu = collect(config('menu.admin'))
+            ->filter(fn ($item) => bouncer()->hasPermission($item['key']))->toArray();
+
+        return $this;
+    }
+
+    /**
+     * Get shop config.
+     */
+    public function forShop(): self
+    {
+        $isShowWishlist = ! (bool) core()->getConfigData('general.content.shop.wishlist_option');
+
+        $this->configMenu = collect(config('menu.customer'))
+            ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $isShowWishlist)
+            ->toArray();
+
+        return $this;
+    }
+
+    /**
      * Prepare menu items.
      */
     private function prepareMenuItems(): void
     {
         $menuWithDotNotation = [];
 
-        foreach (config('menu.admin') as $item) {
-            if (! bouncer()->hasPermission($item['key'])) {
-                continue;
-            }
-
+        foreach ($this->configMenu as $item) {
             if (strpos($this->current, route($item['route'])) !== false) {
                 $this->currentKey = $item['key'];
             }
@@ -146,13 +179,17 @@ class Menu
     /**
      * Remove unauthorized menu item.
      */
-    private function removeUnauthorizedMenuItem(): Collection
+    private function removeUnauthorizedMenuItem(): array
     {
+        if (! $this->isForAdmin) {
+            return $this->items;
+        }
+
         return collect($this->items)->map(function ($item) {
             $this->removeChildrenUnauthorizedMenuItem($item);
 
             return $item;
-        });
+        })->toArray();
     }
 
     /**
