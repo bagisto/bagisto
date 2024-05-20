@@ -97,8 +97,12 @@
                             alt="{{ $product->name }}"
                             @click="isImageZooming = !isImageZooming"
                             @loadeddata="onMediaLoad()"
-                            :src="baseFile.path"
+                            :key="baseFile.path"
                         >
+                            <source
+                                :src="baseFile.path"
+                                type="video/mp4"
+                            />
                         </video>
                     </div>
                 </div>
