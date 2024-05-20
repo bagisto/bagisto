@@ -16,7 +16,7 @@
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
-                <h2 class="font-dmserif text-3xl max-sm:text-2xl">
+                <h2 class="font-dmserif text-3xl max-sm:text-xl">
                     @{{ title }}
                 </h2>
 
@@ -26,10 +26,10 @@
                         :href="navigationLink"
                         v-if="navigationLink"
                     >
-                        <p class="hidden items-center text-sm max-sm:block">
+                        <p class="hidden items-center text-sm max-sm:flex">
                             @lang('shop::app.components.products.carousel.view-all')
 
-                            <span class="icon-arrow-right"></span>
+                            <span class="icon-arrow-right text-sm"></span>
                         </p>
                     </a>
 
