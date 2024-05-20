@@ -43,7 +43,7 @@
         {!! view_render_event('bagisto.shop.customers.reset_password.logo.after') !!}
 
         <!-- Form Container -->
-        <div class="m-auto w-full max-w-[870px] rounded-xl border border-[#E9E9E9] p-16 px-[90px] max-md:px-8 max-md:py-8">
+        <div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8">
             <h1 class="font-dmserif text-4xl max-sm:text-2xl">
                 @lang('shop::app.customers.reset-password.title')
             </h1>
@@ -147,7 +147,7 @@
 
         </div>
 
-        <p class="mb-4 mt-8 text-center text-xs text-[#6E6E6E]">
+        <p class="mb-4 mt-8 text-center text-xs text-zinc-500">
             @lang('shop::app.customers.reset-password.footer', ['current_year'=> date('Y') ])
         </p>
     </div>

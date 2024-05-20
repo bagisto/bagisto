@@ -28,6 +28,10 @@ class Medium implements FilterInterface
                 : 360;
 
             return $image->fit($width, $height);
+        } elseif (Str::contains(url()->current(), '/category')) {
+            return $image->fit(110, 110);
+        } elseif (Str::contains(url()->current(), '/attribute_option')) {
+            return $image->fit(210, 210);
         }
 
         /**

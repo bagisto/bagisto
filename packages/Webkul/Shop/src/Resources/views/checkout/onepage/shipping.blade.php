@@ -60,7 +60,7 @@
                                     </label>
 
                                     <label 
-                                        class="block cursor-pointer rounded-xl border border-[#E9E9E9] p-5"
+                                        class="block cursor-pointer rounded-xl border border-zinc-200 p-5"
                                         :for="rate.method"
                                     >
                                         <span class="icon-flate-rate text-6xl text-navyBlue"></span>

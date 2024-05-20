@@ -4,7 +4,7 @@
 <div class="grid grid-cols-1 gap-6">
     <div class="relative grid max-w-max grid-cols-2 gap-4 max-sm:grid-cols-1">
         <div class="shimmer relative min-h-[258px] min-w-[250px] overflow-hidden rounded"> 
-            <img class="rounded-sm bg-[#F5F5F5]">
+            <img class="rounded-sm bg-zinc-100">
         </div>
 
         <div class="grid content-start gap-4">
