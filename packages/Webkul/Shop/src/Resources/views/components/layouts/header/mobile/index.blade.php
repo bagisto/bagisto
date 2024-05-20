@@ -16,7 +16,7 @@
             
             <x-shop::drawer
                 position="left"
-                width="80%"
+                width="100%"
             >
                 <x-slot:toggle>
                     <span class="icon-hamburger cursor-pointer text-2xl"></span>
@@ -180,7 +180,7 @@
                 <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100">
                     <a
                         :href="category.url"
-                        class="mt-5 flex items-center justify-between pb-5"
+                        class="mt-5 flex items-center justify-between"
                     >
                         @{{ category.name }}
                     </a>
@@ -255,72 +255,82 @@
         </div>
 
         <!-- Localization & Currency Section -->
-        <div class="absolute bottom-0 left-0 flex w-full items-center justify-between gap-x-5 border-t bg-white p-3">
-            <x-shop::dropdown position="top-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}">
-                <!-- Dropdown Toggler -->
-                <x-slot:toggle>
-                    <div
-                        class="flex w-full cursor-pointer items-center justify-between gap-2.5"
-                        role="button"
-                        @click="currencyToggler = ! currencyToggler"
-                    >
-                        <span>
+        <div class="w-full border-t bg-white">
+            <div class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0">
+                <!-- Filter Drawer -->
+                <x-shop::drawer
+                    position="bottom"
+                    width="100%"
+                >
+                    <!-- Drawer Toggler -->
+                    <x-slot:toggle>
+                        <div
+                            class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-sm:py-3"
+                            role="button"
+                        >
                             {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
-                        </span>
+                        </div>
+                    </x-slot>
 
-                        <span
-                            class="text-2xl"
-                            :class="{'icon-arrow-up': currencyToggler, 'icon-arrow-down': ! currencyToggler}"
-                            role="presentation"
-                        ></span>
-                    </div>
-                </x-slot>
+                    <!-- Drawer Header -->
+                    <x-slot:header>
+                        <div class="flex items-center justify-between">
+                            <p class="text-lg font-semibold">
+                                @lang('Currencies')
+                            </p>
+                        </div>
+                    </x-slot>
 
-                <!-- Dropdown Content -->
-                <x-slot:content class="max-h-96 overflow-y-auto !p-0">
-                    <v-currency-switcher></v-currency-switcher>
-                </x-slot>
-            </x-shop::dropdown>
+                    <!-- Drawer Content -->
+                    <x-slot:content>
+                        <v-currency-switcher></v-currency-switcher>
+                    </x-slot>
+                </x-shop::drawer>
 
-            <!-- Seperator -->
-            <span class="h-5 w-0.5 bg-[#E9E9E9]"></span>
+                <!-- Seperator -->
+                <span class="h-5 w-0.5 bg-zinc-200"></span>
 
-            <x-shop::dropdown position="top-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
-                <x-slot:toggle>
-                    <!-- Dropdown Toggler -->
-                    <div
-                        class="flex w-full cursor-pointer items-center justify-between gap-2.5"
-                        role="button"
-                        @click="localeToggler = ! localeToggler"
-                    >
-                        <img
-                            src="{{ ! empty(core()->getCurrentLocale()->logo_url)
-                                    ? core()->getCurrentLocale()->logo_url
-                                    : bagisto_asset('images/default-language.svg')
-                                }}"
-                            class="h-full"
-                            alt="Default locale"
-                            width="24"
-                            height="16"
-                        />
+                <!-- Sort Drawer -->
+                <x-shop::drawer
+                    position="bottom"
+                    width="100%"
+                >
+                    <!-- Drawer Toggler -->
+                    <x-slot:toggle>
+                        <div
+                            class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-sm:py-3"
+                            role="button"
+                        >
+                            <img
+                                src="{{ ! empty(core()->getCurrentLocale()->logo_url)
+                                        ? core()->getCurrentLocale()->logo_url
+                                        : bagisto_asset('images/default-language.svg')
+                                    }}"
+                                class="h-full"
+                                alt="Default locale"
+                                width="24"
+                                height="16"
+                            />
 
-                        <span>
                             {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
-                        </span>
+                        </div>
+                    </x-slot>
 
-                        <span
-                            class="text-2xl"
-                            :class="{'icon-arrow-up': localeToggler, 'icon-arrow-down': ! localeToggler}"
-                            role="presentation"
-                        ></span>
-                    </div>
-                </x-slot>
+                    <!-- Drawer Header -->
+                    <x-slot:header>
+                        <div class="flex items-center justify-between">
+                            <p class="text-lg font-semibold">
+                                @lang('Locales')
+                            </p>
+                        </div>
+                    </x-slot>
 
-                <!-- Dropdown Content -->
-                <x-slot:content class="max-h-96 overflow-y-auto !p-0">
-                    <v-locale-switcher></v-locale-switcher>
-                </x-slot>
-            </x-shop::dropdown>
+                    <!-- Drawer Content -->
+                    <x-slot:content>
+                        <v-locale-switcher></v-locale-switcher>
+                    </x-slot>
+                </x-shop::drawer>
+            </div>
         </div>
     </script>
 
@@ -331,10 +341,6 @@
             data() {
                 return  {
                     categories: [],
-
-                    currencyToggler: '',
-
-                    localeToggler: '',
                 }
             },
 

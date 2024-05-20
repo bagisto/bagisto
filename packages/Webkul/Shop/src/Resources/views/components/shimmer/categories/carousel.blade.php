@@ -4,12 +4,12 @@
     <div class="relative">
         <div class="scrollbar-hide flex gap-10 overflow-auto max-sm:gap-4">
             @for ($i = 0;  $i < $count; $i++)
-                <div class="grid min-w-[120px] grid-cols-1 justify-items-center gap-4 max-sm:min-w-[80px] max-sm:gap-1.5">
-                    <div class="shimmer relative h-[110px] w-[110px] overflow-hidden rounded-full max-sm:h-[80px] max-sm:w-[80px]">
+                <div class="grid min-w-[120px] grid-cols-1 justify-items-center gap-4 max-sm:min-w-[60px] max-sm:max-w-[60px] max-sm:gap-1.5 max-sm:first:ml-4">
+                    <div class="shimmer relative h-[110px] w-[110px] overflow-hidden rounded-full max-sm:h-[60px] max-sm:w-[60px]">
                         <img class="rounded-sm bg-zinc-100">
                     </div>
 
-                    <p class="shimmer h-[27px] w-[90px] rounded-2xl"></p>
+                    <p class="shimmer h-[27px] w-[90px] rounded-2xl max-sm:h-[20px] max-sm:w-[70px]"></p>
                 </div>
             @endfor
         </div>

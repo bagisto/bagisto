@@ -71,14 +71,14 @@
         {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
 
         <!-- Order view tabs -->
-        <div class="mt-5">
+        <div class="mt-5 max-sm:mt-0">
             <x-shop::tabs>
                 <x-shop::tabs.item
-                    class="!px-0"
+                    class="!px-0 py-2"
                     :title="trans('shop::app.customers.account.orders.view.information.info')"
                     :is-selected="true"
                 >
-                    <div class="text-base font-medium">
+                    <div class="text-base font-medium max-sm:hidden">
                         <label>
                             @lang('shop::app.customers.account.orders.view.information.placed-on')
                         </label>
@@ -88,7 +88,98 @@
                         </span>
                     </div>
 
-                    <div class="relative mt-8 overflow-x-auto rounded-xl border">
+                    <!-- For Mobile View -->
+                    <div class="grid gap-8 sm:hidden">
+                        <div class="grid gap-1.5 rounded-lg border px-4 py-2.5 font-medium">
+                            <div class="flex justify-between">
+                                <p class="text-[#757575]">Order Id:</p>
+
+                                <p>#{{ $order->increment_id }}</p>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <p class="text-[#757575]">@lang('shop::app.customers.account.orders.view.information.placed-on'):</p>
+
+                                <p>{{ core()->formatDate($order->created_at, 'd M Y') }}</p>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <p class="text-[#757575]">Status</p>
+
+                                @switch($order->status)
+                                    @case('completed')
+                                        <p class="label-completed">{{ ucfirst($order->status) }}</p>
+                                        @break
+
+                                    @case('pending')
+                                        <p class="label-pending">{{ ucfirst($order->status) }}</p>
+                                        @break
+
+                                    @case('closed')
+                                        <p class="label-closed">{{ ucfirst($order->status) }}</p>
+                                        @break
+
+                                    @case('processing')
+                                        <p class="label-processing">{{ ucfirst($order->status) }}</p>
+                                        @break
+
+                                    @case('canceled')
+                                        <p class="label-canceled">{{ ucfirst($order->status) }}</p>
+                                        @break
+
+                                    @default
+                                        <p class="label-info">{{ ucfirst($order->status) }}</p>
+                                @endswitch
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <p class="mb-2.5 text-base font-medium">Item Ordered</p>
+
+                            <div class="grid gap-3">
+                                @foreach ($order->items as $item)
+                                    <x-shop::accordion :is-active="false">
+                                        <x-slot:header class="bg-gray-100 max-sm:mb-2">
+                                            <p class="text-base font-medium 1180:hidden">
+                                                {{ $item->name }}
+                                            </p>
+                                        </x-slot>
+                            
+                                        <x-slot:content class="max-sm:px-0">
+                                            <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm max-sm:mb-0 max-sm:px-5 max-sm:text-sm max-sm:font-normal">
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.information.sku'): {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
+                                                </p>
+
+                                                <p>
+                                                    @lang('shop::app.customers.account.orders.view.information.price'):
+                                                    
+                                                    @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
+                                                        {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                                    @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
+                                                        {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+    
+                                                        <span class="whitespace-nowrap text-xs font-normal">
+                                                            @lang('shop::app.customers.account.orders.view.information.excl-tax')
+                                                            
+                                                            <span class="font-medium">
+                                                                {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                            </span>
+                                                        </span>
+                                                    @else
+                                                        {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                                    @endif
+                                                </p>
+                                            </div>
+                                        </x-slot>
+                                    </x-shop::accordion>
+                                @endforeach
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="relative mt-8 overflow-x-auto rounded-xl border max-sm:hidden">
                         <table class="w-full text-left text-sm">
                             <thead class="border-b border-zinc-200 bg-zinc-100 text-sm text-black">
                                 <tr>
@@ -236,8 +327,8 @@
                         </table>
                     </div>
 
-                    <div class="mt-8 flex items-start gap-10 max-lg:gap-5 max-md:grid">
-                        <div class="flex-auto max-md:mt-8">
+                    <div class="mt-8 flex items-start gap-10 max-lg:gap-5 max-md:grid max-sm:mt-4">
+                        <div class="flex-auto">
                             <div class="flex justify-end">
                                 <div class="grid max-w-max gap-2 text-sm">
                                     @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
@@ -1016,15 +1107,15 @@
                 @endif
             </x-shop::tabs>
 
-            <div class="mt-11 flex flex-wrap justify-between gap-x-11 gap-y-8 border-t border-zinc-200 pt-7">
+            <div class="mt-11 flex flex-wrap justify-between gap-x-11 gap-y-8 border-t border-zinc-200 pt-7 max-sm:mt-3 max-sm:gap-y-4">
                 <!-- Biiling Address -->
                 @if ($order->billing_address)
-                    <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                        <p class="text-base text-zinc-500">
+                    <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full max-sm:gap-2">
+                        <p class="text-base text-zinc-500 max-sm:text-lg max-sm:text-black">
                             @lang('shop::app.customers.account.orders.view.billing-address')
                         </p>
 
-                        <div class="grid gap-2.5">
+                        <div class="grid gap-2.5 max-sm:gap-0">
                             <p class="text-sm">
                                 @include ('shop::customers.account.orders.view.address', ['address' => $order->billing_address])
                             </p>
@@ -1039,12 +1130,12 @@
 
                 <!-- Shipping Address -->
                 @if ($order->shipping_address)
-                    <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                        <p class="text-base text-zinc-500">
+                    <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full max-sm:gap-2">
+                        <p class="text-base text-zinc-500 max-sm:text-lg max-sm:text-black">
                             @lang('shop::app.customers.account.orders.view.shipping-address')
                         </p>
 
-                        <div class="grid gap-2.5">
+                        <div class="grid gap-2.5 max-sm:gap-0">
                             <p class="text-sm">
                                 @include ('shop::customers.account.orders.view.address', ['address' => $order->shipping_address])
                             </p>
@@ -1053,11 +1144,11 @@
                         {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address_details.after', ['order' => $order]) !!}
                     </div>
                     
-                {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address.after', ['order' => $order]) !!}
+                    {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address.after', ['order' => $order]) !!}
 
                     <!-- Shipping Method -->
-                    <div class="grid max-w-[200px] place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                        <p class="text-base text-zinc-500">
+                    <div class="grid max-w-[200px] place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full max-sm:gap-2">
+                        <p class="text-base text-zinc-500 max-sm:text-lg max-sm:text-black">
                             @lang('shop::app.customers.account.orders.view.shipping-method')
                         </p>
 
@@ -1072,9 +1163,9 @@
 
                 @endif
 
-                <!-- Billing Method -->
-                <div class="grid max-w-[200px] place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-base text-zinc-500">
+                <!-- Payment Method -->
+                <div class="grid max-w-[200px] place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full max-sm:gap-2">
+                    <p class="text-base text-zinc-500 max-sm:text-lg max-sm:text-black">
                         @lang('shop::app.customers.account.orders.view.payment-method')
                     </p>
 

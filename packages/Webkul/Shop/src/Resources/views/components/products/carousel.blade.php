@@ -12,7 +12,7 @@
         id="v-products-carousel-template"
     >
         <div
-            class="container mt-20 max-lg:px-8 max-sm:mt-10 max-sm:!px-4"
+            class="container mt-20 max-lg:px-8 max-sm:mt-7 max-sm:!px-4"
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
