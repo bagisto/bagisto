@@ -1,18 +1,4 @@
-<!--
-    - This code needs to be refactored to reduce the amount of PHP in the Blade
-    template as much as possible.
-
-    - Need to check the view composer capability for the component.
--->
 @php
-    $menu = \Webkul\Core\Tree::create();
-
-    foreach (config('menu.customer') as $item) {
-        $menu->add($item, 'menu');
-    }
-
-    $menu->items = core()->sortItems($menu->items);
-
     $customer = auth()->guard('customer')->user();
 @endphp
 
@@ -35,7 +21,7 @@
     </div>
 
     <!-- Account Navigation Menus -->
-    @foreach (menu()->forShop()->getItems() as $menuItem)
+    @foreach (menu()->getItems() as $menuItem)
         <div class="max-md:rounded-md max-md:border max-md:border-b max-md:border-l-[1px] max-md:border-r max-md:border-t-0 max-md:border-zinc-200">
             <v-account-navigation>
                 <!-- Account Navigation Toggler -->
@@ -48,21 +34,23 @@
                 </div>
 
                 <!-- Account Navigation Content -->
-                <div class="accordian-content grid rounded-md border border-b border-l-[1px] border-r border-t-0 border-zinc-200 max-md:hidden max-md:border-none">
-                    @foreach ($menuItem->getChildren() as $subMenuItem)
-                        <a href="{{ $subMenuItem->getUrl() }}">
-                            <div class="flex justify-between px-6 py-5 border-t {{ $subMenuItem->isActive() ? 'bg-zinc-100' : '' }} border-zinc-200 hover:bg-zinc-100 cursor-pointer">
-                                <p class="flex items-center gap-x-4 text-lg font-medium">
-                                    <span class="{{ $subMenuItem->getIcon() }}  text-2xl"></span>
+                @if ($menuItem->haveChildren())
+                    <div class="accordian-content grid rounded-md border border-b border-l-[1px] border-r border-t-0 border-zinc-200 max-md:hidden max-md:border-none">
+                        @foreach ($menuItem->getChildren() as $subMenuItem)
+                            <a href="{{ $subMenuItem->getUrl() }}">
+                                <div class="flex justify-between px-6 py-5 border-t {{ $subMenuItem->isActive() ? 'bg-zinc-100' : '' }} border-zinc-200 hover:bg-zinc-100 cursor-pointer">
+                                    <p class="flex items-center gap-x-4 text-lg font-medium">
+                                        <span class="{{ $subMenuItem->getIcon() }}  text-2xl"></span>
 
-                                    {{ $subMenuItem->getName() }}
-                                </p>
-                   
-                                <span class="icon-arrow-right rtl:icon-arrow-left text-2xl max-md:hidden"></span>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
+                                        {{ $subMenuItem->getName() }}
+                                    </p>
+                    
+                                    <span class="icon-arrow-right rtl:icon-arrow-left text-2xl max-md:hidden"></span>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
             </v-account-navigation>
         </div>
     @endforeach

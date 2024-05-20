@@ -5,6 +5,7 @@ namespace Webkul\Core;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Webkul\Core\Menu\MenuItem;
+use Illuminate\Support\Str;
 
 class Menu
 {
@@ -12,11 +13,6 @@ class Menu
      * Menu items.
      */
     protected array $items = [];
-
-    /**
-     * Config menu.
-     */
-    protected array $configMenu = [];
 
     /**
      * Is admin menu.
@@ -41,6 +37,8 @@ class Menu
     public function __construct()
     {
         $this->current = request()->url();
+
+        $this->isForAdmin = Str::contains(request()->url(), 'admin');
     }
 
     /**
@@ -60,6 +58,10 @@ class Menu
             $this->prepareMenuItems();
         }
 
+        if (! $this->isForAdmin) {
+            return collect($this->items);
+        }
+
         return collect($this->removeUnauthorizedMenuItem())
             ->sortBy('sort');
     }
@@ -67,28 +69,23 @@ class Menu
     /**
      * Get admin config.
      */
-    public function forAdmin(): self
+    public function forAdmin(): array
     {
-        $this->isForAdmin = true;
-
-        $this->configMenu = collect(config('menu.admin'))
-            ->filter(fn ($item) => bouncer()->hasPermission($item['key']))->toArray();
-
-        return $this;
+        return collect(config('menu.admin'))
+            ->filter(fn ($item) => bouncer()->hasPermission($item['key']))
+            ->toArray();
     }
 
     /**
      * Get shop config.
      */
-    public function forShop(): self
+    public function forShop(): array
     {
-        $isShowWishlist = ! (bool) core()->getConfigData('general.content.shop.wishlist_option');
+        $canShowWishlist = ! (bool) core()->getConfigData('general.content.shop.wishlist_option');
 
-        $this->configMenu = collect(config('menu.customer'))
-            ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $isShowWishlist)
+        return collect(config('menu.customer'))
+            ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)
             ->toArray();
-
-        return $this;
     }
 
     /**
@@ -98,7 +95,12 @@ class Menu
     {
         $menuWithDotNotation = [];
 
-        foreach ($this->configMenu as $item) {
+        foreach (
+            $this->isForAdmin
+            ? $this->forAdmin()
+            : $this->forShop()
+            as $item
+        ) {
             if (strpos($this->current, route($item['route'])) !== false) {
                 $this->currentKey = $item['key'];
             }
@@ -181,10 +183,6 @@ class Menu
      */
     private function removeUnauthorizedMenuItem(): array
     {
-        if (! $this->isForAdmin) {
-            return $this->items;
-        }
-
         return collect($this->items)->map(function ($item) {
             $this->removeChildrenUnauthorizedMenuItem($item);
 
