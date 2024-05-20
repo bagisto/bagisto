@@ -3422,17 +3422,6 @@ return [
                 'info'  => 'Catalog',
                 'title' => 'Catalog',
 
-                'inventory' => [
-                    'info'  => 'Set back orders',
-                    'title' => 'Inventory',
-
-                    'stock-options' => [
-                        'allow-back-orders' => 'Allow Back orders',
-                        'title'             => 'Stock Options',
-                        'title-info'        => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
-                    ],
-                ],
-
                 'products' => [
                     'info'  => 'Set guest checkout, product view page, cart view page, store front, review and attribute social share.',
                     'title' => 'Products',
@@ -3746,7 +3735,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Set order numbers and minimum orders.',
+                    'info'  => 'Set order numbers, minimum orders and back orders.',
                     'title' => 'Order Settings',
 
                     'order-number' => [
@@ -3762,6 +3751,12 @@ return [
                         'minimum-order-amount' => 'Minimum Order Amount',
                         'title'                => 'Minimum Order Settings',
                         'title-info'           => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
+                    ],
+
+                    'stock-options' => [
+                        'allow-back-orders' => 'Allow Back orders',
+                        'title'             => 'Stock Options',
+                        'title-info'        => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
                     ],
                 ],
 

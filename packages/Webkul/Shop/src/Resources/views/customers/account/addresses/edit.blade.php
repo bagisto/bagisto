@@ -292,7 +292,7 @@
                     <x-shop::form.control-group.control
                         type="text"
                         name="phone"
-                        rules="required|integer"
+                        rules="required|phone"
                         :value="old('phone') ?? $address->phone"
                         :label="trans('shop::app.customers.account.addresses.edit.phone')"
                         :placeholder="trans('shop::app.customers.account.addresses.edit.phone')"

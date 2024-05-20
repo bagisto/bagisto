@@ -17,7 +17,7 @@
         type="text/x-template"
         id="v-product-ratings-template"
     >
-        <span class="text-sm font-semibold">
+        <span class="text-sm font-semibold text-black">
             @{{ average }}
         </span>
     

@@ -105,6 +105,7 @@
                                             >
                                                 <span :ref="'imageName_' + index">
                                                     @{{ image.image }}
+                                                </span>
                                             </a>
                                         </span>
                                     </p>

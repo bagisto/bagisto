@@ -23,7 +23,7 @@
                     :aria-label="product.name + ' '"
                 >
                     <x-shop::media.images.lazy
-                        class="after:content-[' '] relative bg-[#F5F5F5] transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
+                        class="after:content-[' '] relative bg-zinc-100 transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
                         ::src="product.base_image.medium_image_url"
                         ::key="product.id"
                         ::index="product.id"
@@ -153,7 +153,7 @@
 
                 <a :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`">
                     <x-shop::media.images.lazy
-                        class="after:content-[' '] relative min-w-[250px] bg-[#F5F5F5] transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
+                        class="after:content-[' '] relative min-w-[250px] bg-zinc-100 transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
                         ::src="product.base_image.medium_image_url"
                         ::key="product.id"
                         ::index="product.id"
@@ -249,9 +249,9 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
 
-                <p class="text-sm text-[#6E6E6E]">
+                <p class="text-sm text-zinc-500">
                     <template  v-if="! product.ratings.total">
-                        <p class="text-sm text-[#6E6E6E]">
+                        <p class="text-sm text-zinc-500">
                             @lang('shop::app.components.products.card.review-description')
                         </p>
                     </template>
@@ -370,7 +370,6 @@
                 },
 
                 addToCart() {
-
                     this.isAddingToCart = true;
 
                     this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', {
@@ -378,10 +377,6 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            if (response.data.data.redirect_uri) {
-                                window.location.href = response.data.data.redirect_uri;
-                            }
-
                             if (response.data.message) {
                                 this.$emitter.emit('update-mini-cart', response.data.data );
 
@@ -393,9 +388,13 @@
                             this.isAddingToCart = false;
                         })
                         .catch(error => {
-                            this.isAddingToCart = false;
-
                             this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+
+                            if (error.response.data.redirect_uri) {
+                                window.location.href = error.response.data.redirect_uri;
+                            }
+                            
+                            this.isAddingToCart = false;
                         });
                 },
             },

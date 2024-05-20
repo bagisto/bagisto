@@ -7,12 +7,12 @@
 
     <div class="container mt-8 max-1180:px-5">
         <!-- Form Container -->
-		<div class="m-auto w-full max-w-[870px] rounded-xl border border-[#E9E9E9] p-16 px-[90px] max-md:px-8 max-md:py-8">
+		<div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8">
 			<h1 class="font-dmserif text-4xl max-sm:text-2xl">
                 @lang('shop::app.home.contact.title')
             </h1>
 
-			<p class="mt-4 text-xl text-[#6E6E6E] max-sm:text-base">
+			<p class="mt-4 text-xl text-zinc-500 max-sm:text-base">
                 @lang('shop::app.home.contact.about')
             </p>
 
@@ -71,6 +71,7 @@
                             type="text"
                             class="px-6 py-5"
                             name="contact"
+                            rules="phone"
                             :value="old('contact')"
                             :label="trans('shop::app.home.contact.phone-number')"
                             :placeholder="trans('shop::app.home.contact.phone-number')"

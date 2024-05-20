@@ -69,7 +69,7 @@
                     class="max-h-[610px] max-w-[560px]"
                     v-show="isMediaLoading"
                 >
-                    <div class="shimmer min-h-[607px] min-w-[560px] rounded-xl bg-[#E9E9E9]"></div>
+                    <div class="shimmer min-h-[607px] min-w-[560px] rounded-xl bg-zinc-200"></div>
                 </div>
 
                 <div
@@ -111,14 +111,15 @@
             <div class="scrollbar-hide flex w-screen gap-8 overflow-auto 1180:hidden">
                 <x-shop::media.images.lazy
                     ::src="image.large_image_url"
-                    class="w-[490px] min-w-[450px] max-sm:min-w-full"
+                    class="h-[404px] w-[490px] max-sm:min-w-full"
                     v-for="(image, index) in media.images"
+                    alt="{{ $product->name }}"
                     @click="isImageZooming = !isImageZooming"
                 />
             </div>
             
             <!-- Gallery Images Zoomer -->
-            <x-shop::modal.image-zoomer 
+            <x-shop::image-zoomer 
                 ::attachments="attachments" 
                 ::is-image-zooming="isImageZooming" 
                 ::initial-index="`media_${activeIndex}`"

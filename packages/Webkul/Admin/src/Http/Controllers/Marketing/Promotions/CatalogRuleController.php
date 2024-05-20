@@ -28,7 +28,7 @@ class CatalogRuleController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(CatalogRuleDataGrid::class)->toJson();
+            return datagrid(CatalogRuleDataGrid::class)->process();
         }
 
         return view('admin::marketing.promotions.catalog-rules.index');

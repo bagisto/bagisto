@@ -64,23 +64,27 @@
     </div>
 
     <!-- Product Information Vue Component -->
-    <v-product :product-id="{{ $product->id }}">
+    <v-product>
         <x-shop::shimmer.products.view />
     </v-product>
 
     <!-- Information Section -->
     <div class="1180:mt-20">
-        <x-shop::tabs position="center">
+        <x-shop::tabs
+            position="center"
+            ref="productTabs"
+        >
             <!-- Description Tab -->
             {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
             <x-shop::tabs.item
+                id="descritpion-tab"
                 class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.view.description')"
                 :is-selected="true"
             >
                 <div class="container mt-[60px] max-1180:px-5">
-                    <p class="text-lg text-[#6E6E6E] max-1180:text-sm">
+                    <p class="text-lg text-zinc-500 max-1180:text-sm">
                         {!! $product->description !!}
                     </p>
                 </div>
@@ -91,6 +95,7 @@
             <!-- Additional Information Tab -->
             @if(count($attributeData))
                 <x-shop::tabs.item
+                    id="information-tab"
                     class="container mt-[60px] !p-0 max-1180:hidden"
                     :title="trans('shop::app.products.view.additional-information')"
                     :is-selected="false"
@@ -124,7 +129,7 @@
                                         </a>
                                     @else
                                         <div class="grid">
-                                            <p class="text-base text-[#7D7D7D]">
+                                            <p class="text-base text-zinc-500">
                                                 {!! $customAttributeValue['value'] !!}
                                             </p>
                                         </div>
@@ -138,6 +143,7 @@
 
             <!-- Reviews Tab -->
             <x-shop::tabs.item
+                id="review-tab"
                 class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.view.review')"
                 :is-selected="false"
@@ -158,7 +164,7 @@
             </x-slot>
 
             <x-slot:content>
-                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm">
+                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -175,7 +181,7 @@
 
                 <x-slot:content>
                     <div class="container mb-4 max-1180:px-5">
-                        <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-lg text-[#6E6E6E] max-1180:text-sm">
+                        <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-lg text-zinc-500 max-1180:text-sm">
                             @foreach ($customAttributeValues as $customAttributeValue)
                                 @if (! empty($customAttributeValue['value']))
                                     <div class="grid">
@@ -204,7 +210,7 @@
                                         </a>
                                     @else
                                         <div class="grid">
-                                            <p class="text-base text-[#6E6E6E]">
+                                            <p class="text-base text-zinc-500">
                                                 {{ $customAttributeValue['value'] ?? '-' }}
                                             </p>
                                         </div>
@@ -219,7 +225,7 @@
 
         <!-- Reviews Accordion -->
         <x-shop::accordion class="bg-gray-100" :is-active="false">
-            <x-slot:header>
+            <x-slot:header id="review-accordian-button">
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.review')
                 </p>
@@ -270,12 +276,6 @@
                         v-model="is_buy_now"
                     >
 
-                    <input
-                        type="hidden"
-                        name="quantity"
-                        :value="qty"
-                    >
-
                     <div class="container px-[60px] max-1180:px-0">
                         <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
                             <!-- Gallery Blade Inclusion -->
@@ -309,7 +309,13 @@
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
                                 @if ($totalRatings = $reviewHelper->getTotalRating($product))
-                                    <div class="mt-4">
+                                    <!-- Scroll To Reviews Section and Activate Reviews Tab -->
+                                    <div
+                                        class="mt-4 w-max cursor-pointer"
+                                        role="button"
+                                        tabindex="0"
+                                        @click="scrollToReview"
+                                    >
                                         <x-shop::products.ratings
                                             :average="$avgRatings"
                                             :total="$totalRatings"
@@ -322,20 +328,20 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-5 grid items-center text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
+                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
-
-                                    <span class="text-sm font-normal text-[#6E6E6E]">
-                                        @if (\Webkul\Tax\Facades\Tax::isInclusiveTaxProductPrices())
-                                            @lang('shop::app.products.view.tax-inclusive')
-                                        @endif
-                                    </span>
                                 </p>
+
+                                @if (\Webkul\Tax\Facades\Tax::isInclusiveTaxProductPrices())
+                                    <span class="text-sm font-normal text-zinc-500">
+                                        @lang('shop::app.products.view.tax-inclusive')
+                                    </span>
+                                @endif
 
                                 @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
                                     <div class="mt-2.5 grid gap-1.5">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
-                                            <p class="text-[#6E6E6E] [&>*]:text-black">
+                                            <p class="text-zinc-500 [&>*]:text-black">
                                                 {!! $offer !!}
                                             </p>
                                         @endforeach
@@ -346,7 +352,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-6 text-lg text-[#6E6E6E] max-sm:mt-4 max-sm:text-sm">
+                                <p class="mt-6 text-lg text-zinc-500 max-sm:mt-4 max-sm:text-sm">
                                     {!! $product->short_description !!}
                                 </p>
 
@@ -445,8 +451,6 @@
         <script type="module">
             app.component('v-product', {
                 template: '#v-product-template',
-
-                props: ['productId'],
 
                 data() {
                     return {
@@ -578,6 +582,28 @@
 
                         return value;
                     },
+
+                    scrollToReview() {
+                        let accordianElement = document.querySelector('#review-accordian-button');
+
+                        if (accordianElement) {
+                            accordianElement.click();
+
+                            accordianElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                        
+                        let tabElement = document.querySelector('#review-tab-button');
+
+                        if (tabElement) {
+                            tabElement.click();
+
+                            tabElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
                 },
             });
         </script>
