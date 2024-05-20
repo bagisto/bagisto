@@ -3957,10 +3957,13 @@ return [
                     'back-btn'          => 'Zurück',
                     'create-new-filter' => 'Neuen Filter erstellen',
                     'custom-filters'    => 'Benutzerdefinierte Filter',
+                    'empty-description' => 'Es sind keine ausgewählten Filter zum Speichern verfügbar. Bitte wählen Sie Filter zum Speichern aus.',
+                    'empty-title'       => 'Filter zum Speichern hinzufügen',
                     'name'              => 'Name',
                     'quick-filters'     => 'Schnellfilter',
                     'save-btn'          => 'Speichern',
                     'save-filter'       => 'Filter speichern',
+                    'selected-filters'  => 'Ausgewählte Filter',
                     'title'             => 'Filter',
                 ],
 

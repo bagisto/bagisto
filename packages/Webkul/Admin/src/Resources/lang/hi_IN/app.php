@@ -3955,13 +3955,16 @@ return [
 
                 'filter' => [
                     'back-btn'          => 'वापस',
-                    'create-new-filter' => 'नया फिल्टर बनाएं',
-                    'custom-filters'    => 'कस्टम फिल्टर',
+                    'create-new-filter' => 'नया फ़िल्टर बनाएँ',
+                    'custom-filters'    => 'कस्टम फ़िल्टर',
+                    'empty-description' => 'सहेजने के लिए कोई चयनित फ़िल्टर उपलब्ध नहीं है। कृपया सहेजने के लिए फ़िल्टर चुनें।',
+                    'empty-title'       => 'सहेजने के लिए फ़िल्टर जोड़ें',
                     'name'              => 'नाम',
-                    'quick-filters'     => 'त्वरित फिल्टर',
+                    'quick-filters'     => 'त्वरित फ़िल्टर',
                     'save-btn'          => 'सहेजें',
-                    'save-filter'       => 'फिल्टर सहेजें',
-                    'title'             => 'फिल्टर',
+                    'save-filter'       => 'फ़िल्टर सहेजें',
+                    'selected-filters'  => 'चयनित फ़िल्टर',
+                    'title'             => 'फ़िल्टर',
                 ],
 
                 'search' => [

@@ -3954,13 +3954,16 @@ return [
                 ],
 
                 'filter' => [
-                    'back-btn'          => 'Volver',
-                    'create-new-filter' => 'Crear Nuevo Filtro',
-                    'custom-filters'    => 'Filtros Personalizados',
+                    'back-btn'          => 'Atrás',
+                    'create-new-filter' => 'Crear nuevo filtro',
+                    'custom-filters'    => 'Filtros personalizados',
+                    'empty-description' => 'No hay filtros seleccionados para guardar. Por favor, seleccione filtros para guardar.',
+                    'empty-title'       => 'Agregar filtros para guardar',
                     'name'              => 'Nombre',
-                    'quick-filters'     => 'Filtros Rápidos',
+                    'quick-filters'     => 'Filtros rápidos',
                     'save-btn'          => 'Guardar',
-                    'save-filter'       => 'Guardar Filtro',
+                    'save-filter'       => 'Guardar filtro',
+                    'selected-filters'  => 'Filtros seleccionados',
                     'title'             => 'Filtro',
                 ],
 

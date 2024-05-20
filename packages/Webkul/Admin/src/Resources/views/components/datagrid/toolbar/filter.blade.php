@@ -62,17 +62,32 @@
                     </x-slot>
 
                     <x-slot:header>
-                        <div class="flex items-center justify-between p-2">
+                        <!-- Apply Filter Title -->
+                        <div v-if="! isShowSavedFilters" class="flex items-center justify-between p-2">
                             <p class="text-xl font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.components.datagrid.filters.title')
+                            </p>
+                        </div>
+
+                        <!-- Save Filter Title -->
+                        <div v-else class="flex items-center gap-x-2">
+                            <span 
+                                class="icon-arrow-right rtl:icon-arrow-left mt-0.5 cursor-pointer text-3xl hover:rounded-md hover:bg-gray-100 dark:hover:bg-gray-950"
+                                @click="isShowSavedFilters = ! isShowSavedFilters"
+                            >
+                            </span>
+                            
+                            <p class="text-xl font-semibold text-gray-800 dark:text-white">
+                                @lang('admin::app.components.datagrid.toolbar.filter.save-filter')
                             </p>
                         </div>
                     </x-slot>
 
                     <x-slot:content class="!p-0">
                         <template v-if="! isShowSavedFilters">
+                            <!-- Quick Filters Accordion -->
                             <x-admin::accordion 
-                                class="!rounded-none !shadow-none" 
+                                class="select-none rounded-none !shadow-none" 
                                 v-if="savedFilters.available.length > 0"
                             >
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
@@ -81,6 +96,7 @@
 
                                 <x-slot:content class="!p-0">
                                     <div class="!p-0">
+                                        <!-- Listing of Quick Filters(Saved Filters) -->
                                         <div v-for="(filter,index) in savedFilters.available">
                                             <div
                                                 class="flex items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"
@@ -104,7 +120,8 @@
                                 </x-slot>
                             </x-admin::accordion>
 
-                            <x-admin::accordion class="!rounded-none !shadow-none">
+                            <!-- Custom Filters Accordion -->
+                            <x-admin::accordion class="select-none !rounded-none !shadow-none">
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.components.datagrid.toolbar.filter.custom-filters')
                                 </x-slot>
@@ -515,6 +532,7 @@
                                             </div>
                                         </div>
 
+                                        <!-- Save Filter Button for open save Filter Section -->
                                         <button
                                             type="button"
                                             v-if="filters.columns.length > 0"
@@ -528,6 +546,7 @@
                             </x-admin::accordion>
                         </template>
 
+                        <!-- Save Filter Section -->
                         <template v-else>
                             <div class="flex items-center justify-between p-3 px-5">
                                 <p class="text-base font-semibold text-gray-800 dark:text-white">
@@ -539,11 +558,13 @@
                                 class="px-5 py-1" 
                                 v-if="filters.columns.length > 0"
                             >
+                                <!-- Save Filter Form -->
                                 <x-admin::form
                                     v-slot="{ meta, errors, handleSubmit }"
                                     as="div"
                                 >
                                     <form @submit="handleSubmit($event, saveFilters)">
+                                        <!-- Save Filter Name Input Field -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.components.datagrid.toolbar.filter.name')
@@ -561,14 +582,8 @@
                                             <x-admin::form.control-group.error control-name="name" />
                                         </x-admin::form.control-group>
 
-                                        <div class="flex content-end items-center justify-end gap-4">
-                                            <div
-                                                @click="isShowSavedFilters = ! isShowSavedFilters"
-                                                class="secondary-button"
-                                            >
-                                                @lang('admin::app.components.datagrid.toolbar.filter.back-btn')
-                                            </div>
-                                            
+                                        <!-- Save Filter Form Submit Button -->
+                                        <div class="flex content-end items-center justify-end">
                                             <button
                                                 type="submit"
                                                 class="primary-button"
@@ -579,11 +594,12 @@
                                             </button>
                                         </div>
                                         
+                                        <p class="py-4 text-base font-semibold text-gray-800 dark:text-white">
+                                            @lang('admin::app.components.datagrid.toolbar.filter.selected-filters')
+                                        </p>
+
+                                        <!-- Applied filters Label and Value Listing for Save Custom Filter-->
                                         <div v-for="column in savedFilters.params.filters.columns">
-                                            <p class="py-4 text-base font-semibold text-gray-800 dark:text-white">
-                                                @lang('Select Filters')
-                                            </p>
-                                            
                                             <div v-if="column.value.length > 0" >
                                                 <p class="mb-2 text-xs font-medium text-gray-800 dark:text-white">
                                                     @{{ column.label }}
@@ -604,6 +620,26 @@
                                                             </span>
                                                         </div>
                                                     </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Save Filter Empty Value Placeholder -->
+                                        <div v-if="savedFilters.params.filters.columns.every(column => column.value.length === 0)">
+                                            <div class="grid">
+                                                <div class="flex items-center gap-5 py-2.5">
+                                                    <img
+                                                        src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                                                        class="h-20 w-20 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
+                                                    >
+                                                    <div class="flex flex-col gap-1.5">
+                                                        <p class="text-base font-semibold text-gray-400">
+                                                            @lang('admin::app.components.datagrid.toolbar.filter.empty-title') 
+                                                        </p>
+                                                        <p class="text-gray-400"> 
+                                                            @lang('admin::app.components.datagrid.toolbar.filter.empty-description') 
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -664,7 +700,7 @@
 
                     applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => column.value.length > 0);;
 
-                    this.$axios.post('{{ route('datagrid.filters.store') }}', {
+                    this.$axios.post('{{ route('datagrid.filters.saved_filters.store') }}', {
                         src: this.src,
                         name: params.name,
                         applied,
@@ -703,7 +739,7 @@
                  */
                 getSavedFilters() {
                     this.$axios
-                        .get('{{ route('datagrid.filters.index') }}', {
+                        .get('{{ route('datagrid.filters.saved_filters.index') }}', {
                             params: { src: this.src }
                         })
                         .then(response => {
@@ -727,7 +763,7 @@
                 deleteSavedFilter(filter) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
-                            this.$axios.delete(`{{ route('datagrid.filters.destroy', '') }}/${filter.id}`)
+                            this.$axios.delete(`{{ route('datagrid.filters.saved_filters.destroy', '') }}/${filter.id}`)
                             
                             .then(response => {
                                 this.savedFilters.available = this.savedFilters.available.filter((savedFilter) => savedFilter.id !== filter.id);

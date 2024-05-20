@@ -3955,12 +3955,15 @@ return [
 
                 'filter' => [
                     'back-btn'          => 'Terug',
-                    'create-new-filter' => 'Nieuwe Filter Maken',
-                    'custom-filters'    => 'Aangepaste Filters',
+                    'create-new-filter' => 'Nieuw filter aanmaken',
+                    'custom-filters'    => 'Aangepaste filters',
+                    'empty-description' => 'Er zijn geen geselecteerde filters om op te slaan. Selecteer filters om op te slaan.',
+                    'empty-title'       => 'Voeg filters toe om op te slaan',
                     'name'              => 'Naam',
-                    'quick-filters'     => 'Snelle Filters',
+                    'quick-filters'     => 'Snelle filters',
                     'save-btn'          => 'Opslaan',
-                    'save-filter'       => 'Filter Opslaan',
+                    'save-filter'       => 'Filter opslaan',
+                    'selected-filters'  => 'Geselecteerde filters',
                     'title'             => 'Filter',
                 ],
 

@@ -3957,10 +3957,13 @@ return [
                     'back-btn'          => 'Retour',
                     'create-new-filter' => 'Créer un nouveau filtre',
                     'custom-filters'    => 'Filtres personnalisés',
+                    'empty-description' => 'Aucun filtre sélectionné à enregistrer. Veuillez sélectionner des filtres à enregistrer.',
+                    'empty-title'       => 'Ajouter des filtres à enregistrer',
                     'name'              => 'Nom',
                     'quick-filters'     => 'Filtres rapides',
                     'save-btn'          => 'Enregistrer',
                     'save-filter'       => 'Enregistrer le filtre',
+                    'selected-filters'  => 'Filtres sélectionnés',
                     'title'             => 'Filtre',
                 ],
 

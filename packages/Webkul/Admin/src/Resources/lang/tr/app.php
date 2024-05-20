@@ -3958,10 +3958,13 @@ return [
                     'back-btn'          => 'Geri',
                     'create-new-filter' => 'Yeni Filtre Oluştur',
                     'custom-filters'    => 'Özel Filtreler',
+                    'empty-description' => 'Kaydetmek için seçilen filtre yok. Lütfen kaydetmek için filtreleri seçin.',
+                    'empty-title'       => 'Kaydetmek için Filtre Ekle',
                     'name'              => 'Ad',
                     'quick-filters'     => 'Hızlı Filtreler',
                     'save-btn'          => 'Kaydet',
                     'save-filter'       => 'Filtreyi Kaydet',
+                    'selected-filters'  => 'Seçilen Filtreler',
                     'title'             => 'Filtre',
                 ],
 

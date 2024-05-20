@@ -3954,13 +3954,16 @@ return [
                 ],
 
                 'filter' => [
-                    'back-btn'          => 'العودة',
+                    'back-btn'          => 'عودة',
                     'create-new-filter' => 'إنشاء فلتر جديد',
-                    'custom-filters'    => 'الفلاتر المخصصة',
-                    'name'              => 'الاسم',
-                    'quick-filters'     => 'الفلاتر السريعة',
+                    'custom-filters'    => 'فلاتر مخصصة',
+                    'empty-description' => 'لا توجد فلاتر مختارة للحفظ. يرجى اختيار الفلاتر للحفظ.',
+                    'empty-title'       => 'أضف فلاتر للحفظ',
+                    'name'              => 'اسم',
+                    'quick-filters'     => 'فلاتر سريعة',
                     'save-btn'          => 'حفظ',
                     'save-filter'       => 'حفظ الفلتر',
+                    'selected-filters'  => 'الفلاتر المختارة',
                     'title'             => 'فلتر',
                 ],
 

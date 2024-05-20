@@ -3955,12 +3955,15 @@ return [
 
                 'filter' => [
                     'back-btn'          => 'Voltar',
-                    'create-new-filter' => 'Criar Novo Filtro',
-                    'custom-filters'    => 'Filtros Personalizados',
+                    'create-new-filter' => 'Criar novo filtro',
+                    'custom-filters'    => 'Filtros personalizados',
+                    'empty-description' => 'Não há filtros selecionados para salvar. Por favor, selecione filtros para salvar.',
+                    'empty-title'       => 'Adicionar filtros para salvar',
                     'name'              => 'Nome',
-                    'quick-filters'     => 'Filtros Rápidos',
+                    'quick-filters'     => 'Filtros rápidos',
                     'save-btn'          => 'Salvar',
-                    'save-filter'       => 'Salvar Filtro',
+                    'save-filter'       => 'Salvar filtro',
+                    'selected-filters'  => 'Filtros selecionados',
                     'title'             => 'Filtro',
                 ],
 

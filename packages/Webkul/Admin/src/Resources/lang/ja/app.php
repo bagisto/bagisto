@@ -3955,13 +3955,16 @@ return [
 
                 'filter' => [
                     'back-btn'          => '戻る',
-                    'create-new-filter' => '新しいフィルタを作成',
-                    'custom-filters'    => 'カスタムフィルタ',
+                    'create-new-filter' => '新しいフィルターを作成',
+                    'custom-filters'    => 'カスタムフィルター',
+                    'empty-description' => '保存する選択されたフィルターはありません。保存するフィルターを選択してください。',
+                    'empty-title'       => '保存するフィルターを追加',
                     'name'              => '名前',
-                    'quick-filters'     => 'クイックフィルタ',
+                    'quick-filters'     => 'クイックフィルター',
                     'save-btn'          => '保存',
-                    'save-filter'       => 'フィルタを保存',
-                    'title'             => 'フィルタ',
+                    'save-filter'       => 'フィルターを保存',
+                    'selected-filters'  => '選択されたフィルター',
+                    'title'             => 'フィルター',
                 ],
 
                 'search' => [

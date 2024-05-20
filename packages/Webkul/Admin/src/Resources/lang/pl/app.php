@@ -3954,13 +3954,16 @@ return [
                 ],
 
                 'filter' => [
-                    'back-btn'          => 'Powrót',
+                    'back-btn'          => 'Wstecz',
                     'create-new-filter' => 'Utwórz nowy filtr',
                     'custom-filters'    => 'Niestandardowe filtry',
+                    'empty-description' => 'Brak wybranych filtrów do zapisania. Proszę wybrać filtry do zapisania.',
+                    'empty-title'       => 'Dodaj filtry do zapisania',
                     'name'              => 'Nazwa',
                     'quick-filters'     => 'Szybkie filtry',
                     'save-btn'          => 'Zapisz',
                     'save-filter'       => 'Zapisz filtr',
+                    'selected-filters'  => 'Wybrane filtry',
                     'title'             => 'Filtr',
                 ],
 

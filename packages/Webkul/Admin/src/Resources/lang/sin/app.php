@@ -3955,12 +3955,15 @@ return [
 
                 'filter' => [
                     'back-btn'          => 'ආපසු',
-                    'create-new-filter' => 'නව පෙරහන් තනන්න',
-                    'custom-filters'    => 'සැකසුම් පෙරහන්',
+                    'create-new-filter' => 'අලුත් පෙරහනක් තනන්න',
+                    'custom-filters'    => 'අභිරුචි පෙරහන',
+                    'empty-description' => 'සුරක්ෂිත කිරීමට තෝරාගත් පෙරහන් නොමැත. කරුණාකර සුරක්ෂිත කිරීමට පෙරහන තෝරන්න.',
+                    'empty-title'       => 'සුරක්ෂිත කිරීමට පෙරහන් එක් කරන්න',
                     'name'              => 'නම',
-                    'quick-filters'     => 'කෙටුම් පෙරහන්',
-                    'save-btn'          => 'ඉතිරි කරන්න',
-                    'save-filter'       => 'පෙරහන් කරන්න',
+                    'quick-filters'     => 'ඉක්මන් පෙරහන',
+                    'save-btn'          => 'සුරකින්න',
+                    'save-filter'       => 'පෙරහන සුරකින්න',
+                    'selected-filters'  => 'තෝරාගත් පෙරහන්',
                     'title'             => 'පෙරහන',
                 ],
 

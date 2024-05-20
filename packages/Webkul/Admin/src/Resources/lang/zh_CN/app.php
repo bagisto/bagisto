@@ -3955,13 +3955,16 @@ return [
 
                 'filter' => [
                     'back-btn'          => '返回',
-                    'create-new-filter' => '创建新过滤器',
-                    'custom-filters'    => '自定义过滤器',
+                    'create-new-filter' => '创建新筛选器',
+                    'custom-filters'    => '自定义筛选器',
+                    'empty-description' => '没有可保存的选定筛选器。请选择要保存的筛选器。',
+                    'empty-title'       => '添加筛选器以保存',
                     'name'              => '名称',
-                    'quick-filters'     => '快速过滤器',
+                    'quick-filters'     => '快速筛选器',
                     'save-btn'          => '保存',
-                    'save-filter'       => '保存过滤器',
-                    'title'             => '过滤器',
+                    'save-filter'       => '保存筛选器',
+                    'selected-filters'  => '选定的筛选器',
+                    'title'             => '筛选器',
                 ],
 
                 'search' => [
