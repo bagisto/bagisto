@@ -11,9 +11,9 @@ use Webkul\Core\Acl;
 use Webkul\Core\Core;
 use Webkul\Core\ElasticSearch;
 use Webkul\Core\Exceptions\Handler;
+use Webkul\Core\Facades\Acl as AclFacade;
 use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchFacade;
-use Webkul\Core\Facades\Acl as AclFacade;
 use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
 

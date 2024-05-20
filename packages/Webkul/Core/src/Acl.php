@@ -62,8 +62,8 @@ class Acl
         }
 
         $roles = collect($this->getAclConfig())
-            ->mapWithKeys(fn($role) => [$role['route'] => $role['key']]);
-        
+            ->mapWithKeys(fn ($role) => [$role['route'] => $role['key']]);
+
         return $roles;
     }
 

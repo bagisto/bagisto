@@ -1,4 +1,5 @@
 <?php
+
 use Webkul\User\Bouncer;
 
 if (! function_exists('bouncer')) {

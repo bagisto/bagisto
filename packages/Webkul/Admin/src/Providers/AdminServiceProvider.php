@@ -13,7 +13,7 @@ class AdminServiceProvider extends ServiceProvider
     /**
      * Bootstrap services.
      */
-    public function boot(Router $router): void  
+    public function boot(Router $router): void
     {
         Route::middleware('web')->group(__DIR__.'/../Routes/web.php');
 
