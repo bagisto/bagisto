@@ -14,14 +14,14 @@
     >
         <div>
             <div
-                class="flex justify-center gap-8 bg-zinc-100 max-sm:gap-4"
+                class="flex justify-center gap-8 bg-zinc-100 max-sm:gap-0"
                 :style="positionStyles"
             >
                 <div
                     role="button"
                     tabindex="0"
                     v-for="tab in tabs"
-                    class="cursor-pointer px-8 py-5 text-xl font-medium text-zinc-500 max-sm:px-4 max-sm:py-2.5 max-sm:text-base"
+                    class="cursor-pointer px-8 py-5 text-xl font-medium text-zinc-500 max-sm:px-3.5 max-sm:py-2.5 max-sm:text-sm"
                     :class="{'border-b-2 border-navyBlue text-black transition': tab.isActive }"
                     @click="change(tab)"
                 >
