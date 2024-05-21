@@ -288,7 +288,7 @@
                     </x-slot>
 
                     <!-- Drawer Content -->
-                    <x-slot:content>
+                    <x-slot:content class="!px-0">
                         <v-currency-switcher></v-currency-switcher>
                     </x-slot>
                 </x-shop::drawer>
@@ -332,7 +332,7 @@
                     </x-slot>
 
                     <!-- Drawer Content -->
-                    <x-slot:content>
+                    <x-slot:content class="!px-0">
                         <v-locale-switcher></v-locale-switcher>
                     </x-slot>
                 </x-shop::drawer>

@@ -289,7 +289,7 @@
 
                                     @if (core()->getConfigData('general.content.shop.wishlist_option'))
                                         <div
-                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-8 max-sm:min-h-8 max-sm:min-w-8 max-sm:text-lg"
+                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border border-zinc-400 bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
@@ -371,7 +371,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-4 rounded-xl px-7 py-4 max-sm:py-3"
+                                            class="gap-x-4 rounded-xl px-7 py-4 max-sm:gap-x-5 max-sm:px-4 max-sm:py-3"
                                         />
                                     @endif
 
