@@ -59,10 +59,17 @@ class DataGridController extends Controller
             'name' => 'required|unique:saved_filters,name,NULL,id,src,'.request('src').',user_id,'.$userId,
         ]);
 
-        $data = $this->savedFilterRepository->create(array_merge(request()->all(), ['user_id' => $userId]));
+        $savedFilter = $this->savedFilterRepository->create(array_merge(
+            request()->only([
+                'name',
+                'src',
+                'applied',
+            ]),
+            ['user_id' => $userId]
+        ));
 
         return response()->json([
-            'data'    => $data,
+            'data'    => $savedFilter,
             'message' => trans('admin::app.components.datagrid.toolbar.filter.saved-success'),
         ], 200);
     }

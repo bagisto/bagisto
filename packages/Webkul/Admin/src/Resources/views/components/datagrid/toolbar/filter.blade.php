@@ -95,7 +95,7 @@
                                 </x-slot>
 
                                 <x-slot:content class="!p-0">
-                                    <div class="!p-0">
+                                    <div class="grid gap-1 !p-0 pb-2.5">
                                         <!-- Listing of Quick Filters(Saved Filters) -->
                                         <div v-for="(filter,index) in savedFilters.available">
                                             <div
@@ -700,7 +700,7 @@
 
                     applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => column.value.length > 0);;
 
-                    this.$axios.post('{{ route('datagrid.filters.saved_filters.store') }}', {
+                    this.$axios.post('{{ route('admin.datagrid.filters.saved_filters.store') }}', {
                         src: this.src,
                         name: params.name,
                         applied,
@@ -739,7 +739,7 @@
                  */
                 getSavedFilters() {
                     this.$axios
-                        .get('{{ route('datagrid.filters.saved_filters.index') }}', {
+                        .get('{{ route('admin.datagrid.filters.saved_filters.index') }}', {
                             params: { src: this.src }
                         })
                         .then(response => {
@@ -763,7 +763,7 @@
                 deleteSavedFilter(filter) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
-                            this.$axios.delete(`{{ route('datagrid.filters.saved_filters.destroy', '') }}/${filter.id}`)
+                            this.$axios.delete(`{{ route('admin.datagrid.filters.saved_filters.destroy', '') }}/${filter.id}`)
                             
                             .then(response => {
                                 this.savedFilters.available = this.savedFilters.available.filter((savedFilter) => savedFilter.id !== filter.id);
