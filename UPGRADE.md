@@ -89,7 +89,7 @@ There is no dependency needed to be updated at for this upgrade.
 + core()->getConfigData('sales.taxes.default_destination_calculation.postcode')
 ```
 
-2: The `repository` option has been removed from the `select` type field in the system configuration. Now, you can use `options` as a closure to populate select field options from the database. Here's an example of how to update the configuration array:
+2: The `repository` option has been replaced with `options`. Now, you can use `options` as shown below to populate select field options from the database.
 
 ```diff
 'key'    => 'sales.taxes.categories',
@@ -103,19 +103,9 @@ There is no dependency needed to be updated at for this upgrade.
         'type'       => 'select',
         'default'    => 0,
 -       'repository' => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
-+       'options'    => function() {
-+           return [
-+               [
-+                   'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
-+                   'value' => 0,
-+               ],
-+           ];
-+       }
-+   ]
++       'options'    => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
 }
 ```
-
-In this example, the `repository` option has been replaced with `options`, which is defined as a closure returning an array of options. Adjust the closure to populate the select field options as needed.
 
 3. The Inventory Stock Options configuration has been relocated to the Order Settings configuration, and the respective path for retrieving configuration values has been updated accordingly
 
