@@ -14,9 +14,9 @@
     $field = collect([
         ...$field,
         'isVisible' => true,
-    ])->map(function ($value, $key) {
+    ])->map(function ($value, $key) use($coreConfigRepository) {
         if ($key == 'options') {
-            return collect(is_callable($value) ? $value() : $value)->map(fn ($option) => [
+            return collect($coreConfigRepository->getOptions($value))->map(fn ($option) => [
                 'title' => trans($option['title']),
                 'value' => $option['value'],
             ])->toArray();
@@ -297,7 +297,7 @@
                     v-if="value"
                     :href="`{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), '']) }}/${value.split('/')[1]}`"
                 >
-                    <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 mb-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
+                    <div class="mb-1 inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
                         <i class="icon-down-stat text-2xl"></i>
                     </div>
                 </a>

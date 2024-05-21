@@ -1,7 +1,6 @@
 <?php
 
 use Webkul\Sales\Models\Order;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 return [
     /**
@@ -1659,49 +1658,17 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'       => 'shipping',
-                'title'      => 'admin::app.configuration.index.sales.taxes.categories.shipping',
-                'type'       => 'select',
-                'default'    => 0,
-                'options'    => function () {
-                    $options = [
-                        [
-                            'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
-                            'value' => 0,
-                        ],
-                    ];
-
-                    foreach (app(TaxCategoryRepository::class)->all() as $taxCategory) {
-                        $options[] = [
-                            'title' => $taxCategory->name,
-                            'value' => $taxCategory->id,
-                        ];
-                    }
-
-                    return $options;
-                },
+                'name'    => 'shipping',
+                'title'   => 'admin::app.configuration.index.sales.taxes.categories.shipping',
+                'type'    => 'select',
+                'default' => 0,
+                'options' => 'Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
             ], [
-                'name'       => 'product',
-                'title'      => 'admin::app.configuration.index.sales.taxes.categories.product',
-                'type'       => 'select',
-                'default'    => 0,
-                'options'    => function () {
-                    $options = [
-                        [
-                            'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
-                            'value' => 0,
-                        ],
-                    ];
-
-                    foreach (app(TaxCategoryRepository::class)->all() as $taxCategory) {
-                        $options[] = [
-                            'title' => $taxCategory->name,
-                            'value' => $taxCategory->id,
-                        ];
-                    }
-
-                    return $options;
-                },
+                'name'    => 'product',
+                'title'   => 'admin::app.configuration.index.sales.taxes.categories.product',
+                'type'    => 'select',
+                'default' => 0,
+                'options' => 'Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
             ],
         ],
     ], [
