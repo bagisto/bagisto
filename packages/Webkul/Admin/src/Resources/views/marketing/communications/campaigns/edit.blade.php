@@ -3,7 +3,7 @@
         @lang('admin::app.marketing.communications.campaigns.edit.title')
     </x-slot>
 
-    {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.before') !!}
+    {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.before', ['campaign' => $campaign]) !!}
 
     <!-- Input Form -->
     <x-admin::form
@@ -11,7 +11,7 @@
         method="PUT"
     >
 
-        {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.create_form_controls.before') !!}
+        {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.create_form_controls.before', ['campaign' => $campaign]) !!}
 
         <div class="flex items-center justify-between">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
@@ -42,7 +42,7 @@
             <!-- Left Section -->
             <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
-                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.card.general.before') !!}
+                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.card.general.before', ['campaign' => $campaign]) !!}
 
                 <!-- General Section -->
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
@@ -147,13 +147,13 @@
                     </div>
                 </div>
 
-                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.card.general.after') !!}
+                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.card.general.after', ['campaign' => $campaign]) !!}
             </div>
 
              <!-- Right Section -->
              <div class="flex w-[360px] max-w-full flex-col gap-2 max-md:w-full">
 
-                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.card.accordion.setting.before') !!}
+                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.card.accordion.setting.before', ['campaign' => $campaign]) !!}
 
                 <!-- Setting -->
                 <x-admin::accordion>
@@ -243,15 +243,15 @@
                     </x-slot>
                 </x-admin::accordion>
 
-                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.card.accordion.setting.after') !!}
+                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.card.accordion.setting.after', ['campaign' => $campaign]) !!}
 
             </div>
         </div>
 
-        {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.create_form_controls.after') !!}
+        {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.create_form_controls.after', ['campaign' => $campaign]) !!}
 
     </x-admin::form>
 
-    {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.after') !!}
+    {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.after', ['campaign' => $campaign]) !!}
 
 </x-admin::layouts>
