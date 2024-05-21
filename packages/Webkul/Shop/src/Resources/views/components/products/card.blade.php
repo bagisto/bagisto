@@ -56,7 +56,7 @@
 
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span
-                                class="absolute top-5 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-[#E3E3E3] bg-white text-2xl max-sm:top-1.5 max-sm:h-6 max-sm:w-6 max-sm:rounded-full max-sm:text-sm ltr:right-5 max-sm:ltr:right-1.5 rtl:left-5 max-sm:rtl:left-1.5"
+                                class="absolute top-5 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-[#E3E3E3] bg-white text-2xl max-sm:top-1.5 max-sm:h-6 max-sm:w-6 max-sm:rounded-full max-sm:text-base ltr:right-5 max-sm:ltr:right-1.5 rtl:left-5 max-sm:rtl:left-1.5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -86,7 +86,7 @@
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
 
                         <button
-                            class="absolute bottom-4 left-1/2 w-max -translate-x-1/2 translate-y-14 cursor-pointer rounded-xl border border-[#E3E3E3] bg-white px-11 py-3 text-xs font-medium text-navyBlue transition-all duration-300 group-hover:translate-y-0 max-lg:translate-y-2.5 max-sm:translate-y-2.5 max-sm:rounded-lg max-sm:px-4 max-sm:py-1.5 max-sm:group-hover:translate-y-2.5"
+                            class="absolute bottom-4 left-1/2 w-max -translate-x-1/2 translate-y-14 cursor-pointer rounded-xl border border-[#E3E3E3] bg-white px-11 py-3 text-xs font-medium text-navyBlue transition-all duration-300 group-hover:translate-y-0 max-lg:translate-y-2.5 max-sm:hidden"
                             :disabled="! product.is_saleable || isAddingToCart"
                             @click="addToCart()"
                         >

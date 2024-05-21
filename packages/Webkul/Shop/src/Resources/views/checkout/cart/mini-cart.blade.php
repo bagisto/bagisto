@@ -75,7 +75,7 @@
                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                 <img
                                     :src="item.base_image.small_image_url"
-                                    class="max-h-28 max-w-28 rounded-xl max-sm:max-h-[80px] max-sm:max-w-[76px]"
+                                    class="max-h-28 max-w-28 rounded-xl max-sm:max-h-20 max-sm:max-w-[76px]"
                                 />
                             </a>
                         </div>
@@ -223,7 +223,7 @@
             <x-slot:footer>
                 <div
                     v-if="cart?.items?.length"
-                    class="grid-col-1 grid gap-5"
+                    class="grid-col-1 grid gap-5 max-sm:gap-2.5"
                 >
                     <div class="my-8 flex items-center justify-between border-b border-zinc-200 px-6 pb-2 max-sm:my-0 max-sm:border-t max-sm:px-5 max-sm:py-2">
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
@@ -294,7 +294,7 @@
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.action.before') !!}
 
                     <!-- Cart Action Container -->
-                    <div class="grid gap-2.5 px-6">
+                    <div class="grid gap-2.5 px-6 max-sm:px-4">
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.continue_to_checkout.before') !!}
 
                         <a

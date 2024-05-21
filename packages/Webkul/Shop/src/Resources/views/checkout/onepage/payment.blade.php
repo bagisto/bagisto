@@ -66,7 +66,7 @@
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.before') !!}
 
                                     <img
-                                        class="max-h-[45px] max-w-[55px]"
+                                        class="max-h-11 max-w-14"
                                         :src="payment.image"
                                         width="55"
                                         height="55"

@@ -209,7 +209,7 @@
                                     <li  @click="changePage('previous')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex h-10 w-[35px] items-center justify-center font-medium leading-normal hover:bg-gray-100 max-sm:h-8 max-sm:w-[24px] max-sm:justify-normal"
+                                            class="flex h-10 w-9 items-center justify-center font-medium leading-normal hover:bg-gray-100 max-sm:h-8 max-sm:w-6 max-sm:justify-normal"
                                             aria-label="@lang('shop::app.components.datagrid.table.previous-page')"
                                         >
                                             <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
@@ -220,7 +220,7 @@
                                         <input
                                             type="text"
                                             :value="$parent.available.meta.current_page"
-                                            class="max-w-[42px] items-center border-l border-r px-4 py-2 font-medium leading-normal text-black hover:bg-gray-100 max-sm:max-w-[36px] max-sm:justify-normal max-sm:px-0 max-sm:py-1 max-sm:text-center"
+                                            class="max-w-[42px] items-center border-l border-r px-4 py-2 font-medium leading-normal text-black hover:bg-gray-100 max-sm:max-w-9 max-sm:justify-normal max-sm:px-0 max-sm:py-1 max-sm:text-center"
                                             @change="changePage(parseInt($event.target.value))"
                                             aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                         >
@@ -229,7 +229,7 @@
                                     <li @click="changePage('next')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex h-10 w-[35px] items-center justify-center font-medium leading-normal hover:bg-gray-100 max-sm:h-8 max-sm:w-[24px] max-sm:justify-normal"
+                                            class="flex h-10 w-9 items-center justify-center font-medium leading-normal hover:bg-gray-100 max-sm:h-8 max-sm:w-6 max-sm:justify-normal"
                                             aria-label="@lang('shop::app.components.datagrid.table.next-page')"
                                         >
                                             <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>

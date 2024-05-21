@@ -271,7 +271,7 @@
                                         <x-shop::flat-picker.date ::allow-input="false">
                                             <input
                                                 value=""
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400"
+                                                class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400"
                                                 :type="column.input_type"
                                                 :name="`${column.index}[from]`"
                                                 :placeholder="column.label"
@@ -288,7 +288,7 @@
                                             <input
                                                 type="column.input_type"
                                                 value=""
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400"
+                                                class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400"
                                                 :name="`${column.index}[to]`"
                                                 :placeholder="column.label"
                                                 :ref="`${column.index}[from]`"
@@ -355,7 +355,7 @@
                                         <x-shop::flat-picker.datetime ::allow-input="false">
                                             <input
                                                 value=""
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                                class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                                 :type="column.input_type"
                                                 :name="`${column.index}[from]`"
                                                 :placeholder="column.label"
@@ -372,7 +372,7 @@
                                             <input
                                                 type="column.input_type"
                                                 value=""
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                                class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                                 :name="`${column.index}[to]`"
                                                 :placeholder="column.label"
                                                 :ref="`${column.index}[from]`"

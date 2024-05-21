@@ -28,14 +28,14 @@
                 </span>
 
                 <span
-                    class="icon-arrow-left fixed left-[10px] top-1/2 z-10 -mt-[22px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-[12px] text-[24px] font-bold text-white opacity-30 transition-all hover:opacity-100"
+                    class="icon-arrow-left fixed left-[10px] top-1/2 z-10 -mt-[48px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
                     v-if="attachments.length >= 2"
                     @click="navigate(currentIndex -= 1)"
                 >
                 </span>
 
                 <span
-                    class="icon-arrow-right fixed right-[10px] top-1/2 z-10 -mt-[22px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-[12px] text-[24px] font-bold text-white opacity-30 transition-all hover:opacity-100"
+                    class="icon-arrow-right fixed right-[10px] top-1/2 z-10 -mt-[48px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
                     v-if="attachments.length >= 2"
                     @click="navigate(currentIndex += 1)"
                 >
@@ -64,24 +64,38 @@
                                 <source :src="attachment.url" type="video/ogg">
                                     Your browser does not support HTML video.
                             </video>
-                            
-                            <img
-                                v-if="attachment.type === 'image'"
-                                :src="attachment.url"
-                                class="max-h-full max-w-full transition-transform duration-300 ease-out"
-                                :class="{
-                                    'cursor-zoom-in': ! isZooming,
-                                    'cursor-grab': ! isDragging && isZooming,
-                                    'cursor-grabbing': isDragging && isZooming,
-                                }"
-                                :style="{transform: `translate(${translateX}px, ${translateY}px)`}"
-                                @click.stop="handleClick"
-                                @mousedown.prevent="handleMouseDown"
-                                @mousemove.prevent="handleMouseMove"
-                                @mouseleave.prevent="resetImagePosition"
-                                @mouseup.prevent="resetImagePosition"
-                                @mousewheel="handleMouseWheel"
-                            />
+
+                            <template v-if="attachment.type === 'image'">
+                                <!-- For Desktop -->
+                                <img
+                                    :src="attachment.url"
+                                    class="max-h-full max-w-full transition-transform duration-300 ease-out max-sm:hidden"
+                                    :class="{
+                                        'cursor-zoom-in': ! isZooming,
+                                        'cursor-grab': ! isDragging && isZooming,
+                                        'cursor-grabbing': isDragging && isZooming,
+                                    }"
+                                    :style="{transform: `translate(${translateX}px, ${translateY}px)`}"
+                                    @click.stop="handleClick"
+                                    @mousedown.prevent="handleMouseDown"
+                                    @mousemove.prevent="handleMouseMove"
+                                    @mouseleave.prevent="resetImagePosition"
+                                    @mouseup.prevent="resetImagePosition"
+                                    @mousewheel="handleMouseWheel"
+                                />
+
+                                <!-- For Mobile -->
+                                <img
+                                    :src="attachment.url"
+                                    class="max-h-full max-w-full transition-transform duration-300 ease-out sm:hidden"
+                                    :class="{
+                                        'cursor-zoom-in': ! isZooming,
+                                        'cursor-grab': ! isDragging && isZooming,
+                                        'cursor-grabbing': isDragging && isZooming,
+                                    }"
+                                    :style="{transform: `translate(${translateX}px, ${translateY}px)`}"
+                                />    
+                            </template>
                         </div>
                     </div>
                 </div>

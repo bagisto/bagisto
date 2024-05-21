@@ -42,7 +42,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div class="pb-8 max-sm:pb-2">
+            <div {{ $footer->attributes->merge(['class' => 'pb-8 max-sm:pb-2']) }}>
                 {{ $footer }}
             </div>
         </template>

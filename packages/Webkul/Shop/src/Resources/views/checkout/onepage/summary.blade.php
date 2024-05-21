@@ -12,7 +12,7 @@
         {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_image.before') !!}
 
         <img
-            class="h-[90px] max-h-[90px] w-[90px] max-w-[90px] rounded-md max-sm:h-[80px] max-sm:max-h-[80px] max-sm:max-w-[80px]"
+            class="h-[90px] max-h-[90px] w-[90px] max-w-[90px] rounded-md max-sm:h-20 max-sm:max-h-20 max-sm:max-w-20"
             :src="item.base_image.small_image_url"
             :alt="item.name"
             width="110"

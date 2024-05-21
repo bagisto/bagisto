@@ -139,7 +139,7 @@
                                     </span>
 
                                     @if (auth()->guard()->check())
-                                        <span class="mx-2.5 border-r-[2px] border-zinc-200"></span>
+                                        <span class="mx-2.5 border-r-2 border-zinc-200"></span>
 
                                         <span
                                             class="cursor-pointer text-base text-[#0A49A7] max-sm:text-xs"
@@ -348,7 +348,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart.continue_shopping.before') !!}
 
                                 <a
-                                    class="secondary-button max-h-[55px] rounded-2xl max-sm:px-6 max-sm:py-3 max-sm:text-sm"
+                                    class="secondary-button max-h-14 rounded-2xl max-sm:px-6 max-sm:py-3 max-sm:text-sm"
                                     href="{{ route('shop.home.index') }}"
                                 >
                                     @lang('shop::app.checkout.cart.index.continue-shopping')
@@ -359,7 +359,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart.update_cart.before') !!}
 
                                 <x-shop::button
-                                    class="secondary-button max-h-[55px] rounded-2xl max-sm:px-6 max-sm:py-3 max-sm:text-sm"
+                                    class="secondary-button max-h-14 rounded-2xl max-sm:px-6 max-sm:py-3 max-sm:text-sm"
                                     :title="trans('shop::app.checkout.cart.index.update-cart')"
                                     ::loading="isStoring"
                                     ::disabled="isStoring"
