@@ -4,7 +4,6 @@ namespace Webkul\Core;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Webkul\Core\Menu\MenuItem;
 
 class Menu
@@ -15,31 +14,14 @@ class Menu
     protected array $items = [];
 
     /**
-     * Is admin menu.
+     * Config menu.
      */
-    protected bool $isForAdmin = false;
-
-    /**
-     * Contains current item route.
-     */
-    private string $current;
+    protected array $configMenu = [];
 
     /**
      * Contains current item key.
      */
     private string $currentKey = '';
-
-    /**
-     * Create a new instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->current = request()->url();
-
-        $this->isForAdmin = Str::contains(request()->url(), 'admin');
-    }
 
     /**
      * Add a new menu item.
@@ -58,10 +40,6 @@ class Menu
             $this->prepareMenuItems();
         }
 
-        if (! $this->isForAdmin) {
-            return collect($this->items);
-        }
-
         return collect($this->removeUnauthorizedMenuItem())
             ->sortBy('sort');
     }
@@ -69,23 +47,27 @@ class Menu
     /**
      * Get admin config.
      */
-    public function forAdmin(): array
+    public function forAdmin(): self
     {
-        return collect(config('menu.admin'))
+        $this->configMenu = collect(config('menu.admin'))
             ->filter(fn ($item) => bouncer()->hasPermission($item['key']))
             ->toArray();
+        
+        return $this;
     }
 
     /**
      * Get shop config.
      */
-    public function forShop(): array
+    public function forShop(): self
     {
         $canShowWishlist = ! (bool) core()->getConfigData('general.content.shop.wishlist_option');
 
-        return collect(config('menu.customer'))
+        $this->configMenu = collect(config('menu.customer'))
             ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)
             ->toArray();
+
+        return $this;
     }
 
     /**
@@ -95,12 +77,8 @@ class Menu
     {
         $menuWithDotNotation = [];
 
-        foreach (
-            $this->isForAdmin
-            ? $this->forAdmin()
-            : $this->forShop() as $item
-        ) {
-            if (strpos($this->current, route($item['route'])) !== false) {
+        foreach ($this->configMenu as $item) {
+            if (strpos(request()->url(), route($item['route'])) !== false) {
                 $this->currentKey = $item['key'];
             }
 
