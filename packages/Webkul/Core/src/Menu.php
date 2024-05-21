@@ -11,17 +11,27 @@ class Menu
     /**
      * Menu items.
      */
-    protected array $items = [];
+    private array $items = [];
 
     /**
      * Config menu.
      */
-    protected array $configMenu = [];
+    private array $configMenu = [];
 
     /**
      * Contains current item key.
      */
     private string $currentKey = '';
+
+    /**
+     * Menu area for admin.
+     */
+    const ADMIN = 'admin';
+
+    /**
+     * Menu area for customer.
+     */
+    const CUSTOMER = 'customer';
 
     /**
      * Add a new menu item.
@@ -34,22 +44,33 @@ class Menu
     /**
      * Get all menu items.
      */
-    public function getItems(string $area): Collection
+    public function getItems(?string $area = null): Collection
     {
-        $configMenu = collect(config('menu.'.$area));
+        if (! $area) {
+            throw new \Exception('Area must be provided to get menu items.');
+        }
 
-        if ($area == 'admin') {
-            $this->configMenu = $configMenu
-                ->filter(fn ($item) => bouncer()->hasPermission($item['key']))
-                ->toArray();
-        } elseif ($area == 'customer') {
-            $canShowWishlist = ! (bool) core()->getConfigData('general.content.shop.wishlist_option');
+        $configMenu = collect(config("menu.$area"));
 
-            $this->configMenu = $configMenu
-                ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)
-                ->toArray();
-        } else {
-            $this->configMenu = $configMenu->toArray();
+        switch ($area) {
+            case self::ADMIN:
+                $this->configMenu = $configMenu
+                    ->filter(fn ($item) => bouncer()->hasPermission($item['key']))
+                    ->toArray();
+                break;
+
+            case self::CUSTOMER:
+                $canShowWishlist = ! (bool) core()->getConfigData('general.content.shop.wishlist_option');
+
+                $this->configMenu = $configMenu
+                    ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)
+                    ->toArray();
+                break;
+
+            default:
+                $this->configMenu = $configMenu->toArray();
+
+                break;
         }
 
         if (! $this->items) {
@@ -116,7 +137,7 @@ class Menu
     /**
      * Get current active menu.
      */
-    public function getCurrentActiveMenu($area): ?MenuItem
+    public function getCurrentActiveMenu(?string $area = null): ?MenuItem
     {
         $currentKey = implode('.', array_slice(explode('.', $this->currentKey), 0, 2));
 

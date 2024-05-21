@@ -21,7 +21,7 @@
     </div>
 
     <!-- Account Navigation Menus -->
-    @foreach (menu()->forShop()->getItems() as $menuItem)
+    @foreach (menu()->getItems('customer') as $menuItem)
         <div class="max-md:rounded-md max-md:border max-md:border-b max-md:border-l-[1px] max-md:border-r max-md:border-t-0 max-md:border-zinc-200">
             <v-account-navigation>
                 <!-- Account Navigation Toggler -->
