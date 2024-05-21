@@ -70,95 +70,98 @@
 
     <!-- Information Section -->
     <div class="1180:mt-20">
-        <x-shop::tabs position="center">
-            <!-- Description Tab -->
-            {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+        <div class="max-1180:hidden">
+            <x-shop::tabs position="center">
+                <!-- Description Tab -->
 
-            <x-shop::tabs.item
-                class="container mt-[60px] !p-0 max-1180:hidden"
-                :title="trans('shop::app.products.view.description')"
-                :is-selected="true"
-            >
-                <div class="container mt-[60px] max-1180:px-5">
-                    <p class="text-lg text-zinc-500 max-1180:text-sm">
-                        {!! $product->description !!}
-                    </p>
-                </div>
-            </x-shop::tabs.item>
+                {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
-            {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
-
-            <!-- Additional Information Tab -->
-            @if(count($attributeData))
                 <x-shop::tabs.item
                     class="container mt-[60px] !p-0 max-1180:hidden"
-                    :title="trans('shop::app.products.view.additional-information')"
-                    :is-selected="false"
+                    :title="trans('shop::app.products.view.description')"
+                    :is-selected="true"
                 >
                     <div class="container mt-[60px] max-1180:px-5">
-                        <div class="mt-8 grid max-w-max grid-cols-[auto_1fr] gap-4">
-                            @foreach ($customAttributeValues as $customAttributeValue)
-                                @if (! empty($customAttributeValue['value']))
-                                    <div class="grid">
-                                        <p class="text-base text-black">
-                                            {!! $customAttributeValue['label'] !!}
-                                        </p>
-                                    </div>
-
-                                    @if ($customAttributeValue['type'] == 'file')
-                                        <a 
-                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
-                                            download="{{ $customAttributeValue['label'] }}"
-                                        >
-                                            <span class="icon-download text-2xl"></span>
-                                        </a>
-                                    @elseif ($customAttributeValue['type'] == 'image')
-                                        <a 
-                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
-                                            download="{{ $customAttributeValue['label'] }}"
-                                        >
-                                            <img 
-                                                class="h-5 min-h-5 w-5 min-w-5" 
-                                                src="{{ Storage::url($customAttributeValue['value']) }}" 
-                                            />
-                                        </a>
-                                    @else
-                                        <div class="grid">
-                                            <p class="text-base text-zinc-500">
-                                                {!! $customAttributeValue['value'] !!}
-                                            </p>
-                                        </div>
-                                    @endif
-                                @endif
-                            @endforeach
-                        </div>
+                        <p class="text-lg text-zinc-500 max-1180:text-sm">
+                            {!! $product->description !!}
+                        </p>
                     </div>
                 </x-shop::tabs.item>
-            @endif
 
-            <!-- Reviews Tab -->
-            <x-shop::tabs.item
-                class="container mt-[60px] !p-0 max-1180:hidden"
-                :title="trans('shop::app.products.view.review')"
-                :is-selected="false"
-            >
-                @include('shop::products.view.reviews')
-            </x-shop::tabs.item>
-        </x-shop::tabs>
+                {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
+
+                <!-- Additional Information Tab -->
+                @if(count($attributeData))
+                    <x-shop::tabs.item
+                        class="container mt-[60px] !p-0 max-1180:hidden"
+                        :title="trans('shop::app.products.view.additional-information')"
+                        :is-selected="false"
+                    >
+                        <div class="container mt-[60px] max-1180:px-5">
+                            <div class="mt-8 grid max-w-max grid-cols-[auto_1fr] gap-4">
+                                @foreach ($customAttributeValues as $customAttributeValue)
+                                    @if (! empty($customAttributeValue['value']))
+                                        <div class="grid">
+                                            <p class="text-base text-black">
+                                                {!! $customAttributeValue['label'] !!}
+                                            </p>
+                                        </div>
+
+                                        @if ($customAttributeValue['type'] == 'file')
+                                            <a 
+                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                                download="{{ $customAttributeValue['label'] }}"
+                                            >
+                                                <span class="icon-download text-2xl"></span>
+                                            </a>
+                                        @elseif ($customAttributeValue['type'] == 'image')
+                                            <a 
+                                                href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                                download="{{ $customAttributeValue['label'] }}"
+                                            >
+                                                <img 
+                                                    class="h-5 min-h-5 w-5 min-w-5" 
+                                                    src="{{ Storage::url($customAttributeValue['value']) }}" 
+                                                />
+                                            </a>
+                                        @else
+                                            <div class="grid">
+                                                <p class="text-base text-zinc-500">
+                                                    {!! $customAttributeValue['value'] !!}
+                                                </p>
+                                            </div>
+                                        @endif
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    </x-shop::tabs.item>
+                @endif
+
+                <!-- Reviews Tab -->
+                <x-shop::tabs.item
+                    class="container mt-[60px] !p-0 max-1180:hidden"
+                    :title="trans('shop::app.products.view.review')"
+                    :is-selected="false"
+                >
+                    @include('shop::products.view.reviews')
+                </x-shop::tabs.item>
+            </x-shop::tabs>
+        </div> 
     </div>
 
     <!-- Information Section -->
-    <div class="container mt-10 !p-0 max-1180:px-5 max-sm:mt-6 1180:hidden">
+    <div class="container mt-6 grid gap-3 !p-0 1180:hidden">
         <!-- Description Accordion -->
         <x-shop::accordion :is-active="true">
-            <x-slot:header class="bg-gray-100 max-sm:mb-2">
-                <p class="text-base font-medium 1180:hidden">
+            <x-slot:header class="bg-gray-100">
+                <p class="text-base font-medium">
                     @lang('shop::app.products.view.description')
                 </p>
             </x-slot>
 
             <x-slot:content class="max-sm:px-0">
-                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm max-sm:mb-0 max-sm:px-5 max-sm:text-sm max-sm:font-normal">
+                <div class="mb-5 text-lg text-zinc-500 max-1180:mb-0 max-1180:px-5 max-1180:text-sm max-1180:font-normal">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -168,7 +171,7 @@
         @if (count($attributeData))
             <x-shop::accordion :is-active="false">
                 <x-slot:header class="bg-gray-100 max-sm:mb-2">
-                    <p class="text-base font-medium 1180:hidden">
+                    <p class="text-base font-medium">
                         @lang('shop::app.products.view.additional-information')
                     </p>
                 </x-slot>
@@ -220,7 +223,7 @@
         <!-- Reviews Accordion -->
         <x-shop::accordion class="bg-gray-100 max-sm:border-none" :is-active="false">
             <x-slot:header>
-                <p class="text-base font-medium 1180:hidden">
+                <p class="text-base font-medium">
                     @lang('shop::app.products.view.review')
                 </p>
             </x-slot>
@@ -290,7 +293,7 @@
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
-                                            :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
+                                            :class="isWishlist ? 'icon-heart-fill text-red-500' : 'icon-heart'"
                                             @click="addToWishlist"
                                         >
                                         </div>
@@ -410,7 +413,7 @@
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="mt-10 flex gap-9 max-sm:mt-6 max-sm:flex-wrap max-sm:justify-center max-sm:gap-2.5">
+                                <div class="mt-10 flex gap-9 max-md:mt-6 max-md:flex-wrap max-sm:justify-center max-sm:gap-2.5">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div

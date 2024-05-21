@@ -14,7 +14,7 @@
         type="text/x-template"
         id="v-product-reviews-template"
     >
-        <div class="container max-1180:px-5 max-sm:mt-3.5 max-sm:px-3.5">
+        <div class="container max-1180:mt-3.5 max-1180:px-5 max-sm:px-3.5">
             <!-- Create Review Form Container -->
             <div 
                 class="w-full" 
@@ -34,17 +34,14 @@
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
-                                    class="!mb-0 !p-0"
+                                    class="!p-0"
                                     name="attachments"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
                                     ref="reviewImages"
                                 />
 
-                                <x-shop::form.control-group.error
-                                    class="mt-4"
-                                    control-name="attachments"
-                                />
+                                <x-shop::form.control-group.error control-name="attachments" />
                             </x-shop::form.control-group>
                         </div>
                         

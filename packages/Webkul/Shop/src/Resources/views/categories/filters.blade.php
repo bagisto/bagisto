@@ -37,7 +37,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex items-center justify-between border-b border-zinc-200 pb-5">
+            <div class="flex items-center justify-between">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
@@ -87,7 +87,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex items-center justify-between border-b border-zinc-200 pb-5">
+            <div class="flex items-center justify-between">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
@@ -95,7 +95,7 @@
         </x-slot>
 
         <!-- Drawer Content -->
-        <x-slot:content>
+        <x-slot:content class="!px-0">
             @include('shop::categories.toolbar')
         </x-slot>
     </x-shop::drawer>

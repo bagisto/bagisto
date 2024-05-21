@@ -34,7 +34,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div class="flex-1 overflow-auto px-6 max-sm:px-4">
+            <div {{ $content->attributes->merge(['class' => 'flex-1 overflow-auto px-6 max-sm:px-4']) }}>
                 {{ $content }}
             </div>
         </template>
