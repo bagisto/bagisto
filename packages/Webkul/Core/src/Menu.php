@@ -34,40 +34,30 @@ class Menu
     /**
      * Get all menu items.
      */
-    public function getItems(): Collection
+    public function getItems(string $area): Collection
     {
+        $configMenu = collect(config('menu.'.$area));
+
+        if ($area == 'admin') {
+            $this->configMenu = $configMenu
+                ->filter(fn ($item) => bouncer()->hasPermission($item['key']))
+                ->toArray();
+        } elseif ($area == 'customer') {
+            $canShowWishlist = ! (bool) core()->getConfigData('general.content.shop.wishlist_option');
+
+            $this->configMenu = $configMenu
+                ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)
+                ->toArray();
+        } else {
+            $this->configMenu = $configMenu->toArray();
+        }
+
         if (! $this->items) {
             $this->prepareMenuItems();
         }
 
         return collect($this->removeUnauthorizedMenuItem())
             ->sortBy('sort');
-    }
-
-    /**
-     * Get admin config.
-     */
-    public function forAdmin(): self
-    {
-        $this->configMenu = collect(config('menu.admin'))
-            ->filter(fn ($item) => bouncer()->hasPermission($item['key']))
-            ->toArray();
-        
-        return $this;
-    }
-
-    /**
-     * Get shop config.
-     */
-    public function forShop(): self
-    {
-        $canShowWishlist = ! (bool) core()->getConfigData('general.content.shop.wishlist_option');
-
-        $this->configMenu = collect(config('menu.customer'))
-            ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)
-            ->toArray();
-
-        return $this;
     }
 
     /**
@@ -126,11 +116,11 @@ class Menu
     /**
      * Get current active menu.
      */
-    public function getCurrentActiveMenu(): ?MenuItem
+    public function getCurrentActiveMenu($area): ?MenuItem
     {
         $currentKey = implode('.', array_slice(explode('.', $this->currentKey), 0, 2));
 
-        return $this->findMatchingItem($this->getItems(), $currentKey);
+        return $this->findMatchingItem($this->getItems($area), $currentKey);
     }
 
     /**

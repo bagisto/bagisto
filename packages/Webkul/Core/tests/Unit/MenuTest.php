@@ -46,13 +46,7 @@ it('should add and get menu items', function () {
         ));
     }
 
-    $class = new ReflectionClass(Menu::class);
-
-    $property = $class->getProperty('items');
-
-    $property->setAccessible(true);
-
-    $menuItems = collect($property->getValue($menu));
+    $menuItems = $menu->getItems('admin');
 
     // Act and Assert.
     expect($menuItems->first()->key)->toBe('dashboard');
@@ -65,7 +59,7 @@ it('should add and get menu items', function () {
 
     expect($menuItems->first()->icon)->toBe('icon-dashboard');
 
-    expect($menuItems->last()->key)->toBe('sales.orders');
+    expect($menuItems->last()->key)->toBe('sales');
 });
 
 it('should process sub menu items', function () {

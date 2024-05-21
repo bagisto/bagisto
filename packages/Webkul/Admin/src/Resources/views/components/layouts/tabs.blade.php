@@ -1,5 +1,5 @@
 @php
-    $tabs = menu()->getCurrentActiveMenu()?->getChildren();
+    $tabs = menu()->getCurrentActiveMenu('admin')?->getChildren();
 @endphp
 
 @if (

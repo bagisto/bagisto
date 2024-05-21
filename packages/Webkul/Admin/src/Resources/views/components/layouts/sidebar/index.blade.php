@@ -2,7 +2,7 @@
     <div class="journal-scroll h-[calc(100vh-100px)] overflow-auto group-[.sidebar-collapsed]/container:overflow-visible">
         <nav class="grid w-full gap-2">
             <!-- Navigation Menu -->
-            @foreach (menu()->forAdmin()->getItems() as $menuItem)
+            @foreach (menu()->getItems('admin') as $menuItem)
                 <div
                     class="px-4 group/item {{ $menuItem->isActive() ? 'active' : 'inactive' }}"
                     onmouseenter="adjustSubMenuPosition(event)"
