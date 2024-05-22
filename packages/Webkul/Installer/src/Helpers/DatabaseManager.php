@@ -99,9 +99,11 @@ class DatabaseManager
 
     /**
      * Generate fake product data.
+     *
      * @return void|string
      */
-    public function faker() {
+    public function faker()
+    {
         try {
             $faker = new \Webkul\Faker\Helpers\Faker();
 
