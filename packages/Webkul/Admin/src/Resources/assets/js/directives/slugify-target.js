@@ -2,6 +2,10 @@ export default {
     mounted(el, binding) {
         let handler = function (e) {
             setTimeout(function () {
+                binding.arg = binding.arg.replace(/([a-z]{2})_([a-z]{2})\[(.*?)\]/g, function(match, p1, p2, p3) {
+                    return `${p1}_${p2.toUpperCase()}[${p3}]`;
+                });
+                
                 var target = document.getElementById(binding.arg);
 
                 target.value = e.target.value
