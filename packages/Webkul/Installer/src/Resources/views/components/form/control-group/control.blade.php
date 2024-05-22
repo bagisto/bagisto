@@ -67,7 +67,7 @@
         </v-field>
 
         <label
-            class="icon-checkbox-normal peer-checked:icon-checkbox-active text-6 cursor-pointer peer-checked:text-blue-600"
+            class="icon-checkbox-normal peer-checked:icon-checkbox-active cursor-pointer text-2xl peer-checked:text-blue-600"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
         </label>

@@ -128,6 +128,10 @@ class InstallerController extends Controller
         $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
 
         try {
+            if (request()->input('sample_products')) {
+                $this->databaseManager->faker();
+            }
+
             DB::table('admins')->updateOrInsert(
                 [
                     'id' => self::USER_ID,

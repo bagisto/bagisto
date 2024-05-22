@@ -72,6 +72,7 @@
 	.required:after {
         @apply content-['*'];
 	}
+
 	.custom-select {
         -webkit-appearance: none;
         -moz-appearance: none;

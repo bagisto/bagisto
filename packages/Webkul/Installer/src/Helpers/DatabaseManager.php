@@ -96,4 +96,20 @@ class DatabaseManager
         } catch (Exception $e) {
         }
     }
+
+    /**
+     * Generate fake product data.
+     * @return void|string
+     */
+    public function faker() {
+        try {
+            $faker = new \Webkul\Faker\Helpers\Faker();
+
+            $faker->fake('products', '5', 'simple');
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
