@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="scrollbar-hide mt-10 flex gap-8 overflow-auto max-sm:mt-5">
+    <div class="scrollbar-hide mt-10 flex gap-8 overflow-auto pb-2.5 max-sm:mt-5">
         <x-shop::shimmer.products.cards.grid
             class="min-w-[291px]"
             :count="4"
@@ -24,7 +24,7 @@
 
     @if ($navigationLink)
         <a
-            class="shimmer mx-auto mt-14 block h-12 w-[150.172px] rounded-2xl"
+            class="shimmer mx-auto mt-5 block h-12 w-[150.172px] rounded-2xl"
             role="button"
             aria-label="Show more products"
         ></a>

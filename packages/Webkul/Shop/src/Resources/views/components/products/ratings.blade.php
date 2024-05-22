@@ -17,16 +17,18 @@
         type="text/x-template"
         id="v-product-ratings-template"
     >
-        <span class="text-sm font-semibold text-black">
+        <span class="font-semibold text-black">
             @{{ average }}
         </span>
     
-        <span class="icon-star-fill -m-px text-xl text-amber-500"></span>
+        <span class="icon-star-fill -mt-px text-xl text-amber-500"></span>
         
-        <span class="mx-1 text-sm text-zinc-300">|</span>
+        <span class="mx-1 text-zinc-300">|</span>
         
-        <span class="text-sm text-zinc-600">
-            @{{ abbreviatedTotal }} Ratings
+        <span class="text-black ltr:ml-1 rtl:mr-1">
+            @{{ abbreviatedTotal }}
+
+            <span>Ratings</span>
         </span>
     </script>
 
