@@ -33,7 +33,7 @@
             </div>
 
             <div class="flex gap-1.5">
-                @if ($order->canCancel())
+                @if ($order->canReorder())
                     <a
                         href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
                         class="secondary-button border-zinc-200 px-5 py-3 font-normal max-sm:hidden"
@@ -245,7 +245,7 @@
                             </div>
 
                             <div class="rounded-b-lg bg-zinc-100 py-1 text-center">
-                                @if ($order->canCancel())
+                                @if ($order->canReorder())
                                     <a
                                         href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
                                         class="text-sm font-normal"
