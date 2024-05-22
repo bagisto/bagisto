@@ -24,7 +24,7 @@
 
     @if ($navigationLink)
         <a
-            class="shimmer mx-auto mt-5 block h-12 w-[150.172px] rounded-2xl"
+            class="shimmer mx-auto mt-16 block h-12 w-[150.172px] rounded-2xl"
             role="button"
             aria-label="Show more products"
         ></a>
