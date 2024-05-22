@@ -85,15 +85,15 @@
 
                                 <div class="flex gap-3 border-zinc-200 max-sm:gap-0 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
-                                        class="group relative"
+                                        class="group relative p-5 pt-0 ltr:pr-0 max-sm:ltr:pl-0 rtl:pl-0 max-sm:rtl:pr-0"
                                         v-for="product in items"
                                     >
                                         <span
-                                            class="icon-cancel absolute top-16 hidden h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-[#E3E3E3] bg-white text-2xl transition-all duration-300 group-hover:z-[1] group-hover:flex max-sm:top-9 max-sm:h-6 max-sm:w-6 max-sm:rounded-full max-sm:text-sm ltr:right-10 max-sm:ltr:right-4 rtl:left-10 max-sm:rtl:left-4"
+                                            class="icon-cancel absolute top-5 hidden h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-[#E3E3E3] bg-white text-2xl transition-all duration-300 group-hover:z-[1] group-hover:flex max-sm:top-4 max-sm:h-6 max-sm:w-6 max-sm:rounded-full max-sm:text-sm ltr:right-10 max-sm:ltr:right-4 rtl:left-10 max-sm:rtl:left-4"
                                             @click="remove(product.id)"
                                         ></span>
 
-                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] p-5 pt-0 max-sm:min-w-[190px] max-sm:px-2.5" />
+                                        <x-shop::products.card class="[&_span.icon-compare]:hidden" />
                                     </div>
                                 </div>
                             </div>

@@ -15,11 +15,10 @@
             <div class="flex justify-between gap-4">
                 <h1 class="shimmer h-[46px] w-2/4"></h1>
 
-                <div class="shimmer h-[46px] w-[46px] rounded-full">
-                </div>
+                <div class="shimmer h-[46px] w-[46px] rounded-full"></div>
             </div>
 
-            <div class="shimmer mt-4 h-[21px] w-[30%] max-sm:w-[220px]"></div>
+            <div class="shimmer mt-4 h-[38px] w-[150px] rounded-md"></div>
 
             <p class="shimmer mt-5 h-9 w-[35%]"></p>
 
