@@ -60,7 +60,6 @@ class DatabaseManager
                 'error' => $e->getMessage(),
             ], 500);
         }
-
     }
 
     /**
