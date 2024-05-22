@@ -30,7 +30,7 @@ return [
     ],
 
     'exchange_api' => [
-        'default' => 'exchange_rates',
+        'default' => 'fixer',
 
         'fixer' => [
             'key'   => env('FIXER_API_KEY'),
