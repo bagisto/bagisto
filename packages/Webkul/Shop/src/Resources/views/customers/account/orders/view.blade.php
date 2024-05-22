@@ -16,9 +16,9 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="flex-auto">
+    <div class="mx-4 flex-auto">
         <div class="flex items-center justify-between">
-            <div class="mb-8 flex items-center max-sm:mb-5">
+            <div class="max-sm:flex max-sm:items-center">
                 <!-- Back Button -->
                 <a
                     class="grid md:hidden"
@@ -36,7 +36,7 @@
                 @if ($order->canCancel())
                     <a
                         href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
-                        class="secondary-button flex items-center gap-x-2.5 border-zinc-200 px-5 py-3 font-normal"
+                        class="secondary-button border-zinc-200 px-5 py-3 font-normal max-sm:hidden"
                     >
                         @lang('shop::app.customers.account.orders.view.reorder-btn-title')
                     </a>
@@ -52,7 +52,7 @@
                     </form>
 
                     <a
-                        class="secondary-button flex items-center gap-x-2.5 border-zinc-200 px-5 py-3 font-normal"
+                        class="secondary-button border-zinc-200 px-5 py-3 font-normal max-sm:py-1.5"
                         href="javascript:void(0);"
                         @click="$emitter.emit('open-confirm-modal', {
                             message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
@@ -71,7 +71,7 @@
         {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
 
         <!-- Order view tabs -->
-        <div class="mt-5 max-sm:mt-0">
+        <div class="mt-8 max-sm:mt-5">
             <x-shop::tabs>
                 <x-shop::tabs.item
                     class="max-sm:!px-0 max-sm:py-2"
@@ -200,46 +200,59 @@
 
                     <!-- For Mobile View -->
                     <div class="grid gap-6 sm:hidden">
-                        <div class="grid gap-1.5 rounded-lg border px-4 py-2.5 text-xs font-medium text-[#757575] [&>*]:flex [&>*]:justify-between">
-                            <div>
-                                @lang('Order Id'):
+                        <div class="rounded-lg border">
+                            <div class="grid gap-1.5 px-4 py-2.5 text-xs font-medium text-[#757575] [&>*]:flex [&>*]:justify-between">
+                                <div>
+                                    @lang('Order Id'):
 
-                                <p class="text-black">#{{ $order->increment_id }}</p>
+                                    <p class="text-black">#{{ $order->increment_id }}</p>
+                                </div>
+    
+                                <div>
+                                    @lang('shop::app.customers.account.orders.view.information.placed-on'):
+
+                                    <p class="text-black">{{ core()->formatDate($order->created_at, 'd M Y') }}</p>
+                                </div>
+
+                                <div class="items-center">
+                                    @lang('Status')
+
+                                    @switch($order->status)
+                                        @case('completed')
+                                            <p class="label-completed">{{ ucfirst($order->status) }}</p>
+                                            @break
+
+                                        @case('pending')
+                                            <p class="label-pending">{{ ucfirst($order->status) }}</p>
+                                            @break
+
+                                        @case('closed')
+                                            <p class="label-closed">{{ ucfirst($order->status) }}</p>
+                                            @break
+
+                                        @case('processing')
+                                            <p class="label-processing">{{ ucfirst($order->status) }}</p>
+                                            @break
+
+                                        @case('canceled')
+                                            <p class="label-canceled">{{ ucfirst($order->status) }}</p>
+                                            @break
+
+                                        @default
+                                            <p class="label-info">{{ ucfirst($order->status) }}</p>
+                                    @endswitch
+                                </div>
                             </div>
 
-                            <div>
-                                @lang('shop::app.customers.account.orders.view.information.placed-on'):
-
-                                <p class="text-black">{{ core()->formatDate($order->created_at, 'd M Y') }}</p>
-                            </div>
-
-                            <div class="items-center">
-                                @lang('Status')
-
-                                @switch($order->status)
-                                    @case('completed')
-                                        <p class="label-completed">{{ ucfirst($order->status) }}</p>
-                                        @break
-
-                                    @case('pending')
-                                        <p class="label-pending">{{ ucfirst($order->status) }}</p>
-                                        @break
-
-                                    @case('closed')
-                                        <p class="label-closed">{{ ucfirst($order->status) }}</p>
-                                        @break
-
-                                    @case('processing')
-                                        <p class="label-processing">{{ ucfirst($order->status) }}</p>
-                                        @break
-
-                                    @case('canceled')
-                                        <p class="label-canceled">{{ ucfirst($order->status) }}</p>
-                                        @break
-
-                                    @default
-                                        <p class="label-info">{{ ucfirst($order->status) }}</p>
-                                @endswitch
+                            <div class="rounded-b-lg bg-zinc-100 py-1 text-center">
+                                @if ($order->canCancel())
+                                    <a
+                                        href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
+                                        class="text-sm font-normal"
+                                    >
+                                        @lang('shop::app.customers.account.orders.view.reorder-btn-title')
+                                    </a>
+                                @endif
                             </div>
                         </div>
 
@@ -248,9 +261,9 @@
 
                             <div class="grid gap-3">
                                 @foreach ($order->items as $item)
-                                    <x-shop::accordion :is-active="false">
+                                    <x-shop::accordion :is-active="true">
                                         <x-slot:header class="bg-gray-100 max-sm:mb-2 max-sm:px-2 max-sm:py-3">
-                                            <p class="text-base font-medium 1180:hidden">
+                                            <p class="text-sm font-medium 1180:hidden">
                                                 {{ $item->name }}
 
                                                 @if (isset($item->additional['attributes']))

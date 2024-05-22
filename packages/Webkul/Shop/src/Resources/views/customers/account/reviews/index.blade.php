@@ -13,7 +13,7 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="flex-auto">
+    <div class="mx-4 flex-auto">
         <div class="mb-8 flex items-center max-sm:mb-5">
             <!-- Back Button -->
             <a

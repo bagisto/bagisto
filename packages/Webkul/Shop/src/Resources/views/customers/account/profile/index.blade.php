@@ -13,7 +13,7 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="flex-auto">
+    <div class="mx-4 flex-auto">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <!-- Back Button -->

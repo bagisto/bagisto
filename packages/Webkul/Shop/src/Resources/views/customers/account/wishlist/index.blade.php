@@ -13,7 +13,7 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="flex-auto">
+    <div class="mx-4 flex-auto">
         <!-- Wishlist Vue Component -->
         <v-wishlist-products>
             <!-- Wishlist Shimmer Effect -->

@@ -13,7 +13,7 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="flex-auto">
+    <div class="mx-4 flex-auto">
         <div class="mb-8 flex items-center max-sm:mb-5">
             <!-- Back Button -->
             <a
@@ -68,18 +68,22 @@
                                 <a :href="record.actions[0].url">
                                     <div class="flex justify-between">
                                         <div class="text-sm font-semibold">
-                                            <p>@lang('Order Id:')#@{{ record.id }}</p>
+                                            <p class="text-sm">@lang('Order Id:')#@{{ record.id }}</p>
     
-                                            <p class="text-xs font-normal" v-text="record.created_at"></p>
+                                            <p class="text-xs font-normal text-[#7D7D7D]">
+                                                @{{ record.created_at }}
+                                            </p>
                                         </div>
     
                                         <p v-html="record.status"></p>
                                     </div>
         
                                     <div class="mt-2.5 text-xs font-normal">
-                                        <p>@lang('Subtotal')</p>
+                                        <p class="text-[#7D7D7D]">@lang('Subtotal')</p>
     
-                                        <p class="text-xl font-semibold" v-text="record.grand_total"></p>
+                                        <p class="text-xl font-semibold">
+                                            @{{ record.grand_total }}
+                                        </p>
                                     </div>
                                 </a>
                             </div>

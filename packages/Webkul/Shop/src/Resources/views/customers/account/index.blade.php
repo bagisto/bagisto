@@ -9,24 +9,32 @@
         <x-shop::breadcrumbs name="orders" />
     @endSection
 
-    <x-shop::layouts.account.navigation />
+    <div class="mx-4">
+        <x-shop::layouts.account.navigation />
+    </div>
+
+    <span class="mb-5 mt-2 w-full border-t border-zinc-300"></span>
 
     <!--Customers logout-->
     @auth('customer')
-        <div class="mt-3 w-full rounded-md border border-navyBlue py-2 text-center">
-            <x-shop::form
-                method="DELETE"
-                action="{{ route('shop.customer.session.destroy') }}"
-                id="customerLogout"
-            />
+        <div class="mx-4">
+            <div class="w-full rounded-lg border border-[#060C3B] py-2.5 text-center">
+                <x-shop::form
+                    method="DELETE"
+                    action="{{ route('shop.customer.session.destroy') }}"
+                    id="customerLogout"
+                />
 
-            <a
-                class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
-                href="{{ route('shop.customer.session.destroy') }}"
-                onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
-            >
-                @lang('shop::app.components.layouts.header.logout')
-            </a>
+                <a
+                    class="flex items-center justify-center gap-1.5 text-base hover:bg-gray-100"
+                    href="{{ route('shop.customer.session.destroy') }}"
+                    onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
+                >
+                    <span class="icon-compare text-2xl"></span>
+
+                    @lang('shop::app.components.layouts.header.logout')
+                </a>
+            </div>
         </div>
     @endauth
 

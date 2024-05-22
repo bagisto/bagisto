@@ -39,7 +39,7 @@
                         <div class="absolute left-1/2 top-1/2 z-[999] w-full max-w-[475px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-white p-5 max-md:w-[90%] max-sm:p-4">
                             <div class="flex gap-2.5">
                                 <div>
-                                    <span class="flex rounded-full border border-[rgba(6,12,59,0.20)] p-2.5">
+                                    <span class="flex rounded-full border border-gray-300 p-2.5">
                                         <i class="icon-error text-3xl max-sm:text-xl"></i>
                                     </span>
                                 </div>
@@ -49,14 +49,14 @@
                                         @{{ title }}
                                     </div>
 
-                                    <div class="pb-5 pt-1.5 text-left text-sm text-[#727272]">
+                                    <div class="pb-5 pt-1.5 text-left text-sm text-gray-500">
                                         @{{ message }}
                                     </div>
 
                                     <div class="flex justify-end gap-2.5">
                                         <button
                                             type="button"
-                                            class="secondary-button max-sm:px-6 max-sm:py-3"
+                                            class="secondary-button max-sm:px-6 max-sm:py-2.5"
                                             @click="disagree"
                                         >
                                             @{{ options.btnDisagree }}
@@ -64,7 +64,7 @@
 
                                         <button
                                             type="button"
-                                            class="primary-button max-sm:px-6 max-sm:py-3"
+                                            class="primary-button max-sm:px-6 max-sm:py-2.5"
                                             @click="agree"
                                         >
                                             @{{ options.btnAgree }} 
