@@ -101,17 +101,15 @@
                                             <div
                                                 class="flex items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"
                                                 :class="{ 'bg-gray-50 dark:bg-gray-950 font-semibold': applied.savedFilterId == filter.id }"
+                                                @click="applySavedFilter(filter)"
                                             >
-                                                <span 
-                                                    class="cursor-pointer" 
-                                                    @click="applySavedFilter(filter)"
-                                                >
+                                                <span class="cursor-pointer">
                                                     @{{ filter.name }}
                                                 </span>
-
+                                            
                                                 <span
                                                     class="icon-cross cursor-pointer rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"
-                                                    @click="deleteSavedFilter(filter)"
+                                                    @click.stop="deleteSavedFilter(filter)"
                                                 >
                                                 </span>
                                             </div>
@@ -121,7 +119,7 @@
                             </x-admin::accordion>
 
                             <!-- Custom Filters Accordion -->
-                            <x-admin::accordion class="select-none !rounded-none !shadow-none">
+                            <x-admin::accordion class="select-none !rounded-none !border-none !shadow-none">
                                 <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
                                     @lang('admin::app.components.datagrid.toolbar.filter.custom-filters')
                                 </x-slot>
