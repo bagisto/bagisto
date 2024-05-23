@@ -659,6 +659,8 @@
 
             props: ['isLoading', 'available', 'applied', 'src', 'savedFilter'],
 
+            emits: ['applyFilter', 'removeFilter', 'applySavedFilter'],
+
             data() {
                 return {
                     savedFilters: {

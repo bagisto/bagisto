@@ -32,13 +32,13 @@
                                 type="text"
                                 name="search"
                                 :value="getSearchedValues('all')"
-                                class="block w-full rounded-lg border dark:border-gray-800 bg-white dark:bg-gray-900 py-1.5 ltr:pl-3 rtl:pr-3 ltr:pr-10 rtl:pl-10 leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400  dark:focus:border-gray-400"
+                                class="block w-full rounded-lg border bg-white py-1.5 leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400 ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3"
                                 placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
                                 autocomplete="off"
                                 @keyup.enter="search"
                             >
 
-                            <div class="icon-search pointer-events-none absolute ltr:right-2.5 rtl:left-2.5 top-2 flex items-center text-2xl">
+                            <div class="icon-search pointer-events-none absolute top-2 flex items-center text-2xl ltr:right-2.5 rtl:left-2.5">
                             </div>
                         </div>
                     </div>
@@ -59,6 +59,8 @@
             template: '#v-datagrid-search-template',
 
             props: ['isLoading', 'available', 'applied'],
+
+            emits: ['search'],
 
             data() {
                 return {
