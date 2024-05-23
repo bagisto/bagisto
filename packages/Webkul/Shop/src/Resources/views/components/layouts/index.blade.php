@@ -128,7 +128,6 @@
         @stack('scripts')
 
         {!! view_render_event('bagisto.shop.layout.vue-app-mount.before') !!}
-
         <script>
             /**
              * Load event, the purpose of using the event is to mount the application
@@ -145,6 +144,20 @@
 
         <script type="text/javascript">
             {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
+        </script>
+
+        <script>
+            window.addEventListener('load', () => {
+                const buttons =document.querySelectorAll('button');
+                
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        let isVib =window.navigator.vibrate([500]);
+
+                        console.log(isVib);
+                    });
+                });
+            });
         </script>
     </body>
 </html>

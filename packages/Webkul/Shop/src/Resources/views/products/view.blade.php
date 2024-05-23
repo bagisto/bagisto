@@ -80,7 +80,7 @@
 
                 <x-shop::tabs.item
                     id="descritpion-tab"
-                    class="container mt-[60px] !p-0 max-1180:hidden"
+                    class="container mt-[60px] !p-0"
                     :title="trans('shop::app.products.view.description')"
                     :is-selected="true"
                 >
@@ -97,7 +97,7 @@
                 @if(count($attributeData))
                     <x-shop::tabs.item
                         id="information-tab"
-                        class="container mt-[60px] !p-0 max-1180:hidden"
+                        class="container mt-[60px] !p-0"
                         :title="trans('shop::app.products.view.additional-information')"
                         :is-selected="false"
                     >
@@ -145,7 +145,7 @@
                 <!-- Reviews Tab -->
                 <x-shop::tabs.item
                     id="review-tab"
-                    class="container mt-[60px] !p-0 max-1180:hidden"
+                    class="container mt-[60px] !p-0"
                     :title="trans('shop::app.products.view.review')"
                     :is-selected="false"
                 >
@@ -165,8 +165,8 @@
                 </p>
             </x-slot>
 
-            <x-slot:content>
-                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm">
+            <x-slot:content class="max-sm:px-0">
+                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm max-sm:mb-1 max-sm:px-4">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -226,9 +226,9 @@
         @endif
 
         <!-- Reviews Accordion -->
-        <x-shop::accordion class="bg-gray-100" :is-active="false">
+        <x-shop::accordion class="bg-gray-100 max-sm:border-none" :is-active="false">
             <x-slot:header id="review-accordian-button">
-                <p class="text-base font-medium 1180:hidden">
+                <p class="text-base font-medium">
                     @lang('shop::app.products.view.review')
                 </p>
             </x-slot>
@@ -279,12 +279,12 @@
                     >
 
                     <div class="container px-[60px] max-1180:px-0">
-                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
+                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-5">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
 
                             <!-- Details -->
-                            <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5">
+                            <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5 max-sm:px-4">
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex justify-between gap-4">
@@ -294,11 +294,11 @@
 
                                     @if (core()->getConfigData('general.content.shop.wishlist_option'))
                                         <div
-                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition-all hover:opacity-[0.8]"
+                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
-                                            :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
+                                            :class="isWishlist ? 'icon-heart-fill text-red-600' : 'icon-heart'"
                                             @click="addToWishlist"
                                         >
                                         </div>
@@ -313,7 +313,7 @@
                                 @if ($totalRatings = $reviewHelper->getTotalRating($product))
                                     <!-- Scroll To Reviews Section and Activate Reviews Tab -->
                                     <div
-                                        class="mt-4 w-max cursor-pointer"
+                                        class="mt-1 w-max cursor-pointer"
                                         role="button"
                                         tabindex="0"
                                         @click="scrollToReview"
@@ -345,8 +345,8 @@
                                     <div class="mt-2.5 grid gap-1.5">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
                                             <p class="text-zinc-500 [&>*]:text-black">
-                                                {!! $offer !!}
                                             </p>
+                                                {!! $offer !!}
                                         @endforeach
                                     </div>
                                 @endif
@@ -371,7 +371,7 @@
 
 
                                 <!-- Product Actions and Qunatity Box -->
-                                <div class="mt-8 flex max-w-[470px] gap-4">
+                                <div class="mt-8 flex max-w-[470px] gap-4 max-sm:mt-5">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
@@ -379,7 +379,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-4 rounded-xl px-7 py-4"
+                                            class="gap-x-4 rounded-xl px-7 py-4 max-sm:gap-x-5 max-sm:px-4 max-sm:py-3"
                                         />
                                     @endif
 
@@ -390,7 +390,7 @@
 
                                     <x-shop::button
                                         type="submit"
-                                        class="secondary-button w-full max-w-full"
+                                        class="secondary-button w-full max-w-full max-sm:py-3"
                                         button-type="secondary-button"
                                         :loading="false"
                                         :title="trans('shop::app.products.view.add-to-cart')"
@@ -407,7 +407,7 @@
                                 @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                     <x-shop::button
                                         type="submit"
-                                        class="primary-button mt-5 w-full max-w-[470px]"
+                                        class="primary-button mt-5 w-full max-w-[470px] max-sm:py-3"
                                         button-type="secondary-button"
                                         :title="trans('shop::app.products.view.buy-now')"
                                         :disabled="! $product->isSaleable(1)"
@@ -421,11 +421,11 @@
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="mt-10 flex gap-9 max-sm:flex-wrap max-sm:justify-center">
+                                <div class="mt-10 flex gap-9 max-md:mt-5 max-md:flex-wrap max-sm:justify-center max-sm:gap-2.5">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div
-                                        class="flex cursor-pointer items-center justify-center gap-2.5"
+                                        class="flex cursor-pointer items-center justify-center gap-2.5 max-sm:text-base"
                                         role="button"
                                         tabindex="0"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"

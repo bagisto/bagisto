@@ -3,33 +3,33 @@
     'total'   => 0,
 ])
 
-<div {{ $attributes->merge(['class' => 'flex w-max rounded-md border border-zinc-200 px-4 py-2  items-center']) }}>
-    <v-product-ratings
-        {{ $attributes }}
-        average="{{ $average }}"
-        total="{{ $total }}"
-    >
-    </v-product-ratings>
-</div>
+<v-product-ratings
+    {{ $attributes->merge(['class' => 'flex w-max items-center rounded-md border border-zinc-200 px-4 py-2']) }}
+    average="{{ $average }}"
+    total="{{ $total }}"
+>
+</v-product-ratings>
 
 @pushOnce("scripts")
     <script
         type="text/x-template"
         id="v-product-ratings-template"
     >
-        <span class="font-semibold text-black max-sm:text-xs">
-            @{{ average }}
-        </span>
-    
-        <span class="icon-star-fill -mt-px text-xl text-amber-500 max-sm:mt-0 max-sm:text-xs"></span>
+        <div>
+            <span class="text-sm font-semibold text-black max-sm:text-xs">
+                @{{ average }}
+            </span>
         
-        <span class="mx-1 text-zinc-300">|</span>
-        
-        <span class="text-black max-sm:text-xs max-sm:font-normal ltr:ml-1 rtl:mr-1">
-            @{{ abbreviatedTotal }}
+            <span class="icon-star-fill -mt-px text-xl text-amber-500 max-sm:-mt-1 max-sm:text-lg"></span>
+            
+            <span class="mx-1 text-zinc-300">|</span>
+            
+            <span class="text-sm font-semibold text-black max-sm:text-xs ltr:ml-1 rtl:mr-1">
+                @{{ abbreviatedTotal }}
 
-            <span class="max-sm:hidden">Ratings</span>
-        </span>
+                <span class="max-sm:hidden">Ratings</span>
+            </span>
+        </div>
     </script>
 
     <script type="module">
@@ -38,7 +38,7 @@
 
             props: {
                 average: {
-                    type: Number,
+                    type: String,
                     required: true,
                 },
 
@@ -46,11 +46,6 @@
                     type: Number,
                     required: true,
                 },
-            },
-
-            data() {
-                return {
-                };
             },
 
             computed: {
