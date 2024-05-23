@@ -123,7 +123,7 @@ class ProductRepository extends Repository
                 $filteredAttributeValues = $attributeValues
                     ->where('channel', core()->getRequestedChannelCode())
                     ->where('locale', core()->getRequestedLocaleCode());
-                
+
                 if ($attributeValues->isEmpty()) {
                     $filteredAttributeValues = $attributeValues
                         ->where('channel', core()->getRequestedChannelCode())
