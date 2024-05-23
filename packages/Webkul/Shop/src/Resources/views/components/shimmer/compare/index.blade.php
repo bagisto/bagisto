@@ -16,7 +16,7 @@
 
             <div class="flex gap-3 border-zinc-200 max-sm:gap-0 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                 <x-shop::shimmer.products.cards.grid
-                    class="min-w-[311px] max-w-[311px] p-5 pt-0 max-sm:min-w-[190px] max-sm:px-2.5"
+                    class="min-w-[311px] max-w-[311px] p-5 pt-0 max-sm:min-w-[190px] max-sm:px-2.5 max-sm:pb-2.5"
                     count="3"
                 />
             </div>

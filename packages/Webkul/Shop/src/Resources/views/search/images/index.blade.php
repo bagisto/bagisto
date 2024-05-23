@@ -22,12 +22,12 @@
             </label>
 
             <label
-                class="absolute top-2.5 flex cursor-pointer items-center text-xl ltr:right-3 ltr:pr-3 rtl:left-3 rtl:pl-3"
+                class="absolute top-2.5 flex cursor-pointer items-center text-xl ltr:right-3 ltr:pr-3 max-sm:ltr:pr-1 rtl:left-3 rtl:pl-3 max-sm:rtl:pl-1"
                 v-else
             >
                 <!-- Spinner -->
                 <svg
-                    class="h-6 w-6 animate-spin text-black"
+                    class="h-5 w-5 animate-spin text-black"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

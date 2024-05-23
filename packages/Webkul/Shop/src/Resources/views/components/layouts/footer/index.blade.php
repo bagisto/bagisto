@@ -46,7 +46,7 @@
         <!-- For Mobile view -->
         <x-shop::accordion
             :is-active="false"
-            class="hidden !w-full rounded-xl !border-2 border-[#e9decc] max-1060:block"
+            class="hidden !w-full rounded-xl !border-2 !border-[#e9decc] max-1060:block"
         >
             <x-slot:header class="rounded-xl bg-[#F1EADF]">
                 @lang('Footer Content')

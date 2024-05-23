@@ -132,7 +132,7 @@
 
                             <div class="mt-4 flex justify-start gap-4 max-xl:mb-5 max-sm:mb-5 max-sm:flex-wrap max-sm:justify-center">
                                 <button
-                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center"
+                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-sm:py-2.5"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')

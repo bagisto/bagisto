@@ -28,7 +28,7 @@
                     ></span>
 
                     <span
-                        class="absolute -top-4 rounded-[44px] bg-[#060C3B] px-2 py-1.5 text-xs font-semibold leading-[9px] text-white max-sm:px-1.5 max-sm:py-1 ltr:left-5 max-sm:ltr:left-4 rtl:right-5 max-sm:rtl:right-4"
+                        class="absolute -top-4 rounded-[44px] bg-[#060C3B] px-2 py-1.5 text-xs font-semibold leading-[9px] text-white max-sm:p-1.5 ltr:left-5 max-sm:ltr:left-4 rtl:right-5 max-sm:rtl:right-4"
                         v-if="cart?.items_qty"
                     >
                         @{{ cart.items_qty }}
@@ -240,7 +240,7 @@
                             </template>
 
                             <template v-else-if="displayTax.subtotal == 'both'">
-                                <p class="flex flex-col text-3xl font-semibold">
+                                <p class="flex flex-col text-3xl font-semibold max-sm:text-lg">
                                     @{{ cart.formatted_sub_total_incl_tax }}
                                     
                                     <span class="text-sm font-normal">
@@ -252,7 +252,7 @@
                             </template>
 
                             <template v-else>
-                                <p class="text-3xl font-semibold">
+                                <p class="text-3xl font-semibold max-sm:text-lg">
                                     @{{ cart.formatted_sub_total }}
                                 </p>
                             </template>
@@ -262,7 +262,7 @@
                             <div class="flex items-center justify-center">
                                 <!-- Spinner -->
                                 <svg
-                                    class="text-blue absolute h-8 w-8 animate-spin text-[5px] font-semibold"
+                                    class="text-blue absolute h-8 w-8 animate-spin text-[5px] font-semibold max-sm:h-6 max-sm:w-6"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     aria-hidden="true"
@@ -284,7 +284,9 @@
                                     ></path>
                                 </svg>
                     
-                                <span class="realative text-3xl font-semibold opacity-0" v-text="cart.formatted_grand_total"></span>
+                                <span class="realative text-3xl font-semibold opacity-0 max-sm:text-lg">
+                                    @{{ cart.formatted_grand_total }}
+                                </span>
                             </div>
                         </template>
 

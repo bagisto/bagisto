@@ -11,10 +11,10 @@
     >
         <!-- Grid Card -->
         <div
-            class="transtion-all group relative grid w-full content-start overflow-hidden rounded-md duration-300 hover:shadow-[0_5px_10px_rgba(0,0,0,0.1)]"
+            class="1180:transtion-all group w-full rounded-md 1180:relative 1180:grid 1180:content-start 1180:overflow-hidden 1180:duration-300 1180:hover:shadow-[0_5px_10px_rgba(0,0,0,0.1)]"
             v-if="mode != 'list'"
         >
-            <div class="relative max-h-[300px] max-w-[291px] overflow-hidden max-sm:max-h-[204px] max-sm:max-w-[200px]">
+            <div class="relative max-h-[300px] max-w-[291px] overflow-hidden max-sm:max-h-[200px] max-sm:max-w-[200px]">
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
                 <!-- Product Image -->
