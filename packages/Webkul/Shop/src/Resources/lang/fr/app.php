@@ -634,7 +634,7 @@ return [
                 'only-images-allowed'  => 'Seules les images (.jpeg, .jpg, .png, ..) sont autorisées.',
                 'search'               => 'Rechercher',
                 'size-limit-error'     => 'Erreur de limite de taille',
-                'something-went-wrong' => `Quelque chose s\'est mal passé, veuillez réessayer ultérieurement.`,
+                'something-went-wrong' => 'Quelque chose s\'est mal passé, veuillez réessayer ultérieurement.',
             ],
 
             'results' => [
