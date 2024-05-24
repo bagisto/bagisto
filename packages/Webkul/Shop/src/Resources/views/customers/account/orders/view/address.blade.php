@@ -1,4 +1,4 @@
-<div class="flex flex-col max-sm:hidden">
+<div class="flex flex-col max-md:hidden">
     <p class="font-semibold leading-6 text-gray-800">
         {{ $address->company_name ?? '' }}
     </p>
@@ -21,7 +21,7 @@
 </div>
 
 <!-- For Mobile View -->
-<div class="sm:hidden">
+<div class="md:hidden">
     <p class="font-semibold leading-6 text-gray-800">
         {{ $address->company_name ?? '' }}
     </p>

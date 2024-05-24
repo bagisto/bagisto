@@ -57,7 +57,7 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="px-6 py-5 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-3.5"
                             name="first_name"
                             rules="required"
                             :value="old('first_name')"
@@ -79,7 +79,7 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="px-6 py-5 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-3.5"
                             name="last_name"
                             rules="required"
                             :value="old('last_name')"
@@ -101,7 +101,7 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="px-6 py-5 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-3.5"
                             name="email"
                             rules="required|email"
                             :value="old('email')"
@@ -123,7 +123,7 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="px-6 py-5 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-3.5"
                             name="password"
                             rules="required|min:6"
                             :value="old('password')"
@@ -146,7 +146,7 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="px-6 py-5 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-3.5"
                             name="password_confirmation"
                             rules="confirmed:@password"
                             value=""

@@ -18,7 +18,7 @@
         type="text/x-template"
         id="v-datagrid-table-template"
     >
-        <div class="w-full overflow-x-auto rounded-xl border max-sm:rounded-none max-sm:border-0">
+        <div class="w-full overflow-x-auto rounded-xl border max-md:rounded-none max-md:border-0">
             <div class="table-responsive box-shadow grid w-full overflow-hidden rounded bg-white">
                 <slot
                     name="header"
@@ -35,7 +35,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid items-center gap-2.5 border-b border-zinc-200 bg-zinc-100 px-6 py-4 text-sm font-medium text-black max-sm:p-4"
+                            class="row grid items-center gap-2.5 border-b border-zinc-200 bg-zinc-100 px-6 py-4 text-sm font-medium text-black max-md:p-4"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -80,7 +80,7 @@
 
                             <!-- Actions -->
                             <p
-                                class="place-self-end max-sm:place-self-auto"
+                                class="place-self-end max-md:place-self-auto"
                                 v-if="available.actions.length"
                             >
                                 @lang('shop::app.components.datagrid.table.actions')
@@ -105,7 +105,7 @@
                     <template v-else>
                         <template v-if="available.records.length">
                             <div
-                                class="row grid items-center gap-2.5 border-b bg-white px-6 py-4 font-medium text-gray-600 transition-all max-sm:p-4 max-sm:text-xs"
+                                class="row grid items-center gap-2.5 border-b bg-white px-6 py-4 font-medium text-gray-600 transition-all max-md:p-4 max-md:text-xs"
                                 v-for="record in available.records"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                             >
@@ -180,7 +180,7 @@
         
                     <template v-else>
                         <!-- Information Panel -->
-                        <div v-if="$parent.available.records.length" class="flex items-center justify-between p-6 max-sm:p-2">
+                        <div v-if="$parent.available.records.length" class="flex items-center justify-between p-6 max-md:p-2">
                             <p class="text-xs font-medium">
                                 @{{ "@lang('shop::app.components.datagrid.table.showing')".replace(':firstItem', $parent.available.meta.from) }}
                                 @{{ "@lang('shop::app.components.datagrid.table.to')".replace(':lastItem', $parent.available.meta.to) }}
@@ -205,11 +205,11 @@
                             </div>
         
                             <nav aria-label="@lang('shop::app.components.datagrid.table.page-navigation')">
-                                <ul class="inline-flex items-center -space-x-px rounded-lg border border-zinc-200 max-sm:px-0">
+                                <ul class="inline-flex items-center -space-x-px rounded-lg border border-zinc-200 max-md:px-0">
                                     <li  @click="changePage('previous')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex h-10 w-9 items-center justify-center font-medium leading-normal hover:bg-gray-100 max-sm:h-8 max-sm:w-6 max-sm:justify-normal"
+                                            class="flex h-10 w-9 items-center justify-center font-medium leading-normal hover:bg-gray-100 max-md:h-8 max-md:w-6 max-md:justify-normal"
                                             aria-label="@lang('shop::app.components.datagrid.table.previous-page')"
                                         >
                                             <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
@@ -220,7 +220,7 @@
                                         <input
                                             type="text"
                                             :value="$parent.available.meta.current_page"
-                                            class="max-w-[42px] items-center border-l border-r px-4 py-2 font-medium leading-normal text-black hover:bg-gray-100 max-sm:max-w-9 max-sm:justify-normal max-sm:px-0 max-sm:py-1 max-sm:text-center"
+                                            class="max-w-[42px] items-center border-l border-r px-4 py-2 font-medium leading-normal text-black hover:bg-gray-100 max-md:max-w-9 max-md:justify-normal max-md:px-0 max-md:py-1 max-md:text-center"
                                             @change="changePage(parseInt($event.target.value))"
                                             aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                         >
@@ -229,7 +229,7 @@
                                     <li @click="changePage('next')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex h-10 w-9 items-center justify-center font-medium leading-normal hover:bg-gray-100 max-sm:h-8 max-sm:w-6 max-sm:justify-normal"
+                                            class="flex h-10 w-9 items-center justify-center font-medium leading-normal hover:bg-gray-100 max-md:h-8 max-md:w-6 max-md:justify-normal"
                                             aria-label="@lang('shop::app.components.datagrid.table.next-page')"
                                         >
                                             <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>

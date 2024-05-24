@@ -14,7 +14,7 @@
     </div>
 
     <div class="mx-4 flex-auto">
-        <div class="mb-8 flex items-center max-sm:mb-5">
+        <div class="mb-8 flex items-center max-md:mb-5">
             <!-- Back Button -->
             <a
                 class="grid md:hidden"
@@ -23,7 +23,7 @@
                 <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
             </a>
 
-            <h2 class="text-2xl font-medium max-sm:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+            <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                 @lang('shop::app.customers.account.downloadable-products.name')
             </h2>
         </div>
@@ -31,12 +31,12 @@
         {!! view_render_event('bagisto.shop.customers.account.downloadable_products.list.before') !!}
 
             <!-- For Desktop View -->
-        <div class="max-sm:hidden">
+        <div class="max-md:hidden">
             <x-shop::datagrid :src="route('shop.customers.account.downloadable_products.index')" />
         </div>
 
         <!-- For Mobile View -->
-        <div class="hidden max-sm:block">
+        <div class="hidden max-md:block">
             <x-shop::datagrid :src="route('shop.customers.account.downloadable_products.index')">
                 <!-- Datagrid Header -->
                 <template #header="{

@@ -37,13 +37,13 @@
                 >
                     <x-slot:toggle>
                         <div
-                            class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-[110px] max-sm:w-fit ltr:pl-3 ltr:pr-4 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-4 rtl:pr-3 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5"
+                            class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-fit ltr:pl-3 ltr:pr-4 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-4 rtl:pr-3 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5"
                             :class="{'[&>*]:text-blue-600': filters.columns.length > 0}"
                         >
                             <span class="flex items-center justify-between gap-1.5">
                                 <span class="icon-filter text-2xl"></span>
 
-                                <span class="max-sm:hidden">
+                                <span class="max-md:hidden">
                                     @lang('shop::app.components.datagrid.toolbar.filter.title')
                                 </span>
                             </span>
@@ -257,7 +257,7 @@
 
                                     <div class="mt-4 grid grid-cols-2 gap-1.5">
                                         <p
-                                            class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600 max-sm:text-sm"
+                                            class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600 max-md:text-sm"
                                             v-for="option in column.options"
                                             v-text="option.label"
                                             @click="applyFilter(
@@ -341,7 +341,7 @@
 
                                     <div class="my-4 grid grid-cols-2 gap-1.5">
                                         <p
-                                            class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600 max-sm:text-sm"
+                                            class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600 max-md:text-sm"
                                             v-for="option in column.options"
                                             v-text="option.label"
                                             @click="applyFilter(

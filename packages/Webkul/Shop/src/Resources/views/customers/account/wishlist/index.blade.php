@@ -46,7 +46,7 @@
                                 <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>                                    
                             </a>
 
-                            <h2 class="text-2xl font-medium max-sm:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                            <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                                 @lang('shop::app.customers.account.wishlist.page-title')
                             </h2>
                         </div>
@@ -54,7 +54,7 @@
                         {!! view_render_event('bagisto.shop.customers.account.wishlist.delete_all.before') !!}
 
                         <div
-                            class="secondary-button border-zinc-200 px-5 py-3 font-normal max-sm:py-1.5"
+                            class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:py-1.5"
                             @click="removeAll"
                             v-if="wishlistItems.length"
                         >
@@ -67,20 +67,20 @@
                     <div 
                         v-if="wishlistItems.length" 
                         v-for="(item, index) in wishlistItems"
-                        class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-sm:my-5 max-sm:last:mb-0"
+                        class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-md:my-5 max-md:last:mb-0"
                     >
                         <div class="grid flex-1 gap-8">
                             <div class="grid gap-y-6">
                                 <!-- Wishlist item -->
                                 <div class="flex justify-between gap-x-2.5 border-b border-zinc-200 pb-5">
-                                    <div class="flex gap-x-5 max-sm:w-full">
+                                    <div class="flex gap-x-5 max-md:w-full">
                                         <div>
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.image.before') !!}
 
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
                                                 <img 
-                                                    class="h-28 max-h-28 w-28 max-w-28 rounded-xl max-sm:h-20 max-sm:max-h-20 max-sm:w-20 max-sm:max-w-20"
+                                                    class="h-28 max-h-28 w-28 max-w-28 rounded-xl max-md:h-20 max-md:max-h-20 max-md:w-20 max-md:max-w-20"
                                                     :src="item.product.base_image.small_image_url" 
                                                     alt="Product Image"
                                                 /> 
@@ -89,15 +89,15 @@
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.image.after') !!}
                                         </div>
 
-                                        <div class="grid gap-y-2.5 max-sm:w-full">
+                                        <div class="grid gap-y-2.5 max-md:w-full max-md:gap-y-0">
                                             <div class="flex justify-between">
-                                                <p class="text-base font-medium max-sm:text-sm">
+                                                <p class="text-base font-medium max-md:text-sm">
                                                     @{{ item.product.name }}
                                                 </p>
 
                                                 <span
                                                     @click="remove(item.id)" 
-                                                    class="icon-bin hidden text-2xl max-sm:block"
+                                                    class="icon-bin hidden text-2xl max-md:block"
                                                 >
                                                 </span>
                                             </div>
@@ -140,9 +140,9 @@
                                                 </div>
                                             </div>
 
-                                            <div class="max-sm:block max-sm:justify-between sm:hidden">
+                                            <div class="max-md:block max-md:justify-between md:hidden">
                                                 <p 
-                                                    class="text-lg font-semibold max-sm:text-sm" 
+                                                    class="text-lg font-semibold max-md:text-sm" 
                                                     v-html="item.product.min_price"
                                                 >
                                                 </p>
@@ -151,7 +151,7 @@
 
                                                 <!--Wishlist Item removed button-->
                                                 <a 
-                                                    class="flex cursor-pointer justify-end text-base text-[#0A49A7] max-sm:hidden" 
+                                                    class="flex cursor-pointer justify-end text-base text-[#0A49A7] max-md:hidden" 
                                                     @click="remove(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.remove')
@@ -163,17 +163,17 @@
 
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.perform_actions.before') !!}
 
-                                            <div class="flex gap-5">
+                                            <div class="flex gap-5 max-md:mt-2.5">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
                                                     ::value="item.options.quantity ?? 1"
-                                                    class="flex max-h-10 items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5 max-sm:gap-x-1 max-sm:px-1.5 max-sm:py-1"
+                                                    class="flex max-h-10 items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5 max-md:gap-x-1 max-md:px-1.5 max-md:py-1"
                                                     @change="setItemQuantity($event, item)"
                                                 />
 
                                                 <!--Wishlist Item Move-to-cart-->
                                                 <x-shop::button
-                                                    class="primary-button max-h-10 w-max rounded-2xl px-6 py-1.5 text-center text-base max-sm:px-4 max-sm:py-1.5 max-sm:text-sm"
+                                                    class="primary-button max-h-10 w-max rounded-2xl px-6 py-1.5 text-center text-base max-md:px-4 max-md:py-1.5 max-md:text-sm"
                                                     :title="trans('shop::app.customers.account.wishlist.move-to-cart')"
                                                     ::loading="isMovingToCart[item.id]"
                                                     ::disabled="isMovingToCart[item.id]"
@@ -185,7 +185,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="max-sm:hidden">
+                                    <div class="max-md:hidden">
                                         <p 
                                             class="text-lg font-semibold" 
                                             v-html="item.product.min_price"
@@ -210,13 +210,13 @@
                         v-else
                     >
                         <img
-                            class="max-sm:h-[100px] max-sm:w-[100px]"
+                            class="max-md:h-[100px] max-md:w-[100px]"
                             src="{{ bagisto_asset('images/wishlist.png') }}"
                             alt="Empty wishlist"
                         >
 
                         <p
-                            class="text-xl max-sm:text-sm"
+                            class="text-xl max-md:text-sm"
                             role="heading"
                         >
                             @lang('shop::app.customers.account.wishlist.empty')

@@ -38,7 +38,7 @@
                     <x-shop::modal ref="loginModel">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <h2 class="text-2xl font-medium max-sm:text-xl">
+                            <h2 class="text-2xl font-medium max-md:text-xl">
                                 @lang('shop::app.checkout.login.title')
                             </h2>
                         </x-slot>
@@ -52,7 +52,7 @@
 
                                 <x-shop::form.control-group.control
                                     type="email"
-                                    class="px-6 py-5"
+                                    class="px-6 py-4"
                                     name="email"
                                     rules="required|email"
                                     :label="trans('shop::app.checkout.login.email')"
@@ -71,7 +71,7 @@
 
                                 <x-shop::form.control-group.control
                                     type="password"
-                                    class="px-6 py-5"
+                                    class="px-6 py-4"
                                     id="password"
                                     name="password"
                                     rules="required|min:6"

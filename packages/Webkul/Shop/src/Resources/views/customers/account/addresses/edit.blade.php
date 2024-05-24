@@ -18,7 +18,7 @@
     </div>
 
     <div class="mx-4 flex-auto">
-        <div class="mb-8 flex items-center max-sm:mb-5">
+        <div class="mb-8 flex items-center max-md:mb-5">
             <!-- Back Button -->
             <a
                 class="grid md:hidden"
@@ -27,7 +27,7 @@
                 <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
             </a>
 
-            <h2 class="text-2xl font-medium max-sm:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+            <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                 @lang('shop::app.customers.account.addresses.edit.edit')
                 @lang('shop::app.customers.account.addresses.edit.title')
             </h2>
@@ -327,7 +327,7 @@
 
                 <button
                     type="submit"
-                    class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-sm:w-full max-sm:max-w-full"
+                    class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-md:w-full max-md:max-w-full"
                 >
                     @lang('shop::app.customers.account.addresses.edit.save')
                 </button>

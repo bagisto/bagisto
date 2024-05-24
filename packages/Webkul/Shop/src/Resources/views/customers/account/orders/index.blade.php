@@ -31,12 +31,12 @@
         {!! view_render_event('bagisto.shop.customers.account.orders.list.before') !!}
 
         <!-- For Desktop View -->
-        <div class="max-sm:hidden">
+        <div class="max-md:hidden">
             <x-shop::datagrid :src="route('shop.customers.account.orders.index')" />
         </div>
 
         <!-- For Mobile View -->
-        <div class="sm:hidden">
+        <div class="md:hidden">
             <x-shop::datagrid :src="route('shop.customers.account.orders.index')">
                 <!-- Datagrid Header -->
                 <template #header="{

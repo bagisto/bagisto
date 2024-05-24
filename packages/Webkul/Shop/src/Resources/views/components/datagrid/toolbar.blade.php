@@ -3,7 +3,7 @@
 </template>
 
 <template v-else>
-    <div class="mt-7 flex items-center justify-between gap-4 max-sm:block">
+    <div class="mt-7 flex items-center justify-between gap-4 max-md:block">
         <!-- Left Toolbar -->
         <div class="flex w-full gap-x-1">
             <!-- Mass Actions Panel -->
@@ -49,7 +49,7 @@
                     </template>
                 </x-shop::datagrid.toolbar.search>
 
-                <div class="hidden w-11 max-sm:block">
+                <div class="hidden w-11 max-md:block">
                     <x-shop::datagrid.toolbar.filter>
                         <template #filter="{
                             available,
@@ -84,7 +84,7 @@
         </div>
 
         <!-- Right Toolbar -->
-        <div class="flex gap-x-4 max-sm:my-4 max-sm:items-center max-sm:justify-between">
+        <div class="flex gap-x-4 max-md:my-4 max-md:items-center max-md:justify-between">
             <!-- Pagination Panel -->
             <x-shop::datagrid.toolbar.pagination>
                 <template #pagination="{
@@ -104,14 +104,14 @@
                 </template>
             </x-shop::datagrid.toolbar.pagination>                
 
-            <div class="hidden max-sm:block ltr:pl-2.5 rtl:pr-2.5">
-                <p class="text-sm font-light text-gray-800 max-sm:w-full">
+            <div class="hidden max-md:block ltr:pl-2.5 rtl:pr-2.5">
+                <p class="text-sm font-light text-gray-800 max-md:w-full">
                     @{{ "@lang('shop::app.components.datagrid.toolbar.results')".replace(':total', available.meta.total) }}
                 </p>
             </div>
 
             <!-- Filter Panel -->
-            <div class="max-sm:hidden">
+            <div class="max-md:hidden">
                 <x-shop::datagrid.toolbar.filter>
                     <template #filter="{
                         available,

@@ -14,7 +14,7 @@
     </div>
 
     <div class="mx-4 flex-auto">
-        <div class="mb-8 flex items-center max-sm:mb-5">
+        <div class="mb-8 flex items-center max-md:mb-5">
             <!-- Back Button -->
             <a
                 class="grid md:hidden"
@@ -23,7 +23,7 @@
                 <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
             </a>
 
-            <h2 class="text-2xl font-medium max-sm:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+            <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                 @lang('shop::app.customers.account.profile.edit.edit-profile')
             </h2>
         </div>
@@ -41,7 +41,7 @@
             <x-shop::form.control-group class="mt-4">
                 <x-shop::form.control-group.control
                     type="image"
-                    class="max-sm:[&>*]:[&>*]:rounded-full mb-0 rounded-xl !p-0 text-gray-700 max-sm:grid max-sm:justify-center"
+                    class="max-md:[&>*]:[&>*]:rounded-full mb-0 rounded-xl !p-0 text-gray-700 max-md:grid max-md:justify-center"
                     name="image[]"
                     :label="trans('Image')"
                     :is-multiple="false"
@@ -259,7 +259,7 @@
                 ></label>
 
                 <label
-                    class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-sm ltr:pl-0 rtl:pr-0"
+                    class="cursor-pointer select-none text-base text-zinc-500 max-md:text-sm ltr:pl-0 rtl:pr-0"
                     for="is-subscribed"
                 >
                     @lang('shop::app.customers.account.profile.edit.subscribe-to-newsletter')
@@ -268,7 +268,7 @@
 
             <button
                 type="submit"
-                class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-sm:w-full max-sm:max-w-full"
+                class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-md:w-full max-md:max-w-full"
             >
                 @lang('shop::app.customers.account.profile.edit.save')
             </button>

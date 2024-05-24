@@ -27,7 +27,7 @@
 
     <!-- Hero Image -->
     @if ($category->banner_path)
-        <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:mt-4 max-sm:px-4">
+        <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
             <div>
                 <img
                     class="aspect-[4/1] max-h-full max-w-full rounded-xl"
@@ -46,7 +46,7 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
-            <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:mt-4 max-sm:px-4">
+            <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
                 {!! $category->description !!}
             </div>
         @endif
@@ -67,7 +67,7 @@
             type="text/x-template" 
             id="v-category-template"
         >
-            <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
+            <div class="container px-[60px] max-lg:px-8 max-md:px-4">
                 <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
@@ -104,13 +104,13 @@
                                 <template v-else>
                                     <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
                                         <img
-                                            class="max-sm:h-[100px] max-sm:w-[100px]"
+                                            class="max-md:h-[100px] max-md:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                         />
                                   
                                         <p
-                                            class="text-xl max-sm:text-sm"
+                                            class="text-xl max-md:text-sm"
                                             role="heading"
                                         >
                                             @lang('shop::app.categories.view.empty')
@@ -123,10 +123,10 @@
                         </div>
 
                         <!-- Product Grid Card Container -->
-                        <div v-else class="mt-8 max-sm:mt-5">
+                        <div v-else class="mt-8 max-md:mt-5">
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-x-4">
+                                <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
                                     <x-shop::shimmer.products.cards.grid count="12" />
                                 </div>
                             </template>
@@ -136,7 +136,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-x-4">
+                                    <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
@@ -148,13 +148,13 @@
                                 <template v-else>
                                     <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
                                         <img
-                                            class="max-sm:h-[100px] max-sm:w-[100px]"
+                                            class="max-md:h-[100px] max-md:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                         />
                                         
                                         <p
-                                            class="text-xl max-sm:text-sm"
+                                            class="text-xl max-md:text-sm"
                                             role="heading"
                                         >
                                             @lang('shop::app.categories.view.empty')

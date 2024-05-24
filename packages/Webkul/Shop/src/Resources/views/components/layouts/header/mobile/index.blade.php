@@ -8,7 +8,7 @@
     $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
 @endphp
 
-<div class="hidden flex-wrap gap-4 px-4 pb-4 pt-6 max-lg:flex">
+<div class="flex flex-wrap gap-4 px-4 pb-4 pt-6 lg:hidden">
     <div class="flex w-full items-center justify-between">
         <!-- Left Navigation -->
         <div class="flex items-center gap-x-1.5">
@@ -37,11 +37,11 @@
 
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
-                    <div class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5 max-sm:mt-4">
+                    <div class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5 max-md:mt-4">
                         <div>
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
-                                class="h-[60px] w-[60px] rounded-full max-sm:rounded-full"
+                                class="h-[60px] w-[60px] rounded-full max-md:rounded-full"
                             >
                         </div>
 
@@ -57,10 +57,10 @@
                         @endguest
 
                         @auth('customer')
-                            <div class="flex flex-col justify-between gap-2.5 max-sm:gap-0">
-                                <p class="font-mediums text-2xl max-sm:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
+                            <div class="flex flex-col justify-between gap-2.5 max-md:gap-0">
+                                <p class="font-mediums text-2xl max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
 
-                                <p class="text-zinc-500 no-underline max-sm:text-sm">{{ auth()->user()?->email }}</p>
+                                <p class="text-zinc-500 no-underline max-md:text-sm">{{ auth()->user()?->email }}</p>
                             </div>
                         @endauth
                     </div>
@@ -98,7 +98,7 @@
 
         <!-- Right Navigation -->
         <div>
-            <div class="flex items-center gap-x-5 max-sm:gap-x-4">
+            <div class="flex items-center gap-x-5 max-md:gap-x-4">
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.compare.before') !!}
 
                 @if($showCompare)
@@ -118,25 +118,137 @@
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.after') !!}
 
-                <!-- Guest Dropdown -->
-                @guest('customer')
-                    <a
-                        href="{{ route('shop.customer.session.create') }}"
-                        aria-label="@lang('shop::app.components.layouts.header.account')"
-                    >
-                        <span class="icon-users cursor-pointer text-2xl"></span>
-                    </a>
-                @endguest
+                <!-- For Large screens -->
+                <div class="max-md:hidden">
+                    <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
+                        <x-slot:toggle>
+                            <span class="icon-users cursor-pointer text-2xl"></span>
+                        </x-slot>
+    
+                        <!-- Guest Dropdown -->
+                        @guest('customer')
+                            <x-slot:content>
+                                <div class="grid gap-2.5">
+                                    <p class="font-dmserif text-xl">
+                                        @lang('shop::app.components.layouts.header.welcome-guest')
+                                    </p>
+    
+                                    <p class="text-sm">
+                                        @lang('shop::app.components.layouts.header.dropdown-text')
+                                    </p>
+                                </div>
+    
+                                <p class="py-2px mt-3 w-full border border-zinc-200"></p>
+    
+                                <div class="mt-6 flex gap-4">
+                                    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.before') !!}
+    
+                                    <a
+                                        href="{{ route('shop.customer.session.create') }}"
+                                        class="m-0 mx-auto block w-max cursor-pointer rounded-2xl bg-navyBlue px-7 py-4 text-center text-base font-medium text-white ltr:ml-0 rtl:mr-0"
+                                    >
+                                        @lang('shop::app.components.layouts.header.sign-in')
+                                    </a>
+    
+                                    <a
+                                        href="{{ route('shop.customers.register.index') }}"
+                                        class="m-0 mx-auto block w-max cursor-pointer rounded-2xl border-2 border-navyBlue bg-white px-7 py-3.5 text-center text-base font-medium text-navyBlue ltr:ml-0 rtl:mr-0"
+                                    >
+                                        @lang('shop::app.components.layouts.header.sign-up')
+                                    </a>
+    
+                                    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.after') !!}
+                                </div>
+                            </x-slot>
+                        @endguest
+    
+                        <!-- Customers Dropdown -->
+                        @auth('customer')
+                            <x-slot:content class="!p-0">
+                                <div class="grid gap-2.5 p-5 pb-0">
+                                    <p class="font-dmserif text-xl">
+                                        @lang('shop::app.components.layouts.header.welcome')’
+                                        {{ auth()->guard('customer')->user()->first_name }}
+                                    </p>
+    
+                                    <p class="text-sm">
+                                        @lang('shop::app.components.layouts.header.dropdown-text')
+                                    </p>
+                                </div>
+    
+                                <p class="py-2px mt-3 w-full border border-zinc-200"></p>
+    
+                                <div class="mt-2.5 grid gap-1 pb-2.5">
+                                    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.profile_dropdown.links.before') !!}
+    
+                                    <a
+                                        class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
+                                        href="{{ route('shop.customers.account.profile.index') }}"
+                                    >
+                                        @lang('shop::app.components.layouts.header.profile')
+                                    </a>
+    
+                                    <a
+                                        class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
+                                        href="{{ route('shop.customers.account.orders.index') }}"
+                                    >
+                                        @lang('shop::app.components.layouts.header.orders')
+                                    </a>
+    
+                                    @if ($showWishlist)
+                                        <a
+                                            class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
+                                            href="{{ route('shop.customers.account.wishlist.index') }}"
+                                        >
+                                            @lang('shop::app.components.layouts.header.wishlist')
+                                        </a>
+                                    @endif
+    
+                                    <!--Customers logout-->
+                                    @auth('customer')
+                                        <x-shop::form
+                                            method="DELETE"
+                                            action="{{ route('shop.customer.session.destroy') }}"
+                                            id="customerLogout"
+                                        />
+    
+                                        <a
+                                            class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
+                                            href="{{ route('shop.customer.session.destroy') }}"
+                                            onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
+                                        >
+                                            @lang('shop::app.components.layouts.header.logout')
+                                        </a>
+                                    @endauth
+    
+                                    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.profile_dropdown.links.after') !!}
+                                </div>
+                            </x-slot>
+                        @endauth
+                    </x-shop::dropdown>
+                </div>
 
-                <!-- Customers Dropdown -->
-                @auth('customer')
-                    <a
-                        href="{{ route('shop.customers.account.index') }}"
-                        aria-label="@lang('shop::app.components.layouts.header.account')"
-                    >
-                        <span class="icon-users cursor-pointer text-2xl"></span>
-                    </a>
-                @endauth
+                <!-- For Medium and small screen --> 
+                <div class="md:hidden">
+                    @guest('customer')
+                        <a
+                            href="{{ route('shop.customer.session.create') }}"
+                            aria-label="@lang('shop::app.components.layouts.header.account')"
+                        >
+                            <span class="icon-users cursor-pointer text-2xl"></span>
+                        </a>
+                    @endguest
+
+                    <!-- Customers Dropdown -->
+                    @auth('customer')
+                        <a
+                            href="{{ route('shop.customers.account.index') }}"
+                            aria-label="@lang('shop::app.components.layouts.header.account')"
+                        >
+                            <span class="icon-users cursor-pointer text-2xl"></span>
+                        </a>
+                    @endauth
+                </div>
             </div>
         </div>
     </div>
@@ -153,11 +265,11 @@
         </label>
 
         <div class="relative w-full">
-            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-sm:top-2 max-sm:text-xl ltr:left-3 rtl:right-3"></div>
+            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:top-2 max-md:text-xl ltr:left-3 rtl:right-3"></div>
 
             <input
                 type="text"
-                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-xs font-medium text-gray-900 max-sm:rounded-lg max-sm:px-10 max-sm:py-2.5"
+                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-xs font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-2.5"
                 name="query"
                 value="{{ request('query') }}"
                 placeholder="@lang('shop::app.components.layouts.header.search-text')"
@@ -271,7 +383,7 @@
                     <!-- Drawer Toggler -->
                     <x-slot:toggle>
                         <div
-                            class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-sm:py-3"
+                            class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
                             role="button"
                         >
                             {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
@@ -304,7 +416,7 @@
                     <!-- Drawer Toggler -->
                     <x-slot:toggle>
                         <div
-                            class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-sm:py-3"
+                            class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
                             role="button"
                         >
                             <img

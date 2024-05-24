@@ -1,11 +1,11 @@
 {!! view_render_event('bagisto.shop.checkout.onepage.address.before') !!}
 
 <!-- Accordian Blade Component -->
-<x-shop::accordion class="mb-7 mt-8 !border-b-0 max-sm:mb-0 max-sm:mt-0">
+<x-shop::accordion class="mb-7 mt-8 !border-b-0 max-md:mb-0 max-md:mt-0">
     <!-- Accordian Header Component Slot -->
     <x-slot:header class="!p-0">
         <div class="flex items-center justify-between">
-            <h2 class="text-2xl font-medium max-sm:text-lg">
+            <h2 class="text-2xl font-medium max-md:text-lg">
                 @lang('shop::app.checkout.onepage.address.title')
             </h2>
         </div>

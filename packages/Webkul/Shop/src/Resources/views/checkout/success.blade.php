@@ -12,7 +12,7 @@
 
     <!-- Page Header -->
     <div class="flex-wrap">
-        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-sm:px-4">
+        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-md:px-4">
             <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 <a
                     href="{{ route('shop.home.index') }}"
@@ -38,18 +38,18 @@
 
 	<!-- Page content -->
 	<div class="container mt-8 px-[60px] max-lg:px-8">
-		<div class="grid place-items-center gap-y-5 max-sm:gap-y-2.5">
+		<div class="grid place-items-center gap-y-5 max-md:gap-y-2.5">
 			{{ view_render_event('bagisto.shop.checkout.success.image.before', ['order' => $order]) }}
 
 			<img 
-				class="max-sm:h-[100px] max-sm:w-[100px]" src="{{ bagisto_asset('images/thank-you.png') }}" 
+				class="max-md:h-[100px] max-md:w-[100px]" src="{{ bagisto_asset('images/thank-you.png') }}" 
 				alt="thankyou" 
 				title=""
 			>
 
 			{{ view_render_event('bagisto.shop.checkout.success.image.after', ['order' => $order]) }}
 
-			<p class="text-xl max-sm:text-sm">
+			<p class="text-xl max-md:text-sm">
 				@if (auth()->guard('customer')->user())
 					@lang('shop::app.checkout.success.order-id-info', [
 						'order_id' => '<a class="text-[#0A49A7]" href="' . route('shop.customers.account.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
@@ -59,11 +59,11 @@
 				@endif
 			</p>
 
-			<p class="text-2xl font-medium max-sm:text-xl">
+			<p class="text-2xl font-medium max-md:text-xl">
 				@lang('shop::app.checkout.success.thanks')
 			</p>
 			
-			<p class="text-xl text-zinc-500 max-sm:text-center max-sm:text-xs">
+			<p class="text-xl text-zinc-500 max-md:text-center max-md:text-xs">
 				@if (! empty($order->checkout_message))
 					{!! nl2br($order->checkout_message) !!}
 				@else

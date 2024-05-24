@@ -69,7 +69,7 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="px-6 py-5 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-3.5"
                             id="email"
                             name="email"
                             rules="required|email"
@@ -91,7 +91,7 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="px-6 py-5 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-3.5"
                             name="password"
                             rules="required|min:6"
                             value=""
@@ -113,7 +113,7 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="px-6 py-5 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-3.5"
                             name="password_confirmation"
                             rules="confirmed:@password"
                             value=""

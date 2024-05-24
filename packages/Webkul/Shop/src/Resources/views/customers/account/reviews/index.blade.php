@@ -14,7 +14,7 @@
     </div>
 
     <div class="mx-4 flex-auto">
-        <div class="mb-8 flex items-center max-sm:mb-5">
+        <div class="mb-8 flex items-center max-md:mb-5">
             <!-- Back Button -->
             <a
                 class="grid md:hidden"
@@ -23,7 +23,7 @@
                 <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
             </a>
 
-            <h2 class="text-2xl font-medium max-sm:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+            <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                 @lang('shop::app.customers.account.reviews.title')
             </h2>
         </div>
@@ -53,7 +53,7 @@
                 <template v-else>
                     @if (! $reviews->isEmpty())
                         <!-- Review Information -->
-                        <div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-sm:mt-5">
+                        <div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-md:mt-5">
                             @foreach($reviews as $review)
                                 <a
                                     href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
@@ -61,7 +61,7 @@
                                     aria-label="{{ $review->title }}"
                                 >
                                     <!-- For Desktop View -->
-                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:hidden max-sm:gap-1.5">
+                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-md:hidden max-md:gap-1.5">
                                         {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
 
                                         <x-shop::media.images.lazy
@@ -103,7 +103,7 @@
 
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.comment.before', ['reviews' => $reviews]) !!}
 
-                                            <p class="mt-5 text-base text-zinc-500 max-sm:mt-2">
+                                            <p class="mt-5 text-base text-zinc-500 max-md:mt-2">
                                                 {{ $review->comment }}
                                             </p>
 
@@ -113,12 +113,12 @@
                                     </div>
 
                                     <!-- For Mobile View -->
-                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:grid max-sm:gap-2.5 max-sm:p-4 sm:hidden">
+                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-md:grid max-md:gap-2.5 max-md:p-4 md:hidden">
                                         <div class="flex gap-2.5">
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
     
                                             <x-shop::media.images.lazy
-                                                class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-sm:h-20 max-sm:w-20 max-sm:min-w-20 max-sm:rounded-md"
+                                                class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-md:h-20 max-md:w-20 max-md:min-w-20 max-md:rounded-md"
                                                 src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
                                                 alt="Review Image"                   
                                             />
@@ -128,7 +128,7 @@
                                             <div class="justify-between">
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.title.before', ['reviews' => $reviews]) !!}
 
-                                                <p class="text-xl font-medium max-sm:text-base">
+                                                <p class="text-xl font-medium max-md:text-base">
                                                     {{ $review->title}}
                                                 </p>
 
@@ -136,7 +136,7 @@
 
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
 
-                                                <p class="mt-1.5 font-normal text-[#757575] max-sm:mt-0 max-sm:text-xs">
+                                                <p class="mt-1.5 font-normal text-[#757575] max-md:mt-0 max-md:text-xs">
                                                     {{ $review->created_at }}
                                                 </p>
             
@@ -175,14 +175,14 @@
                         <!-- Review Empty Page -->
                         <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
                             <img
-                                class="max-sm:h-[100px] max-sm:w-[100px]"
+                                class="max-md:h-[100px] max-md:w-[100px]"
                                 src="{{ bagisto_asset('images/review.png') }}"
                                 alt="Empty Review"
                                 title=""
                             >
 
                             <p
-                                class="text-xl max-sm:text-sm"
+                                class="text-xl max-md:text-sm"
                                 role="heading"
                             >
                                 @lang('shop::app.customers.account.reviews.empty-review')

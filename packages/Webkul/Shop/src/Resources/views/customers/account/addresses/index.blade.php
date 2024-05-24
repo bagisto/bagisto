@@ -24,14 +24,14 @@
                     <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                 </a>
     
-                <h2 class="text-2xl font-medium max-sm:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                     @lang('shop::app.customers.account.addresses.index.title')
                 </h2>
             </div>
 
             <a
                 href="{{ route('shop.customers.account.addresses.create') }}"
-                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-sm:py-1.5"
+                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:py-1.5"
             >
                 @lang('shop::app.customers.account.addresses.index.add-address') 
             </a>
@@ -42,9 +42,9 @@
 
             {!! view_render_event('bagisto.shop.customers.account.addresses.list.before', ['addresses' => $addresses]) !!}
 
-            <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-sm:mt-5">
+            <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-md:mt-5">
                 @foreach ($addresses as $address)
-                    <div class="rounded-xl border border-zinc-200 p-5 max-sm:flex-wrap">
+                    <div class="rounded-xl border border-zinc-200 p-5 max-md:flex-wrap">
                         <div class="flex justify-between">
                             <p class="text-base font-medium">
                                 {{ $address->first_name }} {{ $address->last_name }}
@@ -57,7 +57,7 @@
                             <div class="flex gap-4">
 
                                 @if ($address->default_address)
-                                    <div class="label-pending block h-fit w-max px-2.5 py-1 max-sm:px-1.5">
+                                    <div class="label-pending block h-fit w-max px-2.5 py-1 max-md:px-1.5">
                                         @lang('shop::app.customers.account.addresses.index.default-address') 
                                     </div>
                                 @endif
@@ -66,7 +66,7 @@
                                 <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                                     <x-slot:toggle>
                                         <button 
-                                            class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-zinc-500 transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black max-sm:p-0" 
+                                            class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-zinc-500 transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black max-md:p-0" 
                                             aria-label="More Options"
                                         >
                                         </button>
@@ -136,7 +136,7 @@
                             </div>
                         </div>
 
-                        <p class="mt-6 text-zinc-500 max-sm:mt-5 max-sm:text-sm">
+                        <p class="mt-6 text-zinc-500 max-md:mt-5 max-md:text-sm">
                             {{ $address->address }},
 
                             {{ $address->city }}, 
@@ -153,14 +153,14 @@
             <!-- Address Empty Page -->
             <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
                 <img 
-                    class="max-sm:h-[100px] max-sm:w-[100px]"
+                    class="max-md:h-[100px] max-md:w-[100px]"
                     src="{{ bagisto_asset('images/no-address.png') }}" 
                     alt="Empty Address" 
                     title=""
                 >
                 
                 <p
-                    class="text-xl max-sm:text-sm"
+                    class="text-xl max-md:text-sm"
                     role="heading"
                 >
                     @lang('shop::app.customers.account.addresses.index.empty-address')
