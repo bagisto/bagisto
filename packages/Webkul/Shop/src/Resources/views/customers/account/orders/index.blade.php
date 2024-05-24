@@ -68,9 +68,9 @@
                                 <a :href="record.actions[0].url">
                                     <div class="flex justify-between">
                                         <div class="text-sm font-semibold">
-                                            <p class="text-sm">@lang('Order Id:')#@{{ record.id }}</p>
+                                            @lang('Order Id:') #@{{ record.id }}
     
-                                            <p class="text-xs font-normal text-[#7D7D7D]">
+                                            <p class="text-xs font-normal text-neutral-500">
                                                 @{{ record.created_at }}
                                             </p>
                                         </div>
@@ -79,7 +79,7 @@
                                     </div>
         
                                     <div class="mt-2.5 text-xs font-normal">
-                                        <p class="text-[#7D7D7D]">@lang('Subtotal')</p>
+                                        @lang('Subtotal')
     
                                         <p class="text-xl font-semibold">
                                             @{{ record.grand_total }}

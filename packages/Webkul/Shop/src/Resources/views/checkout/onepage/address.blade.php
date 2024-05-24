@@ -5,7 +5,7 @@
     <!-- Accordian Header Component Slot -->
     <x-slot:header class="!p-0">
         <div class="flex items-center justify-between">
-            <h2 class="text-2xl font-medium max-sm:text-xl">
+            <h2 class="text-2xl font-medium max-sm:text-lg">
                 @lang('shop::app.checkout.onepage.address.title')
             </h2>
         </div>

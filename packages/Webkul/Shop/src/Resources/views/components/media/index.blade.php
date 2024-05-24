@@ -16,7 +16,7 @@
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 
-                        class="group relative flex h-full w-full"
+                        class="group relative flex h-[200px] w-[200px] max-sm:h-[100px] max-sm:w-[100px]"
                         @mouseenter="uploadedFiles.showDeleteButton = true"
                         @mouseleave="uploadedFiles.showDeleteButton = false"
                     >

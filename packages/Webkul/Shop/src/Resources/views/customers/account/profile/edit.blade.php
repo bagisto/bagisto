@@ -41,7 +41,7 @@
             <x-shop::form.control-group class="mt-4">
                 <x-shop::form.control-group.control
                     type="image"
-                    class="[&>*]:[&>*]:rounded-full mb-0 rounded-xl !p-0 text-gray-700 max-sm:grid max-sm:justify-center"
+                    class="max-sm:[&>*]:[&>*]:rounded-full mb-0 rounded-xl !p-0 text-gray-700 max-sm:grid max-sm:justify-center"
                     name="image[]"
                     :label="trans('Image')"
                     :is-multiple="false"

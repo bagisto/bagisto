@@ -57,10 +57,10 @@
                         @endguest
 
                         @auth('customer')
-                            <div class="flex flex-col justify-between gap-2.5">
+                            <div class="flex flex-col justify-between gap-2.5 max-sm:gap-0">
                                 <p class="font-mediums text-2xl max-sm:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
 
-                                <p class="text-zinc-500 max-sm:text-sm">{{ auth()->user()?->email }}</p>
+                                <p class="text-zinc-500 no-underline max-sm:text-sm">{{ auth()->user()?->email }}</p>
                             </div>
                         @endauth
                     </div>
@@ -183,10 +183,10 @@
             <template v-for="(category) in categories">
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.before') !!}
 
-                <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100">
+                <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100 py-2.5">
                     <a
                         :href="category.url"
-                        class="mt-5 flex items-center justify-between"
+                        class="flex items-center justify-between"
                     >
                         @{{ category.name }}
                     </a>

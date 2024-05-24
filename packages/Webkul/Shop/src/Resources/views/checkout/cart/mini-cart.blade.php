@@ -28,7 +28,7 @@
                     ></span>
 
                     <span
-                        class="absolute -top-4 rounded-[44px] bg-[#060C3B] px-2 py-1.5 text-xs font-semibold leading-[9px] text-white max-sm:p-1.5 ltr:left-5 max-sm:ltr:left-4 rtl:right-5 max-sm:rtl:right-4"
+                        class="absolute -top-4 rounded-[44px] bg-[#060C3B] px-2 py-1.5 text-xs font-semibold leading-[9px] text-white max-sm:px-2 max-sm:py-1.5 ltr:left-5 max-sm:ltr:left-4 rtl:right-5 max-sm:rtl:right-4"
                         v-if="cart?.items_qty"
                     >
                         @{{ cart.items_qty }}
@@ -84,7 +84,7 @@
 
                         <!-- Cart Item Information -->
                         <div class="grid flex-1 place-content-start justify-stretch gap-y-2.5">
-                            <div class="flex flex-wrap justify-between max-sm:gap-1.5">
+                            <div class="flex flex-wrap justify-between max-sm:gap-0">
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
 

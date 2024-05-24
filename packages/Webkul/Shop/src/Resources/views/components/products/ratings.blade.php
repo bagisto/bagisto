@@ -20,7 +20,7 @@
                 @{{ average }}
             </span>
         
-            <span class="icon-star-fill -mt-px text-xl text-amber-500 max-sm:-mt-1 max-sm:text-lg"></span>
+            <span class="icon-star-fill -mt-1 text-xl text-amber-500 max-sm:-mt-1 max-sm:text-lg"></span>
             
             <span class="mx-1 text-zinc-300">|</span>
             

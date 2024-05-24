@@ -28,7 +28,7 @@
 
                     <!-- Billing Address Header -->
                     <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-medium max-sm:text-xl">
+                        <h2 class="text-xl font-medium max-sm:text-base">
                             @lang('shop::app.checkout.onepage.address.billing-address')
                         </h2>
                     </div>
@@ -75,7 +75,7 @@
 
                         <!-- Shipping Address Header -->
                         <div class="flex items-center justify-between">
-                            <h2 class="text-xl font-medium max-sm:text-xl">
+                            <h2 class="text-xl font-medium max-sm:text-base">
                                 @lang('shop::app.checkout.onepage.address.shipping-address')
                             </h2>
                         </div>

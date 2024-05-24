@@ -56,7 +56,8 @@
                             v-if="items.length"
                             @click="removeAll"
                         >
-                            <span class="icon-bin text-2xl"></span>
+                            <span class="icon-bin text-2xl max-sm:hidden"></span>
+
                             @lang('shop::app.compare.delete-all')
                         </div>
 
@@ -75,7 +76,7 @@
                             >
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.before') !!}
 
-                                <div class="min-w-[304px] max-w-full max-sm:grid max-sm:h-full max-sm:min-w-[110px] max-sm:items-center max-sm:bg-zinc-200">
+                                <div class="min-w-[304px] max-w-full max-sm:grid max-sm:h-full max-sm:min-w-[110px] max-sm:items-center max-sm:bg-gray-200">
                                     <p class="text-sm font-medium max-sm:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
@@ -85,11 +86,11 @@
 
                                 <div class="flex gap-3 border-zinc-200 max-sm:gap-0 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
-                                        class="group relative w-[311px] max-w-[311px] px-5 max-sm:w-[190px] max-sm:px-2.5"
+                                        class="relative w-[311px] max-w-[311px] px-5 max-sm:w-[190px] max-sm:px-2.5"
                                         v-for="product in items"
                                     >
                                         <span
-                                            class="icon-cancel absolute top-5 hidden h-6 w-6 items-center justify-center rounded-md border border-[#E3E3E3] bg-white text-2xl transition-all duration-300 group-hover:z-[1] group-hover:flex max-sm:top-10 max-sm:h-6 max-sm:w-6 max-sm:rounded-full max-sm:text-sm ltr:right-10 max-sm:ltr:right-4 rtl:left-10 max-sm:rtl:left-4"
+                                            class="icon-cancel absolute top-5 z-[1] flex h-6 w-6 cursor-pointer items-center justify-center rounded-md border border-[#E3E3E3] bg-white text-2xl max-sm:top-10 max-sm:h-6 max-sm:w-6 max-sm:rounded-full max-sm:text-sm ltr:right-10 max-sm:ltr:right-4 rtl:left-10 max-sm:rtl:left-4"
                                             @click="remove(product.id)"
                                         ></span>
 
@@ -105,7 +106,7 @@
                                 class="flex max-w-full items-center border-b border-zinc-200"
                                 v-else
                             >
-                                <div class="min-w-[304px] max-w-full max-sm:grid max-sm:h-full max-sm:min-w-[110px] max-sm:items-center max-sm:bg-zinc-200">
+                                <div class="min-w-[304px] max-w-full max-sm:grid max-sm:h-full max-sm:min-w-[110px] max-sm:items-center max-sm:bg-gray-200">
                                     <p class="text-sm font-medium max-sm:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
@@ -117,7 +118,7 @@
                                         v-for="(product, index) in items"
                                     >
                                         <p
-                                            class="text-sm"
+                                            class="break-all text-sm"
                                             v-html="product[attribute.code] ?? 'N/A'"
                                         >
                                         </p>

@@ -68,9 +68,9 @@
                                 <div class="grid w-full gap-2.5 rounded-md border p-4 transition-all">
                                     <div class="flex justify-between">
                                         <div class="text-sm font-semibold">
-                                            <p>@lang('Order Id:')#@{{ record.increment_id }}</p>
+                                            <p>@lang('Order Id:') #@{{ record.increment_id }}</p>
 
-                                            <p class="text-xs font-normal">
+                                            <p class="text-xs font-normal text-neutral-500">
                                                 @{{ record.created_at }}
                                             </p>
                                         </div>
@@ -80,12 +80,12 @@
             
                                     <div class="text-xs font-normal">
                                         <p
-                                            class="text-sm font-semibold"
+                                            class="text-sm font-semibold text-[#2563EB]"
                                             v-html="record.product_name"
                                         >
                                         </p>
 
-                                        <p>@lang('Remaining Downloads') : @{{ record.remaining_downloads }}</p>
+                                        <p><span class="text-neutral-500">@lang('Remaining Downloads'):</span> <span class="font-medium">@{{ record.remaining_downloads }}</span></p>
                                     </div>
                                 </div>
                             </template>

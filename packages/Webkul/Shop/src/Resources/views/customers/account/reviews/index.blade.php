@@ -113,7 +113,7 @@
                                     </div>
 
                                     <!-- For Mobile View -->
-                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:grid max-sm:gap-1.5 max-sm:p-4 sm:hidden">
+                                    <div class="flex gap-5 rounded-xl border border-[#e5e5e5] p-6 max-sm:grid max-sm:gap-2.5 max-sm:p-4 sm:hidden">
                                         <div class="flex gap-2.5">
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
     
@@ -136,7 +136,7 @@
 
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
 
-                                                <p class="mt-1.5 font-normal text-[#757575] max-sm:text-xs">
+                                                <p class="mt-1.5 font-normal text-[#757575] max-sm:mt-0 max-sm:text-xs">
                                                     {{ $review->created_at }}
                                                 </p>
             

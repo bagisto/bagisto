@@ -29,7 +29,7 @@
                     <!-- Accordion Blade Component Header -->
                     <x-slot:header class="!p-0 max-sm:!py-4">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-2xl font-medium max-sm:text-xl">
+                            <h2 class="text-2xl font-medium max-sm:text-lg">
                                 @lang('shop::app.checkout.onepage.payment.payment-method')
                             </h2>
                         </div>
@@ -87,7 +87,7 @@
 
                                         {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.before') !!}
 
-                                        <p class="mt-2.5 text-xs font-medium">
+                                        <p class="mt-2.5 text-xs font-medium max-sm:mt-0">
                                             @{{ payment.description }}
                                         </p> 
 

@@ -12,7 +12,7 @@
     {!! view_render_event('bagisto.shop.checkout.cart.summary.title.after') !!}
 
     <!-- Cart Totals -->
-    <div class="mt-6 grid gap-4 max-sm:gap-2.5">
+    <div class="mt-6 grid gap-4 max-sm:mt-2.5 max-sm:gap-2.5">
         <!-- Estimate Tax and Shipping -->
         <template v-if="cart.have_stockable_items">
 
@@ -25,11 +25,11 @@
 
         <template v-if="displayTax.subtotal == 'including_tax'">
             <div class="flex justify-between text-right">
-                <p class="text-base">
+                <p class="text-base max-sm:text-sm">
                     @lang('shop::app.checkout.cart.summary.sub-total')
                 </p>
 
-                <p class="text-base font-medium">
+                <p class="text-base font-medium max-sm:text-sm">
                     @{{ cart.formatted_sub_total_incl_tax }}
                 </p>
             </div>
@@ -37,21 +37,21 @@
 
         <template v-else-if="displayTax.subtotal == 'both'">
             <div class="flex justify-between text-right">
-                <p class="text-base">
+                <p class="text-base max-sm:text-sm">
                     @lang('shop::app.checkout.cart.summary.sub-total-excl-tax')
                 </p>
 
-                <p class="text-base font-medium">
+                <p class="text-base font-medium max-sm:text-sm">
                     @{{ cart.formatted_sub_total }}
                 </p>
             </div>
             
             <div class="flex justify-between text-right">
-                <p class="text-base">
+                <p class="text-base max-sm:text-sm">
                     @lang('shop::app.checkout.cart.summary.sub-total-incl-tax')
                 </p>
 
-                <p class="text-base font-medium">
+                <p class="text-base font-medium max-sm:text-sm">
                     @{{ cart.formatted_sub_total_incl_tax }}
                 </p>
             </div>
@@ -59,11 +59,11 @@
 
         <template v-else>
             <div class="flex justify-between text-right">
-                <p class="text-base">
+                <p class="text-base max-sm:text-sm">
                     @lang('shop::app.checkout.cart.summary.sub-total')
                 </p>
 
-                <p class="text-base font-medium">
+                <p class="text-base font-medium max-sm:text-sm">
                     @{{ cart.formatted_sub_total }}
                 </p>
             </div>
@@ -78,11 +78,11 @@
             class="flex justify-between text-right"
             v-if="cart.discount_amount && parseFloat(cart.discount_amount) > 0"
         >
-            <p class="text-base">
+            <p class="text-base max-sm:text-sm">
                 @lang('shop::app.checkout.cart.summary.discount-amount')
             </p>
 
-            <p class="text-base font-medium">
+            <p class="text-base font-medium max-sm:text-sm">
                 @{{ cart.formatted_discount_amount }}
             </p>
         </div>
@@ -101,11 +101,11 @@
         
         <template v-if="displayTax.shipping == 'including_tax'">
             <div class="flex justify-between text-right">
-                <p class="text-base">
+                <p class="text-base max-sm:text-sm">
                     @lang('shop::app.checkout.cart.summary.delivery-charges')
                 </p>
 
-                <p class="text-base font-medium">
+                <p class="text-base font-medium max-sm:text-sm">
                     @{{ cart.formatted_shipping_amount_incl_tax }}
                 </p>
             </div>
@@ -113,21 +113,21 @@
 
         <template v-else-if="displayTax.shipping == 'both'">
             <div class="flex justify-between text-right">
-                <p class="text-base">
+                <p class="text-base max-sm:text-sm">
                     @lang('shop::app.checkout.cart.summary.delivery-charges-excl-tax')
                 </p>
 
-                <p class="text-base font-medium">
+                <p class="text-base font-medium max-sm:text-sm">
                     @{{ cart.formatted_shipping_amount }}
                 </p>
             </div>
             
             <div class="flex justify-between text-right">
-                <p class="text-base">
+                <p class="text-base max-sm:text-sm">
                     @lang('shop::app.checkout.cart.summary.delivery-charges-incl-tax')
                 </p>
 
-                <p class="text-base font-medium">
+                <p class="text-base font-medium max-sm:text-sm">
                     @{{ cart.formatted_shipping_amount_incl_tax }}
                 </p>
             </div>
@@ -135,11 +135,11 @@
 
         <template v-else>
             <div class="flex justify-between text-right">
-                <p class="text-base">
+                <p class="text-base max-sm:text-sm">
                     @lang('shop::app.checkout.cart.summary.delivery-charges')
                 </p>
 
-                <p class="text-base font-medium">
+                <p class="text-base font-medium max-sm:text-sm">
                     @{{ cart.formatted_shipping_amount }}
                 </p>
             </div>
@@ -158,7 +158,7 @@
                 @lang('shop::app.checkout.cart.summary.tax')
             </p>
 
-            <p class="text-lg font-semibold">
+            <p class="text-lg font-semibold max-sm:text-sm">
                 @{{ cart.formatted_tax_total }}
             </p>
         </div>

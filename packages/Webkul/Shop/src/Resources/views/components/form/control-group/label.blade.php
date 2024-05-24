@@ -1,3 +1,3 @@
-<label {{ $attributes->merge(['class' => 'mb-2 block text-base max-sm:text-sm']) }}>
+<label {{ $attributes->merge(['class' => 'mb-2 block text-base ']) }}>
     {{ $slot }}
 </label>

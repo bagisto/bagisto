@@ -197,7 +197,7 @@
                                         {!! view_render_event('bagisto.shop.checkout.cart.item_image.after') !!}
 
                                         <!-- Cart Item Options Container -->
-                                        <div class="grid place-content-start gap-y-2.5">
+                                        <div class="grid place-content-start gap-y-2.5 max-sm:gap-y-0">
                                             {!! view_render_event('bagisto.shop.checkout.cart.item_name.before') !!}
 
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
@@ -270,7 +270,7 @@
 
                                             {!! view_render_event('bagisto.shop.checkout.cart.quantity_changer.before') !!}
 
-                                            <div class="flex items-center gap-2.5">
+                                            <div class="flex items-center gap-2.5 max-sm:mt-2.5">
                                                 <x-shop::quantity-changer
                                                     class="flex max-w-max items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5 max-sm:gap-x-1.5 max-sm:px-1 max-sm:py-0.5"
                                                     name="quantity"
@@ -348,7 +348,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart.continue_shopping.before') !!}
 
                                 <a
-                                    class="secondary-button max-h-14 rounded-2xl max-sm:px-6 max-sm:py-3 max-sm:text-sm"
+                                    class="secondary-button max-h-14 rounded-2xl max-sm:rounded-xl max-sm:px-6 max-sm:py-3 max-sm:text-sm"
                                     href="{{ route('shop.home.index') }}"
                                 >
                                     @lang('shop::app.checkout.cart.index.continue-shopping')
@@ -359,7 +359,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart.update_cart.before') !!}
 
                                 <x-shop::button
-                                    class="secondary-button max-h-14 rounded-2xl max-sm:px-6 max-sm:py-3 max-sm:text-sm"
+                                    class="secondary-button max-h-14 rounded-2xl max-sm:rounded-xl max-sm:px-6 max-sm:py-3 max-sm:text-sm"
                                     :title="trans('shop::app.checkout.cart.index.update-cart')"
                                     ::loading="isStoring"
                                     ::disabled="isStoring"

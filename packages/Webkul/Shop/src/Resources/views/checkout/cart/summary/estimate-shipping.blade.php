@@ -5,7 +5,7 @@
     class="overflow-hidden rounded-xl !border border-zinc-200"
     :is-active="false"
 >
-    <x-slot:header class="font-semibold">
+    <x-slot:header class="font-semibold max-sm:py-2.5">
         @lang('shop::app.checkout.cart.summary.estimate-shipping.title')
     </x-slot>
 
@@ -152,7 +152,7 @@
                                     @{{ rate.base_formatted_price }}
                                 </p>
                                 
-                                <p class="mt-2.5 text-xs font-medium">
+                                <p class="mt-2.5 text-xs font-medium max-sm:mt-0">
                                     <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                 </p>
                             </label>

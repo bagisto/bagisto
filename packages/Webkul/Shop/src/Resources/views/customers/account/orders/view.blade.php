@@ -32,11 +32,11 @@
                 </h2>
             </div>
 
-            <div class="flex gap-1.5">
+            <div class="flex gap-1.5 max-sm:hidden">
                 @if ($order->canReorder())
                     <a
                         href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
-                        class="secondary-button border-zinc-200 px-5 py-3 font-normal max-sm:hidden"
+                        class="secondary-button border-zinc-200 px-5 py-3 font-normal"
                     >
                         @lang('shop::app.customers.account.orders.view.reorder-btn-title')
                     </a>
@@ -244,15 +244,43 @@
                                 </div>
                             </div>
 
-                            <div class="rounded-b-lg bg-zinc-100 py-1 text-center">
-                                @if ($order->canReorder())
-                                    <a
-                                        href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
-                                        class="text-sm font-normal"
-                                    >
-                                        @lang('shop::app.customers.account.orders.view.reorder-btn-title')
-                                    </a>
-                                @endif
+                            <div class="flex">
+                                <div class="w-full bg-zinc-100 py-1 text-center">
+                                    @if ($order->canReorder())
+                                        <a
+                                            href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
+                                            class="text-sm font-normal"
+                                        >
+                                            @lang('shop::app.customers.account.orders.view.reorder-btn-title')
+                                        </a>
+                                    @endif
+                                </div>
+
+                                <div class="w-full bg-zinc-100 py-1 text-center">
+                                    @if ($order->canCancel())
+                                        <form
+                                            method="POST"
+                                            ref="cancelOrderForm"
+                                            action="{{ route('shop.customers.account.orders.cancel', $order->id) }}"
+                                        >
+                                            @csrf
+                                        </form>
+
+                                        <a
+                                            class="text-sm font-normal"
+                                            href="javascript:void(0);"
+                                            @click="$emitter.emit('open-confirm-modal', {
+                                                message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
+
+                                                agree: () => {
+                                                    this.$refs['cancelOrderForm'].submit()
+                                                }
+                                            })"
+                                        >
+                                            @lang('shop::app.customers.account.orders.view.cancel-btn-title')
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 

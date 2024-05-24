@@ -106,7 +106,7 @@
                     @lang('shop::app.customers.account.profile.index.email')
                 </p>
 
-                <p class="text-sm font-medium text-zinc-500">
+                <p class="text-sm font-medium text-zinc-500 no-underline">
                     {{ $customer->email }}
                 </p>
             </div>

@@ -28,7 +28,7 @@
                     <!-- Accordion Blade Component Header -->
                     <x-slot:header class="!px-0 !py-4">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-2xl font-medium max-sm:text-xl">
+                            <h2 class="text-2xl font-medium max-sm:text-lg">
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
                             </h2>
                         </div>
@@ -70,7 +70,7 @@
                                                 @{{ rate.base_formatted_price }}
                                             </p>
                                             
-                                            <p class="mt-2.5 text-xs font-medium">
+                                            <p class="mt-2.5 text-xs font-medium max-sm:mt-0">
                                                 <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                             </p>
                                         </div>

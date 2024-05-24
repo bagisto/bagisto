@@ -30,7 +30,7 @@
         <div class="flex flex-col justify-between">
             <p class="font-mediums text-2xl max-sm:text-xl">Hello! {{ $customer->first_name }}</p>
 
-            <p class="text-zinc-500 max-sm:text-sm">{{ $customer->email }}</p>
+            <p class="text-zinc-500 no-underline max-sm:text-sm">{{ $customer->email }}</p>
         </div>
     </div>
 

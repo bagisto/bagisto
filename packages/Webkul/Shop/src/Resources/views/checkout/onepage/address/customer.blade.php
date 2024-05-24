@@ -32,7 +32,7 @@
                     <form @submit="handleSubmit($event, addAddressToCart)">
                         <!-- Billing Address Header -->
                         <div class="mb-4 flex items-center justify-between">
-                            <h2 class="text-xl font-medium max-sm:text-xl">
+                            <h2 class="text-xl font-medium max-sm:text-base">
                                 @lang('shop::app.checkout.onepage.address.billing-address')
                             </h2>
                         </div>
@@ -86,7 +86,7 @@
                                         </p>
                                     </div>
 
-                                    <p class="mt-6 text-sm text-zinc-500">
+                                    <p class="mt-6 text-sm text-zinc-500 max-sm:mt-0">
                                         <template v-if="address.address">
                                             @{{ address.address.join(', ') }},
                                         </template>
@@ -152,7 +152,7 @@
                             >
                                 <!-- Shipping Address Header -->
                                 <div class="mb-4 flex items-center justify-between">
-                                    <h2 class="text-xl font-medium max-sm:text-xl">
+                                    <h2 class="text-xl font-medium max-sm:text-base">
                                         @lang('shop::app.checkout.onepage.address.shipping-address')
                                     </h2>
                                 </div>
@@ -206,7 +206,7 @@
                                                 </p>
                                             </div>
 
-                                            <p class="mt-6 text-sm text-zinc-500">
+                                            <p class="mt-6 text-sm text-zinc-500 max-sm:mt-0">
                                                 <template v-if="address.address">
                                                     @{{ address.address.join(', ') }},
                                                 </template>
@@ -265,7 +265,7 @@
                     <form @submit="handleSubmit($event, updateOrCreateAddress)">
                         <!-- Billing Address Header -->
                         <div class="mb-4 flex items-center justify-between">
-                            <h2 class="text-xl font-medium max-sm:text-xl">
+                            <h2 class="text-xl font-medium max-sm:text-base">
                                 <template v-if="activeAddressForm == 'billing'">
                                     @lang('shop::app.checkout.onepage.address.billing-address')
                                 </template>
@@ -280,7 +280,7 @@
                                 v-show="customerSavedAddresses.billing.length && ['billing', 'shipping'].includes(activeAddressForm)"
                                 @click="selectedAddressForEdit = null; activeAddressForm = null"
                             >
-                                <span class="icon-arrow-left text-2xl"></span>
+                                <span class="icon-arrow-left text-2xl max-sm:hidden"></span>
 
                                 @lang('shop::app.checkout.onepage.address.back')
                             </span>
