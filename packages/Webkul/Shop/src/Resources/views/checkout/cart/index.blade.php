@@ -125,10 +125,7 @@
                                     </span>
                                 </div>
 
-                                <div 
-                                    {{-- class="max-sm:mt-2.5 max-sm:ltr:ml-9 max-sm:rtl:mr-9" --}}
-                                    v-if="selectedItemsCount"
-                                >
+                                <div v-if="selectedItemsCount">
                                     <span
                                         class="cursor-pointer text-base text-[#0A49A7] max-sm:text-xs" 
                                         role="button"
@@ -187,7 +184,7 @@
                                         <!-- Cart Item Image -->
                                         <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                             <x-shop::media.images.lazy
-                                                class="h-[110px] max-w-[110px] rounded-xl max-sm:h-[80px] max-sm:max-w-[80px]"
+                                                class="h-[110px] max-w-[110px] rounded-xl max-sm:h-20 max-sm:max-w-20"
                                                 ::src="item.base_image.small_image_url"
                                                 ::alt="item.name"
                                                 width="110"
@@ -234,8 +231,11 @@
                                                 </div>
 
                                                 <!-- Option Details -->
-                                                <div class="grid gap-2" v-show="item.option_show">
-                                                    <div class="" v-for="option in item.options">
+                                                <div
+                                                    class="grid gap-2"
+                                                    v-show="item.option_show"
+                                                >
+                                                    <template v-for="option in item.options">
                                                         <p class="text-sm font-medium">
                                                             @{{ option.attribute_name + ':' }}
                                                         </p>
@@ -243,7 +243,7 @@
                                                         <p class="text-sm">
                                                             @{{ option.option_label }}
                                                         </p>
-                                                    </div>
+                                                    </template>
                                                 </div>
                                             </div>
 

@@ -193,18 +193,23 @@ return [
 
                 'view' => [
                     'billing-address'    => 'Адрес для выставления счета',
-                    'cancel-btn-title'   => 'Отмена',
+                    'cancel-btn-title'   => 'Отменить',
                     'cancel-confirm-msg' => 'Вы уверены, что хотите отменить этот заказ?',
                     'cancel-error'       => 'Ваш заказ не может быть отменен.',
                     'cancel-success'     => 'Ваш заказ был отменен',
                     'contact'            => 'Контакт',
+                    'item-invoiced'      => 'Товар выставлен в счет',
+                    'item-refunded'      => 'Товар возвращен',
+                    'item-shipped'       => 'Товар отправлен',
+                    'order-id'           => 'ID заказа',
                     'page-title'         => 'Заказ #:order_id',
                     'payment-method'     => 'Способ оплаты',
-                    'reorder-btn-title'  => 'Переупорядочить',
+                    'reorder-btn-title'  => 'Повторить заказ',
                     'shipping-address'   => 'Адрес доставки',
                     'shipping-method'    => 'Способ доставки',
+                    'status'             => 'Статус',
                     'title'              => 'Просмотр',
-                    'total'              => 'Итого',
+                    'total'              => 'Всего',
 
                     'information' => [
                         'discount'                   => 'Скидка',

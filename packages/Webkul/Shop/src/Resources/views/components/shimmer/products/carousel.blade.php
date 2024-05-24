@@ -14,7 +14,7 @@
             ></span>
         </div>
 
-        <div class="shimmer h-[20px] w-[68px] sm:hidden"></div>
+        <div class="shimmer h-5 w-[68px] sm:hidden"></div>
     </div>
 
     <div class="scrollbar-hide mt-10 flex gap-8 overflow-auto pb-2.5 max-sm:mt-5 max-sm:gap-4">

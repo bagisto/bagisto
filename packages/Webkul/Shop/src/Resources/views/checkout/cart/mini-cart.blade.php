@@ -149,7 +149,10 @@
                                 </div>
 
                                 <!-- Option Details -->
-                                <div class="grid gap-2 max-sm:flex max-sm:gap-4" v-show="item.option_show">
+                                <div
+                                    class="grid gap-2 max-sm:flex max-sm:gap-4"
+                                    v-show="item.option_show"
+                                >
                                     <template v-for="option in item.options">
                                         <div class="max-sm:flex max-sm:gap-1">
                                             <p class="text-sm font-medium max-sm:font-normal">
@@ -198,7 +201,7 @@
 
                 <!-- Empty Cart Section -->
                 <div
-                    class="mt-[128px] pb-8 max-sm:mt-[150px]"
+                    class="mt-32 pb-8 max-sm:mt-32"
                     v-else
                 >
                     <div class="b-0 grid place-items-center gap-y-5 max-sm:gap-y-0">

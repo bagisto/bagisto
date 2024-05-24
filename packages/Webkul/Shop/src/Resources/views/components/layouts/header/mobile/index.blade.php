@@ -13,7 +13,7 @@
         <!-- Left Navigation -->
         <div class="flex items-center gap-x-1.5">
             {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.before') !!}
-            
+
             <x-shop::drawer
                 position="left"
                 width="100%"

@@ -22,7 +22,7 @@
     <x-shop::shimmer.checkout.onepage.cart-summary />
 
     <!-- For Mobile View Billing Address -->
-    <div class="hidden max-sm:block">
+    <div class="sm:hidden">
         <!-- Header -->
         <div class="flex items-center justify-between">
             <h2 class="shimmer h-8 w-[180px]"></h2>

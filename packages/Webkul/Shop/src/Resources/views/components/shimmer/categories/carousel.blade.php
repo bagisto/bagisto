@@ -9,7 +9,7 @@
                         <img class="rounded-sm bg-zinc-100">
                     </div>
 
-                    <p class="shimmer h-[27px] w-[90px] rounded-2xl max-sm:h-[20px] max-sm:w-[70px]"></p>
+                    <p class="shimmer h-[27px] w-[90px] rounded-2xl max-sm:h-5 max-sm:w-[70px]"></p>
                 </div>
             @endfor
         </div>

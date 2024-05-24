@@ -42,7 +42,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.addresses.list.before', ['addresses' => $addresses]) !!}
 
-            <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-sm:mt-[20px]">
+            <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-sm:mt-5">
                 @foreach ($addresses as $address)
                     <div class="rounded-xl border border-zinc-200 p-5 max-sm:flex-wrap">
                         <div class="flex justify-between">

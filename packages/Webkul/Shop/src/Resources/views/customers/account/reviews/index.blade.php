@@ -53,7 +53,7 @@
                 <template v-else>
                     @if (! $reviews->isEmpty())
                         <!-- Review Information -->
-                        <div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-sm:mt-[20px]">
+                        <div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-sm:mt-5">
                             @foreach($reviews as $review)
                                 <a
                                     href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
@@ -118,7 +118,7 @@
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
     
                                             <x-shop::media.images.lazy
-                                                class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-sm:h-[80px] max-sm:w-[80px] max-sm:min-w-[80px] max-sm:rounded-md"
+                                                class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-sm:h-20 max-sm:w-20 max-sm:min-w-20 max-sm:rounded-md"
                                                 src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
                                                 alt="Review Image"                   
                                             />

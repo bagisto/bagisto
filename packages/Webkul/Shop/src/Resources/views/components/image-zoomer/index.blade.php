@@ -28,14 +28,14 @@
                 </span>
 
                 <span
-                    class="icon-arrow-left fixed left-[10px] top-1/2 z-10 -mt-[48px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
+                    class="icon-arrow-left fixed left-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
                     v-if="attachments.length >= 2"
                     @click="navigate(currentIndex -= 1)"
                 >
                 </span>
 
                 <span
-                    class="icon-arrow-right fixed right-[10px] top-1/2 z-10 -mt-[48px] w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
+                    class="icon-arrow-right fixed right-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
                     v-if="attachments.length >= 2"
                     @click="navigate(currentIndex += 1)"
                 >

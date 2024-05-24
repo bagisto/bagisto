@@ -174,15 +174,15 @@
 
         <!-- Additional Information Accordion -->
         @if (count($attributeData))
-            <x-shop::accordion class="bg-gray-100" :is-active="false">
-                <x-slot:header>
+            <x-shop::accordion :is-active="false">
+                <x-slot:header class="bg-gray-100">
                     <p class="text-base font-medium 1180:hidden">
                         @lang('shop::app.products.view.additional-information')
                     </p>
                 </x-slot>
 
-                <x-slot:content>
-                    <div class="container mb-4 max-1180:px-5">
+                <x-slot:content class="max-sm:px-0">
+                    <div class="container max-1180:px-5">
                         <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-lg text-zinc-500 max-1180:text-sm">
                             @foreach ($customAttributeValues as $customAttributeValue)
                                 @if (! empty($customAttributeValue['value']))
@@ -226,8 +226,11 @@
         @endif
 
         <!-- Reviews Accordion -->
-        <x-shop::accordion class="bg-gray-100 max-sm:border-none" :is-active="false">
-            <x-slot:header id="review-accordian-button">
+        <x-shop::accordion :is-active="false">
+            <x-slot:header
+                class="bg-gray-100"
+                id="review-accordian-button"
+            >
                 <p class="text-base font-medium">
                     @lang('shop::app.products.view.review')
                 </p>
@@ -279,7 +282,7 @@
                     >
 
                     <div class="container px-[60px] max-1180:px-0">
-                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-5">
+                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-4">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
 
@@ -313,13 +316,13 @@
                                 @if ($totalRatings = $reviewHelper->getTotalRating($product))
                                     <!-- Scroll To Reviews Section and Activate Reviews Tab -->
                                     <div
-                                        class="mt-1 w-max cursor-pointer"
+                                        class="mt-1 w-max cursor-pointer max-sm:mt-2.5"
                                         role="button"
                                         tabindex="0"
                                         @click="scrollToReview"
                                     >
                                         <x-shop::products.ratings
-                                            class="transition-all hover:border-gray-400"
+                                            class="transition-all hover:border-gray-400 max-sm:px-3 max-sm:py-1"
                                             :average="$avgRatings"
                                             :total="$totalRatings"
                                         />
@@ -331,7 +334,7 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
+                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-2.5 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
                                 </p>
 
