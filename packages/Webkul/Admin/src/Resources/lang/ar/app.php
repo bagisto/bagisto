@@ -3976,7 +3976,7 @@ return [
 
             'filters' => [
                 'select' => 'اختر',
-                'title'  => 'تطبيق الفلاتر',
+                'title'  => 'فلاتر',
 
                 'dropdown' => [
                     'searchable' => [

@@ -3976,7 +3976,7 @@ return [
 
             'filters' => [
                 'select' => 'තේරීම',
-                'title'  => 'වෙනස් කිරීමට',
+                'title'  => 'පෙරහන',
 
                 'dropdown' => [
                     'searchable' => [

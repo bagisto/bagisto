@@ -3976,7 +3976,7 @@ return [
 
             'filters' => [
                 'select' => 'Sélectionner.',
-                'title'  => 'Appliquer les filtres',
+                'title'  => 'Filtres',
 
                 'dropdown' => [
                     'searchable' => [

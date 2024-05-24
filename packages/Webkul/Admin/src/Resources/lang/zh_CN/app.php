@@ -3976,7 +3976,7 @@ return [
 
             'filters' => [
                 'select' => '选择',
-                'title'  => '应用筛选',
+                'title'  => '过滤器',
 
                 'dropdown' => [
                     'searchable' => [

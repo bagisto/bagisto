@@ -3976,7 +3976,7 @@ return [
 
             'filters' => [
                 'select' => 'বাছাই করুন',
-                'title'  => 'ফিল্টার প্রয়োগ করুন',
+                'title'  => 'ফিল্টার',
 
                 'dropdown' => [
                     'searchable' => [

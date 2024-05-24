@@ -3977,7 +3977,7 @@ return [
 
             'filters' => [
                 'select' => 'Seçiniz',
-                'title'  => 'Filtreleri Uygula',
+                'title'  => 'Filtreler',
 
                 'dropdown' => [
                     'searchable' => [
