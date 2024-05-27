@@ -430,32 +430,32 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 **Impact Probability: Medium**
 
-1. We have made some of the methods in this class private. Here are the methods, please have a look.
+1. We have made some of the methods in this class protected. Here are the methods, please have a look.
 
 ```diff
 - public function validatedRequest(): array
-+ private function validatedRequest(): array
++ protected function validatedRequest(): array
 
 - public function processRequestedFilters(array $requestedFilters)
-+ private function processRequestedFilters(array $requestedFilters)
++ protected function processRequestedFilters(array $requestedFilters)
 
 - public function processRequestedSorting($requestedSort)
-+ private function processRequestedSorting($requestedSort)
++ protected function processRequestedSorting($requestedSort)
 
 - public function processRequestedPagination($requestedPagination): LengthAwarePaginator
-+ private function processRequestedPagination($requestedPagination): LengthAwarePaginator
++ protected function processRequestedPagination($requestedPagination): LengthAwarePaginator
 
 - public function processRequest(): void
-+ private function processRequest(): void
++ protected function processRequest(): void
 
 - public function sanitizeRow($row): \stdClass
-+ private function sanitizeRow($row): \stdClass
++ protected function sanitizeRow($row): \stdClass
 
 - public function formatData(): array
-+ private function formatData(): array
++ protected function formatData(): array
 
 - public function prepare(): void
-+ private function prepare(): void
++ protected function prepare(): void
 ```
 
 2. We have deprecated the 'toJson' method. Instead of 'toJson', please use the 'process' method.
