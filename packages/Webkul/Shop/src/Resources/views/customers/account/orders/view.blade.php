@@ -52,7 +52,7 @@
                     </form>
 
                     <a
-                        class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:py-1.5"
+                        class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-md max-md:py-1.5"
                         href="javascript:void(0);"
                         @click="$emitter.emit('open-confirm-modal', {
                             message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
@@ -565,7 +565,7 @@
                                 @lang('Order Summary')
                             </div>
 
-                            <div class="grid gap-1.5 rounded-md border bg-white px-4 py-2 text-xs">
+                            <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs">
                                 @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                     <div class="flex w-full justify-between gap-x-5">
                                         <p class="text-[#757575]">
@@ -851,7 +851,7 @@
                                         @lang('Order Summary')
                                     </div>
 
-                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-2 text-xs">
+                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs">
                                         @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p class="text-[#757575]">
@@ -1539,7 +1539,7 @@
                                         @lang('Order Summary')
                                     </div>
 
-                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-2 text-xs">
+                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs">
                                         @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p class="text-[#757575]">
@@ -1810,7 +1810,7 @@
                     @lang('Shipping & Payment Details')
                 </div>
 
-                <div class="grid gap-3 rounded-md border bg-white px-4 py-2 text-xs">
+                <div class="grid gap-3 rounded-md border bg-white px-4 py-3 text-xs">
                     <!-- Shipping Address -->
                     @if ($order->shipping_address)
                         <div class="text-sm font-medium text-[#757575]">

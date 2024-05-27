@@ -51,7 +51,7 @@
                 <div class="action-items bg-black">
                     <!-- Product Sale Badge -->
                     <p
-                        class="absolute top-5 inline-block rounded-[44px] bg-red-400 px-2.5 text-sm text-white max-sm:top-2.5 max-sm:rounded-l-lg max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-5 max-sm:ltr:left-0 rtl:right-5 max-sm:rtl:right-0"
+                        class="absolute top-5 inline-block rounded-[44px] bg-red-400 px-2.5 text-sm text-white max-sm:top-2.5 max-sm:rounded-l-none max-sm:rounded-r-xl max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-5 max-sm:ltr:left-0 rtl:right-5 max-sm:rtl:right-0"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
@@ -59,7 +59,7 @@
 
                     <!-- Product New Badge -->
                     <p
-                        class="absolute top-5 inline-block rounded-[44px] bg-navyBlue px-2.5 text-sm text-white max-sm:top-2.5 max-sm:rounded-l-lg max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-5 max-sm:ltr:left-0 rtl:right-5 max-sm:rtl:right-0"
+                        class="absolute top-5 inline-block rounded-[44px] bg-navyBlue px-2.5 text-sm text-white max-sm:top-2.5 max-sm:rounded-l-none max-sm:rounded-r-xl max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-5 max-sm:ltr:left-0 rtl:right-5 max-sm:rtl:right-0"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')

@@ -55,7 +55,6 @@
                             </p>
 
                             <div class="flex gap-4">
-
                                 @if ($address->default_address)
                                     <div class="label-pending block h-fit w-max px-2.5 py-1 max-md:px-1.5">
                                         @lang('shop::app.customers.account.addresses.index.default-address') 
@@ -72,7 +71,7 @@
                                         </button>
                                     </x-slot>
 
-                                    <x-slot:menu>
+                                    <x-slot:menu class="!py-1">
                                         <x-shop::dropdown.menu.item>
                                             <a href="{{ route('shop.customers.account.addresses.edit', $address->id) }}">
                                                 <p class="w-full">

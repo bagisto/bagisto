@@ -25,9 +25,9 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.accordion.before') !!}
 
                 <!-- Accordion Blade Component -->
-                <x-shop::accordion class="!border-b-0">
+                <x-shop::accordion class="!border-b-0 max-md:rounded-md max-md:!border-none max-md:!bg-gray-100">
                     <!-- Accordion Blade Component Header -->
-                    <x-slot:header class="!p-0 max-md:!py-4">
+                    <x-slot:header class="!p-0 max-md:!p-4">
                         <div class="flex items-center justify-between">
                             <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-lg">
                                 @lang('shop::app.checkout.onepage.payment.payment-method')
@@ -36,7 +36,7 @@
                     </x-slot>
     
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="mt-8 !p-0 max-md:mt-3 max-sm:mt-0">
+                    <x-slot:content class="mt-8 !p-0 max-md:mt-0 max-md:border max-md:!p-4">
                         <div class="flex flex-wrap gap-7 max-md:gap-4 max-sm:gap-2.5">
                             <div 
                                 class="relative cursor-pointer max-md:max-w-full max-md:flex-auto"
@@ -135,10 +135,12 @@
                             this.$emit('processed', response.data.cart);
 
                             // Used in mobile view. 
-                            window.scrollTo({
-                                top: document.body.scrollHeight,
-                                behavior: 'smooth'
-                            });
+                            if (window.innerWidth <= 768) {
+                                window.scrollTo({
+                                    top: document.body.scrollHeight,
+                                    behavior: 'smooth'
+                                });
+                            }
                         })
                         .catch(error => {
                             this.$emit('processing', 'payment');

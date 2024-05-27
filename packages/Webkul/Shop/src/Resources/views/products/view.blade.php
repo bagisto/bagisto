@@ -158,7 +158,7 @@
     <!-- Information Section -->
     <div class="container mt-6 grid gap-3 !p-0 max-1180:px-5 1180:hidden">
         <!-- Description Accordion -->
-        <x-shop::accordion :is-active="true">
+        <x-shop::accordion class="max-md:border-none" :is-active="true">
             <x-slot:header class="bg-gray-100">
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.description')
@@ -174,7 +174,7 @@
 
         <!-- Additional Information Accordion -->
         @if (count($attributeData))
-            <x-shop::accordion :is-active="false">
+            <x-shop::accordion class="max-md:border-none" :is-active="false">
                 <x-slot:header class="bg-gray-100">
                     <p class="text-base font-medium 1180:hidden">
                         @lang('shop::app.products.view.additional-information')
@@ -226,7 +226,7 @@
         @endif
 
         <!-- Reviews Accordion -->
-        <x-shop::accordion :is-active="false">
+        <x-shop::accordion class="max-md:border-none" :is-active="false">
             <x-slot:header
                 class="bg-gray-100"
                 id="review-accordian-button"
@@ -297,7 +297,7 @@
 
                                     @if (core()->getConfigData('general.content.shop.wishlist_option'))
                                         <div
-                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
+                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
@@ -316,7 +316,7 @@
                                 @if ($totalRatings = $reviewHelper->getTotalRating($product))
                                     <!-- Scroll To Reviews Section and Activate Reviews Tab -->
                                     <div
-                                        class="mt-1 w-max cursor-pointer max-sm:mt-2.5"
+                                        class="mt-1 w-max cursor-pointer max-sm:mt-1.5"
                                         role="button"
                                         tabindex="0"
                                         @click="scrollToReview"
@@ -359,7 +359,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-6 text-lg text-zinc-500 max-sm:mt-4 max-sm:text-sm">
+                                <p class="mt-6 text-lg text-zinc-500 max-sm:mt-1 max-sm:text-sm">
                                     {!! $product->short_description !!}
                                 </p>
 

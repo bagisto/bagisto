@@ -78,7 +78,7 @@
                     </div>
 
                     <div
-                        class="overflow-y-auto"
+                        class="overflow-y-auto max-md:grid max-md:gap-4"
                         id="steps-container"
                     >
                         <!-- Included Addresses Blade File -->
@@ -119,7 +119,7 @@
                             <template v-else>
                                 <x-shop::button
                                     type="button"
-                                    class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-md:mb-4 max-md:w-full max-md:max-w-full"
+                                    class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-md:mb-4 max-md:w-full max-md:max-w-full max-md:rounded-xl"
                                     :title="trans('shop::app.checkout.onepage.summary.place-order')"
                                     ::disabled="isPlacingOrder"
                                     ::loading="isPlacingOrder"

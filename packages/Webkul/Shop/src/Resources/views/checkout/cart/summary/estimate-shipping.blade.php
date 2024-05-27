@@ -2,14 +2,14 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.estimate_shipping.before') !!}
 
 <x-shop::accordion
-    class="overflow-hidden rounded-xl !border border-zinc-200"
+    class="overflow-hidden rounded-xl border max-md:rounded-md max-md:!border-none max-md:!bg-gray-100"
     :is-active="false"
 >
-    <x-slot:header class="font-semibold max-md:py-2.5">
+    <x-slot:header class="font-semibold max-md:p-4">
         @lang('shop::app.checkout.cart.summary.estimate-shipping.title')
     </x-slot>
 
-    <x-slot:content class="!p-4 !pt-0">
+    <x-slot:content class="p-4 pt-0 max-md:border max-md:pt-4">
         <v-estimate-tax-shipping
             :cart="cart"
             @processed="setCart"

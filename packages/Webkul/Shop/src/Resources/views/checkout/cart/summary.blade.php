@@ -15,9 +15,7 @@
     <div class="mt-6 grid gap-4 max-md:mt-2.5 max-md:gap-2.5">
         <!-- Estimate Tax and Shipping -->
         <template v-if="cart.have_stockable_items">
-
             @include('shop::checkout.cart.summary.estimate-shipping')
-            
         </template>
 
         <!-- Sub Total -->
@@ -225,7 +223,7 @@
 
         <a
             href="{{ route('shop.checkout.onepage.index') }}"
-            class="primary-button mt-4 place-self-end rounded-2xl px-11 py-3 max-md:my-3.5 max-md:mt-4 max-md:w-full max-md:max-w-full max-md:py-3.5 max-md:text-sm"
+            class="primary-button mt-4 place-self-end rounded-2xl px-11 py-3 max-md:my-3.5 max-md:mt-4 max-md:w-full max-md:max-w-full max-md:rounded-xl max-md:py-3.5 max-md:text-sm"
         >
             @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>

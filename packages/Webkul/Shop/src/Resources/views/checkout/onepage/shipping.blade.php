@@ -16,7 +16,7 @@
         type="text/x-template"
         id="v-shipping-methods-template"
     >
-        <div class="mb-7">
+        <div class="mb-7 max-md:mb-0">
             <template v-if="! methods">
                 <!-- Shipping Method Shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.shipping-method />
@@ -24,9 +24,9 @@
 
             <template v-else>
                 <!-- Accordion Blade Component -->
-                <x-shop::accordion class="!border-b-0">
+                <x-shop::accordion class="!border-b-0 max-md:rounded-md max-md:!border-none max-md:!bg-gray-100">
                     <!-- Accordion Blade Component Header -->
-                    <x-slot:header class="!px-0 !py-4">
+                    <x-slot:header class="px-0 py-4 max-md:!px-3">
                         <div class="flex items-center justify-between">
                             <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-lg">
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
@@ -35,7 +35,7 @@
                     </x-slot>
 
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="mt-8 !p-0 max-md:mt-3 max-sm:mt-0">
+                    <x-slot:content class="mt-8 !p-0 max-md:mt-0 max-md:border max-md:!p-4">
                         <div class="flex flex-wrap gap-8 max-md:gap-4 max-sm:gap-2.5">
                             <template v-for="method in methods">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}

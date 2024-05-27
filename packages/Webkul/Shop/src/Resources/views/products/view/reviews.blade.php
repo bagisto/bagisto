@@ -132,7 +132,7 @@
 
                             <div class="mt-4 flex justify-start gap-4 max-xl:mb-5 max-sm:mb-5 max-sm:flex-wrap max-sm:justify-center">
                                 <button
-                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-sm:py-2.5"
+                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-md:rounded-xl max-sm:py-2.5"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -140,7 +140,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center rounded-2xl px-8 py-2.5 max-sm:w-full max-sm:max-w-[374px]"
+                                    class="secondary-button items-center rounded-2xl px-8 py-2.5 max-md:rounded-xl max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -327,7 +327,7 @@
                 </p>
 
                 <button
-                    class="secondary-button min-h-[34px] rounded-lg px-2 py-1 text-sm"
+                    class="secondary-button min-h-[34px] rounded-lg px-2 py-1 text-sm max-md:rounded-xl"
                     @click="translate"
                 >
                     <!-- Spinner -->
@@ -444,7 +444,7 @@
                     </p>
     
                     <button
-                        class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-2 text-sm max-sm:px-4 max-sm:py-1.5 max-sm:text-xs"
+                        class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-2 text-sm max-md:rounded-xl max-sm:px-4 max-sm:py-1.5 max-sm:text-xs"
                         @click="translate"
                     >
                         <!-- Spinner -->

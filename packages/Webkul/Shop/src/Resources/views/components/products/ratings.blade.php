@@ -17,15 +17,15 @@
         id="v-product-ratings-template"
     >
         <div>
-            <span class="text-sm font-semibold text-black max-sm:text-xs">
+            <span class="text-sm font-medium text-black max-sm:text-xs">
                 @{{ average }}
             </span>
         
-            <span class="icon-star-fill -mt-1 text-xl text-amber-500 max-sm:-mt-1 max-sm:text-lg"></span>
+            <span class="icon-star-fill -mt-1 text-xl text-amber-500 max-sm:-mt-0.5 max-sm:text-lg"></span>
             
             <span class="mx-1 text-zinc-300">|</span>
             
-            <span class="text-sm font-semibold text-black max-sm:text-xs ltr:ml-1 rtl:mr-1">
+            <span class="text-sm font-medium text-black max-sm:text-xs ltr:ml-1 rtl:mr-1">
                 @{{ abbreviatedTotal }}
 
                 <span v-if="rating">Ratings</span>

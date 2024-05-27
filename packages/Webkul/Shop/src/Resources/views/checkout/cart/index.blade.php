@@ -476,7 +476,11 @@
                             .then(response => {
                                 this.cart = response.data.data;
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                if (response.data.message) {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                } else {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                                }
 
                                 this.isStoring = false;
 
