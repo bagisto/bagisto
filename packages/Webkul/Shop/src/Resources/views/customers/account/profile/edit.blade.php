@@ -234,7 +234,7 @@
             ></label>
 
             <label
-                class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0"
+                class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-xs ltr:pl-0 rtl:pr-0"
                 for="is-subscribed"
             >
                 @lang('shop::app.customers.account.profile.edit.subscribe-to-newsletter')

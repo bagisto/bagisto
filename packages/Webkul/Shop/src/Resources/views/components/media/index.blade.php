@@ -10,9 +10,9 @@
         id="v-media-template"
     >
         <div class="mb-4 flex cursor-pointer flex-col rounded-lg">
-            <div :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl': isDragOver }">
+            <div :class="{'border border-dashed border-gray-300 rounded-2xl': isDragOver }">
                 <div
-                    class="dark:hover:gray-950 flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-[#F5F5F5] hover:bg-gray-100"
+                    class="flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-zinc-100 hover:bg-gray-100"
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 
@@ -39,7 +39,7 @@
 
                 <label 
                     for="file-input"
-                    class="flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-[#F5F5F5] hover:bg-gray-100"
+                    class="flex h-[284px] w-[284px] cursor-pointer flex-col items-center justify-center rounded-xl bg-zinc-100 hover:bg-gray-100"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"

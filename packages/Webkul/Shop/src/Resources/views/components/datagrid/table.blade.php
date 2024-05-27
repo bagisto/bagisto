@@ -35,7 +35,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid items-center gap-2.5 border-b border-[#E9E9E9] bg-[#F5F5F5] px-6 py-4 text-sm font-medium text-black"
+                            class="row grid items-center gap-2.5 border-b border-zinc-200 bg-zinc-100 px-6 py-4 text-sm font-medium text-black"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -210,7 +210,7 @@
                                     <li  @click="changePage('previous')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex h-[37px] w-[35px] items-center justify-center border border-[#E9E9E9] font-medium leading-normal hover:bg-gray-100 ltr:rounded-l-lg rtl:rounded-r-lg"
+                                            class="flex h-[37px] w-[35px] items-center justify-center border border-zinc-200 font-medium leading-normal hover:bg-gray-100 ltr:rounded-l-lg rtl:rounded-r-lg"
                                             aria-label="@lang('shop::app.components.datagrid.table.previous-page')"
                                         >
                                             <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
@@ -221,7 +221,7 @@
                                         <input
                                             type="text"
                                             :value="$parent.available.meta.current_page"
-                                            class="max-w-[42px] border border-[#E9E9E9] px-4 pb-1.5 pt-1.5 text-center font-medium leading-normal text-black hover:bg-gray-100"
+                                            class="max-w-[42px] border border-zinc-200 px-4 pb-1.5 pt-1.5 text-center font-medium leading-normal text-black hover:bg-gray-100"
                                             @change="changePage(parseInt($event.target.value))"
                                             aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                         >
@@ -230,7 +230,7 @@
                                     <li @click="changePage('next')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex h-[37px] w-[35px] items-center justify-center border border-[#E9E9E9] font-medium leading-normal hover:bg-gray-100 ltr:rounded-r-lg rtl:rounded-l-lg"
+                                            class="flex h-[37px] w-[35px] items-center justify-center border border-zinc-200 font-medium leading-normal hover:bg-gray-100 ltr:rounded-r-lg rtl:rounded-l-lg"
                                             aria-label="@lang('shop::app.components.datagrid.table.next-page')"
                                         >
                                             <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>

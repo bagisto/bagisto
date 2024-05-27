@@ -32,6 +32,7 @@
 - [Renamed Admin Controller Method Names](#renamed-admin-controller-method-names)
 - [Removed Cart Traits](#removed-cart-traits)
 - [The Product Types Classes Updates](#the-product-type-class)
+- [Renamed `star-rating.blade.php`](#renamed-star-rating-blade)
 - [Moved `coupon.blade.php`](#moved-coupon-blade)
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
@@ -89,7 +90,7 @@ There is no dependency needed to be updated at for this upgrade.
 + core()->getConfigData('sales.taxes.default_destination_calculation.postcode')
 ```
 
-2: The `repository` option has been removed from the `select` type field in the system configuration. Now, you can use `options` as a closure to populate select field options from the database. Here's an example of how to update the configuration array:
+2: The `repository` option has been replaced with `options`. Now, you can use `options` as shown below to populate select field options from the database.
 
 ```diff
 'key'    => 'sales.taxes.categories',
@@ -103,19 +104,9 @@ There is no dependency needed to be updated at for this upgrade.
         'type'       => 'select',
         'default'    => 0,
 -       'repository' => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
-+       'options'    => function() {
-+           return [
-+               [
-+                   'title' => 'admin::app.configuration.index.sales.taxes.categories.none',
-+                   'value' => 0,
-+               ],
-+           ];
-+       }
-+   ]
++       'options'    => '\Webkul\Tax\Repositories\TaxCategoryRepository@getConfigOptions',
 }
 ```
-
-In this example, the `repository` option has been replaced with `options`, which is defined as a closure returning an array of options. Adjust the closure to populate the select field options as needed.
 
 3. The Inventory Stock Options configuration has been relocated to the Order Settings configuration, and the respective path for retrieving configuration values has been updated accordingly
 
@@ -134,6 +125,23 @@ In this example, the `repository` option has been replaced with `options`, which
 ```diff
 - Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
 + Route::post('update-totals/{order_id}', 'updateTotals')->name('admin.sales.refunds.update_totals');
+```
+
+<a name="admin-event-updates"></a>
+#### Admin Event Updates
+
+**Impact Probability: High**
+
+#### Admin Event Inside Head Updated
+
+1. The event that was previously added in Admin has now been updated in the new format. You can now directly add your own custom elements inside the <head> tag.
+
+```diff
++ {!! view_render_event('bagisto.admin.layout.head.before') !!}
+
+- {!! view_render_event('bagisto.admin.layout.head') !!}
++ {!! view_render_event('bagisto.admin.layout.head.after') !!}
+```
 
 <a name="renamed-admin-view-render-event-names"></a>
 #### Renamed Admin View Render Event Names
@@ -674,29 +682,6 @@ If you've implemented your own product type or overridden existing type classes,
 <a name="shop"></a>
 ### Shop
 
-<a name="the-shop-api-response-updates"></a>
-#### Shop API Response Updates
-
-**Impact Probability: High**
-
-1. The response for the Shop route `shop.api.checkout.cart.store` API has been updated. If you are consuming this API, please make the necessary changes. we have refined the exception handling to provide more specific error responses and HTTP_BAD_REQUEST status code, ensuring better feedback for users.
-
-```diff
-- catch (\Exception $exception) {
--   return new JsonResource([
--       'redirect_uri' => route('shop.product_or_category.index', $product->product->url_key),
--       'message'      => $exception->getMessage(),
--   ]);
-- }
-
-+ catch (\Exception $exception) {
-+    return response()->json([
-+        'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
-+        'message'      => $exception->getMessage(),
-+    ], Response::HTTP_BAD_REQUEST);
-+ }
-```
-
 <a name="shop-customized-datagrid-parameters-updated"></a>
 ####  Shop Customized Datagrid Parameters Updated
 
@@ -888,21 +873,151 @@ If you've implemented your own product type or overridden existing type classes,
 }
 ```
 
-<a name="admin-event-updates"></a>
-#### Admin Event Updates
-
-**Impact Probability: High**
-
-#### Admin Event Inside Head Updated
-
-1. The event that was previously added in Admin has now been updated in the new format. You can now directly add your own custom elements inside the <head> tag.
+2. The response for the Shop route `shop.api.checkout.cart.store` API has been updated. If you are consuming this API, please make the necessary changes. we have refined the exception handling to provide more specific error responses and HTTP_BAD_REQUEST status code, ensuring better feedback for users.
 
 ```diff
-+ {!! view_render_event('bagisto.admin.layout.head.before') !!}
+- catch (\Exception $exception) {
+-   return new JsonResource([
+-       'redirect_uri' => route('shop.product_or_category.index', $product->product->url_key),
+-       'message'      => $exception->getMessage(),
+-   ]);
+- }
 
-- {!! view_render_event('bagisto.admin.layout.head') !!}
-+ {!! view_render_event('bagisto.admin.layout.head.after') !!}
++ catch (\Exception $exception) {
++    return response()->json([
++        'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
++        'message'      => $exception->getMessage(),
++    ], Response::HTTP_BAD_REQUEST);
++ }
 ```
+
+3. The response for the Shop route `shop.api.categories.index` or `/api/categories` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+```diff
+{
+    "data": [
+        {
+            "id": 2,
+            "parent_id": 1,
+            "name": "Men",
+            "slug": "men",
+            "status": 1,
+            "position": 1,
+            "display_mode": "products_and_description",
+            "description": "<p>Men</p>",
+-           "images": {
+-               "banner_url": null,
+-               "logo_url": "https://demo.bagisto.com/bagisto-common/storage/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp"
+-           },
++           "logo": {
++               "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp"
++           },
++           "banner": {
++               "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp",
++               "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/category/2/OYsuHioryn5KrOE7p8wQ2hQ3BReXY5CSbDzhvEk8.webp"
++           },
+            "meta": {
+                "title": "",
+                "keywords": "",
+                "description": ""
+            },
+            "translations": [
+                {
+                    "id": 2,
+                    "category_id": 2,
+                    "name": "Men",
+                    "slug": "men",
+                    "url_path": "men",
+                    "description": "<p>Men</p>",
+                    "meta_title": "",
+                    "meta_description": "",
+                    "meta_keywords": "",
+                    "locale_id": 1,
+                    "locale": "en"
+                }
+            ],
+            "additional": []
+        }
+    ]
+}
+```
+
+4. The response for the Shop route `shop.api.products.index` or `/api/products` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+```diff
+{
+    "data": [
+        {
+            "id": 174,
+            "sku": "COMPLETELOOKSET2023",
+            "name": "All-in-One Smart Casual Outfit Set",
+            "description": "All-in-One Smart Casual Outfit Set",
+            "url_key": "all-in-one-smart-casual-outfit-set",
+            "base_image": {
+                "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+            },
+            "images": [
+                {
+                    "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+                }
+            ],
+            "is_new": true,
+            "is_featured": true,
+            "on_sale": true,
+            "is_saleable": true,
+            "is_wishlist": true,
+            "min_price": "$168.96",
+            "prices": {
+                "from": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                },
+                "to": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                }
+            },
+            "price_html": "<div class=\"grid gap-1.5\">\n<p class=\"flex items-center gap-4 max-sm:text-lg\">\n<span\nclass=\"text-zinc-500 line-through max-sm:text-base\"\n    aria-label=\"$176.96\"\n>\n$176.96\n</span>\n\n$168.96\n</p>\n\n</div>",
+-           "avg_ratings": 4.5,
++           "ratings": {
++               "average": "2.0",
++               "total": 2
++           }
+        }
+    ]
+}
+```
+
+<a name="renamed-star-rating-blade"></a>
+#### Renamed `star-rating.blade.php`
+
+**Impact Probability: Low**
+
+1. The file `packages/Webkul/Shop/src/Resources/views/components/products/star-rating.blade.php` has been renamed to the `packages/Webkul/Shop/src/Resources/views/components/products/ratings.blade.php`.
+
 
 <a name="moved-coupon-blade"></a>
 #### Moved `coupon.blade.php`

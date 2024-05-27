@@ -2,7 +2,7 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.estimate_shipping.before') !!}
 
 <x-shop::accordion
-    class="overflow-hidden rounded-xl !border border-[#E9E9E9]"
+    class="overflow-hidden rounded-xl !border border-zinc-200"
     :is-active="false"
 >
     <x-slot:header class="font-semibold">
@@ -123,14 +123,14 @@
 
                 <!-- Estimated Shipping Methods -->
                 <div
-                    class="mt-4 grid rounded-xl border border-[#E9E9E9]"
+                    class="mt-4 grid rounded-xl border border-zinc-200"
                     v-if="methods.length"
                 >
                     <template v-for="method in methods">
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
 
                         <div
-                            class="relative select-none border-b border-[#E9E9E9] last:border-b-0 max-sm:max-w-full max-sm:flex-auto"
+                            class="relative select-none border-b border-zinc-200 last:border-b-0 max-sm:max-w-full max-sm:flex-auto"
                             v-for="rate in method.rates"
                         >
                             <div class="absolute top-5 ltr:left-4 rtl:right-4">

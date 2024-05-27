@@ -2,7 +2,7 @@
 @inject ('productViewHelper', 'Webkul\Product\Helpers\View')
 
 @php
-    $avgRatings = round($reviewHelper->getAverageRating($product));
+    $avgRatings = $reviewHelper->getAverageRating($product);
 
     $percentageRatings = $reviewHelper->getPercentageRating($product);
 
@@ -64,23 +64,27 @@
     </div>
 
     <!-- Product Information Vue Component -->
-    <v-product :product-id="{{ $product->id }}">
+    <v-product>
         <x-shop::shimmer.products.view />
     </v-product>
 
     <!-- Information Section -->
     <div class="1180:mt-20">
-        <x-shop::tabs position="center">
+        <x-shop::tabs
+            position="center"
+            ref="productTabs"
+        >
             <!-- Description Tab -->
             {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
             <x-shop::tabs.item
+                id="descritpion-tab"
                 class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.view.description')"
                 :is-selected="true"
             >
                 <div class="container mt-[60px] max-1180:px-5">
-                    <p class="text-lg text-[#6E6E6E] max-1180:text-sm">
+                    <p class="text-lg text-zinc-500 max-1180:text-sm">
                         {!! $product->description !!}
                     </p>
                 </div>
@@ -91,6 +95,7 @@
             <!-- Additional Information Tab -->
             @if(count($attributeData))
                 <x-shop::tabs.item
+                    id="information-tab"
                     class="container mt-[60px] !p-0 max-1180:hidden"
                     :title="trans('shop::app.products.view.additional-information')"
                     :is-selected="false"
@@ -124,7 +129,7 @@
                                         </a>
                                     @else
                                         <div class="grid">
-                                            <p class="text-base text-[#7D7D7D]">
+                                            <p class="text-base text-zinc-500">
                                                 {!! $customAttributeValue['value'] !!}
                                             </p>
                                         </div>
@@ -138,6 +143,7 @@
 
             <!-- Reviews Tab -->
             <x-shop::tabs.item
+                id="review-tab"
                 class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.view.review')"
                 :is-selected="false"
@@ -158,7 +164,7 @@
             </x-slot>
 
             <x-slot:content>
-                <div class="mb-5 text-lg text-[#7D7D7D] max-1180:text-sm">
+                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -175,7 +181,7 @@
 
                 <x-slot:content>
                     <div class="container mb-4 max-1180:px-5">
-                        <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-lg text-[#6E6E6E] max-1180:text-sm">
+                        <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-lg text-zinc-500 max-1180:text-sm">
                             @foreach ($customAttributeValues as $customAttributeValue)
                                 @if (! empty($customAttributeValue['value']))
                                     <div class="grid">
@@ -204,7 +210,7 @@
                                         </a>
                                     @else
                                         <div class="grid">
-                                            <p class="text-base text-[#6E6E6E]">
+                                            <p class="text-base text-zinc-500">
                                                 {{ $customAttributeValue['value'] ?? '-' }}
                                             </p>
                                         </div>
@@ -219,7 +225,7 @@
 
         <!-- Reviews Accordion -->
         <x-shop::accordion class="bg-gray-100" :is-active="false">
-            <x-slot:header>
+            <x-slot:header id="review-accordian-button">
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.review')
                 </p>
@@ -302,18 +308,21 @@
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
-                                <div class="mt-4 flex items-center gap-4">
-                                    <x-shop::products.star-rating 
-                                        :value="$avgRatings"
-                                        :is-editable=false
-                                    />
-
-                                    <div class="flex items-center gap-4">
-                                        <p class="text-sm text-[#6E6E6E]">
-                                            ({{ $product->approvedReviews->count() }} @lang('reviews'))
-                                        </p>
+                                @if ($totalRatings = $reviewHelper->getTotalRating($product))
+                                    <!-- Scroll To Reviews Section and Activate Reviews Tab -->
+                                    <div
+                                        class="mt-4 w-max cursor-pointer"
+                                        role="button"
+                                        tabindex="0"
+                                        @click="scrollToReview"
+                                    >
+                                        <x-shop::products.ratings
+                                            class="transition-all hover:border-gray-400"
+                                            :average="$avgRatings"
+                                            :total="$totalRatings"
+                                        />
                                     </div>
-                                </div>
+                                @endif
 
                                 {!! view_render_event('bagisto.shop.products.rating.after', ['product' => $product]) !!}
 
@@ -325,7 +334,7 @@
                                 </p>
 
                                 @if (\Webkul\Tax\Facades\Tax::isInclusiveTaxProductPrices())
-                                    <span class="text-sm font-normal text-[#6E6E6E]">
+                                    <span class="text-sm font-normal text-zinc-500">
                                         @lang('shop::app.products.view.tax-inclusive')
                                     </span>
                                 @endif
@@ -333,7 +342,7 @@
                                 @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
                                     <div class="mt-2.5 grid gap-1.5">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
-                                            <p class="text-[#6E6E6E] [&>*]:text-black">
+                                            <p class="text-zinc-500 [&>*]:text-black">
                                                 {!! $offer !!}
                                             </p>
                                         @endforeach
@@ -344,7 +353,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-6 text-lg text-[#6E6E6E] max-sm:mt-4 max-sm:text-sm">
+                                <p class="mt-6 text-lg text-zinc-500 max-sm:mt-4 max-sm:text-sm">
                                     {!! $product->short_description !!}
                                 </p>
 
@@ -443,8 +452,6 @@
         <script type="module">
             app.component('v-product', {
                 template: '#v-product-template',
-
-                props: ['productId'],
 
                 data() {
                     return {
@@ -576,6 +583,28 @@
 
                         return value;
                     },
+
+                    scrollToReview() {
+                        let accordianElement = document.querySelector('#review-accordian-button');
+
+                        if (accordianElement) {
+                            accordianElement.click();
+
+                            accordianElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                        
+                        let tabElement = document.querySelector('#review-tab-button');
+
+                        if (tabElement) {
+                            tabElement.click();
+
+                            tabElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
                 },
             });
         </script>

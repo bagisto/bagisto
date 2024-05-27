@@ -17,7 +17,7 @@
 
         <a
             href="{{ route('shop.customers.account.addresses.create') }}"
-            class="secondary-button flex items-center gap-x-2.5 border-[#E9E9E9] px-5 py-3 font-normal"
+            class="secondary-button flex items-center gap-x-2.5 border-zinc-200 px-5 py-3 font-normal"
         >
             <span class="icon-location text-2xl"></span>
 
@@ -32,7 +32,7 @@
 
         <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr]">
             @foreach ($addresses as $address)
-                <div class="rounded-xl border border-[#e5e5e5] p-5 max-sm:flex-wrap">
+                <div class="rounded-xl border border-zinc-200 p-5 max-sm:flex-wrap">
                     <div class="flex items-center justify-between">
                         <p class="text-base font-medium">
                             {{ $address->first_name }} {{ $address->last_name }}
@@ -54,7 +54,7 @@
                             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                                 <x-slot:toggle>
                                     <button 
-                                        class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-[#6E6E6E] transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black" 
+                                        class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-zinc-500 transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black" 
                                         aria-label="More Options"
                                     >
                                     </button>
@@ -124,7 +124,7 @@
                         </div>
                     </div>
 
-                    <p class="mt-6 text-[#6E6E6E]">
+                    <p class="mt-6 text-zinc-500">
                         {{ $address->address }},
 
                         {{ $address->city }}, 

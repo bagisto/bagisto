@@ -38,13 +38,13 @@
 
         <!-- Form Container -->
         <div
-            class="m-auto w-full max-w-[870px] rounded-xl border border-[#E9E9E9] p-16 px-[90px] max-md:px-8 max-md:py-8"
+            class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8"
         >
             <h1 class="font-dmserif text-4xl max-sm:text-2xl">
                 @lang('shop::app.customers.login-form.page-title')
             </h1>
 
-            <p class="mt-4 text-xl text-[#6E6E6E] max-sm:text-base">
+            <p class="mt-4 text-xl text-zinc-500 max-sm:text-base">
                 @lang('shop::app.customers.login-form.form-login-text')
             </p>
 
@@ -113,7 +113,7 @@
                             ></label>
 
                             <label
-                                class="cursor-pointer select-none text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0"
+                                class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-xs ltr:pl-0 rtl:pr-0"
                                 for="show-password"
                             >
                                 @lang('shop::app.customers.login-form.show-password')
@@ -155,7 +155,7 @@
 
             {!! view_render_event('bagisto.shop.customers.login.after') !!}
 
-            <p class="mt-5 font-medium text-[#6E6E6E]">
+            <p class="mt-5 font-medium text-zinc-500">
                 @lang('shop::app.customers.login-form.new-customer')
 
                 <a
@@ -167,7 +167,7 @@
             </p>
         </div>
 
-        <p class="mb-4 mt-8 text-center text-xs text-[#6E6E6E]">
+        <p class="mb-4 mt-8 text-center text-xs text-zinc-500">
             @lang('shop::app.customers.login-form.footer', ['current_year'=> date('Y') ])
         </p>
     </div>

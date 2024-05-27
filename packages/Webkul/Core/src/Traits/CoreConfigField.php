@@ -2,6 +2,8 @@
 
 namespace Webkul\Core\Traits;
 
+use Illuminate\Support\Str;
+
 trait CoreConfigField
 {
     /**
@@ -48,53 +50,6 @@ trait CoreConfigField
     }
 
     /**
-     * Get dependent field or value based on arguments.
-     *
-     * @param  array  $field
-     * @param  string  $fieldOrValue
-     * @return string
-     */
-    public function getDependentFieldOrValue($field, $fieldOrValue = 'field')
-    {
-        $depends = explode(':', $field['depends']);
-
-        return $fieldOrValue === 'field'
-            ? current($depends) : end($depends);
-    }
-
-    /**
-     * Get dependent field options.
-     *
-     * @param  array  $field
-     * @param  array  $dependentValues
-     * @return mixed
-     */
-    public function getDependentFieldOptions($field, $dependentValues)
-    {
-        if (
-            empty($field['options'])
-            || ! $dependentValues
-        ) {
-            return '';
-        }
-
-        $options = [];
-
-        if (is_callable($dependentValues)) {
-            $dependentValues = $dependentValues();
-        }
-
-        foreach ($dependentValues as $key => $result) {
-            $options[] = [
-                'title' => $result,
-                'value' => $key,
-            ];
-        }
-
-        return $options;
-    }
-
-    /**
      * Get channel/locale indicator for form fields. So, that form fields can be detected,
      * whether it is channel based or locale based or both.
      *
@@ -116,5 +71,19 @@ trait CoreConfigField
         }
 
         return ! empty($info) ? '['.implode(' - ', $info).']' : '';
+    }
+
+    /**
+     * Returns the select options for the field.
+     */
+    public function getOptions(array|string $options): array
+    {
+        if (is_array($options)) {
+            return $options;
+        }
+
+        [$class, $method] = Str::parseCallback($options);
+
+        return app($class)->$method();
     }
 }

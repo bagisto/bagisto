@@ -29,12 +29,12 @@
                     >
                         <a
                             :href="category.slug"
-                            class="h-[110px] w-[110px] rounded-full bg-[#F5F5F5]"
+                            class="h-[110px] w-[110px] rounded-full bg-zinc-100"
                             :aria-label="category.name"
                         >
-                            <template v-if="category.images.logo_url">
+                            <template v-if="category.logo?.large_image_url">
                                 <x-shop::media.images.lazy
-                                    ::src="category.images.logo_url"
+                                    ::src="category.logo.large_image_url"
                                     width="110"
                                     height="110"
                                     class="h-[110px] w-[110px] rounded-full"

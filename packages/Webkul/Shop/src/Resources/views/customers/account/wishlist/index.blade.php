@@ -38,7 +38,7 @@
                         {!! view_render_event('bagisto.shop.customers.account.wishlist.delete_all.before') !!}
 
                         <div
-                            class="secondary-button flex items-center gap-x-2.5 border-[#E9E9E9] px-5 py-3"
+                            class="secondary-button flex items-center gap-x-2.5 border-zinc-200 px-5 py-3"
                             @click="removeAll"
                             v-if="wishlistItems.length"
                         >
@@ -57,7 +57,7 @@
                         <div class="grid flex-1 gap-8">
                             <div class="grid gap-y-6">
                                 <!-- Wishlist item -->
-                                <div class="flex justify-between gap-x-2.5 border-b border-[#E9E9E9] pb-5">
+                                <div class="flex justify-between gap-x-2.5 border-b border-zinc-200 pb-5">
                                     <div class="flex gap-x-5">
                                         <div class="">
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.image.before') !!}

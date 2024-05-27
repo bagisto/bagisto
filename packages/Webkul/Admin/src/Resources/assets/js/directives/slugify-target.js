@@ -2,20 +2,21 @@ export default {
     mounted(el, binding) {
         let handler = function (e) {
             setTimeout(function () {
+                binding.arg = binding.arg.replace(/([a-z]{2})_([a-z]{2})\[(.*?)\]/g, function(match, p1, p2, p3) {
+                    return `${p1}_${p2.toUpperCase()}[${p3}]`;
+                });
+                
                 var target = document.getElementById(binding.arg);
 
-                target.value = e.target.value.toString()
+                target.value = e.target.value
+                    .toString()
                     .toLowerCase()
-
                     .normalize('NFKD') // Normalize Unicode
-                    .replace(/[^\w\u0621-\u064A\u4e00-\u9fa5\u3402-\uFA6D\u3041-\u30A0\u30A0-\u31FF- ]+/g, '')
-
-                    // replace whitespace with dashes
-                    .replace(/ +/g, '-')
-
-                    // avoid having multiple dashes (---- translates into -)
-                    .replace('![-\s]+!u', '-')
-                    .trim();
+                    .replace(/[\u0300-\u036f]/g, '') // Remove combining diacritical marks
+                    .replace(/[^\p{L}\p{N}\s-]+/gu, '') // Remove all non-letter, non-number characters except spaces and dashes
+                    .replace(/\s+/g, '-') // Replace spaces with dashes
+                    .replace(/-+/g, '-') // Avoid multiple consecutive dashes
+                    .replace(/^-+|-+$/g, ''); // Trim leading and trailing dashes
                 
                 if (binding.value) {
                     binding.value({

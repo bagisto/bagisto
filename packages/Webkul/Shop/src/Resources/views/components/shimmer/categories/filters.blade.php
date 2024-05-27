@@ -1,11 +1,11 @@
 <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] max-w-[400px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] ltr:pr-7 rtl:pl-7">
-    <div class="flex h-[50px] items-center justify-between border-b border-[#E9E9E9] py-2.5 max-md:hidden">
+    <div class="flex h-[50px] items-center justify-between border-b border-zinc-200 py-2.5 max-md:hidden">
         <p class="shimmer h-6 w-[30%]"></p>
         <p class="shimmer h-5 w-1/5"></p>
     </div>
 
     <!-- Price Range Filter Shimmer -->
-    <div class="border-b border-[#E9E9E9]">
+    <div class="border-b border-zinc-200">
         <div class="flex items-center justify-between py-2.5">
             <p class="shimmer h-7 w-2/5"></p>
             <span class="shimmer h-6 w-6"></span>
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Checkbox Filter Shimmer -->
-    <div class="border-b border-[#E9E9E9]">
+    <div class="border-b border-zinc-200">
         <div class="flex items-center justify-between py-2.5">
             <p class="shimmer h-[27px] w-2/5"></p>
             <span class="shimmer h-6 w-6"></span>
