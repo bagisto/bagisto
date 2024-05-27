@@ -2357,7 +2357,6 @@ return [
                         'request-path'        => 'Chemin de requête',
                         'target-path'         => 'Chemin de destination',
                         'temporary-redirect'  => 'Temporaire (302)',
-
                     ],
 
                     'create' => [

@@ -3025,7 +3025,6 @@ return [
                     'id'              => 'ID',
                     'edit'            => 'Bewerken',
                     'delete'          => 'Verwijderen',
-
                 ],
             ],
 
