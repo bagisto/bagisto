@@ -52,7 +52,7 @@
                         {!! view_render_event('bagisto.shop.customers.account.compare.remove_all.before') !!}
 
                         <div
-                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal max-sm:rounded-md max-sm:px-3 max-sm:py-1 max-sm:text-xs"
+                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal max-md:rounded-md max-md:px-3 max-md:py-1.5 max-md:text-xs"
                             v-if="items.length"
                             @click="removeAll"
                         >

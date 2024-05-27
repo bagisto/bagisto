@@ -42,6 +42,7 @@
                     class="absolute bottom-1.5 items-center !border-white bg-white/80 !px-2 !py-1 text-xs max-sm:!px-2.5 ltr:left-1.5 rtl:right-1.5"
                     ::average="product.ratings.average"
                     ::total="product.ratings.total"
+                    ::rating="false"
                     v-if="product.ratings.total"
                 />
 
@@ -288,6 +289,7 @@
                         <x-shop::products.ratings
                             ::average="product.ratings.average"
                             ::total="product.ratings.total"
+                            ::rating="false"
                         />
                     </template>
                 </p>

@@ -16,9 +16,9 @@
     $customer = auth()->guard('customer')->user();
 @endphp
 
-<div class="panel-side journal-scroll max-md::gap-5 grid max-h-[1320px] min-w-[342px] max-w-[380px] grid-cols-[1fr] gap-8 overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] max-md:max-w-full">
+<div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] max-w-[380px] grid-cols-[1fr] gap-8 overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] max-md:max-w-full max-md:gap-5">
     <!-- Account Profile Hero Section -->
-    <div class="max-md::py-2.5 grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 px-5 py-[25px]">
+    <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 px-5 py-[25px] max-md:py-2.5">
         <div class="">
             <img
                 src="{{ $customer->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -28,9 +28,9 @@
         </div>
 
         <div class="flex flex-col justify-between">
-            <p class="font-mediums max-md::text-xl text-2xl">Hello! {{ $customer->first_name }}</p>
+            <p class="font-mediums text-2xl max-md:text-xl">Hello! {{ $customer->first_name }}</p>
 
-            <p class="max-md::text-md: text-zinc-500 no-underline">{{ $customer->email }}</p>
+            <p class="max-md:text-md: text-zinc-500 no-underline">{{ $customer->email }}</p>
         </div>
     </div>
 
@@ -38,7 +38,7 @@
     @foreach ($menu->items as $menuItem)
         <div>
             <!-- Account Navigation Toggler -->
-            <div class="max-md::pb-1.5 select-none pb-5">
+            <div class="select-none pb-5 max-md:pb-1.5">
                 <p class="text-xl font-medium">@lang($menuItem['name'])</p>
             </div>
 
@@ -52,8 +52,8 @@
 
                 @foreach ($menuItem['children'] as $subMenuItem)
                     <a href="{{ $subMenuItem['url'] }}">
-                        <div class="flex justify-between px-6 py-5 border-t border-zinc-200 hover:bg-zinc-100 cursor-pointer max-md::p-4 max-md:border-0 max-md::py-3 max-md::px-0 {{ request()->routeIs($subMenuItem['route']) ? 'bg-zinc-100' : '' }}">
-                            <p class="max-md::text-base flex items-center gap-x-4 text-lg font-medium">
+                        <div class="flex justify-between px-6 py-5 border-t border-zinc-200 hover:bg-zinc-100 cursor-pointer max-md:p-4 max-md:border-0 max-md:py-3 max-md:px-0 {{ request()->routeIs($subMenuItem['route']) ? 'bg-zinc-100' : '' }}">
+                            <p class="flex items-center gap-x-4 text-lg font-medium max-md:text-base">
                                 <span class="{{ $subMenuItem['icon'] }}  text-2xl"></span>
 
                                 @lang($subMenuItem['name'])

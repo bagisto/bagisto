@@ -1,6 +1,7 @@
 @props([
     'average' => 0,
     'total'   => 0,
+    'rating' => true,
 ])
 
 <v-product-ratings
@@ -27,7 +28,7 @@
             <span class="text-sm font-semibold text-black max-sm:text-xs ltr:ml-1 rtl:mr-1">
                 @{{ abbreviatedTotal }}
 
-                <span class="max-sm:hidden">Ratings</span>
+                <span v-if="rating">Ratings</span>
             </span>
         </div>
     </script>
@@ -45,6 +46,11 @@
                 total: {
                     type: Number,
                     required: true,
+                },
+
+                rating: {
+                    type: Boolean,
+                    required: false,
                 },
             },
 

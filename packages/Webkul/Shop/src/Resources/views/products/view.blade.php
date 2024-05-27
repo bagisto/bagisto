@@ -325,6 +325,7 @@
                                             class="transition-all hover:border-gray-400 max-sm:px-3 max-sm:py-1"
                                             :average="$avgRatings"
                                             :total="$totalRatings"
+                                            ::rating="true"
                                         />
                                     </div>
                                 @endif

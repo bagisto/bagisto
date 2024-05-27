@@ -69,7 +69,7 @@
                                 <!-- For Desktop -->
                                 <img
                                     :src="attachment.url"
-                                    class="max-h-full max-w-full transition-transform duration-300 ease-out max-sm:hidden"
+                                    class="max-h-full max-w-full transition-transform duration-300 ease-out max-md:hidden"
                                     :class="{
                                         'cursor-zoom-in': ! isZooming,
                                         'cursor-grab': ! isDragging && isZooming,
@@ -87,7 +87,7 @@
                                 <!-- For Mobile -->
                                 <img
                                     :src="attachment.url"
-                                    class="max-h-full max-w-full transition-transform duration-300 ease-out sm:hidden"
+                                    class="max-h-full max-w-full transition-transform duration-300 ease-out md:hidden"
                                     :class="{
                                         'cursor-zoom-in': ! isZooming,
                                         'cursor-grab': ! isDragging && isZooming,
