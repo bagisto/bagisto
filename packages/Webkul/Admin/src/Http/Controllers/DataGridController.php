@@ -86,6 +86,27 @@ class DataGridController extends Controller
     }
 
     /**
+     * Update the saved filter.
+     */
+    public function update(int $id)
+    {
+        $this->validate(request(), [
+            'name' => 'required|unique:saved_filters,name,'.$id,
+        ]);
+
+        $updateFilter = $this->savedFilterRepository->update(request()->only([
+            'name',
+            'src',
+            'applied',
+        ]), $id);
+
+        return response()->json([
+            'data'    => $updateFilter,
+            'message' => trans('Filter Updated Successfully'),
+        ], 200);
+    }
+
+    /**
      * Delete the saved filter.
      */
     public function destroy(int $id)

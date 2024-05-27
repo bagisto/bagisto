@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => 'පෙරහන සාර්ථකව සුරක්ෂිත කර ඇත.',
                     'selected-filters'  => 'තෝරාගත් පෙරහන්',
                     'title'             => 'පෙරහන',
+                    'update'            => 'යාවත්කාලීන',
+                    'update-filter'     => 'පෙරහන යාවත්කාලීන කරන්න',
                 ],
 
                 'search' => [

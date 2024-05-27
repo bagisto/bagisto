@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => 'Filter is succesvol opgeslagen.',
                     'selected-filters'  => 'Geselecteerde filters',
                     'title'             => 'Filter',
+                    'update'            => 'Bijwerken',
+                    'update-filter'     => 'Filter bijwerken',
                 ],
 
                 'search' => [

@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => 'Filter has been saved successfully.',
                     'selected-filters'  => 'Selected Filters',
                     'title'             => 'Filter',
+                    'update'            => 'Update',
+                    'update-filter'     => 'Update Filter',
                 ],
 
                 'search' => [

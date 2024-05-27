@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => 'O filtro foi salvo com sucesso.',
                     'selected-filters'  => 'Filtros selecionados',
                     'title'             => 'Filtro',
+                    'update'            => 'Aktualizuj',
+                    'update-filter'     => 'Zaktualizuj filtr',
                 ],
 
                 'search' => [

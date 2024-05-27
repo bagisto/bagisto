@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => 'تم حفظ التصفية بنجاح.',
                     'selected-filters'  => 'التصفيات المحددة',
                     'title'             => 'تصفية',
+                    'update'            => 'تحديث',
+                    'update-filter'     => 'تحديث الفلتر',
                 ],
 
                 'search' => [

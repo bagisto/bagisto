@@ -29,6 +29,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(DataGridController::class)->prefix('datagrid/saved-filters')->group(function () {
         Route::post('', 'store')->name('admin.datagrid.filters.saved_filters.store');
         Route::get('', 'get')->name('admin.datagrid.filters.saved_filters.index');
+        Route::put('{id}', 'update')->name('admin.datagrid.filters.saved_filters.update');
         Route::delete('{id}', 'destroy')->name('admin.datagrid.filters.saved_filters.destroy');
     });
 

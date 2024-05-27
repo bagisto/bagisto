@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => 'הפילטר נשמר בהצלחה.',
                     'selected-filters'  => 'פילטרים נבחרים',
                     'title'             => 'פילטר',
+                    'update'            => 'עדכן',
+                    'update-filter'     => 'עדכן מסנן',
                 ],
 
                 'search' => [

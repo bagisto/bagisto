@@ -3968,6 +3968,8 @@ return [
                     'saved-success'     => 'Filtre başarıyla kaydedildi.',
                     'selected-filters'  => 'Seçilen Filtreler',
                     'title'             => 'Filtre',
+                    'update'            => 'Güncelle',
+                    'update-filter'     => 'Filtreyi güncelle',
                 ],
 
                 'search' => [

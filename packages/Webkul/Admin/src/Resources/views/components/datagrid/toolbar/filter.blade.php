@@ -90,22 +90,20 @@
                                 class="select-none rounded-none !shadow-none" 
                                 v-if="savedFilters.available.length > 0"
                             >
-                                <x-slot:header>
-                                    <div class="flex w-full">
-                                        <p class="w-full p-2.5 text-base font-semibold text-gray-800 dark:text-white">
-                                            @lang('admin::app.components.datagrid.toolbar.filter.quick-filters')
-                                        </p>
+                            <x-slot:header class="px-4">
+                                <p class="w-full text-base font-semibold text-gray-800 dark:text-white">
+                                    @lang('admin::app.components.datagrid.toolbar.filter.quick-filters')
+                                </p>
 
-                                        <!--Customer Edit Component -->
-                                        <div
-                                            class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"
-                                            @click="removeAppliedSavedFilters()"
-                                            v-if="applied.savedFilterId" 
-                                        >
-                                            @lang('Clear')
-                                        </div>
-                                    </div>
-                                </x-slot>
+                                <!--Customer Edit Component -->
+                                <div
+                                    class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"
+                                    @click="removeAppliedSavedFilters()"
+                                    v-if="applied.savedFilterId" 
+                                >
+                                    @lang('Clear')
+                                </div>
+                            </x-slot>
 
                                 <x-slot:content class="!p-0">
                                     <div class="grid gap-1 !p-0 pb-2.5">
@@ -547,7 +545,7 @@
                                             <button
                                                 type="button"
                                                 class="secondary-button w-full"
-                                                @click=""
+                                                @click="applySelectedFilters"
                                             >
                                                 @lang('Apply Filter')
                                             </button>
@@ -559,7 +557,7 @@
                                                 class="secondary-button w-full"
                                                 @click="isShowSavedFilters = ! isShowSavedFilters"
                                             >
-                                                @lang('admin::app.components.datagrid.toolbar.filter.save-filter')
+                                                @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.update-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' }}
                                             </button>
                                         </div>
                                     </div>
@@ -584,7 +582,7 @@
                                     v-slot="{ meta, errors, handleSubmit }"
                                     as="div"
                                 >
-                                    <form @submit="handleSubmit($event, saveFilters)">
+                                    <form @submit="handleSubmit($event, createOrUpdateFilter)">
                                         <!-- Save Filter Name Input Field -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
@@ -592,9 +590,16 @@
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
+                                                type="hidden"
+                                                name="id"
+                                                ::value="applied.savedFilterId"
+                                            />
+
+                                            <x-admin::form.control-group.control
                                                 type="text"
                                                 name="name"
                                                 id="name"
+                                                ::value="getAppliedFilter?.name"
                                                 rules="required"
                                                 :label="trans('admin::app.components.datagrid.toolbar.filter.name')"
                                                 :placeholder="trans('admin::app.components.datagrid.toolbar.filter.name')"
@@ -611,7 +616,7 @@
                                                 aria-label="@lang('admin::app.components.datagrid.toolbar.filter.save-btn')"
                                                 :disabled="savedFilters.params.filters.columns.every(column => column.value.length === 0)"
                                             >
-                                                @lang('admin::app.components.datagrid.toolbar.filter.save-btn')
+                                                @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' }}
                                             </button>
                                         </div>
                                         
@@ -678,7 +683,7 @@
         app.component('v-datagrid-filter', {
             template: '#v-datagrid-filter-template',
 
-            props: ['isLoading', 'available', 'applied', 'src', 'savedFilter'],
+            props: ['isLoading', 'available', 'applied', 'src'],
 
             emits: ['applyFilter', 'removeFilter', 'applySavedFilter'],
 
@@ -712,8 +717,19 @@
                 this.getSavedFilters();
             },
 
+            computed: {
+                getAppliedFilter() {
+                    return this.savedFilters.available.find((filter) => filter.id == this.applied.savedFilterId);
+                }
+            },
+
             methods: {
-                removeAppliedSavedFilters() {
+                /**
+                 * Remove Applied save filter.
+                 *
+                 * @returns {void}
+                 */
+                 removeAppliedSavedFilters() {
                     this.applied.savedFilterId = null;
 
                     this.filters = {
@@ -728,18 +744,31 @@
                  *
                  * @returns {void}
                  */
-                 saveFilters(params, { setErrors }) {
+                createOrUpdateFilter(params, { setErrors }) {
                     let applied = JSON.parse(JSON.stringify(this.applied));
 
-                    applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => column.value.length > 0);;
+                    applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => column.value.length > 0);
 
-                    this.$axios.post('{{ route('admin.datagrid.filters.saved_filters.store') }}', {
+                    if (params.id) {
+                        params._method = 'PUT';
+                    }
+
+                    this.$axios.post(params.id ? `{{ route('admin.datagrid.filters.saved_filters.update', '') }}/${params.id}` : "{{ route('admin.datagrid.filters.saved_filters.store') }}", {
                         src: this.src,
-                        name: params.name,
                         applied,
+                        ...params,
                     })
                         .then(response => {
-                            this.savedFilters.available.push(response.data.data);
+                            if (! params.id) {
+                                this.savedFilters.available.push(response.data.data);
+                            } else {
+                                this.savedFilters.available = this.savedFilters.available.map((filter) => {
+                                    if (filter.id == response.data.data.id) {
+                                        return response.data.data;
+                                    }
+                                    return filter;
+                                });
+                            }
 
                             this.savedFilters.name = '';
 
@@ -872,7 +901,9 @@
                             $event.target.value = '';
                         }
                     }
+                },
 
+                applySelectedFilters() {
                     this.$emit('applyFilter', this.filters);
 
                     this.$refs.filterDrawer.close();

@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => '成功保存过滤器。',
                     'selected-filters'  => '已选过滤器',
                     'title'             => '过滤器',
+                    'update'            => '更新',
+                    'update-filter'     => '更新筛选器',
                 ],
 
                 'search' => [

@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => 'フィルターは正常に保存されました。',
                     'selected-filters'  => '選択したフィルター',
                     'title'             => 'フィルター',
+                    'update'            => '更新',
+                    'update-filter'     => 'フィルターを更新',
                 ],
 
                 'search' => [

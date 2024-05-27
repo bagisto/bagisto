@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => 'फ़िल्टर को सफलतापूर्वक सहेजा गया है।',
                     'selected-filters'  => 'चयनित फ़िल्टर',
                     'title'             => 'फ़िल्टर',
+                    'update'            => 'अपडेट करें',
+                    'update-filter'     => 'फिल्टर अपडेट करें',
                 ],
 
                 'search' => [

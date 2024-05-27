@@ -3967,6 +3967,8 @@ return [
                     'saved-success'     => 'Фільтр успішно збережено.',
                     'selected-filters'  => 'Вибрані фільтри',
                     'title'             => 'Фільтр',
+                    'update'            => 'Оновити',
+                    'update-filter'     => 'Оновити фільтр',
                 ],
 
                 'search' => [
