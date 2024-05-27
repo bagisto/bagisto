@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'المعرف',
                         'locale'              => 'محلي',
                         'mass-delete-success' => 'تم حذف إعادة كتابة عناوين URL المحددة بنجاح',
+                        'permanent-redirect'  => 'دائم (301)',
                         'redirect-type'       => 'نوع إعادة التوجيه',
                         'request-path'        => 'مسار الطلب',
                         'target-path'         => 'مسار الهدف',
+                        'temporary-redirect'  => 'مؤقت (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => 'الأدوار',
 
                 'datagrid' => [
-                    'delete'          => 'حذف',
-                    'edit'            => 'تعديل',
-                    'id'              => 'المعرف',
-                    'name'            => 'الاسم',
+                    'custom'          => 'مخصص',
+                    'all'             => 'الكل',
                     'permission-type' => 'نوع الصلاحية',
+                    'name'            => 'الاسم',
+                    'id'              => 'المعرف',
+                    'edit'            => 'تعديل',
+                    'delete'          => 'حذف',
                 ],
             ],
 

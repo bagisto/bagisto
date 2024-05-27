@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'आईडी',
                         'locale'              => 'भाषा क्षेत्र',
                         'mass-delete-success' => 'चुने गए URL अनुकूलन सफलतापूर्वक हटा दिए गए हैं।',
+                        'permanent-redirect'  => 'स्थायी (301)',
                         'redirect-type'       => 'अनुवर्तन प्रकार',
                         'request-path'        => 'अनुरोध पथ',
                         'target-path'         => 'लक्ष्य पथ',
+                        'temporary-redirect'  => 'अस्थायी (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => 'भूमिकाएँ',
 
                 'datagrid' => [
-                    'delete'          => 'हटाएं',
-                    'edit'            => 'संपादित करें',
-                    'id'              => 'आईडी',
-                    'name'            => 'नाम',
+                    'custom'          => 'कस्टम',
+                    'all'             => 'सभी',
                     'permission-type' => 'अनुमति प्रकार',
+                    'name'            => 'नाम',
+                    'id'              => 'आईडी',
+                    'edit'            => 'संपादित करें',
+                    'delete'          => 'हटाएं',
                 ],
             ],
 

@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Località',
                         'mass-delete-success' => 'Riscritture URL Selezionate Eliminate con Successo',
+                        'permanent-redirect'  => 'Permanente (301)',
                         'redirect-type'       => 'Tipo di Reindirizzamento',
                         'request-path'        => 'Percorso Richiesto',
                         'target-path'         => 'Percorso di Destinazione',
+                        'temporary-redirect'  => 'Temporaneo (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => 'Ruoli',
 
                 'datagrid' => [
-                    'delete'          => 'Elimina',
-                    'edit'            => 'Modifica',
-                    'id'              => 'Id',
-                    'name'            => 'Nome',
+                    'custom'          => 'Personalizzato',
+                    'all'             => 'Tutti',
                     'permission-type' => 'Tipo di Autorizzazione',
+                    'name'            => 'Nome',
+                    'id'              => 'Id',
+                    'edit'            => 'Modifica',
+                    'delete'          => 'Elimina',
                 ],
             ],
 

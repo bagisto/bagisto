@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'আইডি',
                         'locale'              => 'স্থানীয়',
                         'mass-delete-success' => 'নির্বাচিত ইউআরএল পুনর্লিখন সফলভাবে মুছে ফেলা হয়েছে',
+                        'permanent-redirect'  => 'স্থায়ী (301)',
                         'redirect-type'       => 'পুনর্নির্দেশের ধরন',
                         'request-path'        => 'অনুরোধ পথ',
                         'target-path'         => 'লক্ষ্য পথ',
+                        'temporary-redirect'  => 'অস্থায়ী (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,14 @@ return [
                 'title'      => 'ভূমিকা',
 
                 'datagrid' => [
+                    'all'             => 'সব',
+                    'custom'          => 'কাস্টম',
                     'delete'          => 'মুছে ফেলুন',
                     'edit'            => 'সম্পাদনা',
                     'id'              => 'আইডি',
                     'name'            => 'নাম',
                     'permission-type' => 'অনুমতি প্রকার',
+
                 ],
             ],
 

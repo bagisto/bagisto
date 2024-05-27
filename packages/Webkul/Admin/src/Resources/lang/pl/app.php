@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Język',
                         'mass-delete-success' => 'Wybrane zapisy URL zostały pomyślnie usunięte.',
+                        'permanent-redirect'  => 'Przejście stałe (301)',
                         'redirect-type'       => 'Typ przekierowania',
                         'request-path'        => 'Ścieżka żądania',
                         'target-path'         => 'Ścieżka docelowa',
+                        'temporary-redirect'  => 'Przejście tymczasowe (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => 'Role',
 
                 'datagrid' => [
-                    'delete'          => 'Usuń',
-                    'edit'            => 'Edytuj',
-                    'id'              => 'Id',
-                    'name'            => 'Nazwa',
+                    'custom'          => 'Niestandardowe',
+                    'all'             => 'Wszystkie',
                     'permission-type' => 'Typ Uprawnienia',
+                    'name'            => 'Nazwa',
+                    'id'              => 'Id',
+                    'edit'            => 'Edytuj',
+                    'delete'          => 'Usuń',
                 ],
             ],
 

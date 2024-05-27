@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'אזור שפה',
                         'mass-delete-success' => 'כתובות URL משכתבות שנבחרו נמחקו בהצלחה.',
+                        'permanent-redirect'  => 'קבוע (301)',
                         'redirect-type'       => 'סוג ההפניה',
                         'request-path'        => 'נתיב הבקשה',
                         'target-path'         => 'נתיב היעד',
+                        'temporary-redirect'  => 'זמני (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => 'תפקידים',
 
                 'datagrid' => [
-                    'delete'          => 'מחיקה',
-                    'edit'            => 'עריכה',
-                    'id'              => 'מזהה',
-                    'name'            => 'שם',
+                    'custom'          => 'מותאם אישית',
+                    'all'             => 'הכל',
                     'permission-type' => 'סוג הרשאה',
+                    'name'            => 'שם',
+                    'id'              => 'מזהה',
+                    'edit'            => 'עריכה',
+                    'delete'          => 'מחיקה',
                 ],
             ],
 

@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Локаль',
                         'mass-delete-success' => 'Выбранные перенаправления URL были успешно удалены.',
+                        'permanent-redirect'  => 'Постоянное (301)',
                         'redirect-type'       => 'Тип перенаправления',
                         'request-path'        => 'Путь запроса',
                         'target-path'         => 'Целевой путь',
+                        'temporary-redirect'  => 'Временное (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => 'Роли',
 
                 'datagrid' => [
-                    'delete'          => 'Удалить',
-                    'edit'            => 'Редактировать',
-                    'id'              => 'ID',
-                    'name'            => 'Название',
+                    'custom'          => 'Пользовательские',
+                    'all'             => 'Все',
                     'permission-type' => 'Тип разрешения',
+                    'name'            => 'Название',
+                    'id'              => 'ID',
+                    'edit'            => 'Редактировать',
+                    'delete'          => 'Удалить',
                 ],
             ],
 

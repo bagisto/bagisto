@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Localidade',
                         'mass-delete-success' => 'As reescritas de URL selecionadas foram excluídas com sucesso.',
+                        'permanent-redirect'  => 'Redirecionamento permanente (301)',
                         'redirect-type'       => 'Tipo de redirecionamento',
                         'request-path'        => 'Caminho da solicitação',
                         'target-path'         => 'Caminho de destino',
+                        'temporary-redirect'  => 'Redirecionamento temporário (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => 'Funções',
 
                 'datagrid' => [
-                    'delete'          => 'Excluir',
-                    'edit'            => 'Editar',
-                    'id'              => 'Id',
-                    'name'            => 'Nome',
+                    'custom'          => 'Customizado',
+                    'all'             => 'Tudo',
                     'permission-type' => 'Tipo de Permissão',
+                    'name'            => 'Nome',
+                    'id'              => 'Id',
+                    'edit'            => 'Editar',
+                    'delete'          => 'Excluir',
                 ],
             ],
 

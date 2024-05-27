@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Lokalisierung',
                         'mass-delete-success' => 'Ausgewählte URL-Weiterleitungen erfolgreich gelöscht',
+                        'permanent-redirect'  => 'Permanent (301)',
                         'redirect-type'       => 'Weiterleitungstyp',
                         'request-path'        => 'Anforderungs-Pfad',
                         'target-path'         => 'Zielpfad',
+                        'temporary-redirect'  => 'Temporär (302)',
                     ],
 
                     'create' => [
@@ -3016,6 +3018,8 @@ return [
                 'title'      => 'Rollen',
 
                 'datagrid' => [
+                    'all'             => 'Alle',
+                    'custom'          => 'Benutzerdefiniert',
                     'delete'          => 'Löschen',
                     'edit'            => 'Bearbeiten',
                     'id'              => 'ID',

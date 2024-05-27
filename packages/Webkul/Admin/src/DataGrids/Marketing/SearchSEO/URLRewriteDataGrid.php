@@ -76,7 +76,23 @@ class URLRewriteDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'redirect_type',
             'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.redirect-type'),
-            'type'       => 'string',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => [
+                        [
+                            'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.temporary-redirect'),
+                            'value' => 302,
+                        ],
+                        [
+                            'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.permanent-redirect'),
+                            'value' => 301,
+                        ],
+                    ],
+                ],
+            ],
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,

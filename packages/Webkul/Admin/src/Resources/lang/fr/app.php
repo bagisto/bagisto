@@ -2352,9 +2352,12 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Localisation',
                         'mass-delete-success' => 'Les réécritures d\'URL sélectionnées ont été supprimées avec succès.',
+                        'permanent-redirect'  => 'Permanent (301)',
                         'redirect-type'       => 'Type de redirection',
                         'request-path'        => 'Chemin de requête',
                         'target-path'         => 'Chemin de destination',
+                        'temporary-redirect'  => 'Temporaire (302)',
+
                     ],
 
                     'create' => [
@@ -3016,11 +3019,13 @@ return [
                 'title'      => 'Rôles',
 
                 'datagrid' => [
-                    'delete'          => 'Supprimer',
-                    'edit'            => 'Éditer',
-                    'id'              => 'ID',
-                    'name'            => 'Nom',
+                    'custom'          => 'Personnalisé',
+                    'all'             => 'Tous',
                     'permission-type' => 'Type d\'autorisation',
+                    'name'            => 'Nom',
+                    'id'              => 'ID',
+                    'edit'            => 'Éditer',
+                    'delete'          => 'Supprimer',
                 ],
             ],
 

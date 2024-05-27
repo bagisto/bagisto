@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Taal',
                         'mass-delete-success' => 'De geselecteerde URL-herschrijvingen zijn succesvol verwijderd.',
+                        'permanent-redirect'  => 'Permanente doorstuur (301)',
                         'redirect-type'       => 'Doorstuurtype',
                         'request-path'        => 'Aanvraagpad',
                         'target-path'         => 'Doelpad',
+                        'temporary-redirect'  => 'Tijdelijke doorstuur (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,14 @@ return [
                 'title'      => 'Rollen',
 
                 'datagrid' => [
-                    'delete'          => 'Verwijderen',
-                    'edit'            => 'Bewerken',
-                    'id'              => 'ID',
-                    'name'            => 'Naam',
+                    'custom'          => 'Aangepast',
+                    'all'             => 'Alle',
                     'permission-type' => 'Toestemmingstype',
+                    'name'            => 'Naam',
+                    'id'              => 'ID',
+                    'edit'            => 'Bewerken',
+                    'delete'          => 'Verwijderen',
+
                 ],
             ],
 

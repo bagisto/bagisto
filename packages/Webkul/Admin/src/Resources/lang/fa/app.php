@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'شناسه',
                         'locale'              => 'منطقه',
                         'mass-delete-success' => 'بازنویسی URL های انتخاب شده با موفقیت حذف شدند',
+                        'permanent-redirect'  => 'دائمی (301)',
                         'redirect-type'       => 'نوع تغییر مسیر',
                         'request-path'        => 'مسیر درخواست',
                         'target-path'         => 'مسیر هدف',
+                        'temporary-redirect'  => 'موقت (302)',
                     ],
 
                     'create' => [
@@ -3016,6 +3018,8 @@ return [
                 'title'      => 'نقش‌ها',
 
                 'datagrid' => [
+                    'all'             => 'همه',
+                    'custom'          => 'سفارشی',
                     'delete'          => 'حذف',
                     'edit'            => 'ویرایش',
                     'id'              => 'شناسه',

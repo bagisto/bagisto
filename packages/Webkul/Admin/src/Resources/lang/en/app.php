@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Locale',
                         'mass-delete-success' => 'Selected URL Rewrites Deleted Successfully',
+                        'permanent-redirect'  => 'Permanent (301)',
                         'redirect-type'       => 'Redirect Type',
                         'request-path'        => 'Request Path',
                         'target-path'         => 'Target Path',
+                        'temporary-redirect'  => 'Temporary (302)',
                     ],
 
                     'create' => [
@@ -3016,6 +3018,8 @@ return [
                 'title'      => 'Roles',
 
                 'datagrid' => [
+                    'all'             => 'All',
+                    'custom'          => 'Custom',
                     'delete'          => 'Delete',
                     'edit'            => 'Edit',
                     'id'              => 'Id',

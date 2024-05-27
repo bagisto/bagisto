@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => '语言环境',
                         'mass-delete-success' => '已成功删除选定的 URL 重写。',
+                        'permanent-redirect'  => '永久（301）',
                         'redirect-type'       => '重定向类型',
                         'request-path'        => '请求路径',
                         'target-path'         => '目标路径',
+                        'temporary-redirect'  => '临时（302）',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => '角色',
 
                 'datagrid' => [
-                    'delete'          => '删除',
-                    'edit'            => '编辑',
-                    'id'              => 'ID',
-                    'name'            => '名称',
+                    'custom'          => '自定义',
+                    'all'             => '全部',
                     'permission-type' => '权限类型',
+                    'name'            => '名称',
+                    'id'              => 'ID',
+                    'edit'            => '编辑',
+                    'delete'          => '删除',
                 ],
             ],
 

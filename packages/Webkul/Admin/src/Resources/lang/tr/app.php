@@ -2353,9 +2353,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Yerel',
                         'mass-delete-success' => 'Seçili URL Yeniden Yönlendirmeleri Başarıyla Silindi',
+                        'permanent-redirect'  => 'Kalıcı (301)',
                         'redirect-type'       => 'Yönlendirme Türü',
                         'request-path'        => 'İstek Yolu',
                         'target-path'         => 'Hedef Yol',
+                        'temporary-redirect'  => 'Geçici (302)',
                     ],
 
                     'create' => [
@@ -3018,11 +3020,13 @@ return [
                 'title'      => 'Roller',
 
                 'datagrid' => [
-                    'delete'          => 'Sil',
-                    'edit'            => 'Düzenle',
-                    'id'              => 'Id',
-                    'name'            => 'Adı',
+                    'custom'          => 'Özel',
+                    'all'             => 'Tümü',
                     'permission-type' => 'İzin Türü',
+                    'name'            => 'Adı',
+                    'id'              => 'Id',
+                    'edit'            => 'Düzenle',
+                    'delete'          => 'Sil',
                 ],
             ],
 

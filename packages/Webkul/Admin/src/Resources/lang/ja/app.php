@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'ロケール',
                         'mass-delete-success' => '選択したURLリライトが正常に削除されました',
+                        'permanent-redirect'  => '恒久的なリダイレクト(301)',
                         'redirect-type'       => 'リダイレクトタイプ',
                         'request-path'        => 'リクエストパス',
                         'target-path'         => 'ターゲットパス',
+                        'temporary-redirect'  => '一時的なリダイレクト(302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => '役割',
 
                 'datagrid' => [
-                    'delete'          => '削除',
-                    'edit'            => '編集',
-                    'id'              => 'ID',
-                    'name'            => '名前',
+                    'custom'          => 'カスタム',
+                    'all'             => 'すべて',
                     'permission-type' => '権限タイプ',
+                    'name'            => '名前',
+                    'id'              => 'ID',
+                    'edit'            => '編集',
+                    'delete'          => '削除',
                 ],
             ],
 

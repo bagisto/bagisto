@@ -2352,9 +2352,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Локаль',
                         'mass-delete-success' => 'Вибрані переадресації URL успішно видалено',
+                        'permanent-redirect'  => 'Постійна (301)',
                         'redirect-type'       => 'Тип переадресації',
                         'request-path'        => 'Шлях запиту',
                         'target-path'         => 'Цільовий шлях',
+                        'temporary-redirect'  => 'Тимчасова (302)',
                     ],
 
                     'create' => [
@@ -3016,11 +3018,13 @@ return [
                 'title'      => 'Ролі',
 
                 'datagrid' => [
-                    'delete'          => 'Видалити',
-                    'edit'            => 'Редагувати',
-                    'id'              => 'ID',
-                    'name'            => 'Назва',
+                    'custom'          => 'Користувацькі',
+                    'all'             => 'Всі',
                     'permission-type' => 'Тип дозволу',
+                    'name'            => 'Назва',
+                    'id'              => 'ID',
+                    'edit'            => 'Редагувати',
+                    'delete'          => 'Видалити',
                 ],
             ],
 
