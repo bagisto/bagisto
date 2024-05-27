@@ -90,8 +90,21 @@
                                 class="select-none rounded-none !shadow-none" 
                                 v-if="savedFilters.available.length > 0"
                             >
-                                <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
-                                    @lang('admin::app.components.datagrid.toolbar.filter.quick-filters')
+                                <x-slot:header>
+                                    <div class="flex w-full">
+                                        <p class="w-full p-2.5 text-base font-semibold text-gray-800 dark:text-white">
+                                            @lang('admin::app.components.datagrid.toolbar.filter.quick-filters')
+                                        </p>
+
+                                        <!--Customer Edit Component -->
+                                        <div
+                                            class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"
+                                            @click="removeAppliedSavedFilters()"
+                                            v-if="applied.savedFilterId" 
+                                        >
+                                            @lang('Clear')
+                                        </div>
+                                    </div>
                                 </x-slot>
 
                                 <x-slot:content class="!p-0">
@@ -530,15 +543,25 @@
                                             </div>
                                         </div>
 
-                                        <!-- Save Filter Button for open save Filter Section -->
-                                        <button
-                                            type="button"
-                                            v-if="filters.columns.length > 0"
-                                            class="secondary-button w-full"
-                                            @click="isShowSavedFilters = ! isShowSavedFilters"
-                                        >
-                                            @lang('admin::app.components.datagrid.toolbar.filter.save-filter')
-                                        </button>
+                                        <div class="flex gap-2">
+                                            <button
+                                                type="button"
+                                                class="secondary-button w-full"
+                                                @click=""
+                                            >
+                                                @lang('Apply Filter')
+                                            </button>
+                                            
+                                            <!-- Save Filter Button for open save Filter Section -->
+                                            <button
+                                                type="button"
+                                                v-if="filters.columns.length > 0"
+                                                class="secondary-button w-full"
+                                                @click="isShowSavedFilters = ! isShowSavedFilters"
+                                            >
+                                                @lang('admin::app.components.datagrid.toolbar.filter.save-filter')
+                                            </button>
+                                        </div>
                                     </div>
                                 </x-slot>
                             </x-admin::accordion>
@@ -690,6 +713,16 @@
             },
 
             methods: {
+                removeAppliedSavedFilters() {
+                    this.applied.savedFilterId = null;
+
+                    this.filters = {
+                        columns: [],
+                    }
+                    
+                    this.$emit('removeFilter', this.filters);
+                },
+                
                 /**
                  * Save filters to the database.
                  *
