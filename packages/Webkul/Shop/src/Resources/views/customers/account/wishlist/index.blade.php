@@ -69,11 +69,11 @@
                         v-for="(item, index) in wishlistItems"
                         class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-md:my-5 max-md:last:mb-0"
                     >
-                        <div class="grid flex-1 gap-8">
-                            <div class="grid gap-y-6">
+                        <div class="grid flex-1 gap-8 max-md:flex-none">
+                            <div class="grid gap-y-6 max-md:gap-y-0">
                                 <!-- Wishlist item -->
                                 <div class="flex justify-between gap-x-2.5 border-b border-zinc-200 pb-5">
-                                    <div class="flex gap-x-5 max-md:w-full">
+                                    <div class="flex gap-x-5 max-md:w-full max-md:gap-x-5">
                                         <div>
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.image.before') !!}
 
@@ -140,7 +140,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="max-md:block max-md:justify-between md:hidden">
+                                            <div class="max-md:block md:hidden">
                                                 <p 
                                                     class="text-lg font-semibold max-md:text-sm" 
                                                     v-html="item.product.min_price"

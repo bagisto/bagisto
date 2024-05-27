@@ -117,7 +117,7 @@
                                     </label>
 
                                     <span
-                                        class="text-xl max-md:text-xl max-md:text-sm ltr:ml-2.5 rtl:mr-2.5"
+                                        class="text-xl max-md:text-sm ltr:ml-2.5 rtl:mr-2.5"
                                         role="heading"
                                         aria-level="2"
                                     >
@@ -161,7 +161,7 @@
                             >
                                 <div class="flex flex-wrap justify-between gap-x-2.5 border-b border-zinc-200 pb-5">
                                     <div class="flex gap-x-5">
-                                        <div class="mt-11 select-none">
+                                        <div class="mt-11 select-none max-md:mt-9 max-sm:mt-7">
                                             <input
                                                 type="checkbox"
                                                 :id="'item_' + item.id"

@@ -73,7 +73,7 @@
             <template v-else>
                 <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
                     <!-- Included Checkout Summary Blade File For Mobile view -->
-                    <div class="hidden max-sm:block">
+                    <div class="hidden max-md:block">
                         @include('shop::checkout.onepage.summary')
                     </div>
 
@@ -99,7 +99,7 @@
 
                     <!-- Included Checkout Summary Blade File For Desktop view -->
                     <div class="sticky top-8 block h-max w-[442px] max-w-full max-lg:w-auto max-lg:max-w-[442px] ltr:pl-8 max-lg:ltr:pl-0 rtl:pr-8 max-lg:rtl:pr-0">
-                        <div class="block max-sm:hidden">
+                        <div class="block max-md:hidden">
                             @include('shop::checkout.onepage.summary')
                         </div>
 
@@ -119,7 +119,7 @@
                             <template v-else>
                                 <x-shop::button
                                     type="button"
-                                    class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-sm:mb-4 max-sm:w-full max-sm:max-w-full"
+                                    class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-md:mb-4 max-md:w-full max-md:max-w-full"
                                     :title="trans('shop::app.checkout.onepage.summary.place-order')"
                                     ::disabled="isPlacingOrder"
                                     ::loading="isPlacingOrder"

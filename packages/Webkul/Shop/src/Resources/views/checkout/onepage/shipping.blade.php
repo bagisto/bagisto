@@ -28,20 +28,20 @@
                     <!-- Accordion Blade Component Header -->
                     <x-slot:header class="!px-0 !py-4">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-2xl font-medium max-sm:text-lg">
+                            <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-lg">
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
                             </h2>
                         </div>
                     </x-slot>
 
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="mt-8 !p-0 max-sm:mt-0">
-                        <div class="flex flex-wrap gap-8 max-sm:gap-2.5">
+                    <x-slot:content class="mt-8 !p-0 max-md:mt-3 max-sm:mt-0">
+                        <div class="flex flex-wrap gap-8 max-md:gap-4 max-sm:gap-2.5">
                             <template v-for="method in methods">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
 
                                 <div
-                                    class="relative max-w-[218px] select-none max-sm:max-w-full max-sm:flex-auto"
+                                    class="relative max-w-[218px] select-none max-md:max-w-full max-md:flex-auto"
                                     v-for="rate in method.rates"
                                 >
                                     <input 
@@ -60,17 +60,17 @@
                                     </label>
 
                                     <label 
-                                        class="block cursor-pointer rounded-xl border border-zinc-200 p-5 max-sm:flex max-sm:gap-4 max-sm:px-4 max-sm:py-2.5"
+                                        class="block cursor-pointer rounded-xl border border-zinc-200 p-5 max-md:flex max-md:gap-4 max-md:px-4 max-md:py-2.5"
                                         :for="rate.method"
                                     >
                                         <span class="icon-flate-rate text-6xl text-navyBlue"></span>
 
                                         <div>
-                                            <p class="mt-1.5 text-2xl font-semibold max-sm:text-xl">
+                                            <p class="mt-1.5 text-2xl font-semibold max-md:text-xl">
                                                 @{{ rate.base_formatted_price }}
                                             </p>
                                             
-                                            <p class="mt-2.5 text-xs font-medium max-sm:mt-0">
+                                            <p class="mt-2.5 text-xs font-medium max-md:mt-1 max-sm:mt-0">
                                                 <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                             </p>
                                         </div>

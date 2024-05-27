@@ -91,7 +91,7 @@
                 :leave-to-class="enterFromLeaveToClasses"
             >
                 <div
-                    class="max-md::!w-full fixed z-[1000] overflow-hidden bg-white"
+                    class="fixed z-[1000] overflow-hidden bg-white max-md:!w-full"
                     :class="{
                         'inset-x-0 top-0': position == 'top',
                         'inset-x-0 bottom-0': position == 'bottom',
@@ -185,7 +185,6 @@
 
                 close() {
                     this.isOpen = false;
-                    console.log(hi);
 
                     document.body.style.overflow = 'auto';
 
