@@ -30,8 +30,6 @@
                     href="{{ route('shop.customer.session.destroy') }}"
                     onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
                 >
-                    <span class="icon-compare text-2xl"></span>
-
                     @lang('shop::app.components.layouts.header.logout')
                 </a>
             </div>

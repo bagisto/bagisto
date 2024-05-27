@@ -21,8 +21,8 @@
 </div>
 
 <!-- For Mobile View -->
-<div class="md:hidden">
-    <p class="font-semibold leading-6 text-gray-800">
+<div class="text-gray-800 md:hidden">
+    <p class="font-semibold">
         {{ $address->company_name ?? '' }}
     </p>
 
@@ -37,6 +37,8 @@
 
         {{ core()->country_name($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif <br>
 
-        {{ __('shop::app.customers.account.orders.view.contact') }} : {{ $address->phone }}
+        <span class="no-underline">
+            {{ __('shop::app.customers.account.orders.view.contact') }} : {{ $address->phone }}
+        </span>
     </p>
 </div>
