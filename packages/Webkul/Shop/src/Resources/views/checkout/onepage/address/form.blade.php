@@ -3,7 +3,7 @@
         type="text/x-template"
         id="v-checkout-address-form-template"
     >
-        <div class="mt-2">
+        <div class="mt-2 max-md:mt-3">
             <x-shop::form.control-group class="hidden">
                 <x-shop::form.control-group.control
                     type="text"

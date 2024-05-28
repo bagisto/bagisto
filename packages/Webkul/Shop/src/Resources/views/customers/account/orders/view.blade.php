@@ -52,7 +52,7 @@
                     </form>
 
                     <a
-                        class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-md max-md:py-1.5"
+                        class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-xl max-md:py-1.5"
                         href="javascript:void(0);"
                         @click="$emitter.emit('open-confirm-modal', {
                             message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
@@ -154,11 +154,11 @@
     
                                             <td data-value="@lang('shop::app.customers.account.orders.view.information.item-status')">
                                                 @if($item->qty_ordered)
-                                                    @lang('shop::app.customers.account.orders.view.information.item-ordered', ['qty_ordered' => $item->qty_ordered])
+                                                    @lang('shop::app.customers.account.orders.view.information.ordered-item', ['qty_ordered' => $item->qty_ordered])
                                                 @endif
     
                                                 @if($item->qty_invoiced)
-                                                    @lang('shop::app.customers.account.orders.view.information.item-invoice', ['qty_invoiced' => $item->qty_invoiced])
+                                                    @lang('shop::app.customers.account.orders.view.information.invoiced-item', ['qty_invoiced' => $item->qty_invoiced])
                                                 @endif
     
                                                 @if($item->qty_shipped)
@@ -395,12 +395,13 @@
                             </div>
                         </div>
 
+                        <!-- Item Ordered -->
                         <x-shop::accordion
                             :is-active="true"
                             class="rounded-md !border-none !bg-gray-100"
                         >
                             <x-slot:header class="!mb-0 rounded-t-md border-none bg-gray-100 px-4 py-3 font-medium">
-                               @lang('Item Ordered')
+                               @lang('shop::app.customers.account.orders.view.item-ordered')
                             </x-slot>
                 
                             <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
@@ -439,13 +440,13 @@
                                                 <div class="[&>*]:text-right">
                                                     @if($item->qty_ordered)
                                                         <p>
-                                                            @lang('shop::app.customers.account.orders.view.information.item-ordered', ['qty_ordered' => $item->qty_ordered])
+                                                            @lang('shop::app.customers.account.orders.view.information.ordered-item', ['qty_ordered' => $item->qty_ordered])
                                                         </p>
                                                     @endif
 
                                                     @if($item->qty_invoiced)
                                                         <p>
-                                                            @lang('shop::app.customers.account.orders.view.information.item-invoice', ['qty_invoiced' => $item->qty_invoiced])
+                                                            @lang('shop::app.customers.account.orders.view.information.invoiced-item', ['qty_invoiced' => $item->qty_invoiced])
                                                         </p>
                                                     @endif
 
@@ -530,7 +531,6 @@
                                                     {{ $item->tax_percent }}
                                                 </p>                                            
                                             </div>
-                                            
 
                                             <!-- Tax Amount -->
                                             <div class="flex justify-between">
@@ -562,7 +562,7 @@
                         <!--Summary -->
                         <div class="w-full rounded-t-md bg-gray-100">
                             <div class="rounded-t-md border-none px-2 py-3 font-medium">
-                                @lang('Order Summary')
+                                @lang('shop::app.customers.account.orders.view.information.order-summary')
                             </div>
 
                             <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs">
@@ -653,6 +653,7 @@
                                     @endif
                                 @endif
 
+                                <!-- Tax Informations -->
                                 <div class="flex w-full justify-between gap-x-5">
                                     <p class="text-[#757575]">
                                         @lang('shop::app.customers.account.orders.view.information.tax')
@@ -679,6 +680,7 @@
                                     </div>
                                 @endif
 
+                                <!-- Grand Total -->
                                 <div class="flex w-full justify-between gap-x-5 font-semibold">
                                     <p class="text-[#757575]">
                                         @lang('shop::app.customers.account.orders.view.information.grand-total')
@@ -689,6 +691,7 @@
                                     </p>
                                 </div>
 
+                                <!-- Total Paid -->
                                 <div class="flex w-full justify-between gap-x-5">
                                     <p class="text-[#757575]">
                                         @lang('shop::app.customers.account.orders.view.information.total-paid')
@@ -699,6 +702,7 @@
                                     </p>
                                 </div>
 
+                                <!-- Refund Details -->
                                 <div class="flex w-full justify-between gap-x-5">
                                     <p class="text-[#757575]">
                                         @lang('shop::app.customers.account.orders.view.information.total-refunded')
@@ -708,7 +712,8 @@
                                         {{ core()->formatPrice($order->grand_total_refunded, $order->order_currency_code) }}
                                     </p>
                                 </div>
-                                
+
+                                <!-- Total Due -->
                                 <div class="flex w-full justify-between gap-x-5">
                                     <p class="text-[#757575]">
                                         @lang('shop::app.customers.account.orders.view.information.total-due')
@@ -752,6 +757,7 @@
                                     </div>
                                 </div>
 
+                                <!-- Item  Invoiced -->
                                 <x-shop::accordion
                                     :is-active="true"
                                     class="rounded-md !border-none !bg-gray-100"
@@ -1536,7 +1542,7 @@
 
                                 <div class="w-full rounded-t-md bg-gray-100">
                                     <div class="rounded-t-md border-none px-4 py-3 font-medium">
-                                        @lang('Order Summary')
+                                        @lang('shop::app.customers.account.orders.view.refunds.order-summary')
                                     </div>
 
                                     <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs">
@@ -1625,6 +1631,7 @@
                                             </div>
                                         @endif
 
+                                        <!-- Discount -->
                                         @if ($refund->discount_amount > 0)
                                             <div class="flex w-full justify-between gap-x-5">
                                                 @lang('shop::app.customers.account.orders.view.refunds.discount')
@@ -1635,6 +1642,7 @@
                                             </div>
                                         @endif
 
+                                        <!-- Refund Tax -->
                                         @if ($refund->tax_amount > 0)
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p class="text-[#757575]">
@@ -1647,7 +1655,7 @@
                                             </div>
                                         @endif
 
-
+                                        <!-- Adjustments Refund -->
                                         <div class="flex w-full justify-between gap-x-5">
                                             <p class="text-[#757575]">
                                                 @lang('shop::app.customers.account.orders.view.refunds.adjustment-refund')
@@ -1658,6 +1666,7 @@
                                             </p>
                                         </div>
 
+                                        <!-- Adjustment fee -->
                                         <div class="flex w-full justify-between gap-x-5">
                                             <p class="text-[#757575]">
                                                 @lang('shop::app.customers.account.orders.view.refunds.adjustment-fee')
@@ -1668,6 +1677,7 @@
                                             </p>
                                         </div>
 
+                                        <!-- Grand Total -->
                                         <div class="flex w-full justify-between gap-x-5 font-semibold">
                                             <p class="text-[#757575]">
                                                 @lang('shop::app.customers.account.orders.view.refunds.grand-total')
@@ -1807,7 +1817,7 @@
             <!-- Shipping Address and Payment methods for mobile view -->
             <div class="w-full rounded-t-md bg-gray-100 md:hidden">
                 <div class="rounded-t-md border-none px-4 py-3 font-medium">
-                    @lang('Shipping & Payment Details')
+                    @lang('shop::app.customers.account.orders.view.shipping-and-payment')
                 </div>
 
                 <div class="grid gap-3 rounded-md border bg-white px-4 py-3 text-xs">
@@ -1840,6 +1850,7 @@
                                 </div>
                                 
                                 {!! view_render_event('bagisto.shop.customers.account.orders.view.billing_address_details.after', ['order' => $order]) !!}
+
                             </div>
         
                             {!! view_render_event('bagisto.shop.customers.account.orders.view.billing_address.after', ['order' => $order]) !!}
@@ -1859,6 +1870,7 @@
                             </div>
         
                             {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_method.after', ['order' => $order]) !!}
+
                         </div>
                     @endif
 
@@ -1876,6 +1888,7 @@
                             @endif
                             
                             {!! view_render_event('bagisto.shop.customers.account.orders.view.payment_method_details.after', ['order' => $order]) !!}
+
                         </div>
                         
                         {!! view_render_event('bagisto.shop.customers.account.orders.view.payment_method.after', ['order' => $order]) !!}

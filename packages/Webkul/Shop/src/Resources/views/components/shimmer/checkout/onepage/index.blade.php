@@ -1,4 +1,4 @@
-<div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
+<div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr] max-md:gap-5">
     <div class="max-sm:hidden">
         <!-- Billing Address Shimmer -->
         <div class="mb-7 mt-8">

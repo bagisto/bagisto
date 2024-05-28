@@ -158,7 +158,10 @@
     <!-- Information Section -->
     <div class="container mt-6 grid gap-3 !p-0 max-1180:px-5 1180:hidden">
         <!-- Description Accordion -->
-        <x-shop::accordion class="max-md:border-none" :is-active="true">
+        <x-shop::accordion
+            class="max-md:border-none"
+            :is-active="true"
+        >
             <x-slot:header class="bg-gray-100">
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.description')
@@ -174,7 +177,10 @@
 
         <!-- Additional Information Accordion -->
         @if (count($attributeData))
-            <x-shop::accordion class="max-md:border-none" :is-active="false">
+            <x-shop::accordion
+                class="max-md:border-none"
+                :is-active="false"
+            >
                 <x-slot:header class="bg-gray-100">
                     <p class="text-base font-medium 1180:hidden">
                         @lang('shop::app.products.view.additional-information')
@@ -226,7 +232,10 @@
         @endif
 
         <!-- Reviews Accordion -->
-        <x-shop::accordion class="max-md:border-none" :is-active="false">
+        <x-shop::accordion
+            class="max-md:border-none"
+            :is-active="false"
+        >
             <x-slot:header
                 class="bg-gray-100"
                 id="review-accordian-button"
@@ -349,8 +358,8 @@
                                     <div class="mt-2.5 grid gap-1.5">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
                                             <p class="text-zinc-500 [&>*]:text-black">
-                                            </p>
                                                 {!! $offer !!}
+                                            </p>
                                         @endforeach
                                     </div>
                                 @endif

@@ -24,7 +24,7 @@
 
             <template v-else>
                 <!-- Accordion Blade Component -->
-                <x-shop::accordion class="!border-b-0 max-md:rounded-md max-md:!border-none max-md:!bg-gray-100">
+                <x-shop::accordion class="!border-b-0 max-md:rounded-xl max-md:!border-none max-md:!bg-gray-100">
                     <!-- Accordion Blade Component Header -->
                     <x-slot:header class="px-0 py-4 max-md:!px-3">
                         <div class="flex items-center justify-between">

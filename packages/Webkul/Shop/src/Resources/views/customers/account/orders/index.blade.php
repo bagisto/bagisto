@@ -68,7 +68,7 @@
                                 <a :href="record.actions[0].url">
                                     <div class="flex justify-between">
                                         <div class="text-sm font-semibold">
-                                            @lang('Order Id:') #@{{ record.id }}
+                                            @lang('shop::app.customers.account.orders.order-id'): #@{{ record.id }}
     
                                             <p class="text-xs font-normal text-neutral-500">
                                                 @{{ record.created_at }}
@@ -79,7 +79,7 @@
                                     </div>
         
                                     <div class="mt-2.5 text-xs font-normal text-neutral-500">
-                                        @lang('Subtotal')
+                                        @lang('shop::app.customers.account.orders.subtotal')
     
                                         <p class="text-xl font-semibold text-black">
                                             @{{ record.grand_total }}

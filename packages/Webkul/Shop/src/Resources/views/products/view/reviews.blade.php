@@ -130,9 +130,9 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="mt-4 flex justify-start gap-4 max-xl:mb-5 max-sm:mb-5 max-sm:flex-wrap max-sm:justify-center">
+                            <div class="mt-4 flex justify-start gap-4 max-xl:mb-5 max-sm:mb-5 max-sm:flex-wrap max-sm:justify-normal max-sm:gap-x-0">
                                 <button
-                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-md:rounded-xl max-sm:py-2.5"
+                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-md:max-w-full max-md:rounded-xl max-sm:py-2.5"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -140,7 +140,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center rounded-2xl px-8 py-2.5 max-md:rounded-xl max-sm:max-w-[374px]"
+                                    class="secondary-button items-center rounded-2xl px-8 py-2.5 max-md:max-w-full max-md:rounded-xl max-sm:w-full"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -167,9 +167,9 @@
                             ({{ $reviewHelper->getTotalReviews($product) }})
                         </h3>
                         
-                        <div class="flex gap-16 max-lg:flex-wrap max-sm:gap-5">
+                        <div class="flex gap-16 max-lg:flex-wrap max-sm:gap-5 max-sm:gap-x-0">
                             <!-- Left Section -->
-                            <div class="sticky top-24 flex h-max flex-col gap-6 max-lg:relative max-lg:top-auto">
+                            <div class="sticky top-24 flex h-max flex-col gap-6 max-lg:relative max-lg:top-auto max-md:w-full">
                                 <div class="flex flex-col items-center gap-2">
                                     <p class="text-5xl">
                                         {{ $avgRatings }}
@@ -187,12 +187,12 @@
                                 </div>
 
                                 <!-- Ratings By Individual Stars -->
-                                <div class="grid max-w-[365px] flex-wrap gap-y-3">
+                                <div class="grid max-w-[365px] flex-wrap gap-y-3 max-md:max-w-full">
                                     @for ($i = 5; $i >= 1; $i--)
                                         <div class="row grid grid-cols-[1fr_2fr] items-center gap-4 max-sm:grid-cols-[1fr_2fr] max-sm:flex-wrap max-sm:gap-0">
                                             <div class="whitespace-nowrap text-base font-medium">{{ $i }} Stars</div>
 
-                                            <div class="h-4 w-[275px] max-w-full rounded-sm bg-[#E5E5E5] max-sm:w-[240px]">
+                                            <div class="h-4 w-[275px] max-w-full rounded-sm bg-[#E5E5E5] max-sm:w-full">
                                                 <div
                                                     class="h-4 rounded-sm bg-amber-500"
                                                     style="width: {{ $percentageRatings[$i] }}%"

@@ -128,7 +128,7 @@
                     {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
 
                     <button
-                        class="secondary-button w-full max-w-full p-2.5 text-sm font-medium max-sm:rounded-md max-sm:p-2"
+                        class="secondary-button w-full max-w-full p-2.5 text-sm font-medium max-sm:rounded-xl max-sm:p-2"
                         :disabled="! product.is_saleable || isAddingToCart"
                         @click="addToCart()"
                     >

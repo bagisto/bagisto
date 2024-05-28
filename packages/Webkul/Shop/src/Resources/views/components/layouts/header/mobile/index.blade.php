@@ -394,7 +394,7 @@
                     <x-slot:header>
                         <div class="flex items-center justify-between">
                             <p class="text-lg font-semibold">
-                                @lang('Currencies')
+                                @lang('shop::app.components.layouts.header.mobile.currecies')
                             </p>
                         </div>
                     </x-slot>
@@ -438,7 +438,7 @@
                     <x-slot:header>
                         <div class="flex items-center justify-between">
                             <p class="text-lg font-semibold">
-                                @lang('Locales')
+                                @lang('shop::app.components.layouts.header.mobile.locales')
                             </p>
                         </div>
                     </x-slot>
