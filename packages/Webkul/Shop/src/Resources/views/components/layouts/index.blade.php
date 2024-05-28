@@ -145,17 +145,5 @@
         <script type="text/javascript">
             {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
         </script>
-
-        <script>
-            window.addEventListener('load', () => {
-                const buttons = document.querySelectorAll('button');
-                
-                buttons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        window.navigator.vibrate([500]);
-                    });
-                });
-            });
-        </script>
     </body>
 </html>
