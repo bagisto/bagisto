@@ -174,7 +174,7 @@
                         value-field="key"
                         id-field="key"
                         :items="json_encode($acl->items)"
-                        :value="json_encode($role->permissions)"
+                        :value="json_encode($role->permissions ?? [])"
                         :fallback-locale="config('app.fallback_locale')"
                     />
                 </div>

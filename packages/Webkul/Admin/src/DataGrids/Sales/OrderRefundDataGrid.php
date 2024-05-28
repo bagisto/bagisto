@@ -67,7 +67,7 @@ class OrderRefundDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.sales.refunds.index.datagrid.refunded'),
+            'label'      => trans('admin::app.sales.refunds.index.datagrid.refunded-amount'),
             'type'       => 'price',
             'searchable' => true,
             'filterable' => true,

@@ -5,6 +5,7 @@ namespace Webkul\Admin\DataGrids\Settings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Webkul\DataGrid\DataGrid;
+use Webkul\User\Repositories\RoleRepository;
 
 class UserDataGrid extends DataGrid
 {
@@ -14,6 +15,15 @@ class UserDataGrid extends DataGrid
      * @var string
      */
     protected $primaryColumn = 'user_id';
+
+    /**
+     * Constructor for the class.
+     *
+     * @return void
+     */
+    public function __construct(protected RoleRepository $roleRepository)
+    {
+    }
 
     /**
      * Prepare query builder.
@@ -110,7 +120,14 @@ class UserDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'role_name',
             'label'      => trans('admin::app.settings.users.index.datagrid.role'),
-            'type'       => 'string',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => $this->roleRepository->all(['name as label', 'name as value'])->toArray(),
+                ],
+            ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
