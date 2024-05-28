@@ -48,7 +48,10 @@ class ProductResource extends JsonResource
             'min_price'   => core()->formatPrice($productTypeInstance->getMinimalPrice()),
             'prices'      => $productTypeInstance->getProductPrices(),
             'price_html'  => $productTypeInstance->getPriceHtml(),
-            'avg_ratings' => round($this->reviewHelper->getAverageRating($this)),
+            'ratings'     => [
+                'average' => $this->reviewHelper->getAverageRating($this),
+                'total'   => $this->reviewHelper->getTotalRating($this),
+            ],
         ];
     }
 }

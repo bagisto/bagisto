@@ -3,6 +3,7 @@
 namespace Webkul\Admin\DataGrids\Customers;
 
 use Illuminate\Support\Facades\DB;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -15,6 +16,15 @@ class CustomerDataGrid extends DataGrid
      * @var string
      */
     protected $primaryColumn = 'customer_id';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(protected CustomerGroupRepository $customerGroupRepository)
+    {
+    }
 
     /**
      * Prepare query builder.
@@ -129,7 +139,14 @@ class CustomerDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'group',
             'label'      => trans('admin::app.customers.customers.index.datagrid.group'),
-            'type'       => 'string',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => $this->customerGroupRepository->all(['name as label', 'name as value'])->toArray(),
+                ],
+            ],
             'searchable' => false,
             'filterable' => true,
             'sortable'   => false,

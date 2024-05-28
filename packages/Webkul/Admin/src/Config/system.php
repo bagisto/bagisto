@@ -779,7 +779,7 @@ return [
                 'type'          => 'boolean',
                 'channel_based' => true,
             ], [
-                'name'          => 'enable_linkedin',
+                'name'          => 'enable_linkedin-openid',
                 'title'         => 'admin::app.configuration.index.customer.settings.social-login.enable-linkedin',
                 'type'          => 'boolean',
                 'channel_based' => true,

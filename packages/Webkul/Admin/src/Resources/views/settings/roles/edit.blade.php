@@ -5,14 +5,14 @@
         @lang('admin::app.settings.roles.edit.title')
     </x-slot>
 
-    {!! view_render_event('bagisto.admin.settings.roles.edit.before') !!}
+    {!! view_render_event('bagisto.admin.settings.roles.edit.before', ['role' => $role]) !!}
 
     <x-admin::form
         method="PUT"
         :action="route('admin.settings.roles.update', $role->id)"
     >
 
-        {!! view_render_event('bagisto.admin.settings.roles.edit.edit_form_controls.before') !!}
+        {!! view_render_event('bagisto.admin.settings.roles.edit.edit_form_controls.before', ['role' => $role]) !!}
 
         <div class="flex items-center justify-between">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
@@ -43,7 +43,7 @@
             <!-- Left sub-component -->
             <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
-                {!! view_render_event('bagisto.admin.settings.roles.edit.card.access-control.before') !!}
+                {!! view_render_event('bagisto.admin.settings.roles.edit.card.access-control.before', ['role' => $role]) !!}
 
                 <!-- Access Control Input Fields -->
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
@@ -65,14 +65,14 @@
                     </v-access-control>
                 </div>
 
-                {!! view_render_event('bagisto.admin.settings.roles.edit.card.access-control.after') !!}
+                {!! view_render_event('bagisto.admin.settings.roles.edit.card.access-control.after', ['role' => $role]) !!}
 
             </div>
 
             <!-- Right sub-component -->
             <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
-                {!! view_render_event('bagisto.admin.settings.roles.edit.card.accordion.general.before') !!}
+                {!! view_render_event('bagisto.admin.settings.roles.edit.card.accordion.general.before', ['role' => $role]) !!}
 
                 <x-admin::accordion>
                     <x-slot:header>
@@ -124,16 +124,16 @@
                     </x-slot>
                 </x-admin::accordion>
 
-                {!! view_render_event('bagisto.admin.settings.roles.edit.card.accordion.general.after') !!}
+                {!! view_render_event('bagisto.admin.settings.roles.edit.card.accordion.general.after', ['role' => $role]) !!}
 
             </div>
         </div>
 
-        {!! view_render_event('bagisto.admin.settings.roles.edit.edit_form_controls.after') !!}
+        {!! view_render_event('bagisto.admin.settings.roles.edit.edit_form_controls.after', ['role' => $role]) !!}
 
     </x-admin::form>
 
-    {!! view_render_event('bagisto.admin.settings.roles.edit.after') !!}
+    {!! view_render_event('bagisto.admin.settings.roles.edit.after', ['role' => $role]) !!}
 
     @pushOnce('scripts')
         <script
@@ -174,7 +174,7 @@
                         value-field="key"
                         id-field="key"
                         :items="json_encode($acl->items)"
-                        :value="json_encode($role->permissions)"
+                        :value="json_encode($role->permissions ?? [])"
                         :fallback-locale="config('app.fallback_locale')"
                     />
                 </div>

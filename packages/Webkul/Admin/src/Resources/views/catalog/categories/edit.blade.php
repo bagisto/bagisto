@@ -7,7 +7,7 @@
         $currentLocale = core()->getRequestedLocale();
     @endphp
 
-    {!! view_render_event('bagisto.admin.catalog.categories.edit.before') !!}
+    {!! view_render_event('bagisto.admin.catalog.categories.edit.before', ['category' => $category]) !!}
 
     <!-- Category Edit Form -->
     <x-admin::form
@@ -456,7 +456,7 @@
 
     </x-admin::form>
 
-    {!! view_render_event('bagisto.admin.catalog.categories.edit.after') !!}
+    {!! view_render_event('bagisto.admin.catalog.categories.edit.after', ['category' => $category]) !!}
 
     @pushOnce('scripts')
         <script

@@ -337,23 +337,27 @@ class Configurable extends AbstractType
                 $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
             }
 
+            $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null;
+
+            $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null;
+
             if ($attribute->value_per_channel) {
                 if ($attribute->value_per_locale) {
                     $productAttributeValue = $variant->attribute_values
-                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
-                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null)
+                        ->where('channel', $channel)
+                        ->where('locale', $locale)
                         ->where('attribute_id', $attribute->id)
                         ->first();
                 } else {
                     $productAttributeValue = $variant->attribute_values
-                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
+                        ->where('channel', $channel)
                         ->where('attribute_id', $attribute->id)
                         ->first();
                 }
             } else {
                 if ($attribute->value_per_locale) {
                     $productAttributeValue = $variant->attribute_values
-                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null)
+                        ->where('locale', $locale)
                         ->where('attribute_id', $attribute->id)
                         ->first();
                 } else {
@@ -365,8 +369,8 @@ class Configurable extends AbstractType
 
             if (! $productAttributeValue) {
                 $uniqueId = implode('|', array_filter([
-                    $data['channel'],
-                    $data['locale'],
+                    $channel,
+                    $locale,
                     $variant->id,
                     $attribute->id,
                 ]));
