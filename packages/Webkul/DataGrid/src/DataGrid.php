@@ -314,7 +314,7 @@ abstract class DataGrid
     /**
      * Validated request.
      */
-    private function validatedRequest(): array
+    protected function validatedRequest(): array
     {
         request()->validate([
             'filters'     => ['sometimes', 'required', 'array'],
@@ -332,14 +332,17 @@ abstract class DataGrid
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    private function processRequestedFilters(array $requestedFilters)
+    protected function processRequestedFilters(array $requestedFilters)
     {
         foreach ($requestedFilters as $requestedColumn => $requestedValues) {
             if ($requestedColumn === 'all') {
                 $this->queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
                     foreach ($requestedValues as $value) {
                         collect($this->columns)
-                            ->filter(fn ($column) => $column->searchable && $column->type !== ColumnTypeEnum::BOOLEAN->value)
+                            ->filter(fn ($column) => $column->searchable && ! in_array($column->type, [
+                                ColumnTypeEnum::BOOLEAN->value,
+                                ColumnTypeEnum::AGGREGATE->value,
+                            ]))
                             ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%'));
                     }
                 });
@@ -360,6 +363,15 @@ abstract class DataGrid
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
                                 $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
+                            }
+                        });
+
+                        break;
+
+                    case ColumnTypeEnum::AGGREGATE->value:
+                        $this->queryBuilder->having(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->orHaving($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
                             }
                         });
 
@@ -415,7 +427,7 @@ abstract class DataGrid
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    private function processRequestedSorting($requestedSort)
+    protected function processRequestedSorting($requestedSort)
     {
         if (! $this->sortColumn) {
             $this->sortColumn = $this->primaryColumn;
@@ -427,7 +439,7 @@ abstract class DataGrid
     /**
      * Process requested pagination.
      */
-    private function processRequestedPagination($requestedPagination): LengthAwarePaginator
+    protected function processRequestedPagination($requestedPagination): LengthAwarePaginator
     {
         return $this->queryBuilder->paginate(
             $requestedPagination['per_page'] ?? $this->itemsPerPage,
@@ -440,7 +452,7 @@ abstract class DataGrid
     /**
      * Process paginated request.
      */
-    private function processPaginatedRequest(array $requestedParams): void
+    protected function processPaginatedRequest(array $requestedParams): void
     {
         $this->dispatchEvent('process_request.paginated.before', $this);
 
@@ -452,7 +464,7 @@ abstract class DataGrid
     /**
      * Process export request.
      */
-    private function processExportRequest(array $requestedParams): void
+    protected function processExportRequest(array $requestedParams): void
     {
         $this->dispatchEvent('process_request.export.before', $this);
 
@@ -464,7 +476,7 @@ abstract class DataGrid
     /**
      * Process request.
      */
-    private function processRequest(): void
+    protected function processRequest(): void
     {
         $this->dispatchEvent('process_request.before', $this);
 
@@ -491,7 +503,7 @@ abstract class DataGrid
     /**
      * Prepare all the setup for datagrid.
      */
-    private function sanitizeRow($row): \stdClass
+    protected function sanitizeRow($row): \stdClass
     {
         /**
          * Convert stdClass to array.
@@ -516,7 +528,7 @@ abstract class DataGrid
     /**
      * Format data.
      */
-    private function formatData(): array
+    protected function formatData(): array
     {
         $paginator = $this->paginator->toArray();
 
@@ -577,7 +589,7 @@ abstract class DataGrid
     /**
      * Dispatch event.
      */
-    private function dispatchEvent(string $eventName, mixed $payload): void
+    protected function dispatchEvent(string $eventName, mixed $payload): void
     {
         $reflection = new \ReflectionClass($this);
 
@@ -589,7 +601,7 @@ abstract class DataGrid
     /**
      * Prepare all the setup for datagrid.
      */
-    private function prepare(): void
+    protected function prepare(): void
     {
         $this->dispatchEvent('prepare.before', $this);
 

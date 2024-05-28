@@ -131,7 +131,19 @@ class ReviewDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'rating',
             'label'      => trans('admin::app.customers.reviews.index.datagrid.rating'),
-            'type'       => 'integer',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => array_map(function ($value) {
+                        return [
+                            'label' => $value,
+                            'value' => (string) $value,
+                        ];
+                    }, range(1, 5)),
+                ],
+            ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,

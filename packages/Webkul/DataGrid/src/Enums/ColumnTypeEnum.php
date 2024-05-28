@@ -15,6 +15,11 @@ enum ColumnTypeEnum: string
     case INTEGER = 'integer';
 
     /**
+     * Aggregate.
+     */
+    case AGGREGATE = 'aggregate';
+
+    /**
      * Boolean.
      */
     case BOOLEAN = 'boolean';
