@@ -128,6 +128,7 @@ class ElasticSearch extends AbstractIndexer
                     'variants',
                     'attribute_family',
                     'attribute_values',
+                    'variants.attribute_family',
                     'variants.attribute_values',
                     'price_indices',
                     'variants.price_indices',
