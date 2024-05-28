@@ -24,7 +24,7 @@ class CartAddressFactory extends Factory
             'company_name'     => $this->faker->company(),
             'first_name'       => preg_replace('/[^a-zA-Z ]/', '', $this->faker->firstName()),
             'last_name'        => preg_replace('/[^a-zA-Z ]/', '', $this->faker->lastName()),
-            'email'            => $this->faker->email(),
+            'email'            => $this->faker->safeEmail(),
             'country'          => $this->faker->countryCode(),
             'state'            => $this->faker->randomElement(['Delhi', 'Mumbai', 'Kolkata', 'Rajasthan']),
             'city'             => $this->faker->city(),

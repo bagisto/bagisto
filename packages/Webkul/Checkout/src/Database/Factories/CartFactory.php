@@ -27,7 +27,7 @@ class CartFactory extends Factory
             'cart_currency_code'    => core()->getCurrentCurrencyCode(),
             'items_count'           => 1,
             'is_guest'              => 1,
-            'customer_email'        => $this->faker->email,
+            'customer_email'        => $this->faker->safeEmail(),
             'customer_first_name'   => preg_replace('/[^a-zA-Z ]/', '', $this->faker->firstName()),
             'customer_last_name'    => preg_replace('/[^a-zA-Z ]/', '', $this->faker->lastName()),
         ];

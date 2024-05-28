@@ -37,7 +37,7 @@ class CustomerFactory extends Factory
             'first_name'        => preg_replace('/[^a-zA-Z ]/', '', $this->faker->firstName()),
             'last_name'         => preg_replace('/[^a-zA-Z ]/', '', $this->faker->lastName()),
             'gender'            => Arr::random(['male', 'female', 'other']),
-            'email'             => $this->faker->email,
+            'email'             => $this->faker->safeEmail(),
             'status'            => 1,
             'password'          => Hash::make($this->faker->password),
             'customer_group_id' => 2,
