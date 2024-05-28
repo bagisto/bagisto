@@ -28,7 +28,7 @@
                     ></span>
 
                     <span
-                        class="absolute -top-4 rounded-[44px] bg-[#060C3B] px-2 py-1.5 text-xs font-semibold leading-[9px] text-white max-md:px-2 max-md:py-1.5 ltr:left-5 max-md:ltr:left-4 rtl:right-5 max-md:rtl:right-4"
+                        class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-[9px] text-white max-md:px-2 max-md:py-1.5 ltr:left-5 max-md:ltr:left-4 rtl:right-5 max-md:rtl:right-4"
                         v-if="cart?.items_qty"
                     >
                         @{{ cart.items_qty }}
@@ -127,7 +127,7 @@
 
                             <!-- Cart Item Options Container -->
                             <div
-                                class="grid select-none gap-x-2.5 gap-y-1.5"
+                                class="grid select-none gap-x-2.5 gap-y-1.5 max-md:gap-y-0.5"
                                 v-if="item.options.length"
                             >
 
@@ -136,7 +136,7 @@
                                 <!-- Details Toggler -->
                                 <div class="">
                                     <p
-                                        class="flex cursor-pointer items-center gap-x-[15px] text-base max-md:text-xs"
+                                        class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-md:text-xs"
                                         @click="item.option_show = ! item.option_show"
                                     >
                                         @lang('shop::app.checkout.cart.mini-cart.see-details')
@@ -155,11 +155,11 @@
                                 >
                                     <template v-for="option in item.options">
                                         <div class="max-md:flex max-md:gap-1">
-                                            <p class="text-sm font-medium max-md:font-normal">
+                                            <p class="text-sm font-medium max-md:text-xs max-md:font-normal">
                                                 @{{ option.attribute_name + ':' }}
                                             </p>
     
-                                            <p class="text-sm">
+                                            <p class="text-sm max-md:text-xs">
                                                 @{{ option.option_label }}
                                             </p>
                                         </div>
@@ -187,7 +187,7 @@
                                 <!-- Cart Item Remove Button -->
                                 <button
                                     type="button"
-                                    class="text-[#0A49A7] max-md:text-xs"
+                                    class="text-blue-700 max-md:text-xs"
                                     @click="removeItem(item.id)"
                                 >
                                     @lang('shop::app.checkout.cart.mini-cart.remove')

@@ -34,7 +34,7 @@
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
-                                    class="!mb-0 !p-0"
+                                    class="!mb-0 !p-0 max-md:gap-1.5"
                                     name="attachments"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
@@ -170,8 +170,9 @@
                         <div class="flex gap-16 max-lg:flex-wrap max-sm:gap-5 max-sm:gap-x-0">
                             <!-- Left Section -->
                             <div class="sticky top-24 flex h-max flex-col gap-6 max-lg:relative max-lg:top-auto max-md:w-full">
-                                <div class="flex flex-col items-center gap-2">
-                                    <p class="text-5xl">
+                                
+                                <div class="flex flex-col items-center gap-2 max-md:mt-3 max-md:gap-0 max-md:border-b max-md:border-zinc-200 max-md:pb-3">
+                                    <p class="text-5xl max-md:text-3xl">
                                         {{ $avgRatings }}
                                     </p>
                                     
@@ -182,17 +183,17 @@
                                     </div>
 
                                     <p class="text-base text-zinc-500">
-                                        {{ $reviewHelper->getTotalRating($product) }} Ratings
+                                        {{ $reviewHelper->getTotalRating($product) }} Reviews
                                     </p>
                                 </div>
 
                                 <!-- Ratings By Individual Stars -->
                                 <div class="grid max-w-[365px] flex-wrap gap-y-3 max-md:max-w-full">
                                     @for ($i = 5; $i >= 1; $i--)
-                                        <div class="row grid grid-cols-[1fr_2fr] items-center gap-4 max-sm:grid-cols-[1fr_2fr] max-sm:flex-wrap max-sm:gap-0">
+                                        <div class="row grid grid-cols-[1fr_2fr] items-center gap-4 max-md:grid-cols-[0.5fr_2fr] max-sm:flex-wrap max-sm:gap-0">
                                             <div class="whitespace-nowrap text-base font-medium">{{ $i }} Stars</div>
 
-                                            <div class="h-4 w-[275px] max-w-full rounded-sm bg-[#E5E5E5] max-sm:w-full">
+                                            <div class="h-4 w-[275px] max-w-full rounded-sm bg-neutral-200 max-sm:w-full">
                                                 <div
                                                     class="h-4 rounded-sm bg-amber-500"
                                                     style="width: {{ $percentageRatings[$i] }}%"
@@ -289,10 +290,10 @@
 
                 <template v-else>
                     <div
-                        class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-[#F5F5F5]"
+                        class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-zinc-100"
                         :title="review.name"
                     >
-                        <span class="text-2xl font-semibold text-[#6E6E6E]">
+                        <span class="text-2xl font-semibold text-zinc-500">
                             @{{ review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('') }}
                         </span>
                     </div>
@@ -397,7 +398,7 @@
 
         <!-- For Mobile View -->
         <div class="sm:hidden">
-            <div class="grid gap-1.5 rounded-xl border border-[#e5e5e5] p-4 max-sm:mb-0">
+            <div class="grid gap-1.5 rounded-xl border border-zinc-200 p-4 max-sm:mb-0">
                 <div class="flex items-center gap-2.5">
                     <img
                         v-if="review.profile"
@@ -409,10 +410,10 @@
     
                     <div
                         v-else
-                        class="flex max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] items-center justify-center rounded-full bg-[#F5F5F5]"
+                        class="flex max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] items-center justify-center rounded-full bg-zinc-100"
                         :title="review.name"
                     >
-                        <span class="text-xs font-semibold text-[#6E6E6E]">
+                        <span class="text-xs font-semibold text-zinc-500">
                             @{{ review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('') }}
                         </span>
                     </div>
@@ -422,7 +423,7 @@
                             @{{ review.name }}
                         </p>
                         
-                        <p class="text-xs text-[#6E6E6E]">
+                        <p class="text-xs text-zinc-500">
                             @{{ review.created_at }}
                         </p>
                     </div>
@@ -439,7 +440,7 @@
                         @{{ review.title }}
                     </p>
     
-                    <p class="mt-1.5 text-sm text-[#6E6E6E]">
+                    <p class="mt-1.5 text-sm text-zinc-500">
                         @{{ review.comment }}
                     </p>
     

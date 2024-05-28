@@ -174,7 +174,7 @@ return [
                 'order'         => 'Заказ',
                 'order-date'    => 'Дата заказа',
                 'order-id'      => 'ID заказа',
-                'subtotal'    => 'Подытог',
+                'subtotal'      => 'Подытог',
                 'title'         => 'Заказы',
                 'total'         => 'Всего',
 

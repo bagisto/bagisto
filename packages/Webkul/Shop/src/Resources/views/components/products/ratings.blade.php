@@ -28,7 +28,7 @@
             <span class="text-sm font-medium text-black max-sm:text-xs ltr:ml-1 rtl:mr-1">
                 @{{ abbreviatedTotal }}
 
-                <span v-if="rating">Ratings</span>
+                <span v-if="rating">Reviews</span>
             </span>
         </div>
     </script>

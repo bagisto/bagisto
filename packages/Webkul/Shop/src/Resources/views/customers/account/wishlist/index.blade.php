@@ -151,7 +151,7 @@
 
                                                 <!--Wishlist Item removed button-->
                                                 <a 
-                                                    class="flex cursor-pointer justify-end text-base text-[#0A49A7] max-md:hidden" 
+                                                    class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden" 
                                                     @click="remove(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.remove')
@@ -193,7 +193,7 @@
                                         </p>
 
                                         <a 
-                                            class="flex cursor-pointer justify-end text-base text-[#0A49A7]" 
+                                            class="flex cursor-pointer justify-end text-base text-blue-700" 
                                             @click="remove(item.id)"
                                         >
                                             @lang('shop::app.customers.account.wishlist.remove')

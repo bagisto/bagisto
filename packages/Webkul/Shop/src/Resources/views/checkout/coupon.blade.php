@@ -33,7 +33,7 @@
                             <!-- Modal Toggler -->
                             <x-slot:toggle>
                                 <span 
-                                    class="cursor-pointer text-[#0A49A7]"
+                                    class="cursor-pointer text-blue-700"
                                     role="button"
                                     tabindex="0"
                                     v-if="! cart.coupon_code"
@@ -50,7 +50,7 @@
                             </x-slot>
 
                             <!-- Modal Content -->
-                            <x-slot:content>
+                            <x-slot:content class="!px-4">
                                 <x-shop::form.control-group class="!mb-0">
                                     <x-shop::form.control-group.control
                                         type="text"
@@ -72,7 +72,7 @@
                                 <!-- Coupon Form Action Container -->
                                 <div class="flex flex-wrap items-center gap-4 max-md:justify-between">
                                     <div class="flex gap-4 max-md:block">
-                                        <p class="text-sm font-medium text-zinc-500 max-md:text-xs">
+                                        <p class="text-sm font-medium text-zinc-500 max-md:text-left max-md:text-xs">
                                             @lang('shop::app.checkout.coupon.subtotal')
                                         </p>
 

@@ -1,7 +1,7 @@
 <!-- Checkout Login Vue JS Component -->
 <v-checkout-login>
     <div class="flex items-center">
-        <span class="cursor-pointer text-base font-medium text-[#0A49A7]">
+        <span class="cursor-pointer text-base font-medium text-blue-700">
             @lang('shop::app.checkout.login.title')
         </span>
     </div>
@@ -15,7 +15,7 @@
         <div>
             <div class="flex items-center">
                 <span
-                    class="cursor-pointer text-base font-medium text-[#0A49A7]"
+                    class="cursor-pointer text-base font-medium text-blue-700"
                     role="button"
                     @click="$refs.loginModel.open()"
                 >
