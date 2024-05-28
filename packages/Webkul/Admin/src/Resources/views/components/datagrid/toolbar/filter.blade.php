@@ -41,7 +41,7 @@
                         <div>
                             <div
                                 class="relative inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-1 py-1.5 text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 ltr:pl-3 ltr:pr-5 rtl:pl-5 rtl:pr-3"
-                                :class="{'[&>*]:text-blue-600 [&>*]:dark:text-white': filters.columns.length > 0}"
+                                :class="{'[&>*]:text-blue-600 [&>*]:dark:text-white': applied.filters.columns.length > 0}"
                             >
                                 <span class="icon-filter text-2xl"></span>
 
@@ -51,7 +51,7 @@
 
                                 <span
                                     class="icon-dot absolute right-2 top-1.5 text-sm font-bold"
-                                    v-if="filters.columns.length > 0"
+                                    v-if="applied.filters.columns.length > 0"
                                 >
                                 </span>
                             </div>
@@ -546,6 +546,7 @@
                                                 type="button"
                                                 class="secondary-button w-full"
                                                 @click="applySelectedFilters"
+                                                :disabled="! isFilterDirty"
                                             >
                                                 @lang('Apply Filter')
                                             </button>
@@ -553,9 +554,10 @@
                                             <!-- Save Filter Button for open save Filter Section -->
                                             <button
                                                 type="button"
-                                                v-if="filters.columns.length > 0"
+                                                v-if="applied.filters.columns.length > 0"
                                                 class="secondary-button w-full"
                                                 @click="isShowSavedFilters = ! isShowSavedFilters"
+                                                :disabled="isFilterDirty"
                                             >
                                                 @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.update-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' }}
                                             </button>
@@ -616,7 +618,7 @@
                                                 aria-label="@lang('admin::app.components.datagrid.toolbar.filter.save-btn')"
                                                 :disabled="savedFilters.params.filters.columns.every(column => column.value.length === 0)"
                                             >
-                                                @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' }}
+                                                @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.update-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' }}
                                             </button>
                                         </div>
                                         
@@ -706,6 +708,8 @@
                     },
 
                     isShowSavedFilters: false,
+
+                    isFilterDirty: false,
                 };
             },
 
@@ -901,6 +905,8 @@
                             $event.target.value = '';
                         }
                     }
+
+                    this.isFilterDirty = true;
                 },
 
                 applySelectedFilters() {
@@ -1031,9 +1037,11 @@
                         this.filters.columns = this.filters.columns.filter(column => column.index !== columnIndex);
                     }
 
-                    this.$emit('removeFilter', this.filters);
+                    // this.$emit('removeFilter', this.filters);
 
-                    this.$refs.filterDrawer.close();
+                    this.isFilterDirty = true;
+
+                    // this.$refs.filterDrawer.close();
                 },
 
                 /**
