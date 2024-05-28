@@ -3,13 +3,20 @@
 namespace Webkul\Installer\Helpers;
 
 use Exception;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 
 class DatabaseManager
 {
+    public function __construct(
+        protected ProductRepository $productRepository,
+    ) {
+    }
+
     /**
      * Check Database Connection.
      */
@@ -105,9 +112,25 @@ class DatabaseManager
     public function faker()
     {
         try {
-            $faker = new \Webkul\Faker\Helpers\Faker();
+            $fileTmpPath = Storage::path('data-transfer/samples/products.csv');
+            $fileContent = file_get_contents($fileTmpPath);
 
-            $faker->fake('products', '5', 'simple');
+            $lines = explode(PHP_EOL, $fileContent);
+
+            $arrayData = [];
+
+            if (count($lines) > 0) {
+                $headers = str_getcsv(array_shift($lines));
+
+                foreach ($lines as $line) {
+                    if (! empty($line)) {
+                        $row = str_getcsv($line);
+                        $arrayData[] = array_combine($headers, $row);
+                    }
+                }
+            }
+
+            $this->productRepository->insert($arrayData);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),

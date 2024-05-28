@@ -837,7 +837,7 @@
                                         </x-installer::form.control-group.label>
 
                                         @foreach ($locales as $key => $locale)
-                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none gap-2.5 p-1.5">
+                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5 p-1.5">
                                                 @php
                                                     $selectedOption = ($key == config('app.locale'));
                                                 @endphp
@@ -876,7 +876,7 @@
                                         </x-installer::form.control-group.label>
     
                                         @foreach ($currencies as $key => $currency)
-                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none gap-2.5 p-1.5">
+                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5 p-1.5">
                                                 @php
                                                     $selectedOption = $key == config('app.currency');
                                                 @endphp
@@ -1014,23 +1014,34 @@
                                     <x-installer::form.control-group.error control-name="confirm_password" />
                                 </x-installer::form.control-group>
 
-                                <!-- Sample Products -->
-                                <x-installer::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
-                                    <x-installer::form.control-group.control
-                                        type="checkbox"
-                                        id="sample_products"
-                                        name="sample_products"
-                                        value="1"
-                                        for="sample_products"
-                                    />
+                                <div class="flex items-center justify-between">
+                                    <!-- Sample Products -->
+                                    <x-installer::form.control-group class="!mb-0 flex select-none items-center">
+                                        <x-installer::form.control-group.control
+                                            type="checkbox"
+                                            id="sample_products"
+                                            name="sample_products"
+                                            value="1"
+                                            for="sample_products"
+                                        />
 
-                                    <label
-                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
-                                        for="sample_products"
+                                        <label
+                                            class="cursor-pointer text-sm font-medium text-gray-600"
+                                            for="sample_products"
+                                        >
+                                            @lang("Sample Products")
+                                        </label>
+                                    </x-installer::form.control-group>
+
+                                    <a
+                                        href="{{ route('installer.download_sample') }}"
+                                        target="_blank"
+                                        id="source-sample-link"
+                                        class="mt-1 cursor-pointer text-sm text-blue-600 transition-all hover:underline"
                                     >
-                                        @lang("Sample Products")
-                                    </label>
-                                </x-installer::form.control-group>
+                                        @lang('download-sample')
+                                    </a>
+                                </div>
                             </div>
 
                             <div class="flex items-center justify-end px-4 py-2.5">

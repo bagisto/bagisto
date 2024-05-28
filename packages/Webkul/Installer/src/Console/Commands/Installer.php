@@ -2,6 +2,7 @@
 
 namespace Webkul\Installer\Console\Commands;
 
+use DateTimeZone;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
@@ -175,12 +176,13 @@ class Installer extends Command
             env('APP_URL', 'http://localhost:8000')
         );
 
-        $this->envUpdate(
-            'APP_TIMEZONE',
-            date_default_timezone_get()
-        );
+        $timezones = $this->getTimezones();
 
-        $this->info('Your Default Timezone is '.date_default_timezone_get());
+        $this->updateEnvChoice(
+            'APP_TIMEZONE',
+            'Please select the application timezone',
+            $timezones
+        );
 
         $defaultLocale = $this->updateEnvChoice(
             'APP_LOCALE',
@@ -480,5 +482,28 @@ class Installer extends Command
         }
 
         return false;
+    }
+
+    /**
+     * Get sorted list of timezone abbreviations.
+     *
+     * @return array
+     */
+    private function getTimezones()
+    {
+        $timezoneAbbreviations = DateTimeZone::listAbbreviations();
+        $timezones = [];
+
+        foreach ($timezoneAbbreviations as $zones) {
+            foreach ($zones as $zone) {
+                if (! empty($zone['timezone_id'])) {
+                    $timezones[$zone['timezone_id']] = $zone['timezone_id'];
+                }
+            }
+        }
+
+        asort($timezones);
+
+        return $timezones;
     }
 }
