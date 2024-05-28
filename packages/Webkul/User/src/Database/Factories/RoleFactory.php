@@ -22,7 +22,7 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            'name'            => $this->faker->name,
+            'name'            => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
             'permission_type' => $this->faker->randomElement(['custom', 'all']),
         ];
     }
