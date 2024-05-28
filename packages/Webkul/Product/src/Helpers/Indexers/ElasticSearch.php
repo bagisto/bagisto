@@ -347,10 +347,12 @@ class ElasticSearch extends AbstractIndexer
         } else {
             if ($attribute->value_per_locale) {
                 $attributeValues = $attributeValues->where('locale', $this->locale->code)->first();
+            } else {
+                $attributeValues = $attributeValues->first();
             }
         }
 
-        return $attributeValues->first();
+        return $attributeValues?->first();
     }
 
     /**
