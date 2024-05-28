@@ -3,12 +3,12 @@
 namespace Webkul\Installer\Helpers;
 
 use Exception;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
+use Webkul\Product\Repositories\ProductRepository;
 
 class DatabaseManager
 {
