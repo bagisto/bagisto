@@ -22,8 +22,8 @@ class CartAddressFactory extends Factory
         return [
             'address'          => implode(PHP_EOL, [$this->faker->address()]),
             'company_name'     => $this->faker->company(),
-            'first_name'       => $this->faker->firstName(),
-            'last_name'        => $this->faker->lastName(),
+            'first_name'       => preg_replace('/[^a-zA-Z ]/', '', $this->faker->firstName()),
+            'last_name'        => preg_replace('/[^a-zA-Z ]/', '', $this->faker->lastName()),
             'email'            => $this->faker->email(),
             'country'          => $this->faker->countryCode(),
             'state'            => $this->faker->randomElement(['Delhi', 'Mumbai', 'Kolkata', 'Rajasthan']),
