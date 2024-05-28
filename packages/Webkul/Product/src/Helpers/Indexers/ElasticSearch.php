@@ -249,11 +249,12 @@ class ElasticSearch extends AbstractIndexer
     public function getIndices()
     {
         $properties = array_merge([
-            'id'           => $this->product->id,
-            'type'         => $this->product->type,
-            'sku'          => $this->product->sku,
-            'category_ids' => $this->product->categories->pluck('id')->toArray(),
-            'created_at'   => $this->product->created_at,
+            'id'                  => $this->product->id,
+            'type'                => $this->product->type,
+            'sku'                 => $this->product->sku,
+            'attribute_family_id' => $this->product->attribute_family_id,
+            'category_ids'        => $this->product->categories->pluck('id')->toArray(),
+            'created_at'          => $this->product->created_at,
         ], $this->product->additional ?? []);
 
         $attributes = $this->getAttributes();
@@ -262,6 +263,8 @@ class ElasticSearch extends AbstractIndexer
             $attributeValue = $this->getAttributeValue($attribute);
 
             if ($attribute->code == 'price') {
+                $properties[$attribute->code] = (float) $attributeValue?->{$attribute->column_name};
+
                 foreach ($this->getCustomerGroups() as $customerGroup) {
                     if (! app()->runningInConsole()) {
                         $this->product->load('price_indices');
@@ -346,7 +349,9 @@ class ElasticSearch extends AbstractIndexer
             }
         } else {
             if ($attribute->value_per_locale) {
-                $attributeValues = $attributeValues->where('locale', $this->locale->code)->first();
+                $attributeValues = $attributeValues->where('locale', $this->locale->code);
+            } else {
+                $attributeValues = $attributeValues;
             }
         }
 
