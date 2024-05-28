@@ -3441,6 +3441,14 @@ return [
                     'info'  => 'Set guest checkout, product view page, cart view page, store front, review and attribute social share.',
                     'title' => 'Products',
 
+                    'admin-datagrid' => [
+                        'database'    => 'Database',
+                        'elastic'     => 'Elastic Search',
+                        'search-mode' => 'Search Mode',
+                        'title'       => 'Admin Datagrid',
+                        'title-info'  => 'Admin datagrid is a table view of data in the admin panel, providing a comprehensive overview of products, and other information for efficient management and analysis.',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Allow Guest Checkout',
                         'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',

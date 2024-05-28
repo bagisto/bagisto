@@ -209,11 +209,7 @@ class ProductRepository extends Repository
      */
     public function searchFromDatabase(array $params = [])
     {
-        $params = array_merge([
-            'status'               => 1,
-            'visible_individually' => 1,
-            'url_key'              => null,
-        ], $params);
+        $params['url_key'] ??= null;
 
         if (! empty($params['query'])) {
             $params['name'] = $params['query'];

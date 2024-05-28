@@ -324,12 +324,10 @@ class ProductController extends Controller
     {
         $results = [];
 
-        $products = $this->productRepository->searchFromDatabase([
-            'status'               => null,
-            'visible_individually' => null,
-            'name'                 => request('query'),
-            'sort'                 => 'created_at',
-            'order'                => 'desc',
+        $products = $this->productRepository->getAll([
+            'name'  => request('query'),
+            'sort'  => 'created_at',
+            'order' => 'desc',
         ]);
 
         return ProductResource::collection($products);

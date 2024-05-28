@@ -337,10 +337,31 @@ return [
         'icon' => 'settings/product.svg',
         'sort' => 2,
     ], [
+        'key'    => 'catalog.products.admin_datagrid',
+        'name'   => 'admin::app.configuration.index.catalog.products.admin-datagrid.title',
+        'info'   => 'admin::app.configuration.index.catalog.products.admin-datagrid.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'search_mode',
+                'title'   => 'admin::app.configuration.index.catalog.products.admin-datagrid.search-mode',
+                'type'    => 'select',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.catalog.products.admin-datagrid.database',
+                        'value' => 'database',
+                    ], [
+                        'title' => 'admin::app.configuration.index.catalog.products.admin-datagrid.elastic',
+                        'value' => 'elastic',
+                    ],
+                ],
+            ],
+        ],
+    ], [
         'key'    => 'catalog.products.guest_checkout',
         'name'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title',
         'info'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title-info',
-        'sort'   => 1,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'  => 'allow_guest_checkout',
@@ -370,7 +391,7 @@ return [
         'key'    => 'catalog.products.cart_view_page',
         'name'   => 'admin::app.configuration.index.catalog.products.cart-view-page.title',
         'info'   => 'admin::app.configuration.index.catalog.products.cart-view-page.title-info',
-        'sort'   => 3,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'       => 'no_of_cross_sells_products',
@@ -383,7 +404,7 @@ return [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.configuration.index.catalog.products.storefront.title',
         'info'   => 'admin::app.configuration.index.catalog.products.storefront.title-info',
-        'sort'   => 3,
+        'sort'   => 5,
         'fields' => [
             [
                 'name'          => 'search_mode',
@@ -454,7 +475,7 @@ return [
         'key'    => 'catalog.products.cache_small_image',
         'name'   => 'admin::app.configuration.index.catalog.products.small-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.small-image.title-info',
-        'sort'   => 4,
+        'sort'   => 6,
         'fields' => [
             [
                 'name'       => 'width',
@@ -473,7 +494,7 @@ return [
         'key'    => 'catalog.products.cache_medium_image',
         'name'   => 'admin::app.configuration.index.catalog.products.medium-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.medium-image.title-info',
-        'sort'   => 5,
+        'sort'   => 7,
         'fields' => [
             [
                 'name'       => 'width',
@@ -492,7 +513,7 @@ return [
         'key'    => 'catalog.products.cache_large_image',
         'name'   => 'admin::app.configuration.index.catalog.products.large-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.large-image.title-info',
-        'sort'   => 6,
+        'sort'   => 8,
         'fields' => [
             [
                 'name'       => 'width',
@@ -511,7 +532,7 @@ return [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.configuration.index.catalog.products.review.title',
         'info'   => 'admin::app.configuration.index.catalog.products.review.title-info',
-        'sort'   => 7,
+        'sort'   => 9,
         'fields' => [
             [
                 'name'  => 'guest_review',
@@ -523,7 +544,7 @@ return [
         'key'    => 'catalog.products.attribute',
         'name'   => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info'   => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort'   => 8,
+        'sort'   => 10,
         'fields' => [
             [
                 'name'       => 'image_attribute_upload_size',
@@ -541,7 +562,7 @@ return [
         'key'    => 'catalog.products.social_share',
         'name'   => 'admin::app.configuration.index.catalog.products.social-share.title',
         'info'   => 'admin::app.configuration.index.catalog.products.social-share.title-info',
-        'sort'   => 100,
+        'sort'   => 11,
         'fields' => [
             [
                 'name'  => 'enabled',
