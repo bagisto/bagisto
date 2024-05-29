@@ -168,7 +168,7 @@
                                         app();
                                     })
                                     .catch((error) => {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.something-went-wrong')'});
+                                        this.$emitter.emit('add-flash', { type: 'error', message: "@lang('shop::app.search.images.index.something-went-wrong')"});
 
                                         this.isSearching = false;
                                     });

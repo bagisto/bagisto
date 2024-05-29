@@ -3,7 +3,7 @@
         @lang('admin::app.settings.inventory-sources.edit.title')
     </x-slot>
 
-    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.before') !!}
+    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.before', ['inventorySource' => $inventorySource]) !!}
 
     <x-admin::form 
         :action="route('admin.settings.inventory_sources.update', $inventorySource->id)"
@@ -11,7 +11,7 @@
         method="PUT"
     >
 
-        {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.edit_form_controls.before') !!}
+        {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.edit_form_controls.before', ['inventorySource' => $inventorySource]) !!}
 
         <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
@@ -45,7 +45,7 @@
             <!-- Left Section -->
             <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
-                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.general.before') !!}
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.general.before', ['inventorySource' => $inventorySource]) !!}
 
                 <!-- General -->
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
@@ -111,9 +111,9 @@
                     </x-admin::form.control-group>
                 </div>
 
-                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.general.after') !!}
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.general.after', ['inventorySource' => $inventorySource]) !!}
 
-                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.contact_info.before') !!}
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.contact_info.before', ['inventorySource' => $inventorySource]) !!}
 
                 <!-- Contact Information -->
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
@@ -197,21 +197,21 @@
                     </x-admin::form.control-group>
                 </div>
 
-                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.contact_info.after') !!}
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.contact_info.after', ['inventorySource' => $inventorySource]) !!}
 
-                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.source_address.before') !!}
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.source_address.before', ['inventorySource' => $inventorySource]) !!}
 
                 <!-- Create Inventory -->
                 <v-source-address></v-source-address>
 
-                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.source_address.after') !!}
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.source_address.after', ['inventorySource' => $inventorySource]) !!}
 
             </div>
 
             <!-- Right Section -->
             <div class="flex w-[360px] max-w-full flex-col gap-2">
 
-                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.accordion.settings.before') !!}
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.accordion.settings.before', ['inventorySource' => $inventorySource]) !!}
 
                 <!-- Settings -->
                 <x-admin::accordion>
@@ -307,16 +307,16 @@
                     </x-slot>
                 </x-admin::accordion>
 
-                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.accordion.settings.after') !!}
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.accordion.settings.after', ['inventorySource' => $inventorySource]) !!}
 
             </div>
         </div>
 
-        {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.edit_form_controls.after') !!}
+        {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.edit_form_controls.after', ['inventorySource' => $inventorySource]) !!}
 
     </x-admin::form>
 
-    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.after') !!}
+    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.after', ['inventorySource' => $inventorySource]) !!}
 
     @pushOnce('scripts')
         <script

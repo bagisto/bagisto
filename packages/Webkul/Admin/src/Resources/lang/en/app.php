@@ -483,12 +483,12 @@ return [
                 'title' => 'Refunds',
 
                 'datagrid' => [
-                    'billed-to'   => 'Billed To',
-                    'id'          => 'ID',
-                    'order-id'    => 'Order ID',
-                    'refund-date' => 'Refund Date',
-                    'refunded'    => 'Refunded',
-                    'view'        => 'View',
+                    'billed-to'       => 'Billed To',
+                    'id'              => 'ID',
+                    'order-id'        => 'Order ID',
+                    'refund-date'     => 'Refund Date',
+                    'refunded-amount' => 'Refunded Amount',
+                    'view'            => 'View',
                 ],
             ],
 
@@ -1046,16 +1046,27 @@ return [
                 'title'      => 'Attributes',
 
                 'datagrid' => [
+                    'boolean'             => 'Boolean',
                     'channel-based'       => 'Channel Based',
+                    'checkbox'            => 'Checkbox',
                     'code'                => 'Code',
                     'created-at'          => 'Created At',
+                    'date'                => 'Date',
+                    'date-time'           => 'Date Time',
                     'delete'              => 'Delete',
                     'edit'                => 'Edit',
+                    'file'                => 'File',
                     'id'                  => 'ID',
+                    'image'               => 'Image',
                     'locale-based'        => 'Locale Based',
                     'mass-delete-success' => 'Selected Attribute Deleted Successfully',
+                    'multiselect'         => 'Multiselect',
                     'name'                => 'Name',
+                    'price'               => 'Price',
                     'required'            => 'Required',
+                    'select'              => 'Select',
+                    'text'                => 'Text',
+                    'textarea'            => 'Textarea',
                     'type'                => 'Type',
                     'unique'              => 'Unique',
                 ],
@@ -2344,9 +2355,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Locale',
                         'mass-delete-success' => 'Selected URL Rewrites Deleted Successfully',
+                        'permanent-redirect'  => 'Permanent (301)',
                         'redirect-type'       => 'Redirect Type',
                         'request-path'        => 'Request Path',
                         'target-path'         => 'Target Path',
+                        'temporary-redirect'  => 'Temporary (302)',
                     ],
 
                     'create' => [
@@ -3008,6 +3021,8 @@ return [
                 'title'      => 'Roles',
 
                 'datagrid' => [
+                    'all'             => 'All',
+                    'custom'          => 'Custom',
                     'delete'          => 'Delete',
                     'edit'            => 'Edit',
                     'id'              => 'Id',

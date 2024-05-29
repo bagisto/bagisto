@@ -483,12 +483,12 @@ return [
                 'title' => 'Rückerstattungen',
 
                 'datagrid' => [
-                    'billed-to'   => 'Abgerechnet an',
-                    'id'          => 'ID',
-                    'order-id'    => 'Bestellnummer',
-                    'refund-date' => 'Rückerstattungsdatum',
-                    'refunded'    => 'Rückerstattet',
-                    'view'        => 'Ansehen',
+                    'billed-to'       => 'Abgerechnet an',
+                    'id'              => 'ID',
+                    'order-id'        => 'Bestellnummer',
+                    'refund-date'     => 'Rückerstattungsdatum',
+                    'refunded-amount' => 'Erstatteter Betrag',
+                    'view'            => 'Ansehen',
                 ],
             ],
 
@@ -1046,18 +1046,29 @@ return [
                 'title'      => 'Attribute',
 
                 'datagrid' => [
+                    'boolean'             => 'Boolesch',
                     'channel-based'       => 'Kanalbasiert',
+                    'checkbox'            => 'Kontrollkästchen',
                     'code'                => 'Code',
                     'created-at'          => 'Erstellt am',
+                    'date'                => 'Datum',
+                    'date-time'           => 'Datum Zeit',
                     'delete'              => 'Löschen',
                     'edit'                => 'Bearbeiten',
+                    'file'                => 'Datei',
                     'id'                  => 'ID',
-                    'locale-based'        => 'Sprachbasiert',
+                    'image'               => 'Bild',
+                    'locale-based'        => 'Ortsbasiert',
                     'mass-delete-success' => 'Ausgewähltes Attribut erfolgreich gelöscht',
+                    'multiselect'         => 'Mehrfachauswahl',
                     'name'                => 'Name',
+                    'price'               => 'Preis',
                     'required'            => 'Erforderlich',
+                    'select'              => 'Auswählen',
+                    'text'                => 'Text',
+                    'textarea'            => 'Textbereich',
                     'type'                => 'Typ',
-                    'unique'              => 'Eindeutig',
+                    'unique'              => 'Einzigartig',
                 ],
             ],
 
@@ -2344,9 +2355,11 @@ return [
                         'id'                  => 'ID',
                         'locale'              => 'Lokalisierung',
                         'mass-delete-success' => 'Ausgewählte URL-Weiterleitungen erfolgreich gelöscht',
+                        'permanent-redirect'  => 'Permanent (301)',
                         'redirect-type'       => 'Weiterleitungstyp',
                         'request-path'        => 'Anforderungs-Pfad',
                         'target-path'         => 'Zielpfad',
+                        'temporary-redirect'  => 'Temporär (302)',
                     ],
 
                     'create' => [
@@ -3008,6 +3021,8 @@ return [
                 'title'      => 'Rollen',
 
                 'datagrid' => [
+                    'all'             => 'Alle',
+                    'custom'          => 'Benutzerdefiniert',
                     'delete'          => 'Löschen',
                     'edit'            => 'Bearbeiten',
                     'id'              => 'ID',

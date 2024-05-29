@@ -27,7 +27,7 @@ class CatalogRuleFactory extends Factory
             'starts_from'     => $this->faker->dateTimeThisMonth,
             'ends_till'       => $this->faker->dateTimeBetween($startsFrom, $endsTill),
             'status'          => $this->faker->boolean(),
-            'name'            => $this->faker->name,
+            'name'            => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
             'description'     => substr($this->faker->paragraph, 0, 50),
             'action_type'     => 'by_percent',
             'discount_amount' => rand(1, 50),

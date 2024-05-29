@@ -60,7 +60,17 @@ class ThemeDatagrid extends DataGrid
         $this->addColumn([
             'index'      => 'channel_name',
             'label'      => trans('admin::app.settings.themes.index.datagrid.channel_name'),
-            'type'       => 'integer',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => core()->getAllChannels()
+                        ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                        ->values()
+                        ->toArray(),
+                ],
+            ],
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
@@ -96,7 +106,7 @@ class ThemeDatagrid extends DataGrid
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.settings.themes.index.datagrid.status'),
-            'type'       => 'string',
+            'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,

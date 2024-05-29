@@ -7,7 +7,7 @@
         @lang('admin::app.catalog.attributes.edit.title')
     </x-slot>
 
-    {!! view_render_event('bagisto.admin.catalog.attributes.edit.before') !!}
+    {!! view_render_event('bagisto.admin.catalog.attributes.edit.before', ['attribute' => $attribute]) !!}
 
     <!-- Input Form -->
     <x-admin::form
@@ -46,7 +46,7 @@
         </v-edit-attributes>
     </x-admin::form>
 
-    {!! view_render_event('bagisto.admin.catalog.attributes.edit.after') !!}
+    {!! view_render_event('bagisto.admin.catalog.attributes.edit.after', ['attribute' => $attribute]) !!}
 
     @pushOnce('scripts')
         <script
