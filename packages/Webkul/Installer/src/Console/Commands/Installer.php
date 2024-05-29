@@ -160,7 +160,7 @@ class Installer extends Command
     /**
      * Ask for application details.
      *
-     * @return void
+     * @return array
      */
     protected function askForApplicationDetails()
     {
@@ -226,6 +226,8 @@ class Installer extends Command
 
     /**
      * Add the database credentials to the .env file.
+     * 
+     * @return mixed
      */
     protected function askForDatabaseDetails()
     {
@@ -267,7 +269,7 @@ class Installer extends Command
 
             'DB_PASSWORD' => password(
                 label: 'Please enter your database password',
-                required: true
+                required: false
             ),
         ];
 

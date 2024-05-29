@@ -130,7 +130,11 @@ class DatabaseManager
                 }
             }
 
-            $this->productRepository->insert($arrayData);
+            foreach ($arrayData as $item) {
+                $product = $this->productRepository->create($item);
+
+                $this->productRepository->update($item, $product->id);
+            }
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),

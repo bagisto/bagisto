@@ -133,9 +133,6 @@ return [
                 'meta-title'       => 'Demo-Shop',
                 'meta-keywords'    => 'Demo-Shop Meta-Stichwörter',
                 'meta-description' => 'Demo-Shop Meta-Beschreibung',
-                'meta-keywords'    => 'Demo-Shop Meta-Schlüsselwörter',
-                'meta-title'       => 'Demo-Shop',
-                'name'             => 'Standard',
             ],
 
             'currencies' => [
