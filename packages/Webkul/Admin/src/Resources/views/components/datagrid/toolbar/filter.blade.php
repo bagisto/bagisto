@@ -823,8 +823,6 @@
                             this.savedFilters.available = response.data;
 
                             let data = response.data.map((filter) => {
-                                console.log(filter.applied.filters.columns);
-                        
                                 filter.applied.filters.columns = filter.applied.filters.columns.map((column) => {
                                     if (column.type === 'date_range') {
                                         column.value = column.value.map(dateRange => {

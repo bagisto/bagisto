@@ -70,12 +70,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
              */
             Route::get('datagrid/look-up', [DataGridController::class, 'lookUp'])->name('shop.customer.datagrid.look_up');
 
-            Route::controller(DataGridController::class)->prefix('datagrid/saved-filters')->group(function () {
-                Route::post('', 'store')->name('shop.datagrid.filters.saved_filters.store');
-                Route::get('', 'get')->name('shop.datagrid.filters.saved_filters.index');
-                Route::delete('{id}', 'destroy')->name('shop.datagrid.filters.saved_filters.destroy');
-            });
-
             /**
              * Logout.
              */
