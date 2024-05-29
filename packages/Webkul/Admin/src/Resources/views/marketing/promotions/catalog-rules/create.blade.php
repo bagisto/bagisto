@@ -523,6 +523,7 @@
                                 value-field="id"
                                 ::items='matchedAttribute.options'
                                 :fallback-locale="config('app.fallback_locale')"
+                                on-click="true"
                             />
                         </div>
 

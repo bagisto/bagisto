@@ -540,6 +540,7 @@
                                 ::items='matchedAttribute.options'
                                 ::value='condition.value'
                                 :fallback-locale="config('app.fallback_locale')"
+                                on-click="true"
                             />
                         </div>
 

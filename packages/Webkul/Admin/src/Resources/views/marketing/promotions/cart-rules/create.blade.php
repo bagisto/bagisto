@@ -764,6 +764,7 @@
                                 id-field="id"
                                 ::items='matchedAttribute.options'
                                 :fallback-locale="config('app.fallback_locale')"
+                                on-click="true"
                             >
                             </x-admin::tree.view>
                         </div>

@@ -215,7 +215,7 @@
                                         this.collapse ? '' : 'active',
                                         'v-tree-item inline-block w-full [&>.v-tree-item]:ltr:pl-6 [&>.v-tree-item]:rtl:pr-6 [&>.v-tree-item]:hidden [&.active>.v-tree-item]:block',
                                         level === 1 && ! hasChildren
-                                            ? 'ltr:!pl-5 rtl:!pr-5'
+                                            ? 'ltr:!pl-0 rtl:!pr-0'
                                             : level > 1 && ! hasChildren
                                             ? 'ltr:pl-5 rtl:pr-5'
                                             : '',
