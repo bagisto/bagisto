@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
+                    'apply-filters-btn' => 'फ़िल्टर लागू करें',
                     'back-btn'          => 'वापस',
+                    'clear-btn'         => 'साफ़ करें',
                     'create-new-filter' => 'नया फ़िल्टर बनाएं',
                     'custom-filters'    => 'कस्टम फ़िल्टर',
                     'delete-success'    => 'फ़िल्टर को सफलतापूर्वक हटा दिया गया है।',

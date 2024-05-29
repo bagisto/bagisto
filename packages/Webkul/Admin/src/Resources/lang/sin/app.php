@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
+                    'apply-filters-btn' => 'පෙරනිමි විමසීමක්',
                     'back-btn'          => 'ආපසු',
+                    'clear-btn'         => 'හිස් කරන්න',
                     'create-new-filter' => 'නව පෙරහන් කරන්න',
                     'custom-filters'    => 'සැකසුම් පෙරහන්',
                     'delete-success'    => 'පෙරහන සාර්ථකව මකා දමන ලදි.',

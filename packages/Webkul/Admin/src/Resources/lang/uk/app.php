@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
+                    'apply-filters-btn' => 'Застосувати фільтри',
                     'back-btn'          => 'Назад',
+                    'clear-btn'         => 'Очистити',
                     'create-new-filter' => 'Створити новий фільтр',
                     'custom-filters'    => 'Користувацькі фільтри',
                     'delete-success'    => 'Фільтр успішно видалено.',

@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
+                    'apply-filters-btn' => '应用过滤器',
                     'back-btn'          => '返回',
+                    'clear-btn'         => '清除',
                     'create-new-filter' => '创建新过滤器',
                     'custom-filters'    => '自定义过滤器',
                     'delete-success'    => '成功删除过滤器。',

@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
+                    'apply-filters-btn' => 'اعمال فیلترها',
                     'back-btn'          => 'بازگشت',
+                    'clear-btn'         => 'پاک کردن',
                     'create-new-filter' => 'ایجاد فیلتر جدید',
                     'custom-filters'    => 'فیلترهای سفارشی',
                     'delete-success'    => 'فیلتر با موفقیت حذف شد.',

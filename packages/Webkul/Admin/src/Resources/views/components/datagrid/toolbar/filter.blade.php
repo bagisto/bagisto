@@ -78,7 +78,7 @@
                             </span>
                             
                             <p class="text-xl font-semibold text-gray-800 dark:text-white">
-                                @lang('admin::app.components.datagrid.toolbar.filter.save-filter')
+                                @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.update-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' }}
                             </p>
                         </div>
                     </x-slot>
@@ -101,7 +101,7 @@
                                     @click="removeAppliedSavedFilters()"
                                     v-if="applied.savedFilterId" 
                                 >
-                                    @lang('Clear')
+                                    @lang('admin::app.components.datagrid.toolbar.filter.clear-btn')
                                 </div>
                             </x-slot>
 
@@ -548,7 +548,7 @@
                                                 @click="applySelectedFilters"
                                                 :disabled="! isFilterDirty"
                                             >
-                                                @lang('Apply Filter')
+                                                @lang('admin::app.components.datagrid.toolbar.filter.apply-filters-btn')
                                             </button>
                                             
                                             <!-- Save Filter Button for open save Filter Section -->
@@ -571,7 +571,7 @@
                         <template v-else>
                             <div class="flex items-center justify-between p-3 px-5">
                                 <p class="text-base font-semibold text-gray-800 dark:text-white">
-                                    @lang('admin::app.components.datagrid.toolbar.filter.create-new-filter')
+                                    @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.update-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.create-new-filter')' }}
                                 </p>
                             </div>
 

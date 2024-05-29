@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
-                    'back-btn'          => 'Voltar',
+                    'apply-filters-btn' => 'Zastosuj filtry',
+                    'back-btn'          => 'Wstecz',
+                    'clear-btn'         => 'Wyczyść',
                     'create-new-filter' => 'Criar novo filtro',
                     'custom-filters'    => 'Filtros personalizados',
                     'delete-success'    => 'O filtro foi excluído com sucesso.',

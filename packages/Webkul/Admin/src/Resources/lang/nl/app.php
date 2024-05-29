@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
+                    'apply-filters-btn' => 'Filters toepassen',
                     'back-btn'          => 'Terug',
+                    'clear-btn'         => 'Wissen',
                     'create-new-filter' => 'Nieuwe filter maken',
                     'custom-filters'    => 'Aangepaste filters',
                     'delete-success'    => 'Filter is succesvol verwijderd.',

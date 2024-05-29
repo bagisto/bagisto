@@ -3970,7 +3970,9 @@ return [
                 ],
 
                 'filter' => [
+                    'apply-filters-btn' => 'Filtreleri Uygula',
                     'back-btn'          => 'Geri',
+                    'clear-btn'         => 'Temizle',
                     'create-new-filter' => 'Yeni Filtre Oluştur',
                     'custom-filters'    => 'Özel Filtreler',
                     'delete-success'    => 'Filtre başarıyla silindi.',

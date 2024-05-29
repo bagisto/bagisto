@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
-                    'back-btn'          => 'الرجوع',
+                    'apply-filters-btn' => 'تطبيق الفلاتر',
+                    'back-btn'          => 'رجوع',
+                    'clear-btn'         => 'مسح',
                     'create-new-filter' => 'إنشاء تصفية جديدة',
                     'custom-filters'    => 'تصفيات مخصصة',
                     'delete-success'    => 'تم حذف التصفية بنجاح.',

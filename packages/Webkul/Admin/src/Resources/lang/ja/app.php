@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
+                    'apply-filters-btn' => 'フィルタを適用する',
                     'back-btn'          => '戻る',
+                    'clear-btn'         => 'クリア',
                     'create-new-filter' => '新しいフィルターを作成',
                     'custom-filters'    => 'カスタムフィルター',
                     'delete-success'    => 'フィルターは正常に削除されました。',

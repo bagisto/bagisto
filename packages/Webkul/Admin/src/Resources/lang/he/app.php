@@ -3969,7 +3969,9 @@ return [
                 ],
 
                 'filter' => [
-                    'back-btn'          => 'חזור',
+                    'apply-filters-btn' => 'החל מסננים',
+                    'back-btn'          => 'חזרה',
+                    'clear-btn'         => 'נקה',
                     'create-new-filter' => 'צור פילטר חדש',
                     'custom-filters'    => 'פילטרים מותאמים אישית',
                     'delete-success'    => 'הפילטר נמחק בהצלחה.',
