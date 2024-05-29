@@ -20,7 +20,7 @@ class SubscriberListFactory extends Factory
     public function definition(): array
     {
         return [
-            'email'         => $this->faker->email,
+            'email'         => $this->faker->safeEmail(),
             'channel_id'    => core()->getCurrentChannel()->id,
             'is_subscribed' => 1,
             'token'         => uniqid(),
