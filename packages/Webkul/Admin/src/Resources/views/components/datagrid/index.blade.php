@@ -334,9 +334,12 @@
                         ...filters.columns,
                     ];
 
-                    const emptyColumnValue = this.applied.filters.columns.every((column) => column.value.length === 0);
+                    /**
+                     * This will check for empty column values and reset the saved filter ID to ensure the saved filter is not highlighted.
+                     */
+                    const isEmptyColumnValue = this.applied.filters.columns.every((column) => column.value.length === 0);
 
-                    if (emptyColumnValue) {
+                    if (isEmptyColumnValue) {
                         this.applied.savedFilterId = null;
                     }
 
@@ -344,7 +347,21 @@
                      * We need to reset the page on filtering.
                      */
                     this.applied.pagination.page = 1;
-                    
+
+                    this.get();
+                },
+
+                /**
+                 * Filter results by the saved filter.
+                 *
+                 * @param {Object} filter
+                 * @returns {void}
+                 */
+                 applySavedFilter(filter) {
+                    this.applied = filter.applied;
+
+                    this.applied.savedFilterId = filter.id;
+
                     this.get();
                 },
 
@@ -423,20 +440,6 @@
                         available: this.available,
                         applied: this.applied
                     });
-                },
-
-                /**
-                 * Apply the saved filter.
-                 *
-                 * @param {Object} filter
-                 * @returns {void}
-                 */
-                applySavedFilter(filter) {
-                    this.applied = filter.applied;
-
-                    this.applied.savedFilterId = filter.id;
-
-                    this.get();
                 },
 
                 //=======================================================================================

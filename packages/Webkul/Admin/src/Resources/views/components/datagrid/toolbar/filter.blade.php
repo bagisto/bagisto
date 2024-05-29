@@ -3,8 +3,7 @@
     :is-loading="isLoading"
     :available="available"
     :applied="applied"
-    @applyFilter="filter"
-    @removeFilter="filter"
+    @applyFilters="filter"
     @applySavedFilter="applySavedFilter"
 >
     {{ $slot }}
@@ -20,7 +19,7 @@
             :available="available"
             :applied="applied"
             :filters="filters"
-            :apply-filter="applyFilter"
+            :apply-filters="applyFilters"
             :apply-column-values="applyColumnValues"
             :find-applied-column="findAppliedColumn"
             :has-any-applied-column-values="hasAnyAppliedColumnValues"
@@ -71,12 +70,12 @@
 
                         <!-- Save Filter Title -->
                         <div v-else class="flex items-center gap-x-2">
-                            <span 
+                            <span
                                 class="icon-arrow-right rtl:icon-arrow-left mt-0.5 cursor-pointer text-3xl hover:rounded-md hover:bg-gray-100 dark:hover:bg-gray-950"
                                 @click="backToFilters"
                             >
                             </span>
-                            
+
                             <p class="text-xl font-semibold text-gray-800 dark:text-white">
                                 @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.update-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' }}
                             </p>
@@ -86,28 +85,27 @@
                     <x-slot:content class="!p-0">
                         <template v-if="! isShowSavedFilters">
                             <!-- Quick Filters Accordion -->
-                            <x-admin::accordion 
-                                class="select-none rounded-none !shadow-none" 
+                            <x-admin::accordion
+                                class="select-none rounded-none !shadow-none"
                                 v-if="savedFilters.available.length > 0"
                             >
-                            <x-slot:header class="px-4">
-                                <p class="w-full text-base font-semibold text-gray-800 dark:text-white">
-                                    @lang('admin::app.components.datagrid.toolbar.filter.quick-filters')
-                                </p>
+                                <x-slot:header class="px-4">
+                                    <p class="w-full text-base font-semibold text-gray-800 dark:text-white">
+                                        @lang('admin::app.components.datagrid.toolbar.filter.quick-filters')
+                                    </p>
 
-                                <!--Customer Edit Component -->
-                                <div
-                                    class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"
-                                    @click="removeAppliedSavedFilters()"
-                                    v-if="applied.savedFilterId" 
-                                >
-                                    @lang('admin::app.components.datagrid.toolbar.filter.clear-btn')
-                                </div>
-                            </x-slot>
+                                    <div
+                                        class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"
+                                        @click="removeAppliedSavedFilters()"
+                                        v-if="applied.savedFilterId"
+                                    >
+                                        @lang('admin::app.components.datagrid.toolbar.filter.clear-btn')
+                                    </div>
+                                </x-slot>
 
                                 <x-slot:content class="!p-0">
                                     <div class="grid gap-1 !p-0 pb-2.5">
-                                        <!-- Listing of Quick Filters(Saved Filters) -->
+                                        <!-- Listing of Quick Filters (Saved Filters) -->
                                         <div v-for="(filter,index) in savedFilters.available">
                                             <div
                                                 class="flex items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"
@@ -117,7 +115,7 @@
                                                 <span class="cursor-pointer">
                                                     @{{ filter.name }}
                                                 </span>
-                                            
+
                                                 <span
                                                     class="icon-cross cursor-pointer rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"
                                                     @click.stop="deleteSavedFilter(filter)"
@@ -182,7 +180,7 @@
                                                                 <x-admin::dropdown.menu.item
                                                                     v-for="option in column.options"
                                                                     v-text="option.label"
-                                                                    @click="applyFilter(option.value, column)"
+                                                                    @click="addFilter(option.value, column)"
                                                                 >
                                                                 </x-admin::dropdown.menu.item>
                                                             </x-slot>
@@ -251,7 +249,7 @@
                                                                     <x-admin::dropdown.menu.item
                                                                         v-for="option in column.options.params.options"
                                                                         v-text="option.label"
-                                                                        @click="applyFilter(option.value, column)"
+                                                                        @click="addFilter(option.value, column)"
                                                                     >
                                                                     </x-admin::dropdown.menu.item>
                                                                 </x-slot>
@@ -301,7 +299,7 @@
                                                             <v-datagrid-searchable-dropdown
                                                                 :datagrid-id="available.id"
                                                                 :column="column"
-                                                                @select-option="applyFilter($event, column)"
+                                                                @select-option="addFilter($event, column)"
                                                             >
                                                             </v-datagrid-searchable-dropdown>
                                                         </div>
@@ -350,7 +348,7 @@
                                                             class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
                                                             v-for="option in column.options"
                                                             v-text="option.label"
-                                                            @click="applyFilter(
+                                                            @click="addFilter(
                                                                 $event,
                                                                 column,
                                                                 { quickFilter: { isActive: true, selectedFilter: option } }
@@ -366,7 +364,7 @@
                                                                 :name="`${column.index}[from]`"
                                                                 :placeholder="column.label"
                                                                 :ref="`${column.index}[from]`"
-                                                                @change="applyFilter(
+                                                                @change="addFilter(
                                                                     $event,
                                                                     column,
                                                                     { range: { name: 'from' }, quickFilter: { isActive: false } }
@@ -382,7 +380,7 @@
                                                                 :name="`${column.index}[to]`"
                                                                 :placeholder="column.label"
                                                                 :ref="`${column.index}[from]`"
-                                                                @change="applyFilter(
+                                                                @change="addFilter(
                                                                     $event,
                                                                     column,
                                                                     { range: { name: 'to' }, quickFilter: { isActive: false } }
@@ -434,7 +432,7 @@
                                                             class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
                                                             v-for="option in column.options"
                                                             v-text="option.label"
-                                                            @click="applyFilter(
+                                                            @click="addFilter(
                                                                 $event,
                                                                 column,
                                                                 { quickFilter: { isActive: true, selectedFilter: option } }
@@ -450,7 +448,7 @@
                                                                 :name="`${column.index}[from]`"
                                                                 :placeholder="column.label"
                                                                 :ref="`${column.index}[from]`"
-                                                                @change="applyFilter(
+                                                                @change="addFilter(
                                                                     $event,
                                                                     column,
                                                                     { range: { name: 'from' }, quickFilter: { isActive: false } }
@@ -466,7 +464,7 @@
                                                                 :name="`${column.index}[to]`"
                                                                 :placeholder="column.label"
                                                                 :ref="`${column.index}[from]`"
-                                                                @change="applyFilter(
+                                                                @change="addFilter(
                                                                     $event,
                                                                     column,
                                                                     { range: { name: 'to' }, quickFilter: { isActive: false } }
@@ -519,7 +517,7 @@
                                                             class="block w-full rounded-md border bg-white px-2 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                                             :name="column.index"
                                                             :placeholder="column.label"
-                                                            @keyup.enter="applyFilter($event, column)"
+                                                            @keyup.enter="addFilter($event, column)"
                                                         />
                                                     </div>
 
@@ -545,13 +543,13 @@
                                             <button
                                                 type="button"
                                                 class="secondary-button w-full"
-                                                @click="applySelectedFilters"
+                                                @click="applyFilters"
                                                 :disabled="! isFilterDirty"
                                             >
                                                 @lang('admin::app.components.datagrid.toolbar.filter.apply-filters-btn')
                                             </button>
-                                            
-                                            <!-- Save Filter Button for open save Filter Section -->
+
+                                            <!-- Save filter button for opening the save filter section. -->
                                             <button
                                                 type="button"
                                                 v-if="applied.filters.columns.length > 0"
@@ -575,8 +573,8 @@
                                 </p>
                             </div>
 
-                            <div 
-                                class="px-5 py-1" 
+                            <div
+                                class="px-5 py-1"
                                 v-if="filters.columns.length > 0"
                             >
                                 <!-- Save Filter Form -->
@@ -621,18 +619,18 @@
                                                 @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.update-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' }}
                                             </button>
                                         </div>
-                                        
+
                                         <p class="py-4 text-base font-semibold text-gray-800 dark:text-white">
                                             @lang('admin::app.components.datagrid.toolbar.filter.selected-filters')
                                         </p>
 
-                                        <!-- Applied filters Label and Value Listing for Save Custom Filter-->
+                                        <!-- Applied filters label and value listing for saving custom filter. -->
                                         <div v-for="column in savedFilters.params.filters.columns">
                                             <div v-if="column.value.length > 0" >
                                                 <p class="mb-2 text-xs font-medium text-gray-800 dark:text-white">
                                                     @{{ column.label }}
                                                 </p>
-                                                
+
                                                 <div class="mb-4 flex flex-wrap gap-2">
                                                     <p
                                                         v-for="columnValue in column.value"
@@ -662,10 +660,10 @@
                                                     >
                                                     <div class="flex flex-col gap-1.5">
                                                         <p class="text-base font-semibold text-gray-400">
-                                                            @lang('admin::app.components.datagrid.toolbar.filter.empty-title') 
+                                                            @lang('admin::app.components.datagrid.toolbar.filter.empty-title')
                                                         </p>
-                                                        <p class="text-gray-400"> 
-                                                            @lang('admin::app.components.datagrid.toolbar.filter.empty-description') 
+                                                        <p class="text-gray-400">
+                                                            @lang('admin::app.components.datagrid.toolbar.filter.empty-description')
                                                         </p>
                                                     </div>
                                                 </div>
@@ -687,7 +685,7 @@
 
             props: ['isLoading', 'available', 'applied', 'src'],
 
-            emits: ['applyFilter', 'removeFilter', 'applySavedFilter'],
+            emits: ['applyFilters', 'applySavedFilter'],
 
             data() {
                 return {
@@ -729,48 +727,62 @@
 
             methods: {
                 /**
-                 * Remove Applied save filter.
+                 * Go back to filters.
                  *
                  * @returns {void}
                  */
-                 removeAppliedSavedFilters() {
+                backToFilters() {
+                    this.savedFilters.params.filters.columns = JSON.parse(JSON.stringify(this.filters.columns));
+
+                    this.isShowSavedFilters = ! this.isShowSavedFilters;
+                },
+
+                /**
+                 * Applies the saved filter.
+                 *
+                 * @param {Object} filter - The filter to be applied.
+                 */
+                applySavedFilter(filter) {
+                    this.$emit('applySavedFilter', filter);
+                },
+
+                /**
+                 * Remove applied saved filter.
+                 *
+                 * @returns {void}
+                 */
+                removeAppliedSavedFilters() {
                     this.applied.savedFilterId = null;
 
                     this.filters = {
                         columns: [],
                     }
-                    
-                    this.$emit('removeFilter', this.filters);
+
+                    this.$emit('applyFilters', this.filters);
                 },
-                
+
+                /**
+                 * Remove filter option from save filters screen.
+                 *
+                 * @returns {void}
+                 */
+                removeSavedFilterColumnValue(column, value) {
+                    column.value = column.value.filter((columnValue) => columnValue !== value);
+                },
+
                 /**
                  * Save filters to the database.
                  *
                  * @returns {void}
                  */
                 createOrUpdateFilter(params, { setErrors }) {
-                    let applied = JSON.parse(JSON.stringify(this.applied));
-
-                    applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => {
-                        if (column.value.length > 0) {
-                            if (column.type === 'date_range') {
-                                column.value = column.value.map(dateRange => {
-                                    const matchedOption = column.options.find(option => option.from === dateRange[0] && option.to === dateRange[1]);
-                                    return matchedOption ? [matchedOption.name] : dateRange;
-                                });
-                            }
-                            return true;
-                        }
-                        return false;
-                    });
-
                     if (params.id) {
                         params._method = 'PUT';
                     }
 
-                    this.$axios.post(params.id ? `{{ route('admin.datagrid.filters.saved_filters.update', '') }}/${params.id}` : "{{ route('admin.datagrid.filters.saved_filters.store') }}", {
+                    this.$axios.post(params.id ? `{{ route('admin.datagrid.saved_filters.update', '') }}/${params.id}` : "{{ route('admin.datagrid.saved_filters.store') }}", {
                         src: this.src,
-                        applied,
+                        applied: this.applied,
                         ...params,
                     })
                         .then(response => {
@@ -781,6 +793,7 @@
                                     if (filter.id == response.data.data.id) {
                                         return response.data.data;
                                     }
+
                                     return filter;
                                 });
                             }
@@ -801,65 +814,31 @@
                 },
 
                 /**
-                 * Remove filter option from save filters.
-                 *
-                 * @returns {void}
-                 */
-                removeSavedFilterColumnValue(column, value) {
-                    column.value = column.value.filter((columnValue) => columnValue !== value);
-                },
-
-                /**
                  * Retrieves the saved filters.
                  *
                  * @returns {void}
                  */
-                 getSavedFilters() {
+                getSavedFilters() {
                     this.$axios
-                        .get('{{ route('admin.datagrid.filters.saved_filters.index') }}', {
+                        .get('{{ route('admin.datagrid.saved_filters.index') }}', {
                             params: { src: this.src }
                         })
                         .then(response => {
                             this.savedFilters.available = response.data;
-
-                            let data = response.data.map((filter) => {
-                                filter.applied.filters.columns = filter.applied.filters.columns.map((column) => {
-                                    if (column.type === 'date_range') {
-                                        column.value = column.value.map(dateRange => {
-                                            if (dateRange.length === 1) {
-                                                const matchedOption = column.options.find(option => option.name === dateRange[0]);
-                                                if (matchedOption) {
-                                                    return [matchedOption.from, matchedOption.to];
-                                                }
-                                            }
-                                            return dateRange;
-                                        });
-                                    }
-                                    return column;
-                                });
-                                return filter;
-                            });
                         })
                         .catch(error => {});
                 },
 
                 /**
-                 * Applies the saved filter.
-                 *
-                 * @param {Object} filter - The filter to be applied.
-                 */
-                applySavedFilter(filter) {
-                    this.$emit('applySavedFilter', filter);
-                },
-
-                /**
                  * Delete the saved filter.
+                 *
+                 * @returns {void}
                  */
                 deleteSavedFilter(filter) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
-                            this.$axios.delete(`{{ route('admin.datagrid.filters.saved_filters.destroy', '') }}/${filter.id}`)
-                            
+                            this.$axios.delete(`{{ route('admin.datagrid.saved_filters.destroy', '') }}/${filter.id}`)
+
                             .then(response => {
                                 this.savedFilters.available = this.savedFilters.available.filter((savedFilter) => savedFilter.id !== filter.id);
 
@@ -873,23 +852,25 @@
                 },
 
                 /**
-                 * Go back to filters.
+                 * Apply all added filters.
+                 *
+                 * @returns {void}
                  */
-                backToFilters() {
-                    this.savedFilters.params.filters.columns = JSON.parse(JSON.stringify(this.filters.columns));
+                applyFilters() {
+                    this.$emit('applyFilters', this.filters);
 
-                    this.isShowSavedFilters = ! this.isShowSavedFilters;
+                    this.$refs.filterDrawer.close();
                 },
 
                 /**
-                 * Apply filter.
+                 * Add filter.
                  *
                  * @param {Event} $event
                  * @param {object} column
                  * @param {object} additional
                  * @returns {void}
                  */
-                applyFilter($event, column = null, additional = {}) {
+                addFilter($event, column = null, additional = {}) {
                     let quickFilter = additional?.quickFilter;
 
                     if (quickFilter?.isActive) {
@@ -934,14 +915,6 @@
                             $event.target.value = '';
                         }
                     }
-
-                    this.isFilterDirty = true;
-                },
-
-                applySelectedFilters() {
-                    this.$emit('applyFilter', this.filters);
-
-                    this.$refs.filterDrawer.close();
                 },
 
                 /**
@@ -1011,6 +984,8 @@
 
                             break;
                     }
+
+                    this.isFilterDirty = true;
                 },
 
                 /**
@@ -1066,11 +1041,7 @@
                         this.filters.columns = this.filters.columns.filter(column => column.index !== columnIndex);
                     }
 
-                    // this.$emit('removeFilter', this.filters);
-
                     this.isFilterDirty = true;
-
-                    // this.$refs.filterDrawer.close();
                 },
 
                 /**
@@ -1082,7 +1053,7 @@
                 removeAppliedColumnAllValues(columnIndex) {
                     this.filters.columns = this.filters.columns.filter(column => column.index !== columnIndex);
 
-                    this.$emit('removeFilter', this.filters);
+                    this.isFilterDirty = true;
                 },
             },
         });

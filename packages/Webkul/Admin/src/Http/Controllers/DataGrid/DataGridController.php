@@ -1,8 +1,9 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers;
+namespace Webkul\Admin\Http\Controllers\DataGrid;
 
 use Illuminate\Support\Facades\Crypt;
+use Webkul\Admin\Http\Controllers\Controller;
 
 class DataGridController extends Controller
 {

@@ -8,7 +8,7 @@ use Webkul\DataGrid\Contracts\SavedFilter;
 class SavedFilterRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify model class name.
      */
     public function model(): string
     {

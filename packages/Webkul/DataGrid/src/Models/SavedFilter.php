@@ -29,15 +29,12 @@ class SavedFilter extends Model implements SavedFilterContract
         'applied',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
     protected $casts = [
         'applied' => 'json',
     ];
-
-    /**
-     * Get the order record of Filter.
-     */
-    public function filter()
-    {
-        return $this->belongsTo(SavedFilterProxy::modelClass());
-    }
 }
