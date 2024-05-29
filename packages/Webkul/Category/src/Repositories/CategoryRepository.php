@@ -140,7 +140,6 @@ class CategoryRepository extends Repository
                     $query->where('parent_id', 1)
                         ->orWhere('id', 1);
                 })->get()->toTree();
-
     }
 
     /**
