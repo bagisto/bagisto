@@ -782,13 +782,17 @@
                  * @returns {void}
                  */
                 createOrUpdateFilter(params, { setErrors }) {
+                    let applied = JSON.parse(JSON.stringify(this.applied));
+                    
+                    applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => column.value.length > 0);
+                    
                     if (params.id) {
                         params._method = 'PUT';
                     }
 
                     this.$axios.post(params.id ? `{{ route('admin.datagrid.saved_filters.update', '') }}/${params.id}` : "{{ route('admin.datagrid.saved_filters.store') }}", {
                         src: this.src,
-                        applied: this.applied,
+                        applied,
                         ...params,
                     })
                         .then(response => {
