@@ -814,13 +814,33 @@
                  *
                  * @returns {void}
                  */
-                getSavedFilters() {
+                 getSavedFilters() {
                     this.$axios
                         .get('{{ route('admin.datagrid.filters.saved_filters.index') }}', {
                             params: { src: this.src }
                         })
                         .then(response => {
                             this.savedFilters.available = response.data;
+
+                            let data = response.data.map((filter) => {
+                                console.log(filter.applied.filters.columns);
+                        
+                                filter.applied.filters.columns = filter.applied.filters.columns.map((column) => {
+                                    if (column.type === 'date_range') {
+                                        column.value = column.value.map(dateRange => {
+                                            if (dateRange.length === 1) {
+                                                const matchedOption = column.options.find(option => option.name === dateRange[0]);
+                                                if (matchedOption) {
+                                                    return [matchedOption.from, matchedOption.to];
+                                                }
+                                            }
+                                            return dateRange;
+                                        });
+                                    }
+                                    return column;
+                                });
+                                return filter;
+                            });
                         })
                         .catch(error => {});
                 },
