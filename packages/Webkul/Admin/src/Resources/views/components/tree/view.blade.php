@@ -217,13 +217,13 @@
                                         level === 1 && ! hasChildren
                                             ? 'ltr:!pl-5 rtl:!pr-5'
                                             : level > 1 && ! hasChildren
-                                            ? 'ltr:!pl-14 rtl:!pr-14'
+                                            ? 'ltr:pl-5 rtl:pr-5'
                                             : '',
                                     ],
                                 }, [
                                     this.generateToggleIconComponent({
                                         class: [
-                                            hasChildren ? 'icon-sort-down' : '',
+                                            this.onClick && !hasChildren ? 'icon-sort-down' : (hasChildren ? 'icon-sort-down' : ''),
                                             'text-xl rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950'
                                         ],
                                     }),
@@ -265,6 +265,12 @@
                             value.children = response.data;
 
                             image.remove();
+
+                            if (! value.children.length && event.srcElement.previousSibling) {
+                                event.srcElement.previousSibling.remove();
+                            }
+
+                            event.srcElement.parentElement.classList.add('ltr:!pl-11', 'rtl:!pr-11');
                         })
                         .catch(error => {
                             this.$emitter.emit('add-flash', { type: 'danger', message: error.message });

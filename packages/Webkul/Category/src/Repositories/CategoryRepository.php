@@ -150,31 +150,9 @@ class CategoryRepository extends Repository
      */
     public function getCategoryTreeWithoutDescendant(?int $id = null)
     {
-        if (! $id) {
-            return $this->model::where('status', 1)
-                ->orderBy('position', 'ASC')
-                ->get()->toTree();
-        }
-
-        $category = $this->model::orderBy('position', 'ASC')
-            ->whereNotDescendantOf($id)
-            ->get();
-
-        if ($id == 1) {
-            return $category->where('id', '!=', $id)->toTree();
-        }
-
-        $primaryParentId = $category->where('id', $id)->value('parent_id');
-        $allParentIds = [$primaryParentId, null];
-
-        while ($primaryParentId) {
-            $primaryParentId = $category->where('id', $primaryParentId)->value('parent_id');
-            $allParentIds[] = $primaryParentId;
-        }
-
-        return $category->whereIn('parent_id', $allParentIds)
-            ->where('id', '!=', $id)
-            ->toTree();
+        return $id
+            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
+            : $this->model::orderBy('position', 'ASC')->get()->toTree();
     }
 
     /**
@@ -214,22 +192,9 @@ class CategoryRepository extends Repository
      */
     public function getVisibleCategoryTree(?int $id = null)
     {
-        if (! $id) {
-            return $this->model::where('status', 1)
-                ->orderBy('position', 'ASC')
-                ->whereIn('parent_id', [1, null])
-                ->get()->toTree();
-
-        }
-
-        return $this->model::where('status', 1)
-            ->orderBy('position', 'ASC')
-            ->where(function ($query) use ($id) {
-                $query->where('parent_id', $id)
-                    ->orWhere('id', $id);
-            })
-            ->descendantsAndSelf($id)
-            ->toTree($id);
+        return $id
+            ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsAndSelf($id)->toTree($id)
+            : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
     }
 
     /**
