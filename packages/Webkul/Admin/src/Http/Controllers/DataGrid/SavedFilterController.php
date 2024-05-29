@@ -56,8 +56,10 @@ class SavedFilterController extends Controller
      */
     public function update(int $id)
     {
+        $userId = auth()->guard('admin')->user()->id;
+
         $this->validate(request(), [
-            'name' => 'required|unique:saved_filters,name,'.$id,
+            'name' => 'required|unique:saved_filters,name,'.$id.',id,src,'.request('src').',user_id,'.$userId,
         ]);
 
         $updateFilter = $this->savedFilterRepository->update(request()->only([
