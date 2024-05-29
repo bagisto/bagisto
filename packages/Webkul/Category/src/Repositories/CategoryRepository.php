@@ -149,9 +149,31 @@ class CategoryRepository extends Repository
      */
     public function getCategoryTreeWithoutDescendant(?int $id = null)
     {
-        return $id
-            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
-            : $this->model::orderBy('position', 'ASC')->get()->toTree();
+        if (! $id) {
+            return $this->model::where('status', 1)
+                ->orderBy('position', 'ASC')
+                ->get()->toTree();
+        }
+
+        $category = $this->model::orderBy('position', 'ASC')
+            ->whereNotDescendantOf($id)
+            ->get();
+
+        if ($id == 1) {
+            return $category->where('id', '!=', $id)->toTree();
+        }
+
+        $primaryParentId = $category->where('id', $id)->value('parent_id');
+        $allParentIds = [$primaryParentId, null];
+
+        while ($primaryParentId) {
+            $primaryParentId = $category->where('id', $primaryParentId)->value('parent_id');
+            $allParentIds[] = $primaryParentId;
+        }
+
+        return $category->whereIn('parent_id', $allParentIds)
+            ->where('id', '!=', $id)
+            ->toTree();
     }
 
     /**

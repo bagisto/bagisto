@@ -267,10 +267,8 @@
                             image.remove();
 
                             if (! value.children.length && event.srcElement.previousSibling) {
-                                event.srcElement.previousSibling.remove();
+                                event.srcElement.previousSibling.style.visibility = 'hidden';
                             }
-
-                            event.srcElement.parentElement.classList.add('ltr:!pl-11', 'rtl:!pr-11');
                         })
                         .catch(error => {
                             this.$emitter.emit('add-flash', { type: 'danger', message: error.message });

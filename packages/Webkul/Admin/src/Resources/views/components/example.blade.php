@@ -526,6 +526,18 @@
     :fallback-locale="config('app.fallback_locale')"
 />
 
+<!-- Tree | Radio Component (If you need to get the child data of a tree via API) -->
+<x-admin::tree.view
+    input-type="radio"
+    name-field="parent_id"
+    value-field="id"
+    id-field="id"
+    :items="json_encode($availableItems)"
+    :value="$savedValue"
+    :fallback-locale="config('app.fallback_locale')"
+    on-click="true"
+/>
+
 <!-- Status  Label -->
 <div class="label-canceled">Canceled</div>
 
