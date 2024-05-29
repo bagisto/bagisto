@@ -226,7 +226,7 @@ class Installer extends Command
 
     /**
      * Add the database credentials to the .env file.
-     * 
+     *
      * @return mixed
      */
     protected function askForDatabaseDetails()
@@ -276,7 +276,6 @@ class Installer extends Command
         if (
             ! $databaseDetails['DB_DATABASE']
             || ! $databaseDetails['DB_USERNAME']
-            || ! $databaseDetails['DB_PASSWORD']
         ) {
             return $this->error('Please enter the database credentials.');
         }
