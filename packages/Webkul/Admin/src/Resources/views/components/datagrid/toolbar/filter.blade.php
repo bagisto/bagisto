@@ -393,7 +393,7 @@
                                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                             >
-                                                                <span v-text="appliedColumnValue.join(' to ')"></span>
+                                                                <span v-text="appliedColumnValue"></span>
 
                                                                 <span
                                                                     class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -477,7 +477,7 @@
                                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                             >
-                                                                <span v-text="appliedColumnValue.join(' to ')"></span>
+                                                                <span v-text="appliedColumnValue"></span>
 
                                                                 <span
                                                                     class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -633,15 +633,15 @@
 
                                                 <div class="mb-4 flex flex-wrap gap-2">
                                                     <p
-                                                        v-for="columnValue in column.value"
+                                                        v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                         class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     >
-                                                        <span v-text="columnValue"></span>
+                                                        <span v-text="appliedColumnValue"></span>
 
                                                         <div>
                                                             <span
                                                                 class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                @click="removeSavedFilterColumnValue(column, columnValue)"
+                                                                @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
                                                             >
                                                             </span>
                                                         </div>
@@ -658,10 +658,12 @@
                                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                                         class="h-20 w-20 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                                                     >
+
                                                     <div class="flex flex-col gap-1.5">
                                                         <p class="text-base font-semibold text-gray-400">
                                                             @lang('admin::app.components.datagrid.toolbar.filter.empty-title')
                                                         </p>
+
                                                         <p class="text-gray-400">
                                                             @lang('admin::app.components.datagrid.toolbar.filter.empty-description')
                                                         </p>
@@ -767,7 +769,11 @@
                  * @returns {void}
                  */
                 removeSavedFilterColumnValue(column, value) {
-                    column.value = column.value.filter((columnValue) => columnValue !== value);
+                    if (typeof column.value === 'string') {
+                        column.value = [];
+                    } else {
+                        column.value = column.value.filter((columnValue) => columnValue !== value);
+                    }
                 },
 
                 /**
@@ -879,17 +885,7 @@
                         switch (column.type) {
                             case 'date_range':
                             case 'datetime_range':
-                                this.applyColumnValues(column, options.from, {
-                                    range: {
-                                        name: 'from'
-                                    }
-                                });
-
-                                this.applyColumnValues(column, options.to, {
-                                    range: {
-                                        name: 'to'
-                                    }
-                                });
+                                this.applyColumnValues(column, options.name);
 
                                 break;
 
@@ -944,30 +940,43 @@
                             if (appliedColumn) {
                                 let appliedRanges = appliedColumn.value[0];
 
-                                if (range.name == 'from') {
-                                    appliedRanges[0] = requestedValue;
-                                }
+                                if (range) {
+                                    if (range.name == 'from') {
+                                        appliedRanges[0] = requestedValue;
+                                    }
 
-                                if (range.name == 'to') {
-                                    appliedRanges[1] = requestedValue;
-                                }
+                                    if (range.name == 'to') {
+                                        appliedRanges[1] = requestedValue;
+                                    }
 
-                                appliedColumn.value = [appliedRanges];
+                                    appliedColumn.value = [appliedRanges];
+                                } else {
+                                    appliedColumn.value = requestedValue;
+                                }
                             } else {
                                 let appliedRanges = ['', ''];
 
-                                if (range.name == 'from') {
-                                    appliedRanges[0] = requestedValue;
-                                }
+                                if (range) {
+                                    if (range.name == 'from') {
+                                        appliedRanges[0] = requestedValue;
+                                    }
 
-                                if (range.name == 'to') {
-                                    appliedRanges[1] = requestedValue;
-                                }
+                                    if (range.name == 'to') {
+                                        appliedRanges[1] = requestedValue;
+                                    }
 
-                                this.filters.columns.push({
-                                    ...column,
-                                    value: [appliedRanges]
-                                });
+                                    this.filters.columns.push({
+                                        index: column.index,
+                                        label: column.label,
+                                        value: [appliedRanges]
+                                    });
+                                } else {
+                                    this.filters.columns.push({
+                                        index: column.index,
+                                        label: column.label,
+                                        value: requestedValue
+                                    });
+                                }
                             }
 
                             break;
@@ -977,7 +986,8 @@
                                 appliedColumn.value.push(requestedValue);
                             } else {
                                 this.filters.columns.push({
-                                    ...column,
+                                    index: column.index,
+                                    label: column.label,
                                     value: [requestedValue]
                                 });
                             }
@@ -1017,7 +1027,15 @@
                  * @returns {Array}
                  */
                 getAppliedColumnValues(columnIndex) {
-                    let appliedColumn = this.findAppliedColumn(columnIndex);
+                    const appliedColumn = this.findAppliedColumn(columnIndex);
+
+                    if (typeof appliedColumn?.value === 'string') {
+                        const availableColumn = this.available.columns.find(column => column.index === columnIndex);
+
+                        const option = availableColumn.options.find(option => option.name === appliedColumn.value);
+
+                        return [[option.from, option.to].join(' to ')];
+                    }
 
                     return appliedColumn?.value ?? [];
                 },
@@ -1032,7 +1050,11 @@
                 removeAppliedColumnValue(columnIndex, appliedColumnValue) {
                     let appliedColumn = this.findAppliedColumn(columnIndex);
 
-                    appliedColumn.value = appliedColumn?.value.filter(value => value !== appliedColumnValue);
+                    if (typeof appliedColumn?.value === 'string') {
+                        appliedColumn.value = [];
+                    } else {
+                        appliedColumn.value = appliedColumn?.value.filter(value => value !== appliedColumnValue);
+                    }
 
                     /**
                      * Clean up is done here. If there are no applied values present, there is no point in including the applied column as well.
