@@ -203,7 +203,7 @@ return [
 
                 'bold-collections' => [
                     'content' => [
-                        'btn-title'   => 'Alle anzeigen',
+                        'btn-title'   => 'Kollektionen anzeigen',
                         'description' => 'Einführung unserer neuen fetten Kollektionen! Heben Sie Ihren Stil mit gewagten Designs und lebhaften Statements hervor. Erkunden Sie auffällige Muster und kräftige Farben, die Ihre Garderobe neu definieren. Machen Sie sich bereit, das Außergewöhnliche zu umarmen!',
                         'title'       => 'Machen Sie sich bereit für unsere neuen fetten Kollektionen!',
                     ],

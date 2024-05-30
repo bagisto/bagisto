@@ -1,28 +1,28 @@
 @props(['count' => 0])
 
-<div class="mt-8 flex flex-wrap gap-20 max-1060:flex-col">
+<div class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-sm:mt-0 max-sm:gap-[30px]">
     <div class="grid flex-1 gap-y-6">
         <!-- Cart Action -->
-        <div class="flex items-center justify-between border-b border-zinc-200 pb-2.5 max-sm:block">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-2.5 max-sm:justify-normal max-sm:gap-5 max-sm:py-2.5">
             <div class="flex select-none items-center">
-                <div class="shimmer h-[25px] w-6 rounded"></div>
+                <div class="shimmer h-[25px] w-6 rounded max-sm:h-5"></div>
 
-                <div class="shimmer h-[30px] w-[165px] ltr:ml-2.5 rtl:mr-2.5"></div>
+                <div class="shimmer h-[30px] w-[165px] max-sm:h-5 max-sm:w-[100px] ltr:ml-2.5 rtl:mr-2.5"></div>
             </div>
 
-            <div class="shimmer h-[23px] w-[222px] max-sm:mt-2.5 max-sm:ltr:ml-9 max-sm:rtl:mr-9"></div>
+            <div class="shimmer h-[23px] w-56 max-sm:h-5 max-sm:w-44"></div>
         </div>
 
         <!-- Cart Items -->
         @for ($i = 0; $i < $count; $i++)
             <div class="flex justify-between gap-x-2.5 border-b border-zinc-200 pb-5">
-                <div class="flex gap-x-5">
-                    <div class="mt-11 select-none">
+                <div class="flex gap-x-5 max-sm:gap-x-3.5">
+                    <div class="mt-11 select-none max-sm:mt-0 max-sm:grid max-sm:h-20 max-sm:items-center max-sm:leading-[80px]">
                         <div class="shimmer h-[25px] w-6 rounded"></div>
                     </div>
 
                     <div>
-                        <div class="shimmer h-[110px] w-[110px] rounded-xl"></div>
+                        <div class="shimmer h-28 w-28 rounded-xl max-sm:h-20 max-sm:max-w-20"></div>
                     </div>
 
                     <div class="grid gap-y-2.5">
@@ -31,12 +31,16 @@
                         <div class="shimmer h-6 w-[100px]"></div>
 
                         <div class="hidden place-content-start gap-2.5 max-sm:grid">
-                            <div class="shimmer h-[27px] w-[100px]"></div>
+                            <div class="shimmer h-[27px] w-[100px] max-sm:h-4"></div>
 
-                            <div class="shimmer h-[23px] w-[100px]"></div>
+                            <div class="shimmer h-[23px] w-[100px] max-sm:hidden"></div>
                         </div>
 
-                        <div class="shimmer h-9 w-[108px] rounded-[54px]"></div>
+                        <div class="flex items-center gap-2.5">
+                            <div class="shimmer h-9 w-[108px] rounded-[54px] max-sm:h-[30px] max-sm:w-20"></div>
+
+                            <div class="shimmer hidden h-6 w-12 max-sm:block"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -48,16 +52,19 @@
             </div>
         @endfor
 
-        <div class="flex flex-wrap justify-end gap-8">
-            <div class="shimmer h-14 w-[217px] rounded-2xl"></div>
+        <!-- Continue And Update Button -->
+        <div class="flex flex-wrap justify-end gap-8 max-sm:justify-between max-sm:gap-5">
+            <div class="shimmer h-14 w-[217px] rounded-2xl max-sm:h-[46px]"></div>
 
-            <div class="shimmer h-14 w-[161px] rounded-2xl"></div>
+            <div class="shimmer h-14 w-[161px] rounded-2xl max-sm:h-[46px]"></div>
         </div>
     </div>
 
     <div class="w-[418px] max-w-full">
 
-        <p class="shimmer h-[39px] w-2/5"></p>
+        <div class="shimmer h-9 w-2/5 max-sm:w-3/6"></div>
+
+        <div class="shimmer mt-5 grid h-14 w-full gap-4 rounded-xl max-sm:gap-2.5"></div>
 
         <div class="mt-6 grid gap-4">
             <div class="flex justify-between text-right">

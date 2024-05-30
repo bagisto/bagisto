@@ -199,4 +199,14 @@ class CustomerController extends Controller
 
         return view('shop::customers.account.reviews.index', compact('reviews'));
     }
+
+    /**
+     * Taking the customer to account details page.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function account()
+    {
+        return view('shop::customers.account.index');
+    }
 }

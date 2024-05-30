@@ -23,9 +23,9 @@
 	</div>
 
     <!-- Compare Component -->
-    <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:px-4">
+    <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:mt-7 max-sm:px-0">
         <v-compare>
-            <!---- Shimmer Effect -->
+            <!-- Shimmer Effect -->
             <x-shop::shimmer.compare :attributeCount="count($comparableAttributes)" />
         </v-compare>
     </div>
@@ -39,11 +39,11 @@
                 {!! view_render_event('bagisto.shop.customers.account.compare.before') !!}
 
                 <div v-if="! isLoading">
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between max-sm:px-4">
 
                         {!! view_render_event('bagisto.shop.customers.account.compare.title.before') !!}
 
-                        <h1 class="text-2xl font-medium">
+                        <h1 class="text-2xl font-medium max-sm:text-xl">
                             @lang('shop::app.compare.title')
                         </h1>
 
@@ -52,11 +52,12 @@
                         {!! view_render_event('bagisto.shop.customers.account.compare.remove_all.before') !!}
 
                         <div
-                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal"
+                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal max-md:px-3 max-md:py-1.5 max-md:text-xs"
                             v-if="items.length"
                             @click="removeAll"
                         >
-                            <span class="icon-bin text-2xl"></span>
+                            <span class="icon-bin text-2xl max-sm:hidden"></span>
+
                             @lang('shop::app.compare.delete-all')
                         </div>
 
@@ -64,7 +65,7 @@
                     </div>
 
                     <div
-                        class="journal-scroll mt-16 grid overflow-auto"
+                        class="journal-scroll scrollbar-width-hidden mt-16 grid overflow-auto max-sm:mt-7"
                         v-if="items.length"
                     >
                         <template v-for="attribute in comparableAttributes">
@@ -75,21 +76,21 @@
                             >
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.before') !!}
 
-                                <div class="min-w-[304px] max-w-full max-sm:hidden">
-                                    <p class="text-sm font-medium">
+                                <div class="min-w-[304px] max-w-full max-sm:grid max-sm:h-full max-sm:min-w-[110px] max-sm:items-center max-sm:bg-gray-200">
+                                    <p class="text-sm font-medium max-sm:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.after') !!}
 
-                                <div class="flex gap-3 border-zinc-200 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
+                                <div class="flex gap-3 border-zinc-200 max-sm:gap-0 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
-                                        class="group relative p-5 pt-0 ltr:pr-0 max-sm:ltr:pl-0 rtl:pl-0 max-sm:rtl:pr-0"
+                                        class="relative w-[311px] max-w-[311px] px-5 max-sm:w-[190px] max-sm:px-2.5"
                                         v-for="product in items"
                                     >
                                         <span
-                                            class="icon-cancel absolute top-5 hidden h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl transition-all duration-300 group-hover:z-[1] group-hover:flex ltr:right-5 rtl:left-5"
+                                            class="icon-cancel absolute top-5 z-[1] flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-zinc-200 bg-white text-2xl max-sm:top-10 max-sm:h-6 max-sm:w-6 max-sm:rounded-full max-sm:text-sm ltr:right-10 max-sm:ltr:right-4 rtl:left-10 max-sm:rtl:left-4"
                                             @click="remove(product.id)"
                                         ></span>
 
@@ -102,26 +103,22 @@
 
                             <!-- Comparable Attributes -->
                             <div
-                                class="flex max-w-full items-center border-b border-zinc-200 last:border-none"
+                                class="flex max-w-full items-center border-b border-zinc-200"
                                 v-else
                             >
-                                <div class="min-w-[304px] max-w-full max-sm:hidden">
-                                    <p class="text-sm font-medium">
+                                <div class="min-w-[304px] max-w-full max-sm:grid max-sm:h-full max-sm:min-w-[110px] max-sm:items-center max-sm:bg-gray-200">
+                                    <p class="text-sm font-medium max-sm:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
 
-                                <div class="flex gap-3 border-zinc-200 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
+                                <div class="flex gap-3 border-zinc-200 max-sm:gap-0 max-sm:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
-                                        class="w-[311px] max-w-[311px] p-5 ltr:pr-0 max-sm:ltr:pl-0 rtl:pl-0 max-sm:rtl:pr-0"
+                                        class="w-[311px] max-w-[311px] p-5 max-sm:w-[190px] max-sm:px-2.5"
                                         v-for="(product, index) in items"
                                     >
-                                        <p class="mb-1.5 hidden text-sm font-medium max-sm:block">
-                                            @{{ attribute.name ?? attribute.admin_name }} :
-                                        </p>
-
                                         <p
-                                            class="text-sm"
+                                            class="break-all text-sm"
                                             v-html="product[attribute.code] ?? 'N/A'"
                                         >
                                         </p>
@@ -134,16 +131,17 @@
                     </div>
 
                     <div
-                        class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center"
+                        class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center"
                         v-else
                     >
                         <img
+                            class="max-sm:h-[100px] max-sm:w-[100px]"
                             src="{{ bagisto_asset('images/thank-you.png') }}"
                             alt="@lang('shop::app.compare.empty-text')"
                         />
                         
                         <p
-                            class="text-xl"
+                            class="text-xl max-sm:text-sm"
                             role="heading"
                         >
                             @lang('shop::app.compare.empty-text')

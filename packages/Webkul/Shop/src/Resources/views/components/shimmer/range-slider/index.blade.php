@@ -1,8 +1,8 @@
 <div>
     <div class="flex items-center gap-4">
-        <p class="shimmer h-[20px] w-12"></p>
+        <p class="shimmer h-5 w-12"></p>
 
-        <p class="shimmer h-[20px] w-28"></p>
+        <p class="shimmer h-5 w-28"></p>
     </div>
 
     <!-- Price range slider effect -->
