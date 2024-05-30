@@ -53,7 +53,7 @@ class Indexer extends Command
         foreach ($indexerIds as $indexerId) {
             if (
                 $indexerId == 'elastic'
-                && core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic'
+                && core()->getConfigData('catalog.products.search.engine') != 'elastic'
             ) {
                 continue;
             }

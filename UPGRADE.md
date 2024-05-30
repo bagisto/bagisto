@@ -20,6 +20,7 @@
 - [The `Webkul\DataGrid\DataGrid` class](#the-datagrid-class)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
+- [The product Elastic Search indexing](#the-elastic-indexing)
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
@@ -115,6 +116,20 @@ There is no dependency needed to be updated at for this upgrade.
 - core()->getConfigData('catalog.inventory.stock_options.back_orders')
 + core()->getConfigData('sales.order_settings.stock_options.back_orders')
 ```
+
+4. The product storefront search mode configuration `core()->getConfigData('catalog.products.storefront.search_mode')` has been replaced with the following configurations, and the corresponding paths for retrieving configuration values have been updated:
+
+
+```diff
+- core()->getConfigData('catalog.products.storefront.search_mode')
+
++ core()->getConfigData('catalog.products.search.engine')
++ core()->getConfigData('catalog.products.search.admin_mode')
++ core()->getConfigData('catalog.products.search.storefront_mode')
+```
+
+`core()->getConfigData('catalog.products.search.engine')` represents the search engine for products. If "Elastic Search" is selected, elastic indexing will be enabled. The other two configurations (`catalog.products.search.admin_mode` and `catalog.products.search.storefront_mode`) will function relative to this configuration.
+
 
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names
@@ -488,10 +503,10 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 <a name="product"></a>
 ### Product
 
-**Impact Probability: Medium**
-
 <a name="the-elastic-search-repository"></a>
 #### The `Webkul\Product\Repositories\ElasticSearchRepository` Repository
+
+**Impact Probability: Medium**
 
 1. We have enhanced the `search` method to accept two arguments. The first argument is an array containing the search parameters (e.g., category_id, etc.), while the second argument is an array containing the options.
 
@@ -567,6 +582,21 @@ If you've implemented your own product type or overridden existing type classes,
 - public function updateDefaultVariantId()
 ```
 
+<a name="the-elastic-indexing"></a>
+#### The product Elastic Search indexing
+
+**Impact Probability: Medium**
+
+Previously, Elastic Search was used only on the frontend and not in the admin section. For large catalogs, this caused the Product datagrid to be very slow. To address this issue, we have now introduced Elastic Search in the admin section as well.
+
+To make Elastic Search compatible with the admin section, some changes were necessary. Previously, only active products were indexed in Elastic Search. Now, all products are indexed with additional keys/information.
+
+Please run the following command to refresh the Elastic Search indices:
+
+
+```diff
+php artisan indexer:index --type=elastic
+```
 
 <a name="Sales"></a>
 ### Sales

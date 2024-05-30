@@ -3445,6 +3445,18 @@ return [
                     'info'  => 'Configurer le paiement en tant qu\'invité, la page de visualisation du produit, la page de visualisation du panier, la page d\'accueil du magasin, la revue et le partage social des attributs.',
                     'title' => 'Produits',
 
+                    'search' => [
+                        'admin-mode-info'      => 'La recherche Mega, Datagrid et autres fonctionnalités de recherche dans le panneau d\'administration seront basées sur le moteur de recherche sélectionné.',
+                        'admin-mode'           => 'Mode de recherche administrateur',
+                        'database'             => 'Base de données',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Moteur de recherche',
+                        'storefront-mode-info' => 'La fonction de recherche sur la vitrine sera basée sur le moteur de recherche sélectionné, y compris la page de catégorie, la page de recherche et d\'autres fonctionnalités de recherche.',
+                        'storefront-mode'      => 'Mode de recherche vitrine',
+                        'title-info'           => 'Pour configurer le moteur de recherche pour les recherches de produits, vous pouvez choisir entre une base de données et Elasticsearch en fonction de vos besoins. Si vous avez un grand nombre de produits, Elasticsearch est recommandé.',
+                        'title'                => 'Recherche',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Autoriser la commande en tant qu\'invité',
                         'allow-guest-checkout-hint' => 'Remarque : lorsqu\'elle est activée, cette option peut être configurée individuellement pour chaque produit.',
@@ -3469,9 +3481,7 @@ return [
                         'buy-now-button-display' => 'Les clients peuvent acheter des produits directement',
                         'cheapest-first'         => 'Les moins chers d\'abord',
                         'comma-separated'        => 'Séparés par des virgules',
-                        'database'               => 'Base de données',
                         'default-list-mode'      => 'Mode de liste par défaut',
-                        'elastic'                => 'Recherche élastique',
                         'expensive-first'        => 'Les plus chers d\'abord',
                         'from-a-z'               => 'De A à Z',
                         'from-z-a'               => 'De Z à A',
@@ -3480,7 +3490,6 @@ return [
                         'list'                   => 'Liste',
                         'oldest-first'           => 'Les plus anciens d\'abord',
                         'products-per-page'      => 'Produits par page',
-                        'search-mode'            => 'Mode de recherche',
                         'sort-by'                => 'Trier par',
                         'title'                  => 'Vitrine',
                         'title-info'             => 'La vitrine est l\'interface utilisateur orientée client d\'une boutique en ligne et présente les produits, les catégories et la navigation pour une expérience d\'achat transparente.',
