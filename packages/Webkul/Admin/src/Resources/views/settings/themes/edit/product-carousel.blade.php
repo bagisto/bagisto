@@ -442,6 +442,7 @@
                                     },
                                 ],
                             },
+                            ...@json(app(Webkul\Attribute\Repositories\AttributeRepository::class)->getFilterableAttributes()),
                         ],
 
                         applied: [],
@@ -464,8 +465,6 @@
                         key: key,
                         value: this.options.filters[key],
                     }));
-
-                this.getFilters();
             },
 
             methods: {
@@ -483,17 +482,6 @@
                             this.options.filters.splice(index, 1);
                         }
                     });
-                },
-
-                getFilters() {
-                    this.$axios.get('{{ route('shop.api.categories.attributes') }}')
-                        .then((response) => {
-                            this.filters.available = [
-                                ...this.filters.available,
-                                ...response.data.data,
-                            ];
-                        })
-                        .catch((error) => {});
                 },
 
                 handleFilter(event) {
