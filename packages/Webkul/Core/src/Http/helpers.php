@@ -1,8 +1,8 @@
 <?php
 
+use Webkul\Core\Acl;
 use Webkul\Core\Core;
 use Webkul\Core\Menu;
-use Webkul\Core\Acl;
 
 if (! function_exists('core')) {
     /**
