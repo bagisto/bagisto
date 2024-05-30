@@ -3990,6 +3990,7 @@ return [
                     'title'             => 'تصفية',
                     'update'            => 'تحديث',
                     'update-filter'     => 'تحديث الفلتر',
+                    'updated-success'   => 'تم تحديث الفلتر بنجاح.',
                 ],
 
                 'search' => [

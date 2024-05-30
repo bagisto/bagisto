@@ -3990,6 +3990,7 @@ return [
                     'title'             => 'פילטר',
                     'update'            => 'עדכן',
                     'update-filter'     => 'עדכן מסנן',
+                    'updated-success'   => 'המסנן עודכן בהצלחה.',
                 ],
 
                 'search' => [

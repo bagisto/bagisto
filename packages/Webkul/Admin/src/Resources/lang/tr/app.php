@@ -3991,6 +3991,7 @@ return [
                     'title'             => 'Filtre',
                     'update'            => 'Güncelle',
                     'update-filter'     => 'Filtreyi güncelle',
+                    'updated-success'   => 'Filtre başarıyla güncellendi.',
                 ],
 
                 'search' => [

@@ -3990,6 +3990,7 @@ return [
                     'title'             => 'Filter',
                     'update'            => 'Bijwerken',
                     'update-filter'     => 'Filter bijwerken',
+                    'updated-success'   => 'Het filter is succesvol bijgewerkt.',
                 ],
 
                 'search' => [

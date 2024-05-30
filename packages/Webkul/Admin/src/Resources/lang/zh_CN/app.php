@@ -3990,6 +3990,7 @@ return [
                     'title'             => '过滤器',
                     'update'            => '更新',
                     'update-filter'     => '更新筛选器',
+                    'updated-success'   => '过滤器已成功更新。',
                 ],
 
                 'search' => [

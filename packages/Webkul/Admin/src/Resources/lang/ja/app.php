@@ -3990,6 +3990,7 @@ return [
                     'title'             => 'フィルター',
                     'update'            => '更新',
                     'update-filter'     => 'フィルターを更新',
+                    'updated-success'   => 'フィルターが正常に更新されました',
                 ],
 
                 'search' => [

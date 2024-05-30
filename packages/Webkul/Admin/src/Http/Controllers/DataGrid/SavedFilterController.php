@@ -70,7 +70,7 @@ class SavedFilterController extends Controller
 
         return response()->json([
             'data'    => $updateFilter,
-            'message' => trans('Filter Updated Successfully'),
+            'message' => trans('admin::app.components.datagrid.toolbar.filter.updated-success'),
         ], 200);
     }
 

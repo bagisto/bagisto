@@ -3990,6 +3990,7 @@ return [
                     'title'             => 'ফিল্টার',
                     'update'            => 'আপডেট',
                     'update-filter'     => 'ফিল্টার আপডেট করুন',
+                    'updated-success'   => 'ফিল্টার সফলভাবে আপডেট হয়েছে।',
                 ],
 
                 'search' => [

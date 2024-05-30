@@ -3990,6 +3990,7 @@ return [
                     'title'             => 'Filtre',
                     'update'            => 'Mettre à jour',
                     'update-filter'     => 'Mettre à jour le filtre',
+                    'updated-success'   => 'Le filtre a été mis à jour avec succès.',
                 ],
 
                 'search' => [
