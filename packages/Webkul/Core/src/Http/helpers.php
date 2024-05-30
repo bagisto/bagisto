@@ -2,6 +2,7 @@
 
 use Webkul\Core\Acl;
 use Webkul\Core\Core;
+use Webkul\Core\Menu;
 
 if (! function_exists('core')) {
     /**
@@ -10,6 +11,16 @@ if (! function_exists('core')) {
     function core(): Core
     {
         return app('core');
+    }
+}
+
+if (! function_exists('menu')) {
+    /**
+     * Menu helper.
+     */
+    function menu(): Menu
+    {
+        return app('menu');
     }
 }
 
