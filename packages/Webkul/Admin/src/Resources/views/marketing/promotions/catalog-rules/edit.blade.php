@@ -3,7 +3,7 @@
         @lang('admin::app.marketing.promotions.catalog-rules.edit.title')
     </x-slot>
 
-    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.before') !!}
+    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.before', ['catalogRule' => $catalogRule]) !!}
 
     <x-admin::form
         :action="route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id)"
@@ -11,7 +11,7 @@
         enctype="multipart/form-data"
     >
 
-        {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.create_form_controls.before') !!}
+        {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.create_form_controls.before', ['catalogRule' => $catalogRule]) !!}
 
         <div class="mt-3 flex items-center justify-between gap-4 max-sm:flex-wrap">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
@@ -43,11 +43,11 @@
             <x-admin::shimmer.marketing.promotions.catalog-rules />
         </v-catalog-rule-edit-form>
 
-        {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.create_form_controls.after') !!}
+        {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.create_form_controls.after', ['catalogRule' => $catalogRule]) !!}
 
     </x-admin::form>
 
-    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.after') !!}
+    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.after', ['catalogRule' => $catalogRule]) !!}
 
     @pushOnce('scripts')
         <!-- v catalog rule edit form template -->
@@ -58,7 +58,7 @@
             <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
                 <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.general.before') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.general.before', ['catalogRule' => $catalogRule]) !!}
 
                     <!-- General Form -->
                     <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
@@ -103,9 +103,9 @@
                         </x-admin::form.control-group>
                     </div>
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.general.after') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.general.after', ['catalogRule' => $catalogRule]) !!}
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.conditions.before') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.conditions.before', ['catalogRule' => $catalogRule]) !!}
 
                     <!-- Conditions -->
                     <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
@@ -155,9 +155,9 @@
 
                     </div>
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.conditions.after') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.conditions.after', ['catalogRule' => $catalogRule]) !!}
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.actions.before') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.actions.before', ['catalogRule' => $catalogRule]) !!}
 
                     <!-- Actions -->
                     <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
@@ -261,14 +261,14 @@
                         </div>
                     </div>
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.actions.after') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.actions.after', ['catalogRule' => $catalogRule]) !!}
 
                 </div>
 
                 <!-- Rightsub components -->
                 <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.settings.before') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.settings.before', ['catalogRule' => $catalogRule]) !!}
 
                     <!-- Settings -->
                     <x-admin::accordion>
@@ -383,9 +383,9 @@
                         </x-slot>
                     </x-admin::accordion>
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.settings.after') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.settings.after', ['catalogRule' => $catalogRule]) !!}
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.marketing_time.before') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.marketing_time.before', ['catalogRule' => $catalogRule]) !!}
 
                     <!-- Marketing Time -->
                     <x-admin::accordion>
@@ -436,7 +436,7 @@
                         </x-slot>
                     </x-admin::accordion>
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.marketing_time.after') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.marketing_time.after', ['catalogRule' => $catalogRule]) !!}
 
                 </div>
             </div>

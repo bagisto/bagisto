@@ -48,7 +48,23 @@ class RolesDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'permission_type',
             'label'      => trans('admin::app.settings.roles.index.datagrid.permission-type'),
-            'type'       => 'string',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => [
+                        [
+                            'label' => trans('admin::app.settings.roles.index.datagrid.custom'),
+                            'value' => 'custom',
+                        ],
+                        [
+                            'label' => trans('admin::app.settings.roles.index.datagrid.create.all'),
+                            'value' => 'all',
+                        ],
+                    ],
+                ],
+            ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,

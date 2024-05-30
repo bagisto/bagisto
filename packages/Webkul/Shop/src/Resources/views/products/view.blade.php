@@ -2,7 +2,7 @@
 @inject ('productViewHelper', 'Webkul\Product\Helpers\View')
 
 @php
-    $avgRatings = round($reviewHelper->getAverageRating($product));
+    $avgRatings = $reviewHelper->getAverageRating($product);
 
     $percentageRatings = $reviewHelper->getPercentageRating($product);
 
@@ -64,17 +64,21 @@
     </div>
 
     <!-- Product Information Vue Component -->
-    <v-product :product-id="{{ $product->id }}">
+    <v-product>
         <x-shop::shimmer.products.view />
     </v-product>
 
     <!-- Information Section -->
     <div class="1180:mt-20">
-        <x-shop::tabs position="center">
+        <x-shop::tabs
+            position="center"
+            ref="productTabs"
+        >
             <!-- Description Tab -->
             {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
             <x-shop::tabs.item
+                id="descritpion-tab"
                 class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.view.description')"
                 :is-selected="true"
@@ -91,6 +95,7 @@
             <!-- Additional Information Tab -->
             @if(count($attributeData))
                 <x-shop::tabs.item
+                    id="information-tab"
                     class="container mt-[60px] !p-0 max-1180:hidden"
                     :title="trans('shop::app.products.view.additional-information')"
                     :is-selected="false"
@@ -138,6 +143,7 @@
 
             <!-- Reviews Tab -->
             <x-shop::tabs.item
+                id="review-tab"
                 class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.view.review')"
                 :is-selected="false"
@@ -219,7 +225,7 @@
 
         <!-- Reviews Accordion -->
         <x-shop::accordion class="bg-gray-100" :is-active="false">
-            <x-slot:header>
+            <x-slot:header id="review-accordian-button">
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.review')
                 </p>
@@ -302,18 +308,21 @@
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
-                                <div class="mt-4 flex items-center gap-4">
-                                    <x-shop::products.star-rating 
-                                        :value="$avgRatings"
-                                        :is-editable=false
-                                    />
-
-                                    <div class="flex items-center gap-4">
-                                        <p class="text-sm text-zinc-500">
-                                            ({{ $product->approvedReviews->count() }} @lang('reviews'))
-                                        </p>
+                                @if ($totalRatings = $reviewHelper->getTotalRating($product))
+                                    <!-- Scroll To Reviews Section and Activate Reviews Tab -->
+                                    <div
+                                        class="mt-4 w-max cursor-pointer"
+                                        role="button"
+                                        tabindex="0"
+                                        @click="scrollToReview"
+                                    >
+                                        <x-shop::products.ratings
+                                            class="transition-all hover:border-gray-400"
+                                            :average="$avgRatings"
+                                            :total="$totalRatings"
+                                        />
                                     </div>
-                                </div>
+                                @endif
 
                                 {!! view_render_event('bagisto.shop.products.rating.after', ['product' => $product]) !!}
 
@@ -443,8 +452,6 @@
         <script type="module">
             app.component('v-product', {
                 template: '#v-product-template',
-
-                props: ['productId'],
 
                 data() {
                     return {
@@ -576,6 +583,28 @@
 
                         return value;
                     },
+
+                    scrollToReview() {
+                        let accordianElement = document.querySelector('#review-accordian-button');
+
+                        if (accordianElement) {
+                            accordianElement.click();
+
+                            accordianElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                        
+                        let tabElement = document.querySelector('#review-tab-button');
+
+                        if (tabElement) {
+                            tabElement.click();
+
+                            tabElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
                 },
             });
         </script>
