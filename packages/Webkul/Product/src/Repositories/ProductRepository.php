@@ -120,21 +120,34 @@ class ProductRepository extends Repository
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
-                $attributeValues = $attributeValues
+                $filteredAttributeValues = $attributeValues
                     ->where('channel', core()->getRequestedChannelCode())
                     ->where('locale', core()->getRequestedLocaleCode());
+
+                if ($attributeValues->isEmpty()) {
+                    $filteredAttributeValues = $attributeValues
+                        ->where('channel', core()->getRequestedChannelCode())
+                        ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel());
+                }
             } else {
-                $attributeValues = $attributeValues
+                $filteredAttributeValues = $attributeValues
                     ->where('channel', core()->getRequestedChannelCode());
             }
         } else {
             if ($attribute->value_per_locale) {
-                $attributeValues = $attributeValues
+                $filteredAttributeValues = $attributeValues
                     ->where('locale', core()->getRequestedLocaleCode());
+
+                if ($filteredAttributeValues->isEmpty()) {
+                    $filteredAttributeValues = $attributeValues
+                        ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel());
+                }
+            } else {
+                $filteredAttributeValues = $attributeValues;
             }
         }
 
-        return $attributeValues->first()?->product;
+        return $filteredAttributeValues->first()?->product;
     }
 
     /**

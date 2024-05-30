@@ -23,7 +23,7 @@ class SearchSynonymFactory extends Factory
 
         return [
             'terms' => $terms[array_rand($terms)],
-            'name'  => $this->faker->name,
+            'name'  => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
         ];
     }
 }

@@ -23,6 +23,7 @@
                     v-for="tab in tabs"
                     class="cursor-pointer px-8 pb-5 text-xl font-medium text-zinc-500"
                     :class="{'border-b-2 border-navyBlue text-black transition': tab.isActive }"
+                    :id="tab.$attrs.id + '-button'"
                     @click="change(tab)"
                 >
                     @{{ tab.title }}

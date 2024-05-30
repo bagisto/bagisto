@@ -23,7 +23,7 @@ class InventorySourceFactory extends Factory
             'code'           => $this->faker->unique()->word,
             'name'           => $this->faker->unique()->word,
             'description'    => $this->faker->sentence,
-            'contact_name'   => $this->faker->name,
+            'contact_name'   => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
             'contact_email'  => $this->faker->safeEmail,
             'contact_number' => $this->faker->phoneNumber,
             'country'        => $this->faker->countryCode,

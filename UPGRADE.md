@@ -33,6 +33,7 @@
 - [Renamed Admin Controller Method Names](#renamed-admin-controller-method-names)
 - [Removed Cart Traits](#removed-cart-traits)
 - [The Product Types Classes Updates](#the-product-type-class)
+- [Renamed `star-rating.blade.php`](#renamed-star-rating-blade)
 - [Moved `coupon.blade.php`](#moved-coupon-blade)
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
@@ -430,32 +431,32 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 
 **Impact Probability: Medium**
 
-1. We have made some of the methods in this class private. Here are the methods, please have a look.
+1. We have made some of the methods in this class protected. Here are the methods, please have a look.
 
 ```diff
 - public function validatedRequest(): array
-+ private function validatedRequest(): array
++ protected function validatedRequest(): array
 
 - public function processRequestedFilters(array $requestedFilters)
-+ private function processRequestedFilters(array $requestedFilters)
++ protected function processRequestedFilters(array $requestedFilters)
 
 - public function processRequestedSorting($requestedSort)
-+ private function processRequestedSorting($requestedSort)
++ protected function processRequestedSorting($requestedSort)
 
 - public function processRequestedPagination($requestedPagination): LengthAwarePaginator
-+ private function processRequestedPagination($requestedPagination): LengthAwarePaginator
++ protected function processRequestedPagination($requestedPagination): LengthAwarePaginator
 
 - public function processRequest(): void
-+ private function processRequest(): void
++ protected function processRequest(): void
 
 - public function sanitizeRow($row): \stdClass
-+ private function sanitizeRow($row): \stdClass
++ protected function sanitizeRow($row): \stdClass
 
 - public function formatData(): array
-+ private function formatData(): array
++ protected function formatData(): array
 
 - public function prepare(): void
-+ private function prepare(): void
++ protected function prepare(): void
 ```
 
 2. We have deprecated the 'toJson' method. Instead of 'toJson', please use the 'process' method.
@@ -1040,6 +1041,78 @@ class ShopServiceProvider extends ServiceProvider
 ```
 
 The getItems() methods of the menu() facade accept different areas of the menu. For example, for the admin area, you need to provide the config name of the menu, whereas for the shop area, you should provide the name 'customer'.
+
+4. The response for the Shop route `shop.api.products.index` or `/api/products` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+```diff
+{
+    "data": [
+        {
+            "id": 174,
+            "sku": "COMPLETELOOKSET2023",
+            "name": "All-in-One Smart Casual Outfit Set",
+            "description": "All-in-One Smart Casual Outfit Set",
+            "url_key": "all-in-one-smart-casual-outfit-set",
+            "base_image": {
+                "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+            },
+            "images": [
+                {
+                    "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+                }
+            ],
+            "is_new": true,
+            "is_featured": true,
+            "on_sale": true,
+            "is_saleable": true,
+            "is_wishlist": true,
+            "min_price": "$168.96",
+            "prices": {
+                "from": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                },
+                "to": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                }
+            },
+            "price_html": "<div class=\"grid gap-1.5\">\n<p class=\"flex items-center gap-4 max-sm:text-lg\">\n<span\nclass=\"text-zinc-500 line-through max-sm:text-base\"\n    aria-label=\"$176.96\"\n>\n$176.96\n</span>\n\n$168.96\n</p>\n\n</div>",
+-           "avg_ratings": 4.5,
++           "ratings": {
++               "average": "2.0",
++               "total": 2
++           }
+        }
+    ]
+}
+```
+
+<a name="renamed-star-rating-blade"></a>
+#### Renamed `star-rating.blade.php`
+
+**Impact Probability: Low**
+
+1. The file `packages/Webkul/Shop/src/Resources/views/components/products/star-rating.blade.php` has been renamed to the `packages/Webkul/Shop/src/Resources/views/components/products/ratings.blade.php`.
+
 
 <a name="moved-coupon-blade"></a>
 #### Moved `coupon.blade.php`

@@ -12,10 +12,8 @@ class AdminServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
-    public function boot(Router $router)
+    public function boot(Router $router): void
     {
         Route::middleware('web')->group(__DIR__.'/../Routes/web.php');
 
@@ -25,29 +23,21 @@ class AdminServiceProvider extends ServiceProvider
 
         Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'admin');
 
-        $this->composeView();
-
-        $this->registerACL();
-
         $this->app->register(EventServiceProvider::class);
     }
 
     /**
      * Register services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerConfig();
     }
 
     /**
      * Register package config.
-     *
-     * @return void
      */
-    protected function registerConfig()
+    protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
             dirname(__DIR__).'/Config/menu.php',
@@ -63,56 +53,5 @@ class AdminServiceProvider extends ServiceProvider
             dirname(__DIR__).'/Config/system.php',
             'core'
         );
-    }
-
-    /**
-     * Bind the data to the views.
-     *
-     * @return void
-     */
-    protected function composeView()
-    {
-        view()->composer([
-            'admin::settings.roles.create',
-            'admin::settings.roles.edit',
-        ], function ($view) {
-            $view->with('acl', $this->createACL());
-        });
-    }
-
-    /**
-     * Register ACL to entire application.
-     *
-     * @return void
-     */
-    protected function registerACL()
-    {
-        $this->app->singleton('acl', function () {
-            return $this->createACL();
-        });
-    }
-
-    /**
-     * Create ACL tree.
-     *
-     * @return mixed
-     */
-    protected function createACL()
-    {
-        static $tree;
-
-        if ($tree) {
-            return $tree;
-        }
-
-        $tree = Tree::create();
-
-        foreach (config('acl') as $item) {
-            $tree->add($item, 'acl');
-        }
-
-        $tree->items = core()->sortItems($tree->items);
-
-        return $tree;
     }
 }
