@@ -632,20 +632,38 @@
                                                 </p>
 
                                                 <div class="mb-4 flex flex-wrap gap-2">
-                                                    <p
-                                                        v-for="appliedColumnValue in (typeof column.value === 'string' ? getAppliedColumnValues(column.index) : column.value)"
-                                                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                    >
-                                                        <span v-text="appliedColumnValue"></span>
-                                                        
-                                                        <div>
-                                                            <span
-                                                                class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
-                                                            >
+                                                    <template v-if="column.type === 'date_range' || column.type === 'datetime_range'">
+                                                        <p class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white">
+                                                            <span>
+                                                                @{{ getFormattedAvailableDateRanges(column) }}
                                                             </span>
-                                                        </div>
-                                                    </p>
+
+                                                            <div>
+                                                                <span
+                                                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                    @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
+                                                                >
+                                                                </span>
+                                                            </div>
+                                                        </p>
+                                                    </template>
+
+                                                    <template v-else>
+                                                        <p
+                                                            v-for="appliedColumnValue in column.value"
+                                                            class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                        >
+                                                            <span v-text="appliedColumnValue"></span>
+
+                                                            <div>
+                                                                <span
+                                                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                    @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
+                                                                >
+                                                                </span>
+                                                            </div>
+                                                        </p>
+                                                    </template>
                                                 </div>
                                             </div>
                                         </div>
@@ -783,9 +801,9 @@
                  */
                 createOrUpdateFilter(params, { setErrors }) {
                     let applied = JSON.parse(JSON.stringify(this.applied));
-                    
+
                     applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => column.value.length > 0);
-                    
+
                     if (params.id) {
                         params._method = 'PUT';
                     }
@@ -848,15 +866,14 @@
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             this.$axios.delete(`{{ route('admin.datagrid.saved_filters.destroy', '') }}/${filter.id}`)
+                                .then(response => {
+                                    this.savedFilters.available = this.savedFilters.available.filter((savedFilter) => savedFilter.id !== filter.id);
 
-                            .then(response => {
-                                this.savedFilters.available = this.savedFilters.available.filter((savedFilter) => savedFilter.id !== filter.id);
-
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                            })
-                            .catch(error => {
-                                this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
-                            });
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                })
+                                .catch(error => {
+                                    this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                });
                         }
                     });
                 },
@@ -939,10 +956,16 @@
                     switch (column.type) {
                         case 'date_range':
                         case 'datetime_range':
+                            let appliedRanges = ['', ''];
+
                             let { range } = additional;
 
                             if (appliedColumn) {
-                                let appliedRanges = appliedColumn.value[0];
+                                if (typeof appliedColumn.value === 'string') {
+                                    appliedRanges = this.getAvailableDateRanges(appliedColumn);
+                                } else {
+                                    appliedRanges = appliedColumn.value[0];
+                                }
 
                                 if (range) {
                                     if (range.name == 'from') {
@@ -958,8 +981,6 @@
                                     appliedColumn.value = requestedValue;
                                 }
                             } else {
-                                let appliedRanges = ['', ''];
-
                                 if (range) {
                                     if (range.name == 'from') {
                                         appliedRanges[0] = requestedValue;
@@ -972,12 +993,14 @@
                                     this.filters.columns.push({
                                         index: column.index,
                                         label: column.label,
+                                        type: column.type,
                                         value: [appliedRanges]
                                     });
                                 } else {
                                     this.filters.columns.push({
                                         index: column.index,
                                         label: column.label,
+                                        type: column.type,
                                         value: requestedValue
                                     });
                                 }
@@ -992,6 +1015,7 @@
                                 this.filters.columns.push({
                                     index: column.index,
                                     label: column.label,
+                                    type: column.type,
                                     value: [requestedValue]
                                 });
                             }
@@ -1000,6 +1024,46 @@
                     }
 
                     this.isFilterDirty = true;
+                },
+
+                /**
+                 * Get available date ranges.
+                 *
+                 * @returns {Array}
+                 */
+                getAvailableDateRanges(appliedColumn)
+                {
+                    if (typeof appliedColumn?.value === 'string') {
+                        const availableColumn = this.available.columns.find(column => column.index === appliedColumn.index);
+
+                        const option = availableColumn.options.find(option => option.name === appliedColumn.value);
+
+                        return [option.from, option.to];
+                    }
+
+                    return appliedColumn?.value[0];
+                },
+
+                /**
+                 * Get formatted available date ranges.
+                 *
+                 * @returns {string}
+                 */
+                getFormattedAvailableDateRanges(appliedColumn)
+                {
+                    const availableDateRanges = this.getAvailableDateRanges(appliedColumn);
+
+                    return this.formatAvailableDateRanges(availableDateRanges);
+                },
+
+                /**
+                 * Format available date ranges.
+                 *
+                 * @returns {string}
+                 */
+                formatAvailableDateRanges(dateRanges)
+                {
+                    return dateRanges.join(' to ');
                 },
 
                 /**
@@ -1033,12 +1097,8 @@
                 getAppliedColumnValues(columnIndex) {
                     const appliedColumn = this.findAppliedColumn(columnIndex);
 
-                    if (typeof appliedColumn?.value === 'string') {
-                        const availableColumn = this.available.columns.find(column => column.index === columnIndex);
-
-                        const option = availableColumn.options.find(option => option.name === appliedColumn.value);
-
-                        return [[option.from, option.to].join(' to ')];
+                    if (appliedColumn?.type === 'date_range' || appliedColumn?.type === 'datetime_range') {
+                        return [this.getFormattedAvailableDateRanges(appliedColumn)];
                     }
 
                     return appliedColumn?.value ?? [];
@@ -1054,7 +1114,7 @@
                 removeAppliedColumnValue(columnIndex, appliedColumnValue) {
                     let appliedColumn = this.findAppliedColumn(columnIndex);
 
-                    if (typeof appliedColumn?.value === 'string') {
+                    if (appliedColumn?.type === 'date_range' || appliedColumn?.type === 'datetime_range') {
                         appliedColumn.value = [];
                     } else {
                         appliedColumn.value = appliedColumn?.value.filter(value => value !== appliedColumnValue);
