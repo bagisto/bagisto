@@ -102,7 +102,7 @@ class ElasticSearchRepository
             case 'boolean':
                 /**
                  * Need to remove this condition after the next release.
-                 * 
+                 *
                  * Previously, these attributes were not indexed in Elasticsearch.
                  * Therefore, we need to check if the attributes exist in the index
                  * to maintain backward compatibility.

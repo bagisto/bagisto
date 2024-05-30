@@ -4,8 +4,8 @@ namespace Webkul\Admin\DataGrids\Catalog;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
-use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
+use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 use Webkul\DataGrid\DataGrid;
@@ -329,7 +329,7 @@ class ProductDataGrid extends DataGrid
                 'query' => [],
             ]
         );
-        
+
         $this->dispatchEvent('process_request.after', $this);
     }
 
@@ -344,7 +344,7 @@ class ProductDataGrid extends DataGrid
             if ($attribute == 'all') {
                 $attribute = 'name';
             }
-            
+
             $filters['filter'][] = $this->getFilterValue($attribute, $value);
         }
 
@@ -370,7 +370,6 @@ class ProductDataGrid extends DataGrid
                         'attribute_family_id' => $values,
                     ],
                 ];
-
 
             case 'sku':
             case 'name':
