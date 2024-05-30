@@ -1,14 +1,36 @@
 <?php
 
+use Webkul\Core\Acl;
+use Webkul\Core\Core;
+use Webkul\Core\Menu;
+
 if (! function_exists('core')) {
     /**
      * Core helper.
-     *
-     * @return \Webkul\Core\Core
      */
-    function core()
+    function core(): Core
     {
         return app('core');
+    }
+}
+
+if (! function_exists('menu')) {
+    /**
+     * Menu helper.
+     */
+    function menu(): Menu
+    {
+        return app('menu');
+    }
+}
+
+if (! function_exists('acl')) {
+    /**
+     * Acl helper.
+     */
+    function acl(): Acl
+    {
+        return app('acl');
     }
 }
 
