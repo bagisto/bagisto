@@ -1,14 +1,25 @@
 <?php
 
+use Webkul\Core\Acl;
+use Webkul\Core\Core;
+
 if (! function_exists('core')) {
     /**
      * Core helper.
-     *
-     * @return \Webkul\Core\Core
      */
-    function core()
+    function core(): Core
     {
         return app('core');
+    }
+}
+
+if (! function_exists('acl')) {
+    /**
+     * Acl helper.
+     */
+    function acl(): Acl
+    {
+        return app('acl');
     }
 }
 
