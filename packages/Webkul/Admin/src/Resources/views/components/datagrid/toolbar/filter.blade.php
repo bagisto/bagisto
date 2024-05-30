@@ -956,18 +956,12 @@
                     switch (column.type) {
                         case 'date_range':
                         case 'datetime_range':
-                            let appliedRanges = ['', ''];
-
                             let { range } = additional;
 
                             if (appliedColumn) {
-                                if (typeof appliedColumn.value === 'string') {
-                                    appliedRanges = this.getAvailableDateRanges(appliedColumn);
-                                } else {
-                                    appliedRanges = appliedColumn.value[0];
-                                }
-
                                 if (range) {
+                                    let appliedRanges = this.getAvailableDateRanges(appliedColumn);
+
                                     if (range.name == 'from') {
                                         appliedRanges[0] = requestedValue;
                                     }
@@ -982,6 +976,8 @@
                                 }
                             } else {
                                 if (range) {
+                                    let appliedRanges = ['', ''];
+
                                     if (range.name == 'from') {
                                         appliedRanges[0] = requestedValue;
                                     }
