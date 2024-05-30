@@ -633,11 +633,11 @@
 
                                                 <div class="mb-4 flex flex-wrap gap-2">
                                                     <p
-                                                        v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
+                                                        v-for="appliedColumnValue in (typeof column.value === 'string' ? getAppliedColumnValues(column.index) : column.value)"
                                                         class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     >
                                                         <span v-text="appliedColumnValue"></span>
-
+                                                        
                                                         <div>
                                                             <span
                                                                 class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"

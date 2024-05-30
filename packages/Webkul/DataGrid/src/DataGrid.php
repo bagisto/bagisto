@@ -391,7 +391,7 @@ abstract class DataGrid
                             if (is_string($requestedValues)) {
                                 $rangeOption = collect($column->getRangeOptions())->firstWhere('name', $requestedValues);
 
-                                $requestedValues = [$rangeOption['from'], $rangeOption['to']];
+                                $requestedValues = [[$rangeOption['from'], $rangeOption['to']]];
                             }
 
                             foreach ($requestedValues as $value) {
@@ -409,7 +409,7 @@ abstract class DataGrid
                             if (is_string($requestedValues)) {
                                 $rangeOption = collect($column->getRangeOptions())->firstWhere('name', $requestedValues);
 
-                                $requestedValues = [$rangeOption['from'], $rangeOption['to']];
+                                $requestedValues = [[$rangeOption['from'], $rangeOption['to']]];
                             }
 
                             foreach ($requestedValues as $value) {
