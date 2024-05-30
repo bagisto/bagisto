@@ -40,7 +40,7 @@
                         <div>
                             <div
                                 class="relative inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-1 py-1.5 text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 ltr:pl-3 ltr:pr-5 rtl:pl-5 rtl:pr-3"
-                                :class="{'[&>*]:text-blue-600 [&>*]:dark:text-white': filters.columns.length > 0 }"
+                                :class="{'[&>*]:text-blue-600 [&>*]:dark:text-white': hasAnyAppliedColumn() }"
                             >
                                 <span class="icon-filter text-2xl"></span>
 
@@ -50,7 +50,7 @@
 
                                 <span
                                     class="icon-dot absolute right-2 top-1.5 text-sm font-bold"
-                                    v-if="filters.columns.length > 0"
+                                    v-if="hasAnyAppliedColumn()"
                                 >
                                 </span>
                             </div>
@@ -599,7 +599,7 @@
                                                 type="text"
                                                 name="name"
                                                 id="name"
-                                                ::value="getAppliedFilter?.name"
+                                                ::value="getAppliedSavedFilter?.name"
                                                 rules="required"
                                                 :label="trans('admin::app.components.datagrid.toolbar.filter.name')"
                                                 :placeholder="trans('admin::app.components.datagrid.toolbar.filter.name')"
@@ -732,7 +732,7 @@
             },
 
             mounted() {
-                this.filters.columns = this.applied.filters.columns.filter((column) => column.index !== 'all');
+                this.filters.columns = this.getAppliedColumns();
 
                 this.savedFilters.params.filters.columns = JSON.parse(JSON.stringify(this.filters.columns));
 
@@ -740,12 +740,30 @@
             },
 
             computed: {
-                getAppliedFilter() {
+                getAppliedSavedFilter() {
                     return this.savedFilters.available.find((filter) => filter.id == this.applied.savedFilterId);
-                }
+                },
             },
 
             methods: {
+                /**
+                 * Get applied columns.
+                 *
+                 * @returns {object}
+                 */
+                getAppliedColumns() {
+                    return this.applied.filters.columns.filter((column) => column.index !== 'all');
+                },
+
+                /**
+                 * Has any applied column.
+                 *
+                 * @returns {boolean}
+                 */
+                hasAnyAppliedColumn() {
+                    return this.getAppliedColumns().length > 0;
+                },
+
                 /**
                  * Go back to filters.
                  *
