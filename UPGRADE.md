@@ -19,6 +19,7 @@
 - [The `Webkul\DataGrid\DataGrid` class](#the-datagrid-class)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
+- [The product Elastic Search indexing](#the-elastic-indexing)
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
@@ -501,10 +502,10 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 <a name="product"></a>
 ### Product
 
-**Impact Probability: Medium**
-
 <a name="the-elastic-search-repository"></a>
 #### The `Webkul\Product\Repositories\ElasticSearchRepository` Repository
+
+**Impact Probability: Medium**
 
 1. We have enhanced the `search` method to accept two arguments. The first argument is an array containing the search parameters (e.g., category_id, etc.), while the second argument is an array containing the options.
 
@@ -580,6 +581,21 @@ If you've implemented your own product type or overridden existing type classes,
 - public function updateDefaultVariantId()
 ```
 
+<a name="the-elastic-indexing"></a>
+#### The product Elastic Search indexing
+
+**Impact Probability: Medium**
+
+Previously, Elastic Search was used only on the frontend and not in the admin section. For large catalogs, this caused the Product datagrid to be very slow. To address this issue, we have now introduced Elastic Search in the admin section as well.
+
+To make Elastic Search compatible with the admin section, some changes were necessary. Previously, only active products were indexed in Elastic Search. Now, all products are indexed with additional keys/information.
+
+Please run the following command to refresh the Elastic Search indices:
+
+
+```diff
+php artisan indexer:index --type=elastic
+```
 
 <a name="Sales"></a>
 ### Sales
