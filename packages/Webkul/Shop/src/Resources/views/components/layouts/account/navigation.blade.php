@@ -1,18 +1,4 @@
-<!--
-    - This code needs to be refactored to reduce the amount of PHP in the Blade
-    template as much as possible.
-
-    - Need to check the view composer capability for the component.
--->
 @php
-    $menu = \Webkul\Core\Tree::create();
-
-    foreach (config('menu.customer') as $item) {
-        $menu->add($item, 'menu');
-    }
-
-    $menu->items = core()->sortItems($menu->items);
-
     $customer = auth()->guard('customer')->user();
 @endphp
 
@@ -35,35 +21,33 @@
     </div>
 
     <!-- Account Navigation Menus -->
-    @foreach ($menu->items as $menuItem)
+    @foreach (menu()->getItems('customer') as $menuItem)
         <div>
             <!-- Account Navigation Toggler -->
             <div class="select-none pb-5 max-md:pb-1.5">
-                <p class="text-xl font-medium">@lang($menuItem['name'])</p>
+                <p class="text-xl font-medium">
+                        {{ $menuItem->getName() }}
+                    </p>
             </div>
 
             <!-- Account Navigation Content -->
-            <div class="grid rounded-md border border-b border-l-[1px] border-r border-t-0 border-zinc-200 max-md:border-none">
-                @if (! (bool) core()->getConfigData('general.content.shop.wishlist_option'))
-                    @php
-                        unset($menuItem['children']['wishlist']);
-                    @endphp
-                @endif
+            @if ($menuItem->haveChildren())
+                <div class="grid rounded-md border border-b border-l-[1px] border-r border-t-0 border-zinc-200 max-md:border-none">
+                    @foreach ($menuItem->getChildren() as $subMenuItem)
+                        <a href="{{ $subMenuItem->getUrl() }}">
+                            <div class="flex justify-between px-6 py-5 border-t border-zinc-200 hover:bg-zinc-100 cursor-pointer max-md:p-4 max-md:border-0 max-md:py-3 max-md:px-0 {{ $subMenuItem->isActive() ? 'bg-zinc-100' : '' }}">
+                                <p class="flex items-center gap-x-4 text-lg font-medium max-md:text-base">
+                                    <span class="{{ $subMenuItem->getIcon() }} text-2xl"></span>
 
-                @foreach ($menuItem['children'] as $subMenuItem)
-                    <a href="{{ $subMenuItem['url'] }}">
-                        <div class="flex justify-between px-6 py-5 border-t border-zinc-200 hover:bg-zinc-100 cursor-pointer max-md:p-4 max-md:border-0 max-md:py-3 max-md:px-0 {{ request()->routeIs($subMenuItem['route']) ? 'bg-zinc-100' : '' }}">
-                            <p class="flex items-center gap-x-4 text-lg font-medium max-md:text-base">
-                                <span class="{{ $subMenuItem['icon'] }}  text-2xl"></span>
+                                    {{ $subMenuItem->getName() }}
+                                </p>
 
-                                @lang($subMenuItem['name'])
-                            </p>
-
-                            <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
+                                <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            @endif
         </div>
     @endforeach
 </div>

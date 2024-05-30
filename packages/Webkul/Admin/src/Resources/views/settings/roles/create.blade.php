@@ -169,7 +169,7 @@
                         input-type="checkbox"
                         value-field="key"
                         id-field="key"
-                        :items="json_encode($acl->items)"
+                        :items="json_encode(acl()->getItems())"
                         :fallback-locale="config('app.fallback_locale')"
                     />
                 </div>
