@@ -3441,6 +3441,18 @@ return [
                     'info'  => 'Skonfiguruj gościnne zamówienie, stronę wyświetlania produktów, stronę wyświetlania koszyka, stronę główną sklepu, recenzję i udostępnianie atrybutów społecznościowych.',
                     'title' => 'Produkty',
 
+                    'search' => [
+                        'admin-mode-info'      => 'Mega Wyszukiwanie, Datagrid i inne funkcje wyszukiwania w panelu administratora będą oparte na wybranym silniku wyszukiwania.',
+                        'admin-mode'           => 'Tryb wyszukiwania administratora',
+                        'database'             => 'Baza danych',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Silnik wyszukiwania',
+                        'storefront-mode-info' => 'Funkcjonalność wyszukiwania na stronie sklepu będzie oparta na wybranym silniku wyszukiwania, w tym na stronie kategorii, stronie wyszukiwania i innych funkcjach wyszukiwania.',
+                        'storefront-mode'      => 'Tryb wyszukiwania na stronie sklepu',
+                        'title-info'           => 'Aby skonfigurować silnik wyszukiwania dla wyszukiwania produktów, możesz wybrać między bazą danych a Elasticsearch w zależności od swoich wymagań. Jeśli masz dużą liczbę produktów, zaleca się Elasticsearch.',
+                        'title'                => 'Wyszukiwanie',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Zezwalać na zakupy gości',
                         'allow-guest-checkout-hint' => 'Wskazówka: Jeśli jest włączone, opcję tę można skonfigurować dla każdego produktu osobno.',
@@ -3465,9 +3477,7 @@ return [
                         'buy-now-button-display' => 'Zezwalaj klientom na bezpośrednie zakupy produktów',
                         'cheapest-first'         => 'Najtańsze najpierw',
                         'comma-separated'        => 'Oddzielone przecinkami',
-                        'database'               => 'Baza danych',
                         'default-list-mode'      => 'Domyślny tryb listy',
-                        'elastic'                => 'Elastyczne wyszukiwanie',
                         'expensive-first'        => 'Najdroższe najpierw',
                         'from-a-z'               => 'Od A do Z',
                         'from-z-a'               => 'Od Z do A',
@@ -3476,7 +3486,6 @@ return [
                         'list'                   => 'Lista',
                         'oldest-first'           => 'Najstarsze najpierw',
                         'products-per-page'      => 'Liczba produktów na stronie',
-                        'search-mode'            => 'Tryb wyszukiwania',
                         'sort-by'                => 'Sortuj według',
                         'title'                  => 'Przód sklepu',
                         'title-info'             => 'Przód sklepu to interfejs dostępny dla klienta sklepu internetowego, prezentujący produkty, kategorie i nawigację dla płynnego doświadczenia zakupowego.',

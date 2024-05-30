@@ -26,10 +26,12 @@ class ProductController extends APIController
      */
     public function index(): JsonResource
     {
-        $products = $this->productRepository->getAll(array_merge(request()->query(), [
-            'status'               => 1,
-            'visible_individually' => 1,
-        ]));
+        $products = $this->productRepository
+            ->setSearchEngine(core()->getConfigData('catalog.products.search.storefront_mode'))
+            ->getAll(array_merge(request()->query(), [
+                'status'               => 1,
+                'visible_individually' => 1,
+            ]));
 
         if (! empty(request()->query('query'))) {
             /**

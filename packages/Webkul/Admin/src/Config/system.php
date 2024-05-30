@@ -337,21 +337,52 @@ return [
         'icon' => 'settings/product.svg',
         'sort' => 2,
     ], [
-        'key'    => 'catalog.products.admin_datagrid',
-        'name'   => 'admin::app.configuration.index.catalog.products.admin-datagrid.title',
-        'info'   => 'admin::app.configuration.index.catalog.products.admin-datagrid.title-info',
+        'key'    => 'catalog.products.search',
+        'name'   => 'admin::app.configuration.index.catalog.products.search.title',
+        'info'   => 'admin::app.configuration.index.catalog.products.search.title-info',
         'sort'   => 1,
         'fields' => [
             [
-                'name'    => 'search_mode',
-                'title'   => 'admin::app.configuration.index.catalog.products.admin-datagrid.search-mode',
+                'name'    => 'engine',
+                'title'   => 'admin::app.configuration.index.catalog.products.search.search-engine',
                 'type'    => 'select',
+                'default' => 'database',
                 'options' => [
                     [
-                        'title' => 'admin::app.configuration.index.catalog.products.admin-datagrid.database',
+                        'title' => 'admin::app.configuration.index.catalog.products.search.database',
                         'value' => 'database',
                     ], [
-                        'title' => 'admin::app.configuration.index.catalog.products.admin-datagrid.elastic',
+                        'title' => 'admin::app.configuration.index.catalog.products.search.elastic',
+                        'value' => 'elastic',
+                    ],
+                ],
+            ], [
+                'name'    => 'admin_mode',
+                'title'   => 'admin::app.configuration.index.catalog.products.search.admin-mode',
+                'info'    => 'admin::app.configuration.index.catalog.products.search.admin-mode-info',
+                'type'    => 'select',
+                'default' => 'database',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.database',
+                        'value' => 'database',
+                    ], [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.elastic',
+                        'value' => 'elastic',
+                    ],
+                ],
+            ], [
+                'name'    => 'storefront_mode',
+                'title'   => 'admin::app.configuration.index.catalog.products.search.storefront-mode',
+                'info'    => 'admin::app.configuration.index.catalog.products.search.storefront-mode-info',
+                'type'    => 'select',
+                'default' => 'database',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.database',
+                        'value' => 'database',
+                    ], [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.elastic',
                         'value' => 'elastic',
                     ],
                 ],
@@ -407,19 +438,6 @@ return [
         'sort'   => 5,
         'fields' => [
             [
-                'name'          => 'search_mode',
-                'title'         => 'admin::app.configuration.index.catalog.products.storefront.search-mode',
-                'type'          => 'select',
-                'options'       => [
-                    [
-                        'title' => 'admin::app.configuration.index.catalog.products.storefront.database',
-                        'value' => 'database',
-                    ], [
-                        'title' => 'admin::app.configuration.index.catalog.products.storefront.elastic',
-                        'value' => 'elastic',
-                    ],
-                ],
-            ], [
                 'name'          => 'mode',
                 'title'         => 'admin::app.configuration.index.catalog.products.storefront.default-list-mode',
                 'type'          => 'select',

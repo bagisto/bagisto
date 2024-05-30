@@ -275,10 +275,7 @@ class ProductDataGrid extends DataGrid
      */
     protected function processRequest(): void
     {
-        if (
-            core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic'
-            || core()->getConfigData('catalog.products.admin_datagrid.search_mode') != 'elastic'
-        ) {
+        if (core()->getConfigData('catalog.products.search.admin_mode') != 'elastic') {
             parent::processRequest();
 
             return;
