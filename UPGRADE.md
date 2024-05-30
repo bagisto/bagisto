@@ -115,6 +115,20 @@ There is no dependency needed to be updated at for this upgrade.
 + core()->getConfigData('sales.order_settings.stock_options.back_orders')
 ```
 
+4. The product storefront search mode configuration `core()->getConfigData('catalog.products.storefront.search_mode')` has been replaced with the following configurations, and the corresponding paths for retrieving configuration values have been updated:
+
+
+```diff
+- core()->getConfigData('catalog.products.storefront.search_mode')
+
++ core()->getConfigData('catalog.products.search.engine')
++ core()->getConfigData('catalog.products.search.admin_mode')
++ core()->getConfigData('catalog.products.search.storefront_mode')
+```
+
+`core()->getConfigData('catalog.products.search.engine')` represents the search engine for products. If "Elastic Search" is selected, elastic indexing will be enabled. The other two configurations (`catalog.products.search.admin_mode` and `catalog.products.search.storefront_mode`) will function relative to this configuration.
+
+
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names
 
