@@ -1011,6 +1011,36 @@ class ShopServiceProvider extends ServiceProvider
 }
 ```
 
+#### How to use it?
+
+##### For `Admin` package.
+
+```diff
+-    @foreach ($menu->items as $menuItem)
++    @foreach (menu()->getItems('admin') as $menuItem)
+        <div
+            class="px-4 group/item {{ $menu->getActive($menuItem) ? 'active' : 'inactive' }}"
+            onmouseenter="adjustSubMenuPosition(event)"
+        >
+        ...
+    @endforeach
+
+```
+
+##### For `Shop` package.
+
+```diff
+-    @foreach ($menu->items as $menuItem)
++    @foreach (menu()->getItems('customer') as $menuItem)
+        <div class="max-md:rounded-md max-md:border max-md:border-b max-md:border-l-[1px] max-md:border-r max-md:border-t-0 max-md:border-zinc-200">
+            <v-account-navigation>
+        ...
+    @endforeach
+
+```
+
+The getItems() methods of the menu() facade accept different areas of the menu. For example, for the admin area, you need to provide the config name of the menu, whereas for the shop area, you should provide the name 'customer'.
+
 <a name="moved-coupon-blade"></a>
 #### Moved `coupon.blade.php`
 
