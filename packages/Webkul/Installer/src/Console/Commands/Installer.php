@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Events\ComposerEvents;
+use Webkul\Installer\Helpers\DatabaseManager;
 
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\password;
@@ -198,23 +199,17 @@ class Installer extends Command
 
         $allowedLocales = $this->allowedChoice(
             'Please choose the allowed locales for your channels',
-            $this->locales
+            array_merge(['all' => 'All'], $this->locales)
         );
 
         $allowedCurrencies = $this->allowedChoice(
             'Please choose the allowed currencies for your channels',
-            $this->currencies
+            array_merge(['all' => 'All'], $this->currencies)
         );
 
-        $allowedLocales = array_values(array_unique(array_merge(
-            [$defaultLocale],
-            array_keys($allowedLocales)
-        )));
+        $allowedLocales = array_key_exists('all', $allowedLocales) ? array_values(array_unique(array_keys($this->locales))) : array_values(array_unique(array_merge([$defaultLocale], array_keys($allowedLocales))));
 
-        $allowedCurrencies = array_values(array_unique(array_merge(
-            [$defaultCurrency ?? 'USD'],
-            array_keys($allowedCurrencies)
-        )));
+        $allowedCurrencies = array_key_exists('all', $allowedCurrencies) ? array_values(array_unique(array_keys($this->currencies))) : array_values(array_unique(array_merge([$defaultCurrency ?? 'USD'], array_keys($allowedCurrencies))));
 
         return [
             'default_locale'     => $defaultLocale,
@@ -315,6 +310,11 @@ class Installer extends Command
             required: true
         );
 
+        $sampleProduct = select(
+            'Please select if you want some sample products after installation.',
+            ['true', 'false'],
+        );
+
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
 
         try {
@@ -328,6 +328,10 @@ class Installer extends Command
                     'status'   => 1,
                 ]
             );
+
+            if ($sampleProduct) {
+                app(DatabaseManager::class)->seedSampleProducts();
+            }
 
             $filePath = storage_path('installed');
 

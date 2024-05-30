@@ -130,7 +130,7 @@ class InstallerController extends Controller
 
         try {
             if (request()->input('sample_products')) {
-                $this->databaseManager->faker();
+                $this->databaseManager->seedSampleProducts();
             }
 
             DB::table('admins')->updateOrInsert(
