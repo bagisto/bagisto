@@ -1,6 +1,4 @@
-<!-- Category Carousel Component -->
-<v-category-carousel></v-category-carousel>
-
+<!-- Category Carousel Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"

@@ -1,6 +1,4 @@
-<!-- Static-Content Component -->
-<v-static-content></v-static-content>
-
+<!-- Static Content Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"
