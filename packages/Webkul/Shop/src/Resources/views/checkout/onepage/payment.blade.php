@@ -15,7 +15,7 @@
         type="text/x-template"
         id="v-payment-methods-template"
     >
-        <div class="mb-7">
+        <div class="mb-7 max-md:last:!mb-0">
             <template v-if="! methods">
                 <!-- Payment Method shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.payment-method />
@@ -25,21 +25,21 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.accordion.before') !!}
 
                 <!-- Accordion Blade Component -->
-                <x-shop::accordion class="!border-b-0">
+                <x-shop::accordion class="!border-b-0 max-md:rounded-xl max-md:!border-none max-md:!bg-gray-100">
                     <!-- Accordion Blade Component Header -->
-                    <x-slot:header class="!p-0">
+                    <x-slot:header class="!p-0 max-md:!p-4">
                         <div class="flex items-center justify-between">
-                            <h2 class="text-2xl font-medium max-sm:text-xl">
+                            <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-lg">
                                 @lang('shop::app.checkout.onepage.payment.payment-method')
                             </h2>
                         </div>
                     </x-slot>
     
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="mt-8 !p-0">
-                        <div class="flex flex-wrap gap-7">
+                    <x-slot:content class="mt-8 !p-0 max-md:mt-0 max-md:border max-md:!p-4">
+                        <div class="flex flex-wrap gap-7 max-md:gap-4 max-sm:gap-2.5">
                             <div 
-                                class="relative cursor-pointer max-sm:max-w-full max-sm:flex-auto"
+                                class="relative cursor-pointer max-md:max-w-full max-md:flex-auto"
                                 v-for="(payment, index) in methods"
                             >
                                 {!! view_render_event('bagisto.shop.checkout.payment-method.before') !!}
@@ -49,7 +49,7 @@
                                     name="payment[method]" 
                                     :value="payment.payment"
                                     :id="payment.method"
-                                    class="peer hidden"    
+                                    class="peer hidden"
                                     @change="store(payment)"
                                 >
     
@@ -61,12 +61,12 @@
 
                                 <label 
                                     :for="payment.method" 
-                                    class="block w-[190px] cursor-pointer rounded-xl border border-zinc-200 p-5 max-sm:w-full"
+                                    class="block w-[190px] cursor-pointer rounded-xl border border-zinc-200 p-5 max-md:flex max-md:w-full max-md:gap-2.5"
                                 >
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.before') !!}
 
                                     <img
-                                        class="max-h-[45px] max-w-[55px]"
+                                        class="max-h-11 max-w-14"
                                         :src="payment.image"
                                         width="55"
                                         height="55"
@@ -76,21 +76,24 @@
 
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.after') !!}
 
-                                    {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.before') !!}
+                                    <div>
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.before') !!}
 
-                                    <p class="mt-1.5 text-sm font-semibold">
-                                        @{{ payment.method_title }}
-                                    </p>
-                                    
-                                    {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.after') !!}
+                                        <p class="mt-1.5 text-sm font-semibold max-md:mt-1 max-sm:mt-0">
+                                            @{{ payment.method_title }}
+                                        </p>
+                                        
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.after') !!}
 
-                                    {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.before') !!}
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.before') !!}
 
-                                    <p class="mt-2.5 text-xs font-medium">
-                                        @{{ payment.description }}
-                                    </p> 
+                                        <p class="mt-2.5 text-xs font-medium max-md:mt-1 max-sm:mt-0">
+                                            @{{ payment.description }}
+                                        </p> 
 
-                                    {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.after') !!}
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.after') !!}
+    
+                                    </div>
                                 </label>
 
                                 {!! view_render_event('bagisto.shop.checkout.payment-method.after') !!}
@@ -130,6 +133,14 @@
                         })
                         .then(response => {
                             this.$emit('processed', response.data.cart);
+
+                            // Used in mobile view. 
+                            if (window.innerWidth <= 768) {
+                                window.scrollTo({
+                                    top: document.body.scrollHeight,
+                                    behavior: 'smooth'
+                                });
+                            }
                         })
                         .catch(error => {
                             this.$emit('processing', 'payment');

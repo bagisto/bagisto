@@ -200,7 +200,7 @@ return [
 
                 'bold-collections' => [
                     'content' => [
-                        'btn-title'   => 'Zobacz wszystko',
+                        'btn-title'   => 'Zobacz kolekcje',
                         'description' => 'Przedstawiamy nasze nowe odważne kolekcje! Podnieś swój styl dzięki śmiałym wzorom i żywym deklaracjom. Odkryj uderzające wzory i odważne kolory, które redefiniują Twoją garderobę. Przygotuj się, by zaakceptować niezwykłość!',
                         'title'       => 'Przygotuj się na nasze nowe odważne kolekcje!',
                     ],

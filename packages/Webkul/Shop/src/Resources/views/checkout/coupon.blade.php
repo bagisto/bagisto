@@ -12,13 +12,13 @@
         id="v-coupon-template"
     >
         <div class="flex justify-between text-right">
-            <p class="text-base max-sm:text-sm max-sm:font-normal">
+            <p class="text-base max-md:text-sm max-md:font-normal">
                 @{{ cart.coupon_code ? "@lang('shop::app.checkout.coupon.applied')" : "@lang('shop::app.checkout.coupon.discount')" }}
             </p>
 
             {!! view_render_event('bagisto.shop.checkout.cart.coupon.before') !!}
 
-            <p class="text-base font-medium max-sm:text-sm">
+            <p class="text-base font-medium max-md:text-sm">
                 <!-- Apply Coupon Form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -33,7 +33,7 @@
                             <!-- Modal Toggler -->
                             <x-slot:toggle>
                                 <span 
-                                    class="cursor-pointer text-[#0A49A7]"
+                                    class="cursor-pointer text-blue-700"
                                     role="button"
                                     tabindex="0"
                                     v-if="! cart.coupon_code"
@@ -44,17 +44,17 @@
 
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <h2 class="text-2xl font-medium max-sm:text-xl">
+                                <h2 class="text-2xl font-medium max-md:text-base">
                                     @lang('shop::app.checkout.coupon.apply')
                                 </h2>
                             </x-slot>
 
                             <!-- Modal Content -->
-                            <x-slot:content>
+                            <x-slot:content class="!px-4">
                                 <x-shop::form.control-group class="!mb-0">
                                     <x-shop::form.control-group.control
                                         type="text"
-                                        class="px-6 py-5"
+                                        class="px-6 py-4 max-md:!mb-0 max-md:!p-2.5"
                                         name="code"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.coupon.enter-your-code')"
@@ -70,19 +70,19 @@
                             <!-- Modal Footer -->
                             <x-slot:footer>
                                 <!-- Coupon Form Action Container -->
-                                <div class="flex flex-wrap items-center gap-4">
-                                    <div class="flex items-center gap-4">
-                                        <p class="text-sm font-medium text-zinc-500">
+                                <div class="flex flex-wrap items-center gap-4 max-md:justify-between">
+                                    <div class="flex gap-4 max-md:block">
+                                        <p class="text-sm font-medium text-zinc-500 max-md:text-left max-md:text-xs">
                                             @lang('shop::app.checkout.coupon.subtotal')
                                         </p>
 
-                                        <p class="text-3xl font-semibold max-sm:text-xl">
+                                        <p class="text-3xl font-semibold max-md:text-lg">
                                             @{{ cart.formatted_sub_total }}
                                         </p>
                                     </div>
 
                                     <x-shop::button
-                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3"
+                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:max-w-[153px] max-md:rounded-xl"
                                         :title="trans('shop::app.checkout.coupon.button-title')"
                                         ::loading="isStoring"
                                         ::disabled="isStoring"

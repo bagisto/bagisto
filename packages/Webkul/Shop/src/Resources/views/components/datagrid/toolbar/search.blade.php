@@ -26,26 +26,26 @@
             <template v-else>
                 <div class="flex w-full items-center gap-x-1">
                     <!-- Search Panel -->
-                    <div class="flex max-w-[445px] items-center max-sm:w-full max-sm:max-w-full">
+                    <div class="flex max-w-[445px] items-center max-md:w-full max-md:max-w-[250px]">
                         <div class="relative w-full">
                             <input
                                 type="text"
                                 name="search"
                                 :value="getSearchedValues('all')"
-                                class="rounded-lg border border-gray-300 bg-white px-3 py-2 ltr:pr-8 rtl:pl-8 text-base text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-md:max-w-[250px] ltr:pr-8 rtl:pl-8"
                                 placeholder="@lang('shop::app.components.datagrid.toolbar.search.title')"
                                 autocomplete="off"
                                 @keyup.enter="search"
                             >
 
-                            <div class="icon-search pointer-events-none absolute rtl:left-2.5 ltr:right-2.5 top-2 flex items-center text-xl">
+                            <div class="icon-search pointer-events-none absolute top-2 flex items-center text-xl max-md:top-2.5 ltr:right-2.5 rtl:left-2.5">
                             </div>
                         </div>
                     </div>
 
                     <!-- Information Panel -->
-                    <div class="ltr:pl-2.5 rtl:pr-2.5">
-                        <p class="text-sm font-light text-gray-800">
+                    <div class="max-md:hidden ltr:pl-2.5 rtl:pr-2.5">
+                        <p class="text-sm font-light text-gray-800 max-md:w-full">
                             @{{ "@lang('shop::app.components.datagrid.toolbar.results')".replace(':total', available.meta.total) }}
                         </p>
                     </div>
