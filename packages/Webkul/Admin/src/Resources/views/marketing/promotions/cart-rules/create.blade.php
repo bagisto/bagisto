@@ -754,7 +754,8 @@
                         <div
                             v-if="matchedAttribute.key == 'product|category_ids'
                             || matchedAttribute.key == 'product|category_ids'
-                            || matchedAttribute.key == 'product|parent::category_ids'"
+                            || matchedAttribute.key == 'product|parent::category_ids'
+                            || matchedAttribute.key == 'product|children::category_ids'"
                         >
                             <x-admin::tree.view
                                 input-type="checkbox"
@@ -1078,7 +1079,7 @@
 
                         let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
 
-                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].find((attribute) => attribute.key == this.condition.attribute);
+                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].find(attribute => attribute.key == this.condition.attribute);
 
                         if (
                             matchedAttribute['type'] == 'multiselect'
