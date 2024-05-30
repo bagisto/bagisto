@@ -26,6 +26,7 @@
 
                     <span>
                         <input
+                            :step="allowedMaxRange - Math.floor(allowedMaxRange) > 0 ? 0.01 : 1"
                             ref="minRange"
                             type="range"
                             :value="minRange"
