@@ -143,7 +143,7 @@
             <div>
                 <!-- Permission Type -->
                 <x-admin::form.control-group>
-                    <x-admin::form.control-group.label>
+                    <x-admin::form.control-group.label class="required">
                         @lang('admin::app.settings.roles.edit.permissions')
                     </x-admin::form.control-group.label>
 
@@ -173,7 +173,7 @@
                         input-type="checkbox"
                         value-field="key"
                         id-field="key"
-                        :items="json_encode($acl->items)"
+                        :items="json_encode(acl()->getItems())"
                         :value="json_encode($role->permissions ?? [])"
                         :fallback-locale="config('app.fallback_locale')"
                     />

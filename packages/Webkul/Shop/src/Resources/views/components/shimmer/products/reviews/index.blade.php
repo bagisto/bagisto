@@ -1,6 +1,6 @@
 <!-- Review Section Header -->
 <div class="mb-8 flex items-center justify-between gap-4 max-sm:flex-wrap">
-    <div class="shimmer h-[36px] w-[245px]"></div>
+    <div class="shimmer h-9 w-[245px]"></div>
 </div>
 
 <div class="flex gap-16 max-lg:flex-wrap">

@@ -200,7 +200,7 @@ return [
 
                 'bold-collections' => [
                     'content' => [
-                        'btn-title'   => 'Ver Todos',
+                        'btn-title'   => 'Ver Coleções',
                         'description' => 'Apresentamos nossas Novas Coleções Audaciosas! Eleve seu estilo com designs ousados e declarações vibrantes. Explore padrões impressionantes e cores audaciosas que redefinem seu guarda-roupa. Prepare-se para abraçar o extraordinário!',
                         'title'       => 'Prepare-se para as nossas novas Coleções Audaciosas!',
                     ],

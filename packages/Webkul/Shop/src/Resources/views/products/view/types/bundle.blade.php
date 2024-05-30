@@ -20,7 +20,7 @@
                 >
                 </v-product-bundle-option-item>
 
-                <div class="my-[20px] flex items-center justify-between">
+                <div class="my-5 flex items-center justify-between">
                     <p class="text-sm">
                         @lang('shop::app.products.view.type.bundle.total-amount')
                     </p>
