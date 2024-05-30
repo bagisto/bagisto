@@ -42,7 +42,8 @@
 			{{ view_render_event('bagisto.shop.checkout.success.image.before', ['order' => $order]) }}
 
 			<img 
-				class="max-md:h-[100px] max-md:w-[100px]" src="{{ bagisto_asset('images/thank-you.png') }}" 
+				class="max-md:h-[100px] max-md:w-[100px]"
+				src="{{ bagisto_asset('images/thank-you.png') }}" 
 				alt="thankyou" 
 				title=""
 			>

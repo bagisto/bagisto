@@ -90,7 +90,7 @@
                                         v-for="product in items"
                                     >
                                         <span
-                                            class="icon-cancel absolute top-5 z-[1] flex h-6 w-6 cursor-pointer items-center justify-center rounded-xl border border-zinc-200 bg-white text-2xl max-sm:top-10 max-sm:h-6 max-sm:w-6 max-sm:rounded-full max-sm:text-sm ltr:right-10 max-sm:ltr:right-4 rtl:left-10 max-sm:rtl:left-4"
+                                            class="icon-cancel absolute top-5 z-[1] flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-zinc-200 bg-white text-2xl max-sm:top-10 max-sm:h-6 max-sm:w-6 max-sm:rounded-full max-sm:text-sm ltr:right-10 max-sm:ltr:right-4 rtl:left-10 max-sm:rtl:left-4"
                                             @click="remove(product.id)"
                                         ></span>
 

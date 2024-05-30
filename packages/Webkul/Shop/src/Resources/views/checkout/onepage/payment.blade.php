@@ -58,7 +58,7 @@
                                     class="icon-radio-unselect peer-checked:icon-radio-select absolute top-5 cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5"
                                 >
                                 </label>
-    
+
                                 <label 
                                     :for="payment.method" 
                                     class="block w-[190px] cursor-pointer rounded-xl border border-zinc-200 p-5 max-md:flex max-md:w-full max-md:gap-2.5"
