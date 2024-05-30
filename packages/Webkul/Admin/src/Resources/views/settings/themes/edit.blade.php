@@ -123,7 +123,6 @@
                 <component
                     :errors="errors"
                     :is="componentName"
-                    ref="dynamicComponentThemeRef"
                 >
                 </component>
             </div>
@@ -136,7 +135,7 @@
         @includeWhen($theme->type === 'product_carousel', 'admin::settings.themes.edit.product-carousel')
 
         <!-- Category Template -->
-        @includeWhen($theme->type==='category_carousel', 'admin::settings.themes.edit.category-carousel')
+        @includeWhen($theme->type === 'category_carousel', 'admin::settings.themes.edit.category-carousel')
 
         <!-- Static-Content Template -->
         @includeWhen($theme->type === 'static_content', 'admin::settings.themes.edit.static-content')
@@ -170,7 +169,7 @@
                     };
                 },
 
-                created(){
+                created() {
                     this.componentName = this.themeType["{{ $theme->type }}"];
                 },
             });

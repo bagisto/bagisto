@@ -331,7 +331,7 @@ class Cart
             }
 
             if (! $item->product->status) {
-                throw new \Exception(__('shop::app.checkout.cart.item.inactive'));
+                throw new \Exception(__('shop::app.checkout.cart.inactive'));
             }
 
             if ($quantity <= 0) {

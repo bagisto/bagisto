@@ -87,6 +87,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
              * customer account details.
              */
             Route::prefix('account')->group(function () {
+                Route::get('', [CustomerController::class, 'account'])->name('shop.customers.account.index');
+
                 /**
                  * Profile.
                  */

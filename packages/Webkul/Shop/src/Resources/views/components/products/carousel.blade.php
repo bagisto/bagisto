@@ -12,17 +12,29 @@
         id="v-products-carousel-template"
     >
         <div
-            class="container mt-20 max-lg:px-8 max-sm:mt-8"
+            class="container mt-20 max-lg:px-8 max-sm:mt-7 max-sm:!px-4"
             v-if="! isLoading && products.length"
         >
             <div class="flex justify-between">
-                <h2 class="font-dmserif text-3xl max-sm:text-2xl">
+                <h2 class="font-dmserif text-3xl max-sm:text-xl">
                     @{{ title }}
                 </h2>
 
                 <div class="flex items-center justify-between gap-8">
+                    
+                    <a
+                        :href="navigationLink"
+                        v-if="navigationLink"
+                    >
+                        <p class="hidden items-center text-sm max-sm:flex">
+                            @lang('shop::app.components.products.carousel.view-all')
+
+                            <span class="icon-arrow-right text-sm"></span>
+                        </p>
+                    </a>
+
                     <span
-                        class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block cursor-pointer text-2xl"
+                        class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block cursor-pointer text-2xl max-sm:hidden"
                         role="button"
                         aria-label="@lang('shop::app.components.products.carousel.previous')"
                         tabindex="0"
@@ -31,7 +43,7 @@
                     </span>
 
                     <span
-                        class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block cursor-pointer text-2xl"
+                        class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block cursor-pointer text-2xl max-sm:hidden"
                         role="button"
                         aria-label="@lang('shop::app.components.products.carousel.next')"
                         tabindex="0"
@@ -43,17 +55,17 @@
 
             <div
                 ref="swiperContainer"
-                class="flex gap-8 pb-2.5 [&>*]:flex-[0] mt-10 overflow-auto scroll-smooth scrollbar-hide max-sm:mt-5"
+                class="flex gap-8 pb-2.5 [&>*]:flex-[0] mt-10 overflow-auto scroll-smooth scrollbar-hide max-sm:mt-5 max-sm:gap-4 max-sm:pb-0 max-sm:whitespace-nowrap"
             >
                 <x-shop::products.card
-                    class="min-w-[291px]"
+                    class="min-w-[291px] max-sm:h-fit max-sm:min-w-[198px]"
                     v-for="product in products"
                 />
             </div>
 
             <a
                 :href="navigationLink"
-                class="secondary-button mx-auto mt-5 block w-max rounded-2xl px-11 py-3 text-center text-base"
+                class="secondary-button mx-auto mt-5 block w-max rounded-2xl px-11 py-3 text-center text-base max-md:rounded-xl max-sm:mt-0 max-sm:hidden max-sm:py-3.5"
                 v-if="navigationLink"
             >
                 @lang('shop::app.components.products.carousel.view-all')
