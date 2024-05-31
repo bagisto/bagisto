@@ -101,6 +101,7 @@ class CoreServiceProvider extends ServiceProvider
         $loader->alias('core', CoreFacade::class);
 
         $loader->alias('menu', MenuFacade::class);
+
         $loader->alias('acl', AclFacade::class);
 
         $this->app->singleton('core', function () {

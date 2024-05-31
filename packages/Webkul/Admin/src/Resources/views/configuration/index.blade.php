@@ -26,7 +26,7 @@
 
     <!-- Page Content -->
     <div class="grid gap-y-8">
-        @foreach ($config->items as $itemKey => $item)
+        @foreach (core()->getConfigurationItems() as $itemKey => $item)
             <div>
                 <div class="grid gap-1">
                     <!-- Title of the Main Card -->

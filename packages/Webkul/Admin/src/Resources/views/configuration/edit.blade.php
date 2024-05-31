@@ -8,13 +8,7 @@
 
 <x-admin::layouts>
     <x-slot:title>
-        @if ($items = Arr::get($config->items, request()->route('slug') . '.children'))
-            @foreach ($items as $key => $item)
-                @if ( $key == request()->route('slug2'))
-                    {{ $title = trans($item['name']) }}
-                @endif
-            @endforeach
-        @endif
+        @php ($title = trans(core()->getActiveConfigurationItem()['name']))
     </x-slot>
 
     <!-- Configuration form fields -->
@@ -121,41 +115,39 @@
             </div>
         </div>
 
-        @if ($groups)
-            <div class="mt-6 grid grid-cols-[1fr_2fr] gap-10 max-xl:flex-wrap">
-                @foreach ($groups as $key => $item)
-                    <div class="grid content-start gap-2.5">
-                        <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                            @lang($item['name'])
-                        </p>
+        <div class="mt-6 grid grid-cols-[1fr_2fr] gap-10 max-xl:flex-wrap">
+            @foreach ($groups as $key => $item)
+                <div class="grid content-start gap-2.5">
+                    <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+                        @lang($item['name'])
+                    </p>
 
-                        <p class="leading-[140%] text-gray-600 dark:text-gray-300">
-                            @lang($item['info'] ?? '')
-                        </p>
-                    </div>
+                    <p class="leading-[140%] text-gray-600 dark:text-gray-300">
+                        @lang($item['info'] ?? '')
+                    </p>
+                </div>
 
-                    <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
-                        @foreach ($item['fields'] as $field)
-                            @if (
-                                $field['type'] == 'blade'
-                                && view()->exists($field['path'])
-                            )
-                                {!! view($field['path'], compact('field'))->render() !!}
-                            @else 
-                                @include ('admin::configuration.field-type')
-                            @endif
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    @foreach ($item['fields'] as $field)
+                        @if (
+                            $field['type'] == 'blade'
+                            && view()->exists($field['path'])
+                        )
+                            {!! view($field['path'], compact('field'))->render() !!}
+                        @else 
+                            @include ('admin::configuration.field-type')
+                        @endif
 
-                            @php ($hint = $field['title'] . '-hint')
+                        @php ($hint = $field['title'] . '-hint')
 
-                            @if ($hint !== __($hint))
-                                <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang($hint)
-                                </p>
-                            @endif
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
-        @endif
+                        @if ($hint !== __($hint))
+                            <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
+                                @lang($hint)
+                            </p>
+                        @endif
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
     </x-admin::form>
 </x-admin::layouts>

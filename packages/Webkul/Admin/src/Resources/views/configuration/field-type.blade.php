@@ -1,35 +1,9 @@
-@inject('coreConfigRepository', 'Webkul\Core\Repositories\CoreConfigRepository')
-
 @php
-    $nameKey = $item['key'] . '.' . $field['name'];
+    $name = core()->getNameField($nameKey = $item['key'] . '.' . $field['name']);
 
-    $name = $coreConfigRepository->getNameField($nameKey);
+    $validations = core()->getFieldValidations($field);
 
-    $validations = $coreConfigRepository->getValidations($field);
-
-    $isRequired = Str::contains($validations, 'required') ? 'required' : '';
-
-    $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
-
-    $field = collect([
-        ...$field,
-        'isVisible' => true,
-    ])->map(function ($value, $key) use($coreConfigRepository) {
-        if ($key == 'options') {
-            return collect($coreConfigRepository->getOptions($value))->map(fn ($option) => [
-                'title' => trans($option['title']),
-                'value' => $option['value'],
-            ])->toArray();
-        }
-
-        return $value;
-    })->toArray();
-
-    if (! empty($field['depends'])) {
-        [$fieldName, $fieldValue] = explode(':' , $field['depends']);
-
-        $dependNameKey = $item['key'] . '.' . $fieldName;
-    }
+    $field = core()->getMappedField($field);
 @endphp
 
 <input
@@ -39,19 +13,19 @@
 />
 
 <v-configurable
-    channel-count="{{ core()->getAllChannels()->count() }}"
-    channel-locale="{{ $channelLocaleInfo }}"
+    channel-locale="{{ core()->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code) }}"
+    src="{{ Storage::url($value = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
+    depend-name="{{ core()->getDependFieldName($field, $item) }}"
+    is-require="{{ Str::contains($validations, 'required') ? 'required' : '' }}"
+    field-data="{{ json_encode($field) }}"
+    channel-count="{{ $channels->count() }}"
     current-channel="{{ $currentChannel }}"
     current-locale="{{ $currentLocale }}"
-    depend-name="{{ isset($field['depends']) ? $coreConfigRepository->getNameField($dependNameKey) : ''}}"
-    field-data="{{ json_encode($field) }}"
     info="{{ trans($field['info'] ?? '') }}"
-    is-require="{{ $isRequired }}"
     label="{{ trans($field['title']) }}"
-    name="{{ $name }}"
-    src="{{ Storage::url(core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
     validations="{{ $validations }}"
-    value="{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}"
+    value="{{ $value }}"
+    name="{{ $name }}"
 >
     <div class="mb-4">
         <div class="shimmer mb-1.5 h-4 w-24"></div>
