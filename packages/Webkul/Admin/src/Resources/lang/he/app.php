@@ -3975,9 +3975,9 @@ return [
                 'filter' => [
                     'apply-filters-btn' => 'החל מסננים',
                     'back-btn'          => 'חזרה',
-                    'clear-btn'         => 'נקה',
                     'create-new-filter' => 'צור פילטר חדש',
                     'custom-filters'    => 'פילטרים מותאמים אישית',
+                    'delete-error'      => 'משהו השתבש בעת מחיקת המסנן, אנא נסה שוב.',
                     'delete-success'    => 'הפילטר נמחק בהצלחה.',
                     'empty-description' => 'אין פילטרים נבחרים זמינים לשמירה. יש לבחור פילטרים לשמירה.',
                     'empty-title'       => 'הוסף פילטרים לשמירה',

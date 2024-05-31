@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\DataGrid;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\DataGrid\Repositories\SavedFilterRepository;
 
@@ -25,12 +26,16 @@ class SavedFilterController extends Controller
             'name' => 'required|unique:saved_filters,name,NULL,id,src,'.request('src').',user_id,'.$userId,
         ]);
 
+        Event::dispatch('datagrid.saved_filter.create.before');
+
         $savedFilter = $this->savedFilterRepository->create([
             'user_id' => $userId,
             'name'    => request('name'),
             'src'     => request('src'),
             'applied' => request('applied'),
         ]);
+
+        Event::dispatch('datagrid.saved_filter.create.after', $savedFilter);
 
         return response()->json([
             'data'    => $savedFilter,
@@ -43,10 +48,12 @@ class SavedFilterController extends Controller
      */
     public function get()
     {
-        return $this->savedFilterRepository->findWhere([
+        $savedFilters = $this->savedFilterRepository->findWhere([
             'src'     => request()->get('src'),
             'user_id' => auth()->guard('admin')->user()->id,
         ]);
+
+        return response()->json(['data' => $savedFilters]);
     }
 
     /**
@@ -61,7 +68,7 @@ class SavedFilterController extends Controller
         ]);
 
         $savedFilter = $this->savedFilterRepository->findOneWhere([
-            'id'     => $id,
+            'id'      => $id,
             'user_id' => auth()->guard('admin')->user()->id,
         ]);
 
@@ -69,14 +76,18 @@ class SavedFilterController extends Controller
             return response()->json([], 404);
         }
 
-        $updateFilter = $this->savedFilterRepository->update(request()->only([
+        Event::dispatch('datagrid.saved_filter.update.before', $id);
+
+        $updatedFilter = $this->savedFilterRepository->update(request()->only([
             'name',
             'src',
             'applied',
         ]), $id);
 
+        Event::dispatch('datagrid.saved_filter.update.after', $updatedFilter);
+
         return response()->json([
-            'data'    => $updateFilter,
+            'data'    => $updatedFilter,
             'message' => trans('admin::app.components.datagrid.toolbar.filter.updated-success'),
         ]);
     }
@@ -86,10 +97,20 @@ class SavedFilterController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->savedFilterRepository->deleteWhere([
+        Event::dispatch('datagrid.saved_filter.delete.before', $id);
+
+        $success = $this->savedFilterRepository->deleteWhere([
             'id'      => $id,
             'user_id' => auth()->guard('admin')->user()->id,
         ]);
+
+        Event::dispatch('datagrid.saved_filter.delete.after', $id);
+
+        if (! $success) {
+            return response()->json([
+                'message' => trans('admin::app.components.datagrid.toolbar.filter.delete-error'),
+            ]);
+        }
 
         return response()->json([
             'message' => trans('admin::app.components.datagrid.toolbar.filter.delete-success'),

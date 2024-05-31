@@ -3975,9 +3975,9 @@ return [
                 'filter' => [
                     'apply-filters-btn' => '应用过滤器',
                     'back-btn'          => '返回',
-                    'clear-btn'         => '清除',
                     'create-new-filter' => '创建新过滤器',
                     'custom-filters'    => '自定义过滤器',
+                    'delete-error'      => '删除过滤器时出了点问题，请再试一次。',
                     'delete-success'    => '成功删除过滤器。',
                     'empty-description' => '没有可保存的选定过滤器。请选择要保存的过滤器。',
                     'empty-title'       => '添加要保存的过滤器',

@@ -3975,9 +3975,9 @@ return [
                 'filter' => [
                     'apply-filters-btn' => 'フィルタを適用する',
                     'back-btn'          => '戻る',
-                    'clear-btn'         => 'クリア',
                     'create-new-filter' => '新しいフィルターを作成',
                     'custom-filters'    => 'カスタムフィルター',
+                    'delete-error'      => 'フィルターの削除中に問題が発生しました。もう一度お試しください。',
                     'delete-success'    => 'フィルターは正常に削除されました。',
                     'empty-description' => '保存する選択されたフィルターはありません。保存するフィルターを選択してください。',
                     'empty-title'       => '保存するフィルターを追加',

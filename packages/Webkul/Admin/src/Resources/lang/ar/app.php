@@ -3975,9 +3975,9 @@ return [
                 'filter' => [
                     'apply-filters-btn' => 'تطبيق الفلاتر',
                     'back-btn'          => 'رجوع',
-                    'clear-btn'         => 'مسح',
                     'create-new-filter' => 'إنشاء تصفية جديدة',
                     'custom-filters'    => 'تصفيات مخصصة',
+                    'delete-error'      => 'حدث خطأ ما أثناء حذف الفلتر، يرجى المحاولة مرة أخرى.',
                     'delete-success'    => 'تم حذف التصفية بنجاح.',
                     'empty-description' => 'لا توجد تصفيات محددة متاحة للحفظ. يرجى تحديد التصفيات للحفظ.',
                     'empty-title'       => 'إضافة تصفيات للحفظ',

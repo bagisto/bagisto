@@ -3975,9 +3975,9 @@ return [
                 'filter' => [
                     'apply-filters-btn' => 'Filters toepassen',
                     'back-btn'          => 'Terug',
-                    'clear-btn'         => 'Wissen',
                     'create-new-filter' => 'Nieuwe filter maken',
                     'custom-filters'    => 'Aangepaste filters',
+                    'delete-error'      => 'Er is iets misgegaan bij het verwijderen van het filter, probeer het opnieuw.',
                     'delete-success'    => 'Filter is succesvol verwijderd.',
                     'empty-description' => 'Er zijn geen geselecteerde filters beschikbaar om op te slaan. Selecteer filters om op te slaan.',
                     'empty-title'       => 'Filters toevoegen om op te slaan',

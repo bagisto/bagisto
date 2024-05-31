@@ -3975,9 +3975,9 @@ return [
                 'filter' => [
                     'apply-filters-btn' => 'Aplicar filtros',
                     'back-btn'          => 'Voltar',
-                    'clear-btn'         => 'Limpar',
                     'create-new-filter' => 'Criar novo filtro',
                     'custom-filters'    => 'Filtros personalizados',
+                    'delete-error'      => 'Algo deu errado ao excluir o filtro, por favor tente novamente.',
                     'delete-success'    => 'O filtro foi excluído com sucesso.',
                     'empty-description' => 'Não há filtros selecionados disponíveis para salvar. Por favor, selecione filtros para salvar.',
                     'empty-title'       => 'Adicionar filtros para salvar',

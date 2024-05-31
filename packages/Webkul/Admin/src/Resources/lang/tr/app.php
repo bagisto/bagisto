@@ -3976,9 +3976,9 @@ return [
                 'filter' => [
                     'apply-filters-btn' => 'Filtreleri Uygula',
                     'back-btn'          => 'Geri',
-                    'clear-btn'         => 'Temizle',
                     'create-new-filter' => 'Yeni Filtre Oluştur',
                     'custom-filters'    => 'Özel Filtreler',
+                    'delete-error'      => 'Filtre silinirken bir hata oluştu, lütfen tekrar deneyin.',
                     'delete-success'    => 'Filtre başarıyla silindi.',
                     'empty-description' => 'Kaydedilecek seçili filtre yok. Lütfen kaydetmek için filtreleri seçin.',
                     'empty-title'       => 'Kaydedilecek Filtreler Ekle',

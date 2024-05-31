@@ -126,7 +126,7 @@
 
                                     <div
                                         v-if="hasAnyAppliedColumn()"
-                                        class="cursor-pointer px-2.5 text-xs font-medium leading-6 text-blue-600 transition-all hover:underline ltr:ml-16 rtl:mr-16"
+                                        class="cursor-pointer text-xs font-medium leading-6 text-blue-600 transition-all hover:underline ltr:ml-20 rtl:mr-20"
                                         @click="removeAllAppliedFilters()"
                                     >
                                         @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
@@ -872,7 +872,7 @@
                             params: { src: this.src }
                         })
                         .then(response => {
-                            this.savedFilters.available = response.data;
+                            this.savedFilters.available = response.data.data;
                         })
                         .catch(error => {});
                 },
