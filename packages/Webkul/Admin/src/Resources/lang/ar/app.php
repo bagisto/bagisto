@@ -3099,6 +3099,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'نشط',
                 'add-filter-btn'                => 'إضافة مرشح',
                 'add-footer-link-btn'           => 'إضافة رابط التذييل',
                 'add-image-btn'                 => 'إضافة صورة',
@@ -3122,6 +3123,7 @@ return [
                 'footer-link-form-title'        => 'رابط التذييل',
                 'footer-title'                  => 'العنوان',
                 'general'                       => 'عام',
+                'inactive'                      => 'غير نشط',
                 'html'                          => 'نص HTML',
                 'image'                         => 'صورة',
                 'image-size'                    => 'يجب أن تكون دقة الصورة (1920 بكسل × 700 بكسل)',
@@ -3134,6 +3136,7 @@ return [
                 'name'                          => 'الاسم',
                 'no'                            => 'لا',
                 'new'                           => 'جديد',
+                'parent-id'                     => 'معرف الأصل',
                 'preview'                       => 'معاينة',
                 'product-carousel'              => 'شريط المنتجات',
                 'product-carousel-description'  => 'قدم المنتجات بأناقة باستخدام شريط المنتجات الديناميكي والمتجاوب.',

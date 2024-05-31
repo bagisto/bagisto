@@ -3099,6 +3099,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => '活动',
                 'add-filter-btn'                => '添加过滤器',
                 'add-footer-link-btn'           => '添加页脚链接',
                 'add-image-btn'                 => '添加图片',
@@ -3122,6 +3123,7 @@ return [
                 'footer-link-form-title'        => '页脚链接',
                 'footer-title'                  => '标题',
                 'general'                       => '通用',
+                'inactive'                      => '非活动',
                 'html'                          => 'HTML',
                 'image'                         => '图片',
                 'image-size'                    => '图片分辨率应为（1920px x 700px）',
@@ -3134,6 +3136,7 @@ return [
                 'name'                          => '名称',
                 'no'                            => '不',
                 'new'                           => '新',
+                'parent-id'                     => '父ID',
                 'preview'                       => '预览',
                 'product-carousel'              => '产品轮播',
                 'product-carousel-description'  => '使用动态和响应式产品轮播优雅地展示产品。',

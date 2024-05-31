@@ -3099,6 +3099,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'アクティブ',
                 'add-filter-btn'                => 'フィルターを追加',
                 'add-footer-link-btn'           => 'フッターリンクを追加',
                 'add-image-btn'                 => '画像を追加',
@@ -3123,6 +3124,7 @@ return [
                 'footer-title'                  => 'タイトル',
                 'general'                       => '一般',
                 'html'                          => 'HTML',
+                'parent-id'                     => '親ID',
                 'image'                         => '画像',
                 'image-size'                    => '画像の解像度は（1920px X 700px）である必要があります',
                 'image-title'                   => '画像のタイトル',

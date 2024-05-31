@@ -3099,6 +3099,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Attivo',
                 'add-filter-btn'                => 'Aggiungi Filtro',
                 'add-footer-link-btn'           => 'Aggiungi Link Piè di Pagina',
                 'add-image-btn'                 => 'Aggiungi Immagine',
@@ -3123,6 +3124,7 @@ return [
                 'footer-title'                  => 'Titolo',
                 'general'                       => 'Generale',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inattivo',
                 'image'                         => 'Immagine',
                 'image-size'                    => 'La risoluzione dell\'immagine dovrebbe essere (1920px X 700px)',
                 'image-title'                   => 'Titolo Immagine',
@@ -3134,6 +3136,7 @@ return [
                 'name'                          => 'Nome',
                 'no'                            => 'No',
                 'new'                           => 'Nuovo',
+                'parent-id'                     => 'ID Genitore',
                 'preview'                       => 'Anteprima',
                 'product-carousel'              => 'Carosello Prodotti',
                 'product-carousel-description'  => 'Mostra i prodotti in modo elegante con un carosello di prodotti dinamico e responsivo.',

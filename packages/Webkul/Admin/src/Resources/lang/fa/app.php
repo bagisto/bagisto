@@ -3099,6 +3099,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'فعال',
                 'add-filter-btn'                => 'افزودن فیلتر',
                 'add-footer-link-btn'           => 'افزودن لینک پاورقی',
                 'add-image-btn'                 => 'افزودن تصویر',
@@ -3123,6 +3124,7 @@ return [
                 'footer-title'                  => 'عنوان',
                 'general'                       => 'عمومی',
                 'html'                          => 'HTML',
+                'inactive'                      => 'غیرفعال',
                 'image'                         => 'تصویر',
                 'image-size'                    => 'اندازه تصویر باید (۱۹۲۰px × ۷۰۰px) باشد.',
                 'image-title'                   => 'عنوان تصویر',
@@ -3134,6 +3136,7 @@ return [
                 'name'                          => 'نام',
                 'no'                            => 'خیر',
                 'New'                           => 'جدید',
+                'parent-id'                     => 'شناسه والد',
                 'preview'                       => 'پیش‌نمایش',
                 'product-carousel'              => 'کاروسل محصولات',
                 'product-carousel-description'  => 'نمایش محصولات به شیوه‌ای شیک با کاروسل محصولات پویا و واکنش‌گرا.',

@@ -363,7 +363,7 @@
                                     <option
                                         v-for="option in filters.applied.options"
                                         :value="option.id"
-                                        :text="option.name"
+                                        :text="option.label ?? option.admin_name"
                                     ></option>
                                 </x-admin::form.control-group.control>
                             </template>
@@ -374,7 +374,7 @@
                                     name="value"
                                     rules="required"
                                     :label="trans('admin::app.settings.themes.edit.value-input')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')" 
                                 />
                             </template>
 
@@ -416,11 +416,11 @@
                                 options: [
                                     {
                                         'id': 0,
-                                        'name': '@lang('admin::app.settings.themes.edit.no')',
+                                        'admin_name': '@lang('admin::app.settings.themes.edit.no')',
                                     },
                                     {
                                         'id': 1,
-                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
+                                        'admin_name': '@lang('admin::app.settings.themes.edit.yes')',
                                     },
                                 ],
                             },
@@ -432,11 +432,11 @@
                                 options: [
                                     {
                                         'id': 0,
-                                        'name': '@lang('admin::app.settings.themes.edit.no')',
+                                        'admin_name': '@lang('admin::app.settings.themes.edit.no')',
                                     },
                                     {
                                         'id': 1,
-                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
+                                        'admin_name': '@lang('admin::app.settings.themes.edit.yes')',
                                     },
                                 ],
                             },
@@ -463,6 +463,8 @@
                         key: key,
                         value: this.options.filters[key],
                     }));
+
+                [this.filters.applied] = this.filters.available;
             },
 
             methods: {

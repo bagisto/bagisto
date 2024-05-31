@@ -3099,6 +3099,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'সক্রিয়',
                 'add-filter-btn'                => 'ফিল্টার যোগ করুন',
                 'add-footer-link-btn'           => 'ফুটার লিংক যোগ করুন',
                 'add-image-btn'                 => 'ছবি যোগ করুন',
@@ -3123,6 +3124,7 @@ return [
                 'footer-title'                  => 'শিরোনাম',
                 'general'                       => 'সাধারণ',
                 'html'                          => 'এইচটিএমএল',
+                'inactive'                      => 'নিষ্ক্রিয়',
                 'image'                         => 'চিত্র',
                 'image-size'                    => 'চিত্রের রেজোলিউশন হতে হবে (1920px X 700px)',
                 'image-title'                   => 'চিত্র শিরোনাম',
@@ -3134,6 +3136,7 @@ return [
                 'name'                          => 'নাম',
                 'no'                            => 'না',
                 'new'                           => 'নতুন',
+                'parent-id'                     => 'প্যারেন্ট আইডি',
                 'preview'                       => 'প্রিভিউ',
                 'product-carousel'              => 'পণ্য ক্যারোসেল',
                 'product-carousel-description'  => 'একটি গতিপ্রদ এবং সাঁচামুঁচো পণ্য ক্যারোসেল দ্বারা পণ্যগুলি প্রদর্শন করুন।',
