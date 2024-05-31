@@ -40,7 +40,7 @@
                         <!-- Saved Customer Addresses Cards -->
                         <div class="mb-2 grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-md:mt-4 max-md:grid-cols-1">
                             <div
-                                class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap"
+                                class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap max-md:rounded-lg"
                                 v-for="address in customerSavedAddresses.billing"
                             >
                                 <!-- Actions -->
@@ -71,7 +71,7 @@
 
                                 <!-- Details -->
                                 <label
-                                    class="block cursor-pointer rounded-xl p-5"
+                                    class="block cursor-pointer rounded-xl p-5 max-sm:rounded-lg"
                                     :for="`billing_address_id_${address.id}`"
                                 >
                                     <span class="icon-checkout-address text-6xl text-navyBlue"></span>
@@ -100,7 +100,7 @@
 
                             <!-- New Address Card -->
                             <div
-                                class="flex max-w-[414px] cursor-pointer items-center justify-center rounded-xl border border-zinc-200 p-5 max-md:flex-wrap"
+                                class="flex max-w-[414px] cursor-pointer items-center justify-center rounded-xl border border-zinc-200 p-5 max-md:flex-wrap max-md:rounded-lg"
                                 @click="activeAddressForm = 'billing'"
                                 v-if="! cart.billing_address"
                             >
@@ -160,7 +160,7 @@
                                 <!-- Saved Customer Addresses Cards -->
                                 <div class="mb-2 grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-md:mt-4 max-md:grid-cols-1">
                                     <div
-                                        class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap"
+                                        class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap max-md:rounded-lg"
                                         v-for="address in customerSavedAddresses.shipping"
                                     >
                                         <!-- Actions -->
@@ -191,7 +191,7 @@
 
                                         <!-- Details -->
                                         <label
-                                            class="block cursor-pointer rounded-xl p-5"
+                                            class="block cursor-pointer rounded-xl p-5 max-md:rounded-lg"
                                             :for="`shipping_address_id_${address.id}`"
                                         >
                                             <span class="icon-checkout-address text-6xl text-navyBlue"></span>
@@ -220,7 +220,7 @@
 
                                     <!-- New Address Card -->
                                     <div
-                                        class="flex max-w-[414px] cursor-pointer items-center justify-center rounded-xl border border-zinc-200 p-5 max-md:flex-wrap"
+                                        class="flex max-w-[414px] cursor-pointer items-center justify-center rounded-xl border border-zinc-200 p-5 max-md:flex-wrap max-md:rounded-lg"
                                         @click="selectedAddressForEdit = null; activeAddressForm = 'shipping'"
                                         v-if="! cart.shipping_address"
                                     >
@@ -246,7 +246,7 @@
                         <!-- Proceed Button -->
                         <div class="mt-4 flex justify-end max-md:my-4">
                             <x-shop::button
-                                class="primary-button rounded-2xl px-11 py-3 max-md:rounded-xl max-sm:w-full max-sm:max-w-full"
+                                class="primary-button rounded-2xl px-11 py-3 max-md:rounded-lg max-sm:w-full max-sm:max-w-full max-sm:py-2"
                                 :title="trans('shop::app.checkout.onepage.address.proceed')"
                                 ::loading="isStoring"
                                 ::disabled="isStoring"
@@ -315,7 +315,7 @@
                         <!-- Save Button -->
                         <div class="mt-4 flex justify-end">
                             <x-shop::button
-                                class="primary-button rounded-2xl px-11 py-3 max-md:rounded-xl max-sm:w-full max-sm:max-w-full"
+                                class="primary-button rounded-2xl px-11 py-3 max-md:rounded-lg max-sm:w-full max-sm:max-w-full"
                                 :title="trans('shop::app.checkout.onepage.address.save')"
                                 ::loading="isStoring"
                                 ::disabled="isStoring"

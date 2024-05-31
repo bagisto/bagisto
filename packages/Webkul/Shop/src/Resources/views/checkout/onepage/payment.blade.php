@@ -25,7 +25,7 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.accordion.before') !!}
 
                 <!-- Accordion Blade Component -->
-                <x-shop::accordion class="!border-b-0 max-md:rounded-xl max-md:!border-none max-md:!bg-gray-100">
+                <x-shop::accordion class="!border-b-0 max-md:rounded-lg max-md:!border-none max-md:!bg-gray-100">
                     <!-- Accordion Blade Component Header -->
                     <x-slot:header class="!p-0 max-md:!p-4">
                         <div class="flex items-center justify-between">
@@ -36,7 +36,7 @@
                     </x-slot>
     
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="mt-8 !p-0 max-md:mt-0 max-md:border max-md:!p-4">
+                    <x-slot:content class="mt-8 !p-0 max-md:mt-0 max-md:border max-md:border-t-0 max-md:!p-4 max-sm:rounded-t-none">
                         <div class="flex flex-wrap gap-7 max-md:gap-4 max-sm:gap-2.5">
                             <div 
                                 class="relative cursor-pointer max-md:max-w-full max-md:flex-auto"
@@ -61,7 +61,7 @@
 
                                 <label 
                                     :for="payment.method" 
-                                    class="block w-[190px] cursor-pointer rounded-xl border border-zinc-200 p-5 max-md:flex max-md:w-full max-md:gap-2.5"
+                                    class="block w-[190px] cursor-pointer rounded-xl border border-zinc-200 p-5 max-md:flex max-md:w-full max-md:gap-2.5 max-md:rounded-lg"
                                 >
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.before') !!}
 

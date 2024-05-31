@@ -49,9 +49,9 @@
         <!-- For Mobile view -->
         <x-shop::accordion
             :is-active="false"
-            class="hidden !w-full rounded-xl !border-2 !border-[#e9decc] max-1060:block max-sm:rounded-md"
+            class="hidden !w-full rounded-xl !border-2 !border-[#e9decc] max-1060:block max-sm:rounded-lg"
         >
-            <x-slot:header class="rounded-t-lg bg-[#F1EADF] px-3 py-2.5 text-sm font-medium">
+            <x-slot:header class="rounded-t-lg bg-[#F1EADF] px-3 py-2 text-sm font-medium">
                 @lang('Footer Content')
             </x-slot>
 
@@ -84,7 +84,7 @@
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
             <div class="grid gap-2.5">
                 <p
-                    class="max-w-[288px] text-3xl italic leading-[45px] text-navyBlue max-sm:text-xl"
+                    class="max-w-[288px] text-3xl italic leading-[45px] text-navyBlue max-sm:text-lg"
                     role="heading"
                     aria-level="2"
                 >
@@ -103,7 +103,7 @@
                         <div class="relative w-full">
                             <x-shop::form.control-group.control
                                 type="email"
-                                class="block w-[420px] max-w-full rounded-xl border-2 border-[#e9decc] bg-[#F1EADF] px-5 py-4 text-base font-medium max-1060:w-full max-sm:mb-0 max-sm:rounded-md max-sm:border-2 max-sm:p-4 max-sm:text-sm"
+                                class="block w-[420px] max-w-full rounded-xl border-2 border-[#e9decc] bg-[#F1EADF] px-5 py-4 text-base max-1060:w-full max-sm:mb-0 max-sm:rounded-lg max-sm:border-2 max-sm:p-4 max-sm:text-sm"
                                 name="email"
                                 rules="required|email"
                                 label="Email"
@@ -115,7 +115,7 @@
     
                             <button
                                 type="submit"
-                                class="absolute top-2 flex w-max items-center rounded-xl bg-white px-7 py-3.5 text-xs font-medium hover:bg-zinc-100 max-sm:-mt-1 max-sm:rounded-md max-sm:px-4 max-sm:py-2 ltr:right-2 rtl:left-2"
+                                class="absolute top-2 flex w-max items-center rounded-xl bg-white px-7 py-3.5 text-xs font-medium hover:bg-zinc-100 max-sm:-mt-1 max-sm:rounded-lg max-sm:px-4 max-sm:py-2 ltr:right-2 rtl:left-2"
                             >
                                 @lang('shop::app.components.layouts.footer.subscribe')
                             </button>

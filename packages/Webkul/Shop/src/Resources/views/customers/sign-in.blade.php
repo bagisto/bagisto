@@ -140,7 +140,7 @@
                     <!-- Submit Button -->
                     <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:justify-center max-sm:gap-5 max-sm:text-center">
                         <button
-                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base max-md:max-w-full max-md:rounded-md max-sm:py-2 ltr:ml-0 rtl:mr-0"
+                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base max-md:max-w-full max-md:rounded-lg max-sm:py-2 ltr:ml-0 rtl:mr-0"
                             type="submit"
                         >
                             @lang('shop::app.customers.login-form.button-title')

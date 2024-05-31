@@ -24,7 +24,7 @@
 
             <template v-else>
                 <!-- Accordion Blade Component -->
-                <x-shop::accordion class="!border-b-0 max-md:rounded-xl max-md:!border-none max-md:!bg-gray-100">
+                <x-shop::accordion class="!border-b-0 max-md:rounded-lg max-md:!border-none max-md:!bg-gray-100">
                     <!-- Accordion Blade Component Header -->
                     <x-slot:header class="px-0 py-4 max-md:!px-3">
                         <div class="flex items-center justify-between">
@@ -35,7 +35,7 @@
                     </x-slot>
 
                     <!-- Accordion Blade Component Content -->
-                    <x-slot:content class="mt-8 !p-0 max-md:mt-0 max-md:border max-md:!p-4">
+                    <x-slot:content class="mt-8 !p-0 max-md:mt-0 max-md:border max-md:border-t-0 max-md:!p-4 max-sm:rounded-t-none">
                         <div class="flex flex-wrap gap-8 max-md:gap-4 max-sm:gap-2.5">
                             <template v-for="method in methods">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
@@ -60,7 +60,7 @@
                                     </label>
 
                                     <label 
-                                        class="block cursor-pointer rounded-xl border border-zinc-200 p-5 max-md:flex max-md:gap-4 max-md:px-4 max-md:py-2.5"
+                                        class="block cursor-pointer rounded-xl border border-zinc-200 p-5 max-md:flex max-md:gap-4 max-md:rounded-lg max-md:px-4 max-md:py-2.5"
                                         :for="rate.method"
                                     >
                                         <span class="icon-flate-rate text-6xl text-navyBlue"></span>

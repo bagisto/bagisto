@@ -82,7 +82,7 @@
                                     </div>
 
                                     <x-shop::button
-                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:max-w-[153px] max-md:rounded-xl"
+                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:max-w-[153px] max-md:rounded-lg"
                                         :title="trans('shop::app.checkout.coupon.button-title')"
                                         ::loading="isStoring"
                                         ::disabled="isStoring"

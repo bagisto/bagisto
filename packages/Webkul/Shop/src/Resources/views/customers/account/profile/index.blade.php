@@ -42,7 +42,7 @@
         </div>
 
         <!-- Profile Information -->
-        <div class="mt-8 grid grid-cols-1 gap-y-6 max-md:mt-5 max-md:gap-y-5">
+        <div class="mt-8 grid grid-cols-1 gap-y-6 max-md:mt-5 max-md:gap-y-4">
             {!! view_render_event('bagisto.shop.customers.account.profile.first_name.before') !!}
 
             <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3 max-md:px-0">
@@ -119,11 +119,11 @@
             <x-shop::form action="{{ route('shop.customers.account.profile.destroy') }}">
                 <x-shop::modal>
                     <x-slot:toggle>
-                        <div class="primary-button rounded-2xl px-11 py-3 max-md:hidden max-md:rounded-xl">
+                        <div class="primary-button rounded-2xl px-11 py-3 max-md:hidden max-md:rounded-lg">
                             @lang('shop::app.customers.account.profile.index.delete-profile')
                         </div>
 
-                        <div class="rounded-2xl py-3 text-center font-medium text-red-500 max-md:w-full max-md:max-w-full md:hidden">
+                        <div class="rounded-2xl py-3 text-center font-medium text-red-500 max-md:w-full max-md:max-w-full max-md:py-2 md:hidden">
                             @lang('shop::app.customers.account.profile.index.delete-profile')
                         </div>
                     </x-slot>
@@ -155,7 +155,7 @@
                     <x-slot:footer>
                         <button
                             type="submit"
-                            class="primary-button flex rounded-2xl px-11 py-3 max-md:rounded-xl max-md:px-6 max-md:text-sm"
+                            class="primary-button flex rounded-2xl px-11 py-3 max-md:rounded-lg max-md:px-6 max-md:text-sm"
                         >
                             @lang('shop::app.customers.account.profile.index.delete')
                         </button>
