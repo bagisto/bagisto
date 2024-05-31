@@ -414,7 +414,7 @@
                                         name: '@lang('admin::app.settings.themes.edit.active')',
                                     },
                                     {
-                                        id: '1',
+                                        id: '0',
                                         name: '@lang('admin::app.settings.themes.edit.inactive')',
                                     },
                                 ],
