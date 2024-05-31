@@ -344,7 +344,7 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-2.5 max-sm:text-lg">
+                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-0.5 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
                                 </p>
 
@@ -392,7 +392,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-4 rounded-xl px-7 py-4 max-sm:gap-x-5 max-sm:px-4 max-sm:py-3"
+                                            class="gap-x-4 rounded-xl px-7 py-4 max-sm:gap-x-5 max-sm:px-4 max-sm:py-2"
                                         />
                                     @endif
 
@@ -403,7 +403,7 @@
 
                                     <x-shop::button
                                         type="submit"
-                                        class="secondary-button w-full max-w-full max-sm:py-3"
+                                        class="secondary-button w-full max-w-full max-sm:py-2"
                                         button-type="secondary-button"
                                         :loading="false"
                                         :title="trans('shop::app.products.view.add-to-cart')"
@@ -420,7 +420,7 @@
                                 @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                     <x-shop::button
                                         type="submit"
-                                        class="primary-button mt-5 w-full max-w-[470px] max-sm:py-3"
+                                        class="primary-button mt-5 w-full max-w-[470px] max-sm:py-2"
                                         button-type="secondary-button"
                                         :title="trans('shop::app.products.view.buy-now')"
                                         :disabled="! $product->isSaleable(1)"
@@ -434,7 +434,7 @@
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="mt-10 flex gap-9 max-md:mt-5 max-md:flex-wrap max-sm:justify-center max-sm:gap-2.5">
+                                <div class="mt-10 flex gap-9 max-md:mt-4 max-md:flex-wrap max-sm:justify-center max-sm:gap-2.5">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div

@@ -257,7 +257,7 @@
                                 || auth()->guard('customer')->user()
                             )
                                 <div
-                                    class="mt-8 flex cursor-pointer items-center gap-x-4 rounded-xl border border-navyBlue px-4 py-2.5"
+                                    class="mt-8 flex cursor-pointer items-center gap-x-4 rounded-xl border border-navyBlue px-4 py-2.5 max-sm:mt-5 max-sm:py-2"
                                     @click="canReview = true"
                                 >
                                     <span class="icon-pen text-2xl"></span>

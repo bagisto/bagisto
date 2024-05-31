@@ -63,10 +63,10 @@
             </span>
 
             <!-- Pagination -->
-            <div class="absolute bottom-5 left-0 flex w-full justify-center">
+            <div class="absolute bottom-5 left-0 flex w-full justify-center max-sm:bottom-2.5">
                 <div
                     v-for="(image, index) in images"
-                    class="mx-1 h-3 w-3 cursor-pointer rounded-full"
+                    class="mx-1 h-3 w-3 cursor-pointer rounded-full max-sm:h-1.5 max-sm:w-1.5"
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
                     @click="navigateByPagination(index)"
                 >

@@ -42,7 +42,7 @@
                 @lang('shop::app.customers.login-form.page-title')
             </h1>
 
-            <p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
+            <p class="mt-4 text-xl text-zinc-500 max-sm:mt-0 max-sm:text-sm">
                 @lang('shop::app.customers.login-form.form-login-text')
             </p>
 
@@ -61,7 +61,7 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="px-6 py-4 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-2"
                             name="email"
                             rules="required|email"
                             value=""
@@ -82,7 +82,7 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="px-6 py-4 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-2"
                             id="password"
                             name="password"
                             rules="required|min:6"
@@ -106,7 +106,7 @@
                             />
 
                             <label
-                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
+                                class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
                                 for="show-password"
                             ></label>
 
@@ -121,7 +121,7 @@
                         <div class="block">
                             <a
                                 href="{{ route('shop.customers.forgot_password.create') }}"
-                                class="cursor-pointer text-base text-black max-sm:text-base"
+                                class="cursor-pointer text-base text-black max-sm:text-sm"
                             >
                                 <span>
                                     @lang('shop::app.customers.login-form.forgot-pass')
@@ -138,9 +138,9 @@
                     @endif
 
                     <!-- Submit Button -->
-                    <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:justify-center max-sm:text-center">
+                    <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:justify-center max-sm:gap-5 max-sm:text-center">
                         <button
-                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base max-md:max-w-full max-md:rounded-xl max-sm:py-3 ltr:ml-0 rtl:mr-0"
+                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base max-md:max-w-full max-md:rounded-md max-sm:py-2 ltr:ml-0 rtl:mr-0"
                             type="submit"
                         >
                             @lang('shop::app.customers.login-form.button-title')
@@ -153,7 +153,7 @@
 
             {!! view_render_event('bagisto.shop.customers.login.after') !!}
 
-            <p class="mt-5 font-medium text-zinc-500 max-sm:text-center">
+            <p class="mt-5 font-medium text-zinc-500 max-sm:text-center max-sm:text-sm">
                 @lang('shop::app.customers.login-form.new-customer')
 
                 <a

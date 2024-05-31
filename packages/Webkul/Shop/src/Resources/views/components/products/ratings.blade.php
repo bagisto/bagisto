@@ -21,14 +21,12 @@
                 @{{ average }}
             </span>
         
-            <span class="icon-star-fill -mt-1 text-xl text-amber-500 max-sm:-mt-0.5 max-sm:text-lg"></span>
+            <span class="icon-star-fill -mt-1 text-xl text-amber-500 max-sm:-mt-1 max-sm:text-lg"></span>
             
-            <span class="mx-1 text-zinc-300">|</span>
-            
-            <span class="text-sm font-medium text-black max-sm:text-xs ltr:ml-1 rtl:mr-1">
+            <span class="border-l border-zinc-300 text-sm font-medium text-black max-sm:border-zinc-400 max-sm:text-xs ltr:pl-1 rtl:pr-1">
                 @{{ abbreviatedTotal }}
 
-                <span v-if="rating">Reviews</span>
+                <span v-if="rating">Ratings</span>
             </span>
         </div>
     </script>
