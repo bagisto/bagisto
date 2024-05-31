@@ -149,7 +149,7 @@ return [
                     'fraud'           => '詐欺',
                     'grand-total'     => '合計金額',
                     'id'              => '#:id',
-                    'images'          => '画像',
+                    'items'           => 'アイテム',
                     'location'        => '場所',
                     'order-id'        => '注文ID',
                     'pay-by'          => ':method で支払う',
