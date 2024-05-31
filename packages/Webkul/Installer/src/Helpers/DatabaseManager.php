@@ -3,12 +3,12 @@
 namespace Webkul\Installer\Helpers;
 
 use Exception;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Artisan;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Installer\Database\Seeders\ImportsTableSeeder;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
+use Webkul\Installer\Database\Seeders\ImportsTableSeeder;
+use Webkul\Product\Repositories\ProductRepository;
 
 class DatabaseManager
 {
@@ -115,6 +115,7 @@ class DatabaseManager
             app(ImportsTableSeeder::class)->run();
         } catch (Exception $e) {
             dd($e);
+
             return response()->json([
                 'error' => $e->getMessage(),
             ], 500);

@@ -3,8 +3,8 @@
 namespace Webkul\Installer\Database\Seeders;
 
 use Carbon\Carbon;
-use Illuminate\Http\File;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -181,8 +181,8 @@ class ImportsTableSeeder extends Seeder
                 'product_id'           => 4,
                 'updated_at'           => $now,
                 'parent_id'            => null,
-                'visible_individually' => 0
-            ]
+                'visible_individually' => 0,
+            ],
         ]);
 
         DB::table('product_attribute_values')->insert([
@@ -294,25 +294,25 @@ class ImportsTableSeeder extends Seeder
             [
                 'id'                   => 1,
                 'product_id'           => 1,
-                'vendor_id'           => 0,
+                'vendor_id'            => 0,
                 'inventory_source_id'  => 1,
                 'qty'                  => 100,
             ], [
                 'id'                   => 2,
                 'product_id'           => 2,
-                'vendor_id'           => 0,
+                'vendor_id'            => 0,
                 'inventory_source_id'  => 1,
                 'qty'                  => 100,
             ], [
                 'id'                   => 3,
                 'product_id'           => 3,
-                'vendor_id'           => 0,
+                'vendor_id'            => 0,
                 'inventory_source_id'  => 1,
                 'qty'                  => 100,
             ], [
                 'id'                   => 4,
                 'product_id'           => 4,
-                'vendor_id'           => 0,
+                'vendor_id'            => 0,
                 'inventory_source_id'  => 1,
                 'qty'                  => 100,
             ],
@@ -347,7 +347,7 @@ class ImportsTableSeeder extends Seeder
                 'channel_id'           => 1,
                 'created_at'           => $now,
                 'updated_at'           => $now,
-            ]
+            ],
         ]);
 
         // Product Categories
@@ -373,25 +373,25 @@ class ImportsTableSeeder extends Seeder
                 'type'       => 'image',
                 'path'       => $this->productImages('product/1', 'product/1/1.webp'),
                 'product_id' => 1,
-                'position'   => 1
+                'position'   => 1,
             ], [
                 'id'         => 2,
                 'type'       => 'image',
                 'path'       => $this->productImages('product/2', 'product/2/2.webp'),
                 'product_id' => 2,
-                'position'   => 1
+                'position'   => 1,
             ], [
                 'id'         => 3,
                 'type'       => 'image',
                 'path'       => $this->productImages('product/3', 'product/3/3.webp'),
                 'product_id' => 3,
-                'position'   => 1
+                'position'   => 1,
             ], [
                 'id'         => 4,
                 'type'       => 'image',
                 'path'       => $this->productImages('product/4', 'product/4/4.webp'),
                 'product_id' => 4,
-                'position'   => 1
+                'position'   => 1,
             ],
         ]);
 
@@ -430,21 +430,21 @@ class ImportsTableSeeder extends Seeder
 
     /**
      * Store image in storage.
-     * 
+     *
      * @return string|null
      */
     public function productImages($targetPath, $file, $default = null)
     {
-        if (file_exists(base_path(self::BASE_PATH . $file))) {
-            return 'storage/' . Storage::putFile($targetPath, new File(base_path(self::BASE_PATH . $file)));
+        if (file_exists(base_path(self::BASE_PATH.$file))) {
+            return 'storage/'.Storage::putFile($targetPath, new File(base_path(self::BASE_PATH.$file)));
         }
 
-        if (!$default) {
+        if (! $default) {
             return;
         }
 
-        if (file_exists(base_path(self::BASE_PATH . $default))) {
-            return 'storage/' . Storage::putFile($targetPath, new File(base_path(self::BASE_PATH . $default)));
+        if (file_exists(base_path(self::BASE_PATH.$default))) {
+            return 'storage/'.Storage::putFile($targetPath, new File(base_path(self::BASE_PATH.$default)));
         }
     }
 }
