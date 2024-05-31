@@ -108,16 +108,14 @@
                                         <!-- Listing of Quick Filters (Saved Filters) -->
                                         <div v-for="(filter,index) in savedFilters.available">
                                             <div
-                                                class="flex items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"
+                                                class="flex cursor-pointer items-center justify-between px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-white dark:hover:bg-gray-950"
                                                 :class="{ 'bg-gray-50 dark:bg-gray-950 font-semibold': applied.savedFilterId == filter.id }"
                                                 @click="applySavedFilter(filter)"
                                             >
-                                                <span class="cursor-pointer">
-                                                    @{{ filter.name }}
-                                                </span>
+                                                <span>@{{ filter.name }}</span>
 
                                                 <span
-                                                    class="icon-cross cursor-pointer rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"
+                                                    class="icon-cross rounded p-1.5 text-xl hover:bg-gray-200 dark:hover:bg-gray-800"
                                                     @click.stop="deleteSavedFilter(filter)"
                                                 >
                                                 </span>

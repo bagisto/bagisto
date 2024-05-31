@@ -27,7 +27,7 @@
 
     <!-- Hero Image -->
     @if ($category->banner_path)
-        <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:px-4">
+        <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
             <div>
                 <img
                     class="aspect-[4/1] max-h-full max-w-full rounded-xl"
@@ -46,7 +46,7 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
-            <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:px-4">
+            <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
                 {!! $category->description !!}
             </div>
         @endif
@@ -67,7 +67,7 @@
             type="text/x-template" 
             id="v-category-template"
         >
-            <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
+            <div class="container px-[60px] max-lg:px-8 max-md:px-4">
                 <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
@@ -102,14 +102,15 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
-                                        <img 
+                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
+                                        <img
+                                            class="max-md:h-[100px] max-md:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                         />
                                   
                                         <p
-                                            class="text-xl"
+                                            class="text-xl max-md:text-sm"
                                             role="heading"
                                         >
                                             @lang('shop::app.categories.view.empty')
@@ -122,10 +123,10 @@
                         </div>
 
                         <!-- Product Grid Card Container -->
-                        <div v-else class="mt-8">
+                        <div v-else class="mt-8 max-md:mt-5">
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-4">
+                                <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
                                     <x-shop::shimmer.products.cards.grid count="12" />
                                 </div>
                             </template>
@@ -135,7 +136,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-4">
+                                    <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
@@ -145,14 +146,15 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
-                                        <img 
+                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
+                                        <img
+                                            class="max-md:h-[100px] max-md:w-[100px]"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                         />
                                         
                                         <p
-                                            class="text-xl"
+                                            class="text-xl max-md:text-sm"
                                             role="heading"
                                         >
                                             @lang('shop::app.categories.view.empty')
@@ -168,7 +170,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base"
+                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base max-md:rounded-xl"
                             @click="loadMoreProducts"
                             v-if="links.next && ! loader"
                         >
@@ -177,7 +179,7 @@
 
                         <button
                             v-else-if="links.next"
-                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-[74.5px] py-3.5 text-center text-base"
+                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-[74.5px] py-3.5 text-center text-base max-md:rounded-xl"
                         >
                             <!-- Spinner -->
                             <img

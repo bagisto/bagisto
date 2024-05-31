@@ -3116,6 +3116,7 @@ return [
                 'delete'                        => 'Sil',
                 'desc'                          => 'azalarak',
                 'edit'                          => 'Düzenle',
+                'featured'                      => 'Öne Çıkan',
                 'filter-title'                  => 'Başlık',
                 'filters'                       => 'Filtreler',
                 'footer-link'                   => 'Alt Bağlantıları',
@@ -3132,6 +3133,8 @@ return [
                 'key-input'                     => 'Anahtar',
                 'limit'                         => 'Sınır',
                 'link'                          => 'Bağlantı',
+                'no'                            => 'Hayır',
+                'new'                           => 'Yeni',
                 'name'                          => 'Ad',
                 'preview'                       => 'Önizleme',
                 'product-carousel'              => 'Ürün Karuseli',
@@ -3171,6 +3174,7 @@ return [
                     'title'              => 'Başlık',
                     'update-service'     => 'Hizmetleri Güncelle',
                 ],
+                'yes'                           => 'Evet',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',
@@ -3987,6 +3991,7 @@ return [
                     'title'             => 'Filtre',
                     'update'            => 'Güncelle',
                     'update-filter'     => 'Filtreyi güncelle',
+                    'updated-success'   => 'Filtre başarıyla güncellendi.',
                 ],
 
                 'search' => [

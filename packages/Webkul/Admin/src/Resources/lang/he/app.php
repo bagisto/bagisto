@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'מחק',
                 'desc'                          => 'יורד',
                 'edit'                          => 'ערוך',
+                'featured'                      => 'מומלץ',
                 'filter-title'                  => 'כותרת',
                 'filters'                       => 'מסננים',
                 'footer-link'                   => 'קישורי תחתית',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'מגבלה',
                 'link'                          => 'קישור',
                 'name'                          => 'שם',
+                'no'                            => 'לא',
+                'new'                           => 'חדש',
                 'preview'                       => 'תצוגה מקדימה',
                 'product-carousel'              => 'קרוסלת מוצרים',
                 'product-carousel-description'  => 'הצגת מוצרים בצורה אלגנטית עם קרוסלת מוצרים דינמית ורספונסיבית.',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => 'כותרת',
                     'update-service'     => 'עדכן שירותים',
                 ],
+                'yes'                           => 'כן',
             ],
 
             'create-success' => 'ערכת העיצוב נוצרה בהצלחה',
@@ -3986,6 +3990,7 @@ return [
                     'title'             => 'פילטר',
                     'update'            => 'עדכן',
                     'update-filter'     => 'עדכן מסנן',
+                    'updated-success'   => 'המסנן עודכן בהצלחה.',
                 ],
 
                 'search' => [

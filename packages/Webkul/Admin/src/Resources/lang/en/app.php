@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'Delete',
                 'desc'                          => 'Desc',
                 'edit'                          => 'Edit',
+                'featured'                      => 'Featured',
                 'filter-title'                  => 'Title',
                 'filters'                       => 'Filters',
                 'footer-link'                   => 'Footer Links',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Name',
+                'no'                            => 'No',
+                'new'                           => 'New',
                 'preview'                       => 'Preview',
                 'product-carousel'              => 'Product Carousel',
                 'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => 'Title',
                     'update-service'     => 'Update Services',
                 ],
+                'yes'                    => 'Yes',
             ],
 
             'create-success' => 'Theme created successfully',
@@ -3986,6 +3990,7 @@ return [
                     'title'             => 'Filter',
                     'update'            => 'Update',
                     'update-filter'     => 'Update Filter',
+                    'updated-success'   => 'Filter has been updated successfully.',
                 ],
 
                 'search' => [

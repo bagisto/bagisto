@@ -191,32 +191,32 @@ return [
         'shop' => [
             'theme-customizations' => [
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'Tüm Ürünler',
 
                     'options' => [
-                        'title' => 'All Products',
+                        'title' => 'Tüm Ürünler',
                     ],
                 ],
 
                 'bold-collections' => [
                     'content' => [
-                        'btn-title'   => 'View All',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'title'       => 'Get Ready for our new Bold Collections!',
+                        'btn-title'   => 'Koleksiyonlara Göz At',
+                        'description' => 'Yeni Cesur Koleksiyonlarımızı Tanıtıyoruz! Cesur tasarımlar ve canlı ifadelerle tarzınızı yükseltin. Gardırobunuzu yeniden tanımlayan çarpıcı desenler ve cesur renklere keşfedin. Olağanüstüye hazır olun!',
+                        'title'       => 'Yeni Cesur Koleksiyonlarımıza Hazır Olun!',
                     ],
 
-                    'name' => 'Bold Collections',
+                    'name' => 'Cesur Koleksiyonlar',
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'Kategori Koleksiyonları',
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'Öne Çıkan Koleksiyonlar',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'Öne Çıkan Ürünler',
                     ],
                 ],
 
@@ -224,52 +224,52 @@ return [
                     'name' => 'Footer Links',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'payment-policy'   => 'Payment Policy',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'refund-policy'    => 'Refund Policy',
-                        'return-policy'    => 'Return Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'terms-of-use'     => 'Terms of Use',
-                        'whats-new'        => 'What\'s New',
+                        'about-us'         => 'Hakkımızda',
+                        'contact-us'       => 'Bize Ulaşın',
+                        'customer-service' => 'Müşteri Hizmetleri',
+                        'payment-policy'   => 'Ödeme Politikası',
+                        'privacy-policy'   => 'Gizlilik Politikası',
+                        'refund-policy'    => 'İade Politikası',
+                        'return-policy'    => 'İade Politikası',
+                        'shipping-policy'  => 'Kargo Politikası',
+                        'terms-conditions' => 'Şartlar ve Koşullar',
+                        'terms-of-use'     => 'Kullanım Koşulları',
+                        'whats-new'        => 'Yenilikler',
                     ],
                 ],
 
                 'game-container' => [
                     'content' => [
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'title'       => 'The game with our new additions!',
+                        'sub-title-1' => 'Koleksiyonlarımız',
+                        'sub-title-2' => 'Koleksiyonlarımız',
+                        'title'       => 'Yeni eklemelerimizle oyun!',
                     ],
 
-                    'name' => 'Game Container',
+                    'name' => 'Oyun Konteyneri',
                 ],
 
                 'image-carousel' => [
-                    'name' => 'Image Carousel',
+                    'name' => 'Resim Karuseli',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'Yeni Koleksiyona Hazır Olun',
                     ],
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'Yeni Ürünler',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'Yeni Ürünler',
                     ],
                 ],
 
                 'offer-information' => [
                     'content' => [
-                        'title' => 'Get UP TO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'İlk siparişinizde %40\'a kadar İNDİRİM alın HEMEN ALIŞVERİŞ YAPIN',
                     ],
 
-                    'name' => 'Offer Information',
+                    'name' => 'Teklif Bilgisi',
                 ],
 
                 'services-content' => [
@@ -292,28 +292,28 @@ return [
 
                 'top-collections' => [
                     'content' => [
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
-                        'title'       => 'The game with our new additions!',
+                        'sub-title-1' => 'Koleksiyonlarımız',
+                        'sub-title-2' => 'Koleksiyonlarımız',
+                        'sub-title-3' => 'Koleksiyonlarımız',
+                        'sub-title-4' => 'Koleksiyonlarımız',
+                        'sub-title-5' => 'Koleksiyonlarımız',
+                        'sub-title-6' => 'Koleksiyonlarımız',
+                        'title'       => 'Yeni eklemelerimizle oyun!',
                     ],
 
-                    'name' => 'Top Collections',
+                    'name' => 'En İyi Koleksiyonlar',
                 ],
             ],
         ],
 
         'user' => [
             'roles' => [
-                'description' => 'This role users will have all the access',
-                'name'        => 'Administrator',
+                'description' => 'Bu rol kullanıcılara tüm erişimi sağlar',
+                'name'        => 'Yönetici',
             ],
 
             'users' => [
-                'name' => 'Example',
+                'name' => 'Örnek',
             ],
         ],
     ],

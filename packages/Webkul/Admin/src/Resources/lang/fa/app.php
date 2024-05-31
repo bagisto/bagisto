@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'حذف',
                 'desc'                          => 'نزولی',
                 'edit'                          => 'ویرایش',
+                'featured'                      => 'برجسته',
                 'filter-title'                  => 'عنوان',
                 'filters'                       => 'فیلترها',
                 'footer-link'                   => 'لینک‌های پاورقی',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'محدودیت',
                 'link'                          => 'لینک',
                 'name'                          => 'نام',
+                'no'                            => 'خیر',
+                'New'                           => 'جدید',
                 'preview'                       => 'پیش‌نمایش',
                 'product-carousel'              => 'کاروسل محصولات',
                 'product-carousel-description'  => 'نمایش محصولات به شیوه‌ای شیک با کاروسل محصولات پویا و واکنش‌گرا.',
@@ -3169,6 +3172,7 @@ return [
                     'title'                 => 'عنوان',
                     'update-service'        => 'به روزرسانی خدمات',
                 ],
+                'yes'                          => 'بله',
             ],
 
             'create-success' => 'تم با موفقیت ایجاد شد',
@@ -3986,6 +3990,7 @@ return [
                     'title'             => 'فیلتر',
                     'update'            => 'به‌روزرسانی',
                     'update-filter'     => 'به‌روزرسانی فیلتر',
+                    'updated-success'   => 'فیلتر با موفقیت به‌روزرسانی شد.',
                 ],
 
                 'search' => [

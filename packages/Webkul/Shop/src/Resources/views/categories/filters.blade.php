@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Naviation -->
 <div
-    class="fixed bottom-0 z-50 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0"
+    class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -26,7 +26,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase"
+                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
                 @click="isDrawerActive.filter = true"
             >
                 <span class="icon-filter-1 text-2xl"></span>
@@ -37,7 +37,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex items-center justify-between border-b border-zinc-200 pb-5">
+            <div class="flex items-center justify-between">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
@@ -76,7 +76,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase"
+                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
                 @click="isDrawerActive.toolbar = true"
             >
                 <span class="icon-sort-1 text-2xl"></span>
@@ -87,7 +87,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex items-center justify-between border-b border-zinc-200 pb-5">
+            <div class="flex items-center justify-between">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
@@ -95,7 +95,7 @@
         </x-slot>
 
         <!-- Drawer Content -->
-        <x-slot:content>
+        <x-slot:content class="!px-0">
             @include('shop::categories.toolbar')
         </x-slot>
     </x-shop::drawer>

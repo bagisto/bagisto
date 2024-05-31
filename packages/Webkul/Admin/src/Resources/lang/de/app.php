@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'Löschen',
                 'desc'                          => 'absteigend',
                 'edit'                          => 'Bearbeiten',
+                'featured'                      => 'Hervorgehoben',
                 'filter-title'                  => 'Titel',
                 'filters'                       => 'Filter',
                 'footer-link'                   => 'Fußzeilen-Links',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Name',
+                'no'                            => 'Nein',
+                'new'                           => 'Neu',
                 'preview'                       => 'Vorschau',
                 'product-carousel'              => 'Produkt Karussell',
                 'product-carousel-description'  => 'Produkte mit einem dynamischen und responsiven Produkt Karussell elegant präsentieren.',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => 'Titel',
                     'update-service'     => 'Dienstleistungen aktualisieren',
                 ],
+                'yes'                           => 'Ja',
             ],
 
             'create-success' => 'Thema erfolgreich erstellt',
@@ -3986,6 +3990,7 @@ return [
                     'title'             => 'Filter',
                     'update'            => 'Aktualisieren',
                     'update-filter'     => 'Filter aktualisieren',
+                    'updated-success'   => 'Der Filter wurde erfolgreich aktualisiert.',
                 ],
 
                 'search' => [

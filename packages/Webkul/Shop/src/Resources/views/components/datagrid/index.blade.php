@@ -14,7 +14,7 @@
             <x-shop::datagrid.toolbar />
 
             <!-- Table -->
-            <div class="mt-8 flex">
+            <div class="mt-8 flex max-md:mt-0">
                 <x-shop::datagrid.table :isMultiRow="$isMultiRow">
                     <template #header="{
                         isLoading,

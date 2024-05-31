@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'Verwijderen',
                 'desc'                          => 'aflopend',
                 'edit'                          => 'Bewerken',
+                'featured'                      => 'Uitgelicht',
                 'filter-title'                  => 'Titel',
                 'filters'                       => 'Filters',
                 'footer-link'                   => 'Voetteksten',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'Limiet',
                 'link'                          => 'Link',
                 'name'                          => 'Naam',
+                'no'                            => 'Nee',
+                'new'                           => 'Nieuw',
                 'preview'                       => 'Voorbeeld',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => 'Titel',
                     'update-service'     => 'Diensten bijwerken',
                 ],
+                'yes'                           => 'Ja',
             ],
 
             'create-success' => 'Thema is succesvol aangemaakt',
@@ -3986,6 +3990,7 @@ return [
                     'title'             => 'Filter',
                     'update'            => 'Bijwerken',
                     'update-filter'     => 'Filter bijwerken',
+                    'updated-success'   => 'Het filter is succesvol bijgewerkt.',
                 ],
 
                 'search' => [

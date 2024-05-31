@@ -6,14 +6,20 @@
     <div class="flex gap-6">
         {!! view_render_event('bagisto.shop.products.view.share.before', ['product' => $product]) !!}
 
-        <div class="hidden gap-2.5 justify-center items-center max-md:flex cursor-pointer">
+        <!-- For Mobile View -->
+        <div class="md:hidden flex gap-2.5 justify-center items-center">
             <span class="icon-share text-2xl"></span>
 
-            <span onclick="shareProduct()">
+            <a
+                class="max-sm:text-base"
+                href="javascript:void(0);"
+                onclick="shareProduct()"
+            >
                 @lang('admin::app.configuration.index.catalog.products.social-share.share')
-            </span>
+            </a>
         </div>
 
+        <!-- For Desktop View -->
         <div class="max-md:hidden">
             <ul class="flex gap-3">
                 @foreach(['facebook', 'twitter', 'instagram', 'pinterest', 'linkedin', 'whatsapp', 'email'] as $social)

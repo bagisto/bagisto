@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'حذف',
                 'desc'                          => 'تنازلي',
                 'edit'                          => 'تعديل',
+                'featured'                      => 'مميز',
                 'filter-title'                  => 'العنوان',
                 'filters'                       => 'المرشحات',
                 'footer-link'                   => 'روابط التذييل',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'الحد',
                 'link'                          => 'رابط',
                 'name'                          => 'الاسم',
+                'no'                            => 'لا',
+                'new'                           => 'جديد',
                 'preview'                       => 'معاينة',
                 'product-carousel'              => 'شريط المنتجات',
                 'product-carousel-description'  => 'قدم المنتجات بأناقة باستخدام شريط المنتجات الديناميكي والمتجاوب.',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => 'عنوان',
                     'update-service'     => 'خدمات التحديث',
                 ],
+                'yes'                           => 'نعم',
             ],
 
             'create-success' => 'تم إنشاء الموضوع بنجاح',
@@ -3986,6 +3990,7 @@ return [
                     'title'             => 'تصفية',
                     'update'            => 'تحديث',
                     'update-filter'     => 'تحديث الفلتر',
+                    'updated-success'   => 'تم تحديث الفلتر بنجاح.',
                 ],
 
                 'search' => [

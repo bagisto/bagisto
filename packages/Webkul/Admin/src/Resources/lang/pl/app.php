@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'Usuń',
                 'desc'                          => 'malejąco',
                 'edit'                          => 'Edytuj',
+                'featured'                      => 'Wyróżnione',
                 'filter-title'                  => 'Tytuł',
                 'filters'                       => 'Filtry',
                 'footer-link'                   => 'Linki stopki',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Nazwa',
+                'no'                            => 'Nie',
+                'new'                           => 'Nowy',
                 'preview'                       => 'Podgląd',
                 'product-carousel'              => 'Karuzela produktów',
                 'product-carousel-description'  => 'Elegancko prezentuj produkty za pomocą dynamicznej i responsywnej karuzeli produktów.',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => 'Tytuł',
                     'update-service'     => 'Aktualizuj usługi',
                 ],
+                'yes'                           => 'Tak',
             ],
 
             'create-success' => 'Motyw został pomyślnie utworzony',
@@ -3986,6 +3990,7 @@ return [
                     'title'             => 'Filtro',
                     'update'            => 'Aktualizuj',
                     'update-filter'     => 'Zaktualizuj filtr',
+                    'updated-success'   => 'Filtr został pomyślnie zaktualizowany.',
                 ],
 
                 'search' => [
