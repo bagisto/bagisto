@@ -9,14 +9,31 @@
         <x-shop::breadcrumbs name="addresses.create" />
     @endSection
 
-    <h2 class="mb-8 text-2xl font-medium">
-        @lang('shop::app.customers.account.addresses.create.add-address')
-    </h2>
+    <div class="max-md:hidden">
+        <x-shop::layouts.account.navigation />
+    </div>
 
-    <v-create-customer-address>
-        <!--Address Shimmer-->
-        <x-shop::shimmer.form.control-group :count="10" />
-    </v-create-customer-address>
+    <div class="mx-4 flex-auto">
+        <div class="mb-8 flex items-center max-md:mb-5">
+            <!-- Back Button -->
+            <a
+                class="grid md:hidden"
+                href="{{ route('shop.customers.account.addresses.index') }}"
+            >
+                <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
+            </a>
+
+            <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                @lang('shop::app.customers.account.addresses.create.add-address')
+            </h2>
+        </div>
+
+        <v-create-customer-address>
+            <!--Address Shimmer-->
+            <x-shop::shimmer.form.control-group :count="10" />
+        </v-create-customer-address>
+
+    </div>
 
     @push('scripts')
         <script
@@ -312,7 +329,7 @@
                         </label>
 
                         <label 
-                            class="block cursor-pointer text-base"
+                            class="block cursor-pointer text-base max-md:text-sm"
                             for="default_address"
                         >
                             @lang('shop::app.customers.account.addresses.create.set-as-default')
@@ -321,7 +338,7 @@
 
                     <button
                         type="submit"
-                        class="primary-button m-0 block w-max rounded-2xl px-11 py-3 text-center text-base"
+                        class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-md:w-full max-md:max-w-full max-md:rounded-xl"
                     >
                         @lang('shop::app.customers.account.addresses.create.save')
                     </button>

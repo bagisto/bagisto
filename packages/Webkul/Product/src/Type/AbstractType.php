@@ -192,28 +192,35 @@ abstract class AbstractType
             $attributeValues = $product->attribute_values
                 ->where('attribute_id', $attribute->id);
 
+            $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null;
+
+            $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null;
+
             if ($attribute->value_per_channel) {
+
                 if ($attribute->value_per_locale) {
-                    $attributeValues = $attributeValues
-                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null)
-                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null);
+                    $filteredAttributeValues = $attributeValues
+                        ->where('channel', $channel)
+                        ->where('locale', $locale);
                 } else {
-                    $attributeValues = $attributeValues
-                        ->where('channel', $attribute->value_per_channel ? $data['channel'] : null);
+                    $filteredAttributeValues = $attributeValues
+                        ->where('channel', $channel);
                 }
             } else {
                 if ($attribute->value_per_locale) {
-                    $attributeValues = $attributeValues
-                        ->where('locale', $attribute->value_per_locale ? $data['locale'] : null);
+                    $filteredAttributeValues = $attributeValues
+                        ->where('locale', $locale);
+                } else {
+                    $filteredAttributeValues = $attributeValues;
                 }
             }
 
-            $attributeValue = $attributeValues->first();
+            $attributeValue = $filteredAttributeValues->first();
 
             if (! $attributeValue) {
                 $uniqueId = implode('|', array_filter([
-                    $data['channel'],
-                    $data['locale'],
+                    $channel,
+                    $locale,
                     $product->id,
                     $attribute->id,
                 ]));

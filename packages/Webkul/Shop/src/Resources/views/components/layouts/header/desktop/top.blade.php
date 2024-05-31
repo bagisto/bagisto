@@ -148,7 +148,7 @@
         type="text/x-template"
         id="v-currency-switcher-template"
     >
-        <div class="mt-2.5 grid gap-1 pb-2.5">
+        <div class="my-2.5 grid gap-1 max-md:my-0">
             <span
                 class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                 v-for="currency in currencies"
@@ -164,7 +164,7 @@
         type="text/x-template"
         id="v-locale-switcher-template"
     >
-        <div class="mt-2.5 grid gap-1 pb-2.5">
+        <div class="my-2.5 grid gap-1 max-md:my-0">
             <span
                 class="flex cursor-pointer items-center gap-2.5 px-5 py-2 text-base hover:bg-gray-100"
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"

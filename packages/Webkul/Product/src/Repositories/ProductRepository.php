@@ -16,6 +16,11 @@ use Webkul\Product\Contracts\Product;
 class ProductRepository extends Repository
 {
     /**
+     * Search engine.
+     */
+    protected $searchEngine = 'database';
+
+    /**
      * Create a new repository instance.
      *
      * @return void
@@ -103,6 +108,16 @@ class ProductRepository extends Repository
     }
 
     /**
+     * Copy product.
+     */
+    public function setSearchEngine(string $searchEngine): self
+    {
+        $this->searchEngine = $searchEngine;
+
+        return $this;
+    }
+
+    /**
      * Return product by filtering through attribute values.
      *
      * @param  string  $code
@@ -120,21 +135,34 @@ class ProductRepository extends Repository
 
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
-                $attributeValues = $attributeValues
+                $filteredAttributeValues = $attributeValues
                     ->where('channel', core()->getRequestedChannelCode())
                     ->where('locale', core()->getRequestedLocaleCode());
+
+                if ($attributeValues->isEmpty()) {
+                    $filteredAttributeValues = $attributeValues
+                        ->where('channel', core()->getRequestedChannelCode())
+                        ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel());
+                }
             } else {
-                $attributeValues = $attributeValues
+                $filteredAttributeValues = $attributeValues
                     ->where('channel', core()->getRequestedChannelCode());
             }
         } else {
             if ($attribute->value_per_locale) {
-                $attributeValues = $attributeValues
+                $filteredAttributeValues = $attributeValues
                     ->where('locale', core()->getRequestedLocaleCode());
+
+                if ($filteredAttributeValues->isEmpty()) {
+                    $filteredAttributeValues = $attributeValues
+                        ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel());
+                }
+            } else {
+                $filteredAttributeValues = $attributeValues;
             }
         }
 
-        return $attributeValues->first()?->product;
+        return $filteredAttributeValues->first()?->product;
     }
 
     /**
@@ -142,7 +170,7 @@ class ProductRepository extends Repository
      */
     public function findBySlug(string $slug): ?Product
     {
-        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
+        if ($this->searchEngine == 'elastic') {
             $indices = $this->elasticSearchRepository->search([
                 'url_key' => $slug,
             ], [
@@ -182,7 +210,7 @@ class ProductRepository extends Repository
      */
     public function getAll(array $params = [])
     {
-        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
+        if ($this->searchEngine == 'elastic') {
             return $this->searchFromElastic($params);
         }
 
@@ -196,11 +224,7 @@ class ProductRepository extends Repository
      */
     public function searchFromDatabase(array $params = [])
     {
-        $params = array_merge([
-            'status'               => 1,
-            'visible_individually' => 1,
-            'url_key'              => null,
-        ], $params);
+        $params['url_key'] ??= null;
 
         if (! empty($params['query'])) {
             $params['name'] = $params['query'];
@@ -404,6 +428,11 @@ class ProductRepository extends Repository
             'price_indices',
             'inventory_indices',
             'reviews',
+            'variants',
+            'variants.attribute_family',
+            'variants.attribute_values',
+            'variants.price_indices',
+            'variants.inventory_indices',
         ])->scopeQuery(function ($query) use ($indices) {
             $qb = $query->distinct()
                 ->whereIn('products.id', $indices['ids']);

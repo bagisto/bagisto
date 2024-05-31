@@ -56,7 +56,23 @@ class LocalesDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'direction',
             'label'      => trans('admin::app.settings.locales.index.datagrid.direction'),
-            'type'       => 'string',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => [
+                        [
+                            'label' => trans('admin::app.settings.locales.index.datagrid.ltr'),
+                            'value' => 'ltr',
+                        ],
+                        [
+                            'label' => trans('admin::app.settings.locales.index.datagrid.rtl'),
+                            'value' => 'rtl',
+                        ],
+                    ],
+                ],
+            ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,

@@ -128,22 +128,13 @@ class ElasticSearch extends AbstractIndexer
                     'variants',
                     'attribute_family',
                     'attribute_values',
+                    'variants.attribute_family',
                     'variants.attribute_values',
                     'price_indices',
                     'variants.price_indices',
                     'inventory_indices',
                     'variants.inventory_indices',
                 ])
-                ->join('product_attribute_values as visible_individually_pav', function ($join) {
-                    $join->on('products.id', '=', 'visible_individually_pav.product_id')
-                        ->where('visible_individually_pav.attribute_id', 7)
-                        ->where('visible_individually_pav.boolean_value', 1);
-                })
-                ->join('product_attribute_values as status_pav', function ($join) {
-                    $join->on('products.id', '=', 'status_pav.product_id')
-                        ->where('status_pav.attribute_id', 8)
-                        ->where('status_pav.boolean_value', 1);
-                })
                 ->cursorPaginate($this->batchSize);
 
             $this->reindexBatch($paginator->items());
@@ -167,8 +158,6 @@ class ElasticSearch extends AbstractIndexer
     {
         $refreshIndices = ['body' => []];
 
-        $removeIndices = [];
-
         foreach ($products as $product) {
             $this->setProduct($product);
 
@@ -178,33 +167,20 @@ class ElasticSearch extends AbstractIndexer
                 foreach ($channel->locales as $locale) {
                     $this->setLocale($locale);
 
-                    $indexName = $this->getIndexName();
+                    $refreshIndices['body'][] = [
+                        'index' => [
+                            '_index' => $this->getIndexName(),
+                            '_id'    => $product->id,
+                        ],
+                    ];
 
-                    if (
-                        ! $this->product->status
-                        || ! $this->product->visible_individually
-                    ) {
-                        $removeIndices[$indexName][] = $product->id;
-                    } else {
-                        $refreshIndices['body'][] = [
-                            'index' => [
-                                '_index' => $indexName,
-                                '_id'    => $product->id,
-                            ],
-                        ];
-
-                        $refreshIndices['body'][] = $this->getIndices();
-                    }
+                    $refreshIndices['body'][] = $this->getIndices();
                 }
             }
         }
 
         if (! empty($refreshIndices['body'])) {
             ElasticsearchClient::bulk($refreshIndices);
-        }
-
-        if (! empty($removeIndices)) {
-            $this->deleteIndices($removeIndices);
         }
     }
 
@@ -249,11 +225,12 @@ class ElasticSearch extends AbstractIndexer
     public function getIndices()
     {
         $properties = array_merge([
-            'id'           => $this->product->id,
-            'type'         => $this->product->type,
-            'sku'          => $this->product->sku,
-            'category_ids' => $this->product->categories->pluck('id')->toArray(),
-            'created_at'   => $this->product->created_at,
+            'id'                  => $this->product->id,
+            'type'                => $this->product->type,
+            'sku'                 => $this->product->sku,
+            'attribute_family_id' => $this->product->attribute_family_id,
+            'category_ids'        => $this->product->categories->pluck('id')->toArray(),
+            'created_at'          => $this->product->created_at,
         ], $this->product->additional ?? []);
 
         $attributes = $this->getAttributes();
@@ -262,6 +239,8 @@ class ElasticSearch extends AbstractIndexer
             $attributeValue = $this->getAttributeValue($attribute);
 
             if ($attribute->code == 'price') {
+                $properties[$attribute->code] = (float) $attributeValue?->{$attribute->column_name};
+
                 foreach ($this->getCustomerGroups() as $customerGroup) {
                     if (! app()->runningInConsole()) {
                         $this->product->load('price_indices');
@@ -311,6 +290,8 @@ class ElasticSearch extends AbstractIndexer
             return $query->where(function ($qb) {
                 return $qb->orWhereIn('code', [
                     'name',
+                    'status',
+                    'visible_individually',
                     'new',
                     'featured',
                     'url_key',
@@ -346,7 +327,9 @@ class ElasticSearch extends AbstractIndexer
             }
         } else {
             if ($attribute->value_per_locale) {
-                $attributeValues = $attributeValues->where('locale', $this->locale->code)->first();
+                $attributeValues = $attributeValues->where('locale', $this->locale->code);
+            } else {
+                $attributeValues = $attributeValues;
             }
         }
 

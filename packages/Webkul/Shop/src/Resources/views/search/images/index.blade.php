@@ -1,7 +1,7 @@
 <v-image-search>
     <button
         type="button"
-        class="icon-camera absolute top-2.5 flex items-center text-xl ltr:right-3 ltr:pr-3 rtl:left-3 rtl:pl-3"
+        class="icon-camera absolute top-3 flex items-center text-xl max-md:top-2 ltr:right-3 ltr:pr-3 max-md:ltr:right-1.5 rtl:left-3 rtl:pl-3 max-md:rtl:left-1.5"
         aria-label="@lang('shop::app.search.images.index.search')"
     >
     </button>
@@ -14,7 +14,7 @@
     >
         <div>
             <label
-                class="icon-camera absolute top-2.5 flex cursor-pointer items-center text-xl ltr:right-3 ltr:pr-3 rtl:left-3 rtl:pl-3"
+                class="icon-camera absolute top-3 flex items-center text-xl max-md:top-2 ltr:right-3 ltr:pr-3 max-md:ltr:right-1.5 rtl:left-3 rtl:pl-3 max-md:rtl:left-1.5"
                 aria-label="@lang('shop::app.search.images.index.search')"
                 :for="'v-image-search-' + $.uid"
                 v-if="! isSearching"
@@ -22,12 +22,12 @@
             </label>
 
             <label
-                class="absolute top-2.5 flex cursor-pointer items-center text-xl ltr:right-3 ltr:pr-3 rtl:left-3 rtl:pl-3"
+                class="absolute top-2.5 flex cursor-pointer items-center text-xl ltr:right-3 ltr:pr-3 max-md:ltr:pr-1 rtl:left-3 rtl:pl-3 max-md:rtl:pl-1"
                 v-else
             >
                 <!-- Spinner -->
                 <svg
-                    class="h-6 w-6 animate-spin text-black"
+                    class="h-5 w-5 animate-spin text-black"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -151,7 +151,7 @@
                                                     }
                                                 });
                                             } catch (error) {
-                                                this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.something-went-wrong')'});
+                                                this.$emitter.emit('add-flash', { type: 'error', message: "@lang('shop::app.search.images.index.something-went-wrong')"});
                                             }
 
                                             localStorage.searchedImageUrl = self.uploadedImageUrl;
@@ -168,7 +168,7 @@
                                         app();
                                     })
                                     .catch((error) => {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.something-went-wrong')'});
+                                        this.$emitter.emit('add-flash', { type: 'error', message: "@lang('shop::app.search.images.index.something-went-wrong')"});
 
                                         this.isSearching = false;
                                     });

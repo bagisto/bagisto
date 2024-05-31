@@ -4,7 +4,7 @@
         @lang('admin::app.settings.taxes.rates.edit.title')
     </x-slot>
 
-    {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.before') !!}
+    {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.before', ['taxRate' => $taxRate]) !!}
 
      <!-- Input Form -->
      <x-admin::form
@@ -41,7 +41,7 @@
         </v-edit-taxrate>
     </x-admin::form>
 
-    {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.after') !!}
+    {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.after', ['taxRate' => $taxRate]) !!}
 
     @pushOnce('scripts')
         <script
@@ -49,7 +49,7 @@
             id="v-edit-taxrate-template"
         >
 
-            {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.edit_form_controls.before') !!}
+            {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.edit_form_controls.before', ['taxRate' => $taxRate]) !!}
 
             <!-- Tax Rates Informations -->
             <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
@@ -180,7 +180,7 @@
                 <!-- Right sub-component -->
                 <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
-                    {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.card.accordion.basic_settings.before') !!}
+                    {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.card.accordion.basic_settings.before', ['taxRate' => $taxRate]) !!}
 
                     <!-- Basic Settings -->
                     <x-admin::accordion>
@@ -262,12 +262,12 @@
                         </x-slot>
                     </x-admin::accordion>
 
-                    {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.card.accordion.basic_settings.after') !!}
+                    {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.card.accordion.basic_settings.after', ['taxRate' => $taxRate]) !!}
 
                 </div>
             </div>
 
-            {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.edit_form_controls.after') !!}
+            {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.edit_form_controls.after', ['taxRate' => $taxRate]) !!}
 
         </script>
 

@@ -40,7 +40,7 @@
                                 v-if="massAction?.options?.length"
                             >
                                 <a
-                                    class="whitespace-no-wrap flex cursor-not-allowed justify-between gap-1.5 !rounded-0 px-4 py-2 bg-white hover:bg-gray-100"
+                                    class="whitespace-no-wrap !rounded-0 flex cursor-not-allowed justify-between gap-1.5 bg-white px-4 py-2 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                 >
                                     <i
@@ -57,7 +57,7 @@
                                     <i class="icon-arrow-right text-2xl"></i>
                                 </a>
 
-                                <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] rounded border border-gray-300 bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
+                                <ul class="absolute top-0 z-10 hidden w-max min-w-[150px] rounded border border-gray-300 bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block ltr:left-full rtl:right-full">
                                     <li v-for="option in massAction.options">
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-100"
