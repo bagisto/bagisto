@@ -86,24 +86,16 @@
                         <template v-if="! isShowSavedFilters">
                             <!-- Quick Filters Accordion -->
                             <x-admin::accordion
-                                class="select-none rounded-none !shadow-none"
+                                class="select-none rounded-none !border-none !shadow-none"
                                 v-if="savedFilters.available.length > 0"
                             >
                                 <x-slot:header class="px-4">
                                     <p class="w-full text-base font-semibold text-gray-800 dark:text-white">
                                         @lang('admin::app.components.datagrid.toolbar.filter.quick-filters')
                                     </p>
-
-                                    <div
-                                        class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"
-                                        @click="removeAppliedSavedFilters()"
-                                        v-if="applied.savedFilterId"
-                                    >
-                                        @lang('admin::app.components.datagrid.toolbar.filter.clear-btn')
-                                    </div>
                                 </x-slot>
 
-                                <x-slot:content class="!p-0">
+                                <x-slot:content class="border-b !p-0">
                                     <div class="grid gap-1 !p-0 pb-2.5">
                                         <!-- Listing of Quick Filters (Saved Filters) -->
                                         <div v-for="(filter,index) in savedFilters.available">
@@ -127,8 +119,18 @@
 
                             <!-- Custom Filters Accordion -->
                             <x-admin::accordion class="select-none !rounded-none !border-none !shadow-none">
-                                <x-slot:header class="px-4 text-base font-semibold text-gray-800 dark:text-white">
-                                    @lang('admin::app.components.datagrid.toolbar.filter.custom-filters')
+                                <x-slot:header class="px-4">
+                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                        @lang('admin::app.components.datagrid.toolbar.filter.custom-filters')
+                                    </p>
+                                
+                                    <div
+                                        v-if="hasAnyAppliedColumn()"
+                                        class="cursor-pointer px-2.5 text-xs font-medium leading-6 text-blue-600 transition-all hover:underline ltr:ml-16 rtl:mr-16"
+                                        @click="removeAllAppliedFilters()"
+                                    >
+                                        @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                                    </div>
                                 </x-slot>
 
                                 <x-slot:content class="!p-0">
@@ -783,11 +785,11 @@
                 },
 
                 /**
-                 * Remove applied saved filter.
+                 * Remove all applied filters.
                  *
                  * @returns {void}
                  */
-                removeAppliedSavedFilters() {
+                removeAllAppliedFilters() {
                     this.filters = {
                         columns: [],
                     };
