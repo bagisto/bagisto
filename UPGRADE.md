@@ -9,6 +9,7 @@
 - [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
 - [Shop API Response Updates](#the-shop-api-response-updates)
 - [Admin and Shop Menu Updates](#the-admin-shop-menu-updates)
+- [Admin ACL Updates](#the-admin-acl-updates)
 
 ## Medium Impact Changes
 
@@ -1135,6 +1136,81 @@ class ShopServiceProvider extends ServiceProvider
 ```
 
 The getItems() methods of the menu() facade accept different areas of the menu. For example, for the admin area, you need to provide the config name of the menu, whereas for the shop area, you should provide the name 'customer'.
+
+
+<a name="the-admin-acl-updates"></a>
+#### Admin ACL Updates
+
+**Impact Probability: High**
+
+1. Previously, the composeView method included logic to share a dynamically generated acl structure with several Blade views in the admin interface. This logic has been removed. Here’s a detailed breakdown of what was removed:
+
+
+```diff
+class AdminServiceProvider extends ServiceProvider
+{
+    public function boot(Router $router)
+    {
+        ...
+
+-        $this->registerACL();
+
+        ...
+
+        $this->app->register(EventServiceProvider::class);
+    }
+
+-   protected function composeView()
+-   {
+-       view()->composer([
+-           'admin::settings.roles.create',
+-           'admin::settings.roles.edit',
+-       ], function ($view) {
+-           $view->with('acl', $this->createACL());
+-       });
+-   }
+
+-    protected function registerACL()
+-    {
+-        $this->app->singleton('acl', function () {
+-            return $this->createACL();
+-        });
+-    }
+-
+-    protected function createACL()
+-    {
+-        static $tree;
+-
+-        if ($tree) {
+-            return $tree;
+-        }
+-
+-        $tree = Tree::create();
+-
+-        foreach (config('acl') as $item) {
+-            $tree->add($item, 'acl');
+-        }
+-
+-        $tree->items = core()->sortItems($tree->items);
+-
+-        return $tree;
+-    }
+}
+```
+
+#### How to use it?
+
+##### Get all acl items.
+
+```php
+    $acl = acl()->getItems();
+```
+
+##### Get all roles.
+
+```php 
+    $roles = acl()->getRoles();
+```
 
 <a name="renamed-star-rating-blade"></a>
 #### Renamed `star-rating.blade.php`
