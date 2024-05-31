@@ -123,7 +123,7 @@
                                     <p class="text-base font-semibold text-gray-800 dark:text-white">
                                         @lang('admin::app.components.datagrid.toolbar.filter.custom-filters')
                                     </p>
-                                
+
                                     <div
                                         v-if="hasAnyAppliedColumn()"
                                         class="cursor-pointer px-2.5 text-xs font-medium leading-6 text-blue-600 transition-all hover:underline ltr:ml-16 rtl:mr-16"
@@ -394,7 +394,7 @@
                                                                 v-if="findAppliedColumn(column.index)"
                                                             >
                                                                 <span>
-                                                                    @{{ getFormattedAvailableDateRanges(findAppliedColumn(column.index)) }}
+                                                                    @{{ getFormattedDates(findAppliedColumn(column.index)) }}
                                                                 </span>
 
                                                                 <span
@@ -480,7 +480,7 @@
                                                                 v-if="findAppliedColumn(column.index)"
                                                             >
                                                                 <span>
-                                                                    @{{ getFormattedAvailableDateRanges(findAppliedColumn(column.index)) }}
+                                                                    @{{ getFormattedDates(findAppliedColumn(column.index)) }}
                                                                 </span>
 
                                                                 <span
@@ -639,7 +639,7 @@
                                                     <template v-if="column.type === 'date_range' || column.type === 'datetime_range'">
                                                         <p class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white">
                                                             <span>
-                                                                @{{ getFormattedAvailableDateRanges(column) }}
+                                                                @{{ getFormattedDates(column) }}
                                                             </span>
 
                                                             <div>
@@ -1049,11 +1049,11 @@
                 },
 
                 /**
-                 * Get formatted available date ranges.
+                 * Get formatted dates.
                  *
                  * @returns {string}
                  */
-                getFormattedAvailableDateRanges(appliedColumn)
+                getFormattedDates(appliedColumn)
                 {
                     if (! appliedColumn) {
                         return '';

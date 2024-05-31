@@ -409,7 +409,12 @@ abstract class DataGrid
                             if (is_string($requestedValues)) {
                                 $rangeOption = collect($column->getRangeOptions())->firstWhere('name', $requestedValues);
 
-                                $requestedValues = [[$rangeOption['from'], $rangeOption['to']]];
+                                $requestedValues = [
+                                    [
+                                        $rangeOption['from'].' 00:00:01',
+                                        $rangeOption['to'].' 23:59:59',
+                                    ],
+                                ];
                             }
 
                             foreach ($requestedValues as $value) {
