@@ -3445,6 +3445,18 @@ return [
                     'info'  => 'Set guest checkout, product view page, cart view page, store front, review and attribute social share.',
                     'title' => 'Products',
 
+                    'search' => [
+                        'admin-mode-info'      => 'Mega Search, Datagrid, and other search functionalities in the admin panel will be based on the selected search engine.',
+                        'admin-mode'           => 'Admin Search Mode',
+                        'database'             => 'Database',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Search Engine',
+                        'storefront-mode-info' => 'Search functionality on the storefront will be based on the selected search engine including category page, search page, and other search functionalities.',
+                        'storefront-mode'      => 'Storefront Search Mode',
+                        'title-info'           => 'To set up the search engine for product searches, you can choose between a database and Elasticsearch based on your requirements. If you have a large number of products, Elasticsearch is recommended.',
+                        'title'                => 'Search',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Allow Guest Checkout',
                         'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',
@@ -3469,9 +3481,7 @@ return [
                         'buy-now-button-display' => 'Allow customers to directly buy products',
                         'cheapest-first'         => 'Cheapest First',
                         'comma-separated'        => 'Comma Separated',
-                        'database'               => 'Database',
                         'default-list-mode'      => 'Default List Mode',
-                        'elastic'                => 'Elastic Search',
                         'expensive-first'        => 'Expensive First',
                         'from-a-z'               => 'From A-Z',
                         'from-z-a'               => 'From Z-A',
@@ -3480,7 +3490,6 @@ return [
                         'list'                   => 'List',
                         'oldest-first'           => 'Oldest First',
                         'products-per-page'      => 'Products Per Page',
-                        'search-mode'            => 'Search Mode',
                         'sort-by'                => 'Sort By',
                         'title'                  => 'Storefront',
                         'title-info'             => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',

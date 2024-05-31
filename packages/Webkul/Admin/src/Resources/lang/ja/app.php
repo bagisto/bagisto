@@ -3445,6 +3445,18 @@ return [
                     'info'  => 'ゲストチェックアウト、製品表示ページ、カート表示ページ、ストアフロント、レビュー、属性ソーシャルシェアを設定します。',
                     'title' => '製品',
 
+                    'search' => [
+                        'admin-mode-info'      => '管理者モードでは、Mega Search、Datagrid、その他の管理パネルの検索機能は選択した検索エンジンに基づいて動作します。',
+                        'admin-mode'           => '管理者検索モード',
+                        'database'             => 'データベース',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => '検索エンジン',
+                        'storefront-mode-info' => 'ストアフロントの検索機能は、カテゴリページ、検索ページ、その他の検索機能を含む、選択した検索エンジンに基づいて動作します。',
+                        'storefront-mode'      => 'ストアフロント検索モード',
+                        'title-info'           => '製品の検索エンジンを設定するには、データベースとElasticsearchのいずれかを選択できます。製品数が多い場合は、Elasticsearchが推奨されます。',
+                        'title'                => '検索',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'ゲストチェックアウトを許可',
                         'allow-guest-checkout-hint' => 'ヒント：オンにすると、このオプションは各製品ごとに設定できます。',
@@ -3469,9 +3481,7 @@ return [
                         'buy-now-button-display' => '顧客に直接製品購入を許可',
                         'cheapest-first'         => '最安値から',
                         'comma-separated'        => 'カンマ区切り',
-                        'database'               => 'データベース',
                         'default-list-mode'      => 'デフォルトリストモード',
-                        'elastic'                => 'エラスティックサーチ',
                         'expensive-first'        => '最高価格から',
                         'from-a-z'               => 'AからZへ',
                         'from-z-a'               => 'ZからAへ',
@@ -3480,7 +3490,6 @@ return [
                         'list'                   => 'リスト',
                         'oldest-first'           => '古い順',
                         'products-per-page'      => 'ページごとの製品数',
-                        'search-mode'            => '検索モード',
                         'sort-by'                => '並べ替え',
                         'title'                  => 'ストアフロント',
                         'title-info'             => 'ストアフロントは、オンラインショップの顧客向けインターフェースで、製品、カテゴリ、およびナビゲーションをシームレスなショッピング体験のために展示します。',

@@ -3445,6 +3445,18 @@ return [
                     'info'  => 'Stel gastafrekening, productweergavepagina, winkelwagenweergavepagina, winkelvoorkant, beoordeling en attribuutsociale deling in.',
                     'title' => 'Producten',
 
+                    'search' => [
+                        'admin-mode-info'      => 'Mega Zoeken, Datagrid en andere zoekfunctionaliteiten in het beheerderspaneel zijn gebaseerd op de geselecteerde zoekmachine.',
+                        'admin-mode'           => 'Beheerders Zoekmodus',
+                        'database'             => 'Database',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Zoekmachine',
+                        'storefront-mode-info' => 'Zoekfunctionaliteit op de winkelvoorkant is gebaseerd op de geselecteerde zoekmachine, inclusief de categoriepagina, zoekpagina en andere zoekfunctionaliteiten.',
+                        'storefront-mode'      => 'Winkelvoorkant Zoekmodus',
+                        'title-info'           => 'Om de zoekmachine in te stellen voor productzoekopdrachten, kunt u kiezen tussen een database en Elasticsearch op basis van uw vereisten. Als u een groot aantal producten heeft, wordt Elasticsearch aanbevolen.',
+                        'title'                => 'Zoeken',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Sta gastafrekening toe',
                         'allow-guest-checkout-hint' => 'Hint: Als dit is ingeschakeld, kan deze optie specifiek worden geconfigureerd voor elk product.',
@@ -3469,9 +3481,7 @@ return [
                         'buy-now-button-display' => 'Klanten toestaan om producten direct te kopen',
                         'cheapest-first'         => 'Goedkoopste eerst',
                         'comma-separated'        => 'Komma gescheiden',
-                        'database'               => 'Database',
                         'default-list-mode'      => 'Standaard lijstmodus',
-                        'elastic'                => 'Elastische zoekopdracht',
                         'expensive-first'        => 'Duurste eerst',
                         'from-a-z'               => 'Van A-Z',
                         'from-z-a'               => 'Van Z-A',
@@ -3480,7 +3490,6 @@ return [
                         'list'                   => 'Lijst',
                         'oldest-first'           => 'Oudste eerst',
                         'products-per-page'      => 'Producten per pagina',
-                        'search-mode'            => 'Zoekmodus',
                         'sort-by'                => 'Sorteer op',
                         'title'                  => 'Etalage',
                         'title-info'             => 'De etalage is de klantgerichte interface van een online winkel, waar producten, categorieën en navigatie worden getoond voor een naadloze winkelervaring.',
