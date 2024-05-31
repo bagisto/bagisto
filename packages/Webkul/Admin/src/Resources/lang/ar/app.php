@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'احتيال',
                     'grand-total'     => 'الإجمالي الكبير',
                     'id'              => '#:id',
-                    'images'          => 'الصور',
+                    'items'           => 'العناصر',
                     'location'        => 'الموقع',
                     'order-id'        => 'رقم الطلب',
                     'pay-by'          => 'الدفع بواسطة - :method',
