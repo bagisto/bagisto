@@ -790,11 +790,9 @@
                  * @returns {void}
                  */
                 removeAppliedSavedFilters() {
-                    this.applied.savedFilterId = null;
-
                     this.filters = {
                         columns: [],
-                    }
+                    };
 
                     this.$emit('applyFilters', this.filters);
                 },
@@ -885,6 +883,8 @@
                         agree: () => {
                             this.$axios.delete(`{{ route('admin.datagrid.saved_filters.destroy', '') }}/${filter.id}`)
                                 .then(response => {
+                                    this.applySavedFilter(null);
+
                                     this.savedFilters.available = this.savedFilters.available.filter((savedFilter) => savedFilter.id !== filter.id);
 
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });

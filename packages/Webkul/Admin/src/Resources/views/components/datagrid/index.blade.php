@@ -131,6 +131,10 @@
                     this.updateExportComponent();
                 },
 
+                'applied.savedFilterId': function (newSavedFilterId, oldSavedFilterId) {
+                    this.updateDatagrids();
+                },
+
                 'applied.massActions.indices': function (newIndices, oldIndices) {
                     this.setCurrentSelectionMode();
                 },
@@ -337,7 +341,9 @@
                     /**
                      * This will check for empty column values and reset the saved filter ID to ensure the saved filter is not highlighted.
                      */
-                    const isEmptyColumnValue = this.applied.filters.columns.every((column) => column.value.length === 0);
+                    const isEmptyColumnValue = this.applied.filters.columns
+                        .filter((column) => column.index !== 'all')
+                        .every((column) => column.value.length === 0);
 
                     if (isEmptyColumnValue) {
                         this.applied.savedFilterId = null;
@@ -358,6 +364,12 @@
                  * @returns {void}
                  */
                  applySavedFilter(filter) {
+                    if (! filter) {
+                        this.applied.savedFilterId = null;
+
+                        return;
+                    }
+
                     this.applied = filter.applied;
 
                     this.applied.savedFilterId = filter.id;
