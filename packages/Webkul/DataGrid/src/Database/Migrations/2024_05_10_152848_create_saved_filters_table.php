@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('src');
             $table->json('applied');
             $table->timestamps();
+
+            $table->unique(['user_id', 'name', 'src']);
         });
     }
 

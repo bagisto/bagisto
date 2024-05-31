@@ -25,19 +25,17 @@ class SavedFilterController extends Controller
             'name' => 'required|unique:saved_filters,name,NULL,id,src,'.request('src').',user_id,'.$userId,
         ]);
 
-        $savedFilter = $this->savedFilterRepository->create(array_merge(
-            request()->only([
-                'name',
-                'src',
-                'applied',
-            ]),
-            ['user_id' => $userId]
-        ));
+        $savedFilter = $this->savedFilterRepository->create([
+            'user_id' => $userId,
+            'name'    => request('name'),
+            'src'     => request('src'),
+            'applied' => request('applied'),
+        ]);
 
         return response()->json([
             'data'    => $savedFilter,
             'message' => trans('admin::app.components.datagrid.toolbar.filter.saved-success'),
-        ], 200);
+        ]);
     }
 
     /**
@@ -62,6 +60,15 @@ class SavedFilterController extends Controller
             'name' => 'required|unique:saved_filters,name,'.$id.',id,src,'.request('src').',user_id,'.$userId,
         ]);
 
+        $savedFilter = $this->savedFilterRepository->findOneWhere([
+            'id'     => $id,
+            'user_id' => auth()->guard('admin')->user()->id,
+        ]);
+
+        if (! $savedFilter) {
+            return response()->json([], 404);
+        }
+
         $updateFilter = $this->savedFilterRepository->update(request()->only([
             'name',
             'src',
@@ -71,7 +78,7 @@ class SavedFilterController extends Controller
         return response()->json([
             'data'    => $updateFilter,
             'message' => trans('admin::app.components.datagrid.toolbar.filter.updated-success'),
-        ], 200);
+        ]);
     }
 
     /**
@@ -86,6 +93,6 @@ class SavedFilterController extends Controller
 
         return response()->json([
             'message' => trans('admin::app.components.datagrid.toolbar.filter.delete-success'),
-        ], 200);
+        ]);
     }
 }
