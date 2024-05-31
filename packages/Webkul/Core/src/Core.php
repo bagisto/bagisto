@@ -5,7 +5,6 @@ namespace Webkul\Core;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Predis\Command\Redis\FUNCTIONS;
 use Webkul\Core\Concerns\CurrencyFormatter;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -1015,7 +1014,7 @@ class Core
     /**
      * Get group of active configuration.
      */
-    public function getNameField(string $nameKey = null): string
+    public function getNameField(?string $nameKey = null): string
     {
         if (! $nameKey) {
             return '';
@@ -1033,9 +1032,7 @@ class Core
             return '';
         }
 
-        [$fieldName, $fieldValue] = explode(':' , $field['depends']);
-
-        $dependNameKey = $item['key'] . '.' . $fieldName;
+        $dependNameKey = $item['key'].'.'.collect(explode(':', $field['depends']))->first();
 
         return $this->getNameField($dependNameKey);
     }
@@ -1079,7 +1076,7 @@ class Core
                     'value' => $option['value'],
                 ])->toArray();
             }
-    
+
             return $value;
         })->toArray();
     }
