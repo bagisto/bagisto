@@ -1,13 +1,11 @@
-<!-- Static-Content Component -->
-<v-static-content></v-static-content>
-
+<!-- Static Content Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"
         id="v-static-content-template"
     >
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
-            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
+            <div class="flex flex-1 flex-col gap-2 min-w-[931px] max-xl:flex-auto">
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
                         <div class="flex flex-col gap-1">
@@ -294,7 +292,7 @@
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "@lang('admin::app.settings.themes.edit.image-upload-message')"
+                            message: '@lang('admin::app.settings.themes.edit.image-upload-message')'
                         });
 
                         imageInput.value = '';
@@ -371,8 +369,8 @@
                     let formData = new FormData();
 
                     formData.append('{{ $currentLocale->code }}[options][][image]', selectedImage);
-                    formData.append('id', "{{ $theme->id }}");
-                    formData.append('type', "static_content");
+                    formData.append('id', '{{ $theme->id }}');
+                    formData.append('type', 'static_content');
 
                     this.$axios.post('{{ route('admin.settings.themes.store') }}', formData)
                         .then((response) => {
@@ -461,25 +459,25 @@
         });
     </script>
 
-         <!-- Code mirror script CDN -->
-         <script
-         type="text/javascript"
-         src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.js"
-     >
-     </script>
+    <!-- Code mirror script CDN -->
+    <script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.js"
+    >
+    </script>
 
-     <!-- 
-         Html mixed and xml cnd both are dependent 
-         Used for html and css theme
-     -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/xml/xml.js"></script>
+    <!-- 
+        Html mixed and xml cnd both are dependent 
+        Used for html and css theme
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/xml/xml.js"></script>
 
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/htmlmixed/htmlmixed.js"></script>
 
-     <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/css/css.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/css/css.js"></script>
 
-     <!-- Beatutify html and css -->
-     <script src="https://cdn.jsdelivr.net/npm/simply-beautiful@latest/dist/index.min.js"></script>
+    <!-- Beatutify html and css -->
+    <script src="https://cdn.jsdelivr.net/npm/simply-beautiful@latest/dist/index.min.js"></script>
 @endPushOnce
 
 @pushOnce('styles')

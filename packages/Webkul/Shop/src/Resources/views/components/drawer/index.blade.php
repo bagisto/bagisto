@@ -18,12 +18,12 @@
 
     @isset($header)
         <template v-slot:header="{ close }">
-            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-6 pb-5 max-sm:px-4']) }}>
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-6 pb-5 max-md:gap-y-1.5 max-md:border-b max-md:border-zinc-200 max-md:p-4 max-md:font-semibold']) }}>
                 {{ $header }}
 
-                <div class="absolute top-5 ltr:right-5 rtl:left-5">
+                <div class="absolute top-5 max-md:top-4 ltr:right-5 rtl:left-5">
                     <span
-                        class="icon-cancel cursor-pointer text-3xl"
+                        class="icon-cancel cursor-pointer text-3xl max-md:text-2xl"
                         @click="close"
                     >
                     </span>
@@ -34,7 +34,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div class="flex-1 overflow-auto px-6 max-sm:px-4">
+            <div {{ $content->attributes->merge(['class' => 'flex-1 overflow-auto px-6 max-md:px-4']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -42,7 +42,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div class="pb-8">
+            <div {{ $footer->attributes->merge(['class' => 'pb-8 max-md:pb-2']) }}>
                 {{ $footer }}
             </div>
         </template>
@@ -91,7 +91,7 @@
                 :leave-to-class="enterFromLeaveToClasses"
             >
                 <div
-                    class="fixed z-[1000] overflow-hidden bg-white max-sm:!w-full"
+                    class="fixed z-[1000] overflow-hidden bg-white max-md:!w-full"
                     :class="{
                         'inset-x-0 top-0': position == 'top',
                         'inset-x-0 bottom-0': position == 'bottom',
@@ -169,7 +169,7 @@
                     if (this.isOpen) {
                         document.body.style.overflow = 'hidden';
                     } else {
-                        document.body.style.overflow ='scroll';
+                        document.body.style.overflow ='auto';
                     }
 
                     this.$emit('toggle', { isActive: this.isOpen });

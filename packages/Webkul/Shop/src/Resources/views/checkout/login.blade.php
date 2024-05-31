@@ -1,7 +1,7 @@
 <!-- Checkout Login Vue JS Component -->
 <v-checkout-login>
     <div class="flex items-center">
-        <span class="cursor-pointer text-base font-medium text-[#0A49A7]">
+        <span class="cursor-pointer text-base font-medium text-blue-700">
             @lang('shop::app.checkout.login.title')
         </span>
     </div>
@@ -15,7 +15,7 @@
         <div>
             <div class="flex items-center">
                 <span
-                    class="cursor-pointer text-base font-medium text-[#0A49A7]"
+                    class="cursor-pointer text-base font-medium text-blue-700"
                     role="button"
                     @click="$refs.loginModel.open()"
                 >
@@ -38,7 +38,7 @@
                     <x-shop::modal ref="loginModel">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <h2 class="text-2xl font-medium max-sm:text-xl">
+                            <h2 class="text-2xl font-medium max-md:text-xl">
                                 @lang('shop::app.checkout.login.title')
                             </h2>
                         </x-slot>
@@ -52,7 +52,7 @@
 
                                 <x-shop::form.control-group.control
                                     type="email"
-                                    class="px-6 py-5"
+                                    class="px-6 py-4"
                                     name="email"
                                     rules="required|email"
                                     :label="trans('shop::app.checkout.login.email')"
@@ -71,7 +71,7 @@
 
                                 <x-shop::form.control-group.control
                                     type="password"
-                                    class="px-6 py-5"
+                                    class="px-6 py-4"
                                     id="password"
                                     name="password"
                                     rules="required|min:6"
@@ -89,7 +89,7 @@
                         <x-slot:footer>
                             <div class="flex flex-wrap items-center gap-4">
                                 <x-shop::button
-                                    class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3"
+                                    class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:rounded-xl"
                                     :title="trans('shop::app.checkout.login.title')"
                                     ::loading="isStoring"
                                     ::disabled="isStoring"

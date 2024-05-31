@@ -5,14 +5,14 @@
         @lang('shop::app.home.contact.title')
     </x-slot>
 
-    <div class="container mt-8 max-1180:px-5">
+    <div class="container mt-8 max-1180:px-5 max-md:mt-6 max-md:px-4">
         <!-- Form Container -->
-		<div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8">
-			<h1 class="font-dmserif text-4xl max-sm:text-2xl">
+		<div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
+			<h1 class="font-dmserif text-4xl max-sm:text-xl">
                 @lang('shop::app.home.contact.title')
             </h1>
 
-			<p class="mt-4 text-xl text-zinc-500 max-sm:text-base">
+			<p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
                 @lang('shop::app.home.contact.about')
             </p>
 
@@ -27,7 +27,7 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="px-6 py-5"
+                            class="px-6 py-5 max-sm:py-3.5"
                             name="name"
                             rules="required"
                             :value="old('name')"
@@ -48,7 +48,7 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="px-6 py-5"
+                            class="px-6 py-5 max-sm:py-3.5"
                             name="email"
                             rules="required|email"
                             :value="old('email')"
@@ -69,7 +69,7 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            class="px-6 py-5"
+                            class="px-6 py-5 max-sm:py-3.5"
                             name="contact"
                             rules="phone"
                             :value="old('contact')"
@@ -89,7 +89,7 @@
 
                         <x-shop::form.control-group.control
                             type="textarea"
-                            class="px-6 py-5"
+                            class="px-6 py-5 max-sm:py-3.5"
                             name="message"
                             rules="required"
                             :label="trans('shop::app.home.contact.message')"
@@ -110,9 +110,9 @@
                     @endif
 
                     <!-- Submit Button -->
-                    <div class="mt-8 flex flex-wrap items-center gap-9">
+                    <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:justify-center max-sm:text-center">
                         <button
-                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 text-center text-base ltr:ml-0 rtl:mr-0"
+                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base max-md:rounded-xl max-sm:py-3 ltr:ml-0 rtl:mr-0"
                             type="submit"
                         >
                             @lang('shop::app.home.contact.submit')

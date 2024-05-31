@@ -1,6 +1,4 @@
-<!-- Todays Details Vue Component -->
-<v-services-content></v-services-content>
-
+<!-- Services Content Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"

@@ -2,14 +2,14 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.estimate_shipping.before') !!}
 
 <x-shop::accordion
-    class="overflow-hidden rounded-xl !border border-zinc-200"
+    class="overflow-hidden rounded-xl border max-md:rounded-md max-md:!border-none max-md:!bg-gray-100"
     :is-active="false"
 >
-    <x-slot:header class="font-semibold">
+    <x-slot:header class="font-semibold max-md:p-4 max-md:text-lg max-md:font-medium">
         @lang('shop::app.checkout.cart.summary.estimate-shipping.title')
     </x-slot>
 
-    <x-slot:content class="!p-4 !pt-0">
+    <x-slot:content class="p-4 pt-0 max-md:border max-md:pt-4">
         <v-estimate-tax-shipping
             :cart="cart"
             @processed="setCart"
@@ -130,7 +130,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.before') !!}
 
                         <div
-                            class="relative select-none border-b border-zinc-200 last:border-b-0 max-sm:max-w-full max-sm:flex-auto"
+                            class="relative select-none border-b border-zinc-200 last:border-b-0 max-md:max-w-full max-md:flex-auto"
                             v-for="rate in method.rates"
                         >
                             <div class="absolute top-5 ltr:left-4 rtl:right-4">
@@ -148,11 +148,11 @@
                                 class="block cursor-pointer p-4 pl-12"
                                 :for="rate.method"
                             >
-                                <p class="text-2xl font-semibold max-sm:text-xl">
+                                <p class="text-2xl font-semibold max-md:text-xl">
                                     @{{ rate.base_formatted_price }}
                                 </p>
                                 
-                                <p class="mt-2.5 text-xs font-medium">
+                                <p class="mt-2.5 text-xs font-medium max-md:mt-0">
                                     <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                 </p>
                             </label>

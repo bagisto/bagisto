@@ -8,6 +8,7 @@
 - [The `Webkul\Checkout\Cart` class](#the-cart-class)
 - [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
 - [Shop API Response Updates](#the-shop-api-response-updates)
+- [Admin and Shop Menu Updates](#the-admin-shop-menu-updates)
 
 ## Medium Impact Changes
 
@@ -1040,6 +1041,100 @@ php artisan indexer:index --type=elastic
     ]
 }
 ```
+
+<a name="the-admin-shop-menu-updates"></a>
+#### Admin and Shop Menu Updates
+
+**Impact Probability: High**
+
+1. Previously, the composeView method included logic to share a dynamically generated menu structure with several Blade views in the admin interface. This logic has been removed. Here’s a detailed breakdown of what was removed:
+
+#### For `Admin` package.
+
+```diff
+class AdminServiceProvider extends ServiceProvider
+{
+    protected function composeView()
+    {
+-       view()->composer([
+-           'admin::components.layouts.header.index',
+-           'admin::components.layouts.sidebar.index',
+-           'admin::components.layouts.tabs',
+-       ], function ($view) {
+-           $tree = Tree::create();
+- 
+-           foreach (config('menu.admin') as $index => $item) {
+-               if (! bouncer()->hasPermission($item['key'])) {
+-                   continue;
+-               }
+-
+-               $tree->add($item, 'menu');
+-           }
+-
+-           $tree->items = $tree->removeUnauthorizedUrls();
+-
+-           $tree->items = core()->sortItems($tree->items);
+-
+-           $view->with('menu', $tree);
+-       });
+
+        view()->composer([
+            'admin::settings.roles.create',
+            'admin::settings.roles.edit',
+        ], function ($view) {
+            $view->with('acl', $this->createACL());
+        });
+    }
+}
+```
+#### For `Shop` package.
+
+```diff
+class ShopServiceProvider extends ServiceProvider
+{
+-   protected function composeView()
+-   {
+-       view()->composer('shop::customers.account.partials.sidemenu', function ($view) {
+-           $tree = Tree::create();
+-           foreach (config('menu.customer') as $item) {
+-               $tree->add($item, 'menu');
+-           }
+-           $tree->items = core()->sortItems($tree->items);
+-           $view->with('menu', $tree);
+-       });
+-   }
+}
+```
+
+#### How to use it?
+
+##### For `Admin` package.
+
+```diff
+-    @foreach ($menu->items as $menuItem)
++    @foreach (menu()->getItems('admin') as $menuItem)
+        <div
+            class="px-4 group/item {{ $menu->getActive($menuItem) ? 'active' : 'inactive' }}"
+            onmouseenter="adjustSubMenuPosition(event)"
+        >
+        ...
+    @endforeach
+
+```
+
+##### For `Shop` package.
+
+```diff
+-    @foreach ($menu->items as $menuItem)
++    @foreach (menu()->getItems('customer') as $menuItem)
+        <div class="max-md:rounded-md max-md:border max-md:border-b max-md:border-l-[1px] max-md:border-r max-md:border-t-0 max-md:border-zinc-200">
+            <v-account-navigation>
+        ...
+    @endforeach
+
+```
+
+The getItems() methods of the menu() facade accept different areas of the menu. For example, for the admin area, you need to provide the config name of the menu, whereas for the shop area, you should provide the name 'customer'.
 
 <a name="renamed-star-rating-blade"></a>
 #### Renamed `star-rating.blade.php`
