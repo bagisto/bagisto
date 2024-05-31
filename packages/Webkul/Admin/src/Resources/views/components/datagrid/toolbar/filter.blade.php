@@ -389,13 +389,15 @@
                                                         <div class="mb-4 flex flex-wrap gap-2">
                                                             <p
                                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                                v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
+                                                                v-if="findAppliedColumn(column.index)"
                                                             >
-                                                                <span v-text="appliedColumnValue"></span>
+                                                                <span>
+                                                                    @{{ getFormattedAvailableDateRanges(findAppliedColumn(column.index)) }}
+                                                                </span>
 
                                                                 <span
                                                                     class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                    @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
+                                                                    @click="removeAppliedColumnValue(column.index)"
                                                                 >
                                                                 </span>
                                                             </p>
@@ -473,13 +475,15 @@
                                                         <div class="mb-4 flex flex-wrap gap-2">
                                                             <p
                                                                 class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                                v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
+                                                                v-if="findAppliedColumn(column.index)"
                                                             >
-                                                                <span v-text="appliedColumnValue"></span>
+                                                                <span>
+                                                                    @{{ getFormattedAvailableDateRanges(findAppliedColumn(column.index)) }}
+                                                                </span>
 
                                                                 <span
                                                                     class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                    @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
+                                                                    @click="removeAppliedColumnValue(column.index)"
                                                                 >
                                                                 </span>
                                                             </p>
@@ -976,7 +980,11 @@
 
                             if (appliedColumn) {
                                 if (range) {
-                                    let appliedRanges = this.getAvailableDateRanges(appliedColumn);
+                                    let appliedRanges = ['', ''];
+
+                                    if (typeof appliedColumn.value !== 'string') {
+                                        appliedRanges = appliedColumn.value[0];
+                                    }
 
                                     if (range.name == 'from') {
                                         appliedRanges[0] = requestedValue;
@@ -1039,43 +1047,25 @@
                 },
 
                 /**
-                 * Get available date ranges.
-                 *
-                 * @returns {Array}
-                 */
-                getAvailableDateRanges(appliedColumn)
-                {
-                    if (typeof appliedColumn?.value === 'string') {
-                        const availableColumn = this.available.columns.find(column => column.index === appliedColumn.index);
-
-                        const option = availableColumn.options.find(option => option.name === appliedColumn.value);
-
-                        return [option.from, option.to];
-                    }
-
-                    return appliedColumn?.value[0];
-                },
-
-                /**
                  * Get formatted available date ranges.
                  *
                  * @returns {string}
                  */
                 getFormattedAvailableDateRanges(appliedColumn)
                 {
-                    const availableDateRanges = this.getAvailableDateRanges(appliedColumn);
+                    if (! appliedColumn) {
+                        return '';
+                    }
 
-                    return this.formatAvailableDateRanges(availableDateRanges);
-                },
+                    if (typeof appliedColumn.value === 'string') {
+                        const availableColumn = this.available.columns.find(column => column.index === appliedColumn.index);
 
-                /**
-                 * Format available date ranges.
-                 *
-                 * @returns {string}
-                 */
-                formatAvailableDateRanges(dateRanges)
-                {
-                    return dateRanges.join(' to ');
+                        const option = availableColumn.options.find(option => option.name === appliedColumn.value);
+
+                        return option.label;
+                    }
+
+                    return appliedColumn.value[0].join(' to ');
                 },
 
                 /**
@@ -1108,10 +1098,6 @@
                  */
                 getAppliedColumnValues(columnIndex) {
                     const appliedColumn = this.findAppliedColumn(columnIndex);
-
-                    if (appliedColumn?.type === 'date_range' || appliedColumn?.type === 'datetime_range') {
-                        return [this.getFormattedAvailableDateRanges(appliedColumn)];
-                    }
 
                     return appliedColumn?.value ?? [];
                 },
