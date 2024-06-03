@@ -10,13 +10,14 @@ class SystemConfigItem
      * Create a new AclItem instance.
      */
     public function __construct(
+        public Collection $children,
+        public ?array $fields = null,
+        public ?string $icon = null,
+        public ?string $info = null,
         public string $key,
         public string $name,
-        public ?string $info,
-        public ?string $route,
-        public ?string $icon,
-        public int $sort,
-        public Collection $children,
+        public ?string $route = null,
+        public ?int $sort = null
     ) {
     }
 
@@ -25,16 +26,31 @@ class SystemConfigItem
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->name ?? '';
     }
 
+    public function getFields(): ?array
+    {
+        return $this->fields ?? null;
+    }
+
+
+    public function getType()
+    {
+        return $this->fields['type'] ?? null;
+    }
+
+    public function getPath()
+    {
+        return $this->fields['path'] ?? null;
+    }
 
     /**
      * Get name of menu item.
      */
     public function getInfo(): ?string
     {
-        return $this->info;
+        return $this->info ?? '';
     }
 
     /**
@@ -66,7 +82,7 @@ class SystemConfigItem
      */
     public function getIcon(): ?string
     {
-        return $this->icon;
+        return $this->icon ?? null;
     }
 
     /**

@@ -5,12 +5,12 @@
 
     $currentLocale = core()->getRequestedLocale();
 
-    $title = trans(systemConfig()->getActiveConfigurationItem()['name']);
+    $activeConfiguration = systemConfig()->getActiveConfigurationItem();
 @endphp
 
 <x-admin::layouts>
     <x-slot:title>
-        {{ $title }}
+        {{ $activeConfiguration->getName() }}
     </x-slot>
 
     <!-- Configuration form fields -->
@@ -21,7 +21,7 @@
         <!-- Save Inventory -->
         <div class="mt-3.5 flex items-center justify-between gap-4 max-sm:flex-wrap">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
-                {{ $title }}
+                {{ $activeConfiguration->getName() }}
             </p>
 
             <!-- Save Inventory -->
@@ -118,19 +118,19 @@
         </div>
 
         <div class="mt-6 grid grid-cols-[1fr_2fr] gap-10 max-xl:flex-wrap">
-            @foreach (systemConfig()->getGroupOfActiveConfiguration() as $key => $item)
+            @foreach ($activeConfiguration->getChildren() as $item)
                 <div class="grid content-start gap-2.5">
                     <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                        @lang($item['name'])
+                        {{ $item->getName() }}
                     </p>
 
                     <p class="leading-[140%] text-gray-600 dark:text-gray-300">
-                        @lang($item['info'] ?? '')
+                        {!! $item->getInfo() !!}
                     </p>
                 </div>
 
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
-                    @foreach ($item['fields'] as $field)
+                    @foreach ($item->getFields() as $field)
                         @if (
                             $field['type'] == 'blade'
                             && view()->exists($field['path'])

@@ -1,5 +1,5 @@
 @php
-    $name = systemConfig()->getNameField($nameKey = $item['key'] . '.' . $field['name']);
+    $name = core()->getNameField($nameKey = $item->getKey() . '.' . $field['name']);
 
     $validations = systemConfig()->getFieldValidations($field);
 

@@ -2,10 +2,18 @@
 
 namespace Webkul\Core;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Webkul\Core\Repositories\CoreConfigRepository;
+use Webkul\Core\SystemConfig\SystemConfigItem;
 
 class SystemConfig
 {
+    /**
+     * Items array.
+     */
+    public array $items = [];
+    
     /**
      * Create a new class instance.
      *
@@ -17,60 +25,99 @@ class SystemConfig
     }
 
     /**
-     * Prepare configuration items.
+     * Add Item.
      */
-    public function getConfigurationItems(): array
+    public function addItem(SystemConfigItem $item): void
     {
-        static $items;
+        $this->items[] = $item;
+    }
 
-        if ($items) {
-            return $items;
+    /**
+     * Get all configuration items.
+     */
+    public function getConfigurationItems(): Collection
+    {
+        if (! $this->items) {
+            $this->prepareConfigurationItems();
         }
 
+        return collect($this->items)
+            ->sortBy('sort');
+    }
 
-        collect(config('core'))->each(function ($item) use (&$items) {
-            $item['children'] = [];
+      /**
+     * Prepare configuration items.
+     */
+    public function prepareConfigurationItems()
+    {
+        $configWithDotNotation = [];
 
-            $children = str_replace('.', '.children.', $item['key']);
+        foreach (config('core') as $item) {
+            $configWithDotNotation[$item['key']] = $item;
+        }
 
-            core()->array_set($items, $children, $item);
-        });
+        $configs = Arr::undot(Arr::dot($configWithDotNotation));
 
-        $items = core()->sortItems($items);
+        foreach ($configs as $configItem) {
+            $subConfigItems = $this->processSubConfigItems($configItem);
 
-        return $items;
+            $this->addItem(new SystemConfigItem(
+                children: $subConfigItems,
+                fields: $configItem['fields'] ?? null,
+                icon: $configItem['icon'] ?? null,
+                info: trans($configItem['info']) ?? null,
+                key: $configItem['key'],
+                name: trans($configItem['name']),
+                route: $configItem['route'] ?? null,
+                sort: $configItem['sort'],
+            ));
+        }
+    }
+
+    /**
+     * Process sub config items.
+     */
+    private function processSubConfigItems($configItem): Collection
+    {
+        return collect($configItem)
+            ->sortBy('sort')
+            ->filter(fn ($value) => is_array($value) && isset($value['name']))
+            ->map(function ($subConfigItem) {
+                $configItemChildren = $this->processSubConfigItems($subConfigItem);
+
+                return new SystemConfigItem(
+                    children: $configItemChildren,
+                    fields: $subConfigItem['fields'] ?? null,
+                    icon: $subConfigItem['icon'] ?? null,
+                    info: trans($subConfigItem['info']) ?? null,
+                    key: $subConfigItem['key'],
+                    name: trans($subConfigItem['name']),
+                    route: $subConfigItem['route'] ?? null,
+                    sort: $subConfigItem['sort'] ?? null,
+                );
+            });
     }
 
     /**
      * Get active configuration item.
      */
-    public function getActiveConfigurationItem(): ?array
+    public function getActiveConfigurationItem(): ?SystemConfigItem
     {
         if (! $slug = request()->route('slug')) {
             return null;
         }
 
-        $activeItem = $this->getConfigurationItems()[$slug] ?? null;
+        $activeItem = $this->getConfigurationItems()->where('key', $slug)->first() ?? null;
 
         if (! $activeItem) {
             return null;
         }
 
         if ($slug2 = request()->route('slug2')) {
-            $activeItem = $activeItem['children'][$slug2] ?? null;
+            $activeItem = $activeItem->getChildren()[$slug2];
         }
 
         return $activeItem;
-    }
-
-    /**
-     * Get group of active configuration.
-     */
-    public function getGroupOfActiveConfiguration(): array
-    {
-        $activeItem = $this->getActiveConfigurationItem();
-
-        return $activeItem['children'] ?? [];
     }
 
     /**
@@ -88,13 +135,13 @@ class SystemConfig
     /**
      * Get depend the field name.
      */
-    public function getDependFieldName(array $field, array $item): string
+    public function getDependFieldName(array $field, SystemConfigItem $item): string
     {
         if (empty($field['depends'])) {
             return '';
         }
 
-        $dependNameKey = $item['key'].'.'.collect(explode(':', $field['depends']))->first();
+        $dependNameKey = $item->getKey().'.'.collect(explode(':', $field['depends']))->first();
 
         return $this->getNameField($dependNameKey);
     }
