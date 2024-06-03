@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Dolandırıcılık',
                     'grand-total'     => 'Genel Toplam',
                     'id'              => '#:id',
-                    'images'          => 'Görseller',
+                    'items'           => 'Öğeler',
                     'location'        => 'Konum',
                     'order-id'        => 'Sipariş Kimliği',
                     'pay-by'          => 'Şunu İle Ödeme Yap - :method',

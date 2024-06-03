@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Frode',
                     'grand-total'     => 'Totale Generale',
                     'id'              => '#:id',
-                    'images'          => 'Immagini',
+                    'items'           => 'Prodotti',
                     'location'        => 'Posizione',
                     'order-id'        => 'ID Ordine',
                     'pay-by'          => 'Paga con - :method',

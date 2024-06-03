@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Fraude',
                     'grand-total'     => 'Total général',
                     'id'              => '#:id',
-                    'images'          => 'Images',
+                    'items'           => 'Articles',
                     'location'        => 'Emplacement',
                     'order-id'        => 'ID de commande',
                     'pay-by'          => 'Payer par - :method',

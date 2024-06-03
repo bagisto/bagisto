@@ -149,7 +149,7 @@ return [
                     'fraud'           => '欺诈',
                     'grand-total'     => '总计',
                     'id'              => '订单号：#:id',
-                    'images'          => '图片',
+                    'items'           => '商品',
                     'location'        => '地点',
                     'order-id'        => '订单编号',
                     'pay-by'          => '支付方式 - :method',

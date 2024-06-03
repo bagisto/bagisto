@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'වලංගු',
                     'grand-total'     => 'සාමාජික එකට වර්ෂය',
                     'id'              => '#:id',
-                    'images'          => 'රූප',
+                    'items'           => 'අයිතම්',
                     'location'        => 'ස්ථාව',
                     'order-id'        => 'ඇණවුමේ අංකය',
                     'pay-by'          => 'වෙනත් - :method',
