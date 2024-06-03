@@ -112,9 +112,15 @@
             <div class="scrollbar-hide flex w-screen gap-8 overflow-auto max-sm:gap-5 1180:hidden">
                 <x-shop::media.images.lazy
                     ::src="image.large_image_url"
-                    class="w-[490px]"
+                    class="w-[490px] max-sm:hidden"
                     v-for="(image, index) in media.images"
                     alt="{{ $product->name }}"
+                    @click="isImageZooming = !isImageZooming"
+                />
+
+                <x-shop::card-carousel
+                    class="sm:hidden" ::options="media.images"
+                    aria-label="{{ $product->name }}"
                     @click="isImageZooming = !isImageZooming"
                 />
             </div>
