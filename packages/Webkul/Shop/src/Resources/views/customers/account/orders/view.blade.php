@@ -27,7 +27,7 @@
                     <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                 </a>
     
-                <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                <h2 class="text-2xl font-medium max-md:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                     @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
                 </h2>
             </div>
@@ -1183,7 +1183,7 @@
                 <!-- Shipment tab -->
                 @if ($order->shipments->count())
                     <x-shop::tabs.item 
-                        class="max-md:!px-0 max-md:py-2"
+                        class="max-md:!px-0 max-md:py-1.5"
                         title="{{ trans('shop::app.customers.account.orders.view.shipments.shipments') }}"
                     >
                         @foreach ($order->shipments as $shipment)
@@ -1309,7 +1309,7 @@
                 <!-- Refund Tab -->
                 @if ($order->refunds->count())
                     <x-shop::tabs.item
-                        class="max-md:!px-0 max-md:py-2"
+                        class="max-md:!px-0 max-md:py-1.5"
                         :title="trans('shop::app.customers.account.orders.view.refunds.refunds')"
                     >
                         @foreach ($order->refunds as $refund)

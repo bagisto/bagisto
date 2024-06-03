@@ -43,7 +43,7 @@
                 </p>
 
                 <p
-                    class="cursor-pointer text-xs font-medium ltr:mr-[50px] rtl:ml-[50px]"
+                    class="cursor-pointer text-sm font-medium ltr:mr-[50px] rtl:ml-[50px]"
                     @click="clearFilters('filter', '')"
                 >
                     @lang('shop::app.categories.filters.clear-all')
@@ -176,12 +176,12 @@
                     </ul>
 
                     <!-- Checkbox Filter Options -->
-                    <ul class="pb-3 text-sm text-gray-700" v-else>
+                    <ul class="pb-3 text-base text-gray-700" v-else>
                         <li
                             :key="option.id"
                             v-for="(option, optionIndex) in filter.options"
                         >
-                            <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 ltr:pl-2 rtl:pr-2">
+                            <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 max-sm:gap-x-1.5 max-sm:!p-0 ltr:pl-2 rtl:pr-2">
                                 <input
                                     type="checkbox"
                                     :id="'option_' + option.id"
@@ -203,7 +203,7 @@
                                 </label>
 
                                 <label
-                                    class="w-full cursor-pointer p-2 text-base text-gray-900 ltr:pl-0 rtl:pr-0"
+                                    class="w-full cursor-pointer p-2 text-base text-gray-900 max-sm:p-1 ltr:pl-0 rtl:pr-0"
                                     :id="'label_option_' + option.id"
                                     :for="'option_' + option.id"
                                     role="button"
@@ -224,7 +224,6 @@
         id="v-price-filter-template"
     >
         <div>
-
             <!-- Price range filter shimmer -->
             <template v-if="isLoading">
                 <x-shop::shimmer.range-slider />

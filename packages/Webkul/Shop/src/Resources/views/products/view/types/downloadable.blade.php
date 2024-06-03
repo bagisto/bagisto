@@ -28,7 +28,7 @@
             @lang('shop::app.products.view.type.downloadable.links')
         </label>
 
-        <div class="grid gap-4">
+        <div class="grid gap-4 max-sm:gap-1">
             @foreach ($product->downloadable_links as $link)
                 <div class="flex select-none gap-x-4">
                     <div class="flex">
@@ -50,7 +50,7 @@
                         
                         <label
                             for="{{ $link->id }}"
-                            class="cursor-pointer ltr:ml-1 rtl:mr-1"
+                            class="cursor-pointer max-sm:text-sm ltr:ml-1 rtl:mr-1"
                         >
                             {{ $link->title . ' + ' . core()->currency($link->price) }}
                         </label>
@@ -63,7 +63,7 @@
                         <a 
                             href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
                             target="_blank"
-                            class="text-blue-700"
+                            class="text-blue-700 max-sm:text-sm"
                         >
                             @lang('shop::app.products.view.type.downloadable.sample')
                         </a>

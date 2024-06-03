@@ -43,7 +43,7 @@
 
                         {!! view_render_event('bagisto.shop.customers.account.compare.title.before') !!}
 
-                        <h1 class="text-2xl font-medium max-sm:text-xl">
+                        <h1 class="text-2xl font-medium max-sm:text-base">
                             @lang('shop::app.compare.title')
                         </h1>
 

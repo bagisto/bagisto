@@ -148,7 +148,7 @@
                                 class="block cursor-pointer p-4 pl-12"
                                 :for="rate.method"
                             >
-                                <p class="text-2xl font-semibold max-md:text-xl">
+                                <p class="text-2xl font-semibold max-md:text-lg">
                                     @{{ rate.base_formatted_price }}
                                 </p>
                                 

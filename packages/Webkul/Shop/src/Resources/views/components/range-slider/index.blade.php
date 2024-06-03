@@ -7,11 +7,11 @@
     >
         <div>
             <div class="flex items-center gap-4">
-                <p class="text-sm">
+                <p class="text-base">
                     @lang('shop::app.components.range-slider.range')
                 </p>
 
-                <p class="text-sm font-semibold">
+                <p class="text-base font-semibold">
                     @{{ rangeText }}
                 </p>
             </div>

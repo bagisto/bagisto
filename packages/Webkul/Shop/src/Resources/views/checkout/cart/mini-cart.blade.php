@@ -43,12 +43,12 @@
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.header.before') !!}
 
                 <div class="flex items-center justify-between">
-                    <p class="text-2xl font-medium max-md:text-lg">
+                    <p class="text-2xl font-medium max-md:text-base">
                         @lang('shop::app.checkout.cart.mini-cart.shopping-cart')
                     </p>
                 </div>
 
-                <p class="text-base max-md:text-xs">
+                <p class="text-base max-md:text-xs max-md:text-zinc-500">
                     @lang('shop::app.checkout.cart.mini-cart.offer-on-orders')
                 </p>
 
@@ -89,7 +89,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
 
                                 <a  class="max-w-4/5 max-md:w-full" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
-                                    <p class="text-base font-medium max-md:text-sm">
+                                    <p class="text-base font-medium max-md:text-sm max-md:font-normal">
                                         @{{ item.name }}
                                     </p>
                                 </a>
@@ -99,25 +99,25 @@
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.before') !!}
 
                                 <template v-if="displayTax.prices == 'including_tax'">
-                                    <p class="text-lg">
+                                    <p class="text-lg max-md:text-sm max-md:font-semibold">
                                         @{{ item.formatted_price_incl_tax }}
                                     </p>
                                 </template>
 
                                 <template v-else-if="displayTax.prices == 'both'">
-                                    <p class="flex flex-col text-lg">
+                                    <p class="flex flex-col text-lg max-md:text-sm max-md:font-semibold">
                                         @{{ item.formatted_price_incl_tax }}
 
-                                        <span class="text-xs">
+                                        <span class="text-xs font-normal text-zinc-500">
                                             @lang('shop::app.checkout.cart.mini-cart.excl-tax')
 
-                                            <span class="font-medium">@{{ item.formatted_price }}</span>
+                                            <span class="font-medium text-black">@{{ item.formatted_price }}</span>
                                         </span>
                                     </p>
                                 </template>
 
                                 <template v-else>
-                                    <p class="text-lg max-md:text-sm">
+                                    <p class="text-lg max-md:text-sm max-md:font-semibold">
                                         @{{ item.formatted_price }}
                                     </p>
                                 </template>
@@ -169,12 +169,12 @@
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.product_details.after') !!}
                             </div>
 
-                            <div class="flex flex-wrap items-center gap-5 max-md:gap-4">
+                            <div class="flex flex-wrap items-center gap-5 max-md:gap-2.5">
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.quantity_changer.before') !!}
 
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
-                                    class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-1 max-md:px-1 max-md:py-0.5"
+                                    class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
                                     name="quantity"
                                     ::value="item?.quantity"
                                     @change="updateItem($event, item)"
@@ -243,13 +243,13 @@
                             </template>
 
                             <template v-else-if="displayTax.subtotal == 'both'">
-                                <p class="flex flex-col text-3xl font-semibold max-md:text-base">
+                                <p class="flex flex-col text-3xl font-semibold max-md:text-sm">
                                     @{{ cart.formatted_sub_total_incl_tax }}
                                     
-                                    <span class="text-sm font-normal max-sm:text-xs">
+                                    <span class="text-sm font-normal text-zinc-500 max-sm:text-xs">
                                         @lang('shop::app.checkout.cart.mini-cart.excl-tax')
                                         
-                                        <span class="font-medium">@{{ cart.formatted_sub_total }}</span>
+                                        <span class="font-medium text-black">@{{ cart.formatted_sub_total }}</span>
                                     </span>
                                 </p>
                             </template>
