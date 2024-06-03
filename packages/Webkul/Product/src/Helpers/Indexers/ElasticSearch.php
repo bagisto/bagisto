@@ -135,16 +135,6 @@ class ElasticSearch extends AbstractIndexer
                     'inventory_indices',
                     'variants.inventory_indices',
                 ])
-                ->join('product_attribute_values as visible_individually_pav', function ($join) {
-                    $join->on('products.id', '=', 'visible_individually_pav.product_id')
-                        ->where('visible_individually_pav.attribute_id', 7)
-                        ->where('visible_individually_pav.boolean_value', 1);
-                })
-                ->join('product_attribute_values as status_pav', function ($join) {
-                    $join->on('products.id', '=', 'status_pav.product_id')
-                        ->where('status_pav.attribute_id', 8)
-                        ->where('status_pav.boolean_value', 1);
-                })
                 ->cursorPaginate($this->batchSize);
 
             $this->reindexBatch($paginator->items());
@@ -168,8 +158,6 @@ class ElasticSearch extends AbstractIndexer
     {
         $refreshIndices = ['body' => []];
 
-        $removeIndices = [];
-
         foreach ($products as $product) {
             $this->setProduct($product);
 
@@ -179,33 +167,20 @@ class ElasticSearch extends AbstractIndexer
                 foreach ($channel->locales as $locale) {
                     $this->setLocale($locale);
 
-                    $indexName = $this->getIndexName();
+                    $refreshIndices['body'][] = [
+                        'index' => [
+                            '_index' => $this->getIndexName(),
+                            '_id'    => $product->id,
+                        ],
+                    ];
 
-                    if (
-                        ! $this->product->status
-                        || ! $this->product->visible_individually
-                    ) {
-                        $removeIndices[$indexName][] = $product->id;
-                    } else {
-                        $refreshIndices['body'][] = [
-                            'index' => [
-                                '_index' => $indexName,
-                                '_id'    => $product->id,
-                            ],
-                        ];
-
-                        $refreshIndices['body'][] = $this->getIndices();
-                    }
+                    $refreshIndices['body'][] = $this->getIndices();
                 }
             }
         }
 
         if (! empty($refreshIndices['body'])) {
             ElasticsearchClient::bulk($refreshIndices);
-        }
-
-        if (! empty($removeIndices)) {
-            $this->deleteIndices($removeIndices);
         }
     }
 
@@ -315,6 +290,8 @@ class ElasticSearch extends AbstractIndexer
             return $query->where(function ($qb) {
                 return $qb->orWhereIn('code', [
                     'name',
+                    'status',
+                    'visible_individually',
                     'new',
                     'featured',
                     'url_key',

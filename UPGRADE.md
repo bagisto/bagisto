@@ -9,6 +9,7 @@
 - [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
 - [Shop API Response Updates](#the-shop-api-response-updates)
 - [Admin and Shop Menu Updates](#the-admin-shop-menu-updates)
+- [Admin ACL Updates](#the-admin-acl-updates)
 
 ## Medium Impact Changes
 
@@ -20,6 +21,7 @@
 - [The `Webkul\DataGrid\DataGrid` class](#the-datagrid-class)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
+- [The product Elastic Search indexing](#the-elastic-indexing)
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
@@ -115,6 +117,20 @@ There is no dependency needed to be updated at for this upgrade.
 - core()->getConfigData('catalog.inventory.stock_options.back_orders')
 + core()->getConfigData('sales.order_settings.stock_options.back_orders')
 ```
+
+4. The product storefront search mode configuration `core()->getConfigData('catalog.products.storefront.search_mode')` has been replaced with the following configurations, and the corresponding paths for retrieving configuration values have been updated:
+
+
+```diff
+- core()->getConfigData('catalog.products.storefront.search_mode')
+
++ core()->getConfigData('catalog.products.search.engine')
++ core()->getConfigData('catalog.products.search.admin_mode')
++ core()->getConfigData('catalog.products.search.storefront_mode')
+```
+
+`core()->getConfigData('catalog.products.search.engine')` represents the search engine for products. If "Elastic Search" is selected, elastic indexing will be enabled. The other two configurations (`catalog.products.search.admin_mode` and `catalog.products.search.storefront_mode`) will function relative to this configuration.
+
 
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names
@@ -488,10 +504,10 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 <a name="product"></a>
 ### Product
 
-**Impact Probability: Medium**
-
 <a name="the-elastic-search-repository"></a>
 #### The `Webkul\Product\Repositories\ElasticSearchRepository` Repository
+
+**Impact Probability: Medium**
 
 1. We have enhanced the `search` method to accept two arguments. The first argument is an array containing the search parameters (e.g., category_id, etc.), while the second argument is an array containing the options.
 
@@ -567,6 +583,21 @@ If you've implemented your own product type or overridden existing type classes,
 - public function updateDefaultVariantId()
 ```
 
+<a name="the-elastic-indexing"></a>
+#### The product Elastic Search indexing
+
+**Impact Probability: Medium**
+
+Previously, Elastic Search was used only on the frontend and not in the admin section. For large catalogs, this caused the Product datagrid to be very slow. To address this issue, we have now introduced Elastic Search in the admin section as well.
+
+To make Elastic Search compatible with the admin section, some changes were necessary. Previously, only active products were indexed in Elastic Search. Now, all products are indexed with additional keys/information.
+
+Please run the following command to refresh the Elastic Search indices:
+
+
+```diff
+php artisan indexer:index --type=elastic
+```
 
 <a name="Sales"></a>
 ### Sales
@@ -948,6 +979,70 @@ If you've implemented your own product type or overridden existing type classes,
 }
 ```
 
+4. The response for the Shop route `shop.api.products.index` or `/api/products` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+```diff
+{
+    "data": [
+        {
+            "id": 174,
+            "sku": "COMPLETELOOKSET2023",
+            "name": "All-in-One Smart Casual Outfit Set",
+            "description": "All-in-One Smart Casual Outfit Set",
+            "url_key": "all-in-one-smart-casual-outfit-set",
+            "base_image": {
+                "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+            },
+            "images": [
+                {
+                    "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+                }
+            ],
+            "is_new": true,
+            "is_featured": true,
+            "on_sale": true,
+            "is_saleable": true,
+            "is_wishlist": true,
+            "min_price": "$168.96",
+            "prices": {
+                "from": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                },
+                "to": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                }
+            },
+            "price_html": "<div class=\"grid gap-1.5\">\n<p class=\"flex items-center gap-4 max-sm:text-lg\">\n<span\nclass=\"text-zinc-500 line-through max-sm:text-base\"\n    aria-label=\"$176.96\"\n>\n$176.96\n</span>\n\n$168.96\n</p>\n\n</div>",
+-           "avg_ratings": 4.5,
++           "ratings": {
++               "average": "2.0",
++               "total": 2
++           }
+        }
+    ]
+}
+```
+
 <a name="the-admin-shop-menu-updates"></a>
 #### Admin and Shop Menu Updates
 
@@ -1042,68 +1137,79 @@ class ShopServiceProvider extends ServiceProvider
 
 The getItems() methods of the menu() facade accept different areas of the menu. For example, for the admin area, you need to provide the config name of the menu, whereas for the shop area, you should provide the name 'customer'.
 
-4. The response for the Shop route `shop.api.products.index` or `/api/products` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+<a name="the-admin-acl-updates"></a>
+#### Admin ACL Updates
+
+**Impact Probability: High**
+
+1. Previously, the composeView method included logic to share a dynamically generated acl structure with several Blade views in the admin interface. This logic has been removed. Here’s a detailed breakdown of what was removed:
+
 
 ```diff
+class AdminServiceProvider extends ServiceProvider
 {
-    "data": [
-        {
-            "id": 174,
-            "sku": "COMPLETELOOKSET2023",
-            "name": "All-in-One Smart Casual Outfit Set",
-            "description": "All-in-One Smart Casual Outfit Set",
-            "url_key": "all-in-one-smart-casual-outfit-set",
-            "base_image": {
-                "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
-            },
-            "images": [
-                {
-                    "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                    "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                    "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                    "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
-                }
-            ],
-            "is_new": true,
-            "is_featured": true,
-            "on_sale": true,
-            "is_saleable": true,
-            "is_wishlist": true,
-            "min_price": "$168.96",
-            "prices": {
-                "from": {
-                    "regular": {
-                        "price": "176.9600",
-                        "formatted_price": "$176.96"
-                    },
-                    "final": {
-                        "price": "168.9600",
-                        "formatted_price": "$168.96"
-                    }
-                },
-                "to": {
-                    "regular": {
-                        "price": "176.9600",
-                        "formatted_price": "$176.96"
-                    },
-                    "final": {
-                        "price": "168.9600",
-                        "formatted_price": "$168.96"
-                    }
-                }
-            },
-            "price_html": "<div class=\"grid gap-1.5\">\n<p class=\"flex items-center gap-4 max-sm:text-lg\">\n<span\nclass=\"text-zinc-500 line-through max-sm:text-base\"\n    aria-label=\"$176.96\"\n>\n$176.96\n</span>\n\n$168.96\n</p>\n\n</div>",
--           "avg_ratings": 4.5,
-+           "ratings": {
-+               "average": "2.0",
-+               "total": 2
-+           }
-        }
-    ]
+    public function boot(Router $router)
+    {
+        ...
+
+-        $this->registerACL();
+
+        ...
+
+        $this->app->register(EventServiceProvider::class);
+    }
+
+-   protected function composeView()
+-   {
+-       view()->composer([
+-           'admin::settings.roles.create',
+-           'admin::settings.roles.edit',
+-       ], function ($view) {
+-           $view->with('acl', $this->createACL());
+-       });
+-   }
+
+-    protected function registerACL()
+-    {
+-        $this->app->singleton('acl', function () {
+-            return $this->createACL();
+-        });
+-    }
+-
+-    protected function createACL()
+-    {
+-        static $tree;
+-
+-        if ($tree) {
+-            return $tree;
+-        }
+-
+-        $tree = Tree::create();
+-
+-        foreach (config('acl') as $item) {
+-            $tree->add($item, 'acl');
+-        }
+-
+-        $tree->items = core()->sortItems($tree->items);
+-
+-        return $tree;
+-    }
 }
+```
+
+#### How to use it?
+
+##### Get all acl items.
+
+```php
+    $acl = acl()->getItems();
+```
+
+##### Get all roles.
+
+```php 
+    $roles = acl()->getRoles();
 ```
 
 <a name="renamed-star-rating-blade"></a>

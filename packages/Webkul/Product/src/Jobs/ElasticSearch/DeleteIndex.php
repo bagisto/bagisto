@@ -31,7 +31,7 @@ class DeleteIndex implements ShouldQueue
      */
     public function handle()
     {
-        if (core()->getConfigData('catalog.products.storefront.search_mode') != 'elastic') {
+        if (core()->getConfigData('catalog.products.search.engine') != 'elastic') {
             return;
         }
 

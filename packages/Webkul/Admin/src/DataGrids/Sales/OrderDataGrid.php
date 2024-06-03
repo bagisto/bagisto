@@ -37,7 +37,7 @@ class OrderDataGrid extends DataGrid
                 'channel_name',
                 'status',
                 'customer_email',
-                'orders.cart_id as image',
+                'orders.cart_id as items',
                 DB::raw('CONCAT('.DB::getTablePrefix().'orders.customer_first_name, " ", '.DB::getTablePrefix().'orders.customer_last_name) as full_name'),
                 DB::raw('CONCAT('.DB::getTablePrefix().'order_address_billing.city, ", ", '.DB::getTablePrefix().'order_address_billing.state,", ", '.DB::getTablePrefix().'order_address_billing.country) as location')
             );
@@ -204,8 +204,8 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'image',
-            'label'      => trans('admin::app.sales.orders.index.datagrid.images'),
+            'index'      => 'items',
+            'label'      => trans('admin::app.sales.orders.index.datagrid.items'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => false,
@@ -213,7 +213,7 @@ class OrderDataGrid extends DataGrid
             'closure'    => function ($value) {
                 $order = app(OrderRepository::class)->with('items')->find($value->id);
 
-                return view('admin::sales.orders.images', compact('order'))->render();
+                return view('admin::sales.orders.items', compact('order'))->render();
             },
         ]);
 
