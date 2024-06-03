@@ -518,6 +518,10 @@ return [
                 'previous' => '上一个',
                 'view-all' => '查看全部',
             ],
+
+            'ratings' => [
+                'title' => '评分',
+            ],
         ],
 
         'range-slider' => [

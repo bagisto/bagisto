@@ -518,6 +518,10 @@ return [
                 'previous' => 'पिछला',
                 'view-all' => 'सभी देखें',
             ],
+
+            'ratings' => [
+                'title' => 'रेटिंग',
+            ],
         ],
 
         'range-slider' => [

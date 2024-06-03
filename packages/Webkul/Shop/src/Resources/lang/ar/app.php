@@ -518,6 +518,10 @@ return [
                 'previous' => 'السابق',
                 'view-all' => 'عرض الكل',
             ],
+
+            'ratings' => [
+                'title' => 'التقييمات',
+            ],
         ],
 
         'range-slider' => [

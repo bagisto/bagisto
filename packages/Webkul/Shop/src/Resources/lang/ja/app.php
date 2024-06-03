@@ -518,6 +518,10 @@ return [
                 'previous' => '前へ',
                 'view-all' => 'すべて表示',
             ],
+
+            'ratings' => [
+                'title' => '評価',
+            ],
         ],
 
         'range-slider' => [

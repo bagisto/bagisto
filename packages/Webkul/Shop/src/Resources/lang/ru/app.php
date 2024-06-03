@@ -518,6 +518,10 @@ return [
                 'previous' => 'Предыдущий',
                 'view-all' => 'Показать Все',
             ],
+
+            'ratings' => [
+                'title' => 'Рейтинги',
+            ],
         ],
 
         'range-slider' => [

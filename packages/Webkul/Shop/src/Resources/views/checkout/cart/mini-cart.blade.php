@@ -150,12 +150,12 @@
 
                                 <!-- Option Details -->
                                 <div
-                                    class="grid gap-2 max-md:flex max-md:gap-4"
+                                    class="grid gap-2"
                                     v-show="item.option_show"
                                 >
                                     <template v-for="option in item.options">
-                                        <div class="max-md:flex max-md:gap-1">
-                                            <p class="text-sm font-medium max-md:text-xs max-md:font-normal">
+                                        <div class="max-md:grid max-md:gap-0.5">
+                                            <p class="text-sm font-medium text-zinc-500 max-md:text-xs max-md:font-normal">
                                                 @{{ option.attribute_name + ':' }}
                                             </p>
     

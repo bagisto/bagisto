@@ -518,6 +518,10 @@ return [
                 'previous' => 'Précédent',
                 'view-all' => 'Voir tout',
             ],
+
+            'ratings' => [
+                'title' => 'Évaluations',
+            ],
         ],
 
         'range-slider' => [

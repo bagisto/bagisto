@@ -518,6 +518,10 @@ return [
                 'previous' => 'הקודם',
                 'view-all' => 'צפה בהכול',
             ],
+
+            'ratings' => [
+                'title' => 'דירוגים',
+            ],
         ],
 
         'range-slider' => [

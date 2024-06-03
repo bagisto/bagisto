@@ -420,7 +420,7 @@
                                 @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                     <x-shop::button
                                         type="submit"
-                                        class="primary-button mt-5 w-full max-w-[470px] max-sm:rounded-lg max-sm:py-1.5"
+                                        class="primary-button mt-5 w-full max-w-[470px] max-sm:mt-3 max-sm:rounded-lg max-sm:py-1.5"
                                         button-type="secondary-button"
                                         :title="trans('shop::app.products.view.buy-now')"
                                         :disabled="! $product->isSaleable(1)"

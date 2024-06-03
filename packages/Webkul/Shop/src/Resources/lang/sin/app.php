@@ -518,6 +518,10 @@ return [
                 'previous' => 'පෙර',
                 'view-all' => 'සියලු දක්වන්න',
             ],
+
+            'ratings' => [
+                'title' => 'අනුක්‍රමයන්',
+            ],
         ],
 
         'range-slider' => [

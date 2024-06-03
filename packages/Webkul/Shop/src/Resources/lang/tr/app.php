@@ -175,7 +175,6 @@ return [
                 'order-date'  => 'Pedido Tarihi',
                 'order-id'    => 'Pedido ID',
                 'subtotal'    => 'Subtotal',
-                'shipping'    => 'Kargo',
                 'title'       => 'Pedidos',
                 'total'       => 'Toplam',
 
@@ -518,6 +517,10 @@ return [
                 'next'     => 'Sonraki',
                 'previous' => 'Önceki',
                 'view-all' => 'Tümünü Görüntüle',
+            ],
+
+            'ratings' => [
+                'title' => 'Değerlendirmeler',
             ],
         ],
 

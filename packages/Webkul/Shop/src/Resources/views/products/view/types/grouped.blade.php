@@ -7,7 +7,7 @@
         @endphp
 
         @if ($groupedProducts->count())
-            <div class="mt-8 grid gap-5">
+            <div class="mt-8 grid gap-5 max-sm:mt-3 max-sm:gap-3">
                 @foreach ($groupedProducts as $groupedProduct)
                     @if ($groupedProduct->associated_product->getTypeInstance()->isSaleable())
                         <div class="flex items-center justify-between gap-5">
@@ -25,7 +25,7 @@
                             <x-shop::quantity-changer
                                 name="qty[{{$groupedProduct->associated_product_id}}]"
                                 :value="$groupedProduct->qty"
-                                class="gap-x-4 rounded-xl px-3 py-2.5"
+                                class="gap-x-4 rounded-xl px-3 py-2.5 max-sm:!py-1.5"
                                 @change="updateItem($event)"
                             />
                         </div>

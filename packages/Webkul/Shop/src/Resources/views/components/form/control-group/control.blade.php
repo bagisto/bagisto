@@ -22,7 +22,6 @@
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-sm:py-2 max-sm:text-sm']) }}
             >
         </v-field>
-
         @break
 
     @case('file')
@@ -38,7 +37,6 @@
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'mb-1.5 w-full rounded-lg border px-5 py-3 text-base text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-sm:py-2 max-sm:text-sm']) }}
             >
         </v-field>
-
         @break
 
     @case('color')
@@ -80,7 +78,6 @@
                 </x-shop::tinymce>
             @endif
         </v-field>
-
         @break
 
     @case('date')
@@ -99,7 +96,6 @@
                 >
             </x-shop::flat-picker.date>
         </v-field>
-
         @break
 
     @case('datetime')
@@ -135,7 +131,6 @@
                 {{ $slot }}
             </select>
         </v-field>
-
         @break
 
     @case('multiselect')
@@ -148,7 +143,6 @@
         >
             {{ $slot }}
         </v-field>
-
         @break
 
     @case('checkbox')
@@ -173,7 +167,6 @@
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
         >
         </label>
-
         @break
 
     @case('radio')
@@ -198,7 +191,6 @@
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label', 'key', ':key']) }}
         >
         </label>
-
         @break
 
     @case('switch')
@@ -225,7 +217,6 @@
                 for="{{ $name }}"
             ></label>
         </label>
-
         @break
 
     @case('image')
@@ -234,7 +225,6 @@
             {{ $attributes }}
             name="{{ $name }}"
         />
-
         @break
 
     @case('custom')

@@ -518,6 +518,10 @@ return [
                 'previous' => 'قبلی',
                 'view-all' => 'نمایش همه',
             ],
+
+            'ratings' => [
+                'title' => 'امتیازات',
+            ],
         ],
 
         'range-slider' => [

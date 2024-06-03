@@ -58,7 +58,7 @@
                 <x-shop::form.control-group>
                     <!-- Dropdown Options Container -->
                     <x-shop::form.control-group.label
-                        class="!mt-0"
+                        class="!mt-0 max-sm:!mb-2.5"
                         ::class="{ 'required': option.is_required }"
                     >
                         @{{ option.label }}
@@ -178,7 +178,7 @@
 
                     <template v-if="option.type == 'multiselect'">
                         <x-shop::form.control-group.control
-                            type="select"
+                            type="multiselect"
                             ::name="'bundle_options[' + option.id + '][]'"
                             ::rules="{'required': option.is_required}"
                             v-model="selectedProduct"

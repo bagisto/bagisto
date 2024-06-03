@@ -175,7 +175,6 @@ return [
                 'order-date'  => 'Data do pedido',
                 'order-id'    => 'ID do pedido',
                 'subtotal'    => 'Subtotal',
-                'tax'         => 'Imposto',
                 'title'       => 'Pedidos',
                 'total'       => 'Total',
 
@@ -518,6 +517,10 @@ return [
                 'next'     => 'Próximo',
                 'previous' => 'Anterior',
                 'view-all' => 'Ver Todos',
+            ],
+
+            'ratings' => [
+                'title' => 'Avaliações',
             ],
         ],
 
