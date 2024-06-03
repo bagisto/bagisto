@@ -15,7 +15,9 @@ use Webkul\Core\Facades\Acl as AclFacade;
 use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchFacade;
 use Webkul\Core\Facades\Menu as MenuFacade;
+use Webkul\Core\Facades\SystemConfig as SystemConfigFacade;
 use Webkul\Core\Menu;
+use Webkul\Core\SystemConfig;
 use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
 
@@ -104,6 +106,8 @@ class CoreServiceProvider extends ServiceProvider
 
         $loader->alias('acl', AclFacade::class);
 
+        $loader->alias('systemConfig', SystemConfigFacade::class);
+
         $this->app->singleton('core', function () {
             return app()->make(Core::class);
         });
@@ -114,6 +118,10 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->app->singleton('acl', function () {
             return app()->make(Acl::class);
+        });
+
+        $this->app->singleton('systemConfig', function () {
+            return app()->make(SystemConfig::class);
         });
 
         /**

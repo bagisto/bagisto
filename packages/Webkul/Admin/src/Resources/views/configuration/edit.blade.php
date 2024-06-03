@@ -4,11 +4,13 @@
     $currentChannel = core()->getRequestedChannel();
 
     $currentLocale = core()->getRequestedLocale();
+
+    $title = trans(systemConfig()->getActiveConfigurationItem()['name']);
 @endphp
 
 <x-admin::layouts>
     <x-slot:title>
-        @php ($title = trans(core()->getActiveConfigurationItem()['name']))
+        {{ $title }}
     </x-slot>
 
     <!-- Configuration form fields -->
@@ -116,7 +118,7 @@
         </div>
 
         <div class="mt-6 grid grid-cols-[1fr_2fr] gap-10 max-xl:flex-wrap">
-            @foreach ($groups as $key => $item)
+            @foreach (systemConfig()->getGroupOfActiveConfiguration() as $key => $item)
                 <div class="grid content-start gap-2.5">
                     <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
                         @lang($item['name'])

@@ -3,6 +3,7 @@
 use Webkul\Core\Acl;
 use Webkul\Core\Core;
 use Webkul\Core\Menu;
+use Webkul\Core\SystemConfig;
 
 if (! function_exists('core')) {
     /**
@@ -31,6 +32,16 @@ if (! function_exists('acl')) {
     function acl(): Acl
     {
         return app('acl');
+    }
+}
+
+if (! function_exists('systemConfig')) {
+    /**
+     * Acl helper.
+     */
+    function systemConfig(): SystemConfig
+    {
+        return app('systemConfig');
     }
 }
 

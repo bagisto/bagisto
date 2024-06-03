@@ -931,7 +931,7 @@ class Core
         $keys = explode('.', $key);
         $count = count($keys);
 
-        while (count($keys) > 1) {
+        while ($count > 1) {
             $key = array_shift($keys);
 
             if (

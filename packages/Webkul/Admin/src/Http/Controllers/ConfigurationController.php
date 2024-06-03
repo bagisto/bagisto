@@ -24,12 +24,11 @@ class ConfigurationController extends Controller
      */
     public function index(): View
     {
-        $groups = core()->getGroupOfActiveConfiguration();
-
-        if ($groups) {
-            return view('admin::configuration.edit', [
-                'groups' => $groups,
-            ]);
+        if (
+            request()->route('slug')
+            && request()->route('slug2')
+        ) {
+            return view('admin::configuration.edit');
         }
 
         return view('admin::configuration.index');
@@ -41,7 +40,7 @@ class ConfigurationController extends Controller
     public function search(): JsonResponse
     {
         $results = $this->coreConfigRepository->search(
-            core()->getConfigurationItems(),
+            systemConfig()->getConfigurationItems(),
             request()->query('query')
         );
 
