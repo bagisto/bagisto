@@ -53,7 +53,7 @@
         </div>
 
         <!-- Right Toolbar -->
-        <div class="flex gap-x-4">
+        <div class="flex gap-x-4">                   
             <!-- Filter Panel -->
             <x-admin::datagrid.toolbar.filter>
                 <template #filter="{

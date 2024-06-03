@@ -89,6 +89,9 @@
                 </div>
             </template>
         </slot>
+
+        <!-- Empty slot for right toolbar after -->
+        <slot name="right-toolbar-left-after"></slot>
     </script>
 
     <script type="module">

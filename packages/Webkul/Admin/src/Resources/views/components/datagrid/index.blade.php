@@ -216,6 +216,10 @@
                         params.filters[column.index] = column.value;
                     });
 
+                    const urlParams = new URLSearchParams(window.location.search);
+
+                    urlParams.forEach((param, key) => params[key] = param);
+
                     this.isLoading = true;
 
                     this.$axios
