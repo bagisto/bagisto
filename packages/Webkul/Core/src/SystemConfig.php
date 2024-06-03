@@ -121,6 +121,26 @@ class SystemConfig
     }
 
     /**
+     * Get the mapped field.
+     */
+    public function getMappedField(?array $field = []): array
+    {
+        return collect([
+            ...$field,
+            'isVisible' => true,
+        ])->map(function ($value, $key) {
+            if ($key == 'options') {
+                return collect($this->coreConfigRepository->getOptions($value))->map(fn ($option) => [
+                    'title' => trans($option['title']),
+                    'value' => $option['value'],
+                ])->toArray();
+            }
+
+            return $value;
+        })->toArray();
+    }
+
+    /**
      * Get group of active configuration.
      */
     public function getNameField(?string $nameKey = null): string
@@ -171,22 +191,10 @@ class SystemConfig
     }
 
     /**
-     * Get the mapped field.
+     * Get the config data.
      */
-    public function getMappedField(?array $field = []): array
+    public function getConfigData(string $nameKey, string $currentChannelCode = null, string $currentLocaleCode = null): ?string
     {
-        return collect([
-            ...$field,
-            'isVisible' => true,
-        ])->map(function ($value, $key) {
-            if ($key == 'options') {
-                return collect($this->coreConfigRepository->getOptions($value))->map(fn ($option) => [
-                    'title' => trans($option['title']),
-                    'value' => $option['value'],
-                ])->toArray();
-            }
-
-            return $value;
-        })->toArray();
+        return core()->getConfigData($nameKey, $currentChannelCode, $currentLocaleCode);
     }
 }

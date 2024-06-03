@@ -1,5 +1,5 @@
 @php
-    $name = core()->getNameField($nameKey = $item->getKey() . '.' . $field['name']);
+    $name = systemConfig()->getNameField($nameKey = $item->getKey() . '.' . $field['name']);
 
     $validations = systemConfig()->getFieldValidations($field);
 
@@ -14,7 +14,7 @@
 
 <v-configurable
     channel-locale="{{ systemConfig()->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code) }}"
-    src="{{ Storage::url($value = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
+    src="{{ Storage::url($value = systemConfig()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
     depend-name="{{ systemConfig()->getDependFieldName($field, $item) }}"
     is-require="{{ Str::contains($validations, 'required') ? 'required' : '' }}"
     field-data="{{ json_encode($field) }}"
