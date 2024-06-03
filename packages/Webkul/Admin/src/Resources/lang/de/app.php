@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Betrug',
                     'grand-total'     => 'Gesamtsumme',
                     'id'              => 'Bestellnummer #:id',
-                    'images'          => 'Bilder',
+                    'items'           => 'Artikel',
                     'location'        => 'Ort',
                     'order-id'        => 'Bestellnummer',
                     'pay-by'          => 'Bezahlen mit - :method',

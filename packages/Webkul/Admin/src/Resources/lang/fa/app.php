@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'تقلب',
                     'grand-total'     => 'مجموع کل',
                     'id'              => '#:id',
-                    'images'          => 'تصاویر',
+                    'items'           => 'موارد',
                     'location'        => 'موقعیت',
                     'order-id'        => 'شماره سفارش',
                     'pay-by'          => 'پرداخت توسط - :method',

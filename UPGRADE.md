@@ -9,6 +9,7 @@
 - [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
 - [Shop API Response Updates](#the-shop-api-response-updates)
 - [Admin and Shop Menu Updates](#the-admin-shop-menu-updates)
+- [Admin ACL Updates](#the-admin-acl-updates)
 
 ## Medium Impact Changes
 
@@ -978,6 +979,70 @@ php artisan indexer:index --type=elastic
 }
 ```
 
+4. The response for the Shop route `shop.api.products.index` or `/api/products` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+```diff
+{
+    "data": [
+        {
+            "id": 174,
+            "sku": "COMPLETELOOKSET2023",
+            "name": "All-in-One Smart Casual Outfit Set",
+            "description": "All-in-One Smart Casual Outfit Set",
+            "url_key": "all-in-one-smart-casual-outfit-set",
+            "base_image": {
+                "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+            },
+            "images": [
+                {
+                    "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+                }
+            ],
+            "is_new": true,
+            "is_featured": true,
+            "on_sale": true,
+            "is_saleable": true,
+            "is_wishlist": true,
+            "min_price": "$168.96",
+            "prices": {
+                "from": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                },
+                "to": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                }
+            },
+            "price_html": "<div class=\"grid gap-1.5\">\n<p class=\"flex items-center gap-4 max-sm:text-lg\">\n<span\nclass=\"text-zinc-500 line-through max-sm:text-base\"\n    aria-label=\"$176.96\"\n>\n$176.96\n</span>\n\n$168.96\n</p>\n\n</div>",
+-           "avg_ratings": 4.5,
++           "ratings": {
++               "average": "2.0",
++               "total": 2
++           }
+        }
+    ]
+}
+```
+
 <a name="the-admin-shop-menu-updates"></a>
 #### Admin and Shop Menu Updates
 
@@ -1072,68 +1137,79 @@ class ShopServiceProvider extends ServiceProvider
 
 The getItems() methods of the menu() facade accept different areas of the menu. For example, for the admin area, you need to provide the config name of the menu, whereas for the shop area, you should provide the name 'customer'.
 
-4. The response for the Shop route `shop.api.products.index` or `/api/products` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+<a name="the-admin-acl-updates"></a>
+#### Admin ACL Updates
+
+**Impact Probability: High**
+
+1. Previously, the composeView method included logic to share a dynamically generated acl structure with several Blade views in the admin interface. This logic has been removed. Here’s a detailed breakdown of what was removed:
+
 
 ```diff
+class AdminServiceProvider extends ServiceProvider
 {
-    "data": [
-        {
-            "id": 174,
-            "sku": "COMPLETELOOKSET2023",
-            "name": "All-in-One Smart Casual Outfit Set",
-            "description": "All-in-One Smart Casual Outfit Set",
-            "url_key": "all-in-one-smart-casual-outfit-set",
-            "base_image": {
-                "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
-            },
-            "images": [
-                {
-                    "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                    "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                    "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                    "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
-                }
-            ],
-            "is_new": true,
-            "is_featured": true,
-            "on_sale": true,
-            "is_saleable": true,
-            "is_wishlist": true,
-            "min_price": "$168.96",
-            "prices": {
-                "from": {
-                    "regular": {
-                        "price": "176.9600",
-                        "formatted_price": "$176.96"
-                    },
-                    "final": {
-                        "price": "168.9600",
-                        "formatted_price": "$168.96"
-                    }
-                },
-                "to": {
-                    "regular": {
-                        "price": "176.9600",
-                        "formatted_price": "$176.96"
-                    },
-                    "final": {
-                        "price": "168.9600",
-                        "formatted_price": "$168.96"
-                    }
-                }
-            },
-            "price_html": "<div class=\"grid gap-1.5\">\n<p class=\"flex items-center gap-4 max-sm:text-lg\">\n<span\nclass=\"text-zinc-500 line-through max-sm:text-base\"\n    aria-label=\"$176.96\"\n>\n$176.96\n</span>\n\n$168.96\n</p>\n\n</div>",
--           "avg_ratings": 4.5,
-+           "ratings": {
-+               "average": "2.0",
-+               "total": 2
-+           }
-        }
-    ]
+    public function boot(Router $router)
+    {
+        ...
+
+-        $this->registerACL();
+
+        ...
+
+        $this->app->register(EventServiceProvider::class);
+    }
+
+-   protected function composeView()
+-   {
+-       view()->composer([
+-           'admin::settings.roles.create',
+-           'admin::settings.roles.edit',
+-       ], function ($view) {
+-           $view->with('acl', $this->createACL());
+-       });
+-   }
+
+-    protected function registerACL()
+-    {
+-        $this->app->singleton('acl', function () {
+-            return $this->createACL();
+-        });
+-    }
+-
+-    protected function createACL()
+-    {
+-        static $tree;
+-
+-        if ($tree) {
+-            return $tree;
+-        }
+-
+-        $tree = Tree::create();
+-
+-        foreach (config('acl') as $item) {
+-            $tree->add($item, 'acl');
+-        }
+-
+-        $tree->items = core()->sortItems($tree->items);
+-
+-        return $tree;
+-    }
 }
+```
+
+#### How to use it?
+
+##### Get all acl items.
+
+```php
+    $acl = acl()->getItems();
+```
+
+##### Get all roles.
+
+```php 
+    $roles = acl()->getRoles();
 ```
 
 <a name="renamed-star-rating-blade"></a>

@@ -36,6 +36,10 @@ class Product
     public function afterCreate($product)
     {
         $this->flatIndexer->refresh($product);
+
+        $productIds = $this->getAllRelatedProductIds($product);
+
+        UpdateCreateElasticSearchIndexJob::dispatch($productIds);
     }
 
     /**
@@ -69,7 +73,15 @@ class Product
             return;
         }
 
-        DeleteElasticSearchIndexJob::dispatch([$productId]);
+        $product = $this->productRepository->find($productId);
+
+        if (! $product) {
+            return;
+        }
+
+        $productIds = $this->getAllRelatedProductIds($product);
+
+        DeleteElasticSearchIndexJob::dispatch($productIds);
     }
 
     /**

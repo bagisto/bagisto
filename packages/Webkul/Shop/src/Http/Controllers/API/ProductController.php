@@ -26,8 +26,12 @@ class ProductController extends APIController
      */
     public function index(): JsonResource
     {
+        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
+            $searchEngine = core()->getConfigData('catalog.products.search.admin_mode');
+        }
+
         $products = $this->productRepository
-            ->setSearchEngine(core()->getConfigData('catalog.products.search.storefront_mode'))
+            ->setSearchEngine($searchEngine ?? 'database')
             ->getAll(array_merge(request()->query(), [
                 'status'               => 1,
                 'visible_individually' => 1,

@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'প্রতারণা',
                     'grand-total'     => 'মোট টোটাল',
                     'id'              => '#:id',
-                    'images'          => 'চিত্র',
+                    'items'           => 'আইটেমগুলি',
                     'location'        => 'স্থান',
                     'order-id'        => 'অর্ডার আইডি',
                     'pay-by'          => ':method দ্বারা পরিশোধ করুন',

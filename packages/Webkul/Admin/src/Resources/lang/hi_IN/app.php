@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'धोखाधड़ी',
                     'grand-total'     => 'कुल योग',
                     'id'              => '#:id',
-                    'images'          => 'छवियाँ',
+                    'items'           => 'आइटम',
                     'location'        => 'स्थान',
                     'order-id'        => 'आदेश आईडी',
                     'pay-by'          => ':method के द्वारा भुगतान करें',
