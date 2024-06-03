@@ -183,7 +183,6 @@
                             ::rules="{'required': option.is_required}"
                             v-model="selectedProduct"
                             ::label="option.label"
-                            multiple
                         >
                             <option
                                 value="0"

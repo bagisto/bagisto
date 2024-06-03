@@ -103,11 +103,11 @@
             </div>
 
             <!-- Product Information Section -->
-            <div class="-mt-9 grid max-w-[291px] translate-y-9 content-start gap-2.5 bg-white p-2.5 transition-transform duration-300 ease-out group-hover:-translate-y-0 group-hover:rounded-t-lg max-sm:relative max-sm:mt-0 max-sm:max-h-[200px] max-sm:min-w-[192px] max-sm:translate-y-0 max-sm:gap-0 max-sm:px-0 max-sm:py-1.5">
+            <div class="-mt-9 grid max-w-[291px] translate-y-9 content-start gap-2.5 bg-white p-2.5 transition-transform duration-300 ease-out group-hover:-translate-y-0 group-hover:rounded-t-lg max-sm:relative max-sm:mt-0 max-sm:min-w-[170px] max-sm:max-w-[192px] max-sm:translate-y-0 max-sm:gap-0 max-sm:px-0 max-sm:py-1.5">
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
                     
-                <p class="text-base font-medium max-sm:text-sm">
+                <p class="text-base font-medium max-sm:mb-1.5 max-sm:max-w-[192px] max-sm:whitespace-break-spaces max-sm:text-sm max-sm:leading-4">
                     @{{ product.name }}
                 </p>
 
