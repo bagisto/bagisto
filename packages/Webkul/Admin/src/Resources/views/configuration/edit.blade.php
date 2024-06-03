@@ -135,7 +135,7 @@
                             $field['type'] == 'blade'
                             && view()->exists($field['path'])
                         )
-                            {!! view($field['path'], compact('field'))->render() !!}
+                            {!! view($field['path'], compact('field', 'item'))->render() !!}
                         @else 
                             @include ('admin::configuration.field-type')
                         @endif

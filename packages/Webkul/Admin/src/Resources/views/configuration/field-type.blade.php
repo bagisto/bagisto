@@ -22,7 +22,7 @@
     current-channel="{{ $currentChannel }}"
     current-locale="{{ $currentLocale }}"
     info="{{ trans($field['info'] ?? '') }}"
-    label="{{ trans($field['title']) }}"
+    label="{{ trans($field['title'] ?? '') }}"
     validations="{{ $validations }}"
     value="{{ $value }}"
     name="{{ $name }}"

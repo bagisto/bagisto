@@ -13,7 +13,7 @@ class SystemConfig
      * Items array.
      */
     public array $items = [];
-    
+
     /**
      * Create a new class instance.
      *
@@ -193,7 +193,7 @@ class SystemConfig
     /**
      * Get the config data.
      */
-    public function getConfigData(string $nameKey, string $currentChannelCode = null, string $currentLocaleCode = null): ?string
+    public function getConfigData(string $nameKey, ?string $currentChannelCode = null, ?string $currentLocaleCode = null): ?string
     {
         return core()->getConfigData($nameKey, $currentChannelCode, $currentLocaleCode);
     }

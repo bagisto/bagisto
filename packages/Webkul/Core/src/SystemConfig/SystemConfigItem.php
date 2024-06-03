@@ -11,9 +11,9 @@ class SystemConfigItem
      */
     public function __construct(
         public Collection $children,
-        public ?array $fields = null,
-        public ?string $icon = null,
-        public ?string $info = null,
+        public ?array $fields,
+        public ?string $icon,
+        public ?string $info,
         public string $key,
         public string $name,
         public ?string $route = null,
@@ -22,7 +22,7 @@ class SystemConfigItem
     }
 
     /**
-     * Get name of menu item.
+     * Get name of config item.
      */
     public function getName(): string
     {
@@ -31,26 +31,15 @@ class SystemConfigItem
 
     public function getFields(): ?array
     {
-        return $this->fields ?? null;
-    }
-
-
-    public function getType()
-    {
-        return $this->fields['type'] ?? null;
-    }
-
-    public function getPath()
-    {
-        return $this->fields['path'] ?? null;
+        return $this->fields;
     }
 
     /**
-     * Get name of menu item.
+     * Get name of config item.
      */
     public function getInfo(): ?string
     {
-        return $this->info ?? '';
+        return $this->info;
     }
 
     /**
@@ -62,7 +51,7 @@ class SystemConfigItem
     }
 
     /**
-     * Get the url of the menu item.
+     * Get the url of the config item.
      */
     public function getUrl(): string
     {
@@ -70,7 +59,7 @@ class SystemConfigItem
     }
 
     /**
-     * Get the key of the menu item.
+     * Get the key of the config item.
      */
     public function getKey(): string
     {
@@ -82,11 +71,11 @@ class SystemConfigItem
      */
     public function getIcon(): ?string
     {
-        return $this->icon ?? null;
+        return $this->icon;
     }
 
     /**
-     * Check weather menu item have children or not.
+     * Check weather config item have children or not.
      */
     public function haveChildren(): bool
     {
@@ -94,7 +83,7 @@ class SystemConfigItem
     }
 
     /**
-     * Get children of menu item.
+     * Get children of config item.
      */
     public function getChildren(): Collection
     {
@@ -103,25 +92,5 @@ class SystemConfigItem
         }
 
         return $this->children;
-    }
-
-    /**
-     * Check weather menu item is active or not.
-     */
-    public function isActive(): bool
-    {
-        if (request()->fullUrlIs($this->getUrl().'*')) {
-            return true;
-        }
-
-        if ($this->haveChildren()) {
-            foreach ($this->getChildren() as $child) {
-                if ($child->isActive()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 }
