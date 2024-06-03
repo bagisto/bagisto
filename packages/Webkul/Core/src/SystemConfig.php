@@ -35,7 +35,7 @@ class SystemConfig
     /**
      * Get all configuration items.
      */
-    public function getConfigurationItems(): Collection
+    public function getItems(): Collection
     {
         if (! $this->items) {
             $this->prepareConfigurationItems();
@@ -45,7 +45,7 @@ class SystemConfig
             ->sortBy('sort');
     }
 
-      /**
+    /**
      * Prepare configuration items.
      */
     public function prepareConfigurationItems()
@@ -107,7 +107,7 @@ class SystemConfig
             return null;
         }
 
-        $activeItem = $this->getConfigurationItems()->where('key', $slug)->first() ?? null;
+        $activeItem = $this->getItems()->where('key', $slug)->first() ?? null;
 
         if (! $activeItem) {
             return null;

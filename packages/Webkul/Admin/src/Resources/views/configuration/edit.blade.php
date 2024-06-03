@@ -10,7 +10,7 @@
 
 <x-admin::layouts>
     <x-slot:title>
-        {{ $activeConfiguration->getName() }}
+        {{ $name = $activeConfiguration->getName() }}
     </x-slot>
 
     <!-- Configuration form fields -->
@@ -21,7 +21,7 @@
         <!-- Save Inventory -->
         <div class="mt-3.5 flex items-center justify-between gap-4 max-sm:flex-wrap">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
-                {{ $activeConfiguration->getName() }}
+                {{ $name }}
             </p>
 
             <!-- Save Inventory -->

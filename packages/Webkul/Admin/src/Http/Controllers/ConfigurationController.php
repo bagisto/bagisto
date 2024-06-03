@@ -40,7 +40,7 @@ class ConfigurationController extends Controller
     public function search(): JsonResponse
     {
         $results = $this->coreConfigRepository->search(
-            systemConfig()->getConfigurationItems(),
+            systemConfig()->getItems(),
             request()->query('query')
         );
 
