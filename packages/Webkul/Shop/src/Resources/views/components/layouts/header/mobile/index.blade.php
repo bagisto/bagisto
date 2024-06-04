@@ -361,7 +361,7 @@
                     </ul>
 
                     <span
-                        class="mt-2 ltr:ml-2 rtl:mr-2"
+                        class="mt-2 max-sm:my-1.5 ltr:ml-2 rtl:mr-2"
                         v-else
                     >
                         @lang('shop::app.components.layouts.header.no-category-found')
