@@ -626,7 +626,7 @@
                                                     :label="inventorySource.name"
                                                 >
                                                 </v-field>
-g
+
                                                 <v-error-message
                                                     :name="'variants[variant_' + variant.id + '][inventory_' + inventorySource.id + ']'"
                                                     v-slot="{ message }"
