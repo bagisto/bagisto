@@ -1,9 +1,9 @@
 @php
     $name = systemConfig()->getNameField($nameKey = $item->getKey() . '.' . $field->getName());
 
-    $validations = systemConfig()->getFieldValidations($field->toArray());
+    $validations = systemConfig()->getFieldValidations($field = $field->toArray());
 
-    $field = systemConfig()->getMappedField($field->toArray());
+    $field = systemConfig()->getMappedField($field);
 @endphp
 
 <input
