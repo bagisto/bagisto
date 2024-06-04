@@ -84,7 +84,7 @@ class ConfigurationController extends Controller
             }
 
             if (! $atLeastOnePaymentMethodEnabled) {
-                session()->flash('error', trans('admin::app.configuration.enable-at-least-one-payment'));
+                session()->flash('error', trans('admin::app.configuration.index.enable-at-least-one-payment'));
 
                 return redirect()->back();
             }
