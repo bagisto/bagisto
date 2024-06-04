@@ -71,7 +71,7 @@
                                         </button>
                                     </x-slot>
 
-                                    <x-slot:menu class="!py-1">
+                                    <x-slot:menu class="!py-1 max-sm:!py-0">
                                         <x-shop::dropdown.menu.item>
                                             <a href="{{ route('shop.customers.account.addresses.edit', $address->id) }}">
                                                 <p class="w-full">

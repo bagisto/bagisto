@@ -583,12 +583,12 @@
                         </x-shop::accordion>
 
                         <!--Summary -->
-                        <div class="w-full rounded-t-md bg-gray-100">
+                        <div class="w-full rounded-md bg-gray-100">
                             <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
                                 @lang('shop::app.customers.account.orders.view.information.order-summary')
                             </div>
 
-                            <div class="grid gap-1.5 rounded-md rounded-t-none border border-t-0 bg-white px-4 py-3 text-xs">
+                            <div class="grid gap-1.5 rounded-md rounded-t-none border border-t-0 bg-white px-4 py-3 text-xs font-medium">
                                 @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                     <div class="flex w-full justify-between gap-x-5">
                                         <p class="text-zinc-500">
@@ -770,8 +770,8 @@
                                             @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
             
                                             <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
-                                                <div class="flex items-center gap-1 font-semibold text-black">
-                                                    <span class="icon-download text-sm"></span>
+                                                <div class="flex items-center gap-1 font-medium text-black">
+                                                    <span class="icon-download text-sm font-semibold"></span>
 
                                                     @lang('shop::app.customers.account.orders.view.invoices.print')
                                                 </div>
@@ -838,7 +838,7 @@
                                                     <!-- Quantity -->
                                                     <div class="flex justify-between">
                                                         <span class="text-zinc-500">
-                                                            @lang('shop::app.customers.account.orders.view.invoices.qty'):  {{ $item->qty }}
+                                                            @lang('shop::app.customers.account.orders.view.invoices.qty')
                                                         </span>
 
                                                         <span>
@@ -879,12 +879,12 @@
                                 </x-shop::accordion>
 
                                 <!--Summary -->
-                                <div class="w-full rounded-t-md bg-gray-100">
+                                <div class="w-full rounded-md bg-gray-100">
                                     <div class="rounded-t-md border-none px-4 py-3 font-medium">
                                         @lang('Order Summary')
                                     </div>
 
-                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs">
+                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs font-medium">
                                         @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p class="text-zinc-500">
@@ -1529,7 +1529,7 @@
                                     </x-slot>
                                 </x-shop::accordion>
 
-                                <div class="w-full rounded-t-md bg-gray-100">
+                                <div class="w-full rounded-md bg-gray-100">
                                     <div class="rounded-t-md border-none px-4 py-3 font-medium">
                                         @lang('shop::app.customers.account.orders.view.refunds.order-summary')
                                     </div>
@@ -1804,12 +1804,12 @@
             </x-shop::tabs>
 
             <!-- Shipping Address and Payment methods for mobile view -->
-            <div class="w-full rounded-t-md bg-gray-100 md:hidden">
+            <div class="w-full rounded-md bg-gray-100 md:hidden">
                 <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
                     @lang('shop::app.customers.account.orders.view.shipping-and-payment')
                 </div>
 
-                <div class="grid gap-1.5 rounded-md rounded-t-none border border-t-0 bg-white px-4 py-3 text-xs">
+                <div class="grid gap-1.5 rounded-md rounded-t-none border border-t-0 bg-white px-4 py-3 text-xs font-medium">
                     <!-- Shipping Address -->
                     @if ($order->shipping_address)
                         <div class="text-sm font-medium text-zinc-500">

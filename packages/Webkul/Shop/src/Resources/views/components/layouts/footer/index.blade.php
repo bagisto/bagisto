@@ -98,7 +98,7 @@
                 <div>
                     <x-shop::form
                         :action="route('shop.subscription.store')"
-                        class="mt-2.5 rounded max-sm:mt-4"
+                        class="mt-2.5 rounded max-sm:mt-0"
                     >
                         <div class="relative w-full">
                             <x-shop::form.control-group.control

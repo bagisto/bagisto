@@ -54,7 +54,7 @@
 </div>
 
 <!-- Cart Totals -->
-<div class="mb-8 mt-6 grid gap-4 max-md:mb-0">
+<div class="mb-8 mt-6 grid gap-4 max-md:mb-0 max-sm:mt-4 max-sm:gap-2.5">
     <!-- Sub Total -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.sub_total.before') !!}
 
