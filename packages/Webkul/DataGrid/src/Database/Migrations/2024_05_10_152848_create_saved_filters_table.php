@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('saved_filters', function (Blueprint $table) {
+        Schema::create('datagrid_saved_filters', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->unsigned();
             $table->string('name');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('saved_filters');
+        Schema::dropIfExists('datagrid_saved_filters');
     }
 };

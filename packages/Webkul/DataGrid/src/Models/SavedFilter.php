@@ -15,7 +15,7 @@ class SavedFilter extends Model implements SavedFilterContract
      *
      * @var string
      */
-    protected $table = 'saved_filters';
+    protected $table = 'datagrid_saved_filters';
 
     /**
      * Fillable property for the model.

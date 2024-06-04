@@ -23,7 +23,7 @@ class SavedFilterController extends Controller
         $userId = auth()->guard('admin')->user()->id;
 
         $this->validate(request(), [
-            'name' => 'required|unique:saved_filters,name,NULL,id,src,'.request('src').',user_id,'.$userId,
+            'name' => 'required|unique:datagrid_saved_filters,name,NULL,id,src,'.request('src').',user_id,'.$userId,
         ]);
 
         Event::dispatch('datagrid.saved_filter.create.before');
@@ -64,7 +64,7 @@ class SavedFilterController extends Controller
         $userId = auth()->guard('admin')->user()->id;
 
         $this->validate(request(), [
-            'name' => 'required|unique:saved_filters,name,'.$id.',id,src,'.request('src').',user_id,'.$userId,
+            'name' => 'required|unique:datagrid_saved_filters,name,'.$id.',id,src,'.request('src').',user_id,'.$userId,
         ]);
 
         $savedFilter = $this->savedFilterRepository->findOneWhere([
