@@ -3982,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtruj',
+                    'apply-filters-btn' => 'Zastosuj filtry',
+                    'back-btn'          => 'Wstecz',
+                    'create-new-filter' => 'Criar novo filtro',
+                    'custom-filters'    => 'Filtros personalizados',
+                    'delete-error'      => 'Coś poszło nie tak podczas usuwania filtra, spróbuj ponownie.',
+                    'delete-success'    => 'O filtro foi excluído com sucesso.',
+                    'empty-description' => 'Não há filtros selecionados disponíveis para salvar. Por favor, selecione filtros para salvar.',
+                    'empty-title'       => 'Adicionar filtros para salvar',
+                    'name'              => 'Nome',
+                    'quick-filters'     => 'Filtros rápidos',
+                    'save-btn'          => 'Salvar',
+                    'save-filter'       => 'Salvar filtro',
+                    'saved-success'     => 'O filtro foi salvo com sucesso.',
+                    'selected-filters'  => 'Filtros selecionados',
+                    'title'             => 'Filtro',
+                    'update'            => 'Aktualizuj',
+                    'update-filter'     => 'Zaktualizuj filtr',
+                    'updated-success'   => 'Filtr został pomyślnie zaktualizowany.',
                 ],
 
                 'search' => [
@@ -3992,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => 'Wybierz.',
-                'title'  => 'Zastosuj Filtry',
+                'title'  => 'Filtrowanie',
 
                 'dropdown' => [
                     'searchable' => [

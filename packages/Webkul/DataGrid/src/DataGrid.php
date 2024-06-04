@@ -388,6 +388,12 @@ abstract class DataGrid
 
                     case ColumnTypeEnum::DATE_RANGE->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            if (is_string($requestedValues)) {
+                                $rangeOption = collect($column->getRangeOptions())->firstWhere('name', $requestedValues);
+
+                                $requestedValues = [[$rangeOption['from'], $rangeOption['to']]];
+                            }
+
                             foreach ($requestedValues as $value) {
                                 $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [
                                     ($value[0] ?? '').' 00:00:01',
@@ -400,6 +406,17 @@ abstract class DataGrid
 
                     case ColumnTypeEnum::DATE_TIME_RANGE->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            if (is_string($requestedValues)) {
+                                $rangeOption = collect($column->getRangeOptions())->firstWhere('name', $requestedValues);
+
+                                $requestedValues = [
+                                    [
+                                        $rangeOption['from'].' 00:00:01',
+                                        $rangeOption['to'].' 23:59:59',
+                                    ],
+                                ];
+                            }
+
                             foreach ($requestedValues as $value) {
                                 $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [$value[0] ?? '', $value[1] ?? '']);
                             }

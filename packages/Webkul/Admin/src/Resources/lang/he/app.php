@@ -3982,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'סנן',
+                    'apply-filters-btn' => 'החל מסננים',
+                    'back-btn'          => 'חזרה',
+                    'create-new-filter' => 'צור פילטר חדש',
+                    'custom-filters'    => 'פילטרים מותאמים אישית',
+                    'delete-error'      => 'משהו השתבש בעת מחיקת המסנן, אנא נסה שוב.',
+                    'delete-success'    => 'הפילטר נמחק בהצלחה.',
+                    'empty-description' => 'אין פילטרים נבחרים זמינים לשמירה. יש לבחור פילטרים לשמירה.',
+                    'empty-title'       => 'הוסף פילטרים לשמירה',
+                    'name'              => 'שם',
+                    'quick-filters'     => 'פילטרים מהירים',
+                    'save-btn'          => 'שמור',
+                    'save-filter'       => 'שמור פילטר',
+                    'saved-success'     => 'הפילטר נשמר בהצלחה.',
+                    'selected-filters'  => 'פילטרים נבחרים',
+                    'title'             => 'פילטר',
+                    'update'            => 'עדכן',
+                    'update-filter'     => 'עדכן מסנן',
+                    'updated-success'   => 'המסנן עודכן בהצלחה.',
                 ],
 
                 'search' => [
@@ -3992,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => 'בחר',
-                'title'  => 'החל סינון',
+                'title'  => 'מסננים',
 
                 'dropdown' => [
                     'searchable' => [
