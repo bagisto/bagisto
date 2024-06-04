@@ -15,7 +15,6 @@ use Webkul\Admin\Http\Resources\AttributeResource;
 use Webkul\Admin\Http\Resources\ProductResource;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Rules\Slug;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
@@ -37,7 +36,6 @@ class ProductController extends Controller
      */
     public function __construct(
         protected AttributeFamilyRepository $attributeFamilyRepository,
-        protected InventorySourceRepository $inventorySourceRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
@@ -139,9 +137,7 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->findOrFail($id);
 
-        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => self::ACTIVE_STATUS]);
-
-        return view('admin::catalog.products.edit', compact('product', 'inventorySources'));
+        return view('admin::catalog.products.edit', compact('product'));
     }
 
     /**

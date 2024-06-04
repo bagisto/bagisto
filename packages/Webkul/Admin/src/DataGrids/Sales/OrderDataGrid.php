@@ -35,6 +35,7 @@ class OrderDataGrid extends DataGrid
                 'orders.base_grand_total',
                 'orders.created_at',
                 'channel_name',
+                'channel_id',
                 'status',
                 'customer_email',
                 'orders.cart_id as items',
@@ -155,7 +156,7 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'channel_name',
+            'index'      => 'channel_id',
             'label'      => trans('admin::app.sales.orders.index.datagrid.channel-name'),
             'type'       => 'dropdown',
             'options'    => [

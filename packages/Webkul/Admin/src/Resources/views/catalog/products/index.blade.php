@@ -245,12 +245,14 @@
                         </div>
 
                         <div class="flex items-center gap-1.5">
-                            <a :href=`{{ route('admin.catalog.products.copy', '') }}/${record.product_id}`>
-                                <span class="icon-copy cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
-                            </a>
-
-                            <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                                <span class="icon-sort-right cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
+                            <a
+                                v-for="action in record.actions"
+                                :href="action.url"
+                            >
+                                <span
+                                    class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
+                                    :class="action.icon"
+                                ></span>
                             </a>
                         </div>
                     </div>

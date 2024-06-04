@@ -71,6 +71,7 @@ class Sale extends AbstractReporting
     {
         return $this->orderRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
     }
@@ -115,6 +116,7 @@ class Sale extends AbstractReporting
         return $this->orderRepository
             ->resetModel()
             ->with(['addresses', 'payment', 'items'])
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('orders.created_at', [now()->today(), now()->endOfDay()])
             ->get();
     }
@@ -168,6 +170,7 @@ class Sale extends AbstractReporting
     {
         return $this->orderRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
     }
@@ -182,6 +185,7 @@ class Sale extends AbstractReporting
     {
         return $this->orderRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_sub_total_invoiced - base_sub_total_refunded'));
     }
@@ -250,6 +254,7 @@ class Sale extends AbstractReporting
     {
         return $this->orderRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
     }
@@ -318,6 +323,7 @@ class Sale extends AbstractReporting
     {
         return $this->orderRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_grand_total_refunded'));
     }
@@ -386,6 +392,7 @@ class Sale extends AbstractReporting
     {
         return $this->orderRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_tax_amount_invoiced - base_tax_amount_refunded'));
     }
@@ -439,9 +446,11 @@ class Sale extends AbstractReporting
     {
         return $this->orderItemRepository
             ->resetModel()
+            ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
             ->leftJoin('tax_categories', 'order_items.tax_category_id', '=', 'tax_categories.id')
             ->select('tax_categories.id as tax_category_id', 'tax_categories.name')
-            ->addSelect(DB::raw('SUM(base_tax_amount_invoiced - base_tax_amount_refunded) as total'))
+            ->addSelect(DB::raw('SUM(order_items.base_tax_amount_invoiced - order_items.base_tax_amount_refunded) as total'))
+            ->whereIn('orders.channel_id', $this->channelIds)
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
             ->whereNotNull('tax_category_id')
             ->groupBy('tax_category_id')
@@ -474,6 +483,7 @@ class Sale extends AbstractReporting
     {
         return $this->orderRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_shipping_invoiced - base_shipping_refunded'));
     }
@@ -529,6 +539,7 @@ class Sale extends AbstractReporting
             ->resetModel()
             ->select('shipping_title as title')
             ->addSelect(DB::raw('SUM(base_shipping_invoiced - base_shipping_refunded) as total'))
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
             ->whereNotNull('shipping_method')
             ->groupBy('shipping_method')
@@ -550,6 +561,7 @@ class Sale extends AbstractReporting
             ->select('method', 'method_title as title')
             ->addSelect(DB::raw('COUNT(*) as total'))
             ->addSelect(DB::raw('SUM(base_grand_total) as base_total'))
+            ->whereIn('orders.channel_id', $this->channelIds)
             ->whereBetween('orders.created_at', [$this->startDate, $this->endDate])
             ->groupBy('method')
             ->orderByDesc('total')
@@ -576,6 +588,7 @@ class Sale extends AbstractReporting
     {
         return $this->orderRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
             ->get()
@@ -603,6 +616,7 @@ class Sale extends AbstractReporting
                 DB::raw("$valueColumn AS total"),
                 DB::raw('COUNT(*) AS count')
             )
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('date')
             ->get();

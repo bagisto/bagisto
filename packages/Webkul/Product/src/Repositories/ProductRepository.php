@@ -73,10 +73,6 @@ class ProductRepository extends Repository
 
         $product->refresh();
 
-        if (isset($data['channels'])) {
-            $product['channels'] = $data['channels'];
-        }
-
         return $product;
     }
 

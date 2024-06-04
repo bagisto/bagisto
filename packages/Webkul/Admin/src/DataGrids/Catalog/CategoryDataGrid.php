@@ -3,7 +3,6 @@
 namespace Webkul\Admin\DataGrids\Catalog;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Core\Models\Locale;
 use Webkul\DataGrid\DataGrid;
 
 class CategoryDataGrid extends DataGrid
@@ -16,44 +15,26 @@ class CategoryDataGrid extends DataGrid
     protected $primaryColumn = 'category_id';
 
     /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
-        'locales',
-    ];
-
-    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
-        if (core()->getRequestedLocaleCode() === 'all') {
-            $whereInLocales = Locale::query()->pluck('code')->toArray();
-        } else {
-            $whereInLocales = [core()->getRequestedLocaleCode()];
-        }
-
-        $queryBuilder = DB::table('categories as cat')
+        $queryBuilder = DB::table('categories')
             ->select(
-                'cat.id as category_id',
-                'ct.name',
-                'cat.position',
-                'cat.status',
-                'ct.locale',
-                DB::raw('COUNT(DISTINCT '.DB::getTablePrefix().'pc.product_id) as count')
+                'categories.id as category_id',
+                'category_translations.name',
+                'categories.position',
+                'categories.status',
+                'category_translations.locale',
             )
-            ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
-                $leftJoin->on('cat.id', '=', 'ct.category_id')
-                    ->whereIn('ct.locale', $whereInLocales);
-            })
-            ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
-            ->groupBy('cat.id', 'ct.locale');
+            ->addSelect(DB::raw('COUNT(DISTINCT '.DB::getTablePrefix().'product_categories.product_id) as count'))
+            ->leftJoin('category_translations', 'categories.id', '=', 'category_translations.category_id')
+            ->leftJoin('product_categories', 'categories.id', '=', 'product_categories.category_id')
+            ->groupBy('categories.id');
 
-        $this->addFilter('category_id', 'cat.id');
+        $this->addFilter('category_id', 'categories.id');
 
         return $queryBuilder;
     }

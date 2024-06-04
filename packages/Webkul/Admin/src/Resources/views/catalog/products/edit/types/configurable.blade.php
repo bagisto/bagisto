@@ -1,3 +1,7 @@
+@php
+    $inventorySources = app(\Webkul\Inventory\Repositories\InventorySourceRepository::class)->findWhere(['status' => 1]);
+@endphp
+
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.before', ['product' => $product]) !!}
 
 <v-product-variations :errors="errors"></v-product-variations>

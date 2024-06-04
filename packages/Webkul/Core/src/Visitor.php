@@ -17,10 +17,10 @@ class Visitor extends BaseVisitor
     {
         foreach ($this->except as $path) {
             if ($this->request->is($path)) {
+                dd(1);
                 return;
             }
         }
-
         UpdateCreateVisitIndex::dispatch($model, $this->prepareLog());
     }
 
@@ -30,6 +30,20 @@ class Visitor extends BaseVisitor
     public function url(): string
     {
         return $this->request->url();
+    }
+
+    /**
+     * Prepare log's data.
+     *
+     * @return array
+     *
+     * @throws \Exception
+     */
+    protected function prepareLog(): array
+    {
+        return array_merge(parent::prepareLog(), [
+            'channel_id' => core()->getCurrentChannel()->id,
+        ]);
     }
 
     /**
