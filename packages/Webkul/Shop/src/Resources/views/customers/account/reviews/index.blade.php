@@ -136,7 +136,7 @@
 
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
 
-                                                <p class="mt-1.5 font-normal text-zinc-100 max-md:mt-0 max-md:text-xs">
+                                                <p class="mt-1.5 font-normal text-zinc-500 max-md:mt-0 max-md:text-xs">
                                                     {{ $review->created_at }}
                                                 </p>
             

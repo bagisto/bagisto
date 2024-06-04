@@ -1,11 +1,13 @@
 @props(['options'])
 
-<v-card-carousel {{ $attributes }}></v-card-carousel>
+<v-product-carousel {{ $attributes }}>
+    <x-shop::shimmer.products.gallery />
+</v-product-carousel>
 
 @pushOnce('scripts')
     <script
         type="text/x-template"
-        id="v-card-carousel-template"
+        id="v-product-carousel-template"
     >
         <div class="relative m-auto flex w-full overflow-hidden">
             <!-- Slider -->
@@ -14,25 +16,40 @@
                 ref="sliderContainer"
             >
                 <div
-                    class="max-h-screen w-screen bg-cover bg-no-repeat"
-                    v-for="(image, index) in options"
+                    class="grid max-h-screen w-screen content-center bg-cover bg-no-repeat"
+                    v-for="(media, index) in [...options.images, ...options.videos]"
                     ref="slide"
                 >
-                    <x-shop::media.images.lazy
-                        class="max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out"
-                        ::lazy="false"
-                        ::src="image.large_image_url"
-                        ::srcset="image.large_image_url + ' 1920w, ' + image.medium_image_url + ' 1024w, ' + image.small_image_url + ' 525w'"
-                        ::alt="image?.title"
-                    />
+                    <template v-if="media.type=='videos'">
+                        <video
+                            controls
+                            width="100%"
+                            :alt="media.video_url"
+                            :key="media.video_url"
+                        >
+                            <source
+                                :src="media.video_url"
+                                type="video/mp4"
+                            />
+                        </video>
+                    </template>
+
+                    <template v-else>
+                        <x-shop::media.images.lazy
+                            class="aspect-square max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out"
+                            ::lazy="true"
+                            ::src="media.medium_image_url"
+                            ::alt="media.medium_image_url"
+                        />
+                    </template>
                 </div>
             </div>
 
             <!-- Pagination -->
-            <div class="absolute bottom-5 left-0 flex w-full justify-center max-sm:bottom-2.5">
+            <div class="absolute bottom-3 left-0 flex w-full justify-center max-sm:bottom-2.5">
                 <div
-                    v-for="(image, index) in options"
-                    class="mx-1 h-3 w-3 cursor-pointer rounded-full"
+                    v-for="(media, index) in [...options.images, ...options.videos]"
+                    class="mx-1 h-2 w-2 cursor-pointer rounded-full"
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
                 >
                 </div>
@@ -41,8 +58,8 @@
     </script>
 
     <script type="module">
-        app.component("v-card-carousel", {
-            template: '#v-card-carousel-template',
+        app.component("v-product-carousel", {
+            template: '#v-product-carousel-template',
 
             props: ['options'],
 
@@ -73,8 +90,6 @@
                 }
 
                 this.init();
-
-                this.play();
             },
 
             methods: {
@@ -158,8 +173,6 @@
                     }
 
                     this.setPositionByIndex();
-
-                    this.play();
                 },
 
                 animation() {
@@ -180,40 +193,6 @@
 
                 setSliderPosition() {
                     this.slider.style.transform = `translateX(${this.currentTranslate}px)`
-                },
-
-                navigate(type) {
-                    clearInterval(this.autoPlayInterval);
-
-                    if (this.direction === 'rtl') {
-                        type === 'next' ? this.prev() : this.next();
-                    } else {
-                        type === 'next' ? this.next() : this.prev();
-                    }
-
-                    this.setPositionByIndex();
-
-                    this.play();
-                },
-
-                next() {
-                    this.currentIndex = (this.currentIndex + this.startFrom) % this.options.length;
-                },
-
-                prev() {
-                    this.currentIndex = this.direction == 'ltr'
-                        ? this.currentIndex > 0 ? this.currentIndex - 1 : 0
-                        : this.currentIndex < 0 ? this.currentIndex + 1 : 0;
-                },
-
-                play() {
-                    clearInterval(this.autoPlayInterval);
-
-                    this.autoPlayInterval = setInterval(() => {
-                        this.currentIndex = (this.currentIndex + this.startFrom) % this.options.length;
-
-                        this.setPositionByIndex();
-                    }, 5000);
                 },
             },
         });
