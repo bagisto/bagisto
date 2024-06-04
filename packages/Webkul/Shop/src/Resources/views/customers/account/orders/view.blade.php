@@ -969,6 +969,20 @@
 
                             <!-- For Desktop View -->
                             <div class="max-md:hidden">
+                                <div class="flex justify-between">
+                                    <label class="text-base font-medium">
+                                        @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
+                                    </label>
+    
+                                    <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
+                                        <div class="flex items-center gap-1 font-semibold">
+                                            <span class="icon-download text-2xl"></span>
+
+                                            @lang('shop::app.customers.account.orders.view.invoices.print')
+                                        </div>
+                                    </a>
+                                </div>
+                                
                                 <div class="relative mt-8 overflow-x-auto rounded-xl border">
                                     <table class="w-full text-left text-sm">
                                         <thead class="border-b border-zinc-200 bg-zinc-500 text-sm text-black">
