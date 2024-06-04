@@ -426,6 +426,7 @@ return [
                 'currency'               => 'Валюта',
                 'customer-service'       => 'Служба підтримки',
                 'email'                  => 'Електронна пошта',
+                'footer-content'         => 'Вміст нижнього колонтитула',
                 'footer-text'            => '© Авторське право 2010 - :current_year, Webkul Software (зареєстровано в Індії). Усі права захищені.',
                 'locale'                 => 'Мова',
                 'newsletter-text'        => 'Готуйтеся до наших цікавих новин!',

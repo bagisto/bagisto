@@ -25,7 +25,7 @@
         <div>
             <!-- Account Navigation Toggler -->
             <div class="select-none pb-5 max-md:pb-1.5">
-                <p class="text-xl font-medium">
+                <p class="text-lg font-medium">
                         {{ $menuItem->getName() }}
                     </p>
             </div>

@@ -384,7 +384,7 @@
 
 
                                 <!-- Product Actions and Qunatity Box -->
-                                <div class="mt-8 flex max-w-[470px] gap-4 max-sm:mt-5">
+                                <div class="mt-8 flex max-w-[470px] gap-4 max-sm:mt-4">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 

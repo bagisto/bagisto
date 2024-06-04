@@ -240,7 +240,7 @@
 
                     <!-- Empty Review Section -->
                     <template v-else>
-                        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center max-md:h-96">
+                        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center max-md:h-60">
                             <img
                                 class="max-sm:h-[100px] max-sm:w-[100px]"
                                 src="{{ bagisto_asset('images/review.png') }}"

@@ -24,7 +24,7 @@
     @endif
 
     @if ($product->downloadable_links->count())
-        <label class="mb-4 mt-8 flex font-medium">
+        <label class="mb-4 mt-8 flex font-medium max-sm:mb-1.5 max-sm:mt-3">
             @lang('shop::app.products.view.type.downloadable.links')
         </label>
 

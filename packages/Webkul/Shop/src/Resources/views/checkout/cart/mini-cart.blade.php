@@ -243,7 +243,7 @@
                             </template>
 
                             <template v-else-if="displayTax.subtotal == 'both'">
-                                <p class="flex flex-col text-3xl font-semibold max-md:text-sm">
+                                <p class="flex flex-col text-3xl font-semibold max-md:text-sm max-sm:text-right">
                                     @{{ cart.formatted_sub_total_incl_tax }}
                                     
                                     <span class="text-sm font-normal text-zinc-500 max-sm:text-xs">

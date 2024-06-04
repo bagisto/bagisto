@@ -49,7 +49,7 @@
             <div class="absolute bottom-3 left-0 flex w-full justify-center max-sm:bottom-2.5">
                 <div
                     v-for="(media, index) in [...options.images, ...options.videos]"
-                    class="mx-1 h-2 w-2 cursor-pointer rounded-full"
+                    class="mx-1 h-1.5 w-1.5 cursor-pointer rounded-full"
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
                 >
                 </div>

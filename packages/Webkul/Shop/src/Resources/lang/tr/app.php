@@ -426,6 +426,7 @@ return [
                 'currency'               => 'Para Birimi',
                 'customer-service'       => 'Müşteri Hizmetleri',
                 'email'                  => 'E-posta',
+                'footer-content'         => 'Alt İçerik',
                 'footer-text'            => '© Telif Hakkı 2010 - :current_year, Webkul Software (Hindistan\'da kayıtlı). Tüm hakları saklıdır.',
                 'locale'                 => 'Yerel Ayar',
                 'newsletter-text'        => 'Eğlenceli Bültenimize Hazır Olun!',

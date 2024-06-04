@@ -496,19 +496,21 @@
                                                     @lang('shop::app.customers.account.orders.view.information.price'):
                                                 </span>
 
-                                                <span>
+                                                <span class="[&>*]:text-right">
                                                     @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
                                                         {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
                                                     @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
-                                                        {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                                        <p>
+                                                            {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                                        </p>
 
-                                                        <span class="whitespace-nowrap text-xs font-normal">
+                                                        <p class="whitespace-nowrap text-xs font-normal">
                                                             @lang('shop::app.customers.account.orders.view.information.excl-tax')
                                                             
                                                             <span class="font-medium">
                                                                 {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                                             </span>
-                                                        </span>
+                                                        </p>
                                                     @else
                                                         {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                                     @endif
@@ -521,19 +523,21 @@
                                                     @lang('shop::app.customers.account.orders.view.invoices.subtotal'): 
                                                 </span>
 
-                                                <span>
+                                                <span class="[&>*]:text-right">
                                                     @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
                                                         {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
                                                     @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
-                                                        {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
+                                                        <p>
+                                                            {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
+                                                        </p>
 
-                                                        <span class="whitespace-nowrap text-xs font-normal">
+                                                        <p class="whitespace-nowrap text-xs font-normal">
                                                             @lang('shop::app.customers.account.orders.view.invoices.excl-tax')
                                                             
                                                             <span class="font-medium">
                                                                 {{ core()->formatPrice($item->total, $order->order_currency_code) }}
                                                             </span>
-                                                        </span>
+                                                        </p>
                                                     @else
                                                         {{ core()->formatPrice($item->total, $order->order_currency_code) }}
                                                     @endif
@@ -810,19 +814,21 @@
                                                             @lang('shop::app.customers.account.orders.view.invoices.price'):
                                                         </span>
 
-                                                        <span>
+                                                        <span class="[&>*]:text-right">
                                                             @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
                                                                 {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
                                                             @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
-                                                                {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                                                <p>
+                                                                    {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                                                </p>    
     
-                                                                <span class="whitespace-nowrap text-xs font-normal">
+                                                                <p class="whitespace-nowrap text-xs font-normal">
                                                                     @lang('shop::app.customers.account.orders.view.information.excl-tax')
                                                                     
                                                                     <span class="font-medium">
                                                                         {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                                                     </span>
-                                                                </span>
+                                                                </p>
                                                             @else
                                                                 {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                                             @endif
@@ -846,19 +852,21 @@
                                                             @lang('shop::app.customers.account.orders.view.invoices.subtotal'): 
                                                         </span>
 
-                                                        <span>
+                                                        <span class="[&>*]:text-right">
                                                             @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
                                                                 {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
                                                             @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
-                                                                {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
+                                                                <p>
+                                                                    {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
+                                                                </p>    
 
-                                                                <span class="whitespace-nowrap text-xs font-normal">
+                                                                <p class="whitespace-nowrap text-xs font-normal">
                                                                     @lang('shop::app.customers.account.orders.view.invoices.excl-tax')
                                                                     
                                                                     <span class="font-medium">
                                                                         {{ core()->formatPrice($item->total, $order->order_currency_code) }}
                                                                     </span>
-                                                                </span>
+                                                                </p>
                                                             @else
                                                                 {{ core()->formatPrice($item->total, $order->order_currency_code) }}
                                                             @endif
@@ -1457,19 +1465,21 @@
                                                             @lang('shop::app.customers.account.orders.view.refunds.price'):
                                                         </span>
 
-                                                        <span>
+                                                        <span class="[&>*]:text-right">
                                                             @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
                                                                 {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
                                                             @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
-                                                                {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                                                <p>
+                                                                    {{ core()->formatPrice($item->price_incl_tax, $order->order_currency_code) }}
+                                                                </p>
         
-                                                                <span class="whitespace-nowrap text-xs font-normal">
+                                                                <p class="whitespace-nowrap text-xs font-normal">
                                                                     @lang('shop::app.customers.account.orders.view.information.excl-tax')
                                                                     
                                                                     <span class="font-medium">
                                                                         {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                                                     </span>
-                                                                </span>
+                                                                </p>
                                                             @else
                                                                 {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                                             @endif
@@ -1493,19 +1503,21 @@
                                                             @lang('shop::app.customers.account.orders.view.refunds.subtotal'): 
                                                         </span>
 
-                                                        <span>
+                                                        <span class="[&>*]:text-right">
                                                             @if (core()->getConfigData('sales.taxes.sales.display_prices') == 'including_tax')
                                                                 {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
                                                             @elseif (core()->getConfigData('sales.taxes.sales.display_prices') == 'both')
-                                                                {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
+                                                                <p>
+                                                                    {{ core()->formatPrice($item->total_incl_tax, $order->order_currency_code) }}
+                                                                </p>
 
-                                                                <span class="whitespace-nowrap text-xs font-normal">
+                                                                <p class="whitespace-nowrap text-xs font-normal">
                                                                     @lang('shop::app.customers.account.orders.view.information.excl-tax')
                                                                     
                                                                     <span class="font-medium">
                                                                         {{ core()->formatPrice($item->total, $order->order_currency_code) }}
                                                                     </span>
-                                                                </span>
+                                                                </p>
                                                             @else
                                                                 {{ core()->formatPrice($item->total, $order->order_currency_code) }}
                                                             @endif

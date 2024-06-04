@@ -64,11 +64,14 @@
 
                     <template v-else>
                         <div class="grid gap-4">
-                            <template v-for="record in available.records">
+                            <template
+                                v-for="record in available.records"
+                                v-if="available.records.length"
+                            >
                                 <div class="grid w-full gap-2.5 rounded-md border p-4 transition-all">
                                     <div class="flex justify-between">
                                         <div class="text-sm font-semibold">
-                                            <p>@lang('Order Id:') #@{{ record.increment_id }}</p>
+                                            <p>@lang('shop::app.customers.account.downloadable-products.orderId'): #@{{ record.increment_id }}</p>
 
                                             <p class="text-xs font-normal text-neutral-500">
                                                 @{{ record.created_at }}
@@ -88,6 +91,10 @@
                                         <p><span class="text-neutral-500">@lang('Remaining Downloads'):</span> <span class="font-medium">@{{ record.remaining_downloads }}</span></p>
                                     </div>
                                 </div>
+                            </template>
+
+                            <template v-else>
+                                @{{ available.records.length }} @lang('shop::app.customers.account.downloadable-products.records-found')
                             </template>
                         </div>
                     </template>

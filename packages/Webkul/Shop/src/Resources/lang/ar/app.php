@@ -426,6 +426,7 @@ return [
                 'currency'               => 'العملة',
                 'customer-service'       => 'خدمة العملاء',
                 'email'                  => 'البريد الإلكتروني',
+                'footer-content'         => 'محتوى التذييل',
                 'footer-text'            => '© حقوق النشر 2010 - :current_year ، Webkul Software (مسجلة في الهند). كل الحقوق محفوظة.',
                 'locale'                 => 'اللغة',
                 'newsletter-text'        => 'احصل على نشرتنا الممتعة!',

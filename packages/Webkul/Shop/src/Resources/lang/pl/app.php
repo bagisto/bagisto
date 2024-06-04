@@ -426,6 +426,7 @@ return [
                 'currency'               => 'Waluta',
                 'customer-service'       => 'Obsługa klienta',
                 'email'                  => 'Email',
+                'footer-content'         => 'Treść stopki',
                 'footer-text'            => '© Prawa autorskie 2010 - :current_year, Webkul Software (zarejestrowane w Indiach). Wszelkie prawa zastrzeżone.',
                 'locale'                 => 'Lokalizacja',
                 'newsletter-text'        => 'Bądź gotów na nasz zabawny biuletyn!',

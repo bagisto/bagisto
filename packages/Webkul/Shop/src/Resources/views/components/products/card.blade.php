@@ -71,7 +71,7 @@
 
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span
-                                class="absolute top-2.5 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-base sm:hidden ltr:right-1.5 rtl:left-1.5"
+                                class="absolute top-2.5 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg sm:hidden ltr:right-1.5 rtl:left-1.5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -87,7 +87,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span
-                                class="icon-compare absolute top-10 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-base sm:hidden ltr:right-1.5 rtl:left-1.5"
+                                class="icon-compare absolute top-10 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg sm:hidden ltr:right-1.5 rtl:left-1.5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"

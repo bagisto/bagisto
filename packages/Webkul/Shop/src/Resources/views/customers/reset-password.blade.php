@@ -21,7 +21,7 @@
         @lang('shop::app.customers.reset-password.title')
     </x-slot>
 
-    <div class="container mt-20 max-1180:px-5">
+    <div class="container mt-20 max-1180:px-5 max-md:mt-12">
         {!! view_render_event('bagisto.shop.customers.reset_password.logo.before') !!}
         
         <!-- Company Logo -->
@@ -44,7 +44,7 @@
 
         <!-- Form Container -->
         <div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
-            <h1 class="font-dmserif text-4xl max-sm:text-2xl">
+            <h1 class="font-dmserif text-4xl max-sm:text-xl">
                 @lang('shop::app.customers.reset-password.title')
             </h1>
 
@@ -69,7 +69,7 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            class="px-6 py-4 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-1.5"
                             id="email"
                             name="email"
                             rules="required|email"
@@ -91,7 +91,7 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="px-6 py-4 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-1.5"
                             name="password"
                             rules="required|min:6"
                             value=""
@@ -113,7 +113,7 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            class="px-6 py-4 max-sm:py-3.5"
+                            class="px-6 py-4 max-sm:py-1.5"
                             name="password_confirmation"
                             rules="confirmed:@password"
                             value=""

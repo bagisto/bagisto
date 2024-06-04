@@ -52,7 +52,7 @@
             class="hidden !w-full rounded-xl !border-2 !border-[#e9decc] max-1060:block max-sm:rounded-lg"
         >
             <x-slot:header class="rounded-t-lg bg-[#F1EADF] px-3 py-2 text-sm font-medium">
-                @lang('Footer Content')
+                @lang('shop::app.components.layouts.footer.footer-content')
             </x-slot>
 
             <x-slot:content class="flex justify-between !bg-transparent !p-4">

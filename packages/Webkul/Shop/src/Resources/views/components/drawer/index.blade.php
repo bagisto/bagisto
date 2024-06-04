@@ -94,7 +94,7 @@
                     class="fixed z-[1000] overflow-hidden bg-white max-md:!w-full"
                     :class="{
                         'inset-x-0 top-0': position == 'top',
-                        'inset-x-0 bottom-0': position == 'bottom',
+                        'inset-x-0 bottom-0 max-sm:max-h-full': position == 'bottom',
                         'inset-y-0 ltr:right-0 rtl:left-0': position == 'right',
                         'inset-y-0 ltr:left-0 rtl:right-0': position == 'left'
                     }"
