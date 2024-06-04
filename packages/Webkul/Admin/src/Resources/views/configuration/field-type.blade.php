@@ -1,9 +1,9 @@
 @php
-    $name = systemConfig()->getNameField($nameKey = $item->getKey() . '.' . $field->getName());
+    $name = system_config()->getNameField($nameKey = $item->getKey() . '.' . $field->getName());
 
-    $validations = systemConfig()->getFieldValidations($field = $field->toArray());
+    $validations = system_config()->getFieldValidations($field = $field->toArray());
 
-    $field = systemConfig()->getMappedField($field);
+    $field = system_config()->getMappedField($field);
 @endphp
 
 <input
@@ -13,9 +13,9 @@
 />
 
 <v-configurable
-    channel-locale="{{ systemConfig()->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code) }}"
-    src="{{ Storage::url($value = systemConfig()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
-    depend-name="{{ systemConfig()->getDependFieldName($field, $item) }}"
+    channel-locale="{{ system_config()->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code) }}"
+    src="{{ Storage::url($value = system_config()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
+    depend-name="{{ system_config()->getDependFieldName($field, $item) }}"
     is-require="{{ Str::contains($validations, 'required') ? 'required' : '' }}"
     field-data="{{ json_encode($field) }}"
     channel-count="{{ $channels->count() }}"

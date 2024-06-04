@@ -13,6 +13,6 @@ class SystemConfig extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'systemConfig';
+        return 'system_config';
     }
 }

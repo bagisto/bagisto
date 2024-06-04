@@ -5,7 +5,7 @@
 
     $currentLocale = core()->getRequestedLocale();
 
-    $activeConfiguration = systemConfig()->getActiveConfigurationItem();
+    $activeConfiguration = system_config()->getActiveConfigurationItem();
 @endphp
 
 <x-admin::layouts>

@@ -35,13 +35,13 @@ if (! function_exists('acl')) {
     }
 }
 
-if (! function_exists('systemConfig')) {
+if (! function_exists('system_config')) {
     /**
      * System Config helper.
      */
-    function systemConfig(): SystemConfig
+    function system_config(): SystemConfig
     {
-        return app('systemConfig');
+        return app('system_config');
     }
 }
 

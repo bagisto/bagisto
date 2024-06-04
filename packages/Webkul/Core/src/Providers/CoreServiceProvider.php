@@ -106,7 +106,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $loader->alias('acl', AclFacade::class);
 
-        $loader->alias('systemConfig', SystemConfigFacade::class);
+        $loader->alias('system_config', SystemConfigFacade::class);
 
         $this->app->singleton('core', function () {
             return app()->make(Core::class);
@@ -120,7 +120,7 @@ class CoreServiceProvider extends ServiceProvider
             return app()->make(Acl::class);
         });
 
-        $this->app->singleton('systemConfig', function () {
+        $this->app->singleton('system_config', function () {
             return app()->make(SystemConfig::class);
         });
 
