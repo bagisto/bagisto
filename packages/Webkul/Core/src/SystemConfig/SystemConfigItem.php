@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 class SystemConfigItem
 {
     /**
-     * Create a new AclItem instance.
+     * Create a new SystemConfigItem instance.
      */
     public function __construct(
         public Collection $children,
@@ -83,7 +83,7 @@ class SystemConfigItem
     }
 
     /**
-     * Get Icon
+     * Get Icon.
      */
     public function getIcon(): ?string
     {
