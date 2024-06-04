@@ -74,7 +74,7 @@
         <div class="mt-8 max-md:mt-5 max-md:grid max-md:gap-4">
             <x-shop::tabs>
                 <x-shop::tabs.item
-                    class="max-md:!px-0 max-md:pb-0 max-md:pt-2"
+                    class="!px-0 max-md:pb-0 max-md:pt-2"
                     :title="trans('shop::app.customers.account.orders.view.information.info')"
                     :is-selected="true"
                 >
@@ -996,8 +996,22 @@
 
                             <!-- For Desktop View -->
                             <div class="max-md:hidden">
+                                <div class="flex items-center justify-between">
+                                    <div class="">
+                                        <p class="text-base font-medium">
+                                            @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
+                                        </p>
+                                    </div>
+                                    
+                                    <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
+                                        <div class="secondary-button flex items-center gap-x-2.5 border-zinc-200 px-5 py-3 font-normal">
+                                            @lang('shop::app.customers.account.orders.view.invoices.print')
+                                        </div>
+                                    </a>
+                                </div>
+
                                 <div class="relative mt-8 overflow-x-auto rounded-xl border">
-                                    <table class="w-full text-left text-sm">
+                                    <table class="w-full text-left">
                                         <thead class="border-b border-zinc-200 bg-zinc-100 text-sm text-black">
                                             <tr class="[&>*]:font-medium [&>*]:px-6 [&>*]:py-4">
                                                 <th scope="col">
@@ -1425,7 +1439,7 @@
                             </div>
 
                             <!-- For Mobile View -->
-                            <div class="grid gap-6 md:hidden">
+                            <div class="grid gap-4 md:hidden">
                                 <div class="rounded-lg border">
                                     <div class="grid gap-1.5 px-4 py-2.5 text-xs font-medium text-zinc-500 [&>*]:flex [&>*]:justify-between">
                                         @lang('shop::app.customers.account.orders.view.refunds.individual-refund', ['refund_id' => $refund->id])

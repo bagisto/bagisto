@@ -54,7 +54,7 @@
                         @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
                     </x-slot>
 
-                    <x-slot:content class="pt-2.5">
+                    <x-slot:content class="max-sm:pt-2.5">
                         <div v-for="column in available.columns">
                             <div v-if="column.filterable">
                                 <!-- Boolean -->

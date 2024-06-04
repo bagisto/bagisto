@@ -84,7 +84,7 @@
 
                         <!-- Cart Item Information -->
                         <div class="grid flex-1 place-content-start justify-stretch gap-y-2.5">
-                            <div class="flex flex-wrap justify-between max-md:gap-0">
+                            <div class="flex justify-between max-md:gap-0 max-sm:flex-wrap">
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
 
