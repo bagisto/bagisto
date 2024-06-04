@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\DashboardController;
-use Webkul\Admin\Http\Controllers\DataGridController;
+use Webkul\Admin\Http\Controllers\DataGrid\DataGridController;
+use Webkul\Admin\Http\Controllers\DataGrid\SavedFilterController;
 use Webkul\Admin\Http\Controllers\MagicAIController;
 use Webkul\Admin\Http\Controllers\TinyMCEController;
 use Webkul\Admin\Http\Controllers\User\AccountController;
@@ -24,7 +25,19 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     /**
      * Datagrid routes.
      */
-    Route::get('datagrid/look-up', [DataGridController::class, 'lookUp'])->name('admin.datagrid.look_up');
+    Route::controller(DataGridController::class)->prefix('datagrid')->group(function () {
+        Route::get('look-up', 'lookUp')->name('admin.datagrid.look_up');
+
+        Route::controller(SavedFilterController::class)->prefix('saved-filters')->group(function () {
+            Route::post('', 'store')->name('admin.datagrid.saved_filters.store');
+
+            Route::get('', 'get')->name('admin.datagrid.saved_filters.index');
+
+            Route::put('{id}', 'update')->name('admin.datagrid.saved_filters.update');
+
+            Route::delete('{id}', 'destroy')->name('admin.datagrid.saved_filters.destroy');
+        });
+    });
 
     /**
      * Tinymce file upload handler.

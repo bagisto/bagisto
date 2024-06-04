@@ -3982,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filter',
+                    'apply-filters-btn' => 'Filters toepassen',
+                    'back-btn'          => 'Terug',
+                    'create-new-filter' => 'Nieuwe filter maken',
+                    'custom-filters'    => 'Aangepaste filters',
+                    'delete-error'      => 'Er is iets misgegaan bij het verwijderen van het filter, probeer het opnieuw.',
+                    'delete-success'    => 'Filter is succesvol verwijderd.',
+                    'empty-description' => 'Er zijn geen geselecteerde filters beschikbaar om op te slaan. Selecteer filters om op te slaan.',
+                    'empty-title'       => 'Filters toevoegen om op te slaan',
+                    'name'              => 'Naam',
+                    'quick-filters'     => 'Snelle filters',
+                    'save-btn'          => 'Opslaan',
+                    'save-filter'       => 'Filter opslaan',
+                    'saved-success'     => 'Filter is succesvol opgeslagen.',
+                    'selected-filters'  => 'Geselecteerde filters',
+                    'title'             => 'Filter',
+                    'update'            => 'Bijwerken',
+                    'update-filter'     => 'Filter bijwerken',
+                    'updated-success'   => 'Het filter is succesvol bijgewerkt.',
                 ],
 
                 'search' => [
@@ -3992,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => 'Selecteren.',
-                'title'  => 'Filters Toepassen',
+                'title'  => 'Filters',
 
                 'dropdown' => [
                     'searchable' => [

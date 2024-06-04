@@ -317,7 +317,7 @@ it('should edit the customer address', function () {
         ->assertOk()
         ->assertSeeText(trans('shop::app.customers.account.addresses.edit.edit'))
         ->assertSeeText(trans('shop::app.customers.account.addresses.edit.title'))
-        ->assertSeeText(trans('shop::app.customers.account.addresses.edit.save'));
+        ->assertSeeText(trans('shop::app.customers.account.addresses.edit.update-btn'));
 });
 
 it('should fails the validation error when certain inputs not provided update the customer address', function () {

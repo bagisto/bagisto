@@ -3982,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => '筛选',
+                    'apply-filters-btn' => '应用过滤器',
+                    'back-btn'          => '返回',
+                    'create-new-filter' => '创建新过滤器',
+                    'custom-filters'    => '自定义过滤器',
+                    'delete-error'      => '删除过滤器时出了点问题，请再试一次。',
+                    'delete-success'    => '成功删除过滤器。',
+                    'empty-description' => '没有可保存的选定过滤器。请选择要保存的过滤器。',
+                    'empty-title'       => '添加要保存的过滤器',
+                    'name'              => '名称',
+                    'quick-filters'     => '快速过滤器',
+                    'save-btn'          => '保存',
+                    'save-filter'       => '保存过滤器',
+                    'saved-success'     => '成功保存过滤器。',
+                    'selected-filters'  => '已选过滤器',
+                    'title'             => '过滤器',
+                    'update'            => '更新',
+                    'update-filter'     => '更新筛选器',
+                    'updated-success'   => '过滤器已成功更新。',
                 ],
 
                 'search' => [
@@ -3992,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => '选择',
-                'title'  => '应用筛选',
+                'title'  => '过滤器',
 
                 'dropdown' => [
                     'searchable' => [
