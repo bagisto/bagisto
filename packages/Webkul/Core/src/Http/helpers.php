@@ -37,7 +37,7 @@ if (! function_exists('acl')) {
 
 if (! function_exists('systemConfig')) {
     /**
-     * Acl helper.
+     * System Config helper.
      */
     function systemConfig(): SystemConfig
     {

@@ -29,7 +29,10 @@ class SystemConfigItem
         return $this->name ?? '';
     }
 
-    public function getFields()
+    /**
+     * Get fields of config item.
+     */
+    public function getFields(): Collection
     {
         return collect($this->fields)->map(function ($field) {
             return new SystemConfigItemField(
