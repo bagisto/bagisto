@@ -29,9 +29,22 @@ class SystemConfigItem
         return $this->name ?? '';
     }
 
-    public function getFields(): ?array
+    public function getFields()
     {
-        return $this->fields;
+        return collect($this->fields)->map(function ($field) {
+            return new SystemConfigItemField(
+                name: $field['name'],
+                title: $field['title'],
+                type: $field['type'],
+                depends: $field['depends'] ?? null,
+                path: $field['path'] ?? null,
+                validation: $field['validation'] ?? null,
+                default: $field['default'] ?? null,
+                channel_based: $field['channel_based'] ?? null,
+                locale_based: $field['locale_based'] ?? null,
+                options: collect($field['options'] ?? [])
+            );
+        });
     }
 
     /**

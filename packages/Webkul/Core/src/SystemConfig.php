@@ -130,7 +130,7 @@ class SystemConfig
             'isVisible' => true,
         ])->map(function ($value, $key) {
             if ($key == 'options') {
-                return collect($this->coreConfigRepository->getOptions($value))->map(fn ($option) => [
+                return collect($this->coreConfigRepository->getOptions($value->toArray()))->map(fn ($option) => [
                     'title' => trans($option['title']),
                     'value' => $option['value'],
                 ])->toArray();

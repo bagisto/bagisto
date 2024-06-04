@@ -132,15 +132,15 @@
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     @foreach ($item->getFields() as $field)
                         @if (
-                            $field['type'] == 'blade'
-                            && view()->exists($field['path'])
+                            $field->getType() == 'blade'
+                            && view()->exists($path = $field->getPath())
                         )
-                            {!! view($field['path'], compact('field', 'item'))->render() !!}
+                            {!! view($path, compact('field', 'item'))->render() !!}
                         @else 
                             @include ('admin::configuration.field-type')
                         @endif
 
-                        @php ($hint = $field['title'] . '-hint')
+                        @php ($hint = $field->getTitle().'-hint')
 
                         @if ($hint !== __($hint))
                             <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
