@@ -12,27 +12,27 @@
     value="{{ json_encode($item) }}"
 />
 
-<v-configurable
-    channel-locale="{{ system_config()->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code) }}"
-    src="{{ Storage::url($value = system_config()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
-    depend-name="{{ system_config()->getDependFieldName($field, $item) }}"
-    is-require="{{ Str::contains($validations, 'required') ? 'required' : '' }}"
-    field-data="{{ json_encode($field) }}"
-    channel-count="{{ $channels->count() }}"
-    current-channel="{{ $currentChannel }}"
-    current-locale="{{ $currentLocale }}"
-    info="{{ trans($field['info'] ?? '') }}"
-    label="{{ trans($field['title'] ?? '') }}"
-    validations="{{ $validations }}"
-    value="{{ $value }}"
-    name="{{ $name }}"
->
-    <div class="mb-4">
+<div class="mb-4 last:!mb-0">
+    <v-configurable
+        channel-locale="{{ system_config()->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code) }}"
+        src="{{ Storage::url($value = system_config()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
+        depend-name="{{ system_config()->getDependFieldName($field, $item) }}"
+        is-require="{{ Str::contains($validations, 'required') ? 'required' : '' }}"
+        field-data="{{ json_encode($field) }}"
+        channel-count="{{ $channels->count() }}"
+        current-channel="{{ $currentChannel }}"
+        current-locale="{{ $currentLocale }}"
+        info="{{ trans($field['info'] ?? '') }}"
+        label="{{ trans($field['title'] ?? '') }}"
+        validations="{{ $validations }}"
+        value="{{ $value }}"
+        name="{{ $name }}"
+    >
         <div class="shimmer mb-1.5 h-4 w-24"></div>
 
         <div class="shimmer flex h-[42px] w-full rounded-md"></div>
-    </div>
-</v-configurable>
+    </v-configurable>
+</div>
 
 @pushOnce('scripts')
     <script
