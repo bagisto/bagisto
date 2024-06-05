@@ -258,9 +258,19 @@ class Installer extends Command
             array_merge(['all' => 'All'], $this->currencies)
         );
 
-        $allowedLocales = array_key_exists('all', $allowedLocales) ? array_values(array_unique(array_keys($this->locales))) : array_values(array_unique(array_merge([$defaultLocale], array_keys($allowedLocales))));
+        $allowedLocales = array_key_exists('all', $allowedLocales)
+                            ? array_values(array_unique(array_keys($this->locales)))
+                            : array_values(array_unique(array_merge(
+                                [$defaultLocale],
+                                array_keys($allowedLocales)
+                            )));
 
-        $allowedCurrencies = array_key_exists('all', $allowedCurrencies) ? array_values(array_unique(array_keys($this->currencies))) : array_values(array_unique(array_merge([$defaultCurrency ?? 'USD'], array_keys($allowedCurrencies))));
+        $allowedCurrencies = array_key_exists('all', $allowedCurrencies)
+                                ? array_values(array_unique(array_keys($this->currencies)))
+                                : array_values(array_unique(array_merge(
+                                    [$defaultCurrency ?? 'USD'],
+                                    array_keys($allowedCurrencies)
+                                )));
 
         return [
             'default_locale'     => $defaultLocale,
