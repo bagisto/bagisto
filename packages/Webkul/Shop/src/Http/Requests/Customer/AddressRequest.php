@@ -3,7 +3,6 @@
 namespace Webkul\Shop\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Rules\AlphaNumericSpace;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Customer\Rules\VatIdRule;
 
@@ -27,12 +26,12 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_name' => [new AlphaNumericSpace],
-            'first_name'   => ['required', new AlphaNumericSpace],
-            'last_name'    => ['required', new AlphaNumericSpace],
+            'company_name' => ['string'],
+            'first_name'   => ['required', 'string'],
+            'last_name'    => ['required', 'string'],
             'address'      => ['required', 'array', 'min:1'],
-            'country'      => core()->isCountryRequired() ? ['required', new AlphaNumericSpace] : [new AlphaNumericSpace],
-            'state'        => core()->isStateRequired() ? ['required', new AlphaNumericSpace] : [new AlphaNumericSpace],
+            'country'      => core()->isCountryRequired() ? ['required', 'string'] : ['string'],
+            'state'        => core()->isStateRequired() ? ['required', 'string'] : ['string'],
             'city'         => ['required', 'string'],
             'postcode'     => core()->isPostCodeRequired() ? ['required', 'numeric'] : ['numeric'],
             'phone'        => ['required', new PhoneNumber],
