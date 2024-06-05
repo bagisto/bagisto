@@ -50,7 +50,7 @@ abstract class AbstractReporting
     /**
      * Sets the channel IDs and codes.
      */
-    public function setChannel(string $code = null): self
+    public function setChannel(?string $code = null): self
     {
         $this->channelIds = core()->getAllChannels()
             ->filter(function ($channel) use ($code) {

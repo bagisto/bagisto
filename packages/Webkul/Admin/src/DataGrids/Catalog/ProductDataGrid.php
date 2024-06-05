@@ -244,7 +244,7 @@ class ProductDataGrid extends DataGrid
                 'method' => 'GET',
                 'url'    => function ($row) {
                     $filteredChannel = request()->input('filters.channel')[0] ?? null;
-                    
+
                     return route('admin.catalog.products.edit', [
                         'id'      => $row->product_id,
                         'channel' => $filteredChannel,

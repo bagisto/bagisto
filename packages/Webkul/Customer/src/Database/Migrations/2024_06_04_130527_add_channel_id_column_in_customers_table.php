@@ -22,7 +22,7 @@ return new class extends Migration
         if (! $firstChannelId) {
             return;
         }
-        
+
         DB::table('customers')->update(['channel_id' => $firstChannelId]);
     }
 

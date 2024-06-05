@@ -4,8 +4,8 @@ namespace Webkul\Product\Helpers\Indexers;
 
 use Illuminate\Support\Facades\Schema;
 use Webkul\Product\Helpers\ProductType;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class Flat extends AbstractIndexer
 {
@@ -54,10 +54,9 @@ class Flat extends AbstractIndexer
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductFlatRepository $productFlatRepository
-    )
-    {
+    ) {
         $this->batchSize = self::BATCH_SIZE;
-        
+
         $this->flatColumns = Schema::getColumnListing('product_flat');
     }
 

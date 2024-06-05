@@ -329,7 +329,7 @@
                     type="submit"
                     class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-md:w-full max-md:max-w-full max-md:rounded-xl"
                 >
-                    @lang('shop::app.customers.account.addresses.edit.save')
+                    @lang('shop::app.customers.account.addresses.edit.update-btn')
                 </button>
                 
                 {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.after', ['address' => $address]) !!}

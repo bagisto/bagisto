@@ -4,9 +4,9 @@ namespace Webkul\Product\Console\Commands;
 
 use Illuminate\Console\Command;
 use Webkul\Product\Helpers\Indexers\ElasticSearch;
+use Webkul\Product\Helpers\Indexers\Flat;
 use Webkul\Product\Helpers\Indexers\Inventory;
 use Webkul\Product\Helpers\Indexers\Price;
-use Webkul\Product\Helpers\Indexers\Flat;
 
 class Indexer extends Command
 {
