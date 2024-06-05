@@ -660,13 +660,8 @@ class Core
 
     /**
      * Retrieve information from payment configuration.
-     *
-     * @param  string  $field
-     * @param  int|string|null  $channelId
-     * @param  string|null  $locale
-     * @return mixed
      */
-    public function getConfigData($field, $currentChannelCode = null, $currentLocaleCode = null)
+    public function getConfigData(string $field, ?string $currentChannelCode = null, ?string $currentLocaleCode = null): mixed
     {
         return system_config()->getConfigData($field, $currentChannelCode, $currentLocaleCode);
     }

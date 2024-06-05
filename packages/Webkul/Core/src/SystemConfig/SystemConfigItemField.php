@@ -2,8 +2,6 @@
 
 namespace Webkul\Core\SystemConfig;
 
-use Illuminate\Support\Collection;
-
 class SystemConfigItemField
 {
     /**

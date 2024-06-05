@@ -51,7 +51,13 @@ class SystemConfig
      */
     public function retrieveCoreConfig(): array
     {
-        return cache()->rememberForever('coreConfig', fn () => config('core'));
+        static $items;
+
+        if ($items) {
+            return $items;
+        }
+
+        return $items = config('core');
     }
 
     /**
@@ -276,14 +282,14 @@ class SystemConfig
     /**
      * Get the config data.
      */
-    public function getConfigData(string $field, ?string $currentChannelCode = null, ?string $currentLocaleCode = null): ?string
+    public function getConfigData(string $field, ?string $currentChannelCode = null, ?string $currentLocaleCode = null): mixed
     {
-        if (empty($channel)) {
-            $channel = core()->getRequestedChannelCode();
+        if (empty($currentChannelCode)) {
+            $currentChannelCode = core()->getRequestedChannelCode();
         }
 
-        if (empty($locale)) {
-            $locale = core()->getRequestedLocaleCode();
+        if (empty($currentLocaleCode)) {
+            $currentLocaleCode = core()->getRequestedLocaleCode();
         }
 
         $coreConfig = $this->getCoreConfig($field, $currentChannelCode, $currentLocaleCode);
