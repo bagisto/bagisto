@@ -732,7 +732,7 @@ class ImportsTableSeeder extends Seeder
                 'json_value'           => null,
                 'product_id'           => 4,
                 'attribute_id'         => 22,
-            ]
+            ],
         ]);
 
         DB::table('product_price_indices')->insert([
@@ -868,7 +868,7 @@ class ImportsTableSeeder extends Seeder
                 'regular_max_price'    => 21,
                 'created_at'           => $now,
                 'updated_at'           => $now,
-            ]
+            ],
         ]);
 
         DB::table('product_customer_group_prices')->insert([
@@ -932,7 +932,7 @@ class ImportsTableSeeder extends Seeder
                 'created_at'        => $now,
                 'updated_at'        => $now,
                 'unique_id'         => '003|1|3',
-            ]
+            ],
         ]);
 
         // Product Categories
@@ -1060,7 +1060,7 @@ class ImportsTableSeeder extends Seeder
             ], [
                 'parent_id'  => 2,
                 'child_id'   => 4,
-            ]
+            ],
         ]);
 
         DB::table('product_cross_sells')->insert([
@@ -1082,7 +1082,7 @@ class ImportsTableSeeder extends Seeder
             ], [
                 'parent_id'  => 2,
                 'child_id'   => 4,
-            ]
+            ],
         ]);
     }
 
