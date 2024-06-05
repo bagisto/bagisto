@@ -392,7 +392,7 @@ class Configurable extends AbstractType
 
         $this->productInventoryRepository->saveInventories($data, $variant);
 
-        $variant->channels()->sync($$product->channels->pluck('id')->toArray());
+        $variant->channels()->sync($variant->product->channels->pluck('id')->toArray());
 
         return $variant;
     }
