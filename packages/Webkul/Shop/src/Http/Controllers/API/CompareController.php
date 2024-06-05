@@ -68,8 +68,8 @@ class CompareController extends APIController
         }
 
         $this->compareItemRepository->create([
-            'customer_id'  => auth()->guard('customer')->user()->id,
-            'product_id'   => request()->input('product_id'),
+            'customer_id' => auth()->guard('customer')->user()->id,
+            'product_id'  => request()->input('product_id'),
         ]);
 
         return new JsonResource([
@@ -89,7 +89,7 @@ class CompareController extends APIController
 
         if (! $success) {
             return new JsonResource([
-                'message'  => trans('shop::app.compare.remove-error'),
+                'message' => trans('shop::app.compare.remove-error'),
             ]);
         }
 
@@ -116,17 +116,17 @@ class CompareController extends APIController
     public function destroyAll(): JsonResource
     {
         $success = $this->compareItemRepository->deleteWhere([
-            'customer_id'  => auth()->guard('customer')->user()->id,
+            'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
         if (! $success) {
             return new JsonResource([
-                'message'  => trans('shop::app.compare.remove-error'),
+                'message' => trans('shop::app.compare.remove-error'),
             ]);
         }
 
         return new JsonResource([
-            'message'  => trans('shop::app.compare.remove-all-success'),
+            'message' => trans('shop::app.compare.remove-all-success'),
         ]);
     }
 }

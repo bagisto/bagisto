@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Fraude',
                     'grand-total'     => 'Total General',
                     'id'              => '#:id',
-                    'images'          => 'Imágenes',
+                    'items'           => 'Artículos',
                     'location'        => 'Ubicación',
                     'order-id'        => 'ID de Pedido',
                     'pay-by'          => 'Pagar Por - :method',
@@ -3982,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtrar',
+                    'apply-filters-btn' => 'Aplicar filtros',
+                    'back-btn'          => 'Atrás',
+                    'create-new-filter' => 'Crear nuevo filtro',
+                    'custom-filters'    => 'Filtros personalizados',
+                    'delete-error'      => 'Algo salió mal al eliminar el filtro, por favor intente de nuevo.',
+                    'delete-success'    => 'El filtro se ha eliminado correctamente.',
+                    'empty-description' => 'No hay filtros seleccionados disponibles para guardar. Por favor, seleccione filtros para guardar.',
+                    'empty-title'       => 'Agregar filtros para guardar',
+                    'name'              => 'Nombre',
+                    'quick-filters'     => 'Filtros rápidos',
+                    'save-btn'          => 'Guardar',
+                    'save-filter'       => 'Guardar filtro',
+                    'saved-success'     => 'El filtro se ha guardado correctamente.',
+                    'selected-filters'  => 'Filtros seleccionados',
+                    'title'             => 'Filtro',
+                    'update'            => 'Actualizar',
+                    'update-filter'     => 'Actualizar filtro',
+                    'updated-success'   => 'El filtro se ha actualizado correctamente.',
                 ],
 
                 'search' => [
@@ -3992,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => 'Seleccionar.',
-                'title'  => 'Aplicar Filtros',
+                'title'  => 'Filtros',
 
                 'dropdown' => [
                     'searchable' => [

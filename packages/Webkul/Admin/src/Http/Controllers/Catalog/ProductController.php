@@ -324,8 +324,12 @@ class ProductController extends Controller
     {
         $results = [];
 
+        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
+            $searchEngine = core()->getConfigData('catalog.products.search.admin_mode');
+        }
+
         $products = $this->productRepository
-            ->setSearchEngine(core()->getConfigData('catalog.products.search.admin_mode'))
+            ->setSearchEngine($searchEngine ?? 'database')
             ->getAll([
                 'name'  => request('query'),
                 'sort'  => 'created_at',
