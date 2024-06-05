@@ -272,7 +272,7 @@ class Product extends Model implements ProductContract
      */
     public function channels(): BelongsToMany
     {
-        return $this->belongsToMany(ChannelProxy::modelClass(), 'channel_products', 'product_id', 'channel_id');
+        return $this->belongsToMany(ChannelProxy::modelClass(), 'product_channels', 'product_id', 'channel_id');
     }
 
     /**

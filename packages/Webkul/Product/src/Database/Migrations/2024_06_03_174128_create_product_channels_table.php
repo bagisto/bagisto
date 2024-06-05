@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('channel_products', function (Blueprint $table) {
+        Schema::create('product_channels', function (Blueprint $table) {
             $table->integer('product_id')->unsigned();
             $table->integer('channel_id')->unsigned();
 
@@ -25,7 +25,7 @@ return new class extends Migration
             return;
         }
 
-        DB::table('channel_products')->insertUsing(
+        DB::table('product_channels')->insertUsing(
             ['product_id', 'channel_id'],
             DB::table('products')
                 ->select('id as product_id', DB::raw("$firstChannelId as channel_id"))
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('channel_products');
+        Schema::dropIfExists('product_channels');
     }
 };
