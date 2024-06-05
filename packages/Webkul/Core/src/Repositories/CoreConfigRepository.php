@@ -3,6 +3,7 @@
 namespace Webkul\Core\Repositories;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -120,28 +121,64 @@ class CoreConfigRepository extends Repository
     }
 
     /**
-     * Search configuration.
-     *
-     * @param  array  $items
-     * @param  string  $searchTerm
-     * @return array
+     * Get the configuration title.
      */
-    public function search($items, $searchTerm, $path = [])
+    protected function getTranslatedTitle(mixed $configuration): string
+    {
+        if (
+            method_exists($configuration, 'getTitle')
+            && ! is_null($configuration->getTitle())
+        ) {
+            return trans($configuration->getTitle());
+        }
+
+        if (
+            method_exists($configuration, 'getName')
+            && ! is_null($configuration->getName())
+        ) {
+            return trans($configuration->getName());
+        }
+
+        return '';
+    }
+
+    /**
+     * Get children and fields.
+     */
+    protected function getChildrenAndFields(mixed $configuration, string $searchTerm, array $path, array &$results): void
+    {
+        if (
+            method_exists($configuration, 'getChildren')
+            || method_exists($configuration, 'getFields')
+        ) {
+            $children = $configuration->haveChildren()
+                ? $configuration->getChildren()
+                : $configuration->getFields();
+
+            $tempPath = array_merge($path, [[
+                'key'   => $configuration->getKey() ?? null,
+                'title' => $this->getTranslatedTitle($configuration),
+            ]]);
+
+            $results = array_merge($results, $this->search($children, $searchTerm, $tempPath));
+        }
+    }
+
+    /**
+     * Search configuration.
+     */
+    public function search(Collection $items, string $searchTerm, array $path = []): array
     {
         $results = [];
 
         foreach ($items as $configuration) {
-            $title = trans($configuration['title'] ?? ($configuration['name'] ?? ''));
+            $title = $this->getTranslatedTitle($configuration);
 
             if (
                 stripos($title, $searchTerm) !== false
                 && count($path)
             ) {
-                if (isset($path[1])) {
-                    $queryParam = $path[1]['key'];
-                } else {
-                    $queryParam = $configuration['key'];
-                }
+                $queryParam = $path[1]['key'] ?? $configuration->getKey();
 
                 $results[] = [
                     'title' => implode(' > ', [...Arr::pluck($path, 'title'), $title]),
@@ -149,21 +186,7 @@ class CoreConfigRepository extends Repository
                 ];
             }
 
-            if (
-                ! empty($configuration['children'])
-                || ! empty($configuration['fields'])
-            ) {
-                $children = ! empty($configuration['children'])
-                    ? $configuration['children']
-                    : $configuration['fields'];
-
-                $tempPath = array_merge($path, [[
-                    'key'   => $configuration['key'] ?? null,
-                    'title' => trans($configuration['name'] ?? ''),
-                ]]);
-
-                $results = array_merge($results, $this->search($children, $searchTerm, $tempPath));
-            }
+            $this->getChildrenAndFields($configuration, $searchTerm, $path, $results);
         }
 
         return $results;

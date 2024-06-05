@@ -12,6 +12,7 @@ class SystemConfigItemField
     public function __construct(
         public string $name,
         public string $title,
+        public ?string $info,
         public string $type,
         public ?string $path,
         public ?string $validation,
@@ -29,6 +30,14 @@ class SystemConfigItemField
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * Get info of config item.
+     */
+    public function getInfo(): ?string
+    {
+        return $this->info;
     }
 
     /**
@@ -111,6 +120,7 @@ class SystemConfigItemField
         return [
             'name'          => $this->getName(),
             'title'         => $this->getTitle(),
+            'info'          => $this->getInfo(),
             'type'          => $this->getType(),
             'path'          => $this->getPath(),
             'depends'       => $this->getDepends(),

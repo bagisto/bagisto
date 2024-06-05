@@ -38,6 +38,7 @@ class SystemConfigItem
             return new SystemConfigItemField(
                 name: $field['name'],
                 title: $field['title'],
+                info: $field['info'] ?? null,
                 type: $field['type'],
                 depends: $field['depends'] ?? null,
                 path: $field['path'] ?? null,

@@ -139,14 +139,6 @@
                         @else 
                             @include ('admin::configuration.field-type')
                         @endif
-
-                        @php ($hint = $field->getTitle().'-hint')
-
-                        @if ($hint !== __($hint))
-                            <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
-                                @lang($hint)
-                            </p>
-                        @endif
                     @endforeach
                 </div>
             @endforeach
