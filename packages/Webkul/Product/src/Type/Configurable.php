@@ -297,7 +297,7 @@ class Configurable extends AbstractType
 
         $this->productImageRepository->upload($data, $variant, 'images');
 
-        $variant->channels()->sync($$product->channels->pluck('id')->toArray());
+        $variant->channels()->sync($variant->parent->channels->pluck('id')->toArray());
 
         return $variant;
     }
