@@ -14,7 +14,12 @@ class EventDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('marketing_events')->addSelect('id', 'name', 'date');
+        $queryBuilder = DB::table('marketing_events')
+            ->select(
+                'id',
+                'name',
+                'date'
+            );
 
         return $queryBuilder;
     }

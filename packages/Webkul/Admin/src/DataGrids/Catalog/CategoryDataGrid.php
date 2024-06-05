@@ -145,8 +145,7 @@ class CategoryDataGrid extends DataGrid
                     [
                         'label' => trans('admin::app.catalog.categories.index.datagrid.active'),
                         'value' => 1,
-                    ],
-                    [
+                    ], [
                         'label' => trans('admin::app.catalog.categories.index.datagrid.inactive'),
                         'value' => 0,
                     ],

@@ -22,16 +22,6 @@ class CartRuleDataGrid extends DataGrid
     protected $channel = 'all';
 
     /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
-        'channels',
-        'customer_groups',
-    ];
-
-    /**
      * Create a new datagrid instance.
      *
      * @return void
@@ -55,7 +45,7 @@ class CartRuleDataGrid extends DataGrid
                 $leftJoin->on('cart_rule_coupons.cart_rule_id', '=', 'cart_rules.id')
                     ->where('cart_rule_coupons.is_primary', 1);
             })
-            ->addSelect(
+            ->select(
                 'cart_rules.id',
                 'name',
                 'cart_rule_coupons.code as coupon_code',
@@ -64,9 +54,6 @@ class CartRuleDataGrid extends DataGrid
                 'ends_till',
                 'sort_order'
             );
-
-        $this->addFilter('id', 'cart_rules.id');
-        $this->addFilter('coupon_code', 'cart_rule_coupons.code');
 
         if ($this->customer_group !== 'all') {
             $queryBuilder->leftJoin(
@@ -90,7 +77,9 @@ class CartRuleDataGrid extends DataGrid
             $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
         }
 
-        // $this->addFilter('status', 'status');
+        $this->addFilter('id', 'cart_rules.id');
+
+        $this->addFilter('coupon_code', 'cart_rule_coupons.code');
 
         return $queryBuilder;
     }
