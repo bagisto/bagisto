@@ -380,7 +380,7 @@ class Installer extends Command
                 ]
             );
 
-            if ($sampleProduct) {
+            if ($sampleProduct === 'true') {
                 app(DatabaseManager::class)->seedSampleProducts();
             }
 
