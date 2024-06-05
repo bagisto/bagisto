@@ -20,7 +20,7 @@ class SystemConfigItemField
         public ?string $default,
         public ?bool $channel_based,
         public ?bool $locale_based,
-        public ?Collection $options,
+        public Collection|string $options,
     ) {
     }
 
@@ -107,7 +107,7 @@ class SystemConfigItemField
     /**
      * Get options of config item.
      */
-    public function getOptions(): ?Collection
+    public function getOptions(): Collection|string
     {
         return $this->options;
     }

@@ -30,6 +30,14 @@ class SystemConfigItem
     }
 
     /**
+     * Format options.
+     */
+    private function formatOptions($options)
+    {
+        return is_array($options) ? collect($options) : (is_string($options) ? $options : collect([]));
+    }
+
+    /**
      * Get fields of config item.
      */
     public function getFields(): Collection
@@ -46,7 +54,7 @@ class SystemConfigItem
                 default: $field['default'] ?? null,
                 channel_based: $field['channel_based'] ?? null,
                 locale_based: $field['locale_based'] ?? null,
-                options: collect($field['options'] ?? [])
+                options: $this->formatOptions($field['options'] ?? null),
             );
         });
     }
