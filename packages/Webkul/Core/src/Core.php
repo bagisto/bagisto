@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Concerns\CurrencyFormatter;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
@@ -103,7 +102,6 @@ class Core
         protected CountryRepository $countryRepository,
         protected CountryStateRepository $countryStateRepository,
         protected LocaleRepository $localeRepository,
-        protected CoreConfigRepository $coreConfigRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected TaxCategoryRepository $taxCategoryRepository
     ) {
@@ -668,23 +666,9 @@ class Core
      * @param  string|null  $locale
      * @return mixed
      */
-    public function getConfigData($field, $channel = null, $locale = null)
+    public function getConfigData($field, $currentChannelCode = null, $currentLocaleCode = null)
     {
-        if (empty($channel)) {
-            $channel = $this->getRequestedChannelCode();
-        }
-
-        if (empty($locale)) {
-            $locale = $this->getRequestedLocaleCode();
-        }
-
-        $coreConfig = $this->getCoreConfig($field, $channel, $locale);
-
-        if (! $coreConfig) {
-            return $this->getDefaultConfig($field);
-        }
-
-        return $coreConfig->value;
+        return system_config()->getConfigData($field, $currentChannelCode, $currentLocaleCode);
     }
 
     /**
@@ -829,19 +813,7 @@ class Core
      */
     public function getConfigField($fieldName)
     {
-        foreach (config('core') as $coreData) {
-            if (! isset($coreData['fields'])) {
-                continue;
-            }
-
-            foreach ($coreData['fields'] as $field) {
-                $name = $coreData['key'].'.'.$field['name'];
-
-                if ($name == $fieldName) {
-                    return $field;
-                }
-            }
-        }
+        return system_config()->getConfigField($fieldName);
     }
 
     /**
@@ -958,66 +930,6 @@ class Core
             'name'  => $contactName,
             'email' => $contactEmail,
         ];
-    }
-
-    /**
-     * Get core config values.
-     *
-     * @param  mixed  $field
-     * @param  mixed  $channel
-     * @param  mixed  $locale
-     * @return mixed
-     */
-    protected function getCoreConfig($field, $channel, $locale)
-    {
-        $fields = $this->getConfigField($field);
-
-        if (! empty($fields['channel_based'])) {
-            if (! empty($fields['locale_based'])) {
-                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code'         => $field,
-                    'channel_code' => $channel,
-                    'locale_code'  => $locale,
-                ]);
-            } else {
-                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code'         => $field,
-                    'channel_code' => $channel,
-                ]);
-            }
-        } else {
-            if (! empty($fields['locale_based'])) {
-                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code'        => $field,
-                    'locale_code' => $locale,
-                ]);
-            } else {
-                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code' => $field,
-                ]);
-            }
-        }
-
-        return $coreConfigValue;
-    }
-
-    /**
-     * Get default config.
-     *
-     * @param  string  $field
-     * @return mixed
-     */
-    protected function getDefaultConfig($field)
-    {
-        $configFieldInfo = $this->getConfigField($field);
-
-        $fields = explode('.', $field);
-
-        array_shift($fields);
-
-        $field = implode('.', $fields);
-
-        return Config::get($field, $configFieldInfo['default'] ?? null);
     }
 
     /**

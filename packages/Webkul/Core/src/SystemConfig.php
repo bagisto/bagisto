@@ -4,6 +4,8 @@ namespace Webkul\Core;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Config;
+use Webkul\Core\Models\CoreConfig;
 use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\SystemConfig\SystemConfigItem;
 
@@ -21,7 +23,6 @@ class SystemConfig
      */
     public function __construct(protected CoreConfigRepository $coreConfigRepository)
     {
-        $this->coreConfigRepository = $coreConfigRepository;
     }
 
     /**
@@ -46,13 +47,21 @@ class SystemConfig
     }
 
     /**
+     * Retrieve Core Config
+     */
+    public function retrieveCoreConfig(): array
+    {
+        return cache()->rememberForever('coreConfig', fn () => config('core'));
+    }
+
+    /**
      * Prepare configuration items.
      */
     public function prepareConfigurationItems()
     {
         $configWithDotNotation = [];
 
-        foreach (config('core') as $item) {
+        foreach ($this->retrieveCoreConfig() as $item) {
             $configWithDotNotation[$item['key']] = $item;
         }
 
@@ -191,10 +200,98 @@ class SystemConfig
     }
 
     /**
+     * Get config field.
+     */
+    public function getConfigField(string $fieldName): ?array
+    {
+        foreach ($this->retrieveCoreConfig() as $coreData) {
+            if (! isset($coreData['fields'])) {
+                continue;
+            }
+
+            foreach ($coreData['fields'] as $field) {
+                $name = $coreData['key'].'.'.$field['name'];
+
+                if ($name == $fieldName) {
+                    return $field;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get core config values.
+     */
+    protected function getCoreConfig(string $field, ?string $channel, ?string $locale): ?CoreConfig
+    {
+        $fields = $this->getConfigField($field);
+
+        if (! empty($fields['channel_based'])) {
+            if (! empty($fields['locale_based'])) {
+                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
+                    'code'         => $field,
+                    'channel_code' => $channel,
+                    'locale_code'  => $locale,
+                ]);
+            } else {
+                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
+                    'code'         => $field,
+                    'channel_code' => $channel,
+                ]);
+            }
+        } else {
+            if (! empty($fields['locale_based'])) {
+                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
+                    'code'        => $field,
+                    'locale_code' => $locale,
+                ]);
+            } else {
+                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
+                    'code' => $field,
+                ]);
+            }
+        }
+
+        return $coreConfigValue;
+    }
+
+    /**
+     * Get default config.
+     */
+    protected function getDefaultConfig(string $field): mixed
+    {
+        $configFieldInfo = $this->getConfigField($field);
+
+        $fields = explode('.', $field);
+
+        array_shift($fields);
+
+        $field = implode('.', $fields);
+
+        return Config::get($field, $configFieldInfo['default'] ?? null);
+    }
+
+    /**
      * Get the config data.
      */
-    public function getConfigData(string $nameKey, ?string $currentChannelCode = null, ?string $currentLocaleCode = null): ?string
+    public function getConfigData(string $field, ?string $currentChannelCode = null, ?string $currentLocaleCode = null): ?string
     {
-        return core()->getConfigData($nameKey, $currentChannelCode, $currentLocaleCode);
+        if (empty($channel)) {
+            $channel = core()->getRequestedChannelCode();
+        }
+
+        if (empty($locale)) {
+            $locale = core()->getRequestedLocaleCode();
+        }
+
+        $coreConfig = $this->getCoreConfig($field, $currentChannelCode, $currentLocaleCode);
+
+        if (! $coreConfig) {
+            return $this->getDefaultConfig($field);
+        }
+
+        return $coreConfig->value;
     }
 }
