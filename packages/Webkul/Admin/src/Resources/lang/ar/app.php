@@ -3982,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'تصفية',
+                    'apply-filters-btn' => 'تطبيق الفلاتر',
+                    'back-btn'          => 'رجوع',
+                    'create-new-filter' => 'إنشاء تصفية جديدة',
+                    'custom-filters'    => 'تصفيات مخصصة',
+                    'delete-error'      => 'حدث خطأ ما أثناء حذف الفلتر، يرجى المحاولة مرة أخرى.',
+                    'delete-success'    => 'تم حذف التصفية بنجاح.',
+                    'empty-description' => 'لا توجد تصفيات محددة متاحة للحفظ. يرجى تحديد التصفيات للحفظ.',
+                    'empty-title'       => 'إضافة تصفيات للحفظ',
+                    'name'              => 'الاسم',
+                    'quick-filters'     => 'تصفيات سريعة',
+                    'save-btn'          => 'حفظ',
+                    'save-filter'       => 'حفظ التصفية',
+                    'saved-success'     => 'تم حفظ التصفية بنجاح.',
+                    'selected-filters'  => 'التصفيات المحددة',
+                    'title'             => 'تصفية',
+                    'update'            => 'تحديث',
+                    'update-filter'     => 'تحديث الفلتر',
+                    'updated-success'   => 'تم تحديث الفلتر بنجاح.',
                 ],
 
                 'search' => [
@@ -3992,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => 'اختر',
-                'title'  => 'تطبيق الفلاتر',
+                'title'  => 'فلاتر',
 
                 'dropdown' => [
                     'searchable' => [

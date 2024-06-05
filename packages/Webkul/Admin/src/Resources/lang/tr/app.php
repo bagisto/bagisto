@@ -3983,7 +3983,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtrele',
+                    'apply-filters-btn' => 'Filtreleri Uygula',
+                    'back-btn'          => 'Geri',
+                    'create-new-filter' => 'Yeni Filtre Oluştur',
+                    'custom-filters'    => 'Özel Filtreler',
+                    'delete-error'      => 'Filtre silinirken bir hata oluştu, lütfen tekrar deneyin.',
+                    'delete-success'    => 'Filtre başarıyla silindi.',
+                    'empty-description' => 'Kaydedilecek seçili filtre yok. Lütfen kaydetmek için filtreleri seçin.',
+                    'empty-title'       => 'Kaydedilecek Filtreler Ekle',
+                    'name'              => 'Adı',
+                    'quick-filters'     => 'Hızlı Filtreler',
+                    'save-btn'          => 'Kaydet',
+                    'save-filter'       => 'Filtreyi Kaydet',
+                    'saved-success'     => 'Filtre başarıyla kaydedildi.',
+                    'selected-filters'  => 'Seçilen Filtreler',
+                    'title'             => 'Filtre',
+                    'update'            => 'Güncelle',
+                    'update-filter'     => 'Filtreyi güncelle',
+                    'updated-success'   => 'Filtre başarıyla güncellendi.',
                 ],
 
                 'search' => [
@@ -3993,7 +4010,7 @@ return [
 
             'filters' => [
                 'select' => 'Seçiniz',
-                'title'  => 'Filtreleri Uygula',
+                'title'  => 'Filtreler',
 
                 'dropdown' => [
                     'searchable' => [

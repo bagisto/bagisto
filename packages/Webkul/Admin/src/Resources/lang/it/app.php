@@ -3982,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtro',
+                    'apply-filters-btn' => 'Applica filtri',
+                    'back-btn'          => 'Indietro',
+                    'create-new-filter' => 'Crea nuovo filtro',
+                    'custom-filters'    => 'Filtri personalizzati',
+                    'delete-error'      => 'Si è verificato un errore durante l\'eliminazione del filtro, per favore riprova.',
+                    'delete-success'    => 'Il filtro è stato eliminato con successo.',
+                    'empty-description' => 'Non ci sono filtri selezionati disponibili per il salvataggio. Selezionare i filtri da salvare.',
+                    'empty-title'       => 'Aggiungi filtri da salvare',
+                    'name'              => 'Nome',
+                    'quick-filters'     => 'Filtri rapidi',
+                    'save-btn'          => 'Salva',
+                    'save-filter'       => 'Salva filtro',
+                    'saved-success'     => 'Il filtro è stato salvato con successo.',
+                    'selected-filters'  => 'Filtri selezionati',
+                    'title'             => 'Filtro',
+                    'update'            => 'Aggiorna',
+                    'update-filter'     => 'Aggiorna filtro',
+                    'updated-success'   => 'Il filtro è stato aggiornato con successo.',
                 ],
 
                 'search' => [
@@ -3992,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => 'Seleziona',
-                'title'  => 'Applica Filtri',
+                'title'  => 'Filtri',
 
                 'dropdown' => [
                     'searchable' => [

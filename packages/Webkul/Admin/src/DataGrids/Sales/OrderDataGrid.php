@@ -188,17 +188,7 @@ class OrderDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'customer_email',
             'label'      => trans('admin::app.sales.orders.index.datagrid.email'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type'   => 'searchable',
-                'params' => [
-                    'repository' => \Webkul\Customer\Repositories\CustomerRepository::class,
-                    'column'     => [
-                        'label' => 'email',
-                        'value' => 'email',
-                    ],
-                ],
-            ],
+            'type'       => 'text',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
