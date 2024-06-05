@@ -34,7 +34,7 @@ class SystemConfigItem
      */
     private function formatOptions($options)
     {
-        return is_array($options) ? collect($options) : (is_string($options) ? $options : collect([]));
+        return is_array($options) ? $options : (is_string($options) ? $options : []);
     }
 
     /**
