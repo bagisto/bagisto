@@ -319,14 +319,12 @@ class ProductDataGrid extends DataGrid
 
         $channelCodes = request()->input('filters.channel') ?? core()->getAllChannels()->pluck('code')->toArray();
 
-        $indexNames = [];
-
-        foreach ($channelCodes as $channelCode) {
-            $indexNames[] = 'products_'.$channelCode.'_'.core()->getRequestedLocaleCode().'_index';
-        }
+        $indexNames = collect($channelCodes)->map(function ($channelCode) {
+            return 'products_'.$channelCode.'_'.app()->getLocale().'_index';
+        })->toArray();
 
         $results = Elasticsearch::search([
-            'index' => implode(',', $indexNames),
+            'index' => $indexNames,
             'body'  => [
                 'from'          => ($pagination['page'] * $pagination['per_page']) - $pagination['per_page'],
                 'size'          => $pagination['per_page'],

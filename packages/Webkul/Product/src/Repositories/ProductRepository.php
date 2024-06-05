@@ -252,6 +252,11 @@ class ProductRepository extends Repository
                     ->whereIn('product_categories.category_id', explode(',', $params['category_id']));
             }
 
+            if (! empty($params['channel_id'])) {
+                $qb->leftJoin('product_channels', 'products.id', '=', 'product_channels.product_id')
+                    ->where('product_channels.channel_id', explode(',', $params['channel_id']));
+            }
+
             if (! empty($params['type'])) {
                 $qb->where('products.type', $params['type']);
             }
@@ -394,10 +399,6 @@ class ProductRepository extends Repository
 
     /**
      * Search product from elastic search.
-     *
-     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
-     * good request parameter with an array type as an argument. Make a clean pull request for
-     * this to have track record.
      *
      * @return \Illuminate\Support\Collection
      */

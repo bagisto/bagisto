@@ -106,7 +106,7 @@ class Customer extends AbstractReporting
     {
         return $this->reviewRepository
             ->resetModel()
-            ->leftJoin('channel_products', 'product_reviews.product_id', '=', 'channel_products.product_id')
+            ->leftJoin('product_channels', 'product_reviews.product_id', '=', 'product_channels.product_id')
             ->where('status', 'approved')
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
@@ -176,7 +176,7 @@ class Customer extends AbstractReporting
         return $this->reviewRepository
             ->resetModel()
             ->leftJoin('customers', 'product_reviews.customer_id', '=', 'customers.id')
-            ->leftJoin('channel_products', 'product_reviews.product_id', '=', 'channel_products.product_id')
+            ->leftJoin('product_channels', 'product_reviews.product_id', '=', 'product_channels.product_id')
             ->addSelect(
                 'customers.id as id',
                 'customers.email as email',
@@ -184,7 +184,7 @@ class Customer extends AbstractReporting
                 DB::raw('COUNT(*) as reviews')
             )
             ->whereIn('customers.channel_id', $this->channelIds)
-            ->whereIn('channel_products.channel_id', $this->channelIds)
+            ->whereIn('product_channels.channel_id', $this->channelIds)
             ->whereBetween('product_reviews.created_at', [$this->startDate, $this->endDate])
             ->where('product_reviews.status', 'approved')
             ->whereNotNull('customer_id')

@@ -320,13 +320,23 @@ class ProductController extends Controller
     {
         $results = [];
 
-        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
-            $searchEngine = core()->getConfigData('catalog.products.search.admin_mode');
+        $searchEngine = 'database';
+
+        if (
+            core()->getConfigData('catalog.products.search.engine') == 'elastic'
+            && core()->getConfigData('catalog.products.search.admin_mode') == 'elastic'
+        ) {
+            $searchEngine = 'elastic';
+
+            $indexNames = core()->getAllChannels()->map(function ($channel) {
+                return 'products_'.$channel->code.'_'.app()->getLocale().'_index';
+            })->toArray();
         }
 
         $products = $this->productRepository
-            ->setSearchEngine($searchEngine ?? 'database')
+            ->setSearchEngine($searchEngine)
             ->getAll([
+                'index' => $indexNames ?? null,
                 'name'  => request('query'),
                 'sort'  => 'created_at',
                 'order' => 'desc',

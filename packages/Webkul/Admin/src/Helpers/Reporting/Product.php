@@ -155,7 +155,7 @@ class Product extends AbstractReporting
     {
         return $this->reviewRepository
             ->resetModel()
-            ->leftJoin('channel_products', 'product_reviews.product_id', '=', 'channel_products.product_id')
+            ->leftJoin('product_channels', 'product_reviews.product_id', '=', 'product_channels.product_id')
             ->where('status', 'approved')
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
@@ -172,7 +172,7 @@ class Product extends AbstractReporting
         return $this->productInventoryRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
-            ->leftJoin('channel_products', 'product_inventories.product_id', '=', 'channel_products.product_id')
+            ->leftJoin('product_channels', 'product_inventories.product_id', '=', 'product_channels.product_id')
             ->select('*', DB::raw('SUM(qty) as total_qty'))
             ->whereIn('channel_id', $this->channelIds)
             ->groupBy('product_inventories.product_id')
@@ -263,7 +263,7 @@ class Product extends AbstractReporting
 
         $products = $this->reviewRepository
             ->resetModel()
-            ->leftJoin('channel_products', 'product_reviews.product_id', '=', 'channel_products.product_id')
+            ->leftJoin('product_channels', 'product_reviews.product_id', '=', 'product_channels.product_id')
             ->addSelect(
                 'product_reviews.product_id',
                 DB::raw('COUNT(*) as reviews')
