@@ -206,7 +206,7 @@
                 <input
                     type="hidden"
                     :name="name"
-                    value="0"
+                    :value="0"
                 />
         
                 <label class="relative inline-flex cursor-pointer items-center">
@@ -216,7 +216,7 @@
                         :value="1"
                         :id="name"
                         class="peer sr-only"
-                        :checked="parseInt(value)"
+                        :checked="parseInt(this.value || 0)"
                     >
 
                     <div class="peer h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none dark:border-gray-600 dark:bg-gray-700 rtl:peer-checked:after:-translate-x-full"></div>
