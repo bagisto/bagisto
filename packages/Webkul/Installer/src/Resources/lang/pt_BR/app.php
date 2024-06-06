@@ -463,10 +463,11 @@ return [
                 'ukrainian-hryvnia'           => 'Hryvnia Ucraniana (UAH)',
                 'united-arab-emirates-dirham' => 'Dirham dos Emirados Árabes Unidos (AED)',
                 'united-states-dollar'        => 'Dólar Americano (USD)',
+                'uzbekistani-som'             => 'Som Uzbeque (UZS)',
                 'venezuelan-bolívar'          => 'Bolívar Venezuelano (VEF)',
                 'vietnamese-dong'             => 'Dong Vietnamita (VND)',
                 'warning-message'             => 'Atenção! As configurações para os idiomas do sistema padrão, assim como a moeda padrão, são permanentes e não podem ser alteradas novamente.',
-                'zambian-kwach'               => 'Kwacha Zambiano (ZMW)',
+                'zambian-kwacha'              => 'Kwacha Zambiano (ZMW)',
             ],
 
             'installation-processing' => [

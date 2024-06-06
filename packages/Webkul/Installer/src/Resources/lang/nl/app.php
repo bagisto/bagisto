@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'Venezolaanse Bolívar (VEF)',
                 'vietnamese-dong'             => 'Vietnamese Dong (VND)',
                 'warning-message'             => 'Pas op! De instellingen voor uw standaard systeemtalen en de standaardvaluta zijn permanent en kunnen nooit meer worden gewijzigd.',
-                'zambian-kwach'               => 'Zambiaanse Kwacha (ZMW)',
+                'zambian-kwacha'              => 'Zambiaanse Kwacha (ZMW)',
             ],
 
             'installation-processing' => [

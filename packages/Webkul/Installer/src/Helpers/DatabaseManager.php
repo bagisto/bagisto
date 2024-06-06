@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
-use Webkul\Installer\Database\Seeders\ImportsTableSeeder;
+use Webkul\Installer\Database\Seeders\SampleProductsTableSeeder;
 
 class DatabaseManager
 {
@@ -113,10 +113,8 @@ class DatabaseManager
     public function seedSampleProducts()
     {
         try {
-            app(ImportsTableSeeder::class)->run();
+            app(SampleProductsTableSeeder::class)->run();
         } catch (Exception $e) {
-            dd($e);
-
             return response()->json([
                 'error' => $e->getMessage(),
             ], 500);

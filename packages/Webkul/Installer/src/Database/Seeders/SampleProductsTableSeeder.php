@@ -8,7 +8,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class ImportsTableSeeder extends Seeder
+class SampleProductsTableSeeder extends Seeder
 {
     /**
      * Base path for the images.

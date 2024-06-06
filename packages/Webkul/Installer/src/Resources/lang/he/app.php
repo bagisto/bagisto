@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'בוליבר ונצואלי (VEF)',
                 'vietnamese-dong'             => 'דונג וייטנאמי (VND)',
                 'warning-message'             => 'זהירות! הגדרות השפות המערכת המוגדרות כברירת מחדל והמטבע המוגדר כברירת מחדל הם קבועים ולא ניתן לשנותם שוב.',
-                'zambian-kwach'               => 'קוואצ\'ה זמבית (ZMW)',
+                'zambian-kwacha'              => 'קוואצ\'ה זמבית (ZMW)',
             ],
 
             'installation-processing' => [

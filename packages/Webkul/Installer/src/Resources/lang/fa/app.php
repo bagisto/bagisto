@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'بولیوار ونزوئلا (VEF)',
                 'vietnamese-dong'             => 'دانگ ویتنامی (VND)',
                 'warning-message'             => 'هشدار! تنظیمات زبان‌های پیشفرض سیستم و ارز پیشفرض برای همیشه ثابت و قابل تغییر نیستند.',
-                'zambian-kwach'               => 'کواچای زامبیا (ZMW)',
+                'zambian-kwacha'              => 'کواچای زامبیا (ZMW)',
             ],
 
             'installation-processing' => [

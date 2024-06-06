@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'البوليفار الفنزويلي (VEF)',
                 'vietnamese-dong'             => 'الدونج الفيتنامي (VND)',
                 'warning-message'             => 'تحذير! إعدادات اللغات الافتراضية لنظامك وكذلك العملة الافتراضية هي دائمة ولا يمكن تغييرها مرة أخرى.',
-                'zambian-kwach'               => 'الكواشا الزامبي (ZMW)',
+                'zambian-kwacha'              => 'الكواشا الزامبي (ZMW)',
             ],
 
             'installation-processing' => [

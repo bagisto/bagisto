@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'ভেনেজুয়েলান বলিভার (VEF)',
                 'vietnamese-dong'             => 'ভিয়েতনামি ডঙ্গ (VND)',
                 'warning-message'             => 'সাবধান! আপনার ডিফল্ট সিস্টেম ভাষা এবং ডিফল্ট মুদ্রা সেটিংস স্থায়ী এবং আর পরিবর্তন করা যাবে না।',
-                'zambian-kwach'               => 'জাম্বিয়ান কোয়াচা (ZMW)',
+                'zambian-kwacha'              => 'জাম্বিয়ান কোয়াচা (ZMW)',
             ],
 
             'installation-processing' => [

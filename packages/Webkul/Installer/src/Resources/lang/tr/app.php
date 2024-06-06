@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'Venezuela Bolivarı (VEF)',
                 'vietnamese-dong'             => 'Vietnam Dongu (VND)',
                 'warning-message'             => 'Dikkat! Varsayılan sistem dili ve varsayılan para birimi ayarlarınız kalıcıdır ve bir daha asla değiştirilemez.',
-                'zambian-kwach'               => 'Zambiya Kvaçası (ZMW)',
+                'zambian-kwacha'              => 'Zambiya Kvaçası (ZMW)',
             ],
 
             'installation-processing' => [

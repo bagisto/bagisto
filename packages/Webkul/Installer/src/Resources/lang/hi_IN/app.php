@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'वेनेज़ुएलाई बोलिवार (VEF)',
                 'vietnamese-dong'             => 'वियतनामी डॉंग (VND)',
                 'warning-message'             => 'सावधान रहें! आपके डिफ़ॉल्ट सिस्टम भाषाओं और डिफ़ॉल्ट मुद्रा की सेटिंग्स स्थायी हैं और इसे फिर से कभी नहीं बदला जा सकता है।',
-                'zambian-kwach'               => 'ज़ाम्बियाई क्वाचा (ZMW)',
+                'zambian-kwacha'              => 'ज़ाम्बियाई क्वाचा (ZMW)',
             ],
 
             'installation-processing' => [

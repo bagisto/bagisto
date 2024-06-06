@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'වෙනෙස්වීලාන් බොලිවාර් (VEF)',
                 'vietnamese-dong'             => 'වියට්නාමි ඩොන් (VND)',
                 'warning-message'             => 'සම්පූර්ණයෙන්! ඔබේ පිළිබඳ ප්‍රධාන වින්යාසය සහ ප්‍රධාන මුදල් ස්ථාපනයන් ඉක්මනින් ස්ථානය කළ නොහැක.',
-                'zambian-kwach'               => 'සැම්බියාව් ක්වාච් (ZMW)',
+                'zambian-kwacha'              => 'සැම්බියාව් ක්වාච් (ZMW)',
             ],
 
             'installation-processing' => [

@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'ベネズエラボリバル（VEF）',
                 'vietnamese-dong'             => 'ベトナムドン（VND）',
                 'warning-message'             => '注意！デフォルトのシステム言語とデフォルトの通貨の設定は永久に変更できません。',
-                'zambian-kwach'               => 'ザンビアクワチャ（ZMW）',
+                'zambian-kwacha'              => 'ザンビアクワチャ（ZMW）',
             ],
 
             'installation-processing' => [

@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'Bolívar vénézuélien (VEF)',
                 'vietnamese-dong'             => 'Dong vietnamien (VND)',
                 'warning-message'             => 'Attention ! Les paramètres de vos langues système par défaut ainsi que de la devise par défaut sont permanents et ne peuvent plus être modifiés.',
-                'zambian-kwach'               => 'Kwacha zambien (ZMW)',
+                'zambian-kwacha'              => 'Kwacha zambien (ZMW)',
             ],
 
             'installation-processing' => [

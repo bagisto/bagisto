@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'Venezolanischer Bolívar (VEF)',
                 'vietnamese-dong'             => 'Vietnamesischer Dong (VND)',
                 'warning-message'             => 'Achtung! Die Einstellungen für die Standardsprachen des Systems sowie die Standardwährung sind dauerhaft und können nicht mehr geändert werden.',
-                'zambian-kwach'               => 'Sambischer Kwacha (ZMW)',
+                'zambian-kwacha'              => 'Sambischer Kwacha (ZMW)',
             ],
 
             'installation-completed' => [

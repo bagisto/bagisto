@@ -467,7 +467,7 @@ return [
                 'venezuelan-bolívar'          => 'Венесуельський болівар (VEF)',
                 'vietnamese-dong'             => 'В\'єтнамський донг (VND)',
                 'warning-message'             => 'Увага! Налаштування типової мови системи та типової валюти є постійними і більше не можуть бути змінені.',
-                'zambian-kwach'               => 'Замбійський квача (ZMW)',
+                'zambian-kwacha'              => 'Замбійський квача (ZMW)',
             ],
 
             'installation-processing' => [
