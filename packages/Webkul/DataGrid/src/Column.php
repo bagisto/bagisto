@@ -2,26 +2,21 @@
 
 namespace Webkul\DataGrid;
 
+use Webkul\DataGrid\ColumnTypes\Aggregate;
+use Webkul\DataGrid\ColumnTypes\Boolean;
+use Webkul\DataGrid\ColumnTypes\Date;
+use Webkul\DataGrid\ColumnTypes\Datetime;
+use Webkul\DataGrid\ColumnTypes\Decimal;
+use Webkul\DataGrid\ColumnTypes\Integer;
+use Webkul\DataGrid\ColumnTypes\Text;
 use Webkul\DataGrid\Enums\ColumnTypeEnum;
-use Webkul\DataGrid\Enums\FormInputTypeEnum;
-use Webkul\DataGrid\Enums\RangeOptionEnum;
 
 class Column
 {
     /**
      * Fully qualified database column name.
      */
-    public $databaseColumnName;
-
-    /**
-     * Form input type.
-     */
-    protected ?string $formInputType = null;
-
-    /**
-     * Form options.
-     */
-    protected ?array $formOptions = null;
+    protected $databaseColumnName;
 
     /**
      * Create a column instance.
@@ -30,9 +25,10 @@ class Column
         public string $index,
         public string $label,
         public string $type,
-        public ?array $options = null,
         public bool $searchable = false,
         public bool $filterable = false,
+        public ?string $filterableType = null,
+        public array $filterableOptions = [],
         public bool $sortable = false,
         public mixed $closure = null,
     ) {
@@ -46,38 +42,16 @@ class Column
     {
         $this->setDatabaseColumnName();
 
-        switch ($this->type) {
-            case ColumnTypeEnum::BOOLEAN->value:
-                $this->setFormOptions($this->getBooleanOptions());
+        $this->setFilterableType();
 
-                break;
-
-            case ColumnTypeEnum::DROPDOWN->value:
-                $this->setFormOptions($this->options);
-
-                break;
-
-            case ColumnTypeEnum::DATE_RANGE->value:
-                $this->setFormInputType(FormInputTypeEnum::DATE->value);
-
-                $this->setFormOptions($this->getRangeOptions());
-
-                break;
-
-            case ColumnTypeEnum::DATE_TIME_RANGE->value:
-                $this->setFormInputType(FormInputTypeEnum::DATE_TIME->value);
-
-                $this->setFormOptions($this->getRangeOptions('Y-m-d H:i:s'));
-
-                break;
-        }
+        $this->setFilterableOptions();
     }
 
     /**
      * Define the database column name. Initially, it will match the index. However, after adding an alias,
      * the column name may change.
      */
-    public function setDatabaseColumnName(mixed $databaseColumnName = null): void
+    public function setDatabaseColumnName(?string $databaseColumnName = null): void
     {
         $this->databaseColumnName = $databaseColumnName ?: $this->index;
     }
@@ -91,108 +65,79 @@ class Column
     }
 
     /**
-     * Set form input type.
+     * Set filterable type.
      */
-    public function setFormInputType(string $formInputType): void
+    public function setFilterableType(?string $filterableType = null): void
     {
-        $this->formInputType = $formInputType;
+        $this->filterableType = $filterableType ?: $this->getFilterableType();
     }
 
     /**
-     * Get form input type.
+     * Get filterable type.
      */
-    public function getFormInputType(): ?string
+    public function getFilterableType(): ?string
     {
-        return $this->formInputType;
+        return $this->filterableType;
     }
 
     /**
-     * Set form options.
+     * Set filterable options.
      */
-    public function setFormOptions(array $formOptions): void
+    public function setFilterableOptions(?array $filterableOptions = null): void
     {
-        $this->formOptions = $formOptions;
+        $this->filterableOptions = $filterableOptions ?: $this->getFilterableOptions();
     }
 
     /**
-     * Get form options.
+     * Get filterable options.
      */
-    public function getFormOptions(): ?array
+    public function getFilterableOptions(): array
     {
-        return $this->formOptions;
+        return $this->filterableOptions;
     }
 
     /**
-     * Get boolean options.
+     * Resolve the column type.
      */
-    public function getBooleanOptions(): array
-    {
-        return [
-            [
-                'label' => trans('admin::app.components.datagrid.filters.boolean-options.true'),
-                'value' => 1,
-            ],
-            [
-                'label' => trans('admin::app.components.datagrid.filters.boolean-options.false'),
-                'value' => 0,
-            ],
-        ];
-    }
+    public static function resolve(
+        string $index,
+        string $label,
+        string $type,
+        bool $searchable = false,
+        bool $filterable = false,
+        ?string $filterableType = null,
+        array $filterableOptions = [],
+        bool $sortable = false,
+        mixed $closure = null,
+    ) {
+        if ($type === ColumnTypeEnum::STRING->value) {
+            return new Text($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+        }
 
-    /**
-     * Get range options.
-     */
-    public function getRangeOptions(string $format = 'Y-m-d'): array
-    {
-        return [
-            [
-                'name'  => RangeOptionEnum::TODAY->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.today'),
-                'from'  => now()->today()->format($format),
-                'to'    => now()->today()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::YESTERDAY->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.yesterday'),
-                'from'  => now()->yesterday()->format($format),
-                'to'    => now()->yesterday()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::THIS_WEEK->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.this-week'),
-                'from'  => now()->startOfWeek()->format($format),
-                'to'    => now()->endOfWeek()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::THIS_MONTH->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.this-month'),
-                'from'  => now()->startOfMonth()->format($format),
-                'to'    => now()->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::LAST_MONTH->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.last-month'),
-                'from'  => now()->subMonth(1)->startOfMonth()->format($format),
-                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::LAST_THREE_MONTHS->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.last-three-months'),
-                'from'  => now()->subMonth(3)->startOfMonth()->format($format),
-                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::LAST_SIX_MONTHS->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.last-six-months'),
-                'from'  => now()->subMonth(6)->startOfMonth()->format($format),
-                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::THIS_YEAR->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.this-year'),
-                'from'  => now()->startOfYear()->format($format),
-                'to'    => now()->endOfYear()->format($format),
-            ],
-        ];
+        if ($type === ColumnTypeEnum::INTEGER->value) {
+            return new Integer($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+        }
+
+        if ($type === ColumnTypeEnum::FLOAT->value) {
+            return new Decimal($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+        }
+
+        if ($type === ColumnTypeEnum::BOOLEAN->value) {
+            return new Boolean($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+        }
+
+        if ($type === ColumnTypeEnum::DATE->value) {
+            return new Date($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+        }
+
+        if ($type === ColumnTypeEnum::DATETIME->value) {
+            return new Datetime($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+        }
+
+        if ($type === ColumnTypeEnum::AGGREGATE->value) {
+            return new Aggregate($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+        }
+
+        return new Text($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
     }
 }

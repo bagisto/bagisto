@@ -15,9 +15,9 @@ enum ColumnTypeEnum: string
     case INTEGER = 'integer';
 
     /**
-     * Aggregate.
+     * Float.
      */
-    case AGGREGATE = 'aggregate';
+    case FLOAT = 'float';
 
     /**
      * Boolean.
@@ -25,17 +25,17 @@ enum ColumnTypeEnum: string
     case BOOLEAN = 'boolean';
 
     /**
-     * Dropdown.
+     * Date.
      */
-    case DROPDOWN = 'dropdown';
+    case DATE = 'date';
 
     /**
-     * Date range.
+     * Date time.
      */
-    case DATE_RANGE = 'date_range';
+    case DATETIME = 'datetime';
 
     /**
-     * Date time range.
+     * Aggregate.
      */
-    case DATE_TIME_RANGE = 'datetime_range';
+    case AGGREGATE = 'aggregate';
 }

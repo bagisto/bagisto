@@ -63,63 +63,58 @@ class AttributeDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'type',
-            'label'      => trans('admin::app.catalog.attributes.index.datagrid.type'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => [
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.text'),
-                            'value' => 'text',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.textarea'),
-                            'value' => 'textarea',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.price'),
-                            'value' => 'price',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.boolean'),
-                            'value' => 'boolean',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.select'),
-                            'value' => 'select',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.multiselect'),
-                            'value' => 'multiselect',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.date-time'),
-                            'value' => 'datetime',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.date'),
-                            'value' => 'date',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.image'),
-                            'value' => 'image',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.file'),
-                            'value' => 'file',
-                        ],
-                        [
-                            'label' => trans('admin::app.catalog.attributes.index.datagrid.checkbox'),
-                            'value' => 'checkbox',
-                        ],
-                    ],
+            'index'              => 'type',
+            'label'              => trans('admin::app.catalog.attributes.index.datagrid.type'),
+            'type'               => 'string',
+            'searchable'         => true,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.text'),
+                    'value' => 'text',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.textarea'),
+                    'value' => 'textarea',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.price'),
+                    'value' => 'price',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.boolean'),
+                    'value' => 'boolean',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.select'),
+                    'value' => 'select',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.multiselect'),
+                    'value' => 'multiselect',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.date-time'),
+                    'value' => 'datetime',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.date'),
+                    'value' => 'date',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.image'),
+                    'value' => 'image',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.file'),
+                    'value' => 'file',
+                ],
+                [
+                    'label' => trans('admin::app.catalog.attributes.index.datagrid.checkbox'),
+                    'value' => 'checkbox',
                 ],
             ],
-            'searchable' => true,
-            'filterable' => true,
             'sortable'   => true,
         ]);
 
@@ -159,14 +154,43 @@ class AttributeDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
+        // $this->addColumn([
+        //     'index'      => 'created_at',
+        //     'label'      => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
+        //     'type'       => 'date',
+        //     'searchable' => true,
+        //     'filterable' => true,
+        //     'sortable'   => true,
+        // ]);
+
+        // $this->addColumn([
+        //     'index'           => 'created_at',
+        //     'label'           => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
+        //     'type'            => 'date',
+        //     'searchable'      => true,
+        //     'filterable'      => true,
+        //     'filterable_type' => 'date_range',
+        //     'sortable'        => true,
+        // ]);
+
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
-            'type'       => 'date_range',
+            'type'       => 'datetime',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
         ]);
+
+        // $this->addColumn([
+        //     'index'           => 'created_at',
+        //     'label'           => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
+        //     'type'            => 'datetime',
+        //     'searchable'      => true,
+        //     'filterable'      => true,
+        //     'filterable_type' => 'datetime_range',
+        //     'sortable'        => true,
+        // ]);
     }
 
     /**

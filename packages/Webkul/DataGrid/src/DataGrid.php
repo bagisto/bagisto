@@ -138,15 +138,16 @@ abstract class DataGrid
     {
         $this->dispatchEvent('columns.add.before', [$this, $column]);
 
-        $this->columns[] = new Column(
+        $this->columns[] = Column::resolve(
             index: $column['index'],
             label: $column['label'],
             type: $column['type'],
-            options: $column['options'] ?? null,
-            searchable: $column['searchable'],
-            filterable: $column['filterable'],
-            sortable: $column['sortable'],
-            closure: $column['closure'] ?? null,
+            searchable: $column['searchable'] ?? false,
+            filterable: $column['filterable'] ?? false,
+            filterableType: $column['filterable_type'] ?? null,
+            filterableOptions: $column['filterable_options'] ?? [],
+            sortable: $column['sortable'] ?? false,
+            closure: $column['closure'] ?? null
         );
 
         $this->dispatchEvent('columns.add.after', [$this, $this->columns[count($this->columns) - 1]]);
@@ -347,92 +348,9 @@ abstract class DataGrid
                     }
                 });
             } else {
-                $column = collect($this->columns)->first(fn ($c) => $c->index === $requestedColumn);
-
-                switch ($column->type) {
-                    case ColumnTypeEnum::STRING->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::INTEGER->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::AGGREGATE->value:
-                        $this->queryBuilder->having(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orHaving($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::DROPDOWN->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::DATE_RANGE->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            if (is_string($requestedValues)) {
-                                $rangeOption = collect($column->getRangeOptions())->firstWhere('name', $requestedValues);
-
-                                $requestedValues = [[$rangeOption['from'], $rangeOption['to']]];
-                            }
-
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [
-                                    ($value[0] ?? '').' 00:00:01',
-                                    ($value[1] ?? '').' 23:59:59',
-                                ]);
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::DATE_TIME_RANGE->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            if (is_string($requestedValues)) {
-                                $rangeOption = collect($column->getRangeOptions())->firstWhere('name', $requestedValues);
-
-                                $requestedValues = [
-                                    [
-                                        $rangeOption['from'].' 00:00:01',
-                                        $rangeOption['to'].' 23:59:59',
-                                    ],
-                                ];
-                            }
-
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [$value[0] ?? '', $value[1] ?? '']);
-                            }
-                        });
-
-                        break;
-
-                    default:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
-                            }
-                        });
-
-                        break;
-                }
+                collect($this->columns)
+                    ->first(fn ($c) => $c->index === $requestedColumn)
+                    ->processFilter($this->queryBuilder, $requestedValues);
             }
         }
 
@@ -548,15 +466,6 @@ abstract class DataGrid
     protected function formatData(): array
     {
         $paginator = $this->paginator->toArray();
-
-        /**
-         * TODO: need to handle this...
-         */
-        foreach ($this->columns as $column) {
-            $column->input_type = $column->getFormInputType();
-
-            $column->options = $column->getFormOptions();
-        }
 
         foreach ($paginator['data'] as $record) {
             $record = $this->sanitizeRow($record);
