@@ -61,34 +61,6 @@ class ImportsTableSeeder extends Seeder
             ],
         ]);
 
-        DB::table('category_filterable_attributes')->insert([
-            [
-                'category_id'  => 2,
-                'attribute_id' => 11,
-            ], [
-                'category_id'  => 2,
-                'attribute_id' => 23,
-            ], [
-                'category_id'  => 2,
-                'attribute_id' => 24,
-            ], [
-                'category_id'  => 2,
-                'attribute_id' => 25,
-            ], [
-                'category_id'  => 3,
-                'attribute_id' => 11,
-            ], [
-                'category_id'  => 3,
-                'attribute_id' => 23,
-            ], [
-                'category_id'  => 3,
-                'attribute_id' => 24,
-            ], [
-                'category_id'  => 3,
-                'attribute_id' => 25,
-            ],
-        ]);
-
         DB::table('category_translations')->insert([
             [
                 'id'               => 20,
@@ -114,6 +86,34 @@ class ImportsTableSeeder extends Seeder
                 'meta_keywords'    => 'Winter Wear Category Meta Keywords',
                 'locale_id'        => 4,
                 'locale'           => 'en',
+            ],
+        ]);
+
+        DB::table('category_filterable_attributes')->insert([
+            [
+                'category_id'  => 2,
+                'attribute_id' => 11,
+            ], [
+                'category_id'  => 2,
+                'attribute_id' => 23,
+            ], [
+                'category_id'  => 2,
+                'attribute_id' => 24,
+            ], [
+                'category_id'  => 2,
+                'attribute_id' => 25,
+            ], [
+                'category_id'  => 3,
+                'attribute_id' => 11,
+            ], [
+                'category_id'  => 3,
+                'attribute_id' => 23,
+            ], [
+                'category_id'  => 3,
+                'attribute_id' => 24,
+            ], [
+                'category_id'  => 3,
+                'attribute_id' => 25,
             ],
         ]);
 
@@ -2479,7 +2479,7 @@ class ImportsTableSeeder extends Seeder
         DB::table('product_bundle_option_products')->insert([
             [
                 'id'                       => 1,
-                'product_id'               => 6,
+                'product_id'               => 1,
                 'product_bundle_option_id' => 1,
                 'qty'                      => 1,
                 'is_user_defined'          => 1,
@@ -2487,7 +2487,7 @@ class ImportsTableSeeder extends Seeder
                 'sort_order'               => 0,
             ], [
                 'id'                       => 2,
-                'product_id'               => 6,
+                'product_id'               => 2,
                 'product_bundle_option_id' => 2,
                 'qty'                      => 2,
                 'is_user_defined'          => 1,
@@ -2495,7 +2495,7 @@ class ImportsTableSeeder extends Seeder
                 'sort_order'               => 1,
             ], [
                 'id'                       => 3,
-                'product_id'               => 6,
+                'product_id'               => 3,
                 'product_bundle_option_id' => 3,
                 'qty'                      => 1,
                 'is_user_defined'          => 1,
@@ -2503,7 +2503,7 @@ class ImportsTableSeeder extends Seeder
                 'sort_order'               => 2,
             ], [
                 'id'                       => 4,
-                'product_id'               => 6,
+                'product_id'               => 4,
                 'product_bundle_option_id' => 4,
                 'qty'                      => 2,
                 'is_user_defined'          => 1,

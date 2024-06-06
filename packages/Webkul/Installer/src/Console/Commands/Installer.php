@@ -259,18 +259,24 @@ class Installer extends Command
         );
 
         $allowedLocales = array_key_exists('all', $allowedLocales)
-                            ? array_values(array_unique(array_keys($this->locales)))
+                            ? array_values(array_unique(array_merge(
+                                [$defaultLocale],
+                                array_diff(array_keys($this->locales), [$defaultLocale])
+                            )))
                             : array_values(array_unique(array_merge(
                                 [$defaultLocale],
-                                array_keys($allowedLocales)
+                                array_diff(array_keys($allowedLocales), [$defaultLocale])
                             )));
 
         $allowedCurrencies = array_key_exists('all', $allowedCurrencies)
-                                ? array_values(array_unique(array_keys($this->currencies)))
-                                : array_values(array_unique(array_merge(
-                                    [$defaultCurrency ?? 'USD'],
-                                    array_keys($allowedCurrencies)
-                                )));
+                            ? array_values(array_unique(array_merge(
+                                [$defaultCurrency],
+                                array_diff(array_keys($this->currencies), [$defaultCurrency])
+                            )))
+                            : array_values(array_unique(array_merge(
+                                [$defaultCurrency],
+                                array_diff(array_keys($allowedCurrencies), [$defaultCurrency])
+                            )));
 
         return [
             'default_locale'     => $defaultLocale,

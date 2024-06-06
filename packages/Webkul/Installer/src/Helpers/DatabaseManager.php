@@ -8,15 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Database\Seeders\ImportsTableSeeder;
-use Webkul\Product\Repositories\ProductRepository;
 
 class DatabaseManager
 {
-    public function __construct(
-        protected ProductRepository $productRepository,
-    ) {
-    }
-
     /**
      * Check Database Connection.
      */
@@ -76,6 +70,13 @@ class DatabaseManager
      */
     public function seeder($data)
     {
+        $data['parameter'] = [
+            'default_locale'     => $data['parameter']['default_locales'],
+            'allowed_locales'    => $data['parameter']['allowed_locales'],
+            'default_currency'   => $data['parameter']['default_currency'],
+            'allowed_currencies' => $data['parameter']['allowed_currencies'],
+        ];
+
         try {
             app(BagistoDatabaseSeeder::class)->run($data['parameter']);
 
