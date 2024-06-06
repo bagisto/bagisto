@@ -85,7 +85,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Locales Inputs -->
-                        @foreach ($allLocales as $locale)
+                        @foreach ($allLocales->sortBy('name') as $locale)
                             <x-admin::form.control-group class="last:!mb-0">
                                 <x-admin::form.control-group.label>
                                     {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
