@@ -8,6 +8,7 @@ use Webkul\Admin\DataGrids\Catalog\AttributeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Repositories\LocaleRepository;
 use Webkul\Core\Rules\Code;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -20,7 +21,8 @@ class AttributeController extends Controller
      */
     public function __construct(
         protected AttributeRepository $attributeRepository,
-        protected ProductRepository $productRepository
+        protected ProductRepository $productRepository,
+        protected LocaleRepository $localeRepository
     ) {
     }
 
@@ -45,7 +47,9 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view('admin::catalog.attributes.create');
+        $allLocales = $this->localeRepository->orderBy('name')->get();
+
+        return view('admin::catalog.attributes.create', compact('allLocales'));
     }
 
     /**
@@ -86,7 +90,9 @@ class AttributeController extends Controller
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
-        return view('admin::catalog.attributes.edit', compact('attribute'));
+        $allLocales = $this->localeRepository->orderBy('name')->get();
+
+        return view('admin::catalog.attributes.edit', compact('attribute', 'allLocales'));
     }
 
     /**

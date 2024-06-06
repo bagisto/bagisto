@@ -1,7 +1,3 @@
-@php
-    $allLocales = app('Webkul\Core\Repositories\LocaleRepository')->all();
-@endphp
-
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.catalog.attributes.create.title')
@@ -91,7 +87,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Locales Inputs -->
-                        @foreach ($allLocales->sortBy('name') as $locale)
+                        @foreach ($allLocales as $locale)
                             <x-admin::form.control-group class="last:!mb-0">
                                 <x-admin::form.control-group.label>
                                     {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
