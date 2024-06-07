@@ -39,7 +39,7 @@
         </div>
         
         <!-- Create Attributes Vue Components -->
-        <v-create-attributes :all-locales="{{ $allLocales->toJson() }}">
+        <v-create-attributes :locales="{{ $locales->toJson() }}">
             <!-- Shimmer Effect -->
             <x-admin::shimmer.catalog.attributes />
         </v-create-attributes>
@@ -87,7 +87,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Locales Inputs -->
-                        @foreach ($allLocales as $locale)
+                        @foreach ($locales as $locale)
                             <x-admin::form.control-group class="last:!mb-0">
                                 <x-admin::form.control-group.label>
                                     {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
@@ -208,7 +208,7 @@
                                             </x-admin::table.th>
 
                                             <!-- Loacles tables heading -->
-                                            @foreach ($allLocales as $locale)
+                                            @foreach ($locales as $locale)
                                                 <x-admin::table.th>
                                                     {{ $locale->name . ' (' . $locale->code . ')' }}
                                                 </x-admin::table.th>
@@ -288,7 +288,7 @@
                                                     />
                                                 </x-admin::table.td>
 
-                                                    <x-admin::table.td v-for="locale in allLocales">
+                                                    <x-admin::table.td v-for="locale in locales">
                                                         <p class="dark:text-white">
                                                             @{{ element.params[locale.code] }}
                                                         </p>
@@ -766,7 +766,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Locales Input -->
-                                @foreach ($allLocales as $locale)
+                                @foreach ($locales as $locale)
                                     <x-admin::form.control-group class="mb-2.5 w-full">
                                         <x-admin::form.control-group.label ::class="{ '{{core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
@@ -804,7 +804,7 @@
             app.component('v-create-attributes', {
                 template: '#v-create-attributes-template',
 
-                props: ['allLocales'],
+                props: ['locales'],
 
                 data() {
                     return {
