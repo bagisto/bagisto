@@ -432,7 +432,7 @@
                                             @if (isset($item->additional['attributes']))
                                                 <div>
                                                     @foreach ($item->additional['attributes'] as $attribute)
-                                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                                        <b  class="max-sm:!font-semibold">{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
                                                     @endforeach
                                                 </div>
                                             @endif
@@ -783,15 +783,15 @@
                                 <!-- Item  Invoiced -->
                                 <x-shop::accordion
                                     :is-active="true"
-                                    class="rounded-md !border-none !bg-gray-100"
+                                    class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md border-none bg-gray-100 px-4 py-3 font-medium">
+                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-2 text-sm font-medium">
                                         @lang('shop::app.customers.account.orders.view.item-invoiced')
                                     </x-slot>
                         
                                     <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
                                         @foreach ($invoice->items as $item)
-                                            <div class="rounded-md border bg-white px-4 py-2">
+                                            <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                                 <p class="pb-2 text-sm font-medium">
                                                     {{ $item->name }}
                                                 </p>
@@ -880,11 +880,11 @@
 
                                 <!--Summary -->
                                 <div class="w-full rounded-md bg-gray-100">
-                                    <div class="rounded-t-md border-none px-4 py-3 font-medium">
+                                    <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
                                         @lang('Order Summary')
                                     </div>
 
-                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs font-medium">
+                                    <div class="grid gap-1.5 rounded-md rounded-t-none border border-t-0 bg-white px-4 py-3 text-xs font-medium">
                                         @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p class="text-zinc-500">
@@ -1285,15 +1285,15 @@
 
                                 <x-shop::accordion
                                     :is-active="true"
-                                    class="rounded-md !border-none !bg-gray-100"
+                                    class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md border-none bg-gray-100 px-4 py-3 font-medium">
+                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-2 text-sm font-medium">
                                         @lang('shop::app.customers.account.orders.view.item-shipped')
                                     </x-slot>
                         
                                     <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
                                         @foreach ($shipment->items as $item)
-                                            <div class="rounded-md border bg-white px-4 py-2">
+                                            <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                                 <p class="pb-2 text-sm font-medium">
                                                     {{ $item->name }}
                                                 </p>
@@ -1448,15 +1448,15 @@
 
                                 <x-shop::accordion
                                     :is-active="true"
-                                    class="rounded-md !border-none !bg-gray-100"
+                                    class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md border-none bg-gray-100 px-4 py-3 font-medium">
+                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-2 text-sm font-medium">
                                         @lang('shop::app.customers.account.orders.view.item-refunded')
                                     </x-slot>
                         
                                     <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
                                         @foreach ($invoice->items as $item)
-                                            <div class="rounded-md border bg-white px-4 py-2">
+                                            <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                                 <p class="pb-2 text-sm font-medium">
                                                     {{ $item->name }}
                                                 </p>
@@ -1543,12 +1543,13 @@
                                     </x-slot>
                                 </x-shop::accordion>
 
+                                <!-- Summary -->
                                 <div class="w-full rounded-md bg-gray-100">
-                                    <div class="rounded-t-md border-none px-4 py-3 font-medium">
+                                    <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
                                         @lang('shop::app.customers.account.orders.view.refunds.order-summary')
                                     </div>
 
-                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs">
+                                    <div class="grid gap-1.5 rounded-md rounded-t-none border border-t-0 bg-white px-4 py-3 text-xs font-medium">
                                         @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p class="text-zinc-500">

@@ -2,7 +2,7 @@
 
 <div class="container mt-14 max-lg:px-8 max-sm:mt-5 max-sm:!px-0">
     <div class="relative">
-        <div class="scrollbar-hide flex gap-10 overflow-auto max-sm:gap-4">
+        <div class="scrollbar-hide flex gap-10 overflow-auto max-lg:gap-4">
             @for ($i = 0;  $i < $count; $i++)
                 <div class="grid min-w-[120px] grid-cols-1 justify-items-center gap-4 max-sm:min-w-[60px] max-sm:max-w-[60px] max-sm:gap-1.5 max-sm:first:ml-4">
                     <div class="shimmer relative h-[110px] w-[110px] overflow-hidden rounded-full max-sm:h-[60px] max-sm:w-[60px]">

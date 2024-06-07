@@ -218,13 +218,13 @@
                                                 <!-- Details Toggler -->
                                                 <div class="">
                                                     <p
-                                                        class="flex cursor-pointer items-center gap-x-1.5 whitespace-nowrap text-base"
+                                                        class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-sm:text-xs"
                                                         @click="item.option_show = ! item.option_show"
                                                     >
                                                         @lang('shop::app.checkout.cart.index.see-details')
 
                                                         <span
-                                                            class="text-2xl"
+                                                            class="text-2xl max-md:text-lg"
                                                             :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
                                                         ></span>
                                                     </p>
@@ -236,13 +236,15 @@
                                                     v-show="item.option_show"
                                                 >
                                                     <template v-for="option in item.options">
-                                                        <p class="text-sm font-medium">
-                                                            @{{ option.attribute_name + ':' }}
-                                                        </p>
+                                                        <div class="max-md:grid max-md:gap-0.5">
+                                                            <p class="text-sm font-medium text-zinc-500 max-md:text-xs max-md:font-normal">
+                                                                @{{ option.attribute_name + ':' }}
+                                                            </p>
 
-                                                        <p class="text-sm">
-                                                            @{{ option.option_label }}
-                                                        </p>
+                                                            <p class="text-sm max-md:text-xs">
+                                                                @{{ option.option_label }}
+                                                            </p>
+                                                        </div>
                                                     </template>
                                                 </div>
                                             </div>

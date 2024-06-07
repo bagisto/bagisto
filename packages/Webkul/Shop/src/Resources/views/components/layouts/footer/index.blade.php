@@ -33,10 +33,7 @@
 
                         @foreach ($footerLinkSection as $link)
                             <li>
-                                <a
-                                    href="{{ $link['url'] }}"
-                                    class="max-sm:font-medium"
-                                >
+                                <a href="{{ $link['url'] }}">
                                     {{ $link['title'] }}
                                 </a>
                             </li>
@@ -67,7 +64,9 @@
 
                             @foreach ($footerLinkSection as $link)
                                 <li>
-                                    <a href="{{ $link['url'] }}" class="max-sm:font-medium">
+                                    <a
+                                        href="{{ $link['url'] }}"
+                                        class="max-sm:text-xs max-sm:font-medium">
                                         {{ $link['title'] }}
                                     </a>
                                 </li>
