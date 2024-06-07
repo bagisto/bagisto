@@ -52,22 +52,33 @@
                     {{ $shipment->order->shipping_title }}
                 </div>
 
+
+                <div style="font-size: 16px; color: #384860;">
+                    <div>
+                        <span>
+                            @lang('shop::app.emails.orders.carrier') : 
+                        </span>
+                        
+                        {{ $shipment->carrier_title }}
+                    </div>
+
+                    <div>
+                        <span>
+                            @lang('shop::app.emails.orders.tracking-number', ['tracking_number' =>  $shipment->track_number])
+                        </span>
+                    </div>
+                </div>
+
                 @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($shipment->order->payment->method); @endphp
 
                 @if (! empty($additionalDetails))
                     <div style="font-size: 16px; color: #384860;">
                         <div>
-                            <span>
-                                @lang('shop::app.emails.orders.carrier') : 
-                            </span>
-                            
-                            {{ $shipment->carrier_title }}
+                            <span>{{ $additionalDetails->title }} : </span>
                         </div>
 
                         <div>
-                            <span>
-                                @lang('shop::app.emails.orders.tracking-number', ['tracking_number' =>  $shipment->track_number])
-                            </span>
+                            <span>{{ $additionalDetails->value }} </span>
                         </div>
                     </div>
                 @endif
