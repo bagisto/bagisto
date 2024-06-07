@@ -313,11 +313,13 @@
                 <table class="{{ core()->getCurrentLocale()->direction }}">
                     <thead>
                         <tr>
-                            <th style="width: 50%;">
-                                <b>
-                                    @lang('admin::app.sales.invoices.invoice-pdf.bill-to')
-                                </b>
-                            </th>
+                            @if ($invoice->order->billing_address)
+                                <th style="width: 50%;">
+                                    <b>
+                                        @lang('admin::app.sales.invoices.invoice-pdf.bill-to')
+                                    </b>
+                                </th>
+                            @endif
 
                             @if ($invoice->order->shipping_address)
                                 <th style="width: 50%">
@@ -331,19 +333,21 @@
 
                     <tbody>
                         <tr>
-                            <td style="width: 50%">
-                                <div>{{ $invoice->order->billing_address->company_name ?? '' }}<div>
+                            @if ($invoice->order->billing_address)
+                                <td style="width: 50%">
+                                    <div>{{ $invoice->order->billing_address->company_name ?? '' }}<div>
 
-                                <div>{{ $invoice->order->billing_address->name }}</div>
+                                    <div>{{ $invoice->order->billing_address->name }}</div>
 
-                                <div>{{ $invoice->order->billing_address->address }}</div>
+                                    <div>{{ $invoice->order->billing_address->address }}</div>
 
-                                <div>{{ $invoice->order->billing_address->postcode . ' ' . $invoice->order->billing_address->city }}</div>
+                                    <div>{{ $invoice->order->billing_address->postcode . ' ' . $invoice->order->billing_address->city }}</div>
 
-                                <div>{{ $invoice->order->billing_address->state . ', ' . core()->country_name($invoice->order->billing_address->country) }}</div>
+                                    <div>{{ $invoice->order->billing_address->state . ', ' . core()->country_name($invoice->order->billing_address->country) }}</div>
 
-                                <div>@lang('admin::app.sales.invoices.invoice-pdf.contact'): {{ $invoice->order->billing_address->phone }}</div>
-                            </td>
+                                    <div>@lang('admin::app.sales.invoices.invoice-pdf.contact'): {{ $invoice->order->billing_address->phone }}</div>
+                                </td>
+                            @endif
                             
                             @if ($invoice->order->shipping_address)
                                 <td style="width: 50%">
