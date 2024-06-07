@@ -426,6 +426,7 @@ return [
                 'currency'               => 'מטבע',
                 'customer-service'       => 'שירות לקוחות',
                 'email'                  => 'אימייל',
+                'footer-content'         => 'תוכן תחתית הדף',
                 'footer-text'            => '© זכויות יוצרים 2010 - :current_year, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
                 'locale'                 => 'אזור',
                 'newsletter-text'        => 'הכנסו לרשימת התפוצה שלנו וקבלו עדכונים והצעות מרשימות!',
@@ -517,6 +518,10 @@ return [
                 'next'     => 'הבא',
                 'previous' => 'הקודם',
                 'view-all' => 'צפה בהכול',
+            ],
+
+            'ratings' => [
+                'title' => 'דירוגים',
             ],
         ],
 

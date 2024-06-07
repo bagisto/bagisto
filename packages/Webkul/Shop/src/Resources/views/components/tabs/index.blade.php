@@ -21,7 +21,7 @@
                     role="button"
                     tabindex="0"
                     v-for="tab in tabs"
-                    class="cursor-pointer px-8 py-5 text-xl font-medium text-zinc-500 max-md:px-4 max-md:py-3 max-md:text-sm max-sm:px-2 max-sm:py-3.5"
+                    class="cursor-pointer px-8 py-5 text-xl font-medium text-zinc-500 max-md:px-4 max-md:py-3 max-md:text-sm max-sm:px-2.5 max-sm:py-2.5"
                     :class="{'border-b-2 border-navyBlue !text-black transition': tab.isActive }"
                     :id="tab.$attrs.id + '-button'"
                     @click="change(tab)"

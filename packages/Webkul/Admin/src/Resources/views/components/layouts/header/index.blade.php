@@ -293,7 +293,7 @@
                                 class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
                                 v-if="searchedResults.products.data.length"
                             >
-                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-products')".replace(':query', searchTerm).replace(':count', searchedResults.products.total) }}
+                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-products')".replace(':query', searchTerm).replace(':count', searchedResults.products.meta.total) }}
                             </a>
 
                             <a

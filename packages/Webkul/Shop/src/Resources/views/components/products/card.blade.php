@@ -14,7 +14,7 @@
             class="1180:transtion-all group w-full rounded-md 1180:relative 1180:grid 1180:content-start 1180:overflow-hidden 1180:duration-300 1180:hover:shadow-[0_5px_10px_rgba(0,0,0,0.1)]"
             v-if="mode != 'list'"
         >
-            <div class="relative max-h-[300px] max-w-[291px] overflow-hidden max-md:rounded-lg max-sm:max-h-[200px] max-sm:max-w-[200px]">
+            <div class="relative max-h-[300px] max-w-[291px] overflow-hidden max-md:rounded-lg max-sm:max-h-[200px] max-sm:max-w-full">
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
                 <!-- Product Image -->
@@ -39,7 +39,7 @@
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
 
                 <x-shop::products.ratings
-                    class="absolute bottom-1.5 items-center !border-white bg-white/80 !px-2 !py-1 text-xs max-sm:!px-2.5 ltr:left-1.5 rtl:right-1.5"
+                    class="absolute bottom-1.5 items-center !border-white bg-white/80 !px-2 !py-1 text-xs max-sm:!px-1.5 max-sm:!py-0.5 ltr:left-1.5 rtl:right-1.5"
                     ::average="product.ratings.average"
                     ::total="product.ratings.total"
                     ::rating="false"
@@ -51,7 +51,7 @@
                 <div class="action-items bg-black">
                     <!-- Product Sale Badge -->
                     <p
-                        class="absolute top-5 inline-block rounded-[44px] bg-red-400 px-2.5 text-sm text-white max-sm:top-2.5 max-sm:rounded-l-none max-sm:rounded-r-xl max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-5 max-sm:ltr:left-0 rtl:right-5 max-sm:rtl:right-0"
+                        class="absolute top-1.5 inline-block rounded-[44px] bg-red-600 px-2.5 text-sm text-white max-sm:rounded-l-none max-sm:rounded-r-xl max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-1.5 max-sm:ltr:left-0 rtl:right-5 max-sm:rtl:right-0"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
@@ -59,7 +59,7 @@
 
                     <!-- Product New Badge -->
                     <p
-                        class="absolute top-5 inline-block rounded-[44px] bg-blue-600 px-2.5 text-sm text-white max-sm:top-2.5 max-sm:rounded-l-none max-sm:rounded-r-xl max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-5 max-sm:ltr:left-0 rtl:right-5 max-sm:rtl:right-0"
+                        class="absolute top-1.5 inline-block rounded-[44px] bg-navyBlue px-2.5 text-sm text-white max-sm:rounded-l-none max-sm:rounded-r-xl max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-1.5 max-sm:ltr:left-0 rtl:right-1.5 max-sm:rtl:right-0"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -71,7 +71,7 @@
 
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span
-                                class="absolute top-2.5 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-base sm:hidden ltr:right-1.5 rtl:left-1.5"
+                                class="absolute top-2.5 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg sm:hidden ltr:right-1.5 rtl:left-1.5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -87,7 +87,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span
-                                class="icon-compare absolute top-10 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-base sm:hidden ltr:right-1.5 rtl:left-1.5"
+                                class="icon-compare absolute top-10 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg sm:hidden ltr:right-1.5 rtl:left-1.5"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -103,10 +103,11 @@
             </div>
 
             <!-- Product Information Section -->
-            <div class="-mt-9 grid max-w-[291px] translate-y-9 content-start gap-2.5 bg-white p-2.5 transition-transform duration-300 ease-out group-hover:-translate-y-0 group-hover:rounded-t-lg max-sm:mt-0 max-sm:translate-y-0 max-sm:gap-0 max-sm:px-0 max-sm:py-1.5">
+            <div class="-mt-9 grid max-w-[291px] translate-y-9 content-start gap-2.5 bg-white p-2.5 transition-transform duration-300 ease-out group-hover:-translate-y-0 group-hover:rounded-t-lg max-sm:relative max-sm:mt-0 max-sm:min-w-[170px] max-sm:max-w-[192px] max-sm:translate-y-0 max-sm:gap-0 max-sm:px-0 max-sm:py-1.5">
+
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
                     
-                <p class="text-base font-medium max-sm:text-sm">
+                <p class="text-base font-medium max-sm:mb-1.5 max-sm:max-w-[192px] max-sm:whitespace-break-spaces max-sm:text-sm max-sm:leading-4">
                     @{{ product.name }}
                 </p>
 
