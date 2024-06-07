@@ -60,7 +60,7 @@
 				@endif
 			</p>
 
-			<p class="text-2xl font-medium max-md:text-xl">
+			<p class="text-2xl font-medium max-md:text-base">
 				@lang('shop::app.checkout.success.thanks')
 			</p>
 			
@@ -75,7 +75,7 @@
 			{{ view_render_event('bagisto.shop.checkout.success.continue-shopping.before', ['order' => $order]) }}
 
 			<a href="{{ route('shop.home.index') }}">
-				<div class="text-basefont-medium m-auto mx-auto block w-max cursor-pointer rounded-2xl bg-navyBlue px-11 py-3 text-center text-white max-md:rounded-xl">
+				<div class="m-auto mx-auto block w-max cursor-pointer rounded-2xl bg-navyBlue px-11 py-3 text-center text-base font-medium text-white max-md:rounded-lg max-md:px-6 max-md:py-1.5">
              		@lang('shop::app.checkout.cart.index.continue-shopping')
 				</div> 
 			</a>
