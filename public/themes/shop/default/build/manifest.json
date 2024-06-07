@@ -36,6 +36,10 @@
     "file": "assets/large-product-placeholder-13b8a96b.webp",
     "src": "src/Resources/assets/images/large-product-placeholder.webp"
   },
+  "src/Resources/assets/images/logo.png": {
+    "file": "assets/logo-013cd27b.png",
+    "src": "src/Resources/assets/images/logo.png"
+  },
   "src/Resources/assets/images/logo.svg": {
     "file": "assets/logo-942157c2.svg",
     "src": "src/Resources/assets/images/logo.svg"
@@ -88,7 +92,7 @@
     "css": [
       "assets/app-05f8acf7.css"
     ],
-    "file": "assets/app-5cc689de.js",
+    "file": "assets/app-124f916c.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

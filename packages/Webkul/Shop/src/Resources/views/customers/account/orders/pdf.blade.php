@@ -113,7 +113,6 @@
             }
 
             .page-header {
-                position: relative;
                 border-bottom: 1px solid #E9EFFC;
                 text-align: center;
                 font-size: 24px;
@@ -123,15 +122,25 @@
                 margin: 0;
             }
 
-            .page-header .logo {
+            .logo-container {
                 position: absolute;
-                left: 14px;
-                top: 14px;
+                top: 20px;
+                left: 20px;
             }
 
-            .page-header .logo:where([dir=rtl],[dir=rtl] *) {
-                right: 14px;
+            .logo-container.rtl {
                 left: auto;
+                right: 20px;
+            }
+
+            .logo-container img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .page-header b {
+                display: inline-block;
+                vertical-align: middle;
             }
 
             .small-text {
@@ -196,17 +205,17 @@
     </head>
 
     <body dir="{{ core()->getCurrentLocale()->direction }}">
+        <div class="logo-container {{ core()->getCurrentLocale()->direction }}">
+            @if (!core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
+                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')))) }}"/>
+            @else
+                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(bagisto_asset('images/logo.png'))) }}"/>
+            @endif
+        </div>
+        
         <div class="page">
             <!-- Header -->
             <div class="page-header">
-                <div class="logo">
-                    @if (! core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
-                        <img src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}"/>
-                    @else
-                        <img src="{{ bagisto_asset('images/logo.svg') }}"/>
-                    @endif
-                </div>
-                
                 <b>@lang('shop::app.customers.account.orders.invoice-pdf.invoice')</b>
             </div>
 
@@ -394,8 +403,6 @@
                                 {{ core()->getConfigData('sales.payment_methods.' . $invoice->order->payment->method . '.title') }}
 
                                 @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($invoice->order->payment->method); @endphp
-
-                                @php $additionalDetails = ['title' => 'Color', 'value' => 'Red'] @endphp
 
                                 @if (! empty($additionalDetails))
                                     <div class="row small-text">
