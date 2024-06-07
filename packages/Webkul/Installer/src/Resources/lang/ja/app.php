@@ -375,9 +375,11 @@ return [
                 'admin'            => '管理者',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'パスワードの確認',
+                'download-sample'  => 'サンプルのダウンロード',
                 'email'            => 'メール',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'パスワード',
+                'sample-products'  => 'サンプル商品',
                 'title'            => '管理者の作成',
             ],
 

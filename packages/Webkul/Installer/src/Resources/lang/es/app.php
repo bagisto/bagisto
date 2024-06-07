@@ -374,11 +374,13 @@ return [
             'create-administrator' => [
                 'admin'            => 'Administrador',
                 'bagisto'          => 'Bagisto',
-                'confirm-password' => 'Confirmar contraseña',
+                'confirm-password' => 'Confirmar Contraseña',
+                'download-sample'  => 'Descargar Muestra',
+                'email'            => 'Correo Electrónico',
                 'email-address'    => 'admin@example.com',
-                'email'            => 'Correo electrónico',
                 'password'         => 'Contraseña',
-                'title'            => 'Crear administrador',
+                'sample-products'  => 'Productos de Muestra',
+                'title'            => 'Crear Administrador',
             ],
 
             'environment-configuration' => [

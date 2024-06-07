@@ -374,10 +374,12 @@ return [
             'create-administrator' => [
                 'admin'            => 'Адміністратор',
                 'bagisto'          => 'Bagisto',
-                'confirm-password' => 'Підтвердіть пароль',
+                'confirm-password' => 'Підтвердити пароль',
+                'download-sample'  => 'завантажити-зразок',
                 'email'            => 'Електронна пошта',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Пароль',
+                'sample-products'  => 'Зразкові товари',
                 'title'            => 'Створити адміністратора',
             ],
 

@@ -1080,17 +1080,17 @@
                                             class="cursor-pointer text-sm font-medium text-gray-600"
                                             for="sample_products"
                                         >
-                                            @lang("Sample Products")
+                                            @lang("installer::app.installer.index.create-administrator.sample-products")
                                         </label>
                                     </x-installer::form.control-group>
 
                                     <a
-                                        href="{{ route('installer.download_sample') }}"
-                                        target="_blank"
+                                        href="{{ Storage::disk('public')->url('data-transfer/samples/products.csv') }}"
+                                        download="products.csv"
                                         id="source-sample-link"
                                         class="mt-1 cursor-pointer text-sm text-blue-600 transition-all hover:underline"
                                     >
-                                        @lang('download-sample')
+                                        @lang('installer::app.installer.index.create-administrator.download-sample')
                                     </a>
                                 </div>
                             </div>

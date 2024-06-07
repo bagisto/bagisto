@@ -374,10 +374,12 @@ return [
             'create-administrator' => [
                 'admin'            => 'مدیر',
                 'bagisto'          => 'Bagisto',
-                'confirm-password' => 'تایید رمز عبور',
+                'confirm-password' => 'تأیید رمز عبور',
+                'download-sample'  => 'دانلود نمونه',
                 'email'            => 'ایمیل',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'رمز عبور',
+                'sample-products'  => 'محصولات نمونه',
                 'title'            => 'ایجاد مدیر',
             ],
 

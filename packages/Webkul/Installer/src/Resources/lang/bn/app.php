@@ -375,10 +375,12 @@ return [
                 'admin'            => 'অ্যাডমিন',
                 'bagisto'          => 'বাগিস্তো',
                 'confirm-password' => 'পাসওয়ার্ড নিশ্চিত করুন',
-                'email-address'    => 'ইমেল ঠিকানা',
-                'email'            => 'ইমেল',
+                'download-sample'  => 'স্যাম্পল ডাউনলোড করুন',
+                'email'            => 'ইমেইল',
+                'email-address'    => 'admin@example.com',
                 'password'         => 'পাসওয়ার্ড',
-                'title'            => 'প্রশাসক তৈরি করুন',
+                'sample-products'  => 'স্যাম্পল পণ্য',
+                'title'            => 'অ্যাডমিনিস্ট্রেটর তৈরি করুন',
             ],
 
             'environment-configuration' => [

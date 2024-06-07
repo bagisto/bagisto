@@ -372,12 +372,14 @@ return [
     'installer' => [
         'index' => [
             'create-administrator' => [
-                'admin'            => 'المشرف',
+                'admin'            => 'مدير',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'تأكيد كلمة المرور',
+                'download-sample'  => 'تحميل العينة',
                 'email'            => 'البريد الإلكتروني',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'كلمة المرور',
+                'sample-products'  => 'منتجات عينة',
                 'title'            => 'إنشاء المسؤول',
             ],
 

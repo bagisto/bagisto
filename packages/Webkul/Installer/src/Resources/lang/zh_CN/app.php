@@ -375,9 +375,11 @@ return [
                 'admin'            => '管理员',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => '确认密码',
+                'download-sample'  => '下载示例',
                 'email'            => '电子邮件',
                 'email-address'    => 'admin@example.com',
                 'password'         => '密码',
+                'sample-products'  => '示例产品',
                 'title'            => '创建管理员',
             ],
 

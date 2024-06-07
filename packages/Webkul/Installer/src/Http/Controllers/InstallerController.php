@@ -91,15 +91,19 @@ class InstallerController extends Controller
         $appLocale = $allParameters['app_locale'] ?? null;
         $appCurrency = $allParameters['app_currency'] ?? null;
 
-        $allowedLocales = array_unique(array_merge(
-            [($appLocale ?? 'en')],
-            $selectedParameters['allowed_locales']
-        ));
+        $allowedLocales = array_unique(
+            array_merge(
+                [($appLocale ?? 'en')],
+                $selectedParameters['allowed_locales']
+            )
+        );
 
-        $allowedCurrencies = array_unique(array_merge(
-            [($appCurrency ?? 'USD')],
-            $selectedParameters['allowed_currencies']
-        ));
+        $allowedCurrencies = array_unique(
+            array_merge(
+                [($appCurrency ?? 'USD')],
+                $selectedParameters['allowed_currencies']
+            )
+        );
 
         $parameter = [
             'parameter' => [
@@ -163,13 +167,5 @@ class InstallerController extends Controller
         Event::dispatch('bagisto.installed');
 
         return $filePath;
-    }
-
-    /**
-     * Download import error report.
-     */
-    public function downloadSample()
-    {
-        return Storage::download('data-transfer/samples/products.csv');
     }
 }

@@ -375,9 +375,11 @@ return [
                 'admin'            => 'Beheerder',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Bevestig wachtwoord',
+                'download-sample'  => 'download-voorbeeld',
                 'email'            => 'E-mail',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Wachtwoord',
+                'sample-products'  => 'Voorbeeldproducten',
                 'title'            => 'Beheerder aanmaken',
             ],
 

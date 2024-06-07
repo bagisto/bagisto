@@ -375,10 +375,12 @@ return [
                 'admin'            => 'व्यवस्थापक',
                 'bagisto'          => 'बैगिस्टो',
                 'confirm-password' => 'पासवर्ड की पुष्टि करें',
+                'download-sample'  => 'नमूना डाउनलोड करें',
                 'email'            => 'ईमेल',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'पासवर्ड',
-                'title'            => 'प्रबंधक बनाएं',
+                'sample-products'  => 'नमूना उत्पाद',
+                'title'            => 'व्यवस्थापक बनाएं',
             ],
 
             'environment-configuration' => [

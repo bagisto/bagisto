@@ -375,9 +375,11 @@ return [
                 'admin'            => 'Administrador',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Confirmar Senha',
+                'download-sample'  => 'Baixar Amostra',
                 'email'            => 'E-mail',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Senha',
+                'sample-products'  => 'Produtos de Exemplo',
                 'title'            => 'Criar Administrador',
             ],
 

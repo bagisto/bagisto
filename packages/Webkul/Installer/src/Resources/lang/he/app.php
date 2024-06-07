@@ -372,13 +372,15 @@ return [
     'installer' => [
         'index' => [
             'create-administrator' => [
-                'admin'            => 'מנהל מערכת',
+                'admin'            => 'מנהל',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'אשר סיסמה',
-                'email'            => 'כתובת דוא"ל',
+                'download-sample'  => 'הורד דוגמא',
+                'email'            => 'אימייל',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'סיסמה',
-                'title'            => 'יצירת מנהל מערכת',
+                'sample-products'  => 'מוצרים דוגמה',
+                'title'            => 'צור מנהל',
             ],
 
             'environment-configuration' => [

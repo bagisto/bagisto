@@ -372,13 +372,15 @@ return [
     'installer' => [
         'index' => [
             'create-administrator' => [
-                'admin'            => 'පරිපාල',
-                'bagisto'          => 'Bagisto',
-                'confirm-password' => 'මහපදය තහවුරු කරන්න',
-                'email'            => 'E-mail',
+                'admin'            => 'පරිපාලක',
+                'bagisto'          => 'බැගිස්ටෝ',
+                'confirm-password' => 'මුරපදය තහවුරු කරන්න',
+                'download-sample'  => 'උපකාරක භාණ්ඩ බාගත කරන්න',
+                'email'            => 'ඊමේල්',
                 'email-address'    => 'admin@example.com',
-                'password'         => 'මහපදය',
-                'title'            => 'පරිපාලකරු නිපුණ',
+                'password'         => 'මුරපදය',
+                'sample-products'  => 'උපකාරක නිෂ්පාදන',
+                'title'            => 'පරිපාලකයකු සාදන්න',
             ],
 
             'environment-configuration' => [

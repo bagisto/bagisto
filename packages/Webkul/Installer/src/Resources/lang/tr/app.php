@@ -374,10 +374,12 @@ return [
             'create-administrator' => [
                 'admin'            => 'Yönetici',
                 'bagisto'          => 'Bagisto',
-                'confirm-password' => 'Parolayı Onayla',
+                'confirm-password' => 'Şifreyi Onayla',
+                'download-sample'  => 'örnek-indir',
                 'email'            => 'E-posta',
-                'email-address'    => 'admin@example.com',
-                'password'         => 'Parola',
+                'email-address'    => 'admin@ornek.com',
+                'password'         => 'Şifre',
+                'sample-products'  => 'Örnek Ürünler',
                 'title'            => 'Yönetici Oluştur',
             ],
 

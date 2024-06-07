@@ -372,12 +372,14 @@ return [
     'installer' => [
         'index' => [
             'create-administrator' => [
-                'admin'            => 'Administrateur',
+                'admin'            => 'Admin',
                 'bagisto'          => 'Bagisto',
-                'confirm-password' => 'Confirmez le mot de passe',
-                'email'            => 'E-mail',
+                'confirm-password' => 'Confirmer le mot de passe',
+                'download-sample'  => 'Télécharger un exemple',
+                'email'            => 'Email',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Mot de passe',
+                'sample-products'  => 'Produits d\'exemple',
                 'title'            => 'Créer un administrateur',
             ],
 
