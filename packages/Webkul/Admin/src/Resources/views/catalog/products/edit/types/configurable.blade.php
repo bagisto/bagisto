@@ -615,12 +615,12 @@
                                                 <x-admin::form.control-group.label>
                                                     @{{ inventorySource.name }}
                                                 </x-admin::form.control-group.label>
-
+                                                
                                                 <v-field
                                                     type="text"
                                                     class="flex min-h-[39px] w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                                                    :class="[errors['variants[variant_' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
-                                                    :name="'variants[variant_' + variant.id + '][' + inventorySource.id + ']'"
+                                                    :class="[errors['variants[variant_' + variant.id + '][inventory_' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
+                                                    :name="'variants[variant_' + variant.id + '][inventory_' + inventorySource.id + ']'"
                                                     rules="required|numeric|min:0"
                                                     v-model="variant.inventories[inventorySource.id]"
                                                     :label="inventorySource.name"
@@ -628,7 +628,7 @@
                                                 </v-field>
 
                                                 <v-error-message
-                                                    :name="'variants[variant_' + variant.id + '][' + inventorySource.id + ']'"
+                                                    :name="'variants[variant_' + variant.id + '][inventory_' + inventorySource.id + ']'"
                                                     v-slot="{ message }"
                                                 >
                                                     <p class="mt-1 text-xs italic text-red-600">
@@ -1357,50 +1357,68 @@
 
                 editPrices(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.price = params?.price ?? params[`variants[variant_${variant.id}]`];
+                        variant.price = this.findVariantByAttribute({
+                            id: variant.id,
+                            name: 'price'
+                        });
                     });
                 },
 
                 editInventories(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.inventories = {
-                            ...variant?.inventories,
-                            ...(params?.inventories ?? params[`variants[variant_${variant.id}]`]),
-                        };
+                        variant.inventories = this.findVariantByAttribute({
+                            id: variant.id,
+                            name: 'inventories'
+                        })
                     });
                 },
 
                 editWeight(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.weight = params?.weight ?? params[`variants[variant_${variant.id}]`];
+                        variant.weight = this.findVariantByAttribute({
+                            id: variant.id,
+                            name: 'weight'
+                        });
                     });
                 },
 
                 editName(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.name = params?.name ?? params[`variants[variant_${variant.id}]`];
+                        variant.name = this.findVariantByAttribute({
+                            id: variant.id,
+                            name: 'name'
+                        });
                     });
                 },
 
                 editSku(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.sku = params?.sku ?? params[`variants[variant_${variant.id}]`];
+                        variant.sku = this.findVariantByAttribute({
+                            id: variant.id,
+                            name: 'sku'
+                        });
                     });
                 },
 
                 editStatus(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.status = params?.status ?? params[`variants[variant_${variant.id}]`];
+                        variant.status = this.findVariantByAttribute({
+                            id: variant.id,
+                            name: 'status'
+                        });
                     });
                 },
                 
                 addImages(params) {
                     this.selectedVariants.forEach((variant) => {
-                        let correspondingTempVariant = this.tempSelectedVariants.find(tempVariant => tempVariant.id === variant.id);
+                        let correspondingTempVariantTempImages = this.findVariantByAttribute({
+                            id: variant.id,
+                            name: 'temp_images'
+                        });
 
                         let images = [
                             ...this.updateTypes.addImages.images,
-                            ...(correspondingTempVariant?.temp_images || [])
+                            ...(correspondingTempVariantTempImages || [])
                         ];
 
                         variant.images = variant.images.concat(images);
@@ -1435,6 +1453,10 @@
 
                 optionName(attribute, optionId) {
                     return attribute.options.find((option) => option.id == optionId)?.admin_name;
+                },
+
+                findVariantByAttribute(attribute) {
+                    return this.tempSelectedVariants.find(tempVariant => tempVariant.id === attribute.id)?.[attribute.name];
                 },
             },
         });
