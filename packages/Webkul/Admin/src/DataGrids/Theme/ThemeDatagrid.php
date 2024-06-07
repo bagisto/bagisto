@@ -32,16 +32,19 @@ class ThemeDatagrid extends DataGrid
                 'theme_customizations.id',
                 'theme_customizations.type',
                 'theme_customizations.sort_order',
-                'channel_translations.name as channel_name',
+                'channel_translations.name',
                 'theme_customizations.status',
-                'theme_customizations.name as name',
+                'theme_customizations.name',
+                'theme_customizations.channel_id'
             );
 
+        $this->addFilter('id', 'theme_customizations.id');
         $this->addFilter('type', 'theme_customizations.type');
         $this->addFilter('name', 'theme_customizations.name');
         $this->addFilter('sort_order', 'theme_customizations.sort_order');
         $this->addFilter('status', 'theme_customizations.status');
-        $this->addFilter('channel_name', 'channel_name');
+        $this->addFilter('channel_name', 'channel_translations.name');
+        $this->addFilter('channel_id', 'theme_customizations.channel_id');
 
         return $queryBuilder;
     }
@@ -58,7 +61,7 @@ class ThemeDatagrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'channel_name',
+            'index'      => 'channel_id',
             'label'      => trans('admin::app.settings.themes.index.datagrid.channel_name'),
             'type'       => 'dropdown',
             'options'    => [
