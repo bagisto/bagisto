@@ -8,6 +8,7 @@
         id="v-product-gallery-template"
     >
         <div>
+            <!-- For large screens greater than 1180px. -->
             <div class="sticky top-20 flex h-max gap-8 max-1180:hidden">
                 <!-- Product Image and Videos Slider -->
                 <div class="flex-24 h-509 flex min-w-[100px] max-w-[100px] flex-wrap place-content-start justify-center gap-2.5 overflow-y-auto overflow-x-hidden">
@@ -108,15 +109,31 @@
                 </div>
             </div>
 
-            <!-- Product Images and Videos for Small Screen -->
-            <div class="scrollbar-hide flex w-screen gap-8 overflow-auto max-sm:gap-5 1180:hidden">
+            <!-- Product Images and Videos for Medium & Small Screen -->
+            <div
+                class="scrollbar-hide flex w-screen gap-8 overflow-auto max-sm:gap-5 1180:hidden"
+                v-show="! isMediaLoading"
+            >
                 <x-shop::media.images.lazy
                     ::src="image.large_image_url"
                     class="w-[490px]"
+                    ::class="(media.images.length + media.videos.length) > 1 ? 'max-sm:hidden' : ''"
                     v-for="(image, index) in media.images"
                     alt="{{ $product->name }}"
                     @click="isImageZooming = !isImageZooming"
                 />
+
+                <!-- For mobile view, use the carousel when the image count is greater than 2" -->
+                <x-shop::products.mobile.carousel
+                    class="sm:hidden"
+                    ::class="(media.images.length + media.videos.length) > 1 ? '' : 'hidden'"
+                    ::options="media"
+                    @click="isImageZooming = !isImageZooming"
+                />
+            </div>
+
+            <div v-show="isMediaLoading">
+                <x-shop::shimmer.products.gallery />
             </div>
             
             <!-- Gallery Images Zoomer -->

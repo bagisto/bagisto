@@ -156,7 +156,7 @@
                     const urlParams = new URLSearchParams(window.location.search);
 
                     if (urlParams.has('search')) {
-                        let searchAppliedColumn = this.findAppliedColumn('all');
+                        let searchAppliedColumn = this.applied.filters.columns.find(column => column.index === 'all');
 
                         searchAppliedColumn.value = [urlParams.get('search')];
                     }
@@ -174,7 +174,7 @@
                             this.applied.savedFilterId = currentDatagrid.applied.savedFilterId;
 
                             if (urlParams.has('search')) {
-                                let searchAppliedColumn = this.findAppliedColumn('all');
+                                let searchAppliedColumn = this.applied.filters.columns.find(column => column.index === 'all');
 
                                 searchAppliedColumn.value = [urlParams.get('search')];
                             }
