@@ -26,12 +26,12 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_name' => ['string'],
-            'first_name'   => ['required', 'string'],
-            'last_name'    => ['required', 'string'],
+            'company_name' => ['nullable'],
+            'first_name'   => ['required'],
+            'last_name'    => ['required'],
             'address'      => ['required', 'array', 'min:1'],
-            'country'      => core()->isCountryRequired() ? ['required', 'string'] : ['string'],
-            'state'        => core()->isStateRequired() ? ['required', 'string'] : ['string'],
+            'country'      => core()->isCountryRequired() ? ['required'] : ['nullable'],
+            'state'        => core()->isStateRequired() ? ['required'] : ['nullable'],
             'city'         => ['required', 'string'],
             'postcode'     => core()->isPostCodeRequired() ? ['required', 'numeric'] : ['numeric'],
             'phone'        => ['required', new PhoneNumber],

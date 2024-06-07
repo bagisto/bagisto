@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\admin\Http\Requests;
+namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\PhoneNumber;
@@ -26,13 +26,13 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_name'    => ['string'],
-            'first_name'      => ['required', 'string'],
-            'last_name'       => ['required', 'string'],
+            'company_name'    => ['nullable'],
+            'first_name'      => ['required'],
+            'last_name'       => ['required'],
             'address'         => ['required', 'array', 'min:1'],
-            'country'         => ['required', 'string'],
-            'state'           => ['required', 'string'],
-            'city'            => ['required', 'string'],
+            'country'         => ['required'],
+            'state'           => ['required'],
+            'city'            => ['required'],
             'postcode'        => ['required', 'numeric'],
             'phone'           => ['required', new PhoneNumber],
             'vat_id'          => [new VatIdRule()],
