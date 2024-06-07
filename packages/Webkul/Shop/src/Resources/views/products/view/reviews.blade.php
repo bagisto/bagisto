@@ -132,7 +132,7 @@
 
                             <div class="mt-4 flex justify-start gap-4 max-xl:mb-5 max-sm:mb-5 max-sm:flex-wrap max-sm:justify-normal max-sm:gap-x-0">
                                 <button
-                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-md:max-w-full max-md:rounded-xl max-sm:py-2.5"
+                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-md:max-w-full max-md:rounded-lg max-md:py-1.5"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -140,7 +140,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center rounded-2xl px-8 py-2.5 max-md:max-w-full max-md:rounded-xl max-sm:w-full"
+                                    class="secondary-button items-center rounded-2xl px-8 py-2.5 max-md:w-full max-md:max-w-full max-md:rounded-lg max-md:py-1.5"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -182,7 +182,7 @@
                                         @endfor
                                     </div>
 
-                                    <p class="text-base text-zinc-500">
+                                    <p class="text-base text-zinc-500 max-sm:text-sm">
                                         {{ $reviewHelper->getTotalRating($product) }} Reviews
                                     </p>
                                 </div>
@@ -191,11 +191,11 @@
                                 <div class="grid max-w-[365px] flex-wrap gap-y-3 max-md:max-w-full">
                                     @for ($i = 5; $i >= 1; $i--)
                                         <div class="row grid grid-cols-[1fr_2fr] items-center gap-4 max-md:grid-cols-[0.5fr_2fr] max-sm:flex-wrap max-sm:gap-0">
-                                            <div class="whitespace-nowrap text-base font-medium">{{ $i }} Stars</div>
+                                            <div class="whitespace-nowrap text-base font-medium max-sm:text-sm">{{ $i }} Stars</div>
 
-                                            <div class="h-4 w-[275px] max-w-full rounded-sm bg-neutral-200 max-sm:w-full">
+                                            <div class="h-4 w-[275px] max-w-full rounded-sm bg-neutral-200 max-sm:h-3.5 max-sm:w-full">
                                                 <div
-                                                    class="h-4 rounded-sm bg-amber-500"
+                                                    class="h-4 rounded-sm bg-amber-500 max-sm:h-3.5"
                                                     style="width: {{ $percentageRatings[$i] }}%"
                                                 ></div>
                                             </div>
@@ -209,7 +209,7 @@
                                     || auth()->guard('customer')->user()
                                 )
                                     <div
-                                        class="flex cursor-pointer items-center justify-center gap-x-4 rounded-xl border border-navyBlue px-4 py-2.5"
+                                        class="flex cursor-pointer items-center justify-center gap-x-4 rounded-xl border border-navyBlue px-4 py-1.5 max-sm:rounded-lg"
                                         @click="canReview = true"
                                     >
                                         <span class="icon-pen text-2xl"></span>
@@ -240,7 +240,7 @@
 
                     <!-- Empty Review Section -->
                     <template v-else>
-                        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
+                        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center max-md:h-60">
                             <img
                                 class="max-sm:h-[100px] max-sm:w-[100px]"
                                 src="{{ bagisto_asset('images/review.png') }}"
@@ -257,10 +257,10 @@
                                 || auth()->guard('customer')->user()
                             )
                                 <div
-                                    class="mt-8 flex cursor-pointer items-center gap-x-4 rounded-xl border border-navyBlue px-4 py-2.5"
+                                    class="mt-8 flex cursor-pointer items-center gap-x-4 rounded-xl border border-navyBlue px-4 py-2.5 max-sm:mt-5 max-sm:gap-x-1.5 max-sm:rounded-lg max-sm:py-1.5 max-sm:text-sm"
                                     @click="canReview = true"
                                 >
-                                    <span class="icon-pen text-2xl"></span>
+                                    <span class="icon-pen text-2xl max-sm:text-lg"></span>
 
                                     @lang('shop::app.products.view.reviews.write-a-review')
                                 </div>
@@ -328,7 +328,7 @@
                 </p>
 
                 <button
-                    class="secondary-button min-h-[34px] rounded-lg px-2 py-1 text-sm max-md:rounded-xl"
+                    class="secondary-button min-h-[34px] rounded-lg px-2 py-1 text-sm max-md:rounded-lg"
                     @click="translate"
                 >
                     <!-- Spinner -->
@@ -445,7 +445,7 @@
                     </p>
     
                     <button
-                        class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-2 text-sm max-md:rounded-xl max-sm:px-4 max-sm:py-1.5 max-sm:text-xs"
+                        class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-2 text-sm max-md:rounded-lg max-sm:px-3 max-sm:py-1 max-sm:text-xs"
                         @click="translate"
                     >
                         <!-- Spinner -->
