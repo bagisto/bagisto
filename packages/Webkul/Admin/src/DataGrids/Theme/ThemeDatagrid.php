@@ -49,7 +49,10 @@ class ThemeDatagrid extends DataGrid
         return $queryBuilder;
     }
 
-    public function prepareColumns()
+    /**
+     * Prepare Columns.
+     */
+    public function prepareColumns(): void
     {
         $this->addColumn([
             'index'      => 'id',
@@ -123,7 +126,10 @@ class ThemeDatagrid extends DataGrid
         ]);
     }
 
-    public function prepareActions()
+    /**
+     * Prepare Actions.
+     */
+    public function prepareActions(): void
     {
         if (bouncer()->hasPermission('settings.themes.edit')) {
             $this->addAction([
