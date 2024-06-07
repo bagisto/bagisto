@@ -273,6 +273,7 @@ class CategoryController extends Controller
 
     /**
      * Get all sub categories of specific category.
+     * @return \Webkul\Category\Contracts\Category
      */
     public function getChildTree(int $id)
     {
