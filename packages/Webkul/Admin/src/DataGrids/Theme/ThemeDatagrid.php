@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\DataGrids\Theme;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
@@ -9,10 +10,8 @@ class ThemeDatagrid extends DataGrid
 {
     /**
      * Prepare query builder.
-     *
-     * @return \Illuminate\Database\Query\Builder
      */
-    public function prepareQueryBuilder()
+    public function prepareQueryBuilder(): Builder
     {
         $whereInLocales = core()->getRequestedLocaleCode() === 'all'
             ? core()->getAllLocales()->pluck('code')->toArray()
