@@ -116,6 +116,8 @@
                                 },
                             ],
                         },
+
+                        savedFilterId: null,
                     },
                 };
             },
@@ -127,6 +129,10 @@
                     this.updateDatagrids();
 
                     this.updateExportComponent();
+                },
+
+                'applied.savedFilterId': function (newSavedFilterId, oldSavedFilterId) {
+                    this.updateDatagrids();
                 },
 
                 'applied.massActions.indices': function (newIndices, oldIndices) {
@@ -164,6 +170,8 @@
                             this.applied.sort = currentDatagrid.applied.sort;
 
                             this.applied.filters = currentDatagrid.applied.filters;
+
+                            this.applied.savedFilterId = currentDatagrid.applied.savedFilterId;
 
                             if (urlParams.has('search')) {
                                 let searchAppliedColumn = this.findAppliedColumn('all');
@@ -207,6 +215,10 @@
                     this.applied.filters.columns.forEach(column => {
                         params.filters[column.index] = column.value;
                     });
+
+                    const urlParams = new URLSearchParams(window.location.search);
+
+                    urlParams.forEach((param, key) => params[key] = param);
 
                     this.isLoading = true;
 
@@ -331,9 +343,40 @@
                     ];
 
                     /**
+                     * This will check for empty column values and reset the saved filter ID to ensure the saved filter is not highlighted.
+                     */
+                    const isEmptyColumnValue = this.applied.filters.columns
+                        .filter((column) => column.index !== 'all')
+                        .every((column) => column.value.length === 0);
+
+                    if (isEmptyColumnValue) {
+                        this.applied.savedFilterId = null;
+                    }
+
+                    /**
                      * We need to reset the page on filtering.
                      */
                     this.applied.pagination.page = 1;
+
+                    this.get();
+                },
+
+                /**
+                 * Filter results by the saved filter.
+                 *
+                 * @param {Object} filter
+                 * @returns {void}
+                 */
+                 applySavedFilter(filter) {
+                    if (! filter) {
+                        this.applied.savedFilterId = null;
+
+                        return;
+                    }
+
+                    this.applied = filter.applied;
+
+                    this.applied.savedFilterId = filter.id;
 
                     this.get();
                 },

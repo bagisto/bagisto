@@ -128,7 +128,6 @@
         @stack('scripts')
 
         {!! view_render_event('bagisto.shop.layout.vue-app-mount.before') !!}
-
         <script>
             /**
              * Load event, the purpose of using the event is to mount the application

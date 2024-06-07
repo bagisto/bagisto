@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Fraude',
                     'grand-total'     => 'Total Geral',
                     'id'              => '#:id',
-                    'images'          => 'Imagens',
+                    'items'           => 'Itens',
                     'location'        => 'Localização',
                     'order-id'        => 'ID do Pedido',
                     'pay-by'          => 'Pagar Por - :method',
@@ -3117,6 +3117,7 @@ return [
                 'delete'                        => 'Excluir',
                 'desc'                          => 'decrescente',
                 'edit'                          => 'Editar',
+                'featured'                      => 'Destacado',
                 'filter-title'                  => 'Título',
                 'filters'                       => 'Filtros',
                 'footer-link'                   => 'Links do Rodapé',
@@ -3134,6 +3135,8 @@ return [
                 'limit'                         => 'Limite',
                 'link'                          => 'Link',
                 'name'                          => 'Nome',
+                'no'                            => 'Não',
+                'new'                           => 'Novo',
                 'preview'                       => 'Visualização',
                 'product-carousel'              => 'Carrossel de Produtos',
                 'product-carousel-description'  => 'Apresente produtos de forma elegante com um carrossel de produtos dinâmico e responsivo.',
@@ -3172,6 +3175,7 @@ return [
                     'title'              => 'Título',
                     'update-service'     => 'Atualizar Serviços',
                 ],
+                'yes'                           => 'Sim',
             ],
 
             'create-success' => 'Tema criado com sucesso',
@@ -3444,6 +3448,18 @@ return [
                     'info'  => 'Configure o checkout de convidado, página de visualização de produtos, página de visualização de carrinho, frente de loja, revisão e compartilhamento social de atributos.',
                     'title' => 'Produtos',
 
+                    'search' => [
+                        'admin-mode-info'      => 'A funcionalidade de pesquisa avançada, grade de dados e outras funcionalidades de pesquisa no painel de administração serão baseadas no mecanismo de busca selecionado.',
+                        'admin-mode'           => 'Modo de Pesquisa do Admin',
+                        'database'             => 'Banco de Dados',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Motor de Busca',
+                        'storefront-mode-info' => 'A funcionalidade de pesquisa na loja será baseada no mecanismo de busca selecionado, incluindo a página de categoria, página de pesquisa e outras funcionalidades de pesquisa.',
+                        'storefront-mode'      => 'Modo de Pesquisa da Loja',
+                        'title-info'           => 'Para configurar o mecanismo de busca para pesquisas de produtos, você pode escolher entre um banco de dados e o Elasticsearch com base em suas necessidades. Se você tiver um grande número de produtos, o Elasticsearch é recomendado.',
+                        'title'                => 'Pesquisa',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Permitir Checkout de Convidado',
                         'allow-guest-checkout-hint' => 'Dica: Se ativado, esta opção pode ser configurada especificamente para cada produto.',
@@ -3468,9 +3484,7 @@ return [
                         'buy-now-button-display' => 'Permitir que os clientes comprem diretamente produtos',
                         'cheapest-first'         => 'Mais Baratos Primeiro',
                         'comma-separated'        => 'Separado por Vírgula',
-                        'database'               => 'Banco de dados',
                         'default-list-mode'      => 'Modo de Lista Padrão',
-                        'elastic'                => 'Pesquisa Elástica',
                         'expensive-first'        => 'Mais Caros Primeiro',
                         'from-a-z'               => 'De A a Z',
                         'from-z-a'               => 'De Z a A',
@@ -3479,7 +3493,6 @@ return [
                         'list'                   => 'Lista',
                         'oldest-first'           => 'Mais Antigos Primeiro',
                         'products-per-page'      => 'Produtos por Página',
-                        'search-mode'            => 'Modo de Pesquisa',
                         'sort-by'                => 'Ordenar Por',
                         'title'                  => 'Loja',
                         'title-info'             => 'A loja é a interface voltada para o cliente de uma loja online, apresentando produtos, categorias e navegação para uma experiência de compra sem interrupções.',
@@ -3972,7 +3985,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtrer',
+                    'apply-filters-btn' => 'Aplicar filtros',
+                    'back-btn'          => 'Voltar',
+                    'create-new-filter' => 'Criar novo filtro',
+                    'custom-filters'    => 'Filtros personalizados',
+                    'delete-error'      => 'Algo deu errado ao excluir o filtro, por favor tente novamente.',
+                    'delete-success'    => 'O filtro foi excluído com sucesso.',
+                    'empty-description' => 'Não há filtros selecionados disponíveis para salvar. Por favor, selecione filtros para salvar.',
+                    'empty-title'       => 'Adicionar filtros para salvar',
+                    'name'              => 'Nome',
+                    'quick-filters'     => 'Filtros rápidos',
+                    'save-btn'          => 'Salvar',
+                    'save-filter'       => 'Salvar filtro',
+                    'saved-success'     => 'O filtro foi salvo com sucesso.',
+                    'selected-filters'  => 'Filtros selecionados',
+                    'title'             => 'Filtro',
+                    'update'            => 'Atualizar',
+                    'update-filter'     => 'Atualizar filtro',
+                    'updated-success'   => 'O filtro foi atualizado com sucesso.',
                 ],
 
                 'search' => [
@@ -3982,7 +4012,7 @@ return [
 
             'filters' => [
                 'select' => 'Selecionar.',
-                'title'  => 'Appliquer des filtres',
+                'title'  => ' Filtros',
 
                 'dropdown' => [
                     'searchable' => [

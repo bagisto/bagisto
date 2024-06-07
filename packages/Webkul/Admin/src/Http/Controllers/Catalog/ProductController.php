@@ -324,13 +324,17 @@ class ProductController extends Controller
     {
         $results = [];
 
-        $products = $this->productRepository->searchFromDatabase([
-            'status'               => null,
-            'visible_individually' => null,
-            'name'                 => request('query'),
-            'sort'                 => 'created_at',
-            'order'                => 'desc',
-        ]);
+        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
+            $searchEngine = core()->getConfigData('catalog.products.search.admin_mode');
+        }
+
+        $products = $this->productRepository
+            ->setSearchEngine($searchEngine ?? 'database')
+            ->getAll([
+                'name'  => request('query'),
+                'sort'  => 'created_at',
+                'order' => 'desc',
+            ]);
 
         return ProductResource::collection($products);
     }

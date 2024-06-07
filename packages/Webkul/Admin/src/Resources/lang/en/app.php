@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Fraud',
                     'grand-total'     => 'Grand Total',
                     'id'              => '#:id',
-                    'images'          => 'Images',
+                    'items'           => 'Items',
                     'location'        => 'Location',
                     'order-id'        => 'Order ID',
                     'pay-by'          => 'Pay By - :method',
@@ -3117,6 +3117,7 @@ return [
                 'delete'                        => 'Delete',
                 'desc'                          => 'Desc',
                 'edit'                          => 'Edit',
+                'featured'                      => 'Featured',
                 'filter-title'                  => 'Title',
                 'filters'                       => 'Filters',
                 'footer-link'                   => 'Footer Links',
@@ -3134,6 +3135,8 @@ return [
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Name',
+                'no'                            => 'No',
+                'new'                           => 'New',
                 'preview'                       => 'Preview',
                 'product-carousel'              => 'Product Carousel',
                 'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',
@@ -3172,6 +3175,7 @@ return [
                     'title'              => 'Title',
                     'update-service'     => 'Update Services',
                 ],
+                'yes'                    => 'Yes',
             ],
 
             'create-success' => 'Theme created successfully',
@@ -3444,6 +3448,18 @@ return [
                     'info'  => 'Set guest checkout, product view page, cart view page, store front, review and attribute social share.',
                     'title' => 'Products',
 
+                    'search' => [
+                        'admin-mode-info'      => 'Mega Search, Datagrid, and other search functionalities in the admin panel will be based on the selected search engine.',
+                        'admin-mode'           => 'Admin Search Mode',
+                        'database'             => 'Database',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Search Engine',
+                        'storefront-mode-info' => 'Search functionality on the storefront will be based on the selected search engine including category page, search page, and other search functionalities.',
+                        'storefront-mode'      => 'Storefront Search Mode',
+                        'title-info'           => 'To set up the search engine for product searches, you can choose between a database and Elasticsearch based on your requirements. If you have a large number of products, Elasticsearch is recommended.',
+                        'title'                => 'Search',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Allow Guest Checkout',
                         'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',
@@ -3468,9 +3484,7 @@ return [
                         'buy-now-button-display' => 'Allow customers to directly buy products',
                         'cheapest-first'         => 'Cheapest First',
                         'comma-separated'        => 'Comma Separated',
-                        'database'               => 'Database',
                         'default-list-mode'      => 'Default List Mode',
-                        'elastic'                => 'Elastic Search',
                         'expensive-first'        => 'Expensive First',
                         'from-a-z'               => 'From A-Z',
                         'from-z-a'               => 'From Z-A',
@@ -3479,7 +3493,6 @@ return [
                         'list'                   => 'List',
                         'oldest-first'           => 'Oldest First',
                         'products-per-page'      => 'Products Per Page',
-                        'search-mode'            => 'Search Mode',
                         'sort-by'                => 'Sort By',
                         'title'                  => 'Storefront',
                         'title-info'             => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
@@ -3972,7 +3985,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filter',
+                    'apply-filters-btn' => 'Apply Filters',
+                    'back-btn'          => 'Back',
+                    'create-new-filter' => 'Create New Filter',
+                    'custom-filters'    => 'Custom Filters',
+                    'delete-error'      => 'Something went wrong while deleting the filter, please try again.',
+                    'delete-success'    => 'Filter has been deleted successfully.',
+                    'empty-description' => 'There is no selected filters available to save. Please select filters to save.',
+                    'empty-title'       => 'Add Filters to Save',
+                    'name'              => 'Name',
+                    'quick-filters'     => 'Quick Filters',
+                    'save-btn'          => 'Save',
+                    'save-filter'       => 'Save Filter',
+                    'saved-success'     => 'Filter has been saved successfully.',
+                    'selected-filters'  => 'Selected Filters',
+                    'title'             => 'Filter',
+                    'update'            => 'Update',
+                    'update-filter'     => 'Update Filter',
+                    'updated-success'   => 'Filter has been updated successfully.',
                 ],
 
                 'search' => [
@@ -3982,7 +4012,7 @@ return [
 
             'filters' => [
                 'select' => 'Select',
-                'title'  => 'Apply Filters',
+                'title'  => 'Filters',
 
                 'dropdown' => [
                     'searchable' => [

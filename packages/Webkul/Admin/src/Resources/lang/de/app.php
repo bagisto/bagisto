@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Betrug',
                     'grand-total'     => 'Gesamtsumme',
                     'id'              => 'Bestellnummer #:id',
-                    'images'          => 'Bilder',
+                    'items'           => 'Artikel',
                     'location'        => 'Ort',
                     'order-id'        => 'Bestellnummer',
                     'pay-by'          => 'Bezahlen mit - :method',
@@ -3117,6 +3117,7 @@ return [
                 'delete'                        => 'Löschen',
                 'desc'                          => 'absteigend',
                 'edit'                          => 'Bearbeiten',
+                'featured'                      => 'Hervorgehoben',
                 'filter-title'                  => 'Titel',
                 'filters'                       => 'Filter',
                 'footer-link'                   => 'Fußzeilen-Links',
@@ -3134,6 +3135,8 @@ return [
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Name',
+                'no'                            => 'Nein',
+                'new'                           => 'Neu',
                 'preview'                       => 'Vorschau',
                 'product-carousel'              => 'Produkt Karussell',
                 'product-carousel-description'  => 'Produkte mit einem dynamischen und responsiven Produkt Karussell elegant präsentieren.',
@@ -3172,6 +3175,7 @@ return [
                     'title'              => 'Titel',
                     'update-service'     => 'Dienstleistungen aktualisieren',
                 ],
+                'yes'                           => 'Ja',
             ],
 
             'create-success' => 'Thema erfolgreich erstellt',
@@ -3444,6 +3448,18 @@ return [
                     'info'  => 'Gastkasse einrichten, Produktansichtsseite, Warenkorbansichtsseite, Ladenfront, Bewertung und Attribut-Social-Share festlegen.',
                     'title' => 'Produkte',
 
+                    'search' => [
+                        'admin-mode-info'      => 'Mega-Suche, Datagrid und andere Suchfunktionen im Admin-Panel basieren auf der ausgewählten Suchmaschine.',
+                        'admin-mode'           => 'Admin-Suchmodus',
+                        'database'             => 'Datenbank',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Suchmaschine',
+                        'storefront-mode-info' => 'Die Suchfunktionen auf der Storefront basieren auf der ausgewählten Suchmaschine, einschließlich Kategorieseite, Suchseite und anderen Suchfunktionen.',
+                        'storefront-mode'      => 'Storefront-Suchmodus',
+                        'title-info'           => 'Um die Suchmaschine für Produktsuchen einzurichten, können Sie je nach Ihren Anforderungen zwischen einer Datenbank und Elasticsearch wählen. Wenn Sie eine große Anzahl von Produkten haben, wird Elasticsearch empfohlen.',
+                        'title'                => 'Suche',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Gastbestellung erlauben',
                         'allow-guest-checkout-hint' => 'Hinweis: Wenn aktiviert, kann diese Option für jedes Produkt speziell konfiguriert werden.',
@@ -3468,9 +3484,7 @@ return [
                         'buy-now-button-display' => 'Kunden können Produkte direkt kaufen',
                         'cheapest-first'         => 'Günstigste zuerst',
                         'comma-separated'        => 'Durch Komma getrennt',
-                        'databse'                => 'Datenbank',
                         'default-list-mode'      => 'Standardlistenmodus',
-                        'elastic'                => 'Elastische Suche',
                         'expensive-first'        => 'Teuerste zuerst',
                         'from-a-z'               => 'Von A-Z',
                         'from-z-a'               => 'Von Z-A',
@@ -3479,7 +3493,6 @@ return [
                         'list'                   => 'Liste',
                         'oldest-first'           => 'Älteste zuerst',
                         'products-per-page'      => 'Produkte pro Seite',
-                        'search-mode'            => 'Suchmodus',
                         'sort-by'                => 'Sortieren nach',
                         'title'                  => 'Ladenfront',
                         'title-info'             => 'Die Ladenfront ist die kundenorientierte Benutzeroberfläche eines Online-Shops und präsentiert Produkte, Kategorien und Navigation für ein nahtloses Einkaufserlebnis.',
@@ -3972,7 +3985,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtern',
+                    'apply-filters-btn' => 'Filter anwenden',
+                    'back-btn'          => 'Zurück',
+                    'create-new-filter' => 'Neuen Filter erstellen',
+                    'custom-filters'    => 'Benutzerdefinierte Filter',
+                    'delete-error'      => 'Beim Löschen des Filters ist etwas schief gelaufen, bitte versuchen Sie es erneut.',
+                    'delete-success'    => 'Filter wurde erfolgreich gelöscht.',
+                    'empty-description' => 'Es sind keine ausgewählten Filter zum Speichern verfügbar. Bitte wählen Sie Filter zum Speichern aus.',
+                    'empty-title'       => 'Filter zum Speichern hinzufügen',
+                    'name'              => 'Name',
+                    'quick-filters'     => 'Schnellfilter',
+                    'save-btn'          => 'Speichern',
+                    'save-filter'       => 'Filter speichern',
+                    'saved-success'     => 'Filter wurde erfolgreich gespeichert.',
+                    'selected-filters'  => 'Ausgewählte Filter',
+                    'title'             => 'Filter',
+                    'update'            => 'Aktualisieren',
+                    'update-filter'     => 'Filter aktualisieren',
+                    'updated-success'   => 'Der Filter wurde erfolgreich aktualisiert.',
                 ],
 
                 'search' => [
@@ -3982,7 +4012,7 @@ return [
 
             'filters' => [
                 'select' => 'Auswählen',
-                'title'  => 'Filter anwenden',
+                'title'  => 'Filter',
 
                 'dropdown' => [
                     'searchable' => [

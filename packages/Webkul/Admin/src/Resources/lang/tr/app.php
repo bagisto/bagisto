@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Dolandırıcılık',
                     'grand-total'     => 'Genel Toplam',
                     'id'              => '#:id',
-                    'images'          => 'Görseller',
+                    'items'           => 'Öğeler',
                     'location'        => 'Konum',
                     'order-id'        => 'Sipariş Kimliği',
                     'pay-by'          => 'Şunu İle Ödeme Yap - :method',
@@ -3119,6 +3119,7 @@ return [
                 'delete'                        => 'Sil',
                 'desc'                          => 'azalarak',
                 'edit'                          => 'Düzenle',
+                'featured'                      => 'Öne Çıkan',
                 'filter-title'                  => 'Başlık',
                 'filters'                       => 'Filtreler',
                 'footer-link'                   => 'Alt Bağlantıları',
@@ -3135,6 +3136,8 @@ return [
                 'key-input'                     => 'Anahtar',
                 'limit'                         => 'Sınır',
                 'link'                          => 'Bağlantı',
+                'no'                            => 'Hayır',
+                'new'                           => 'Yeni',
                 'name'                          => 'Ad',
                 'preview'                       => 'Önizleme',
                 'product-carousel'              => 'Ürün Karuseli',
@@ -3174,6 +3177,7 @@ return [
                     'title'              => 'Başlık',
                     'update-service'     => 'Hizmetleri Güncelle',
                 ],
+                'yes'                           => 'Evet',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',
@@ -3445,6 +3449,18 @@ return [
                     'info'  => 'Misafir ödeme, ürün görünüm sayfası, alışveriş sepeti görünüm sayfası, mağaza ön yüzü, inceleme ve özellik sosyal paylaşımını ayarlayın.',
                     'title' => 'Ürünler',
 
+                    'search' => [
+                        'admin-mode-info'      => 'Mega Arama, Veri Tablosu ve diğer arama işlevleri yönetici panelinde seçilen arama motoruna dayanacaktır.',
+                        'admin-mode'           => 'Yönetici Arama Modu',
+                        'database'             => 'Veritabanı',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Arama Motoru',
+                        'storefront-mode-info' => 'Mağaza ön yüzünde kategori sayfası, arama sayfası ve diğer arama işlevleri de dahil olmak üzere seçilen arama motoruna dayalı arama işlevselliği olacaktır.',
+                        'storefront-mode'      => 'Mağaza Arama Modu',
+                        'title-info'           => 'Ürün aramaları için arama motorunu ayarlamak için, gereksinimlerinize bağlı olarak veritabanı ve Elasticsearch arasında seçim yapabilirsiniz. Büyük bir ürün sayınız varsa, Elasticsearch önerilir.',
+                        'title'                => 'Arama',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Misafir Ödemesine İzin Ver',
                         'allow-guest-checkout-hint' => 'İpucu: Açıkken, bu seçenek her ürün için özelleştirilebilir.',
@@ -3469,9 +3485,7 @@ return [
                         'buy-now-button-display' => 'Müşterilere doğrudan ürün satın alma izni ver',
                         'cheapest-first'         => 'En Ucuz İlk',
                         'comma-separated'        => 'Virgülle Ayrılmış',
-                        'database'               => 'Veritabanı',
                         'default-list-mode'      => 'Varsayılan Liste Modu',
-                        'elastic'                => 'Elastik Arama',
                         'expensive-first'        => 'En Pahalı İlk',
                         'from-a-z'               => 'A\'dan Z\'ye',
                         'from-z-a'               => 'Z\'den A\'ya',
@@ -3480,7 +3494,6 @@ return [
                         'list'                   => 'Liste',
                         'oldest-first'           => 'En Eski İlk',
                         'products-per-page'      => 'Sayfa Başına Ürün Sayısı',
-                        'search-mode'            => 'Arama Modu',
                         'sort-by'                => 'Sırala',
                         'title'                  => 'Mağaza ön yüzü',
                         'title-info'             => 'Mağaza ön yüzü, bir çevrimiçi mağazanın müşteri yüzüdür, ürünleri, kategorileri ve sorunsuz bir alışveriş deneyimi için gezinmeyi sergiler.',
@@ -3973,7 +3986,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtrele',
+                    'apply-filters-btn' => 'Filtreleri Uygula',
+                    'back-btn'          => 'Geri',
+                    'create-new-filter' => 'Yeni Filtre Oluştur',
+                    'custom-filters'    => 'Özel Filtreler',
+                    'delete-error'      => 'Filtre silinirken bir hata oluştu, lütfen tekrar deneyin.',
+                    'delete-success'    => 'Filtre başarıyla silindi.',
+                    'empty-description' => 'Kaydedilecek seçili filtre yok. Lütfen kaydetmek için filtreleri seçin.',
+                    'empty-title'       => 'Kaydedilecek Filtreler Ekle',
+                    'name'              => 'Adı',
+                    'quick-filters'     => 'Hızlı Filtreler',
+                    'save-btn'          => 'Kaydet',
+                    'save-filter'       => 'Filtreyi Kaydet',
+                    'saved-success'     => 'Filtre başarıyla kaydedildi.',
+                    'selected-filters'  => 'Seçilen Filtreler',
+                    'title'             => 'Filtre',
+                    'update'            => 'Güncelle',
+                    'update-filter'     => 'Filtreyi güncelle',
+                    'updated-success'   => 'Filtre başarıyla güncellendi.',
                 ],
 
                 'search' => [
@@ -3983,7 +4013,7 @@ return [
 
             'filters' => [
                 'select' => 'Seçiniz',
-                'title'  => 'Filtreleri Uygula',
+                'title'  => 'Filtreler',
 
                 'dropdown' => [
                     'searchable' => [
