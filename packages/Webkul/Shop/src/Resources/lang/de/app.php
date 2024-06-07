@@ -431,6 +431,7 @@ return [
                 'currency'               => 'Währung',
                 'customer-service'       => 'Kundenservice',
                 'email'                  => 'E-Mail',
+                'footer-content'         => 'Fußzeileninhalt',
                 'footer-text'            => '© Copyright 2010 - :current_year, Webkul Software (eingetragen in Indien). Alle Rechte vorbehalten.',
                 'locale'                 => 'Sprache',
                 'newsletter-text'        => 'Bereiten Sie sich auf unseren unterhaltsamen Newsletter vor!',
@@ -522,6 +523,10 @@ return [
                 'next'     => 'Nächster',
                 'previous' => 'Vorheriger',
                 'view-all' => 'Alle anzeigen',
+            ],
+
+            'ratings' => [
+                'title' => 'Bewertungen',
             ],
         ],
 

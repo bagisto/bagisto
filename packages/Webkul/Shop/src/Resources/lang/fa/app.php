@@ -431,6 +431,7 @@ return [
                 'currency'               => 'واحد پول',
                 'customer-service'       => 'خدمات مشتری',
                 'email'                  => 'ایمیل',
+                'footer-content'         => 'محتوای فوتر',
                 'footer-text'            => '© حق تکثیر 2010 - :current_year ، نرم‌افزار Webkul (ثبت‌شده در هند). تمام حقوق محفوظ است.',
                 'locale'                 => 'زبان و محل',
                 'newsletter-text'        => 'برای دریافت خبرنامه‌ی جذاب ما آماده شوید!',
@@ -522,6 +523,10 @@ return [
                 'next'     => 'بعدی',
                 'previous' => 'قبلی',
                 'view-all' => 'نمایش همه',
+            ],
+
+            'ratings' => [
+                'title' => 'امتیازات',
             ],
         ],
 

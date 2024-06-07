@@ -24,14 +24,14 @@
     @endif
 
     @if ($product->downloadable_links->count())
-        <label class="mb-4 mt-8 flex font-medium">
+        <label class="mb-4 mt-8 flex font-medium max-sm:mb-1.5 max-sm:mt-3">
             @lang('shop::app.products.view.type.downloadable.links')
         </label>
 
-        <div class="grid gap-4">
+        <div class="grid gap-4 max-sm:gap-1">
             @foreach ($product->downloadable_links as $link)
-                <div class="flex select-none gap-x-4">
-                    <div class="flex">
+                <div class="flex select-none items-center gap-x-4">
+                    <div class="flex items-center">
                         <v-field
                             type="checkbox"
                             name="links[]"
@@ -50,7 +50,7 @@
                         
                         <label
                             for="{{ $link->id }}"
-                            class="cursor-pointer ltr:ml-1 rtl:mr-1"
+                            class="cursor-pointer max-sm:text-sm ltr:ml-1 rtl:mr-1"
                         >
                             {{ $link->title . ' + ' . core()->currency($link->price) }}
                         </label>
@@ -63,7 +63,7 @@
                         <a 
                             href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
                             target="_blank"
-                            class="text-blue-700"
+                            class="text-blue-700 max-sm:text-sm"
                         >
                             @lang('shop::app.products.view.type.downloadable.sample')
                         </a>

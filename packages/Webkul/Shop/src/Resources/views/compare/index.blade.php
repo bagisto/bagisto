@@ -43,7 +43,7 @@
 
                         {!! view_render_event('bagisto.shop.customers.account.compare.title.before') !!}
 
-                        <h1 class="text-2xl font-medium max-sm:text-xl">
+                        <h1 class="text-2xl font-medium max-sm:text-base">
                             @lang('shop::app.compare.title')
                         </h1>
 
@@ -52,7 +52,7 @@
                         {!! view_render_event('bagisto.shop.customers.account.compare.remove_all.before') !!}
 
                         <div
-                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal max-md:px-3 max-md:py-1.5 max-md:text-xs"
+                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:px-3 max-md:py-1.5 max-md:text-xs"
                             v-if="items.length"
                             @click="removeAll"
                         >

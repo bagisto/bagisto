@@ -431,6 +431,7 @@ return [
                 'currency'               => 'Currency',
                 'customer-service'       => 'Customer Service',
                 'email'                  => 'Email',
+                'footer-content'         => 'Footer Content',
                 'footer-text'            => '© Copyright 2010 - :current_year, Webkul Software (Registered in India). All rights reserved.',
                 'locale'                 => 'Locale',
                 'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
@@ -522,6 +523,10 @@ return [
                 'next'     => 'Next',
                 'previous' => 'Previous',
                 'view-all' => 'View All',
+            ],
+
+            'ratings' => [
+                'title' => 'Ratings',
             ],
         ],
 
