@@ -183,11 +183,15 @@
 
             .summary table {
                 float: right;
-                width: 290px;
+                width: 250px;
                 padding-top: 5px;
                 padding-bottom: 5px;
                 background-color: #E9EFFC;
                 white-space: nowrap;
+            }
+
+            .summary table.rtl {
+                width: 280px;
             }
 
             .summary table.rtl {
@@ -200,6 +204,10 @@
 
             .summary table td:nth-child(2) {
                 text-align: center;
+            }
+
+            .summary table td:nth-child(3) {
+                text-align: right;
             }
         </style>
     </head>
