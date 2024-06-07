@@ -54,7 +54,7 @@
                                 <x-shop::form.control-group class="!mb-0">
                                     <x-shop::form.control-group.control
                                         type="text"
-                                        class="px-6 py-4 max-md:!mb-0 max-md:!p-2.5"
+                                        class="px-6 py-4 max-md:!mb-0 max-md:!p-2"
                                         name="code"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.coupon.enter-your-code')"
@@ -82,7 +82,7 @@
                                     </div>
 
                                     <x-shop::button
-                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:max-w-[153px] max-md:rounded-xl"
+                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:max-w-[153px] max-md:rounded-lg max-md:py-2"
                                         :title="trans('shop::app.checkout.coupon.button-title')"
                                         ::loading="isStoring"
                                         ::disabled="isStoring"
@@ -101,14 +101,14 @@
                     v-if="cart.coupon_code"
                 >
                     <p 
-                        class="text-base font-medium text-navyBlue"
+                        class="text-base font-medium text-navyBlue max-sm:text-sm"
                         title="@lang('shop::app.checkout.coupon.applied')"
                     >
                         "@{{ cart.coupon_code }}"
                     </p>
 
                     <span 
-                        class="icon-cancel cursor-pointer text-2xl"
+                        class="icon-cancel cursor-pointer text-2xl max-sm:text-base"
                         title="@lang('shop::app.checkout.coupon.remove')"
                         @click="destroyCoupon"
                     >

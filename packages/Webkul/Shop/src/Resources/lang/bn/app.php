@@ -426,6 +426,7 @@ return [
                 'currency'               => 'মুদ্রা',
                 'customer-service'       => 'গ্রাহক সেবা',
                 'email'                  => 'ইমেইল',
+                'footer-content'         => 'ফুটারের সামগ্রী',
                 'footer-text'            => '© কপিরাইট 2010 - :current_year, Webkul Software (ভারতে নিবন্ধিত)। সমস্ত অধিকার সংরক্ষিত।',
                 'locale'                 => 'লোকেল',
                 'newsletter-text'        => 'আমাদের মজাদার নিউজলেটারের জন্য প্রস্তুত থাকুন!',
@@ -517,6 +518,10 @@ return [
                 'next'     => 'পরবর্তী',
                 'previous' => 'পূর্ববর্তী',
                 'view-all' => 'সব দেখুন',
+            ],
+
+            'ratings' => [
+                'title' => 'রেটিংস',
             ],
         ],
 
