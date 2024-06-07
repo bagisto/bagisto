@@ -375,9 +375,20 @@ class ProductRepository extends Repository
 
                         $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($alias, $attribute) {
                             $join->on('products.id', '=', $alias.'.product_id')
-                                ->where($alias.'.attribute_id', $attribute->id)
-                                ->where($alias.'.channel', core()->getRequestedChannelCode())
-                                ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                ->where($alias.'.attribute_id', $attribute->id);
+
+                            if ($attribute->value_per_channel) {
+                                if ($attribute->value_per_locale) {
+                                    $join->where($alias.'.channel', core()->getRequestedChannelCode())
+                                        ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                } else {
+                                    $join->where($alias.'.channel', core()->getRequestedChannelCode());
+                                }
+                            } else {
+                                if ($attribute->value_per_locale) {
+                                    $join->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                }
+                            }
                         })
                             ->orderBy($alias.'.'.$attribute->column_name, $sortOptions['order']);
                     }
