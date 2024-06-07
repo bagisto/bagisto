@@ -3,6 +3,7 @@
 namespace Webkul\Core\Traits;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+use Mpdf\Mpdf;
 use Illuminate\Support\Str;
 
 trait PDFHandler
@@ -20,9 +21,28 @@ trait PDFHandler
 
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
 
+
+        if (($direction = core()->getCurrentLocale()->direction) == 'rtl') {
+            $mPDF = new Mpdf([
+                'margin_left' => 0,
+                'margin_right' => 0,
+                'margin_top' => 0,
+                'margin_bottom' => 0,
+            ]);
+            $mPDF->SetDirectionality($direction);
+            $mPDF->SetDisplayMode('fullpage');
+            $mPDF->WriteHTML($this->adjustArabicAndPersianContent($html));
+
+            return response()->streamDownload(
+                fn () => print($mPDF->Output('', 'S')),
+                app()->getLocale().'-'.$fileName.'.pdf'
+            );
+        }
+
         return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
-            ->setPaper('a4')
-            ->download($fileName.'.pdf');
+            ->setPaper('A4', 'portrait')
+            ->set_option('defaultFont', 'Courier')
+            ->download(app()->getLocale().'-'.$fileName.'.pdf');
     }
 
     /**
