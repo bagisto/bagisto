@@ -29,6 +29,7 @@ class Column
         public bool $filterable = false,
         public ?string $filterableType = null,
         public array $filterableOptions = [],
+        public bool $allowMultipleValues = true,
         public bool $sortable = false,
         public mixed $closure = null,
     ) {
@@ -51,7 +52,7 @@ class Column
      * Define the database column name. Initially, it will match the index. However, after adding an alias,
      * the column name may change.
      */
-    public function setDatabaseColumnName(?string $databaseColumnName = null): void
+    public function setDatabaseColumnName(mixed $databaseColumnName = null): void
     {
         $this->databaseColumnName = $databaseColumnName ?: $this->index;
     }
@@ -107,37 +108,38 @@ class Column
         bool $filterable = false,
         ?string $filterableType = null,
         array $filterableOptions = [],
+        bool $allowMultipleValues = true,
         bool $sortable = false,
         mixed $closure = null,
     ) {
         if ($type === ColumnTypeEnum::STRING->value) {
-            return new Text($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+            return new Text($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
         }
 
         if ($type === ColumnTypeEnum::INTEGER->value) {
-            return new Integer($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+            return new Integer($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
         }
 
         if ($type === ColumnTypeEnum::FLOAT->value) {
-            return new Decimal($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+            return new Decimal($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
         }
 
         if ($type === ColumnTypeEnum::BOOLEAN->value) {
-            return new Boolean($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+            return new Boolean($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
         }
 
         if ($type === ColumnTypeEnum::DATE->value) {
-            return new Date($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+            return new Date($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
         }
 
         if ($type === ColumnTypeEnum::DATETIME->value) {
-            return new Datetime($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+            return new Datetime($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
         }
 
         if ($type === ColumnTypeEnum::AGGREGATE->value) {
-            return new Aggregate($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+            return new Aggregate($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
         }
 
-        return new Text($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $sortable, $closure);
+        return new Text($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
     }
 }

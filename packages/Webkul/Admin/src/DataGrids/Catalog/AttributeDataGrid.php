@@ -36,12 +36,12 @@ class AttributeDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'id',
-            'label'      => trans('admin::app.catalog.attributes.index.datagrid.id'),
-            'type'       => 'integer',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'                 => 'id',
+            'label'                 => trans('admin::app.catalog.attributes.index.datagrid.id'),
+            'type'                  => 'integer',
+            'searchable'            => true,
+            'filterable'            => true,
+            'sortable'              => true,
         ]);
 
         $this->addColumn([
@@ -115,16 +115,16 @@ class AttributeDataGrid extends DataGrid
                     'value' => 'checkbox',
                 ],
             ],
-            'sortable'   => true,
+            'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'is_required',
-            'label'      => trans('admin::app.catalog.attributes.index.datagrid.required'),
-            'type'       => 'boolean',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'                 => 'is_required',
+            'label'                 => trans('admin::app.catalog.attributes.index.datagrid.required'),
+            'type'                  => 'boolean',
+            'searchable'            => true,
+            'filterable'            => true,
+            'sortable'              => true,
         ]);
 
         $this->addColumn([
@@ -154,43 +154,15 @@ class AttributeDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
-        // $this->addColumn([
-        //     'index'      => 'created_at',
-        //     'label'      => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
-        //     'type'       => 'date',
-        //     'searchable' => true,
-        //     'filterable' => true,
-        //     'sortable'   => true,
-        // ]);
-
-        // $this->addColumn([
-        //     'index'           => 'created_at',
-        //     'label'           => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
-        //     'type'            => 'date',
-        //     'searchable'      => true,
-        //     'filterable'      => true,
-        //     'filterable_type' => 'date_range',
-        //     'sortable'        => true,
-        // ]);
-
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
-            'type'       => 'datetime',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'           => 'created_at',
+            'label'           => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
+            'type'            => 'date',
+            'searchable'      => true,
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
-
-        // $this->addColumn([
-        //     'index'           => 'created_at',
-        //     'label'           => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
-        //     'type'            => 'datetime',
-        //     'searchable'      => true,
-        //     'filterable'      => true,
-        //     'filterable_type' => 'datetime_range',
-        //     'sortable'        => true,
-        // ]);
     }
 
     /**

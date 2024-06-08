@@ -39,6 +39,12 @@ class Boolean extends Column
     {
         if ($this->filterableType === FilterTypeEnum::DROPDOWN->value) {
             return $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
+                if (is_string($requestedValues)) {
+                    $scopeQueryBuilder->orWhere($this->getDatabaseColumnName(), $requestedValues);
+
+                    return;
+                }
+
                 foreach ($requestedValues as $value) {
                     $scopeQueryBuilder->orWhere($this->getDatabaseColumnName(), $value);
                 }

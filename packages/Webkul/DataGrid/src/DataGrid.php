@@ -146,6 +146,7 @@ abstract class DataGrid
             filterable: $column['filterable'] ?? false,
             filterableType: $column['filterable_type'] ?? null,
             filterableOptions: $column['filterable_options'] ?? [],
+            allowMultipleValues: $column['allow_multiple_values'] ?? true,
             sortable: $column['sortable'] ?? false,
             closure: $column['closure'] ?? null
         );
