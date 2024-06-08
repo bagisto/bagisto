@@ -14,9 +14,9 @@ use Webkul\DataGrid\Enums\ColumnTypeEnum;
 class Column
 {
     /**
-     * Fully qualified database column name.
+     * Fully qualified table's column name.
      */
-    protected $databaseColumnName;
+    protected $columnName;
 
     /**
      * Create a column instance.
@@ -41,7 +41,7 @@ class Column
      */
     public function init(): void
     {
-        $this->setDatabaseColumnName();
+        $this->setColumnName();
 
         $this->setFilterableType();
 
@@ -49,20 +49,20 @@ class Column
     }
 
     /**
-     * Define the database column name. Initially, it will match the index. However, after adding an alias,
+     * Define the table's column name. Initially, it will match the index. However, after adding an alias,
      * the column name may change.
      */
-    public function setDatabaseColumnName(mixed $databaseColumnName = null): void
+    public function setColumnName(mixed $columnName = null): void
     {
-        $this->databaseColumnName = $databaseColumnName ?: $this->index;
+        $this->columnName = $columnName ?: $this->index;
     }
 
     /**
-     * Get the database column name.
+     * Get the table's column name.
      */
-    public function getDatabaseColumnName(): mixed
+    public function getColumnName(): mixed
     {
-        return $this->databaseColumnName;
+        return $this->columnName;
     }
 
     /**

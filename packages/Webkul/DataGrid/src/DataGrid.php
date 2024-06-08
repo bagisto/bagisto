@@ -221,7 +221,7 @@ abstract class DataGrid
 
         foreach ($this->columns as $column) {
             if ($column->index === $datagridColumn) {
-                $column->setDatabaseColumnName($queryColumn);
+                $column->setColumnName($queryColumn);
 
                 break;
             }
@@ -345,7 +345,7 @@ abstract class DataGrid
                                 ColumnTypeEnum::BOOLEAN->value,
                                 ColumnTypeEnum::AGGREGATE->value,
                             ]))
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%'));
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getColumnName(), 'LIKE', '%'.$value.'%'));
                     }
                 });
             } else {

@@ -15,26 +15,26 @@ class Text extends Column
         if ($this->filterableType === FilterTypeEnum::DROPDOWN->value) {
             return $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
                 if (is_string($requestedValues)) {
-                    $scopeQueryBuilder->orWhere($this->getDatabaseColumnName(), $requestedValues);
+                    $scopeQueryBuilder->orWhere($this->getColumnName(), $requestedValues);
 
                     return;
                 }
 
                 foreach ($requestedValues as $value) {
-                    $scopeQueryBuilder->orWhere($this->getDatabaseColumnName(), $value);
+                    $scopeQueryBuilder->orWhere($this->getColumnName(), $value);
                 }
             });
         }
 
         return $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
             if (is_string($requestedValues)) {
-                $scopeQueryBuilder->orWhere($this->getDatabaseColumnName(), 'LIKE', '%'.$requestedValues.'%');
+                $scopeQueryBuilder->orWhere($this->getColumnName(), 'LIKE', '%'.$requestedValues.'%');
 
                 return;
             }
 
             foreach ($requestedValues as $value) {
-                $scopeQueryBuilder->orWhere($this->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
+                $scopeQueryBuilder->orWhere($this->getColumnName(), 'LIKE', '%'.$value.'%');
             }
         });
     }

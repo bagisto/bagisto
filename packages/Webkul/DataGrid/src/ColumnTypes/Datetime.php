@@ -30,7 +30,7 @@ class Datetime extends Column
             }
 
             foreach ($requestedDates as $value) {
-                $scopeQueryBuilder->whereBetween($this->getDatabaseColumnName(), [$value[0] ?? '', $value[1] ?? '']);
+                $scopeQueryBuilder->whereBetween($this->getColumnName(), [$value[0] ?? '', $value[1] ?? '']);
             }
         });
     }
