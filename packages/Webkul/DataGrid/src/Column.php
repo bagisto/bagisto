@@ -3,6 +3,7 @@
 namespace Webkul\DataGrid;
 
 use Webkul\DataGrid\Enums\ColumnTypeEnum;
+use Webkul\DataGrid\Exceptions\InvalidColumnException;
 
 class Column
 {
@@ -293,10 +294,30 @@ class Column
     }
 
     /**
+     * Validate the column.
+     */
+    public static function validate(array $column): void
+    {
+        if (empty($column['index'])) {
+            throw new InvalidColumnException('The `index` key is required. Ensure that the `index` key is present in all calls to the `addColumn` method.');
+        }
+
+        if (empty($column['label'])) {
+            throw new InvalidColumnException('The `label` key is required. Ensure that the `label` key is present in all calls to the `addColumn` method.');
+        }
+
+        if (empty($column['type'])) {
+            throw new InvalidColumnException('The `type` key is required. Ensure that the `type` key is present in all calls to the `addColumn` method.');
+        }
+    }
+
+    /**
      * Resolve the column type class.
      */
     public static function resolveType(array $column): self
     {
+        self::validate($column);
+
         $columnTypeClass = ColumnTypeEnum::getClassName($column['type']);
 
         return new $columnTypeClass($column);

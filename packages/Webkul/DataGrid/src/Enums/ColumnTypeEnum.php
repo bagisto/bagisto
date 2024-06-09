@@ -9,6 +9,7 @@ use Webkul\DataGrid\ColumnTypes\Datetime;
 use Webkul\DataGrid\ColumnTypes\Decimal;
 use Webkul\DataGrid\ColumnTypes\Integer;
 use Webkul\DataGrid\ColumnTypes\Text;
+use Webkul\DataGrid\Exceptions\InvalidColumnTypeException;
 
 enum ColumnTypeEnum: string
 {
@@ -60,6 +61,7 @@ enum ColumnTypeEnum: string
             self::DATE->value      => Date::class,
             self::DATETIME->value  => Datetime::class,
             self::AGGREGATE->value => Aggregate::class,
+            default                => throw new InvalidColumnTypeException("Invalid column type: {$type}"),
         };
     }
 }
