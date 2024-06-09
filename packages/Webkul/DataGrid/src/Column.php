@@ -2,17 +2,60 @@
 
 namespace Webkul\DataGrid;
 
-use Webkul\DataGrid\ColumnTypes\Aggregate;
-use Webkul\DataGrid\ColumnTypes\Boolean;
-use Webkul\DataGrid\ColumnTypes\Date;
-use Webkul\DataGrid\ColumnTypes\Datetime;
-use Webkul\DataGrid\ColumnTypes\Decimal;
-use Webkul\DataGrid\ColumnTypes\Integer;
-use Webkul\DataGrid\ColumnTypes\Text;
 use Webkul\DataGrid\Enums\ColumnTypeEnum;
 
 class Column
 {
+    /**
+     * Column's index.
+     */
+    protected string $index;
+
+    /**
+     * Column's label.
+     */
+    protected string $label;
+
+    /**
+     * Column's type.
+     */
+    protected string $type;
+
+    /**
+     * Column's searchability.
+     */
+    protected bool $searchable = false;
+
+    /**
+     * Column's filterability.
+     */
+    protected bool $filterable = false;
+
+    /**
+     * Column's filterable type.
+     */
+    protected ?string $filterableType = null;
+
+    /**
+     * Column's filterable options.
+     */
+    protected array $filterableOptions = [];
+
+    /**
+     * Column's allow multiple values.
+     */
+    protected bool $allowMultipleValues = true;
+
+    /**
+     * Column's sortability.
+     */
+    protected bool $sortable = true;
+
+    /**
+     * Column's closure.
+     */
+    protected mixed $closure = null;
+
     /**
      * Fully qualified table's column name.
      */
@@ -21,56 +64,125 @@ class Column
     /**
      * Create a column instance.
      */
-    public function __construct(
-        public string $index,
-        public string $label,
-        public string $type,
-        public bool $searchable = false,
-        public bool $filterable = false,
-        public ?string $filterableType = null,
-        public array $filterableOptions = [],
-        public bool $allowMultipleValues = true,
-        public bool $sortable = false,
-        public mixed $closure = null,
-    ) {
-        $this->init();
+    public function __construct(array $column)
+    {
+        $this->init($column);
     }
 
     /**
      * Initialize all necessary settings for the columns.
      */
-    public function init(): void
+    public function init(array $column): void
     {
-        $this->setColumnName();
+        $this->setIndex($column['index']);
 
-        $this->setFilterableType();
+        $this->setLabel($column['label']);
 
-        $this->setFilterableOptions();
+        $this->setType($column['type']);
+
+        $this->setSearchable($column['searchable'] ?? $this->getSearchable());
+
+        $this->setFilterable($column['filterable'] ?? $this->getFilterable());
+
+        $this->setFilterableType($column['filterable_type'] ?? $this->getFilterableType());
+
+        $this->setFilterableOptions($column['filterable_options'] ?? $this->getFilterableOptions());
+
+        $this->setAllowMultipleValues($column['allow_multiple_values'] ?? $this->getAllowMultipleValues());
+
+        $this->setSortable($column['sortable'] ?? $this->getSortable());
+
+        $this->setClosure($column['closure'] ?? $this->getClosure());
+
+        $this->setColumnName($this->getIndex());
     }
 
     /**
-     * Define the table's column name. Initially, it will match the index. However, after adding an alias,
-     * the column name may change.
+     * Set index.
      */
-    public function setColumnName(mixed $columnName = null): void
+    public function setIndex(string $index): void
     {
-        $this->columnName = $columnName ?: $this->index;
+        $this->index = $index;
     }
 
     /**
-     * Get the table's column name.
+     * Get index.
      */
-    public function getColumnName(): mixed
+    public function getIndex(): string
     {
-        return $this->columnName;
+        return $this->index;
+    }
+
+    /**
+     * Set label.
+     */
+    public function setLabel(string $label): void
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * Get label.
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * Set type.
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get type.
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set searchable.
+     */
+    public function setSearchable(bool $searchable): void
+    {
+        $this->searchable = $searchable;
+    }
+
+    /**
+     * Get searchable.
+     */
+    public function getSearchable(): bool
+    {
+        return $this->searchable;
+    }
+
+    /**
+     * Set filterable.
+     */
+    public function setFilterable(bool $filterable): void
+    {
+        $this->filterable = $filterable;
+    }
+
+    /**
+     * Get filterable.
+     */
+    public function getFilterable(): bool
+    {
+        return $this->filterable;
     }
 
     /**
      * Set filterable type.
      */
-    public function setFilterableType(?string $filterableType = null): void
+    public function setFilterableType(?string $filterableType): void
     {
-        $this->filterableType = $filterableType ?: $this->getFilterableType();
+        $this->filterableType = $filterableType;
     }
 
     /**
@@ -84,9 +196,9 @@ class Column
     /**
      * Set filterable options.
      */
-    public function setFilterableOptions(?array $filterableOptions = null): void
+    public function setFilterableOptions(array $filterableOptions): void
     {
-        $this->filterableOptions = $filterableOptions ?: $this->getFilterableOptions();
+        $this->filterableOptions = $filterableOptions;
     }
 
     /**
@@ -98,48 +210,95 @@ class Column
     }
 
     /**
-     * Resolve the column type.
+     * Set allow multiple values.
      */
-    public static function resolve(
-        string $index,
-        string $label,
-        string $type,
-        bool $searchable = false,
-        bool $filterable = false,
-        ?string $filterableType = null,
-        array $filterableOptions = [],
-        bool $allowMultipleValues = true,
-        bool $sortable = false,
-        mixed $closure = null,
-    ) {
-        if ($type === ColumnTypeEnum::STRING->value) {
-            return new Text($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
-        }
+    public function setAllowMultipleValues(bool $allowMultipleValues): void
+    {
+        $this->allowMultipleValues = $allowMultipleValues;
+    }
 
-        if ($type === ColumnTypeEnum::INTEGER->value) {
-            return new Integer($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
-        }
+    /**
+     * Get allow multiple values.
+     */
+    public function getAllowMultipleValues(): bool
+    {
+        return $this->allowMultipleValues;
+    }
 
-        if ($type === ColumnTypeEnum::FLOAT->value) {
-            return new Decimal($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
-        }
+    /**
+     * Set sortable.
+     */
+    public function setSortable(?bool $sortable = null): void
+    {
+        $this->sortable = $sortable;
+    }
 
-        if ($type === ColumnTypeEnum::BOOLEAN->value) {
-            return new Boolean($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
-        }
+    /**
+     * Get sortable.
+     */
+    public function getSortable(): bool
+    {
+        return $this->sortable;
+    }
 
-        if ($type === ColumnTypeEnum::DATE->value) {
-            return new Date($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
-        }
+    /**
+     * Set closure.
+     */
+    public function setClosure(mixed $closure): void
+    {
+        $this->closure = $closure;
+    }
 
-        if ($type === ColumnTypeEnum::DATETIME->value) {
-            return new Datetime($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
-        }
+    /**
+     * Get closure.
+     */
+    public function getClosure(): mixed
+    {
+        return $this->closure;
+    }
 
-        if ($type === ColumnTypeEnum::AGGREGATE->value) {
-            return new Aggregate($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
-        }
+    /**
+     * Define the table's column name. Initially, it will match the index. However, after adding an alias,
+     * the column name may change.
+     */
+    public function setColumnName(mixed $columnName): void
+    {
+        $this->columnName = $columnName;
+    }
 
-        return new Text($index, $label, $type, $searchable, $filterable, $filterableType, $filterableOptions, $allowMultipleValues, $sortable, $closure);
+    /**
+     * Get the table's column name.
+     */
+    public function getColumnName(): mixed
+    {
+        return $this->columnName;
+    }
+
+    /**
+     * To array.
+     */
+    public function toArray(): array
+    {
+        return [
+            'index'                 => $this->getIndex(),
+            'label'                 => $this->getLabel(),
+            'type'                  => $this->getType(),
+            'searchable'            => $this->getSearchable(),
+            'filterable'            => $this->getFilterable(),
+            'filterable_type'       => $this->getFilterableType(),
+            'filterable_options'    => $this->getFilterableOptions(),
+            'allow_multiple_values' => $this->getAllowMultipleValues(),
+            'sortable'              => $this->getSortable(),
+        ];
+    }
+
+    /**
+     * Resolve the column type class.
+     */
+    public static function resolveType(array $column): self
+    {
+        $columnTypeClass = ColumnTypeEnum::getClassName($column['type']);
+
+        return new $columnTypeClass($column);
     }
 }

@@ -4,6 +4,7 @@ namespace Webkul\DataGrid\ColumnTypes;
 
 use Webkul\DataGrid\Column;
 use Webkul\DataGrid\Enums\FilterTypeEnum;
+use Webkul\DataGrid\Exceptions\InvalidColumnException;
 
 class Boolean extends Column
 {
@@ -51,6 +52,6 @@ class Boolean extends Column
             });
         }
 
-        throw new \Exception('Bool filter will only work with dropdown type.');
+        throw new InvalidColumnException('Boolean filters will only work with dropdown type.');
     }
 }

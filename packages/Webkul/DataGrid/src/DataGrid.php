@@ -41,6 +41,13 @@ abstract class DataGrid
     protected $itemsPerPage = 10;
 
     /**
+     * Per page options.
+     *
+     * @var array
+     */
+    protected $perPageOptions = [10, 20, 30, 40, 50];
+
+    /**
      * Columns.
      *
      * @var array
@@ -138,18 +145,7 @@ abstract class DataGrid
     {
         $this->dispatchEvent('columns.add.before', [$this, $column]);
 
-        $this->columns[] = Column::resolve(
-            index: $column['index'],
-            label: $column['label'],
-            type: $column['type'],
-            searchable: $column['searchable'] ?? false,
-            filterable: $column['filterable'] ?? false,
-            filterableType: $column['filterable_type'] ?? null,
-            filterableOptions: $column['filterable_options'] ?? [],
-            allowMultipleValues: $column['allow_multiple_values'] ?? true,
-            sortable: $column['sortable'] ?? false,
-            closure: $column['closure'] ?? null
-        );
+        $this->columns[] = Column::resolveType($column);
 
         $this->dispatchEvent('columns.add.after', [$this, $this->columns[count($this->columns) - 1]]);
     }
@@ -220,7 +216,7 @@ abstract class DataGrid
         $this->dispatchEvent('filters.add.before', [$this, $datagridColumn, $queryColumn]);
 
         foreach ($this->columns as $column) {
-            if ($column->index === $datagridColumn) {
+            if ($column->getIndex() === $datagridColumn) {
                 $column->setColumnName($queryColumn);
 
                 break;
@@ -341,7 +337,7 @@ abstract class DataGrid
                 $this->queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
                     foreach ($requestedValues as $value) {
                         collect($this->columns)
-                            ->filter(fn ($column) => $column->searchable && ! in_array($column->type, [
+                            ->filter(fn ($column) => $column->getSearchable() && ! in_array($column->getType(), [
                                 ColumnTypeEnum::BOOLEAN->value,
                                 ColumnTypeEnum::AGGREGATE->value,
                             ]))
@@ -350,7 +346,7 @@ abstract class DataGrid
                 });
             } else {
                 collect($this->columns)
-                    ->first(fn ($c) => $c->index === $requestedColumn)
+                    ->first(fn ($column) => $column->getIndex() === $requestedColumn)
                     ->processFilter($this->queryBuilder, $requestedValues);
             }
         }
@@ -462,18 +458,46 @@ abstract class DataGrid
     }
 
     /**
-     * Format data.
+     * Format columns.
      */
-    protected function formatData(): array
+    protected function formatColumns(): array
     {
-        $paginator = $this->paginator->toArray();
+        return collect($this->columns)
+            ->map(fn ($column) => $column->toArray())
+            ->toArray();
+    }
 
-        foreach ($paginator['data'] as $record) {
+    /**
+     * Format actions.
+     */
+    protected function formatActions(): array
+    {
+        return collect($this->actions)
+            ->map(fn ($action) => $action->toArray())
+            ->toArray();
+    }
+
+    /**
+     * Format mass actions.
+     */
+    protected function formatMassActions(): array
+    {
+        return collect($this->massActions)
+            ->map(fn ($massAction) => $massAction->toArray())
+            ->toArray();
+    }
+
+    /**
+     * Format records.
+     */
+    protected function formatRecords($records): mixed
+    {
+        foreach ($records as $record) {
             $record = $this->sanitizeRow($record);
 
             foreach ($this->columns as $column) {
-                if ($closure = $column->closure) {
-                    $record->{$column->index} = $closure($record);
+                if ($closure = $column->getClosure()) {
+                    $record->{$column->getIndex()} = $closure($record);
 
                     $record->is_closure = true;
                 }
@@ -494,18 +518,28 @@ abstract class DataGrid
             }
         }
 
+        return $records;
+    }
+
+    /**
+     * Format data.
+     */
+    protected function formatData(): array
+    {
+        $paginator = $this->paginator->toArray();
+
         return [
             'id'           => Crypt::encryptString(get_called_class()),
-            'columns'      => $this->columns,
-            'actions'      => $this->actions,
-            'mass_actions' => $this->massActions,
-            'records'      => $paginator['data'],
+            'columns'      => $this->formatColumns(),
+            'actions'      => $this->formatActions(),
+            'mass_actions' => $this->formatMassActions(),
+            'records'      => $this->formatRecords($paginator['data']),
             'meta'         => [
                 'primary_column'   => $this->primaryColumn,
                 'from'             => $paginator['from'],
                 'to'               => $paginator['to'],
                 'total'            => $paginator['total'],
-                'per_page_options' => [10, 20, 30, 40, 50],
+                'per_page_options' => $this->perPageOptions,
                 'per_page'         => $paginator['per_page'],
                 'current_page'     => $paginator['current_page'],
                 'last_page'        => $paginator['last_page'],

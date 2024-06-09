@@ -144,7 +144,7 @@
                                                 <!-- Boolean -->
                                                 <div v-if="column.type === 'boolean'">
                                                     <!-- Dropdown -->
-                                                    <template v-if="column.filterableType === 'dropdown'">
+                                                    <template v-if="column.filterable_type === 'dropdown'">
                                                         <div class="flex items-center justify-between">
                                                             <p
                                                                 class="text-xs font-medium text-gray-800 dark:text-white"
@@ -184,7 +184,7 @@
 
                                                                 <x-slot:menu>
                                                                     <x-admin::dropdown.menu.item
-                                                                        v-for="option in column.filterableOptions"
+                                                                        v-for="option in column.filterable_options"
                                                                         v-text="option.label"
                                                                         @click="addFilter(option.value, column)"
                                                                     >
@@ -195,13 +195,13 @@
 
                                                         <div class="mb-4 flex flex-wrap gap-2">
                                                             <!-- If Allow Multiple Values -->
-                                                            <template v-if="column.allowMultipleValues">
+                                                            <template v-if="column.allow_multiple_values">
                                                                 <p
                                                                     class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                                 >
                                                                     <!-- Retrieving the label from the options based on the applied column value. -->
-                                                                    <span v-text="column.filterableOptions.find((option => option.value == appliedColumnValue)).label"></span>
+                                                                    <span v-text="column.filterable_options.find((option => option.value == appliedColumnValue)).label"></span>
 
                                                                     <span
                                                                         class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -218,7 +218,7 @@
                                                                     v-if="getAppliedColumnValues(column.index) !== ''"
                                                                 >
                                                                     <!-- Retrieving the label from the options based on the applied column value. -->
-                                                                    <span v-text="column.filterableOptions.find((option => option.value == getAppliedColumnValues(column.index))).label"></span>
+                                                                    <span v-text="column.filterable_options.find((option => option.value == getAppliedColumnValues(column.index))).label"></span>
 
                                                                     <span
                                                                         class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -237,7 +237,7 @@
                                                 <!-- Date -->
                                                 <div v-else-if="column.type === 'date'">
                                                     <!-- Range -->
-                                                    <template v-if="column.filterableType === 'date_range'">
+                                                    <template v-if="column.filterable_type === 'date_range'">
                                                         <div class="flex items-center justify-between">
                                                             <p
                                                                 class="text-xs font-medium text-gray-800 dark:text-white"
@@ -261,7 +261,7 @@
                                                         <div class="mt-1.5 grid grid-cols-2 gap-1.5">
                                                             <p
                                                                 class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
-                                                                v-for="option in column.filterableOptions"
+                                                                v-for="option in column.filterable_options"
                                                                 v-text="option.label"
                                                                 @click="addFilter(
                                                                     $event,
@@ -380,7 +380,7 @@
                                                 <!-- Date Time -->
                                                 <div v-else-if="column.type === 'datetime'">
                                                     <!-- Range -->
-                                                    <template v-if="column.filterableType === 'datetime_range'">
+                                                    <template v-if="column.filterable_type === 'datetime_range'">
                                                         <div class="flex items-center justify-between">
                                                             <p
                                                                 class="text-xs font-medium text-gray-800 dark:text-white"
@@ -404,7 +404,7 @@
                                                         <div class="my-4 grid grid-cols-2 gap-1.5">
                                                             <p
                                                                 class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300 dark:hover:border-gray-400"
-                                                                v-for="option in column.filterableOptions"
+                                                                v-for="option in column.filterable_options"
                                                                 v-text="option.label"
                                                                 @click="addFilter(
                                                                     $event,
@@ -523,7 +523,7 @@
                                                 <!-- Rest -->
                                                 <div v-else>
                                                     <!-- Dropdown -->
-                                                    <template v-if="column.filterableType === 'dropdown'">
+                                                    <template v-if="column.filterable_type === 'dropdown'">
                                                         <div class="flex items-center justify-between">
                                                             <p
                                                                 class="text-xs font-medium text-gray-800 dark:text-white"
@@ -563,7 +563,7 @@
 
                                                                 <x-slot:menu>
                                                                     <x-admin::dropdown.menu.item
-                                                                        v-for="option in column.filterableOptions"
+                                                                        v-for="option in column.filterable_options"
                                                                         v-text="option.label"
                                                                         @click="addFilter(option.value, column)"
                                                                     >
@@ -574,13 +574,13 @@
 
                                                         <div class="mb-4 flex flex-wrap gap-2">
                                                             <!-- If Allow Multiple Values -->
-                                                            <template v-if="column.allowMultipleValues">
+                                                            <template v-if="column.allow_multiple_values">
                                                                 <p
                                                                     class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                                 >
                                                                     <!-- Retrieving the label from the options based on the applied column value. -->
-                                                                    <span v-text="column.filterableOptions.find((option => option.value == appliedColumnValue)).label"></span>
+                                                                    <span v-text="column.filterable_options.find((option => option.value == appliedColumnValue)).label"></span>
 
                                                                     <span
                                                                         class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -597,7 +597,7 @@
                                                                     v-if="getAppliedColumnValues(column.index) !== ''"
                                                                 >
                                                                     <!-- Retrieving the label from the options based on the applied column value. -->
-                                                                    <span v-text="column.filterableOptions.find((option => option.value == getAppliedColumnValues(column.index))).label"></span>
+                                                                    <span v-text="column.filterable_options.find((option => option.value == getAppliedColumnValues(column.index))).label"></span>
 
                                                                     <span
                                                                         class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
@@ -643,7 +643,7 @@
 
                                                         <div class="mb-4 flex flex-wrap gap-2">
                                                             <!-- If Allow Multiple Values -->
-                                                            <template v-if="column.allowMultipleValues">
+                                                            <template v-if="column.allow_multiple_values">
                                                                 <p
                                                                     class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                                                                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -1108,8 +1108,8 @@
                     if (
                         requestedValue === undefined ||
                         requestedValue === '' ||
-                        (appliedColumn?.allowMultipleValues && appliedColumn?.value.includes(requestedValue)) ||
-                        (! appliedColumn?.allowMultipleValues && appliedColumn?.value === requestedValue)
+                        (appliedColumn?.allow_multiple_values && appliedColumn?.value.includes(requestedValue)) ||
+                        (! appliedColumn?.allow_multiple_values && appliedColumn?.value === requestedValue)
                     ) {
                         return;
                     }
@@ -1171,7 +1171,7 @@
 
                         default:
                             if (appliedColumn) {
-                                if (appliedColumn.allowMultipleValues) {
+                                if (appliedColumn.allow_multiple_values) {
                                     appliedColumn.value.push(requestedValue);
                                 } else {
                                     appliedColumn.value = requestedValue;
@@ -1181,8 +1181,8 @@
                                     index: column.index,
                                     label: column.label,
                                     type: column.type,
-                                    value: column.allowMultipleValues ? [requestedValue] : requestedValue,
-                                    allowMultipleValues: column.allowMultipleValues,
+                                    value: column.allow_multiple_values ? [requestedValue] : requestedValue,
+                                    allow_multiple_values: column.allow_multiple_values,
                                 });
                             }
 
@@ -1207,8 +1207,8 @@
                     if (typeof appliedColumn.value === 'string') {
                         const availableColumn = this.available.columns.find(column => column.index === appliedColumn.index);
 
-                        if (availableColumn.filterableType === 'date_range' || availableColumn.filterableType === 'datetime_range') {
-                            const option = availableColumn.filterableOptions.find(option => option.name === appliedColumn.value);
+                        if (availableColumn.filterable_type === 'date_range' || availableColumn.filterable_type === 'datetime_range') {
+                            const option = availableColumn.filterable_options.find(option => option.name === appliedColumn.value);
 
                             return option.label;
                         }
@@ -1250,7 +1250,7 @@
                 getAppliedColumnValues(columnIndex) {
                     const appliedColumn = this.findAppliedColumn(columnIndex);
 
-                    if (appliedColumn?.allowMultipleValues) {
+                    if (appliedColumn?.allow_multiple_values) {
                         return appliedColumn?.value ?? [];
                     }
 
@@ -1270,7 +1270,7 @@
                     if (appliedColumn?.type === 'date' || appliedColumn?.type === 'datetime') {
                         appliedColumn.value = [];
                     } else {
-                        if (appliedColumn.allowMultipleValues) {
+                        if (appliedColumn.allow_multiple_values) {
                             appliedColumn.value = appliedColumn?.value.filter(value => value !== appliedColumnValue);
                         } else {
                             appliedColumn.value = '';
