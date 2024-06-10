@@ -20,7 +20,7 @@ class AttributeController extends Controller
      */
     public function __construct(
         protected AttributeRepository $attributeRepository,
-        protected ProductRepository $productRepository,
+        protected ProductRepository $productRepository
     ) {
     }
 
