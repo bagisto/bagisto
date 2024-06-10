@@ -17,7 +17,10 @@
                 {!! view_render_event('bagisto.shop.categories.toolbar.filter.before') !!}
 
                 <!-- Product Sorting Filters -->
-                <x-shop::dropdown position="bottom-left">
+                <x-shop::dropdown 
+                    class="z-[1]" 
+                    position="bottom-left"
+                >
                     <x-slot:toggle>
                         <!-- Dropdown Toggler -->
                         <button class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white p-3.5 text-base transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-[110px] max-md:border-0 max-md:pl-2.5 max-md:pr-2.5">
@@ -105,7 +108,7 @@
             <div class="md:hidden">
                 <ul>
                     <li
-                        class="p-2.5"
+                        class="px-4 py-2.5"
                         :class="{'bg-gray-100': sort.value == filters.applied.sort}"
                         v-for="(sort, key) in filters.available.sort"
                         @click="apply('sort', sort.value)"

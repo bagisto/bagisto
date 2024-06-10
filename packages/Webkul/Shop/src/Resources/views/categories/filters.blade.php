@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Naviation -->
 <div
-    class="fixed bottom-0 z-50 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0"
+    class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -26,7 +26,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase"
+                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
                 @click="isDrawerActive.filter = true"
             >
                 <span class="icon-filter-1 text-2xl"></span>
@@ -37,13 +37,13 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex items-center justify-between border-b border-zinc-200 pb-5">
+            <div class="flex items-center justify-between">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
 
                 <p
-                    class="cursor-pointer text-xs font-medium ltr:mr-[50px] rtl:ml-[50px]"
+                    class="cursor-pointer text-sm font-medium ltr:mr-[50px] rtl:ml-[50px]"
                     @click="clearFilters('filter', '')"
                 >
                     @lang('shop::app.categories.filters.clear-all')
@@ -76,7 +76,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase"
+                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
                 @click="isDrawerActive.toolbar = true"
             >
                 <span class="icon-sort-1 text-2xl"></span>
@@ -87,7 +87,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex items-center justify-between border-b border-zinc-200 pb-5">
+            <div class="flex items-center justify-between">
                 <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
@@ -95,7 +95,7 @@
         </x-slot>
 
         <!-- Drawer Content -->
-        <x-slot:content>
+        <x-slot:content class="!px-0">
             @include('shop::categories.toolbar')
         </x-slot>
     </x-shop::drawer>
@@ -119,7 +119,7 @@
             <div class="panel-side journal-scroll grid max-h-[1320px] min-w-[342px] grid-cols-[1fr] overflow-y-auto overflow-x-hidden max-xl:min-w-[270px] md:max-w-[400px] md:pr-7">
                 <!-- Filters Header Container -->
                 <div class="flex h-[50px] items-center justify-between border-b border-zinc-200 pb-2.5 max-md:hidden">
-                    <p class="text-lg font-semibold">
+                    <p class="text-lg font-semibold max-sm:font-medium">
                         @lang('shop::app.categories.filters.filters')
                     </p>
 
@@ -153,9 +153,9 @@
         <template v-if="filter.type === 'price' || filter.options.length">
             <x-shop::accordion class="last:border-b-0">
                 <!-- Filter Item Header -->
-                <x-slot:header class="px-0 py-2.5">
+                <x-slot:header class="px-0 py-2.5 max-sm:!pb-1.5">
                     <div class="flex items-center justify-between">
-                        <p class="text-lg font-semibold">
+                        <p class="text-lg font-semibold max-sm:text-base max-sm:font-medium">
                             @{{ filter.name }}
                         </p>
                     </div>
@@ -176,12 +176,12 @@
                     </ul>
 
                     <!-- Checkbox Filter Options -->
-                    <ul class="pb-3 text-sm text-gray-700" v-else>
+                    <ul class="pb-3 text-base text-gray-700" v-else>
                         <li
                             :key="option.id"
                             v-for="(option, optionIndex) in filter.options"
                         >
-                            <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 ltr:pl-2 rtl:pr-2">
+                            <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 max-sm:gap-x-1 max-sm:!p-0 ltr:pl-2 rtl:pr-2">
                                 <input
                                     type="checkbox"
                                     :id="'option_' + option.id"
@@ -192,7 +192,7 @@
                                 />
 
                                 <label
-                                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
+                                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
                                     role="checkbox"
                                     aria-checked="false"
                                     :aria-label="option.name"
@@ -203,7 +203,7 @@
                                 </label>
 
                                 <label
-                                    class="w-full cursor-pointer p-2 text-base text-gray-900 ltr:pl-0 rtl:pr-0"
+                                    class="w-full cursor-pointer p-2 text-base text-gray-900 max-sm:p-1 max-sm:text-sm ltr:pl-0 rtl:pr-0"
                                     :id="'label_option_' + option.id"
                                     :for="'option_' + option.id"
                                     role="button"
@@ -224,7 +224,6 @@
         id="v-price-filter-template"
     >
         <div>
-
             <!-- Price range filter shimmer -->
             <template v-if="isLoading">
                 <x-shop::shimmer.range-slider />

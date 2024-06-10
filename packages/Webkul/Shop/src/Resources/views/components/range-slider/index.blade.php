@@ -7,11 +7,11 @@
     >
         <div>
             <div class="flex items-center gap-4">
-                <p class="text-sm">
+                <p class="text-base max-sm:text-sm">
                     @lang('shop::app.components.range-slider.range')
                 </p>
 
-                <p class="text-sm font-semibold">
+                <p class="text-base font-semibold max-sm:text-sm">
                     @{{ rangeText }}
                 </p>
             </div>
@@ -26,6 +26,7 @@
 
                     <span>
                         <input
+                            :step="allowedMaxRange - Math.floor(allowedMaxRange) > 0 ? 0.01 : 1"
                             ref="minRange"
                             type="range"
                             :value="minRange"
@@ -40,6 +41,7 @@
 
                     <span>
                         <input
+                            :step="allowedMaxRange - Math.floor(allowedMaxRange) > 0 ? 0.01 : 1"
                             ref="maxRange"
                             type="range"
                             :value="maxRange"
@@ -74,13 +76,13 @@
 
                     supportedTypes: ['integer', 'float', 'price'],
 
-                    allowedMinRange: parseInt(this.defaultAllowedMinRange ?? 0),
+                    allowedMinRange: parseFloat(this.defaultAllowedMinRange ?? 0),
 
-                    allowedMaxRange: parseInt(this.defaultAllowedMaxRange ?? 100),
+                    allowedMaxRange: parseFloat(this.defaultAllowedMaxRange ?? 100),
 
-                    minRange: parseInt(this.defaultMinRange ?? 0),
+                    minRange: parseFloat(this.defaultMinRange ?? 0),
 
-                    maxRange: parseInt(this.defaultMaxRange ?? 100),
+                    maxRange: parseFloat(this.defaultMaxRange ?? 100),
                 };
             },
 
@@ -150,9 +152,9 @@
                 },
 
                 handle(rangeType) {
-                    this.minRange = parseInt(this.$refs.minRange.value);
+                    this.minRange = parseFloat(this.$refs.minRange.value);
 
-                    this.maxRange = parseInt(this.$refs.maxRange.value);
+                    this.maxRange = parseFloat(this.$refs.maxRange.value);
 
                     if (this.maxRange - this.minRange < this.gap) {
                         if (rangeType === 'min') {

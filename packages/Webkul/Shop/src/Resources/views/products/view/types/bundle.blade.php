@@ -10,7 +10,7 @@
             type="text/x-template"
             id="v-product-bundle-options-template"
         >
-            <div class="mt-8">
+            <div class="mt-8 max-sm:mt-0">
                 <v-product-bundle-option-item
                     v-for="(option, index) in options"
                     :option="option"
@@ -20,19 +20,19 @@
                 >
                 </v-product-bundle-option-item>
 
-                <div class="my-[20px] flex items-center justify-between">
+                <div class="mb-2.5 mt-5 flex items-center justify-between">
                     <p class="text-sm">
                         @lang('shop::app.products.view.type.bundle.total-amount')
                     </p>
 
-                    <p class="text-lg font-medium">
+                    <p class="text-lg font-medium max-sm:text-sm">
                         @{{ formattedTotalPrice }}
                     </p>
                 </div>
 
-                <ul class="grid gap-2.5 text-base">
+                <ul class="grid gap-2.5 text-base max-sm:text-sm">
                     <li v-for="option in options">
-                        <span class="mb-1.5 inline-block">
+                        <span class="mb-1.5 inline-block max-sm:mb-0">
                             @{{ option.label }}
                         </span>
 
@@ -54,11 +54,11 @@
             type="text/x-template"
             id="v-product-bundle-option-item-template"
         >
-            <div class="mt-8 border-b border-zinc-200 pb-4">
+            <div class="mt-8 border-b border-zinc-200 pb-4 max-sm:mt-4 max-sm:pb-0">
                 <x-shop::form.control-group>
                     <!-- Dropdown Options Container -->
                     <x-shop::form.control-group.label
-                        class="!mt-0"
+                        class="!mt-0 max-sm:!mb-2.5"
                         ::class="{ 'required': option.is_required }"
                     >
                         @{{ option.label }}
@@ -89,7 +89,7 @@
                     </template>
                     
                     <template v-if="option.type == 'radio'">
-                        <div class="grid gap-2">
+                        <div class="grid gap-2 max-sm:gap-1">
                             <!-- None radio option if option is not required -->
                             <div
                                 class="flex select-none gap-x-4"
@@ -107,7 +107,7 @@
                                 />
 
                                 <label
-                                    class="cursor-pointer text-zinc-500"
+                                    class="cursor-pointer text-zinc-500 max-sm:text-sm"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @lang('shop::app.products.view.type.bundle.none')
@@ -116,7 +116,7 @@
 
                             <!-- Options -->
                             <div
-                                class="flex select-none items-center gap-x-4"
+                                class="flex select-none items-center gap-x-4 max-sm:gap-x-1.5"
                                 v-for="(product, index) in option.products"
                             >
                                 <x-shop::form.control-group.control
@@ -131,7 +131,7 @@
                                 />
 
                                 <label
-                                    class="cursor-pointer text-zinc-500"
+                                    class="cursor-pointer text-zinc-500 max-sm:text-sm"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
@@ -148,7 +148,7 @@
                         <div class="grid gap-2">
                         <!-- Options -->
                             <div
-                                class="flex select-none items-center gap-x-4"
+                                class="flex select-none items-center gap-x-4 max-sm:gap-x-1.5"
                                 v-for="(product, index) in option.products"
                             >
                                 <x-shop::form.control-group.control
@@ -163,7 +163,7 @@
                                 />
 
                                 <label
-                                    class="cursor-pointer text-zinc-500"
+                                    class="cursor-pointer text-zinc-500 max-sm:text-sm"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
@@ -178,12 +178,11 @@
 
                     <template v-if="option.type == 'multiselect'">
                         <x-shop::form.control-group.control
-                            type="select"
+                            type="multiselect"
                             ::name="'bundle_options[' + option.id + '][]'"
                             ::rules="{'required': option.is_required}"
                             v-model="selectedProduct"
                             ::label="option.label"
-                            multiple
                         >
                             <option
                                 value="0"
@@ -208,7 +207,7 @@
                     <x-shop::quantity-changer
                         ::name="'bundle_option_qty[' + option?.id + ']'"
                         ::value="productQty"
-                        class="mt-5 w-max gap-x-4 rounded-xl !border-zinc-200 px-4 py-2.5"
+                        class="mt-5 w-max gap-x-4 rounded-xl !border-zinc-200 px-4 py-1.5 max-sm:my-4"
                         @change="qtyUpdated($event)"
                     />
                 </template>

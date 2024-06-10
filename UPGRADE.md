@@ -8,6 +8,8 @@
 - [The `Webkul\Checkout\Cart` class](#the-cart-class)
 - [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
 - [Shop API Response Updates](#the-shop-api-response-updates)
+- [Admin and Shop Menu Updates](#the-admin-shop-menu-updates)
+- [Admin ACL Updates](#the-admin-acl-updates)
 
 ## Medium Impact Changes
 
@@ -19,6 +21,7 @@
 - [The `Webkul\DataGrid\DataGrid` class](#the-datagrid-class)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
+- [The product Elastic Search indexing](#the-elastic-indexing)
 - [The Sales Tables Schema Updates](#the-sales-tables-schema-updates)
 - [The `Webkul\Sales\Repositories\OrderItemRepository` Repository](#the-order-item-repository)
 - [The `Webkul\Tax\Helpers\Tax` Class Moved](#moved-tax-helper-class)
@@ -114,6 +117,75 @@ There is no dependency needed to be updated at for this upgrade.
 - core()->getConfigData('catalog.inventory.stock_options.back_orders')
 + core()->getConfigData('sales.order_settings.stock_options.back_orders')
 ```
+
+4. The product storefront search mode configuration `core()->getConfigData('catalog.products.storefront.search_mode')` has been replaced with the following configurations, and the corresponding paths for retrieving configuration values have been updated:
+
+
+```diff
+- core()->getConfigData('catalog.products.storefront.search_mode')
+
++ core()->getConfigData('catalog.products.search.engine')
++ core()->getConfigData('catalog.products.search.admin_mode')
++ core()->getConfigData('catalog.products.search.storefront_mode')
+```
+
+`core()->getConfigData('catalog.products.search.engine')` represents the search engine for products. If "Elastic Search" is selected, elastic indexing will be enabled. The other two configurations (`catalog.products.search.admin_mode` and `catalog.products.search.storefront_mode`) will function relative to this configuration.
+
+5: The `locale_based` setting in the sales shipping origin configuration has been updated to support multiple locale values.
+
+```diff
+[
+    'key'    => 'sales.shipping.origin',
+    'name'   => 'admin::app.configuration.index.sales.shipping.origin.title',
+    'info'   => 'admin::app.configuration.index.sales.shipping.origin.title-info',
+    'sort'   => 0,
+    'fields' => [
+        [
+            'name'          => 'city',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.city',
+            'type'          => 'text',
+            'validation'    => 'required',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'address',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.street-address',
+            'type'          => 'text',
+            'validation'    => 'required',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'zipcode',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.zip',
+            'type'          => 'text',
+            'validation'    => 'required',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'store_name',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.store-name',
+            'type'          => 'text',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'bank_details',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.bank-details',
+            'type'          => 'textarea',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ],
+    ],
+]
+```
+
+If you are migrating your existing store to this version, please save the configuration values again, as previously saved values will no longer work.
+
+
 
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names
@@ -487,10 +559,10 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 <a name="product"></a>
 ### Product
 
-**Impact Probability: Medium**
-
 <a name="the-elastic-search-repository"></a>
 #### The `Webkul\Product\Repositories\ElasticSearchRepository` Repository
+
+**Impact Probability: Medium**
 
 1. We have enhanced the `search` method to accept two arguments. The first argument is an array containing the search parameters (e.g., category_id, etc.), while the second argument is an array containing the options.
 
@@ -566,6 +638,21 @@ If you've implemented your own product type or overridden existing type classes,
 - public function updateDefaultVariantId()
 ```
 
+<a name="the-elastic-indexing"></a>
+#### The product Elastic Search indexing
+
+**Impact Probability: Medium**
+
+Previously, Elastic Search was used only on the frontend and not in the admin section. For large catalogs, this caused the Product datagrid to be very slow. To address this issue, we have now introduced Elastic Search in the admin section as well.
+
+To make Elastic Search compatible with the admin section, some changes were necessary. Previously, only active products were indexed in Elastic Search. Now, all products are indexed with additional keys/information.
+
+Please run the following command to refresh the Elastic Search indices:
+
+
+```diff
+php artisan indexer:index --type=elastic
+```
 
 <a name="Sales"></a>
 ### Sales
@@ -1009,6 +1096,175 @@ If you've implemented your own product type or overridden existing type classes,
         }
     ]
 }
+```
+
+<a name="the-admin-shop-menu-updates"></a>
+#### Admin and Shop Menu Updates
+
+**Impact Probability: High**
+
+1. Previously, the composeView method included logic to share a dynamically generated menu structure with several Blade views in the admin interface. This logic has been removed. Here’s a detailed breakdown of what was removed:
+
+#### For `Admin` package.
+
+```diff
+class AdminServiceProvider extends ServiceProvider
+{
+    protected function composeView()
+    {
+-       view()->composer([
+-           'admin::components.layouts.header.index',
+-           'admin::components.layouts.sidebar.index',
+-           'admin::components.layouts.tabs',
+-       ], function ($view) {
+-           $tree = Tree::create();
+- 
+-           foreach (config('menu.admin') as $index => $item) {
+-               if (! bouncer()->hasPermission($item['key'])) {
+-                   continue;
+-               }
+-
+-               $tree->add($item, 'menu');
+-           }
+-
+-           $tree->items = $tree->removeUnauthorizedUrls();
+-
+-           $tree->items = core()->sortItems($tree->items);
+-
+-           $view->with('menu', $tree);
+-       });
+
+        view()->composer([
+            'admin::settings.roles.create',
+            'admin::settings.roles.edit',
+        ], function ($view) {
+            $view->with('acl', $this->createACL());
+        });
+    }
+}
+```
+#### For `Shop` package.
+
+```diff
+class ShopServiceProvider extends ServiceProvider
+{
+-   protected function composeView()
+-   {
+-       view()->composer('shop::customers.account.partials.sidemenu', function ($view) {
+-           $tree = Tree::create();
+-           foreach (config('menu.customer') as $item) {
+-               $tree->add($item, 'menu');
+-           }
+-           $tree->items = core()->sortItems($tree->items);
+-           $view->with('menu', $tree);
+-       });
+-   }
+}
+```
+
+#### How to use it?
+
+##### For `Admin` package.
+
+```diff
+-    @foreach ($menu->items as $menuItem)
++    @foreach (menu()->getItems('admin') as $menuItem)
+        <div
+            class="px-4 group/item {{ $menu->getActive($menuItem) ? 'active' : 'inactive' }}"
+            onmouseenter="adjustSubMenuPosition(event)"
+        >
+        ...
+    @endforeach
+
+```
+
+##### For `Shop` package.
+
+```diff
+-    @foreach ($menu->items as $menuItem)
++    @foreach (menu()->getItems('customer') as $menuItem)
+        <div class="max-md:rounded-md max-md:border max-md:border-b max-md:border-l-[1px] max-md:border-r max-md:border-t-0 max-md:border-zinc-200">
+            <v-account-navigation>
+        ...
+    @endforeach
+
+```
+
+The getItems() methods of the menu() facade accept different areas of the menu. For example, for the admin area, you need to provide the config name of the menu, whereas for the shop area, you should provide the name 'customer'.
+
+
+<a name="the-admin-acl-updates"></a>
+#### Admin ACL Updates
+
+**Impact Probability: High**
+
+1. Previously, the composeView method included logic to share a dynamically generated acl structure with several Blade views in the admin interface. This logic has been removed. Here’s a detailed breakdown of what was removed:
+
+
+```diff
+class AdminServiceProvider extends ServiceProvider
+{
+    public function boot(Router $router)
+    {
+        ...
+
+-        $this->registerACL();
+
+        ...
+
+        $this->app->register(EventServiceProvider::class);
+    }
+
+-   protected function composeView()
+-   {
+-       view()->composer([
+-           'admin::settings.roles.create',
+-           'admin::settings.roles.edit',
+-       ], function ($view) {
+-           $view->with('acl', $this->createACL());
+-       });
+-   }
+
+-    protected function registerACL()
+-    {
+-        $this->app->singleton('acl', function () {
+-            return $this->createACL();
+-        });
+-    }
+-
+-    protected function createACL()
+-    {
+-        static $tree;
+-
+-        if ($tree) {
+-            return $tree;
+-        }
+-
+-        $tree = Tree::create();
+-
+-        foreach (config('acl') as $item) {
+-            $tree->add($item, 'acl');
+-        }
+-
+-        $tree->items = core()->sortItems($tree->items);
+-
+-        return $tree;
+-    }
+}
+```
+
+#### How to use it?
+
+##### Get all acl items.
+
+```php
+    $acl = acl()->getItems();
+```
+
+##### Get all roles.
+
+```php 
+    $roles = acl()->getRoles();
 ```
 
 <a name="renamed-star-rating-blade"></a>

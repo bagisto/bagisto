@@ -25,7 +25,7 @@
             >
             </span>
 
-            <p class="w-2.5 select-none text-center">
+            <p class="w-2.5 select-none text-center max-sm:text-sm">
                 @{{ quantity }}
             </p>
             

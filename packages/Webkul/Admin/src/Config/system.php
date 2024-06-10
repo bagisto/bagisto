@@ -337,10 +337,62 @@ return [
         'icon' => 'settings/product.svg',
         'sort' => 2,
     ], [
+        'key'    => 'catalog.products.search',
+        'name'   => 'admin::app.configuration.index.catalog.products.search.title',
+        'info'   => 'admin::app.configuration.index.catalog.products.search.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'engine',
+                'title'   => 'admin::app.configuration.index.catalog.products.search.search-engine',
+                'type'    => 'select',
+                'default' => 'database',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.database',
+                        'value' => 'database',
+                    ], [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.elastic',
+                        'value' => 'elastic',
+                    ],
+                ],
+            ], [
+                'name'    => 'admin_mode',
+                'title'   => 'admin::app.configuration.index.catalog.products.search.admin-mode',
+                'info'    => 'admin::app.configuration.index.catalog.products.search.admin-mode-info',
+                'type'    => 'select',
+                'default' => 'database',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.database',
+                        'value' => 'database',
+                    ], [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.elastic',
+                        'value' => 'elastic',
+                    ],
+                ],
+            ], [
+                'name'    => 'storefront_mode',
+                'title'   => 'admin::app.configuration.index.catalog.products.search.storefront-mode',
+                'info'    => 'admin::app.configuration.index.catalog.products.search.storefront-mode-info',
+                'type'    => 'select',
+                'default' => 'database',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.database',
+                        'value' => 'database',
+                    ], [
+                        'title' => 'admin::app.configuration.index.catalog.products.search.elastic',
+                        'value' => 'elastic',
+                    ],
+                ],
+            ],
+        ],
+    ], [
         'key'    => 'catalog.products.guest_checkout',
         'name'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title',
         'info'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title-info',
-        'sort'   => 1,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'  => 'allow_guest_checkout',
@@ -370,7 +422,7 @@ return [
         'key'    => 'catalog.products.cart_view_page',
         'name'   => 'admin::app.configuration.index.catalog.products.cart-view-page.title',
         'info'   => 'admin::app.configuration.index.catalog.products.cart-view-page.title-info',
-        'sort'   => 3,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'       => 'no_of_cross_sells_products',
@@ -383,22 +435,9 @@ return [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.configuration.index.catalog.products.storefront.title',
         'info'   => 'admin::app.configuration.index.catalog.products.storefront.title-info',
-        'sort'   => 3,
+        'sort'   => 5,
         'fields' => [
             [
-                'name'          => 'search_mode',
-                'title'         => 'admin::app.configuration.index.catalog.products.storefront.search-mode',
-                'type'          => 'select',
-                'options'       => [
-                    [
-                        'title' => 'admin::app.configuration.index.catalog.products.storefront.database',
-                        'value' => 'database',
-                    ], [
-                        'title' => 'admin::app.configuration.index.catalog.products.storefront.elastic',
-                        'value' => 'elastic',
-                    ],
-                ],
-            ], [
                 'name'          => 'mode',
                 'title'         => 'admin::app.configuration.index.catalog.products.storefront.default-list-mode',
                 'type'          => 'select',
@@ -454,7 +493,7 @@ return [
         'key'    => 'catalog.products.cache_small_image',
         'name'   => 'admin::app.configuration.index.catalog.products.small-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.small-image.title-info',
-        'sort'   => 4,
+        'sort'   => 6,
         'fields' => [
             [
                 'name'       => 'width',
@@ -473,7 +512,7 @@ return [
         'key'    => 'catalog.products.cache_medium_image',
         'name'   => 'admin::app.configuration.index.catalog.products.medium-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.medium-image.title-info',
-        'sort'   => 5,
+        'sort'   => 7,
         'fields' => [
             [
                 'name'       => 'width',
@@ -492,7 +531,7 @@ return [
         'key'    => 'catalog.products.cache_large_image',
         'name'   => 'admin::app.configuration.index.catalog.products.large-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.large-image.title-info',
-        'sort'   => 6,
+        'sort'   => 8,
         'fields' => [
             [
                 'name'       => 'width',
@@ -511,7 +550,7 @@ return [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.configuration.index.catalog.products.review.title',
         'info'   => 'admin::app.configuration.index.catalog.products.review.title-info',
-        'sort'   => 7,
+        'sort'   => 9,
         'fields' => [
             [
                 'name'  => 'guest_review',
@@ -523,7 +562,7 @@ return [
         'key'    => 'catalog.products.attribute',
         'name'   => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info'   => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort'   => 8,
+        'sort'   => 10,
         'fields' => [
             [
                 'name'       => 'image_attribute_upload_size',
@@ -541,7 +580,7 @@ return [
         'key'    => 'catalog.products.social_share',
         'name'   => 'admin::app.configuration.index.catalog.products.social-share.title',
         'info'   => 'admin::app.configuration.index.catalog.products.social-share.title-info',
-        'sort'   => 100,
+        'sort'   => 11,
         'fields' => [
             [
                 'name'  => 'enabled',
@@ -962,26 +1001,27 @@ return [
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
-                'locale_based'  => false,
+                'locale_based'  => true,
             ], [
                 'name'          => 'address',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.street-address',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
-                'locale_based'  => false,
+                'locale_based'  => true,
             ], [
                 'name'          => 'zipcode',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.zip',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
-                'locale_based'  => false,
+                'locale_based'  => true,
             ], [
                 'name'          => 'store_name',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.store-name',
                 'type'          => 'text',
                 'channel_based' => true,
+                'locale_based'  => true,
             ], [
                 'name'          => 'vat_number',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.vat-number',
@@ -997,6 +1037,7 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.bank-details',
                 'type'          => 'textarea',
                 'channel_based' => true,
+                'locale_based'  => true,
             ],
         ],
     ], [

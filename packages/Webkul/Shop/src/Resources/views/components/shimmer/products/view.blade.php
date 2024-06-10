@@ -18,7 +18,7 @@
                 <div class="shimmer h-[46px] w-[46px] rounded-full"></div>
             </div>
 
-            <div class="shimmer mt-4 h-[38px] w-[150px] rounded-md"></div>
+            <div class="shimmer mt-4 h-[38px] w-[150px] rounded-lg"></div>
 
             <p class="shimmer mt-5 h-9 w-[35%]"></p>
 

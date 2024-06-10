@@ -28,7 +28,7 @@
 
                     <!-- Billing Address Header -->
                     <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-medium max-sm:text-xl">
+                        <h2 class="text-xl font-medium max-md:text-lg max-sm:text-base">
                             @lang('shop::app.checkout.onepage.address.billing-address')
                         </h2>
                     </div>
@@ -55,7 +55,7 @@
                         />
 
                         <label
-                            class="cursor-pointer select-none text-base text-zinc-500 max-sm:text-xs ltr:pl-0 rtl:pr-0"
+                            class="cursor-pointer select-none text-base text-zinc-500 max-md:text-sm max-sm:text-xs ltr:pl-0 rtl:pr-0"
                             for="use_for_shipping"
                         >
                             @lang('shop::app.checkout.onepage.address.same-as-billing')
@@ -75,7 +75,7 @@
 
                         <!-- Shipping Address Header -->
                         <div class="flex items-center justify-between">
-                            <h2 class="text-xl font-medium max-sm:text-xl">
+                            <h2 class="text-xl font-medium max-md:text-lg max-sm:text-base">
                                 @lang('shop::app.checkout.onepage.address.shipping-address')
                             </h2>
                         </div>
@@ -93,7 +93,7 @@
                 <!-- Proceed Button -->
                 <div class="mt-4 flex justify-end">
                     <x-shop::button
-                        class="primary-button rounded-2xl px-11 py-3"
+                        class="primary-button rounded-2xl px-11 py-3 max-md:w-full max-md:max-w-full max-md:rounded-lg"
                         :title="trans('shop::app.checkout.onepage.address.proceed')"
                         ::loading="isStoring"
                         ::disabled="isStoring"

@@ -16,6 +16,11 @@ use Webkul\Product\Contracts\Product;
 class ProductRepository extends Repository
 {
     /**
+     * Search engine.
+     */
+    protected $searchEngine = 'database';
+
+    /**
      * Create a new repository instance.
      *
      * @return void
@@ -103,6 +108,16 @@ class ProductRepository extends Repository
     }
 
     /**
+     * Copy product.
+     */
+    public function setSearchEngine(string $searchEngine): self
+    {
+        $this->searchEngine = $searchEngine;
+
+        return $this;
+    }
+
+    /**
      * Return product by filtering through attribute values.
      *
      * @param  string  $code
@@ -155,7 +170,7 @@ class ProductRepository extends Repository
      */
     public function findBySlug(string $slug): ?Product
     {
-        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
+        if ($this->searchEngine == 'elastic') {
             $indices = $this->elasticSearchRepository->search([
                 'url_key' => $slug,
             ], [
@@ -195,7 +210,7 @@ class ProductRepository extends Repository
      */
     public function getAll(array $params = [])
     {
-        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
+        if ($this->searchEngine == 'elastic') {
             return $this->searchFromElastic($params);
         }
 
@@ -209,11 +224,7 @@ class ProductRepository extends Repository
      */
     public function searchFromDatabase(array $params = [])
     {
-        $params = array_merge([
-            'status'               => 1,
-            'visible_individually' => 1,
-            'url_key'              => null,
-        ], $params);
+        $params['url_key'] ??= null;
 
         if (! empty($params['query'])) {
             $params['name'] = $params['query'];
@@ -417,6 +428,11 @@ class ProductRepository extends Repository
             'price_indices',
             'inventory_indices',
             'reviews',
+            'variants',
+            'variants.attribute_family',
+            'variants.attribute_values',
+            'variants.price_indices',
+            'variants.inventory_indices',
         ])->scopeQuery(function ($query) use ($indices) {
             $qb = $query->distinct()
                 ->whereIn('products.id', $indices['ids']);

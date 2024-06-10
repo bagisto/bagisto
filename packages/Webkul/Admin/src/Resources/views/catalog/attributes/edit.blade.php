@@ -1,7 +1,3 @@
-@php
-    $allLocales = app('Webkul\Core\Repositories\LocaleRepository')->all();
-@endphp
-
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.catalog.attributes.edit.title')
@@ -40,7 +36,7 @@
         </div>
 
         <!-- Edit Attributes Vue Components -->
-        <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}">
+        <v-edit-attributes>
             <!-- Shimmer Effect -->
             <x-admin::shimmer.catalog.attributes />
         </v-edit-attributes>
@@ -85,7 +81,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Locales Inputs -->
-                        @foreach ($allLocales as $locale)
+                        @foreach ($locales as $locale)
                             <x-admin::form.control-group class="last:!mb-0">
                                 <x-admin::form.control-group.label>
                                     {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
@@ -206,7 +202,7 @@
                                                 </x-admin::table.th>
 
                                                 <!-- Loacles tables heading -->
-                                                @foreach ($allLocales as $locale)
+                                                @foreach ($locales as $locale)
                                                     <x-admin::table.th>
                                                         {{ $locale->name . ' (' . $locale->code . ')' }}
                                                     </x-admin::table.th>
@@ -288,11 +284,11 @@
                                                         </div>
                                                     </x-admin::table.td>
 
-                                                        <!-- Admin-->
-                                                        <x-admin::table.td>
-                                                            <p class="dark:text-white">
-                                                                @{{ element.admin_name }}
-                                                            </p>
+                                                    <!-- Admin-->
+                                                    <x-admin::table.td>
+                                                        <p class="dark:text-white">
+                                                            @{{ element.admin_name }}
+                                                        </p>
 
                                                         <input
                                                             type="hidden"
@@ -301,11 +297,11 @@
                                                         />
                                                     </x-admin::table.td>
 
-                                                        <!-- Loacles -->
-                                                        <x-admin::table.td v-for="locale in allLocales">
-                                                            <p class="dark:text-white">
-                                                                @{{ element['locales'][locale.code] }}
-                                                            </p>
+                                                    <!-- Loacles -->
+                                                    <x-admin::table.td v-for="locale in locales">
+                                                        <p class="dark:text-white">
+                                                            @{{ element['locales'][locale.code] }}
+                                                        </p>
 
                                                         <input
                                                             type="hidden"
@@ -914,7 +910,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Locales Input -->
-                                @foreach ($allLocales as $locale)
+                                @foreach ($locales as $locale)
                                     <x-admin::form.control-group class="mb-2.5 w-full">
                                         <x-admin::form.control-group.label ::class="{ '{{ core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
@@ -953,8 +949,6 @@
             app.component('v-edit-attributes', {
                 template: '#v-edit-attributes-template',
 
-                props: ['allLocales'],
-
                 data() {
                     return {
                         showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
@@ -970,6 +964,8 @@
                         ],
 
                         optionsData: [],
+
+                        locales: @json($locales),
 
                         optionIsNew: true,
 

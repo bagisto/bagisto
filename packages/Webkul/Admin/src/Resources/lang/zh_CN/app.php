@@ -149,7 +149,7 @@ return [
                     'fraud'           => '欺诈',
                     'grand-total'     => '总计',
                     'id'              => '订单号：#:id',
-                    'images'          => '图片',
+                    'items'           => '商品',
                     'location'        => '地点',
                     'order-id'        => '订单编号',
                     'pay-by'          => '支付方式 - :method',
@@ -636,13 +636,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => '银行详细信息',
                 'bill-to'                    => '账单给',
-                'contact'                    => '联系人',
                 'contact-number'             => '联系电话',
+                'contact'                    => '联系人',
                 'date'                       => '发票日期',
                 'discount'                   => '折扣',
+                'excl-tax'                   => '不含税：',
                 'grand-total'                => '总计',
-                'invoice'                    => '发票',
                 'invoice-id'                 => '发票ID',
+                'invoice'                    => '发票',
                 'order-date'                 => '订单日期',
                 'order-id'                   => '订单ID',
                 'payment-method'             => '付款方式',
@@ -659,10 +660,9 @@ return [
                 'subtotal-excl-tax'          => '小计（不含税）',
                 'subtotal-incl-tax'          => '小计（含税）',
                 'subtotal'                   => '小计',
-                'tax'                        => '税费',
                 'tax-amount'                 => '税费金额',
+                'tax'                        => '税费',
                 'vat-number'                 => '增值税号码',
-                'excl-tax'                   => '不含税：',
             ],
         ],
 
@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => '删除',
                 'desc'                          => '降序',
                 'edit'                          => '编辑',
+                'featured'                      => '精选',
                 'filter-title'                  => '标题',
                 'filters'                       => '过滤器',
                 'footer-link'                   => '页脚链接',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => '限制',
                 'link'                          => '链接',
                 'name'                          => '名称',
+                'no'                            => '不',
+                'new'                           => '新',
                 'preview'                       => '预览',
                 'product-carousel'              => '产品轮播',
                 'product-carousel-description'  => '使用动态和响应式产品轮播优雅地展示产品。',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => '标题',
                     'update-service'     => '更新服务',
                 ],
+                'yes'                           => '是',
             ],
 
             'create-success' => '成功创建主题',
@@ -3441,6 +3445,18 @@ return [
                     'info'  => '设置访客结帐，产品查看页面，购物车查看页面，商店前端，评论和属性社交分享。',
                     'title' => '产品',
 
+                    'search' => [
+                        'admin-mode-info'      => '管理模式中的Mega搜索、数据网格和其他搜索功能将基于所选的搜索引擎。',
+                        'admin-mode'           => '管理搜索模式',
+                        'database'             => '数据库',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => '搜索引擎',
+                        'storefront-mode-info' => '商店前端的搜索功能将基于所选的搜索引擎，包括类别页面、搜索页面和其他搜索功能。',
+                        'storefront-mode'      => '商店前端搜索模式',
+                        'title-info'           => '要设置产品搜索的搜索引擎，您可以根据您的需求选择数据库或Elasticsearch。如果您有大量的产品，建议使用Elasticsearch。',
+                        'title'                => '搜索',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => '允许访客结账',
                         'allow-guest-checkout-hint' => '提示：如果启用，可以为每个产品单独配置此选项。',
@@ -3465,9 +3481,7 @@ return [
                         'buy-now-button-display' => '允许客户直接购买产品',
                         'cheapest-first'         => '最便宜的优先',
                         'comma-separated'        => '逗号分隔',
-                        'database'               => '数据库',
                         'default-list-mode'      => '默认列表模式',
-                        'elastic'                => '弹性搜索',
                         'expensive-first'        => '最贵的优先',
                         'from-a-z'               => '从A到Z',
                         'from-z-a'               => '从Z到A',
@@ -3476,7 +3490,6 @@ return [
                         'list'                   => '列表',
                         'oldest-first'           => '最旧的优先',
                         'products-per-page'      => '每页产品数量',
-                        'search-mode'            => '搜索模式',
                         'sort-by'                => '排序方式',
                         'title'                  => '商店前端',
                         'title-info'             => '商店前端是在线商店的面向客户的界面，展示产品、类别和导航，提供无缝的购物体验。',
@@ -3969,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => '筛选',
+                    'apply-filters-btn' => '应用过滤器',
+                    'back-btn'          => '返回',
+                    'create-new-filter' => '创建新过滤器',
+                    'custom-filters'    => '自定义过滤器',
+                    'delete-error'      => '删除过滤器时出了点问题，请再试一次。',
+                    'delete-success'    => '成功删除过滤器。',
+                    'empty-description' => '没有可保存的选定过滤器。请选择要保存的过滤器。',
+                    'empty-title'       => '添加要保存的过滤器',
+                    'name'              => '名称',
+                    'quick-filters'     => '快速过滤器',
+                    'save-btn'          => '保存',
+                    'save-filter'       => '保存过滤器',
+                    'saved-success'     => '成功保存过滤器。',
+                    'selected-filters'  => '已选过滤器',
+                    'title'             => '过滤器',
+                    'update'            => '更新',
+                    'update-filter'     => '更新筛选器',
+                    'updated-success'   => '过滤器已成功更新。',
                 ],
 
                 'search' => [
@@ -3979,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => '选择',
-                'title'  => '应用筛选',
+                'title'  => '过滤器',
 
                 'dropdown' => [
                     'searchable' => [

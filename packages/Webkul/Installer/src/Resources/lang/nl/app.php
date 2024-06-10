@@ -191,32 +191,32 @@ return [
         'shop' => [
             'theme-customizations' => [
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'Alle Producten',
 
                     'options' => [
-                        'title' => 'All Products',
+                        'title' => 'Alle Producten',
                     ],
                 ],
 
                 'bold-collections' => [
                     'content' => [
-                        'btn-title'   => 'View All',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'title'       => 'Get Ready for our new Bold Collections!',
+                        'btn-title'   => 'Bekijk Collecties',
+                        'description' => 'Maak kennis met onze nieuwe gedurfde collecties! Verhoog je stijl met gedurfde ontwerpen en levendige statements. Verken opvallende patronen en gedurfde kleuren die je garderobe opnieuw definiëren. Maak je klaar om het buitengewone te omarmen!',
+                        'title'       => 'Maak je klaar voor onze nieuwe gedurfde collecties!',
                     ],
 
-                    'name' => 'Bold Collections',
+                    'name' => 'Gedurfde Collecties',
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'Categorieën Collecties',
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'Uitgelichte Collecties',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'Uitgelichte Producten',
                     ],
                 ],
 
@@ -224,51 +224,51 @@ return [
                     'name' => 'Footer Links',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'payment-policy'   => 'Payment Policy',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'refund-policy'    => 'Refund Policy',
-                        'return-policy'    => 'Return Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'terms-of-use'     => 'Terms of Use',
-                        'whats-new'        => 'What\'s New',
+                        'about-us'         => 'Over Ons',
+                        'contact-us'       => 'Contacteer Ons',
+                        'customer-service' => 'Klantenservice',
+                        'payment-policy'   => 'Betalingsbeleid',
+                        'privacy-policy'   => 'Privacybeleid',
+                        'refund-policy'    => 'Retourbeleid',
+                        'return-policy'    => 'Terugstuurbeleid',
+                        'shipping-policy'  => 'Verzendingsbeleid',
+                        'terms-conditions' => 'Algemene Voorwaarden',
+                        'terms-of-use'     => 'Gebruiksvoorwaarden',
+                        'whats-new'        => 'Wat is nieuw',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name' => 'Spelcontainer',
 
                     'content' => [
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'title'       => 'The game with our new additions!',
+                        'sub-title-1' => 'Onze Collecties',
+                        'sub-title-2' => 'Onze Collecties',
+                        'title'       => 'Het spel met onze nieuwe toevoegingen!',
                     ],
                 ],
 
                 'image-carousel' => [
-                    'name' => 'Image Carousel',
+                    'name' => 'Afbeeldingencarrousel',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'Maak je klaar voor de nieuwe collectie',
                     ],
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'Nieuwe Producten',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'Nieuwe Producten',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name' => 'Aanbiedingsinformatie',
 
                     'content' => [
-                        'title' => 'Get UP TO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'KRIJG TOT 40% KORTING op je 1e bestelling NU WINKELEN',
                     ],
                 ],
 
@@ -292,28 +292,28 @@ return [
 
                 'top-collections' => [
                     'content' => [
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
-                        'title'       => 'The game with our new additions!',
+                        'sub-title-1' => 'Onze Collecties',
+                        'sub-title-2' => 'Onze Collecties',
+                        'sub-title-3' => 'Onze Collecties',
+                        'sub-title-4' => 'Onze Collecties',
+                        'sub-title-5' => 'Onze Collecties',
+                        'sub-title-6' => 'Onze Collecties',
+                        'title'       => 'Het spel met onze nieuwe toevoegingen!',
                     ],
 
-                    'name' => 'Top Collections',
+                    'name' => 'Top Collecties',
                 ],
             ],
         ],
 
         'user' => [
             'roles' => [
-                'description' => 'This role users will have all the access',
-                'name'        => 'Administrator',
+                'description' => 'Deze rol geeft gebruikers alle toegang',
+                'name'        => 'Beheerder',
             ],
 
             'users' => [
-                'name' => 'Example',
+                'name' => 'Voorbeeld',
             ],
         ],
     ],

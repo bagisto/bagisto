@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Fraude',
                     'grand-total'     => 'Total général',
                     'id'              => '#:id',
-                    'images'          => 'Images',
+                    'items'           => 'Articles',
                     'location'        => 'Emplacement',
                     'order-id'        => 'ID de commande',
                     'pay-by'          => 'Payer par - :method',
@@ -636,13 +636,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Coordonnées bancaires',
                 'bill-to'                    => 'Facturé à',
-                'contact'                    => 'Contact',
                 'contact-number'             => 'Numéro de contact',
+                'contact'                    => 'Contact',
                 'date'                       => 'Date de la facture',
                 'discount'                   => 'Remise',
+                'excl-tax'                   => 'Hors taxe:',
                 'grand-total'                => 'Total général',
-                'invoice'                    => 'Facture',
                 'invoice-id'                 => 'ID de la facture',
+                'invoice'                    => 'Facture',
                 'order-date'                 => 'Date de la commande',
                 'order-id'                   => 'ID de la commande',
                 'payment-method'             => 'Méthode de paiement',
@@ -659,10 +660,9 @@ return [
                 'subtotal-excl-tax'          => 'Sous-total (Hors taxe)',
                 'subtotal-incl-tax'          => 'Sous-total (TTC)',
                 'subtotal'                   => 'Sous-total',
-                'tax'                        => 'Taxe',
                 'tax-amount'                 => 'Montant de la taxe',
+                'tax'                        => 'Taxe',
                 'vat-number'                 => 'Numéro de TVA',
-                'excl-tax'                   => 'Hors taxe:',
             ],
         ],
 
@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'Supprimer',
                 'desc'                          => 'Desc',
                 'edit'                          => 'Éditer',
+                'featured'                      => 'En vedette',
                 'filter-title'                  => 'Titre',
                 'filters'                       => 'Filtres',
                 'footer-link'                   => 'Liens de pied de page',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'Limite',
                 'link'                          => 'Lien',
                 'name'                          => 'Nom',
+                'no'                            => 'Non',
+                'New'                           => 'Nouveau',
                 'preview'                       => 'Aperçu',
                 'product-carousel'              => 'Carrousel de produits',
                 'product-carousel-description'  => 'Présentez élégamment des produits avec un carrousel de produits dynamique et réactif.',
@@ -3169,6 +3172,7 @@ return [
                     'title'                 => 'Titre',
                     'update-service'        => 'Mettre à jour les services',
                 ],
+                'Yes'                          => 'Oui',
             ],
 
             'create-success' => 'Thème créé avec succès',
@@ -3441,6 +3445,18 @@ return [
                     'info'  => 'Configurer le paiement en tant qu\'invité, la page de visualisation du produit, la page de visualisation du panier, la page d\'accueil du magasin, la revue et le partage social des attributs.',
                     'title' => 'Produits',
 
+                    'search' => [
+                        'admin-mode-info'      => 'La recherche Mega, Datagrid et autres fonctionnalités de recherche dans le panneau d\'administration seront basées sur le moteur de recherche sélectionné.',
+                        'admin-mode'           => 'Mode de recherche administrateur',
+                        'database'             => 'Base de données',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Moteur de recherche',
+                        'storefront-mode-info' => 'La fonction de recherche sur la vitrine sera basée sur le moteur de recherche sélectionné, y compris la page de catégorie, la page de recherche et d\'autres fonctionnalités de recherche.',
+                        'storefront-mode'      => 'Mode de recherche vitrine',
+                        'title-info'           => 'Pour configurer le moteur de recherche pour les recherches de produits, vous pouvez choisir entre une base de données et Elasticsearch en fonction de vos besoins. Si vous avez un grand nombre de produits, Elasticsearch est recommandé.',
+                        'title'                => 'Recherche',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Autoriser la commande en tant qu\'invité',
                         'allow-guest-checkout-hint' => 'Remarque : lorsqu\'elle est activée, cette option peut être configurée individuellement pour chaque produit.',
@@ -3465,9 +3481,7 @@ return [
                         'buy-now-button-display' => 'Les clients peuvent acheter des produits directement',
                         'cheapest-first'         => 'Les moins chers d\'abord',
                         'comma-separated'        => 'Séparés par des virgules',
-                        'database'               => 'Base de données',
                         'default-list-mode'      => 'Mode de liste par défaut',
-                        'elastic'                => 'Recherche élastique',
                         'expensive-first'        => 'Les plus chers d\'abord',
                         'from-a-z'               => 'De A à Z',
                         'from-z-a'               => 'De Z à A',
@@ -3476,7 +3490,6 @@ return [
                         'list'                   => 'Liste',
                         'oldest-first'           => 'Les plus anciens d\'abord',
                         'products-per-page'      => 'Produits par page',
-                        'search-mode'            => 'Mode de recherche',
                         'sort-by'                => 'Trier par',
                         'title'                  => 'Vitrine',
                         'title-info'             => 'La vitrine est l\'interface utilisateur orientée client d\'une boutique en ligne et présente les produits, les catégories et la navigation pour une expérience d\'achat transparente.',
@@ -3969,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtrer',
+                    'apply-filters-btn' => 'Appliquer les filtres',
+                    'back-btn'          => 'Retour',
+                    'create-new-filter' => 'Créer un nouveau filtre',
+                    'custom-filters'    => 'Filtres personnalisés',
+                    'delete-error'      => 'Une erreur s\'est produite lors de la suppression du filtre, veuillez réessayer.',
+                    'delete-success'    => 'Le filtre a été supprimé avec succès.',
+                    'empty-description' => 'Aucun filtre sélectionné n\'est disponible pour être enregistré. Veuillez sélectionner des filtres à enregistrer.',
+                    'empty-title'       => 'Ajouter des filtres à enregistrer',
+                    'name'              => 'Nom',
+                    'quick-filters'     => 'Filtres rapides',
+                    'save-btn'          => 'Enregistrer',
+                    'save-filter'       => 'Enregistrer le filtre',
+                    'saved-success'     => 'Le filtre a été enregistré avec succès.',
+                    'selected-filters'  => 'Filtres sélectionnés',
+                    'title'             => 'Filtre',
+                    'update'            => 'Mettre à jour',
+                    'update-filter'     => 'Mettre à jour le filtre',
+                    'updated-success'   => 'Le filtre a été mis à jour avec succès.',
                 ],
 
                 'search' => [
@@ -3979,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => 'Sélectionner.',
-                'title'  => 'Appliquer les filtres',
+                'title'  => 'Filtres',
 
                 'dropdown' => [
                     'searchable' => [

@@ -11,10 +11,10 @@
     >
         <!-- Grid Card -->
         <div
-            class="transtion-all group relative grid w-full content-start overflow-hidden rounded-md duration-300 hover:shadow-[0_5px_10px_rgba(0,0,0,0.1)]"
+            class="1180:transtion-all group w-full rounded-md 1180:relative 1180:grid 1180:content-start 1180:overflow-hidden 1180:duration-300 1180:hover:shadow-[0_5px_10px_rgba(0,0,0,0.1)]"
             v-if="mode != 'list'"
         >
-            <div class="relative max-h-[300px] max-w-[291px] overflow-hidden">
+            <div class="relative max-h-[300px] max-w-[291px] overflow-hidden max-md:rounded-lg max-sm:max-h-[200px] max-sm:max-w-full">
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
                 <!-- Product Image -->
@@ -39,45 +39,85 @@
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
 
                 <x-shop::products.ratings
-                    class="absolute bottom-1.5 items-center !border-white bg-white/80 !px-2 !py-1 text-xs ltr:left-1.5 rtl:right-1.5"
+                    class="absolute bottom-1.5 items-center !border-white bg-white/80 !px-2 !py-1 text-xs max-sm:!px-1.5 max-sm:!py-0.5 ltr:left-1.5 rtl:right-1.5"
                     ::average="product.ratings.average"
                     ::total="product.ratings.total"
+                    ::rating="false"
                     v-if="product.ratings.total"
                 />
-                
-                <!-- Product Sale Badge -->
-                <p
-                    class="absolute top-5 inline-block rounded-[44px] bg-[#E51A1A] px-2.5 text-sm text-white ltr:left-5 rtl:right-5"
-                    v-if="product.on_sale"
-                >
-                    @lang('shop::app.components.products.card.sale')
-                </p>
-
-                <!-- Product New Badge -->
-                <p
-                    class="absolute top-5 inline-block rounded-[44px] bg-navyBlue px-2.5 text-sm text-white ltr:left-5 rtl:right-5"
-                    v-else-if="product.is_new"
-                >
-                    @lang('shop::app.components.products.card.new')
-                </p>
 
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.after') !!}
+
+                <div class="action-items bg-black">
+                    <!-- Product Sale Badge -->
+                    <p
+                        class="absolute top-1.5 inline-block rounded-[44px] bg-red-600 px-2.5 text-sm text-white max-sm:rounded-l-none max-sm:rounded-r-xl max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-1.5 max-sm:ltr:left-0 rtl:right-5 max-sm:rtl:right-0"
+                        v-if="product.on_sale"
+                    >
+                        @lang('shop::app.components.products.card.sale')
+                    </p>
+
+                    <!-- Product New Badge -->
+                    <p
+                        class="absolute top-1.5 inline-block rounded-[44px] bg-navyBlue px-2.5 text-sm text-white max-sm:rounded-l-none max-sm:rounded-r-xl max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-1.5 max-sm:ltr:left-0 rtl:right-1.5 max-sm:rtl:right-0"
+                        v-else-if="product.is_new"
+                    >
+                        @lang('shop::app.components.products.card.new')
+                    </p>
+
+                    <div class="opacity-0 transition-all duration-300 group-hover:bottom-0 group-hover:opacity-100 max-lg:opacity-100 max-sm:opacity-100">
+
+                        {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
+
+                        @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                            <span
+                                class="absolute top-2.5 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg sm:hidden ltr:right-1.5 rtl:left-1.5"
+                                role="button"
+                                aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
+                                tabindex="0"
+                                :class="product.is_wishlist ? 'icon-heart-fill text-red-500' : 'icon-heart'"
+                                @click="addToWishlist()"
+                            >
+                            </span>
+                        @endif
+
+                        {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.after') !!}
+
+                        {!! view_render_event('bagisto.shop.components.products.card.compare_option.before') !!}
+
+                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                            <span
+                                class="icon-compare absolute top-10 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg sm:hidden ltr:right-1.5 rtl:left-1.5"
+                                role="button"
+                                aria-label="@lang('shop::app.components.products.card.add-to-compare')"
+                                tabindex="0"
+                                @click="addToCompare(product.id)"
+                            >
+                            </span>
+                        @endif
+
+                        {!! view_render_event('bagisto.shop.components.products.card.compare_option.after') !!}
+
+                    </div>
+                </div>
             </div>
 
             <!-- Product Information Section -->
-            <div class="-mt-9 grid max-w-[291px] translate-y-9 content-start gap-2.5 bg-white p-2.5 transition-transform duration-300 ease-out group-hover:-translate-y-0 group-hover:rounded-t-lg">
+            <div class="-mt-9 grid max-w-[291px] translate-y-9 content-start gap-2.5 bg-white p-2.5 transition-transform duration-300 ease-out group-hover:-translate-y-0 group-hover:rounded-t-lg max-sm:relative max-sm:mt-0 max-sm:min-w-[170px] max-sm:max-w-[192px] max-sm:translate-y-0 max-sm:gap-0 max-sm:px-0 max-sm:py-1.5">
+
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
                     
-                <p class="text-base">
+                <p class="text-base font-medium max-sm:mb-1.5 max-sm:max-w-[192px] max-sm:whitespace-break-spaces max-sm:text-sm max-sm:leading-4">
                     @{{ product.name }}
                 </p>
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.after') !!}
 
+                <!-- Pricing -->
                 {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
 
                 <div
-                    class="flex items-center gap-2.5 text-lg font-semibold"
+                    class="flex items-center gap-2.5 text-lg font-semibold max-sm:text-sm max-sm:leading-6"
                     v-html="product.price_html"
                 >
                 </div>
@@ -85,11 +125,11 @@
                 {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
 
                 <!-- Product Actions Section -->
-                <div class="action-items flex items-center justify-between opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100">
+                <div class="action-items flex items-center justify-between opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100 max-sm:hidden">
                     {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
 
                     <button
-                        class="secondary-button w-full max-w-full p-2.5 text-sm font-medium"
+                        class="secondary-button w-full max-w-full p-2.5 text-sm font-medium max-sm:rounded-xl max-sm:p-2"
                         :disabled="! product.is_saleable || isAddingToCart"
                         @click="addToCart()"
                     >
@@ -102,11 +142,11 @@
 
                     @if (core()->getConfigData('general.content.shop.wishlist_option'))
                         <span
-                            class="cursor-pointer p-2.5 text-2xl"
+                            class="cursor-pointer p-2.5 text-2xl max-sm:hidden"
                             role="button"
                             aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                             tabindex="0"
-                            :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
+                            :class="product.is_wishlist ? 'icon-heart-fill text-red-600' : 'icon-heart'"
                             @click="addToWishlist()"
                         >
                         </span>
@@ -118,7 +158,7 @@
 
                     @if (core()->getConfigData('general.content.shop.compare_option'))
                         <span
-                            class="icon-compare cursor-pointer p-2.5 text-2xl"
+                            class="icon-compare cursor-pointer p-2.5 text-2xl max-sm:hidden"
                             role="button"
                             aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                             tabindex="0"
@@ -157,14 +197,14 @@
 
                 <div class="action-items bg-black">
                     <p
-                        class="absolute top-5 inline-block rounded-[44px] bg-[#E51A1A] px-2.5 text-sm text-white ltr:left-5 rtl:right-5"
+                        class="absolute top-5 inline-block rounded-[44px] bg-[#E51A1A] px-2.5 text-sm text-white ltr:left-5 max-sm:ltr:left-2 rtl:right-5"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="absolute top-5 inline-block rounded-[44px] bg-navyBlue px-2.5 text-sm text-white ltr:left-5 rtl:right-5"
+                        class="absolute top-5 inline-block rounded-[44px] bg-navyBlue px-2.5 text-sm text-white ltr:left-5 max-sm:ltr:left-2 rtl:right-5"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -180,7 +220,7 @@
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
-                                :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
+                                :class="product.is_wishlist ? 'icon-heart-fill text-red-600' : 'icon-heart'"
                                 @click="addToWishlist()"
                             >
                             </span>
@@ -250,6 +290,7 @@
                         <x-shop::products.ratings
                             ::average="product.ratings.average"
                             ::total="product.ratings.total"
+                            ::rating="false"
                         />
                     </template>
                 </p>

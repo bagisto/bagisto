@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'הונאה',
                     'grand-total'     => 'סכום כולל',
                     'id'              => '#:מזהה',
-                    'images'          => 'תמונות',
+                    'items'           => 'פריטים',
                     'location'        => 'מיקום',
                     'order-id'        => 'מזהה הזמנה',
                     'pay-by'          => 'שלם באמצעות - :שיטה',
@@ -636,13 +636,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'פרטי הבנק',
                 'bill-to'                    => 'חשבונית ל',
-                'contact'                    => 'צור קשר',
                 'contact-number'             => 'מספר טלפון ליצירת קשר',
+                'contact'                    => 'צור קשר',
                 'date'                       => 'תאריך חשבונית',
                 'discount'                   => 'הנחה',
+                'excl-tax'                   => 'לא כולל מס:',
                 'grand-total'                => 'סכום כולל',
-                'invoice'                    => 'חשבונית',
                 'invoice-id'                 => 'מספר זיהוי חשבונית',
+                'invoice'                    => 'חשבונית',
                 'order-date'                 => 'תאריך הזמנה',
                 'order-id'                   => 'מספר הזמנה',
                 'payment-method'             => 'אמצעי תשלום',
@@ -659,10 +660,9 @@ return [
                 'subtotal-excl-tax'          => 'סה"כ ביניים (לא כולל מס)',
                 'subtotal-incl-tax'          => 'סה"כ ביניים (כולל מס)',
                 'subtotal'                   => 'סה"כ ביניים',
-                'tax'                        => 'מס',
                 'tax-amount'                 => 'סכום מס',
+                'tax'                        => 'מס',
                 'vat-number'                 => 'מספר ת.ז.',
-                'excl-tax'                   => 'לא כולל מס:',
             ],
         ],
 
@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'מחק',
                 'desc'                          => 'יורד',
                 'edit'                          => 'ערוך',
+                'featured'                      => 'מומלץ',
                 'filter-title'                  => 'כותרת',
                 'filters'                       => 'מסננים',
                 'footer-link'                   => 'קישורי תחתית',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'מגבלה',
                 'link'                          => 'קישור',
                 'name'                          => 'שם',
+                'no'                            => 'לא',
+                'new'                           => 'חדש',
                 'preview'                       => 'תצוגה מקדימה',
                 'product-carousel'              => 'קרוסלת מוצרים',
                 'product-carousel-description'  => 'הצגת מוצרים בצורה אלגנטית עם קרוסלת מוצרים דינמית ורספונסיבית.',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => 'כותרת',
                     'update-service'     => 'עדכן שירותים',
                 ],
+                'yes'                           => 'כן',
             ],
 
             'create-success' => 'ערכת העיצוב נוצרה בהצלחה',
@@ -3441,6 +3445,18 @@ return [
                     'info'  => 'הגדרת קנייה כאורח אורח, דף תצוגת מוצר, דף תצוגת עגלת הקניות, חנות החנות, ביקורת ושיתוף חברתי של התכונה.',
                     'title' => 'מוצרים',
 
+                    'search' => [
+                        'admin-mode-info'      => 'מצב חיפוש מנהל',
+                        'admin-mode'           => 'מצב חיפוש מנהל',
+                        'database'             => 'מסד נתונים',
+                        'elastic'              => 'חיפוש אלסטי',
+                        'search-engine'        => 'מנוע חיפוש',
+                        'storefront-mode-info' => 'מצב חיפוש בחנות יתבצע בהתאם למנוע החיפוש הנבחר, כולל עמוד קטגוריה, עמוד חיפוש ופונקציות חיפוש נוספות.',
+                        'storefront-mode'      => 'מצב חיפוש בחנות',
+                        'title-info'           => 'כדי להגדיר את מנוע החיפוש לחיפושי מוצרים, ניתן לבחור בין מסד נתונים ו-Elasticsearch בהתאם לדרישות שלך. אם יש לך מספר גדול של מוצרים, מומלץ להשתמש ב-Elasticsearch.',
+                        'title'                => 'חיפוש',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'אפשר רכישה באורח אורח',
                         'allow-guest-checkout-hint' => 'הערה: כאשר מופעל, ניתן להגדיר אופציה זו לכל מוצר באופן פרטי.',
@@ -3465,9 +3481,7 @@ return [
                         'buy-now-button-display' => 'ללקוחות ניתן לרכוש מוצרים מיד',
                         'cheapest-first'         => 'הכי זולים קודם',
                         'comma-separated'        => 'מופרדים בפסיקים',
-                        'database'               => 'בסיס נתונים',
                         'default-list-mode'      => 'מצב רשימת ברירת מחדל',
-                        'elastic'                => 'חיפוש מרובה תוצאות',
                         'expensive-first'        => 'הכי יקרים קודם',
                         'from-a-z'               => 'מאות A ל Z',
                         'from-z-a'               => 'מאות Z לא',
@@ -3476,7 +3490,6 @@ return [
                         'list'                   => 'רשימה',
                         'oldest-first'           => 'הישן ביותר קודם',
                         'products-per-page'      => 'מוצרים לעמוד',
-                        'search-mode'            => 'מצב חיפוש',
                         'sort-by'                => 'מיין לפי',
                         'title'                  => 'חנות החנות',
                         'title-info'             => 'חנות החנות היא ממשק המשתמש המונהל על ידי הלקוחות בחנות המקוונת ומציגה מוצרים, קטגוריות וניווט לחוויית קנייה חלקה.',
@@ -3969,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'סנן',
+                    'apply-filters-btn' => 'החל מסננים',
+                    'back-btn'          => 'חזרה',
+                    'create-new-filter' => 'צור פילטר חדש',
+                    'custom-filters'    => 'פילטרים מותאמים אישית',
+                    'delete-error'      => 'משהו השתבש בעת מחיקת המסנן, אנא נסה שוב.',
+                    'delete-success'    => 'הפילטר נמחק בהצלחה.',
+                    'empty-description' => 'אין פילטרים נבחרים זמינים לשמירה. יש לבחור פילטרים לשמירה.',
+                    'empty-title'       => 'הוסף פילטרים לשמירה',
+                    'name'              => 'שם',
+                    'quick-filters'     => 'פילטרים מהירים',
+                    'save-btn'          => 'שמור',
+                    'save-filter'       => 'שמור פילטר',
+                    'saved-success'     => 'הפילטר נשמר בהצלחה.',
+                    'selected-filters'  => 'פילטרים נבחרים',
+                    'title'             => 'פילטר',
+                    'update'            => 'עדכן',
+                    'update-filter'     => 'עדכן מסנן',
+                    'updated-success'   => 'המסנן עודכן בהצלחה.',
                 ],
 
                 'search' => [
@@ -3979,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => 'בחר',
-                'title'  => 'החל סינון',
+                'title'  => 'מסננים',
 
                 'dropdown' => [
                     'searchable' => [

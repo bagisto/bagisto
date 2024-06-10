@@ -321,5 +321,3 @@
 <div class="label-processing"></div>
 
 <div class="label-pending"></div>
-
-<div class="label-canceled"></div>

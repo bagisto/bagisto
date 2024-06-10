@@ -1,35 +1,34 @@
 @props([
     'average' => 0,
     'total'   => 0,
+    'rating' => true,
 ])
 
-<div {{ $attributes->merge(['class' => 'flex w-max rounded-md border border-zinc-200 px-4 py-2']) }}>
-    <v-product-ratings
-        {{ $attributes }}
-        average="{{ $average }}"
-        total="{{ $total }}"
-    >
-    </v-product-ratings>
-</div>
+<v-product-ratings
+    {{ $attributes->merge(['class' => 'flex w-max items-center rounded-md border border-zinc-200 px-4 py-2']) }}
+    average="{{ $average }}"
+    total="{{ $total }}"
+>
+</v-product-ratings>
 
 @pushOnce("scripts")
     <script
         type="text/x-template"
         id="v-product-ratings-template"
     >
-        <span class="font-semibold text-black">
-            @{{ average }}
-        </span>
-    
-        <span class="icon-star-fill -mt-px text-xl text-amber-500"></span>
+        <div>
+            <span class="text-sm font-medium text-black max-sm:text-xs">
+                @{{ average }}
+            </span>
         
-        <span class="mx-1 text-zinc-300">|</span>
-        
-        <span class="text-black ltr:ml-1 rtl:mr-1">
-            @{{ abbreviatedTotal }}
+            <span class="icon-star-fill -mt-1 text-xl text-amber-500 max-sm:-mt-1 max-sm:text-lg"></span>
+            
+            <span class="border-l border-zinc-300 text-sm font-medium text-black max-sm:border-zinc-300 max-sm:text-xs ltr:pl-1 rtl:pr-1">
+                @{{ abbreviatedTotal }}
 
-            <span>Ratings</span>
-        </span>
+                <span v-if="rating">@lang('shop::app.components.products.ratings.title')</span>
+            </span>
+        </div>
     </script>
 
     <script type="module">
@@ -38,7 +37,7 @@
 
             props: {
                 average: {
-                    type: Number,
+                    type: String,
                     required: true,
                 },
 
@@ -46,11 +45,11 @@
                     type: Number,
                     required: true,
                 },
-            },
 
-            data() {
-                return {
-                };
+                rating: {
+                    type: Boolean,
+                    required: false,
+                },
             },
 
             computed: {

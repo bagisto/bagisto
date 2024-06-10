@@ -149,7 +149,7 @@ return [
                     'fraud'           => 'Fraude',
                     'grand-total'     => 'Totaalbedrag',
                     'id'              => '#:id',
-                    'images'          => 'Afbeeldingen',
+                    'items'           => 'Artikelen',
                     'location'        => 'Locatie',
                     'order-id'        => 'Bestelnummer',
                     'pay-by'          => 'Betaal Via - :method',
@@ -636,13 +636,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Bankgegevens',
                 'bill-to'                    => 'Factuuradres',
-                'contact'                    => 'Contact',
                 'contact-number'             => 'Contactnummer',
+                'contact'                    => 'Contact',
                 'date'                       => 'Factuurdatum',
                 'discount'                   => 'Korting',
+                'excl-tax'                   => 'Excl. BTW:',
                 'grand-total'                => 'Totaalbedrag',
-                'invoice'                    => 'Factuur',
                 'invoice-id'                 => 'Factuurnummer',
+                'invoice'                    => 'Factuur',
                 'order-date'                 => 'Besteldatum',
                 'order-id'                   => 'Bestelnummer',
                 'payment-method'             => 'Betaalmethode',
@@ -659,10 +660,9 @@ return [
                 'subtotal-excl-tax'          => 'Subtotaal (excl. BTW)',
                 'subtotal-incl-tax'          => 'Subtotaal (incl. BTW)',
                 'subtotal'                   => 'Subtotaal',
-                'tax'                        => 'Belasting',
                 'tax-amount'                 => 'Belastingbedrag',
+                'tax'                        => 'Belasting',
                 'vat-number'                 => 'BTW-nummer',
-                'excl-tax'                   => 'Excl. BTW:',
             ],
         ],
 
@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => 'Verwijderen',
                 'desc'                          => 'aflopend',
                 'edit'                          => 'Bewerken',
+                'featured'                      => 'Uitgelicht',
                 'filter-title'                  => 'Titel',
                 'filters'                       => 'Filters',
                 'footer-link'                   => 'Voetteksten',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => 'Limiet',
                 'link'                          => 'Link',
                 'name'                          => 'Naam',
+                'no'                            => 'Nee',
+                'new'                           => 'Nieuw',
                 'preview'                       => 'Voorbeeld',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => 'Titel',
                     'update-service'     => 'Diensten bijwerken',
                 ],
+                'yes'                           => 'Ja',
             ],
 
             'create-success' => 'Thema is succesvol aangemaakt',
@@ -3441,6 +3445,18 @@ return [
                     'info'  => 'Stel gastafrekening, productweergavepagina, winkelwagenweergavepagina, winkelvoorkant, beoordeling en attribuutsociale deling in.',
                     'title' => 'Producten',
 
+                    'search' => [
+                        'admin-mode-info'      => 'Mega Zoeken, Datagrid en andere zoekfunctionaliteiten in het beheerderspaneel zijn gebaseerd op de geselecteerde zoekmachine.',
+                        'admin-mode'           => 'Beheerders Zoekmodus',
+                        'database'             => 'Database',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => 'Zoekmachine',
+                        'storefront-mode-info' => 'Zoekfunctionaliteit op de winkelvoorkant is gebaseerd op de geselecteerde zoekmachine, inclusief de categoriepagina, zoekpagina en andere zoekfunctionaliteiten.',
+                        'storefront-mode'      => 'Winkelvoorkant Zoekmodus',
+                        'title-info'           => 'Om de zoekmachine in te stellen voor productzoekopdrachten, kunt u kiezen tussen een database en Elasticsearch op basis van uw vereisten. Als u een groot aantal producten heeft, wordt Elasticsearch aanbevolen.',
+                        'title'                => 'Zoeken',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'Sta gastafrekening toe',
                         'allow-guest-checkout-hint' => 'Hint: Als dit is ingeschakeld, kan deze optie specifiek worden geconfigureerd voor elk product.',
@@ -3465,9 +3481,7 @@ return [
                         'buy-now-button-display' => 'Klanten toestaan om producten direct te kopen',
                         'cheapest-first'         => 'Goedkoopste eerst',
                         'comma-separated'        => 'Komma gescheiden',
-                        'database'               => 'Database',
                         'default-list-mode'      => 'Standaard lijstmodus',
-                        'elastic'                => 'Elastische zoekopdracht',
                         'expensive-first'        => 'Duurste eerst',
                         'from-a-z'               => 'Van A-Z',
                         'from-z-a'               => 'Van Z-A',
@@ -3476,7 +3490,6 @@ return [
                         'list'                   => 'Lijst',
                         'oldest-first'           => 'Oudste eerst',
                         'products-per-page'      => 'Producten per pagina',
-                        'search-mode'            => 'Zoekmodus',
                         'sort-by'                => 'Sorteer op',
                         'title'                  => 'Etalage',
                         'title-info'             => 'De etalage is de klantgerichte interface van een online winkel, waar producten, categorieën en navigatie worden getoond voor een naadloze winkelervaring.',
@@ -3969,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filter',
+                    'apply-filters-btn' => 'Filters toepassen',
+                    'back-btn'          => 'Terug',
+                    'create-new-filter' => 'Nieuwe filter maken',
+                    'custom-filters'    => 'Aangepaste filters',
+                    'delete-error'      => 'Er is iets misgegaan bij het verwijderen van het filter, probeer het opnieuw.',
+                    'delete-success'    => 'Filter is succesvol verwijderd.',
+                    'empty-description' => 'Er zijn geen geselecteerde filters beschikbaar om op te slaan. Selecteer filters om op te slaan.',
+                    'empty-title'       => 'Filters toevoegen om op te slaan',
+                    'name'              => 'Naam',
+                    'quick-filters'     => 'Snelle filters',
+                    'save-btn'          => 'Opslaan',
+                    'save-filter'       => 'Filter opslaan',
+                    'saved-success'     => 'Filter is succesvol opgeslagen.',
+                    'selected-filters'  => 'Geselecteerde filters',
+                    'title'             => 'Filter',
+                    'update'            => 'Bijwerken',
+                    'update-filter'     => 'Filter bijwerken',
+                    'updated-success'   => 'Het filter is succesvol bijgewerkt.',
                 ],
 
                 'search' => [
@@ -3979,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => 'Selecteren.',
-                'title'  => 'Filters Toepassen',
+                'title'  => 'Filters',
 
                 'dropdown' => [
                     'searchable' => [

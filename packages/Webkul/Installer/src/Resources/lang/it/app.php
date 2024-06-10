@@ -200,7 +200,7 @@ return [
 
                 'bold-collections' => [
                     'content' => [
-                        'btn-title'   => 'Visualizza Tutto',
+                        'btn-title'   => 'Visualizza Collezioni',
                         'description' => 'Presentiamo le nostre nuove Collezioni Audaci! Elevalo il tuo stile con design audaci e dichiarazioni vibranti. Esplora modelli straordinari e colori audaci che ridefiniscono il tuo guardaroba. Preparati ad abbracciare l\'straordinario!',
                         'title'       => 'Preparati per le nostre nuove Collezioni Audaci!',
                     ],

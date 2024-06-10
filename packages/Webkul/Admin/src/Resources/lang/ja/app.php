@@ -149,7 +149,7 @@ return [
                     'fraud'           => '詐欺',
                     'grand-total'     => '合計金額',
                     'id'              => '#:id',
-                    'images'          => '画像',
+                    'items'           => 'アイテム',
                     'location'        => '場所',
                     'order-id'        => '注文ID',
                     'pay-by'          => ':method で支払う',
@@ -636,13 +636,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => '銀行詳細',
                 'bill-to'                    => '請求先',
-                'contact'                    => '連絡先',
                 'contact-number'             => '連絡先番号',
+                'contact'                    => '連絡先',
                 'date'                       => '請求日',
                 'discount'                   => '割引',
+                'excl-tax'                   => '税抜き:',
                 'grand-total'                => '総合計',
-                'invoice'                    => '請求書',
                 'invoice-id'                 => '請求書ID',
+                'invoice'                    => '請求書',
                 'order-date'                 => '注文日',
                 'order-id'                   => '注文ID',
                 'payment-method'             => '支払方法',
@@ -659,10 +660,9 @@ return [
                 'subtotal-excl-tax'          => '小計（税抜き）',
                 'subtotal-incl-tax'          => '小計（税込み）',
                 'subtotal'                   => '小計',
-                'tax'                        => '税金',
                 'tax-amount'                 => '税額',
+                'tax'                        => '税金',
                 'vat-number'                 => 'VAT番号',
-                'excl-tax'                   => '税抜き:',
             ],
         ],
 
@@ -3114,6 +3114,7 @@ return [
                 'delete'                        => '削除',
                 'desc'                          => '降順',
                 'edit'                          => '編集',
+                'featured'                      => '注目',
                 'filter-title'                  => 'タイトル',
                 'filters'                       => 'フィルター',
                 'footer-link'                   => 'フッターリンク',
@@ -3131,6 +3132,8 @@ return [
                 'limit'                         => '制限',
                 'link'                          => 'リンク',
                 'name'                          => '名前',
+                'no'                            => 'いいえ',
+                'new'                           => '新しい',
                 'preview'                       => 'プレビュー',
                 'product-carousel'              => '商品カルーセル',
                 'product-carousel-description'  => '動的でレスポンシブな商品カルーセルを使用して、製品をエレガントにショーケースします。',
@@ -3169,6 +3172,7 @@ return [
                     'title'              => 'タイトル',
                     'update-service'     => 'サービスを更新',
                 ],
+                'yes'                           => 'はい',
             ],
 
             'create-success' => 'テーマが正常に作成されました',
@@ -3441,6 +3445,18 @@ return [
                     'info'  => 'ゲストチェックアウト、製品表示ページ、カート表示ページ、ストアフロント、レビュー、属性ソーシャルシェアを設定します。',
                     'title' => '製品',
 
+                    'search' => [
+                        'admin-mode-info'      => '管理者モードでは、Mega Search、Datagrid、その他の管理パネルの検索機能は選択した検索エンジンに基づいて動作します。',
+                        'admin-mode'           => '管理者検索モード',
+                        'database'             => 'データベース',
+                        'elastic'              => 'Elastic Search',
+                        'search-engine'        => '検索エンジン',
+                        'storefront-mode-info' => 'ストアフロントの検索機能は、カテゴリページ、検索ページ、その他の検索機能を含む、選択した検索エンジンに基づいて動作します。',
+                        'storefront-mode'      => 'ストアフロント検索モード',
+                        'title-info'           => '製品の検索エンジンを設定するには、データベースとElasticsearchのいずれかを選択できます。製品数が多い場合は、Elasticsearchが推奨されます。',
+                        'title'                => '検索',
+                    ],
+
                     'guest-checkout' => [
                         'allow-guest-checkout'      => 'ゲストチェックアウトを許可',
                         'allow-guest-checkout-hint' => 'ヒント：オンにすると、このオプションは各製品ごとに設定できます。',
@@ -3465,9 +3481,7 @@ return [
                         'buy-now-button-display' => '顧客に直接製品購入を許可',
                         'cheapest-first'         => '最安値から',
                         'comma-separated'        => 'カンマ区切り',
-                        'database'               => 'データベース',
                         'default-list-mode'      => 'デフォルトリストモード',
-                        'elastic'                => 'エラスティックサーチ',
                         'expensive-first'        => '最高価格から',
                         'from-a-z'               => 'AからZへ',
                         'from-z-a'               => 'ZからAへ',
@@ -3476,7 +3490,6 @@ return [
                         'list'                   => 'リスト',
                         'oldest-first'           => '古い順',
                         'products-per-page'      => 'ページごとの製品数',
-                        'search-mode'            => '検索モード',
                         'sort-by'                => '並べ替え',
                         'title'                  => 'ストアフロント',
                         'title-info'             => 'ストアフロントは、オンラインショップの顧客向けインターフェースで、製品、カテゴリ、およびナビゲーションをシームレスなショッピング体験のために展示します。',
@@ -3969,7 +3982,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'フィルター',
+                    'apply-filters-btn' => 'フィルタを適用する',
+                    'back-btn'          => '戻る',
+                    'create-new-filter' => '新しいフィルターを作成',
+                    'custom-filters'    => 'カスタムフィルター',
+                    'delete-error'      => 'フィルターの削除中に問題が発生しました。もう一度お試しください。',
+                    'delete-success'    => 'フィルターは正常に削除されました。',
+                    'empty-description' => '保存する選択されたフィルターはありません。保存するフィルターを選択してください。',
+                    'empty-title'       => '保存するフィルターを追加',
+                    'name'              => '名前',
+                    'quick-filters'     => 'クイックフィルター',
+                    'save-btn'          => '保存',
+                    'save-filter'       => 'フィルターを保存',
+                    'saved-success'     => 'フィルターは正常に保存されました。',
+                    'selected-filters'  => '選択したフィルター',
+                    'title'             => 'フィルター',
+                    'update'            => '更新',
+                    'update-filter'     => 'フィルターを更新',
+                    'updated-success'   => 'フィルターが正常に更新されました',
                 ],
 
                 'search' => [
@@ -3979,7 +4009,7 @@ return [
 
             'filters' => [
                 'select' => '選択',
-                'title'  => 'フィルターを適用',
+                'title'  => 'フィルター',
 
                 'dropdown' => [
                     'searchable' => [

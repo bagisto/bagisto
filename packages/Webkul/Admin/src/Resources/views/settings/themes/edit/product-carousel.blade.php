@@ -1,6 +1,4 @@
-<!-- Image-Carousel Component -->
-<v-product-carousel></v-product-carousel>
-
+<!-- Product Carousel Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"
@@ -296,7 +294,7 @@
                                 </v-field>
                     
                                 <label
-                                    class="peer-checked:bg-navyBlue peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
+                                    class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
                                     for="status"
                                 ></label>
                             </label>
@@ -331,12 +329,19 @@
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
-                                type="text"
+                                type="select"
                                 name="key"
+                                ::value="filters.available[0].code"
                                 rules="required"
                                 :label="trans('admin::app.settings.themes.edit.key-input')"
-                                :placeholder="trans('admin::app.settings.themes.edit.key-input')"
-                            />
+                                @change="handleFilter($event)"
+                            >
+                                <option
+                                    v-for="filter in filters.available"
+                                    :value="filter.code"
+                                    :text="filter.name"
+                                ></option>
+                            </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error control-name="key" />
                         </x-admin::form.control-group>
@@ -347,13 +352,31 @@
                                 @lang('admin::app.settings.themes.edit.value-input')
                             </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="value"
-                                rules="required"
-                                :label="trans('admin::app.settings.themes.edit.value-input')"
-                                :placeholder="trans('admin::app.settings.themes.edit.value-input')"
-                            />
+                            <template v-if="filters.applied.type == 'select'">
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="value"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.themes.edit.value-input')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                                >
+                                    <option
+                                        v-for="option in filters.applied.options"
+                                        :value="option.id"
+                                        :text="option.name"
+                                    ></option>
+                                </x-admin::form.control-group.control>
+                            </template>
+
+                            <template v-else>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="value"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.themes.edit.value-input')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                                />
+                            </template>
 
                             <x-admin::form.control-group.error control-name="value" />
                         </x-admin::form.control-group>
@@ -382,13 +405,53 @@
             data() {
                 return {
                     options: @json($theme->translate($currentLocale->code)['options'] ?? null),
+
+                    filters: {
+                        available: [
+                            {
+                                id: 'new',
+                                code: 'new',
+                                type: 'select',
+                                name: '@lang('admin::app.settings.themes.edit.new')',
+                                options: [
+                                    {
+                                        'id': 0,
+                                        'name': '@lang('admin::app.settings.themes.edit.no')',
+                                    },
+                                    {
+                                        'id': 1,
+                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
+                                    },
+                                ],
+                            },
+                            {
+                                id: 'featured',
+                                code: 'featured',
+                                type: 'select',
+                                name: '@lang('admin::app.settings.themes.edit.featured')',
+                                options: [
+                                    {
+                                        'id': 0,
+                                        'name': '@lang('admin::app.settings.themes.edit.no')',
+                                    },
+                                    {
+                                        'id': 1,
+                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
+                                    },
+                                ],
+                            },
+                            ...@json(app(Webkul\Attribute\Repositories\AttributeRepository::class)->getFilterableAttributes()),
+                        ],
+
+                        applied: [],
+                    },
                 };
             },
 
             created() {
                 if (this.options === null) {
                     this.options = { filters: {} };
-                }   
+                }
                 
                 if (! this.options.filters) {
                     this.options.filters = {};
@@ -398,7 +461,7 @@
                     .filter(key => ! ['sort', 'limit', 'title'].includes(key))
                     .map(key => ({
                         key: key,
-                        value: this.options.filters[key]
+                        value: this.options.filters[key],
                     }));
             },
 
@@ -417,6 +480,10 @@
                             this.options.filters.splice(index, 1);
                         }
                     });
+                },
+
+                handleFilter(event) {
+                    this.filters.applied = this.filters.available.find(filter => filter.code == event.target.value);
                 },
             },
         });
