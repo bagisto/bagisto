@@ -110,10 +110,10 @@ class DatabaseManager
      *
      * @return void|string
      */
-    public function seedSampleProducts()
+    public function seedSampleProducts($parameters)
     {
         try {
-            app(SampleProductsTableSeeder::class)->run();
+            app(SampleProductsTableSeeder::class)->run($parameters);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),

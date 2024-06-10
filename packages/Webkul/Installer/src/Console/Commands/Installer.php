@@ -19,6 +19,13 @@ use function Laravel\Prompts\text;
 class Installer extends Command
 {
     /**
+     * Contain locales anb currencies details.
+     *
+     * @var string
+     */
+    protected $applicationDetails;
+
+    /**
      * The name and signature of the console command.
      *
      * @var string
@@ -278,7 +285,7 @@ class Installer extends Command
                                 array_diff(array_keys($allowedCurrencies), [$defaultCurrency])
                             )));
 
-        return [
+        return $this->applicationDetails = [
             'default_locale'     => $defaultLocale,
             'allowed_locales'    => $allowedLocales,
             'default_currency'   => $defaultCurrency,
@@ -397,7 +404,7 @@ class Installer extends Command
             );
 
             if ($sampleProduct === 'true') {
-                app(DatabaseManager::class)->seedSampleProducts();
+                app(DatabaseManager::class)->seedSampleProducts($this->applicationDetails);
             }
 
             $filePath = storage_path('installed');
