@@ -127,7 +127,7 @@
                         <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
                             <x-admin::dropdown.menu.item
                                 v-for="channel in channels"
-                                ::class="{'bg-gray-100': channel.code == filters.channel}"
+                                ::class="{'bg-gray-100 dark:bg-gray-950': channel.code == filters.channel}"
                                 @click="filters.channel = channel.code"
                             >
                                 @{{ channel.name }}
