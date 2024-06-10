@@ -58,14 +58,14 @@
                 class="flex gap-8 pb-2.5 [&>*]:flex-[0] mt-10 overflow-auto scroll-smooth scrollbar-hide max-sm:mt-5 max-sm:gap-4 max-sm:pb-0 max-sm:whitespace-nowrap"
             >
                 <x-shop::products.card
-                    class="min-w-[291px] max-sm:h-fit max-sm:min-w-[198px]"
+                    class="min-w-[291px] max-sm:h-fit max-sm:min-w-[192px]"
                     v-for="product in products"
                 />
             </div>
 
             <a
                 :href="navigationLink"
-                class="secondary-button mx-auto mt-5 block w-max rounded-2xl px-11 py-3 text-center text-base max-md:rounded-xl max-sm:mt-0 max-sm:hidden max-sm:py-3.5"
+                class="secondary-button mx-auto mt-5 block w-max rounded-2xl px-11 py-3 text-center text-base max-md:rounded-lg max-sm:mt-0 max-sm:hidden max-sm:py-3.5"
                 v-if="navigationLink"
             >
                 @lang('shop::app.components.products.carousel.view-all')

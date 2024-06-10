@@ -1001,26 +1001,27 @@ return [
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
-                'locale_based'  => false,
+                'locale_based'  => true,
             ], [
                 'name'          => 'address',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.street-address',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
-                'locale_based'  => false,
+                'locale_based'  => true,
             ], [
                 'name'          => 'zipcode',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.zip',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
-                'locale_based'  => false,
+                'locale_based'  => true,
             ], [
                 'name'          => 'store_name',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.store-name',
                 'type'          => 'text',
                 'channel_based' => true,
+                'locale_based'  => true,
             ], [
                 'name'          => 'vat_number',
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.vat-number',
@@ -1036,6 +1037,7 @@ return [
                 'title'         => 'admin::app.configuration.index.sales.shipping.origin.bank-details',
                 'type'          => 'textarea',
                 'channel_based' => true,
+                'locale_based'  => true,
             ],
         ],
     ], [

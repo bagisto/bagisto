@@ -11,7 +11,7 @@
         id="v-flash-item-template"
     >
         <div
-            class="flex w-max max-w-[408px] justify-between gap-12 rounded-lg px-5 py-3 max-sm:max-w-[320px] max-sm:items-center max-sm:gap-1 max-sm:p-3"
+            class="flex w-max max-w-[408px] justify-between gap-12 rounded-lg px-5 py-3 max-sm:max-w-[320px] max-sm:items-center max-sm:gap-2 max-sm:p-3"
             :style="typeStyles[flash.type]['container']"
         >
             <p

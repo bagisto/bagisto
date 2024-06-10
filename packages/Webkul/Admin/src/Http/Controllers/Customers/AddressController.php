@@ -5,12 +5,10 @@ namespace Webkul\Admin\Http\Controllers\Customers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Requests\AddressRequest;
 use Webkul\Admin\Http\Resources\AddressResource;
-use Webkul\Core\Rules\AlphaNumericSpace;
-use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Customer\Rules\VatIdRule;
 
 class AddressController extends Controller
 {
@@ -52,22 +50,9 @@ class AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(int $id): JsonResponse
+    public function store(int $id, AddressRequest $request): JsonResponse
     {
-        $this->validate(request(), [
-            'company_name'    => [new AlphaNumericSpace],
-            'address'         => ['required', 'array'],
-            'country'         => ['required', new AlphaNumericSpace],
-            'state'           => ['required', new AlphaNumericSpace],
-            'city'            => ['required', 'string'],
-            'postcode'        => ['required', 'numeric'],
-            'phone'           => ['required', new PhoneNumber],
-            'vat_id'          => [new VatIdRule()],
-            'email'           => ['required'],
-            'default_address' => ['sometimes', 'required', 'in:0,1'],
-        ]);
-
-        $data = array_merge(request()->only([
+        $data = array_merge($request->only([
             'customer_id',
             'company_name',
             'vat_id',
@@ -114,22 +99,9 @@ class AddressController extends Controller
     /**
      * Edit's the pre made resource of customer called address.
      */
-    public function update(int $id): JsonResponse
+    public function update(int $id, AddressRequest $request): JsonResponse
     {
-        $this->validate(request(), [
-            'company_name'    => [new AlphaNumericSpace],
-            'address'         => ['required', 'array'],
-            'country'         => ['required', new AlphaNumericSpace],
-            'state'           => ['required', new AlphaNumericSpace],
-            'city'            => ['required', 'string'],
-            'postcode'        => ['required', 'numeric'],
-            'phone'           => ['required', new PhoneNumber],
-            'vat_id'          => [new VatIdRule()],
-            'email'           => ['required'],
-            'default_address' => ['sometimes', 'required', 'boolean'],
-        ]);
-
-        $data = array_merge(request()->only([
+        $data = array_merge($request->only([
             'customer_id',
             'company_name',
             'vat_id',
