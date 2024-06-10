@@ -3,7 +3,6 @@
 namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Rules\AlphaNumericSpace;
 use Webkul\Core\Rules\PhoneNumber;
 
 class CartAddressRequest extends FormRequest
@@ -47,15 +46,16 @@ class CartAddressRequest extends FormRequest
     private function mergeAddressRules(string $addressType)
     {
         $this->mergeWithRules([
-            "{$addressType}.first_name" => ['required', new AlphaNumericSpace],
-            "{$addressType}.last_name"  => ['required', new AlphaNumericSpace],
-            "{$addressType}.email"      => ['required'],
-            "{$addressType}.address"    => ['required', 'array', 'min:1'],
-            "{$addressType}.city"       => ['required'],
-            "{$addressType}.country"    => [new AlphaNumericSpace],
-            "{$addressType}.state"      => [new AlphaNumericSpace],
-            "{$addressType}.postcode"   => ['numeric'],
-            "{$addressType}.phone"      => ['required', new PhoneNumber],
+            "{$addressType}.company_name" => ['nullable'],
+            "{$addressType}.first_name"   => ['required'],
+            "{$addressType}.last_name"    => ['required'],
+            "{$addressType}.email"        => ['required'],
+            "{$addressType}.address"      => ['required', 'array', 'min:1'],
+            "{$addressType}.city"         => ['required'],
+            "{$addressType}.country"      => ['required'],
+            "{$addressType}.state"        => ['required'],
+            "{$addressType}.postcode"     => ['required', 'numeric'],
+            "{$addressType}.phone"        => ['required', new PhoneNumber],
         ]);
     }
 
