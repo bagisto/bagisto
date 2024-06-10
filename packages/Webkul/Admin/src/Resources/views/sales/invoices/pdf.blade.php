@@ -214,7 +214,7 @@
 
     <body dir="{{ core()->getCurrentLocale()->direction }}">
         <div class="logo-container {{ core()->getCurrentLocale()->direction }}">
-            @if (!core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
+            @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
                 <img src="data:image/png;base64,{{ base64_encode(file_get_contents(Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')))) }}"/>
             @else
                 <img src="data:image/png;base64,{{ base64_encode(file_get_contents(bagisto_asset('images/logo.png'))) }}"/>
