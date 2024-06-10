@@ -131,6 +131,61 @@ There is no dependency needed to be updated at for this upgrade.
 
 `core()->getConfigData('catalog.products.search.engine')` represents the search engine for products. If "Elastic Search" is selected, elastic indexing will be enabled. The other two configurations (`catalog.products.search.admin_mode` and `catalog.products.search.storefront_mode`) will function relative to this configuration.
 
+5: The `locale_based` setting in the sales shipping origin configuration has been updated to support multiple locale values.
+
+```diff
+[
+    'key'    => 'sales.shipping.origin',
+    'name'   => 'admin::app.configuration.index.sales.shipping.origin.title',
+    'info'   => 'admin::app.configuration.index.sales.shipping.origin.title-info',
+    'sort'   => 0,
+    'fields' => [
+        [
+            'name'          => 'city',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.city',
+            'type'          => 'text',
+            'validation'    => 'required',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'address',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.street-address',
+            'type'          => 'text',
+            'validation'    => 'required',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'zipcode',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.zip',
+            'type'          => 'text',
+            'validation'    => 'required',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'store_name',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.store-name',
+            'type'          => 'text',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'bank_details',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.bank-details',
+            'type'          => 'textarea',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ],
+    ],
+]
+```
+
+If you are migrating your existing store to this version, please save the configuration values again, as previously saved values will no longer work.
+
+
 
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names

@@ -1,11 +1,11 @@
 @component('admin::emails.layout')
     <div style="margin-bottom: 34px;">
         <span style="font-size: 22px;font-weight: 600;color: #121A26">
-            {{ __('admin::app.emails.orders.inventory-source.title') }}
+            @lang('admin::app.emails.orders.inventory-source.title')
         </span> <br>
 
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-            {{ __('admin::app.emails.dear', ['admin_name' => $shipment->inventory_source->contact_name]) }},👋
+            @lang('admin::app.emails.dear', ['admin_name' => $shipment->inventory_source->contact_name]),👋
         </p>
 
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
@@ -18,14 +18,14 @@
     </div>
 
     <div style="font-size: 20px;font-weight: 600;color: #121A26">
-        {{ __('admin::app.emails.orders.inventory-source.summary') }}
+        @lang('admin::app.emails.orders.inventory-source.summary')
     </div>
 
     <div style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
         @if ($shipment->order->shipping_address)
             <div style="line-height: 25px;">
                 <div style="font-size: 16px;font-weight: 600;color: #121A26;">
-                    {{ __('admin::app.emails.orders.shipping-address') }}
+                    @lang('admin::app.emails.orders.shipping-address')
                 </div>
 
                 <div style="font-size: 16px;font-weight: 400;color: #384860;margin-bottom: 40px;">
@@ -41,15 +41,29 @@
 
                     ---<br/>
 
-                    {{ __('admin::app.emails.orders.contact') }} : {{ $shipment->order->billing_address->phone }}
+                    @lang('admin::app.emails.orders.contact') : {{ $shipment->order->billing_address->phone }}
                 </div>
 
                 <div style="font-size: 16px;font-weight: 600;color: #121A26;">
-                    {{ __('admin::app.emails.orders.shipping') }}
+                    @lang('admin::app.emails.orders.shipping')
                 </div>
 
                 <div style="font-size: 16px;font-weight: 400;color: #384860;">
                     {{ $shipment->order->shipping_title }}
+                </div>
+
+                <div style="font-size: 16px; color: #384860;">
+                    <div>
+                        <span>@lang('admin::app.emails.orders.carrier') : </span>
+
+                        {{ $shipment->carrier_title }}
+                    </div>
+
+                    <div>
+                        <span>@lang('admin::app.emails.orders.tracking-number') : </span>
+
+                        {{ $shipment->track_number }}
+                    </div>
                 </div>
 
                 @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($shipment->order->payment->method); @endphp
@@ -57,15 +71,11 @@
                 @if (! empty($additionalDetails))
                     <div style="font-size: 16px; color: #384860;">
                         <div>
-                            <span>{{ __('admin::app.emails.orders.carrier') }} : </span>
-
-                            {{ $shipment->carrier_title }}
+                            <span>{{ $additionalDetails->title }} : </span>
                         </div>
 
                         <div>
-                            <span>{{ __('admin::app.emails.orders.tracking-number') }} : </span>
-
-                            {{ $shipment->track_number }}
+                            <span>{{ $additionalDetails->value }} </span>
                         </div>
                     </div>
                 @endif
@@ -75,7 +85,7 @@
         @if ($shipment->order->billing_address)
             <div style="line-height: 25px;">
                 <div style="font-size: 16px;font-weight: 600;color: #121A26;">
-                    {{ __('admin::app.emails.orders.billing-address') }}
+                    @lang('admin::app.emails.orders.billing-address')
                 </div>
 
                 <div style="font-size: 16px;font-weight: 400;color: #384860;margin-bottom: 40px;">
@@ -91,11 +101,11 @@
 
                     ---<br/>
 
-                    {{ __('admin::app.emails.orders.contact') }} : {{ $shipment->order->billing_address->phone }}
+                    @lang('admin::app.emails.orders.contact') : {{ $shipment->order->billing_address->phone }}
                 </div>
 
                 <div style="font-size: 16px;font-weight: 600;color: #121A26;">
-                    {{ __('admin::app.emails.orders.payment') }}
+                    @lang('admin::app.emails.orders.payment')
                 </div>
 
                 <div style="font-size: 16px;font-weight: 400;color: #384860;">
@@ -110,10 +120,10 @@
         border-spacing: 0;width: 100%">
             <thead>
                 <tr style="color: #121A26;border-top: 1px solid #CBD5E1;border-bottom: 1px solid #CBD5E1;">
-                    <th style="text-align: left;padding: 15px">{{ __('admin::app.emails.orders.sku') }}</th>
-                    <th style="text-align: left;padding: 15px">{{ __('admin::app.emails.orders.name') }}</th>
-                    <th style="text-align: left;padding: 15px">{{ __('admin::app.emails.orders.price') }}</th>
-                    <th style="text-align: left;padding: 15px">{{ __('admin::app.emails.orders.qty') }}</th>
+                    <th style="text-align: left;padding: 15px">@lang('admin::app.emails.orders.sku')</th>
+                    <th style="text-align: left;padding: 15px">@lang('admin::app.emails.orders.name')</th>
+                    <th style="text-align: left;padding: 15px">@lang('admin::app.emails.orders.price')</th>
+                    <th style="text-align: left;padding: 15px">@lang('admin::app.emails.orders.qty')</th>
                 </tr>
             </thead>
 
