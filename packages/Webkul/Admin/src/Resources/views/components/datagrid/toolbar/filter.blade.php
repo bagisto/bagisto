@@ -130,7 +130,7 @@
                                     <div
                                         v-if="hasAnyAppliedColumn()"
                                         class="cursor-pointer text-xs font-medium leading-6 text-blue-600 transition-all hover:underline ltr:ml-20 rtl:mr-20"
-                                        @click="removeAllAppliedFilters()"
+                                        @click="removeAllAppliedFilters() || isFilterDirty"
                                     >
                                         @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
                                     </div>
@@ -166,7 +166,8 @@
                                                         </div>
 
                                                         <div class="mb-2 mt-1.5">
-                                                            <x-admin::dropdown>
+                                                            <!-- If Allow Multiple Values -->
+                                                            <x-admin::dropdown v-if="column.allow_multiple_values">
                                                                 <x-slot:toggle>
                                                                     <button
                                                                         type="button"
@@ -175,6 +176,33 @@
                                                                         <span
                                                                             class="text-sm text-gray-400 dark:text-gray-400"
                                                                             v-text="'@lang('admin::app.components.datagrid.filters.select')'"
+                                                                        >
+                                                                        </span>
+
+                                                                        <span class="icon-sort-down text-2xl"></span>
+                                                                    </button>
+                                                                </x-slot>
+
+                                                                <x-slot:menu>
+                                                                    <x-admin::dropdown.menu.item
+                                                                        v-for="option in column.filterable_options"
+                                                                        v-text="option.label"
+                                                                        @click="addFilter(option.value, column)"
+                                                                    >
+                                                                    </x-admin::dropdown.menu.item>
+                                                                </x-slot>
+                                                            </x-admin::dropdown>
+
+                                                            <!-- If Allow Single Value -->
+                                                            <x-admin::dropdown v-else>
+                                                                <x-slot:toggle>
+                                                                    <button
+                                                                        type="button"
+                                                                        class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                                                    >
+                                                                        <span
+                                                                            class="text-sm text-gray-400 dark:text-gray-400"
+                                                                            v-text="column.filterable_options.find((option => option.value === getAppliedColumnValues(column.index)))?.label ?? '@lang('admin::app.components.datagrid.filters.select')'"
                                                                         >
                                                                         </span>
 
@@ -206,23 +234,6 @@
                                                                     <span
                                                                         class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
-                                                                    >
-                                                                    </span>
-                                                                </p>
-                                                            </template>
-
-                                                            <!-- If Allow Single Value -->
-                                                            <template v-else>
-                                                                <p
-                                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                                    v-if="getAppliedColumnValues(column.index) !== ''"
-                                                                >
-                                                                    <!-- Retrieving the label from the options based on the applied column value. -->
-                                                                    <span v-text="column.filterable_options.find((option => option.value == getAppliedColumnValues(column.index))).label"></span>
-
-                                                                    <span
-                                                                        class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                        @click="removeAppliedColumnValue(column.index, getAppliedColumnValues(column.index))"
                                                                     >
                                                                     </span>
                                                                 </p>
@@ -545,7 +556,8 @@
                                                         </div>
 
                                                         <div class="mb-2 mt-1.5">
-                                                            <x-admin::dropdown>
+                                                            <!-- If Allow Multiple Values -->
+                                                            <x-admin::dropdown v-if="column.allow_multiple_values">
                                                                 <x-slot:toggle>
                                                                     <button
                                                                         type="button"
@@ -554,6 +566,33 @@
                                                                         <span
                                                                             class="text-sm text-gray-400 dark:text-gray-400"
                                                                             v-text="'@lang('admin::app.components.datagrid.filters.select')'"
+                                                                        >
+                                                                        </span>
+
+                                                                        <span class="icon-sort-down text-2xl"></span>
+                                                                    </button>
+                                                                </x-slot>
+
+                                                                <x-slot:menu>
+                                                                    <x-admin::dropdown.menu.item
+                                                                        v-for="option in column.filterable_options"
+                                                                        v-text="option.label"
+                                                                        @click="addFilter(option.value, column)"
+                                                                    >
+                                                                    </x-admin::dropdown.menu.item>
+                                                                </x-slot>
+                                                            </x-admin::dropdown>
+
+                                                            <!-- If Allow Single Value -->
+                                                            <x-admin::dropdown v-else>
+                                                                <x-slot:toggle>
+                                                                    <button
+                                                                        type="button"
+                                                                        class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                                                    >
+                                                                        <span
+                                                                            class="text-sm text-gray-400 dark:text-gray-400"
+                                                                            v-text="column.filterable_options.find((option => option.value === getAppliedColumnValues(column.index)))?.label ?? '@lang('admin::app.components.datagrid.filters.select')'"
                                                                         >
                                                                         </span>
 
@@ -585,23 +624,6 @@
                                                                     <span
                                                                         class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
-                                                                    >
-                                                                    </span>
-                                                                </p>
-                                                            </template>
-
-                                                            <!-- If Allow Single Value -->
-                                                            <template v-else>
-                                                                <p
-                                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                                    v-if="getAppliedColumnValues(column.index) !== ''"
-                                                                >
-                                                                    <!-- Retrieving the label from the options based on the applied column value. -->
-                                                                    <span v-text="column.filterable_options.find((option => option.value == getAppliedColumnValues(column.index))).label"></span>
-
-                                                                    <span
-                                                                        class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                        @click="removeAppliedColumnValue(column.index, getAppliedColumnValues(column.index))"
                                                                     >
                                                                     </span>
                                                                 </p>
@@ -768,12 +790,13 @@
 
                                         <!-- Applied filters label and value listing for saving custom filter. -->
                                         <div v-for="column in savedFilters.params.filters.columns">
-                                            <div v-if="column.value.length > 0" >
+                                            <div v-if="hasAnyValue(column)" >
                                                 <p class="mb-2 text-xs font-medium text-gray-800 dark:text-white">
                                                     @{{ column.label }}
                                                 </p>
 
                                                 <div class="mb-4 flex flex-wrap gap-2">
+                                                    <!-- Date & Date Time Case -->
                                                     <template v-if="column.type === 'date' || column.type === 'datetime'">
                                                         <p class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white">
                                                             <span>
@@ -790,21 +813,44 @@
                                                         </p>
                                                     </template>
 
+                                                    <!-- Rest Case -->
                                                     <template v-else>
-                                                        <p
-                                                            v-for="appliedColumnValue in column.value"
-                                                            class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
-                                                        >
-                                                            <span v-text="appliedColumnValue"></span>
-
-                                                            <div>
-                                                                <span
-                                                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                                                    @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
-                                                                >
+                                                        <!-- If Allow Multiple Values -->
+                                                        <template v-if="column.allow_multiple_values">
+                                                            <p
+                                                                v-for="appliedColumnValue in column.value"
+                                                                class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                            >
+                                                                <span>
+                                                                    @{{ appliedColumnValue }}
                                                                 </span>
-                                                            </div>
-                                                        </p>
+
+                                                                <div>
+                                                                    <span
+                                                                        class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                        @click="removeSavedFilterColumnValue(column, appliedColumnValue)"
+                                                                    >
+                                                                    </span>
+                                                                </div>
+                                                            </p>
+                                                        </template>
+
+                                                        <!-- If Allow Single Value -->
+                                                        <template v-else>
+                                                            <p class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white">
+                                                                <span>
+                                                                    @{{ column.value }}
+                                                                </span>
+
+                                                                <div>
+                                                                    <span
+                                                                        class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                                        @click="removeSavedFilterColumnValue(column, column.value)"
+                                                                    >
+                                                                    </span>
+                                                                </div>
+                                                            </p>
+                                                        </template>
                                                     </template>
                                                 </div>
                                             </div>
@@ -936,7 +982,7 @@
                         columns: [],
                     };
 
-                    this.$emit('applyFilters', this.filters);
+                    this.isFilterDirty = true;
                 },
 
                 /**
@@ -945,10 +991,10 @@
                  * @returns {void}
                  */
                 removeSavedFilterColumnValue(column, value) {
-                    if (typeof column.value === 'string') {
-                        column.value = [];
-                    } else {
+                    if (column.allow_multiple_values) {
                         column.value = column.value.filter((columnValue) => columnValue !== value);
+                    } else {
+                        column.value = '';
                     }
                 },
 
@@ -960,7 +1006,7 @@
                 createOrUpdateFilter(params, { setErrors }) {
                     let applied = JSON.parse(JSON.stringify(this.applied));
 
-                    applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => column.value.length > 0);
+                    applied.filters.columns = this.savedFilters.params.filters.columns.filter((column) => this.hasAnyValue(column));
 
                     if (params.id) {
                         params._method = 'PUT';
@@ -1220,6 +1266,20 @@
                 },
 
                 /**
+                 * Check if any values are applied for the specified column.
+                 *
+                 * @param {object} column
+                 * @returns {boolean}
+                 */
+                hasAnyValue(column) {
+                    if (column.allow_multiple_values) {
+                        return column.value.length > 0;
+                    }
+
+                    return column.value !== '';
+                },
+
+                /**
                  * Find applied column.
                  *
                  * @param {string} columnIndex
@@ -1238,7 +1298,11 @@
                 hasAnyAppliedColumnValues(columnIndex) {
                     let appliedColumn = this.findAppliedColumn(columnIndex);
 
-                    return appliedColumn?.value.length > 0;
+                    if (! appliedColumn) {
+                        return false;
+                    }
+
+                    return this.hasAnyValue(appliedColumn);
                 },
 
                 /**
