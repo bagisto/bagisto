@@ -350,7 +350,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart.continue_shopping.before') !!}
 
                                 <a
-                                    class="secondary-button max-h-14 rounded-2xl max-md:rounded-lg max-md:px-6 max-md:py-2 max-md:text-sm"
+                                    class="secondary-button max-h-14 rounded-2xl max-md:rounded-lg max-md:px-6 max-md:py-3 max-md:text-sm max-sm:py-2"
                                     href="{{ route('shop.home.index') }}"
                                 >
                                     @lang('shop::app.checkout.cart.index.continue-shopping')
@@ -361,7 +361,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart.update_cart.before') !!}
 
                                 <x-shop::button
-                                    class="secondary-button max-h-14 rounded-2xl max-md:rounded-lg max-md:px-6 max-md:py-2 max-md:text-sm"
+                                    class="secondary-button max-h-14 rounded-2xl max-md:rounded-lg max-md:px-6 max-md:py-3 max-md:text-sm max-sm:py-2"
                                     :title="trans('shop::app.checkout.cart.index.update-cart')"
                                     ::loading="isStoring"
                                     ::disabled="isStoring"
