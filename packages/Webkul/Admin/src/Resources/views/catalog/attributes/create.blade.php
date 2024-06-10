@@ -39,7 +39,7 @@
         </div>
         
         <!-- Create Attributes Vue Components -->
-        <v-create-attributes :locales="{{ $locales->toJson() }}">
+        <v-create-attributes>
             <!-- Shimmer Effect -->
             <x-admin::shimmer.catalog.attributes />
         </v-create-attributes>
@@ -275,11 +275,11 @@
                                                     </div>
                                                 </x-admin::table.td>
 
-                                                    <!-- Admin-->
-                                                    <x-admin::table.td>
-                                                        <p class="dark:text-white">
-                                                            @{{ element.params.admin_name }}
-                                                        </p>
+                                                <!-- Admin -->
+                                                <x-admin::table.td>
+                                                    <p class="dark:text-white">
+                                                        @{{ element.params.admin_name }}
+                                                    </p>
 
                                                     <input
                                                         type="hidden"
@@ -288,10 +288,10 @@
                                                     />
                                                 </x-admin::table.td>
 
-                                                    <x-admin::table.td v-for="locale in locales">
-                                                        <p class="dark:text-white">
-                                                            @{{ element.params[locale.code] }}
-                                                        </p>
+                                                <x-admin::table.td v-for="locale in locales">
+                                                    <p class="dark:text-white">
+                                                        @{{ element.params[locale.code] }}
+                                                    </p>
 
                                                     <input
                                                         type="hidden"
@@ -804,8 +804,6 @@
             app.component('v-create-attributes', {
                 template: '#v-create-attributes-template',
 
-                props: ['locales'],
-
                 data() {
                     return {
                         optionRowCount: 1,
@@ -825,6 +823,8 @@
                         isNullOptionChecked: false,
 
                         options: [],
+
+                        locales: @json($locales),
 
                         swatchValue: [
                             {

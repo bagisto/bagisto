@@ -36,7 +36,7 @@
         </div>
 
         <!-- Edit Attributes Vue Components -->
-        <v-edit-attributes :locales="{{ $locales->toJson() }}">
+        <v-edit-attributes>
             <!-- Shimmer Effect -->
             <x-admin::shimmer.catalog.attributes />
         </v-edit-attributes>
@@ -284,11 +284,11 @@
                                                         </div>
                                                     </x-admin::table.td>
 
-                                                        <!-- Admin-->
-                                                        <x-admin::table.td>
-                                                            <p class="dark:text-white">
-                                                                @{{ element.admin_name }}
-                                                            </p>
+                                                    <!-- Admin-->
+                                                    <x-admin::table.td>
+                                                        <p class="dark:text-white">
+                                                            @{{ element.admin_name }}
+                                                        </p>
 
                                                         <input
                                                             type="hidden"
@@ -297,11 +297,11 @@
                                                         />
                                                     </x-admin::table.td>
 
-                                                        <!-- Loacles -->
-                                                        <x-admin::table.td v-for="locale in locales">
-                                                            <p class="dark:text-white">
-                                                                @{{ element['locales'][locale.code] }}
-                                                            </p>
+                                                    <!-- Loacles -->
+                                                    <x-admin::table.td v-for="locale in locales">
+                                                        <p class="dark:text-white">
+                                                            @{{ element['locales'][locale.code] }}
+                                                        </p>
 
                                                         <input
                                                             type="hidden"
@@ -949,8 +949,6 @@
             app.component('v-edit-attributes', {
                 template: '#v-edit-attributes-template',
 
-                props: ['locales'],
-
                 data() {
                     return {
                         showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
@@ -966,6 +964,8 @@
                         ],
 
                         optionsData: [],
+
+                        locales: @json($locales),
 
                         optionIsNew: true,
 
