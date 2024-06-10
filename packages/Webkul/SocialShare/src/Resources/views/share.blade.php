@@ -7,7 +7,7 @@
         {!! view_render_event('bagisto.shop.products.view.share.before', ['product' => $product]) !!}
 
         <!-- For Mobile View -->
-        <div class="md:hidden flex gap-2.5 justify-center items-center">
+        <div class="md:hidden flex gap-2.5 justify-center items-center max-sm:gap-1.5">
             <span class="icon-share text-2xl"></span>
 
             <a

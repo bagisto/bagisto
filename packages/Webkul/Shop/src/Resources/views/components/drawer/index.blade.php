@@ -18,10 +18,10 @@
 
     @isset($header)
         <template v-slot:header="{ close }">
-            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-6 pb-5 max-md:gap-y-1.5 max-md:border-b max-md:border-zinc-200 max-md:p-4 max-md:font-semibold']) }}>
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-6 pb-5 max-md:gap-y-1.5 max-md:border-b max-md:border-zinc-200 max-md:p-4 max-md:gap-y-1 max-md:font-semibold']) }}>
                 {{ $header }}
 
-                <div class="absolute top-5 max-md:top-4 ltr:right-5 rtl:left-5">
+                <div class="absolute top-5 max-sm:top-4 ltr:right-5 rtl:left-5">
                     <span
                         class="icon-cancel cursor-pointer text-3xl max-md:text-2xl"
                         @click="close"
@@ -94,7 +94,7 @@
                     class="fixed z-[1000] overflow-hidden bg-white max-md:!w-full"
                     :class="{
                         'inset-x-0 top-0': position == 'top',
-                        'inset-x-0 bottom-0': position == 'bottom',
+                        'inset-x-0 bottom-0 max-sm:max-h-full': position == 'bottom',
                         'inset-y-0 ltr:right-0 rtl:left-0': position == 'right',
                         'inset-y-0 ltr:left-0 rtl:right-0': position == 'left'
                     }"

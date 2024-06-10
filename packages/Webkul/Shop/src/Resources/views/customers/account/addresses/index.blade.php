@@ -24,14 +24,14 @@
                     <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                 </a>
     
-                <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                <h2 class="text-2xl font-medium max-md:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                     @lang('shop::app.customers.account.addresses.index.title')
                 </h2>
             </div>
 
             <a
                 href="{{ route('shop.customers.account.addresses.create') }}"
-                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:py-1.5"
+                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-1.5 max-sm:text-sm"
             >
                 @lang('shop::app.customers.account.addresses.index.add-address') 
             </a>
@@ -54,7 +54,7 @@
                                 @endif
                             </p>
 
-                            <div class="flex gap-4">
+                            <div class="flex gap-4 max-sm:gap-2.5">
                                 @if ($address->default_address)
                                     <div class="label-pending block h-fit w-max px-2.5 py-1 max-md:px-1.5">
                                         @lang('shop::app.customers.account.addresses.index.default-address') 
@@ -71,7 +71,7 @@
                                         </button>
                                     </x-slot>
 
-                                    <x-slot:menu class="!py-1">
+                                    <x-slot:menu class="!py-1 max-sm:!py-0">
                                         <x-shop::dropdown.menu.item>
                                             <a href="{{ route('shop.customers.account.addresses.edit', $address->id) }}">
                                                 <p class="w-full">

@@ -93,7 +93,7 @@
                 <!-- Proceed Button -->
                 <div class="mt-4 flex justify-end">
                     <x-shop::button
-                        class="primary-button rounded-2xl px-11 py-3 max-md:w-full max-md:max-w-full max-md:rounded-xl"
+                        class="primary-button rounded-2xl px-11 py-3 max-md:w-full max-md:max-w-full max-md:rounded-lg"
                         :title="trans('shop::app.checkout.onepage.address.proceed')"
                         ::loading="isStoring"
                         ::disabled="isStoring"
