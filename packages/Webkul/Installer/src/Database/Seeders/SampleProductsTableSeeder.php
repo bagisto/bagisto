@@ -23,6 +23,7 @@ class SampleProductsTableSeeder extends Seeder
      */
     public function run($parameters = [])
     {
+        dd(DB::table('attributes')->get());
         DB::table('products')->delete();
 
         DB::table('product_flat')->delete();
@@ -529,9 +530,10 @@ class SampleProductsTableSeeder extends Seeder
             ]);
         }
 
+        // foreach ($locales as $locale) {
+        // }
         DB::table('product_attribute_values')->insert([
             [
-                'id'                   => 1,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'SP-001',
@@ -545,7 +547,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => '1|1',
             ], [
-                'id'                   => 2,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Arctic Cozy Knit Unisex Beanie',
@@ -559,7 +560,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => 'default|en|1|2',
             ], [
-                'id'                   => 3,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'arctic-cozy-knit-unisex-beanie',
@@ -573,7 +573,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => 'en|1|3',
             ], [
-                'id'                   => 4,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -587,7 +586,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => '1|7',
             ], [
-                'id'                   => 5,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -601,7 +599,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => 'default|1|8',
             ], [
-                'id'                   => 6,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Embrace the chilly days in style with our Arctic Cozy Knit Beanie. Crafted from a soft and durable blend of acrylic, this classic beanie offers warmth and versatility. Suitable for both men and women, it\'s the ideal accessory for casual or outdoor wear. Elevate your winter wardrobe or gift someone special with this essential beanie cap.',
@@ -615,7 +612,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => 'default|en|1|9',
             ], [
-                'id'                   => 7,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'The Arctic Cozy Knit Beanie is your go-to solution for staying warm, comfortable, and stylish during the colder months. Crafted from a soft and durable blend of acrylic knit, this beanie is designed to provide a cozy and snug fit. The classic design makes it suitable for both men and women, offering a versatile accessory that complements various styles. Whether you\'re heading out for a casual day in town or embracing the great outdoors, this beanie adds a touch of comfort and warmth to your ensemble. The soft and breathable material ensures that you stay cozy without sacrificing style. The Arctic Cozy Knit Beanie isn\'t just an accessory; it\'s a statement of winter fashion. Its simplicity makes it easy to pair with different outfits, making it a staple in your winter wardrobe. Ideal for gifting or as a treat for yourself, this beanie is a thoughtful addition to any winter ensemble. It\'s a versatile accessory that goes beyond functionality, adding a touch of warmth and style to your look. Embrace the essence of winter with the Arctic Cozy Knit Beanie. Whether you\'re enjoying a casual day out or facing the elements, let this beanie be your companion for comfort and style. Elevate your winter wardrobe with this classic accessory that effortlessly combines warmth with a timeless sense of fashion.',
@@ -629,7 +625,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => 'default|en|1|10',
             ], [
-                'id'                   => 8,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -643,7 +638,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 11,
                 'unique_id'            => 'default|en|1|11',
             ], [
-                'id'                   => 9,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -657,7 +651,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => 'default|en|1|16',
             ], [
-                'id'                   => 10,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta3',
@@ -671,7 +664,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => 'default|en|1|17',
             ], [
-                'id'                   => 11,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -685,7 +677,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => 'default|en|1|18',
             ], [
-                'id'                   => 12,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 1,
@@ -699,7 +690,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 22,
                 'unique_id'            => '1|22',
             ], [
-                'id'                   => 13,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'SP-002',
@@ -713,7 +703,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => '2|1',
             ], [
-                'id'                   => 14,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Arctic Bliss Stylish Winter Scarf',
@@ -727,7 +716,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => 'default|en|2|2',
             ], [
-                'id'                   => 15,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'arctic-bliss-stylish-winter-scarf',
@@ -741,7 +729,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => 'en|2|3',
             ], [
-                'id'                   => 16,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -755,7 +742,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => '2|7',
             ], [
-                'id'                   => 17,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -769,7 +755,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => 'default|2|8',
             ], [
-                'id'                   => 18,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'The Arctic Bliss Winter Scarf is more than just a cold-weather accessory; it\'s a statement of warmth, comfort, and style for the winter season. Crafted with care from a luxurious blend of acrylic and wool, this scarf is designed to keep you cozy and snug even in the chilliest temperatures. The soft and plush texture not only provides insulation against the cold but also adds a touch of luxury to your winter wardrobe. The design of the Arctic Bliss Winter Scarf is both stylish and versatile, making it a perfect addition to a variety of winter outfits. Whether you\'re dressing up for a special occasion or adding a chic layer to your everyday look, this scarf complements your style effortlessly. The extra-long length of the scarf offers customizable styling options. Wrap it around for added warmth, drape it loosely for a casual look, or experiment with different knots to express your unique style. This versatility makes it a must-have accessory for the winter season. Looking for the perfect gift? The Arctic Bliss Winter Scarf is an ideal choice. Whether you\'re surprising a loved one or treating yourself, this scarf is a timeless and practical gift that will be cherished throughout the winter months. Embrace the winter with the Arctic Bliss Winter Scarf, where warmth meets style in perfect harmony. Elevate your winter wardrobe with this essential accessory that not only keeps you warm but also adds a touch of sophistication to your cold-weather ensemble.',
@@ -783,7 +768,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => 'default|en|2|9',
             ], [
-                'id'                   => 19,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Experience the embrace of warmth and style with our Arctic Bliss Winter Scarf. Crafted from a luxurious blend of acrylic and wool, this cozy scarf is designed to keep you snug during the coldest days. Its stylish and versatile design, combined with an extra-long length, offers customizable styling options. Elevate your winter wardrobe or delight someone special with this essential winter accessory.',
@@ -797,7 +781,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => 'default|en|2|10',
             ], [
-                'id'                   => 20,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -811,7 +794,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 11,
                 'unique_id'            => 'default|en|2|11',
             ], [
-                'id'                   => 21,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -825,7 +807,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => 'default|en|2|16',
             ], [
-                'id'                   => 22,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta4',
@@ -839,7 +820,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => 'default|en|2|17',
             ], [
-                'id'                   => 23,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -853,7 +833,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => 'default|en|2|18',
             ], [
-                'id'                   => 24,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => '2',
@@ -867,7 +846,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 22,
                 'unique_id'            => '2|22',
             ], [
-                'id'                   => 25,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'SP-003',
@@ -881,7 +859,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => '3|1',
             ], [
-                'id'                   => 26,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Arctic Touchscreen Winter Gloves',
@@ -895,7 +872,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => 'default|en|3|2',
             ], [
-                'id'                   => 27,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'arctic-touchscreen-winter-gloves',
@@ -909,7 +885,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => 'en|3|3',
             ], [
-                'id'                   => 28,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -923,7 +898,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => '3|7',
             ], [
-                'id'                   => 29,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -937,7 +911,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => 'default|3|8',
             ], [
-                'id'                   => 30,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Stay connected and warm with our Arctic Touchscreen Winter Gloves. These gloves are not only crafted from high-quality acrylic for warmth and durability but also feature a touchscreen-compatible design. With an insulated lining, elastic cuffs for a secure fit, and a stylish look, these gloves are perfect for daily wear in chilly conditions.',
@@ -951,7 +924,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => 'default|en|3|9',
             ], [
-                'id'                   => 31,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Introducing the Arctic Touchscreen Winter Gloves – where warmth, style, and connectivity meet to enhance your winter experience. Crafted from high-quality acrylic, these gloves are designed to provide exceptional warmth and durability. The touchscreen-compatible fingertips allow you to stay connected without exposing your hands to the cold. Answer calls, send messages, and navigate your devices effortlessly, all while keeping your hands snug. The insulated lining adds an extra layer of coziness, making these gloves your go-to choice for facing the winter chill. Whether you\'re commuting, running errands, or enjoying outdoor activities, these gloves provide the warmth and protection you need. Elastic cuffs ensure a secure fit, preventing cold drafts and keeping the gloves in place during your daily activities. The stylish design adds a touch of flair to your winter ensemble, making these gloves as fashionable as they are functional. Ideal for gifting or as a treat for yourself, the Arctic Touchscreen Winter Gloves are a must-have accessory for the modern individual. Say goodbye to the inconvenience of removing your gloves to use your devices and embrace the seamless blend of warmth, style, and connectivity. Stay connected, stay warm, and stay stylish with the Arctic Touchscreen Winter Gloves – your reliable companion for conquering the winter season with confidence.',
@@ -965,7 +937,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => 'default|en|3|10',
             ], [
-                'id'                   => 32,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -979,7 +950,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 11,
                 'unique_id'            => 'default|en|3|11',
             ], [
-                'id'                   => 33,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -993,7 +963,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 13,
                 'unique_id'            => '3|13',
             ], [
-                'id'                   => 34,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1007,7 +976,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 14,
                 'unique_id'            => 'default|3|14',
             ], [
-                'id'                   => 35,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1021,7 +989,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 15,
                 'unique_id'            => 'default|3|15',
             ], [
-                'id'                   => 36,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -1035,7 +1002,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => 'default|en|3|16',
             ], [
-                'id'                   => 37,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta5',
@@ -1049,7 +1015,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => 'default|en|3|17',
             ], [
-                'id'                   => 38,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -1063,7 +1028,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => 'default|en|3|18',
             ], [
-                'id'                   => 39,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => '3',
@@ -1077,7 +1041,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 22,
                 'unique_id'            => '3|22',
             ], [
-                'id'                   => 40,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'SP-004',
@@ -1091,7 +1054,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => '4|1',
             ], [
-                'id'                   => 41,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Arctic Warmth Wool Blend Socks',
@@ -1105,7 +1067,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => 'default|en|4|2',
             ], [
-                'id'                   => 42,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'arctic-warmth-wool-blend-socks',
@@ -1119,7 +1080,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => 'en|4|3',
             ], [
-                'id'                   => 43,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -1133,7 +1093,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => '4|7',
             ], [
-                'id'                   => 44,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1147,7 +1106,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => 'default|4|8',
             ], [
-                'id'                   => 45,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Experience the unmatched warmth and comfort of our Arctic Warmth Wool Blend Socks. Crafted from a blend of Merino wool, acrylic, nylon, and spandex, these socks offer ultimate coziness for cold weather. With a reinforced heel and toe for durability, these versatile and stylish socks are perfect for various occasions.',
@@ -1161,7 +1119,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => 'default|en|4|9',
             ], [
-                'id'                   => 46,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Introducing the Arctic Warmth Wool Blend Socks – your essential companion for cozy and comfortable feet during the colder seasons. Crafted from a premium blend of Merino wool, acrylic, nylon, and spandex, these socks are designed to provide unparalleled warmth and comfort. The wool blend ensures that your feet stay toasty even in the coldest temperatures, making these socks the perfect choice for winter adventures or simply staying snug at home. The soft and cozy texture of the socks offers a luxurious feel against your skin. Say goodbye to chilly feet as you embrace the plush warmth provided by these wool blend socks. Designed for durability, the socks feature a reinforced heel and toe, adding extra strength to high-wear areas. This ensures that your socks withstand the test of time, providing long-lasting comfort and coziness. The breathable nature of the material prevents overheating, allowing your feet to stay comfortable and dry throughout the day. Whether you\'re heading outdoors for a winter hike or relaxing indoors, these socks offer the perfect balance of warmth and breathability. Versatile and stylish, these wool blend socks are suitable for various occasions. Pair them with your favorite boots for a fashionable winter look or wear them around the house for ultimate comfort. Elevate your winter wardrobe and prioritize comfort with the Arctic Warmth Wool Blend Socks. Treat your feet to the luxury they deserve and step into a world of coziness that lasts all season long.',
@@ -1175,7 +1132,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => 'default|en|4|10',
             ], [
-                'id'                   => 47,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1189,7 +1145,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 11,
                 'unique_id'            => 'default|en|4|11',
             ], [
-                'id'                   => 48,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -1203,7 +1158,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => 'default|en|4|16',
             ], [
-                'id'                   => 49,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta5',
@@ -1217,7 +1171,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => 'default|en|4|17',
             ], [
-                'id'                   => 50,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -1231,7 +1184,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => 'default|en|4|18',
             ], [
-                'id'                   => 51,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => '4',
@@ -1245,7 +1197,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 22,
                 'unique_id'            => '4|22',
             ], [
-                'id'                   => 52,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'GP-001',
@@ -1259,7 +1210,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => '5|1',
             ], [
-                'id'                   => 53,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Arctic Frost Winter Accessories',
@@ -1273,7 +1223,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => 'default|en|5|2',
             ], [
-                'id'                   => 54,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'arctic-frost-winter-accessories',
@@ -1287,7 +1236,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => 'en|5|3',
             ], [
-                'id'                   => 55,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -1301,7 +1249,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => '5|7',
             ], [
-                'id'                   => 56,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1315,7 +1262,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => 'default|5|8',
             ], [
-                'id'                   => 57,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Embrace the winter chill with our Arctic Frost Winter Accessories Bundle. This curated set includes a luxurious scarf, a cozy beanie, touchscreen-compatible gloves and wool Blend Socks. Stylish and functional, this ensemble is crafted from high-quality materials, ensuring both durability and comfort. Elevate your winter wardrobe or delight someone special with this perfect gifting option.',
@@ -1329,7 +1275,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => 'default|en|5|9',
             ], [
-                'id'                   => 58,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Introducing the Arctic Frost Winter Accessories Bundle, your go-to solution for staying warm, stylish, and connected during the chilly winter days. This thoughtfully curated set brings together Four essential winter accessories to create a harmonious ensemble. The luxurious scarf, woven from a blend of acrylic and wool, not only adds a layer of warmth but also brings a touch of elegance to your winter wardrobe. The soft knit beanie, crafted with care, promises to keep you cozy while adding a fashionable flair to your look. But it doesn\'t end there – our bundle also includes touchscreen-compatible gloves. Stay connected without sacrificing warmth as you navigate your devices effortlessly. Whether you\'re answering calls, sending messages, or capturing winter moments on your smartphone, these gloves ensure convenience without compromising style. The soft and cozy texture of the socks offers a luxurious feel against your skin. Say goodbye to chilly feet as you embrace the plush warmth provided by these wool blend socks. The Arctic Frost Winter Accessories Bundle is not just about functionality; it\'s a statement of winter fashion. Each piece is designed not only to protect you from the cold but also to elevate your style during the frosty season. The materials chosen for this bundle prioritize both durability and comfort, ensuring that you can enjoy the winter wonderland in style. Whether you\'re treating yourself or searching for the perfect gift, the Arctic Frost Winter Accessories Bundle is a versatile choice. Delight someone special during the holiday season or elevate your own winter wardrobe with this stylish and functional ensemble. Embrace the frost with confidence, knowing that you have the perfect accessories to keep you warm and chic.',
@@ -1343,7 +1288,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => 'default|en|5|10',
             ], [
-                'id'                   => 59,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -1357,7 +1301,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => 'default|en|5|16',
             ], [
-                'id'                   => 60,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta6',
@@ -1371,7 +1314,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => 'default|en|5|17',
             ], [
-                'id'                   => 61,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -1385,7 +1327,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => 'default|en|5|18',
             ], [
-                'id'                   => 62,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'BP-001',
@@ -1399,7 +1340,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => '6|1',
             ], [
-                'id'                   => 63,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Arctic Frost Winter Accessories Bundle',
@@ -1413,7 +1353,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => 'default|en|6|2',
             ], [
-                'id'                   => 64,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'arctic-frost-winter-accessories-bundle',
@@ -1427,7 +1366,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => 'en|6|3',
             ], [
-                'id'                   => 65,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -1441,7 +1379,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => '6|7',
             ], [
-                'id'                   => 66,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1455,7 +1392,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => 'default|6|8',
             ], [
-                'id'                   => 67,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Embrace the winter chill with our Arctic Frost Winter Accessories Bundle. This curated set includes a luxurious scarf, a cozy beanie, touchscreen-compatible gloves and wool Blend Socks. Stylish and functional, this ensemble is crafted from high-quality materials, ensuring both durability and comfort. Elevate your winter wardrobe or delight someone special with this perfect gifting option.',
@@ -1469,7 +1405,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => 'default|en|6|9',
             ], [
-                'id'                   => 68,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Introducing the Arctic Frost Winter Accessories Bundle, your go-to solution for staying warm, stylish, and connected during the chilly winter days. This thoughtfully curated set brings together Four essential winter accessories to create a harmonious ensemble. The luxurious scarf, woven from a blend of acrylic and wool, not only adds a layer of warmth but also brings a touch of elegance to your winter wardrobe. The soft knit beanie, crafted with care, promises to keep you cozy while adding a fashionable flair to your look. But it doesn\'t end there – our bundle also includes touchscreen-compatible gloves. Stay connected without sacrificing warmth as you navigate your devices effortlessly. Whether you\'re answering calls, sending messages, or capturing winter moments on your smartphone, these gloves ensure convenience without compromising style. The soft and cozy texture of the socks offers a luxurious feel against your skin. Say goodbye to chilly feet as you embrace the plush warmth provided by these wool blend socks. The Arctic Frost Winter Accessories Bundle is not just about functionality; it\'s a statement of winter fashion. Each piece is designed not only to protect you from the cold but also to elevate your style during the frosty season. The materials chosen for this bundle prioritize both durability and comfort, ensuring that you can enjoy the winter wonderland in style. Whether you\'re treating yourself or searching for the perfect gift, the Arctic Frost Winter Accessories Bundle is a versatile choice. Delight someone special during the holiday season or elevate your own winter wardrobe with this stylish and functional ensemble. Embrace the frost with confidence, knowing that you have the perfect accessories to keep you warm and chic.',
@@ -1483,7 +1418,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => 'default|en|6|10',
             ], [
-                'id'                   => 69,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -1497,7 +1431,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => 'default|en|6|16',
             ], [
-                'id'                   => 70,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta6',
@@ -1511,7 +1444,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => 'default|en|6|17',
             ], [
-                'id'                   => 71,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -1525,7 +1457,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => 'default|en|6|18',
             ], [
-                'id'                   => 72,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'CP-001',
@@ -1539,7 +1470,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => '7|1',
             ], [
-                'id'                   => 73,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'OmniHeat Men\'s Solid Hooded Puffer Jacket',
@@ -1553,7 +1483,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => 'default|en|7|2',
             ], [
-                'id'                   => 74,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'omniheat-mens-solid-hooded-puffer-jacket',
@@ -1567,7 +1496,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => 'en|7|3',
             ], [
-                'id'                   => 75,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -1581,7 +1509,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => '7|7',
             ], [
-                'id'                   => 76,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1595,7 +1522,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => 'default|7|8',
             ], [
-                'id'                   => 77,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Stay warm and stylish with our OmniHeat Men\'s Solid Hooded Puffer Jacket. This jacket is designed to provide ultimate warmth and features insert pockets for added convenience. The insulated material ensures you stay cozy in cold weather. Available in 5 attractive colors, making it a versatile choice for various occasions.',
@@ -1609,7 +1535,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => 'default|en|7|9',
             ], [
-                'id'                   => 78,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Introducing the OmniHeat Men\'s Solid Hooded Puffer Jacket, your go-to solution for staying warm and fashionable during colder seasons. This jacket is crafted with durability and warmth in mind, ensuring it becomes your trusted companion. The hooded design not only adds a touch of style but also provides additional warmth, shielding you from cold winds and weather. The full sleeves offer complete coverage, ensuring you stay cozy from shoulder to wrist. Equipped with insert pockets, this puffer jacket provides convenience for carrying your essentials or keeping your hands warm. The insulated synthetic filling offers enhanced warmth, making it ideal for battling chilly days and nights. Made from a durable polyester shell and lining, this jacket is built to last and endure the elements. Available in 5 attractive colors, you can choose the one that suits your style and preference. Versatile and functional, the OmniHeat Men\'s Solid Hooded Puffer Jacket is suitable for various occasions, whether you\'re heading to work, going for a casual outing, or attending an outdoor event. Experience the perfect blend of style, comfort, and functionality with OmniHeat Men\'s Solid Hooded Puffer Jacket. Elevate your winter wardrobe and stay snug while embracing the outdoors. Beat the cold in style and make a statement with this essential piece.',
@@ -1623,7 +1548,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => 'default|en|7|10',
             ], [
-                'id'                   => 79,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -1637,7 +1561,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => 'default|en|7|16',
             ], [
-                'id'                   => 80,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta6',
@@ -1651,7 +1574,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => 'default|en|7|17',
             ], [
-                'id'                   => 81,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -1665,7 +1587,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => 'default|en|7|18',
             ], [
-                'id'                   => 82,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'SP-005',
@@ -1679,7 +1600,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => null,
             ], [
-                'id'                   => 83,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Yellow-M',
@@ -1693,7 +1613,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => null,
             ], [
-                'id'                   => 84,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'omniheat-mens-solid-hooded-puffer-jacket-blue-yellow-m',
@@ -1707,7 +1626,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => null,
             ], [
-                'id'                   => 85,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -1721,7 +1639,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => null,
             ], [
-                'id'                   => 86,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1735,7 +1652,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => null,
             ], [
-                'id'                   => 87,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Stay warm and stylish with our OmniHeat Men\'s Solid Hooded Puffer Jacket. This jacket is designed to provide ultimate warmth and features insert pockets for added convenience. The insulated material ensures you stay cozy in cold weather. Available in 5 attractive colors, making it a versatile choice for various occasions.',
@@ -1749,7 +1665,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => null,
             ], [
-                'id'                   => 88,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Introducing the OmniHeat Men\'s Solid Hooded Puffer Jacket, your go-to solution for staying warm and fashionable during colder seasons. This jacket is crafted with durability and warmth in mind, ensuring it becomes your trusted companion. The hooded design not only adds a touch of style but also provides additional warmth, shielding you from cold winds and weather. The full sleeves offer complete coverage, ensuring you stay cozy from shoulder to wrist. Equipped with insert pockets, this puffer jacket provides convenience for carrying your essentials or keeping your hands warm. The insulated synthetic filling offers enhanced warmth, making it ideal for battling chilly days and nights. Made from a durable polyester shell and lining, this jacket is built to last and endure the elements. Available in 5 attractive colors, you can choose the one that suits your style and preference. Versatile and functional, the OmniHeat Men\'s Solid Hooded Puffer Jacket is suitable for various occasions, whether you\'re heading to work, going for a casual outing, or attending an outdoor event. Experience the perfect blend of style, comfort, and functionality with OmniHeat Men\'s Solid Hooded Puffer Jacket. Elevate your winter wardrobe and stay snug while embracing the outdoors. Beat the cold in style and make a statement with this essential piece.',
@@ -1763,7 +1678,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => null,
             ], [
-                'id'                   => 89,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1777,7 +1691,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 11,
                 'unique_id'            => null,
             ], [
-                'id'                   => 90,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -1791,7 +1704,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => null,
             ], [
-                'id'                   => 91,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta5',
@@ -1805,7 +1717,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => null,
             ], [
-                'id'                   => 92,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -1819,7 +1730,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => null,
             ], [
-                'id'                   => 93,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => '1.23',
@@ -1833,7 +1743,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 22,
                 'unique_id'            => null,
             ], [
-                'id'                   => 94,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -1847,7 +1756,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 23,
                 'unique_id'            => null,
             ], [
-                'id'                   => 95,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -1861,7 +1769,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 24,
                 'unique_id'            => null,
             ], [
-                'id'                   => 96,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'SP-006',
@@ -1875,7 +1782,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => null,
             ], [
-                'id'                   => 97,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Yellow-L',
@@ -1889,7 +1795,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => null,
             ], [
-                'id'                   => 98,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'omniheat-mens-solid-hooded-puffer-jacket-blue-yellow-l',
@@ -1903,7 +1808,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => null,
             ], [
-                'id'                   => 99,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -1917,7 +1821,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => null,
             ], [
-                'id'                   => 100,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1931,7 +1834,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => null,
             ], [
-                'id'                   => 101,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Stay warm and stylish with our OmniHeat Men\'s Solid Hooded Puffer Jacket. This jacket is designed to provide ultimate warmth and features insert pockets for added convenience. The insulated material ensures you stay cozy in cold weather. Available in 5 attractive colors, making it a versatile choice for various occasions.',
@@ -1945,7 +1847,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => null,
             ], [
-                'id'                   => 102,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'DescIntroducing the OmniHeat Men\'s Solid Hooded Puffer Jacket, your go-to solution for staying warm and fashionable during colder seasons. This jacket is crafted with durability and warmth in mind, ensuring it becomes your trusted companion. The hooded design not only adds a touch of style but also provides additional warmth, shielding you from cold winds and weather. The full sleeves offer complete coverage, ensuring you stay cozy from shoulder to wrist. Equipped with insert pockets, this puffer jacket provides convenience for carrying your essentials or keeping your hands warm. The insulated synthetic filling offers enhanced warmth, making it ideal for battling chilly days and nights. Made from a durable polyester shell and lining, this jacket is built to last and endure the elements. Available in 5 attractive colors, you can choose the one that suits your style and preference. Versatile and functional, the OmniHeat Men\'s Solid Hooded Puffer Jacket is suitable for various occasions, whether you\'re heading to work, going for a casual outing, or attending an outdoor event. Experience the perfect blend of style, comfort, and functionality with OmniHeat Men\'s Solid Hooded Puffer Jacket. Elevate your winter wardrobe and stay snug while embracing the outdoors. Beat the cold in style and make a statement with this essential piece.ription 9',
@@ -1959,7 +1860,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => null,
             ], [
-                'id'                   => 103,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -1973,7 +1873,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 11,
                 'unique_id'            => null,
             ], [
-                'id'                   => 104,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -1987,7 +1886,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => null,
             ], [
-                'id'                   => 105,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta5',
@@ -2001,7 +1899,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => null,
             ], [
-                'id'                   => 106,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -2015,7 +1912,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => null,
             ], [
-                'id'                   => 107,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => '1',
@@ -2029,7 +1925,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 22,
                 'unique_id'            => null,
             ], [
-                'id'                   => 108,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -2043,7 +1938,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 23,
                 'unique_id'            => null,
             ], [
-                'id'                   => 109,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -2057,7 +1951,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 24,
                 'unique_id'            => null,
             ], [
-                'id'                   => 110,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'SP-007',
@@ -2071,7 +1964,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => null,
             ], [
-                'id'                   => 111,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Green-M',
@@ -2085,7 +1977,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => null,
             ], [
-                'id'                   => 112,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'omniheat-mens-solid-hooded-puffer-jacket-blue-green-m',
@@ -2099,7 +1990,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => null,
             ], [
-                'id'                   => 113,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -2113,7 +2003,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => null,
             ], [
-                'id'                   => 114,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -2127,7 +2016,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => null,
             ], [
-                'id'                   => 115,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Stay warm and stylish with our OmniHeat Men\'s Solid Hooded Puffer Jacket. This jacket is designed to provide ultimate warmth and features insert pockets for added convenience. The insulated material ensures you stay cozy in cold weather. Available in 5 attractive colors, making it a versatile choice for various occasions.',
@@ -2141,7 +2029,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => null,
             ], [
-                'id'                   => 116,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Introducing the OmniHeat Men\'s Solid Hooded Puffer Jacket, your go-to solution for staying warm and fashionable during colder seasons. This jacket is crafted with durability and warmth in mind, ensuring it becomes your trusted companion. The hooded design not only adds a touch of style but also provides additional warmth, shielding you from cold winds and weather. The full sleeves offer complete coverage, ensuring you stay cozy from shoulder to wrist. Equipped with insert pockets, this puffer jacket provides convenience for carrying your essentials or keeping your hands warm. The insulated synthetic filling offers enhanced warmth, making it ideal for battling chilly days and nights. Made from a durable polyester shell and lining, this jacket is built to last and endure the elements. Available in 5 attractive colors, you can choose the one that suits your style and preference. Versatile and functional, the OmniHeat Men\'s Solid Hooded Puffer Jacket is suitable for various occasions, whether you\'re heading to work, going for a casual outing, or attending an outdoor event. Experience the perfect blend of style, comfort, and functionality with OmniHeat Men\'s Solid Hooded Puffer Jacket. Elevate your winter wardrobe and stay snug while embracing the outdoors. Beat the cold in style and make a statement with this essential piece.',
@@ -2155,7 +2042,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => null,
             ], [
-                'id'                   => 117,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -2169,7 +2055,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 11,
                 'unique_id'            => null,
             ], [
-                'id'                   => 118,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -2183,7 +2068,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 13,
                 'unique_id'            => null,
             ], [
-                'id'                   => 119,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -2197,7 +2081,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 14,
                 'unique_id'            => null,
             ], [
-                'id'                   => 120,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -2211,7 +2094,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 15,
                 'unique_id'            => null,
             ], [
-                'id'                   => 121,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -2225,7 +2107,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => null,
             ], [
-                'id'                   => 122,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta5',
@@ -2239,7 +2120,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => null,
             ], [
-                'id'                   => 123,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -2253,7 +2133,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => null,
             ], [
-                'id'                   => 124,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => '1',
@@ -2267,7 +2146,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 22,
                 'unique_id'            => null,
             ], [
-                'id'                   => 125,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -2281,7 +2159,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 23,
                 'unique_id'            => null,
             ], [
-                'id'                   => 126,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -2295,7 +2172,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 24,
                 'unique_id'            => null,
             ], [
-                'id'                   => 127,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => 'SP-008',
@@ -2309,7 +2185,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 1,
                 'unique_id'            => null,
             ], [
-                'id'                   => 128,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Green-L',
@@ -2323,7 +2198,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 2,
                 'unique_id'            => null,
             ], [
-                'id'                   => 129,
                 'locale'               => 'en',
                 'channel'              => null,
                 'text_value'           => 'omniheat-mens-solid-hooded-puffer-jacket-blue-green-l',
@@ -2337,7 +2211,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 3,
                 'unique_id'            => null,
             ], [
-                'id'                   => 130,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -2351,7 +2224,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 7,
                 'unique_id'            => null,
             ], [
-                'id'                   => 131,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -2365,7 +2237,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 8,
                 'unique_id'            => null,
             ], [
-                'id'                   => 132,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Stay warm and stylish with our OmniHeat Men\'s Solid Hooded Puffer Jacket. This jacket is designed to provide ultimate warmth and features insert pockets for added convenience. The insulated material ensures you stay cozy in cold weather. Available in 5 attractive colors, making it a versatile choice for various occasions.',
@@ -2379,7 +2250,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 9,
                 'unique_id'            => null,
             ], [
-                'id'                   => 133,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Introducing the OmniHeat Men\'s Solid Hooded Puffer Jacket, your go-to solution for staying warm and fashionable during colder seasons. This jacket is crafted with durability and warmth in mind, ensuring it becomes your trusted companion. The hooded design not only adds a touch of style but also provides additional warmth, shielding you from cold winds and weather. The full sleeves offer complete coverage, ensuring you stay cozy from shoulder to wrist. Equipped with insert pockets, this puffer jacket provides convenience for carrying your essentials or keeping your hands warm. The insulated synthetic filling offers enhanced warmth, making it ideal for battling chilly days and nights. Made from a durable polyester shell and lining, this jacket is built to last and endure the elements. Available in 5 attractive colors, you can choose the one that suits your style and preference. Versatile and functional, the OmniHeat Men\'s Solid Hooded Puffer Jacket is suitable for various occasions, whether you\'re heading to work, going for a casual outing, or attending an outdoor event. Experience the perfect blend of style, comfort, and functionality with OmniHeat Men\'s Solid Hooded Puffer Jacket. Elevate your winter wardrobe and stay snug while embracing the outdoors. Beat the cold in style and make a statement with this essential piece.',
@@ -2393,7 +2263,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 10,
                 'unique_id'            => null,
             ], [
-                'id'                   => 134,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -2407,7 +2276,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 11,
                 'unique_id'            => null,
             ], [
-                'id'                   => 135,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -2421,7 +2289,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 13,
                 'unique_id'            => null,
             ], [
-                'id'                   => 136,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -2435,7 +2302,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 14,
                 'unique_id'            => null,
             ], [
-                'id'                   => 137,
                 'locale'               => null,
                 'channel'              => 'default',
                 'text_value'           => null,
@@ -2449,7 +2315,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 15,
                 'unique_id'            => null,
             ], [
-                'id'                   => 138,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'Meta Title',
@@ -2463,7 +2328,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 16,
                 'unique_id'            => null,
             ], [
-                'id'                   => 139,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta1, meta2, meta5',
@@ -2477,7 +2341,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 17,
                 'unique_id'            => null,
             ], [
-                'id'                   => 140,
                 'locale'               => 'en',
                 'channel'              => 'default',
                 'text_value'           => 'meta description',
@@ -2491,7 +2354,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 18,
                 'unique_id'            => null,
             ], [
-                'id'                   => 141,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => '1',
@@ -2505,7 +2367,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 22,
                 'unique_id'            => null,
             ], [
-                'id'                   => 142,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
@@ -2519,7 +2380,6 @@ class SampleProductsTableSeeder extends Seeder
                 'attribute_id'         => 23,
                 'unique_id'            => null,
             ], [
-                'id'                   => 143,
                 'locale'               => null,
                 'channel'              => null,
                 'text_value'           => null,
