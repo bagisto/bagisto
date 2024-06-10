@@ -46,7 +46,7 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
-            <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
+            <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4 max-md:text-sm max-sm:text-xs">
                 {!! $category->description !!}
             </div>
         @endif
@@ -170,7 +170,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base max-md:rounded-xl"
+                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base max-md:rounded-lg max-sm:mt-6 max-sm:px-6 max-sm:py-1.5 max-sm:text-sm"
                             @click="loadMoreProducts"
                             v-if="links.next && ! loader"
                         >
@@ -179,7 +179,7 @@
 
                         <button
                             v-else-if="links.next"
-                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-[74.5px] py-3.5 text-center text-base max-md:rounded-xl"
+                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-[74.5px] py-3.5 text-center text-base max-md:rounded-lg max-sm:mt-6 max-sm:px-[50.8px] max-sm:py-1.5"
                         >
                             <!-- Spinner -->
                             <img

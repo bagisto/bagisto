@@ -19,7 +19,7 @@
 
     <div class="scrollbar-hide mt-10 flex gap-8 overflow-auto pb-2.5 max-sm:mt-5 max-sm:gap-4">
         <x-shop::shimmer.products.cards.grid
-            class="min-w-[291px] max-sm:min-w-[198px]"
+            class="min-w-[291px] max-sm:min-w-[192px]"
             :count="4"
         />
     </div>

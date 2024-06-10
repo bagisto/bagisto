@@ -24,7 +24,7 @@
                     <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                 </a>
 
-                <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                <h2 class="text-2xl font-medium max-md:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                     @lang('shop::app.customers.account.profile.index.title')
                 </h2>
             </div>
@@ -33,7 +33,7 @@
 
             <a
                 href="{{ route('shop.customers.account.profile.edit') }}"
-                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:py-1.5"
+                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-1.5 max-sm:text-sm"
             >
                 @lang('shop::app.customers.account.profile.index.edit')
             </a>
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Profile Information -->
-        <div class="mt-8 grid grid-cols-1 gap-y-6 max-md:mt-5 max-md:gap-y-5">
+        <div class="mt-8 grid grid-cols-1 gap-y-6 max-md:mt-5 max-md:gap-y-4">
             {!! view_render_event('bagisto.shop.customers.account.profile.first_name.before') !!}
 
             <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3 max-md:px-0">
@@ -119,17 +119,17 @@
             <x-shop::form action="{{ route('shop.customers.account.profile.destroy') }}">
                 <x-shop::modal>
                     <x-slot:toggle>
-                        <div class="primary-button rounded-2xl px-11 py-3 max-md:hidden max-md:rounded-xl">
+                        <div class="primary-button rounded-2xl px-11 py-3 max-md:hidden max-md:rounded-lg">
                             @lang('shop::app.customers.account.profile.index.delete-profile')
                         </div>
 
-                        <div class="rounded-2xl py-3 text-center font-medium text-red-500 max-md:w-full max-md:max-w-full md:hidden">
+                        <div class="rounded-2xl py-3 text-center font-medium text-red-500 max-md:w-full max-md:max-w-full max-md:py-1.5 md:hidden">
                             @lang('shop::app.customers.account.profile.index.delete-profile')
                         </div>
                     </x-slot>
 
                     <x-slot:header>
-                        <h2 class="text-2xl font-medium max-md:text-xl">
+                        <h2 class="text-2xl font-medium max-md:text-base">
                             @lang('shop::app.customers.account.profile.index.enter-password')
                         </h2>
                     </x-slot>
@@ -155,7 +155,7 @@
                     <x-slot:footer>
                         <button
                             type="submit"
-                            class="primary-button flex rounded-2xl px-11 py-3 max-md:rounded-xl max-md:px-6 max-md:text-sm"
+                            class="primary-button flex rounded-2xl px-11 py-3 max-md:rounded-lg max-md:px-6 max-md:text-sm"
                         >
                             @lang('shop::app.customers.account.profile.index.delete')
                         </button>
