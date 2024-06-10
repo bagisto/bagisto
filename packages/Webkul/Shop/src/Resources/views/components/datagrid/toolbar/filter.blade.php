@@ -54,7 +54,7 @@
                         @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
                     </x-slot>
 
-                    <x-slot:content class="max-sm:pt-2.5">
+                    <x-slot:content class="max-md:pt-2.5">
                         <div v-for="column in available.columns">
                             <div v-if="column.filterable">
                                 <!-- Boolean -->
@@ -149,7 +149,7 @@
                                                 <x-slot:toggle>
                                                     <button
                                                         type="button"
-                                                        class="flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-full max-md:py-1.5 ltr:pl-4 ltr:pr-3 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-3 rtl:pr-4 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5"
+                                                        class="flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-full max-sm:py-1.5 ltr:pl-4 ltr:pr-3 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-3 rtl:pr-4 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5"
                                                     >
                                                         <span v-text="'@lang('shop::app.components.datagrid.toolbar.filter.dropdown.select')'"></span>
 

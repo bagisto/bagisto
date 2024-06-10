@@ -27,7 +27,7 @@
                     <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                 </a>
     
-                <h2 class="text-2xl font-medium max-md:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                     @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
                 </h2>
             </div>
@@ -387,7 +387,7 @@
                                 @if ($order->canReorder())
                                     <a
                                         href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
-                                        class="mx-auto w-full py-2 text-sm font-medium text-navyBlue hover:bg-zinc-100"
+                                        class="mx-auto w-full py-3 text-sm font-medium text-navyBlue hover:bg-zinc-100 max-sm:py-2"
                                     >
                                         @lang('shop::app.customers.account.orders.view.reorder-btn-title')
                                     </a>
@@ -399,7 +399,7 @@
 
                                     <a
                                         href="javascript:void(0);"
-                                        class="mx-auto w-full py-2 text-sm font-medium hover:bg-zinc-100"
+                                        class="mx-auto w-full py-3 text-sm font-medium hover:bg-zinc-100 max-sm:py-2"
                                         @click="$emitter.emit('open-confirm-modal', {
                                             message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
 
@@ -419,7 +419,7 @@
                             :is-active="true"
                             class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                         >
-                            <x-slot:header class="bg-gray-100 !px-4 py-2 text-sm font-medium">
+                            <x-slot:header class="bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
                                @lang('shop::app.customers.account.orders.view.item-ordered')
                             </x-slot>
                 
@@ -584,7 +584,7 @@
 
                         <!--Summary -->
                         <div class="w-full rounded-md bg-gray-100">
-                            <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
+                            <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                                 @lang('shop::app.customers.account.orders.view.information.order-summary')
                             </div>
 
@@ -785,7 +785,7 @@
                                     :is-active="true"
                                     class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-2 text-sm font-medium">
+                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.item-invoiced')
                                     </x-slot>
                         
@@ -880,7 +880,7 @@
 
                                 <!--Summary -->
                                 <div class="w-full rounded-md bg-gray-100">
-                                    <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
+                                    <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('Order Summary')
                                     </div>
 
@@ -1287,7 +1287,7 @@
                                     :is-active="true"
                                     class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-2 text-sm font-medium">
+                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.item-shipped')
                                     </x-slot>
                         
@@ -1450,7 +1450,7 @@
                                     :is-active="true"
                                     class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-2 text-sm font-medium">
+                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.item-refunded')
                                     </x-slot>
                         
@@ -1545,7 +1545,7 @@
 
                                 <!-- Summary -->
                                 <div class="w-full rounded-md bg-gray-100">
-                                    <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
+                                    <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.refunds.order-summary')
                                     </div>
 
@@ -1820,7 +1820,7 @@
 
             <!-- Shipping Address and Payment methods for mobile view -->
             <div class="w-full rounded-md bg-gray-100 md:hidden">
-                <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
+                <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                     @lang('shop::app.customers.account.orders.view.shipping-and-payment')
                 </div>
 

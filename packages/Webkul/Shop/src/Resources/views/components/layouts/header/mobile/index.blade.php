@@ -265,11 +265,11 @@
         </label>
 
         <div class="relative w-full">
-            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:top-2 max-md:text-xl ltr:left-3 rtl:right-3"></div>
+            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2 ltr:left-3 rtl:right-3"></div>
 
             <input
                 type="text"
-                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-2.5 max-md:font-normal max-sm:text-xs"
+                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                 name="query"
                 value="{{ request('query') }}"
                 placeholder="@lang('shop::app.components.layouts.header.search-text')"
@@ -384,7 +384,7 @@
                         <!-- Drawer Toggler -->
                         <x-slot:toggle>
                             <div
-                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-xl font-medium uppercase max-md:py-3 max-sm:text-base"
+                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
                                 role="button"
                             >
                                 {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
@@ -417,7 +417,7 @@
                         <!-- Drawer Toggler -->
                         <x-slot:toggle>
                             <div
-                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-xl font-medium uppercase max-md:py-3 max-sm:text-base"
+                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
                                 role="button"
                             >
                                 <img

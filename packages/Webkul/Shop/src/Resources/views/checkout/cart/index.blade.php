@@ -117,7 +117,7 @@
                                     </label>
 
                                     <span
-                                        class="text-xl max-md:text-sm ltr:ml-2.5 rtl:mr-2.5"
+                                        class="text-xl max-sm:text-sm ltr:ml-2.5 rtl:mr-2.5"
                                         role="heading"
                                         aria-level="2"
                                     >
@@ -127,7 +127,7 @@
 
                                 <div v-if="selectedItemsCount">
                                     <span
-                                        class="cursor-pointer text-base text-blue-700 max-md:text-xs" 
+                                        class="cursor-pointer text-base text-blue-700 max-sm:text-xs" 
                                         role="button"
                                         tabindex="0"
                                         @click="removeSelectedItems"
@@ -139,7 +139,7 @@
                                         <span class="mx-2.5 border-r-2 border-zinc-200"></span>
 
                                         <span
-                                            class="cursor-pointer text-base text-blue-700 max-md:text-xs"
+                                            class="cursor-pointer text-base text-blue-700 max-sm:text-xs"
                                             role="button"
                                             tabindex="0"
                                             @click="moveToWishlistSelectedItems"
@@ -201,7 +201,7 @@
                                             {!! view_render_event('bagisto.shop.checkout.cart.item_name.before') !!}
 
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
-                                                <p class="text-base font-medium max-md:text-sm">
+                                                <p class="text-base font-medium max-sm:text-sm">
                                                     @{{ item.name }}
                                                 </p>
                                             </a>
@@ -237,11 +237,11 @@
                                                 >
                                                     <template v-for="option in item.options">
                                                         <div class="max-md:grid max-md:gap-0.5">
-                                                            <p class="text-sm font-medium text-zinc-500 max-md:text-xs max-md:font-normal">
+                                                            <p class="text-sm font-medium text-zinc-500 max-md:font-normal max-sm:text-xs">
                                                                 @{{ option.attribute_name + ':' }}
                                                             </p>
 
-                                                            <p class="text-sm max-md:text-xs">
+                                                            <p class="text-sm max-sm:text-xs">
                                                                 @{{ option.option_label }}
                                                             </p>
                                                         </div>

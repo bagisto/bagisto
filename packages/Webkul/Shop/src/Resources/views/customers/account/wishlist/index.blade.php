@@ -46,7 +46,7 @@
                                 <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>                                    
                             </a>
 
-                            <h2 class="text-2xl font-medium max-md:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                            <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                                 @lang('shop::app.customers.account.wishlist.page-title')
                             </h2>
                         </div>
