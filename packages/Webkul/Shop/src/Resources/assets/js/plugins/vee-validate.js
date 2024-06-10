@@ -41,9 +41,9 @@ export default {
         /**
          * Registration of all global validators.
          */
-        Object.keys(AllRules).forEach((rule) => {
-            defineRule(rule, AllRules[rule]);
-        });
+        Object.keys(AllRules)
+            .filter(rule => typeof AllRules[rule] === 'function')
+            .forEach(rule => defineRule(rule, AllRules[rule]));
 
         /**
          * This regular expression allows phone numbers with the following conditions:
