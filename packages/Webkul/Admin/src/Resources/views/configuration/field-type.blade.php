@@ -1,6 +1,4 @@
 @php
-    $validations = $field->getValidations();
-
     $value = system_config()->getConfigData($field->getNameKey(), $currentChannel->code, $currentLocale->code);
 @endphp
 
@@ -16,7 +14,7 @@
         value="{{ $value }}"
         label="{{ trans($field->getTitle()) }}"
         info="{{ trans($field->getInfo()) }}"
-        validations="{{ $validations }}"
+        validations="{{ $field->getValidations() }}"
         is-require="{{ $field->isRequired() }}"
         depend-name="{{ $field->getDependFieldName() }}"
         src="{{ Storage::url($value) }}"
