@@ -35,13 +35,15 @@ class ThemeDatagrid extends DataGrid
                 'channel_translations.name as channel_name',
                 'theme_customizations.status',
                 'theme_customizations.name as name',
+                'theme_customizations.channel_id'
             );
 
+        $this->addFilter('id', 'theme_customizations.id');
         $this->addFilter('type', 'theme_customizations.type');
         $this->addFilter('name', 'theme_customizations.name');
         $this->addFilter('sort_order', 'theme_customizations.sort_order');
         $this->addFilter('status', 'theme_customizations.status');
-        $this->addFilter('channel_name', 'channel_name');
+        $this->addFilter('channel_name', 'theme_customizations.channel_id');
 
         return $queryBuilder;
     }
