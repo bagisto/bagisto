@@ -2,10 +2,10 @@
 
 namespace Webkul\Core\SystemConfig;
 
-class SystemConfigItemField
+class ItemField
 {
     /**
-     * Create a new SystemConfigItemField instance.
+     * Create a new ItemField instance.
      */
     public function __construct(
         public string $name,
@@ -67,7 +67,13 @@ class SystemConfigItemField
      */
     public function getValidation(): ?string
     {
-        return $this->validation;
+        if (empty($this->validation)) {
+            return '';
+        }
+
+        return app('Webkul\Core\Repositories\CoreConfigRepository')->getValidations([
+            'validation' => $this->validation,
+        ]);
     }
 
     /**
@@ -108,6 +114,26 @@ class SystemConfigItemField
     public function getOptions(): array|string
     {
         return $this->options;
+    }
+
+    /**
+     * Get the mapped field.
+     */
+    public function getMappedField(): array
+    {
+        return collect([
+            ...$this->toArray(),
+            'isVisible' => true,
+        ])->map(function ($value, $key) {
+            if ($key == 'options') {
+                return collect(app('Webkul\Core\Repositories\CoreConfigRepository')->getOptions($value))->map(fn ($option) => [
+                    'title' => trans($option['title']),
+                    'value' => $option['value'],
+                ])->toArray();
+            }
+
+            return $value;
+        })->toArray();
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Core\Repositories\CoreConfigRepository;
-use Webkul\Core\SystemConfig\SystemConfigItem;
+use Webkul\Core\SystemConfig\Item;
 
 class SystemConfig
 {
@@ -28,7 +28,7 @@ class SystemConfig
     /**
      * Add Item.
      */
-    public function addItem(SystemConfigItem $item): void
+    public function addItem(Item $item): void
     {
         $this->items[] = $item;
     }
@@ -76,7 +76,7 @@ class SystemConfig
         foreach ($configs as $configItem) {
             $subConfigItems = $this->processSubConfigItems($configItem);
 
-            $this->addItem(new SystemConfigItem(
+            $this->addItem(new Item(
                 children: $subConfigItems,
                 fields: $configItem['fields'] ?? null,
                 icon: $configItem['icon'] ?? null,
@@ -100,7 +100,7 @@ class SystemConfig
             ->map(function ($subConfigItem) {
                 $configItemChildren = $this->processSubConfigItems($subConfigItem);
 
-                return new SystemConfigItem(
+                return new Item(
                     children: $configItemChildren,
                     fields: $subConfigItem['fields'] ?? null,
                     icon: $subConfigItem['icon'] ?? null,
@@ -116,7 +116,7 @@ class SystemConfig
     /**
      * Get active configuration item.
      */
-    public function getActiveConfigurationItem(): ?SystemConfigItem
+    public function getActiveConfigurationItem(): ?Item
     {
         if (! $slug = request()->route('slug')) {
             return null;
@@ -136,26 +136,6 @@ class SystemConfig
     }
 
     /**
-     * Get the mapped field.
-     */
-    public function getMappedField(?array $field = []): array
-    {
-        return collect([
-            ...$field,
-            'isVisible' => true,
-        ])->map(function ($value, $key) {
-            if ($key == 'options') {
-                return collect($this->coreConfigRepository->getOptions($value))->map(fn ($option) => [
-                    'title' => trans($option['title']),
-                    'value' => $option['value'],
-                ])->toArray();
-            }
-
-            return $value;
-        })->toArray();
-    }
-
-    /**
      * Get group of active configuration.
      */
     public function getNameField(?string $nameKey = null): string
@@ -170,7 +150,7 @@ class SystemConfig
     /**
      * Get depend the field name.
      */
-    public function getDependFieldName(array $field, SystemConfigItem $item): string
+    public function getDependFieldName(array $field, Item $item): string
     {
         if (empty($field['depends'])) {
             return '';
@@ -179,18 +159,6 @@ class SystemConfig
         $dependNameKey = $item->getKey().'.'.collect(explode(':', $field['depends']))->first();
 
         return $this->getNameField($dependNameKey);
-    }
-
-    /**
-     * Get the validations for the field.
-     */
-    public function getFieldValidations(array $field): string
-    {
-        if (empty($field)) {
-            return '';
-        }
-
-        return $this->coreConfigRepository->getValidations($field);
     }
 
     /**

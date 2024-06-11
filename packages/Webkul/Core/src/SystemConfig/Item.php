@@ -4,10 +4,10 @@ namespace Webkul\Core\SystemConfig;
 
 use Illuminate\Support\Collection;
 
-class SystemConfigItem
+class Item
 {
     /**
-     * Create a new SystemConfigItem instance.
+     * Create a new Item instance.
      */
     public function __construct(
         public Collection $children,
@@ -43,7 +43,7 @@ class SystemConfigItem
     public function getFields(): Collection
     {
         return collect($this->fields)->map(function ($field) {
-            return new SystemConfigItemField(
+            return new ItemField(
                 name: $field['name'],
                 title: $field['title'],
                 info: $field['info'] ?? null,
