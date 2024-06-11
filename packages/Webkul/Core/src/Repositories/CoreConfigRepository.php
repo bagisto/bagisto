@@ -165,8 +165,6 @@ class CoreConfigRepository extends Repository
      * Search configuration.
      *
      * @param  array  $items
-     * @param  string  $searchTerm
-     * @return array
      */
     public function search(Collection $items, string $searchTerm, array $path = []): array
     {

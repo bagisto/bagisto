@@ -22,7 +22,6 @@
         src="{{ Storage::url($value) }}"
         field-data="{{ json_encode($field) }}"
         channel-count="{{ $channels->count() }}"
-        channel-locale="{{ $field->getChannelLocaleInfo($currentChannel->code, $currentLocale->code) }}"
         current-channel="{{ $currentChannel }}"
         current-locale="{{ $currentLocale }}"
     >
@@ -430,7 +429,6 @@
 
             props: [
                 'channelCount',
-                'channelLocale',
                 'currentChannel',
                 'currentLocale',
                 'dependName',

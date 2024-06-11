@@ -223,29 +223,6 @@ class ItemField
     }
 
     /**
-     * Get channel/locale indicator for form fields. So, that form fields can be detected,
-     * whether it is channel based or locale based or both.
-     *
-     * @param  string  $channel
-     * @param  string  $locale
-     * @return string
-     */
-    public function getChannelLocaleInfo($channel, $locale)
-    {
-        $info = [];
-
-        if (! empty($this->channel_based)) {
-            $info[] = $channel;
-        }
-
-        if (! empty($this->locale_based)) {
-            $info[] = $locale;
-        }
-
-        return ! empty($info) ? '['.implode(' - ', $info).']' : '';
-    }
-
-    /**
      * Returns the select options for the field.
      */
     protected function getFieldOptions(array|string $options): array
