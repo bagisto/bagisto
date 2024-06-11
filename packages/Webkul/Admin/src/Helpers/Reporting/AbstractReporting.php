@@ -9,30 +9,27 @@ use Illuminate\Support\Str;
 abstract class AbstractReporting
 {
     /**
+     * The channel ids.
+     */
+    protected array $channelIds;
+
+    /**
      * The starting date for a given period.
-     *
-     * @var \Carbon\Carbon
      */
     protected Carbon $startDate;
 
     /**
      * The ending date for a given period.
-     *
-     * @var \Carbon\Carbon
      */
     protected Carbon $endDate;
 
     /**
      * The starting date for the previous period.
-     *
-     * @var \Carbon\Carbon
      */
     protected Carbon $lastStartDate;
 
     /**
      * The ending date for the previous period.
-     *
-     * @var \Carbon\Carbon
      */
     protected Carbon $lastEndDate;
 
@@ -43,9 +40,28 @@ abstract class AbstractReporting
      */
     public function __construct()
     {
+        $this->setChannel(request()->query('channel'));
+
         $this->setStartDate(request()->date('start'));
 
         $this->setEndDate(request()->date('end'));
+    }
+
+    /**
+     * Sets the channel IDs and codes.
+     */
+    public function setChannel(?string $code = null): self
+    {
+        $this->channelIds = core()->getAllChannels()
+            ->filter(function ($channel) use ($code) {
+                return $code ? $channel->code == $code : true;
+            })
+            ->pluck('id')
+            ->toArray();
+
+        // $this->channelIds = [2];
+
+        return $this;
     }
 
     /**

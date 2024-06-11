@@ -17,10 +17,10 @@ class OrderInvoicesDataGrid extends DataGrid
         $dbPrefix = DB::getTablePrefix();
 
         $queryBuilder = DB::table('invoices')
-            ->leftJoin('orders as ors', 'invoices.order_id', '=', 'ors.id')
+            ->leftJoin('orders', 'invoices.order_id', '=', 'orders.id')
             ->select(
                 'invoices.id as id',
-                'ors.increment_id as order_id',
+                'orders.increment_id as order_id',
                 'invoices.state as state',
                 'invoices.base_grand_total as base_grand_total',
                 'invoices.created_at as created_at'
@@ -28,7 +28,7 @@ class OrderInvoicesDataGrid extends DataGrid
             ->selectRaw("CASE WHEN {$dbPrefix}invoices.increment_id IS NOT NULL THEN {$dbPrefix}invoices.increment_id ELSE {$dbPrefix}invoices.id END AS increment_id");
 
         $this->addFilter('increment_id', 'invoices.increment_id');
-        $this->addFilter('order_id', 'ors.increment_id');
+        $this->addFilter('order_id', 'orders.increment_id');
         $this->addFilter('base_grand_total', 'invoices.base_grand_total');
         $this->addFilter('created_at', 'invoices.created_at');
 

@@ -100,6 +100,7 @@ class Cart extends AbstractReporting
     {
         return $this->cartRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
     }
@@ -115,6 +116,7 @@ class Cart extends AbstractReporting
         return $this->cartRepository
             ->resetModel()
             ->where('is_active', 1)
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate->subDays(2)])
             ->count();
     }
@@ -147,6 +149,7 @@ class Cart extends AbstractReporting
         return $this->cartRepository
             ->resetModel()
             ->where('is_active', 1)
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate->subDays(2)])
             ->sum('base_grand_total');
     }
@@ -160,10 +163,11 @@ class Cart extends AbstractReporting
     {
         return $this->cartItemRepository
             ->resetModel()
+            ->leftJoin('cart', 'cart_items.cart_id', '=', 'cart.id')
             ->select('product_id as id', 'name')
             ->addSelect(DB::raw('COUNT(*) as count'))
-            ->leftJoin('cart', 'cart_items.cart_id', '=', 'cart.id')
             ->where('is_active', 1)
+            ->whereIn('cart.channel_id', $this->channelIds)
             ->whereBetween('cart.created_at', [$this->startDate, $this->endDate->subDays(2)])
             ->groupBy('product_id')
             ->limit($limit)
@@ -181,6 +185,7 @@ class Cart extends AbstractReporting
             ->distinct('product_id')
             ->leftJoin('cart', 'cart_items.cart_id', '=', 'cart.id')
             ->where('is_active', 1)
+            ->whereIn('cart.channel_id', $this->channelIds)
             ->whereBetween('cart.created_at', [$this->startDate, $this->endDate->subDays(2)])
             ->count();
     }
@@ -197,6 +202,7 @@ class Cart extends AbstractReporting
         return $this->cartRepository
             ->resetModel()
             ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
+            ->whereIn('cart.channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get()
             ->count();

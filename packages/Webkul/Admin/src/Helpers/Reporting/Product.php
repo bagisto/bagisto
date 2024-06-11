@@ -76,7 +76,9 @@ class Product extends AbstractReporting
     {
         return $this->orderItemRepository
             ->resetModel()
-            ->whereBetween('created_at', [$startDate, $endDate])
+            ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
+            ->whereIn('orders.channel_id', $this->channelIds)
+            ->whereBetween('order_items.created_at', [$startDate, $endDate])
             ->value(DB::raw('SUM(qty_invoiced - qty_refunded)')) ?? 0;
     }
 
@@ -126,6 +128,7 @@ class Product extends AbstractReporting
     {
         return $this->wishlistRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
     }
@@ -152,7 +155,9 @@ class Product extends AbstractReporting
     {
         return $this->reviewRepository
             ->resetModel()
+            ->leftJoin('product_channels', 'product_reviews.product_id', '=', 'product_channels.product_id')
             ->where('status', 'approved')
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
     }
@@ -167,8 +172,10 @@ class Product extends AbstractReporting
         return $this->productInventoryRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
+            ->leftJoin('product_channels', 'product_inventories.product_id', '=', 'product_channels.product_id')
             ->select('*', DB::raw('SUM(qty) as total_qty'))
-            ->groupBy('product_id')
+            ->whereIn('channel_id', $this->channelIds)
+            ->groupBy('product_inventories.product_id')
             ->orderBy('total_qty', 'ASC')
             ->limit($limit)
             ->get();
@@ -184,8 +191,10 @@ class Product extends AbstractReporting
         $items = $this->orderItemRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
+            ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
             ->addSelect('*', DB::raw('SUM(base_total_invoiced - base_amount_refunded) as revenue'))
             ->whereNull('parent_id')
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
             ->having(DB::raw('SUM(base_total_invoiced - base_amount_refunded)'), '>', 0)
             ->groupBy('product_id')
@@ -218,8 +227,10 @@ class Product extends AbstractReporting
         $items = $this->orderItemRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
+            ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
             ->addSelect('*', DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_ordered'))
             ->whereNull('parent_id')
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
             ->having(DB::raw('SUM(qty_invoiced - qty_refunded)'), '>', 0)
             ->groupBy('product_id')
@@ -252,13 +263,15 @@ class Product extends AbstractReporting
 
         $products = $this->reviewRepository
             ->resetModel()
+            ->leftJoin('product_channels', 'product_reviews.product_id', '=', 'product_channels.product_id')
             ->addSelect(
-                'product_id',
+                'product_reviews.product_id',
                 DB::raw('COUNT(*) as reviews')
             )
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
             ->where('status', 'approved')
-            ->groupBy('product_id')
+            ->groupBy('product_reviews.product_id')
             ->orderByDesc('reviews')
             ->limit($limit)
             ->get();
@@ -279,6 +292,7 @@ class Product extends AbstractReporting
     {
         return $this->searchTermRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('updated_at', [$this->startDate, $this->endDate])
             ->orderByDesc('updated_at')
             ->limit($limit)
@@ -294,6 +308,7 @@ class Product extends AbstractReporting
     {
         return $this->searchTermRepository
             ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
             ->orderByDesc('uses')
             ->limit($limit)
             ->get();
@@ -310,15 +325,17 @@ class Product extends AbstractReporting
     {
         $config = $this->getTimeInterval($startDate, $endDate, $period);
 
-        $groupColumn = $config['group_column'];
+        $groupColumn = str_replace('created_at', 'order_items.created_at', $config['group_column']);
 
         $results = $this->orderItemRepository
             ->resetModel()
+            ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
             ->select(
                 DB::raw("$groupColumn AS date"),
                 DB::raw('COUNT(*) AS total')
             )
-            ->whereBetween('created_at', [$startDate, $endDate])
+            ->whereIn('channel_id', $this->channelIds)
+            ->whereBetween('order_items.created_at', [$startDate, $endDate])
             ->groupBy('date')
             ->get();
 
@@ -355,6 +372,7 @@ class Product extends AbstractReporting
                 DB::raw("$groupColumn AS date"),
                 DB::raw('COUNT(*) AS total')
             )
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('date')
             ->get();

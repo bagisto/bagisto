@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'පාරිභෝගිකයක් එකතු කරන්න',
             'add-product'                 => 'නිෂ්පාදනයක් එකතු කරන්න',
+            'all-channels'                => 'සියලු චැනල්',
             'attribute-code'              => 'ගුණාංග කේතය',
             'average-sale'                => 'මධ්‍යම ඇනවුම වින්‍යාසය',
             'color'                       => 'පරාසය',
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'සැකසුම් පවුර',
                     'attribute-family-value' => 'සැකසුම් පවුර - :attribute_family',
                     'category'               => 'ප්‍රවර්ගය',
+                    'channel'                => 'චැනල්',
                     'copy-of'                => 'සාකච්චා :value',
                     'copy-of-slug'           => 'පිටුගත :value',
                     'delete'                 => 'මකාදමන්',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'ක්‍රියාකාරී',
                     'address'        => ':address  ලිපිනය(හොය)',
                     'address-count'  => 'ලිපිනය ගණන',
+                    'channel'        => 'චැනල්',
                     'delete'         => 'මකන්න',
                     'delete-success' => 'තෝරාගත් දත්ත සාර්ථකව මකන ලදි',
                     'email'          => 'ඊමේල්',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'සෙවුම් නියමයන්',
 
                     'datagrid' => [
-                        'Channel'             => 'නාලිකාව',
+                        'channel'             => 'නාලිකාව',
                         'actions'             => 'ක්රියාවන්',
                         'channel'             => 'නාලිකාව',
                         'delete'              => 'මකන්න',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'නාලිකාව',
                         'channel'        => 'නාලිකාව',
                         'delete-warning' => 'ඔබට මෙම ක්‍රියාව සිදු කිරීමට අවශ්‍ය බව විශ්වාසද?',
                         'locale'         => 'දේශීය',
@@ -2396,6 +2398,7 @@ return [
             'title'         => 'පිටුවෙන්',
 
             'datagrid' => [
+                'channel'             => 'චැනල්',
                 'delete'              => 'මකනවා',
                 'edit'                => 'සංස්කරණය',
                 'id'                  => 'අංකය',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => 'අබන්ඩන් හුදුන්',
                 'added-to-cart'                 => 'කරුණට එකතු කරන ලදි',
                 'added-to-cart-info'            => 'පතිරූක :progress පිටවල් එකතු කරන ලදි',
+                'all-channels'                  => 'සියලු චැනල්',
                 'average-order-value-over-time' => 'කාලය හා මධ්‍යම ඇණවුම අගය',
                 'average-sales'                 => 'මධ්‍යම ඇණවුමේ වටින',
                 'count'                         => 'ගණන',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'සියලු චැනල්',
                 'count'                       => 'ගණන',
                 'customers'                   => 'කුරුණු',
                 'customers-over-time'         => 'කාලය හා කුරුණු',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'සියලු චැනල්',
                 'channel'                          => 'නාලිකාව',
                 'end-date'                         => 'අවසන් දිනය',
                 'id'                               => 'ID',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'සියලු චැනල්',
             'day'           => 'දිනය',
             'end-date'      => 'අවසන් දිනය',
             'export-csv'    => 'CSV අපනයය',

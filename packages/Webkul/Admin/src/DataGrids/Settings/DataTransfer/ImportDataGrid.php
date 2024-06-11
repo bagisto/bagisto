@@ -14,8 +14,8 @@ class ImportDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('imports')
-            ->addSelect(
+        return DB::table('imports')
+            ->select(
                 'id',
                 'state',
                 'file_path',
@@ -24,8 +24,6 @@ class ImportDataGrid extends DataGrid
                 'completed_at',
                 'summary',
             );
-
-        return $queryBuilder;
     }
 
     /**
@@ -61,7 +59,7 @@ class ImportDataGrid extends DataGrid
             'filterable' => false,
             'sortable'   => false,
             'closure'    => function ($row) {
-                return '<a href="'.route('admin.settings.data_transfer.imports.download', $row->id).'" class="text-blue-600 hover:underline cursor-pointer">'.$row->file_path.'<a>';
+                return '<a href="'.route('admin.settings.data_transfer.imports.download', $row->id).'" class="cursor-pointer text-blue-600 hover:underline">'.$row->file_path.'<a>';
             },
         ]);
 
@@ -77,7 +75,7 @@ class ImportDataGrid extends DataGrid
                     return '';
                 }
 
-                return '<a href="'.route('admin.settings.data_transfer.imports.download_error_report', $row->id).'" class="text-blue-600 hover:underline cursor-pointer">'.$row->error_file_path.'<a>';
+                return '<a href="'.route('admin.settings.data_transfer.imports.download_error_report', $row->id).'" class="cursor-pointer text-blue-600 hover:underline">'.$row->error_file_path.'<a>';
             },
         ]);
 
