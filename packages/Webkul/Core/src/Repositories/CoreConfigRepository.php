@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Core\Traits\CoreConfigField;
 
 class CoreConfigRepository extends Repository
 {

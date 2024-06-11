@@ -103,7 +103,7 @@ class ItemField
     /**
      * Get depends of config item.
      */
-    public function getDepends(): ?string
+    private function getDepends(): ?string
     {
         return $this->depends;
     }
@@ -151,7 +151,7 @@ class ItemField
     /**
      * Get options of config item.
      */
-    public function getOptions(): array|string
+    private function getOptions(): array|string
     {
         if (is_array($this->options)) {
             return collect($this->options)->map(fn ($option) => [
@@ -248,7 +248,7 @@ class ItemField
     /**
      * Returns the select options for the field.
      */
-    public function getFieldOptions(array|string $options): array
+    protected function getFieldOptions(array|string $options): array
     {
         if (is_array($options)) {
             return $options;
