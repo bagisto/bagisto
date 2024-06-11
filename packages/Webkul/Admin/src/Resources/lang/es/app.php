@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Agregar Cliente',
             'add-product'                 => 'Agregar Producto',
+            'all-channels'                => 'Todos los Canales',
             'attribute-code'              => 'Código de Atributo',
             'average-sale'                => 'Promedio de Venta por Pedido',
             'color'                       => 'Color',
@@ -740,30 +741,31 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'Activo',
-                    'attribute-family'              => 'Familia de atributos',
-                    'attribute-family-value'        => 'Familia de atributos - :attribute_family',
-                    'category'                      => 'Categoría',
-                    'copy-of'                       => 'Copia de :value',
-                    'copy-of-slug'                  => 'copia-de-:value',
-                    'delete'                        => 'Eliminar',
-                    'disable'                       => 'Desactivar',
-                    'id'                            => 'ID',
-                    'id-value'                      => 'ID - :id',
-                    'image'                         => 'Imagen',
-                    'mass-delete-success'           => 'Productos seleccionados eliminados exitosamente',
-                    'mass-update-success'           => 'Productos seleccionados actualizados exitosamente',
-                    'name'                          => 'Nombre',
-                    'out-of-stock'                  => 'Agotado',
-                    'price'                         => 'Precio',
-                    'product-image'                 => 'Imagen del producto',
-                    'qty'                           => 'Cantidad',
-                    'qty-value'                     => ':qty Disponible',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'Estado',
-                    'type'                          => 'Tipo',
-                    'update-status'                 => 'Actualizar estado',
+                    'active'                 => 'Activo',
+                    'attribute-family'       => 'Familia de atributos',
+                    'attribute-family-value' => 'Familia de atributos - :attribute_family',
+                    'category'               => 'Categoría',
+                    'channel'                => 'Canal',
+                    'copy-of'                => 'Copia de :value',
+                    'copy-of-slug'           => 'copia-de-:value',
+                    'delete'                 => 'Eliminar',
+                    'disable'                => 'Desactivar',
+                    'id'                     => 'ID',
+                    'id-value'               => 'ID - :id',
+                    'image'                  => 'Imagen',
+                    'mass-delete-success'    => 'Productos seleccionados eliminados exitosamente',
+                    'mass-update-success'    => 'Productos seleccionados actualizados exitosamente',
+                    'name'                   => 'Nombre',
+                    'out-of-stock'           => 'Agotado',
+                    'price'                  => 'Precio',
+                    'product-image'          => 'Imagen del producto',
+                    'qty'                    => 'Cantidad',
+                    'qty-value'              => ':qty Disponible',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'Estado',
+                    'type'                   => 'Tipo',
+                    'update-status'          => 'Actualizar estado',
                 ],
             ],
 
@@ -1398,6 +1400,7 @@ return [
                     'active'         => 'Activo',
                     'address'        => ':address  Dirección(es)',
                     'address-count'  => 'Cantidad de Direcciones',
+                    'channel'        => 'Canal',
                     'delete'         => 'Eliminar',
                     'delete-success' => 'Datos seleccionados eliminados correctamente',
                     'email'          => 'Correo Electrónico',
@@ -2226,7 +2229,7 @@ return [
                     'title'      => 'Términos de búsqueda',
 
                     'datagrid' => [
-                        'Channel'             => 'Canal',
+                        'channel'             => 'Canal',
                         'actions'             => 'Acciones',
                         'channel'             => 'Canal',
                         'delete'              => 'Eliminar',
@@ -2241,7 +2244,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Canal',
                         'channel'        => 'Canal',
                         'delete-warning' => '¿Estás seguro de que quieres realizar esta acción?',
                         'locale'         => 'Localización',
@@ -2398,6 +2400,7 @@ return [
             'title'         => 'Páginas',
 
             'datagrid' => [
+                'channel'             => 'Canal',
                 'delete'              => 'Eliminar',
                 'edit'                => 'Editar',
                 'id'                  => 'ID',
@@ -3193,6 +3196,7 @@ return [
                 'abandoned-revenue'             => 'Ingresos Abandonados',
                 'added-to-cart'                 => 'Añadido al Carro',
                 'added-to-cart-info'            => 'Solo :progress visitantes añadieron productos al carrito',
+                'all-channels'                  => 'Todos los Canales',
                 'average-order-value-over-time' => 'Valor Promedio del Pedido a lo largo del Tiempo',
                 'average-sales'                 => 'Valor Promedio del Pedido',
                 'count'                         => 'Conteo',
@@ -3231,6 +3235,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Todos los Canales',
                 'count'                       => 'Conteo',
                 'customers'                   => 'Clientes',
                 'customers-over-time'         => 'Clientes a lo largo del Tiempo',
@@ -3259,6 +3264,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Todos los Canales',
                 'channel'                          => 'Canal',
                 'end-date'                         => 'Fecha de Finalización',
                 'id'                               => 'ID',
@@ -3292,6 +3298,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Todos los Canales',
             'day'           => 'Día',
             'end-date'      => 'Fecha de Finalización',
             'export-csv'    => 'Exportar CSV',

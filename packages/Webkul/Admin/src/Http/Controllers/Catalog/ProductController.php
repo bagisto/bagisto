@@ -15,7 +15,6 @@ use Webkul\Admin\Http\Resources\AttributeResource;
 use Webkul\Admin\Http\Resources\ProductResource;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Rules\Slug;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
@@ -37,7 +36,6 @@ class ProductController extends Controller
      */
     public function __construct(
         protected AttributeFamilyRepository $attributeFamilyRepository,
-        protected InventorySourceRepository $inventorySourceRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
@@ -139,9 +137,7 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->findOrFail($id);
 
-        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => self::ACTIVE_STATUS]);
-
-        return view('admin::catalog.products.edit', compact('product', 'inventorySources'));
+        return view('admin::catalog.products.edit', compact('product'));
     }
 
     /**
@@ -324,13 +320,23 @@ class ProductController extends Controller
     {
         $results = [];
 
-        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
-            $searchEngine = core()->getConfigData('catalog.products.search.admin_mode');
+        $searchEngine = 'database';
+
+        if (
+            core()->getConfigData('catalog.products.search.engine') == 'elastic'
+            && core()->getConfigData('catalog.products.search.admin_mode') == 'elastic'
+        ) {
+            $searchEngine = 'elastic';
+
+            $indexNames = core()->getAllChannels()->map(function ($channel) {
+                return 'products_'.$channel->code.'_'.app()->getLocale().'_index';
+            })->toArray();
         }
 
         $products = $this->productRepository
-            ->setSearchEngine($searchEngine ?? 'database')
+            ->setSearchEngine($searchEngine)
             ->getAll([
+                'index' => $indexNames ?? null,
                 'name'  => request('query'),
                 'sort'  => 'created_at',
                 'order' => 'desc',

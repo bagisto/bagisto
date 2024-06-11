@@ -15,7 +15,7 @@ class InvoicesTransactionsDatagrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('order_transactions')
-            ->leftJoin('invoices as inv', 'order_transactions.invoice_id', '=', 'inv.id')
+            ->leftJoin('invoices', 'order_transactions.invoice_id', '=', 'invoices.id')
             ->select(
                 'order_transactions.id as id',
                 'order_transactions.transaction_id as transaction_id',

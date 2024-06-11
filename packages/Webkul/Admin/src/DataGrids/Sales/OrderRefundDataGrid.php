@@ -16,6 +16,11 @@ class OrderRefundDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('refunds')
+            ->leftJoin('orders', 'refunds.order_id', '=', 'orders.id')
+            ->leftJoin('addresses as order_address_billing', function ($leftJoin) {
+                $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
+                    ->where('order_address_billing.address_type', OrderAddress::ADDRESS_TYPE_BILLING);
+            })
             ->select(
                 'refunds.id',
                 'orders.increment_id',
@@ -23,11 +28,6 @@ class OrderRefundDataGrid extends DataGrid
                 'refunds.base_grand_total',
                 'refunds.created_at'
             )
-            ->leftJoin('orders', 'refunds.order_id', '=', 'orders.id')
-            ->leftJoin('addresses as order_address_billing', function ($leftJoin) {
-                $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
-                    ->where('order_address_billing.address_type', OrderAddress::ADDRESS_TYPE_BILLING);
-            })
             ->addSelect(DB::raw('CONCAT('.DB::getTablePrefix().'order_address_billing.first_name, " ", '.DB::getTablePrefix().'order_address_billing.last_name) as billed_to'));
 
         $this->addFilter('billed_to', DB::raw('CONCAT('.DB::getTablePrefix().'order_address_billing.first_name, " ", '.DB::getTablePrefix().'order_address_billing.last_name)'));

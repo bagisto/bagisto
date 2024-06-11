@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Add Customer',
             'add-product'                 => 'Add Product',
+            'all-channels'                => 'All Channels',
             'attribute-code'              => 'Attribute Code',
             'average-sale'                => 'Average Order Sale',
             'color'                       => 'Color',
@@ -740,30 +741,31 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'Active',
-                    'attribute-family'              => 'Attribute Family',
-                    'attribute-family-value'        => 'Attribute Family - :attribute_family',
-                    'category'                      => 'Category',
-                    'copy-of'                       => 'Copy Of :value',
-                    'copy-of-slug'                  => 'copy-of-:value',
-                    'delete'                        => 'Delete',
-                    'disable'                       => 'Disable',
-                    'id'                            => 'Id',
-                    'id-value'                      => 'Id - :id',
-                    'image'                         => 'Image',
-                    'mass-delete-success'           => 'Selected Products Deleted Successfully',
-                    'mass-update-success'           => 'Selected Products Updated Successfully',
-                    'name'                          => 'Name',
-                    'out-of-stock'                  => 'Out of Stock',
-                    'price'                         => 'Price',
-                    'product-image'                 => 'Product Image',
-                    'qty'                           => 'Quantity',
-                    'qty-value'                     => ':qty Available',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'Status',
-                    'type'                          => 'Type',
-                    'update-status'                 => 'Update Status',
+                    'active'                 => 'Active',
+                    'attribute-family-value' => 'Attribute Family - :attribute_family',
+                    'attribute-family'       => 'Attribute Family',
+                    'category'               => 'Category',
+                    'channel'                => 'Channel',
+                    'copy-of-slug'           => 'copy-of-:value',
+                    'copy-of'                => 'Copy Of :value',
+                    'delete'                 => 'Delete',
+                    'disable'                => 'Disable',
+                    'id-value'               => 'Id - :id',
+                    'id'                     => 'Id',
+                    'image'                  => 'Image',
+                    'mass-delete-success'    => 'Selected Products Deleted Successfully',
+                    'mass-update-success'    => 'Selected Products Updated Successfully',
+                    'name'                   => 'Name',
+                    'out-of-stock'           => 'Out of Stock',
+                    'price'                  => 'Price',
+                    'product-image'          => 'Product Image',
+                    'qty-value'              => ':qty Available',
+                    'qty'                    => 'Quantity',
+                    'sku-value'              => 'SKU - :sku',
+                    'sku'                    => 'SKU',
+                    'status'                 => 'Status',
+                    'type'                   => 'Type',
+                    'update-status'          => 'Update Status',
                 ],
             ],
 
@@ -772,6 +774,10 @@ return [
                 'remove'   => 'Remove',
                 'save-btn' => 'Save Product',
                 'title'    => 'Edit Product',
+
+                'channels' => [
+                    'title' => 'Channels',
+                ],
 
                 'price' => [
                     'group' => [
@@ -1216,8 +1222,8 @@ return [
 
                 'datagrid' => [
                     'active'         => 'Active',
-                    'delete'         => 'Delete',
                     'delete-success' => 'Selected :resource were successfully deleted',
+                    'delete'         => 'Delete',
                     'edit'           => 'Edit',
                     'id'             => 'ID',
                     'inactive'       => 'Inactive',
@@ -1398,6 +1404,7 @@ return [
                     'active'         => 'Active',
                     'address'        => ':address  Address(s)',
                     'address-count'  => 'Address Count',
+                    'channel'        => 'Channel',
                     'delete'         => 'Delete',
                     'delete-success' => 'Selected data successfully deleted',
                     'email'          => 'Email',
@@ -2237,11 +2244,10 @@ return [
                         'delete'              => 'Delete',
                         'channel'             => 'Channel',
                         'actions'             => 'Actions',
-                        'Channel'             => 'Channel',
+                        'channel'             => 'Channel',
                     ],
 
                     'create' => [
-                        'Channel'        => 'Channel',
                         'channel'        => 'Channel',
                         'delete-warning' => 'Are you sure, you want to perform this action?',
                         'locale'         => 'Locale',
@@ -2398,6 +2404,7 @@ return [
             'title'         => 'Pages',
 
             'datagrid' => [
+                'channel'             => 'Channel',
                 'delete'              => 'Delete',
                 'edit'                => 'Edit',
                 'id'                  => 'ID',
@@ -3191,8 +3198,9 @@ return [
                 'abandoned-products'            => 'Abandoned Products',
                 'abandoned-rate'                => 'Abandoned Rate',
                 'abandoned-revenue'             => 'Abandoned Revenue',
-                'added-to-cart'                 => 'Added to Cart',
                 'added-to-cart-info'            => 'Only :progress visitors added products to cart',
+                'added-to-cart'                 => 'Added to Cart',
+                'all-channels'                  => 'All Channels',
                 'average-order-value-over-time' => 'Average Order Value Over Time',
                 'average-sales'                 => 'Average Order Value',
                 'count'                         => 'Count',
@@ -3231,6 +3239,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'All Channels',
                 'count'                       => 'Count',
                 'customers'                   => 'Customers',
                 'customers-over-time'         => 'Customers Over Time',
@@ -3259,6 +3268,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'All Channels',
                 'channel'                          => 'Channel',
                 'end-date'                         => 'End Date',
                 'id'                               => 'Id',
@@ -3292,6 +3302,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'All Channels',
             'day'           => 'Day',
             'end-date'      => 'End Date',
             'export-csv'    => 'Export CSV',

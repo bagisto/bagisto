@@ -3,12 +3,17 @@
 namespace Webkul\Product\Helpers\Indexers;
 
 use Illuminate\Support\Facades\Schema;
-use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductFlatRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
-class Flat
+class Flat extends AbstractIndexer
 {
+    /**
+     * @var int
+     */
+    private $batchSize;
+
     /**
      * Attribute codes that can be fill during flat creation.
      *
@@ -47,10 +52,54 @@ class Flat
      * @return void
      */
     public function __construct(
-        protected ChannelRepository $channelRepository,
+        protected ProductRepository $productRepository,
         protected ProductFlatRepository $productFlatRepository
     ) {
+        $this->batchSize = self::BATCH_SIZE;
+
         $this->flatColumns = Schema::getColumnListing('product_flat');
+    }
+
+    /**
+     * Reindex all products
+     *
+     * @return void
+     */
+    public function reindexFull()
+    {
+        while (true) {
+            $paginator = $this->productRepository
+                ->with([
+                    'variants',
+                    'attribute_family',
+                    'attribute_values',
+                    'variants.attribute_family',
+                    'variants.attribute_values',
+                ])
+                ->cursorPaginate($this->batchSize);
+
+            $this->reindexBatch($paginator->items());
+
+            if (! $cursor = $paginator->nextCursor()) {
+                break;
+            }
+
+            request()->query->add(['cursor' => $cursor->encode()]);
+        }
+
+        request()->query->remove('cursor');
+    }
+
+    /**
+     * Reindex products by batch size
+     *
+     * @return void
+     */
+    public function reindexBatch($products)
+    {
+        foreach ($products as $product) {
+            $this->refresh($product);
+        }
     }
 
     /**
@@ -82,20 +131,16 @@ class Flat
     {
         $familyAttributes = $this->getCachedFamilyAttributes($product);
 
-        $channelCodes = $product['channels'] ?? [];
+        $channelIds = $product->channels->pluck('id')->toArray();
 
-        if (! empty($channelCodes)) {
-            foreach ($channelCodes as $channel) {
-                $channels[] = $this->getCachedChannel($channel)->code;
-            }
-        } else {
-            $channels[] = core()->getDefaultChannelCode();
+        if (empty($channelIds)) {
+            $channelIds[] = core()->getDefaultChannel()->id;
         }
 
         $attributeValues = $product->attribute_values()->get();
 
         foreach (core()->getAllChannels() as $channel) {
-            if (in_array($channel->code, $channels)) {
+            if (in_array($channel->id, $channelIds)) {
                 foreach ($channel->locales as $locale) {
                     $productFlat = $this->productFlatRepository->updateOrCreate([
                         'product_id'          => $product->id,
@@ -140,16 +185,10 @@ class Flat
                 }
             } else {
                 if (request()->route()?->getName() == 'admin.catalog.products.update') {
-                    $productFlat = $this->productFlatRepository->findWhere([
+                    $this->productFlatRepository->deleteWhere([
                         'product_id' => $product->id,
                         'channel'    => $channel->code,
                     ]);
-
-                    if ($productFlat) {
-                        foreach ($productFlat as $productFlatByChannelLocale) {
-                            $this->productFlatRepository->delete($productFlatByChannelLocale->id);
-                        }
-                    }
                 }
             }
         }
@@ -166,18 +205,5 @@ class Flat
         }
 
         return $this->familyAttributes[$product->attribute_family_id] = $product->attribute_family->custom_attributes;
-    }
-
-    /**
-     * @param  string  $id
-     * @return mixed
-     */
-    public function getCachedChannel($id)
-    {
-        if (isset($this->channels[$id])) {
-            return $this->channels[$id];
-        }
-
-        return $this->channels[$id] = $this->channelRepository->findOrFail($id);
     }
 }

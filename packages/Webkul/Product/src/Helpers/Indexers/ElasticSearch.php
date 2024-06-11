@@ -122,10 +122,12 @@ class ElasticSearch extends AbstractIndexer
             $paginator = $this->productRepository
                 ->select('products.*')
                 ->with([
+                    'channels',
                     'categories',
                     'inventories',
                     'super_attributes',
                     'variants',
+                    'variants.channels',
                     'attribute_family',
                     'attribute_values',
                     'variants.attribute_family',
@@ -158,6 +160,8 @@ class ElasticSearch extends AbstractIndexer
     {
         $refreshIndices = ['body' => []];
 
+        $removeIndices = [];
+
         foreach ($products as $product) {
             $this->setProduct($product);
 
@@ -167,20 +171,30 @@ class ElasticSearch extends AbstractIndexer
                 foreach ($channel->locales as $locale) {
                     $this->setLocale($locale);
 
-                    $refreshIndices['body'][] = [
-                        'index' => [
-                            '_index' => $this->getIndexName(),
-                            '_id'    => $product->id,
-                        ],
-                    ];
+                    $indexName = $this->getIndexName();
 
-                    $refreshIndices['body'][] = $this->getIndices();
+                    if (in_array($channel->id, $product->channels->pluck('id')->toArray())) {
+                        $refreshIndices['body'][] = [
+                            'index' => [
+                                '_index' => $indexName,
+                                '_id'    => $product->id,
+                            ],
+                        ];
+
+                        $refreshIndices['body'][] = $this->getIndices();
+                    } else {
+                        $removeIndices[$indexName][] = $product->id;
+                    }
                 }
             }
         }
 
         if (! empty($refreshIndices['body'])) {
             ElasticsearchClient::bulk($refreshIndices);
+        }
+
+        if (! empty($removeIndices)) {
+            $this->deleteIndices($removeIndices);
         }
     }
 
