@@ -8,7 +8,9 @@ export default {
              * @returns {string} - The formatted price string.
              */
             formatPrice: (price) => {
-                const locale = document.querySelector('meta[http-equiv="content-language"]').content;
+                let locale = document.querySelector('meta[http-equiv="content-language"]').content;
+
+                locale = locale.replace(/([a-z]{2})_([A-Z]{2})/g, '$1-$2');
 
                 const currency = JSON.parse(document.querySelector('meta[name="currency"]').content);
 
