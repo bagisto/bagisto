@@ -47,7 +47,6 @@ class SearchTermDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.id'),
             'type'       => 'integer',
-            'width'      => '40px',
             'filterable' => true,
             'sortable'   => true,
         ]);

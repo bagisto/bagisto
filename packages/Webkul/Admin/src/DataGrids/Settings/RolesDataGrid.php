@@ -33,7 +33,6 @@ class RolesDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.roles.index.datagrid.id'),
             'type'       => 'integer',
-            'width'      => '40px',
             'filterable' => true,
             'sortable'   => true,
         ]);

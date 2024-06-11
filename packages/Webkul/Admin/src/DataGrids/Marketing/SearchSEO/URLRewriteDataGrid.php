@@ -40,7 +40,6 @@ class URLRewriteDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.id'),
             'type'       => 'integer',
-            'width'      => '40px',
             'filterable' => true,
             'sortable'   => true,
         ]);

@@ -35,7 +35,6 @@ class SitemapDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.id'),
             'type'       => 'integer',
-            'width'      => '40px',
             'filterable' => true,
             'sortable'   => true,
         ]);
