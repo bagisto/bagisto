@@ -2,12 +2,24 @@
 
 namespace Webkul\Core\SystemConfig;
 
+use Illuminate\Support\Str;
+
 class ItemField
 {
+    /**
+     * Laravel to Vee Validation mappings.
+     *
+     * @var array
+     */
+    protected $veeValidateMappings = [
+        'min'=> 'min_value',
+    ];
+
     /**
      * Create a new ItemField instance.
      */
     public function __construct(
+        public string $item_key,
         public string $name,
         public string $title,
         public ?string $info,
@@ -19,13 +31,15 @@ class ItemField
         public ?bool $channel_based,
         public ?bool $locale_based,
         public array|string $options,
+        public bool $is_visible = true,
     ) {
+        $this->options = $this->getOptions();
     }
 
     /**
      * Get name of config item.
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -35,15 +49,15 @@ class ItemField
      */
     public function getInfo(): ?string
     {
-        return $this->info;
+        return $this->info ?? '';
     }
 
     /**
      * Get title of config item.
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
-        return $this->title;
+        return $this->title ?? '';
     }
 
     /**
@@ -63,17 +77,27 @@ class ItemField
     }
 
     /**
+     * Get item key of config item.
+     */
+    public function getItemKey(): string
+    {
+        return $this->item_key;
+    }
+
+    /**
      * Get validation of config item.
      */
-    public function getValidation(): ?string
+    public function getValidations(): ?string
     {
         if (empty($this->validation)) {
             return '';
         }
 
-        return app('Webkul\Core\Repositories\CoreConfigRepository')->getValidations([
-            'validation' => $this->validation,
-        ]);
+        foreach ($this->veeValidateMappings as $laravelRule => $veeValidateRule) {
+            $this->validation = str_replace($laravelRule, $veeValidateRule, $this->validation);
+        }
+
+        return $this->validation;
     }
 
     /**
@@ -109,31 +133,37 @@ class ItemField
     }
 
     /**
+     * Get name field for forms in configuration page.
+     */
+    public function getNameKey(): string
+    {
+        return $this->item_key.'.'.$this->name;
+    }
+
+    /**
+     * Check if the field is required.
+     */
+    public function isRequired(): bool
+    {
+        return Str::contains($this->getValidations(), 'required') ? 'required' : '';
+    }
+
+    /**
      * Get options of config item.
      */
     public function getOptions(): array|string
     {
-        return $this->options;
-    }
+        if (is_array($this->options)) {
+            return collect($this->options)->map(fn ($option) => [
+                'title' => trans($option['title']),
+                'value' => $option['value'],
+            ])->toArray();
+        }
 
-    /**
-     * Get the mapped field.
-     */
-    public function getMappedField(): array
-    {
-        return collect([
-            ...$this->toArray(),
-            'isVisible' => true,
-        ])->map(function ($value, $key) {
-            if ($key == 'options') {
-                return collect(app('Webkul\Core\Repositories\CoreConfigRepository')->getOptions($value))->map(fn ($option) => [
-                    'title' => trans($option['title']),
-                    'value' => $option['value'],
-                ])->toArray();
-            }
-
-            return $value;
-        })->toArray();
+        return collect($this->getFieldOptions($this->options))->map(fn ($option) => [
+            'title' => trans($option['title']),
+            'value' => $option['value'],
+        ])->toArray();
     }
 
     /**
@@ -148,11 +178,84 @@ class ItemField
             'type'          => $this->getType(),
             'path'          => $this->getPath(),
             'depends'       => $this->getDepends(),
-            'validation'    => $this->getValidation(),
+            'validation'    => $this->getValidations(),
             'default'       => $this->getDefault(),
             'channel_based' => $this->getChannelBased(),
             'locale_based'  => $this->getLocaleBased(),
             'options'       => $this->getOptions(),
+            'item_key'      => $this->getItemKey(),
         ];
+    }
+
+    /**
+     * Get name field for forms in configuration page.
+     *
+     * @param  string  $key
+     * @return string
+     */
+    public function getNameField($key = null)
+    {
+        if (! $key) {
+            $key = $this->item_key.'.'.$this->name;
+        }
+
+        $nameField = '';
+
+        foreach (explode('.', $key) as $key => $field) {
+            $nameField .= $key === 0 ? $field : '['.$field.']';
+        }
+
+        return $nameField;
+    }
+
+    /**
+     * Get depend the field name.
+     */
+    public function getDependFieldName(): string
+    {
+        if (empty($depends = $this->getDepends())) {
+            return '';
+        }
+
+        $dependNameKey = $this->getItemKey().'.'.collect(explode(':', $depends))->first();
+
+        return $this->getNameField($dependNameKey);
+    }
+
+    /**
+     * Get channel/locale indicator for form fields. So, that form fields can be detected,
+     * whether it is channel based or locale based or both.
+     *
+     * @param  string  $channel
+     * @param  string  $locale
+     * @return string
+     */
+    public function getChannelLocaleInfo($channel, $locale)
+    {
+        $info = [];
+
+        if (! empty($this->channel_based)) {
+            $info[] = $channel;
+        }
+
+        if (! empty($this->locale_based)) {
+            $info[] = $locale;
+        }
+
+        return ! empty($info) ? '['.implode(' - ', $info).']' : '';
+    }
+
+    /**
+     * Returns the select options for the field.
+     */
+    public function getFieldOptions(array|string $options): array
+    {
+        if (is_array($options)) {
+            return $options;
+        }
+
+        [$class, $method] = Str::parseCallback($options);
+
+        return app($class)->$method();
     }
 }

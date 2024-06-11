@@ -44,6 +44,7 @@ class Item
     {
         return collect($this->fields)->map(function ($field) {
             return new ItemField(
+                item_key: $this->key,
                 name: $field['name'],
                 title: $field['title'],
                 info: $field['info'] ?? null,
@@ -55,6 +56,7 @@ class Item
                 channel_based: $field['channel_based'] ?? null,
                 locale_based: $field['locale_based'] ?? null,
                 options: $this->formatOptions($field['options'] ?? null),
+                is_visible: true,
             );
         });
     }

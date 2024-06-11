@@ -1,9 +1,7 @@
 @php
-    $name = system_config()->getNameField($nameKey = $item->getKey() . '.' . $field->getName());
+    $validations = $field->getValidations();
 
-    $validations = $field->getValidation();
-
-    $field = $field->getMappedField();
+    $value = system_config()->getConfigData($field->getNameKey(), $currentChannel->code, $currentLocale->code);
 @endphp
 
 <input
@@ -14,19 +12,19 @@
 
 <div class="mb-4 last:!mb-0">
     <v-configurable
-        channel-locale="{{ system_config()->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code) }}"
-        src="{{ Storage::url($value = system_config()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
-        depend-name="{{ system_config()->getDependFieldName($field, $item) }}"
-        is-require="{{ Str::contains($validations, 'required') ? 'required' : '' }}"
+        name="{{ $field->getNameField() }}"
+        value="{{ $value }}"
+        label="{{ trans($field->getTitle()) }}"
+        info="{{ trans($field->getInfo()) }}"
+        validations="{{ $validations }}"
+        is-require="{{ $field->isRequired() }}"
+        depend-name="{{ $field->getDependFieldName() }}"
+        src="{{ Storage::url($value) }}"
         field-data="{{ json_encode($field) }}"
         channel-count="{{ $channels->count() }}"
+        channel-locale="{{ $field->getChannelLocaleInfo($currentChannel->code, $currentLocale->code) }}"
         current-channel="{{ $currentChannel }}"
         current-locale="{{ $currentLocale }}"
-        info="{{ trans($field['info'] ?? '') }}"
-        label="{{ trans($field['title'] ?? '') }}"
-        validations="{{ $validations }}"
-        value="{{ $value }}"
-        name="{{ $name }}"
     >
         <div class="shimmer mb-1.5 h-4 w-24"></div>
 
@@ -42,7 +40,7 @@
         <x-admin::form.control-group class="last:!mb-0">
             <!-- Title of the input field -->
             <div    
-                v-if="field.isVisible"
+                v-if="field.is_visible"
                 class="flex justify-between"
             >
                 <x-admin::form.control-group.label ::for="name">
@@ -65,7 +63,7 @@
             </div>
         
             <!-- Text input -->
-            <template v-if="field.type == 'text' && field.isVisible">
+            <template v-if="field.type == 'text' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="text"
                     ::id="name"
@@ -77,7 +75,7 @@
             </template>
         
             <!-- Password input -->
-            <template v-if="field.type == 'password' && field.isVisible">
+            <template v-if="field.type == 'password' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="password"
                     ::id="name"
@@ -89,7 +87,7 @@
             </template>
         
             <!-- Number input -->
-            <template v-if="field.type == 'number' && field.isVisible">
+            <template v-if="field.type == 'number' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="number"
                     ::id="name"
@@ -102,7 +100,7 @@
             </template>
 
             <!-- Color Input -->
-            <template v-if="field.type == 'color' && field.isVisible">
+            <template v-if="field.type == 'color' && field.is_visible">
                 <v-field
                     v-slot="{ field, errors }"
                     :id="name"
@@ -121,7 +119,7 @@
             </template>
         
             <!-- Textarea Input -->
-            <template v-if="field.type == 'textarea' && field.isVisible">
+            <template v-if="field.type == 'textarea' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
@@ -134,7 +132,7 @@
             </template>
 
             <!-- Textarea with tinymce -->
-            <template v-if="field.type == 'editor' && field.isVisible">
+            <template v-if="field.type == 'editor' && field.is_visible">
                 <x-admin::form.control-group.control
                     type="textarea"
                     class="text-gray-600 dark:text-gray-300"
@@ -147,7 +145,7 @@
             </template>
         
             <!-- Select input -->
-            <template v-if="field.type == 'select' && field.isVisible">
+            <template v-if="field.type == 'select' && field.is_visible">
                 <v-field
                     v-slot="data"
                     :id="name"
@@ -174,7 +172,7 @@
             </template>
 
             <!-- Multiselect Input -->
-            <template v-if="field.type == 'multiselect' && field.isVisible">
+            <template v-if="field.type == 'multiselect' && field.is_visible">
                 <v-field
                     v-slot="data"
                     :id="name"
@@ -202,7 +200,7 @@
             </template>
            
             <!-- Boolean/Switch input -->
-            <template v-if="field.type == 'boolean' && field.isVisible">
+            <template v-if="field.type == 'boolean' && field.is_visible">
                 <input
                     type="hidden"
                     :name="name"
@@ -223,7 +221,7 @@
                 </label>
             </template>
         
-            <template v-if="field.type == 'image' && field.isVisible">
+            <template v-if="field.type == 'image' && field.is_visible">
                 <div class="flex items-center justify-center">
                     <a
                         :href="src"
@@ -266,7 +264,7 @@
                 </template>
             </template>
 
-            <template v-if="field.type == 'file' && field.isVisible">
+            <template v-if="field.type == 'file' && field.is_visible">
                 <a
                     v-if="value"
                     :href="`{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), '']) }}/${value.split('/')[1]}`"
@@ -303,7 +301,7 @@
                 </template>
             </template>
 
-            <template v-if="field.type == 'country' && field.isVisible">
+            <template v-if="field.type == 'country' && field.is_visible">
                 <v-country :selected-country="value">
                     <template v-slot:default="{ changeCountry }">
                         <x-admin::form.control-group class="flex">
@@ -332,7 +330,7 @@
             </template>
         
             <!-- State select Vue component -->
-            <template v-if="field.type == 'state' && field.isVisible">
+            <template v-if="field.type == 'state' && field.is_visible">
                 <v-state>
                     <template v-slot:default="{ countryStates, country, haveStates, isStateComponenetLoaded }">
                         <div v-if="isStateComponenetLoaded">
@@ -382,7 +380,7 @@
             </template>
         
             <p
-                v-if="field.info && field.isVisible"
+                v-if="field.info && field.is_visible"
                 class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300"
                 v-text="info"
             >
@@ -464,7 +462,7 @@
                 }
 
                 dependElement.addEventListener('change', (event) => {
-                    this.field['isVisible'] = 
+                    this.field['is_visible'] = 
                         event.target.type === 'checkbox' 
                         ? event.target.checked
                         : this.validations.split(',').slice(1).includes(event.target.value);

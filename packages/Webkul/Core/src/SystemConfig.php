@@ -136,32 +136,6 @@ class SystemConfig
     }
 
     /**
-     * Get group of active configuration.
-     */
-    public function getNameField(?string $nameKey = null): string
-    {
-        if (! $nameKey) {
-            return '';
-        }
-
-        return $this->coreConfigRepository->getNameField($nameKey);
-    }
-
-    /**
-     * Get depend the field name.
-     */
-    public function getDependFieldName(array $field, Item $item): string
-    {
-        if (empty($field['depends'])) {
-            return '';
-        }
-
-        $dependNameKey = $item->getKey().'.'.collect(explode(':', $field['depends']))->first();
-
-        return $this->getNameField($dependNameKey);
-    }
-
-    /**
      * Get the channel locale info.
      */
     public function getChannelLocaleInfo(array $field, string $channelCode, string $localeCode): string
