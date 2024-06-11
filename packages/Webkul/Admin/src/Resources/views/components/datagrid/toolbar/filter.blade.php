@@ -1262,6 +1262,10 @@
                         return appliedColumn.value;
                     }
 
+                    if (! appliedColumn.value.length) {
+                        return '';
+                    }
+
                     return appliedColumn.value[0].join(' to ');
                 },
 

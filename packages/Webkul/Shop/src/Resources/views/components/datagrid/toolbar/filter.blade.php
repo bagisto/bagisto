@@ -2,8 +2,7 @@
     :is-loading="isLoading"
     :available="available"
     :applied="applied"
-    @applyFilter="filter"
-    @removeFilter="filter"
+    @applyFilters="filter"
 >
     {{ $slot }}
 </v-datagrid-filter>
@@ -18,7 +17,7 @@
             :available="available"
             :applied="applied"
             :filters="filters"
-            :apply-filter="applyFilter"
+            :apply-filters="applyFilters"
             :apply-column-values="applyColumnValues"
             :find-applied-column="findAppliedColumn"
             :has-any-applied-column-values="hasAnyAppliedColumnValues"
@@ -56,9 +55,9 @@
 
                     <x-slot:content class="max-sm:pt-2.5">
                         <div v-for="column in available.columns">
-                            <div v-if="column.filterable">
+                            <template v-if="column.filterable">
                                 <!-- Boolean -->
-                                <div v-if="column.type === 'boolean'">
+                                <template v-if="column.type === 'boolean'">
                                     <!-- Dropdown -->
                                     <template v-if="column.filterable_type === 'dropdown'">
                                         <div class="flex items-center justify-between">
@@ -99,7 +98,7 @@
                                                     <x-shop::dropdown.menu.item
                                                         v-for="option in column.filterable_options"
                                                         v-text="option.label"
-                                                        @click="applyFilter(option.value, column)"
+                                                        @click="addFilter(option.value, column)"
                                                     >
                                                     </x-shop::dropdown.menu.item>
                                                 </x-slot>
@@ -122,7 +121,7 @@
                                                     <x-shop::dropdown.menu.item
                                                         v-for="option in column.filterable_options"
                                                         v-text="option.label"
-                                                        @click="applyFilter(option.value, column)"
+                                                        @click="addFilter(option.value, column)"
                                                     >
                                                     </x-shop::dropdown.menu.item>
                                                 </x-slot>
@@ -151,10 +150,10 @@
 
                                     <!-- Basic (If Needed) -->
                                     <template v-else></template>
-                                </div>
+                                </template>
 
                                 <!-- Date Range -->
-                                <div v-else-if="column.type === 'date'">
+                                <template v-else-if="column.type === 'date'">
                                     <!-- Range -->
                                     <template v-if="column.filterable_type === 'date_range'">
                                         <div class="flex items-center justify-between">
@@ -182,7 +181,7 @@
                                                 class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600 max-md:text-sm max-sm:font-normal"
                                                 v-for="option in column.filterable_options"
                                                 v-text="option.label"
-                                                @click="applyFilter(
+                                                @click="addFilter(
                                                     $event,
                                                     column,
                                                     { quickFilter: { isActive: true, selectedFilter: option } }
@@ -198,7 +197,7 @@
                                                     class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 max-sm:py-1.5"
                                                     :placeholder="column.label"
                                                     :ref="`${column.index}[from]`"
-                                                    @change="applyFilter(
+                                                    @change="addFilter(
                                                         $event,
                                                         column,
                                                         { range: { name: 'from' }, quickFilter: { isActive: false } }
@@ -214,7 +213,7 @@
                                                     class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 max-sm:py-1.5"
                                                     :placeholder="column.label"
                                                     :ref="`${column.index}[from]`"
-                                                    @change="applyFilter(
+                                                    @change="addFilter(
                                                         $event,
                                                         column,
                                                         { range: { name: 'to' }, quickFilter: { isActive: false } }
@@ -270,7 +269,7 @@
                                                     class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 max-sm:py-1.5"
                                                     :placeholder="column.label"
                                                     :ref="column.index"
-                                                    @change="applyFilter($event, column)"
+                                                    @change="addFilter($event, column)"
                                                 />
                                             </x-shop::flat-picker.date>
 
@@ -290,10 +289,10 @@
                                             </div>
                                         </div>
                                     </template>
-                                </div>
+                                </template>
 
                                 <!-- Date Time Range -->
-                                <div v-else-if="column.type === 'datetime'">
+                                <template v-else-if="column.type === 'datetime'">
                                     <!-- Range -->
                                     <template v-if="column.filterable_type === 'date_range'">
                                         <div class="flex items-center justify-between">
@@ -321,7 +320,7 @@
                                                 class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600 max-md:text-sm max-sm:font-normal"
                                                 v-for="option in column.filterable_options"
                                                 v-text="option.label"
-                                                @click="applyFilter(
+                                                @click="addFilter(
                                                     $event,
                                                     column,
                                                     { quickFilter: { isActive: true, selectedFilter: option } }
@@ -337,7 +336,7 @@
                                                     class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                                     :placeholder="column.label"
                                                     :ref="`${column.index}[from]`"
-                                                    @change="applyFilter(
+                                                    @change="addFilter(
                                                         $event,
                                                         column,
                                                         { range: { name: 'from' }, quickFilter: { isActive: false } }
@@ -353,7 +352,7 @@
                                                     class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                                     :placeholder="column.label"
                                                     :ref="`${column.index}[from]`"
-                                                    @change="applyFilter(
+                                                    @change="addFilter(
                                                         $event,
                                                         column,
                                                         { range: { name: 'to' }, quickFilter: { isActive: false } }
@@ -409,7 +408,7 @@
                                                     class="flex min-h-10 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                                     :placeholder="column.label"
                                                     :ref="column.index"
-                                                    @change="applyFilter($event, column)"
+                                                    @change="addFilter($event, column)"
                                                 />
                                             </x-shop::flat-picker.datetime>
 
@@ -429,10 +428,10 @@
                                             </div>
                                         </div>
                                     </template>
-                                </div>
+                                </template>
 
                                 <!-- Rest -->
-                                <div v-else>
+                                <template v-else>
                                     <!-- Dropdown -->
                                     <template v-if="column.filterable_type === 'dropdown'">
                                         <div class="flex items-center justify-between">
@@ -473,7 +472,7 @@
                                                     <x-shop::dropdown.menu.item
                                                         v-for="option in column.filterable_options"
                                                         v-text="option.label"
-                                                        @click="applyFilter(option.value, column)"
+                                                        @click="addFilter(option.value, column)"
                                                     >
                                                     </x-shop::dropdown.menu.item>
                                                 </x-slot>
@@ -496,7 +495,7 @@
                                                     <x-shop::dropdown.menu.item
                                                         v-for="option in column.filterable_options"
                                                         v-text="option.label"
-                                                        @click="applyFilter(option.value, column)"
+                                                        @click="addFilter(option.value, column)"
                                                     >
                                                     </x-shop::dropdown.menu.item>
                                                 </x-slot>
@@ -551,7 +550,7 @@
                                                 class="mb-3 w-full rounded-lg border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:mb-0"
                                                 :name="column.index"
                                                 :placeholder="column.label"
-                                                @keyup.enter="applyFilter($event, column)"
+                                                @keyup.enter="addFilter($event, column)"
                                             />
                                         </div>
 
@@ -589,8 +588,20 @@
                                             </template>
                                         </div>
                                     </template>
-                                </div>
-                            </div>
+                                </template>
+                            </template>
+                        </div>
+
+                        <div>
+                            <!-- Apply Filter Button -->
+                            <button
+                                type="button"
+                                class="secondary-button w-full max-w-full"
+                                @click="applyFilters"
+                                :disabled="! isFilterDirty"
+                            >
+                                @lang('admin::app.components.datagrid.toolbar.filter.apply-filters-btn')
+                            </button>
                         </div>
                     </x-slot>
                 </x-shop::drawer>
@@ -604,13 +615,15 @@
 
             props: ['isLoading', 'available', 'applied'],
 
-            emits: ['applyFilter', 'removeFilter'],
+            emits: ['applyFilters'],
 
             data() {
                 return {
                     filters: {
                         columns: [],
                     },
+
+                    isFilterDirty: false,
                 };
             },
 
@@ -620,14 +633,25 @@
 
             methods: {
                 /**
-                 * Apply filter.
+                 * Apply all added filters.
+                 *
+                 * @returns {void}
+                 */
+                applyFilters() {
+                    this.$emit('applyFilters', this.filters);
+
+                    this.$refs.filterDrawer.close();
+                },
+
+                /**
+                 * Add filter.
                  *
                  * @param {Event} $event
                  * @param {object} column
                  * @param {object} additional
                  * @returns {void}
                  */
-                applyFilter($event, column = null, additional = {}) {
+                addFilter($event, column = null, additional = {}) {
                     let quickFilter = additional?.quickFilter;
 
                     if (quickFilter?.isActive) {
@@ -662,10 +686,6 @@
                             $event.target.value = '';
                         }
                     }
-
-                    this.$emit('applyFilter', this.filters);
-
-                    this.$refs.filterDrawer.close();
                 },
 
                 /**
@@ -762,6 +782,8 @@
 
                             break;
                     }
+
+                    this.isFilterDirty = true;
                 },
 
                 /**
@@ -786,6 +808,10 @@
                         }
 
                         return appliedColumn.value;
+                    }
+
+                    if (! appliedColumn.value.length) {
+                        return '';
                     }
 
                     return appliedColumn.value[0].join(' to ');
@@ -874,9 +900,7 @@
                         this.filters.columns = this.filters.columns.filter(column => column.index !== columnIndex);
                     }
 
-                    this.$emit('removeFilter', this.filters);
-
-                    this.$refs.filterDrawer.close();
+                    this.isFilterDirty = true;
                 },
 
                 /**
@@ -888,7 +912,7 @@
                 removeAppliedColumnAllValues(columnIndex) {
                     this.filters.columns = this.filters.columns.filter(column => column.index !== columnIndex);
 
-                    this.$emit('removeFilter', this.filters);
+                    this.isFilterDirty = true;
                 },
             },
         });
