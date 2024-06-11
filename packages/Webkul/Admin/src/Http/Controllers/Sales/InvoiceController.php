@@ -4,7 +4,7 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\Sales\OrderInvoicesDataGrid;
+use Webkul\Admin\DataGrids\Sales\OrderInvoiceDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
@@ -33,7 +33,7 @@ class InvoiceController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return datagrid(OrderInvoicesDataGrid::class)->process();
+            return datagrid(OrderInvoiceDataGrid::class)->process();
         }
 
         return view('admin::sales.invoices.index');

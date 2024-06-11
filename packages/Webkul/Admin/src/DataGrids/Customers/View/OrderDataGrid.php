@@ -7,7 +7,7 @@ use Webkul\DataGrid\DataGrid;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 
-class OrdersDataGrid extends DataGrid
+class OrderDataGrid extends DataGrid
 {
     /**
      * Prepare query builder.

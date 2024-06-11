@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids\Sales;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
-class OrderInvoicesDataGrid extends DataGrid
+class OrderInvoiceDataGrid extends DataGrid
 {
     /**
      * Prepare query builder.

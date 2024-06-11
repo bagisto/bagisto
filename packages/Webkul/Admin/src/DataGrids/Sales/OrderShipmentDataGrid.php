@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Sales\Models\OrderAddress;
 
-class OrderShipmentsDataGrid extends DataGrid
+class OrderShipmentDataGrid extends DataGrid
 {
     /**
      * Shipment Id.

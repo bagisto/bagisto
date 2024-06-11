@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids\Sales;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
-class OrderTransactionsDataGrid extends DataGrid
+class OrderTransactionDataGrid extends DataGrid
 {
     /**
      * Transaction status Paid.
