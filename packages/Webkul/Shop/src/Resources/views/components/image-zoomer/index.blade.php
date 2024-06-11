@@ -101,7 +101,10 @@
                 </div>
 
                 <!-- Thumbnails -->
-                <div class="mb-4 flex justify-center space-x-2">
+                <div 
+                    ref="thumbnailContainer" 
+                    class="mb-4 flex justify-center space-x-2"
+                >
                     <template v-for="(attachment, index) in attachments">
                         <img
                             class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent object-cover transition-transform hover:!border-navyBlue"
@@ -276,8 +279,8 @@
                     const deltaY = event.clientY - this.startDragY;
 
                     const newTranslateY = this.translateY + deltaY;
-
-                    const maxTranslateY = Math.min(0, window.innerHeight - event.srcElement.height);
+                
+                    const maxTranslateY = Math.min(0, window.innerHeight - (event.srcElement.height + this.$refs.thumbnailContainer.clientHeight));
 
                     const clampedTranslateY = Math.max(maxTranslateY, Math.min(newTranslateY, 0));
 
@@ -295,7 +298,7 @@
 
                     let newTranslateY = this.translateY - event.deltaY / Math.abs(event.deltaY) * 100;
 
-                    const maxTranslateY = Math.min(0, window.innerHeight - event.srcElement.height);
+                    const maxTranslateY = Math.min(0, window.innerHeight - (event.srcElement.height + this.$refs.thumbnailContainer.clientHeight));
 
                     this.translateY = Math.max(maxTranslateY, Math.min(newTranslateY, 0));
                 },
