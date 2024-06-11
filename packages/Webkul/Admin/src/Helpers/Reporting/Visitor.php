@@ -46,6 +46,7 @@ class Visitor extends AbstractReporting
             return $this->visitRepository
                 ->resetModel()
                 ->where('visitable_type', $visitableType)
+                ->whereIn('channel_id', $this->channelIds)
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->get()
                 ->count();
@@ -54,6 +55,7 @@ class Visitor extends AbstractReporting
         return $this->visitRepository
             ->resetModel()
             ->whereNull('visitable_id')
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get()
             ->count();
@@ -88,6 +90,7 @@ class Visitor extends AbstractReporting
                 ->resetModel()
                 ->where('visitable_type', $visitableType)
                 ->groupBy(DB::raw('CONCAT(ip, "-", visitor_id, "-", visitable_type)'))
+                ->whereIn('channel_id', $this->channelIds)
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->get()
                 ->count();
@@ -97,6 +100,7 @@ class Visitor extends AbstractReporting
             ->resetModel()
             ->whereNull('visitable_id')
             ->groupBy(DB::raw('CONCAT(ip, "-", visitor_id)'))
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get()
             ->count();
@@ -159,6 +163,7 @@ class Visitor extends AbstractReporting
                 DB::raw('COUNT(*) as visits')
             )
             ->where('visitable_type', $visitableType)
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
             ->groupBy('visitable_id')
             ->orderByDesc('visits')
@@ -193,6 +198,7 @@ class Visitor extends AbstractReporting
                 DB::raw('COUNT(*) AS total')
             )
             ->whereNull('visitable_id')
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('date')
             ->get();
@@ -231,6 +237,7 @@ class Visitor extends AbstractReporting
                 DB::raw('COUNT(*) AS count')
             )
             ->whereNull('visitable_id')
+            ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('day')
             ->get();

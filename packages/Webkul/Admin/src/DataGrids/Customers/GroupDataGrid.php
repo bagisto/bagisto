@@ -14,9 +14,12 @@ class GroupDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customer_groups')->addSelect('id', 'code', 'name');
-
-        return $queryBuilder;
+        return DB::table('customer_groups')
+            ->select(
+                'id',
+                'code',
+                'name'
+            );
     }
 
     public function prepareColumns()

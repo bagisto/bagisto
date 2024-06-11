@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    @foreach ($inventorySources as $inventorySource)
+    @foreach (app(\Webkul\Inventory\Repositories\InventorySourceRepository::class)->findWhere(['status' => 1]) as $inventorySource)
         @php
             $qty = old('inventories[' . $inventorySource->id . ']')
                 ?: ($product->inventories->where('inventory_source_id', $inventorySource->id)->pluck('qty')->first() ?? 0);

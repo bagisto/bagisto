@@ -14,9 +14,12 @@ class AttributeFamilyDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('attribute_families')->select('id')->addSelect('id', 'code', 'name');
-
-        return $queryBuilder;
+        return DB::table('attribute_families')
+            ->select(
+                'id',
+                'code',
+                'name',
+            );
     }
 
     /**

@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'הוסף לקוח',
             'add-product'                 => 'הוסף מוצר',
+            'all-channels'                => 'כל הערוצים',
             'attribute-code'              => 'קוד תכונה',
             'average-sale'                => 'ממוצע מכירות הזמנות',
             'color'                       => 'צבע',
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'משפחת מאפיינים',
                     'attribute-family-value' => 'משפחת מאפיינים - :attribute_family',
                     'category'               => 'קטגוריה',
+                    'channel'                => 'ערוץ',
                     'copy-of'                => 'העתק של :value',
                     'copy-of-slug'           => 'העתק-של-:value',
                     'delete'                 => 'מחק',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'פעיל',
                     'address'        => ':address  כתובת(ות)',
                     'address-count'  => 'סך הכתובות',
+                    'channel'        => 'ערוץ',
                     'delete'         => 'מחיקה',
                     'delete-success' => 'המידע שנבחר נמחק בהצלחה',
                     'email'          => 'אימייל',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'ביטויי חיפוש',
 
                     'datagrid' => [
-                        'Channel'             => 'ערוץ',
+                        'channel'             => 'ערוץ',
                         'actions'             => 'פעולות',
                         'channel'             => 'ערוץ',
                         'delete'              => 'מחיקה',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'ערוץ',
                         'channel'        => 'ערוץ',
                         'delete-warning' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
                         'locale'         => 'מיקום',
@@ -2395,6 +2397,7 @@ return [
             'title'         => 'עמודים',
 
             'datagrid' => [
+                'channel'             => 'ערוץ',
                 'delete'              => 'מחק',
                 'edit'                => 'ערוך',
                 'id'                  => 'מזהה',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => 'רווח נטוש',
                 'added-to-cart'                 => 'נוסף לעגלה',
                 'added-to-cart-info'            => 'רק :progress מבקרים הוסיפו מוצרים לעגלה',
+                'all-channels'                  => 'כל הערוצים',
                 'average-order-value-over-time' => 'ערך הזמנה ממוצע במהלך הזמן',
                 'average-sales'                 => 'ערך הזמנה ממוצע',
                 'count'                         => 'מספר',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'כל הערוצים',
                 'count'                       => 'כמות',
                 'customers'                   => 'לקוחות',
                 'customers-over-time'         => 'לקוחות לפי זמן',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'כל הערוצים',
                 'channel'                          => 'ערוץ',
                 'end-date'                         => 'תאריך סיום',
                 'id'                               => 'מזהה',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'כל הערוצים',
             'day'           => 'יום',
             'end-date'      => 'תאריך סיום',
             'export-csv'    => 'ייצוא ל־CSV',

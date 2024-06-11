@@ -23,7 +23,7 @@ class ExchangeRatesDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('currency_exchange_rates')
             ->leftJoin('currencies', 'currency_exchange_rates.target_currency', '=', 'currencies.id')
-            ->addSelect(
+            ->select(
                 'currency_exchange_rates.id as currency_exchange_id',
                 'currencies.name as currency_name',
                 'currency_exchange_rates.rate as currency_rate'

@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Добавить клиента',
             'add-product'                 => 'Добавить товар',
+            'all-channels'                => 'Все каналы',
             'attribute-code'              => 'Код атрибута',
             'average-sale'                => 'Средний заказ',
             'color'                       => 'Цвет',
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'Семейство атрибутов',
                     'attribute-family-value' => 'Семейство атрибутов - :attribute_family',
                     'category'               => 'Категория',
+                    'channel'                => 'Канал',
                     'copy-of'                => 'Копия :value',
                     'copy-of-slug'           => 'копия-:value',
                     'delete'                 => 'Удалить',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Активный',
                     'address'        => ':address  Адрес(ов)',
                     'address-count'  => 'Количество адресов',
+                    'channel'        => 'Канал',
                     'delete'         => 'Удалить',
                     'delete-success' => 'Выбранные данные успешно удалены',
                     'email'          => 'Электронная почта',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'Термины поиска',
 
                     'datagrid' => [
-                        'Channel'             => 'Канал',
+                        'channel'             => 'Канал',
                         'actions'             => 'Действия',
                         'channel'             => 'Канал',
                         'delete'              => 'Удалить',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Канал',
                         'channel'        => 'Канал',
                         'delete-warning' => 'Вы уверены, что хотите выполнить эту операцию?',
                         'locale'         => 'Региональные настройки',
@@ -2395,6 +2397,7 @@ return [
             'title'         => 'Страницы',
 
             'datagrid' => [
+                'channel'             => 'Канал',
                 'delete'              => 'Удалить',
                 'edit'                => 'Редактировать',
                 'id'                  => 'ID',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => 'Заброшенная выручка',
                 'added-to-cart'                 => 'Добавлено в корзину',
                 'added-to-cart-info'            => 'Только :progress посетителей добавили продукты в корзину',
+                'all-channels'                  => 'Все каналы',
                 'average-order-value-over-time' => 'Средний объем заказа со временем',
                 'average-sales'                 => 'Средний объем продаж',
                 'count'                         => 'Количество',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Все каналы',
                 'count'                       => 'Количество',
                 'customers'                   => 'Клиенты',
                 'customers-over-time'         => 'Клиенты со временем',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Все каналы',
                 'channel'                          => 'Канал',
                 'end-date'                         => 'Дата окончания',
                 'id'                               => 'Идентификатор',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'All Channels',
             'day'           => 'День',
             'end-date'      => 'Дата окончания',
             'export-csv'    => 'Экспорт в CSV',
