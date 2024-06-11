@@ -9,11 +9,6 @@ use Webkul\DataGrid\Exceptions\InvalidColumnException;
 class Boolean extends Column
 {
     /**
-     * Column's filterable type.
-     */
-    protected ?string $filterableType = FilterTypeEnum::DROPDOWN->value;
-
-    /**
      * Set filterable type.
      */
     public function setFilterableType(?string $filterableType): void
@@ -23,6 +18,10 @@ class Boolean extends Column
             && ($filterableType !== FilterTypeEnum::DROPDOWN->value)
         ) {
             throw new InvalidColumnException('Boolean filters will only work with `dropdown` type. Either remove the `filterable_type` or set it to `dropdown`.');
+        }
+
+        if (! $filterableType) {
+            $filterableType = FilterTypeEnum::DROPDOWN->value;
         }
 
         parent::setFilterableType($filterableType);
