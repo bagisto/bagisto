@@ -231,7 +231,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                 => 'simple',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.1.name'),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.1.short-descriptions'),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.1.sort-description'),
                     'description'          => trans('installer::app.seeders.sample-products.product-flat.1.descriptions'),
                     'url_key'              => 'arctic-cozy-knit-unisex-beanie',
                     'new'                  => 1,
@@ -258,7 +258,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                 => 'simple',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.2.name'),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.2.short-descriptions'),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.2.sort-description'),
                     'description'          => trans('installer::app.seeders.sample-products.product-flat.2.descriptions'),
                     'url_key'              => 'arctic-bliss-stylish-winter-scarf',
                     'new'                  => 1,
@@ -285,7 +285,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                 => 'simple',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.3.name'),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.3.short-descriptions'),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.3.sort-description'),
                     'description'          => trans('installer::app.seeders.sample-products.product-flat.3.descriptions'),
                     'url_key'              => 'arctic-touchscreen-winter-gloves',
                     'new'                  => 1,
@@ -312,7 +312,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                 => 'simple',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.4.name'),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.4.short-descriptions'),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.4.sort-description'),
                     'description'          => trans('installer::app.seeders.sample-products.product-flat.4.descriptions'),
                     'url_key'              => 'arctic-warmth-wool-blend-socks',
                     'new'                  => 0,
@@ -339,7 +339,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                 => 'grouped',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.5.name'),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.5.short-descriptions'),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.5.sort-description'),
                     'description'          => trans('installer::app.seeders.sample-products.product-flat.5.descriptions'),
                     'url_key'              => 'arctic-frost-winter-accessories',
                     'new'                  => 0,
@@ -366,7 +366,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                 => 'bundle',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.6.name'),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.6.short-descriptions'),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.6.sort-description'),
                     'description'          => trans('installer::app.seeders.sample-products.product-flat.6.descriptions'),
                     'url_key'              => 'arctic-frost-winter-accessories-bundle',
                     'new'                  => 0,
@@ -393,7 +393,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                 => 'configurable',
                     'product_number'       => '',
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.7.name'),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.7.short-descriptions'),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.7.sort-description'),
                     'description'          => trans('installer::app.seeders.sample-products.product-flat.7.descriptions'),
                     'url_key'              => 'omniheat-mens-solid-hooded-puffer-jacket',
                     'new'                  => 0,
@@ -420,8 +420,8 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                  => 'simple',
                     'product_number'        => null,
                     'name'                  => trans('installer::app.seeders.sample-products.product-flat.8.name'),
-                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.8.short-descriptions'),
-                    'description'           => trans('installer::app.seeders.sample-products.product-flat.8.descriptions'),
+                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.8.sort-description'),
+                    'description'           => trans('installer::app.seeders.sample-products.product-flat.8.description'),
                     'url_key'               => 'omniheat-mens-solid-hooded-puffer-jacket-blue-yellow-m',
                     'new'                   => 0,
                     'featured'              => 0,
@@ -447,7 +447,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                  => 'simple',
                     'product_number'        => null,
                     'name'                  => trans('installer::app.seeders.sample-products.product-flat.9.name'),
-                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.9.short-descriptions'),
+                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.9.sort-description'),
                     'description'           => trans('installer::app.seeders.sample-products.product-flat.9.descriptions'),
                     'url_key'               => 'omniheat-mens-solid-hooded-puffer-jacket-blue-yellow-l',
                     'new'                   => 0,
@@ -474,7 +474,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                  => 'simple',
                     'product_number'        => null,
                     'name'                  => trans('installer::app.seeders.sample-products.product-flat.10.name'),
-                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.10.short-descriptions'),
+                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.10.sort-description'),
                     'description'           => trans('installer::app.seeders.sample-products.product-flat.10.descriptions'),
                     'url_key'               => 'omniheat-mens-solid-hooded-puffer-jacket-blue-green-m',
                     'new'                   => 0,
@@ -501,7 +501,7 @@ class SampleProductsTableSeeder extends Seeder
                     'type'                  => 'simple',
                     'product_number'        => null,
                     'name'                  => trans('installer::app.seeders.sample-products.product-flat.11.name'),
-                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.11.short-descriptions'),
+                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.11.short-description'),
                     'description'           => trans('installer::app.seeders.sample-products.product-flat.11.descriptions'),
                     'url_key'               => 'omniheat-mens-solid-hooded-puffer-jacket-blue-green-l',
                     'new'                   => 0,
@@ -525,7 +525,9 @@ class SampleProductsTableSeeder extends Seeder
                     'visible_individually'  => 1,
                 ],
             ]);
+        }
 
+        foreach ($locales as $locale) {
             DB::table('product_attribute_values')->insert([
                 [
                     'locale'               => null,
@@ -634,7 +636,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.1.meta-title'),,
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.1.meta-title'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -751,7 +753,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.2.short-description'),
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.2.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -907,7 +909,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.3.short-description'),
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.3.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1102,7 +1104,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.4.short-description'),
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.4.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1258,7 +1260,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.5.short-description'),
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.5.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1388,7 +1390,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.6.short-description'),
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.6.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1427,7 +1429,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.6.meta-Keywords'),
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.6.meta-keywords'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1518,7 +1520,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.7.short-description'),,
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.7.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1531,7 +1533,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.7.description'),,
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.7.description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1648,7 +1650,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.8.short-description'),
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.8.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1687,7 +1689,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'Meta Title',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.8.meta-title'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1700,7 +1702,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'meta1, meta2, meta5',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.8.meta-keywords'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1713,7 +1715,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'meta description',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.8.meta-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1778,7 +1780,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Yellow-L',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.9.name'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1830,7 +1832,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'Stay warm and stylish with our OmniHeat Men\'s Solid Hooded Puffer Jacket. This jacket is designed to provide ultimate warmth and features insert pockets for added convenience. The insulated material ensures you stay cozy in cold weather. Available in 5 attractive colors, making it a versatile choice for various occasions.',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.9.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1843,7 +1845,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'DescIntroducing the OmniHeat Men\'s Solid Hooded Puffer Jacket, your go-to solution for staying warm and fashionable during colder seasons. This jacket is crafted with durability and warmth in mind, ensuring it becomes your trusted companion. The hooded design not only adds a touch of style but also provides additional warmth, shielding you from cold winds and weather. The full sleeves offer complete coverage, ensuring you stay cozy from shoulder to wrist. Equipped with insert pockets, this puffer jacket provides convenience for carrying your essentials or keeping your hands warm. The insulated synthetic filling offers enhanced warmth, making it ideal for battling chilly days and nights. Made from a durable polyester shell and lining, this jacket is built to last and endure the elements. Available in 5 attractive colors, you can choose the one that suits your style and preference. Versatile and functional, the OmniHeat Men\'s Solid Hooded Puffer Jacket is suitable for various occasions, whether you\'re heading to work, going for a casual outing, or attending an outdoor event. Experience the perfect blend of style, comfort, and functionality with OmniHeat Men\'s Solid Hooded Puffer Jacket. Elevate your winter wardrobe and stay snug while embracing the outdoors. Beat the cold in style and make a statement with this essential piece.ription 9',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.9.description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1869,7 +1871,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'Meta Title',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.9.meta-title'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1882,7 +1884,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'meta1, meta2, meta5',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.9.meta-keywords'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1895,7 +1897,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'meta description',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.9.meta-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -1960,7 +1962,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Green-M',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.10.name'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2012,7 +2014,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'Stay warm and stylish with our OmniHeat Men\'s Solid Hooded Puffer Jacket. This jacket is designed to provide ultimate warmth and features insert pockets for added convenience. The insulated material ensures you stay cozy in cold weather. Available in 5 attractive colors, making it a versatile choice for various occasions.',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.10.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2025,7 +2027,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'Introducing the OmniHeat Men\'s Solid Hooded Puffer Jacket, your go-to solution for staying warm and fashionable during colder seasons. This jacket is crafted with durability and warmth in mind, ensuring it becomes your trusted companion. The hooded design not only adds a touch of style but also provides additional warmth, shielding you from cold winds and weather. The full sleeves offer complete coverage, ensuring you stay cozy from shoulder to wrist. Equipped with insert pockets, this puffer jacket provides convenience for carrying your essentials or keeping your hands warm. The insulated synthetic filling offers enhanced warmth, making it ideal for battling chilly days and nights. Made from a durable polyester shell and lining, this jacket is built to last and endure the elements. Available in 5 attractive colors, you can choose the one that suits your style and preference. Versatile and functional, the OmniHeat Men\'s Solid Hooded Puffer Jacket is suitable for various occasions, whether you\'re heading to work, going for a casual outing, or attending an outdoor event. Experience the perfect blend of style, comfort, and functionality with OmniHeat Men\'s Solid Hooded Puffer Jacket. Elevate your winter wardrobe and stay snug while embracing the outdoors. Beat the cold in style and make a statement with this essential piece.',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.10.description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2090,7 +2092,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'Meta Title',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.10.meta-title'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2103,7 +2105,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'meta1, meta2, meta5',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.10.meta-keywords'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2116,7 +2118,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'meta description',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.10.meta-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2181,7 +2183,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Green-L',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.11.name'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2233,7 +2235,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'Stay warm and stylish with our OmniHeat Men\'s Solid Hooded Puffer Jacket. This jacket is designed to provide ultimate warmth and features insert pockets for added convenience. The insulated material ensures you stay cozy in cold weather. Available in 5 attractive colors, making it a versatile choice for various occasions.',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.11.sort-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2246,7 +2248,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'Introducing the OmniHeat Men\'s Solid Hooded Puffer Jacket, your go-to solution for staying warm and fashionable during colder seasons. This jacket is crafted with durability and warmth in mind, ensuring it becomes your trusted companion. The hooded design not only adds a touch of style but also provides additional warmth, shielding you from cold winds and weather. The full sleeves offer complete coverage, ensuring you stay cozy from shoulder to wrist. Equipped with insert pockets, this puffer jacket provides convenience for carrying your essentials or keeping your hands warm. The insulated synthetic filling offers enhanced warmth, making it ideal for battling chilly days and nights. Made from a durable polyester shell and lining, this jacket is built to last and endure the elements. Available in 5 attractive colors, you can choose the one that suits your style and preference. Versatile and functional, the OmniHeat Men\'s Solid Hooded Puffer Jacket is suitable for various occasions, whether you\'re heading to work, going for a casual outing, or attending an outdoor event. Experience the perfect blend of style, comfort, and functionality with OmniHeat Men\'s Solid Hooded Puffer Jacket. Elevate your winter wardrobe and stay snug while embracing the outdoors. Beat the cold in style and make a statement with this essential piece.',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.11.description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2311,7 +2313,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'Meta Title',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.11.meta-title'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2324,7 +2326,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'meta1, meta2, meta5',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.11.meta-keywords'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2337,7 +2339,7 @@ class SampleProductsTableSeeder extends Seeder
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
-                    'text_value'           => 'meta description',
+                    'text_value'           => trans('installer::app.seeders.sample-products.product-attribute-values.11.meta-description'),
                     'boolean_value'        => null,
                     'integer_value'        => null,
                     'float_value'          => null,
@@ -2389,7 +2391,6 @@ class SampleProductsTableSeeder extends Seeder
                 ],
             ]);
         }
-
 
         DB::table('product_grouped_products')->insert([
             [
@@ -3096,103 +3097,103 @@ class SampleProductsTableSeeder extends Seeder
             [
                 'id'         => 1,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/1', '1/1.webp'),
+                'path'       => $this->productImages('product/1', '1.webp'),
                 'product_id' => 1,
                 'position'   => 1,
             ], [
                 'id'         => 2,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/2', '2/2.webp'),
+                'path'       => $this->productImages('product/2', '2.webp'),
                 'product_id' => 2,
                 'position'   => 1,
             ], [
                 'id'         => 3,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/3', '3/3.webp'),
+                'path'       => $this->productImages('product/3', '3.webp'),
                 'product_id' => 3,
                 'position'   => 1,
             ], [
                 'id'         => 4,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/4', '4/4.webp'),
+                'path'       => $this->productImages('product/4', '4.webp'),
                 'product_id' => 4,
                 'position'   => 1,
             ], [
                 'id'         => 5,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/5', '5/5.webp'),
+                'path'       => $this->productImages('product/5', '5.webp'),
                 'product_id' => 5,
                 'position'   => 1,
             ], [
                 'id'         => 6,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/6', '6/5.webp'),
+                'path'       => $this->productImages('product/6', '5.webp'),
                 'product_id' => 6,
                 'position'   => 1,
             ], [
                 'id'         => 7,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/7', '7/6.webp'),
+                'path'       => $this->productImages('product/7', '6.webp'),
                 'product_id' => 7,
                 'position'   => 1,
             ], [
                 'id'         => 8,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/7', '7/7.webp'),
+                'path'       => $this->productImages('product/7', '7.webp'),
                 'product_id' => 7,
                 'position'   => 2,
             ], [
                 'id'         => 9,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/7', '7/8.webp'),
+                'path'       => $this->productImages('product/7', '8.webp'),
                 'product_id' => 7,
                 'position'   => 3,
             ], [
                 'id'         => 10,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/8', '8/9.webp'),
+                'path'       => $this->productImages('product/8', '9.webp'),
                 'product_id' => 8,
                 'position'   => 1,
             ], [
                 'id'         => 11,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/8', '8/10.webp'),
+                'path'       => $this->productImages('product/8', '10.webp'),
                 'product_id' => 8,
                 'position'   => 2,
             ], [
                 'id'         => 12,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/9', '9/9.webp'),
+                'path'       => $this->productImages('product/9', '9.webp'),
                 'product_id' => 9,
                 'position'   => 1,
             ], [
                 'id'         => 13,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/9', '9/10.webp'),
+                'path'       => $this->productImages('product/9', '10.webp'),
                 'product_id' => 9,
                 'position'   => 2,
             ], [
                 'id'         => 14,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/10', '10/11.webp'),
+                'path'       => $this->productImages('product/10', '11.webp'),
                 'product_id' => 10,
                 'position'   => 1,
             ], [
                 'id'         => 15,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/10', '10/12.webp'),
+                'path'       => $this->productImages('product/10', '12.webp'),
                 'product_id' => 10,
                 'position'   => 2,
             ], [
                 'id'         => 16,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/11', '11/11.webp'),
+                'path'       => $this->productImages('product/11', '11.webp'),
                 'product_id' => 11,
                 'position'   => 1,
             ], [
                 'id'         => 17,
                 'type'       => 'image',
-                'path'       => $this->productImages('product/11', '11/12.webp'),
+                'path'       => $this->productImages('product/11', '12.webp'),
                 'product_id' => 11,
                 'position'   => 2,
             ],
