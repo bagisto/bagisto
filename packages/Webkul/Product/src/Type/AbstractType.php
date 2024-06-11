@@ -128,7 +128,11 @@ abstract class AbstractType
      */
     public function create(array $data)
     {
-        return $this->productRepository->getModel()->create($data);
+        $product = $this->productRepository->getModel()->create($data);
+
+        $product->channels()->sync(core()->getDefaultChannel()->id);
+
+        return $product;
     }
 
     /**
@@ -279,6 +283,12 @@ abstract class AbstractType
         $product->cross_sells()->sync($data['cross_sells'] ?? []);
 
         $product->related_products()->sync($data['related_products'] ?? []);
+
+        if (empty($data['channels'])) {
+            $data['channels'][] = core()->getDefaultChannel()->id;
+        }
+
+        $product->channels()->sync($data['channels']);
 
         $this->productInventoryRepository->saveInventories($data, $product);
 

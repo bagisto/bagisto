@@ -814,7 +814,8 @@
                         <div
                             v-if="matchedAttribute.key == 'product|category_ids'
                             || matchedAttribute.key == 'product|category_ids'
-                            || matchedAttribute.key == 'product|parent::category_ids'"
+                            || matchedAttribute.key == 'product|parent::category_ids'
+                            || matchedAttribute.key == 'product|children::category_ids'"
                         >
                             <x-admin::tree.view
                                 input-type="checkbox"
@@ -835,13 +836,32 @@
                                     || matchedAttribute.type == 'decimal'
                                     || matchedAttribute.type == 'integer'"
                             >
-                                <input
-                                    type="text"
-                                    class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                    :id="['conditions[' + index + '][value]']"
-                                    :name="['conditions[' + index + '][value]']"
+                                <v-field
+                                    :name="`conditions[${index}][value]`"
+                                    v-slot="{ field, errorMessage }"
+                                    :id="`conditions[${index}][value]`"
+                                    :rules="
+                                        matchedAttribute.type == 'price' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
+                                        || matchedAttribute.type == 'decimal' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
+                                        || matchedAttribute.type == 'integer' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
+                                        || matchedAttribute.type == 'text' ? 'regex:^([A-Za-z0-9_ \'\-]+)$' : ''"
+                                    label="Conditions"
                                     v-model="condition.value"
-                                />
+                                >
+                                    <input
+                                        type="text"
+                                        v-bind="field"
+                                        :class="{ 'border border-red-500': errorMessage }"
+                                        class="min:w-1/3 flex h-10 w-[289px] rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                    />
+                                </v-field>
+
+                                <v-error-message
+                                    :name="`conditions[${index}][value]`"
+                                    class="mt-1 text-xs italic text-red-500"
+                                    as="p"
+                                >
+                                </v-error-message>
                             </div>
 
                             <div v-if="matchedAttribute.type == 'date'">
@@ -1113,31 +1133,30 @@
 
                 computed: {
                     matchedAttribute() {
-                        if (this.condition.attribute == '')
+                        if (this.condition.attribute == '') {
                             return;
-
-                        let self = this;
+                        }
 
                         let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
 
-                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].filter(function (attribute) {
-                            return attribute.key == self.condition.attribute;
-                        });
+                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].find(attribute => attribute.key == this.condition.attribute);
 
-                        if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
+                        if (
+                            matchedAttribute['type'] == 'multiselect'
+                            || matchedAttribute['type'] == 'checkbox'
+                        ) {
+                            this.condition.operator = '{}';
 
-                            this.condition.value = this.condition.value == '' && this.condition.value != undefined
-                                    ? []
-                                    : Array.isArray(this.condition.value) ? this.condition.value : [];
+                            this.condition.value = [];
                         }
 
-                        return matchedAttribute[0];
-                    },
+                        return matchedAttribute;
+                    }
                 },
 
                 methods: {
                     removeCondition() {
-                        this.$emit('onRemoveCondition', this.condition)
+                        this.$emit('onRemoveCondition', this.condition);
                     },
                 },
             });

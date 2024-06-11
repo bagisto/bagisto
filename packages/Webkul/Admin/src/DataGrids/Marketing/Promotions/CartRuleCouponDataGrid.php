@@ -15,7 +15,13 @@ class CartRuleCouponDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('cart_rule_coupons')
-            ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')
+            ->select(
+                'id',
+                'code',
+                'created_at',
+                'expired_at',
+                'times_used'
+            )
             ->where('cart_rule_coupons.cart_rule_id', request('id'));
 
         return $queryBuilder;

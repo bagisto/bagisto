@@ -14,16 +14,14 @@ class InventorySourcesDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('inventory_sources')
-            ->addSelect(
+        return DB::table('inventory_sources')
+            ->select(
                 'id',
                 'code',
                 'name',
                 'priority',
                 'status'
             );
-
-        return $queryBuilder;
     }
 
     /**

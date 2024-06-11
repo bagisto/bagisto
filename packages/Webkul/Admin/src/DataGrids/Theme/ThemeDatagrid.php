@@ -20,15 +20,15 @@ class ThemeDatagrid extends DataGrid
 
         $queryBuilder = DB::table('theme_customizations')
             ->distinct()
-            ->join('theme_customization_translations as tct', function ($leftJoin) use ($whereInLocales) {
-                $leftJoin->on('theme_customizations.id', '=', 'tct.theme_customization_id')
-                    ->whereIn('tct.locale', $whereInLocales);
+            ->join('theme_customization_translations', function ($leftJoin) use ($whereInLocales) {
+                $leftJoin->on('theme_customizations.id', '=', 'theme_customization_translations.theme_customization_id')
+                    ->whereIn('theme_customization_translations.locale', $whereInLocales);
             })
             ->join('channel_translations', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('theme_customizations.channel_id', '=', 'channel_translations.channel_id')
                     ->whereIn('channel_translations.locale', $whereInLocales);
             })
-            ->addSelect(
+            ->select(
                 'theme_customizations.id',
                 'theme_customizations.type',
                 'theme_customizations.sort_order',
@@ -46,6 +46,11 @@ class ThemeDatagrid extends DataGrid
         return $queryBuilder;
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([

@@ -73,10 +73,6 @@ class ProductRepository extends Repository
 
         $product->refresh();
 
-        if (isset($data['channels'])) {
-            $product['channels'] = $data['channels'];
-        }
-
         return $product;
     }
 
@@ -256,6 +252,11 @@ class ProductRepository extends Repository
                     ->whereIn('product_categories.category_id', explode(',', $params['category_id']));
             }
 
+            if (! empty($params['channel_id'])) {
+                $qb->leftJoin('product_channels', 'products.id', '=', 'product_channels.product_id')
+                    ->where('product_channels.channel_id', explode(',', $params['channel_id']));
+            }
+
             if (! empty($params['type'])) {
                 $qb->where('products.type', $params['type']);
             }
@@ -374,9 +375,20 @@ class ProductRepository extends Repository
 
                         $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($alias, $attribute) {
                             $join->on('products.id', '=', $alias.'.product_id')
-                                ->where($alias.'.attribute_id', $attribute->id)
-                                ->where($alias.'.channel', core()->getRequestedChannelCode())
-                                ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                ->where($alias.'.attribute_id', $attribute->id);
+
+                            if ($attribute->value_per_channel) {
+                                if ($attribute->value_per_locale) {
+                                    $join->where($alias.'.channel', core()->getRequestedChannelCode())
+                                        ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                } else {
+                                    $join->where($alias.'.channel', core()->getRequestedChannelCode());
+                                }
+                            } else {
+                                if ($attribute->value_per_locale) {
+                                    $join->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                }
+                            }
                         })
                             ->orderBy($alias.'.'.$attribute->column_name, $sortOptions['order']);
                     }
@@ -398,10 +410,6 @@ class ProductRepository extends Repository
 
     /**
      * Search product from elastic search.
-     *
-     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
-     * good request parameter with an array type as an argument. Make a clean pull request for
-     * this to have track record.
      *
      * @return \Illuminate\Support\Collection
      */

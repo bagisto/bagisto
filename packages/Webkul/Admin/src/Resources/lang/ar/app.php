@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'إضافة عميل',
             'add-product'                 => 'إضافة منتج',
+            'all-channels'                => 'جميع القنوات',
             'attribute-code'              => 'رمز السمة',
             'average-sale'                => 'متوسط مبيعات الطلبات',
             'color'                       => 'لون',
@@ -740,30 +741,31 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'نشط',
-                    'attribute-family'              => 'عائلة السمة',
-                    'attribute-family-value'        => 'عائلة السمة - :attribute_family',
-                    'category'                      => 'الفئة',
-                    'copy-of'                       => 'نسخة من :value',
-                    'copy-of-slug'                  => 'نسخة-من-:value',
-                    'delete'                        => 'حذف',
-                    'disable'                       => 'تعطيل',
-                    'id'                            => 'المعرف',
-                    'id-value'                      => 'المعرف - :id',
-                    'image'                         => 'صورة',
-                    'mass-delete-success'           => 'تم حذف المنتجات المحددة بنجاح',
-                    'mass-update-success'           => 'تم تحديث المنتجات المحددة بنجاح',
-                    'name'                          => 'الاسم',
-                    'out-of-stock'                  => 'نفدت الكمية',
-                    'price'                         => 'السعر',
-                    'product-image'                 => 'صورة المنتج',
-                    'qty'                           => 'الكمية',
-                    'qty-value'                     => ':qty متوفرة',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'الحالة',
-                    'type'                          => 'النوع',
-                    'update-status'                 => 'تحديث الحالة',
+                    'active'                 => 'نشط',
+                    'attribute-family'       => 'عائلة السمة',
+                    'attribute-family-value' => 'عائلة السمة - :attribute_family',
+                    'category'               => 'الفئة',
+                    'channel'                => 'القناة',
+                    'copy-of'                => 'نسخة من :value',
+                    'copy-of-slug'           => 'نسخة-من-:value',
+                    'delete'                 => 'حذف',
+                    'disable'                => 'تعطيل',
+                    'id'                     => 'المعرف',
+                    'id-value'               => 'المعرف - :id',
+                    'image'                  => 'صورة',
+                    'mass-delete-success'    => 'تم حذف المنتجات المحددة بنجاح',
+                    'mass-update-success'    => 'تم تحديث المنتجات المحددة بنجاح',
+                    'name'                   => 'الاسم',
+                    'out-of-stock'           => 'نفدت الكمية',
+                    'price'                  => 'السعر',
+                    'product-image'          => 'صورة المنتج',
+                    'qty'                    => 'الكمية',
+                    'qty-value'              => ':qty متوفرة',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'الحالة',
+                    'type'                   => 'النوع',
+                    'update-status'          => 'تحديث الحالة',
                 ],
             ],
 
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'نشط',
                     'address'        => ':address عنوان(عناوين)',
                     'address-count'  => 'عدد العناوين',
+                    'channel'        => 'القناة',
                     'delete'         => 'حذف',
                     'delete-success' => 'تم حذف البيانات المحددة بنجاح',
                     'email'          => 'البريد الإلكتروني',
@@ -2234,11 +2237,10 @@ return [
                         'delete'              => 'حذف',
                         'channel'             => 'القناة',
                         'actions'             => 'الإجراءات',
-                        'Channel'             => 'القناة',
+                        'channel'             => 'القناة',
                     ],
 
                     'create' => [
-                        'Channel'        => 'القناة',
                         'channel'        => 'القناة',
                         'delete-warning' => 'هل أنت متأكد أنك تريد إجراء هذا الإجراء؟',
                         'locale'         => 'التحديد المحلي',
@@ -2395,6 +2397,7 @@ return [
             'title'         => 'الصفحات',
 
             'datagrid' => [
+                'channel'             => 'القناة',
                 'delete'              => 'حذف',
                 'edit'                => 'تعديل',
                 'id'                  => 'المعرف',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => 'الإيرادات المهجورة',
                 'added-to-cart'                 => 'تمت الإضافة إلى العربة',
                 'added-to-cart-info'            => 'فقط :progress الزائرين قاموا بإضافة منتجات إلى العربة',
+                'all-channels'                  => 'جميع القنوات',
                 'average-order-value-over-time' => 'القيمة المتوسطة للطلب مع مرور الوقت',
                 'average-sales'                 => 'القيمة المتوسطة للطلب',
                 'count'                         => 'العدد',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'جميع القنوات',
                 'count'                       => 'العدد',
                 'customers'                   => 'العملاء',
                 'customers-over-time'         => 'العملاء مع مرور الوقت',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'جميع القنوات',
                 'channel'                          => 'قناة',
                 'end-date'                         => 'تاريخ الانتهاء',
                 'id'                               => 'المعرف',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'جميع القنوات',
             'day'           => 'يوم',
             'end-date'      => 'تاريخ الانتهاء',
             'export-csv'    => 'تصدير كملف CSV',

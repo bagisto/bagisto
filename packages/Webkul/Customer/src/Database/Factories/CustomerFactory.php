@@ -41,6 +41,7 @@ class CustomerFactory extends Factory
             'status'            => 1,
             'password'          => Hash::make($this->faker->password),
             'customer_group_id' => 2,
+            'channel_id'        => 1,
             'is_verified'       => 1,
             'created_at'        => now(),
             'updated_at'        => now(),

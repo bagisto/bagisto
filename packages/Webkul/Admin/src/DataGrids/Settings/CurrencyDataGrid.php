@@ -14,14 +14,12 @@ class CurrencyDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('currencies')
-            ->addSelect(
+        return DB::table('currencies')
+            ->select(
                 'id',
                 'name',
                 'code'
             );
-
-        return $queryBuilder;
     }
 
     /**

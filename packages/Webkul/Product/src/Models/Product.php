@@ -16,6 +16,7 @@ use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\CatalogRule\Models\CatalogRuleProductPriceProxy;
 use Webkul\Category\Models\CategoryProxy;
+use Webkul\Core\Models\ChannelProxy;
 use Webkul\Inventory\Models\InventorySourceProxy;
 use Webkul\Product\Contracts\Product as ProductContract;
 use Webkul\Product\Database\Eloquent\Builder;
@@ -264,6 +265,14 @@ class Product extends Model implements ProductContract
     public function cross_sells(): BelongsToMany
     {
         return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id');
+    }
+
+    /**
+     * The cross sells that belong to the product.
+     */
+    public function channels(): BelongsToMany
+    {
+        return $this->belongsToMany(ChannelProxy::modelClass(), 'product_channels', 'product_id', 'channel_id');
     }
 
     /**
