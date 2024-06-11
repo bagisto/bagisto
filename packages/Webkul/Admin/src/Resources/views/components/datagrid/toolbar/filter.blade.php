@@ -166,43 +166,25 @@
                                                         </div>
 
                                                         <div class="mb-2 mt-1.5">
-                                                            <!-- If Allow Multiple Values -->
-                                                            <x-admin::dropdown v-if="column.allow_multiple_values">
+                                                            <x-admin::dropdown>
                                                                 <x-slot:toggle>
                                                                     <button
                                                                         type="button"
                                                                         class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                                                     >
+                                                                        <!-- If Allow Multiple Values -->
                                                                         <span
                                                                             class="text-sm text-gray-400 dark:text-gray-400"
                                                                             v-text="'@lang('admin::app.components.datagrid.filters.select')'"
+                                                                            v-if="column.allow_multiple_values"
                                                                         >
                                                                         </span>
 
-                                                                        <span class="icon-sort-down text-2xl"></span>
-                                                                    </button>
-                                                                </x-slot>
-
-                                                                <x-slot:menu>
-                                                                    <x-admin::dropdown.menu.item
-                                                                        v-for="option in column.filterable_options"
-                                                                        v-text="option.label"
-                                                                        @click="addFilter(option.value, column)"
-                                                                    >
-                                                                    </x-admin::dropdown.menu.item>
-                                                                </x-slot>
-                                                            </x-admin::dropdown>
-
-                                                            <!-- If Allow Single Value -->
-                                                            <x-admin::dropdown v-else>
-                                                                <x-slot:toggle>
-                                                                    <button
-                                                                        type="button"
-                                                                        class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                                                    >
+                                                                        <!-- If Allow Single Value -->
                                                                         <span
                                                                             class="text-sm text-gray-400 dark:text-gray-400"
                                                                             v-text="column.filterable_options.find((option => option.value === getAppliedColumnValues(column.index)))?.label ?? '@lang('admin::app.components.datagrid.filters.select')'"
+                                                                            v-else
                                                                         >
                                                                         </span>
 
@@ -556,43 +538,25 @@
                                                         </div>
 
                                                         <div class="mb-2 mt-1.5">
-                                                            <!-- If Allow Multiple Values -->
-                                                            <x-admin::dropdown v-if="column.allow_multiple_values">
+                                                            <x-admin::dropdown>
                                                                 <x-slot:toggle>
                                                                     <button
                                                                         type="button"
                                                                         class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                                                     >
+                                                                        <!-- If Allow Multiple Values -->
                                                                         <span
                                                                             class="text-sm text-gray-400 dark:text-gray-400"
                                                                             v-text="'@lang('admin::app.components.datagrid.filters.select')'"
+                                                                            v-if="column.allow_multiple_values"
                                                                         >
                                                                         </span>
 
-                                                                        <span class="icon-sort-down text-2xl"></span>
-                                                                    </button>
-                                                                </x-slot>
-
-                                                                <x-slot:menu>
-                                                                    <x-admin::dropdown.menu.item
-                                                                        v-for="option in column.filterable_options"
-                                                                        v-text="option.label"
-                                                                        @click="addFilter(option.value, column)"
-                                                                    >
-                                                                    </x-admin::dropdown.menu.item>
-                                                                </x-slot>
-                                                            </x-admin::dropdown>
-
-                                                            <!-- If Allow Single Value -->
-                                                            <x-admin::dropdown v-else>
-                                                                <x-slot:toggle>
-                                                                    <button
-                                                                        type="button"
-                                                                        class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                                                    >
+                                                                        <!-- If Allow Single Value -->
                                                                         <span
                                                                             class="text-sm text-gray-400 dark:text-gray-400"
                                                                             v-text="column.filterable_options.find((option => option.value === getAppliedColumnValues(column.index)))?.label ?? '@lang('admin::app.components.datagrid.filters.select')'"
+                                                                            v-else
                                                                         >
                                                                         </span>
 

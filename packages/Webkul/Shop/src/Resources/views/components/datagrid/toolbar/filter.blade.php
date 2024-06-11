@@ -443,7 +443,7 @@
                                         </div>
 
                                         <div class="mb-2 mt-1.5">
-                                            <x-shop::dropdown v-if="column.allow_multiple_values">
+                                            <x-shop::dropdown>
                                                 <x-slot:toggle>
                                                     <button
                                                         type="button"
