@@ -14,11 +14,11 @@
             {!! view_render_event('bagisto.admin.catalog.product.edit.form.channels.controls.before', ['product' => $product]) !!}
 
             <!-- Panel Content -->
-            <div class="mb-5 text-sm text-gray-600 dark:text-gray-300">
+            <div class="text-sm text-gray-600 dark:text-gray-300">
                 @php $selectedChannelsId = old('channels') ?? $product->channels->pluck('id')->toArray() @endphp
                 
                 @foreach (core()->getAllChannels() as $channel)
-                    <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
+                    <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5 last:!mb-0">
                         <x-admin::form.control-group.control
                             type="checkbox"
                             :id="'channels_' . $channel->id" 
@@ -26,7 +26,7 @@
                             rules="required"
                             :value="$channel->id"
                             :for="'channels_' . $channel->id" 
-                            :label="trans('admin::app.settings.channels.edit.channels')"
+                            :label="trans('admin::app.catalog.products.edit.channels.title')"
                             :checked="in_array($channel->id, $selectedChannelsId)"
                         />
 
