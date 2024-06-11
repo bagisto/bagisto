@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Klant Toevoegen',
             'add-product'                 => 'Product Toevoegen',
+            'all-channels'                => 'Alle Kanalen',
             'attribute-code'              => 'Attribuutcode',
             'average-sale'                => 'Gemiddelde Bestelverkoop',
             'color'                       => 'Kleur',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Bankgegevens',
                 'bill-to'                    => 'Factuuradres',
-                'contact'                    => 'Contact',
                 'contact-number'             => 'Contactnummer',
+                'contact'                    => 'Contact',
                 'date'                       => 'Factuurdatum',
                 'discount'                   => 'Korting',
+                'excl-tax'                   => 'Excl. BTW:',
                 'grand-total'                => 'Totaalbedrag',
-                'invoice'                    => 'Factuur',
                 'invoice-id'                 => 'Factuurnummer',
+                'invoice'                    => 'Factuur',
                 'order-date'                 => 'Besteldatum',
                 'order-id'                   => 'Bestelnummer',
                 'payment-method'             => 'Betaalmethode',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'Subtotaal (excl. BTW)',
                 'subtotal-incl-tax'          => 'Subtotaal (incl. BTW)',
                 'subtotal'                   => 'Subtotaal',
-                'tax'                        => 'Belasting',
                 'tax-amount'                 => 'Belastingbedrag',
+                'tax'                        => 'Belasting',
                 'vat-number'                 => 'BTW-nummer',
-                'excl-tax'                   => 'Excl. BTW:',
             ],
         ],
 
@@ -740,30 +741,31 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'Actief',
-                    'attribute-family'              => 'Attribuutfamilie',
-                    'attribute-family-value'        => 'Attribuutfamilie - :attribute_family',
-                    'category'                      => 'Categorie',
-                    'copy-of'                       => 'Kopie van :value',
-                    'copy-of-slug'                  => 'kopie-van-:value',
-                    'delete'                        => 'Verwijderen',
-                    'disable'                       => 'Uitschakelen',
-                    'id'                            => 'ID',
-                    'id-value'                      => 'ID - :id',
-                    'image'                         => 'Afbeelding',
-                    'mass-delete-success'           => 'Geselecteerde producten succesvol verwijderd',
-                    'mass-update-success'           => 'Geselecteerde producten succesvol bijgewerkt',
-                    'name'                          => 'Naam',
-                    'out-of-stock'                  => 'Niet op voorraad',
-                    'price'                         => 'Prijs',
-                    'product-image'                 => 'Productafbeelding',
-                    'qty'                           => 'Aantal',
-                    'qty-value'                     => ':qty Beschikbaar',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'Status',
-                    'type'                          => 'Type',
-                    'update-status'                 => 'Status bijwerken',
+                    'active'                 => 'Actief',
+                    'attribute-family'       => 'Attribuutfamilie',
+                    'attribute-family-value' => 'Attribuutfamilie - :attribute_family',
+                    'category'               => 'Categorie',
+                    'channel'                => 'Kanaal',
+                    'copy-of'                => 'Kopie van :value',
+                    'copy-of-slug'           => 'kopie-van-:value',
+                    'delete'                 => 'Verwijderen',
+                    'disable'                => 'Uitschakelen',
+                    'id'                     => 'ID',
+                    'id-value'               => 'ID - :id',
+                    'image'                  => 'Afbeelding',
+                    'mass-delete-success'    => 'Geselecteerde producten succesvol verwijderd',
+                    'mass-update-success'    => 'Geselecteerde producten succesvol bijgewerkt',
+                    'name'                   => 'Naam',
+                    'out-of-stock'           => 'Niet op voorraad',
+                    'price'                  => 'Prijs',
+                    'product-image'          => 'Productafbeelding',
+                    'qty'                    => 'Aantal',
+                    'qty-value'              => ':qty Beschikbaar',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'Status',
+                    'type'                   => 'Type',
+                    'update-status'          => 'Status bijwerken',
                 ],
             ],
 
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Actief',
                     'address'        => ':address  Adres(sen)',
                     'address-count'  => 'Aantal adressen',
+                    'channel'        => 'Kanaal',
                     'delete'         => 'Verwijderen',
                     'delete-success' => 'Geselecteerde gegevens succesvol verwijderd',
                     'email'          => 'E-mail',
@@ -2224,7 +2227,7 @@ return [
                     'title'      => 'Zoektermen',
 
                     'datagrid' => [
-                        'Channel'             => 'Kanaal',
+                        'channel'             => 'Kanaal',
                         'actions'             => 'Acties',
                         'channel'             => 'Kanaal',
                         'delete'              => 'Verwijderen',
@@ -2239,7 +2242,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Kanaal',
                         'channel'        => 'Kanaal',
                         'delete-warning' => 'Weet u zeker dat u deze actie wilt uitvoeren?',
                         'locale'         => 'Lokale instelling',
@@ -2395,6 +2397,7 @@ return [
             'title'         => 'Pagina\'s',
 
             'datagrid' => [
+                'channel'             => 'Kanaal',
                 'delete'              => 'Verwijderen',
                 'edit'                => 'Bewerken',
                 'id'                  => 'ID',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => 'Verlaten omzet',
                 'added-to-cart'                 => 'Toegevoegd aan winkelwagen',
                 'added-to-cart-info'            => 'Alleen :progress bezoekers hebben producten aan de winkelwagen toegevoegd',
+                'all-channels'                  => 'Alle kanalen',
                 'average-order-value-over-time' => 'Gemiddelde bestelwaarde in de tijd',
                 'average-sales'                 => 'Gemiddelde bestelwaarde',
                 'count'                         => 'Aantal',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Alle kanalen',
                 'count'                       => 'Aantal',
                 'customers'                   => 'Klanten',
                 'customers-over-time'         => 'Klanten in de loop der tijd',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Alle kanalen',
                 'channel'                          => 'Kanaal',
                 'end-date'                         => 'Einddatum',
                 'id'                               => 'ID',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Alle kanalen',
             'day'           => 'Dag',
             'end-date'      => 'Einddatum',
             'export-csv'    => 'Exporteer CSV',

@@ -45,7 +45,7 @@ class ElasticSearchRepository
         }
 
         $results = Elasticsearch::search([
-            'index' => $this->getIndexName(),
+            'index' => $params['index'] ?? $this->getIndexName(),
             'body'  => [
                 'from'          => $options['from'],
                 'size'          => $options['limit'],

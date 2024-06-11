@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Müşteri Ekle',
             'add-product'                 => 'Ürün Ekle',
+            'all-channels'                => 'Tüm Kanallar',
             'attribute-code'              => 'Özellik Kodu',
             'average-sale'                => 'Ortalama Sipariş Tutarı',
             'color'                       => 'Renk',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Banka Detayları',
                 'bill-to'                    => 'Fatura Edilen',
-                'contact'                    => 'İletişim',
                 'contact-number'             => 'İletişim Numarası',
+                'contact'                    => 'İletişim',
                 'date'                       => 'Fatura Tarihi',
                 'discount'                   => 'İndirim',
+                'excl-tax'                   => 'KDV Hariç:',
                 'grand-total'                => 'Genel Toplam',
-                'invoice'                    => 'Fatura',
                 'invoice-id'                 => 'Fatura ID',
+                'invoice'                    => 'Fatura',
                 'order-date'                 => 'Sipariş Tarihi',
                 'order-id'                   => 'Sipariş ID',
                 'payment-method'             => 'Ödeme Yöntemi',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'Ara Toplam (KDV Hariç)',
                 'subtotal-incl-tax'          => 'Ara Toplam (KDV Dahil)',
                 'subtotal'                   => 'Ara Toplam',
-                'tax'                        => 'Vergi',
                 'tax-amount'                 => 'Vergi Tutarı',
+                'tax'                        => 'Vergi',
                 'vat-number'                 => 'Vergi Numarası',
-                'excl-tax'                   => 'KDV Hariç:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'Özellik Ailesi',
                     'attribute-family-value' => 'Özellik Ailesi - :attribute_family',
                     'category'               => 'Kategori',
+                    'channel'                => 'Kanal',
                     'copy-of'                => 'Kopyası :value',
                     'copy-of-slug'           => 'kopyası-:value',
                     'delete'                 => 'Sil',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Aktif',
                     'address'        => ':address  Adres(ler)',
                     'address-count'  => 'Adres Sayısı',
+                    'channel'        => 'Kanal',
                     'delete'         => 'Sil',
                     'delete-success' => 'Seçilen veriler başarıyla silindi',
                     'email'          => 'E-posta',
@@ -2224,7 +2227,7 @@ return [
                     'title'      => 'Arama Terimleriniz',
 
                     'datagrid' => [
-                        'Channel'             => 'Kanal',
+                        'channel'             => 'Kanal',
                         'actions'             => 'İşlemler',
                         'channel'             => 'Kanal',
                         'delete'              => 'Sil',
@@ -2239,7 +2242,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Kanal',
                         'channel'        => 'Kanal',
                         'delete-warning' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
                         'locale'         => 'Yerel Ayar',
@@ -2396,6 +2398,7 @@ return [
             'title'         => 'Sayfalar',
 
             'datagrid' => [
+                'channel'             => 'Kanal',
                 'delete'              => 'Sil',
                 'edit'                => 'Düzenle',
                 'id'                  => 'ID',
@@ -3192,6 +3195,7 @@ return [
                 'abandoned-revenue'             => 'Terk Edilen Gelir',
                 'added-to-cart'                 => 'Sepete Eklendi',
                 'added-to-cart-info'            => 'Sadece :progress ziyaretçisi ürünleri sepete ekledi',
+                'all-channels'                  => 'Tüm Kanallar',
                 'average-order-value-over-time' => 'Zaman İçinde Ortalama Sipariş Değeri',
                 'average-sales'                 => 'Ortalama Sipariş Değeri',
                 'count'                         => 'Sayı',
@@ -3230,6 +3234,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Tüm Kanallar',
                 'count'                       => 'Sayı',
                 'customers'                   => 'Müşteriler',
                 'customers-over-time'         => 'Zaman İçinde Müşteriler',
@@ -3258,6 +3263,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Tüm Kanallar',
                 'channel'                          => 'Kanal',
                 'end-date'                         => 'Bitiş Tarihi',
                 'id'                               => 'Kimlik',
@@ -3291,6 +3297,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Tüm Kanallar',
             'day'           => 'Gün',
             'end-date'      => 'Bitiş Tarihi',
             'export-csv'    => 'CSV Olarak Dışa Aktar',

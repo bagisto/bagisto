@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'افزودن مشتری',
             'add-product'                 => 'افزودن محصول',
+            'all-channels'                => 'همه کانال‌ها',
             'attribute-code'              => 'کد ویژگی',
             'average-sale'                => 'میانگین فروش سفارش',
             'color'                       => 'رنگ',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'جزئیات بانکی',
                 'bill-to'                    => 'صورتحساب به',
-                'contact'                    => 'تماس',
                 'contact-number'             => 'شماره تماس',
+                'contact'                    => 'تماس',
                 'date'                       => 'تاریخ فاکتور',
                 'discount'                   => 'تخفیف',
+                'excl-tax'                   => 'بدون مالیات:',
                 'grand-total'                => 'جمع کل',
-                'invoice'                    => 'فاکتور',
                 'invoice-id'                 => 'شناسه فاکتور',
+                'invoice'                    => 'فاکتور',
                 'order-date'                 => 'تاریخ سفارش',
                 'order-id'                   => 'شماره سفارش',
                 'payment-method'             => 'روش پرداخت',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'جمع جزئی (بدون مالیات)',
                 'subtotal-incl-tax'          => 'جمع جزئی (شامل مالیات)',
                 'subtotal'                   => 'جمع جزئی',
-                'tax'                        => 'مالیات',
                 'tax-amount'                 => 'مقدار مالیات',
+                'tax'                        => 'مالیات',
                 'vat-number'                 => 'شماره مالیات بر ارزش افزوده',
-                'excl-tax'                   => 'بدون مالیات:',
             ],
         ],
 
@@ -740,30 +741,31 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'فعال',
-                    'attribute-family'              => 'خانواده ویژگی',
-                    'attribute-family-value'        => 'خانواده ویژگی - :attribute_family',
-                    'category'                      => 'دسته‌بندی',
-                    'copy-of'                       => 'رونویسی از :value',
-                    'copy-of-slug'                  => 'رونویسی-:value',
-                    'delete'                        => 'حذف',
-                    'disable'                       => 'غیرفعال‌سازی',
-                    'id'                            => 'شناسه',
-                    'id-value'                      => 'شناسه - :id',
-                    'image'                         => 'تصویر',
-                    'mass-delete-success'           => 'محصولات انتخابی با موفقیت حذف شدند',
-                    'mass-update-success'           => 'محصولات انتخابی با موفقیت به‌روزرسانی شدند',
-                    'name'                          => 'نام',
-                    'out-of-stock'                  => 'تمام شده',
-                    'price'                         => 'قیمت',
-                    'product-image'                 => 'تصویر محصول',
-                    'qty'                           => 'تعداد',
-                    'qty-value'                     => ':qty در دسترس است',
-                    'sku'                           => 'شناسه SKU',
-                    'sku-value'                     => 'شناسه SKU - :sku',
-                    'status'                        => 'وضعیت',
-                    'type'                          => 'نوع',
-                    'update-status'                 => 'به‌روزرسانی وضعیت',
+                    'active'                 => 'فعال',
+                    'attribute-family'       => 'خانواده ویژگی',
+                    'attribute-family-value' => 'خانواده ویژگی - :attribute_family',
+                    'category'               => 'دسته‌بندی',
+                    'channel'                => 'کانال',
+                    'copy-of'                => 'رونویسی از :value',
+                    'copy-of-slug'           => 'رونویسی-:value',
+                    'delete'                 => 'حذف',
+                    'disable'                => 'غیرفعال‌سازی',
+                    'id'                     => 'شناسه',
+                    'id-value'               => 'شناسه - :id',
+                    'image'                  => 'تصویر',
+                    'mass-delete-success'    => 'محصولات انتخابی با موفقیت حذف شدند',
+                    'mass-update-success'    => 'محصولات انتخابی با موفقیت به‌روزرسانی شدند',
+                    'name'                   => 'نام',
+                    'out-of-stock'           => 'تمام شده',
+                    'price'                  => 'قیمت',
+                    'product-image'          => 'تصویر محصول',
+                    'qty'                    => 'تعداد',
+                    'qty-value'              => ':qty در دسترس است',
+                    'sku'                    => 'شناسه SKU',
+                    'sku-value'              => 'شناسه SKU - :sku',
+                    'status'                 => 'وضعیت',
+                    'type'                   => 'نوع',
+                    'update-status'          => 'به‌روزرسانی وضعیت',
                 ],
             ],
 
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'فعال',
                     'address'        => ':address  آدرس(ها)',
                     'address-count'  => 'تعداد آدرس‌ها',
+                    'channel'        => 'کانال',
                     'delete'         => 'حذف',
                     'delete-success' => 'داده‌های انتخاب شده با موفقیت حذف شدند',
                     'email'          => 'ایمیل',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'عبارات جستجو',
 
                     'datagrid' => [
-                        'Channel'             => 'کانال',
+                        'channel'             => 'کانال',
                         'actions'             => 'اقدامات',
                         'channel'             => 'کانال',
                         'delete'              => 'حذف',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'کانال',
                         'channel'        => 'کانال',
                         'delete-warning' => 'آیا مطمئن هستید که می خواهید این کار را انجام دهید؟',
                         'locale'         => 'موقعیت',
@@ -2388,13 +2390,14 @@ return [
 
     'cms' => [
         'index' => [
-            'already-taken' => 'The :name has already been taken.',
-            'create-btn'    => 'Create Page',
-            'channel'       => 'Channel',
-            'language'      => 'Language',
-            'title'         => 'Pages',
+            'already-taken' => 'این :name قبلاً استفاده شده است.',
+            'create-btn'    => 'ایجاد صفحه',
+            'channel'       => 'کانال',
+            'language'      => 'زبان',
+            'title'         => 'صفحات',
 
             'datagrid' => [
+                'channel'             => 'کانال',
                 'delete'              => 'حذف',
                 'edit'                => 'ویرایش',
                 'id'                  => 'شناسه',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => 'درآمد ترک شده',
                 'added-to-cart'                 => 'افزوده شده به سبد خرید',
                 'added-to-cart-info'            => 'تنها :progress بازدیدکننده محصولات را به سبد خرید اضافه کرده‌اند',
+                'all-channels'                  => 'همه کانال‌ها',
                 'average-order-value-over-time' => 'میانگین ارزش سفارش در طول زمان',
                 'average-sales'                 => 'میانگین ارزش سفارش',
                 'count'                         => 'تعداد',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'همه کانال‌ها',
                 'count'                       => 'تعداد',
                 'customers'                   => 'مشتریان',
                 'customers-over-time'         => 'مشتریان در طول زمان',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'همه کانال‌ها',
                 'channel'                          => 'کانال',
                 'end-date'                         => 'تاریخ پایان',
                 'id'                               => 'شناسه',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'همه کانال‌ها',
             'day'           => 'روز',
             'end-date'      => 'تاریخ پایان',
             'export-csv'    => 'خروجی CSV',

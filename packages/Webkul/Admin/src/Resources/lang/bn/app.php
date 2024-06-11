@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'গ্রাহক যোগ করুন',
             'add-product'                 => 'পণ্য যোগ করুন',
+            'all-channels'                => 'সমস্ত চ্যানেল',
             'attribute-code'              => 'গুণমান কোড',
             'average-sale'                => 'গড় অর্ডার বিক্রয়',
             'color'                       => 'রং',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'ব্যাংকের বিবরণ',
                 'bill-to'                    => 'বিল প্রাপ্তি',
-                'contact'                    => 'যোগাযোগ',
                 'contact-number'             => 'যোগাযোগ নম্বর',
+                'contact'                    => 'যোগাযোগ',
                 'date'                       => 'চালানের তারিখ',
                 'discount'                   => 'মূল্যছাড়',
+                'excl-tax'                   => 'কর ব্যতিত:',
                 'grand-total'                => 'সর্বমোট',
-                'invoice'                    => 'চালান',
                 'invoice-id'                 => 'চালান আইডি',
+                'invoice'                    => 'চালান',
                 'order-date'                 => 'অর্ডারের তারিখ',
                 'order-id'                   => 'অর্ডার আইডি',
                 'payment-method'             => 'পেমেন্ট পদ্ধতি',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'উপমোট (কর ব্যতিত)',
                 'subtotal-incl-tax'          => 'উপমোট (কর সহ)',
                 'subtotal'                   => 'উপমোট',
-                'tax'                        => 'কর',
                 'tax-amount'                 => 'করের পরিমাণ',
+                'tax'                        => 'কর',
                 'vat-number'                 => 'ভ্যাট নম্বর',
-                'excl-tax'                   => 'কর ব্যতিত:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'গুণ পরিবার',
                     'attribute-family-value' => 'গুণ পরিবার - :attribute_family',
                     'category'               => 'বিভাগ',
+                    'channel'                => 'চ্যানেল',
                     'copy-of'                => 'কপি অব :value',
                     'copy-of-slug'           => 'কপি-অব-:value',
                     'delete'                 => 'মুছে ফেলুন',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'সক্রিয়',
                     'address'        => ':address  ঠিকানা(স)',
                     'address-count'  => 'ঠিকানা সংখ্যা',
+                    'channel'        => 'চ্যানেল',
                     'delete'         => 'মুছুন',
                     'delete-success' => 'নির্বাচিত ডেটা সফলভাবে মুছে ফেলা হয়েছে',
                     'email'          => 'ইমেইল',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'সার্চ টার্মস',
 
                     'datagrid' => [
-                        'Channel'             => 'চ্যানেল',
+                        'channel'             => 'চ্যানেল',
                         'actions'             => 'কার্যক্রম',
                         'channel'             => 'চ্যানেল',
                         'delete'              => 'মুছুন',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'চ্যানেল',
                         'channel'        => 'চ্যানেল',
                         'delete-warning' => 'আপনি কি নিশ্চিত যে আপনি এই ক্রিয়াটি করতে চান?',
                         'locale'         => 'লোকাল',
@@ -2395,6 +2397,7 @@ return [
             'title'         => 'পৃষ্ঠা',
 
             'datagrid' => [
+                'channel'             => 'চ্যানেল',
                 'delete'              => 'মুছে ফেলা',
                 'edit'                => 'সম্পাদনা করুন',
                 'id'                  => 'আইডি',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => 'বাতিল আয়',
                 'added-to-cart'                 => 'কার্টে যোগ করা হয়েছে',
                 'added-to-cart-info'            => 'কেবল :progress দর্শকগণ পণ্য কার্টে যোগ করেছেন',
+                'all-channels'                  => 'সমস্ত চ্যানেল',
                 'average-order-value-over-time' => 'সময়ের সাথে গড় অর্ডারের মান',
                 'average-sales'                 => 'গড় অর্ডারের মান',
                 'count'                         => 'সংখ্যা',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'সমস্ত চ্যানেল',
                 'count'                       => 'সংখ্যা',
                 'customers'                   => 'গ্রাহক',
                 'customers-over-time'         => 'সময়ের সাথে গ্রাহক',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'সমস্ত চ্যানেল',
                 'channel'                          => 'চ্যানেল',
                 'end-date'                         => 'শেষ তারিখ',
                 'id'                               => 'আইডি',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'সমস্ত চ্যানেল',
             'day'           => 'দিন',
             'end-date'      => 'শেষ তারিখ',
             'export-csv'    => 'CSV রপ্যার্ট করুন',

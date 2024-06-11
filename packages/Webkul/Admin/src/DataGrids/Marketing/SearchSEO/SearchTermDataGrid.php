@@ -15,7 +15,7 @@ class SearchTermDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('search_terms')
-            ->addSelect(
+            ->select(
                 'search_terms.id',
                 'search_terms.term',
                 'search_terms.results',

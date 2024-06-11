@@ -86,7 +86,11 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.registration.before');
 
-        $data = array_merge(request()->only([
+        $data = array_merge([
+            'password'    => bcrypt($password),
+            'is_verified' => 1,
+            'channel_id'  => core()->getCurrentChannel()->id,
+        ], request()->only([
             'first_name',
             'last_name',
             'gender',
@@ -94,10 +98,8 @@ class CustomerController extends Controller
             'date_of_birth',
             'phone',
             'customer_group_id',
-        ]), [
-            'password'    => bcrypt($password),
-            'is_verified' => 1,
-        ]);
+            'channel_id',
+        ]));
 
         if (empty($data['phone'])) {
             $data['phone'] = null;

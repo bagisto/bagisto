@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => '添加客户',
             'add-product'                 => '添加产品',
+            'all-channels'                => '所有渠道',
             'attribute-code'              => '属性代码',
             'average-sale'                => '平均订单销售额',
             'color'                       => '颜色',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => '银行详细信息',
                 'bill-to'                    => '账单给',
-                'contact'                    => '联系人',
                 'contact-number'             => '联系电话',
+                'contact'                    => '联系人',
                 'date'                       => '发票日期',
                 'discount'                   => '折扣',
+                'excl-tax'                   => '不含税：',
                 'grand-total'                => '总计',
-                'invoice'                    => '发票',
                 'invoice-id'                 => '发票ID',
+                'invoice'                    => '发票',
                 'order-date'                 => '订单日期',
                 'order-id'                   => '订单ID',
                 'payment-method'             => '付款方式',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => '小计（不含税）',
                 'subtotal-incl-tax'          => '小计（含税）',
                 'subtotal'                   => '小计',
-                'tax'                        => '税费',
                 'tax-amount'                 => '税费金额',
+                'tax'                        => '税费',
                 'vat-number'                 => '增值税号码',
-                'excl-tax'                   => '不含税：',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => '属性家族',
                     'attribute-family-value' => '属性家族 - :attribute_family',
                     'category'               => '类别',
+                    'channel'                => '渠道',
                     'copy-of'                => '复制 :value',
                     'copy-of-slug'           => '复制-:value',
                     'delete'                 => '删除',
@@ -1394,6 +1396,7 @@ return [
                     'active'         => '活跃',
                     'address'        => ':address  地址',
                     'address-count'  => '地址数量',
+                    'channel'        => '渠道',
                     'delete'         => '删除',
                     'delete-success' => '成功删除所选数据',
                     'email'          => '电子邮件',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => '搜索词条',
 
                     'datagrid' => [
-                        'Channel'             => '频道',
+                        'channel'             => '频道',
                         'actions'             => '操作',
                         'channel'             => '频道',
                         'delete'              => '删除',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => '频道',
                         'channel'        => '频道',
                         'delete-warning' => '您确定要执行此操作吗？',
                         'locale'         => '本地化',
@@ -2395,6 +2397,7 @@ return [
             'title'         => '页面',
 
             'datagrid' => [
+                'channel'             => '渠道',
                 'delete'              => '删除',
                 'edit'                => '编辑',
                 'id'                  => 'ID',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => '被遗弃的收入',
                 'added-to-cart'                 => '已添加到购物车',
                 'added-to-cart-info'            => '仅 :progress 位访客将产品添加到购物车',
+                'all-channels'                  => '所有渠道',
                 'average-order-value-over-time' => '随时间的平均订单价值',
                 'average-sales'                 => '平均订单价值',
                 'count'                         => '数量',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => '所有渠道',
                 'count'                       => '数量',
                 'customers'                   => '客户',
                 'customers-over-time'         => '随时间的客户数',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => '所有渠道',
                 'channel'                          => '频道',
                 'end-date'                         => '结束日期',
                 'id'                               => 'ID',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => '所有渠道',
             'day'           => '日',
             'end-date'      => '结束日期',
             'export-csv'    => '导出CSV',

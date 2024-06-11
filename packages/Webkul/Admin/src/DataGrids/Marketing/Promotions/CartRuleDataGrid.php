@@ -8,42 +8,6 @@ use Webkul\DataGrid\DataGrid;
 class CartRuleDataGrid extends DataGrid
 {
     /**
-     * Customer group.
-     *
-     * @var string
-     */
-    protected $customer_group = 'all';
-
-    /**
-     * Channel.
-     *
-     * @var string
-     */
-    protected $channel = 'all';
-
-    /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
-        'channels',
-        'customer_groups',
-    ];
-
-    /**
-     * Create a new datagrid instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->customer_group = request()->get('customer_group') ?? 'all';
-
-        $this->channel = core()->getRequestedChannelCode(false) ?? 'all';
-    }
-
-    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
@@ -51,11 +15,12 @@ class CartRuleDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('cart_rules')
+            ->distinct()
             ->leftJoin('cart_rule_coupons', function ($leftJoin) {
                 $leftJoin->on('cart_rule_coupons.cart_rule_id', '=', 'cart_rules.id')
                     ->where('cart_rule_coupons.is_primary', 1);
             })
-            ->addSelect(
+            ->select(
                 'cart_rules.id',
                 'name',
                 'cart_rule_coupons.code as coupon_code',
@@ -67,30 +32,6 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addFilter('id', 'cart_rules.id');
         $this->addFilter('coupon_code', 'cart_rule_coupons.code');
-
-        if ($this->customer_group !== 'all') {
-            $queryBuilder->leftJoin(
-                'cart_rule_customer_groups',
-                'cart_rule_customer_groups.cart_rule_id',
-                '=',
-                'cart_rules.id'
-            );
-
-            $queryBuilder->where('cart_rule_customer_groups.customer_group_id', $this->customer_group);
-        }
-
-        if ($this->channel !== 'all') {
-            $queryBuilder->leftJoin(
-                'cart_rule_channels',
-                'cart_rule_channels.cart_rule_id',
-                '=',
-                'cart_rules.id'
-            );
-
-            $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
-        }
-
-        // $this->addFilter('status', 'status');
 
         return $queryBuilder;
     }

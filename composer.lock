@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e6e0223ab3b43a8bb7b6fc5b70bd609",
+    "content-hash": "39622e2e478c3641803ae55003acc4e6",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -4501,6 +4501,238 @@
             "time": "2023-10-27T15:32:31+00:00"
         },
         {
+            "name": "mpdf/mpdf",
+            "version": "v8.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpdf/mpdf.git",
+                "reference": "6f723a96becf989a831e38caf758d28364a69939"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/6f723a96becf989a831e38caf758d28364a69939",
+                "reference": "6f723a96becf989a831e38caf758d28364a69939",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "mpdf/psr-http-message-shim": "^1.0 || ^2.0",
+                "mpdf/psr-log-aware-trait": "^2.0 || ^3.0",
+                "myclabs/deep-copy": "^1.7",
+                "paragonie/random_compat": "^1.4|^2.0|^9.99.99",
+                "php": "^5.6 || ^7.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
+                "psr/http-message": "^1.0 || ^2.0",
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
+                "setasign/fpdi": "^2.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.0",
+                "mpdf/qrcode": "^1.1.0",
+                "squizlabs/php_codesniffer": "^3.5.0",
+                "tracy/tracy": "~2.5",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "suggest": {
+                "ext-bcmath": "Needed for generation of some types of barcodes",
+                "ext-xml": "Needed mainly for SVG manipulation",
+                "ext-zlib": "Needed for compression of embedded resources, such as fonts"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Mpdf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Matěj Humpál",
+                    "role": "Developer, maintainer"
+                },
+                {
+                    "name": "Ian Back",
+                    "role": "Developer (retired)"
+                }
+            ],
+            "description": "PHP library generating PDF files from UTF-8 encoded HTML",
+            "homepage": "https://mpdf.github.io",
+            "keywords": [
+                "pdf",
+                "php",
+                "utf-8"
+            ],
+            "support": {
+                "docs": "http://mpdf.github.io",
+                "issues": "https://github.com/mpdf/mpdf/issues",
+                "source": "https://github.com/mpdf/mpdf"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/mpdf",
+                    "type": "custom"
+                }
+            ],
+            "time": "2024-03-11T12:55:53+00:00"
+        },
+        {
+            "name": "mpdf/psr-http-message-shim",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpdf/psr-http-message-shim.git",
+                "reference": "f25a0153d645e234f9db42e5433b16d9b113920f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpdf/psr-http-message-shim/zipball/f25a0153d645e234f9db42e5433b16d9b113920f",
+                "reference": "f25a0153d645e234f9db42e5433b16d9b113920f",
+                "shasum": ""
+            },
+            "require": {
+                "psr/http-message": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mpdf\\PsrHttpMessageShim\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Dorison",
+                    "email": "mark@chromatichq.com"
+                },
+                {
+                    "name": "Kristofer Widholm",
+                    "email": "kristofer@chromatichq.com"
+                },
+                {
+                    "name": "Nigel Cunningham",
+                    "email": "nigel.cunningham@technocrat.com.au"
+                }
+            ],
+            "description": "Shim to allow support of different psr/message versions.",
+            "support": {
+                "issues": "https://github.com/mpdf/psr-http-message-shim/issues",
+                "source": "https://github.com/mpdf/psr-http-message-shim/tree/v2.0.1"
+            },
+            "time": "2023-10-02T14:34:03+00:00"
+        },
+        {
+            "name": "mpdf/psr-log-aware-trait",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpdf/psr-log-aware-trait.git",
+                "reference": "a633da6065e946cc491e1c962850344bb0bf3e78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpdf/psr-log-aware-trait/zipball/a633da6065e946cc491e1c962850344bb0bf3e78",
+                "reference": "a633da6065e946cc491e1c962850344bb0bf3e78",
+                "shasum": ""
+            },
+            "require": {
+                "psr/log": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mpdf\\PsrLogAwareTrait\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Dorison",
+                    "email": "mark@chromatichq.com"
+                },
+                {
+                    "name": "Kristofer Widholm",
+                    "email": "kristofer@chromatichq.com"
+                }
+            ],
+            "description": "Trait to allow support of different psr/log versions.",
+            "support": {
+                "issues": "https://github.com/mpdf/psr-log-aware-trait/issues",
+                "source": "https://github.com/mpdf/psr-log-aware-trait/tree/v3.0.0"
+            },
+            "time": "2023-05-03T06:19:36+00:00"
+        },
+        {
+            "name": "myclabs/deep-copy",
+            "version": "1.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/DeepCopy.git",
+                "reference": "7284c22080590fb39f2ffa3e9057f10a4ddd0e0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/7284c22080590fb39f2ffa3e9057f10a4ddd0e0c",
+                "reference": "7284c22080590fb39f2ffa3e9057f10a4ddd0e0c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "conflict": {
+                "doctrine/collections": "<1.6.8",
+                "doctrine/common": "<2.13.3 || >=3,<3.2.2"
+            },
+            "require-dev": {
+                "doctrine/collections": "^1.6.8",
+                "doctrine/common": "^2.13.3 || ^3.2.2",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.23 || ^9.5.13"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/DeepCopy/deep_copy.php"
+                ],
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Create deep copies (clones) of your objects",
+            "keywords": [
+                "clone",
+                "copy",
+                "duplicate",
+                "object",
+                "object graph"
+            ],
+            "support": {
+                "issues": "https://github.com/myclabs/DeepCopy/issues",
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.11.1"
+            },
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/myclabs/deep-copy",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-03-08T13:26:56+00:00"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "2.72.1",
             "source": {
@@ -7012,6 +7244,78 @@
                 "source": "https://github.com/MyIntervals/PHP-CSS-Parser/tree/v8.5.1"
             },
             "time": "2024-02-15T16:41:13+00:00"
+        },
+        {
+            "name": "setasign/fpdi",
+            "version": "v2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Setasign/FPDI.git",
+                "reference": "a6db878129ec6c7e141316ee71872923e7f1b7ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Setasign/FPDI/zipball/a6db878129ec6c7e141316ee71872923e7f1b7ad",
+                "reference": "a6db878129ec6c7e141316ee71872923e7f1b7ad",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zlib": "*",
+                "php": "^5.6 || ^7.0 || ^8.0"
+            },
+            "conflict": {
+                "setasign/tfpdf": "<1.31"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7",
+                "setasign/fpdf": "~1.8.6",
+                "setasign/tfpdf": "~1.33",
+                "squizlabs/php_codesniffer": "^3.5",
+                "tecnickcom/tcpdf": "~6.2"
+            },
+            "suggest": {
+                "setasign/fpdf": "FPDI will extend this class but as it is also possible to use TCPDF or tFPDF as an alternative. There's no fixed dependency configured."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "setasign\\Fpdi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Slabon",
+                    "email": "jan.slabon@setasign.com",
+                    "homepage": "https://www.setasign.com"
+                },
+                {
+                    "name": "Maximilian Kresse",
+                    "email": "maximilian.kresse@setasign.com",
+                    "homepage": "https://www.setasign.com"
+                }
+            ],
+            "description": "FPDI is a collection of PHP classes facilitating developers to read pages from existing PDF documents and use them as templates in FPDF. Because it is also possible to use FPDI with TCPDF, there are no fixed dependencies defined. Please see suggestions for packages which evaluates the dependencies automatically.",
+            "homepage": "https://www.setasign.com/fpdi",
+            "keywords": [
+                "fpdf",
+                "fpdi",
+                "pdf"
+            ],
+            "support": {
+                "issues": "https://github.com/Setasign/FPDI/issues",
+                "source": "https://github.com/Setasign/FPDI/tree/v2.6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/setasign/fpdi",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-12-11T16:03:32+00:00"
         },
         {
             "name": "shetabit/visitor",
@@ -10426,12 +10730,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bagisto/laravel-data-faker.git",
-                "reference": "6613f0b440f7875ed54fd686aaabbb9d35090084"
+                "reference": "e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/6613f0b440f7875ed54fd686aaabbb9d35090084",
-                "reference": "6613f0b440f7875ed54fd686aaabbb9d35090084",
+                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7",
+                "reference": "e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7",
                 "shasum": ""
             },
             "default-branch": true,
@@ -10472,7 +10776,7 @@
                 "issues": "https://github.com/bagisto/laravel-data-faker/issues",
                 "source": "https://github.com/bagisto/laravel-data-faker/tree/master"
             },
-            "time": "2024-02-09T09:25:31+00:00"
+            "time": "2024-06-07T11:16:25+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -11172,65 +11476,6 @@
                 "source": "https://github.com/mockery/mockery"
             },
             "time": "2023-12-10T02:24:34+00:00"
-        },
-        {
-            "name": "myclabs/deep-copy",
-            "version": "1.11.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "7284c22080590fb39f2ffa3e9057f10a4ddd0e0c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/7284c22080590fb39f2ffa3e9057f10a4ddd0e0c",
-                "reference": "7284c22080590fb39f2ffa3e9057f10a4ddd0e0c",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1 || ^8.0"
-            },
-            "conflict": {
-                "doctrine/collections": "<1.6.8",
-                "doctrine/common": "<2.13.3 || >=3,<3.2.2"
-            },
-            "require-dev": {
-                "doctrine/collections": "^1.6.8",
-                "doctrine/common": "^2.13.3 || ^3.2.2",
-                "phpunit/phpunit": "^7.5.20 || ^8.5.23 || ^9.5.13"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/DeepCopy/deep_copy.php"
-                ],
-                "psr-4": {
-                    "DeepCopy\\": "src/DeepCopy/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Create deep copies (clones) of your objects",
-            "keywords": [
-                "clone",
-                "copy",
-                "duplicate",
-                "object",
-                "object graph"
-            ],
-            "support": {
-                "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.11.1"
-            },
-            "funding": [
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/myclabs/deep-copy",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2023-03-08T13:26:56+00:00"
         },
         {
             "name": "nunomaduro/collision",

@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'ग्राहक जोड़ें',
             'add-product'                 => 'उत्पाद जोड़ें',
+            'all-channels'                => 'सभी चैनल',
             'attribute-code'              => 'विशेषता कोड',
             'average-sale'                => 'औसत आदेश बेची गई राशि',
             'color'                       => 'रंग',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'बैंक विवरण',
                 'bill-to'                    => 'बिल करने के लिए',
-                'contact'                    => 'संपर्क',
                 'contact-number'             => 'संपर्क नंबर',
+                'contact'                    => 'संपर्क',
                 'date'                       => 'चालान तिथि',
                 'discount'                   => 'डिस्काउंट',
+                'excl-tax'                   => 'कर छोड़कर:',
                 'grand-total'                => 'कुल योग',
-                'invoice'                    => 'चालान',
                 'invoice-id'                 => 'चालान आईडी',
+                'invoice'                    => 'चालान',
                 'order-date'                 => 'आदेश तिथि',
                 'order-id'                   => 'आदेश आईडी',
                 'payment-method'             => 'भुगतान का तरीका',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'उपकुल (कर छोड़कर)',
                 'subtotal-incl-tax'          => 'उपकुल (कर सहित)',
                 'subtotal'                   => 'उपकुल',
-                'tax'                        => 'कर',
                 'tax-amount'                 => 'कर राशि',
+                'tax'                        => 'कर',
                 'vat-number'                 => 'वैट नंबर',
-                'excl-tax'                   => 'कर छोड़कर:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'गुण परिवार',
                     'attribute-family-value' => 'गुण परिवार - :attribute_family',
                     'category'               => 'श्रेणी',
+                    'channel'                => 'चैनल',
                     'copy-of'                => ':value की प्रतिलिपि',
                     'copy-of-slug'           => ':value-की-प्रतिलिपि',
                     'delete'                 => 'हटाएं',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'सक्रिय',
                     'address'        => ':address पता(ओं)',
                     'address-count'  => 'पता गणना',
+                    'channel'        => 'चैनल',
                     'delete'         => 'हटाएँ',
                     'delete-success' => 'चयनित डेटा सफलतापूर्वक हटा दिया गया',
                     'email'          => 'ईमेल',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'खोज शब्द',
 
                     'datagrid' => [
-                        'Channel'             => 'चैनल',
+                        'channel'             => 'चैनल',
                         'actions'             => 'क्रियाएँ',
                         'channel'             => 'चैनल',
                         'delete'              => 'हटायें',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'चैनल',
                         'channel'        => 'चैनल',
                         'delete-warning' => 'क्या आप इस ऑपरेशन को पूरा करना चाहते हैं?',
                         'locale'         => 'स्थानीयीकरण',
@@ -2395,6 +2397,7 @@ return [
             'title'         => 'पेज',
 
             'datagrid' => [
+                'channel'             => 'चैनल',
                 'delete'              => 'हटाएं',
                 'edit'                => 'संपादित करें',
                 'id'                  => 'आईडी',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => 'छोड़े गए राजस्व',
                 'added-to-cart'                 => 'कार्ट में जोड़ा गया',
                 'added-to-cart-info'            => 'केवल :progress दर्शकों ने उत्पाद कार्ट में जोड़े',
+                'all-channels'                  => 'सभी चैनल',
                 'average-order-value-over-time' => 'समय के साथ औसत आदेश मूल्य',
                 'average-sales'                 => 'औसत आदेश मूल्य',
                 'count'                         => 'गणना',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'सभी चैनल',
                 'count'                       => 'गणना',
                 'customers'                   => 'ग्राहक',
                 'customers-over-time'         => 'समय के साथ ग्राहक',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'सभी चैनल',
                 'channel'                          => 'चैनल',
                 'end-date'                         => 'समापन तिथि',
                 'id'                               => 'आईडी',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'सभी चैनल',
             'day'           => 'दिन',
             'end-date'      => 'समापन तिथि',
             'export-csv'    => 'CSV पर्याप्त',

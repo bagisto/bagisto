@@ -45,7 +45,9 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view('admin::catalog.attributes.create');
+        $locales = core()->getAllLocales();
+
+        return view('admin::catalog.attributes.create', compact('locales'));
     }
 
     /**
@@ -86,7 +88,9 @@ class AttributeController extends Controller
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
-        return view('admin::catalog.attributes.edit', compact('attribute'));
+        $locales = core()->getAllLocales();
+
+        return view('admin::catalog.attributes.edit', compact('attribute', 'locales'));
     }
 
     /**
