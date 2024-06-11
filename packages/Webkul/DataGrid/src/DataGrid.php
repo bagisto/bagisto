@@ -498,8 +498,6 @@ abstract class DataGrid
             foreach ($this->columns as $column) {
                 if ($closure = $column->getClosure()) {
                     $record->{$column->getIndex()} = $closure($record);
-
-                    $record->is_closure = true;
                 }
             }
 

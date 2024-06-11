@@ -98,7 +98,6 @@
                                 </p>
 
                                 <p
-                                    v-if="record.is_closure"
                                     v-html="record.status"
                                 >
                                 </p>

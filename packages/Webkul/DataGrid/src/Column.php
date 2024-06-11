@@ -53,6 +53,11 @@ class Column
     protected bool $sortable = false;
 
     /**
+     * Column's visibility.
+     */
+    protected bool $visibility = true;
+
+    /**
      * Column's closure.
      */
     protected mixed $closure = null;
@@ -92,6 +97,8 @@ class Column
         $this->setAllowMultipleValues($column['allow_multiple_values'] ?? $this->allowMultipleValues);
 
         $this->setSortable($column['sortable'] ?? $this->sortable);
+
+        $this->setVisibility($column['visibility'] ?? $this->visibility);
 
         $this->setClosure($column['closure'] ?? $this->closure);
 
@@ -247,6 +254,22 @@ class Column
     }
 
     /**
+     * Set visibility.
+     */
+    public function setVisibility(bool $visibility): void
+    {
+        $this->visibility = $visibility;
+    }
+
+    /**
+     * Get visibility.
+     */
+    public function getVisibility(): bool
+    {
+        return $this->visibility;
+    }
+
+    /**
      * Set closure.
      */
     public function setClosure(mixed $closure): void
@@ -294,6 +317,7 @@ class Column
             'filterable_options'    => $this->filterableOptions,
             'allow_multiple_values' => $this->allowMultipleValues,
             'sortable'              => $this->sortable,
+            'visibility'            => $this->visibility,
         ];
     }
 

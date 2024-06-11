@@ -52,7 +52,6 @@ class CMSPageDataGrid extends DataGrid
             'index'              => 'channel',
             'label'              => trans('admin::app.cms.index.datagrid.channel'),
             'type'               => 'string',
-            'class'              => 'hidden',
             'filterable'         => true,
             'filterable_type'    => 'dropdown',
             'filterable_options' => collect(core()->getAllChannels())
@@ -60,6 +59,7 @@ class CMSPageDataGrid extends DataGrid
                 ->values()
                 ->toArray(),
             'sortable'   => true,
+            'visibility' => false,
         ]);
 
         $this->addColumn([

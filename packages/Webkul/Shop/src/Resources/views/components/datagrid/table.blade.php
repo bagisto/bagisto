@@ -62,20 +62,22 @@
                             </p>
 
                             <!-- Columns -->
-                            <p
-                                v-for="column in available.columns"
-                                class="flex items-center gap-1.5"
-                                :class="{'cursor-pointer select-none': column.sortable}"
-                                @click="sort(column)"
-                            >
-                                @{{ column.label }}
+                            <template v-for="column in available.columns">
+                                <p
+                                    class="flex items-center gap-1.5"
+                                    :class="{'cursor-pointer select-none': column.sortable}"
+                                    @click="sort(column)"
+                                    v-if="column.visibility"
+                                >
+                                    @{{ column.label }}
 
-                                <i
-                                    class="align-text-bottom text-base text-gray-800"
-                                    :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
-                                    v-if="column.index == applied.sort.column"
-                                ></i>
-                            </p>
+                                    <i
+                                        class="align-text-bottom text-base text-gray-800"
+                                        :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
+                                        v-if="column.index == applied.sort.column"
+                                    ></i>
+                                </p>
+                            </template>
 
                             <!-- Actions -->
                             <p
@@ -126,21 +128,14 @@
                                 </p>
 
                                 <!-- Columns -->
-                                <p
-                                    v-else
-                                    v-for="column in available.columns"
-                                    :class="!available.actions.length ? 'last:text-center' : ''"
-                                    v-html="record[column.index]"
-                                    v-if="record.is_closure"
-                                >
-                                </p>
-
-                                <p
-                                    v-for="column in available.columns"
-                                    v-html="record[column.index]"
-                                    v-else
-                                >
-                                </p>
+                                <template v-for="column in available.columns">
+                                    <p
+                                        :class="!available.actions.length ? 'last:text-center' : ''"
+                                        v-html="record[column.index]"
+                                        v-if="column.visibility"
+                                    >
+                                    </p>
+                                </template>
 
                                 <!-- Actions -->
                                 <p v-if="available.actions.length">
