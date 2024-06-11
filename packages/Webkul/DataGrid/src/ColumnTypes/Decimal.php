@@ -13,13 +13,13 @@ class Decimal extends Column
     {
         return $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
             if (is_string($requestedValues)) {
-                $scopeQueryBuilder->orWhere($this->getColumnName(), $requestedValues);
+                $scopeQueryBuilder->orWhere($this->columnName, $requestedValues);
 
                 return;
             }
 
             foreach ($requestedValues as $value) {
-                $scopeQueryBuilder->orWhere($this->getColumnName(), $value);
+                $scopeQueryBuilder->orWhere($this->columnName, $value);
             }
         });
     }

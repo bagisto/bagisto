@@ -4,15 +4,36 @@ namespace Webkul\DataGrid\ColumnTypes;
 
 use Webkul\DataGrid\Column;
 use Webkul\DataGrid\Enums\DateRangeOptionEnum;
+use Webkul\DataGrid\Enums\FilterTypeEnum;
+use Webkul\DataGrid\Exceptions\InvalidColumnException;
 
 class Date extends Column
 {
     /**
-     * Get filterable options.
+     * Set filterable type.
      */
-    public function getFilterableOptions(): array
+    public function setFilterableType(?string $filterableType): void
     {
-        return DateRangeOptionEnum::options();
+        if (
+            $filterableType
+            && ($filterableType !== FilterTypeEnum::DATE_RANGE->value)
+        ) {
+            throw new InvalidColumnException('Date filters will only work with `date_range` type. Either remove the `filterable_type` or set it to `date_range`.');
+        }
+
+        parent::setFilterableType($filterableType);
+    }
+
+    /**
+     * Set filterable options.
+     */
+    public function setFilterableOptions(mixed $filterableOptions): void
+    {
+        if (empty($filterableOptions)) {
+            $filterableOptions = DateRangeOptionEnum::options();
+        }
+
+        parent::setFilterableOptions($filterableOptions);
     }
 
     /**
@@ -22,7 +43,7 @@ class Date extends Column
     {
         return $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedDates) {
             if (is_string($requestedDates)) {
-                $rangeOption = collect($this->getFilterableOptions())->firstWhere('name', $requestedDates);
+                $rangeOption = collect($this->filterableOptions)->firstWhere('name', $requestedDates);
 
                 $requestedDates = ! $rangeOption
                     ? [[$requestedDates, $requestedDates]]
@@ -30,7 +51,7 @@ class Date extends Column
             }
 
             foreach ($requestedDates as $value) {
-                $scopeQueryBuilder->whereBetween($this->getColumnName(), [
+                $scopeQueryBuilder->whereBetween($this->columnName, [
                     ($value[0] ?? '').' 00:00:01',
                     ($value[1] ?? '').' 23:59:59',
                 ]);

@@ -50,7 +50,7 @@ class Column
     /**
      * Column's sortability.
      */
-    protected bool $sortable = true;
+    protected bool $sortable = false;
 
     /**
      * Column's closure.
@@ -81,21 +81,21 @@ class Column
 
         $this->setType($column['type']);
 
-        $this->setSearchable($column['searchable'] ?? $this->getSearchable());
+        $this->setSearchable($column['searchable'] ?? $this->searchable);
 
-        $this->setFilterable($column['filterable'] ?? $this->getFilterable());
+        $this->setFilterable($column['filterable'] ?? $this->filterable);
 
-        $this->setFilterableType($column['filterable_type'] ?? $this->getFilterableType());
+        $this->setFilterableType($column['filterable_type'] ?? $this->filterableType);
 
-        $this->setFilterableOptions($column['filterable_options'] ?? $this->getFilterableOptions());
+        $this->setFilterableOptions($column['filterable_options'] ?? $this->filterableOptions);
 
-        $this->setAllowMultipleValues($column['allow_multiple_values'] ?? $this->getAllowMultipleValues());
+        $this->setAllowMultipleValues($column['allow_multiple_values'] ?? $this->allowMultipleValues);
 
-        $this->setSortable($column['sortable'] ?? $this->getSortable());
+        $this->setSortable($column['sortable'] ?? $this->sortable);
 
-        $this->setClosure($column['closure'] ?? $this->getClosure());
+        $this->setClosure($column['closure'] ?? $this->closure);
 
-        $this->setColumnName($this->getIndex());
+        $this->setColumnName($this->index);
     }
 
     /**
@@ -197,8 +197,12 @@ class Column
     /**
      * Set filterable options.
      */
-    public function setFilterableOptions(array $filterableOptions): void
+    public function setFilterableOptions(mixed $filterableOptions): void
     {
+        if ($filterableOptions instanceof \Closure) {
+            $filterableOptions = $filterableOptions();
+        }
+
         $this->filterableOptions = $filterableOptions;
     }
 
@@ -281,15 +285,15 @@ class Column
     public function toArray(): array
     {
         return [
-            'index'                 => $this->getIndex(),
-            'label'                 => $this->getLabel(),
-            'type'                  => $this->getType(),
-            'searchable'            => $this->getSearchable(),
-            'filterable'            => $this->getFilterable(),
-            'filterable_type'       => $this->getFilterableType(),
-            'filterable_options'    => $this->getFilterableOptions(),
-            'allow_multiple_values' => $this->getAllowMultipleValues(),
-            'sortable'              => $this->getSortable(),
+            'index'                 => $this->index,
+            'label'                 => $this->label,
+            'type'                  => $this->type,
+            'searchable'            => $this->searchable,
+            'filterable'            => $this->filterable,
+            'filterable_type'       => $this->filterableType,
+            'filterable_options'    => $this->filterableOptions,
+            'allow_multiple_values' => $this->allowMultipleValues,
+            'sortable'              => $this->sortable,
         ];
     }
 

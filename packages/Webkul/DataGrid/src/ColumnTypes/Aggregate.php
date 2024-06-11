@@ -15,26 +15,26 @@ class Aggregate extends Column
         if ($this->filterableType === FilterTypeEnum::DROPDOWN->value) {
             return $queryBuilder->having(function ($scopeQueryBuilder) use ($requestedValues) {
                 if (is_string($requestedValues)) {
-                    $scopeQueryBuilder->orHaving($this->getColumnName(), $requestedValues);
+                    $scopeQueryBuilder->orHaving($this->columnName, $requestedValues);
 
                     return;
                 }
 
                 foreach ($requestedValues as $value) {
-                    $scopeQueryBuilder->orHaving($this->getColumnName(), $value);
+                    $scopeQueryBuilder->orHaving($this->columnName, $value);
                 }
             });
         }
 
         return $queryBuilder->having(function ($scopeQueryBuilder) use ($requestedValues) {
             if (is_string($requestedValues)) {
-                $scopeQueryBuilder->orHaving($this->getColumnName(), 'LIKE', '%'.$requestedValues.'%');
+                $scopeQueryBuilder->orHaving($this->columnName, 'LIKE', '%'.$requestedValues.'%');
 
                 return;
             }
 
             foreach ($requestedValues as $value) {
-                $scopeQueryBuilder->orHaving($this->getColumnName(), 'LIKE', '%'.$value.'%');
+                $scopeQueryBuilder->orHaving($this->columnName, 'LIKE', '%'.$value.'%');
             }
         });
     }

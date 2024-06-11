@@ -9,28 +9,44 @@ use Webkul\DataGrid\Exceptions\InvalidColumnException;
 class Boolean extends Column
 {
     /**
-     * Get filterable type.
+     * Column's filterable type.
      */
-    public function getFilterableType(): ?string
+    protected ?string $filterableType = FilterTypeEnum::DROPDOWN->value;
+
+    /**
+     * Set filterable type.
+     */
+    public function setFilterableType(?string $filterableType): void
     {
-        return FilterTypeEnum::DROPDOWN->value;
+        if (
+            $filterableType
+            && ($filterableType !== FilterTypeEnum::DROPDOWN->value)
+        ) {
+            throw new InvalidColumnException('Boolean filters will only work with `dropdown` type. Either remove the `filterable_type` or set it to `dropdown`.');
+        }
+
+        parent::setFilterableType($filterableType);
     }
 
     /**
-     * Get filterable options.
+     * Set filterable options.
      */
-    public function getFilterableOptions(): array
+    public function setFilterableOptions(mixed $filterableOptions): void
     {
-        return [
-            [
-                'label' => trans('admin::app.components.datagrid.filters.boolean-options.true'),
-                'value' => 1,
-            ],
-            [
-                'label' => trans('admin::app.components.datagrid.filters.boolean-options.false'),
-                'value' => 0,
-            ],
-        ];
+        if (empty($filterableOptions)) {
+            $filterableOptions = [
+                [
+                    'label' => trans('admin::app.components.datagrid.filters.boolean-options.true'),
+                    'value' => 1,
+                ],
+                [
+                    'label' => trans('admin::app.components.datagrid.filters.boolean-options.false'),
+                    'value' => 0,
+                ],
+            ];
+        }
+
+        parent::setFilterableOptions($filterableOptions);
     }
 
     /**
@@ -38,20 +54,16 @@ class Boolean extends Column
      */
     public function processFilter($queryBuilder, $requestedValues): mixed
     {
-        if ($this->filterableType === FilterTypeEnum::DROPDOWN->value) {
-            return $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
-                if (is_string($requestedValues)) {
-                    $scopeQueryBuilder->orWhere($this->getColumnName(), $requestedValues);
+        return $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
+            if (is_string($requestedValues)) {
+                $scopeQueryBuilder->orWhere($this->columnName, $requestedValues);
 
-                    return;
-                }
+                return;
+            }
 
-                foreach ($requestedValues as $value) {
-                    $scopeQueryBuilder->orWhere($this->getColumnName(), $value);
-                }
-            });
-        }
-
-        throw new InvalidColumnException('Boolean filters will only work with dropdown type.');
+            foreach ($requestedValues as $value) {
+                $scopeQueryBuilder->orWhere($this->columnName, $value);
+            }
+        });
     }
 }
