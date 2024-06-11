@@ -8,7 +8,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class SampleProductsTableSeeder extends Seeder
+class ProductTableSeeder extends Seeder
 {
     /**
      * Base path for the images.
@@ -554,7 +554,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 1,
                     'attribute_id'         => 2,
-                    'unique_id'            => 'default|'.$locale.'|1|2',
+                    'unique_id'            => 'default|' . $locale . '|1|2',
                 ], [
                     'locale'               => $locale,
                     'channel'              => null,
@@ -567,7 +567,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 1,
                     'attribute_id'         => 3,
-                    'unique_id'            => $locale.'|1|3',
+                    'unique_id'            => $locale . '|1|3',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -606,7 +606,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 1,
                     'attribute_id'         => 9,
-                    'unique_id'            => 'default|'.$locale.'|1|9',
+                    'unique_id'            => 'default|' . $locale . '|1|9',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -619,7 +619,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 1,
                     'attribute_id'         => 10,
-                    'unique_id'            => 'default|'.$locale.'|1|10',
+                    'unique_id'            => 'default|' . $locale . '|1|10',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -632,7 +632,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 1,
                     'attribute_id'         => 11,
-                    'unique_id'            => 'default|'.$locale.'|1|11',
+                    'unique_id'            => 'default|' . $locale . '|1|11',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -645,7 +645,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 1,
                     'attribute_id'         => 16,
-                    'unique_id'            => 'default|'.$locale.'|1|16',
+                    'unique_id'            => 'default|' . $locale . '|1|16',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -658,7 +658,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 1,
                     'attribute_id'         => 17,
-                    'unique_id'            => 'default|'.$locale.'|1|17',
+                    'unique_id'            => 'default|' . $locale . '|1|17',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -671,7 +671,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 1,
                     'attribute_id'         => 18,
-                    'unique_id'            => 'default|'.$locale.'|1|18',
+                    'unique_id'            => 'default|' . $locale . '|1|18',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -710,7 +710,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 2,
                     'attribute_id'         => 2,
-                    'unique_id'            => 'default|'.$locale.'|2|2',
+                    'unique_id'            => 'default|' . $locale . '|2|2',
                 ], [
                     'locale'               => $locale,
                     'channel'              => null,
@@ -723,7 +723,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 2,
                     'attribute_id'         => 3,
-                    'unique_id'            => $locale.'|2|3',
+                    'unique_id'            => $locale . '|2|3',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -762,7 +762,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 2,
                     'attribute_id'         => 9,
-                    'unique_id'            => 'default|'.$locale.'|2|9',
+                    'unique_id'            => 'default|' . $locale . '|2|9',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -775,7 +775,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 2,
                     'attribute_id'         => 10,
-                    'unique_id'            => 'default|'.$locale.'|2|10',
+                    'unique_id'            => 'default|' . $locale . '|2|10',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -788,7 +788,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 2,
                     'attribute_id'         => 11,
-                    'unique_id'            => 'default|'.$locale.'|2|11',
+                    'unique_id'            => 'default|' . $locale . '|2|11',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -801,7 +801,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 2,
                     'attribute_id'         => 16,
-                    'unique_id'            => 'default|'.$locale.'|2|16',
+                    'unique_id'            => 'default|' . $locale . '|2|16',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -814,7 +814,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 2,
                     'attribute_id'         => 17,
-                    'unique_id'            => 'default|'.$locale.'|2|17',
+                    'unique_id'            => 'default|' . $locale . '|2|17',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -827,7 +827,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 2,
                     'attribute_id'         => 18,
-                    'unique_id'            => 'default|'.$locale.'|2|18',
+                    'unique_id'            => 'default|' . $locale . '|2|18',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -866,7 +866,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 3,
                     'attribute_id'         => 2,
-                    'unique_id'            => 'default|'.$locale.'|3|2',
+                    'unique_id'            => 'default|' . $locale . '|3|2',
                 ], [
                     'locale'               => $locale,
                     'channel'              => null,
@@ -879,7 +879,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 3,
                     'attribute_id'         => 3,
-                    'unique_id'            => $locale.'|3|3',
+                    'unique_id'            => $locale . '|3|3',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -918,7 +918,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 3,
                     'attribute_id'         => 9,
-                    'unique_id'            => 'default|'.$locale.'|3|9',
+                    'unique_id'            => 'default|' . $locale . '|3|9',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -931,7 +931,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 3,
                     'attribute_id'         => 10,
-                    'unique_id'            => 'default|'.$locale.'|3|10',
+                    'unique_id'            => 'default|' . $locale . '|3|10',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -944,7 +944,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 3,
                     'attribute_id'         => 11,
-                    'unique_id'            => 'default|'.$locale.'|3|11',
+                    'unique_id'            => 'default|' . $locale . '|3|11',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -996,7 +996,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 3,
                     'attribute_id'         => 16,
-                    'unique_id'            => 'default|'.$locale.'|3|16',
+                    'unique_id'            => 'default|' . $locale . '|3|16',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1009,7 +1009,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 3,
                     'attribute_id'         => 17,
-                    'unique_id'            => 'default|'.$locale.'|3|17',
+                    'unique_id'            => 'default|' . $locale . '|3|17',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1022,7 +1022,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 3,
                     'attribute_id'         => 18,
-                    'unique_id'            => 'default|'.$locale.'|3|18',
+                    'unique_id'            => 'default|' . $locale . '|3|18',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -1061,7 +1061,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 4,
                     'attribute_id'         => 2,
-                    'unique_id'            => 'default|'.$locale.'|4|2',
+                    'unique_id'            => 'default|' . $locale . '|4|2',
                 ], [
                     'locale'               => $locale,
                     'channel'              => null,
@@ -1074,7 +1074,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 4,
                     'attribute_id'         => 3,
-                    'unique_id'            => $locale.'|4|3',
+                    'unique_id'            => $locale . '|4|3',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -1113,7 +1113,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 4,
                     'attribute_id'         => 9,
-                    'unique_id'            => 'default|'.$locale.'|4|9',
+                    'unique_id'            => 'default|' . $locale . '|4|9',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1126,7 +1126,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 4,
                     'attribute_id'         => 10,
-                    'unique_id'            => 'default|'.$locale.'|4|10',
+                    'unique_id'            => 'default|' . $locale . '|4|10',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1139,7 +1139,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 4,
                     'attribute_id'         => 11,
-                    'unique_id'            => 'default|'.$locale.'|4|11',
+                    'unique_id'            => 'default|' . $locale . '|4|11',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1152,7 +1152,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 4,
                     'attribute_id'         => 16,
-                    'unique_id'            => 'default|'.$locale.'|4|16',
+                    'unique_id'            => 'default|' . $locale . '|4|16',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1165,7 +1165,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 4,
                     'attribute_id'         => 17,
-                    'unique_id'            => 'default|'.$locale.'|4|17',
+                    'unique_id'            => 'default|' . $locale . '|4|17',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1178,7 +1178,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 4,
                     'attribute_id'         => 18,
-                    'unique_id'            => 'default|'.$locale.'|4|18',
+                    'unique_id'            => 'default|' . $locale . '|4|18',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -1217,7 +1217,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 5,
                     'attribute_id'         => 2,
-                    'unique_id'            => 'default|'.$locale.'|5|2',
+                    'unique_id'            => 'default|' . $locale . '|5|2',
                 ], [
                     'locale'               => $locale,
                     'channel'              => null,
@@ -1230,7 +1230,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 5,
                     'attribute_id'         => 3,
-                    'unique_id'            => $locale.'|5|3',
+                    'unique_id'            => $locale . '|5|3',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -1269,7 +1269,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 5,
                     'attribute_id'         => 9,
-                    'unique_id'            => 'default|'.$locale.'|5|9',
+                    'unique_id'            => 'default|' . $locale . '|5|9',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1282,7 +1282,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 5,
                     'attribute_id'         => 10,
-                    'unique_id'            => 'default|'.$locale.'|5|10',
+                    'unique_id'            => 'default|' . $locale . '|5|10',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1295,7 +1295,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 5,
                     'attribute_id'         => 16,
-                    'unique_id'            => 'default|'.$locale.'|5|16',
+                    'unique_id'            => 'default|' . $locale . '|5|16',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1308,7 +1308,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 5,
                     'attribute_id'         => 17,
-                    'unique_id'            => 'default|'.$locale.'|5|17',
+                    'unique_id'            => 'default|' . $locale . '|5|17',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1321,7 +1321,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 5,
                     'attribute_id'         => 18,
-                    'unique_id'            => 'default|'.$locale.'|5|18',
+                    'unique_id'            => 'default|' . $locale . '|5|18',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -1347,7 +1347,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 6,
                     'attribute_id'         => 2,
-                    'unique_id'            => 'default|'.$locale.'|6|2',
+                    'unique_id'            => 'default|' . $locale . '|6|2',
                 ], [
                     'locale'               => $locale,
                     'channel'              => null,
@@ -1360,7 +1360,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 6,
                     'attribute_id'         => 3,
-                    'unique_id'            => $locale.'|6|3',
+                    'unique_id'            => $locale . '|6|3',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -1399,7 +1399,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 6,
                     'attribute_id'         => 9,
-                    'unique_id'            => 'default|'.$locale.'|6|9',
+                    'unique_id'            => 'default|' . $locale . '|6|9',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1412,7 +1412,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 6,
                     'attribute_id'         => 10,
-                    'unique_id'            => 'default|'.$locale.'|6|10',
+                    'unique_id'            => 'default|' . $locale . '|6|10',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1425,7 +1425,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 6,
                     'attribute_id'         => 16,
-                    'unique_id'            => 'default|'.$locale.'|6|16',
+                    'unique_id'            => 'default|' . $locale . '|6|16',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1438,7 +1438,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 6,
                     'attribute_id'         => 17,
-                    'unique_id'            => 'default|'.$locale.'|6|17',
+                    'unique_id'            => 'default|' . $locale . '|6|17',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1451,7 +1451,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 6,
                     'attribute_id'         => 18,
-                    'unique_id'            => 'default|'.$locale.'|6|18',
+                    'unique_id'            => 'default|' . $locale . '|6|18',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -1477,7 +1477,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 7,
                     'attribute_id'         => 2,
-                    'unique_id'            => 'default|'.$locale.'|7|2',
+                    'unique_id'            => 'default|' . $locale . '|7|2',
                 ], [
                     'locale'               => $locale,
                     'channel'              => null,
@@ -1490,7 +1490,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 7,
                     'attribute_id'         => 3,
-                    'unique_id'            => $locale.'|7|3',
+                    'unique_id'            => $locale . '|7|3',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -1529,7 +1529,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 7,
                     'attribute_id'         => 9,
-                    'unique_id'            => 'default|'.$locale.'|7|9',
+                    'unique_id'            => 'default|' . $locale . '|7|9',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1542,7 +1542,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 7,
                     'attribute_id'         => 10,
-                    'unique_id'            => 'default|'.$locale.'|7|10',
+                    'unique_id'            => 'default|' . $locale . '|7|10',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1555,7 +1555,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 7,
                     'attribute_id'         => 16,
-                    'unique_id'            => 'default|'.$locale.'|7|16',
+                    'unique_id'            => 'default|' . $locale . '|7|16',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1568,7 +1568,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 7,
                     'attribute_id'         => 17,
-                    'unique_id'            => 'default|'.$locale.'|7|17',
+                    'unique_id'            => 'default|' . $locale . '|7|17',
                 ], [
                     'locale'               => $locale,
                     'channel'              => 'default',
@@ -1581,7 +1581,7 @@ class SampleProductsTableSeeder extends Seeder
                     'json_value'           => null,
                     'product_id'           => 7,
                     'attribute_id'         => 18,
-                    'unique_id'            => 'default|'.$locale.'|7|18',
+                    'unique_id'            => 'default|' . $locale . '|7|18',
                 ], [
                     'locale'               => null,
                     'channel'              => null,
@@ -3273,16 +3273,16 @@ class SampleProductsTableSeeder extends Seeder
      */
     public function productImages($targetPath, $file, $default = null)
     {
-        if (file_exists(base_path(self::BASE_PATH.$file))) {
-            return Storage::putFile($targetPath, new File(base_path(self::BASE_PATH.$file)));
+        if (file_exists(base_path(self::BASE_PATH . $file))) {
+            return Storage::putFile($targetPath, new File(base_path(self::BASE_PATH . $file)));
         }
 
-        if (! $default) {
+        if (!$default) {
             return;
         }
 
-        if (file_exists(base_path(self::BASE_PATH.$default))) {
-            return Storage::putFile($targetPath, new File(base_path(self::BASE_PATH.$default)));
+        if (file_exists(base_path(self::BASE_PATH . $default))) {
+            return Storage::putFile($targetPath, new File(base_path(self::BASE_PATH . $default)));
         }
     }
 }
