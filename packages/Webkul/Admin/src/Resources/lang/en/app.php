@@ -2241,11 +2241,10 @@ return [
                         'delete'              => 'Delete',
                         'channel'             => 'Channel',
                         'actions'             => 'Actions',
-                        'Channel'             => 'Channel',
+                        'channel'             => 'Channel',
                     ],
 
                     'create' => [
-                        'Channel'        => 'Channel',
                         'channel'        => 'Channel',
                         'delete-warning' => 'Are you sure, you want to perform this action?',
                         'locale'         => 'Locale',
