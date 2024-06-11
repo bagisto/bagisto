@@ -91,22 +91,16 @@ class ProductDataGrid extends DataGrid
 
         if ($channels->count() > 1) {
             $this->addColumn([
-                'index'      => 'channel',
-                'label'      => trans('admin::app.catalog.products.index.datagrid.channel'),
-                'type'       => 'dropdown',
-                'class'      => 'hidden',
-                'options'    => [
-                    'type' => 'basic',
-
-                    'params' => [
-                        'options' => collect($channels)
-                            ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->code])
-                            ->values()
-                            ->toArray(),
-                    ],
-                ],
-                'searchable' => false,
-                'filterable' => true,
+                'index'              => 'channel',
+                'label'              => trans('admin::app.catalog.products.index.datagrid.channel'),
+                'type'               => 'string',
+                'class'              => 'hidden',
+                'filterable'         => true,
+                'filterable_type'    => 'dropdown',
+                'filterable_options' => collect($channels)
+                    ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->code])
+                    ->values()
+                    ->toArray(),
                 'sortable'   => true,
             ]);
         }
