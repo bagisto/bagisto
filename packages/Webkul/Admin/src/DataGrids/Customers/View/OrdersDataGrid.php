@@ -62,47 +62,42 @@ class OrdersDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('admin::app.customers.customers.view.datagrid.orders.status'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => [
-                        [
-                            'label' => trans('admin::app.customers.customers.view.datagrid.orders.processing'),
-                            'value' => Order::STATUS_PROCESSING,
-                        ],
-                        [
-                            'label' => trans('admin::app.customers.customers.view.datagrid.orders.completed'),
-                            'value' => Order::STATUS_COMPLETED,
-                        ],
-                        [
-                            'label' => trans('admin::app.customers.customers.view.datagrid.orders.canceled'),
-                            'value' => Order::STATUS_CANCELED,
-                        ],
-                        [
-                            'label' => trans('admin::app.customers.customers.view.datagrid.orders.closed'),
-                            'value' => Order::STATUS_CLOSED,
-                        ],
-                        [
-                            'label' => trans('admin::app.customers.customers.view.datagrid.orders.pending'),
-                            'value' => Order::STATUS_PENDING,
-                        ],
-                        [
-                            'label' => trans('admin::app.customers.customers.view.datagrid.orders.pending-payment'),
-                            'value' => Order::STATUS_PENDING_PAYMENT,
-                        ],
-                        [
-                            'label' => trans('admin::app.customers.customers.view.datagrid.orders.fraud'),
-                            'value' => Order::STATUS_FRAUD,
-                        ],
-                    ],
+            'index'              => 'status',
+            'label'              => trans('admin::app.customers.customers.view.datagrid.orders.status'),
+            'type'               => 'string',
+            'searchable'         => true,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label' => trans('admin::app.customers.customers.view.datagrid.orders.processing'),
+                    'value' => Order::STATUS_PROCESSING,
+                ],
+                [
+                    'label' => trans('admin::app.customers.customers.view.datagrid.orders.completed'),
+                    'value' => Order::STATUS_COMPLETED,
+                ],
+                [
+                    'label' => trans('admin::app.customers.customers.view.datagrid.orders.canceled'),
+                    'value' => Order::STATUS_CANCELED,
+                ],
+                [
+                    'label' => trans('admin::app.customers.customers.view.datagrid.orders.closed'),
+                    'value' => Order::STATUS_CLOSED,
+                ],
+                [
+                    'label' => trans('admin::app.customers.customers.view.datagrid.orders.pending'),
+                    'value' => Order::STATUS_PENDING,
+                ],
+                [
+                    'label' => trans('admin::app.customers.customers.view.datagrid.orders.pending-payment'),
+                    'value' => Order::STATUS_PENDING_PAYMENT,
+                ],
+                [
+                    'label' => trans('admin::app.customers.customers.view.datagrid.orders.fraud'),
+                    'value' => Order::STATUS_FRAUD,
                 ],
             ],
-            'searchable' => true,
-            'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($row) {
                 switch ($row->status) {
@@ -133,8 +128,7 @@ class OrdersDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'base_grand_total',
             'label'      => trans('admin::app.customers.customers.view.datagrid.orders.grand-total'),
-            'type'       => 'price',
-            'searchable' => false,
+            'type'       => 'string',
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -143,9 +137,6 @@ class OrdersDataGrid extends DataGrid
             'index'      => 'method',
             'label'      => trans('admin::app.customers.customers.view.datagrid.orders.pay-via'),
             'type'       => 'string',
-            'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
             'closure'    => function ($row) {
                 return core()->getConfigData('sales.payment_methods.'.$row->method.'.title');
             },
@@ -155,9 +146,7 @@ class OrdersDataGrid extends DataGrid
             'index'      => 'channel_name',
             'label'      => trans('admin::app.customers.customers.view.datagrid.orders.channel-name'),
             'type'       => 'string',
-            'searchable' => false,
             'filterable' => true,
-            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -165,7 +154,6 @@ class OrdersDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.customers.view.datagrid.orders.customer-name'),
             'type'       => 'string',
             'searchable' => true,
-            'filterable' => false,
             'sortable'   => true,
         ]);
 
@@ -175,19 +163,8 @@ class OrdersDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'customer_email',
             'label'      => trans('admin::app.customers.customers.view.datagrid.orders.email'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type'   => 'searchable',
-                'params' => [
-                    'repository' => \Webkul\Customer\Repositories\CustomerRepository::class,
-                    'column'     => [
-                        'label' => 'email',
-                        'value' => 'email',
-                    ],
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => false,
+            'type'       => 'string',
+            'filterable' => true,
             'sortable'   => true,
         ]);
 
@@ -195,18 +172,15 @@ class OrdersDataGrid extends DataGrid
             'index'      => 'location',
             'label'      => trans('admin::app.customers.customers.view.datagrid.orders.location'),
             'type'       => 'string',
-            'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.customers.customers.view.datagrid.orders.date'),
-            'type'       => 'date_range',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'           => 'created_at',
+            'label'           => trans('admin::app.customers.customers.view.datagrid.orders.date'),
+            'type'            => 'date',
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
     }
 

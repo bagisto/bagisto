@@ -44,7 +44,6 @@ class CMSPageDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.cms.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

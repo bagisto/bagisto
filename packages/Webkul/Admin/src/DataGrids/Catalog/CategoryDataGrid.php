@@ -50,7 +50,6 @@ class CategoryDataGrid extends DataGrid
             'index'      => 'category_id',
             'label'      => trans('admin::app.catalog.categories.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -68,7 +67,6 @@ class CategoryDataGrid extends DataGrid
             'index'      => 'position',
             'label'      => trans('admin::app.catalog.categories.index.datagrid.position'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -77,7 +75,6 @@ class CategoryDataGrid extends DataGrid
             'index'      => 'status',
             'label'      => trans('admin::app.catalog.categories.index.datagrid.status'),
             'type'       => 'boolean',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
@@ -93,8 +90,6 @@ class CategoryDataGrid extends DataGrid
             'index'      => 'count',
             'label'      => trans('admin::app.catalog.categories.index.datagrid.no-of-products'),
             'type'       => 'integer',
-            'searchable' => false,
-            'filterable' => false,
             'sortable'   => true,
         ]);
     }

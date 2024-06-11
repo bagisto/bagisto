@@ -124,41 +124,29 @@ class ProductDataGrid extends DataGrid
             'index'      => 'sku',
             'label'      => trans('admin::app.catalog.products.index.datagrid.sku'),
             'type'       => 'string',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'attribute_family',
-            'label'      => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => $this->attributeFamilyRepository->all(['name as label', 'id as value'])->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => false,
+            'index'              => 'attribute_family',
+            'label'              => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => $this->attributeFamilyRepository->all(['name as label', 'id as value'])->toArray(),
         ]);
 
         $this->addColumn([
             'index'      => 'base_image',
             'label'      => trans('admin::app.catalog.products.index.datagrid.image'),
             'type'       => 'string',
-            'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
         ]);
 
         $this->addColumn([
             'index'      => 'price',
             'label'      => trans('admin::app.catalog.products.index.datagrid.price'),
-            'type'       => 'price',
-            'searchable' => false,
+            'type'       => 'string',
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -167,8 +155,6 @@ class ProductDataGrid extends DataGrid
             'index'      => 'quantity',
             'label'      => trans('admin::app.catalog.products.index.datagrid.qty'),
             'type'       => 'integer',
-            'searchable' => false,
-            'filterable' => false,
             'sortable'   => true,
         ]);
 
@@ -176,7 +162,6 @@ class ProductDataGrid extends DataGrid
             'index'      => 'product_id',
             'label'      => trans('admin::app.catalog.products.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -185,7 +170,6 @@ class ProductDataGrid extends DataGrid
             'index'      => 'status',
             'label'      => trans('admin::app.catalog.products.index.datagrid.status'),
             'type'       => 'boolean',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -194,27 +178,18 @@ class ProductDataGrid extends DataGrid
             'index'      => 'category_name',
             'label'      => trans('admin::app.catalog.products.index.datagrid.category'),
             'type'       => 'string',
-            'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
         ]);
 
         $this->addColumn([
-            'index'      => 'type',
-            'label'      => trans('admin::app.catalog.products.index.datagrid.type'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => collect(config('product_types'))
-                        ->map(fn ($type) => ['label' => trans($type['name']), 'value' => $type['key']])
-                        ->values()
-                        ->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
+            'index'              => 'type',
+            'label'              => trans('admin::app.catalog.products.index.datagrid.type'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => collect(config('product_types'))
+                ->map(fn ($type) => ['label' => trans($type['name']), 'value' => $type['key']])
+                ->values()
+                ->toArray(),
             'sortable'   => true,
         ]);
     }

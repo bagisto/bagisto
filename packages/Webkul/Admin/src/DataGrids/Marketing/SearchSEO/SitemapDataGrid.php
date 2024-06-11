@@ -35,7 +35,6 @@ class SitemapDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'width'      => '40px',
             'filterable' => true,
             'sortable'   => true,
@@ -54,7 +53,6 @@ class SitemapDataGrid extends DataGrid
             'index'      => 'path',
             'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.path'),
             'type'       => 'string',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -63,9 +61,6 @@ class SitemapDataGrid extends DataGrid
             'index'      => 'url',
             'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.link-for-google'),
             'type'       => 'string',
-            'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
             'closure'    => function ($row) {
                 return Storage::url($row->path.'/'.$row->file_name);
             },
