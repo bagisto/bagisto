@@ -247,7 +247,7 @@
 
             computed: {
                 gridsCount() {
-                    let count = this.available.columns.length;
+                    let count = this.available.columns.filter((column) => column.visibility).length;
 
                     if (this.available.actions.length) {
                         ++count;

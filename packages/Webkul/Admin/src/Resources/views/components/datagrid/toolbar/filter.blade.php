@@ -131,9 +131,9 @@
                                     </p>
 
                                     <div
-                                        v-if="hasAnyAppliedColumn()"
+                                        v-if="hasAnyAppliedColumn() || isFilterDirty"
                                         class="cursor-pointer text-xs font-medium leading-6 text-blue-600 transition-all hover:underline ltr:ml-20 rtl:mr-20"
-                                        @click="removeAllAppliedFilters() || isFilterDirty"
+                                        @click="removeAllAppliedFilters()"
                                     >
                                         @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
                                     </div>

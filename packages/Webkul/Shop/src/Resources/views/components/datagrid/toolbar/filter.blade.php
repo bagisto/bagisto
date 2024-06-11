@@ -49,11 +49,13 @@
                         </div>
                     </x-slot>
 
-                    <x-slot:header class="border-b border-zinc-200">
-                        @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
+                    <x-slot:header class="border-b border-zinc-200 !px-4">
+                        <p class="text-lg font-semibold">
+                            @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
+                        </p>
                     </x-slot>
 
-                    <x-slot:content class="max-sm:pt-2.5">
+                    <x-slot:content class="!p-4 max-sm:pt-2.5">
                         <div v-for="column in available.columns">
                             <template v-if="column.filterable">
                                 <!-- Boolean -->
@@ -523,7 +525,7 @@
                                         <div class="mb-2 mt-1.5 grid">
                                             <input
                                                 type="text"
-                                                class="mb-3 w-full rounded-lg border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:mb-0"
+                                                class="w-full rounded-lg border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:mb-0"
                                                 :name="column.index"
                                                 :placeholder="column.label"
                                                 @keyup.enter="addFilter($event, column)"
@@ -572,7 +574,7 @@
                             <!-- Apply Filter Button -->
                             <button
                                 type="button"
-                                class="secondary-button w-full max-w-full"
+                                class="primary-button w-full max-w-full p-2.5 text-sm font-medium"
                                 @click="applyFilters"
                                 :disabled="! isFilterDirty"
                             >
