@@ -8,7 +8,6 @@
     @sort="sort"
     @actionSuccess="get"
     @changePage="changePage"
-    @changePerPageOption="changePerPageOption"
 >
     {{ $slot }}
 </v-datagrid-table>
@@ -172,12 +171,11 @@
                     :available="available"
                     :applied="applied"
                     :change-page="changePage"
-                    :change-per-page-option="changePerPageOption"
                 >
                     <template v-if="isLoading">
                         <x-shop::shimmer.datagrid.table.footer />
                     </template>
-        
+
                     <template v-else>
                         <!-- Information Panel -->
                         <div v-if="$parent.available.records.length" class="flex items-center justify-between p-6 max-md:p-2">
@@ -186,7 +184,7 @@
                                 @{{ "@lang('shop::app.components.datagrid.table.to')".replace(':lastItem', $parent.available.meta.to) }}
                                 @{{ "@lang('shop::app.components.datagrid.table.of')".replace(':total', $parent.available.meta.total) }}
                             </p>
-        
+
                             <!-- Pagination -->
                             <div class="flex items-center gap-1">
                                 <div
@@ -195,7 +193,7 @@
                                 >
                                     <span class="icon-sort-left text-2xl"></span>
                                 </div>
-        
+
                                 <div
                                     class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                                     @click="changePage('next')"
@@ -203,7 +201,7 @@
                                     <span class="icon-sort-right text-2xl"></span>
                                 </div>
                             </div>
-        
+
                             <nav aria-label="@lang('shop::app.components.datagrid.table.page-navigation')">
                                 <ul class="inline-flex items-center -space-x-px rounded-lg border border-zinc-200 max-md:px-0">
                                     <li  @click="changePage('previous')">
@@ -215,7 +213,7 @@
                                             <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                                         </a>
                                     </li>
-        
+
                                     <li>
                                         <input
                                             type="text"
@@ -225,7 +223,7 @@
                                             aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                         >
                                     </li>
-        
+
                                     <li @click="changePage('next')">
                                         <a
                                             href="javascript:void(0);"
@@ -250,6 +248,8 @@
 
             props: ['isLoading', 'available', 'applied'],
 
+            emits: ['selectAll', 'sort', 'actionSuccess', 'changePage'],
+
             computed: {
                 gridsCount() {
                     let count = this.available.columns.length;
@@ -267,7 +267,7 @@
             },
 
             methods: {
-                                /**
+                /**
                  * Change Page.
                  *
                  * The reason for choosing the numeric approach over the URL approach is to prevent any conflicts with our existing
