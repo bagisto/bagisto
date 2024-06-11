@@ -281,11 +281,7 @@
                     
                     const newTranslateY = this.translateY + deltaY;
 
-                    const parentContainerHeight = this.$refs.parentContainer.clientHeight;
-                    
-                    const mediaContainerHeight = this.$refs.mediaContainer.clientHeight;
-
-                    const remainingHeight = parentContainerHeight - mediaContainerHeight;
+                    const remainingHeight = this.$refs.parentContainer.clientHeight - this.$refs.mediaContainer.clientHeight;
 
                     const maxTranslateY = Math.min(0, window.innerHeight - (event.srcElement.height + remainingHeight));
 
@@ -305,11 +301,7 @@
 
                     let newTranslateY = this.translateY - event.deltaY / Math.abs(event.deltaY) * 100;
                     
-                    const parentContainerHeight = this.$refs.parentContainer.clientHeight;
-                    
-                    const mediaContainerHeight = this.$refs.mediaContainer.clientHeight;
-
-                    const remainingHeight = parentContainerHeight - mediaContainerHeight;
+                    const remainingHeight = this.$refs.parentContainer.clientHeight - this.$refs.mediaContainer.clientHeight;
 
                     const maxTranslateY = Math.min(0, window.innerHeight - (event.srcElement.height + remainingHeight));
 
