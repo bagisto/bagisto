@@ -157,7 +157,7 @@
                                                     </button>
                                                 </x-slot>
 
-                                                <x-slot:menu class="max-sm:!py-0">
+                                                <x-slot:menu class="max-md:!py-0">
                                                     <x-shop::dropdown.menu.item
                                                         v-for="option in column.options.params.options"
                                                         v-text="option.label"
