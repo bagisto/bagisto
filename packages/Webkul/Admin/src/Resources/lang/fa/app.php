@@ -2348,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'عملیات',
+                        'category'            => 'دسته بندی',
+                        'cms-page'            => 'صفحه CMS',
                         'delete'              => 'حذف',
                         'edit'                => 'ویرایش',
                         'for'                 => 'برای',
@@ -2355,6 +2357,7 @@ return [
                         'locale'              => 'منطقه',
                         'mass-delete-success' => 'بازنویسی URL های انتخاب شده با موفقیت حذف شدند',
                         'permanent-redirect'  => 'دائمی (301)',
+                        'product'             => 'محصول',
                         'redirect-type'       => 'نوع تغییر مسیر',
                         'request-path'        => 'مسیر درخواست',
                         'target-path'         => 'مسیر هدف',

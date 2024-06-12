@@ -143,10 +143,17 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'channel_name',
-            'label'      => trans('admin::app.customers.customers.view.datagrid.orders.channel-name'),
-            'type'       => 'string',
-            'filterable' => true,
+            'index'              => 'channel_name',
+            'label'              => trans('admin::app.customers.customers.view.datagrid.orders.channel-name'),
+            'type'               => 'string',
+            'searchable'         => false,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => core()->getAllChannels()
+                ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                ->values()
+                ->toArray(),
+            'sortable'           => true,
         ]);
 
         $this->addColumn([

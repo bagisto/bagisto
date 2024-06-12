@@ -2348,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Действия',
+                        'category'            => 'Категория',
+                        'cms-page'            => 'Страница CMS',
                         'delete'              => 'Удалить',
                         'edit'                => 'Редактировать',
                         'for'                 => 'Для',
@@ -2355,6 +2357,7 @@ return [
                         'locale'              => 'Локаль',
                         'mass-delete-success' => 'Выбранные перенаправления URL были успешно удалены.',
                         'permanent-redirect'  => 'Постоянное (301)',
+                        'product'             => 'Продукт',
                         'redirect-type'       => 'Тип перенаправления',
                         'request-path'        => 'Путь запроса',
                         'target-path'         => 'Целевой путь',

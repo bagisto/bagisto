@@ -45,11 +45,27 @@ class URLRewriteDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'entity_type',
-            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.for'),
-            'type'       => 'string',
-            'filterable' => true,
-            'sortable'   => true,
+            'index'              => 'entity_type',
+            'label'              => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.for'),
+            'type'               => 'string',
+            'searchable'         => false,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.product'),
+                    'value' => 'product',
+                ],
+                [
+                    'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.category'),
+                    'value' => 'category',
+                ],
+                [
+                    'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.cms-page'),
+                    'value' => 'cms_page',
+                ],
+            ],
+            'sortable'         => true,
         ]);
 
         $this->addColumn([

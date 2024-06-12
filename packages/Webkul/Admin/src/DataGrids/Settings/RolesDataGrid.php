@@ -54,19 +54,13 @@ class RolesDataGrid extends DataGrid
             'filterable'         => true,
             'filterable_type'    => 'dropdown',
             'filterable_options' => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => [
-                        [
-                            'label' => trans('admin::app.settings.roles.index.datagrid.custom'),
-                            'value' => 'custom',
-                        ],
-                        [
-                            'label' => trans('admin::app.settings.roles.index.datagrid.create.all'),
-                            'value' => 'all',
-                        ],
-                    ],
+                [
+                    'label' => trans('admin::app.settings.roles.index.datagrid.custom'),
+                    'value' => 'custom',
+                ],
+                [
+                    'label' => trans('admin::app.settings.roles.index.datagrid.all'),
+                    'value' => 'all',
                 ],
             ],
             'sortable'   => true,
