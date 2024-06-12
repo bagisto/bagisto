@@ -234,6 +234,11 @@ class ProductRepository extends Repository
             'price_indices',
             'inventory_indices',
             'reviews',
+            'variants',
+            'variants.attribute_family',
+            'variants.attribute_values',
+            'variants.price_indices',
+            'variants.inventory_indices',
         ])->scopeQuery(function ($query) use ($params) {
             $prefix = DB::getTablePrefix();
 
