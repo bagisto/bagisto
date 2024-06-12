@@ -335,26 +335,29 @@ class ProductRepository extends Repository
              * Filter query by attributes.
              */
             if ($attributes->isNotEmpty()) {
-                $qb->leftJoin('product_attribute_values', 'products.id', '=', 'product_attribute_values.product_id');
-
-                $qb->where(function ($filterQuery) use ($params, $attributes) {
-                    foreach ($attributes as $attribute) {
-                        $filterQuery->orWhere(function ($attributeQuery) use ($params, $attribute) {
-                            $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
-
-                            $values = explode(',', $params[$attribute->code]);
-
-                            if ($attribute->type == 'price') {
-                                $attributeQuery->whereBetween('product_attribute_values.'.$attribute->column_name, [
-                                    core()->convertToBasePrice(current($values)),
-                                    core()->convertToBasePrice(end($values)),
-                                ]);
-                            } else {
-                                $attributeQuery->whereIn('product_attribute_values.'.$attribute->column_name, $values);
+                $qb->leftJoin('product_attribute_values', 'products.id', '=', 'product_attribute_values.product_id')
+                    ->orWhere(function ($filterQuery) use ($params, $attributes) {
+                        $filterQuery->where(function ($attributeQuery) use ($params, $attributes) {
+                            foreach ($attributes as $attribute) {
+                                $attributeQuery->orWhere(function ($subQuery) use ($params, $attribute) {
+                                    $subQuery->where('product_attribute_values.attribute_id', $attribute->id)
+                                        ->whereIn('product_attribute_values.'.$attribute->column_name, explode(',', $params[$attribute->code]));
+                                });
                             }
                         });
-                    }
-                });
+
+                        $filterQuery->orWhere(function ($variantQuery) use ($params, $attributes) {
+                            $variantQuery->leftJoin('product_attribute_values as variant_attribute_values', 'variants.id', '=', 'variant_attribute_values.product_id')
+                                ->where(function ($attributeQuery) use ($params, $attributes) {
+                                    foreach ($attributes as $attribute) {
+                                        $attributeQuery->orWhere(function ($subQuery) use ($params, $attribute) {
+                                            $subQuery->where('variant_attribute_values.attribute_id', $attribute->id)
+                                                ->whereIn('variant_attribute_values.'.$attribute->column_name, explode(',', $params[$attribute->code]));
+                                        });
+                                    }
+                                });
+                        });
+                    });
 
                 $qb->groupBy('products.id');
             }
