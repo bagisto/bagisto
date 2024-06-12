@@ -56,7 +56,7 @@ class ProductTableSeeder extends Seeder
         $localeProductsData = $this->prepareProductsData($locales);
 
         $products = Arr::map($localeProductsData[$defaultLocale], function ($row) {
-            return Arr::only($row, ['id', 'parent_id', 'sku', 'type', 'attribute_family_id', 'created_at', 'updated_at']);
+            return Arr::only($row, ['parent_id', 'sku', 'type', 'attribute_family_id', 'created_at', 'updated_at']);
         });
 
         DB::table('categories')->insert([
@@ -95,24 +95,24 @@ class ProductTableSeeder extends Seeder
             DB::table('category_translations')->insert([
                 [
                     'category_id'      => 2,
-                    'name'             => 'Men',
-                    'slug'             => 'men',
+                    'name'             => trans('installer::app.seeders.sample-products.category-translation.2.name', [], $locale),
+                    'slug'             => trans('installer::app.seeders.sample-products.category-translation.2.slug', [], $locale),
                     'url_path'         => '',
-                    'description'      => trans('installer::app.seeders.sample-products.category-translation.20.description'),
-                    'meta_title'       => trans('installer::app.seeders.sample-products.category-translation.20.meta-title'),
-                    'meta_description' => trans('installer::app.seeders.sample-products.category-translation.20.meta-description'),
-                    'meta_keywords'    => trans('installer::app.seeders.sample-products.category-translation.20.meta-keywords'),
+                    'description'      => trans('installer::app.seeders.sample-products.category-translation.2.description', [], $locale),
+                    'meta_title'       => trans('installer::app.seeders.sample-products.category-translation.2.meta-title', [], $locale),
+                    'meta_description' => trans('installer::app.seeders.sample-products.category-translation.2.meta-description', [], $locale),
+                    'meta_keywords'    => trans('installer::app.seeders.sample-products.category-translation.2.meta-keywords', [], $locale),
                     'locale_id'        => null,
                     'locale'           => $locale,
                 ], [
                     'category_id'      => 3,
-                    'name'             => 'Winter Wear',
-                    'slug'             => 'winter-wear',
+                    'name'             => trans('installer::app.seeders.sample-products.category-translation.3.name', [], $locale),
+                    'slug'             => trans('installer::app.seeders.sample-products.category-translation.3.slug', [], $locale),
                     'url_path'         => '',
-                    'description'      => trans('installer::app.seeders.sample-products.category-translation.21.description'),
-                    'meta_title'       => trans('installer::app.seeders.sample-products.category-translation.21.meta-title'),
-                    'meta_description' => trans('installer::app.seeders.sample-products.category-translation.21.meta-description'),
-                    'meta_keywords'    => trans('installer::app.seeders.sample-products.category-translation.21.meta-keywords'),
+                    'description'      => trans('installer::app.seeders.sample-products.category-translation.3.description', [], $locale),
+                    'meta_title'       => trans('installer::app.seeders.sample-products.category-translation.3.meta-title', [], $locale),
+                    'meta_description' => trans('installer::app.seeders.sample-products.category-translation.3.meta-description', [], $locale),
+                    'meta_keywords'    => trans('installer::app.seeders.sample-products.category-translation.3.meta-keywords', [], $locale),
                     'locale_id'        => null,
                     'locale'           => $locale,
                 ],
@@ -156,15 +156,29 @@ class ProductTableSeeder extends Seeder
         $attributeValues = [];
 
         foreach ($localeProductsData as $locale => $productsData) {
-            $productsFlatData = Arr::map($localeProductsData[$defaultLocale], function ($row) {
-                return Arr::except($row, ['id', 'color', 'size', 'parent_id']);
+            $productsFlatData = Arr::map($localeProductsData[$locale], function ($row) {
+                return Arr::except($row, ['color', 'size', 'parent_id']);
             });
 
             DB::table('product_flat')->insert($productsFlatData);
-
-            foreach ($productsData as $productData) {
+            
+            $skipAttributes = [
+                'product_id', 'parent_id', 'type', 'attribute_family_id',
+                'locale', 'channel', 'created_at', 'updated_at'
+            ];
+            
+            $localeSpecificAttributes = [
+                'name', 'url_key', 'short_description', 'description',
+                'meta_title', 'meta_keywords', 'meta_description'
+            ];
+            
+            foreach ($productsData as $productIndex => $productData) {
                 foreach ($productData as $attributeCode => $value) {
-                    if (in_array($attributeCode, ['id', 'product_id', 'parent_id', 'type', 'attribute_family_id', 'locale', 'channel', 'created_at', 'updated_at'])) {
+                    if (in_array($attributeCode, $skipAttributes)) {
+                        continue;
+                    }
+            
+                    if ($locale !== 'en' && ! in_array($attributeCode, $localeSpecificAttributes)) {
                         continue;
                     }
 
@@ -296,19 +310,19 @@ class ProductTableSeeder extends Seeder
             DB::table('product_bundle_option_translations')->insert([
                 [
                     'locale'                   => $locale,
-                    'label'                    => 'Bundle Option 1',
+                    'label'                    => trans('installer::app.seeders.sample-products.product-bundle-option-translations.1.label', [], $locale),
                     'product_bundle_option_id' => 1,
                 ], [
                     'locale'                   => $locale,
-                    'label'                    => 'Bundle Option 1',
+                    'label'                    => trans('installer::app.seeders.sample-products.product-bundle-option-translations.2.label', [], $locale),
                     'product_bundle_option_id' => 2,
                 ], [
                     'locale'                   => $locale,
-                    'label'                    => 'Bundle Option 2',
+                    'label'                    => trans('installer::app.seeders.sample-products.product-bundle-option-translations.3.label', [], $locale),
                     'product_bundle_option_id' => 3,
                 ], [
                     'locale'                   => $locale,
-                    'label'                    => 'Bundle Option 2',
+                    'label'                    => trans('installer::app.seeders.sample-products.product-bundle-option-translations.4.label', [], $locale),
                     'product_bundle_option_id' => 4,
                 ],
             ]);
@@ -1096,13 +1110,13 @@ class ProductTableSeeder extends Seeder
         foreach ($locales as $locale) {
             $products[$locale] = [
                 [
-                    'id'                   => 1,
+                    // 'id'                   => 1,
                     'sku'                  => 'SP-001',
                     'type'                 => 'simple',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.1.name'),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.1.sort-description'),
-                    'description'          => trans('installer::app.seeders.sample-products.product-flat.1.descriptions'),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.1.short-description'),
+                    'description'          => trans('installer::app.seeders.sample-products.product-flat.1.description'),
                     'url_key'              => 'arctic-cozy-knit-unisex-beanie',
                     'new'                  => 1,
                     'featured'             => 1,
@@ -1124,13 +1138,13 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    'id'                   => 2,
+                    // 'id'                   => 2,
                     'sku'                  => 'SP-002',
                     'type'                 => 'simple',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.2.name', [], $locale),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.2.sort-description', [], $locale),
-                    'description'          => trans('installer::app.seeders.sample-products.product-flat.2.descriptions', [], $locale),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.2.short-description', [], $locale),
+                    'description'          => trans('installer::app.seeders.sample-products.product-flat.2.description', [], $locale),
                     'url_key'              => 'arctic-bliss-stylish-winter-scarf',
                     'new'                  => 1,
                     'featured'             => 1,
@@ -1152,13 +1166,13 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    'id'                   => 3,
+                    // 'id'                   => 3,
                     'sku'                  => 'SP-003',
                     'type'                 => 'simple',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.3.name', [], $locale),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.3.sort-description', [], $locale),
-                    'description'          => trans('installer::app.seeders.sample-products.product-flat.3.descriptions', [], $locale),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.3.short-description', [], $locale),
+                    'description'          => trans('installer::app.seeders.sample-products.product-flat.3.description', [], $locale),
                     'url_key'              => 'arctic-touchscreen-winter-gloves',
                     'new'                  => 1,
                     'featured'             => 1,
@@ -1173,20 +1187,20 @@ class ProductTableSeeder extends Seeder
                     'weight'               => 1,
                     'created_at'           => $now,
                     'locale'               => $locale,
-                    'channel'              => $locale,
+                    'channel'              => 'default',
                     'attribute_family_id'  => 1,
                     'product_id'           => 3,
                     'updated_at'           => $now,
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    'id'                   => 4,
+                    // 'id'                   => 4,
                     'sku'                  => 'SP-004',
                     'type'                 => 'simple',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.4.name', [], $locale),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.4.sort-description', [], $locale),
-                    'description'          => trans('installer::app.seeders.sample-products.product-flat.4.descriptions', [], $locale),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.4.short-description', [], $locale),
+                    'description'          => trans('installer::app.seeders.sample-products.product-flat.4.description', [], $locale),
                     'url_key'              => 'arctic-warmth-wool-blend-socks',
                     'new'                  => 0,
                     'featured'             => 0,
@@ -1208,13 +1222,13 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    'id'                   => 5,
+                    // 'id'                   => 5,
                     'sku'                  => 'GP-001',
                     'type'                 => 'grouped',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.5.name', [], $locale),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.5.sort-description', [], $locale),
-                    'description'          => trans('installer::app.seeders.sample-products.product-flat.5.descriptions', [], $locale),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.5.short-description', [], $locale),
+                    'description'          => trans('installer::app.seeders.sample-products.product-flat.5.description', [], $locale),
                     'url_key'              => 'arctic-frost-winter-accessories',
                     'new'                  => 0,
                     'featured'             => 0,
@@ -1236,13 +1250,13 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    'id'                   => 6,
+                    // 'id'                   => 6,
                     'sku'                  => 'BP-001',
                     'type'                 => 'bundle',
                     'product_number'       => null,
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.6.name', [], $locale),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.6.sort-description', [], $locale),
-                    'description'          => trans('installer::app.seeders.sample-products.product-flat.6.descriptions', [], $locale),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.6.short-description', [], $locale),
+                    'description'          => trans('installer::app.seeders.sample-products.product-flat.6.description', [], $locale),
                     'url_key'              => 'arctic-frost-winter-accessories-bundle',
                     'new'                  => 0,
                     'featured'             => 0,
@@ -1264,13 +1278,13 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    'id'                   => 7,
+                    // 'id'                   => 7,
                     'sku'                  => 'CP-001',
                     'type'                 => 'configurable',
                     'product_number'       => '',
                     'name'                 => trans('installer::app.seeders.sample-products.product-flat.7.name', [], $locale),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.7.sort-description', [], $locale),
-                    'description'          => trans('installer::app.seeders.sample-products.product-flat.7.descriptions', [], $locale),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.7.short-description', [], $locale),
+                    'description'          => trans('installer::app.seeders.sample-products.product-flat.7.description', [], $locale),
                     'url_key'              => 'omniheat-mens-solid-hooded-puffer-jacket',
                     'new'                  => 0,
                     'featured'             => 0,
@@ -1292,12 +1306,12 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    'id'                    => 8,
+                    // 'id'                    => 8,
                     'sku'                   => 'SP-005',
                     'type'                  => 'simple',
                     'product_number'        => null,
                     'name'                  => trans('installer::app.seeders.sample-products.product-flat.8.name', [], $locale),
-                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.8.sort-description', [], $locale),
+                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.8.short-description', [], $locale),
                     'description'           => trans('installer::app.seeders.sample-products.product-flat.8.description', [], $locale),
                     'url_key'               => 'omniheat-mens-solid-hooded-puffer-jacket-blue-yellow-m',
                     'new'                   => 0,
@@ -1322,13 +1336,13 @@ class ProductTableSeeder extends Seeder
                     'color'                 => 3,
                     'size'                  => 2,
                 ], [
-                    'id'                    => 9,
+                    // 'id'                    => 9,
                     'sku'                   => 'SP-006',
                     'type'                  => 'simple',
                     'product_number'        => null,
                     'name'                  => trans('installer::app.seeders.sample-products.product-flat.9.name', [], $locale),
-                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.9.sort-description', [], $locale),
-                    'description'           => trans('installer::app.seeders.sample-products.product-flat.9.descriptions', [], $locale),
+                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.9.short-description', [], $locale),
+                    'description'           => trans('installer::app.seeders.sample-products.product-flat.9.description', [], $locale),
                     'url_key'               => 'omniheat-mens-solid-hooded-puffer-jacket-blue-yellow-l',
                     'new'                   => 0,
                     'featured'              => 0,
@@ -1352,13 +1366,13 @@ class ProductTableSeeder extends Seeder
                     'color'                 => 3,
                     'size'                  => 3,
                 ], [
-                    'id'                    => 10,
+                    // 'id'                    => 10,
                     'sku'                   => 'SP-007',
                     'type'                  => 'simple',
                     'product_number'        => null,
                     'name'                  => trans('installer::app.seeders.sample-products.product-flat.10.name', [], $locale),
-                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.10.sort-description', [], $locale),
-                    'description'           => trans('installer::app.seeders.sample-products.product-flat.10.descriptions', [], $locale),
+                    'short_description'     => trans('installer::app.seeders.sample-products.product-flat.10.short-description', [], $locale),
+                    'description'           => trans('installer::app.seeders.sample-products.product-flat.10.description', [], $locale),
                     'url_key'               => 'omniheat-mens-solid-hooded-puffer-jacket-blue-green-m',
                     'new'                   => 0,
                     'featured'              => 0,
@@ -1382,13 +1396,13 @@ class ProductTableSeeder extends Seeder
                     'color'                 => 2,
                     'size'                  => 2,
                 ], [
-                    'id'                    => 11,
+                    // 'id'                    => 11,
                     'sku'                   => 'SP-008',
                     'type'                  => 'simple',
                     'product_number'        => null,
                     'name'                  => trans('installer::app.seeders.sample-products.product-flat.11.name', [], $locale),
                     'short_description'     => trans('installer::app.seeders.sample-products.product-flat.11.short-description', [], $locale),
-                    'description'           => trans('installer::app.seeders.sample-products.product-flat.11.descriptions', [], $locale),
+                    'description'           => trans('installer::app.seeders.sample-products.product-flat.11.description', [], $locale),
                     'url_key'               => 'omniheat-mens-solid-hooded-puffer-jacket-blue-green-l',
                     'new'                   => 0,
                     'featured'              => 0,
