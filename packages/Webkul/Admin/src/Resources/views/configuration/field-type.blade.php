@@ -5,7 +5,7 @@
 <input
     type="hidden"
     name="keys[]"
-    value="{{ json_encode($item) }}"
+    value="{{ json_encode($child) }}"
 />
 
 <div class="mb-4 last:!mb-0">

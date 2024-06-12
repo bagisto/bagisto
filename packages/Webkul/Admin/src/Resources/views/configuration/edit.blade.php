@@ -118,19 +118,19 @@
         </div>
 
         <div class="mt-6 grid grid-cols-[1fr_2fr] gap-10 max-xl:flex-wrap">
-            @foreach ($activeConfiguration->getChildren() as $item)
+            @foreach ($activeConfiguration->getChildren() as $child)
                 <div class="grid content-start gap-2.5">
                     <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                        {{ $item->getName() }}
+                        {{ $child->getName() }}
                     </p>
 
                     <p class="leading-[140%] text-gray-600 dark:text-gray-300">
-                        {!! $item->getInfo() !!}
+                        {!! $child->getInfo() !!}
                     </p>
                 </div>
 
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
-                    @foreach ($item->getFields() as $field)
+                    @foreach ($child->getFields() as $field)
                         @if (
                             $field->getType() == 'blade'
                             && view()->exists($path = $field->getPath())
