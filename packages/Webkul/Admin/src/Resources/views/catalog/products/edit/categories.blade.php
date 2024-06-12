@@ -67,7 +67,11 @@
 
             methods: {
                 get() {
-                    this.$axios.get("{{ route('admin.catalog.categories.tree') }}")
+                    axios.get("{{ route('admin.catalog.categories.tree') }}", { // Update this line
+                            params: {
+                                channel: "{{ $currentChannel->code }}",
+                            }
+                        })
                         .then(response => {
                             this.isLoading = false;
 

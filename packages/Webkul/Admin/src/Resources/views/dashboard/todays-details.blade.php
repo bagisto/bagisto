@@ -220,6 +220,8 @@
 
             mounted() {
                 this.getStats({});
+
+                this.$emitter.on('reporting-filter-updated', this.getStats);
             },
 
             methods: {

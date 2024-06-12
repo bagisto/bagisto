@@ -4,6 +4,7 @@ namespace Webkul\Product\Console\Commands;
 
 use Illuminate\Console\Command;
 use Webkul\Product\Helpers\Indexers\ElasticSearch;
+use Webkul\Product\Helpers\Indexers\Flat;
 use Webkul\Product\Helpers\Indexers\Inventory;
 use Webkul\Product\Helpers\Indexers\Price;
 
@@ -12,6 +13,7 @@ class Indexer extends Command
     protected $indexers = [
         'inventory' => Inventory::class,
         'price'     => Price::class,
+        'flat'      => Flat::class,
         'elastic'   => ElasticSearch::class,
     ];
 
@@ -38,7 +40,7 @@ class Indexer extends Command
     {
         $start = microtime(true);
 
-        $indexerIds = ['inventory', 'price', 'elastic'];
+        $indexerIds = ['inventory', 'price', 'flat', 'elastic'];
 
         if (! empty($this->option('type'))) {
             $indexerIds = $this->option('type');

@@ -23,7 +23,7 @@ import sin from "../../locales/sin.json";
 import tr from "@vee-validate/i18n/dist/locale/tr.json";
 import uk from "@vee-validate/i18n/dist/locale/uk.json";
 import zh_CN from "@vee-validate/i18n/dist/locale/zh_CN.json";
-import * as AllRules from "@vee-validate/rules";
+import { all } from "@vee-validate/rules";
 
 window.defineRule = defineRule;
 
@@ -41,9 +41,7 @@ export default {
         /**
          * Registration of all global validators.
          */
-        Object.keys(AllRules).forEach((rule) => {
-            defineRule(rule, AllRules[rule]);
-        });
+        Object.entries(all).forEach(([name, rule]) => defineRule(name, rule));
 
         /**
          * This regular expression allows phone numbers with the following conditions:

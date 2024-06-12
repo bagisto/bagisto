@@ -10730,12 +10730,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bagisto/laravel-data-faker.git",
-                "reference": "6613f0b440f7875ed54fd686aaabbb9d35090084"
+                "reference": "e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/6613f0b440f7875ed54fd686aaabbb9d35090084",
-                "reference": "6613f0b440f7875ed54fd686aaabbb9d35090084",
+                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7",
+                "reference": "e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7",
                 "shasum": ""
             },
             "default-branch": true,
@@ -10776,7 +10776,7 @@
                 "issues": "https://github.com/bagisto/laravel-data-faker/issues",
                 "source": "https://github.com/bagisto/laravel-data-faker/tree/master"
             },
-            "time": "2024-02-09T09:25:31+00:00"
+            "time": "2024-06-07T11:16:25+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
