@@ -47,9 +47,9 @@ return [
         'sort'   => 2,
         'fields' => [
             [
-                'name' => 'shop',
-                'title' => 'Shop Breadcrumbs',
-                'type' => 'boolean',
+                'name'    => 'shop',
+                'title'   => 'Shop Breadcrumbs',
+                'type'    => 'boolean',
                 'default' => true,
             ],
         ],
@@ -588,9 +588,9 @@ return [
                 'type'  => 'boolean',
             ],
             [
-                'name'  => 'review',
-                'title' => 'Review',
-                'type'  => 'boolean',
+                'name'    => 'review',
+                'title'   => 'Review',
+                'type'    => 'boolean',
                 'default' => true,
             ],
         ],
@@ -835,10 +835,10 @@ return [
         'icon' => 'settings/settings.svg',
         'sort' => 3,
     ], [
-        'key'  => 'customer.contact.enable',
-        'name' => 'Contact',
-        'info' => 'Enable or Disable Contact',
-        'sort' => 1,
+        'key'    => 'customer.contact.enable',
+        'name'   => 'Contact',
+        'info'   => 'Enable or Disable Contact',
+        'sort'   => 1,
         'fields' => [
             [
                 'name'    => 'enable',
@@ -848,10 +848,10 @@ return [
             ],
         ],
     ], [
-        'key'  => 'customer.contact.email_configuration',
-        'name' => 'Email Configuration',
-        'info' => 'To set up the email configuration for sending mail, you can fill the required fields for email setup.',
-        'sort' => 2,
+        'key'    => 'customer.contact.email_configuration',
+        'name'   => 'Email Configuration',
+        'info'   => 'To set up the email configuration for sending mail, you can fill the required fields for email setup.',
+        'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'mailer',
@@ -1706,17 +1706,17 @@ return [
             ],
         ],
     ],  [
-        'key' => 'sales.order_settings.reorder',
-        'name' => 'Reorder',
-        'info' => 'To enable or disable the reordering feature.',
-        'sort' => 2,
+        'key'    => 'sales.order_settings.reorder',
+        'name'   => 'Reorder',
+        'info'   => 'To enable or disable the reordering feature.',
+        'sort'   => 2,
         'fields' => [
             [
-                'name' => 'enable',
-                'title' => 'Shop Reorder',
-                'type'  => 'boolean',
+                'name'    => 'enable',
+                'title'   => 'Shop Reorder',
+                'type'    => 'boolean',
                 'default' => true,
-            ]
+            ],
         ],
     ], [
         'key'    => 'sales.order_settings.pdf_print_outs',
@@ -1727,7 +1727,7 @@ return [
             [
                 'name'    => 'order_id',
                 'title'   => 'Display Order ID in Header',
-                'type' => 'boolean',
+                'type'    => 'boolean',
                 'default' => true,
             ],
         ],
@@ -1823,7 +1823,7 @@ return [
             [
                 'name'    => 'invoice_id',
                 'title'   => 'Display Invoice ID in Header',
-                'type' => 'boolean',
+                'type'    => 'boolean',
                 'default' => true,
             ],
         ],
@@ -2099,7 +2099,7 @@ return [
             ],
         ],
     ], [
-        'key' => 'sales.checkout',
+        'key'  => 'sales.checkout',
         'name' => 'Checkout',
         'info' => 'Enable/Disable Mini Cart, cart Summary',
         'icon' => 'settings/tax.svg',
@@ -2130,5 +2130,5 @@ return [
                 'default' => 1,
             ],
         ],
-    ]
+    ],
 ];
