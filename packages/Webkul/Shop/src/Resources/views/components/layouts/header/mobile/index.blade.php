@@ -344,7 +344,7 @@
                                                 :href="thirdLevelCategory.url"
                                                 class="mt-5 flex items-center justify-between pb-5 ltr:ml-3 rtl:mr-3"
                                             >
-                                                @{{ thirdLevelCategory.Name }}
+                                                @{{ thirdLevelCategory.name }}
                                             </a>
                                         </div>
                                     </li>

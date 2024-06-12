@@ -240,11 +240,11 @@ class OnepageController extends APIController
         }
 
         if ($cart->haveStockableItems() && ! $cart->shipping_address) {
-            throw new \Exception(trans('shop::app.checkout.cart.check-shipping-address'));
+            throw new \Exception(trans('shop::app.checkout.onepage.address.check-shipping-address'));
         }
 
         if (! $cart->billing_address) {
-            throw new \Exception(trans('shop::app.checkout.cart.check-billing-address'));
+            throw new \Exception(trans('shop::app.checkout.onepage.address.check-billing-address'));
         }
 
         if (
