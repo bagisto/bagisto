@@ -2,8 +2,8 @@
 
 namespace Webkul\DataTransfer\Helpers\Importers\Product;
 
-use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
