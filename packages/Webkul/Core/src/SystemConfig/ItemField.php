@@ -151,7 +151,7 @@ class ItemField
     /**
      * Get options of config item.
      */
-    public function getOptions(): array|string
+    public function getOptions(): array
     {
         if (is_array($this->options)) {
             return collect($this->options)->map(fn ($option) => [
@@ -225,12 +225,8 @@ class ItemField
     /**
      * Returns the select options for the field.
      */
-    protected function getFieldOptions(array|string $options): array
+    protected function getFieldOptions(string $options): array
     {
-        if (is_array($options)) {
-            return $options;
-        }
-
         [$class, $method] = Str::parseCallback($options);
 
         return app($class)->$method();
