@@ -125,28 +125,41 @@ class InstallerController extends Controller
     /**
      * Admin Configuration Setup.
      *
-     * @return void
+     * @return bool
      */
     public function adminConfigSetup()
     {
+        $defaultLocale = config('app.locale');
+        $allowedLocales = array_merge([$defaultLocale], request()->input('selectedLocales'));
+
+        $defaultCurrency = config('app.currency');
+        $allowedCurrencies = array_merge([$defaultCurrency], request()->input('selectedCurrencies'));
+
         $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
 
         try {
             if (request()->input('sample_products')) {
-                $this->databaseManager->seedSampleProducts();
+                $this->databaseManager->seedSampleProducts([
+                    'default_locale'     => $defaultLocale,
+                    'allowed_locales'    => $allowedLocales,
+                    'default_currency'   => $defaultCurrency,
+                    'allowed_currencies' => $allowedCurrencies,
+                ]);
             }
 
             DB::table('admins')->updateOrInsert(
                 [
                     'id' => self::USER_ID,
                 ], [
-                    'name'     => request()->input('admin'),
-                    'email'    => request()->input('email'),
+                    'name'     => request()->input('params')['admin'],
+                    'email'    => request()->input('params')['email'],
                     'password' => $password,
                     'role_id'  => 1,
                     'status'   => 1,
                 ]
             );
+
+            return true;
         } catch (\Throwable $th) {
             dd($th);
         }

@@ -1250,8 +1250,6 @@
                                 },
 
                                 createAdmin: (setErrors) => {
-                                    this.completeStep('createAdmin', 'installationCompleted', 'active', 'complete', setErrors);
-
                                     this.saveAdmin(params, setErrors);
                                 },
                             };
@@ -1373,9 +1371,17 @@
                         },
 
                         saveAdmin(params, setErrors) {
-                            this.$axios.post("{{ route('installer.admin_config_setup') }}", params)
+                            this.$axios.post("{{ route('installer.admin_config_setup') }}",{
+                                'selectedLocales': this.locales.allowed,
+                                'selectedCurrencies': this.currencies.allowed,
+                                params,
+                            })
                                 .then((response) => {
                                     this.currentStep = 'installationCompleted';
+
+                                    if (response.data) {
+                                        this.completeStep('createAdmin', 'installationCompleted', 'active', 'complete', setErrors);
+                                    }
                                 })
                                 .catch(error => {
                                     setErrors(error.response.data.errors);

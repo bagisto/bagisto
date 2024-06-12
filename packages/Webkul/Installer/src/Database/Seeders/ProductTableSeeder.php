@@ -149,6 +149,8 @@ class ProductTableSeeder extends Seeder
 
         DB::table('products')->insert($products);
 
+        $createdProducts = DB::table('products')->get();
+
         $attributes = DB::table('attributes')->get();
 
         $productsAttributeValues = [];
@@ -161,23 +163,23 @@ class ProductTableSeeder extends Seeder
             });
 
             DB::table('product_flat')->insert($productsFlatData);
-            
+
             $skipAttributes = [
                 'product_id', 'parent_id', 'type', 'attribute_family_id',
-                'locale', 'channel', 'created_at', 'updated_at'
+                'locale', 'channel', 'created_at', 'updated_at',
             ];
-            
+
             $localeSpecificAttributes = [
                 'name', 'url_key', 'short_description', 'description',
-                'meta_title', 'meta_keywords', 'meta_description'
+                'meta_title', 'meta_keywords', 'meta_description',
             ];
-            
+
             foreach ($productsData as $productIndex => $productData) {
                 foreach ($productData as $attributeCode => $value) {
                     if (in_array($attributeCode, $skipAttributes)) {
                         continue;
                     }
-            
+
                     if ($locale !== 'en' && ! in_array($attributeCode, $localeSpecificAttributes)) {
                         continue;
                     }
@@ -213,7 +215,9 @@ class ProductTableSeeder extends Seeder
 
         DB::table('product_attribute_values')->insert($attributeValues);
 
-        foreach ($products as $product) {
+        foreach ($createdProducts as $product) {
+            $product = (array) $product;
+
             DB::table('product_channels')->insert([
                 'product_id' => $product['id'],
                 'channel_id' => 1,
@@ -1110,20 +1114,19 @@ class ProductTableSeeder extends Seeder
         foreach ($locales as $locale) {
             $products[$locale] = [
                 [
-                    // 'id'                   => 1,
                     'sku'                  => 'SP-001',
                     'type'                 => 'simple',
                     'product_number'       => null,
-                    'name'                 => trans('installer::app.seeders.sample-products.product-flat.1.name'),
-                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.1.short-description'),
-                    'description'          => trans('installer::app.seeders.sample-products.product-flat.1.description'),
+                    'name'                 => trans('installer::app.seeders.sample-products.product-flat.1.name', [], $locale),
+                    'short_description'    => trans('installer::app.seeders.sample-products.product-flat.1.short-description', [], $locale),
+                    'description'          => trans('installer::app.seeders.sample-products.product-flat.1.description', [], $locale),
                     'url_key'              => 'arctic-cozy-knit-unisex-beanie',
                     'new'                  => 1,
                     'featured'             => 1,
                     'status'               => 1,
-                    'meta_title'           => trans('installer::app.seeders.sample-products.product-flat.1.meta-title'),
-                    'meta_keywords'        => trans('installer::app.seeders.sample-products.product-flat.1.meta-keywords'),
-                    'meta_description'     => trans('installer::app.seeders.sample-products.product-flat.1.meta-description'),
+                    'meta_title'           => trans('installer::app.seeders.sample-products.product-flat.1.meta-title', [], $locale),
+                    'meta_keywords'        => trans('installer::app.seeders.sample-products.product-flat.1.meta-keywords', [], $locale),
+                    'meta_description'     => trans('installer::app.seeders.sample-products.product-flat.1.meta-description', [], $locale),
                     'price'                => 14,
                     'special_price'        => null,
                     'special_price_from'   => null,
@@ -1138,7 +1141,6 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    // 'id'                   => 2,
                     'sku'                  => 'SP-002',
                     'type'                 => 'simple',
                     'product_number'       => null,
@@ -1166,7 +1168,6 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    // 'id'                   => 3,
                     'sku'                  => 'SP-003',
                     'type'                 => 'simple',
                     'product_number'       => null,
@@ -1194,7 +1195,6 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    // 'id'                   => 4,
                     'sku'                  => 'SP-004',
                     'type'                 => 'simple',
                     'product_number'       => null,
@@ -1222,7 +1222,6 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    // 'id'                   => 5,
                     'sku'                  => 'GP-001',
                     'type'                 => 'grouped',
                     'product_number'       => null,
@@ -1250,7 +1249,6 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    // 'id'                   => 6,
                     'sku'                  => 'BP-001',
                     'type'                 => 'bundle',
                     'product_number'       => null,
@@ -1278,7 +1276,6 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    // 'id'                   => 7,
                     'sku'                  => 'CP-001',
                     'type'                 => 'configurable',
                     'product_number'       => '',
@@ -1306,7 +1303,6 @@ class ProductTableSeeder extends Seeder
                     'parent_id'            => null,
                     'visible_individually' => 1,
                 ], [
-                    // 'id'                    => 8,
                     'sku'                   => 'SP-005',
                     'type'                  => 'simple',
                     'product_number'        => null,
@@ -1336,7 +1332,6 @@ class ProductTableSeeder extends Seeder
                     'color'                 => 3,
                     'size'                  => 2,
                 ], [
-                    // 'id'                    => 9,
                     'sku'                   => 'SP-006',
                     'type'                  => 'simple',
                     'product_number'        => null,
@@ -1366,7 +1361,6 @@ class ProductTableSeeder extends Seeder
                     'color'                 => 3,
                     'size'                  => 3,
                 ], [
-                    // 'id'                    => 10,
                     'sku'                   => 'SP-007',
                     'type'                  => 'simple',
                     'product_number'        => null,
@@ -1396,7 +1390,6 @@ class ProductTableSeeder extends Seeder
                     'color'                 => 2,
                     'size'                  => 2,
                 ], [
-                    // 'id'                    => 11,
                     'sku'                   => 'SP-008',
                     'type'                  => 'simple',
                     'product_number'        => null,
