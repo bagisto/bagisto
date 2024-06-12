@@ -135,10 +135,10 @@ class InstallerController extends Controller
         $defaultCurrency = config('app.currency');
         $allowedCurrencies = array_merge([$defaultCurrency], request()->input('selectedCurrencies'));
 
-        $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
+        $password = password_hash(request()->input('params')['password'], PASSWORD_BCRYPT, ['cost' => 10]);
 
         try {
-            if (request()->input('sample_products')) {
+            if (request()->input('params')['sample_products']) {
                 $this->databaseManager->seedSampleProducts([
                     'default_locale'     => $defaultLocale,
                     'allowed_locales'    => $allowedLocales,

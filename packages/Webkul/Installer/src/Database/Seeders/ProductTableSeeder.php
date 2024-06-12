@@ -164,17 +164,11 @@ class ProductTableSeeder extends Seeder
 
             DB::table('product_flat')->insert($productsFlatData);
 
-            $skipAttributes = [
-                'product_id', 'parent_id', 'type', 'attribute_family_id',
-                'locale', 'channel', 'created_at', 'updated_at',
-            ];
+            $skipAttributes = ['product_id', 'parent_id', 'type', 'attribute_family_id', 'locale', 'channel', 'created_at', 'updated_at'];
 
-            $localeSpecificAttributes = [
-                'name', 'url_key', 'short_description', 'description',
-                'meta_title', 'meta_keywords', 'meta_description',
-            ];
+            $localeSpecificAttributes = ['name', 'url_key', 'short_description', 'description', 'meta_title', 'meta_keywords', 'meta_description'];
 
-            foreach ($productsData as $productIndex => $productData) {
+            foreach ($productsData as $productData) {
                 foreach ($productData as $attributeCode => $value) {
                     if (in_array($attributeCode, $skipAttributes)) {
                         continue;
