@@ -143,7 +143,7 @@ class ItemField
     /**
      * Check if the field is required.
      */
-    public function isRequired(): bool
+    public function isRequired(): string
     {
         return Str::contains($this->getValidations(), 'required') ? 'required' : '';
     }
