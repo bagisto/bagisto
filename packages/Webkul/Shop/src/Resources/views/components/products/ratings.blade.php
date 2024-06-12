@@ -7,7 +7,7 @@
 <v-product-ratings
     {{ $attributes->merge(['class' => 'flex w-max items-center rounded-md border border-zinc-200 px-4 py-2']) }}
     average="{{ $average }}"
-    :total="{{ $total }}"
+    total="{{ $total }}"
 >
 </v-product-ratings>
 
@@ -42,7 +42,7 @@
                 },
 
                 total: {
-                    type: Number,
+                    type: String,
                     required: true,
                 },
 
