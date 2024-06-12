@@ -12,15 +12,17 @@
     </x-slot>
 
     <!-- Breadcrumb -->
-    <div class="mt-5 flex justify-center max-lg:hidden">
-        {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.before') !!}
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        <div class="mt-5 flex justify-center max-lg:hidden">
+            {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.before') !!}
 
-		<div class="flex items-center gap-x-2.5">
-            <x-shop::breadcrumbs name="compare" />
-		</div>
+            <div class="flex items-center gap-x-2.5">
+                <x-shop::breadcrumbs name="compare" />
+            </div>
 
-        {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.after') !!}
-	</div>
+            {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.after') !!}
+        </div>
+    @endif
 
     <!-- Compare Component -->
     <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:mt-7 max-sm:px-0">

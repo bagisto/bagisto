@@ -49,7 +49,9 @@
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.before') !!}
 
         <!-- Breadcrumbs -->
-        <x-shop::breadcrumbs name="checkout" />
+        @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+            <x-shop::breadcrumbs name="checkout" />
+        @endif
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.after') !!}
 

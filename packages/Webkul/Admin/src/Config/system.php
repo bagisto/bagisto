@@ -41,6 +41,19 @@ return [
             ],
         ],
     ], [
+        'key'    => 'general.general.breadcrumbs',
+        'name'   => 'Breadcrumbs',
+        'info'   => 'Breadcrumbs',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name' => 'shop',
+                'title' => 'Shop Breadcrumbs',
+                'type' => 'boolean',
+                'default' => true,
+            ],
+        ],
+    ], [
         'key'  => 'general.content',
         'name' => 'admin::app.configuration.index.general.content.title',
         'info' => 'admin::app.configuration.index.general.content.info',
@@ -389,6 +402,23 @@ return [
             ],
         ],
     ], [
+        'key'    => 'catalog.products.stock',
+        'name'   => 'Manage stock',
+        'info'   => 'Manage Stock',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'threshold',
+                'title'   => 'Out-of-Stock Threshold',
+                'type'    => 'text',
+            ], [
+                'name'    => 'min_qty_in_shopping_cart',
+                'title'   => 'Maximum Qty Allowed in Shopping Cart',
+                'info'    => 'Maximum Qty Allowed in Shopping Cart',
+                'type'    => 'text',
+            ],
+        ],
+    ], [
         'key'    => 'catalog.products.guest_checkout',
         'name'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title',
         'info'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title-info',
@@ -557,12 +587,45 @@ return [
                 'title' => 'admin::app.configuration.index.catalog.products.review.allow-guest-review',
                 'type'  => 'boolean',
             ],
+            [
+                'name'  => 'review',
+                'title' => 'Review',
+                'type'  => 'boolean',
+                'default' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'catalog.products.placeholders',
+        'name'   => 'Product Image Placeholders',
+        'info'   => 'Product Image Placeholders',
+        'sort'   => 10,
+        'fields' => [
+            [
+                'name'  => 'small_image',
+                'title' => 'Small Image',
+                'type'  => 'image',
+            ],
+            [
+                'name'  => 'medium_image',
+                'title' => 'Medium Image',
+                'type'  => 'image',
+            ],
+            [
+                'name'  => 'large_image',
+                'title' => 'Large Image',
+                'type'  => 'image',
+            ],
+            [
+                'name'  => 'original_image',
+                'title' => 'Original Image',
+                'type'  => 'image',
+            ],
         ],
     ], [
         'key'    => 'catalog.products.attribute',
         'name'   => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info'   => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort'   => 10,
+        'sort'   => 11,
         'fields' => [
             [
                 'name'       => 'image_attribute_upload_size',
@@ -580,7 +643,7 @@ return [
         'key'    => 'catalog.products.social_share',
         'name'   => 'admin::app.configuration.index.catalog.products.social-share.title',
         'info'   => 'admin::app.configuration.index.catalog.products.social-share.title-info',
-        'sort'   => 11,
+        'sort'   => 12,
         'fields' => [
             [
                 'name'  => 'enabled',
@@ -766,16 +829,90 @@ return [
             ],
         ],
     ], [
+        'key'  => 'customer.contact',
+        'name' => 'Contact',
+        'info' => 'Enable/Disable contact, Email Configurations',
+        'icon' => 'settings/settings.svg',
+        'sort' => 3,
+    ], [
+        'key'  => 'customer.contact.enable',
+        'name' => 'Contact',
+        'info' => 'Enable or Disable Contact',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name'    => 'enable',
+                'title'   => 'Enable',
+                'type'    => 'boolean',
+                'default' => true,
+            ],
+        ],
+    ], [
+        'key'  => 'customer.contact.email_configuration',
+        'name' => 'Email Configuration',
+        'info' => 'To set up the email configuration for sending mail, you can fill the required fields for email setup.',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name'          => 'mailer',
+                'title'         => 'Mailer',
+                'type'          => 'text',
+            ], [
+                'name'          => 'host',
+                'title'         => 'Host Name',
+                'type'          => 'text',
+            ], [
+                'name'          => 'port',
+                'title'         => 'Port Number',
+                'type'          => 'text',
+            ], [
+                'name'          => 'username',
+                'title'         => 'User Name',
+                'type'          => 'text',
+            ], [
+                'name'          => 'password',
+                'title'         => 'Password',
+                'type'          => 'text',
+            ], [
+                'name'          => 'encryption',
+                'title'         => 'Encryption',
+                'type'          => 'select',
+                'default'       => 'tls',
+                'options'       => [
+                    [
+                        'title' => 'tls',
+                        'value' => 'tls',
+                    ], [
+                        'title' => 'pgp',
+                        'value' => 'pgp',
+                    ],
+                ],
+            ],
+        ],
+    ], [
         'key'  => 'customer.settings',
         'name' => 'admin::app.configuration.index.customer.settings.title',
         'info' => 'admin::app.configuration.index.customer.settings.settings-info',
         'icon' => 'settings/settings.svg',
-        'sort' => 3,
+        'sort' => 4,
+    ], [
+        'key'    => 'customer.settings.login_as_customer',
+        'name'   => 'Login As Customer',
+        'info'   => 'Login As Customer',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'         => 'Login',
+                'title'        => 'Login as Customer',
+                'type'         => 'boolean',
+                'default'      => 1,
+            ],
+        ],
     ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.configuration.index.customer.settings.newsletter.title',
         'info'   => 'admin::app.configuration.index.customer.settings.newsletter.title-info',
-        'sort'   => 2,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'         => 'subscription',
@@ -788,7 +925,7 @@ return [
         'key'    => 'customer.settings.email',
         'name'   => 'admin::app.configuration.index.customer.settings.email.title',
         'info'   => 'admin::app.configuration.index.customer.settings.email.title-info',
-        'sort'   => 3,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'  => 'verification',
@@ -797,10 +934,22 @@ return [
             ],
         ],
     ], [
+        'key'    => 'customer.settings.password',
+        'name'   => 'Reset Password',
+        'info'   => 'To setup minimum password length for the customers.',
+        'sort'   => 5,
+        'fields' => [
+            [
+                'name'  => 'minimum_password_length',
+                'title' => 'Minimum Password Length',
+                'type'  => 'text',
+            ],
+        ],
+    ], [
         'key'    => 'customer.settings.social_login',
         'name'   => 'admin::app.configuration.index.customer.settings.social-login.social-login',
         'info'   => 'admin::app.configuration.index.customer.settings.social-login.social-login-info',
-        'sort'   => 4,
+        'sort'   => 6,
         'fields' => [
             [
                 'name'          => 'enable_facebook',
@@ -1544,6 +1693,10 @@ return [
         'sort'   => 1,
         'fields' => [
             [
+                'name'          => 'enable',
+                'title'         => 'Enable',
+                'type'          => 'boolean',
+            ], [
                 'name'          => 'minimum_order_amount',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.minimum-order-amount',
                 'type'          => 'number',
@@ -1552,11 +1705,37 @@ return [
                 'locale_based'  => true,
             ],
         ],
+    ],  [
+        'key' => 'sales.order_settings.reorder',
+        'name' => 'Reorder',
+        'info' => 'To enable or disable the reordering feature.',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'enable',
+                'title' => 'Shop Reorder',
+                'type'  => 'boolean',
+                'default' => true,
+            ]
+        ],
+    ], [
+        'key'    => 'sales.order_settings.pdf_print_outs',
+        'name'   => 'PDF Print Out',
+        'info'   => 'PDF Print Out',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'    => 'order_id',
+                'title'   => 'Display Order ID in Header',
+                'type' => 'boolean',
+                'default' => true,
+            ],
+        ],
     ], [
         'key'    => 'sales.order_settings.stock_options',
         'name'   => 'admin::app.configuration.index.sales.order-settings.stock-options.title',
         'info'   => 'admin::app.configuration.index.sales.order-settings.stock-options.title-info',
-        'sort'   => 2,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'          => 'back_orders',
@@ -1636,10 +1815,23 @@ return [
             ],
         ],
     ], [
+        'key'    => 'sales.invoice_settings.pdf_print_outs',
+        'name'   => 'Invoice PDF Print Out',
+        'info'   => 'Invoice PDF Print Out',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'    => 'invoice_id',
+                'title'   => 'Display Invoice ID in Header',
+                'type' => 'boolean',
+                'default' => true,
+            ],
+        ],
+    ], [
         'key'    => 'sales.invoice_settings.invoice_reminders',
         'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.title',
         'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.title-info',
-        'sort'   => 2,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'          => 'reminders_limit',
@@ -1906,5 +2098,37 @@ return [
                 ],
             ],
         ],
-    ],
+    ], [
+        'key' => 'sales.checkout',
+        'name' => 'Checkout',
+        'info' => 'Enable/Disable Mini Cart, cart Summary',
+        'icon' => 'settings/tax.svg',
+        'sort' => 7,
+    ], [
+        'key'    => 'sales.checkout.mini_cart',
+        'name'   => 'Mini Cart',
+        'info'   => 'Mini Cart',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'enable',
+                'title'   => 'Mini Cart',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+        ],
+    ], [
+        'key'    => 'sales.checkout.cart_summary',
+        'name'   => 'Cart Summary',
+        'info'   => 'Cart Summary',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'cart_summary',
+                'title'   => 'Cart Summary',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+        ],
+    ]
 ];
