@@ -49,7 +49,7 @@ class SystemConfig
     /**
      * Retrieve Core Config
      */
-    public function retrieveCoreConfig(): array
+    private function retrieveCoreConfig(): array
     {
         static $items;
 
@@ -133,18 +133,6 @@ class SystemConfig
         }
 
         return $activeItem;
-    }
-
-    /**
-     * Get the channel locale info.
-     */
-    public function getChannelLocaleInfo(array $field, string $channelCode, string $localeCode): string
-    {
-        if (empty($field)) {
-            return '';
-        }
-
-        return $this->coreConfigRepository->getChannelLocaleInfo($field, $channelCode, $localeCode);
     }
 
     /**
