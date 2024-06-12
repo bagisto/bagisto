@@ -40,17 +40,7 @@ class CustomerDataGrid extends DataGrid
                 $join->on('customers.id', '=', 'addresses.customer_id')
                     ->where('addresses.address_type', '=', 'customer');
             })
-            ->addSelect('customers.id as customer_id')
-            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'addresses.id) as address_count'))
-            ->groupBy('customers.id')
-
-            ->leftJoin('orders', function ($join) {
-                $join->on('customers.id', '=', 'orders.customer_id');
-            })
-            ->addSelect('customers.id as customer_id')
-            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'orders.id) as order_count'))
-            ->groupBy('customers.id')
-
+            ->leftJoin('orders', 'customers.id', '=', 'orders.customer_id')
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
             ->addSelect(
                 'customers.id as customer_id',
@@ -60,11 +50,14 @@ class CustomerDataGrid extends DataGrid
                 'customers.status',
                 'customers.is_suspended',
                 'customer_groups.name as group',
+                'customers.channel_id',
             )
-            ->addSelect(
-                DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name) as full_name')
-            );
+            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'addresses.id) as address_count'))
+            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'orders.id) as order_count'))
+            ->addSelect(DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name) as full_name'))
+            ->groupBy('customers.id');
 
+        $this->addFilter('channel_id', 'customers.channel_id');
         $this->addFilter('customer_id', 'customers.id');
         $this->addFilter('email', 'customers.email');
         $this->addFilter('full_name', DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name)'));
@@ -82,6 +75,26 @@ class CustomerDataGrid extends DataGrid
      */
     public function prepareColumns()
     {
+        $this->addColumn([
+            'index'      => 'channel_id',
+            'label'      => trans('admin::app.customers.customers.index.datagrid.channel'),
+            'type'       => 'dropdown',
+            'class'      => 'hidden',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => collect(core()->getAllChannels())
+                        ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                        ->values()
+                        ->toArray(),
+                ],
+            ],
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
         $this->addColumn([
             'index'      => 'customer_id',
             'label'      => trans('admin::app.customers.customers.index.datagrid.id'),

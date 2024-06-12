@@ -42,6 +42,7 @@ class UpdateCreateVisitIndex implements ShouldQueue
             'ip',
             'visitor_id',
             'visitor_type',
+            'channel_id',
         ]))->latest()->first();
 
         if ($lastVisit?->created_at->isToday()) {
@@ -49,7 +50,10 @@ class UpdateCreateVisitIndex implements ShouldQueue
         }
 
         if ($this->model !== null && method_exists($this->model, 'visitLogs')) {
-            $this->model->visitLogs()->create($this->log);
+            $visit = $this->model->visitLogs()->create($this->log);
+
+            $visit->channel_id = $this->log['channel_id'];
+            $visit->save();
         } else {
             $visitRepository->create($this->log);
         }

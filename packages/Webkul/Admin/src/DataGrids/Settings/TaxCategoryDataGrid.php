@@ -14,9 +14,12 @@ class TaxCategoryDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('tax_categories')->addSelect('id', 'name', 'code');
-
-        return $queryBuilder;
+        return DB::table('tax_categories')
+            ->select(
+                'id',
+                'name',
+                'code'
+            );
     }
 
     /**

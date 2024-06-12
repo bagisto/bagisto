@@ -14,9 +14,12 @@ class RolesDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('roles')->addSelect('id', 'name', 'permission_type');
-
-        return $queryBuilder;
+        return DB::table('roles')
+            ->select(
+                'id',
+                'name',
+                'permission_type'
+            );
     }
 
     /**

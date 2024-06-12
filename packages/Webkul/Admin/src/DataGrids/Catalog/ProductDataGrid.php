@@ -6,11 +6,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Facades\ElasticSearch;
-use Webkul\Core\Models\Channel;
-use Webkul\Core\Models\Locale;
 use Webkul\DataGrid\DataGrid;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Product\Repositories\ProductRepository;
 
 class ProductDataGrid extends DataGrid
 {
@@ -26,11 +22,8 @@ class ProductDataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct(
-        protected AttributeFamilyRepository $attributeFamilyRepository,
-        protected ProductRepository $productRepository,
-        protected InventorySourceRepository $inventorySourceRepository
-    ) {
+    public function __construct(protected AttributeFamilyRepository $attributeFamilyRepository)
+    {
     }
 
     /**
@@ -40,31 +33,20 @@ class ProductDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        if (core()->getRequestedChannelCode() === 'all') {
-            $whereInChannels = Channel::query()->pluck('code')->toArray();
-        } else {
-            $whereInChannels = [core()->getRequestedChannelCode()];
-        }
-
-        if (core()->getRequestedLocaleCode() === 'all') {
-            $whereInLocales = Locale::query()->pluck('code')->toArray();
-        } else {
-            $whereInLocales = [core()->getRequestedLocaleCode()];
-        }
-
         $tablePrefix = DB::getTablePrefix();
 
         /**
          * Query Builder to fetch records from `product_flat` table
          */
         $queryBuilder = DB::table('product_flat')
+            ->distinct()
             ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->leftJoin('product_images', 'product_flat.product_id', '=', 'product_images.product_id')
             ->leftJoin('product_categories as pc', 'product_flat.product_id', '=', 'pc.product_id')
-            ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
+            ->leftJoin('category_translations as ct', function ($leftJoin) {
                 $leftJoin->on('pc.category_id', '=', 'ct.category_id')
-                    ->whereIn('ct.locale', $whereInLocales);
+                    ->where('ct.locale', app()->getLocale());
             })
             ->select(
                 'product_flat.locale',
@@ -81,19 +63,15 @@ class ProductDataGrid extends DataGrid
                 'product_flat.url_key',
                 'product_flat.visible_individually',
                 'af.name as attribute_family',
-                DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity')
             )
+            ->addSelect(DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity'))
             ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
-            ->distinct()
-            ->whereIn('product_flat.locale', $whereInLocales)
-            ->whereIn('product_flat.channel', $whereInChannels)
-            ->groupBy(
-                'product_flat.product_id',
-                'product_flat.locale',
-                'product_flat.channel'
-            );
+            ->where('product_flat.locale', app()->getLocale())
+            ->groupBy('product_flat.product_id');
 
         $this->addFilter('product_id', 'product_flat.product_id');
+        $this->addFilter('channel', 'product_flat.channel');
+        $this->addFilter('locale', 'product_flat.locale');
         $this->addFilter('name', 'product_flat.name');
         $this->addFilter('type', 'product_flat.type');
         $this->addFilter('status', 'product_flat.status');
@@ -109,6 +87,30 @@ class ProductDataGrid extends DataGrid
      */
     public function prepareColumns()
     {
+        $channels = core()->getAllChannels();
+
+        if ($channels->count() > 1) {
+            $this->addColumn([
+                'index'      => 'channel',
+                'label'      => trans('admin::app.catalog.products.index.datagrid.channel'),
+                'type'       => 'dropdown',
+                'class'      => 'hidden',
+                'options'    => [
+                    'type' => 'basic',
+
+                    'params' => [
+                        'options' => collect($channels)
+                            ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->code])
+                            ->values()
+                            ->toArray(),
+                    ],
+                ],
+                'searchable' => false,
+                'filterable' => true,
+                'sortable'   => true,
+            ]);
+        }
+
         $this->addColumn([
             'index'      => 'name',
             'label'      => trans('admin::app.catalog.products.index.datagrid.name'),
@@ -224,13 +226,29 @@ class ProductDataGrid extends DataGrid
      */
     public function prepareActions()
     {
+        if (bouncer()->hasPermission('catalog.products.copy')) {
+            $this->addAction([
+                'icon'   => 'icon-copy',
+                'title'  => trans('admin::app.catalog.products.index.datagrid.copy'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.catalog.products.copy', $row->product_id);
+                },
+            ]);
+        }
+
         if (bouncer()->hasPermission('catalog.products.edit')) {
             $this->addAction([
-                'icon'   => 'icon-edit',
+                'icon'   => 'icon-sort-right',
                 'title'  => trans('admin::app.catalog.products.index.datagrid.edit'),
                 'method' => 'GET',
                 'url'    => function ($row) {
-                    return route('admin.catalog.products.edit', $row->product_id);
+                    $filteredChannel = request()->input('filters.channel')[0] ?? null;
+
+                    return route('admin.catalog.products.edit', [
+                        'id'      => $row->product_id,
+                        'channel' => $filteredChannel,
+                    ]);
                 },
             ]);
         }
@@ -284,8 +302,6 @@ class ProductDataGrid extends DataGrid
             return;
         }
 
-        $this->dispatchEvent('process_request.before', $this);
-
         /**
          * Store all request parameters in this variable; avoid using direct request helpers afterward.
          */
@@ -297,10 +313,18 @@ class ProductDataGrid extends DataGrid
             return;
         }
 
+        $this->dispatchEvent('process_request.before', $this);
+
         $pagination = $params['pagination'];
 
+        $channelCodes = request()->input('filters.channel') ?? core()->getAllChannels()->pluck('code')->toArray();
+
+        $indexNames = collect($channelCodes)->map(function ($channelCode) {
+            return 'products_'.$channelCode.'_'.app()->getLocale().'_index';
+        })->toArray();
+
         $results = Elasticsearch::search([
-            'index' => 'products_'.core()->getRequestedChannelCode().'_'.core()->getRequestedLocaleCode().'_index',
+            'index' => $indexNames,
             'body'  => [
                 'from'          => ($pagination['page'] * $pagination['per_page']) - $pagination['per_page'],
                 'size'          => $pagination['per_page'],
@@ -341,6 +365,10 @@ class ProductDataGrid extends DataGrid
         $filters = [];
 
         foreach ($params as $attribute => $value) {
+            if (in_array($attribute, ['channel', 'locale'])) {
+                continue;
+            }
+
             if ($attribute == 'all') {
                 $attribute = 'name';
             }

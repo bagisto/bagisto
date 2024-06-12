@@ -73,10 +73,6 @@ class ProductRepository extends Repository
 
         $product->refresh();
 
-        if (isset($data['channels'])) {
-            $product['channels'] = $data['channels'];
-        }
-
         return $product;
     }
 
@@ -238,12 +234,16 @@ class ProductRepository extends Repository
             'price_indices',
             'inventory_indices',
             'reviews',
+            'variants',
+            'variants.attribute_family',
+            'variants.attribute_values',
+            'variants.price_indices',
+            'variants.inventory_indices',
         ])->scopeQuery(function ($query) use ($params) {
             $prefix = DB::getTablePrefix();
 
             $qb = $query->distinct()
                 ->select('products.*')
-                ->leftJoin('products as variants', DB::raw('COALESCE('.$prefix.'variants.parent_id, '.$prefix.'variants.id)'), '=', 'products.id')
                 ->leftJoin('product_price_indices', function ($join) {
                     $customerGroup = $this->customerRepository->getCurrentGroup();
 
@@ -254,6 +254,11 @@ class ProductRepository extends Repository
             if (! empty($params['category_id'])) {
                 $qb->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id')
                     ->whereIn('product_categories.category_id', explode(',', $params['category_id']));
+            }
+
+            if (! empty($params['channel_id'])) {
+                $qb->leftJoin('product_channels', 'products.id', '=', 'product_channels.product_id')
+                    ->where('product_channels.channel_id', explode(',', $params['channel_id']));
             }
 
             if (! empty($params['type'])) {
@@ -339,18 +344,9 @@ class ProductRepository extends Repository
                 $qb->where(function ($filterQuery) use ($params, $attributes) {
                     foreach ($attributes as $attribute) {
                         $filterQuery->orWhere(function ($attributeQuery) use ($params, $attribute) {
-                            $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
+                            $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
 
-                            $values = explode(',', $params[$attribute->code]);
-
-                            if ($attribute->type == 'price') {
-                                $attributeQuery->whereBetween('product_attribute_values.'.$attribute->column_name, [
-                                    core()->convertToBasePrice(current($values)),
-                                    core()->convertToBasePrice(end($values)),
-                                ]);
-                            } else {
-                                $attributeQuery->whereIn('product_attribute_values.'.$attribute->column_name, $values);
-                            }
+                            $attributeQuery->whereIn('product_attribute_values.'.$attribute->column_name, explode(',', $params[$attribute->code]));
                         });
                     }
                 });
@@ -374,9 +370,20 @@ class ProductRepository extends Repository
 
                         $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($alias, $attribute) {
                             $join->on('products.id', '=', $alias.'.product_id')
-                                ->where($alias.'.attribute_id', $attribute->id)
-                                ->where($alias.'.channel', core()->getRequestedChannelCode())
-                                ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                ->where($alias.'.attribute_id', $attribute->id);
+
+                            if ($attribute->value_per_channel) {
+                                if ($attribute->value_per_locale) {
+                                    $join->where($alias.'.channel', core()->getRequestedChannelCode())
+                                        ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                } else {
+                                    $join->where($alias.'.channel', core()->getRequestedChannelCode());
+                                }
+                            } else {
+                                if ($attribute->value_per_locale) {
+                                    $join->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                }
+                            }
                         })
                             ->orderBy($alias.'.'.$attribute->column_name, $sortOptions['order']);
                     }
@@ -398,10 +405,6 @@ class ProductRepository extends Repository
 
     /**
      * Search product from elastic search.
-     *
-     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
-     * good request parameter with an array type as an argument. Make a clean pull request for
-     * this to have track record.
      *
      * @return \Illuminate\Support\Collection
      */

@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Додати клієнта',
             'add-product'                 => 'Додати продукт',
+            'all-channels'                => 'Усі канали',
             'attribute-code'              => 'Код атрибута',
             'average-sale'                => 'Середній обсяг замовлення',
             'color'                       => 'Колір',
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'Сімейство атрибутів',
                     'attribute-family-value' => 'Сімейство атрибутів - :attribute_family',
                     'category'               => 'Категорія',
+                    'channel'                => 'Канал',
                     'copy-of'                => 'Копія :value',
                     'copy-of-slug'           => 'копія-:value',
                     'delete'                 => 'Видалити',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Активний',
                     'address'        => ':address Адреса(и)',
                     'address-count'  => 'Кількість адрес',
+                    'channel'        => 'Канал',
                     'delete'         => 'Видалити',
                     'delete-success' => 'Вибрані дані успішно видалено',
                     'email'          => 'Електронна пошта',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'Терміни пошуку',
 
                     'datagrid' => [
-                        'Channel'             => 'Канал',
+                        'channel'             => 'Канал',
                         'actions'             => 'Дії',
                         'channel'             => 'Канал',
                         'delete'              => 'Видалити',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Канал',
                         'channel'        => 'Канал',
                         'delete-warning' => 'Ви впевнені, що хочете виконати цю дію?',
                         'locale'         => 'Локаль',
@@ -2395,6 +2397,7 @@ return [
             'title'         => 'Сторінки',
 
             'datagrid' => [
+                'channel'             => 'Канал',
                 'delete'              => 'Видалити',
                 'edit'                => 'Редагувати',
                 'id'                  => 'ID',
@@ -3190,6 +3193,7 @@ return [
                 'abandoned-revenue'             => 'Дохід від залишених товарів',
                 'added-to-cart'                 => 'Додано в кошик',
                 'added-to-cart-info'            => 'Лише :progress відвідувачів додали товари в кошик',
+                'all-channels'                  => 'Усі канали',
                 'average-order-value-over-time' => 'Середній обсяг замовлення відносно часу',
                 'average-sales'                 => 'Середній обсяг замовлення',
                 'count'                         => 'Кількість',
@@ -3228,6 +3232,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Усі канали',
                 'count'                       => 'Кількість',
                 'customers'                   => 'Клієнти',
                 'customers-over-time'         => 'Клієнти відносно часу',
@@ -3256,6 +3261,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Усі канали',
                 'channel'                          => 'Канал',
                 'end-date'                         => 'Дата закінчення',
                 'id'                               => 'Ідентифікатор',
@@ -3289,6 +3295,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Усі канали',
             'day'           => 'День',
             'end-date'      => 'Дата закінчення',
             'export-csv'    => 'Експорт у форматі CSV',

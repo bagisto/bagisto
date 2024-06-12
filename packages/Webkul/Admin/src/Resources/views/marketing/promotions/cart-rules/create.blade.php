@@ -754,7 +754,8 @@
                         <div
                             v-if="matchedAttribute.key == 'product|category_ids'
                             || matchedAttribute.key == 'product|category_ids'
-                            || matchedAttribute.key == 'product|parent::category_ids'"
+                            || matchedAttribute.key == 'product|parent::category_ids'
+                            || matchedAttribute.key == 'product|children::category_ids'"
                         >
                             <x-admin::tree.view
                                 input-type="checkbox"
@@ -776,9 +777,9 @@
                                     || matchedAttribute.type == 'integer'"
                             >
                                 <v-field
-                                    :name="`['conditions[${index}][value]']`"
+                                    :name="`conditions[${index}][value]`"
                                     v-slot="{ field, errorMessage }"
-                                    :id="`['conditions[${index}][value]']`"
+                                    :id="`conditions[${index}][value]`"
                                     :rules="
                                         matchedAttribute.type == 'price' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
                                         || matchedAttribute.type == 'decimal' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
@@ -796,7 +797,7 @@
                                 </v-field>
 
                                 <v-error-message
-                                    :name="`['conditions[${index}][value]']`"
+                                    :name="`conditions[${index}][value]`"
                                     class="mt-1 text-xs italic text-red-500"
                                     as="p"
                                 >
@@ -1078,7 +1079,7 @@
 
                         let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
 
-                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].find((attribute) => attribute.key == this.condition.attribute);
+                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].find(attribute => attribute.key == this.condition.attribute);
 
                         if (
                             matchedAttribute['type'] == 'multiselect'

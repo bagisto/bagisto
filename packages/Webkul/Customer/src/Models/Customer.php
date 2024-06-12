@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\URL;
 use Laravel\Sanctum\HasApiTokens;
 use Shetabit\Visitor\Traits\Visitor;
 use Webkul\Checkout\Models\CartProxy;
+use Webkul\Core\Models\ChannelProxy;
 use Webkul\Core\Models\SubscribersListProxy;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Customer\Database\Factories\CustomerFactory;
@@ -54,6 +55,7 @@ class Customer extends Authenticatable implements CustomerContract
         'api_token',
         'token',
         'customer_group_id',
+        'channel_id',
         'subscribed_to_news_letter',
         'status',
         'is_verified',
@@ -277,6 +279,16 @@ class Customer extends Authenticatable implements CustomerContract
     public function subscription()
     {
         return $this->hasOne(SubscribersListProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Get the channel that owns the customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function channel()
+    {
+        return $this->belongsTo(ChannelProxy::modelClass(), 'channel_id');
     }
 
     /**

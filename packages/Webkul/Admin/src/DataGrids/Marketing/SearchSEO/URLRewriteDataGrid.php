@@ -15,7 +15,7 @@ class URLRewriteDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('url_rewrites')
-            ->addSelect(
+            ->select(
                 'url_rewrites.id',
                 'url_rewrites.entity_type',
                 'url_rewrites.request_path',

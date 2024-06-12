@@ -2,6 +2,7 @@
 
 namespace Webkul\DataTransfer\Helpers\Importers\Product;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Bus;
@@ -16,6 +17,7 @@ use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Slug;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
@@ -143,6 +145,11 @@ class Importer extends AbstractImporter
     protected array $categories = [];
 
     /**
+     * Cached channels
+     */
+    protected Collection $channels;
+
+    /**
      * Cached categories
      */
     protected mixed $customerGroups = [];
@@ -200,6 +207,7 @@ class Importer extends AbstractImporter
         protected AttributeOptionRepository $attributeOptionRepository,
         protected CategoryRepository $categoryRepository,
         protected CustomerGroupRepository $customerGroupRepository,
+        protected ChannelRepository $channelRepository,
         protected InventorySourceRepository $inventorySourceRepository,
         protected ProductRepository $productRepository,
         protected ProductFlatRepository $productFlatRepository,
@@ -907,6 +915,8 @@ class Importer extends AbstractImporter
 
         $products = [];
 
+        $channels = [];
+
         $customerGroupPrices = [];
 
         $categories = [];
@@ -924,6 +934,11 @@ class Importer extends AbstractImporter
              * Prepare products for import
              */
             $this->prepareProducts($rowData, $products);
+
+            /**
+             * Prepare product channels to attach with products
+             */
+            $this->prepareChannels($rowData, $channels);
 
             /**
              * Prepare customer group prices
@@ -957,6 +972,8 @@ class Importer extends AbstractImporter
         }
 
         $this->saveProducts($products);
+
+        $this->saveChannels($channels);
 
         $this->saveCustomerGroupPrices($customerGroupPrices);
 
@@ -1157,6 +1174,44 @@ class Importer extends AbstractImporter
             [
                 'product_id',
                 'category_id',
+            ],
+        );
+    }
+
+    /**
+     * Prepare products channels data
+     */
+    public function prepareChannels(array $rowData, array &$channels): void
+    {
+        $channels[$rowData['sku']][] = $this->getChannels()
+            ->where('code', $rowData['channel'])
+            ->first()
+            ->id;
+    }
+
+    /**
+     * Save channels from current batch
+     */
+    public function saveChannels(array $channels): void
+    {
+        $productChannels = [];
+
+        foreach ($channels as $sku => $channelIds) {
+            $product = $this->skuStorage->get($sku);
+
+            foreach (array_unique($channelIds) as $channelId) {
+                $productChannels[] = [
+                    'product_id' => $product['id'],
+                    'channel_id' => $channelId,
+                ];
+            }
+        }
+
+        DB::table('product_channels')->upsert(
+            $productChannels,
+            [
+                'product_id',
+                'channel_id',
             ],
         );
     }
@@ -1913,6 +1968,18 @@ class Importer extends AbstractImporter
         }
 
         return $this->customerGroups = $this->customerGroupRepository->all();
+    }
+
+    /**
+     * Retrieve channels
+     */
+    public function getChannels(): mixed
+    {
+        if (! empty($this->channels)) {
+            return $this->channels;
+        }
+
+        return $this->channels = $this->channelRepository->all();
     }
 
     /**

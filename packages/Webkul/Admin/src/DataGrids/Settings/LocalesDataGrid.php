@@ -14,9 +14,13 @@ class LocalesDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('locales')->addSelect('id', 'code', 'name', 'direction');
-
-        return $queryBuilder;
+        return DB::table('locales')
+            ->select(
+                'id',
+                'code',
+                'name',
+                'direction'
+            );
     }
 
     /**
