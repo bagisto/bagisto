@@ -370,18 +370,22 @@ return [
 
         'sample-products' => [
             'category-translation' => [
-                '20' => [
+                '2' => [
                     'description'      => 'Descrizione della categoria Uomo',
                     'meta-description' => 'Meta descrizione della categoria Uomo',
                     'meta-keywords'    => 'Meta parole chiave della categoria Uomo',
                     'meta-title'       => 'Meta titolo della categoria Uomo',
+                    'name'             => 'Uomini',
+                    'slug'             => 'uomini',
                 ],
 
-                '21' => [
+                '3' => [
                     'description'      => 'Descrizione della categoria Abbigliamento Invernale',
                     'meta-description' => 'Meta descrizione della categoria Abbigliamento Invernale',
                     'meta-keywords'    => 'Meta parole chiave della categoria Abbigliamento Invernale',
                     'meta-title'       => 'Meta titolo della categoria Abbigliamento Invernale',
+                    'name'             => 'Abbigliamento invernale',
+                    'slug'             => 'abbigliamento invernale',
                 ],
             ],
 
@@ -582,6 +586,24 @@ return [
                     'meta-title'       => 'Titolo Meta\',tion',
                     'name'             => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Green-L',
                     'sort-description' => 'Rimani al caldo e alla moda con la nostra giacca OmniHeat con cappuccio per uomo. Questa giacca è progettata per offrire calore estremo e dispone di tasche inseribili per una maggiore comodità. Il materiale isolante assicura che tu rimanga comodo in condizioni di freddo. Disponibile in 5 colori attraenti, rendendola una scelta versatile per varie occasioni.',
+                ],
+            ],
+
+            'product-bundle-option-translations' => [
+                '1' => [
+                    'label' => 'Opzione pacchetto 1',
+                ],
+
+                '2' => [
+                    'label' => 'Opzione pacchetto 1',
+                ],
+
+                '3' => [
+                    'label' => 'Opzione pacchetto 2',
+                ],
+
+                '4' => [
+                    'label' => 'Opzione pacchetto 2',
                 ],
             ],
         ],

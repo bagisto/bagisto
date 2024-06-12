@@ -370,18 +370,22 @@ return [
 
         'sample-products' => [
             'category-translation' => [
-                '20' => [
+                '2' => [
                     'description'      => 'Beschreibung der Kategorie Herren',
                     'meta-description' => 'Meta-Beschreibung der Kategorie Herren',
                     'meta-keywords'    => 'Meta-Schlüsselwörter der Kategorie Herren',
                     'meta-title'       => 'Meta-Titel der Kategorie Herren',
+                    'name'             => 'Männer',
+                    'slug'             => 'maenner',
                 ],
 
-                '21' => [
+                '3' => [
                     'description'      => 'Beschreibung der Kategorie Winterkleidung',
                     'meta-description' => 'Meta-Beschreibung der Kategorie Winterkleidung',
                     'meta-keywords'    => 'Meta-Schlüsselwörter der Kategorie Winterkleidung',
                     'meta-title'       => 'Meta-Titel der Kategorie Winterkleidung',
+                    'name'             => 'Winterkleidung',
+                    'slug'             => 'winterkleidung',
                 ],
             ],
 
@@ -583,6 +587,24 @@ return [
                     'meta-title'       => 'Meta-Titel',
                     'name'             => 'OmniHeat Herren Solide Kapuzenpufferjacke-Blau-Grün-L',
                     'sort-description' => 'Bleiben Sie warm und stilvoll mit unserer OmniHeat Herren Solide Kapuzenpufferjacke. Diese Jacke wurde entwickelt, um ultimative Wärme zu bieten und verfügt über Einstecktaschen für zusätzliche Bequemlichkeit. Das isolierte Material sorgt dafür, dass Sie in kaltem Wetter gemütlich bleiben. Erhältlich in 5 attraktiven Farben, ist sie eine vielseitige Wahl für verschiedene Anlässe.',
+                ],
+            ],
+
+            'product-bundle-option-translations' => [
+                '1' => [
+                    'label' => 'Bundle-Option 1',
+                ],
+
+                '2' => [
+                    'label' => 'Bundle-Option 1',
+                ],
+
+                '3' => [
+                    'label' => 'Bundle-Option 2',
+                ],
+
+                '4' => [
+                    'label' => 'Bundle-Option 2',
                 ],
             ],
         ],

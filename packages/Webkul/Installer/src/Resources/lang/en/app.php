@@ -370,18 +370,22 @@ return [
 
         'sample-products' => [
             'category-translation' => [
-                '20' => [
+                '2' => [
                     'description'      => 'Men Category Description',
                     'meta-description' => 'Men Category Meta Description',
                     'meta-keywords'    => 'Men Category Meta Keywords',
                     'meta-title'       => 'Men Category Meta Title',
+                    'name'             => 'Men',
+                    'slug'             => 'men',
                 ],
 
-                '21' => [
+                '3' => [
                     'description'      => 'Winter Wear Category Description',
                     'meta-description' => 'Winter Wear Category Meta Description',
                     'meta-keywords'    => 'Winter Wear Category Meta Keywords',
                     'meta-title'       => 'Winter Wear Category Meta Title',
+                    'name'             => 'Winter Wear',
+                    'slug'             => 'winter-wear',
                 ],
             ],
 
@@ -584,6 +588,24 @@ return [
                     'meta-title'       => 'Meta Title',
                     'name'             => 'OmniHeat Men\'s Solid Hooded Puffer Jacket-Blue-Green-L',
                     'sort-description' => 'Stay warm and stylish with our OmniHeat Men\'s Solid Hooded Puffer Jacket. This jacket is designed to provide ultimate warmth and features insert pockets for added convenience. The insulated material ensures you stay cozy in cold weather. Available in 5 attractive colors, making it a versatile choice for various occasions.',
+                ],
+            ],
+
+            'product-bundle-option-translations' => [
+                '1' => [
+                    'label' => 'Bundle Option 1',
+                ],
+
+                '2' => [
+                    'label' => 'Bundle Option 1',
+                ],
+
+                '3' => [
+                    'label' => 'Bundle Option 2',
+                ],
+
+                '4' => [
+                    'label' => 'Bundle Option 2',
                 ],
             ],
         ],

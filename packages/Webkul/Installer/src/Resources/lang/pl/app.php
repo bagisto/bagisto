@@ -370,18 +370,22 @@ return [
 
         'sample-products' => [
             'category-translation' => [
-                '20' => [
+                '2' => [
                     'description'      => 'Opis kategorii męskiej',
                     'meta-description' => 'Meta opis kategorii męskiej',
                     'meta-keywords'    => 'Meta słowa kluczowe kategorii męskiej',
                     'meta-title'       => 'Meta tytuł kategorii męskiej',
+                    'name'             => 'Mężczyźni',
+                    'slug'             => 'mężczyźni',
                 ],
 
-                '21' => [
+                '3' => [
                     'description'      => 'Opis kategorii odzieży zimowej',
                     'meta-description' => 'Meta opis kategorii odzieży zimowej',
                     'meta-keywords'    => 'Meta słowa kluczowe kategorii odzieży zimowej',
                     'meta-title'       => 'Meta tytuł kategorii odzieży zimowej',
+                    'name'             => 'Odzież zimowa',
+                    'slug'             => 'odzież zimowa',
                 ],
             ],
 
@@ -584,6 +588,24 @@ return [
                     'meta-title'       => 'Tytuł meta',
                     'name'             => 'Kurtka OmniHeat Men\'s Solid Hooded Puffer Jacket-Niebiesko-Zielona-L',
                     'sort-description' => 'Zostań ciepły i stylowy dzięki naszej kurtce OmniHeat Men\'s Solid Hooded Puffer Jacket. Ta kurtka została zaprojektowana, aby zapewnić ostateczne ciepło i posiada kieszenie na wstawki dla dodatkowej wygody. Izolacyjny materiał zapewnia przytulność w zimnej pogodzie. Dostępna w 5 atrakcyjnych kolorach, jest wszechstronnym wyborem na różne okazje.',
+                ],
+            ],
+
+            'product-bundle-option-translations' => [
+                '1' => [
+                    'label' => 'Opcja pakietu 1',
+                ],
+
+                '2' => [
+                    'label' => 'Opcja pakietu 1',
+                ],
+
+                '3' => [
+                    'label' => 'Opcja pakietu 2',
+                ],
+
+                '4' => [
+                    'label' => 'Opcja pakietu 2',
                 ],
             ],
         ],

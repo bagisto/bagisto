@@ -370,18 +370,22 @@ return [
 
         'sample-products' => [
             'category-translation' => [
-                '20' => [
+                '2' => [
                     'description'      => 'Erkek Kategori Açıklaması',
                     'meta-description' => 'Erkek Kategori Meta Açıklaması',
                     'meta-keywords'    => 'Erkek Kategori Meta Anahtar Kelimeleri',
                     'meta-title'       => 'Erkek Kategori Meta Başlığı',
+                    'name'             => 'Erkekler',
+                    'slug'             => 'erkekler',
                 ],
 
-                '21' => [
+                '3' => [
                     'description'      => 'Kış Giyim Kategori Açıklaması',
                     'meta-description' => 'Kış Giyim Kategori Meta Açıklaması',
                     'meta-keywords'    => 'Kış Giyim Kategori Meta Anahtar Kelimeleri',
                     'meta-title'       => 'Kış Giyim Kategori Meta Başlığı',
+                    'name'             => 'Kış giysisi',
+                    'slug'             => 'kış giysisi',
                 ],
             ],
 
@@ -584,6 +588,24 @@ return [
                     'meta-title'       => 'Meta Başlık',
                     'name'             => 'OmniHeat Erkeklerin Düz Kapüşonlu Puf Montu-Mavi-Yeşil-L',
                     'sort-description' => 'OmniHeat Erkeklerin Düz Kapüşonlu Puf Montu ile sıcak ve şık kalın. Bu mont, ultimate sıcaklık sağlamak ve eklem cepleriyle donatılmış olup ekstra kolaylık sağlamak için tasarlanmıştır. Yalıtımlı malzeme, soğuk havalarda sizi sıcak tutar. 5 çekici renkte mevcut olması, çeşitli durumlar için çok yönlü bir seçenek yapar.',
+                ],
+            ],
+
+            'product-bundle-option-translations' => [
+                '1' => [
+                    'label' => 'Paket Seçeneği 1',
+                ],
+
+                '2' => [
+                    'label' => 'Paket Seçeneği 1',
+                ],
+
+                '3' => [
+                    'label' => 'Paket Seçeneği 2',
+                ],
+
+                '4' => [
+                    'label' => 'Paket Seçeneği 2',
                 ],
             ],
         ],

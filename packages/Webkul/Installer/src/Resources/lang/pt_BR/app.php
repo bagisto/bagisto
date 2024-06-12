@@ -370,18 +370,22 @@ return [
 
         'sample-products' => [
             'category-translation' => [
-                '20' => [
+                '2' => [
                     'description'      => 'Descrição da categoria masculina',
                     'meta-description' => 'Meta descrição da categoria masculina',
                     'meta-keywords'    => 'Meta palavras-chave da categoria masculina',
                     'meta-title'       => 'Meta título da categoria masculina',
+                    'name'             => 'Homens',
+                    'slug'             => 'homens',
                 ],
 
-                '21' => [
+                '3' => [
                     'description'      => 'Descrição da categoria de roupas de inverno',
                     'meta-description' => 'Meta descrição da categoria de roupas de inverno',
                     'meta-keywords'    => 'Meta palavras-chave da categoria de roupas de inverno',
                     'meta-title'       => 'Meta título da categoria de roupas de inverno',
+                    'name'             => 'Roupa de inverno',
+                    'slug'             => 'roupa de inverno',
                 ],
             ],
 
@@ -584,6 +588,24 @@ return [
                     'meta-title'       => 'Título Meta',
                     'name'             => 'Jaqueta Acolchoada com Capuz OmniHeat para Homens-Azul-Verde-L',
                     'sort-description' => 'Mantenha-se aquecido e estiloso com nossa Jaqueta Acolchoada com Capuz OmniHeat para Homens. Esta jaqueta é projetada para fornecer calor máximo e possui bolsos internos para maior conveniência. O material isolado garante que você fique aconchegante em clima frio. Disponível em 5 cores atraentes, tornando-a uma escolha versátil para várias ocasiões.',
+                ],
+            ],
+
+            'product-bundle-option-translations' => [
+                '1' => [
+                    'label' => 'Opção de pacote 1',
+                ],
+
+                '2' => [
+                    'label' => 'Opção de pacote 1',
+                ],
+
+                '3' => [
+                    'label' => 'Opção de pacote 2',
+                ],
+
+                '4' => [
+                    'label' => 'Opção de pacote 2',
                 ],
             ],
         ],

@@ -370,18 +370,22 @@ return [
 
         'sample-products' => [
             'category-translation' => [
-                '20' => [
+                '2' => [
                     'description'      => 'Mannen Categorie Beschrijving',
                     'meta-description' => 'Mannen Categorie Meta Beschrijving',
                     'meta-keywords'    => 'Mannen Categorie Meta Trefwoorden',
                     'meta-title'       => 'Mannen Categorie Meta Titel',
+                    'name'             => 'Heren',
+                    'slug'             => 'heren',
                 ],
 
-                '21' => [
+                '3' => [
                     'description'      => 'Winterkleding Categorie Beschrijving',
                     'meta-description' => 'Winterkleding Categorie Meta Beschrijving',
                     'meta-keywords'    => 'Winterkleding Categorie Meta Trefwoorden',
                     'meta-title'       => 'Winterkleding Categorie Meta Titel',
+                    'name'             => 'Winterkleding',
+                    'slug'             => 'winterkleding',
                 ],
             ],
 
@@ -584,6 +588,24 @@ return [
                     'meta-title'       => 'Meta Titel',
                     'name'             => 'OmniHeat Heren Solide Gewatteerde Jas met Capuchon-Blauw-Groen-L',
                     'sort-description' => 'Blijf warm en stijlvol met onze OmniHeat Heren Solide Gewatteerde Jas met Capuchon. Deze jas is ontworpen om ultieme warmte te bieden en heeft insteekzakken voor extra gemak. Het geïsoleerde materiaal zorgt ervoor dat je warm blijft in koud weer. Verkrijgbaar in 5 aantrekkelijke kleuren, waardoor het een veelzijdige keuze is voor verschillende gelegenheden.',
+                ],
+            ],
+
+            'product-bundle-option-translations' => [
+                '1' => [
+                    'label' => 'Bundeloptie 1',
+                ],
+
+                '2' => [
+                    'label' => 'Bundeloptie 1',
+                ],
+
+                '3' => [
+                    'label' => 'Bundeloptie 2',
+                ],
+
+                '4' => [
+                    'label' => 'Bundeloptie 2',
                 ],
             ],
         ],

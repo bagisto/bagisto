@@ -370,18 +370,22 @@ return [
 
         'sample-products' => [
             'category-translation' => [
-                '20' => [
+                '2' => [
                     'description'      => '男士类别描述',
                     'meta-description' => '男士类别元描述',
                     'meta-keywords'    => '男士类别元关键词',
                     'meta-title'       => '男士类别元标题',
+                    'name'             => '男士',
+                    'slug'             => '男人',
                 ],
 
-                '21' => [
+                '3' => [
                     'description'      => '冬季服装类别描述',
                     'meta-description' => '冬季服装类别元描述',
                     'meta-keywords'    => '冬季服装类别元关键词',
                     'meta-title'       => '冬季服装类别元标题',
+                    'name'             => '冬装',
+                    'slug'             => '冬装',
                 ],
             ],
 
@@ -584,6 +588,24 @@ return [
                     'meta-title'       => '元标题',
                     'name'             => 'OmniHeat男士纯色连帽羽绒服-蓝色-绿色-L',
                     'sort-description' => '用我们的OmniHeat男士纯色连帽羽绒服保持温暖和时尚。这款羽绒服旨在提供终极保暖，并配有插袋，方便携带。绝缘材料确保您在寒冷天气中保持舒适。有5种吸引人的颜色可供选择，使其成为各种场合的多功能选择。',
+                ],
+            ],
+
+            'product-bundle-option-translations' => [
+                '1' => [
+                    'label' => '捆绑选项 1',
+                ],
+
+                '2' => [
+                    'label' => '捆绑选项 1',
+                ],
+
+                '3' => [
+                    'label' => '捆绑选项 2',
+                ],
+
+                '4' => [
+                    'label' => '捆绑选项 2',
                 ],
             ],
         ],

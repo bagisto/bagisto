@@ -370,18 +370,22 @@ return [
 
         'sample-products' => [
             'category-translation' => [
-                '20' => [
+                '2' => [
                     'description'      => 'Description de la catégorie Hommes',
                     'meta-description' => 'Méta-description de la catégorie Hommes',
                     'meta-keywords'    => 'Mots-clés méta de la catégorie Hommes',
                     'meta-title'       => 'Titre méta de la catégorie Hommes',
+                    'name'             => 'Hommes',
+                    'slug'             => 'hommes',
                 ],
 
-                '21' => [
+                '3' => [
                     'description'      => 'Description de la catégorie Vêtements d\'hiver',
                     'meta-description' => 'Méta-description de la catégorie Vêtements d\'hiver',
                     'meta-keywords'    => 'Mots-clés méta de la catégorie Vêtements d\'hiver',
                     'meta-title'       => 'Titre méta de la catégorie Vêtements d\'hiver',
+                    'name'             => 'Vêtements d\'hiver',
+                    'slug'             => 'vetements-hiver',
                 ],
             ],
 
@@ -584,6 +588,24 @@ return [
                     'meta-title'       => 'Titre méta',
                     'name'             => 'Veste matelassée à capuche OmniHeat pour hommes-Bleu-Vert-L',
                     'sort-description' => 'Restez au chaud et à la mode avec notre veste matelassée à capuche OmniHeat pour hommes. Cette veste est conçue pour offrir une chaleur ultime et dispose de poches intérieures pour plus de commodité. Le matériau isolant vous assure de rester confortable par temps froid. Disponible en 5 couleurs attrayantes, ce qui en fait un choix polyvalent pour différentes occasions.',
+                ],
+            ],
+
+            'product-bundle-option-translations' => [
+                '1' => [
+                    'label' => 'Option de pack 1',
+                ],
+
+                '2' => [
+                    'label' => 'Option de pack 1',
+                ],
+
+                '3' => [
+                    'label' => 'Option de pack 2',
+                ],
+
+                '4' => [
+                    'label' => 'Option de pack 2',
                 ],
             ],
         ],
