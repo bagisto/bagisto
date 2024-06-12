@@ -548,6 +548,27 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 ```diff
 - public $databaseColumnName;
 + protected $columnName;
+
+- public string $index;
++ protected string $index;
+
+- public string $label;
++ protected string $label;
+
+- public string $type;
++ protected string $type;
+
+- public bool $searchable = false;
++ protected bool $searchable = false;
+
+- public bool $filterable = false,
++ protected bool $filterable = false;
+
+- public bool $sortable = false,
++ protected bool $sortable = false;
+
+- public mixed $closure = null,
++ protected mixed $closure = null;
 ```
 
 2. The setDatabaseColumnName method has been renamed to setColumnName  and the getDatabaseColumnName method has been renamed to geDatabaseColumnName.
