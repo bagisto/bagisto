@@ -240,8 +240,7 @@ If you are migrating your existing store to this version, please save the config
 <a name="optimize-the-configuration-section"></a>
 #### Optimize the configuration section
 
-We are remove the `packages/Webkul/Core/src/Tree.php` file, and also remove the `CoreConfigField` trait file and its important method moved into `packages/Webkul/Core/src/SystemConfig/ItemField.php`
-because configuration items's, field `ItemField.php` file is responsible for each fields of configuration.
+We are removing the `packages/Webkul/Core/src/Tree.php` file and also removing the `CoreConfigField` trait from `CoreConfigRepository.php` file. Its important methods have been moved into `packages/Webkul/Core/src/SystemConfig/ItemField.php` because the `ItemField.php` file is responsible for each field of configuration items.
 
 ```diff
 -<?php
@@ -430,8 +429,7 @@ because configuration items's, field `ItemField.php` file is responsible for eac
 
 ```
 
-The method `getChannelLocaleInfo` which was in `CoreConfigField` trait, is used for showing that the field is locale based or channel based, which is completely removed as no need more, `getNameField`, `getValidations` and `getOptions` methods and its class properties moved same as into `packages/Webkul/Core/src/SystemConfig/ItemField.php` file which is handle via the `ItemField` class.
-
+The method `getChannelLocaleInfo`, which was in the `CoreConfigField` trait, has been completely removed as it is no longer needed. The `getNameField`, `getValidations`, and `getOptions` methods, along with their class properties, have been moved to the `packages/Webkul/Core/src/SystemConfig/ItemField.php` file, which is handled by the `ItemField` class.
 
 ```diff
 -    /**
@@ -459,7 +457,7 @@ The method `getChannelLocaleInfo` which was in `CoreConfigField` trait, is used 
 -    }
 ```
 
-for achieve same we are using below provide code.
+To achieve this, we are using the code provided below.
 
 ```diff
 + <span
@@ -477,9 +475,9 @@ for achieve same we are using below provide code.
 + </span>
 ```
 
-in `packages/Webkul/Admin/src/Resources/views/configuration/index.blade.php` we are completely change the way to get/fetch the configuration items as now we are using the `packages/Webkul/Core/src/SystemConfig/Item.php` and `packages/Webkul/Core/src/SystemConfig/ItemField.php` and `packages/Webkul/Core/src/SystemConfig.php` is responsible for handling the configuration items and its field.
+In `packages/Webkul/Admin/src/Resources/views/configuration/index.blade.php`, we have completely changed the way to get/fetch the configuration items. We are now using `packages/Webkul/Core/src/SystemConfig/Item.php`, `packages/Webkul/Core/src/SystemConfig/ItemField.php`, and `packages/Webkul/Core/src/SystemConfig.php`, which are responsible for handling the configuration items and their fields.
 
-In `index.blade.php` changes are shown below,
+The changes in `index.blade.php` are shown below:
 
 ```diff
 <div class="grid gap-y-8">
@@ -537,7 +535,7 @@ In `index.blade.php` changes are shown below,
 </div>
 ```
 
-in `packages/Webkul/Admin/src/Resources/views/configuration/edit.blade.php` there we were using the iteration and condition based on routes now we are using the `facade` helper method named `system_config()` for getting the active configuration items and its fields.
+In `packages/Webkul/Admin/src/Resources/views/configuration/edit.blade.php`, we were previously using iteration and conditions based on routes. Now, we are using the `facade` helper method named `system_config()` to get the active configuration items and their fields.
 
 ```diff
 @php
@@ -617,7 +615,7 @@ in `packages/Webkul/Admin/src/Resources/views/configuration/edit.blade.php` ther
 -@endif
 ```
 
-in `field-type.blade.php` changes are shown below,
+The changes in field-type.blade.php are shown below:
 
 ```diff
 -@inject('coreConfigRepository', 'Webkul\Core\Repositories\CoreConfigRepository')
