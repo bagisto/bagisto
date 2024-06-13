@@ -3102,6 +3102,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Aktiv',
                 'add-filter-btn'                => 'Filter hinzufügen',
                 'add-footer-link-btn'           => 'Fußzeilen-Link hinzufügen',
                 'add-image-btn'                 => 'Bild hinzufügen',
@@ -3126,6 +3127,7 @@ return [
                 'footer-title'                  => 'Titel',
                 'general'                       => 'Allgemein',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inaktiv',
                 'image'                         => 'Bild',
                 'image-size'                    => 'Die Bildauflösung sollte (1920px X 700px) sein',
                 'image-title'                   => 'Bildtitel',
@@ -3137,6 +3139,7 @@ return [
                 'name'                          => 'Name',
                 'no'                            => 'Nein',
                 'new'                           => 'Neu',
+                'parent-id'                     => 'Eltern-ID',
                 'preview'                       => 'Vorschau',
                 'product-carousel'              => 'Produkt Karussell',
                 'product-carousel-description'  => 'Produkte mit einem dynamischen und responsiven Produkt Karussell elegant präsentieren.',

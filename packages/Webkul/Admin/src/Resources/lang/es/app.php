@@ -3102,6 +3102,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Activo',
                 'add-filter-btn'                => 'Agregar Filtro',
                 'add-footer-link-btn'           => 'Agregar Enlace del Pie de Página',
                 'add-image-btn'                 => 'Agregar Imagen',
@@ -3126,6 +3127,7 @@ return [
                 'footer-title'                  => 'Título',
                 'general'                       => 'General',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inactivo',
                 'image'                         => 'Imagen',
                 'image-size'                    => 'El tamaño de la imagen debe ser (1920px x 700px)',
                 'image-title'                   => 'Título de la imagen',
@@ -3137,6 +3139,7 @@ return [
                 'name'                          => 'Nombre',
                 'no'                            => 'No',
                 'new'                           => 'Nuevo',
+                'parent-id'                     => 'ID del Padre',
                 'preview'                       => 'Vista Previa',
                 'product-carousel'              => 'Carrusel de Productos',
                 'product-carousel-description'  => 'Muestra productos de forma elegante con un carrusel de productos dinámico y receptivo.',
