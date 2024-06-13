@@ -185,6 +185,12 @@ There is no dependency needed to be updated at for this upgrade.
 
 If you are migrating your existing store to this version, please save the configuration values again, as previously saved values will no longer work.
 
+6. The Allow Guest Checkout configuration has been relocated to the Sales configuration under Checkout, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('catalog.products.guest_checkout.allow_guest_checkout')
++ core()->getConfigData('sales.checkout.shopping_cart.allow_guest_checkout')
+```
 
 
 <a name="renamed-admin-api-routes-names"></a>

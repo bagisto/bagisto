@@ -117,9 +117,7 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.mini_cart.before') !!}
 
             <!-- Mini cart -->
-            @if (core()->getConfigData('sales.checkout.mini_cart.enable'))
-                @include('shop::checkout.cart.mini-cart')
-            @endif
+            @include('shop::checkout.cart.mini-cart')
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.mini_cart.after') !!}
 

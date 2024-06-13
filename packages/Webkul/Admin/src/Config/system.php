@@ -419,22 +419,10 @@ return [
             ],
         ],
     ], [
-        'key'    => 'catalog.products.guest_checkout',
-        'name'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title',
-        'info'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title-info',
-        'sort'   => 2,
-        'fields' => [
-            [
-                'name'  => 'allow_guest_checkout',
-                'title' => 'admin::app.configuration.index.catalog.products.guest-checkout.allow-guest-checkout',
-                'type'  => 'boolean',
-            ],
-        ],
-    ], [
         'key'    => 'catalog.products.product_view_page',
         'name'   => 'admin::app.configuration.index.catalog.products.product-view-page.title',
         'info'   => 'admin::app.configuration.index.catalog.products.product-view-page.title-info',
-        'sort'   => 3,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'       => 'no_of_related_products',
@@ -452,7 +440,7 @@ return [
         'key'    => 'catalog.products.cart_view_page',
         'name'   => 'admin::app.configuration.index.catalog.products.cart-view-page.title',
         'info'   => 'admin::app.configuration.index.catalog.products.cart-view-page.title-info',
-        'sort'   => 4,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'       => 'no_of_cross_sells_products',
@@ -465,7 +453,7 @@ return [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.configuration.index.catalog.products.storefront.title',
         'info'   => 'admin::app.configuration.index.catalog.products.storefront.title-info',
-        'sort'   => 5,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'          => 'mode',
@@ -523,7 +511,7 @@ return [
         'key'    => 'catalog.products.cache_small_image',
         'name'   => 'admin::app.configuration.index.catalog.products.small-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.small-image.title-info',
-        'sort'   => 6,
+        'sort'   => 5,
         'fields' => [
             [
                 'name'       => 'width',
@@ -542,7 +530,7 @@ return [
         'key'    => 'catalog.products.cache_medium_image',
         'name'   => 'admin::app.configuration.index.catalog.products.medium-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.medium-image.title-info',
-        'sort'   => 7,
+        'sort'   => 6,
         'fields' => [
             [
                 'name'       => 'width',
@@ -561,7 +549,7 @@ return [
         'key'    => 'catalog.products.cache_large_image',
         'name'   => 'admin::app.configuration.index.catalog.products.large-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.large-image.title-info',
-        'sort'   => 8,
+        'sort'   => 7,
         'fields' => [
             [
                 'name'       => 'width',
@@ -580,7 +568,7 @@ return [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.configuration.index.catalog.products.review.title',
         'info'   => 'admin::app.configuration.index.catalog.products.review.title-info',
-        'sort'   => 9,
+        'sort'   => 8,
         'fields' => [
             [
                 'name'  => 'guest_review',
@@ -598,7 +586,7 @@ return [
         'key'    => 'catalog.products.placeholders',
         'name'   => 'Product Image Placeholders',
         'info'   => 'Product Image Placeholders',
-        'sort'   => 10,
+        'sort'   => 9,
         'fields' => [
             [
                 'name'  => 'small_image',
@@ -625,7 +613,7 @@ return [
         'key'    => 'catalog.products.attribute',
         'name'   => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info'   => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort'   => 11,
+        'sort'   => 10,
         'fields' => [
             [
                 'name'       => 'image_attribute_upload_size',
@@ -643,7 +631,7 @@ return [
         'key'    => 'catalog.products.social_share',
         'name'   => 'admin::app.configuration.index.catalog.products.social-share.title',
         'info'   => 'admin::app.configuration.index.catalog.products.social-share.title-info',
-        'sort'   => 12,
+        'sort'   => 11,
         'fields' => [
             [
                 'name'  => 'enabled',
@@ -2105,29 +2093,75 @@ return [
         'icon' => 'settings/tax.svg',
         'sort' => 7,
     ], [
-        'key'    => 'sales.checkout.mini_cart',
-        'name'   => 'Mini Cart',
-        'info'   => 'Mini Cart',
+        'key'    => 'sales.checkout.shopping_cart',
+        'name'   => 'Shopping cart',
+        'info'   => 'Enable guest checkout, cart page, cross-sell products, and estimated shipping to enhance user convenience and streamline the shopping process for increased sales.',
         'sort'   => 1,
         'fields' => [
             [
-                'name'    => 'enable',
-                'title'   => 'Mini Cart',
+                'name'    => 'allow_guest_checkout',
+                'title'   => 'Allow guest Checkout',
+                'info'    => 'Enable guest checkout for a faster, hassle-free purchase process.',
                 'type'    => 'boolean',
                 'default' => 1,
+            ], [
+                'name'    => 'cart_page',
+                'title'   => 'Cart Page',
+                'info'    => 'Control Cart Page visibility to enhance user shopping experience.',
+                'type'    => 'boolean',
+                'default' => 2,
+            ], [
+                'name'    => 'cross_sell',
+                'title'   => 'Cross sell Products',
+                'info'    => 'Enable cross-sell products to boost additional sales opportunities.',
+                'type'    => 'boolean',
+                'default' => 3,
+            ], [
+                'name'    => 'estimate_shipping',
+                'title'   => 'Estimate Shipping',
+                'info'    => 'Enable estimated shipping to provide upfront shipping costs.',
+                'type'    => 'boolean',
+                'default' => 4,
             ],
         ],
     ], [
-        'key'    => 'sales.checkout.cart_summary',
-        'name'   => 'Cart Summary',
-        'info'   => 'Cart Summary',
+        'key'    => 'sales.checkout.my_cart',
+        'name'   => 'My cart',
+        'info'   => 'Enable settings for My Cart to show a summary of item quantities and display the total number of items in the cart for easy tracking.',
         'sort'   => 2,
         'fields' => [
             [
-                'name'    => 'cart_summary',
-                'title'   => 'Cart Summary',
+                'name'    => 'summary',
+                'title'   => 'Summary',
+                'type'    => 'select',
+                'default' => 'display_item_quantity',
+                'options' => [
+                    [
+                        'title' => 'Display Item quantities',
+                        'value' => 'display_item_quantity',
+                    ], [
+                        'title' => 'Display number of items in cart',
+                        'value' => 'display_number_of_items_in_cart',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key'    => 'sales.checkout.mini_cart',
+        'name'   => 'Mini Cart',
+        'info'   => 'Enable Mini Cart settings to display the mini cart and show Mini Cart Offer Information for quick access to cart details and promotions.',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'    => 'display_mini_cart',
+                'title'   => 'Display Mini Cart',
                 'type'    => 'boolean',
                 'default' => 1,
+            ], [
+                'name'    => 'offer_info',
+                'title'   => 'Mini Cart Offer Information',
+                'type'    => 'text',
+                'default' => 'Get Up To 30% OFF on your 1st order',
             ],
         ],
     ],
