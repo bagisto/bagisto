@@ -134,7 +134,7 @@ it('should update the existing channel', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.channels.update', $channel->id), $data = [
-        'code'              => strtolower(fake()->numerify('code######')),
+        'code'              => $channel->code,
 
         app()->getLocale()  => [
             'name'            => fake()->name(),
