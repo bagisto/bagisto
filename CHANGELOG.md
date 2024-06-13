@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.2 (14th of June 2024)** - *Release*
 
-## Datagrid Improvements
+### Datagrid Improvements
 
 1. **Custom Filters:**
 
@@ -26,31 +26,57 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Added support for filtering data by date and date-time, enhancing data analysis capabilities.
 
-## Inclusive and Exclusive Tax Options
+6. **Elasticsearch Support for Datagrids**
+
+* Implemented Elasticsearch support for datagrids, enabling faster and more efficient data retrieval and analysis.
+
+### Inclusive and Exclusive Tax Options
 
 * Added the feature to support both inclusive and exclusive tax settings. Users can now choose whether taxes are included in or added to the product price, providing flexibility to accommodate different tax regulations and pricing strategies.
 
-## Order and Reorder Functionality
+### Estimate Shipping Charges
+
+* Implemented a feature to estimate shipping charges for orders, providing users with upfront cost estimates during the checkout process.
+
+### Order and Reorder Functionality
 
 * Enabled administrators to order and reorder items directly from the admin interface, enhancing management efficiency. 
 
 * Implemented the ability for customers to reorder products directly from their account, streamlining the purchasing process and enhancing user convenience.
 
-## Redesigned Invoice Layout:
+### Redesigned Invoice Layout:
 
 * Updated the design of the invoice for a more modern and user-friendly appearance.
 
 * Added support for Right-to-Left (RTL) languages, ensuring compatibility and usability for languages that are written from right to left.
 
-## Custom Currency Options
+* Added support for multiple locales in the invoice, allowing invoices to be generated and displayed in different languages and formats based on user preferences.
+
+### Product Card UI Enhancements
+
+* Upgraded the product cart layout to enhance user experience with a more intuitive and visually appealing design.
+
+### Frontend Fixes and Redesigns for Mobile devices
+
+* Improved mobile view for all front-facing elements, including the review section, footer, product view, and customer account section.
+
+### Added Contact Us Feature
+
+* Implemented a feature allowing users to easily contact the store from the frontend.
+
+### Enhanced Theme Customization
+
+* Enhanced the theme customization section by adding a feature to filter attributes.
+
+### Custom Currency Options
 
 * Enhanced currency creation with additional customization options. Added support for specifying Group Separator, Decimal Separator, and Currency Position during currency setup.
 
-## Media zooming for product and review images 
+### Media zooming for product and review images 
 
 * Added the feature to zoom in on media for both reviews and products, improving the viewing experience and providing better detail.
 
-## Implemented new features in installer package.
+### Implemented new features in installer package.
 
 1. **All Currency Support**
 
@@ -60,10 +86,54 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Added the feature to create sample products during installation using the GUI, enhancing the initial setup experience for users.
 
-## Search Mode Functionality
+### Search Mode Functionality
 
 * Implemented search mode functionality for the product datagrid and Elasticsearch, enabling users to perform advanced searches and retrieve relevant product information efficiently.
 
+### Channel Filter Support
+
+1. **Data Grids:**
+    - Users can now filter data by channels directly within data grids, improving data management and analysis capabilities.
+
+2. **Dashboard:**
+    - Enhanced the dashboard with channel filter support, allowing users to view analytics and metrics specific to selected channels.
+
+3. **Reporting:**
+    - Integrated channel filters into reporting features, enabling users to generate channel-specific reports for detailed analysis.
+
+### Added Blade File Support in Configuration
+
+* Implemented support for Blade files in configuration settings, enhancing flexibility and customization options.
+
+### Added Login Option in Cart and Checkout
+
+* Implemented a login option directly on the cart and checkout pages, improving accessibility and convenience for users.
+
+### Locale-Based URL Key Implementation
+
+* Implemented locale-based URL keys, improving SEO and localization by generating URLs tailored to different language versions.
+
+### Improved Web Vitals
+
+*  Enhanced web vitals including loading speed, interactivity, and visual stability for a smoother user experience.
+
+* Improved web vitals contribute to better user engagement and satisfaction.
+
+* Optimized web vitals can positively impact search engine rankings and user retention.
+
+### Simplified Tailwind CSS Classes
+
+* Enhanced readability of code by simplifying class definitions.
+
+*  Ensured a uniform look by standardizing how Tailwind CSS classes are applied.
+
+* Tailwind CSS classes clearer by removing unnecessary values.
+
+### Added Debug Mode with Allowed IPs Feature
+
+* Implemented debug mode with IP allowlist configuration.
+
+* This entry clarifies that the debug mode now includes a configuration option (`APP_DEBUG_ALLOWED_IPS=`) in the `.env` file, where IP addresses can be listed comma-separated to restrict access to authorized users during debugging, thereby enhancing security measures.
 
 * #9534 [feature] - Logged in User -> Checkout Page -> Default address must be selected.
 
