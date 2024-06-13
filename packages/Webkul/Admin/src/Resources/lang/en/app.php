@@ -3109,6 +3109,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Active',
                 'add-filter-btn'                => 'Add Filter',
                 'add-footer-link-btn'           => 'Add Footer Link',
                 'add-image-btn'                 => 'Add Image',
@@ -3133,6 +3134,7 @@ return [
                 'footer-title'                  => 'Title',
                 'general'                       => 'General',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inactive',
                 'image'                         => 'Image',
                 'image-size'                    => 'Image resolution should be (1920px X 700px)',
                 'image-title'                   => 'Image Title',
@@ -3144,6 +3146,7 @@ return [
                 'name'                          => 'Name',
                 'no'                            => 'No',
                 'new'                           => 'New',
+                'parent-id'                     => 'Parent ID',
                 'preview'                       => 'Preview',
                 'product-carousel'              => 'Product Carousel',
                 'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',

@@ -3105,6 +3105,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'פעיל',
                 'add-filter-btn'                => 'הוסף מסנן',
                 'add-footer-link-btn'           => 'הוסף קישור לתחתית',
                 'add-image-btn'                 => 'הוסף תמונה',
@@ -3129,6 +3130,7 @@ return [
                 'footer-title'                  => 'כותרת',
                 'general'                       => 'כללי',
                 'html'                          => 'HTML',
+                'inactive'                      => 'לא פעיל',
                 'image'                         => 'תמונה',
                 'image-size'                    => 'גודל התמונה צריך להיות (1920px X 700px)',
                 'image-title'                   => 'כותרת התמונה',
@@ -3140,6 +3142,7 @@ return [
                 'name'                          => 'שם',
                 'no'                            => 'לא',
                 'new'                           => 'חדש',
+                'parent-id'                     => 'מזהה הורה',
                 'preview'                       => 'תצוגה מקדימה',
                 'product-carousel'              => 'קרוסלת מוצרים',
                 'product-carousel-description'  => 'הצגת מוצרים בצורה אלגנטית עם קרוסלת מוצרים דינמית ורספונסיבית.',
