@@ -306,7 +306,7 @@
                                         {{ $product->name }}
                                     </h1>
 
-                                    @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                                    @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                                         <div
                                             class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
                                             role="button"
@@ -445,7 +445,7 @@
                                         tabindex="0"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"
                                     >
-                                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                                        @if (core()->getConfigData('catalog.products.settings.compare_option'))
                                             <span
                                                 class="icon-compare text-2xl"
                                                 role="presentation"

@@ -60,39 +60,23 @@ return [
         'icon' => 'settings/store.svg',
         'sort' => 2,
     ], [
-        'key'    => 'general.content.shop',
-        'name'   => 'admin::app.configuration.index.general.content.settings.title',
-        'info'   => 'admin::app.configuration.index.general.content.settings.title-info',
+        'key'    => 'general.content.header_offer',
+        'name'   => 'Header Offer Title',
+        'info'   => 'Home page header offer title',
         'sort'   => 1,
         'fields' => [
             [
-                'name'          => 'compare_option',
-                'title'         => 'admin::app.configuration.index.general.content.settings.compare-options',
-                'type'          => 'boolean',
-                'default'       => 1,
-                'locale_based'  => true,
-                'channel_based' => true,
-            ], [
-                'name'          => 'wishlist_option',
-                'title'         => 'admin::app.configuration.index.general.content.settings.wishlist-options',
-                'type'          => 'boolean',
-                'default'       => 1,
-                'locale_based'  => true,
-                'channel_based' => true,
-            ], [
-                'name'          => 'image_search',
-                'title'         => 'admin::app.configuration.index.general.content.settings.image-search-option',
-                'type'          => 'boolean',
-                'default'       => 1,
-                'locale_based'  => true,
-                'channel_based' => true,
-            ],
+                'name'  => 'title',
+                'title' => 'Offer Title',
+                'type'  => 'text',
+                'default' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+            ]
         ],
     ], [
         'key'    => 'general.content.custom_scripts',
         'name'   => 'admin::app.configuration.index.general.content.custom-scripts.title',
         'info'   => 'admin::app.configuration.index.general.content.custom-scripts.title-info',
-        'sort'   => 1,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'custom_css',
@@ -348,7 +332,25 @@ return [
         'name' => 'admin::app.configuration.index.catalog.products.title',
         'info' => 'admin::app.configuration.index.catalog.products.info',
         'icon' => 'settings/product.svg',
-        'sort' => 2,
+        'sort' => 1,
+    ], [
+        'key'    => 'catalog.products.settings',
+        'name'   => 'admin::app.configuration.index.general.content.settings.title',
+        'info'   => 'admin::app.configuration.index.general.content.settings.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'compare_option',
+                'title'         => 'admin::app.configuration.index.general.content.settings.compare-options',
+                'type'          => 'boolean',
+                'default'       => 1,
+            ], [
+                'name'          => 'image_search',
+                'title'         => 'admin::app.configuration.index.general.content.settings.image-search-option',
+                'type'          => 'boolean',
+                'default'       => 1,
+            ],
+        ],
     ], [
         'key'    => 'catalog.products.search',
         'name'   => 'admin::app.configuration.index.catalog.products.search.title',
@@ -399,6 +401,18 @@ return [
                         'value' => 'elastic',
                     ],
                 ],
+            ], [
+                'name'    => 'min_query_length',
+                'title'   => 'Minimum query length',
+                'info'    => 'Set minimum query length for search queries.',
+                'type'    => 'text',
+                'default' => '0',
+            ], [
+                'name'    => 'max_query_length',
+                'title'   => 'Maximum query length',
+                'info'    => 'Set maximum query length for search queries.',
+                'type'    => 'text',
+                'default' => '1000',
             ],
         ],
     ], [
@@ -524,6 +538,10 @@ return [
                 'title'      => 'admin::app.configuration.index.catalog.products.small-image.height',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
+            ],  [
+                'name'  => 'small_image',
+                'title' => 'Small Image',
+                'type'  => 'image',
             ],
         ],
     ], [
@@ -537,12 +555,15 @@ return [
                 'title'      => 'admin::app.configuration.index.catalog.products.medium-image.width',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
-            ],
-            [
+            ], [
                 'name'       => 'height',
                 'title'      => 'admin::app.configuration.index.catalog.products.medium-image.height',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
+            ], [
+                'name'  => 'medium_image',
+                'title' => 'Medium Image',
+                'type'  => 'image',
             ],
         ],
     ], [
@@ -556,12 +577,15 @@ return [
                 'title'      => 'admin::app.configuration.index.catalog.products.large-image.width',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
-            ],
-            [
+            ], [
                 'name'       => 'height',
                 'title'      => 'admin::app.configuration.index.catalog.products.large-image.height',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
+            ], [
+                'name'  => 'large_image',
+                'title' => 'Large Image',
+                'type'  => 'image',
             ],
         ],
     ], [
@@ -583,37 +607,10 @@ return [
             ],
         ],
     ], [
-        'key'    => 'catalog.products.placeholders',
-        'name'   => 'Product Image Placeholders',
-        'info'   => 'Product Image Placeholders',
-        'sort'   => 9,
-        'fields' => [
-            [
-                'name'  => 'small_image',
-                'title' => 'Small Image',
-                'type'  => 'image',
-            ],
-            [
-                'name'  => 'medium_image',
-                'title' => 'Medium Image',
-                'type'  => 'image',
-            ],
-            [
-                'name'  => 'large_image',
-                'title' => 'Large Image',
-                'type'  => 'image',
-            ],
-            [
-                'name'  => 'original_image',
-                'title' => 'Original Image',
-                'type'  => 'image',
-            ],
-        ],
-    ], [
         'key'    => 'catalog.products.attribute',
         'name'   => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info'   => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort'   => 10,
+        'sort'   => 9,
         'fields' => [
             [
                 'name'       => 'image_attribute_upload_size',
@@ -631,7 +628,7 @@ return [
         'key'    => 'catalog.products.social_share',
         'name'   => 'admin::app.configuration.index.catalog.products.social-share.title',
         'info'   => 'admin::app.configuration.index.catalog.products.social-share.title-info',
-        'sort'   => 11,
+        'sort'   => 10,
         'fields' => [
             [
                 'name'  => 'enabled',
@@ -673,7 +670,7 @@ return [
         'name' => 'admin::app.configuration.index.catalog.rich-snippets.title',
         'info' => 'admin::app.configuration.index.catalog.rich-snippets.info',
         'icon' => 'settings/settings.svg',
-        'sort' => 3,
+        'sort' => 2,
     ], [
         'key'    => 'catalog.rich_snippets.products',
         'name'   => 'admin::app.configuration.index.catalog.rich-snippets.products.title',
@@ -730,6 +727,25 @@ return [
                 'type'  => 'boolean',
             ],
         ],
+    ], [
+        'key'  => 'catalog.inventory',
+        'name' => 'Inventory',
+        'info' => 'Inventory',
+        'icon' => 'settings/settings.svg',
+        'sort' => 3,
+    ], [
+        'key'    => 'catalog.inventory.stock_options',
+        'name'   => 'Product Stock Options',
+        'info'   => 'Product Stock Options',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'backOrder',
+                'title'   => 'Back order',
+                'type'    => 'boolean',
+                'default' => true,
+            ],
+        ],
     ],
 
     /**
@@ -782,7 +798,7 @@ return [
                 'name'          => 'street_lines',
                 'title'         => 'admin::app.configuration.index.customer.address.information.street-lines',
                 'type'          => 'text',
-                'validation'    => 'between:1,2',
+                'validation'    => 'between:1,4',
                 'channel_based' => true,
                 'default_value' => 1,
             ],
@@ -817,83 +833,35 @@ return [
             ],
         ],
     ], [
-        'key'  => 'customer.contact',
-        'name' => 'Contact',
-        'info' => 'Enable/Disable contact, Email Configurations',
-        'icon' => 'settings/settings.svg',
-        'sort' => 3,
-    ], [
-        'key'    => 'customer.contact.enable',
-        'name'   => 'Contact',
-        'info'   => 'Enable or Disable Contact',
-        'sort'   => 1,
-        'fields' => [
-            [
-                'name'    => 'enable',
-                'title'   => 'Enable',
-                'type'    => 'boolean',
-                'default' => true,
-            ],
-        ],
-    ], [
-        'key'    => 'customer.contact.email_configuration',
-        'name'   => 'Email Configuration',
-        'info'   => 'To set up the email configuration for sending mail, you can fill the required fields for email setup.',
-        'sort'   => 2,
-        'fields' => [
-            [
-                'name'          => 'mailer',
-                'title'         => 'Mailer',
-                'type'          => 'text',
-            ], [
-                'name'          => 'host',
-                'title'         => 'Host Name',
-                'type'          => 'text',
-            ], [
-                'name'          => 'port',
-                'title'         => 'Port Number',
-                'type'          => 'text',
-            ], [
-                'name'          => 'username',
-                'title'         => 'User Name',
-                'type'          => 'text',
-            ], [
-                'name'          => 'password',
-                'title'         => 'Password',
-                'type'          => 'text',
-            ], [
-                'name'          => 'encryption',
-                'title'         => 'Encryption',
-                'type'          => 'select',
-                'default'       => 'tls',
-                'options'       => [
-                    [
-                        'title' => 'tls',
-                        'value' => 'tls',
-                    ], [
-                        'title' => 'pgp',
-                        'value' => 'pgp',
-                    ],
-                ],
-            ],
-        ],
-    ], [
         'key'  => 'customer.settings',
         'name' => 'admin::app.configuration.index.customer.settings.title',
         'info' => 'admin::app.configuration.index.customer.settings.settings-info',
         'icon' => 'settings/settings.svg',
-        'sort' => 4,
+        'sort' => 3,
     ], [
         'key'    => 'customer.settings.login_as_customer',
         'name'   => 'Login As Customer',
-        'info'   => 'Login As Customer',
-        'sort'   => 2,
+        'info'   => 'Enable "Login as Customer" functionality.',
+        'sort'   => 1,
         'fields' => [
             [
                 'name'         => 'Login',
                 'title'        => 'Login as Customer',
                 'type'         => 'boolean',
                 'default'      => 1,
+            ],
+        ],
+    ], [
+        'key'    => 'customer.settings.wishlist',
+        'name'   => 'Wishlist',
+        'info'   => 'Enable or disable the wishlist option.',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'wishlist_option',
+                'title'   => 'Allow Wishlist option',
+                'type'    => 'boolean',
+                'default' => 1,
             ],
         ],
     ], [
@@ -922,22 +890,10 @@ return [
             ],
         ],
     ], [
-        'key'    => 'customer.settings.password',
-        'name'   => 'Reset Password',
-        'info'   => 'To setup minimum password length for the customers.',
-        'sort'   => 5,
-        'fields' => [
-            [
-                'name'  => 'minimum_password_length',
-                'title' => 'Minimum Password Length',
-                'type'  => 'text',
-            ],
-        ],
-    ], [
         'key'    => 'customer.settings.social_login',
         'name'   => 'admin::app.configuration.index.customer.settings.social-login.social-login',
         'info'   => 'admin::app.configuration.index.customer.settings.social-login.social-login-info',
-        'sort'   => 6,
+        'sort'   => 5,
         'fields' => [
             [
                 'name'          => 'enable_facebook',
@@ -1695,26 +1651,20 @@ return [
         ],
     ],  [
         'key'    => 'sales.order_settings.reorder',
-        'name'   => 'Reorder',
-        'info'   => 'To enable or disable the reordering feature.',
+        'name'   => 'Allow Reorder',
+        'info'   => 'Enable reorder functionality for both admin and shop interfaces.',
         'sort'   => 2,
         'fields' => [
             [
-                'name'    => 'enable',
-                'title'   => 'Shop Reorder',
+                'name'    => 'admin',
+                'title'   => 'Admin Reorder',
+                'info'    => 'Enable or disable the reordering feature for admin users.',
                 'type'    => 'boolean',
                 'default' => true,
-            ],
-        ],
-    ], [
-        'key'    => 'sales.order_settings.pdf_print_outs',
-        'name'   => 'PDF Print Out',
-        'info'   => 'PDF Print Out',
-        'sort'   => 3,
-        'fields' => [
-            [
-                'name'    => 'order_id',
-                'title'   => 'Display Order ID in Header',
+            ], [
+                'name'    => 'shop',
+                'title'   => 'Shop Reorder',
+                'info'    => 'Enable or disable the reordering feature for shop users.',
                 'type'    => 'boolean',
                 'default' => true,
             ],
@@ -1804,13 +1754,20 @@ return [
         ],
     ], [
         'key'    => 'sales.invoice_settings.pdf_print_outs',
-        'name'   => 'Invoice PDF Print Out',
-        'info'   => 'Invoice PDF Print Out',
+        'name'   => 'PDF Print Outs',
+        'info'   => 'PDF Print Out',
         'sort'   => 3,
         'fields' => [
             [
                 'name'    => 'invoice_id',
                 'title'   => 'Display Invoice ID in Header',
+                'info'    => 'Configure display of Invoice ID in Invoice Header.',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'order_id',
+                'title'   => 'Display Order ID in Header',
+                'info'    => 'Configure display of Order ID in Invoice Header.',
                 'type'    => 'boolean',
                 'default' => true,
             ],

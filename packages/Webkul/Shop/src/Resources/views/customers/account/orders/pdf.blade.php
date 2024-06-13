@@ -244,7 +244,7 @@
                                 </td>
                             @endif
 
-                            @if (core()->getConfigData('sales.order_settings.pdf_print_outs.order_id'))
+                            @if (core()->getConfigData('sales.invoice_settings.pdf_print_outs.order_id'))
                                 <td style="width: 50%; padding: 2px 18px;border:none;">
                                     <b>
                                         @lang('shop::app.customers.account.orders.invoice-pdf.order-id'): 

@@ -33,7 +33,10 @@
             </div>
 
             <div class="flex gap-1.5">
-                @if ($order->canReorder() && core()->getConfigData('sales.order_settings.reorder.enable'))
+                @if (
+                    $order->canReorder()
+                    && core()->getConfigData('sales.order_settings.reorder.shop')
+                )
                     <a
                         href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
                         class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:hidden"

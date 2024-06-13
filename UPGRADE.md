@@ -192,6 +192,62 @@ If you are migrating your existing store to this version, please save the config
 + core()->getConfigData('sales.checkout.shopping_cart.allow_guest_checkout')
 ```
 
+7. The Wishlist Option configuration has been relocated to the Customer configuration under Setting, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('general.content.shop.wishlist_option')
++ core()->getConfigData('customer.settings.wishlist.wishlist_option')
+```
+
+8. The `locale_based` and `channel_based` settings in the customer products settings configuration have been updated to no longer be locale- or channel-based.
+
+```diff
+[
+    'key'    => 'catalog.products.settings',
+    'name'   => 'admin::app.configuration.index.general.content.settings.title',
+    'info'   => 'admin::app.configuration.index.general.content.settings.title-info',
+    'sort'   => 1,
+    'fields' => [
+        [
+            'name'          => 'compare_option',
+            'title'         => 'admin::app.configuration.index.general.content.settings.compare-options',
+            'type'          => 'boolean',
+            'default'       => 1,
+-           'locale_based'  => true,
+-           'channel_based' => true,
+        ], [
+            'name'          => 'image_search',
+            'title'         => 'admin::app.configuration.index.general.content.settings.image-search-option',
+            'type'          => 'boolean',
+            'default'       => 1,
+-           'locale_based'  => true,
+-           'channel_based' => true,
+        ],
+    ],
+]
+```
+
+9. The `locale_based` and `channel_based` settings in the customer settings wishlist configuration have been updated to no longer be locale- or channel-based.
+
+```diff
+[
+    'key'    => 'customer.settings.wishlist',
+    'name'   => 'Wishlist',
+    'info'   => 'Enable or disable the wishlist option.',
+    'sort'   => 2,
+    'fields' => [
+        [
+            'name'    => 'wishlist_option',
+            'title'   => 'Allow Wishlist option',
+            'type'    => 'boolean',
+            'default' => 1,
+-           'locale_based'  => true,
+-           'channel_based' => true,
+        ],
+    ],
+]
+```
+
 
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names

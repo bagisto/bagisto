@@ -69,7 +69,7 @@
 
                         {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
-                        @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                        @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                             <span
                                 class="absolute top-2.5 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg sm:hidden ltr:right-1.5 rtl:left-1.5"
                                 role="button"
@@ -85,7 +85,7 @@
 
                         {!! view_render_event('bagisto.shop.components.products.card.compare_option.before') !!}
 
-                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                        @if (core()->getConfigData('catalog.products.settings.compare_option'))
                             <span
                                 class="icon-compare absolute top-10 flex h-6 w-6 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg sm:hidden ltr:right-1.5 rtl:left-1.5"
                                 role="button"
@@ -140,7 +140,7 @@
                     
                     {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
-                    @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                    @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                         <span
                             class="cursor-pointer p-2.5 text-2xl max-sm:hidden"
                             role="button"
@@ -156,7 +156,7 @@
 
                     {!! view_render_event('bagisto.shop.components.products.card.compare_option.before') !!}
 
-                    @if (core()->getConfigData('general.content.shop.compare_option'))
+                    @if (core()->getConfigData('catalog.products.settings.compare_option'))
                         <span
                             class="icon-compare cursor-pointer p-2.5 text-2xl max-sm:hidden"
                             role="button"
@@ -214,7 +214,7 @@
 
                         {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
-                        @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                        @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                             <span 
                                 class="absolute top-5 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl ltr:right-5 rtl:left-5"
                                 role="button"
@@ -230,7 +230,7 @@
 
                         {!! view_render_event('bagisto.shop.components.products.card.compare_option.before') !!}
 
-                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                        @if (core()->getConfigData('catalog.products.settings.compare_option'))
                             <span
                                 class="icon-compare absolute top-16 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl ltr:right-5 rtl:left-5"
                                 role="button"

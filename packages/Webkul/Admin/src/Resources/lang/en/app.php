@@ -3695,8 +3695,8 @@ return [
                 'title' => 'Sales',
 
                 'shipping' => [
-                    'info'  => 'Set shipping information.',
-                    'title' => 'Shipping',
+                    'info'  => 'Configure shipping settings including Country, State, City, Street Address, Zip Code, Store Name, VAT Number, Contact Number, and Bank Details.',
+                    'title' => 'Shipping Settings',
 
                     'origin' => [
                         'bank-details'   => 'Bank Details',
@@ -3714,7 +3714,7 @@ return [
                 ],
 
                 'shipping-methods' => [
-                    'info'  => 'Set shipping methods information',
+                    'info'  => 'Configure shipping methods, including Free Shipping, Flat Rate, and additional options as needed.',
                     'title' => 'Shipping Methods',
 
                     'free-shipping' => [

@@ -73,6 +73,8 @@
                     name="query"
                     value="{{ request('query') }}"
                     class="block w-full rounded-lg border border-transparent bg-zinc-100 px-11 py-3 text-xs font-medium text-gray-900 transition-all hover:border-gray-400 focus:border-gray-400"
+                    minlength="{{ core()->getConfigData('catalog.products.search.min_query_length') }}"
+                    maxlength="{{ core()->getConfigData('catalog.products.search.max_query_length') }}"
                     placeholder="@lang('shop::app.components.layouts.header.search-text')"
                     aria-label="@lang('shop::app.components.layouts.header.search-text')"
                     aria-required="true"
@@ -100,7 +102,7 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.compare.before') !!}
 
             <!-- Compare -->
-            @if(core()->getConfigData('general.content.shop.compare_option'))
+            @if(core()->getConfigData('catalog.products.settings.compare_option'))
                 <a
                     href="{{ route('shop.compare.index') }}"
                     aria-label="@lang('shop::app.components.layouts.header.compare')"
@@ -204,7 +206,7 @@
                                 @lang('shop::app.components.layouts.header.orders')
                             </a>
 
-                            @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                            @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                                 <a
                                     class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                     href="{{ route('shop.customers.account.wishlist.index') }}"

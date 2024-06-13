@@ -89,14 +89,15 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.after') !!}
 
             <p class="text-xs font-medium">
-                @lang('shop::app.components.layouts.header.desktop.top.offer') 
+                {{-- @lang('shop::app.components.layouts.header.desktop.top.offer')  --}}
+                {{ core()->getConfigData('general.content.header_offer.title') }}
                 
-                <a 
+                {{-- <a 
                     href="{{ route('shop.home.index') }}" 
                     class="underline"
-                > 
+                >
                     @lang('shop::app.components.layouts.header.desktop.top.shop-now')
-                </a>
+                </a> --}}
             </p>
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.before') !!}
