@@ -249,17 +249,16 @@ abstract class DataGrid
     /**
      * Set export file.
      *
-     * @param  \Illuminate\Support\Collection  $records
      * @param  string  $format
      * @return void
      */
-    public function setExportFile($records, $format = 'csv')
+    public function setExportFile($format = 'csv')
     {
-        $this->dispatchEvent('export_file.set.before', [$this, $records, $format]);
+        $this->dispatchEvent('export_file.set.before', [$this, $format]);
 
         $this->setExportable(true);
 
-        $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36).'.'.$format);
+        $this->exportFile = Excel::download(new DataGridExport($this), Str::random(36).'.'.$format);
 
         $this->dispatchEvent('export_file.set.after', $this);
     }
@@ -400,7 +399,7 @@ abstract class DataGrid
     {
         $this->dispatchEvent('process_request.export.before', $this);
 
-        $this->setExportFile($this->queryBuilder->get(), $requestedParams['format']);
+        $this->setExportFile($requestedParams['format']);
 
         $this->dispatchEvent('process_request.export.after', $this);
     }

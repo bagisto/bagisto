@@ -1,8 +1,8 @@
 <table>
     <thead>
         <tr>
-            @foreach ($columns as $key => $value)
-                <th>{{ $value == 'increment_id' ? 'order_id' : $value }}</th>
+            @foreach ($columns as $column)
+                <th>{{ $column->getLabel() }}</th>
             @endforeach
         </tr>
     </thead>
@@ -10,8 +10,12 @@
     <tbody>
         @foreach ($records as $record)
             <tr>
-                @foreach($record as $column => $value)
-                    <td>{{ $value }} </td>
+                @foreach($columns as $column)
+                    @if ($closure = $column->getClosure())
+                        <td>{!! $closure($record) !!}</td>
+                    @else
+                        <td>{{ $record->{$column->getIndex()} }}</td>
+                    @endif
                 @endforeach
             </tr>
         @endforeach
