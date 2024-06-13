@@ -42,13 +42,13 @@ return [
         ],
     ], [
         'key'    => 'general.general.breadcrumbs',
-        'name'   => 'Breadcrumbs',
-        'info'   => 'Breadcrumbs',
+        'name'   => 'admin::app.configuration.index.general.general.breadcrumbs.title',
+        'info'   => 'admin::app.configuration.index.general.general.breadcrumbs.title-info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'    => 'shop',
-                'title'   => 'Shop Breadcrumbs',
+                'title'   => 'admin::app.configuration.index.general.general.breadcrumbs.shop',
                 'type'    => 'boolean',
                 'default' => true,
             ],
@@ -61,16 +61,25 @@ return [
         'sort' => 2,
     ], [
         'key'    => 'general.content.header_offer',
-        'name'   => 'Header Offer Title',
-        'info'   => 'Home page header offer title',
+        'name'   => 'admin::app.configuration.index.general.content.title',
+        'info'   => 'admin::app.configuration.index.general.content.title-info',
         'sort'   => 1,
         'fields' => [
             [
-                'name'  => 'title',
-                'title' => 'Offer Title',
-                'type'  => 'text',
-                'default' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
-            ]
+                'name'    => 'title',
+                'title'   => 'admin::app.configuration.index.general.content.offer-title',
+                'type'    => 'text',
+                'default' => 'Get UPTO 40% OFF on your 1st order',
+            ], [
+                'name'    => 'redirection_title',
+                'title'   => 'admin::app.configuration.index.general.content.redirection-title',
+                'type'    => 'text',
+                'default' => 'SHOP NOW',
+            ], [
+                'name'    => 'redirection_link',
+                'title'   => 'admin::app.configuration.index.general.content.redirection-link',
+                'type'    => 'text',
+            ],
         ],
     ], [
         'key'    => 'general.content.custom_scripts',
@@ -335,18 +344,18 @@ return [
         'sort' => 1,
     ], [
         'key'    => 'catalog.products.settings',
-        'name'   => 'admin::app.configuration.index.general.content.settings.title',
-        'info'   => 'admin::app.configuration.index.general.content.settings.title-info',
+        'name'   => 'admin::app.configuration.index.catalog.products.settings.title',
+        'info'   => 'admin::app.configuration.index.catalog.products.settings.title-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'compare_option',
-                'title'         => 'admin::app.configuration.index.general.content.settings.compare-options',
+                'title'         => 'admin::app.configuration.index.catalog.products.settings.compare-options',
                 'type'          => 'boolean',
                 'default'       => 1,
             ], [
                 'name'          => 'image_search',
-                'title'         => 'admin::app.configuration.index.general.content.settings.image-search-option',
+                'title'         => 'admin::app.configuration.index.catalog.products.settings.image-search-option',
                 'type'          => 'boolean',
                 'default'       => 1,
             ],
@@ -413,23 +422,6 @@ return [
                 'info'    => 'Set maximum query length for search queries.',
                 'type'    => 'text',
                 'default' => '1000',
-            ],
-        ],
-    ], [
-        'key'    => 'catalog.products.stock',
-        'name'   => 'Manage stock',
-        'info'   => 'Manage Stock',
-        'sort'   => 1,
-        'fields' => [
-            [
-                'name'    => 'threshold',
-                'title'   => 'Out-of-Stock Threshold',
-                'type'    => 'text',
-            ], [
-                'name'    => 'min_qty_in_shopping_cart',
-                'title'   => 'Maximum Qty Allowed in Shopping Cart',
-                'info'    => 'Maximum Qty Allowed in Shopping Cart',
-                'type'    => 'text',
             ],
         ],
     ], [
@@ -532,16 +524,16 @@ return [
                 'title'      => 'admin::app.configuration.index.catalog.products.small-image.width',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
-            ],
-            [
+            ], [
                 'name'       => 'height',
                 'title'      => 'admin::app.configuration.index.catalog.products.small-image.height',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
-            ],  [
-                'name'  => 'small_image',
-                'title' => 'Small Image',
-                'type'  => 'image',
+            ], [
+                'name'       => 'url',
+                'title'      => 'Small Image',
+                'type'       => 'image',
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
             ],
         ],
     ], [
@@ -561,9 +553,10 @@ return [
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
             ], [
-                'name'  => 'medium_image',
-                'title' => 'Medium Image',
-                'type'  => 'image',
+                'name'       => 'url',
+                'title'      => 'Medium Image',
+                'type'       => 'image',
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
             ],
         ],
     ], [
@@ -583,9 +576,10 @@ return [
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
             ], [
-                'name'  => 'large_image',
-                'title' => 'Large Image',
-                'type'  => 'image',
+                'name'       => 'url',
+                'title'      => 'Large Image',
+                'type'       => 'image',
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
             ],
         ],
     ], [
@@ -598,10 +592,9 @@ return [
                 'name'  => 'guest_review',
                 'title' => 'admin::app.configuration.index.catalog.products.review.allow-guest-review',
                 'type'  => 'boolean',
-            ],
-            [
-                'name'    => 'review',
-                'title'   => 'Review',
+            ], [
+                'name'    => 'customer_review',
+                'title'   => 'Allow Customer Review',
                 'type'    => 'boolean',
                 'default' => true,
             ],
@@ -740,10 +733,25 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'    => 'backOrder',
-                'title'   => 'Back order',
-                'type'    => 'boolean',
-                'default' => true,
+                'name'          => 'back_orders',
+                'title'         => 'Allow Back Orders',
+                'type'          => 'boolean',
+                'default',
+            ], [
+                'name'          => 'maximum_product',
+                'title'         => 'Maximum Qty Allowed in Shopping Cart',
+                'type'          => 'text',
+                'default'       => '11',
+            ], [
+                'name'          => 'minimum_product',
+                'title'         => 'Minimum Qty Allowed in Shopping Cart',
+                'type'          => 'number',
+                'default'       => '0',
+            ], [
+                'name'          => 'out_of_stock_threshold',
+                'title'         => 'Out-of-Stock Threshold',
+                'type'          => 'number',
+                'default'       => '0',
             ],
         ],
     ],
@@ -865,14 +873,69 @@ return [
             ],
         ],
     ], [
+        'key'    => 'customer.settings.login_options',
+        'name'   => 'Login Options',
+        'info'   => 'Configure login options to determine the redirect page for customers after login.',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'    => 'redirected_to_page',
+                'title'   => 'Redirect Customer to the selected page',
+                'type'    => 'select',
+                'default' => 'home',
+                'options' => [
+                    [
+                        'title' => 'Home',
+                        'value' => 'home',
+                    ], [
+                        'title' => 'Account',
+                        'value' => 'account',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key'    => 'customer.settings.create_new_account_options',
+        'name'   => 'Create New Account Options',
+        'info'   => 'Set options for new accounts, including assigning a default customer group and enabling the newsletter subscription option during sign-up.',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'    => 'default_group',
+                'title'   => 'Default Group',
+                'info'    => 'Assign a specific customer group as the default for new customers.',
+                'type'    => 'select',
+                'default' => 'guest',
+                'options' => [
+                    [
+                        'title' => 'General',
+                        'value' => 'general',
+                    ], [
+                        'title' => 'Guest',
+                        'value' => 'guest',
+                    ], [
+                        'title' => 'Wholesale',
+                        'value' => 'wholesale',
+                    ],
+                ],
+            ], [
+                'name'    => 'news_letter',
+                'title'   => 'Allow NewsLetter',
+                'info'    => 'Enable newsletter subscription option on the sign-up page.',
+                'type'    => 'boolean',
+                'default' => true,
+            ],
+        ],
+    ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.configuration.index.customer.settings.newsletter.title',
         'info'   => 'admin::app.configuration.index.customer.settings.newsletter.title-info',
-        'sort'   => 3,
+        'sort'   => 5,
         'fields' => [
             [
                 'name'         => 'subscription',
                 'title'        => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
+                'info'         => 'Enable subscription option for users in the footer section.',
                 'type'         => 'boolean',
                 'default'      => 1,
             ],
@@ -881,7 +944,7 @@ return [
         'key'    => 'customer.settings.email',
         'name'   => 'admin::app.configuration.index.customer.settings.email.title',
         'info'   => 'admin::app.configuration.index.customer.settings.email.title-info',
-        'sort'   => 4,
+        'sort'   => 6,
         'fields' => [
             [
                 'name'  => 'verification',
@@ -893,7 +956,7 @@ return [
         'key'    => 'customer.settings.social_login',
         'name'   => 'admin::app.configuration.index.customer.settings.social-login.social-login',
         'info'   => 'admin::app.configuration.index.customer.settings.social-login.social-login-info',
-        'sort'   => 5,
+        'sort'   => 7,
         'fields' => [
             [
                 'name'          => 'enable_facebook',
@@ -1647,9 +1710,49 @@ return [
                 'validation'    => 'numeric',
                 'channel_based' => true,
                 'locale_based'  => true,
+            ], [
+                'name'    => 'include_discount_amount',
+                'title'   => 'Include Discount Amount',
+                'type'    => 'select',
+                'default' => 'no',
+                'options' => [
+                    [
+                        'title' => 'Yes',
+                        'value' => 'yes',
+                    ], [
+                        'title' => 'No',
+                        'value' => 'no',
+                    ],
+                ],
+            ], [
+                'name'    => 'include_tax_to_amount',
+                'title'   => 'Include Tax to Amount',
+                'type'    => 'select',
+                'default' => 'no',
+                'options' => [
+                    [
+                        'title' => 'Yes',
+                        'value' => 'yes',
+                    ], [
+                        'title' => 'No',
+                        'value' => 'no',
+                    ],
+                ],
+            ], [
+                'name'          => 'description',
+                'title'         => 'Description',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'show_error_in_cart',
+                'title'         => 'Error to Show in Shopping Cart',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
             ],
         ],
-    ],  [
+    ], [
         'key'    => 'sales.order_settings.reorder',
         'name'   => 'Allow Reorder',
         'info'   => 'Enable reorder functionality for both admin and shop interfaces.',
@@ -1667,19 +1770,6 @@ return [
                 'info'    => 'Enable or disable the reordering feature for shop users.',
                 'type'    => 'boolean',
                 'default' => true,
-            ],
-        ],
-    ], [
-        'key'    => 'sales.order_settings.stock_options',
-        'name'   => 'admin::app.configuration.index.sales.order-settings.stock-options.title',
-        'info'   => 'admin::app.configuration.index.sales.order-settings.stock-options.title-info',
-        'sort'   => 4,
-        'fields' => [
-            [
-                'name'          => 'back_orders',
-                'title'         => 'admin::app.configuration.index.sales.order-settings.stock-options.allow-back-orders',
-                'type'          => 'boolean',
-                'channel_based' => true,
             ],
         ],
     ], [
@@ -1739,24 +1829,10 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.invoice_settings.invoice_slip_design',
-        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.title',
-        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.title-info',
-        'sort'   => 2,
-        'fields' => [
-            [
-                'name'          => 'logo',
-                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.logo',
-                'type'          => 'image',
-                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
         'key'    => 'sales.invoice_settings.pdf_print_outs',
         'name'   => 'PDF Print Outs',
-        'info'   => 'PDF Print Out',
-        'sort'   => 3,
+        'info'   => 'Configure PDF Print Outs to display Invoice ID, Order ID in the header, and include the invoice logo.',
+        'sort'   => 2,
         'fields' => [
             [
                 'name'    => 'invoice_id',
@@ -1770,13 +1846,19 @@ return [
                 'info'    => 'Configure display of Order ID in Invoice Header.',
                 'type'    => 'boolean',
                 'default' => true,
+            ], [
+                'name'          => 'logo',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.logo',
+                'type'          => 'image',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+                'channel_based' => true,
             ],
         ],
     ], [
         'key'    => 'sales.invoice_settings.invoice_reminders',
         'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.title',
         'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.title-info',
-        'sort'   => 4,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'          => 'reminders_limit',
@@ -2083,7 +2165,7 @@ return [
         ],
     ], [
         'key'    => 'sales.checkout.my_cart',
-        'name'   => 'My cart',
+        'name'   => 'My Cart',
         'info'   => 'Enable settings for My Cart to show a summary of item quantities and display the total number of items in the cart for easy tracking.',
         'sort'   => 2,
         'fields' => [

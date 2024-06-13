@@ -114,7 +114,9 @@
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.before') !!}
 
-                @include('shop::checkout.cart.mini-cart')
+                @if(core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                    @include('shop::checkout.cart.mini-cart')
+                @endif
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.after') !!}
 

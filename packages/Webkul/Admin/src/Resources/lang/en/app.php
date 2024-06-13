@@ -3344,18 +3344,24 @@ return [
                         'title-info'  => 'Size, color, material, customization, enhancing customer satisfaction and tailoring purchases.',
                         'weight-unit' => 'Weight Unit',
                     ],
+
+                    'breadcrumbs' => [
+                        'shop'       => 'Shop Breadcrumbs',
+                        'title'      => 'Breadcrumbs',
+                        'title-info' => 'Enable or disable breadcrumbs navigation in the shop.',
+                    ],
                 ],
 
                 'content' => [
                     'info'  => 'Set compare options, wishlist options, image search options, footer, toggle footer and custom scripts.',
                     'title' => 'Content',
 
-                    'settings' => [
-                        'compare-options'     => 'Compare options',
-                        'image-search-option' => 'Image Search Option',
-                        'title'               => 'Settings',
-                        'title-info'          => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
-                        'wishlist-options'    => 'Wishlist options',
+                    'header-offer' => [
+                        'title'             => 'Header Offer Title',
+                        'title-info'        => 'Configure Header Offer Title with offer title, redirection title, and redirection link.',
+                        'offer-title'       => 'Offer Title',
+                        'redirection-title' => 'Redirection Title',
+                        'redirection-link'  => 'Redirection Link',
                     ],
 
                     'custom-scripts' => [
@@ -3455,6 +3461,14 @@ return [
                 'products' => [
                     'info'  => 'Set guest checkout, product view page, cart view page, store front, review and attribute social share.',
                     'title' => 'Products',
+
+                    'settings' => [
+                        'compare-options'     => 'Compare options',
+                        'image-search-option' => 'Image Search Option',
+                        'title'               => 'Settings',
+                        'title-info'          => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
+                        'wishlist-options'    => 'Wishlist options',
+                    ],
 
                     'search' => [
                         'admin-mode-info'      => 'Mega Search, Datagrid, and other search functionalities in the admin panel will be based on the selected search engine.',

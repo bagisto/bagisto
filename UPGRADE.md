@@ -248,6 +248,40 @@ If you are migrating your existing store to this version, please save the config
 ]
 ```
 
+10. The Back Order configuration has been relocated to the Catalog Inventory under Stock Options, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('sales.order_settings.stock_options.back_orders')
++ core()->getConfigData('catalog.inventory.stock_options.back_orders')
+```
+
+11. The `channel_based` settings in the customer settings wishlist configuration have been updated to no longer be locale- or channel-based.
+
+```diff
+[
+    'key'    => 'catalog.inventory.stock_options',
+    'name'   => 'Product Stock Options',
+    'info'   => 'Product Stock Options',
+    'sort'   => 1,
+    'fields' => [
+        [
+            'name'          => 'back_orders',
+            'title'         => 'Allow Back Orders',
+            'type'          => 'boolean',
+            'default'       => false,
+-           'channel_based' => true,
+        ],
+    ],
+]
+```
+
+10. The Invoice Slip Design Logo configuration has been relocated to the Sales Invoice Setting under PDF Print Outs, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')
++ core()->getConfigData('sales.invoice_settings.pdf_print_outs.logo')
+```
+
 
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names

@@ -68,7 +68,7 @@
                                 </p>
 
                                 <!-- Total Product Stock -->
-                                <p :class="[product.ttal_qty > 10 ? 'text-emerald-500' : 'text-red-500']">
+                                <p :class="[product.total_qty > {{ core()->getConfigData('catalog.inventory.stock_options.out_of_stock_threshold') }} ? 'text-emerald-500' : 'text-red-500']">
                                     @{{ "@lang('admin::app.dashboard.index.total-stock', ['total_stock' => ':replace'])".replace(':replace', product.total_qty) }}
                                 </p>
                             </div>

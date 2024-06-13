@@ -92,12 +92,13 @@
                 {{-- @lang('shop::app.components.layouts.header.desktop.top.offer')  --}}
                 {{ core()->getConfigData('general.content.header_offer.title') }}
                 
-                {{-- <a 
-                    href="{{ route('shop.home.index') }}" 
+                <a 
+                    href="{{ core()->getConfigData('general.content.header_offer.redirection_link') }}" 
                     class="underline"
                 >
-                    @lang('shop::app.components.layouts.header.desktop.top.shop-now')
-                </a> --}}
+                    {{ core()->getConfigData('general.content.header_offer.redirection_title') }}
+                    {{-- @lang('shop::app.components.layouts.header.desktop.top.shop-now') --}}
+                </a>
             </p>
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.before') !!}

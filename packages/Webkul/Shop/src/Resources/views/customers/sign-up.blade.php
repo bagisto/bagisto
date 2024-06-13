@@ -1,8 +1,14 @@
 <!-- SEO Meta Content -->
 @push('meta')
-    <meta name="description" content="@lang('shop::app.customers.signup-form.page-title')"/>
+    <meta
+        name="description"
+        content="@lang('shop::app.customers.signup-form.page-title')"
+    />
 
-    <meta name="keywords" content="@lang('shop::app.customers.signup-form.page-title')"/>
+    <meta
+        name="keywords"
+        content="@lang('shop::app.customers.signup-form.page-title')"
+    />
 @endPush
 
 <x-shop::layouts
@@ -167,7 +173,7 @@
                         </div>
                     @endif
 
-                    @if (core()->getConfigData('customer.settings.newsletter.subscription'))
+                    @if (core()->getConfigData('customer.settings.create_new_account_options.news_letter'))
                         <div class="flex select-none items-center gap-1.5">
                             <input
                                 type="checkbox"
