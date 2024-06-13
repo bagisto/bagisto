@@ -17,7 +17,7 @@
                     <a href="{{ route('shop.home.index') }}">
                         @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                             <img
-                                src="{{ $logo }}"
+                                src="{{ Storage::url($logo) }}"
                                 alt="{{ config('app.name') }}"
                                 style="height: 40px; width: 110px;"
                             />
