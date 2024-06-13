@@ -59,8 +59,6 @@ class ProductTableSeeder extends Seeder
         });
 
         // Category seeder.
-        $this->call(CategoryTableSeeder::class, false, ['parameters' => $parameters]);
-
         $seeder = new CategoryTableSeeder();
 
         $seeder->sampleCategories($parameters);
