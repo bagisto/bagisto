@@ -12,13 +12,9 @@
     set of configurations.
 -->
 @else
-    @props([
-        'method' => 'POST',
-    ])
+    @props(['method' => 'POST'])
 
-    @php
-        $method = strtoupper($method);
-    @endphp
+    @php $method = strtoupper($method); @endphp
 
     <v-form
         method="{{ $method === 'GET' ? 'GET' : 'POST' }}"

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
+use Webkul\Installer\Database\Seeders\ProductTableSeeder;
 
 class DatabaseManager
 {
@@ -60,7 +61,6 @@ class DatabaseManager
                 'error' => $e->getMessage(),
             ], 500);
         }
-
     }
 
     /**
@@ -70,6 +70,13 @@ class DatabaseManager
      */
     public function seeder($data)
     {
+        $data['parameter'] = [
+            'default_locale'     => $data['parameter']['default_locales'],
+            'allowed_locales'    => $data['parameter']['allowed_locales'],
+            'default_currency'   => $data['parameter']['default_currency'],
+            'allowed_currencies' => $data['parameter']['allowed_currencies'],
+        ];
+
         try {
             app(BagistoDatabaseSeeder::class)->run($data['parameter']);
 
@@ -95,6 +102,22 @@ class DatabaseManager
         try {
             Artisan::call('key:generate');
         } catch (Exception $e) {
+        }
+    }
+
+    /**
+     * Generate fake product data.
+     *
+     * @return void|string
+     */
+    public function seedSampleProducts($parameters)
+    {
+        try {
+            app(ProductTableSeeder::class)->run($parameters);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 500);
         }
     }
 }
