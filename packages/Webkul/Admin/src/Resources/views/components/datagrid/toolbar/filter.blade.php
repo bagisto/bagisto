@@ -65,8 +65,8 @@
 
                     <x-slot:header>
                         <!-- Apply Filter Title -->
-                        <div 
-                            v-if="! isShowSavedFilters" 
+                        <div
+                            v-if="! isShowSavedFilters"
                             class="flex items-center justify-between px-1 py-2"
                         >
                             <p class="text-xl font-semibold text-gray-800 dark:text-white">
@@ -682,7 +682,7 @@
                                         <!-- Save Filter Button -->
                                         <button
                                             type="button"
-                                            v-if="filters.columns.length > 0"
+                                            v-if="hasAnyColumn"
                                             class="secondary-button w-full"
                                             @click="isShowSavedFilters = ! isShowSavedFilters"
                                             :disabled="isFilterDirty"
@@ -702,7 +702,7 @@
                                 </p>
                             </div>
 
-                            <div v-if="filters.columns.length > 0">
+                            <div v-if="hasAnyColumn">
                                 <!-- Save Filter Form -->
                                 <x-admin::form
                                     v-slot="{ meta, errors, handleSubmit }"
@@ -748,17 +748,17 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="flex flex-col gap-4 px-4">
                                                 <p class="text-base font-semibold text-gray-800 dark:text-white">
                                                     @lang('admin::app.components.datagrid.toolbar.filter.selected-filters')
                                                 </p>
-                                            
+
                                                 <div v-if="! savedFilters.params.filters.columns.every(column => column.value.length === 0)">
                                                     <!-- Applied filters label and value listing for saving custom filter. -->
                                                     <div v-for="column in savedFilters.params.filters.columns">
                                                         <div
-                                                            class="flex flex-col gap-2" 
+                                                            class="flex flex-col gap-2"
                                                             v-if="hasAnyValue(column)"
                                                         >
                                                             <p class="text-xs font-medium text-gray-800 dark:text-white">
@@ -826,7 +826,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <!-- Save Filter Empty Value Placeholder -->
                                                 <div v-else>
                                                     <div class="mb-4 flex content-end items-center justify-end">
@@ -849,7 +849,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>    
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -909,6 +909,15 @@
             },
 
             methods: {
+                /**
+                 * Has any column.
+                 *
+                 * @returns {boolean}
+                 */
+                hasAnyColumn() {
+                    return filters.columns.length;
+                },
+
                 /**
                  * Get applied columns.
                  *
