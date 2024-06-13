@@ -3102,6 +3102,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Actif',
                 'Asc'                           => 'Asc',
                 'add-filter-btn'                => 'Ajouter un filtre',
                 'add-footer-link-btn'           => 'Ajouter un lien de pied de page',
@@ -3126,6 +3127,7 @@ return [
                 'footer-title'                  => 'Titre',
                 'general'                       => 'Général',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inactif',
                 'image'                         => 'Image',
                 'image-size'                    => "La résolution de l'image doit être de (1920px x 700px)",
                 'image-title'                   => 'Titre de l\'image',
@@ -3137,6 +3139,7 @@ return [
                 'name'                          => 'Nom',
                 'no'                            => 'Non',
                 'New'                           => 'Nouveau',
+                'parent-id'                     => 'ID Parent',
                 'preview'                       => 'Aperçu',
                 'product-carousel'              => 'Carrousel de produits',
                 'product-carousel-description'  => 'Présentez élégamment des produits avec un carrousel de produits dynamique et réactif.',
