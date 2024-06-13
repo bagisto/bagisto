@@ -101,6 +101,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 3. **Reporting:**
     - Integrated channel filters into reporting features, enabling users to generate channel-specific reports for detailed analysis.
 
+### Added Channel Selection for Product Creation
+
+*  Implemented a feature that allows users to select the channel while creating a product, enhancing flexibility and management.
+
 ### Added Blade File Support in Configuration
 
 * Implemented support for Blade files in configuration settings, enhancing flexibility and customization options.
@@ -146,8 +150,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #9764 [improvements] - In the Grouped Product feature, there's an issue where the quantity box becomes unresponsive and shifts when we input a quantity of 0, triggering a validation error.
 
 * #9795 [improvements] - Create a new attribute, the labels in locale list should be in Alphabetical Order. 
-
-* #9591 [enhancement] - There should be an Empty Space in Country Drop Down for Tax Inclusive Default Location Calculation.
 
 * #9591 [enhancement] - There should be an Empty Space in Country Drop Down for Tax Inclusive Default Location Calculation.
 
