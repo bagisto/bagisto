@@ -538,6 +538,13 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + datagrid(AttributeDataGrid::class)->process();
 ```
 
+3. The setExportFile method will now only accept the file format:
+
+```diff
+- public function setExportFile($records, $format = 'csv') 
++ public function setExportFile($format = 'csv')
+```
+
 <a name="the-column-class"></a>
 #### The `Webkul/DataGrid/src/Column` Class
 
@@ -652,6 +659,18 @@ And the available FilterType `filterable_type` are now defined as follows: `drop
 ```
 
 7. By default, the properties `searchable`, `filterable`, and `sortable` will be false if you need to activate them, set them to `true`.
+
+<a name="the-datagrid-export-class"></a>
+#### The `Webkul\Admin\Exports\DataGridExport` Class
+
+**Impact Probability: Medium**
+
+1. This class will now accept the full DataGrid instance instead of the records to enhance the export features:
+
+```diff
+- public function __construct(protected $gridData = [])
++ public function __construct(protected DataGrid $datagrid)
+```
 
 
 
