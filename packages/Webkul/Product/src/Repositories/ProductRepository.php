@@ -234,12 +234,16 @@ class ProductRepository extends Repository
             'price_indices',
             'inventory_indices',
             'reviews',
+            'variants',
+            'variants.attribute_family',
+            'variants.attribute_values',
+            'variants.price_indices',
+            'variants.inventory_indices',
         ])->scopeQuery(function ($query) use ($params) {
             $prefix = DB::getTablePrefix();
 
             $qb = $query->distinct()
                 ->select('products.*')
-                ->leftJoin('products as variants', DB::raw('COALESCE('.$prefix.'variants.parent_id, '.$prefix.'variants.id)'), '=', 'products.id')
                 ->leftJoin('product_price_indices', function ($join) {
                     $customerGroup = $this->customerRepository->getCurrentGroup();
 
@@ -340,18 +344,9 @@ class ProductRepository extends Repository
                 $qb->where(function ($filterQuery) use ($params, $attributes) {
                     foreach ($attributes as $attribute) {
                         $filterQuery->orWhere(function ($attributeQuery) use ($params, $attribute) {
-                            $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
+                            $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
 
-                            $values = explode(',', $params[$attribute->code]);
-
-                            if ($attribute->type == 'price') {
-                                $attributeQuery->whereBetween('product_attribute_values.'.$attribute->column_name, [
-                                    core()->convertToBasePrice(current($values)),
-                                    core()->convertToBasePrice(end($values)),
-                                ]);
-                            } else {
-                                $attributeQuery->whereIn('product_attribute_values.'.$attribute->column_name, $values);
-                            }
+                            $attributeQuery->whereIn('product_attribute_values.'.$attribute->column_name, explode(',', $params[$attribute->code]));
                         });
                     }
                 });
