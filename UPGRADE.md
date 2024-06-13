@@ -240,7 +240,8 @@ If you are migrating your existing store to this version, please save the config
 <a name="optimize-the-configuration-section"></a>
 #### Optimize the configuration section
 
-We are remove the `packages/Webkul/Core/src/Tree.php` file,
+We are remove the `packages/Webkul/Core/src/Tree.php` file, and also remove the `CoreConfigField` trait file and its important method moved into `packages/Webkul/Core/src/SystemConfig/ItemField.php`
+because configuration items's, field `ItemField.php` file is responsible for each fields of configuration.
 
 ```diff
 -<?php
@@ -336,56 +337,6 @@ We are remove the `packages/Webkul/Core/src/Tree.php` file,
 -}
 ```
 
-and also remove the `CoreConfigField` trait file, its important method moved into `packages/Webkul/Core/src/SystemConfig/ItemField.php`
-because configuration items, field `ItemField.php` file is responsible for each fields of configuration.
-
-the method `getChannelLocaleInfo` which was in `CoreConfigField` trait, is used for showing that the field is locale based or channel based, which is completely removed from both files, as no need more.
-
-```diff
--    /**
--     * Get channel/locale indicator for form fields. So, that form fields can be detected,
--     * whether it is channel based or locale based or both.
--     *
--     * @param  array  $field
--     * @param  string  $channel
--     * @param  string  $locale
--     * @return string
--     */
--    public function getChannelLocaleInfo($field, $channel, $locale)
--    {
--        $info = [];
--
--        if (! empty($field['channel_based'])) {
--            $info[] = $channel;
--        }
--
--        if (! empty($field['locale_based'])) {
--            $info[] = $locale;
--        }
--
--        return ! empty($info) ? '['.implode(' - ', $info).']' : '';
--    }
-```
-
-for achieve same we are using below provide code.
-
-
-```diff
-+ <span
-+     v-if="field['channel_based'] && channelCount"
-+     class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
-+     v-text="JSON.parse(currentChannel).name"
-+ >
-+ </span>
-+ 
-+ <span
-+     v-if="field['locale_based']"
-+     class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
-+     v-text="JSON.parse(currentLocale).name"
-+ >
-+ </span>
-```
-
 ```diff
 -<?php
 -
@@ -476,9 +427,56 @@ for achieve same we are using below provide code.
 -        return app($class)->$method();
 -    }
 -}
-```
-in `packages/Webkul/Admin/src/Resources/views/configuration/index.blade.php` we are completely change the way to get/fetch the configuration items as now we are using the `packages/Webkul/Core/src/SystemConfig/Item.php` and `packages/Webkul/Core/src/SystemConfig/ItemField.php` and `packages/Webkul/Core/src/SystemConfig.php` is responsible for handling the configuration items and its field.
 
+```
+
+The method `getChannelLocaleInfo` which was in `CoreConfigField` trait, is used for showing that the field is locale based or channel based, which is completely removed from both files, as no need more.
+
+```diff
+-    /**
+-     * Get channel/locale indicator for form fields. So, that form fields can be detected,
+-     * whether it is channel based or locale based or both.
+-     *
+-     * @param  array  $field
+-     * @param  string  $channel
+-     * @param  string  $locale
+-     * @return string
+-     */
+-    public function getChannelLocaleInfo($field, $channel, $locale)
+-    {
+-        $info = [];
+-
+-        if (! empty($field['channel_based'])) {
+-            $info[] = $channel;
+-        }
+-
+-        if (! empty($field['locale_based'])) {
+-            $info[] = $locale;
+-        }
+-
+-        return ! empty($info) ? '['.implode(' - ', $info).']' : '';
+-    }
+```
+
+for achieve same we are using below provide code.
+
+```diff
++ <span
++     v-if="field['channel_based'] && channelCount"
++     class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
++     v-text="JSON.parse(currentChannel).name"
++ >
++ </span>
++ 
++ <span
++     v-if="field['locale_based']"
++     class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
++     v-text="JSON.parse(currentLocale).name"
++ >
++ </span>
+```
+
+in `packages/Webkul/Admin/src/Resources/views/configuration/index.blade.php` we are completely change the way to get/fetch the configuration items as now we are using the `packages/Webkul/Core/src/SystemConfig/Item.php` and `packages/Webkul/Core/src/SystemConfig/ItemField.php` and `packages/Webkul/Core/src/SystemConfig.php` is responsible for handling the configuration items and its field.
 
 In `index.blade.php` changes are shown below,
 
