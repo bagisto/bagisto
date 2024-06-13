@@ -340,24 +340,24 @@ class ProductRepository extends Repository
              * Filter query by attributes.
              */
             if ($attributes->isNotEmpty()) {
-                $qb->where(function($filterQuery) use($qb, $params, $attributes) {
+                $qb->where(function ($filterQuery) use ($qb, $params, $attributes) {
                     $aliases = [
                         'products' => 'product_attribute_values',
                         'variants' => 'variant_attribute_values',
                     ];
 
-                    foreach($aliases as $table => $tableAlias) {
-                        $filterQuery->orWhere(function($subFilterQuery) use ($qb, $params, $attributes, $table, $tableAlias) {
+                    foreach ($aliases as $table => $tableAlias) {
+                        $filterQuery->orWhere(function ($subFilterQuery) use ($qb, $params, $attributes, $table, $tableAlias) {
                             foreach ($attributes as $attribute) {
-                                $alias = $attribute->code . '_' . $tableAlias;
+                                $alias = $attribute->code.'_'.$tableAlias;
 
-                                $qb->leftJoin('product_attribute_values as ' . $alias, function($join) use($table, $alias, $attribute) {
-                                    $join->on($table . '.id', '=', $alias . '.product_id');
+                                $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($table, $alias, $attribute) {
+                                    $join->on($table.'.id', '=', $alias.'.product_id');
 
-                                    $join->where($alias . '.attribute_id', $attribute->id);
+                                    $join->where($alias.'.attribute_id', $attribute->id);
                                 });
 
-                                $subFilterQuery->whereIn($alias . '.' . $attribute->column_name, explode(',', $params[$attribute->code]));
+                                $subFilterQuery->whereIn($alias.'.'.$attribute->column_name, explode(',', $params[$attribute->code]));
                             }
                         });
                     }
