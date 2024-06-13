@@ -430,7 +430,8 @@ because configuration items's, field `ItemField.php` file is responsible for eac
 
 ```
 
-The method `getChannelLocaleInfo` which was in `CoreConfigField` trait, is used for showing that the field is locale based or channel based, which is completely removed from both files, as no need more.
+The method `getChannelLocaleInfo` which was in `CoreConfigField` trait, is used for showing that the field is locale based or channel based, which is completely removed as no need more, `getNameField`, `getValidations` and `getOptions` methods and its class properties moved same as into `packages/Webkul/Core/src/SystemConfig/ItemField.php` file which is handle via the `ItemField` class.
+
 
 ```diff
 -    /**
