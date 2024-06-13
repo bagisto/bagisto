@@ -577,13 +577,13 @@ in `packages/Webkul/Admin/src/Resources/views/configuration/edit.blade.php` ther
 +       @foreach ($activeConfiguration->getChildren() as $child)
             <div class="grid content-start gap-2.5">
                 <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                    @lang($item['name'])
-                    {{ $child->getName() }}
+-                   @lang($item['name'])
++                   {{ $child->getName() }}
                 </p>
 
                 <p class="leading-[140%] text-gray-600 dark:text-gray-300">
-                    @lang($item['info'] ?? '')
-                    {!! $child->getInfo() !!}
+-                   @lang($item['info'] ?? '')
++                   {!! $child->getInfo() !!}
                 </p>
             </div>
 
