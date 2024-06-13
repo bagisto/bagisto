@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Concerns\CurrencyFormatter;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
@@ -103,7 +102,6 @@ class Core
         protected CountryRepository $countryRepository,
         protected CountryStateRepository $countryStateRepository,
         protected LocaleRepository $localeRepository,
-        protected CoreConfigRepository $coreConfigRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected TaxCategoryRepository $taxCategoryRepository
     ) {
@@ -662,29 +660,10 @@ class Core
 
     /**
      * Retrieve information from payment configuration.
-     *
-     * @param  string  $field
-     * @param  int|string|null  $channelId
-     * @param  string|null  $locale
-     * @return mixed
      */
-    public function getConfigData($field, $channel = null, $locale = null)
+    public function getConfigData(string $field, ?string $currentChannelCode = null, ?string $currentLocaleCode = null): mixed
     {
-        if (empty($channel)) {
-            $channel = $this->getRequestedChannelCode();
-        }
-
-        if (empty($locale)) {
-            $locale = $this->getRequestedLocaleCode();
-        }
-
-        $coreConfig = $this->getCoreConfig($field, $channel, $locale);
-
-        if (! $coreConfig) {
-            return $this->getDefaultConfig($field);
-        }
-
-        return $coreConfig->value;
+        return system_config()->getConfigData($field, $currentChannelCode, $currentLocaleCode);
     }
 
     /**
@@ -822,31 +801,6 @@ class Core
     }
 
     /**
-     * Method to sort through the acl items and put them in order.
-     *
-     * @param  array  $items
-     * @return array
-     */
-    public function sortItems($items)
-    {
-        foreach ($items as &$item) {
-            if (count($item['children'])) {
-                $item['children'] = $this->sortItems($item['children']);
-            }
-        }
-
-        usort($items, function ($a, $b) {
-            if ($a['sort'] == $b['sort']) {
-                return 0;
-            }
-
-            return ($a['sort'] < $b['sort']) ? -1 : 1;
-        });
-
-        return $this->convertToAssociativeArray($items);
-    }
-
-    /**
      * Get config field.
      *
      * @param  string  $fieldName
@@ -854,105 +808,7 @@ class Core
      */
     public function getConfigField($fieldName)
     {
-        foreach (config('core') as $coreData) {
-            if (! isset($coreData['fields'])) {
-                continue;
-            }
-
-            foreach ($coreData['fields'] as $field) {
-                $name = $coreData['key'].'.'.$field['name'];
-
-                if ($name == $fieldName) {
-                    return $field;
-                }
-            }
-        }
-    }
-
-    /**
-     * Convert to associative array.
-     *
-     * @param  array  $items
-     * @return array
-     */
-    public function convertToAssociativeArray($items)
-    {
-        foreach ($items as $key1 => $level1) {
-            unset($items[$key1]);
-
-            $items[$level1['key']] = $level1;
-
-            if (! count($level1['children'])) {
-                continue;
-            }
-
-            foreach ($level1['children'] as $key2 => $level2) {
-                $temp2 = explode('.', $level2['key']);
-
-                $finalKey2 = end($temp2);
-
-                unset($items[$level1['key']]['children'][$key2]);
-
-                $items[$level1['key']]['children'][$finalKey2] = $level2;
-
-                if (! count($level2['children'])) {
-                    continue;
-                }
-
-                foreach ($level2['children'] as $key3 => $level3) {
-                    $temp3 = explode('.', $level3['key']);
-
-                    $finalKey3 = end($temp3);
-
-                    unset($items[$level1['key']]['children'][$finalKey2]['children'][$key3]);
-
-                    $items[$level1['key']]['children'][$finalKey2]['children'][$finalKey3] = $level3;
-                }
-            }
-        }
-
-        return $items;
-    }
-
-    /**
-     * Array set.
-     *
-     * @param  array  $items
-     * @param  string  $key
-     * @param  string|int|float  $value
-     * @return array
-     */
-    public function array_set(&$array, $key, $value)
-    {
-        if (is_null($key)) {
-            return $array = $value;
-        }
-
-        $keys = explode('.', $key);
-        $count = count($keys);
-
-        while (count($keys) > 1) {
-            $key = array_shift($keys);
-
-            if (
-                ! isset($array[$key])
-                || ! is_array($array[$key])
-            ) {
-                $array[$key] = [];
-            }
-
-            $array = &$array[$key];
-        }
-
-        $finalKey = array_shift($keys);
-
-        if (isset($array[$finalKey])) {
-            $array[$finalKey] = $this->arrayMerge($array[$finalKey], $value);
-        } else {
-            $array[$finalKey] = $value;
-        }
-
-        return $array;
+        return system_config()->getConfigField($fieldName);
     }
 
     /**
@@ -1069,90 +925,6 @@ class Core
             'name'  => $contactName,
             'email' => $contactEmail,
         ];
-    }
-
-    /**
-     * Array merge.
-     *
-     * @return array
-     */
-    protected function arrayMerge(array &$array1, array &$array2)
-    {
-        $merged = $array1;
-
-        foreach ($array2 as $key => &$value) {
-            if (
-                is_array($value)
-                && isset($merged[$key])
-                && is_array($merged[$key])
-            ) {
-                $merged[$key] = $this->arrayMerge($merged[$key], $value);
-            } else {
-                $merged[$key] = $value;
-            }
-        }
-
-        return $merged;
-    }
-
-    /**
-     * Get core config values.
-     *
-     * @param  mixed  $field
-     * @param  mixed  $channel
-     * @param  mixed  $locale
-     * @return mixed
-     */
-    protected function getCoreConfig($field, $channel, $locale)
-    {
-        $fields = $this->getConfigField($field);
-
-        if (! empty($fields['channel_based'])) {
-            if (! empty($fields['locale_based'])) {
-                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code'         => $field,
-                    'channel_code' => $channel,
-                    'locale_code'  => $locale,
-                ]);
-            } else {
-                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code'         => $field,
-                    'channel_code' => $channel,
-                ]);
-            }
-        } else {
-            if (! empty($fields['locale_based'])) {
-                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code'        => $field,
-                    'locale_code' => $locale,
-                ]);
-            } else {
-                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code' => $field,
-                ]);
-            }
-        }
-
-        return $coreConfigValue;
-    }
-
-    /**
-     * Get default config.
-     *
-     * @param  string  $field
-     * @return mixed
-     */
-    protected function getDefaultConfig($field)
-    {
-        $configFieldInfo = $this->getConfigField($field);
-
-        $fields = explode('.', $field);
-
-        array_shift($fields);
-
-        $field = implode('.', $fields);
-
-        return Config::get($field, $configFieldInfo['default'] ?? null);
     }
 
     /**
