@@ -368,7 +368,7 @@ return [
             ],
         ],
 
-        'sample-products' => [
+        'sample-categories' => [
             'category-translation' => [
                 '2' => [
                     'description'      => 'Erkek Kategori Açıklaması',
@@ -388,7 +388,9 @@ return [
                     'slug'             => 'kış giysisi',
                 ],
             ],
+        ],
 
+        'sample-products' => [
             'product-flat' => [
                 '1' => [
                     'description'       => 'Arctic Cozy Örme Unisex Bere, soğuk aylarda sıcak, rahat ve şık kalmanız için ideal bir çözümdür. Akrilik örgü malzemeden üretilen bu bere, sıcak ve sıkı bir uyum sağlamak için tasarlanmıştır. Klasik tasarımı sayesinde hem erkekler hem de kadınlar için uygun olan bu bere, çeşitli stillere uyum sağlayan çok yönlü bir aksesuardır. Şehirde rahat bir gün geçirirken veya doğayla iç içe olurken, bu bere, kıyafetinize biraz konfor ve sıcaklık katıyor. Yumuşak ve nefes alabilen malzeme, tarzınızdan ödün vermeden sıcak kalmanızı sağlar. Arctic Cozy Örme Unisex Bere sadece bir aksesuar değil, kış modasının bir ifadesidir. Basitliği, farklı kıyafetlerle kolayca eşleştirilebilmesini sağlar ve kış gardırobunuzun vazgeçilmez bir parçası haline gelir. Hediye olarak veya kendinizi şımartmak için düşünülen bu bere, her kış kombinine düşünülen bir ek olarak düşünülebilir. Sıcaklık ile zamansız bir moda anlayışını mükemmel bir şekilde birleştiren bu klasik aksesuarla kış gardırobunuzu yükseltin.',

@@ -368,7 +368,7 @@ return [
             ],
         ],
 
-        'sample-products' => [
+        'sample-categories' => [
             'category-translation' => [
                 '2' => [
                     'description'      => 'Description de la catégorie Hommes',
@@ -388,7 +388,9 @@ return [
                     'slug'             => 'vetements-hiver',
                 ],
             ],
+        ],
 
+        'sample-products' => [
             'product-flat' => [
                 '1' => [
                     'description'       => 'Le bonnet tricoté Arctic Cozy est votre solution pour rester au chaud, confortable et élégant pendant les mois les plus froids. Fabriqué à partir d\'un mélange doux et durable de tricot acrylique, ce bonnet est conçu pour offrir un ajustement confortable et snug. Son design classique le rend adapté aux hommes et aux femmes, offrant un accessoire polyvalent qui complète différents styles. Que vous sortiez pour une journée décontractée en ville ou que vous vous aventuriez en plein air, ce bonnet ajoute une touche de confort et de chaleur à votre tenue. Le matériau doux et respirant garantit que vous restez confortable sans sacrifier le style. Le bonnet tricoté Arctic Cozy n\'est pas seulement un accessoire; c\'est une déclaration de mode hivernale. Sa simplicité le rend facile à associer à différentes tenues, ce qui en fait un incontournable de votre garde-robe d\'hiver. Idéal pour offrir en cadeau ou pour vous faire plaisir, ce bonnet est un ajout réfléchi à toute tenue d\'hiver. C\'est un accessoire polyvalent qui va au-delà de la fonctionnalité, ajoutant une touche de chaleur et de style à votre look. Embrassez l\'essence de l\'hiver avec le bonnet tricoté Arctic Cozy. Que vous profitiez d\'une journée décontractée ou que vous affrontiez les éléments, laissez ce bonnet être votre compagnon de confort et de style. Rehaussez votre garde-robe d\'hiver avec cet accessoire classique qui combine parfaitement chaleur et intemporalité.',

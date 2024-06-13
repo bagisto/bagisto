@@ -368,7 +368,7 @@ return [
             ],
         ],
 
-        'sample-products' => [
+        'sample-categories' => [
             'category-translation' => [
                 '2' => [
                     'description'      => 'Descrizione della categoria Uomo',
@@ -388,7 +388,9 @@ return [
                     'slug'             => 'abbigliamento invernale',
                 ],
             ],
+        ],
 
+        'sample-products' => [
             'product-flat' => [
                 '1' => [
                     'description'       => 'L\'Arctic Cozy Knit Beanie è la soluzione ideale per rimanere al caldo, comodi e alla moda durante i mesi più freddi. Realizzato in una morbida e resistente miscela di maglia acrilica, questo berretto è progettato per offrire una vestibilità calda e avvolgente. Il design classico lo rende adatto sia per uomini che per donne, offrendo un accessorio versatile che si adatta a vari stili. Che tu stia uscendo per una giornata informale in città o che tu stia abbracciando la natura, questo berretto aggiunge un tocco di comfort e calore al tuo abbigliamento. Il materiale morbido e traspirante garantisce che tu rimanga al caldo senza sacrificare lo stile. L\'Arctic Cozy Knit Beanie non è solo un accessorio; è una dichiarazione di moda invernale. La sua semplicità lo rende facile da abbinare a diversi outfit, rendendolo un capo indispensabile nel tuo guardaroba invernale. Ideale come regalo o come coccola per te stesso, questo berretto è un\'aggiunta premurosa a qualsiasi ensemble invernale. È un accessorio versatile che va oltre la funzionalità, aggiungendo un tocco di calore e stile al tuo look. Abbraccia l\'essenza dell\'inverno con l\'Arctic Cozy Knit Beanie. Che tu stia godendo di una giornata informale o affrontando gli elementi, lascia che questo berretto sia il tuo compagno di comfort e stile. Eleva il tuo guardaroba invernale con questo accessorio classico che combina senza sforzo calore con un senso senza tempo della moda.',

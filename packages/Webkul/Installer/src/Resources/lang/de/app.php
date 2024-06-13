@@ -368,7 +368,7 @@ return [
             ],
         ],
 
-        'sample-products' => [
+        'sample-categories' => [
             'category-translation' => [
                 '2' => [
                     'description'      => 'Beschreibung der Kategorie Herren',
@@ -388,7 +388,9 @@ return [
                     'slug'             => 'winterkleidung',
                 ],
             ],
+        ],
 
+        'sample-products' => [
             'product-flat' => [
                 '1' => [
                     'description'       => 'Die Arctic Cozy Knit Beanie ist Ihre ideale Lösung, um in den kälteren Monaten warm, bequem und stilvoll zu bleiben. Hergestellt aus einer weichen und strapazierfähigen Mischung aus Acrylstrick, bietet diese Mütze eine gemütliche und eng anliegende Passform. Das klassische Design macht sie sowohl für Männer als auch für Frauen geeignet und bietet ein vielseitiges Accessoire, das zu verschiedenen Stilen passt. Egal, ob Sie einen lässigen Tag in der Stadt verbringen oder die Natur genießen, diese Mütze verleiht Ihrem Outfit einen Hauch von Komfort und Wärme. Das weiche und atmungsaktive Material sorgt dafür, dass Sie es gemütlich haben, ohne auf Stil verzichten zu müssen. Die Arctic Cozy Knit Beanie ist nicht nur ein Accessoire, sondern ein Statement der Wintermode. Ihre Schlichtheit macht es einfach, sie mit verschiedenen Outfits zu kombinieren, und sie ist ein Grundbestandteil Ihrer Wintergarderobe. Ideal als Geschenk oder als Belohnung für sich selbst, ist diese Mütze eine durchdachte Ergänzung für jedes Winteroutfit. Sie ist ein vielseitiges Accessoire, das über die Funktionalität hinausgeht und Ihrem Look einen Hauch von Wärme und Stil verleiht. Erleben Sie die Essenz des Winters mit der Arctic Cozy Knit Beanie. Egal, ob Sie einen lässigen Tag draußen genießen oder den Elementen trotzen, lassen Sie diese Mütze Ihr Begleiter für Komfort und Stil sein. Erhöhen Sie Ihre Wintergarderobe mit diesem klassischen Accessoire, das Wärme mit einem zeitlosen Sinn für Mode mühelos kombiniert.',

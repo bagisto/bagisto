@@ -368,7 +368,7 @@ return [
             ],
         ],
 
-        'sample-products' => [
+        'sample-categories' => [
             'category-translation' => [
                 '2' => [
                     'description'      => 'Opis kategorii męskiej',
@@ -388,7 +388,9 @@ return [
                     'slug'             => 'odzież zimowa',
                 ],
             ],
+        ],
 
+        'sample-products' => [
             'product-flat' => [
                 '1' => [
                     'description'       => 'Arctic Cozy Knit Beanie to Twoje rozwiązanie na utrzymanie ciepła, komfortu i stylu podczas chłodniejszych miesięcy. Wykonana z miękkiej i trwałej mieszanki akrylu, ta czapka zapewnia przytulne i dopasowane dopasowanie. Klasyczny design sprawia, że jest odpowiednia zarówno dla mężczyzn, jak i kobiet, oferując wszechstronny dodatek, który uzupełnia różne style. Niezależnie od tego, czy wychodzisz na casualowy dzień w mieście, czy cieszysz się na świeżym powietrzu, ta czapka dodaje nuty komfortu i ciepła do twojej stylizacji. Miękki i oddychający materiał zapewnia, że pozostajesz przytulny, nie rezygnując ze stylu. Arctic Cozy Knit Beanie to nie tylko dodatek; to oznaczenie zimowej mody. Jego prostota sprawia, że łatwo można go zestawić z różnymi strojami, co czyni go podstawą twojej zimowej garderoby. Idealny na prezent lub jako przyjemność dla siebie, ta czapka to przemyślany dodatek do każdej zimowej stylizacji. To wszechstronny dodatek, który wykracza poza funkcjonalność, dodając nutę ciepła i stylu do twojego wyglądu. Przyjmij esencję zimy z Arctic Cozy Knit Beanie. Niezależnie od tego, czy cieszysz się casualowym dniem na mieście, czy stajesz w obliczu elementów, pozwól tej czapce być twoim towarzyszem komfortu i stylu. Podnieś swoją zimową garderobę tym klasycznym dodatkiem, który doskonale łączy ciepło z ponadczasowym poczuciem mody.',

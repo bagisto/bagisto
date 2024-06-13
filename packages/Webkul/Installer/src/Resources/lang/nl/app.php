@@ -368,7 +368,7 @@ return [
             ],
         ],
 
-        'sample-products' => [
+        'sample-categories' => [
             'category-translation' => [
                 '2' => [
                     'description'      => 'Mannen Categorie Beschrijving',
@@ -388,7 +388,9 @@ return [
                     'slug'             => 'winterkleding',
                 ],
             ],
+        ],
 
+        'sample-products' => [
             'product-flat' => [
                 '1' => [
                     'description'       => 'De Arctic Cozy Knit Beanie is dé oplossing om warm, comfortabel en stijlvol te blijven tijdens de koudere maanden. Gemaakt van een zachte en duurzame mix van acryl breisel, is deze muts ontworpen om een gezellige en nauwsluitende pasvorm te bieden. Het klassieke ontwerp maakt het geschikt voor zowel mannen als vrouwen, en biedt een veelzijdige accessoire die verschillende stijlen aanvult. Of je nu een casual dagje uit gaat of de natuur in trekt, deze muts voegt een vleugje comfort en warmte toe aan je outfit. Het zachte en ademende materiaal zorgt ervoor dat je gezellig blijft zonder stijl op te offeren. De Arctic Cozy Knit Beanie is niet zomaar een accessoire; het is een statement van wintermode. Door zijn eenvoud is hij gemakkelijk te combineren met verschillende outfits, waardoor hij een essentieel onderdeel is van je wintergarderobe. Ideaal om cadeau te geven of jezelf te verwennen, deze muts is een doordachte toevoeging aan elke winteroutfit. Het is een veelzijdige accessoire die verder gaat dan functionaliteit, en een vleugje warmte en stijl toevoegt aan je look. Omarm de essentie van de winter met de Arctic Cozy Knit Beanie. Of je nu geniet van een casual dagje uit of de elementen trotseert, laat deze muts je metgezel zijn voor comfort en stijl. Upgrade je wintergarderobe met deze klassieke accessoire die moeiteloos warmte combineert met een tijdloos gevoel voor mode.',

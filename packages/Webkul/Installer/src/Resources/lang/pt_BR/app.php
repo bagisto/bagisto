@@ -368,7 +368,7 @@ return [
             ],
         ],
 
-        'sample-products' => [
+        'sample-categories' => [
             'category-translation' => [
                 '2' => [
                     'description'      => 'Descrição da categoria masculina',
@@ -388,7 +388,9 @@ return [
                     'slug'             => 'roupa de inverno',
                 ],
             ],
+        ],
 
+        'sample-products' => [
             'product-flat' => [
                 '1' => [
                     'description'       => 'O Arctic Cozy Knit Beanie é a sua solução para se manter quente, confortável e elegante durante os meses mais frios. Feito de uma mistura macia e durável de acrílico, este gorro foi projetado para proporcionar um ajuste aconchegante. O design clássico o torna adequado tanto para homens quanto para mulheres, oferecendo um acessório versátil que combina com vários estilos. Seja para um dia casual na cidade ou para aproveitar o ar livre, este gorro adiciona um toque de conforto e calor ao seu visual. O material macio e respirável garante que você fique aconchegante sem sacrificar o estilo. O Arctic Cozy Knit Beanie não é apenas um acessório; é uma declaração de moda de inverno. Sua simplicidade facilita a combinação com diferentes roupas, tornando-o um item essencial em seu guarda-roupa de inverno. Ideal para presentear ou se presentear, este gorro é uma adição atenciosa a qualquer conjunto de inverno. É um acessório versátil que vai além da funcionalidade, adicionando um toque de calor e estilo ao seu visual. Abraçe a essência do inverno com o Arctic Cozy Knit Beanie. Seja para um dia casual ou para enfrentar os elementos, deixe este gorro ser seu companheiro de conforto e estilo. Eleve seu guarda-roupa de inverno com este acessório clássico que combina calor com um senso atemporal de moda.',

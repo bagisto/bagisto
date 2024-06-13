@@ -368,7 +368,7 @@ return [
             ],
         ],
 
-        'sample-products' => [
+        'sample-categories' => [
             'category-translation' => [
                 '2' => [
                     'description'      => 'Descripción de la categoría de hombres',
@@ -388,7 +388,9 @@ return [
                     'slug'             => 'ropa-de-invierno',
                 ],
             ],
+        ],
 
+        'sample-products' => [
             'product-flat' => [
                 '1' => [
                     'description'       => 'El Gorro de Punto Cómodo del Ártico es tu solución para mantenerte abrigado, cómodo y con estilo durante los meses más fríos. Elaborado con una mezcla suave y duradera de acrílico, este gorro está diseñado para proporcionar un ajuste acogedor y ceñido. Su diseño clásico lo hace adecuado tanto para hombres como para mujeres, ofreciendo un accesorio versátil que complementa varios estilos. Ya sea que salgas para un día casual en la ciudad o disfrutes del aire libre, este gorro añade un toque de comodidad y calidez a tu conjunto. El material suave y transpirable asegura que te mantengas abrigado sin sacrificar el estilo. El Gorro de Punto Cómodo del Ártico no es solo un accesorio; es una declaración de moda invernal. Su simplicidad hace que sea fácil de combinar con diferentes outfits, convirtiéndolo en un básico en tu guardarropa de invierno. Ideal para regalar o como un capricho para ti mismo, este gorro es una adición considerada a cualquier conjunto invernal. Es un accesorio versátil que va más allá de la funcionalidad, añadiendo un toque de calidez y estilo a tu look. Abraza la esencia del invierno con el Gorro de Punto Cómodo del Ártico. Ya sea que disfrutes de un día casual o te enfrentes a los elementos, deja que este gorro sea tu compañero de comodidad y estilo. Eleva tu guardarropa de invierno con este accesorio clásico que combina sin esfuerzo la calidez con un sentido atemporal de la moda.',
