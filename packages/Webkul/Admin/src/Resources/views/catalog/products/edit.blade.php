@@ -227,6 +227,9 @@
                             @includeIf($view)
                         @endforeach
                     @else
+                        <!-- Channels View Blade File -->
+                        @include('admin::catalog.products.edit.channels')
+
                         <!-- Categories View Blade File -->
                         @include('admin::catalog.products.edit.categories')
                     @endif

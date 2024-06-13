@@ -36,26 +36,26 @@ class ReviewDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('product_reviews as pr')
-            ->leftJoin('product_flat as pf', 'pr.product_id', '=', 'pf.product_id')
-            ->leftJoin('customers as c', 'pr.customer_id', '=', 'c.id')
+        $queryBuilder = DB::table('product_reviews')
+            ->leftJoin('product_flat', 'product_reviews.product_id', '=', 'product_flat.product_id')
+            ->leftJoin('customers', 'product_reviews.customer_id', '=', 'customers.id')
             ->select(
-                'pr.id as product_review_id',
-                'pr.title',
-                'pr.comment',
-                'pr.name as customer_full_name',
-                'pf.name as product_name',
-                'pr.status as product_review_status',
-                'pr.rating',
-                'pr.created_at',
+                'product_reviews.id as product_review_id',
+                'product_reviews.title',
+                'product_reviews.comment',
+                'product_reviews.name as customer_full_name',
+                'product_flat.name as product_name',
+                'product_reviews.status as product_review_status',
+                'product_reviews.rating',
+                'product_reviews.created_at',
             )
             ->where('channel', core()->getCurrentChannelCode())
             ->where('locale', app()->getLocale());
 
-        $this->addFilter('product_review_id', 'pr.id');
-        $this->addFilter('product_review_status', 'pr.status');
-        $this->addFilter('product_name', 'pf.name');
-        $this->addFilter('created_at', 'pr.created_at');
+        $this->addFilter('product_review_id', 'product_reviews.id');
+        $this->addFilter('product_review_status', 'product_reviews.status');
+        $this->addFilter('product_name', 'product_flat.name');
+        $this->addFilter('created_at', 'product_reviews.created_at');
 
         return $queryBuilder;
     }

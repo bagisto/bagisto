@@ -15,9 +15,13 @@ class SitemapDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('sitemaps')->addSelect('id', 'file_name', 'path', 'path as url');
-
-        return $queryBuilder;
+        return DB::table('sitemaps')
+            ->addSelect(
+                'id',
+                'file_name',
+                'path',
+                'path as url'
+            );
     }
 
     /**

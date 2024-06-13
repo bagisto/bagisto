@@ -17,6 +17,7 @@
             leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
         >
             <div
+                ref="parentContainer" 
                 class="fixed inset-0 z-10 flex transform flex-col gap-4 overflow-y-auto transition"
                 v-show="isOpen"
             >
@@ -42,7 +43,10 @@
                 </span>
                     
                 <!-- Main Image -->
-                <div class="h-full w-full overflow-hidden">
+                <div 
+                    ref="mediaContainer" 
+                    class="h-full w-full overflow-hidden"
+                >
                     <div
                         class="relative m-auto flex w-full items-center justify-center"
                         :class="{
@@ -264,7 +268,7 @@
 
                 handleMouseMove(event) {
                     this.isMouseMoveTriggered = true;
-
+                    
                     this.isMouseDownTriggered = false;
 
                     if (! this.isDragging) {
@@ -272,19 +276,21 @@
                     }
 
                     const deltaX = event.clientX - this.startDragX;
-
+                    
                     const deltaY = event.clientY - this.startDragY;
-
+                    
                     const newTranslateY = this.translateY + deltaY;
 
-                    const maxTranslateY = Math.min(0, window.innerHeight - event.srcElement.height);
+                    const remainingHeight = this.$refs.parentContainer.clientHeight - this.$refs.mediaContainer.clientHeight;
+
+                    const maxTranslateY = Math.min(0, window.innerHeight - (event.srcElement.height + remainingHeight));
 
                     const clampedTranslateY = Math.max(maxTranslateY, Math.min(newTranslateY, 0));
 
                     this.translateY = clampedTranslateY;
-
+                    
                     this.startDragY = event.clientY;
-
+                    
                     this.startDragX = event.clientX;
 
                     this.translateX += deltaX;
@@ -294,8 +300,10 @@
                     const deltaY = event.clientY - this.startDragY;
 
                     let newTranslateY = this.translateY - event.deltaY / Math.abs(event.deltaY) * 100;
+                    
+                    const remainingHeight = this.$refs.parentContainer.clientHeight - this.$refs.mediaContainer.clientHeight;
 
-                    const maxTranslateY = Math.min(0, window.innerHeight - event.srcElement.height);
+                    const maxTranslateY = Math.min(0, window.innerHeight - (event.srcElement.height + remainingHeight));
 
                     this.translateY = Math.max(maxTranslateY, Math.min(newTranslateY, 0));
                 },

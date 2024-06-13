@@ -590,6 +590,20 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + public function getAll(array $params = [])
 ```
 
+Previously, this method returned only active products. Now, it returns all products by default. To retrieve active products, you need to pass `status` and `visible_individually` as `1`. Additionally, you can pass `channel_id` to filter products specific to a channel. You can also specify the search engine by using `setSearchEngine` and passing either `database` or `elastic`.
+
+```diff
+- $products = $this->productRepository->getAll();
+
++ $products = $this->productRepository
++     ->setSearchEngine('database')
++     ->getAll(array_merge(request()->query(), [
++         'channel_id'           => core()->getCurrentChannel()->id,
++         'status'               => 1,
++         'visible_individually' => 1,
++     ]));
+```
+
 2. We've made revisions to the `searchFromDatabase` method to allow for optional search parameters.
 
 ```diff

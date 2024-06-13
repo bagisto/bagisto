@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Ajouter un client',
             'add-product'                 => 'Ajouter un produit',
+            'all-channels'                => 'Tous les canaux',
             'attribute-code'              => 'Code d\'attribut',
             'average-sale'                => 'Vente moyenne par commande',
             'color'                       => 'Couleur',
@@ -740,30 +741,31 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'Actif',
-                    'attribute-family'              => 'Famille d\'attributs',
-                    'attribute-family-value'        => 'Famille d\'attributs - :attribute_family',
-                    'category'                      => 'Catégorie',
-                    'copy-of'                       => 'Copie de :value',
-                    'copy-of-slug'                  => 'copie-de-:value',
-                    'delete'                        => 'Supprimer',
-                    'disable'                       => 'Désactiver',
-                    'id'                            => 'ID',
-                    'id-value'                      => 'ID - :id',
-                    'image'                         => 'Image',
-                    'mass-delete-success'           => 'Produits sélectionnés supprimés avec succès',
-                    'mass-update-success'           => 'Produits sélectionnés mis à jour avec succès',
-                    'name'                          => 'Nom',
-                    'out-of-stock'                  => 'En rupture de stock',
-                    'price'                         => 'Prix',
-                    'product-image'                 => 'Image du produit',
-                    'qty'                           => 'Quantité',
-                    'qty-value'                     => ':qty disponible(s)',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'Statut',
-                    'type'                          => 'Type',
-                    'update-status'                 => 'Mettre à jour le statut',
+                    'active'                 => 'Actif',
+                    'attribute-family'       => 'Famille d\'attributs',
+                    'attribute-family-value' => 'Famille d\'attributs - :attribute_family',
+                    'category'               => 'Catégorie',
+                    'channel'                => 'Chaîne',
+                    'copy-of'                => 'Copie de :value',
+                    'copy-of-slug'           => 'copie-de-:value',
+                    'delete'                 => 'Supprimer',
+                    'disable'                => 'Désactiver',
+                    'id'                     => 'ID',
+                    'id-value'               => 'ID - :id',
+                    'image'                  => 'Image',
+                    'mass-delete-success'    => 'Produits sélectionnés supprimés avec succès',
+                    'mass-update-success'    => 'Produits sélectionnés mis à jour avec succès',
+                    'name'                   => 'Nom',
+                    'out-of-stock'           => 'En rupture de stock',
+                    'price'                  => 'Prix',
+                    'product-image'          => 'Image du produit',
+                    'qty'                    => 'Quantité',
+                    'qty-value'              => ':qty disponible(s)',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'Statut',
+                    'type'                   => 'Type',
+                    'update-status'          => 'Mettre à jour le statut',
                 ],
             ],
 
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Actif',
                     'address'        => ':address  Adresse(s)',
                     'address-count'  => 'Nombre d\'adresses',
+                    'channel'        => 'Chaîne',
                     'delete'         => 'Supprimer',
                     'delete-success' => 'Données sélectionnées supprimées avec succès',
                     'email'          => 'E-mail',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'Termes de recherche',
 
                     'datagrid' => [
-                        'Channel'             => 'Chaîne',
+                        'channel'             => 'Chaîne',
                         'actions'             => 'Actions',
                         'channel'             => 'Chaîne',
                         'delete'              => 'Supprimer',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Chaîne',
                         'channel'        => 'Chaîne',
                         'delete-warning' => 'Êtes-vous sûr de vouloir effectuer cette action ?',
                         'locale'         => 'Langue',
@@ -2395,6 +2397,7 @@ return [
             'title'         => 'Pages',
 
             'datagrid' => [
+                'channel'             => 'Chaîne',
                 'delete'              => 'Supprimer',
                 'edit'                => 'Modifier',
                 'id'                  => 'ID',
@@ -3099,6 +3102,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Actif',
                 'Asc'                           => 'Asc',
                 'add-filter-btn'                => 'Ajouter un filtre',
                 'add-footer-link-btn'           => 'Ajouter un lien de pied de page',
@@ -3123,6 +3127,7 @@ return [
                 'footer-title'                  => 'Titre',
                 'general'                       => 'Général',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inactif',
                 'image'                         => 'Image',
                 'image-size'                    => "La résolution de l'image doit être de (1920px x 700px)",
                 'image-title'                   => 'Titre de l\'image',
@@ -3134,6 +3139,7 @@ return [
                 'name'                          => 'Nom',
                 'no'                            => 'Non',
                 'New'                           => 'Nouveau',
+                'parent-id'                     => 'ID Parent',
                 'preview'                       => 'Aperçu',
                 'product-carousel'              => 'Carrousel de produits',
                 'product-carousel-description'  => 'Présentez élégamment des produits avec un carrousel de produits dynamique et réactif.',
@@ -3190,6 +3196,7 @@ return [
                 'abandoned-revenue'             => 'Revenu abandonné',
                 'added-to-cart'                 => 'Ajouté au panier',
                 'added-to-cart-info'            => 'Seuls :progress visiteurs ont ajouté des produits au panier',
+                'all-channels'                  => 'Tous les canaux',
                 'average-order-value-over-time' => 'Valeur moyenne de la commande dans le temps',
                 'average-sales'                 => 'Valeur moyenne de la commande',
                 'count'                         => 'Nombre',
@@ -3228,6 +3235,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Tous les canaux',
                 'count'                       => 'Nombre',
                 'customers'                   => 'Clients',
                 'customers-over-time'         => 'Clients dans le temps',
@@ -3256,6 +3264,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Tous les canaux',
                 'channel'                          => 'Canal',
                 'end-date'                         => 'Date de fin',
                 'id'                               => 'ID',
@@ -3289,6 +3298,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Tous les canaux',
             'day'           => 'Jour',
             'end-date'      => 'Date de fin',
             'export-csv'    => 'Exporter en CSV',

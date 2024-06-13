@@ -19,9 +19,6 @@ class ProductAttributeValueFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'locale'  => 'en',
-            'channel' => 'default',
-        ];
+        return [];
     }
 }

@@ -297,6 +297,8 @@ class Configurable extends AbstractType
 
         $this->productImageRepository->upload($data, $variant, 'images');
 
+        $variant->channels()->sync($variant->parent->channels->pluck('id')->toArray());
+
         return $variant;
     }
 
@@ -389,6 +391,8 @@ class Configurable extends AbstractType
         }
 
         $this->productInventoryRepository->saveInventories($data, $variant);
+
+        $variant->channels()->sync($variant->parent->channels->pluck('id')->toArray());
 
         return $variant;
     }
@@ -531,19 +535,23 @@ class Configurable extends AbstractType
 
         return [
             [
-                'product_id'        => $this->product->id,
-                'sku'               => $this->product->sku,
-                'name'              => $this->product->name,
-                'type'              => $this->product->type,
-                'quantity'          => $data['quantity'],
-                'price'             => $convertedPrice = core()->convertPrice($price),
-                'base_price'        => $price,
-                'total'             => $convertedPrice * $data['quantity'],
-                'base_total'        => $price * $data['quantity'],
-                'weight'            => $childProduct->weight,
-                'total_weight'      => $childProduct->weight * $data['quantity'],
-                'base_total_weight' => $childProduct->weight * $data['quantity'],
-                'additional'        => $this->getAdditionalOptions($data),
+                'product_id'          => $this->product->id,
+                'sku'                 => $this->product->sku,
+                'name'                => $this->product->name,
+                'type'                => $this->product->type,
+                'quantity'            => $data['quantity'],
+                'price'               => $convertedPrice = core()->convertPrice($price),
+                'price_incl_tax'      => $convertedPrice,
+                'base_price'          => $price,
+                'base_price_incl_tax' => $price,
+                'total'               => $convertedPrice * $data['quantity'],
+                'total_incl_tax'      => $convertedPrice * $data['quantity'],
+                'base_total'          => $price * $data['quantity'],
+                'base_total_incl_tax' => $price * $data['quantity'],
+                'weight'              => $childProduct->weight,
+                'total_weight'        => $childProduct->weight * $data['quantity'],
+                'base_total_weight'   => $childProduct->weight * $data['quantity'],
+                'additional'          => $this->getAdditionalOptions($data),
             ], [
                 'parent_id'  => $this->product->id,
                 'product_id' => (int) $data['selected_configurable_option'],

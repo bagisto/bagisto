@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Kunde hinzufügen',
             'add-product'                 => 'Produkt hinzufügen',
+            'all-channels'                => 'Alle Kanäle',
             'attribute-code'              => 'Attributcode',
             'average-sale'                => 'Durchschnittlicher Bestellumsatz',
             'color'                       => 'Farbe',
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'Attributfamilie',
                     'attribute-family-value' => 'Attributfamilie - :attribute_family',
                     'category'               => 'Kategorie',
+                    'channel'                => 'Kanal',
                     'copy-of'                => 'Kopie von :value',
                     'copy-of-slug'           => 'kopie-von-:value',
                     'delete'                 => 'Löschen',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Aktiv',
                     'address'        => ':address Adresse(n)',
                     'address-count'  => 'Anzahl der Adressen',
+                    'channel'        => 'Kanal',
                     'delete'         => 'Löschen',
                     'delete-success' => 'Ausgewählte Daten erfolgreich gelöscht',
                     'email'          => 'E-Mail',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'Suchbegriffe',
 
                     'datagrid' => [
-                        'Channel'             => 'Kanal',
+                        'channel'             => 'Kanal',
                         'actions'             => 'Aktionen',
                         'channel'             => 'Kanal',
                         'delete'              => 'Löschen',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Kanal',
                         'channel'        => 'Kanal',
                         'delete-warning' => 'Möchten Sie diese Aktion wirklich ausführen?',
                         'locale'         => 'Lokalisierung',
@@ -2395,6 +2397,7 @@ return [
             'title'         => 'Seiten',
 
             'datagrid' => [
+                'channel'             => 'Kanal',
                 'delete'              => 'Löschen',
                 'edit'                => 'Bearbeiten',
                 'id'                  => 'ID',
@@ -3099,6 +3102,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Aktiv',
                 'add-filter-btn'                => 'Filter hinzufügen',
                 'add-footer-link-btn'           => 'Fußzeilen-Link hinzufügen',
                 'add-image-btn'                 => 'Bild hinzufügen',
@@ -3123,6 +3127,7 @@ return [
                 'footer-title'                  => 'Titel',
                 'general'                       => 'Allgemein',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inaktiv',
                 'image'                         => 'Bild',
                 'image-size'                    => 'Die Bildauflösung sollte (1920px X 700px) sein',
                 'image-title'                   => 'Bildtitel',
@@ -3134,6 +3139,7 @@ return [
                 'name'                          => 'Name',
                 'no'                            => 'Nein',
                 'new'                           => 'Neu',
+                'parent-id'                     => 'Eltern-ID',
                 'preview'                       => 'Vorschau',
                 'product-carousel'              => 'Produkt Karussell',
                 'product-carousel-description'  => 'Produkte mit einem dynamischen und responsiven Produkt Karussell elegant präsentieren.',
@@ -3190,6 +3196,7 @@ return [
                 'abandoned-revenue'             => 'Abgebrochene Einnahmen',
                 'added-to-cart'                 => 'Zum Warenkorb hinzugefügt',
                 'added-to-cart-info'            => 'Nur :progress Besucher haben Produkte zum Warenkorb hinzugefügt',
+                'all-channels'                  => 'Alle Kanäle',
                 'average-order-value-over-time' => 'Durchschnittlicher Bestellwert im Laufe der Zeit',
                 'average-sales'                 => 'Durchschnittlicher Bestellwert',
                 'count'                         => 'Anzahl',
@@ -3228,6 +3235,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Alle Kanäle',
                 'count'                       => 'Anzahl',
                 'customers'                   => 'Kunden',
                 'customers-over-time'         => 'Kunden im Laufe der Zeit',
@@ -3256,6 +3264,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Alle Kanäle',
                 'channel'                          => 'Kanal',
                 'end-date'                         => 'Enddatum',
                 'id'                               => 'ID',
@@ -3289,6 +3298,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Alle Kanäle',
             'day'           => 'Tag',
             'end-date'      => 'Enddatum',
             'export-csv'    => 'CSV exportieren',
