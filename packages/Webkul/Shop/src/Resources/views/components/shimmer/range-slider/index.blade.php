@@ -1,5 +1,5 @@
 <div>
-    <div class="flex items-center gap-4">
+    <div class="mt-1 flex items-center gap-4">
         <p class="shimmer h-5 w-12"></p>
 
         <p class="shimmer h-5 w-28"></p>
@@ -11,6 +11,5 @@
             <div class="shimmer absolute -left-1 -top-2.5 h-6 w-6 rounded-full"></div>
             <div class="shimmer absolute -right-1 -top-2.5 h-6 w-6 rounded-full"></div>
         </div>
-
     </div>
 </div>

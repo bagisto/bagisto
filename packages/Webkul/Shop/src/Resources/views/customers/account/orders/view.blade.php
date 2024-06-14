@@ -16,7 +16,7 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="mx-4 flex-auto">
+    <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
         <div class="flex items-center justify-between">
             <div class="max-md:flex max-md:items-center">
                 <!-- Back Button For mobile view -->
@@ -27,7 +27,7 @@
                     <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                 </a>
     
-                <h2 class="text-2xl font-medium max-md:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                     @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
                 </h2>
             </div>
@@ -387,7 +387,7 @@
                                 @if ($order->canReorder())
                                     <a
                                         href="{{ route('shop.customers.account.orders.reorder', $order->id) }}"
-                                        class="mx-auto w-full py-2 text-sm font-medium text-navyBlue hover:bg-zinc-100"
+                                        class="mx-auto w-full py-3 text-sm font-medium text-navyBlue hover:bg-zinc-100 max-sm:py-2"
                                     >
                                         @lang('shop::app.customers.account.orders.view.reorder-btn-title')
                                     </a>
@@ -399,7 +399,7 @@
 
                                     <a
                                         href="javascript:void(0);"
-                                        class="mx-auto w-full py-2 text-sm font-medium hover:bg-zinc-100"
+                                        class="mx-auto w-full py-3 text-sm font-medium hover:bg-zinc-100 max-sm:py-2"
                                         @click="$emitter.emit('open-confirm-modal', {
                                             message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
 
@@ -419,7 +419,7 @@
                             :is-active="true"
                             class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                         >
-                            <x-slot:header class="bg-gray-100 !px-4 py-2 text-sm font-medium">
+                            <x-slot:header class="bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
                                @lang('shop::app.customers.account.orders.view.item-ordered')
                             </x-slot>
                 
@@ -432,7 +432,7 @@
                                             @if (isset($item->additional['attributes']))
                                                 <div>
                                                     @foreach ($item->additional['attributes'] as $attribute)
-                                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                                        <b  class="max-sm:!font-semibold">{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
                                                     @endforeach
                                                 </div>
                                             @endif
@@ -584,7 +584,7 @@
 
                         <!--Summary -->
                         <div class="w-full rounded-md bg-gray-100">
-                            <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
+                            <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                                 @lang('shop::app.customers.account.orders.view.information.order-summary')
                             </div>
 
@@ -783,15 +783,15 @@
                                 <!-- Item  Invoiced -->
                                 <x-shop::accordion
                                     :is-active="true"
-                                    class="rounded-md !border-none !bg-gray-100"
+                                    class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md border-none bg-gray-100 px-4 py-3 font-medium">
+                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.item-invoiced')
                                     </x-slot>
                         
                                     <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
                                         @foreach ($invoice->items as $item)
-                                            <div class="rounded-md border bg-white px-4 py-2">
+                                            <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                                 <p class="pb-2 text-sm font-medium">
                                                     {{ $item->name }}
                                                 </p>
@@ -880,11 +880,11 @@
 
                                 <!--Summary -->
                                 <div class="w-full rounded-md bg-gray-100">
-                                    <div class="rounded-t-md border-none px-4 py-3 font-medium">
+                                    <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('Order Summary')
                                     </div>
 
-                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs font-medium">
+                                    <div class="grid gap-1.5 rounded-md rounded-t-none border border-t-0 bg-white px-4 py-3 text-xs font-medium">
                                         @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p class="text-zinc-500">
@@ -1285,15 +1285,15 @@
 
                                 <x-shop::accordion
                                     :is-active="true"
-                                    class="rounded-md !border-none !bg-gray-100"
+                                    class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md border-none bg-gray-100 px-4 py-3 font-medium">
+                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.item-shipped')
                                     </x-slot>
                         
                                     <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
                                         @foreach ($shipment->items as $item)
-                                            <div class="rounded-md border bg-white px-4 py-2">
+                                            <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                                 <p class="pb-2 text-sm font-medium">
                                                     {{ $item->name }}
                                                 </p>
@@ -1448,15 +1448,15 @@
 
                                 <x-shop::accordion
                                     :is-active="true"
-                                    class="rounded-md !border-none !bg-gray-100"
+                                    class="overflow-hidden rounded-lg !border-none !bg-gray-100"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md border-none bg-gray-100 px-4 py-3 font-medium">
+                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.item-refunded')
                                     </x-slot>
                         
                                     <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
                                         @foreach ($invoice->items as $item)
-                                            <div class="rounded-md border bg-white px-4 py-2">
+                                            <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                                 <p class="pb-2 text-sm font-medium">
                                                     {{ $item->name }}
                                                 </p>
@@ -1543,12 +1543,13 @@
                                     </x-slot>
                                 </x-shop::accordion>
 
+                                <!-- Summary -->
                                 <div class="w-full rounded-md bg-gray-100">
-                                    <div class="rounded-t-md border-none px-4 py-3 font-medium">
+                                    <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.refunds.order-summary')
                                     </div>
 
-                                    <div class="grid gap-1.5 rounded-md border bg-white px-4 py-3 text-xs">
+                                    <div class="grid gap-1.5 rounded-md rounded-t-none border border-t-0 bg-white px-4 py-3 text-xs font-medium">
                                         @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                             <div class="flex w-full justify-between gap-x-5">
                                                 <p class="text-zinc-500">
@@ -1819,7 +1820,7 @@
 
             <!-- Shipping Address and Payment methods for mobile view -->
             <div class="w-full rounded-md bg-gray-100 md:hidden">
-                <div class="rounded-t-md border-none !px-4 py-2 text-sm font-medium">
+                <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                     @lang('shop::app.customers.account.orders.view.shipping-and-payment')
                 </div>
 

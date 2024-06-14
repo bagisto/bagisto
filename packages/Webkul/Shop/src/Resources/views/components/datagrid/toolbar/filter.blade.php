@@ -55,7 +55,7 @@
                         </p>
                     </x-slot>
 
-                    <x-slot:content class="!p-4 max-sm:pt-2.5">
+                    <x-slot:content class="!p-4 max-md:!pt-2.5">
                         <div v-for="column in available.columns">
                             <template v-if="column.filterable">
                                 <!-- Boolean -->
