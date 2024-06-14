@@ -289,7 +289,7 @@ class ProductController extends Controller
 
             $product = $this->productRepository->update([
                 'status'  => $massUpdateRequest->input('value'),
-            ], $productId);
+            ], $productId, ['status']);
 
             Event::dispatch('catalog.product.update.after', $product);
         }

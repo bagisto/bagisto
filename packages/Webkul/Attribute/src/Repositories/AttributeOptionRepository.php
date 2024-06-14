@@ -32,7 +32,7 @@ class AttributeOptionRepository extends Repository
      * @param  string  $attribute
      * @return \Webkul\Attribute\Contracts\AttributeOption
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id)
     {
         $option = parent::update($data, $id);
 
