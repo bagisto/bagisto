@@ -35,6 +35,7 @@ class ThemeDataGrid extends DataGrid
                 'channel_translations.name as channel_name',
                 'theme_customizations.status',
                 'theme_customizations.name as name',
+                'theme_customizations.theme_code',
                 'theme_customizations.channel_id'
             );
 
@@ -44,6 +45,7 @@ class ThemeDataGrid extends DataGrid
         $this->addFilter('sort_order', 'theme_customizations.sort_order');
         $this->addFilter('status', 'theme_customizations.status');
         $this->addFilter('channel_name', 'theme_customizations.channel_id');
+        $this->addFilter('theme_code', 'theme_customizations.theme_code');
 
         return $queryBuilder;
     }
@@ -55,6 +57,8 @@ class ThemeDataGrid extends DataGrid
      */
     public function prepareColumns()
     {
+        $themes = config('themes.shop');
+
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.settings.themes.index.datagrid.id'),
@@ -73,6 +77,22 @@ class ThemeDataGrid extends DataGrid
                 ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
                 ->values()
                 ->toArray(),
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'              => 'theme_code',
+            'label'              => trans('Theme Name'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => collect($themes)
+                ->map(fn ($theme, $code) => ['label' => $theme['name'], 'value' => $code])
+                ->values()
+                ->toArray(),
+            'closure'            => function ($row) use ($themes) {
+                return collect($themes)->first(fn ($theme, $code) => $row->theme_code == $code)['name'];
+            },
             'sortable'   => true,
         ]);
 
