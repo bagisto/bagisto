@@ -90,15 +90,19 @@ class InstallerController extends Controller
         $appLocale = $allParameters['app_locale'] ?? null;
         $appCurrency = $allParameters['app_currency'] ?? null;
 
-        $allowedLocales = array_unique(array_merge(
-            [($appLocale ?? 'en')],
-            $selectedParameters['allowed_locales']
-        ));
+        $allowedLocales = array_unique(
+            array_merge(
+                [($appLocale ?? 'en')],
+                $selectedParameters['allowed_locales']
+            )
+        );
 
-        $allowedCurrencies = array_unique(array_merge(
-            [($appCurrency ?? 'USD')],
-            $selectedParameters['allowed_currencies']
-        ));
+        $allowedCurrencies = array_unique(
+            array_merge(
+                [($appCurrency ?? 'USD')],
+                $selectedParameters['allowed_currencies']
+            )
+        );
 
         $parameter = [
             'parameter' => [
@@ -121,24 +125,41 @@ class InstallerController extends Controller
     /**
      * Admin Configuration Setup.
      *
-     * @return void
+     * @return bool
      */
     public function adminConfigSetup()
     {
-        $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
+        $defaultLocale = config('app.locale');
+        $allowedLocales = array_merge([$defaultLocale], request()->input('selectedLocales'));
+
+        $defaultCurrency = config('app.currency');
+        $allowedCurrencies = array_merge([$defaultCurrency], request()->input('selectedCurrencies'));
+
+        $password = password_hash(request()->input('params')['password'], PASSWORD_BCRYPT, ['cost' => 10]);
 
         try {
+            if (request()->input('params')['sample_products']) {
+                $this->databaseManager->seedSampleProducts([
+                    'default_locale'     => $defaultLocale,
+                    'allowed_locales'    => $allowedLocales,
+                    'default_currency'   => $defaultCurrency,
+                    'allowed_currencies' => $allowedCurrencies,
+                ]);
+            }
+
             DB::table('admins')->updateOrInsert(
                 [
                     'id' => self::USER_ID,
                 ], [
-                    'name'     => request()->input('admin'),
-                    'email'    => request()->input('email'),
+                    'name'     => request()->input('params')['admin'],
+                    'email'    => request()->input('params')['email'],
                     'password' => $password,
                     'role_id'  => 1,
                     'status'   => 1,
                 ]
             );
+
+            return true;
         } catch (\Throwable $th) {
             dd($th);
         }

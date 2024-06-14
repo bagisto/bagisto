@@ -4,17 +4,13 @@
     $currentChannel = core()->getRequestedChannel();
 
     $currentLocale = core()->getRequestedLocale();
+
+    $activeConfiguration = system_config()->getActiveConfigurationItem();
 @endphp
 
 <x-admin::layouts>
     <x-slot:title>
-        @if ($items = Arr::get($config->items, request()->route('slug') . '.children'))
-            @foreach ($items as $key => $item)
-                @if ( $key == request()->route('slug2'))
-                    {{ $title = trans($item['name']) }}
-                @endif
-            @endforeach
-        @endif
+        {{ $name = $activeConfiguration->getName() }}
     </x-slot>
 
     <!-- Configuration form fields -->
@@ -25,7 +21,7 @@
         <!-- Save Inventory -->
         <div class="mt-3.5 flex items-center justify-between gap-4 max-sm:flex-wrap">
             <p class="text-xl font-bold text-gray-800 dark:text-white">
-                {{ $title }}
+                {{ $name }}
             </p>
 
             <!-- Save Inventory -->
@@ -121,41 +117,31 @@
             </div>
         </div>
 
-        @if ($groups)
-            <div class="mt-6 grid grid-cols-[1fr_2fr] gap-10 max-xl:flex-wrap">
-                @foreach ($groups as $key => $item)
-                    <div class="grid content-start gap-2.5">
-                        <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                            @lang($item['name'])
-                        </p>
+        <div class="mt-6 grid grid-cols-[1fr_2fr] gap-10 max-xl:flex-wrap">
+            @foreach ($activeConfiguration->getChildren() as $child)
+                <div class="grid content-start gap-2.5">
+                    <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+                        {{ $child->getName() }}
+                    </p>
 
-                        <p class="leading-[140%] text-gray-600 dark:text-gray-300">
-                            @lang($item['info'] ?? '')
-                        </p>
-                    </div>
+                    <p class="leading-[140%] text-gray-600 dark:text-gray-300">
+                        {!! $child->getInfo() !!}
+                    </p>
+                </div>
 
-                    <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
-                        @foreach ($item['fields'] as $field)
-                            @if (
-                                $field['type'] == 'blade'
-                                && view()->exists($field['path'])
-                            )
-                                {!! view($field['path'], compact('field'))->render() !!}
-                            @else 
-                                @include ('admin::configuration.field-type')
-                            @endif
-
-                            @php ($hint = $field['title'] . '-hint')
-
-                            @if ($hint !== __($hint))
-                                <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
-                                    @lang($hint)
-                                </p>
-                            @endif
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
-        @endif
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    @foreach ($child->getFields() as $field)
+                        @if (
+                            $field->getType() == 'blade'
+                            && view()->exists($path = $field->getPath())
+                        )
+                            {!! view($path, compact('field', 'child'))->render() !!}
+                        @else 
+                            @include ('admin::configuration.field-type')
+                        @endif
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
     </x-admin::form>
 </x-admin::layouts>
