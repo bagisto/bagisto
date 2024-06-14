@@ -2352,6 +2352,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Actions',
+                        'category'            => 'Category',
+                        'cms-page'            => 'CMS Page',
                         'delete'              => 'Delete',
                         'edit'                => 'Edit',
                         'for'                 => 'For',
@@ -2359,6 +2361,7 @@ return [
                         'locale'              => 'Locale',
                         'mass-delete-success' => 'Selected URL Rewrites Deleted Successfully',
                         'permanent-redirect'  => 'Permanent (301)',
+                        'product'             => 'Product',
                         'redirect-type'       => 'Redirect Type',
                         'request-path'        => 'Request Path',
                         'target-path'         => 'Target Path',
@@ -3106,6 +3109,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Active',
                 'add-filter-btn'                => 'Add Filter',
                 'add-footer-link-btn'           => 'Add Footer Link',
                 'add-image-btn'                 => 'Add Image',
@@ -3130,6 +3134,7 @@ return [
                 'footer-title'                  => 'Title',
                 'general'                       => 'General',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inactive',
                 'image'                         => 'Image',
                 'image-size'                    => 'Image resolution should be (1920px X 700px)',
                 'image-title'                   => 'Image Title',
@@ -3141,6 +3146,7 @@ return [
                 'name'                          => 'Name',
                 'no'                            => 'No',
                 'new'                           => 'New',
+                'parent-id'                     => 'Parent ID',
                 'preview'                       => 'Preview',
                 'product-carousel'              => 'Product Carousel',
                 'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',

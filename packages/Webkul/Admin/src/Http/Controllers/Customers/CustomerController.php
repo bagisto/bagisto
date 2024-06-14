@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
-use Webkul\Admin\DataGrids\Customers\View\InvoicesDatagrid;
-use Webkul\Admin\DataGrids\Customers\View\OrdersDataGrid;
-use Webkul\Admin\DataGrids\Customers\View\ReviewDatagrid;
+use Webkul\Admin\DataGrids\Customers\View\InvoiceDataGrid;
+use Webkul\Admin\DataGrids\Customers\View\OrderDataGrid;
+use Webkul\Admin\DataGrids\Customers\View\ReviewDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
@@ -249,13 +249,13 @@ class CustomerController extends Controller
         if (request()->ajax()) {
             switch (request()->query('type')) {
                 case self::ORDERS:
-                    return datagrid(OrdersDataGrid::class)->process();
+                    return datagrid(OrderDataGrid::class)->process();
 
                 case self::INVOICES:
-                    return datagrid(InvoicesDatagrid::class)->process();
+                    return datagrid(InvoiceDataGrid::class)->process();
 
                 case self::REVIEWS:
-                    return datagrid(ReviewDatagrid::class)->process();
+                    return datagrid(ReviewDataGrid::class)->process();
             }
         }
 
