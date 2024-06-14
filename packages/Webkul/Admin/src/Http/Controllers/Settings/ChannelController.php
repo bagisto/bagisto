@@ -117,7 +117,7 @@ class ChannelController extends Controller
 
         $data = $this->validate(request(), [
             /* general */
-            'code'                             => ['required', 'unique:channels,code,'.$id, new \Webkul\Core\Rules\Code],
+            'code'                             => ['required', 'prohibited', 'unique:channels,code,'.$id, new \Webkul\Core\Rules\Code],
             $locale.'.name'                    => 'required',
             $locale.'.description'             => 'nullable',
             'inventory_sources'                => 'required|array|min:1',
