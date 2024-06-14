@@ -3088,6 +3088,7 @@ return [
                 'name'       => 'Naam',
                 'save-btn'   => 'Thema opslaan',
                 'sort-order' => 'Sorteervolgorde',
+                'themes'     => 'Thema\'s',
                 'title'      => 'Thema aanmaken',
 
                 'type' => [

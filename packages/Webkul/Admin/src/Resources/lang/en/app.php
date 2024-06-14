@@ -3092,6 +3092,7 @@ return [
                 'name'       => 'Name',
                 'save-btn'   => 'Save Theme',
                 'sort-order' => 'Sort Order',
+                'themes'     => 'Themes',
                 'title'      => 'Create Theme',
 
                 'type' => [

@@ -3090,6 +3090,7 @@ return [
                 'name'       => 'Ad',
                 'save-btn'   => 'Tema kaydet',
                 'sort-order' => 'Sıralama Sırası',
+                'themes'     => 'Temalar',
                 'title'      => 'Tema Oluştur',
 
                 'type' => [

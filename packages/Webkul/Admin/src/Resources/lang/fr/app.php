@@ -3088,6 +3088,7 @@ return [
                 'name'       => 'Nom',
                 'save-btn'   => 'Enregistrer le thème',
                 'sort-order' => 'Ordre de tri',
+                'themes'     => 'Thèmes',
                 'title'      => 'Créer un thème',
 
                 'type' => [

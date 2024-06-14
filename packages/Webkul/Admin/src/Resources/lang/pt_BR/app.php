@@ -3088,6 +3088,7 @@ return [
                 'name'       => 'Nome',
                 'save-btn'   => 'Salvar tema',
                 'sort-order' => 'Ordem de Classificação',
+                'themes'     => 'Temas',
                 'title'      => 'Criar Tema',
 
                 'type' => [

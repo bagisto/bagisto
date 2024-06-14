@@ -3088,6 +3088,7 @@ return [
                 'name'       => 'Nazwa',
                 'save-btn'   => 'Zapisz motyw',
                 'sort-order' => 'Kolejność sortowania',
+                'themes'     => 'Motywy',
                 'title'      => 'Utwórz motyw',
 
                 'type' => [

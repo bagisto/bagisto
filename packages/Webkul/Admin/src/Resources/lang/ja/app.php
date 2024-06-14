@@ -3088,6 +3088,7 @@ return [
                 'name'       => '名前',
                 'save-btn'   => 'テーマを保存する',
                 'sort-order' => '並び替え順',
+                'themes'     => 'テーマ',
                 'title'      => 'テーマを作成',
 
                 'type' => [
