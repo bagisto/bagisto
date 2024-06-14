@@ -75,7 +75,6 @@ class CartRuleRepository extends Repository
     }
 
     /**
-     * @param  array  $data
      * @param  int  $id
      * @return \Webkul\CartRule\Contracts\CartRule
      */

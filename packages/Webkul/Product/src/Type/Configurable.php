@@ -125,7 +125,6 @@ class Configurable extends AbstractType
     /**
      * Update configurable product.
      *
-     * @param  array  $data
      * @param  int  $id
      * @param  array  $attributes
      * @return \Webkul\Product\Contracts\Product

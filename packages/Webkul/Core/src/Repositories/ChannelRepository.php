@@ -51,7 +51,6 @@ class ChannelRepository extends Repository
     /**
      * Update.
      *
-     * @param  array  $data
      * @param  int  $id
      * @return \Webkul\Core\Contracts\Channel
      */

@@ -41,7 +41,6 @@ class PageRepository extends Repository
     }
 
     /**
-     * @param  array  $data
      * @param  int  $id
      * @return \Webkul\CMS\Contracts\Page
      */

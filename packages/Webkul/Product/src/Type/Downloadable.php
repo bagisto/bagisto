@@ -80,7 +80,6 @@ class Downloadable extends AbstractType
     /**
      * Update.
      *
-     * @param  array  $data
      * @param  int  $id
      * @param  array  $attributes
      * @return \Webkul\Product\Contracts\Product

@@ -145,7 +145,6 @@ abstract class AbstractType
     /**
      * Update product.
      *
-     * @param  array  $data
      * @param  int  $id
      * @param  array  $attributes
      * @return \Webkul\Product\Contracts\Product
@@ -163,7 +162,7 @@ abstract class AbstractType
             $attributes = $this->attributeRepository->findWhereIn('code', $attributes);
 
             $this->attributeValueRepository->saveValues($data, $product, $attributes);
-            
+
             return $product;
         }
 

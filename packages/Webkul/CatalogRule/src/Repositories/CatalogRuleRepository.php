@@ -59,7 +59,6 @@ class CatalogRuleRepository extends Repository
     /**
      * Update.
      *
-     * @param  array  $data
      * @param  int  $id
      * @return \Webkul\CatalogRule\Contracts\CatalogRule
      */

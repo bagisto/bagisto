@@ -60,7 +60,6 @@ class AttributeFamilyRepository extends Repository
     }
 
     /**
-     * @param  array  $data
      * @param  int  $id
      * @return \Webkul\Attribute\Contracts\AttributeFamily
      */

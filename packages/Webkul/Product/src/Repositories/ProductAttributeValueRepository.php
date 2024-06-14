@@ -17,7 +17,7 @@ class ProductAttributeValueRepository extends Repository
 
     /**
      * Save attribute values
-     * 
+     *
      * @param  array  $data
      * @param  \Webkul\Product\Contracts\Product  $product
      * @param  mixed  $attributes
@@ -125,7 +125,7 @@ class ProductAttributeValueRepository extends Repository
                         Storage::delete($previousTextValue);
                     }
                 }
-                
+
                 $attributeValue = $this->update([
                     $attribute->column_name => $data[$attribute->code],
                     'unique_id'             => $uniqueId,
