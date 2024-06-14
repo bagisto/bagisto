@@ -737,7 +737,7 @@ return [
                 'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.allow-back-orders',
                 'type'          => 'boolean',
                 'default',
-            ], 
+            ],
             // [
             //     'name'          => 'maximum_product',
             //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.max-qty-allowed-in-cart',
@@ -847,20 +847,22 @@ return [
         'info' => 'admin::app.configuration.index.customer.settings.settings-info',
         'icon' => 'settings/settings.svg',
         'sort' => 3,
-    ], [
-        'key'    => 'customer.settings.login_as_customer',
-        'name'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title',
-        'info'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title-info',
-        'sort'   => 1,
-        'fields' => [
-            [
-                'name'         => 'login',
-                'title'        => 'admin::app.configuration.index.customer.settings.login-as-customer.allow-option',
-                'type'         => 'boolean',
-                'default'      => 1,
-            ],
-        ],
-    ], [
+    ],
+    // [
+    //     'key'    => 'customer.settings.login_as_customer',
+    //     'name'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title',
+    //     'info'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title-info',
+    //     'sort'   => 1,
+    //     'fields' => [
+    //         [
+    //             'name'         => 'login',
+    //             'title'        => 'admin::app.configuration.index.customer.settings.login-as-customer.allow-option',
+    //             'type'         => 'boolean',
+    //             'default'      => 1,
+    //         ],
+    //     ],
+    // ],
+    [
         'key'    => 'customer.settings.wishlist',
         'name'   => 'admin::app.configuration.index.customer.settings.wishlist.title',
         'info'   => 'admin::app.configuration.index.customer.settings.wishlist.title-info',
