@@ -2359,6 +2359,9 @@ return [
                         'request-path'        => 'Aanvraagpad',
                         'target-path'         => 'Doelpad',
                         'temporary-redirect'  => 'Tijdelijke doorstuur (302)',
+                        'product'             => 'Product',
+                        'cms-page'            => 'CMS-pagina',
+                        'category'            => 'Categorie',
                     ],
 
                     'create' => [

@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
+use Webkul\Admin\DataGrids\Theme\ThemeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
@@ -28,7 +28,7 @@ class ThemeController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return datagrid(ThemeDatagrid::class)->process();
+            return datagrid(ThemeDataGrid::class)->process();
         }
 
         return view('admin::settings.themes.index');

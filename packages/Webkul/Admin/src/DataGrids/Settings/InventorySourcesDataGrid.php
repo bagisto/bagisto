@@ -35,7 +35,6 @@ class InventorySourcesDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.inventory-sources.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

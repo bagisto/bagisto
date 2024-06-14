@@ -2348,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'कार्य',
+                        'category'            => 'श्रेणी',
+                        'cms-page'            => 'CMS पृष्ठ',
                         'delete'              => 'हटाएं',
                         'edit'                => 'संपादित करें',
                         'for'                 => 'के लिए',
@@ -2355,6 +2357,7 @@ return [
                         'locale'              => 'भाषा क्षेत्र',
                         'mass-delete-success' => 'चुने गए URL अनुकूलन सफलतापूर्वक हटा दिए गए हैं।',
                         'permanent-redirect'  => 'स्थायी (301)',
+                        'product'             => 'उत्पाद',
                         'redirect-type'       => 'अनुवर्तन प्रकार',
                         'request-path'        => 'अनुरोध पथ',
                         'target-path'         => 'लक्ष्य पथ',

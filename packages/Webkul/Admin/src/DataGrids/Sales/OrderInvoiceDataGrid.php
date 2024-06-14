@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids\Sales;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
-class OrderInvoicesDataGrid extends DataGrid
+class OrderInvoiceDataGrid extends DataGrid
 {
     /**
      * Prepare query builder.
@@ -46,7 +46,6 @@ class OrderInvoicesDataGrid extends DataGrid
             'index'      => 'increment_id',
             'label'      => trans('admin::app.sales.invoices.index.datagrid.id'),
             'type'       => 'string',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -63,7 +62,7 @@ class OrderInvoicesDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'base_grand_total',
             'label'      => trans('admin::app.sales.invoices.index.datagrid.grand-total'),
-            'type'       => 'price',
+            'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
@@ -96,12 +95,13 @@ class OrderInvoicesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.sales.invoices.index.datagrid.invoice-date'),
-            'type'       => 'date_range',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'           => 'created_at',
+            'label'           => trans('admin::app.sales.invoices.index.datagrid.invoice-date'),
+            'type'            => 'date',
+            'searchable'      => true,
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
     }
 

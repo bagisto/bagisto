@@ -2348,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'פעולות',
+                        'category'            => 'קטגוריה',
+                        'cms-page'            => 'דף CMS',
                         'delete'              => 'מחיקה',
                         'edit'                => 'עריכה',
                         'for'                 => 'עבור',
@@ -2355,6 +2357,7 @@ return [
                         'locale'              => 'אזור שפה',
                         'mass-delete-success' => 'כתובות URL משכתבות שנבחרו נמחקו בהצלחה.',
                         'permanent-redirect'  => 'קבוע (301)',
+                        'product'             => 'מוצר',
                         'redirect-type'       => 'סוג ההפניה',
                         'request-path'        => 'נתיב הבקשה',
                         'target-path'         => 'נתיב היעד',
