@@ -152,8 +152,8 @@
 
                                     <x-admin::form.control-group.control
                                         type="select"
-                                        id="theme"
-                                        name="theme"
+                                        id="theme_code"
+                                        name="theme_code"
                                         :value="config('themes.admin-default')"
                                         :label="trans('admin::app.settings.themes.create.themes')"
                                     >

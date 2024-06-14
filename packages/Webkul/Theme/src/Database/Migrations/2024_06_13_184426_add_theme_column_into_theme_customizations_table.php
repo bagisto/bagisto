@@ -13,10 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('theme_customizations', function (Blueprint $table) {
-            $table->string('theme')->nullable()->after('id');
+            $table->string('theme_code')->nullable()->after('id');
         });
 
-        DB::table('theme_customizations')->update(['theme' => core()->getCurrentChannel()->theme]);
+        DB::table('theme_customizations')->update(['theme_code' => core()->getCurrentChannel()->theme]);
     }
 
     /**
@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('theme_customizations', function (Blueprint $table) {
-            $table->dropColumn('theme');
+            $table->dropColumn('theme_code');
         });
     }
 };

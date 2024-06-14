@@ -260,15 +260,15 @@
     
                             <x-admin::form.control-group.control
                                 type="select"
-                                id="theme"
-                                name="theme"
-                                :value="$theme->theme"
+                                id="theme_code"
+                                name="theme_code"
+                                :value="$theme->theme_code"
                                 rules="required"
                                 :label="trans('admin::app.settings.themes.edit.themes')"
                             >
-                                @foreach (config('themes.shop') as $themeCode => $themes)
-                                    <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
-                                        {{ $themes['name'] }}
+                                @foreach (config('themes.shop') as $themeCode => $shopTheme)
+                                    <option value="{{ $themeCode }}">
+                                        {{ $shopTheme['name'] }}
                                     </option>
                                 @endforeach
                             </x-admin::form.control-group.control>
