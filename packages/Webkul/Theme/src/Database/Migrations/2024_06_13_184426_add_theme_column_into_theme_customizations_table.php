@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('theme_code')->nullable()->after('id');
         });
 
-        DB::table('theme_customizations')->update(['theme_code' => core()->getCurrentChannel()->theme]);
+        DB::table('theme_customizations')->update(['theme_code' => 'default']);
     }
 
     /**
