@@ -17,7 +17,7 @@
                     <x-shop::shimmer.products.cards.list count="12" />
                 </div>
             @else
-                <div class="mt-8 grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-sm:mt-5 max-sm:justify-items-center max-sm:gap-x-4 max-sm:gap-y-5">
+                <div class="mt-8 grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:mt-5 max-md:justify-items-center max-md:gap-x-4 max-md:gap-y-5">
                     <!-- Product Card Shimmer Effect -->
                     <x-shop::shimmer.products.cards.grid count="12" />
                 </div> 
