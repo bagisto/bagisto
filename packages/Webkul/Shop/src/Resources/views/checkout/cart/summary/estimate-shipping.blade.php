@@ -5,7 +5,7 @@
     class="overflow-hidden rounded-xl border max-md:rounded-lg max-md:!border-none max-md:!bg-gray-100"
     :is-active="false"
 >
-    <x-slot:header class="font-semibold max-md:p-2 max-md:text-sm max-md:font-medium">
+    <x-slot:header class="font-semibold max-md:py-3 max-md:font-medium max-sm:p-2 max-sm:text-sm">
         @lang('shop::app.checkout.cart.summary.estimate-shipping.title')
     </x-slot>
 
