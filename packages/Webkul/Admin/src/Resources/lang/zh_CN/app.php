@@ -3091,6 +3091,7 @@ return [
                 'name'       => '名称',
                 'save-btn'   => '保存主题',
                 'sort-order' => '排序顺序',
+                'themes'     => '主题',
                 'title'      => '创建主题',
 
                 'type' => [
@@ -3163,6 +3164,7 @@ return [
                 'url'                           => '网址',
                 'value'                         => '值：:value',
                 'value-input'                   => '值',
+                'themes'                        => '主题',
 
                 'services-content' => [
                     'add-btn'            => '添加服务',
