@@ -16,6 +16,10 @@ class OnepageController extends Controller
      */
     public function index()
     {
+        if (! core()->getConfigData('sales.checkout.shopping_cart.cart_page')) {
+            abort(404);
+        }
+
         Event::dispatch('checkout.load.index');
 
         /**

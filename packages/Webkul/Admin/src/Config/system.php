@@ -737,22 +737,23 @@ return [
                 'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.allow-back-orders',
                 'type'          => 'boolean',
                 'default',
-            ], [
-                'name'          => 'maximum_product',
-                'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.max-qty-allowed-in-cart',
-                'type'          => 'text',
-                'default'       => '10',
-            ], [
-                'name'          => 'minimum_product',
-                'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.min-qty-allowed-in-cart',
-                'type'          => 'number',
-                'default'       => '0',
-            ], [
-                'name'          => 'out_of_stock_threshold',
-                'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.out-of-stock-threshold',
-                'type'          => 'number',
-                'default'       => '0',
-            ],
+            ], 
+            // [
+            //     'name'          => 'maximum_product',
+            //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.max-qty-allowed-in-cart',
+            //     'type'          => 'text',
+            //     'default'       => '10',
+            // ], [
+            //     'name'          => 'minimum_product',
+            //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.min-qty-allowed-in-cart',
+            //     'type'          => 'number',
+            //     'default'       => '0',
+            // ], [
+            //     'name'          => 'out_of_stock_threshold',
+            //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.out-of-stock-threshold',
+            //     'type'          => 'number',
+            //     'default'       => '0',
+            // ],
         ],
     ],
 
