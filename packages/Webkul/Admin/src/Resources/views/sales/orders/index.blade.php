@@ -110,13 +110,8 @@
                                 </p>
 
                                 <p
-                                    v-if="record.is_closure"
                                     v-html="record.status"
                                 >
-                                </p>
-
-                                <p v-else>
-                                    @{{ record.status }}
                                 </p>
                             </div>
                         </div>
@@ -174,7 +169,7 @@
     </x-admin::datagrid>
 
     @include('admin::customers.customers.index.create')
-    
+
     @pushOnce('scripts')
         <script
             type="text/x-template"
@@ -311,7 +306,7 @@
                         this.isSearching = true;
 
                         let self = this;
-                        
+
                         this.$axios.get("{{ route('admin.customers.customers.search') }}", {
                                 params: {
                                     query: this.searchTerm,

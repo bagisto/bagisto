@@ -41,7 +41,6 @@ class ChannelDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.channels.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

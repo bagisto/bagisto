@@ -2348,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => '操作',
+                        'category'            => '类别',
+                        'cms-page'            => 'CMS 页面',
                         'delete'              => '删除',
                         'edit'                => '编辑',
                         'for'                 => '适用对象',
@@ -2355,6 +2357,7 @@ return [
                         'locale'              => '语言环境',
                         'mass-delete-success' => '已成功删除选定的 URL 重写。',
                         'permanent-redirect'  => '永久（301）',
+                        'product'             => '产品',
                         'redirect-type'       => '重定向类型',
                         'request-path'        => '请求路径',
                         'target-path'         => '目标路径',

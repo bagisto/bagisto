@@ -47,8 +47,6 @@ class SearchTermDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
-            'width'      => '40px',
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -66,7 +64,6 @@ class SearchTermDataGrid extends DataGrid
             'index'      => 'results',
             'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.results'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -75,7 +72,6 @@ class SearchTermDataGrid extends DataGrid
             'index'      => 'uses',
             'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.uses'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -84,46 +80,33 @@ class SearchTermDataGrid extends DataGrid
             'index'      => 'redirect_url',
             'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.redirect-url'),
             'type'       => 'string',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'channel_id',
-            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.channel'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => core()->getAllChannels()
-                        ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
-                        ->values()
-                        ->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
+            'index'              => 'channel_id',
+            'label'              => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.channel'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => core()->getAllChannels()
+                ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                ->values()
+                ->toArray(),
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'locale',
-            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.locale'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => core()->getAllLocales()
-                        ->map(fn ($locale) => ['label' => $locale->name, 'value' => $locale->code])
-                        ->values()
-                        ->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
+            'index'              => 'locale',
+            'label'              => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.locale'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => core()->getAllLocales()
+                ->map(fn ($locale) => ['label' => $locale->name, 'value' => $locale->code])
+                ->values()
+                ->toArray(),
             'sortable'   => true,
         ]);
     }

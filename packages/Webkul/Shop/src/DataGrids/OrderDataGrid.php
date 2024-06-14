@@ -41,17 +41,18 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('shop::app.customers.account.orders.order-id'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('shop::app.customers.account.orders.order-date'),
-            'type'       => 'date_range',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
+            'index'           => 'created_at',
+            'label'           => trans('shop::app.customers.account.orders.order-date'),
+            'type'            => 'date',
+            'searchable'      => true,
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
 
         $this->addColumn([
@@ -59,56 +60,51 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('shop::app.customers.account.orders.total'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($row) {
                 return core()->formatPrice($row->grand_total, $row->order_currency_code);
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('shop::app.customers.account.orders.status.title'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => [
-                        [
-                            'label'  => trans('shop::app.customers.account.orders.status.options.processing'),
-                            'value'  => Order::STATUS_PROCESSING,
-                        ],
-                        [
-                            'label'  => trans('shop::app.customers.account.orders.status.options.completed'),
-                            'value'  => Order::STATUS_COMPLETED,
-                        ],
-                        [
-                            'label'  => trans('shop::app.customers.account.orders.status.options.canceled'),
-                            'value'  => Order::STATUS_CANCELED,
-                        ],
-                        [
-                            'label'  => trans('shop::app.customers.account.orders.status.options.closed'),
-                            'value'  => Order::STATUS_CLOSED,
-                        ],
-                        [
-                            'label'  => trans('shop::app.customers.account.orders.status.options.pending'),
-                            'value'  => Order::STATUS_PENDING,
-                        ],
-                        [
-                            'label'  => trans('shop::app.customers.account.orders.status.options.pending-payment'),
-                            'value'  => Order::STATUS_PENDING_PAYMENT,
-                        ],
-                        [
-                            'label'  => trans('shop::app.customers.account.orders.status.options.fraud'),
-                            'value'  => Order::STATUS_FRAUD,
-                        ],
-                    ],
+            'index'              => 'status',
+            'label'              => trans('shop::app.customers.account.orders.status.title'),
+            'type'               => 'string',
+            'searchable'         => true,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label'  => trans('shop::app.customers.account.orders.status.options.processing'),
+                    'value'  => Order::STATUS_PROCESSING,
+                ],
+                [
+                    'label'  => trans('shop::app.customers.account.orders.status.options.completed'),
+                    'value'  => Order::STATUS_COMPLETED,
+                ],
+                [
+                    'label'  => trans('shop::app.customers.account.orders.status.options.canceled'),
+                    'value'  => Order::STATUS_CANCELED,
+                ],
+                [
+                    'label'  => trans('shop::app.customers.account.orders.status.options.closed'),
+                    'value'  => Order::STATUS_CLOSED,
+                ],
+                [
+                    'label'  => trans('shop::app.customers.account.orders.status.options.pending'),
+                    'value'  => Order::STATUS_PENDING,
+                ],
+                [
+                    'label'  => trans('shop::app.customers.account.orders.status.options.pending-payment'),
+                    'value'  => Order::STATUS_PENDING_PAYMENT,
+                ],
+                [
+                    'label'  => trans('shop::app.customers.account.orders.status.options.fraud'),
+                    'value'  => Order::STATUS_FRAUD,
                 ],
             ],
-            'searchable' => true,
             'sortable'   => true,
-            'filterable' => true,
             'closure'    => function ($row) {
                 switch ($row->status) {
                     case Order::STATUS_PROCESSING:

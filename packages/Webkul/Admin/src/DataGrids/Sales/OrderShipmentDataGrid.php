@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Sales\Models\OrderAddress;
 
-class OrderShipmentsDataGrid extends DataGrid
+class OrderShipmentDataGrid extends DataGrid
 {
     /**
      * Shipment Id.
@@ -61,7 +61,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'index'      => 'shipment_id',
             'label'      => trans('admin::app.sales.shipments.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -79,7 +78,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'index'      => 'shipment_total_qty',
             'label'      => trans('admin::app.sales.shipments.index.datagrid.total-qty'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -103,21 +101,21 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'order_date',
-            'label'      => trans('admin::app.sales.shipments.index.datagrid.order-date'),
-            'type'       => 'date_range',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'           => 'order_date',
+            'label'           => trans('admin::app.sales.shipments.index.datagrid.order-date'),
+            'type'            => 'date',
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'shipment_created_at',
-            'label'      => trans('admin::app.sales.shipments.index.datagrid.shipment-date'),
-            'type'       => 'date_range',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'           => 'shipment_created_at',
+            'label'           => trans('admin::app.sales.shipments.index.datagrid.shipment-date'),
+            'type'            => 'date',
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
     }
 

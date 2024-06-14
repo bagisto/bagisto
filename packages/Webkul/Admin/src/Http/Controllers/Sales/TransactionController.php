@@ -4,7 +4,7 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
+use Webkul\Admin\DataGrids\Sales\OrderTransactionDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Resources\TransactionResource;
 use Webkul\Payment\Facades\Payment;
@@ -38,7 +38,7 @@ class TransactionController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return datagrid(OrderTransactionsDataGrid::class)->process();
+            return datagrid(OrderTransactionDataGrid::class)->process();
         }
 
         $paymentMethods = Payment::getSupportedPaymentMethods();

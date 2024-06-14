@@ -2349,6 +2349,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'ක්රියාවන්',
+                        'category'            => 'වර්ගය',
+                        'cms-page'            => 'CMS පිටුව',
                         'delete'              => 'මකන්න',
                         'edit'                => 'සංස්කරණය කරන්න',
                         'for'                 => 'සදහා',
@@ -2356,6 +2358,7 @@ return [
                         'locale'              => 'දේශීය',
                         'mass-delete-success' => 'තෝරාගත් URL නැවත ලිවීම සාර්ථකව මකා ඇත',
                         'permanent-redirect'  => 'ස්ථිර (301)',
+                        'product'             => 'නිෂ්පාදන',
                         'redirect-type'       => 'හරවා යැවීමේ වර්ගය',
                         'request-path'        => 'ඉල්ලීම් මාර්ගය',
                         'target-path'         => 'ඉලක්ක මාර්ගය',

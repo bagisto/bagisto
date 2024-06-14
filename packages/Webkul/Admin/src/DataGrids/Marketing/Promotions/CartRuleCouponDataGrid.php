@@ -38,9 +38,8 @@ class CartRuleCouponDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -48,26 +47,26 @@ class CartRuleCouponDataGrid extends DataGrid
             'label'      => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.coupon-code'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.created-date'),
-            'type'       => 'datetime',
-            'sortable'   => true,
-            'searchable' => false,
-            'filterable' => true,
+            'index'           => 'created_at',
+            'label'           => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.created-date'),
+            'type'            => 'datetime',
+            'filterable'      => true,
+            'filterable_type' => 'datetime_range',
+            'sortable'        => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'expired_at',
-            'label'      => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.expiration-date'),
-            'type'       => 'datetime',
-            'sortable'   => true,
-            'searchable' => false,
-            'filterable' => true,
+            'index'           => 'expired_at',
+            'label'           => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.expiration-date'),
+            'type'            => 'datetime',
+            'filterable'      => true,
+            'filterable_type' => 'datetime_range',
+            'sortable'        => true,
         ]);
 
         $this->addColumn([
@@ -75,8 +74,8 @@ class CartRuleCouponDataGrid extends DataGrid
             'label'      => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.times-used'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
