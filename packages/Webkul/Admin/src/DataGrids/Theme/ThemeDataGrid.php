@@ -82,18 +82,18 @@ class ThemeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'              => 'theme_code',
-            'label'              => trans('Theme Name'),
+            'label'              => trans('admin::app.settings.themes.index.datagrid.theme'),
             'type'               => 'string',
             'filterable'         => true,
             'filterable_type'    => 'dropdown',
-            'filterable_options' => collect($themes)
+            'filterable_options' => collect($themes = config('themes.shop'))
                 ->map(fn ($theme, $code) => ['label' => $theme['name'], 'value' => $code])
                 ->values()
                 ->toArray(),
-            'closure'            => function ($row) use ($themes) {
-                return collect($themes)->first(fn ($theme, $code) => $row->theme_code == $code)['name'];
+            'closure'=> function ($row) use ($themes) {
+                return collect($themes)->first(fn ($theme, $code) => $code === $row->theme_code)['name'] ?? 'N/A';
             },
-            'sortable'   => true,
+            'sortable'           => true,
         ]);
 
         $this->addColumn([

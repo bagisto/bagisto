@@ -3082,6 +3082,7 @@ return [
                     'name'         => '名称',
                     'sort-order'   => '排序顺序',
                     'status'       => '状态',
+                    'theme'        => '主题',
                     'type'         => '类型',
                     'view'         => '查看',
                 ],
