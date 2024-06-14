@@ -59,7 +59,7 @@
                     <!-- Dropdown Options Container -->
                     <x-shop::form.control-group.label
                         class="!mt-0 max-sm:!mb-2.5"
-                        ::class="{ 'required': option.is_required }"
+                        ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
                     </x-shop::form.control-group.label>
@@ -68,13 +68,13 @@
                         <x-shop::form.control-group.control
                             type="select"
                             ::name="'bundle_options[' + option.id + '][]'"
-                            ::rules="{'required': option.is_required}"
+                            ::rules="{'required': Boolean(option.is_required)}"
                             v-model="selectedProduct"
                             ::label="option.label"
                         >
                             <option
                                 value="0"
-                                v-if="! option.is_required"
+                                v-if="! Boolean(option.is_required)"
                             >
                                 @lang('shop::app.products.view.type.bundle.none')
                             </option>
@@ -93,7 +93,7 @@
                             <!-- None radio option if option is not required -->
                             <div
                                 class="flex select-none gap-x-4"
-                                v-if="! option.is_required"
+                                v-if="! Boolean(option.is_required)"
                             >
                                 <x-shop::form.control-group.control
                                     type="radio"
@@ -102,7 +102,7 @@
                                     ::id="'bundle_options[' + option.id + '][' + index + ']'"
                                     value="0"
                                     v-model="selectedProduct"
-                                    ::rules="{'required': option.is_required}"
+                                    ::rules="{'required': Boolean(option.is_required)}"
                                     ::label="option.label"
                                 />
 
@@ -126,7 +126,7 @@
                                     ::id="'bundle_options[' + option.id + '][' + index + ']'"
                                     ::value="product.id"
                                     v-model="selectedProduct"
-                                    ::rules="{'required': option.is_required}"
+                                    ::rules="{'required': Boolean(option.is_required)}"
                                     ::label="option.label"
                                 />
 
@@ -158,7 +158,7 @@
                                     ::id="'bundle_options[' + option.id + '][' + index + ']'"
                                     ::value="product.id"
                                     v-model="selectedProduct"
-                                    ::rules="{'required': option.is_required}"
+                                    ::rules="{'required': Boolean(option.is_required)}"
                                     ::label="option.label"
                                 />
 
@@ -180,13 +180,13 @@
                         <x-shop::form.control-group.control
                             type="multiselect"
                             ::name="'bundle_options[' + option.id + '][]'"
-                            ::rules="{'required': option.is_required}"
+                            ::rules="{'required': Boolean(option.is_required)}"
                             v-model="selectedProduct"
                             ::label="option.label"
                         >
                             <option
                                 value="0"
-                                v-if="! option.is_required"
+                                v-if="! Boolean(option.is_required)"
                             >
                                 @lang('shop::app.products.view.type.bundle.none')
                             </option>
