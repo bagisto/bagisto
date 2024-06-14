@@ -44,29 +44,22 @@ class CMSPageDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.cms.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'channel',
-            'label'      => trans('admin::app.cms.index.datagrid.channel'),
-            'type'       => 'dropdown',
-            'class'      => 'hidden',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => collect(core()->getAllChannels())
-                        ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
-                        ->values()
-                        ->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
+            'index'              => 'channel',
+            'label'              => trans('admin::app.cms.index.datagrid.channel'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => collect(core()->getAllChannels())
+                ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                ->values()
+                ->toArray(),
             'sortable'   => true,
+            'visibility' => false,
         ]);
 
         $this->addColumn([

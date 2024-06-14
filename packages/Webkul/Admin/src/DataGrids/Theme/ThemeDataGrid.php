@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids\Theme;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
-class ThemeDatagrid extends DataGrid
+class ThemeDataGrid extends DataGrid
 {
     /**
      * Prepare query builder.
@@ -59,27 +59,20 @@ class ThemeDatagrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.themes.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'channel_name',
-            'label'      => trans('admin::app.settings.themes.index.datagrid.channel_name'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => core()->getAllChannels()
-                        ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
-                        ->values()
-                        ->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
+            'index'              => 'channel_name',
+            'label'              => trans('admin::app.settings.themes.index.datagrid.channel_name'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => core()->getAllChannels()
+                ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                ->values()
+                ->toArray(),
             'sortable'   => true,
         ]);
 

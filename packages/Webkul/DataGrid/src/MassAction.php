@@ -18,4 +18,18 @@ class MassAction
         public array $options = [],
     ) {
     }
+
+    /**
+     * Convert to an array.
+     */
+    public function toArray()
+    {
+        return [
+            'icon'    => $this->icon,
+            'title'   => $this->title,
+            'method'  => $this->method,
+            'url'     => $this->url,
+            'options' => $this->options,
+        ];
+    }
 }

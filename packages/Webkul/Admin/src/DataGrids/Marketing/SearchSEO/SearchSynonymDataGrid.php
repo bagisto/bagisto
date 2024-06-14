@@ -33,8 +33,6 @@ class SearchSynonymDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
-            'width'      => '40px',
             'filterable' => true,
             'sortable'   => true,
         ]);

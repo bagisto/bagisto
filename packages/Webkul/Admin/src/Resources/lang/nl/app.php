@@ -2362,6 +2362,9 @@ return [
                         'request-path'        => 'Aanvraagpad',
                         'target-path'         => 'Doelpad',
                         'temporary-redirect'  => 'Tijdelijke doorstuur (302)',
+                        'product'             => 'Product',
+                        'cms-page'            => 'CMS-pagina',
+                        'category'            => 'Categorie',
                     ],
 
                     'create' => [
@@ -3091,6 +3094,7 @@ return [
                 'name'       => 'Naam',
                 'save-btn'   => 'Thema opslaan',
                 'sort-order' => 'Sorteervolgorde',
+                'themes'     => 'Thema\'s',
                 'title'      => 'Thema aanmaken',
 
                 'type' => [
@@ -3130,7 +3134,6 @@ return [
                 'footer-title'                  => 'Titel',
                 'general'                       => 'Algemeen',
                 'html'                          => 'HTML',
-                'parent-id'                     => 'Ouder-ID',
                 'image'                         => 'Afbeelding',
                 'image-size'                    => 'Afbeeldingsresolutie moet zijn (1920px X 700px)',
                 'image-title'                   => 'Afbeeldingstitel',
@@ -3140,8 +3143,9 @@ return [
                 'limit'                         => 'Limiet',
                 'link'                          => 'Link',
                 'name'                          => 'Naam',
-                'no'                            => 'Nee',
                 'new'                           => 'Nieuw',
+                'no'                            => 'Nee',
+                'parent-id'                     => 'Ouder-ID',
                 'preview'                       => 'Voorbeeld',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
@@ -3157,6 +3161,7 @@ return [
                 'static-content'                => 'Statische Inhoud',
                 'static-content-description'    => 'Verbeter de betrokkenheid met beknopte, informatieve statische inhoud voor uw publiek.',
                 'status'                        => 'Status',
+                'themes'                        => 'Thema\'s',
                 'title'                         => 'Thema bewerken',
                 'update-slider'                 => 'Schuifregelaar bijwerken',
                 'url'                           => 'URL',

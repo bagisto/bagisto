@@ -38,7 +38,6 @@ class TaxRateDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.taxes.rates.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
