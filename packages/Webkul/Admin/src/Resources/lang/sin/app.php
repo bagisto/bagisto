@@ -2349,6 +2349,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'ක්රියාවන්',
+                        'category'            => 'වර්ගය',
+                        'cms-page'            => 'CMS පිටුව',
                         'delete'              => 'මකන්න',
                         'edit'                => 'සංස්කරණය කරන්න',
                         'for'                 => 'සදහා',
@@ -2356,6 +2358,7 @@ return [
                         'locale'              => 'දේශීය',
                         'mass-delete-success' => 'තෝරාගත් URL නැවත ලිවීම සාර්ථකව මකා ඇත',
                         'permanent-redirect'  => 'ස්ථිර (301)',
+                        'product'             => 'නිෂ්පාදන',
                         'redirect-type'       => 'හරවා යැවීමේ වර්ගය',
                         'request-path'        => 'ඉල්ලීම් මාර්ගය',
                         'target-path'         => 'ඉලක්ක මාර්ගය',
@@ -3102,6 +3105,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'ක්‍රියාකාරී',
                 'add-filter-btn'                => 'ශ්‍රිතයක් එක්කරන්න',
                 'add-footer-link-btn'           => 'පිටු සල්ලිකරන්න',
                 'add-image-btn'                 => 'පින්තූරයක් එක්කරන්න',
@@ -3126,6 +3130,7 @@ return [
                 'footer-title'                  => 'මාතෘකාව',
                 'general'                       => 'සාමාන්‍ය',
                 'html'                          => 'HTML',
+                'inactive'                      => 'අක්‍රියාකාරී',
                 'image'                         => 'පින්තූරය',
                 'image-size'                    => 'රූපයේ ප්‍රනාන්දු මානාව (1920px X 700px) විය යුතුය',
                 'image-title'                   => 'පින්තූර සිටුවක්',
@@ -3137,6 +3142,7 @@ return [
                 'name'                          => 'නම',
                 'no'                            => 'නැත',
                 'new'                           => 'නව',
+                'parent-id'                     => 'මවුලක් අංකය',
                 'preview'                       => 'පෙරදසුන',
                 'product-carousel'              => 'නිෂ්පාදන කැරූසල්',
                 'product-carousel-description'  => 'නිෂ්පාදනය සහිතවෙනි ස්ථානයට සුපිරි ආදරයක් පෙනවීමට ජලානන හා සංකීර්ණ නිෂ්පාදන කැරූසල් සැකසුම්.',

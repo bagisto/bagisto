@@ -33,7 +33,6 @@ class CurrencyDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.currencies.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

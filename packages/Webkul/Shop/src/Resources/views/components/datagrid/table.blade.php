@@ -8,7 +8,6 @@
     @sort="sort"
     @actionSuccess="get"
     @changePage="changePage"
-    @changePerPageOption="changePerPageOption"
 >
     {{ $slot }}
 </v-datagrid-table>
@@ -63,20 +62,22 @@
                             </p>
 
                             <!-- Columns -->
-                            <p
-                                v-for="column in available.columns"
-                                class="flex items-center gap-1.5"
-                                :class="{'cursor-pointer select-none': column.sortable}"
-                                @click="sort(column)"
-                            >
-                                @{{ column.label }}
+                            <template v-for="column in available.columns">
+                                <p
+                                    class="flex items-center gap-1.5"
+                                    :class="{'cursor-pointer select-none': column.sortable}"
+                                    @click="sort(column)"
+                                    v-if="column.visibility"
+                                >
+                                    @{{ column.label }}
 
-                                <i
-                                    class="align-text-bottom text-base text-gray-800"
-                                    :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
-                                    v-if="column.index == applied.sort.column"
-                                ></i>
-                            </p>
+                                    <i
+                                        class="align-text-bottom text-base text-gray-800"
+                                        :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
+                                        v-if="column.index == applied.sort.column"
+                                    ></i>
+                                </p>
+                            </template>
 
                             <!-- Actions -->
                             <p
@@ -127,21 +128,14 @@
                                 </p>
 
                                 <!-- Columns -->
-                                <p
-                                    v-else
-                                    v-for="column in available.columns"
-                                    :class="!available.actions.length ? 'last:text-center' : ''"
-                                    v-html="record[column.index]"
-                                    v-if="record.is_closure"
-                                >
-                                </p>
-
-                                <p
-                                    v-for="column in available.columns"
-                                    v-html="record[column.index]"
-                                    v-else
-                                >
-                                </p>
+                                <template v-for="column in available.columns">
+                                    <p
+                                        :class="!available.actions.length ? 'last:text-center' : ''"
+                                        v-html="record[column.index]"
+                                        v-if="column.visibility"
+                                    >
+                                    </p>
+                                </template>
 
                                 <!-- Actions -->
                                 <p v-if="available.actions.length">
@@ -172,12 +166,11 @@
                     :available="available"
                     :applied="applied"
                     :change-page="changePage"
-                    :change-per-page-option="changePerPageOption"
                 >
                     <template v-if="isLoading">
                         <x-shop::shimmer.datagrid.table.footer />
                     </template>
-        
+
                     <template v-else>
                         <!-- Information Panel -->
                         <div v-if="$parent.available.records.length" class="flex items-center justify-between p-6 max-md:p-2">
@@ -186,7 +179,7 @@
                                 @{{ "@lang('shop::app.components.datagrid.table.to')".replace(':lastItem', $parent.available.meta.to) }}
                                 @{{ "@lang('shop::app.components.datagrid.table.of')".replace(':total', $parent.available.meta.total) }}
                             </p>
-        
+
                             <!-- Pagination -->
                             <div class="flex items-center gap-1">
                                 <div
@@ -195,7 +188,7 @@
                                 >
                                     <span class="icon-sort-left text-2xl"></span>
                                 </div>
-        
+
                                 <div
                                     class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                                     @click="changePage('next')"
@@ -203,7 +196,7 @@
                                     <span class="icon-sort-right text-2xl"></span>
                                 </div>
                             </div>
-        
+
                             <nav aria-label="@lang('shop::app.components.datagrid.table.page-navigation')">
                                 <ul class="inline-flex items-center -space-x-px rounded-lg border border-zinc-200 max-md:px-0">
                                     <li  @click="changePage('previous')">
@@ -215,7 +208,7 @@
                                             <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                                         </a>
                                     </li>
-        
+
                                     <li>
                                         <input
                                             type="text"
@@ -225,7 +218,7 @@
                                             aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                         >
                                     </li>
-        
+
                                     <li @click="changePage('next')">
                                         <a
                                             href="javascript:void(0);"
@@ -250,9 +243,11 @@
 
             props: ['isLoading', 'available', 'applied'],
 
+            emits: ['selectAll', 'sort', 'actionSuccess', 'changePage'],
+
             computed: {
                 gridsCount() {
-                    let count = this.available.columns.length;
+                    let count = this.available.columns.filter((column) => column.visibility).length;
 
                     if (this.available.actions.length) {
                         ++count;
@@ -267,7 +262,7 @@
             },
 
             methods: {
-                                /**
+                /**
                  * Change Page.
                  *
                  * The reason for choosing the numeric approach over the URL approach is to prevent any conflicts with our existing

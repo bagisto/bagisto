@@ -2348,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'ক্রিয়া',
+                        'category'            => 'শ্রেণি',
+                        'cms-page'            => 'CMS পৃষ্ঠা',
                         'delete'              => 'মুছে ফেলুন',
                         'edit'                => 'সম্পাদনা',
                         'for'                 => 'জন্য',
@@ -2355,6 +2357,7 @@ return [
                         'locale'              => 'স্থানীয়',
                         'mass-delete-success' => 'নির্বাচিত ইউআরএল পুনর্লিখন সফলভাবে মুছে ফেলা হয়েছে',
                         'permanent-redirect'  => 'স্থায়ী (301)',
+                        'product'             => 'পণ্য',
                         'redirect-type'       => 'পুনর্নির্দেশের ধরন',
                         'request-path'        => 'অনুরোধ পথ',
                         'target-path'         => 'লক্ষ্য পথ',
@@ -3102,6 +3105,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'সক্রিয়',
                 'add-filter-btn'                => 'ফিল্টার যোগ করুন',
                 'add-footer-link-btn'           => 'ফুটার লিংক যোগ করুন',
                 'add-image-btn'                 => 'ছবি যোগ করুন',
@@ -3126,6 +3130,7 @@ return [
                 'footer-title'                  => 'শিরোনাম',
                 'general'                       => 'সাধারণ',
                 'html'                          => 'এইচটিএমএল',
+                'inactive'                      => 'নিষ্ক্রিয়',
                 'image'                         => 'চিত্র',
                 'image-size'                    => 'চিত্রের রেজোলিউশন হতে হবে (1920px X 700px)',
                 'image-title'                   => 'চিত্র শিরোনাম',
@@ -3137,6 +3142,7 @@ return [
                 'name'                          => 'নাম',
                 'no'                            => 'না',
                 'new'                           => 'নতুন',
+                'parent-id'                     => 'প্যারেন্ট আইডি',
                 'preview'                       => 'প্রিভিউ',
                 'product-carousel'              => 'পণ্য ক্যারোসেল',
                 'product-carousel-description'  => 'একটি গতিপ্রদ এবং সাঁচামুঁচো পণ্য ক্যারোসেল দ্বারা পণ্যগুলি প্রদর্শন করুন।',

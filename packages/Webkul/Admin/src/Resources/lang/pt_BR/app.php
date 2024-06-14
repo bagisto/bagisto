@@ -2348,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Ações',
+                        'category'            => 'Categoria',
+                        'cms-page'            => 'Página CMS',
                         'delete'              => 'Excluir',
                         'edit'                => 'Editar',
                         'for'                 => 'Para',
@@ -2355,6 +2357,7 @@ return [
                         'locale'              => 'Localidade',
                         'mass-delete-success' => 'As reescritas de URL selecionadas foram excluídas com sucesso.',
                         'permanent-redirect'  => 'Redirecionamento permanente (301)',
+                        'product'             => 'Produto',
                         'redirect-type'       => 'Tipo de redirecionamento',
                         'request-path'        => 'Caminho da solicitação',
                         'target-path'         => 'Caminho de destino',
@@ -3102,6 +3105,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Ativo',
                 'add-filter-btn'                => 'Adicionar Filtro',
                 'add-footer-link-btn'           => 'Adicionar Link do Rodapé',
                 'add-image-btn'                 => 'Adicionar Imagem',
@@ -3126,6 +3130,7 @@ return [
                 'footer-title'                  => 'Título',
                 'general'                       => 'Geral',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inativo',
                 'image'                         => 'Imagem',
                 'image-size'                    => 'O tamanho da imagem deve ser (1920px X 700px)',
                 'image-title'                   => 'Título da imagem',
@@ -3137,6 +3142,7 @@ return [
                 'name'                          => 'Nome',
                 'no'                            => 'Não',
                 'new'                           => 'Novo',
+                'parent-id'                     => 'ID do Pai',
                 'preview'                       => 'Visualização',
                 'product-carousel'              => 'Carrossel de Produtos',
                 'product-carousel-description'  => 'Apresente produtos de forma elegante com um carrossel de produtos dinâmico e responsivo.',

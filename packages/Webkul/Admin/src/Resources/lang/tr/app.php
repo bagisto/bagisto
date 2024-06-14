@@ -2349,6 +2349,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'İşlemler',
+                        'category'            => 'Kategori',
+                        'cms-page'            => 'CMS Sayfası',
                         'delete'              => 'Sil',
                         'edit'                => 'Düzenle',
                         'for'                 => 'İçin',
@@ -2356,6 +2358,7 @@ return [
                         'locale'              => 'Yerel',
                         'mass-delete-success' => 'Seçili URL Yeniden Yönlendirmeleri Başarıyla Silindi',
                         'permanent-redirect'  => 'Kalıcı (301)',
+                        'product'             => 'Ürün',
                         'redirect-type'       => 'Yönlendirme Türü',
                         'request-path'        => 'İstek Yolu',
                         'target-path'         => 'Hedef Yol',
@@ -3104,6 +3107,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Aktif',
                 'add-filter-btn'                => 'Filtre Ekle',
                 'add-footer-link-btn'           => 'Alt Bağlantı Ekle',
                 'add-image-btn'                 => 'Resim Ekle',
@@ -3128,6 +3132,7 @@ return [
                 'footer-title'                  => 'Başlık',
                 'general'                       => 'Genel',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Pasif',
                 'image'                         => 'Resim',
                 'image-size'                    => 'Resim çözünürlüğü (1920 piksel x 700 piksel) olmalıdır',
                 'image-title'                   => 'Resim Başlığı',
@@ -3139,6 +3144,7 @@ return [
                 'no'                            => 'Hayır',
                 'new'                           => 'Yeni',
                 'name'                          => 'Ad',
+                'parent-id'                     => 'Üst Kimlik',
                 'preview'                       => 'Önizleme',
                 'product-carousel'              => 'Ürün Karuseli',
                 'product-carousel-description'  => 'Dinamik ve duyarlı bir ürün karuseli ile ürünleri zarif bir şekilde sergileyin.',

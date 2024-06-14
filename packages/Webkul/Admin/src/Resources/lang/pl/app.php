@@ -2348,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Akcje',
+                        'category'            => 'Kategoria',
+                        'cms-page'            => 'Strona CMS',
                         'delete'              => 'Usuń',
                         'edit'                => 'Edytuj',
                         'for'                 => 'Dla',
@@ -2355,6 +2357,7 @@ return [
                         'locale'              => 'Język',
                         'mass-delete-success' => 'Wybrane zapisy URL zostały pomyślnie usunięte.',
                         'permanent-redirect'  => 'Przejście stałe (301)',
+                        'product'             => 'Produkt',
                         'redirect-type'       => 'Typ przekierowania',
                         'request-path'        => 'Ścieżka żądania',
                         'target-path'         => 'Ścieżka docelowa',
@@ -3102,6 +3105,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Aktywny',
                 'add-filter-btn'                => 'Dodaj filtr',
                 'add-footer-link-btn'           => 'Dodaj link stopki',
                 'add-image-btn'                 => 'Dodaj obraz',
@@ -3126,6 +3130,7 @@ return [
                 'footer-title'                  => 'Tytuł',
                 'general'                       => 'Ogólne',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Nieaktywny',
                 'image'                         => 'Obraz',
                 'image-size'                    => 'Rozmiar obrazu powinien wynosić (1920px X 700px)',
                 'image-title'                   => 'Tytuł obrazu',
@@ -3137,6 +3142,7 @@ return [
                 'name'                          => 'Nazwa',
                 'no'                            => 'Nie',
                 'new'                           => 'Nowy',
+                'parent-id'                     => 'Identyfikator nadrzędny',
                 'preview'                       => 'Podgląd',
                 'product-carousel'              => 'Karuzela produktów',
                 'product-carousel-description'  => 'Elegancko prezentuj produkty za pomocą dynamicznej i responsywnej karuzeli produktów.',

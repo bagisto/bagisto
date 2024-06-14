@@ -2348,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Actions',
+                        'category'            => 'Catégorie',
+                        'cms-page'            => 'Page CMS',
                         'delete'              => 'Supprimer',
                         'edit'                => 'Modifier',
                         'for'                 => 'Pour',
@@ -2355,6 +2357,7 @@ return [
                         'locale'              => 'Localisation',
                         'mass-delete-success' => 'Les réécritures d\'URL sélectionnées ont été supprimées avec succès.',
                         'permanent-redirect'  => 'Permanent (301)',
+                        'product'             => 'Produit',
                         'redirect-type'       => 'Type de redirection',
                         'request-path'        => 'Chemin de requête',
                         'target-path'         => 'Chemin de destination',
@@ -3102,6 +3105,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Actif',
                 'Asc'                           => 'Asc',
                 'add-filter-btn'                => 'Ajouter un filtre',
                 'add-footer-link-btn'           => 'Ajouter un lien de pied de page',
@@ -3126,6 +3130,7 @@ return [
                 'footer-title'                  => 'Titre',
                 'general'                       => 'Général',
                 'html'                          => 'HTML',
+                'inactive'                      => 'Inactif',
                 'image'                         => 'Image',
                 'image-size'                    => "La résolution de l'image doit être de (1920px x 700px)",
                 'image-title'                   => 'Titre de l\'image',
@@ -3137,6 +3142,7 @@ return [
                 'name'                          => 'Nom',
                 'no'                            => 'Non',
                 'New'                           => 'Nouveau',
+                'parent-id'                     => 'ID Parent',
                 'preview'                       => 'Aperçu',
                 'product-carousel'              => 'Carrousel de produits',
                 'product-carousel-description'  => 'Présentez élégamment des produits avec un carrousel de produits dynamique et réactif.',

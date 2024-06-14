@@ -47,7 +47,6 @@ class CartRuleDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -74,25 +73,25 @@ class CartRuleDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'starts_from',
-            'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.start'),
-            'type'       => 'datetime',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-            'closure'    => function ($value) {
+            'index'           => 'starts_from',
+            'label'           => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.start'),
+            'type'            => 'datetime',
+            'filterable'      => true,
+            'filterable_type' => 'datetime_range',
+            'sortable'        => true,
+            'closure'         => function ($value) {
                 return $value->starts_from ?? '-';
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'ends_till',
-            'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.end'),
-            'type'       => 'datetime',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-            'closure'    => function ($value) {
+            'index'           => 'ends_till',
+            'label'           => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.end'),
+            'type'            => 'datetime',
+            'filterable'      => true,
+            'filterable_type' => 'datetime_range',
+            'sortable'        => true,
+            'closure'         => function ($value) {
                 return $value->ends_till ?? '-';
             },
         ]);

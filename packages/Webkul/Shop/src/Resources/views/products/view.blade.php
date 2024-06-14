@@ -492,6 +492,8 @@
 
                         let formData = new FormData(this.$refs.formData);
 
+                        this.ensureQuantity(formData);
+
                         this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
@@ -619,7 +621,13 @@
                                 behavior: 'smooth'
                             });
                         }
-                    }
+                    },
+
+                    ensureQuantity(formData) {
+                        if (! formData.has('quantity')) {
+                            formData.append('quantity', 1);
+                        }
+                    },
                 },
             });
         </script>

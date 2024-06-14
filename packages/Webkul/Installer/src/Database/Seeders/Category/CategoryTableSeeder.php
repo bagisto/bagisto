@@ -61,4 +61,106 @@ class CategoryTableSeeder extends Seeder
             ]);
         }
     }
+
+    /**
+     * Create Sample Categories.
+     *
+     * @return void
+     */
+    public function sampleCategories(array $parameters = [])
+    {
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
+
+        $now = Carbon::now();
+
+        $locales = $parameters['allowed_locales'] ?? [$defaultLocale];
+
+        DB::table('categories')->insert([
+            [
+                'id'            => 2,
+                'position'      => 1,
+                'logo_path'     => null,
+                'status'        => 1,
+                'display_mode'  => 'products_and_description',
+                '_lft'          => 1,
+                '_rgt'          => 1,
+                'parent_id'     => 1,
+                'additional'    => null,
+                'banner_path'   => null,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+
+            ], [
+                'id'            => 3,
+                'position'      => 1,
+                'logo_path'     => null,
+                'status'        => 1,
+                'display_mode'  => 'products_and_description',
+                '_lft'          => 1,
+                '_rgt'          => 1,
+                'parent_id'     => 2,
+                'additional'    => null,
+                'banner_path'   => null,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+
+            ],
+        ]);
+
+        foreach ($locales as $locale) {
+            DB::table('category_translations')->insert([
+                [
+                    'category_id'      => 2,
+                    'name'             => trans('installer::app.seeders.sample-categories.category-translation.2.name', [], $locale),
+                    'slug'             => trans('installer::app.seeders.sample-categories.category-translation.2.slug', [], $locale),
+                    'url_path'         => '',
+                    'description'      => trans('installer::app.seeders.sample-categories.category-translation.2.description', [], $locale),
+                    'meta_title'       => trans('installer::app.seeders.sample-categories.category-translation.2.meta-title', [], $locale),
+                    'meta_description' => trans('installer::app.seeders.sample-categories.category-translation.2.meta-description', [], $locale),
+                    'meta_keywords'    => trans('installer::app.seeders.sample-categories.category-translation.2.meta-keywords', [], $locale),
+                    'locale_id'        => null,
+                    'locale'           => $locale,
+                ], [
+                    'category_id'      => 3,
+                    'name'             => trans('installer::app.seeders.sample-categories.category-translation.3.name', [], $locale),
+                    'slug'             => trans('installer::app.seeders.sample-categories.category-translation.3.slug', [], $locale),
+                    'url_path'         => '',
+                    'description'      => trans('installer::app.seeders.sample-categories.category-translation.3.description', [], $locale),
+                    'meta_title'       => trans('installer::app.seeders.sample-categories.category-translation.3.meta-title', [], $locale),
+                    'meta_description' => trans('installer::app.seeders.sample-categories.category-translation.3.meta-description', [], $locale),
+                    'meta_keywords'    => trans('installer::app.seeders.sample-categories.category-translation.3.meta-keywords', [], $locale),
+                    'locale_id'        => null,
+                    'locale'           => $locale,
+                ],
+            ]);
+        }
+
+        DB::table('category_filterable_attributes')->insert([
+            [
+                'category_id'  => 2,
+                'attribute_id' => 11,
+            ], [
+                'category_id'  => 2,
+                'attribute_id' => 23,
+            ], [
+                'category_id'  => 2,
+                'attribute_id' => 24,
+            ], [
+                'category_id'  => 2,
+                'attribute_id' => 25,
+            ], [
+                'category_id'  => 3,
+                'attribute_id' => 11,
+            ], [
+                'category_id'  => 3,
+                'attribute_id' => 23,
+            ], [
+                'category_id'  => 3,
+                'attribute_id' => 24,
+            ], [
+                'category_id'  => 3,
+                'attribute_id' => 25,
+            ],
+        ]);
+    }
 }

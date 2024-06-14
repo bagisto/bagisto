@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids\Customers\View;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
-class InvoicesDatagrid extends DataGrid
+class InvoiceDataGrid extends DataGrid
 {
     /**
      * Prepare query builder.
@@ -53,12 +53,13 @@ class InvoicesDatagrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.customers.customers.view.datagrid.invoices.invoice-date'),
-            'type'       => 'date_range',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'           => 'created_at',
+            'label'           => trans('admin::app.customers.customers.view.datagrid.invoices.invoice-date'),
+            'type'            => 'date',
+            'searchable'      => true,
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
 
         $this->addColumn([
