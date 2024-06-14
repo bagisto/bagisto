@@ -775,6 +775,10 @@ return [
                 'save-btn' => 'Ürünü Kaydet',
                 'title'    => 'Ürünü Düzenle',
 
+                'channels' => [
+                    'title' => 'Kanallar',
+                ],
+
                 'price' => [
                     'group' => [
                         'add-group-price'           => 'Grup Fiyatı Ekle',
@@ -2227,7 +2231,6 @@ return [
                     'title'      => 'Arama Terimleriniz',
 
                     'datagrid' => [
-                        'channel'             => 'Kanal',
                         'actions'             => 'İşlemler',
                         'channel'             => 'Kanal',
                         'delete'              => 'Sil',
@@ -3322,14 +3325,14 @@ return [
             'back-btn'                     => 'Geri',
             'delete'                       => 'Sil',
             'enable-at-least-one-payment'  => 'En az bir ödeme yöntemi etkinleştirin.',
-            'enable-at-least-one-shipping' => 'En az bir nakliye yöntemi etkinleştirin.',
-            'no-result-found'              => 'sonuç bulunamadı',
-            'save-btn'                     => 'Yapılandırmayı Kaydet',
-            'save-message'                 => 'Yapılandırma başarıyla kaydedildi',
-            'search'                       => 'Aramak',
-            'select-country'               => 'Ülke seçiniz',
-            'select-state'                 => 'Eyalet seçiniz',
-            'title'                        => 'Yapılandırma',
+            'enable-at-least-one-shipping' => 'En az bir kargo yöntemi etkinleştirin.',
+            'no-result-found'              => 'Sonuç bulunamadı',
+            'save-btn'                     => 'Ayarları Kaydet',
+            'save-message'                 => 'Ayarlar başarıyla kaydedildi',
+            'search'                       => 'Ara',
+            'select-country'               => 'Ülke Seçin',
+            'select-state'                 => 'Bölge Seçin',
+            'title'                        => 'Ayarlar',
 
             'general' => [
                 'info'  => 'Birim seçeneklerini ayarlayın.',
@@ -3340,29 +3343,36 @@ return [
                     'title' => 'Genel',
 
                     'unit-options' => [
-                        'info'              => 'Birim seçeneklerini ayarlayın.',
-                        'title'             => 'Birim Seçenekleri',
-                        'title-info'        => 'Beden, renk, malzeme, özelleştirme, müşteri memnuniyetini artırma ve alımları uyarlama.',
-                        'weight-unit'       => 'Ağırlık Birimi',
+                        'info'        => 'Birim seçeneklerini ayarlayın.',
+                        'title'       => 'Birim Seçenekleri',
+                        'title-info'  => 'Boyut, renk, malzeme, özelleştirme, müşteri memnuniyetini artırma ve satın almaları özelleştirme.',
+                        'weight-unit' => 'Ağırlık Birimi',
+                    ],
+
+                    'breadcrumbs' => [
+                        'shop'       => 'Mağaza Breadcrumbs',
+                        'title'      => 'Breadcrumbs',
+                        'title-info' => 'Mağazada breadcrumbs gezinmesini etkinleştirin veya devre dışı bırakın.',
                     ],
                 ],
 
                 'content' => [
-                    'info'  => 'Karşılaştırma seçeneklerini, dilek listesi seçeneklerini, görüntü arama seçeneklerini, altbilgiyi, altbilgiyi açma ve özel komutları ayarlayın.',
+                    'info'  => 'Karşılaştırma seçeneklerini, dilek listesi seçeneklerini, görüntü arama seçeneklerini, alt bilgiyi, alt bilgiyi açma/kapatma ve özel komut dosyalarını ayarlayın.',
                     'title' => 'İçerik',
 
-                    'settings' => [
-                        'compare-options'     => 'Karşılaştırma seçenekleri',
-                        'image-search-option' => 'Resim Arama Seçeneği',
-                        'title'               => 'Ayarlar',
-                        'title-info'          => 'Ayarlar, bir sistemin, uygulamanın veya cihazın nasıl davrandığını kontrol eden yapılandırılabilir seçenekleri ifade eder, kullanıcı tercihlerine ve gereksinimlerine göre uyarlanır.',        'wishlist-options'    => 'Dilek listesi seçenekleri',
+                    'header-offer' => [
+                        'title'             => 'Başlık Teklifi',
+                        'title-info'        => 'Başlık Teklifi Başlığını, teklif başlığını ve yönlendirme bağlantısını yapılandırın.',
+                        'offer-title'       => 'Teklif Başlığı',
+                        'redirection-title' => 'Yönlendirme Başlığı',
+                        'redirection-link'  => 'Yönlendirme Bağlantısı',
                     ],
 
                     'custom-scripts' => [
                         'custom-css'        => 'Özel CSS',
                         'custom-javascript' => 'Özel Javascript',
                         'title'             => 'Özel Komut Dosyaları',
-                        'title-info'        => 'Özel komut dosyaları, yazılıma belirli işlevler veya özellikler eklemek için oluşturulan kişiselleştirilmiş kod parçalarıdır ve benzersiz bir şekilde yeteneklerini artırır.',
+                        'title-info'        => 'Özel komut dosyaları, yazılımın özelliklerini benzersiz bir şekilde geliştiren belirli işlevler veya özellikler eklemek için oluşturulan kişiselleştirilmiş kod parçalarıdır.',
                     ],
                 ],
 
@@ -3374,13 +3384,13 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Logo Resmi',
                         'title'      => 'Yönetici Logosu',
-                        'title-info' => 'Yönetici logosu, bir sistemin veya web sitesinin yönetim arayüzünü temsil eden karakteristik bir resim veya simgedir, genellikle özelleştirilebilir.',
+                        'title-info' => 'Yönetici logosu, genellikle özelleştirilebilen bir sistemin veya web sitesinin yönetim arayüzünü temsil eden ayırt edici bir görüntü veya simgedir.',
                     ],
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Sihirli AI seçeneklerini ayarla.',
-                    'title' => 'Sihirli AI',
+                    'info'  => 'Magic AI seçeneklerini ayarlayın.',
+                    'title' => 'Magic AI',
 
                     'settings' => [
                         'api-key'        => 'API Anahtarı',
@@ -3388,31 +3398,31 @@ return [
                         'llm-api-domain' => 'LLM API Alanı',
                         'organization'   => 'Organizasyon',
                         'title'          => 'Genel Ayarlar',
-                        'title-info'     => 'Magic AI özelliğini etkinleştirerek deneyiminizi artırın. Özel API Anahtarınızı girin ve sorunsuz entegrasyon için ilgili Organizasyonu belirtin. OpenAI kimlik bilgileriniz üzerinde kontrol sağlayın ve ayarları özel ihtiyaçlarınıza göre özelleştirin.',
+                        'title-info'     => 'Magic AI özelliğinden tam anlamıyla yararlanmak için özel API Anahtarınızı girin ve ilgili Organizasyonu belirtin. OpenAI kimlik bilgilerinizi kontrol edin ve ayarları belirli ihtiyaçlarınıza göre özelleştirin.',
                     ],
 
                     'content-generation' => [
-                        'category-description-prompt'      => 'Kategori Açıklama İpucu',
-                        'cms-page-content-prompt'          => 'CMS Sayfa İçeriği İpucu',
+                        'category-description-prompt'      => 'Kategori Açıklama İsteği',
+                        'cms-page-content-prompt'          => 'CMS Sayfa İçeriği İsteği',
                         'enabled'                          => 'Etkin',
-                        'product-description-prompt'       => 'Ürün Açıklama İpucu',
-                        'product-short-description-prompt' => 'Ürün Kısa Açıklama İpucu',
+                        'product-description-prompt'       => 'Ürün Açıklama İsteği',
+                        'product-short-description-prompt' => 'Ürün Kısa Açıklama İsteği',
                         'title'                            => 'İçerik Oluşturma',
-                        'title-info'                       => 'Bu özellik, AI kullanarak içerik yönetmek istediğiniz her WYSIWYG editörü için Magic AI\'yi etkinleştirir.<br/><br/>Etkinleştirildiğinde, içerik oluşturmak için herhangi bir editöre gidin.',
+                        'title-info'                       => 'Bu özellik, AI kullanarak içeriği yönetmek istediğiniz her WYSIWYG düzenleyici için Magic AI\'yi etkinleştirir.<br/><br/>Etkinleştirildiğinde, herhangi bir düzenleyiciye giderek içerik oluşturabilirsiniz.',
                     ],
 
                     'image-generation' => [
                         'enabled'    => 'Etkin',
                         'title'      => 'Görüntü Oluşturma',
-                        'title-info' => 'Bu özellik, DALL-E kullanarak görüntü oluşturmak istediğiniz her görüntü yüklemesi için Magic AI\'yi etkinleştirir.<br/><br/>Etkinleştirildiğinde, herhangi bir görüntü yüklemeye gidin ve görüntü oluşturun.',
+                        'title-info' => 'Bu özellik, DALL-E kullanarak görüntü oluşturmak istediğiniz her görüntü yüklemesi için Magic AI\'yi etkinleştirir.<br/><br/>Etkinleştirildiğinde, herhangi bir görüntü yüklemeye giderek görüntü oluşturabilirsiniz.',
                     ],
 
                     'review-translation' => [
                         'dolphin-phi'       => 'Dolphin Phi',
-                        'enabled'           => 'Etkinleştirildi',
+                        'enabled'           => 'Etkin',
                         'gpt-3-5-turbo'     => 'OpenAI gpt-3.5-turbo',
                         'llama2'            => 'Llama 2',
-                        'llama2-uncensored' => 'Llama 2 Sansürsüz',
+                        'llama2-uncensored' => 'Llama 2 Sansürlü',
                         'llama2:13b'        => 'Llama 2 13B',
                         'llama2:70b'        => 'Llama 2 70B',
                         'llava'             => 'LLaVA',
@@ -3422,16 +3432,16 @@ return [
                         'phi'               => 'Phi-2',
                         'starling-lm'       => 'Starling',
                         'title'             => 'İnceleme Çevirisi',
-                        'title-info'        => 'Müşteri veya ziyaretçi için müşteri yorumlarını İngilizce\'ye çevirme seçeneği sağlayın.<br/><br/>Etkinleştirildiğinde, incelemeye gidin ve İngilizce\'den farklı bir dilde bir inceleme yazdıysanız "İngilizce\'ye Çevir" düğmesini bulacaksınız.',
+                        'title-info'        => 'Müşteri değerlendirmesini İngilizce\'ye çevirmek için müşteriye veya ziyaretçiye seçenek sağlayın.<br/><br/>Etkinleştirildiğinde, incelemeye gidin ve İngilizce\'den farklı bir dilde bir inceleme yaparsanız \'İngilizce\'ye Çevir\' düğmesini bulacaksınız.',
                         'vicuna'            => 'Vicuna',
                     ],
 
                     'checkout-message' => [
                         'dolphin-phi'       => 'Dolphin Phi',
-                        'enabled'           => 'Etkinleştirildi',
+                        'enabled'           => 'Etkin',
                         'gpt-3-5-turbo'     => 'OpenAI gpt-3.5-turbo',
                         'llama2'            => 'Llama 2',
-                        'llama2-uncensored' => 'Llama 2 Sansürsüz',
+                        'llama2-uncensored' => 'Llama 2 Sansürlü',
                         'llama2:13b'        => 'Llama 2 13B',
                         'llama2:70b'        => 'Llama 2 70B',
                         'llava'             => 'LLaVA',
@@ -3442,7 +3452,7 @@ return [
                         'prompt'            => 'İstek',
                         'starling-lm'       => 'Starling',
                         'title'             => 'Kişiselleştirilmiş Ödeme Sayfası Mesajı',
-                        'title-info'        => 'Müşteriler için kişiselleştirilmiş bir ödeme sayfası mesajı oluşturun, içeriği bireysel tercihlerle uyumlu hale getirin ve genel satın alma deneyimini geliştirin.',
+                        'title-info'        => 'Müşterilere Teşekkür Sayfasında kişiselleştirilmiş bir ödeme sayfası mesajı oluşturun, içeriği bireysel tercihlere uyacak şekilde uyarlayarak genel satın alma deneyimini geliştirin.',
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
@@ -3453,39 +3463,51 @@ return [
                 'title' => 'Katalog',
 
                 'products' => [
-                    'info'  => 'Misafir ödeme, ürün görünüm sayfası, alışveriş sepeti görünüm sayfası, mağaza ön yüzü, inceleme ve özellik sosyal paylaşımını ayarlayın.',
+                    'info'  => 'Konuk ödeme, ürün görüntüleme sayfası, sepet görüntüleme sayfası, mağaza ön yüzü, inceleme ve öznitelik sosyal paylaşımını ayarlayın.',
                     'title' => 'Ürünler',
 
+                    'settings' => [
+                        'compare-options'     => 'Karşılaştırma seçenekleri',
+                        'image-search-option' => 'Görsel Arama Seçeneği',
+                        'title'               => 'Ayarlar',
+                        'title-info'          => 'Ayarlar, kullanıcı tercihlerine ve gereksinimlerine uygun olarak bir sistemin, uygulamanın veya cihazın nasıl davrandığını kontrol eden yapılandırılabilir seçeneklerdir.',
+                        'wishlist-options'    => 'İstek listesi seçenekleri',
+                    ],
+
                     'search' => [
-                        'admin-mode-info'      => 'Mega Arama, Veri Tablosu ve diğer arama işlevleri yönetici panelinde seçilen arama motoruna dayanacaktır.',
-                        'admin-mode'           => 'Yönetici Arama Modu',
-                        'database'             => 'Veritabanı',
-                        'elastic'              => 'Elastic Search',
-                        'search-engine'        => 'Arama Motoru',
-                        'storefront-mode-info' => 'Mağaza ön yüzünde kategori sayfası, arama sayfası ve diğer arama işlevleri de dahil olmak üzere seçilen arama motoruna dayalı arama işlevselliği olacaktır.',
-                        'storefront-mode'      => 'Mağaza Arama Modu',
-                        'title-info'           => 'Ürün aramaları için arama motorunu ayarlamak için, gereksinimlerinize bağlı olarak veritabanı ve Elasticsearch arasında seçim yapabilirsiniz. Büyük bir ürün sayınız varsa, Elasticsearch önerilir.',
-                        'title'                => 'Arama',
+                        'admin-mode'            => 'Yönetici Arama Modu',
+                        'admin-mode-info'       => 'Mega Arama, Veri Tablosu ve diğer arama işlevleri yönetici panelinde seçilen arama motoruna dayanacaktır.',
+                        'database'              => 'Veritabanı',
+                        'elastic'               => 'Elastic Search',
+                        'max-query-length'      => 'Maksimum sorgu uzunluğu',
+                        'max-query-length-info' => 'Arama sorguları için maksimum sorgu uzunluğunu ayarlayın.',
+                        'min-query-length'      => 'Minimum sorgu uzunluğu',
+                        'min-query-length-info' => 'Arama sorguları için minimum sorgu uzunluğunu ayarlayın.',
+                        'search-engine'         => 'Arama Motoru',
+                        'storefront-mode'       => 'Mağaza ön yüzü Arama Modu',
+                        'storefront-mode-info'  => 'Mağaza ön yüzünde kategori sayfası, arama sayfası ve diğer arama işlevleri de dahil olmak üzere seçilen arama motoruna dayalı arama işlevselliği sağlanır.',
+                        'title'                 => 'Arama',
+                        'title-info'            => 'Ürün aramaları için arama motorunu ayarlamak için gereksinimlerinize bağlı olarak bir veritabanı ve Elasticsearch arasında seçim yapabilirsiniz. Büyük bir ürün sayınız varsa, Elasticsearch önerilir.',
                     ],
 
                     'guest-checkout' => [
-                        'allow-guest-checkout'      => 'Misafir Ödemesine İzin Ver',
-                        'allow-guest-checkout-hint' => 'İpucu: Açıkken, bu seçenek her ürün için özelleştirilebilir.',
-                        'title'                     => 'Misafir Ödemesi',
-                        'title-info'                => 'Misafir ödemesi, müşterilere hesap oluşturmadan ürün satın alma olanağı sunar, işlemi kolaylaştırır ve daha hızlı işlemler için.',
+                        'allow-guest-checkout'      => 'Konuk Ödemesine İzin Ver',
+                        'allow-guest-checkout-hint' => 'İpucu: Etkinleştirildiğinde, bu seçenek her ürün için ayrı ayrı yapılandırılabilir.',
+                        'title'                     => 'Konuk Ödemesi',
+                        'title-info'                => 'Konuk ödemesi, müşterilerin bir hesap oluşturmadan ürün satın almalarına olanak tanır, kullanım kolaylığı ve daha hızlı işlemler için satın alma sürecini basitleştirir.',
                     ],
 
                     'product-view-page' => [
-                        'allow-no-of-related-products'  => 'İlgili Ürünler Sayısına İzin Ver',
-                        'allow-no-of-up-sells-products' => 'Yükseltilmiş Ürün Sayısına İzin Ver',
-                        'title'                         => 'Ürün görünüm sayfası yapılandırması',
-                        'title-info'                    => 'Ürün görünüm sayfası yapılandırması, bir ürünün görüntü sayfasındaki düzeni ve öğeleri ayarlama işlemidir, kullanıcı deneyimini ve bilgi sunumunu artırır.',
+                        'allow-no-of-related-products'  => 'İzin Verilen İlgili Ürün Sayısı',
+                        'allow-no-of-up-sells-products' => 'İzin Verilen Yükseltme Ürün Sayısı',
+                        'title'                         => 'Ürün görüntüleme sayfası yapılandırması',
+                        'title-info'                    => 'Ürün görüntüleme sayfası yapılandırması, bir ürünün görüntüleme sayfasındaki düzeni ve öğeleri ayarlamayı içerir, kullanıcı deneyimini ve bilgi sunumunu geliştirir.',
                     ],
 
                     'cart-view-page' => [
-                        'allow-no-of-cross-sells-products' => 'Çapraz Satış Ürünlerine İzin Ver',
-                        'title'                            => 'Alışveriş sepeti görünüm sayfası yapılandırması',
-                        'title-info'                       => 'Alışveriş sepeti görünüm sayfası yapılandırması, kullanıcı etkileşimini ve satın alma akışını geliştirme işlemi olan alışveriş sepeti sayfasındaki öğeleri, detayları ve seçenekleri düzenlemeyi içerir.',
+                        'allow-no-of-cross-sells-products' => 'İzin Verilen Çapraz Satış Ürün Sayısı',
+                        'title'                            => 'Sepet görüntüleme sayfası yapılandırması',
+                        'title-info'                       => 'Sepet görüntüleme sayfası yapılandırması, alışveriş sepeti sayfasındaki öğeleri, ayrıntıları ve seçenekleri düzenlemeyi içerir, kullanıcı etkileşimini ve satın alma akışını iyileştirir.',
                     ],
 
                     'storefront' => [
@@ -3500,83 +3522,102 @@ return [
                         'latest-first'           => 'En Yeni İlk',
                         'list'                   => 'Liste',
                         'oldest-first'           => 'En Eski İlk',
-                        'products-per-page'      => 'Sayfa Başına Ürün Sayısı',
+                        'products-per-page'      => 'Sayfa Başına Ürün',
                         'sort-by'                => 'Sırala',
                         'title'                  => 'Mağaza ön yüzü',
-                        'title-info'             => 'Mağaza ön yüzü, bir çevrimiçi mağazanın müşteri yüzüdür, ürünleri, kategorileri ve sorunsuz bir alışveriş deneyimi için gezinmeyi sergiler.',
+                        'title-info'             => 'Mağaza ön yüzü, bir çevrimiçi mağazanın müşteriye yönelik arayüzüdür ve sorunsuz bir alışveriş deneyimi için ürünleri, kategorileri ve gezinmeyi sergiler.',
                     ],
 
                     'small-image' => [
-                        'height'     => 'Yükseklik',
-                        'title'      => 'Küçük Resim',
-                        'title-info' => 'Mağaza ön yüzü, bir çevrimiçi mağazanın müşteri yüzüdür, ürünleri, kategorileri ve sorunsuz bir alışveriş deneyimi için gezinmeyi sergiler.',
-                        'width'      => 'Genişlik',
+                        'height'      => 'Yükseklik',
+                        'placeholder' => 'Küçük Resim Yer Tutucusu',
+                        'title'       => 'Küçük Resim',
+                        'title-info'  => 'Mağaza ön yüzü, bir çevrimiçi mağazanın müşteriye yönelik arayüzüdür ve ürünleri, kategorileri ve gezinmeyi sergiler.',
+                        'width'       => 'Genişlik',
                     ],
 
                     'medium-image' => [
-                        'height'     => 'Yükseklik',
-                        'title'      => 'Orta Resim',
-                        'title-info' => 'Orta resim, ayrıntı ve ekran alanı arasında denge sağlayan orta boyutlu bir resmi ifade eder, genellikle görseller için kullanılır.',
-                        'width'      => 'Genişlik',
+                        'height'      => 'Yükseklik',
+                        'placeholder' => 'Orta Resim Yer Tutucusu',
+                        'title'       => 'Orta Resim',
+                        'title-info'  => 'Orta resim, ayrıntı ve ekran alanı arasında bir denge sunan orta boyutlu bir resimdir ve genellikle görseller için kullanılır.',
+                        'width'       => 'Genişlik',
                     ],
 
                     'large-image' => [
-                        'width'      => 'Genişlik',
-                        'height'     => 'Yükseklik',
-                        'title'      => 'Büyük resim',
-                        'title-info' => 'Büyük resim, artırılmış detay ve görsel etki sunan yüksek çözünürlüklü bir resmi temsil eder, genellikle ürünleri veya grafikleri sergilemek için kullanılır.',
+                        'height'      => 'Yükseklik',
+                        'placeholder' => 'Büyük Resim Yer Tutucusu',
+                        'title'       => 'Büyük resim',
+                        'title-info'  => 'Büyük resim, genellikle ürünleri veya grafikleri sergilemek için kullanılan, ayrıntıları ve görsel etkiyi artıran yüksek çözünürlüklü bir resmi temsil eder.',
+                        'width'       => 'Genişlik',
                     ],
 
                     'review' => [
-                        'allow-guest-review' => 'Misafir İncelemesine İzin Ver',
-                        'title'              => 'İnceleme',
-                        'title-info'         => 'Bir şeyin değerlendirmesi veya değerlendirmesi, genellikle görüşler ve geri bildirim içerir.',
+                        'allow-customer-review' => 'Müşteri İncelemesine İzin Ver',
+                        'allow-guest-review'    => 'Konuk İncelemesine İzin Ver',
+                        'title'                 => 'İnceleme',
+                        'title-info'            => 'Bir şeyin değerlendirilmesi veya değerlendirilmesi, genellikle görüşler ve geri bildirimler içeren bir değerlendirme sürecidir.',
                     ],
 
                     'attribute' => [
                         'file-upload-size'  => 'İzin Verilen Dosya Yükleme Boyutu (Kb cinsinden)',
                         'image-upload-size' => 'İzin Verilen Resim Yükleme Boyutu (Kb cinsinden)',
-                        'title'             => 'Özellik',
-                        'title-info'        => 'Bir nesneyi tanımlayan karakteristik veya özellik, davranışını, görünümünü veya işlevini etkileyen.',
+                        'title'             => 'Öznitelik',
+                        'title-info'        => 'Bir nesneyi tanımlayan, davranışını, görünümünü veya işlevini etkileyen özellik veya özellik.',
                     ],
 
                     'social-share' => [
-                        'enable-share-email'     => 'E-posta ile Paylaşımı Etkinleştir?',
-                        'enable-share-facebook'  => 'Facebook\'ta Paylaşımı Etkinleştir?',
-                        'enable-share-linkedin'  => 'Linkedin\'de Paylaşımı Etkinleştir?',
-                        'enable-share-pinterest' => 'Pinterest\'te Paylaşımı Etkinleştir?',
-                        'enable-share-twitter'   => 'Twitter\'da Paylaşımı Etkinleştir?',
-                        'enable-share-whatsapp'  => 'What\'s App\'ta Paylaşımı Etkinleştir?',
-                        'enable-social-share'    => 'Sosyal Paylaşımı Etkinleştir?',
-                        'share'                  => 'Paylaş',
-                        'share-message'          => 'Paylaşım Mesajı',
-                        'title'                  => 'Sosyal Paylaşım',
-                        'title-info'             => 'Bir web sitesinden arkadaşlarınızla Facebook, Twitter veya Instagram gibi sosyal medya platformlarında şeyler paylaşma işlemi.',
+                        'title-info'                  => 'Bir web sitesinden Facebook, Twitter veya Instagram gibi sosyal medya platformlarında arkadaşlarla paylaşma.',
+                        'title'                       => 'Sosyal Paylaşım',
+                        'share-message'               => 'Paylaşım Mesajı',
+                        'share'                       => 'Paylaş',
+                        'enable-social-share'         => 'Sosyal Paylaşımı Etkinleştir?',
+                        'enable-share-whatsapp-info'  => 'Sadece mobil cihazlarda WhatsApp paylaşım bağlantısı görünecektir.',
+                        'enable-share-whatsapp'       => 'WhatsApp\'ta Paylaşımı Etkinleştir?',
+                        'enable-share-twitter'        => 'Twitter\'da Paylaşımı Etkinleştir?',
+                        'enable-share-pinterest'      => 'Pinterest\'ta Paylaşımı Etkinleştir?',
+                        'enable-share-linkedin'       => 'Linkedin\'de Paylaşımı Etkinleştir?',
+                        'enable-share-facebook'       => 'Facebook\'ta Paylaşımı Etkinleştir?',
+                        'enable-share-email'          => 'E-posta ile Paylaşımı Etkinleştir?',
                     ],
                 ],
 
                 'rich-snippets' => [
-                    'info'  => 'Ürünleri ve kategorileri ayarlayın.',
-                    'title' => 'Zengin Snippetlar',
+                    'info'  => 'Ürünler ve kategorileri ayarlayın.',
+                    'title' => 'Zengin Snippetler',
 
                     'products' => [
                         'enable'          => 'Etkinleştir',
                         'show-categories' => 'Kategorileri Göster',
                         'show-images'     => 'Resimleri Göster',
                         'show-offers'     => 'Teklifleri Göster',
-                        'show-ratings'    => 'Oylamaları Göster',
+                        'show-ratings'    => 'Değerlendirmeleri Göster',
                         'show-reviews'    => 'İncelemeleri Göster',
-                        'show-sku'        => 'Sku\'yu Göster',
-                        'show-weight'     => 'Ağırlık Göster',
+                        'show-sku'        => 'SKU\'yu Göster',
+                        'show-weight'     => 'Ağırlığı Göster',
                         'title'           => 'Ürünler',
-                        'title-info'      => 'Bir işletme veya satıcı tarafından sunulan satın alma veya kullanma için kullanılabilir ürünler.',
+                        'title-info'      => 'Bir işletme veya satıcı tarafından sunulan satın alınabilir veya kullanılabilir ürünler.',
                     ],
 
                     'categories' => [
                         'enable'                  => 'Etkinleştir',
                         'show-search-input-field' => 'Arama Giriş Alanını Göster',
                         'title'                   => 'Kategoriler',
-                        'title-info'              => '"Kategoriler", benzer ürünleri veya öğeleri gruplamak ve kolayca göz atma ve gezinme için yardımcı olan gruplar veya sınıflamalardır.',
+                        'title-info'              => '"Kategoriler", benzer ürünleri veya öğeleri gruplandırmak ve daha kolay gezinme için bir araya getirmek için kullanılan gruplar veya sınıflandırmalardır.',
+                    ],
+                ],
+
+                'inventory' => [
+                    'title'      => 'Envanter',
+                    'title-info' => 'Envanter ayarlarını yapılandırarak geri siparişlere izin verme, minimum ve maksimum sepet miktarlarını belirleme ve stokta olmayan eşik değerini tanımlama.',
+
+                    'product-stock-options' => [
+                        'allow-back-orders'       => 'Geri Siparişlere İzin Ver',
+                        'max-qty-allowed-in-cart' => 'Alışveriş Sepetinde İzin Verilen Maksimum Miktar',
+                        'min-qty-allowed-in-cart' => 'Alışveriş Sepetinde İzin Verilen Minimum Miktar',
+                        'out-of-stock-threshold'  => 'Stokta Olmayan Eşik Değeri',
+                        'title'                   => 'Ürün Stok Seçeneği',
+                        'title-info'              => 'Geri siparişlere izin verme, minimum ve maksimum sepet miktarlarını belirleme ve stokta olmayan eşik değerlerini tanımlama için ürün stok seçeneklerini yapılandırın.',
                     ],
                 ],
             ],
@@ -3586,27 +3627,27 @@ return [
                 'title' => 'Müşteri',
 
                 'address' => [
-                    'info'  => 'Ülke, il, posta kodu ve bir sokak adresindeki satırları ayarlayın.',
+                    'info'  => 'Ülke, il, posta kodu ve sokak adresindeki satırları ayarlayın.',
                     'title' => 'Adres',
 
                     'requirements' => [
                         'city'       => 'Şehir',
                         'country'    => 'Ülke',
-                        'state'      => 'Eyalet',
+                        'state'      => 'İl',
                         'title'      => 'Gereksinimler',
-                        'title-info' => 'Gereksinimler, bir şeyin başarılı bir şekilde yerine getirilmesi, başarılması veya karşılanması için gerekli olan koşullar, özellikler veya özelliklerdir.',
+                        'title-info' => 'Gereksinimler, bir şeyin başarıyla yerine getirilmesi, gerçekleştirilmesi veya karşılanması için gerekli olan koşullar, özellikler veya özelliklerdir.',
                         'zip'        => 'Posta Kodu',
                     ],
 
                     'information' => [
-                        'street-lines' => 'Bir Sokak Adresindeki Satırlar',
+                        'street-lines' => 'Sokak Adresindeki Satırlar',
                         'title'        => 'Bilgi',
-                        'title-info'   => '"Bir sokak adresindeki satırlar", genellikle virgüllerle ayrılmış, konum bilgisi sağlayan adresin bireysel bölümlerini ifade eder, örneğin ev numarası, sokak, şehir ve daha fazlası.',
+                        'title-info'   => '"Sokak adresindeki satırlar", genellikle virgüllerle ayrılan, konum bilgisi sağlayan bir adreste yer alan bireysel segmentlerdir, ev numarası, sokak, şehir ve daha fazlası gibi.',
                     ],
                 ],
 
                 'captcha' => [
-                    'info'  => 'Site anahtarını, gizli anahtarı ve durumu ayarlayın.',
+                    'info'  => 'Site anahtarını, gizli anahtarını ve durumunu ayarlayın.',
                     'title' => 'Captcha',
 
                     'credentials' => [
@@ -3614,7 +3655,7 @@ return [
                         'site-key'   => 'Site Anahtarı',
                         'status'     => 'Durum',
                         'title'      => 'Kimlik Bilgileri',
-                        'title-info' => '"Site haritası: Arama motorları için web sitesi düzen haritası. Gizli anahtar: Veri şifreleme, kimlik doğrulama veya API erişimi koruma için güvenli kod."',
+                        'title-info' => '"Site haritası: Arama motorları için web sitesi düzen haritası. Gizli anahtar: Veri şifreleme, kimlik doğrulama veya API erişim koruması için güvenli kod."',
                     ],
 
                     'validations' => [
@@ -3624,19 +3665,54 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Bülten abonelikleri, e-posta doğrulamaları ve sosyal giriş ayarla.',
+                    'settings-info' => 'Bülten aboneliklerini, e-posta doğrulamalarını ve sosyal girişi ayarlayın.',
                     'title'         => 'Ayarlar',
+
+                    'login-as-customer' => [
+                        'allow-option' => 'Müşteri olarak Girişe İzin Ver',
+                        'title'        => 'Müşteri Olarak Giriş',
+                        'title-info'   => '"Müşteri olarak giriş" işlevselliğini etkinleştirin.',
+                    ],
+
+                    'wishlist' => [
+                        'allow-option' => 'İstek Listesi seçeneğine izin ver',
+                        'title'        => 'İstek Listesi',
+                        'title-info'   => 'İstek listesi seçeneğini etkinleştirin veya devre dışı bırakın.',
+                    ],
+
+                    'login-options' => [
+                        'account'          => 'Hesap',
+                        'home'             => 'Ana Sayfa',
+                        'redirect-to-page' => 'Müşteriyi seçilen sayfaya yönlendir',
+                        'title'            => 'Giriş Seçenekleri',
+                        'title-info'       => 'Müşterilerin giriş yaptıktan sonra yönlendirilecek sayfayı belirlemek için giriş seçeneklerini yapılandırın.',
+                    ],
+
+                    'create-new-account-option' => [
+                        'news-letter'      => 'Bülten\'e İzin Ver',
+                        'news-letter-info' => 'Kayıt sayfasında bülten aboneliği seçeneğini etkinleştirin.',
+                        'title'            => 'Yeni Hesap Oluşturma Seçenekleri',
+                        'title-info'       => 'Yeni hesaplar için seçenekleri ayarlayın, bunlar arasında varsayılan bir müşteri grubu atama ve kayıt sırasında bülten aboneliği seçeneğini etkinleştirme bulunur.',
+
+                        'default-group' => [
+                            'general'    => 'Genel',
+                            'guest'      => 'Misafir',
+                            'title'      => 'Varsayılan Grup',
+                            'title-info' => 'Yeni müşteriler için belirli bir müşteri grubunu varsayılan olarak atayın.',
+                            'wholesale'  => 'Toptan',
+                        ],
+                    ],
 
                     'newsletter' => [
                         'subscription' => 'Bülten Aboneliğine İzin Ver',
                         'title'        => 'Bülten Aboneliği',
-                        'title-info'   => '"Bülten bilgileri", abonelere düzenli olarak e-posta yoluyla paylaşılan güncellemeler, teklifler veya içerik içerir, onları bilgilendirir ve katılımı artırır.',
+                        'title-info'   => '"Bülten bilgileri", abonelere düzenli olarak e-posta yoluyla paylaşılan güncellemeleri, teklifleri veya içerikleri içerir ve onları bilgilendirir ve etkileşimde bulunur.',
                     ],
 
                     'email' => [
-                        'email-verification' => 'E-posta Doğrulamayı Etkinleştir',
+                        'email-verification' => 'E-posta Doğrulamaya İzin Ver',
                         'title'              => 'E-posta Doğrulama',
-                        'title-info'         => '"E-posta doğrulama", genellikle bir doğrulama bağlantısı göndererek bir e-posta adresinin gerçekliğini onaylar, hesap güvenliğini ve iletişim güvenilirliğini artırır.',
+                        'title-info'         => '"E-posta doğrulama", bir e-posta adresinin gerçekliğini doğrular, genellikle bir onay bağlantısı göndererek hesap güvenliğini ve iletişim güvenilirliğini artırır.',
                     ],
 
                     'social-login' => [
@@ -3646,7 +3722,7 @@ return [
                         'enable-linkedin'   => 'LinkedIn\'i Etkinleştir',
                         'enable-twitter'    => 'Twitter\'ı Etkinleştir',
                         'social-login'      => 'Sosyal Giriş',
-                        'social-login-info' => '"Sosyal giriş", kullanıcıların sosyal medya hesaplarını kullanarak web sitelerine erişmelerini sağlar, kayıt ve giriş işlemlerini kolaylaştırır.',
+                        'social-login-info' => '"Sosyal giriş", kullanıcıların sosyal medya hesaplarını kullanarak web sitelerine erişmelerini sağlar, kayıt ve giriş işlemlerini kolaylık sağlamak için basitleştirir.',
                     ],
                 ],
             ],
@@ -3657,72 +3733,72 @@ return [
 
                 'email-settings' => [
                     'admin-email'           => 'Yönetici E-postası',
-                    'admin-email-tip'       => 'Bu kanalın yöneticisinin e-posta adresi, e-postaları almak için',
+                    'admin-email-tip'       => 'Bu kanal için yöneticiye e-posta göndermek için kullanılan e-posta adresi',
                     'admin-name'            => 'Yönetici Adı',
-                    'admin-name-tip'        => 'Bu isim tüm yönetici e-postalarında görüntülenecektir',
+                    'admin-name-tip'        => 'Bu isim tüm yönetici e-postalarında görünecektir',
                     'admin-page-limit'      => 'Varsayılan Sayfa Başına Öğe (Yönetici)',
                     'contact-email'         => 'İletişim E-postası',
-                    'contact-email-tip'     => 'Bu e-posta adresi e-postalarınızın alt kısmında gösterilecek',
+                    'contact-email-tip'     => 'E-postalarınızın altında gösterilecek e-posta adresi',
                     'contact-name'          => 'İletişim Adı',
-                    'contact-name-tip'      => 'Bu isim e-postalarınızın alt kısmında gösterilecek',
+                    'contact-name-tip'      => 'E-postalarınızın altında gösterilecek isim',
                     'email-sender-name'     => 'E-posta Gönderen Adı',
-                    'email-sender-name-tip' => 'Bu isim müşterilerin gelen kutusunda görüntülenecektir',
+                    'email-sender-name-tip' => 'Bu isim müşterilerin gelen kutusunda görünecektir',
                     'info'                  => 'E-posta gönderen adını, mağaza e-posta adresini, yönetici adını ve yönetici e-posta adresini ayarlayın.',
                     'shop-email-from'       => 'Mağaza E-posta Adresi',
-                    'shop-email-from-tip'   => 'Bu kanalın müşterilerine e-posta göndermek için e-posta adresi',
+                    'shop-email-from-tip'   => 'Müşterilerinize e-posta göndermek için bu kanalın e-posta adresi',
                     'title'                 => 'E-posta Ayarları',
                 ],
 
                 'notifications' => [
-                    'cancel-order'                                     => 'Siparişi iptal ettikten sonra bildirim gönder',
-                    'customer'                                         => 'Kayıttan sonra müşteri hesap kimlik bilgilerini gönder',
-                    'customer-registration-confirmation-mail-to-admin' => 'Müşteri kaydından sonra yöneticiye onay e-postası gönder',
-                    'info'                                             => '"Bildirim", kullanıcıları olaylar, güncellemeler veya eylemler hakkında bilgilendiren bir ileti veya uyarıdır, kullanıcı etkileşimini ve farkındalığı artırır.',
-                    'new-admin'                                        => 'Yeni bir sipariş verildikten sonra yöneticiye onay e-postası gönder',
-                    'new-inventory-source'                             => 'Yeni bir gönderi oluşturulduğunda envanter kaynağına bildirim e-postası gönder',
-                    'new-invoice'                                      => 'Yeni bir fatura oluşturulduğunda müşteriye bildirim e-postası gönder',
-                    'new-order'                                        => 'Yeni bir sipariş verildikten sonra müşteriye onay e-postası gönder',
-                    'new-refund'                                       => 'Yeni bir iade işlemi oluşturulduğunda müşteriye bildirim e-postası gönder',
-                    'new-shipment'                                     => 'Yeni bir gönderi oluşturulduğunda müşteriye bildirim e-postası gönder',
-                    'registration'                                     => 'Müşteri kaydından sonra onay e-postası gönder',
+                    'cancel-order'                                     => 'Bir sipariş iptal edildikten sonra bildirim gönder',
+                    'customer'                                         => 'Kayıt olduktan sonra müşteri hesap bilgilerini gönder',
+                    'customer-registration-confirmation-mail-to-admin' => 'Müşteri kaydından sonra yöneticiye bir onay e-postası gönder',
+                    'info'                                             => '"Bildirim" kullanıcıları etkinlikler, güncellemeler veya eylemler hakkında bilgilendiren bir mesaj veya uyarıdır ve kullanıcı katılımını ve farkındalığını artırır.',
+                    'new-admin'                                        => 'Yeni bir sipariş verildikten sonra yöneticiye bir onay e-postası gönder',
+                    'new-inventory-source'                             => 'Bir sevkiyat oluşturduktan sonra envanter kaynağına bir bildirim e-postası gönder',
+                    'new-invoice'                                      => 'Yeni bir fatura oluşturduktan sonra müşteriye bir bildirim e-postası gönder',
+                    'new-order'                                        => 'Yeni bir sipariş verildikten sonra müşteriye bir onay e-postası gönder',
+                    'new-refund'                                       => 'Bir iade oluşturduktan sonra müşteriye bir bildirim e-postası gönder',
+                    'new-shipment'                                     => 'Bir sevkiyat oluşturduktan sonra müşteriye bir bildirim e-postası gönder',
+                    'registration'                                     => 'Müşteri kaydından sonra bir onay e-postası gönder',
                     'title'                                            => 'Bildirimler',
-                    'verification'                                     => 'Müşteri kaydından sonra doğrulama e-postası gönder',
+                    'verification'                                     => 'Müşteri kaydından sonra bir doğrulama e-postası gönder',
                 ],
             ],
 
             'sales' => [
-                'info'  => 'Satış',
-                'title' => 'Satış',
+                'info'  => 'Satışlar',
+                'title' => 'Satışlar',
 
-                'shipping' => [
-                    'info'  => 'Kargo bilgilerini ayarlayın.',
-                    'title' => 'Kargo',
+                'shipping-setting' => [
+                    'info'  => 'Ülke, Eyalet, Şehir, Sokak Adresi, Posta Kodu, Mağaza Adı, KDV Numarası, İletişim Numarası ve Banka Bilgileri gibi nakliye ayarlarını yapılandırın.',
+                    'title' => 'Nakliye Ayarları',
 
                     'origin' => [
-                        'bank-details'   => 'Banka Detayları',
+                        'bank-details'   => 'Banka Bilgileri',
                         'city'           => 'Şehir',
                         'contact-number' => 'İletişim Numarası',
                         'country'        => 'Ülke',
                         'state'          => 'Eyalet',
                         'store-name'     => 'Mağaza Adı',
-                        'street-address' => 'Cadde Adresi',
-                        'title'          => 'Köken',
-                        'title-info'     => 'Kargo kökeni, ürünlerin taşınmadan önce kaynaklandığı yerini belirtir.',
+                        'street-address' => 'Sokak Adresi',
+                        'title'          => 'Kaynak',
+                        'title-info'     => 'Nakliye kaynağı, malların veya ürünlerin hedeflerine ulaşmadan önce kaynaklandığı konumu ifade eder.',
                         'vat-number'     => 'KDV Numarası',
                         'zip'            => 'Posta Kodu',
                     ],
                 ],
 
                 'shipping-methods' => [
-                    'info'  => 'Kargo yöntemleri bilgilerini ayarlayın',
-                    'title' => 'Kargo Yöntemleri',
+                    'info'  => 'Ücretsiz Kargo, Sabit Fiyat ve ihtiyaç duyulması halinde ek seçenekleri içeren nakliye yöntemlerini yapılandırın.',
+                    'title' => 'Nakliye Yöntemleri',
 
                     'free-shipping' => [
                         'description' => 'Açıklama',
                         'page-title'  => 'Ücretsiz Kargo',
                         'status'      => 'Durum',
                         'title'       => 'Başlık',
-                        'title-info'  => '"Ücretsiz kargo", kargo maliyetinin ücretsiz olduğu ve satıcının alıcıya ürünleri ulaştırmak için kargo masraflarını karşıladığı bir kargo yöntemini ifade eder.',
+                        'title-info'  => '"Ücretsiz kargo", kargo ücretinin feragat edildiği ve satıcının alıcıya mal teslim etmek için kargo masraflarını karşıladığı bir nakliye yöntemini ifade eder.',
                     ],
 
                     'flat-rate-shipping' => [
@@ -3731,130 +3807,162 @@ return [
                         'rate'        => 'Fiyat',
                         'status'      => 'Durum',
                         'title'       => 'Başlık',
-                        'title-info'  => 'Sabit fiyatlı kargo, paketin ağırlığı, boyutu veya mesafesi ne olursa olsun kargo için sabit bir ücret alındığı bir kargo yöntemidir. Bu, hem alıcılar hem de satıcılar için kargo maliyetlerini basitleştirir ve avantajlı olabilir.',
-                        'type'        => 'Tür',
+                        'title-info'  => 'Sabit fiyatlı kargo, paketin ağırlığına, boyutuna veya mesafesine bakılmaksızın sabit bir ücretin tahsil edildiği bir nakliye yöntemidir. Bu, hem alıcılar hem de satıcılar için nakliye maliyetlerini basitleştirir ve avantajlı olabilir.',
+                        'type'        => [
+                            'per-order' => 'Sipariş Başına',
+                            'per-unit'  => 'Ürün Başına',
+                            'title'     => 'Tip',
+                        ],
                     ],
                 ],
 
                 'payment-methods' => [
                     'accepted-currencies'            => 'Kabul Edilen Para Birimleri',
-                    'accepted-currencies-info'       => 'Para birimi kodlarını virgülle ayırarak ekleyin, örneğin USD, INR,...',
+                    'accepted-currencies-info'       => 'Para birimi kodunu virgülle ayırarak ekleyin, örn. USD, INR, ...',
                     'business-account'               => 'İş Hesabı',
-                    'cash-on-delivery'               => 'Kapıda Nakit Ödeme',
-                    'cash-on-delivery-info'          => 'Müşterilerin ürün veya hizmeti kapıda teslim alırken nakit ödeme yaptığı ödeme yöntemi.',
+                    'cash-on-delivery'               => 'Kapıda Ödeme',
+                    'cash-on-delivery-info'          => 'Müşterilerin mal veya hizmetleri kapılarında teslim alırken nakit ödeme yaptığı ödeme yöntemi.',
                     'client-id'                      => 'Müşteri Kimliği',
                     'client-id-info'                 => 'Test için "sb" kullanın.',
                     'client-secret'                  => 'Müşteri Sırrı',
-                    'client-secret-info'             => 'Buraya gizli anahtarınızı ekleyin',
+                    'client-secret-info'             => 'Gizli anahtarınızı buraya ekleyin',
                     'description'                    => 'Açıklama',
                     'generate-invoice'               => 'Sipariş verildikten sonra faturayı otomatik olarak oluştur',
-                    'generate-invoice-applicable'    => 'Otomatik fatura oluşturma etkinse geçerlidir',
-                    'info'                           => 'Ödeme yöntemleri bilgisi ayarla',
+                    'generate-invoice-applicable'    => 'Otomatik fatura oluşturma etkinse uygulanır',
+                    'info'                           => 'Ödeme yöntemi bilgilerini ayarlayın',
                     'instructions'                   => 'Talimatlar',
                     'logo'                           => 'Logo',
-                    'logo-information'               => 'Resim çözünürlüğü 55px x 45px gibi olmalıdır',
-                    'mailing-address'                => 'Çeki Gönderilecek Adres',
+                    'logo-information'               => 'Resim çözünürlüğü 55 piksel X 45 piksel gibi olmalıdır',
+                    'mailing-address'                => 'Çeki Gönder',
                     'money-transfer'                 => 'Havale',
-                    'money-transfer-info'            => 'Fonların bir kişiden veya hesaptan başka birine, genellikle elektronik olarak, çeşitli amaçlar için aktarılması, işlemler veya havaleler gibi.',
+                    'money-transfer-info'            => 'Fonların bir kişiden veya hesaptan başka bir kişiye veya hesaba, genellikle elektronik olarak, işlemler veya havaleler gibi çeşitli amaçlarla aktarılması.',
                     'page-title'                     => 'Ödeme Yöntemleri',
-                    'paid'                           => 'Ödenmiş',
+                    'paid'                           => 'Ödendi',
                     'paypal-smart-button'            => 'PayPal',
-                    'paypal-smart-button-info'       => 'PayPal Smart Button: Web siteleri ve uygulamalarda güvenli, çoklu yöntemli işlemler için özelleştirilebilir düğmelerle online ödemeleri kolaylaştırır.',
+                    'paypal-smart-button-info'       => 'PayPal Smart Button: Web siteleri ve uygulamalar için güvenli, çoklu yöntemli işlemler için özelleştirilebilir düğmelerle çevrimiçi ödemeleri kolaylaştırır.',
                     'paypal-standard'                => 'PayPal Standart',
-                    'paypal-standard-info'           => 'PayPal Standart, online işletmeler için temel bir PayPal ödeme seçeneğidir; müşterilere PayPal hesapları veya kredi/debit kartları kullanarak ödeme yapma olanağı sağlar.',
+                    'paypal-standard-info'           => 'PayPal Standart, çevrimiçi işletmeler için temel bir PayPal ödeme seçeneğidir ve müşterilerin PayPal hesaplarını veya kredi / banka kartlarını kullanarak ödeme yapmalarını sağlar.',
                     'pending'                        => 'Beklemede',
-                    'pending-payment'                => 'Beklemede Ödeme',
+                    'pending-payment'                => 'Bekleyen Ödeme',
                     'processing'                     => 'İşleniyor',
                     'sandbox'                        => 'Kum Havuzu',
-                    'set-invoice-status'             => 'Fatura oluşturulduktan sonra fatura durumunu şuna ayarla',
-                    'set-order-status'               => 'Fatura oluşturulduktan sonra sipariş durumunu şuna ayarla',
+                    'set-invoice-status'             => 'Fatura oluşturulduktan sonra fatura durumunu ayarla',
+                    'set-order-status'               => 'Fatura oluşturulduktan sonra sipariş durumunu ayarla',
                     'sort-order'                     => 'Sıralama Sırası',
                     'status'                         => 'Durum',
                     'title'                          => 'Başlık',
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Sipariş numaralarını, minimum siparişleri ve geri siparişleri ayarlayın.',
-                    'title' => 'Sipariş Ayarları',
+                    'info'               => 'Sipariş numaralarını, minimum siparişleri ve geri siparişleri ayarlayın.',
+                    'title'              => 'Sipariş Ayarları',
 
                     'order-number' => [
-                        'generator'  => 'Sipariş Numarası Oluşturucu',
-                        'length'     => 'Sipariş Numarası Uzunluğu',
-                        'prefix'     => 'Sipariş Numarası Öneki',
-                        'suffix'     => 'Sipariş Numarası Soneki',
-                        'title'      => 'Sipariş Numarası Ayarları',
-                        'title-info' => 'Belirli bir müşteri siparişine atanmış benzersiz bir tanımlayıcıdır ve satın alma süreci boyunca izlemeye, iletişime ve referansa yardımcı olur.',
+                        'generator'   => 'Sipariş Numarası Oluşturucusu',
+                        'info'        => 'Bir müşteri siparişine atanan benzersiz bir tanımlayıcıdır ve satın alma süreci boyunca takip, iletişim ve referans sağlar.',
+                        'length'      => 'Sipariş Numarası Uzunluğu',
+                        'prefix'      => 'Sipariş Numarası Öneki',
+                        'suffix'      => 'Sipariş Numarası Soneki',
+                        'title'       => 'Sipariş Numarası Ayarları',
                     ],
 
                     'minimum-order' => [
-                        'minimum-order-amount' => 'Minimum Sipariş Tutarı',
-                        'title'                => 'Minimum Sipariş Ayarları',
-                        'title-info'           => 'Siparişin işlenmesi veya avantajlardan yararlanabilmesi için gerekli en düşük miktar veya değeri belirleyen yapılandırılmış kriterler.',
+                        'description'             => 'Açıklama',
+                        'enable'                  => 'Etkinleştir',
+                        'info'                    => 'Bir siparişin işlenmesi veya faydalar için gereken en düşük miktarı veya değeri belirleyen yapılandırılmış kriterler.',
+                        'minimum-order-amount'    => 'Minimum Sipariş Tutarı',
+                        'show-error-in-cart'      => 'Alışveriş Sepetinde Gösterilecek Hata',
+                        'title'                   => 'Minimum Sipariş Ayarları',
+
+                        'include-discount-amount' => [
+                            'no'    => 'Hayır',
+                            'title' => 'İndirim Tutarını Dahil Et',
+                            'yes'   => 'Evet',
+                        ],
+
+                        'include-tax-amount' => [
+                            'no'    => 'Hayır',
+                            'title' => 'Tutara Vergi Dahil Et',
+                            'yes'   => 'Evet',
+                        ],
+                    ],
+
+                    'reorder' => [
+                        'admin-reorder'      => 'Yönetici Yeniden Sipariş',
+                        'admin-reorder-info' => 'Yönetici kullanıcıları için yeniden sipariş özelliğini etkinleştirin veya devre dışı bırakın.',
+                        'info'               => 'Mağaza kullanıcıları için yeniden sipariş özelliğini etkinleştirin veya devre dışı bırakın.',
+                        'shop-reorder'       => 'Mağaza Yeniden Sipariş',
+                        'shop-reorder-info'  => 'Mağaza kullanıcıları için yeniden sipariş özelliğini etkinleştirin veya devre dışı bırakın.',
+                        'title'              => 'Yeniden Siparişe İzin Ver',
                     ],
 
                     'stock-options' => [
                         'allow-back-orders' => 'Geri Siparişlere İzin Ver',
+                        'info'              => 'Stok seçenekleri, potansiyel karları etkileyen belirli bir fiyattan şirket hisselerini satın alma veya satma hakkı veren yatırım sözleşmeleridir.',
                         'title'             => 'Stok Seçenekleri',
-                        'title-info'        => 'Stok seçenekleri, şirket hisselerini belirli bir fiyattan satın alma veya satma hakkını veren yatırım sözleşmeleridir ve potansiyel karları etkiler.',
                     ],
                 ],
 
                 'invoice-settings' => [
-                    'info'  => 'Fatura numarası, ödeme koşulları, fatura kaydı tasarımı ve fatura hatırlatıcılarını ayarlayın.',
+                    'info'  => 'Fatura numarasını, ödeme koşullarını, fatura kaydırma tasarımını ve fatura hatırlatıcılarını ayarlayın.',
                     'title' => 'Fatura Ayarları',
 
                     'invoice-number' => [
-                        'generator'  => 'Fatura Numarası Oluşturucu',
+                        'generator'  => 'Fatura Numarası Oluşturucusu',
+                        'info'       => 'Faturalara benzersiz tanımlama numaraları oluşturmak ve atamak için kuralların veya parametrelerin yapılandırılması.',
                         'length'     => 'Fatura Numarası Uzunluğu',
                         'prefix'     => 'Fatura Numarası Öneki',
                         'suffix'     => 'Fatura Numarası Soneki',
                         'title'      => 'Fatura Numarası Ayarları',
-                        'title-info' => 'Organizasyon ve takip amaçları için benzersiz tanımlama numaralarını oluşturmak ve atamak için kuralların veya parametrelerin yapılandırılması.',
                     ],
 
                     'payment-terms' => [
                         'due-duration'      => 'Vade Süresi',
                         'due-duration-day'  => ':due-duration Gün',
-                        'due-duration-days' => ':due-duration Günler',
+                        'due-duration-days' => ':due-duration Gün',
+                        'info'              => 'Alıcının satıcıya mal veya hizmetler için ne zaman ve nasıl ödeme yapması gerektiğini belirleyen anlaşılan koşullar.',
                         'title'             => 'Ödeme Koşulları',
-                        'title-info'        => 'Alıcıdan satıcıya mal veya hizmetler için ne zaman ve nasıl ödeme yapılması gerektiğini belirleyen kabul edilen koşullar.',
                     ],
 
-                    'invoice-slip-design' => [
-                        'logo'       => 'Logo',
-                        'title'      => 'Fatura Kaydı Tasarımı',
-                        'title-info' => 'Profesyonel sunum için şirket markalama, maddeleme, fiyatlandırma ve ödeme ayrıntılarını içeren fatura kaydının görsel düzeni ve biçimi.',
+                    'pdf-print-outs' => [
+                        'info'             => 'Fatura Kimliği, Sipariş Kimliği\'ni başlıkta görüntülemek ve fatura logosunu içermek için PDF Yazdırmalarını yapılandırın.',
+                        'invoice-id-info'  => 'Fatura Başlığında Fatura Kimliği\'nin görüntülenmesini yapılandırın.',
+                        'invoice-id-title' => 'Başlıkta Fatura Kimliği\'ni Göster',
+                        'logo'             => 'Logo',
+                        'order-id-info'    => 'Fatura Başlığında Sipariş Kimliği\'nin görüntülenmesini yapılandırın.',
+                        'order-id-title'   => 'Başlıkta Sipariş Kimliği\'ni Göster',
+                        'title'            => 'PDF Yazdırmaları',
                     ],
 
                     'invoice-reminders' => [
-                        'interval-between-reminders' => 'Hatırlatıcılar arası aralık',
-                        'maximum-limit-of-reminders' => 'Hatırlatıcıların maksimum sınırı',
+                        'info'                       => 'Faturalar için yaklaşan veya gecikmiş ödemeleri müşterilere hatırlatmak için otomatik bildirimler veya iletişimler gönderilir.',
+                        'interval-between-reminders' => 'Hatırlatmalar Arasındaki Süre',
+                        'maximum-limit-of-reminders' => 'Hatırlatmaların Maksimum Sınırı',
                         'title'                      => 'Fatura Hatırlatıcıları',
-                        'title-info'                 => 'Müşterilere gelecek veya geciken ödemeleri hatırlatmak için gönderilen otomatik bildirimler veya iletişimler.',
                     ],
                 ],
 
                 'taxes' => [
                     'title'      => 'Vergiler',
-                    'title-info' => 'Vergiler, mal, hizmet veya işlemler üzerinde hükümetler tarafından zorunlu olarak uygulanan ve satıcılar tarafından tahsil edilerek yetkililere ödenen zorunlu ücretlerdir.',
+                    'title-info' => 'Vergiler, mallar, hizmetler veya işlemler üzerinde hükümetler tarafından zorunlu olarak uygulanan ve satıcılar tarafından toplanan ve yetkililere aktarılan zorunlu ücretlerdir.',
 
                     'categories' => [
                         'title'      => 'Vergi Kategorileri',
-                        'title-info' => 'Vergi kategorileri, satış vergisi, katma değer vergisi veya özel tüketim vergisi gibi farklı vergi türleri için sınıflandırmalardır. Ürünlere veya hizmetlere vergi oranları uygulamak için kullanılır.',
+                        'title-info' => 'Vergi kategorileri, ürünlere veya hizmetlere vergi oranlarını kategorize etmek ve uygulamak için satış vergisi, katma değer vergisi veya özel tüketim vergisi gibi farklı vergi türleri için sınıflandırmalardır.',
                         'product'    => 'Ürün Varsayılan Vergi Kategorisi',
-                        'shipping'   => 'Kargo Vergi Kategorisi',
-                        'none'       => 'Hiçbiri',
+                        'shipping'   => 'Nakliye Vergi Kategorisi',
+                        'none'       => 'Yok',
                     ],
 
                     'calculation' => [
                         'title'            => 'Hesaplama Ayarları',
-                        'title-info'       => 'Mal veya hizmetlerin maliyeti hakkında ayrıntılar, temel fiyat, indirimler, vergiler ve ek ücretler gibi bilgiler.',
+                        'title-info'       => 'Temel fiyat, indirimler, vergiler ve ek ücretler gibi mal veya hizmetlerin maliyeti hakkında ayrıntılar.',
                         'based-on'         => 'Hesaplama Temeli',
                         'shipping-address' => 'Teslimat Adresi',
                         'billing-address'  => 'Fatura Adresi',
-                        'shipping-origin'  => 'Kargo Kaynağı',
+                        'shipping-origin'  => 'Nakliye Kaynağı',
                         'product-prices'   => 'Ürün Fiyatları',
-                        'shipping-prices'  => 'Kargo Fiyatları',
+                        'shipping-prices'  => 'Nakliye Fiyatları',
                         'excluding-tax'    => 'Vergi Hariç',
                         'including-tax'    => 'Vergi Dahil',
                     ],
@@ -3864,7 +3972,7 @@ return [
                         'default-post-code' => 'Varsayılan Posta Kodu',
                         'default-state'     => 'Varsayılan Eyalet',
                         'title'             => 'Varsayılan Hedef Hesaplama',
-                        'title-info'        => 'Önceden tanımlanmış faktörler veya ayarlara dayalı olarak standart veya başlangıç ​​bir hedefin otomatik olarak belirlenmesi.',
+                        'title-info'        => 'Önceden belirlenmiş faktörler veya ayarlar temelinde standart veya başlangıç ​​bir hedefin otomatik belirlenmesi.',
                     ],
 
                     'shopping-cart' => [
@@ -3872,7 +3980,7 @@ return [
                         'title-info'              => 'Alışveriş sepetinde vergilerin görüntülenmesini ayarlayın',
                         'display-prices'          => 'Fiyatları Göster',
                         'display-subtotal'        => 'Ara Toplamı Göster',
-                        'display-shipping-amount' => 'Kargo Tutarını Göster',
+                        'display-shipping-amount' => 'Nakliye Tutarını Göster',
                         'excluding-tax'           => 'Vergi Hariç',
                         'including-tax'           => 'Vergi Dahil',
                         'both'                    => 'Hem Vergi Hariç Hem de Dahil',
@@ -3883,10 +3991,43 @@ return [
                         'title-info'              => 'Siparişlerde, faturalarda ve iadelerde vergilerin görüntülenmesini ayarlayın',
                         'display-prices'          => 'Fiyatları Göster',
                         'display-subtotal'        => 'Ara Toplamı Göster',
-                        'display-shipping-amount' => 'Kargo Tutarını Göster',
+                        'display-shipping-amount' => 'Nakliye Tutarını Göster',
                         'excluding-tax'           => 'Vergi Hariç',
                         'including-tax'           => 'Vergi Dahil',
                         'both'                    => 'Hem Vergi Hariç Hem de Dahil',
+                    ],
+                ],
+
+                'checkout' => [
+                    'title' => 'Ödeme',
+                    'info'  => 'Mini Sepet, Sepet Özeti\'ni etkinleştirin veya devre dışı bırakın.',
+
+                    'shopping-cart' => [
+                        'cart-page'              => 'Sepet Sayfası',
+                        'cart-page-info'         => 'Kullanıcı alışveriş deneyimini geliştirmek için Sepet Sayfası görünürlüğünü kontrol edin.',
+                        'cross-sell'             => 'Çapraz Satış Ürünleri',
+                        'cross-sell-info'        => 'Ek satış fırsatlarını artırmak için çapraz satış ürünlerini etkinleştirin.',
+                        'estimate-shipping'      => 'Tahmini Nakliye',
+                        'estimate-shipping-info' => 'Ön ödemeli nakliye maliyetlerini sağlamak için tahmini nakliyeyi etkinleştirin.',
+                        'guest-checkout'         => 'Misafir ödemesine izin ver',
+                        'guest-checkout-info'    => 'Hızlı ve sorunsuz bir satın alma işlemi için misafir ödemesini etkinleştirin.',
+                        'info'                   => 'Kullanıcı kolaylığını artırmak ve satın alma sürecini optimize etmek için misafir ödemesini, sepet sayfasını, çapraz satış ürünlerini ve tahmini nakliyeyi etkinleştirin.',
+                        'title'                  => 'Alışveriş Sepeti',
+                    ],
+
+                    'my-cart' => [
+                        'display-item-quantities' => 'Ürün miktarlarını göster',
+                        'display-number-in-cart'  => 'Sepetteki ürün sayısını göster',
+                        'info'                    => 'My Cart ayarlarını etkinleştirerek, ürün miktarlarının özetini göstermek ve sepetin toplam ürün sayısını görüntülemek için kolay takip için ayarları etkinleştirin.',
+                        'summary'                 => 'Özet',
+                        'title'                   => 'Sepetim',
+                    ],
+
+                    'mini-cart' => [
+                        'display-mini-cart'    => 'Mini Sepeti Göster',
+                        'info'                 => 'Mini Sepet ayarlarını etkinleştirerek mini sepeti görüntüleyin ve hızlı erişim için Mini Sepet Teklif Bilgilerini gösterin.',
+                        'mini-cart-offer-info' => 'Mini Sepet Teklif Bilgileri',
+                        'title'                => 'Mini Sepet',
                     ],
                 ],
             ],
