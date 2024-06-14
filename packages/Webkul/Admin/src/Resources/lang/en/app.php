@@ -2241,7 +2241,6 @@ return [
                         'delete'              => 'Delete',
                         'channel'             => 'Channel',
                         'actions'             => 'Actions',
-                        'channel'             => 'Channel',
                     ],
 
                     'create' => [
