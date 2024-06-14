@@ -19,6 +19,7 @@
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The Checkout Tables Schema Updates](#the-checkout-tables-schema-updates)
 - [The `Webkul\DataGrid\DataGrid` class](#the-datagrid-class)
+- [The `Webkul/DataGrid/src/Column` class](#the-column-class)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
 - [The product Elastic Search indexing](#the-elastic-indexing)
@@ -991,6 +992,140 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 ```diff
 - app(AttributeDataGrid::class)->toJson();
 + datagrid(AttributeDataGrid::class)->process();
+```
+
+3. The setExportFile method will now only accept the file format:
+
+```diff
+- public function setExportFile($records, $format = 'csv') 
++ public function setExportFile($format = 'csv')
+```
+
+<a name="the-column-class"></a>
+#### The `Webkul/DataGrid/src/Column` Class
+
+**Impact Probability: Medium**
+
+1. The `Column` class has undergone a change in how it stores the fully qualified column name. The property name and its access level have been modified.
+
+```diff
+- public $databaseColumnName;
++ protected $columnName;
+
+- public string $index;
++ protected string $index;
+
+- public string $label;
++ protected string $label;
+
+- public string $type;
++ protected string $type;
+
+- public bool $searchable = false;
++ protected bool $searchable = false;
+
+- public bool $filterable = false,
++ protected bool $filterable = false;
+
+- public bool $sortable = false,
++ protected bool $sortable = false;
+
+- public mixed $closure = null,
++ protected mixed $closure = null;
+```
+
+2. The setDatabaseColumnName method has been renamed to setColumnName  and the getDatabaseColumnName method has been renamed to geDatabaseColumnName.
+
+```diff
+- public function setDatabaseColumnName(mixed $databaseColumnName = null)
++ public function setColumnName(mixed $columnName): void
+
+- public function getDatabaseColumnName(): mixed
++ public function getColumnName(): mixed
+```
+
+3. The `getRangeOptions` method has been removed from `Column` class and its functionality is now managed by the `DateRangeOptionEnum` class located in `Webkul/DataGrid/src/Enums/DateRangeOptionEnum.php` through the `options`  method.
+
+```diff
+- public function getRangeOptions(string $format = 'Y-m-d'): array
++ public static function options(string $format = 'Y-m-d H:i:s'): array
+```
+
+4. The following methods have been removed from the backend and their functionalities are now managed from the front end:
+
+```diff
+- public function setFormInputType(string $formInputType): void
+
+- public function getFormInputType(): ?string
+
+- public function setFormOptions(array $formOptions): void
+
+- public function getFormOptions(): ?array
+
+- public function getBooleanOptions(): array
+```
+
+5. The `Column` class constructor now accepts a single array of properties instead of individual parameters.
+
+```diff
+- public function __construct(
+-    public string $index,
+-    public string $label,
+-    public string $type,
+-    public ?array $options = null,
+-    public bool $searchable = false,
+-    public bool $filterable = false,
+-    public bool $sortable = false,
+-    public mixed $closure = null,
+- ) {
+-      $this->init();
+- }
++ public function __construct(array $column)
++ {
++   $this->init($column);
++ }
+```
+
+6. The column types are now updated The available column types are now defined as follows:`string`, `integer`, `float`, `boolean`, `date`, `datetime`, `aggregate`.
+And the available FilterType `filterable_type` are now defined as follows: `dropdown`,`date_range`,`datetime_range`.   
+
+```diff
+- $this->addColumn([
+-    'index'      => 'attribute_family',
+-    'label'      => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
+-    'type'       => 'dropdown',
+-    'options'    => [
+-        'type' => 'basic',
+-        'params' => [
+-            'options' => $this->attributeFamilyRepository->all(['name as label', 'id as value'])->toArray(),
+-        ],
+-    ],
+-    'searchable' => false,
+-    'filterable' => true,
+-    'sortable'   => false,
+- ]); 
++ $this->addColumn([
++    'index'              => 'attribute_family',
++    'label'              => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
++    'type'               => 'string',
++    'filterable'         => true,
++    'filterable_type'    => 'dropdown',
++    'filterable_options' => $this->attributeFamilyRepository->all(['name as label', 'id as value'])->toArray(),
++ ]);
+```
+
+7. By default, the properties `searchable`, `filterable`, and `sortable` will be false if you need to activate them, set them to `true`.
+
+<a name="the-datagrid-export-class"></a>
+#### The `Webkul\Admin\Exports\DataGridExport` Class
+
+**Impact Probability: Medium**
+
+1. This class will now accept the full DataGrid instance instead of the records to enhance the export features:
+
+```diff
+- public function __construct(protected $gridData = [])
++ public function __construct(protected DataGrid $datagrid)
 ```
 
 

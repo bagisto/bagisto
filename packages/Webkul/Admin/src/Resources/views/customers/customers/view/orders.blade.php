@@ -97,15 +97,7 @@
                                     @{{ record.created_at }}
                                 </p>
 
-                                <p
-                                    v-if="record.is_closure"
-                                    v-html="record.status"
-                                >
-                                </p>
-
-                                <p v-else>
-                                    @{{ record.status }}
-                                </p>
+                                <p v-html="record.status"></p>
                             </div>
                         </div>
                     </div>

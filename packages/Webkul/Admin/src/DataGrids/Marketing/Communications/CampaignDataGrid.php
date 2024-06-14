@@ -38,7 +38,6 @@ class CampaignDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.communications.campaigns.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
         ]);

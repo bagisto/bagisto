@@ -2352,6 +2352,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Actions',
+                        'category'            => 'Category',
+                        'cms-page'            => 'CMS Page',
                         'delete'              => 'Delete',
                         'edit'                => 'Edit',
                         'for'                 => 'For',
@@ -2359,6 +2361,7 @@ return [
                         'locale'              => 'Locale',
                         'mass-delete-success' => 'Selected URL Rewrites Deleted Successfully',
                         'permanent-redirect'  => 'Permanent (301)',
+                        'product'             => 'Product',
                         'redirect-type'       => 'Redirect Type',
                         'request-path'        => 'Request Path',
                         'target-path'         => 'Target Path',

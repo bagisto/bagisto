@@ -42,7 +42,6 @@ class ExchangeRatesDataGrid extends DataGrid
             'index'      => 'currency_exchange_id',
             'label'      => trans('admin::app.settings.exchange-rates.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

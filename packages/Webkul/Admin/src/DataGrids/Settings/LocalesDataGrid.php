@@ -34,7 +34,6 @@ class LocalesDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.locales.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -58,27 +57,22 @@ class LocalesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'direction',
-            'label'      => trans('admin::app.settings.locales.index.datagrid.direction'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => [
-                        [
-                            'label' => trans('admin::app.settings.locales.index.datagrid.ltr'),
-                            'value' => 'ltr',
-                        ],
-                        [
-                            'label' => trans('admin::app.settings.locales.index.datagrid.rtl'),
-                            'value' => 'rtl',
-                        ],
-                    ],
+            'index'              => 'direction',
+            'label'              => trans('admin::app.settings.locales.index.datagrid.direction'),
+            'type'               => 'string',
+            'searchable'         => true,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label' => trans('admin::app.settings.locales.index.datagrid.ltr'),
+                    'value' => 'ltr',
+                ],
+                [
+                    'label' => trans('admin::app.settings.locales.index.datagrid.rtl'),
+                    'value' => 'rtl',
                 ],
             ],
-            'searchable' => true,
-            'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->direction == 'ltr') {

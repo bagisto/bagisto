@@ -2349,6 +2349,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'İşlemler',
+                        'category'            => 'Kategori',
+                        'cms-page'            => 'CMS Sayfası',
                         'delete'              => 'Sil',
                         'edit'                => 'Düzenle',
                         'for'                 => 'İçin',
@@ -2356,6 +2358,7 @@ return [
                         'locale'              => 'Yerel',
                         'mass-delete-success' => 'Seçili URL Yeniden Yönlendirmeleri Başarıyla Silindi',
                         'permanent-redirect'  => 'Kalıcı (301)',
+                        'product'             => 'Ürün',
                         'redirect-type'       => 'Yönlendirme Türü',
                         'request-path'        => 'İstek Yolu',
                         'target-path'         => 'Hedef Yol',

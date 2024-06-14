@@ -2,6 +2,15 @@
 
 namespace Webkul\DataGrid\Enums;
 
+use Webkul\DataGrid\ColumnTypes\Aggregate;
+use Webkul\DataGrid\ColumnTypes\Boolean;
+use Webkul\DataGrid\ColumnTypes\Date;
+use Webkul\DataGrid\ColumnTypes\Datetime;
+use Webkul\DataGrid\ColumnTypes\Decimal;
+use Webkul\DataGrid\ColumnTypes\Integer;
+use Webkul\DataGrid\ColumnTypes\Text;
+use Webkul\DataGrid\Exceptions\InvalidColumnTypeException;
+
 enum ColumnTypeEnum: string
 {
     /**
@@ -15,9 +24,9 @@ enum ColumnTypeEnum: string
     case INTEGER = 'integer';
 
     /**
-     * Aggregate.
+     * Float.
      */
-    case AGGREGATE = 'aggregate';
+    case FLOAT = 'float';
 
     /**
      * Boolean.
@@ -25,17 +34,34 @@ enum ColumnTypeEnum: string
     case BOOLEAN = 'boolean';
 
     /**
-     * Dropdown.
+     * Date.
      */
-    case DROPDOWN = 'dropdown';
+    case DATE = 'date';
 
     /**
-     * Date range.
+     * Date time.
      */
-    case DATE_RANGE = 'date_range';
+    case DATETIME = 'datetime';
 
     /**
-     * Date time range.
+     * Aggregate.
      */
-    case DATE_TIME_RANGE = 'datetime_range';
+    case AGGREGATE = 'aggregate';
+
+    /**
+     * Get the corresponding class name for the column type.
+     */
+    public static function getClassName(string $type): string
+    {
+        return match ($type) {
+            self::STRING->value    => Text::class,
+            self::INTEGER->value   => Integer::class,
+            self::FLOAT->value     => Decimal::class,
+            self::BOOLEAN->value   => Boolean::class,
+            self::DATE->value      => Date::class,
+            self::DATETIME->value  => Datetime::class,
+            self::AGGREGATE->value => Aggregate::class,
+            default                => throw new InvalidColumnTypeException("Invalid column type: {$type}"),
+        };
+    }
 }

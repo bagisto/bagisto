@@ -28,7 +28,6 @@ class EventDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.communications.events.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -43,12 +42,13 @@ class EventDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'date',
-            'label'      => trans('admin::app.marketing.communications.events.index.datagrid.date'),
-            'type'       => 'date_range',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'           => 'date',
+            'label'           => trans('admin::app.marketing.communications.events.index.datagrid.date'),
+            'type'            => 'date',
+            'searchable'      => true,
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
     }
 

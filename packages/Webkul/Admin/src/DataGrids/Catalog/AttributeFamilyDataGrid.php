@@ -33,7 +33,6 @@ class AttributeFamilyDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.catalog.families.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

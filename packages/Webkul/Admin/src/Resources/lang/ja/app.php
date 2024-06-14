@@ -2359,6 +2359,9 @@ return [
                         'request-path'        => 'リクエストパス',
                         'target-path'         => 'ターゲットパス',
                         'temporary-redirect'  => '一時的なリダイレクト(302)',
+                        'category'            => 'カテゴリ',
+                        'cms-page'            => 'CMSページ',
+                        'product'             => '製品',
                     ],
 
                     'create' => [

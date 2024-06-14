@@ -55,9 +55,8 @@ class DownloadableProductDataGrid extends DataGrid
             'index'      => 'increment_id',
             'label'      => trans('shop::app.customers.account.downloadable-products.orderId'),
             'type'       => 'string',
-            'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -65,8 +64,8 @@ class DownloadableProductDataGrid extends DataGrid
             'label'      => trans('shop::app.customers.account.downloadable-products.title'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($row) {
                 if (
                     $row->status == 'pending'
@@ -81,41 +80,35 @@ class DownloadableProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('shop::app.customers.account.downloadable-products.date'),
-            'type'       => 'date_range',
-            'searchable' => false,
-            'sortable'   => true,
-            'filterable' => true,
+            'index'           => 'created_at',
+            'label'           => trans('shop::app.customers.account.downloadable-products.date'),
+            'type'            => 'date',
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('shop::app.customers.account.downloadable-products.status'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => [
-                        [
-                            'label' => trans('shop::app.customers.account.downloadable-products.expired'),
-                            'value' => self::STATUS_EXPIRED,
-                        ],
-                        [
-                            'label' => trans('shop::app.customers.account.downloadable-products.pending'),
-                            'value' => self::STATUS_PENDING,
-                        ],
-                        [
-                            'label' => trans('shop::app.customers.account.downloadable-products.available'),
-                            'value' => self::STATUS_AVAILABLE,
-                        ],
-                    ],
+            'index'              => 'status',
+            'label'              => trans('shop::app.customers.account.downloadable-products.status'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label' => trans('shop::app.customers.account.downloadable-products.expired'),
+                    'value' => self::STATUS_EXPIRED,
+                ],
+                [
+                    'label' => trans('shop::app.customers.account.downloadable-products.pending'),
+                    'value' => self::STATUS_PENDING,
+                ],
+                [
+                    'label' => trans('shop::app.customers.account.downloadable-products.available'),
+                    'value' => self::STATUS_AVAILABLE,
                 ],
             ],
-            'searchable' => false,
             'sortable'   => true,
-            'filterable' => true,
             'closure'    => function ($row) {
                 switch ($row->status) {
                     case self::STATUS_EXPIRED:
@@ -131,13 +124,12 @@ class DownloadableProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'remaining_downloads',
-            'label'      => trans('shop::app.customers.account.downloadable-products.remaining-downloads'),
-            'type'       => 'datetime',
-            'searchable' => false,
-            'sortable'   => true,
-            'filterable' => false,
-            'closure'    => function ($row) {
+            'index'           => 'remaining_downloads',
+            'label'           => trans('shop::app.customers.account.downloadable-products.remaining-downloads'),
+            'type'            => 'datetime',
+            'filterable_type' => 'datetime_range',
+            'sortable'        => true,
+            'closure'         => function ($row) {
                 if (! $row->download_bought) {
                     return trans('shop::app.customer.account.downloadable_products.unlimited');
                 }

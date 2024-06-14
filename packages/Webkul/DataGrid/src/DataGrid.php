@@ -41,6 +41,13 @@ abstract class DataGrid
     protected $itemsPerPage = 10;
 
     /**
+     * Per page options.
+     *
+     * @var array
+     */
+    protected $perPageOptions = [10, 20, 30, 40, 50];
+
+    /**
      * Columns.
      *
      * @var array
@@ -138,16 +145,7 @@ abstract class DataGrid
     {
         $this->dispatchEvent('columns.add.before', [$this, $column]);
 
-        $this->columns[] = new Column(
-            index: $column['index'],
-            label: $column['label'],
-            type: $column['type'],
-            options: $column['options'] ?? null,
-            searchable: $column['searchable'],
-            filterable: $column['filterable'],
-            sortable: $column['sortable'],
-            closure: $column['closure'] ?? null,
-        );
+        $this->columns[] = Column::resolveType($column);
 
         $this->dispatchEvent('columns.add.after', [$this, $this->columns[count($this->columns) - 1]]);
     }
@@ -218,8 +216,8 @@ abstract class DataGrid
         $this->dispatchEvent('filters.add.before', [$this, $datagridColumn, $queryColumn]);
 
         foreach ($this->columns as $column) {
-            if ($column->index === $datagridColumn) {
-                $column->setDatabaseColumnName($queryColumn);
+            if ($column->getIndex() === $datagridColumn) {
+                $column->setColumnName($queryColumn);
 
                 break;
             }
@@ -251,17 +249,16 @@ abstract class DataGrid
     /**
      * Set export file.
      *
-     * @param  \Illuminate\Support\Collection  $records
      * @param  string  $format
      * @return void
      */
-    public function setExportFile($records, $format = 'csv')
+    public function setExportFile($format = 'csv')
     {
-        $this->dispatchEvent('export_file.set.before', [$this, $records, $format]);
+        $this->dispatchEvent('export_file.set.before', [$this, $format]);
 
         $this->setExportable(true);
 
-        $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36).'.'.$format);
+        $this->exportFile = Excel::download(new DataGridExport($this), Str::random(36).'.'.$format);
 
         $this->dispatchEvent('export_file.set.after', $this);
     }
@@ -339,100 +336,17 @@ abstract class DataGrid
                 $this->queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
                     foreach ($requestedValues as $value) {
                         collect($this->columns)
-                            ->filter(fn ($column) => $column->searchable && ! in_array($column->type, [
+                            ->filter(fn ($column) => $column->getSearchable() && ! in_array($column->getType(), [
                                 ColumnTypeEnum::BOOLEAN->value,
                                 ColumnTypeEnum::AGGREGATE->value,
                             ]))
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%'));
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getColumnName(), 'LIKE', '%'.$value.'%'));
                     }
                 });
             } else {
-                $column = collect($this->columns)->first(fn ($c) => $c->index === $requestedColumn);
-
-                switch ($column->type) {
-                    case ColumnTypeEnum::STRING->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::INTEGER->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::AGGREGATE->value:
-                        $this->queryBuilder->having(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orHaving($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::DROPDOWN->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::DATE_RANGE->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            if (is_string($requestedValues)) {
-                                $rangeOption = collect($column->getRangeOptions())->firstWhere('name', $requestedValues);
-
-                                $requestedValues = [[$rangeOption['from'], $rangeOption['to']]];
-                            }
-
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [
-                                    ($value[0] ?? '').' 00:00:01',
-                                    ($value[1] ?? '').' 23:59:59',
-                                ]);
-                            }
-                        });
-
-                        break;
-
-                    case ColumnTypeEnum::DATE_TIME_RANGE->value:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            if (is_string($requestedValues)) {
-                                $rangeOption = collect($column->getRangeOptions())->firstWhere('name', $requestedValues);
-
-                                $requestedValues = [
-                                    [
-                                        $rangeOption['from'].' 00:00:01',
-                                        $rangeOption['to'].' 23:59:59',
-                                    ],
-                                ];
-                            }
-
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [$value[0] ?? '', $value[1] ?? '']);
-                            }
-                        });
-
-                        break;
-
-                    default:
-                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
-                            foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
-                            }
-                        });
-
-                        break;
-                }
+                collect($this->columns)
+                    ->first(fn ($column) => $column->getIndex() === $requestedColumn)
+                    ->processFilter($this->queryBuilder, $requestedValues);
             }
         }
 
@@ -485,7 +399,7 @@ abstract class DataGrid
     {
         $this->dispatchEvent('process_request.export.before', $this);
 
-        $this->setExportFile($this->queryBuilder->get(), $requestedParams['format']);
+        $this->setExportFile($requestedParams['format']);
 
         $this->dispatchEvent('process_request.export.after', $this);
     }
@@ -543,29 +457,46 @@ abstract class DataGrid
     }
 
     /**
-     * Format data.
+     * Format columns.
      */
-    protected function formatData(): array
+    protected function formatColumns(): array
     {
-        $paginator = $this->paginator->toArray();
+        return collect($this->columns)
+            ->map(fn ($column) => $column->toArray())
+            ->toArray();
+    }
 
-        /**
-         * TODO: need to handle this...
-         */
-        foreach ($this->columns as $column) {
-            $column->input_type = $column->getFormInputType();
+    /**
+     * Format actions.
+     */
+    protected function formatActions(): array
+    {
+        return collect($this->actions)
+            ->map(fn ($action) => $action->toArray())
+            ->toArray();
+    }
 
-            $column->options = $column->getFormOptions();
-        }
+    /**
+     * Format mass actions.
+     */
+    protected function formatMassActions(): array
+    {
+        return collect($this->massActions)
+            ->map(fn ($massAction) => $massAction->toArray())
+            ->toArray();
+    }
 
-        foreach ($paginator['data'] as $record) {
+    /**
+     * Format records.
+     */
+    protected function formatRecords($records): mixed
+    {
+        foreach ($records as $record) {
             $record = $this->sanitizeRow($record);
 
             foreach ($this->columns as $column) {
-                if ($closure = $column->closure) {
-                    $record->{$column->index} = $closure($record);
-
-                    $record->is_closure = true;
+                if ($closure = $column->getClosure()) {
+                    $record->{$column->getIndex()} = $closure($record);
                 }
             }
 
@@ -584,18 +515,28 @@ abstract class DataGrid
             }
         }
 
+        return $records;
+    }
+
+    /**
+     * Format data.
+     */
+    protected function formatData(): array
+    {
+        $paginator = $this->paginator->toArray();
+
         return [
             'id'           => Crypt::encryptString(get_called_class()),
-            'columns'      => $this->columns,
-            'actions'      => $this->actions,
-            'mass_actions' => $this->massActions,
-            'records'      => $paginator['data'],
+            'columns'      => $this->formatColumns(),
+            'actions'      => $this->formatActions(),
+            'mass_actions' => $this->formatMassActions(),
+            'records'      => $this->formatRecords($paginator['data']),
             'meta'         => [
                 'primary_column'   => $this->primaryColumn,
                 'from'             => $paginator['from'],
                 'to'               => $paginator['to'],
                 'total'            => $paginator['total'],
-                'per_page_options' => [10, 20, 30, 40, 50],
+                'per_page_options' => $this->perPageOptions,
                 'per_page'         => $paginator['per_page'],
                 'current_page'     => $paginator['current_page'],
                 'last_page'        => $paginator['last_page'],
