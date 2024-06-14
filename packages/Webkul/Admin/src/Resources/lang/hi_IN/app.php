@@ -3102,6 +3102,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'सक्रिय',
                 'add-filter-btn'                => 'फ़िल्टर जोड़ें',
                 'add-footer-link-btn'           => 'फ़ुटर लिंक जोड़ें',
                 'add-image-btn'                 => 'छवि जोड़ें',
@@ -3126,6 +3127,7 @@ return [
                 'footer-title'                  => 'शीर्षक',
                 'general'                       => 'सामान्य',
                 'html'                          => 'एचटीएमएल',
+                'inactive'                      => 'निष्क्रिय',
                 'image'                         => 'छवि',
                 'image-size'                    => 'छवि संकल्प (1920px X 700px) होना चाहिए',
                 'image-title'                   => 'चित्र शीर्षक',
@@ -3137,6 +3139,7 @@ return [
                 'name'                          => 'नाम',
                 'no'                            => 'नहीं',
                 'new'                           => 'नया',
+                'parent-id'                     => 'मूल आईडी',
                 'preview'                       => 'पूर्वावलोकन',
                 'product-carousel'              => 'उत्पाद कैरोसल',
                 'product-carousel-description'  => 'डायनामिक और प्रतिस्थापनीय उत्पाद कैरोसल के साथ उत्पादों का सुंदर प्रदर्शन करें।',

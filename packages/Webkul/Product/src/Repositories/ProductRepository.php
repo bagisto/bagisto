@@ -234,6 +234,11 @@ class ProductRepository extends Repository
             'price_indices',
             'inventory_indices',
             'reviews',
+            'variants',
+            'variants.attribute_family',
+            'variants.attribute_values',
+            'variants.price_indices',
+            'variants.inventory_indices',
         ])->scopeQuery(function ($query) use ($params) {
             $prefix = DB::getTablePrefix();
 
@@ -335,22 +340,24 @@ class ProductRepository extends Repository
              * Filter query by attributes.
              */
             if ($attributes->isNotEmpty()) {
-                $qb->leftJoin('product_attribute_values', 'products.id', '=', 'product_attribute_values.product_id');
+                $qb->where(function ($filterQuery) use ($qb, $params, $attributes) {
+                    $aliases = [
+                        'products' => 'product_attribute_values',
+                        'variants' => 'variant_attribute_values',
+                    ];
 
-                $qb->where(function ($filterQuery) use ($params, $attributes) {
-                    foreach ($attributes as $attribute) {
-                        $filterQuery->orWhere(function ($attributeQuery) use ($params, $attribute) {
-                            $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
+                    foreach ($aliases as $table => $tableAlias) {
+                        $filterQuery->orWhere(function ($subFilterQuery) use ($qb, $params, $attributes, $table, $tableAlias) {
+                            foreach ($attributes as $attribute) {
+                                $alias = $attribute->code.'_'.$tableAlias;
 
-                            $values = explode(',', $params[$attribute->code]);
+                                $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($table, $alias, $attribute) {
+                                    $join->on($table.'.id', '=', $alias.'.product_id');
 
-                            if ($attribute->type == 'price') {
-                                $attributeQuery->whereBetween('product_attribute_values.'.$attribute->column_name, [
-                                    core()->convertToBasePrice(current($values)),
-                                    core()->convertToBasePrice(end($values)),
-                                ]);
-                            } else {
-                                $attributeQuery->whereIn('product_attribute_values.'.$attribute->column_name, $values);
+                                    $join->where($alias.'.attribute_id', $attribute->id);
+                                });
+
+                                $subFilterQuery->whereIn($alias.'.'.$attribute->column_name, explode(',', $params[$attribute->code]));
                             }
                         });
                     }

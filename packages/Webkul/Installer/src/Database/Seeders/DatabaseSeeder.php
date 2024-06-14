@@ -23,14 +23,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run($parameters = [])
     {
-        $this->call(CategorySeeder::class, false, ['parameters' => $parameters]);
-        $this->call(InventorySeeder::class, false, ['parameters' => $parameters]);
-        $this->call(CoreSeeder::class, false, ['parameters' => $parameters]);
         $this->call(AttributeSeeder::class, false, ['parameters' => $parameters]);
-        $this->call(UserSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(CategorySeeder::class, false, ['parameters' => $parameters]);
+        $this->call(CoreSeeder::class, false, ['parameters' => $parameters]);
         $this->call(CustomerSeeder::class, false, ['parameters' => $parameters]);
         $this->call(CMSSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(InventorySeeder::class, false, ['parameters' => $parameters]);
         $this->call(SocialLoginSeeder::class, false, ['parameters' => $parameters]);
         $this->call(ShopSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(UserSeeder::class, false, ['parameters' => $parameters]);
     }
 }

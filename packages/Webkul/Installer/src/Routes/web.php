@@ -15,6 +15,8 @@ Route::middleware(['web', 'installer_locale'])->group(function () {
 
             Route::post('run-seeder', 'runSeeder')->name('installer.run_seeder')->withoutMiddleware('web');
 
+            Route::get('download-sample', 'downloadSample')->name('installer.download_sample')->withoutMiddleware('web');
+
             Route::post('admin-config-setup', 'adminConfigSetup')->name('installer.admin_config_setup')->withoutMiddleware('web');
         });
     });

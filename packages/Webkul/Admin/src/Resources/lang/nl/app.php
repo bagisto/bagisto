@@ -3102,6 +3102,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Actief',
                 'add-filter-btn'                => 'Filter toevoegen',
                 'add-footer-link-btn'           => 'Voettekstlink toevoegen',
                 'add-image-btn'                 => 'Afbeelding toevoegen',
@@ -3126,6 +3127,7 @@ return [
                 'footer-title'                  => 'Titel',
                 'general'                       => 'Algemeen',
                 'html'                          => 'HTML',
+                'parent-id'                     => 'Ouder-ID',
                 'image'                         => 'Afbeelding',
                 'image-size'                    => 'Afbeeldingsresolutie moet zijn (1920px X 700px)',
                 'image-title'                   => 'Afbeeldingstitel',
