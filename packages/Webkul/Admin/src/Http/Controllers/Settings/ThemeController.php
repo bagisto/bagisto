@@ -94,6 +94,7 @@ class ThemeController extends Controller
             'sort_order' => 'required|numeric',
             'type'       => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
             'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
+            'theme'      => 'required',
         ]);
 
         $locale = request('locale');
@@ -104,6 +105,7 @@ class ThemeController extends Controller
             'name',
             'sort_order',
             'channel_id',
+            'theme',
             'status',
             $locale
         );

@@ -3161,6 +3161,7 @@ return [
                 'url'                           => '网址',
                 'value'                         => '值：:value',
                 'value-input'                   => '值',
+                'themes'                        => '主题',
 
                 'services-content' => [
                     'add-btn'            => '添加服务',

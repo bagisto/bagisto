@@ -223,6 +223,30 @@
                             <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
+                        <!-- Themes -->
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.themes.edit.themes')
+                            </x-admin::form.control-group.label>
+    
+                            <x-admin::form.control-group.control
+                                type="select"
+                                id="theme"
+                                name="theme"
+                                :value="$theme->theme"
+                                rules="required"
+                                :label="trans('admin::app.settings.themes.edit.themes')"
+                            >
+                                @foreach (config('themes.shop') as $themeCode => $themes)
+                                    <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
+                                        {{ $themes['name'] }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+    
+                            <x-admin::form.control-group.error control-name="theme" />
+                        </x-admin::form.control-group>
+
                         <!-- Status -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
