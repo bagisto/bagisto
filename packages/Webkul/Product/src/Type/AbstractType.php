@@ -307,8 +307,14 @@ abstract class AbstractType
         }
 
         if (! in_array('customer_group_prices', $attributesToSkip)) {
-            foreach ($this->product->customer_group_prices as $customer_group_price) {
-                $product->customer_group_prices()->save($customer_group_price->replicate());
+            foreach ($this->product->customer_group_prices as $customerGroupPrice) {
+                $product->customer_group_prices()->save($customerGroupPrice->replicate()->fill([
+                    'unique_id' => implode('|', array_filter([
+                        $customerGroupPrice->qty,
+                        $product->id,
+                        $customerGroupPrice->customer_group_id,
+                    ])),
+                ]));
             }
         }
 
