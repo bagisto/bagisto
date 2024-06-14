@@ -60,6 +60,8 @@
 
             props: ['isLoading', 'available', 'applied'],
 
+            emits: ['search'],
+
             data() {
                 return {
                     filters: {

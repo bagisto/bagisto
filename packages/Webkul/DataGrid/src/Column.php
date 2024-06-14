@@ -3,196 +3,351 @@
 namespace Webkul\DataGrid;
 
 use Webkul\DataGrid\Enums\ColumnTypeEnum;
-use Webkul\DataGrid\Enums\FormInputTypeEnum;
-use Webkul\DataGrid\Enums\RangeOptionEnum;
+use Webkul\DataGrid\Exceptions\InvalidColumnException;
 
 class Column
 {
     /**
-     * Fully qualified database column name.
+     * Column's index.
      */
-    public $databaseColumnName;
+    protected string $index;
 
     /**
-     * Form input type.
+     * Column's label.
      */
-    protected ?string $formInputType = null;
+    protected string $label;
 
     /**
-     * Form options.
+     * Column's type.
      */
-    protected ?array $formOptions = null;
+    protected string $type;
+
+    /**
+     * Column's searchability.
+     */
+    protected bool $searchable = false;
+
+    /**
+     * Column's filterability.
+     */
+    protected bool $filterable = false;
+
+    /**
+     * Column's filterable type.
+     */
+    protected ?string $filterableType = null;
+
+    /**
+     * Column's filterable options.
+     */
+    protected array $filterableOptions = [];
+
+    /**
+     * Column's allow multiple values.
+     */
+    protected bool $allowMultipleValues = true;
+
+    /**
+     * Column's sortability.
+     */
+    protected bool $sortable = false;
+
+    /**
+     * Column's visibility.
+     */
+    protected bool $visibility = true;
+
+    /**
+     * Column's closure.
+     */
+    protected mixed $closure = null;
+
+    /**
+     * Fully qualified table's column name.
+     */
+    protected $columnName;
 
     /**
      * Create a column instance.
      */
-    public function __construct(
-        public string $index,
-        public string $label,
-        public string $type,
-        public ?array $options = null,
-        public bool $searchable = false,
-        public bool $filterable = false,
-        public bool $sortable = false,
-        public mixed $closure = null,
-    ) {
-        $this->init();
+    public function __construct(array $column)
+    {
+        $this->init($column);
     }
 
     /**
      * Initialize all necessary settings for the columns.
      */
-    public function init(): void
+    public function init(array $column): void
     {
-        $this->setDatabaseColumnName();
+        $this->setIndex($column['index']);
 
-        switch ($this->type) {
-            case ColumnTypeEnum::BOOLEAN->value:
-                $this->setFormOptions($this->getBooleanOptions());
+        $this->setLabel($column['label']);
 
-                break;
+        $this->setType($column['type']);
 
-            case ColumnTypeEnum::DROPDOWN->value:
-                $this->setFormOptions($this->options);
+        $this->setSearchable($column['searchable'] ?? $this->searchable);
 
-                break;
+        $this->setFilterable($column['filterable'] ?? $this->filterable);
 
-            case ColumnTypeEnum::DATE_RANGE->value:
-                $this->setFormInputType(FormInputTypeEnum::DATE->value);
+        $this->setFilterableType($column['filterable_type'] ?? $this->filterableType);
 
-                $this->setFormOptions($this->getRangeOptions());
+        $this->setFilterableOptions($column['filterable_options'] ?? $this->filterableOptions);
 
-                break;
+        $this->setAllowMultipleValues($column['allow_multiple_values'] ?? $this->allowMultipleValues);
 
-            case ColumnTypeEnum::DATE_TIME_RANGE->value:
-                $this->setFormInputType(FormInputTypeEnum::DATE_TIME->value);
+        $this->setSortable($column['sortable'] ?? $this->sortable);
 
-                $this->setFormOptions($this->getRangeOptions('Y-m-d H:i:s'));
+        $this->setVisibility($column['visibility'] ?? $this->visibility);
 
-                break;
+        $this->setClosure($column['closure'] ?? $this->closure);
+
+        $this->setColumnName($this->index);
+    }
+
+    /**
+     * Set index.
+     */
+    public function setIndex(string $index): void
+    {
+        $this->index = $index;
+    }
+
+    /**
+     * Get index.
+     */
+    public function getIndex(): string
+    {
+        return $this->index;
+    }
+
+    /**
+     * Set label.
+     */
+    public function setLabel(string $label): void
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * Get label.
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * Set type.
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get type.
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set searchable.
+     */
+    public function setSearchable(bool $searchable): void
+    {
+        $this->searchable = $searchable;
+    }
+
+    /**
+     * Get searchable.
+     */
+    public function getSearchable(): bool
+    {
+        return $this->searchable;
+    }
+
+    /**
+     * Set filterable.
+     */
+    public function setFilterable(bool $filterable): void
+    {
+        $this->filterable = $filterable;
+    }
+
+    /**
+     * Get filterable.
+     */
+    public function getFilterable(): bool
+    {
+        return $this->filterable;
+    }
+
+    /**
+     * Set filterable type.
+     */
+    public function setFilterableType(?string $filterableType): void
+    {
+        $this->filterableType = $filterableType;
+    }
+
+    /**
+     * Get filterable type.
+     */
+    public function getFilterableType(): ?string
+    {
+        return $this->filterableType;
+    }
+
+    /**
+     * Set filterable options.
+     */
+    public function setFilterableOptions(mixed $filterableOptions): void
+    {
+        if ($filterableOptions instanceof \Closure) {
+            $filterableOptions = $filterableOptions();
+        }
+
+        $this->filterableOptions = $filterableOptions;
+    }
+
+    /**
+     * Get filterable options.
+     */
+    public function getFilterableOptions(): array
+    {
+        return $this->filterableOptions;
+    }
+
+    /**
+     * Set allow multiple values.
+     */
+    public function setAllowMultipleValues(bool $allowMultipleValues): void
+    {
+        $this->allowMultipleValues = $allowMultipleValues;
+    }
+
+    /**
+     * Get allow multiple values.
+     */
+    public function getAllowMultipleValues(): bool
+    {
+        return $this->allowMultipleValues;
+    }
+
+    /**
+     * Set sortable.
+     */
+    public function setSortable(?bool $sortable = null): void
+    {
+        $this->sortable = $sortable;
+    }
+
+    /**
+     * Get sortable.
+     */
+    public function getSortable(): bool
+    {
+        return $this->sortable;
+    }
+
+    /**
+     * Set visibility.
+     */
+    public function setVisibility(bool $visibility): void
+    {
+        $this->visibility = $visibility;
+    }
+
+    /**
+     * Get visibility.
+     */
+    public function getVisibility(): bool
+    {
+        return $this->visibility;
+    }
+
+    /**
+     * Set closure.
+     */
+    public function setClosure(mixed $closure): void
+    {
+        $this->closure = $closure;
+    }
+
+    /**
+     * Get closure.
+     */
+    public function getClosure(): mixed
+    {
+        return $this->closure;
+    }
+
+    /**
+     * Define the table's column name. Initially, it will match the index. However, after adding an alias,
+     * the column name may change.
+     */
+    public function setColumnName(mixed $columnName): void
+    {
+        $this->columnName = $columnName;
+    }
+
+    /**
+     * Get the table's column name.
+     */
+    public function getColumnName(): mixed
+    {
+        return $this->columnName;
+    }
+
+    /**
+     * To array.
+     */
+    public function toArray(): array
+    {
+        return [
+            'index'                 => $this->index,
+            'label'                 => $this->label,
+            'type'                  => $this->type,
+            'searchable'            => $this->searchable,
+            'filterable'            => $this->filterable,
+            'filterable_type'       => $this->filterableType,
+            'filterable_options'    => $this->filterableOptions,
+            'allow_multiple_values' => $this->allowMultipleValues,
+            'sortable'              => $this->sortable,
+            'visibility'            => $this->visibility,
+        ];
+    }
+
+    /**
+     * Validate the column.
+     */
+    public static function validate(array $column): void
+    {
+        if (empty($column['index'])) {
+            throw new InvalidColumnException('The `index` key is required. Ensure that the `index` key is present in all calls to the `addColumn` method.');
+        }
+
+        if (empty($column['label'])) {
+            throw new InvalidColumnException('The `label` key is required. Ensure that the `label` key is present in all calls to the `addColumn` method.');
+        }
+
+        if (empty($column['type'])) {
+            throw new InvalidColumnException('The `type` key is required. Ensure that the `type` key is present in all calls to the `addColumn` method.');
         }
     }
 
     /**
-     * Define the database column name. Initially, it will match the index. However, after adding an alias,
-     * the column name may change.
+     * Resolve the column type class.
      */
-    public function setDatabaseColumnName(mixed $databaseColumnName = null): void
+    public static function resolveType(array $column): self
     {
-        $this->databaseColumnName = $databaseColumnName ?: $this->index;
-    }
+        self::validate($column);
 
-    /**
-     * Get the database column name.
-     */
-    public function getDatabaseColumnName(): mixed
-    {
-        return $this->databaseColumnName;
-    }
+        $columnTypeClass = ColumnTypeEnum::getClassName($column['type']);
 
-    /**
-     * Set form input type.
-     */
-    public function setFormInputType(string $formInputType): void
-    {
-        $this->formInputType = $formInputType;
-    }
-
-    /**
-     * Get form input type.
-     */
-    public function getFormInputType(): ?string
-    {
-        return $this->formInputType;
-    }
-
-    /**
-     * Set form options.
-     */
-    public function setFormOptions(array $formOptions): void
-    {
-        $this->formOptions = $formOptions;
-    }
-
-    /**
-     * Get form options.
-     */
-    public function getFormOptions(): ?array
-    {
-        return $this->formOptions;
-    }
-
-    /**
-     * Get boolean options.
-     */
-    public function getBooleanOptions(): array
-    {
-        return [
-            [
-                'label' => trans('admin::app.components.datagrid.filters.boolean-options.true'),
-                'value' => 1,
-            ],
-            [
-                'label' => trans('admin::app.components.datagrid.filters.boolean-options.false'),
-                'value' => 0,
-            ],
-        ];
-    }
-
-    /**
-     * Get range options.
-     */
-    public function getRangeOptions(string $format = 'Y-m-d'): array
-    {
-        return [
-            [
-                'name'  => RangeOptionEnum::TODAY->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.today'),
-                'from'  => now()->today()->format($format),
-                'to'    => now()->today()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::YESTERDAY->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.yesterday'),
-                'from'  => now()->yesterday()->format($format),
-                'to'    => now()->yesterday()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::THIS_WEEK->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.this-week'),
-                'from'  => now()->startOfWeek()->format($format),
-                'to'    => now()->endOfWeek()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::THIS_MONTH->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.this-month'),
-                'from'  => now()->startOfMonth()->format($format),
-                'to'    => now()->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::LAST_MONTH->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.last-month'),
-                'from'  => now()->subMonth(1)->startOfMonth()->format($format),
-                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::LAST_THREE_MONTHS->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.last-three-months'),
-                'from'  => now()->subMonth(3)->startOfMonth()->format($format),
-                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::LAST_SIX_MONTHS->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.last-six-months'),
-                'from'  => now()->subMonth(6)->startOfMonth()->format($format),
-                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => RangeOptionEnum::THIS_YEAR->value,
-                'label' => trans('admin::app.components.datagrid.filters.date-options.this-year'),
-                'from'  => now()->startOfYear()->format($format),
-                'to'    => now()->endOfYear()->format($format),
-            ],
-        ];
+        return new $columnTypeClass($column);
     }
 }

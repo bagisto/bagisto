@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Webkul\Admin\DataGrids\Sales\OrderShipmentsDataGrid;
+use Webkul\Admin\DataGrids\Sales\OrderShipmentDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -30,7 +30,7 @@ class ShipmentController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return datagrid(OrderShipmentsDataGrid::class)->process();
+            return datagrid(OrderShipmentDataGrid::class)->process();
         }
 
         return view('admin::sales.shipments.index');

@@ -143,6 +143,29 @@
 
                                     <x-admin::form.control-group.error control-name="type" />
                                 </x-admin::form.control-group>
+
+                                 <!-- Theme Selector -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.create.themes')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        id="theme_code"
+                                        name="theme_code"
+                                        :value="config('themes.admin-default')"
+                                        :label="trans('admin::app.settings.themes.create.themes')"
+                                    >
+                                        @foreach (config('themes.shop') as $themeCode => $theme)
+                                            <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
+                                                {{ $theme['name'] }}
+                                            </option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error control-name="theme" />
+                                </x-admin::form.control-group>
                             </x-slot>
 
                             <x-slot:footer>
