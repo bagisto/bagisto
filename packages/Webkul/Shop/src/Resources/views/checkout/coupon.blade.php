@@ -12,13 +12,13 @@
         id="v-coupon-template"
     >
         <div class="flex justify-between text-right">
-            <p class="text-base max-md:font-normal max-sm:text-sm">
+            <p class="text-base max-md:text-sm max-md:font-normal">
                 @{{ cart.coupon_code ? "@lang('shop::app.checkout.coupon.applied')" : "@lang('shop::app.checkout.coupon.discount')" }}
             </p>
 
             {!! view_render_event('bagisto.shop.checkout.cart.coupon.before') !!}
 
-            <p class="text-base font-medium max-sm:text-sm">
+            <p class="text-base font-medium max-md:text-sm">
                 <!-- Apply Coupon Form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -33,7 +33,7 @@
                             <!-- Modal Toggler -->
                             <x-slot:toggle>
                                 <span 
-                                    class="cursor-pointer text-base text-blue-700 max-sm:text-sm"
+                                    class="cursor-pointer text-blue-700"
                                     role="button"
                                     tabindex="0"
                                     v-if="! cart.coupon_code"

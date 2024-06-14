@@ -28,7 +28,7 @@
                     ></span>
 
                     <span
-                        class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-[9px] text-white ltr:left-5 max-md:ltr:left-4 rtl:right-5 max-md:rtl:right-4"
+                        class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-[9px] text-white max-md:px-2 max-md:py-1.5 ltr:left-5 max-md:ltr:left-4 rtl:right-5 max-md:rtl:right-4"
                         v-if="cart?.items_qty"
                     >
                         @{{ cart.items_qty }}
@@ -43,12 +43,12 @@
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.header.before') !!}
 
                 <div class="flex items-center justify-between">
-                    <p class="text-2xl font-medium max-md:text-xl max-sm:text-xl">
+                    <p class="text-2xl font-medium max-md:text-base">
                         @lang('shop::app.checkout.cart.mini-cart.shopping-cart')
                     </p>
                 </div>
 
-                <p class="text-base max-md:text-zinc-500 max-sm:text-xs">
+                <p class="text-base max-md:text-xs max-md:text-zinc-500">
                     @lang('shop::app.checkout.cart.mini-cart.offer-on-orders')
                 </p>
 
@@ -88,11 +88,8 @@
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
 
-                                <a
-                                    class="max-w-4/5 max-md:w-full"
-                                    :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`"
-                                >
-                                    <p class="text-base font-medium max-md:font-normal max-sm:text-sm">
+                                <a  class="max-w-4/5 max-md:w-full" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                    <p class="text-base font-medium max-md:text-sm max-md:font-normal">
                                         @{{ item.name }}
                                     </p>
                                 </a>
@@ -102,13 +99,13 @@
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.before') !!}
 
                                 <template v-if="displayTax.prices == 'including_tax'">
-                                    <p class="text-lg max-md:font-semibold max-sm:text-sm">
+                                    <p class="text-lg max-md:text-sm max-md:font-semibold">
                                         @{{ item.formatted_price_incl_tax }}
                                     </p>
                                 </template>
 
                                 <template v-else-if="displayTax.prices == 'both'">
-                                    <p class="flex flex-col text-lg max-md:font-semibold max-sm:text-sm">
+                                    <p class="flex flex-col text-lg max-md:text-sm max-md:font-semibold">
                                         @{{ item.formatted_price_incl_tax }}
 
                                         <span class="text-xs font-normal text-zinc-500">
@@ -120,7 +117,7 @@
                                 </template>
 
                                 <template v-else>
-                                    <p class="text-lg max-md:font-semibold max-sm:text-sm">
+                                    <p class="text-lg max-md:text-sm max-md:font-semibold">
                                         @{{ item.formatted_price }}
                                     </p>
                                 </template>
@@ -130,7 +127,7 @@
 
                             <!-- Cart Item Options Container -->
                             <div
-                                class="grid select-none gap-x-2.5 gap-y-1.5 max-sm:gap-y-0.5"
+                                class="grid select-none gap-x-2.5 gap-y-1.5 max-md:gap-y-0.5"
                                 v-if="item.options.length"
                             >
 
@@ -139,13 +136,13 @@
                                 <!-- Details Toggler -->
                                 <div class="">
                                     <p
-                                        class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-md:text-sm max-sm:text-xs"
+                                        class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-md:text-xs"
                                         @click="item.option_show = ! item.option_show"
                                     >
                                         @lang('shop::app.checkout.cart.mini-cart.see-details')
 
                                         <span
-                                            class="text-2xl max-md:text-xl max-sm:text-lg"
+                                            class="text-2xl max-md:text-lg"
                                             :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
                                         ></span>
                                     </p>
@@ -158,11 +155,11 @@
                                 >
                                     <template v-for="option in item.options">
                                         <div class="max-md:grid max-md:gap-0.5">
-                                            <p class="text-sm font-medium text-zinc-500 max-md:font-normal max-sm:text-xs">
+                                            <p class="text-sm font-medium text-zinc-500 max-md:text-xs max-md:font-normal">
                                                 @{{ option.attribute_name + ':' }}
                                             </p>
     
-                                            <p class="text-sm max-sm:text-xs">
+                                            <p class="text-sm max-md:text-xs">
                                                 @{{ option.option_label }}
                                             </p>
                                         </div>
@@ -177,7 +174,7 @@
 
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
-                                    class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-2 max-md:py-0.5 max-sm:px-1"
+                                    class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
                                     name="quantity"
                                     ::value="item?.quantity"
                                     @change="updateItem($event, item)"
@@ -190,7 +187,7 @@
                                 <!-- Cart Item Remove Button -->
                                 <button
                                     type="button"
-                                    class="text-blue-700 max-sm:text-sm"
+                                    class="text-blue-700 max-md:text-sm"
                                     @click="removeItem(item.id)"
                                 >
                                     @lang('shop::app.checkout.cart.mini-cart.remove')
@@ -232,7 +229,6 @@
                     class="grid-col-1 grid gap-5 max-md:gap-2.5"
                 >
                     <div class="my-8 flex items-center justify-between border-b border-zinc-200 px-6 pb-2 max-md:my-0 max-md:border-t max-md:px-5 max-md:py-2">
-
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
 
                         <p class="text-sm font-medium text-zinc-500">
@@ -241,13 +237,13 @@
 
                         <template v-if="! isLoading">
                             <template v-if="displayTax.subtotal == 'including_tax'">
-                                <p class="text-3xl font-semibold max-md:text-xl max-sm:text-base">
+                                <p class="text-3xl font-semibold max-md:text-base">
                                     @{{ cart.formatted_sub_total_incl_tax }}
                                 </p>
                             </template>
 
                             <template v-else-if="displayTax.subtotal == 'both'">
-                                <p class="flex flex-col text-3xl font-semibold max-md:text-xl max-sm:text-right max-sm:text-sm">
+                                <p class="flex flex-col text-3xl font-semibold max-md:text-sm max-sm:text-right">
                                     @{{ cart.formatted_sub_total_incl_tax }}
                                     
                                     <span class="text-sm font-normal text-zinc-500 max-sm:text-xs">
@@ -259,7 +255,7 @@
                             </template>
 
                             <template v-else>
-                                <p class="text-3xl font-semibold max-md:text-xl max-sm:text-base">
+                                <p class="text-3xl font-semibold max-md:text-base">
                                     @{{ cart.formatted_sub_total }}
                                 </p>
                             </template>
@@ -269,7 +265,7 @@
                             <div class="flex items-center justify-center">
                                 <!-- Spinner -->
                                 <svg
-                                    class="text-blue absolute h-8 w-8 animate-spin text-[5px] font-semibold max-md:h-7 max-md:w-7 max-sm:h-4 max-sm:w-4"
+                                    class="text-blue absolute h-8 w-8 animate-spin text-[5px] font-semibold max-md:h-4 max-md:w-4"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     aria-hidden="true"
@@ -291,7 +287,7 @@
                                     ></path>
                                 </svg>
                     
-                                <span class="realative text-3xl font-semibold opacity-0 max-md:text-xl max-sm:text-base">
+                                <span class="realative text-3xl font-semibold opacity-0 max-md:text-base">
                                     @{{ cart.formatted_grand_total }}
                                 </span>
                             </div>
@@ -308,7 +304,7 @@
 
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
-                            class="mx-auto block w-full cursor-pointer rounded-2xl bg-navyBlue px-11 py-4 text-center text-base font-medium text-white max-md:rounded-lg max-md:px-5 max-md:py-3 max-sm:py-2"
+                            class="mx-auto block w-full cursor-pointer rounded-2xl bg-navyBlue px-11 py-4 text-center text-base font-medium text-white max-md:rounded-lg max-md:px-5 max-md:py-2"
                         >
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>
