@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.2 (14th of June 2024)** - *Release*
+## **v2.2.0 (14th of June 2024)** - *Release*
 
 ### Datagrid Improvements
 
@@ -43,6 +43,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 * Enabled administrators to order and reorder items directly from the admin interface, enhancing management efficiency. 
 
 * Implemented the ability for customers to reorder products directly from their account, streamlining the purchasing process and enhancing user convenience.
+
+### Enhanced Theme Customization
+
+* The theme_customizations table now supports customizations for multiple themes and multiple channels. This enhancement allows you to define different customizations for each theme and channel combination, providing greater flexibility and control over your application's appearance.
 
 ### Redesigned Invoice Layout:
 
