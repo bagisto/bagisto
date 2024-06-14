@@ -724,7 +724,7 @@ return [
         'key'  => 'catalog.inventory',
         'name' => 'admin::app.configuration.index.catalog.inventory.title',
         'info' => 'admin::app.configuration.index.catalog.inventory.title-info',
-        'icon' => 'settings/settings.svg',
+        'icon' => 'settings/inventory.svg',
         'sort' => 3,
     ], [
         'key'    => 'catalog.inventory.stock_options',
@@ -741,7 +741,7 @@ return [
                 'name'          => 'maximum_product',
                 'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.max-qty-allowed-in-cart',
                 'type'          => 'text',
-                'default'       => '11',
+                'default'       => '10',
             ], [
                 'name'          => 'minimum_product',
                 'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.min-qty-allowed-in-cart',
@@ -2129,7 +2129,7 @@ return [
         'key'  => 'sales.checkout',
         'name' => 'admin::app.configuration.index.sales.checkout.title',
         'info' => 'admin::app.configuration.index.sales.checkout.info',
-        'icon' => 'settings/tax.svg',
+        'icon' => 'settings/checkout.svg',
         'sort' => 7,
     ], [
         'key'    => 'sales.checkout.shopping_cart',
@@ -2173,7 +2173,7 @@ return [
                 'name'    => 'summary',
                 'title'   => 'admin::app.configuration.index.sales.checkout.my-cart.summary',
                 'type'    => 'select',
-                'default' => 'display_item_quantity',
+                'default' => 'display_number_of_items_in_cart',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.sales.checkout.my-cart.display-item-quantities',
