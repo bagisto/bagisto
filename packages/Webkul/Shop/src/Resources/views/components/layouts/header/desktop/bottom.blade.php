@@ -161,7 +161,7 @@
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
-                                class="secondary-button m-0 mx-auto block w-max rounded-2xl border-2 px-7 text-center text-base max-md:rounded-lg max-md:py-3 ltr:ml-0 rtl:mr-0"
+                                class="secondary-button m-0 mx-auto block w-max rounded-2xl border-2 px-7 text-center text-base max-md:rounded-lg ltr:ml-0 rtl:mr-0"
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
