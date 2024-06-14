@@ -35,7 +35,7 @@ class Configurable extends AbstractType
      *
      * @var array
      */
-    protected $fillableTypes = [
+    protected $fillableVariantAttributeCodes = [
         'sku',
         'name',
         'url_key',
@@ -96,7 +96,7 @@ class Configurable extends AbstractType
      */
     public function create(array $data)
     {
-        $product = $this->productRepository->getModel()->create($data);
+        $product = parent::create($data);
 
         if (! isset($data['super_attributes'])) {
             return $product;
@@ -117,7 +117,10 @@ class Configurable extends AbstractType
         }
 
         foreach (array_permutation($superAttributes) as $permutation) {
-            $this->createVariant($product, $permutation);
+            $this->createVariant($product, $permutation, [
+                'channel' => $data['channel'] ?? core()->getDefaultChannelCode(),
+                'locale'  => $data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel(),
+            ]);
         }
 
         return $product;
@@ -140,29 +143,28 @@ class Configurable extends AbstractType
 
         $previousVariantIds = $product->variants->pluck('id');
 
-        if (isset($data['variants'])) {
-            foreach ($data['variants'] as $variantId => $variantData) {
-                if (Str::contains($variantId, 'variant_')) {
-                    $permutation = [];
+        foreach ($data['variants'] ?? [] as $variantId => $variantData) {
+            if (Str::contains($variantId, 'variant_')) {
+                $permutation = [];
 
-                    foreach ($product->super_attributes as $superAttribute) {
-                        $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
-                    }
-
-                    $this->createVariant($product, $permutation, $variantData);
-                } else {
-                    if (is_numeric($index = $previousVariantIds->search($variantId))) {
-                        $previousVariantIds->forget($index);
-                    }
-
-                    $variantData['channel'] = $data['channel'];
-
-                    $variantData['locale'] = $data['locale'];
-
-                    $variantData['tax_category_id'] = $data['tax_category_id'] ?? null;
-
-                    $this->updateVariant($variantData, $variantId);
+                foreach ($product->super_attributes as $superAttribute) {
+                    $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
                 }
+
+                $this->createVariant($product, $permutation, array_merge($variantData, [
+                    'channel' => $data['channel'] ?? core()->getDefaultChannelCode(),
+                    'locale'  => $data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel(),
+                ]));
+            } else {
+                if (is_numeric($index = $previousVariantIds->search($variantId))) {
+                    $previousVariantIds->forget($index);
+                }
+
+                $this->updateVariant(array_merge($variantData, [
+                    'channel'         => $data['channel'] ?? core()->getDefaultChannelCode(),
+                    'locale'          => $data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel(),
+                    'tax_category_id' => $data['tax_category_id'] ?? null,
+                ]), $variantId);
             }
         }
 
@@ -196,31 +198,16 @@ class Configurable extends AbstractType
             'description'       => $sku,
         ], $data);
 
-        $typeOfVariants = 'simple';
-
-        $productInstance = app(config('product_types.'.$product->type.'.class'));
-
-        if (
-            isset($productInstance->variantsType)
-            && ! in_array($productInstance->variantsType, ['bundle', 'configurable', 'grouped'])
-        ) {
-            $typeOfVariants = $productInstance->variantsType;
-        }
-
-        $variant = $this->productRepository->getModel()->create([
+        $variant = parent::create([
             'parent_id'           => $product->id,
-            'type'                => $typeOfVariants,
+            'type'                => 'simple',
             'attribute_family_id' => $product->attribute_family_id,
             'sku'                 => $data['sku'],
         ]);
 
         $attributeValues = [];
 
-        $channels = core()->getAllChannels();
-
-        $locales = core()->getAllLocales();
-
-        foreach ($this->fillableTypes as $attributeCode) {
+        foreach ($this->fillableVariantAttributeCodes as $attributeCode) {
             if (! isset($data[$attributeCode])) {
                 continue;
             }
@@ -231,49 +218,18 @@ class Configurable extends AbstractType
                 $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
             }
 
-            $attributeTypeFields = $this->getAttributeTypeValues($attribute, $data[$attributeCode]);
-
-            if ($attribute->value_per_channel) {
-                if ($attribute->value_per_locale) {
-                    foreach ($channels as $channel) {
-                        foreach ($locales as $locale) {
-                            $attributeValues[] = array_merge($attributeTypeFields, [
-                                'product_id'   => $variant->id,
-                                'attribute_id' => $attribute->id,
-                                'channel'      => $channel->code,
-                                'locale'       => $locale->code,
-                            ]);
-                        }
-                    }
-                } else {
-                    foreach ($channels as $channel) {
-                        $attributeValues[] = array_merge($attributeTypeFields, [
-                            'product_id'   => $variant->id,
-                            'attribute_id' => $attribute->id,
-                            'channel'      => $channel->code,
-                            'locale'       => null,
-                        ]);
-                    }
-                }
-            } else {
-                if ($attribute->value_per_locale) {
-                    foreach ($locales as $locale) {
-                        $attributeValues[] = array_merge($attributeTypeFields, [
-                            'product_id'   => $variant->id,
-                            'attribute_id' => $attribute->id,
-                            'channel'      => null,
-                            'locale'       => $locale->code,
-                        ]);
-                    }
-                } else {
-                    $attributeValues[] = array_merge($attributeTypeFields, [
-                        'product_id'   => $variant->id,
-                        'attribute_id' => $attribute->id,
-                        'channel'      => null,
-                        'locale'       => null,
-                    ]);
-                }
-            }
+            $attributeValues[] = array_merge($this->getAttributeTypeValues($attribute, $data[$attributeCode]), [
+                'product_id'   => $variant->id,
+                'attribute_id' => $attribute->id,
+                'channel'      => $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null,
+                'locale'       => $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null,
+                'unique_id'    => implode('|', array_filter([
+                    $channel,
+                    $locale,
+                    $variant->id,
+                    $attribute->id,
+                ])),
+            ]);
         }
 
         foreach ($permutation as $attributeId => $optionId) {
@@ -286,8 +242,14 @@ class Configurable extends AbstractType
             $attributeValues[] = array_merge($this->getAttributeTypeValues($attribute, $optionId), [
                 'product_id'   => $variant->id,
                 'attribute_id' => $attributeId,
-                'channel'      => null,
-                'locale'       => null,
+                'channel'      => $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null,
+                'locale'       => $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null,
+                'unique_id'    => implode('|', array_filter([
+                    $channel,
+                    $locale,
+                    $variant->id,
+                    $attribute->id,
+                ])),
             ]);
         }
 
@@ -296,6 +258,87 @@ class Configurable extends AbstractType
         $this->productInventoryRepository->saveInventories($data, $variant);
 
         $this->productImageRepository->upload($data, $variant, 'images');
+
+        $variant->channels()->sync($product->channels->pluck('id')->toArray());
+
+        return $variant;
+    }
+
+    /**
+     * Update variant.
+     *
+     * @param  int  $id
+     * @return \Webkul\Product\Contracts\Product
+     */
+    public function updateVariant(array $data, $id)
+    {
+        $variant = $this->productRepository->find($id);
+
+        $variant->update(['sku' => $data['sku']]);
+
+        foreach ($this->fillableVariantAttributeCodes as $attributeCode) {
+            if (! isset($data[$attributeCode])) {
+                continue;
+            }
+
+            $attribute = $this->attributesByCode[$attributeCode] ?? null;
+
+            if (empty($attribute)) {
+                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
+            }
+
+            $attributeValues = $variant->attribute_values
+                ->where('attribute_id', $attribute->id);
+
+            $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null;
+
+            $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null;
+
+            if ($attribute->value_per_channel) {
+                if ($attribute->value_per_locale) {
+                    $filteredAttributeValues = $attributeValues
+                        ->where('channel', $channel)
+                        ->where('locale', $locale);
+                } else {
+                    $filteredAttributeValues = $attributeValues
+                        ->where('channel', $channel);
+                }
+            } else {
+                if ($attribute->value_per_locale) {
+                    $filteredAttributeValues = $attributeValues
+                        ->where('locale', $locale);
+                } else {
+                    $filteredAttributeValues = $attributeValues;
+                }
+            }
+
+            $attributeValue = $filteredAttributeValues->first();
+
+            $uniqueId = implode('|', array_filter([
+                $channel,
+                $locale,
+                $variant->id,
+                $attribute->id,
+            ]));
+
+            if (! $attributeValue) {
+                $this->attributeValueRepository->create([
+                    'product_id'            => $variant->id,
+                    'attribute_id'          => $attribute->id,
+                    $attribute->column_name => $data[$attribute->code],
+                    'channel'               => $attribute->value_per_channel ? $data['channel'] : null,
+                    'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
+                    'unique_id'             => $uniqueId,
+                ]);
+            } else {
+                $attributeValue->update([
+                    $attribute->column_name => $data[$attribute->code],
+                    'unique_id'             => $uniqueId,
+                ]);
+            }
+        }
+
+        $this->productInventoryRepository->saveInventories($data, $variant);
 
         $variant->channels()->sync($variant->parent->channels->pluck('id')->toArray());
 
@@ -314,87 +357,6 @@ class Configurable extends AbstractType
         $attributeTypeFields[$attribute->column_name] = $value;
 
         return $attributeTypeFields;
-    }
-
-    /**
-     * Update variant.
-     *
-     * @param  int  $id
-     * @return \Webkul\Product\Contracts\Product
-     */
-    public function updateVariant(array $data, $id)
-    {
-        $variant = $this->productRepository->find($id);
-
-        $variant->update(['sku' => $data['sku']]);
-
-        foreach ($this->fillableTypes as $attributeCode) {
-            if (! isset($data[$attributeCode])) {
-                continue;
-            }
-
-            $attribute = $this->attributesByCode[$attributeCode] ?? null;
-
-            if (empty($attribute)) {
-                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
-            }
-
-            $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null;
-
-            $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null;
-
-            if ($attribute->value_per_channel) {
-                if ($attribute->value_per_locale) {
-                    $productAttributeValue = $variant->attribute_values
-                        ->where('channel', $channel)
-                        ->where('locale', $locale)
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
-                } else {
-                    $productAttributeValue = $variant->attribute_values
-                        ->where('channel', $channel)
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
-                }
-            } else {
-                if ($attribute->value_per_locale) {
-                    $productAttributeValue = $variant->attribute_values
-                        ->where('locale', $locale)
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
-                } else {
-                    $productAttributeValue = $variant->attribute_values
-                        ->where('attribute_id', $attribute->id)
-                        ->first();
-                }
-            }
-
-            if (! $productAttributeValue) {
-                $uniqueId = implode('|', array_filter([
-                    $channel,
-                    $locale,
-                    $variant->id,
-                    $attribute->id,
-                ]));
-
-                $this->attributeValueRepository->create([
-                    'product_id'            => $variant->id,
-                    'attribute_id'          => $attribute->id,
-                    $attribute->column_name => $data[$attribute->code],
-                    'channel'               => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
-                    'unique_id'             => $uniqueId,
-                ]);
-            } else {
-                $productAttributeValue->update([$attribute->column_name => $data[$attribute->code]]);
-            }
-        }
-
-        $this->productInventoryRepository->saveInventories($data, $variant);
-
-        $variant->channels()->sync($variant->parent->channels->pluck('id')->toArray());
-
-        return $variant;
     }
 
     /**
