@@ -197,7 +197,7 @@
 
                 <div class="action-items bg-black">
                     <p
-                        class="absolute top-5 inline-block rounded-[44px] bg-[#E51A1A] px-2.5 text-sm text-white ltr:left-5 max-sm:ltr:left-2 rtl:right-5"
+                        class="absolute top-5 inline-block rounded-[44px] bg-red-500 px-2.5 text-sm text-white ltr:left-5 max-sm:ltr:left-2 rtl:right-5"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
@@ -271,7 +271,7 @@
                     <span class="block h-[30px] w-[30px] rounded-full bg-[#B5DCB4]">
                     </span>
 
-                    <span class="block h-[30px] w-[30px] rounded-full bg-[#5C5C5C]">
+                    <span class="block h-[30px] w-[30px] rounded-full bg-zinc-500">
                     </span>
                 </div>
 
