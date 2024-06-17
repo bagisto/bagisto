@@ -8,7 +8,7 @@
         type="text/x-template"
         id="v-static-content-template"
     >
-        <div class="flex min-w-[931px] flex-1 flex-col gap-2 max-xl:flex-auto">
+        <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
             <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                 <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
                     <div class="flex flex-col gap-1">
@@ -112,7 +112,7 @@
         type="text/x-template"
         id="v-html-editor-theme-template"
     >
-        <div ref="html"></div>
+        <div ref="html" class="max-w-[850px]"></div>
     </script>
 
     <!-- Css Editor Template -->
