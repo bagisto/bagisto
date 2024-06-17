@@ -14,7 +14,7 @@
             class="1180:transtion-all group w-full rounded-md 1180:relative 1180:grid 1180:content-start 1180:overflow-hidden 1180:duration-300 1180:hover:shadow-[0_5px_10px_rgba(0,0,0,0.1)]"
             v-if="mode != 'list'"
         >
-            <div class="relative max-h-[300px] max-w-[291px] overflow-hidden max-md:max-h-64 max-md:max-w-full max-md:rounded-lg max-sm:max-h-[200px] max-sm:max-w-full">
+            <div class="relative max-h-[300px] max-w-[291px] overflow-hidden max-md:max-h-60 max-md:max-w-full max-md:rounded-lg max-sm:max-h-[200px] max-sm:max-w-full">
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
                 <!-- Product Image -->
@@ -199,7 +199,7 @@
 
                 <div class="action-items bg-black">
                     <p
-                        class="absolute top-5 inline-block rounded-[44px] bg-[#E51A1A] px-2.5 text-sm text-white ltr:left-5 max-sm:ltr:left-2 rtl:right-5"
+                        class="absolute top-5 inline-block rounded-[44px] bg-red-500 px-2.5 text-sm text-white ltr:left-5 max-sm:ltr:left-2 rtl:right-5"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
@@ -273,7 +273,7 @@
                     <span class="block h-[30px] w-[30px] rounded-full bg-[#B5DCB4]">
                     </span>
 
-                    <span class="block h-[30px] w-[30px] rounded-full bg-[#5C5C5C]">
+                    <span class="block h-[30px] w-[30px] rounded-full bg-zinc-500">
                     </span>
                 </div>
 

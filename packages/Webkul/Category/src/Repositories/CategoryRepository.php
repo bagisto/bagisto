@@ -107,7 +107,7 @@ class CategoryRepository extends Repository
      * @param  string  $attribute
      * @return \Webkul\Category\Contracts\Category
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id)
     {
         $category = $this->find($id);
 

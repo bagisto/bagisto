@@ -478,12 +478,12 @@
                     <template v-for="file in review.images">
                         <a
                             :href="file.url"
-                            class="flex h-[80px] w-[80px]"
+                            class="flex h-20 w-20"
                             target="_blank"
                             v-if="file.type == 'image'"
                         >
                             <img
-                                class="max-h-[80px] min-w-[80px] cursor-pointer rounded-xl"
+                                class="max-h-20 min-w-20 cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -492,12 +492,12 @@
     
                         <a
                             :href="file.url"
-                            class="flex h-[80px] w-[80px]"
+                            class="flex h-20 w-20"
                             target="_blank"
                             v-else
                         >
                             <video
-                                class="max-h-[80px] min-w-[80px] cursor-pointer rounded-xl"
+                                class="max-h-20 min-w-20 cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"

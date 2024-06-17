@@ -88,7 +88,7 @@
 
                                                 <div class="flex items-center gap-0.5">
                                                     @for ($i = 1; $i <= 5; $i++)
-                                                        <span class="icon-star-fill text-3xl {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-zinc-500' }}"></span>
+                                                        <span class="icon-star-fill text-3xl {{ $review->rating >= $i ? 'text-amber-500' : 'text-zinc-500' }}"></span>
                                                     @endfor
                                                 </div>
 
@@ -148,7 +148,7 @@
 
                                                 <div class="mt-1 flex items-center">
                                                     @for ($i = 1; $i <= 5; $i++)
-                                                        <span class="icon-star-fill text-3xl {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-zinc-500' }}"></span>
+                                                        <span class="icon-star-fill text-3xl {{ $review->rating >= $i ? 'text-amber-500' : 'text-zinc-500' }}"></span>
                                                     @endfor
                                                 </div>
 
