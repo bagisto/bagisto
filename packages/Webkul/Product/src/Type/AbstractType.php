@@ -243,10 +243,6 @@ abstract class AbstractType
      */
     protected function copyAttributeValues($product): void
     {
-        $productFlat = $this->product->product_flats->first()?->replicate() ?? new ProductFlat();
-
-        $productFlat->product_id = $product->id;
-
         $attributesToSkip = config('products.copy.skip_attributes') ?? [];
 
         $copyAttributes = [
@@ -277,13 +273,10 @@ abstract class AbstractType
 
             if (! is_null($value)) {
                 $newAttributeValue->{$attribute->column_name} = $value;
-                $productFlat->{$attribute->code} = $value;
             }
 
             $product->attribute_values()->save($newAttributeValue);
         }
-
-        $productFlat->save();
     }
 
     /**
@@ -295,6 +288,16 @@ abstract class AbstractType
     protected function copyRelationships($product)
     {
         $attributesToSkip = config('products.copy.skip_attributes') ?? [];
+
+        if (! in_array('flat', $attributesToSkip)) {
+            foreach ($this->product->product_flats as $productFlat) {
+                $product->product_flats()->save($productFlat->replicate());
+            }
+        }
+
+        if (! in_array('channels', $attributesToSkip)) {
+            $product->channels()->sync($this->product->channels->pluck('id'));
+        }
 
         if (! in_array('categories', $attributesToSkip)) {
             $product->categories()->sync($this->product->categories->pluck('id'));
