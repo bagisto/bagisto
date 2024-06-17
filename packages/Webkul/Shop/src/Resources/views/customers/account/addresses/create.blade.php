@@ -13,7 +13,7 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="mx-4 flex-auto">
+    <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
         <div class="mb-8 flex items-center max-md:mb-5">
             <!-- Back Button -->
             <a
@@ -23,7 +23,7 @@
                 <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
             </a>
 
-            <h2 class="text-2xl font-medium max-md:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+            <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                 @lang('shop::app.customers.account.addresses.create.add-address')
             </h2>
         </div>
@@ -338,7 +338,7 @@
 
                     <button
                         type="submit"
-                        class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-md:w-full max-md:max-w-full max-md:rounded-lg max-md:py-1.5"
+                        class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-md:w-full max-md:max-w-full max-md:rounded-lg max-md:py-2 max-sm:py-1.5"
                     >
                         @lang('shop::app.customers.account.addresses.create.save')
                     </button>

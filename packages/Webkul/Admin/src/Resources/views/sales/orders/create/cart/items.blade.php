@@ -325,7 +325,7 @@
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="qty"
-                                                class="!w-[80px] !px-2 !py-1.5"
+                                                class="!w-20 !px-2 !py-1.5"
                                                 value="1"
                                                 rules="required|numeric|min_value:1"
                                                 :label="trans('admin::app.sales.orders.create.cart.items.search.qty')"

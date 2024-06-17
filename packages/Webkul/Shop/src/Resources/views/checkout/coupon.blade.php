@@ -12,13 +12,13 @@
         id="v-coupon-template"
     >
         <div class="flex justify-between text-right">
-            <p class="text-base max-md:text-sm max-md:font-normal">
+            <p class="text-base max-md:font-normal max-sm:text-sm">
                 @{{ cart.coupon_code ? "@lang('shop::app.checkout.coupon.applied')" : "@lang('shop::app.checkout.coupon.discount')" }}
             </p>
 
             {!! view_render_event('bagisto.shop.checkout.cart.coupon.before') !!}
 
-            <p class="text-base font-medium max-md:text-sm">
+            <p class="text-base font-medium max-sm:text-sm">
                 <!-- Apply Coupon Form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -33,7 +33,7 @@
                             <!-- Modal Toggler -->
                             <x-slot:toggle>
                                 <span 
-                                    class="cursor-pointer text-blue-700"
+                                    class="cursor-pointer text-base text-blue-700 max-sm:text-sm"
                                     role="button"
                                     tabindex="0"
                                     v-if="! cart.coupon_code"
@@ -43,7 +43,7 @@
                             </x-slot>
 
                             <!-- Modal Header -->
-                            <x-slot:header>
+                            <x-slot:header class="max-md:p-5">
                                 <h2 class="text-2xl font-medium max-md:text-base">
                                     @lang('shop::app.checkout.coupon.apply')
                                 </h2>
@@ -54,7 +54,7 @@
                                 <x-shop::form.control-group class="!mb-0">
                                     <x-shop::form.control-group.control
                                         type="text"
-                                        class="px-6 py-4 max-md:!mb-0 max-md:!p-2"
+                                        class="px-6 py-4 max-md:!mb-0 max-md:!p-3 max-sm:!p-2"
                                         name="code"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.coupon.enter-your-code')"
@@ -71,7 +71,7 @@
                             <x-slot:footer>
                                 <!-- Coupon Form Action Container -->
                                 <div class="flex flex-wrap items-center gap-4 max-md:justify-between">
-                                    <div class="flex gap-4 max-md:block">
+                                    <div class="flex items-center gap-4 max-md:block">
                                         <p class="text-sm font-medium text-zinc-500 max-md:text-left max-md:text-xs">
                                             @lang('shop::app.checkout.coupon.subtotal')
                                         </p>

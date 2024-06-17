@@ -10,13 +10,12 @@
         <div class="md:hidden flex gap-2.5 justify-center items-center max-sm:gap-1.5">
             <span class="icon-share text-2xl"></span>
 
-            <a
-                class="max-sm:text-base"
-                href="javascript:void(0);"
+            <span
+                class="max-sm:text-base cursor-pointer"
                 onclick="shareProduct()"
             >
                 @lang('admin::app.configuration.index.catalog.products.social-share.share')
-            </a>
+            </span>
         </div>
 
         <!-- For Desktop View -->

@@ -79,7 +79,7 @@ it('displays navigation buttons when the customer is logged in', function () {
         ->toBeTruthy();
 });
 
-it('should returns the home page of the sore', function () {
+it('should returns the home page of the store', function () {
     get(route('shop.home.index'))
         ->assertOk()
         ->assertSeeText('The game with our new additions!')

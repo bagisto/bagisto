@@ -76,10 +76,9 @@ class CartRuleRepository extends Repository
 
     /**
      * @param  int  $id
-     * @param  string  $attribute
      * @return \Webkul\CartRule\Contracts\CartRule
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id)
     {
         $data = array_merge($data, [
             'starts_from' => $data['starts_from'] ?: null,
@@ -90,7 +89,7 @@ class CartRuleRepository extends Repository
 
         $cartRule = $this->find($id);
 
-        parent::update($data, $id, $attribute);
+        parent::update($data, $id);
 
         $cartRule->channels()->sync($data['channels']);
 

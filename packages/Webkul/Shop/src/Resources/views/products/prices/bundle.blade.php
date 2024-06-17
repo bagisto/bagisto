@@ -1,4 +1,4 @@
-<div class="max-sm:[&>*]:leading-4 grid gap-1.5 max-sm:flex">
+<div class="max-md:[&>*]:leading-6 max-sm:[&>*]:leading-4 grid gap-1.5 max-md:flex">
     @if ($prices['from']['regular']['price'] != $prices['from']['final']['price'])
         <p class="flex items-center gap-4 max-sm:text-sm">
             <span

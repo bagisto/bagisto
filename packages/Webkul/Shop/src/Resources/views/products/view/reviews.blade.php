@@ -14,7 +14,7 @@
         type="text/x-template"
         id="v-product-reviews-template"
     >
-        <div class="container max-1180:mt-3.5 max-1180:px-5 max-sm:px-3.5">
+        <div class="container max-1180:mt-3.5 max-1180:px-5 max-md:px-4 max-sm:px-3.5">
             <!-- Create Review Form Container -->
             <div 
                 class="w-full" 
@@ -26,7 +26,7 @@
                 >
                     <!-- Review Form -->
                     <form
-                        class="grid grid-cols-[auto_1fr] justify-center gap-10 max-md:grid-cols-[1fr] max-sm:gap-0"
+                        class="grid grid-cols-[auto_1fr] justify-center gap-10 max-md:grid-cols-[1fr] max-md:gap-0"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
@@ -132,7 +132,7 @@
 
                             <div class="mt-4 flex justify-start gap-4 max-xl:mb-5 max-sm:mb-5 max-sm:flex-wrap max-sm:justify-normal max-sm:gap-x-0">
                                 <button
-                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-md:max-w-full max-md:rounded-lg max-md:py-1.5"
+                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-md:max-w-full max-md:rounded-lg max-md:py-3 max-sm:py-1.5"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -161,7 +161,7 @@
                 <!-- Reviews Cards Container -->
                 <template v-else>
                     <template v-if="reviews.length">
-                        <h3 class="mb-8 font-dmserif text-3xl max-sm:mb-2.5 max-sm:text-xl">
+                        <h3 class="mb-8 font-dmserif text-3xl max-md:mb-2.5 max-md:text-2xl max-sm:text-xl">
                             @lang('shop::app.products.view.reviews.customer-review')
 
                             ({{ $reviewHelper->getTotalReviews($product) }})
@@ -209,7 +209,7 @@
                                     || auth()->guard('customer')->user()
                                 )
                                     <div
-                                        class="flex cursor-pointer items-center justify-center gap-x-4 rounded-xl border border-navyBlue px-4 py-1.5 max-sm:rounded-lg"
+                                        class="flex cursor-pointer items-center justify-center gap-x-4 rounded-xl border border-navyBlue px-4 py-3 max-sm:rounded-lg max-sm:py-1.5"
                                         @click="canReview = true"
                                     >
                                         <span class="icon-pen text-2xl"></span>
@@ -242,13 +242,13 @@
                     <template v-else>
                         <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center max-md:h-60">
                             <img
-                                class="max-sm:h-[100px] max-sm:w-[100px]"
+                                class="max-md:h-32 max-md:w-32 max-sm:h-[100px] max-sm:w-[100px]"
                                 src="{{ bagisto_asset('images/review.png') }}"
                                 alt=""
                                 title=""
                             >
 
-                            <p class="text-xl max-sm:text-xs">
+                            <p class="text-xl max-md:text-sm max-sm:text-xs">
                                 @lang('shop::app.products.view.reviews.empty-review')
                             </p>
                         
@@ -277,7 +277,7 @@
         type="text/x-template"
         id="v-product-review-item-template"
     >
-        <div class="rounded-xl border border-zinc-200 p-6 max-sm:hidden">
+        <div class="rounded-xl border border-zinc-200 p-6 max-md:hidden">
             <div class="flex gap-5">
                 <template v-if="review.profile">
                     <img
@@ -300,11 +300,11 @@
                 </template>
             
                 <div class="flex flex-col">
-                    <p class="text-xl font-medium max-sm:text-base">
+                    <p class="font x-md:text-lg text-xl">
                         @{{ review.name }}
                     </p>
                     
-                    <p class="mb-2 text-sm font-medium text-neutral-500 max-sm:text-xs">
+                    <p class="mb-2 text-sm font-medium text-neutral-500">
                         @{{ review.created_at }}
                     </p>
 
@@ -397,12 +397,12 @@
         </div>
 
         <!-- For Mobile View -->
-        <div class="sm:hidden">
-            <div class="grid gap-1.5 rounded-xl border border-zinc-200 p-4 max-sm:mb-0">
+        <div class="md:hidden">
+            <div class="grid gap-1.5 rounded-xl border border-zinc-200 p-4 max-md:mb-0">
                 <div class="flex items-center gap-2.5">
                     <img
                         v-if="review.profile"
-                        class="flex max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] items-center justify-center rounded-full"
+                        class="flex max-h-10 min-h-10 min-w-10 max-w-10 items-center justify-center rounded-full"
                         :src="review.profile"
                         :alt="review.name"
                         :title="review.name"
@@ -410,7 +410,7 @@
     
                     <div
                         v-else
-                        class="flex max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] items-center justify-center rounded-full bg-zinc-100"
+                        class="flex max-h-10 min-h-10 min-w-10 max-w-10 items-center justify-center rounded-full bg-zinc-100"
                         :title="review.name"
                     >
                         <span class="text-xs font-semibold text-zinc-500">
@@ -445,7 +445,7 @@
                     </p>
     
                     <button
-                        class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-2 text-sm max-md:rounded-lg max-sm:px-3 max-sm:py-1 max-sm:text-xs"
+                        class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-4 py-2.5 text-base max-md:rounded-lg max-sm:px-3 max-sm:py-1 max-sm:text-xs"
                         @click="translate"
                     >
                         <!-- Spinner -->
@@ -474,12 +474,12 @@
                     <template v-for="file in review.images">
                         <a
                             :href="file.url"
-                            class="flex h-12 w-12 max-sm:h-[80px] max-sm:w-[80px]"
+                            class="flex h-20 w-20"
                             target="_blank"
                             v-if="file.type == 'image'"
                         >
                             <img
-                                class="max-h-860px] min-w-[80px] cursor-pointer rounded-xl"
+                                class="max-h-20 min-w-20 cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -488,12 +488,12 @@
     
                         <a
                             :href="file.url"
-                            class="flex h-12 w-12 max-sm:h-[80px] max-sm:w-[80px]"
+                            class="flex h-20 w-20"
                             target="_blank"
                             v-else
                         >
                             <video
-                                class="max-h-[80px] min-w-[80px] cursor-pointer rounded-xl"
+                                class="max-h-20 min-w-20 cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"

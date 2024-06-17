@@ -52,12 +52,11 @@ class ChannelRepository extends Repository
      * Update.
      *
      * @param  int  $id
-     * @param  string  $attribute
      * @return \Webkul\Core\Contracts\Channel
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id)
     {
-        $channel = parent::update($data, $id, $attribute);
+        $channel = parent::update($data, $id);
 
         $channel->locales()->sync($data['locales']);
 
