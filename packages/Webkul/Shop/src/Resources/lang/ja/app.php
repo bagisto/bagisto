@@ -601,6 +601,7 @@ return [
                 'load-more'        => 'さらに読み込む',
                 'name'             => '名前',
                 'rating'           => '評価',
+                'ratings'          => '評価',
                 'submit-review'    => 'レビューを送信',
                 'success'          => 'レビューが正常に送信されました。',
                 'title'            => 'タイトル',

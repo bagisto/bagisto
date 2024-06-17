@@ -601,6 +601,7 @@ return [
                 'load-more'        => 'Charger plus',
                 'name'             => 'Nom',
                 'rating'           => 'Évaluation',
+                'ratings'          => 'Notes',
                 'submit-review'    => 'Envoyer un avis',
                 'success'          => 'Avis soumis avec succès.',
                 'title'            => 'Titre',
