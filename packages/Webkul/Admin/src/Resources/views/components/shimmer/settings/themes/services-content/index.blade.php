@@ -40,7 +40,5 @@
             @endfor
         </div>
     </div>
-
-    <x-admin::shimmer.settings.themes.general-content />
 </div>
 

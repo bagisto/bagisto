@@ -30,6 +30,4 @@
             <div class="shimmer h-[214px] w-full"></div>
         </div>
     </div>
-
-    <x-admin::shimmer.settings.themes.general-content />
 </div>
