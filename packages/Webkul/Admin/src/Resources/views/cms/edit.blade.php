@@ -55,7 +55,10 @@
         <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
             <div class="flex items-center gap-x-1">
                 <!-- Locale Switcher -->
-                <x-admin::dropdown :class="core()->getAllLocales()->count() <= 1 ? 'hidden' : ''">
+                <x-admin::dropdown
+                    position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}" 
+                    :class="core()->getAllLocales()->count() <= 1 ? 'hidden' : ''"
+                >
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
