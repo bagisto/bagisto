@@ -10,7 +10,7 @@
 
             <!-- Button -->
             <div class="flex gap-2.5">
-                <div class="secondary-button h-10 w-[109px]"></div>
+                <div class="shimmer h-10 w-[109px] rounded-md"></div>
             </div>
         </div>
 
