@@ -1,4 +1,4 @@
-<v-image-carousel  :errors="errors">
+<v-image-carousel :errors="errors">
     <x-admin::shimmer.settings.themes.image-carousel />
 </v-image-carousel>
 

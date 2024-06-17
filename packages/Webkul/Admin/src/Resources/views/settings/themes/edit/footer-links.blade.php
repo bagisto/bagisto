@@ -1,4 +1,4 @@
-<v-footer-links  :errors="errors">
+<v-footer-links :errors="errors">
     <x-admin::shimmer.settings.themes.footer-links />
 </v-footer-links>
 

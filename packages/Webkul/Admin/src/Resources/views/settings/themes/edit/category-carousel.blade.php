@@ -1,4 +1,4 @@
-<v-category-carousel  :errors="errors">
+<v-category-carousel :errors="errors">
     <x-admin::shimmer.settings.themes.category-carousel />
 </v-category-carousel>
 
