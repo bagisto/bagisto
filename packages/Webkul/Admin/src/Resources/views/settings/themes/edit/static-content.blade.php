@@ -112,7 +112,7 @@
         type="text/x-template"
         id="v-html-editor-theme-template"
     >
-        <div ref="html" class="max-w-[850px]"></div>
+        <div ref="html"></div>
     </script>
 
     <!-- Css Editor Template -->
@@ -229,6 +229,7 @@
                         this._html = new CodeMirror(this.$refs.html, {
                             lineNumbers: true,
                             tabSize: 4,
+                            lineWrapping: true,
                             lineWiseCopyCut: true,
                             value: this.options.html,
                             mode: 'htmlmixed',
@@ -314,6 +315,7 @@
 
                         this._css = new CodeMirror(this.$refs.css, {
                             lineNumbers: true,
+                            lineWrapping: true,
                             tabSize: 4,
                             lineWiseCopyCut: true,
                             value: this.options.css,
