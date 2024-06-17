@@ -10,7 +10,6 @@ use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Facades\ProductImage;
-use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
