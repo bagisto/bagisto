@@ -144,6 +144,30 @@
                         </div>
                     </template>
 
+                    <template v-if="option.type == 'multiselect'">
+                        <x-shop::form.control-group.control
+                            type="multiselect"
+                            ::name="'bundle_options[' + option.id + '][]'"
+                            ::rules="{'required': Boolean(option.is_required)}"
+                            v-model="selectedProduct"
+                            ::label="option.label"
+                        >
+                            <option
+                                value="0"
+                                v-if="! Boolean(option.is_required)"
+                            >
+                                @lang('shop::app.products.view.type.bundle.none')
+                            </option>
+
+                            <option
+                                v-for="product in option.products"
+                                :value="product.id"
+                            >
+                                @{{ product.name + ' + ' + product.price.final.formatted_price }}
+                            </option>
+                        </x-shop::form.control-group.control>
+                    </template>
+
                     <template v-if="option.type == 'checkbox'">
                         <div class="grid gap-2">
                         <!-- Options -->
@@ -174,30 +198,6 @@
                                 </label>
                             </div>
                         </div>
-                    </template>
-
-                    <template v-if="option.type == 'multiselect'">
-                        <x-shop::form.control-group.control
-                            type="multiselect"
-                            ::name="'bundle_options[' + option.id + '][]'"
-                            ::rules="{'required': Boolean(option.is_required)}"
-                            v-model="selectedProduct"
-                            ::label="option.label"
-                        >
-                            <option
-                                value="0"
-                                v-if="! Boolean(option.is_required)"
-                            >
-                                @lang('shop::app.products.view.type.bundle.none')
-                            </option>
-
-                            <option
-                                v-for="product in option.products"
-                                :value="product.id"
-                            >
-                                @{{ product.name + ' + ' + product.price.final.formatted_price }}
-                            </option>
-                        </x-shop::form.control-group.control>
                     </template>
 
                     <x-shop::form.control-group.error ::name="'bundle_options[' + option.id + '][]'" />
