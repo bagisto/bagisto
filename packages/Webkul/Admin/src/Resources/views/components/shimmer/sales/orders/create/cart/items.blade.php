@@ -5,7 +5,7 @@
         <div class="flex items-center gap-4">
             <div class="shimmer h-[17px] w-[134px]"></div>
 
-            <div class="shimmer h-[40px] w-[123px]"></div>
+            <div class="shimmer h-10 w-[123px]"></div>
         </div>
     </div>
 
