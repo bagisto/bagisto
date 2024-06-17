@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.2.0 (14th of June 2024)** - *Release*
+## **v2.2.0 (17th of June 2024)** - *Release*
 
 ### Datagrid Improvements
 
@@ -22,7 +22,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Enhanced datagrid functionality to allow backend control over column visibility. Columns are now visible by default, but can be disabled from visibility with `'visibility' => false.` This allows users to hide columns while retaining the ability to filter data associated with those columns.
 
-5. **Column Visibility Control**
+5. **Gave single date and datetime support**
 
 * Added support for filtering data by date and date-time, enhancing data analysis capabilities.
 
@@ -48,6 +48,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * The theme_customizations table now supports customizations for multiple themes and multiple channels. This enhancement allows you to define different customizations for each theme and channel combination, providing greater flexibility and control over your application's appearance.
 
+* Enhanced the theme customization section by adding a feature to filter attributes.
+
 ### Redesigned Invoice Layout:
 
 * Updated the design of the invoice for a more modern and user-friendly appearance.
@@ -67,10 +69,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 ### Added Contact Us Feature
 
 * Implemented a feature allowing users to easily contact the store from the frontend.
-
-### Enhanced Theme Customization
-
-* Enhanced the theme customization section by adding a feature to filter attributes.
 
 ### Custom Currency Options
 
@@ -142,6 +140,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 * Implemented debug mode with IP allowlist configuration.
 
 * This entry clarifies that the debug mode now includes a configuration option (`APP_DEBUG_ALLOWED_IPS=`) in the `.env` file, where IP addresses can be listed comma-separated to restrict access to authorized users during debugging, thereby enhancing security measures.
+
+### Multiple Configuration Settings Support
+
+* Enhanced the configuration management system for better performance and usability.
+
+* Implemented support for multiple configuration settings, allowing users to define and manage various configurations based on their needs.
+
 
 * #9534 [feature] - Logged in User -> Checkout Page -> Default address must be selected.
 
