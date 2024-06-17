@@ -1,244 +1,108 @@
+<v-static-content :errors="errors">
+    <x-admin::shimmer.settings.themes.static-content />
+</v-static-content>
+
 <!-- Static Content Vue Component -->
 @pushOnce('scripts')
     <script
         type="text/x-template"
         id="v-static-content-template"
     >
-        <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
-            <div class="flex min-w-[931px] flex-1 flex-col gap-2 max-xl:flex-auto">
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
-                    <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
-                        <div class="flex flex-col gap-1">
-                            <p class="text-base font-semibold text-gray-800 dark:text-white">
-                                @lang('admin::app.settings.themes.edit.static-content')
-                            </p>
-
-                            <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
-                                @lang('admin::app.settings.themes.edit.static-content-description')
-                            </p>
-                        </div>
-
-                        <div
-                            class="flex gap-2.5"
-                            v-if="isHtmlEditorActive"
-                        >
-                            <!-- Hidden Input Filed for upload images -->
-                            <label
-                                class="secondary-button"
-                                for="static_image"
-                            >
-                                @lang('admin::app.settings.themes.edit.add-image-btn')
-                            </label>
-
-                            <input 
-                                type="file"
-                                name="static_image"
-                                id="static_image"
-                                class="hidden"
-                                accept="image/*"
-                                ref="static_image"
-                                label="Image"
-                                @change="storeImage($event)"
-                            >
-                        </div>
-                    </div>
-                    
-                    <div class="pt-4 text-center text-sm font-medium text-gray-500">
-                        <div class="tabs">
-                            <div class="mb-4 flex gap-4 border-b-2 pt-2 max-sm:hidden">
-                                <!-- HTML Tab Header -->
-                                <p @click="switchEditor('v-html-editor-theme', 1)">
-                                    <div
-                                        class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-600 transition dark:text-gray-300"
-                                        :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-html-editor-theme'}"
-                                    >
-                                        @lang('admin::app.settings.themes.edit.html')
-                                    </div>
-                                </p>
-
-                                <!-- CSS Tab Editor -->
-                                <p @click="switchEditor('v-css-editor-theme', 0);">
-                                    <div
-                                        class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-600 transition dark:text-gray-300"
-                                        :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-css-editor-theme'}"
-                                    >
-                                        @lang('admin::app.settings.themes.edit.css')
-                                    </div>
-                                </p>
-
-                                <!-- Preview Tab Editor -->
-                                <p @click="switchEditor('v-static-content-previewer', 0);">
-                                    <div
-                                        class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-600 transition dark:text-gray-300"
-                                        :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-static-content-previewer'}"
-                                    >
-                                        @lang('admin::app.settings.themes.edit.preview')
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <input
-                        type="hidden"
-                        name="{{ $currentLocale->code }}[options][html]"
-                        v-model="options.html"
-                    />
-
-                    <input
-                        type="hidden"
-                        name="{{ $currentLocale->code }}[options][css]"
-                        v-model="options.css"
-                    />
-
-                    <KeepAlive class="dark:bg-white">
-                        <component 
-                            :is="inittialEditor"
-                            ref="editor"
-                            @editor-data="editorData"
-                            :options="options"
-                        >
-                        </component>
-                    </KeepAlive>
-                </div>
-            </div>
-
-            <!-- General -->
-            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
-                <x-admin::accordion>
-                    <x-slot:header>
-                        <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
-                            @lang('admin::app.settings.themes.edit.general')
+        <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
+            <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
+                    <div class="flex flex-col gap-1">
+                        <p class="text-base font-semibold text-gray-800 dark:text-white">
+                            @lang('admin::app.settings.themes.edit.static-content')
                         </p>
-                    </x-slot>
+
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
+                            @lang('admin::app.settings.themes.edit.static-content-description')
+                        </p>
+                    </div>
+
+                    <div
+                        class="flex gap-2.5"
+                        v-if="isHtmlEditorActive"
+                    >
+                        <!-- Hidden Input Filed for upload images -->
+                        <label
+                            class="secondary-button"
+                            for="static_image"
+                        >
+                            @lang('admin::app.settings.themes.edit.add-image-btn')
+                        </label>
+
+                        <input 
+                            type="file"
+                            name="static_image"
+                            id="static_image"
+                            class="hidden"
+                            accept="image/*"
+                            ref="static_image"
+                            label="Image"
+                            @change="storeImage($event)"
+                        >
+                    </div>
+                </div>
                 
-                    <x-slot:content>
-                        <input
-                            type="hidden"
-                            name="type"
-                            value="static_content"
-                        />
-
-                        <!-- Name -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.name')
-                            </x-admin::form.control-group.label>
-
-                            <v-field
-                                type="text"
-                                name="name"
-                                value="{{ $theme->name }}"
-                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                rules="required"
-                                label="@lang('admin::app.settings.themes.edit.name')"
-                                placeholder="@lang('admin::app.settings.themes.edit.name')"
-                            >
-                            </v-field>
-
-                            <x-admin::form.control-group.error control-name="name" />
-                        </x-admin::form.control-group>
-
-                        <!-- Sort Order -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.sort-order')
-                            </x-admin::form.control-group.label>
-
-                            <v-field
-                                type="text"
-                                name="sort_order"
-                                value="{{ $theme->sort_order }}"
-                                rules="required|min_value:1"
-                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                label="@lang('admin::app.settings.themes.edit.sort-order')"
-                                placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
-                            >
-                            </v-field>
-
-                            <x-admin::form.control-group.error control-name="sort_order" />
-                        </x-admin::form.control-group>
-
-                        <!-- Channel -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.channels')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="channel_id"
-                                rules="required"
-                                :value="$theme->channel_id"
-                            >
-                                @foreach($channels as $channel)
-                                    <option value="{{ $channel->id }}">{{ $channel->name }}</option>
-                                @endforeach 
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error control-name="channel_id" />
-                        </x-admin::form.control-group>
-
-                        <!-- Themes -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.themes')
-                            </x-admin::form.control-group.label>
-    
-                            <x-admin::form.control-group.control
-                                type="select"
-                                id="theme_code"
-                                name="theme_code"
-                                :value="$theme->theme_code"
-                                rules="required"
-                                :label="trans('admin::app.settings.themes.edit.themes')"
-                            >
-                                @foreach (config('themes.shop') as $themeCode => $shopTheme)
-                                    <option value="{{ $themeCode }}">
-                                        {{ $shopTheme['name'] }}
-                                    </option>
-                                @endforeach
-                            </x-admin::form.control-group.control>
-    
-                            <x-admin::form.control-group.error control-name="theme" />
-                        </x-admin::form.control-group>
-
-                        <!-- Status -->
-                        <x-admin::form.control-group class="!mb-0">
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.status')
-                            </x-admin::form.control-group.label>
-
-                            <label class="relative inline-flex cursor-pointer items-center">
-                                <v-field
-                                    type="checkbox"
-                                    name="status"
-                                    class="hidden"
-                                    v-slot="{ field }"
-                                    value="{{ $theme->status }}"
+                <div class="pt-4 text-center text-sm font-medium text-gray-500">
+                    <div class="tabs">
+                        <div class="mb-4 flex gap-4 border-b-2 pt-2 max-sm:hidden">
+                            <!-- HTML Tab Header -->
+                            <p @click="switchEditor('v-html-editor-theme', 1)">
+                                <div
+                                    class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-600 transition dark:text-gray-300"
+                                    :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                 >
-                                    <input
-                                        type="checkbox"
-                                        name="status"
-                                        id="status"
-                                        class="peer sr-only"
-                                        v-bind="field"
-                                        :checked="{{ $theme->status }}"
-                                    />
-                                </v-field>
-                    
-                                <label
-                                    class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
-                                    for="status"
-                                ></label>
-                            </label>
-                            
-                            <x-admin::form.control-group.error control-name="status" />
-                        </x-admin::form.control-group>
-                    </x-slot>
-                </x-admin::accordion>
+                                    @lang('admin::app.settings.themes.edit.html')
+                                </div>
+                            </p>
+
+                            <!-- CSS Tab Editor -->
+                            <p @click="switchEditor('v-css-editor-theme', 0);">
+                                <div
+                                    class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-600 transition dark:text-gray-300"
+                                    :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-css-editor-theme'}"
+                                >
+                                    @lang('admin::app.settings.themes.edit.css')
+                                </div>
+                            </p>
+
+                            <!-- Preview Tab Editor -->
+                            <p @click="switchEditor('v-static-content-previewer', 0);">
+                                <div
+                                    class="cursor-pointer px-2.5 pb-3.5 text-base font-medium text-gray-600 transition dark:text-gray-300"
+                                    :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-static-content-previewer'}"
+                                >
+                                    @lang('admin::app.settings.themes.edit.preview')
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <input
+                    type="hidden"
+                    name="{{ $currentLocale->code }}[options][html]"
+                    v-model="options.html"
+                />
+
+                <input
+                    type="hidden"
+                    name="{{ $currentLocale->code }}[options][css]"
+                    v-model="options.css"
+                />
+
+                <KeepAlive class="dark:bg-white">
+                    <component 
+                        :is="inittialEditor"
+                        ref="editor"
+                        @editor-data="editorData"
+                        :options="options"
+                    >
+                    </component>
+                </KeepAlive>
             </div>
         </div>
     </script>
@@ -365,6 +229,7 @@
                         this._html = new CodeMirror(this.$refs.html, {
                             lineNumbers: true,
                             tabSize: 4,
+                            lineWrapping: true,
                             lineWiseCopyCut: true,
                             value: this.options.html,
                             mode: 'htmlmixed',
@@ -450,6 +315,7 @@
 
                         this._css = new CodeMirror(this.$refs.css, {
                             lineNumbers: true,
+                            lineWrapping: true,
                             tabSize: 4,
                             lineWiseCopyCut: true,
                             value: this.options.css,
