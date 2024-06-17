@@ -60,10 +60,9 @@ class CatalogRuleRepository extends Repository
      * Update.
      *
      * @param  int  $id
-     * @param  string  $attribute
      * @return \Webkul\CatalogRule\Contracts\CatalogRule
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id)
     {
         $data = array_merge($data, [
             'starts_from' => $data['starts_from'] ?? null,
@@ -74,7 +73,7 @@ class CatalogRuleRepository extends Repository
 
         $catalogRule = $this->find($id);
 
-        parent::update($data, $id, $attribute);
+        parent::update($data, $id);
 
         $catalogRule->channels()->sync($data['channels']);
 

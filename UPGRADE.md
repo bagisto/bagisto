@@ -41,7 +41,8 @@
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
 - [Renamed Admin View Render Event Names](#renamed-admin-view-render-event-names)
-- [Optimize the configuration section](#optimize-the-configuration-section)
+- [Repositories Update Method Signature Updated](#repository-update-method-signature-updated)
+- [Optimize The Configuration Section](#optimize-the-configuration-section)
 
 ## Upgrading To v2.2.0 From v2.1.0
 
@@ -238,8 +239,28 @@ If you are migrating your existing store to this version, please save the config
 + {!! view_render_event('bagisto.admin.dashboard.todays_details.after') !!}
 ```
 
+<a name="repository-update-method-signature-updated"></a>
+
+#### Repository Update Method Signature Updated
+
+1. We have updated the signature of the `update` method in the `Repositories` class to streamline its functionality and improve code clarity. The method previously accepted three arguments, but the third argument, `$attribute`, is no longer necessary. The updated method signature is as follows:
+
+```diff
+- public function update(array $data, $id, $attribute = 'id')
++ public function update(array $data, $id)
+```
+
+2. We have updated the signature of the `update` method in the `ProductRepository` to improve its functionality and provide greater flexibility in specifying which attributes should be updated. The method previously accepted three arguments, but the third argument, `$attribute`, has been modified to `$attributes`, which now accepts an array of attributes to be updated. The updated method signature is as follows:
+
+```diff
+- public function update(array $data, $id, $attribute = 'id')
++ public function update(array $data, $id, $attributes = [])
+
+```
+
 <a name="optimize-the-configuration-section"></a>
-#### Optimize the configuration section
+
+#### Optimize The Configuration Section
 
 We are removing the `packages/Webkul/Core/src/Tree.php` file and also removing the `CoreConfigField` trait from `CoreConfigRepository.php` file. Its important methods have been moved into `packages/Webkul/Core/src/SystemConfig/ItemField.php` because the `ItemField.php` file is responsible for each field of configuration items.
 
