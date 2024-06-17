@@ -225,6 +225,7 @@ class Bundle extends AbstractType
     public function prepareForCart($data)
     {
         $bundleQuantity = parent::handleQuantity((int) $data['quantity']);
+        
         if (empty($data['bundle_options'])) {
             return trans('product::app.checkout.cart.missing-options');
         }
