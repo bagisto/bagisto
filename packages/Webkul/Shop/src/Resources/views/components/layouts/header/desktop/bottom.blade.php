@@ -88,7 +88,7 @@
                 >
                 </button>
 
-                @if (core()->getConfigData('general.content.shop.image_search'))
+                @if (core()->getConfigData('catalog.products.settings.image_search'))
                     @include('shop::search.images.index')
                 @endif
             </form>
