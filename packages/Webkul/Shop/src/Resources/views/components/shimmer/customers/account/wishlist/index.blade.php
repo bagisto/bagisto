@@ -3,7 +3,7 @@
 <div class="journal-scroll flex items-center justify-between overflow-auto">
     <h2 class="shimmer h-[39px] w-[110px]"></h2>
 
-    <div class="shimmer flex items-center gap-x-2.5 rounded-xl px-5 py-3 max-md:px-1 max-md:py-1.5">
+    <div class="shimmer flex items-center gap-x-2.5 rounded-xl px-5 py-3 max-md:px-1 max-md:py-2 max-sm:py-1.5">
         <span class="h-6 w-[108px]"></span>
     </div>
 </div>
@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="flex flex-wrap gap-5 max-md:mt-2.5 max-md:flex-nowrap">
-                                <div class="shimmer h-10 w-[110px] rounded-[54px] max-md:h-[34px] max-md:w-[80px]"></div>
+                                <div class="shimmer h-10 w-[110px] rounded-[54px] max-md:h-[34px] max-md:w-20"></div>
 
                                 <div class="shimmer h-10 w-[158px] rounded-2xl max-md:h-[34px] max-md:w-28"></div>
                             </div>

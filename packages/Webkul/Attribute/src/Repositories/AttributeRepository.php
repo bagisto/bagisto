@@ -63,7 +63,7 @@ class AttributeRepository extends Repository
      * @param  string  $attribute
      * @return \Webkul\Attribute\Contracts\Attribute
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id)
     {
         $data = $this->validateUserInput($data);
 

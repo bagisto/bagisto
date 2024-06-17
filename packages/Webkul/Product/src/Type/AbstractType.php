@@ -105,6 +105,13 @@ abstract class AbstractType
     protected $additionalViews = [];
 
     /**
+     * Attribute stored bu their code.
+     *
+     * @var array
+     */
+    protected $attributesByCode = [];
+
+    /**
      * Create a new product type instance.
      *
      * @return void
@@ -139,140 +146,33 @@ abstract class AbstractType
      * Update product.
      *
      * @param  int  $id
-     * @param  string  $attribute
+     * @param  array  $attributes
      * @return \Webkul\Product\Contracts\Product
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id, $attributes = [])
     {
         $product = $this->productRepository->find($id);
 
         $product->update($data);
 
-        $route = request()->route()?->getName();
+        /**
+         * If attributes are provided then only save the provided attributes and return.
+         */
+        if (! empty($attributes)) {
+            $attributes = $this->attributeRepository->findWhereIn('code', $attributes);
 
-        foreach ($product->attribute_family->custom_attributes as $attribute) {
-            if (
-                $attribute->type === 'boolean'
-                && $route !== 'admin.catalog.products.mass_update'
-            ) {
-                $data[$attribute->code] = ! empty($data[$attribute->code]);
-            }
+            $this->attributeValueRepository->saveValues($data, $product, $attributes);
 
-            if (
-                $attribute->type == 'multiselect'
-                || $attribute->type == 'checkbox'
-            ) {
-                $data[$attribute->code] = isset($data[$attribute->code]) ? implode(',', $data[$attribute->code]) : null;
-            }
-
-            if (! isset($data[$attribute->code])) {
-                continue;
-            }
-
-            if (
-                $attribute->type === 'price'
-                && empty($data[$attribute->code])
-            ) {
-                $data[$attribute->code] = null;
-            }
-
-            if (
-                $attribute->type === 'date'
-                && $data[$attribute->code] === ''
-                && $route !== 'admin.catalog.products.mass_update'
-            ) {
-                $data[$attribute->code] = null;
-            }
-
-            if (
-                $attribute->type === 'image'
-                || $attribute->type === 'file'
-            ) {
-                $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
-                    ? request()->file($attribute->code)->store('product/'.$product->id)
-                    : $data[$attribute->code];
-            }
-
-            $attributeValues = $product->attribute_values
-                ->where('attribute_id', $attribute->id);
-
-            $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null;
-
-            $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null;
-
-            if ($attribute->value_per_channel) {
-                if ($attribute->value_per_locale) {
-                    $filteredAttributeValues = $attributeValues
-                        ->where('channel', $channel)
-                        ->where('locale', $locale);
-                } else {
-                    $filteredAttributeValues = $attributeValues
-                        ->where('channel', $channel);
-                }
-            } else {
-                if ($attribute->value_per_locale) {
-                    $filteredAttributeValues = $attributeValues
-                        ->where('locale', $locale);
-                } else {
-                    $filteredAttributeValues = $attributeValues;
-                }
-            }
-
-            $attributeValue = $filteredAttributeValues->first();
-
-            $uniqueId = implode('|', array_filter([
-                $channel,
-                $locale,
-                $product->id,
-                $attribute->id,
-            ]));
-
-            if (! $attributeValue) {
-                $this->attributeValueRepository->create([
-                    'product_id'            => $product->id,
-                    'attribute_id'          => $attribute->id,
-                    $attribute->column_name => $data[$attribute->code],
-                    'channel'               => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
-                    'unique_id'             => $uniqueId,
-                ]);
-            } else {
-                $previousTextValue = $attributeValue->text_value;
-
-                if (
-                    $attribute->type == 'image'
-                    || $attribute->type == 'file'
-                ) {
-                    /**
-                     * If $data[$attribute->code]['delete'] is not empty, that means someone selected the "delete" option.
-                     */
-                    if (! empty($data[$attribute->code]['delete'])) {
-                        Storage::delete($previousTextValue);
-
-                        $data[$attribute->code] = null;
-                    }
-                    /**
-                     * If $data[$attribute->code] is not equal to the previous one, that means someone has
-                     * updated the file or image. In that case, we will remove the previous file.
-                     */
-                    elseif (
-                        ! empty($previousTextValue)
-                        && $data[$attribute->code] != $previousTextValue
-                    ) {
-                        Storage::delete($previousTextValue);
-                    }
-                }
-
-                $attributeValue->update([
-                    $attribute->column_name => $data[$attribute->code],
-                    'unique_id'             => $uniqueId,
-                ]);
-            }
-        }
-
-        if ($route == 'admin.catalog.products.mass_update') {
             return $product;
         }
+
+        $this->attributeValueRepository->saveValues($data, $product, $product->attribute_family->custom_attributes);
+
+        if (empty($data['channels'])) {
+            $data['channels'][] = core()->getDefaultChannel()->id;
+        }
+
+        $product->channels()->sync($data['channels']);
 
         if (! isset($data['categories'])) {
             $data['categories'] = [];
@@ -286,24 +186,28 @@ abstract class AbstractType
 
         $product->related_products()->sync($data['related_products'] ?? []);
 
-        if (empty($data['channels'])) {
-            $data['channels'][] = core()->getDefaultChannel()->id;
-        }
-
-        $product->channels()->sync($data['channels']);
-
         $this->productInventoryRepository->saveInventories($data, $product);
 
-        $this->productImageRepository->uploadImages($data, $product);
+        $this->productImageRepository->upload($data, $product, 'images');
 
-        $this->productVideoRepository->uploadVideos($data, $product);
+        $this->productVideoRepository->upload($data, $product, 'videos');
 
-        $this->productCustomerGroupPriceRepository->saveCustomerGroupPrices(
-            $data,
-            $product
-        );
+        $this->productCustomerGroupPriceRepository->saveCustomerGroupPrices($data, $product);
 
         return $product;
+    }
+
+    /**
+     * @param  string  $code
+     * @return \Webkul\Attribute\Contracts\Attribute
+     */
+    public function getAttributeByCode($code)
+    {
+        if (! empty($this->attributesByCode[$code])) {
+            return $this->attributesByCode[$code];
+        }
+
+        return $this->attributesByCode[$code] = $this->attributeRepository->findOneByField('code', $code);
     }
 
     /**
@@ -403,8 +307,14 @@ abstract class AbstractType
         }
 
         if (! in_array('customer_group_prices', $attributesToSkip)) {
-            foreach ($this->product->customer_group_prices as $customer_group_price) {
-                $product->customer_group_prices()->save($customer_group_price->replicate());
+            foreach ($this->product->customer_group_prices as $customerGroupPrice) {
+                $product->customer_group_prices()->save($customerGroupPrice->replicate()->fill([
+                    'unique_id' => implode('|', array_filter([
+                        $customerGroupPrice->qty,
+                        $product->id,
+                        $customerGroupPrice->customer_group_id,
+                    ])),
+                ]));
             }
         }
 

@@ -62,14 +62,14 @@ class ProductRepository extends Repository
      * Update product.
      *
      * @param  int  $id
-     * @param  string  $attribute
+     * @param  array  $attributes
      * @return \Webkul\Product\Contracts\Product
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id, $attributes = [])
     {
         $product = $this->findOrFail($id);
 
-        $product = $product->getTypeInstance()->update($data, $id, $attribute);
+        $product = $product->getTypeInstance()->update($data, $id, $attributes);
 
         $product->refresh();
 

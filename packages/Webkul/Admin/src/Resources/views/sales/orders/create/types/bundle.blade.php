@@ -23,7 +23,7 @@
             </v-product-bundle-option-item>
 
             <div class="p-4">
-                <div class="my-[20px] flex items-center justify-between">
+                <div class="my-5 flex items-center justify-between">
                     <p class="text-sm dark:text-white">
                         @lang('admin::app.sales.orders.create.types.bundle.total-amount')
                     </p>

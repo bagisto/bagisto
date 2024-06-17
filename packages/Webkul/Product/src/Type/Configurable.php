@@ -48,6 +48,13 @@ class Configurable extends AbstractType
     ];
 
     /**
+     * These are the types which can be fillable when generating variant.
+     *
+     * @var array
+     */
+    protected $fillableVariantAttributes = [];
+
+    /**
      * Is a composite product type.
      *
      * @var bool
@@ -76,20 +83,6 @@ class Configurable extends AbstractType
     protected $hasVariants = true;
 
     /**
-     * Attribute stored bu their code.
-     *
-     * @var bool
-     */
-    protected $attributesByCode = [];
-
-    /**
-     * Attribute stored bu their id.
-     *
-     * @var bool
-     */
-    protected $attributesById = [];
-
-    /**
      * Create configurable product.
      *
      * @return \Webkul\Product\Contracts\Product
@@ -102,16 +95,19 @@ class Configurable extends AbstractType
             return $product;
         }
 
+        /**
+         * Load fillable variant attributes.
+         */
+        $this->fillableVariantAttributes = $this->attributeRepository->findWhereIn('code', $this->fillableVariantAttributeCodes);
+
         $superAttributes = [];
 
         foreach ($data['super_attributes'] as $attributeCode => $attributeOptions) {
-            $attribute = $this->attributesByCode[$attributeCode] ?? null;
+            $attribute = $this->getAttributeByCode($attributeCode);
 
-            if (empty($attribute)) {
-                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
-            }
+            $this->fillableVariantAttributes->push($attribute);
 
-            $superAttributes[$attribute->id] = $attributeOptions;
+            $superAttributes[$attribute->code] = $attributeOptions;
 
             $product->super_attributes()->attach($attribute->id);
         }
@@ -130,16 +126,21 @@ class Configurable extends AbstractType
      * Update configurable product.
      *
      * @param  int  $id
-     * @param  string  $attribute
+     * @param  array  $attributes
      * @return \Webkul\Product\Contracts\Product
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id, $attributes = [])
     {
-        $product = parent::update($data, $id, $attribute);
+        $product = parent::update($data, $id, $attributes);
 
-        if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
+        if (! empty($attributes)) {
             return $product;
         }
+
+        /**
+         * Load fillable variant attributes.
+         */
+        $this->fillableVariantAttributes = $this->attributeRepository->findWhereIn('code', $this->fillableVariantAttributeCodes);
 
         $previousVariantIds = $product->variants->pluck('id');
 
@@ -179,16 +180,17 @@ class Configurable extends AbstractType
      * Create variant.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  array  $permutation
+     * @param  array  $superAttributes
      * @param  array  $data
      * @return \Webkul\Product\Contracts\Product
      */
-    public function createVariant($product, $permutation, $data = [])
+    public function createVariant($product, $superAttributes, $data = [])
     {
+        $sku = $product->sku.'-variant-'.implode('-', $superAttributes);
+
         $data = array_merge([
-            'sku'               => $sku = $product->sku.'-variant-'.implode('-', $permutation),
-            'name'              => 'Variant '.implode(' ', $permutation),
-            'inventories'       => [],
+            'sku'               => $sku,
+            'name'              => 'Variant '.implode(' ', $superAttributes),
             'price'             => 0,
             'weight'            => 0,
             'status'            => 1,
@@ -196,70 +198,25 @@ class Configurable extends AbstractType
             'url_key'           => $sku,
             'short_description' => $sku,
             'description'       => $sku,
+            'inventories'       => [],
         ], $data);
 
         $variant = parent::create([
-            'parent_id'           => $product->id,
             'type'                => 'simple',
+            'sku'                 => $sku,
             'attribute_family_id' => $product->attribute_family_id,
-            'sku'                 => $data['sku'],
+            'parent_id'           => $product->id,
         ]);
 
-        $attributeValues = [];
-
-        foreach ($this->fillableVariantAttributeCodes as $attributeCode) {
-            if (! isset($data[$attributeCode])) {
-                continue;
-            }
-
-            $attribute = $this->attributesByCode[$attributeCode] ?? null;
-
-            if (empty($attribute)) {
-                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
-            }
-
-            $attributeValues[] = array_merge($this->getAttributeTypeValues($attribute, $data[$attributeCode]), [
-                'product_id'   => $variant->id,
-                'attribute_id' => $attribute->id,
-                'channel'      => $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null,
-                'locale'       => $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null,
-                'unique_id'    => implode('|', array_filter([
-                    $channel,
-                    $locale,
-                    $variant->id,
-                    $attribute->id,
-                ])),
-            ]);
+        foreach ($superAttributes as $attributeCode => $optionId) {
+            $data[$attributeCode] = $optionId;
         }
 
-        foreach ($permutation as $attributeId => $optionId) {
-            $attribute = $this->attributesById[$attributeId] ?? null;
-
-            if (empty($attribute)) {
-                $attribute = $this->attributeRepository->find($attributeId);
-            }
-
-            $attributeValues[] = array_merge($this->getAttributeTypeValues($attribute, $optionId), [
-                'product_id'   => $variant->id,
-                'attribute_id' => $attributeId,
-                'channel'      => $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null,
-                'locale'       => $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null,
-                'unique_id'    => implode('|', array_filter([
-                    $channel,
-                    $locale,
-                    $variant->id,
-                    $attribute->id,
-                ])),
-            ]);
-        }
-
-        $this->attributeValueRepository->insert($attributeValues);
+        $this->attributeValueRepository->saveValues($data, $variant, $this->fillableVariantAttributes);
 
         $this->productInventoryRepository->saveInventories($data, $variant);
 
         $this->productImageRepository->upload($data, $variant, 'images');
-
-        $variant->channels()->sync($product->channels->pluck('id')->toArray());
 
         return $variant;
     }
@@ -276,87 +233,15 @@ class Configurable extends AbstractType
 
         $variant->update(['sku' => $data['sku']]);
 
-        foreach ($this->fillableVariantAttributeCodes as $attributeCode) {
-            if (! isset($data[$attributeCode])) {
-                continue;
-            }
-
-            $attribute = $this->attributesByCode[$attributeCode] ?? null;
-
-            if (empty($attribute)) {
-                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
-            }
-
-            $attributeValues = $variant->attribute_values
-                ->where('attribute_id', $attribute->id);
-
-            $channel = $attribute->value_per_channel ? ($data['channel'] ?? core()->getDefaultChannelCode()) : null;
-
-            $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null;
-
-            if ($attribute->value_per_channel) {
-                if ($attribute->value_per_locale) {
-                    $filteredAttributeValues = $attributeValues
-                        ->where('channel', $channel)
-                        ->where('locale', $locale);
-                } else {
-                    $filteredAttributeValues = $attributeValues
-                        ->where('channel', $channel);
-                }
-            } else {
-                if ($attribute->value_per_locale) {
-                    $filteredAttributeValues = $attributeValues
-                        ->where('locale', $locale);
-                } else {
-                    $filteredAttributeValues = $attributeValues;
-                }
-            }
-
-            $attributeValue = $filteredAttributeValues->first();
-
-            $uniqueId = implode('|', array_filter([
-                $channel,
-                $locale,
-                $variant->id,
-                $attribute->id,
-            ]));
-
-            if (! $attributeValue) {
-                $this->attributeValueRepository->create([
-                    'product_id'            => $variant->id,
-                    'attribute_id'          => $attribute->id,
-                    $attribute->column_name => $data[$attribute->code],
-                    'channel'               => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
-                    'unique_id'             => $uniqueId,
-                ]);
-            } else {
-                $attributeValue->update([
-                    $attribute->column_name => $data[$attribute->code],
-                    'unique_id'             => $uniqueId,
-                ]);
-            }
-        }
+        $this->attributeValueRepository->saveValues($data, $variant, $this->fillableVariantAttributes);
 
         $this->productInventoryRepository->saveInventories($data, $variant);
+
+        $this->productImageRepository->upload($data, $variant, 'images');
 
         $variant->channels()->sync($variant->parent->channels->pluck('id')->toArray());
 
         return $variant;
-    }
-
-    /**
-     * @param  mixed  $attribute
-     * @param  mixed  $value
-     * @return array
-     */
-    public function getAttributeTypeValues($attribute, $value)
-    {
-        $attributeTypeFields = array_fill_keys(array_values($attribute->attributeTypeFields), null);
-
-        $attributeTypeFields[$attribute->column_name] = $value;
-
-        return $attributeTypeFields;
     }
 
     /**

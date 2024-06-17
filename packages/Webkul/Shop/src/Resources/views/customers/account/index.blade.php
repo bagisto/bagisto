@@ -18,7 +18,7 @@
     <!--Customers logout-->
     @auth('customer')
         <div class="mx-4">
-            <div class="w-full rounded-lg border border-navyBlue py-2.5 text-center max-sm:py-1.5">
+            <div class="mx-auto w-[400px] rounded-lg border border-navyBlue py-2.5 text-center max-sm:w-full max-sm:py-1.5">
                 <x-shop::form
                     method="DELETE"
                     action="{{ route('shop.customer.session.destroy') }}"
