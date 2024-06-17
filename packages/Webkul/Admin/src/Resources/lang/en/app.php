@@ -3085,6 +3085,7 @@ return [
                     'name'         => 'Name',
                     'sort-order'   => 'Sort Order',
                     'status'       => 'Status',
+                    'theme'        => 'Theme',
                     'type'         => 'Type',
                     'view'         => 'View',
                 ],

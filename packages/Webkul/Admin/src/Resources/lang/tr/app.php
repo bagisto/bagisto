@@ -3085,6 +3085,7 @@ return [
                     'name'         => 'Ad',
                     'sort-order'   => 'Sıralama Sırası',
                     'status'       => 'Durum',
+                    'theme'        => 'Tema',
                     'type'         => 'Tür',
                     'view'         => 'Görünüm',
                 ],

@@ -3085,6 +3085,7 @@ return [
                     'name'         => '名前',
                     'sort-order'   => '並び替え順',
                     'status'       => 'ステータス',
+                    'theme'        => 'テーマ',
                     'type'         => 'タイプ',
                     'view'         => '表示',
                 ],
