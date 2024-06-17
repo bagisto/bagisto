@@ -44,7 +44,7 @@
                     </a>
                 @endif
 
-                {!! view_render_event('bagisto.shop.customers.account.orders.reorder.after') !!}
+                {!! view_render_event('bagisto.shop.customers.account.orders.reorder-btn.after') !!}
 
                 {!! view_render_event('bagisto.shop.customers.account.orders.cancel-btn.before') !!}
 
