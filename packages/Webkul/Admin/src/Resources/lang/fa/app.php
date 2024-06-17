@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'توضیحات',
                         'enable'                  => 'فعال کردن',
+                        'include-discount-amount' => 'شامل مبلغ تخفیف',
+                        'include-tax-amount'      => 'شامل مالیات در مبلغ',
                         'info'                    => 'معیارهای تنظیم شده برای تعداد حداقل مورد نیاز یا ارزش برای پردازش یک سفارش یا واجد شرایط شدن برای بهره مندی ها.',
                         'minimum-order-amount'    => 'حداقل مبلغ سفارش',
-                        'show-error-in-cart'      => 'نمایش خطا در سبد خرید',
                         'title'                   => 'تنظیمات حداقل سفارش',
-
-                        'include-discount-amount' => [
-                            'no'    => 'خیر',
-                            'title' => 'شامل مبلغ تخفیف',
-                            'yes'   => 'بله',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'خیر',
-                            'title' => 'شامل مالیات در مبلغ',
-                            'yes'   => 'بله',
-                        ],
                     ],
 
                     'reorder' => [

@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'Description',
                         'enable'                  => 'Activer',
+                        'include-discount-amount' => 'Inclure le montant de la remise',
+                        'include-tax-amount'      => 'Inclure la taxe dans le montant',
                         'info'                    => 'Critères configurés spécifiant la quantité ou la valeur minimale requise pour qu\'une commande soit traitée ou bénéficie d\'avantages.',
                         'minimum-order-amount'    => 'Montant minimum de commande',
-                        'show-error-in-cart'      => 'Erreur à afficher dans le panier',
                         'title'                   => 'Paramètres de commande minimale',
-
-                        'include-discount-amount' => [
-                            'no'    => 'Non',
-                            'title' => 'Inclure le montant de la remise',
-                            'yes'   => 'Oui',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'Non',
-                            'title' => 'Inclure la taxe dans le montant',
-                            'yes'   => 'Oui',
-                        ],
                     ],
 
                     'reorder' => [

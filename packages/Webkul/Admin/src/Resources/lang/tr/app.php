@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'Açıklama',
                         'enable'                  => 'Etkinleştir',
+                        'include-discount-amount' => 'İndirim Tutarını Dahil Et',
+                        'include-tax-amount'      => 'Tutara Vergi Dahil Et',
                         'info'                    => 'Bir siparişin işlenmesi veya faydalar için gereken en düşük miktarı veya değeri belirleyen yapılandırılmış kriterler.',
                         'minimum-order-amount'    => 'Minimum Sipariş Tutarı',
-                        'show-error-in-cart'      => 'Alışveriş Sepetinde Gösterilecek Hata',
                         'title'                   => 'Minimum Sipariş Ayarları',
-
-                        'include-discount-amount' => [
-                            'no'    => 'Hayır',
-                            'title' => 'İndirim Tutarını Dahil Et',
-                            'yes'   => 'Evet',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'Hayır',
-                            'title' => 'Tutara Vergi Dahil Et',
-                            'yes'   => 'Evet',
-                        ],
                     ],
 
                     'reorder' => [

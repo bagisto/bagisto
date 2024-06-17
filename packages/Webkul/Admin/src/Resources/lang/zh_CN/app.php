@@ -3872,22 +3872,11 @@ return [
                     'minimum-order' => [
                         'description'             => '説明',
                         'enable'                  => '有効にする',
+                        'include-discount-amount' => '割引額を含む',
+                        'include-tax-amount'      => '税額を含む',
                         'info'                    => '注文が処理されるか、特典の対象となるために必要な最低数量または金額を指定する基準を設定します。',
                         'minimum-order-amount'    => '最低注文金額',
-                        'show-error-in-cart'      => 'ショッピングカートに表示するエラー',
                         'title'                   => '最低注文設定',
-
-                        'include-discount-amount' => [
-                            'no'    => 'いいえ',
-                            'title' => '割引額を含む',
-                            'yes'   => 'はい',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'いいえ',
-                            'title' => '税額を含む',
-                            'yes'   => 'はい',
-                        ],
                     ],
 
                     'reorder' => [

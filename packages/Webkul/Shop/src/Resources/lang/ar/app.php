@@ -695,7 +695,7 @@ return [
             'inactive'                  => 'تم إلغاء تنشيط المنتج وبالتالي إزالته من السلة.',
             'inventory-warning'         => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
             'item-add-to-cart'          => 'تمت إضافة العنصر بنجاح',
-            'minimum-order-message'     => 'الحد الأدنى للطلب هو :amount',
+            'minimum-order-message'     => 'الحد الأدنى للطلب هو',
             'missing-fields'            => 'بعض الحقول المطلوبة مفقودة لهذا المنتج.',
             'missing-options'           => 'الخيارات مفقودة لهذا المنتج.',
             'paypal-payment-cancelled'  => 'تم إلغاء الدفع باي بال.',

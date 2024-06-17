@@ -1673,28 +1673,24 @@ return [
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
-                'locale_based'  => true,
             ], [
                 'name'          => 'order_number_length',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.length',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
-                'locale_based'  => true,
             ], [
                 'name'          => 'order_number_suffix',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.suffix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
-                'locale_based'  => true,
             ], [
                 'name'          => 'order_number_generator',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.generator',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
-                'locale_based'  => true,
             ],
         ],
     ], [
@@ -1703,60 +1699,30 @@ return [
         'info'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.info',
         'sort'   => 1,
         'fields' => [
-            // [
-            //     'name'          => 'enable',
-            //     'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.enable',
-            //     'type'          => 'boolean',
-            // ],
             [
+                'name'          => 'enable',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.enable',
+                'type'          => 'boolean',
+            ], [
                 'name'          => 'minimum_order_amount',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.minimum-order-amount',
                 'type'          => 'number',
                 'validation'    => 'numeric',
                 'channel_based' => true,
-                'locale_based'  => true,
+            ], [
+                'name'    => 'include_discount_amount',
+                'title'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-discount-amount',
+                'type'    => 'boolean',
+            ], [
+                'name'    => 'include_tax_to_amount',
+                'title'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-tax-amount',
+                'type'    => 'boolean',
+            ], [
+                'name'          => 'description',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.description',
+                'type'          => 'textarea',
+                'channel_based' => true,
             ],
-            //  [
-            //     'name'    => 'include_discount_amount',
-            //     'title'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-discount-amount.title',
-            //     'type'    => 'select',
-            //     'default' => 'no',
-            //     'options' => [
-            //         [
-            //             'title' => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-discount-amount.yes',
-            //             'value' => 'yes',
-            //         ], [
-            //             'title' => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-discount-amount.no',
-            //             'value' => 'no',
-            //         ],
-            //     ],
-            // ], [
-            //     'name'    => 'include_tax_to_amount',
-            //     'title'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-tax-amount.title',
-            //     'type'    => 'select',
-            //     'default' => 'no',
-            //     'options' => [
-            //         [
-            //             'title' => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-tax-amount.yes',
-            //             'value' => 'yes',
-            //         ], [
-            //             'title' => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-tax-amount.no',
-            //             'value' => 'no',
-            //         ],
-            //     ],
-            // ], [
-            //     'name'          => 'description',
-            //     'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.description',
-            //     'type'          => 'textarea',
-            //     'channel_based' => true,
-            //     'locale_based'  => true,
-            // ], [
-            //     'name'          => 'show_error_in_cart',
-            //     'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.show-error-in-cart',
-            //     'type'          => 'textarea',
-            //     'channel_based' => true,
-            //     'locale_based'  => true,
-            // ],
         ],
     ], [
         'key'    => 'sales.order_settings.reorder',

@@ -695,7 +695,7 @@ return [
             'inactive'                  => 'Het item is gedeactiveerd en vervolgens uit de winkelwagen verwijderd.',
             'inventory-warning'         => 'De aangevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
             'item-add-to-cart'          => 'Item succesvol toegevoegd',
-            'minimum-order-message'     => 'Het minimum bestelbedrag is :amount',
+            'minimum-order-message'     => 'Het minimum bestelbedrag is',
             'missing-fields'            => 'Sommige vereiste velden ontbreken voor dit product.',
             'missing-options'           => 'Opties ontbreken voor dit product.',
             'paypal-payment-cancelled'  => 'PayPal-betaling is geannuleerd.',

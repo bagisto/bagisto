@@ -233,10 +233,8 @@ class OrderController extends Controller
     {
         $cart = Cart::getCart();
 
-        if (! $cart->checkMinimumOrder()) {
-            throw new \Exception(trans('admin::app.sales.orders.create.minimum-order-error', [
-                'amount' => core()->formatPrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0),
-            ]));
+        if (! $minimumOrderAmount = Cart::minimumOrderAmount()) {
+            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message'), core()->currency($minimumOrderAmount));
         }
 
         if (

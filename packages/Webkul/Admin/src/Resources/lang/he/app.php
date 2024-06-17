@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'תיאור',
                         'enable'                  => 'הפעל',
+                        'include-discount-amount' => 'כלול סכום הנחה',
+                        'include-tax-amount'      => 'כלול מס בסכום',
                         'info'                    => 'קריטריונים מוגדרים המציינים את הכמות או הערך הנדרש הנמוך ביותר עבור הזמנה כדי שתעבוד או תזכה בהטבות.',
                         'minimum-order-amount'    => 'סכום הזמנה מינימלי',
-                        'show-error-in-cart'      => 'הצג שגיאה בעגלת הקניות',
                         'title'                   => 'הגדרות הזמנה מינימלית',
-
-                        'include-discount-amount' => [
-                            'no'    => 'לא',
-                            'title' => 'כלול סכום הנחה',
-                            'yes'   => 'כן',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'לא',
-                            'title' => 'כלול מס בסכום',
-                            'yes'   => 'כן',
-                        ],
                     ],
 
                     'reorder' => [

@@ -694,14 +694,67 @@ class Cart
      */
     public function hasError(): bool
     {
+        if (! $this->cart) {
+            return true;
+        }
+
+        if (! $this->isItemsHaveSufficientQuantity()) {
+            return true;
+        }
+
         if (
-            ! $this->cart
-            || ! $this->isItemsHaveSufficientQuantity()
+            $this->minimumOrderAmount()
+            && $this->minimumOrderAmount() < (core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0)
         ) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Checks if cart has any error.
+     */
+    public function getErrors(): array
+    {
+        $errors = [];
+
+        if (! $this->hasError()) {
+            return $errors;
+        }
+
+        if ($this->minimumOrderAmount()) {
+            $minimumOrderDescription = core()->getConfigData('sales.order_settings.minimum_order.description');
+
+            $errors = [
+                'message' => $minimumOrderDescription ?: trans('shop::app.checkout.cart.minimum-order-message'),
+                'amount'  => core()->formatPrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount')),
+            ];
+        }
+
+        return $errors;
+    }
+
+    /**
+     * Check minimum Order Amount.
+     */
+    public function minimumOrderAmount(): mixed
+    {
+        if (! core()->getConfigData('sales.order_settings.minimum_order.enable')) {
+            return false;
+        }
+
+        $minimumOrderAmount = $this->cart->sub_total;
+
+        if (core()->getConfigData('sales.order_settings.minimum_order.include_tax_to_amount')) {
+            $minimumOrderAmount += $this->cart->tax_total;
+        }
+
+        if (core()->getConfigData('sales.order_settings.minimum_order.include_discount_amount')) {
+            $minimumOrderAmount -= $this->cart->tax_total;
+        }
+
+        return $minimumOrderAmount;
     }
 
     /**

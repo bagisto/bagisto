@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'الوصف',
                         'enable'                  => 'تمكين',
+                        'include-discount-amount' => 'تضمين مبلغ الخصم',
+                        'include-tax-amount'      => 'تضمين الضريبة في المبلغ',
                         'info'                    => 'معايير مكونة تحدد الحد الأدنى المطلوب للكمية أو القيمة لتجهيز الطلب أو التأهل للاستفادة.',
                         'minimum-order-amount'    => 'الحد الأدنى لمبلغ الطلب',
-                        'show-error-in-cart'      => 'خطأ لإظهاره في سلة التسوق',
                         'title'                   => 'إعدادات الحد الأدنى للطلب',
-
-                        'include-discount-amount' => [
-                            'no'    => 'لا',
-                            'title' => 'تضمين مبلغ الخصم',
-                            'yes'   => 'نعم',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'لا',
-                            'title' => 'تضمين الضريبة في المبلغ',
-                            'yes'   => 'نعم',
-                        ],
                     ],
 
                     'reorder' => [

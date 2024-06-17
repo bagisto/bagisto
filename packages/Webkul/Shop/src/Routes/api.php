@@ -87,8 +87,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::post('payment-methods', 'storePaymentMethod')->name('shop.checkout.onepage.payment_methods.store');
 
         Route::post('orders', 'storeOrder')->name('shop.checkout.onepage.orders.store');
-
-        Route::post('check-minimum-order', 'checkMinimumOrder')->name('shop.checkout.onepage.check_minimum_order');
     });
 
     /**

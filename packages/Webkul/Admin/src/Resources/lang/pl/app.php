@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'Opis',
                         'enable'                  => 'Włącz',
+                        'include-discount-amount' => 'Uwzględnij kwotę rabatu',
+                        'include-tax-amount'      => 'Uwzględnij podatek w kwocie',
                         'info'                    => 'Skonfigurowane kryteria określające minimalną wymaganą ilość lub wartość zamówienia, aby mogło być przetworzone lub kwalifikować się do korzyści.',
                         'minimum-order-amount'    => 'Minimalna kwota zamówienia',
-                        'show-error-in-cart'      => 'Błąd do wyświetlenia w koszyku',
                         'title'                   => 'Ustawienia minimalnego zamówienia',
-
-                        'include-discount-amount' => [
-                            'no'    => 'Nie',
-                            'title' => 'Uwzględnij kwotę rabatu',
-                            'yes'   => 'Tak',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'Nie',
-                            'title' => 'Uwzględnij podatek w kwocie',
-                            'yes'   => 'Tak',
-                        ],
                     ],
 
                     'reorder' => [

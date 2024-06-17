@@ -695,7 +695,7 @@ return [
             'inactive-add'              => 'Devre dışı ürün sepete eklenemez.',
             'inventory-warning'         => 'İstenen miktar şu anda stokta bulunmuyor, lütfen daha sonra tekrar deneyin',
             'item-add-to-cart'          => 'Ürün Başarıyla Eklendi',
-            'minimum-order-message'     => 'Minimum sipariş miktarı: :amount',
+            'minimum-order-message'     => 'Minimum sipariş miktarı',
             'missing-fields'            => 'Bu ürün için bazı gerekli alanlar eksik',
             'missing-options'           => 'Bu ürün için seçenekler eksik',
             'paypal-payment-cancelled'  => 'Paypal ödemesi iptal edildi.',

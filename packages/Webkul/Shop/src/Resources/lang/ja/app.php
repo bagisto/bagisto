@@ -695,7 +695,7 @@ return [
             'inactive'                  => 'アイテムは無効になり、カートから削除されました。',
             'inventory-warning'         => '要求された数量は利用できません。後でやり直してください。',
             'item-add-to-cart'          => 'アイテムが正常に追加されました',
-            'minimum-order-message'     => '最小注文金額は :amount です',
+            'minimum-order-message'     => '最小注文金額は です',
             'missing-fields'            => 'この製品にはいくつかの必須フィールドがありません。',
             'missing-options'           => 'この製品にはオプションがありません。',
             'paypal-payment-cancelled'  => 'PayPalの支払いがキャンセルされました。',

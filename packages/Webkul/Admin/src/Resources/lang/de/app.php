@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'Beschreibung',
                         'enable'                  => 'Aktivieren',
+                        'include-discount-amount' => 'Rabattbetrag einschließen',
+                        'include-tax-amount'      => 'Steuern zum Betrag hinzufügen',
                         'info'                    => 'Konfigurierte Kriterien, die die niedrigste erforderliche Menge oder den niedrigsten erforderlichen Wert für eine Bestellung festlegen, um verarbeitet zu werden oder Vorteile zu erhalten.',
                         'minimum-order-amount'    => 'Mindestbestellmenge',
-                        'show-error-in-cart'      => 'Fehler im Warenkorb anzeigen',
                         'title'                   => 'Einstellungen für Mindestbestellung',
-
-                        'include-discount-amount' => [
-                            'no'    => 'Nein',
-                            'title' => 'Rabattbetrag einschließen',
-                            'yes'   => 'Ja',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'Nein',
-                            'title' => 'Steuern zum Betrag hinzufügen',
-                            'yes'   => 'Ja',
-                        ],
                     ],
 
                     'reorder' => [

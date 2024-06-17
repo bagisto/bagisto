@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'Description',
                         'enable'                  => 'Enable',
+                        'include-discount-amount' => 'Include Discount Amount',
+                        'include-tax-amount'      => 'Include Tax to Amount',
                         'info'                    => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
                         'minimum-order-amount'    => 'Minimum Order Amount',
-                        'show-error-in-cart'      => 'Error to Show in Shopping Cart',
                         'title'                   => 'Minimum Order Settings',
-
-                        'include-discount-amount' => [
-                            'no'    => 'No',
-                            'title' => 'Include Discount Amount',
-                            'yes'   => 'Yes',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'No',
-                            'title' => 'Include Tax to Amount',
-                            'yes'   => 'Yes',
-                        ],
                     ],
 
                     'reorder' => [

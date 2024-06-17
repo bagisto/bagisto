@@ -695,7 +695,7 @@ return [
             'inactive'                  => 'El artículo ha sido desactivado y posteriormente eliminado del carrito.',
             'inventory-warning'         => 'La cantidad solicitada no está disponible, por favor inténtalo de nuevo más tarde.',
             'item-add-to-cart'          => 'Producto Agregado Exitosamente',
-            'minimum-order-message'     => 'El monto mínimo de la orden es :amount',
+            'minimum-order-message'     => 'El monto mínimo de la orden es',
             'missing-fields'            => 'Faltan algunos campos obligatorios para este producto.',
             'missing-options'           => 'Faltan opciones para este producto.',
             'paypal-payment-cancelled'  => 'El pago de Paypal ha sido cancelado.',

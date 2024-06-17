@@ -45,6 +45,10 @@ class OnepageController extends Controller
          * If cart has errors then redirect back to the cart page
          */
         if (Cart::hasError()) {
+            if ($error = Cart::getErrors()) {
+                return redirect()->route('shop.checkout.cart.index', compact('error'));
+            }
+
             return redirect()->route('shop.checkout.cart.index');
         }
 
@@ -62,19 +66,6 @@ class OnepageController extends Controller
             )
         ) {
             return redirect()->route('shop.customer.session.index');
-        }
-
-        /**
-         * If cart minimum order amount is not satisfied then redirect back to the cart page
-         */
-        $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
-
-        if (! $cart->checkMinimumOrder()) {
-            session()->flash('warning', trans('shop::app.checkout.cart.minimum-order-message', [
-                'amount' => core()->currency($minimumOrderAmount),
-            ]));
-
-            return redirect()->back();
         }
 
         return view('shop::checkout.onepage.index', compact('cart'));

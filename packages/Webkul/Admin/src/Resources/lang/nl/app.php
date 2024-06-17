@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'Beschrijving',
                         'enable'                  => 'Inschakelen',
+                        'include-discount-amount' => 'Inclusief korting',
+                        'include-tax-amount'      => 'Inclusief belasting',
                         'info'                    => 'Geconfigureerde criteria die de laagste vereiste hoeveelheid of waarde specificeren voor een bestelling om te worden verwerkt of in aanmerking te komen voor voordelen.',
                         'minimum-order-amount'    => 'Minimale bestelwaarde',
-                        'show-error-in-cart'      => 'Fout weergeven in winkelwagen',
                         'title'                   => 'Instellingen minimale bestelling',
-
-                        'include-discount-amount' => [
-                            'no'    => 'Nee',
-                            'title' => 'Inclusief korting',
-                            'yes'   => 'Ja',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'Nee',
-                            'title' => 'Inclusief belasting',
-                            'yes'   => 'Ja',
-                        ],
                     ],
 
                     'reorder' => [

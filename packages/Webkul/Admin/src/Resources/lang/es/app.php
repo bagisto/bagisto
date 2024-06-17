@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'Descripción',
                         'enable'                  => 'Habilitar',
+                        'include-discount-amount' => 'Incluir monto de descuento',
+                        'include-tax-amount'      => 'Incluir impuesto en el monto',
                         'info'                    => 'Criterios configurados que especifican la cantidad o el valor mínimo requerido para que un pedido se procese o califique para beneficios.',
                         'minimum-order-amount'    => 'Monto mínimo del pedido',
-                        'show-error-in-cart'      => 'Mostrar error en el carrito de compras',
                         'title'                   => 'Configuración del pedido mínimo',
-
-                        'include-discount-amount' => [
-                            'no'    => 'No',
-                            'title' => 'Incluir monto de descuento',
-                            'yes'   => 'Sí',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'No',
-                            'title' => 'Incluir impuesto en el monto',
-                            'yes'   => 'Sí',
-                        ],
                     ],
 
                     'reorder' => [

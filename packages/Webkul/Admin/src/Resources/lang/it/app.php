@@ -3873,22 +3873,11 @@ return [
                     'minimum-order' => [
                         'description'             => 'Descrizione',
                         'enable'                  => 'Abilita',
+                        'include-discount-amount' => 'Includi Importo Sconto',
+                        'include-tax-amount'      => 'Includi Importo Tasse',
                         'info'                    => 'Criteri configurati che specificano la quantità o il valore minimo richiesto per elaborare un ordine o qualificarsi per vantaggi.',
                         'minimum-order-amount'    => 'Importo Minimo dell\'Ordine',
-                        'show-error-in-cart'      => 'Errore da Mostrare nel Carrello',
                         'title'                   => 'Impostazioni Ordine Minimo',
-
-                        'include-discount-amount' => [
-                            'no'    => 'No',
-                            'title' => 'Includi Importo Sconto',
-                            'yes'   => 'Sì',
-                        ],
-
-                        'include-tax-amount' => [
-                            'no'    => 'No',
-                            'title' => 'Includi Importo Tasse',
-                            'yes'   => 'Sì',
-                        ],
                     ],
 
                     'reorder' => [
