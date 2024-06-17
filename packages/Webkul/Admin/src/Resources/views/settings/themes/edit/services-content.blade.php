@@ -20,7 +20,7 @@
                             @lang('admin::app.settings.themes.edit.services-content.service-info')
                         </p>
                     </div>
-
+    
                     <!-- Add Services Button -->
                     <div class="flex gap-2.5">
                         <div
@@ -153,95 +153,95 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Update Form -->
-        <x-admin::form
-            v-slot="{ meta, errors, handleSubmit }"
-            as="div"
-        >
-            <form 
-                @submit="handleSubmit($event, saveServices)"
-                ref="createServiceForm"
+            <!-- Update Form -->
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
             >
-                <x-admin::modal ref="addServiceModal">
-                    <!-- Modal Header -->
-                    <x-slot:header>
-                        <p class="text-lg font-bold text-gray-800 dark:text-white">
-                            @lang('admin::app.settings.themes.edit.services-content.update-service')
-                        </p>
-                    </x-slot>
+                <form 
+                    @submit="handleSubmit($event, saveServices)"
+                    ref="createServiceForm"
+                >
+                    <x-admin::modal ref="addServiceModal">
+                        <!-- Modal Header -->
+                        <x-slot:header>
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
+                                @lang('admin::app.settings.themes.edit.services-content.update-service')
+                            </p>
+                        </x-slot>
 
-                    <!-- Modal Content -->
-                    <x-slot:content>
-                        <!-- Title -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.services-content.title')
-                            </x-admin::form.control-group.label>
+                        <!-- Modal Content -->
+                        <x-slot:content>
+                            <!-- Title -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.services-content.title')
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="{{ $currentLocale->code }}[title]"
-                                rules="required"
-                                v-model="selectedService.title"
-                                :label="trans('admin::app.settings.themes.edit.services-content.title')"
-                                :placeholder="trans('admin::app.settings.themes.edit.services-content.title')"
-                            />
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="{{ $currentLocale->code }}[title]"
+                                    rules="required"
+                                    v-model="selectedService.title"
+                                    :label="trans('admin::app.settings.themes.edit.services-content.title')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.services-content.title')"
+                                />
 
-                            <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[title]" />
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[title]" />
+                            </x-admin::form.control-group>
 
-                        <!-- Description -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.themes.edit.services-content.description')
-                            </x-admin::form.control-group.label>
+                            <!-- Description -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.services-content.description')
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
-                                type="textarea"
-                                name="{{ $currentLocale->code }}[description]"
-                                v-model="selectedService.description"
-                                :label="trans('admin::app.settings.themes.edit.services-content.description')"
-                                :placeholder="trans('admin::app.settings.themes.edit.services-content.description')"
-                            />
+                                <x-admin::form.control-group.control
+                                    type="textarea"
+                                    name="{{ $currentLocale->code }}[description]"
+                                    v-model="selectedService.description"
+                                    :label="trans('admin::app.settings.themes.edit.services-content.description')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.services-content.description')"
+                                />
 
-                            <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[description]" />
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[description]" />
+                            </x-admin::form.control-group>
 
-                        <!-- Services Icon -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.services-content.service-icon-class')
-                            </x-admin::form.control-group.label>
+                            <!-- Services Icon -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.services-content.service-icon-class')
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="{{ $currentLocale->code }}[service_icon]"
-                                rules="required"
-                                v-model="selectedService.service_icon"
-                                :label="trans('admin::app.settings.themes.edit.services-content.service-icon-class')"
-                                :placeholder="trans('admin::app.settings.themes.edit.services-content.service-icon-class')"
-                            />
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="{{ $currentLocale->code }}[service_icon]"
+                                    rules="required"
+                                    v-model="selectedService.service_icon"
+                                    :label="trans('admin::app.settings.themes.edit.services-content.service-icon-class')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.services-content.service-icon-class')"
+                                />
 
-                            <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[service_icon]" />
-                        </x-admin::form.control-group>
-                    </x-slot>
+                                <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[service_icon]" />
+                            </x-admin::form.control-group>
+                        </x-slot>
 
-                    <!-- Modal Footer -->
-                    <x-slot:footer>
-                        <div class="flex items-center gap-x-2.5">
-                            <button 
-                                type="submit"
-                                class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
-                            >
-                                @lang('admin::app.settings.themes.edit.services-content.save-btn')
-                            </button>
-                        </div>
-                    </x-slot>
-                </x-admin::modal>
-            </form>
-        </x-admin::form>
+                        <!-- Modal Footer -->
+                        <x-slot:footer>
+                            <div class="flex items-center gap-x-2.5">
+                                <button 
+                                    type="submit"
+                                    class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
+                                >
+                                    @lang('admin::app.settings.themes.edit.services-content.save-btn')
+                                </button>
+                            </div>
+                        </x-slot>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
+        </div>
     </script>
 
     <script type="module">

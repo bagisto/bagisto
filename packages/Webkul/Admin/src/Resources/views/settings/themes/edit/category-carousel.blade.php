@@ -175,96 +175,96 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- For Fitler Form -->
-        <x-admin::form
-            v-slot="{ meta, errors, handleSubmit }"
-            as="div"
-        >
-            <form @submit="handleSubmit($event, addFilter)">
-                <x-admin::modal ref="categoryFilterModal">
-                    <!-- Modal Header -->
-                    <x-slot:header>
-                        <p class="text-lg font-bold text-gray-800 dark:text-white">
-                            @lang('admin::app.settings.themes.edit.create-filter')
-                        </p>
-                    </x-slot>
+            <!-- For Fitler Form -->
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <form @submit="handleSubmit($event, addFilter)">
+                    <x-admin::modal ref="categoryFilterModal">
+                        <!-- Modal Header -->
+                        <x-slot:header>
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
+                                @lang('admin::app.settings.themes.edit.create-filter')
+                            </p>
+                        </x-slot>
 
-                    <!-- Modal Content -->
-                    <x-slot:content>
-                        <!-- Key -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.key-input')
-                            </x-admin::form.control-group.label>
+                        <!-- Modal Content -->
+                        <x-slot:content>
+                            <!-- Key -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.key-input')
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="key"
-                                ::value="filters.available[0].code"
-                                rules="required"
-                                :label="trans('admin::app.settings.themes.edit.key-input')"
-                                @change="handleFilter($event)"
-                            >
-                                <option
-                                    v-for="filter in filters.available"
-                                    :value="filter.code"
-                                    :text="filter.name"
-                                ></option>
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error control-name="key" />
-                        </x-admin::form.control-group>
-
-                        <!-- Value -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.value-input')
-                            </x-admin::form.control-group.label>
-
-                            <template v-if="filters.applied.type == 'select'">
                                 <x-admin::form.control-group.control
                                     type="select"
-                                    name="value"
+                                    name="key"
+                                    ::value="filters.available[0].code"
                                     rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.value-input')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                                    :label="trans('admin::app.settings.themes.edit.key-input')"
+                                    @change="handleFilter($event)"
                                 >
                                     <option
-                                        v-for="option in filters.applied.options"
-                                        :value="option.id"
-                                        :text="option.name"
+                                        v-for="filter in filters.available"
+                                        :value="filter.code"
+                                        :text="filter.name"
                                     ></option>
                                 </x-admin::form.control-group.control>
-                            </template>
 
-                            <template v-else>
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="value"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.value-input')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')" 
-                                />
-                            </template>
+                                <x-admin::form.control-group.error control-name="key" />
+                            </x-admin::form.control-group>
 
-                            <x-admin::form.control-group.error control-name="value" />
-                        </x-admin::form.control-group>
-                    </x-slot>
+                            <!-- Value -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.value-input')
+                                </x-admin::form.control-group.label>
 
-                    <!-- Modal Footer -->
-                    <x-slot:footer>
-                        <button 
-                            type="submit"
-                            class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
-                        >
-                            @lang('admin::app.settings.themes.edit.save-btn')
-                        </button>
-                    </x-slot>
-                </x-admin::modal>
-            </form>
-        </x-admin::form>
+                                <template v-if="filters.applied.type == 'select'">
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="value"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.themes.edit.value-input')"
+                                        :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                                    >
+                                        <option
+                                            v-for="option in filters.applied.options"
+                                            :value="option.id"
+                                            :text="option.name"
+                                        ></option>
+                                    </x-admin::form.control-group.control>
+                                </template>
+
+                                <template v-else>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="value"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.themes.edit.value-input')"
+                                        :placeholder="trans('admin::app.settings.themes.edit.value-input')" 
+                                    />
+                                </template>
+
+                                <x-admin::form.control-group.error control-name="value" />
+                            </x-admin::form.control-group>
+                        </x-slot>
+
+                        <!-- Modal Footer -->
+                        <x-slot:footer>
+                            <button 
+                                type="submit"
+                                class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50"
+                            >
+                                @lang('admin::app.settings.themes.edit.save-btn')
+                            </button>
+                        </x-slot>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
+        </div>
     </script>
 
     <script type="module">

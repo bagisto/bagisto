@@ -112,7 +112,7 @@
                         <input
                             type="hidden"
                             name="type"
-                            value="category_carousel"
+                            value="{{ $theme->type }}"
                         >
     
                         <!-- Name -->
