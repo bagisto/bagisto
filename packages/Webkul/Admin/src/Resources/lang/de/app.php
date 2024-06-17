@@ -3348,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'Einheitsoptionen festlegen.',
                         'title'       => 'Einheitsoptionen',
-                        'title-info'  => 'Größe, Farbe, Material, Anpassung, Steigerung der Kundenzufriedenheit und Anpassung von Einkäufen.',
+                        'title-info'  => 'Konfigurieren Sie das Gewicht in Pfund (lbs) oder Kilogramm (kg).',
                         'weight-unit' => 'Gewichtseinheit',
                     ],
 
@@ -3387,7 +3387,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Logo-Bild',
                         'title'      => 'Admin-Logo',
-                        'title-info' => 'Das Admin-Logo ist das charakteristische Bild oder Emblem, das die Administrations-Schnittstelle eines Systems oder einer Website repräsentiert und oft anpassbar ist.',
+                        'title-info' => 'Konfigurieren Sie das Logo und das Favicon-Bild für das Frontend Ihrer Website für eine bessere Markenbildung und Wiedererkennung.',
                     ],
                 ],
 
@@ -3570,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'Das Teilen von Inhalten einer Website mit Freunden in sozialen Medienplattformen wie Facebook, Twitter oder Instagram.',
+                        'title-info'                  => 'Konfigurieren Sie die Einstellungen für die soziale Freigabe, um das Teilen von Produkten auf Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn und per E-Mail zu ermöglichen.',
                         'title'                       => 'Soziale Freigabe',
                         'share-message'               => 'Freigabemeldung',
                         'share'                       => 'Teilen',
@@ -3599,7 +3599,7 @@ return [
                         'show-sku'        => 'SKU anzeigen',
                         'show-weight'     => 'Gewicht anzeigen',
                         'title'           => 'Produkte',
-                        'title-info'      => 'Artikel, die zum Kauf oder zur Verwendung angeboten werden und von einem Unternehmen oder Verkäufer angeboten werden.',
+                        'info'            => 'Konfigurieren Sie die Produktbestandsoptionen, um Rückstände zu ermöglichen, setzen Sie Mindest- und Höchstwerte für den Warenkorb und definieren Sie Ausverkaufsgrenzen.',
                     ],
 
                     'categories' => [
@@ -3620,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'Minimale Menge im Warenkorb erlaubt',
                         'out-of-stock-threshold'  => 'Schwelle für nicht vorrätige Artikel',
                         'title'                   => 'Produktbestandsoption',
-                        'title-info'              => 'Konfigurieren Sie die Produktbestandsoptionen, um Rückstände zuzulassen, Mindest- und Höchstbestellmengen festzulegen und die Schwelle für nicht vorrätige Artikel zu definieren.',
+                        'info'                    => 'Konfigurieren Sie die Produktbestandsoptionen, um Rückstände zuzulassen, Mindest- und Höchstbestellmengen festzulegen und die Schwelle für nicht vorrätige Artikel zu definieren.',
                     ],
                 ],
             ],
@@ -3756,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Eine Benachrichtigung nach Stornierung einer Bestellung senden',
                     'customer'                                         => 'Die Kundenkontodaten nach der Registrierung senden',
                     'customer-registration-confirmation-mail-to-admin' => 'Eine Bestätigungs-E-Mail an den Admin nach Kundenregistrierung senden',
-                    'info'                                             => '"Benachrichtigung" ist eine Nachricht oder ein Hinweis, der Benutzer über Ereignisse, Updates oder Aktionen informiert und die Benutzerbindung und -wahrnehmung verbessert.',
+                    'info'                                             => 'Konfigurieren Sie die Produktlageroptionen, um Rückbestellungen zu ermöglichen, legen Sie Mindest- und Höchstwerte für den Warenkorb fest und definieren Sie Schwellenwerte für nicht verfügbare Artikel.',
                     'new-admin'                                        => 'Eine Bestätigungs-E-Mail an den Admin nach Aufgabe einer neuen Bestellung senden',
                     'new-inventory-source'                             => 'Eine Benachrichtigungs-E-Mail an die Lagerquelle nach Erstellung einer Lieferung senden',
                     'new-invoice'                                      => 'Eine Benachrichtigungs-E-Mail an den Kunden nach Erstellung einer neuen Rechnung senden',

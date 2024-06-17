@@ -3348,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'इकाई विकल्प सेट करें।',
                         'title'       => 'इकाई विकल्प',
-                        'title-info'  => 'आकार, रंग, सामग्री, अनुकूलन, ग्राहक संतुष्टि और खरीदारी को अनुकूलित करना।',
+                        'title-info'  => 'पाउंड (lbs) या किलोग्राम (kgs) में वजन कॉन्फ़िगर करें।',
                         'weight-unit' => 'वजन इकाई',
                     ],
 
@@ -3387,7 +3387,7 @@ return [
                         'favicon'    => 'फ़ेविकॉन',
                         'logo-image' => 'लोगो छवि',
                         'title'      => 'व्यवस्थापक लोगो',
-                        'title-info' => 'व्यवस्थापक लोगो सिस्टम या वेबसाइट के प्रशासन इंटरफ़ेस को प्रतिष्ठित छवि या प्रतीक रूप में प्रदर्शित करता है, जिसे आमतौर पर अनुकूलित किया जा सकता है।',
+                        'title-info' => 'अपनी वेबसाइट के फ्रंट एंड के लिए लोगो और फ़ेविकॉन छवियों को कॉन्फ़िगर करें ताकि ब्रांडिंग और पहचान के लिए बेहतर हो।',
                     ],
                 ],
 
@@ -3570,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'वेबसाइट से दोस्तों के साथ सोशल मीडिया प्लेटफ़ॉर्म्स जैसे फेसबुक, ट्विटर या इंस्टाग्राम पर चीजों को साझा करना।',
+                        'title-info'                  => 'इंस्टाग्राम, ट्विटर, व्हाट्सएप, फेसबुक, पिंटरेस्ट, लिंक्डइन और ईमेल के माध्यम से उत्पाद साझा करने के लिए सोशल शेयरिंग सेटिंग्स को कॉन्फ़िगर करें।',
                         'title'                       => 'सोशल शेयर',
                         'share-message'               => 'साझा करें संदेश',
                         'share'                       => 'साझा करें',
@@ -3599,7 +3599,7 @@ return [
                         'show-sku'        => 'एसकेयू दिखाएं',
                         'show-weight'     => 'वजन दिखाएं',
                         'title'           => 'उत्पाद',
-                        'title-info'      => 'व्यापार या विक्रेता द्वारा प्रदान किए जाने वाले खरीदारी या उपयोग के लिए उपलब्ध आइटम।',
+                        'title-info'      => 'SKU, वजन, श्रेणियाँ, छवियाँ, समीक्षाएँ, रेटिंग, ऑफर आदि सहित उत्पाद सेटिंग्स कॉन्फ़िगर करें।',
                     ],
 
                     'categories' => [
@@ -3620,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'शॉपिंग कार्ट में न्यूनतम मात्रा अनुमत है',
                         'out-of-stock-threshold'  => 'अप्राप्य स्थिति की सीमा',
                         'title'                   => 'उत्पाद स्टॉक विकल्प',
-                        'title-info'              => 'उत्पाद स्टॉक विकल्प को कॉन्फ़िगर करें ताकि बैक ऑर्डर की अनुमति हो, कार्ट में न्यूनतम और अधिकतम मात्रा सेट की जा सके, और अप्राप्य स्थिति को परिभाषित की जा सके।',
+                        'info'                    => 'बैक ऑर्डर स्वीकृत करने के लिए, कार्ट में न्यूनतम और अधिकतम मात्रा निर्धारित करने और अस्टॉक थ्रेशहोल्ड्स को परिभाषित करने के लिए प्रोडक्ट स्टॉक विकल्प कॉन्फ़िगर करें।',
                     ],
                 ],
             ],
@@ -3756,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Send a notification after canceling an order',
                     'customer'                                         => 'Send the customer account credentials after registration',
                     'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
-                    'info'                                             => '"Notification" is a message or alert that informs users about events, updates, or actions, enhancing user engagement and awareness.',
+                    'info'                                             => 'बैक ऑर्डर्स की अनुमति देने, कार्ट के न्यूनतम और अधिकतम मात्रा सेट करने, और अस्टॉक की थ्रेशोल्ड को परिभाषित करने के लिए प्रोडक्ट स्टॉक विकल्प कॉन्फ़िगर करें।',
                     'new-admin'                                        => 'Send a confirmation e-mail to the admin after placing a new order',
                     'new-inventory-source'                             => 'Send a notification e-mail to the inventory source after creating a shipment',
                     'new-invoice'                                      => 'Send a notification e-mail to the customer after creating a new invoice',

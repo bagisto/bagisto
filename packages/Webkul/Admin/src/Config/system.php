@@ -643,7 +643,7 @@ return [
                 'name'  => 'whatsapp',
                 'title' => 'admin::app.configuration.index.catalog.products.social-share.enable-share-whatsapp',
                 'type'  => 'boolean',
-                'info'  => 'admin::app.configuration.index.catalog.products.social-share.enable-share-whatsapp-info.',
+                'info'  => 'admin::app.configuration.index.catalog.products.social-share.enable-share-whatsapp-info',
             ], [
                 'name'  => 'linkedin',
                 'title' => 'admin::app.configuration.index.catalog.products.social-share.enable-share-linkedin',

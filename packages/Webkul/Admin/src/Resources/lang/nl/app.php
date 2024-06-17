@@ -3138,6 +3138,7 @@ return [
                 'image-size'                    => 'Afbeeldingsresolutie moet zijn (1920px X 700px)',
                 'image-title'                   => 'Afbeeldingstitel',
                 'image-upload-message'          => 'Alleen afbeeldingen (.jpeg, .jpg, .png, .webp, ..) zijn toegestaan.',
+                'inactive'                      => 'Inactief',
                 'key'                           => 'Sleutel: :key',
                 'key-input'                     => 'Sleutel',
                 'limit'                         => 'Limiet',
@@ -3347,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'Stel eenhedensopties in.',
                         'title'       => 'Eenheidsopties',
-                        'title-info'  => 'Grootte, kleur, materiaal, aanpassing, verbetering van klanttevredenheid en op maat gemaakte aankopen.',
+                        'title-info'  => 'Configureer het gewicht in ponden (lbs) of kilogrammen (kgs).',
                         'weight-unit' => 'Gewichtseenheid',
                     ],
 
@@ -3386,7 +3387,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Logo-afbeelding',
                         'title'      => 'Admin-logo',
-                        'title-info' => 'Het admin-logo is de onderscheidende afbeelding of embleem dat de beheerinterface van een systeem of website vertegenwoordigt, vaak aanpasbaar.',
+                        'title-info' => 'Configureer het logo en de favicon-afbeeldingen voor de voorkant van uw website voor een betere branding en herkenning.',
                     ],
                 ],
 
@@ -3569,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'Dingen delen vanaf een website met vrienden op sociale media platforms zoals Facebook, Twitter of Instagram.',
+                        'title-info'                  => 'Configureer sociale deelinstellingen om producten te delen op Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn en via e-mail.',
                         'title'                       => 'Sociale media delen',
                         'share-message'               => 'Deelbericht',
                         'share'                       => 'Delen',
@@ -3598,7 +3599,7 @@ return [
                         'show-sku'        => 'SKU weergeven',
                         'show-weight'     => 'Gewicht weergeven',
                         'title'           => 'Producten',
-                        'title-info'      => 'Items die te koop zijn of worden gebruikt, aangeboden door een bedrijf of verkoper.',
+                        'title-info'      => 'Configureer productinstellingen inclusief SKU, gewicht, categorieën, afbeeldingen, beoordelingen, ratings, aanbiedingen enz.',
                     ],
 
                     'categories' => [
@@ -3619,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'Minimale hoeveelheid toegestaan in winkelwagen',
                         'out-of-stock-threshold'  => 'Drempel voor uitverkochte producten',
                         'title'                   => 'Productvoorraadoptie',
-                        'title-info'              => 'Configureer productvoorraadopties om backorders toe te staan, minimale en maximale hoeveelheden in de winkelwagen in te stellen en drempels voor uitverkochte producten te definiëren.',
+                        'info'                    => 'Configureer productvoorraadopties om backorders toe te staan, stel minimale en maximale winkelwagenhoeveelheden in en definieer uitverkoopdrempels.',
                     ],
                 ],
             ],
@@ -3755,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Stuur een melding na het annuleren van een bestelling',
                     'customer'                                         => 'Stuur de klantaccountgegevens na registratie',
                     'customer-registration-confirmation-mail-to-admin' => 'Stuur een bevestigingsmail naar de beheerder na klantregistratie',
-                    'info'                                             => '"Melding" is een bericht of waarschuwing die gebruikers informeert over gebeurtenissen, updates of acties, waardoor de betrokkenheid en bewustwording van de gebruiker worden vergroot.',
+                    'info'                                             => 'Configureer productvoorraadopties om backorders toe te staan, stel minimale en maximale winkelwagenhoeveelheden in, en definieer drempels voor uitverkochte producten.',
                     'new-admin'                                        => 'Stuur een bevestigingsmail naar de beheerder na het plaatsen van een nieuwe bestelling',
                     'new-inventory-source'                             => 'Stuur een melding naar de voorraadbron na het maken van een zending',
                     'new-invoice'                                      => 'Stuur een melding naar de klant na het maken van een nieuwe factuur',

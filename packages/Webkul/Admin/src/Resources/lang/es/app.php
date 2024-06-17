@@ -3348,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'Establecer opciones de unidades.',
                         'title'       => 'Opciones de Unidades',
-                        'title-info'  => 'Tamaño, color, material, personalización, mejora de la satisfacción del cliente y adaptación de las compras.',
+                        'title-info'  => 'Configure el peso en libras (lbs) o kilogramos (kgs).',
                         'weight-unit' => 'Unidad de Peso',
                     ],
 
@@ -3387,7 +3387,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Imagen de Logotipo',
                         'title'      => 'Logotipo de Administrador',
-                        'title-info' => 'El logotipo de administrador es la imagen o emblema distintivo que representa la interfaz de administración de un sistema o sitio web, a menudo personalizable.',
+                        'title-info' => 'Configure imágenes de logotipo y favicon para la interfaz de su sitio web para una mejor marca y reconocimiento.',
                     ],
                 ],
 
@@ -3570,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'Compartir cosas desde un sitio web con amigos en plataformas de redes sociales como Facebook, Twitter o Instagram.',
+                        'title-info'                  => 'Configure la configuración de compartir en redes sociales para habilitar el compartir de productos en Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn y por correo electrónico.',
                         'title'                       => 'Compartir en redes sociales',
                         'share-message'               => 'Mensaje de compartir',
                         'share'                       => 'Compartir',
@@ -3599,7 +3599,7 @@ return [
                         'show-sku'        => 'Mostrar SKU',
                         'show-weight'     => 'Mostrar peso',
                         'title'           => 'Productos',
-                        'title-info'      => 'Artículos disponibles para su compra o uso, ofrecidos por un negocio o vendedor.',
+                        'info'            => 'Configure opciones de stock del producto para permitir pedidos pendientes, establecer cantidades mínimas y máximas en el carrito, y definir umbrales de falta de stock.',
                     ],
 
                     'categories' => [
@@ -3620,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'Cantidad mínima permitida en el carrito de compras',
                         'out-of-stock-threshold'  => 'Umbral de falta de stock',
                         'title'                   => 'Opción de stock de producto',
-                        'title-info'              => 'Configurar opciones de stock de productos para permitir pedidos pendientes, establecer cantidades mínimas y máximas en el carrito y definir umbrales de falta de stock.',
+                        'info'                    => 'Configurar opciones de stock de productos para permitir pedidos pendientes, establecer cantidades mínimas y máximas en el carrito y definir umbrales de falta de stock.',
                     ],
                 ],
             ],
@@ -3756,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Enviar una notificación después de cancelar un pedido',
                     'customer'                                         => 'Enviar las credenciales de la cuenta del cliente después del registro',
                     'customer-registration-confirmation-mail-to-admin' => 'Enviar un correo electrónico de confirmación al administrador después del registro del cliente',
-                    'info'                                             => '"Notificación" es un mensaje o alerta que informa a los usuarios sobre eventos, actualizaciones o acciones, mejorando la participación y la conciencia del usuario.',
+                    'info'                                             => 'Configure las opciones de stock del producto para permitir pedidos pendientes, establezca cantidades mínimas y máximas en el carrito, y defina umbrales de falta de stock.',
                     'new-admin'                                        => 'Enviar un correo electrónico de confirmación al administrador después de realizar un nuevo pedido',
                     'new-inventory-source'                             => 'Enviar un correo electrónico de notificación a la fuente de inventario después de crear un envío',
                     'new-invoice'                                      => 'Enviar un correo electrónico de notificación al cliente después de crear una nueva factura',

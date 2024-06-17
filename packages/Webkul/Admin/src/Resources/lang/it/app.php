@@ -3348,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'Imposta le opzioni delle unità.',
                         'title'       => 'Opzioni Unità',
-                        'title-info'  => 'Dimensione, colore, materiale, personalizzazione, miglioramento della soddisfazione del cliente e personalizzazione degli acquisti.',
+                        'title-info'  => 'Configura il peso in libbre (lbs) o chilogrammi (kgs).',
                         'weight-unit' => 'Unità di Peso',
                     ],
 
@@ -3387,7 +3387,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Immagine Logo',
                         'title'      => 'Logo Admin',
-                        'title-info' => 'Il logo admin è l\'immagine o l\'emblema distintivo che rappresenta l\'interfaccia di amministrazione di un sistema o un sito web, spesso personalizzabile.',
+                        'title-info' => 'Configura le immagini del logo e del favicon per il front-end del tuo sito web per un miglior branding e riconoscimento.',
                     ],
                 ],
 
@@ -3570,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'Condivisione di cose da un sito web con amici su piattaforme di social media come Facebook, Twitter o Instagram.',
+                        'title-info'                  => 'Configura le impostazioni di condivisione sui social network per abilitare la condivisione dei prodotti su Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn e tramite email.',
                         'title'                       => 'Condivisione sui social network',
                         'share-message'               => 'Messaggio di condivisione',
                         'share'                       => 'Condividi',
@@ -3599,7 +3599,7 @@ return [
                         'show-sku'        => 'Mostra SKU',
                         'show-weight'     => 'Mostra peso',
                         'title'           => 'Prodotti',
-                        'title-info'      => 'Articoli disponibili per l\'acquisto o l\'uso, offerti da un\'azienda o da un venditore.',
+                        'title-info'      => 'Configurare le impostazioni del prodotto inclusi SKU, peso, categorie, immagini, recensioni, valutazioni, offerte e altro.',
                     ],
 
                     'categories' => [
@@ -3620,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'Quantità minima consentita nel carrello',
                         'out-of-stock-threshold'  => 'Soglia di esaurimento delle scorte',
                         'title'                   => 'Opzione di stock del prodotto',
-                        'title-info'              => 'Configura le opzioni di stock del prodotto per consentire ordini in sospeso, impostare quantità minime e massime nel carrello e definire le soglie di esaurimento delle scorte.',
+                        'info'                    => 'Configurare le opzioni di stock del prodotto per consentire ordini in sospeso, impostare quantità minime e massime nel carrello e definire soglie di esaurimento scorte.',
                     ],
                 ],
             ],
@@ -3756,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Send a notification after canceling an order',
                     'customer'                                         => 'Send the customer account credentials after registration',
                     'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
-                    'info'                                             => '"Notification" is a message or alert that informs users about events, updates, or actions, enhancing user engagement and awareness.',
+                    'info'                                             => 'Configurare le opzioni di magazzino del prodotto per consentire ordini arretrati, impostare quantità minime e massime nel carrello e definire soglie di esaurimento scorte.',
                     'new-admin'                                        => 'Send a confirmation e-mail to the admin after placing a new order',
                     'new-inventory-source'                             => 'Send a notification e-mail to the inventory source after creating a shipment',
                     'new-invoice'                                      => 'Send a notification e-mail to the customer after creating a new invoice',

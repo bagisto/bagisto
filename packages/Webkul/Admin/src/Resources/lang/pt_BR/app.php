@@ -3348,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'Definir opções de unidades.',
                         'title'       => 'Opções de Unidade',
-                        'title-info'  => 'Tamanho, cor, material, personalização, aumentando a satisfação do cliente e adaptando as compras.',
+                        'title-info'  => 'Configure o peso em libras (lbs) ou quilogramas (kgs).',
                         'weight-unit' => 'Unidade de Peso',
                     ],
 
@@ -3387,7 +3387,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Imagem do Logotipo',
                         'title'      => 'Logotipo do Admin',
-                        'title-info' => 'O logotipo do admin é a imagem ou emblema distintivo que representa a interface de administração de um sistema ou site, muitas vezes personalizável.',
+                        'title-info' => 'Configure imagens de logotipo e favicon para a interface do seu site para melhorar a marca e o reconhecimento.',
                     ],
                 ],
 
@@ -3570,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'Compartilhar coisas de um site com amigos em plataformas de mídia social como Facebook, Twitter ou Instagram.',
+                        'title-info'                  => 'Configure as configurações de compartilhamento social para permitir o compartilhamento de produtos no Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn e por e-mail.',
                         'title'                       => 'Compartilhamento Social',
                         'share-message'               => 'Mensagem de Compartilhamento',
                         'share'                       => 'Compartilhar',
@@ -3599,7 +3599,7 @@ return [
                         'show-sku'        => 'Mostrar SKU',
                         'show-weight'     => 'Mostrar Peso',
                         'title'           => 'Produtos',
-                        'title-info'      => 'Itens disponíveis para compra ou uso, oferecidos por um negócio ou vendedor.',
+                        'title-info'      => 'Configurar configurações do produto incluindo SKU, peso, categorias, imagens, avaliações, classificações, ofertas e etc.',
                     ],
 
                     'categories' => [
@@ -3620,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'Quantidade Mínima Permitida no Carrinho de Compras',
                         'out-of-stock-threshold'  => 'Limite de Estoque Esgotado',
                         'title'                   => 'Opção de Estoque do Produto',
-                        'title-info'              => 'Configure as opções de estoque do produto para permitir pedidos pendentes, definir quantidades mínimas e máximas no carrinho e definir limites de estoque esgotado.',
+                        'info'                    => 'Configure opções de estoque do produto para permitir pedidos pendentes, definir quantidades mínimas e máximas no carrinho e definir limites de falta de estoque.',
                     ],
                 ],
             ],
@@ -3756,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Enviar uma notificação após cancelar um pedido',
                     'customer'                                         => 'Enviar as credenciais da conta do cliente após o registro',
                     'customer-registration-confirmation-mail-to-admin' => 'Enviar um e-mail de confirmação para o administrador após o registro do cliente',
-                    'info'                                             => '"Notificação" é uma mensagem ou alerta que informa os usuários sobre eventos, atualizações ou ações, melhorando o engajamento e a conscientização do usuário.',
+                    'info'                                             => 'Configure as opções de estoque do produto para permitir pedidos em atraso, definir quantidades mínimas e máximas no carrinho e definir limites de estoque indisponível.',
                     'new-admin'                                        => 'Enviar um e-mail de confirmação para o administrador após fazer um novo pedido',
                     'new-inventory-source'                             => 'Enviar um e-mail de notificação para a fonte de inventário após criar um envio',
                     'new-invoice'                                      => 'Enviar um e-mail de notificação para o cliente após criar uma nova fatura',

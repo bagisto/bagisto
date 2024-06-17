@@ -3348,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'Set units options.',
                         'title'       => 'Unit Options',
-                        'title-info'  => 'Size, color, material, customization, enhancing customer satisfaction and tailoring purchases.',
+                        'title-info'  => 'Configure the weight in pounds (lbs) or kilograms (kgs).',
                         'weight-unit' => 'Weight Unit',
                     ],
 
@@ -3387,7 +3387,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Logo Image',
                         'title'      => 'Admin Logo',
-                        'title-info' => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
+                        'title-info' => 'Configure logo and favicon images for your website\'s front end for better branding and recognition.',
                     ],
                 ],
 
@@ -3570,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'Sharing things from a website with friends on social media platforms like Facebook, Twitter, or Instagram.',
+                        'title-info'                  => 'Configure social sharing settings to enable product sharing on Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn, and via email.',
                         'title'                       => 'Social Share',
                         'share-message'               => 'Share Message',
                         'share'                       => 'Share',
@@ -3599,7 +3599,7 @@ return [
                         'show-sku'        => 'Show SKU',
                         'show-weight'     => 'Show Weight',
                         'title'           => 'Products',
-                        'title-info'      => 'Items available for purchase or use, offered by a business or seller.',
+                        'title-info'      => 'Configure product settings including with SKU, weight, Categories, Images, Reviews, Ratings, Offers and etc.',
                     ],
 
                     'categories' => [
@@ -3620,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'Minimum Qty Allowed in Shopping Cart',
                         'out-of-stock-threshold'  => 'Out-of-Stock Threshold',
                         'title'                   => 'Product Stock Option',
-                        'title-info'              => 'Configure product stock options to allow back orders, set minimum and maximum cart quantities, and define out-of-stock thresholds.',
+                        'info'                    => 'Configure product stock options to allow back orders, set minimum and maximum cart quantities, and define out-of-stock thresholds.',
                     ],
                 ],
             ],
@@ -3756,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Send a notification after canceling an order',
                     'customer'                                         => 'Send the customer account credentials after registration',
                     'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
-                    'info'                                             => '"Notification" is a message or alert that informs users about events, updates, or actions, enhancing user engagement and awareness.',
+                    'info'                                             => 'To configure, receive emails for account verification, order confirmations, updates on invoices, refunds, shipments, and order cancellations.',
                     'new-admin'                                        => 'Send a confirmation e-mail to the admin after placing a new order',
                     'new-inventory-source'                             => 'Send a notification e-mail to the inventory source after creating a shipment',
                     'new-invoice'                                      => 'Send a notification e-mail to the customer after creating a new invoice',

@@ -3348,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'Ustaw opcje jednostek.',
                         'title'       => 'Opcje jednostek',
-                        'title-info'  => 'Rozmiar, kolor, materiał, dostosowanie, zwiększanie satysfakcji klienta i dostosowywanie zakupów.',
+                        'title-info'  => 'Skonfiguruj wagę w funtach (lbs) lub kilogramach (kgs).',
                         'weight-unit' => 'Jednostka wagi',
                     ],
 
@@ -3387,7 +3387,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Obraz logo',
                         'title'      => 'Logo administratora',
-                        'title-info' => 'Logo administratora to charakterystyczny obraz lub emblemat reprezentujący interfejs administracyjny systemu lub strony internetowej, często dostosowywany.',
+                        'title-info' => 'Skonfiguruj obrazy logo i favicon dla front-endu Twojej witryny, aby poprawić rozpoznawalność i branding.',
                     ],
                 ],
 
@@ -3570,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'Dzielenie się rzeczami z witryny z przyjaciółmi na platformach mediów społecznościowych, takich jak Facebook, Twitter lub Instagram.',
+                        'title-info'                  => 'Skonfiguruj ustawienia udostępniania społecznościowego, aby umożliwić udostępnianie produktów na Instagramie, Twitterze, WhatsApp, Facebooku, Pinterest, LinkedIn i za pośrednictwem poczty elektronicznej.',
                         'title'                       => 'Udostępnianie społecznościowe',
                         'share-message'               => 'Wiadomość udostępniania',
                         'share'                       => 'Udostępnij',
@@ -3599,7 +3599,7 @@ return [
                         'show-sku'        => 'Pokaż SKU',
                         'show-weight'     => 'Pokaż wagę',
                         'title'           => 'Produkty',
-                        'title-info'      => 'Przedmioty dostępne do zakupu lub użytku, oferowane przez firmę lub sprzedawcę.',
+                        'title-info'      => 'Skonfiguruj ustawienia produktu, w tym SKU, wagę, kategorie, obrazy, recenzje, oceny, oferty itp.',
                     ],
 
                     'categories' => [
@@ -3620,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'Minimalna ilość dozwolona w koszyku',
                         'out-of-stock-threshold'  => 'Próg braku towaru',
                         'title'                   => 'Opcja zapasów produktów',
-                        'title-info'              => 'Skonfiguruj opcje zapasów produktów, aby umożliwić zamówienia z oczekiwaniem, ustawić minimalne i maksymalne ilości w koszyku oraz zdefiniować próg braku towaru.',
+                        'info'                    => 'Skonfiguruj opcje zapasów produktu, aby umożliwić zamówienia wsteczne, ustawić minimalne i maksymalne ilości w koszyku oraz zdefiniować progi braku towaru.',
                     ],
                 ],
             ],
@@ -3756,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Wyślij powiadomienie po anulowaniu zamówienia',
                     'customer'                                         => 'Wyślij dane logowania klienta po rejestracji',
                     'customer-registration-confirmation-mail-to-admin' => 'Wyślij e-mail potwierdzający do administratora po rejestracji klienta',
-                    'info'                                             => '"Powiadomienie" to wiadomość lub alert informujący użytkowników o wydarzeniach, aktualizacjach lub działaniach, zwiększając zaangażowanie i świadomość użytkowników.',
+                    'info'                                             => 'Skonfiguruj opcje zapasów produktu, aby umożliwić zamówienia wsteczne, ustawić minimalne i maksymalne ilości w koszyku oraz zdefiniować progi braku towaru.',
                     'new-admin'                                        => 'Wyślij e-mail potwierdzający do administratora po złożeniu nowego zamówienia',
                     'new-inventory-source'                             => 'Wyślij e-mail powiadomienia do źródła inwentarza po utworzeniu przesyłki',
                     'new-invoice'                                      => 'Wyślij e-mail powiadomienia do klienta po utworzeniu nowej faktury',

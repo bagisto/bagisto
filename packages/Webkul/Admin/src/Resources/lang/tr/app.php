@@ -1846,7 +1846,6 @@ return [
                         'edit'    => 'Düzenle',
                         'id'      => 'ID',
                         'name'    => 'Adı',
-
                     ],
 
                     'create' => [
@@ -2428,7 +2427,6 @@ return [
             'seo'              => 'SEO',
             'title'            => 'Sayfa Oluştur',
             'url-key'          => 'URL Anahtarı',
-
         ],
 
         'edit' => [
@@ -3350,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'Birim seçeneklerini ayarlayın.',
                         'title'       => 'Birim Seçenekleri',
-                        'title-info'  => 'Boyut, renk, malzeme, özelleştirme, müşteri memnuniyetini artırma ve satın almaları özelleştirme.',
+                        'title-info'  => 'Ağırlığı pound (lbs) veya kilogram (kgs) cinsinden yapılandırın.',
                         'weight-unit' => 'Ağırlık Birimi',
                     ],
 
@@ -3389,7 +3387,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Logo Resmi',
                         'title'      => 'Yönetici Logosu',
-                        'title-info' => 'Yönetici logosu, genellikle özelleştirilebilen bir sistemin veya web sitesinin yönetim arayüzünü temsil eden ayırt edici bir görüntü veya simgedir.',
+                        'title-info' => 'Web sitenizin ön ucu için logo ve favicon görüntülerini daha iyi markalaşma ve tanınma için yapılandırın.',
                     ],
                 ],
 
@@ -3572,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'Bir web sitesinden Facebook, Twitter veya Instagram gibi sosyal medya platformlarında arkadaşlarla paylaşma.',
+                        'title-info'                  => 'Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn ve e-posta aracılığıyla ürün paylaşımını etkinleştirmek için sosyal paylaşım ayarlarını yapılandırın.',
                         'title'                       => 'Sosyal Paylaşım',
                         'share-message'               => 'Paylaşım Mesajı',
                         'share'                       => 'Paylaş',
@@ -3601,7 +3599,7 @@ return [
                         'show-sku'        => 'SKU\'yu Göster',
                         'show-weight'     => 'Ağırlığı Göster',
                         'title'           => 'Ürünler',
-                        'title-info'      => 'Bir işletme veya satıcı tarafından sunulan satın alınabilir veya kullanılabilir ürünler.',
+                        'title-info'      => 'SKU, ağırlık, kategoriler, resimler, yorumlar, derecelendirmeler, teklifler vb. dahil ürün ayarlarını yapılandırın.',
                     ],
 
                     'categories' => [
@@ -3622,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'Alışveriş Sepetinde İzin Verilen Minimum Miktar',
                         'out-of-stock-threshold'  => 'Stokta Olmayan Eşik Değeri',
                         'title'                   => 'Ürün Stok Seçeneği',
-                        'title-info'              => 'Geri siparişlere izin verme, minimum ve maksimum sepet miktarlarını belirleme ve stokta olmayan eşik değerlerini tanımlama için ürün stok seçeneklerini yapılandırın.',
+                        'info'                    => 'Geri siparişlere izin vermek için ürün stok seçeneklerini yapılandırın, minimum ve maksimum sepette miktarları ayarlayın ve stok dışı eşikleri tanımlayın.',
                     ],
                 ],
             ],
@@ -3758,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Bir sipariş iptal edildikten sonra bildirim gönder',
                     'customer'                                         => 'Kayıt olduktan sonra müşteri hesap bilgilerini gönder',
                     'customer-registration-confirmation-mail-to-admin' => 'Müşteri kaydından sonra yöneticiye bir onay e-postası gönder',
-                    'info'                                             => '"Bildirim" kullanıcıları etkinlikler, güncellemeler veya eylemler hakkında bilgilendiren bir mesaj veya uyarıdır ve kullanıcı katılımını ve farkındalığını artırır.',
+                    'info'                                             => 'Geri siparişlere izin vermek için ürün stok seçeneklerini yapılandırın, minimum ve maksimum sepet miktarlarını ayarlayın ve stok dışı eşiklerini tanımlayın.',
                     'new-admin'                                        => 'Yeni bir sipariş verildikten sonra yöneticiye bir onay e-postası gönder',
                     'new-inventory-source'                             => 'Bir sevkiyat oluşturduktan sonra envanter kaynağına bir bildirim e-postası gönder',
                     'new-invoice'                                      => 'Yeni bir fatura oluşturduktan sonra müşteriye bir bildirim e-postası gönder',

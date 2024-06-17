@@ -1845,7 +1845,6 @@ return [
                         'edit'    => '编辑',
                         'id'      => 'ID',
                         'name'    => '名称',
-
                     ],
 
                     'create' => [
@@ -3348,7 +3347,7 @@ return [
                     'unit-options' => [
                         'info'        => '设置单位选项。',
                         'title'       => '单位选项',
-                        'title-info'  => '尺寸、颜色、材料、定制化，提升顾客满意度和个性化购买。',
+                        'title-info'  => '配置重量单位为磅（lbs）或千克（kgs）。',
                         'weight-unit' => '重量单位',
                     ],
 
@@ -3387,7 +3386,7 @@ return [
                         'favicon'    => '网站图标',
                         'logo-image' => '标志图像',
                         'title'      => '管理标志',
-                        'title-info' => '管理标志是表示系统或网站管理界面的独特图像或徽标，通常可自定义。',
+                        'title-info' => '为您的网站前端配置标志和网站图标图像，以提升品牌形象和识别度。',
                     ],
                 ],
 
@@ -3570,7 +3569,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => '在社交媒体平台（如Facebook、Twitter或Instagram）上与朋友分享网站上的内容。',
+                        'title-info'                  => '配置社交分享设置，以在Instagram、Twitter、WhatsApp、Facebook、Pinterest、LinkedIn和电子邮件中启用产品分享。',
                         'title'                       => '社交分享',
                         'share-message'               => '分享消息',
                         'share'                       => '分享',
@@ -3599,7 +3598,7 @@ return [
                         'show-sku'        => '显示SKU',
                         'show-weight'     => '显示重量',
                         'title'           => '产品',
-                        'title-info'      => '由企业或卖家提供的可购买或使用的物品。',
+                        'title-info'      => '配置产品设置，包括SKU、重量、类别、图像、评论、评分、优惠等。',
                     ],
 
                     'categories' => [
@@ -3620,7 +3619,7 @@ return [
                         'min-qty-allowed-in-cart' => '购物车中允许的最小数量',
                         'out-of-stock-threshold'  => '缺货阈值',
                         'title'                   => '产品库存选项',
-                        'title-info'              => '配置产品库存选项以允许缺货、设置购物车的最小和最大数量，并定义缺货阈值。',
+                        'info'                    => '配置产品库存选项，允许后订单，设置购物车的最小和最大数量，并定义缺货门槛。',
                     ],
                 ],
             ],
@@ -3756,7 +3755,7 @@ return [
                     'cancel-order'                                     => '注文をキャンセルした後に通知を送信する',
                     'customer'                                         => '登録後に顧客アカウントの資格情報を送信する',
                     'customer-registration-confirmation-mail-to-admin' => '顧客登録後に管理者に確認メールを送信する',
-                    'info'                                             => '「通知」は、イベント、更新、またはアクションについてユーザーに通知するメッセージまたはアラートであり、ユーザーの関与と認識を高めます。',
+                    'info'                                             => '配置产品库存选项，允许后订单，设置购物车的最小和最大数量，并定义缺货门槛。',
                     'new-admin'                                        => '新しい注文を配置した後に管理者に確認メールを送信する',
                     'new-inventory-source'                             => '出荷を作成した後に在庫ソースに通知メールを送信する',
                     'new-invoice'                                      => '新しい請求書を作成した後に顧客に通知メールを送信する',

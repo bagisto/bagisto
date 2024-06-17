@@ -3348,7 +3348,7 @@ return [
                     'unit-options' => [
                         'info'        => 'Définir les options d\'unités.',
                         'title'       => 'Options d\'unité',
-                        'title-info'  => 'Taille, couleur, matériau, personnalisation, amélioration de la satisfaction client et adaptation des achats.',
+                        'title-info'  => 'Configurez le poids en livres (lbs) ou en kilogrammes (kgs).',
                         'weight-unit' => 'Unité de poids',
                     ],
 
@@ -3387,7 +3387,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Image du logo',
                         'title'      => 'Logo de l\'administrateur',
-                        'title-info' => 'Le logo de l\'administrateur est l\'image ou l\'emblème distinctif représentant l\'interface d\'administration d\'un système ou d\'un site web, souvent personnalisable.',
+                        'title-info' => 'Configurez les images du logo et du favicon pour la partie frontale de votre site web afin d\'améliorer votre image de marque et votre reconnaissance.',
                     ],
                 ],
 
@@ -3570,7 +3570,7 @@ return [
                     ],
 
                     'social-share' => [
-                        'title-info'                  => 'Partager des choses depuis un site Web avec des amis sur des plateformes de médias sociaux comme Facebook, Twitter ou Instagram.',
+                        'title-info'                  => 'Configurez les paramètres de partage social pour permettre le partage de produits sur Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn et par e-mail.',
                         'title'                       => 'Partage social',
                         'share-message'               => 'Message de partage',
                         'share'                       => 'Partager',
@@ -3599,7 +3599,7 @@ return [
                         'show-sku'        => 'Afficher le SKU',
                         'show-weight'     => 'Afficher le poids',
                         'title'           => 'Produits',
-                        'title-info'      => 'Articles disponibles à l\'achat ou à l\'utilisation, proposés par une entreprise ou un vendeur.',
+                        'info'            => 'Configurer les options de stock du produit pour autoriser les commandes en attente, définir les quantités minimales et maximales dans le panier, et définir les seuils de rupture de stock.',
                     ],
 
                     'categories' => [
@@ -3620,7 +3620,7 @@ return [
                         'min-qty-allowed-in-cart' => 'Quantité minimale autorisée dans le panier',
                         'out-of-stock-threshold'  => 'Seuil de rupture de stock',
                         'title'                   => 'Option de stock de produit',
-                        'title-info'              => 'Configurez les options de stock de produit pour autoriser les commandes en attente, définir les quantités minimales et maximales du panier, et définir les seuils de rupture de stock.',
+                        'info'                    => 'Configurez les options de stock de produit pour autoriser les commandes en attente, définir les quantités minimales et maximales du panier, et définir les seuils de rupture de stock.',
                     ],
                 ],
             ],
@@ -3756,7 +3756,7 @@ return [
                     'cancel-order'                                     => 'Envoyer une notification après l\'annulation d\'une commande',
                     'customer'                                         => 'Envoyer les informations de compte client après l\'inscription',
                     'customer-registration-confirmation-mail-to-admin' => 'Envoyer un e-mail de confirmation à l\'administrateur après l\'inscription du client',
-                    'info'                                             => '"Notification" est un message ou une alerte qui informe les utilisateurs des événements, des mises à jour ou des actions, améliorant ainsi l\'engagement et la sensibilisation des utilisateurs.',
+                    'info'                                             => 'Configurer les options de stock du produit pour permettre les commandes en attente, définir les quantités minimales et maximales dans le panier, et définir les seuils de rupture de stock.',
                     'new-admin'                                        => 'Envoyer un e-mail de confirmation à l\'administrateur après avoir passé une nouvelle commande',
                     'new-inventory-source'                             => 'Envoyer un e-mail de notification à la source d\'inventaire après la création d\'un envoi',
                     'new-invoice'                                      => 'Envoyer un e-mail de notification au client après la création d\'une nouvelle facture',
