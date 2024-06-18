@@ -20,9 +20,9 @@ import * as AllRules from '@vee-validate/rules';
 /**
  * Registration of all global validators.
  */
-Object.keys(AllRules).forEach(rule => {
-    defineRule(rule, AllRules[rule]);
-});
+Object.keys(AllRules)
+    .filter(rule => typeof AllRules[rule] === 'function')
+    .forEach(rule => defineRule(rule, AllRules[rule]));
 
 
 defineRule("", () => true);

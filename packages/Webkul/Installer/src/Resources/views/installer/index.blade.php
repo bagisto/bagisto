@@ -232,6 +232,23 @@
                                     </template>
 
                                     <p>@lang('installer::app.installer.index.ready-for-installation.title')</p>
+                                </div>
+                                
+                                <!-- Create Sample Product -->
+                                <div :class="[stepStates.createSampleProducts == 'active' ? 'font-bold' : '']">
+                                    <template v-if="stepStates.createSampleProducts !== 'complete'">
+                                        <span
+                                            class="text-xl"
+                                            :class="stepStates.createSampleProducts === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
+                                        >
+                                        </span>
+                                    </template>
+
+                                    <template v-else>
+                                        <span class="icon-tick text-green-500"></span>
+                                    </template>
+
+                                    <p>@lang('Create Sample Products')</p>
                                 </div> 
 
                                 <!-- Create Admin Configuration -->
@@ -828,7 +845,7 @@
                                     @lang('installer::app.installer.index.environment-configuration.warning-message')
                                 </div>
 
-                                <div class="flex gap-2.5">
+                                <div class="grid grid-cols-2 gap-2.5">
                                     <!-- Application Default Locale -->
                                     <x-installer::form.control-group class="w-full">
                                         <x-installer::form.control-group.label class="required">
@@ -880,7 +897,7 @@
                                     </x-installer::form.control-group>
                                 </div>
 
-                                <div class="flex gap-2.5">
+                                <div class="grid grid-cols-2 gap-2.5">
                                     <!-- Allowed Locales -->
                                     <x-installer::form.control-group class="w-full">
                                         <x-installer::form.control-group.label class="required">
@@ -888,7 +905,7 @@
                                         </x-installer::form.control-group.label>
 
                                         @foreach ($locales as $key => $locale)
-                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5 p-1.5">
+                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-1">
                                                 @php
                                                     $selectedOption = ($key == config('app.locale'));
                                                 @endphp
@@ -927,7 +944,7 @@
                                         </x-installer::form.control-group.label>
     
                                         @foreach ($currencies as $key => $currency)
-                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5 p-1.5">
+                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-1">
                                                 @php
                                                     $selectedOption = $key == config('app.currency');
                                                 @endphp
@@ -971,6 +988,72 @@
                                     @lang('installer::app.installer.index.continue')
                                 </button>
                             </div>
+                        </form>
+                    </x-installer::form>
+                </div>
+
+                <!-- Create Sample Products -->
+                <div
+                    class="w-full max-w-[568px] rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    v-if="currentStep == 'createSampleProducts'"
+                >
+                    <x-installer::form
+                        v-slot="{ meta, errors, handleSubmit }"
+                        as="div"
+                        ref="createSampleProducts"
+                    >
+                        <form
+                            @submit.prevent="handleSubmit($event, FormSubmit)"
+                            enctype="multipart/form-data"
+                        >
+                            <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
+                                <p class="text-xl font-bold text-gray-800">
+                                    @lang('Create Sample Products') 
+                                </p>
+                            </div>
+
+                            <div class="flex h-[484px] flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
+                                <!-- Sample Products -->
+                                <x-admin::form.control-group.label>
+                                    @lang("installer::app.installer.index.create-administrator.sample-products")
+                                </x-admin::form.control-group.label>
+                            
+                                <x-installer::form.control-group.control
+                                    type="select"
+                                    id="sample_products"
+                                    name="sample_products"
+                                    for="sample_products"
+                                    :value="0"
+                                >
+                                    <option value="1">
+                                        @lang('Yes')
+                                    </option>
+                            
+                                    <option value="0">
+                                        @lang('No')
+                                    </option>
+                                </x-installer::form.control-group.control>
+                            
+                                <a
+                                    href="{{ Storage::disk('public')->url('data-transfer/samples/products.csv') }}"
+                                    download="products.csv"
+                                    id="source-sample-link"
+                                    class="mt-1 cursor-pointer text-right text-sm text-blue-600 transition-all hover:underline"
+                                >
+                                    @lang('installer::app.installer.index.create-administrator.download-sample')
+                                </a>
+                            </div>
+
+                            <div class="flex items-center justify-end px-4 py-2.5">
+                                <x-installer::button
+                                    button-type="submit"
+                                    class="primary-button"
+                                    :title="trans('installer::app.installer.index.continue')"
+                                    tabindex="0"
+                                    ::loading="isLoading"
+                                    ::disabled="isLoading"
+                                />
+                             </div>
                         </form>
                     </x-installer::form>
                 </div>
@@ -1065,35 +1148,6 @@
 
                                     <x-installer::form.control-group.error control-name="confirm_password" />
                                 </x-installer::form.control-group>
-
-                                <div class="flex items-center justify-between">
-                                    <!-- Sample Products -->
-                                    <x-installer::form.control-group class="!mb-0 flex select-none items-center">
-                                        <x-installer::form.control-group.control
-                                            type="checkbox"
-                                            id="sample_products"
-                                            name="sample_products"
-                                            value="1"
-                                            for="sample_products"
-                                        />
-
-                                        <label
-                                            class="cursor-pointer text-sm font-medium text-gray-600"
-                                            for="sample_products"
-                                        >
-                                            @lang("installer::app.installer.index.create-administrator.sample-products")
-                                        </label>
-                                    </x-installer::form.control-group>
-
-                                    <a
-                                        href="{{ Storage::disk('public')->url('data-transfer/samples/products.csv') }}"
-                                        download="products.csv"
-                                        id="source-sample-link"
-                                        class="mt-1 cursor-pointer text-sm text-blue-600 transition-all hover:underline"
-                                    >
-                                        @lang('installer::app.installer.index.create-administrator.download-sample')
-                                    </a>
-                                </div>
                             </div>
 
                             <div class="flex items-center justify-end px-4 py-2.5">
@@ -1200,6 +1254,7 @@
                                 envDatabase: 'pending',
                                 readyForInstallation: 'pending',
                                 envConfiguration: 'pending',
+                                createSampleProducts: 'pending',
                                 createAdmin: 'pending',
                                 installationCompleted: 'pending',
                             },
@@ -1211,6 +1266,7 @@
                                 'readyForInstallation',
                                 'installProgress',
                                 'envConfiguration',
+                                'createSampleProducts',
                                 'createAdmin',
                                 'installationCompleted',
                             ],
@@ -1250,6 +1306,10 @@
                                     this.currentStep = 'installProgress';
 
                                     this.startMigration(setErrors);
+                                },
+
+                                createSampleProducts: (setErrors) => {
+                                    this.createSampleProducts(params, setErrors);
                                 },
 
                                 createAdmin: (setErrors) => {
@@ -1366,21 +1426,42 @@
                                 'selectedParameters': selectedParams
                             })
                                 .then((response) => {
-                                    this.completeStep('envConfiguration', 'createAdmin', 'active', 'complete');
+                                    this.completeStep('readyForInstallation', 'createSampleProducts', 'active', 'complete');
 
-                                    this.currentStep = 'createAdmin';
+                                    this.currentStep = 'createSampleProducts';
                             })
                                 .catch(error => {
                                     setErrors(error.response.data.errors);
                                 });
                         },
 
+                        createSampleProducts(params, setErrors) {
+                            if (params.sample_products){
+                                this.isLoading = true;
+
+                                this.$axios.post("{{ route('installer.sample_products_setup') }}",{
+                                    'selectedLocales': this.locales.allowed,
+                                    'selectedCurrencies': this.currencies.allowed,
+                                })
+                                    .then((response) => {
+                                        this.isLoading = false;
+
+                                        this.completeStep('createSampleProducts', 'createAdmin', 'active', 'complete');
+
+                                        this.currentStep = 'createAdmin';
+                                    })
+                                    .catch(error => {
+                                        setErrors(error.response.data.errors);
+                                    });
+                            } else {
+                                this.completeStep('createSampleProducts', 'createAdmin', 'active', 'complete');
+
+                                this.currentStep = 'createAdmin';
+                            }    
+                        },
+
                         saveAdmin(params, setErrors) {
-                            this.$axios.post("{{ route('installer.admin_config_setup') }}",{
-                                'selectedLocales': this.locales.allowed,
-                                'selectedCurrencies': this.currencies.allowed,
-                                params,
-                            })
+                            this.$axios.post("{{ route('installer.admin_config_setup') }}", params)
                                 .then((response) => {
                                     this.isLoading = false;
 
