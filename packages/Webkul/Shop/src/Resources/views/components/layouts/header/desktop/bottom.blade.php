@@ -167,6 +167,7 @@
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
+                            
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up_button.after') !!}
                         </div>
 
