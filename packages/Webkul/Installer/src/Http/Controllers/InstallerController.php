@@ -123,7 +123,7 @@ class InstallerController extends Controller
     }
 
     /**
-     * Admin Configuration Setup.
+     * Create Sample Products.
      *
      * @return mixed
      */
