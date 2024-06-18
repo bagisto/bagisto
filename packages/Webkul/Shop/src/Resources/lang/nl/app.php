@@ -601,6 +601,7 @@ return [
                 'load-more'        => 'Meer laden',
                 'name'             => 'Naam',
                 'rating'           => 'Beoordeling',
+                'ratings'          => 'Waarderingen',
                 'submit-review'    => 'Beoordeling indienen',
                 'success'          => 'Beoordeling succesvol ingediend.',
                 'title'            => 'Titel',

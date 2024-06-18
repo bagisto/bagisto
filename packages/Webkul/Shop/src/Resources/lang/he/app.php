@@ -601,6 +601,7 @@ return [
                 'load-more'        => 'טען עוד',
                 'name'             => 'שם',
                 'rating'           => 'דירוג',
+                'ratings'          => 'דירוגים',
                 'submit-review'    => 'שלח ביקורת',
                 'success'          => 'ביקורת נשלחה בהצלחה.',
                 'title'            => 'כותרת',
