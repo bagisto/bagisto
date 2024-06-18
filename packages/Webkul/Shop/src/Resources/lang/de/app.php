@@ -601,6 +601,7 @@ return [
                 'load-more'        => 'Mehr laden',
                 'name'             => 'Name',
                 'rating'           => 'Bewertung',
+                'ratings'          => 'Bewertungen',
                 'submit-review'    => 'Bewertung absenden',
                 'success'          => 'Bewertung erfolgreich übermittelt.',
                 'title'            => 'Titel',
