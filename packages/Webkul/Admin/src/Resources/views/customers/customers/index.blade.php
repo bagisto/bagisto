@@ -226,7 +226,7 @@
                             </a>
 
                             <a
-                                class="icon-sort-right cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
+                                class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
                                 :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
                             >
                             </a>

@@ -141,7 +141,7 @@
                         <a 
                             :href="`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`"
                             target="_blank"
-                            class="icon-sort-right cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
+                            class="icon-sort-right rtl:icon-sort-left cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
                         >
                         </a>
                     </div>
