@@ -61,8 +61,7 @@
 
             @if ($errors = Cart::getErrors())
                 <div class="mt-5 w-full gap-12 rounded-lg bg-[#FFF3CD] px-5 py-3 text-[#383D41]">
-                    {{ $errors['message'] }}
-                    {{ $errors['amount'] }}
+                    {{ implode(": ", Cart::getErrors()) }}
                 </div>
             @endif
 
