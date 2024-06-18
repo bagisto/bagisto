@@ -2,9 +2,9 @@
 
 namespace Webkul\Admin\DataGrids\CMS;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
-use Illuminate\Support\Facades\App; 
 
 class CMSPageDataGrid extends DataGrid
 {
@@ -27,7 +27,7 @@ class CMSPageDataGrid extends DataGrid
             ->addSelect(DB::raw('GROUP_CONCAT(DISTINCT channels.code) as channel'))
             ->join('cms_page_translations', function ($join) use ($currentLocale) {
                 $join->on('cms_pages.id', '=', 'cms_page_translations.cms_page_id')
-                     ->where('cms_page_translations.locale', '=', $currentLocale);
+                    ->where('cms_page_translations.locale', '=', $currentLocale);
             })
             ->leftJoin('cms_page_channels', 'cms_pages.id', '=', 'cms_page_channels.cms_page_id')
             ->leftJoin('channels', 'cms_page_channels.channel_id', '=', 'channels.id')
