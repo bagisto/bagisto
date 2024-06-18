@@ -232,25 +232,29 @@
                 <table class="{{ core()->getCurrentLocale()->direction }}">
                     <tbody>
                         <tr>
-                            <td style="width: 50%; padding: 2px 18px;border:none;">
-                                <b>
-                                    @lang('admin::app.sales.invoices.invoice-pdf.invoice-id'):
-                                </b>
+                            @if (core()->getConfigData('sales.invoice_settings.pdf_print_outs.invoice_id'))
+                                <td style="width: 50%; padding: 2px 18px;border:none;">
+                                    <b>
+                                        @lang('admin::app.sales.invoices.invoice-pdf.invoice-id'):
+                                    </b>
 
-                                <span>
-                                    #{{ $invoice->increment_id ?? $invoice->id }}
-                                </span>
-                            </td>
+                                    <span>
+                                        #{{ $invoice->increment_id ?? $invoice->id }}
+                                    </span>
+                                </td>
+                            @endif
 
-                            <td style="width: 50%; padding: 2px 18px;border:none;">
-                                <b>
-                                    @lang('admin::app.sales.invoices.invoice-pdf.order-id'): 
-                                </b>
+                            @if (core()->getConfigData('sales.invoice_settings.pdf_print_outs.order_id'))
+                                <td style="width: 50%; padding: 2px 18px;border:none;">
+                                    <b>
+                                        @lang('admin::app.sales.invoices.invoice-pdf.order-id'): 
+                                    </b>
 
-                                <span>
-                                    #{{ $invoice->order->increment_id }}
-                                </span>
-                            </td>
+                                    <span>
+                                        #{{ $invoice->order->increment_id }}
+                                    </span>
+                                </td>
+                            @endif
                         </tr>
                         
                         <tr>
