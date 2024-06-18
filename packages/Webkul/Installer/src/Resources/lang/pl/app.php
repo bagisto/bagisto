@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Administrator',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Potwierdź hasło',
-                'download-sample'  => 'pobierz-przykład',
                 'email'            => 'Email',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Hasło',
-                'sample-products'  => 'Przykładowe produkty',
                 'title'            => 'Utwórz administratora',
             ],
 
@@ -714,6 +712,14 @@ return [
                 'vietnamese-dong'             => 'Dong Wietnamski (VND)',
                 'warning-message'             => 'Uwaga! Ustawienia domyślnych języków systemowych oraz domyślnej waluty są trwałe i nie mogą być nigdy więcej zmienione.',
                 'zambian-kwacha'              => 'Kwacha Zambijska (ZMW)',
+            ],
+
+            'sample-products' => [
+                'download-sample' => 'pobierz próbkę',
+                'no'              => 'Nie',
+                'sample-products' => 'Produkty próbne',
+                'title'           => 'Produkty próbne',
+                'yes'             => 'Tak',
             ],
 
             'installation-processing' => [

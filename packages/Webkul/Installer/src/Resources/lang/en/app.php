@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Admin',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Confirm Password',
-                'download-sample'  => 'download-sample',
                 'email'            => 'Email',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Password',
-                'sample-products'  => 'Sample Products',
                 'title'            => 'Create Administrator',
             ],
 
@@ -716,10 +714,18 @@ return [
                 'zambian-kwacha'              => 'Zambian Kwacha (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'download-sample',
+                'no'              => 'No',
+                'sample-products' => 'Sample Products',
+                'title'           => 'Sample Products',
+                'yes'             => 'Yes',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'Installation Bagisto',
-                'bagisto-info'     => 'Creating the database tables, this can take a few moments',
-                'title'            => 'Installation',
+                'bagisto'      => 'Installation Bagisto',
+                'bagisto-info' => 'Creating the database tables, this can take a few moments',
+                'title'        => 'Installation',
             ],
 
             'installation-completed' => [

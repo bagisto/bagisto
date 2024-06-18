@@ -619,11 +619,9 @@ return [
                 'admin'            => 'مدیر',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'تأیید رمز عبور',
-                'download-sample'  => 'دانلود نمونه',
                 'email'            => 'ایمیل',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'رمز عبور',
-                'sample-products'  => 'محصولات نمونه',
                 'title'            => 'ایجاد مدیر',
             ],
 
@@ -716,10 +714,18 @@ return [
                 'zambian-kwacha'              => 'کواچای زامبیا (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'دانلود نمونه',
+                'no'              => 'خیر',
+                'sample-products' => 'محصولات نمونه',
+                'title'           => 'محصولات نمونه',
+                'yes'             => 'بله',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'نصب Bagisto',
-                'bagisto-info'     => 'ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
-                'title'            => 'نصب',
+                'bagisto'      => 'نصب Bagisto',
+                'bagisto-info' => 'ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
+                'title'        => 'نصب',
             ],
 
             'installation-completed' => [

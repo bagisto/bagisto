@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Адміністратор',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Підтвердити пароль',
-                'download-sample'  => 'завантажити-зразок',
                 'email'            => 'Електронна пошта',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Пароль',
-                'sample-products'  => 'Зразкові товари',
                 'title'            => 'Створити адміністратора',
             ],
 
@@ -716,10 +714,18 @@ return [
                 'zambian-kwacha'              => 'Замбійський квача (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'завантажити зразок',
+                'no'              => 'Ні',
+                'sample-products' => 'Зразки продукції',
+                'title'           => 'Зразки продукції',
+                'yes'             => 'Так',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'Установка Bagisto',
-                'bagisto-info'     => 'Створення таблиць бази даних, це може зайняти кілька хвилин',
-                'title'            => 'Установка',
+                'bagisto'      => 'Установка Bagisto',
+                'bagisto-info' => 'Створення таблиць бази даних, це може зайняти кілька хвилин',
+                'title'        => 'Установка',
             ],
 
             'installation-completed' => [

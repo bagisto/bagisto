@@ -619,11 +619,9 @@ return [
                 'admin'            => 'مدير',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'تأكيد كلمة المرور',
-                'download-sample'  => 'تحميل العينة',
                 'email'            => 'البريد الإلكتروني',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'كلمة المرور',
-                'sample-products'  => 'منتجات عينة',
                 'title'            => 'إنشاء المسؤول',
             ],
 
@@ -716,10 +714,18 @@ return [
                 'zambian-kwacha'              => 'الكواشا الزامبي (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'تحميل العينة',
+                'no'              => 'لا',
+                'sample-products' => 'منتجات العينة',
+                'title'           => 'منتجات العينة',
+                'yes'             => 'نعم',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'تثبيت Bagisto',
-                'bagisto-info'     => 'إنشاء جداول قاعدة البيانات، وقد يستغرق ذلك بضع دقائق',
-                'title'            => 'التثبيت',
+                'bagisto'      => 'تثبيت Bagisto',
+                'bagisto-info' => 'إنشاء جداول قاعدة البيانات، وقد يستغرق ذلك بضع دقائق',
+                'title'        => 'التثبيت',
             ],
 
             'installation-completed' => [

@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Administrador',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Confirmar Contraseña',
-                'download-sample'  => 'Descargar Muestra',
                 'email'            => 'Correo Electrónico',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Contraseña',
-                'sample-products'  => 'Productos de Muestra',
                 'title'            => 'Crear Administrador',
             ],
 
@@ -716,10 +714,18 @@ return [
                 'zambian-kwacha'              => 'Kwacha de Zambia (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'descargar muestra',
+                'no'              => 'No',
+                'sample-products' => 'Productos de muestra',
+                'title'           => 'Productos de muestra',
+                'yes'             => 'Sí',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'Instalación de Bagisto',
-                'bagisto-info'     => 'Creando las tablas de la base de datos, esto puede tomar algunos momentos',
-                'title'            => 'Instalación',
+                'bagisto'      => 'Instalación de Bagisto',
+                'bagisto-info' => 'Creando las tablas de la base de datos, esto puede tomar algunos momentos',
+                'title'        => 'Instalación',
             ],
 
             'installation-completed' => [

@@ -248,7 +248,7 @@
                                         <span class="icon-tick text-green-500"></span>
                                     </template>
 
-                                    <p>@lang('Create Sample Products')</p>
+                                    <p>@lang('installer::app.installer.index.sample-products.title')</p>
                                 </div> 
 
                                 <!-- Create Admin Configuration -->
@@ -1008,14 +1008,14 @@
                         >
                             <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
                                 <p class="text-xl font-bold text-gray-800">
-                                    @lang('Create Sample Products') 
+                                    @lang('installer::app.installer.index.sample-products.title') 
                                 </p>
                             </div>
 
                             <div class="flex h-[484px] flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
                                 <!-- Sample Products -->
                                 <x-admin::form.control-group.label>
-                                    @lang("installer::app.installer.index.create-administrator.sample-products")
+                                    @lang("installer::app.installer.index.sample-products.sample-products")
                                 </x-admin::form.control-group.label>
                             
                                 <x-installer::form.control-group.control
@@ -1026,11 +1026,11 @@
                                     :value="0"
                                 >
                                     <option value="1">
-                                        @lang('Yes')
+                                        @lang('installer::app.installer.index.sample-products.yes')
                                     </option>
                             
                                     <option value="0">
-                                        @lang('No')
+                                        @lang('installer::app.installer.index.sample-products.no')
                                     </option>
                                 </x-installer::form.control-group.control>
                             
@@ -1040,7 +1040,7 @@
                                     id="source-sample-link"
                                     class="mt-1 cursor-pointer text-right text-sm text-blue-600 transition-all hover:underline"
                                 >
-                                    @lang('installer::app.installer.index.create-administrator.download-sample')
+                                    @lang('installer::app.installer.index.sample-products.download-sample')
                                 </a>
                             </div>
 
@@ -1436,7 +1436,7 @@
                         },
 
                         createSampleProducts(params, setErrors) {
-                            if (params.sample_products){
+                            if (params.sample_products == 1){
                                 this.isLoading = true;
 
                                 this.$axios.post("{{ route('installer.sample_products_setup') }}",{

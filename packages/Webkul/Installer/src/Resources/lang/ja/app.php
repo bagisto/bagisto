@@ -619,11 +619,9 @@ return [
                 'admin'            => '管理者',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'パスワードの確認',
-                'download-sample'  => 'サンプルのダウンロード',
                 'email'            => 'メール',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'パスワード',
-                'sample-products'  => 'サンプル商品',
                 'title'            => '管理者の作成',
             ],
 
@@ -714,6 +712,14 @@ return [
                 'vietnamese-dong'             => 'ベトナムドン（VND）',
                 'warning-message'             => '注意！デフォルトのシステム言語とデフォルトの通貨の設定は永久に変更できません。',
                 'zambian-kwacha'              => 'ザンビアクワチャ（ZMW）',
+            ],
+
+            'sample-products' => [
+                'download-sample' => 'サンプルをダウンロード',
+                'no'              => 'いいえ',
+                'sample-products' => 'サンプル製品',
+                'title'           => 'サンプル製品',
+                'yes'             => 'はい',
             ],
 
             'installation-processing' => [

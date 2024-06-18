@@ -619,11 +619,9 @@ return [
                 'admin'            => 'व्यवस्थापक',
                 'bagisto'          => 'बैगिस्टो',
                 'confirm-password' => 'पासवर्ड की पुष्टि करें',
-                'download-sample'  => 'नमूना डाउनलोड करें',
                 'email'            => 'ईमेल',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'पासवर्ड',
-                'sample-products'  => 'नमूना उत्पाद',
                 'title'            => 'व्यवस्थापक बनाएं',
             ],
 
@@ -714,6 +712,14 @@ return [
                 'vietnamese-dong'             => 'वियतनामी डॉंग (VND)',
                 'warning-message'             => 'सावधान रहें! आपके डिफ़ॉल्ट सिस्टम भाषाओं और डिफ़ॉल्ट मुद्रा की सेटिंग्स स्थायी हैं और इसे फिर से कभी नहीं बदला जा सकता है।',
                 'zambian-kwacha'              => 'ज़ाम्बियाई क्वाचा (ZMW)',
+            ],
+
+            'sample-products' => [
+                'download-sample' => 'नमूना डाउनलोड करें',
+                'no'              => 'नहीं',
+                'sample-products' => 'नमूना उत्पाद',
+                'title'           => 'नमूना उत्पाद',
+                'yes'             => 'हाँ',
             ],
 
             'installation-processing' => [

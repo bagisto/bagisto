@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Yönetici',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Şifreyi Onayla',
-                'download-sample'  => 'örnek-indir',
                 'email'            => 'E-posta',
                 'email-address'    => 'admin@ornek.com',
                 'password'         => 'Şifre',
-                'sample-products'  => 'Örnek Ürünler',
                 'title'            => 'Yönetici Oluştur',
             ],
 
@@ -716,10 +714,18 @@ return [
                 'zambian-kwacha'              => 'Zambiya Kvaçası (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'örnek indir',
+                'no'              => 'Hayır',
+                'sample-products' => 'Örnek Ürünler',
+                'title'           => 'Örnek Ürünler',
+                'yes'             => 'Evet',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'Bagisto Kurulumu',
-                'bagisto-info'     => 'Veritabanı tabloları oluşturuluyor, bu birkaç dakika sürebilir',
-                'title'            => 'Kurulum',
+                'bagisto'      => 'Bagisto Kurulumu',
+                'bagisto-info' => 'Veritabanı tabloları oluşturuluyor, bu birkaç dakika sürebilir',
+                'title'        => 'Kurulum',
             ],
 
             'installation-completed' => [

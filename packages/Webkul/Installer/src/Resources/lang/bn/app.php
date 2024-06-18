@@ -620,11 +620,9 @@ return [
                 'admin'            => 'অ্যাডমিন',
                 'bagisto'          => 'বাগিস্তো',
                 'confirm-password' => 'পাসওয়ার্ড নিশ্চিত করুন',
-                'download-sample'  => 'স্যাম্পল ডাউনলোড করুন',
                 'email'            => 'ইমেইল',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'পাসওয়ার্ড',
-                'sample-products'  => 'স্যাম্পল পণ্য',
                 'title'            => 'অ্যাডমিনিস্ট্রেটর তৈরি করুন',
             ],
 
@@ -717,10 +715,18 @@ return [
                 'zambian-kwacha'              => 'জাম্বিয়ান কোয়াচা (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample'  => 'নমুনা ডাউনলোড',
+                'no'               => 'না',
+                'sample-products'  => 'নমুনা পণ্য',
+                'title'            => 'নমুনা পণ্য',
+                'yes'              => 'হ্যাঁ',
+            ],
+
             'installation-processing' => [
-                'bagisto-info'     => 'ডাটাবেস টেবিল তৈরি করা হচ্ছে, এটি কিছুটা সময় নিতে পারে',
-                'bagisto'          => 'ইনস্টলেশন বাগিস্তো',
-                'title'            => 'ইনস্টলেশন',
+                'bagisto-info' => 'ডাটাবেস টেবিল তৈরি করা হচ্ছে, এটি কিছুটা সময় নিতে পারে',
+                'bagisto'      => 'ইনস্টলেশন বাগিস্তো',
+                'title'        => 'ইনস্টলেশন',
             ],
 
             'installation-completed' => [

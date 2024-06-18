@@ -618,11 +618,9 @@ return [
                 'admin'            => 'පරිපාලක',
                 'bagisto'          => 'බැගිස්ටෝ',
                 'confirm-password' => 'මුරපදය තහවුරු කරන්න',
-                'download-sample'  => 'උපකාරක භාණ්ඩ බාගත කරන්න',
                 'email'            => 'ඊමේල්',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'මුරපදය',
-                'sample-products'  => 'උපකාරක නිෂ්පාදන',
                 'title'            => 'පරිපාලකයකු සාදන්න',
             ],
 
@@ -715,10 +713,18 @@ return [
                 'zambian-kwacha'              => 'සැම්බියාව් ක්වාච් (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'සාම්පලය බාගන්න',
+                'no'              => 'නැහැ',
+                'sample-products' => 'සාම්පල නිෂ්පාදන',
+                'title'           => 'සාම්පල නිෂ්පාදන',
+                'yes'             => 'ඔව්',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'Bagisto ස්තුරාකුල',
-                'bagisto-info'     => 'දත්ත වගකාගකක් සාදනු ඇති වී, මෙමගේ කුම වේදයන්ද කතාමතා වේදිය',
-                'title'            => 'ස්තුරාකුල',
+                'bagisto'      => 'Bagisto ස්තුරාකුල',
+                'bagisto-info' => 'දත්ත වගකාගකක් සාදනු ඇති වී, මෙමගේ කුම වේදයන්ද කතාමතා වේදිය',
+                'title'        => 'ස්තුරාකුල',
             ],
 
             'installation-completed' => [

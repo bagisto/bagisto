@@ -618,11 +618,9 @@ return [
                 'admin'            => 'Administrator',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Passwort bestätigen',
-                'download-sample'  => 'Beispiel herunterladen',
                 'email'            => 'E-Mail',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Passwort',
-                'sample-products'  => 'Beispielprodukte',
                 'title'            => 'Administrator erstellen',
             ],
 
@@ -715,6 +713,20 @@ return [
                 'zambian-kwacha'              => 'Sambischer Kwacha (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'Beispiel herunterladen',
+                'no'              => 'Nein',
+                'sample-products' => 'Beispielfprodukte',
+                'title'           => 'Beispielfprodukte',
+                'yes'             => 'Ja',
+            ],
+
+            'installation-processing' => [
+                'title'        => 'Installation',
+                'bagisto-info' => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
+                'bagisto'      => 'Installation Bagisto',
+            ],
+
             'installation-completed' => [
                 'admin-panel'                => 'Admin-Panel',
                 'bagisto-forums'             => 'Bagisto Forum',
@@ -722,12 +734,6 @@ return [
                 'explore-bagisto-extensions' => 'Erkunden Sie Bagisto-Erweiterungen',
                 'title'                      => 'Installation abgeschlossen',
                 'title-info'                 => 'Bagisto wurde erfolgreich auf Ihrem System installiert.',
-            ],
-
-            'installation-processing' => [
-                'title'            => 'Installation',
-                'bagisto-info'     => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
-                'bagisto'          => 'Installation Bagisto',
             ],
 
             'ready-for-installation' => [

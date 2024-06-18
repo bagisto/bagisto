@@ -619,11 +619,9 @@ return [
                 'admin'            => '管理员',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => '确认密码',
-                'download-sample'  => '下载示例',
                 'email'            => '电子邮件',
                 'email-address'    => 'admin@example.com',
                 'password'         => '密码',
-                'sample-products'  => '示例产品',
                 'title'            => '创建管理员',
             ],
 
@@ -716,10 +714,18 @@ return [
                 'zambian-kwacha'              => '赞比亚克瓦查 (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => '下载样品',
+                'no'              => '否',
+                'sample-products' => '样品产品',
+                'title'           => '样品产品',
+                'yes'             => '是',
+            ],
+
             'installation-processing' => [
-                'bagisto-info'     => '正在创建数据库表，这可能需要一些时间',
-                'bagisto'          => 'Bagisto 安装',
-                'title'            => '安装',
+                'bagisto-info' => '正在创建数据库表，这可能需要一些时间',
+                'bagisto'      => 'Bagisto 安装',
+                'title'        => '安装',
             ],
 
             'installation-completed' => [

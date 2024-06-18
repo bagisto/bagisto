@@ -619,11 +619,9 @@ return [
                 'admin'            => 'מנהל',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'אשר סיסמה',
-                'download-sample'  => 'הורד דוגמא',
                 'email'            => 'אימייל',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'סיסמה',
-                'sample-products'  => 'מוצרים דוגמה',
                 'title'            => 'צור מנהל',
             ],
 
@@ -714,6 +712,14 @@ return [
                 'vietnamese-dong'             => 'דונג וייטנאמי (VND)',
                 'warning-message'             => 'זהירות! הגדרות השפות המערכת המוגדרות כברירת מחדל והמטבע המוגדר כברירת מחדל הם קבועים ולא ניתן לשנותם שוב.',
                 'zambian-kwacha'              => 'קוואצ\'ה זמבית (ZMW)',
+            ],
+
+            'sample-products' => [
+                'download-sample' => 'הורד דוגמה',
+                'no'              => 'לא',
+                'sample-products' => 'מוצרי דוגמה',
+                'title'           => 'מוצרי דוגמה',
+                'yes'             => 'כן',
             ],
 
             'installation-processing' => [

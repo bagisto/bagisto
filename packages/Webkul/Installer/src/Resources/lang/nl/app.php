@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Beheerder',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Bevestig wachtwoord',
-                'download-sample'  => 'download-voorbeeld',
                 'email'            => 'E-mail',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Wachtwoord',
-                'sample-products'  => 'Voorbeeldproducten',
                 'title'            => 'Beheerder aanmaken',
             ],
 
@@ -714,6 +712,14 @@ return [
                 'vietnamese-dong'             => 'Vietnamese Dong (VND)',
                 'warning-message'             => 'Pas op! De instellingen voor uw standaard systeemtalen en de standaardvaluta zijn permanent en kunnen nooit meer worden gewijzigd.',
                 'zambian-kwacha'              => 'Zambiaanse Kwacha (ZMW)',
+            ],
+
+            'sample-products' => [
+                'download-sample' => 'download voorbeeld',
+                'no'              => 'Nee',
+                'sample-products' => 'Voorbeeldproducten',
+                'title'           => 'Voorbeeldproducten',
+                'yes'             => 'Ja',
             ],
 
             'installation-processing' => [

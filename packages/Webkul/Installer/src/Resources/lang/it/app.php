@@ -714,6 +714,14 @@ return [
                 'zambian-kwacha'              => 'Kwacha zambiano (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'scarica campione',
+                'no'              => 'No',
+                'sample-products' => 'Prodotti campione',
+                'title'           => 'Prodotti campione',
+                'yes'             => 'Sì',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Installazione Bagisto',
                 'bagisto-info'     => 'Creazione delle tabelle del Database, questo potrebbe richiedere qualche momento',
