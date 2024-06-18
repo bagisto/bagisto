@@ -386,7 +386,7 @@ class Installer extends Command
 
         $sampleProduct = select(
             'Please select if you want some sample products after installation.',
-            ['true', 'false'],
+            ['false', 'true'],
         );
 
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
