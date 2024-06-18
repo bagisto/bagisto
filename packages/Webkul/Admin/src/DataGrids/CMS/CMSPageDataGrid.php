@@ -2,7 +2,6 @@
 
 namespace Webkul\Admin\DataGrids\CMS;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
@@ -15,7 +14,7 @@ class CMSPageDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $currentLocale = App::getLocale();
+        $currentLocale = app()->getLocale();
 
         $queryBuilder = DB::table('cms_pages')
             ->select(
