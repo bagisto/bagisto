@@ -752,7 +752,7 @@ return [
                 'main'          => '开始',
                 'select-locale' => '选择区域设置',
                 'title'         => '您的 Bagisto 安装',
-                'welcome-title' => '欢迎来到 Bagisto 2.0。',
+                'welcome-title' => '欢迎来到 Bagisto',
             ],
 
             'server-requirements' => [
@@ -792,7 +792,7 @@ return [
             'german'                   => '德语',
             'hebrew'                   => '希伯来语',
             'hindi'                    => '印地语',
-            'installation-description' => 'Bagisto 安装通常涉及多个步骤。以下是 Bagisto 安装过程的一般概述：',
+            'installation-description' => 'Bagisto 的安装通常涉及几个步骤。以下是 Bagisto 安装过程的一般概述',
             'installation-info'        => '我们很高兴在这里见到你！',
             'installation-title'       => '欢迎安装 Bagisto',
             'italian'                  => '意大利语',

@@ -752,7 +752,7 @@ return [
                 'main'          => 'Başlangıç',
                 'select-locale' => 'Yerel Seçin',
                 'title'         => 'Bagisto kurulumunuz',
-                'welcome-title' => 'Bagisto 2.0\'a hoş geldiniz.',
+                'welcome-title' => 'Bagisto\'ya hoş geldiniz',
             ],
 
             'server-requirements' => [
@@ -792,7 +792,7 @@ return [
             'german'                   => 'Almanca',
             'hebrew'                   => 'İbranice',
             'hindi'                    => 'Hintçe',
-            'installation-description' => 'Bagisto kurulumu genellikle birkaç adım içerir. İşte Bagisto kurulum sürecinin genel bir taslağı:',
+            'installation-description' => 'Bagisto kurulumu genellikle birkaç adım içerir. İşte Bagisto\'nun kurulum sürecine genel bir bakış',
             'installation-info'        => 'Sizi burada görmekten mutluluk duyuyoruz!',
             'installation-title'       => 'Kurulum\'a Hoş Geldiniz',
             'italian'                  => 'İtalyanca',

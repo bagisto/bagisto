@@ -752,7 +752,7 @@ return [
                 'main'          => '開始',
                 'select-locale' => 'ロケールを選択',
                 'title'         => 'Bagistoのインストール',
-                'welcome-title' => 'Bagisto 2.0へようこそ。',
+                'welcome-title' => 'Bagistoへようこそ',
             ],
 
             'server-requirements' => [
@@ -792,7 +792,7 @@ return [
             'german'                   => 'ドイツ語',
             'hebrew'                   => 'ヘブライ語',
             'hindi'                    => 'ヒンディー語',
-            'installation-description' => '通常、Bagistoのインストールにはいくつかのステップが含まれます。ここにBagistoのインストールプロセスの概要を示します:',
+            'installation-description' => 'Bagistoのインストールには通常、いくつかのステップが含まれます。 ここにBagistoのインストールプロセスの一般的な概要があります',
             'installation-info'        => 'ここにいてくれてうれしいです！',
             'installation-title'       => 'Bagistoインストールへようこそ',
             'italian'                  => 'イタリア語',

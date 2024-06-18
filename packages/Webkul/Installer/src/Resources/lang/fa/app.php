@@ -752,7 +752,7 @@ return [
                 'main'          => 'شروع',
                 'select-locale' => 'انتخاب محلی',
                 'title'         => 'نصب Bagisto شما',
-                'welcome-title' => 'خوش آمدید به Bagisto 2.0.',
+                'welcome-title' => 'خوش آمدید به Bagisto',
             ],
 
             'server-requirements' => [
@@ -792,7 +792,7 @@ return [
             'german'                   => 'آلمانی',
             'hebrew'                   => 'عبری',
             'hindi'                    => 'هندی',
-            'installation-description' => 'نصب Bagisto به طور معمول شامل چندین مرحله است. در اینجا یک خلاصه عمومی از فرا یند نصب Bagisto آورده شده است:',
+            'installation-description' => 'نصب Bagisto معمولاً شامل چندین مرحله است. در اینجا یک نمای کلی از فرآیند نصب برای Bagisto آورده شده است',
             'installation-info'        => 'خوشحالیم که شما را اینجا می‌بینیم!',
             'installation-title'       => 'به نصب Bagisto خوش آمدید',
             'italian'                  => 'ایتالیایی',

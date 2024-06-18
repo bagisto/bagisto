@@ -752,7 +752,7 @@ return [
                 'main'          => 'بداية',
                 'select-locale' => 'اختر اللغة',
                 'title'         => 'تثبيت Bagisto الخاص بك',
-                'welcome-title' => 'مرحبًا بك في Bagisto 2.0.',
+                'welcome-title' => 'مرحبًا بك في Bagisto',
             ],
 
             'server-requirements' => [
@@ -792,7 +792,7 @@ return [
             'german'                   => 'ألماني',
             'hebrew'                   => 'العبرية',
             'hindi'                    => 'الهندية',
-            'installation-description' => 'تتضمن عملية تثبيت Bagisto عادة عدة خطوات. إليك مخطط عام لعملية التثبيت لـ Bagisto:',
+            'installation-description' => 'عادة ما تتضمن عملية تثبيت Bagisto عدة خطوات. إليك نظرة عامة عامة على عملية التثبيت لBagisto',
             'installation-info'        => 'نحن سعداء برؤيتك هنا!',
             'installation-title'       => 'مرحبًا بك في التثبيت',
             'italian'                  => 'الإيطالية',

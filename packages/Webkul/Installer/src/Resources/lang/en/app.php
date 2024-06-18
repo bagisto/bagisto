@@ -752,7 +752,7 @@ return [
                 'main'          => 'Start',
                 'select-locale' => 'Select Locale',
                 'title'         => 'Your Bagisto install',
-                'welcome-title' => 'Welcome to Bagisto 2.0.',
+                'welcome-title' => 'Welcome to Bagisto',
             ],
 
             'server-requirements' => [
@@ -792,7 +792,7 @@ return [
             'german'                   => 'German',
             'hebrew'                   => 'Hebrew',
             'hindi'                    => 'Hindi',
-            'installation-description' => 'Bagisto installation typically involves several steps. Here\'s a general outline of the installation process for Bagisto:',
+            'installation-description' => 'Bagisto installation typically involves several steps. Here\'s a general outline of the installation process for Bagisto',
             'installation-info'        => 'We are happy to see you here!',
             'installation-title'       => 'Welcome to Installation',
             'italian'                  => 'Italian',
