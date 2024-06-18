@@ -4,7 +4,7 @@ namespace Webkul\Admin\DataGrids\CMS;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\App; 
 
 class CMSPageDataGrid extends DataGrid
 {
@@ -35,7 +35,8 @@ class CMSPageDataGrid extends DataGrid
 
         $this->addFilter('id', 'cms_pages.id');
         $this->addFilter('channel', 'cms_page_channels.channel_id');
-        
+        $this->addFilter('locale', 'cms_page_translations.locale');
+
         return $queryBuilder;
     }
 
