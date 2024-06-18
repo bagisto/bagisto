@@ -151,10 +151,8 @@ class CartController extends Controller
 
     /**
      * Store address.
-     *
-     * @return JsonResource
      */
-    public function storeAddress(CartAddressRequest $cartAddressRequest, int $id)
+    public function storeAddress(CartAddressRequest $cartAddressRequest, int $id): JsonResource
     {
         $cart = $this->cartRepository->findOrFail($id);
 
@@ -163,12 +161,8 @@ class CartController extends Controller
         Cart::setCart($cart);
 
         if (Cart::hasError()) {
-            $error = Cart::getErrors();
-
-            session()->flash('error', $error['message'].' '.$error['amount']);
-
             return response()->json([
-                'message' => $error['message'].' '.$error['amount'],
+                'message' => 'Something went wrong!',
             ], Response::HTTP_BAD_REQUEST);
         }
 

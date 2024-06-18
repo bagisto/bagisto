@@ -694,72 +694,14 @@ class Cart
      */
     public function hasError(): bool
     {
-        if (! $this->cart) {
-            return true;
-        }
-
-        if (! $this->isItemsHaveSufficientQuantity()) {
-            return true;
-        }
-
-        if ($this->haveMinimumOrderAmount()) {
+        if (
+            ! $this->cart
+            || ! $this->isItemsHaveSufficientQuantity()
+        ) {
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * Checks if cart has any error.
-     */
-    public function getErrors(): array
-    {
-        $errors = [];
-
-        if (! $this->hasError()) {
-            return $errors;
-        }
-
-        if ($this->getOrderAmount()) {
-            $minimumOrderDescription = core()->getConfigData('sales.order_settings.minimum_order.description');
-
-            $errors = [
-                'message' => $minimumOrderDescription ?: trans('shop::app.checkout.cart.minimum-order-message'),
-                'amount'  => core()->formatPrice((int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: $this->getOrderAmount()),
-            ];
-        }
-
-        return $errors;
-    }
-
-    /**
-     * Check minimum Order Amount.
-     */
-    public function getOrderAmount(): int
-    {
-        $minimumOrderAmount = $this->cart->sub_total;
-
-        if (core()->getConfigData('sales.order_settings.minimum_order.include_tax_to_amount')) {
-            $minimumOrderAmount += $this->cart->tax_total;
-        }
-
-        if (core()->getConfigData('sales.order_settings.minimum_order.include_discount_amount')) {
-            $minimumOrderAmount -= $this->cart->tax_total;
-        }
-
-        return $minimumOrderAmount;
-    }
-
-    /**
-     * Checks if cart haveMinimumOrderAmount.
-     */
-    public function haveMinimumOrderAmount(): bool
-    {
-        if (! core()->getConfigData('sales.order_settings.minimum_order.enable')) {
-            return true;
-        }
-
-        return $this->getOrderAmount() <= ((int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0);
     }
 
     /**

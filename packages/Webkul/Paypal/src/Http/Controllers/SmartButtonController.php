@@ -270,8 +270,10 @@ class SmartButtonController extends Controller
     {
         $cart = Cart::getCart();
 
-        if (! Cart::haveMinimumOrderAmount()) {
-            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message').' '.core()->formatPrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0));
+        $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
+
+        if (! $cart->checkMinimumOrder()) {
+            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }
 
         if (
