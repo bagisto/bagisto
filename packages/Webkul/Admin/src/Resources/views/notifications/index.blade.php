@@ -122,14 +122,14 @@
                         <div class="flex items-center gap-1">
                             <a @click="getResults(pagination.prev_page_url)">
                                 <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white p-1.5 text-center text-gray-600 transition-all marker:shadow hover:border hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-950 ltr:ml-2 rtl:mr-2">
-                                    <span class="icon-sort-left text-2xl"></span>
+                                    <span class="icon-sort-left rtl:icon-sort-right text-2xl"></span>
                                 </div>
                             </a>
 
                             <a @click="getResults(pagination.next_page_url)">
                                 <div
                                     class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white p-1.5 text-center text-gray-600 transition-all marker:shadow hover:border hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-950 ltr:ml-2 rtl:mr-2">
-                                    <span class="icon-sort-right text-2xl"></span>
+                                    <span class="icon-sort-right rtl:icon-sort-left text-2xl"></span>
                                 </div>
                             </a>
                         </div>

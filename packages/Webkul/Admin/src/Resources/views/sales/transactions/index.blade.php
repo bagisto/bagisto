@@ -107,11 +107,11 @@
                             @if (bouncer()->hasPermission('sales.transactions.view'))
                                 <div class="flex justify-end">
                                     <a
-                                        v-if="record.actions.find(action => action.title === 'View')"
-                                        @click="view(record.actions.find(action => action.title === 'View')?.url)"
+                                        v-if="record.actions.find(action => action.title === '@lang('admin::app.sales.transactions.index.datagrid.view')')"
+                                        @click="view(record.actions.find(action => action.title === '@lang('admin::app.sales.transactions.index.datagrid.view')')?.url)"
                                     >
                                         <span
-                                            class="icon-sort-right cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
+                                            class="icon-sort-right rtl:icon-sort-left cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
                                             role="button"
                                             tabindex="0"
                                         >
