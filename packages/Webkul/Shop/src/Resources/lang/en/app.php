@@ -601,6 +601,7 @@ return [
                 'load-more'        => 'Load More',
                 'name'             => 'Name',
                 'rating'           => 'Rating',
+                'ratings'          => 'Ratings',
                 'submit-review'    => 'Submit Review',
                 'success'          => 'Review submitted successfully.',
                 'title'            => 'Title',

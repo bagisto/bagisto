@@ -601,6 +601,7 @@ return [
                 'load-more'         => 'Daha Fazla Yükle',
                 'name'              => 'Adı',
                 'rating'            => 'Derecelendirme',
+                'ratings'           => 'Derecelendirmeler',
                 'submit-review'     => 'Yorumu Gönder',
                 'success'           => 'Yorum başarıyla gönderildi.',
                 'title'             => 'Başlık',

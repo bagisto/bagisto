@@ -601,6 +601,7 @@ return [
                 'load-more'        => '加载更多',
                 'name'             => '名称',
                 'rating'           => '评分',
+                'ratings'          => '评级',
                 'submit-review'    => '提交评论',
                 'success'          => '评论成功提交。',
                 'title'            => '标题',
