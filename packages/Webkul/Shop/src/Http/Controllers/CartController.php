@@ -15,10 +15,6 @@ class CartController extends Controller
             abort(404);
         }
 
-        if ($error = request()->input('error')) {
-            return view('shop::checkout.cart.index', compact('error'));
-        }
-
         return view('shop::checkout.cart.index');
     }
 }

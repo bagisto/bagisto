@@ -177,18 +177,6 @@ class Cart extends Model implements CartContract
     }
 
     /**
-     * Check minimum order.
-     */
-    public function checkMinimumOrder(): bool
-    {
-        $minimumOrderAmount = (float) (core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0);
-
-        $cartBaseSubTotal = (float) $this->base_sub_total;
-
-        return $cartBaseSubTotal >= $minimumOrderAmount;
-    }
-
-    /**
      * Create a new factory instance for the model.
      */
     protected static function newFactory(): Factory

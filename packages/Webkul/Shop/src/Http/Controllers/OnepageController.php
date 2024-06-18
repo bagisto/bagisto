@@ -45,10 +45,6 @@ class OnepageController extends Controller
          * If cart has errors then redirect back to the cart page
          */
         if (Cart::hasError()) {
-            if ($error = Cart::getErrors()) {
-                return redirect()->route('shop.checkout.cart.index', compact('error'));
-            }
-
             return redirect()->route('shop.checkout.cart.index');
         }
 

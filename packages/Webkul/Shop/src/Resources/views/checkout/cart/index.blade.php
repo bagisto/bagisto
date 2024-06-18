@@ -1,7 +1,3 @@
-@php
-    $error = isset($error) ? $error : null;
-@endphp
-
 <!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="@lang('shop::app.checkout.cart.index.cart')"/>
@@ -63,10 +59,10 @@
 
             {!! view_render_event('bagisto.shop.checkout.cart.breadcrumbs.after') !!}
 
-            @if ($error)
+            @if ($errors = Cart::getErrors())
                 <div class="mt-5 w-full gap-12 rounded-lg bg-[#FFF3CD] px-5 py-3 text-[#383D41]">
-                    {{ $error['message'] }}
-                    {{ $error['amount'] }}
+                    {{ $errors['message'] }}
+                    {{ $errors['amount'] }}
                 </div>
             @endif
 
