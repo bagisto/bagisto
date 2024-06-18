@@ -702,10 +702,7 @@ class Cart
             return true;
         }
 
-        if (
-            $this->minimumOrderAmount()
-            && $this->minimumOrderAmount() < (core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0)
-        ) {
+        if ($this->haveMinimumOrderAmount()) {
             return true;
         }
 
@@ -723,12 +720,12 @@ class Cart
             return $errors;
         }
 
-        if ($this->minimumOrderAmount()) {
+        if ($this->getOrderAmount()) {
             $minimumOrderDescription = core()->getConfigData('sales.order_settings.minimum_order.description');
 
             $errors = [
                 'message' => $minimumOrderDescription ?: trans('shop::app.checkout.cart.minimum-order-message'),
-                'amount'  => core()->formatPrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount')),
+                'amount'  => core()->formatPrice((int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: $this->getOrderAmount()),
             ];
         }
 
@@ -738,12 +735,8 @@ class Cart
     /**
      * Check minimum Order Amount.
      */
-    public function minimumOrderAmount(): mixed
+    public function getOrderAmount(): int
     {
-        if (! core()->getConfigData('sales.order_settings.minimum_order.enable')) {
-            return false;
-        }
-
         $minimumOrderAmount = $this->cart->sub_total;
 
         if (core()->getConfigData('sales.order_settings.minimum_order.include_tax_to_amount')) {
@@ -755,6 +748,18 @@ class Cart
         }
 
         return $minimumOrderAmount;
+    }
+
+    /**
+     * Checks if cart haveMinimumOrderAmount.
+     */
+    public function haveMinimumOrderAmount(): bool
+    {
+        if (! core()->getConfigData('sales.order_settings.minimum_order.enable')) {
+            return true;
+        }
+
+        return $this->getOrderAmount() <= ((int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0);
     }
 
     /**

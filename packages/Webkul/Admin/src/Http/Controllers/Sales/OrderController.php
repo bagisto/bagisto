@@ -79,8 +79,10 @@ class OrderController extends Controller
         Cart::setCart($cart);
 
         if (Cart::hasError()) {
+            $error = Cart::getErrors();
+
             return response()->json([
-                'message' => trans('admin::app.sales.orders.create.summary.error'),
+                'message' => $error['message'].' '.$error['amount'],
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -233,8 +235,8 @@ class OrderController extends Controller
     {
         $cart = Cart::getCart();
 
-        if (! $minimumOrderAmount = Cart::minimumOrderAmount()) {
-            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message'), core()->currency($minimumOrderAmount));
+        if (Cart::haveMinimumOrderAmount()) {
+            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message').' '.core()->formatPrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0));
         }
 
         if (
