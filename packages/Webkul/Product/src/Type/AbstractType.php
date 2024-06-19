@@ -124,8 +124,7 @@ abstract class AbstractType
         protected ProductImageRepository $productImageRepository,
         protected ProductVideoRepository $productVideoRepository,
         protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Create product.

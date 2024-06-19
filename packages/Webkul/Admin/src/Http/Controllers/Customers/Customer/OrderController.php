@@ -12,9 +12,7 @@ class OrderController extends Controller
     /**
      * Create a new controller instance.
      */
-    public function __construct(protected OrderItemRepository $orderItemRepository)
-    {
-    }
+    public function __construct(protected OrderItemRepository $orderItemRepository) {}
 
     /**
      * Returns the compare items of the customer.

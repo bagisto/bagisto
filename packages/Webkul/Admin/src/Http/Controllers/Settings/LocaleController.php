@@ -14,9 +14,7 @@ class LocaleController extends Controller
      *
      * @return void
      */
-    public function __construct(protected LocaleRepository $localeRepository)
-    {
-    }
+    public function __construct(protected LocaleRepository $localeRepository) {}
 
     /**
      * Display a listing of the resource.

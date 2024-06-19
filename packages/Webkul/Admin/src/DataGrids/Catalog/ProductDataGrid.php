@@ -22,9 +22,7 @@ class ProductDataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct(protected AttributeFamilyRepository $attributeFamilyRepository)
-    {
-    }
+    public function __construct(protected AttributeFamilyRepository $attributeFamilyRepository) {}
 
     /**
      * Prepare query builder.

@@ -45,8 +45,7 @@ class CartRule
         protected CartRuleCustomerRepository $cartRuleCustomerRepository,
         protected CartRuleCouponUsageRepository $cartRuleCouponUsageRepository,
         protected Validator $validator
-    ) {
-    }
+    ) {}
 
     /**
      * Collect discount on cart

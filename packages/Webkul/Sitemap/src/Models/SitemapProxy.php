@@ -4,6 +4,4 @@ namespace Webkul\Sitemap\Models;
 
 use Konekt\Concord\Proxies\ModelProxy;
 
-class SitemapProxy extends ModelProxy
-{
-}
+class SitemapProxy extends ModelProxy {}

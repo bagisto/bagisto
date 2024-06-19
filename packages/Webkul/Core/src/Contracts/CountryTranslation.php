@@ -2,6 +2,4 @@
 
 namespace Webkul\Core\Contracts;
 
-interface CountryTranslation
-{
-}
+interface CountryTranslation {}

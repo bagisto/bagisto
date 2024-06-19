@@ -23,8 +23,7 @@ class OnepageController extends APIController
     public function __construct(
         protected OrderRepository $orderRepository,
         protected CustomerRepository $customerRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Return cart summary.

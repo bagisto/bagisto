@@ -2,6 +2,4 @@
 
 namespace Webkul\Theme\Contracts;
 
-interface ThemeCustomizationTranslation
-{
-}
+interface ThemeCustomizationTranslation {}

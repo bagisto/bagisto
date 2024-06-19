@@ -41,8 +41,7 @@ class ProductController extends Controller
         protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductRepository $productRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

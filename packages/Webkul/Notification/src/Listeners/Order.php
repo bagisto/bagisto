@@ -13,9 +13,7 @@ class Order
      *
      * @return void
      */
-    public function __construct(protected NotificationRepository $notificationRepository)
-    {
-    }
+    public function __construct(protected NotificationRepository $notificationRepository) {}
 
     /**
      * Create a new resource.

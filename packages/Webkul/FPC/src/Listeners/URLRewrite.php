@@ -12,9 +12,7 @@ class URLRewrite
      *
      * @return void
      */
-    public function __construct(protected URLRewriteRepository $urlRewriteRepository)
-    {
-    }
+    public function __construct(protected URLRewriteRepository $urlRewriteRepository) {}
 
     /**
      * After URL Rewrite update

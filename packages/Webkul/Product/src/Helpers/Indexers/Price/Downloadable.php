@@ -2,6 +2,4 @@
 
 namespace Webkul\Product\Helpers\Indexers\Price;
 
-class Downloadable extends AbstractType
-{
-}
+class Downloadable extends AbstractType {}

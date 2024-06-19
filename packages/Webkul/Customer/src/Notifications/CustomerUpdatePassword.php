@@ -16,9 +16,7 @@ class CustomerUpdatePassword extends Mailable
      *
      * @return void
      */
-    public function __construct(public Customer $customer)
-    {
-    }
+    public function __construct(public Customer $customer) {}
 
     /**
      * Build the message.

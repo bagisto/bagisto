@@ -131,9 +131,7 @@ abstract class AbstractImporter
      *
      * @return void
      */
-    public function __construct(protected ImportBatchRepository $importBatchRepository)
-    {
-    }
+    public function __construct(protected ImportBatchRepository $importBatchRepository) {}
 
     /**
      * Validate data row

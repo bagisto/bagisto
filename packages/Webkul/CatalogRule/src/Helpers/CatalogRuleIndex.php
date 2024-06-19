@@ -16,8 +16,7 @@ class CatalogRuleIndex
         protected CatalogRuleRepository $catalogRuleRepository,
         protected CatalogRuleProduct $catalogRuleProductHelper,
         protected CatalogRuleProductPrice $catalogRuleProductPriceHelper
-    ) {
-    }
+    ) {}
 
     /**
      * Full re-index

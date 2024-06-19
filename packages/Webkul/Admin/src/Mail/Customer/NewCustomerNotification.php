@@ -18,8 +18,7 @@ class NewCustomerNotification extends Mailable
     public function __construct(
         public Customer $customer,
         public string $password
-    ) {
-    }
+    ) {}
 
     /**
      * Get the message envelope.

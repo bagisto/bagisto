@@ -104,8 +104,7 @@ class Core
         protected LocaleRepository $localeRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected TaxCategoryRepository $taxCategoryRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Get the version number of the Bagisto.

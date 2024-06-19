@@ -20,9 +20,7 @@ class ProductController extends Controller
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         protected ProductDownloadableLinkRepository $productDownloadableLinkRepository
-    ) {
-
-    }
+    ) {}
 
     /**
      * Download image or file.

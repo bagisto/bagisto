@@ -2,6 +2,4 @@
 
 namespace Webkul\User\Contracts;
 
-interface Role
-{
-}
+interface Role {}

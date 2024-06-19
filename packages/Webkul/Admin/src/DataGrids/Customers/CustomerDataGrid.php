@@ -22,9 +22,7 @@ class CustomerDataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct(protected CustomerGroupRepository $customerGroupRepository)
-    {
-    }
+    public function __construct(protected CustomerGroupRepository $customerGroupRepository) {}
 
     /**
      * Prepare query builder.

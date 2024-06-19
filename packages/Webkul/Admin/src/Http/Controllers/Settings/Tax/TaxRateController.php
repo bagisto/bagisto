@@ -15,9 +15,7 @@ class TaxRateController extends Controller
      *
      * @return void
      */
-    public function __construct(protected TaxRateRepository $taxRateRepository)
-    {
-    }
+    public function __construct(protected TaxRateRepository $taxRateRepository) {}
 
     /**
      * Display a listing resource for the available tax rates.

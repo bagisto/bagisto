@@ -15,6 +15,5 @@ class AclItem
         public string $route,
         public int $sort,
         public Collection $children,
-    ) {
-    }
+    ) {}
 }

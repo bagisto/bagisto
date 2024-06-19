@@ -15,9 +15,7 @@ class InvoicedNotification extends Mailable
      *
      * @return void
      */
-    public function __construct(public Invoice $invoice)
-    {
-    }
+    public function __construct(public Invoice $invoice) {}
 
     /**
      * Get the message envelope.

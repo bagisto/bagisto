@@ -24,8 +24,7 @@ class UpdateCreateVisitIndex implements ShouldQueue
     public function __construct(
         protected $model,
         protected $log
-    ) {
-    }
+    ) {}
 
     /**
      * Execute the job.

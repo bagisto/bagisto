@@ -13,9 +13,7 @@ class ReportingExport implements FromCollection
      * @param mixed records
      * @return void
      */
-    public function __construct(protected $records = [])
-    {
-    }
+    public function __construct(protected $records = []) {}
 
     /**
      * function to create a blade view for export.

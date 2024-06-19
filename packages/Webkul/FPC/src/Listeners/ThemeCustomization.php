@@ -12,9 +12,7 @@ class ThemeCustomization
      *
      * @return void
      */
-    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository)
-    {
-    }
+    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository) {}
 
     /**
      * After theme customization create

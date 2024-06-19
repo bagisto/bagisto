@@ -15,8 +15,7 @@ class SearchController extends Controller
     public function __construct(
         protected SearchTermRepository $searchTermRepository,
         protected SearchRepository $searchRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Index to handle the view loaded with the search results

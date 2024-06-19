@@ -19,8 +19,7 @@ class ShipmentController extends Controller
         protected OrderRepository $orderRepository,
         protected OrderItemRepository $orderItemRepository,
         protected ShipmentRepository $shipmentRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

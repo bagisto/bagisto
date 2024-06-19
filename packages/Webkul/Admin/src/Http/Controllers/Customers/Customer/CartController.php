@@ -17,8 +17,7 @@ class CartController extends Controller
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected CartItemRepository $cartItemRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Create cart

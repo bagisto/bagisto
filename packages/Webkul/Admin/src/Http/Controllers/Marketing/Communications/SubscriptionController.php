@@ -14,9 +14,7 @@ class SubscriptionController extends Controller
      *
      * @return void
      */
-    public function __construct(protected SubscribersListRepository $subscribersListRepository)
-    {
-    }
+    public function __construct(protected SubscribersListRepository $subscribersListRepository) {}
 
     /**
      * Display a listing of the resource.

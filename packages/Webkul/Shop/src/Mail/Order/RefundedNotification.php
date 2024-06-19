@@ -15,9 +15,7 @@ class RefundedNotification extends Mailable
      *
      * @return void
      */
-    public function __construct(public Refund $refund)
-    {
-    }
+    public function __construct(public Refund $refund) {}
 
     /**
      * Get the message envelope.

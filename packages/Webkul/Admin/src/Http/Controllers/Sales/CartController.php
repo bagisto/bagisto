@@ -28,8 +28,7 @@ class CartController extends Controller
         protected CustomerRepository $customerRepository,
         protected ProductRepository $productRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Cart.

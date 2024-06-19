@@ -21,9 +21,7 @@ class UserDataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct(protected RoleRepository $roleRepository)
-    {
-    }
+    public function __construct(protected RoleRepository $roleRepository) {}
 
     /**
      * Prepare query builder.

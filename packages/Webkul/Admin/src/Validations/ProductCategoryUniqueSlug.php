@@ -35,8 +35,7 @@ class ProductCategoryUniqueSlug implements Rule
     public function __construct(
         protected $tableName = null,
         protected $id = null
-    ) {
-    }
+    ) {}
 
     /**
      * Determine if the validation rule passes.

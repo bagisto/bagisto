@@ -18,8 +18,7 @@ class Item
         public string $name,
         public ?string $route = null,
         public ?int $sort = null
-    ) {
-    }
+    ) {}
 
     /**
      * Get name of config item.

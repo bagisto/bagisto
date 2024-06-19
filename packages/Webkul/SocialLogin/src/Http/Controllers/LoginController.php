@@ -18,9 +18,7 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CustomerSocialAccountRepository $customerSocialAccountRepository)
-    {
-    }
+    public function __construct(protected CustomerSocialAccountRepository $customerSocialAccountRepository) {}
 
     /**
      * Redirects to the social provider

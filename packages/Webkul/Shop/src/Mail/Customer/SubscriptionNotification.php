@@ -15,9 +15,7 @@ class SubscriptionNotification extends Mailable
      *
      * @return void
      */
-    public function __construct(public SubscribersList $subscribersList)
-    {
-    }
+    public function __construct(public SubscribersList $subscribersList) {}
 
     /**
      * Get the message envelope.

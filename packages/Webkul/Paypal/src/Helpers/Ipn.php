@@ -31,8 +31,7 @@ class Ipn
         protected Standard $paypalStandard,
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    ) {
-    }
+    ) {}
 
     /**
      * This function process the IPN sent from paypal end.
