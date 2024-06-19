@@ -28,6 +28,7 @@ class ThemeFactory extends Factory
             'name'       => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
             'sort_order' => ($lastTheme ? $lastTheme->id : 0) + 1,
             'channel_id' => core()->getCurrentChannel()->id,
+            'theme_code' => core()->getCurrentChannel()->theme,
         ];
     }
 }

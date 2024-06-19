@@ -59,7 +59,7 @@
                     <!-- Dropdown Options Container -->
                     <x-shop::form.control-group.label
                         class="!mt-0 max-sm:!mb-2.5"
-                        ::class="{ 'required': option.is_required }"
+                        ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
                     </x-shop::form.control-group.label>
@@ -68,13 +68,13 @@
                         <x-shop::form.control-group.control
                             type="select"
                             ::name="'bundle_options[' + option.id + '][]'"
-                            ::rules="{'required': option.is_required}"
+                            ::rules="{'required': Boolean(option.is_required)}"
                             v-model="selectedProduct"
                             ::label="option.label"
                         >
                             <option
                                 value="0"
-                                v-if="! option.is_required"
+                                v-if="! Boolean(option.is_required)"
                             >
                                 @lang('shop::app.products.view.type.bundle.none')
                             </option>
@@ -93,7 +93,7 @@
                             <!-- None radio option if option is not required -->
                             <div
                                 class="flex select-none gap-x-4"
-                                v-if="! option.is_required"
+                                v-if="! Boolean(option.is_required)"
                             >
                                 <x-shop::form.control-group.control
                                     type="radio"
@@ -102,7 +102,7 @@
                                     ::id="'bundle_options[' + option.id + '][' + index + ']'"
                                     value="0"
                                     v-model="selectedProduct"
-                                    ::rules="{'required': option.is_required}"
+                                    ::rules="{'required': Boolean(option.is_required)}"
                                     ::label="option.label"
                                 />
 
@@ -126,39 +126,7 @@
                                     ::id="'bundle_options[' + option.id + '][' + index + ']'"
                                     ::value="product.id"
                                     v-model="selectedProduct"
-                                    ::rules="{'required': option.is_required}"
-                                    ::label="option.label"
-                                />
-
-                                <label
-                                    class="cursor-pointer text-zinc-500 max-sm:text-sm"
-                                    :for="'bundle_options[' + option.id + '][' + index + ']'"
-                                >
-                                    @{{ product.name }}
-
-                                    <span class="text-black">
-                                        @{{ '+ ' + product.price.final.formatted_price }}
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                    </template>
-
-                    <template v-if="option.type == 'checkbox'">
-                        <div class="grid gap-2">
-                        <!-- Options -->
-                            <div
-                                class="flex select-none items-center gap-x-4 max-sm:gap-x-1.5"
-                                v-for="(product, index) in option.products"
-                            >
-                                <x-shop::form.control-group.control
-                                    type="checkbox"
-                                    ::name="'bundle_options[' + option.id + '][]'"
-                                    ::for="'bundle_options[' + option.id + '][' + index + ']'"
-                                    ::id="'bundle_options[' + option.id + '][' + index + ']'"
-                                    ::value="product.id"
-                                    v-model="selectedProduct"
-                                    ::rules="{'required': option.is_required}"
+                                    ::rules="{'required': Boolean(option.is_required)}"
                                     ::label="option.label"
                                 />
 
@@ -180,13 +148,13 @@
                         <x-shop::form.control-group.control
                             type="multiselect"
                             ::name="'bundle_options[' + option.id + '][]'"
-                            ::rules="{'required': option.is_required}"
+                            ::rules="{'required': Boolean(option.is_required)}"
                             v-model="selectedProduct"
                             ::label="option.label"
                         >
                             <option
                                 value="0"
-                                v-if="! option.is_required"
+                                v-if="! Boolean(option.is_required)"
                             >
                                 @lang('shop::app.products.view.type.bundle.none')
                             </option>
@@ -198,6 +166,38 @@
                                 @{{ product.name + ' + ' + product.price.final.formatted_price }}
                             </option>
                         </x-shop::form.control-group.control>
+                    </template>
+
+                    <template v-if="option.type == 'checkbox'">
+                        <div class="grid gap-2">
+                        <!-- Options -->
+                            <div
+                                class="flex select-none items-center gap-x-4 max-sm:gap-x-1.5"
+                                v-for="(product, index) in option.products"
+                            >
+                                <x-shop::form.control-group.control
+                                    type="checkbox"
+                                    ::name="'bundle_options[' + option.id + '][]'"
+                                    ::for="'bundle_options[' + option.id + '][' + index + ']'"
+                                    ::id="'bundle_options[' + option.id + '][' + index + ']'"
+                                    ::value="product.id"
+                                    v-model="selectedProduct"
+                                    ::rules="{'required': Boolean(option.is_required)}"
+                                    ::label="option.label"
+                                />
+
+                                <label
+                                    class="cursor-pointer text-zinc-500 max-sm:text-sm"
+                                    :for="'bundle_options[' + option.id + '][' + index + ']'"
+                                >
+                                    @{{ product.name }}
+
+                                    <span class="text-black">
+                                        @{{ '+ ' + product.price.final.formatted_price }}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
                     </template>
 
                     <x-shop::form.control-group.error ::name="'bundle_options[' + option.id + '][]'" />

@@ -90,15 +90,19 @@ class InstallerController extends Controller
         $appLocale = $allParameters['app_locale'] ?? null;
         $appCurrency = $allParameters['app_currency'] ?? null;
 
-        $allowedLocales = array_unique(array_merge(
-            [($appLocale ?? 'en')],
-            $selectedParameters['allowed_locales']
-        ));
+        $allowedLocales = array_unique(
+            array_merge(
+                [($appLocale ?? 'en')],
+                $selectedParameters['allowed_locales']
+            )
+        );
 
-        $allowedCurrencies = array_unique(array_merge(
-            [($appCurrency ?? 'USD')],
-            $selectedParameters['allowed_currencies']
-        ));
+        $allowedCurrencies = array_unique(
+            array_merge(
+                [($appCurrency ?? 'USD')],
+                $selectedParameters['allowed_currencies']
+            )
+        );
 
         $parameter = [
             'parameter' => [
@@ -119,9 +123,32 @@ class InstallerController extends Controller
     }
 
     /**
+     * Create Sample Products.
+     *
+     * @return mixed
+     */
+    public function createSampleProducts()
+    {
+        $defaultLocale = config('app.locale');
+
+        $allowedLocales = array_merge([$defaultLocale], request()->input('selectedLocales'));
+
+        $defaultCurrency = config('app.currency');
+
+        $allowedCurrencies = array_merge([$defaultCurrency], request()->input('selectedCurrencies'));
+
+        $this->databaseManager->seedSampleProducts([
+            'default_locale'     => $defaultLocale,
+            'allowed_locales'    => $allowedLocales,
+            'default_currency'   => $defaultCurrency,
+            'allowed_currencies' => $allowedCurrencies,
+        ]);
+    }
+
+    /**
      * Admin Configuration Setup.
      *
-     * @return void
+     * @return bool
      */
     public function adminConfigSetup()
     {
@@ -139,6 +166,8 @@ class InstallerController extends Controller
                     'status'   => 1,
                 ]
             );
+
+            return true;
         } catch (\Throwable $th) {
             dd($th);
         }

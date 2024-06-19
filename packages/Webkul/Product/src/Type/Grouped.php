@@ -80,14 +80,14 @@ class Grouped extends AbstractType
      * Update.
      *
      * @param  int  $id
-     * @param  string  $attribute
+     * @param  array  $attributes
      * @return \Webkul\Product\Contracts\Product
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id, $attributes = [])
     {
-        $product = parent::update($data, $id, $attribute);
+        $product = parent::update($data, $id);
 
-        if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
+        if (! empty($attributes)) {
             return $product;
         }
 

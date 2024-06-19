@@ -199,7 +199,11 @@ class ProductController extends Controller
     public function copy(int $id)
     {
         try {
+            Event::dispatch('catalog.product.create.before');
+
             $product = $this->productRepository->copy($id);
+
+            Event::dispatch('catalog.product.create.after', $product);
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
 
@@ -289,7 +293,7 @@ class ProductController extends Controller
 
             $product = $this->productRepository->update([
                 'status'  => $massUpdateRequest->input('value'),
-            ], $productId);
+            ], $productId, ['status']);
 
             Event::dispatch('catalog.product.update.after', $product);
         }

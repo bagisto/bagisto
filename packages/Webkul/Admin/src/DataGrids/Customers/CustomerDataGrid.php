@@ -76,32 +76,24 @@ class CustomerDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'channel_id',
-            'label'      => trans('admin::app.customers.customers.index.datagrid.channel'),
-            'type'       => 'dropdown',
-            'class'      => 'hidden',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => collect(core()->getAllChannels())
-                        ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
-                        ->values()
-                        ->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
+            'index'              => 'channel_id',
+            'label'              => trans('admin::app.customers.customers.index.datagrid.channel'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => collect(core()->getAllChannels())
+                ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                ->values()
+                ->toArray(),
             'sortable'   => true,
+            'visibility' => false,
         ]);
 
         $this->addColumn([
             'index'      => 'customer_id',
             'label'      => trans('admin::app.customers.customers.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
-            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -126,16 +118,13 @@ class CustomerDataGrid extends DataGrid
             'index'      => 'phone',
             'label'      => trans('admin::app.customers.customers.index.datagrid.phone'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
-            'sortable'   => false,
         ]);
 
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.customers.customers.index.datagrid.status'),
             'type'       => 'boolean',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -144,44 +133,29 @@ class CustomerDataGrid extends DataGrid
             'index'      => 'gender',
             'label'      => trans('admin::app.customers.customers.index.datagrid.gender'),
             'type'       => 'string',
-            'searchable' => false,
-            'filterable' => false,
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'group',
-            'label'      => trans('admin::app.customers.customers.index.datagrid.group'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => $this->customerGroupRepository->all(['name as label', 'name as value'])->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => false,
+            'index'              => 'group',
+            'label'              => trans('admin::app.customers.customers.index.datagrid.group'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => $this->customerGroupRepository->all(['name as label', 'name as value'])->toArray(),
         ]);
 
         $this->addColumn([
-            'index'       => 'is_suspended',
-            'label'       => trans('admin::app.customers.customers.index.datagrid.suspended'),
-            'type'        => 'boolean',
-            'searchable'  => false,
-            'filterable'  => false,
-            'visibility'  => false,
-            'sortable'    => true,
+            'index'    => 'is_suspended',
+            'label'    => trans('admin::app.customers.customers.index.datagrid.suspended'),
+            'type'     => 'boolean',
+            'sortable' => true,
         ]);
 
         $this->addColumn([
             'index'       => 'revenue',
             'label'       => trans('admin::app.customers.customers.index.datagrid.revenue'),
             'type'        => 'integer',
-            'searchable'  => false,
-            'filterable'  => false,
-            'sortable'    => false,
             'closure'     => function ($row) {
                 return app(OrderRepository::class)->scopeQuery(function ($q) use ($row) {
                     return $q->whereNotIn('status', [Order::STATUS_CANCELED, Order::STATUS_CLOSED])
@@ -194,8 +168,6 @@ class CustomerDataGrid extends DataGrid
             'index'       => 'order_count',
             'label'       => trans('admin::app.customers.customers.index.datagrid.order-count'),
             'type'        => 'integer',
-            'searchable'  => false,
-            'filterable'  => false,
             'sortable'    => true,
         ]);
 
@@ -203,8 +175,6 @@ class CustomerDataGrid extends DataGrid
             'index'       => 'address_count',
             'label'       => trans('admin::app.customers.customers.index.datagrid.address-count'),
             'type'        => 'integer',
-            'searchable'  => false,
-            'filterable'  => false,
             'sortable'    => true,
         ]);
     }

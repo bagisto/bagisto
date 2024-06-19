@@ -61,12 +61,11 @@ class AttributeFamilyRepository extends Repository
 
     /**
      * @param  int  $id
-     * @param  string  $attribute
      * @return \Webkul\Attribute\Contracts\AttributeFamily
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id)
     {
-        $family = parent::update($data, $id, $attribute);
+        $family = parent::update($data, $id);
 
         $previousAttributeGroupIds = $family->attribute_groups()->pluck('id');
 

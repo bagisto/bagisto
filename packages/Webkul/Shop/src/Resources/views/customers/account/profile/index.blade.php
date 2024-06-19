@@ -5,15 +5,17 @@
     </x-slot>
 
     <!-- Breadcrumbs -->
-    @section('breadcrumbs')
-        <x-shop::breadcrumbs name="profile" />
-    @endSection
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        @section('breadcrumbs')
+            <x-shop::breadcrumbs name="profile" />
+        @endSection
+    @endif
 
     <div class="max-md:hidden">
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="mx-4 flex-auto">
+    <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <!-- Back Button -->
@@ -24,7 +26,7 @@
                     <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                 </a>
 
-                <h2 class="text-2xl font-medium max-md:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                     @lang('shop::app.customers.account.profile.index.title')
                 </h2>
             </div>
@@ -33,7 +35,7 @@
 
             <a
                 href="{{ route('shop.customers.account.profile.edit') }}"
-                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-1.5 max-sm:text-sm"
+                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2 max-sm:py-1.5 max-sm:text-sm"
             >
                 @lang('shop::app.customers.account.profile.index.edit')
             </a>
@@ -42,7 +44,7 @@
         </div>
 
         <!-- Profile Information -->
-        <div class="mt-8 grid grid-cols-1 gap-y-6 max-md:mt-5 max-md:gap-y-4">
+        <div class="mt-8 grid grid-cols-1 gap-y-6 max-md:mt-5 max-sm:gap-y-4">
             {!! view_render_event('bagisto.shop.customers.account.profile.first_name.before') !!}
 
             <div class="grid w-full grid-cols-[2fr_3fr] border-b border-zinc-200 px-8 py-3 max-md:px-0">

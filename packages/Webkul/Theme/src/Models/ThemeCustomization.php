@@ -91,6 +91,7 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
         'sort_order',
         'status',
         'channel_id',
+        'theme_code',
     ];
 
     /**

@@ -14,21 +14,27 @@ class CMSPageDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
+        $currentLocale = app()->getLocale();
+
         $queryBuilder = DB::table('cms_pages')
             ->select(
                 'cms_pages.id',
                 'cms_page_translations.page_title',
                 'cms_page_translations.url_key',
-                'cms_page_translations.locale',
+                'cms_page_translations.locale'
             )
             ->addSelect(DB::raw('GROUP_CONCAT(DISTINCT channels.code) as channel'))
-            ->join('cms_page_translations', 'cms_pages.id', '=', 'cms_page_translations.cms_page_id')
+            ->join('cms_page_translations', function ($join) use ($currentLocale) {
+                $join->on('cms_pages.id', '=', 'cms_page_translations.cms_page_id')
+                    ->where('cms_page_translations.locale', '=', $currentLocale);
+            })
             ->leftJoin('cms_page_channels', 'cms_pages.id', '=', 'cms_page_channels.cms_page_id')
             ->leftJoin('channels', 'cms_page_channels.channel_id', '=', 'channels.id')
-            ->groupBy('cms_pages.id');
+            ->groupBy('cms_pages.id', 'cms_page_translations.locale');
 
         $this->addFilter('id', 'cms_pages.id');
         $this->addFilter('channel', 'cms_page_channels.channel_id');
+        $this->addFilter('locale', 'cms_page_translations.locale');
 
         return $queryBuilder;
     }
@@ -44,29 +50,22 @@ class CMSPageDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.cms.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'channel',
-            'label'      => trans('admin::app.cms.index.datagrid.channel'),
-            'type'       => 'dropdown',
-            'class'      => 'hidden',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => collect(core()->getAllChannels())
-                        ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
-                        ->values()
-                        ->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
+            'index'              => 'channel',
+            'label'              => trans('admin::app.cms.index.datagrid.channel'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => collect(core()->getAllChannels())
+                ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                ->values()
+                ->toArray(),
             'sortable'   => true,
+            'visibility' => false,
         ]);
 
         $this->addColumn([

@@ -70,8 +70,15 @@
                             :value="old('code') ?? $channel->code"
                             :label="trans('admin::app.settings.channels.edit.code')"
                             :placeholder="trans('admin::app.settings.channels.edit.code')"
+                            disabled="disabled"
                         />
 
+                        <input
+                            type="hidden"
+                            name="code"
+                            value="{{ $channel->code }}"
+                        />
+                    
                         <x-admin::form.control-group.error control-name="code" />
                     </x-admin::form.control-group>
 
