@@ -1358,6 +1358,7 @@ return [
                 'edit-group-info'                  => '双击编辑分组',
                 'enter-code'                       => '输入代码',
                 'enter-name'                       => '输入名称',
+                'general'                          => '一般的',
                 'group-code-already-exists'        => '属性组代码已经存在。',
                 'group-contains-system-attributes' => '此分组包含系统属性。请先将系统属性移至其他分组，然后重试。',
                 'group-name-already-exists'        => '已存在属性分组名称。',
