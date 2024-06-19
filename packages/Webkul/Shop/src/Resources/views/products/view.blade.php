@@ -56,12 +56,14 @@
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
     <!-- Breadcrumbs -->
-    <div class="flex justify-center max-lg:hidden">
-        <x-shop::breadcrumbs
-            name="product"
-            :entity="$product"
-        />
-    </div>
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        <div class="flex justify-center max-lg:hidden">
+            <x-shop::breadcrumbs
+                name="product"
+                :entity="$product"
+            />
+        </div>
+    @endif
 
     <!-- Product Information Vue Component -->
     <v-product>
@@ -304,7 +306,7 @@
                                         {{ $product->name }}
                                     </h1>
 
-                                    @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                                    @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                                         <div
                                             class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
                                             role="button"
@@ -398,38 +400,42 @@
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
-                                    <!-- Add To Cart Button -->
-                                    {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}
+                                    @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                                        <!-- Add To Cart Button -->
+                                        {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}
 
-                                    <x-shop::button
-                                        type="submit"
-                                        class="secondary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
-                                        button-type="secondary-button"
-                                        :loading="false"
-                                        :title="trans('shop::app.products.view.add-to-cart')"
-                                        :disabled="! $product->isSaleable(1)"
-                                        ::loading="isStoring.addToCart"
-                                    />
+                                        <x-shop::button
+                                            type="submit"
+                                            class="secondary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            button-type="secondary-button"
+                                            :loading="false"
+                                            :title="trans('shop::app.products.view.add-to-cart')"
+                                            :disabled="! $product->isSaleable(1)"
+                                            ::loading="isStoring.addToCart"
+                                        />
 
-                                    {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
+                                        {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
+                                    @endif
                                 </div>
 
                                 <!-- Buy Now Button -->
-                                {!! view_render_event('bagisto.shop.products.view.buy_now.before', ['product' => $product]) !!}
+                                @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                                    {!! view_render_event('bagisto.shop.products.view.buy_now.before', ['product' => $product]) !!}
 
-                                @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
-                                    <x-shop::button
-                                        type="submit"
-                                        class="primary-button mt-5 w-full max-w-[470px] max-md:py-3 max-sm:mt-3 max-sm:rounded-lg max-sm:py-1.5"
-                                        button-type="secondary-button"
-                                        :title="trans('shop::app.products.view.buy-now')"
-                                        :disabled="! $product->isSaleable(1)"
-                                        ::loading="isStoring.buyNow"
-                                        @click="is_buy_now=1;"
-                                    />
+                                    @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
+                                        <x-shop::button
+                                            type="submit"
+                                            class="primary-button mt-5 w-full max-w-[470px] max-md:py-3 max-sm:mt-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            button-type="secondary-button"
+                                            :title="trans('shop::app.products.view.buy-now')"
+                                            :disabled="! $product->isSaleable(1)"
+                                            ::loading="isStoring.buyNow"
+                                            @click="is_buy_now=1;"
+                                        />
+                                    @endif
+
+                                    {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
                                 @endif
-
-                                {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
 
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
@@ -443,7 +449,7 @@
                                         tabindex="0"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"
                                     >
-                                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                                        @if (core()->getConfigData('catalog.products.settings.compare_option'))
                                             <span
                                                 class="icon-compare text-2xl"
                                                 role="presentation"

@@ -53,9 +53,17 @@
             {!! view_render_event('bagisto.shop.checkout.cart.breadcrumbs.before') !!}
 
             <!-- Breadcrumbs -->
-            <x-shop::breadcrumbs name="cart" />
+            @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+                <x-shop::breadcrumbs name="cart" />
+            @endif
 
             {!! view_render_event('bagisto.shop.checkout.cart.breadcrumbs.after') !!}
+
+            @if ($errors = Cart::getErrors())
+                <div class="mt-5 w-full gap-12 rounded-lg bg-[#FFF3CD] px-5 py-3 text-[#383D41]">
+                    {{ implode(": ", Cart::getErrors()) }}
+                </div>
+            @endif
 
             <v-cart ref="vCart">
                 <!-- Cart Shimmer Effect -->
@@ -64,16 +72,18 @@
         </div>
     </div>
 
-    {!! view_render_event('bagisto.shop.checkout.cart.cross_sell_carousel.before') !!}
+    @if (core()->getConfigData('sales.checkout.shopping_cart.cross_sell'))
+        {!! view_render_event('bagisto.shop.checkout.cart.cross_sell_carousel.before') !!}
 
-    <!-- Cross-sell Product Carousal -->
-    <x-shop::products.carousel
-        :title="trans('shop::app.checkout.cart.index.cross-sell.title')"
-        :src="route('shop.api.checkout.cart.cross-sell.index')"
-    >
-    </x-shop::products.carousel>
+        <!-- Cross-sell Product Carousal -->
+        <x-shop::products.carousel
+            :title="trans('shop::app.checkout.cart.index.cross-sell.title')"
+            :src="route('shop.api.checkout.cart.cross-sell.index')"
+        >
+        </x-shop::products.carousel>
 
-    {!! view_render_event('bagisto.shop.checkout.cart.cross_sell_carousel.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.cart.cross_sell_carousel.after') !!}
+    @endif    
 
     @pushOnce('scripts')
         <script

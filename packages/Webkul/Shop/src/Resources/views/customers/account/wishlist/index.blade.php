@@ -5,9 +5,11 @@
     </x-slot>
 
     <!-- Breadcrumbs -->
-    @section('breadcrumbs')
-        <x-shop::breadcrumbs name="wishlist" />
-    @endSection
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        @section('breadcrumbs')
+            <x-shop::breadcrumbs name="wishlist" />
+        @endSection
+    @endif
 
     <div class="max-md:hidden">
         <x-shop::layouts.account.navigation />
@@ -171,14 +173,16 @@
                                                     @change="setItemQuantity($event, item)"
                                                 />
 
-                                                <!--Wishlist Item Move-to-cart-->
-                                                <x-shop::button
-                                                    class="primary-button max-h-10 w-max rounded-2xl px-6 py-1.5 text-center text-base max-md:px-4 max-md:py-1.5 max-md:text-sm"
-                                                    :title="trans('shop::app.customers.account.wishlist.move-to-cart')"
-                                                    ::loading="isMovingToCart[item.id]"
-                                                    ::disabled="isMovingToCart[item.id]"
-                                                    @click="moveToCart(item.id,index)"
-                                                />
+                                                @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                                                    <!--Wishlist Item Move-to-cart-->
+                                                    <x-shop::button
+                                                        class="primary-button max-h-10 w-max rounded-2xl px-6 py-1.5 text-center text-base max-md:px-4 max-md:py-1.5 max-md:text-sm"
+                                                        :title="trans('shop::app.customers.account.wishlist.move-to-cart')"
+                                                        ::loading="isMovingToCart[item.id]"
+                                                        ::disabled="isMovingToCart[item.id]"
+                                                        @click="moveToCart(item.id,index)"
+                                                    />
+                                                @endif
                                             </div>
 
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.perform_actions.after') !!}

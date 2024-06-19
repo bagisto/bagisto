@@ -197,7 +197,7 @@
 
                              <!-- View More Icon -->
                              <a :href="'{{ route('admin.sales.orders.view', ':replace') }}'.replace(':replace', order.id)">
-                                <span class="icon-sort-right cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
+                                <span class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                             </a>
                         </div>
                     </div>

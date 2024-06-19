@@ -38,6 +38,7 @@
             @if (
                 $order->canReorder()
                 && bouncer()->hasPermission('sales.orders.create')
+                && core()->getConfigData('sales.order_settings.reorder.admin')
             )
                 <a
                     href="{{ route('admin.sales.orders.reorder', $order->id) }}"

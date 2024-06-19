@@ -73,6 +73,8 @@
                     name="query"
                     value="{{ request('query') }}"
                     class="block w-full rounded-lg border border-transparent bg-zinc-100 px-11 py-3 text-xs font-medium text-gray-900 transition-all hover:border-gray-400 focus:border-gray-400"
+                    minlength="{{ core()->getConfigData('catalog.products.search.min_query_length') }}"
+                    maxlength="{{ core()->getConfigData('catalog.products.search.max_query_length') }}"
                     placeholder="@lang('shop::app.components.layouts.header.search-text')"
                     aria-label="@lang('shop::app.components.layouts.header.search-text')"
                     aria-required="true"
@@ -86,7 +88,7 @@
                 >
                 </button>
 
-                @if (core()->getConfigData('general.content.shop.image_search'))
+                @if (core()->getConfigData('catalog.products.settings.image_search'))
                     @include('shop::search.images.index')
                 @endif
             </form>
@@ -100,7 +102,7 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.compare.before') !!}
 
             <!-- Compare -->
-            @if(core()->getConfigData('general.content.shop.compare_option'))
+            @if(core()->getConfigData('catalog.products.settings.compare_option'))
                 <a
                     href="{{ route('shop.compare.index') }}"
                     aria-label="@lang('shop::app.components.layouts.header.compare')"
@@ -117,7 +119,9 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.mini_cart.before') !!}
 
             <!-- Mini cart -->
-            @include('shop::checkout.cart.mini-cart')
+            @if(core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                @include('shop::checkout.cart.mini-cart')
+            @endif
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.mini_cart.after') !!}
 
@@ -149,6 +153,8 @@
 
                         <p class="py-2px mt-3 w-full border border-zinc-200"></p>
 
+                        {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.customers_action.before') !!}
+                        
                         <div class="mt-6 flex gap-4">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
 
@@ -165,9 +171,11 @@
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
-
-                            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up__button.after') !!}
+                            
+                            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up_button.after') !!}
                         </div>
+
+                        {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.customers_action.after') !!}
                     </x-slot>
                 @endguest
 
@@ -204,7 +212,7 @@
                                 @lang('shop::app.components.layouts.header.orders')
                             </a>
 
-                            @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                            @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                                 <a
                                     class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                     href="{{ route('shop.customers.account.wishlist.index') }}"

@@ -619,11 +619,9 @@ return [
                 'admin'            => '管理者',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'パスワードの確認',
-                'download-sample'  => 'サンプルのダウンロード',
                 'email'            => 'メール',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'パスワード',
-                'sample-products'  => 'サンプル商品',
                 'title'            => '管理者の作成',
             ],
 
@@ -716,6 +714,14 @@ return [
                 'zambian-kwacha'              => 'ザンビアクワチャ（ZMW）',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'サンプルをダウンロード',
+                'no'              => 'いいえ',
+                'sample-products' => 'サンプル製品',
+                'title'           => 'サンプル製品',
+                'yes'             => 'はい',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Bagistoのインストール',
                 'bagisto-info'     => 'データベーステーブルの作成中、これには数分かかることがあります',
@@ -746,7 +752,7 @@ return [
                 'main'          => '開始',
                 'select-locale' => 'ロケールを選択',
                 'title'         => 'Bagistoのインストール',
-                'welcome-title' => 'Bagisto 2.0へようこそ。',
+                'welcome-title' => 'Bagistoへようこそ',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'ドイツ語',
             'hebrew'                   => 'ヘブライ語',
             'hindi'                    => 'ヒンディー語',
-            'installation-description' => '通常、Bagistoのインストールにはいくつかのステップが含まれます。ここにBagistoのインストールプロセスの概要を示します:',
+            'installation-description' => 'Bagistoのインストールには通常、いくつかのステップが含まれます。 ここにBagistoのインストールプロセスの一般的な概要があります',
             'installation-info'        => 'ここにいてくれてうれしいです！',
             'installation-title'       => 'Bagistoインストールへようこそ',
             'italian'                  => 'イタリア語',

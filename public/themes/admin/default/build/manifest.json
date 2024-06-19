@@ -96,9 +96,17 @@
     "file": "assets/captcha-061d77ab.svg",
     "src": "src/Resources/assets/images/settings/captcha.svg"
   },
+  "src/Resources/assets/images/settings/checkout.svg": {
+    "file": "assets/checkout-e5efdb8e.svg",
+    "src": "src/Resources/assets/images/settings/checkout.svg"
+  },
   "src/Resources/assets/images/settings/email.svg": {
     "file": "assets/email-5653e8d5.svg",
     "src": "src/Resources/assets/images/settings/email.svg"
+  },
+  "src/Resources/assets/images/settings/inventory.svg": {
+    "file": "assets/inventory-d69907d8.svg",
+    "src": "src/Resources/assets/images/settings/inventory.svg"
   },
   "src/Resources/assets/images/settings/invoice.svg": {
     "file": "assets/invoice-bbc6d6a8.svg",
