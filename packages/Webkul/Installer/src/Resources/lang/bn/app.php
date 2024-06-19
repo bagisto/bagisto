@@ -620,11 +620,9 @@ return [
                 'admin'            => 'অ্যাডমিন',
                 'bagisto'          => 'বাগিস্তো',
                 'confirm-password' => 'পাসওয়ার্ড নিশ্চিত করুন',
-                'download-sample'  => 'স্যাম্পল ডাউনলোড করুন',
                 'email'            => 'ইমেইল',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'পাসওয়ার্ড',
-                'sample-products'  => 'স্যাম্পল পণ্য',
                 'title'            => 'অ্যাডমিনিস্ট্রেটর তৈরি করুন',
             ],
 
@@ -717,10 +715,18 @@ return [
                 'zambian-kwacha'              => 'জাম্বিয়ান কোয়াচা (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample'  => 'নমুনা ডাউনলোড',
+                'no'               => 'না',
+                'sample-products'  => 'নমুনা পণ্য',
+                'title'            => 'নমুনা পণ্য',
+                'yes'              => 'হ্যাঁ',
+            ],
+
             'installation-processing' => [
-                'bagisto-info'     => 'ডাটাবেস টেবিল তৈরি করা হচ্ছে, এটি কিছুটা সময় নিতে পারে',
-                'bagisto'          => 'ইনস্টলেশন বাগিস্তো',
-                'title'            => 'ইনস্টলেশন',
+                'bagisto-info' => 'ডাটাবেস টেবিল তৈরি করা হচ্ছে, এটি কিছুটা সময় নিতে পারে',
+                'bagisto'      => 'ইনস্টলেশন বাগিস্তো',
+                'title'        => 'ইনস্টলেশন',
             ],
 
             'installation-completed' => [
@@ -747,7 +753,7 @@ return [
                 'main'          => 'শুরু',
                 'select-locale' => 'লোকেল নির্বাচন করুন',
                 'title'         => 'আপনার Bagisto ইনস্টলেশন',
-                'welcome-title' => 'Bagisto 2.0-এ আপনাকে স্বাগতম।',
+                'welcome-title' => 'Bagisto এ আপনাকে স্বাগতম',
             ],
 
             'server-requirements' => [
@@ -787,7 +793,7 @@ return [
             'german'                   => 'জার্মান',
             'hebrew'                   => 'হিব্রু',
             'hindi'                    => 'হিন্দি',
-            'installation-description' => 'বাগিস্তো ইনস্টলেশন সাধারণত একাধিক পদক্ষেপ শামিল করে। বাগিস্তোর ইনস্টলেশন প্রক্রিয়ার জন্য এটি সাধারণ বর্ণনা:',
+            'installation-description' => 'বাগিস্তো ইনস্টলেশন সাধারণত একাধিক পদক্ষেপ শামিল করে। বাগিস্তোর ইনস্টলেশন প্রক্রিয়ার জন্য এটি সাধারণ বর্ণনা',
             'installation-info'        => 'আমরা আপনাকে এখানে দেখা দেখার খুশি!',
             'installation-title'       => 'ইনস্টলেশনে আপনাকে স্বাগতম',
             'italian'                  => 'ইটালিয়ান',

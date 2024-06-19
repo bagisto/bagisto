@@ -714,6 +714,14 @@ return [
                 'zambian-kwacha'              => 'Kwacha zambiano (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'scarica campione',
+                'no'              => 'No',
+                'sample-products' => 'Prodotti campione',
+                'title'           => 'Prodotti campione',
+                'yes'             => 'Sì',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Installazione Bagisto',
                 'bagisto-info'     => 'Creazione delle tabelle del Database, questo potrebbe richiedere qualche momento',
@@ -744,7 +752,7 @@ return [
                 'main'          => 'Inizio',
                 'select-locale' => 'Seleziona la località',
                 'title'         => 'La tua installazione di Bagisto',
-                'welcome-title' => 'Benvenuto in Bagisto 2.0.',
+                'welcome-title' => 'Benvenuto in Bagisto',
             ],
 
             'server-requirements' => [
@@ -784,7 +792,7 @@ return [
             'german'                   => 'Tedesco',
             'hebrew'                   => 'Ebraico',
             'hindi'                    => 'Hindi',
-            'installation-description' => 'L\'installazione di Bagisto coinvolge tipicamente diversi passaggi. Ecco un outline generale del processo di installazione p er Bagisto:',
+            'installation-description' => 'L\'installazione di Bagisto generalmente prevede diversi passaggi. Ecco una panoramica generale del processo di installazione per Bagisto',
             'installation-info'        => 'Siamo felici di vederti qui!',
             'installation-title'       => 'Benvenuti all\'installazione',
             'italian'                  => 'Italiano',

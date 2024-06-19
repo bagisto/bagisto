@@ -619,11 +619,9 @@ return [
                 'admin'            => 'מנהל',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'אשר סיסמה',
-                'download-sample'  => 'הורד דוגמא',
                 'email'            => 'אימייל',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'סיסמה',
-                'sample-products'  => 'מוצרים דוגמה',
                 'title'            => 'צור מנהל',
             ],
 
@@ -716,6 +714,14 @@ return [
                 'zambian-kwacha'              => 'קוואצ\'ה זמבית (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'הורד דוגמה',
+                'no'              => 'לא',
+                'sample-products' => 'מוצרי דוגמה',
+                'title'           => 'מוצרי דוגמה',
+                'yes'             => 'כן',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'התקנת Bagisto',
                 'bagisto-info' => 'יצירת טבלאות מסד הנתונים, זה עשוי לקחת מספר רגעים',
@@ -746,7 +752,7 @@ return [
                 'main'          => 'הַתְחָלָה',
                 'select-locale' => 'בחר אזור',
                 'title'         => 'התקנת Bagisto שלך',
-                'welcome-title' => 'ברוך הבא ל-Bagisto 2.0.',
+                'welcome-title' => 'ברוך הבא ל-Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'גרמני',
             'hebrew'                   => 'עברית',
             'hindi'                    => 'הינדי',
-            'installation-description' => 'התקנת Bagisto בדרך כלל כוללת מספר שלבים. הנה סקירה כללית של תהליך ההתקנה עבור  Bagisto:',
+            'installation-description' => 'התקנת Bagisto כוללת בדרך כלל מספר שלבים. הנה מתווה כללי של תהליך ההתקנה עבור Bagisto',
             'installation-info'        => 'אנו שמחים לראותך כאן!',
             'installation-title'       => 'ברוך הבא להתקנת Bagisto',
             'italian'                  => 'איטלקי',

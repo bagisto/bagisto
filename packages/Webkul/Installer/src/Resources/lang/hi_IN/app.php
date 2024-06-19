@@ -619,11 +619,9 @@ return [
                 'admin'            => 'व्यवस्थापक',
                 'bagisto'          => 'बैगिस्टो',
                 'confirm-password' => 'पासवर्ड की पुष्टि करें',
-                'download-sample'  => 'नमूना डाउनलोड करें',
                 'email'            => 'ईमेल',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'पासवर्ड',
-                'sample-products'  => 'नमूना उत्पाद',
                 'title'            => 'व्यवस्थापक बनाएं',
             ],
 
@@ -716,6 +714,14 @@ return [
                 'zambian-kwacha'              => 'ज़ाम्बियाई क्वाचा (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'नमूना डाउनलोड करें',
+                'no'              => 'नहीं',
+                'sample-products' => 'नमूना उत्पाद',
+                'title'           => 'नमूना उत्पाद',
+                'yes'             => 'हाँ',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'बैगिस्टो स्थापना',
                 'bagisto-info'     => 'डेटाबेस तालिकाएँ बनाने का प्रक्रियाण, इसमें कुछ क्षण लग सकते हैं',
@@ -746,7 +752,7 @@ return [
                 'main'          => 'शुरू',
                 'select-locale' => 'स्थान चुनें',
                 'title'         => 'आपका Bagisto स्थापित करें',
-                'welcome-title' => 'Bagisto 2.0 में आपका स्वागत है।',
+                'welcome-title' => 'Bagisto में आपका स्वागत है।',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'जर्मन',
             'hebrew'                   => 'हिब्रू',
             'hindi'                    => 'हिंदी',
-            'installation-description' => 'बैगिस्टो स्थापना आमतौर पर कई कदमों में होती है। यहां बैगिस्टो के लिए स्थापना प्रक्रिया की सामान्य रूपरेखा है:',
+            'installation-description' => 'बैगिस्टो स्थापना आमतौर पर कई कदमों में होती है। यहां बैगिस्टो के लिए स्थापना प्रक्रिया की सामान्य रूपरेखा है',
             'installation-info'        => 'हमें यहाँ आपको खुश देखकर अच्छा लग रहा है!',
             'installation-title'       => 'स्थापना में आपका स्वागत है',
             'italian'                  => 'इतालवी',

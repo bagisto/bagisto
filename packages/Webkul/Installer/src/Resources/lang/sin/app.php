@@ -618,11 +618,9 @@ return [
                 'admin'            => 'පරිපාලක',
                 'bagisto'          => 'බැගිස්ටෝ',
                 'confirm-password' => 'මුරපදය තහවුරු කරන්න',
-                'download-sample'  => 'උපකාරක භාණ්ඩ බාගත කරන්න',
                 'email'            => 'ඊමේල්',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'මුරපදය',
-                'sample-products'  => 'උපකාරක නිෂ්පාදන',
                 'title'            => 'පරිපාලකයකු සාදන්න',
             ],
 
@@ -715,10 +713,18 @@ return [
                 'zambian-kwacha'              => 'සැම්බියාව් ක්වාච් (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'සාම්පලය බාගන්න',
+                'no'              => 'නැහැ',
+                'sample-products' => 'සාම්පල නිෂ්පාදන',
+                'title'           => 'සාම්පල නිෂ්පාදන',
+                'yes'             => 'ඔව්',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'Bagisto ස්තුරාකුල',
-                'bagisto-info'     => 'දත්ත වගකාගකක් සාදනු ඇති වී, මෙමගේ කුම වේදයන්ද කතාමතා වේදිය',
-                'title'            => 'ස්තුරාකුල',
+                'bagisto'      => 'Bagisto ස්තුරාකුල',
+                'bagisto-info' => 'දත්ත වගකාගකක් සාදනු ඇති වී, මෙමගේ කුම වේදයන්ද කතාමතා වේදිය',
+                'title'        => 'ස්තුරාකුල',
             ],
 
             'installation-completed' => [
@@ -745,7 +751,7 @@ return [
                 'main'          => 'ආරම්භක',
                 'select-locale' => 'Locale තෝරන්න',
                 'title'         => 'ඔබේ Bagisto ස්ථාපනය',
-                'welcome-title' => 'Bagisto 2.0 වෙත සාදරයෙන් පිළිගනිමු.',
+                'welcome-title' => 'Bagisto වෙත සාදරයෙන් පිළිගනිමු.',
             ],
 
             'server-requirements' => [
@@ -785,7 +791,7 @@ return [
             'german'                   => 'ජර්මානු',
             'hebrew'                   => 'හෙබ්රෙව්',
             'hindi'                    => 'හින්දි',
-            'installation-description' => 'Bagisto ස්තුරාකුල සහාභයට මෙතා දිගේ ස්තුරාකුල ප්‍රකාරයට වර්ගය වෙනවා:',
+            'installation-description' => 'Bagisto ස්ථාපනය සාමාන්‍යයෙන් කිහිපයක් පියවරට යටත් වේ. මෙන්න Bagisto සඳහා ස්ථාපන ක්රියාවලියේ සාමාන්ය දෘෂ්ටියක්',
             'installation-info'        => 'අපට ඔබ මෙතා බලන්නේ සුමුදුසමින්!',
             'installation-title'       => 'ස්තුරාකුල සහාභ',
             'italian'                  => 'ඉතාලි',

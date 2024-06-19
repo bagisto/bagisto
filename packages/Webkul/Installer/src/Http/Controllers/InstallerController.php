@@ -123,36 +123,44 @@ class InstallerController extends Controller
     }
 
     /**
+     * Create Sample Products.
+     *
+     * @return mixed
+     */
+    public function createSampleProducts()
+    {
+        $defaultLocale = config('app.locale');
+
+        $allowedLocales = array_merge([$defaultLocale], request()->input('selectedLocales'));
+
+        $defaultCurrency = config('app.currency');
+
+        $allowedCurrencies = array_merge([$defaultCurrency], request()->input('selectedCurrencies'));
+
+        $this->databaseManager->seedSampleProducts([
+            'default_locale'     => $defaultLocale,
+            'allowed_locales'    => $allowedLocales,
+            'default_currency'   => $defaultCurrency,
+            'allowed_currencies' => $allowedCurrencies,
+        ]);
+    }
+
+    /**
      * Admin Configuration Setup.
      *
      * @return bool
      */
     public function adminConfigSetup()
     {
-        $defaultLocale = config('app.locale');
-        $allowedLocales = array_merge([$defaultLocale], request()->input('selectedLocales'));
-
-        $defaultCurrency = config('app.currency');
-        $allowedCurrencies = array_merge([$defaultCurrency], request()->input('selectedCurrencies'));
-
-        $password = password_hash(request()->input('params')['password'], PASSWORD_BCRYPT, ['cost' => 10]);
+        $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
 
         try {
-            if (request()->input('params')['sample_products']) {
-                $this->databaseManager->seedSampleProducts([
-                    'default_locale'     => $defaultLocale,
-                    'allowed_locales'    => $allowedLocales,
-                    'default_currency'   => $defaultCurrency,
-                    'allowed_currencies' => $allowedCurrencies,
-                ]);
-            }
-
             DB::table('admins')->updateOrInsert(
                 [
                     'id' => self::USER_ID,
                 ], [
-                    'name'     => request()->input('params')['admin'],
-                    'email'    => request()->input('params')['email'],
+                    'name'     => request()->input('admin'),
+                    'email'    => request()->input('email'),
                     'password' => $password,
                     'role_id'  => 1,
                     'status'   => 1,
