@@ -2,6 +2,326 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.2.0 (19th of June 2024)** - *Release*
+
+### Datagrid Improvements
+
+1. **Custom Filters:**
+
+* Introduced the feature to save and update custom filters, allowing users to personalize and streamline their search and browsing experience.
+
+2. **Aggregate support**
+
+* Added aggregate functions to the datagrid, allowing users to perform calculations such as sum, average, and count directly within the grid for enhanced data analysis.
+
+3. **Multiple Select and Single Select**
+
+* Introduced the feature to support both single select and multiple select in datagrid filters, providing users with flexible and efficient filtering options.
+
+4. **Column Visibility Control**
+
+* Enhanced datagrid functionality to allow backend control over column visibility. Columns are now visible by default, but can be disabled from visibility with `'visibility' => false.` This allows users to hide columns while retaining the ability to filter data associated with those columns.
+
+5. **Gave single date and datetime support**
+
+* Added support for filtering data by date and date-time, enhancing data analysis capabilities.
+
+6. **Elasticsearch Support for Datagrids**
+
+* Implemented Elasticsearch support for datagrids, enabling faster and more efficient data retrieval and analysis.
+
+### Inclusive and Exclusive Tax Options
+
+* Added the feature to support both inclusive and exclusive tax settings. Users can now choose whether taxes are included in or added to the product price, providing flexibility to accommodate different tax regulations and pricing strategies.
+
+### Estimate Shipping Charges
+
+* Implemented a feature to estimate shipping charges for orders, providing users with upfront cost estimates during the checkout process.
+
+### Order and Reorder Functionality
+
+* Enabled administrators to order and reorder items directly from the admin interface, enhancing management efficiency. 
+
+* Implemented the ability for customers to reorder products directly from their account, streamlining the purchasing process and enhancing user convenience.
+
+### Enhanced Theme Customization
+
+* The theme_customizations table now supports customizations for multiple themes and multiple channels. This enhancement allows you to define different customizations for each theme and channel combination, providing greater flexibility and control over your application's appearance.
+
+* Enhanced the theme customization section by adding a feature to filter attributes.
+
+### Redesigned Invoice Layout:
+
+* Updated the design of the invoice for a more modern and user-friendly appearance.
+
+* Added support for Right-to-Left (RTL) languages, ensuring compatibility and usability for languages that are written from right to left.
+
+* Added support for multiple locales in the invoice, allowing invoices to be generated and displayed in different languages and formats based on user preferences.
+
+### Product Card UI Enhancements
+
+* Upgraded the product cart layout to enhance user experience with a more intuitive and visually appealing design.
+
+### Frontend Fixes and Redesigns for Mobile devices
+
+* Improved mobile view for all front-facing elements, including the review section, footer, product view, and customer account section.
+
+### Added Contact Us Feature
+
+* Implemented a feature allowing users to easily contact the store from the frontend.
+
+### Custom Currency Options
+
+* Enhanced currency creation with additional customization options. Added support for specifying Group Separator, Decimal Separator, and Currency Position during currency setup.
+
+### Media zooming for product and review images 
+
+* Added the feature to zoom in on media for both reviews and products, improving the viewing experience and providing better detail.
+
+### Implemented new features in installer package.
+
+1. **All Currency Support**
+
+* Implemented comprehensive support for all possible currencies during the installation process, ensuring smooth setup and functionality for users worldwide.
+
+2. **Sample Products**
+
+* Added the feature to create sample products during installation using the GUI, enhancing the initial setup experience for users.
+
+### Search Mode Functionality
+
+* Implemented search mode functionality for the product datagrid and Elasticsearch, enabling users to perform advanced searches and retrieve relevant product information efficiently.
+
+### Channel Filter Support
+
+1. **Data Grids:**
+    - Users can now filter data by channels directly within data grids, improving data management and analysis capabilities.
+
+2. **Dashboard:**
+    - Enhanced the dashboard with channel filter support, allowing users to view analytics and metrics specific to selected channels.
+
+3. **Reporting:**
+    - Integrated channel filters into reporting features, enabling users to generate channel-specific reports for detailed analysis.
+
+### Added Channel Selection for Product Creation
+
+*  Implemented a feature that allows users to select the channel while creating a product, enhancing flexibility and management.
+
+### Added Blade File Support in Configuration
+
+* Implemented support for Blade files in configuration settings, enhancing flexibility and customization options.
+
+### Added Login Option in Cart and Checkout
+
+* Implemented a login option directly on the cart and checkout pages, improving accessibility and convenience for users.
+
+### Locale-Based URL Key Implementation
+
+* Implemented locale-based URL keys, improving SEO and localization by generating URLs tailored to different language versions.
+
+### Improved Web Vitals
+
+*  Enhanced web vitals including loading speed, interactivity, and visual stability for a smoother user experience.
+
+* Improved web vitals contribute to better user engagement and satisfaction.
+
+* Optimized web vitals can positively impact search engine rankings and user retention.
+
+### Simplified Tailwind CSS Classes
+
+* Enhanced readability of code by simplifying class definitions.
+
+*  Ensured a uniform look by standardizing how Tailwind CSS classes are applied.
+
+* Tailwind CSS classes clearer by removing unnecessary values.
+
+### Added Debug Mode with Allowed IPs Feature
+
+* Implemented debug mode with IP allowlist configuration.
+
+* This entry clarifies that the debug mode now includes a configuration option (`APP_DEBUG_ALLOWED_IPS=`) in the `.env` file, where IP addresses can be listed comma-separated to restrict access to authorized users during debugging, thereby enhancing security measures.
+
+### Multiple Configuration Settings Support
+
+* Enhanced the configuration management system for better performance and usability.
+
+* Implemented support for multiple configuration settings, allowing users to define and manage various configurations based on their needs.
+
+1. **Breadcrumbs**
+
+* In the General section added new Configuration setting to enable or disable breadcrumbs.
+
+2. **Header Offer Title**
+
+* In the Content section added new Configuration setting to Configure Header Offer Title with offer title, redirection title, and redirection link.
+
+3. **Products configuration**
+
+* In the Products section added new Configuration setting to set up the search engine for product searches, you can choose between a database and Elasticsearch based on your requirements. If you have a large number of products, Elasticsearch is recommended.
+
+* In the Products section added new Configuration setting to add product image placeholders for small, medium, and large sizes.
+
+* In the Products section, added a new configuration setting to allow permission for customer reviews.
+ 
+4. **Inventory Section**
+
+* Added a new configuration section `Inventory`.
+
+* In the Inventory section you can configure product stock options to allow back orders, set minimum and maximum cart quantities, and define out-of-stock thresholds.
+
+5. **Login Options**
+
+* In the Settings section added new configuration setting to Configure login options to determine the redirect page for customers after login.
+
+6. **Create New Account Options**
+
+* In the Settings section added new configuration setting to set options for new accounts, including assigning a default customer group and enabling the newsletter subscription option during sign-up.
+
+6. **Email Settings Section**
+
+* New configuration in the email settings section to configure Contact Name and Contact Email.
+
+7. **Minimum Order Settings**
+
+* In the Order section added new configuration setting to that the order has Include Discount Amount, Include Tax to Amount and the Description in cart page.
+
+8. **Allow Reorder**
+
+* In the Order section added new configuration setting to Enable or disable the reordering feature for admin users.
+
+9. **PDF Print Outs**
+
+* In the Invoice section added new configuration setting to configure PDF Print Outs to display Invoice ID, Order ID in the header, and include the invoice logo.
+
+9. **Inclusive Exclusive Tax**
+
+* In the Tax section added new configuration setting to configure Inclusive Exclusive Taxes.
+
+10. **Checkout**
+
+* Added a new configuration section `Checkout`.
+
+* In the Checkout section you can manage guest checkout, cart page, cross-sell products, and estimated shipping to enhance user convenience and streamline the shopping process for increased sales.
+
+* In the Checkout section you can configure settings for My Cart to show a summary of item quantities and display the total number of items in the cart for easy tracking.
+
+* In the Checkout section you can enable Mini Cart settings to display the mini cart and show Mini Cart Offer Information for quick access to cart details and promotions.
+
+* #9534 [feature] - Logged in User -> Checkout Page -> Default address must be selected.
+
+* #9625 [feature] - Make the email address from the footer of the emails send from admin and shop configurable.
+
+* #9854 [feature] - please support Swiss franc (CHF) as currency during installation. 
+
+* #9758 [improvements] - When we delete a select type attribute options, there we are unable to see the delete warning message.
+
+* #9764 [improvements] - In the Grouped Product feature, there's an issue where the quantity box becomes unresponsive and shifts when we input a quantity of 0, triggering a validation error.
+
+* #9795 [improvements] - Create a new attribute, the labels in locale list should be in Alphabetical Order. 
+
+* #9591 [enhancement] - There should be an Empty Space in Country Drop Down for Tax Inclusive Default Location Calculation.
+
+* #9728 [fixed] - There is a UI issue with the Invoice Datagrid in the Admin-end customer section. The alignment is not appropriate.
+
+* #9739 [fixed] - The UI of the Shipping Address is not displaying properly in the Shop Front Customer Orders section.
+
+* #9880 [fixed] - Toggle Button on status color is not appropriate. 
+
+* #9585 [fixed] - Tax is added to total price, even when catalog prices are including tax.
+
+* #9588 [fixed] - Category Filter -> Max Price Filter issue appearing. Decimal Value entry not appearing.
+
+* #9609 [fixed] - Serialization of 'Closure' is not allowed {"exception":"[object] (Exception(code: 0): Serialization of 'Closure' is not allowed at 
+
+* #9610 [fixed] - Social Share links are not appearing.
+
+* #9612 [fixed] - Getting Exceptional Error in saving categories in different locale. 
+
+* #9644 [fixed] - Fields in configuration that use depends do not respect the type chosen. 
+
+* #9645 [fixed] - While a product has deleted, and the order view and order refund have error report and can't do it continue .
+
+* #9646 [fixed] - Reset Password Form -> Footer text translation is missing.
+
+* #9649 [fixed] - Incomplete Spanish translations.
+
+* #9654 [fixed] - Refunded product status color box is not appearing. 
+
+* #9660 [fixed] - In Mobile view -> I have added all locale but cannot see or scroll all locales.
+
+* #9662 [fixed] - Guest User Name is not appearing in order section of Admin End.
+
+* #9665 [fixed] - Admin End -> Notification Page is not having Shimmer Effect.
+
+* #9666 [fixed] - Admin End -> Datagrid Export button icon is not responding properly. 
+
+* #9669 [fixed] - Unable to Mass Update configurable product inventory of Variants after filling any of the other details. 
+
+* #9666 [fixed] - Admin End -> Datagrid Export button icon is not responding properly. 
+
+* #9673 [fixed] - Admin End -> Reorder Feature -> We are unable to save new created address.
+
+* #9676 [fixed] - Installer translation missing when we are adding locale in it.
+
+* #9679 [fixed] - Getting Console Errors and Blank Page in Reorder Page in Admin Panel if we delete the existing product.
+
+* #9680 [fixed] - In the Reorder Feature, we can see that we are able to click the "-" button of qty when the qty is 1. 
+
+* #9687 [fixed] - In Contact Us form there we should not be able to see the arrows to increase or decrees number.
+
+* #9698 [fixed] - Bagisto Installers refuse to connect to a database without db password.
+
+* #9701 [fixed] - Getting Console Error inMass Delete In Cart Rule Coupons is not working properly. 
+
+* #9705 [fixed] - When creating a Bundle product and selecting options, we can observe a field indicating whether it is required. Even if we select 'no,' we still see the asterisk symbol.
+
+* #9707 [fixed] - value is missing for lines in a street address.
+
+* #9713 [fixed] - VAT ID is missing in address create form.
+
+* #9714 [fixed] - After enabling Buy it now feature from admin and checking the functionality it is not redirecting to checkout page.
+
+* #9717 [fixed] - In the Reorder option, the image of the product appearing is not accurate.
+
+* #9719 [fixed] - price does not change when options changed at configurable product with variant.
+
+* #9726 [fixed] - Name Validation need to be removed from the First Name and Last Name while editing profile from shop front.
+
+* #9733 [fixed] - Unnecessary validation messages are appearing in refreshing the Customer profile edit page.
+
+* #9761 [fixed] - Unable to add products to cart that have variants or options to select. It does not redirect to the Product View Page.
+
+* #9763 [fixed] - There is an issue with Cart Rule Marketing Time regarding the saving of Date and Time.
+
+* #9772 [fixed] - Facebook/Whatsapp Share buttons don't work on mobile.
+
+* #9785 [fixed] - Theme Section -> Image Carousal is not working, getting console errors.
+
+* #9796 [fixed] - Unable to save the image title name when creating a new slider in the Image Carousel theme section of Settings. 
+
+* #9799 [fixed] - Cyrillic is not supported.
+
+* #9801 [fixed] - In Category Page -> Filters are Overlapping into the header.
+
+* #9814 [fixed] - Your configuration files are not serializable.
+
+* #9828 [fixed] - Doesn't work Social login with Google.
+
+* #9845 [fixed] - The Cart Rule is experiencing issues under various conditions and rules.
+
+* #9852 [fixed] - lang=ja, but the name input box can only input letters and numbers.
+
+* #9863 [fixed] - Shipping.blade.php has a bug in client email and admin email.
+
+* #9875 [fixed] - Admin End Mega Search is showing "Undefined" in "Explore all products matching (undefined)," and when clicked, a blank page appears.
+
+* #9883 [fixed] - Error: Extension Error: The validator 'all' must be a function. 
+
+* #9885 [fixed] - Getting issue in Order, Customer and Catalog Datagrid, unable to see the details in some specific locales. 
+
+* #9836 [fixed] - Currency should be showing correct in Arabic locale for Bundle Product.
+
+
 ## **v2.1.2 (8th of March 2024)** - *Release*
 * #9547 [improvements] - Revamped completed checkout flow.
 
