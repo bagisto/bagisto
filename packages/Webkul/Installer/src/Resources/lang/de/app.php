@@ -618,11 +618,9 @@ return [
                 'admin'            => 'Administrator',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Passwort bestätigen',
-                'download-sample'  => 'Beispiel herunterladen',
                 'email'            => 'E-Mail',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Passwort',
-                'sample-products'  => 'Beispielprodukte',
                 'title'            => 'Administrator erstellen',
             ],
 
@@ -715,6 +713,20 @@ return [
                 'zambian-kwacha'              => 'Sambischer Kwacha (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'Beispiel herunterladen',
+                'no'              => 'Nein',
+                'sample-products' => 'Beispielfprodukte',
+                'title'           => 'Beispielfprodukte',
+                'yes'             => 'Ja',
+            ],
+
+            'installation-processing' => [
+                'title'        => 'Installation',
+                'bagisto-info' => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
+                'bagisto'      => 'Installation Bagisto',
+            ],
+
             'installation-completed' => [
                 'admin-panel'                => 'Admin-Panel',
                 'bagisto-forums'             => 'Bagisto Forum',
@@ -722,12 +734,6 @@ return [
                 'explore-bagisto-extensions' => 'Erkunden Sie Bagisto-Erweiterungen',
                 'title'                      => 'Installation abgeschlossen',
                 'title-info'                 => 'Bagisto wurde erfolgreich auf Ihrem System installiert.',
-            ],
-
-            'installation-processing' => [
-                'title'            => 'Installation',
-                'bagisto-info'     => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
-                'bagisto'          => 'Installation Bagisto',
             ],
 
             'ready-for-installation' => [
@@ -745,7 +751,7 @@ return [
                 'main'          => 'Start',
                 'select-locale' => 'Wähle Lokale',
                 'title'         => 'Deine Bagisto-Installation',
-                'welcome-title' => 'Willkommen bei Bagisto 2.0.',
+                'welcome-title' => 'Willkommen bei Bagisto',
             ],
 
             'server-requirements' => [
@@ -785,7 +791,7 @@ return [
             'german'                   => 'Deutsch',
             'hebrew'                   => 'Hebräisch',
             'hindi'                    => 'Hindi',
-            'installation-description' => 'Die Installation von Bagisto umfasst in der Regel mehrere Schritte. Hier ist ein grober Überblick über den Installationsprozess für Bagisto:',
+            'installation-description' => 'Die Installation von Bagisto umfasst in der Regel mehrere Schritte. Hier ist eine allgemeine Übersicht über den Installationsprozess für Bagisto',
             'installation-info'        => 'Wir freuen uns, Sie hier zu sehen!',
             'installation-title'       => 'Willkommen zur Installation',
             'italian'                  => 'Italienisch',

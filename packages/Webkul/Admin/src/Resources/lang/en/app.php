@@ -2241,7 +2241,6 @@ return [
                         'delete'              => 'Delete',
                         'channel'             => 'Channel',
                         'actions'             => 'Actions',
-                        'channel'             => 'Channel',
                     ],
 
                     'create' => [
@@ -3350,8 +3349,14 @@ return [
                     'unit-options' => [
                         'info'        => 'Set units options.',
                         'title'       => 'Unit Options',
-                        'title-info'  => 'Size, color, material, customization, enhancing customer satisfaction and tailoring purchases.',
+                        'title-info'  => 'Configure the weight in pounds (lbs) or kilograms (kgs).',
                         'weight-unit' => 'Weight Unit',
+                    ],
+
+                    'breadcrumbs' => [
+                        'shop'       => 'Shop Breadcrumbs',
+                        'title'      => 'Breadcrumbs',
+                        'title-info' => 'Enable or disable breadcrumbs navigation in the shop.',
                     ],
                 ],
 
@@ -3359,12 +3364,12 @@ return [
                     'info'  => 'Set compare options, wishlist options, image search options, footer, toggle footer and custom scripts.',
                     'title' => 'Content',
 
-                    'settings' => [
-                        'compare-options'     => 'Compare options',
-                        'image-search-option' => 'Image Search Option',
-                        'title'               => 'Settings',
-                        'title-info'          => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
-                        'wishlist-options'    => 'Wishlist options',
+                    'header-offer' => [
+                        'title'             => 'Header Offer Title',
+                        'title-info'        => 'Configure Header Offer Title with offer title, redirection title, and redirection link.',
+                        'offer-title'       => 'Offer Title',
+                        'redirection-title' => 'Redirection Title',
+                        'redirection-link'  => 'Redirection Link',
                     ],
 
                     'custom-scripts' => [
@@ -3383,7 +3388,7 @@ return [
                         'favicon'    => 'Favicon',
                         'logo-image' => 'Logo Image',
                         'title'      => 'Admin Logo',
-                        'title-info' => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
+                        'title-info' => 'Configure logo and favicon images for your website\'s front end for better branding and recognition.',
                     ],
                 ],
 
@@ -3465,16 +3470,28 @@ return [
                     'info'  => 'Set guest checkout, product view page, cart view page, store front, review and attribute social share.',
                     'title' => 'Products',
 
+                    'settings' => [
+                        'compare-options'     => 'Compare options',
+                        'image-search-option' => 'Image Search Option',
+                        'title'               => 'Settings',
+                        'title-info'          => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
+                        'wishlist-options'    => 'Wishlist options',
+                    ],
+
                     'search' => [
-                        'admin-mode-info'      => 'Mega Search, Datagrid, and other search functionalities in the admin panel will be based on the selected search engine.',
-                        'admin-mode'           => 'Admin Search Mode',
-                        'database'             => 'Database',
-                        'elastic'              => 'Elastic Search',
-                        'search-engine'        => 'Search Engine',
-                        'storefront-mode-info' => 'Search functionality on the storefront will be based on the selected search engine including category page, search page, and other search functionalities.',
-                        'storefront-mode'      => 'Storefront Search Mode',
-                        'title-info'           => 'To set up the search engine for product searches, you can choose between a database and Elasticsearch based on your requirements. If you have a large number of products, Elasticsearch is recommended.',
-                        'title'                => 'Search',
+                        'admin-mode'            => 'Admin Search Mode',
+                        'admin-mode-info'       => 'Mega Search, Datagrid, and other search functionalities in the admin panel will be based on the selected search engine.',
+                        'database'              => 'Database',
+                        'elastic'               => 'Elastic Search',
+                        'max-query-length'      => 'Maximum query length',
+                        'max-query-length-info' => 'Set maximum query length for search queries.',
+                        'min-query-length'      => 'Minimum query length',
+                        'min-query-length-info' => 'Set minimum query length for search queries.',
+                        'search-engine'         => 'Search Engine',
+                        'storefront-mode'       => 'Storefront Search Mode',
+                        'storefront-mode-info'  => 'Search functionality on the storefront will be based on the selected search engine including category page, search page, and other search functionalities.',
+                        'title'                 => 'Search',
+                        'title-info'            => 'To set up the search engine for product searches, you can choose between a database and Elasticsearch based on your requirements. If you have a large number of products, Elasticsearch is recommended.',
                     ],
 
                     'guest-checkout' => [
@@ -3516,30 +3533,34 @@ return [
                     ],
 
                     'small-image' => [
-                        'height'     => 'Height',
-                        'title'      => 'Small Image',
-                        'title-info' => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
-                        'width'      => 'Width',
+                        'height'      => 'Height',
+                        'placeholder' => 'Small Image Placeholder',
+                        'title'       => 'Small Image',
+                        'title-info'  => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
+                        'width'       => 'Width',
                     ],
 
                     'medium-image' => [
-                        'height'     => 'Height',
-                        'title'      => 'Medium Image',
-                        'title-info' => 'Medium image refers to a moderate-sized picture that offers a balance between detail and screen space, commonly used for visuals.',
-                        'width'      => 'Width',
+                        'height'      => 'Height',
+                        'placeholder' => 'Medium Image Placeholder',
+                        'title'       => 'Medium Image',
+                        'title-info'  => 'Medium image refers to a moderate-sized picture that offers a balance between detail and screen space, commonly used for visuals.',
+                        'width'       => 'Width',
                     ],
 
                     'large-image' => [
-                        'height'     => 'Height',
-                        'title'      => 'Large image',
-                        'title-info' => 'Large image represents a high-resolution picture providing enhanced detail and visual impact, often used for showcasing products or graphics.',
-                        'width'      => 'Width',
+                        'height'      => 'Height',
+                        'placeholder' => 'Large Image Placeholder',
+                        'title'       => 'Large image',
+                        'title-info'  => 'Large image represents a high-resolution picture providing enhanced detail and visual impact, often used for showcasing products or graphics.',
+                        'width'       => 'Width',
                     ],
 
                     'review' => [
-                        'allow-guest-review' => 'Allow Guest Review',
-                        'title'              => 'Review',
-                        'title-info'         => 'Evaluation or assessment of something, often involving opinions and feedback.',
+                        'allow-customer-review' => 'Allow Customer Review',
+                        'allow-guest-review'    => 'Allow Guest Review',
+                        'title'                 => 'Review',
+                        'title-info'            => 'Evaluation or assessment of something, often involving opinions and feedback.',
                     ],
 
                     'attribute' => [
@@ -3550,17 +3571,18 @@ return [
                     ],
 
                     'social-share' => [
-                        'enable-share-email'     => 'Enable Share in Email?',
-                        'enable-share-facebook'  => 'Enable Share in Facebook?',
-                        'enable-share-linkedin'  => 'Enable Share in Linkedin?',
-                        'enable-share-pinterest' => 'Enable Share in Pinterest?',
-                        'enable-share-twitter'   => 'Enable Share in Twitter?',
-                        'enable-share-whatsapp'  => 'Enable Share in What\'s App?',
-                        'enable-social-share'    => 'Enable Social Share?',
-                        'share'                  => 'Share',
-                        'share-message'          => 'Share Message',
-                        'title'                  => 'Social Share',
-                        'title-info'             => 'Sharing things from a website with friends on social media platforms like Facebook, Twitter, or Instagram.',
+                        'title-info'                  => 'Configure social sharing settings to enable product sharing on Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn, and via email.',
+                        'title'                       => 'Social Share',
+                        'share-message'               => 'Share Message',
+                        'share'                       => 'Share',
+                        'enable-social-share'         => 'Enable Social Share?',
+                        'enable-share-whatsapp-info'  => 'What\'s App share link just will appear to mobile devices.',
+                        'enable-share-whatsapp'       => 'Enable Share in What\'s App?',
+                        'enable-share-twitter'        => 'Enable Share in Twitter?',
+                        'enable-share-pinterest'      => 'Enable Share in Pinterest?',
+                        'enable-share-linkedin'       => 'Enable Share in Linkedin?',
+                        'enable-share-facebook'       => 'Enable Share in Facebook?',
+                        'enable-share-email'          => 'Enable Share in Email?',
                     ],
                 ],
 
@@ -3578,7 +3600,7 @@ return [
                         'show-sku'        => 'Show SKU',
                         'show-weight'     => 'Show Weight',
                         'title'           => 'Products',
-                        'title-info'      => 'Items available for purchase or use, offered by a business or seller.',
+                        'title-info'      => 'Configure product settings including with SKU, weight, Categories, Images, Reviews, Ratings, Offers and etc.',
                     ],
 
                     'categories' => [
@@ -3586,6 +3608,20 @@ return [
                         'show-search-input-field' => 'Show Search Input Field',
                         'title'                   => 'Categories',
                         'title-info'              => '"Categories" refer to groups or classifications that help organize and group similar products or items together for easier browsing and navigation.',
+                    ],
+                ],
+
+                'inventory' => [
+                    'title'      => 'Inventory',
+                    'title-info' => 'Configure inventory settings to allow back orders, set minimum and maximum cart quantities, and define the out-of-stock threshold.',
+
+                    'product-stock-options' => [
+                        'allow-back-orders'       => 'Allow Back Orders',
+                        'max-qty-allowed-in-cart' => 'Maximum Qty Allowed in Shopping Cart',
+                        'min-qty-allowed-in-cart' => 'Minimum Qty Allowed in Shopping Cart',
+                        'out-of-stock-threshold'  => 'Out-of-Stock Threshold',
+                        'title'                   => 'Product Stock Option',
+                        'info'                    => 'Configure product stock options to allow back orders, set minimum and maximum cart quantities, and define out-of-stock thresholds.',
                     ],
                 ],
             ],
@@ -3635,6 +3671,41 @@ return [
                 'settings' => [
                     'settings-info' => 'Set newsletter subscriptions, email verifications and social login.',
                     'title'         => 'Settings',
+
+                    'login-as-customer' => [
+                        'allow-option' => 'Allow Login as Customer',
+                        'title'        => 'Login As Customer',
+                        'title-info'   => 'Enable "Login as Customer" functionality.',
+                    ],
+
+                    'wishlist' => [
+                        'allow-option' => 'Allow Wishlist option',
+                        'title'        => 'Wishlist',
+                        'title-info'   => 'Enable or disable the wishlist option.',
+                    ],
+
+                    'login-options' => [
+                        'account'          => 'Account',
+                        'home'             => 'Home',
+                        'redirect-to-page' => 'Redirect Customer to the selected page',
+                        'title'            => 'Login Options',
+                        'title-info'       => 'Configure login options to determine the redirect page for customers after login.',
+                    ],
+
+                    'create-new-account-option' => [
+                        'news-letter'      => 'Allow NewsLetter',
+                        'news-letter-info' => 'Enable newsletter subscription option on the sign-up page.',
+                        'title'            => 'Create New Account Options',
+                        'title-info'       => 'Set options for new accounts, including assigning a default customer group and enabling the newsletter subscription option during sign-up.',
+
+                        'default-group' => [
+                            'general'    => 'General',
+                            'guest'      => 'Guest',
+                            'title'      => 'Default Group',
+                            'title-info' => 'Assign a specific customer group as the default for new customers.',
+                            'wholesale'  => 'Wholesale',
+                        ],
+                    ],
 
                     'newsletter' => [
                         'subscription' => 'Allow Newsletter Subscription',
@@ -3686,7 +3757,7 @@ return [
                     'cancel-order'                                     => 'Send a notification after canceling an order',
                     'customer'                                         => 'Send the customer account credentials after registration',
                     'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
-                    'info'                                             => '"Notification" is a message or alert that informs users about events, updates, or actions, enhancing user engagement and awareness.',
+                    'info'                                             => 'To configure, receive emails for account verification, order confirmations, updates on invoices, refunds, shipments, and order cancellations.',
                     'new-admin'                                        => 'Send a confirmation e-mail to the admin after placing a new order',
                     'new-inventory-source'                             => 'Send a notification e-mail to the inventory source after creating a shipment',
                     'new-invoice'                                      => 'Send a notification e-mail to the customer after creating a new invoice',
@@ -3703,9 +3774,9 @@ return [
                 'info'  => 'Sales',
                 'title' => 'Sales',
 
-                'shipping' => [
-                    'info'  => 'Set shipping information.',
-                    'title' => 'Shipping',
+                'shipping-setting' => [
+                    'info'  => 'Configure shipping settings including Country, State, City, Street Address, Zip Code, Store Name, VAT Number, Contact Number, and Bank Details.',
+                    'title' => 'Shipping Settings',
 
                     'origin' => [
                         'bank-details'   => 'Bank Details',
@@ -3723,7 +3794,7 @@ return [
                 ],
 
                 'shipping-methods' => [
-                    'info'  => 'Set shipping methods information',
+                    'info'  => 'Configure shipping methods, including Free Shipping, Flat Rate, and additional options as needed.',
                     'title' => 'Shipping Methods',
 
                     'free-shipping' => [
@@ -3741,7 +3812,11 @@ return [
                         'status'      => 'Status',
                         'title'       => 'Title',
                         'title-info'  => 'Flat rate shipping is a shipping method where a fixed fee is charged for shipping, regardless of the weight, size, or distance of the package. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
-                        'type'        => 'Type',
+                        'type'        => [
+                            'per-order' => 'Per Order',
+                            'per-unit'  => 'Per Unit',
+                            'title'     => 'Type',
+                        ],
                     ],
                 ],
 
@@ -3783,28 +3858,41 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info'  => 'Set order numbers, minimum orders and back orders.',
-                    'title' => 'Order Settings',
+                    'info'               => 'Set order numbers, minimum orders and back orders.',
+                    'title'              => 'Order Settings',
 
                     'order-number' => [
                         'generator'   => 'Order Number Generator',
+                        'info'        => 'Unique identifier assigned to a specific customer order, aiding tracking, communication, and reference throughout the purchasing process.',
                         'length'      => 'Order Number Length',
                         'prefix'      => 'Order Number Prefix',
                         'suffix'      => 'Order Number Suffix',
                         'title'       => 'Order Number Settings',
-                        'title-info'  => 'Unique identifier assigned to a specific customer order, aiding tracking, communication, and reference throughout the purchasing process.',
                     ],
 
                     'minimum-order' => [
-                        'minimum-order-amount' => 'Minimum Order Amount',
-                        'title'                => 'Minimum Order Settings',
-                        'title-info'           => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
+                        'description'             => 'Description',
+                        'enable'                  => 'Enable',
+                        'include-discount-amount' => 'Include Discount Amount',
+                        'include-tax-amount'      => 'Include Tax to Amount',
+                        'info'                    => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
+                        'minimum-order-amount'    => 'Minimum Order Amount',
+                        'title'                   => 'Minimum Order Settings',
+                    ],
+
+                    'reorder' => [
+                        'admin-reorder'      => 'Admin Reorder',
+                        'admin-reorder-info' => 'Enable or disable the reordering feature for admin users.',
+                        'info'               => 'Enable or disable the reordering feature for admin users.',
+                        'shop-reorder'       => 'Shop Reorder',
+                        'shop-reorder-info'  => 'Enable or disable the reordering feature for shop users.',
+                        'title'              => 'Allow Reorder',
                     ],
 
                     'stock-options' => [
                         'allow-back-orders' => 'Allow Back orders',
+                        'info'              => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
                         'title'             => 'Stock Options',
-                        'title-info'        => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
                     ],
                 ],
 
@@ -3814,32 +3902,36 @@ return [
 
                     'invoice-number' => [
                         'generator'  => 'Invoice Number Generator',
+                        'info'       => 'Configuration of rules or parameters for generating and assigning unique identification numbers to invoices for organizational and tracking purposes.',
                         'length'     => 'Invoice Number Length',
                         'prefix'     => 'Invoice Number Prefix',
                         'suffix'     => 'Invoice Number Suffix',
                         'title'      => 'Invoice Number Settings',
-                        'title-info' => 'Configuration of rules or parameters for generating and assigning unique identification numbers to invoices for organizational and tracking purposes.',
                     ],
 
                     'payment-terms' => [
                         'due-duration'      => 'Due Duration',
                         'due-duration-day'  => ':due-duration Day',
                         'due-duration-days' => ':due-duration Days',
+                        'info'              => 'Agreed-upon conditions dictating when and how payment for goods or services should be made by the buyer to the seller.',
                         'title'             => 'Payment Terms',
-                        'title-info'        => 'Agreed-upon conditions dictating when and how payment for goods or services should be made by the buyer to the seller.',
                     ],
 
-                    'invoice-slip-design' => [
-                        'logo'       => 'Logo',
-                        'title'      => 'Invoice Slip Design',
-                        'title-info' => 'Visual layout and formatting of an invoice slip, including company branding, itemization, pricing, and payment details for professional presentation.',
+                    'pdf-print-outs' => [
+                        'info'             => 'Configure PDF Print Outs to display Invoice ID, Order ID in the header, and include the invoice logo.',
+                        'invoice-id-info'  => 'Configure display of Invoice ID in Invoice Header.',
+                        'invoice-id-title' => 'Display Invoice ID in Header',
+                        'logo'             => 'Logo',
+                        'order-id-info'    => 'Configure display of Order ID in Invoice Header.',
+                        'order-id-title'   => 'Display Order ID in Header',
+                        'title'            => 'PDF Print Outs',
                     ],
 
                     'invoice-reminders' => [
+                        'info'                       => 'Automated notifications or communications sent to customers to remind them of upcoming or overdue payments for invoices.',
                         'interval-between-reminders' => 'Interval between reminders',
                         'maximum-limit-of-reminders' => 'Maximum limit of reminders',
                         'title'                      => 'Invoice Reminders',
-                        'title-info'                 => 'Automated notifications or communications sent to customers to remind them of upcoming or overdue payments for invoices.',
                     ],
                 ],
 
@@ -3896,6 +3988,39 @@ return [
                         'excluding-tax'           => 'Excluding Tax',
                         'including-tax'           => 'Including Tax',
                         'both'                    => 'Excluding and Including Both',
+                    ],
+                ],
+
+                'checkout' => [
+                    'title' => 'Checkout',
+                    'info'  => 'Enable or Disable Mini Cart, cart Summary.',
+
+                    'shopping-cart' => [
+                        'cart-page'              => 'Cart Page',
+                        'cart-page-info'         => 'Control Cart Page visibility to enhance user shopping experience.',
+                        'cross-sell'             => 'Cross sell Products',
+                        'cross-sell-info'        => 'Enable cross-sell products to boost additional sales opportunities.',
+                        'estimate-shipping'      => 'Estimated Shipping',
+                        'estimate-shipping-info' => 'Enable estimated shipping to provide upfront shipping costs.',
+                        'guest-checkout'         => 'Allow guest checkout',
+                        'guest-checkout-info'    => 'Enable guest checkout for a faster, hassle-free purchase process.',
+                        'info'                   => 'Enable guest checkout, cart page, cross-sell products, and estimated shipping to enhance user convenience and streamline the shopping process for increased sales.',
+                        'title'                  => 'Shopping Cart',
+                    ],
+
+                    'my-cart' => [
+                        'display-item-quantities' => 'Display item quantities',
+                        'display-number-in-cart'  => 'Display number of items in cart',
+                        'info'                    => 'Enable settings for My Cart to show a summary of item quantities and display the total number of items in the cart for easy tracking.',
+                        'summary'                 => 'Summary',
+                        'title'                   => 'My Cart',
+                    ],
+
+                    'mini-cart' => [
+                        'display-mini-cart'    => 'Display Mini Cart',
+                        'info'                 => 'Enable Mini Cart settings to display the mini cart and show Mini Cart Offer Information for quick access to cart details and promotions.',
+                        'mini-cart-offer-info' => 'Mini Cart Offer Information',
+                        'title'                => 'Mini Cart',
                     ],
                 ],
             ],

@@ -3,9 +3,9 @@
     template as much as possible.
 -->
 @php
-    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
+    $showCompare = (bool) core()->getConfigData('catalog.products.settings.compare_option');
 
-    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
+    $showWishlist = (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 @endphp
 
 <div class="flex flex-wrap gap-4 px-4 pb-4 pt-6 shadow-sm lg:hidden">
@@ -114,7 +114,9 @@
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.before') !!}
 
-                @include('shop::checkout.cart.mini-cart')
+                @if(core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                    @include('shop::checkout.cart.mini-cart')
+                @endif
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.after') !!}
 
@@ -280,7 +282,7 @@
                 required
             >
 
-            @if (core()->getConfigData('general.content.shop.image_search'))
+            @if (core()->getConfigData('catalog.products.settings.image_search'))
                 @include('shop::search.images.index')
             @endif
         </div>

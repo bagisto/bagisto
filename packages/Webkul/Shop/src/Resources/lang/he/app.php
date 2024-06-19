@@ -696,7 +696,7 @@ return [
             'inactive'                  => 'הפריט הושבת ונמחק מהעגלה.',
             'inventory-warning'         => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
             'item-add-to-cart'          => 'הפריט התווסף בהצלחה',
-            'minimum-order-message'     => 'סכום הזמנה מינימלי הוא :amount',
+            'minimum-order-message'     => 'סכום הזמנה מינימלי הוא ',
             'missing-fields'            => 'חלק מהשדות החובה חסרים עבור מוצר זה.',
             'missing-options'           => 'אפשרויות חסרות עבור מוצר זה.',
             'paypal-payment-cancelled'  => 'התשלום בפייפאל בוטל.',

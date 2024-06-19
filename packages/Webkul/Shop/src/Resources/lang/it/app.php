@@ -696,7 +696,7 @@ return [
             'inactive'                  => 'L\'articolo è stato disattivato e rimosso dal carrello.',
             'inventory-warning'         => 'La quantità richiesta non è disponibile, riprova più tardi.',
             'item-add-to-cart'          => 'Articolo aggiunto con successo',
-            'minimum-order-message'     => 'L\'importo minimo dell\'ordine è :amount',
+            'minimum-order-message'     => 'L\'importo minimo dell\'ordine è',
             'missing-fields'            => 'Mancano alcuni campi obbligatori per questo prodotto.',
             'missing-options'           => 'Mancano opzioni per questo prodotto.',
             'paypal-payment-cancelled'  => 'Il pagamento Paypal è stato annullato.',

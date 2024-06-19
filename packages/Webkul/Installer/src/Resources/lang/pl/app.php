@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Administrator',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Potwierdź hasło',
-                'download-sample'  => 'pobierz-przykład',
                 'email'            => 'Email',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Hasło',
-                'sample-products'  => 'Przykładowe produkty',
                 'title'            => 'Utwórz administratora',
             ],
 
@@ -716,6 +714,14 @@ return [
                 'zambian-kwacha'              => 'Kwacha Zambijska (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'pobierz próbkę',
+                'no'              => 'Nie',
+                'sample-products' => 'Produkty próbne',
+                'title'           => 'Produkty próbne',
+                'yes'             => 'Tak',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Instalacja Bagisto',
                 'bagisto-info'     => 'Tworzenie tabel w bazie danych może zająć kilka chwil',
@@ -746,7 +752,7 @@ return [
                 'main'          => 'Rozpocznij',
                 'select-locale' => 'Selecteer Locatie',
                 'title'         => 'Uw Bagisto-installatie',
-                'welcome-title' => 'Welkom bij Bagisto 2.0.',
+                'welcome-title' => 'Welkom bij Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'Niemiecki',
             'hebrew'                   => 'Hebrajski',
             'hindi'                    => 'Hinduski',
-            'installation-description' => 'Instalacja Bagisto zazwyczaj obejmuje kilka kroków. Oto ogólny zarys procesu instalacji Bagisto:',
+            'installation-description' => 'Instalacja Bagisto zazwyczaj obejmuje kilka kroków. Oto ogólny zarys procesu instalacji Bagisto',
             'installation-info'        => 'Cieszymy się, że tu jesteś!',
             'installation-title'       => 'Witaj w instalacji',
             'italian'                  => 'Włoski',
