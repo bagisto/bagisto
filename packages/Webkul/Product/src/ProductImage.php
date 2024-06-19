@@ -14,9 +14,7 @@ class ProductImage
      *
      * @return void
      */
-    public function __construct(protected ProductRepository $productRepository)
-    {
-    }
+    public function __construct(protected ProductRepository $productRepository) {}
 
     /**
      * Retrieve collection of gallery images.

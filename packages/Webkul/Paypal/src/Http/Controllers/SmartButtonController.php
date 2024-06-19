@@ -19,8 +19,7 @@ class SmartButtonController extends Controller
         protected SmartButton $smartButton,
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Paypal order creation for approval of client.

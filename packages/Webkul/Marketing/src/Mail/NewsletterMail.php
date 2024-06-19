@@ -17,8 +17,7 @@ class NewsletterMail extends Mailable
     public function __construct(
         public string $email,
         public Campaign $campaign
-    ) {
-    }
+    ) {}
 
     /**
      * Get the message envelope.

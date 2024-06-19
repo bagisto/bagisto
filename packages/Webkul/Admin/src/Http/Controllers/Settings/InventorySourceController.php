@@ -16,9 +16,7 @@ class InventorySourceController extends Controller
      *
      * @return void
      */
-    public function __construct(protected InventorySourceRepository $inventorySourceRepository)
-    {
-    }
+    public function __construct(protected InventorySourceRepository $inventorySourceRepository) {}
 
     /**
      * Display a listing of the resource.

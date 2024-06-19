@@ -13,9 +13,7 @@ class ContactUs extends Mailable
      *
      * @return void
      */
-    public function __construct(public $contactUs)
-    {
-    }
+    public function __construct(public $contactUs) {}
 
     /**
      * Get the message envelope.

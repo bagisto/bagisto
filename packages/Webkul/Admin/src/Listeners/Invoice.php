@@ -14,8 +14,7 @@ class Invoice extends Base
      */
     public function __construct(
         protected OrderTransactionRepository $orderTransactionRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * After order is created

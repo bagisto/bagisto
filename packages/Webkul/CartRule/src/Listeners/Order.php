@@ -19,8 +19,7 @@ class Order
         protected CartRuleCustomerRepository $cartRuleCustomerRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository,
         protected CartRuleCouponUsageRepository $cartRuleCouponUsageRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Save cart rule and cart rule coupon properties after place order

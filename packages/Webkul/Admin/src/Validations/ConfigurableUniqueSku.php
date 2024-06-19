@@ -14,8 +14,7 @@ class ConfigurableUniqueSku implements Rule
      */
     public function __construct(
         protected $currentIds = null,
-    ) {
-    }
+    ) {}
 
     /**
      * Determine if the validation rule passes.

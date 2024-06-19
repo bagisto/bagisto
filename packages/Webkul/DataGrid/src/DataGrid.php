@@ -103,16 +103,12 @@ abstract class DataGrid
     /**
      * Prepare actions.
      */
-    public function prepareActions()
-    {
-    }
+    public function prepareActions() {}
 
     /**
      * Prepare mass actions.
      */
-    public function prepareMassActions()
-    {
-    }
+    public function prepareMassActions() {}
 
     /**
      * Get columns.

@@ -2,6 +2,4 @@
 
 namespace Webkul\SocialLogin\Contracts;
 
-interface CustomerSocialAccount
-{
-}
+interface CustomerSocialAccount {}

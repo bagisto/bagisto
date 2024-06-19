@@ -27,8 +27,7 @@ class TransactionController extends Controller
         protected InvoiceRepository $invoiceRepository,
         protected ShipmentRepository $shipmentRepository,
         protected OrderTransactionRepository $orderTransactionRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

@@ -20,8 +20,7 @@ class Campaign
     public function __construct(
         protected EventRepository $eventRepository,
         protected CampaignRepository $campaignRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Process the email.

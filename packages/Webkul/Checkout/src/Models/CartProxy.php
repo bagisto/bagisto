@@ -4,6 +4,4 @@ namespace Webkul\Checkout\Models;
 
 use Konekt\Concord\Proxies\ModelProxy;
 
-class CartProxy extends ModelProxy
-{
-}
+class CartProxy extends ModelProxy {}

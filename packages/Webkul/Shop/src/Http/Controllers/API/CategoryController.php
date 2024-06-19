@@ -21,8 +21,7 @@ class CategoryController extends APIController
         protected AttributeRepository $attributeRepository,
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Get all categories.

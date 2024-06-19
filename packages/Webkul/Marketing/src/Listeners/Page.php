@@ -23,8 +23,7 @@ class Page
     public function __construct(
         protected PageRepository $pageRepository,
         protected URLRewriteRepository $urlRewriteRepository
-    ) {
-    }
+    ) {}
 
     /**
      * After page is created

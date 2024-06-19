@@ -22,8 +22,7 @@ class CartController extends APIController
     public function __construct(
         protected ProductRepository $productRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Cart.

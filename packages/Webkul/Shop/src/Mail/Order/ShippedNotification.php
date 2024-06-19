@@ -15,9 +15,7 @@ class ShippedNotification extends Mailable
      *
      * @return void
      */
-    public function __construct(public Shipment $shipment)
-    {
-    }
+    public function __construct(public Shipment $shipment) {}
 
     /**
      * Get the message envelope.

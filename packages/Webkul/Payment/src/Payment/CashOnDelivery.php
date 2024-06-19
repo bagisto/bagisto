@@ -18,9 +18,7 @@ class CashOnDelivery extends Payment
      *
      * @return string
      */
-    public function getRedirectUrl()
-    {
-    }
+    public function getRedirectUrl() {}
 
     /**
      * Is available.

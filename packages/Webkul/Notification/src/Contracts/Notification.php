@@ -2,6 +2,4 @@
 
 namespace Webkul\Notification\Contracts;
 
-interface Notification
-{
-}
+interface Notification {}

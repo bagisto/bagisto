@@ -24,8 +24,7 @@ class Reporting
         protected Product $productReporting,
         protected Customer $customerReporting,
         protected Visitor $visitorReporting
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the sales statistics.

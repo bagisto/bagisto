@@ -30,8 +30,7 @@ class OrderController extends Controller
         protected OrderCommentRepository $orderCommentRepository,
         protected CartRepository $cartRepository,
         protected CustomerGroupRepository $customerGroupRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

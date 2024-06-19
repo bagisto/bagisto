@@ -23,8 +23,7 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected SubscribersListRepository $subscriptionRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Taking the customer to profile details page.

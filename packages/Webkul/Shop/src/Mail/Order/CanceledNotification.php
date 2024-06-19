@@ -14,9 +14,7 @@ class CanceledNotification extends Mailable
      *
      * @return void
      */
-    public function __construct(public $order)
-    {
-    }
+    public function __construct(public $order) {}
 
     /**
      * Get the message envelope.

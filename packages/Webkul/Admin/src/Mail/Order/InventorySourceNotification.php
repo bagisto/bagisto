@@ -13,9 +13,7 @@ class InventorySourceNotification extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public Shipment $shipment)
-    {
-    }
+    public function __construct(public Shipment $shipment) {}
 
     /**
      * Get the message envelope.

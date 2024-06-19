@@ -21,9 +21,7 @@ class SystemConfig
      *
      * @return void
      */
-    public function __construct(protected CoreConfigRepository $coreConfigRepository)
-    {
-    }
+    public function __construct(protected CoreConfigRepository $coreConfigRepository) {}
 
     /**
      * Add Item.

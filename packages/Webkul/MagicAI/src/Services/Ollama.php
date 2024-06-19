@@ -15,8 +15,7 @@ class Ollama
         protected float $temperature,
         protected bool $stream,
         protected bool $raw,
-    ) {
-    }
+    ) {}
 
     /**
      * Set LLM prompt text.

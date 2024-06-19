@@ -2,6 +2,4 @@
 
 namespace Webkul\Marketing\Contracts;
 
-interface SearchTerm
-{
-}
+interface SearchTerm {}

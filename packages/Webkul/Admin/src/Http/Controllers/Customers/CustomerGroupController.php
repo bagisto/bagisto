@@ -16,9 +16,7 @@ class CustomerGroupController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CustomerGroupRepository $customerGroupRepository)
-    {
-    }
+    public function __construct(protected CustomerGroupRepository $customerGroupRepository) {}
 
     /**
      * Display a listing of the resource.

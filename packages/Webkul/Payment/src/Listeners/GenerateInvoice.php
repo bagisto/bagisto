@@ -18,8 +18,7 @@ class GenerateInvoice
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Generate a new invoice.

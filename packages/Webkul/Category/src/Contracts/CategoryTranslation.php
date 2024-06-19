@@ -2,6 +2,4 @@
 
 namespace Webkul\Category\Contracts;
 
-interface CategoryTranslation
-{
-}
+interface CategoryTranslation {}
