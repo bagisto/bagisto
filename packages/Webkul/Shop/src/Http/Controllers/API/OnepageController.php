@@ -188,29 +188,6 @@ class OnepageController extends APIController
     }
 
     /**
-     * Check for minimum order.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function checkMinimumOrder()
-    {
-        $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
-
-        $cart = Cart::getCart();
-
-        $status = $cart->checkMinimumOrder();
-
-        return response()->json([
-            'status'  => ! $status ? false : true,
-            'message' => ! $status
-                ? trans('shop::app.checkout.cart.minimum-order-message', [
-                    'amount' => core()->currency($minimumOrderAmount),
-                ])
-                : 'Success',
-        ]);
-    }
-
-    /**
      * Validate order before creation.
      *
      * @return void|\Exception
@@ -235,7 +212,7 @@ class OnepageController extends APIController
             throw new \Exception(trans('shop::app.checkout.cart.inactive-account-message'));
         }
 
-        if (! $cart->checkMinimumOrder()) {
+        if (! Cart::haveMinimumOrderAmount()) {
             throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }
 

@@ -571,6 +571,8 @@
                                         'shipping.id': error.response.data.message
                                     });
                                 }
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                             }
                         });
                 },
