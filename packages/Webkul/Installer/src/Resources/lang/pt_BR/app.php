@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Administrador',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Confirmar Senha',
-                'download-sample'  => 'Baixar Amostra',
                 'email'            => 'E-mail',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Senha',
-                'sample-products'  => 'Produtos de Exemplo',
                 'title'            => 'Criar Administrador',
             ],
 
@@ -716,6 +714,14 @@ return [
                 'zambian-kwacha'              => 'Kwacha Zambiano (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'baixar amostra',
+                'no'              => 'Não',
+                'sample-products' => 'Produtos de amostra',
+                'title'           => 'Produtos de amostra',
+                'yes'             => 'Sim',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Instalação do Bagisto',
                 'bagisto-info'     => 'A criação de tabelas no banco de dados pode levar alguns momentos',
@@ -746,7 +752,7 @@ return [
                 'main'          => 'Iniciar',
                 'select-locale' => 'Selecteer Locatie',
                 'title'         => 'Uw Bagisto-installatie',
-                'welcome-title' => 'Welkom bij Bagisto 2.0.',
+                'welcome-title' => 'Welkom bij Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'Niemiecki',
             'hebrew'                   => 'Hebrajski',
             'hindi'                    => 'Hinduski',
-            'installation-description' => 'Instalacja Bagisto zazwyczaj obejmuje kilka kroków. Oto ogólny zarys procesu instalacji Bagisto:',
+            'installation-description' => 'A instalação do Bagisto geralmente envolve várias etapas. Aqui está uma visão geral do processo de instalação do Bagisto',
             'installation-info'        => 'Cieszymy się, że tu jesteś!',
             'installation-title'       => 'Witaj w instalacji',
             'italian'                  => 'Włoski',

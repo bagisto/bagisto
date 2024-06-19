@@ -80,7 +80,7 @@ class OrderController extends Controller
 
         if (Cart::hasError()) {
             return response()->json([
-                'message' => trans('admin::app.sales.orders.create.summary.error'),
+                'message' => trans('admin::app.sales.orders.create.error'),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -98,7 +98,7 @@ class OrderController extends Controller
 
         if (Payment::getRedirectUrl($cart)) {
             return response()->json([
-                'message' => trans('admin::app.sales.orders.create.summary.payment-not-supported'),
+                'message' => trans('admin::app.sales.orders.create.payment-not-supported'),
             ], Response::HTTP_BAD_REQUEST);
         }
 
@@ -233,7 +233,7 @@ class OrderController extends Controller
     {
         $cart = Cart::getCart();
 
-        if (! $cart->checkMinimumOrder()) {
+        if (! Cart::haveMinimumOrderAmount()) {
             throw new \Exception(trans('admin::app.sales.orders.create.minimum-order-error', [
                 'amount' => core()->formatPrice(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0),
             ]));

@@ -82,4 +82,12 @@
         background-position-x: calc(100% - 10px);
         background-position-y: 50%;
     }
+
+	.primary-button {
+        @apply bg-blue-600 border border-blue-700 cursor-pointer flex focus:opacity-[0.9] font-semibold gap-x-1 hover:opacity-[0.9] items-center place-content-center px-3 py-1.5 rounded-md text-gray-50 transition-all;
+    }
+
+	[dir="rtl"] .custom-select {
+        background-position-x: calc(100% - (100% - 10px));
+    }
 }

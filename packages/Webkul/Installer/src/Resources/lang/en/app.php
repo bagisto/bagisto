@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Admin',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Confirm Password',
-                'download-sample'  => 'download-sample',
                 'email'            => 'Email',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Password',
-                'sample-products'  => 'Sample Products',
                 'title'            => 'Create Administrator',
             ],
 
@@ -716,10 +714,18 @@ return [
                 'zambian-kwacha'              => 'Zambian Kwacha (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'download-sample',
+                'no'              => 'No',
+                'sample-products' => 'Sample Products',
+                'title'           => 'Sample Products',
+                'yes'             => 'Yes',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'Installation Bagisto',
-                'bagisto-info'     => 'Creating the database tables, this can take a few moments',
-                'title'            => 'Installation',
+                'bagisto'      => 'Installation Bagisto',
+                'bagisto-info' => 'Creating the database tables, this can take a few moments',
+                'title'        => 'Installation',
             ],
 
             'installation-completed' => [
@@ -746,7 +752,7 @@ return [
                 'main'          => 'Start',
                 'select-locale' => 'Select Locale',
                 'title'         => 'Your Bagisto install',
-                'welcome-title' => 'Welcome to Bagisto 2.0.',
+                'welcome-title' => 'Welcome to Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'German',
             'hebrew'                   => 'Hebrew',
             'hindi'                    => 'Hindi',
-            'installation-description' => 'Bagisto installation typically involves several steps. Here\'s a general outline of the installation process for Bagisto:',
+            'installation-description' => 'Bagisto installation typically involves several steps. Here\'s a general outline of the installation process for Bagisto',
             'installation-info'        => 'We are happy to see you here!',
             'installation-title'       => 'Welcome to Installation',
             'italian'                  => 'Italian',

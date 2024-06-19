@@ -60,7 +60,7 @@ class Menu
                 break;
 
             case self::CUSTOMER:
-                $canShowWishlist = ! (bool) core()->getConfigData('general.content.shop.wishlist_option');
+                $canShowWishlist = ! (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 
                 $this->configMenu = $configMenu
                     ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)

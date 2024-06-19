@@ -64,7 +64,9 @@
 
         <div class="shimmer h-9 w-2/5 max-sm:w-3/6"></div>
 
-        <div class="shimmer mt-5 grid h-14 w-full gap-4 rounded-xl max-sm:gap-2.5"></div>
+        @if (core()->getConfigData('sales.checkout.shopping_cart.estimate_shipping'))
+            <div class="shimmer mt-5 grid h-14 w-full gap-4 rounded-xl max-sm:gap-2.5"></div>
+        @endif
 
         <div class="mt-6 grid gap-4">
             <div class="flex justify-between text-right">

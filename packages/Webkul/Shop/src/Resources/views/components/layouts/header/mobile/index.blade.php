@@ -3,9 +3,9 @@
     template as much as possible.
 -->
 @php
-    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
+    $showCompare = (bool) core()->getConfigData('catalog.products.settings.compare_option');
 
-    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
+    $showWishlist = (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 @endphp
 
 <div class="flex flex-wrap gap-4 px-4 pb-4 pt-6 shadow-sm lg:hidden">
@@ -114,7 +114,9 @@
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.before') !!}
 
-                @include('shop::checkout.cart.mini-cart')
+                @if(core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                    @include('shop::checkout.cart.mini-cart')
+                @endif
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.after') !!}
 
@@ -140,9 +142,11 @@
     
                                 <p class="py-2px mt-3 w-full border border-zinc-200"></p>
     
+                                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.customers_action.before') !!}
+
                                 <div class="mt-6 flex gap-4">
                                     {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.before') !!}
-    
+
                                     <a
                                         href="{{ route('shop.customer.session.create') }}"
                                         class="m-0 mx-auto block w-max cursor-pointer rounded-2xl bg-navyBlue px-7 py-4 text-center text-base font-medium text-white ltr:ml-0 rtl:mr-0"
@@ -159,6 +163,8 @@
     
                                     {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.after') !!}
                                 </div>
+
+                                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.customers_action.after') !!}
                             </x-slot>
                         @endguest
     
@@ -276,7 +282,7 @@
                 required
             >
 
-            @if (core()->getConfigData('general.content.shop.image_search'))
+            @if (core()->getConfigData('catalog.products.settings.image_search'))
                 @include('shop::search.images.index')
             @endif
         </div>

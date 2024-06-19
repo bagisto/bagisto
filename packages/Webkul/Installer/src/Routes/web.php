@@ -18,6 +18,8 @@ Route::middleware(['web', 'installer_locale'])->group(function () {
             Route::get('download-sample', 'downloadSample')->name('installer.download_sample')->withoutMiddleware('web');
 
             Route::post('admin-config-setup', 'adminConfigSetup')->name('installer.admin_config_setup')->withoutMiddleware('web');
+
+            Route::post('sample-products-setup', 'createSampleProducts')->name('installer.sample_products_setup')->withoutMiddleware('web');
         });
     });
 });

@@ -188,6 +188,102 @@ There is no dependency needed to be updated at for this upgrade.
 
 If you are migrating your existing store to this version, please save the configuration values again, as previously saved values will no longer work.
 
+6. The Allow Guest Checkout configuration has been relocated to the Sales configuration under Checkout, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('catalog.products.guest_checkout.allow_guest_checkout')
++ core()->getConfigData('sales.checkout.shopping_cart.allow_guest_checkout')
+```
+
+7. The Wishlist Option configuration has been relocated to the Customer configuration under Setting, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('general.content.shop.wishlist_option')
++ core()->getConfigData('customer.settings.wishlist.wishlist_option')
+```
+
+8. The `locale_based` and `channel_based` settings in the customer products settings configuration have been updated to no longer be locale- or channel-based.
+
+```diff
+[
+    'key'    => 'catalog.products.settings',
+    'name'   => 'admin::app.configuration.index.general.content.settings.title',
+    'info'   => 'admin::app.configuration.index.general.content.settings.title-info',
+    'sort'   => 1,
+    'fields' => [
+        [
+            'name'          => 'compare_option',
+            'title'         => 'admin::app.configuration.index.general.content.settings.compare-options',
+            'type'          => 'boolean',
+            'default'       => 1,
+-           'locale_based'  => true,
+-           'channel_based' => true,
+        ], [
+            'name'          => 'image_search',
+            'title'         => 'admin::app.configuration.index.general.content.settings.image-search-option',
+            'type'          => 'boolean',
+            'default'       => 1,
+-           'locale_based'  => true,
+-           'channel_based' => true,
+        ],
+    ],
+]
+```
+
+9. The `locale_based` and `channel_based` settings in the customer settings wishlist configuration have been updated to no longer be locale- or channel-based.
+
+```diff
+[
+    'key'    => 'customer.settings.wishlist',
+    'name'   => 'Wishlist',
+    'info'   => 'Enable or disable the wishlist option.',
+    'sort'   => 2,
+    'fields' => [
+        [
+            'name'    => 'wishlist_option',
+            'title'   => 'Allow Wishlist option',
+            'type'    => 'boolean',
+            'default' => 1,
+-           'locale_based'  => true,
+-           'channel_based' => true,
+        ],
+    ],
+]
+```
+
+10. The Back Order configuration has been relocated to the Catalog Inventory under Stock Options, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('sales.order_settings.stock_options.back_orders')
++ core()->getConfigData('catalog.inventory.stock_options.back_orders')
+```
+
+11. The `channel_based` settings in the customer settings wishlist configuration have been updated to no longer be locale- or channel-based.
+
+```diff
+[
+    'key'    => 'catalog.inventory.stock_options',
+    'name'   => 'Product Stock Options',
+    'info'   => 'Product Stock Options',
+    'sort'   => 1,
+    'fields' => [
+        [
+            'name'          => 'back_orders',
+            'title'         => 'Allow Back Orders',
+            'type'          => 'boolean',
+            'default'       => false,
+-           'channel_based' => true,
+        ],
+    ],
+]
+```
+
+10. The Invoice Slip Design Logo configuration has been relocated to the Sales Invoice Setting under PDF Print Outs, and the respective path for retrieving configuration values has been updated accordingly
+
+```diff
+- core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')
++ core()->getConfigData('sales.invoice_settings.pdf_print_outs.logo')
+```
 
 
 <a name="renamed-admin-api-routes-names"></a>

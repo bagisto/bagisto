@@ -5,9 +5,11 @@
     </x-slot>
 
     <!-- Breadcrumbs -->
-    @section('breadcrumbs')
-        <x-shop::breadcrumbs name="downloadable-products" />
-    @endSection
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        @section('breadcrumbs')
+            <x-shop::breadcrumbs name="downloadable-products" />
+        @endSection
+    @endif
 
     <div class="max-md:hidden">
         <x-shop::layouts.account.navigation />

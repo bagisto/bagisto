@@ -619,11 +619,9 @@ return [
                 'admin'            => 'مدير',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'تأكيد كلمة المرور',
-                'download-sample'  => 'تحميل العينة',
                 'email'            => 'البريد الإلكتروني',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'كلمة المرور',
-                'sample-products'  => 'منتجات عينة',
                 'title'            => 'إنشاء المسؤول',
             ],
 
@@ -716,10 +714,18 @@ return [
                 'zambian-kwacha'              => 'الكواشا الزامبي (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'تحميل العينة',
+                'no'              => 'لا',
+                'sample-products' => 'منتجات العينة',
+                'title'           => 'منتجات العينة',
+                'yes'             => 'نعم',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'تثبيت Bagisto',
-                'bagisto-info'     => 'إنشاء جداول قاعدة البيانات، وقد يستغرق ذلك بضع دقائق',
-                'title'            => 'التثبيت',
+                'bagisto'      => 'تثبيت Bagisto',
+                'bagisto-info' => 'إنشاء جداول قاعدة البيانات، وقد يستغرق ذلك بضع دقائق',
+                'title'        => 'التثبيت',
             ],
 
             'installation-completed' => [
@@ -746,7 +752,7 @@ return [
                 'main'          => 'بداية',
                 'select-locale' => 'اختر اللغة',
                 'title'         => 'تثبيت Bagisto الخاص بك',
-                'welcome-title' => 'مرحبًا بك في Bagisto 2.0.',
+                'welcome-title' => 'مرحبًا بك في Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'ألماني',
             'hebrew'                   => 'العبرية',
             'hindi'                    => 'الهندية',
-            'installation-description' => 'تتضمن عملية تثبيت Bagisto عادة عدة خطوات. إليك مخطط عام لعملية التثبيت لـ Bagisto:',
+            'installation-description' => 'عادة ما تتضمن عملية تثبيت Bagisto عدة خطوات. إليك نظرة عامة عامة على عملية التثبيت لBagisto',
             'installation-info'        => 'نحن سعداء برؤيتك هنا!',
             'installation-title'       => 'مرحبًا بك في التثبيت',
             'italian'                  => 'الإيطالية',
