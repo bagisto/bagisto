@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.2.0 (17th of June 2024)** - *Release*
+## **v2.2.0 (19th of June 2024)** - *Release*
 
 ### Datagrid Improvements
 
@@ -147,6 +147,65 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Implemented support for multiple configuration settings, allowing users to define and manage various configurations based on their needs.
 
+1. **Breadcrumbs**
+
+* In the General section added new Configuration setting to enable or disable breadcrumbs.
+
+2. **Header Offer Title**
+
+* In the Content section added new Configuration setting to Configure Header Offer Title with offer title, redirection title, and redirection link.
+
+3. **Products configuration**
+
+* In the Products section added new Configuration setting to set up the search engine for product searches, you can choose between a database and Elasticsearch based on your requirements. If you have a large number of products, Elasticsearch is recommended.
+
+* In the Products section added new Configuration setting to add product image placeholders for small, medium, and large sizes.
+
+* In the Products section, added a new configuration setting to allow permission for customer reviews.
+ 
+4. **Inventory Section**
+
+* Added a new configuration section `Inventory`.
+
+* In the Inventory section you can configure product stock options to allow back orders, set minimum and maximum cart quantities, and define out-of-stock thresholds.
+
+5. **Login Options**
+
+* In the Settings section added new configuration setting to Configure login options to determine the redirect page for customers after login.
+
+6. **Create New Account Options**
+
+* In the Settings section added new configuration setting to set options for new accounts, including assigning a default customer group and enabling the newsletter subscription option during sign-up.
+
+6. **Email Settings Section**
+
+* New configuration in the email settings section to configure Contact Name and Contact Email.
+
+7. **Minimum Order Settings**
+
+* In the Order section added new configuration setting to that the order has Include Discount Amount, Include Tax to Amount and the Description in cart page.
+
+8. **Allow Reorder**
+
+* In the Order section added new configuration setting to Enable or disable the reordering feature for admin users.
+
+9. **PDF Print Outs**
+
+* In the Invoice section added new configuration setting to configure PDF Print Outs to display Invoice ID, Order ID in the header, and include the invoice logo.
+
+9. **Inclusive Exclusive Tax**
+
+* In the Tax section added new configuration setting to configure Inclusive Exclusive Taxes.
+
+10. **Checkout**
+
+* Added a new configuration section `Checkout`.
+
+* In the Checkout section you can manage guest checkout, cart page, cross-sell products, and estimated shipping to enhance user convenience and streamline the shopping process for increased sales.
+
+* In the Checkout section you can configure settings for My Cart to show a summary of item quantities and display the total number of items in the cart for easy tracking.
+
+* In the Checkout section you can enable Mini Cart settings to display the mini cart and show Mini Cart Offer Information for quick access to cart details and promotions.
 
 * #9534 [feature] - Logged in User -> Checkout Page -> Default address must be selected.
 
