@@ -739,7 +739,7 @@ return [
             'mini-cart' => [
                 'continue-to-checkout' => 'চেকআউট চালিয়ে যান',
                 'empty-cart'           => 'আপনার কার্ট খালি',
-                'excl-tax'             => 'বাদ। Tax:',
+                'excl-tax'             => 'බද. බද්ද:',
                 'offer-on-orders'      => 'আপনার 1 ম অর্ডারে 30% ছাড়',
                 'remove'               => 'সরান',
                 'see-details'          => 'বিশদ দেখুন',
