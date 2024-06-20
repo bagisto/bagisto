@@ -135,19 +135,14 @@
 
     @case('multiselect')
         <v-field
-            v-slot="{ field, errors }"
-            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            as="select"
+            v-slot="{ value }"
+            :class="[errors && errors['{{ $name }}'] ? 'border !border-red-500' : '']"
+            {{ $attributes->except([])->merge(['class' => 'mb-1.5 w-full rounded-lg border border-zinc-200 bg-white px-5 py-3 text-base text-gray-600  transition-all hover:border-gray-400 focus-visible:outline-none max-md:py-2 max-sm:px-4 max-sm:text-sm']) }}
             name="{{ $name }}"
+            multiple
         >
-            <select
-                name="{{ $name }}"
-                v-bind="field"
-                :class="[errors.length ? 'border !border-red-500' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'mb-1.5 w-full rounded-lg border border-zinc-200 bg-white px-5 py-3 text-base text-gray-600  transition-all hover:border-gray-400 focus-visible:outline-none max-md:py-2 max-sm:px-4 max-sm:text-sm']) }}
-                multiple
-            >
-                {{ $slot }}
-            </select>
+            {{ $slot }}
         </v-field>
         @break
 

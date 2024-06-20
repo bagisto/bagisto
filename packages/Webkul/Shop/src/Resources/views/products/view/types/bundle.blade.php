@@ -162,6 +162,7 @@
                             <option
                                 v-for="product in option.products"
                                 :value="product.id"
+                                :selected="value && value.includes(product.id)"
                             >
                                 @{{ product.name + ' + ' + product.price.final.formatted_price }}
                             </option>
