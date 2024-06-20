@@ -14,6 +14,7 @@ use Webkul\Installer\Helpers\DatabaseManager;
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\password;
 use function Laravel\Prompts\select;
+use function Laravel\Prompts\suggest;
 use function Laravel\Prompts\text;
 
 class Installer extends Command
@@ -240,7 +241,8 @@ class Installer extends Command
         $this->updateEnvChoice(
             'APP_TIMEZONE',
             'Please select the application timezone',
-            $timezones
+            $timezones,
+            true
         );
 
         $defaultLocale = $this->updateEnvChoice(
@@ -487,13 +489,21 @@ class Installer extends Command
      *
      * @return string
      */
-    protected function updateEnvChoice(string $key, string $question, array $choices)
+    protected function updateEnvChoice(string $key, string $question, array $choices, bool $useSuggest = false)
     {
-        $choice = select(
-            label: $question,
-            options: $choices,
-            default: env($key)
-        );
+        if ($useSuggest) {
+            $choice = suggest(
+                label: $question,
+                options: $choices,
+                default: env($key)
+            );
+        } else {
+            $choice = select(
+                label: $question,
+                options: $choices,
+                default: env($key)
+            );
+        }
 
         $this->envUpdate($key, $choice);
 
