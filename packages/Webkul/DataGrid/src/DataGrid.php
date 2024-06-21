@@ -91,6 +91,11 @@ abstract class DataGrid
     protected mixed $exportFile = null;
 
     /**
+     * Export file name.
+     */
+    protected string $exportFileName;
+
+    /**
      * Prepare query builder.
      */
     abstract public function prepareQueryBuilder();
@@ -111,27 +116,91 @@ abstract class DataGrid
     public function prepareMassActions() {}
 
     /**
-     * Get columns.
+     * Set primary column.
      */
-    public function getColumns(): array
+    public function setPrimaryColumn(string $primaryColumn): void
     {
-        return $this->columns;
+        $this->primaryColumn = $primaryColumn;
     }
 
     /**
-     * Get actions.
+     * Get primary column.
      */
-    public function getActions(): array
+    public function getPrimaryColumn(): string
     {
-        return $this->actions;
+        return $this->primaryColumn;
     }
 
     /**
-     * Get mass actions.
+     * Set sort column.
      */
-    public function getMassActions(): array
+    public function setSortColumn(string $sortColumn): void
     {
-        return $this->massActions;
+        $this->sortColumn = $sortColumn;
+    }
+
+    /**
+     * Get sort column.
+     */
+    public function getSortColumn(): ?string
+    {
+        return $this->sortColumn;
+    }
+
+    /**
+     * Set sort order.
+     */
+    public function setSortOrder(string $sortOrder): void
+    {
+        $this->sortOrder = $sortOrder;
+    }
+
+    /**
+     * Get sort order.
+     */
+    public function getSortOrder(): string
+    {
+        return $this->sortOrder;
+    }
+
+    /**
+     * Set items per page.
+     */
+    public function setItemsPerPage(int $itemsPerPage): void
+    {
+        $this->itemsPerPage = $itemsPerPage;
+    }
+
+    /**
+     * Get items per page.
+     */
+    public function getItemsPerPage(): int
+    {
+        return $this->itemsPerPage;
+    }
+
+    /**
+     * Set per page options.
+     */
+    public function setPerPageOptions(array $perPageOptions): void
+    {
+        $this->perPageOptions = $perPageOptions;
+    }
+
+    /**
+     * Get per page options.
+     */
+    public function getPerPageOptions(): array
+    {
+        return $this->perPageOptions;
+    }
+
+    /**
+     * Set columns.
+     */
+    public function setColumns(array $columns): void
+    {
+        $this->columns = $columns;
     }
 
     /**
@@ -144,6 +213,22 @@ abstract class DataGrid
         $this->columns[] = Column::resolveType($column);
 
         $this->dispatchEvent('columns.add.after', [$this, $this->columns[count($this->columns) - 1]]);
+    }
+
+    /**
+     * Get columns.
+     */
+    public function getColumns(): array
+    {
+        return $this->columns;
+    }
+
+    /**
+     * Set actions.
+     */
+    public function setActions(array $actions): void
+    {
+        $this->actions = $actions;
     }
 
     /**
@@ -165,6 +250,22 @@ abstract class DataGrid
     }
 
     /**
+     * Get actions.
+     */
+    public function getActions(): array
+    {
+        return $this->actions;
+    }
+
+    /**
+     * Set mass actions.
+     */
+    public function setMassActions(array $massActions): void
+    {
+        $this->massActions = $massActions;
+    }
+
+    /**
      * Add mass action.
      */
     public function addMassAction(array $massAction): void
@@ -183,17 +284,21 @@ abstract class DataGrid
     }
 
     /**
+     * Get mass actions.
+     */
+    public function getMassActions(): array
+    {
+        return $this->massActions;
+    }
+
+    /**
      * Set query builder.
      *
      * @param  mixed  $queryBuilder
      */
     public function setQueryBuilder($queryBuilder = null): void
     {
-        $this->dispatchEvent('query_builder.set.before', [$this, $queryBuilder]);
-
         $this->queryBuilder = $queryBuilder ?: $this->prepareQueryBuilder();
-
-        $this->dispatchEvent('query_builder.set.after', $this);
     }
 
     /**
@@ -227,11 +332,7 @@ abstract class DataGrid
      */
     public function setExportable(bool $exportable): void
     {
-        $this->dispatchEvent('exportable.set.before', [$this, $exportable]);
-
         $this->exportable = $exportable;
-
-        $this->dispatchEvent('exportable.set.after', $this);
     }
 
     /**
@@ -243,6 +344,22 @@ abstract class DataGrid
     }
 
     /**
+     * Set export file name.
+     */
+    public function setExportFileName(string $exportFileName): void
+    {
+        $this->exportFileName = $exportFileName;
+    }
+
+    /**
+     * Get export file name.
+     */
+    public function getExportFileName(): string
+    {
+        return $this->exportFileName;
+    }
+
+    /**
      * Set export file.
      *
      * @param  string  $format
@@ -250,17 +367,23 @@ abstract class DataGrid
      */
     public function setExportFile($format = 'csv')
     {
-        $this->dispatchEvent('export_file.set.before', [$this, $format]);
+        $this->exportFile = Excel::download(new DataGridExport($this), $this->exportFileName.'.'.$format);
+    }
 
-        $this->setExportable(true);
-
-        $this->exportFile = Excel::download(new DataGridExport($this), Str::random(36).'.'.$format);
-
-        $this->dispatchEvent('export_file.set.after', $this);
+    /**
+     * Get export file.
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function getExportFile()
+    {
+        return $this->exportFile;
     }
 
     /**
      * Download export file.
+     *
+     * @deprecated
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
@@ -279,7 +402,7 @@ abstract class DataGrid
         $this->prepare();
 
         if ($this->getExportable()) {
-            return $this->downloadExportFile();
+            return $this->getExportFile();
         }
 
         return response()->json($this->formatData());
@@ -298,7 +421,7 @@ abstract class DataGrid
         $this->prepare();
 
         if ($this->getExportable()) {
-            return $this->downloadExportFile();
+            return $this->getExportFile();
         }
 
         return response()->json($this->formatData());
@@ -394,6 +517,10 @@ abstract class DataGrid
     protected function processExportRequest(array $requestedParams): void
     {
         $this->dispatchEvent('process_request.export.before', $this);
+
+        $this->setExportable(true);
+
+        $this->setExportFileName(Str::random(36));
 
         $this->setExportFile($requestedParams['format']);
 
