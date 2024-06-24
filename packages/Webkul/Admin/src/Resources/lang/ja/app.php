@@ -3308,6 +3308,7 @@ return [
 
         'view' => [
             'all-channels'  => 'すべてのチャンネル',
+            'back-btn'      => '戻る',
             'day'           => '日',
             'end-date'      => '終了日',
             'export-csv'    => 'CSVエクスポート',

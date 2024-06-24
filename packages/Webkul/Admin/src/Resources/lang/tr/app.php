@@ -3308,6 +3308,7 @@ return [
 
         'view' => [
             'all-channels'  => 'Tüm Kanallar',
+            'back-btn'      => 'Geri',
             'day'           => 'Gün',
             'end-date'      => 'Bitiş Tarihi',
             'export-csv'    => 'CSV Olarak Dışa Aktar',

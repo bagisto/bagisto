@@ -25,6 +25,27 @@
 
                     <!-- Actions -->
                     <div class="flex items-center gap-1.5">
+                       <!-- Back Button -->
+                        <div>
+                            <a v-if="entity === 'customers'"
+                                href="{{ route('admin.reporting.customers.index') }}"
+                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+                                @lang('admin::app.reporting.view.back-btn')
+                            </a>
+                            
+                            <a v-else-if="entity === 'products'"
+                                href="{{ route('admin.reporting.products.index') }}"
+                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+                                @lang('admin::app.reporting.view.back-btn')
+                            </a>
+                            
+                            <a v-else
+                                href="{{ route('admin.reporting.sales.index') }}"
+                                class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
+                                @lang('admin::app.reporting.view.back-btn')
+                            </a>
+                        </div>
+             
                         <x-admin::dropdown position="bottom-right">
                             <x-slot:toggle>
                                 <span class="icon-export flex cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
@@ -192,6 +213,8 @@
                         reporing: [],
 
                         isLoading: true,
+
+                        entity: "{{ $entity }}",
                     }
                 },
 
