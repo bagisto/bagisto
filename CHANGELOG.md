@@ -2,6 +2,27 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.2.1 (24th of June 2024)** - *Release*
+
+* #9955 [fixed] - Cart Rule -> Category is not being retained even after we have selected and saved it.
+
+* #9960 [fixed] - Disabled filterable and add category_id filter to product carousel.
+
+* #9948 [fixed] - few fixes in CLI Installer.
+
+* #9958 [fixed] - Update summary.blade.php.
+
+* #9957 [fixed] - Prevent Template Injection.
+
+* #9950 [fixed] - Fixed multiselect issue.
+
+* #9944 [fixed] - 🐛 Fixed Cart page issue.
+
+* #9945 [fixed] - Updated customers orders view render events.
+
+* #9946 [fixed] - Improve timezone selection during cli install.
+
+
 ## **v2.2.0 (19th of June 2024)** - *Release*
 
 ### Datagrid Improvements
