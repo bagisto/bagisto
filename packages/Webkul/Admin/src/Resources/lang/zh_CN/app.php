@@ -3148,6 +3148,7 @@ return [
                 'no'                            => '不',
                 'new'                           => '新',
                 'parent-id'                     => '父ID',
+                'category-id'                   => '类别ID',
                 'preview'                       => '预览',
                 'product-carousel'              => '产品轮播',
                 'product-carousel-description'  => '使用动态和响应式产品轮播优雅地展示产品。',

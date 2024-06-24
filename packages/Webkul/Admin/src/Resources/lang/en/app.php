@@ -3148,6 +3148,7 @@ return [
                 'new'                           => 'New',
                 'no'                            => 'No',
                 'parent-id'                     => 'Parent ID',
+                'category-id'                   => 'Category ID',
                 'preview'                       => 'Preview',
                 'product-carousel'              => 'Product Carousel',
                 'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',

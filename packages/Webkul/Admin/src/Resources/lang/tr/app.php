@@ -3148,6 +3148,7 @@ return [
                 'new'                           => 'Yeni',
                 'no'                            => 'Hayır',
                 'parent-id'                     => 'Üst Kimlik',
+                'category-id'                   => 'Kategori Kimliği',
                 'preview'                       => 'Önizleme',
                 'product-carousel'              => 'Ürün Karuseli',
                 'product-carousel-description'  => 'Dinamik ve duyarlı bir ürün karuseli ile ürünleri zarif bir şekilde sergileyin.',

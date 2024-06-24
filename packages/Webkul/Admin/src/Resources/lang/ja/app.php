@@ -3148,6 +3148,7 @@ return [
                 'new'                           => '新しい',
                 'no'                            => 'いいえ',
                 'parent-id'                     => '親ID',
+                'category-id'                   => 'カテゴリID',
                 'preview'                       => 'プレビュー',
                 'product-carousel'              => '商品カルーセル',
                 'product-carousel-description'  => '動的でレスポンシブな商品カルーセルを使用して、製品をエレガントにショーケースします。',

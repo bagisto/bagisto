@@ -3148,6 +3148,7 @@ return [
                 'new'                           => 'Nieuw',
                 'no'                            => 'Nee',
                 'parent-id'                     => 'Ouder-ID',
+                'category-id'                   => 'Categorie-ID',
                 'preview'                       => 'Voorbeeld',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',

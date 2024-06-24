@@ -3148,6 +3148,7 @@ return [
                 'new'                           => 'חדש',
                 'no'                            => 'לא',
                 'parent-id'                     => 'מזהה הורה',
+                'category-id'                   => 'מזהה קטגוריה',
                 'preview'                       => 'תצוגה מקדימה',
                 'product-carousel'              => 'קרוסלת מוצרים',
                 'product-carousel-description'  => 'הצגת מוצרים בצורה אלגנטית עם קרוסלת מוצרים דינמית ורספונסיבית.',

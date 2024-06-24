@@ -3148,6 +3148,7 @@ return [
                 'new'                           => 'جديد',
                 'no'                            => 'لا',
                 'parent-id'                     => 'معرف الأصل',
+                'category-id'                   => 'معرف الفئة',
                 'preview'                       => 'معاينة',
                 'product-carousel'              => 'شريط المنتجات',
                 'product-carousel-description'  => 'قدم المنتجات بأناقة باستخدام شريط المنتجات الديناميكي والمتجاوب.',
