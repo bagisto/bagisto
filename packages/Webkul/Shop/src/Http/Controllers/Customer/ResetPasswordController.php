@@ -20,9 +20,7 @@ class ResetPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CustomerRepository $customerRepository)
-    {
-    }
+    public function __construct(protected CustomerRepository $customerRepository) {}
 
     /**
      * Display the password reset view for the given token.

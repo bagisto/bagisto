@@ -19,9 +19,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository)
-    {
-    }
+    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository) {}
 
     /**
      * Loads the home page for the storefront.
@@ -35,6 +33,7 @@ class HomeController extends Controller
         $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
             'status'     => self::STATUS,
             'channel_id' => core()->getCurrentChannel()->id,
+            'theme_code' => core()->getCurrentChannel()->theme,
         ]);
 
         return view('shop::home.index', compact('customizations'));

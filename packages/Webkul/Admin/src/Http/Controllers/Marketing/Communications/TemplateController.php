@@ -15,9 +15,7 @@ class TemplateController extends Controller
      *
      * @return void
      */
-    public function __construct(protected TemplateRepository $templateRepository)
-    {
-    }
+    public function __construct(protected TemplateRepository $templateRepository) {}
 
     /**
      * Display a listing of the resource.

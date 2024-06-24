@@ -18,8 +18,7 @@ class MenuItem
         public int $sort,
         public string $icon,
         public Collection $children,
-    ) {
-    }
+    ) {}
 
     /**
      * Get name of menu item.

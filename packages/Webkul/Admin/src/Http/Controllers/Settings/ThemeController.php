@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
+use Webkul\Admin\DataGrids\Theme\ThemeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
@@ -16,9 +16,7 @@ class ThemeController extends Controller
      *
      * @return void
      */
-    public function __construct(public ThemeCustomizationRepository $themeCustomizationRepository)
-    {
-    }
+    public function __construct(public ThemeCustomizationRepository $themeCustomizationRepository) {}
 
     /**
      * Display a listing resource for the available tax rates.
@@ -28,7 +26,7 @@ class ThemeController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return datagrid(ThemeDatagrid::class)->process();
+            return datagrid(ThemeDataGrid::class)->process();
         }
 
         return view('admin::settings.themes.index');
@@ -56,6 +54,7 @@ class ThemeController extends Controller
             'sort_order' => 'required|numeric',
             'type'       => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
             'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
+            'theme_code' => 'required',
         ]);
 
         Event::dispatch('theme_customization.create.before');
@@ -93,6 +92,7 @@ class ThemeController extends Controller
             'sort_order' => 'required|numeric',
             'type'       => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
             'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
+            'theme_code' => 'required',
         ]);
 
         $locale = request('locale');
@@ -103,6 +103,7 @@ class ThemeController extends Controller
             'name',
             'sort_order',
             'channel_id',
+            'theme_code',
             'status',
             $locale
         );

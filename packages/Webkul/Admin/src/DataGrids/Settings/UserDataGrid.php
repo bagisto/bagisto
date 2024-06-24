@@ -21,9 +21,7 @@ class UserDataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct(protected RoleRepository $roleRepository)
-    {
-    }
+    public function __construct(protected RoleRepository $roleRepository) {}
 
     /**
      * Prepare query builder.
@@ -62,7 +60,6 @@ class UserDataGrid extends DataGrid
             'index'      => 'user_id',
             'label'      => trans('admin::app.settings.users.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -80,9 +77,6 @@ class UserDataGrid extends DataGrid
             'index'      => 'user_img',
             'label'      => trans('admin::app.settings.users.index.datagrid.name'),
             'type'       => 'string',
-            'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
             'closure'    => function ($row) {
                 if ($row->user_image) {
                     return Storage::url($row->user_image);
@@ -118,19 +112,14 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'role_name',
-            'label'      => trans('admin::app.settings.users.index.datagrid.role'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => $this->roleRepository->all(['name as label', 'name as value'])->toArray(),
-                ],
-            ],
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'              => 'role_name',
+            'label'              => trans('admin::app.settings.users.index.datagrid.role'),
+            'type'               => 'string',
+            'searchable'         => true,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => $this->roleRepository->all(['name as label', 'name as value'])->toArray(),
+            'sortable'           => true,
         ]);
     }
 

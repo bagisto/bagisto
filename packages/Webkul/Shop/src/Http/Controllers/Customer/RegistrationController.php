@@ -25,8 +25,7 @@ class RegistrationController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected SubscribersListRepository $subscriptionRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Opens up the user's sign up form.
@@ -45,6 +44,8 @@ class RegistrationController extends Controller
      */
     public function store(RegistrationRequest $registrationRequest)
     {
+        $customerGroup = core()->getConfigData('customer.settings.create_new_account_options.default_group');
+
         $data = array_merge($registrationRequest->only([
             'first_name',
             'last_name',
@@ -55,7 +56,7 @@ class RegistrationController extends Controller
             'password'                  => bcrypt(request()->input('password')),
             'api_token'                 => Str::random(80),
             'is_verified'               => ! core()->getConfigData('customer.settings.email.verification'),
-            'customer_group_id'         => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id,
+            'customer_group_id'         => $this->customerGroupRepository->findOneWhere(['code' => $customerGroup])->id,
             'channel_id'                => core()->getCurrentChannel()->id,
             'token'                     => md5(uniqid(rand(), true)),
             'subscribed_to_news_letter' => (bool) request()->input('is_subscribed'),

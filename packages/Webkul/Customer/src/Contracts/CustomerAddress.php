@@ -2,6 +2,4 @@
 
 namespace Webkul\Customer\Contracts;
 
-interface CustomerAddress
-{
-}
+interface CustomerAddress {}

@@ -6,8 +6,9 @@
             <div class="shimmer h-[100px] w-[100px] rounded-xl"></div>
 
             <div class="flex flex-col gap-0.5">
-                <p class="shimmer h-7 w-[160px]"></p>
-                <p class="shimmer mb-2 h-4 w-[160px]"></p>
+                <p class="shimmer h-7 w-40"></p
+>
+                <p class="shimmer mb-2 h-4 w-40"></p>
 
                 <div class="flex items-center gap-0.5">
                     <span class="shimmer h-[30px] w-[30px]"></span>

@@ -16,9 +16,7 @@ class CartRuleCouponController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CartRuleCouponRepository $cartRuleCouponRepository)
-    {
-    }
+    public function __construct(protected CartRuleCouponRepository $cartRuleCouponRepository) {}
 
     /**
      * Index.

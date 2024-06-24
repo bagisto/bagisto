@@ -26,8 +26,7 @@ class CategoryController extends Controller
         protected ChannelRepository $channelRepository,
         protected CategoryRepository $categoryRepository,
         protected AttributeRepository $attributeRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

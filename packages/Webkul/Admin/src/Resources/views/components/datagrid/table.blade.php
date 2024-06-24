@@ -61,20 +61,22 @@
                             </p>
 
                             <!-- Columns -->
-                            <p
-                                v-for="column in available.columns"
-                                class="flex items-center gap-1.5 break-words"
-                                :class="{'cursor-pointer select-none hover:text-gray-800 dark:hover:text-white': column.sortable}"
-                                @click="sort(column)"
-                            >
-                                @{{ column.label }}
+                            <template v-for="column in available.columns">
+                                <p
+                                    class="flex items-center gap-1.5 break-words"
+                                    :class="{'cursor-pointer select-none hover:text-gray-800 dark:hover:text-white': column.sortable}"
+                                    @click="sort(column)"
+                                    v-if="column.visibility"
+                                >
+                                    @{{ column.label }}
 
-                                <i
-                                    class="align-text-bottom text-base text-gray-600 dark:text-gray-300"
-                                    :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
-                                    v-if="column.index == applied.sort.column"
-                                ></i>
-                            </p>
+                                    <i
+                                        class="align-text-bottom text-base text-gray-600 dark:text-gray-300"
+                                        :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                        v-if="column.index == applied.sort.column"
+                                    ></i>
+                                </p>
+                            </template>
 
                             <!-- Actions -->
                             <p
@@ -125,21 +127,14 @@
                                 </p>
 
                                 <!-- Columns -->
-                                <p
-                                    class="break-words"
-                                    v-for="column in available.columns"
-                                    v-html="record[column.index]"
-                                    v-if="record.is_closure"
-                                >
-                                </p>
-
-                                <p
-                                    class="break-words"
-                                    v-for="column in available.columns"
-                                    v-html="record[column.index]"
-                                    v-else
-                                >
-                                </p>
+                                <template v-for="column in available.columns">
+                                    <p
+                                        class="break-words"
+                                        v-html="record[column.index]"
+                                        v-if="column.visibility"
+                                    >
+                                    </p>
+                                </template>
 
                                 <!-- Actions -->
                                 <p
@@ -179,7 +174,7 @@
 
             computed: {
                 gridsCount() {
-                    let count = this.available.columns.length;
+                    let count = this.available.columns.filter((column) => column.visibility).length;
 
                     if (this.available.actions.length) {
                         ++count;

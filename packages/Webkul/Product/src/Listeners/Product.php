@@ -24,8 +24,7 @@ class Product
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected FlatIndexer $flatIndexer
-    ) {
-    }
+    ) {}
 
     /**
      * Update or create product indices

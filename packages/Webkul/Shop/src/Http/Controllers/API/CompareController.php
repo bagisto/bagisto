@@ -18,8 +18,7 @@ class CompareController extends APIController
     public function __construct(
         protected CompareItemRepository $compareItemRepository,
         protected ProductRepository $productRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Address route index page.

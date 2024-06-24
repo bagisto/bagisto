@@ -37,7 +37,6 @@ class NewsLetterDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.communications.subscribers.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

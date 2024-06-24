@@ -3,9 +3,9 @@
     template as much as possible.
 -->
 @php
-    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
+    $showCompare = (bool) core()->getConfigData('catalog.products.settings.compare_option');
 
-    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
+    $showWishlist = (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 @endphp
 
 <div class="flex flex-wrap gap-4 px-4 pb-4 pt-6 shadow-sm lg:hidden">
@@ -114,7 +114,9 @@
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.before') !!}
 
-                @include('shop::checkout.cart.mini-cart')
+                @if(core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                    @include('shop::checkout.cart.mini-cart')
+                @endif
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.after') !!}
 
@@ -140,9 +142,11 @@
     
                                 <p class="py-2px mt-3 w-full border border-zinc-200"></p>
     
+                                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.customers_action.before') !!}
+
                                 <div class="mt-6 flex gap-4">
                                     {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.before') !!}
-    
+
                                     <a
                                         href="{{ route('shop.customer.session.create') }}"
                                         class="m-0 mx-auto block w-max cursor-pointer rounded-2xl bg-navyBlue px-7 py-4 text-center text-base font-medium text-white ltr:ml-0 rtl:mr-0"
@@ -159,6 +163,8 @@
     
                                     {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.after') !!}
                                 </div>
+
+                                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.customers_action.after') !!}
                             </x-slot>
                         @endguest
     
@@ -265,18 +271,18 @@
         </label>
 
         <div class="relative w-full">
-            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:top-2 max-md:text-xl ltr:left-3 rtl:right-3"></div>
+            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2 ltr:left-3 rtl:right-3"></div>
 
             <input
                 type="text"
-                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-xs font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-2.5 max-md:font-normal"
+                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                 name="query"
                 value="{{ request('query') }}"
                 placeholder="@lang('shop::app.components.layouts.header.search-text')"
                 required
             >
 
-            @if (core()->getConfigData('general.content.shop.image_search'))
+            @if (core()->getConfigData('catalog.products.settings.image_search'))
                 @include('shop::search.images.index')
             @endif
         </div>
@@ -295,7 +301,7 @@
             <template v-for="(category) in categories">
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.before') !!}
 
-                <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100 py-2.5">
+                <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-zinc-100 py-3.5 max-sm:py-2.5">
                     <a
                         :href="category.url"
                         class="flex items-center justify-between"
@@ -344,7 +350,7 @@
                                                 :href="thirdLevelCategory.url"
                                                 class="mt-5 flex items-center justify-between pb-5 ltr:ml-3 rtl:mr-3"
                                             >
-                                                @{{ thirdLevelCategory.Name }}
+                                                @{{ thirdLevelCategory.name }}
                                             </a>
                                         </div>
                                     </li>
@@ -384,7 +390,7 @@
                         <!-- Drawer Toggler -->
                         <x-slot:toggle>
                             <div
-                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
+                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
                                 role="button"
                             >
                                 {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
@@ -417,7 +423,7 @@
                         <!-- Drawer Toggler -->
                         <x-slot:toggle>
                             <div
-                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase max-md:py-3"
+                                class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
                                 role="button"
                             >
                                 <img

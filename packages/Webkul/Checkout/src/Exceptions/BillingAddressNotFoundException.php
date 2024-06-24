@@ -4,6 +4,4 @@ namespace Webkul\Checkout\Exceptions;
 
 use Exception;
 
-class BillingAddressNotFoundException extends Exception
-{
-}
+class BillingAddressNotFoundException extends Exception {}

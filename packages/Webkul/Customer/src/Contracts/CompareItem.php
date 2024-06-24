@@ -2,6 +2,4 @@
 
 namespace Webkul\Customer\Contracts;
 
-interface CompareItem
-{
-}
+interface CompareItem {}

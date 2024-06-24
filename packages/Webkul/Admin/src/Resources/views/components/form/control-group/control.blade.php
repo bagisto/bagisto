@@ -174,6 +174,7 @@
     @case('multiselect')
         <v-field
             as="select"
+            v-slot="{ value }"
             :class="[errors && errors['{{ $name }}'] ? 'border !border-red-600 hover:border-red-600' : '']"
             {{ $attributes->except([])->merge(['class' => 'flex w-full flex-col rounded-md border bg-white px-3 py-2.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400']) }}
             name="{{ $name }}"

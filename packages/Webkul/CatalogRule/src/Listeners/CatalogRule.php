@@ -17,8 +17,7 @@ class CatalogRule
     public function __construct(
         protected CatalogRuleRepository $catalogRuleRepository,
         protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $catalogRule

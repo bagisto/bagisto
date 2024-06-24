@@ -131,10 +131,6 @@
                     @click="isImageZooming = !isImageZooming"
                 />
             </div>
-
-            <div v-show="isMediaLoading">
-                <x-shop::shimmer.products.gallery />
-            </div>
             
             <!-- Gallery Images Zoomer -->
             <x-shop::image-zoomer 
@@ -152,7 +148,7 @@
             data() {
                 return {
                     isImageZooming: false,
-                    
+
                     isMediaLoading: true,
 
                     media: {

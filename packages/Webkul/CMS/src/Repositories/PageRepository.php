@@ -42,10 +42,9 @@ class PageRepository extends Repository
 
     /**
      * @param  int  $id
-     * @param  string  $attribute
      * @return \Webkul\CMS\Contracts\Page
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id)
     {
         $page = $this->find($id);
 
@@ -53,7 +52,7 @@ class PageRepository extends Repository
 
         $data[$locale]['html_content'] = str_replace('=&gt;', '=>', $data[$locale]['html_content']);
 
-        parent::update($data, $id, $attribute);
+        parent::update($data, $id);
 
         $page->channels()->sync($data['channels']);
 

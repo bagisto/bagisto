@@ -22,7 +22,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 1,
-            'code'         => 'catalog.products.guest_checkout.allow_guest_checkout',
+            'code'         => 'sales.checkout.shopping_cart.allow_guest_checkout',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,

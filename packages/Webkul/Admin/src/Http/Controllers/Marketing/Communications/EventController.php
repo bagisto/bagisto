@@ -15,9 +15,7 @@ class EventController extends Controller
      *
      * @return void
      */
-    public function __construct(protected EventRepository $eventRepository)
-    {
-    }
+    public function __construct(protected EventRepository $eventRepository) {}
 
     /**
      * Display a listing of the resource.

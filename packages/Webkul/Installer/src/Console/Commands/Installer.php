@@ -2,20 +2,30 @@
 
 namespace Webkul\Installer\Console\Commands;
 
+use DateTimeZone;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Events\ComposerEvents;
+use Webkul\Installer\Helpers\DatabaseManager;
 
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\password;
 use function Laravel\Prompts\select;
+use function Laravel\Prompts\suggest;
 use function Laravel\Prompts\text;
 
 class Installer extends Command
 {
+    /**
+     * Contain locales anb currencies details.
+     *
+     * @var string
+     */
+    protected $applicationDetails;
+
     /**
      * The name and signature of the console command.
      *
@@ -65,19 +75,70 @@ class Installer extends Command
      * @var array
      */
     protected $currencies = [
+        'AED' => 'United Arab Emirates Dirham',
+        'ARS' => 'Argentine Peso',
+        'AUD' => 'Australian Dollar',
+        'BDT' => 'Bangladeshi Taka',
+        'BRL' => 'Brazilian Real',
+        'CAD' => 'Canadian Dollar',
+        'CHF' => 'Swiss Franc',
+        'CLP' => 'Chilean Peso',
         'CNY' => 'Chinese Yuan',
-        'AED' => 'Dirham',
+        'COP' => 'Colombian Peso',
+        'CZK' => 'Czech Koruna',
+        'DKK' => 'Danish Krone',
+        'DZD' => 'Algerian Dinar',
+        'EGP' => 'Egyptian Pound',
         'EUR' => 'Euro',
+        'FJD' => 'Fijian Dollar',
+        'GBP' => 'British Pound Sterling',
+        'HKD' => 'Hong Kong Dollar',
+        'HUF' => 'Hungarian Forint',
+        'IDR' => 'Indonesian Rupiah',
+        'ILS' => 'Israeli New Shekel',
         'INR' => 'Indian Rupee',
-        'IRR' => 'Iranian Rial',
-        'AFN' => 'Israeli Shekel',
+        'JOD' => 'Jordanian Dinar',
         'JPY' => 'Japanese Yen',
-        'GBP' => 'Pound Sterling',
+        'KRW' => 'South Korean Won',
+        'KWD' => 'Kuwaiti Dinar',
+        'KZT' => 'Kazakhstani Tenge',
+        'LBP' => 'Lebanese Pound',
+        'LKR' => 'Sri Lankan Rupee',
+        'LYD' => 'Libyan Dinar',
+        'MAD' => 'Moroccan Dirham',
+        'MUR' => 'Mauritian Rupee',
+        'MXN' => 'Mexican Peso',
+        'MYR' => 'Malaysian Ringgit',
+        'NGN' => 'Nigerian Naira',
+        'NOK' => 'Norwegian Krone',
+        'NPR' => 'Nepalese Rupee',
+        'NZD' => 'New Zealand Dollar',
+        'OMR' => 'Omani Rial',
+        'PAB' => 'Panamanian Balboa',
+        'PEN' => 'Peruvian Nuevo Sol',
+        'PHP' => 'Philippine Peso',
+        'PKR' => 'Pakistani Rupee',
+        'PLN' => 'Polish Zloty',
+        'PYG' => 'Paraguayan Guarani',
+        'QAR' => 'Qatari Rial',
+        'RON' => 'Romanian Leu',
         'RUB' => 'Russian Ruble',
         'SAR' => 'Saudi Riyal',
+        'SEK' => 'Swedish Krona',
+        'SGD' => 'Singapore Dollar',
+        'THB' => 'Thai Baht',
+        'TND' => 'Tunisian Dinar',
         'TRY' => 'Turkish Lira',
-        'USD' => 'US Dollar',
+        'TWD' => 'New Taiwan Dollar',
         'UAH' => 'Ukrainian Hryvnia',
+        'USD' => 'United States Dollar',
+        'UZS' => 'Uzbekistani Som',
+        'VEF' => 'Venezuelan Bolívar',
+        'VND' => 'Vietnamese Dong',
+        'XAF' => 'CFA Franc BEAC',
+        'XOF' => 'CFA Franc BCEAO',
+        'ZAR' => 'South African Rand',
+        'ZMW' => 'Zambian Kwacha',
     ];
 
     /**
@@ -159,7 +220,7 @@ class Installer extends Command
     /**
      * Ask for application details.
      *
-     * @return void
+     * @return array
      */
     protected function askForApplicationDetails()
     {
@@ -175,12 +236,14 @@ class Installer extends Command
             env('APP_URL', 'http://localhost:8000')
         );
 
-        $this->envUpdate(
-            'APP_TIMEZONE',
-            date_default_timezone_get()
-        );
+        $timezones = $this->getTimezones();
 
-        $this->info('Your Default Timezone is '.date_default_timezone_get());
+        $this->updateEnvChoice(
+            'APP_TIMEZONE',
+            'Please select the application timezone',
+            $timezones,
+            true
+        );
 
         $defaultLocale = $this->updateEnvChoice(
             'APP_LOCALE',
@@ -196,25 +259,35 @@ class Installer extends Command
 
         $allowedLocales = $this->allowedChoice(
             'Please choose the allowed locales for your channels',
-            $this->locales
+            array_merge(['all' => 'All'], $this->locales)
         );
 
         $allowedCurrencies = $this->allowedChoice(
             'Please choose the allowed currencies for your channels',
-            $this->currencies
+            array_merge(['all' => 'All'], $this->currencies)
         );
 
-        $allowedLocales = array_values(array_unique(array_merge(
-            [$defaultLocale],
-            array_keys($allowedLocales)
-        )));
+        $allowedLocales = array_key_exists('all', $allowedLocales)
+                            ? array_values(array_unique(array_merge(
+                                [$defaultLocale],
+                                array_diff(array_keys($this->locales), [$defaultLocale])
+                            )))
+                            : array_values(array_unique(array_merge(
+                                [$defaultLocale],
+                                array_diff(array_keys($allowedLocales), [$defaultLocale])
+                            )));
 
-        $allowedCurrencies = array_values(array_unique(array_merge(
-            [$defaultCurrency ?? 'USD'],
-            array_keys($allowedCurrencies)
-        )));
+        $allowedCurrencies = array_key_exists('all', $allowedCurrencies)
+                            ? array_values(array_unique(array_merge(
+                                [$defaultCurrency],
+                                array_diff(array_keys($this->currencies), [$defaultCurrency])
+                            )))
+                            : array_values(array_unique(array_merge(
+                                [$defaultCurrency],
+                                array_diff(array_keys($allowedCurrencies), [$defaultCurrency])
+                            )));
 
-        return [
+        return $this->applicationDetails = [
             'default_locale'     => $defaultLocale,
             'allowed_locales'    => $allowedLocales,
             'default_currency'   => $defaultCurrency,
@@ -224,6 +297,8 @@ class Installer extends Command
 
     /**
      * Add the database credentials to the .env file.
+     *
+     * @return mixed
      */
     protected function askForDatabaseDetails()
     {
@@ -265,14 +340,13 @@ class Installer extends Command
 
             'DB_PASSWORD' => password(
                 label: 'Please enter your database password',
-                required: true
+                required: false
             ),
         ];
 
         if (
             ! $databaseDetails['DB_DATABASE']
             || ! $databaseDetails['DB_USERNAME']
-            || ! $databaseDetails['DB_PASSWORD']
         ) {
             return $this->error('Please enter the database credentials.');
         }
@@ -312,6 +386,11 @@ class Installer extends Command
             required: true
         );
 
+        $sampleProduct = select(
+            'Please select if you want some sample products after installation.',
+            ['false', 'true'],
+        );
+
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
 
         try {
@@ -325,6 +404,10 @@ class Installer extends Command
                     'status'   => 1,
                 ]
             );
+
+            if ($sampleProduct === 'true') {
+                app(DatabaseManager::class)->seedSampleProducts($this->applicationDetails);
+            }
 
             $filePath = storage_path('installed');
 
@@ -406,13 +489,21 @@ class Installer extends Command
      *
      * @return string
      */
-    protected function updateEnvChoice(string $key, string $question, array $choices)
+    protected function updateEnvChoice(string $key, string $question, array $choices, bool $useSuggest = false)
     {
-        $choice = select(
-            label: $question,
-            options: $choices,
-            default: env($key)
-        );
+        if ($useSuggest) {
+            $choice = suggest(
+                label: $question,
+                options: $choices,
+                default: env($key)
+            );
+        } else {
+            $choice = select(
+                label: $question,
+                options: $choices,
+                default: env($key)
+            );
+        }
 
         $this->envUpdate($key, $choice);
 
@@ -480,5 +571,28 @@ class Installer extends Command
         }
 
         return false;
+    }
+
+    /**
+     * Get sorted list of timezone abbreviations.
+     *
+     * @return array
+     */
+    private function getTimezones()
+    {
+        $timezoneAbbreviations = DateTimeZone::listAbbreviations();
+        $timezones = [];
+
+        foreach ($timezoneAbbreviations as $zones) {
+            foreach ($zones as $zone) {
+                if (! empty($zone['timezone_id'])) {
+                    $timezones[$zone['timezone_id']] = $zone['timezone_id'];
+                }
+            }
+        }
+
+        asort($timezones);
+
+        return $timezones;
     }
 }

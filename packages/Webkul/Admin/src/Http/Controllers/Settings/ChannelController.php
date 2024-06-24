@@ -15,9 +15,7 @@ class ChannelController extends Controller
      *
      * @return void
      */
-    public function __construct(protected ChannelRepository $channelRepository)
-    {
-    }
+    public function __construct(protected ChannelRepository $channelRepository) {}
 
     /**
      * Display a listing of the resource.

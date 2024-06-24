@@ -23,7 +23,7 @@
             </v-product-bundle-option-item>
 
             <div class="p-4">
-                <div class="my-[20px] flex items-center justify-between">
+                <div class="my-5 flex items-center justify-between">
                     <p class="text-sm dark:text-white">
                         @lang('admin::app.sales.orders.create.types.bundle.total-amount')
                     </p>
@@ -86,6 +86,32 @@
                         <option
                             v-for="product in option.products"
                             :value="product.id"
+                        >
+                            @{{ product.name + ' + ' + product.price.final.formatted_price }}
+                        </option>
+                    </x-admin::form.control-group.control>
+                </template>
+
+                <template v-if="option.type == 'multiselect'">
+                    <x-admin::form.control-group.control
+                        type="select"
+                        ::name="'bundle_options[' + option.id + '][]'"
+                        ::rules="{'required': option.is_required}"
+                        v-model="selectedProduct"
+                        ::label="option.label"
+                        multiple
+                    >
+                        <option
+                            value="0"
+                            v-if="! option.is_required"
+                        >
+                            @lang('admin::app.sales.orders.create.types.bundle.none')
+                        </option>
+
+                        <option
+                            v-for="product in option.products"
+                            :value="product.id"
+                            :selected="value && value.includes(product.id)"
                         >
                             @{{ product.name + ' + ' + product.price.final.formatted_price }}
                         </option>
@@ -178,31 +204,6 @@
                             </label>
                         </div>
                     </div>
-                </template>
-
-                <template v-if="option.type == 'multiselect'">
-                    <x-admin::form.control-group.control
-                        type="select"
-                        ::name="'bundle_options[' + option.id + '][]'"
-                        ::rules="{'required': option.is_required}"
-                        v-model="selectedProduct"
-                        ::label="option.label"
-                        multiple
-                    >
-                        <option
-                            value="0"
-                            v-if="! option.is_required"
-                        >
-                            @lang('admin::app.sales.orders.create.types.bundle.none')
-                        </option>
-
-                        <option
-                            v-for="product in option.products"
-                            :value="product.id"
-                        >
-                            @{{ product.name + ' + ' + product.price.final.formatted_price }}
-                        </option>
-                    </x-admin::form.control-group.control>
                 </template>
 
                 <x-admin::form.control-group.error ::name="'bundle_options[' + option.id + '][]'" />

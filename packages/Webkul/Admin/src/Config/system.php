@@ -41,45 +41,51 @@ return [
             ],
         ],
     ], [
+        'key'    => 'general.general.breadcrumbs',
+        'name'   => 'admin::app.configuration.index.general.general.breadcrumbs.title',
+        'info'   => 'admin::app.configuration.index.general.general.breadcrumbs.title-info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'shop',
+                'title'   => 'admin::app.configuration.index.general.general.breadcrumbs.shop',
+                'type'    => 'boolean',
+                'default' => true,
+            ],
+        ],
+    ], [
         'key'  => 'general.content',
         'name' => 'admin::app.configuration.index.general.content.title',
         'info' => 'admin::app.configuration.index.general.content.info',
         'icon' => 'settings/store.svg',
         'sort' => 2,
     ], [
-        'key'    => 'general.content.shop',
-        'name'   => 'admin::app.configuration.index.general.content.settings.title',
-        'info'   => 'admin::app.configuration.index.general.content.settings.title-info',
+        'key'    => 'general.content.header_offer',
+        'name'   => 'admin::app.configuration.index.general.content.header-offer.title',
+        'info'   => 'admin::app.configuration.index.general.content.header-offer.title-info',
         'sort'   => 1,
         'fields' => [
             [
-                'name'          => 'compare_option',
-                'title'         => 'admin::app.configuration.index.general.content.settings.compare-options',
-                'type'          => 'boolean',
-                'default'       => 1,
-                'locale_based'  => true,
-                'channel_based' => true,
+                'name'    => 'title',
+                'title'   => 'admin::app.configuration.index.general.content.header-offer.offer-title',
+                'type'    => 'text',
+                'default' => 'Get UPTO 40% OFF on your 1st order',
             ], [
-                'name'          => 'wishlist_option',
-                'title'         => 'admin::app.configuration.index.general.content.settings.wishlist-options',
-                'type'          => 'boolean',
-                'default'       => 1,
-                'locale_based'  => true,
-                'channel_based' => true,
+                'name'    => 'redirection_title',
+                'title'   => 'admin::app.configuration.index.general.content.header-offer.redirection-title',
+                'type'    => 'text',
+                'default' => 'SHOP NOW',
             ], [
-                'name'          => 'image_search',
-                'title'         => 'admin::app.configuration.index.general.content.settings.image-search-option',
-                'type'          => 'boolean',
-                'default'       => 1,
-                'locale_based'  => true,
-                'channel_based' => true,
+                'name'    => 'redirection_link',
+                'title'   => 'admin::app.configuration.index.general.content.header-offer.redirection-link',
+                'type'    => 'text',
             ],
         ],
     ], [
         'key'    => 'general.content.custom_scripts',
         'name'   => 'admin::app.configuration.index.general.content.custom-scripts.title',
         'info'   => 'admin::app.configuration.index.general.content.custom-scripts.title-info',
-        'sort'   => 1,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'custom_css',
@@ -335,7 +341,25 @@ return [
         'name' => 'admin::app.configuration.index.catalog.products.title',
         'info' => 'admin::app.configuration.index.catalog.products.info',
         'icon' => 'settings/product.svg',
-        'sort' => 2,
+        'sort' => 1,
+    ], [
+        'key'    => 'catalog.products.settings',
+        'name'   => 'admin::app.configuration.index.catalog.products.settings.title',
+        'info'   => 'admin::app.configuration.index.catalog.products.settings.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'compare_option',
+                'title'         => 'admin::app.configuration.index.catalog.products.settings.compare-options',
+                'type'          => 'boolean',
+                'default'       => 1,
+            ], [
+                'name'          => 'image_search',
+                'title'         => 'admin::app.configuration.index.catalog.products.settings.image-search-option',
+                'type'          => 'boolean',
+                'default'       => 1,
+            ],
+        ],
     ], [
         'key'    => 'catalog.products.search',
         'name'   => 'admin::app.configuration.index.catalog.products.search.title',
@@ -386,25 +410,27 @@ return [
                         'value' => 'elastic',
                     ],
                 ],
-            ],
-        ],
-    ], [
-        'key'    => 'catalog.products.guest_checkout',
-        'name'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title',
-        'info'   => 'admin::app.configuration.index.catalog.products.guest-checkout.title-info',
-        'sort'   => 2,
-        'fields' => [
-            [
-                'name'  => 'allow_guest_checkout',
-                'title' => 'admin::app.configuration.index.catalog.products.guest-checkout.allow-guest-checkout',
-                'type'  => 'boolean',
+            ], [
+                'name'       => 'min_query_length',
+                'title'      => 'admin::app.configuration.index.catalog.products.search.min-query-length',
+                'info'       => 'admin::app.configuration.index.catalog.products.search.min-query-length-info',
+                'type'       => 'number',
+                'validation' => 'numeric',
+                'default'    => '0',
+            ], [
+                'name'       => 'max_query_length',
+                'title'      => 'admin::app.configuration.index.catalog.products.search.max-query-length',
+                'info'       => 'admin::app.configuration.index.catalog.products.search.max-query-length-info',
+                'type'       => 'number',
+                'validation' => 'numeric',
+                'default'    => '1000',
             ],
         ],
     ], [
         'key'    => 'catalog.products.product_view_page',
         'name'   => 'admin::app.configuration.index.catalog.products.product-view-page.title',
         'info'   => 'admin::app.configuration.index.catalog.products.product-view-page.title-info',
-        'sort'   => 3,
+        'sort'   => 2,
         'fields' => [
             [
                 'name'       => 'no_of_related_products',
@@ -422,7 +448,7 @@ return [
         'key'    => 'catalog.products.cart_view_page',
         'name'   => 'admin::app.configuration.index.catalog.products.cart-view-page.title',
         'info'   => 'admin::app.configuration.index.catalog.products.cart-view-page.title-info',
-        'sort'   => 4,
+        'sort'   => 3,
         'fields' => [
             [
                 'name'       => 'no_of_cross_sells_products',
@@ -435,7 +461,7 @@ return [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.configuration.index.catalog.products.storefront.title',
         'info'   => 'admin::app.configuration.index.catalog.products.storefront.title-info',
-        'sort'   => 5,
+        'sort'   => 4,
         'fields' => [
             [
                 'name'          => 'mode',
@@ -493,76 +519,93 @@ return [
         'key'    => 'catalog.products.cache_small_image',
         'name'   => 'admin::app.configuration.index.catalog.products.small-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.small-image.title-info',
-        'sort'   => 6,
+        'sort'   => 5,
         'fields' => [
             [
                 'name'       => 'width',
                 'title'      => 'admin::app.configuration.index.catalog.products.small-image.width',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
-            ],
-            [
+            ], [
                 'name'       => 'height',
                 'title'      => 'admin::app.configuration.index.catalog.products.small-image.height',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
+            ], [
+                'name'       => 'url',
+                'title'      => 'admin::app.configuration.index.catalog.products.small-image.placeholder',
+                'type'       => 'image',
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
             ],
         ],
     ], [
         'key'    => 'catalog.products.cache_medium_image',
         'name'   => 'admin::app.configuration.index.catalog.products.medium-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.medium-image.title-info',
-        'sort'   => 7,
+        'sort'   => 6,
         'fields' => [
             [
                 'name'       => 'width',
                 'title'      => 'admin::app.configuration.index.catalog.products.medium-image.width',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
-            ],
-            [
+            ], [
                 'name'       => 'height',
                 'title'      => 'admin::app.configuration.index.catalog.products.medium-image.height',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
+            ], [
+                'name'       => 'url',
+                'title'      => 'admin::app.configuration.index.catalog.products.medium-image.placeholder',
+                'type'       => 'image',
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
             ],
         ],
     ], [
         'key'    => 'catalog.products.cache_large_image',
         'name'   => 'admin::app.configuration.index.catalog.products.large-image.title',
         'info'   => 'admin::app.configuration.index.catalog.products.large-image.title-info',
-        'sort'   => 8,
+        'sort'   => 7,
         'fields' => [
             [
                 'name'       => 'width',
                 'title'      => 'admin::app.configuration.index.catalog.products.large-image.width',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
-            ],
-            [
+            ], [
                 'name'       => 'height',
                 'title'      => 'admin::app.configuration.index.catalog.products.large-image.height',
                 'type'       => 'text',
                 'validation' => 'integer|min:1',
+            ], [
+                'name'       => 'url',
+                'title'      => 'admin::app.configuration.index.catalog.products.large-image.placeholder',
+                'type'       => 'image',
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
             ],
         ],
     ], [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.configuration.index.catalog.products.review.title',
         'info'   => 'admin::app.configuration.index.catalog.products.review.title-info',
-        'sort'   => 9,
+        'sort'   => 8,
         'fields' => [
             [
                 'name'  => 'guest_review',
                 'title' => 'admin::app.configuration.index.catalog.products.review.allow-guest-review',
                 'type'  => 'boolean',
+            ], [
+                'name'    => 'customer_review',
+                'title'   => 'admin::app.configuration.index.catalog.products.review.allow-customer-review',
+                'type'    => 'boolean',
+                'default' => true,
             ],
         ],
     ], [
         'key'    => 'catalog.products.attribute',
         'name'   => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info'   => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort'   => 10,
+        'sort'   => 9,
         'fields' => [
             [
                 'name'       => 'image_attribute_upload_size',
@@ -580,7 +623,7 @@ return [
         'key'    => 'catalog.products.social_share',
         'name'   => 'admin::app.configuration.index.catalog.products.social-share.title',
         'info'   => 'admin::app.configuration.index.catalog.products.social-share.title-info',
-        'sort'   => 11,
+        'sort'   => 10,
         'fields' => [
             [
                 'name'  => 'enabled',
@@ -602,7 +645,7 @@ return [
                 'name'  => 'whatsapp',
                 'title' => 'admin::app.configuration.index.catalog.products.social-share.enable-share-whatsapp',
                 'type'  => 'boolean',
-                'info'  => 'What\'s App share link just will appear to mobile devices.',
+                'info'  => 'admin::app.configuration.index.catalog.products.social-share.enable-share-whatsapp-info',
             ], [
                 'name'  => 'linkedin',
                 'title' => 'admin::app.configuration.index.catalog.products.social-share.enable-share-linkedin',
@@ -622,7 +665,7 @@ return [
         'name' => 'admin::app.configuration.index.catalog.rich-snippets.title',
         'info' => 'admin::app.configuration.index.catalog.rich-snippets.info',
         'icon' => 'settings/settings.svg',
-        'sort' => 3,
+        'sort' => 2,
     ], [
         'key'    => 'catalog.rich_snippets.products',
         'name'   => 'admin::app.configuration.index.catalog.rich-snippets.products.title',
@@ -679,6 +722,42 @@ return [
                 'type'  => 'boolean',
             ],
         ],
+    ], [
+        'key'  => 'catalog.inventory',
+        'name' => 'admin::app.configuration.index.catalog.inventory.title',
+        'info' => 'admin::app.configuration.index.catalog.inventory.title-info',
+        'icon' => 'settings/inventory.svg',
+        'sort' => 3,
+    ], [
+        'key'    => 'catalog.inventory.stock_options',
+        'name'   => 'admin::app.configuration.index.catalog.inventory.product-stock-options.title',
+        'info'   => 'admin::app.configuration.index.catalog.inventory.product-stock-options.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'back_orders',
+                'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.allow-back-orders',
+                'type'          => 'boolean',
+                'default',
+            ],
+            // [
+            //     'name'          => 'maximum_product',
+            //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.max-qty-allowed-in-cart',
+            //     'type'          => 'text',
+            //     'default'       => '10',
+            // ], [
+            //     'name'          => 'minimum_product',
+            //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.min-qty-allowed-in-cart',
+            //     'type'          => 'number',
+            //     'default'       => '0',
+            // ],
+            [
+                'name'          => 'out_of_stock_threshold',
+                'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.out-of-stock-threshold',
+                'type'          => 'number',
+                'default'       => '0',
+            ],
+        ],
     ],
 
     /**
@@ -731,7 +810,7 @@ return [
                 'name'          => 'street_lines',
                 'title'         => 'admin::app.configuration.index.customer.address.information.street-lines',
                 'type'          => 'text',
-                'validation'    => 'between:1,2',
+                'validation'    => 'between:1,4',
                 'channel_based' => true,
                 'default_value' => 1,
             ],
@@ -771,15 +850,98 @@ return [
         'info' => 'admin::app.configuration.index.customer.settings.settings-info',
         'icon' => 'settings/settings.svg',
         'sort' => 3,
+    ],
+    // [
+    //     'key'    => 'customer.settings.login_as_customer',
+    //     'name'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title',
+    //     'info'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title-info',
+    //     'sort'   => 1,
+    //     'fields' => [
+    //         [
+    //             'name'         => 'login',
+    //             'title'        => 'admin::app.configuration.index.customer.settings.login-as-customer.allow-option',
+    //             'type'         => 'boolean',
+    //             'default'      => 1,
+    //         ],
+    //     ],
+    // ],
+    [
+        'key'    => 'customer.settings.wishlist',
+        'name'   => 'admin::app.configuration.index.customer.settings.wishlist.title',
+        'info'   => 'admin::app.configuration.index.customer.settings.wishlist.title-info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'wishlist_option',
+                'title'   => 'admin::app.configuration.index.customer.settings.wishlist.allow-option',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+        ],
+    ], [
+        'key'    => 'customer.settings.login_options',
+        'name'   => 'admin::app.configuration.index.customer.settings.login-options.title',
+        'info'   => 'admin::app.configuration.index.customer.settings.login-options.title-info',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'    => 'redirected_to_page',
+                'title'   => 'admin::app.configuration.index.customer.settings.login-options.redirect-to-page',
+                'type'    => 'select',
+                'default' => 'home',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.customer.settings.login-options.home',
+                        'value' => 'home',
+                    ], [
+                        'title' => 'admin::app.configuration.index.customer.settings.login-options.account',
+                        'value' => 'account',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key'    => 'customer.settings.create_new_account_options',
+        'name'   => 'admin::app.configuration.index.customer.settings.create-new-account-option.title',
+        'info'   => 'admin::app.configuration.index.customer.settings.create-new-account-option.title-info',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name'    => 'default_group',
+                'title'   => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.title',
+                'info'    => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.title-info',
+                'type'    => 'select',
+                'default' => 'guest',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.general',
+                        'value' => 'general',
+                    ], [
+                        'title' => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.guest',
+                        'value' => 'guest',
+                    ], [
+                        'title' => 'admin::app.configuration.index.customer.settings.create-new-account-option.default-group.wholesale',
+                        'value' => 'wholesale',
+                    ],
+                ],
+            ], [
+                'name'    => 'news_letter',
+                'title'   => 'admin::app.configuration.index.customer.settings.create-new-account-option.news-letter',
+                'info'    => 'admin::app.configuration.index.customer.settings.create-new-account-option.news-letter-info',
+                'type'    => 'boolean',
+                'default' => true,
+            ],
+        ],
     ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.configuration.index.customer.settings.newsletter.title',
         'info'   => 'admin::app.configuration.index.customer.settings.newsletter.title-info',
-        'sort'   => 2,
+        'sort'   => 5,
         'fields' => [
             [
                 'name'         => 'subscription',
                 'title'        => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
+                'info'         => 'Enable subscription option for users in the footer section.',
                 'type'         => 'boolean',
                 'default'      => 1,
             ],
@@ -788,7 +950,7 @@ return [
         'key'    => 'customer.settings.email',
         'name'   => 'admin::app.configuration.index.customer.settings.email.title',
         'info'   => 'admin::app.configuration.index.customer.settings.email.title-info',
-        'sort'   => 3,
+        'sort'   => 6,
         'fields' => [
             [
                 'name'  => 'verification',
@@ -800,7 +962,7 @@ return [
         'key'    => 'customer.settings.social_login',
         'name'   => 'admin::app.configuration.index.customer.settings.social-login.social-login',
         'info'   => 'admin::app.configuration.index.customer.settings.social-login.social-login-info',
-        'sort'   => 4,
+        'sort'   => 7,
         'fields' => [
             [
                 'name'          => 'enable_facebook',
@@ -971,70 +1133,70 @@ return [
         'sort' => 5,
     ], [
         'key'  => 'sales.shipping',
-        'name' => 'admin::app.configuration.index.sales.shipping.title',
-        'info' => 'admin::app.configuration.index.sales.shipping.info',
+        'name' => 'admin::app.configuration.index.sales.shipping-setting.title',
+        'info' => 'admin::app.configuration.index.sales.shipping-setting.info',
         'icon' => 'settings/shipping.svg',
         'sort' => 1,
     ], [
         'key'    => 'sales.shipping.origin',
-        'name'   => 'admin::app.configuration.index.sales.shipping.origin.title',
-        'info'   => 'admin::app.configuration.index.sales.shipping.origin.title-info',
+        'name'   => 'admin::app.configuration.index.sales.shipping-setting.origin.title',
+        'info'   => 'admin::app.configuration.index.sales.shipping-setting.origin.title-info',
         'sort'   => 0,
         'fields' => [
             [
                 'name'          => 'country',
-                'title'         => 'admin::app.configuration.index.sales.shipping.origin.country',
+                'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.country',
                 'type'          => 'country',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'state',
-                'title'         => 'admin::app.configuration.index.sales.shipping.origin.state',
+                'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.state',
                 'type'          => 'state',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'city',
-                'title'         => 'admin::app.configuration.index.sales.shipping.origin.city',
+                'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.city',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'address',
-                'title'         => 'admin::app.configuration.index.sales.shipping.origin.street-address',
+                'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.street-address',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'zipcode',
-                'title'         => 'admin::app.configuration.index.sales.shipping.origin.zip',
+                'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.zip',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'store_name',
-                'title'         => 'admin::app.configuration.index.sales.shipping.origin.store-name',
+                'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.store-name',
                 'type'          => 'text',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'vat_number',
-                'title'         => 'admin::app.configuration.index.sales.shipping.origin.vat-number',
+                'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.vat-number',
                 'type'          => 'text',
                 'channel_based' => true,
             ], [
                 'name'          => 'contact',
-                'title'         => 'admin::app.configuration.index.sales.shipping.origin.contact-number',
+                'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.contact-number',
                 'type'          => 'text',
                 'channel_based' => true,
             ], [
                 'name'          => 'bank_details',
-                'title'         => 'admin::app.configuration.index.sales.shipping.origin.bank-details',
+                'title'         => 'admin::app.configuration.index.sales.shipping-setting.origin.bank-details',
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -1104,14 +1266,14 @@ return [
                 'locale_based'  => false,
             ], [
                 'name'    => 'type',
-                'title'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.type',
+                'title'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.type.title',
                 'type'    => 'select',
                 'options' => [
                     [
-                        'title' => 'Per Unit',
+                        'title' => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.type.per-unit',
                         'value' => 'per_unit',
                     ], [
-                        'title' => 'Per Order',
+                        'title' => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.type.per-order',
                         'value' => 'per_order',
                     ],
                 ],
@@ -1504,7 +1666,7 @@ return [
     ], [
         'key'    => 'sales.order_settings.order_number',
         'name'   => 'admin::app.configuration.index.sales.order-settings.order-number.title',
-        'info'   => 'admin::app.configuration.index.sales.order-settings.order-number.title-info',
+        'info'   => 'admin::app.configuration.index.sales.order-settings.order-number.info',
         'sort'   => 0,
         'fields' => [
             [
@@ -1513,56 +1675,79 @@ return [
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
-                'locale_based'  => true,
             ], [
                 'name'          => 'order_number_length',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.length',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
-                'locale_based'  => true,
             ], [
                 'name'          => 'order_number_suffix',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.suffix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
-                'locale_based'  => true,
             ], [
                 'name'          => 'order_number_generator',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.generator',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
-                'locale_based'  => true,
             ],
         ],
     ], [
         'key'    => 'sales.order_settings.minimum_order',
         'name'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.title',
-        'info'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.title-info',
+        'info'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.info',
         'sort'   => 1,
         'fields' => [
             [
+                'name'          => 'enable',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.enable',
+                'type'          => 'boolean',
+            ], [
                 'name'          => 'minimum_order_amount',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.minimum-order-amount',
                 'type'          => 'number',
-                'validation'    => 'numeric',
+                'validation'    => 'required_if:enable,1|numeric',
+                'depends'       => 'enable:1',
                 'channel_based' => true,
-                'locale_based'  => true,
+            ], [
+                'name'          => 'include_discount_amount',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-discount-amount',
+                'type'          => 'boolean',
+                'depends'       => 'enable:1',
+            ], [
+                'name'          => 'include_tax_to_amount',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.include-tax-amount',
+                'type'          => 'boolean',
+                'depends'       => 'enable:1',
+            ], [
+                'name'          => 'description',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.description',
+                'type'          => 'textarea',
+                'depends'       => 'enable:1',
+                'channel_based' => true,
             ],
         ],
     ], [
-        'key'    => 'sales.order_settings.stock_options',
-        'name'   => 'admin::app.configuration.index.sales.order-settings.stock-options.title',
-        'info'   => 'admin::app.configuration.index.sales.order-settings.stock-options.title-info',
+        'key'    => 'sales.order_settings.reorder',
+        'name'   => 'admin::app.configuration.index.sales.order-settings.reorder.title',
+        'info'   => 'admin::app.configuration.index.sales.order-settings.reorder.info',
         'sort'   => 2,
         'fields' => [
             [
-                'name'          => 'back_orders',
-                'title'         => 'admin::app.configuration.index.sales.order-settings.stock-options.allow-back-orders',
-                'type'          => 'boolean',
-                'channel_based' => true,
+                'name'    => 'admin',
+                'title'   => 'admin::app.configuration.index.sales.order-settings.reorder.admin-reorder',
+                'info'    => 'admin::app.configuration.index.sales.order-settings.reorder.admin-reorder-info',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'shop',
+                'title'   => 'admin::app.configuration.index.sales.order-settings.reorder.shop-reorder',
+                'info'    => 'admin::app.configuration.index.sales.order-settings.reorder.shop-reorder-info',
+                'type'    => 'boolean',
+                'default' => true,
             ],
         ],
     ], [
@@ -1574,7 +1759,7 @@ return [
     ], [
         'key'    => 'sales.invoice_settings.invoice_number',
         'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.title',
-        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.title-info',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.info',
         'sort'   => 0,
         'fields' => [
             [
@@ -1610,7 +1795,7 @@ return [
     ], [
         'key'    => 'sales.invoice_settings.payment_terms',
         'name'   => 'admin::app.configuration.index.sales.invoice-settings.payment-terms.title',
-        'info'   => 'admin::app.configuration.index.sales.invoice-settings.payment-terms.title-info',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.payment-terms.info',
         'sort'   => 1,
         'fields' => [
             [
@@ -1622,14 +1807,26 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.invoice_settings.invoice_slip_design',
-        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.title',
-        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.title-info',
+        'key'    => 'sales.invoice_settings.pdf_print_outs',
+        'name'   => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.title',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.info',
         'sort'   => 2,
         'fields' => [
             [
+                'name'    => 'invoice_id',
+                'title'   => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.invoice-id-title',
+                'info'    => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.invoice-id-info',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
+                'name'    => 'order_id',
+                'title'   => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.order-id-title',
+                'info'    => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.order-id-info',
+                'type'    => 'boolean',
+                'default' => true,
+            ], [
                 'name'          => 'logo',
-                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.logo',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.logo',
                 'type'          => 'image',
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
                 'channel_based' => true,
@@ -1638,8 +1835,8 @@ return [
     ], [
         'key'    => 'sales.invoice_settings.invoice_reminders',
         'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.title',
-        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.title-info',
-        'sort'   => 2,
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.info',
+        'sort'   => 3,
         'fields' => [
             [
                 'name'          => 'reminders_limit',
@@ -1904,6 +2101,84 @@ return [
                         'value' => 'both',
                     ],
                 ],
+            ],
+        ],
+    ], [
+        'key'  => 'sales.checkout',
+        'name' => 'admin::app.configuration.index.sales.checkout.title',
+        'info' => 'admin::app.configuration.index.sales.checkout.info',
+        'icon' => 'settings/checkout.svg',
+        'sort' => 7,
+    ], [
+        'key'    => 'sales.checkout.shopping_cart',
+        'name'   => 'admin::app.configuration.index.sales.checkout.shopping-cart.title',
+        'info'   => 'admin::app.configuration.index.sales.checkout.shopping-cart.info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'    => 'allow_guest_checkout',
+                'title'   => 'admin::app.configuration.index.sales.checkout.shopping-cart.guest-checkout',
+                'info'    => 'admin::app.configuration.index.sales.checkout.shopping-cart.guest-checkout-info',
+                'type'    => 'boolean',
+                'default' => 1,
+            ], [
+                'name'    => 'cart_page',
+                'title'   => 'admin::app.configuration.index.sales.checkout.shopping-cart.cart-page',
+                'info'    => 'admin::app.configuration.index.sales.checkout.shopping-cart.cart-page-info',
+                'type'    => 'boolean',
+                'default' => 2,
+            ], [
+                'name'    => 'cross_sell',
+                'title'   => 'admin::app.configuration.index.sales.checkout.shopping-cart.cross-sell',
+                'info'    => 'admin::app.configuration.index.sales.checkout.shopping-cart.cross-sell-info',
+                'type'    => 'boolean',
+                'default' => 3,
+            ], [
+                'name'    => 'estimate_shipping',
+                'title'   => 'admin::app.configuration.index.sales.checkout.shopping-cart.estimate-shipping',
+                'info'    => 'admin::app.configuration.index.sales.checkout.shopping-cart.estimate-shipping-info',
+                'type'    => 'boolean',
+                'default' => 4,
+            ],
+        ],
+    ], [
+        'key'    => 'sales.checkout.my_cart',
+        'name'   => 'admin::app.configuration.index.sales.checkout.my-cart.title',
+        'info'   => 'admin::app.configuration.index.sales.checkout.my-cart.info',
+        'sort'   => 2,
+        'fields' => [
+            [
+                'name'    => 'summary',
+                'title'   => 'admin::app.configuration.index.sales.checkout.my-cart.summary',
+                'type'    => 'select',
+                'default' => 'display_number_of_items_in_cart',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.checkout.my-cart.display-item-quantities',
+                        'value' => 'display_item_quantity',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.checkout.my-cart.display-number-in-cart',
+                        'value' => 'display_number_of_items_in_cart',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key'    => 'sales.checkout.mini_cart',
+        'name'   => 'admin::app.configuration.index.sales.checkout.mini-cart.title',
+        'info'   => 'admin::app.configuration.index.sales.checkout.mini-cart.info',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'    => 'display_mini_cart',
+                'title'   => 'admin::app.configuration.index.sales.checkout.mini-cart.display-mini-cart',
+                'type'    => 'boolean',
+                'default' => 1,
+            ], [
+                'name'    => 'offer_info',
+                'title'   => 'admin::app.configuration.index.sales.checkout.mini-cart.mini-cart-offer-info',
+                'type'    => 'text',
+                'default' => 'Get Up To 30% OFF on your 1st order',
             ],
         ],
     ],

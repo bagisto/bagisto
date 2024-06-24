@@ -2,6 +2,4 @@
 
 namespace Webkul\Attribute\Contracts;
 
-interface AttributeFamily
-{
-}
+interface AttributeFamily {}

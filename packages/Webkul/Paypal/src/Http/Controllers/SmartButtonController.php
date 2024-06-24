@@ -19,8 +19,7 @@ class SmartButtonController extends Controller
         protected SmartButton $smartButton,
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Paypal order creation for approval of client.
@@ -272,7 +271,7 @@ class SmartButtonController extends Controller
 
         $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
 
-        if (! $cart->checkMinimumOrder()) {
+        if (! Cart::haveMinimumOrderAmount()) {
             throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }
 

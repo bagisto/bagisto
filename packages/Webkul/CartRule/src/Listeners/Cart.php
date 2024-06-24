@@ -12,9 +12,7 @@ class Cart
      * @param  \Webkul\CartRule\Repositories\CartRule  $cartRuleHelper
      * @return void
      */
-    public function __construct(protected CartRule $cartRuleHelper)
-    {
-    }
+    public function __construct(protected CartRule $cartRuleHelper) {}
 
     /**
      * Apply valid cart rules to cart

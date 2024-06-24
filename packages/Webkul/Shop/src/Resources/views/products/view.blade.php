@@ -56,12 +56,14 @@
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
     <!-- Breadcrumbs -->
-    <div class="flex justify-center max-lg:hidden">
-        <x-shop::breadcrumbs
-            name="product"
-            :entity="$product"
-        />
-    </div>
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        <div class="flex justify-center max-lg:hidden">
+            <x-shop::breadcrumbs
+                name="product"
+                :entity="$product"
+            />
+        </div>
+    @endif
 
     <!-- Product Information Vue Component -->
     <v-product>
@@ -162,14 +164,14 @@
             class="max-md:border-none"
             :is-active="true"
         >
-            <x-slot:header class="bg-gray-100 max-sm:!py-2">
+            <x-slot:header class="bg-gray-100 max-md:!py-3 max-sm:!py-2">
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.description')
                 </p>
             </x-slot>
 
             <x-slot:content class="max-sm:px-0">
-                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm max-sm:mb-1 max-sm:px-4">
+                <div class="mb-5 text-lg text-zinc-500 max-1180:text-sm max-md:mb-1 max-md:px-4">
                     {!! $product->description !!}
                 </div>
             </x-slot>
@@ -181,7 +183,7 @@
                 class="max-md:border-none"
                 :is-active="false"
             >
-                <x-slot:header class="bg-gray-100 max-sm:!py-2">
+                <x-slot:header class="bg-gray-100 max-md:!py-3 max-sm:!py-2">
                     <p class="text-base font-medium 1180:hidden">
                         @lang('shop::app.products.view.additional-information')
                     </p>
@@ -237,7 +239,7 @@
             :is-active="false"
         >
             <x-slot:header
-                class="bg-gray-100 max-sm:!py-2"
+                class="bg-gray-100 max-md:!py-3 max-sm:!py-2"
                 id="review-accordian-button"
             >
                 <p class="text-base font-medium">
@@ -304,7 +306,7 @@
                                         {{ $product->name }}
                                     </h1>
 
-                                    @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                                    @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                                         <div
                                             class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
                                             role="button"
@@ -344,7 +346,7 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-2 max-sm:gap-x-2.5 max-sm:gap-y-0 max-sm:text-lg">
+                                <p class="mt-[22px] flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-2 max-sm:gap-x-2.5 max-sm:gap-y-0 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
                                 </p>
 
@@ -392,44 +394,48 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-4 rounded-xl px-7 py-4 max-sm:gap-x-5 max-sm:rounded-lg max-sm:px-4 max-sm:py-1.5"
+                                            class="gap-x-4 rounded-xl px-7 py-4 max-md:py-3 max-sm:gap-x-5 max-sm:rounded-lg max-sm:px-4 max-sm:py-1.5"
                                         />
                                     @endif
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
-                                    <!-- Add To Cart Button -->
-                                    {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}
+                                    @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                                        <!-- Add To Cart Button -->
+                                        {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}
 
-                                    <x-shop::button
-                                        type="submit"
-                                        class="secondary-button w-full max-w-full max-sm:rounded-lg max-sm:py-1.5"
-                                        button-type="secondary-button"
-                                        :loading="false"
-                                        :title="trans('shop::app.products.view.add-to-cart')"
-                                        :disabled="! $product->isSaleable(1)"
-                                        ::loading="isStoring.addToCart"
-                                    />
+                                        <x-shop::button
+                                            type="submit"
+                                            class="secondary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            button-type="secondary-button"
+                                            :loading="false"
+                                            :title="trans('shop::app.products.view.add-to-cart')"
+                                            :disabled="! $product->isSaleable(1)"
+                                            ::loading="isStoring.addToCart"
+                                        />
 
-                                    {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
+                                        {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
+                                    @endif
                                 </div>
 
                                 <!-- Buy Now Button -->
-                                {!! view_render_event('bagisto.shop.products.view.buy_now.before', ['product' => $product]) !!}
+                                @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                                    {!! view_render_event('bagisto.shop.products.view.buy_now.before', ['product' => $product]) !!}
 
-                                @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
-                                    <x-shop::button
-                                        type="submit"
-                                        class="primary-button mt-5 w-full max-w-[470px] max-sm:mt-3 max-sm:rounded-lg max-sm:py-1.5"
-                                        button-type="secondary-button"
-                                        :title="trans('shop::app.products.view.buy-now')"
-                                        :disabled="! $product->isSaleable(1)"
-                                        ::loading="isStoring.buyNow"
-                                        @click="is_buy_now=1;"
-                                    />
+                                    @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
+                                        <x-shop::button
+                                            type="submit"
+                                            class="primary-button mt-5 w-full max-w-[470px] max-md:py-3 max-sm:mt-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            button-type="secondary-button"
+                                            :title="trans('shop::app.products.view.buy-now')"
+                                            :disabled="! $product->isSaleable(1)"
+                                            ::loading="isStoring.buyNow"
+                                            @click="is_buy_now=1;"
+                                        />
+                                    @endif
+
+                                    {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
                                 @endif
-
-                                {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
 
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
@@ -443,7 +449,7 @@
                                         tabindex="0"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"
                                     >
-                                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                                        @if (core()->getConfigData('catalog.products.settings.compare_option'))
                                             <span
                                                 class="icon-compare text-2xl"
                                                 role="presentation"
@@ -491,6 +497,8 @@
                         this.isStoring[operation] = true;
 
                         let formData = new FormData(this.$refs.formData);
+
+                        this.ensureQuantity(formData);
 
                         this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', formData, {
                                 headers: {
@@ -619,7 +627,13 @@
                                 behavior: 'smooth'
                             });
                         }
-                    }
+                    },
+
+                    ensureQuantity(formData) {
+                        if (! formData.has('quantity')) {
+                            formData.append('quantity', 1);
+                        }
+                    },
                 },
             });
         </script>

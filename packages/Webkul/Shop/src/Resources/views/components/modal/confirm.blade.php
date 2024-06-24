@@ -56,7 +56,7 @@
                                     <div class="flex justify-end gap-2.5">
                                         <button
                                             type="button"
-                                            class="secondary-button max-sm:px-6 max-sm:py-2.5"
+                                            class="secondary-button max-md:py-3 max-sm:px-6 max-sm:py-2.5"
                                             @click="disagree"
                                         >
                                             @{{ options.btnDisagree }}
@@ -64,7 +64,7 @@
 
                                         <button
                                             type="button"
-                                            class="primary-button max-sm:px-6 max-sm:py-2.5"
+                                            class="primary-button max-md:py-3 max-sm:px-6 max-sm:py-2.5"
                                             @click="agree"
                                         >
                                             @{{ options.btnAgree }} 

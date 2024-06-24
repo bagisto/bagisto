@@ -5,9 +5,11 @@
     </x-slot>
 
     <!-- Breadcrumbs -->
-    @section('breadcrumbs')
-        <x-shop::breadcrumbs name="orders" />
-    @endSection
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        @section('breadcrumbs')
+            <x-shop::breadcrumbs name="orders" />
+        @endSection
+    @endif
 
     <div class="mx-4">
         <x-shop::layouts.account.navigation />
@@ -18,7 +20,7 @@
     <!--Customers logout-->
     @auth('customer')
         <div class="mx-4">
-            <div class="w-full rounded-lg border border-navyBlue py-1.5 text-center">
+            <div class="mx-auto w-[400px] rounded-lg border border-navyBlue py-2.5 text-center max-sm:w-full max-sm:py-1.5">
                 <x-shop::form
                     method="DELETE"
                     action="{{ route('shop.customer.session.destroy') }}"

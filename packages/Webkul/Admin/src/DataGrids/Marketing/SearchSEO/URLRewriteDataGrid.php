@@ -40,19 +40,32 @@ class URLRewriteDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
-            'width'      => '40px',
             'filterable' => true,
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'entity_type',
-            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.for'),
-            'type'       => 'string',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'              => 'entity_type',
+            'label'              => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.for'),
+            'type'               => 'string',
+            'searchable'         => false,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.product'),
+                    'value' => 'product',
+                ],
+                [
+                    'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.category'),
+                    'value' => 'category',
+                ],
+                [
+                    'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.cms-page'),
+                    'value' => 'cms_page',
+                ],
+            ],
+            'sortable'         => true,
         ]);
 
         $this->addColumn([
@@ -74,46 +87,34 @@ class URLRewriteDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'redirect_type',
-            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.redirect-type'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => [
-                        [
-                            'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.temporary-redirect'),
-                            'value' => 302,
-                        ],
-                        [
-                            'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.permanent-redirect'),
-                            'value' => 301,
-                        ],
-                    ],
+            'index'              => 'redirect_type',
+            'label'              => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.redirect-type'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => [
+                [
+                    'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.temporary-redirect'),
+                    'value' => 302,
+                ],
+                [
+                    'label' => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.permanent-redirect'),
+                    'value' => 301,
                 ],
             ],
-            'searchable' => false,
-            'filterable' => true,
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'locale',
-            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.locale'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => core()->getAllLocales()
-                        ->map(fn ($locale) => ['label' => $locale->name, 'value' => $locale->code])
-                        ->values()
-                        ->toArray(),
-                ],
-            ],
-            'searchable' => false,
-            'filterable' => true,
+            'index'              => 'locale',
+            'label'              => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.locale'),
+            'type'               => 'string',
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => core()->getAllLocales()
+                ->map(fn ($locale) => ['label' => $locale->name, 'value' => $locale->code])
+                ->values()
+                ->toArray(),
             'sortable'   => true,
         ]);
     }

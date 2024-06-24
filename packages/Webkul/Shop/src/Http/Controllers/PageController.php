@@ -15,8 +15,7 @@ class PageController extends Controller
     public function __construct(
         protected PageRepository $pageRepository,
         protected URLRewriteRepository $urlRewriteRepository
-    ) {
-    }
+    ) {}
 
     /**
      * To extract the page content and load it in the respective view file

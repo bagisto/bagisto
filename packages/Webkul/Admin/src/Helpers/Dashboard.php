@@ -22,8 +22,7 @@ class Dashboard
         protected Product $productReporting,
         protected Customer $customerReporting,
         protected Visitor $visitorReporting
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the overall statistics.

@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -27,8 +28,7 @@ class CartController extends Controller
         protected CustomerRepository $customerRepository,
         protected ProductRepository $productRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Cart.
@@ -152,7 +152,7 @@ class CartController extends Controller
     /**
      * Store address.
      */
-    public function storeAddress(CartAddressRequest $cartAddressRequest, int $id): JsonResource
+    public function storeAddress(CartAddressRequest $cartAddressRequest, int $id): JsonResource|JsonResponse
     {
         $cart = $this->cartRepository->findOrFail($id);
 
@@ -161,8 +161,8 @@ class CartController extends Controller
         Cart::setCart($cart);
 
         if (Cart::hasError()) {
-            return response()->json([
-                'message' => 'Something went wrong!',
+            return new JsonResponse([
+                'message' => implode(': ', Cart::getErrors()) ?: 'Something went wrong',
             ], Response::HTTP_BAD_REQUEST);
         }
 

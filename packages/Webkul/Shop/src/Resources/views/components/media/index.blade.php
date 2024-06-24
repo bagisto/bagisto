@@ -12,16 +12,16 @@
         <div class="mb-4 flex cursor-pointer flex-col rounded-lg">
             <div :class="{'border border-dashed border-gray-300 rounded-2xl': isDragOver }">
                 <div
-                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center rounded-xl bg-zinc-100 hover:bg-gray-100 max-sm:h-[100px] max-sm:w-[100px]"
+                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px]"
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 
-                        class="group relative flex h-[200px] w-[200px] max-sm:h-[100px] max-sm:w-[100px]"
+                        class="group relative flex h-[200px] w-[200px] max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px]"
                         @mouseenter="uploadedFiles.showDeleteButton = true"
                         @mouseleave="uploadedFiles.showDeleteButton = false"
                     >
                         <img
-                            class="rounded-xl object-cover max-sm:rounded-full"
+                            class="rounded-xl object-cover max-md:rounded-full"
                             :src="uploadedFiles.url"
                             :class="{'opacity-25' : uploadedFiles.showDeleteButton}"
                             alt="Uploaded Image"
@@ -39,7 +39,7 @@
 
                 <label 
                     for="file-input"
-                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-zinc-100 hover:bg-gray-100 max-sm:h-[100px] max-sm:w-[100px] max-sm:gap-1"
+                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px] max-sm:gap-1"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"

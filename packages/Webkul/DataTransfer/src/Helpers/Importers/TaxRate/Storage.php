@@ -24,9 +24,7 @@ class Storage
      *
      * @return void
      */
-    public function __construct(protected TaxRateRepository $taxRateRepository)
-    {
-    }
+    public function __construct(protected TaxRateRepository $taxRateRepository) {}
 
     /**
      * Initialize storage

@@ -68,14 +68,14 @@
                                 </p>
 
                                 <!-- Total Product Stock -->
-                                <p :class="[product.ttal_qty > 10 ? 'text-emerald-500' : 'text-red-500']">
+                                <p :class="[product.total_qty > {{ core()->getConfigData('catalog.inventory.stock_options.out_of_stock_threshold') }} ? 'text-emerald-500' : 'text-red-500']">
                                     @{{ "@lang('admin::app.dashboard.index.total-stock', ['total_stock' => ':replace'])".replace(':replace', product.total_qty) }}
                                 </p>
                             </div>
 
                             <!-- View More Icon -->
                             <a :href="'{{ route('admin.catalog.products.edit', ':replace') }}'.replace(':replace', product.id)">
-                                <span class="icon-sort-right cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
+                                <span class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                             </a>
                         </div>
                     </div>

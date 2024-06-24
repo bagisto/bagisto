@@ -19,8 +19,7 @@ class RefundController extends Controller
         protected OrderRepository $orderRepository,
         protected OrderItemRepository $orderItemRepository,
         protected RefundRepository $refundRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

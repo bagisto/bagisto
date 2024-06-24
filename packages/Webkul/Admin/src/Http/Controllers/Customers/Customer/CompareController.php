@@ -12,9 +12,7 @@ class CompareController extends Controller
     /**
      * Create a new controller instance.
      */
-    public function __construct(protected CompareItemRepository $compareItemRepository)
-    {
-    }
+    public function __construct(protected CompareItemRepository $compareItemRepository) {}
 
     /**
      * Returns the compare items of the customer.

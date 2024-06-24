@@ -16,9 +16,7 @@ class SitemapController extends Controller
      *
      * @return void
      */
-    public function __construct(public SitemapRepository $sitemapRepository)
-    {
-    }
+    public function __construct(public SitemapRepository $sitemapRepository) {}
 
     /**
      * Display a listing of the resource.

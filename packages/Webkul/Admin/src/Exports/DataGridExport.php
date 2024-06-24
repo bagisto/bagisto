@@ -5,6 +5,7 @@ namespace Webkul\Admin\Exports;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Webkul\DataGrid\DataGrid;
 
 class DataGridExport implements FromView, ShouldAutoSize
 {
@@ -14,26 +15,16 @@ class DataGridExport implements FromView, ShouldAutoSize
      * @param mixed DataGrid
      * @return void
      */
-    public function __construct(protected $gridData = [])
-    {
-    }
+    public function __construct(protected DataGrid $datagrid) {}
 
     /**
      * function to create a blade view for export.
      */
     public function view(): View
     {
-        $columns = [];
-
-        foreach ($this->gridData as $key => $gridData) {
-            $columns = array_keys((array) $gridData);
-
-            break;
-        }
-
         return view('admin::components.datagrid.export.temp', [
-            'columns' => $columns,
-            'records' => $this->gridData,
+            'columns' => $this->datagrid->getColumns(),
+            'records' => $this->datagrid->getQueryBuilder()->get(),
         ]);
     }
 }

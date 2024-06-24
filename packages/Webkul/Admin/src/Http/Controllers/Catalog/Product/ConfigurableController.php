@@ -15,8 +15,7 @@ class ConfigurableController extends Controller
     public function __construct(
         protected ProductRepository $productRepository,
         protected ConfigurableOption $configurableOptionHelper
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the compare items of the customer.

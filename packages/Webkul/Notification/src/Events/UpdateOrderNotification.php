@@ -17,9 +17,7 @@ class UpdateOrderNotification implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(protected $data)
-    {
-    }
+    public function __construct(protected $data) {}
 
     /**
      * Get the channels the event should broadcast on.

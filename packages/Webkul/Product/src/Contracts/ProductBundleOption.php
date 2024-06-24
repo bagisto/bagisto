@@ -2,6 +2,4 @@
 
 namespace Webkul\Product\Contracts;
 
-interface ProductBundleOption
-{
-}
+interface ProductBundleOption {}

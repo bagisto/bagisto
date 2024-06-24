@@ -33,7 +33,6 @@ class TaxCategoryDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.taxes.categories.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

@@ -32,9 +32,7 @@ class SKUStorage
      *
      * @return void
      */
-    public function __construct(protected ProductRepository $productRepository)
-    {
-    }
+    public function __construct(protected ProductRepository $productRepository) {}
 
     /**
      * Initialize storage

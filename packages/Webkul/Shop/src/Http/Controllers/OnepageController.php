@@ -16,6 +16,10 @@ class OnepageController extends Controller
      */
     public function index()
     {
+        if (! core()->getConfigData('sales.checkout.shopping_cart.cart_page')) {
+            abort(404);
+        }
+
         Event::dispatch('checkout.load.index');
 
         /**
@@ -23,7 +27,7 @@ class OnepageController extends Controller
          */
         if (
             ! auth()->guard('customer')->check()
-            && ! core()->getConfigData('catalog.products.guest_checkout.allow_guest_checkout')
+            && ! core()->getConfigData('sales.checkout.shopping_cart.allow_guest_checkout')
         ) {
             return redirect()->route('shop.customer.session.index');
         }
@@ -58,19 +62,6 @@ class OnepageController extends Controller
             )
         ) {
             return redirect()->route('shop.customer.session.index');
-        }
-
-        /**
-         * If cart minimum order amount is not satisfied then redirect back to the cart page
-         */
-        $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
-
-        if (! $cart->checkMinimumOrder()) {
-            session()->flash('warning', trans('shop::app.checkout.cart.minimum-order-message', [
-                'amount' => core()->currency($minimumOrderAmount),
-            ]));
-
-            return redirect()->back();
         }
 
         return view('shop::checkout.onepage.index', compact('cart'));

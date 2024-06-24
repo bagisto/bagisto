@@ -136,9 +136,7 @@ class SmartButton extends Paypal
      *
      * @return string
      */
-    public function getRedirectUrl()
-    {
-    }
+    public function getRedirectUrl() {}
 
     /**
      * Set up and return PayPal PHP SDK environment with PayPal access credentials.
