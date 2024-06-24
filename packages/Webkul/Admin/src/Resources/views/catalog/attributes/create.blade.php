@@ -638,6 +638,7 @@
                                 </label>
                             </x-admin::form.control-group>
 
+                            <!-- Use in Layered -->
                             <x-admin::form.control-group
                                 class="!mb-2 flex select-none items-center gap-2.5"
                                 ::class="{ 'opacity-70' : isFilterableDisabled }"
