@@ -3148,6 +3148,7 @@ return [
                 'new'                           => 'Novo',
                 'no'                            => 'Não',
                 'parent-id'                     => 'ID do Pai',
+                'category-id'                   => 'ID de categoria',
                 'preview'                       => 'Visualização',
                 'product-carousel'              => 'Carrossel de Produtos',
                 'product-carousel-description'  => 'Apresente produtos de forma elegante com um carrossel de produtos dinâmico e responsivo.',

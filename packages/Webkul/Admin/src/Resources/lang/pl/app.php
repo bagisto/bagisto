@@ -3148,6 +3148,7 @@ return [
                 'new'                           => 'Nowy',
                 'no'                            => 'Nie',
                 'parent-id'                     => 'Identyfikator nadrzędny',
+                'category-id'                   => 'ID kategorii',
                 'preview'                       => 'Podgląd',
                 'product-carousel'              => 'Karuzela produktów',
                 'product-carousel-description'  => 'Elegancko prezentuj produkty za pomocą dynamicznej i responsywnej karuzeli produktów.',
