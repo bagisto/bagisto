@@ -296,9 +296,9 @@ abstract class DataGrid
      *
      * @param  mixed  $queryBuilder
      */
-    public function setQueryBuilder($queryBuilder = null): void
+    public function setQueryBuilder($queryBuilder): void
     {
-        $this->queryBuilder = $queryBuilder ?: $this->prepareQueryBuilder();
+        $this->queryBuilder = $queryBuilder;
     }
 
     /**
@@ -389,7 +389,7 @@ abstract class DataGrid
      */
     public function downloadExportFile()
     {
-        return $this->exportFile;
+        return $this->getExportFile();
     }
 
     /**
@@ -418,13 +418,7 @@ abstract class DataGrid
      */
     public function toJson()
     {
-        $this->prepare();
-
-        if ($this->getExportable()) {
-            return $this->getExportFile();
-        }
-
-        return response()->json($this->formatData());
+        return $this->process();
     }
 
     /**
@@ -444,12 +438,14 @@ abstract class DataGrid
     }
 
     /**
-     * Process all requested filters.
+     * Process requested filters.
      *
      * @return \Illuminate\Database\Query\Builder
      */
     protected function processRequestedFilters(array $requestedFilters)
     {
+        $this->dispatchEvent('process_request.filters.before', $this);
+
         foreach ($requestedFilters as $requestedColumn => $requestedValues) {
             if ($requestedColumn === 'all') {
                 $this->queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
@@ -469,7 +465,7 @@ abstract class DataGrid
             }
         }
 
-        return $this->queryBuilder;
+        $this->dispatchEvent('process_request.filters.after', $this);
     }
 
     /**
@@ -479,42 +475,38 @@ abstract class DataGrid
      */
     protected function processRequestedSorting($requestedSort)
     {
+        $this->dispatchEvent('process_request.sorting.before', $this);
+
         if (! $this->sortColumn) {
             $this->sortColumn = $this->primaryColumn;
         }
 
-        return $this->queryBuilder->orderBy($requestedSort['column'] ?? $this->sortColumn, $requestedSort['order'] ?? $this->sortOrder);
+        $this->queryBuilder->orderBy($requestedSort['column'] ?? $this->sortColumn, $requestedSort['order'] ?? $this->sortOrder);
+
+        $this->dispatchEvent('process_request.sorting.after', $this);
     }
 
     /**
      * Process requested pagination.
      */
-    protected function processRequestedPagination($requestedPagination): LengthAwarePaginator
+    protected function processRequestedPagination(array $requestedPagination): void
     {
-        return $this->queryBuilder->paginate(
+        $this->dispatchEvent('process_request.paginated.before', $this);
+
+        $this->paginator = $this->queryBuilder->paginate(
             $requestedPagination['per_page'] ?? $this->itemsPerPage,
             ['*'],
             'page',
             $requestedPagination['page'] ?? 1
         );
-    }
-
-    /**
-     * Process paginated request.
-     */
-    protected function processPaginatedRequest(array $requestedParams): void
-    {
-        $this->dispatchEvent('process_request.paginated.before', $this);
-
-        $this->paginator = $this->processRequestedPagination($requestedParams['pagination'] ?? []);
 
         $this->dispatchEvent('process_request.paginated.after', $this);
     }
 
     /**
-     * Process export request.
+     * Process requested export.
      */
-    protected function processExportRequest(array $requestedParams): void
+    protected function processRequestedExport(string $format = 'csv'): void
     {
         $this->dispatchEvent('process_request.export.before', $this);
 
@@ -522,7 +514,7 @@ abstract class DataGrid
 
         $this->setExportFileName(Str::random(36));
 
-        $this->setExportFile($requestedParams['format']);
+        $this->setExportFile($format);
 
         $this->dispatchEvent('process_request.export.after', $this);
     }
@@ -539,17 +531,17 @@ abstract class DataGrid
          */
         $requestedParams = $this->validatedRequest();
 
-        $this->queryBuilder = $this->processRequestedFilters($requestedParams['filters'] ?? []);
+        $this->processRequestedFilters($requestedParams['filters'] ?? []);
 
-        $this->queryBuilder = $this->processRequestedSorting($requestedParams['sort'] ?? []);
+        $this->processRequestedSorting($requestedParams['sort'] ?? []);
 
         /**
          * The `export` parameter is validated as a boolean in the `validatedRequest`. An `empty` function will not work,
          * as it will always be treated as true because of "0" and "1".
          */
         isset($requestedParams['export']) && (bool) $requestedParams['export']
-            ? $this->processExportRequest($requestedParams)
-            : $this->processPaginatedRequest($requestedParams);
+            ? $this->processRequestedExport($requestedParams['format'] ?? null)
+            : $this->processRequestedPagination($requestedParams['pagination'] ?? []);
 
         $this->dispatchEvent('process_request.after', $this);
     }
@@ -686,22 +678,45 @@ abstract class DataGrid
     {
         $this->dispatchEvent('prepare.before', $this);
 
+        /**
+         * Prepare columns.
+         */
+        $this->dispatchEvent('columns.prepare.before', $this);
+
         $this->prepareColumns();
 
         $this->dispatchEvent('columns.prepare.after', $this);
+
+        /**
+         * Prepare actions.
+         */
+        $this->dispatchEvent('actions.prepare.before', $this);
 
         $this->prepareActions();
 
         $this->dispatchEvent('actions.prepare.after', $this);
 
+        /**
+         * Prepare mass actions.
+         */
+        $this->dispatchEvent('mass_actions.prepare.before', $this);
+
         $this->prepareMassActions();
 
         $this->dispatchEvent('mass_actions.prepare.after', $this);
 
-        $this->setQueryBuilder();
+        /**
+         * Prepare query builder.
+         */
+        $this->dispatchEvent('query_builder.prepare.before', $this);
+
+        $this->setQueryBuilder($this->prepareQueryBuilder());
 
         $this->dispatchEvent('query_builder.prepare.after', $this);
 
+        /**
+         * Process request.
+         */
         $this->processRequest();
 
         $this->dispatchEvent('prepare.after', $this);
