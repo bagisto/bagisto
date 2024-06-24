@@ -304,43 +304,44 @@ class Installer extends Command
     {
         $databaseDetails = [
             'DB_CONNECTION' => select(
-                'Please select the database connection',
-                ['mysql', 'pgsql', 'sqlsrv']
+                label   : 'Please select the database connection',
+                options : ['mysql', 'pgsql', 'sqlsrv'],
+                default : 'mysql',
             ),
 
-            'DB_HOST'       => text(
-                label: 'Please enter the database host',
-                default: env('DB_HOST', '127.0.0.1'),
-                required: true
+            'DB_HOST' => text(
+                label    : 'Please enter the database host',
+                default  : env('DB_HOST', '127.0.0.1'),
+                required : true
             ),
 
-            'DB_PORT'       => text(
-                label: 'Please enter the database port',
-                default: env('DB_PORT', '3306'),
-                required: true
+            'DB_PORT' => text(
+                label    : 'Please enter the database port',
+                default  : env('DB_PORT', '3306'),
+                required : true
             ),
 
             'DB_DATABASE' => text(
-                label: 'Please enter the database name',
-                default: env('DB_DATABASE', ''),
-                required: true
+                label    : 'Please enter the database name',
+                default  : env('DB_DATABASE', ''),
+                required : true
             ),
 
             'DB_PREFIX' => text(
-                label: 'Please enter the database prefix',
-                default: env('DB_PREFIX', ''),
-                hint: 'or press enter to continue'
+                label   : 'Please enter the database prefix',
+                default : env('DB_PREFIX', ''),
+                hint    : 'or press enter to continue'
             ),
 
             'DB_USERNAME' => text(
-                label: 'Please enter your database username',
-                default: env('DB_USERNAME', ''),
-                required: true
+                label    : 'Please enter your database username',
+                default  : env('DB_USERNAME', ''),
+                required : true
             ),
 
             'DB_PASSWORD' => password(
-                label: 'Please enter your database password',
-                required: false
+                label    : 'Please enter your database password',
+                required : false
             ),
         ];
 
@@ -366,29 +367,31 @@ class Installer extends Command
     protected function createAdminCredentials()
     {
         $adminName = text(
-            label: 'Enter the name of the admin user',
-            default: 'Example',
-            required: true
+            label    : 'Enter the name of the admin user',
+            default  : 'Example',
+            required : true
         );
 
         $adminEmail = text(
-            label: 'Enter the email address of the admin user',
-            default: 'admin@example.com',
-            validate: fn (string $value) => match (true) {
+            label    : 'Enter the email address of the admin user',
+            default  : 'admin@example.com',
+            validate : fn (string $value) => match (true) {
                 ! filter_var($value, FILTER_VALIDATE_EMAIL) => 'The email address you entered is not valid please try again.',
                 default                                     => null
             }
         );
 
         $adminPassword = text(
-            label: 'Configure the password for the admin user',
-            default: 'admin123',
-            required: true
+            label    : 'Configure the password for the admin user',
+            default  : 'admin123',
+            required : true
         );
 
         $sampleProduct = select(
-            'Please select if you want some sample products after installation.',
-            ['false', 'true'],
+            label   : 'Please select if you want some sample products after installation.',
+            options : ['true', 'false'],
+            default : 'false',
+            hint    : 'The action will create products after installation.',
         );
 
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
@@ -406,7 +409,11 @@ class Installer extends Command
             );
 
             if ($sampleProduct === 'true') {
+                $this->warn('Step: Seeding sample product data. Please Wait...');
+
                 app(DatabaseManager::class)->seedSampleProducts($this->applicationDetails);
+
+                $this->info('Product Creation Completed...');
             }
 
             $filePath = storage_path('installed');
@@ -476,9 +483,9 @@ class Installer extends Command
     protected function updateEnvVariable(string $key, string $question, string $defaultValue): void
     {
         $input = text(
-            label: $question,
-            default: $defaultValue,
-            required: true
+            label    : $question,
+            default  : $defaultValue,
+            required : true
         );
 
         $this->envUpdate($key, $input ?: $defaultValue);
