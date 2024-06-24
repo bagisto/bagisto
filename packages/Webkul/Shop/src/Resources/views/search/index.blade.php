@@ -25,8 +25,10 @@
         @endif
 
         <div class="mt-8 flex items-center justify-between max-md:mt-5">
-            <h1 class="text-2xl font-medium max-sm:text-base">
-                {{ $title }}
+            <h1 
+                class="text-2xl font-medium max-sm:text-base" 
+                v-text="'{{ $title }}'"
+            >    
             </h1>
         </div>
     </div>
