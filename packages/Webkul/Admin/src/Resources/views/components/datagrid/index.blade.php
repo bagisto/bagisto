@@ -447,12 +447,13 @@
                  *
                  * @returns {void}
                  */
-                 updateExportComponent() {
+                updateExportComponent() {
                     /**
                      * This event should be fired whenever new results appear. This allows the export feature to
                      * listen to it and update its properties accordingly.
                      */
                      this.$emitter.emit('change-datagrid', {
+                        src: this.src,
                         available: this.available,
                         applied: this.applied
                     });
