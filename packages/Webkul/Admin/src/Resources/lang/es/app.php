@@ -3560,6 +3560,9 @@ return [
                     'review' => [
                         'allow-customer-review' => 'Permitir reseñas de clientes',
                         'allow-guest-review'    => 'Permitir reseñas de invitados',
+                        'display-review-count'  => 'Muestra el recuento de reseñas para las calificaciones.',
+                        'display-star-count'    => 'Muestra el recuento de estrellas en las calificaciones.',
+                        'summary'               => 'Resumen',
                         'title'                 => 'Reseña',
                         'title-info'            => 'Evaluación o valoración de algo, a menudo involucrando opiniones y comentarios.',
                     ],

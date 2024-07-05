@@ -3560,6 +3560,9 @@ return [
                     'review' => [
                         'allow-customer-review' => 'Permitir Avaliação do Cliente',
                         'allow-guest-review'    => 'Permitir Avaliação de Convidado',
+                        'display-review-count'  => 'Exiba a contagem de avaliações para classificações.',
+                        'display-star-count'    => 'Exiba a contagem de estrelas nas avaliações.',
+                        'summary'               => 'Resumo',
                         'title'                 => 'Avaliação',
                         'title-info'            => 'Avaliação ou avaliação de algo, envolvendo frequentemente opiniões e feedback.',
                     ],

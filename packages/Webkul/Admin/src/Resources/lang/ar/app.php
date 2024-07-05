@@ -3560,6 +3560,9 @@ return [
                     'review' => [
                         'allow-customer-review' => 'السماح بمراجعة العملاء',
                         'allow-guest-review'    => 'السماح بمراجعة الضيف',
+                        'display-review-count'  => 'عرض عدد المراجعة للتقييمات.',
+                        'display-star-count'    => 'عرض عدد النجوم في التقييمات.',
+                        'summary'               => 'ملخص',
                         'title'                 => 'المراجعة',
                         'title-info'            => 'تقييم أو تقييم شيء ما، وغالبًا ما ينطوي على آراء وتعليقات.',
                     ],
