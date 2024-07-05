@@ -1,14 +1,6 @@
 <div class="container px-[60px] max-1180:px-0">
     <div class="mt-12 flex gap-10 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
 
-        <div class="scrollbar-hide flex gap-8 overflow-auto 1180:hidden">
-            <div class="shimmer min-h-[487px] min-w-[450px] max-sm:h-[533px] max-sm:min-w-[490px]"></div>
-            <div class="shimmer min-h-[487px] min-w-[450px] max-sm:h-[533px] max-sm:min-w-[490px]"></div>
-            <div class="shimmer min-h-[487px] min-w-[450px] max-sm:h-[533px] max-sm:min-w-[490px]"></div>
-            <div class="shimmer min-h-[487px] min-w-[450px] max-sm:h-[533px] max-sm:min-w-[490px]"></div>
-            <div class="shimmer min-h-[487px] min-w-[450px] max-sm:h-[533px] max-sm:min-w-[490px]"></div>
-        </div>
-    
         <x-shop::shimmer.products.gallery />
 
         <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5">
