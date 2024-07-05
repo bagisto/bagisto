@@ -475,7 +475,7 @@
                                     @change="inputValidation=true"
                                 >
                                     <!-- Here! All Needed types are defined -->
-                                    @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
+                                    @foreach(['numeric', 'email', 'decimal', 'url', 'regex'] as $type)
                                         <option value="{{ $type }}">
                                             @lang('admin::app.catalog.attributes.create.' . $type)
                                         </option>
