@@ -24,6 +24,7 @@ class SavedFilter extends Model implements SavedFilterContract
      */
     protected $fillable = [
         'user_id',
+        'user_type',
         'src',
         'name',
         'applied',

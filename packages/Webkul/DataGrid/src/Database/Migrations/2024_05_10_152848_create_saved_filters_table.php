@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('datagrid_saved_filters', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
+            $table->morphs('user');
             $table->string('name');
             $table->string('src');
             $table->json('applied');

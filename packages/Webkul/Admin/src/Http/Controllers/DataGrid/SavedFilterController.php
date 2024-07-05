@@ -18,19 +18,24 @@ class SavedFilterController extends Controller
      */
     public function store()
     {
-        $userId = auth()->guard('admin')->user()->id;
+        $user = auth()->guard(request()->segment(1))->user();
+
+        if(! $user) {
+            return response()->json([], 404);
+        }
 
         $this->validate(request(), [
-            'name' => 'required|unique:datagrid_saved_filters,name,NULL,id,src,'.request('src').',user_id,'.$userId,
+            'name' => 'required|unique:datagrid_saved_filters,name,NULL,id,src,'.request('src').',user_id,'.$user->id,
         ]);
 
         Event::dispatch('datagrid.saved_filter.create.before');
 
         $savedFilter = $this->savedFilterRepository->create([
-            'user_id' => $userId,
-            'name'    => request('name'),
-            'src'     => request('src'),
-            'applied' => request('applied'),
+            'user_id'   => $user->id,
+            'user_type' => get_class($user),
+            'name'      => request('name'),
+            'src'       => request('src'),
+            'applied'   => request('applied'),
         ]);
 
         Event::dispatch('datagrid.saved_filter.create.after', $savedFilter);
@@ -46,9 +51,12 @@ class SavedFilterController extends Controller
      */
     public function get()
     {
+        $user = auth()->guard(request()->segment(1))->user();
+
         $savedFilters = $this->savedFilterRepository->findWhere([
-            'src'     => request()->get('src'),
-            'user_id' => auth()->guard('admin')->user()->id,
+            'src'       => request()->get('src'),
+            'user_id'   => $user->id,
+            'user_type' => get_class($user),
         ]);
 
         return response()->json(['data' => $savedFilters]);
@@ -59,15 +67,16 @@ class SavedFilterController extends Controller
      */
     public function update(int $id)
     {
-        $userId = auth()->guard('admin')->user()->id;
+        $user = auth()->guard(request()->segment(1))->user();
 
         $this->validate(request(), [
-            'name' => 'required|unique:datagrid_saved_filters,name,'.$id.',id,src,'.request('src').',user_id,'.$userId,
+            'name' => 'required|unique:datagrid_saved_filters,name,'.$id.',id,src,'.request('src').',user_id,'.$user->id,
         ]);
 
         $savedFilter = $this->savedFilterRepository->findOneWhere([
             'id'      => $id,
-            'user_id' => auth()->guard('admin')->user()->id,
+            'user_id' => $user->id,
+            'user_type' => get_class($user),
         ]);
 
         if (! $savedFilter) {
@@ -95,11 +104,18 @@ class SavedFilterController extends Controller
      */
     public function destroy(int $id)
     {
+        $user = auth()->guard(request()->segment(1))->user();
+
+        if(! $user) {
+            return response()->json([], 404);
+        }
+
         Event::dispatch('datagrid.saved_filter.delete.before', $id);
 
         $success = $this->savedFilterRepository->deleteWhere([
             'id'      => $id,
-            'user_id' => auth()->guard('admin')->user()->id,
+            'user_id' => $user->id,
+            'user_type' => get_class($user),
         ]);
 
         Event::dispatch('datagrid.saved_filter.delete.after', $id);
