@@ -3560,6 +3560,9 @@ return [
                     'review' => [
                         'allow-customer-review' => 'Autoriser les avis des clients',
                         'allow-guest-review'    => 'Autoriser les avis des invités',
+                        'display-review-count'  => 'Affichez le nombre d\'avis pour les notes.',
+                        'display-star-count'    => 'Affichez le nombre d\'étoiles dans les notes.',
+                        'summary'               => 'Résumé',
                         'title'                 => 'Avis',
                         'title-info'            => 'Évaluation ou évaluation de quelque chose, impliquant souvent des opinions et des commentaires.',
                     ],

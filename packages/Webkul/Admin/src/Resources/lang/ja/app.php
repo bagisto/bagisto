@@ -3560,6 +3560,9 @@ return [
                     'review' => [
                         'allow-customer-review' => '顧客レビューを許可する',
                         'allow-guest-review'    => 'ゲストレビューを許可する',
+                        'display-review-count'  => '評価のレビュー数を表示します。',
+                        'display-star-count'    => '評価に星の数を表示します。',
+                        'summary'               => 'まとめ',
                         'title'                 => 'レビュー',
                         'title-info'            => '何かを評価または評価することで、しばしば意見やフィードバックが含まれます。',
                     ],

@@ -3560,6 +3560,9 @@ return [
                     'review' => [
                         'allow-customer-review' => '允许客户评价',
                         'allow-guest-review'    => '允许访客评价',
+                        'display-review-count'  => '显示评级的评论计数。',
+                        'display-star-count'    => '显示评分中的星级数。',
+                        'summary'               => '概括',
                         'title'                 => '评价',
                         'title-info'            => '对某物进行评估或评价，通常涉及意见和反馈。',
                     ],
