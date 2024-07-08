@@ -25,18 +25,21 @@
 
 **Impact Probability: Medium**
 
-1. For consistency, we have added a new `getExportFile` method and deprecated the `downloadExportFile` method.
+1. Moved the `DataGridExport` class to the DataGrid package and enhanced the new exporter class with the `WithQuery` interface instead of `WithView`. This change reduces the need for temporary file creation.
+
+2. We have removed the `exportFile` properties and all its associated method i.e. `setExportFile` and `getExportFile`,
 
 ```diff
-- $this->downloadExportFile();
-+ $this->getExportFile();
+- protected mixed $exportFile = null;
+- public function setExportFile($format = 'csv')
+- public function getExportFile()
 ```
 
-2. We have removed two methods: `processPaginatedRequest` and `processExportRequest`.
+3. We have removed two methods: `processPaginatedRequest` and `processExportRequest`.
 
 ```diff
 - $this->processPaginatedRequest();
 - $this->processExportRequest();
 ```
 
-3. Removed all the events from the setter methods to avoid duplicate dispatching.
+4. Removed all the events from the setter methods to avoid duplicate dispatching.
