@@ -86,14 +86,14 @@ abstract class DataGrid
     protected bool $exportable = false;
 
     /**
-     * Export meta information.
-     */
-    protected mixed $exportFile = null;
-
-    /**
      * Export file name.
      */
     protected string $exportFileName;
+
+    /**
+     * Export file format.
+     */
+    protected string $exportFileExtension = 'csv';
 
     /**
      * Prepare query builder.
@@ -344,6 +344,14 @@ abstract class DataGrid
     }
 
     /**
+     * Is exportable.
+     */
+    public function isExportable(): bool
+    {
+        return $this->getExportable();
+    }
+
+    /**
      * Set export file name.
      */
     public function setExportFileName(string $exportFileName): void
@@ -360,36 +368,45 @@ abstract class DataGrid
     }
 
     /**
-     * Set export file.
-     *
-     * @param  string  $format
-     * @return void
+     * Set export file extension.
      */
-    public function setExportFile($format = 'csv')
+    public function setExportFileExtension(string $exportFileExtension = 'csv'): void
     {
-        $this->exportFile = Excel::download(new DataGridExport($this), $this->exportFileName.'.'.$format);
+        $this->exportFileExtension = $exportFileExtension;
     }
 
     /**
-     * Get export file.
-     *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * Get export file extension.
      */
-    public function getExportFile()
+    public function getExportFileExtension(): string
     {
-        return $this->exportFile;
+        return $this->exportFileExtension;
+    }
+
+    /**
+     * Get exporter.
+     */
+    public function getExporter()
+    {
+        return new DataGridExport($this);
+    }
+
+    /**
+     * Get export file name with extension.
+     */
+    public function getExportFileNameWithExtension(): string
+    {
+        return $this->getExportFileName().'.'.$this->getExportFileExtension();
     }
 
     /**
      * Download export file.
      *
-     * @deprecated
-     *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function downloadExportFile()
     {
-        return $this->getExportFile();
+        return Excel::download($this->getExporter(), $this->getExportFileNameWithExtension());
     }
 
     /**
@@ -401,8 +418,8 @@ abstract class DataGrid
     {
         $this->prepare();
 
-        if ($this->getExportable()) {
-            return $this->getExportFile();
+        if ($this->isExportable()) {
+            return $this->downloadExportFile();
         }
 
         return response()->json($this->formatData());
@@ -506,7 +523,7 @@ abstract class DataGrid
     /**
      * Process requested export.
      */
-    protected function processRequestedExport(string $format = 'csv'): void
+    protected function processRequestedExport(string $exportFileExtension = 'csv'): void
     {
         $this->dispatchEvent('process_request.export.before', $this);
 
@@ -514,7 +531,7 @@ abstract class DataGrid
 
         $this->setExportFileName(Str::random(36));
 
-        $this->setExportFile($format);
+        $this->setExportFileExtension($exportFileExtension);
 
         $this->dispatchEvent('process_request.export.after', $this);
     }
