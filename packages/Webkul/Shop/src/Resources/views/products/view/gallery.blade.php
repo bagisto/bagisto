@@ -34,6 +34,7 @@
                                 :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
                                 @click="change(media, index)"
                                 alt="{{ $product->name }}"
+                                tabindex="0"
                             >
                                 <source
                                     :src="media.video_url"
@@ -48,6 +49,7 @@
                                 alt="{{ $product->name }}"
                                 width="100"
                                 height="100"
+                                tabindex="0"
                                 @click="change(media, index)"
                             />
                         </template>
@@ -84,12 +86,14 @@
                         alt="{{ $product->name }}"
                         width="560"
                         height="610"
+                        tabindex="0"
                         @click="isImageZooming = !isImageZooming"
                         @load="onMediaLoad()"
                     />
 
                     <div
                         class="min-w-[450px] cursor-pointer rounded-xl"
+                        tabindex="0"
                         v-if="baseFile.type == 'video'"
                     >
                         <video

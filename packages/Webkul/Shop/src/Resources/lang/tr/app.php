@@ -414,8 +414,6 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Varsayılan dil',
-                        'offer'          => 'İlk siparişinizde %40\'a varan İNDİRİM alın',
-                        'shop-now'       => 'ŞİMDİ ALIŞVERİŞ YAP',
                     ],
                 ],
 

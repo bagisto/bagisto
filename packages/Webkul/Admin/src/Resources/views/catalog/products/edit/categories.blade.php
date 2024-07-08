@@ -43,8 +43,7 @@
                     ::items="categories"
                     :value="json_encode($product->categories->pluck('id'))"
                     :fallback-locale="config('app.fallback_locale')"
-                >
-                </x-admin::tree.view>
+                />
             </template>
         </div>
     </script>
