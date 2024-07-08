@@ -51,6 +51,19 @@ class Review
     }
 
     /**
+     * Returns the total active feedback of the product
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return int
+     */
+    public function getTotalFeedback($product)
+    {
+        return core()->getConfigData('catalog.products.review.summary') == 'star_counts'
+            ? $this->getTotalRating($product)
+            : $this->getTotalReviews($product);
+    }
+
+    /**
      * Returns reviews with ratings.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
