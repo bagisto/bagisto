@@ -29,6 +29,7 @@
                         ::src="image.image"
                         ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
                         ::alt="image?.title"
+                        tabindex="0"
                     />
                 </div>
             </div>
@@ -68,6 +69,8 @@
                     v-for="(image, index) in images"
                     class="mx-1 h-3 w-3 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5"
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
+                    role="button"
+                    tabindex="0"
                     @click="navigateByPagination(index)"
                 >
                 </div>

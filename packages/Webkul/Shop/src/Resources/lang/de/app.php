@@ -414,8 +414,6 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Standardsprache',
-                        'offer'          => 'Erhalten Sie bis zu 40% Rabatt auf Ihre erste Bestellung',
-                        'shop-now'       => 'JETZT KAUFEN',
                     ],
                 ],
 

@@ -414,8 +414,6 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Standaardtaal',
-                        'offer'          => 'Krijg TOT 40% KORTING op je 1e bestelling',
-                        'shop-now'       => 'KOOP NU',
                     ],
                 ],
 

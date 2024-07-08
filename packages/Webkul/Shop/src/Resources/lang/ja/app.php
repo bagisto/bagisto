@@ -414,8 +414,6 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'デフォルトのロケール',
-                        'offer'          => '初回注文で最大40％オフ',
-                        'shop-now'       => '今すぐ購入',
                     ],
                 ],
 

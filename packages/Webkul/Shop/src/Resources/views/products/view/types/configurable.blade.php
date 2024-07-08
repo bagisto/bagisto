@@ -95,6 +95,7 @@
 
                                         <span
                                             class="h-8 w-8 rounded-full border border-opacity-10 max-sm:h-[25px] max-sm:w-[25px]"
+                                            tabindex="0"
                                             :style="{ 'background-color': option.swatch_value, 'border-color': option.swatch_value}"
                                         ></span>
                                     </label>
@@ -167,7 +168,11 @@
                                             @{{ option.label }}
                                         </span>
 
-                                        <span class="pointer-events-none absolute -inset-px rounded-full"></span>
+                                        <span
+                                            class="pointer-events-none absolute -inset-px rounded-full"
+                                            role="presentation"
+                                        >
+                                        </span>
                                     </label>
                                 </template>
                             </template>

@@ -414,8 +414,6 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Default locale',
-                        'offer'          => 'Get UPTO 40% OFF on your 1st order',
-                        'shop-now'       => 'SHOP NOW',
                     ],
                 ],
 
