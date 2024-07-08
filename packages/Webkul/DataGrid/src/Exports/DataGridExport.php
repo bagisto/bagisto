@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Exports;
+namespace Webkul\DataGrid\Exports;
 
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
