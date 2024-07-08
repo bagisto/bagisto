@@ -100,7 +100,11 @@
                  * @param {object} data - Object containing available and applied properties.
                  * @returns {void}
                  */
-                updateProperties({ available, applied }) {
+                updateProperties({ src, available, applied }) {
+                    if (this.src !== src) {
+                        return;
+                    }
+
                     this.available = available;
 
                     this.applied = applied;
@@ -147,11 +151,26 @@
                                 const url = window.URL.createObjectURL(new Blob([response.data]));
 
                                 /**
+                                 * Extracting filename from content-disposition header.
+                                 */
+                                let filename = `${(Math.random() + 1).toString(36).substring(7)}.${this.format}`;
+
+                                const contentDisposition = response.headers['content-disposition'];
+
+                                if (contentDisposition && contentDisposition.indexOf('attachment') !== -1) {
+                                    const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+
+                                    if (filenameMatch != null && filenameMatch[1]) {
+                                        filename = filenameMatch[1].replace(/['"]/g, '');
+                                    }
+                                }
+
+                                /**
                                  * Link generation.
                                  */
                                 const link = document.createElement('a');
                                 link.href = url;
-                                link.setAttribute('download', `${(Math.random() + 1).toString(36).substring(7)}.${this.format}`);
+                                link.setAttribute('download', filename);
 
                                 /**
                                  * Adding a link to a document, clicking on the link, and then removing the link.
