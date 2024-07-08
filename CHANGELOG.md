@@ -2,7 +2,22 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.2.1 (24th of June 2024)** - *Release*
+## **v2.2.2 (8th of July 2024)** - *Release*
+
+* #9972 [improvements] - The new reviews display system does not make sense
+
+* #9963 [fixed] - When creating a product, getting console error in Number Validation when attribute created. 
+
+* #9971 [fixed] - Images are not changing in mobile view in configurable product according to the Color swatch what is selected. 
+
+[fixed] - Added missing CSS classes for dark themes.
+
+[fixed] - Fix the translation issue on the error page.
+
+[fixed] - Fixed CMS page email send status issue on Update. 
+
+
+## **v2.2.1 (24th of June 2024)** - *Rele1ase*
 
 * #9955 [fixed] - Cart Rule -> Category is not being retained even after we have selected and saved it.
 
