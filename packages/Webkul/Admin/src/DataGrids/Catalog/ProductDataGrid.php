@@ -133,6 +133,7 @@ class ProductDataGrid extends DataGrid
             'index'      => 'base_image',
             'label'      => trans('admin::app.catalog.products.index.datagrid.image'),
             'type'       => 'string',
+            'exportable' => false,
         ]);
 
         $this->addColumn([

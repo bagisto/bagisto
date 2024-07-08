@@ -189,6 +189,7 @@ class OrderDataGrid extends DataGrid
             'index'      => 'items',
             'label'      => trans('admin::app.sales.orders.index.datagrid.items'),
             'type'       => 'string',
+            'exportable' => false,
             'closure'    => function ($value) {
                 $order = app(OrderRepository::class)->with('items')->find($value->id);
 

@@ -43,13 +43,7 @@ class DataGridExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMap
     {
         return collect($this->datagrid->getColumns())
             ->filter(fn ($column) => $column->getExportable())
-            ->map(function ($column) use ($record) {
-                $closure = $column->getClosure();
-
-                return $closure
-                    ? $closure($record)
-                    : $record->{$column->getIndex()};
-            })
+            ->map(fn ($column) => $record->{$column->getIndex()})
             ->toArray();
     }
 }
