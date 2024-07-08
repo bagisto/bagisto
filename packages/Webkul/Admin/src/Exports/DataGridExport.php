@@ -2,29 +2,52 @@
 
 namespace Webkul\Admin\Exports;
 
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 use Webkul\DataGrid\DataGrid;
 
-class DataGridExport implements FromView, ShouldAutoSize
+class DataGridExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMapping
 {
     /**
      * Create a new instance.
      *
-     * @param mixed DataGrid
      * @return void
      */
     public function __construct(protected DataGrid $datagrid) {}
 
     /**
-     * function to create a blade view for export.
+     * Query.
      */
-    public function view(): View
+    public function query(): mixed
     {
-        return view('admin::components.datagrid.export.temp', [
-            'columns' => $this->datagrid->getColumns(),
-            'records' => $this->datagrid->getQueryBuilder()->get(),
-        ]);
+        return $this->datagrid->getQueryBuilder();
+    }
+
+    /**
+     * Headings.
+     */
+    public function headings(): array
+    {
+        return collect($this->datagrid->getColumns())
+            ->map(fn ($column) => $column->getLabel())
+            ->toArray();
+    }
+
+    /**
+     * Mapping.
+     */
+    public function map(mixed $record): array
+    {
+        return collect($this->datagrid->getColumns())
+            ->map(function ($column) use ($record) {
+                $closure = $column->getClosure();
+
+                return $closure
+                    ? $closure($record)
+                    : $record->{$column->getIndex()};
+            })
+            ->toArray();
     }
 }
