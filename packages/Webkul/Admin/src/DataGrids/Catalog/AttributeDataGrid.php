@@ -125,8 +125,8 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure' => function ($value) {
-                return trans('admin::app.catalog.attributes.index.datagrid.' . ($value->is_required ? 'true' : 'false'));
+            'closure'    => function ($value) {
+                return trans('admin::app.catalog.attributes.index.datagrid.'.($value->is_required ? 'true' : 'false'));
             },
         ]);
 
@@ -137,8 +137,8 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure' => function ($value) {
-                return trans('admin::app.catalog.attributes.index.datagrid.' . ($value->is_unique ? 'true' : 'false'));
+            'closure'    => function ($value) {
+                return trans('admin::app.catalog.attributes.index.datagrid.'.($value->is_unique ? 'true' : 'false'));
             },
         ]);
 
@@ -149,8 +149,8 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure' => function ($value) {
-                return trans('admin::app.catalog.attributes.index.datagrid.' . ($value->value_per_locale ? 'true' : 'false'));
+            'closure'    => function ($value) {
+                return trans('admin::app.catalog.attributes.index.datagrid.'.($value->value_per_locale ? 'true' : 'false'));
             },
         ]);
 
@@ -161,8 +161,8 @@ class AttributeDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure' => function ($value) {
-                return trans('admin::app.catalog.attributes.index.datagrid.' . ($value->value_per_channel ? 'true' : 'false'));
+            'closure'    => function ($value) {
+                return trans('admin::app.catalog.attributes.index.datagrid.'.($value->value_per_channel ? 'true' : 'false'));
             },
         ]);
 
