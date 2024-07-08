@@ -328,6 +328,12 @@
                                     },
                                 ],
                             },
+                            {
+                                id: 'category_id',
+                                code: 'category_id',
+                                type: 'text',
+                                name: '@lang('admin::app.settings.themes.edit.category-id')',
+                            },
                             ...@json(app(Webkul\Attribute\Repositories\AttributeRepository::class)->getFilterableAttributes()),
                         ],
 

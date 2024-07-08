@@ -2,6 +2,4 @@
 
 namespace Webkul\Core\Contracts;
 
-interface Locale
-{
-}
+interface Locale {}

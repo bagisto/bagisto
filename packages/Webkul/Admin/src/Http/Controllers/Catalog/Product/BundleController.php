@@ -15,8 +15,7 @@ class BundleController extends Controller
     public function __construct(
         protected ProductRepository $productRepository,
         protected BundleOption $bundleOptionHelper
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the compare items of the customer.

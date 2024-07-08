@@ -36,8 +36,7 @@ class InstallerController extends Controller
         protected ServerRequirements $serverRequirements,
         protected EnvironmentManager $environmentManager,
         protected DatabaseManager $databaseManager
-    ) {
-    }
+    ) {}
 
     /**
      * Installer View Root Page

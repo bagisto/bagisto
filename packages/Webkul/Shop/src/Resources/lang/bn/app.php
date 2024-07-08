@@ -414,8 +414,6 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'ডিফল্ট লোকেল',
-                        'offer'          => 'আপনার ১ম অর্ডারে ৪০% ছাড়',
-                        'shop-now'       => 'এখনই কিনুন',
                     ],
                 ],
 
@@ -739,6 +737,7 @@ return [
             'mini-cart' => [
                 'continue-to-checkout' => 'চেকআউট চালিয়ে যান',
                 'empty-cart'           => 'আপনার কার্ট খালি',
+                'excl-tax'             => 'බද. බද්ද:',
                 'offer-on-orders'      => 'আপনার 1 ম অর্ডারে 30% ছাড়',
                 'remove'               => 'সরান',
                 'see-details'          => 'বিশদ দেখুন',

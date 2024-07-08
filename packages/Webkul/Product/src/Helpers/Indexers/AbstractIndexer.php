@@ -26,9 +26,7 @@ abstract class AbstractIndexer
      *
      * @return void
      */
-    public function reindexFull()
-    {
-    }
+    public function reindexFull() {}
 
     /**
      * Reindex necessary products

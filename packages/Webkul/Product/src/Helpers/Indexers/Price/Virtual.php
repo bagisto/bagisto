@@ -2,6 +2,4 @@
 
 namespace Webkul\Product\Helpers\Indexers\Price;
 
-class Virtual extends AbstractType
-{
-}
+class Virtual extends AbstractType {}

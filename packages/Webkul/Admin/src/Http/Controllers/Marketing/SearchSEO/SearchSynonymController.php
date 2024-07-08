@@ -17,9 +17,7 @@ class SearchSynonymController extends Controller
      *
      * @return void
      */
-    public function __construct(public SearchSynonymRepository $searchSynonymRepository)
-    {
-    }
+    public function __construct(public SearchSynonymRepository $searchSynonymRepository) {}
 
     /**
      * Display a listing of the resource.

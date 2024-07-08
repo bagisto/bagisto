@@ -22,8 +22,7 @@ class InvoiceController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

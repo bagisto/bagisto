@@ -39,8 +39,7 @@ abstract class AbstractType
         protected CustomerRepository $customerRepository,
         protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
         protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Set current product

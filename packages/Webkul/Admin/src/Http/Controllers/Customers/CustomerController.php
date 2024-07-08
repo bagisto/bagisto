@@ -49,8 +49,7 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected CustomerNoteRepository $customerNoteRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

@@ -19,8 +19,7 @@ class WishlistController extends APIController
     public function __construct(
         protected WishlistRepository $wishlistRepository,
         protected ProductRepository $productRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Displays the listing resources if the customer has items on the wishlist.

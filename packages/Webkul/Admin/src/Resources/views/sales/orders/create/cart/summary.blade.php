@@ -223,7 +223,7 @@
             </div>
 
             <div class="flex w-full justify-end p-4">
-                <x-shop::button
+                <x-admin::button
                     type="button"
                     class="primary-button w-max px-11 py-3"
                     :title="trans('shop::app.checkout.onepage.summary.place-order')"

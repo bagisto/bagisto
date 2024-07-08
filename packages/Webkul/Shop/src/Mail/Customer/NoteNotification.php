@@ -15,9 +15,7 @@ class NoteNotification extends Mailable
      *
      * @return void
      */
-    public function __construct(public CustomerNote $customerNote)
-    {
-    }
+    public function __construct(public CustomerNote $customerNote) {}
 
     /**
      * Get the message envelope.

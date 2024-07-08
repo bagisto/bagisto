@@ -34,6 +34,7 @@
                                 :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
                                 @click="change(media, index)"
                                 alt="{{ $product->name }}"
+                                tabindex="0"
                             >
                                 <source
                                     :src="media.video_url"
@@ -48,6 +49,7 @@
                                 alt="{{ $product->name }}"
                                 width="100"
                                 height="100"
+                                tabindex="0"
                                 @click="change(media, index)"
                             />
                         </template>
@@ -84,12 +86,14 @@
                         alt="{{ $product->name }}"
                         width="560"
                         height="610"
+                        tabindex="0"
                         @click="isImageZooming = !isImageZooming"
                         @load="onMediaLoad()"
                     />
 
                     <div
                         class="min-w-[450px] cursor-pointer rounded-xl"
+                        tabindex="0"
                         v-if="baseFile.type == 'video'"
                     >
                         <video
@@ -111,23 +115,51 @@
 
             <!-- Product Images and Videos for Medium & Small Screen -->
             <div
+                class="overflow-hidden 1180:hidden"
+                v-show="isMediaLoading"
+            >
+                <div class="shimmer aspect-square max-h-screen w-screen bg-zinc-200"></div>
+            </div>
+        
+            <div
                 class="scrollbar-hide flex w-screen gap-8 overflow-auto max-sm:gap-5 1180:hidden"
                 v-show="! isMediaLoading"
             >
-                <x-shop::media.images.lazy
-                    ::src="image.large_image_url"
-                    class="w-[490px]"
-                    ::class="(media.images.length + media.videos.length) > 1 ? 'max-sm:hidden' : ''"
-                    v-for="(image, index) in media.images"
-                    alt="{{ $product->name }}"
-                    @click="isImageZooming = !isImageZooming"
-                />
-
-                <!-- For mobile view, use the carousel when the image count is greater than 2" -->
+                <!-- Show single media if there is only one image or video -->
+                <template 
+                    v-if="media.images.length + media.videos.length <= 1"
+                    v-for="(media, index) in [...media.images, ...media.videos]"
+                >
+                    <div class="w-full flex-shrink-0 snap-center">
+                        <video
+                            v-if="media.type == 'videos'"
+                            alt="{{ $product->name }}"
+                            controls
+                            @click="isImageZooming = !isImageZooming"
+                            class="w-full"
+                        >
+                            <source
+                                :src="media.video_url"
+                                type="video/mp4"
+                            />
+                        </video>
+            
+                        <img
+                            v-else
+                            :src="media.large_image_url"
+                            alt="{{ $product->name }}"
+                            width="490"
+                            height="550"
+                            @click="isImageZooming = !isImageZooming"
+                            class="w-full"
+                        />
+                    </div>
+                </template>
+                
+                 <!-- Show carousel if there is more than one image or video -->
                 <x-shop::products.mobile.carousel
-                    class="sm:hidden"
-                    ::class="(media.images.length + media.videos.length) > 1 ? '' : 'hidden'"
-                    ::options="media"
+                    v-else
+                    ::options="[...media.images, ...media.videos]"
                     @click="isImageZooming = !isImageZooming"
                 />
             </div>

@@ -17,9 +17,7 @@ class SearchTermController extends Controller
      *
      * @return void
      */
-    public function __construct(public SearchTermRepository $searchTermRepository)
-    {
-    }
+    public function __construct(public SearchTermRepository $searchTermRepository) {}
 
     /**
      * Display a listing of the resource.

@@ -324,7 +324,7 @@
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
-                                @if ($totalRatings = $reviewHelper->getTotalRating($product))
+                                @if ($totalRatings = $reviewHelper->getTotalFeedback($product))
                                     <!-- Scroll To Reviews Section and Activate Reviews Tab -->
                                     <div
                                         class="mt-1 w-max cursor-pointer max-sm:mt-1.5"

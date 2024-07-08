@@ -18,9 +18,7 @@ class CartRuleController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CartRuleRepository $cartRuleRepository)
-    {
-    }
+    public function __construct(protected CartRuleRepository $cartRuleRepository) {}
 
     /**
      * Display a listing of the resource.

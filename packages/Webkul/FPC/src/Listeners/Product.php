@@ -18,8 +18,7 @@ class Product
         protected ProductRepository $productRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Update or create product page cache

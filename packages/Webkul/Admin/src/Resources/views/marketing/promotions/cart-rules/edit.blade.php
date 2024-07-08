@@ -1147,7 +1147,9 @@
                         ) {
                             this.condition.operator = '{}';
 
-                            this.condition.value = [];
+                            if (! this.condition.value) {
+                                this.condition.value = [];
+                            }
                         }
 
                         return matchedAttribute;

@@ -16,9 +16,7 @@ class CurrencyController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CurrencyRepository $currencyRepository)
-    {
-    }
+    public function __construct(protected CurrencyRepository $currencyRepository) {}
 
     /**
      * Display a listing of the resource.

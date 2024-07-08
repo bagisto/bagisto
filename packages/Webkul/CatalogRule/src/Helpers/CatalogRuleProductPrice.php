@@ -15,8 +15,7 @@ class CatalogRuleProductPrice
     public function __construct(
         protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository,
         protected CatalogRuleProduct $catalogRuleProductHelper
-    ) {
-    }
+    ) {}
 
     /**
      * Collect discount on cart

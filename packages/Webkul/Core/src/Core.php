@@ -25,7 +25,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.1.x-dev';
+    const BAGISTO_VERSION = '2.2.1';
 
     /**
      * Current Channel.
@@ -104,8 +104,7 @@ class Core
         protected LocaleRepository $localeRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected TaxCategoryRepository $taxCategoryRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Get the version number of the Bagisto.

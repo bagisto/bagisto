@@ -21,8 +21,7 @@ class ReviewController extends APIController
         protected ProductRepository $productRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected ProductReviewAttachmentRepository $productReviewAttachmentRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Using const variable for status

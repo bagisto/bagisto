@@ -20,8 +20,7 @@ class TaxCategoryController extends Controller
     public function __construct(
         protected TaxCategoryRepository $taxCategoryRepository,
         protected TaxRateRepository $taxRateRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

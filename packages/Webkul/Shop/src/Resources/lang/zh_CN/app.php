@@ -414,8 +414,6 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => '默认区域设置',
-                        'offer'          => '首次订单最高可享受40%折扣',
-                        'shop-now'       => '立即购买',
                     ],
                 ],
 

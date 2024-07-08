@@ -33,6 +33,8 @@
             </div>
 
             <div class="flex gap-1.5">
+                {!! view_render_event('bagisto.shop.customers.account.orders.reorder_button.before', ['order' => $order]) !!}
+
                 @if (
                     $order->canReorder()
                     && core()->getConfigData('sales.order_settings.reorder.shop')
@@ -44,6 +46,10 @@
                         @lang('shop::app.customers.account.orders.view.reorder-btn-title')
                     </a>
                 @endif
+
+                {!! view_render_event('bagisto.shop.customers.account.orders.reorder_button.after', ['order' => $order]) !!}
+
+                {!! view_render_event('bagisto.shop.customers.account.orders.cancel_button.before', ['order' => $order]) !!}
 
                 @if ($order->canCancel())
                     <form
@@ -68,6 +74,8 @@
                         @lang('shop::app.customers.account.orders.view.cancel-btn-title')
                     </a>
                 @endif
+
+                {!! view_render_event('bagisto.shop.customers.account.orders.cancel_button.after', ['order' => $order]) !!}
             </div>
         </div>
 

@@ -60,7 +60,7 @@
             {!! view_render_event('bagisto.shop.checkout.cart.breadcrumbs.after') !!}
 
             @if ($errors = Cart::getErrors())
-                <div class="mt-5 w-full gap-12 rounded-lg bg-[#FFF3CD] px-5 py-3 text-[#383D41]">
+                <div class="mt-5 w-full gap-12 rounded-lg bg-[#FFF3CD] px-5 py-3 text-[#383D41] max-sm:px-3 max-sm:py-2 max-sm:text-sm">
                     {{ implode(": ", Cart::getErrors()) }}
                 </div>
             @endif
@@ -169,7 +169,7 @@
                                 class="grid gap-y-6" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex flex-wrap justify-between gap-x-2.5 border-b border-zinc-200 pb-5">
+                                <div class="flex justify-between gap-x-2.5 border-b border-zinc-200 pb-5">
                                     <div class="flex gap-x-5">
                                         <div class="mt-11 select-none max-md:mt-9 max-sm:mt-7">
                                             <input

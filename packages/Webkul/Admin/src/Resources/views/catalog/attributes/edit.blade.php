@@ -520,7 +520,7 @@
                                             disabled="disabled"
                                         >
                                             <!-- Here! All Needed types are defined -->
-                                            @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
+                                            @foreach(['numeric', 'email', 'decimal', 'url', 'regex'] as $type)
                                                 <option value="{{ $type }}" {{ $attribute->validation == $type ? 'selected' : '' }}>
                                                     @lang('admin::app.catalog.attributes.edit.' . $type)
                                                 </option>

@@ -2,6 +2,4 @@
 
 namespace Webkul\Customer\Contracts;
 
-interface CustomerNote
-{
-}
+interface CustomerNote {}

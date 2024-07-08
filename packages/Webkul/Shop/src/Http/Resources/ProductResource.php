@@ -52,6 +52,9 @@ class ProductResource extends JsonResource
                 'average' => $this->reviewHelper->getAverageRating($this),
                 'total'   => $this->reviewHelper->getTotalRating($this),
             ],
+            'reviews'     => [
+                'total'   => $this->reviewHelper->getTotalReviews($this),
+            ],
         ];
     }
 }

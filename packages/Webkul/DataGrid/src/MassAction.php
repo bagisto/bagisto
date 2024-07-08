@@ -16,8 +16,7 @@ class MassAction
         public string $method,
         public mixed $url,
         public array $options = [],
-    ) {
-    }
+    ) {}
 
     /**
      * Convert to an array.

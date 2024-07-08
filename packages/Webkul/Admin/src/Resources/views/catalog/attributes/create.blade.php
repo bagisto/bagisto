@@ -475,7 +475,7 @@
                                     @change="inputValidation=true"
                                 >
                                     <!-- Here! All Needed types are defined -->
-                                    @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
+                                    @foreach(['numeric', 'email', 'decimal', 'url', 'regex'] as $type)
                                         <option value="{{ $type }}">
                                             @lang('admin::app.catalog.attributes.create.' . $type)
                                         </option>
@@ -639,20 +639,18 @@
                             </x-admin::form.control-group>
 
                             <!-- Use in Layered -->
-                            <div class="!mb-0 flex items-center gap-2.5">
-                                <input
+                            <x-admin::form.control-group
+                                class="!mb-2 flex select-none items-center gap-2.5"
+                                ::class="{ 'opacity-70' : isFilterableDisabled }"
+                            >
+                                <x-admin::form.control-group.control
                                     type="checkbox"
                                     id="is_filterable"
-                                    class="peer hidden"
                                     name="is_filterable"
                                     value="1"
-                                    :disabled="attributeType == 'price' ||  attributeType == 'checkbox'
-                                        || attributeType == 'select' || attributeType == 'multiselect'
-                                        ? false : true
-                                    "
+                                    for="is_filterable"
+                                    ::disabled="isFilterableDisabled"
                                 />
-
-                                <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"></span>
 
                                 <label
                                     class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
@@ -660,7 +658,7 @@
                                 >
                                     @lang('admin::app.catalog.attributes.create.is-filterable')
                                 </label>
-                            </div>
+                            </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
                 </div>
@@ -832,6 +830,14 @@
                             }
                         ],
                     }
+                },
+
+                computed: {
+                    isFilterableDisabled() {
+                        return this.attributeType == 'price' || this.attributeType == 'checkbox'
+                            || this.attributeType == 'select' || this.attributeType == 'multiselect'
+                            ? false : true;
+                    },
                 },
 
                 methods: {
