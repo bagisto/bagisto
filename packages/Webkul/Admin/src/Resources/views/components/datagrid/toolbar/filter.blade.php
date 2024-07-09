@@ -685,7 +685,7 @@
                                             v-if="hasAnyColumn"
                                             class="secondary-button w-full"
                                             @click="isShowSavedFilters = ! isShowSavedFilters"
-                                            :disabled="isFilterDirty"
+                                            :disabled="isFilterDirty || ! filters.columns.length > 0"
                                         >
                                             @{{ applied.savedFilterId ? '@lang('admin::app.components.datagrid.toolbar.filter.update-filter')' : '@lang('admin::app.components.datagrid.toolbar.filter.save-filter')' }}
                                         </button>
