@@ -737,6 +737,10 @@ class Cart
      */
     public function getOrderAmount(): int
     {
+        if (! $this->cart) {
+            return false;
+        }
+
         $minimumOrderAmount = $this->cart->sub_total;
 
         if (core()->getConfigData('sales.order_settings.minimum_order.include_tax_to_amount')) {
