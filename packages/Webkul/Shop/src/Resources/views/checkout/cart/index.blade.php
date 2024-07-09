@@ -63,7 +63,7 @@
                 $errors = Cart::getErrors();
             @endphp
             
-            @if (Cart::hasError() && $errors['error_code'] === 'MINIMUM_ORDER_AMOUNT')
+            @if (! empty($errors) && $errors['error_code'] === 'MINIMUM_ORDER_AMOUNT')
                 <div class="mt-5 w-full gap-12 rounded-lg bg-[#FFF3CD] px-5 py-3 text-[#383D41] max-sm:px-3 max-sm:py-2 max-sm:text-sm">
                     {{ $errors['message'] }}: {{ $errors['amount'] }}
                 </div>
