@@ -492,14 +492,6 @@
                                         >
                                             @lang('installer::app.installer.index.environment-configuration.mysql')
                                         </option>
-
-                                        <option value="pgsql">
-                                            @lang('installer::app.installer.index.environment-configuration.pgsql')
-                                        </option>
-
-                                        <option value="sqlsrv">
-                                            @lang('installer::app.installer.index.environment-configuration.sqlsrv')
-                                        </option>
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error control-name="db_connection" />

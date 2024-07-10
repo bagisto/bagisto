@@ -710,7 +710,7 @@ return [
                 'uzbekistani-som'             => 'Usbekischer Som (UZS)',
                 'venezuelan-bolívar'          => 'Venezolanischer Bolívar (VEF)',
                 'vietnamese-dong'             => 'Vietnamesischer Dong (VND)',
-                'warning-message'             => 'Achtung! Die Einstellungen für die Standardsprachen des Systems sowie die Standardwährung sind dauerhaft und können nicht mehr geändert werden.',
+                'warning-message'             => 'Achtung! Die Einstellungen für Ihre Standardsystemsprache und Standardwährung sind dauerhaft und können nach der Festlegung nicht mehr geändert werden.',
                 'zambian-kwacha'              => 'Sambischer Kwacha (ZMW)',
             ],
 

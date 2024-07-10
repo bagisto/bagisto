@@ -710,7 +710,7 @@ return [
                 'uzbekistani-som'             => 'ウズベキスタンソム（UZS）',
                 'venezuelan-bolívar'          => 'ベネズエラボリバル（VEF）',
                 'vietnamese-dong'             => 'ベトナムドン（VND）',
-                'warning-message'             => '注意！デフォルトのシステム言語とデフォルトの通貨の設定は永久に変更できません。',
+                'warning-message'             => '注意！ デフォルトのシステム言語とデフォルトの通貨の設定は永久的なものであり、一度設定すると変更できません。',
                 'zambian-kwacha'              => 'ザンビアクワチャ（ZMW）',
             ],
 
