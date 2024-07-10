@@ -158,31 +158,31 @@
                             },
 
                             pending : {
-                                icon: 'icon-information text-amber-600 bg-amber-100',
+                                icon: 'icon-information bg-amber-100 text-amber-600 dark:!text-amber-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.pending')",
                                 status: 'pending'
                             },
 
                             processing : {
-                                icon: 'icon-sort-right text-green-600 bg-green-100',
+                                icon: 'icon-sort-right bg-green-100 text-green-600 dark:!text-green-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.processing')",
                                 status: 'processing'
                             },
 
                             canceled : {
-                                icon: 'icon-cancel-1 text-red-600 bg-red-100',
+                                icon: 'icon-cancel-1 bg-red-100 text-red-600 dark:!text-red-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.canceled')",
                                 status: 'canceled'
                             },
 
                             completed : {
-                                icon: 'icon-done text-blue-600 bg-blue-100',
+                                icon: 'icon-done bg-blue-100 text-blue-600 dark:!text-blue-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.completed')",
                                 status: 'completed'
                             },
 
                             closed : {
-                                icon: 'icon-repeat text-red-600 bg-red-100',
+                                icon: 'icon-repeat bg-red-100 text-red-600 dark:!text-red-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.closed')",
                                 status: 'closed'
                             },
