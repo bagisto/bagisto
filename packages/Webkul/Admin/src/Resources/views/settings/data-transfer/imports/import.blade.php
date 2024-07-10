@@ -193,7 +193,7 @@
 
                 <!-- Import In Process -->
                 <div
-                    class="grid w-full gap-2 rounded-sm border border-green-200 bg-gray-900 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
+                    class="grid w-full gap-2 rounded-sm border border-green-200 bg-green-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
                     v-else-if="importResource.state == 'processing'"
                 >
                     <p class="flex items-center gap-2">
