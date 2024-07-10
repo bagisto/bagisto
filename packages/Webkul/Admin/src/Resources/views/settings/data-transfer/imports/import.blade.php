@@ -154,7 +154,7 @@
                         </p>
 
                         <div
-                            class="flex place-items-start items-center gap-2"
+                            class="flex place-items-start items-center gap-2 dark:text-white"
                             v-if="importResource.errors.length"
                         >
                             <i class="icon-information rounded-full bg-red-200 text-2xl text-red-600 dark:!text-red-600"></i>
