@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.2.2 (8th of July 2024)** - *Release*
+## **v2.2.2 (10th of July 2024)** - *Release*
 
 * #9972 [improvements] - The new reviews display system does not make sense
 
@@ -10,11 +10,21 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #9971 [fixed] - Images are not changing in mobile view in configurable product according to the Color swatch what is selected. 
 
-[fixed] - Added missing CSS classes for dark themes.
+* #9976 [fixed] - Added missing CSS classes for dark themes.
 
-[fixed] - Fix the translation issue on the error page.
+* #9980 [fixed] - Fix the translation issue on the error page.
 
-[fixed] - Fixed CMS page email send status issue on Update. 
+* #9970 [fixed] - Fixed CMS page email send status issue on Update. 
+
+* #9987 [fixed] - Fixed data grid issue save filter button issue.
+
+* #9988 [fixed] - Fixed cart page exception. 
+
+* #9989 [fixed] - Fixed buy-now button issue.
+
+* #9990 [fixed] - Dark Mode UI issue is appearing in Import stock, Import Section where validate is processed. 
+
+* #9990 [fixed] - Fix notification icons for dark theme.
 
 
 ## **v2.2.1 (24th of June 2024)** - *Rele1ase*
