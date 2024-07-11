@@ -710,7 +710,7 @@ return [
                 'uzbekistani-som'             => 'Oezbeekse Som (UZS)',
                 'venezuelan-bolívar'          => 'Venezolaanse Bolívar (VEF)',
                 'vietnamese-dong'             => 'Vietnamese Dong (VND)',
-                'warning-message'             => 'Pas op! De instellingen voor uw standaard systeemtalen en de standaardvaluta zijn permanent en kunnen nooit meer worden gewijzigd.',
+                'warning-message'             => 'Pas op! De instellingen voor uw standaardtaal en standaardvaluta zijn permanent en kunnen niet worden gewijzigd zodra ze zijn ingesteld.',
                 'zambian-kwacha'              => 'Zambiaanse Kwacha (ZMW)',
             ],
 

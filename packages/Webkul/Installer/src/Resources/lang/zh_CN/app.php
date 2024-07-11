@@ -710,7 +710,7 @@ return [
                 'uzbekistani-som'             => '乌兹别克斯坦苏姆 (UZS)',
                 'venezuelan-bolívar'          => '委内瑞拉玻利瓦尔 (VEF)',
                 'vietnamese-dong'             => '越南盾 (VND)',
-                'warning-message'             => '警告！默认系统语言和默认货币设置是永久性的，无法再次更改。',
+                'warning-message'             => '注意！您的默认系统语言和默认货币设置是永久性的，设置后无法更改。',
                 'zambian-kwacha'              => '赞比亚克瓦查 (ZMW)',
             ],
 

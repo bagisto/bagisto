@@ -710,7 +710,7 @@ return [
                 'uzbekistani-som'             => 'Som Uzbekistański (UZS)',
                 'venezuelan-bolívar'          => 'Boliwar Wenezuelski (VEF)',
                 'vietnamese-dong'             => 'Dong Wietnamski (VND)',
-                'warning-message'             => 'Uwaga! Ustawienia domyślnych języków systemowych oraz domyślnej waluty są trwałe i nie mogą być nigdy więcej zmienione.',
+                'warning-message'             => 'Uwaga! Ustawienia domyślnego języka systemowego i domyślnej waluty są trwałe i nie można ich zmienić po ustawieniu.',
                 'zambian-kwacha'              => 'Kwacha Zambijska (ZMW)',
             ],
 

@@ -710,7 +710,7 @@ return [
                 'uzbekistani-som'             => 'Som ouzbek (UZS)',
                 'venezuelan-bolívar'          => 'Bolívar vénézuélien (VEF)',
                 'vietnamese-dong'             => 'Dong vietnamien (VND)',
-                'warning-message'             => 'Attention ! Les paramètres de vos langues système par défaut ainsi que de la devise par défaut sont permanents et ne peuvent plus être modifiés.',
+                'warning-message'             => 'Attention! Les paramètres de langue système par défaut et de devise par défaut sont permanents et ne peuvent pas être modifiés une fois définis.',
                 'zambian-kwacha'              => 'Kwacha zambien (ZMW)',
             ],
 
