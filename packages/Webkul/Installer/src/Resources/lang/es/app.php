@@ -710,7 +710,7 @@ return [
                 'uzbekistani-som'             => 'Som Uzbeko (UZS)',
                 'venezuelan-bolívar'          => 'Bolívar Venezolano (VEF)',
                 'vietnamese-dong'             => 'Dong Vietnamita (VND)',
-                'warning-message'             => '¡Cuidado! La configuración de los idiomas y la moneda predeterminada del sistema son permanentes y no se pueden cambiar.',
+                'warning-message'             => '¡Cuidado! Los ajustes de su idioma del sistema predeterminado y la moneda predeterminada son permanentes y no se pueden cambiar una vez establecidos.',
                 'zambian-kwacha'              => 'Kwacha de Zambia (ZMW)',
             ],
 

@@ -710,7 +710,7 @@ return [
                 'uzbekistani-som'             => 'Uzbekistani Som (UZS)',
                 'venezuelan-bolívar'          => 'Venezuelan Bolívar (VEF)',
                 'vietnamese-dong'             => 'Vietnamese Dong (VND)',
-                'warning-message'             => 'Beware! The settings for your default system languages as well as the default currency are permanent and cannot be changed ever again.',
+                'warning-message'             => 'Beware! The settings for your default system language and default currency are permanent and cannot be changed once set.',
                 'zambian-kwacha'              => 'Zambian Kwacha (ZMW)',
             ],
 
