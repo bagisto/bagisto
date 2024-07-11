@@ -2,7 +2,9 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.2.2 (10th of July 2024)** - *Release*
+## **v2.2.2 (11th of July 2024)** - *Release*
+
+* Fixed installer issue.
 
 * #9972 [improvements] - The new reviews display system does not make sense
 
