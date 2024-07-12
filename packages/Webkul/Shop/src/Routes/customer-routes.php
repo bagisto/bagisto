@@ -78,11 +78,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             ])->name('shop.customer.session.destroy');
 
             /**
-             * Wishlist.
-             */
-            Route::get('wishlist', [WishlistController::class, 'index'])->name('shop.customers.account.wishlist.index');
-
-            /**
              * Customer account. All the below routes are related to
              * customer account details.
              */
@@ -90,16 +85,23 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                 Route::get('', [CustomerController::class, 'account'])->name('shop.customers.account.index');
 
                 /**
+                 * Wishlist.
+                 */
+                Route::get('wishlist', [WishlistController::class, 'index'])->name('shop.customers.account.wishlist.index');
+
+                /**
                  * Profile.
                  */
-                Route::controller(CustomerController::class)->prefix('profile')->group(function () {
-                    Route::get('', 'index')->name('shop.customers.account.profile.index');
+                Route::controller(CustomerController::class)->group(function () {
+                    Route::prefix('profile')->group(function () {
+                        Route::get('', 'index')->name('shop.customers.account.profile.index');
 
-                    Route::get('edit', 'edit')->name('shop.customers.account.profile.edit');
+                        Route::get('edit', 'edit')->name('shop.customers.account.profile.edit');
 
-                    Route::post('edit', 'update')->name('shop.customers.account.profile.update');
+                        Route::post('edit', 'update')->name('shop.customers.account.profile.update');
 
-                    Route::post('destroy', 'destroy')->name('shop.customers.account.profile.destroy');
+                        Route::post('destroy', 'destroy')->name('shop.customers.account.profile.destroy');
+                    });
 
                     Route::get('reviews', 'reviews')->name('shop.customers.account.reviews.index');
                 });
