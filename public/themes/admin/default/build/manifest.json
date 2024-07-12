@@ -1,11 +1,11 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-b4a732a0.css",
+    "file": "assets/app-7339cde0.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
-    "file": "assets/bagisto-admin-37c2feba.woff",
+    "file": "assets/bagisto-admin-c1c971d5.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
   },
   "src/Resources/assets/images/average-orders.svg": {
@@ -180,7 +180,7 @@
     "css": [
       "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-a9239a81.js",
+    "file": "assets/app-5c9f2d83.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },
