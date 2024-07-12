@@ -27,7 +27,7 @@
                     <div class="flex items-center gap-1.5">
                         <x-admin::dropdown position="bottom-right">
                             <x-slot:toggle>
-                                <span class="icon-export flex cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span class="icon-admin-export flex cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </x-slot>
 
                             <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
@@ -81,22 +81,26 @@
                             'total-sold-quantities',
                             'total-products-added-to-wishlist',
                         ]))
-                            <select
-                                class="custom-select flex min-h-[39px] w-fit rounded-md border px-3 pl-2 pr-9 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                v-model="filters.period"
-                            >
-                                <option value="day">
-                                    @lang('admin::app.reporting.view.day')
-                                </option>
-
-                                <option value="month">
-                                    @lang('admin::app.reporting.view.month')
-                                </option>
-
-                                <option value="year">
-                                    @lang('admin::app.reporting.view.year')
-                                </option>
-                            </select>
+                            <div class="relative inline-flex w-full max-w-max">
+                                <select
+                                    class="w-full cursor-pointer appearance-none rounded-md border bg-white px-2.5 py-1.5 pr-8 text-center leading-6 text-gray-600 transition hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                    v-model="filters.period"
+                                >
+                                    <option value="day">
+                                        @lang('admin::app.reporting.view.day')
+                                    </option>
+                                    
+                                    <option value="month">
+                                        @lang('admin::app.reporting.view.month')
+                                    </option>
+                            
+                                    <option value="year">
+                                        @lang('admin::app.reporting.view.year')
+                                    </option>
+                                </select>
+                                
+                                <span class="icon-sort-down pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 transform text-2xl text-gray-600 dark:text-gray-300"></span>
+                            </div>
                         @endif
 
                         <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
