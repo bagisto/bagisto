@@ -148,11 +148,11 @@ class ProductImage
 
         $mediumImageUrl = core()->getConfigData('catalog.products.cache_medium_image.url')
                         ? Storage::url(core()->getConfigData('catalog.products.cache_medium_image.url'))
-                        : bagisto_asset('images/small-product-placeholder.webp', 'shop');
+                        : bagisto_asset('images/medium-product-placeholder.webp', 'shop');
 
         $largeImageUrl = core()->getConfigData('catalog.products.cache_large_image.url')
                         ? Storage::url(core()->getConfigData('catalog.products.cache_large_image.url'))
-                        : bagisto_asset('images/small-product-placeholder.webp', 'shop');
+                        : bagisto_asset('images/large-product-placeholder.webp', 'shop');
 
         return [
             'small_image_url'    => $smallImageUrl,
