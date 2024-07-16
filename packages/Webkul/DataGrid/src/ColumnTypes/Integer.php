@@ -19,9 +19,9 @@ class Integer extends Column
                 foreach ($requestedValues as $value) {
                     $this->applyIntegerFilter($scopeQueryBuilder, $value);
                 }
+            } else {
+                throw new InvalidColumnExpressionException('Only string and array are allowed for integer column type.');
             }
-
-            throw new InvalidColumnExpressionException('Only string and array are allowed for integer column type.');
         });
     }
 

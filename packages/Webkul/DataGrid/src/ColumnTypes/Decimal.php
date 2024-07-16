@@ -19,9 +19,9 @@ class Decimal extends Column
                 foreach ($requestedValues as $value) {
                     $this->applyDecimalFilter($scopeQueryBuilder, $value);
                 }
+            } else {
+                throw new InvalidColumnExpressionException('Only string and array are allowed for decimal column type.');
             }
-
-            throw new InvalidColumnExpressionException('Only string and array are allowed for decimal column type.');
         });
     }
 
