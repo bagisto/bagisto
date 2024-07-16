@@ -24,9 +24,9 @@ enum ColumnTypeEnum: string
     case INTEGER = 'integer';
 
     /**
-     * Float.
+     * Decimal.
      */
-    case FLOAT = 'float';
+    case DECIMAL = 'decimal';
 
     /**
      * Boolean.
@@ -56,7 +56,7 @@ enum ColumnTypeEnum: string
         return match ($type) {
             self::STRING->value    => Text::class,
             self::INTEGER->value   => Integer::class,
-            self::FLOAT->value     => Decimal::class,
+            self::DECIMAL->value   => Decimal::class,
             self::BOOLEAN->value   => Boolean::class,
             self::DATE->value      => Date::class,
             self::DATETIME->value  => Datetime::class,

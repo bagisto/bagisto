@@ -4,6 +4,7 @@ namespace Webkul\DataGrid\ColumnTypes;
 
 use Webkul\DataGrid\Column;
 use Webkul\DataGrid\Enums\FilterTypeEnum;
+use Webkul\DataGrid\Exceptions\InvalidColumnExpressionException;
 
 class Text extends Column
 {
@@ -16,12 +17,12 @@ class Text extends Column
             return $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
                 if (is_string($requestedValues)) {
                     $scopeQueryBuilder->orWhere($this->columnName, $requestedValues);
-
-                    return;
-                }
-
-                foreach ($requestedValues as $value) {
-                    $scopeQueryBuilder->orWhere($this->columnName, $value);
+                } elseif (is_array($requestedValues)) {
+                    foreach ($requestedValues as $value) {
+                        $scopeQueryBuilder->orWhere($this->columnName, $value);
+                    }
+                } else {
+                    throw new InvalidColumnExpressionException('Only string and array are allowed for text column type.');
                 }
             });
         }
@@ -29,12 +30,12 @@ class Text extends Column
         return $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
             if (is_string($requestedValues)) {
                 $scopeQueryBuilder->orWhere($this->columnName, 'LIKE', '%'.$requestedValues.'%');
-
-                return;
-            }
-
-            foreach ($requestedValues as $value) {
-                $scopeQueryBuilder->orWhere($this->columnName, 'LIKE', '%'.$value.'%');
+            } elseif (is_array($requestedValues)) {
+                foreach ($requestedValues as $value) {
+                    $scopeQueryBuilder->orWhere($this->columnName, 'LIKE', '%'.$value.'%');
+                }
+            } else {
+                throw new InvalidColumnExpressionException('Only string and array are allowed for text column type.');
             }
         });
     }
