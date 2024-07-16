@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\Marketing\SearchSEO\SitemapDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Sitemap\Jobs\ProcessSitemap;
 use Webkul\Sitemap\Repositories\SitemapRepository;
 
 class SitemapController extends Controller
@@ -49,6 +50,8 @@ class SitemapController extends Controller
             'path',
         ]));
 
+        ProcessSitemap::dispatch($sitemap);
+
         Event::dispatch('marketing.search_seo.sitemap.create.after', $sitemap);
 
         return new JsonResponse([
@@ -77,6 +80,8 @@ class SitemapController extends Controller
             'path',
         ]), $id);
 
+        ProcessSitemap::dispatch($sitemap);
+
         Event::dispatch('marketing.search_seo.sitemap.update.after', $sitemap);
 
         return new JsonResponse([
@@ -94,7 +99,9 @@ class SitemapController extends Controller
     {
         $sitemap = $this->sitemapRepository->findOrFail($id);
 
-        Storage::delete($sitemap->path.'/'.$sitemap->file_name);
+        if (Storage::exists($sitemapFilePath = $sitemap->path.'/'.$sitemap->file_name)) {
+            Storage::delete($sitemapFilePath);
+        }
 
         try {
             Event::dispatch('marketing.search_seo.sitemap.delete.before', $id);
@@ -105,12 +112,11 @@ class SitemapController extends Controller
 
             return response()->json([
                 'message' => trans('admin::app.marketing.search-seo.sitemaps.index.edit.delete-success'),
-            ], 200);
+            ]);
         } catch (\Exception $e) {
+            return response()->json([
+                'message' => trans('admin::app.marketing.search-seo.sitemaps.delete-failed', ['name' => 'admin::app.marketing.search-seo.sitemaps.index.sitemap']),
+            ], 500);
         }
-
-        return response()->json([
-            'message' => trans('admin::app.marketing.search-seo.sitemaps.delete-failed', ['name' => 'admin::app.marketing.search-seo.sitemaps.index.sitemap']),
-        ], 500);
     }
 }
