@@ -139,7 +139,7 @@ class ProductDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'price',
             'label'      => trans('admin::app.catalog.products.index.datagrid.price'),
-            'type'       => 'float',
+            'type'       => 'decimal',
             'filterable' => true,
             'sortable'   => true,
         ]);
