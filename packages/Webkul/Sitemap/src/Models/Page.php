@@ -20,7 +20,7 @@ class Page extends BasePage implements Sitemapable
 
         return Url::create(route('shop.cms.page', $this->url_key))
             ->setLastModificationDate(Carbon::create($this->updated_at))
-            ->setChangeFrequency(core()->getConfigData('general.sitemap.cms.frequency') ?: Sitemap::DEFAULT_FREQUENCY)
-            ->setPriority(core()->getConfigData('general.sitemap.cms.priority') ?: Sitemap::DEFAULT_PRIORITY);
+            ->setChangeFrequency(core()->getConfigData('general.sitemap.cms.frequency'))
+            ->setPriority(core()->getConfigData('general.sitemap.cms.priority'));
     }
 }

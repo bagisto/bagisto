@@ -70,8 +70,8 @@ class ProcessSitemap implements ShouldQueue
          */
         $this->processItems([
             Url::create('/')
-                ->setChangeFrequency(core()->getConfigData('general.sitemap.store_url.frequency') ?: $this->sitemap::DEFAULT_FREQUENCY)
-                ->setPriority(core()->getConfigData('general.sitemap.store_url.priority') ?: $this->sitemap::DEFAULT_PRIORITY),
+                ->setChangeFrequency(core()->getConfigData('general.sitemap.store_url.frequency'))
+                ->setPriority(core()->getConfigData('general.sitemap.store_url.priority')),
         ]);
 
         /**
@@ -127,7 +127,7 @@ class ProcessSitemap implements ShouldQueue
         foreach ($items as $item) {
             $this->itemsToBeProcessed[] = $item;
 
-            if (count($this->itemsToBeProcessed) === ((int) core()->getConfigData('general.sitemap.file_limits.max_url_per_file') ?: $this->sitemap::DEFAULT_MAX_URLS)) {
+            if (count($this->itemsToBeProcessed) === ((int) core()->getConfigData('general.sitemap.file_limits.max_url_per_file'))) {
                 $this->batchProcessed++;
 
                 $this->generateSitemap();
