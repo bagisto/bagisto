@@ -4,7 +4,6 @@ namespace Webkul\Admin\Http\Controllers\Marketing\SearchSEO;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\Marketing\SearchSEO\SitemapDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sitemap\Jobs\ProcessSitemap;
@@ -99,9 +98,7 @@ class SitemapController extends Controller
     {
         $sitemap = $this->sitemapRepository->findOrFail($id);
 
-        if (Storage::exists($sitemapFilePath = $sitemap->path.'/'.$sitemap->file_name)) {
-            Storage::delete($sitemapFilePath);
-        }
+        $sitemap->deleteFromStorage();
 
         try {
             Event::dispatch('marketing.search_seo.sitemap.delete.before', $id);
