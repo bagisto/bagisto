@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 class CSV extends AbstractSource
 {
     /**
-     * CSV reader
+     * CSV reader.
      */
     protected mixed $reader;
 
@@ -32,7 +32,7 @@ class CSV extends AbstractSource
     }
 
     /**
-     * Close file handle
+     * Close file handle.
      *
      * @return void
      */
@@ -46,7 +46,7 @@ class CSV extends AbstractSource
     }
 
     /**
-     * Read next line from csv
+     * Read next line from csv.
      */
     protected function getNextRow(): array
     {
@@ -68,7 +68,7 @@ class CSV extends AbstractSource
     }
 
     /**
-     * Rewind the iterator to the first row
+     * Rewind the iterator to the first row.
      */
     public function rewind(): void
     {

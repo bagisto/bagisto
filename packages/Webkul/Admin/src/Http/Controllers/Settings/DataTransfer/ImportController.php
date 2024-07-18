@@ -61,7 +61,7 @@ class ImportController extends Controller
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'required|mimes:csv,xls,xlsx,txt',
+            'file'                => 'required|mimes:csv,xls,xlsx,txt,xml',
         ]);
 
         Event::dispatch('data_transfer.imports.create.before');
@@ -132,7 +132,7 @@ class ImportController extends Controller
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'mimes:csv,xls,xlsx,txt',
+            'file'                => 'mimes:csv,xls,xlsx,txt,xml',
         ]);
 
         Event::dispatch('data_transfer.imports.update.before');

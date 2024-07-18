@@ -9,12 +9,12 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 class Excel extends AbstractSource
 {
     /**
-     * CSV reader
+     * Excel reader.
      */
     protected mixed $reader;
 
     /**
-     * Current row number
+     * Current row number.
      */
     protected int $currentRowNumber = 1;
 
@@ -41,7 +41,7 @@ class Excel extends AbstractSource
     }
 
     /**
-     * Read next line from csv
+     * Read next line from excel.
      */
     protected function getNextRow(): array|bool
     {
@@ -59,7 +59,7 @@ class Excel extends AbstractSource
     }
 
     /**
-     * Rewind the iterator to the first row
+     * Rewind the iterator to the first row.
      */
     public function rewind(): void
     {

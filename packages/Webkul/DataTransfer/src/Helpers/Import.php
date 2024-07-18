@@ -17,73 +17,100 @@ use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
 use Webkul\DataTransfer\Helpers\Sources\AbstractSource;
 use Webkul\DataTransfer\Helpers\Sources\CSV as CSVSource;
 use Webkul\DataTransfer\Helpers\Sources\Excel as ExcelSource;
+use Webkul\DataTransfer\Helpers\Sources\XML as XMLSource;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\DataTransfer\Repositories\ImportRepository;
 
 class Import
 {
     /**
-     * Import state for pending import
+     * Import state for pending import.
+     *
+     * @var string
      */
     public const STATE_PENDING = 'pending';
 
     /**
-     * Import state for validated import
+     * Import state for validated import.
+     *
+     * @var string
      */
     public const STATE_VALIDATED = 'validated';
 
     /**
-     * Import state for processing import
+     * Import state for processing import.
+     *
+     * @var string
      */
     public const STATE_PROCESSING = 'processing';
 
     /**
-     * Import state for processed import
+     * Import state for processed import.
+     *
+     * @var string
      */
     public const STATE_PROCESSED = 'processed';
 
     /**
-     * Import state for linking import
+     * Import state for linking import.
+     *
+     * @var string
      */
     public const STATE_LINKING = 'linking';
 
     /**
-     * Import state for linked import
+     * Import state for linked import.
+     *
+     * @var string
      */
     public const STATE_LINKED = 'linked';
 
     /**
-     * Import state for indexing import
+     * Import state for indexing import.
+     *
+     * @var string
      */
     public const STATE_INDEXING = 'indexing';
 
     /**
-     * Import state for indexed import
+     * Import state for indexed import.
+     *
+     * @var string
      */
     public const STATE_INDEXED = 'indexed';
 
     /**
-     * Import state for completed import
+     * Import state for completed import.
+     *
+     * @var string
      */
     public const STATE_COMPLETED = 'completed';
 
     /**
-     * Validation strategy for skipping the error during the import process
+     * Validation strategy for skipping the error during the import process.
+     *
+     * @var string
      */
     public const VALIDATION_STRATEGY_SKIP_ERRORS = 'skip-errors';
 
     /**
-     * Validation strategy for stopping the import process on error
+     * Validation strategy for stopping the import process on error.
+     *
+     * @var string
      */
     public const VALIDATION_STRATEGY_STOP_ON_ERROR = 'stop-on-errors';
 
     /**
-     * Action constant for updating/creating for the resource
+     * Action constant for updating/creating for the resource.
+     *
+     * @var string
      */
     public const ACTION_APPEND = 'append';
 
     /**
-     * Action constant for deleting the resource
+     * Action constant for deleting the resource.
+     *
+     * @var string
      */
     public const ACTION_DELETE = 'delete';
 
@@ -143,8 +170,13 @@ class Import
      */
     public function getSource(): AbstractSource
     {
-        if (Str::contains($this->import->file_path, '.csv')) {
+        if (Str::endsWith($this->import->file_path, '.csv')) {
             $source = new CSVSource(
+                $this->import->file_path,
+                $this->import->field_separator,
+            );
+        } elseif (Str::endsWith($this->import->file_path, '.xml')) {
+            $source = new XMLSource(
                 $this->import->file_path,
                 $this->import->field_separator,
             );
@@ -159,7 +191,7 @@ class Import
     }
 
     /**
-     * Validates import and returns validation result
+     * Validates import and returns validation result.
      */
     public function validate(): bool
     {
@@ -193,7 +225,7 @@ class Import
     }
 
     /**
-     * Starts import process
+     * Starts import process.
      */
     public function isValid(): bool
     {
@@ -209,7 +241,7 @@ class Import
     }
 
     /**
-     * Check if error limit has been exceeded
+     * Check if error limit has been exceeded.
      */
     public function isErrorLimitExceeded(): bool
     {
@@ -224,7 +256,7 @@ class Import
     }
 
     /**
-     * Starts import process
+     * Starts import process.
      */
     public function start(?ImportBatchContract $importBatch = null): bool
     {
@@ -252,7 +284,7 @@ class Import
     }
 
     /**
-     * Link import resources
+     * Link import resources.
      */
     public function link(ImportBatchContract $importBatch): bool
     {
@@ -280,7 +312,7 @@ class Import
     }
 
     /**
-     * Index import resources
+     * Index import resources.
      */
     public function index(ImportBatchContract $importBatch): bool
     {
@@ -308,7 +340,7 @@ class Import
     }
 
     /**
-     * Started the import process
+     * Started the import process.
      */
     public function started(): void
     {
@@ -324,7 +356,7 @@ class Import
     }
 
     /**
-     * Started the import linking process
+     * Started the import linking process.
      */
     public function linking(): void
     {
@@ -338,7 +370,7 @@ class Import
     }
 
     /**
-     * Started the import indexing process
+     * Started the import indexing process.
      */
     public function indexing(): void
     {
@@ -352,7 +384,7 @@ class Import
     }
 
     /**
-     * Start the import process
+     * Start the import process.
      */
     public function completed(): void
     {
@@ -379,7 +411,7 @@ class Import
     }
 
     /**
-     * Returns import stats
+     * Returns import stats.
      */
     public function stats(string $state): array
     {
@@ -419,7 +451,7 @@ class Import
     }
 
     /**
-     * Return all error grouped by error code
+     * Return all error grouped by error code.
      */
     public function getFormattedErrors(): array
     {
@@ -439,19 +471,19 @@ class Import
     }
 
     /**
-     * Uploads error report and save the path to the database
+     * Uploads error report and save the path to the database.
      */
     public function uploadErrorReport(): ?string
     {
         /**
-         * Return null if there are no errors
+         * Return null if there are no errors.
          */
         if (! $this->errorHelper->getErrorsCount()) {
             return null;
         }
 
         /**
-         * Return null if there are no invalid rows
+         * Return null if there are no invalid rows.
          */
         if (! $this->errorHelper->getInvalidRowsCount()) {
             return null;
@@ -468,7 +500,7 @@ class Import
         $sheet = $spreadsheet->getActiveSheet();
 
         /**
-         * Add headers with extra error column
+         * Add headers with extra error column.
          */
         $sheet->fromArray(
             [array_merge($source->getColumnNames(), [
@@ -532,7 +564,7 @@ class Import
     }
 
     /**
-     * Validates source file and returns validation result
+     * Validates source file and returns validation result.
      */
     public function getTypeImporter(): AbstractImporter
     {
@@ -556,7 +588,7 @@ class Import
     }
 
     /**
-     * Is linking resource required for the import operation
+     * Is linking resource required for the import operation.
      */
     public function isLinkingRequired(): bool
     {
@@ -564,7 +596,7 @@ class Import
     }
 
     /**
-     * Is indexing resource required for the import operation
+     * Is indexing resource required for the import operation.
      */
     public function isIndexingRequired(): bool
     {

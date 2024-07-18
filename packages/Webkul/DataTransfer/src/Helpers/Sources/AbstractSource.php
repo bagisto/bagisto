@@ -7,37 +7,37 @@ use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
 abstract class AbstractSource
 {
     /**
-     * Column names
+     * Column names.
      */
     protected array $columnNames = [];
 
     /**
-     * Quantity of columns
+     * Quantity of columns.
      */
     protected int $totalColumns = 0;
 
     /**
-     * Current row
+     * Current row.
      */
     protected array $currentRowData = [];
 
     /**
-     * Current row number
+     * Current row number.
      */
     protected int $currentRowNumber = -1;
 
     /**
-     * Flag to indicate that wrong quote was found
+     * Flag to indicate that wrong quote was found.
      */
     protected bool $foundWrongQuoteFlag = false;
 
     /**
-     * Read next line from source
+     * Read next line from source.
      */
     abstract protected function getNextRow(): array|bool;
 
     /**
-     * Return the key of the current row
+     * Return the key of the current row.
      */
     public function getCurrentRowNumber(): int
     {
@@ -45,7 +45,7 @@ abstract class AbstractSource
     }
 
     /**
-     * Checks if current position is valid
+     * Checks if current position is valid.
      */
     public function valid(): bool
     {
@@ -53,7 +53,7 @@ abstract class AbstractSource
     }
 
     /**
-     * Read next line from source
+     * Read next line from source.
      */
     public function current(): array
     {
@@ -71,7 +71,7 @@ abstract class AbstractSource
     }
 
     /**
-     * Read next line from source
+     * Read next line from source.
      */
     public function next(): void
     {
@@ -89,7 +89,7 @@ abstract class AbstractSource
     }
 
     /**
-     * Rewind the iterator to the first row
+     * Rewind the iterator to the first row.
      */
     public function rewind(): void
     {
@@ -103,7 +103,7 @@ abstract class AbstractSource
     }
 
     /**
-     * Column names getter.
+     * Get column names.
      */
     public function getColumnNames(): array
     {
@@ -111,10 +111,10 @@ abstract class AbstractSource
     }
 
     /**
-     * Column names getter.
+     * Total columns count.
      */
     public function getTotalColumns(): int
     {
-        return $this->columnNames;
+        return $this->totalColumns;
     }
 }
