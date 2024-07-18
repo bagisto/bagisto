@@ -13,19 +13,9 @@ class XML extends AbstractSource
     protected $reader;
 
     /**
-     * Current element name.
-     */
-    protected string $currentElement = '';
-
-    /**
      * File path.
      */
     protected string $filePath;
-
-    /**
-     * Column names.
-     */
-    protected array $columnNames = [];
 
     /**
      * Create a new helper instance.
@@ -45,8 +35,6 @@ class XML extends AbstractSource
                 $this->reader->read()
                 && ! $this->reader->attributeCount
             );
-
-            $this->currentElement = $this->reader->name;
 
             $this->columnNames = $this->getColumnNames();
 
@@ -112,8 +100,6 @@ class XML extends AbstractSource
             $this->reader->read()
             && ! $this->reader->attributeCount
         );
-
-        $this->currentElement = $this->reader->name;
 
         $this->next();
     }
