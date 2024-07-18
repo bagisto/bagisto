@@ -32,11 +32,6 @@ class ProcessSitemap implements ShouldQueue
     protected array $itemsToBeProcessed = [];
 
     /**
-     * Generated sitemap index.
-     */
-    protected string $generatedSitemapIndex = '';
-
-    /**
      * Generated sitemaps.
      */
     protected array $generatedSitemaps = [];
@@ -93,11 +88,7 @@ class ProcessSitemap implements ShouldQueue
          * If there are any items left to be processed then generate the sitemap.
          */
         if (! empty($this->itemsToBeProcessed)) {
-            $this->batchProcessed++;
-
             $this->generateSitemap();
-
-            $this->itemsToBeProcessed = [];
         }
 
         /**
@@ -110,8 +101,9 @@ class ProcessSitemap implements ShouldQueue
          */
         $this->sitemap->update([
             'generated_at' => now(),
+
             'additional'   => array_merge($this->sitemap->additional ?? [], [
-                'index'    => $this->generatedSitemapIndex,
+                'index'    => $this->sitemap->index_file_name,
                 'sitemaps' => $this->generatedSitemaps,
             ]),
         ]);
@@ -127,12 +119,8 @@ class ProcessSitemap implements ShouldQueue
         foreach ($items as $item) {
             $this->itemsToBeProcessed[] = $item;
 
-            if (count($this->itemsToBeProcessed) === ((int) core()->getConfigData('general.sitemap.file_limits.max_url_per_file'))) {
-                $this->batchProcessed++;
-
+            if (count($this->itemsToBeProcessed) === (int) core()->getConfigData('general.sitemap.file_limits.max_url_per_file')) {
                 $this->generateSitemap();
-
-                $this->itemsToBeProcessed = [];
             }
         }
     }
@@ -142,17 +130,21 @@ class ProcessSitemap implements ShouldQueue
      */
     protected function generateSitemap(): void
     {
+        $this->batchProcessed++;
+
         $sitemap = Sitemap::create();
 
         foreach ($this->itemsToBeProcessed as $item) {
             $sitemap->add($item);
         }
 
-        $fileName = $this->sitemap->path.'/'.File::name($this->sitemap->file_name).'-'.$this->sitemap->id.'-'.$this->batchProcessed.'.'.File::extension($this->sitemap->file_name);
+        $sitemapFilePath = clean_path($this->sitemap->path.'/'.File::name($this->sitemap->file_name).'-'.$this->sitemap->id.'-'.$this->batchProcessed.'.'.File::extension($this->sitemap->file_name));
 
-        $sitemap->writeToDisk('public', $fileName);
+        $sitemap->writeToDisk('public', $sitemapFilePath);
 
-        $this->generatedSitemaps[] = collect(explode('/', $fileName))->filter(fn ($segment) => ! empty($segment))->join('/');
+        $this->generatedSitemaps[] = $sitemapFilePath;
+
+        $this->itemsToBeProcessed = [];
     }
 
     /**
@@ -166,10 +158,6 @@ class ProcessSitemap implements ShouldQueue
             $sitemap->add(Storage::url($generatedSitemap));
         }
 
-        $sitemapFilePath = $this->sitemap->path.'/'.$this->sitemap->file_name;
-
-        $sitemap->writeToDisk('public', $sitemapFilePath);
-
-        $this->generatedSitemapIndex = collect(explode('/', $sitemapFilePath))->filter(fn ($segment) => ! empty($segment))->join('/');
+        $sitemap->writeToDisk('public', $this->sitemap->index_file_name);
     }
 }

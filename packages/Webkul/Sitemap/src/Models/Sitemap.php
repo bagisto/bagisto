@@ -57,6 +57,14 @@ class Sitemap extends Model implements SitemapContract
     }
 
     /**
+     * Get the sitemap index file name.
+     */
+    public function getIndexFileNameAttribute()
+    {
+        return clean_path($this->path.'/'.$this->file_name);
+    }
+
+    /**
      * Create a new factory instance for the model.
      */
     protected static function newFactory(): Factory
