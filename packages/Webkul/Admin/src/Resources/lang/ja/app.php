@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => 'サイトマップのオプションを設定します。',
+                    'title' => 'サイトマップ',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => '有効',
+                        'info'    => 'サイトマップを有効または無効にして、検索エンジン最適化を改善し、ユーザーエクスペリエンスを向上させます。',
+                        'title'   => '設定',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'ファイル制限オプションを設定します。',
+                        'max-file-size'    => '最大ファイルサイズ',
+                        'max-url-per-file' => 'ファイルあたりの最大URL数',
+                        'title'            => 'ファイル制限',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'ストアURLの頻度と優先順位のオプションを設定します。',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => '頻度',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'ストアURL',
+                        'priority' => '優先順位',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'カテゴリーの頻度と優先順位のオプションを設定します。',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => '頻度',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'カテゴリー',
+                        'priority' => '優先順位',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => '製品の頻度と優先順位のオプションを設定します。',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => '頻度',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => '製品',
+                        'priority' => '優先順位',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'CMSページの頻度と優先順位のオプションを設定します。',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => '頻度',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'CMSページ',
+                        'priority' => '優先順位',
                     ],
                 ],
             ],

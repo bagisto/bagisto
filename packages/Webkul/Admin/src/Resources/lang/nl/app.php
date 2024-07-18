@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
+                    'info'  => 'Stel sitemapopties in.',
                     'title' => 'Sitemap',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'Ingeschakeld',
+                        'info'    => 'Schakel de sitemap in of uit voor uw website om de zoekmachineoptimalisatie te verbeteren en de gebruikerservaring te verbeteren.',
+                        'title'   => 'Instellingen',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'Stel bestandslimietopties in.',
+                        'max-file-size'    => 'Maximale bestandsgrootte',
+                        'max-url-per-file' => 'Maximaal aantal URL\'s per bestand',
+                        'title'            => 'Bestandslimieten',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de winkel-URL.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Frequentie',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'Winkel URL',
+                        'priority' => 'Prioriteit',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de categorieën.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Frequentie',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'Categorieën',
+                        'priority' => 'Prioriteit',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de producten.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Frequentie',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'Producten',
+                        'priority' => 'Prioriteit',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'Stel frequentie- en prioriteitsopties in voor de CMS-pagina\'s.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Frequentie',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Altijd',
+                                'daily'   => 'Dagelijks',
+                                'hourly'  => 'Elk uur',
+                                'monthly' => 'Maandelijks',
+                                'never'   => 'Nooit',
+                                'weekly'  => 'Wekelijks',
+                                'yearly'  => 'Jaarlijks',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'CMS Pagina\'s',
+                        'priority' => 'Prioriteit',
                     ],
                 ],
             ],

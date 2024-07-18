@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => 'تنظیم گزینه‌های نقشه سایت.',
+                    'title' => 'نقشه سایت',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'فعال',
+                        'info'    => 'نقشه سایت را برای وب‌سایت خود فعال یا غیرفعال کنید تا به بهبود بهینه‌سازی موتورهای جستجو و افزایش تجربه کاربری کمک کند.',
+                        'title'   => 'تنظیمات',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'تنظیم گزینه‌های محدودیت فایل.',
+                        'max-file-size'    => 'حداکثر اندازه فایل',
+                        'max-url-per-file' => 'حداکثر تعداد URL‌ها در هر فایل',
+                        'title'            => 'محدودیت‌های فایل',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'تنظیم گزینه فرکانس و اولویت برای URL فروشگاه.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'فرکانس',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'همیشه',
+                                'daily'   => 'روزانه',
+                                'hourly'  => 'ساعتی',
+                                'monthly' => 'ماهانه',
+                                'never'   => 'هرگز',
+                                'weekly'  => 'هفتگی',
+                                'yearly'  => 'سالانه',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'URL فروشگاه',
+                        'priority' => 'اولویت',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'تنظیم گزینه فرکانس و اولویت برای دسته‌بندی‌ها.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'فرکانس',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'همیشه',
+                                'daily'   => 'روزانه',
+                                'hourly'  => 'ساعتی',
+                                'monthly' => 'ماهانه',
+                                'never'   => 'هرگز',
+                                'weekly'  => 'هفتگی',
+                                'yearly'  => 'سالانه',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'دسته‌بندی‌ها',
+                        'priority' => 'اولویت',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'تنظیم گزینه فرکانس و اولویت برای محصولات.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'فرکانس',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'همیشه',
+                                'daily'   => 'روزانه',
+                                'hourly'  => 'ساعتی',
+                                'monthly' => 'ماهانه',
+                                'never'   => 'هرگز',
+                                'weekly'  => 'هفتگی',
+                                'yearly'  => 'سالانه',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'محصولات',
+                        'priority' => 'اولویت',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'تنظیم گزینه فرکانس و اولویت برای صفحات CMS.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'فرکانس',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'همیشه',
+                                'daily'   => 'روزانه',
+                                'hourly'  => 'ساعتی',
+                                'monthly' => 'ماهانه',
+                                'never'   => 'هرگز',
+                                'weekly'  => 'هفتگی',
+                                'yearly'  => 'سالانه',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'صفحات CMS',
+                        'priority' => 'اولویت',
                     ],
                 ],
             ],

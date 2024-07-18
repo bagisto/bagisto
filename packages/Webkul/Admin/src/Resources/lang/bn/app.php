@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => 'সাইটম্যাপ বিকল্প সেট করুন।',
+                    'title' => 'সাইটম্যাপ',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'সক্রিয়',
+                        'info'    => 'আপনার ওয়েবসাইটের জন্য সাইটম্যাপ সক্ষম বা অক্ষম করুন যাতে সার্চ ইঞ্জিন অপ্টিমাইজেশনে উন্নতি হয় এবং ব্যবহারকারীর অভিজ্ঞতা বাড়ে।',
+                        'title'   => 'সেটিংস',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'ফাইল সীমাবদ্ধতার বিকল্প সেট করুন।',
+                        'max-file-size'    => 'সর্বাধিক ফাইল আকার',
+                        'max-url-per-file' => 'প্রতি ফাইলে সর্বাধিক URL সংখ্যা',
+                        'title'            => 'ফাইল সীমাবদ্ধতা',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'স্টোর URL এর জন্য ফ্রিকোয়েন্সি এবং অগ্রাধিকার বিকল্প সেট করুন।',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'ফ্রিকোয়েন্সি',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'সবসময়',
+                                'daily'   => 'দৈনিক',
+                                'hourly'  => 'প্রতি ঘন্টায়',
+                                'monthly' => 'মাসিক',
+                                'never'   => 'কখনো না',
+                                'weekly'  => 'সাপ্তাহিক',
+                                'yearly'  => 'বাৎসরিক',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'স্টোর URL',
+                        'priority' => 'অগ্রাধিকার',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'বিভাগগুলির জন্য ফ্রিকোয়েন্সি এবং অগ্রাধিকার বিকল্প সেট করুন।',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'ফ্রিকোয়েন্সি',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'সবসময়',
+                                'daily'   => 'দৈনিক',
+                                'hourly'  => 'প্রতি ঘন্টায়',
+                                'monthly' => 'মাসিক',
+                                'never'   => 'কখনো না',
+                                'weekly'  => 'সাপ্তাহিক',
+                                'yearly'  => 'বাৎসরিক',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'বিভাগ',
+                        'priority' => 'অগ্রাধিকার',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'পণ্যের জন্য ফ্রিকোয়েন্সি এবং অগ্রাধিকার বিকল্প সেট করুন।',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'ফ্রিকোয়েন্সি',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'সবসময়',
+                                'daily'   => 'দৈনিক',
+                                'hourly'  => 'প্রতি ঘন্টায়',
+                                'monthly' => 'মাসিক',
+                                'never'   => 'কখনো না',
+                                'weekly'  => 'সাপ্তাহিক',
+                                'yearly'  => 'বাৎসরিক',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'পণ্য',
+                        'priority' => 'অগ্রাধিকার',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'CMS পৃষ্ঠাগুলির জন্য ফ্রিকোয়েন্সি এবং অগ্রাধিকার বিকল্প সেট করুন।',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'ফ্রিকোয়েন্সি',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'সবসময়',
+                                'daily'   => 'দৈনিক',
+                                'hourly'  => 'প্রতি ঘন্টায়',
+                                'monthly' => 'মাসিক',
+                                'never'   => 'কখনো না',
+                                'weekly'  => 'সাপ্তাহিক',
+                                'yearly'  => 'বাৎসরিক',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'CMS পৃষ্ঠা',
+                        'priority' => 'অগ্রাধিকার',
                     ],
                 ],
             ],

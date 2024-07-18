@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => 'සයිට්මැප් විකල්ප සකසන්න.',
+                    'title' => 'සයිට්මැප්',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'සක්‍රීයයි',
+                        'info'    => 'ඔබගේ වෙබ් අඩවිය සඳහා සයිට්මැප් සක්‍රීය හෝ අක්‍රීය කර, සර්ච් එන්ජින් අතින් පිරිවැයින් වැඩිදියුණු කරන්න හා පරිශීලක පළපුරුද්ද ඉහළ නැංවීමක් කරන්න.',
+                        'title'   => 'සැකසුම්',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'ගොනු සීමා විකල්ප සකසන්න.',
+                        'max-file-size'    => 'උපරිම ගොනුවේ විශාලත්වය',
+                        'max-url-per-file' => 'ගොනුවකට උපරිම URL සංඛ්‍යාව',
+                        'title'            => 'ගොනු සීමා',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'ගබඩා URL සඳහා අනුපාතය සහ ප්‍රමුඛතාවය විකල්ප සකසන්න.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'අනුපාතය',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'සෑම විටම',
+                                'daily'   => 'දිනපතා',
+                                'hourly'  => 'පටිපටි',
+                                'monthly' => 'මාසිකව',
+                                'never'   => 'කිසිදිනෙක',
+                                'weekly'  => 'සතිපතා',
+                                'yearly'  => 'වාර්ෂිකව',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'ගබඩා URL',
+                        'priority' => 'ප්‍රමුඛතාවය',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'වර්ග සඳහා අනුපාතය සහ ප්‍රමුඛතාවය විකල්ප සකසන්න.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'අනුපාතය',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'සෑම විටම',
+                                'daily'   => 'දිනපතා',
+                                'hourly'  => 'පටිපටි',
+                                'monthly' => 'මාසිකව',
+                                'never'   => 'කිසිදිනෙක',
+                                'weekly'  => 'සතිපතා',
+                                'yearly'  => 'වාර්ෂිකව',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'වර්ග',
+                        'priority' => 'ප්‍රමුඛතාවය',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'නිෂ්පාදන සඳහා අනුපාතය සහ ප්‍රමුඛතාවය විකල්ප සකසන්න.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'අනුපාතය',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'සෑම විටම',
+                                'daily'   => 'දිනපතා',
+                                'hourly'  => 'පටිපටි',
+                                'monthly' => 'මාසිකව',
+                                'never'   => 'කිසිදිනෙක',
+                                'weekly'  => 'සතිපතා',
+                                'yearly'  => 'වාර්ෂිකව',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'නිෂ්පාදන',
+                        'priority' => 'ප්‍රමුඛතාවය',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'CMS පිටු සඳහා අනුපාතය සහ ප්‍රමුඛතාවය විකල්ප සකසන්න.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'අනුපාතය',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'සෑම විටම',
+                                'daily'   => 'දිනපතා',
+                                'hourly'  => 'පටිපටි',
+                                'monthly' => 'මාසිකව',
+                                'never'   => 'කිසිදිනෙක',
+                                'weekly'  => 'සතිපතා',
+                                'yearly'  => 'වාර්ෂිකව',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'CMS පිටු',
+                        'priority' => 'ප්‍රමුඛතාවය',
                     ],
                 ],
             ],

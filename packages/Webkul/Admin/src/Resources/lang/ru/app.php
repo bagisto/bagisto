@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => 'Настройка параметров карты сайта.',
+                    'title' => 'Карта сайта',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'Включено',
+                        'info'    => 'Включите или отключите карту сайта для вашего веб-сайта, чтобы улучшить поисковую оптимизацию и повысить удобство использования.',
+                        'title'   => 'Настройки',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'Настройка параметров ограничения файлов.',
+                        'max-file-size'    => 'Максимальный размер файла',
+                        'max-url-per-file' => 'Максимальное количество URL на файл',
+                        'title'            => 'Ограничения файлов',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'Настройка параметров частоты и приоритета для URL магазина.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Частота',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Всегда',
+                                'daily'   => 'Ежедневно',
+                                'hourly'  => 'Ежечасно',
+                                'monthly' => 'Ежемесячно',
+                                'never'   => 'Никогда',
+                                'weekly'  => 'Еженедельно',
+                                'yearly'  => 'Ежегодно',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'URL магазина',
+                        'priority' => 'Приоритет',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'Настройка параметров частоты и приоритета для категорий.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Частота',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Всегда',
+                                'daily'   => 'Ежедневно',
+                                'hourly'  => 'Ежечасно',
+                                'monthly' => 'Ежемесячно',
+                                'never'   => 'Никогда',
+                                'weekly'  => 'Еженедельно',
+                                'yearly'  => 'Ежегодно',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'Категории',
+                        'priority' => 'Приоритет',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'Настройка параметров частоты и приоритета для продуктов.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Частота',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Всегда',
+                                'daily'   => 'Ежедневно',
+                                'hourly'  => 'Ежечасно',
+                                'monthly' => 'Ежемесячно',
+                                'never'   => 'Никогда',
+                                'weekly'  => 'Еженедельно',
+                                'yearly'  => 'Ежегодно',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'Продукты',
+                        'priority' => 'Приоритет',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'Настройка параметров частоты и приоритета для страниц CMS.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Частота',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Всегда',
+                                'daily'   => 'Ежедневно',
+                                'hourly'  => 'Ежечасно',
+                                'monthly' => 'Ежемесячно',
+                                'never'   => 'Никогда',
+                                'weekly'  => 'Еженедельно',
+                                'yearly'  => 'Ежегодно',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'Страницы CMS',
+                        'priority' => 'Приоритет',
                     ],
                 ],
             ],

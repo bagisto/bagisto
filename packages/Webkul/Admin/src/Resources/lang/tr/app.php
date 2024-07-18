@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => 'Site haritası seçeneklerini ayarlayın.',
+                    'title' => 'Site Haritası',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'Etkin',
+                        'info'    => 'Arama motoru optimizasyonunu iyileştirmek ve kullanıcı deneyimini artırmak için web siteniz için site haritasını etkinleştirin veya devre dışı bırakın.',
+                        'title'   => 'Ayarlar',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'Dosya limitleri seçeneklerini ayarlayın.',
+                        'max-file-size'    => 'Maksimum dosya boyutu',
+                        'max-url-per-file' => 'Dosya başına maksimum URL sayısı',
+                        'title'            => 'Dosya Limitleri',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'Mağaza URL\'si için frekans ve öncelik seçeneklerini ayarlayın.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Frekans',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'Mağaza URL\'si',
+                        'priority' => 'Öncelik',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'Kategoriler için frekans ve öncelik seçeneklerini ayarlayın.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Frekans',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'Kategoriler',
+                        'priority' => 'Öncelik',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'Ürünler için frekans ve öncelik seçeneklerini ayarlayın.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Frekans',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'Ürünler',
+                        'priority' => 'Öncelik',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'CMS sayfaları için frekans ve öncelik seçeneklerini ayarlayın.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Frekans',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Her zaman',
+                                'daily'   => 'Günlük',
+                                'hourly'  => 'Saatlik',
+                                'monthly' => 'Aylık',
+                                'never'   => 'Asla',
+                                'weekly'  => 'Haftalık',
+                                'yearly'  => 'Yıllık',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'CMS Sayfaları',
+                        'priority' => 'Öncelik',
                     ],
                 ],
             ],

@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => '设置站点地图选项。',
+                    'title' => '站点地图',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => '启用',
+                        'info'    => '启用或禁用您网站的站点地图，以提高搜索引擎优化并增强用户体验。',
+                        'title'   => '设置',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => '设置文件限制选项。',
+                        'max-file-size'    => '最大文件大小',
+                        'max-url-per-file' => '每个文件的最大 URL 数量',
+                        'title'            => '文件限制',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => '设置商店 URL 的频率和优先级选项。',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => '频率',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => '始终',
+                                'daily'   => '每天',
+                                'hourly'  => '每小时',
+                                'monthly' => '每月',
+                                'never'   => '从不',
+                                'weekly'  => '每周',
+                                'yearly'  => '每年',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => '商店 URL',
+                        'priority' => '优先级',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => '设置类别的频率和优先级选项。',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => '频率',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => '始终',
+                                'daily'   => '每天',
+                                'hourly'  => '每小时',
+                                'monthly' => '每月',
+                                'never'   => '从不',
+                                'weekly'  => '每周',
+                                'yearly'  => '每年',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => '类别',
+                        'priority' => '优先级',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => '设置产品的频率和优先级选项。',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => '频率',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => '始终',
+                                'daily'   => '每天',
+                                'hourly'  => '每小时',
+                                'monthly' => '每月',
+                                'never'   => '从不',
+                                'weekly'  => '每周',
+                                'yearly'  => '每年',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => '产品',
+                        'priority' => '优先级',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => '设置 CMS 页面的频率和优先级选项。',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => '频率',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => '始终',
+                                'daily'   => '每天',
+                                'hourly'  => '每小时',
+                                'monthly' => '每月',
+                                'never'   => '从不',
+                                'weekly'  => '每周',
+                                'yearly'  => '每年',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'CMS 页面',
+                        'priority' => '优先级',
                     ],
                 ],
             ],

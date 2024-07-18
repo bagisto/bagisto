@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => 'הגדר אפשרויות מפת אתר.',
+                    'title' => 'מפת אתר',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'מופעל',
+                        'info'    => 'הפעל או השבת את מפת האתר לאתר שלך כדי לשפר את אופטימיזציית מנועי החיפוש ולשפר את חוויית המשתמש.',
+                        'title'   => 'הגדרות',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'הגדר אפשרויות גבולות קובץ.',
+                        'max-file-size'    => 'גודל קובץ מרבי',
+                        'max-url-per-file' => 'מספר מרבי של כתובות URL לכל קובץ',
+                        'title'            => 'גבולות קובץ',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'הגדר אפשרויות תדירות ועדיפות לכתובת ה-URL של החנות.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'תדירות',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'תמיד',
+                                'daily'   => 'יומי',
+                                'hourly'  => 'כל שעה',
+                                'monthly' => 'חודשי',
+                                'never'   => 'אף פעם',
+                                'weekly'  => 'שבועי',
+                                'yearly'  => 'שנתי',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'כתובת ה-URL של החנות',
+                        'priority' => 'עדיפות',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'הגדר אפשרויות תדירות ועדיפות לקטגוריות.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'תדירות',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'תמיד',
+                                'daily'   => 'יומי',
+                                'hourly'  => 'כל שעה',
+                                'monthly' => 'חודשי',
+                                'never'   => 'אף פעם',
+                                'weekly'  => 'שבועי',
+                                'yearly'  => 'שנתי',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'קטגוריות',
+                        'priority' => 'עדיפות',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'הגדר אפשרויות תדירות ועדיפות למוצרים.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'תדירות',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'תמיד',
+                                'daily'   => 'יומי',
+                                'hourly'  => 'כל שעה',
+                                'monthly' => 'חודשי',
+                                'never'   => 'אף פעם',
+                                'weekly'  => 'שבועי',
+                                'yearly'  => 'שנתי',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'מוצרים',
+                        'priority' => 'עדיפות',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'הגדר אפשרויות תדירות ועדיפות לעמודי CMS.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'תדירות',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'תמיד',
+                                'daily'   => 'יומי',
+                                'hourly'  => 'כל שעה',
+                                'monthly' => 'חודשי',
+                                'never'   => 'אף פעם',
+                                'weekly'  => 'שבועי',
+                                'yearly'  => 'שנתי',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'עמודי CMS',
+                        'priority' => 'עדיפות',
                     ],
                 ],
             ],

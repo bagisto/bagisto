@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => 'साइटमैप विकल्प सेट करें।',
+                    'title' => 'साइटमैप',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'सक्रिय',
+                        'info'    => 'अपनी वेबसाइट के लिए साइटमैप को सक्रिय या निष्क्रिय करें ताकि खोज इंजन अनुकूलन में सुधार हो सके और उपयोगकर्ता अनुभव को बढ़ाया जा सके।',
+                        'title'   => 'सेटिंग्स',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'फाइल लिमिट विकल्प सेट करें।',
+                        'max-file-size'    => 'अधिकतम फ़ाइल आकार',
+                        'max-url-per-file' => 'प्रति फ़ाइल अधिकतम URL की संख्या',
+                        'title'            => 'फ़ाइल सीमाएं',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'स्टोर URL के लिए आवृत्ति और प्राथमिकता विकल्प सेट करें।',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'आवृत्ति',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'हमेशा',
+                                'daily'   => 'दैनिक',
+                                'hourly'  => 'प्रति घंटा',
+                                'monthly' => 'मासिक',
+                                'never'   => 'कभी नहीं',
+                                'weekly'  => 'साप्ताहिक',
+                                'yearly'  => 'वार्षिक',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'स्टोर URL',
+                        'priority' => 'प्राथमिकता',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'श्रेणियों के लिए आवृत्ति और प्राथमिकता विकल्प सेट करें।',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'आवृत्ति',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'हमेशा',
+                                'daily'   => 'दैनिक',
+                                'hourly'  => 'प्रति घंटा',
+                                'monthly' => 'मासिक',
+                                'never'   => 'कभी नहीं',
+                                'weekly'  => 'साप्ताहिक',
+                                'yearly'  => 'वार्षिक',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'श्रेणियाँ',
+                        'priority' => 'प्राथमिकता',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'उत्पादों के लिए आवृत्ति और प्राथमिकता विकल्प सेट करें।',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'आवृत्ति',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'हमेशा',
+                                'daily'   => 'दैनिक',
+                                'hourly'  => 'प्रति घंटा',
+                                'monthly' => 'मासिक',
+                                'never'   => 'कभी नहीं',
+                                'weekly'  => 'साप्ताहिक',
+                                'yearly'  => 'वार्षिक',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'उत्पाद',
+                        'priority' => 'प्राथमिकता',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'CMS पृष्ठों के लिए आवृत्ति और प्राथमिकता विकल्प सेट करें।',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'आवृत्ति',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'हमेशा',
+                                'daily'   => 'दैनिक',
+                                'hourly'  => 'प्रति घंटा',
+                                'monthly' => 'मासिक',
+                                'never'   => 'कभी नहीं',
+                                'weekly'  => 'साप्ताहिक',
+                                'yearly'  => 'वार्षिक',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'CMS पृष्ठ',
+                        'priority' => 'प्राथमिकता',
                     ],
                 ],
             ],

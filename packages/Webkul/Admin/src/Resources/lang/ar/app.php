@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
-                    'title' => 'Sitemap',
+                    'info'  => 'تعيين خيارات خريطة الموقع.',
+                    'title' => 'خريطة الموقع',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'مفعل',
+                        'info'    => 'تمكين أو تعطيل خريطة الموقع لموقعك على الويب لتحسين محركات البحث وتعزيز تجربة المستخدم.',
+                        'title'   => 'الإعدادات',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'تعيين خيارات حدود الملف.',
+                        'max-file-size'    => 'الحد الأقصى لحجم الملف',
+                        'max-url-per-file' => 'الحد الأقصى لعدد عناوين URL لكل ملف',
+                        'title'            => 'حدود الملف',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'تعيين خيار التردد والأولوية لعنوان URL للمتجر.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'التردد',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'دائما',
+                                'daily'   => 'يوميا',
+                                'hourly'  => 'كل ساعة',
+                                'monthly' => 'شهريا',
+                                'never'   => 'أبدا',
+                                'weekly'  => 'أسبوعيا',
+                                'yearly'  => 'سنويًا',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'عنوان URL للمتجر',
+                        'priority' => 'الأولوية',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'تعيين خيار التردد والأولوية للفئات.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'التردد',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'دائما',
+                                'daily'   => 'يوميا',
+                                'hourly'  => 'كل ساعة',
+                                'monthly' => 'شهريا',
+                                'never'   => 'أبدا',
+                                'weekly'  => 'أسبوعيا',
+                                'yearly'  => 'سنويًا',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'الفئات',
+                        'priority' => 'الأولوية',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'تعيين خيار التردد والأولوية للمنتجات.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'التردد',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'دائما',
+                                'daily'   => 'يوميا',
+                                'hourly'  => 'كل ساعة',
+                                'monthly' => 'شهريا',
+                                'never'   => 'أبدا',
+                                'weekly'  => 'أسبوعيا',
+                                'yearly'  => 'سنويًا',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'المنتجات',
+                        'priority' => 'الأولوية',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'تعيين خيار التردد والأولوية لصفحات إدارة المحتوى.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'التردد',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'دائما',
+                                'daily'   => 'يوميا',
+                                'hourly'  => 'كل ساعة',
+                                'monthly' => 'شهريا',
+                                'never'   => 'أبدا',
+                                'weekly'  => 'أسبوعيا',
+                                'yearly'  => 'سنويًا',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'صفحات إدارة المحتوى',
+                        'priority' => 'الأولوية',
                     ],
                 ],
             ],

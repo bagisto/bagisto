@@ -3466,104 +3466,104 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info'  => 'Set sitemap options.',
+                    'info'  => 'Sitemap-Optionen festlegen.',
                     'title' => 'Sitemap',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
-                        'title'   => 'Settings',
+                        'enabled' => 'Aktiviert',
+                        'info'    => 'Aktivieren oder deaktivieren Sie die Sitemap für Ihre Website, um die Suchmaschinenoptimierung zu verbessern und die Benutzererfahrung zu steigern.',
+                        'title'   => 'Einstellungen',
                     ],
 
                     'file-limits' => [
-                        'info'             => 'Set file limits options.',
-                        'max-file-size'    => 'Maximum file size',
-                        'max-url-per-file' => 'Maximum no. of URLs per file',
-                        'title'            => 'File Limits',
+                        'info'             => 'Dateigrößenbeschränkungen festlegen.',
+                        'max-file-size'    => 'Maximale Dateigröße',
+                        'max-url-per-file' => 'Maximale Anzahl von URLs pro Datei',
+                        'title'            => 'Dateibeschränkungen',
                     ],
 
                     'store-url' => [
-                        'info'  => 'Set frequency and priority option for the store URL.',
+                        'info'  => 'Häufigkeit und Prioritätsoption für die Store-URL festlegen.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Häufigkeit',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
                             ],
                         ],
 
-                        'title'    => 'Store URL',
-                        'priority' => 'Priority',
+                        'title'    => 'Store-URL',
+                        'priority' => 'Priorität',
                     ],
 
                     'categories' => [
-                        'info'  => 'Set frequency and priority option for the categories.',
+                        'info'  => 'Häufigkeit und Prioritätsoption für die Kategorien festlegen.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Häufigkeit',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
                             ],
                         ],
 
-                        'title'    => 'Categories',
-                        'priority' => 'Priority',
+                        'title'    => 'Kategorien',
+                        'priority' => 'Priorität',
                     ],
 
                     'products' => [
-                        'info'  => 'Set frequency and priority option for the products.',
+                        'info'  => 'Häufigkeit und Prioritätsoption für die Produkte festlegen.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Häufigkeit',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
                             ],
                         ],
 
-                        'title'    => 'Products',
-                        'priority' => 'Priority',
+                        'title'    => 'Produkte',
+                        'priority' => 'Priorität',
                     ],
 
                     'cms' => [
-                        'info'  => 'Set frequency and priority option for the CMS pages.',
+                        'info'  => 'Häufigkeit und Prioritätsoption für die CMS-Seiten festlegen.',
 
                         'frequency' => [
-                            'title' => 'Frequency',
+                            'title' => 'Häufigkeit',
 
                             'options' => [
-                                'always'  => 'Always',
-                                'daily'   => 'Daily',
-                                'hourly'  => 'Hourly',
-                                'monthly' => 'Monthly',
-                                'never'   => 'Never',
-                                'weekly'  => 'Weekly',
-                                'yearly'  => 'Yearly',
+                                'always'  => 'Immer',
+                                'daily'   => 'Täglich',
+                                'hourly'  => 'Stündlich',
+                                'monthly' => 'Monatlich',
+                                'never'   => 'Nie',
+                                'weekly'  => 'Wöchentlich',
+                                'yearly'  => 'Jährlich',
                             ],
                         ],
 
-                        'title'    => 'CMS Pages',
-                        'priority' => 'Priority',
+                        'title'    => 'CMS-Seiten',
+                        'priority' => 'Priorität',
                     ],
                 ],
             ],
