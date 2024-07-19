@@ -1,4 +1,5 @@
-!customers.csv
-!products.csv
-!tax-rates.csv
+!csv
+!xls
+!xlsx
+!xml
 !.gitignore

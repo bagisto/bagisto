@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customers>
+  <customer
+    email="john@example.com"
+    customer_group_code="wholesale"
+    first_name="John"
+    last_name="Doe"
+    phone="9876543109"
+    date_of_birth="1991-05-15"
+    gender="Male"
+  />
+  <customer
+    email="jane@example.com"
+    customer_group_code="general"
+    first_name="Jane"
+    last_name="Smith"
+    phone=""
+    date_of_birth="1991-05-15"
+    gender="Female"
+  />
+  <customer
+    email="robert@example.com"
+    customer_group_code="general"
+    first_name="Robert"
+    last_name="Johnson"
+    phone=""
+    date_of_birth="1990-11-26"
+    gender="Male"
+  />
+</customers>
