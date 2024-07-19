@@ -355,7 +355,7 @@ return [
             [
                 'name'          => 'max_url_per_file',
                 'title'         => 'admin::app.configuration.index.general.sitemap.file-limits.max-url-per-file',
-                'type'          => 'number',
+                'type'          => 'text',
                 'default'       => 50000,
                 'validation'    => 'integer|min:1',
                 'channel_based' => true,
