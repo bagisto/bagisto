@@ -491,7 +491,7 @@ class ImportController extends Controller
      */
     public function downloadSample(string $type, string $format)
     {
-        $samplePath = config("importers.{$type}.sample_path.{$format}");
+        $samplePath = config("importers.{$type}.sample_paths.{$format}");
 
         return Storage::download($samplePath);
     }
