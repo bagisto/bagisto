@@ -78,7 +78,7 @@ abstract class Repository extends BaseRepository implements CacheableInterface
      */
     public function findOneByField($field, $value = null, $columns = ['*'])
     {
-        $model = $this->findByField($field, $value, $columns = ['*']);
+        $model = $this->findByField($field, $value, $columns);
 
         return $model->first();
     }
