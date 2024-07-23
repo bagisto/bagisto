@@ -184,12 +184,12 @@ class Importer extends AbstractImporter
          */
         $validator = Validator::make($rowData, [
             'customer_group_code' => 'required',
-            'first_name'          => 'string|required',
-            'last_name'           => 'string|required',
+            'first_name'          => 'required|string',
+            'last_name'           => 'required|string',
             'gender'              => 'required:in,Male,Female,Other',
             'email'               => 'required|email',
             'date_of_birth'       => 'date|before:today',
-            'phone'               => new PhoneNumber,
+            'phone'               => ! empty($rowData['phone']) ? new PhoneNumber : '',
         ]);
 
         if ($validator->fails()) {
