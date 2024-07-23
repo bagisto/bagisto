@@ -11,11 +11,29 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     use CacheableRepository;
 
     /**
-     * @var bool
+     * Cache only enabled.
+     *
+     * @var array
      */
-    protected $cacheEnabled = false;
+    protected $cacheOnly;
 
     /**
+     * Cache except enabled.
+     *
+     * @var array
+     */
+    protected $cacheExcept;
+
+    /**
+     * Clean enabled.
+     *
+     * @var bool
+     */
+    protected $cleanEnabled;
+
+    /**
+     * Allowed clean.
+     *
      * @return bool
      */
     public function allowedClean()
@@ -28,6 +46,8 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
+     * Allowed cache.
+     *
      * @return bool
      */
     protected function allowedCache($method)
@@ -41,6 +61,7 @@ abstract class Repository extends BaseRepository implements CacheableInterface
         }
 
         $cacheOnly = isset($this->cacheOnly) ? $this->cacheOnly : config("repository.cache.repositories.{$className}.allowed.only", config('repository.cache.allowed.only', null));
+
         $cacheExcept = isset($this->cacheExcept) ? $this->cacheExcept : config("repository.cache.repositories.{$className}.allowed.except", config('repository.cache.allowed.only', null));
 
         if (is_array($cacheOnly)) {
@@ -59,6 +80,8 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
+     * Reset model.
+     *
      * @throws RepositoryException
      */
     public function resetModel()
@@ -69,7 +92,7 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
-     * Find data by field and value
+     * Find data by field and value.
      *
      * @param  string  $field
      * @param  string  $value
@@ -78,13 +101,13 @@ abstract class Repository extends BaseRepository implements CacheableInterface
      */
     public function findOneByField($field, $value = null, $columns = ['*'])
     {
-        $model = $this->findByField($field, $value, $columns = ['*']);
+        $model = $this->findByField($field, $value, $columns);
 
         return $model->first();
     }
 
     /**
-     * Find data by field and value
+     * Find data by field and value.
      *
      * @param  string  $field
      * @param  string  $value
@@ -99,7 +122,7 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
-     * Find data by id
+     * Find data by id.
      *
      * @param  int  $id
      * @param  array  $columns
@@ -116,7 +139,7 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
-     * Find data by id
+     * Find data by id.
      *
      * @param  int  $id
      * @param  array  $columns
@@ -133,7 +156,7 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
-     * Count results of repository
+     * Count results of repository.
      *
      * @param  string  $columns
      * @return int
@@ -155,6 +178,8 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
+     * Sum.
+     *
      * @param  string  $columns
      * @return mixed
      */
@@ -170,6 +195,8 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
+     * Avg.
+     *
      * @param  string  $columns
      * @return mixed
      */
@@ -185,6 +212,8 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
+     * Get model.
+     *
      * @return mixed
      */
     public function getModel()
