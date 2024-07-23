@@ -37,6 +37,11 @@ abstract class AbstractSource
     abstract protected function getNextRow(): array|bool;
 
     /**
+     * Generate error report.
+     */
+    abstract public function generateErrorReport(array $errors): string;
+
+    /**
      * Return the key of the current row.
      */
     public function getCurrentRowNumber(): int

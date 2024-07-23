@@ -4,70 +4,61 @@ namespace Webkul\DataTransfer\Helpers\Sources;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Csv as CSVWriter;
+use PhpOffice\PhpSpreadsheet\Writer\Xls as XLSWriter;
 
-class CSV extends AbstractSource
+class XLS extends AbstractSource
 {
     /**
-     * CSV reader.
+     * Excel reader.
      */
     protected mixed $reader;
+
+    /**
+     * Current row number.
+     */
+    protected int $currentRowNumber = 1;
 
     /**
      * Create a new helper instance.
      *
      * @return void
      */
-    public function __construct(
-        string $filePath,
-        protected string $delimiter = ','
-    ) {
+    public function __construct(string $filePath)
+    {
         try {
-            $this->reader = fopen(Storage::disk('private')->path($filePath), 'r');
+            $factory = IOFactory::load(Storage::disk('private')->path($filePath));
 
-            $this->columnNames = fgetcsv($this->reader, 4096, $delimiter);
+            $this->reader = $factory->getActiveSheet();
 
-            $this->totalColumns = count($this->columnNames);
+            $highestColumn = $this->reader->getHighestColumn();
+
+            $this->totalColumns = Coordinate::columnIndexFromString($highestColumn);
+
+            $this->columnNames = $this->getNextRow();
         } catch (\Exception $e) {
             throw new \LogicException("Unable to open file: '{$filePath}'");
         }
     }
 
     /**
-     * Close file handle.
-     *
-     * @return void
+     * Read next line from excel.
      */
-    public function __destruct()
+    protected function getNextRow(): array|bool
     {
-        if (! is_object($this->reader)) {
-            return;
+        for ($column = 1; $column <= $this->totalColumns; $column++) {
+            $rowData[] = $this->reader->getCellByColumnAndRow($column, $this->currentRowNumber)->getValue();
         }
 
-        $this->reader->close();
-    }
+        $filteredRowData = array_filter($rowData);
 
-    /**
-     * Read next line from csv.
-     */
-    protected function getNextRow(): array
-    {
-        $parsed = fgetcsv($this->reader, 4096, $this->delimiter);
-
-        if (is_array($parsed) && count($parsed) != $this->totalColumns) {
-            foreach ($parsed as $element) {
-                if ($element && strpos($element, "'") !== false) {
-                    $this->foundWrongQuoteFlag = true;
-
-                    break;
-                }
-            }
-        } else {
-            $this->foundWrongQuoteFlag = false;
+        if (empty($filteredRowData)) {
+            return false;
         }
 
-        return is_array($parsed) ? $parsed : [];
+        return $rowData;
     }
 
     /**
@@ -75,9 +66,9 @@ class CSV extends AbstractSource
      */
     public function rewind(): void
     {
-        rewind($this->reader);
+        $this->currentRowNumber = 1;
 
-        parent::rewind();
+        $this->next();
     }
 
     /**
@@ -126,11 +117,9 @@ class CSV extends AbstractSource
             $this->next();
         }
 
-        $writer = new CSVWriter($spreadsheet);
+        $writer = new XLSWriter($spreadsheet);
 
-        $writer->setDelimiter(',');
-
-        $writer->save(Storage::disk('private')->path($errorFilePath = 'imports/'.time().'-error-report.csv'));
+        $writer->save(Storage::disk('private')->path($errorFilePath = 'imports/'.time().'-error-report.xls'));
 
         return $errorFilePath;
     }

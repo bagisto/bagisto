@@ -2,11 +2,14 @@
 
 namespace Webkul\DataTransfer\Helpers\Sources;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XLSXWriter;
 
-class Excel extends AbstractSource
+class XLSX extends AbstractSource
 {
     /**
      * Excel reader.
@@ -66,5 +69,58 @@ class Excel extends AbstractSource
         $this->currentRowNumber = 1;
 
         $this->next();
+    }
+
+    /**
+     * Generate error report.
+     */
+    public function generateErrorReport(array $errors): string
+    {
+        $this->rewind();
+
+        $spreadsheet = new Spreadsheet();
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        /**
+         * Add headers with extra error column.
+         */
+        $sheet->fromArray(
+            [array_merge($this->getColumnNames(), [
+                'errors',
+            ])],
+            null,
+            'A1'
+        );
+
+        $rowNumber = 2;
+
+        while ($this->valid()) {
+            try {
+                $rowData = $this->current();
+            } catch (\InvalidArgumentException $e) {
+                $this->next();
+
+                continue;
+            }
+
+            $rowErrors = $errors[$this->getCurrentRowNumber()] ?? [];
+
+            if (! empty($rowErrors)) {
+                $rowErrors = Arr::pluck($rowErrors, 'message');
+            }
+
+            $rowData[] = implode('|', $rowErrors);
+
+            $sheet->fromArray([$rowData], null, 'A'.$rowNumber++);
+
+            $this->next();
+        }
+
+        $writer = new XLSXWriter($spreadsheet);
+
+        $writer->save(Storage::disk('private')->path($errorFilePath = 'imports/'.time().'-error-report.xlsx'));
+
+        return $errorFilePath;
     }
 }

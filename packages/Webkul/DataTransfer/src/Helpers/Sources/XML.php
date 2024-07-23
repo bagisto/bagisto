@@ -2,7 +2,10 @@
 
 namespace Webkul\DataTransfer\Helpers\Sources;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use SimpleXMLElement;
 use XMLReader;
 
 class XML extends AbstractSource
@@ -102,5 +105,51 @@ class XML extends AbstractSource
         );
 
         $this->next();
+    }
+
+    /**
+     * Generate error report.
+     */
+    public function generateErrorReport(array $errors): string
+    {
+        $this->rewind();
+
+        $childElement = $this->reader->name;
+
+        $parentElement = Str::pluralStudly($this->reader->name);
+
+        $writer = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><'.$parentElement.'></'.$parentElement.'>');
+
+        while ($this->valid()) {
+            try {
+                $rowData = $this->current();
+            } catch (\InvalidArgumentException $e) {
+                $this->next();
+
+                continue;
+            }
+
+            $rowErrors = $errors[$this->getCurrentRowNumber()] ?? [];
+
+            if (! empty($rowErrors)) {
+                $rowErrors = Arr::pluck($rowErrors, 'message');
+            }
+
+            $rowData['errors'] = implode('|', $rowErrors);
+
+            $customer = $writer->addChild($childElement);
+
+            foreach ($rowData as $key => $value) {
+                if (is_string($key)) {
+                    $customer->addAttribute($key, $value);
+                }
+            }
+
+            $this->next();
+        }
+
+        $writer->saveXML(Storage::disk('private')->path($errorFilePath = 'imports/'.time().'-error-report.xml'));
+
+        return $errorFilePath;
     }
 }

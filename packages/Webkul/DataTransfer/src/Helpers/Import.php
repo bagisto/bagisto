@@ -2,22 +2,16 @@
 
 namespace Webkul\DataTransfer\Helpers;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Csv;
-use PhpOffice\PhpSpreadsheet\Writer\Xls;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use SimpleXMLElement;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
 use Webkul\DataTransfer\Helpers\Sources\AbstractSource;
 use Webkul\DataTransfer\Helpers\Sources\CSV as CSVSource;
-use Webkul\DataTransfer\Helpers\Sources\Excel as ExcelSource;
+use Webkul\DataTransfer\Helpers\Sources\XLS as XLSSource;
+use Webkul\DataTransfer\Helpers\Sources\XLSX as XLSXSource;
 use Webkul\DataTransfer\Helpers\Sources\XML as XMLSource;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\DataTransfer\Repositories\ImportRepository;
@@ -172,23 +166,34 @@ class Import
     public function getSource(): AbstractSource
     {
         if (Str::endsWith($this->import->file_path, '.csv')) {
-            $source = new CSVSource(
-                $this->import->file_path,
-                $this->import->field_separator,
-            );
-        } elseif (Str::endsWith($this->import->file_path, '.xml')) {
-            $source = new XMLSource(
-                $this->import->file_path,
-                $this->import->field_separator,
-            );
-        } else {
-            $source = new ExcelSource(
+            return new CSVSource(
                 $this->import->file_path,
                 $this->import->field_separator,
             );
         }
 
-        return $source;
+        if (Str::endsWith($this->import->file_path, '.xml')) {
+            return new XMLSource(
+                $this->import->file_path,
+                $this->import->field_separator,
+            );
+        }
+
+        if (Str::endsWith($this->import->file_path, '.xls')) {
+            return new XLSSource(
+                $this->import->file_path,
+                $this->import->field_separator,
+            );
+        }
+
+        if (Str::endsWith($this->import->file_path, '.xlsx')) {
+            return new XLSXSource(
+                $this->import->file_path,
+                $this->import->field_separator,
+            );
+        }
+
+        throw new \InvalidArgumentException("Unsupported file type: {$this->import->file_path}");
     }
 
     /**
@@ -492,193 +497,9 @@ class Import
 
         $errors = $this->errorHelper->getAllErrors();
 
-        $source = $this->getTypeImporter()->getSource();
-
-        $source->rewind();
-
-        $fileType = pathinfo($this->import->file_path, PATHINFO_EXTENSION);
-
-        $errorFilePath = 'imports/'.time().'-error-report.'.$fileType;
-
-        switch ($fileType) {
-            case 'csv':
-                $spreadsheet = new Spreadsheet();
-
-                $sheet = $spreadsheet->getActiveSheet();
-
-                /**
-                 * Add headers with extra error column.
-                 */
-                $sheet->fromArray(
-                    [array_merge($source->getColumnNames(), [
-                        'errors',
-                    ])],
-                    null,
-                    'A1'
-                );
-
-                $rowNumber = 2;
-
-                while ($source->valid()) {
-                    try {
-                        $rowData = $source->current();
-                    } catch (\InvalidArgumentException $e) {
-                        $source->next();
-
-                        continue;
-                    }
-
-                    $rowErrors = $errors[$source->getCurrentRowNumber()] ?? [];
-
-                    if (! empty($rowErrors)) {
-                        $rowErrors = Arr::pluck($rowErrors, 'message');
-                    }
-
-                    $rowData[] = implode('|', $rowErrors);
-
-                    $sheet->fromArray([$rowData], null, 'A'.$rowNumber++);
-
-                    $source->next();
-                }
-
-                $writer = new Csv($spreadsheet);
-
-                $writer->setDelimiter($this->import->field_separator);
-
-                $writer->save(Storage::disk('private')->path($errorFilePath));
-
-                break;
-
-            case 'xls':
-                $spreadsheet = new Spreadsheet();
-
-                $sheet = $spreadsheet->getActiveSheet();
-
-                /**
-                 * Add headers with extra error column.
-                 */
-                $sheet->fromArray(
-                    [array_merge($source->getColumnNames(), [
-                        'errors',
-                    ])],
-                    null,
-                    'A1'
-                );
-
-                $rowNumber = 2;
-
-                while ($source->valid()) {
-                    try {
-                        $rowData = $source->current();
-                    } catch (\InvalidArgumentException $e) {
-                        $source->next();
-
-                        continue;
-                    }
-
-                    $rowErrors = $errors[$source->getCurrentRowNumber()] ?? [];
-
-                    if (! empty($rowErrors)) {
-                        $rowErrors = Arr::pluck($rowErrors, 'message');
-                    }
-
-                    $rowData[] = implode('|', $rowErrors);
-
-                    $sheet->fromArray([$rowData], null, 'A'.$rowNumber++);
-
-                    $source->next();
-                }
-
-                $writer = new Xls($spreadsheet);
-
-                $writer->save(Storage::disk('private')->path($errorFilePath));
-
-            case 'xlsx':
-                $spreadsheet = new Spreadsheet();
-
-                $sheet = $spreadsheet->getActiveSheet();
-
-                /**
-                 * Add headers with extra error column.
-                 */
-                $sheet->fromArray(
-                    [array_merge($source->getColumnNames(), [
-                        'errors',
-                    ])],
-                    null,
-                    'A1'
-                );
-
-                $rowNumber = 2;
-
-                while ($source->valid()) {
-                    try {
-                        $rowData = $source->current();
-                    } catch (\InvalidArgumentException $e) {
-                        $source->next();
-
-                        continue;
-                    }
-
-                    $rowErrors = $errors[$source->getCurrentRowNumber()] ?? [];
-
-                    if (! empty($rowErrors)) {
-                        $rowErrors = Arr::pluck($rowErrors, 'message');
-                    }
-
-                    $rowData[] = implode('|', $rowErrors);
-
-                    $sheet->fromArray([$rowData], null, 'A'.$rowNumber++);
-
-                    $source->next();
-                }
-
-                $writer = new Xlsx($spreadsheet);
-
-                $writer->save(Storage::disk('private')->path($errorFilePath));
-
-                break;
-
-            case 'xml':
-                $writer = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><customers></customers>');
-
-                while ($source->valid()) {
-                    try {
-                        $rowData = $source->current();
-                    } catch (\InvalidArgumentException $e) {
-                        $source->next();
-
-                        continue;
-                    }
-
-                    $rowErrors = $errors[$source->getCurrentRowNumber()] ?? [];
-
-                    if (! empty($rowErrors)) {
-                        $rowErrors = Arr::pluck($rowErrors, 'message');
-                    }
-
-                    $rowData['errors'] = implode('|', $rowErrors);
-
-                    $customer = $writer->addChild('customer');
-
-                    foreach ($rowData as $key => $value) {
-                        if (is_string($key)) {
-                            $customer->addAttribute($key, $value);
-                        }
-                    }
-
-                    $source->next();
-                }
-
-                $writer->saveXML(Storage::disk('private')->path($errorFilePath));
-
-                break;
-
-            default:
-                throw new \InvalidArgumentException("Unsupported file type: $fileType");
-        }
-
-        return $errorFilePath;
+        return $this->getTypeImporter()
+            ->getSource()
+            ->generateErrorReport($errors);
     }
 
     /**
