@@ -28,8 +28,7 @@ class ProductDataGrid extends DataGrid
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected ProductRepository $productRepository,
         protected InventorySourceRepository $inventorySourceRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Prepare query builder.

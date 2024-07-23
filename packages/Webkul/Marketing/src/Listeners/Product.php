@@ -23,8 +23,7 @@ class Product
     public function __construct(
         protected ProductRepository $productRepository,
         protected URLRewriteRepository $urlRewriteRepository
-    ) {
-    }
+    ) {}
 
     /**
      * After product is updated

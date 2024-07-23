@@ -16,6 +16,5 @@ class Action
         public string $title,
         public string $method,
         public mixed $url,
-    ) {
-    }
+    ) {}
 }

@@ -2,6 +2,4 @@
 
 namespace Webkul\DataTransfer\Contracts;
 
-interface ImportBatch
-{
-}
+interface ImportBatch {}

@@ -15,9 +15,7 @@ class RegistrationNotification extends Mailable
      *
      * @return void
      */
-    public function __construct(public Customer $customer)
-    {
-    }
+    public function __construct(public Customer $customer) {}
 
     /**
      * Get the message envelope.

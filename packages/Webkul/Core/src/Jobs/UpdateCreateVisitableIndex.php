@@ -20,9 +20,7 @@ class UpdateCreateVisitableIndex implements ShouldQueue
      * @param  array  $log
      * @return void
      */
-    public function __construct(protected $log)
-    {
-    }
+    public function __construct(protected $log) {}
 
     /**
      * Execute the job.

@@ -19,8 +19,7 @@ class OrderController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected OrderCommentRepository $orderCommentRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

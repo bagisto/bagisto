@@ -2,6 +2,4 @@
 
 namespace Webkul\CatalogRule\Contracts;
 
-interface CatalogRuleProductPrice
-{
-}
+interface CatalogRuleProductPrice {}

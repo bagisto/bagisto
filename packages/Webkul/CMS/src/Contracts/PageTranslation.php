@@ -2,6 +2,4 @@
 
 namespace Webkul\CMS\Contracts;
 
-interface PageTranslation
-{
-}
+interface PageTranslation {}

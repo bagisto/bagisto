@@ -24,9 +24,7 @@ class Storage
      *
      * @return void
      */
-    public function __construct(protected CustomerRepository $customerRepository)
-    {
-    }
+    public function __construct(protected CustomerRepository $customerRepository) {}
 
     /**
      * Initialize storage

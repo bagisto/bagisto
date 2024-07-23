@@ -108,8 +108,7 @@ class Import
         protected ImportRepository $importRepository,
         protected ImportBatchRepository $importBatchRepository,
         protected Error $errorHelper
-    ) {
-    }
+    ) {}
 
     /**
      * Set import instance.

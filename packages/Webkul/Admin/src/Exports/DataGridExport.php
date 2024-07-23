@@ -14,9 +14,7 @@ class DataGridExport implements FromView, ShouldAutoSize
      * @param mixed DataGrid
      * @return void
      */
-    public function __construct(protected $gridData = [])
-    {
-    }
+    public function __construct(protected $gridData = []) {}
 
     /**
      * function to create a blade view for export.

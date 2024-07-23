@@ -18,10 +18,7 @@ class MoneyTransfer extends Payment
      *
      * @return string
      */
-    public function getRedirectUrl()
-    {
-
-    }
+    public function getRedirectUrl() {}
 
     /**
      * Returns payment method additional information.

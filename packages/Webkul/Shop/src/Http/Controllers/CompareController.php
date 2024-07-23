@@ -11,9 +11,7 @@ class CompareController extends Controller
      *
      * @return void
      */
-    public function __construct(protected AttributeFamilyRepository $attributeFamilyRepository)
-    {
-    }
+    public function __construct(protected AttributeFamilyRepository $attributeFamilyRepository) {}
 
     /**
      * Address route index page.

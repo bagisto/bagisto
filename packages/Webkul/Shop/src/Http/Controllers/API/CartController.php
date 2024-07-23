@@ -23,8 +23,7 @@ class CartController extends APIController
         protected WishlistRepository $wishlistRepository,
         protected ProductRepository $productRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Cart.

@@ -16,9 +16,7 @@ class CustomerUpdatePassword extends Mailable
      * @param  \Webkul\Customer\Models\Customer  $customer
      * @return void
      */
-    public function __construct(public $customer)
-    {
-    }
+    public function __construct(public $customer) {}
 
     /**
      * Build the message.

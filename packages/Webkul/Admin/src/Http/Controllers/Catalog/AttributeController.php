@@ -21,8 +21,7 @@ class AttributeController extends Controller
     public function __construct(
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

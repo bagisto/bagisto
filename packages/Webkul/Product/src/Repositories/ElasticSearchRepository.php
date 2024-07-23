@@ -18,8 +18,7 @@ class ElasticSearchRepository
         protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
         protected SearchSynonymRepository $searchSynonymRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Return elastic search index name

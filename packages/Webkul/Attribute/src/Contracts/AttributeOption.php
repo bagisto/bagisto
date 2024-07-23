@@ -2,6 +2,4 @@
 
 namespace Webkul\Attribute\Contracts;
 
-interface AttributeOption
-{
-}
+interface AttributeOption {}

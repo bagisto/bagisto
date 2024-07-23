@@ -19,8 +19,7 @@ class RoleController extends Controller
     public function __construct(
         protected RoleRepository $roleRepository,
         protected AdminRepository $adminRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

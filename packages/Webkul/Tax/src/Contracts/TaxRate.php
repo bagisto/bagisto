@@ -2,6 +2,4 @@
 
 namespace Webkul\Tax\Contracts;
 
-interface TaxRate
-{
-}
+interface TaxRate {}

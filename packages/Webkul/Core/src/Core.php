@@ -112,8 +112,7 @@ class Core
         protected CoreConfigRepository $coreConfigRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected TaxCategoryRepository $taxCategoryRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Get the version number of the Bagisto.
