@@ -513,6 +513,10 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->findOrFail($id);
 
+        if (! $import->error_file_path) {
+            abort(404);
+        }
+
         return Storage::disk('private')->download($import->error_file_path);
     }
 }
