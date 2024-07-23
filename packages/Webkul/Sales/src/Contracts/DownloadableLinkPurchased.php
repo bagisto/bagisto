@@ -2,6 +2,4 @@
 
 namespace Webkul\Sales\Contracts;
 
-interface DownloadableLinkPurchased
-{
-}
+interface DownloadableLinkPurchased {}

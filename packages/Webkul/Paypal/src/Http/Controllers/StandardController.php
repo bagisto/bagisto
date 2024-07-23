@@ -17,8 +17,7 @@ class StandardController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected Ipn $ipnHelper
-    ) {
-    }
+    ) {}
 
     /**
      * Redirects to the paypal.

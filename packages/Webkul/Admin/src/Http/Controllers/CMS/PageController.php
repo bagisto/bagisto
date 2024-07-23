@@ -16,9 +16,7 @@ class PageController extends Controller
      *
      * @return void
      */
-    public function __construct(protected PageRepository $pageRepository)
-    {
-    }
+    public function __construct(protected PageRepository $pageRepository) {}
 
     /**
      * Loads the index page showing the static pages resources.

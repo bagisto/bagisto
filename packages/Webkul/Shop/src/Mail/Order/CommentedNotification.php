@@ -15,9 +15,7 @@ class CommentedNotification extends Mailable
      *
      * @return void
      */
-    public function __construct(public OrderComment $comment)
-    {
-    }
+    public function __construct(public OrderComment $comment) {}
 
     /**
      * Get the message envelope.

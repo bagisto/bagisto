@@ -21,9 +21,7 @@ class AddressDataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct(protected CustomerRepository $customerRepository)
-    {
-    }
+    public function __construct(protected CustomerRepository $customerRepository) {}
 
     /**
      * Prepare query builder.

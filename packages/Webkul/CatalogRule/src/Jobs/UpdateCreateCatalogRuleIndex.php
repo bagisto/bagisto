@@ -26,9 +26,7 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(protected CatalogRule $catalogRule)
-    {
-    }
+    public function __construct(protected CatalogRule $catalogRule) {}
 
     /**
      * Execute the job.

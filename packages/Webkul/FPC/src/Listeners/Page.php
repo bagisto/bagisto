@@ -12,9 +12,7 @@ class Page
      *
      * @return void
      */
-    public function __construct(protected PageRepository $pageRepository)
-    {
-    }
+    public function __construct(protected PageRepository $pageRepository) {}
 
     /**
      * After page update

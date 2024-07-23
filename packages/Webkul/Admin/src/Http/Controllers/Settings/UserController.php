@@ -23,8 +23,7 @@ class UserController extends Controller
     public function __construct(
         protected AdminRepository $adminRepository,
         protected RoleRepository $roleRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

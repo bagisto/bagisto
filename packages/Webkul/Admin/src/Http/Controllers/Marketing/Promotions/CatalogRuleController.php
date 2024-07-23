@@ -16,9 +16,7 @@ class CatalogRuleController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CatalogRuleRepository $catalogRuleRepository)
-    {
-    }
+    public function __construct(protected CatalogRuleRepository $catalogRuleRepository) {}
 
     /**
      * Display a listing of the resource.

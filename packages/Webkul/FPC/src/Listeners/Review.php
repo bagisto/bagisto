@@ -12,9 +12,7 @@ class Review
      *
      * @return void
      */
-    public function __construct(protected ProductReviewRepository $productReviewRepository)
-    {
-    }
+    public function __construct(protected ProductReviewRepository $productReviewRepository) {}
 
     /**
      * After review is updated

@@ -16,9 +16,7 @@ class ThemeController extends Controller
      *
      * @return void
      */
-    public function __construct(public ThemeCustomizationRepository $themeCustomizationRepository)
-    {
-    }
+    public function __construct(public ThemeCustomizationRepository $themeCustomizationRepository) {}
 
     /**
      * Display a listing resource for the available tax rates.

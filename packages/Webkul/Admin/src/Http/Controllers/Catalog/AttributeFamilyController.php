@@ -20,8 +20,7 @@ class AttributeFamilyController extends Controller
     public function __construct(
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected AttributeRepository $attributeRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

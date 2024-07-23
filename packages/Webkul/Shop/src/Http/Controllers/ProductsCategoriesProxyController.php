@@ -27,8 +27,7 @@ class ProductsCategoriesProxyController extends Controller
         protected ProductRepository $productRepository,
         protected ThemeCustomizationRepository $themeCustomizationRepository,
         protected URLRewriteRepository $urlRewriteRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Show product or category view. If neither category nor product matches, abort with code 404.

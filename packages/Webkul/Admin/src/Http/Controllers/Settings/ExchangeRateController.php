@@ -19,8 +19,7 @@ class ExchangeRateController extends Controller
     public function __construct(
         protected ExchangeRateRepository $exchangeRateRepository,
         protected CurrencyRepository $currencyRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

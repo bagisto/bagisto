@@ -20,8 +20,7 @@ class CatalogRuleProduct
         protected ProductRepository $productRepository,
         protected CatalogRuleProductRepository $catalogRuleProductRepository,
         protected Validator $validator
-    ) {
-    }
+    ) {}
 
     /**
      * Collect discount on cart

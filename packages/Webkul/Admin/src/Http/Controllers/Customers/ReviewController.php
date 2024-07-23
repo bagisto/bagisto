@@ -17,9 +17,7 @@ class ReviewController extends Controller
      *
      * @return void
      */
-    public function __construct(protected ProductReviewRepository $productReviewRepository)
-    {
-    }
+    public function __construct(protected ProductReviewRepository $productReviewRepository) {}
 
     /**
      * Display a listing of the resource.

@@ -2,6 +2,4 @@
 
 namespace Webkul\Checkout\Contracts;
 
-interface CartItem
-{
-}
+interface CartItem {}

@@ -23,8 +23,7 @@ class Category
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected URLRewriteRepository $urlRewriteRepository
-    ) {
-    }
+    ) {}
 
     /**
      * After category is created

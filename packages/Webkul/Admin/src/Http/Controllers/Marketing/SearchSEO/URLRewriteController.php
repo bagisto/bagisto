@@ -17,9 +17,7 @@ class URLRewriteController extends Controller
      *
      * @return void
      */
-    public function __construct(public URLRewriteRepository $urlRewriteRepository)
-    {
-    }
+    public function __construct(public URLRewriteRepository $urlRewriteRepository) {}
 
     /**
      * Display a listing of the resource.

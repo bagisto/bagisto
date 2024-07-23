@@ -20,8 +20,7 @@ class ImportController extends Controller
     public function __construct(
         protected ImportRepository $importRepository,
         protected Import $importHelper
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.

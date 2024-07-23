@@ -16,9 +16,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository)
-    {
-    }
+    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository) {}
 
     /**
      * Loads the home page for the storefront.

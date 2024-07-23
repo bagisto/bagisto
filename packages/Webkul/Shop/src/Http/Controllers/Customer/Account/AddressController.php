@@ -14,9 +14,7 @@ class AddressController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CustomerAddressRepository $customerAddressRepository)
-    {
-    }
+    public function __construct(protected CustomerAddressRepository $customerAddressRepository) {}
 
     /**
      * Address route index page.

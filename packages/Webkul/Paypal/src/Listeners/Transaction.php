@@ -15,8 +15,7 @@ class Transaction
     public function __construct(
         protected SmartButton $smartButton,
         protected OrderTransactionRepository $orderTransactionRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Save the transaction data for online payment.

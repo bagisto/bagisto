@@ -19,8 +19,7 @@ class CampaignController extends Controller
     public function __construct(
         protected CampaignRepository $campaignRepository,
         protected TemplateRepository $templateRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.
