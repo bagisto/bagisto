@@ -12,35 +12,22 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XLSXWriter;
 class XLSX extends AbstractSource
 {
     /**
-     * Excel reader.
-     */
-    protected mixed $reader;
-
-    /**
      * Current row number.
      */
     protected int $currentRowNumber = 1;
 
     /**
-     * Create a new helper instance.
-     *
-     * @return void
+     * Initialize.
      */
-    public function __construct(string $filePath)
+    public function initialize(): void
     {
-        try {
-            $factory = IOFactory::load(Storage::disk('private')->path($filePath));
+        $factory = IOFactory::load(Storage::disk('private')->path($this->filePath));
 
-            $this->reader = $factory->getActiveSheet();
+        $this->reader = $factory->getActiveSheet();
 
-            $highestColumn = $this->reader->getHighestColumn();
+        $this->totalColumns = Coordinate::columnIndexFromString($this->reader->getHighestColumn());
 
-            $this->totalColumns = Coordinate::columnIndexFromString($highestColumn);
-
-            $this->columnNames = $this->getNextRow();
-        } catch (\Exception $e) {
-            throw new \LogicException("Unable to open file: '{$filePath}'");
-        }
+        $this->columnNames = $this->getNextRow();
     }
 
     /**
@@ -119,8 +106,8 @@ class XLSX extends AbstractSource
 
         $writer = new XLSXWriter($spreadsheet);
 
-        $writer->save(Storage::disk('private')->path($errorFilePath = 'imports/'.time().'-error-report.xlsx'));
+        $writer->save(Storage::disk('private')->path($this->errorFilePath()));
 
-        return $errorFilePath;
+        return $this->errorFilePath();
     }
 }

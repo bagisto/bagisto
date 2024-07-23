@@ -7,6 +7,11 @@ use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
 abstract class AbstractSource
 {
     /**
+     * Reader.
+     */
+    protected mixed $reader;
+
+    /**
      * Column names.
      */
     protected array $columnNames = [];
@@ -32,6 +37,11 @@ abstract class AbstractSource
     protected bool $foundWrongQuoteFlag = false;
 
     /**
+     * Initialize reader.
+     */
+    abstract protected function initialize(): void;
+
+    /**
      * Read next line from source.
      */
     abstract protected function getNextRow(): array|bool;
@@ -40,6 +50,22 @@ abstract class AbstractSource
      * Generate error report.
      */
     abstract public function generateErrorReport(array $errors): string;
+
+    /**
+     * Create a new helper instance.
+     *
+     * @return void
+     */
+    public function __construct(
+        protected string $filePath,
+        protected string $delimiter = ','
+    ) {
+        try {
+            $this->initialize();
+        } catch (\Exception $e) {
+            throw new \LogicException("Unable to open file: '{$filePath}'");
+        }
+    }
 
     /**
      * Return the key of the current row.
@@ -108,6 +134,30 @@ abstract class AbstractSource
     }
 
     /**
+     * Set reader.
+     */
+    public function setReader(mixed $reader): void
+    {
+        $this->reader = $reader;
+    }
+
+    /**
+     * Get reader.
+     */
+    public function getReader(): mixed
+    {
+        return $this->reader;
+    }
+
+    /**
+     * Set column names.
+     */
+    public function setColumnNames(array $columnNames): void
+    {
+        $this->columnNames = $columnNames;
+    }
+
+    /**
      * Get column names.
      */
     public function getColumnNames(): array
@@ -116,10 +166,28 @@ abstract class AbstractSource
     }
 
     /**
+     * Set total columns count.
+     */
+    public function setTotalColumns(int $totalColumns): void
+    {
+        $this->totalColumns = $totalColumns;
+    }
+
+    /**
      * Total columns count.
      */
     public function getTotalColumns(): int
     {
         return $this->totalColumns;
+    }
+
+    /**
+     * Error file path.
+     */
+    public function errorFilePath(): string
+    {
+        $fileType = pathinfo($this->filePath, PATHINFO_EXTENSION);
+
+        return 'imports/'.time().'-error-report.'.$fileType;
     }
 }

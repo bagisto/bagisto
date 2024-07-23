@@ -11,40 +11,22 @@ use XMLReader;
 class XML extends AbstractSource
 {
     /**
-     * XML reader.
+     * Initialize.
      */
-    protected $reader;
-
-    /**
-     * File path.
-     */
-    protected string $filePath;
-
-    /**
-     * Create a new helper instance.
-     *
-     * @return void
-     */
-    public function __construct(string $filePath)
+    public function initialize(): void
     {
-        $this->filePath = $filePath;
+        $this->reader = new XMLReader();
 
-        try {
-            $this->reader = new XMLReader();
+        $this->reader->open(Storage::disk('private')->path($this->filePath));
 
-            $this->reader->open(Storage::disk('private')->path($filePath));
+        while (
+            $this->reader->read()
+            && ! $this->reader->attributeCount
+        );
 
-            while (
-                $this->reader->read()
-                && ! $this->reader->attributeCount
-            );
+        $this->columnNames = $this->getColumnNames();
 
-            $this->columnNames = $this->getColumnNames();
-
-            $this->totalColumns = count($this->columnNames);
-        } catch (\Exception $e) {
-            throw new \LogicException("Unable to open file: '{$filePath}'");
-        }
+        $this->totalColumns = count($this->columnNames);
     }
 
     /**
@@ -148,8 +130,22 @@ class XML extends AbstractSource
             $this->next();
         }
 
-        $writer->saveXML(Storage::disk('private')->path($errorFilePath = 'imports/'.time().'-error-report.xml'));
+        $writer->saveXML(Storage::disk('private')->path($this->errorFilePath()));
 
-        return $errorFilePath;
+        return $this->errorFilePath();
+    }
+
+    /**
+     * Close file handle.
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        if (! is_object($this->reader)) {
+            return;
+        }
+
+        $this->reader->close();
     }
 }

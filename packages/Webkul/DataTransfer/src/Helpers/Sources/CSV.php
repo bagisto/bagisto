@@ -10,42 +10,15 @@ use PhpOffice\PhpSpreadsheet\Writer\Csv as CSVWriter;
 class CSV extends AbstractSource
 {
     /**
-     * CSV reader.
+     * Initialize.
      */
-    protected mixed $reader;
-
-    /**
-     * Create a new helper instance.
-     *
-     * @return void
-     */
-    public function __construct(
-        string $filePath,
-        protected string $delimiter = ','
-    ) {
-        try {
-            $this->reader = fopen(Storage::disk('private')->path($filePath), 'r');
-
-            $this->columnNames = fgetcsv($this->reader, 4096, $delimiter);
-
-            $this->totalColumns = count($this->columnNames);
-        } catch (\Exception $e) {
-            throw new \LogicException("Unable to open file: '{$filePath}'");
-        }
-    }
-
-    /**
-     * Close file handle.
-     *
-     * @return void
-     */
-    public function __destruct()
+    public function initialize(): void
     {
-        if (! is_object($this->reader)) {
-            return;
-        }
+        $this->reader = fopen(Storage::disk('private')->path($this->filePath), 'r');
 
-        $this->reader->close();
+        $this->columnNames = fgetcsv($this->reader, 4096, $this->delimiter);
+
+        $this->totalColumns = count($this->columnNames);
     }
 
     /**
@@ -130,8 +103,22 @@ class CSV extends AbstractSource
 
         $writer->setDelimiter(',');
 
-        $writer->save(Storage::disk('private')->path($errorFilePath = 'imports/'.time().'-error-report.csv'));
+        $writer->save(Storage::disk('private')->path($this->errorFilePath()));
 
-        return $errorFilePath;
+        return $this->errorFilePath();
+    }
+
+    /**
+     * Close file handle.
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        if (! is_object($this->reader)) {
+            return;
+        }
+
+        $this->reader->close();
     }
 }
