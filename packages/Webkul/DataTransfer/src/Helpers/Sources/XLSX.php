@@ -65,7 +65,7 @@ class XLSX extends AbstractSource
     {
         $this->rewind();
 
-        $spreadsheet = new Spreadsheet();
+        $spreadsheet = new Spreadsheet;
 
         $sheet = $spreadsheet->getActiveSheet();
 
