@@ -10,15 +10,15 @@ it('returns paginated category products', function () {
     // Arrange.
     $productsCount = 50;
 
-    $specifiedCategory = (new CategoryFaker())->factory()->create();
+    $specifiedCategory = (new CategoryFaker)->factory()->create();
 
-    (new ProductFaker())
+    (new ProductFaker)
         ->getSimpleProductFactory()
         ->hasAttached($specifiedCategory)
         ->count($productsCount)
         ->create();
 
-    $availableLimits = (new Toolbar())->getAvailableLimits();
+    $availableLimits = (new Toolbar)->getAvailableLimits();
 
     // Act and Assert.
     $availableLimits->each(function ($limit) use ($specifiedCategory, $productsCount) {
@@ -31,9 +31,9 @@ it('returns paginated category products', function () {
 
 it('returns category products sorted by name descending', function () {
     // Arrange.
-    $specifiedCategory = (new CategoryFaker())->factory()->create();
+    $specifiedCategory = (new CategoryFaker)->factory()->create();
 
-    $products = (new ProductFaker())
+    $products = (new ProductFaker)
         ->getSimpleProductFactory()
         ->hasAttached($specifiedCategory)
         ->count(3)
@@ -52,9 +52,9 @@ it('returns category products sorted by name descending', function () {
 
 it('returns category products sorted by name ascending', function () {
     // Arrange.
-    $specifiedCategory = (new CategoryFaker())->factory()->create();
+    $specifiedCategory = (new CategoryFaker)->factory()->create();
 
-    $products = (new ProductFaker())
+    $products = (new ProductFaker)
         ->getSimpleProductFactory()
         ->hasAttached($specifiedCategory)
         ->count(3)
@@ -73,9 +73,9 @@ it('returns category products sorted by name ascending', function () {
 
 it('returns category products sorted by created_at descending', function () {
     // Arrange.
-    $specifiedCategory = (new CategoryFaker())->factory()->create();
+    $specifiedCategory = (new CategoryFaker)->factory()->create();
 
-    $simpleProductFactory = (new ProductFaker())
+    $simpleProductFactory = (new ProductFaker)
         ->getSimpleProductFactory()
         ->hasAttached($specifiedCategory);
 
@@ -103,9 +103,9 @@ it('returns category products sorted by created_at descending', function () {
 
 it('returns category products sorted by created_at ascending', function () {
     // Arrange.
-    $specifiedCategory = (new CategoryFaker())->factory()->create();
+    $specifiedCategory = (new CategoryFaker)->factory()->create();
 
-    $simpleProductFactory = (new ProductFaker())
+    $simpleProductFactory = (new ProductFaker)
         ->getSimpleProductFactory()
         ->hasAttached($specifiedCategory);
 
@@ -133,9 +133,9 @@ it('returns category products sorted by created_at ascending', function () {
 
 it('returns category products sorted by price descending', function () {
     // Arrange.
-    $specifiedCategory = (new CategoryFaker())->factory()->create();
+    $specifiedCategory = (new CategoryFaker)->factory()->create();
 
-    $products = (new ProductFaker())
+    $products = (new ProductFaker)
         ->getSimpleProductFactory()
         ->hasAttached($specifiedCategory)
         ->count(3)
@@ -155,9 +155,9 @@ it('returns category products sorted by price descending', function () {
 
 it('returns category products sorted by price ascending', function () {
     // Arrange.
-    $specifiedCategory = (new CategoryFaker())->factory()->create();
+    $specifiedCategory = (new CategoryFaker)->factory()->create();
 
-    $products = (new ProductFaker())
+    $products = (new ProductFaker)
         ->getSimpleProductFactory()
         ->hasAttached($specifiedCategory)
         ->count(3)

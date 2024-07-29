@@ -297,7 +297,7 @@ class ProductDataGrid extends DataGrid
                 'size'          => $pagination['per_page'],
                 'stored_fields' => [],
                 'query'         => [
-                    'bool' => $this->getElasticFilters($params['filters'] ?? []) ?: new \stdClass(),
+                    'bool' => $this->getElasticFilters($params['filters'] ?? []) ?: new \stdClass,
                 ],
                 'sort'          => $this->getElasticSort($params['sort'] ?? []),
             ],

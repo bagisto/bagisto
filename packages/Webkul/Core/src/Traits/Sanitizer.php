@@ -25,7 +25,7 @@ trait Sanitizer
     {
         if ($this->checkMimeType($mimeType)) {
             /* sanitizer instance */
-            $sanitizer = new MainSanitizer();
+            $sanitizer = new MainSanitizer;
 
             /* grab svg file */
             $dirtySVG = Storage::get($path);

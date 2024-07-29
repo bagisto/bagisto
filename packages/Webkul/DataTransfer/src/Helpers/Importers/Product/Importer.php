@@ -1399,7 +1399,7 @@ class Importer extends AbstractImporter
             foreach ($images as $key => $image) {
                 $file = new UploadedFile($image['path'], $image['name']);
 
-                $image = (new ImageManager())->make($file)->encode('webp');
+                $image = (new ImageManager)->make($file)->encode('webp');
 
                 $imageDirectory = $this->productImageRepository->getProductDirectory((object) $product);
 

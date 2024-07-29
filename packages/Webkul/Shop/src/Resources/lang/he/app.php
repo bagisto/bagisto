@@ -420,6 +420,7 @@ return [
                 'mobile' => [
                     'currencies' => 'מטבעות',
                     'locales'    => 'אזורים',
+                    'login'      => ' הרשם או התחבר',
                 ],
             ],
 

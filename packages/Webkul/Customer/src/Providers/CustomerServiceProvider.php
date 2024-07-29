@@ -31,7 +31,7 @@ class CustomerServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton('captcha', function ($app) {
-            return new Captcha();
+            return new Captcha;
         });
     }
 }

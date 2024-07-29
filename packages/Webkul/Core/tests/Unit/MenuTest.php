@@ -33,7 +33,7 @@ beforeEach(function () {
 
 it('should add and get menu items', function () {
     // Arrange.
-    $menu = new Menu();
+    $menu = new Menu;
 
     foreach (config('menu.admin') as $menuItem) {
         $menu->addItem(new MenuItem(
@@ -64,7 +64,7 @@ it('should add and get menu items', function () {
 
 it('should process sub menu items', function () {
     // Arrange.
-    $menu = new Menu();
+    $menu = new Menu;
 
     $class = new ReflectionClass(Menu::class);
 
