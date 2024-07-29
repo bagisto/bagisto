@@ -38,7 +38,7 @@
                                 @keyup.enter="search"
                             >
 
-                            <div class="icon-search pointer-events-none absolute top-2 flex items-center text-xl max-md:top-2.5 max-sm:top-2 ltr:right-2.5 rtl:left-2.5">
+                            <div class="icon-search pointer-events-none absolute top-2.5 flex items-center text-xl max-sm:top-2 ltr:right-2.5 rtl:left-2.5">
                             </div>
                         </div>
                     </div>

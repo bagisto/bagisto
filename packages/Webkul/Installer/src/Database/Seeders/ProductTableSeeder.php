@@ -59,7 +59,7 @@ class ProductTableSeeder extends Seeder
         });
 
         // Category seeder.
-        $seeder = new CategoryTableSeeder();
+        $seeder = new CategoryTableSeeder;
 
         $seeder->sampleCategories($parameters);
 
@@ -1240,7 +1240,7 @@ class ProductTableSeeder extends Seeder
                     'parent_id'             => 7,
                     'visible_individually'  => 1,
                     'color'                 => 3,
-                    'size'                  => 2,
+                    'size'                  => 7,
                 ], [
                     'sku'                   => 'SP-006',
                     'type'                  => 'simple',
@@ -1269,7 +1269,7 @@ class ProductTableSeeder extends Seeder
                     'parent_id'             => 7,
                     'visible_individually'  => 1,
                     'color'                 => 3,
-                    'size'                  => 3,
+                    'size'                  => 8,
                 ], [
                     'sku'                   => 'SP-007',
                     'type'                  => 'simple',
@@ -1298,7 +1298,7 @@ class ProductTableSeeder extends Seeder
                     'parent_id'             => 7,
                     'visible_individually'  => 1,
                     'color'                 => 2,
-                    'size'                  => 2,
+                    'size'                  => 7,
                 ], [
                     'sku'                   => 'SP-008',
                     'type'                  => 'simple',
@@ -1327,7 +1327,7 @@ class ProductTableSeeder extends Seeder
                     'parent_id'             => 7,
                     'visible_individually'  => 1,
                     'color'                 => 2,
-                    'size'                  => 3,
+                    'size'                  => 8,
                 ],
             ];
         }

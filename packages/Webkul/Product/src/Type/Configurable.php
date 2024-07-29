@@ -506,7 +506,7 @@ class Configurable extends AbstractType
      */
     public function validateCartItem(CartItemModel $item): CartItemValidationResult
     {
-        $validation = new CartItemValidationResult();
+        $validation = new CartItemValidationResult;
 
         if ($this->isCartItemInactive($item)) {
             $validation->itemIsInactive();

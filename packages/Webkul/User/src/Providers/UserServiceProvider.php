@@ -46,7 +46,7 @@ class UserServiceProvider extends ServiceProvider
         $loader->alias('Bouncer', BouncerFacade::class);
 
         $this->app->singleton('bouncer', function () {
-            return new Bouncer();
+            return new Bouncer;
         });
     }
 }

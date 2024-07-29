@@ -78,6 +78,7 @@
                     placeholder="@lang('shop::app.components.layouts.header.search-text')"
                     aria-label="@lang('shop::app.components.layouts.header.search-text')"
                     aria-required="true"
+                    pattern="[^\\]+"
                     required
                 >
 
