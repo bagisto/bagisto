@@ -315,7 +315,7 @@
                                     >
                                         <select
                                             name="role_id"
-                                            class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                            class="flex min-h-[39px] w-full rounded-md border bg-white px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                             :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                             v-model="data.user.role_id"
                                         >
