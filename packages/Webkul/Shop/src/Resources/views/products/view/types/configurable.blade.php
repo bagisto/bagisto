@@ -68,7 +68,6 @@
                                     <label
                                         class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
                                         :class="{'ring-2 ring-gray-900' : option.id == attribute.selectedValue}"
-                                        :style="{ '--tw-ring-color': option.swatch_value }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'color'"
                                     >
@@ -94,9 +93,9 @@
                                         </v-field>
 
                                         <span
-                                            class="h-8 w-8 rounded-full border border-opacity-10 max-sm:h-[25px] max-sm:w-[25px]"
+                                            class="h-8 w-8 rounded-full border border-gray-200 max-sm:h-[25px] max-sm:w-[25px]"
                                             tabindex="0"
-                                            :style="{ 'background-color': option.swatch_value, 'border-color': option.swatch_value}"
+                                            :style="{ 'background-color': option.swatch_value }"
                                         ></span>
                                     </label>
 
