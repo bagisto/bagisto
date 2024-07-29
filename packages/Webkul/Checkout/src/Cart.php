@@ -103,7 +103,7 @@ class Cart
             return;
         }
 
-        $cartTemp = new \stdClass();
+        $cartTemp = new \stdClass;
         $cartTemp->id = $this->cart->id;
 
         session()->put('cart', $cartTemp);

@@ -50,7 +50,7 @@ it('should return the create page of configurable product', function () {
 
 it('should return the edit page of configurable product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getConfigurableProductFactory()->create();
+    $product = (new ProductFaker)->getConfigurableProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -67,7 +67,7 @@ it('should return the edit page of configurable product', function () {
 
 it('should fail the validation with errors when certain inputs are not provided when update in configurable product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getConfigurableProductFactory()->create();
+    $product = (new ProductFaker)->getConfigurableProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -83,7 +83,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 
 it('should fail the validation with errors if certain data is not provided correctly in configurable product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getConfigurableProductFactory()->create();
+    $product = (new ProductFaker)->getConfigurableProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -110,7 +110,7 @@ it('should fail the validation with errors if certain data is not provided corre
 
 it('should update the configurable product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getConfigurableProductFactory()->create();
+    $product = (new ProductFaker)->getConfigurableProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -158,7 +158,7 @@ it('should update the configurable product', function () {
 
 it('should update the configurable product variants', function () {
     // Arrange.
-    $product = (new ProductFaker())->getConfigurableProductFactory()->create();
+    $product = (new ProductFaker)->getConfigurableProductFactory()->create();
 
     $attributeOptions = AttributeFamily::find(1)->configurable_attributes
         ->flatMap(function ($attribute) {
@@ -222,7 +222,7 @@ it('should update the configurable product variants', function () {
 
 it('should delete a configurable product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getConfigurableProductFactory()->create();
+    $product = (new ProductFaker)->getConfigurableProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();

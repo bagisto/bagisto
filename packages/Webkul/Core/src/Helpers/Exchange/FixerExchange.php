@@ -42,7 +42,7 @@ class FixerExchange extends ExchangeRate
      */
     public function updateRates()
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client;
 
         foreach ($this->currencyRepository->all() as $currency) {
             if ($currency->code == config('app.currency')) {
