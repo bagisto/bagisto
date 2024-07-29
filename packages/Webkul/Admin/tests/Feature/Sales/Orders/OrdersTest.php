@@ -24,7 +24,7 @@ use function Pest\Laravel\putJson;
 
 it('should search the customers via email or name', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -44,7 +44,7 @@ it('should search the customers via email or name', function () {
 
 it('should create the customer if none exists when creating an order', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -114,7 +114,7 @@ it('should add product to the cart after search the product', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -175,7 +175,7 @@ it('should update the cart item after add product to the cart', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -270,7 +270,7 @@ it('should fails the validation error if billing and shipping address is not pro
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -348,7 +348,7 @@ it('should add billing address after add item to the cart', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -460,7 +460,7 @@ it('should add billing and shipping address after add item to the cart', functio
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -582,7 +582,7 @@ it('should the shipping rates after storing address', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -678,7 +678,7 @@ it('should store the payment method after storing the shipping method', function
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -821,7 +821,7 @@ it('should place order via admin', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -916,7 +916,7 @@ it('should lists the all wishlist items related to the customer', function () {
         ->count(5)
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $wishlists = [];
 
@@ -960,7 +960,7 @@ it('should remove item from the wishlist', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $wishlist = Wishlist::factory()->create([
         'channel_id'  => core()->getDefaultChannel()->id,
@@ -998,7 +998,7 @@ it('should add a simple product wishlisted item to the cart', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -1060,7 +1060,7 @@ it('should add a configurable product wishlisted item to the cart', function () 
         ->getConfigurableProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -1132,7 +1132,7 @@ it('should return all the compare items related to the customer', function () {
         ->count(5)
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $compares = [];
 
@@ -1175,7 +1175,7 @@ it('should remove compare items from the compared list item', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $compare = CompareItem::factory()->create([
         'product_id'  => $product->id,
@@ -1212,7 +1212,7 @@ it('show add a simple product to the cart from compared items', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,
@@ -1273,7 +1273,7 @@ it('show add a configurable product to the cart from compared items', function (
         ->getConfigurableProductFactory()
         ->create();
 
-    $customer = (new CustomerFaker())->factory()->create();
+    $customer = (new CustomerFaker)->factory()->create();
 
     $cart = Cart::factory()->create([
         'customer_id'         => $customer->id,

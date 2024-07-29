@@ -50,7 +50,7 @@ class ElasticSearchRepository
                 'size'          => $options['limit'],
                 'stored_fields' => [],
                 'query'         => [
-                    'bool' => $filters ?: new \stdClass(),
+                    'bool' => $filters ?: new \stdClass,
                 ],
                 'sort'          => $this->getSortOptions($options),
             ],

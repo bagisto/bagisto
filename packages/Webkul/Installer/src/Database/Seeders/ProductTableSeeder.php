@@ -59,7 +59,7 @@ class ProductTableSeeder extends Seeder
         });
 
         // Category seeder.
-        $seeder = new CategoryTableSeeder();
+        $seeder = new CategoryTableSeeder;
 
         $seeder->sampleCategories($parameters);
 

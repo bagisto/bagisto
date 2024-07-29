@@ -37,7 +37,7 @@ class ProfileRequest extends FormRequest
             'current_password'          => 'required_with:new_password',
             'image'                     => 'array',
             'image.*'                   => 'mimes:bmp,jpeg,jpg,png,webp',
-            'phone'                     => ['required', new PhoneNumber(), 'unique:customers,phone,'.$id],
+            'phone'                     => ['required', new PhoneNumber, 'unique:customers,phone,'.$id],
             'subscribed_to_news_letter' => 'nullable',
         ];
     }

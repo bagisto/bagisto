@@ -44,7 +44,7 @@ class PaymentServiceProvider extends ServiceProvider
         $loader->alias('payment', PaymentFacade::class);
 
         $this->app->singleton('payment', function () {
-            return new Payment();
+            return new Payment;
         });
     }
 
