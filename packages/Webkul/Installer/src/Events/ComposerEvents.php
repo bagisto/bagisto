@@ -13,7 +13,7 @@ class ComposerEvents
      */
     public static function postCreateProject()
     {
-        $output = new ConsoleOutput();
+        $output = new ConsoleOutput;
 
         $output->writeln(file_get_contents(__DIR__.'/../Templates/on-boarding.php'));
     }

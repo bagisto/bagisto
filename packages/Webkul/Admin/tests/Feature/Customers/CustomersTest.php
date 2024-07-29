@@ -26,7 +26,7 @@ it('should returns the customers page', function () {
 
 it('should return listing items of customers', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -44,7 +44,7 @@ it('should return listing items of customers', function () {
 
 it('should return the view page of customer', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -135,7 +135,7 @@ it('should create a new customer and send notification to the customer', functio
 
 it('should search the customers for mega search', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -153,7 +153,7 @@ it('should search the customers for mega search', function () {
 
 it('should login the customer from the admin panel', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -167,7 +167,7 @@ it('should login the customer from the admin panel', function () {
 
 it('should fail the validation with errors for notes', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -181,7 +181,7 @@ it('should fail the validation with errors for notes', function () {
 
 it('should store the notes for the customer', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -207,7 +207,7 @@ it('should store the notes for the customer and send email to the customer', fun
     // Arrange.
     Mail::fake();
 
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -236,7 +236,7 @@ it('should store the notes for the customer and send email to the customer', fun
 
 it('should fail the validation with errors when certain inputs are not provided when update in customer', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -253,7 +253,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 
 it('should update the the existing customer', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -283,7 +283,7 @@ it('should update the the existing customer', function () {
 
 it('should mass delete the customers', function () {
     // Arrange.
-    $customers = (new CustomerFaker())->factory()->count(2)->create([
+    $customers = (new CustomerFaker)->factory()->count(2)->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -305,7 +305,7 @@ it('should mass delete the customers', function () {
 
 it('should mass update the customers', function () {
     // Arrange.
-    $customers = (new CustomerFaker())->factory()->count(2)->create([
+    $customers = (new CustomerFaker)->factory()->count(2)->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -333,7 +333,7 @@ it('should mass update the customers', function () {
 
 it('should delete a specific customer', function () {
     // Arrange.
-    $customer = (new CustomerFaker())->factory()->create([
+    $customer = (new CustomerFaker)->factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 

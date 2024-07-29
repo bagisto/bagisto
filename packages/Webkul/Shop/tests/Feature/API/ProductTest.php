@@ -65,7 +65,7 @@ it('returns a featured products listing', function () {
 
 it('returns all products listing', function () {
     // Arrange.
-    $product = (new ProductFaker())
+    $product = (new ProductFaker)
         ->getSimpleProductFactory()
         ->create();
 

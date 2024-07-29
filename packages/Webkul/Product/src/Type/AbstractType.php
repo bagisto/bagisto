@@ -880,7 +880,7 @@ abstract class AbstractType
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        $validation = new CartItemValidationResult();
+        $validation = new CartItemValidationResult;
 
         if ($this->isCartItemInactive($item)) {
             $validation->itemIsInactive();

@@ -22,7 +22,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 
 it('should return the create page of virtual product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getSimpleProductFactory()->create();
+    $product = (new ProductFaker)->getSimpleProductFactory()->create();
 
     $productId = $product->id + 1;
 
@@ -50,7 +50,7 @@ it('should return the create page of virtual product', function () {
 
 it('should return the edit page of virtual product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getVirtualProductFactory()->create();
+    $product = (new ProductFaker)->getVirtualProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -67,7 +67,7 @@ it('should return the edit page of virtual product', function () {
 
 it('should fail the validation with errors when certain inputs are not provided when update in virtual product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getVirtualProductFactory()->create();
+    $product = (new ProductFaker)->getVirtualProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -84,7 +84,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 
 it('should fail the validation with errors if certain data is not provided correctly in virtual product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getVirtualProductFactory()->create();
+    $product = (new ProductFaker)->getVirtualProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -112,7 +112,7 @@ it('should fail the validation with errors if certain data is not provided corre
 
 it('should update the virtual product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getVirtualProductFactory()->create();
+    $product = (new ProductFaker)->getVirtualProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -160,7 +160,7 @@ it('should update the virtual product', function () {
 
 it('should delete a virtual product', function () {
     // Arrange.
-    $product = (new ProductFaker())->getSimpleProductFactory()->create();
+    $product = (new ProductFaker)->getSimpleProductFactory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();

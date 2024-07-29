@@ -29,7 +29,7 @@ class MagicAIServiceProvider extends ServiceProvider
         $loader->alias('magic_ai', MagicAIFacade::class);
 
         $this->app->singleton('magic_ai', function () {
-            return new MagicAI();
+            return new MagicAI;
         });
     }
 }

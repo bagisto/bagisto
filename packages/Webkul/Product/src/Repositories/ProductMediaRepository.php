@@ -55,7 +55,7 @@ class ProductMediaRepository extends Repository
             foreach ($data[$uploadFileType]['files'] as $indexOrModelId => $file) {
                 if ($file instanceof UploadedFile) {
                     if (Str::contains($file->getMimeType(), 'image')) {
-                        $manager = new ImageManager();
+                        $manager = new ImageManager;
 
                         $image = $manager->make($file)->encode('webp');
 

@@ -79,7 +79,7 @@ class Tax
      */
     public function getShippingOriginAddress(): object
     {
-        return new class()
+        return new class
         {
             public $country;
 
@@ -105,7 +105,7 @@ class Tax
      */
     public function getDefaultAddress(): object
     {
-        return new class()
+        return new class
         {
             public $country;
 
