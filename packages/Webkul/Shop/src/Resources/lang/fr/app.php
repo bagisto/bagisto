@@ -420,6 +420,7 @@ return [
                 'mobile' => [
                     'currencies' => 'Devises',
                     'locales'    => 'Langues',
+                    'login'      => 'S\'inscrire ou Se connecter',
                 ],
             ],
 

@@ -420,6 +420,7 @@ return [
                 'mobile' => [
                     'currencies' => 'मुद्रा',
                     'locales'    => 'स्थान',
+                    'login'      => 'साइन अप या लॉगिन करें',
                 ],
             ],
 

@@ -420,6 +420,7 @@ return [
                 'mobile' => [
                     'currencies' => 'Currencies',
                     'locales'    => 'Locales',
+                    'login'      => 'Sign up or Login',
                 ],
             ],
 
