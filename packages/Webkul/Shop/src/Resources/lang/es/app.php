@@ -420,6 +420,7 @@ return [
                 'mobile' => [
                     'currencies' => 'Monedas',
                     'locales'    => 'Idiomas',
+                    'login'      => 'Registrarse o Iniciar sesión',
                 ],
             ],
 

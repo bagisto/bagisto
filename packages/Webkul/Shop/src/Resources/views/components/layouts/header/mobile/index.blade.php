@@ -50,7 +50,7 @@
                                 href="{{ route('shop.customer.session.create') }}"
                                 class="flex text-base font-medium"
                             >
-                                @lang('Sign up or Login')
+                                @lang('shop::app.components.layouts.header.mobile.login')
 
                                 <i class="icon-double-arrow text-2xl ltr:ml-2.5 rtl:mr-2.5"></i>
                             </a>

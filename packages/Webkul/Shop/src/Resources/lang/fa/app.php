@@ -420,6 +420,7 @@ return [
                 'mobile' => [
                     'currencies' => 'واحد پول',
                     'locales'    => 'زبان و محل',
+                    'login'      => 'ثبت‌نام یا ورود',
                 ],
             ],
 
