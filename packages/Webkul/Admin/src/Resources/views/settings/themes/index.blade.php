@@ -169,15 +169,13 @@
                             </x-slot>
 
                             <x-slot:footer>
-                                <!-- Modal Submission -->
-                                <div class="flex items-center gap-x-2.5">
-                                    <button
-                                        type="submit"
-                                        class="primary-button"
-                                    >
-                                        @lang('admin::app.settings.themes.create.save-btn')
-                                    </button>
-                                </div>
+                                <x-admin::button
+                                    button-type="submit"
+                                    class="primary-button"
+                                    :title="trans('admin::app.settings.themes.create.save-btn')"
+                                    ::loading="isLoading"
+                                    ::disabled="isLoading"
+                                />
                             </x-slot>
                         </x-admin::modal>
                     </form>
@@ -198,19 +196,27 @@
                             image_carousel: "@lang('admin::app.settings.themes.create.type.image-carousel')",
                             footer_links: "@lang('admin::app.settings.themes.create.type.footer-links')",
                             services_content: "@lang('admin::app.settings.themes.create.type.services-content')",
-                        }
+                        },
+
+                        isLoading: false,
                     };
                 },
 
                 methods: {
                     create(params, { setErrors }) {
+                        this.isLoading = true;
+
                         this.$axios.post('{{ route('admin.settings.themes.store') }}', params)
                             .then((response) => {
+                                this.isLoading = false;
+
                                 if (response.data.redirect_url) {
                                     window.location.href = response.data.redirect_url;
                                 } 
                             })
                             .catch((error) => {
+                                this.isLoading = false;
+
                                 if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }

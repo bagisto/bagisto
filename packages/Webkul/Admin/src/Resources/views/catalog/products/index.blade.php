@@ -418,12 +418,13 @@
                                         @lang('admin::app.catalog.products.index.create.back-btn')
                                     </button>
 
-                                    <button
-                                        type="submit"
+                                    <x-admin::button
+                                        button-type="button"
                                         class="primary-button"
-                                    >
-                                        @lang('admin::app.catalog.products.index.create.save-btn')
-                                    </button>
+                                        :title="trans('admin::app.catalog.products.index.create.save-btn')"
+                                        ::loading="isLoading"
+                                        ::disabled="isLoading"
+                                    />
                                 </div>
                             </x-slot>
                         </x-admin::modal>
@@ -440,12 +441,16 @@
                     return {
                         attributes: [],
 
-                        superAttributes: {}
+                        superAttributes: {},
+
+                        isLoading: false,
                     };
                 },
 
                 methods: {
                     create(params, { resetForm, resetField, setErrors }) {
+                        this.isLoading = true;
+
                         this.attributes.forEach(attribute => {
                             params.super_attributes ||= {};
 
@@ -454,6 +459,8 @@
 
                         this.$axios.post("{{ route('admin.catalog.products.store') }}", params)
                             .then((response) => {
+                                this.isLoading = false;
+
                                 if (response.data.data.redirect_url) {
                                     window.location.href = response.data.data.redirect_url;
                                 } else {
@@ -463,6 +470,8 @@
                                 }
                             })
                             .catch(error => {
+                                this.isLoading = false;
+
                                 if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }
