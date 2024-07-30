@@ -979,14 +979,22 @@
 
                 methods: {
                     storeOptions(params, { resetForm, setValues }) {
+                        const ids = this.optionsData.map(item => item.id);
+
+                        const lastId = ids.length ? ids[ids.length - 1] : 0;
+
                         if (! params.id) {
-                            params.id = 'option_' + this.optionId;
+                            params.id = 'options_' + (lastId + 1);
                             this.optionId++;
                         }
 
                         let foundIndex = this.optionsData.findIndex(item => item.id === params.id);
 
                         if (foundIndex !== -1) {
+                            if (typeof params.id === 'string') {
+                                params.isNew = true;
+                            }
+
                             this.optionsData.splice(foundIndex, 1, params);
                         } else {
                             this.optionsData.push(params);
