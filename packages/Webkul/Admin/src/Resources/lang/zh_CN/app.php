@@ -43,6 +43,7 @@ return [
         'view-all'         => '查看全部',
 
         'order-status-messages' => [
+            'all'             => '全部',
             'canceled'        => '订单已取消',
             'closed'          => '订单已关闭',
             'completed'       => '订单已完成',

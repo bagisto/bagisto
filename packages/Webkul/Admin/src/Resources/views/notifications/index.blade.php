@@ -153,7 +153,7 @@
                         orderType: {
                             all : {
                                 icon: 'icon',
-                                message: 'All',
+                                message: "@lang('admin::app.notifications.order-status-messages.all'),
                                 status: 'all'
                             },
 

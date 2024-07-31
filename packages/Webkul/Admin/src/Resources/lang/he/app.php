@@ -43,6 +43,7 @@ return [
         'view-all'         => 'הצג הכל',
 
         'order-status-messages' => [
+            'all'             => 'הכל',
             'canceled'        => 'הזמנה בוטלה',
             'closed'          => 'הזמנה נסגרה',
             'completed'       => 'הזמנה הושלמה',
