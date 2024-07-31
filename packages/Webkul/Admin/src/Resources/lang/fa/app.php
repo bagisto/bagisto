@@ -43,6 +43,7 @@ return [
         'view-all'         => 'مشاهده همه',
 
         'order-status-messages' => [
+            'all'             => 'همه',
             'canceled'        => 'سفارش کنسل شده',
             'closed'          => 'سفارش بسته شده',
             'completed'       => 'سفارش تکمیل شده',

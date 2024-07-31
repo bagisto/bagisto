@@ -43,6 +43,7 @@ return [
         'view-all'         => 'すべて表示',
 
         'order-status-messages' => [
+            'all'             => 'すべて',
             'canceled'        => '注文キャンセル',
             'closed'          => '注文終了',
             'completed'       => '注文完了',

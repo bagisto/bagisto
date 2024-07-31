@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Tümünü Görüntüle',
 
         'order-status-messages' => [
+            'all'             => 'Tümü',
             'canceled'        => 'Sipariş İptal Edildi',
             'closed'          => 'Sipariş Kapatıldı',
             'completed'       => 'Sipariş Tamamlandı',

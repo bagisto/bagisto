@@ -43,6 +43,7 @@ return [
         'view-all'              => 'View All',
 
         'order-status-messages' => [
+            'all'             => 'All',
             'canceled'        => 'Order Canceled',
             'closed'          => 'Order Closed',
             'completed'       => 'Order Completed',

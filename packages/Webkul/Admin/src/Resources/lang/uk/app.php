@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Переглянути всі',
 
         'order-status-messages' => [
+            'all'             => 'Все',
             'canceled'        => 'Замовлення скасовано',
             'closed'          => 'Замовлення закрито',
             'completed'       => 'Замовлення завершено',

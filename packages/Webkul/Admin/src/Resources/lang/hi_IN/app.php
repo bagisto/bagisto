@@ -43,6 +43,7 @@ return [
         'view-all'         => 'सभी देखें',
 
         'order-status-messages' => [
+            'all'             => 'सभी',
             'canceled'        => 'ऑर्डर रद्द हो गया',
             'closed'          => 'ऑर्डर बंद हो गया',
             'completed'       => 'ऑर्डर पूरा हुआ',

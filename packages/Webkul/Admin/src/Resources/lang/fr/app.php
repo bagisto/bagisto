@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Voir tout',
 
         'order-status-messages' => [
+            'all'             => 'Tout',
             'canceled'        => 'Commande annulée',
             'closed'          => 'Commande fermée',
             'completed'       => 'Commande terminée',

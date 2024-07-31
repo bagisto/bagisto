@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Alles Bekijken',
 
         'order-status-messages' => [
+            'all'             => 'Alles',
             'canceled'        => 'Bestelling Geannuleerd',
             'closed'          => 'Bestelling Gesloten',
             'completed'       => 'Bestelling Voltooid',

@@ -43,6 +43,7 @@ return [
         'view-all'         => 'සියල්ල බලන්න',
 
         'order-status-messages' => [
+            'all'             => 'සියල්ල',
             'canceled'        => 'ඇනවුම අවලංගු කරන ලදි',
             'closed'          => 'ඇනවුම වසා ඇත',
             'completed'       => 'ඇනවුම කරන ලදි',
