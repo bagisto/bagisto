@@ -870,7 +870,10 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
+            'categories-carousel' => 'Categorieën Carrousel',
+            'image-carousel'      => 'Afbeeldingen Carrousel',
+            'offer'               => 'Krijg TOT 40% KORTING op je eerste bestelling, WINKEL NU',
+            'product-carousel'    => 'Producten Carrousel',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email'        => 'Verifieer je e-mailaccount',
         ],
@@ -880,7 +883,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Volgende pagina',
             'pagination-showing' => 'Toont :firstItem tot :lastItem van de :total vermeldingen',
+            'prev-page'          => 'Vorige pagina'
         ],
     ],
 

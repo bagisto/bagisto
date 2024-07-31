@@ -870,7 +870,10 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie. ZAKUP TERAZ',
+            'categories-carousel' => 'Karuzela kategorii',
+            'image-carousel'      => 'Karuzela obrazów',
+            'offer'               => 'Otrzymaj DO 40% RABATU na swoje pierwsze zamówienie, ZAKUP TERAZ',
+            'product-carousel'    => 'Karuzela produktów',
             'resend-verify-email' => 'Wyślij ponownie e-mail weryfikacyjny',
             'verify-email'        => 'Zweryfikuj swoje konto e-mail',
         ],
@@ -880,7 +883,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Następna strona',
             'pagination-showing' => 'Wyświetlanie :firstItem do :lastItem z :total wpisów',
+            'prev-page'          => 'Poprzednia strona'
         ],
     ],
 

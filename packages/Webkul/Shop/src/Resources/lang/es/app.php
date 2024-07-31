@@ -870,9 +870,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Obtén HASTA UN 40 % DE DESCUENTO en tu primera compra ¡COMPRA AHORA!',
+            'categories-carousel' => 'Carrusel de categorías',
+            'image-carousel'      => 'Carrusel de imágenes',
+            'offer'               => 'Obtén HASTA 40% DE DESCUENTO en tu primer pedido, COMPRA AHORA',
+            'product-carousel'    => 'Carrusel de productos',
             'resend-verify-email' => 'Reenviar correo de verificación',
-            'verify-email'        => 'Verifica tu dirección de correo electrónico',
+            'verify-email'        => 'Verifica tu cuenta de correo electrónico',
         ],
 
         'thanks-for-contact' => 'Gracias por contactarnos con tus comentarios y preguntas. Te responderemos muy pronto.',
@@ -880,7 +883,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Página siguiente',
             'pagination-showing' => 'Mostrando :firstItem a :lastItem de :total entradas',
+            'prev-page'          => 'Página anterior'
         ],
     ],
 
