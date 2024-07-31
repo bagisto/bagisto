@@ -407,17 +407,17 @@
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
-                                <!-- Modal Submission -->
                                 <div class="flex items-center gap-x-2.5">
-                                    <button
-                                        type="button"
+                                    <!-- Back Button -->
+                                    <x-admin::button
+                                        button-type="button"
                                         class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
+                                        :title="trans('admin::app.catalog.products.index.create.back-btn')"
                                         v-if="attributes.length"
                                         @click="attributes = []"
-                                    >
-                                        @lang('admin::app.catalog.products.index.create.back-btn')
-                                    </button>
+                                    />
 
+                                    <!-- Save Button -->
                                     <x-admin::button
                                         button-type="button"
                                         class="primary-button"

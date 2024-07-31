@@ -302,15 +302,14 @@
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <x-admin::button
-                                    button-type="button"
-                                    class="primary-button"
-                                    :title="trans('admin::app.settings.currencies.index.create.save-btn')"
-                                    ::loading="isLoading"
-                                    ::disabled="isLoading"
-                                />
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="button"
+                                class="primary-button"
+                                :title="trans('admin::app.settings.currencies.index.create.save-btn')"
+                                ::loading="isLoading"
+                                ::disabled="isLoading"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>
