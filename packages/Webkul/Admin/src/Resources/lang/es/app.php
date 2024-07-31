@@ -3926,6 +3926,7 @@ return [
                         'invoice-id-info'  => 'Configurar la visualización del ID de la factura en el encabezado de la factura.',
                         'invoice-id-title' => 'Mostrar ID de factura en el encabezado',
                         'logo'             => 'Logotipo',
+                        'logo-info'        => 'La resolución de la imagen debe ser de 131px X 30px.',
                         'order-id-info'    => 'Configurar la visualización del ID del pedido en el encabezado de la factura.',
                         'order-id-title'   => 'Mostrar ID de pedido en el encabezado',
                         'title'            => 'Impresiones en PDF',

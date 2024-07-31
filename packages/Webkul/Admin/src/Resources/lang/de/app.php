@@ -3926,6 +3926,7 @@ return [
                         'invoice-id-info'  => 'Konfigurieren Sie die Anzeige der Rechnungs-ID im Rechnungskopf.',
                         'invoice-id-title' => 'Rechnungs-ID im Header anzeigen',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'Die Bildauflösung sollte etwa 131px x 30px betragen.',
                         'order-id-info'    => 'Konfigurieren Sie die Anzeige der Bestell-ID im Rechnungskopf.',
                         'order-id-title'   => 'Bestell-ID im Header anzeigen',
                         'title'            => 'PDF-Druckausgaben',

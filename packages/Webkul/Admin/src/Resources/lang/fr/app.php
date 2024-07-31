@@ -3926,6 +3926,7 @@ return [
                         'invoice-id-info'  => 'Configurer l\'affichage de l\'ID de la facture dans l\'en-tête de la facture.',
                         'invoice-id-title' => 'Afficher l\'ID de la facture dans l\'en-tête',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'La résolution de l\'image doit être de 131px x 30px.',
                         'order-id-info'    => 'Configurer l\'affichage de l\'ID de la commande dans l\'en-tête de la facture.',
                         'order-id-title'   => 'Afficher l\'ID de la commande dans l\'en-tête',
                         'title'            => 'Impressions PDF',

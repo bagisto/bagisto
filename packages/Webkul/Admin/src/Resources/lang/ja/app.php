@@ -3926,6 +3926,7 @@ return [
                         'invoice-id-info'  => '請求書ヘッダーに請求書IDを表示するように設定します。',
                         'invoice-id-title' => 'ヘッダーに請求書IDを表示',
                         'logo'             => 'ロゴ',
+                        'logo-info'        => '画像の解像度は131px x 30pxであるべきです。',
                         'order-id-info'    => '請求書ヘッダーに注文IDを表示するように設定します。',
                         'order-id-title'   => 'ヘッダーに注文IDを表示',
                         'title'            => 'PDF印刷アウト',

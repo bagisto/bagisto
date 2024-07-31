@@ -3926,6 +3926,7 @@ return [
                         'invoice-id-info'  => 'Configura la visualizzazione dell\'ID Fattura nell\'Intestazione della Fattura.',
                         'invoice-id-title' => 'Visualizza ID Fattura nell\'Intestazione',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'La risoluzione dell\'immagine dovrebbe essere di 131px X 30px.',
                         'order-id-info'    => 'Configura la visualizzazione dell\'ID Ordine nell\'Intestazione della Fattura.',
                         'order-id-title'   => 'Visualizza ID Ordine nell\'Intestazione',
                         'title'            => 'Stampa PDF',

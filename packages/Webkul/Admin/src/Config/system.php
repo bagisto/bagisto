@@ -1841,6 +1841,7 @@ return [
             ], [
                 'name'          => 'logo',
                 'title'         => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.logo',
+                'info'          => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.logo-info',
                 'type'          => 'image',
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
                 'channel_based' => true,
