@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Anhänge hinzufügen',
+            'index' => [
+                'add-attachments' => 'Anhänge hinzufügen',
+                'add-image'       => 'Bild hinzufügen',
+            ],
         ],
 
         'layouts' => [

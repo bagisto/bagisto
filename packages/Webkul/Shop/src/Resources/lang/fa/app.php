@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'افزودن پیوست',
+            'index' => [
+                'add-attachments' => 'افزودن پیوست',
+                'add-image'       => 'افزودن تصویر',
+            ],
         ],
 
         'layouts' => [
