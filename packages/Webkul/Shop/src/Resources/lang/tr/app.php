@@ -886,7 +886,7 @@ return [
         'pagination' => [
             'next-page'          => 'Sonraki Sayfa',
             'pagination-showing' => 'Toplam :total girdinin :firstItem ile :lastItem arası gösteriliyor',
-            'prev-page'          => 'Önceki Sayfa'
+            'prev-page'          => 'Önceki Sayfa',
         ],
     ],
 

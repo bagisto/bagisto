@@ -885,7 +885,7 @@ return [
         'pagination' => [
             'next-page'          => 'Page suivante',
             'pagination-showing' => 'Affichage de :firstItem à :lastItem sur :total entrées',
-            'prev-page'          => 'Page précédente'
+            'prev-page'          => 'Page précédente',
         ],
     ],
 

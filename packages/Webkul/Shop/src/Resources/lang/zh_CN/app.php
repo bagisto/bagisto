@@ -885,7 +885,7 @@ return [
         'pagination' => [
             'next-page'          => '下一页',
             'pagination-showing' => '显示 :total 个条目中的 :firstItem 到 :lastItem',
-            'prev-page'          => '上一页'
+            'prev-page'          => '上一页',
         ],
     ],
 

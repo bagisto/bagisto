@@ -885,7 +885,7 @@ return [
         'pagination' => [
             'next-page'          => 'الصفحة التالية',
             'pagination-showing' => 'عرض :firstItem إلى :lastItem من :total مقالات',
-            'prev-page'          => 'الصفحة السابقة'
+            'prev-page'          => 'الصفحة السابقة',
         ],
     ],
 

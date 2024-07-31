@@ -885,7 +885,7 @@ return [
         'pagination' => [
             'next-page'          => '次のページ',
             'pagination-showing' => '合計 :total エントリのうち :firstItem から :lastItem を表示',
-            'prev-page'          => '前のページ'
+            'prev-page'          => '前のページ',
         ],
     ],
 

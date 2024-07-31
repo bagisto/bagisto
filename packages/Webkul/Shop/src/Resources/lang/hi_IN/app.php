@@ -885,7 +885,7 @@ return [
         'pagination' => [
             'next-page'          => 'अगला पृष्ठ',
             'pagination-showing' => 'कुल :total आइटमों में :firstItem से :lastItem तक दिखा रहा है',
-            'prev-page'          => 'पिछला पृष्ठ'
+            'prev-page'          => 'पिछला पृष्ठ',
         ],
     ],
 

@@ -885,7 +885,7 @@ return [
         'pagination' => [
             'next-page'          => 'ඊළඟ පිටුව',
             'pagination-showing' => ':total ඇතුල් :firstItem සිට :lastItem දක්වා පෙන්වයි',
-            'prev-page'          => 'පෙර පිටුව'
+            'prev-page'          => 'පෙර පිටුව',
         ],
     ],
 

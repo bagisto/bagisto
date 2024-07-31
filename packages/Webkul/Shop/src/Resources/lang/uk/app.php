@@ -885,7 +885,7 @@ return [
         'pagination' => [
             'next-page'          => 'Наступна сторінка',
             'pagination-showing' => 'Показано від :firstItem до :lastItem з :total записів',
-            'prev-page'          => 'Попередня сторінка'
+            'prev-page'          => 'Попередня сторінка',
         ],
     ],
 

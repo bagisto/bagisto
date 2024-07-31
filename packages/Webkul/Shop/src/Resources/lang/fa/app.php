@@ -885,8 +885,8 @@ return [
         'pagination' => [
             'next-page'          => 'صفحه بعدی',
             'pagination-showing' => 'نمایش :firstItem تا :lastItem از مجموع :total مورد',
-            'prev-page'          => 'صفحه قبلی'
-            
+            'prev-page'          => 'صفحه قبلی',
+
         ],
     ],
 

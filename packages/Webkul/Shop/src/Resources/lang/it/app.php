@@ -885,7 +885,7 @@ return [
         'pagination' => [
             'next-page'          => 'Pagina successiva',
             'pagination-showing' => 'Visualizzazione da :firstItem a :lastItem di :total voci',
-            'prev-page'          => 'Pagina precedente'
+            'prev-page'          => 'Pagina precedente',
         ],
     ],
 

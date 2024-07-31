@@ -885,7 +885,7 @@ return [
         'pagination' => [
             'next-page'          => 'עמוד הבא',
             'pagination-showing' => 'מציג :firstItem עד :lastItem מתוך :total רשומות',
-            'prev-page'          => 'עמוד קודם'
+            'prev-page'          => 'עמוד קודם',
         ],
     ],
 
