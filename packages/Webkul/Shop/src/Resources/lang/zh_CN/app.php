@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => '添加附件',
+            'index' => [
+                'add-attachments' => '添加附件',
+                'add-image'       => '添加图片',
+            ],
         ],
 
         'layouts' => [

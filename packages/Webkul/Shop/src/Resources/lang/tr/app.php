@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Ek Dosyalar Ekle',
+            'index' => [
+                'add-attachments' => 'Ek Dosyalar Ekle',
+                'add-image'       => 'Resim ekle',
+            ],
         ],
 
         'layouts' => [

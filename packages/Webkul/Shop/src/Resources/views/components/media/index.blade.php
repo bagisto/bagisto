@@ -51,7 +51,9 @@
                     >
                     </label>
 
-                    <p class="font-medium max-sm:text-xs">@lang('Add Image')</p>
+                    <p class="font-medium max-sm:text-xs">
+                        @lang("shop::app.components.media.index.add-image")
+                    </p>
 
                     <input
                         type="hidden"
@@ -160,7 +162,7 @@
 
                 label: {
                     type: String, 
-                    default: 'Add attachments'
+                    default: '@lang("shop::app.components.media.index.add-attachments")'
                 }, 
 
                 src: {

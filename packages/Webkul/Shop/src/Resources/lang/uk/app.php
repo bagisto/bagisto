@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Додати вкладення',
+            'index' => [
+                'add-attachments' => 'Додати вкладення',
+                'add-image'       => 'Додати зображення',
+            ],
         ],
 
         'layouts' => [
