@@ -120,64 +120,65 @@
                             </div>
                         </div>
 
-                        <!-- For Attribute Options If Data Exist -->
-                        <div class="mt-4 overflow-x-auto">
-                            <div class="flex items-center gap-4 max-sm:flex-wrap">
-                                <!-- Input Options -->
-                                <x-admin::form.control-group
-                                    class="mb-2.5 w-full"
-                                    v-if="this.showSwatch"
+                        <!-- Swatch Changer and Empty Field Section. -->
+                        <div class="flex items-center gap-4 max-sm:flex-wrap">
+                            <!-- Input Options -->
+                            <x-admin::form.control-group
+                                class="mb-2.5 w-full"
+                                v-if="this.showSwatch"
+                            >
+                                <x-admin::form.control-group.label for="swatchType">
+                                    @lang('admin::app.catalog.attributes.edit.input-options')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    id="swatchType"
+                                    name="swatch_type"
+                                    v-model="swatchType"
+                                    @change="showSwatch=true"
                                 >
-                                    <x-admin::form.control-group.label for="swatchType">
-                                        @lang('admin::app.catalog.attributes.edit.input-options')
-                                    </x-admin::form.control-group.label>
+                                    @foreach (['dropdown', 'color', 'image', 'text'] as $type)
+                                        <option value="{{ $type }}">
+                                            @lang('admin::app.catalog.attributes.edit.option.' . $type)
+                                        </option>
+                                    @endforeach
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        id="swatchType"
-                                        name="swatch_type"
-                                        v-model="swatchType"
-                                        @change="showSwatch=true"
+                                <x-admin::form.control-group.error control-name="admin" />
+                            </x-admin::form.control-group>
+
+                            <!-- checkbox -->
+                            <div class="w-full">
+                                <div class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5">
+                                    <input
+                                        type="checkbox"
+                                        name="empty_option"
+                                        id="empty_option"
+                                        for="empty_option"
+                                        class="peer hidden"
+                                        v-model="isNullOptionChecked"
+                                        @click="$refs.addOptionsRow.toggle()"
                                     >
-                                        @foreach (['dropdown', 'color', 'image', 'text'] as $type)
-                                            <option value="{{ $type }}">
-                                                @lang('admin::app.catalog.attributes.edit.option.' . $type)
-                                            </option>
-                                        @endforeach
-                                    </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error control-name="admin" />
-                                </x-admin::form.control-group>
+                                    <label
+                                        for="empty_option"
+                                        class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"
+                                    >
+                                    </label>
 
-                                <!-- checkbox -->
-                                <div class="w-full">
-                                    <div class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5">
-                                        <input
-                                            type="checkbox"
-                                            name="empty_option"
-                                            id="empty_option"
-                                            for="empty_option"
-                                            class="peer hidden"
-                                            v-model="isNullOptionChecked"
-                                            @click="$refs.addOptionsRow.toggle()"
-                                        >
-
-                                        <label
-                                            for="empty_option"
-                                            class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600"
-                                        >
-                                        </label>
-
-                                        <label
-                                            for="empty_option"
-                                            class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
-                                        >
-                                            @lang('admin::app.catalog.attributes.edit.create-empty-option')
-                                        </label>
-                                    </div>
+                                    <label
+                                        for="empty_option"
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.create-empty-option')
+                                    </label>
                                 </div>
                             </div>
+                        </div>
 
+                        <!-- For Attribute Options If Data Exist -->
+                        <div class="mt-4 overflow-x-auto">
                             <template v-if="optionsData?.length">
                                 @if (
                                     $attribute->type == 'select'
@@ -979,21 +980,18 @@
 
                 methods: {
                     storeOptions(params, { resetForm, setValues }) {
-                        const ids = this.optionsData.map(item => item.id);
-
-                        const lastId = ids.length ? ids[ids.length - 1] : 0;
+                        const lastId = this.optionsData.map(item => item.id).pop() ?? 0 ;
 
                         if (! params.id) {
-                            params.id = 'options_' + (lastId + 1);
+                            params.id = `options_${lastId + 1}`;
+
                             this.optionId++;
                         }
 
                         let foundIndex = this.optionsData.findIndex(item => item.id === params.id);
 
                         if (foundIndex !== -1) {
-                            if (typeof params.id === 'string') {
-                                params.isNew = true;
-                            }
+                            params.isNew = String(params.id).startsWith('options_');
 
                             this.optionsData.splice(foundIndex, 1, params);
                         } else {
