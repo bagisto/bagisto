@@ -159,12 +159,17 @@ class Installer extends Command
         $this->call('migrate:fresh');
 
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
-        $this->info(app(BagistoDatabaseSeeder::class)->run([
+
+        $this->progressBar();
+
+        app(BagistoDatabaseSeeder::class)->run([
             'default_locale'     => $applicationDetails['default_locale'] ?? 'en',
             'allowed_locales'    => $applicationDetails['allowed_locales'] ?? ['en'],
             'default_currency'   => $applicationDetails['default_currency'] ?? 'USD',
             'allowed_currencies' => $applicationDetails['allowed_currencies'] ?? ['USD'],
-        ]));
+        ]);
+
+        $this->info('');
 
         $this->warn('Step: Linking storage directory...');
         $this->call('storage:link');
@@ -174,6 +179,7 @@ class Installer extends Command
 
         if (! $this->option('skip-admin-creation')) {
             $this->warn('Step: Create admin credentials...');
+
             $this->createAdminCredentials();
         }
 
@@ -411,9 +417,13 @@ class Installer extends Command
             if ($sampleProduct === 'true') {
                 $this->warn('Step: Seeding sample product data. Please Wait...');
 
-                app(DatabaseManager::class)->seedSampleProducts($this->applicationDetails);
+                $this->progressBar();
+
+                $this->info('');
 
                 $this->info('Product Creation Completed...');
+
+                app(DatabaseManager::class)->seedSampleProducts($this->applicationDetails);
             }
 
             $filePath = storage_path('installed');
@@ -582,10 +592,8 @@ class Installer extends Command
 
     /**
      * Get sorted list of timezone abbreviations.
-     *
-     * @return array
      */
-    private function getTimezones()
+    private function getTimezones(): array
     {
         $timezoneAbbreviations = DateTimeZone::listAbbreviations();
         $timezones = [];
@@ -601,5 +609,27 @@ class Installer extends Command
         asort($timezones);
 
         return $timezones;
+    }
+
+    /**
+     * Progress Bar.
+     */
+    private function progressBar(): void
+    {
+        $progressBar = $this->output->createProgressBar(100);
+
+        $this->info('');
+
+        $progressBar->start();
+
+        for ($i = 0; $i < 100; $i++) {
+            usleep(50000);
+
+            $progressBar->advance();
+        }
+
+        $progressBar->finish();
+
+        $this->info('');
     }
 }
