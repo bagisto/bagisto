@@ -635,7 +635,7 @@ return [
                 'australian-dollar'           => 'الدولار الأسترالي (AUD)',
                 'bagisto'                     => 'Bagisto',
                 'bangladeshi-taka'            => 'التاكا البنغلاديشي (BDT)',
-                'bahraini-dinar'               => 'دينار بحريني (BHD)',
+                'bahraini-dinar'              => 'دينار بحريني (BHD)',
                 'brazilian-real'              => 'الريال البرازيلي (BRL)',
                 'british-pound-sterling'      => 'الجنيه الإسترليني البريطاني (GBP)',
                 'canadian-dollar'             => 'الدولار الكندي (CAD)',
