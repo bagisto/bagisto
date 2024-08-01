@@ -32,6 +32,7 @@ class CategoryDataGrid extends DataGrid
             ->addSelect(DB::raw('COUNT(DISTINCT '.DB::getTablePrefix().'product_categories.product_id) as count'))
             ->leftJoin('category_translations', 'categories.id', '=', 'category_translations.category_id')
             ->leftJoin('product_categories', 'categories.id', '=', 'product_categories.category_id')
+            ->where('category_translations.locale', app()->getLocale())
             ->groupBy('categories.id');
 
         $this->addFilter('category_id', 'categories.id');
