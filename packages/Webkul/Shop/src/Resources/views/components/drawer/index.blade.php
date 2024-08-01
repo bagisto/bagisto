@@ -172,13 +172,19 @@
                         document.body.style.overflow ='auto';
                     }
 
+                    document.body.style.paddingRight = '';
+
                     this.$emit('toggle', { isActive: this.isOpen });
                 },
 
                 open() {
                     this.isOpen = true;
 
+                    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
                     document.body.style.overflow = 'hidden';
+
+                    document.body.style.paddingRight = `${scrollbarWidth}px`;
 
                     this.$emit('open', { isActive: this.isOpen });
                 },
@@ -187,6 +193,8 @@
                     this.isOpen = false;
 
                     document.body.style.overflow = 'auto';
+
+                    document.body.style.paddingRight = '';
 
                     this.$emit('close', { isActive: this.isOpen });
                 }
