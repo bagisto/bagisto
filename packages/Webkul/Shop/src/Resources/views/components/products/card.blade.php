@@ -186,10 +186,10 @@
 
         <!-- List Card -->
         <div
-            class="relative flex max-w-max grid-cols-2 gap-4 overflow-hidden rounded max-sm:flex-wrap"
+            class="group relative flex max-w-max grid-cols-2 gap-4 overflow-hidden rounded max-sm:flex-wrap"
             v-else
         >
-            <div class="group relative max-h-[258px] max-w-[250px] overflow-hidden"> 
+            <div class="relative max-h-[258px] max-w-[250px] overflow-hidden rounded-md"> 
 
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
@@ -209,7 +209,7 @@
 
                 <div class="action-items bg-black">
                     <p
-                        class="absolute top-5 inline-block rounded-[44px] bg-red-500 px-2.5 text-sm text-white ltr:left-5 max-sm:ltr:left-2 rtl:right-5"
+                        class="absolute top-1.5 inline-block rounded-[44px] bg-red-600 px-2.5 text-sm text-white max-sm:rounded-l-none max-sm:rounded-r-xl max-sm:px-2 max-sm:py-0.5 max-sm:text-xs ltr:left-1.5 max-sm:ltr:left-0 rtl:right-5 max-sm:rtl:right-0"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
@@ -221,44 +221,10 @@
                     >
                         @lang('shop::app.components.products.card.new')
                     </p>
-
-                    <div class="opacity-0 transition-all duration-300 group-hover:bottom-0 group-hover:opacity-100 max-sm:opacity-100">
-
-                        {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
-
-                        @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
-                            <span 
-                                class="absolute top-5 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl ltr:right-5 rtl:left-5"
-                                role="button"
-                                aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
-                                tabindex="0"
-                                :class="product.is_wishlist ? 'icon-heart-fill text-red-600' : 'icon-heart'"
-                                @click="addToWishlist()"
-                            >
-                            </span>
-                        @endif
-
-                        {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.after') !!}
-
-                        {!! view_render_event('bagisto.shop.components.products.card.compare_option.before') !!}
-
-                        @if (core()->getConfigData('catalog.products.settings.compare_option'))
-                            <span
-                                class="icon-compare absolute top-16 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl ltr:right-5 rtl:left-5"
-                                role="button"
-                                aria-label="@lang('shop::app.components.products.card.add-to-compare')"
-                                tabindex="0"
-                                @click="addToCompare(product.id)"
-                            >
-                            </span>
-                        @endif
-
-                        {!! view_render_event('bagisto.shop.components.products.card.compare_option.after') !!}
-                    </div>
                 </div>
             </div>
 
-            <div class="grid content-start gap-4">
+            <div class="grid cursor-pointer content-start gap-4 max-sm:max-w-[250px]">
 
                 {!! view_render_event('bagisto.shop.components.products.card.name.before') !!}
 
@@ -317,21 +283,59 @@
 
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.after') !!}
 
-                @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                <div class="flex items-center gap-4">
+                    <!-- Add To Cart Option -->
+                    @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+    
+                        {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
+    
+                        <x-shop::button
+                            class="primary-button whitespace-nowrap px-8 py-2.5"
+                            :title="trans('shop::app.components.products.card.add-to-cart')"
+                            ::loading="isAddingToCart"
+                            ::disabled="! product.is_saleable || isAddingToCart"
+                            @click="addToCart()"
+                        />
+    
+                        {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.after') !!}
+    
+                    @endif
 
-                    {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
+                    <!-- Compare Option -->
+                    @if (core()->getConfigData('catalog.products.settings.compare_option'))
 
-                    <x-shop::button
-                        class="primary-button whitespace-nowrap px-8 py-2.5"
-                        :title="trans('shop::app.components.products.card.add-to-cart')"
-                        ::loading="isAddingToCart"
-                        ::disabled="! product.is_saleable || isAddingToCart"
-                        @click="addToCart()"
-                    />
+                        {!! view_render_event('bagisto.shop.components.products.card.compare_option.before') !!}
+                            <span
+                                class="icon-compare flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl"
+                                role="button"
+                                aria-label="@lang('shop::app.components.products.card.add-to-compare')"
+                                tabindex="0"
+                                @click="addToCompare(product.id)"
+                            >
+                            </span>
+                            
+                        {!! view_render_event('bagisto.shop.components.products.card.compare_option.after') !!}
+                    @endif
 
-                    {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.after') !!}
+                    <!-- Wishlist Option -->
+                    @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
+                        
+                        {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.before') !!}
 
-                @endif
+                        <span 
+                            class="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md bg-white text-2xl"
+                            role="button"
+                            aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
+                            tabindex="0"
+                            :class="product.is_wishlist ? 'icon-heart-fill text-red-600' : 'icon-heart'"
+                            @click="addToWishlist()"
+                        >
+                        </span>
+
+                        {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.after') !!}
+
+                    @endif
+                </div>
             </div>
         </div>
     </script>
