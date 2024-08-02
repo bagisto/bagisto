@@ -203,11 +203,11 @@
                                                 </x-admin::table.th>
 
                                                 <!-- Loacles tables heading -->
-                                                @foreach ($locales as $locale)
+                                                <x-admin::table.th v-for="locale in locales">
                                                     <x-admin::table.th>
-                                                        {{ $locale->name . ' (' . $locale->code . ')' }}
+                                                        @{{ locale.name + '(' + [locale.code] + ')' }}
                                                     </x-admin::table.th>
-                                                @endforeach
+                                                </x-admin::table.th>
 
                                                 <!-- Action tables heading -->
                                                 <x-admin::table.th></x-admin::table.th>
@@ -886,6 +886,7 @@
                                     name="id"
                                 />
 
+                                <!-- Hidden IsNew Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="isNew"
@@ -1024,7 +1025,16 @@
                             : [],
                         };
 
-                        this.$refs.modelForm.setValues(value);
+                        this.$refs.modelForm.setValues({
+                            id: value.id,
+                            admin_name: value.admin_name,
+                            swatch_value: this.swatchValue[0].image,
+                            swatch_value_url: value.swatch_value_url,
+                            isNew: false,
+                            locales: {
+                                ...value.locales,
+                            }
+                        });
 
                         this.$refs.addOptionsRow.toggle();
                     },
