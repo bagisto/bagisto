@@ -1028,7 +1028,7 @@
                         this.$refs.modelForm.setValues({
                             id: value.id,
                             admin_name: value.admin_name,
-                            swatch_value: this.swatchValue[0].image,
+                            swatch_value: value.swatch_value,
                             swatch_value_url: value.swatch_value_url,
                             isNew: false,
                             locales: {
