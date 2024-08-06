@@ -870,8 +870,11 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'עד 40% הנחה על הזמנתך הראשונה! קנה עכשיו',
-            'resend-verify-email' => 'שלח מחדש אימייל לאימות',
+            'categories-carousel' => 'קרוסלת קטגוריות',
+            'image-carousel'      => 'קרוסלת תמונות',
+            'offer'               => 'קבל עד 40% הנחה על ההזמנה הראשונה שלך, קנה עכשיו',
+            'product-carousel'    => 'קרוסלת מוצרים',
+            'resend-verify-email' => 'שלח מחדש את מייל האימות',
             'verify-email'        => 'אמת את חשבון האימייל שלך',
         ],
 
@@ -880,7 +883,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'עמוד הבא',
             'pagination-showing' => 'מציג :firstItem עד :lastItem מתוך :total רשומות',
+            'prev-page'          => 'עמוד קודם',
         ],
     ],
 

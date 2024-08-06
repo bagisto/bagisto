@@ -870,9 +870,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => '首次下单立减40%，现在开始购物',
-            'resend-verify-email' => '重新发送验证电子邮件',
-            'verify-email'        => '验证您的电子邮件帐户',
+            'categories-carousel' => '分类轮播',
+            'image-carousel'      => '图片轮播',
+            'offer'               => '首单最高可享40%折扣，立即购买',
+            'product-carousel'    => '产品轮播',
+            'resend-verify-email' => '重新发送验证邮件',
+            'verify-email'        => '验证您的邮箱账户',
         ],
 
         'thanks-for-contact' => '感谢您与我们联系，提供您的意见和问题。我们会尽快回复您。',
@@ -880,7 +883,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => '下一页',
             'pagination-showing' => '显示 :total 个条目中的 :firstItem 到 :lastItem',
+            'prev-page'          => '上一页',
         ],
     ],
 
