@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'সংযুক্তি যোগ করুন',
+            'index' => [
+                'add-attachments' => 'সংযুক্তি যোগ করুন',
+                'add-image'       => 'চিত্র যোগ করুন',
+            ],
         ],
 
         'layouts' => [

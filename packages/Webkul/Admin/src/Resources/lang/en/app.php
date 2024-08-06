@@ -43,6 +43,7 @@ return [
         'view-all'              => 'View All',
 
         'order-status-messages' => [
+            'all'             => 'All',
             'canceled'        => 'Order Canceled',
             'closed'          => 'Order Closed',
             'completed'       => 'Order Completed',
@@ -3928,6 +3929,7 @@ return [
                         'invoice-id-info'  => 'Configure display of Invoice ID in Invoice Header.',
                         'invoice-id-title' => 'Display Invoice ID in Header',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'Image resolution should be like 131px X 30px.',
                         'order-id-info'    => 'Configure display of Order ID in Invoice Header.',
                         'order-id-title'   => 'Display Order ID in Header',
                         'title'            => 'PDF Print Outs',

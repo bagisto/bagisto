@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Alles Bekijken',
 
         'order-status-messages' => [
+            'all'             => 'Alles',
             'canceled'        => 'Bestelling Geannuleerd',
             'closed'          => 'Bestelling Gesloten',
             'completed'       => 'Bestelling Voltooid',
@@ -3928,6 +3929,7 @@ return [
                         'invoice-id-info'  => 'Configureer de weergave van het factuurnummer in de factuurkop.',
                         'invoice-id-title' => 'Toon factuurnummer in koptekst',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'De resolutie van de afbeelding moet ongeveer 131px x 30px zijn.',
                         'order-id-info'    => 'Configureer de weergave van het bestelnummer in de factuurkop.',
                         'order-id-title'   => 'Toon bestelnummer in koptekst',
                         'title'            => 'PDF-afdrukken',

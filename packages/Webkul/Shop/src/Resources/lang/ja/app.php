@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => '添付ファイルを追加',
+            'index' => [
+                'add-attachments' => '添付ファイルを追加',
+                'add-image'       => '画像を追加',
+            ],
         ],
 
         'layouts' => [

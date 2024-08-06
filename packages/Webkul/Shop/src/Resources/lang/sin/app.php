@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'ඇඩෙක්මෙන්ට් එකක් එක්කරන්න',
+            'index' => [
+                'add-attachments' => 'ඇඩෙක්මෙන්ට් එකක් එක්කරන්න',
+                'add-image'       => 'පින්තූර එකතු කරන්න',
+            ],
         ],
 
         'layouts' => [

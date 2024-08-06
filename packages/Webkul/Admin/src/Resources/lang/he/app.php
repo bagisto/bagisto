@@ -43,6 +43,7 @@ return [
         'view-all'         => 'הצג הכל',
 
         'order-status-messages' => [
+            'all'             => 'הכל',
             'canceled'        => 'הזמנה בוטלה',
             'closed'          => 'הזמנה נסגרה',
             'completed'       => 'הזמנה הושלמה',
@@ -3928,6 +3929,7 @@ return [
                         'invoice-id-info'  => 'הגדרת הצגת מזהה חשבונית בכותרת החשבונית.',
                         'invoice-id-title' => 'הצג מזהה חשבונית בכותרת',
                         'logo'             => 'לוגו',
+                        'logo-info'        => 'רזולוציית התמונה צריכה להיות 131px X 30px.',
                         'order-id-info'    => 'הגדרת הצגת מזהה הזמנה בכותרת החשבונית.',
                         'order-id-title'   => 'הצג מזהה הזמנה בכותרת',
                         'title'            => 'הדפסת PDF',
