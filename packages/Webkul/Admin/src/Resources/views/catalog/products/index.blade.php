@@ -401,7 +401,7 @@
                                         </div>
                                     </div>
 
-                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.before') !!}
+                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.after') !!}
                                 </div>
                             </x-slot>
 
