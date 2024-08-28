@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Tümünü Görüntüle',
 
         'order-status-messages' => [
+            'all'             => 'Tümü',
             'canceled'        => 'Sipariş İptal Edildi',
             'closed'          => 'Sipariş Kapatıldı',
             'completed'       => 'Sipariş Tamamlandı',
@@ -3928,6 +3929,7 @@ return [
                         'invoice-id-info'  => 'Fatura Başlığında Fatura Kimliği\'nin görüntülenmesini yapılandırın.',
                         'invoice-id-title' => 'Başlıkta Fatura Kimliği\'ni Göster',
                         'logo'             => 'Logo',
+                        'logo-info'        => 'Görüntü çözünürlüğü 131px X 30px olmalıdır.',
                         'order-id-info'    => 'Fatura Başlığında Sipariş Kimliği\'nin görüntülenmesini yapılandırın.',
                         'order-id-title'   => 'Başlıkta Sipariş Kimliği\'ni Göster',
                         'title'            => 'PDF Yazdırmaları',

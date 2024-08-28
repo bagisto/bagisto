@@ -43,6 +43,7 @@ return [
         'view-all'         => 'Ver Todas',
 
         'order-status-messages' => [
+            'all'             => 'Todos',
             'canceled'        => 'Pedido Cancelado',
             'closed'          => 'Pedido Fechado',
             'completed'       => 'Pedido Concluído',
@@ -3928,6 +3929,7 @@ return [
                         'invoice-id-info'  => 'Configurar a exibição do ID da Fatura no Cabeçalho da Fatura.',
                         'invoice-id-title' => 'Exibir ID da Fatura no Cabeçalho',
                         'logo'             => 'Logotipo',
+                        'logo-info'        => 'A resolução da imagem deve ser de 131px X 30px.',
                         'order-id-info'    => 'Configurar a exibição do ID do Pedido no Cabeçalho da Fatura.',
                         'order-id-title'   => 'Exibir ID do Pedido no Cabeçalho',
                         'title'            => 'Impressões em PDF',
