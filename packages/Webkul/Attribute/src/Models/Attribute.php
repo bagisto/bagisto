@@ -61,7 +61,7 @@ class Attribute extends TranslatableModel implements AttributeContract
      */
     public function options(): HasMany
     {
-        return $this->hasMany(AttributeOptionProxy::modelClass());
+        return $this->hasMany(AttributeOptionProxy::modelClass())->orderBy('sort_order', 'asc');
     }
 
     /**
