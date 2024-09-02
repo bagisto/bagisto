@@ -369,7 +369,7 @@
                                         <x-admin::form.control-group.error control-name="sku" />
                                     </x-admin::form.control-group>
 
-                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
+                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.after') !!}
                                 </div>
 
                                 <div v-show="attributes.length">
