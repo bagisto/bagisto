@@ -111,14 +111,13 @@
                         <x-admin::form.control-group>
                             <!-- Country Have States -->
                             <template v-if="haveStates()">
-                                <x-admin::form.control-group.label class="required">
+                                <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.taxes.rates.edit.state')
                                 </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="state"
-                                        rules="required"
                                         value="{{ old('state') }}"
                                         v-model="state"
                                         :label="trans('admin::app.settings.taxes.rates.edit.state')"
