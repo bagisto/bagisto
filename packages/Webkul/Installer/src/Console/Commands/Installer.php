@@ -354,7 +354,7 @@ class Installer extends Command
 
         foreach ($databaseDetails as $key => $value) {
             if ($value) {
-                $this->envUpdate($key, $value);
+                $this->envUpdate($key, $value, true);
             }
         }
     }
@@ -544,12 +544,12 @@ class Installer extends Command
     /**
      * Update the .env values.
      */
-    protected function envUpdate(string $key, string $value): void
+    protected function envUpdate(string $key, string $value, bool $addQuotes = false): void
     {
         $data = file_get_contents(base_path('.env'));
 
-        // Check if $value contains spaces, and if so, add double quotes
-        if (preg_match('/\s/', $value)) {
+        // Check if $value contains spaces, and if so, add double quotes or if $addQuotes is true
+        if ($addQuotes || preg_match('/\s/', $value)) {
             $value = '"'.$value.'"';
         }
 
