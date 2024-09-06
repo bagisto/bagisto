@@ -79,6 +79,7 @@ class Installer extends Command
         'ARS' => 'Argentine Peso',
         'AUD' => 'Australian Dollar',
         'BDT' => 'Bangladeshi Taka',
+        'BHD' => 'Bahraini Dinar',
         'BRL' => 'Brazilian Real',
         'CAD' => 'Canadian Dollar',
         'CHF' => 'Swiss Franc',
