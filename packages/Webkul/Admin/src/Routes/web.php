@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
  */
 require 'auth-routes.php';
 
-Route::group(['domain' => config('app.url'), 'middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     /**
      * Sales routes.
      */
