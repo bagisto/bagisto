@@ -132,11 +132,11 @@
                         <!-- Table Header -->
                         <div
                             class="row grid grid-cols-4 grid-rows-1 items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                            :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
+                            :style="`grid-template-columns: repeat(${reporting.statistics.columns.length}, minmax(0, 1fr))`"
                         >
                             <div
                                 class="flex cursor-pointer gap-2.5"
-                                v-for="column in reporing.statistics.columns"
+                                v-for="column in reporting.statistics.columns"
                             >
                                 <p class="text-gray-600 dark:text-gray-300">
                                     @{{ column.label }}
@@ -147,11 +147,11 @@
                         <!-- Table Body -->
                         <div
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, minmax(0, 1fr));"
-                            :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
-                            v-if="reporing.statistics.records.length"
-                            v-for="record in reporing.statistics.records"
+                            :style="`grid-template-columns: repeat(${reporting.statistics.columns.length}, minmax(0, 1fr))`"
+                            v-if="reporting.statistics.records.length"
+                            v-for="record in reporting.statistics.records"
                         >
-                            <p v-for="column in reporing.statistics.columns">
+                            <p v-for="column in reporting.statistics.columns">
                                 @{{ record[column.key] }}
                             </p>
                         </div>
@@ -193,7 +193,7 @@
                             end: "{{ $endDate->format('Y-m-d') }}",
                         },
 
-                        reporing: [],
+                        reporting: [],
 
                         isLoading: true,
                     }
@@ -221,7 +221,7 @@
                                 params: this.filters
                             })
                             .then(response => {
-                                this.reporing = response.data;
+                                this.reporting = response.data;
 
                                 this.isLoading = false;
                             })
