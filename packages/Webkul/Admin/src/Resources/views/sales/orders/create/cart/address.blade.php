@@ -300,14 +300,13 @@
 
                         <!-- Model Footer -->
                         <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <x-admin::button
-                                    class="primary-button"
-                                    :title="trans('shop::app.checkout.onepage.address.save')"
-                                    ::loading="isStoring"
-                                    ::disabled="isStoring"
-                                />
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                class="primary-button"
+                                :title="trans('shop::app.checkout.onepage.address.save')"
+                                ::loading="isStoring"
+                                ::disabled="isStoring"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>

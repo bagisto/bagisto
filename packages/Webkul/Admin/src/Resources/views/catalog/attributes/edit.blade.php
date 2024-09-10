@@ -825,14 +825,14 @@
                         @toggle="listenModel"
                         ref="addOptionsRow"
                     >
-                        <!-- Modal Header !-->
+                        <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.attributes.edit.add-option')
                             </p>
                         </x-slot>
 
-                        <!-- Modal Content !-->
+                        <!-- Modal Content -->
                         <x-slot:content>
                             <div class="grid">
                                 <!-- Image Input -->
@@ -932,15 +932,14 @@
                             </div>
                         </x-slot>
 
-                        <!-- Modal Footer !-->
+                        <!-- Modal Footer -->
                         <x-slot:footer>
                             <!-- Save Button -->
-                            <button
-                                type="submit"
+                            <x-admin::button
+                                button-type="button"
                                 class="primary-button"
-                            >
-                                @lang('admin::app.catalog.attributes.edit.option.save-btn')
-                            </button>
+                                :title="trans('admin::app.catalog.attributes.edit.option.save-btn')"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>

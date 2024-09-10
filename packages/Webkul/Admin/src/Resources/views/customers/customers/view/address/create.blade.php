@@ -323,13 +323,13 @@
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
-                        <!-- Modal Submission -->
+                        <!-- Save Button -->
                         <x-admin::button
                             button-type="submit"
                             class="primary-button justify-center"
                             :title="trans('admin::app.customers.customers.view.address.create.save-btn-title')"
-                            ::loading="isUpdating"
-                            ::disabled="isUpdating"
+                            ::loading="isLoading"
+                            ::disabled="isLoading"
                         />
                     </x-slot>
                 </x-admin::modal>
@@ -357,13 +357,13 @@
 
                     countryStates: @json(core()->groupedStatesByCountries()),
 
-                    isUpdating: false,
+                    isLoading: false,
                 };
             },
 
             methods: {
                 create(params, { resetForm, setErrors }) {
-                    this.isUpdating = true;
+                    this.isLoading = true;
 
                     params.default_address = params.default_address ?? 0;
 
@@ -375,12 +375,12 @@
 
                             resetForm();
 
-                            this.isUpdating = false;
+                            this.isLoading = false;
 
                             this.$refs.createAddress.toggle();
                         })
                         .catch(error => {
-                            this.isUpdating = false;
+                            this.isLoading = false;
 
                             if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
