@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Voettekst',
+                        'footer-text-info' => 'Voer de tekst in die in de voettekst van de PDF verschijnt.',
                         'info'             => 'Configureer PDF-afdrukken om het factuurnummer en het bestelnummer in de koptekst weer te geven en het factuurlogo op te nemen.',
                         'invoice-id-info'  => 'Configureer de weergave van het factuurnummer in de factuurkop.',
                         'invoice-id-title' => 'Toon factuurnummer in koptekst',

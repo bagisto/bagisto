@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Testo del piè di pagina',
+                        'footer-text-info' => 'Inserisci il testo che apparirà nel piè di pagina del PDF.',
                         'info'             => 'Configura le Stampe PDF per visualizzare l\'ID Fattura, l\'ID Ordine nell\'intestazione e includere il logo della fattura.',
                         'invoice-id-info'  => 'Configura la visualizzazione dell\'ID Fattura nell\'Intestazione della Fattura.',
                         'invoice-id-title' => 'Visualizza ID Fattura nell\'Intestazione',

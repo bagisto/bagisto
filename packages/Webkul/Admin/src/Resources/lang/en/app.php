@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Footer text',
+                        'footer-text-info' => 'Enter the text that will appear in the footer of the PDF.',
                         'info'             => 'Configure PDF Print Outs to display Invoice ID, Order ID in the header, and include the invoice logo.',
                         'invoice-id-info'  => 'Configure display of Invoice ID in Invoice Header.',
                         'invoice-id-title' => 'Display Invoice ID in Header',

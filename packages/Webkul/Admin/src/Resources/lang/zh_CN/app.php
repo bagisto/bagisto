@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => '页脚文字',
+                        'footer-text-info' => '输入将显示在PDF页脚中的文本。',
                         'info'             => 'PDFプリントアウトを設定して、ヘッダーに請求書ID、注文IDを表示し、請求書のロゴを含めます。',
                         'invoice-id-info'  => '請求書ヘッダーに請求書IDを表示するかを設定します。',
                         'invoice-id-title' => 'ヘッダーに請求書IDを表示',

@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'フッターテキスト',
+                        'footer-text-info' => 'PDFのフッターに表示されるテキストを入力してください。',
                         'info'             => 'PDF印刷アウトを設定して、ヘッダーに請求書ID、注文IDを表示し、請求書のロゴを含めます。',
                         'invoice-id-info'  => '請求書ヘッダーに請求書IDを表示するように設定します。',
                         'invoice-id-title' => 'ヘッダーに請求書IDを表示',

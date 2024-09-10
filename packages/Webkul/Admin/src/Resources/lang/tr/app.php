@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Alt bilgi metni',
+                        'footer-text-info' => 'PDF\'nin altbilgisinde görünecek metni girin.',
                         'info'             => 'Fatura Kimliği, Sipariş Kimliği\'ni başlıkta görüntülemek ve fatura logosunu içermek için PDF Yazdırmalarını yapılandırın.',
                         'invoice-id-info'  => 'Fatura Başlığında Fatura Kimliği\'nin görüntülenmesini yapılandırın.',
                         'invoice-id-title' => 'Başlıkta Fatura Kimliği\'ni Göster',
