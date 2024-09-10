@@ -22,6 +22,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Webkul\Core\Http\Middleware\SecureHeaders::class,
         \Webkul\Installer\Http\Middleware\CanInstall::class,
+        \Webkul\Shop\Http\Middleware\SanitizeInputMiddleware::class,
     ];
 
     /**
@@ -63,5 +64,6 @@ class Kernel extends HttpKernel
         'signed'        => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'cacheResponse' => \Webkul\Shop\Http\Middleware\CacheResponse::class,
+        'sanitize'      => \Webkul\Shop\Http\Middleware\SanitizeInputMiddleware::class, 
     ];
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
+Route::group(['middleware' => ['locale', 'theme', 'currency', 'sanitize']], function () {
     /**
      * Store front routes.
      */
