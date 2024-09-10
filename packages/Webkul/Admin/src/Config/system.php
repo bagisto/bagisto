@@ -1851,7 +1851,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.footer-text-info',
                 'type'          => 'textarea',
                 'channel_based' => true,
-                'locale_based'  => true
+                'locale_based'  => true,
             ],
         ],
     ], [
