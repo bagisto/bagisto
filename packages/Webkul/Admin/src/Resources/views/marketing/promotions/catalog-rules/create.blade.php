@@ -537,10 +537,12 @@
                                     :name="`conditions[${index}][value]`"
                                     v-slot="{ field, errorMessage}"
                                     :id="`conditions[${index}][value]`"
-                                    :rules="matchedAttribute.type == 'price' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
-                                        || matchedAttribute.type == 'decimal' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
-                                        || matchedAttribute.type == 'integer' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
-                                        || matchedAttribute.type == 'text' ? 'regex:^([A-Za-z0-9_ \'\-]+)$' : ''"
+                                    :rules="{
+                                        'price': 'regex:^[0-9]+(\.[0-9]+)?$',
+                                        'decimal': 'regex:^[0-9]+(\.[0-9]+)?$',
+                                        'integer': 'regex:^[0-9]+$',
+                                        'text': 'regex:^[-]?\\d+(\\.\\d+)?$'
+                                    }[ matchedAttribute.type ] || ''" 
                                     label="@lang('admin::app.marketing.promotions.catalog-rules.create.conditions')"
                                     v-model="condition.value"
                                 >
