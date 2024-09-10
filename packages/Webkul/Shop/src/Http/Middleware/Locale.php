@@ -23,17 +23,21 @@ class Locale
     public function handle($request, Closure $next)
     {
         if ($localeCode = core()->getRequestedLocaleCode('locale', false)) {
-            if ($this->localeRepository->findOneByField('code', $localeCode)) {
+            if (in_array($localeCode, core()->getCurrentChannel()->locales->pluck('code')->toArray())) {
                 app()->setLocale($localeCode);
 
                 session()->put('locale', $localeCode);
-            }
-        } else {
-            if ($localeCode = session()->get('locale')) {
-                app()->setLocale($localeCode);
             } else {
-                app()->setLocale(core()->getDefaultLocaleCodeFromDefaultChannel());
+                $defaultLocaleCode = core()->getCurrentChannel()->default_locale->code;
+
+                app()->setLocale($defaultLocaleCode);
+
+                session()->put('locale', $defaultLocaleCode);
             }
+        } elseif ($localeCode = session()->get('locale')) {
+            app()->setLocale($localeCode);
+        } else {
+            app()->setLocale(core()->getDefaultLocaleCodeFromDefaultChannel());
         }
 
         unset($request['locale']);
