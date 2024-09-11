@@ -122,6 +122,13 @@
             ]
         }
     },
+    "repositories": [{
+        "type": "path",
+        "url": "packages/*/*",
+        "options": {
+            "symlink": true
+        }
+    }],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
