@@ -3469,7 +3469,7 @@ return [
                 'title' => 'Catálogo',
 
                 'products' => [
-                    'info'  => 'Configurar el pago de invitados, página de vista de producto, página de carrito, tienda en línea, reseñas y compartir en redes sociales de atributos.',
+                    'info'  => 'Página de vista del producto, página de vista del carrito, escaparate, revisión y compartir atributos en redes sociales.',
                     'title' => 'Productos',
 
                     'settings' => [
@@ -3999,7 +3999,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Finalizar compra',
-                    'info'  => 'Habilitar o deshabilitar el mini carrito, el resumen del carrito.',
+                    'info'  => 'Configurar pago como invitado, habilitar o deshabilitar el carrito mini, resumen del carrito.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Página del carrito',

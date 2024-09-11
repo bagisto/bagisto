@@ -3469,7 +3469,7 @@ return [
                 'title' => 'Catálogo',
 
                 'products' => [
-                    'info'  => 'Defina o checkout de convidado, página de visualização do produto, página de visualização do carrinho, frente da loja, revisão e compartilhamento social de atributos.',
+                    'info'  => 'Página de visualização do produto, página de visualização do carrinho, vitrine, avaliação e compartilhamento social de atributos.',
                     'title' => 'Produtos',
 
                     'settings' => [
@@ -3999,7 +3999,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Finalizar Compra',
-                    'info'  => 'Ativar ou Desativar Mini Carrinho, Resumo do Carrinho.',
+                    'info'  => 'Definir checkout de convidado, habilitar ou desabilitar Mini Carrinho, resumo do carrinho.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Página do Carrinho',
