@@ -122,7 +122,10 @@
                 >
                     <form @submit="handleSubmit($event, generate)">
                         <!-- AI Content Generation Modal -->
-                        <x-admin::modal ref="magicAIImageModal">
+                        <x-admin::modal
+                            ref="magicAIImageModal"
+                            class="[&>*]:-ml-px [&>*]:-mt-px [&>*]:h-[100.3%] [&>*]:w-[100.3%] [&>*]:rounded-lg"
+                        >
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <template v-if="! ai.images.length">
