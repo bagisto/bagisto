@@ -320,14 +320,13 @@
                                             </template>
                                         </button>
 
-                                        <button
-                                            type="button"
+                                        <x-admin::button
+                                            button-type="button"
                                             class="primary-button"
-                                            :disabled="! selectedAIImages.length"
+                                            :title="trans('admin::app.components.media.images.ai-generation.apply')"
+                                            ::disabled="! selectedAIImages.length"
                                             @click="apply"
-                                        >
-                                            @lang('admin::app.components.media.images.ai-generation.apply')
-                                        </button>
+                                        />
                                     </template>
                                 </div>
                             </x-slot>

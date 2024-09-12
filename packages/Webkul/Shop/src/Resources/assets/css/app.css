@@ -466,7 +466,6 @@ img.lazy {
     }
 
     .wrapper-404 {
-        aspect-ratio: 16/9;
         position: relative;
         font-size: 394px;
         perspective: 4.5em;

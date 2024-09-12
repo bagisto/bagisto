@@ -87,7 +87,7 @@ class OrderRepository extends Repository
             );
 
             /* recalling */
-            $this->createOrderIfNotThenRetry($data);
+            return $this->createOrderIfNotThenRetry($data);
         } finally {
             /* commit in each case */
             DB::commit();

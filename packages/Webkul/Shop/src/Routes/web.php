@@ -1,18 +1,22 @@
 <?php
 
-/**
- * Store front routes.
- */
-require 'store-front-routes.php';
+use Illuminate\Support\Facades\Route;
 
-/**
- * Customer routes. All routes related to customer
- * in storefront will be placed here.
- */
-require 'customer-routes.php';
+Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
+    /**
+     * Store front routes.
+     */
+    require 'store-front-routes.php';
 
-/**
- * Checkout routes. All routes related to checkout like
- * cart, coupons, etc will be placed here.
- */
-require 'checkout-routes.php';
+    /**
+     * Customer routes. All routes related to customer
+     * in storefront will be placed here.
+     */
+    require 'customer-routes.php';
+
+    /**
+     * Checkout routes. All routes related to checkout like
+     * cart, coupons, etc will be placed here.
+     */
+    require 'checkout-routes.php';
+});

@@ -146,15 +146,12 @@
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <!-- Modal Submission -->
-                            <div class="flex items-center gap-x-2.5">
-                                <button 
-                                    type="submit"
-                                    class="primary-button"
-                                >
-                                    @lang('admin::app.catalog.products.edit.types.configurable.create.save-btn')
-                                </button>
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="button"
+                                class="primary-button"
+                                :title="trans('admin::app.catalog.products.edit.types.configurable.create.save-btn')"
+                            />
                         </x-slot>
                     </x-admin::modal>
                 </form>
