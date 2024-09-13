@@ -30,7 +30,7 @@ class Currency
         }
 
         if (! $currencyCode || ! in_array($currencyCode, $currencies)) {
-            $currencyCode = core()->getCurrentChannel()->default_currency->code;
+            $currencyCode = core()->getCurrentChannel()->base_currency->code;
         }
 
         core()->setCurrentCurrency($currencyCode);
