@@ -6,11 +6,19 @@
         $clientId = core()->getConfigData('sales.payment_methods.paypal_smart_button.client_id');
 
         $acceptedCurrency = core()->getConfigData('sales.payment_methods.paypal_smart_button.accepted_currencies');
+
+        $currentCurrency = core()->getCurrentCurrencyCode();
+
+        $acceptedCurrenciesArray = array_map('trim', explode(',', $acceptedCurrency));
+
+        $currencyToUse = in_array($currentCurrency, $acceptedCurrenciesArray)
+            ? $currentCurrency
+            : $acceptedCurrenciesArray[0];
     @endphp
 
     @pushOnce('scripts')
         <script
-            src="https://www.paypal.com/sdk/js?client-id={{ $clientId }}&currency={{ $acceptedCurrency }}"
+            src="https://www.paypal.com/sdk/js?client-id={{ $clientId }}&currency={{ $currencyToUse }}"
             data-partner-attribution-id="Bagisto_Cart"
         >
         </script>
