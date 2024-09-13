@@ -338,7 +338,7 @@
                             </x-admin::modal>
                         </form>
                     </x-admin::form>
-                <Teleport>
+                </Teleport>
             </div>
         </div>  
     </script>
