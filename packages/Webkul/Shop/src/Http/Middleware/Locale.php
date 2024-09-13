@@ -22,20 +22,19 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        if ($localeCode = core()->getRequestedLocaleCode('locale', false)) {
-            if ($this->localeRepository->findOneByField('code', $localeCode)) {
-                app()->setLocale($localeCode);
+        $locales = core()->getCurrentChannel()->locales->pluck('code')->toArray();
+        $localeCode = core()->getRequestedLocaleCode('locale', false);
 
-                session()->put('locale', $localeCode);
-            }
-        } else {
-            if ($localeCode = session()->get('locale')) {
-                app()->setLocale($localeCode);
-            } else {
-                app()->setLocale(core()->getDefaultLocaleCodeFromDefaultChannel());
-            }
+        if (! $localeCode || ! in_array($localeCode, $locales)) {
+            $localeCode = session()->get('locale');
         }
 
+        if (! $localeCode || ! in_array($localeCode, $locales)) {
+            $localeCode = core()->getCurrentChannel()->default_locale->code;
+        }
+
+        app()->setLocale($localeCode);
+        session()->put('locale', $localeCode);
         unset($request['locale']);
 
         return $next($request);
