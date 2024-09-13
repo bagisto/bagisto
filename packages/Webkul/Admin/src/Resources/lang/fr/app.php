@@ -3469,7 +3469,7 @@ return [
                 'title' => 'Catalogue',
 
                 'products' => [
-                    'info'  => 'Définissez la validation des invités, la page de visualisation du produit, la page de visualisation du panier, la vitrine du magasin, l\'avis et le partage social des attributs.',
+                    'info'  => 'Page de vue produit, page de vue panier, vitrine, avis et partage social des attributs.',
                     'title' => 'Produits',
 
                     'settings' => [
@@ -3999,7 +3999,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Validation de la commande',
-                    'info'  => 'Activer ou désactiver le mini panier, le résumé du panier.',
+                    'info'  => 'Définir le paiement en tant qu\'invité, activer ou désactiver le mini-panier, résumé du panier.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Page du panier',

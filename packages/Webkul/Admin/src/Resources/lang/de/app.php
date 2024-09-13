@@ -3469,7 +3469,7 @@ return [
                 'title' => 'Katalog',
 
                 'products' => [
-                    'info'  => 'Setzen Sie den Gast-Checkout, die Produktansichtsseite, die Warenkorbansichtsseite, die Storefront, die Bewertung und die Attributfreigabe.',
+                    'info'  => 'Produktansichtsseite, Warenkorbansichtsseite, Storefront, Bewertung und Attribut-Sozialfreigabe.',
                     'title' => 'Produkte',
 
                     'settings' => [
@@ -3999,7 +3999,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Kasse',
-                    'info'  => 'Aktivieren oder Deaktivieren des Mini-Warenkorbs und der Warenkorbübersicht.',
+                    'info'  => 'Gast-Checkout einrichten, Mini-Warenkorb aktivieren oder deaktivieren, Warenkorbzusammenfassung.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Warenkorbseite',
