@@ -19,6 +19,10 @@ class Bouncer
             return redirect()->route('admin.session.create');
         }
 
+        if (auth()->guard($guard)->user()->locale) {
+            app()->setLocale(auth()->guard($guard)->user()->locale->code);
+        }
+
         /**
          * If user status is changed by admin. Then session should be
          * logged out.
