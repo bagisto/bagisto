@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Webkul\Admin\Mail\Admin\ResetPasswordNotification;
+use Webkul\Core\Models\LocaleProxy;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
 
@@ -28,6 +29,7 @@ class Admin extends Authenticatable implements AdminContract
         'image',
         'api_token',
         'role_id',
+        'locale_id',
         'status',
     ];
 
@@ -82,6 +84,16 @@ class Admin extends Authenticatable implements AdminContract
     public function role()
     {
         return $this->belongsTo(RoleProxy::modelClass());
+    }
+
+    /**
+     * Get the locale that owns the admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function locale()
+    {
+        return $this->belongsTo(LocaleProxy::modelClass());
     }
 
     /**
