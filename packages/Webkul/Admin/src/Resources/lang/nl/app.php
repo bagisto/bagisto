@@ -69,6 +69,7 @@ return [
             'title'             => 'Mijn Account',
             'update-success'    => 'Account succesvol bijgewerkt',
             'upload-image-info' => 'Upload een Profiel Afbeelding (110px X 110px) in PNG of JPG Formaat',
+            'locale'            => 'Taal',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => 'Naam',
                     'password'          => 'Wachtwoord',
                     'role'              => 'Rol',
+                    'locale'            => 'Taal',
                     'save-btn'          => 'Gebruiker Opslaan',
                     'status'            => 'Status',
                     'title'             => 'Gebruiker Aanmaken',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => 'Inactief',
                     'name'     => 'Naam',
                     'role'     => 'Rol',
+                    'locale'   => 'Taal',
                     'status'   => 'Status',
                 ],
 
