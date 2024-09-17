@@ -69,6 +69,7 @@ return [
             'title'             => '我的账户',
             'update-success'    => '账户已成功更新',
             'upload-image-info' => '上传个人资料图片（110px X 110px），格式为PNG或JPG',
+            'locale'            => '語言',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => '姓名',
                     'password'          => '密码',
                     'role'              => '角色',
+                    'locale'            => '語言',
                     'save-btn'          => '保存用户',
                     'status'            => '状态',
                     'title'             => '创建用户',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => '不活跃',
                     'name'     => '姓名',
                     'role'     => '角色',
+                    'locale'   => '語言',
                     'status'   => '状态',
                 ],
 
