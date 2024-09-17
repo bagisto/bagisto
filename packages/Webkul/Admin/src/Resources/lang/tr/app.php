@@ -69,6 +69,7 @@ return [
             'title'             => 'Hesabım',
             'update-success'    => 'Hesap başarıyla güncellendi',
             'upload-image-info' => 'PNG veya JPG Formatında 110x110 boyutlarında bir profil resmi yükleyin',
+            'locale'            => 'Dil',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => 'Adı',
                     'password'          => 'Şifre',
                     'role'              => 'Rol',
+                    'locale'            => 'Dil',
                     'save-btn'          => 'Kullanıcıyı Kaydet',
                     'status'            => 'Durum',
                     'title'             => 'Kullanıcı Oluştur',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => 'Pasif',
                     'name'     => 'Adı',
                     'role'     => 'Rol',
+                    'locale'   => 'Dil',
                     'status'   => 'Durum',
                 ],
 
