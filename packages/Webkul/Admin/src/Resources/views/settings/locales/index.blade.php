@@ -254,14 +254,14 @@
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex items-center gap-x-2.5">
-                                <button
-                                    type="submit"
-                                    class="primary-button"
-                                >
-                                    @lang('admin::app.settings.locales.index.create.save-btn')
-                                </button>
-                            </div>
+                            <!-- Save Button -->
+                            <x-admin::button
+                                button-type="button"
+                                class="primary-button"
+                                :title="trans('admin::app.settings.locales.index.create.save-btn')"
+                                ::loading="isLoading"
+                                ::disabled="isLoading"
+                            />
                         </x-slot>
                     </x-admin::modal>
 
@@ -280,6 +280,8 @@
                         locale: {
                             image: [],
                         },
+
+                        isLoading: false,
 
                         selectedLocales: 0,
                     }
@@ -303,6 +305,8 @@
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors  }) {
+                        this.isLoading = true;
+
                         let formData = new FormData(this.$refs.createLocaleForm);
 
                         if (params.id) {
@@ -315,6 +319,8 @@
                             }
                         })
                         .then((response) => {
+                            this.isLoading = false;
+
                             this.$refs.localeUpdateOrCreateModal.close();
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
@@ -324,6 +330,8 @@
                             resetForm();
                         })
                         .catch(error => {
+                            this.isLoading = false;
+
                             if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
                             }
