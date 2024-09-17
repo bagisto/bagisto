@@ -69,6 +69,7 @@ return [
             'title'             => 'Mein Konto',
             'update-success'    => 'Konto erfolgreich aktualisiert',
             'upload-image-info' => 'Laden Sie ein Profilbild (110px X 110px) im PNG- oder JPG-Format hoch',
+            'locale'            => 'Sprache',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => 'Name',
                     'password'          => 'Passwort',
                     'role'              => 'Rolle',
+                    'locale'            => 'Sprache',
                     'save-btn'          => 'Benutzer speichern',
                     'status'            => 'Status',
                     'title'             => 'Benutzer erstellen',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => 'Inaktiv',
                     'name'     => 'Name',
                     'role'     => 'Rolle',
+                    'locale'   => 'Sprache',
                     'status'   => 'Status',
                 ],
 
