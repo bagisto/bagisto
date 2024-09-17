@@ -64,10 +64,13 @@
                     sort,
                     performAction
                 }">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
+                    <div
+                        class="row grid grid-cols-{{ $hasPermission ? '7' : '6' }} grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
+                        :style="'grid-template-columns: repeat({{ $hasPermission ? '7' : '6' }}, minmax(0, 1fr));'"
+                    >
                         <div
                             class="flex cursor-pointer gap-2.5"
-                            v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name']"
+                            v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name', 'locale_name']"
                         >
                             <p class="text-gray-600 dark:text-gray-300">
                                 <span class="[&>*]:after:content-['_/_']">
@@ -117,7 +120,7 @@
                         <div
                             v-for="record in available.records"
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
-                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
+                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 7 : 6) + ', minmax(0, 1fr));'"
                         >
                             <!-- ID -->
                             <p>@{{ record.user_id }}</p>
@@ -159,6 +162,9 @@
 
                             <!-- Role -->
                             <p>@{{ record.role_name }}</p>
+
+                            <!-- Locale -->
+                            <p>@{{ record.locale_name }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">
@@ -333,6 +339,56 @@
                                     <x-admin::form.control-group.error control-name="role_id" />
                                 </x-admin::form.control-group>
 
+                                <!-- Locale -->
+                                <x-admin::form.control-group class="w-full flex-1">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.users.index.create.locale')
+                                    </x-admin::form.control-group.label>
+
+                                    <v-field
+                                        name="locale_id"
+                                        rules="required"
+                                        label="@lang('admin::app.settings.users.index.create.locale')"
+                                        v-model="data.user.role_id"
+                                    >
+                                        <select
+                                            name="locale_id"
+                                            class="flex min-h-[39px] w-full rounded-md border bg-white px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                            :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                            v-model="data.user.locale_id"
+                                        >
+                                            <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
+
+                                            <option
+                                                v-for="locale in locales"
+                                                :value="locale.id"
+                                                :text="locale.name"
+                                            >
+                                            </option>
+                                        </select>
+                                    </v-field>
+
+                                    <x-admin::form.control-group.error control-name="locale_id" />
+                                </x-admin::form.control-group>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <x-admin::form.control-group class="w-full flex-1">
+                                    <div class="hidden">
+                                        <x-admin::media.images
+                                            name="image"
+                                            ::uploaded-images='data.images'
+                                        />
+                                    </div>
+
+                                    <v-media-images
+                                        name="image"
+                                        :uploaded-images='data.images'
+                                    >
+                                    </v-media-images>
+
+                                </x-admin::form.control-group>
+
                                 <template v-if="currentUserId != data.user.id">
                                     <x-admin::form.control-group class="!mb-0 w-full flex-1">
                                         <x-admin::form.control-group.label>
@@ -362,25 +418,11 @@
                                     />
                                 </template>
                             </div>
-
-                            <x-admin::form.control-group>
-                                <div class="hidden">
-                                    <x-admin::media.images
-                                        name="image"
-                                        ::uploaded-images='data.images'
-                                    />
-                                </div>
-
-                                <v-media-images
-                                    name="image"
-                                    :uploaded-images='data.images'
-                                >
-                                </v-media-images>
-
-                                <p class="required my-3 text-sm text-gray-400">
-                                    @lang('admin::app.settings.users.index.create.upload-image-info')
-                                </p>
-                            </x-admin::form.control-group>
+                            
+                            <p class="required text-sm text-gray-400">
+                                @lang('admin::app.settings.users.index.create.upload-image-info')
+                            </p>
+                            
                         </x-slot>
 
                         <!-- Modal Footer -->
@@ -461,6 +503,7 @@
                         isUpdating: false,
 
                         roles: @json($roles),
+                        locales: @json($locales),
 
                         data: {
                             user: {},
