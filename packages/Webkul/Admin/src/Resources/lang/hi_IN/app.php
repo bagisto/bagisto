@@ -69,6 +69,7 @@ return [
             'title'             => 'मेरा खाता',
             'update-success'    => 'खाता सफलतापूर्वक अपडेट किया गया',
             'upload-image-info' => 'PNG या JPG प्रारूप में प्रोफ़ाइल छवि (110px X 110px) अपलोड करें',
+            'locale'            => 'Locale',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => 'नाम',
                     'password'          => 'पासवर्ड',
                     'role'              => 'भूमिका',
+                    'locale'            => 'Locale',
                     'save-btn'          => 'उपयोगकर्ता सहेजें',
                     'status'            => 'स्थिति',
                     'title'             => 'उपयोगकर्ता बनाएँ',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => 'निष्क्रिय',
                     'name'     => 'नाम',
                     'role'     => 'भूमिका',
+                    'locale'   => 'Locale',
                     'status'   => 'स्थिति',
                 ],
 
