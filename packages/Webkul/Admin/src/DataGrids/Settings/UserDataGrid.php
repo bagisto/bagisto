@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Settings;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Repositories\LocaleRepository;
 use Webkul\DataGrid\DataGrid;
 use Webkul\User\Repositories\RoleRepository;
 
@@ -21,7 +22,7 @@ class UserDataGrid extends DataGrid
      *
      * @return void
      */
-    public function __construct(protected RoleRepository $roleRepository) {}
+    public function __construct(protected RoleRepository $roleRepository, protected LocaleRepository $localeRepository) {}
 
     /**
      * Prepare query builder.
@@ -32,17 +33,20 @@ class UserDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('admins')
             ->leftJoin('roles', 'admins.role_id', '=', 'roles.id')
+            ->leftJoin('locales', 'admins.locale_id', '=', 'locales.id')
             ->select(
                 'admins.id as user_id',
                 'admins.name as user_name',
                 'admins.image as user_image',
                 'admins.status',
                 'admins.email',
-                'roles.name as role_name'
+                'roles.name as role_name',
+                'locales.name as locale_name'
             );
 
         $this->addFilter('user_id', 'admins.id');
         $this->addFilter('user_name', 'admins.name');
+        $this->addFilter('locale_name', 'locales.name');
         $this->addFilter('role_name', 'roles.name');
         $this->addFilter('status', 'admins.status');
 
@@ -109,6 +113,17 @@ class UserDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'              => 'locale_name',
+            'label'              => trans('admin::app.settings.users.index.datagrid.locale'),
+            'type'               => 'string',
+            'searchable'         => true,
+            'filterable'         => true,
+            'filterable_type'    => 'dropdown',
+            'filterable_options' => $this->localeRepository->all(['name as label', 'name as value'])->toArray(),
+            'sortable'           => true,
         ]);
 
         $this->addColumn([
