@@ -69,6 +69,7 @@ return [
             'title'             => 'החשבון שלי',
             'update-success'    => 'החשבון עודכן בהצלחה',
             'upload-image-info' => 'העלה תמונת פרופיל (110px X 110px) בתבנית PNG או JPG',
+            'locale'            => 'Locale',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => 'שם',
                     'password'          => 'סיסמה',
                     'role'              => 'תפקיד',
+                    'locale'            => 'Locale',
                     'save-btn'          => 'שמור משתמש',
                     'status'            => 'סטטוס',
                     'title'             => 'יצירת משתמש',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => 'לא פעיל',
                     'name'     => 'שם',
                     'role'     => 'תפקיד',
+                    'locale'   => 'Locale',
                     'status'   => 'סטטוס',
                 ],
 
