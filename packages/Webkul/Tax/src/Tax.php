@@ -151,7 +151,7 @@ class Tax
         // dump($address);
         foreach ($taxRates as $rate) {
             if (
-                $address->state != '*'
+                ! in_array(trim($rate->state), ['*', ''])
                 && $rate->state != $address->state
             ) {
                 continue;

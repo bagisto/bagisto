@@ -3471,7 +3471,7 @@ return [
                 'title' => 'Catalogus',
 
                 'products' => [
-                    'info'  => 'Stel gastafrekening in, productweergavepagina, winkelwagenweergavepagina, winkelvoorkant, beoordeling en attribuut delen via sociale media.',
+                    'info'  => 'Productweergavepagina, winkelwagenweergavepagina, etalage, beoordeling en sociale attributendelingsoptie.',
                     'title' => 'Producten',
 
                     'settings' => [
@@ -4001,7 +4001,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Afrekenen',
-                    'info'  => 'Schakel Mini-winkelwagen, winkelwagensamenvatting in of uit.',
+                    'info'  => 'Gastafrekenen instellen, mini-winkelwagen inschakelen of uitschakelen, winkelwagensamenvatting.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Winkelwagenpagina',

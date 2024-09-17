@@ -3471,7 +3471,7 @@ return [
                 'title' => 'Catalogo',
 
                 'products' => [
-                    'info'  => 'Imposta il checkout per gli ospiti, la pagina di visualizzazione del prodotto, la pagina del carrello, il front-end del negozio, la condivisione dei social network delle recensioni e degli attributi.',
+                    'info'  => 'Pagina di visualizzazione prodotto, pagina di visualizzazione carrello, vetrina, recensione e condivisione sociale degli attributi.',
                     'title' => 'Prodotti',
 
                     'settings' => [
@@ -4001,7 +4001,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Checkout',
-                    'info'  => 'Abilita o Disabilita Mini Carrello, Riepilogo Carrello.',
+                    'info'  => 'Imposta il checkout ospite, abilita o disabilita il mini carrello, riepilogo carrello',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Pagina Carrello',

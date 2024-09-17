@@ -3471,7 +3471,7 @@ return [
                 'title' => 'Katalog',
 
                 'products' => [
-                    'info'  => 'Ustawienia dotyczące gościnnego zamawiania, strony produktu, strony koszyka, frontu sklepu, udostępniania społecznościowego recenzji i atrybutów.',
+                    'info'  => 'Strona widoku produktu, strona widoku koszyka, strona główna sklepu, recenzja i społecznościowe udostępnianie atrybutów.',
                     'title' => 'Produkty',
 
                     'settings' => [
@@ -4001,7 +4001,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Kasa',
-                    'info'  => 'Włącz lub wyłącz Mini Koszyk, podsumowanie koszyka.',
+                    'info'  => 'Ustaw finalizację transakcji bez rejestracji, włącz lub wyłącz mini koszyk, podsumowanie koszyka.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Strona koszyka',

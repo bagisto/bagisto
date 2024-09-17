@@ -3471,7 +3471,7 @@ return [
                 'title' => 'कैटलॉग',
 
                 'products' => [
-                    'info'  => 'मेहमान चेकआउट, उत्पाद देखें पृष्ठ, कार्ट देखें पृष्ठ, स्टोर फ्रंट, समीक्षा और विशेषता सामाजिक साझा करें।',
+                    'info'  => 'उत्पाद दृश्य पृष्ठ, कार्ट दृश्य पृष्ठ, स्टोर फ्रंट, समीक्षा और विशेषता सामाजिक साझाकरण।',
                     'title' => 'उत्पाद',
 
                     'settings' => [
@@ -4001,34 +4001,34 @@ return [
 
                 'checkout' => [
                     'title' => 'Checkout',
-                    'info'  => 'Enable or Disable Mini Cart, cart Summary.',
+                    'info'  => 'अतिथि चेकआउट सेट करें, मिनी कार्ट सक्षम या अक्षम करें, कार्ट सारांश।',
 
                     'shopping-cart' => [
-                        'cart-page'              => 'Cart Page',
-                        'cart-page-info'         => 'Control Cart Page visibility to enhance user shopping experience.',
-                        'cross-sell'             => 'Cross sell Products',
-                        'cross-sell-info'        => 'Enable cross-sell products to boost additional sales opportunities.',
-                        'estimate-shipping'      => 'Estimated Shipping',
-                        'estimate-shipping-info' => 'Enable estimated shipping to provide upfront shipping costs.',
-                        'guest-checkout'         => 'Allow guest checkout',
-                        'guest-checkout-info'    => 'Enable guest checkout for a faster, hassle-free purchase process.',
-                        'info'                   => 'Enable guest checkout, cart page, cross-sell products, and estimated shipping to enhance user convenience and streamline the shopping process for increased sales.',
-                        'title'                  => 'Shopping Cart',
+                        'cart-page'              => 'कार्ट पेज',
+                        'cart-page-info'         => 'उपयोगकर्ता की खरीदारी अनुभव को बेहतर बनाने के लिए कार्ट पेज की दृश्यता नियंत्रित करें।',
+                        'cross-sell'             => 'क्रॉस सेल उत्पाद',
+                        'cross-sell-info'        => 'अतिरिक्त बिक्री के अवसर बढ़ाने के लिए क्रॉस सेल उत्पाद सक्षम करें।',
+                        'estimate-shipping'      => 'अनुमानित शिपिंग',
+                        'estimate-shipping-info' => 'शिपिंग लागत पहले से देने के लिए अनुमानित शिपिंग सक्षम करें।',
+                        'guest-checkout'         => 'अतिथि चेकआउट की अनुमति दें',
+                        'guest-checkout-info'    => 'अतिथि चेकआउट को सक्षम करें ताकि तेजी से और परेशानी रहित खरीद प्रक्रिया हो सके।',
+                        'info'                   => 'उपयोगकर्ता की सुविधा बढ़ाने और बिक्री बढ़ाने के लिए अतिथि चेकआउट, कार्ट पेज, क्रॉस सेल उत्पाद और अनुमानित शिपिंग को सक्षम करें।',
+                        'title'                  => 'शॉपिंग कार्ट',
                     ],
 
                     'my-cart' => [
-                        'display-item-quantities' => 'Display item quantities',
-                        'display-number-in-cart'  => 'Display number of items in cart',
-                        'info'                    => 'Enable settings for My Cart to show a summary of item quantities and display the total number of items in the cart for easy tracking.',
-                        'summary'                 => 'Summary',
-                        'title'                   => 'My Cart',
+                        'display-item-quantities' => 'आइटम की मात्रा प्रदर्शित करें',
+                        'display-number-in-cart'  => 'कार्ट में आइटम की संख्या प्रदर्शित करें',
+                        'info'                    => 'आइटम की मात्रा का सारांश दिखाने और कार्ट में कुल आइटम की संख्या प्रदर्शित करने के लिए "माई कार्ट" सेटिंग्स सक्षम करें, जिससे ट्रैकिंग आसान हो सके।',
+                        'summary'                 => 'सारांश',
+                        'title'                   => 'माई कार्ट',
                     ],
 
                     'mini-cart' => [
-                        'display-mini-cart'    => 'Display Mini Cart',
-                        'info'                 => 'Enable Mini Cart settings to display the mini cart and show Mini Cart Offer Information for quick access to cart details and promotions.',
-                        'mini-cart-offer-info' => 'Mini Cart Offer Information',
-                        'title'                => 'Mini Cart',
+                        'display-mini-cart'    => 'मिनी कार्ट प्रदर्शित करें',
+                        'info'                 => 'मिनी कार्ट और मिनी कार्ट ऑफर जानकारी प्रदर्शित करने के लिए मिनी कार्ट सेटिंग्स सक्षम करें, जिससे कार्ट विवरण और प्रचारों तक त्वरित पहुंच हो सके।',
+                        'mini-cart-offer-info' => 'मिनी कार्ट ऑफर जानकारी',
+                        'title'                => 'मिनी कार्ट',
                     ],
                 ],
             ],

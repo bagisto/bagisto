@@ -22,24 +22,19 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        if ($localeCode = core()->getRequestedLocaleCode('locale', false)) {
-            if (in_array($localeCode, core()->getCurrentChannel()->locales->pluck('code')->toArray())) {
-                app()->setLocale($localeCode);
+        $locales = core()->getCurrentChannel()->locales->pluck('code')->toArray();
+        $localeCode = core()->getRequestedLocaleCode('locale', false);
 
-                session()->put('locale', $localeCode);
-            } else {
-                $defaultLocaleCode = core()->getCurrentChannel()->default_locale->code;
-
-                app()->setLocale($defaultLocaleCode);
-
-                session()->put('locale', $defaultLocaleCode);
-            }
-        } elseif ($localeCode = session()->get('locale')) {
-            app()->setLocale($localeCode);
-        } else {
-            app()->setLocale(core()->getDefaultLocaleCodeFromDefaultChannel());
+        if (! $localeCode || ! in_array($localeCode, $locales)) {
+            $localeCode = session()->get('locale');
         }
 
+        if (! $localeCode || ! in_array($localeCode, $locales)) {
+            $localeCode = core()->getCurrentChannel()->default_locale->code;
+        }
+
+        app()->setLocale($localeCode);
+        session()->put('locale', $localeCode);
         unset($request['locale']);
 
         return $next($request);

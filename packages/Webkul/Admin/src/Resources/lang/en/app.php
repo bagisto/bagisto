@@ -3471,7 +3471,7 @@ return [
                 'title' => 'Catalog',
 
                 'products' => [
-                    'info'  => 'Set guest checkout, product view page, cart view page, store front, review and attribute social share.',
+                    'info'  => 'Product view page, cart view page, store front, review and attribute social share.',
                     'title' => 'Products',
 
                     'settings' => [
@@ -4001,7 +4001,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Checkout',
-                    'info'  => 'Enable or Disable Mini Cart, cart Summary.',
+                    'info'  => 'Set guest checkout, Enable or Disable Mini Cart, cart Summary.',
 
                     'shopping-cart' => [
                         'cart-page'              => 'Cart Page',
