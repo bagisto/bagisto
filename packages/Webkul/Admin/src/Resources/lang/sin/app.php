@@ -69,6 +69,7 @@ return [
             'title'             => 'මමේ ගිණුම',
             'update-success'    => 'ගිණුම සාර්ථකව යාවත්කාලීන විය',
             'upload-image-info' => 'PNG හෝ JPG ආකාරයෙන් (110px X 110px) පැතිකඩ රූපය උඩුගත කරන්න',
+            'locale'            => 'Locale',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => 'නම',
                     'password'          => 'මුරපදය',
                     'role'              => 'භූමිකා',
+                    'locale'            => 'Locale',
                     'save-btn'          => 'පරිශීලකයක් සුරක්ෂා කරන්න',
                     'status'            => 'තත්වය',
                     'title'             => 'පරිශීලකයක් සාදන්න',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => 'අක්‍රීය',
                     'name'     => 'නම',
                     'role'     => 'භූමිකා',
+                    'locale'   => 'Locale',
                     'status'   => 'තත්වය',
                 ],
 
