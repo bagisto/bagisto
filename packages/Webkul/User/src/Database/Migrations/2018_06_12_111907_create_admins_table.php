@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('api_token', 80)->unique()->nullable()->default(null);
             $table->boolean('status')->default(0);
             $table->integer('role_id')->unsigned();
+            $table->integer('locale_id')->unsigned();
             $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
