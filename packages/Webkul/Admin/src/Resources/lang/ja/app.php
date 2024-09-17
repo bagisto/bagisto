@@ -69,6 +69,7 @@ return [
             'title'             => 'マイアカウント',
             'update-success'    => 'アカウントが正常に更新されました',
             'upload-image-info' => 'プロフィール画像をアップロード（110px X 110px）PNGまたはJPG形式',
+            'locale'            => '言語',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => '名前',
                     'password'          => 'パスワード',
                     'role'              => '役割',
+                    'locale'            => '言語',
                     'save-btn'          => 'ユーザーを保存',
                     'status'            => 'ステータス',
                     'title'             => 'ユーザーを作成',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => '非アクティブ',
                     'name'     => '名前',
                     'role'     => '役割',
+                    'locale'   => '言語',
                     'status'   => 'ステータス',
                 ],
 
