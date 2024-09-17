@@ -69,6 +69,7 @@ return [
             'title'             => 'আমার অ্যাকাউন্ট',
             'update-success'    => 'অ্যাকাউন্ট সফলভাবে আপডেট হয়েছে',
             'upload-image-info' => 'প্রোফাইল ছবি আপলোড করুন (110px X 110px) PNG বা JPG ফরম্যাটে',
+            'locale'            => 'Locale',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => 'নাম',
                     'password'          => 'পাসওয়ার্ড',
                     'role'              => 'ভূমিকা',
+                    'locale'            => 'Locale',
                     'save-btn'          => 'ব্যবহারকারী সংরক্ষণ করুন',
                     'status'            => 'স্থিতি',
                     'title'             => 'ব্যবহারকারী তৈরি করুন',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => 'নিষ্ক্রিয়',
                     'name'     => 'নাম',
                     'role'     => 'ভূমিকা',
+                    'locale'   => 'Locale',
                     'status'   => 'স্থিতি',
                 ],
 
