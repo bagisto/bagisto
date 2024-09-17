@@ -32,13 +32,15 @@ class UserController extends Controller
      */
     public function index()
     {
+
         if (request()->ajax()) {
             return datagrid(UserDataGrid::class)->process();
         }
 
         $roles = $this->roleRepository->all();
+        $locales = core()->getAllLocales();
 
-        return view('admin::settings.users.index', compact('roles'));
+        return view('admin::settings.users.index', compact('roles', 'locales'));
     }
 
     /**
@@ -52,6 +54,7 @@ class UserController extends Controller
             'password',
             'password_confirmation',
             'role_id',
+            'locale_id',
             'status',
         ]);
 
@@ -100,6 +103,7 @@ class UserController extends Controller
      */
     public function update(UserForm $request): JsonResponse
     {
+
         $id = request()->id;
 
         $data = $this->prepareUserData($request, $id);
