@@ -69,6 +69,7 @@ return [
             'title'             => 'Mon compte',
             'update-success'    => 'Compte mis à jour avec succès',
             'upload-image-info' => 'Téléchargez une image de profil (110px X 110px) au format PNG ou JPG',
+            'locale'            => 'Langue',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => 'Nom',
                     'password'          => 'Mot de passe',
                     'role'              => 'Rôle',
+                    'locale'            => 'Langue',
                     'save-btn'          => 'Enregistrer l\'utilisateur',
                     'status'            => 'Statut',
                     'title'             => 'Créer un utilisateur',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => 'Inactif',
                     'name'     => 'Nom',
                     'role'     => 'Rôle',
+                    'locale'   => 'Langue',
                     'status'   => 'Statut',
                 ],
 
@@ -4133,7 +4136,7 @@ return [
                 ],
 
                 'filter' => [
-                    'apply-filters-btn' => 'Appliquer les filtres',
+                    'apply-filters-btn' => 'Appliquer',
                     'back-btn'          => 'Retour',
                     'create-new-filter' => 'Créer un nouveau filtre',
                     'custom-filters'    => 'Filtres personnalisés',
@@ -4144,7 +4147,7 @@ return [
                     'name'              => 'Nom',
                     'quick-filters'     => 'Filtres rapides',
                     'save-btn'          => 'Enregistrer',
-                    'save-filter'       => 'Enregistrer le filtre',
+                    'save-filter'       => 'Enregistrer',
                     'saved-success'     => 'Le filtre a été enregistré avec succès.',
                     'selected-filters'  => 'Filtres sélectionnés',
                     'title'             => 'Filtre',
