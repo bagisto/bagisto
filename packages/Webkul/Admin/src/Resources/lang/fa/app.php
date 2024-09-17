@@ -69,6 +69,7 @@ return [
             'title'             => 'حساب کاربری من',
             'update-success'    => 'حساب با موفقیت به‌روزرسانی شد',
             'upload-image-info' => 'تصویر پروفایل را (110px X 110px) به فرمت PNG یا JPG بارگذاری کنید',
+            'locale'            => 'Locale',
         ],
     ],
 
@@ -2973,6 +2974,7 @@ return [
                     'name'              => 'نام',
                     'password'          => 'رمز عبور',
                     'role'              => 'نقش',
+                    'locale'            => 'Locale',
                     'save-btn'          => 'ذخیره کاربر',
                     'status'            => 'وضعیت',
                     'title'             => 'ایجاد کاربر',
@@ -2989,6 +2991,7 @@ return [
                     'inactive' => 'غیرفعال',
                     'name'     => 'نام',
                     'role'     => 'نقش',
+                    'locale'   => 'Locale',
                     'status'   => 'وضعیت',
                 ],
 
