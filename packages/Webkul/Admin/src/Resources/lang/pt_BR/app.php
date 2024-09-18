@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Texto do rodapé',
+                        'footer-text-info' => 'Insira o texto que aparecerá no rodapé do PDF.',
                         'info'             => 'Configurar Impressões em PDF para exibir o ID da Fatura, ID do Pedido no cabeçalho e incluir o logotipo da fatura.',
                         'invoice-id-info'  => 'Configurar a exibição do ID da Fatura no Cabeçalho da Fatura.',
                         'invoice-id-title' => 'Exibir ID da Fatura no Cabeçalho',

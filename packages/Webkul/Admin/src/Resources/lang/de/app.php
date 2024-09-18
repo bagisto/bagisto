@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Fußzeilentext',
+                        'footer-text-info' => 'Geben Sie den Text ein, der in der Fußzeile des PDFs erscheint.',
                         'info'             => 'Konfigurieren Sie PDF-Druckausgaben, um die Rechnungs-ID, die Bestell-ID im Header anzuzeigen und das Rechnungslogo einzuschließen.',
                         'invoice-id-info'  => 'Konfigurieren Sie die Anzeige der Rechnungs-ID im Rechnungskopf.',
                         'invoice-id-title' => 'Rechnungs-ID im Header anzeigen',

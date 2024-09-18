@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Texte de pied de page',
+                        'footer-text-info' => 'Saisissez le texte qui apparaîtra dans le pied de page du PDF.',
                         'info'             => 'Configurer les impressions PDF pour afficher l\'ID de la facture, l\'ID de la commande dans l\'en-tête et inclure le logo de la facture.',
                         'invoice-id-info'  => 'Configurer l\'affichage de l\'ID de la facture dans l\'en-tête de la facture.',
                         'invoice-id-title' => 'Afficher l\'ID de la facture dans l\'en-tête',

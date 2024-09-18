@@ -1845,6 +1845,13 @@ return [
                 'type'          => 'image',
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
                 'channel_based' => true,
+            ], [
+                'name'          => 'footer_text',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.footer-text',
+                'info'          => 'admin::app.configuration.index.sales.invoice-settings.pdf-print-outs.footer-text-info',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
             ],
         ],
     ], [

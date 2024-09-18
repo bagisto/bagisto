@@ -3925,6 +3925,8 @@ return [
                     ],
 
                     'pdf-print-outs' => [
+                        'footer-text'      => 'Tekst stopki',
+                        'footer-text-info' => 'Wprowadź tekst, który pojawi się w stopce pliku PDF.',
                         'info'             => 'Skonfiguruj wydruki PDF, aby wyświetlały identyfikator faktury, identyfikator zamówienia w nagłówku i zawierały logo faktury.',
                         'invoice-id-info'  => 'Skonfiguruj wyświetlanie identyfikatora faktury w nagłówku faktury.',
                         'invoice-id-title' => 'Wyświetl identyfikator faktury w nagłówku',

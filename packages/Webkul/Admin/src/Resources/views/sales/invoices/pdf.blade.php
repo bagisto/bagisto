@@ -605,6 +605,13 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Footer Content -->
+                @if (core()->getConfigData('sales.invoice_settings.pdf_print_outs.footer_text'))
+                    <div>
+                        {{ core()->getConfigData('sales.invoice_settings.pdf_print_outs.footer_text') }}
+                    </div>
+                @endif
             </div>
         </div>
     </body>
