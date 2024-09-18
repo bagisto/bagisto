@@ -41,6 +41,7 @@
         $locales = [
             'ar'    => 'arabic',
             'bn'    => 'bengali',
+            'bg'    => 'bulgarian',
             'de'    => 'german',
             'en'    => 'english',
             'es'    => 'spanish',
@@ -67,6 +68,7 @@
             'BDT' => 'bangladeshi-taka',
             'BHD' => 'bahraini-dinar',
             'BRL' => 'brazilian-real',
+            'BGN' => 'bulgarian-lev',
             'CAD' => 'canadian-dollar',
             'CHF' => 'swiss-franc',
             'CLP' => 'chilean-peso',
