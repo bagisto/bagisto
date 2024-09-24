@@ -2,6 +2,27 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.2.3 (24th of July 2024)** - *Release*
+
+* #10033 [Enhancement] Loader must be added when we create any product, sitemap etc, in the submit button. So that we cannot click them. Single Entry must pass.
+
+* #10072 [Enhancement] Add Footer Text to Invoice PDF.
+
+* #10022 [Fixed] [CMS MODULE] Admin Not Working on Clean Install.
+
+* #10030 [Fixed] A UI issue appears when two modals overlap each other. This occurs when the AI Image Generator is enabled.
+
+* #10080 [Fixed] not work after installation if password contains character #.
+
+* #10082 [Fixed] Getting ? Symbol rather than ₹ (Indian rupee currency in invoice).
+
+* #10094 [Fixed] Remove the state mandatory in the tax rates configuration
+
+* #10096 [Fixed] In the condition of the cart rule and catalog rule section, float value is not accepted for weight, height, etc.
+
+* #10103 [Fixed] Issue with Language and Channel Mix-up in Admin Product Form.
+
+
 ## **v2.2.2 (11th of July 2024)** - *Release*
 
 * Fixed installer issue.
