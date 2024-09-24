@@ -82,7 +82,7 @@
                     <button class="flex h-9 w-9 cursor-pointer overflow-hidden rounded-full hover:opacity-80 focus:opacity-80">
                         <img
                             src="{{ $admin->image_url }}"
-                            class="w-full"
+                            class="h-full w-full"
                         />
                     </button>
                 @else
