@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.2.3 (24th of July 2024)** - *Release*
+## **v2.2.3 (24th of September 2024)** - *Release*
 
 * #10033 [Enhancement] Loader must be added when we create any product, sitemap etc, in the submit button. So that we cannot click them. Single Entry must pass.
 
@@ -16,7 +16,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10082 [Fixed] Getting ? Symbol rather than ₹ (Indian rupee currency in invoice).
 
-* #10094 [Fixed] Remove the state mandatory in the tax rates configuration
+* #10094 [Fixed] Remove the state mandatory in the tax rates configuration.
 
 * #10096 [Fixed] In the condition of the cart rule and catalog rule section, float value is not accepted for weight, height, etc.
 
