@@ -22,6 +22,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10103 [Fixed] Issue with Language and Channel Mix-up in Admin Product Form.
 
+* #10128 [Fixed] If Automatically generate the invoice after placing status field is disabled then Set the invoice status after creating the invoice to field should be disable on the payment method configuration.
 
 ## **v2.2.2 (11th of July 2024)** - *Release*
 
