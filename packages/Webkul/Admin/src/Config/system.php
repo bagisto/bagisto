@@ -1351,6 +1351,7 @@ return [
             ], [
                 'name'          => 'invoice_status',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
+                'depends'       => 'generate_invoice:1',
                 'validation'    => 'required_if:generate_invoice,1',
                 'type'          => 'select',
                 'options'       => [
@@ -1447,9 +1448,11 @@ return [
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
-                'name'    => 'invoice_status',
-                'title'   => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
-                'type'    => 'select',
+                'name'       => 'invoice_status',
+                'depends'    => 'generate_invoice:1',
+                'validation' => 'required_if:generate_invoice,1',
+                'title'      => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
+                'type'       => 'select',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
