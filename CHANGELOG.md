@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.2.3 (24th of September 2024)** - *Release*
+## **v2.2.3 (25th of September 2024)** - *Release*
 
 * #10033 [Enhancement] Loader must be added when we create any product, sitemap etc, in the submit button. So that we cannot click them. Single Entry must pass.
 
