@@ -1453,7 +1453,7 @@ return [
                 'validation' => 'required_if:generate_invoice,1',
                 'title'      => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
                 'type'       => 'select',
-                'options' => [
+                'options'    => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
                         'value' => 'pending',
