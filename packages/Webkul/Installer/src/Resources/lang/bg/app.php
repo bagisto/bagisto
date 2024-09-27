@@ -727,6 +727,10 @@ return [
                 'yes'             => 'Да',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Език на съветника за инсталиране',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'Инсталация на Bagisto',
                 'bagisto-info' => 'Creating the database tables, this can take a few moments',
@@ -761,12 +765,12 @@ return [
             ],
 
             'server-requirements' => [
-                'calendar'    => 'Календар',
+                'calendar'    => 'Calendar',
                 'ctype'       => 'cType',
                 'curl'        => 'cURL',
                 'dom'         => 'dom',
                 'fileinfo'    => 'fileInfo',
-                'filter'      => 'Филтър',
+                'filter'      => 'Filter',
                 'gd'          => 'GD',
                 'hash'        => 'Hash',
                 'intl'        => 'intl',
