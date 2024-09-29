@@ -726,6 +726,10 @@ return [
                 'yes'             => 'Yes',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'Installation Bagisto',
                 'bagisto-info' => 'Creating the database tables, this can take a few moments',
