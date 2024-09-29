@@ -400,17 +400,17 @@ return [
                 'cart'              => 'Cart',
                 'compare'           => 'Compare',
                 'dropdown-text'     => 'Manage Cart, Orders & Wishlist',
-                'logout'            => 'Logout',
+                'logout'            => 'Изход',
                 'no-category-found' => 'No category found.',
-                'orders'            => 'Orders',
-                'profile'           => 'Profile',
-                'search'            => 'Search',
-                'search-text'       => 'Search products here',
-                'sign-in'           => 'Sign In',
-                'sign-up'           => 'Sign Up',
+                'orders'            => 'Поръчки',
+                'profile'           => 'Профил',
+                'search'            => 'Търси',
+                'search-text'       => 'Търси продукти тук',
+                'sign-in'           => 'Вход',
+                'sign-up'           => 'Регистрация',
                 'submit'            => 'Submit',
                 'title'             => 'Account',
-                'welcome'           => 'Welcome',
+                'welcome'           => 'Добре дошъл',
                 'welcome-guest'     => 'Welcome Guest',
                 'wishlist'          => 'Wishlist',
 
@@ -462,7 +462,7 @@ return [
                 ],
 
                 'search' => [
-                    'title' => 'Search',
+                    'title' => 'Търси',
                 ],
 
                 'filter' => [
