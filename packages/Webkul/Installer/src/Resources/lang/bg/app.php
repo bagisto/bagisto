@@ -720,7 +720,7 @@ return [
             ],
 
             'sample-products' => [
-                'download-sample' => 'download-sample',
+                'download-sample' => 'Свалете - примерни продукти',
                 'no'              => 'Не',
                 'sample-products' => 'Примерни продукти',
                 'title'           => 'Примерни продукти',
@@ -733,7 +733,7 @@ return [
 
             'installation-processing' => [
                 'bagisto'      => 'Инсталация на Bagisto',
-                'bagisto-info' => 'Създаване на таблиците в базата данни, това може да отнеме няколко минути',
+                'bagisto-info' => 'Създаване на таблиците в базата данни, това може да отнеме няколко минути!',
                 'title'        => 'Инсталация',
             ],
 
@@ -747,11 +747,11 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-databsae-table'   => 'Създай нова таблица в базата данни"',
+                'create-databsae-table'   => 'създадат нови таблици в базата данни',
                 'install'                 => 'Инсталация',
                 'install-info'            => 'Bagisto за инсталация',
-                'install-info-button'     => 'Кликнете върху бутона по-долу, за да',
-                'populate-database-table' => 'Попълнете таблиците в базата данни',
+                'install-info-button'     => 'Кликнете върху бутона по-долу, за да се:',
+                'populate-database-table' => 'запълнят с данни, таблиците в базата данни',
                 'start-installation'      => 'Започнете инсталацията',
                 'title'                   => 'Готов за инсталация',
             ],
@@ -793,6 +793,7 @@ return [
             'bagisto-info'             => 'е Обществен проект от',
             'bagisto-logo'             => 'Bagisto лого',
             'bengali'                  => 'Бенгалски',
+            'bulgarian'                => 'Български',
             'chinese'                  => 'Китайски',
             'continue'                 => 'Продължи',
             'dutch'                    => 'Холандски',
@@ -803,7 +804,7 @@ return [
             'hindi'                    => 'Хинди',
             'installation-description' => 'Инсталацията на Bagisto обикновено включва няколко стъпки. Ето общ преглед на процеса на инсталация:',
             'installation-info'        => 'Радваме се да Ви видим тук!',
-            'installation-title'       => 'Добре дошли в инсталацията',
+            'installation-title'       => 'Добре дошли в инсталацията!',
             'italian'                  => 'Италиански',
             'japanese'                 => 'Японски',
             'persian'                  => 'Персийски',
