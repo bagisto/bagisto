@@ -312,7 +312,7 @@
                         <div class="flex flex-col gap-y-1.5">
                             @if (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'including_tax')
                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
-                                    {{ core()->formatBasePrice($order->base_sub_total) }}
+                                    {{ core()->formatBasePrice($order->base_sub_total_incl_tax) }}
                                 </p>
                             @elseif (core()->getConfigData('sales.taxes.sales.display_subtotal') == 'both')
                                 <p class="font-semibold !leading-5 text-gray-600 dark:text-gray-300">
