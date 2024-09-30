@@ -748,7 +748,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'qty'        => $data['quantities'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -841,7 +841,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'qty'        => $data['quantities'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -944,7 +944,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'qty'        => $data['quantities'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1037,7 +1037,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'qty'        => $data['quantities'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1142,7 +1142,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'qty'        => $data['quantities'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1240,7 +1240,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'qty'        => $data['quantities'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1346,7 +1346,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'qty'        => $data['quantities'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1443,7 +1443,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
         'qty'        => $data['quantities'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1531,7 +1531,7 @@ it('should check tax is applying for the grouped product into the cart for group
         'qty'        => $data['quantities'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 

@@ -32,7 +32,7 @@ trait PDFHandler
      */
     protected function adjustArabicAndPersianContent(string $html)
     {
-        $arabic = new \ArPHP\I18N\Arabic();
+        $arabic = new \ArPHP\I18N\Arabic;
 
         $p = $arabic->arIdentify($html);
 

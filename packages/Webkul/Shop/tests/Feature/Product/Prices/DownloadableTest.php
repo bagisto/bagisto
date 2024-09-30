@@ -638,7 +638,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -730,7 +730,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -825,7 +825,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -914,7 +914,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1008,7 +1008,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1098,7 +1098,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1194,7 +1194,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1284,7 +1284,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1365,7 +1365,7 @@ it('should check tax is applying for the downloadable product into the cart for 
         'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 

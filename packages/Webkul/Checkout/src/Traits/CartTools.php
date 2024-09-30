@@ -37,7 +37,7 @@ trait CartTools
     public function putCart($cart)
     {
         if (! auth()->guard()->check()) {
-            $cartTemp = new \stdClass();
+            $cartTemp = new \stdClass;
             $cartTemp->id = $cart->id;
 
             session()->put('cart', $cartTemp);

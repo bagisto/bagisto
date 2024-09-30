@@ -79,7 +79,7 @@ class Tax
      */
     public static function getDefaultAddress()
     {
-        return new class()
+        return new class
         {
             public $country;
 

@@ -42,7 +42,7 @@ class ShippingServiceProvider extends ServiceProvider
         $loader->alias('shipping', ShippingFacade::class);
 
         $this->app->singleton('shipping', function () {
-            return new Shipping();
+            return new Shipping;
         });
     }
 
