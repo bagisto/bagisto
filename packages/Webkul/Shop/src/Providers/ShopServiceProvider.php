@@ -35,18 +35,11 @@ class ShopServiceProvider extends ServiceProvider
         $router->aliasMiddleware('locale', Locale::class);
         $router->aliasMiddleware('theme', Theme::class);
 
-        $this->publishes([
-            dirname(__DIR__).'/Config/imagecache.php' => config_path('imagecache.php'),
-        ]);
-
         /* Paginator */
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
 
         Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'shop');
-
-        /* Breadcrumbs */
-        require __DIR__.'/../Routes/breadcrumbs.php';
 
         $this->app->register(EventServiceProvider::class);
     }

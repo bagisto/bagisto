@@ -32,13 +32,6 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'core');
 
-        $this->publishes([
-            dirname(__DIR__).'/Config/concord.php'       => config_path('concord.php'),
-            dirname(__DIR__).'/Config/repository.php'    => config_path('repository.php'),
-            dirname(__DIR__).'/Config/visitor.php'       => config_path('visitor.php'),
-            dirname(__DIR__).'/Config/elasticsearch.php' => config_path('elasticsearch.php'),
-        ]);
-
         $this->app->register(EventServiceProvider::class);
 
         $this->app->register(VisitorServiceProvider::class);
@@ -146,7 +139,6 @@ class CoreServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Webkul\Core\Console\Commands\BagistoPublish::class,
                 \Webkul\Core\Console\Commands\BagistoVersion::class,
                 \Webkul\Core\Console\Commands\ExchangeRateUpdate::class,
                 \Webkul\Core\Console\Commands\InvoiceOverdueCron::class,
