@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39622e2e478c3641803ae55003acc4e6",
+    "content-hash": "27522c85537e8d64557ff5c6cf01e6f5",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -10730,12 +10730,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bagisto/laravel-data-faker.git",
-                "reference": "e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7"
+                "reference": "0b4de0aaf38c5d9a6d3fcb7d0189dba5dfd0a49b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7",
-                "reference": "e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7",
+                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/0b4de0aaf38c5d9a6d3fcb7d0189dba5dfd0a49b",
+                "reference": "0b4de0aaf38c5d9a6d3fcb7d0189dba5dfd0a49b",
                 "shasum": ""
             },
             "default-branch": true,
@@ -10759,9 +10759,8 @@
             ],
             "authors": [
                 {
-                    "name": "Jitendra Singh",
-                    "email": "jitendra@webkul.in",
-                    "homepage": "https://bagisto.com"
+                    "name": "Bagisto Data Faker",
+                    "email": "support@bagisto.com"
                 }
             ],
             "description": "Create fake customers, categories and products in Bagisto.",
@@ -10776,7 +10775,7 @@
                 "issues": "https://github.com/bagisto/laravel-data-faker/issues",
                 "source": "https://github.com/bagisto/laravel-data-faker/tree/master"
             },
-            "time": "2024-06-07T11:16:25+00:00"
+            "time": "2024-09-30T08:40:53+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
