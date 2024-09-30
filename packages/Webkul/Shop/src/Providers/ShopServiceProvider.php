@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Shop\Http\Middleware\AuthenticateCustomer;
+use Webkul\Shop\Http\Middleware\CacheResponse;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
@@ -28,9 +29,10 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'shop');
 
         /* aliases */
+        $router->aliasMiddleware('cache.response', CacheResponse::class);
         $router->aliasMiddleware('currency', Currency::class);
-        $router->aliasMiddleware('locale', Locale::class);
         $router->aliasMiddleware('customer', AuthenticateCustomer::class);
+        $router->aliasMiddleware('locale', Locale::class);
         $router->aliasMiddleware('theme', Theme::class);
 
         $this->publishes([

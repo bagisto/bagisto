@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         operating-systems: [ubuntu-latest]
-        php-versions: ['8.1']
+        php-versions: ['8.2', '8.3']
 
     name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
 

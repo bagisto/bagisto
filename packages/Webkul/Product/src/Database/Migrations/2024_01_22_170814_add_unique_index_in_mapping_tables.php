@@ -32,7 +32,7 @@ return new class extends Migration
         });
 
         Schema::table('product_bundle_option_translations', function (Blueprint $table) {
-            $table->string('label')->change();
+            $table->string('label')->nullable()->change();
         });
 
         Schema::table('product_bundle_option_translations', function (Blueprint $table) {
