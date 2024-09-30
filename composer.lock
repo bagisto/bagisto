@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39622e2e478c3641803ae55003acc4e6",
+    "content-hash": "c87b4a547fa39e802d2aaf967cc102b0",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -10715,19 +10715,18 @@
     "packages-dev": [
         {
             "name": "bagisto/laravel-datafaker",
-            "version": "dev-master",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bagisto/laravel-data-faker.git",
-                "reference": "e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7"
+                "reference": "26660106b3a75168accea6b2bb17c4dc2fd95543"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7",
-                "reference": "e064846a2d7c71ce3a6d0a1e3d9db45cd92f41f7",
+                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/26660106b3a75168accea6b2bb17c4dc2fd95543",
+                "reference": "26660106b3a75168accea6b2bb17c4dc2fd95543",
                 "shasum": ""
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -10748,9 +10747,8 @@
             ],
             "authors": [
                 {
-                    "name": "Jitendra Singh",
-                    "email": "jitendra@webkul.in",
-                    "homepage": "https://bagisto.com"
+                    "name": "Bagisto Data Faker",
+                    "email": "support@bagisto.com"
                 }
             ],
             "description": "Create fake customers, categories and products in Bagisto.",
@@ -10763,9 +10761,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bagisto/laravel-data-faker/issues",
-                "source": "https://github.com/bagisto/laravel-data-faker/tree/master"
+                "source": "https://github.com/bagisto/laravel-data-faker/tree/v2.2.0"
             },
-            "time": "2024-06-07T11:16:25+00:00"
+            "time": "2024-09-30T09:26:10+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -13969,9 +13967,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bagisto/laravel-datafaker": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
