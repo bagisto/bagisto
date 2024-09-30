@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27522c85537e8d64557ff5c6cf01e6f5",
+    "content-hash": "c87b4a547fa39e802d2aaf967cc102b0",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -10726,19 +10726,18 @@
     "packages-dev": [
         {
             "name": "bagisto/laravel-datafaker",
-            "version": "dev-master",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bagisto/laravel-data-faker.git",
-                "reference": "0b4de0aaf38c5d9a6d3fcb7d0189dba5dfd0a49b"
+                "reference": "26660106b3a75168accea6b2bb17c4dc2fd95543"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/0b4de0aaf38c5d9a6d3fcb7d0189dba5dfd0a49b",
-                "reference": "0b4de0aaf38c5d9a6d3fcb7d0189dba5dfd0a49b",
+                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/26660106b3a75168accea6b2bb17c4dc2fd95543",
+                "reference": "26660106b3a75168accea6b2bb17c4dc2fd95543",
                 "shasum": ""
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -10773,9 +10772,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bagisto/laravel-data-faker/issues",
-                "source": "https://github.com/bagisto/laravel-data-faker/tree/master"
+                "source": "https://github.com/bagisto/laravel-data-faker/tree/v2.2.0"
             },
-            "time": "2024-09-30T08:40:53+00:00"
+            "time": "2024-09-30T09:26:10+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -13972,9 +13971,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bagisto/laravel-datafaker": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
