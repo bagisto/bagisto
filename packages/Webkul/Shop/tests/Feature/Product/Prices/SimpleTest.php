@@ -613,7 +613,7 @@ it('should fails the validation error when the product id not provided add a sim
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -702,7 +702,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -795,7 +795,7 @@ it('should fails the validation error when the product id not provided add a sim
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -881,7 +881,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -973,7 +973,7 @@ it('should fails the validation error when the product id not provided add a sim
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1067,7 +1067,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1161,7 +1161,7 @@ it('should fails the validation error when the product id not provided add a sim
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1248,7 +1248,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1327,7 +1327,7 @@ it('should check tax is applying for the simple product into the cart for simple
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 

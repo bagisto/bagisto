@@ -22,7 +22,7 @@ it('should show category page', function () {
 
 it('should show category edit page', function () {
     // Arrange
-    $category = (new CategoryFaker())->factory()->create();
+    $category = (new CategoryFaker)->factory()->create();
 
     // Act & Assert
     $this->loginAsAdmin();
@@ -34,7 +34,7 @@ it('should show category edit page', function () {
 
 it('should return listing items of categories', function () {
     // Arrange
-    $category = (new CategoryFaker())->factory()->create();
+    $category = (new CategoryFaker)->factory()->create();
 
     // Act & Assert
     $this->loginAsAdmin();
@@ -135,7 +135,7 @@ it('should fail the validation with errors slug is already taken', function () {
 
 it('should fail the validation with errors when certain inputs are not provided when update in category', function () {
     // Arrange
-    $category = (new CategoryFaker())->factory()->create();
+    $category = (new CategoryFaker)->factory()->create();
 
     $localeCode = core()->getRequestedLocaleCode();
 
@@ -152,7 +152,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 
 it('should fail the validation with errors when certain inputs are not provided and display mode products and description when update in category', function () {
     // Arrange
-    $category = (new CategoryFaker())->factory()->create();
+    $category = (new CategoryFaker)->factory()->create();
 
     $localeCode = core()->getRequestedLocaleCode();
 
@@ -172,7 +172,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 
 it('should update a category', function () {
     // Arrange
-    $category = (new CategoryFaker())->factory()->create();
+    $category = (new CategoryFaker)->factory()->create();
 
     $attributes = Attribute::where('is_filterable', 1)->pluck('id')->toArray();
 
@@ -206,7 +206,7 @@ it('should update a category', function () {
 
 it('should delete a category', function () {
     // Arrange
-    $category = (new CategoryFaker())->factory()->create();
+    $category = (new CategoryFaker)->factory()->create();
 
     // Act & Assert
     $this->loginAsAdmin();
@@ -222,7 +222,7 @@ it('should delete a category', function () {
 
 it('should delete mass categories', function () {
     // Arrange
-    $categories = (new CategoryFaker())->create(5);
+    $categories = (new CategoryFaker)->create(5);
 
     // Act & Assert
     $this->loginAsAdmin();
@@ -242,7 +242,7 @@ it('should delete mass categories', function () {
 
 it('should update mass categories', function () {
     // Arrange
-    $categories = (new CategoryFaker())->create(5);
+    $categories = (new CategoryFaker)->create(5);
 
     // Act & Assert
     $this->loginAsAdmin();
@@ -268,7 +268,7 @@ it('should update mass categories', function () {
 
 it('should search categories with mega search', function () {
     // Arrange
-    $category = (new CategoryFaker())->factory()->create();
+    $category = (new CategoryFaker)->factory()->create();
 
     // Act & Assert
     $this->loginAsAdmin();
@@ -283,7 +283,7 @@ it('should search categories with mega search', function () {
 
 it('should show the tree view of categories', function () {
     // Arrange
-    $category = (new CategoryFaker())->factory()->create();
+    $category = (new CategoryFaker)->factory()->create();
 
     // Act & Assert
     $this->loginAsAdmin();

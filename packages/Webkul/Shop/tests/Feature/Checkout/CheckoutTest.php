@@ -66,7 +66,7 @@ it('should fail certain validation error when storing guest user address for car
         ])->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cartId;
 
@@ -132,7 +132,7 @@ it('should store the same billing and shipping address for guest if use for ship
         ]),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -249,7 +249,7 @@ it('should store the same billing and shipping address for customer if use for s
         ]),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -365,7 +365,7 @@ it('should store the billing and shipping address for guest when the use for shi
         ]),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -506,7 +506,7 @@ it('should store the billing and shipping address for customer when the use for 
         ]),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -638,7 +638,7 @@ it('should store the guest user address for cart billing/shipping for guest user
         ])->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cartId;
 
@@ -715,7 +715,7 @@ it('should fails the validation error when use for shipping is false in billing 
         ])->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cartId;
 
@@ -792,7 +792,7 @@ it('should gives the validation error if not use for shipping true and not provi
         ])->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cartId;
 
@@ -873,7 +873,7 @@ it('should fails the validation error when shipping method not providing when st
 
     CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cartId;
 
@@ -935,7 +935,7 @@ it('should store the shipping method', function () {
 
     CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cartId;
 
@@ -1003,7 +1003,7 @@ it('should fails the validation error when store the payment method for guest us
 
     CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cartId;
 
@@ -1066,7 +1066,7 @@ it('should store the payment method for guest user', function () {
 
     $cartShippingAddress = CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cartId;
 
@@ -1181,7 +1181,7 @@ it('should place a simple product order for a guest user', function () {
         'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1404,7 +1404,7 @@ it('should place a simple product order for a guest user and send email to the g
         'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1637,7 +1637,7 @@ it('should place a simple product order for a customer', function () {
         'cart_address_id'    => $cartBillingAddress->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1879,7 +1879,7 @@ it('should place a simple product order for a customer and send email to the cus
         'cart_address_id'    => $cartBillingAddress->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -2085,7 +2085,7 @@ it('should place a configurable product order for a guest user', function () {
         'customer_last_name'    => fake()->lastName(),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -2379,7 +2379,7 @@ it('should place a configurable product order for a guest user and send email to
         'customer_last_name'    => fake()->lastName(),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -2675,7 +2675,7 @@ it('should place a configurable product order for a customer', function () {
         'customer_last_name'    => $customer->last_name,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -2925,7 +2925,7 @@ it('should place a configurable product order for a customer and send email to t
         'customer_last_name'    => $customer->last_name,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -3204,7 +3204,7 @@ it('should place a virtual product order for a guest user', function () {
         'cart_address_id'    => $cartBillingAddress->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -3373,7 +3373,7 @@ it('should place a virtual product order for a guest user and send email to the 
         'cart_address_id'    => $cartBillingAddress->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -3543,7 +3543,7 @@ it('should place a virtual product order for a customer', function () {
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -3718,7 +3718,7 @@ it('should place a virtual product order for a customer and send email to the us
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -3867,7 +3867,7 @@ it('should place a downloadable product order for a customer and send email to t
         'customer_last_name'    => fake()->lastName(),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -4040,7 +4040,7 @@ it('should place a downloadable product order for a customer', function () {
         'customer_last_name'    => fake()->lastName(),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -4215,7 +4215,7 @@ it('should not return the cash on delivery payment method if product is download
         'email'        => fake()->email(),
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -4344,7 +4344,7 @@ it('should not return the shipping methods if product is downloadable', function
         'customer_last_name'    => $customer->last_name,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -4472,7 +4472,7 @@ it('should not return the cash on delivery payment method if product is virtual'
         'customer_last_name'    => $customer->last_name,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -4602,7 +4602,7 @@ it('should not return the shipping methods if product is virtual', function () {
         'customer_last_name'    => $customer->last_name,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -4751,7 +4751,7 @@ it('should place order with two products with simple and configurable product ty
         'customer_last_name'    => $customer->last_name,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -5031,7 +5031,7 @@ it('should place order with two products with simple and grouped product type', 
         'customer_last_name'    => $customer->last_name,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -5260,7 +5260,7 @@ it('should place order with two products with simple and downloadable product ty
         'shipping_method'       => 'free_free',
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 

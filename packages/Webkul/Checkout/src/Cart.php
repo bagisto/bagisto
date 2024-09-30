@@ -775,7 +775,7 @@ class Cart
     {
         $attributes = [];
 
-        $cartAddress = new CartAddress();
+        $cartAddress = new CartAddress;
 
         foreach ($cartAddress->getFillable() as $attribute) {
             if (! isset($addressAttributes[$attribute])) {

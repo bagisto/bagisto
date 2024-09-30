@@ -313,7 +313,7 @@ abstract class AbstractType
      */
     protected function copyAttributeValues($product): void
     {
-        $productFlat = $this->product->product_flats->first()?->replicate() ?? new ProductFlat();
+        $productFlat = $this->product->product_flats->first()?->replicate() ?? new ProductFlat;
 
         $productFlat->product_id = $product->id;
 
@@ -970,7 +970,7 @@ abstract class AbstractType
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        $result = new CartItemValidationResult();
+        $result = new CartItemValidationResult;
 
         if ($this->isCartItemInactive($item)) {
             $result->itemIsInactive();

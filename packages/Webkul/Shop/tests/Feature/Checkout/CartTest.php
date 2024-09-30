@@ -54,7 +54,7 @@ it('should display the cart items from the cart', function () {
         ])->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -116,7 +116,7 @@ it('should fails the validation error when the cart item id not provided when re
         ])->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -173,7 +173,7 @@ it('should fails the validation error when the wrong cart item id provided when 
         ])->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -232,7 +232,7 @@ it('should remove product items to the cart', function () {
         ])->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);

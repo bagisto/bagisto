@@ -445,7 +445,7 @@ class Bundle extends AbstractType
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        $result = new CartItemValidationResult();
+        $result = new CartItemValidationResult;
 
         if (parent::isCartItemInactive($item)) {
             $result->itemIsInactive();

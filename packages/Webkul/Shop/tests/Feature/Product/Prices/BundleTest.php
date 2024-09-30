@@ -797,7 +797,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -889,7 +889,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -990,7 +990,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1082,7 +1082,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1183,7 +1183,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1277,7 +1277,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1382,7 +1382,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1478,7 +1478,7 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1564,7 +1564,7 @@ it('should check tax is applying for the bundle product into the cart for bundle
         'bundle_options'    => $bundleOptions['bundle_options'],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 

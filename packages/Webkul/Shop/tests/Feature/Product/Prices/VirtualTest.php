@@ -613,7 +613,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -702,7 +702,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -795,7 +795,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -881,7 +881,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -973,7 +973,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1060,7 +1060,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1154,7 +1154,7 @@ it('should fails the validation error when certain inputs not provided when add 
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1241,7 +1241,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1320,7 +1320,7 @@ it('should check tax is applying for the virtual product into the cart for virtu
         'cart_id'    => $cart->id,
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 

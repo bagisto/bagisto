@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e6e0223ab3b43a8bb7b6fc5b70bd609",
+    "content-hash": "3933e36f555753f6032bc15d585b91f2",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -10425,19 +10425,18 @@
     "packages-dev": [
         {
             "name": "bagisto/laravel-datafaker",
-            "version": "dev-master",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bagisto/laravel-data-faker.git",
-                "reference": "fbd01a511dea07fcd590f641bf0445af920dcadb"
+                "reference": "58a871c8b3030da10a3908a9d54ad05f4b44aaad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/fbd01a511dea07fcd590f641bf0445af920dcadb",
-                "reference": "fbd01a511dea07fcd590f641bf0445af920dcadb",
+                "url": "https://api.github.com/repos/bagisto/laravel-data-faker/zipball/58a871c8b3030da10a3908a9d54ad05f4b44aaad",
+                "reference": "58a871c8b3030da10a3908a9d54ad05f4b44aaad",
                 "shasum": ""
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -10458,9 +10457,8 @@
             ],
             "authors": [
                 {
-                    "name": "Jitendra Singh",
-                    "email": "jitendra@webkul.in",
-                    "homepage": "https://bagisto.com"
+                    "name": "Bagisto Data Faker",
+                    "email": "support@bagisto.com"
                 }
             ],
             "description": "Create fake customers, categories and products in Bagisto.",
@@ -10473,9 +10471,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bagisto/laravel-data-faker/issues",
-                "source": "https://github.com/bagisto/laravel-data-faker/tree/master"
+                "source": "https://github.com/bagisto/laravel-data-faker/tree/v2.1.1"
             },
-            "time": "2024-01-11T12:24:10+00:00"
+            "time": "2024-09-30T09:56:52+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -10963,16 +10961,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.16.2",
+            "version": "v1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "51f1ba679a6afe0315621ad143d788bd7ded0eca"
+                "reference": "35c00c05ec43e6b46d295efc0f4386ceb30d50d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/51f1ba679a6afe0315621ad143d788bd7ded0eca",
-                "reference": "51f1ba679a6afe0315621ad143d788bd7ded0eca",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/35c00c05ec43e6b46d295efc0f4386ceb30d50d9",
+                "reference": "35c00c05ec43e6b46d295efc0f4386ceb30d50d9",
                 "shasum": ""
             },
             "require": {
@@ -10983,13 +10981,13 @@
                 "php": "^8.1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.59.3",
-                "illuminate/view": "^10.48.12",
-                "larastan/larastan": "^2.9.7",
+                "friendsofphp/php-cs-fixer": "^3.64.0",
+                "illuminate/view": "^10.48.20",
+                "larastan/larastan": "^2.9.8",
                 "laravel-zero/framework": "^10.4.0",
                 "mockery/mockery": "^1.6.12",
                 "nunomaduro/termwind": "^1.15.1",
-                "pestphp/pest": "^2.34.8"
+                "pestphp/pest": "^2.35.1"
             },
             "bin": [
                 "builds/pint"
@@ -11025,7 +11023,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2024-07-09T15:58:08+00:00"
+            "time": "2024-09-24T17:22:50+00:00"
         },
         {
             "name": "maximebf/debugbar",
@@ -13731,9 +13729,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bagisto/laravel-datafaker": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

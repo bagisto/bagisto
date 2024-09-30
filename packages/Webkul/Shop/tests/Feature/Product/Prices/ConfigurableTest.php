@@ -701,7 +701,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -787,7 +787,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -883,7 +883,7 @@ it('should fails the validation error when certain inputs not provided when add 
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -969,7 +969,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1067,7 +1067,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1157,7 +1157,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1257,7 +1257,7 @@ it('should fails the validation error when the certain input not provided when a
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1347,7 +1347,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
 
     $cartTemp->id = $cart->id;
 
@@ -1428,7 +1428,7 @@ it('should check tax is applying for the configurable product into the cart for 
         ],
     ]);
 
-    $cartTemp = new \stdClass();
+    $cartTemp = new \stdClass;
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
