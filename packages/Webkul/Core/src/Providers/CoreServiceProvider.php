@@ -3,14 +3,12 @@
 namespace Webkul\Core\Providers;
 
 use Elastic\Elasticsearch\Client as ElasticSearchClient;
-use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Acl;
 use Webkul\Core\Core;
 use Webkul\Core\ElasticSearch;
-use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Acl as AclFacade;
 use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchFacade;
@@ -45,7 +43,10 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->app->register(VisitorServiceProvider::class);
 
-        $this->app->bind(ExceptionHandler::class, Handler::class);
+        $this->app->bind(
+            \Illuminate\Contracts\Debug\ExceptionHandler::class,
+            \Webkul\Core\Exceptions\Handler::class
+        );
 
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'core');
 
