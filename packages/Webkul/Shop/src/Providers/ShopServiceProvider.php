@@ -7,6 +7,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Core\Http\Middleware\PreventRequestsDuringMaintenance;
 use Webkul\Shop\Http\Middleware\AuthenticateCustomer;
 use Webkul\Shop\Http\Middleware\CacheResponse;
 use Webkul\Shop\Http\Middleware\Currency;
@@ -20,22 +21,25 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function boot(Router $router): void
     {
-        /* loaders */
-        Route::middleware('web')->group(__DIR__.'/../Routes/web.php');
-        Route::middleware('web')->group(__DIR__.'/../Routes/api.php');
+        $router->middlewareGroup('shop', [
+            Theme::class,
+            Locale::class,
+            Currency::class,
+        ]);
+
+        $router->aliasMiddleware('theme', Theme::class);
+        $router->aliasMiddleware('locale', Locale::class);
+        $router->aliasMiddleware('currency', Currency::class);
+        $router->aliasMiddleware('cache.response', CacheResponse::class);
+        $router->aliasMiddleware('customer', AuthenticateCustomer::class);
+
+        Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class])->group(__DIR__.'/../Routes/web.php');
+        Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class])->group(__DIR__.'/../Routes/api.php');
 
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'shop');
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'shop');
 
-        /* aliases */
-        $router->aliasMiddleware('cache.response', CacheResponse::class);
-        $router->aliasMiddleware('currency', Currency::class);
-        $router->aliasMiddleware('customer', AuthenticateCustomer::class);
-        $router->aliasMiddleware('locale', Locale::class);
-        $router->aliasMiddleware('theme', Theme::class);
-
-        /* Paginator */
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
 
