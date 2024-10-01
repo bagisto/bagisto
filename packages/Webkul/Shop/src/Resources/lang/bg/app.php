@@ -792,10 +792,10 @@ return [
                 'first-name'             => 'Име',
                 'last-name'              => 'Фамилия',
                 'postcode'               => 'Пощенски код',
-                'proceed'                => 'Proceed',
-                'same-as-billing'        => 'Use same address for shipping?',
+                'proceed'                => 'Продължи',
+                'same-as-billing'        => 'Използвайте същия адрес за доставка?',
                 'save'                   => 'Запази',
-                'save-address'           => 'Save this to address book',
+                'save-address'           => 'Запази това в адресната книга',
                 'select-country'         => 'Изберете държава',
                 'select-state'           => 'Изберете регион',
                 'shipping-address'       => 'Адрес за доставка',
@@ -828,7 +828,7 @@ return [
                 'grand-total'               => 'Обща сума',
                 'place-order'               => 'Поръчай',
                 'price_&_qty'               => ':price × :qty',
-                'processing'                => 'Processing',
+                'processing'                => 'Обработва се',
                 'sub-total-excl-tax'        => 'Сума (без ДДС)',
                 'sub-total-incl-tax'        => 'Сума (с ДДС)',
                 'sub-total'                 => 'Сума',
@@ -837,19 +837,19 @@ return [
         ],
 
         'coupon' => [
-            'already-applied' => 'Coupon code already applied.',
-            'applied'         => 'Coupon applied',
-            'apply'           => 'Apply Coupon',
-            'apply-issue'     => 'Coupon code can\'t be applied.',
+            'already-applied' => 'Купонът вече е приложен.',
+            'applied'         => 'Купонът е приложен',
+            'apply'           => 'Приложи купон',
+            'apply-issue'     => 'Кодът за отстъпка не може да бъде приложен.',
             'button-title'    => 'Приложи',
-            'code'            => 'Coupon code',
-            'discount'        => 'Coupon Discount',
-            'enter-your-code' => 'Enter your code',
-            'error'           => 'Something went wrong',
-            'invalid'         => 'Coupon code is invalid.',
-            'remove'          => 'Remove Coupon',
+            'code'            => 'Купон за отстъпка',
+            'discount'        => 'Отстъпка по купон',
+            'enter-your-code' => 'Въведете своя код',
+            'error'           => 'Нещо се обърка',
+            'invalid'         => 'Купонът е невалиден.',
+            'remove'          => 'Премахване на купон',
             'subtotal'        => 'Сума',
-            'success-apply'   => 'Coupon code applied successfully.',
+            'success-apply'   => 'Купонът е приложен успешно.',
         ],
 
         'login' => [
@@ -861,9 +861,9 @@ return [
 
     'home' => [
         'contact' => [
-            'about'         => 'Jot us a note, and we’ll get back to you as quickly as possible',
-            'desc'          => ' What’s on your mind?',
-            'describe-here' => 'Describe Here',
+            'about'         => 'Опишете запитването си и ще се свържем с вас възможно най-скоро',
+            'desc'          => ' Какво Ви вълнува?',
+            'describe-here' => 'Опишете тук',
             'email'         => 'Имейл',
             'message'       => 'Съобщение',
             'name'          => 'Име',
@@ -873,21 +873,21 @@ return [
         ],
 
         'index' => [
-            'categories-carousel' => 'Categories Carousel',
-            'image-carousel'      => 'Image Carousel',
-            'offer'               => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
-            'product-carousel'    => 'Product Carousel',
-            'resend-verify-email' => 'Resend Verification Имейл',
-            'verify-email'        => 'Verify your email account',
+            'categories-carousel' => 'Карусел на категории',
+            'image-carousel'      => 'Карусел с изображения',
+            'offer'               => 'Получете ДО 40% ОТСТЪПКА при първата си поръчка ПАЗАРУВАЙТЕ СЕГА',
+            'product-carousel'    => 'Карусел на продукти',
+            'resend-verify-email' => 'Изпрати потвърждаващ имейл',
+            'verify-email'        => 'Потвърдете своя имейл адрес',
         ],
 
-        'thanks-for-contact' => 'Thanks for contacting us with your comments and questions. We all respond to you very soon.',
+        'thanks-for-contact' => 'Благодарим ви, че се свързахте с нас с вашите коментари и въпроси. Ние ще Ви отговорим много скоро.',
     ],
 
     'partials' => [
         'pagination' => [
             'next-page'          => 'Следваща страница',
-            'pagination-showing' => 'Showing :firstItem to :lastItem of :total entries',
+            'pagination-showing' => 'Показване от :firstItem до :lastItem от :total записи',
             'prev-page'          => 'Предишна страница',
         ],
     ],
@@ -896,28 +896,28 @@ return [
         'go-to-home' => 'Отидете в началото',
 
         '404' => [
-            'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',
-            'title'       => '404 Page Not Found',
+            'description' => 'Опс! Страницата, която търсите, е на почивка. Изглежда не успяхме да намерим това, което търсите.',
+            'title'       => '404 Страницата не е намерена',
         ],
 
         '401' => [
-            'description' => 'Oops! Looks like you\'re not allowed to access this page. It seems you\'re missing the necessary credentials.',
-            'title'       => '401 Unauthorized',
+            'description' => 'Опс! Изглежда нямате достъп до тази страница. Изглежда Ви липсват необходимите идентификационни данни.',
+            'title'       => '401 Неразрешено',
         ],
 
         '403' => [
-            'description' => 'Oops! This page is off-limits. It appears you don\'t have the required permissions to view this content.',
-            'title'       => '403 Forbidden',
+            'description' => 'Опс! Тази страница е забранена. Изглежда нямате необходимите разрешения, за да видите това съдържание.',
+            'title'       => '403 Забранено',
         ],
 
         '500' => [
-            'description' => 'Oops! Something went wrong. It seems we\'re having trouble loading the page you\'re looking for.',
-            'title'       => '500 Internal Server Error',
+            'description' => 'Опс! Нещо се обърка. Изглежда имаме проблеми с зареждането на страницата, която търсите.',
+            'title'       => '500 Вътрешна грешка на сървъра',
         ],
 
         '503' => [
-            'description' => 'Oops! Looks like we\'re temporarily down for maintenance. Please check back in a bit.',
-            'title'       => '503 Service Unavailable',
+            'description' => 'Опс! Изглежда сме временно излезли от строя за поддръжка. Моля, проверете отново след малко.',
+            'title'       => '503 Услугата е недостъпна',
         ],
     ],
 
@@ -932,110 +932,110 @@ return [
     ],
 
     'subscription' => [
-        'already'             => 'You are already subscribed to our newsletter.',
-        'subscribe-success'   => 'You have successfully subscribed to our newsletter.',
-        'unsubscribe-success' => 'You have successfully unsubscribed to our newsletter.',
+        'already'             => 'Вече сте абонирани за нашия бюлетин.',
+        'subscribe-success'   => 'Успешно се абонирахте за нашия бюлетин.',
+        'unsubscribe-success' => 'Успешно се отписахте от нашия бюлетин.',
     ],
 
     'emails' => [
-        'dear'   => 'Dear :customer_name',
-        'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
+        'dear'   => 'Уважаеми :customer_name',
+        'thanks' => 'Ако имате нужда от помощ, моля свържете се с нас на <a href=":link" style=":style">:email</a>.<br/>Благодарим Ви!',
 
         'customers' => [
             'registration' => [
-                'credentials-description' => 'Your account has been created. Your account details are below:',
-                'description'             => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
-                'greeting'                => 'Welcome and thank you for registering with us!',
-                'password'                => 'Password',
-                'sign-in'                 => 'Sign in',
-                'subject'                 => 'New Customer Registration',
-                'username-email'          => 'Username/Имейл',
+                'credentials-description' => 'Вашият акаунт е създаден. Вашите данни за акаунта са по-долу:',
+                'description'             => 'Вашият акаунт е създаден успешно и можете да влезете в системата, като използвате своя имейл адрес и парола. След като влезете в системата, ще можете да използвате други услуги, включително да преглеждате минали поръчки, списъци с желания и да редактирате информацията за вашия акаунт.',
+                'greeting'                => 'Добре дошли и благодарим Ви, че се регистрирахте при нас!',
+                'password'                => 'Парола',
+                'sign-in'                 => 'Вход',
+                'subject'                 => 'Нова регистрация на клиент',
+                'username-email'          => 'Потребител/Имейл',
             ],
 
             'forgot-password' => [
-                'description'    => 'You are receiving this email because we received a password reset request for your account.',
-                'greeting'       => 'Forgot Password!',
-                'reset-password' => 'Reset Password',
-                'subject'        => 'Reset Password Имейл',
+                'description'    => 'Получавате този имейл, защото получихме заявка за възстановяване на паролата за вашия акаунт.',
+                'greeting'       => 'Забравена парола!',
+                'reset-password' => 'Възстановяване на парола',
+                'subject'        => 'Имейл за възстановяване на парола',
             ],
 
             'update-password' => [
-                'description' => 'You are receiving this email because you have updated your password.',
-                'greeting'    => 'Password Updated!',
-                'subject'     => 'Password Updated',
+                'description' => 'Получавате този имейл, защото сте актуализирали паролата си.',
+                'greeting'    => 'Паролата е актуализирана!',
+                'subject'     => 'Паролата е актуализирана',
             ],
 
             'verification' => [
-                'description'  => 'Please click the button below to verify your email address.',
-                'greeting'     => 'Welcome!',
-                'subject'      => 'Account Verification Имейл',
-                'verify-email' => 'Verify Имейл Address',
+                'description'  => 'Моля, кликнете върху бутона по-долу, за да потвърдите своя имейл адрес.',
+                'greeting'     => 'Добре дошли!',
+                'subject'      => 'Имейл за потвърждение на акаунт',
+                'verify-email' => 'Потвърдете имейл адреса',
             ],
 
             'commented' => [
-                'description' => 'Note Is - :note',
-                'subject'     => 'New comment Added',
+                'description' => 'Бележките са - :note',
+                'subject'     => 'Добавен нов коментар',
             ],
 
             'subscribed' => [
-                'description' => 'Congratulations and welcome to our newsletter community! We\'re excited to have you on board and keep you updated with the latest news, trends, and exclusive offers.',
-                'greeting'    => 'Welcome to our newsletter!',
-                'subject'     => 'You! Subscribe to Our Newsletter',
-                'unsubscribe' => 'Unsubscribe',
+                'description' => 'Поздравления и добре дошли в нашата общност на бюлетина! Радваме се, че сте с нас и ще ви държим в течение с последните новини, тенденции и ексклузивни оферти.',
+                'greeting'    => 'Добре дошли в нашия бюлетин!',
+                'subject'     => 'Абонирайте се за нашия бюлетин!',
+                'unsubscribe' => 'Отписване',
             ],
         ],
 
         'contact-us' => [
-            'contact-from'    => 'via Website Contact Form',
-            'reply-to-mail'   => 'please reply to this email.',
-            'reach-via-phone' => 'Alternatively, you can reach us by phone at',
-            'inquiry-from'    => 'Inquiry from',
-            'to'              => 'To contact',
+            'contact-from'    => 'чрез формуляр за контакт на уебсайта',
+            'reply-to-mail'   => 'Моля, отговорете на този имейл.',
+            'reach-via-phone' => 'Алтернативно можете да се свържете с нас по телефона на',
+            'inquiry-from'    => 'Запитване от',
+            'to'              => 'За да се свържете',
         ],
 
         'orders' => [
             'created' => [
-                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
-                'subject'  => 'New Order Confirmation',
-                'summary'  => 'Summary of Order',
-                'title'    => 'Order Confirmation!',
+                'greeting' => 'Благодарим за вашата поръчка :order_id направена на :created_at',
+                'subject'  => 'Потвърждение за нова поръчка',
+                'summary'  => 'Обобщение на поръчката',
+                'title'    => 'Потвърждение на поръчката!',
             ],
 
             'invoiced' => [
-                'greeting' => 'Your invoice #:invoice_id for Order :order_id created on :created_at',
-                'subject'  => 'New Invoice Confirmation',
-                'summary'  => 'Summary of Invoice',
-                'title'    => 'Invoice Confirmation!',
+                'greeting' => 'Вашата фактура #:invoice_id за поръчка :order_id, създадена на :created_at',
+                'subject'  => 'Потвърждение за нова фактура',
+                'summary'  => 'Обобщение на фактурата',
+                'title'    => 'Потвърждение на фактурата!',
             ],
 
             'shipped' => [
-                'greeting' => 'Your order :order_id placed on :created_at has been shipped',
+                'greeting' => 'Вашата поръчка :order_id направена на :created_at е изпратена.',
                 'subject'  => 'New Shipment Confirmation',
-                'summary'  => 'Summary of Shipment',
-                'title'    => 'Order Shipped!',
+                'summary'  => 'Обобщение на пратката',
+                'title'    => 'Поръчката е изпратена!',
             ],
 
             'refunded' => [
-                'greeting' => 'Refund has been initiated for the :order_id placed on :created_at',
-                'subject'  => 'New Refund Confirmation',
-                'summary'  => 'Summary of Refund',
-                'title'    => 'Order Refunded!',
+                'greeting' => 'Иницирана е възстановяване на поръчка :order_id направена на :created_at',
+                'subject'  => 'Потвърждение за възстановяване на поръчка',
+                'summary'  => 'Обобщение на възстановяването на поръчка',
+                'title'    => 'Поръчката е възстановена!',
             ],
 
             'canceled' => [
-                'greeting' => 'Your Order :order_id placed on :created_at has been canceled',
-                'subject'  => 'New Order Canceled',
-                'summary'  => 'Summary of Order',
-                'title'    => 'Order Canceled!',
+                'greeting' => 'Вашата поръчка :order_id направена на :created_at е анулирана',
+                'subject'  => 'Нова поръчка анулирана',
+                'summary'  => 'Обобщение на поръчката',
+                'title'    => 'Поръчката е анулирана!',
             ],
 
             'commented' => [
-                'subject' => 'New comment Added',
-                'title'   => 'New comment added to your order :order_id placed on :created_at',
+                'subject' => 'Добавен нов коментар',
+                'title'   => 'Нов коментар е добавен към вашата поръчка :order_id направена на  :created_at',
             ],
 
-            'billing-address'            => 'Billing Address',
-            'carrier'                    => 'Carrier',
+            'billing-address'            => 'Адрес за фактуриране',
+            'carrier'                    => 'Доставчик',
             'contact'                    => 'Контакт',
             'discount'                   => 'Отстъпка',
             'excl-tax'                   => 'без ДДС: ',
@@ -1054,7 +1054,7 @@ return [
             'subtotal-incl-tax'          => 'Сума (с ДДС)',
             'subtotal'                   => 'Сума',
             'tax'                        => 'Данък',
-            'tracking-number'            => 'Tracking Number : :tracking_number',
+            'tracking-number'            => 'Номер за проследяване: :tracking_number',
         ],
     ],
 ];
