@@ -4,6 +4,9 @@ namespace Webkul\Core\Providers;
 
 use Elastic\Elasticsearch\Client as ElasticSearchClient;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Foundation\Console\DownCommand;
+use Illuminate\Foundation\Console\UpCommand;
+use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as BasePreventRequestsDuringMaintenance;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Acl;
@@ -14,6 +17,7 @@ use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchFacade;
 use Webkul\Core\Facades\Menu as MenuFacade;
 use Webkul\Core\Facades\SystemConfig as SystemConfigFacade;
+use Webkul\Core\Http\Middleware\PreventRequestsDuringMaintenance;
 use Webkul\Core\Menu;
 use Webkul\Core\SystemConfig;
 use Webkul\Core\View\Compilers\BladeCompiler;
@@ -51,16 +55,8 @@ class CoreServiceProvider extends ServiceProvider
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
 
-        $this->app->extend('command.down', function () {
-            return new \Webkul\Core\Console\Commands\DownCommand;
-        });
-
-        $this->app->extend('command.up', function () {
-            return new \Webkul\Core\Console\Commands\UpCommand;
-        });
-
         /**
-         * Image Cache route
+         * Image cache route.
          */
         if (is_string(config('imagecache.route'))) {
             $filenamePattern = '[ \w\\.\\/\\-\\@\(\)\=]+';
@@ -85,6 +81,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerBladeCompiler();
+
+        $this->registerOverrides();
     }
 
     /**
@@ -144,11 +142,6 @@ class CoreServiceProvider extends ServiceProvider
                 \Webkul\Core\Console\Commands\InvoiceOverdueCron::class,
             ]);
         }
-
-        $this->commands([
-            \Webkul\Core\Console\Commands\DownChannelCommand::class,
-            \Webkul\Core\Console\Commands\UpChannelCommand::class,
-        ]);
     }
 
     /**
@@ -159,5 +152,17 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->singleton('blade.compiler', function ($app) {
             return new BladeCompiler($app['files'], $app['config']['view.compiled']);
         });
+    }
+
+    /**
+     * Register the overrides.
+     */
+    protected function registerOverrides(): void
+    {
+        $this->app->extend(UpCommand::class, fn () => new \Webkul\Core\Console\Commands\UpCommand);
+
+        $this->app->extend(DownCommand::class, fn () => new \Webkul\Core\Console\Commands\DownCommand);
+
+        $this->app->bind(BasePreventRequestsDuringMaintenance::class, fn ($app) => new PreventRequestsDuringMaintenance($app));
     }
 }

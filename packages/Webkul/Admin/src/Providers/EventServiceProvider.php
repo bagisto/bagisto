@@ -39,9 +39,5 @@ class EventServiceProvider extends ServiceProvider
         'sales.refund.save.after' => [
             'Webkul\Admin\Listeners\Refund@afterCreated',
         ],
-
-        'core.channel.update.after' => [
-            'Webkul\Admin\Listeners\ChannelSettingsChange@checkForMaintenanceMode',
-        ],
     ];
 }
