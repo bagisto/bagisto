@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'address'                 => 'The :attribute can only accept alpha, numeric, spaces, comma and dashes.',
-    'alpha-numeric-space'     => 'The :attribute can only accept alpha, numeric and spaces.',
-    'code'                    => 'The :attribute must be valid.',
-    'decimal'                 => 'The :attribute must be valid.',
-    'phone-number'            => 'The :attribute must be valid phone number.',
-    'slug'                    => 'The :attribute must be valid slug.',
-    'comma-separated-integer' => 'The :attribute field must be numeric and may contain comma.',
+    'address'                 => 'Полето :attribute може да приема само букви, цифри, интервали, запетаи и тирета.',
+    'alpha-numeric-space'     => 'Полето :attribute може да приема само букви, цифри и интервали.',
+    'code'                    => 'Полето :attribute трябва да е валиден.',
+    'decimal'                 => 'Полето :attribute трябва да е валиден.',
+    'phone-number'            => 'Полето :attribute трябва да е валиден телефонен номер.',
+    'slug'                    => 'Полето :attribute трябва да е валиден "slug".',
+    'comma-separated-integer' => 'Полето :attribute трябва да е числово и може да съдържа запетая.',
 ];

@@ -2,16 +2,16 @@
 
 return [
     'path-hint' => [
-        'template' => 'Template',
-        'parents'  => 'Parents',
+        'template' => 'Шаблон',
+        'parents'  => 'Главни',
     ],
 
     'currency-position'  => [
         'options' => [
-            'left'             => 'Left',
-            'left-with-space'  => 'Left With Space',
-            'right'            => 'Right',
-            'right-with-space' => 'Right With Space',
+            'left'             => 'Ляво',
+            'left-with-space'  => 'Ляво с интервал',
+            'right'            => 'Дясно',
+            'right-with-space' => 'Дясно с интервал',
         ],
     ],
 ];

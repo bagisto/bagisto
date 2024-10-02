@@ -3,12 +3,12 @@
 return [
     'validations' => [
         'captcha' => [
-            'captcha'  => 'Something went wrong! Please try again.',
-            'required' => 'Please select CAPTCHA',
+            'captcha'  => 'Нещо се обърка! Моля, опитайте отново.',
+            'required' => 'Моля, изберете CAPTCHA',
         ],
 
         'vat-id' => [
-            'invalid-format' => 'Invalid Vat Format',
+            'invalid-format' => 'Невалиден формат на ЕИК номера',
         ],
     ],
 ];

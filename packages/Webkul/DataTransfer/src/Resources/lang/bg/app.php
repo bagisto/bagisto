@@ -3,39 +3,39 @@
 return [
     'importers' => [
         'customers' => [
-            'title' => 'Customers',
+            'title' => 'Клиенти',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'Email : \'%s\' is found more than once in the import file.',
-                    'duplicate-phone'        => 'Phone : \'%s\' is found more than once in the import file.',
-                    'email-not-found'        => 'Email : \'%s\' not found in the system.',
-                    'invalid-customer-group' => 'Customer group is invalid or not supported',
+                    'duplicate-email'        => 'Имейлът \'%s\' се среща повече от веднъж в импортния файл.',
+                    'duplicate-phone'        => 'Телефонът \'%s\' се среща повече от веднъж в импортния файл.',
+                    'email-not-found'        => 'Имейлът \'%s\' не е намерен в системата.',
+                    'invalid-customer-group' => 'Клиентската група е невалидна или не се поддържа',
                 ],
             ],
         ],
 
         'products' => [
-            'title' => 'Products',
+            'title' => 'Продукти',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'         => 'URL key: \'%s\' was already generated for an item with the SKU: \'%s\'.',
-                    'invalid-attribute-family'  => 'Invalid value for attribute family column (attribute family doesn\'t exist?)',
-                    'invalid-type'              => 'Product type is invalid or not supported',
-                    'sku-not-found'             => 'Product with specified SKU not found',
-                    'super-attribute-not-found' => 'Super attribute with code: \'%s\' not found or does not belong to the attribute family: \'%s\'',
+                    'duplicate-url-key'         => 'URL ключът \'%s\' вече е генериран за продукт със SKU номер : \'%s\'.',
+                    'invalid-attribute-family'  => 'Невалидна стойност за колона семейство на атрибут (семейството на атрибута не съществува?)',
+                    'invalid-type'              => 'Типът от продукти е невалиден или не се поддържа',
+                    'sku-not-found'             => 'Продукт със зададен SKU номер не е намерен',
+                    'super-attribute-not-found' => 'Супер атрибут с код \'%s\' не е намерен или не принадлежи към семейството на атрибута: \'%s\'',
                 ],
             ],
         ],
 
         'tax-rates' => [
-            'title' => 'Tax Rates',
+            'title' => 'Данъци',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-identifier' => 'Identifier : \'%s\' is found more than once in the import file.',
-                    'identifier-not-found' => 'Identifier : \'%s\' not found in the system.',
+                    'duplicate-identifier' => 'Идентификатор \'%s\' се среща повече от веднъж в импортния файл.',
+                    'identifier-not-found' => 'Идентификатор \'%s\' не е намерен в системата',
                 ],
             ],
         ],
@@ -43,13 +43,13 @@ return [
 
     'validation' => [
         'errors' => [
-            'column-empty-headers' => 'Columns number "%s" have empty headers.',
-            'column-name-invalid'  => 'Invalid column names: "%s".',
-            'column-not-found'     => 'Required columns not found: %s.',
-            'column-numbers'       => 'Number of columns does not correspond to the number of rows in the header.',
-            'invalid-attribute'    => 'Header contains invalid attribute(s): "%s".',
-            'system'               => 'An unexpected system error occurred.',
-            'wrong-quotes'         => 'Curly quotes used instead of straight quotes.',
+            'column-empty-headers' => 'Колони номер "%s" имат празни заглавия.',
+            'column-name-invalid'  => 'Невалидни имена на колони: "%s".',
+            'column-not-found'     => 'Не са намерени задължителни колони: %s.',
+            'column-numbers'       => 'Броят на колоните не съответства на броя на редовете в "header".',
+            'invalid-attribute'    => '"Header" съдържа невалиден(и) атрибут(и): "%s".',
+            'system'               => 'Възникна неочаквана системна грешка.',
+            'wrong-quotes'         => 'Използвани са къдрави кавички вместо прави кавички.',
         ],
     ],
 ];

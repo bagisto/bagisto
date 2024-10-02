@@ -4,46 +4,46 @@ return [
     'checkout' => [
         'cart' => [
             'integrity' => [
-                'qty-missing'   => 'At least one product should have more than 1 quantity.',
+                'qty-missing'   => 'Най-малко един продукт трябва да има повече от 1 брой.',
             ],
 
-            'inventory-warning' => 'The requested quantity is not available, please try again later.',
-            'missing-links'     => 'Downloadable links are missing for this product.',
-            'missing-options'   => 'Options are missing for this product.',
+            'inventory-warning' => 'Заявеното количество не е налично, моля опитайте отново по-късно.',
+            'missing-links'     => 'Липсват връзки за изтегляне за този продукт.',
+            'missing-options'   => 'Липсват опции за този продукт.',
         ],
     ],
 
     'datagrid' => [
         'copy-of-slug'                  => 'copy-of-:value',
-        'copy-of'                       => 'Copy Of :value',
-        'variant-already-exist-message' => 'Variant with same attribute options already exists.',
+        'copy-of'                       => 'Копирай от :value',
+        'variant-already-exist-message' => 'Вариант със същите атрибутни опции вече съществува.',
     ],
 
     'response' => [
-        'product-can-not-be-copied' => 'Products of type :type can not be copied',
+        'product-can-not-be-copied' => 'Продукти от тип :type не могат да бъдат копирани',
     ],
 
     'sort-by'  => [
         'options' => [
-            'cheapest-first'  => 'Cheapest First',
-            'expensive-first' => 'Expensive First',
-            'from-a-z'        => 'From A-Z',
-            'from-z-a'        => 'From Z-A',
-            'latest-first'    => 'Newest First',
-            'oldest-first'    => 'Oldest First',
+            'cheapest-first'  => 'Най-евтино',
+            'expensive-first' => 'Най-скъпо',
+            'from-a-z'        => 'От А-Я',
+            'from-z-a'        => 'От Я-А',
+            'latest-first'    => 'Най-ново',
+            'oldest-first'    => 'Най-старо',
         ],
     ],
 
     'type'     => [
         'abstract'     => [
-            'offers' => 'Buy :qty for :price each and save :discount',
+            'offers' => 'Купи :qty за :price от всеки и спести :discount',
         ],
 
-        'bundle'       => 'Bundle',
-        'configurable' => 'Configurable',
-        'downloadable' => 'Downloadable',
-        'grouped'      => 'Grouped',
-        'simple'       => 'Simple',
-        'virtual'      => 'Virtual',
+        'bundle'       => 'Пакет',
+        'configurable' => 'Конфигурируем',
+        'downloadable' => 'Изтегляем',
+        'grouped'      => 'Групиран',
+        'simple'       => 'Обикновен',
+        'virtual'      => 'Виртуален',
     ],
 ];
