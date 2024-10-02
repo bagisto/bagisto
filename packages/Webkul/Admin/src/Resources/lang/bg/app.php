@@ -3,37 +3,37 @@
 return [
     'users' => [
         'sessions' => [
-            'email'                => 'Email Address',
-            'forget-password-link' => 'Forget Password ?',
-            'password'             => 'Password',
-            'submit-btn'           => 'Sign In',
-            'title'                => 'Sign In',
+            'email'                => 'Имейл адрес',
+            'forget-password-link' => 'Забравена парола?',
+            'password'             => 'Парола',
+            'submit-btn'           => 'Вход',
+            'title'                => 'Вход',
         ],
 
         'forget-password' => [
             'create' => [
-                'email'           => 'Registered Email',
-                'email-not-exist' => 'Email Not Exists',
-                'page-title'      => 'Forget Password',
-                'reset-link-sent' => 'Reset Password link sent',
-                'sign-in-link'    => 'Back to Sign In ?',
-                'submit-btn'      => 'Reset',
-                'title'           => 'Recover Password',
+                'email'           => 'Регистриран имейл',
+                'email-not-exist' => 'Имейлът не съществува',
+                'page-title'      => 'Забравена парола',
+                'reset-link-sent' => 'URL адресът за нулиране на паролата е изпратен',
+                'sign-in-link'    => 'Назад към Вход?',
+                'submit-btn'      => 'Нулиране',
+                'title'           => 'Възстановяване на парола',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Back to Sign In ?',
-            'confirm-password' => 'Confirm Password',
-            'email'            => 'Registered Email',
-            'password'         => 'Password',
-            'submit-btn'       => 'Reset Password',
-            'title'            => 'Reset Password',
+            'back-link-title'  => 'Назад към Вход?',
+            'confirm-password' => 'Потвърди парола',
+            'email'            => 'Регистриран имейл',
+            'password'         => 'Парола',
+            'submit-btn'       => 'Нулиране на парола',
+            'title'            => 'Нулиране на парола',
         ],
     ],
 
     'notifications' => [
-        'description-text'      => 'List all the Notifications',
+        'description-text'      => 'Списък на всички известия',
         'marked-success'        => 'Notification Marked Successfully',
         'no-record'             => 'No Record Found',
         'of'                    => 'of',
@@ -57,13 +57,13 @@ return [
         'edit' => [
             'back-btn'          => 'Back',
             'change-password'   => 'Change Password',
-            'confirm-password'  => 'Confirm Password',
+            'confirm-password'  => 'Потвърди парола',
             'current-password'  => 'Current Password',
             'email'             => 'Email',
             'general'           => 'General',
             'invalid-password'  => 'The current password you entered is incorrect.',
             'name'              => 'Name',
-            'password'          => 'Password',
+            'password'          => 'Парола',
             'profile-image'     => 'Profile Image',
             'save-btn'          => 'Save Account',
             'title'             => 'My Account',
@@ -2970,10 +2970,10 @@ return [
                 'user'  => 'User',
 
                 'create' => [
-                    'confirm-password'  => 'Confirm Password',
+                    'confirm-password'  => 'Потвърди парола',
                     'email'             => 'Email',
                     'name'              => 'Name',
-                    'password'          => 'Password',
+                    'password'          => 'Парола',
                     'role'              => 'Role',
                     'save-btn'          => 'Save User',
                     'status'            => 'Status',
@@ -3001,11 +3001,11 @@ return [
 
             'edit' => [
                 'back-btn'         => 'Back',
-                'confirm-password' => 'Confirm Password',
+                'confirm-password' => 'Потвърди парола',
                 'email'            => 'Email',
                 'general'          => 'General',
                 'name'             => 'Name',
-                'password'         => 'Password',
+                'password'         => 'Парола',
                 'role'             => 'Role',
                 'save-btn'         => 'Save User',
                 'status'           => 'Status',
@@ -4411,7 +4411,7 @@ return [
             'forgot-password' => [
                 'description'    => 'You are receiving this email because we received a password reset request for your account.',
                 'greeting'       => 'Forgot Password!',
-                'reset-password' => 'Reset Password',
+                'reset-password' => 'Нулиране на парола',
                 'subject'        => 'Reset Password Email',
             ],
         ],
