@@ -1,95 +1,92 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-9ab26c42.css",
-    "isEntry": true,
-    "src": "src/Resources/assets/css/app.css"
+    "file": "assets/app-N7CLTFph.css",
+    "src": "src/Resources/assets/css/app.css",
+    "isEntry": true
   },
   "src/Resources/assets/fonts/bagisto-shop.woff": {
-    "file": "assets/bagisto-shop-5afe0d07.woff",
+    "file": "assets/bagisto-shop-CwjLXSBu.woff",
     "src": "src/Resources/assets/fonts/bagisto-shop.woff"
   },
   "src/Resources/assets/images/cash-on-delivery.png": {
-    "file": "assets/cash-on-delivery-73061c49.png",
+    "file": "assets/cash-on-delivery-Ck2rBtSq.png",
     "src": "src/Resources/assets/images/cash-on-delivery.png"
   },
   "src/Resources/assets/images/default-language.svg": {
-    "file": "assets/default-language-6ef0ef70.svg",
+    "file": "assets/default-language-BxH8WlkY.svg",
     "src": "src/Resources/assets/images/default-language.svg"
   },
   "src/Resources/assets/images/empty-dwn-product.png": {
-    "file": "assets/empty-dwn-product-3c9202e1.png",
+    "file": "assets/empty-dwn-product-DYRIKFWL.png",
     "src": "src/Resources/assets/images/empty-dwn-product.png"
   },
   "src/Resources/assets/images/favicon.ico": {
-    "file": "assets/favicon-1b7c1fb6.ico",
+    "file": "assets/favicon-Df9chQdB.ico",
     "src": "src/Resources/assets/images/favicon.ico"
   },
   "src/Resources/assets/images/hero-image.jpg": {
-    "file": "assets/hero-image-feee3420.jpg",
+    "file": "assets/hero-image-BlVTwpsv.jpg",
     "src": "src/Resources/assets/images/hero-image.jpg"
   },
   "src/Resources/assets/images/hero-image.webp": {
-    "file": "assets/hero-image-3170dce6.webp",
+    "file": "assets/hero-image-DwKg3YHc.webp",
     "src": "src/Resources/assets/images/hero-image.webp"
   },
   "src/Resources/assets/images/large-product-placeholder.webp": {
-    "file": "assets/large-product-placeholder-13b8a96b.webp",
+    "file": "assets/large-product-placeholder-B9xoAuKQ.webp",
     "src": "src/Resources/assets/images/large-product-placeholder.webp"
   },
   "src/Resources/assets/images/logo.svg": {
-    "file": "assets/logo-942157c2.svg",
+    "file": "assets/logo-CZWQQgOF.svg",
     "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/medium-product-placeholder.webp": {
-    "file": "assets/medium-product-placeholder-3b1a7b7d.webp",
+    "file": "assets/medium-product-placeholder-INODB-G2.webp",
     "src": "src/Resources/assets/images/medium-product-placeholder.webp"
   },
   "src/Resources/assets/images/money-transfer.png": {
-    "file": "assets/money-transfer-115da55a.png",
+    "file": "assets/money-transfer-BNjtOcYo.png",
     "src": "src/Resources/assets/images/money-transfer.png"
   },
   "src/Resources/assets/images/no-address.png": {
-    "file": "assets/no-address-740c7843.png",
+    "file": "assets/no-address-BHTy4apn.png",
     "src": "src/Resources/assets/images/no-address.png"
   },
   "src/Resources/assets/images/paypal.png": {
-    "file": "assets/paypal-df581855.png",
+    "file": "assets/paypal-CIu1GKlz.png",
     "src": "src/Resources/assets/images/paypal.png"
   },
   "src/Resources/assets/images/review.png": {
-    "file": "assets/review-342fab8f.png",
+    "file": "assets/review-ZWqERyaT.png",
     "src": "src/Resources/assets/images/review.png"
   },
   "src/Resources/assets/images/small-product-placeholder.webp": {
-    "file": "assets/small-product-placeholder-64b7f208.webp",
+    "file": "assets/small-product-placeholder-CMT26fOX.webp",
     "src": "src/Resources/assets/images/small-product-placeholder.webp"
   },
   "src/Resources/assets/images/spinner.svg": {
-    "file": "assets/spinner-51c5cf50.svg",
+    "file": "assets/spinner-CWS6ej98.svg",
     "src": "src/Resources/assets/images/spinner.svg"
   },
   "src/Resources/assets/images/thank-you.png": {
-    "file": "assets/thank-you-aa4a2b62.png",
+    "file": "assets/thank-you-mhMpuEVL.png",
     "src": "src/Resources/assets/images/thank-you.png"
   },
   "src/Resources/assets/images/user-placeholder.png": {
-    "file": "assets/user-placeholder-4670a452.png",
+    "file": "assets/user-placeholder-C_FiyGd9.png",
     "src": "src/Resources/assets/images/user-placeholder.png"
   },
   "src/Resources/assets/images/wishlist.png": {
-    "file": "assets/wishlist-8c226c7a.png",
+    "file": "assets/wishlist-DPRG46v-.png",
     "src": "src/Resources/assets/images/wishlist.png"
   },
-  "src/Resources/assets/js/app.css": {
-    "file": "assets/app-05f8acf7.css",
-    "src": "src/Resources/assets/js/app.css"
-  },
   "src/Resources/assets/js/app.js": {
-    "css": [
-      "assets/app-05f8acf7.css"
-    ],
-    "file": "assets/app-b30607f0.js",
+    "file": "assets/app-CG--VZHn.js",
+    "name": "app",
+    "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
-    "src": "src/Resources/assets/js/app.js"
+    "css": [
+      "assets/app-CjC7gl3E.css"
+    ]
   }
 }
