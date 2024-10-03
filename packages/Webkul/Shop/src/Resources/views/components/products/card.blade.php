@@ -122,7 +122,7 @@
                 >
                 </div>
 
-                {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
+                {!! view_render_event('bagisto.shop.components.products.card.price.after') !!}
 
                 <!-- Product Actions Section -->
                 <div class="action-items flex items-center justify-between opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100 max-md:hidden">
@@ -276,8 +276,6 @@
                     <span class="block h-[30px] w-[30px] rounded-full bg-zinc-500">
                     </span>
                 </div>
-
-                {!! view_render_event('bagisto.shop.components.products.card.price.after') !!}
 
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.before') !!}
 
