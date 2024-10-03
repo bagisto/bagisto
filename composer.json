@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-calendar": "*",
         "ext-curl": "*",
         "ext-intl": "*",
@@ -18,6 +18,7 @@
         "ext-pdo_mysql": "*",
         "ext-tokenizer": "*",
         "astrotomic/laravel-translatable": "^11.0.0",
+        "bagisto/image-cache": "dev-master",
         "barryvdh/laravel-dompdf": "^2.0.0",
         "diglactic/laravel-breadcrumbs": "^9.0",
         "elasticsearch/elasticsearch": "^8.10",
@@ -117,6 +118,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [
+                "intervention/image",
                 "shetabit/visitor"
             ]
         }

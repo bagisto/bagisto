@@ -36,16 +36,18 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'core');
 
-        $this->app->register(EventServiceProvider::class);
-
-        $this->app->register(VisitorServiceProvider::class);
-
         $this->app->bind(
             \Illuminate\Contracts\Debug\ExceptionHandler::class,
             \Webkul\Core\Exceptions\Handler::class
         );
 
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'core');
+
+        $this->app->register(EventServiceProvider::class);
+
+        $this->app->register(ImageServiceProvider::class);
+
+        $this->app->register(VisitorServiceProvider::class);
 
         Event::listen('bagisto.shop.layout.body.after', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
@@ -54,21 +56,6 @@ class CoreServiceProvider extends ServiceProvider
         Event::listen('bagisto.admin.layout.head', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
-
-        /**
-         * Image cache route.
-         */
-        if (is_string(config('imagecache.route'))) {
-            $filenamePattern = '[ \w\\.\\/\\-\\@\(\)\=]+';
-
-            /**
-             * Route to access template applied image file
-             */
-            $this->app['router']->get(config('imagecache.route').'/{template}/{filename}', [
-                'uses' => 'Webkul\Core\ImageCache\Controller@getResponse',
-                'as'   => 'imagecache',
-            ])->where(['filename' => $filenamePattern]);
-        }
     }
 
     /**
