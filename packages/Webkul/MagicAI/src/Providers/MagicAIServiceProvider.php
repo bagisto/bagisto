@@ -13,14 +13,4 @@ class MagicAIServiceProvider extends ServiceProvider
     {
         include __DIR__.'/../Http/helpers.php';
     }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
 }

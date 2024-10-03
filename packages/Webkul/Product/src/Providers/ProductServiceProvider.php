@@ -10,6 +10,16 @@ use Webkul\Product\Observers\ProductObserver;
 class ProductServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        $this->registerConfig();
+
+        $this->registerCommands();
+    }
+
+    /**
      * Bootstrap services.
      */
     public function boot(): void
@@ -23,16 +33,6 @@ class ProductServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
 
         ProductProxy::observe(ProductObserver::class);
-    }
-
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        $this->registerConfig();
-
-        $this->registerCommands();
     }
 
     /**

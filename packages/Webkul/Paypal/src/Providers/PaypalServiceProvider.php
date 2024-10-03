@@ -7,6 +7,16 @@ use Illuminate\Support\ServiceProvider;
 class PaypalServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerConfig();
+    }
+
+    /**
      * Bootstrap services.
      *
      * @return void
@@ -18,16 +28,6 @@ class PaypalServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'paypal');
 
         $this->app->register(EventServiceProvider::class);
-    }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->registerConfig();
     }
 
     /**

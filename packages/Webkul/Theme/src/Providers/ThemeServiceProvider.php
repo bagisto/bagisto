@@ -8,22 +8,6 @@ use Illuminate\Support\ServiceProvider;
 class ThemeServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        include __DIR__.'/../Http/helpers.php';
-
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
-
-        Blade::directive('bagistoVite', function ($expression) {
-            return "<?php echo themes()->setBagistoVite({$expression})->toHtml(); ?>";
-        });
-    }
-
-    /**
      * Register services.
      *
      * @return void
@@ -36,6 +20,22 @@ class ThemeServiceProvider extends ServiceProvider
                 $app['config']['view.paths'],
                 null
             );
+        });
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        include __DIR__.'/../Http/helpers.php';
+
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+
+        Blade::directive('bagistoVite', function ($expression) {
+            return "<?php echo themes()->setBagistoVite({$expression})->toHtml(); ?>";
         });
     }
 }

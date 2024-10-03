@@ -17,6 +17,14 @@ use Webkul\Shop\Http\Middleware\Theme;
 class ShopServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        $this->registerConfig();
+    }
+
+    /**
      * Bootstrap services.
      */
     public function boot(Router $router): void
@@ -46,14 +54,6 @@ class ShopServiceProvider extends ServiceProvider
         Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'shop');
 
         $this->app->register(EventServiceProvider::class);
-    }
-
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        $this->registerConfig();
     }
 
     /**

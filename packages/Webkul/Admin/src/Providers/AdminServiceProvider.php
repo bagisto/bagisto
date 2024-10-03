@@ -10,6 +10,14 @@ use Webkul\Core\Http\Middleware\PreventRequestsDuringMaintenance;
 class AdminServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        $this->registerConfig();
+    }
+
+    /**
      * Bootstrap services.
      */
     public function boot(): void
@@ -23,14 +31,6 @@ class AdminServiceProvider extends ServiceProvider
         Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'admin');
 
         $this->app->register(EventServiceProvider::class);
-    }
-
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        $this->registerConfig();
     }
 
     /**

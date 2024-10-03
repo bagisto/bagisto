@@ -24,12 +24,4 @@ class CustomerServiceProvider extends ServiceProvider
             return Captcha::getFacadeRoot()->validateResponse($value);
         });
     }
-
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        //
-    }
 }

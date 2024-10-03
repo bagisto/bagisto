@@ -19,12 +19,4 @@ class CheckoutServiceProvider extends ServiceProvider
 
         $this->app->register(ModuleServiceProvider::class);
     }
-
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        //
-    }
 }

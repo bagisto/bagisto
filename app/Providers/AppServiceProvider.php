@@ -11,16 +11,6 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        ParallelTesting::setUpTestDatabase(function (string $database, int $token) {
-            Artisan::call('db:seed');
-        });
-    }
-
-    /**
      * Register any application services.
      */
     public function register(): void
@@ -38,5 +28,15 @@ class AppServiceProvider extends ServiceProvider
         } else {
             Debugbar::disable();
         }
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        ParallelTesting::setUpTestDatabase(function (string $database, int $token) {
+            Artisan::call('db:seed');
+        });
     }
 }

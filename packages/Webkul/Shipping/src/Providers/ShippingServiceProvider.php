@@ -7,16 +7,6 @@ use Illuminate\Support\ServiceProvider;
 class ShippingServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        include __DIR__.'/../Http/helpers.php';
-    }
-
-    /**
      * Register services.
      *
      * @return void
@@ -24,6 +14,16 @@ class ShippingServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        include __DIR__.'/../Http/helpers.php';
     }
 
     /**

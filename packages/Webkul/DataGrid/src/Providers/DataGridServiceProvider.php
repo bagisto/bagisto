@@ -15,9 +15,4 @@ class DataGridServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
-
-    /**
-     * Register any application services.
-     */
-    public function register(): void {}
 }
