@@ -49,14 +49,13 @@
     "require-dev": {
         "bagisto/laravel-datafaker": "2.2.*",
         "barryvdh/laravel-debugbar": "^3.8",
-        "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.8",
-        "mockery/mockery": "^1.3.1",
-        "nunomaduro/collision": "^8.1",
-        "pestphp/pest": "^2.6",
-        "pestphp/pest-plugin-laravel": "^2.1",
-        "phpunit/phpunit": "^10.0",
-        "spatie/laravel-ignition": "^2.0"
+        "fakerphp/faker": "^1.23",
+        "laravel/pint": "^1.13",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "phpunit/phpunit": "^11.0"
     },
     "autoload": {
         "psr-4": {
