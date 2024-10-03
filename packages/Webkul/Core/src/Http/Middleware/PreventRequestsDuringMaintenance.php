@@ -92,8 +92,8 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
 
             if (isset($data['redirect'])) {
                 $path = $data['redirect'] === '/'
-                            ? $data['redirect']
-                            : trim($data['redirect'], '/');
+                    ? $data['redirect']
+                    : trim($data['redirect'], '/');
 
                 if ($request->path() !== $path) {
                     return redirect($path);
