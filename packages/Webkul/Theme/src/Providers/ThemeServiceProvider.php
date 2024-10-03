@@ -14,6 +14,8 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        include __DIR__.'/../Http/helpers.php';
+
         $this->app->singleton('view.finder', function ($app) {
             return new \Webkul\Theme\ThemeViewFinder(
                 $app['files'],
@@ -30,8 +32,6 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include __DIR__.'/../Http/helpers.php';
-
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         Blade::directive('bagistoVite', function ($expression) {

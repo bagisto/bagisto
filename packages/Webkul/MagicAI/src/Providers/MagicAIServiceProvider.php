@@ -7,9 +7,9 @@ use Illuminate\Support\ServiceProvider;
 class MagicAIServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap services.
+     * Register services.
      */
-    public function boot(): void
+    public function register(): void
     {
         include __DIR__.'/../Http/helpers.php';
     }

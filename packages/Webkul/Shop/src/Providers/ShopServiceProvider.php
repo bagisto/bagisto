@@ -45,7 +45,9 @@ class ShopServiceProvider extends ServiceProvider
         Route::middleware(['web', 'shop', PreventRequestsDuringMaintenance::class])->group(__DIR__.'/../Routes/api.php');
 
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'shop');
+
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'shop');
 
         Paginator::defaultView('shop::partials.pagination');

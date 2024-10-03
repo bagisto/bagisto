@@ -9,14 +9,22 @@ use Webkul\User\Http\Middleware\Bouncer as BouncerMiddleware;
 class UserServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        include __DIR__.'/../Http/helpers.php';
+    }
+
+    /**
      * Bootstrap services.
      *
      * @return void
      */
     public function boot(Router $router)
     {
-        include __DIR__.'/../Http/helpers.php';
-
         $router->aliasMiddleware('admin', BouncerMiddleware::class);
 
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');

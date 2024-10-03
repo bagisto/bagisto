@@ -14,6 +14,8 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        include __DIR__.'/../Http/helpers.php';
+
         $this->registerConfig();
 
         $this->registerCommands();
@@ -24,15 +26,13 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        include __DIR__.'/../Http/helpers.php';
-
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'product');
 
-        $this->app->register(EventServiceProvider::class);
-
         ProductProxy::observe(ProductObserver::class);
+
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**

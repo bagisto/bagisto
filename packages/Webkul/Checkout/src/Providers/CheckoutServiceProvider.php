@@ -7,16 +7,21 @@ use Illuminate\Support\ServiceProvider;
 class CheckoutServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        include __DIR__.'/../Http/helpers.php';
+    }
+
+    /**
      * Bootstrap services.
      */
     public function boot(): void
     {
-        include __DIR__.'/../Http/helpers.php';
-
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         $this->app->register(EventServiceProvider::class);
-
         $this->app->register(ModuleServiceProvider::class);
     }
 }
