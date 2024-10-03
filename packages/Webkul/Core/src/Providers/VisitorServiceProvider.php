@@ -12,14 +12,6 @@ use Webkul\Core\Visitor;
 class VisitorServiceProvider extends BaseVisitorServiceProvider
 {
     /**
-     * Perform post-registration booting of services.
-     */
-    public function boot(): void
-    {
-        $this->registerMacroHelpers();
-    }
-
-    /**
      * Register any package services.
      */
     public function register(): void
@@ -32,5 +24,13 @@ class VisitorServiceProvider extends BaseVisitorServiceProvider
 
             return new Visitor($request, config('visitor'));
         });
+    }
+
+    /**
+     * Perform post-registration booting of services.
+     */
+    public function boot(): void
+    {
+        $this->registerMacroHelpers();
     }
 }

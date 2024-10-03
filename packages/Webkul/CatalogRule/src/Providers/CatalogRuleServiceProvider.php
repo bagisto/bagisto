@@ -8,6 +8,16 @@ use Webkul\CatalogRule\Console\Commands\PriceRuleIndex;
 class CatalogRuleServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerCommands();
+    }
+
+    /**
      * Bootstrap services.
      *
      * @return void
@@ -17,16 +27,6 @@ class CatalogRuleServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         $this->app->register(EventServiceProvider::class);
-    }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->registerCommands();
     }
 
     /**

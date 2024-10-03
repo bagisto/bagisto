@@ -9,6 +9,16 @@ use Webkul\Theme\ViewRenderEventManager;
 class CoreServiceProvider extends ServiceProvider
 {
     /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        $this->registerCommands();
+
+        $this->registerOverrides();
+    }
+
+    /**
      * Bootstrap services.
      */
     public function boot(): void
@@ -34,16 +44,6 @@ class CoreServiceProvider extends ServiceProvider
         Event::listen('bagisto.admin.layout.head', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
-    }
-
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        $this->registerCommands();
-
-        $this->registerOverrides();
     }
 
     /**

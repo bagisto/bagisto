@@ -19,18 +19,6 @@ class ImageServiceProvider extends BaseImageServiceProvider
     protected $defer = false;
 
     /**
-     * Bootstrap the application events.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->cacheIsInstalled()
-            ? $this->bootstrapImageCache()
-            : null;
-    }
-
-    /**
      * Register the service provider.
      *
      * @return void
@@ -42,6 +30,18 @@ class ImageServiceProvider extends BaseImageServiceProvider
         });
 
         $this->app->alias('image', 'Intervention\Image\ImageManager');
+    }
+
+    /**
+     * Bootstrap the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->cacheIsInstalled()
+            ? $this->bootstrapImageCache()
+            : null;
     }
 
     /**

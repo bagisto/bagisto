@@ -19,6 +19,16 @@ class InstallerServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerCommands();
+    }
+
+    /**
      * Bootstrap the application events.
      *
      * @return void
@@ -36,16 +46,6 @@ class InstallerServiceProvider extends ServiceProvider
         $router->aliasMiddleware('installer_locale', Locale::class);
 
         Event::listen('bagisto.installed', 'Webkul\Installer\Listeners\Installer@installed');
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->registerCommands();
     }
 
     /**
