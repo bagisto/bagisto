@@ -239,7 +239,7 @@ return [
                         'add-btn'          => 'Add Address',
                         'add-new'          => 'Add new address',
                         'add-new-address'  => 'Add new address',
-                        'addresses'        => 'Addresses',
+                        'addresses'        => 'Адреси',
                         'back'             => 'Back',
                         'billing-address'  => 'Billing Address',
                         'city'             => 'City',
@@ -356,7 +356,7 @@ return [
                 'fraud'                          => 'Fraud',
                 'grand-total'                    => 'Grand Total - :grand_total',
                 'invoice-id'                     => 'Invoice #:invoice',
-                'invoices'                       => 'Invoices',
+                'invoices'                       => 'Фактури',
                 'item-canceled'                  => 'Canceled (:qty_canceled)',
                 'item-invoice'                   => 'Invoiced (:qty_invoiced)',
                 'item-ordered'                   => 'Ordered (:qty_ordered)',
@@ -565,7 +565,7 @@ return [
 
         'invoices' => [
             'index' => [
-                'title' => 'Invoices',
+                'title' => 'Фактури',
 
                 'datagrid' => [
                     'action'       => 'Actions',
@@ -728,7 +728,7 @@ return [
             'index' => [
                 'already-taken' => 'The :name has already been taken.',
                 'create-btn'    => 'Create Product',
-                'title'         => 'Products',
+                'title'         => 'Продукти',
 
                 'create' => [
                     'back-btn'                => 'Back',
@@ -777,7 +777,7 @@ return [
                 'title'    => 'Edit Product',
 
                 'channels' => [
-                    'title' => 'Channels',
+                    'title' => 'Канали',
                 ],
 
                 'price' => [
@@ -814,7 +814,7 @@ return [
                 ],
 
                 'categories' => [
-                    'title' => 'Categories',
+                    'title' => 'Категории',
                 ],
 
                 'images' => [
@@ -1049,7 +1049,7 @@ return [
         'attributes' => [
             'index' => [
                 'create-btn' => 'Create Attributes',
-                'title'      => 'Attributes',
+                'title'      => 'Атрибути',
 
                 'datagrid' => [
                     'boolean'             => 'Boolean',
@@ -1220,7 +1220,7 @@ return [
         'categories' => [
             'index' => [
                 'add-btn' => 'Create Category',
-                'title'   => 'Categories',
+                'title'   => 'Категории',
 
                 'datagrid' => [
                     'active'         => 'Active',
@@ -1263,7 +1263,7 @@ return [
                 'save-btn'                 => 'Save Category',
                 'select-display-mode'      => 'Select Display Mode',
                 'seo-details'              => 'SEO Details',
-                'settings'                 => 'Settings',
+                'settings'                 => 'Настройки',
                 'slug'                     => 'Slug',
                 'title'                    => 'Add New Category',
                 'visible-in-menu'          => 'Visible In Menu',
@@ -1295,7 +1295,7 @@ return [
                 'select-display-mode'      => 'Select Display Mode',
                 'select-parent-category'   => 'Select Parent Category',
                 'seo-details'              => 'SEO Details',
-                'settings'                 => 'Settings',
+                'settings'                 => 'Настройки',
                 'slug'                     => 'Slug',
                 'title'                    => 'Edit Category',
                 'visible-in-menu'          => 'Visible In Menu',
@@ -1342,7 +1342,7 @@ return [
                 'group-code-already-exists'        => 'An attribute group code already exists.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
                 'group-name-already-exists'        => 'An attribute group name already exists.',
-                'groups'                           => 'Groups',
+                'groups'                           => 'Групи',
                 'groups-info'                      => 'Manage attribute family groups',
                 'main-column'                      => 'Main Column',
                 'name'                             => 'Name',
@@ -1369,7 +1369,7 @@ return [
                 'group-code-already-exists'        => 'An attribute group code already exists.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
                 'group-name-already-exists'        => 'An attribute group name already exists.',
-                'groups'                           => 'Groups',
+                'groups'                           => 'Групи',
                 'groups-info'                      => 'Manage attribute family groups',
                 'main-column'                      => 'Main Column',
                 'name'                             => 'Name',
@@ -1397,7 +1397,7 @@ return [
     'customers' => [
         'customers' => [
             'index' => [
-                'title'         => 'Customers',
+                'title'         => 'Клиенти',
                 'login-message' => 'You logged in as :customer_name',
 
                 'datagrid' => [
@@ -1636,7 +1636,7 @@ return [
 
         'groups' => [
             'index' => [
-                'title' => 'Groups',
+                'title' => 'Групи',
 
                 'create' => [
                     'code'       => 'Code',
@@ -1953,8 +1953,8 @@ return [
                     'buy-x-quantity'                            => 'Buy X Quantity',
                     'cart-attribute'                            => 'Cart attribute',
                     'cart-item-attribute'                       => 'Cart item attribute',
-                    'categories'                                => 'Categories',
-                    'channels'                                  => 'Channels',
+                    'categories'                                => 'Категории',
+                    'channels'                                  => 'Канали',
                     'children-categories'                       => 'Categories(Children Only)',
                     'choose-condition-to-add'                   => 'Choose condition to add',
                     'condition-type'                            => 'Condition Type',
@@ -1993,7 +1993,7 @@ return [
                     'product-attribute'                         => 'Product attribute',
                     'qty-in-cart'                               => 'Quantity in cart',
                     'save-btn'                                  => 'Save Cart Rule',
-                    'settings'                                  => 'Settings',
+                    'settings'                                  => 'Настройки',
                     'shipping-country'                          => 'Shipping country',
                     'shipping-method'                           => 'Shipping method',
                     'shipping-postcode'                         => 'Shipping postcode',
@@ -2030,8 +2030,8 @@ return [
                     'buy-x-quantity'                            => 'Buy X Quantity',
                     'cart-attribute'                            => 'Cart attribute',
                     'cart-item-attribute'                       => 'Cart item attribute',
-                    'categories'                                => 'Categories',
-                    'channels'                                  => 'Channels',
+                    'categories'                                => 'Категории',
+                    'channels'                                  => 'Канали',
                     'children-categories'                       => 'Children Categories',
                     'choose-condition-to-add'                   => 'Choose condition to add',
                     'code-format'                               => 'Code Format',
@@ -2077,7 +2077,7 @@ return [
                     'product-attribute'                         => 'Product attribute',
                     'qty-in-cart'                               => 'Quantity in cart',
                     'save-btn'                                  => 'Save Cart Rule',
-                    'settings'                                  => 'Settings',
+                    'settings'                                  => 'Настройки',
                     'shipping-country'                          => 'Shipping country',
                     'shipping-method'                           => 'Shipping method',
                     'shipping-postcode'                         => 'Shipping postcode',
@@ -2127,8 +2127,8 @@ return [
                     'any-conditions-true'      => 'Any Conditions are true',
                     'attribute-family'         => 'Attribute Family',
                     'back-btn'                 => 'Back',
-                    'categories'               => 'Categories',
-                    'channels'                 => 'Channels',
+                    'categories'               => 'Категории',
+                    'channels'                 => 'Канали',
                     'choose-condition-to-add'  => 'Choose Condition To Add',
                     'condition-type'           => 'Condition Type',
                     'conditions'               => 'Conditions',
@@ -2155,7 +2155,7 @@ return [
                     'priority'                 => 'Priority',
                     'product-attribute'        => 'Product attribute',
                     'save-btn'                 => 'Save Catalog Rule',
-                    'settings'                 => 'Settings',
+                    'settings'                 => 'Настройки',
                     'status'                   => 'Status',
                     'title'                    => 'Create Catalog Rule',
                     'to'                       => 'To',
@@ -2169,8 +2169,8 @@ return [
                     'all-conditions-true'      => 'All Conditions are true',
                     'any-conditions-true'      => 'Any Conditions are true',
                     'back-btn'                 => 'Back',
-                    'categories'               => 'Categories',
-                    'channels'                 => 'Channels',
+                    'categories'               => 'Категории',
+                    'channels'                 => 'Канали',
                     'choose-condition-to-add'  => 'Choose Condition To Add',
                     'condition-type'           => 'Condition Type',
                     'conditions'               => 'Conditions',
@@ -2197,7 +2197,7 @@ return [
                     'priority'                 => 'Priority',
                     'product-attribute'        => 'Product attribute',
                     'save-btn'                 => 'Save Catalog Rule',
-                    'settings'                 => 'Settings',
+                    'settings'                 => 'Настройки',
                     'status'                   => 'Status',
                     'title'                    => 'Edit Catalog Rule',
                     'to'                       => 'To',
@@ -2418,7 +2418,7 @@ return [
         ],
 
         'create' => [
-            'channels'         => 'Channels',
+            'channels'         => 'Канали',
             'content'          => 'Content',
             'description'      => 'Description',
             'general'          => 'General',
@@ -2434,7 +2434,7 @@ return [
 
         'edit' => [
             'back-btn'         => 'Back',
-            'channels'         => 'Channels',
+            'channels'         => 'Канали',
             'content'          => 'Content',
             'description'      => 'Description',
             'general'          => 'General',
@@ -2502,7 +2502,7 @@ return [
             'index' => [
                 'create-btn' => 'Create Currency',
                 'currency'   => 'Currency',
-                'title'      => 'Currencies',
+                'title'      => 'Валути',
 
                 'datagrid' => [
                     'actions'        => 'Actions',
@@ -2562,7 +2562,7 @@ return [
                     'process-in-queue'    => 'Process In Queue',
                     'results'             => 'Results',
                     'save-btn'            => 'Save Import',
-                    'settings'            => 'Settings',
+                    'settings'            => 'Настройки',
                     'skip-errors'         => 'Skip Errors',
                     'stop-on-errors'      => 'Stop on Errors',
                     'title'               => 'Create Import',
@@ -2586,7 +2586,7 @@ return [
                     'process-in-queue'    => 'Process In Queue',
                     'results'             => 'Results',
                     'save-btn'            => 'Save Import',
-                    'settings'            => 'Settings',
+                    'settings'            => 'Настройки',
                     'skip-errors'         => 'Skip Errors',
                     'stop-on-errors'      => 'Stop on Errors',
                     'title'               => 'Edit Import',
@@ -2727,7 +2727,7 @@ return [
                 'save-btn'       => 'Save Inventory Sources',
                 'select-country' => 'Select Country',
                 'select-state'   => 'Select State',
-                'settings'       => 'Settings',
+                'settings'       => 'Настройки',
                 'state'          => 'State',
                 'status'         => 'Status',
                 'street'         => 'Street',
@@ -2754,7 +2754,7 @@ return [
                 'save-btn'       => 'Save Inventory Sources',
                 'select-country' => 'Select Country',
                 'select-state'   => 'Select State',
-                'settings'       => 'Settings',
+                'settings'       => 'Настройки',
                 'source-address' => 'Source Address',
                 'state'          => 'State',
                 'status'         => 'Status',
@@ -2838,7 +2838,7 @@ return [
                     'save-btn'       => 'Save Tax Rate',
                     'select-country' => 'Select Country',
                     'select-state'   => 'Select State',
-                    'settings'       => 'Settings',
+                    'settings'       => 'Настройки',
                     'state'          => 'State',
                     'tax-rate'       => 'Rate',
                     'title'          => 'Create Tax Rate',
@@ -2854,7 +2854,7 @@ return [
                     'save-btn'       => 'Save Tax Rate',
                     'select-country' => 'Select Country',
                     'select-state'   => 'Select State',
-                    'settings'       => 'Settings',
+                    'settings'       => 'Настройки',
                     'state'          => 'State',
                     'tax-rate'       => 'Rate',
                     'title'          => 'Edit Tax Rate',
@@ -2876,7 +2876,7 @@ return [
                 'delete-failed'     => 'Channel Delete Failed',
                 'delete-success'    => 'Channel deleted successfully.',
                 'last-delete-error' => 'Last Channel deleted failed.',
-                'title'             => 'Channels',
+                'title'             => 'Канали',
 
                 'datagrid' => [
                     'code'      => 'Code',
@@ -2893,7 +2893,7 @@ return [
                 'cancel'                  => 'Back',
                 'code'                    => 'Code',
                 'create-success'          => 'Channel created successfully.',
-                'currencies'              => 'Currencies',
+                'currencies'              => 'Валути',
                 'currencies-and-locales'  => 'Currencies and Locales',
                 'default-currency'        => 'Default Currency',
                 'default-locale'          => 'Default Locale',
@@ -2921,7 +2921,7 @@ return [
                 'seo-description'         => 'Meta description',
                 'seo-keywords'            => 'Meta keywords',
                 'seo-title'               => 'Meta title',
-                'settings'                => 'Settings',
+                'settings'                => 'Настройки',
                 'status'                  => 'Status',
                 'theme'                   => 'Theme',
                 'title'                   => 'Create Channel',
@@ -2931,7 +2931,7 @@ return [
                 'allowed-ips'            => 'Allowed IPs',
                 'back-btn'               => 'Back',
                 'code'                   => 'Code',
-                'currencies'             => 'Currencies',
+                'currencies'             => 'Валути',
                 'currencies-and-locales' => 'Currencies and Locales',
                 'default-currency'       => 'Default Currency',
                 'default-locale'         => 'Default Locale',
@@ -2966,7 +2966,7 @@ return [
         'users' => [
             'index' => [
                 'admin' => 'Admin',
-                'title' => 'Users',
+                'title' => 'Потребители',
                 'user'  => 'User',
 
                 'create' => [
@@ -3077,7 +3077,7 @@ return [
         'themes' => [
             'index' => [
                 'create-btn' => 'Create Theme',
-                'title'      => 'Themes',
+                'title'      => 'Теми',
 
                 'datagrid' => [
                     'active'       => 'Active',
@@ -3098,7 +3098,7 @@ return [
                 'name'       => 'Name',
                 'save-btn'   => 'Save Theme',
                 'sort-order' => 'Sort Order',
-                'themes'     => 'Themes',
+                'themes'     => 'Теми',
                 'title'      => 'Create Theme',
 
                 'type' => [
@@ -3122,7 +3122,7 @@ return [
                 'back'                          => 'Back',
                 'category-carousel'             => 'Category Carousel',
                 'category-carousel-description' => 'Display dynamic categories attractively using a responsive category carousel.',
-                'channels'                      => 'Channels',
+                'channels'                      => 'Канали',
                 'column'                        => 'Column',
                 'create-filter'                 => 'Create Filter',
                 'css'                           => 'CSS',
@@ -3167,7 +3167,7 @@ return [
                 'static-content'                => 'Static Content',
                 'static-content-description'    => 'Improve engagement with concise, informative static content for your audience.',
                 'status'                        => 'Status',
-                'themes'                        => 'Themes',
+                'themes'                        => 'Теми',
                 'title'                         => 'Edit Theme',
                 'update-slider'                 => 'Update Slider',
                 'url'                           => 'URL',
@@ -3176,7 +3176,7 @@ return [
 
                 'services-content' => [
                     'add-btn'            => 'Add Services',
-                    'channels'           => 'Channels',
+                    'channels'           => 'Канали',
                     'delete'             => 'Delete',
                     'description'        => 'Description',
                     'general'            => 'General',
@@ -3217,7 +3217,7 @@ return [
                 'id'                            => 'Id',
                 'interval'                      => 'Interval',
                 'name'                          => 'Name',
-                'orders'                        => 'Orders',
+                'orders'                        => 'Поръчки',
                 'orders-over-time'              => 'Orders Over Time',
                 'payment-method'                => 'Payment Method',
                 'product-views'                 => 'Product Views',
@@ -3233,7 +3233,7 @@ return [
                 'start-date'                    => 'Start Date',
                 'tax-collected'                 => 'Tax Collected',
                 'tax-collected-over-time'       => 'Tax Collected Over Time',
-                'title'                         => 'Sales',
+                'title'                         => 'Продажби',
                 'top-payment-methods'           => 'Top Payment Methods',
                 'top-shipping-methods'          => 'Top Shipping Methods',
                 'top-tax-categories'            => 'Top Tax Categories',
@@ -3250,7 +3250,7 @@ return [
             'index' => [
                 'all-channels'                => 'All Channels',
                 'count'                       => 'Count',
-                'customers'                   => 'Customers',
+                'customers'                   => 'Клиенти',
                 'customers-over-time'         => 'Customers Over Time',
                 'customers-traffic'           => 'Customers Traffic',
                 'customers-with-most-orders'  => 'Customers With Most Orders',
@@ -3261,10 +3261,10 @@ return [
                 'id'                          => 'Id',
                 'interval'                    => 'Interval',
                 'name'                        => 'Name',
-                'orders'                      => 'Orders',
+                'orders'                      => 'Поръчки',
                 'reviews'                     => 'Reviews',
                 'start-date'                  => 'Start Date',
-                'title'                       => 'Customers',
+                'title'                       => 'Клиенти',
                 'top-customer-groups'         => 'Top Customer Groups',
                 'total'                       => 'Total',
                 'total-customers'             => 'Total Customers',
@@ -3285,7 +3285,7 @@ return [
                 'last-search-terms'                => 'Last Search Terms',
                 'locale'                           => 'Locale',
                 'name'                             => 'Name',
-                'orders'                           => 'Orders',
+                'orders'                           => 'Поръчки',
                 'price'                            => 'Price',
                 'products-added-over-time'         => 'Products Added Over Time',
                 'products-with-most-reviews'       => 'Products With Most Reviews',
@@ -3297,7 +3297,7 @@ return [
                 'reviews'                          => 'Reviews',
                 'search-term'                      => 'Search Term',
                 'start-date'                       => 'Start Date',
-                'title'                            => 'Products',
+                'title'                            => 'Продукти',
                 'top-search-terms'                 => 'Top Search Terms',
                 'top-selling-products-by-quantity' => 'Top Selling Products By Quantity',
                 'top-selling-products-by-revenue'  => 'Top Selling Products By Revenue',
@@ -3467,17 +3467,17 @@ return [
             ],
 
             'catalog' => [
-                'info'  => 'Catalog',
-                'title' => 'Catalog',
+                'info'  => 'Каталог',
+                'title' => 'Каталог',
 
                 'products' => [
                     'info'  => 'Product view page, cart view page, store front, review and attribute social share.',
-                    'title' => 'Products',
+                    'title' => 'Продукти',
 
                     'settings' => [
                         'compare-options'     => 'Compare options',
                         'image-search-option' => 'Image Search Option',
-                        'title'               => 'Settings',
+                        'title'               => 'Настройки',
                         'title-info'          => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
                         'wishlist-options'    => 'Wishlist options',
                     ],
@@ -3606,14 +3606,14 @@ return [
                         'show-reviews'    => 'Show Reviews',
                         'show-sku'        => 'Show SKU',
                         'show-weight'     => 'Show Weight',
-                        'title'           => 'Products',
+                        'title'           => 'Продукти',
                         'title-info'      => 'Configure product settings including with SKU, weight, Categories, Images, Reviews, Ratings, Offers and etc.',
                     ],
 
                     'categories' => [
                         'enable'                  => 'Enable',
                         'show-search-input-field' => 'Show Search Input Field',
-                        'title'                   => 'Categories',
+                        'title'                   => 'Категории',
                         'title-info'              => '"Categories" refer to groups or classifications that help organize and group similar products or items together for easier browsing and navigation.',
                     ],
                 ],
@@ -3677,7 +3677,7 @@ return [
 
                 'settings' => [
                     'settings-info' => 'Set newsletter subscriptions, email verifications and social login.',
-                    'title'         => 'Settings',
+                    'title'         => 'Настройки',
 
                     'login-as-customer' => [
                         'allow-option' => 'Allow Login as Customer',
@@ -3778,8 +3778,8 @@ return [
             ],
 
             'sales' => [
-                'info'  => 'Sales',
-                'title' => 'Sales',
+                'info'  => 'Продажби',
+                'title' => 'Продажби',
 
                 'shipping-setting' => [
                     'info'  => 'Configure shipping settings including Country, State, City, Street Address, Zip Code, Store Name, VAT Number, Contact Number, and Bank Details.',
@@ -4048,8 +4048,8 @@ return [
                 'visit-shop'    => 'Visit Shop',
 
                 'mega-search' => [
-                    'categories'                      => 'Categories',
-                    'customers'                       => 'Customers',
+                    'categories'                      => 'Категории',
+                    'customers'                       => 'Клиенти',
                     'explore-all-categories'          => 'Explore all categories',
                     'explore-all-customers'           => 'Explore all customers',
                     'explore-all-matching-categories' => 'Explore all categories matching “:query” (:count)',
@@ -4058,61 +4058,61 @@ return [
                     'explore-all-matching-products'   => 'Explore all products matching “:query” (:count)',
                     'explore-all-orders'              => 'Explore all Orders',
                     'explore-all-products'            => 'Explore all products',
-                    'orders'                          => 'Orders',
-                    'products'                        => 'Products',
+                    'orders'                          => 'Поръчки',
+                    'products'                        => 'Продукти',
                     'sku'                             => 'SKU: :sku',
                     'title'                           => 'Mega Search',
                 ],
             ],
 
             'sidebar' => [
-                'attribute-families'       => 'Attribute Families',
-                'attributes'               => 'Attributes',
+                'attribute-families'       => 'Семейства от атрибути',
+                'attributes'               => 'Атрибути',
                 'campaigns'                => 'Campaigns',
-                'catalog'                  => 'Catalog',
-                'categories'               => 'Categories',
-                'channels'                 => 'Channels',
+                'catalog'                  => 'Каталог',
+                'categories'               => 'Категории',
+                'channels'                 => 'Канали',
                 'cms'                      => 'CMS',
                 'collapse'                 => 'Collapse',
                 'communications'           => 'Communications',
                 'configure'                => 'Configure',
-                'currencies'               => 'Currencies',
-                'customers'                => 'Customers',
-                'dashboard'                => 'Dashboard',
+                'currencies'               => 'Валути',
+                'customers'                => 'Клиенти',
+                'dashboard'                => 'Табло за управление',
                 'data-transfer'            => 'Data Transfer',
                 'discount'                 => 'Discount',
                 'email-templates'          => 'Email Templates',
                 'events'                   => 'Events',
                 'exchange-rates'           => 'Exchange Rates',
-                'groups'                   => 'Groups',
+                'groups'                   => 'Групи',
                 'imports'                  => 'Imports',
                 'inventory-sources'        => 'Inventory Sources',
-                'invoices'                 => 'Invoices',
+                'invoices'                 => 'Фактури',
                 'locales'                  => 'Locales',
                 'marketing'                => 'Marketing',
                 'mode'                     => 'Dark Mode',
                 'newsletter-subscriptions' => 'Newsletter Subscriptions',
-                'orders'                   => 'Orders',
-                'products'                 => 'Products',
+                'orders'                   => 'Поръчки',
+                'products'                 => 'Продукти',
                 'promotions'               => 'Promotions',
                 'refunds'                  => 'Refunds',
                 'reporting'                => 'Reporting',
                 'reviews'                  => 'Reviews',
                 'roles'                    => 'Roles',
-                'sales'                    => 'Sales',
+                'sales'                    => 'Продажби',
                 'search-seo'               => 'Search & SEO',
                 'search-synonyms'          => 'Search Synonyms',
                 'search-terms'             => 'Search Terms',
-                'settings'                 => 'Settings',
+                'settings'                 => 'Настройки',
                 'shipments'                => 'Shipments',
                 'sitemaps'                 => 'Sitemaps',
                 'tax-categories'           => 'Tax Categories',
                 'tax-rates'                => 'Tax Rates',
                 'taxes'                    => 'Taxes',
-                'themes'                   => 'Themes',
+                'themes'                   => 'Теми',
                 'transactions'             => 'Transactions',
                 'url-rewrites'             => 'URL Rewrites',
-                'users'                    => 'Users',
+                'users'                    => 'Потребители',
             ],
         ],
 
@@ -4296,66 +4296,66 @@ return [
     ],
 
     'acl' => [
-        'addresses'                => 'Addresses',
-        'attribute-families'       => 'Attribute Families',
-        'attributes'               => 'Attributes',
+        'addresses'                => 'Адреси',
+        'attribute-families'       => 'Семейства от атрибути',
+        'attributes'               => 'Атрибути',
         'campaigns'                => 'Campaigns',
         'cancel'                   => 'Cancel',
         'cart-rules'               => 'Cart Rules',
         'catalog-rules'            => 'Catalog Rules',
-        'catalog'                  => 'Catalog',
-        'categories'               => 'Categories',
-        'channels'                 => 'Channels',
+        'catalog'                  => 'Каталог',
+        'categories'               => 'Категории',
+        'channels'                 => 'Канали',
         'cms'                      => 'CMS',
         'communications'           => 'Communications',
         'configure'                => 'Configure',
         'copy'                     => 'Copy',
         'create'                   => 'Create',
-        'currencies'               => 'Currencies',
-        'customers'                => 'Customers',
-        'dashboard'                => 'Dashboard',
+        'currencies'               => 'Валути',
+        'customers'                => 'Клиенти',
+        'dashboard'                => 'Табло за управление',
         'data-transfer'            => 'Data Transfer',
         'delete'                   => 'Delete',
         'edit'                     => 'Edit',
         'email-templates'          => 'Email Templates',
         'events'                   => 'Events',
         'exchange-rates'           => 'Exchange Rates',
-        'groups'                   => 'Groups',
+        'groups'                   => 'Групи',
         'import'                   => 'Import',
         'imports'                  => 'Imports',
         'inventory-sources'        => 'Inventory Sources',
-        'invoices'                 => 'Invoices',
+        'invoices'                 => 'Фактури',
         'locales'                  => 'Locales',
         'marketing'                => 'Marketing',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
         'note'                     => 'Note',
-        'orders'                   => 'Orders',
-        'products'                 => 'Products',
+        'orders'                   => 'Поръчки',
+        'products'                 => 'Продукти',
         'promotions'               => 'Promotions',
         'refunds'                  => 'Refunds',
         'reporting'                => 'Reporting',
         'reviews'                  => 'Reviews',
         'roles'                    => 'Roles',
-        'sales'                    => 'Sales',
+        'sales'                    => 'Продажби',
         'search-seo'               => 'Search & SEO',
         'search-synonyms'          => 'Search Synonyms',
         'search-terms'             => 'Search Terms',
-        'settings'                 => 'Settings',
+        'settings'                 => 'Настройки',
         'shipments'                => 'Shipments',
         'sitemaps'                 => 'Sitemaps',
         'subscribers'              => 'Newsletter Subscribers',
         'tax-categories'           => 'Tax Categories',
         'tax-rates'                => 'Tax Rates',
         'taxes'                    => 'Taxes',
-        'themes'                   => 'Themes',
+        'themes'                   => 'Теми',
         'transactions'             => 'Transactions',
         'url-rewrites'             => 'URL Rewrites',
-        'users'                    => 'Users',
+        'users'                    => 'Потребители',
         'view'                     => 'View',
     ],
 
     'errors' => [
-        'dashboard' => 'Dashboard',
+        'dashboard' => 'Табло за управление',
         'go-back'   => 'Go Back',
         'support'   => 'If the problem persists, reach out to us at <a href=":link" class=":class">:email</a> for assistance.',
 
