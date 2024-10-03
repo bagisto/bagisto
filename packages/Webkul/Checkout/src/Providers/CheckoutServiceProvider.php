@@ -2,9 +2,7 @@
 
 namespace Webkul\Checkout\Providers;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Checkout\Facades\Cart;
 
 class CheckoutServiceProvider extends ServiceProvider
 {
@@ -27,18 +25,6 @@ class CheckoutServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->registerFacades();
-    }
-
-    /**
-     * Register cart as a singleton.
-     */
-    protected function registerFacades(): void
-    {
-        $loader = AliasLoader::getInstance();
-
-        $loader->alias('cart', Cart::class);
-
-        $this->app->singleton('cart', \Webkul\Checkout\Cart::class);
+        //
     }
 }

@@ -2,10 +2,7 @@
 
 namespace Webkul\MagicAI\Providers;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Webkul\MagicAI\Facades\MagicAI as MagicAIFacade;
-use Webkul\MagicAI\MagicAI;
 
 class MagicAIServiceProvider extends ServiceProvider
 {
@@ -24,12 +21,6 @@ class MagicAIServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $loader = AliasLoader::getInstance();
-
-        $loader->alias('magic_ai', MagicAIFacade::class);
-
-        $this->app->singleton('magic_ai', function () {
-            return new MagicAI;
-        });
+        //
     }
 }

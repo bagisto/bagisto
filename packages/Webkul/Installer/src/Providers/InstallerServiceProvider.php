@@ -39,7 +39,7 @@ class InstallerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the service provider
+     * Register the service provider.
      *
      * @return void
      */
