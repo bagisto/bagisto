@@ -13,17 +13,9 @@ class ShippingServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerConfig();
-    }
-
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
         include __DIR__.'/../Http/helpers.php';
+
+        $this->registerConfig();
     }
 
     /**

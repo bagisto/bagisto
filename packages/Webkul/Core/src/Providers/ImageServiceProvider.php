@@ -12,13 +12,6 @@ use Intervention\Image\ImageServiceProvider as BaseImageServiceProvider;
 class ImageServiceProvider extends BaseImageServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
      * Register the service provider.
      *
      * @return void

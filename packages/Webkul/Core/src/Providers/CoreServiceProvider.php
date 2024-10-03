@@ -13,6 +13,8 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        include __DIR__.'/../Http/helpers.php';
+
         $this->registerCommands();
 
         $this->registerOverrides();
@@ -23,19 +25,11 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        include __DIR__.'/../Http/helpers.php';
-
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'core');
 
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'core');
-
-        $this->app->register(EventServiceProvider::class);
-
-        $this->app->register(ImageServiceProvider::class);
-
-        $this->app->register(VisitorServiceProvider::class);
 
         Event::listen('bagisto.shop.layout.body.after', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
@@ -44,6 +38,10 @@ class CoreServiceProvider extends ServiceProvider
         Event::listen('bagisto.admin.layout.head', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
         });
+
+        $this->app->register(EventServiceProvider::class);
+        $this->app->register(ImageServiceProvider::class);
+        $this->app->register(VisitorServiceProvider::class);
     }
 
     /**
