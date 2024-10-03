@@ -2,15 +2,10 @@
 
 namespace Webkul\Product\Providers;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Console\Commands\Indexer;
-use Webkul\Product\Facades\ProductImage as ProductImageFacade;
-use Webkul\Product\Facades\ProductVideo as ProductVideoFacade;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
-use Webkul\Product\ProductImage;
-use Webkul\Product\ProductVideo;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -38,8 +33,6 @@ class ProductServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->registerCommands();
-
-        $this->registerFacades();
     }
 
     /**
@@ -58,31 +51,5 @@ class ProductServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([Indexer::class]);
         }
-    }
-
-    /**
-     * Register Bouncer as a singleton.
-     */
-    protected function registerFacades(): void
-    {
-        /**
-         * Product image.
-         */
-        $loader = AliasLoader::getInstance();
-
-        $loader->alias('product_image', ProductImageFacade::class);
-
-        $this->app->singleton('product_image', function () {
-            return app()->make(ProductImage::class);
-        });
-
-        /**
-         * Product video.
-         */
-        $loader->alias('product_video', ProductVideoFacade::class);
-
-        $this->app->singleton('product_video', function () {
-            return app()->make(ProductVideo::class);
-        });
     }
 }

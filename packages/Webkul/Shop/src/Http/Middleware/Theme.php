@@ -14,18 +14,17 @@ class Theme
      */
     public function handle($request, Closure $next)
     {
-        $themes = app('themes');
+        $themes = themes();
+
         $channel = core()->getCurrentChannel();
 
         if (
             $channel
             && $channelThemeCode = $channel->theme
         ) {
-            if ($themes->exists($channelThemeCode)) {
-                $themes->set($channelThemeCode);
-            } else {
-                $themes->set(config('themes.shop-default'));
-            }
+            $themes->exists($channelThemeCode)
+                ? $themes->set($channelThemeCode)
+                : $themes->set(config('themes.shop-default'));
         } else {
             $themes->set(config('themes.shop-default'));
         }
