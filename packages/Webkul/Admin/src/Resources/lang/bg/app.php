@@ -2977,8 +2977,8 @@ return [
                     'role'              => 'Роля',
                     'save-btn'          => 'Запази потребител',
                     'status'            => 'Статус',
-                    'title'             => 'Create User',
-                    'upload-image-info' => 'Upload a Profile Image (110px X 110px) in PNG or JPG Format',
+                    'title'             => 'Създай потребител',
+                    'upload-image-info' => 'Качете профилна снимка (110px X 110px) в PNG или JPG формат.',
                 ],
 
                 'datagrid' => [
