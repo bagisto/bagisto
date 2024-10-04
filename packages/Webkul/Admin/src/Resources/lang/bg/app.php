@@ -4127,7 +4127,7 @@ return [
                 'length-of' => ':length от',
                 'of'        => 'от',
                 'per-page'  => 'на страница',
-                'results'   => ':total разултати',
+                'results'   => ':total запис(а)',
                 'selected'  => ':total избрани',
 
                 'mass-actions' => [
