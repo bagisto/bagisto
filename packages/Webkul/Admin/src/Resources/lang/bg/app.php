@@ -2965,9 +2965,9 @@ return [
 
         'users' => [
             'index' => [
-                'admin' => 'Admin',
+                'admin' => 'Администратор',
                 'title' => 'Потребители',
-                'user'  => 'User',
+                'user'  => 'Потребител',
 
                 'create' => [
                     'confirm-password'  => 'Потвърди парола',
