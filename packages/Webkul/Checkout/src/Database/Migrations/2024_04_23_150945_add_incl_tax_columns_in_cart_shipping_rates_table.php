@@ -35,11 +35,14 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('cart_shipping_rates', function (Blueprint $table) {
-            $table->dropColumn('tax_amount');
-            $table->dropColumn('base_tax_amount');
-            $table->dropColumn('price_incl_tax');
+            $table->dropColumn('applied_tax_rate');
+
             $table->dropColumn('base_price_incl_tax');
-            $table->dropColumn('applied_taxes');
+            $table->dropColumn('price_incl_tax');
+
+            $table->dropColumn('base_tax_amount');
+            $table->dropColumn('tax_amount');
+            $table->dropColumn('tax_percent');
         });
     }
 };
