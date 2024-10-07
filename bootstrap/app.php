@@ -4,6 +4,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance;
 use Webkul\Core\Http\Middleware\SecureHeaders;
 use Webkul\Installer\Http\Middleware\CanInstall;
@@ -23,6 +24,12 @@ return Application::configure(basePath: dirname(__DIR__))
          * As of now, this has been added in the Admin and Shop providers. I will look for a better approach in Laravel 11 for this.
          */
         $middleware->remove(PreventRequestsDuringMaintenance::class);
+
+        /**
+         * Remove the default Laravel middleware that converts empty strings to null. First, handle all nullable cases,
+         * then remove this line.
+         */
+        $middleware->remove(ConvertEmptyStringsToNull::class);
 
         $middleware->append(SecureHeaders::class);
         $middleware->append(CanInstall::class);
