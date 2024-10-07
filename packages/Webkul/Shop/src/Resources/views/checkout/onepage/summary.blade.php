@@ -130,7 +130,6 @@
     @include('shop::checkout.coupon')
 
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.coupon.after') !!}
-    
 
     <!-- Shipping Rates -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
@@ -242,7 +241,6 @@
     </div>
 
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.tax.after') !!}
-    
 
     <!-- Cart Grand Total -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.grand_total.before') !!}

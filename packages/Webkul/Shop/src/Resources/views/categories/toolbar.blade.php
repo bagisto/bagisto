@@ -104,7 +104,7 @@
                 {!! view_render_event('bagisto.shop.categories.toolbar.pagination.after') !!}
             </div>
 
-            <!-- Modile Toolbar -->
+            <!-- Mobile Toolbar -->
             <div class="md:hidden">
                 <ul>
                     <li

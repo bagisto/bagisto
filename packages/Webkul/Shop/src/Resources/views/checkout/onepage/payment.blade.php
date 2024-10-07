@@ -106,7 +106,7 @@
                     </x-slot>
                 </x-shop::accordion>
 
-                {!! view_render_event('bagisto.shop.checkout.onepage.index.payment_method.accordion.before') !!}
+                {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.accordion.after') !!}
             </template>
         </div>
     </script>
