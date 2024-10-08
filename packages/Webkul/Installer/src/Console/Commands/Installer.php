@@ -423,7 +423,7 @@ class Installer extends Command
             $this->info('-----------------------------');
             $this->info('Congratulations!');
             $this->info('The installation has been finished and you can now use Bagisto.');
-            $this->info('Go to '.env('APP_URL').'/admin'.' and authenticate with:');
+            $this->info('Go to ' . env('APP_URL') . '/' . env('APP_ADMIN_URL', 'admin') . ' and authenticate with:');
             $this->info('Email: '.$adminEmail);
             $this->info('Password: '.$adminPassword);
             $this->info('Cheers!');
