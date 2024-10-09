@@ -1,6 +1,6 @@
 # UPGRADE Guide
 
-- [Upgrading To master From v2.2.1](#upgrade-master)
+- [Upgrading To master From v2.2](#upgrading-to-master-from-v22)
 
 ## High Impact Changes
 
@@ -10,7 +10,7 @@
 
 ## Medium Impact Changes
 
-- [The `Webkul\DataGrid\DataGrid` class](#the-datagrid-class)
+- [The `Webkul\DataGrid\DataGrid` class](#the-webkuldatagriddatagrid-class)
 
 ## Low Impact Changes
 
@@ -18,8 +18,7 @@
 
 - [Removal of Aliases and Singleton Facade Registry](#removal-of-aliases-and-singleton-facade-registry)
 
-<a name="upgrade-master"></a>
-## Upgrading To master From v2.2.1
+## Upgrading To master From v2.2
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
@@ -34,7 +33,7 @@ We have upgraded to Laravel 11 and Laravel now requires PHP 8.2.0 or greater.
 
 #### Composer Dependencies
 
-We have handled most of the dependencies mentioned by Laravel, so there is no need for further action on your part.
+We have handled most of the dependencies mentioned by Laravel, so there is no need for further action on your part. 
 
 #### NPM Depenencies
 
@@ -107,10 +106,75 @@ Use:
 
 This change applies to all our helper methods, not just `core()`. Always prefer the helper method if one is available.
 
-<a name="datagrid"></a>
+### Packages
+
+Below are the specific changes we have implemented in each package:
+
+### Core
+
+#### Unwanted Files Removed
+
+The following files have been removed as they are no longer needed:
+
+**Impact Probability: Low**
+
+- Configs
+
+```diff
+- src/Config/concord.php
+- src/Config/elasticsearch.php
+- src/Config/repository.php
+- src/Config/visitor.php
+```
+
+- Commands
+
+```diff
+- src/Console/Commands/BagistoPublish.php
+- src/Console/Commands/DownChannelCommand.php
+- src/Console/Commands/UpChannelCommand.php
+```
+
+These files have been deemed unnecessary in the current structure, streamlining the codebase and reducing clutter
+
+#### Exception Handler
+
+**Impact Probability: Low**
+
+n Bagisto, we have overridden the default Laravel 11 exception handler. Since the Laravel 11 application skeleton is now empty, we need to override the core Laravel exception handler instead of using the handler within the app directory.
+
+Additionally, the access modifiers for some of our methods have been updated.
+
+```diff
+- private function handleAuthenticationException(): void
++ protected function handleAuthenticationException(): void
+
+- private function handleHttpException(): void
++ protected function handleHttpException(): void
+
+- private function handleValidationException(): void
++ protected function handleValidationException(): void
+
+- private function handleServerException(): void
++ protected function handleServerException(): void
+```
+
+#### Mainenance Mode Middleware
+
+**Impact Probability: Low**
+
+The `CheckForMaintenanceMode` class has been removed, and a new class, `PreventRequestsDuringMaintenance`, has been introduced. In Laravel, `PreventRequestsDuringMaintenance` middleware is applied at the global level. However, in Bagisto, we have removed the middleware from the global scope and applied it at the route level.
+
+The reason for this change is that we need to display customized pages based on the current theme, and if the middleware is applied globally, the theme may not be accessible, resulting an error.
+
+```diff
+- CheckForMaintenanceMode.php
+
++ PreventRequestsDuringMaintenance.php
+```
+
 ### DataGrid
 
-<a name="the-datagrid-class"></a>
 #### The `Webkul\DataGrid\DataGrid` Class
 
 **Impact Probability: Medium**
