@@ -1854,7 +1854,7 @@
                         </div>
                     @endif
 
-                    <!-- Biiling Address -->
+                    <!-- Billing Address -->
                     @if ($order->billing_address)
                         <div class="text-sm font-medium text-zinc-500">
                             @lang('shop::app.customers.account.orders.view.billing-address')
@@ -1913,7 +1913,7 @@
 
             <!-- Desktop View -->
             <div class="mt-11 flex flex-wrap justify-between gap-x-11 gap-y-8 border-t border-zinc-200 pt-7 max-md:hidden">
-                <!-- Biiling Address -->
+                <!-- Billing Address -->
                 @if ($order->billing_address)
                     <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
                         <p class="text-base text-zinc-500 max-md:text-lg max-md:text-black">
