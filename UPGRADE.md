@@ -110,9 +110,9 @@ This change applies to all our helper methods, not just `core()`. Always prefer 
 
 Below are the specific changes we have implemented in each package:
 
-### Core
+#### Core
 
-#### Unwanted Files Removed
+##### Unwanted Files Removed
 
 The following files have been removed as they are no longer needed:
 
@@ -137,7 +137,7 @@ The following files have been removed as they are no longer needed:
 
 These files have been deemed unnecessary in the current structure, streamlining the codebase and reducing clutter
 
-#### Exception Handler
+##### Exception Handler
 
 **Impact Probability: Low**
 
@@ -159,7 +159,7 @@ Additionally, the access modifiers for some of our methods have been updated.
 + protected function handleServerException(): void
 ```
 
-#### Mainenance Mode Middleware
+##### Mainenance Mode Middleware
 
 **Impact Probability: Low**
 
@@ -173,9 +173,9 @@ The reason for this change is that we need to display customized pages based on 
 + PreventRequestsDuringMaintenance.php
 ```
 
-### DataGrid
+#### DataGrid
 
-#### The `Webkul\DataGrid\DataGrid` Class
+##### The `Webkul\DataGrid\DataGrid` Class
 
 **Impact Probability: Medium**
 
