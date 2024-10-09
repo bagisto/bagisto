@@ -41,6 +41,7 @@
         $locales = [
             'ar'    => 'arabic',
             'bn'    => 'bengali',
+            'bg'    => 'bulgarian',
             'de'    => 'german',
             'en'    => 'english',
             'es'    => 'spanish',
@@ -67,6 +68,7 @@
             'BDT' => 'bangladeshi-taka',
             'BHD' => 'bahraini-dinar',
             'BRL' => 'brazilian-real',
+            'BGN' => 'bulgarian-lev',
             'CAD' => 'canadian-dollar',
             'CHF' => 'swiss-franc',
             'CLP' => 'chilean-peso',
@@ -289,19 +291,12 @@
                         </div>
 
                         <p class="mb-6 w-full place-self-end text-left">
-                            <a
-                                class="bg-white text-blue-600 underline"
-                                href="https://bagisto.com/en/"
-                            >
+                            <a class="bg-white text-blue-600 underline" href="https://bagisto.com/en/">
                                 @lang('installer::app.installer.index.bagisto')
                             </a>
 
                             <span>@lang('installer::app.installer.index.bagisto-info')</span>
-
-                            <a
-                                class="bg-white text-blue-600 underline"
-                                href="https://webkul.com/"
-                            >
+                            <a class="bg-white text-blue-600 underline" href="https://webkul.com/">
                                 @lang('installer::app.installer.index.webkul')
                             </a>
                         </p>
@@ -342,7 +337,7 @@
                                         <!-- Application Name -->
                                         <x-installer::form.control-group class="mb-2.5">
                                             <x-installer::form.control-group.label>
-                                                @lang('Installation Wizard language')
+                                                @lang('installer::app.installer.index.installation-wizard.text')
                                             </x-installer::form.control-group.label>
 
                                             <x-installer::form.control-group.control

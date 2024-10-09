@@ -142,6 +142,7 @@ return [
                 'BDT' => 'Bangladeschischer Taka',
                 'BHD' => 'Bahreinse Dinar',
                 'BRL' => 'Brasilianischer Real',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'Kanadischer Dollar',
                 'CHF' => 'Schweizer Franken',
                 'CLP' => 'Chilenischer Peso',
@@ -206,6 +207,7 @@ return [
             'locales' => [
                 'ar'    => 'Arabisch',
                 'bn'    => 'Bengalisch',
+                'bg'    => 'Bulgarian',
                 'de'    => 'Deutsch',
                 'en'    => 'Englisch',
                 'es'    => 'Spanisch',

@@ -50,6 +50,7 @@ class Installer extends Command
     protected $locales = [
         'ar'    => 'Arabic',
         'bn'    => 'Bengali',
+        'bg'    => 'Bulgarian',
         'de'    => 'German',
         'en'    => 'English',
         'es'    => 'Spanish',
@@ -81,6 +82,7 @@ class Installer extends Command
         'BDT' => 'Bangladeshi Taka',
         'BHD' => 'Bahraini Dinar',
         'BRL' => 'Brazilian Real',
+        'BGN' => 'Bulgarian Lev',
         'CAD' => 'Canadian Dollar',
         'CHF' => 'Swiss Franc',
         'CLP' => 'Chilean Peso',

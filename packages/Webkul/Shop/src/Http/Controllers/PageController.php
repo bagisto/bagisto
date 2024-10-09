@@ -37,8 +37,9 @@ class PageController extends Controller
             if ($urlRewrite) {
                 return redirect()->to($urlRewrite->target_path, $urlRewrite->redirect_type);
             }
+        } else {
+            return view('shop::cms.page')->with('page', $page);
         }
-
-        return view('shop::cms.page')->with('page', $page);
+        abort(404);
     }
 }

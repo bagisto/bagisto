@@ -142,6 +142,7 @@ return [
                 'BDT' => 'Bangladeş Takası',
                 'BHD' => 'Bahreyn Dinarı',
                 'BRL' => 'Brezilya Reali',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'Kanada Doları',
                 'CHF' => 'İsviçre Frangı',
                 'CLP' => 'Şili Pesosu',
@@ -206,6 +207,7 @@ return [
             'locales'    => [
                 'ar'    => 'Arapça',
                 'bn'    => 'Bengali',
+                'bg'    => 'Bulgarian',
                 'de'    => 'Almanca',
                 'en'    => 'İngilizce',
                 'es'    => 'İspanyolca',
