@@ -811,6 +811,7 @@ return [
                     'pending-ordered-qty'      => '待发货数量: :qty',
                     'pending-ordered-qty-info' => '待发货数量将在发货后从相应的库存来源中扣减。在取消的情况下，待处理数量将可供销售。',
                     'title'                    => '库存',
+                    'minimum-sellable-qty'     => '最小采购订单数量',
                 ],
 
                 'categories' => [

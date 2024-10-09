@@ -613,6 +613,7 @@ return [
                 'write-a-review'    => 'Yorum Yazın',
             ],
 
+            'min-qty'                => 'Ürün için minimum satın alma siparişi miktarı: :min_sellable_qty',
             'add-to-cart'            => 'Sepete Ekle',
             'add-to-compare'         => 'Ürün karşılaştırmada',
             'add-to-wishlist'        => 'Dilek Listesine Ekle',

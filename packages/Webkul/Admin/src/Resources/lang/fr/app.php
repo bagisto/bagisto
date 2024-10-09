@@ -811,6 +811,7 @@ return [
                     'pending-ordered-qty'      => 'Quantité commandée en attente : :qty',
                     'pending-ordered-qty-info' => 'La quantité en attente de commande sera déduite de la source d\'inventaire respective après l\'expédition. En cas d\'annulation, la quantité en attente sera disponible à la vente.',
                     'title'                    => 'Inventaires',
+                    'minimum-sellable-qty'     => 'Quantité minimale de commande',
                 ],
 
                 'categories' => [

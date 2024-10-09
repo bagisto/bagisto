@@ -811,6 +811,7 @@ return [
                     'pending-ordered-qty'      => 'Bekleyen Sipariş Miktarı: :qty',
                     'pending-ordered-qty-info' => 'Bekleyen sipariş miktarı, sevkiyat sonrası ilgili envanter kaynağından düşürülecektir. İptal durumunda bekleme miktarı satışa sunulacaktır.',
                     'title'                    => 'Envanterler',
+                    'minimum-sellable-qty'     => 'Minimum satın alma siparişi miktarı',
                 ],
 
                 'categories' => [

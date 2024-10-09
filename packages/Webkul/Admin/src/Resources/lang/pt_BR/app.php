@@ -811,6 +811,7 @@ return [
                     'pending-ordered-qty'      => 'Quantidade Pendente Encomendada: :qty',
                     'pending-ordered-qty-info' => 'A quantidade pendente encomendada será deduzida da fonte de inventário correspondente após o envio. Em caso de cancelamento, a quantidade pendente estará disponível para venda.',
                     'title'                    => 'Inventários',
+                    'minimum-sellable-qty'     => 'Quantidade mínima do pedido de compra',
                 ],
 
                 'categories' => [

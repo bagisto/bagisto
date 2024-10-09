@@ -612,6 +612,7 @@ return [
                 'write-a-review'   => 'අදහස ලියන්න',
             ],
 
+            'min-qty'                => 'නිෂ්පාදනය සඳහා අවම මිලදී ගැනීමේ ඇණවුම් ප්‍රමාණය වේ :min_sellable_qty',
             'add-to-cart'            => 'කර්තෘකරුකරන්න',
             'add-to-compare'         => 'සාකච්ඡාකරන්න',
             'add-to-wishlist'        => 'පෙරහුරු සාක්ෂි කිරීම',
