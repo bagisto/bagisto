@@ -10,8 +10,6 @@
 
 ## Medium Impact Changes
 
-- [The `Webkul\DataGrid\DataGrid` class](#the-webkuldatagriddatagrid-class)
-
 ## Low Impact Changes
 
 - [Removed Publishable Stuffs](#removed-publishable-stuffs)
@@ -60,26 +58,6 @@ With Laravel 11, a new default application structure has been introduced, result
 
 Since Bagisto is built on top of Laravel, we have also updated Bagisto to Laravel 11 and adopted the same streamlined approach to maintain compatibility. For more detailed information, please refer to the [Laravel documentation](https://laravel.com/docs/11.x). 
 
-### Removed Publishable Stuffs
-
-**Impact Probability: Low**
-
-We have removed all the publishable registries from the service provider, and we are no longer publishing any files. Previously, configuration files were often published manually. However, with this update, most of the configuration files have been moved directly into the default config folder, simplifying the structure and eliminating the need for manual publishing.
-
-For instance, if you look at the **Core** package, there were previously four configuration files located in the `Config` folder of the package:
-
-```diff
-- packages/Webkul/Core/src/Config/*.php
-```
-
-These configuration files have now been moved to the root `config` folder:
-
-```diff
-+ config/*.php
-```
-
-This change consolidates the configuration files into a central location, following Laravel 11's convention and eliminating the need for separate publishable registries.
-
 ### Removal of Aliases and Singleton Facade Registry
 
 **Impact Probability: Low**
@@ -100,11 +78,40 @@ Use:
 
 ```diff
 + core()->getAllChannels(); // Recommended
+```
+
+OR
+
+```diff
++ use Webkul\Core\Facades\Core;
 
 + Core::getAllChannels();
 ```
 
+> [!NOTE]
+> Did you noticed, in the newer version of Bagisto, we have replaced all alias references with full namespaces.
+
 This change applies to all our helper methods, not just `core()`. Always prefer the helper method if one is available.
+
+### Removed Publishable Stuffs
+
+**Impact Probability: Low**
+
+We have removed all the publishable registries from the service provider, and we are no longer publishing any files. Previously, configuration files were often published manually. However, with this update, most of the configuration files have been moved directly into the default config folder, simplifying the structure and eliminating the need for manual publishing.
+
+For instance, if you look at the **Core** package, there were previously four configuration files located in the `Config` folder of the package:
+
+```diff
+- packages/Webkul/Core/src/Config/*.php
+```
+
+These configuration files have now been moved to the root `config` folder:
+
+```diff
++ config/*.php
+```
+
+This change consolidates the configuration files into a central location, following Laravel 11's convention and eliminating the need for separate publishable registries.
 
 ### Packages
 
@@ -159,7 +166,7 @@ Additionally, the access modifiers for some of our methods have been updated.
 + protected function handleServerException(): void
 ```
 
-##### Mainenance Mode Middleware
+##### Maintenance Mode Middleware
 
 **Impact Probability: Low**
 
