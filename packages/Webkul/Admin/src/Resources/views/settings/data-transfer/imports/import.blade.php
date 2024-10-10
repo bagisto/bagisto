@@ -184,7 +184,7 @@
                             class="primary-button place-self-start"
                             href="{{ route('admin.settings.data_transfer.imports.download_error_report', $import->id) }}"
                             target="_blank"
-                            v-if="importResource.errors_count"
+                            v-if="importResource.error_file_path && importResource.errors_count"
                         >
                             @lang('admin::app.settings.data-transfer.imports.import.download-error-report')
                         </a>
