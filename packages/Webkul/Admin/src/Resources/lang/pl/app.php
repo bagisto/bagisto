@@ -3464,6 +3464,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Ustaw opcje mapy witryny.',
+                    'title' => 'Mapa witryny',
+
+                    'settings' => [
+                        'enabled' => 'Włączone',
+                        'info'    => 'Włącz lub wyłącz mapę witryny dla swojej strony internetowej, aby poprawić optymalizację wyszukiwarek i poprawić doświadczenia użytkowników.',
+                        'title'   => 'Ustawienia',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Ustaw opcje limitów plików.',
+                        'max-file-size'    => 'Maksymalny rozmiar pliku',
+                        'max-url-per-file' => 'Maksymalna liczba URL na plik',
+                        'title'            => 'Limity plików',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Ustaw opcje częstotliwości i priorytetu dla adresu URL sklepu.',
+
+                        'frequency' => [
+                            'title' => 'Częstotliwość',
+
+                            'options' => [
+                                'always'  => 'Zawsze',
+                                'daily'   => 'Codziennie',
+                                'hourly'  => 'Co godzinę',
+                                'monthly' => 'Miesięcznie',
+                                'never'   => 'Nigdy',
+                                'weekly'  => 'Cotygodniowo',
+                                'yearly'  => 'Co roku',
+                            ],
+                        ],
+
+                        'title'    => 'Adres URL sklepu',
+                        'priority' => 'Priorytet',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Ustaw opcje częstotliwości i priorytetu dla kategorii.',
+
+                        'frequency' => [
+                            'title' => 'Częstotliwość',
+
+                            'options' => [
+                                'always'  => 'Zawsze',
+                                'daily'   => 'Codziennie',
+                                'hourly'  => 'Co godzinę',
+                                'monthly' => 'Miesięcznie',
+                                'never'   => 'Nigdy',
+                                'weekly'  => 'Cotygodniowo',
+                                'yearly'  => 'Co roku',
+                            ],
+                        ],
+
+                        'title'    => 'Kategorie',
+                        'priority' => 'Priorytet',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Ustaw opcje częstotliwości i priorytetu dla produktów.',
+
+                        'frequency' => [
+                            'title' => 'Częstotliwość',
+
+                            'options' => [
+                                'always'  => 'Zawsze',
+                                'daily'   => 'Codziennie',
+                                'hourly'  => 'Co godzinę',
+                                'monthly' => 'Miesięcznie',
+                                'never'   => 'Nigdy',
+                                'weekly'  => 'Cotygodniowo',
+                                'yearly'  => 'Co roku',
+                            ],
+                        ],
+
+                        'title'    => 'Produkty',
+                        'priority' => 'Priorytet',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Ustaw opcje częstotliwości i priorytetu dla stron CMS.',
+
+                        'frequency' => [
+                            'title' => 'Częstotliwość',
+
+                            'options' => [
+                                'always'  => 'Zawsze',
+                                'daily'   => 'Codziennie',
+                                'hourly'  => 'Co godzinę',
+                                'monthly' => 'Miesięcznie',
+                                'never'   => 'Nigdy',
+                                'weekly'  => 'Cotygodniowo',
+                                'yearly'  => 'Co roku',
+                            ],
+                        ],
+
+                        'title'    => 'Strony CMS',
+                        'priority' => 'Priorytet',
+                    ],
+                ],
             ],
 
             'catalog' => [

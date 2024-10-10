@@ -12,7 +12,8 @@ class ItemField
      * @var array
      */
     protected $veeValidateMappings = [
-        'min'=> 'min_value',
+        'max' => 'max_value',
+        'min' => 'min_value',
     ];
 
     /**

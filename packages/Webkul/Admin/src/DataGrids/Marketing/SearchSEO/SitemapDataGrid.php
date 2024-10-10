@@ -61,7 +61,7 @@ class SitemapDataGrid extends DataGrid
             'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.link-for-google'),
             'type'       => 'string',
             'closure'    => function ($row) {
-                return Storage::url($row->path.'/'.$row->file_name);
+                return Storage::url(clean_path($row->path.'/'.$row->file_name));
             },
         ]);
     }

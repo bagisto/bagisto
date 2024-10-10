@@ -3464,6 +3464,108 @@ return [
                         'vicuna'            => 'ビクーニャ',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'サイトマップのオプションを設定します。',
+                    'title' => 'サイトマップ',
+
+                    'settings' => [
+                        'enabled' => '有効',
+                        'info'    => 'サイトマップを有効または無効にして、検索エンジン最適化を改善し、ユーザーエクスペリエンスを向上させます。',
+                        'title'   => '設定',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'ファイル制限オプションを設定します。',
+                        'max-file-size'    => '最大ファイルサイズ',
+                        'max-url-per-file' => 'ファイルあたりの最大URL数',
+                        'title'            => 'ファイル制限',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'ストアURLの頻度と優先順位のオプションを設定します。',
+
+                        'frequency' => [
+                            'title' => '頻度',
+
+                            'options' => [
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
+                            ],
+                        ],
+
+                        'title'    => 'ストアURL',
+                        'priority' => '優先順位',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'カテゴリーの頻度と優先順位のオプションを設定します。',
+
+                        'frequency' => [
+                            'title' => '頻度',
+
+                            'options' => [
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
+                            ],
+                        ],
+
+                        'title'    => 'カテゴリー',
+                        'priority' => '優先順位',
+                    ],
+
+                    'products' => [
+                        'info'  => '製品の頻度と優先順位のオプションを設定します。',
+
+                        'frequency' => [
+                            'title' => '頻度',
+
+                            'options' => [
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
+                            ],
+                        ],
+
+                        'title'    => '製品',
+                        'priority' => '優先順位',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'CMSページの頻度と優先順位のオプションを設定します。',
+
+                        'frequency' => [
+                            'title' => '頻度',
+
+                            'options' => [
+                                'always'  => '常に',
+                                'daily'   => '毎日',
+                                'hourly'  => '毎時',
+                                'monthly' => '毎月',
+                                'never'   => '決してない',
+                                'weekly'  => '毎週',
+                                'yearly'  => '毎年',
+                            ],
+                        ],
+
+                        'title'    => 'CMSページ',
+                        'priority' => '優先順位',
+                    ],
+                ],
             ],
 
             'catalog' => [

@@ -3464,6 +3464,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Configurer les options du plan du site.',
+                    'title' => 'Plan du Site',
+
+                    'settings' => [
+                        'enabled' => 'Activé',
+                        'info'    => 'Activer ou désactiver le plan du site pour votre site web afin d\'améliorer le référencement et d\'améliorer l\'expérience utilisateur.',
+                        'title'   => 'Paramètres',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Configurer les options de limites de fichier.',
+                        'max-file-size'    => 'Taille maximale du fichier',
+                        'max-url-per-file' => 'Nombre maximal d\'URL par fichier',
+                        'title'            => 'Limites de Fichier',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Configurer les options de fréquence et de priorité pour l\'URL du magasin.',
+
+                        'frequency' => [
+                            'title' => 'Fréquence',
+
+                            'options' => [
+                                'always'  => 'Toujours',
+                                'daily'   => 'Quotidiennement',
+                                'hourly'  => 'Toutes les heures',
+                                'monthly' => 'Mensuellement',
+                                'never'   => 'Jamais',
+                                'weekly'  => 'Hebdomadairement',
+                                'yearly'  => 'Annuellement',
+                            ],
+                        ],
+
+                        'title'    => 'URL du Magasin',
+                        'priority' => 'Priorité',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Configurer les options de fréquence et de priorité pour les catégories.',
+
+                        'frequency' => [
+                            'title' => 'Fréquence',
+
+                            'options' => [
+                                'always'  => 'Toujours',
+                                'daily'   => 'Quotidiennement',
+                                'hourly'  => 'Toutes les heures',
+                                'monthly' => 'Mensuellement',
+                                'never'   => 'Jamais',
+                                'weekly'  => 'Hebdomadairement',
+                                'yearly'  => 'Annuellement',
+                            ],
+                        ],
+
+                        'title'    => 'Catégories',
+                        'priority' => 'Priorité',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Configurer les options de fréquence et de priorité pour les produits.',
+
+                        'frequency' => [
+                            'title' => 'Fréquence',
+
+                            'options' => [
+                                'always'  => 'Toujours',
+                                'daily'   => 'Quotidiennement',
+                                'hourly'  => 'Toutes les heures',
+                                'monthly' => 'Mensuellement',
+                                'never'   => 'Jamais',
+                                'weekly'  => 'Hebdomadairement',
+                                'yearly'  => 'Annuellement',
+                            ],
+                        ],
+
+                        'title'    => 'Produits',
+                        'priority' => 'Priorité',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Configurer les options de fréquence et de priorité pour les pages CMS.',
+
+                        'frequency' => [
+                            'title' => 'Fréquence',
+
+                            'options' => [
+                                'always'  => 'Toujours',
+                                'daily'   => 'Quotidiennement',
+                                'hourly'  => 'Toutes les heures',
+                                'monthly' => 'Mensuellement',
+                                'never'   => 'Jamais',
+                                'weekly'  => 'Hebdomadairement',
+                                'yearly'  => 'Annuellement',
+                            ],
+                        ],
+
+                        'title'    => 'Pages CMS',
+                        'priority' => 'Priorité',
+                    ],
+                ],
             ],
 
             'catalog' => [

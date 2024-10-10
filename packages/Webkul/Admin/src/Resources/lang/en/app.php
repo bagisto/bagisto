@@ -3464,6 +3464,108 @@ return [
                         'vicuna'            => 'Vicuna',
                     ],
                 ],
+
+                'sitemap' => [
+                    'info'  => 'Set sitemap options.',
+                    'title' => 'Sitemap',
+
+                    'settings' => [
+                        'enabled' => 'Enabled',
+                        'info'    => 'Enable or disable the sitemap for your website to improve search engine optimization and enhance user experience.',
+                        'title'   => 'Settings',
+                    ],
+
+                    'file-limits' => [
+                        'info'             => 'Set file limits options.',
+                        'max-file-size'    => 'Maximum file size',
+                        'max-url-per-file' => 'Maximum no. of URLs per file',
+                        'title'            => 'File Limits',
+                    ],
+
+                    'store-url' => [
+                        'info'  => 'Set frequency and priority option for the store URL.',
+
+                        'frequency' => [
+                            'title' => 'Frequency',
+
+                            'options' => [
+                                'always'  => 'Always',
+                                'daily'   => 'Daily',
+                                'hourly'  => 'Hourly',
+                                'monthly' => 'Monthly',
+                                'never'   => 'Never',
+                                'weekly'  => 'Weekly',
+                                'yearly'  => 'Yearly',
+                            ],
+                        ],
+
+                        'title'    => 'Store URL',
+                        'priority' => 'Priority',
+                    ],
+
+                    'categories' => [
+                        'info'  => 'Set frequency and priority option for the categories.',
+
+                        'frequency' => [
+                            'title' => 'Frequency',
+
+                            'options' => [
+                                'always'  => 'Always',
+                                'daily'   => 'Daily',
+                                'hourly'  => 'Hourly',
+                                'monthly' => 'Monthly',
+                                'never'   => 'Never',
+                                'weekly'  => 'Weekly',
+                                'yearly'  => 'Yearly',
+                            ],
+                        ],
+
+                        'title'    => 'Categories',
+                        'priority' => 'Priority',
+                    ],
+
+                    'products' => [
+                        'info'  => 'Set frequency and priority option for the products.',
+
+                        'frequency' => [
+                            'title' => 'Frequency',
+
+                            'options' => [
+                                'always'  => 'Always',
+                                'daily'   => 'Daily',
+                                'hourly'  => 'Hourly',
+                                'monthly' => 'Monthly',
+                                'never'   => 'Never',
+                                'weekly'  => 'Weekly',
+                                'yearly'  => 'Yearly',
+                            ],
+                        ],
+
+                        'title'    => 'Products',
+                        'priority' => 'Priority',
+                    ],
+
+                    'cms' => [
+                        'info'  => 'Set frequency and priority option for the CMS pages.',
+
+                        'frequency' => [
+                            'title' => 'Frequency',
+
+                            'options' => [
+                                'always'  => 'Always',
+                                'daily'   => 'Daily',
+                                'hourly'  => 'Hourly',
+                                'monthly' => 'Monthly',
+                                'never'   => 'Never',
+                                'weekly'  => 'Weekly',
+                                'yearly'  => 'Yearly',
+                            ],
+                        ],
+
+                        'title'    => 'CMS Pages',
+                        'priority' => 'Priority',
+                    ],
+                ],
             ],
 
             'catalog' => [
