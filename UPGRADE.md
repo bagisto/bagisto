@@ -10,11 +10,15 @@
 
 ## Medium Impact Changes
 
+- [Environment Keys Changes](#environment-keys-changes)
+
 ## Low Impact Changes
 
 - [Removed Publishable Stuffs](#removed-publishable-stuffs)
 
 - [Removal of Aliases and Singleton Facade Registry](#removal-of-aliases-and-singleton-facade-registry)
+
+- [Schedule Commands Moved To Package](#schedule-commands-moved-to-package)
 
 ## Upgrading To master From v2.2
 
@@ -57,6 +61,59 @@ We have upgraded the NPM dependencies to Vite 5 and the Laravel Vite Plugin to v
 With Laravel 11, a new default application structure has been introduced, resulting in a leaner setup with fewer default files. This update reduces the number of service providers, middleware, and configuration files in the framework.
 
 Since Bagisto is built on top of Laravel, we have also updated Bagisto to Laravel 11 and adopted the same streamlined approach to maintain compatibility. For more detailed information, please refer to the [Laravel documentation](https://laravel.com/docs/11.x). 
+
+### Environment Keys Changes
+
+**Impact Probability: Medium**
+
+We have synchronized most of the new .env keys introduced in Laravel's latest release (version 11). Below, we have listed only the keys that have been newly added or had their names changed in this version.
+
+```diff
+- CACHE_DRIVER=file
++ CACHE_STORE=file
+
+- BROADCAST_DRIVER=log
++ BROADCAST_CONNECTION=log
+
+- QUEUE_DRIVER=sync
++ QUEUE_CONNECTION=database
+```
+
+Additionally, the following keys have been removed to prevent the `.env` file from becoming unnecessarily large. These keys are not required unless the related services are being used. In a fresh installation of Bagisto, these keys will not be present by default; you will need to add them manually if you plan to use the corresponding services.
+
+```diff
+- FIXER_API_KEY=
+- EXCHANGE_RATES_API_KEY=
+- EXCHANGE_RATES_API_ENDPOINT=
+
+- PUSHER_APP_ID=
+- PUSHER_APP_KEY=
+- PUSHER_APP_SECRET=
+- PUSHER_APP_CLUSTER=mt1
+
+- MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+- MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+- FACEBOOK_CLIENT_ID=
+- FACEBOOK_CLIENT_SECRET=
+- FACEBOOK_CALLBACK_URL=https://yourhost.com/customer/social-login/facebook/callback
+
+- TWITTER_CLIENT_ID=
+- TWITTER_CLIENT_SECRET=
+- TWITTER_CALLBACK_URL=https://yourhost.com/customer/social-login/twitter/callback
+
+- GOOGLE_CLIENT_ID=
+- GOOGLE_CLIENT_SECRET=
+- GOOGLE_CALLBACK_URL=https://yourhost.com/customer/social-login/google/callback
+
+- LINKEDIN_CLIENT_ID=
+- LINKEDIN_CLIENT_SECRET=
+- LINKEDIN_CALLBACK_URL=https://yourhost.com/customer/social-login/linkedin-openid/callback
+
+- GITHUB_CLIENT_ID=
+- GITHUB_CLIENT_SECRET=
+- GITHUB_CALLBACK_URL=https://yourhost.com/customer/social-login/github/callback
+```
 
 ### Removal of Aliases and Singleton Facade Registry
 
@@ -112,6 +169,27 @@ These configuration files have now been moved to the root `config` folder:
 ```
 
 This change consolidates the configuration files into a central location, following Laravel 11's convention and eliminating the need for separate publishable registries.
+
+### Schedule Commands Moved To Package
+
+**Impact Probability: Low**
+
+All scheduled commands previously registered in the Kernel have now been moved to their respective packages. Since each command belongs to a specific package, it is more appropriate for the package itself to handle its own commands. Therefore, each individual package is now responsible for registering its respective commands.
+
+```diff
+- $schedule->command('invoice:cron')->dailyAt('3:00');
+- $schedule->command('indexer:index --type=price')->dailyAt('00:01');
+- $schedule->command('product:price-rule:index')->dailyAt('00:01');
+
++ // Core Package
++ $schedule->command('invoice:cron')->dailyAt('3:00');
+
++ // Product Package
++ $schedule->command('indexer:index --type=price')->dailyAt('00:01');
+
++ // CatalogRule Package
++ $schedule->command('product:price-rule:index')->dailyAt('00:01');
+```
 
 ### Packages
 
