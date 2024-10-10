@@ -3,6 +3,7 @@
 namespace Webkul\Checkout\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Webkul\Checkout\Cart as BaseCart;
 
 class Cart extends Facade
 {
@@ -13,6 +14,6 @@ class Cart extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'cart';
+        return BaseCart::class;
     }
 }

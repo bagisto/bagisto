@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('theme_customization_id')->unsigned();
             $table->string('locale');
             $table->json('options');
-            $table->foreign('theme_customization_id')->references('id')->on('theme_customizations')->onDelete('cascade');
+            $table->foreign('theme_customization_id', 'theme_customization_id_foreign')->references('id')->on('theme_customizations')->onDelete('cascade');
         });
     }
 

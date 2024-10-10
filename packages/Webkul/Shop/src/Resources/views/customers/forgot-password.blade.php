@@ -79,7 +79,7 @@
 
                     <div>
 
-                        {!! Captcha::render() !!}
+                        {!! \Webkul\Customer\Facades\Captcha::render() !!}
 
                     </div>
 
@@ -119,7 +119,7 @@
 
     @push('scripts')
 
-        {!! Captcha::renderJS() !!}
+        {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
 
     @endpush
 </x-shop::layouts>

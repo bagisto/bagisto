@@ -1,192 +1,190 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-cbb58df2.css",
-    "isEntry": true,
-    "src": "src/Resources/assets/css/app.css"
+    "file": "assets/app-BF-F-NA4.css",
+    "src": "src/Resources/assets/css/app.css",
+    "isEntry": true
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
-    "file": "assets/bagisto-admin-c1c971d5.woff",
+    "file": "assets/bagisto-admin-DRpisRbe.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
   },
   "src/Resources/assets/images/average-orders.svg": {
-    "file": "assets/average-orders-71c4bf9a.svg",
+    "file": "assets/average-orders-UpY6pgyW.svg",
     "src": "src/Resources/assets/images/average-orders.svg"
   },
   "src/Resources/assets/images/customers.svg": {
-    "file": "assets/customers-199df769.svg",
+    "file": "assets/customers-BfcJGhnh.svg",
     "src": "src/Resources/assets/images/customers.svg"
   },
   "src/Resources/assets/images/dark-logo.svg": {
-    "file": "assets/dark-logo-ea7984e7.svg",
+    "file": "assets/dark-logo-P5H7MBtx.svg",
     "src": "src/Resources/assets/images/dark-logo.svg"
   },
   "src/Resources/assets/images/empty-placeholders/customers.svg": {
-    "file": "assets/customers-57f8166b.svg",
+    "file": "assets/customers-BksiMJdH.svg",
     "src": "src/Resources/assets/images/empty-placeholders/customers.svg"
   },
   "src/Resources/assets/images/empty-placeholders/default.svg": {
-    "file": "assets/default-2c56169a.svg",
+    "file": "assets/default-Bzl-phiD.svg",
     "src": "src/Resources/assets/images/empty-placeholders/default.svg"
   },
   "src/Resources/assets/images/empty-placeholders/orders.svg": {
-    "file": "assets/orders-5dd62d9d.svg",
+    "file": "assets/orders-BL3uXoui.svg",
     "src": "src/Resources/assets/images/empty-placeholders/orders.svg"
   },
   "src/Resources/assets/images/empty-placeholders/report-empty.svg": {
-    "file": "assets/report-empty-c3bb4a01.svg",
+    "file": "assets/report-empty-B0NsGHhI.svg",
     "src": "src/Resources/assets/images/empty-placeholders/report-empty.svg"
   },
   "src/Resources/assets/images/empty-placeholders/reviews.svg": {
-    "file": "assets/reviews-17309002.svg",
+    "file": "assets/reviews-UDFC2zlO.svg",
     "src": "src/Resources/assets/images/empty-placeholders/reviews.svg"
   },
   "src/Resources/assets/images/error.svg": {
-    "file": "assets/error-4179d5c7.svg",
+    "file": "assets/error-ClRu8L1K.svg",
     "src": "src/Resources/assets/images/error.svg"
   },
   "src/Resources/assets/images/favicon.ico": {
-    "file": "assets/favicon-a4003609.ico",
+    "file": "assets/favicon--PZ4cBiP.ico",
     "src": "src/Resources/assets/images/favicon.ico"
   },
   "src/Resources/assets/images/icon-add-product.svg": {
-    "file": "assets/icon-add-product-e3232d62.svg",
+    "file": "assets/icon-add-product-nFt8sucb.svg",
     "src": "src/Resources/assets/images/icon-add-product.svg"
   },
   "src/Resources/assets/images/icon-discount.svg": {
-    "file": "assets/icon-discount-e37d1aed.svg",
+    "file": "assets/icon-discount-muGQmsXC.svg",
     "src": "src/Resources/assets/images/icon-discount.svg"
   },
   "src/Resources/assets/images/icon-options.svg": {
-    "file": "assets/icon-options-ebfcd268.svg",
-    "src": "src/Resources/assets/images/settings/shipping-method.svg"
+    "file": "assets/icon-options-B9pp5RQf.svg",
+    "src": "src/Resources/assets/images/icon-options.svg"
   },
   "src/Resources/assets/images/logo.svg": {
-    "file": "assets/logo-f02a1643.svg",
+    "file": "assets/logo-CXf-crI0.svg",
     "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/product-placeholders/front.svg": {
-    "file": "assets/front-93490c30.svg",
+    "file": "assets/front-CFI3VfdH.svg",
     "src": "src/Resources/assets/images/product-placeholders/front.svg"
   },
   "src/Resources/assets/images/product-placeholders/next-1.svg": {
-    "file": "assets/next-1-91bb148a.svg",
+    "file": "assets/next-1-C2hl59rC.svg",
     "src": "src/Resources/assets/images/product-placeholders/next-1.svg"
   },
   "src/Resources/assets/images/product-placeholders/next-2.svg": {
-    "file": "assets/next-2-6aace5ca.svg",
+    "file": "assets/next-2-wWoAa-nH.svg",
     "src": "src/Resources/assets/images/product-placeholders/next-2.svg"
   },
   "src/Resources/assets/images/product-placeholders/size.svg": {
-    "file": "assets/size-04e2a252.svg",
+    "file": "assets/size-DCBc_ei4.svg",
     "src": "src/Resources/assets/images/product-placeholders/size.svg"
   },
   "src/Resources/assets/images/product-placeholders/use-cases.svg": {
-    "file": "assets/use-cases-4a33de1a.svg",
+    "file": "assets/use-cases-D4JhqD_Z.svg",
     "src": "src/Resources/assets/images/product-placeholders/use-cases.svg"
   },
   "src/Resources/assets/images/product-placeholders/zoom.svg": {
-    "file": "assets/zoom-0c75bed3.svg",
+    "file": "assets/zoom-CynTuPTI.svg",
     "src": "src/Resources/assets/images/product-placeholders/zoom.svg"
   },
   "src/Resources/assets/images/settings/address.svg": {
-    "file": "assets/address-c3d46b29.svg",
+    "file": "assets/address-DH7M3lNY.svg",
     "src": "src/Resources/assets/images/settings/address.svg"
   },
   "src/Resources/assets/images/settings/captcha.svg": {
-    "file": "assets/captcha-061d77ab.svg",
+    "file": "assets/captcha-CcuSNj-t.svg",
     "src": "src/Resources/assets/images/settings/captcha.svg"
   },
   "src/Resources/assets/images/settings/checkout.svg": {
-    "file": "assets/checkout-e5efdb8e.svg",
+    "file": "assets/checkout-BvqH__Gi.svg",
     "src": "src/Resources/assets/images/settings/checkout.svg"
   },
   "src/Resources/assets/images/settings/email.svg": {
-    "file": "assets/email-5653e8d5.svg",
+    "file": "assets/email-5AJwT575.svg",
     "src": "src/Resources/assets/images/settings/email.svg"
   },
   "src/Resources/assets/images/settings/inventory.svg": {
-    "file": "assets/inventory-d69907d8.svg",
+    "file": "assets/inventory-D1uKZcKj.svg",
     "src": "src/Resources/assets/images/settings/inventory.svg"
   },
   "src/Resources/assets/images/settings/invoice.svg": {
-    "file": "assets/invoice-bbc6d6a8.svg",
+    "file": "assets/invoice-qNYgi9ea.svg",
     "src": "src/Resources/assets/images/settings/invoice.svg"
   },
   "src/Resources/assets/images/settings/magic-ai.svg": {
-    "file": "assets/magic-ai-2b88cb86.svg",
+    "file": "assets/magic-ai-C0gXN1sk.svg",
     "src": "src/Resources/assets/images/settings/magic-ai.svg"
   },
   "src/Resources/assets/images/settings/order.svg": {
-    "file": "assets/order-c8714dda.svg",
+    "file": "assets/order-Bj8Kur9c.svg",
     "src": "src/Resources/assets/images/settings/order.svg"
   },
   "src/Resources/assets/images/settings/payment-method.svg": {
-    "file": "assets/payment-method-10ea91e1.svg",
+    "file": "assets/payment-method-Bu6ybGKX.svg",
     "src": "src/Resources/assets/images/settings/payment-method.svg"
   },
   "src/Resources/assets/images/settings/product.svg": {
-    "file": "assets/product-357134fb.svg",
+    "file": "assets/product-CoE-Gk7v.svg",
     "src": "src/Resources/assets/images/settings/product.svg"
   },
   "src/Resources/assets/images/settings/settings.svg": {
-    "file": "assets/settings-26b93165.svg",
+    "file": "assets/settings-DhKa03Cc.svg",
     "src": "src/Resources/assets/images/settings/settings.svg"
   },
   "src/Resources/assets/images/settings/shipping-method.svg": {
-    "file": "assets/icon-options-ebfcd268.svg",
-    "src": "src/Resources/assets/images/settings/shipping-method.svg"
+    "file": "assets/icon-options-B9pp5RQf.svg",
+    "src": "src/Resources/assets/images/icon-options.svg"
   },
   "src/Resources/assets/images/settings/shipping.svg": {
-    "file": "assets/shipping-ceb1cb37.svg",
+    "file": "assets/shipping-B_qRLPCF.svg",
     "src": "src/Resources/assets/images/settings/shipping.svg"
   },
   "src/Resources/assets/images/settings/store-information.svg": {
-    "file": "assets/store-information-a7d64429.svg",
+    "file": "assets/store-information-Cjd5D_oN.svg",
     "src": "src/Resources/assets/images/settings/store-information.svg"
   },
   "src/Resources/assets/images/settings/store.svg": {
-    "file": "assets/store-8d27c0df.svg",
+    "file": "assets/store-DyMTCGK9.svg",
     "src": "src/Resources/assets/images/settings/store.svg"
   },
   "src/Resources/assets/images/settings/tax.svg": {
-    "file": "assets/tax-20f847de.svg",
+    "file": "assets/tax-BQgwf9VP.svg",
     "src": "src/Resources/assets/images/settings/tax.svg"
   },
   "src/Resources/assets/images/settings/theme.svg": {
-    "file": "assets/theme-f4d870b8.svg",
+    "file": "assets/theme-Bwf_p88V.svg",
     "src": "src/Resources/assets/images/settings/theme.svg"
   },
   "src/Resources/assets/images/spinner.svg": {
-    "file": "assets/spinner-08c27ad5.svg",
+    "file": "assets/spinner-CkjnFMgn.svg",
     "src": "src/Resources/assets/images/spinner.svg"
   },
   "src/Resources/assets/images/total-orders.svg": {
-    "file": "assets/total-orders-f1b2017e.svg",
+    "file": "assets/total-orders-wduYhIFA.svg",
     "src": "src/Resources/assets/images/total-orders.svg"
   },
   "src/Resources/assets/images/total-sales.svg": {
-    "file": "assets/total-sales-5b2c7b58.svg",
+    "file": "assets/total-sales-B1A9STxj.svg",
     "src": "src/Resources/assets/images/total-sales.svg"
   },
   "src/Resources/assets/images/unpaid-invoices.svg": {
-    "file": "assets/unpaid-invoices-6c51662d.svg",
+    "file": "assets/unpaid-invoices-BgQgwKF1.svg",
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
-  "src/Resources/assets/js/app.css": {
-    "file": "assets/app-c04ede37.css",
-    "src": "src/Resources/assets/js/app.css"
-  },
   "src/Resources/assets/js/app.js": {
-    "css": [
-      "assets/app-c04ede37.css"
-    ],
-    "file": "assets/app-5c9f2d83.js",
+    "file": "assets/app-CFql2OFl.js",
+    "name": "app",
+    "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
-    "src": "src/Resources/assets/js/app.js"
+    "css": [
+      "assets/app-C7s3BGlm.css"
+    ]
   },
   "src/Resources/assets/js/chart.js": {
-    "file": "assets/chart-1d2144fe.js",
-    "isEntry": true,
-    "src": "src/Resources/assets/js/chart.js"
+    "file": "assets/chart-DeBQbFuW.js",
+    "name": "chart",
+    "src": "src/Resources/assets/js/chart.js",
+    "isEntry": true
   }
 }
