@@ -27,6 +27,7 @@ return [
                 'height'               => 'גובה',
                 'length'               => 'אורך',
                 'manage-stock'         => 'ניהול מלאי',
+                'minimum-sellable-qty' => 'כמות הזמנת רכש מינימלית',
                 'meta-description'     => 'תיאור מטא',
                 'meta-keywords'        => 'מילות מפתח מטא',
                 'meta-title'           => 'כותרת מטא',

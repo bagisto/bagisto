@@ -27,6 +27,7 @@ return [
                 'height'               => 'Высота',
                 'length'               => 'Длина',
                 'manage-stock'         => 'Управление запасами',
+                'minimum-sellable-qty' => 'Минимальный объем заказа на закупку',
                 'meta-description'     => 'Мета-описание',
                 'meta-keywords'        => 'Мета-ключевые слова',
                 'meta-title'           => 'Мета-заголовок',

@@ -27,6 +27,7 @@ return [
                 'height'               => 'Yükseklik',
                 'length'               => 'Uzunluk',
                 'manage-stock'         => 'Stoğu Yönet',
+                'minimum-sellable-qty' => 'Minimum satın alma siparişi miktarı',
                 'meta-description'     => 'Meta Açıklama',
                 'meta-keywords'        => 'Meta Anahtar Kelimeler',
                 'meta-title'           => 'Meta Başlık',

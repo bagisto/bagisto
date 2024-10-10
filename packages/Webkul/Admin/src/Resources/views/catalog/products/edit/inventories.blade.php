@@ -41,21 +41,6 @@
         </x-admin::form.control-group>
     @endforeach
 
-    <x-admin::form.control-group>
-        <x-admin::form.control-group.label>
-            @lang('admin::app.catalog.products.edit.inventories.minimum-sellable-qty')
-        </x-admin::form.control-group.label>
-
-        <x-admin::form.control-group.control
-            type="text"
-            :name="'min_sellable_qty'"
-            :rules="'numeric|min:1'"
-            :value="$product->min_sellable_qty"
-        />
-
-        <x-admin::form.control-group.error :control-name="'min_sellable_qty'" />
-    </x-admin::form.control-group>
-
 </v-inventories>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.controls.after', ['product' => $product]) !!}

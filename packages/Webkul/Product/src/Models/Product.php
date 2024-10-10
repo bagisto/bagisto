@@ -35,7 +35,6 @@ class Product extends Model implements ProductContract
         'attribute_family_id',
         'sku',
         'parent_id',
-        'min_sellable_qty',
     ];
 
     /**

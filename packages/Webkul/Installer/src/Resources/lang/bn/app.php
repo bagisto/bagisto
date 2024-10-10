@@ -27,6 +27,7 @@ return [
                 'height'               => 'উচ্চতা',
                 'length'               => 'দৈর্ঘ্য',
                 'manage-stock'         => 'স্টক পরিচালনা করুন',
+                'minimum-sellable-qty' => 'ন্যূনতম ক্রয় অর্ডার পরিমাণ',
                 'meta-description'     => 'মেটা বর্ণনা',
                 'meta-keywords'        => 'মেটা কীওয়ার্ড',
                 'meta-title'           => 'মেটা শিরোনাম',

@@ -811,7 +811,6 @@ return [
                     'pending-ordered-qty'      => 'Oczekująca ilość zamówiona: :qty',
                     'pending-ordered-qty-info' => 'Oczekująca ilość zamówienia zostanie odjęta z odpowiedniego źródła magazynu po wysyłce. W przypadku anulowania zamówienia oczekująca ilość będzie dostępna do sprzedaży.',
                     'title'                    => 'Zasoby magazynowe',
-                    'minimum-sellable-qty'     => 'Minimalna ilość zamówienia',
                 ],
 
                 'categories' => [

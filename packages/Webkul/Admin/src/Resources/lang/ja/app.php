@@ -811,7 +811,6 @@ return [
                     'pending-ordered-qty'      => '保留中の注文数量: :qty',
                     'pending-ordered-qty-info' => '出荷後、対応する在庫ソースから保留中の注文数量が差し引かれます。キャンセルの場合、保留中の数量は販売可能になります。',
                     'title'                    => '在庫',
-                    'minimum-sellable-qty'     => '最小発注数量',
                 ],
 
                 'categories' => [

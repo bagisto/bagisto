@@ -811,7 +811,6 @@ return [
                     'pending-ordered-qty'      => 'Ausstehende Bestellmenge: :qty',
                     'pending-ordered-qty-info' => 'Die ausstehende Bestellmenge wird nach dem Versand von der jeweiligen Lagerquelle abgezogen. Im Falle einer Stornierung steht die ausstehende Menge zum Verkauf zur Verfügung.',
                     'title'                    => 'Bestände',
-                    'minimum-sellable-qty'     => 'Mindestbestellmenge',
                 ],
 
                 'categories' => [
