@@ -1,12 +1,14 @@
 @props([
     'name'  => '',
     'value' => 1,
+    'min_value' => 1,
 ])
 
 <v-quantity-changer
     {{ $attributes->merge(['class' => 'flex items-center border border-navyBlue']) }}
     name="{{ $name }}"
     value="{{ $value }}"
+    min_value="{{ $min_value }}"
 >
 </v-quantity-changer>
 
@@ -16,7 +18,7 @@
         id="v-quantity-changer-template"
     >
         <div>
-            <span 
+            <span
                 class="icon-minus cursor-pointer text-2xl"
                 role="button"
                 tabindex="0"
@@ -28,8 +30,8 @@
             <p class="w-2.5 select-none text-center max-sm:text-sm">
                 @{{ quantity }}
             </p>
-            
-            <span 
+
+            <span
                 class="icon-plus cursor-pointer text-2xl"
                 role="button"
                 tabindex="0"
@@ -50,7 +52,7 @@
         app.component("v-quantity-changer", {
             template: '#v-quantity-changer-template',
 
-            props:['name', 'value'],
+            props:['name', 'value', 'min_value'],
 
             data() {
                 return  {
@@ -70,7 +72,7 @@
                 },
 
                 decrease() {
-                    if (this.quantity > 1) {
+                    if (this.quantity > this.min_value) {
                         this.quantity -= 1;
 
                         this.$emit('change', this.quantity);

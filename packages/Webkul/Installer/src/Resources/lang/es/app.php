@@ -27,6 +27,7 @@ return [
                 'height'               => 'Altura',
                 'length'               => 'Longitud',
                 'manage-stock'         => 'Gestionar Stock',
+                'minimum-sellable-qty' => 'Cantidad mínima de orden de compra',
                 'meta-description'     => 'Meta Descripción',
                 'meta-keywords'        => 'Meta Palabras Clave',
                 'meta-title'           => 'Meta Título',

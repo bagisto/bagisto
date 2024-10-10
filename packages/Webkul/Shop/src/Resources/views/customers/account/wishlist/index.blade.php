@@ -45,7 +45,7 @@
                                 class="grid md:hidden"
                                 href="{{ route('shop.customers.account.index') }}"
                             >
-                                <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>                                    
+                                <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                             </a>
 
                             <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
@@ -66,8 +66,8 @@
                         {!! view_render_event('bagisto.shop.customers.account.wishlist.delete_all.after') !!}
                     </div>
 
-                    <div 
-                        v-if="wishlistItems.length" 
+                    <div
+                        v-if="wishlistItems.length"
                         v-for="(item, index) in wishlistItems"
                         class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-md:my-5 max-md:last:mb-0"
                     >
@@ -81,11 +81,11 @@
 
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
-                                                <img 
+                                                <img
                                                     class="h-28 max-h-28 w-28 max-w-28 rounded-xl max-md:h-20 max-md:max-h-20 max-md:w-20 max-md:max-w-20"
-                                                    :src="item.product.base_image.small_image_url" 
+                                                    :src="item.product.base_image.small_image_url"
                                                     alt="Product Image"
-                                                /> 
+                                                />
                                             </a>
 
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.image.after') !!}
@@ -98,7 +98,7 @@
                                                 </p>
 
                                                 <span
-                                                    @click="remove(item.id)" 
+                                                    @click="remove(item.id)"
                                                     class="icon-bin hidden text-2xl max-md:block"
                                                 >
                                                 </span>
@@ -116,7 +116,7 @@
                                                             @click="item.option_show = ! item.option_show"
                                                         >
                                                             @lang('shop::app.customers.account.wishlist.see-details')
-        
+
                                                             <span
                                                                 class="text-2xl"
                                                                 :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
@@ -126,14 +126,14 @@
                                                     </div>
 
                                                     <div
-                                                        class="grid gap-2" 
+                                                        class="grid gap-2"
                                                         v-show="item.option_show"
                                                     >
                                                         <div v-for="option in item.options?.attributes">
                                                             <p class="text-sm font-medium">
                                                                 @{{ option.attribute_name + ':' }}
                                                             </p>
-        
+
                                                             <p class="text-sm">
                                                                 @{{ option.option_label }}
                                                             </p>
@@ -143,8 +143,8 @@
                                             </div>
 
                                             <div class="max-md:block md:hidden">
-                                                <p 
-                                                    class="text-lg font-semibold max-md:text-sm" 
+                                                <p
+                                                    class="text-lg font-semibold max-md:text-sm"
                                                     v-html="item.product.min_price"
                                                 >
                                                 </p>
@@ -152,8 +152,8 @@
                                                 {!! view_render_event('bagisto.shop.customers.account.wishlist.remove_button.before') !!}
 
                                                 <!--Wishlist Item removed button-->
-                                                <a 
-                                                    class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden" 
+                                                <a
+                                                    class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden"
                                                     @click="remove(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.remove')
@@ -168,7 +168,8 @@
                                             <div class="flex gap-5 max-md:mt-2.5">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
-                                                    ::value="item.options.quantity ?? 1"
+                                                    ::value="item.product.min_sellable_qty ?? 1"
+                                                    ::min_value="item.product.min_sellable_qty ?? 1"
                                                     class="flex max-h-10 items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5 max-md:gap-x-1 max-md:px-1.5 max-md:py-1"
                                                     @change="setItemQuantity($event, item)"
                                                 />
@@ -190,14 +191,14 @@
                                     </div>
 
                                     <div class="max-md:hidden">
-                                        <p 
-                                            class="text-lg font-semibold" 
+                                        <p
+                                            class="text-lg font-semibold"
                                             v-html="item.product.min_price"
                                         >
                                         </p>
 
-                                        <a 
-                                            class="flex cursor-pointer justify-end text-base text-blue-700" 
+                                        <a
+                                            class="flex cursor-pointer justify-end text-base text-blue-700"
                                             @click="remove(item.id)"
                                         >
                                             @lang('shop::app.customers.account.wishlist.remove')

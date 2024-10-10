@@ -27,6 +27,7 @@ return [
                 'height'               => 'Hoogte',
                 'length'               => 'Lengte',
                 'manage-stock'         => 'Voorraad Beheren',
+                'minimum-sellable-qty' => 'Minimale bestelhoeveelheid',
                 'meta-description'     => 'Meta Beschrijving',
                 'meta-keywords'        => 'Meta Sleutelwoorden',
                 'meta-title'           => 'Meta Titel',

@@ -612,6 +612,7 @@ return [
                 'write-a-review'   => 'Escribir una reseña',
             ],
 
+            'min-qty'                => 'La cantidad mínima de orden de compra para el producto es :min_sellable_qty',
             'add-to-cart'            => 'Agregar al carrito',
             'add-to-compare'         => 'Producto añadido a la lista de comparación.',
             'add-to-wishlist'        => 'Agregar a la lista de deseos',

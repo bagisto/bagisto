@@ -27,6 +27,7 @@ return [
                 'height'               => 'Висота',
                 'length'               => 'Довжина',
                 'manage-stock'         => 'Управління запасами',
+                'minimum-sellable-qty' => 'Мінімальна кількість замовлення',
                 'meta-description'     => 'Мета-опис',
                 'meta-keywords'        => 'Мета-ключові слова',
                 'meta-title'           => 'Мета-заголовок',

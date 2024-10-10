@@ -27,6 +27,7 @@ return [
                 'height'               => 'ارتفاع',
                 'length'               => 'طول',
                 'manage-stock'         => 'مدیریت موجودی',
+                'minimum-sellable-qty' => 'حداقل مقدار سفارش خرید',
                 'meta-description'     => 'توضیحات متا',
                 'meta-keywords'        => 'کلمات کلیدی متا',
                 'meta-title'           => 'عنوان متا',

@@ -31,18 +31,19 @@ class ProductResource extends JsonResource
         $productTypeInstance = $this->getTypeInstance();
 
         return [
-            'id'          => $this->id,
-            'sku'         => $this->sku,
-            'name'        => $this->name,
-            'description' => $this->description,
-            'url_key'     => $this->url_key,
-            'base_image'  => product_image()->getProductBaseImage($this),
-            'images'      => product_image()->getGalleryImages($this),
-            'is_new'      => (bool) $this->new,
-            'is_featured' => (bool) $this->featured,
-            'on_sale'     => (bool) $productTypeInstance->haveDiscount(),
-            'is_saleable' => (bool) $productTypeInstance->isSaleable(),
-            'is_wishlist' => (bool) auth()->guard()->user()?->wishlist_items
+            'id'               => $this->id,
+            'sku'              => $this->sku,
+            'name'             => $this->name,
+            'description'      => $this->description,
+            'url_key'          => $this->url_key,
+            'min_sellable_qty' => $this->min_sellable_qty,
+            'base_image'       => product_image()->getProductBaseImage($this),
+            'images'           => product_image()->getGalleryImages($this),
+            'is_new'           => (bool) $this->new,
+            'is_featured'      => (bool) $this->featured,
+            'on_sale'          => (bool) $productTypeInstance->haveDiscount(),
+            'is_saleable'      => (bool) $productTypeInstance->isSaleable(),
+            'is_wishlist'      => (bool) auth()->guard()->user()?->wishlist_items
                 ->where('channel_id', core()->getCurrentChannel()->id)
                 ->where('product_id', $this->id)->count(),
             'min_price'   => core()->formatPrice($productTypeInstance->getMinimalPrice()),

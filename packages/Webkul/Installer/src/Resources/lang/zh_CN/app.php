@@ -27,6 +27,7 @@ return [
                 'height'               => '高度',
                 'length'               => '長度',
                 'manage-stock'         => '庫存管理',
+                'minimum-sellable-qty' => '最小采购订单数量',
                 'meta-description'     => '元描述',
                 'meta-keywords'        => '元關鍵詞',
                 'meta-title'           => '元標題',
