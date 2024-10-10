@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Providers;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Theme\ViewRenderEventManager;
@@ -37,6 +38,10 @@ class CoreServiceProvider extends ServiceProvider
 
         Event::listen('bagisto.admin.layout.head', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
+        });
+
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('invoice:cron')->dailyAt('3:00');
         });
 
         $this->app->register(EventServiceProvider::class);

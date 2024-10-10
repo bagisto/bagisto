@@ -35,9 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(CanInstall::class);
     })
     ->withSchedule(function (Schedule $schedule) {
-        $schedule->command('invoice:cron')->dailyAt('3:00');
-        $schedule->command('indexer:index --type=price')->dailyAt('00:01');
-        $schedule->command('product:price-rule:index')->dailyAt('00:01');
+        //
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

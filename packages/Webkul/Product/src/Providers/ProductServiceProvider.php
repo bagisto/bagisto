@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Providers;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Console\Commands\Indexer;
 use Webkul\Product\Models\ProductProxy;
@@ -31,6 +32,10 @@ class ProductServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'product');
 
         ProductProxy::observe(ProductObserver::class);
+
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('indexer:index --type=price')->dailyAt('00:01');
+        });
 
         $this->app->register(EventServiceProvider::class);
     }

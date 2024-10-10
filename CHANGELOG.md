@@ -51,7 +51,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 * #9990 [fixed] - Fix notification icons for dark theme.
 
 
-## **v2.2.1 (24th of June 2024)** - *Rele1ase*
+## **v2.2.1 (24th of June 2024)** - *Release*
 
 * #9955 [fixed] - Cart Rule -> Category is not being retained even after we have selected and saved it.
 
