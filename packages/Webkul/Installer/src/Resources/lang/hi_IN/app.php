@@ -27,6 +27,7 @@ return [
                 'height'               => 'ऊँचाई',
                 'length'               => 'लंबाई',
                 'manage-stock'         => 'स्टॉक प्रबंधन',
+                'minimum-sellable-qty' => 'न्यूनतम खरीद आदेश मात्रा',
                 'meta-description'     => 'मेटा विवरण',
                 'meta-keywords'        => 'मेटा कीवर्ड्स',
                 'meta-title'           => 'मेटा शीर्षक',

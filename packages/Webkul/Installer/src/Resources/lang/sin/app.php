@@ -27,6 +27,7 @@ return [
                 'height'               => 'උඹට',
                 'length'               => 'දුරක්කට',
                 'manage-stock'         => 'වෘක්ත කළමනාක්ක',
+                'minimum-sellable-qty' => 'අවම මිලදී ගැනීමේ ඇණවුම් ප්‍රමාණය',
                 'meta-description'     => 'මැටා වෘක්ත',
                 'meta-keywords'        => 'මැටා මාළු වල',
                 'meta-title'           => 'මැටා මාළු',

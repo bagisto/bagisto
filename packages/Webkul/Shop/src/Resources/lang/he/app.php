@@ -612,6 +612,7 @@ return [
                 'write-a-review'   => 'כתוב ביקורת',
             ],
 
+            'min-qty'                => 'כמות הזמנת הרכש המינימלית עבור המוצר היא :min_sellable_qty',
             'add-to-cart'            => 'הוסף לעגלת הקניות',
             'add-to-compare'         => 'המוצר התווסף להשוואה.',
             'add-to-wishlist'        => 'הוסף לרשימת המשאלות',

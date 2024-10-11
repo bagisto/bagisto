@@ -27,6 +27,7 @@ return [
                 'height'               => '高さ',
                 'length'               => '長さ',
                 'manage-stock'         => '在庫管理',
+                'minimum-sellable-qty' => '最小発注数量',
                 'meta-description'     => 'メタ説明',
                 'meta-keywords'        => 'メタキーワード',
                 'meta-title'           => 'メタタイトル',

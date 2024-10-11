@@ -612,6 +612,7 @@ return [
                 'write-a-review'   => '写评论',
             ],
 
+            'min-qty'                => '该产品的最小采购订单数量为 :min_sellable_qty',
             'add-to-cart'            => '加入购物车',
             'add-to-compare'         => '已添加到比较。',
             'add-to-wishlist'        => '添加到愿望清单',

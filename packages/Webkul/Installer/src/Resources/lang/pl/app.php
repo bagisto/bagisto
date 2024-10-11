@@ -27,6 +27,7 @@ return [
                 'height'               => 'Wysokość',
                 'length'               => 'Długość',
                 'manage-stock'         => 'Zarządzaj zapasami',
+                'minimum-sellable-qty' => 'Minimalna ilość zamówienia',
                 'meta-description'     => 'Opis meta',
                 'meta-keywords'        => 'Słowa kluczowe meta',
                 'meta-title'           => 'Tytuł meta',

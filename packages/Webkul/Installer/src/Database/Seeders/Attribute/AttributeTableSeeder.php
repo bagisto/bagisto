@@ -585,6 +585,26 @@ class AttributeTableSeeder extends Seeder
                 'enable_wysiwyg'      => 0,
                 'created_at'          => $now,
                 'updated_at'          => $now,
+            ], [
+                'id'                  => 29,
+                'code'                => 'min_sellable_qty',
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.minimum-sellable-qty', [], $defaultLocale),
+                'type'                => 'text',
+                'validation'          => 'numeric',
+                'position'            => 1,
+                'is_required'         => 0,
+                'is_unique'           => 0,
+                'value_per_locale'    => 0,
+                'value_per_channel'   => 0,
+                'default_value'       => 1,
+                'is_filterable'       => 0,
+                'is_configurable'     => 0,
+                'is_user_defined'     => 0,
+                'is_visible_on_front' => 0,
+                'is_comparable'       => 0,
+                'enable_wysiwyg'      => 0,
+                'created_at'          => $now,
+                'updated_at'          => $now,
             ],
         ]);
 
@@ -704,6 +724,10 @@ class AttributeTableSeeder extends Seeder
                     'locale'       => $locale,
                     'name'         => trans('installer::app.seeders.attribute.attributes.manage-stock', [], $locale),
                     'attribute_id' => 28,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.minimum-sellable-qty', [], $locale),
+                    'attribute_id' => 29,
                 ],
             ]);
         }
