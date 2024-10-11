@@ -856,6 +856,64 @@ return [
                 ],
 
                 'types' => [
+                    'simple' => [
+                        'customizable-options' => [
+                            'add-btn'           => 'Add Option',
+                            'empty-info'        => 'To create customizable options on a go.',
+                            'empty-title'       => 'Add Option',
+                            'image-placeholder' => 'Product Image',
+                            'info'              => 'This will customize the simple product.',
+                            'title'             => 'Customizable Item',
+
+                            'update-create' => [
+                                'checkbox'    => 'Checkbox',
+                                'is-required' => 'Is Required',
+                                'multiselect' => 'Multiselect',
+                                'name'        => 'Title',
+                                'no'          => 'No',
+                                'radio'       => 'Radio',
+                                'save-btn'    => 'Save',
+                                'select'      => 'Select',
+                                'title'       => 'Option',
+                                'type'        => 'Type',
+                                'yes'         => 'Yes',
+                            ],
+
+                            'option' => [
+                                'add-btn'     => 'Add Option',
+                                'default-qty' => 'Default Qty',
+                                'delete'      => 'Delete',
+                                'delete-btn'  => 'Delete',
+                                'edit-btn'    => 'Edit',
+                                'empty-info'  => 'To create various combination of product on a go.',
+                                'empty-title' => 'Add Option',
+                                'sku'         => 'SKU - :sku',
+
+                                'types' => [
+                                    'checkbox' => [
+                                        'info'  => 'Set default option using checkbox',
+                                        'title' => 'Checkbox',
+                                    ],
+
+                                    'multiselect' => [
+                                        'info'  => 'Set default option using checkbox button',
+                                        'title' => 'Multiselect',
+                                    ],
+
+                                    'radio' => [
+                                        'info'  => 'Set default option using radio button',
+                                        'title' => 'Radio',
+                                    ],
+
+                                    'select' => [
+                                        'info'  => 'Set default option using radio button',
+                                        'title' => 'Select',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+
                     'configurable' => [
                         'add-btn'           => 'Add Variant',
                         'delete-btn'        => 'Delete',

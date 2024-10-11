@@ -203,6 +203,14 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the customizable options.
+     */
+    public function customizable_options(): HasMany
+    {
+        return $this->hasMany(ProductCustomizableOptionProxy::modelClass());
+    }
+
+    /**
      * Get the product variants that owns the product.
      */
     public function variants(): HasMany
