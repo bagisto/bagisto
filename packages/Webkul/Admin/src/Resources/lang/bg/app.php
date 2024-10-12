@@ -2773,8 +2773,8 @@ return [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Are You sure you want to delete ?',
-                    'tax-category'   => 'Tax Category',
-                    'title'          => 'Tax Categories',
+                    'tax-category'   => 'Данъчна категория',
+                    'title'          => 'Данъчни категории',
 
                     'datagrid' => [
                         'actions' => 'Действие',
@@ -2790,7 +2790,7 @@ return [
                         'code'          => 'Код',
                         'description'   => 'Описание',
                         'empty-text'    => 'Tax Rates are not available please create new Tax Rates.',
-                        'general'       => 'Tax Category',
+                        'general'       => 'Данъчна категория',
                         'name'          => 'Име',
                         'save-btn'      => 'Save Tax Category',
                         'select'        => 'Избери',
@@ -3950,7 +3950,7 @@ return [
                     'title-info' => 'Taxes are mandatory fees imposed by governments on goods, services, or transactions, collected by sellers and remitted to the authorities.',
 
                     'categories' => [
-                        'title'      => 'Tax Categories',
+                        'title'      => 'Данъчни категории',
                         'title-info' => 'Tax categories are classifications for different types of taxes, such as sales tax, value-added tax, or excise tax, used to categorize and apply tax rates to products or services.',
                         'product'    => 'Product Default Tax Category',
                         'shipping'   => 'Shipping Tax Category',
@@ -4344,7 +4344,7 @@ return [
         'shipments'                => 'Пратки',
         'sitemaps'                 => 'Карти на сайта',
         'subscribers'              => 'Newsletter Subscribers',
-        'tax-categories'           => 'Tax Categories',
+        'tax-categories'           => 'Данъчни категории',
         'tax-rates'                => 'Данъчни ставки',
         'taxes'                    => 'Данъци',
         'themes'                   => 'Теми',
