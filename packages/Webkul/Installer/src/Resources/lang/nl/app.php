@@ -726,6 +726,10 @@ return [
                 'yes'             => 'Ja',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Bagisto installatie',
                 'bagisto-info'     => 'Het maken van database tabellen kan even duren',

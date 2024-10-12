@@ -726,6 +726,10 @@ return [
                 'yes'              => 'হ্যাঁ',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto-info' => 'ডাটাবেস টেবিল তৈরি করা হচ্ছে, এটি কিছুটা সময় নিতে পারে',
                 'bagisto'      => 'ইনস্টলেশন বাগিস্তো',

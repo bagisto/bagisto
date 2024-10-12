@@ -726,6 +726,10 @@ return [
                 'yes'             => 'Evet',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'Bagisto Kurulumu',
                 'bagisto-info' => 'Veritabanı tabloları oluşturuluyor, bu birkaç dakika sürebilir',

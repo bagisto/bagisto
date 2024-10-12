@@ -726,6 +726,10 @@ return [
                 'yes'             => 'はい',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Bagistoのインストール',
                 'bagisto-info'     => 'データベーステーブルの作成中、これには数分かかることがあります',

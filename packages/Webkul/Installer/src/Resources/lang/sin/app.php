@@ -726,6 +726,10 @@ return [
                 'yes'             => 'ඔව්',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'Bagisto ස්තුරාකුල',
                 'bagisto-info' => 'දත්ත වගකාගකක් සාදනු ඇති වී, මෙමගේ කුම වේදයන්ද කතාමතා වේදිය',

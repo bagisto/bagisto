@@ -726,6 +726,10 @@ return [
                 'yes'             => 'Sim',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Instalação do Bagisto',
                 'bagisto-info'     => 'A criação de tabelas no banco de dados pode levar alguns momentos',

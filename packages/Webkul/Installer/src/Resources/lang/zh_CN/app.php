@@ -726,6 +726,10 @@ return [
                 'yes'             => '是',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto-info' => '正在创建数据库表，这可能需要一些时间',
                 'bagisto'      => 'Bagisto 安装',
