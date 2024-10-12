@@ -690,7 +690,7 @@ return [
                     'status'             => 'Статус',
                     'transaction-amount' => 'Сума',
                     'transaction-date'   => 'Дата',
-                    'transaction-id'     => 'Транзакция ID',
+                    'transaction-id'     => 'Транзакция №',
                     'view'               => 'Виж',
                 ],
 
@@ -818,21 +818,21 @@ return [
                 ],
 
                 'images' => [
-                    'info'  => 'Image resolution should be like 560px X 609px',
+                    'info'  => 'Разделителната способност на изображението трябва да бъде 560px X 609px',
                     'title' => 'Изображения',
                 ],
 
                 'videos' => [
                     'error' => 'The :attribute may not be greater than :max kilobytes. Please choose a smaller file.',
-                    'info'  => 'Maximum video size should be like :size',
-                    'title' => 'Videos',
+                    'info'  => 'Максималният размер на видеоклипа трябва да бъде :size',
+                    'title' => 'Видеклипове',
                 ],
 
                 'links' => [
                     'related-products' => [
                         'empty-info' => 'Add related products on the go.',
                         'info'       => 'In addition to the product the customer is viewing, they are presented with related products.',
-                        'title'      => 'Related Products',
+                        'title'      => 'Подобни продукти',
                     ],
 
                     'up-sells' => [
@@ -857,22 +857,22 @@ return [
 
                 'types' => [
                     'configurable' => [
-                        'add-btn'           => 'Add Variant',
+                        'add-btn'           => 'Добави вариант',
                         'delete-btn'        => 'Изтрий',
                         'edit-btn'          => 'Редактирай',
                         'empty-info'        => 'To create various combination of product on a go.',
-                        'empty-title'       => 'Add Variant',
+                        'empty-title'       => 'Добави вариант',
                         'image-placeholder' => 'Изображение на продукта',
                         'info'              => 'Variation products are depend on all possible combination of attribute.',
                         'qty'               => ':qty Qty',
                         'sku'               => 'SKU номер - :sku',
-                        'title'             => 'Variations',
+                        'title'             => 'Вариации',
 
                         'create' => [
                             'description'            => 'Описание',
                             'name'                   => 'Име',
-                            'save-btn'               => 'Add',
-                            'title'                  => 'Add Variant',
+                            'save-btn'               => 'Добави',
+                            'title'                  => 'Добави вариант',
                             'variant-already-exists' => 'This variant already exists',
                         ],
 
@@ -889,11 +889,11 @@ return [
                             'sku'             => 'SKU номер',
                             'status'          => 'Статус',
                             'title'           => 'Продукт',
-                            'weight'          => 'Weight',
+                            'weight'          => 'Тегло',
                         ],
 
                         'mass-edit' => [
-                            'add-images'          => 'Add Images',
+                            'add-images'          => 'Добави изображения',
                             'apply-to-all-btn'    => 'Apply to All',
                             'apply-to-all-name'   => 'Apply a name to all variants.',
                             'apply-to-all-sku'    => 'Apply a price to all SKU.',
@@ -914,7 +914,7 @@ return [
                             'status'              => 'Статус',
                             'variant-name'        => 'Variant Name',
                             'variant-sku'         => 'Variant SKU',
-                            'weight'              => 'Weight',
+                            'weight'              => 'Тегло',
                         ],
                     ],
 
@@ -2230,7 +2230,7 @@ return [
             'search-terms' => [
                 'index' => [
                     'create-btn' => 'Create Search Term',
-                    'title'      => 'Search Terms',
+                    'title'      => 'Ключови думи',
 
                     'datagrid' => [
                         'uses'                => 'Uses',
@@ -2270,7 +2270,7 @@ return [
             'search-synonyms' => [
                 'index' => [
                     'create-btn' => 'Create Search Synonym',
-                    'title'      => 'Search Synonyms',
+                    'title'      => 'Търси синоними',
 
                     'datagrid' => [
                         'actions'             => 'Действие',
@@ -2350,7 +2350,7 @@ return [
             'url-rewrites' => [
                 'index' => [
                     'create-btn' => 'Create URL Rewrite',
-                    'title'      => 'URL Rewrites',
+                    'title'      => 'Пренасочване на URL адреси',
 
                     'datagrid' => [
                         'actions'             => 'Действие',
@@ -2794,7 +2794,7 @@ return [
                         'name'          => 'Име',
                         'save-btn'      => 'Save Tax Category',
                         'select'        => 'Избери',
-                        'tax-rates'     => 'Tax Rates',
+                        'tax-rates'     => 'Данъчни ставки',
                         'title'         => 'Create Tax Category',
                     ],
 
@@ -2813,7 +2813,7 @@ return [
                 'index' => [
                     'button-title' => 'Create Tax Rate',
                     'tax-rate'     => 'Tax Rate',
-                    'title'        => 'Tax Rates',
+                    'title'        => 'Данъчни ставки',
 
                     'datagrid' => [
                         'country'    => 'Държава',
@@ -3946,7 +3946,7 @@ return [
                 ],
 
                 'taxes' => [
-                    'title'      => 'Taxes',
+                    'title'      => 'Данъци',
                     'title-info' => 'Taxes are mandatory fees imposed by governments on goods, services, or transactions, collected by sellers and remitted to the authorities.',
 
                     'categories' => [
@@ -4100,18 +4100,18 @@ return [
                 'reviews'                  => 'Отзиви',
                 'roles'                    => 'Роли',
                 'sales'                    => 'Продажби',
-                'search-seo'               => 'Search & SEO',
-                'search-synonyms'          => 'Search Synonyms',
-                'search-terms'             => 'Search Terms',
+                'search-seo'               => 'Търсене & SEO',
+                'search-synonyms'          => 'Търси синоними',
+                'search-terms'             => 'Ключови думи',
                 'settings'                 => 'Настройки',
                 'shipments'                => 'Пратки',
                 'sitemaps'                 => 'Карти на сайта',
-                'tax-categories'           => 'Tax Categories',
-                'tax-rates'                => 'Tax Rates',
-                'taxes'                    => 'Taxes',
+                'tax-categories'           => 'Данъчни категории',
+                'tax-rates'                => 'Данъчни ставки',
+                'taxes'                    => 'Данъци',
                 'themes'                   => 'Теми',
-                'transactions'             => 'Transactions',
-                'url-rewrites'             => 'URL Rewrites',
+                'transactions'             => 'Транзакции',
+                'url-rewrites'             => 'Пренасочване на URL адреси',
                 'users'                    => 'Потребители',
             ],
         ],
@@ -4338,18 +4338,18 @@ return [
         'roles'                    => 'Roles',
         'sales'                    => 'Продажби',
         'search-seo'               => 'Search & SEO',
-        'search-synonyms'          => 'Search Synonyms',
-        'search-terms'             => 'Search Terms',
+        'search-synonyms'          => 'Търси синоними',
+        'search-terms'             => 'Ключови думи',
         'settings'                 => 'Настройки',
         'shipments'                => 'Пратки',
         'sitemaps'                 => 'Карти на сайта',
         'subscribers'              => 'Newsletter Subscribers',
         'tax-categories'           => 'Tax Categories',
-        'tax-rates'                => 'Tax Rates',
-        'taxes'                    => 'Taxes',
+        'tax-rates'                => 'Данъчни ставки',
+        'taxes'                    => 'Данъци',
         'themes'                   => 'Теми',
-        'transactions'             => 'Transactions',
-        'url-rewrites'             => 'URL Rewrites',
+        'transactions'             => 'Транзакции',
+        'url-rewrites'             => 'Пренасочване на URL адреси',
         'users'                    => 'Потребители',
         'view'                     => 'Виж',
     ],
