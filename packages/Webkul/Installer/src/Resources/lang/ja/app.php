@@ -788,6 +788,7 @@ return [
             'bagisto-info'             => 'コミュニティプロジェクト by',
             'bagisto-logo'             => 'Bagistoロゴ',
             'bengali'                  => 'ベンガル語',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => '中国語',
             'continue'                 => '続行',
             'dutch'                    => 'オランダ語',

@@ -788,6 +788,7 @@ return [
             'bagisto-info'             => 'Webkul tarafından geliştirilen bir Topluluk Projesi',
             'bagisto-logo'             => 'Bagisto Logosu',
             'bengali'                  => 'Bengalce',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'Çince',
             'continue'                 => 'Devam Et',
             'dutch'                    => 'Hollandaca',

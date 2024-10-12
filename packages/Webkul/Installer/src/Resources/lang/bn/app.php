@@ -788,6 +788,7 @@ return [
             'bagisto-logo'             => 'বাগিস্তো লোগো',
             'bagisto'                  => 'বাগিস্তো',
             'bengali'                  => 'বাংলা',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'চীনা',
             'continue'                 => 'চালিয়ে যান',
             'dutch'                    => 'ডাচ',

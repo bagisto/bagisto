@@ -788,6 +788,7 @@ return [
             'bagisto-info'             => 'एक सामुदायिक परियोजना द्वारा',
             'bagisto-logo'             => 'बैगिस्टो लोगो',
             'bengali'                  => 'बंगाली',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'चीनी',
             'continue'                 => 'जारी रखें',
             'dutch'                    => 'डच',

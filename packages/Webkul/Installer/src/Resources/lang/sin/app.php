@@ -788,6 +788,7 @@ return [
             'bagisto-info'             => 'සමුදුසමින් ව්‍යාක්රණය',
             'bagisto-logo'             => 'Bagisto ලෝගො',
             'bengali'                  => 'බෙංගාලි',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'චීන',
             'continue'                 => 'ඉදිරිපත්',
             'dutch'                    => 'ලන්දේසි',

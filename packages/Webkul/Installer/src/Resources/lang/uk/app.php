@@ -788,6 +788,7 @@ return [
             'bagisto-info'             => 'Спільний проект спільноти від Webkul',
             'bagisto-logo'             => 'Логотип Bagisto',
             'bengali'                  => 'Бенгальська',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'Китайська',
             'continue'                 => 'Продовжити',
             'dutch'                    => 'Голландська',

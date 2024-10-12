@@ -788,6 +788,7 @@ return [
             'bagisto-info'             => '由 Webkul 社区共同开发的项目',
             'bagisto-logo'             => 'Bagisto Logo',
             'bengali'                  => '孟加拉语',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => '中文',
             'continue'                 => '继续',
             'dutch'                    => '荷兰语',

@@ -788,6 +788,7 @@ return [
             'bagisto-info'             => 'Un progetto della comunità di',
             'bagisto-logo'             => 'Logo Bagisto',
             'bengali'                  => 'Bengalese',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'Cinese',
             'continue'                 => 'Continua',
             'dutch'                    => 'Olandese',

@@ -792,6 +792,7 @@ return [
             'bagisto-info'             => 'a Community Project by',
             'bagisto-logo'             => 'Bagisto Logo',
             'bengali'                  => 'Bengali',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'Chinese',
             'continue'                 => 'Continue',
             'dutch'                    => 'Dutch',

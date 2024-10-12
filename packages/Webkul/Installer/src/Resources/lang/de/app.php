@@ -788,6 +788,7 @@ return [
             'bagisto-info'             => 'Ein Gemeinschaftsprojekt von',
             'bagisto-logo'             => 'Bagisto Logo',
             'bengali'                  => 'Bengalisch',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'Chinesisch',
             'continue'                 => 'Weiter',
             'dutch'                    => 'Niederländisch',
