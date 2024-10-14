@@ -20,63 +20,31 @@ class ProductCustomizableOptionPriceRepository extends Repository
      * Save customizable option prices.
      *
      * @param  array  $data
-     * @param  \Webkul\Product\Contracts\ProductBundleOption  $productBundleOption
+     * @param  \Webkul\Product\Contracts\ProductCustomizableOption  $productCustomizableOption
      * @return void
      */
-    public function saveBundleOptionProducts($data, $productBundleOption)
+    public function saveCustomizableOptionPrices($data, $productCustomizableOption)
     {
-        $previousBundleOptionProductIds = $productBundleOption->bundle_option_products()->pluck('id');
+        $previousCustomizableOptionPriceIds = $productCustomizableOption->customizable_option_prices()->pluck('id');
 
-        if (isset($data['products'])) {
-            $this->setIsDefaultFlag($data);
-
-            foreach ($data['products'] as $bundleOptionProductId => $bundleOptionProductInputs) {
-                if (Str::contains($bundleOptionProductId, 'product_')) {
+        if (isset($data['prices'])) {
+            foreach ($data['prices'] as $customizableOptionPriceId => $customizableOptionPriceInputs) {
+                if (Str::contains($customizableOptionPriceId, 'price_')) {
                     $this->create(array_merge([
-                        'product_bundle_option_id' => $productBundleOption->id,
-                    ], $bundleOptionProductInputs));
+                        'product_customizable_option_id' => $productCustomizableOption->id,
+                    ], $customizableOptionPriceInputs));
                 } else {
-                    if (is_numeric($index = $previousBundleOptionProductIds->search($bundleOptionProductId))) {
-                        $previousBundleOptionProductIds->forget($index);
+                    if (is_numeric($index = $previousCustomizableOptionPriceIds->search($customizableOptionPriceId))) {
+                        $previousCustomizableOptionPriceIds->forget($index);
                     }
 
-                    $this->update($bundleOptionProductInputs, $bundleOptionProductId);
+                    $this->update($customizableOptionPriceInputs, $customizableOptionPriceId);
                 }
             }
         }
 
-        foreach ($previousBundleOptionProductIds as $previousBundleOptionProductId) {
-            $this->delete($previousBundleOptionProductId);
-        }
-    }
-
-    /**
-     * Set is default flag.
-     *
-     * @param  array  $data
-     * @return void|null
-     */
-    public function setIsDefaultFlag(&$data)
-    {
-        if (! count($data['products'])) {
-            return;
-        }
-
-        $haveIsDefaultFlag = false;
-
-        foreach ($data['products'] as $key => $product) {
-            if (! empty($product['is_default'])) {
-                $haveIsDefaultFlag = true;
-            } else {
-                $data['products'][$key]['is_default'] = 0;
-            }
-        }
-
-        if (
-            ! $haveIsDefaultFlag
-            && $data['is_required']
-        ) {
-            $data['products'][key($data['products'])]['is_default'] = 1;
+        foreach ($previousCustomizableOptionPriceIds as $previouscustomizableOptionPriceId) {
+            $this->delete($previouscustomizableOptionPriceId);
         }
     }
 }

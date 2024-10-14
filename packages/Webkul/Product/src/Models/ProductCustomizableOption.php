@@ -46,6 +46,7 @@ class ProductCustomizableOption extends TranslatableModel implements ProductCust
      */
     public function customizable_option_prices()
     {
-        return $this->hasMany(ProductCustomizableOptionPriceProxy::modelClass());
+        return $this->hasMany(ProductCustomizableOptionPriceProxy::modelClass())
+            ->orderBy('sort_order');
     }
 }

@@ -891,23 +891,26 @@ return [
 
                                 'types' => [
                                     'checkbox' => [
-                                        'info'  => 'Set default option using checkbox',
                                         'title' => 'Checkbox',
                                     ],
 
-                                    'multiselect' => [
-                                        'info'  => 'Set default option using checkbox button',
-                                        'title' => 'Multiselect',
-                                    ],
-
                                     'radio' => [
-                                        'info'  => 'Set default option using radio button',
                                         'title' => 'Radio',
                                     ],
 
                                     'select' => [
-                                        'info'  => 'Set default option using radio button',
                                         'title' => 'Select',
+                                    ],
+
+                                    'multiselect' => [
+                                        'title' => 'Multiselect',
+                                    ],
+                                ],
+
+                                'items' => [
+                                    'update-create' => [
+                                        'label' => 'Label',
+                                        'price' => 'Price',
                                     ],
                                 ],
                             ],

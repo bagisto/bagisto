@@ -17,8 +17,9 @@
         id="v-customizable-options-template"
     >
         <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
-            <!-- Panel Header -->
+            <!-- Option Panel Header -->
             <div class="mb-2.5 flex justify-between gap-5 p-4">
+                <!-- Option Title & Option Info -->
                 <div class="flex flex-col gap-2">
                     <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.title')
@@ -29,7 +30,7 @@
                     </p>
                 </div>
 
-                <!-- Add Button -->
+                <!-- Add Option Button -->
                 <div class="flex items-center gap-x-1">
                     <div
                         class="secondary-button"
@@ -40,22 +41,33 @@
                 </div>
             </div>
 
-            <!-- Panel Content -->
+            <!-- Option Panel Content -->
             <div
                 class="grid"
                 v-if="options.length"
             >
-                <!-- Customizable Option Component -->
-                <v-customizable-option-item
-                    v-for='(option, index) in options'
-                    :key="index"
-                    :index="index"
-                    :option="option"
-                    :errors="errors"
-                    @onEdit="selectedOption = $event; $refs.updateCreateOptionModal.open()"
-                    @onRemove="removeOption($event)"
+                <draggable
+                    ghost-class="draggable-ghost"
+                    v-bind="{ animation: 200 }"
+                    handle=".icon-drag"
+                    :list="options"
+                    item-key="id"
                 >
-                </v-customizable-option-item>
+                    <template #item="{ element, index }">
+                        <div>
+                            <!-- Customizable Option Component -->
+                            <v-customizable-option-item
+                                :key="index"
+                                :index="index"
+                                :option="element"
+                                :errors="errors"
+                                @updateOption="selectedOption = $event; $refs.updateCreateOptionModal.open()"
+                                @removeOption="removeOption($event)"
+                            >
+                            </v-customizable-option-item>
+                        </div>
+                    </template>
+                </draggable>
             </div>
 
             <!-- For Empty Option -->
@@ -69,7 +81,7 @@
                     class="h-20 w-20 rounded border border-dashed dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                 />
 
-                <!-- Add Variants Information -->
+                <!-- Add Information -->
                 <div class="flex flex-col items-center gap-1.5">
                     <p class="text-base font-semibold text-gray-400">
                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.empty-title')
@@ -80,6 +92,7 @@
                     </p>
                 </div>
 
+                <!-- Update Create Option Item Modal -->
                 <div
                     class="secondary-button text-sm"
                     @click="resetForm(); $refs.updateCreateOptionModal.open()"
@@ -228,173 +241,128 @@
 
             <!-- Panel Header -->
             <div class="mb-2.5 flex justify-between gap-5 p-4">
-                <div class="flex flex-col gap-2">
+                <!-- Option Information -->
+                <div class="flex gap-2.5">
+                    <i class="icon-drag cursor-grab text-xl transition-all hover:text-gray-700 dark:text-gray-300"></i>
+
                     <p
                         class="text-base font-semibold text-gray-800 dark:text-white"
                         :class="{'required': option.is_required == 1}"
                     >
                         @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
                     </p>
-
-                    <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
-                        @{{ types[option.type].info }}
-                    </p>
                 </div>
 
-                <!-- Add Button -->
+                <!-- Action Buttons -->
                 <div class="flex items-center gap-x-5">
+                    <!-- Open Add Option Item Modal -->
                     <p
                         class="cursor-pointer font-semibold text-blue-600 transition-all hover:underline"
-                        @click="$refs.addOptionRowModal.open()"
+                        @click="$refs.updateCreateOptionItemModal.open()"
                     >
                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.add-btn')
                     </p>
 
+                    <!-- Edit Option -->
                     <p
                         class="cursor-pointer font-semibold text-blue-600 transition-all hover:underline"
-                        @click="edit"
+                        @click="updateOption"
                     >
                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.edit-btn')
                     </p>
 
+                    <!-- Remove Option -->
                     <p
                         class="cursor-pointer font-semibold text-red-600 transition-all hover:underline"
-                        @click="remove"
+                        @click="removeOption"
                     >
                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.delete-btn')
                     </p>
                 </div>
             </div>
 
-            <!-- Panel Content -->
+            <!-- Option Item Panel Content -->
             <div
                 class="grid"
-                v-if="option.customizable_option_prices.length"
+                v-if="items.length"
             >
-                <!-- Draggable Products -->
+                <!-- Option Item Draggable Items -->
                 <draggable
                     ghost-class="draggable-ghost"
                     v-bind="{animation: 200}"
                     handle=".icon-drag"
-                    :list="option.customizable_option_prices"
+                    :list="items"
                     item-key="id"
                 >
                     <template #item="{ element, index }">
                         <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
-                            <!-- Information -->
+                            <!-- Option Item Information -->
                             <div class="flex gap-2.5">
-                                <!-- Drag Icon -->
+                                <!-- Option Item Drag Icon -->
                                 <div>
                                     <i class="icon-drag cursor-grab text-xl transition-all hover:text-gray-700 dark:text-gray-300"></i>
                                 </div>
 
-                                <!-- Is Default Option -->
-                                <div>
-                                    <input
-                                        :type="[option.type == 'checkbox' || option.type == 'multiselect' ? 'checkbox' : 'radio']"
-                                        :id="'customizable_options[' + option.id + '][products][' + element.id + '][is_default]'"
-                                        class="peer sr-only"
-                                        :name="'customizable_options[' + option.id + '][products][' + element.id + '][is_default]'"
-                                        :value="element.is_default"
-                                        :checked="element.is_default"
-                                        @change="updateIsDefault(element)"
-                                    />
-
-                                    <label
-                                        class="cursor-pointer text-2xl peer-checked:text-blue-600"
-                                        :class="[option.type == 'checkbox' || option.type == 'multiselect' ? 'icon-uncheckbox  peer-checked:icon-checked' : 'icon-radio-normal peer-checked:icon-radio-selected']"
-                                        :for="'customizable_options[' + option.id + '][products][' + element.id + '][is_default]'"
-                                    >
-                                    </label>
-                                </div>
-
-                                <!-- Image -->
-                                <div
-                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
-                                    :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! element.product.images.length}"
-                                >
-                                    <template v-if="! element.product.images.length">
-                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-
-                                        <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
-                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.image-placeholder')
-                                        </p>
-                                    </template>
-
-                                    <template v-else>
-                                        <img :src="element.product.images[0].url">
-                                    </template>
-                                </div>
-
-                                <!-- Details -->
+                                <!-- Option Item Details -->
                                 <div class="grid place-content-start gap-1.5">
                                     <p class="text-base font-semibold text-gray-800 dark:text-white">
-                                        @{{ element.product.name }}
+                                        @{{ element.label }}
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300">
-                                        @{{ "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.sku')".replace(':sku', element.product.sku) }}
-                                    </p>
+                                    <!-- Option Item Label Hidden Input -->
+                                    <input
+                                        type="hidden"
+                                        :name="'customizable_options[' + option.id + '][prices][' + element.id + '][label]'"
+                                        :value="element.label"
+                                    />
                                 </div>
                             </div>
 
-                            <!-- Actions -->
+                            <!-- Option Item Actions -->
                             <div class="grid place-content-start gap-1 ltr:text-right rtl:text-left">
+                                <!-- Option Item Price -->
                                 <p class="font-semibold text-gray-800 dark:text-white">
-                                    @{{ $admin.formatPrice(element.product.price) }}
+                                    @{{ $admin.formatPrice(element.price) }}
                                 </p>
 
-                                <!-- Hidden Input -->
+                                <!-- Option Item Price Hidden Input -->
                                 <input
                                     type="hidden"
-                                    :name="'customizable_options[' + option.id + '][products][' + element.id + '][product_id]'"
-                                    :value="element.product.id"
+                                    :name="'customizable_options[' + option.id + '][prices][' + element.id + '][price]'"
+                                    :value="element.price"
                                 />
 
+                                <!-- Option Item Sort Order Hidden Input -->
                                 <input
                                     type="hidden"
-                                    :name="'customizable_options[' + option.id + '][products][' + element.id + '][sort_order]'"
+                                    :name="'customizable_options[' + option.id + '][prices][' + element.id + '][sort_order]'"
                                     :value="index"
                                 />
 
-                                <x-admin::form.control-group class="!mb-0">
-                                    <x-admin::form.control-group.label class="required !block">
-                                        @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.default-qty')
-                                    </x-admin::form.control-group.label>
-
-                                    <v-field
-                                        type="text"
-                                        :name="'customizable_options[' + option.id + '][products][' + element.id + '][qty]'"
-                                        v-model="element.qty"
-                                        class="min-h-[39px] w-[86px] rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                                        :class="[errors['customizable_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                        rules="required|numeric|min_value:1"
-                                        label="@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.default-qty')"
-                                    ></v-field>
-
-                                    <v-error-message
-                                        :name="'customizable_options[' + option.id + '][products][' + element.id + '][qty]'"
-                                        v-slot="{ message }"
+                                <div class="flex gap-2">
+                                    <!-- Edit Option -->
+                                    <p
+                                        class="cursor-pointer font-semibold text-blue-600 transition-all hover:underline"
+                                        @click="selectedItem = element; $refs.updateCreateOptionItemModal.open()"
                                     >
-                                        <p class="mt-1 text-xs italic text-red-600">
-                                            @{{ message }}
-                                        </p>
-                                    </v-error-message>
-                                </x-admin::form.control-group>
+                                        @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.edit-btn')
+                                    </p>
 
-                                <p
-                                    class="cursor-pointer text-red-600 transition-all hover:underline"
-                                    @click="removeProduct(element)"
-                                >
-                                    @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.delete-btn')
-                                </p>
+                                    <!-- Remove Option Item -->
+                                    <p
+                                        class="cursor-pointer text-red-600 transition-all hover:underline"
+                                        @click="removeOptionItem(element)"
+                                    >
+                                        @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.delete-btn')
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </template>
                 </draggable>
             </div>
 
-            <!-- For Empty Option -->
+            <!-- For Empty Option Item -->
             <div
                 class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10"
                 v-else
@@ -405,7 +373,7 @@
                     class="h-20 w-20 dark:mix-blend-exclusion dark:invert"
                 />
 
-                <!-- Add Variants Information -->
+                <!-- Add Information -->
                 <div class="flex flex-col items-center gap-1.5">
                     <p class="text-base font-semibold text-gray-400">
                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.empty-title')
@@ -418,36 +386,80 @@
 
                 <div
                     class="secondary-button text-sm"
-                    @click="$refs.addOptionRowModal.open()"
+                    @click="$refs.updateCreateOptionItemModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.add-btn')
                 </div>
             </div>
         </div>
 
-        <x-admin::modal ref="addOptionRowModal">
-            <!-- Modal Header -->
-            <x-slot:header>
-                <p class="text-lg font-bold text-gray-800 dark:text-white">
-                    @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.title')
-                </p>
-            </x-slot>
+        <!-- Add Option Item Form Modal -->
+        <x-admin::form
+            v-slot="{ meta, errors, handleSubmit }"
+            as="div"
+        >
+            <form
+                @submit="handleSubmit($event, updateOrCreateOptionItem)"
+            >
+                <x-admin::modal ref="updateCreateOptionItemModal">
+                    <!-- Option Item Modal Header -->
+                    <x-slot:header>
+                        <p class="text-lg font-bold text-gray-800 dark:text-white">
+                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.title')
+                        </p>
+                    </x-slot>
 
-            <!-- Modal Content -->
-            <x-slot:content>
-                Test
-            </x-slot>
+                    <!-- Option Item Modal Content -->
+                    <x-slot:content>
+                        <div class="flex gap-2">
+                            <!-- Option Item Label -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.label')
+                                </x-admin::form.control-group.label>
 
-            <!-- Modal Footer -->
-            <x-slot:footer>
-                <!-- Save Button -->
-                <x-admin::button
-                    button-type="button"
-                    class="primary-button"
-                    :title="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.save-btn')"
-                />
-            </x-slot>
-        </x-admin::modal>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="label"
+                                    v-model="selectedItem.label"
+                                    rules="required"
+                                    :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.label')"
+                                />
+
+                                <x-admin::form.control-group.error control-name="label" />
+                            </x-admin::form.control-group>
+
+                            <!-- Option Item Price -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.price')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="price"
+                                    name="price"
+                                    v-model="selectedItem.price"
+                                    rules="required"
+                                    :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.price')"
+                                />
+
+                                <x-admin::form.control-group.error control-name="price" />
+                            </x-admin::form.control-group>
+                        </div>
+                    </x-slot>
+
+                    <!-- Option Item Modal Footer -->
+                    <x-slot:footer>
+                        <!-- Save Button -->
+                        <x-admin::button
+                            button-type="button"
+                            class="primary-button"
+                            :title="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.save-btn')"
+                        />
+                    </x-slot>
+                </x-admin::modal>
+            </form>
+        </x-admin::form>
     </script>
 
     <script type="module">
@@ -512,6 +524,8 @@
         app.component('v-customizable-option-item', {
             template: '#v-customizable-option-item-template',
 
+            emits: ['updateOption', 'removeOption'],
+
             props: ['index', 'option', 'errors'],
 
             data() {
@@ -541,54 +555,65 @@
                             info: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.checkbox.info')"
                         }
                     },
+
+                    items: [],
+
+                    selectedItem: {
+                        label: '',
+                        price: 0,
+                    }
                 }
             },
 
+            mounted() {
+                this.items = this.option.customizable_option_prices.map(item => {
+                    return {
+                        id: item.id,
+                        label: item.label,
+                        price: item.price,
+                    };
+                });
+            },
+
             methods: {
-                edit() {
-                    this.$emit('onEdit', this.option);
+                updateOption() {
+                    this.$emit('updateOption', this.option);
                 },
 
-                remove() {
-                    this.$emit('onRemove', this.option);
+                removeOption() {
+                    this.$emit('removeOption', this.option);
                 },
 
-                addSelected(selectedProducts) {
-                    let self = this;
+                updateOrCreateOptionItem(params) {
+                    if (this.selectedItem.id == undefined) {
+                        params.id = 'price_' + this.items.length;
 
-                    selectedProducts.forEach(function (product) {
-                        self.option.customizable_option_prices.push({
-                            id: 'product_' + self.option.customizable_option_prices.length,
-                            qty: 1,
-                            is_default: 0,
-                            product: product,
-                        });
-                    });
+                        this.items.push(params);
+                    } else {
+                        const indexToUpdate = this.items.findIndex(item => item.id === this.selectedItem.id);
+
+                        this.items[indexToUpdate] = this.selectedItem;
+                    }
+
+                    this.resetForm();
+
+                    this.$refs.updateCreateOptionItemModal.close();
                 },
 
-                removeProduct(product) {
+                removeOptionItem(selectedItem) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
-                            let index = this.option.customizable_option_prices.indexOf(product);
-
-                            this.option.customizable_option_prices.splice(index, 1);
+                            this.items = this.items.filter(item => item.id != selectedItem.id);
                         }
                     });
                 },
 
-                updateIsDefault: function(updatedProductOption) {
-                    let self = this;
-
-                    this.option.customizable_option_prices.forEach(function(productOption) {
-                        if (self.option.type == 'radio' || self.option.type == 'select') {
-                            productOption.is_default = productOption.product.id == updatedProductOption.product.id ? 1 : 0;
-                        } else {
-                            if (productOption.product.id == updatedProductOption.product.id) {
-                                productOption.is_default = productOption.is_default ? 0 : 1;
-                            }
-                        }
-                    });
-                }
+                resetForm() {
+                    this.selectedItem = {
+                        label: '',
+                        price: 0,
+                    };
+                },
             }
         });
     </script>

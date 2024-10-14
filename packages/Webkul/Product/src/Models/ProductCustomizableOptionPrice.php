@@ -22,6 +22,7 @@ class ProductCustomizableOptionPrice extends Model implements ProductCustomizabl
     protected $fillable = [
         'is_default',
         'is_user_defined',
+        'label',
         'price',
         'product_customizable_option_id',
         'qty',

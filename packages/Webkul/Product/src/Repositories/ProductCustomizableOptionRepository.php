@@ -15,7 +15,7 @@ class ProductCustomizableOptionRepository extends Repository
      * @return void
      */
     public function __construct(
-        protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
+        protected ProductCustomizableOptionPriceRepository $productCustomizableOptionPriceRepository,
         Container $container
     ) {
         parent::__construct($container);
@@ -30,38 +30,38 @@ class ProductCustomizableOptionRepository extends Repository
     }
 
     /**
-     * Save bundle options.
+     * Save customizable options.
      *
      * @param  array  $data
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
-    public function saveBundleOptions($data, $product)
+    public function saveCustomizableOptions($data, $product)
     {
-        $previousBundleOptionIds = $product->bundle_options()->pluck('id');
+        $previousCustomizableOptionIds = $product->customizable_options()->pluck('id');
 
-        if (isset($data['bundle_options'])) {
-            foreach ($data['bundle_options'] as $bundleOptionId => $bundleOptionInputs) {
-                if (Str::contains($bundleOptionId, 'option_')) {
-                    $productBundleOption = $this->create(array_merge([
+        if (isset($data['customizable_options'])) {
+            foreach ($data['customizable_options'] as $customizableOptionId => $customizableOptionInputs) {
+                if (Str::contains($customizableOptionId, 'option_')) {
+                    $productCustomizableOption = $this->create(array_merge([
                         'product_id' => $product->id,
-                    ], $bundleOptionInputs));
+                    ], $customizableOptionInputs));
                 } else {
-                    $productBundleOption = $this->find($bundleOptionId);
+                    $productCustomizableOption = $this->find($customizableOptionId);
 
-                    if (is_numeric($index = $previousBundleOptionIds->search($bundleOptionId))) {
-                        $previousBundleOptionIds->forget($index);
+                    if (is_numeric($index = $previousCustomizableOptionIds->search($customizableOptionId))) {
+                        $previousCustomizableOptionIds->forget($index);
                     }
 
-                    $this->update($bundleOptionInputs, $bundleOptionId);
+                    $this->update($customizableOptionInputs, $customizableOptionId);
                 }
 
-                $this->productBundleOptionProductRepository->saveBundleOptionProducts($bundleOptionInputs, $productBundleOption);
+                $this->productCustomizableOptionPriceRepository->saveCustomizableOptionPrices($customizableOptionInputs, $productCustomizableOption);
             }
         }
 
-        foreach ($previousBundleOptionIds as $previousBundleOptionId) {
-            $this->delete($previousBundleOptionId);
+        foreach ($previousCustomizableOptionIds as $previousCustomizableOptionId) {
+            $this->delete($previousCustomizableOptionId);
         }
     }
 }

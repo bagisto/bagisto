@@ -207,7 +207,8 @@ class Product extends Model implements ProductContract
      */
     public function customizable_options(): HasMany
     {
-        return $this->hasMany(ProductCustomizableOptionProxy::modelClass());
+        return $this->hasMany(ProductCustomizableOptionProxy::modelClass())
+            ->orderBy('sort_order');
     }
 
     /**
