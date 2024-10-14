@@ -284,14 +284,14 @@
             <!-- Option Item Panel Content -->
             <div
                 class="grid"
-                v-if="items.length"
+                v-if="optionItems.length"
             >
                 <!-- Option Item Draggable Items -->
                 <draggable
                     ghost-class="draggable-ghost"
                     v-bind="{animation: 200}"
                     handle=".icon-drag"
-                    :list="items"
+                    :list="optionItems"
                     item-key="id"
                 >
                     <template #item="{ element, index }">
@@ -343,7 +343,7 @@
                                     <!-- Edit Option -->
                                     <p
                                         class="cursor-pointer font-semibold text-blue-600 transition-all hover:underline"
-                                        @click="selectedItem = element; $refs.updateCreateOptionItemModal.open()"
+                                        @click="selectedOptionItem = element; $refs.updateCreateOptionItemModal.open()"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.edit-btn')
                                     </p>
@@ -421,7 +421,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="label"
-                                    v-model="selectedItem.label"
+                                    v-model="selectedOptionItem.label"
                                     rules="required"
                                     :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.label')"
                                 />
@@ -438,7 +438,7 @@
                                 <x-admin::form.control-group.control
                                     type="price"
                                     name="price"
-                                    v-model="selectedItem.price"
+                                    v-model="selectedOptionItem.price"
                                     rules="required"
                                     :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.price')"
                                 />
@@ -556,9 +556,9 @@
                         }
                     },
 
-                    items: [],
+                    optionItems: [],
 
-                    selectedItem: {
+                    selectedOptionItem: {
                         label: '',
                         price: 0,
                     }
@@ -566,11 +566,11 @@
             },
 
             mounted() {
-                this.items = this.option.customizable_option_prices.map(item => {
+                this.optionItems = this.option.customizable_option_prices.map(optionItem => {
                     return {
-                        id: item.id,
-                        label: item.label,
-                        price: item.price,
+                        id: optionItem.id,
+                        label: optionItem.label,
+                        price: optionItem.price,
                     };
                 });
             },
@@ -585,14 +585,14 @@
                 },
 
                 updateOrCreateOptionItem(params) {
-                    if (this.selectedItem.id == undefined) {
-                        params.id = 'price_' + this.items.length;
+                    if (this.selectedOptionItem.id == undefined) {
+                        params.id = 'price_' + this.optionItems.length;
 
-                        this.items.push(params);
+                        this.optionItems.push(params);
                     } else {
-                        const indexToUpdate = this.items.findIndex(item => item.id === this.selectedItem.id);
+                        const indexToUpdate = this.optionItems.findIndex(optionItem => optionItem.id === this.selectedOptionItem.id);
 
-                        this.items[indexToUpdate] = this.selectedItem;
+                        this.optionItems[indexToUpdate] = this.selectedOptionItem;
                     }
 
                     this.resetForm();
@@ -600,21 +600,21 @@
                     this.$refs.updateCreateOptionItemModal.close();
                 },
 
-                removeOptionItem(selectedItem) {
+                removeOptionItem(selectedOptionItem) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
-                            this.items = this.items.filter(item => item.id != selectedItem.id);
+                            this.optionItems = this.optionItems.filter(optionItem => optionItem.id != selectedOptionItem.id);
                         }
                     });
                 },
 
                 resetForm() {
-                    this.selectedItem = {
+                    this.selectedOptionItem = {
                         label: '',
                         price: 0,
                     };
                 },
-            }
+            },
         });
     </script>
 @endPushOnce
