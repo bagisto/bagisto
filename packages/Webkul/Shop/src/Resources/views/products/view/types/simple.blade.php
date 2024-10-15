@@ -25,7 +25,6 @@
                     <v-product-customizable-option-item
                         :option="option"
                         :key="index"
-                        v-if="this.canHaveMultiplePrices(option.type)"
                         @priceUpdated="priceUpdated"
                     >
                     </v-product-customizable-option-item>
@@ -40,14 +39,6 @@
                         @{{ formattedTotalPrice }}
                     </p>
                 </div>
-
-                <ul class="grid gap-2.5 text-base max-sm:text-sm">
-                    <li v-for="option in options">
-                        <span class="mb-1.5 inline-block max-sm:mb-0">
-                            @{{ option.label }}
-                        </span>
-                    </li>
-                </ul>
             </div>
         </script>
 
@@ -57,16 +48,61 @@
         >
             <div class="mt-8 border-b border-zinc-200 pb-4 max-sm:mt-4 max-sm:pb-0">
                 <x-shop::form.control-group>
-                    <!-- Dropdown Options Container -->
-                    <x-shop::form.control-group.label
-                        class="!mt-0 max-sm:!mb-2.5"
-                        ::class="{ 'required': Boolean(option.is_required) }"
-                    >
-                        @{{ option.label }}
-                    </x-shop::form.control-group.label>
+                    <!-- Text Field -->
+                    <template v-if="option.type == 'text'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+
+                            <span class="text-black">
+                                @{{ '+ ' + $shop.formatPrice(option.price) }}
+                            </span>
+                        </x-shop::form.control-group.label>
+
+                        <x-shop::form.control-group.control
+                            type="text"
+                            ::name="'customizable_options[' + option.id + '][]'"
+                            ::value="option.id"
+                            v-model="selectedItems"
+                            ::rules="{'required': Boolean(option.is_required)}"
+                            ::label="option.label"
+                        />
+                    </template>
+
+                    <!-- Textarea Field -->
+                    <template v-if="option.type == 'textarea'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+
+                            <span class="text-black">
+                                @{{ '+ ' + $shop.formatPrice(option.price) }}
+                            </span>
+                        </x-shop::form.control-group.label>
+
+                        <x-shop::form.control-group.control
+                            type="textarea"
+                            ::name="'customizable_options[' + option.id + '][]'"
+                            ::value="option.id"
+                            v-model="selectedItems"
+                            ::rules="{'required': Boolean(option.is_required)}"
+                            ::label="option.label"
+                        />
+                    </template>
 
                     <!-- Checkbox Options -->
-                    <template v-if="option.type == 'checkbox'">
+                    <template v-else-if="option.type == 'checkbox'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+                        </x-shop::form.control-group.label>
+
                         <div class="grid gap-2">
                             <div
                                 class="flex select-none items-center gap-x-4 max-sm:gap-x-1.5"
@@ -98,7 +134,14 @@
                     </template>
 
                     <!-- Radio Options -->
-                    <template v-if="option.type == 'radio'">
+                    <template v-else-if="option.type == 'radio'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+                        </x-shop::form.control-group.label>
+
                         <div class="grid gap-2 max-sm:gap-1">
                             <!-- "None" radio option for cases where the option is not required. -->
                             <div
@@ -155,7 +198,14 @@
                     </template>
 
                     <!-- Select Options -->
-                    <template v-if="option.type == 'select'">
+                    <template v-else-if="option.type == 'select'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+                        </x-shop::form.control-group.label>
+
                         <x-shop::form.control-group.control
                             type="select"
                             ::name="'customizable_options[' + option.id + '][]'"
@@ -181,7 +231,14 @@
                     </template>
 
                     <!-- Multiselect Options -->
-                    <template v-if="option.type == 'multiselect'">
+                    <template v-else-if="option.type == 'multiselect'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+                        </x-shop::form.control-group.label>
+
                         <x-shop::form.control-group.control
                             type="multiselect"
                             ::name="'customizable_options[' + option.id + '][]'"
@@ -204,6 +261,95 @@
                                 @{{ item.label + ' + ' + $shop.formatPrice(item.price) }}
                             </option>
                         </x-shop::form.control-group.control>
+                    </template>
+
+                    <!-- Date Field -->
+                    <template v-else-if="option.type == 'date'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+
+                            <span class="text-black">
+                                @{{ '+ ' + $shop.formatPrice(option.price) }}
+                            </span>
+                        </x-shop::form.control-group.label>
+
+                        <x-shop::form.control-group.control
+                            type="date"
+                            ::name="'customizable_options[' + option.id + '][]'"
+                            ::value="option.id"
+                            v-model="selectedItems"
+                            ::rules="{'required': Boolean(option.is_required)}"
+                            ::label="option.label"
+                        />
+                    </template>
+
+                    <!-- Datetime Field -->
+                    <template v-else-if="option.type == 'datetime'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+
+                            <span class="text-black">
+                                @{{ '+ ' + $shop.formatPrice(option.price) }}
+                            </span>
+                        </x-shop::form.control-group.label>
+
+                        <x-shop::form.control-group.control
+                            type="datetime"
+                            ::name="'customizable_options[' + option.id + '][]'"
+                            ::value="option.id"
+                            v-model="selectedItems"
+                            ::rules="{'required': Boolean(option.is_required)}"
+                            ::label="option.label"
+                        />
+                    </template>
+
+                    <!-- Time Field -->
+                    <template v-else-if="option.type == 'time'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+
+                            <span class="text-black">
+                                @{{ '+ ' + $shop.formatPrice(option.price) }}
+                            </span>
+                        </x-shop::form.control-group.label>
+
+                        <input
+                            type="time"
+                            :name="'customizable_options[' + option.id + '][]'"
+                            :value="option.id"
+                            v-model="selectedItems"
+                            :rules="{'required': Boolean(option.is_required)}"
+                            :label="option.label"
+                        >
+                    </template>
+
+                    <!-- File -->
+                    <template v-else-if="option.type == 'file'">
+                        <x-shop::form.control-group.label
+                            class="!mt-0 max-sm:!mb-2.5"
+                            ::class="{ 'required': Boolean(option.is_required) }"
+                        >
+                            @{{ option.label }}
+
+                            <span class="text-black">
+                                @{{ '+ ' + $shop.formatPrice(option.price) }}
+                            </span>
+                        </x-shop::form.control-group.label>
+
+                        <input
+                            type="file"
+                            :name="'customizable_options[' + option.id + '][]'"
+                            @change="handleFileChange"
+                        />
                     </template>
 
                     <x-shop::form.control-group.error ::name="'customizable_options[' + option.id + '][]'" />
@@ -233,7 +379,7 @@
 
                 mounted() {
                     this.options = this.options.map((option) => {
-                        if (! this.canHaveMultiplePrices(option.type)) {
+                        if (! this.canHaveMultiplePriceOptions(option.type)) {
                             return {
                                 id: option.id,
                                 label: option.label,
@@ -280,7 +426,7 @@
                         price.price = totalPrice;
                     },
 
-                    canHaveMultiplePrices(type) {
+                    canHaveMultiplePriceOptions(type) {
                         return ['checkbox', 'radio', 'select', 'multiselect'].includes(type);
                     },
                 }
@@ -297,7 +443,7 @@
                     return {
                         optionItems: [],
 
-                        selectedItems: this.canHaveMultipleItems()  ? [] : null,
+                        selectedItems: this.canHaveMultiplePrices()  ? [] : null,
                     };
                 },
 
@@ -317,13 +463,37 @@
 
                 watch: {
                     selectedItems: function (value) {
-                        let selectedItemIds = Array.isArray(value) ? value : [value];
+                        let selectedItemValues = Array.isArray(value) ? value : [value];
 
                         let totalPrice = 0;
 
                         for (let item of this.optionItems) {
-                            if (selectedItemIds.includes(item.id)) {
-                                totalPrice += parseFloat(item.price);
+                            switch (this.option.type) {
+                                case 'text':
+                                case 'textarea':
+                                case 'date':
+                                case 'datetime':
+                                case 'time':
+                                    if (selectedItemValues[0].length > 0) {
+                                        totalPrice += parseFloat(item.price);
+                                    }
+
+                                    break;
+
+                                case 'checkbox':
+                                case 'radio':
+                                case 'select':
+                                case 'multiselect':
+                                    if (selectedItemValues.includes(item.id)) {
+                                        totalPrice += parseFloat(item.price);
+                                    }
+
+                                case 'file':
+                                    if (selectedItemValues[0] instanceof File) {
+                                        totalPrice += parseFloat(item.price);
+                                    }
+
+                                    break;
                             }
                         }
 
@@ -336,8 +506,14 @@
                 },
 
                 methods: {
-                    canHaveMultipleItems() {
+                    canHaveMultiplePrices() {
                         return ['checkbox', 'multiselect'].includes(this.option.type);
+                    },
+
+                    handleFileChange($event) {
+                        const selectedFiles = event.target.files;
+
+                        this.selectedItems = selectedFiles[0];
                     },
                 },
             });
