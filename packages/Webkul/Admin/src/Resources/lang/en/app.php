@@ -861,19 +861,15 @@ return [
                             'add-btn'           => 'Add Option',
                             'empty-info'        => 'To create customizable options on a go.',
                             'empty-title'       => 'Add Option',
-                            'image-placeholder' => 'Product Image',
                             'info'              => 'This will customize the simple product.',
                             'title'             => 'Customizable Item',
 
                             'update-create' => [
-                                'checkbox'    => 'Checkbox',
                                 'is-required' => 'Is Required',
-                                'multiselect' => 'Multiselect',
                                 'name'        => 'Title',
                                 'no'          => 'No',
-                                'radio'       => 'Radio',
+                                'price'       => 'Price',
                                 'save-btn'    => 'Save',
-                                'select'      => 'Select',
                                 'title'       => 'Option',
                                 'type'        => 'Type',
                                 'yes'         => 'Yes',
@@ -881,15 +877,21 @@ return [
 
                             'option' => [
                                 'add-btn'     => 'Add Option',
-                                'default-qty' => 'Default Qty',
                                 'delete'      => 'Delete',
                                 'delete-btn'  => 'Delete',
                                 'edit-btn'    => 'Edit',
                                 'empty-info'  => 'To create various combination of product on a go.',
                                 'empty-title' => 'Add Option',
-                                'sku'         => 'SKU - :sku',
 
                                 'types' => [
+                                    'text' => [
+                                        'title' => 'Text',
+                                    ],
+
+                                    'textarea' => [
+                                        'title' => 'Textarea',
+                                    ],
+
                                     'checkbox' => [
                                         'title' => 'Checkbox',
                                     ],
@@ -905,12 +907,28 @@ return [
                                     'multiselect' => [
                                         'title' => 'Multiselect',
                                     ],
+
+                                    'date' => [
+                                        'title' => 'Date',
+                                    ],
+
+                                    'datetime' => [
+                                        'title' => 'Datetime',
+                                    ],
+
+                                    'time' => [
+                                        'title' => 'Time',
+                                    ],
+
+                                    'file' => [
+                                        'title' => 'File',
+                                    ],
                                 ],
 
                                 'items' => [
                                     'update-create' => [
-                                        'label' => 'Label',
-                                        'price' => 'Price',
+                                        'label'    => 'Label',
+                                        'price'    => 'Price',
                                     ],
                                 ],
                             ],

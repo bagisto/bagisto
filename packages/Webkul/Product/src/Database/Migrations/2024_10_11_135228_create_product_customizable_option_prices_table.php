@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('product_customizable_option_prices', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('label');
+            $table->text('label')->nullable();
             $table->decimal('price', 12, 4)->default(0);
             $table->integer('product_customizable_option_id')->unsigned();
             $table->integer('sort_order')->default(0);

@@ -55,14 +55,114 @@
                 >
                     <template #item="{ element, index }">
                         <div>
-                            <!-- Customizable Option Component -->
+                            <!--
+                                Hidden Attributes:
+
+                                All hidden attributes are used to store form data for this component only. They are kept in a single
+                                place to avoid confusion.
+                            -->
+                            <input
+                                type="hidden"
+                                :name="'customizable_options[' + element.id + '][{{$currentLocale->code}}][label]'"
+                                :value="element.label"
+                            />
+
+                            <input
+                                type="hidden"
+                                :name="'customizable_options[' + element.id + '][type]'"
+                                :value="element.type"
+                            />
+
+                            <input
+                                type="hidden"
+                                :name="'customizable_options[' + element.id + '][is_required]'"
+                                :value="element.is_required"
+                            />
+
+                            <input
+                                type="hidden"
+                                :name="'customizable_options[' + element.id + '][sort_order]'"
+                                :value="index"
+                            />
+
+                            <input
+                                type="hidden"
+                                :name="'customizable_options[' + element.id + '][prices][' + element.price_id + '][price]'"
+                                :value="element.price"
+                                v-if="! canHaveMultiplePrices(element.type)"
+                            />
+
+                            <!--
+                                This block supports the following types, which can have only a single price:
+                                - text
+                                - textarea
+                                - date
+                                - datetime
+                                - time
+                                - file
+                            -->
+                            <div
+                                class="mb-2.5 flex justify-between gap-5 p-4"
+                                v-if="! canHaveMultiplePrices(element.type)"
+                            >
+                                <!-- Option Information -->
+                                <div class="flex gap-2.5">
+                                    <i class="icon-drag cursor-grab text-xl transition-all hover:text-gray-700 dark:text-gray-300"></i>
+
+                                    <p
+                                        class="text-base font-semibold text-gray-800 dark:text-white"
+                                        :class="{'required': element.is_required == 1}"
+                                    >
+                                        @{{ (index + 1) + '. ' + element.label + ' - ' + types[element.type].title }}
+                                    </p>
+                                </div>
+
+                                <!-- Option Action Buttons -->
+                                <div class="grid place-content-start gap-1 ltr:text-right rtl:text-left">
+                                    <p class="font-semibold text-gray-800 dark:text-white">
+                                        @{{ $admin.formatPrice(element.price) }}
+                                    </p>
+
+                                    <div class="flex gap-2">
+                                        <!-- Edit Option -->
+                                        <p
+                                            class="cursor-pointer text-blue-600 transition-all hover:underline"
+                                            @click="selectedOption = element; $refs.updateCreateOptionModal.open()"
+                                        >
+                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.edit-btn')
+                                        </p>
+
+                                        <!-- Remove Option -->
+                                        <p
+                                            class="cursor-pointer text-red-600 transition-all hover:underline"
+                                            @click="removeOption(element)"
+                                        >
+                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.delete-btn')
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--
+                                Customizable Option Item Component:
+
+                                This component is used to render customizable option items. It supports the following four types of options:
+                                - select
+                                - radio
+                                - multiselect
+                                - checkbox
+
+                                For all other types, the option items are rendered in the parent component. This component only handles the
+                                display and CRUD operations; all form handling is done in the parent component. The form parameters are
+                                prepared in the parent component.
+                            -->
                             <v-customizable-option-item
                                 :key="index"
-                                :index="index"
+                                :title="(index + 1) + '. ' + element.label + ' - ' + types[element.type].title"
                                 :option="element"
-                                :errors="errors"
                                 @updateOption="selectedOption = $event; $refs.updateCreateOptionModal.open()"
                                 @removeOption="removeOption($event)"
+                                v-else
                             >
                             </v-customizable-option-item>
                         </div>
@@ -107,16 +207,15 @@
                 as="div"
             >
                 <form @submit="handleSubmit($event, updateOrCreate)">
-                    <!-- Customer Create Modal -->
                     <x-admin::modal ref="updateCreateOptionModal">
-                        <!-- Modal Header -->
+                        <!-- Option Form Modal Header -->
                         <x-slot:header>
                             <p class="text-lg font-bold text-gray-800 dark:text-white">
                                 @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.title')
                             </p>
                         </x-slot>
 
-                        <!-- Modal Content -->
+                        <!-- Option Form Modal Content -->
                         <x-slot:content>
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -147,20 +246,12 @@
                                         v-model="selectedOption.type"
                                         :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.type')"
                                     >
-                                        <option value="select">
-                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.select')
-                                        </option>
-
-                                        <option value="radio">
-                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.radio')
-                                        </option>
-
-                                        <option value="checkbox">
-                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.checkbox')
-                                        </option>
-
-                                        <option value="multiselect">
-                                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.multiselect')
+                                        <option
+                                            :value="type.key"
+                                            :key="key"
+                                            v-for="(type, key) in types"
+                                            v-text="type.title"
+                                        >
                                         </option>
                                     </x-admin::form.control-group.control>
 
@@ -191,9 +282,25 @@
                                     <x-admin::form.control-group.error control-name="is_required" />
                                 </x-admin::form.control-group>
                             </div>
+
+                            <x-admin::form.control-group v-if="! canHaveMultiplePrices(selectedOption.type)">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.price')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="price"
+                                    name="price"
+                                    rules="required"
+                                    v-model="selectedOption.price"
+                                    :label="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.price')"
+                                />
+
+                                <x-admin::form.control-group.error control-name="price" />
+                            </x-admin::form.control-group>
                         </x-slot>
 
-                        <!-- Modal Footer -->
+                        <!-- Option Form Modal Footer -->
                         <x-slot:footer>
                             <!-- Save Button -->
                             <x-admin::button
@@ -214,31 +321,6 @@
     >
         <!-- Panel -->
         <div>
-            <!-- Hidden Inputs -->
-            <input
-                type="hidden"
-                :name="'customizable_options[' + option.id + '][{{$currentLocale->code}}][label]'"
-                :value="option.label"
-            />
-
-            <input
-                type="hidden"
-                :name="'customizable_options[' + option.id + '][type]'"
-                :value="option.type"
-            />
-
-            <input
-                type="hidden"
-                :name="'customizable_options[' + option.id + '][is_required]'"
-                :value="option.is_required"
-            />
-
-            <input
-                type="hidden"
-                :name="'customizable_options[' + option.id + '][sort_order]'"
-                :value="index"
-            />
-
             <!-- Panel Header -->
             <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <!-- Option Information -->
@@ -249,15 +331,15 @@
                         class="text-base font-semibold text-gray-800 dark:text-white"
                         :class="{'required': option.is_required == 1}"
                     >
-                        @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
+                        @{{ title }}
                     </p>
                 </div>
 
-                <!-- Action Buttons -->
+                <!-- Option Action Buttons -->
                 <div class="flex items-center gap-x-5">
                     <!-- Open Add Option Item Modal -->
                     <p
-                        class="cursor-pointer font-semibold text-blue-600 transition-all hover:underline"
+                        class="cursor-pointer text-blue-600 transition-all hover:underline"
                         @click="$refs.updateCreateOptionItemModal.open()"
                     >
                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.add-btn')
@@ -265,7 +347,7 @@
 
                     <!-- Edit Option -->
                     <p
-                        class="cursor-pointer font-semibold text-blue-600 transition-all hover:underline"
+                        class="cursor-pointer text-blue-600 transition-all hover:underline"
                         @click="updateOption"
                     >
                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.edit-btn')
@@ -273,7 +355,7 @@
 
                     <!-- Remove Option -->
                     <p
-                        class="cursor-pointer font-semibold text-red-600 transition-all hover:underline"
+                        class="cursor-pointer text-red-600 transition-all hover:underline"
                         @click="removeOption"
                     >
                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.delete-btn')
@@ -296,6 +378,30 @@
                 >
                     <template #item="{ element, index }">
                         <div class="flex justify-between gap-2.5 border-b border-slate-300 p-4 dark:border-gray-800">
+                            <!--
+                                Hidden Attributes:
+
+                                All hidden attributes are used to store form data for this component only. They are kept in a single
+                                place to avoid confusion.
+                            -->
+                            <input
+                                type="hidden"
+                                :name="'customizable_options[' + option.id + '][prices][' + element.id + '][label]'"
+                                :value="element.label"
+                            />
+
+                            <input
+                                type="hidden"
+                                :name="'customizable_options[' + option.id + '][prices][' + element.id + '][price]'"
+                                :value="element.price"
+                            />
+
+                            <input
+                                type="hidden"
+                                :name="'customizable_options[' + option.id + '][prices][' + element.id + '][sort_order]'"
+                                :value="index"
+                            />
+
                             <!-- Option Item Information -->
                             <div class="flex gap-2.5">
                                 <!-- Option Item Drag Icon -->
@@ -308,13 +414,6 @@
                                     <p class="text-base font-semibold text-gray-800 dark:text-white">
                                         @{{ element.label }}
                                     </p>
-
-                                    <!-- Option Item Label Hidden Input -->
-                                    <input
-                                        type="hidden"
-                                        :name="'customizable_options[' + option.id + '][prices][' + element.id + '][label]'"
-                                        :value="element.label"
-                                    />
                                 </div>
                             </div>
 
@@ -325,24 +424,10 @@
                                     @{{ $admin.formatPrice(element.price) }}
                                 </p>
 
-                                <!-- Option Item Price Hidden Input -->
-                                <input
-                                    type="hidden"
-                                    :name="'customizable_options[' + option.id + '][prices][' + element.id + '][price]'"
-                                    :value="element.price"
-                                />
-
-                                <!-- Option Item Sort Order Hidden Input -->
-                                <input
-                                    type="hidden"
-                                    :name="'customizable_options[' + option.id + '][prices][' + element.id + '][sort_order]'"
-                                    :value="index"
-                                />
-
                                 <div class="flex gap-2">
-                                    <!-- Edit Option -->
+                                    <!-- Edit Option Item -->
                                     <p
-                                        class="cursor-pointer font-semibold text-blue-600 transition-all hover:underline"
+                                        class="cursor-pointer text-blue-600 transition-all hover:underline"
                                         @click="selectedOptionItem = element; $refs.updateCreateOptionItemModal.open()"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.edit-btn')
@@ -405,7 +490,7 @@
                     <!-- Option Item Modal Header -->
                     <x-slot:header>
                         <p class="text-lg font-bold text-gray-800 dark:text-white">
-                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.title')
+                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.items.update-create.title')
                         </p>
                     </x-slot>
 
@@ -454,7 +539,7 @@
                         <x-admin::button
                             button-type="button"
                             class="primary-button"
-                            :title="trans('admin::app.catalog.products.edit.types.simple.customizable-options.update-create.save-btn')"
+                            :title="trans('admin::app.catalog.products.edit.types.simple.customizable-options.items.update-create.save-btn')"
                         />
                     </x-slot>
                 </x-admin::modal>
@@ -470,15 +555,100 @@
 
             data() {
                 return {
+                    types: {
+                        text: {
+                            key: 'text',
+                            canHaveMultiplePrices: false,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.text.title')",
+                        },
+
+                        textarea: {
+                            key: 'textarea',
+                            canHaveMultiplePrices: false,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.textarea.title')",
+                        },
+
+                        select: {
+                            key: 'select',
+                            canHaveMultiplePrices: true,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.select.title')",
+                        },
+
+                        radio: {
+                            key: 'radio',
+                            canHaveMultiplePrices: true,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.radio.title')",
+                        },
+
+                        multiselect: {
+                            key: 'multiselect',
+                            canHaveMultiplePrices: true,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.multiselect.title')",
+                        },
+
+                        checkbox: {
+                            key: 'checkbox',
+                            canHaveMultiplePrices: true,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.checkbox.title')",
+                        },
+
+                        date: {
+                            key: 'date',
+                            canHaveMultiplePrices: false,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.date.title')",
+                        },
+
+                        datetime: {
+                            key: 'datetime',
+                            canHaveMultiplePrices: false,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.datetime.title')",
+                        },
+
+                        time: {
+                            key: 'time',
+                            canHaveMultiplePrices: false,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.time.title')",
+                        },
+
+                        file: {
+                            key: 'file',
+                            canHaveMultiplePrices: false,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.file.title')",
+                        },
+                    },
+
                     options: @json($options),
 
                     selectedOption: {
                         label: '',
                         type: 'select',
                         is_required: 1,
-                        customizable_option_prices: []
+                        price: 0,
                     }
                 }
+            },
+
+            mounted() {
+                this.options = this.options.map((option) => {
+                    if (! this.canHaveMultiplePrices(option.type)) {
+                        return {
+                            id: option.id,
+                            label: option.label,
+                            type: option.type,
+                            is_required: option.is_required,
+                            price_id: option.customizable_option_prices[0].id,
+                            price: option.customizable_option_prices[0].price,
+                        };
+                    }
+
+                    return {
+                        id: option.id,
+                        label: option.label,
+                        type: option.type,
+                        is_required: option.is_required,
+                        price: 0,
+                    };
+                });
             },
 
             methods: {
@@ -486,7 +656,9 @@
                     if (this.selectedOption.id == undefined) {
                         params.id = 'option_' + this.options.length;
 
-                        params.customizable_option_prices = [];
+                        if (! this.canHaveMultiplePrices(this.selectedOption.type)) {
+                            params.price_id = 'price_0';
+                        }
 
                         this.options.push(params);
                     } else {
@@ -515,57 +687,39 @@
                         label: '',
                         type: 'select',
                         is_required: 1,
-                        customizable_option_prices: []
+                        price: 0,
                     };
                 },
-            }
+
+                canHaveMultiplePrices(type) {
+                    return this.types[type].canHaveMultiplePrices;
+                },
+            },
         });
 
         app.component('v-customizable-option-item', {
             template: '#v-customizable-option-item-template',
 
-            emits: ['updateOption', 'removeOption'],
+            emits: ['updateOption', 'removeOption', 'updateOptionItems', 'removeOptionItems'],
 
-            props: ['index', 'option', 'errors'],
+            props: ['title', 'option'],
 
             data() {
                 return {
-                    types: {
-                        select: {
-                            key: 'select',
-                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.select.title')",
-                            info: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.select.info')"
-                        },
-
-                        radio: {
-                            key: 'radio',
-                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.radio.title')",
-                            info: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.radio.info')"
-                        },
-
-                        multiselect: {
-                            key: 'multiselect',
-                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.multiselect.title')",
-                            info: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.multiselect.info')"
-                        },
-
-                        checkbox: {
-                            key: 'checkbox',
-                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.checkbox.title')",
-                            info: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.checkbox.info')"
-                        }
-                    },
-
                     optionItems: [],
 
                     selectedOptionItem: {
                         label: '',
                         price: 0,
                     }
-                }
+                };
             },
 
             mounted() {
+                if (! this.option.customizable_option_prices) {
+                    return;
+                }
+
                 this.optionItems = this.option.customizable_option_prices.map(optionItem => {
                     return {
                         id: optionItem.id,
@@ -573,6 +727,8 @@
                         price: optionItem.price,
                     };
                 });
+
+                this.$emit('updateOptionItems', this.optionItems);
             },
 
             methods: {
@@ -598,12 +754,16 @@
                     this.resetForm();
 
                     this.$refs.updateCreateOptionItemModal.close();
+
+                    this.$emit('updateOptionItems', this.optionItems);
                 },
 
                 removeOptionItem(selectedOptionItem) {
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             this.optionItems = this.optionItems.filter(optionItem => optionItem.id != selectedOptionItem.id);
+
+                            this.$emit('removeOptionItems', this.optionItems);
                         }
                     });
                 },
