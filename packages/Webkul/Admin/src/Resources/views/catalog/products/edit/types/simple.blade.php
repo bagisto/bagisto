@@ -490,7 +490,7 @@
                     <!-- Option Item Modal Header -->
                     <x-slot:header>
                         <p class="text-lg font-bold text-gray-800 dark:text-white">
-                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.items.update-create.title')
+                            @lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.title')
                         </p>
                     </x-slot>
 
@@ -539,7 +539,7 @@
                         <x-admin::button
                             button-type="button"
                             class="primary-button"
-                            :title="trans('admin::app.catalog.products.edit.types.simple.customizable-options.items.update-create.save-btn')"
+                            :title="trans('admin::app.catalog.products.edit.types.simple.customizable-options.option.items.update-create.save-btn')"
                         />
                     </x-slot>
                 </x-admin::modal>
@@ -568,10 +568,10 @@
                             title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.textarea.title')",
                         },
 
-                        select: {
-                            key: 'select',
+                        checkbox: {
+                            key: 'checkbox',
                             canHaveMultiplePrices: true,
-                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.select.title')",
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.checkbox.title')",
                         },
 
                         radio: {
@@ -580,16 +580,16 @@
                             title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.radio.title')",
                         },
 
+                        select: {
+                            key: 'select',
+                            canHaveMultiplePrices: true,
+                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.select.title')",
+                        },
+
                         multiselect: {
                             key: 'multiselect',
                             canHaveMultiplePrices: true,
                             title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.multiselect.title')",
-                        },
-
-                        checkbox: {
-                            key: 'checkbox',
-                            canHaveMultiplePrices: true,
-                            title: "@lang('admin::app.catalog.products.edit.types.simple.customizable-options.option.types.checkbox.title')",
                         },
 
                         date: {

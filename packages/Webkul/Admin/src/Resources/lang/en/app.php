@@ -929,6 +929,8 @@ return [
                                     'update-create' => [
                                         'label'    => 'Label',
                                         'price'    => 'Price',
+                                        'save-btn' => 'Save',
+                                        'title'    => 'Option',
                                     ],
                                 ],
                             ],
