@@ -4,26 +4,9 @@ namespace Webkul\Theme\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Theme\Themes;
 
 class ThemeServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        include __DIR__.'/../Http/helpers.php';
-
-        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
-
-        Blade::directive('bagistoVite', function ($expression) {
-            return "<?php echo themes()->setBagistoVite({$expression})->toHtml(); ?>";
-        });
-    }
-
     /**
      * Register services.
      *
@@ -31,9 +14,7 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('themes', function () {
-            return new Themes;
-        });
+        include __DIR__.'/../Http/helpers.php';
 
         $this->app->singleton('view.finder', function ($app) {
             return new \Webkul\Theme\ThemeViewFinder(
@@ -41,6 +22,20 @@ class ThemeServiceProvider extends ServiceProvider
                 $app['config']['view.paths'],
                 null
             );
+        });
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+
+        Blade::directive('bagistoVite', function ($expression) {
+            return "<?php echo themes()->setBagistoVite({$expression})->toHtml(); ?>";
         });
     }
 }

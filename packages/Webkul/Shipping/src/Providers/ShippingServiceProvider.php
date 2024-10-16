@@ -2,23 +2,10 @@
 
 namespace Webkul\Shipping\Providers;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Shipping\Facades\Shipping as ShippingFacade;
-use Webkul\Shipping\Shipping;
 
 class ShippingServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        include __DIR__.'/../Http/helpers.php';
-    }
-
     /**
      * Register services.
      *
@@ -26,24 +13,9 @@ class ShippingServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerFacades();
+        include __DIR__.'/../Http/helpers.php';
 
         $this->registerConfig();
-    }
-
-    /**
-     * Register Bouncer as a singleton.
-     *
-     * @return void
-     */
-    protected function registerFacades()
-    {
-        $loader = AliasLoader::getInstance();
-        $loader->alias('shipping', ShippingFacade::class);
-
-        $this->app->singleton('shipping', function () {
-            return new Shipping;
-        });
     }
 
     /**

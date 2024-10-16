@@ -72,7 +72,7 @@
                                 </span>
 
                                 <div class="grid">
-                                    <p  
+                                    <p
                                         class="text-gray-800 dark:text-white"
                                         :class="notification.read ? 'font-normal' : 'font-semibold'"
                                     >
@@ -153,7 +153,7 @@
                         orderType: {
                             all : {
                                 icon: 'icon',
-                                message: "@lang('admin::app.notifications.order-status-messages.all'),
+                                message: "@lang('admin::app.notifications.order-status-messages.all')",
                                 status: 'all'
                             },
 
