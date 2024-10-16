@@ -18,8 +18,9 @@
 </p>
 
 <p align="center">
-    ➡️ <a href="https://bagisto.com/en/">Website</a> | <a href="https://devdocs.bagisto.com/">Documentation</a> | <a href="https://webkul.com/blog/laravel-ecommerce-website/">Installation Guide</a> | <a href="https://forums.bagisto.com/">Forums</a> | <a href="https://www.facebook.com/groups/bagisto/">Community</a> ⬅️
+    ➡️ <a href="https://bagisto.com/en/">Website</a> | <a href="https://devdocs.bagisto.com/">Documentation</a> | <a href="https://webkul.com/blog/laravel-ecommerce-website/">Installation Guide</a> | <a href="https://devdocs.bagisto.com/2.2/introduction/docker.html">Docker Installation</a>  | <a href="https://forums.bagisto.com/">Forums</a> | <a href="https://www.facebook.com/groups/bagisto/">Community</a> ⬅️
 </p>
+
 
 <p align="center" style="display: inline;">
     <img class="flag-img" src="https://flagicons.lipis.dev/flags/4x3/ar.svg" alt="Arabic" width="24" height="24">
