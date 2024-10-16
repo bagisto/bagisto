@@ -142,6 +142,7 @@ return [
                 'BDT' => 'बांगलादेशी टाका',
                 'BHD' => 'बहरीन दीनार',
                 'BRL' => 'ब्राज़ीली रियाल',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'कनाडाई डॉलर',
                 'CHF' => 'स्विस फ़्रैंक',
                 'CLP' => 'चिली पेसो',
@@ -206,6 +207,7 @@ return [
             'locales'    => [
                 'ar'    => 'अरबी',
                 'bn'    => 'बंगाली',
+                'bg'    => 'Bulgarian',
                 'de'    => 'जर्मन',
                 'en'    => 'अंग्रेज़ी',
                 'es'    => 'स्पेनिश',
@@ -724,6 +726,10 @@ return [
                 'yes'             => 'हाँ',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'बैगिस्टो स्थापना',
                 'bagisto-info'     => 'डेटाबेस तालिकाएँ बनाने का प्रक्रियाण, इसमें कुछ क्षण लग सकते हैं',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => 'एक सामुदायिक परियोजना द्वारा',
             'bagisto-logo'             => 'बैगिस्टो लोगो',
             'bengali'                  => 'बंगाली',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'चीनी',
             'continue'                 => 'जारी रखें',
             'dutch'                    => 'डच',

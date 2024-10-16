@@ -142,6 +142,7 @@ return [
                 'BDT' => 'バングラデシュタカ',
                 'BHD' => 'バーレーンディナール',
                 'BRL' => 'ブラジルレアル',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'カナダドル',
                 'CHF' => 'スイスフラン',
                 'CLP' => 'チリペソ',
@@ -206,6 +207,7 @@ return [
             'locales' => [
                 'ar'    => 'アラビア語',
                 'bn'    => 'ベンガル語',
+                'bg'    => 'Bulgarian',
                 'de'    => 'ドイツ語',
                 'en'    => '英語',
                 'es'    => 'スペイン語',
@@ -724,6 +726,10 @@ return [
                 'yes'             => 'はい',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'          => 'Bagistoのインストール',
                 'bagisto-info'     => 'データベーステーブルの作成中、これには数分かかることがあります',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => 'コミュニティプロジェクト by',
             'bagisto-logo'             => 'Bagistoロゴ',
             'bengali'                  => 'ベンガル語',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => '中国語',
             'continue'                 => '続行',
             'dutch'                    => 'オランダ語',

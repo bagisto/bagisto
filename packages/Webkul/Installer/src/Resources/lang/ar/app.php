@@ -85,7 +85,7 @@ return [
                     'title'   => 'خدمة العملاء',
                 ],
 
-                'payment-policy'   => [
+                'payment-policy' => [
                     'content' => 'محتوى صفحة سياسة الدفع',
                     'title'   => 'سياسة الدفع',
                 ],
@@ -142,6 +142,7 @@ return [
                 'BDT' => 'التاكا البنغلاديشي',
                 'BHD' => 'دينار بحريني',
                 'BRL' => 'الريال البرازيلي',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'الدولار الكندي',
                 'CHF' => 'الفرنك السويسري',
                 'CLP' => 'البيزو التشيلي',
@@ -206,6 +207,7 @@ return [
             'locales' => [
                 'ar'    => 'العربية',
                 'bn'    => 'البنغالية',
+                'bg'    => 'Bulgarian',
                 'de'    => 'الألمانية',
                 'en'    => 'الإنجليزية',
                 'es'    => 'الإسبانية',
@@ -240,7 +242,7 @@ return [
             ],
         ],
 
-        'shop'      => [
+        'shop' => [
             'theme-customizations' => [
                 'all-products' => [
                     'name' => 'جميع المنتجات',
@@ -309,7 +311,7 @@ return [
                 ],
 
                 'new-products' => [
-                    'name'    => 'منتجات جديدة',
+                    'name' => 'منتجات جديدة',
 
                     'options' => [
                         'title' => 'منتجات جديدة',
@@ -724,6 +726,10 @@ return [
                 'yes'             => 'نعم',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'تثبيت Bagisto',
                 'bagisto-info' => 'إنشاء جداول قاعدة البيانات، وقد يستغرق ذلك بضع دقائق',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => 'مشروع مجتمعي من قبل',
             'bagisto-logo'             => 'شعار Bagisto',
             'bengali'                  => 'البنغالية',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'الصينية',
             'continue'                 => 'متابعة',
             'dutch'                    => 'هولندي',

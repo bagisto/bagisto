@@ -142,6 +142,7 @@ return [
                 'BDT' => 'Bangladeş Takası',
                 'BHD' => 'Bahreyn Dinarı',
                 'BRL' => 'Brezilya Reali',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'Kanada Doları',
                 'CHF' => 'İsviçre Frangı',
                 'CLP' => 'Şili Pesosu',
@@ -206,6 +207,7 @@ return [
             'locales'    => [
                 'ar'    => 'Arapça',
                 'bn'    => 'Bengali',
+                'bg'    => 'Bulgarian',
                 'de'    => 'Almanca',
                 'en'    => 'İngilizce',
                 'es'    => 'İspanyolca',
@@ -724,6 +726,10 @@ return [
                 'yes'             => 'Evet',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto'      => 'Bagisto Kurulumu',
                 'bagisto-info' => 'Veritabanı tabloları oluşturuluyor, bu birkaç dakika sürebilir',
@@ -786,6 +792,7 @@ return [
             'bagisto-info'             => 'Webkul tarafından geliştirilen bir Topluluk Projesi',
             'bagisto-logo'             => 'Bagisto Logosu',
             'bengali'                  => 'Bengalce',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'Çince',
             'continue'                 => 'Devam Et',
             'dutch'                    => 'Hollandaca',

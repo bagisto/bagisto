@@ -142,6 +142,7 @@ return [
                 'BDT' => 'বাংলাদেশী টাকা',
                 'BHD' => 'বাহরাইন দিনার',
                 'BRL' => 'ব্রাজিলিয়ান রিয়েল',
+                'BGN' => 'Bulgarian Lev',
                 'CAD' => 'কানাডিয়ান ডলার',
                 'CHF' => 'সুইস ফ্রাঙ্ক',
                 'CLP' => 'চিলিয়ান পেসো',
@@ -206,6 +207,7 @@ return [
             'locales' => [
                 'ar'    => 'আরবি',
                 'bn'    => 'বাংলা',
+                'bg'    => 'Bulgarian',
                 'de'    => 'জার্মান',
                 'en'    => 'ইংরেজি',
                 'es'    => 'স্পেনী',
@@ -724,6 +726,10 @@ return [
                 'yes'              => 'হ্যাঁ',
             ],
 
+            'installation-wizard' => [
+                'text' => 'Installation wizard language',
+            ],
+
             'installation-processing' => [
                 'bagisto-info' => 'ডাটাবেস টেবিল তৈরি করা হচ্ছে, এটি কিছুটা সময় নিতে পারে',
                 'bagisto'      => 'ইনস্টলেশন বাগিস্তো',
@@ -786,6 +792,7 @@ return [
             'bagisto-logo'             => 'বাগিস্তো লোগো',
             'bagisto'                  => 'বাগিস্তো',
             'bengali'                  => 'বাংলা',
+            'bulgarian'                => 'Bulgarian',
             'chinese'                  => 'চীনা',
             'continue'                 => 'চালিয়ে যান',
             'dutch'                    => 'ডাচ',
