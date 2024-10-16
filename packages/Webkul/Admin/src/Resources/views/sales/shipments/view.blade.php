@@ -61,11 +61,11 @@
 
                                     <div class="flex flex-col place-items-start gap-1.5">
                                         @if (isset($item->additional['attributes']))
-                                            <p class="text-gray-600 dark:text-gray-300">
-                                                @foreach ($item->additional['attributes'] as $attribute)
+                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
-                                                @endforeach
-                                            </p>
+                                                </p>
+                                            @endforeach
                                         @endif
 
                                         <p class="text-gray-600 dark:text-gray-300">
