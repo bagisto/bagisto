@@ -269,7 +269,23 @@
 
                                             <div class="md:hidden">
                                                 <p class="text-lg font-semibold max-md:text-sm">
-                                                    @{{ item.formatted_total }}
+                                                    <template v-if="displayTax.prices == 'including_tax'">
+                                                            @{{ item.formatted_total_incl_tax }}
+                                                    </template>
+
+                                                    <template v-else-if="displayTax.prices == 'both'">
+
+                                                        @{{ item.formatted_total_incl_tax }}
+                                                        <span class="text-xs font-normal">
+                                                            @lang('shopTheme::app.checkout.cart.index.excl-tax')
+                                                            <span class="font-medium">@{{ item.formatted_total }}</span>
+                                                        </span>
+
+                                                    </template>
+
+                                                    <template v-else>
+                                                            @{{ item.formatted_total }}
+                                                    </template>
                                                 </p>
                                                 
                                                 <span
