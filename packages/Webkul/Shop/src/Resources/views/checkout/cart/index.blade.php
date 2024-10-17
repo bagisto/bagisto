@@ -249,14 +249,27 @@
                                                     class="grid gap-2"
                                                     v-show="item.option_show"
                                                 >
-                                                    <template v-for="option in item.options">
+                                                    <template v-for="attribute in item.options">
                                                         <div class="max-md:grid max-md:gap-0.5">
                                                             <p class="text-sm font-medium text-zinc-500 max-md:font-normal max-sm:text-xs">
-                                                                @{{ option.attribute_name + ':' }}
+                                                                @{{ attribute.attribute_name + ':' }}
                                                             </p>
 
                                                             <p class="text-sm max-sm:text-xs">
-                                                                @{{ option.option_label }}
+                                                                <template v-if="attribute?.attribute_type === 'file'">
+                                                                    <a
+                                                                        :href="attribute.file_url"
+                                                                        class="text-blue-700"
+                                                                        target="_blank"
+                                                                        :download="attribute.file_name"
+                                                                    >
+                                                                        @{{ attribute.file_name }}
+                                                                    </a>
+                                                                </template>
+
+                                                                <template v-else>
+                                                                    @{{ attribute.option_label }}
+                                                                </template>
                                                             </p>
                                                         </div>
                                                     </template>

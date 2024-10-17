@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Type;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -140,9 +142,32 @@ class Simple extends AbstractType
         $price = $this->getFinalPrice();
 
         if (! empty($data['customizable_options'])) {
-            $data['formatted_customizable_options'] = $this->getFormattedCustomizableOptions($data['customizable_options']);
+            $formattedCustomizableOptions = $this->formatRequestedCustomizableOptions($data['customizable_options'])
+                ->map(function ($option) use ($data) {
+                    if ($option['type'] === 'file') {
+                        $file = $option['prices'][0]['label'];
 
-            $price += collect($data['formatted_customizable_options'])->sum('total_price');
+                        if (
+                            ! empty($file)
+                            && $file instanceof UploadedFile
+                        ) {
+                            $filePath = $file->store("carts/{$data['cart_id']}");
+
+                            $option['prices'][0]['label'] = $filePath;
+                        } else {
+                            $filePath = collect($data['formatted_customizable_options'] ?? [])
+                                ->firstWhere('id', $option['id']);
+
+                            $option['prices'][0]['label'] = $filePath['prices'][0]['label'] ?? '';
+                        }
+                    }
+
+                    return $option;
+                });
+
+            $price += $formattedCustomizableOptions->sum('total_price');
+
+            $data['formatted_customizable_options'] = $formattedCustomizableOptions->toArray();
         }
 
         $products = [
@@ -190,9 +215,9 @@ class Simple extends AbstractType
          * and retrieve the formatted options from the database again, similar to how we handled the base price above.
          */
         if (! empty($item->additional['customizable_options'])) {
-            $formattedCustomizableOptions = $this->getFormattedCustomizableOptions($item->additional['customizable_options']);
+            $formattedCustomizableOptions = $this->formatRequestedCustomizableOptions($item->additional['customizable_options']);
 
-            $basePrice += round(collect($formattedCustomizableOptions)->sum('total_price'), 4);
+            $basePrice += round($formattedCustomizableOptions->sum('total_price'), 4);
         }
 
         if ($basePrice == $item->base_price_incl_tax) {
@@ -230,11 +255,13 @@ class Simple extends AbstractType
             foreach ($data['formatted_customizable_options'] as $option) {
                 if (in_array($option['type'], ['checkbox', 'multiselect'])) {
                     $data['attributes'][] = [
+                        'attribute_type' => $option['type'],
                         'attribute_name' => $option['label'][app()->getLocale()],
                         'option_label'   => collect($option['prices'])->pluck('label')->join(', ', ' and '),
                     ];
                 } else {
                     $data['attributes'][] = [
+                        'attribute_type' => $option['type'],
                         'attribute_name' => $option['label'][app()->getLocale()],
                         'option_label'   => $option['prices'][0]['label'],
                     ];
@@ -246,10 +273,49 @@ class Simple extends AbstractType
     }
 
     /**
-     * Get formatted customizable options. This is a cleaned and formatted version of the customizable options requested by the user.
-     * It will be used to display the options on necessary pages such as the cart, order, invoice, shipment, etc.
+     * Compare options.
+     *
+     * @param  array  $options1
+     * @param  array  $options2
+     * @return bool
      */
-    protected function getFormattedCustomizableOptions(array $requestedCustomizableOptions): array
+    public function compareOptions($options1, $options2)
+    {
+        if (
+            isset($options1['customizable_options'])
+            && isset($options2['customizable_options'])
+        ) {
+            return $options1['customizable_options'] == $options2['customizable_options'];
+        }
+
+        if (
+            (
+                ! isset($options1['customizable_options'])
+                && isset($options2['customizable_options'])
+            )
+            || (
+                isset($options1['customizable_options'])
+                && ! isset($options2['customizable_options'])
+            )
+        ) {
+            return false;
+        }
+
+        if (
+            ! isset($options1['customizable_options'])
+            && ! isset($options2['customizable_options'])
+        ) {
+            return $this->product->id == $options2['product_id'];
+        }
+
+        return false;
+    }
+
+    /**
+     * Format the requested customizable options. This is a cleaned and formatted version of the customizable options
+     * requested by the user.
+     */
+    protected function formatRequestedCustomizableOptions(array $requestedCustomizableOptions): Collection
     {
         $formattedCustomizableOptions = [];
 
@@ -273,9 +339,14 @@ class Simple extends AbstractType
                     $optionPrice = $customizableOption->customizable_option_prices->first();
 
                     $formattedCustomizableOptions[] = [
+                        'id'          => $customizableOption->id,
                         'type'        => $customizableOption->type,
                         'label'       => $customizableOption->translations->pluck('label', 'locale')->toArray(),
-                        'prices'      => [['label' => $requestedCustomizableOptions[$customizableOption->id][0], 'price' => $optionPrice->price]],
+                        'prices'      => [[
+                            'id'    => $optionPrice->id,
+                            'label' => $requestedCustomizableOptions[$customizableOption->id][0],
+                            'price' => $optionPrice->price,
+                        ]],
                         'total_price' => $optionPrice->price,
                     ];
 
@@ -289,9 +360,14 @@ class Simple extends AbstractType
                         ->whereIn('id', $requestedCustomizableOptions[$customizableOption->id]);
 
                     $formattedCustomizableOptions[] = [
+                        'id'          => $customizableOption->id,
                         'type'        => $customizableOption->type,
                         'label'       => $customizableOption->translations->pluck('label', 'locale')->toArray(),
-                        'prices'      => $optionPrices->map(fn ($price) => ['label' => $price->label, 'price' => $price->price])->toArray(),
+                        'prices'      => $optionPrices->map(fn ($price) => [
+                            'id'    => $price->id,
+                            'label' => $price->label,
+                            'price' => $price->price,
+                        ])->values()->toArray(),
                         'total_price' => $optionPrices->sum('price'),
                     ];
 
@@ -300,10 +376,20 @@ class Simple extends AbstractType
                 case 'file':
                     $optionPrice = $customizableOption->customizable_option_prices->first();
 
+                    /**
+                     * The file object is present in the label key here. We will not store the file at this moment because we do not have
+                     * the cart ID yet. The file will be stored when the cart is created. Then, we will update the label key with the
+                     * file path.
+                     */
                     $formattedCustomizableOptions[] = [
+                        'id'          => $customizableOption->id,
                         'type'        => $customizableOption->type,
                         'label'       => $customizableOption->translations->pluck('label', 'locale')->toArray(),
-                        'prices'      => [['label' => 'file-link', 'price' => $optionPrice->price]],
+                        'prices'      => [[
+                            'id'    => $optionPrice->id,
+                            'label' => $requestedCustomizableOptions[$customizableOption->id][0],
+                            'price' => $optionPrice->price,
+                        ]],
                         'total_price' => $optionPrice->price,
                     ];
 
@@ -311,6 +397,6 @@ class Simple extends AbstractType
             }
         }
 
-        return $formattedCustomizableOptions;
+        return collect($formattedCustomizableOptions);
     }
 }

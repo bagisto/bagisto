@@ -162,7 +162,22 @@
                                                         @if (isset($item->additional['attributes']))
                                                             @foreach ($item->additional['attributes'] as $attribute)
                                                                 <p class="text-gray-600 dark:text-gray-300">
-                                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                                    @if (
+                                                                        ! isset($attribute['attribute_type'])
+                                                                        || $attribute['attribute_type'] !== 'file'
+                                                                    )
+                                                                        {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                                    @else
+                                                                        {{ $attribute['attribute_name'] }} :
+
+                                                                        <a
+                                                                            href="{{ Storage::url($attribute['option_label']) }}"
+                                                                            class="text-blue-600 hover:underline"
+                                                                            download="{{ File::basename($attribute['option_label']) }}"
+                                                                        >
+                                                                            {{ File::basename($attribute['option_label']) }}
+                                                                        </a>
+                                                                    @endif
                                                                 </p>
                                                             @endforeach
                                                         @endif
