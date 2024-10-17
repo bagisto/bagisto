@@ -1147,7 +1147,10 @@
                         ) {
                             this.condition.operator = '{}';
 
-                            if (! this.condition.value) {
+                            if (
+                                ! this.condition.value 
+                                || ! Array.isArray(this.condition.value)
+                            ) {
                                 this.condition.value = [];
                             }
                         }
@@ -1239,21 +1242,15 @@
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.code-format')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.code-format')"
                                         >
-                                            <option
-                                                value="alphanumeric"
-                                            >
+                                            <option value="alphanumeric">
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.alphanumeric')
                                             </option>
 
-                                            <option
-                                                value="alphabetical"
-                                            >
+                                            <option value="alphabetical">
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.alphabetical')
                                             </option>
 
-                                            <option
-                                                value="numeric"
-                                            >
+                                            <option value="numeric">
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.numeric')
                                             </option>
                                         </x-admin::form.control-group.control>
