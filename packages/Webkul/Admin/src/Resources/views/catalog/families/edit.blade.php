@@ -452,9 +452,19 @@
 
                 computed: {
                     unassignedAttributes() {
+                        this.columnGroups[1] = this.columnGroups[1] || [];
+                        this.columnGroups[2] = this.columnGroups[2] || [];
+
                         return this.customAttributes.filter(attribute => {
-                            return ! this.columnGroups[1].find(group => group.custom_attributes.find(customAttribute => customAttribute.id == attribute.id))
-                                && ! this.columnGroups[2].find(group => group.custom_attributes.find(customAttribute => customAttribute.id == attribute.id));
+                            const isInGroup1 = this.columnGroups[1].some(group => 
+                                group.custom_attributes.some(customAttribute => customAttribute.id === attribute.id)
+                            );
+
+                            const isInGroup2 = this.columnGroups[2].some(group => 
+                                group.custom_attributes.some(customAttribute => customAttribute.id === attribute.id)
+                            );
+
+                            return !isInGroup1 && !isInGroup2;
                         });
                     },
                 },
