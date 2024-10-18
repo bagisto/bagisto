@@ -322,14 +322,14 @@
                             </span>
                         </x-shop::form.control-group.label>
 
-                        <input
+                        <v-field
                             type="time"
                             :name="'customizable_options[' + option.id + '][]'"
                             :value="option.id"
                             v-model="selectedItems"
                             :rules="{'required': Boolean(option.is_required)}"
                             :label="option.label"
-                        >
+                        />
                     </template>
 
                     <!-- File -->
@@ -345,11 +345,14 @@
                             </span>
                         </x-shop::form.control-group.label>
 
-                        <input
+                        <v-field
                             type="file"
                             :name="'customizable_options[' + option.id + '][]'"
+                            :rules="{'required': Boolean(option.is_required)}"
+                            :label="option.label"
                             @change="handleFileChange"
-                        />
+                        >
+                        </v-field>
                     </template>
 
                     <x-shop::form.control-group.error ::name="'customizable_options[' + option.id + '][]'" />

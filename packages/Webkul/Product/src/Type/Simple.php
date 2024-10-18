@@ -170,6 +170,13 @@ class Simple extends AbstractType
      */
     public function prepareForCart($data)
     {
+        if (
+            $this->product->customizable_options->isNotEmpty()
+            && empty($data['customizable_options'])
+        ) {
+            return trans('product::app.checkout.cart.missing-options');
+        }
+
         $data['quantity'] = $this->handleQuantity((int) $data['quantity']);
 
         $data = $this->getQtyRequest($data);
@@ -209,7 +216,7 @@ class Simple extends AbstractType
             $data['formatted_customizable_options'] = $formattedCustomizableOptions->toArray();
         }
 
-        $products = [
+        return [
             [
                 'product_id'          => $this->product->id,
                 'sku'                 => $this->product->sku,
@@ -230,8 +237,6 @@ class Simple extends AbstractType
                 'additional'          => $this->getAdditionalOptions($data),
             ],
         ];
-
-        return $products;
     }
 
     /**
