@@ -345,6 +345,10 @@ class ProductController extends Controller
             $params['type'] = request('type');
         }
 
+        if (request()->has('exclude_customizable_products')) {
+            $params['exclude_customizable_products'] = request('exclude_customizable_products');
+        }
+
         $products = $this->productRepository
             ->setSearchEngine($searchEngine)
             ->getAll($params);

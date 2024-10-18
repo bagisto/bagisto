@@ -934,6 +934,10 @@ return [
                                     ],
                                 ],
                             ],
+
+                            'validations' => [
+                                'associated-product' => 'The product is already associated with a configurable, grouped, or bundle product.',
+                            ],
                         ],
                     ],
 

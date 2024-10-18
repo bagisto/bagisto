@@ -10,9 +10,11 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Helpers\Indexers\Price\Simple as SimpleIndexer;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductCustomizableOptionPriceRepository;
 use Webkul\Product\Repositories\ProductCustomizableOptionRepository;
+use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -41,6 +43,8 @@ class Simple extends AbstractType
         ProductImageRepository $productImageRepository,
         ProductVideoRepository $productVideoRepository,
         ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
+        protected ProductGroupedProductRepository $productGroupedProductRepository,
+        protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductCustomizableOptionRepository $productCustomizableOptionRepository,
         protected ProductCustomizableOptionPriceRepository $productCustomizableOptionPriceRepository,
     ) {
@@ -74,6 +78,41 @@ class Simple extends AbstractType
         $this->productCustomizableOptionRepository->saveCustomizableOptions($data, $product);
 
         return $product;
+    }
+
+    /**
+     * Is customizable.
+     *
+     * @return bool
+     */
+    public function isCustomizable()
+    {
+        /**
+         * If the product is a child product of a configurable product, then it is not customizable.
+         */
+        if ($this->product->parent) {
+            return false;
+        }
+
+        /**
+         * If the product is a child product of a grouped product, then it is not customizable.
+         */
+        $associatedWithGroupedProduct = $this->productGroupedProductRepository->firstWhere('associated_product_id', $this->product->id);
+
+        if ($associatedWithGroupedProduct) {
+            return false;
+        }
+
+        /**
+         * If the product is a child product of a bundle product, then it is not customizable.
+         */
+        $associatedWithBundleProduct = $this->productBundleOptionProductRepository->firstWhere('product_id', $this->product->id);
+
+        if ($associatedWithBundleProduct) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -239,6 +278,25 @@ class Simple extends AbstractType
         $item->save();
 
         return $validation;
+    }
+
+    /**
+     * Returns validation rules.
+     *
+     * @return array
+     */
+    public function getTypeValidationRules()
+    {
+        return [
+            'customizable_options' => [
+                'array',
+                function ($attribute, $value, $fail) {
+                    if (! $this->isCustomizable()) {
+                        $fail(trans('admin::app.catalog.products.edit.types.simple.customizable-options.validations.associated-product'));
+                    }
+                },
+            ],
+        ];
     }
 
     /**
